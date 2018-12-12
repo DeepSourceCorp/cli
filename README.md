@@ -1,0 +1,3 @@
+# CLI
+
+- `deepsource coverage`
