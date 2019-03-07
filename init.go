@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"os"
@@ -15,15 +16,24 @@ func main() {
 	coverageCommand := flag.NewFlagSet("coverage", flag.ExitOnError)
 
 	// Coverage subcommand
-	coveragePush := coverageCommand.Bool("push", true, "Push")
 	coverageDryRun := coverageCommand.Bool("sample-run", false, "Test run")
 
+	// Verify that a subcommand has been provided
+	// os.Arg[0] is the main command
+	// os.Arg[1] will be the subcommand
+	if len(os.Args) < 2 {
+		fmt.Println("DeepSource: Error: Subcommand not provided.")
+		flag.PrintDefaults()
+		os.Exit(0)
+	}
+
+	// Switch on the subcommand
 	switch os.Args[1] {
 	case "coverage":
 		coverageCommand.Parse(os.Args[2:])
 	default:
 		flag.PrintDefaults()
-		os.Exit(1)
+		os.Exit(0)
 	}
 
 	if coverageCommand.Parsed() {
@@ -46,6 +56,7 @@ func main() {
 			fmt.Printf("DeepSource: Error: DSN specified should start with https. Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
 			os.Exit(0)
 		}
+		dsnProtocol := dsnSplitProtocolBody[0]
 
 		// Parse body of the DSN
 		dsnSplitTokenHost := strings.Split(dsnSplitProtocolBody[1], "@")
@@ -101,5 +112,26 @@ func main() {
 
 		query.Variables.Input = coverageInput
 
+		// Marshal request body
+		queryBodyBytes, err := json.Marshal(query)
+		if err != nil {
+			fmt.Printf("DeepSource: Error: Unable to marshal query body.")
+			os.Exit(0)
+		}
+
+		if *coverageDryRun == false {
+			_, err := makeQuery(
+				dsnProtocol+"://"+dsnHost+"/graphql",
+				queryBodyBytes,
+				"application/json",
+			)
+
+			if err != nil {
+				fmt.Printf("DeepSource: Error: Unable to publish coverage results.")
+				os.Exit(0)
+			}
+		}
+
+		os.Exit(0)
 	}
 }
