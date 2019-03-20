@@ -10,26 +10,33 @@ import (
 )
 
 func main() {
-	// Execution init
-	currentDir, err := os.Getwd()
-	if err != nil {
-		fmt.Println("DeepSource: Error: Unable to identify current directory.")
-		os.Exit(0)
+	// Print default stub message
+	fmt.Println("DeepSource Command Line Interface " + cliVersion)
+
+	flag.Usage = func() {
+		fmt.Println(commonUsageMessage)
 	}
 
-	fmt.Println("DeepSource: Info: Executing CLI on path " + currentDir)
+	/////////////////////
+	// Command: report //
+	/////////////////////
 
-	// Sub commands
 	reportCommand := flag.NewFlagSet("report", flag.ExitOnError)
-	reportCommandAnalyzerShortcode := reportCommand.String("analyzer", "", "Shortcode of the analyzer")
-	reportCommandKey := reportCommand.String("key", "default", "Artifact key. Defaults to default.")
-	reportCommandValue := reportCommand.String("value", "", "Artifact value")
-	reportCommandValueFile := reportCommand.String("value-file", "", "Artifact value file. Should be a valid file path")
+	reportCommandAnalyzerShortcode := reportCommand.String("analyzer", "", "")
+	reportCommandKey := reportCommand.String("key", "default", "")
+	reportCommandValue := reportCommand.String("value", "", "")
+	reportCommandValueFile := reportCommand.String("value-file", "", "")
+
+	reportCommand.Usage = func() {
+		fmt.Println(reportUsageMessage)
+	}
+
+	// Parse flags to extract its values
+	flag.Parse()
 
 	// Check for subcommands
 	if len(os.Args) == 1 {
-		flag.Usage()
-		flag.PrintDefaults()
+		fmt.Println(commonUsageMessage)
 		os.Exit(0)
 	}
 
@@ -38,7 +45,14 @@ func main() {
 	case "report":
 		reportCommand.Parse(os.Args[2:])
 	default:
-		flag.PrintDefaults()
+		fmt.Println(reportUsageMessage)
+		os.Exit(0)
+	}
+
+	// Get current path
+	currentDir, err := os.Getwd()
+	if err != nil {
+		fmt.Println("DeepSource: Error: Unable to identify current directory.")
 		os.Exit(0)
 	}
 
@@ -96,7 +110,6 @@ func main() {
 	}
 
 	if reportCommand.Parsed() {
-
 		// Flag validation
 		if *reportCommandValue == "" && *reportCommandValueFile == "" {
 			fmt.Println("DeepSource: Error: Report: Value not passed")
