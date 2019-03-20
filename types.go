@@ -17,3 +17,12 @@ type ReportQuery struct {
 		Input ReportQueryInput `json:"input"`
 	} `json:"variables"`
 }
+
+type QueryResponse struct {
+	Data struct {
+		CreateArtifact struct {
+			Error string `json:"error"`
+			Ok    bool   `json:"ok"`
+		} `json:"createArtifact"`
+	} `json:"data"`
+}

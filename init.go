@@ -151,11 +151,40 @@ func main() {
 			os.Exit(0)
 		}
 
-		_, err = makeQuery(
+		queryResponseBody, err := makeQuery(
 			dsnProtocol+"://"+dsnHost+"/graphql",
 			queryBodyBytes,
 			"application/json",
 		)
+		if err != nil {
+			fmt.Printf("DeepSource: Error: Reporting query failed.")
+			os.Exit(0)
+		}
+
+		// Parse query response body
+		queryResponse := QueryResponse{}
+
+		err = json.Unmarshal(queryResponseBody, &queryResponse)
+		if err != nil {
+			fmt.Println("DeepSource: Error: Unable to parse response body.")
+			os.Exit(0)
+		}
+
+		// Check for errors in response body
+		// Response format:
+		// {
+		//   "data": {
+		//     "createArtifact": {
+		//       "ok": false,
+		//       "error": "No repository found attached with the access token: dasdsds"
+		//     }
+		//   }
+		// }
+
+		if queryResponse.Data.CreateArtifact.Ok != true {
+			fmt.Println("DeepSource: Error: Reporting query failed.")
+			os.Exit(0)
+		}
 
 		if err != nil {
 			fmt.Printf("DeepSource: Error: Unable to report results.")
