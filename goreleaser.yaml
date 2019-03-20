@@ -16,4 +16,4 @@ changelog:
   sort: asc
   filters:
     exclude:
-    - '^test:'
+    - '^tests:'
