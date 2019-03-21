@@ -7,7 +7,7 @@ Usage:
     deepsource <command> [<arguments>]
 
 Available commands are:
-    report        Report an artifact to an analyzer
+    report        Report an artifact to analyzer
 
 Help:
     Use 'deepsource <command> --help' for more information about the command.

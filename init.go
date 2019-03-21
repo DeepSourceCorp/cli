@@ -11,7 +11,7 @@ import (
 
 func main() {
 	// Print default stub message
-	fmt.Println("DeepSource Command Line Interface " + cliVersion)
+	fmt.Printf("DeepSource Command Line Interface " + cliVersion + "\n \n")
 
 	flag.Usage = func() {
 		fmt.Println(commonUsageMessage)
@@ -37,7 +37,7 @@ func main() {
 	// Check for subcommands
 	if len(os.Args) == 1 {
 		fmt.Println(commonUsageMessage)
-		os.Exit(0)
+		os.Exit(1)
 	}
 
 	// Switch on the subcommand
@@ -46,13 +46,13 @@ func main() {
 		reportCommand.Parse(os.Args[2:])
 	default:
 		fmt.Println(reportUsageMessage)
-		os.Exit(0)
+		os.Exit(1)
 	}
 
 	// Get current path
 	currentDir, err := os.Getwd()
 	if err != nil {
-		fmt.Println("DeepSource: Error: Unable to identify current directory.")
+		fmt.Println("DeepSource | Error | Unable to identify current directory.")
 		os.Exit(0)
 	}
 
@@ -60,10 +60,10 @@ func main() {
 	_, err = os.Stat("./.deepsource.toml")
 	if err != nil {
 		if os.IsNotExist(err) {
-			fmt.Println("DeepSource: Error: .deepsource.toml not found.")
-			os.Exit(0)
+			fmt.Println("DeepSource | Error | .deepsource.toml not found.")
+			os.Exit(1)
 		} else {
-			fmt.Println("DeepSource: Error: Unable to stat .deepsource.toml")
+			fmt.Println("DeepSource | Error | Unable to stat .deepsource.toml")
 			os.Exit(0)
 		}
 	}
@@ -71,8 +71,8 @@ func main() {
 	// Verify the env variables
 	dsn := os.Getenv("DEEPSOURCE_DSN")
 	if dsn == "" {
-		fmt.Println("DeepSource: Error: Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page.")
-		os.Exit(0)
+		fmt.Println("DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page.")
+		os.Exit(1)
 	}
 
 	//////////////////
@@ -83,9 +83,9 @@ func main() {
 	dsnSplitProtocolBody := strings.Split(dsn, "://")
 
 	// Check for valid protocol
-	if dsnSplitProtocolBody[0] != "https" {
-		fmt.Printf("DeepSource: Error: DSN specified should start with https. Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
-		os.Exit(0)
+	if dsnSplitProtocolBody[0] != "http" {
+		fmt.Printf("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
+		os.Exit(1)
 	}
 	dsnProtocol := dsnSplitProtocolBody[0]
 
@@ -105,15 +105,15 @@ func main() {
 	// Head Commit OID
 	headCommitOID, err := gitGetHead(currentDir)
 	if err != nil {
-		fmt.Printf("DeepSource: Error: Unable to get commit OID HEAD")
-		os.Exit(0)
+		fmt.Printf("DeepSource | Error | Unable to get commit OID HEAD")
+		os.Exit(1)
 	}
 
 	if reportCommand.Parsed() {
 		// Flag validation
 		if *reportCommandValue == "" && *reportCommandValueFile == "" {
-			fmt.Println("DeepSource: Error: Report: Value not passed")
-			os.Exit(0)
+			fmt.Println("DeepSource | Error | Value not passed")
+			os.Exit(1)
 		}
 
 		var analyzerShortcode string
@@ -128,10 +128,22 @@ func main() {
 		}
 
 		if *reportCommandValueFile != "" {
+			// Check file size
+			fileStat, err := os.Stat(*reportCommandValueFile)
+			if err != nil {
+				fmt.Println("DeepSource | Error | Unable to stat value file")
+				os.Exit(1)
+			}
+
+			if fileStat.Size() > 5000000 {
+				fmt.Println("DeepSource | Error | Value file too large. Should be less than 5 Megabytes")
+				os.Exit(1)
+			}
+
 			valueBytes, err := ioutil.ReadFile(*reportCommandValueFile)
 			if err != nil {
-				fmt.Println("DeepSource: Error: Report: Value file incorrect")
-				os.Exit(0)
+				fmt.Println("DeepSource | Error | Value file incorrect")
+				os.Exit(1)
 			}
 
 			artifactValue = string(valueBytes)
@@ -160,7 +172,7 @@ func main() {
 		// Marshal request body
 		queryBodyBytes, err := json.Marshal(query)
 		if err != nil {
-			fmt.Printf("DeepSource: Error: Unable to marshal query body.")
+			fmt.Printf("DeepSource | Error | Unable to marshal query body.")
 			os.Exit(0)
 		}
 
@@ -170,7 +182,7 @@ func main() {
 			"application/json",
 		)
 		if err != nil {
-			fmt.Printf("DeepSource: Error: Reporting query failed.")
+			fmt.Printf("DeepSource | Error | Reporting query failed: %v", err)
 			os.Exit(0)
 		}
 
@@ -179,7 +191,7 @@ func main() {
 
 		err = json.Unmarshal(queryResponseBody, &queryResponse)
 		if err != nil {
-			fmt.Println("DeepSource: Error: Unable to parse response body.")
+			fmt.Println("DeepSource | Error | Unable to parse response body.")
 			os.Exit(0)
 		}
 
@@ -195,14 +207,18 @@ func main() {
 		// }
 
 		if queryResponse.Data.CreateArtifact.Ok != true {
-			fmt.Println("DeepSource: Error: Reporting query failed.")
+			fmt.Println("DeepSource | Error | Reporting query failed.")
 			os.Exit(0)
 		}
 
 		if err != nil {
-			fmt.Printf("DeepSource: Error: Unable to report results.")
+			fmt.Printf("DeepSource | Error | Unable to report results.")
 			os.Exit(0)
 		}
+
+		fmt.Printf("DeepSource |  Artifact published successfully \n \n")
+		fmt.Printf("Analyzer  %s \n", analyzerShortcode)
+		fmt.Printf("Key       %s \n", artifactKey)
 
 		os.Exit(0)
 	}
