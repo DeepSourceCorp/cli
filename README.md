@@ -19,10 +19,23 @@
 
 Command line interface to DeepSource
 
-### Installation
+### Usage
 
-Todo
+DeepSource Command Line Interface v0.x.x
 
-### Configuration
+Usage:
+    deepsource <command> [<arguments>]
 
-Todo
+Available commands are:
+    report        Report an artifact to an analyzer
+
+Help:
+    Use 'deepsource <command> --help' for more information about the command.
+
+### Documentation
+
+[https://deepsource.io/docs/cli](https://deepsource.io/docs/cli)
+
+### Support
+
+[support@deepsource.io](mailto:support@deepsource.io)
