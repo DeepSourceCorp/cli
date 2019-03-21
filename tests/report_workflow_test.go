@@ -12,15 +12,8 @@ import (
 
 // Workflow tested:
 //
-// - Initiate RabbitMQ connection for reception of the result/status
-// - Run rome CLI with test arguments
-// - Check existence of the repo locally
-
-// - Wait for the results from RabbitMQ and see if it matches expected results
-//
-// > Note: github.com/faginawu/test repository is being used. Don't change that repo
-
-var reqChan chan bool
+// - Run deepsource CLI with report command and value flag
+// - Run deepsource CLI with report command and value-file flag
 
 // Sample values to the run the analyzer on
 const (
@@ -87,7 +80,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 		t.Errorf(err.Error())
 	}
 
-	cmd := exec.Command("/app/deepsource",
+	cmd := exec.Command("/tmp/deepsource",
 		"report",
 		"--analyzer",
 		analyzer,
@@ -100,6 +93,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 	// Set env variables
 	cmd.Env = os.Environ()
 	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
+	cmd.Dir = "/code"
 
 	var stdout, stderr bytes.Buffer
 
@@ -131,19 +125,20 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 		}
 	}()
 
-	cmd := exec.Command("./cli",
+	cmd := exec.Command("/tmp/deepsource",
 		"report",
 		"--analyzer",
 		analyzer,
 		"--key",
 		key,
 		"--value-file",
-		"./tests/dummy/python_coverage.xml",
+		"/go/src/github.com/deepsourcelabs/cli/tests/dummy/python_coverage.xml",
 	)
 
 	// Set env variables
 	cmd.Env = os.Environ()
 	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
+	cmd.Dir = "/code"
 
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout

@@ -3,3 +3,6 @@ vendor
 
 # Executable
 cli
+
+# Goreleaser artifacts
+dist

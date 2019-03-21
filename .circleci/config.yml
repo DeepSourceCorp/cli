@@ -1,0 +1,51 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      # Golang image - primary
+      - image: golang:1.11.5-alpine3.9
+
+    working_directory: /go/src/github.com/deepsourcelabs/cli
+
+    steps:
+      - run:
+          name: Install necessities
+          command: |
+            echo "https://mirror.csclub.uwaterloo.ca/alpine/v3.8/main" >/etc/apk/repositories
+            echo "https://mirror.csclub.uwaterloo.ca/alpine/v3.8/community" >>/etc/apk/repositories
+            apk update
+            apk add bash curl git openssh
+            mkdir /code
+
+      - checkout
+
+      - run:
+          name: Configure git to use ssh
+          command: |
+            git config --global url.git@github.com:.insteadOf https://github.com/
+
+      - run:
+          name: Build cli
+          command: |
+            GOOS=linux GOARCH=amd64 go build -tags static_all -o /tmp/deepsource .
+            chmod +x /tmp/deepsource
+
+      - run:
+          name: Clone the test repository
+          command: |
+            git clone https://github.com/faginawu/test.git /code
+
+      - run:
+          name: Run report value argument tests
+          command: CGO_ENABLED=0 GOCACHE=off go test -v ./tests/... -run TestReportKeyValueWorkflow
+          no_output_timeout: 60s
+
+      - run:
+          name: Run report value file argument tests
+          command: CGO_ENABLED=0 GOCACHE=off go test -v ./tests/... -run TestReportKeyValueFileWorkflow
+          no_output_timeout: 60s
+
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: raw-test-output

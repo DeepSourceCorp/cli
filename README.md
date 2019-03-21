@@ -19,8 +19,13 @@
 
 Command line interface to DeepSource
 
+### Build status
+
+[![CircleCI](https://circleci.com/gh/deepsourcelabs/cli.svg?style=svg)](https://circleci.com/gh/deepsourcelabs/cli)
+
 ### Usage
 
+```
 DeepSource Command Line Interface v0.x.x
 
 Usage:
@@ -31,6 +36,7 @@ Available commands are:
 
 Help:
     Use 'deepsource <command> --help' for more information about the command.
+```
 
 ### Documentation
 

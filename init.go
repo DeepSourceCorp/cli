@@ -105,14 +105,14 @@ func main() {
 	// Head Commit OID
 	headCommitOID, err := gitGetHead(currentDir)
 	if err != nil {
-		fmt.Printf("DeepSource | Error | Unable to get commit OID HEAD")
+		fmt.Printf("DeepSource | Error | Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
 		os.Exit(1)
 	}
 
 	if reportCommand.Parsed() {
 		// Flag validation
 		if *reportCommandValue == "" && *reportCommandValueFile == "" {
-			fmt.Println("DeepSource | Error | Value not passed")
+			fmt.Println("DeepSource | Error | '--value' (or) '--value-file' not passed")
 			os.Exit(1)
 		}
 
@@ -131,7 +131,7 @@ func main() {
 			// Check file size
 			fileStat, err := os.Stat(*reportCommandValueFile)
 			if err != nil {
-				fmt.Println("DeepSource | Error | Unable to stat value file")
+				fmt.Println("DeepSource | Error | Unable to read specified value file: " + *reportCommandValueFile)
 				os.Exit(1)
 			}
 
@@ -142,7 +142,7 @@ func main() {
 
 			valueBytes, err := ioutil.ReadFile(*reportCommandValueFile)
 			if err != nil {
-				fmt.Println("DeepSource | Error | Value file incorrect")
+				fmt.Println("DeepSource | Error | Unable to read specified value file: ", *reportCommandValueFile)
 				os.Exit(1)
 			}
 
