@@ -40,7 +40,7 @@ Help:
 
 ### Documentation
 
-[https://deepsource.io/docs/cli](https://deepsource.io/docs/cli)
+[https://deepsource.io/docs/configuration/cli](https://deepsource.io/docs/configuration/cli.html)
 
 ### Support
 
