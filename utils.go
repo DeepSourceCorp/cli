@@ -2,6 +2,8 @@ package main
 
 import "os"
 
+// isEnvDefined looks up for env variable and returns
+// true if defined
 func isEnvDefined(env string) bool {
 	_, ok := os.LookupEnv(env)
 	if !ok {
@@ -11,6 +13,8 @@ func isEnvDefined(env string) bool {
 	return true
 }
 
+// whichCI checks for whitelisted env variables and
+// returns the CI environment
 func whichCI() string {
 	var CIVendor string
 
