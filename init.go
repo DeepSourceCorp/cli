@@ -177,7 +177,7 @@ func main() {
 		}
 
 		queryResponseBody, err := makeQuery(
-			dsnProtocol+"://"+dsnHost+"/cli/graphql/",
+			dsnProtocol+"://"+dsnHost+"/graphql/cli/",
 			queryBodyBytes,
 			"application/json",
 		)
