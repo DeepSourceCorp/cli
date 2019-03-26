@@ -177,12 +177,12 @@ func main() {
 		}
 
 		queryResponseBody, err := makeQuery(
-			dsnProtocol+"://"+dsnHost+"/graphql",
+			dsnProtocol+"://"+dsnHost+"/cli/graphql/",
 			queryBodyBytes,
 			"application/json",
 		)
 		if err != nil {
-			fmt.Println("DeepSource | Error | Reporting query failed: %v", err)
+			fmt.Println("DeepSource | Error | Reporting query failed: ", err)
 			os.Exit(0)
 		}
 

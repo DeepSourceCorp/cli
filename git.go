@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"os/exec"
+	"strings"
 )
 
 // gitGetHead accepts a git directory and returns head commit OID / error
@@ -24,7 +25,8 @@ func gitGetHead(workspaceDir string) (string, error) {
 		return headOID, err
 	}
 
-	headOID = outStr
+	// Trim newline suffix from Commit OID
+	headOID = strings.TrimSuffix(outStr, "\n")
 
 	return headOID, nil
 }
