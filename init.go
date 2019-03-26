@@ -182,7 +182,7 @@ func main() {
 			"application/json",
 		)
 		if err != nil {
-			fmt.Println("DeepSource | Error | Reporting query failed: ", err)
+			fmt.Println("DeepSource | Error | Reporting failed | ", err)
 			os.Exit(0)
 		}
 
@@ -207,7 +207,7 @@ func main() {
 		// }
 
 		if queryResponse.Data.CreateArtifact.Ok != true {
-			fmt.Println("DeepSource | Error | Reporting query failed.")
+			fmt.Println("DeepSource | Error | Reporting failed | ", queryResponse.Data.CreateArtifact.Error)
 			os.Exit(0)
 		}
 
