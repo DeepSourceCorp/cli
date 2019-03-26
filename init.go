@@ -83,8 +83,8 @@ func main() {
 	dsnSplitProtocolBody := strings.Split(dsn, "://")
 
 	// Check for valid protocol
-	if dsnSplitProtocolBody[0] != "http" {
-		fmt.Printf("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
+	if strings.HasPrefix(dsnSplitProtocolBody[0], "http") == false {
+		fmt.Println("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
 		os.Exit(1)
 	}
 	dsnProtocol := dsnSplitProtocolBody[0]
@@ -105,7 +105,7 @@ func main() {
 	// Head Commit OID
 	headCommitOID, err := gitGetHead(currentDir)
 	if err != nil {
-		fmt.Printf("DeepSource | Error | Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
+		fmt.Println("DeepSource | Error | Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
 		os.Exit(1)
 	}
 
@@ -172,7 +172,7 @@ func main() {
 		// Marshal request body
 		queryBodyBytes, err := json.Marshal(query)
 		if err != nil {
-			fmt.Printf("DeepSource | Error | Unable to marshal query body.")
+			fmt.Println("DeepSource | Error | Unable to marshal query body.")
 			os.Exit(0)
 		}
 
@@ -182,7 +182,7 @@ func main() {
 			"application/json",
 		)
 		if err != nil {
-			fmt.Printf("DeepSource | Error | Reporting query failed: %v", err)
+			fmt.Println("DeepSource | Error | Reporting query failed: %v", err)
 			os.Exit(0)
 		}
 
@@ -212,7 +212,7 @@ func main() {
 		}
 
 		if err != nil {
-			fmt.Printf("DeepSource | Error | Unable to report results.")
+			fmt.Println("DeepSource | Error | Unable to report results.")
 			os.Exit(0)
 		}
 
