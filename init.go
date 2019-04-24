@@ -153,6 +153,9 @@ func main() {
 		// Generate query //
 		////////////////////
 
+		reportMeta := make(map[string]string)
+		reportMeta["workDir"] = currentDir
+
 		query := ReportQuery{
 			Query: reportGraphqlQuery,
 		}
@@ -165,6 +168,7 @@ func main() {
 			Key:               artifactKey,
 			Data:              artifactValue,
 			AnalyzerShortcode: analyzerShortcode,
+			Metadata:          reportMeta,
 		}
 
 		query.Variables.Input = queryInput
