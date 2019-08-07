@@ -20,6 +20,8 @@
 
 Command line interface to DeepSource
 
+[![DeepSource](https://static.deepsource.io/deepsource-badge-light.svg)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)
+
 ### Build status
 
 [![CircleCI](https://circleci.com/gh/deepsourcelabs/cli.svg?style=svg)](https://circleci.com/gh/deepsourcelabs/cli)
