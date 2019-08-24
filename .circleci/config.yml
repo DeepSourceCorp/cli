@@ -4,16 +4,16 @@ jobs:
   build:
     docker:
       # Golang image - primary
-      - image: golang:1.11.5-alpine3.9
+      - image: golang:1.12.9-alpine3.10
 
-    working_directory: /go/src/github.com/deepsourcelabs/cli
+    working_directory: /code
 
     steps:
       - run:
           name: Install necessities
           command: |
-            echo "https://mirror.csclub.uwaterloo.ca/alpine/v3.8/main" >/etc/apk/repositories
-            echo "https://mirror.csclub.uwaterloo.ca/alpine/v3.8/community" >>/etc/apk/repositories
+            echo "https://mirror.csclub.uwaterloo.ca/alpine/v3.10/main" >/etc/apk/repositories
+            echo "https://mirror.csclub.uwaterloo.ca/alpine/v3.10/community" >>/etc/apk/repositories
             apk update
             apk add bash curl git openssh
             mkdir /code
