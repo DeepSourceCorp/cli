@@ -6,7 +6,7 @@ jobs:
       # Golang image - primary
       - image: golang:1.12.9-alpine3.10
 
-    working_directory: /code
+    working_directory: ~/repo
 
     steps:
       - run:
@@ -16,7 +16,7 @@ jobs:
             echo "https://mirror.csclub.uwaterloo.ca/alpine/v3.10/community" >>/etc/apk/repositories
             apk update
             apk add bash curl git openssh
-            mkdir /code
+            mkdir /code -p
 
       - checkout
 
