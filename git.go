@@ -46,7 +46,7 @@ func gitGetHead(workspaceDir string) (string, error) {
 
 	err := cmd.Run()
 
-	outStr, _ := string(stdout.Bytes()), string(stderr.Bytes())
+	outStr, _ := stdout.String(), stderr.String()
 
 	if err != nil {
 		return headOID, err
