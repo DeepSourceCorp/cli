@@ -34,16 +34,16 @@ jobs:
       - run:
           name: Clone the test repository
           command: |
-            git clone https://github.com/faginawu/test.git /code
+            git clone https://github.com/deepsourcelabs/july.git /code
 
       - run:
           name: Run report value argument tests
-          command: CGO_ENABLED=0 GOCACHE=off go test -v ./tests/... -run TestReportKeyValueWorkflow
+          command: CGO_ENABLED=0 go test -v ./tests/... -run TestReportKeyValueWorkflow
           no_output_timeout: 60s
 
       - run:
           name: Run report value file argument tests
-          command: CGO_ENABLED=0 GOCACHE=off go test -v ./tests/... -run TestReportKeyValueFileWorkflow
+          command: CGO_ENABLED=0 go test -v ./tests/... -run TestReportKeyValueFileWorkflow
           no_output_timeout: 60s
 
       - store_artifacts:
