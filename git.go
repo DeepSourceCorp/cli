@@ -25,8 +25,16 @@ func gitGetHead(workspaceDir string) (string, error) {
 
 	}
 
-	// If we are here, it means either this is not a travis env, or this is not a travis PR.
-	// Continue to fetch the headOID via the git command.
+	// Check if it is a GitHub Action Environment, If it is then get
+	// the HEAD from `GITHUB_SHA` environment
+	_, isGitHubEnv := os.LookupEnv("GITHUB_ACTIONS")
+
+	if isGitHubEnv {
+		return os.Getenv("GITHUB_SHA"), nil
+	}
+
+	// If we are here, it means this is neither GitHub Action env nor a travis env
+	// with PR. Continue to fetch the headOID via the git command.
 	headOID := ""
 
 	cmd := exec.Command("git", "--no-pager", "rev-parse", "HEAD")
