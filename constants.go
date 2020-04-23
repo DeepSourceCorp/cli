@@ -1,7 +1,7 @@
 package main
 
 const (
-	cliVersion         = "v0.1.0"
+	cliVersion         = "v0.1.6"
 	commonUsageMessage = `
 Usage:
     deepsource <command> [<arguments>]

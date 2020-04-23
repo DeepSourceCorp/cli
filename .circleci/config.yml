@@ -26,15 +26,12 @@ jobs:
             git config --global url.git@github.com:.insteadOf https://github.com/
 
       - run:
-          name: Build cli
-          command: |
-            GOOS=linux GOARCH=amd64 go build -tags static_all -o /tmp/deepsource .
-            chmod +x /tmp/deepsource
-
-      - run:
-          name: Clone the test repository
+          name: Setup tests
           command: |
             git clone https://github.com/deepsourcelabs/july.git /code
+            GOOS=linux GOARCH=amd64 go build -tags static_all -o /tmp/deepsource .
+            chmod +x /tmp/deepsource
+            cp ./tests/dummy/python_coverage.xml /tmp
 
       - run:
           name: Run report value argument tests

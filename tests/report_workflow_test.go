@@ -132,7 +132,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 		"--key",
 		key,
 		"--value-file",
-		"/go/src/github.com/deepsourcelabs/cli/tests/dummy/python_coverage.xml",
+		"/tmp/python_coverage.xml",
 	)
 
 	// Set env variables
