@@ -27,14 +27,17 @@ func gitGetHead(workspaceDir string) (string, error) {
 
 	// Check if it is a GitHub Action Environment, If it is then get
 	// the HEAD from `GITHUB_SHA` environment
-	_, isGitHubEnv := os.LookupEnv("GITHUB_ACTIONS")
-
-	if isGitHubEnv {
-		return os.Getenv("GITHUB_SHA"), nil
+	if _, isGitHubEnv := os.LookupEnv("GITHUB_ACTIONS"); isGitHubEnv {
+		// When GITHUB_REF is not set, GITHUB_SHA points to original commit.
+		// When set, it points to the "latest *merge* commit in the branch".
+		// Ref: https://help.github.com/en/actions/reference/events-that-trigger-workflows#pull-request-event-pull_request
+		if _, isBranchCommit := os.LookupEnv("GITHUB_REF"); !isBranchCommit {
+			return os.Getenv("GITHUB_SHA"), nil
+		}
 	}
 
-	// If we are here, it means this is neither GitHub Action env nor a travis env
-	// with PR. Continue to fetch the headOID via the git command.
+	// If we are here, it means this is neither GitHub Action on default branch,
+	// nor a travis env with PR. Continue to fetch the headOID via the git command.
 	headOID := ""
 
 	cmd := exec.Command("git", "--no-pager", "rev-parse", "HEAD")
