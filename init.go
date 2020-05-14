@@ -19,13 +19,26 @@ func run() int {
 	// Print default stub message
 	fmt.Printf("DeepSource Command Line Interface " + cliVersion + "\n \n")
 
-	sentry.Init(sentry.ClientOptions{
+	err := sentry.Init(sentry.ClientOptions{
 		Dsn: SentryDSN,
 	})
+	if err != nil {
+		fmt.Println("Could not load sentry.")
+	}
 
 	flag.Usage = func() {
 		fmt.Println(commonUsageMessage)
 	}
+
+	// Verify the env variables
+	dsn := os.Getenv("DEEPSOURCE_DSN")
+	if dsn == "" {
+		fmt.Println("DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page.")
+		return 1
+	}
+	sentry.ConfigureScope(func(scope *sentry.Scope) {
+		scope.SetUser(sentry.User{ID: dsn})
+	})
 
 	/////////////////////
 	// Command: report //
@@ -58,6 +71,9 @@ func run() int {
 		fmt.Println(reportUsageMessage)
 		return 1
 	}
+	sentry.ConfigureScope(func(scope *sentry.Scope) {
+		scope.SetExtra("Args", os.Args)
+	})
 
 	// Get current path
 	currentDir, err := os.Getwd()
@@ -66,6 +82,10 @@ func run() int {
 		sentry.CaptureException(err)
 		return 0
 	}
+	sentry.ConfigureScope(func(scope *sentry.Scope) {
+		scope.SetExtra("currentDir", currentDir)
+	})
+
 
 	// Verify existence of .deepsource.toml
 	_, err = os.Stat("./.deepsource.toml")
@@ -79,13 +99,6 @@ func run() int {
 			sentry.CaptureException(err)
 			return 0
 		}
-	}
-
-	// Verify the env variables
-	dsn := os.Getenv("DEEPSOURCE_DSN")
-	if dsn == "" {
-		fmt.Println("DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page.")
-		return 1
 	}
 
 	//////////////////
@@ -124,6 +137,10 @@ func run() int {
 		sentry.CaptureException(err)
 		return 1
 	}
+	sentry.ConfigureScope(func(scope *sentry.Scope) {
+		scope.SetExtra("headCommitOID", headCommitOID)
+	})
+
 
 	if reportCommand.Parsed() {
 		// Flag validation
@@ -254,6 +271,6 @@ func run() int {
 
 func main() {
 	returnCode := run()
-	defer func() { os.Exit(returnCode) }()
+	defer os.Exit(returnCode)
 	defer sentry.Flush(2 * time.Second)
 }
