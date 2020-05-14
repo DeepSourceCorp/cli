@@ -110,9 +110,9 @@ func run() int {
 
 	// Check for valid protocol
 	if strings.HasPrefix(dsnSplitProtocolBody[0], "http") == false {
-		errMessage := "DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository."
-		fmt.Println(errMessage)
-		sentry.CaptureException(errors.New(errMessage))
+		err = errors.New("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
+		fmt.Println(err)
+		sentry.CaptureException(err)
 		return 1
 	}
 	dsnProtocol := dsnSplitProtocolBody[0]
