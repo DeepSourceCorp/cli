@@ -86,21 +86,6 @@ func run() int {
 		scope.SetExtra("currentDir", currentDir)
 	})
 
-
-	// Verify existence of .deepsource.toml
-	_, err = os.Stat("./.deepsource.toml")
-	if err != nil {
-		if os.IsNotExist(err) {
-			fmt.Println("DeepSource | Error | .deepsource.toml not found.")
-			sentry.CaptureException(err)
-			return 1
-		} else {
-			fmt.Println("DeepSource | Error | Unable to stat .deepsource.toml")
-			sentry.CaptureException(err)
-			return 0
-		}
-	}
-
 	//////////////////
 	// Validate DSN //
 	//////////////////
@@ -140,7 +125,6 @@ func run() int {
 	sentry.ConfigureScope(func(scope *sentry.Scope) {
 		scope.SetExtra("headCommitOID", headCommitOID)
 	})
-
 
 	if reportCommand.Parsed() {
 		// Flag validation
