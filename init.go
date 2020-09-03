@@ -172,8 +172,9 @@ func run() int {
 		// Generate query //
 		////////////////////
 
-		reportMeta := make(map[string]string)
-		reportMeta["workDir"] = currentDir
+		reportMeta := Metadata{
+			WorkDir: currentDir,
+		}
 
 		query := ReportQuery{
 			Query: reportGraphqlQuery,

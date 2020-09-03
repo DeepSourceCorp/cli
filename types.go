@@ -1,16 +1,21 @@
 package main
 
+// The metadata sent by CLI
+type Metadata struct {
+	WorkDir string `json:"workDir"`
+}
+
 // ReportQueryInput is the schema for variables of artifacts
 // report GraphQL query
 type ReportQueryInput struct {
-	AccessToken       string      `json:"accessToken"`
-	CommitOID         string      `json:"commitOid"`
-	ReporterName      string      `json:"reporter"`
-	ReporterVersion   string      `json:"reporterVersion"`
-	Key               string      `json:"key"`
-	Data              string      `json:"data"`
-	AnalyzerShortcode string      `json:"analyzer"`
-	Metadata          interface{} `json:"metadata,omitempty"`
+	AccessToken       string   `json:"accessToken"`
+	CommitOID         string   `json:"commitOid"`
+	ReporterName      string   `json:"reporter"`
+	ReporterVersion   string   `json:"reporterVersion"`
+	Key               string   `json:"key"`
+	Data              string   `json:"data"`
+	AnalyzerShortcode string   `json:"analyzer"`
+	Metadata          Metadata `json:"metadata,omitempty"`
 }
 
 // ReportQueryInput is the structure of artifacts report
