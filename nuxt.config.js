@@ -33,17 +33,16 @@ export default {
   modules: ['@nuxtjs/apollo'],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
-  build: {
+  build: {},
+
+  tailwindcss: {
+    cssPath: '~/assets/css/tailwind.scss'
   },
 
   googleFonts: {
     families: {
       Inter: [400, 500, 600, 700]
     }
-  },
-
-  tailwindcss: {
-    cssPath: '~/assets/css/tailwind.scss'
   },
 
   apollo: {
@@ -54,7 +53,7 @@ export default {
           fetchOptions: {
             mode: 'cors' //Cors Needed for external Cross origins, need to allow headers from server
           },
-          credentials: "omit" //must be omit to support application/json content type 
+          credentials: 'omit' //must be omit to support application/json content type
         }
       }
     }
