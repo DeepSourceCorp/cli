@@ -18,7 +18,7 @@ import { mapState } from 'vuex'
 import { Component, Watch } from 'nuxt-property-decorator'
 import { namespace } from 'vuex-class'
 
-const analyzers = namespace('analyzers')
+const analyzers = namespace('modules/analyzers')
 
 @Component
 export default class Index extends Vue {
@@ -26,7 +26,7 @@ export default class Index extends Vue {
   analyzers: any
 
   public dispatchAction() {
-    this.$store.dispatch(`analyzers/${ACT_FETCH_ANALYZERS}`)
+    this.$store.dispatch(`modules/analyzers/${ACT_FETCH_ANALYZERS}`)
   }
 }
 </script>

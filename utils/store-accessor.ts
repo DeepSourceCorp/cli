@@ -1,6 +1,6 @@
 import { Store } from 'vuex'
 import { getModule } from 'vuex-module-decorators'
-import analyzers from '~/store/analyzers'
+import analyzers from '~/store/modules/analyzers'
 
 let analyzersStore: analyzers
 

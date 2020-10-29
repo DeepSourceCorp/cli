@@ -6,7 +6,7 @@ import { ACT_FETCH_ANALYZERS } from '~/types/action-types';
 const MUT_SET_ANALYZERS = 'setAnalyzers';
 
 @Module({
-  name: 'analyzers',
+  name: 'modules/analyzers',
   stateFactory: true,
   namespaced: true
 })
