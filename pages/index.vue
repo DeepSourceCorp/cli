@@ -3,7 +3,7 @@
     <div>
       <button class="btn" @click="dispatchAction">Fetch</button>
       <span v-if="$apollo.loading">Loading</span>
-      <div v-else v-for="analyzer in analyzers" class="bar">
+      <div v-else v-for="analyzer in analyzers.edges" class="bar">
         {{ analyzer.node.id }}/{{ analyzer.node.name }}
       </div>
     </div>

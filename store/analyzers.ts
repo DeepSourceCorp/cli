@@ -1,5 +1,7 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import gql from "graphql-tag";
+import { AnalyzerConnection, PageInfo } from '~/types/types.ts'
+import AnalyzersGQLQuery from '~/apollo/queries/analyzers.graphql';
 
 @Module({
   name: 'analyzers',
@@ -7,10 +9,16 @@ import gql from "graphql-tag";
   namespaced: true
 })
 class Analyzers extends VuexModule {
-  public analyzers: any = [];
+  public analyzers: AnalyzerConnection | null = {
+    pageInfo: {
+      hasNextPage: true,
+      hasPreviousPage: true
+    },
+    edges: []
+  };
 
   @Mutation
-  public setAnalyzers(analyzers: any): void {
+  public setAnalyzers(analyzers: AnalyzerConnection): void {
     this.analyzers = analyzers;
   }
 
@@ -18,21 +26,9 @@ class Analyzers extends VuexModule {
   public async fetchAnalyzers() {
     let client = this.store.app.apolloProvider.defaultClient
     const response = await client.query({
-      query: gql`
-      query {
-        analyzers {
-          edges {
-            node {
-              id
-              name
-              shortcode
-            }
-          }
-        }
-      }
-      `
+      query: AnalyzersGQLQuery
     })
-    this.context.commit('setAnalyzers', response.data.analyzers.edges)
+    this.context.commit('setAnalyzers', response.data.analyzers)
   }
 }
 
