@@ -1,0 +1,1 @@
+export const ACT_FETCH_ANALYZERS: string = 'fetchAnalyzers'

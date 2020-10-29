@@ -11,20 +11,22 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import gql from "graphql-tag";
-import { mapState } from "vuex";
-import { Component, Watch } from "nuxt-property-decorator";
-import { namespace } from "vuex-class";
+import Vue from 'vue'
+import gql from 'graphql-tag'
+import { ACT_FETCH_ANALYZERS } from '~/types/action-types'
+import { mapState } from 'vuex'
+import { Component, Watch } from 'nuxt-property-decorator'
+import { namespace } from 'vuex-class'
 
-const analyzers = namespace("analyzers");
+const analyzers = namespace('analyzers')
 
 @Component
 export default class Index extends Vue {
   @analyzers.State
-  analyzers: any;
+  analyzers: any
+
   public dispatchAction() {
-    this.$store.dispatch("analyzers/fetchAnalyzers");
+    this.$store.dispatch(`analyzers/${ACT_FETCH_ANALYZERS}`)
   }
 }
 </script>

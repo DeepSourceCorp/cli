@@ -1,8 +1,9 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import { AnalyzerConnection } from '~/types/types'
 import AnalyzersGQLQuery from '~/apollo/queries/analyzers.graphql';
-import { fetchAnalyzers } from '../utils/types/actions'
-import { setAnalyzers } from '../utils/types/mutations'
+import { ACT_FETCH_ANALYZERS } from '~/types/action-types';
+
+const MUT_SET_ANALYZERS = 'setAnalyzers';
 
 @Module({
   name: 'analyzers',
@@ -10,7 +11,7 @@ import { setAnalyzers } from '../utils/types/mutations'
   namespaced: true
 })
 class Analyzers extends VuexModule {
-  public analyzers: AnalyzerConnection | null = {
+  analyzers: AnalyzerConnection | null = {
     pageInfo: {
       hasNextPage: true,
       hasPreviousPage: true
@@ -19,17 +20,17 @@ class Analyzers extends VuexModule {
   };
 
   @Mutation
-  public [setAnalyzers](analyzers: AnalyzerConnection): void {
+  public [MUT_SET_ANALYZERS](analyzers: AnalyzerConnection): void {
     this.analyzers = analyzers;
   }
 
   @Action
-  public async [fetchAnalyzers]() {
+  public async [ACT_FETCH_ANALYZERS]() {
     let client = this.store.app.apolloProvider.defaultClient
     const response = await client.query({
       query: AnalyzersGQLQuery
     })
-    this.context.commit('setAnalyzers', response.data.analyzers)
+    this.context.commit(MUT_SET_ANALYZERS, response.data.analyzers)
   }
 }
 
