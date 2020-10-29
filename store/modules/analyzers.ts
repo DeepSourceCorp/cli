@@ -1,6 +1,6 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
 import { AnalyzerConnection } from '~/types/types'
-import AnalyzersGQLQuery from '~/apollo/queries/analyzers.graphql';
+import AnalyzersGQLQuery from '~/apollo/queries/analyzers.gql';
 import { ACT_FETCH_ANALYZERS } from '~/types/action-types';
 
 const MUT_SET_ANALYZERS = 'setAnalyzers';
@@ -24,13 +24,13 @@ class Analyzers extends VuexModule {
     this.analyzers = analyzers;
   }
 
-  @Action
+  @Action({ commit: MUT_SET_ANALYZERS })
   public async [ACT_FETCH_ANALYZERS]() {
     let client = this.store.app.apolloProvider.defaultClient
-    const response = await client.query({
+    let response = await client.query({
       query: AnalyzersGQLQuery
-    })
-    this.context.commit(MUT_SET_ANALYZERS, response.data.analyzers)
+    });
+    return response.data.analyzers;
   }
 }
 
