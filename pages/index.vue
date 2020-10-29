@@ -1,80 +1,53 @@
 <template>
   <div class="container">
     <div>
-      <Logo />
-      <h1 class="title my-5">
-        bifrost
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+      <button class="btn" @click="dispatchAction">Fetch</button>
+      <span v-if="$apollo.loading">Loading</span>
+      <div v-else v-for="analyzer in analyzers" class="bar">
+        {{ analyzer.node.id }}/{{ analyzer.node.name }}
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
+import gql from "graphql-tag";
+import { mapState } from "vuex";
+import { Component, Watch } from "nuxt-property-decorator";
+import { namespace } from "vuex-class";
 
-export default Vue.extend({})
+const analyzers = namespace("analyzers");
+
+@Component
+export default class Index extends Vue {
+  @analyzers.State
+  analyzers: any;
+  public dispatchAction() {
+    this.$store.dispatch("analyzers/fetchAnalyzers");
+  }
+}
 </script>
 
 <style>
-/* Sample `apply` at-rules with Tailwind CSS
 .container {
-@apply min-h-screen flex justify-center items-center text-center mx-auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 100px;
 }
-*/
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+.bar {
+  color: grey;
+  padding: 10px;
+  border-radius: 2px;
+  border: 1px lightgrey solid;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.btn {
+  background: lightgray;
+  border-radius: 2px;
+  border: 1px lightgrey solid;
+  padding: 10px 15px;
+  color: black;
 }
 </style>
