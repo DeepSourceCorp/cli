@@ -1,7 +1,8 @@
 import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
-import gql from "graphql-tag";
-import { AnalyzerConnection, PageInfo } from '~/types/types.ts'
+import { AnalyzerConnection } from '~/types/types'
 import AnalyzersGQLQuery from '~/apollo/queries/analyzers.graphql';
+import { fetchAnalyzers } from '../utils/types/actions'
+import { setAnalyzers } from '../utils/types/mutations'
 
 @Module({
   name: 'analyzers',
@@ -18,12 +19,12 @@ class Analyzers extends VuexModule {
   };
 
   @Mutation
-  public setAnalyzers(analyzers: AnalyzerConnection): void {
+  public [setAnalyzers](analyzers: AnalyzerConnection): void {
     this.analyzers = analyzers;
   }
 
   @Action
-  public async fetchAnalyzers() {
+  public async [fetchAnalyzers]() {
     let client = this.store.app.apolloProvider.defaultClient
     const response = await client.query({
       query: AnalyzersGQLQuery
