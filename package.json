@@ -15,8 +15,7 @@
     "nuxt": "^2.14.6",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
     "graphql-tag": "^2.11.0",
-    "nuxt-property-decorator": "^2.8.8",
-    "vuex-module-decorators": "^1.0.1"
+    "nuxt-property-decorator": "^2.8.8"
   },
   "devDependencies": {
     "@nuxtjs/google-analytics": "^2.4.0",

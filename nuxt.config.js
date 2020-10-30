@@ -61,7 +61,7 @@ export default {
 
   vue: {
     config: {
-      transpileDependencies: ['vuex-module-decorators']
+      transpileDependencies: []
     }
   }
 }
