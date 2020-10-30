@@ -1,0 +1,1683 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+enum ActionChoice {
+  ADD
+  REMOVE
+}
+
+input AddAnalyzerFeedbackInput {
+  feedback: String!
+  analyzerShortcode: String!
+  okToContact: Boolean!
+  isAlreadyUsing: Boolean!
+  clientMutationId: String
+}
+
+type AddAnalyzerFeedbackPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input AddTransformerFeedbackInput {
+  feedback: String!
+  shortcode: String!
+  okToContact: Boolean!
+  isAlreadyUsing: Boolean!
+  clientMutationId: String
+}
+
+type AddTransformerFeedbackPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type Analyzer implements Node {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  category: String
+  documentationUrl: String
+  discussUrl: String
+  version: String!
+  shortcode: String!
+  name: String!
+  accessKey: UUID!
+  logo: String
+  description: String!
+  analyzerType: AnalyzerAnalyzerType!
+  status: AnalyzerStatus!
+  command: String
+  autofixerCommand: String
+  minCpuLimit: Int!
+  minMemoryLimit: Int!
+  maxCpuLimit: Int!
+  maxMemoryLimit: Int!
+  metaSchema: JSONString!
+  runtimeVersions: [String!]!
+  trigger: AnalyzerTrigger!
+  owner: String
+  isPrimary: Boolean!
+  starIssues(before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection!
+  exampleConfig: String
+  issues(before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection!
+  reviews(before: String, after: String, first: Int, last: Int): AnalyzerReviewConnection!
+  checks(before: String, after: String, first: Int, last: Int): CheckConnection!
+  repositories(before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
+  userSet(before: String, after: String, first: Int, last: Int): UserConnection!
+  autofixRuns(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
+  transformertoolSet(before: String, after: String, first: Int, last: Int, q: String, language: String): TransformerToolConnection!
+  transformerRuns(before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
+  analyzerLogo: String
+  publishedOn: Date
+  updatedOn: Date
+  issuesCount: Int
+  autofixableIssuesCount: Int
+  issueDistribution: GenericScalar
+}
+
+enum AnalyzerAnalyzerType {
+  CORE
+  COMMUNITY
+  CUSTOM
+}
+
+type AnalyzerConnection {
+  pageInfo: PageInfo!
+  edges: [AnalyzerEdge]!
+  totalCount: Int
+}
+
+type AnalyzerEdge {
+  node: Analyzer
+  cursor: String!
+}
+
+type AnalyzerReview implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  analyzer: Analyzer!
+  name: String!
+  avatar: String!
+  comment: String!
+}
+
+type AnalyzerReviewConnection {
+  pageInfo: PageInfo!
+  edges: [AnalyzerReviewEdge]!
+  totalCount: Int
+}
+
+type AnalyzerReviewEdge {
+  node: AnalyzerReview
+  cursor: String!
+}
+
+enum AnalyzerStatus {
+  ACTIVE
+  DRAFT
+}
+
+enum AnalyzerTrigger {
+  CODE
+  DATA
+}
+
+type AppliedCoupon {
+  code: String
+  description: String
+}
+
+input ApplyCreditsToOwnerInput {
+  ownerId: Int!
+  amount: Int!
+  clientMutationId: String
+}
+
+type ApplyCreditsToOwnerPayload {
+  ok: Boolean
+  availableCredits: Int
+  clientMutationId: String
+}
+
+type AutofixRun implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  runId: UUID!
+  commitOid: String
+  status: AutofixRunStatus!
+  finishedAt: DateTime
+  errors: JSONString
+  config: JSONString
+  resolvedIssues: Int
+  resolvedIssuesMetadata: JSONString!
+  pullRequestNumber: Int
+  pullRequestStatus: AutofixRunPullRequestStatus!
+  committedToBranchStatus: AutofixRunCommittedToBranchStatus!
+  extraData: JSONString!
+  createdBy: User
+  issue: Issue
+  analyzer: Analyzer
+  repository: Repository!
+  checkIssues(before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  filesAffected: Int
+  issuesAffected: Int
+  changeset: GenericScalar
+  finishedIn: Int
+  vcsPrUrl: String
+  resolvedIssuesCount: Int
+  gitCompareDisplay: String
+  isGeneratedFromPr: Boolean
+  pullRequestTitle: String
+}
+
+enum AutofixRunCommittedToBranchStatus {
+  NCB
+  CIP
+  CTB
+}
+
+type AutofixRunConnection {
+  pageInfo: PageInfo!
+  edges: [AutofixRunEdge]!
+  totalCount: Int
+}
+
+type AutofixRunEdge {
+  node: AutofixRun
+  cursor: String!
+}
+
+enum AutofixRunPullRequestStatus {
+  PNC
+  PRP
+  PRO
+  PRM
+  PRC
+}
+
+enum AutofixRunStatus {
+  PEND
+  PASS
+  TIMO
+  CNCL
+  FAIL
+}
+
+type AutofixableIssueDetail {
+  shortcode: String
+  title: String
+  category: String
+  occurrenceCount: Int
+}
+
+type BillingInfo {
+  planSlug: String
+  seatsTotal: Int
+  seatsUsed: Int
+  lastBillAmount: Float
+  upcomingBillAmount: Float
+  lastPaymentDate: DateTime
+  upcomingPaymentDate: DateTime
+  upcomingCancellationDate: DateTime
+  lastInvoiceUrl: String
+  couponApplied: AppliedCoupon
+  activeCard: Card
+  invoices: [Invoice]
+  outstandingCredits: Float
+  upgradePlans: [String]
+  downgradePlans: [String]
+  status: SubscriptionStatusChoice!
+  billingEmail: String
+  billingAddress: String
+  cancelAtPeriodEnd: Boolean
+}
+
+input CancelCodeQualitySubscriptionInput {
+  ownerId: Int!
+  clientMutationId: String
+}
+
+type CancelCodeQualitySubscriptionPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type Card {
+  brand: String
+  endingIn: String
+  expYear: Int
+  expMonth: Int
+}
+
+type Check implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  checkSeq: Int!
+  analyzer: Analyzer
+  status: CheckStatus!
+  run: Run!
+  triggeredAt: DateTime
+  finishedAt: DateTime
+  resolvedIssues(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection!
+  extraData: JSONString!
+  errors: GenericScalar
+  metrics: JSONString!
+  githubCheckRunId: Int
+  githubCheckSuiteId: Int
+  repository: Repository!
+  metricsCaptured: [RepositoryMetricValue]
+  checkIssues(before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  concreteIssues(before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection
+  finishedIn: Int
+  finishedInDisplay: String
+  issuesRaisedCount: Int
+  issuesResolvedCount: Int
+  autofixableIssues: [AutofixableIssueDetail]
+  filesAffectedByAutofix: Int
+}
+
+type CheckConnection {
+  pageInfo: PageInfo!
+  edges: [CheckEdge]!
+  totalCount: Int
+}
+
+type CheckEdge {
+  node: Check
+  cursor: String!
+}
+
+type CheckIssue implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  checkInstance: Check!
+  concreteIssue: Issue
+  severity: CheckIssueSeverity!
+  isSuppressed: Boolean
+  path: String!
+  text: String
+  occurrenceType: CheckIssueOccurrenceType!
+  beginLine: Int!
+  beginColumn: Int!
+  endLine: Int!
+  endColumn: Int!
+  extraData: JSONString!
+  inRepositoryIssue(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection!
+  autofixRuns(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
+  sourceCodeMarkup: String
+  issueType: String
+  shortcode: String
+  description: String
+}
+
+type CheckIssueConnection {
+  pageInfo: PageInfo!
+  edges: [CheckIssueEdge]!
+  totalCount: Int
+}
+
+type CheckIssueEdge {
+  node: CheckIssue
+  cursor: String!
+}
+
+enum CheckIssueOccurrenceType {
+  EXIST
+  NEW
+}
+
+enum CheckIssueSeverity {
+  CRITICAL
+  MAJOR
+  MINOR
+}
+
+enum CheckStatus {
+  PEND
+  PASS
+  FAIL
+  TIMO
+  CNCL
+  READ
+  NEUT
+}
+
+input CommitChangesToPRInput {
+  patches: [Int]!
+  autofixRunId: String!
+  clientMutationId: String
+}
+
+type CommitChangesToPRPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input CommitConfigToVCSInput {
+  config: String!
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type CommitConfigToVCSPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type CouponInfo {
+  currentCycleDiscount: Float!
+  nextCycleDiscount: Float!
+  isApplied: Boolean!
+  description: String!
+}
+
+input CreateAutofixRunForPullRequestInput {
+  checkId: ID!
+  issues: [String]!
+  clientMutationId: String
+}
+
+type CreateAutofixRunForPullRequestPayload {
+  autofixRunId: String
+  clientMutationId: String
+}
+
+input CreateAutofixRunInput {
+  inputFiles: [String]!
+  repoIssueId: ID!
+  clientMutationId: String
+}
+
+type CreateAutofixRunPayload {
+  runId: String
+  clientMutationId: String
+}
+
+input CreatePullRequestInput {
+  patches: [Int]!
+  autofixRunId: String!
+  repoId: ID!
+  clientMutationId: String
+}
+
+type CreatePullRequestPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input CreateUserFeedbackInput {
+  content: String!
+  clientMutationId: String
+}
+
+type CreateUserFeedbackPayload {
+  ok: Boolean
+  description: String
+  clientMutationId: String
+}
+
+type CreditsInfo {
+  currentCycleDiscount: Float!
+  nextCycleDiscount: Float!
+  isApplied: Boolean!
+}
+
+scalar Date
+
+scalar DateTime
+
+input DeleteSilenceRuleInput {
+  silenceRuleId: ID!
+  clientMutationId: String
+}
+
+type DeleteSilenceRulePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type Discount {
+  coupon: CouponInfo
+  credits: CreditsInfo
+}
+
+input GenerateKeyPairForRepositoryInput {
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type GenerateKeyPairForRepositoryPayload {
+  repository: Repository
+  clientMutationId: String
+}
+
+scalar GenericScalar
+
+input GetBillingInfoInput {
+  productSlug: String!
+  planSlug: String!
+  quantity: Int!
+  couponCode: String
+  ownerId: Int!
+  isTrial: Boolean!
+  clientMutationId: String
+}
+
+type GetBillingInfoPayload {
+  amountPayableThisCycle: Float!
+  amountPayableNextCycle: Float!
+  nextBillingCycle: DateTime!
+  netPayableThisCycle: Float!
+  netPayableNextCycle: Float!
+  discounts: Discount!
+  clientMutationId: String
+}
+
+input GetUpgradeCodeQualitySubscriptionPlanInfoInput {
+  ownerId: Int!
+  planSlug: String!
+  clientMutationId: String
+}
+
+type GetUpgradeCodeQualitySubscriptionPlanInfoPayload {
+  endingBalance: Int
+  upcomingBillAmount: Int
+  upcomingBillDate: DateTime
+  prorationAmount: Int
+  proratedForDays: Int
+  billedImmediately: Boolean
+  quantity: Int
+  clientMutationId: String
+}
+
+enum IgnoreCheckIssueActionChoice {
+  SUPPRESS
+  DELETE
+}
+
+input IgnoreCheckIssueInput {
+  checkIssueId: ID!
+  action: IgnoreCheckIssueActionChoice!
+  clientMutationId: String
+}
+
+type IgnoreCheckIssuePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input IgnoreIssueForFilePatternInRepositoryInput {
+  repoIssueId: ID
+  checkId: ID
+  issueShortcode: String
+  pattern: String!
+  clientMutationId: String
+}
+
+type IgnoreIssueForFilePatternInRepositoryPayload {
+  ok: Boolean
+  checkIssueIds: [String]
+  clientMutationId: String
+}
+
+input IgnoreIssueForRepositoryInput {
+  repoIssueId: ID
+  checkId: ID
+  issueShortcode: String
+  filePath: String
+  clientMutationId: String
+}
+
+type IgnoreIssueForRepositoryPayload {
+  ok: Boolean
+  checkIssueIds: [String]
+  clientMutationId: String
+}
+
+input IgnoreIssueForTestPatternsInRepositoryInput {
+  repoIssueId: ID
+  checkId: ID
+  issueShortcode: String
+  clientMutationId: String
+}
+
+type IgnoreIssueForTestPatternsInRepositoryPayload {
+  ok: Boolean
+  checkIssueIds: [String]
+  clientMutationId: String
+}
+
+enum InviteTeamMemberActionChoice {
+  CREATE
+  CANCEL
+}
+
+input InviteTeamMemberInput {
+  ownerId: Int!
+  email: String!
+  action: InviteTeamMemberActionChoice!
+  role: TeamMemberRoleChoices!
+  clientMutationId: String
+}
+
+type InviteTeamMemberPayload {
+  invitationUrl: String
+  clientMutationId: String
+}
+
+input InviteTeamMembersInput {
+  invitees: [Invitee]!
+  ownerId: ID!
+  action: InviteTeamMemberActionChoice!
+  clientMutationId: String
+}
+
+type InviteTeamMembersPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input Invitee {
+  email: String!
+  role: TeamMemberRoleChoices!
+}
+
+type Invoice {
+  invoiceId: String
+  date: DateTime
+  amount: Float
+  url: String
+}
+
+type Issue implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  shortcode: String!
+  title: String!
+  description: String!
+  severity: IssueSeverity!
+  analyzer: Analyzer!
+  autofixAvailable: Boolean!
+  autofixTitle: String
+  isRecommended: Boolean!
+  starIssueInAnalyzers(before: String, after: String, first: Int, last: Int, categoryIn: String, q: String): AnalyzerConnection!
+  checkIssues(before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  autofixRuns(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
+  occurrenceCount: Int
+  issueType: String
+  seenIn: String
+  descriptionRendered: String
+}
+
+type IssueConnection {
+  pageInfo: PageInfo!
+  edges: [IssueEdge]!
+  totalCount: Int
+}
+
+type IssueEdge {
+  node: Issue
+  cursor: String!
+}
+
+enum IssueSeverity {
+  CRITICAL
+  MAJOR
+  MINOR
+}
+
+type IssueTypeSetting {
+  slug: String
+  name: String
+  isIgnoredInCheckStatus: Boolean
+  isIgnoredToDisplay: Boolean
+  description: String
+}
+
+input IssueTypeSettingInput {
+  slug: String
+  name: String
+  isIgnoredInCheckStatus: Boolean
+  isIgnoredToDisplay: Boolean
+  description: String
+}
+
+scalar JSONString
+
+type Mutation {
+  socialAuth(accessToken: String!, provider: String!): SocialAuthJWT
+  toggleRepositoryActivation(input: ToggleRepositoryActivationInput!): ToggleRepositoryActivationPayload
+  createUserFeedback(input: CreateUserFeedbackInput!): CreateUserFeedbackPayload
+  updateRepositorySettings(input: UpdateRepositorySettingsInput!): UpdateRepositorySettingsPayload
+  updateOwnerSettings(input: UpdateOwnerSettingsInput!): UpdateOwnerSettingsPayload
+  getBillingInfo(input: GetBillingInfoInput!): GetBillingInfoPayload
+  ignoreIssueForRepository(input: IgnoreIssueForRepositoryInput!): IgnoreIssueForRepositoryPayload
+  ignoreIssueForFilePatternInRepository(input: IgnoreIssueForFilePatternInRepositoryInput!): IgnoreIssueForFilePatternInRepositoryPayload
+  ignoreIssueForTestPatternsInRepository(input: IgnoreIssueForTestPatternsInRepositoryInput!): IgnoreIssueForTestPatternsInRepositoryPayload
+  reportIssueFalsePositive(input: ReportIssueFalsePositiveInput!): ReportIssueFalsePositivePayload
+  ignoreCheckIssue(input: IgnoreCheckIssueInput!): IgnoreCheckIssuePayload
+  generateKeyPairForRepository(input: GenerateKeyPairForRepositoryInput!): GenerateKeyPairForRepositoryPayload
+  updateRepositoryWidgets(input: UpdateRepositoryWidgetsInput!): UpdateRepositoryWidgetsPayload
+  deleteSilenceRule(input: DeleteSilenceRuleInput!): DeleteSilenceRulePayload
+  updateDefaultDashboardContextForUser(input: UpdateDefaultDashboardContextForUserInput!): UpdateDefaultDashboardContextForUserPayload
+  updateBillingInfo(input: UpdateBillingInfoInput!): UpdateBillingInfoPayload
+  updateDefaultPaymentSource(input: UpdateDefaultPaymentSourceInput!): UpdateDefaultPaymentSourcePayload
+  cancelCodeQualitySubscription(input: CancelCodeQualitySubscriptionInput!): CancelCodeQualitySubscriptionPayload
+  updateCodeQualitySubscriptionSeats(input: UpdateCodeQualitySubscriptionSeatsInput!): UpdateCodeQualitySubscriptionSeatsPayload
+  getUpgradeCodeQualitySubscriptionPlanInfo(input: GetUpgradeCodeQualitySubscriptionPlanInfoInput!): GetUpgradeCodeQualitySubscriptionPlanInfoPayload
+  revertSubscriptionCancellation(input: RevertSubscriptionCancellationInput!): RevertSubscriptionCancellationPayload
+  applyCreditsToOwner(input: ApplyCreditsToOwnerInput!): ApplyCreditsToOwnerPayload
+  inviteTeamMember(input: InviteTeamMemberInput!): InviteTeamMemberPayload
+  inviteTeamMembers(input: InviteTeamMembersInput!): InviteTeamMembersPayload
+  removeTeamMember(input: RemoveTeamMemberInput!): RemoveTeamMemberPayload
+  updateTeamMemberRole(input: UpdateTeamMemberRoleInput!): UpdateTeamMemberRolePayload
+  syncRepositoriesForOwner(input: SyncRepositoriesForOwnerInput!): SyncRepositoriesForOwnerPayload
+  createAutofixRun(input: CreateAutofixRunInput!): CreateAutofixRunPayload
+  createdPullRequest(input: CreatePullRequestInput!): CreatePullRequestPayload
+  commitConfigToVcs(input: CommitConfigToVCSInput!): CommitConfigToVCSPayload
+  updateRepoMetricThreshold(input: UpdateRepoMetricThresholdInput!): UpdateRepoMetricThresholdPayload
+  createAutofixRunForPullRequest(input: CreateAutofixRunForPullRequestInput!): CreateAutofixRunForPullRequestPayload
+  commitChangesToPr(input: CommitChangesToPRInput!): CommitChangesToPRPayload
+  resetInvitationLink(input: ResetTeamInvitationLinkInput!): ResetTeamInvitationLinkPayload
+  updateTeamBasePermissions(input: UpdateTeamBasePermissionsInput!): UpdateTeamBasePermissionsPayload
+  addAnalyzerFeedback(input: AddAnalyzerFeedbackInput!): AddAnalyzerFeedbackPayload
+  addTransformerFeedback(input: AddTransformerFeedbackInput!): AddTransformerFeedbackPayload
+  updateAccessControlSettings(input: UpdateAccessControlSettingsInput!): UpdateAccessControlSettingsPayload
+  syncVcsPermissions(input: SyncVcsPermissionsInput!): SyncVcsPermissionsPayload
+  updateOrCreateRepositoryCollaborator(input: UpdateOrCreateRepositoryCollaboratorInput!): UpdateOrCreateRepositoryCollaboratorPayload
+  removeRepositoryCollaborator(input: RemoveRepositoryCollaboratorInput!): RemoveRepositoryCollaboratorPayload
+  triggerAnalysisForRepository(input: TriggerAnalysisForRepositoryInput!): TriggerAnalysisForRepositoryPayload
+  updateTechnologyPreference(input: UpdateTechnologyPreferenceInput!): UpdateTechnologyPreferencePayload
+  updateBookmarkedIssue(input: UpdateBookmarkedIssueInput!): UpdateBookmarkedIssuePayload
+}
+
+interface Node {
+  id: ID!
+}
+
+type Owner implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  login: String!
+  avatar: String
+  vcsProvider: OwnerVcsProvider!
+  vcsAccountUid: String!
+  plan: OwnerPlan
+  billingEmail: String
+  billingAddress: String
+  customerId: String
+  primaryUser: User
+  analyzers(before: String, after: String, first: Int, last: Int, categoryIn: String, q: String): AnalyzerConnection!
+  team: Team
+  repositories(before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  userSet(before: String, after: String, first: Int, last: Int): UserConnection!
+  ownerSetting: OwnerSetting
+  isTeam: Boolean
+  cards: GenericScalar
+  stripeInvoices: GenericScalar
+  numMembersTotal: Int
+  billingInfo: BillingInfo
+  activeCard: Card
+  hasPremiumPlan: Boolean
+  planUpgradeUrl: String
+  isViewerPrimaryUser: Boolean
+  setting: OwnerSetting
+  hasGrantedAllRepoAccess: Boolean
+  appConfigurationUrl: String
+}
+
+type OwnerConnection {
+  pageInfo: PageInfo!
+  edges: [OwnerEdge]!
+}
+
+type OwnerEdge {
+  node: Owner
+  cursor: String!
+}
+
+enum OwnerPlan {
+  FREE
+  DEVELOPER
+  TEAM
+}
+
+type OwnerSetting implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  owner: Owner!
+  issueTypeSettings: [IssueTypeSetting]
+}
+
+enum OwnerVcsProvider {
+  GH
+  BB
+  GL
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+type Query {
+  transformer(shortcode: String!): TransformerTool
+  transformers(before: String, after: String, first: Int, last: Int, q: String, language: String): TransformerToolConnection
+  transformerRun(runId: String!): TransformerRun!
+  autofixRun(runId: String!): AutofixRun!
+  issue(shortcode: String!): Issue
+  transactions(userId: Int!, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection
+  owner(login: String!, provider: VCSProviderChoices!): Owner
+  team(login: String!, provider: VCSProviderChoices!): Team
+  checkIssues(checkId: ID!, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection
+  check(checkId: ID!): Check!
+  analyzer(shortcode: String!): Analyzer
+  analyzers(before: String, after: String, first: Int, last: Int, categoryIn: String, q: String): AnalyzerConnection
+  viewer: User
+  repositoryIssues(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection
+  repository(name: String!, owner: String!, provider: VCSProviderChoices!): Repository
+  trendingRepositories(count: Int = 5, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  node(id: ID!): Node
+}
+
+input RemoveRepositoryCollaboratorInput {
+  repositoryCollaboratorId: ID!
+  clientMutationId: String
+}
+
+type RemoveRepositoryCollaboratorPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input RemoveTeamMemberInput {
+  ownerId: Int!
+  memberEmail: String!
+  clientMutationId: String
+}
+
+type RemoveTeamMemberPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input ReportIssueFalsePositiveInput {
+  checkIssueId: ID!
+  comment: String
+  clientMutationId: String
+}
+
+type ReportIssueFalsePositivePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type Repository implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  name: String!
+  vcsType: RepositoryVcsType!
+  vcsProvider: VCSProviderChoices!
+  vcsUrl: String!
+  vcsRepoUid: String!
+  collaborators(before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection
+  vcsCreatedAt: DateTime
+  sshUrl: String!
+  defaultBranchName: String
+  latestCommitOid: String
+  latestAnalysisRun: Run
+  isFork: Boolean!
+  isMirror: Boolean!
+  isPrivate: Boolean!
+  showInDiscover: Boolean!
+  languages: GenericScalar!
+  isActivated: Boolean!
+  errorCode: Int!
+  errorMessage: String
+  errorCtaButtonText: String
+  errorCtaButtonUrl: String
+  accessToken: UUID!
+  encPublicKey: String
+  isSubmoduleEnabled: Boolean!
+  analyzeChangesetOnly: Boolean!
+  issues(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection
+  config: GenericScalar!
+  owner: Owner!
+  widgets: [String]
+  supportedAnalyzers: GenericScalar
+  token: String!
+  extraData: JSONString!
+  checks(before: String, after: String, first: Int, last: Int): CheckConnection!
+  autofixRuns(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection
+  transformerRuns(before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
+  runs(before: String, after: String, first: Int, last: Int, status: String): RunConnection
+  repositorycollaboratorSet(before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
+  silenceRules(before: String, after: String, first: Int, last: Int, silenceLevel: String): SilenceRuleConnection
+  ownerLogin: String
+  canBeActivated: Boolean
+  lastAnalyzedAt: DateTime
+  blobUrlRoot: String
+  fullName: String
+  activityModality: String
+  issueTypeSettings: [IssueTypeSetting]
+  widgetsDisplay: GenericScalar
+  isAutofixEnabled: Boolean
+  isCommitPossible: Boolean
+  vcsHost: String
+  configGenerationRoute: String
+  activeIssueCount: Int
+  primaryAnalyzer: Analyzer
+  issue(shortcode: String!): RepositoryIssue
+  autofixRun(runId: String!): AutofixRun
+  transformerRun(runId: String!): TransformerRun
+  run(runId: String!): Run
+  hasViewerEditAccess: Boolean
+  viewerPermission: RepositoryPermissionChoices
+  autofixGithubAppInstallationUrl: String
+  autofixBitbucketAddonInstallationUrl: String
+  addableMembers(before: String, after: String, first: Int, last: Int, q: String, role: String): TeamMemberConnection
+}
+
+type RepositoryCollaborator implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  repository: Repository!
+  user: User!
+  permission: RepositoryCollaboratorPermission!
+}
+
+type RepositoryCollaboratorConnection {
+  pageInfo: PageInfo!
+  edges: [RepositoryCollaboratorEdge]!
+  totalCount: Int
+}
+
+type RepositoryCollaboratorEdge {
+  node: RepositoryCollaborator
+  cursor: String!
+}
+
+enum RepositoryCollaboratorPermission {
+  READ
+  WRITE
+  ADMIN
+}
+
+type RepositoryConnection {
+  pageInfo: PageInfo!
+  edges: [RepositoryEdge]!
+  totalCount: Int
+}
+
+type RepositoryEdge {
+  node: Repository
+  cursor: String!
+}
+
+type RepositoryIssue implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  repositoryInstance: Repository!
+  checkIssues(before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  shouldIgnore: Boolean!
+  severity: RepositoryIssueSeverityChoices!
+  lastSeen: DateTime
+  checkSet(before: String, after: String, first: Int, last: Int): CheckConnection!
+  userSet(before: String, after: String, first: Int, last: Int): UserConnection!
+  issueType: String
+  title: String
+  shortcode: String
+  description: String
+  descriptionRendered: String
+  occurrenceCount: Int
+  firstSeen: DateTime
+  analyzerName: String
+  analyzerShortcode: String
+  analyzerLogo: String
+  seenIn: String
+  pastValue: Int
+  autofixAvailable: Boolean
+  raisedInFiles: [String]
+  silenceRules: [SilenceRule]
+  newVcsIssueUrl: String
+  lastActivity: String
+}
+
+type RepositoryIssueConnection {
+  pageInfo: PageInfo!
+  edges: [RepositoryIssueEdge]!
+  totalCount: Int
+}
+
+type RepositoryIssueEdge {
+  node: RepositoryIssue
+  cursor: String!
+}
+
+enum RepositoryIssueSeverityChoices {
+  CRITICAL
+  MAJOR
+  MINOR
+}
+
+type RepositoryMetricValue implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  value: Float!
+  extraData: JSONString!
+  commitOid: String!
+  checkInstance: Check!
+  branchName: String
+  name: String
+  valueDisplay: String
+  isPassing: Boolean
+}
+
+enum RepositoryPermissionChoices {
+  READ
+  WRITE
+  ADMIN
+}
+
+enum RepositoryVcsType {
+  GIT
+  SVN
+  HG
+}
+
+input ResetTeamInvitationLinkInput {
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type ResetTeamInvitationLinkPayload {
+  invitationUrl: String
+  clientMutationId: String
+}
+
+input RevertSubscriptionCancellationInput {
+  ownerId: Int!
+  clientMutationId: String
+}
+
+type RevertSubscriptionCancellationPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type Run implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  runId: UUID!
+  status: RunStatus!
+  branchName: String
+  baseOid: String
+  commitOid: String
+  finishedAt: DateTime
+  errorMeta: JSONString
+  config: GenericScalar
+  extraData: JSONString!
+  repository: Repository!
+  checks(before: String, after: String, first: Int, last: Int): CheckConnection!
+  finishedIn: Int
+  vcsCommitUrl: String
+  gitCompareDisplay: String
+  pullRequestNumberDisplay: String
+  issuesRaisedCount: Int
+  issuesResolvedNum: Int
+  isForDefaultBranch: Boolean
+}
+
+type RunConnection {
+  pageInfo: PageInfo!
+  edges: [RunEdge]!
+  totalCount: Int
+}
+
+type RunEdge {
+  node: Run
+  cursor: String!
+}
+
+enum RunStatus {
+  PEND
+  PASS
+  FAIL
+  TIMO
+  CNCL
+  READ
+}
+
+type SilenceRule implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  silenceLevel: SilenceRuleSilenceLevel!
+  filePath: String
+  repository: Repository!
+  issue: Issue!
+  creator: User
+  objectId: Int!
+  metadata: GenericScalar
+}
+
+type SilenceRuleConnection {
+  pageInfo: PageInfo!
+  edges: [SilenceRuleEdge]!
+  totalCount: Int
+}
+
+type SilenceRuleEdge {
+  node: SilenceRule
+  cursor: String!
+}
+
+enum SilenceRuleSilenceLevel {
+  FL
+  RL
+}
+
+type SocialAuthJWT {
+  social: SocialType
+  token: String
+}
+
+scalar SocialCamelJSON
+
+type SocialNode implements Node {
+  id: ID!
+  user: User!
+  provider: String!
+  uid: String!
+  extraData: SocialCamelJSON
+  created: DateTime!
+  modified: DateTime!
+}
+
+type SocialNodeConnection {
+  pageInfo: PageInfo!
+  edges: [SocialNodeEdge]!
+}
+
+type SocialNodeEdge {
+  node: SocialNode
+  cursor: String!
+}
+
+type SocialType {
+  id: ID!
+  user: User!
+  provider: String!
+  uid: String!
+  extraData: SocialCamelJSON
+  created: DateTime!
+  modified: DateTime!
+}
+
+enum SubscriptionStatusChoice {
+  TRIAL
+  ACTIVE
+  INACTIVE
+  PAST_DUE
+}
+
+input SyncRepositoriesForOwnerInput {
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type SyncRepositoriesForOwnerPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input SyncVcsPermissionsInput {
+  teamId: ID!
+  clientMutationId: String
+}
+
+type SyncVcsPermissionsPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type Team implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  login: String!
+  avatar: String
+  vcsProvider: OwnerVcsProvider!
+  vcsAccountUid: String!
+  plan: OwnerPlan
+  billingEmail: String
+  billingAddress: String
+  customerId: String
+  primaryUser: User
+  ownerPtr: Owner!
+  name: String!
+  members(before: String, after: String, first: Int, last: Int): UserConnection!
+  invitationCode: String
+  syncPermissionsWithVcs: Boolean!
+  teammemberSet(before: String, after: String, first: Int, last: Int, q: String, role: String): TeamMemberConnection!
+  teammemberinvitationSet(before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection!
+  basePermissionSet: TeamBasePermissionSet
+  billingDetails: GenericScalar
+  numMembersTotal: Int
+  isViewerPrimaryUser: Boolean
+  teamMembers(before: String, after: String, first: Int, last: Int, q: String, role: String): TeamMemberConnection
+  invites(before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
+  invitationUrl: String
+}
+
+type TeamBasePermissionSet implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  team: Team!
+  defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
+  canMembersIgnoreIssues: Boolean!
+  canMembersModifyMetricThresholds: Boolean!
+  canContributorsIgnoreIssues: Boolean!
+  canContributorsModifyMetricThresholds: Boolean!
+}
+
+enum TeamBasePermissionSetDefaultRepositoryPermission {
+  READ
+  WRITE
+  ADMIN
+}
+
+type TeamConnection {
+  pageInfo: PageInfo!
+  edges: [TeamEdge]!
+}
+
+type TeamEdge {
+  node: Team
+  cursor: String!
+}
+
+type TeamMember implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  role: TeamMemberRoleChoices
+  team: Team!
+  user: User!
+  isPrimaryUser: Boolean
+}
+
+type TeamMemberConnection {
+  pageInfo: PageInfo!
+  edges: [TeamMemberEdge]!
+  totalCount: Int
+}
+
+type TeamMemberEdge {
+  node: TeamMember
+  cursor: String!
+}
+
+type TeamMemberInvitation implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  role: TeamMemberRoleChoices
+  id: ID!
+  team: Team!
+  invitationCode: String!
+  email: String!
+  status: TeamMemberInvitationStatus!
+}
+
+type TeamMemberInvitationConnection {
+  pageInfo: PageInfo!
+  edges: [TeamMemberInvitationEdge]!
+  totalCount: Int
+}
+
+type TeamMemberInvitationEdge {
+  node: TeamMemberInvitation
+  cursor: String!
+}
+
+enum TeamMemberInvitationStatus {
+  PEND
+  ACTD
+}
+
+enum TeamMemberRoleChoices {
+  ADMIN
+  MEMBER
+  CONTRIBUTOR
+}
+
+input ToggleRepositoryActivationInput {
+  isActivated: Boolean!
+  id: ID!
+  clientMutationId: String
+}
+
+type ToggleRepositoryActivationPayload {
+  repository: Repository
+  clientMutationId: String
+}
+
+type Transaction implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  transactionType: TransactionTransactionType!
+  amount: Int!
+  user: User!
+  reason: TransactionReason!
+  objectId: Int
+  through: String
+}
+
+type TransactionConnection {
+  pageInfo: PageInfo!
+  edges: [TransactionEdge]!
+  totalCount: Int
+}
+
+type TransactionEdge {
+  node: Transaction
+  cursor: String!
+}
+
+enum TransactionReason {
+  REFER
+  SIGNUP
+  CREDIT
+}
+
+enum TransactionTransactionType {
+  CRD
+  DBT
+}
+
+type TransformerReview implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  transformerTool: TransformerTool!
+  name: String!
+  avatar: String!
+  comment: String!
+}
+
+type TransformerReviewConnection {
+  pageInfo: PageInfo!
+  edges: [TransformerReviewEdge]!
+  totalCount: Int
+}
+
+type TransformerReviewEdge {
+  node: TransformerReview
+  cursor: String!
+}
+
+type TransformerRun implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  runId: UUID!
+  commitOid: String!
+  baseOid: String
+  branchName: String
+  status: TransformerRunStatus!
+  finishedAt: DateTime
+  errors: JSONString
+  config: JSONString
+  pullRequestNumber: Int
+  pullRequestStatus: TransformerRunPullRequestStatus!
+  commitStatus: Boolean
+  createdCommitOid: String
+  extraData: JSONString!
+  repository: Repository!
+  analyzer: Analyzer!
+  changedFiles: [String!]!
+  tools: GenericScalar
+  githubCheckRunId: Int
+  githubCheckSuiteId: Int
+  changedFilesCount: Int
+  changeset: GenericScalar
+  finishedIn: Int
+  vcsPrUrl: String
+  vcsCommitUrl: String
+  pullRequestNumberDisplay: String
+  commitOidShort: String
+  gitCompareDisplay: String
+  gitCompareUrl: String
+}
+
+type TransformerRunConnection {
+  pageInfo: PageInfo!
+  edges: [TransformerRunEdge]!
+  totalCount: Int
+}
+
+type TransformerRunEdge {
+  node: TransformerRun
+  cursor: String!
+}
+
+enum TransformerRunPullRequestStatus {
+  PNC
+  PRO
+  PRC
+  PRM
+}
+
+enum TransformerRunStatus {
+  PEND
+  PASS
+  EMPT
+  TIMO
+  FAIL
+}
+
+type TransformerTool implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  analyzer: Analyzer
+  documentationUrl: String
+  discussUrl: String
+  exampleConfig: String
+  version: String
+  name: String!
+  shortcode: String!
+  logo: String
+  description: String!
+  transformerRuns(before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
+  reviews(before: String, after: String, first: Int, last: Int): TransformerReviewConnection!
+  language: String
+  publishedOn: Date
+  updatedOn: Date
+  owner: String
+}
+
+type TransformerToolConnection {
+  pageInfo: PageInfo!
+  edges: [TransformerToolEdge]!
+  totalCount: Int
+}
+
+type TransformerToolEdge {
+  node: TransformerTool
+  cursor: String!
+}
+
+input TriggerAnalysisForRepositoryInput {
+  repoId: ID!
+  clientMutationId: String
+}
+
+type TriggerAnalysisForRepositoryPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+scalar UUID
+
+input UpdateAccessControlSettingsInput {
+  teamId: ID!
+  syncPermissionsWithVcs: Boolean
+  clientMutationId: String
+}
+
+type UpdateAccessControlSettingsPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateBillingInfoInput {
+  ownerId: Int!
+  billingEmail: String
+  billingAddress: String
+  clientMutationId: String
+}
+
+type UpdateBillingInfoPayload {
+  billingEmail: String
+  billingAddress: String
+  clientMutationId: String
+}
+
+input UpdateBookmarkedIssueInput {
+  repoIssueId: ID!
+  action: ActionChoice!
+  clientMutationId: String
+}
+
+type UpdateBookmarkedIssuePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateCodeQualitySubscriptionSeatsInput {
+  ownerId: Int!
+  seats: Int!
+  clientMutationId: String
+}
+
+type UpdateCodeQualitySubscriptionSeatsPayload {
+  ok: Boolean
+  totalSeats: Int
+  clientMutationId: String
+}
+
+input UpdateDefaultDashboardContextForUserInput {
+  contextOwnerId: Int!
+  clientMutationId: String
+}
+
+type UpdateDefaultDashboardContextForUserPayload {
+  contexts: GenericScalar
+  clientMutationId: String
+}
+
+input UpdateDefaultPaymentSourceInput {
+  ownerId: Int!
+  token: String
+  action: UpdatePaymentActionChoice!
+  clientMutationId: String
+}
+
+type UpdateDefaultPaymentSourcePayload {
+  card: Card
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateOrCreateRepositoryCollaboratorInput {
+  userId: ID!
+  repositoryId: ID!
+  permission: RepositoryPermissionChoices
+  clientMutationId: String
+}
+
+type UpdateOrCreateRepositoryCollaboratorPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateOwnerSettingsInput {
+  issueTypeSettings: [IssueTypeSettingInput]!
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type UpdateOwnerSettingsPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+enum UpdatePaymentActionChoice {
+  UPDATE
+  REMOVE
+}
+
+input UpdateRepoMetricThresholdInput {
+  metricShortcode: String!
+  repositoryId: ID!
+  thresholdValue: Int
+  key: String!
+  clientMutationId: String
+}
+
+type UpdateRepoMetricThresholdPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateRepositorySettingsInput {
+  defaultBranchName: String
+  isSubmoduleEnabled: Boolean
+  showInDiscover: Boolean
+  analyzeChangesetOnly: Boolean
+  keepExistingIssues: Boolean
+  issueTypeSettings: [IssueTypeSettingInput]!
+  id: ID!
+  clientMutationId: String
+}
+
+type UpdateRepositorySettingsPayload {
+  repository: Repository
+  clientMutationId: String
+}
+
+input UpdateRepositoryWidgetsInput {
+  widgetCodes: [String]!
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type UpdateRepositoryWidgetsPayload {
+  widgetCodes: [String]
+  clientMutationId: String
+}
+
+input UpdateTeamBasePermissionsInput {
+  teamId: ID!
+  defaultRepositoryPermission: RepositoryPermissionChoices
+  canMembersIgnoreIssues: Boolean
+  canMembersModifyMetricThresholds: Boolean
+  canContributorsIgnoreIssues: Boolean
+  canContributorsModifyMetricThresholds: Boolean
+  clientMutationId: String
+}
+
+type UpdateTeamBasePermissionsPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateTeamMemberRoleInput {
+  ownerId: Int!
+  email: String!
+  role: TeamMemberRoleChoices!
+  clientMutationId: String
+}
+
+type UpdateTeamMemberRolePayload {
+  role: TeamMemberRoleChoices
+  clientMutationId: String
+}
+
+input UpdateTechnologyPreferenceInput {
+  analyzerShortcodes: [String]
+  clientMutationId: String
+}
+
+type UpdateTechnologyPreferencePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+type User implements Node {
+  id: ID!
+  lastLogin: DateTime
+  firstName: String!
+  lastName: String!
+  isStaff: Boolean!
+  isActive: Boolean!
+  dateJoined: DateTime!
+  email: String!
+  primaryOwner: Owner
+  avatar: String
+  preferredTechnologies(before: String, after: String, first: Int, last: Int, categoryIn: String, q: String): AnalyzerConnection!
+  bookmarkedIssues(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection!
+  socialAuth(before: String, after: String, first: Int, last: Int, uid: String, uid_In: String, provider: String, provider_In: String): SocialNodeConnection!
+  primaryOwnerships(before: String, after: String, first: Int, last: Int): OwnerConnection!
+  teams(before: String, after: String, first: Int, last: Int): TeamConnection!
+  teamMemberships(before: String, after: String, first: Int, last: Int, q: String, role: String): TeamMemberConnection!
+  repositorySet(before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
+  transactions(before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!
+  autofixrunSet(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
+  repositorycollaboratorSet(before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
+  silenceRulesCreated(before: String, after: String, first: Int, last: Int, silenceLevel: String): SilenceRuleConnection!
+  fullName: String
+  availableCredits: Float
+  referralUrl: String
+  repositories(before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  bookmarkedIssueCount: Int
+}
+
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  totalCount: Int
+}
+
+type UserEdge {
+  node: User
+  cursor: String!
+}
+
+enum VCSProviderChoices {
+  GITHUB
+  BITBUCKET
+  GITLAB
+}

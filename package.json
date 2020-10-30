@@ -7,21 +7,27 @@
     "build": "nuxt-ts build",
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
-    "test": "jest"
+    "test": "jest",
+    "generate-types": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
-    "core-js": "^3.6.5",
-    "nuxt": "^2.14.6",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
+    "core-js": "^3.6.5",
     "graphql-tag": "^2.11.0",
+    "nuxt": "^2.14.6",
+    "nuxt-property-decorator": "^2.8.8",
     "nuxt-property-decorator": "^2.8.8"
   },
   "devDependencies": {
-    "@nuxtjs/google-analytics": "^2.4.0",
-    "@nuxtjs/google-fonts": "^1.0.3",
+    "@graphql-codegen/cli": "^1.19.0",
+    "@graphql-codegen/typescript": "^1.17.11",
+    "@graphql-codegen/typescript-graphql-files-modules": "^1.18.0",
+    "@graphql-codegen/typescript-operations": "^1.17.8",
     "@nuxt/types": "^2.14.7",
     "@nuxt/typescript-build": "^2.0.3",
+    "@nuxtjs/google-analytics": "^2.4.0",
+    "@nuxtjs/google-fonts": "^1.0.3",
     "@nuxtjs/tailwindcss": "^3.1.0",
     "@vue/test-utils": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",
@@ -29,11 +35,11 @@
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest": "^26.5.0",
-    "prettier": "^2.1.2",
-    "ts-jest": "^26.4.1",
-    "vue-jest": "^3.0.4",
     "node-sass": "^4.14.1",
-    "sass-loader": "^10.0.2"
+    "prettier": "^2.1.2",
+    "sass-loader": "^10.0.2",
+    "ts-jest": "^26.4.1",
+    "vue-jest": "^3.0.4"
   },
   "prettier": {
     "printWidth": 100,
