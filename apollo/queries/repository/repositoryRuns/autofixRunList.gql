@@ -1,0 +1,45 @@
+query(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $limit: Int
+  $after: String
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    autofixRuns(first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          runId
+          status
+          filesAffected
+          finishedIn
+          isGeneratedFromPr
+          gitCompareDisplay
+          pullRequestTitle
+          pullRequestNumber
+          pullRequestStatus
+          createdAt
+          resolvedIssuesCount
+          createdBy {
+            fullName
+            avatar
+          }
+          analyzer {
+            name
+            analyzerLogo
+          }
+          issue {
+            title
+            issueType
+            shortcode
+          }
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}

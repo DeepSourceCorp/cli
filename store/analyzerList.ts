@@ -1,10 +1,10 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { RootState } from '~/store'
 import { AnalyzerConnection, PageInfo } from '~/types/types'
-import AnalyzersGQLQuery from '~/apollo/queries/analyzers.gql';
-import { ACT_FETCH_ANALYZERS } from '~/types/action-types';
+import AnalyzersGQLQuery from '~/apollo/queries/analyzerList/analyzers.gql';
+import { ACT_FETCH_ANALYZER_LIST } from '~/types/action-types';
 
-const MUT_SET_ANALYZERS = 'setAnalyzers';
+const MUT_SET_ANALYZER_LIST = 'setAnalyzerList';
 
 export const state = () => ({
   /**
@@ -12,15 +12,15 @@ export const state = () => ({
    * For eg,
    * stateProp: 'this is a state property' as string
    */
-  analyzers: {
+  analyzerList: {
     pageInfo: {} as PageInfo,
     edges: []
   } as AnalyzerConnection | null
 })
 
-export type AnalyzersModuleState = ReturnType<typeof state>
+export type AnalyzerListModuleState = ReturnType<typeof state>
 
-export const getters: GetterTree<AnalyzersModuleState, RootState> = {
+export const getters: GetterTree<AnalyzerListModuleState, RootState> = {
   /**
    * Define a getter here.
    * For eg,
@@ -34,12 +34,12 @@ export const mutations: MutationTree<RootState> = {
    * For eg,
    * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
    */
-  [MUT_SET_ANALYZERS]: (state: any, analyzers: AnalyzerConnection) => {
-    state.analyzers = analyzers
+  [MUT_SET_ANALYZER_LIST]: (state: any, analyzerList: AnalyzerConnection) => {
+    state.analyzerList = analyzerList
   }
 }
 
-export const actions: ActionTree<AnalyzersModuleState, RootState> = {
+export const actions: ActionTree<AnalyzerListModuleState, RootState> = {
   /**
    * Define actions here,
    * For eg,
@@ -47,11 +47,11 @@ export const actions: ActionTree<AnalyzersModuleState, RootState> = {
    *  commit('CHANGE_STATE_PROP', 'New state property')
    * }
    */
-  async [ACT_FETCH_ANALYZERS]({ commit }) {
+  async [ACT_FETCH_ANALYZER_LIST]({ commit }) {
     let client = this.app.apolloProvider?.defaultClient
     let response = await client?.query({
       query: AnalyzersGQLQuery
     });
-    commit(MUT_SET_ANALYZERS, response?.data.analyzers)
+    commit(MUT_SET_ANALYZER_LIST, response?.data.analyzers)
   }
 }

@@ -1,0 +1,8 @@
+query($id: ID!) {
+  repository: node(id: $id) {
+    ... on Repository {
+      id
+      encPublicKey
+    }
+  }
+}

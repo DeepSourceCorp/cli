@@ -3,7 +3,7 @@
     <div>
       <button class="btn" @click="dispatchAction">Fetch</button>
       <span v-if="$apollo.loading">Loading</span>
-      <div v-else v-for="analyzer in analyzers.edges" class="bar">
+      <div v-else v-for="analyzer in analyzerList.edges" class="bar">
         {{ analyzer.node.id }}/{{ analyzer.node.name }}
       </div>
     </div>
@@ -12,21 +12,19 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import gql from 'graphql-tag'
-import { ACT_FETCH_ANALYZERS } from '~/types/action-types'
-import { mapState } from 'vuex'
-import { Component, Watch } from 'nuxt-property-decorator'
-import { namespace } from 'vuex-class'
+import { ACT_FETCH_ANALYZER_LIST } from '~/types/action-types'
+import { Component, namespace } from 'nuxt-property-decorator'
+import { AnalyzerConnection } from '~/types/types'
 
-const analyzers = namespace('analyzers')
+const analyzerList = namespace('analyzerList')
 
 @Component
 export default class Index extends Vue {
-  @analyzers.State
-  analyzers: any
+  @analyzerList.State
+  analyzerList!: AnalyzerConnection
 
   public dispatchAction() {
-    this.$store.dispatch(`analyzers/${ACT_FETCH_ANALYZERS}`)
+    this.$store.dispatch(`analyzerList/${ACT_FETCH_ANALYZER_LIST}`)
   }
 }
 </script>

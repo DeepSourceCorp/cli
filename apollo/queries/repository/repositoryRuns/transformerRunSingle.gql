@@ -1,0 +1,18 @@
+query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    transformerRun(runId: $runId) {
+      createdAt
+      runId
+      status
+      branchName
+      commitOid
+      finishedIn
+      changedFilesCount
+      tools
+      commitStatus
+      gitCompareDisplay
+      pullRequestNumber
+      vcsPrUrl
+    }
+  }
+}

@@ -1,0 +1,51 @@
+query(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $limit: Int
+  $after: String
+  $issueType: String
+  $analyzer: String
+  $sort: String
+  $q: String
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    defaultBranchName
+    ownerLogin
+    name
+    id
+    hasViewerEditAccess
+    config
+    blobUrlRoot
+    vcsProvider
+    activityModality
+    issues(
+      first: $limit
+      after: $after
+      issueType: $issueType
+      analyzer: $analyzer
+      sort: $sort
+      q: $q
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          issueType
+          title
+          shortcode
+          description
+          occurrenceCount
+          createdAt
+          analyzerName
+          analyzerLogo
+          seenIn
+          firstSeen
+          lastSeen
+          pastValue
+          autofixAvailable
+        }
+      }
+    }
+  }
+}

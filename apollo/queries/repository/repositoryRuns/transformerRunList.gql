@@ -1,0 +1,33 @@
+query(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $limit: Int
+  $after: String
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    transformerRuns(first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          createdAt
+          runId
+          status
+          branchName
+          commitOid
+          finishedIn
+          changedFilesCount
+          tools
+          commitStatus
+          gitCompareDisplay
+          pullRequestNumber
+          vcsPrUrl
+          __typename
+        }
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+}

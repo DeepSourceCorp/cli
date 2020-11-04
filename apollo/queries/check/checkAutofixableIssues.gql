@@ -1,0 +1,11 @@
+query($checkId: ID!) {
+  check(checkId: $checkId) {
+    autofixableIssues {
+      title
+      shortcode
+      occurrenceCount
+      category
+    }
+    filesAffectedByAutofix
+  }
+}

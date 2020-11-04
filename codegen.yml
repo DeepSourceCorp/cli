@@ -7,3 +7,6 @@
     types/types.ts:
       - typescript
       - typescript-operations
+    types/fragmentTypes.ts:
+      plugins:
+        - fragment-matcher

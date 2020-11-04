@@ -1,0 +1,38 @@
+query($repositoryId: ID!, $shortcode: String!) {
+  repository: node(id: $repositoryId) {
+    ... on Repository {
+      config
+      blobUrlRoot
+      vcsProvider
+      hasViewerEditAccess
+      issue(shortcode: $shortcode) {
+        id
+        descriptionRendered
+        issueType
+        title
+        shortcode
+        firstSeen
+        lastSeen
+        occurrenceCount
+        analyzerName
+        analyzerShortcode
+        analyzerLogo
+        autofixAvailable
+        newVcsIssueUrl
+        silenceRules {
+          silenceLevel
+          id
+          filePath
+          createdAt
+          metadata
+          creator {
+            firstName
+            lastName
+            email
+            avatar
+          }
+        }
+      }
+    }
+  }
+}

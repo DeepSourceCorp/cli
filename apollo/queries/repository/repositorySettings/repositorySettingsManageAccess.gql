@@ -1,0 +1,32 @@
+query(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $q: String!
+  $limit: Int
+  $after: String
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    collaborators(q: $q, first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          id
+          permission
+          repository {
+            id
+          }
+          user {
+            id
+            firstName
+            lastName
+            email
+            avatar
+            dateJoined
+          }
+        }
+      }
+    }
+  }
+}

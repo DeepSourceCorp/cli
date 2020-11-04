@@ -1,0 +1,17 @@
+query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    run(runId: $runId) {
+      createdAt
+      runId
+      status
+      branchName
+      commitOid
+      finishedIn
+      vcsCommitUrl
+      gitCompareDisplay
+      pullRequestNumberDisplay
+      issuesRaisedCount
+      issuesResolvedNum
+    }
+  }
+}

@@ -1,0 +1,34 @@
+query(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $isActivated: Boolean
+  $limit: Int
+  $after: String
+  $query: String
+) {
+  owner(login: $login, provider: $provider) {
+    id
+    hasPremiumPlan
+    planUpgradeUrl
+    repositories(isActivated: $isActivated, first: $limit, after: $after, name_Icontains: $query) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          vcsProvider
+          ownerLogin
+          modifiedAt
+          isActivated
+          isFork
+          isPrivate
+          latestCommitOid
+          defaultBranchName
+          lastAnalyzedAt
+          config
+          canBeActivated
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+query($q: String) {
+  viewer {
+    id
+    repositories(name_Icontains: $q) {
+      edges {
+        node {
+          name
+          owner {
+            login
+          }
+          isPrivate
+          isFork
+          configGenerationRoute
+        }
+      }
+    }
+  }
+}

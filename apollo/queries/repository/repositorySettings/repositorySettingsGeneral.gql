@@ -1,0 +1,21 @@
+query($id: ID!) {
+  repository: node(id: $id) {
+    ... on Repository {
+      id
+      showInDiscover
+      analyzeChangesetOnly
+      defaultBranchName
+      isSubmoduleEnabled
+      config
+      isActivated
+      isPrivate
+      issueTypeSettings {
+        name
+        slug
+        description
+        isIgnoredInCheckStatus
+        isIgnoredToDisplay
+      }
+    }
+  }
+}

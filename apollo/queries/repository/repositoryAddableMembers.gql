@@ -1,0 +1,22 @@
+query($name: String!, $owner: String!, $provider: VCSProviderChoices!, $q: String!) {
+  repository(name: $name, owner: $owner, provider: $provider) {
+    id
+    addableMembers(q: $q) {
+      totalCount
+      edges {
+        node {
+          role
+          isPrimaryUser
+          user {
+            id
+            firstName
+            lastName
+            email
+            avatar
+            dateJoined
+          }
+        }
+      }
+    }
+  }
+}

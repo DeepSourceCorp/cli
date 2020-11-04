@@ -8,7 +8,8 @@
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "test": "jest",
-    "generate-types": "graphql-codegen --config codegen.yml"
+    "generate-types": "graphql-codegen --config codegen.yml",
+    "build-fragment": "node apollo/schemaQuery.js"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
@@ -16,11 +17,11 @@
     "core-js": "^3.6.5",
     "graphql-tag": "^2.11.0",
     "nuxt": "^2.14.6",
-    "nuxt-property-decorator": "^2.8.8",
     "nuxt-property-decorator": "^2.8.8"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.19.0",
+    "@graphql-codegen/fragment-matcher": "^2.0.0",
     "@graphql-codegen/typescript": "^1.17.11",
     "@graphql-codegen/typescript-graphql-files-modules": "^1.18.0",
     "@graphql-codegen/typescript-operations": "^1.17.8",

@@ -46,16 +46,9 @@ export default {
   },
 
   apollo: {
+    includeNodeModules: true,
     clientConfigs: {
-      default: {
-        httpEndpoint: 'http://localhost:9002/graphql',
-        httpLinkOptions: {
-          fetchOptions: {
-            mode: 'cors' //Cors Needed for external Cross origins, need to allow headers from server
-          },
-          credentials: 'omit' //must be omit to support application/json content type
-        }
-      }
+      default: '@/apollo/client-configs/default.js'
     }
   },
 

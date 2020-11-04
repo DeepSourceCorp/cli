@@ -1,0 +1,33 @@
+query($checkId: ID!) {
+  check(checkId: $checkId) {
+    status
+    checkSeq
+    finishedInDisplay
+    autofixableIssues {
+      shortcode
+      title
+      category
+      occurrenceCount
+    }
+    filesAffectedByAutofix
+    errors
+    issuesRaisedCount
+    issuesResolvedCount
+    run {
+      isForDefaultBranch
+    }
+    analyzer {
+      name
+      description
+    }
+    metricsCaptured {
+      id
+      name
+      valueDisplay
+      isPassing
+    }
+    concreteIssues {
+      totalCount
+    }
+  }
+}

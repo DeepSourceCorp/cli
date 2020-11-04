@@ -1,0 +1,14 @@
+query($runId: String!) {
+  autofixRun(runId: $runId) {
+    errors
+    finishedIn
+    issuesAffected
+    committedToBranchStatus
+    resolvedIssuesCount
+    pullRequestStatus
+    status
+    id
+    changeset
+    vcsPrUrl
+  }
+}

@@ -1,0 +1,33 @@
+query(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $limit: Int
+  $after: String
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    hasViewerEditAccess
+    silenceRules(first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          silenceLevel
+          id
+          filePath
+          createdAt
+          metadata
+          issue {
+            shortcode
+            title
+          }
+          creator {
+            firstName
+            lastName
+            email
+            avatar
+          }
+        }
+      }
+    }
+  }
+}

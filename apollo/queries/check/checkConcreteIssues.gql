@@ -1,0 +1,17 @@
+query($checkId: ID!, $q: String, $limit: Int, $after: String, $sort: String, $issueType: String) {
+  check(checkId: $checkId) {
+    concreteIssues(q: $q, first: $limit, after: $after, sort: $sort, issueType: $issueType) {
+      totalCount
+      edges {
+        node {
+          id
+          issueType
+          title
+          seenIn
+          shortcode
+          occurrenceCount
+        }
+      }
+    }
+  }
+}

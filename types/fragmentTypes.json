@@ -1,0 +1,30 @@
+{
+  "possibleTypes": {
+    "Node": [
+      "TransformerTool",
+      "Analyzer",
+      "Issue",
+      "CheckIssue",
+      "Check",
+      "Run",
+      "Repository",
+      "RepositoryCollaborator",
+      "User",
+      "Owner",
+      "Team",
+      "TeamMember",
+      "TeamMemberInvitation",
+      "TeamBasePermissionSet",
+      "OwnerSetting",
+      "RepositoryIssue",
+      "SilenceRule",
+      "SocialNode",
+      "Transaction",
+      "AutofixRun",
+      "TransformerRun",
+      "RepositoryMetricValue",
+      "AnalyzerReview",
+      "TransformerReview"
+    ]
+  }
+}
