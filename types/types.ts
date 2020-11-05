@@ -2700,6 +2700,28 @@ export enum VcsProviderChoices {
   Gitlab = 'GITLAB'
 }
 
+export type SocialAuthMutationVariables = Exact<{
+  provider: Scalars['String'];
+  accessToken: Scalars['String'];
+}>;
+
+
+export type SocialAuthMutation = (
+  { __typename?: 'Mutation' }
+  & { socialAuth?: Maybe<(
+    { __typename?: 'SocialAuthJWT' }
+    & Pick<SocialAuthJwt, 'token'>
+    & { social?: Maybe<(
+      { __typename?: 'SocialType' }
+      & Pick<SocialType, 'uid'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'fullName'>
+      ) }
+    )> }
+  )> }
+);
+
 export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 

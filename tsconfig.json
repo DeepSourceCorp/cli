@@ -27,7 +27,9 @@
     "types": [
       "@types/node",
       "@nuxt/types",
-      "vue-apollo/types"
+      "vue-apollo/types",
+      "@types/express",
+      "cookie-universal-nuxt/types"
     ]
   },
   "exclude": [

@@ -18,7 +18,9 @@ import { AnalyzerConnection } from '~/types/types'
 
 const analyzerList = namespace('analyzerList')
 
-@Component
+@Component(
+  { middleware: ['myMiddleware']}
+)
 export default class Index extends Vue {
   @analyzerList.State
   analyzerList!: AnalyzerConnection
@@ -27,6 +29,7 @@ export default class Index extends Vue {
     this.$store.dispatch(`analyzerList/${ACT_FETCH_ANALYZER_LIST}`)
   }
 }
+
 </script>
 
 <style>

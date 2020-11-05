@@ -1,4 +1,13 @@
 
+declare module '*/socialAuth.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SocialAuth: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/analyzers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

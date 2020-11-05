@@ -29,8 +29,12 @@ export default {
     '@nuxtjs/google-fonts'
   ],
 
+  serverMiddleware: [
+    '~/api'
+  ],
+
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['@nuxtjs/apollo'],
+  modules: ['@nuxtjs/apollo', 'cookie-universal-nuxt'],
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
