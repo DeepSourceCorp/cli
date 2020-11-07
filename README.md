@@ -21,10 +21,8 @@
 Command line interface to DeepSource
 
 [![DeepSource](https://static.deepsource.io/deepsource-badge-light.svg)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)
-
-### Build status
-
 [![CircleCI](https://circleci.com/gh/deepsourcelabs/cli.svg?style=svg)](https://circleci.com/gh/deepsourcelabs/cli)
+[![Gitopia](https://img.shields.io/endpoint?style=&url=https://gitopia.org/mirror-badge.json)](https://gitopia.org/#/WU8MwK_wNu7had5xKwuD2dilKn9gzCFH6carv-QmIKs/deepsource-cli)
 
 ### Usage
 
