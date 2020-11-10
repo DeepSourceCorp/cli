@@ -6,6 +6,7 @@ query(
   $after: String
 ) {
   repository(provider: $provider, owner: $owner, name: $name) {
+    id
     runs(first: $limit, after: $after) {
       totalCount
       edges {

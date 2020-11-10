@@ -6,7 +6,14 @@
       >
       <h1 class="text-2xl mb-5">Repository Issue</h1>
 
-      {{ issue }}
+      <div class="flex text-lg">
+        <span
+          >Issue title: <span class="text-robin">{{ issue.title }}</span></span
+        >
+        <span class="ml-2"
+          >Issue shortcode: <span class="text-robin">{{ issue.shortcode }}</span></span
+        >
+      </div>
     </div>
   </div>
 </template>

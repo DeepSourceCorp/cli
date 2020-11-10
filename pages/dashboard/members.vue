@@ -25,18 +25,18 @@ import { RepositoryConnection } from '~/types/types'
 const repositoryList = namespace('repositoryList')
 
 @Component
-export default class ActiveRepositories extends Vue {
+export default class Members extends Vue {
   @repositoryList.State
   repositoryList!: RepositoryConnection
 
   created() {
     this.$store.dispatch(`repositoryList/${ACT_FETCH_REPOSITORY_LIST}`, {
-      login: 'deepsourcelabs',
+      login: 'String',
       provider: 'GITHUB',
       isActivated: true,
-      limit: 10,
-      after: '',
-      query: ''
+      limit: 20,
+      after: 'String',
+      query: 'String'
     })
   }
 }

@@ -2761,7 +2761,7 @@ export type Unnamed_3_Query = (
   { __typename?: 'Query' }
   & { check: (
     { __typename?: 'Check' }
-    & Pick<Check, 'filesAffectedByAutofix'>
+    & Pick<Check, 'id' | 'filesAffectedByAutofix'>
     & { autofixableIssues?: Maybe<Array<Maybe<(
       { __typename?: 'AutofixableIssueDetail' }
       & Pick<AutofixableIssueDetail, 'title' | 'shortcode' | 'occurrenceCount' | 'category'>
@@ -2783,6 +2783,7 @@ export type Unnamed_4_Query = (
   { __typename?: 'Query' }
   & { check: (
     { __typename?: 'Check' }
+    & Pick<Check, 'id'>
     & { concreteIssues?: Maybe<(
       { __typename?: 'IssueConnection' }
       & Pick<IssueConnection, 'totalCount'>
@@ -2806,7 +2807,7 @@ export type Unnamed_5_Query = (
   { __typename?: 'Query' }
   & { check: (
     { __typename?: 'Check' }
-    & Pick<Check, 'status' | 'checkSeq' | 'finishedInDisplay' | 'filesAffectedByAutofix' | 'errors' | 'issuesRaisedCount' | 'issuesResolvedCount'>
+    & Pick<Check, 'id' | 'status' | 'checkSeq' | 'finishedInDisplay' | 'filesAffectedByAutofix' | 'errors' | 'issuesRaisedCount' | 'issuesResolvedCount'>
     & { autofixableIssues?: Maybe<Array<Maybe<(
       { __typename?: 'AutofixableIssueDetail' }
       & Pick<AutofixableIssueDetail, 'shortcode' | 'title' | 'category' | 'occurrenceCount'>
@@ -2958,6 +2959,7 @@ export type Unnamed_11_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename: 'Repository' }
+    & Pick<Repository, 'id'>
     & { autofixRuns?: Maybe<(
       { __typename: 'AutofixRunConnection' }
       & Pick<AutofixRunConnection, 'totalCount'>
@@ -3023,6 +3025,7 @@ export type Unnamed_13_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
+    & Pick<Repository, 'id'>
     & { runs?: Maybe<(
       { __typename?: 'RunConnection' }
       & Pick<RunConnection, 'totalCount'>
@@ -3095,6 +3098,7 @@ export type Unnamed_16_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename: 'Repository' }
+    & Pick<Repository, 'id'>
     & { transformerRuns?: Maybe<(
       { __typename: 'TransformerRunConnection' }
       & Pick<TransformerRunConnection, 'totalCount'>

@@ -4,7 +4,7 @@
     <nuxt-link
       v-for="run in runList.edges"
       :key="run.node.id"
-      to=""
+      to="/run"
       class="border p-2 my-2 cursor-pointer hover:bg-ink-100 hover:text-vanilla-100 block"
     >
       {{ run.node.runId }}/{{ run.node.branchName }}
@@ -14,7 +14,7 @@
     <nuxt-link
       v-for="run in autofixRunList.edges"
       :key="run.node.id"
-      to=""
+      to="/autofix-run"
       class="border p-2 my-2 cursor-pointer hover:bg-ink-100 hover:text-vanilla-100 block"
     >
       {{ run.node.runId }}/{{ run.node.branchName }}
@@ -24,7 +24,7 @@
     <nuxt-link
       v-for="run in transformerRunList.edges"
       :key="run.node.id"
-      to=""
+      to="/transformer-run"
       class="border p-2 my-2 cursor-pointer hover:bg-ink-100 hover:text-vanilla-100 block"
     >
       {{ run.node.runId }}/{{ run.node.branchName }}

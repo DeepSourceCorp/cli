@@ -1,11 +1,10 @@
 <template>
   <div class="container mx-auto mt-10">
     <div>
-      <nuxt-link class="text-underline text-cherry underline" to="/dashboard">Go back to Dashboard</nuxt-link>
-      <h1 class="text-2xl mb-5">Repository</h1>
+      <h1 class="text-2xl mb-5">Dashboard</h1>
 
       <ul class="flex border-b">
-        <li v-for="tab in repoTabs" class="mr-1">
+        <li v-for="tab in dashboardTabs" class="mr-1">
           <nuxt-link
             :class="{'border-l border-t border-r': $route.fullPath === tab.route}"
             class="bg-white inline-block py-2 px-4 font-semibold"
@@ -27,27 +26,19 @@ import {} from '~/types/action-types'
 import { Component } from 'nuxt-property-decorator'
 
 @Component
-export default class Repository extends Vue {
-  repoTabs = [
+export default class Dashboard extends Vue {
+  dashboardTabs = [
     {
-      name: 'Overview',
-      route: '/repository/overview'
+      name: 'Active repositories',
+      route: '/dashboard'
     },
     {
-      name: 'Issues',
-      route: '/repository/issues'
-    },
-    {
-      name: 'Metrics',
-      route: '/repository/metrics'
-    },
-    {
-      name: 'History',
-      route: '/repository/history'
+      name: 'Members',
+      route: '/dashboard/members'
     },
     {
       name: 'Settings',
-      route: '/repository/settings'
+      route: '/dashboard/settings'
     }
   ]
 }

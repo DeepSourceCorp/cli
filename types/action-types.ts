@@ -28,14 +28,32 @@ export const ACT_FETCH_ISSUE_LIST: string = 'fetchIssueList'
 export const ACT_FETCH_RUN_LIST: string = 'fetchRunList'
 
 /**
+ * Actions for run module
+ */
+export const ACT_FETCH_RUN: string = 'fetchRun'
+export const ACT_FETCH_CONCRETE_ISSUE_LIST: string = 'fetchConcreteIssueList'
+export const ACT_SET_CONCRETE_ISSUE: string = 'setConcreteIssue'
+export const ACT_FETCH_AUTOFIXABLE_ISSUES: string = 'fetchAutofixableIssues'
+
+/**
  * Actions for autofixRunList module
  */
 export const ACT_FETCH_AUTOFIX_RUN_LIST: string = 'fetchAutofixRunList'
 
 /**
+ * Actions for autofixRun module
+ */
+export const ACT_FETCH_AUTOFIX_RUN: string = 'fetchAutofixRun'
+
+/**
  * Actions for transformerRunList module
  */
 export const ACT_FETCH_TRANSFORMER_RUN_LIST: string = 'fetchTransformerRunList'
+
+/**
+ * Actions for transformerRun module
+ */
+export const ACT_FETCH_TRANSFORMER_RUN: string = 'fetchTransformerRun'
 
 /**
  * Actions for issue module

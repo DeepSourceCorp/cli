@@ -1,18 +1,15 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { DocumentNode } from 'graphql'
 import { RootState } from '~/store'
-import RepositoryIssueDetailGQLQuery from '~/apollo/queries/repository/repositoryIssue/repositoryIssueDetail.gql'
+import RepositoryAutofixRunGQLQuery from '~/apollo/queries/autofixRunDetail.gql'
 import {
-  RepositoryIssue
+  AutofixRun
 } from '~/types/types'
 import {
-  ACT_FETCH_ISSUE
+  ACT_FETCH_AUTOFIX_RUN
 } from '~/types/action-types';
 
-// This data is temporarily being imported for the queries that are not working.
-import { repositoryIssueDetail } from '~/temp/data.ts'
-
-const MUT_SET_ISSUE = 'setIssue';
+const MUT_SET_AUTOFIX_RUN = 'setAutofixRun';
 
 export const state = () => ({
   /**
@@ -20,12 +17,12 @@ export const state = () => ({
    * For eg,
    * stateProp: 'this is a state property' as string
    */
-  issue: {} as RepositoryIssue
+  autofixRun: {} as AutofixRun
 })
 
-export type IssueModuleState = ReturnType<typeof state>
+export type AutofixRunModuleState = ReturnType<typeof state>
 
-export const getters: GetterTree<IssueModuleState, RootState> = {
+export const getters: GetterTree<AutofixRunModuleState, RootState> = {
   /**
    * Define a getter here.
    * For eg,
@@ -39,12 +36,12 @@ export const mutations: MutationTree<RootState> = {
    * For eg,
    * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
    */
-  [MUT_SET_ISSUE]: (state: any, issue: RepositoryIssue) => {
-    state.issue = Object.assign({}, state.issue, issue)
+  [MUT_SET_AUTOFIX_RUN]: (state: any, autofixRun: AutofixRun) => {
+    state.autofixRun = Object.assign({}, state.autofixRun, autofixRun)
   }
 }
 
-export const actions: ActionTree<IssueModuleState, RootState> = {
+export const actions: ActionTree<AutofixRunModuleState, RootState> = {
   /**
    * Define actions here,
    * For eg,
@@ -52,16 +49,11 @@ export const actions: ActionTree<IssueModuleState, RootState> = {
    *  commit('CHANGE_STATE_PROP', 'New state property')
    * }
    */
-  async [ACT_FETCH_ISSUE]({ commit }, args) {
-    /**
-     * Temorarily using dummy data.
-     */
-    // let response = await fetchGraphqlData(this, RepositoryIssueDetailGQLQuery, {
-    //   repositoryId: args.repositoryId,
-    //   shortcode: args.shortcode
-    // })
-    let response = repositoryIssueDetail
-    commit(MUT_SET_ISSUE, response?.data.repository.issue)
+  async [ACT_FETCH_AUTOFIX_RUN]({ commit }, args) {
+    let response = await fetchGraphqlData(this, RepositoryAutofixRunGQLQuery, {
+      runId: args.runId
+    })
+    commit(MUT_SET_AUTOFIX_RUN, response?.data.autofixRun)
   }
 }
 

@@ -35,7 +35,7 @@ declare module '*/checkAutofixableIssues.gql' {
 }
     
 
-declare module '*/checkConcreteIssues.gql' {
+declare module '*/checkConcreteIssueList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
