@@ -2740,94 +2740,6 @@ export type Unnamed_1_Query = (
 );
 
 export type Unnamed_2_QueryVariables = Exact<{
-  runId: Scalars['String'];
-}>;
-
-
-export type Unnamed_2_Query = (
-  { __typename?: 'Query' }
-  & { autofixRun: (
-    { __typename?: 'AutofixRun' }
-    & Pick<AutofixRun, 'errors' | 'finishedIn' | 'issuesAffected' | 'committedToBranchStatus' | 'resolvedIssuesCount' | 'pullRequestStatus' | 'status' | 'id' | 'changeset' | 'vcsPrUrl'>
-  ) }
-);
-
-export type Unnamed_3_QueryVariables = Exact<{
-  checkId: Scalars['ID'];
-}>;
-
-
-export type Unnamed_3_Query = (
-  { __typename?: 'Query' }
-  & { check: (
-    { __typename?: 'Check' }
-    & Pick<Check, 'id' | 'filesAffectedByAutofix'>
-    & { autofixableIssues?: Maybe<Array<Maybe<(
-      { __typename?: 'AutofixableIssueDetail' }
-      & Pick<AutofixableIssueDetail, 'title' | 'shortcode' | 'occurrenceCount' | 'category'>
-    )>>> }
-  ) }
-);
-
-export type Unnamed_4_QueryVariables = Exact<{
-  checkId: Scalars['ID'];
-  q?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  sort?: Maybe<Scalars['String']>;
-  issueType?: Maybe<Scalars['String']>;
-}>;
-
-
-export type Unnamed_4_Query = (
-  { __typename?: 'Query' }
-  & { check: (
-    { __typename?: 'Check' }
-    & Pick<Check, 'id'>
-    & { concreteIssues?: Maybe<(
-      { __typename?: 'IssueConnection' }
-      & Pick<IssueConnection, 'totalCount'>
-      & { edges: Array<Maybe<(
-        { __typename?: 'IssueEdge' }
-        & { node?: Maybe<(
-          { __typename?: 'Issue' }
-          & Pick<Issue, 'id' | 'issueType' | 'title' | 'seenIn' | 'shortcode' | 'occurrenceCount'>
-        )> }
-      )>> }
-    )> }
-  ) }
-);
-
-export type Unnamed_5_QueryVariables = Exact<{
-  checkId: Scalars['ID'];
-}>;
-
-
-export type Unnamed_5_Query = (
-  { __typename?: 'Query' }
-  & { check: (
-    { __typename?: 'Check' }
-    & Pick<Check, 'id' | 'status' | 'checkSeq' | 'finishedInDisplay' | 'filesAffectedByAutofix' | 'errors' | 'issuesRaisedCount' | 'issuesResolvedCount'>
-    & { autofixableIssues?: Maybe<Array<Maybe<(
-      { __typename?: 'AutofixableIssueDetail' }
-      & Pick<AutofixableIssueDetail, 'shortcode' | 'title' | 'category' | 'occurrenceCount'>
-    )>>>, run: (
-      { __typename?: 'Run' }
-      & Pick<Run, 'isForDefaultBranch'>
-    ), analyzer?: Maybe<(
-      { __typename?: 'Analyzer' }
-      & Pick<Analyzer, 'name' | 'description'>
-    )>, metricsCaptured?: Maybe<Array<Maybe<(
-      { __typename?: 'RepositoryMetricValue' }
-      & Pick<RepositoryMetricValue, 'id' | 'name' | 'valueDisplay' | 'isPassing'>
-    )>>>, concreteIssues?: Maybe<(
-      { __typename?: 'IssueConnection' }
-      & Pick<IssueConnection, 'totalCount'>
-    )> }
-  ) }
-);
-
-export type Unnamed_6_QueryVariables = Exact<{
   name: Scalars['String'];
   owner: Scalars['String'];
   provider: VcsProviderChoices;
@@ -2835,7 +2747,7 @@ export type Unnamed_6_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_6_Query = (
+export type Unnamed_2_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -2858,12 +2770,12 @@ export type Unnamed_6_Query = (
   )> }
 );
 
-export type Unnamed_7_QueryVariables = Exact<{
+export type Unnamed_3_QueryVariables = Exact<{
   repositoryId: Scalars['ID'];
 }>;
 
 
-export type Unnamed_7_Query = (
+export type Unnamed_3_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
     { __typename?: 'Repository' }
@@ -2871,13 +2783,13 @@ export type Unnamed_7_Query = (
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
 );
 
-export type Unnamed_8_QueryVariables = Exact<{
+export type Unnamed_4_QueryVariables = Exact<{
   repositoryId: Scalars['ID'];
   shortcode: Scalars['String'];
 }>;
 
 
-export type Unnamed_8_Query = (
+export type Unnamed_4_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
     { __typename?: 'Repository' }
@@ -2897,7 +2809,7 @@ export type Unnamed_8_Query = (
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
 );
 
-export type Unnamed_9_QueryVariables = Exact<{
+export type Unnamed_5_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -2910,7 +2822,7 @@ export type Unnamed_9_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_9_Query = (
+export type Unnamed_5_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -2929,13 +2841,13 @@ export type Unnamed_9_Query = (
   )> }
 );
 
-export type Unnamed_10_QueryVariables = Exact<{
+export type Unnamed_6_QueryVariables = Exact<{
   repositoryId: Scalars['ID'];
   shortcode: Scalars['String'];
 }>;
 
 
-export type Unnamed_10_Query = (
+export type Unnamed_6_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
     { __typename?: 'Repository' }
@@ -2946,7 +2858,76 @@ export type Unnamed_10_Query = (
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
 );
 
-export type Unnamed_11_QueryVariables = Exact<{
+export type Unnamed_7_QueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  isActivated?: Maybe<Scalars['Boolean']>;
+  limit?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  query?: Maybe<Scalars['String']>;
+}>;
+
+
+export type Unnamed_7_Query = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id' | 'hasPremiumPlan' | 'planUpgradeUrl'>
+    & { repositories?: Maybe<(
+      { __typename?: 'RepositoryConnection' }
+      & Pick<RepositoryConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'RepositoryEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Repository' }
+          & Pick<Repository, 'id' | 'name' | 'vcsProvider' | 'ownerLogin' | 'modifiedAt' | 'isActivated' | 'isFork' | 'isPrivate' | 'latestCommitOid' | 'defaultBranchName' | 'lastAnalyzedAt' | 'config' | 'canBeActivated'>
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type Unnamed_8_QueryVariables = Exact<{
+  q?: Maybe<Scalars['String']>;
+}>;
+
+
+export type Unnamed_8_Query = (
+  { __typename?: 'Query' }
+  & { viewer?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id'>
+    & { repositories?: Maybe<(
+      { __typename?: 'RepositoryConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'RepositoryEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Repository' }
+          & Pick<Repository, 'name' | 'isPrivate' | 'isFork' | 'configGenerationRoute'>
+          & { owner: (
+            { __typename?: 'Owner' }
+            & Pick<Owner, 'login'>
+          ) }
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type Unnamed_9_QueryVariables = Exact<{
+  runId: Scalars['String'];
+}>;
+
+
+export type Unnamed_9_Query = (
+  { __typename?: 'Query' }
+  & { autofixRun: (
+    { __typename?: 'AutofixRun' }
+    & Pick<AutofixRun, 'id' | 'errors' | 'finishedIn' | 'issuesAffected' | 'committedToBranchStatus' | 'resolvedIssuesCount' | 'pullRequestStatus' | 'status' | 'changeset' | 'vcsPrUrl'>
+  ) }
+);
+
+export type Unnamed_10_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -2955,7 +2936,7 @@ export type Unnamed_11_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_11_Query = (
+export type Unnamed_10_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename: 'Repository' }
@@ -2984,7 +2965,7 @@ export type Unnamed_11_Query = (
   )> }
 );
 
-export type Unnamed_12_QueryVariables = Exact<{
+export type Unnamed_11_QueryVariables = Exact<{
   runId: Scalars['String'];
   provider: VcsProviderChoices;
   owner: Scalars['String'];
@@ -2992,7 +2973,7 @@ export type Unnamed_12_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_12_Query = (
+export type Unnamed_11_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -3013,7 +2994,7 @@ export type Unnamed_12_Query = (
   )> }
 );
 
-export type Unnamed_13_QueryVariables = Exact<{
+export type Unnamed_12_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -3021,11 +3002,10 @@ export type Unnamed_13_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_13_Query = (
+export type Unnamed_12_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id'>
     & { runs?: Maybe<(
       { __typename?: 'RunConnection' }
       & Pick<RunConnection, 'totalCount'>
@@ -3039,50 +3019,79 @@ export type Unnamed_13_Query = (
   )> }
 );
 
+export type Unnamed_13_QueryVariables = Exact<{
+  checkId: Scalars['ID'];
+}>;
+
+
+export type Unnamed_13_Query = (
+  { __typename?: 'Query' }
+  & { check: (
+    { __typename?: 'Check' }
+    & Pick<Check, 'id' | 'filesAffectedByAutofix'>
+    & { autofixableIssues?: Maybe<Array<Maybe<(
+      { __typename?: 'AutofixableIssueDetail' }
+      & Pick<AutofixableIssueDetail, 'title' | 'shortcode' | 'occurrenceCount' | 'category'>
+    )>>> }
+  ) }
+);
+
 export type Unnamed_14_QueryVariables = Exact<{
-  provider: VcsProviderChoices;
-  owner: Scalars['String'];
-  name: Scalars['String'];
+  checkId: Scalars['ID'];
+  q?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
+  sort?: Maybe<Scalars['String']>;
+  issueType?: Maybe<Scalars['String']>;
 }>;
 
 
 export type Unnamed_14_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<(
-    { __typename?: 'Repository' }
-    & { runs?: Maybe<(
-      { __typename?: 'RunConnection' }
-      & Pick<RunConnection, 'totalCount'>
+  & { check: (
+    { __typename?: 'Check' }
+    & Pick<Check, 'id'>
+    & { concreteIssues?: Maybe<(
+      { __typename?: 'IssueConnection' }
+      & Pick<IssueConnection, 'totalCount'>
       & { edges: Array<Maybe<(
-        { __typename?: 'RunEdge' }
+        { __typename?: 'IssueEdge' }
         & { node?: Maybe<(
-          { __typename?: 'Run' }
-          & Pick<Run, 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedNum'>
+          { __typename?: 'Issue' }
+          & Pick<Issue, 'id' | 'issueType' | 'title' | 'seenIn' | 'shortcode' | 'occurrenceCount'>
         )> }
       )>> }
     )> }
-  )> }
+  ) }
 );
 
 export type Unnamed_15_QueryVariables = Exact<{
-  runId: Scalars['String'];
-  provider: VcsProviderChoices;
-  owner: Scalars['String'];
-  name: Scalars['String'];
+  checkId: Scalars['ID'];
 }>;
 
 
 export type Unnamed_15_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<(
-    { __typename?: 'Repository' }
-    & { run?: Maybe<(
+  & { check: (
+    { __typename?: 'Check' }
+    & Pick<Check, 'id' | 'status' | 'checkSeq' | 'finishedInDisplay' | 'filesAffectedByAutofix' | 'errors' | 'issuesRaisedCount' | 'issuesResolvedCount'>
+    & { autofixableIssues?: Maybe<Array<Maybe<(
+      { __typename?: 'AutofixableIssueDetail' }
+      & Pick<AutofixableIssueDetail, 'shortcode' | 'title' | 'category' | 'occurrenceCount'>
+    )>>>, run: (
       { __typename?: 'Run' }
-      & Pick<Run, 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedNum'>
+      & Pick<Run, 'isForDefaultBranch'>
+    ), analyzer?: Maybe<(
+      { __typename?: 'Analyzer' }
+      & Pick<Analyzer, 'name' | 'description'>
+    )>, metricsCaptured?: Maybe<Array<Maybe<(
+      { __typename?: 'RepositoryMetricValue' }
+      & Pick<RepositoryMetricValue, 'id' | 'name' | 'valueDisplay' | 'isPassing'>
+    )>>>, concreteIssues?: Maybe<(
+      { __typename?: 'IssueConnection' }
+      & Pick<IssueConnection, 'totalCount'>
     )> }
-  )> }
+  ) }
 );
 
 export type Unnamed_16_QueryVariables = Exact<{
@@ -3097,16 +3106,16 @@ export type Unnamed_16_QueryVariables = Exact<{
 export type Unnamed_16_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
-    { __typename: 'Repository' }
+    { __typename?: 'Repository' }
     & Pick<Repository, 'id'>
-    & { transformerRuns?: Maybe<(
-      { __typename: 'TransformerRunConnection' }
-      & Pick<TransformerRunConnection, 'totalCount'>
+    & { runs?: Maybe<(
+      { __typename?: 'RunConnection' }
+      & Pick<RunConnection, 'totalCount'>
       & { edges: Array<Maybe<(
-        { __typename: 'TransformerRunEdge' }
+        { __typename?: 'RunEdge' }
         & { node?: Maybe<(
-          { __typename: 'TransformerRun' }
-          & Pick<TransformerRun, 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'changedFilesCount' | 'tools' | 'commitStatus' | 'gitCompareDisplay' | 'pullRequestNumber' | 'vcsPrUrl'>
+          { __typename?: 'Run' }
+          & Pick<Run, 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedNum'>
         )> }
       )>> }
     )> }
@@ -3125,28 +3134,24 @@ export type Unnamed_17_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & { transformerRun?: Maybe<(
-      { __typename?: 'TransformerRun' }
-      & Pick<TransformerRun, 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'changedFilesCount' | 'tools' | 'commitStatus' | 'gitCompareDisplay' | 'pullRequestNumber' | 'vcsPrUrl'>
+    & { run?: Maybe<(
+      { __typename?: 'Run' }
+      & Pick<Run, 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedNum'>
     )> }
   )> }
 );
 
 export type Unnamed_18_QueryVariables = Exact<{
-  id: Scalars['ID'];
+  runId: Scalars['String'];
 }>;
 
 
 export type Unnamed_18_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
-    { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'showInDiscover' | 'analyzeChangesetOnly' | 'defaultBranchName' | 'isSubmoduleEnabled' | 'config' | 'isActivated' | 'isPrivate'>
-    & { issueTypeSettings?: Maybe<Array<Maybe<(
-      { __typename?: 'IssueTypeSetting' }
-      & Pick<IssueTypeSetting, 'name' | 'slug' | 'description' | 'isIgnoredInCheckStatus' | 'isIgnoredToDisplay'>
-    )>>> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
+  & { transformerRun: (
+    { __typename?: 'TransformerRun' }
+    & Pick<TransformerRun, 'errors' | 'pullRequestStatus' | 'status' | 'tools' | 'changedFilesCount' | 'commitStatus' | 'id' | 'changeset' | 'vcsPrUrl' | 'vcsCommitUrl'>
+  ) }
 );
 
 export type Unnamed_19_QueryVariables = Exact<{
@@ -3159,6 +3164,70 @@ export type Unnamed_19_QueryVariables = Exact<{
 
 
 export type Unnamed_19_Query = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename: 'Repository' }
+    & Pick<Repository, 'id'>
+    & { transformerRuns?: Maybe<(
+      { __typename: 'TransformerRunConnection' }
+      & Pick<TransformerRunConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename: 'TransformerRunEdge' }
+        & { node?: Maybe<(
+          { __typename: 'TransformerRun' }
+          & Pick<TransformerRun, 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'changedFilesCount' | 'tools' | 'commitStatus' | 'gitCompareDisplay' | 'pullRequestNumber' | 'vcsPrUrl'>
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type Unnamed_20_QueryVariables = Exact<{
+  runId: Scalars['String'];
+  provider: VcsProviderChoices;
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type Unnamed_20_Query = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & { transformerRun?: Maybe<(
+      { __typename?: 'TransformerRun' }
+      & Pick<TransformerRun, 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'changedFilesCount' | 'tools' | 'commitStatus' | 'gitCompareDisplay' | 'pullRequestNumber' | 'vcsPrUrl'>
+    )> }
+  )> }
+);
+
+export type Unnamed_21_QueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+
+export type Unnamed_21_Query = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id' | 'showInDiscover' | 'analyzeChangesetOnly' | 'defaultBranchName' | 'isSubmoduleEnabled' | 'config' | 'isActivated' | 'isPrivate'>
+    & { issueTypeSettings?: Maybe<Array<Maybe<(
+      { __typename?: 'IssueTypeSetting' }
+      & Pick<IssueTypeSetting, 'name' | 'slug' | 'description' | 'isIgnoredInCheckStatus' | 'isIgnoredToDisplay'>
+    )>>> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
+);
+
+export type Unnamed_22_QueryVariables = Exact<{
+  provider: VcsProviderChoices;
+  owner: Scalars['String'];
+  name: Scalars['String'];
+  limit?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type Unnamed_22_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -3184,7 +3253,7 @@ export type Unnamed_19_Query = (
   )> }
 );
 
-export type Unnamed_20_QueryVariables = Exact<{
+export type Unnamed_23_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -3194,7 +3263,7 @@ export type Unnamed_20_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_20_Query = (
+export type Unnamed_23_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -3220,12 +3289,12 @@ export type Unnamed_20_Query = (
   )> }
 );
 
-export type Unnamed_21_QueryVariables = Exact<{
+export type Unnamed_24_QueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type Unnamed_21_Query = (
+export type Unnamed_24_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
     { __typename?: 'Repository' }
@@ -3233,14 +3302,14 @@ export type Unnamed_21_Query = (
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
 );
 
-export type Unnamed_22_QueryVariables = Exact<{
+export type Unnamed_25_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
 }>;
 
 
-export type Unnamed_22_Query = (
+export type Unnamed_25_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -3248,71 +3317,17 @@ export type Unnamed_22_Query = (
   )> }
 );
 
-export type Unnamed_23_QueryVariables = Exact<{
-  login: Scalars['String'];
-  provider: VcsProviderChoices;
-  isActivated?: Maybe<Scalars['Boolean']>;
-  limit?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  query?: Maybe<Scalars['String']>;
-}>;
+export type Unnamed_26_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_23_Query = (
-  { __typename?: 'Query' }
-  & { owner?: Maybe<(
-    { __typename?: 'Owner' }
-    & Pick<Owner, 'id' | 'hasPremiumPlan' | 'planUpgradeUrl'>
-    & { repositories?: Maybe<(
-      { __typename?: 'RepositoryConnection' }
-      & Pick<RepositoryConnection, 'totalCount'>
-      & { edges: Array<Maybe<(
-        { __typename?: 'RepositoryEdge' }
-        & { node?: Maybe<(
-          { __typename?: 'Repository' }
-          & Pick<Repository, 'id' | 'name' | 'vcsProvider' | 'ownerLogin' | 'modifiedAt' | 'isActivated' | 'isFork' | 'isPrivate' | 'latestCommitOid' | 'defaultBranchName' | 'lastAnalyzedAt' | 'config' | 'canBeActivated'>
-        )> }
-      )>> }
-    )> }
-  )> }
-);
-
-export type Unnamed_24_QueryVariables = Exact<{
-  q?: Maybe<Scalars['String']>;
-}>;
-
-
-export type Unnamed_24_Query = (
+export type Unnamed_26_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id'>
-    & { repositories?: Maybe<(
-      { __typename?: 'RepositoryConnection' }
-      & { edges: Array<Maybe<(
-        { __typename?: 'RepositoryEdge' }
-        & { node?: Maybe<(
-          { __typename?: 'Repository' }
-          & Pick<Repository, 'name' | 'isPrivate' | 'isFork' | 'configGenerationRoute'>
-          & { owner: (
-            { __typename?: 'Owner' }
-            & Pick<Owner, 'login'>
-          ) }
-        )> }
-      )>> }
+    & Pick<User, 'id' | 'fullName' | 'firstName' | 'lastName' | 'email' | 'avatar' | 'lastLogin' | 'isActive' | 'isStaff'>
+    & { primaryOwner?: Maybe<(
+      { __typename?: 'Owner' }
+      & Pick<Owner, 'id' | 'login' | 'vcsProvider' | 'billingEmail'>
     )> }
   )> }
-);
-
-export type Unnamed_25_QueryVariables = Exact<{
-  runId: Scalars['String'];
-}>;
-
-
-export type Unnamed_25_Query = (
-  { __typename?: 'Query' }
-  & { transformerRun: (
-    { __typename?: 'TransformerRun' }
-    & Pick<TransformerRun, 'errors' | 'pullRequestStatus' | 'status' | 'tools' | 'changedFilesCount' | 'commitStatus' | 'id' | 'changeset' | 'vcsPrUrl' | 'vcsCommitUrl'>
-  ) }
 );

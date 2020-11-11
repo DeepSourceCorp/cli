@@ -1,0 +1,19 @@
+{
+  viewer {
+    id
+    fullName
+    firstName
+    lastName
+    email
+    avatar
+    lastLogin
+    isActive
+    isStaff
+    primaryOwner {
+      id
+      login
+      vcsProvider
+      billingEmail
+    }
+  }
+}

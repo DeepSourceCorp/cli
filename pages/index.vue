@@ -1,12 +1,7 @@
 <template>
   <div class="container">
-    <div>
-      <button class="btn" @click="dispatchAction">Fetch</button>
-      <span v-if="$apollo.loading">Loading</span>
-      <div v-else v-for="analyzer in analyzerList.edges" class="bar">
-        {{ analyzer.node.id }}/{{ analyzer.node.name }}
-      </div>
-    </div>
+    <span class="text-xl">Analyzer your code, fix issues in seconds</span>
+    <a class="btn">Github</a>
   </div>
 </template>
 
@@ -18,9 +13,7 @@ import { AnalyzerConnection } from '~/types/types'
 
 const analyzerList = namespace('analyzerList')
 
-@Component(
-  { middleware: ['myMiddleware']}
-)
+@Component
 export default class Index extends Vue {
   @analyzerList.State
   analyzerList!: AnalyzerConnection

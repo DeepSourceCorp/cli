@@ -14,7 +14,7 @@ router.get("/callback", async (req: express.Request, res: express.Response) => {
   const asgardClient = AsgardClient.getInstance(client);
   const jwt :string = await asgardClient.getJWT(accessToken, 'github');
 
-  res.cookie("jwt", jwt).redirect("/dashboard");
+  res.cookie("jwt", jwt).redirect("/dummy/dashboard");
 });
 
 router.get("/login", function(req: express.Request, res: express.Response) {

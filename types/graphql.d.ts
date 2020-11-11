@@ -17,7 +17,7 @@ declare module '*/analyzers.gql' {
 }
     
 
-declare module '*/autofixRunDetail.gql' {
+declare module '*/addableMembers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -26,7 +26,7 @@ declare module '*/autofixRunDetail.gql' {
 }
     
 
-declare module '*/checkAutofixableIssues.gql' {
+declare module '*/detailForActivation.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -35,7 +35,7 @@ declare module '*/checkAutofixableIssues.gql' {
 }
     
 
-declare module '*/checkConcreteIssueList.gql' {
+declare module '*/detail.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -44,7 +44,7 @@ declare module '*/checkConcreteIssueList.gql' {
 }
     
 
-declare module '*/checkDetail.gql' {
+declare module '*/list.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -53,7 +53,7 @@ declare module '*/checkDetail.gql' {
 }
     
 
-declare module '*/repositoryAddableMembers.gql' {
+declare module '*/issueRaisedInFiles.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -62,7 +62,7 @@ declare module '*/repositoryAddableMembers.gql' {
 }
     
 
-declare module '*/repositoryDetailForActivation.gql' {
+declare module '*/listForAnalyzerDirectory.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -71,7 +71,7 @@ declare module '*/repositoryDetailForActivation.gql' {
 }
     
 
-declare module '*/repositoryIssueDetail.gql' {
+declare module '*/single.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -80,7 +80,7 @@ declare module '*/repositoryIssueDetail.gql' {
 }
     
 
-declare module '*/repositoryIssueList.gql' {
+declare module '*/globalStateIndicator.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -89,7 +89,7 @@ declare module '*/repositoryIssueList.gql' {
 }
     
 
-declare module '*/repositoryIssueRaisedInFiles.gql' {
+declare module '*/autofixableIssues.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -98,7 +98,7 @@ declare module '*/repositoryIssueRaisedInFiles.gql' {
 }
     
 
-declare module '*/autofixRunList.gql' {
+declare module '*/concreteIssueList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -107,7 +107,7 @@ declare module '*/autofixRunList.gql' {
 }
     
 
-declare module '*/autofixRunSingle.gql' {
+declare module '*/general.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -116,7 +116,7 @@ declare module '*/autofixRunSingle.gql' {
 }
     
 
-declare module '*/repositoryRunsGlobalStateIndicator.gql' {
+declare module '*/ignoreRules.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -125,7 +125,7 @@ declare module '*/repositoryRunsGlobalStateIndicator.gql' {
 }
     
 
-declare module '*/runList.gql' {
+declare module '*/manageAccess.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -134,7 +134,7 @@ declare module '*/runList.gql' {
 }
     
 
-declare module '*/runSingle.gql' {
+declare module '*/ssh.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -143,7 +143,7 @@ declare module '*/runSingle.gql' {
 }
     
 
-declare module '*/transformerRunList.gql' {
+declare module '*/widgets.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -152,79 +152,7 @@ declare module '*/transformerRunList.gql' {
 }
     
 
-declare module '*/transformerRunSingle.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/repositorySettingsGeneral.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/repositorySettingsIgnoreRules.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/repositorySettingsManageAccess.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/repositorySettingsSsh.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/repositoryWidgets.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/repositoryList.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/repositoryListForAnalyzerDirectory.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/transformerRunDetail.gql' {
+declare module '*/info.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
