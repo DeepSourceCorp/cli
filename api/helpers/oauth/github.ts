@@ -5,7 +5,7 @@ export enum SCOPE {
   Repo = "repo"
 }
 
-var githubOauth: GithubOauth;
+let githubOauth: GithubOauth;
 
 export class GithubOauth extends Oauth {
 

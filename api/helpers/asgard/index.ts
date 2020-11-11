@@ -2,7 +2,7 @@ import {ApolloClient} from 'apollo-client';
 import { NormalizedCacheObject } from 'apollo-cache-inmemory'
 import gql from 'graphql-tag'
 
-var asgardClient: AsgardClient;
+let asgardClient: AsgardClient;
 
 export class AsgardClient {
 
