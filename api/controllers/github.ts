@@ -17,7 +17,7 @@ router.get("/callback", async (req: express.Request, res: express.Response) => {
   res.cookie("jwt", jwt).redirect("/dummy/dashboard");
 });
 
-router.get("/login", function(req: express.Request, res: express.Response) {
+router.get("/login", (req: express.Request, res: express.Response) => {
   const githubOauth = GithubOauth.getInstance(githubOpts);
   const authorizationUrl = githubOauth.getAuthorizationUrl()
   res.redirect(authorizationUrl);
