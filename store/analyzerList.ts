@@ -2,8 +2,8 @@ import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { RootState } from '~/store'
 import { AnalyzerConnection, PageInfo } from '~/types/types'
 import AnalyzersGQLQuery from '~/apollo/queries/analyzerList/analyzers.gql';
-import { ACT_FETCH_ANALYZER_LIST } from '~/types/action-types';
 
+export const ACT_FETCH_ANALYZER_LIST = 'fetchAnalyzerList'
 const MUT_SET_ANALYZER_LIST = 'setAnalyzerList';
 
 export const state = () => ({

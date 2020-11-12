@@ -8,9 +8,8 @@ import {
   PageInfo,
   RepositoryIssueEdge
 } from '~/types/types'
-import {
-  ACT_FETCH_ISSUE_LIST
-} from '~/types/action-types';
+
+export const ACT_FETCH_ISSUE_LIST = 'fetchIssueList'
 
 const MUT_SET_ISSUE_LIST = 'setIssueList';
 

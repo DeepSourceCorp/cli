@@ -11,14 +11,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ACT_FETCH_ANALYZER_LIST } from '~/types/action-types'
 import { Component, namespace } from 'nuxt-property-decorator'
-import { AnalyzerConnection } from '~/types/types'
 
 const analyzerList = namespace('analyzerList')
 
 @Component
-export default class SignUp extends Vue {
-  
-}
+export default class SignUp extends Vue {}
 </script>

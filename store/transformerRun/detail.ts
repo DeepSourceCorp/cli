@@ -5,9 +5,8 @@ import RepositoryTransformerRunGQLQuery from '~/apollo/queries/repository/runs/t
 import {
   TransformerRun
 } from '~/types/types'
-import {
-  ACT_FETCH_TRANSFORMER_RUN
-} from '~/types/action-types';
+
+export const ACT_FETCH_TRANSFORMER_RUN = 'fetchTransformerRun'
 
 const MUT_SET_TRANSFORMER_RUN = 'setAutofixRun';
 

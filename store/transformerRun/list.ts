@@ -8,9 +8,8 @@ import {
   TransformerRunConnection,
   TransformerRunEdge
 } from '~/types/types'
-import {
-  ACT_FETCH_TRANSFORMER_RUN_LIST
-} from '~/types/action-types';
+
+export const ACT_FETCH_TRANSFORMER_RUN_LIST = 'fetchTransformerRunList'
 
 const MUT_SET_TRANSFORMER_RUN_LIST = 'setTransformerRunList';
 

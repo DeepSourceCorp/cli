@@ -1,8 +1,9 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { RootState } from '~/store'
-import { RepositoryConnection, PageInfo, Maybe, Scalars, VcsProviderChoices } from '~/types/types'
+import { RepositoryConnection, PageInfo, Maybe, Scalars } from '~/types/types'
 import RepositoryListGQLQuery from '~/apollo/queries/repository/list.gql';
-import { ACT_FETCH_REPOSITORY_LIST } from '~/types/action-types';
+
+export const ACT_FETCH_REPOSITORY_LIST = 'fetchRepositoryList'
 
 const MUT_SET_REPOSITORY_LIST = 'setRepositoryList';
 
@@ -49,18 +50,14 @@ export const actions: ActionTree<RepositoryListModuleState, RootState> = {
    * }
    */
   async [ACT_FETCH_REPOSITORY_LIST]({ commit }, variables) {
-    let client = this.app.apolloProvider?.defaultClient
-    let response = await client?.query({
-      query: RepositoryListGQLQuery,
-      variables: {
-        login: variables.login,
-        provider: variables.provider,
-        isActivated: variables.isActivated,
-        limit: variables.limit,
-        after: variables.after,
-        query: variables.query
-      }
-    });
+    const response = await this.$fetchGraphqlData(RepositoryListGQLQuery, {
+      login: variables.login,
+      provider: variables.provider,
+      isActivated: variables.isActivated,
+      limit: variables.limit,
+      after: this.$getGQLAfter(variables.currentPageNumber, variables.limit),
+      query: variables.query
+    })
     commit(MUT_SET_REPOSITORY_LIST, response?.data.owner.repositories)
   }
 }

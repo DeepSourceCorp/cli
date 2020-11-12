@@ -8,9 +8,8 @@ import {
   AutofixRunConnection,
   AutofixRunEdge
 } from '~/types/types'
-import {
-  ACT_FETCH_AUTOFIX_RUN_LIST
-} from '~/types/action-types';
+
+export const ACT_FETCH_AUTOFIX_RUN_LIST = 'fetchAutofixRunList'
 
 const MUT_SET_AUTOFIX_RUN_LIST = 'setAutofixRunList';
 

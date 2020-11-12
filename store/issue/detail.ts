@@ -5,9 +5,8 @@ import RepositoryIssueDetailGQLQuery from '~/apollo/queries/repository/issue/det
 import {
   RepositoryIssue
 } from '~/types/types'
-import {
-  ACT_FETCH_ISSUE
-} from '~/types/action-types';
+
+export const ACT_FETCH_ISSUE = 'fetchIssue'
 
 // This data is temporarily being imported for the queries that are not working.
 import { repositoryIssueDetail } from '~/temp/data.ts'

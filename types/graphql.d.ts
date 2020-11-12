@@ -151,12 +151,3 @@ declare module '*/widgets.gql' {
   export default defaultDocument;
 }
     
-
-declare module '*/info.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    

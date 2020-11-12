@@ -10,10 +10,11 @@ import {
   IssueEdge,
   Check, IssueConnection, Issue
 } from '~/types/types'
-import {
-  ACT_FETCH_RUN,
-  ACT_FETCH_AUTOFIXABLE_ISSUES, ACT_FETCH_CONCRETE_ISSUE_LIST, ACT_SET_CONCRETE_ISSUE
-} from '~/types/action-types';
+
+export const ACT_FETCH_RUN = 'fetchRun'
+export const ACT_FETCH_CONCRETE_ISSUE_LIST = 'fetchConcreteIssueList'
+export const ACT_SET_CONCRETE_ISSUE = 'setConcreteIssue'
+export const ACT_FETCH_AUTOFIXABLE_ISSUES = 'fetchAutofixableIssues'
 
 const MUT_SET_RUN = 'setRun';
 const MUT_SET_CONCRETE_ISSUE_LIST = 'setConcreteIssueList';

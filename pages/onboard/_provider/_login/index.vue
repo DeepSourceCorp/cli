@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto mt-10">
     <div>
-      <h1 class="text-2xl mb-5">Welcome Ayushi! Let’s get you all set up</h1>
+      <h1 class="text-2xl mb-5">Welcome {{ viewer.firstName }}! Let’s get you all set up</h1>
 
       <ul class="flex border-b">
         <li v-for="tab in progressTabs" class="mr-1">
@@ -22,11 +22,17 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {} from '~/types/action-types'
-import { Component } from 'nuxt-property-decorator'
+import { ACT_FETCH_VIEWER_INFO } from '~/store/user/active'
+import { Component, namespace } from 'nuxt-property-decorator'
+import { User } from '~/types/types'
+
+const activeUser = namespace('user/active')
 
 @Component
 export default class Repository extends Vue {
+  @activeUser.State
+  viewer!: User
+
   progressTabs = [
     {
       name: 'Select preferences',
@@ -41,5 +47,10 @@ export default class Repository extends Vue {
       route: '/onboard/gh/deepsourcelabs/generate-config'
     }
   ]
+
+  async fetch() {
+    await this.$store.dispatch(`user/active/${ACT_FETCH_VIEWER_INFO}`)
+  }
+  fetchOnServer = false
 }
 </script>

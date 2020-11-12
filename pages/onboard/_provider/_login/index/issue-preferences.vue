@@ -1,7 +1,7 @@
 <template>
   <div class="container mx-auto mt-10">
     <span class="text-xl block">Issue preference</span>
-    <label class="block my-2" v-for="issueType in issue_type_settings">
+    <label v-for="issueType in issue_type_settings" :key="issueType.id" class="block my-2">
       <input type="checkbox" /> {{ issueType.name }}
       <p class="block text-sm ml-4">{{ issueType.description }}</p>
     </label>
@@ -12,9 +12,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {} from '~/types/action-types'
 import { Component, namespace } from 'nuxt-property-decorator'
-import {} from '~/types/types'
 
 const runList = namespace('runList')
 
@@ -22,6 +20,7 @@ const runList = namespace('runList')
 export default class GenerateConfig extends Vue {
   issue_type_settings = [
     {
+      id: 1,
       name: 'Bug Risk',
       slug: 'bug-risk',
       description: 'Issues that can cause bugs and breakages in production',
@@ -29,6 +28,7 @@ export default class GenerateConfig extends Vue {
       is_ignored_to_display: false
     },
     {
+      id: 2,
       name: 'Anti-pattern',
       slug: 'antipattern',
       description:
@@ -37,6 +37,7 @@ export default class GenerateConfig extends Vue {
       is_ignored_to_display: false
     },
     {
+      id: 3,
       name: 'Performance',
       slug: 'performance',
       description: "Issues that impact performance of the code when it's executed in production",
@@ -44,6 +45,7 @@ export default class GenerateConfig extends Vue {
       is_ignored_to_display: false
     },
     {
+      id: 4,
       name: 'Security',
       slug: 'security',
       description:
@@ -52,6 +54,7 @@ export default class GenerateConfig extends Vue {
       is_ignored_to_display: false
     },
     {
+      id: 5,
       name: 'Type Check',
       slug: 'typecheck',
       description:
@@ -60,6 +63,7 @@ export default class GenerateConfig extends Vue {
       is_ignored_to_display: false
     },
     {
+      id: 6,
       name: 'Coverage',
       slug: 'coverage',
       description: 'Lapses in test or documentation coverage in the source code',
@@ -67,6 +71,7 @@ export default class GenerateConfig extends Vue {
       is_ignored_to_display: false
     },
     {
+      id: 7,
       name: 'Style',
       slug: 'style',
       description: 'Violations in the code format according to a style guide',
@@ -74,6 +79,7 @@ export default class GenerateConfig extends Vue {
       is_ignored_to_display: false
     },
     {
+      id: 8,
       name: 'Documentation',
       slug: 'doc',
       description: 'Lapses in source code documentation',

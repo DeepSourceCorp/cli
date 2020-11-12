@@ -8,9 +8,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {} from '~/types/action-types'
 import { Component, namespace } from 'nuxt-property-decorator'
-import {} from '~/types/types'
 
 const runList = namespace('runList')
 

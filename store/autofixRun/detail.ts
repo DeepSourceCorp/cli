@@ -5,9 +5,8 @@ import RepositoryAutofixRunGQLQuery from '~/apollo/queries/repository/runs/autof
 import {
   AutofixRun
 } from '~/types/types'
-import {
-  ACT_FETCH_AUTOFIX_RUN
-} from '~/types/action-types';
+
+export const ACT_FETCH_AUTOFIX_RUN = 'fetchAutofixRun'
 
 const MUT_SET_AUTOFIX_RUN = 'setAutofixRun';
 

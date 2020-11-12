@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ACT_FETCH_ANALYZER_LIST } from '~/types/action-types'
+import { ACT_FETCH_ANALYZER_LIST } from '~/store/analyzerList'
 import { Component, namespace } from 'nuxt-property-decorator'
 import { AnalyzerConnection } from '~/types/types'
 

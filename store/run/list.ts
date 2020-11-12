@@ -8,9 +8,8 @@ import {
   RunConnection,
   RunEdge
 } from '~/types/types'
-import {
-  ACT_FETCH_RUN_LIST
-} from '~/types/action-types';
+
+export const ACT_FETCH_RUN_LIST = 'fetchRunList'
 
 const MUT_SET_RUN_LIST = 'setRunList';
 

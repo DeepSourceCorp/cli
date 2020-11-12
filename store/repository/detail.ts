@@ -9,13 +9,12 @@ import RepositorySettingsManageAccessGQLQuery from '~/apollo/queries/repository/
 import {
   Repository
 } from '~/types/types'
-import {
-  ACT_FETCH_WIDGETS,
-  ACT_FETCH_REPOSITORY_SETTINGS_MANAGE_ACCESS,
-  ACT_FETCH_REPOSITORY_SETTINGS_GENERAL,
-  ACT_FETCH_REPOSITORY_SETTINGS_IGNORE_RULES,
-  ACT_FETCH_REPOSITORY_SETTINGS_SSH
-} from '~/types/action-types';
+
+export const ACT_FETCH_WIDGETS = 'fetchWidgets'
+export const ACT_FETCH_REPOSITORY_SETTINGS_GENERAL = 'fetchRepositorySettingsGeneral'
+export const ACT_FETCH_REPOSITORY_SETTINGS_SSH = 'fetchRepositorySettingsSsh'
+export const ACT_FETCH_REPOSITORY_SETTINGS_IGNORE_RULES = 'fetchRepositorySettingsIgnoreRules'
+export const ACT_FETCH_REPOSITORY_SETTINGS_MANAGE_ACCESS = 'fetchRepositorySettingsManageAccess'
 
 const MUT_SET_REPOSITORY = 'setRepository';
 
