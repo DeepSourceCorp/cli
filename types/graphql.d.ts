@@ -17,6 +17,15 @@ declare module '*/analyzers.gql' {
 }
     
 
+declare module '*/IssueTypeSettings.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/addableMembers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
