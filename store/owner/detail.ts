@@ -94,11 +94,11 @@ export const actions: ActionTree<OwnerModuleState, RootState> = {
     })
     commit(MUT_SET_OWNER, response?.data.owner)
   },
-  async [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]({ state }) {
+  async [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]({ state, getters }) {
     let response = await this.$applyGraphqlMutation(UpdateOwnerSettingsGQLMutation, {
       input: {
         ownerId: state.owner.id,
-        issueTypeSettings: this.getters["owner/detail/refinedIssueTypeSettings"]
+        issueTypeSettings: getters.refinedIssueTypeSettings
       }
     })
       .then(() => {
