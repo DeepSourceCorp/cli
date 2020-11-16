@@ -1,0 +1,16 @@
+query($repositoryId: ID!) {
+  repository: node(id: $repositoryId) {
+    ... on Repository {
+      id
+      name
+      defaultBranchName
+      hasViewerEditAccess
+      vcsUrl
+      vcsHost
+      supportedAnalyzers
+      isCommitPossible
+      isAutofixEnabled
+      autofixGithubAppInstallationUrl
+    }
+  }
+}

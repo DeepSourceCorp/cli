@@ -1,6 +1,7 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { DocumentNode } from 'graphql'
 import { RootState } from '~/store'
+import RepositoryDetailGQLQuery from '~/apollo/queries/repository/detail.gql'
 import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
 import RepositorySettingsGeneralGQLQuery from '~/apollo/queries/repository/settings/general.gql'
 import RepositorySettingsSshGQLQuery from '~/apollo/queries/repository/settings/ssh.gql'
@@ -10,6 +11,7 @@ import {
   Repository
 } from '~/types/types'
 
+export const ACT_FETCH_REPOSITORY_DETAIL = 'fetchRepositoryDetail'
 export const ACT_FETCH_WIDGETS = 'fetchWidgets'
 export const ACT_FETCH_REPOSITORY_SETTINGS_GENERAL = 'fetchRepositorySettingsGeneral'
 export const ACT_FETCH_REPOSITORY_SETTINGS_SSH = 'fetchRepositorySettingsSsh'
@@ -61,6 +63,12 @@ export const actions: ActionTree<RepositoryModuleState, RootState> = {
       provider: args.provider,
       owner: args.owner,
       name: args.name
+    })
+    commit(MUT_SET_REPOSITORY, response?.data.repository)
+  },
+  async [ACT_FETCH_REPOSITORY_DETAIL]({ commit }, args) {
+    let response = await fetchGraphqlData(this, RepositoryDetailGQLQuery, {
+      repositoryId: args.id
     })
     commit(MUT_SET_REPOSITORY, response?.data.repository)
   },

@@ -1,6 +1,9 @@
 <template>
   <div class="container mx-auto mt-10">
     <span class="text-xl block">Generate Config</span>
+    <em class="my-4 block">
+      <strong>{{ repository.name }}</strong> repository has been selected
+    </em>
     <label class="block">
       Test patterns:
       <textarea
@@ -15,15 +18,25 @@
         class="resize border rounded focus:outline-none focus:shadow-outline"
       ></textarea>
     </label>
+
+    <button @click="onSubmit" class="border cursor-pointer p-2 my-4">
+      Analyze and show results
+    </button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component } from 'nuxt-property-decorator'
+import { Component, namespace } from 'nuxt-property-decorator'
+import { Repository } from '~/types/types'
+
+const repository = namespace('repository/detail')
 
 @Component
 export default class GenerateConfig extends Vue {
+  @repository.State
+  repository!: Repository
+
   tomlJson = {
     version: 1,
     test_patterns: '',
@@ -31,5 +44,7 @@ export default class GenerateConfig extends Vue {
     analyzers: {},
     transformers: {}
   }
+
+  onSubmit() {}
 }
 </script>

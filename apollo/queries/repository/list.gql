@@ -27,6 +27,7 @@ query(
           lastAnalyzedAt
           config
           canBeActivated
+          supportedAnalyzers
         }
       }
     }

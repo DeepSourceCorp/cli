@@ -44,7 +44,7 @@ declare module '*/addableMembers.gql' {
 }
     
 
-declare module '*/detailForActivation.gql' {
+declare module '*/detail.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -53,7 +53,7 @@ declare module '*/detailForActivation.gql' {
 }
     
 
-declare module '*/detail.gql' {
+declare module '*/detailForActivation.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
