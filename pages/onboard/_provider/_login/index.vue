@@ -9,8 +9,9 @@
             :class="{ 'border-l border-t border-r': $route.fullPath === tab.route }"
             class="bg-white inline-block py-2 px-4 font-semibold"
             :to="`${tab.route}`"
-            >{{ tab.name }}</nuxt-link
           >
+            {{ tab.name }}
+          </nuxt-link>
         </li>
       </ul>
     </div>
@@ -29,22 +30,22 @@ import { User } from '~/types/types'
 const activeUser = namespace('user/active')
 
 @Component
-export default class Repository extends Vue {
+export default class Index extends Vue {
   @activeUser.State
   viewer!: User
 
   progressTabs = [
     {
       name: 'Select preferences',
-      route: '/onboard/gh/deepsourcelabs/issue-preferences'
+      route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/issue-preferences`
     },
     {
       name: 'Choose repository',
-      route: '/onboard/gh/deepsourcelabs/choose-first-repo'
+      route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/choose-first-repo`
     },
     {
       name: 'Generate config',
-      route: '/onboard/gh/deepsourcelabs/generate-config'
+      route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/generate-config`
     }
   ]
 

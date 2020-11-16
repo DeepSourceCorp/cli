@@ -8,16 +8,20 @@ module.exports = {
     'ts',
     'js',
     'vue',
-    'json'
+    'json',
+    'gql',
+    'graphql'
   ],
   transform: {
     "^.+\\.ts$": "ts-jest",
     '^.+\\.js$': 'babel-jest',
-    '.*\\.(vue)$': 'vue-jest'
+    '.*\\.(vue)$': 'vue-jest',
+    ".*\\.(gql|graphql)$": "jest-transform-graphql"
   },
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',
-    '<rootDir>/pages/**/*.vue'
+    '<rootDir>/pages/**/*.vue',
+    '<rootDir>/store/**/*.ts'
   ]
 }

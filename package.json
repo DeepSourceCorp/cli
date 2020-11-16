@@ -14,12 +14,14 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
+    "@types/jest": "^26.0.15",
     "axios": "^0.21.0",
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.6.5",
     "cross-fetch": "^3.0.6",
     "express": "^4.17.1",
     "graphql-tag": "^2.11.0",
+    "jest-transform-graphql": "^2.1.0",
     "nuxt": "^2.14.6",
     "nuxt-property-decorator": "^2.8.8"
   },

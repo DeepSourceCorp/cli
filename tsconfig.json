@@ -29,6 +29,7 @@
       "@nuxt/types",
       "vue-apollo/types",
       "@types/express",
+      "@types/jest",
       "cookie-universal-nuxt/types"
     ]
   },

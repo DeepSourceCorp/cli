@@ -7,22 +7,10 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { ACT_FETCH_ANALYZER_LIST } from '~/store/analyzerList'
-import { Component, namespace } from 'nuxt-property-decorator'
-import { AnalyzerConnection } from '~/types/types'
-
-const analyzerList = namespace('analyzerList')
+import { Component } from 'nuxt-property-decorator'
 
 @Component
-export default class Index extends Vue {
-  @analyzerList.State
-  analyzerList!: AnalyzerConnection
-
-  public dispatchAction() {
-    this.$store.dispatch(`analyzerList/${ACT_FETCH_ANALYZER_LIST}`)
-  }
-}
-
+export default class Index extends Vue {}
 </script>
 
 <style>
