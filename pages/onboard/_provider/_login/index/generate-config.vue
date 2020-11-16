@@ -29,6 +29,7 @@
 import Vue from 'vue'
 import { Component, namespace } from 'nuxt-property-decorator'
 import { Repository } from '~/types/types'
+import { ACT_COMMIT_CONFIG_TO_VCS } from '~/store/repository/detail'
 
 const repository = namespace('repository/detail')
 
@@ -45,6 +46,11 @@ export default class GenerateConfig extends Vue {
     transformers: {}
   }
 
-  onSubmit() {}
+  async onSubmit() {
+    await this.$store.dispatch(`repository/detail/${ACT_COMMIT_CONFIG_TO_VCS}`, {
+      repositoryId: this.repository.id,
+      config: ""
+    })
+  }
 }
 </script>

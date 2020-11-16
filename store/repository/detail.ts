@@ -7,6 +7,7 @@ import RepositorySettingsGeneralGQLQuery from '~/apollo/queries/repository/setti
 import RepositorySettingsSshGQLQuery from '~/apollo/queries/repository/settings/ssh.gql'
 import RepositorySettingsIgnoreRulesGQLQuery from '~/apollo/queries/repository/settings/ignoreRules.gql'
 import RepositorySettingsManageAccessGQLQuery from '~/apollo/queries/repository/settings/manageAccess.gql'
+import CommitConfigToVcsGQLMutation from '~/apollo/mutations/repository/commitConfigToVcs.gql'
 import {
   Repository
 } from '~/types/types'
@@ -17,6 +18,7 @@ export const ACT_FETCH_REPOSITORY_SETTINGS_GENERAL = 'fetchRepositorySettingsGen
 export const ACT_FETCH_REPOSITORY_SETTINGS_SSH = 'fetchRepositorySettingsSsh'
 export const ACT_FETCH_REPOSITORY_SETTINGS_IGNORE_RULES = 'fetchRepositorySettingsIgnoreRules'
 export const ACT_FETCH_REPOSITORY_SETTINGS_MANAGE_ACCESS = 'fetchRepositorySettingsManageAccess'
+export const ACT_COMMIT_CONFIG_TO_VCS = 'commitConfigToVcs'
 
 const MUT_SET_REPOSITORY = 'setRepository';
 
@@ -95,6 +97,14 @@ export const actions: ActionTree<RepositoryModuleState, RootState> = {
       id: args.id
     })
     commit(MUT_SET_REPOSITORY, response?.data.repository)
+  },
+  async [ACT_COMMIT_CONFIG_TO_VCS]({}, args) {
+    let response = await this.$applyGraphqlMutation(CommitConfigToVcsGQLMutation, {
+      input: {
+        repositoryId: args.repositoryId,
+        config: args.config
+      }
+    })
   }
 }
 
