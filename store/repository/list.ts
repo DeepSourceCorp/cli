@@ -52,7 +52,7 @@ export const actions: ActionTree<RepositoryListModuleState, RootState> = {
   async [ACT_FETCH_REPOSITORY_LIST]({ commit }, variables) {
     const response = await this.$fetchGraphqlData(RepositoryListGQLQuery, {
       login: variables.login,
-      provider: variables.provider,
+      provider: this.$providerMetaMap[variables.provider].value,
       isActivated: variables.isActivated,
       limit: variables.limit,
       after: this.$getGQLAfter(variables.currentPageNumber, variables.limit),

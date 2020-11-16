@@ -5,6 +5,7 @@ import { DocumentNode } from 'graphql'
 declare module 'vuex/types/index' {
   interface Store<S> {
     $fetchGraphqlData(query: DocumentNode, variables: any): any,
+    $applyGraphqlMutation(mutation: DocumentNode, variables: any): any,
     $getGQLAfter(pageNumber: number, limit: number): string
   }
 }
@@ -13,10 +14,22 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject) => {
   inject('fetchGraphqlData', async (query: DocumentNode, variables: any) => {
     /**
      * Abstracts graphql client code from actions.
+     * Used to fetch data through queries.
      */
     const client = app.apolloProvider?.defaultClient
     return client?.query({
       query,
+      variables
+    });
+  })
+  inject('applyGraphqlMutation', async (mutation: DocumentNode, variables: any) => {
+    /**
+     * Abstracts graphql client code from actions.
+     * Used to apply graphql mutations.
+     */
+    const client = app.apolloProvider?.defaultClient
+    return client?.mutate({
+      mutation,
       variables
     });
   })

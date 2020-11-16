@@ -1,0 +1,5 @@
+mutation($input: UpdateOwnerSettingsInput!) {
+  updateOwnerSettings(input: $input) {
+    ok
+  }
+}

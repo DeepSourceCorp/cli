@@ -26,8 +26,8 @@ export default class ChooseFirstRepo extends Vue {
 
   async fetch() {
     await this.$store.dispatch(`repository/list/${ACT_FETCH_REPOSITORY_LIST}`, {
-      login: 'deepsourcelabs',
-      provider: 'GITHUB',
+      login: this.$route.params.login,
+      provider: this.$route.params.provider,
       isActivated: false,
       limit: 10,
       currentPageNumber: 1,

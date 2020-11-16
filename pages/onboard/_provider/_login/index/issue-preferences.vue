@@ -2,28 +2,35 @@
   <div class="container mx-auto mt-10">
     <span class="text-xl block">Issue preference</span>
     <label
-      v-for="issueType in owner.ownerSetting.issueTypeSettings"
+      v-for="(issueType, index) in owner.ownerSetting.issueTypeSettings"
       :key="issueType.slug"
       class="block my-2"
     >
       <input
         type="checkbox"
+        @change="onSettingChange(index, $event)"
         :checked="!issueType.isIgnoredInCheckStatus"
-        @click="selectIssueType(issueType)"
       />
       {{ issueType.name }}
       <p class="block text-sm ml-4">{{ issueType.description }}</p>
     </label>
 
-    <nuxt-link class="border cursor-pointer p-2" to="">Proceed with these issues</nuxt-link>
+    <button @click="onSubmit" class="border cursor-pointer p-2 my-4">
+      Proceed with these issues
+    </button>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, namespace } from 'nuxt-property-decorator'
+import { Component, namespace, Watch } from 'nuxt-property-decorator'
 import { IssueTypeSetting, Owner } from '~/types/types'
-import { ACT_FETCH_ISSUE_TYPE_SETTINGS } from '~/store/owner/detail'
+import {
+  ACT_SUBMIT_ISSUE_TYPE_SETTING_PREFERENCES,
+  ACT_FETCH_ISSUE_TYPE_SETTINGS,
+  ACT_SET_ISSUE_TYPE_SETTING,
+  ACT_SET_OWNER
+} from '~/store/owner/detail'
 
 const owner = namespace('owner/detail')
 
@@ -34,18 +41,35 @@ export default class IssuePreferences extends Vue {
 
   async fetch() {
     await this.$store.dispatch(`owner/detail/${ACT_FETCH_ISSUE_TYPE_SETTINGS}`, {
-      login: 'deepsourcelabs',
-      provider: 'GITHUB'
+      login: this.$route.params.login,
+      provider: this.$route.params.provider
     })
   }
 
-  selectIssueType(issueType: IssueTypeSetting) {
+  onSettingChange(issueTypeSettingIndex: number, event: Event) {
     /**
-     * Select an issue type from the list
-     * @param {Object} issueType - Object of an issue type
+     * Method resposible to select/de-select issue type settings
      */
-    issueType.isIgnoredInCheckStatus = issueType.isIgnoredInCheckStatus ? false : true
-    issueType.isIgnoredToDisplay = issueType.isIgnoredInCheckStatus
+    this.$store.dispatch(`owner/detail/${ACT_SET_ISSUE_TYPE_SETTING}`, {
+      issueTypeSetting: {
+        isIgnoredInCheckStatus: !(<HTMLInputElement>event.target).checked,
+        isIgnoredToDisplay: !(<HTMLInputElement>event.target).checked
+      },
+      issueTypeSettingIndex
+    })
+  }
+
+  async onSubmit() {
+    /**
+     * Submitting the selected issue type settings
+     */
+    await this.$store
+      .dispatch(`owner/detail/${ACT_SUBMIT_ISSUE_TYPE_SETTING_PREFERENCES}`)
+      .then(() => {
+        this.$router.push({
+          path: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/choose-first-repo`
+        })
+      })
   }
 }
 </script>

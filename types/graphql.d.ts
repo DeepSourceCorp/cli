@@ -1,4 +1,13 @@
 
+declare module '*/updateOwnerSettings.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/socialAuth.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
