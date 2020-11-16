@@ -8,7 +8,7 @@ import { IssueTypeSetting, Owner, OwnerSetting, Maybe } from '~/types/types'
 export const ACT_FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings'
 export const ACT_SET_OWNER = 'setOwner'
 export const ACT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
-export const ACT_SUBMIT_ISSUE_TYPE_SETTING_PREFERENCES = 'submitIssueTypeSettingPreferences'
+export const ACT_SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings'
 
 const MUT_SET_OWNER = 'setOwner'
 const MUT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
@@ -94,7 +94,7 @@ export const actions: ActionTree<OwnerModuleState, RootState> = {
     })
     commit(MUT_SET_OWNER, response?.data.owner)
   },
-  async [ACT_SUBMIT_ISSUE_TYPE_SETTING_PREFERENCES]({ state }) {
+  async [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]({ state }) {
     let response = await this.$applyGraphqlMutation(UpdateOwnerSettingsGQLMutation, {
       input: {
         ownerId: state.owner.id,

@@ -26,7 +26,7 @@ import Vue from 'vue'
 import { Component, namespace, Watch } from 'nuxt-property-decorator'
 import { IssueTypeSetting, Owner } from '~/types/types'
 import {
-  ACT_SUBMIT_ISSUE_TYPE_SETTING_PREFERENCES,
+  ACT_SUBMIT_ISSUE_TYPE_SETTINGS,
   ACT_FETCH_ISSUE_TYPE_SETTINGS,
   ACT_SET_ISSUE_TYPE_SETTING,
   ACT_SET_OWNER
@@ -64,7 +64,7 @@ export default class IssuePreferences extends Vue {
      * Submitting the selected issue type settings
      */
     await this.$store
-      .dispatch(`owner/detail/${ACT_SUBMIT_ISSUE_TYPE_SETTING_PREFERENCES}`)
+      .dispatch(`owner/detail/${ACT_SUBMIT_ISSUE_TYPE_SETTINGS}`)
       .then(() => {
         this.$router.push({
           path: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/choose-first-repo`
