@@ -34,20 +34,22 @@ export default class Index extends Vue {
   @activeUser.State
   viewer!: User
 
-  progressTabs = [
-    {
-      name: 'Select preferences',
-      route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/issue-preferences`
-    },
-    {
-      name: 'Choose repository',
-      route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/choose-first-repo`
-    },
-    {
-      name: 'Generate config',
-      route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/generate-config`
-    }
-  ]
+  get progressTabs() {
+    return [
+      {
+        name: 'Select preferences',
+        route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/issue-preferences`
+      },
+      {
+        name: 'Choose repository',
+        route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/choose-first-repo`
+      },
+      {
+        name: 'Generate config',
+        route: `/onboard/${this.$route.params.provider}/${this.$route.params.login}/generate-config`
+      }
+    ]
+  }
 
   async fetch() {
     await this.$store.dispatch(`user/active/${ACT_FETCH_VIEWER_INFO}`)
