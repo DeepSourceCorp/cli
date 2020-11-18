@@ -47,14 +47,11 @@ export const getters: GetterTree<OwnerModuleState, RootState> = {
 
     let arr: Maybe<Array<RefinedIssueTypeSetting>> = []
     state.owner.ownerSetting?.issueTypeSettings?.forEach((obj: Maybe<IssueTypeSetting>) => {
-      let newObj = {
-        slug: '',
-        isIgnoredToDisplay: true,
-        isIgnoredInCheckStatus: true
+      let newObj = <RefinedIssueTypeSetting>{
+        slug: obj?.slug,
+        isIgnoredInCheckStatus: obj?.isIgnoredInCheckStatus,
+        isIgnoredToDisplay: obj?.isIgnoredInCheckStatus
       }
-      newObj.slug = <string>obj?.slug
-      newObj.isIgnoredToDisplay = <boolean>obj?.isIgnoredToDisplay
-      newObj.isIgnoredInCheckStatus = <boolean>obj?.isIgnoredInCheckStatus
       arr?.push(newObj)
     })
     return arr

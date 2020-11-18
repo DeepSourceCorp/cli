@@ -15,7 +15,7 @@ let store: Store<RootState>;
 // Component config
 let wrapper: Wrapper<Index>;
 
-describe('onboard/index.vue', () => {
+describe('onboard/_provider/_login/index.vue', () => {
   beforeEach(() => {
     store = new Vuex.Store({
       modules: {
