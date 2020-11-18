@@ -14,7 +14,7 @@ export default {
   css: [],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
-  plugins: ['~/plugins/helpers/store.ts', '~/plugins/helpers/values.ts'],
+  plugins: ['~/plugins/helpers/store.ts', '~/plugins/helpers/provider.ts'],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
