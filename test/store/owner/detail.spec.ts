@@ -10,7 +10,7 @@ let localThis: any;
 let spy: any;
 let ownerState: OwnerModuleState;
 
-describe('[Store] Owner -- details module', () => {
+describe('[Store] Owner/Details', () => {
   beforeEach(() => {
     commit = jest.fn();
     ownerState = mockOwner();
@@ -25,8 +25,8 @@ describe('[Store] Owner -- details module', () => {
     };
   });
 
-  describe('Actions', () => {
-    describe(ACT_FETCH_ISSUE_TYPE_SETTINGS, () => {
+  describe('[[Actions]]', () => {
+    describe(`Action "${ACT_FETCH_ISSUE_TYPE_SETTINGS}"`, () => {
       beforeEach(async () => {
         localThis = {
           $providerMetaMap: {
@@ -72,8 +72,8 @@ describe('[Store] Owner -- details module', () => {
     })
   })
 
-  describe('Mutations', () => {
-    describe(MUT_SET_OWNER, () => {
+  describe('[[Mutations]]', () => {
+    describe(`Mutation "${MUT_SET_OWNER}"`, () => {
       test('successfully adds new owner to the state', () => {
         const newOwner: Owner = {
           id: 'DUMMY_OWNER_ID',
@@ -94,7 +94,7 @@ describe('[Store] Owner -- details module', () => {
       })
     })
 
-    describe(MUT_SET_ISSUE_TYPE_SETTING, () => {
+    describe(`Mutation "${MUT_SET_ISSUE_TYPE_SETTING}"`, () => {
       test('successfully appends issue type setting', () => {
         const newIssueTypeSetting: IssueTypeSetting = {
           "slug": "bug-risk",
