@@ -1,4 +1,4 @@
-import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { GetterTree, ActionTree, MutationTree, ActionContext } from 'vuex'
 import { RootState } from '~/store'
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
@@ -10,8 +10,8 @@ export const ACT_SET_OWNER = 'setOwner'
 export const ACT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
 export const ACT_SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings'
 
-const MUT_SET_OWNER = 'setOwner'
-const MUT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
+export const MUT_SET_OWNER = 'setOwner'
+export const MUT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
 
 export const state = () => ({
   /**
@@ -27,6 +27,7 @@ export const state = () => ({
 })
 
 export type OwnerModuleState = ReturnType<typeof state>
+export type OwnerModuleActionContext = ActionContext<OwnerModuleState, RootState>
 
 export const getters: GetterTree<OwnerModuleState, RootState> = {
   /**
