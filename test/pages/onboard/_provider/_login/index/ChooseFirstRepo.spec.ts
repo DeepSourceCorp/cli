@@ -35,8 +35,10 @@ describe('onboard/_provider/_login/index/choose-first-repo.vue', () => {
     wrapper = shallowMount(ChooseFirstRepo, {
       localVue,
       store,
-      data: {
-        selectedRepository: {}
+      data: () => {
+        return {
+          selectedRepository: {}
+        }
       },
       stubs: {
         NuxtLink: RouterLinkStub
