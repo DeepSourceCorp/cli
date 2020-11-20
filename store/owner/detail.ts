@@ -109,7 +109,7 @@ export const actions: ActionTree<OwnerModuleState, RootState> = {
   async [ACT_SET_OWNER]({ commit }, owner) {
     commit(MUT_SET_OWNER, owner)
   },
-  [ACT_SET_ISSUE_TYPE_SETTING]({ commit }, args) {
+  [ACT_SET_ISSUE_TYPE_SETTING]({ commit }, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) {
     commit(MUT_SET_ISSUE_TYPE_SETTING, args)
   }
 }
