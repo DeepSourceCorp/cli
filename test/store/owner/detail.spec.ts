@@ -1,8 +1,24 @@
 import { mockOwner } from './__mocks__/detail.mock';
-import { state, mutations, actions, ACT_SUBMIT_ISSUE_TYPE_SETTINGS, ACT_SET_OWNER, ACT_SET_ISSUE_TYPE_SETTING } from '~/store/owner/detail';
-import { OwnerModuleState, OwnerModuleActionContext } from '~/store/owner/detail';
-import { ACT_FETCH_ISSUE_TYPE_SETTINGS, MUT_SET_OWNER, MUT_SET_ISSUE_TYPE_SETTING } from '~/store/owner/detail';
-import { IssueTypeSetting, MutationUpdateOwnerSettingsArgs, Owner, UpdateOwnerSettingsPayload } from '~/types/types';
+import {
+  state,
+  mutations,
+  getters,
+  actions,
+  OwnerModuleState,
+  OwnerModuleActionContext,
+  GET_REFINED_ISSUE_TYPE_SETTINGS,
+  ACT_SUBMIT_ISSUE_TYPE_SETTINGS,
+  ACT_SET_OWNER,
+  ACT_SET_ISSUE_TYPE_SETTING,
+  ACT_FETCH_ISSUE_TYPE_SETTINGS,
+  MUT_SET_OWNER,
+  MUT_SET_ISSUE_TYPE_SETTING
+} from '~/store/owner/detail';
+import {
+  IssueTypeSetting,
+  Owner,
+  UpdateOwnerSettingsPayload
+} from '~/types/types';
 
 let actionCxt: OwnerModuleActionContext;
 let commit: jest.Mock;
@@ -24,6 +40,45 @@ describe('[Store] Owner/Details', () => {
       rootState: {}
     };
   });
+
+  /*
+    +++++++++++++++++++++++++++++++++++++++++++++
+    +++++++++++++++++++ STATE +++++++++++++++++++
+    +++++++++++++++++++++++++++++++++++++++++++++
+  */
+  describe('[[State]]', () => {
+    test('has the right initial data', () => {
+      const initState = state()
+      expect(initState.owner.ownerSetting!.issueTypeSettings!).toEqual([]);
+    })
+  })
+
+  /*
+    +++++++++++++++++++++++++++++++++++++++++++++++
+    +++++++++++++++++++ GETTERS +++++++++++++++++++
+    +++++++++++++++++++++++++++++++++++++++++++++++
+  */
+  describe('[[Getters]]', () => {
+    describe(`Getter "${GET_REFINED_ISSUE_TYPE_SETTINGS}"`, () => {
+      test('returns data with equal length as issueTypeSettings', () => {
+        const refinedSettings = (getters[GET_REFINED_ISSUE_TYPE_SETTINGS] as Function)(ownerState)
+        expect(ownerState.owner.ownerSetting!.issueTypeSettings!.length).toEqual(refinedSettings.length);
+      })
+
+      test('returns data as intended', () => {
+        const refinedSettings = (getters[GET_REFINED_ISSUE_TYPE_SETTINGS] as Function)(ownerState)
+
+        // Should return `slug` field at same index
+        expect(ownerState.owner.ownerSetting!.issueTypeSettings![0]!.slug).toEqual(refinedSettings[0].slug);
+
+        // Should return `isIgnoredInCheckStatus` field at same index
+        expect(ownerState.owner.ownerSetting!.issueTypeSettings![0]!.isIgnoredInCheckStatus).toEqual(refinedSettings[0].isIgnoredInCheckStatus);
+
+        // Should return `isIgnoredToDisplay` field at same index
+        expect(ownerState.owner.ownerSetting!.issueTypeSettings![0]!.isIgnoredToDisplay).toEqual(refinedSettings[0].isIgnoredToDisplay);
+      })
+    })
+  })
 
   /*
     +++++++++++++++++++++++++++++++++++++++++++++++

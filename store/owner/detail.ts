@@ -13,6 +13,14 @@ export const ACT_SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings'
 export const MUT_SET_OWNER = 'setOwner'
 export const MUT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
 
+export const GET_REFINED_ISSUE_TYPE_SETTINGS = 'refinedIssueTypeSettings'
+
+export type RefinedIssueTypeSetting = {
+  slug?: string;
+  isIgnoredInCheckStatus?: boolean;
+  isIgnoredToDisplay?: boolean;
+};
+
 export const state = () => ({
   /**
    * Define state here.
@@ -35,17 +43,11 @@ export const getters: GetterTree<OwnerModuleState, RootState> = {
    * For eg,
    * statePropGetter: string => state.stateProp.toUpperCase()
    */
-  refinedIssueTypeSettings: state => {
+  [GET_REFINED_ISSUE_TYPE_SETTINGS]: state => {
     /**
      * Returns array of object of issue types without __typename field in it,
      * as it causes problems while sending in the mutation.
      */
-    type RefinedIssueTypeSetting = {
-      slug?: string;
-      isIgnoredInCheckStatus?: boolean;
-      isIgnoredToDisplay?: boolean;
-    };
-
     let arr: Maybe<Array<RefinedIssueTypeSetting>> = []
     state.owner.ownerSetting?.issueTypeSettings?.forEach((obj: Maybe<IssueTypeSetting>) => {
       let newObj = <RefinedIssueTypeSetting>{
@@ -96,7 +98,7 @@ export const actions: ActionTree<OwnerModuleState, RootState> = {
     let response = await this.$applyGraphqlMutation(UpdateOwnerSettingsGQLMutation, {
       input: {
         ownerId: state.owner.id,
-        issueTypeSettings: getters.refinedIssueTypeSettings
+        issueTypeSettings: getters[GET_REFINED_ISSUE_TYPE_SETTINGS]
       }
     })
       .then(() => {
