@@ -66,7 +66,7 @@ describe('[Store] Owner/Details', () => {
       })
 
       test('returns data as intended', () => {
-        const refinedSettings = (getters[GET_REFINED_ISSUE_TYPE_SETTINGS] as Function)(ownerState)
+        const refinedSettings = getters[GET_REFINED_ISSUE_TYPE_SETTINGS](ownerState)
 
         // Should return `slug` field at same index
         expect(ownerState.owner.ownerSetting?.issueTypeSettings?.[0]?.slug).toEqual(refinedSettings[0].slug);
