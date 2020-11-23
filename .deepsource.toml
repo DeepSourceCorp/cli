@@ -5,7 +5,10 @@ name = "javascript"
 enabled = true
 
   [analyzers.meta]
-  environment = ["browser"]
+  environment = [
+    "jest",
+    "browser"
+  ]
   plugins = ["vue"]
   style_guide = "airbnb"
   dialect = "typescript"
