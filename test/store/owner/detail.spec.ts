@@ -106,7 +106,7 @@ describe('[Store] Owner/Details', () => {
         // Setting the global spy on `localThis.$fetchGraphqlData`
         spy = jest.spyOn(localThis, '$fetchGraphqlData')
 
-        await (actions[ACT_FETCH_ISSUE_TYPE_SETTINGS] as Function).call(localThis, actionCxt, {
+        await actions[ACT_FETCH_ISSUE_TYPE_SETTINGS].call(localThis, actionCxt, {
           login: 'deepsourcelabs',
           provider: 'gh'
         })
@@ -157,7 +157,7 @@ describe('[Store] Owner/Details', () => {
         // Setting the global spy on `localThis.$applyGraphqlMutation`
         spy = jest.spyOn(localThis, '$applyGraphqlMutation')
 
-        await (actions[ACT_SUBMIT_ISSUE_TYPE_SETTINGS] as Function).call(localThis, actionCxt)
+        await actions[ACT_SUBMIT_ISSUE_TYPE_SETTINGS].call(localThis, actionCxt)
       })
 
       test('successfully calls the api', () => {
@@ -167,7 +167,7 @@ describe('[Store] Owner/Details', () => {
 
     describe(`Action "${ACT_SET_OWNER}"`, () => {
       beforeEach(async () => {
-        await (actions[ACT_SET_OWNER] as Function)(actionCxt, mockOwner().owner)
+        await actions[ACT_SET_OWNER](actionCxt, mockOwner().owner)
       })
 
       test('successfully commits mutation', async () => {
@@ -186,8 +186,8 @@ describe('[Store] Owner/Details', () => {
 
     describe(`Action "${ACT_SET_ISSUE_TYPE_SETTING}"`, () => {
       beforeEach(() => {
-        (actions[ACT_SET_ISSUE_TYPE_SETTING] as Function)(actionCxt, {
-          issueTypeSetting: mockOwner().owner.ownerSetting!.issueTypeSettings![2],
+        actions[ACT_SET_ISSUE_TYPE_SETTING](actionCxt, {
+          issueTypeSetting: mockOwner().owner.ownerSetting!.issueTypeSettings![2] as IssueTypeSetting,
           issueTypeSettingIndex: 2
         })
       })

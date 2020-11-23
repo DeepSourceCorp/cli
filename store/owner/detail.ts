@@ -1,5 +1,6 @@
-import { GetterTree, ActionTree, MutationTree, ActionContext } from 'vuex'
+import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 import { RootState } from '~/store'
+import { DocumentNode } from 'graphql'
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
 
@@ -61,25 +62,39 @@ export const getters: GetterTree<OwnerModuleState, RootState> = {
   }
 }
 
-export const mutations: MutationTree<OwnerModuleState> = {
+interface OwnerModuleMutations extends MutationTree<OwnerModuleState> {
+  [MUT_SET_OWNER]: (state: OwnerModuleState, owner: Owner) => void;
+  [MUT_SET_ISSUE_TYPE_SETTING]: (state: OwnerModuleState, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
+}
+
+export const mutations: OwnerModuleMutations = {
   /**
    * Define mutation here.
    * For eg,
    * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
    */
-  [MUT_SET_OWNER]: (state: any, owner: Owner) => {
+  [MUT_SET_OWNER]: (state, owner) => {
     state.owner = Object.assign({}, state.owner, owner)
   },
-  [MUT_SET_ISSUE_TYPE_SETTING]: (state: any, args: any) => {
-    state.owner.ownerSetting.issueTypeSettings[args.index] = Object.assign({},
-      state.owner.ownerSetting.issueTypeSettings[args.index], {
-      ...args.issueTypeSetting
+  [MUT_SET_ISSUE_TYPE_SETTING]: (state, args) => {
+    if (state.owner.ownerSetting?.issueTypeSettings?.[args.issueTypeSettingIndex]) {
+      state.owner.ownerSetting.issueTypeSettings[args.issueTypeSettingIndex] = Object.assign({},
+        state.owner.ownerSetting?.issueTypeSettings?.[args.issueTypeSettingIndex], {
+        ...args.issueTypeSetting
+      }
+      )
     }
-    )
   }
 }
 
-export const actions: ActionTree<OwnerModuleState, RootState> = {
+interface OwnerModuleActions extends ActionTree<OwnerModuleState, RootState> {
+  [ACT_FETCH_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerModuleActionContext, args: { login: string, provider: string }) => void;
+  [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerModuleActionContext, args?: any) => void;
+  [ACT_SET_OWNER]: (injectee: OwnerModuleActionContext, owner: Owner) => void;
+  [ACT_SET_ISSUE_TYPE_SETTING]: (injectee: OwnerModuleActionContext, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
+}
+
+export const actions: OwnerModuleActions = {
   /**
    * Define actions here,
    * For eg,
@@ -95,7 +110,7 @@ export const actions: ActionTree<OwnerModuleState, RootState> = {
     commit(MUT_SET_OWNER, response?.data.owner)
   },
   async [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]({ state, getters }) {
-    let response = await this.$applyGraphqlMutation(UpdateOwnerSettingsGQLMutation, {
+    await this.$applyGraphqlMutation(UpdateOwnerSettingsGQLMutation, {
       input: {
         ownerId: state.owner.id,
         issueTypeSettings: getters[GET_REFINED_ISSUE_TYPE_SETTINGS]
@@ -108,10 +123,10 @@ export const actions: ActionTree<OwnerModuleState, RootState> = {
         console.log("Failure", e)
       })
   },
-  async [ACT_SET_OWNER]({ commit }, owner) {
+  [ACT_SET_OWNER]({ commit }, owner) {
     commit(MUT_SET_OWNER, owner)
   },
-  [ACT_SET_ISSUE_TYPE_SETTING]({ commit }, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) {
+  [ACT_SET_ISSUE_TYPE_SETTING]({ commit }, args) {
     commit(MUT_SET_ISSUE_TYPE_SETTING, args)
   }
 }
