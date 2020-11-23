@@ -1,6 +1,5 @@
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 import { RootState } from '~/store'
-import { DocumentNode } from 'graphql'
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
 
@@ -38,7 +37,11 @@ export const state = () => ({
 export type OwnerModuleState = ReturnType<typeof state>
 export type OwnerModuleActionContext = ActionContext<OwnerModuleState, RootState>
 
-export const getters: GetterTree<OwnerModuleState, RootState> = {
+interface OwnerModuleGetters extends GetterTree<OwnerModuleState, RootState> {
+  [GET_REFINED_ISSUE_TYPE_SETTINGS]: (state: OwnerModuleState) => RefinedIssueTypeSetting[];
+}
+
+export const getters: OwnerModuleGetters = {
   /**
    * Define a getter here.
    * For eg,

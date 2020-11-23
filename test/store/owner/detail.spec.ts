@@ -23,7 +23,7 @@ import {
 let actionCxt: OwnerModuleActionContext;
 let commit: jest.Mock;
 let localThis: any;
-let spy: any;
+let spy: jest.SpyInstance;
 let ownerState: OwnerModuleState;
 
 describe('[Store] Owner/Details', () => {
@@ -49,7 +49,7 @@ describe('[Store] Owner/Details', () => {
   describe('[[State]]', () => {
     test('has the right initial data', () => {
       const initState = state()
-      expect(initState.owner.ownerSetting!.issueTypeSettings!).toEqual([]);
+      expect(initState.owner.ownerSetting?.issueTypeSettings).toEqual([]);
     })
   })
 
@@ -61,21 +61,21 @@ describe('[Store] Owner/Details', () => {
   describe('[[Getters]]', () => {
     describe(`Getter "${GET_REFINED_ISSUE_TYPE_SETTINGS}"`, () => {
       test('returns data with equal length as issueTypeSettings', () => {
-        const refinedSettings = (getters[GET_REFINED_ISSUE_TYPE_SETTINGS] as Function)(ownerState)
-        expect(ownerState.owner.ownerSetting!.issueTypeSettings!.length).toEqual(refinedSettings.length);
+        const refinedSettings = getters[GET_REFINED_ISSUE_TYPE_SETTINGS](ownerState)
+        expect(ownerState.owner.ownerSetting?.issueTypeSettings?.length).toEqual(refinedSettings.length);
       })
 
       test('returns data as intended', () => {
         const refinedSettings = (getters[GET_REFINED_ISSUE_TYPE_SETTINGS] as Function)(ownerState)
 
         // Should return `slug` field at same index
-        expect(ownerState.owner.ownerSetting!.issueTypeSettings![0]!.slug).toEqual(refinedSettings[0].slug);
+        expect(ownerState.owner.ownerSetting?.issueTypeSettings?.[0]?.slug).toEqual(refinedSettings[0].slug);
 
         // Should return `isIgnoredInCheckStatus` field at same index
-        expect(ownerState.owner.ownerSetting!.issueTypeSettings![0]!.isIgnoredInCheckStatus).toEqual(refinedSettings[0].isIgnoredInCheckStatus);
+        expect(ownerState.owner.ownerSetting?.issueTypeSettings?.[0]?.isIgnoredInCheckStatus).toEqual(refinedSettings[0].isIgnoredInCheckStatus);
 
         // Should return `isIgnoredToDisplay` field at same index
-        expect(ownerState.owner.ownerSetting!.issueTypeSettings![0]!.isIgnoredToDisplay).toEqual(refinedSettings[0].isIgnoredToDisplay);
+        expect(ownerState.owner.ownerSetting?.issueTypeSettings?.[0]?.isIgnoredToDisplay).toEqual(refinedSettings[0].isIgnoredToDisplay);
       })
     })
   })
@@ -187,7 +187,7 @@ describe('[Store] Owner/Details', () => {
     describe(`Action "${ACT_SET_ISSUE_TYPE_SETTING}"`, () => {
       beforeEach(() => {
         actions[ACT_SET_ISSUE_TYPE_SETTING](actionCxt, {
-          issueTypeSetting: mockOwner().owner.ownerSetting!.issueTypeSettings![2] as IssueTypeSetting,
+          issueTypeSetting: mockOwner().owner.ownerSetting?.issueTypeSettings?.[2] as IssueTypeSetting,
           issueTypeSettingIndex: 2
         })
       })
@@ -203,7 +203,7 @@ describe('[Store] Owner/Details', () => {
 
         // Assert if the data passed to the mutation is correct.
         expect(commitCall[1]).toEqual({
-          issueTypeSetting: mockOwner().owner.ownerSetting!.issueTypeSettings![2],
+          issueTypeSetting: mockOwner().owner.ownerSetting?.issueTypeSettings?.[2],
           issueTypeSettingIndex: 2
         })
       })
@@ -231,9 +231,11 @@ describe('[Store] Owner/Details', () => {
         const newOwner: Owner = mockOwner().owner as Owner;
 
         // Change owner setting id
-        newOwner.ownerSetting!.id = "DUMMY_ID"
+        if(newOwner.ownerSetting) {
+          newOwner.ownerSetting.id = "DUMMY_ID"
+        }
         mutations[MUT_SET_OWNER](ownerState, newOwner)
-        expect(ownerState.owner.ownerSetting!.id).toEqual(newOwner.ownerSetting!.id)
+        expect(ownerState.owner.ownerSetting?.id).toEqual(newOwner.ownerSetting?.id)
       })
     })
 
@@ -248,10 +250,10 @@ describe('[Store] Owner/Details', () => {
         }
 
         mutations[MUT_SET_ISSUE_TYPE_SETTING](ownerState, {
-          index: 2,
+          issueTypeSettingIndex: 2,
           issueTypeSetting: newIssueTypeSetting
         })
-        expect(ownerState.owner.ownerSetting!.issueTypeSettings![2]).toEqual(newIssueTypeSetting)
+        expect(ownerState.owner.ownerSetting?.issueTypeSettings?.[2]).toEqual(newIssueTypeSetting)
       })
     })
   })
