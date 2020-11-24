@@ -38,6 +38,12 @@ const owner = namespace('owner/detail')
 export default class IssuePreferences extends Vue {
   @owner.State
   owner!: Owner
+  
+  @owner.State
+  loading!: Boolean
+
+  @owner.State
+  error!: Object
 
   async fetch() {
     await this.$store.dispatch(`owner/detail/${ACT_FETCH_ISSUE_TYPE_SETTINGS}`, {

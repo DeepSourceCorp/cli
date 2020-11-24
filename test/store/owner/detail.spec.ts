@@ -12,7 +12,7 @@ import {
   ACT_SET_ISSUE_TYPE_SETTING,
   ACT_FETCH_ISSUE_TYPE_SETTINGS,
   MUT_SET_OWNER,
-  MUT_SET_ISSUE_TYPE_SETTING
+  MUT_SET_ISSUE_TYPE_SETTING, MUT_SET_LOADING, MUT_SET_ERROR
 } from '~/store/owner/detail';
 import {
   IssueTypeSetting,
@@ -87,87 +87,261 @@ describe('[Store] Owner/Details', () => {
   */
   describe('[[Actions]]', () => {
     describe(`Action "${ACT_FETCH_ISSUE_TYPE_SETTINGS}"`, () => {
-      beforeEach(async () => {
-        localThis = {
-          $providerMetaMap: {
-            gh: {
-              text: 'Github',
-              shortcode: 'gh',
-              value: 'GITHUB'
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<{ data: { owner: Owner } }> {
+              return new Promise<{ data: { owner: Owner } }>(resolve =>
+                setTimeout(() => resolve({ data: { owner: mockOwner().owner } }), 10)
+              );
             }
-          },
-          async $fetchGraphqlData(): Promise<{ data: { owner: Owner } }> {
-            return new Promise<{ data: { owner: Owner } }>(resolve =>
-              setTimeout(() => resolve({ data: { owner: mockOwner().owner } }), 10)
-            );
           }
-        }
 
-        // Setting the global spy on `localThis.$fetchGraphqlData`
-        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
 
-        await actions[ACT_FETCH_ISSUE_TYPE_SETTINGS].call(localThis, actionCxt, {
-          login: 'deepsourcelabs',
-          provider: 'gh'
+          await actions[ACT_FETCH_ISSUE_TYPE_SETTINGS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1);
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3);
+        })
+
+        test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          let commitCall = commit.mock.calls[0];
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(commitCall[1]).toEqual(true)
+
+          // Storing the third commit call made
+          commitCall = commit.mock.calls[2];
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(commitCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${MUT_SET_OWNER}`, async () => {
+          // Storing the second commit call made
+          const commitCall = commit.mock.calls[1];
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `MUT_SET_ISSUE_TYPE_SETTING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_OWNER)
+
+          // Assert if the response from api is same as the one passed to the mutation.
+          expect(commitCall[1]).toEqual(apiResponse.data.owner)
         })
       })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((resolve, reject) =>
+                reject('ERR1')
+              );
+            }
+          }
 
-      test('successfully calls the api', () => {
-        expect(spy).toHaveBeenCalledTimes(1);
-      })
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
 
-      test('successfully commits mutation', async () => {
-        expect(commit).toHaveBeenCalledTimes(1);
+          await actions[ACT_FETCH_ISSUE_TYPE_SETTINGS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
 
-        // Storing the first commit call made
-        const commitCall = commit.mock.calls[0];
-        const apiResponse = await localThis.$fetchGraphqlData()
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3);
+        })
 
-        // Assert if `MUT_SET_ISSUE_TYPE_SETTING` is being commited or not.
-        expect(commitCall[0]).toEqual(MUT_SET_OWNER)
+        test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          let commitCall = commit.mock.calls[0];
 
-        // Assert if the response from api is same as the one passed to the mutation.
-        expect(commitCall[1]).toEqual(apiResponse.data.owner)
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(commitCall[1]).toEqual(true)
+
+          // Storing the third commit call made
+          commitCall = commit.mock.calls[2];
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(commitCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${MUT_SET_ERROR}`, async () => {
+          // Storing the second commit call made
+          const commitCall = commit.mock.calls[1];
+
+          // Assert if `MUT_SET_ERROR` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_ERROR)
+
+          // Assert if the payload passed to the mutation was empty.
+          expect(commitCall[1]).toEqual("ERR1")
+        })
       })
     })
 
     describe(`Action "${ACT_SUBMIT_ISSUE_TYPE_SETTINGS}"`, () => {
-      beforeEach(async () => {
-        type GqlMutationUpdateOwnerSettingsResponse = {
-          data: {
-            updateOwnerSettings: UpdateOwnerSettingsPayload
-          }
-        }
-
-        localThis = {
-          $providerMetaMap: {
-            gh: {
-              text: 'Github',
-              shortcode: 'gh',
-              value: 'GITHUB'
+      describe('Success', () => {
+        beforeEach(async () => {
+          type GqlMutationUpdateOwnerSettingsResponse = {
+            data: {
+              updateOwnerSettings: UpdateOwnerSettingsPayload
             }
-          },
-          async $applyGraphqlMutation(): Promise<GqlMutationUpdateOwnerSettingsResponse> {
-            return new Promise<GqlMutationUpdateOwnerSettingsResponse>(resolve =>
-              setTimeout(() => resolve({ data: { updateOwnerSettings: { ok: true } } }), 10)
-            );
           }
-        }
 
-        // Setting the global spy on `localThis.$applyGraphqlMutation`
-        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $applyGraphqlMutation(): Promise<GqlMutationUpdateOwnerSettingsResponse> {
+              return new Promise<GqlMutationUpdateOwnerSettingsResponse>(resolve =>
+                setTimeout(() => resolve({ data: { updateOwnerSettings: { ok: true } } }), 10)
+              );
+            }
+          }
 
-        await actions[ACT_SUBMIT_ISSUE_TYPE_SETTINGS].call(localThis, actionCxt)
+          // Setting the global spy on `localThis.$applyGraphqlMutation`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+          await actions[ACT_SUBMIT_ISSUE_TYPE_SETTINGS].call(localThis, actionCxt)
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1);
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(2);
+        })
+
+        test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          let commitCall = commit.mock.calls[0];
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(commitCall[1]).toEqual(true)
+
+          // Storing the second commit call made
+          commitCall = commit.mock.calls[1];
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(commitCall[1]).toEqual(false)
+        })
       })
 
-      test('successfully calls the api', () => {
-        expect(spy).toHaveBeenCalledTimes(1);
+      describe('Failure', () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $applyGraphqlMutation(): Promise<Error> {
+              return new Promise<Error>((resolve, reject) =>
+                setTimeout(() => reject('GQL_MUT_ERR1'), 10)
+              );
+            }
+          }
+
+          // Setting the global spy on `localThis.$applyGraphqlMutation`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+          await actions[ACT_SUBMIT_ISSUE_TYPE_SETTINGS].call(localThis, actionCxt)
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1);
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3);
+        })
+
+        test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          let commitCall = commit.mock.calls[0];
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(commitCall[1]).toEqual(true)
+
+          // Storing the third commit call made
+          commitCall = commit.mock.calls[2];
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(commitCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${MUT_SET_ERROR}`, async () => {
+          // Storing the second commit call made
+          const commitCall = commit.mock.calls[1];
+
+          // Assert if `MUT_SET_ERROR` is being commited or not.
+          expect(commitCall[0]).toEqual(MUT_SET_ERROR)
+
+          // Assert if the payload passed to the mutation was empty.
+          expect(commitCall[1]).toEqual("GQL_MUT_ERR1")
+        })
       })
     })
 
     describe(`Action "${ACT_SET_OWNER}"`, () => {
       beforeEach(async () => {
-        await actions[ACT_SET_OWNER](actionCxt, mockOwner().owner)
+        actions[ACT_SET_OWNER](actionCxt, mockOwner().owner)
       })
 
       test('successfully commits mutation', async () => {
@@ -231,7 +405,7 @@ describe('[Store] Owner/Details', () => {
         const newOwner: Owner = mockOwner().owner as Owner;
 
         // Change owner setting id
-        if(newOwner.ownerSetting) {
+        if (newOwner.ownerSetting) {
           newOwner.ownerSetting.id = "DUMMY_ID"
         }
         mutations[MUT_SET_OWNER](ownerState, newOwner)

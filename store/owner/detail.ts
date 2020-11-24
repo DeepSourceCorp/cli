@@ -1,4 +1,5 @@
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
+import { GraphQLFormattedError } from 'graphql'
 import { RootState } from '~/store'
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
@@ -10,6 +11,8 @@ export const ACT_SET_OWNER = 'setOwner'
 export const ACT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
 export const ACT_SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings'
 
+export const MUT_SET_ERROR = 'setOwnerDetailError'
+export const MUT_SET_LOADING = 'setOwnerDetailLoading'
 export const MUT_SET_OWNER = 'setOwner'
 export const MUT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
 
@@ -27,6 +30,8 @@ export const state = () => ({
    * For eg,
    * stateProp: 'this is a state property' as string
    */
+  loading: false as Boolean,
+  error: {} as Object,
   owner: {
     ownerSetting: {
       issueTypeSettings: [] as Maybe<Array<Maybe<IssueTypeSetting>>>
@@ -66,6 +71,8 @@ export const getters: OwnerModuleGetters = {
 }
 
 interface OwnerModuleMutations extends MutationTree<OwnerModuleState> {
+  [MUT_SET_LOADING]: (state: OwnerModuleState, value: Boolean) => void;
+  [MUT_SET_ERROR]: (state: OwnerModuleState, error: { graphQLErrors: GraphQLFormattedError }) => void;
   [MUT_SET_OWNER]: (state: OwnerModuleState, owner: Owner) => void;
   [MUT_SET_ISSUE_TYPE_SETTING]: (state: OwnerModuleState, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
 }
@@ -76,6 +83,12 @@ export const mutations: OwnerModuleMutations = {
    * For eg,
    * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
    */
+  [MUT_SET_LOADING]: (state, value) => {
+    Object.assign(state.loading, value)
+  },
+  [MUT_SET_ERROR]: (state, error) => {
+    state.error = Object.assign({}, state.error, error)
+  },
   [MUT_SET_OWNER]: (state, owner) => {
     state.owner = Object.assign({}, state.owner, owner)
   },
@@ -91,8 +104,8 @@ export const mutations: OwnerModuleMutations = {
 }
 
 interface OwnerModuleActions extends ActionTree<OwnerModuleState, RootState> {
-  [ACT_FETCH_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerModuleActionContext, args: { login: string, provider: string }) => void;
-  [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerModuleActionContext, args?: any) => void;
+  [ACT_FETCH_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerModuleActionContext, args: { login: string, provider: string }) => Promise<void>;
+  [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerModuleActionContext, args?: any) => Promise<void>;
   [ACT_SET_OWNER]: (injectee: OwnerModuleActionContext, owner: Owner) => void;
   [ACT_SET_ISSUE_TYPE_SETTING]: (injectee: OwnerModuleActionContext, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
 }
@@ -106,25 +119,35 @@ export const actions: OwnerModuleActions = {
    * }
    */
   async [ACT_FETCH_ISSUE_TYPE_SETTINGS]({ commit }, args) {
-    let response = await this.$fetchGraphqlData(IssueTypeSettingsGQLQuery, {
+    commit(MUT_SET_LOADING, true)
+    await this.$fetchGraphqlData(IssueTypeSettingsGQLQuery, {
       login: args.login,
       provider: this.$providerMetaMap[args.provider].value
+    }).then((response: { data: { owner: Owner } }) => {
+      console.log("Successfully fetched issue preferences")
+      commit(MUT_SET_OWNER, response.data.owner)
+      commit(MUT_SET_LOADING, false)
+    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+      commit(MUT_SET_ERROR, e)
+      commit(MUT_SET_LOADING, false)
+      console.log("Failure in fetching issue preferences", e)
     })
-    commit(MUT_SET_OWNER, response?.data.owner)
   },
-  async [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]({ state, getters }) {
+  async [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]({ commit, state, getters }) {
+    commit(MUT_SET_LOADING, true)
     await this.$applyGraphqlMutation(UpdateOwnerSettingsGQLMutation, {
       input: {
         ownerId: state.owner.id,
         issueTypeSettings: getters[GET_REFINED_ISSUE_TYPE_SETTINGS]
       }
+    }).then(() => {
+      console.log("Successfully submitted issue preferences")
+      commit(MUT_SET_LOADING, false)
+    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+      commit(MUT_SET_ERROR, e)
+      commit(MUT_SET_LOADING, false)
+      console.log("Failure in submitting issue preferences", e)
     })
-      .then(() => {
-        console.log("Successfully submitted issue preferences")
-      })
-      .catch((e: Error) => {
-        console.log("Failure", e)
-      })
   },
   [ACT_SET_OWNER]({ commit }, owner) {
     commit(MUT_SET_OWNER, owner)
