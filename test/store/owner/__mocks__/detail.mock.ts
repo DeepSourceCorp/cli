@@ -79,5 +79,7 @@ export const mockOwnerDetailIssueTypeSettings = (): Owner => OWNER_DETAIL_ISSUE_
  * Mock factory
  */
 export const mockOwner = (): OwnerModuleState => ({
+  loading: false,
+  error: {},
   owner: mockOwnerDetailIssueTypeSettings()
 });

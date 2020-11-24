@@ -390,6 +390,27 @@ describe('[Store] Owner/Details', () => {
     +++++++++++++++++++++++++++++++++++++++++++++++++
   */
   describe('[[Mutations]]', () => {
+    describe(`Mutation "${MUT_SET_LOADING}"`, () => {
+      test('successfully updates loading field in state', () => {
+        mutations[MUT_SET_LOADING](ownerState, true)
+        expect(ownerState.loading).toEqual(true)
+      })
+    })
+
+    describe(`Mutation "${MUT_SET_ERROR}"`, () => {
+      test('successfully updates loading field in state', () => {
+        const dummyError = {
+          graphQLErrors: {
+            message: 'Dummy error',
+            locations: [],
+            path: []
+          }
+        }
+        mutations[MUT_SET_ERROR](ownerState, dummyError)
+        expect(ownerState.error).toEqual(dummyError)
+      })
+    })
+
     describe(`Mutation "${MUT_SET_OWNER}"`, () => {
       test('successfully adds new owner to the state', () => {
         const newOwner: Owner = {

@@ -84,7 +84,7 @@ export const mutations: OwnerModuleMutations = {
    * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
    */
   [MUT_SET_LOADING]: (state, value) => {
-    Object.assign(state.loading, value)
+    state.loading = value
   },
   [MUT_SET_ERROR]: (state, error) => {
     state.error = Object.assign({}, state.error, error)
