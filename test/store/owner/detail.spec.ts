@@ -165,7 +165,7 @@ describe('[Store] Owner/Details', () => {
             },
             async $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) =>
-                reject('ERR1')
+                reject(new Error('ERR1'))
               );
             }
           }
@@ -211,7 +211,7 @@ describe('[Store] Owner/Details', () => {
           expect(commitCall[0]).toEqual(MUT_SET_ERROR)
 
           // Assert if the payload passed to the mutation was empty.
-          expect(commitCall[1]).toEqual("ERR1")
+          expect(commitCall[1]).toEqual(Error("ERR1"))
         })
       })
     })
@@ -287,7 +287,7 @@ describe('[Store] Owner/Details', () => {
             },
             async $applyGraphqlMutation(): Promise<Error> {
               return new Promise<Error>((resolve, reject) =>
-                setTimeout(() => reject('GQL_MUT_ERR1'), 10)
+                reject(new Error('GQL_MUT_ERR1'))
               );
             }
           }
@@ -334,7 +334,7 @@ describe('[Store] Owner/Details', () => {
           expect(commitCall[0]).toEqual(MUT_SET_ERROR)
 
           // Assert if the payload passed to the mutation was empty.
-          expect(commitCall[1]).toEqual("GQL_MUT_ERR1")
+          expect(commitCall[1]).toEqual(Error("GQL_MUT_ERR1"))
         })
       })
     })

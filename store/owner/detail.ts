@@ -30,8 +30,8 @@ export const state = () => ({
    * For eg,
    * stateProp: 'this is a state property' as string
    */
-  loading: false as Boolean,
-  error: {} as Object,
+  loading: false as boolean,
+  error: {} as Record<string, any>,
   owner: {
     ownerSetting: {
       issueTypeSettings: [] as Maybe<Array<Maybe<IssueTypeSetting>>>
@@ -71,7 +71,7 @@ export const getters: OwnerModuleGetters = {
 }
 
 interface OwnerModuleMutations extends MutationTree<OwnerModuleState> {
-  [MUT_SET_LOADING]: (state: OwnerModuleState, value: Boolean) => void;
+  [MUT_SET_LOADING]: (state: OwnerModuleState, value: boolean) => void;
   [MUT_SET_ERROR]: (state: OwnerModuleState, error: { graphQLErrors: GraphQLFormattedError }) => void;
   [MUT_SET_OWNER]: (state: OwnerModuleState, owner: Owner) => void;
   [MUT_SET_ISSUE_TYPE_SETTING]: (state: OwnerModuleState, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;

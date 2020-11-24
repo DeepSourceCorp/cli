@@ -40,10 +40,10 @@ export default class IssuePreferences extends Vue {
   owner!: Owner
   
   @owner.State
-  loading!: Boolean
+  loading!: boolean
 
   @owner.State
-  error!: Object
+  error!: Record<string, any>
 
   async fetch() {
     await this.$store.dispatch(`owner/detail/${ACT_FETCH_ISSUE_TYPE_SETTINGS}`, {
