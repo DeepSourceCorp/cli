@@ -1,8 +1,8 @@
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
-import { GraphQLFormattedError } from 'graphql'
 import { RootState } from '~/store'
 import { RepositoryConnection, PageInfo, Maybe, Scalars, Owner } from '~/types/types'
 import RepositoryListGQLQuery from '~/apollo/queries/repository/list.gql';
+import { GraphqlError } from '~/types/apollo-graphql-types';
 
 export const ACT_FETCH_REPOSITORY_LIST = 'fetchRepositoryList'
 
@@ -38,7 +38,7 @@ export const getters: GetterTree<RepositoryListModuleState, RootState> = {
 
 interface RepositoryListModuleMutations extends MutationTree<RepositoryListModuleState> {
   [MUT_SET_LOADING]: (state: RepositoryListModuleState, value: boolean) => void;
-  [MUT_SET_ERROR]: (state: RepositoryListModuleState, error: { graphQLErrors: GraphQLFormattedError }) => void;
+  [MUT_SET_ERROR]: (state: RepositoryListModuleState, error: GraphqlError) => void;
   [MUT_SET_REPOSITORY_LIST]: (state: RepositoryListModuleState, repositoryList: RepositoryConnection) => void;
 }
 
@@ -91,7 +91,7 @@ export const actions: RepositoryListModuleActions = {
       // TODO: Toast("Successfully fetched repository list")
       commit(MUT_SET_REPOSITORY_LIST, response.data.owner.repositories)
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in fetching repository list", e)

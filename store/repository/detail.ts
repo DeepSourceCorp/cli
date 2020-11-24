@@ -1,5 +1,4 @@
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
-import { GraphQLFormattedError } from 'graphql'
 import { RootState } from '~/store'
 import RepositoryDetailGQLQuery from '~/apollo/queries/repository/detail.gql'
 import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
@@ -12,7 +11,7 @@ import {
   CommitConfigToVcsInput,
   Repository
 } from '~/types/types'
-import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 export const ACT_FETCH_REPOSITORY_DETAIL = 'fetchRepositoryDetail'
 export const ACT_FETCH_WIDGETS = 'fetchWidgets'
@@ -50,7 +49,7 @@ export const getters: GetterTree<RepositoryDetailModuleState, RootState> = {
 
 interface RepositoryDetailModuleMutations extends MutationTree<RepositoryDetailModuleState> {
   [MUT_SET_LOADING]: (state: RepositoryDetailModuleState, value: boolean) => void;
-  [MUT_SET_ERROR]: (state: RepositoryDetailModuleState, error: { graphQLErrors: GraphQLFormattedError }) => void;
+  [MUT_SET_ERROR]: (state: RepositoryDetailModuleState, error: GraphqlError) => void;
   [MUT_SET_REPOSITORY]: (state: RepositoryDetailModuleState, repository: Repository) => void;
 }
 
@@ -123,7 +122,7 @@ export const actions: RepositoryDetailModuleActions = {
       // TODO: Toast("Successfully fetched widgets")
       commit(MUT_SET_REPOSITORY, response.data.repository)
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in fetching widgets", e)
@@ -137,7 +136,7 @@ export const actions: RepositoryDetailModuleActions = {
       // TODO: Toast("Successfully fetched repository detail")
       commit(MUT_SET_REPOSITORY, response.data.repository)
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in fetching repository detail", e)
@@ -156,7 +155,7 @@ export const actions: RepositoryDetailModuleActions = {
       // TODO: Toast("Successfully fetched repository settings detail -- General")
       commit(MUT_SET_REPOSITORY, response.data.repository)
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in fetching repository settings detail -- General", e)
@@ -175,7 +174,7 @@ export const actions: RepositoryDetailModuleActions = {
       // TODO: Toast("Successfully fetched repository settings detail -- Manage Access")
       commit(MUT_SET_REPOSITORY, response.data.repository)
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in fetching repository settings detail -- Manage Access", e)
@@ -193,7 +192,7 @@ export const actions: RepositoryDetailModuleActions = {
       // TODO: Toast("Successfully fetched repository settings detail -- Ignore rules")
       commit(MUT_SET_REPOSITORY, response.data.repository)
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in fetching repository settings detail -- Ignore rules", e)
@@ -207,7 +206,7 @@ export const actions: RepositoryDetailModuleActions = {
       // TODO: Toast("Successfully fetched repository settings detail -- SSH")
       commit(MUT_SET_REPOSITORY, response.data.repository)
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in fetching repository settings detail -- SSH", e)
@@ -223,7 +222,7 @@ export const actions: RepositoryDetailModuleActions = {
     }).then(() => {
       // TODO: Toast("Successfully committed config to VCS")
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in committing config to VCS", e)

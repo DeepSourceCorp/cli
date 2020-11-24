@@ -1,11 +1,11 @@
 import { RootState } from '~/store'
-import { GraphQLFormattedError } from 'graphql'
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
 
 import { IssueTypeSetting, Owner, OwnerSetting, Maybe } from '~/types/types'
+import { GraphqlError } from '~/types/apollo-graphql-types'
 
 export const ACT_FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings'
 export const ACT_SET_OWNER = 'setOwner'
@@ -66,7 +66,7 @@ export const getters: OwnerDetailModuleGetters = {
 
 interface OwnerDetailModuleMutations extends MutationTree<OwnerDetailModuleState> {
   [MUT_SET_LOADING]: (state: OwnerDetailModuleState, value: boolean) => void;
-  [MUT_SET_ERROR]: (state: OwnerDetailModuleState, error: { graphQLErrors: GraphQLFormattedError }) => void;
+  [MUT_SET_ERROR]: (state: OwnerDetailModuleState, error: GraphqlError) => void;
   [MUT_SET_OWNER]: (state: OwnerDetailModuleState, owner: Owner) => void;
   [MUT_SET_ISSUE_TYPE_SETTING]: (state: OwnerDetailModuleState, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
 }
@@ -109,7 +109,7 @@ export const actions: OwnerDetailModuleActions = {
       // TODO: Toast("Successfully fetched issue preferences")
       commit(MUT_SET_OWNER, response.data.owner)
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in fetching issue preferences", e)
@@ -125,7 +125,7 @@ export const actions: OwnerDetailModuleActions = {
     }).then(() => {
       // TODO: Toast("Successfully submitted issue preferences")
       commit(MUT_SET_LOADING, false)
-    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+    }).catch((e: GraphqlError) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
       // TODO: Toast("Failure in submitting issue preferences", e)

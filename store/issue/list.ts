@@ -1,81 +1,86 @@
-import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { DocumentNode } from 'graphql'
-import { RootState } from '~/store'
+import { RepositoryIssueConnection, Maybe, PageInfo, RepositoryIssueEdge } from '~/types/types'
 import RepositoryIssuesListGQLQuery from '~/apollo/queries/repository/issue/list.gql'
-import {
-  RepositoryIssueConnection,
-  Maybe,
-  PageInfo,
-  RepositoryIssueEdge
-} from '~/types/types'
+import { GetterTree, ActionTree, MutationTree, Store, ActionContext } from 'vuex'
+import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { RootState } from '~/store'
 
 export const ACT_FETCH_ISSUE_LIST = 'fetchIssueList'
 
-const MUT_SET_ISSUE_LIST = 'setIssueList';
+export const MUT_SET_LOADING = 'setIssueListLoading'
+export const MUT_SET_ERROR = 'setIssueListError'
+export const MUT_SET_ISSUE_LIST = 'setIssueList'
 
-export const state = () => ({
-  /**
-   * Define state here.
-   * For eg,
-   * stateProp: 'this is a state property' as string
-   */
-  issueList: {
-    pageInfo: {} as PageInfo,
-    edges: [] as Array<Maybe<RepositoryIssueEdge>>,
-  } as RepositoryIssueConnection
-})
-
-export type IssueListModuleState = ReturnType<typeof state>
-
-export const getters: GetterTree<IssueListModuleState, RootState> = {
-  /**
-   * Define a getter here.
-   * For eg,
-   * statePropGetter: string => state.stateProp.toUpperCase()
-   */
+export interface IssueListModuleState {
+  loading: boolean,
+  error: Record<string, any>,
+  issueList: RepositoryIssueConnection
 }
 
-export const mutations: MutationTree<RootState> = {
-  /**
-   * Define mutation here.
-   * For eg,
-   * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
-   */
-  [MUT_SET_ISSUE_LIST]: (state: any, issueList: RepositoryIssueConnection) => {
+export const state = (): IssueListModuleState => ({
+  ...<IssueListModuleState>({
+    loading: false,
+    error: {},
+    issueList: {
+      pageInfo: {} as PageInfo,
+      edges: [] as Array<Maybe<RepositoryIssueEdge>>,
+    }
+  })
+})
+
+export type IssueListActionContext = ActionContext<IssueListModuleState, RootState>
+
+export const getters: GetterTree<IssueListModuleState, RootState> = {}
+
+interface IssueListModuleMutations extends MutationTree<IssueListModuleState> {
+  [MUT_SET_LOADING]: (state: IssueListModuleState, value: boolean) => void;
+  [MUT_SET_ERROR]: (state: IssueListModuleState, error: GraphqlError) => void;
+  [MUT_SET_ISSUE_LIST]: (state: IssueListModuleState, issueList: RepositoryIssueConnection) => void;
+}
+
+export const mutations: IssueListModuleMutations = {
+  [MUT_SET_LOADING]: (state, value) => {
+    state.loading = value
+  },
+  [MUT_SET_ERROR]: (state, error) => {
+    state.error = Object.assign({}, state.error, error)
+  },
+  [MUT_SET_ISSUE_LIST]: (state, issueList) => {
     state.issueList = Object.assign({}, state.issueList, issueList)
   }
 }
 
-export const actions: ActionTree<IssueListModuleState, RootState> = {
-  /**
-   * Define actions here,
-   * For eg,
-   * async fetchThings({ commit }) {
-   *  commit('CHANGE_STATE_PROP', 'New state property')
-   * }
-   */
+interface IssueListModuleActions extends ActionTree<IssueListModuleState, RootState> {
+  [ACT_FETCH_ISSUE_LIST]: (this: Store<RootState>, injectee: IssueListActionContext, args: {
+    provider: string,
+    owner: string,
+    name: string,
+    currentPageNumber: number,
+    limit: number,
+    issueType: string,
+    analyzer: string,
+    sort: string,
+    q: string
+  }) => Promise<void>;
+}
+
+export const actions: IssueListModuleActions = {
   async [ACT_FETCH_ISSUE_LIST]({ commit }, args) {
-    let response = await fetchGraphqlData(this, RepositoryIssuesListGQLQuery, {
+    commit(MUT_SET_LOADING, true)
+    await this.$fetchGraphqlData(RepositoryIssuesListGQLQuery, {
       provider: args.provider,
       owner: args.owner,
       name: args.name,
-      after: args.after,
+      after: this.$getGQLAfter(args.currentPageNumber, args.limit),
       issueType: args.issueType,
       analyzer: args.analyzer,
       sort: args.sort,
       q: args.q
+    }).then((response: GraphqlQueryResponse) => {
+      commit(MUT_SET_ISSUE_LIST, response.data.repository?.issues)
+      commit(MUT_SET_LOADING, false)
+    }).catch((e: GraphqlError) => {
+      commit(MUT_SET_ERROR, e)
+      commit(MUT_SET_LOADING, false)
     })
-    commit(MUT_SET_ISSUE_LIST, response?.data.repository.issues)
   }
-}
-
-const fetchGraphqlData = async function (self: any, query: DocumentNode, variables: any) {
-  /**
-   * Abstracts graphql client code from actions.
-   */
-  let client = self.app.apolloProvider?.defaultClient
-  return client?.query({
-    query,
-    variables
-  });
 }

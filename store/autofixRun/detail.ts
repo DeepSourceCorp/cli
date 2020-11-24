@@ -1,68 +1,68 @@
-import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { DocumentNode } from 'graphql'
-import { RootState } from '~/store'
 import RepositoryAutofixRunGQLQuery from '~/apollo/queries/repository/runs/autofixRun/detail.gql'
-import {
-  AutofixRun
-} from '~/types/types'
+import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
+import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { AutofixRun } from '~/types/types'
+import { RootState } from '~/store'
 
 export const ACT_FETCH_AUTOFIX_RUN = 'fetchAutofixRun'
 
-const MUT_SET_AUTOFIX_RUN = 'setAutofixRun';
+export const MUT_SET_LOADING = 'setAutofixRunDetailLoading'
+export const MUT_SET_ERROR = 'setAutofixRunDetailError'
+export const MUT_SET_AUTOFIX_RUN = 'setAutofixRun'
 
-export const state = () => ({
-  /**
-   * Define state here.
-   * For eg,
-   * stateProp: 'this is a state property' as string
-   */
-  autofixRun: {} as AutofixRun
-})
-
-export type AutofixRunModuleState = ReturnType<typeof state>
-
-export const getters: GetterTree<AutofixRunModuleState, RootState> = {
-  /**
-   * Define a getter here.
-   * For eg,
-   * statePropGetter: string => state.stateProp.toUpperCase()
-   */
+export interface AutofixRunDetailModuleState {
+  loading: boolean,
+  error: Record<string, any>,
+  autofixRun: AutofixRun
 }
 
-export const mutations: MutationTree<RootState> = {
-  /**
-   * Define mutation here.
-   * For eg,
-   * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
-   */
-  [MUT_SET_AUTOFIX_RUN]: (state: any, autofixRun: AutofixRun) => {
+export const state = (): AutofixRunDetailModuleState => ({
+  ...<AutofixRunDetailModuleState>({
+    loading: false,
+    error: {},
+    autofixRun: {}
+  })
+})
+
+export type AutofixRunDetailActionContext = ActionContext<AutofixRunDetailModuleState, RootState>
+
+export const getters: GetterTree<AutofixRunDetailModuleState, RootState> = {}
+
+interface AutofixRunDetailModuleMutations extends MutationTree<AutofixRunDetailModuleState> {
+  [MUT_SET_LOADING]: (state: AutofixRunDetailModuleState, value: boolean) => void;
+  [MUT_SET_ERROR]: (state: AutofixRunDetailModuleState, error: GraphqlError) => void;
+  [MUT_SET_AUTOFIX_RUN]: (state: AutofixRunDetailModuleState, autofixRun: AutofixRun) => void;
+}
+
+export const mutations: AutofixRunDetailModuleMutations = {
+  [MUT_SET_LOADING]: (state, value) => {
+    state.loading = value
+  },
+  [MUT_SET_ERROR]: (state, error) => {
+    state.error = Object.assign({}, state.error, error)
+  },
+  [MUT_SET_AUTOFIX_RUN]: (state, autofixRun) => {
     state.autofixRun = Object.assign({}, state.autofixRun, autofixRun)
   }
 }
 
-export const actions: ActionTree<AutofixRunModuleState, RootState> = {
-  /**
-   * Define actions here,
-   * For eg,
-   * async fetchThings({ commit }) {
-   *  commit('CHANGE_STATE_PROP', 'New state property')
-   * }
-   */
-  async [ACT_FETCH_AUTOFIX_RUN]({ commit }, args) {
-    let response = await fetchGraphqlData(this, RepositoryAutofixRunGQLQuery, {
-      runId: args.runId
-    })
-    commit(MUT_SET_AUTOFIX_RUN, response?.data.autofixRun)
-  }
+interface AutofixRunDetailModuleActions extends ActionTree<AutofixRunDetailModuleState, RootState> {
+  [ACT_FETCH_AUTOFIX_RUN]: (this: Store<RootState>, injectee: AutofixRunDetailActionContext, args: {
+    runId: string
+  }) => Promise<void>;
 }
 
-const fetchGraphqlData = async function (self: any, query: DocumentNode, variables: any) {
-  /**
-   * Abstracts graphql client code from actions.
-   */
-  let client = self.app.apolloProvider?.defaultClient
-  return client?.query({
-    query,
-    variables
-  });
+export const actions: AutofixRunDetailModuleActions = {
+  async [ACT_FETCH_AUTOFIX_RUN]({ commit }, args) {
+    commit(MUT_SET_LOADING, true)
+    await this.$fetchGraphqlData(RepositoryAutofixRunGQLQuery, {
+      runId: args.runId
+    }).then((response: GraphqlQueryResponse) => {
+      commit(MUT_SET_AUTOFIX_RUN, response.data.autofixRun)
+      commit(MUT_SET_LOADING, false)
+    }).catch((e: GraphqlError) => {
+      commit(MUT_SET_ERROR, e)
+      commit(MUT_SET_LOADING, false)
+    })
+  }
 }

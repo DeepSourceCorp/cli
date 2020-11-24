@@ -1,0 +1,236 @@
+import { state, mutations, actions, MUT_SET_ERROR, MUT_SET_LOADING, TransformerRunListActionContext, TransformerRunListModuleState, ACT_FETCH_TRANSFORMER_RUN_LIST, MUT_SET_TRANSFORMER_RUN_LIST } from '~/store/transformerRun/list';
+import { mockTransformerRunListState } from './__mocks__/list.mock';
+import { Repository, TransformerRunConnection } from '~/types/types';
+import { GraphqlQueryResponse } from '~/types/apollo-graphql-types';
+
+let actionCxt: TransformerRunListActionContext;
+let commit: jest.Mock;
+let localThis: any;
+let spy: jest.SpyInstance;
+let transformerRunListState: TransformerRunListModuleState;
+
+describe('[Store] TransformerRun/List', () => {
+  beforeEach(() => {
+    commit = jest.fn();
+    transformerRunListState = mockTransformerRunListState();
+
+    actionCxt = {
+      state: transformerRunListState,
+      commit,
+      dispatch: jest.fn(),
+      getters: jest.fn(),
+      rootGetters: jest.fn(),
+      rootState: {}
+    };
+  });
+
+  /*
+    +++++++++++++++++++++++++++++++++++++++++++++
+    +++++++++++++++++++ STATE +++++++++++++++++++
+    +++++++++++++++++++++++++++++++++++++++++++++
+  */
+  describe('[[State]]', () => {
+    test('has the right initial data', () => {
+      const initState = state()
+      expect(initState.loading).toEqual(false);
+      expect(initState.error).toEqual({});
+      expect(initState.transformerRunList).toEqual({
+        pageInfo: {},
+        edges: []
+      });
+    })
+  })
+
+  /*
+    +++++++++++++++++++++++++++++++++++++++++++++++
+    +++++++++++++++++++ ACTIONS +++++++++++++++++++
+    +++++++++++++++++++++++++++++++++++++++++++++++
+  */
+  describe('[[Actions]]', () => {
+    describe(`Action "${ACT_FETCH_TRANSFORMER_RUN_LIST}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $getGQLAfter: jest.fn(),
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>(resolve =>
+                resolve({
+                  data: {
+                    repository: <Repository>{
+                      transformerRuns: mockTransformerRunListState().transformerRunList
+                    }
+                  }
+                })
+              );
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[ACT_FETCH_TRANSFORMER_RUN_LIST].call(localThis, actionCxt, {
+            provider: 'gh',
+            owner: 'deepsourcelabs',
+            name: 'asgard',
+            currentPageNumber: 2,
+            limit: 10
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1);
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3);
+        })
+
+        test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
+          const { mock: { calls: [firstCall, , thirdCall] } } = commit
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(firstCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(thirdCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(thirdCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${MUT_SET_TRANSFORMER_RUN_LIST}`, async () => {
+          const { mock: { calls: [, secondCall,] } } = commit
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `MUT_SET_TRANSFORMER_RUN_LIST` is being commited or not.
+          expect(secondCall[0]).toEqual(MUT_SET_TRANSFORMER_RUN_LIST)
+
+          // Assert if the response from api is same as the one passed to the mutation.
+          expect(secondCall[1]).toEqual(apiResponse.data.repository.transformerRuns)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $getGQLAfter: jest.fn(),
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((resolve, reject) =>
+                reject(new Error('ERR1'))
+              );
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[ACT_FETCH_TRANSFORMER_RUN_LIST].call(localThis, actionCxt, {
+            provider: 'gh',
+            owner: 'deepsourcelabs',
+            name: 'asgard',
+            currentPageNumber: 2,
+            limit: 10
+          })
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3);
+        })
+
+        test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
+          const { mock: { calls: [firstCall, , thirdCall] } } = commit
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(firstCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+
+          // Assert if `MUT_SET_LOADING` is being commited or not.
+          expect(thirdCall[0]).toEqual(MUT_SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(thirdCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${MUT_SET_ERROR}`, async () => {
+          const { mock: { calls: [, secondCall,] } } = commit
+
+          // Assert if `MUT_SET_ERROR` is being commited or not.
+          expect(secondCall[0]).toEqual(MUT_SET_ERROR)
+
+          // Assert if the payload passed to the mutation was empty.
+          expect(secondCall[1]).toEqual(Error("ERR1"))
+        })
+      })
+    })
+  })
+
+  /*
+    +++++++++++++++++++++++++++++++++++++++++++++++++
+    +++++++++++++++++++ MUTATIONS +++++++++++++++++++
+    +++++++++++++++++++++++++++++++++++++++++++++++++
+  */
+  describe('[[Mutations]]', () => {
+    describe(`Mutation "${MUT_SET_LOADING}"`, () => {
+      test('successfully updates loading field in state', () => {
+        mutations[MUT_SET_LOADING](transformerRunListState, true)
+        expect(transformerRunListState.loading).toEqual(true)
+      })
+    })
+
+    describe(`Mutation "${MUT_SET_ERROR}"`, () => {
+      test('successfully updates loading field in state', () => {
+        const dummyError = {
+          graphQLErrors: {
+            message: 'Dummy error',
+            locations: [],
+            path: []
+          }
+        }
+        mutations[MUT_SET_ERROR](transformerRunListState, dummyError)
+        expect(transformerRunListState.error).toEqual(dummyError)
+      })
+    })
+
+    describe(`Mutation "${MUT_SET_TRANSFORMER_RUN_LIST}"`, () => {
+      beforeEach(() => {
+        transformerRunListState.transformerRunList = {} as TransformerRunConnection;
+      })
+      test('successfully adds new run list to the state', () => {
+        const newTransformerRunList: TransformerRunConnection = {
+          totalCount: 10
+        } as TransformerRunConnection
+
+        mutations[MUT_SET_TRANSFORMER_RUN_LIST](transformerRunListState, newTransformerRunList)
+        expect(transformerRunListState.transformerRunList).toEqual(newTransformerRunList)
+      })
+
+      test('successfully appends data', () => {
+        const newTransformerRunList: TransformerRunConnection = mockTransformerRunListState().transformerRunList as TransformerRunConnection;
+
+        if (newTransformerRunList.edges[0]?.node?.changedFilesCount) {
+          newTransformerRunList.edges[0].node.changedFilesCount = 2
+        }
+        mutations[MUT_SET_TRANSFORMER_RUN_LIST](transformerRunListState, newTransformerRunList)
+        expect(transformerRunListState.transformerRunList.edges[0]?.node?.changedFilesCount).toEqual(newTransformerRunList.edges[0]?.node?.changedFilesCount)
+      })
+    })
+  })
+});

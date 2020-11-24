@@ -3,7 +3,7 @@ import Vuex, { Store } from 'vuex';
 
 import { RootState } from '~/store';
 import Index from '~/pages/onboard/_provider/_login/index.vue';
-import { mockUser } from '~/test/store/user/__mocks__/active.mock';
+import { mockActiveUserState } from '~/test/store/user/__mocks__/active.mock';
 
 // Vue config
 const localVue = createLocalVue();
@@ -25,7 +25,7 @@ describe('onboard/_provider/_login/index.vue', () => {
           modules: {
             active: {
               namespaced: true,
-              state: mockUser()
+              state: mockActiveUserState()
             }
           }
         }

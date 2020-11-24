@@ -26,7 +26,7 @@ declare module '*/socialAuth.gql' {
 }
     
 
-declare module '*/analyzers.gql' {
+declare module '*/list.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -63,15 +63,6 @@ declare module '*/detail.gql' {
     
 
 declare module '*/detailForActivation.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/list.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

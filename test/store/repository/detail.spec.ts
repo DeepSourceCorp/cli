@@ -34,7 +34,7 @@ let localThis: any;
 let spy: jest.SpyInstance;
 let repositoryDetailState: RepositoryDetailModuleState;
 
-describe('[Store] Repository/List', () => {
+describe('[Store] Repository/Detail', () => {
   beforeEach(() => {
     commit = jest.fn();
     repositoryDetailState = mockRepositoryDetailState();

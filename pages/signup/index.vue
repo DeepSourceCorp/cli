@@ -11,9 +11,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { Component, namespace } from 'nuxt-property-decorator'
-
-const analyzerList = namespace('analyzerList')
+import { Component } from 'nuxt-property-decorator'
 
 @Component
 export default class SignUp extends Vue {}

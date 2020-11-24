@@ -1,76 +1,70 @@
-import { GetterTree, ActionTree, MutationTree } from 'vuex'
-import { DocumentNode } from 'graphql'
-import { RootState } from '~/store'
 import RepositoryIssueDetailGQLQuery from '~/apollo/queries/repository/issue/detail.gql'
-import {
-  RepositoryIssue
-} from '~/types/types'
+import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
+import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { RepositoryIssue } from '~/types/types'
+import { RootState } from '~/store'
 
 export const ACT_FETCH_ISSUE = 'fetchIssue'
 
-// This data is temporarily being imported for the queries that are not working.
-import { repositoryIssueDetail } from '~/temp/data.ts'
+export const MUT_SET_LOADING = 'setIssueDetailLoading'
+export const MUT_SET_ERROR = 'setIssueDetailError'
+export const MUT_SET_ISSUE = 'setIssue'
 
-const MUT_SET_ISSUE = 'setIssue';
-
-export const state = () => ({
-  /**
-   * Define state here.
-   * For eg,
-   * stateProp: 'this is a state property' as string
-   */
-  issue: {} as RepositoryIssue
-})
-
-export type IssueModuleState = ReturnType<typeof state>
-
-export const getters: GetterTree<IssueModuleState, RootState> = {
-  /**
-   * Define a getter here.
-   * For eg,
-   * statePropGetter: string => state.stateProp.toUpperCase()
-   */
+export interface IssueDetailModuleState {
+  loading: boolean,
+  error: Record<string, any>,
+  issue: RepositoryIssue
 }
 
-export const mutations: MutationTree<RootState> = {
-  /**
-   * Define mutation here.
-   * For eg,
-   * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
-   */
+export const state = (): IssueDetailModuleState => ({
+  ...<IssueDetailModuleState>({
+    loading: false,
+    error: {},
+    issue: {}
+  })
+})
+
+export type IssueDetailActionContext = ActionContext<IssueDetailModuleState, RootState>
+
+export const getters: GetterTree<IssueDetailModuleState, RootState> = {}
+
+interface IssueDetailModuleMutations extends MutationTree<IssueDetailModuleState> {
+  [MUT_SET_LOADING]: (state: IssueDetailModuleState, value: boolean) => void;
+  [MUT_SET_ERROR]: (state: IssueDetailModuleState, error: GraphqlError) => void;
+  [MUT_SET_ISSUE]: (state: IssueDetailModuleState, issue: RepositoryIssue) => void;
+}
+
+export const mutations: IssueDetailModuleMutations = {
+  [MUT_SET_LOADING]: (state, value) => {
+    state.loading = value
+  },
+  [MUT_SET_ERROR]: (state, error) => {
+    state.error = Object.assign({}, state.error, error)
+  },
   [MUT_SET_ISSUE]: (state: any, issue: RepositoryIssue) => {
     state.issue = Object.assign({}, state.issue, issue)
   }
 }
 
-export const actions: ActionTree<IssueModuleState, RootState> = {
-  /**
-   * Define actions here,
-   * For eg,
-   * async fetchThings({ commit }) {
-   *  commit('CHANGE_STATE_PROP', 'New state property')
-   * }
-   */
-  async [ACT_FETCH_ISSUE]({ commit }, args) {
-    /**
-     * Temorarily using dummy data.
-     */
-    // let response = await fetchGraphqlData(this, RepositoryIssueDetailGQLQuery, {
-    //   repositoryId: args.repositoryId,
-    //   shortcode: args.shortcode
-    // })
-    let response = repositoryIssueDetail
-    commit(MUT_SET_ISSUE, response?.data.repository.issue)
-  }
+interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, RootState> {
+  [ACT_FETCH_ISSUE]: (this: Store<RootState>, injectee: IssueDetailActionContext, args: {
+    repositoryId: string,
+    shortcode: string
+  }) => Promise<void>;
 }
 
-const fetchGraphqlData = async function (self: any, query: DocumentNode, variables: any) {
-  /**
-   * Abstracts graphql client code from actions.
-   */
-  let client = self.app.apolloProvider?.defaultClient
-  return client?.query({
-    query,
-    variables
-  });
+export const actions: IssueDetailModuleActions = {
+  async [ACT_FETCH_ISSUE]({ commit }, args) {
+    commit(MUT_SET_LOADING, true)
+    await this.$fetchGraphqlData(RepositoryIssueDetailGQLQuery, {
+      repositoryId: args.repositoryId,
+      shortcode: args.shortcode
+    }).then((response: GraphqlQueryResponse) => {
+      commit(MUT_SET_ISSUE, response.data.repository?.issue)
+      commit(MUT_SET_LOADING, false)
+    }).catch((e: GraphqlError) => {
+      commit(MUT_SET_ERROR, e)
+      commit(MUT_SET_LOADING, false)
+    })
+  }
 }

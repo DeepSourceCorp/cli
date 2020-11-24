@@ -7,7 +7,7 @@
         v-for="repo in repositoryList.edges"
         :key="repo.node.id"
         @click="selectRepository(repo.node)"
-        class="block"
+        class="block repo-box"
       >
         <span class="border p-2 my-2 cursor-pointer hover:bg-ink-100 hover:text-vanilla-100 block">
           {{ repo.node.name }}
