@@ -1,4 +1,4 @@
-import { mockOwner } from './__mocks__/detail.mock';
+import { mockOwnerDetail } from './__mocks__/detail.mock';
 import {
   state,
   mutations,
@@ -16,9 +16,9 @@ import {
 } from '~/store/owner/detail';
 import {
   IssueTypeSetting,
-  Owner,
-  UpdateOwnerSettingsPayload
+  Owner
 } from '~/types/types';
+import { GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types';
 
 let actionCxt: OwnerDetailModuleActionContext;
 let commit: jest.Mock;
@@ -29,7 +29,7 @@ let ownerState: OwnerDetailModuleState;
 describe('[Store] Owner/Details', () => {
   beforeEach(() => {
     commit = jest.fn();
-    ownerState = mockOwner();
+    ownerState = mockOwnerDetail();
 
     actionCxt = {
       state: ownerState,
@@ -97,9 +97,9 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<{ data: { owner: Owner } }> {
-              return new Promise<{ data: { owner: Owner } }>(resolve =>
-                setTimeout(() => resolve({ data: { owner: mockOwner().owner } }), 10)
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>(resolve =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               );
             }
           }
@@ -123,34 +123,31 @@ describe('[Store] Owner/Details', () => {
 
         test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
           // Storing the first commit call made
-          let commitCall = commit.mock.calls[0];
+          const { mock: { calls: [firstCall, , thirdCall] } } = commit
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(firstCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(true)
-
-          // Storing the third commit call made
-          commitCall = commit.mock.calls[2];
+          expect(firstCall[1]).toEqual(true)
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(thirdCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(false)
+          expect(thirdCall[1]).toEqual(false)
         })
 
         test(`successfully commits mutation ${MUT_SET_OWNER}`, async () => {
           // Storing the second commit call made
-          const commitCall = commit.mock.calls[1];
+          const { mock: { calls: [, secondCall,] } } = commit
           const apiResponse = await localThis.$fetchGraphqlData()
 
           // Assert if `MUT_SET_ISSUE_TYPE_SETTING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_OWNER)
+          expect(secondCall[0]).toEqual(MUT_SET_OWNER)
 
           // Assert if the response from api is same as the one passed to the mutation.
-          expect(commitCall[1]).toEqual(apiResponse.data.owner)
+          expect(secondCall[1]).toEqual(apiResponse.data.owner)
         })
       })
       describe(`Failure`, () => {
@@ -185,33 +182,30 @@ describe('[Store] Owner/Details', () => {
 
         test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
           // Storing the first commit call made
-          let commitCall = commit.mock.calls[0];
+          const { mock: { calls: [firstCall, , thirdCall] } } = commit
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(firstCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(true)
-
-          // Storing the third commit call made
-          commitCall = commit.mock.calls[2];
+          expect(firstCall[1]).toEqual(true)
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(thirdCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(false)
+          expect(thirdCall[1]).toEqual(false)
         })
 
         test(`successfully commits mutation ${MUT_SET_ERROR}`, async () => {
           // Storing the second commit call made
-          const commitCall = commit.mock.calls[1];
+          const { mock: { calls: [, secondCall,] } } = commit
 
           // Assert if `MUT_SET_ERROR` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_ERROR)
+          expect(secondCall[0]).toEqual(MUT_SET_ERROR)
 
           // Assert if the payload passed to the mutation was empty.
-          expect(commitCall[1]).toEqual(Error("ERR1"))
+          expect(secondCall[1]).toEqual(Error("ERR1"))
         })
       })
     })
@@ -219,12 +213,6 @@ describe('[Store] Owner/Details', () => {
     describe(`Action "${ACT_SUBMIT_ISSUE_TYPE_SETTINGS}"`, () => {
       describe('Success', () => {
         beforeEach(async () => {
-          type GqlMutationUpdateOwnerSettingsResponse = {
-            data: {
-              updateOwnerSettings: UpdateOwnerSettingsPayload
-            }
-          }
-
           localThis = {
             $providerMetaMap: {
               gh: {
@@ -233,8 +221,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $applyGraphqlMutation(): Promise<GqlMutationUpdateOwnerSettingsResponse> {
-              return new Promise<GqlMutationUpdateOwnerSettingsResponse>(resolve =>
+            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+              return new Promise<GraphqlMutationResponse>(resolve =>
                 setTimeout(() => resolve({ data: { updateOwnerSettings: { ok: true } } }), 10)
               );
             }
@@ -256,22 +244,19 @@ describe('[Store] Owner/Details', () => {
 
         test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
           // Storing the first commit call made
-          let commitCall = commit.mock.calls[0];
+          const { mock: { calls: [firstCall, secondCall,] } } = commit
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(firstCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(true)
-
-          // Storing the second commit call made
-          commitCall = commit.mock.calls[1];
+          expect(firstCall[1]).toEqual(true)
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(secondCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(false)
+          expect(secondCall[1]).toEqual(false)
         })
       })
 
@@ -308,60 +293,57 @@ describe('[Store] Owner/Details', () => {
 
         test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
           // Storing the first commit call made
-          let commitCall = commit.mock.calls[0];
+          const { mock: { calls: [firstCall, , thirdCall] } } = commit
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(firstCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(true)
-
-          // Storing the third commit call made
-          commitCall = commit.mock.calls[2];
+          expect(firstCall[1]).toEqual(true)
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(thirdCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(false)
+          expect(thirdCall[1]).toEqual(false)
         })
 
         test(`successfully commits mutation ${MUT_SET_ERROR}`, async () => {
           // Storing the second commit call made
-          const commitCall = commit.mock.calls[1];
+          const { mock: { calls: [, secondCall,] } } = commit
 
           // Assert if `MUT_SET_ERROR` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_ERROR)
+          expect(secondCall[0]).toEqual(MUT_SET_ERROR)
 
           // Assert if the payload passed to the mutation was empty.
-          expect(commitCall[1]).toEqual(Error("GQL_MUT_ERR1"))
+          expect(secondCall[1]).toEqual(Error("GQL_MUT_ERR1"))
         })
       })
     })
 
     describe(`Action "${ACT_SET_OWNER}"`, () => {
       beforeEach(async () => {
-        actions[ACT_SET_OWNER](actionCxt, mockOwner().owner)
+        actions[ACT_SET_OWNER](actionCxt, mockOwnerDetail().owner)
       })
 
       test('successfully commits mutation', async () => {
         expect(commit).toHaveBeenCalledTimes(1);
 
         // Storing the first commit call made
-        const commitCall = commit.mock.calls[0];
+        const { mock: { calls: [firstCall, ,] } } = commit
 
         // Assert if `MUT_SET_OWNER` is being commited or not.
-        expect(commitCall[0]).toEqual(MUT_SET_OWNER)
+        expect(firstCall[0]).toEqual(MUT_SET_OWNER)
 
         // Assert if the data passed to the mutation is correct.
-        expect(commitCall[1]).toEqual(mockOwner().owner)
+        expect(firstCall[1]).toEqual(mockOwnerDetail().owner)
       })
     })
 
     describe(`Action "${ACT_SET_ISSUE_TYPE_SETTING}"`, () => {
       beforeEach(() => {
         actions[ACT_SET_ISSUE_TYPE_SETTING](actionCxt, {
-          issueTypeSetting: mockOwner().owner.ownerSetting?.issueTypeSettings?.[2] as IssueTypeSetting,
+          issueTypeSetting: mockOwnerDetail().owner.ownerSetting?.issueTypeSettings?.[2] as IssueTypeSetting,
           issueTypeSettingIndex: 2
         })
       })
@@ -370,14 +352,14 @@ describe('[Store] Owner/Details', () => {
         expect(commit).toHaveBeenCalledTimes(1);
 
         // Storing the first commit call made
-        const commitCall = commit.mock.calls[0];
+        const { mock: { calls: [firstCall, ,] } } = commit
 
         // Assert if `MUT_SET_ISSUE_TYPE_SETTING` is being commited or not.
-        expect(commitCall[0]).toEqual(MUT_SET_ISSUE_TYPE_SETTING)
+        expect(firstCall[0]).toEqual(MUT_SET_ISSUE_TYPE_SETTING)
 
         // Assert if the data passed to the mutation is correct.
-        expect(commitCall[1]).toEqual({
-          issueTypeSetting: mockOwner().owner.ownerSetting?.issueTypeSettings?.[2],
+        expect(firstCall[1]).toEqual({
+          issueTypeSetting: mockOwnerDetail().owner.ownerSetting?.issueTypeSettings?.[2],
           issueTypeSettingIndex: 2
         })
       })
@@ -412,6 +394,9 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Mutation "${MUT_SET_OWNER}"`, () => {
+      beforeEach(() => {
+        ownerState.owner = {} as Owner;
+      })
       test('successfully adds new owner to the state', () => {
         const newOwner: Owner = {
           id: 'DUMMY_OWNER_ID',
@@ -423,7 +408,7 @@ describe('[Store] Owner/Details', () => {
       })
 
       test('successfully appends data', () => {
-        const newOwner: Owner = mockOwner().owner as Owner;
+        const newOwner: Owner = mockOwnerDetail().owner as Owner;
 
         // Change owner setting id
         if (newOwner.ownerSetting) {

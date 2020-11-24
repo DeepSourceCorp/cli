@@ -106,34 +106,31 @@ describe('[Store] Repository/List', () => {
 
         test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
           // Storing the first commit call made
-          let commitCall = commit.mock.calls[0];
+          const { mock: { calls: [firstCall, , thirdCall] } } = commit
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(firstCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(true)
-
-          // Storing the third commit call made
-          commitCall = commit.mock.calls[2];
+          expect(firstCall[1]).toEqual(true)
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(thirdCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(false)
+          expect(thirdCall[1]).toEqual(false)
         })
 
         test(`successfully commits mutation ${MUT_SET_REPOSITORY_LIST}`, async () => {
           // Storing the second commit call made
-          const commitCall = commit.mock.calls[1];
+          const { mock: { calls: [, secondCall,] } } = commit
           const apiResponse = await localThis.$fetchGraphqlData()
 
           // Assert if `MUT_SET_ISSUE_TYPE_SETTING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_REPOSITORY_LIST)
+          expect(secondCall[0]).toEqual(MUT_SET_REPOSITORY_LIST)
 
           // Assert if the response from api is same as the one passed to the mutation.
-          expect(commitCall[1]).toEqual(apiResponse.data.owner.repositories)
+          expect(secondCall[1]).toEqual(apiResponse.data.owner.repositories)
         })
       })
       describe(`Failure`, () => {
@@ -173,33 +170,30 @@ describe('[Store] Repository/List', () => {
 
         test(`successfully commits mutation ${MUT_SET_LOADING}`, async () => {
           // Storing the first commit call made
-          let commitCall = commit.mock.calls[0];
+          const { mock: { calls: [firstCall, , thirdCall] } } = commit
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(firstCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(true)
-
-          // Storing the third commit call made
-          commitCall = commit.mock.calls[2];
+          expect(firstCall[1]).toEqual(true)
 
           // Assert if `MUT_SET_LOADING` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_LOADING)
+          expect(thirdCall[0]).toEqual(MUT_SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(commitCall[1]).toEqual(false)
+          expect(thirdCall[1]).toEqual(false)
         })
 
         test(`successfully commits mutation ${MUT_SET_ERROR}`, async () => {
           // Storing the second commit call made
-          const commitCall = commit.mock.calls[1];
+          const { mock: { calls: [, secondCall,] } } = commit
 
           // Assert if `MUT_SET_ERROR` is being commited or not.
-          expect(commitCall[0]).toEqual(MUT_SET_ERROR)
+          expect(secondCall[0]).toEqual(MUT_SET_ERROR)
 
           // Assert if the payload passed to the mutation was empty.
-          expect(commitCall[1]).toEqual(Error("ERR1"))
+          expect(secondCall[1]).toEqual(Error("ERR1"))
         })
       })
     })
