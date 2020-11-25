@@ -39,14 +39,14 @@ export const state = () => ({
   } as Owner
 })
 
-export type OwnerModuleState = ReturnType<typeof state>
-export type OwnerModuleActionContext = ActionContext<OwnerModuleState, RootState>
+export type OwnerDetailModuleState = ReturnType<typeof state>
+export type OwnerDetailModuleActionContext = ActionContext<OwnerDetailModuleState, RootState>
 
-interface OwnerModuleGetters extends GetterTree<OwnerModuleState, RootState> {
-  [GET_REFINED_ISSUE_TYPE_SETTINGS]: (state: OwnerModuleState) => RefinedIssueTypeSetting[];
+interface OwnerDetailModuleGetters extends GetterTree<OwnerDetailModuleState, RootState> {
+  [GET_REFINED_ISSUE_TYPE_SETTINGS]: (state: OwnerDetailModuleState) => RefinedIssueTypeSetting[];
 }
 
-export const getters: OwnerModuleGetters = {
+export const getters: OwnerDetailModuleGetters = {
   /**
    * Define a getter here.
    * For eg,
@@ -70,14 +70,14 @@ export const getters: OwnerModuleGetters = {
   }
 }
 
-interface OwnerModuleMutations extends MutationTree<OwnerModuleState> {
-  [MUT_SET_LOADING]: (state: OwnerModuleState, value: boolean) => void;
-  [MUT_SET_ERROR]: (state: OwnerModuleState, error: { graphQLErrors: GraphQLFormattedError }) => void;
-  [MUT_SET_OWNER]: (state: OwnerModuleState, owner: Owner) => void;
-  [MUT_SET_ISSUE_TYPE_SETTING]: (state: OwnerModuleState, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
+interface OwnerDetailModuleMutations extends MutationTree<OwnerDetailModuleState> {
+  [MUT_SET_LOADING]: (state: OwnerDetailModuleState, value: boolean) => void;
+  [MUT_SET_ERROR]: (state: OwnerDetailModuleState, error: { graphQLErrors: GraphQLFormattedError }) => void;
+  [MUT_SET_OWNER]: (state: OwnerDetailModuleState, owner: Owner) => void;
+  [MUT_SET_ISSUE_TYPE_SETTING]: (state: OwnerDetailModuleState, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
 }
 
-export const mutations: OwnerModuleMutations = {
+export const mutations: OwnerDetailModuleMutations = {
   /**
    * Define mutation here.
    * For eg,
@@ -103,14 +103,14 @@ export const mutations: OwnerModuleMutations = {
   }
 }
 
-interface OwnerModuleActions extends ActionTree<OwnerModuleState, RootState> {
-  [ACT_FETCH_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerModuleActionContext, args: { login: string, provider: string }) => Promise<void>;
-  [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerModuleActionContext, args?: any) => Promise<void>;
-  [ACT_SET_OWNER]: (injectee: OwnerModuleActionContext, owner: Owner) => void;
-  [ACT_SET_ISSUE_TYPE_SETTING]: (injectee: OwnerModuleActionContext, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
+interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
+  [ACT_FETCH_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerDetailModuleActionContext, args: { login: string, provider: string }) => Promise<void>;
+  [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerDetailModuleActionContext, args?: any) => Promise<void>;
+  [ACT_SET_OWNER]: (injectee: OwnerDetailModuleActionContext, owner: Owner) => void;
+  [ACT_SET_ISSUE_TYPE_SETTING]: (injectee: OwnerDetailModuleActionContext, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
 }
 
-export const actions: OwnerModuleActions = {
+export const actions: OwnerDetailModuleActions = {
   /**
    * Define actions here,
    * For eg,

@@ -4,8 +4,8 @@ import {
   mutations,
   getters,
   actions,
-  OwnerModuleState,
-  OwnerModuleActionContext,
+  OwnerDetailModuleState,
+  OwnerDetailModuleActionContext,
   GET_REFINED_ISSUE_TYPE_SETTINGS,
   ACT_SUBMIT_ISSUE_TYPE_SETTINGS,
   ACT_SET_OWNER,
@@ -20,11 +20,11 @@ import {
   UpdateOwnerSettingsPayload
 } from '~/types/types';
 
-let actionCxt: OwnerModuleActionContext;
+let actionCxt: OwnerDetailModuleActionContext;
 let commit: jest.Mock;
 let localThis: any;
 let spy: jest.SpyInstance;
-let ownerState: OwnerModuleState;
+let ownerState: OwnerDetailModuleState;
 
 describe('[Store] Owner/Details', () => {
   beforeEach(() => {

@@ -1,5 +1,5 @@
 import { Owner } from "~/types/types";
-import { OwnerModuleState } from "~/store/owner/detail"
+import { OwnerDetailModuleState } from "~/store/owner/detail"
 
 /**
  * Mock for issue type settings.
@@ -78,7 +78,7 @@ export const mockOwnerDetailIssueTypeSettings = (): Owner => OWNER_DETAIL_ISSUE_
 /**
  * Mock factory
  */
-export const mockOwner = (): OwnerModuleState => ({
+export const mockOwner = (): OwnerDetailModuleState => ({
   loading: false,
   error: {},
   owner: mockOwnerDetailIssueTypeSettings()
