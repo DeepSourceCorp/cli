@@ -1,6 +1,7 @@
-import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
-import { GraphQLFormattedError } from 'graphql'
 import { RootState } from '~/store'
+import { GraphQLFormattedError } from 'graphql'
+import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
+
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
 
@@ -24,22 +25,24 @@ export type RefinedIssueTypeSetting = {
   isIgnoredToDisplay?: boolean;
 };
 
-export const state = () => ({
-  /**
-   * Define state here.
-   * For eg,
-   * stateProp: 'this is a state property' as string
-   */
-  loading: false as boolean,
-  error: {} as Record<string, any>,
-  owner: {
-    ownerSetting: {
-      issueTypeSettings: [] as Maybe<Array<Maybe<IssueTypeSetting>>>
-    } as OwnerSetting
-  } as Owner
+export interface OwnerDetailModuleState {
+  loading :boolean,
+  error :Record<string, any>,
+  owner :Owner
+}
+
+export const state = () :OwnerDetailModuleState => ({
+  ...<OwnerDetailModuleState>{
+    loading: false,
+    error: {},
+    owner: {
+      ownerSetting: <OwnerSetting> {
+        issueTypeSettings: <Maybe<Array<Maybe<IssueTypeSetting>>>>[]
+      }
+    }
+  },
 })
 
-export type OwnerDetailModuleState = ReturnType<typeof state>
 export type OwnerDetailModuleActionContext = ActionContext<OwnerDetailModuleState, RootState>
 
 interface OwnerDetailModuleGetters extends GetterTree<OwnerDetailModuleState, RootState> {
@@ -47,16 +50,7 @@ interface OwnerDetailModuleGetters extends GetterTree<OwnerDetailModuleState, Ro
 }
 
 export const getters: OwnerDetailModuleGetters = {
-  /**
-   * Define a getter here.
-   * For eg,
-   * statePropGetter: string => state.stateProp.toUpperCase()
-   */
   [GET_REFINED_ISSUE_TYPE_SETTINGS]: state => {
-    /**
-     * Returns array of object of issue types without __typename field in it,
-     * as it causes problems while sending in the mutation.
-     */
     let arr: Maybe<Array<RefinedIssueTypeSetting>> = []
     state.owner.ownerSetting?.issueTypeSettings?.forEach((obj: Maybe<IssueTypeSetting>) => {
       let newObj = <RefinedIssueTypeSetting>{
@@ -78,11 +72,6 @@ interface OwnerDetailModuleMutations extends MutationTree<OwnerDetailModuleState
 }
 
 export const mutations: OwnerDetailModuleMutations = {
-  /**
-   * Define mutation here.
-   * For eg,
-   * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
-   */
   [MUT_SET_LOADING]: (state, value) => {
     state.loading = value
   },
@@ -111,13 +100,6 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
 }
 
 export const actions: OwnerDetailModuleActions = {
-  /**
-   * Define actions here,
-   * For eg,
-   * async fetchThings({ commit }) {
-   *  commit('CHANGE_STATE_PROP', 'New state property')
-   * }
-   */
   async [ACT_FETCH_ISSUE_TYPE_SETTINGS]({ commit }, args) {
     commit(MUT_SET_LOADING, true)
     await this.$fetchGraphqlData(IssueTypeSettingsGQLQuery, {
