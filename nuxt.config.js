@@ -50,7 +50,7 @@ export default {
   apollo: {
     includeNodeModules: true,
     clientConfigs: {
-      default: '@/apollo/config/index.ts'
+      default: '@/apollo/config/client.ts'
     }
   },
 
