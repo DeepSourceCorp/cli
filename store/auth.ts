@@ -1,67 +1,62 @@
 import { GetterTree, ActionTree, MutationTree } from 'vuex'
 import { RootState } from '~/store'
 
-const MUT_SET_USER = 'setUser';
-const MUT_RESET_USER = 'resetUser';
-export const ACT_COMPLETE_LOGIN = 'user';
-export const ACT_RESET_TOKEN = 'resetToken'
+export enum AuthActionTypes {
+  LOGIN = 'LOGIN',
+  LOGOUT = 'LOGOUT'
+}
 
+export enum AuthMutationTypes {
+  SET_LOGGED_IN = 'SET_LOGGED_IN',
+  SET_LOGGED_OUT = 'SET_LOGGED_OUT'
+}
 
-export type User = {
+export enum AuthGetterTypes {
+    IS_LOGGED_IN = 'IS_LOGGED_IN',
+    GET_TOKEN = 'GET_TOKEN'
+}
+
+// Todo: move to env
+const AUTH_COOKIE = 'nova';
+
+/** Auth is the model for authentication. */
+export interface Auth {
   token: string
   loggedIn: boolean
 }
 
-export const state = () => ({
-  user!: <User>{
-    token: 'fasfhjaifh',
-    loggedIn: false
-  },
-})
-
-export type AuthState = ReturnType<typeof state>
-
-export const getters: GetterTree<AuthState, RootState> = {
-  /**
-   * Define a getter here.
-   * For eg,
-   * statePropGetter: string => state.stateProp.toUpperCase()
-   */  token: state => state.user.token,
-}
-
-export const mutations: MutationTree<RootState> = {
-  /**
-   * Define mutation here.
-   * For eg,
-   * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
-   */
-  [MUT_SET_USER]: (state: any, user: User) => {
-    state.user = user;
+/** Auth Mutations */
+export const mutations: MutationTree<Auth> = {
+  [AuthMutationTypes.SET_LOGGED_IN]: (state: Auth, token: string) => {
+    state.loggedIn = true;
+    state.token = token;
   },
 
-  [MUT_RESET_USER]: (state: any) => {
-    state.user = Object.assign({}, state.user, {token: 'asdasd'})
-  }
-
-}
-
-export const actions: ActionTree<AuthState, RootState> = {
-  /**
-   * Define actions here,
-   * For eg,
-   * async fetchThings({ commit }) {
-   *  commit('CHANGE_STATE_PROP', 'New state property')
-   * }
-   */
-  async [ACT_COMPLETE_LOGIN]({ commit }) {
-    const user = <User> {
-      loggedIn: true,
-      token: "abcd"
-    }
-    commit(MUT_SET_USER, user)
-  },
-
-  async [ACT_RESET_TOKEN]({ commit }) {
-    commit(MUT_RESET_USER, {})
+  [AuthMutationTypes.SET_LOGGED_OUT]: (state: Auth) => {
+    state.loggedIn = false;
+    state.token = '';
   }
 }
+
+/** Auth Getters */
+export const getters: GetterTree<Auth, RootState> = {
+  [AuthGetterTypes.IS_LOGGED_IN]: state => state.loggedIn && state.loggedIn,
+  [AuthGetterTypes.GET_TOKEN]: state => { return state.loggedIn ? state.token : '' }
+}
+
+/** Auth Actions */
+export const actions: ActionTree<Auth, RootState> = {
+  async [AuthActionTypes.LOGIN]({ commit }) {
+    const cookie = this.$cookies.get(AUTH_COOKIE);
+    commit(AuthMutationTypes.SET_LOGGED_IN, cookie.jwt);
+  },
+
+  async [AuthActionTypes.LOGOUT]({ commit }) {
+    commit(AuthMutationTypes.SET_LOGGED_OUT)
+  }
+}
+
+export const state = function() :Auth {return <Auth>{
+  token: '',
+  loggedIn: false
+}};

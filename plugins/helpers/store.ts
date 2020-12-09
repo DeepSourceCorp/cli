@@ -1,6 +1,8 @@
 import { NuxtAppOptions } from "@nuxt/types"
 import { Inject } from "@nuxt/types/app"
 import { DocumentNode } from 'graphql'
+import { AuthGetterTypes } from '~/store/auth';
+import { GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apolloTypes';
 
 declare module 'vuex/types/index' {
   interface Store<S> {
@@ -10,30 +12,56 @@ declare module 'vuex/types/index' {
   }
 }
 
-export default ({ app }: { app: NuxtAppOptions }, inject: Inject) => {
-  inject('fetchGraphqlData', async (query: DocumentNode, variables: any) => {
+const getApolloContext = (app: NuxtAppOptions) :Record<string, any> | null => {
+  if (app.store) {
+    const token = app.store.getters[`auth/${AuthGetterTypes.GET_TOKEN}`]
+    return {
+      'headers': {
+        'Authorization': `JWT ${token}`
+      }
+    }
+  }
+  return {}
+}
+
+export default ({ app }: { app: NuxtAppOptions }, inject: Inject) :void=> {
+  inject('fetchGraphqlData', async (query: DocumentNode, variables: any) :Promise<GraphqlQueryResponse> => {
     /**
      * Abstracts graphql client code from actions.
      * Used to fetch data through queries.
      */
-    const client = app.apolloProvider?.defaultClient
-    return client?.query({
+    if (!app.apolloProvider || !app.apolloProvider.defaultClient) {
+      throw new Error("foo")
+
+    }
+    const client = app.apolloProvider.defaultClient
+    const context = getApolloContext(app);
+    return client.query({
       query,
-      variables
+      variables,
+      context
     });
   })
-  inject('applyGraphqlMutation', async (mutation: DocumentNode, variables: any) => {
+
+  inject('applyGraphqlMutation', async (mutation: DocumentNode, variables: any) :Promise<GraphqlMutationResponse> => {
     /**
      * Abstracts graphql client code from actions.
      * Used to apply graphql mutations.
      */
-    const client = app.apolloProvider?.defaultClient
-    return client?.mutate({
+    if (!app.apolloProvider || !app.apolloProvider.defaultClient) {
+      throw new Error("foo")
+
+    }
+    const context = getApolloContext(app);
+    const client = app.apolloProvider.defaultClient
+    return client.mutate({
       mutation,
-      variables
+      variables,
+      context
     });
   })
-  inject('getGQLAfter', (pageNumber: number, limit: number) => {
+
+  inject('getGQLAfter', (pageNumber: number, limit: number) :string => {
     /*
       Get the `after` value that can be used in a GQL query depending on
       the page number and the limit provided.
@@ -45,5 +73,6 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject) => {
     if (pageNumber !== 1) {
       return btoa(`arrayconnection:${endCursor}`)
     }
+    return ""
   })
 }

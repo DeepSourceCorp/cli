@@ -13,8 +13,9 @@ router.get("/callback", async (req: express.Request, res: express.Response) => {
 
   const asgardClient = AsgardClient.getInstance(client);
   const jwt :string = await asgardClient.getJWT(accessToken, 'github');
+  const cookie = { jwt }
 
-  res.cookie("jwt", jwt).redirect("/onboard/gh/deepsourcelabs/issue-preferences");
+  res.cookie("nova", JSON.stringify(cookie)).redirect("/onboard/gh/deepsourcelabs/issue-preferences");
 });
 
 router.get("/login", (req: express.Request, res: express.Response) => {

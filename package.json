@@ -8,8 +8,7 @@
     "start": "nuxt-ts start",
     "generate": "nuxt-ts generate",
     "test": "jest",
-    "generate-types": "graphql-codegen --config codegen.yml",
-    "build-fragment": "node apollo/schemaQuery.js"
+    "generate-types": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
