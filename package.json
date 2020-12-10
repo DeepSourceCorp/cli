@@ -11,7 +11,8 @@
     "generate-types": "graphql-codegen --config codegen.yml"
   },  
   "dependencies": {
-    "@deepsourcelabs/zeal": "^0.1.5",
+    "@deepsourcelabs/zeal": "0.1.9",
+    "@nuxt/content": "^1.11.1",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
     "axios": "^0.21.0",
@@ -45,10 +46,14 @@
     "babel-jest": "^26.5.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-prettier": "^3.1.4",
+    "fs": "0.0.1-security",
     "jest": "^26.5.0",
+    "net": "^1.0.2",
     "node-sass": "^4.14.1",
+    "nuxt-property-decorator": "^2.8.8",
     "prettier": "^2.1.2",
     "sass-loader": "^10.0.2",
+    "tls": "0.0.1",
     "ts-jest": "^26.4.1",
     "vue-jest": "^3.0.4"
   },

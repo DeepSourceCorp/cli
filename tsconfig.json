@@ -29,10 +29,15 @@
     "types": [
       "@types/node",
       "@nuxt/types",
+      "@nuxt/content",
       "vue-apollo/types",
       "@types/express",
       "@types/jest",
       "cookie-universal-nuxt/types"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
     ]
   },
   "exclude": [

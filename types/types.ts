@@ -3512,3 +3512,10 @@ export type Unnamed_30_Query = (
     )> }
   )> }
 );
+
+export interface Testimonial {
+  body?: string,
+  author_name?: string,
+  company?: string,
+  avatar_url?: string
+}

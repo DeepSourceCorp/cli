@@ -36,7 +36,7 @@ export default {
   serverMiddleware: ['~/api'],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
-  modules: ['@nuxtjs/apollo', 'cookie-universal-nuxt'],
+  modules: ['@nuxtjs/apollo', 'cookie-universal-nuxt', '@nuxt/content'],
   router: {},
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
