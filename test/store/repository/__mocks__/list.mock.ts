@@ -247,6 +247,8 @@ export const mockRepositoryList = (): RepositoryConnection => REPOSITORY_LIST;
 /**
  * Mock factory
  */
-export const mockRepository = (): RepositoryListModuleState => ({
+export const mockRepositoryListState = (): RepositoryListModuleState => ({
+  loading: false as boolean,
+  error: {},
   repositoryList: mockRepositoryList()
 });

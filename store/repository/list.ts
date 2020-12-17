@@ -1,11 +1,14 @@
-import { GetterTree, ActionTree, MutationTree } from 'vuex'
+import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
+import { GraphQLFormattedError } from 'graphql'
 import { RootState } from '~/store'
-import { RepositoryConnection, PageInfo, Maybe, Scalars } from '~/types/types'
+import { RepositoryConnection, PageInfo, Maybe, Scalars, Owner } from '~/types/types'
 import RepositoryListGQLQuery from '~/apollo/queries/repository/list.gql';
 
 export const ACT_FETCH_REPOSITORY_LIST = 'fetchRepositoryList'
 
-const MUT_SET_REPOSITORY_LIST = 'setRepositoryList';
+export const MUT_SET_ERROR = 'setRepositoryListError'
+export const MUT_SET_LOADING = 'setRepositoryListLoading'
+export const MUT_SET_REPOSITORY_LIST = 'setRepositoryList';
 
 export const state = () => ({
   /**
@@ -13,6 +16,8 @@ export const state = () => ({
    * For eg,
    * stateProp: 'this is a state property' as string
    */
+  loading: false as boolean,
+  error: {},
   repositoryList: {
     pageInfo: {} as PageInfo,
     totalCount: 0 as Maybe<Scalars['Int']>,
@@ -21,6 +26,7 @@ export const state = () => ({
 })
 
 export type RepositoryListModuleState = ReturnType<typeof state>
+export type RepositoryListActionContext = ActionContext<RepositoryListModuleState, RootState>
 
 export const getters: GetterTree<RepositoryListModuleState, RootState> = {
   /**
@@ -30,18 +36,41 @@ export const getters: GetterTree<RepositoryListModuleState, RootState> = {
    */
 }
 
-export const mutations: MutationTree<RootState> = {
+interface RepositoryListModuleMutations extends MutationTree<RepositoryListModuleState> {
+  [MUT_SET_LOADING]: (state: RepositoryListModuleState, value: boolean) => void;
+  [MUT_SET_ERROR]: (state: RepositoryListModuleState, error: { graphQLErrors: GraphQLFormattedError }) => void;
+  [MUT_SET_REPOSITORY_LIST]: (state: RepositoryListModuleState, repositoryList: RepositoryConnection) => void;
+}
+
+export const mutations: RepositoryListModuleMutations = {
   /**
    * Define mutation here.
    * For eg,
    * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
    */
-  [MUT_SET_REPOSITORY_LIST]: (state: any, repositoryList: RepositoryConnection) => {
-    state.repositoryList = repositoryList
+  [MUT_SET_LOADING]: (state, value) => {
+    state.loading = value
+  },
+  [MUT_SET_ERROR]: (state, error) => {
+    state.error = Object.assign({}, state.error, error)
+  },
+  [MUT_SET_REPOSITORY_LIST]: (state, repositoryList) => {
+    state.repositoryList = Object.assign({}, state.repositoryList, repositoryList)
   }
 }
 
-export const actions: ActionTree<RepositoryListModuleState, RootState> = {
+interface RepositoryListModuleActions extends ActionTree<RepositoryListModuleState, RootState> {
+  [ACT_FETCH_REPOSITORY_LIST]: (this: Store<RootState>, injectee: RepositoryListActionContext, variables: {
+    login: string,
+    provider: string,
+    isActivated: boolean,
+    limit: number,
+    currentPageNumber: number,
+    query: string
+  }) => Promise<void>;
+}
+
+export const actions: RepositoryListModuleActions = {
   /**
    * Define actions here,
    * For eg,
@@ -50,14 +79,22 @@ export const actions: ActionTree<RepositoryListModuleState, RootState> = {
    * }
    */
   async [ACT_FETCH_REPOSITORY_LIST]({ commit }, variables) {
-    const response = await this.$fetchGraphqlData(RepositoryListGQLQuery, {
+    commit(MUT_SET_LOADING, true)
+    await this.$fetchGraphqlData(RepositoryListGQLQuery, {
       login: variables.login,
       provider: this.$providerMetaMap[variables.provider].value,
       isActivated: variables.isActivated,
       limit: variables.limit,
       after: this.$getGQLAfter(variables.currentPageNumber, variables.limit),
       query: variables.query
+    }).then((response: { data: { owner: Owner } }) => {
+      // TODO: Toast("Successfully fetched repository list")
+      commit(MUT_SET_REPOSITORY_LIST, response.data.owner.repositories)
+      commit(MUT_SET_LOADING, false)
+    }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
+      commit(MUT_SET_ERROR, e)
+      commit(MUT_SET_LOADING, false)
+      // TODO: Toast("Failure in fetching repository list", e)
     })
-    commit(MUT_SET_REPOSITORY_LIST, response?.data.owner.repositories)
   }
 }

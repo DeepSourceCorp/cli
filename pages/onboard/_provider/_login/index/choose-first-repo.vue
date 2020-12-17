@@ -43,6 +43,9 @@ export default class ChooseFirstRepo extends Vue {
   @repositoryList.State
   repositoryList!: RepositoryConnection
 
+  @repositoryList.State
+  loading!: boolean
+  
   selectedRepository: Repository = {} as Repository
 
   async fetch() {

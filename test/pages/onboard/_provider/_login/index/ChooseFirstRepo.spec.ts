@@ -3,7 +3,7 @@ import Vuex, { Store } from 'vuex';
 
 import { RootState } from '~/store';
 import ChooseFirstRepo from '~/pages/onboard/_provider/_login/index/choose-first-repo.vue';
-import { mockRepository } from '~/test/store/repository/__mocks__/list.mock';
+import { mockRepositoryListState } from '~/test/store/repository/__mocks__/list.mock';
 
 // Vue config
 const localVue = createLocalVue();
@@ -25,7 +25,7 @@ describe('onboard/_provider/_login/index/choose-first-repo.vue', () => {
           modules: {
             list: {
               namespaced: true,
-              state: mockRepository()
+              state: mockRepositoryListState()
             }
           }
         }

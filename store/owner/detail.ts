@@ -106,13 +106,13 @@ export const actions: OwnerDetailModuleActions = {
       login: args.login,
       provider: this.$providerMetaMap[args.provider].value
     }).then((response: { data: { owner: Owner } }) => {
-      console.log("Successfully fetched issue preferences")
+      // TODO: Toast("Successfully fetched issue preferences")
       commit(MUT_SET_OWNER, response.data.owner)
       commit(MUT_SET_LOADING, false)
     }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
-      console.log("Failure in fetching issue preferences", e)
+      // TODO: Toast("Failure in fetching issue preferences", e)
     })
   },
   async [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]({ commit, state, getters }) {
@@ -123,12 +123,12 @@ export const actions: OwnerDetailModuleActions = {
         issueTypeSettings: getters[GET_REFINED_ISSUE_TYPE_SETTINGS]
       }
     }).then(() => {
-      console.log("Successfully submitted issue preferences")
+      // TODO: Toast("Successfully submitted issue preferences")
       commit(MUT_SET_LOADING, false)
     }).catch((e: { graphQLErrors: GraphQLFormattedError }) => {
       commit(MUT_SET_ERROR, e)
       commit(MUT_SET_LOADING, false)
-      console.log("Failure in submitting issue preferences", e)
+      // TODO: Toast("Failure in submitting issue preferences", e)
     })
   },
   [ACT_SET_OWNER]({ commit }, owner) {
