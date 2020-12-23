@@ -21,8 +21,8 @@
 
     <button
       v-if="Object.keys(selectedRepository).length"
-      @click="onSubmit"
       class="border cursor-pointer p-2 my-4"
+      @click="onSubmit"
     >
       Select {{ this.$route.params.login }}/{{ selectedRepository.name }}
     </button>
