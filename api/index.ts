@@ -1,6 +1,7 @@
 
 import express from 'express';
 import ghRouter from './controllers/github'
+import cookieParser from 'cookie-parser';
 
 const app: express.Application = express();
 const router: express.Router = express.Router();
@@ -14,7 +15,7 @@ const ghRoutes: express.Router = ghRouter;
 router.use('/github', ghRoutes);
 // router.use('/bitbucket', bbRoutes);
 // router.use('/gitlab', glRoutes);
-
+app.use(cookieParser());
 app.use(router);
 // app.use(cookieParser())
 

@@ -1,4 +1,13 @@
 
+declare module '*/social-auth.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SocialAuth: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updateOwnerSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -12,15 +21,6 @@ declare module '*/commitConfigToVcs.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/socialAuth.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const SocialAuth: DocumentNode;
 
   export default defaultDocument;
 }

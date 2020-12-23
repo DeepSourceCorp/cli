@@ -1,4 +1,4 @@
-import getApolloConfig from '../../../apollo/config/server';
+import getApolloConfig from '../../apollo/config/server';
 import { ApolloClient } from 'apollo-client';
 
 const config = getApolloConfig();

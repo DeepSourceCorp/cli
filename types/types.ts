@@ -902,6 +902,8 @@ export type IssueTypeSettingInput = {
 export type Mutation = {
   __typename?: 'Mutation';
   socialAuth?: Maybe<SocialAuthJwt>;
+  verifyToken?: Maybe<Verify>;
+  refreshToken?: Maybe<Refresh>;
   toggleRepositoryActivation?: Maybe<ToggleRepositoryActivationPayload>;
   createUserFeedback?: Maybe<CreateUserFeedbackPayload>;
   updateRepositorySettings?: Maybe<UpdateRepositorySettingsPayload>;
@@ -951,6 +953,16 @@ export type Mutation = {
 export type MutationSocialAuthArgs = {
   accessToken: Scalars['String'];
   provider: Scalars['String'];
+};
+
+
+export type MutationVerifyTokenArgs = {
+  token?: Maybe<Scalars['String']>;
+};
+
+
+export type MutationRefreshTokenArgs = {
+  refreshToken?: Maybe<Scalars['String']>;
 };
 
 
@@ -1420,6 +1432,14 @@ export type QueryTrendingRepositoriesArgs = {
 
 export type QueryNodeArgs = {
   id: Scalars['ID'];
+};
+
+export type Refresh = {
+  __typename?: 'Refresh';
+  payload: Scalars['GenericScalar'];
+  refreshExpiresIn: Scalars['Int'];
+  token: Scalars['String'];
+  refreshToken: Scalars['String'];
 };
 
 export type RemoveRepositoryCollaboratorInput = {
@@ -1898,6 +1918,9 @@ export type SocialAuthJwt = {
   __typename?: 'SocialAuthJWT';
   social?: Maybe<SocialType>;
   token?: Maybe<Scalars['String']>;
+  refreshToken?: Maybe<Scalars['String']>;
+  tokenExpiresIn?: Maybe<Scalars['Int']>;
+  refreshExpiresIn?: Maybe<Scalars['Int']>;
 };
 
 
@@ -2700,6 +2723,33 @@ export enum VcsProviderChoices {
   Gitlab = 'GITLAB'
 }
 
+export type Verify = {
+  __typename?: 'Verify';
+  payload: Scalars['GenericScalar'];
+};
+
+export type SocialAuthMutationVariables = Exact<{
+  provider: Scalars['String'];
+  accessToken: Scalars['String'];
+}>;
+
+
+export type SocialAuthMutation = (
+  { __typename?: 'Mutation' }
+  & { socialAuth?: Maybe<(
+    { __typename?: 'SocialAuthJWT' }
+    & Pick<SocialAuthJwt, 'token' | 'refreshToken'>
+    & { social?: Maybe<(
+      { __typename?: 'SocialType' }
+      & Pick<SocialType, 'uid'>
+      & { user: (
+        { __typename?: 'User' }
+        & Pick<User, 'fullName'>
+      ) }
+    )> }
+  )> }
+);
+
 export type Unnamed_1_MutationVariables = Exact<{
   input: UpdateOwnerSettingsInput;
 }>;
@@ -2723,28 +2773,6 @@ export type Unnamed_2_Mutation = (
   & { commitConfigToVcs?: Maybe<(
     { __typename?: 'CommitConfigToVCSPayload' }
     & Pick<CommitConfigToVcsPayload, 'ok'>
-  )> }
-);
-
-export type SocialAuthMutationVariables = Exact<{
-  provider: Scalars['String'];
-  accessToken: Scalars['String'];
-}>;
-
-
-export type SocialAuthMutation = (
-  { __typename?: 'Mutation' }
-  & { socialAuth?: Maybe<(
-    { __typename?: 'SocialAuthJWT' }
-    & Pick<SocialAuthJwt, 'token'>
-    & { social?: Maybe<(
-      { __typename?: 'SocialType' }
-      & Pick<SocialType, 'uid'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'fullName'>
-      ) }
-    )> }
   )> }
 );
 

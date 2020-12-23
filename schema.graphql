@@ -660,6 +660,8 @@ scalar JSONString
 
 type Mutation {
   socialAuth(accessToken: String!, provider: String!): SocialAuthJWT
+  verifyToken(token: String): Verify
+  refreshToken(refreshToken: String): Refresh
   toggleRepositoryActivation(input: ToggleRepositoryActivationInput!): ToggleRepositoryActivationPayload
   createUserFeedback(input: CreateUserFeedbackInput!): CreateUserFeedbackPayload
   updateRepositorySettings(input: UpdateRepositorySettingsInput!): UpdateRepositorySettingsPayload
@@ -798,6 +800,13 @@ type Query {
   repository(name: String!, owner: String!, provider: VCSProviderChoices!): Repository
   trendingRepositories(count: Int = 5, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
   node(id: ID!): Node
+}
+
+type Refresh {
+  payload: GenericScalar!
+  refreshExpiresIn: Int!
+  token: String!
+  refreshToken: String!
 }
 
 input RemoveRepositoryCollaboratorInput {
@@ -1111,6 +1120,9 @@ enum SilenceRuleSilenceLevel {
 type SocialAuthJWT {
   social: SocialType
   token: String
+  refreshToken: String
+  tokenExpiresIn: Int
+  refreshExpiresIn: Int
 }
 
 scalar SocialCamelJSON
@@ -1680,4 +1692,8 @@ enum VCSProviderChoices {
   GITHUB
   BITBUCKET
   GITLAB
+}
+
+type Verify {
+  payload: GenericScalar!
 }

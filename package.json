@@ -13,8 +13,8 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
-    "@types/jest": "^26.0.15",
     "axios": "^0.21.0",
+    "cookie-parser": "^1.4.5",
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.6.5",
     "cross-fetch": "^3.0.6",
@@ -25,6 +25,8 @@
     "nuxt-property-decorator": "^2.8.8"
   },
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/jest": "^26.0.19",
     "@graphql-codegen/cli": "^1.19.0",
     "@graphql-codegen/fragment-matcher": "^2.0.0",
     "@graphql-codegen/typescript": "^1.17.11",
