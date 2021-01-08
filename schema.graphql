@@ -61,16 +61,16 @@ type Analyzer implements Node {
   trigger: AnalyzerTrigger!
   owner: String
   isPrimary: Boolean!
-  starIssues(before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection!
+  starIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection!
   exampleConfig: String
-  issues(before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection!
-  reviews(before: String, after: String, first: Int, last: Int): AnalyzerReviewConnection!
-  checks(before: String, after: String, first: Int, last: Int): CheckConnection!
-  repositories(before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
-  userSet(before: String, after: String, first: Int, last: Int): UserConnection!
-  autofixRuns(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
-  transformertoolSet(before: String, after: String, first: Int, last: Int, q: String, language: String): TransformerToolConnection!
-  transformerRuns(before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
+  issues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection!
+  reviews(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerReviewConnection!
+  checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
+  repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
+  userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
+  autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
+  transformertoolSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, language: [String]): TransformerToolConnection!
+  transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
   analyzerLogo: String
   publishedOn: Date
   updatedOn: Date
@@ -156,7 +156,6 @@ type AutofixRun implements Node {
   finishedAt: DateTime
   errors: JSONString
   config: JSONString
-  resolvedIssues: Int
   resolvedIssuesMetadata: JSONString!
   pullRequestNumber: Int
   pullRequestStatus: AutofixRunPullRequestStatus!
@@ -166,7 +165,7 @@ type AutofixRun implements Node {
   issue: Issue
   analyzer: Analyzer
   repository: Repository!
-  checkIssues(before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   filesAffected: Int
   issuesAffected: Int
   changeset: GenericScalar
@@ -268,7 +267,7 @@ type Check implements Node {
   run: Run!
   triggeredAt: DateTime
   finishedAt: DateTime
-  resolvedIssues(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection!
+  resolvedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String]): RepositoryIssueConnection!
   extraData: JSONString!
   errors: GenericScalar
   metrics: JSONString!
@@ -276,8 +275,8 @@ type Check implements Node {
   githubCheckSuiteId: Int
   repository: Repository!
   metricsCaptured: [RepositoryMetricValue]
-  checkIssues(before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
-  concreteIssues(before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection
+  checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  concreteIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection
   finishedIn: Int
   finishedInDisplay: String
   issuesRaisedCount: Int
@@ -314,8 +313,8 @@ type CheckIssue implements Node {
   endLine: Int!
   endColumn: Int!
   extraData: JSONString!
-  inRepositoryIssue(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection!
-  autofixRuns(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
+  inRepositoryIssue(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String]): RepositoryIssueConnection!
+  autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
   sourceCodeMarkup: String
   issueType: String
   shortcode: String
@@ -374,6 +373,28 @@ input CommitConfigToVCSInput {
 type CommitConfigToVCSPayload {
   ok: Boolean
   clientMutationId: String
+}
+
+type Context {
+  staticRoot: String
+  apiRoot: String
+  websocketUrl: String
+  installationProvidersUrl: String
+  githubInstallationUrl: String
+  stripePublishableKey: String
+  appEnv: String
+  emptyAvatarUrl: String
+  debug: String
+  bitbucketAddonUrl: String
+  sentryDsn: String
+  userGroupUrl: String
+  onPrem: String
+  deepsourceCloudProduction: String
+  githubEnabled: Boolean
+  gitlabEnabled: Boolean
+  bitbucketEnabled: Boolean
+  supportEmail: String
+  isTransformersLicensed: Boolean
 }
 
 type CouponInfo {
@@ -438,6 +459,8 @@ scalar Date
 
 scalar DateTime
 
+scalar Decimal
+
 input DeleteSilenceRuleInput {
   silenceRuleId: ID!
   clientMutationId: String
@@ -451,6 +474,14 @@ type DeleteSilenceRulePayload {
 type Discount {
   coupon: CouponInfo
   credits: CreditsInfo
+}
+
+type EnterpriseBillingInfo {
+  seatsTotal: Int
+  seatsUsed: Int
+  plan: String
+  licenseExpiry: String
+  features: GenericScalar
 }
 
 input GenerateKeyPairForRepositoryInput {
@@ -614,9 +645,9 @@ type Issue implements Node {
   autofixAvailable: Boolean!
   autofixTitle: String
   isRecommended: Boolean!
-  starIssueInAnalyzers(before: String, after: String, first: Int, last: Int, categoryIn: String, q: String): AnalyzerConnection!
-  checkIssues(before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
-  autofixRuns(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
+  starIssueInAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
+  checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
   occurrenceCount: Int
   issueType: String
   seenIn: String
@@ -705,6 +736,7 @@ type Mutation {
   triggerAnalysisForRepository(input: TriggerAnalysisForRepositoryInput!): TriggerAnalysisForRepositoryPayload
   updateTechnologyPreference(input: UpdateTechnologyPreferenceInput!): UpdateTechnologyPreferencePayload
   updateBookmarkedIssue(input: UpdateBookmarkedIssueInput!): UpdateBookmarkedIssuePayload
+  triggerAdhocRun(input: TriggerAdHocRunInput!): TriggerAdHocRunPayload
 }
 
 interface Node {
@@ -725,16 +757,17 @@ type Owner implements Node {
   billingAddress: String
   customerId: String
   primaryUser: User
-  analyzers(before: String, after: String, first: Int, last: Int, categoryIn: String, q: String): AnalyzerConnection!
+  analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   team: Team
-  repositories(before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
-  userSet(before: String, after: String, first: Int, last: Int): UserConnection!
+  repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   ownerSetting: OwnerSetting
   isTeam: Boolean
   cards: GenericScalar
   stripeInvoices: GenericScalar
   numMembersTotal: Int
   billingInfo: BillingInfo
+  enterpriseBillingInfo: EnterpriseBillingInfo
   activeCard: Card
   hasPremiumPlan: Boolean
   planUpgradeUrl: String
@@ -784,21 +817,22 @@ type PageInfo {
 
 type Query {
   transformer(shortcode: String!): TransformerTool
-  transformers(before: String, after: String, first: Int, last: Int, q: String, language: String): TransformerToolConnection
+  transformers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, language: [String]): TransformerToolConnection
   transformerRun(runId: String!): TransformerRun!
   autofixRun(runId: String!): AutofixRun!
   issue(shortcode: String!): Issue
-  transactions(userId: Int!, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection
+  transactions(userId: Int!, offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection
   owner(login: String!, provider: VCSProviderChoices!): Owner
   team(login: String!, provider: VCSProviderChoices!): Team
-  checkIssues(checkId: ID!, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection
+  checkIssues(checkId: ID!, offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection
   check(checkId: ID!): Check!
   analyzer(shortcode: String!): Analyzer
-  analyzers(before: String, after: String, first: Int, last: Int, categoryIn: String, q: String): AnalyzerConnection
+  analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection
   viewer: User
-  repositoryIssues(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection
+  repositoryIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String]): RepositoryIssueConnection
   repository(name: String!, owner: String!, provider: VCSProviderChoices!): Repository
-  trendingRepositories(count: Int = 5, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  trendingRepositories(count: Int = 5, offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  context: Context
   node(id: ID!): Node
 }
 
@@ -851,7 +885,7 @@ type Repository implements Node {
   vcsProvider: VCSProviderChoices!
   vcsUrl: String!
   vcsRepoUid: String!
-  collaborators(before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection
+  collaborators(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection
   vcsCreatedAt: DateTime
   sshUrl: String!
   defaultBranchName: String
@@ -871,19 +905,19 @@ type Repository implements Node {
   encPublicKey: String
   isSubmoduleEnabled: Boolean!
   analyzeChangesetOnly: Boolean!
-  issues(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection
+  issues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String]): RepositoryIssueConnection
   config: GenericScalar!
   owner: Owner!
   widgets: [String]
   supportedAnalyzers: GenericScalar
   token: String!
   extraData: JSONString!
-  checks(before: String, after: String, first: Int, last: Int): CheckConnection!
-  autofixRuns(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection
-  transformerRuns(before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
-  runs(before: String, after: String, first: Int, last: Int, status: String): RunConnection
-  repositorycollaboratorSet(before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
-  silenceRules(before: String, after: String, first: Int, last: Int, silenceLevel: String): SilenceRuleConnection
+  checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
+  autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection
+  transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
+  runs(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
+  repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
+  silenceRules(offset: Int, before: String, after: String, first: Int, last: Int, silenceLevel: String): SilenceRuleConnection
   ownerLogin: String
   canBeActivated: Boolean
   lastAnalyzedAt: DateTime
@@ -906,7 +940,7 @@ type Repository implements Node {
   viewerPermission: RepositoryPermissionChoices
   autofixGithubAppInstallationUrl: String
   autofixBitbucketAddonInstallationUrl: String
-  addableMembers(before: String, after: String, first: Int, last: Int, q: String, role: String): TeamMemberConnection
+  addableMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection
 }
 
 type RepositoryCollaborator implements Node {
@@ -953,12 +987,12 @@ type RepositoryIssue implements Node {
   alive: Boolean
   id: ID!
   repositoryInstance: Repository!
-  checkIssues(before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
+  checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   shouldIgnore: Boolean!
   severity: RepositoryIssueSeverityChoices!
   lastSeen: DateTime
-  checkSet(before: String, after: String, first: Int, last: Int): CheckConnection!
-  userSet(before: String, after: String, first: Int, last: Int): UserConnection!
+  checkSet(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
+  userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   issueType: String
   title: String
   shortcode: String
@@ -1000,7 +1034,7 @@ type RepositoryMetricValue implements Node {
   modifiedAt: DateTime!
   alive: Boolean
   id: ID!
-  value: Float!
+  value: Decimal!
   extraData: JSONString!
   commitOid: String!
   checkInstance: Check!
@@ -1057,7 +1091,7 @@ type Run implements Node {
   config: GenericScalar
   extraData: JSONString!
   repository: Repository!
-  checks(before: String, after: String, first: Int, last: Int): CheckConnection!
+  checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   finishedIn: Int
   vcsCommitUrl: String
   gitCompareDisplay: String
@@ -1200,17 +1234,17 @@ type Team implements Node {
   primaryUser: User
   ownerPtr: Owner!
   name: String!
-  members(before: String, after: String, first: Int, last: Int): UserConnection!
+  members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
   syncPermissionsWithVcs: Boolean!
-  teammemberSet(before: String, after: String, first: Int, last: Int, q: String, role: String): TeamMemberConnection!
-  teammemberinvitationSet(before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection!
+  teammemberSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
+  teammemberinvitationSet(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection!
   basePermissionSet: TeamBasePermissionSet
   billingDetails: GenericScalar
   numMembersTotal: Int
   isViewerPrimaryUser: Boolean
-  teamMembers(before: String, after: String, first: Int, last: Int, q: String, role: String): TeamMemberConnection
-  invites(before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
+  teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection
+  invites(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
   invitationUrl: String
 }
 
@@ -1442,8 +1476,8 @@ type TransformerTool implements Node {
   shortcode: String!
   logo: String
   description: String!
-  transformerRuns(before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
-  reviews(before: String, after: String, first: Int, last: Int): TransformerReviewConnection!
+  transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
+  reviews(offset: Int, before: String, after: String, first: Int, last: Int): TransformerReviewConnection!
   language: String
   publishedOn: Date
   updatedOn: Date
@@ -1459,6 +1493,17 @@ type TransformerToolConnection {
 type TransformerToolEdge {
   node: TransformerTool
   cursor: String!
+}
+
+input TriggerAdHocRunInput {
+  config: String!
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type TriggerAdHocRunPayload {
+  ok: Boolean
+  clientMutationId: String
 }
 
 input TriggerAnalysisForRepositoryInput {
@@ -1659,21 +1704,21 @@ type User implements Node {
   email: String!
   primaryOwner: Owner
   avatar: String
-  preferredTechnologies(before: String, after: String, first: Int, last: Int, categoryIn: String, q: String): AnalyzerConnection!
-  bookmarkedIssues(before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: String): RepositoryIssueConnection!
-  socialAuth(before: String, after: String, first: Int, last: Int, uid: String, uid_In: String, provider: String, provider_In: String): SocialNodeConnection!
-  primaryOwnerships(before: String, after: String, first: Int, last: Int): OwnerConnection!
-  teams(before: String, after: String, first: Int, last: Int): TeamConnection!
-  teamMemberships(before: String, after: String, first: Int, last: Int, q: String, role: String): TeamMemberConnection!
-  repositorySet(before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
-  transactions(before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!
-  autofixrunSet(before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
-  repositorycollaboratorSet(before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
-  silenceRulesCreated(before: String, after: String, first: Int, last: Int, silenceLevel: String): SilenceRuleConnection!
+  preferredTechnologies(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
+  bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String]): RepositoryIssueConnection!
+  socialAuth(offset: Int, before: String, after: String, first: Int, last: Int, uid: String, uid_In: [String], provider: String, provider_In: [String]): SocialNodeConnection!
+  primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
+  teams(offset: Int, before: String, after: String, first: Int, last: Int): TeamConnection!
+  teamMemberships(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
+  repositorySet(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
+  transactions(offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!
+  autofixrunSet(offset: Int, before: String, after: String, first: Int, last: Int, status: String): AutofixRunConnection!
+  repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
+  silenceRulesCreated(offset: Int, before: String, after: String, first: Int, last: Int, silenceLevel: String): SilenceRuleConnection!
   fullName: String
   availableCredits: Float
   referralUrl: String
-  repositories(before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
   bookmarkedIssueCount: Int
 }
 

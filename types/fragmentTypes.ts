@@ -7,30 +7,30 @@
       const result: PossibleTypesResultData = {
   "possibleTypes": {
     "Node": [
-      "TransformerTool",
       "Analyzer",
-      "Issue",
-      "CheckIssue",
+      "AnalyzerReview",
+      "AutofixRun",
       "Check",
-      "Run",
+      "CheckIssue",
+      "Issue",
+      "Owner",
+      "OwnerSetting",
       "Repository",
       "RepositoryCollaborator",
-      "User",
-      "Owner",
-      "Team",
-      "TeamMember",
-      "TeamMemberInvitation",
-      "TeamBasePermissionSet",
-      "OwnerSetting",
       "RepositoryIssue",
+      "RepositoryMetricValue",
+      "Run",
       "SilenceRule",
       "SocialNode",
+      "Team",
+      "TeamBasePermissionSet",
+      "TeamMember",
+      "TeamMemberInvitation",
       "Transaction",
-      "AutofixRun",
+      "TransformerReview",
       "TransformerRun",
-      "RepositoryMetricValue",
-      "AnalyzerReview",
-      "TransformerReview"
+      "TransformerTool",
+      "User"
     ]
   }
 };

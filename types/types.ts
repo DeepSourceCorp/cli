@@ -1,5 +1,7 @@
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -7,12 +9,13 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  DateTime: any;
-  UUID: any;
-  JSONString: any;
-  GenericScalar: any;
-  SocialCamelJSON: any;
   Date: any;
+  DateTime: any;
+  Decimal: any;
+  GenericScalar: any;
+  JSONString: any;
+  SocialCamelJSON: any;
+  UUID: any;
 };
 
 export enum ActionChoice {
@@ -96,6 +99,7 @@ export type Analyzer = Node & {
 
 
 export type AnalyzerStarIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -107,6 +111,7 @@ export type AnalyzerStarIssuesArgs = {
 
 
 export type AnalyzerIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -118,6 +123,7 @@ export type AnalyzerIssuesArgs = {
 
 
 export type AnalyzerReviewsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -126,6 +132,7 @@ export type AnalyzerReviewsArgs = {
 
 
 export type AnalyzerChecksArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -134,6 +141,7 @@ export type AnalyzerChecksArgs = {
 
 
 export type AnalyzerRepositoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -146,6 +154,7 @@ export type AnalyzerRepositoriesArgs = {
 
 
 export type AnalyzerUserSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -154,6 +163,7 @@ export type AnalyzerUserSetArgs = {
 
 
 export type AnalyzerAutofixRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -163,16 +173,18 @@ export type AnalyzerAutofixRunsArgs = {
 
 
 export type AnalyzerTransformertoolSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
-  language?: Maybe<Scalars['String']>;
+  language?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type AnalyzerTransformerRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -253,14 +265,6 @@ export type ApplyCreditsToOwnerPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type AutofixableIssueDetail = {
-  __typename?: 'AutofixableIssueDetail';
-  shortcode?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  category?: Maybe<Scalars['String']>;
-  occurrenceCount?: Maybe<Scalars['Int']>;
-};
-
 export type AutofixRun = Node & {
   __typename?: 'AutofixRun';
   createdAt: Scalars['DateTime'];
@@ -273,7 +277,6 @@ export type AutofixRun = Node & {
   finishedAt?: Maybe<Scalars['DateTime']>;
   errors?: Maybe<Scalars['JSONString']>;
   config?: Maybe<Scalars['JSONString']>;
-  resolvedIssues?: Maybe<Scalars['Int']>;
   resolvedIssuesMetadata: Scalars['JSONString'];
   pullRequestNumber?: Maybe<Scalars['Int']>;
   pullRequestStatus: AutofixRunPullRequestStatus;
@@ -297,6 +300,7 @@ export type AutofixRun = Node & {
 
 
 export type AutofixRunCheckIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -340,6 +344,14 @@ export enum AutofixRunStatus {
   Cncl = 'CNCL',
   Fail = 'FAIL'
 }
+
+export type AutofixableIssueDetail = {
+  __typename?: 'AutofixableIssueDetail';
+  shortcode?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  category?: Maybe<Scalars['String']>;
+  occurrenceCount?: Maybe<Scalars['Int']>;
+};
 
 export type BillingInfo = {
   __typename?: 'BillingInfo';
@@ -415,6 +427,7 @@ export type Check = Node & {
 
 
 export type CheckResolvedIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -424,11 +437,12 @@ export type CheckResolvedIssuesArgs = {
   sort?: Maybe<Scalars['String']>;
   severity?: Maybe<Scalars['String']>;
   q?: Maybe<Scalars['String']>;
-  severityIn?: Maybe<Scalars['String']>;
+  severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type CheckCheckIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -440,6 +454,7 @@ export type CheckCheckIssuesArgs = {
 
 
 export type CheckConcreteIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -490,6 +505,7 @@ export type CheckIssue = Node & {
 
 
 export type CheckIssueInRepositoryIssueArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -499,11 +515,12 @@ export type CheckIssueInRepositoryIssueArgs = {
   sort?: Maybe<Scalars['String']>;
   severity?: Maybe<Scalars['String']>;
   q?: Maybe<Scalars['String']>;
-  severityIn?: Maybe<Scalars['String']>;
+  severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type CheckIssueAutofixRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -567,6 +584,29 @@ export type CommitConfigToVcsPayload = {
   __typename?: 'CommitConfigToVCSPayload';
   ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type Context = {
+  __typename?: 'Context';
+  staticRoot?: Maybe<Scalars['String']>;
+  apiRoot?: Maybe<Scalars['String']>;
+  websocketUrl?: Maybe<Scalars['String']>;
+  installationProvidersUrl?: Maybe<Scalars['String']>;
+  githubInstallationUrl?: Maybe<Scalars['String']>;
+  stripePublishableKey?: Maybe<Scalars['String']>;
+  appEnv?: Maybe<Scalars['String']>;
+  emptyAvatarUrl?: Maybe<Scalars['String']>;
+  debug?: Maybe<Scalars['String']>;
+  bitbucketAddonUrl?: Maybe<Scalars['String']>;
+  sentryDsn?: Maybe<Scalars['String']>;
+  userGroupUrl?: Maybe<Scalars['String']>;
+  onPrem?: Maybe<Scalars['String']>;
+  deepsourceCloudProduction?: Maybe<Scalars['String']>;
+  githubEnabled?: Maybe<Scalars['Boolean']>;
+  gitlabEnabled?: Maybe<Scalars['Boolean']>;
+  bitbucketEnabled?: Maybe<Scalars['Boolean']>;
+  supportEmail?: Maybe<Scalars['String']>;
+  isTransformersLicensed?: Maybe<Scalars['Boolean']>;
 };
 
 export type CouponInfo = {
@@ -635,6 +675,7 @@ export type CreditsInfo = {
 
 
 
+
 export type DeleteSilenceRuleInput = {
   silenceRuleId: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
@@ -650,6 +691,15 @@ export type Discount = {
   __typename?: 'Discount';
   coupon?: Maybe<CouponInfo>;
   credits?: Maybe<CreditsInfo>;
+};
+
+export type EnterpriseBillingInfo = {
+  __typename?: 'EnterpriseBillingInfo';
+  seatsTotal?: Maybe<Scalars['Int']>;
+  seatsUsed?: Maybe<Scalars['Int']>;
+  plan?: Maybe<Scalars['String']>;
+  licenseExpiry?: Maybe<Scalars['String']>;
+  features?: Maybe<Scalars['GenericScalar']>;
 };
 
 export type GenerateKeyPairForRepositoryInput = {
@@ -764,11 +814,6 @@ export type IgnoreIssueForTestPatternsInRepositoryPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type Invitee = {
-  email: Scalars['String'];
-  role: TeamMemberRoleChoices;
-};
-
 export enum InviteTeamMemberActionChoice {
   Create = 'CREATE',
   Cancel = 'CANCEL'
@@ -799,6 +844,11 @@ export type InviteTeamMembersPayload = {
   __typename?: 'InviteTeamMembersPayload';
   ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type Invitee = {
+  email: Scalars['String'];
+  role: TeamMemberRoleChoices;
 };
 
 export type Invoice = {
@@ -834,16 +884,18 @@ export type Issue = Node & {
 
 
 export type IssueStarIssueInAnalyzersArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categoryIn?: Maybe<Scalars['String']>;
+  categoryIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   q?: Maybe<Scalars['String']>;
 };
 
 
 export type IssueCheckIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -855,6 +907,7 @@ export type IssueCheckIssuesArgs = {
 
 
 export type IssueAutofixRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -947,6 +1000,7 @@ export type Mutation = {
   triggerAnalysisForRepository?: Maybe<TriggerAnalysisForRepositoryPayload>;
   updateTechnologyPreference?: Maybe<UpdateTechnologyPreferencePayload>;
   updateBookmarkedIssue?: Maybe<UpdateBookmarkedIssuePayload>;
+  triggerAdhocRun?: Maybe<TriggerAdHocRunPayload>;
 };
 
 
@@ -1180,6 +1234,11 @@ export type MutationUpdateBookmarkedIssueArgs = {
   input: UpdateBookmarkedIssueInput;
 };
 
+
+export type MutationTriggerAdhocRunArgs = {
+  input: TriggerAdHocRunInput;
+};
+
 export type Node = {
   id: Scalars['ID'];
 };
@@ -1209,6 +1268,7 @@ export type Owner = Node & {
   stripeInvoices?: Maybe<Scalars['GenericScalar']>;
   numMembersTotal?: Maybe<Scalars['Int']>;
   billingInfo?: Maybe<BillingInfo>;
+  enterpriseBillingInfo?: Maybe<EnterpriseBillingInfo>;
   activeCard?: Maybe<Card>;
   hasPremiumPlan?: Maybe<Scalars['Boolean']>;
   planUpgradeUrl?: Maybe<Scalars['String']>;
@@ -1220,16 +1280,18 @@ export type Owner = Node & {
 
 
 export type OwnerAnalyzersArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categoryIn?: Maybe<Scalars['String']>;
+  categoryIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   q?: Maybe<Scalars['String']>;
 };
 
 
 export type OwnerRepositoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1242,6 +1304,7 @@ export type OwnerRepositoriesArgs = {
 
 
 export type OwnerUserSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1308,6 +1371,7 @@ export type Query = {
   repositoryIssues?: Maybe<RepositoryIssueConnection>;
   repository?: Maybe<Repository>;
   trendingRepositories?: Maybe<RepositoryConnection>;
+  context?: Maybe<Context>;
   node?: Maybe<Node>;
 };
 
@@ -1318,12 +1382,13 @@ export type QueryTransformerArgs = {
 
 
 export type QueryTransformersArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
-  language?: Maybe<Scalars['String']>;
+  language?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -1344,6 +1409,7 @@ export type QueryIssueArgs = {
 
 export type QueryTransactionsArgs = {
   userId: Scalars['Int'];
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1366,6 +1432,7 @@ export type QueryTeamArgs = {
 
 export type QueryCheckIssuesArgs = {
   checkId: Scalars['ID'];
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1387,16 +1454,18 @@ export type QueryAnalyzerArgs = {
 
 
 export type QueryAnalyzersArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categoryIn?: Maybe<Scalars['String']>;
+  categoryIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   q?: Maybe<Scalars['String']>;
 };
 
 
 export type QueryRepositoryIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1406,7 +1475,7 @@ export type QueryRepositoryIssuesArgs = {
   sort?: Maybe<Scalars['String']>;
   severity?: Maybe<Scalars['String']>;
   q?: Maybe<Scalars['String']>;
-  severityIn?: Maybe<Scalars['String']>;
+  severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -1419,6 +1488,7 @@ export type QueryRepositoryArgs = {
 
 export type QueryTrendingRepositoriesArgs = {
   count?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1548,6 +1618,7 @@ export type Repository = Node & {
 
 
 export type RepositoryCollaboratorsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1558,6 +1629,7 @@ export type RepositoryCollaboratorsArgs = {
 
 
 export type RepositoryIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1567,11 +1639,12 @@ export type RepositoryIssuesArgs = {
   sort?: Maybe<Scalars['String']>;
   severity?: Maybe<Scalars['String']>;
   q?: Maybe<Scalars['String']>;
-  severityIn?: Maybe<Scalars['String']>;
+  severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type RepositoryChecksArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1580,6 +1653,7 @@ export type RepositoryChecksArgs = {
 
 
 export type RepositoryAutofixRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1589,6 +1663,7 @@ export type RepositoryAutofixRunsArgs = {
 
 
 export type RepositoryTransformerRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1598,6 +1673,7 @@ export type RepositoryTransformerRunsArgs = {
 
 
 export type RepositoryRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1607,6 +1683,7 @@ export type RepositoryRunsArgs = {
 
 
 export type RepositoryRepositorycollaboratorSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1617,6 +1694,7 @@ export type RepositoryRepositorycollaboratorSetArgs = {
 
 
 export type RepositorySilenceRulesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1646,12 +1724,13 @@ export type RepositoryRunArgs = {
 
 
 export type RepositoryAddableMembersArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['String']>;
+  role?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 export type RepositoryCollaborator = Node & {
@@ -1731,6 +1810,7 @@ export type RepositoryIssue = Node & {
 
 
 export type RepositoryIssueCheckIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1742,6 +1822,7 @@ export type RepositoryIssueCheckIssuesArgs = {
 
 
 export type RepositoryIssueCheckSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1750,6 +1831,7 @@ export type RepositoryIssueCheckSetArgs = {
 
 
 export type RepositoryIssueUserSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -1781,7 +1863,7 @@ export type RepositoryMetricValue = Node & {
   modifiedAt: Scalars['DateTime'];
   alive?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
-  value: Scalars['Float'];
+  value: Scalars['Decimal'];
   extraData: Scalars['JSONString'];
   commitOid: Scalars['String'];
   checkInstance: Check;
@@ -1853,6 +1935,7 @@ export type Run = Node & {
 
 
 export type RunChecksArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2020,6 +2103,7 @@ export type Team = Node & {
 
 
 export type TeamMembersArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2028,16 +2112,18 @@ export type TeamMembersArgs = {
 
 
 export type TeamTeammemberSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['String']>;
+  role?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type TeamTeammemberinvitationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2047,16 +2133,18 @@ export type TeamTeammemberinvitationSetArgs = {
 
 
 export type TeamTeamMembersArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['String']>;
+  role?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type TeamInvitesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2322,6 +2410,7 @@ export type TransformerTool = Node & {
 
 
 export type TransformerToolTransformerRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2331,6 +2420,7 @@ export type TransformerToolTransformerRunsArgs = {
 
 
 export type TransformerToolReviewsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2350,6 +2440,18 @@ export type TransformerToolEdge = {
   cursor: Scalars['String'];
 };
 
+export type TriggerAdHocRunInput = {
+  config: Scalars['String'];
+  repositoryId: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type TriggerAdHocRunPayload = {
+  __typename?: 'TriggerAdHocRunPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type TriggerAnalysisForRepositoryInput = {
   repoId: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
@@ -2360,6 +2462,7 @@ export type TriggerAnalysisForRepositoryPayload = {
   ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
+
 
 export type UpdateAccessControlSettingsInput = {
   teamId: Scalars['ID'];
@@ -2582,16 +2685,18 @@ export type User = Node & {
 
 
 export type UserPreferredTechnologiesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  categoryIn?: Maybe<Scalars['String']>;
+  categoryIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   q?: Maybe<Scalars['String']>;
 };
 
 
 export type UserBookmarkedIssuesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2601,23 +2706,25 @@ export type UserBookmarkedIssuesArgs = {
   sort?: Maybe<Scalars['String']>;
   severity?: Maybe<Scalars['String']>;
   q?: Maybe<Scalars['String']>;
-  severityIn?: Maybe<Scalars['String']>;
+  severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type UserSocialAuthArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   uid?: Maybe<Scalars['String']>;
-  uid_In?: Maybe<Scalars['String']>;
+  uid_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   provider?: Maybe<Scalars['String']>;
-  provider_In?: Maybe<Scalars['String']>;
+  provider_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type UserPrimaryOwnershipsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2626,6 +2733,7 @@ export type UserPrimaryOwnershipsArgs = {
 
 
 export type UserTeamsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2634,16 +2742,18 @@ export type UserTeamsArgs = {
 
 
 export type UserTeamMembershipsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
-  role?: Maybe<Scalars['String']>;
+  role?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
 export type UserRepositorySetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2656,6 +2766,7 @@ export type UserRepositorySetArgs = {
 
 
 export type UserTransactionsArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2665,6 +2776,7 @@ export type UserTransactionsArgs = {
 
 
 export type UserAutofixrunSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2674,6 +2786,7 @@ export type UserAutofixrunSetArgs = {
 
 
 export type UserRepositorycollaboratorSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2684,6 +2797,7 @@ export type UserRepositorycollaboratorSetArgs = {
 
 
 export type UserSilenceRulesCreatedArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2693,6 +2807,7 @@ export type UserSilenceRulesCreatedArgs = {
 
 
 export type UserRepositoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
@@ -2716,7 +2831,6 @@ export type UserEdge = {
   cursor: Scalars['String'];
 };
 
-
 export enum VcsProviderChoices {
   Github = 'GITHUB',
   Bitbucket = 'BITBUCKET',
@@ -2727,28 +2841,6 @@ export type Verify = {
   __typename?: 'Verify';
   payload: Scalars['GenericScalar'];
 };
-
-export type SocialAuthMutationVariables = Exact<{
-  provider: Scalars['String'];
-  accessToken: Scalars['String'];
-}>;
-
-
-export type SocialAuthMutation = (
-  { __typename?: 'Mutation' }
-  & { socialAuth?: Maybe<(
-    { __typename?: 'SocialAuthJWT' }
-    & Pick<SocialAuthJwt, 'token' | 'refreshToken'>
-    & { social?: Maybe<(
-      { __typename?: 'SocialType' }
-      & Pick<SocialType, 'uid'>
-      & { user: (
-        { __typename?: 'User' }
-        & Pick<User, 'fullName'>
-      ) }
-    )> }
-  )> }
-);
 
 export type Unnamed_1_MutationVariables = Exact<{
   input: UpdateOwnerSettingsInput;
@@ -2853,10 +2945,10 @@ export type Unnamed_6_QueryVariables = Exact<{
 
 export type Unnamed_6_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
+  & { repository?: Maybe<{ __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' }> }
 );
 
 export type Unnamed_7_QueryVariables = Exact<{
@@ -2866,10 +2958,10 @@ export type Unnamed_7_QueryVariables = Exact<{
 
 export type Unnamed_7_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
+  & { repository?: Maybe<{ __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' }> }
 );
 
 export type Unnamed_8_QueryVariables = Exact<{
@@ -2880,7 +2972,7 @@ export type Unnamed_8_QueryVariables = Exact<{
 
 export type Unnamed_8_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
+  & { repository?: Maybe<{ __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'config' | 'blobUrlRoot' | 'vcsProvider' | 'hasViewerEditAccess'>
     & { issue?: Maybe<(
@@ -2895,7 +2987,7 @@ export type Unnamed_8_Query = (
         )> }
       )>>> }
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' }> }
 );
 
 export type Unnamed_9_QueryVariables = Exact<{
@@ -2938,13 +3030,13 @@ export type Unnamed_10_QueryVariables = Exact<{
 
 export type Unnamed_10_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
+  & { repository?: Maybe<{ __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'raisedInFiles'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' }> }
 );
 
 export type Unnamed_11_QueryVariables = Exact<{
@@ -3297,14 +3389,14 @@ export type Unnamed_25_QueryVariables = Exact<{
 
 export type Unnamed_25_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
+  & { repository?: Maybe<{ __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'showInDiscover' | 'analyzeChangesetOnly' | 'defaultBranchName' | 'isSubmoduleEnabled' | 'config' | 'isActivated' | 'isPrivate'>
     & { issueTypeSettings?: Maybe<Array<Maybe<(
       { __typename?: 'IssueTypeSetting' }
       & Pick<IssueTypeSetting, 'name' | 'slug' | 'description' | 'isIgnoredInCheckStatus' | 'isIgnoredToDisplay'>
     )>>> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' }> }
 );
 
 export type Unnamed_26_QueryVariables = Exact<{
@@ -3385,10 +3477,10 @@ export type Unnamed_28_QueryVariables = Exact<{
 
 export type Unnamed_28_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'TransformerTool' } | { __typename?: 'Analyzer' } | { __typename?: 'Issue' } | { __typename?: 'CheckIssue' } | { __typename?: 'Check' } | { __typename?: 'Run' } | (
+  & { repository?: Maybe<{ __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'User' } | { __typename?: 'Owner' } | { __typename?: 'Team' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'OwnerSetting' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Transaction' } | { __typename?: 'AutofixRun' } | { __typename?: 'TransformerRun' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'TransformerReview' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SocialNode' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' }> }
 );
 
 export type Unnamed_29_QueryVariables = Exact<{
