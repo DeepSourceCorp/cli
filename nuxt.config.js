@@ -11,7 +11,11 @@ export default {
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
-  css: [],
+  css: [
+    '@deepsourcelabs/zeal/dist/tailwind.css',
+    '@deepsourcelabs/zeal/dist/layout.css',
+    '@deepsourcelabs/zeal/dist/typography.css'
+  ],
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: ['~/plugins/helpers/store.ts', '~/plugins/helpers/provider.ts'],
@@ -33,13 +37,10 @@ export default {
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: ['@nuxtjs/apollo', 'cookie-universal-nuxt'],
+  router: {},
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {},
-
-  tailwindcss: {
-    cssPath: '~/assets/css/tailwind.scss'
-  },
 
   googleFonts: {
     families: {

@@ -9,8 +9,9 @@
     "generate": "nuxt-ts generate",
     "test": "jest",
     "generate-types": "graphql-codegen --config codegen.yml"
-  },
+  },  
   "dependencies": {
+    "@deepsourcelabs/zeal": "^0.1.5",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
     "axios": "^0.21.0",
@@ -22,11 +23,10 @@
     "graphql-tag": "^2.11.0",
     "jest-transform-graphql": "^2.1.0",
     "nuxt": "^2.14.6",
-    "nuxt-property-decorator": "^2.8.8"
+    "nuxt-property-decorator": "^2.8.8",
+    "postcss": "7"
   },
   "devDependencies": {
-    "@types/cookie-parser": "^1.4.2",
-    "@types/jest": "^26.0.19",
     "@graphql-codegen/cli": "^1.19.0",
     "@graphql-codegen/fragment-matcher": "^2.0.0",
     "@graphql-codegen/typescript": "^1.17.11",
@@ -37,7 +37,9 @@
     "@nuxtjs/google-analytics": "^2.4.0",
     "@nuxtjs/google-fonts": "^1.0.3",
     "@nuxtjs/tailwindcss": "^3.1.0",
+    "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.8",
+    "@types/jest": "^26.0.19",
     "@vue/test-utils": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "^26.5.0",
