@@ -63,12 +63,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, namespace } from 'nuxt-property-decorator';
+import { Vue, Component } from 'nuxt-property-decorator';
 import { ZButton, ZDivider, ZIcon, ZCarousel, ZSlide, ZCard } from "@deepsourcelabs/zeal";
 import { Testimonial } from '~/types/types';
 import { contentFunc } from '@nuxt/content/types/content';
-
-const analyzerList = namespace('analyzerList')
 
 @Component({
   components: {
@@ -83,7 +81,7 @@ const analyzerList = namespace('analyzerList')
 
 export default class SignUp extends Vue {
 private testimonials: Array<Testimonial> = [];
-  content: any;
+  content: Array<Testimonial> = [];
   created() {
     this.testimonials = this.content;
   }
