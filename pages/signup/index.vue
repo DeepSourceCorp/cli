@@ -43,7 +43,7 @@
             <z-slide v-for="(testimonial, index) in testimonials" :key="index">
               <z-card>
                 <template slot="header">
-                  <img class="h-64 object-fill w-full" :src="testimonial.avatar_url">
+                  <div class="h-64 bg-cover w-full bg-local" :style="{backgroundImage: `url(${testimonial.avatar_url})`}"></div>
                 </template>
                 <template slot="body">
                   <p class="mt-8 text-lg text-vanilla-300 md:text-xl" v-html="testimonial.body"></p>
