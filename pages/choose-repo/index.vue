@@ -20,7 +20,7 @@
                     <div class="flex space-x-1">
                         <z-icon icon="activity" size="small"></z-icon>
                         <div class="text-xs flex-1">Actively analyzing</div>
-                        <!-- <z-button color="primary" size="small" class="p-0 h-0"><z-icon icon="plus" size="small" color="ink-400"></z-icon></z-button> -->
+                        <z-button color="primary" icon="plus" iconColor="ink-400" iconSize="small"></z-button>
                     </div>
                     <!-- Placeholders - Subtree - Repo list -->
                     <div class="ml-5 p-3 bg-ink-100 w-9/12"></div>
