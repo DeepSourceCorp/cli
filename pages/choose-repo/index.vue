@@ -72,8 +72,8 @@ import { ZButton, ZIcon, ZDivider, ZStepper, ZStep, ZInput, ZAvatar } from "@dee
 })
 export default class ChooseRepo extends Vue {
     // TODO: This will be from the API/Store once the user signs in
-    public userName: string = "Ruphaa"
-    public handleName:string = "Acme";
+    public userName = "Ruphaa"
+    public handleName = "Acme";
     private tabs: Array<Record<string, unknown>> = [{
                                                         name: "Overview",
                                                         active: false
