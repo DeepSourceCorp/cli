@@ -6,7 +6,7 @@
         <!-- Right section -->   
         <div class="hidden w-5/12 bg-ink-300 xl:flex flex-row-reverse items-center">
             <div class="bg-ink-200 w-11/12 h-96 flex">
-                <div class="flex flex-col space-y-4 h-full p-4 w-2/5 border border-solid border-l-0 border-t-0 border-b-0 border-ink-100">
+                <div class="flex flex-col space-y-4 h-full p-4 w-2/5 border-r border-ink-100">
                     <!-- Avatar and header -->
                     <div class="flex items-center space-x-2">
                         <!-- Avatar Component -->
@@ -43,7 +43,7 @@
                     <div class="flex text-center">
                         <div v-for="tab in tabs" 
                             :key="tab.name"
-                            class="text-vanilla-400 flex-1 pb-0.5 border border-solid border-t-0 border-l-0 border-r-0"
+                            class="text-vanilla-400 flex-1 pb-0.5 border-b"
                             :class="tab.active ? 'border-juniper' : 'border-ink-100'">
                             {{ tab.name }}
                         </div>
