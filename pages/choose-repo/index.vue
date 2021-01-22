@@ -10,9 +10,17 @@
                     <!-- Avatar and header -->
                     <div class="flex items-center space-x-2">
                         <!-- Avatar Component -->
-                        <div class="bg-juniper p-4 rounded-full"></div>
+                        <!-- TODO: Dummy Image URL, later will render from API/Store -->
+                        <z-avatar
+                            image="https://randomuser.me/api/portraits/women/24.jpg"
+                            :user-name="userName"
+                            size="md">
+                        </z-avatar>
                         <!-- Handle Name -->
-                        <div class="flex items-center space-x-1 font-medium text-base text-vanilla-200 cursor-pointer">Ruphaa<z-icon icon="chevron-down" size="small" color="vanilla-200"></z-icon></div>
+                        <div class="flex items-center space-x-1 font-medium text-base text-vanilla-200 cursor-pointer">
+                            {{ userName }}
+                            <z-icon icon="chevron-down" size="small" color="vanilla-200"></z-icon>
+                        </div>
                     </div>
                     <!-- Blank space -->
                     <div class="w-full p-10 bg-ink-100"></div>
@@ -33,9 +41,12 @@
                     <div class="p-3 bg-ink-100 w-full"></div>
                     <!-- Tab Component -->
                     <div class="flex text-center">
-                        <div class="text-vanilla-400 flex-1 pb-0.5 border border-solid border-t-0 border-l-0 border-r-0 border-ink-100 ">Overview</div>
-                        <div class="text-vanilla-400 flex-1 pb-0.5 border border-solid border-t-0 border-l-0 border-r-0 border-juniper">Issues</div>
-                        <div class="text-vanilla-400 flex-1 pb-0.5 border border-solid border-t-0 border-l-0 border-r-0 border-ink-100 ">Autofixes</div>
+                        <div v-for="tab in tabs" 
+                            :key="tab.name"
+                            class="text-vanilla-400 flex-1 pb-0.5 border border-solid border-t-0 border-l-0 border-r-0"
+                            :class="tab.active ? 'border-juniper' : 'border-ink-100'">
+                            {{ tab.name }}
+                        </div>
                     </div>
                     <!-- placeholder -->
                     <div class="p-6 bg-ink-100"></div>
@@ -60,7 +71,18 @@ import { ZButton, ZIcon, ZDivider, ZStepper, ZStep, ZInput, ZAvatar } from "@dee
   }
 })
 export default class ChooseRepo extends Vue {
-    public name!: string
-    handleName:string = "Acme";
+    // TODO: This will be from the API/Store once the user signs in
+    public userName: string = "Ruphaa"
+    public handleName:string = "Acme";
+    private tabs: Array<Record<string, unknown>> = [{
+                                                        name: "Overview",
+                                                        active: false
+                                                    }, {
+                                                        name: "Issues",
+                                                        active: true
+                                                    }, {
+                                                        name: "Autofixes",
+                                                        active: false
+                                                    }]
 }
 </script>
