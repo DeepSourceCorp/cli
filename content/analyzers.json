@@ -1,0 +1,94 @@
+{
+"analyzers": [{
+    "name": "python",
+    "label": "Python",
+    "icon": "lock",
+    "config": [{
+        "title": "runtime version",
+        "type": "boolean",
+        "selected": "2",
+        "values": [{
+            "value": "2",
+            "label": "2.x.x"
+        },{
+            "value": "3",
+            "label": "3.x.x"
+        }]
+    }]
+},{
+    "name": "go",
+    "label": "Go",
+    "config": [{
+        "title": "import path",
+        "type": "input",
+        "selected": "github.com/deepsourcelabs/marvin..."
+    }],
+    "icon": "cpu"
+},{
+    "name": "javascript",
+    "label": "JavaScript",
+    "config": [{
+        "title": "framework",
+        "type": "list",
+        "selected": "",
+        "values": [{
+            "value": "ember",
+            "label": "Ember JS"    
+            },{
+                "value": "angular",
+                "label": "Angular"
+            },{
+                "value": "react",
+                "label": "React"
+            },{
+                "value": "meteor",
+                "label": "Meteor"
+            },{
+                "value": "vue",
+                "label": "Vue"
+            }]
+    }, {
+        "title": "dialect",
+        "type": "boolean",
+        "selected": "typescript",
+        "values": [{
+            "value": "typescript",
+            "label": "Typescript"
+        }, {
+            "value": "flow",
+            "label": "Flow"
+        }]
+    }], 
+    "icon": "eye"
+},{
+    "name": "sql",
+    "label": "SQL",
+    "config": [],
+    "icon": "anchor"
+},{
+    "name": "docker",
+    "label": "Docker",
+    "config": [],
+    "icon": "archive"
+},{
+    "name": "terraform",
+    "label": "Terraform",
+    "config": [],
+    "icon": "award"
+},{
+    "name": "ruby",
+    "label": "Ruby",
+    "config": [],
+    "icon": "bell"
+},{
+    "name": "java",
+    "label": "Java",
+    "config": [],
+    "icon": "command"
+},{
+    "name": "shell",
+    "label": "Shell",
+    "config": [],
+    "icon": "coffee"
+}]
+}

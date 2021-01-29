@@ -66,7 +66,7 @@
 import { Vue, Component } from 'nuxt-property-decorator';
 import { ZButton, ZDivider, ZIcon, ZCarousel, ZSlide, ZCard } from "@deepsourcelabs/zeal";
 import { Testimonial } from '~/types/types';
-import { contentFunc } from '@nuxt/content/types/content';
+import { contentFunc, IContentDocument } from '@nuxt/content/types/content';
 
 @Component({
   components: {
@@ -81,12 +81,12 @@ import { contentFunc } from '@nuxt/content/types/content';
 
 export default class SignUp extends Vue {
 private testimonials: Array<Testimonial> = [];
-  content: Array<Testimonial> = [];
+  content !: IContentDocument;
   created() {
-    this.testimonials = this.content;
+    this.testimonials = this.content.testimonials;
   }
   async asyncData({ $content }: {$content: contentFunc}) {
-    const content = await $content('').fetch()
+    const content = await $content('user-testimonials').fetch()
     return { content }
   }
 }

@@ -1,5 +1,6 @@
 <template>
-  <div class="flex items-center py-2 gap-x-2 cursor-pointer hover:bg-ink-300">
+  <div class="flex items-center py-2 gap-x-2 cursor-pointer hover:bg-ink-300"
+        @click="handleClick">
     <z-icon :icon="icon"></z-icon>
     <div class="flex-1 text-xs sm:text-sm md:text-base">{{ handleName }}/{{ repoName }}</div>
     <z-icon :icon="language" color="robin"></z-icon>
@@ -24,5 +25,9 @@ export default class RepoListItem extends Vue {
     handleName!: string
     @Prop({default: 'aperture'})
     language!: string
+    
+    public handleClick(event: Event): void {
+        this.$emit('click', event)
+    }
 }
 </script>
