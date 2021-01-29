@@ -14,7 +14,8 @@
             "value": "3",
             "label": "3.x.x"
         }]
-    }]
+    }],
+    "active": false
 },{
     "name": "go",
     "label": "Go",
@@ -23,7 +24,8 @@
         "type": "input",
         "selected": "github.com/deepsourcelabs/marvin..."
     }],
-    "icon": "cpu"
+    "icon": "cpu",
+    "active": false
 },{
     "name": "javascript",
     "label": "JavaScript",
@@ -59,36 +61,43 @@
             "label": "Flow"
         }]
     }], 
-    "icon": "eye"
+    "icon": "eye",
+    "active": false
 },{
     "name": "sql",
     "label": "SQL",
     "config": [],
-    "icon": "anchor"
+    "icon": "anchor",
+    "active": false
 },{
     "name": "docker",
     "label": "Docker",
     "config": [],
-    "icon": "archive"
+    "icon": "archive",
+    "active": false
 },{
     "name": "terraform",
     "label": "Terraform",
     "config": [],
-    "icon": "award"
+    "icon": "award",
+    "active": false
 },{
     "name": "ruby",
     "label": "Ruby",
     "config": [],
-    "icon": "bell"
+    "icon": "bell",
+    "active": false
 },{
     "name": "java",
     "label": "Java",
     "config": [],
-    "icon": "command"
+    "icon": "command",
+    "active": false
 },{
     "name": "shell",
     "label": "Shell",
     "config": [],
-    "icon": "coffee"
+    "icon": "coffee",
+    "active": false
 }]
 }

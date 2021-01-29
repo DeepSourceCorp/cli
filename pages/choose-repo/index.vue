@@ -29,7 +29,7 @@
                                 :key="index">
                                 <repo-list-item handleName="acme"
                                             :repoName="repo.name"
-                                            @click="showAnalyzer()">
+                                            @click="showAnalyzer(repo)">
                                 </repo-list-item>
                                 <z-divider class="mt-0 mb-0"></z-divider>
                             </div>
@@ -69,7 +69,7 @@
                                         :name="analyzer.label"
                                         :icon="analyzer.icon"
                                         :configList="analyzer.config"
-                                        @click="removeAnalyzer">
+                                        @click="toggleAnalyzer(analyzer.name, false)">
                         </analyzer-card>
                         <!-- Empty Placeholder -->
                         <div class="h-24 md:h-40 p-6 border text-sm text-center border-dashed border-vanilla-400 rounded-sm md:min-w-1/2 md:w-1/2 box-border">
@@ -84,7 +84,7 @@
                                             :key="analyzer.name"
                                             :icon="analyzer.icon"
                                             :name="analyzer.label"
-                                            @click="selectAnalyzer(analyzer.name)">
+                                            @click="toggleAnalyzer(analyzer.name, true)">
                         </analyzer-title-card>
                     </div>
                 </div>
@@ -126,7 +126,11 @@
                                     iconSize="small"></z-button>
                     </div>
                     <!-- Placeholders - Subtree - Repo list -->
-                    <div class="ml-5 p-3 bg-ink-100 w-9/12"></div>
+                    <div v-if="selectedRepo" class="ml-5 text-xs w-9/12 flex space-x-2 text-vanilla-300 items-center">
+                        <z-icon icon="refresh-ccw" size="small" color="juniper"></z-icon>
+                        <span>{{selectedRepo}}</span>    
+                    </div>
+                    <div v-else class="ml-5 p-3 bg-ink-100 w-9/12"></div>
                     <div class="p-6 bg-ink-100"></div>
                 </div>
                 <div class="p-4 w-3/5 h-full flex flex-col space-y-6">
@@ -144,7 +148,23 @@
                         </div>
                     </div>
                     <!-- placeholder -->
-                    <div class="p-6 bg-ink-100"></div>
+                    <div v-if="selectedAnalyzers.length" class="flex">
+                        <div v-for="analyzer in previewAnalyzersList" 
+                            :key="analyzer.name"
+                            class="flex flex-wrap space-y-2">
+                            <!-- Recently added analyzer in expanded state -->
+                            <div v-if="analyzer.active"
+                                class="inline-flex bg-ink-200 px-2 py-1 items-center space-x-1 border-2 border-solid border-ink-400">
+                                <z-icon :icon="analyzer.icon" size="small" color="robin"></z-icon>
+                                <span class="font-bold text-sm text-vanilla-200">{{analyzer.label}}</span>
+                            </div>
+                            <!-- Analyzer in shrink state -->
+                            <div v-else class="inline-flex bg-ink-400 px-2 py-1 items-center space-x-1 border-r border-solid border-ink-200">
+                                <z-icon :icon="analyzer.icon" size="small" color="robin"></z-icon>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-else class="p-6 bg-ink-100"></div>
                 </div>
             </div>
         </div>
@@ -188,9 +208,11 @@ export default class ChooseRepo extends Vue {
     public handleName = "Acme";
     private repoName = ''
     private isAnalyzer = false
+    private selectedRepo!: string;
     private content!: IContentDocument;
     private selectedAnalyzers: Array<Record<string, unknown>> = []
     private availableAnalyzers: Array<Record<string, unknown>> = []
+    private previewAnalyzersList: Array<Record<string, unknown>> = []
     private tabs: Array<Record<string, unknown>> = [{
                                                         name: "Overview",
                                                         active: false
@@ -246,18 +268,35 @@ export default class ChooseRepo extends Vue {
     }
     public showFilters(): void {
         this.isAnalyzer = false;
+        this.selectedRepo = '';
     }
-    public showAnalyzer(): void {
+    public showAnalyzer(repo: Repo): void {
+        this.selectedRepo = repo.name.trim();
         this.isAnalyzer = true;
-        this.selectAnalyzer("python")
+        this.toggleAnalyzer("python", true)
     }
-    public selectAnalyzer(name: string): void {
-        const analyzerIndex = this.availableAnalyzers.findIndex(analyzer => analyzer.name === name);
-        this.selectedAnalyzers.unshift(...this.availableAnalyzers.splice(analyzerIndex, 1))
+    private getAnalyzerIndex(list: Array<Record<string, unknown>>, 
+                            analyzerName: string): number {
+        return (list.findIndex(analyzer => analyzer.name === analyzerName));
     }
-    public removeAnalyzer(name: string): void {
-        const analyzerIndex = this.selectedAnalyzers.findIndex(analyzer => analyzer.name === name);
-        this.availableAnalyzers.push(...this.selectedAnalyzers.splice(analyzerIndex, 1))
+    private setActiveAnalyzer(list: Array<Record<string, unknown>>, name: string): void {
+        this.selectedAnalyzers.forEach(analyzer => {
+            if(analyzer.name === name) analyzer.active = true;
+            else analyzer.active = false;
+        })
+    }
+    public toggleAnalyzer(name: string, isSelected: boolean): void {
+        this.previewAnalyzersList = []
+        let index!: number
+        if(isSelected) {
+            index = this.getAnalyzerIndex(this.availableAnalyzers, name)
+            this.selectedAnalyzers.unshift(...this.availableAnalyzers.splice(index, 1))
+        } else {
+            index = this.getAnalyzerIndex(this.selectedAnalyzers, name)
+            this.availableAnalyzers.push(...this.selectedAnalyzers.splice(index, 1))
+        }
+        this.setActiveAnalyzer(this.selectedAnalyzers, name)
+        this.previewAnalyzersList.unshift(...this.selectedAnalyzers)
     }
 }
 </script>
