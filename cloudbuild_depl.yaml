@@ -1,0 +1,11 @@
+timeout: 30m0s
+
+steps:
+
+- name: 'gcr.io/kaniko-project/executor:v1.0.0'
+  args:
+  - --destination=us.gcr.io/deepsource-production/bifrost:$TAG_NAME
+  - --dockerfile=Dockerfile
+  - --cache-ttl=500h
+  - --build-arg=DOMAIN=assets.deepsource.io
+  - --cache=false
