@@ -16,7 +16,7 @@ import (
 )
 
 // loginCmd represents the login command
-func loginCmd() *cobra.Command {
+func newLoginCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "login",
 		Short: "Authenticate to DeepSource using OAuth.",

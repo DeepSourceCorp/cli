@@ -10,14 +10,11 @@ import (
 var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
-func rootCmd() *cobra.Command {
-	cmd := &cobra.Command{
-		Use:   "deepsource-cli",
-		Short: "A CLI interface for DeepSource",
-		Long: `DeepSource
+var rootCmd = &cobra.Command{
+	Use:   "deepsource-cli",
+	Short: "A CLI interface for DeepSource",
+	Long: `DeepSource
 A Friendly Code-Review Tool, now in your Command Line.`,
-	}
-	return cmd
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -30,5 +27,5 @@ func Execute() {
 }
 
 func init() {
-	rootCmd.AddCommand(authCmd)
+	rootCmd.AddCommand(newAuthCmd())
 }
