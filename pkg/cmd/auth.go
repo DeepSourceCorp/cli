@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	authLoginCmd "github.com/deepsourcelabs/cli/cmd/login"
+	authLoginCmd "cli/cmd/login"
 
 	"github.com/spf13/cobra"
 )
