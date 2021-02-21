@@ -1,4 +1,4 @@
-package main
+package login
 
 import (
 	"crypto/rand"
@@ -12,7 +12,7 @@ import (
 )
 
 // Opens the browser at the provided URL
-func openBrowser(url string) {
+func OpenBrowser(url string) {
 	var err error
 
 	fmt.Printf("Opening the default browser for authentication....\n")
@@ -31,7 +31,7 @@ func openBrowser(url string) {
 	}
 }
 
-func findFreePort(port string) (string, error) {
+func FindFreePort(port string) (string, error) {
 	listener, err := net.Listen("tcp4", ":"+port)
 	if err == nil {
 		return port, nil
@@ -51,7 +51,7 @@ func findFreePort(port string) (string, error) {
 	return portString, nil
 }
 
-func calcState(length int) (string, error) {
+func CalcState(length int) (string, error) {
 	b := make([]byte, length/2)
 	_, err := rand.Read(b)
 	if err != nil {
@@ -60,11 +60,11 @@ func calcState(length int) (string, error) {
 	return hex.EncodeToString(b), nil
 }
 
-func makeURL(port string, state string) string {
+func MakeURL(port string, state string) string {
 	return fmt.Sprintf("https://deepsource.io/login/cli?state=%s&redirect_uri=https://localhost:%v", state, port)
 }
 
-func bindLocalServer(port string) (net.Listener, error) {
+func BindLocalServer(port string) (net.Listener, error) {
 	localhostURL := fmt.Sprintf("127.0.0.1:%v", port)
 	listener, err := net.Listen("tcp4", localhostURL)
 	if err != nil {
@@ -74,7 +74,7 @@ func bindLocalServer(port string) (net.Listener, error) {
 	return listener, nil
 }
 
-func saveAuthToken(token string) {
+func SaveAuthToken(token string) {
 	filePath := "~/.deepsource/token.txt"
 	if runtime.GOOS == "windows" {
 		// TODO: Figure this path out
