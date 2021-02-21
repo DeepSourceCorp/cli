@@ -1,34 +1,69 @@
 package login
 
+// Login Workflow
+// 1. Check the status if the user is already logged in or not
+// 2. If yes, displays the message that the user is already logged in.
+// 3. If no :
+// 		1. Find a free port. Default - 8080
+//      2. Calculate state
+// 		3. Open the browser at `https://deepsource.io/login/cli/state=<state>&redirect_uri=http://localhost:<port>`
+// 		4. Asgard does the magic required.
+// 		5. Get the query params - `auth_token` and `state`
+// 		6. Match the `state` to verify.
+// 		7. If verified, save the received `auth_token` in `~/.deepsource` and show Logged in, else show Error message
+
+// TODO: Check the status of user auth (Not planned as of now)
+// checkAuthStatus()
+
 import (
 	"crypto/rand"
 	"encoding/hex"
 	"fmt"
+	"io"
 	"log"
 	"net"
 	"os"
-	"os/exec"
 	"runtime"
+
+	"github.com/deepsourcelabs/cli/pkg/browser"
+	"github.com/spf13/cobra"
 )
 
-// Opens the browser at the provided URL
-func OpenBrowser(url string) {
-	var err error
+var open = browser.Open
+var canOpenBrowser = browser.CanOpenBrowser
 
-	fmt.Printf("Opening the default browser for authentication....\n")
-	switch runtime.GOOS {
-	case "linux":
-		err = exec.Command("xdg-open", url).Start()
-	case "windows":
-		err = exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
-	case "darwin":
-		err = exec.Command("open", url).Start()
-	default:
-		err = fmt.Errorf("unsupported platform")
-	}
+func Login(cmd *cobra.Command, args []string) {
+
+	var token string
+	var recState string
+	var serverPort string
+
+	defaultPort := "8080"
+
+	serverPort, err := FindFreePort(defaultPort)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln("Failed to find an available port. Error:", err)
 	}
+
+	// `state` calculation
+	state, _ := CalcState(20)
+	// get URL
+	url := MakeURL(serverPort, state)
+
+	// Open Browser for authentication at the respective URL
+	OpenBrowser(url)
+
+	// Receive authorization code, refresh token in a local server
+	auth_code, refresh_token, err := ReceiveAuthCode(serverPort)
+
+	// Send request to asgard for exchanging authorization code with auth token
+
+	if recState == state {
+		SaveAuthToken(token)
+	} else {
+		log.Fatalln("Error: States don't match. Authentication Failed.")
+	}
+
 }
 
 func FindFreePort(port string) (string, error) {
@@ -60,18 +95,39 @@ func CalcState(length int) (string, error) {
 	return hex.EncodeToString(b), nil
 }
 
+// Frame the URL to open browser at
 func MakeURL(port string, state string) string {
-	return fmt.Sprintf("https://deepsource.io/login/cli?state=%s&redirect_uri=https://localhost:%v", state, port)
+	return fmt.Sprintf("https://deepsource.io/login/cli?state=%s&redirect_port=%s", state, port)
 }
 
-func BindLocalServer(port string) (net.Listener, error) {
-	localhostURL := fmt.Sprintf("127.0.0.1:%v", port)
-	listener, err := net.Listen("tcp4", localhostURL)
-	if err != nil {
-		return nil, err
-	}
+// Opens the browser at the provided URL
+func OpenBrowser(url string) {
+	if isSSH() || !canOpenBrowser() {
+		fmt.Printf("To authenticate with DeepSource, please go to: %s\n", url)
+		// TODO: Add spinner
 
-	return listener, nil
+	} else {
+		var input io.Reader
+		input = os.Stdin
+		fmt.Printf("Press Enter to open the browser (^C to quit)")
+		fmt.Fscanln(input)
+
+		// TODO: Add loading spinner here
+
+		err := open(url)
+		if err != nil {
+			fmt.Println("Failed to open browser, please go to %s manually.", url)
+			// TODO: Handle the spinner action here
+		}
+	}
+}
+
+// Check SSH
+func isSSH() bool {
+	if os.Getenv("SSH_TTY") != "" || os.Getenv("SSH_CONNECTION") != "" || os.Getenv("SSH_CLIENT") != "" {
+		return true
+	}
+	return false
 }
 
 func SaveAuthToken(token string) {
