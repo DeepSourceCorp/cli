@@ -8,16 +8,15 @@ import (
 	"sync"
 )
 
-type AuthResponse struct {
-	authCode     string
-	state        string
-	refreshToken string
-}
-
 // Receive the code in the local server.
 // Return the auth code on receiving
 // The auth code will then be exchanged for auth token
-func (au *AuthResponse) ReceiveAuthCode(port string) (string, string, error) {
+func ReceiveAuthCode(port string) (string, string, string, error) {
+	var (
+		authCode     string
+		state        string
+		refreshToken string
+	)
 	// bind local server to receive token
 	listener, err := BindLocalServer(port)
 	if err != nil {
@@ -37,15 +36,15 @@ func (au *AuthResponse) ReceiveAuthCode(port string) (string, string, error) {
 		fmt.Println("Redirect Received")
 		params := r.URL.Query()
 		fmt.Println("Received Params - ", params)
-		au.authCode = params.Get("code")
-		au.state = params.Get("state")
-		au.refreshToken = params.Get("refresh_token")
+		authCode = params.Get("code")
+		state = params.Get("state")
+		refreshToken = params.Get("refresh_token")
 		listener.Close()
 		wg.Done()
 	})
 
 	wg.Wait()
-	return au.authCode, au.refreshToken, nil
+	return authCode, refreshToken, state, nil
 }
 
 func BindLocalServer(port string) (net.Listener, error) {

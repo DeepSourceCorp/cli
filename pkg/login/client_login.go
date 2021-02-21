@@ -34,7 +34,6 @@ var canOpenBrowser = browser.CanOpenBrowser
 
 func Login(cmd *cobra.Command, args []string) {
 
-	var token string
 	var recState string
 	var serverPort string
 
@@ -54,16 +53,16 @@ func Login(cmd *cobra.Command, args []string) {
 	OpenBrowser(url)
 
 	// Receive authorization code, refresh token in a local server
-	auth_code, refresh_token, err := ReceiveAuthCode(serverPort)
-
-	// Send request to asgard for exchanging authorization code with auth token
-
-	if recState == state {
-		SaveAuthToken(token)
-	} else {
-		log.Fatalln("Error: States don't match. Authentication Failed.")
+	authCode, refreshToken, recvState, err := ReceiveAuthCode(serverPort)
+	if recvState != state {
+		log.Fatalln("The incoming state doesn't match with the sent state. Danger of CSRF.")
 	}
 
+	// TODO: Send another request to asgard (For exchanging the authCode with a JWT and store it locally)
+
+	// After exchanging, save the JSON web-token and refresh-token locallly
+	// Send the data to be saved and filename as args to SaveAuthToken function
+	// SaveTokens(jsonWT, refreshToken)
 }
 
 func FindFreePort(port string) (string, error) {
@@ -130,7 +129,7 @@ func isSSH() bool {
 	return false
 }
 
-func SaveAuthToken(token string) {
+func SaveAuthToken(jsonWebToken string, refreshToken string) {
 	filePath := "~/.deepsource/token.txt"
 	if runtime.GOOS == "windows" {
 		// TODO: Figure this path out
@@ -141,7 +140,7 @@ func SaveAuthToken(token string) {
 		log.Fatalln("File not created. Error:", err)
 	}
 	defer f.Close()
-	_, err = f.WriteString(token)
+	_, err = f.WriteString(jsonWebToken)
 	if err != nil {
 		log.Fatalln("Contents not written in file. Error:", err)
 	}
