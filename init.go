@@ -8,8 +8,8 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
-	"time"
 
+	"github.com/deepsourcelabs/cli/cmd"
 	"github.com/getsentry/sentry-go"
 )
 
@@ -254,7 +254,10 @@ func run() int {
 }
 
 func main() {
-	returnCode := run()
-	defer os.Exit(returnCode)
-	defer sentry.Flush(2 * time.Second)
+
+	cmd.Execute()
+
+	// returnCode := run()
+	// defer os.Exit(returnCode)
+	// defer sentry.Flush(2 * time.Second)
 }
