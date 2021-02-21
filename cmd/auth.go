@@ -1,9 +1,7 @@
 package cmd
 
 import (
-	authLoginCmd "github.com/deepsourcelabs/lilith/cmd/login"
-	authLogoutCmd "github.com/deepsourcelabs/lilith/cmd/logout"
-	authRefreshCmd "github.com/deepsourcelabs/lilith/cmd/refresh_token"
+	authLoginCmd "github.com/deepsourcelabs/cli/cmd/login"
 
 	"github.com/spf13/cobra"
 )
@@ -17,7 +15,5 @@ func cmdAuth() *cobra.Command {
 	}
 
 	cmd.AddCommand(authLoginCmd.loginCmd())
-	cmd.AddCommand(authLogoutCmd.logoutCmd())
-	cmd.AddCommand(authRefreshCmd.refreshTokenCmd())
 	return cmd
 }
