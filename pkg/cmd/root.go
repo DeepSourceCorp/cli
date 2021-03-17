@@ -28,4 +28,5 @@ func Execute() {
 
 func init() {
 	rootCmd.AddCommand(newAuthCmd())
+	rootCmd.AddCommand(newAnalysisCmd())
 }

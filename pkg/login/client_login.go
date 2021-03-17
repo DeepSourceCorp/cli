@@ -34,7 +34,7 @@ var canOpenBrowser = browser.CanOpenBrowser
 
 func Login(cmd *cobra.Command, args []string) {
 
-	var recState string
+	// var recState string
 	var serverPort string
 
 	defaultPort := "8080"
@@ -53,7 +53,9 @@ func Login(cmd *cobra.Command, args []string) {
 	OpenBrowser(url)
 
 	// Receive authorization code, refresh token in a local server
-	authCode, refreshToken, recvState, err := ReceiveAuthCode(serverPort)
+	_, _, recvState, err := ReceiveAuthCode(serverPort)
+
+	// authCode, refreshToken, recvState, err := ReceiveAuthCode(serverPort)
 	if recvState != state {
 		log.Fatalln("The incoming state doesn't match with the sent state. Danger of CSRF.")
 	}
@@ -115,7 +117,7 @@ func OpenBrowser(url string) {
 
 		err := open(url)
 		if err != nil {
-			fmt.Println("Failed to open browser, please go to %s manually.", url)
+			fmt.Printf("Failed to open browser, please go to %s manually.", url)
 			// TODO: Handle the spinner action here
 		}
 	}
