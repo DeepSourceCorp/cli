@@ -8,6 +8,6 @@ test:
 test_setup:
 	mkdir -p ${CODE_PATH}
 	cd ${CODE_PATH} && ls -A1 | xargs rm -rf
-	git clone git@github.com:deepsourcelabs/july.git ${CODE_PATH}
+	git clone https://github.com/deepsourcelabs/cli ${CODE_PATH}
 	chmod +x /tmp/deepsource
 	cp ./tests/dummy/python_coverage.xml /tmp

@@ -20,19 +20,6 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
 
-      - name: Set up container
-        run: |
-          # copy SSH keys to ~/.ssh dir
-          mkdir -p ~/.ssh && touch ~/.ssh/id_rsa
-          # configure git to use ssh
-          git config --global url.git@github.com:.insteadOf https://github.com/
-
-      - name: copy ssh keys
-        run: 'echo "$SSH_KEY" > ~/.ssh/id_rsa && chmod 0600 ~/.ssh/id_rsa'
-        shell: bash
-        env:
-          SSH_KEY: ${{ secrets.SSH_KEY }}
-
       - name: Build the binary
         run: make build
 
