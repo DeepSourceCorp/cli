@@ -93,7 +93,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 	// Set env variables
 	cmd.Env = os.Environ()
 	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
-	cmd.Dir = "/code"
+	cmd.Dir = os.Getenv("CODE_PATH")
 
 	var stdout, stderr bytes.Buffer
 
@@ -138,7 +138,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 	// Set env variables
 	cmd.Env = os.Environ()
 	cmd.Env = append(cmd.Env, "DEEPSOURCE_DSN="+dsn)
-	cmd.Dir = "/code"
+	cmd.Dir = os.Getenv("CODE_PATH")
 
 	var stdout, stderr bytes.Buffer
 	cmd.Stdout = &stdout

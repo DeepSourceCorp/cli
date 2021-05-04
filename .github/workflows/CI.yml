@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches:
+      - master
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.15
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+
+      - name: Build the binary
+        run: make build
+
+      - name: Setup tests
+        run: make test_setup
+        env:
+          CODE_PATH: /home/runner/code
+
+      - name: Run tests
+        run: make test
+        env:
+          CODE_PATH: /home/runner/code
