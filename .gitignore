@@ -2,7 +2,8 @@
 vendor
 
 # Executable
-cli
+cmd/deepsource/deepsource
 
 # Goreleaser artifacts
 dist
+
