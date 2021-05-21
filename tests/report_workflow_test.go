@@ -102,7 +102,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 
 	err = cmd.Run()
 
-	outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
+	outStr, errStr := stdout.String(), stderr.String()
 	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
 
 	if err != nil {
@@ -146,7 +146,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 
 	err := cmd.Run()
 
-	outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
+	outStr, errStr := stdout.String(), stderr.String()
 	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
 
 	if err != nil {

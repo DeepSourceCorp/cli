@@ -5,7 +5,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewCmdRoot(buildVersion string, buildDate string) *cobra.Command {
+func NewCmdRoot(buildVersion, buildDate string) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "deepsource <command> <subcommand> [flags]",
 		Short: "DeepSource CLI",
