@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"runtime/debug"
 
 	"github.com/deepsourcelabs/cli/pkg/cmd"
@@ -15,7 +17,11 @@ func main() {
 
 	buildVersion, buildDate := getBuildInfo()
 
-	cmd.Execute(buildVersion, buildDate)
+	err := cmd.Execute(buildVersion, buildDate)
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
 
 func getBuildInfo() (string, string) {

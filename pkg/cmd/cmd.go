@@ -1,9 +1,6 @@
 package cmd
 
 import (
-	"fmt"
-	"os"
-
 	versionCmd "github.com/deepsourcelabs/cli/pkg/cmd/version"
 	"github.com/spf13/cobra"
 )
@@ -19,10 +16,11 @@ func NewCmdRoot(buildVersion string, buildDate string) *cobra.Command {
 	return cmd
 }
 
-func Execute(buildVersion string, buildDate string) {
+func Execute(buildVersion string, buildDate string) error {
 	cmd := NewCmdRoot(buildVersion, buildDate)
-	if err := cmd.Execute(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+	err := cmd.Execute()
+	if err != nil {
+		return err
 	}
+	return nil
 }
