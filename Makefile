@@ -1,5 +1,5 @@
 build:
-	GOOS=linux GOARCH=amd64 go build -tags static_all -o /tmp/deepsource .
+	cd cmd/deepsource && go build .
 
 test:
 	CGO_ENABLED=0 go test -cover -coverprofile=coverage.out -v ./tests/... -run TestReportKeyValueWorkflow
