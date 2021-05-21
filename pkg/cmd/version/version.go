@@ -20,6 +20,9 @@ func NewCmdVersion(version string, date string) *cobra.Command {
 
 func formatVersionOutput(version string, date string) string {
 
-	return fmt.Sprintf("%s %s", version, date)
+	// Changelog URL
+	releasePath := fmt.Sprintf("https://github.com/deepsourcelabs/cli/releases/tag/%s", version)
+
+	return fmt.Sprintf("DeepSource CLI %s\nReleased on %s\n%s", version, date, releasePath)
 
 }
