@@ -94,7 +94,7 @@ func run() int {
 	dsnSplitProtocolBody := strings.Split(dsn, "://")
 
 	// Check for valid protocol
-	if strings.HasPrefix(dsnSplitProtocolBody[0], "http") == false {
+	if !strings.HasPrefix(dsnSplitProtocolBody[0], "http") {
 		err = errors.New("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
 		fmt.Println(err)
 		sentry.CaptureException(err)
@@ -232,7 +232,7 @@ func run() int {
 		//   }
 		// }
 
-		if queryResponse.Data.CreateArtifact.Ok != true {
+		if !queryResponse.Data.CreateArtifact.Ok {
 			fmt.Println("DeepSource | Error | Reporting failed | ", queryResponse.Data.CreateArtifact.Error)
 			sentry.CaptureException(errors.New(queryResponse.Data.CreateArtifact.Error))
 			return 0

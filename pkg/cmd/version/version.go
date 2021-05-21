@@ -7,7 +7,7 @@ import (
 )
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdVersion(version string, date string) *cobra.Command {
+func NewCmdVersion(version, date string) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "version",
 		Short: "Get the version of the DeepSource CLI",
@@ -18,7 +18,7 @@ func NewCmdVersion(version string, date string) *cobra.Command {
 	return cmd
 }
 
-func formatVersionOutput(version string, date string) string {
+func formatVersionOutput(version, date string) string {
 
 	// Changelog URL
 	releasePath := fmt.Sprintf("https://github.com/deepsourcelabs/cli/releases/tag/%s", version)

@@ -8,7 +8,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-func NewCmdRoot(buildVersion string, buildDate string) *cobra.Command {
+func NewCmdRoot(buildVersion, buildDate string) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "deepsource <command> <subcommand> [flags]",
 		Short: "DeepSource CLI",
@@ -19,7 +19,7 @@ func NewCmdRoot(buildVersion string, buildDate string) *cobra.Command {
 	return cmd
 }
 
-func Execute(buildVersion string, buildDate string) {
+func Execute(buildVersion, buildDate string) {
 	cmd := NewCmdRoot(buildVersion, buildDate)
 	if err := cmd.Execute(); err != nil {
 		fmt.Println(err)
