@@ -18,9 +18,8 @@ func NewCmdRoot(buildVersion, buildDate string) *cobra.Command {
 
 func Execute(buildVersion string, buildDate string) error {
 	cmd := NewCmdRoot(buildVersion, buildDate)
-	err := cmd.Execute()
-	if err != nil {
-		return err
+	if err := cmd.Execute(); err != nil {
+	    return err
 	}
 	return nil
 }
