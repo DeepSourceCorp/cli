@@ -1,34 +1,25 @@
 package main
 
 import (
-	"fmt"
-	"os"
-	"runtime/debug"
+	"log"
 
-	"github.com/deepsourcelabs/cli/pkg/cmd"
+	"github.com/deepsourcelabs/cli/command"
+	"github.com/deepsourcelabs/cli/version"
 )
 
-var Version = "development"
+var (
+	// Version is the build version.  This is set using ldflags -X
+	Version = "development"
 
-// Date is dynamically set at build time in the Makefile.
-var Date = "YYYY-MM-DD" // YYYY-MM-DD
+	// Date is the build date.  This is set using ldflags -X
+	Date = "YYYY-MM-DD" // YYYY-MM-DD
+)
 
 func main() {
 
-	buildVersion, buildDate := getBuildInfo()
+	version.SetBuildInfo(Version, Date, "", "")
 
-	err := cmd.Execute(buildVersion, buildDate)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
+	if err := command.Execute(); err != nil {
+		log.Fatal(err)
 	}
-}
-
-func getBuildInfo() (string, string) {
-
-	if info, ok := debug.ReadBuildInfo(); ok && info.Main.Version != "(devel)" {
-		Version = info.Main.Version
-	}
-
-	return Version, Date
 }
