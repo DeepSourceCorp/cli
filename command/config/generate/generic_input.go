@@ -117,13 +117,14 @@ func (o *Options) collectTestPatterns() error {
 func getMatchingFiles(path string) []string {
 
 	// Geting matching dirs and files using glob
-	files, _ := filepath.Glob(path + "**")
+	files, _ := filepath.Glob(path + "*")
 
+	cwd, _ := os.Getwd()
 	// Iterating over files and appending "/" to directories
-	for _, file := range files {
-		fileInfo, _ := os.Stat(file)
+	for index, file := range files {
+		fileInfo, _ := os.Stat(filepath.Join(cwd, file))
 		if fileInfo.IsDir() {
-			file = file + "/"
+			files[index] = files[index] + "/"
 		}
 	}
 	return files
