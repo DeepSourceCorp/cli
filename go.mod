@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.2.12
+	github.com/fatih/color v1.12.0 // indirect
 	github.com/getsentry/sentry-go v0.11.0
 	github.com/kyokomi/emoji/v2 v2.2.8
 	github.com/mattn/go-colorable v0.1.8 // indirect

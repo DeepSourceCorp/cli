@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/fatih/color"
 	"github.com/kyokomi/emoji/v2"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
@@ -53,7 +54,13 @@ func (o *Options) Run() {
 		os.Exit(1)
 	}
 
-	emoji.Println(":beer: DeepSource Config Generated :tada::sparkles:")
+	cwd, err := os.Getwd()
+
+	fmt.Println()
+	c := color.New(color.FgGreen)
+	successOutput := emoji.Sprintf(":sparkles::tada: DeepSource config generated at %s/.deepsource.toml", cwd)
+	c.Println(successOutput)
+	// emoji.Println(":beer: DeepSource Config Generated :tada::sparkles:")
 }
 
 func (o *Options) generateDeepSourceConfig() {
