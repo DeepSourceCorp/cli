@@ -136,7 +136,7 @@ func (o *Options) writeConfigToFile() error {
 
 	// Creating file
 	cwd, _ := os.Getwd()
-	f, err := os.Create(filepath.Join(cwd + "/.deepsource.toml"))
+	f, err := os.Create(filepath.Join(cwd,".deepsource.toml"))
 	if err != nil {
 		return err
 	}
