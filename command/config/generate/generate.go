@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 
 	"github.com/fatih/color"
 	"github.com/kyokomi/emoji/v2"
@@ -14,13 +15,13 @@ import (
 
 // Options holds the metadata.
 type Options struct {
+	GoImportRoot          string // Mandatory meta for Go
+	JavaVersion           string // Mandatory meta for JAVA
+	GeneratedConfig       string
 	ActivatedAnalyzers    []string
 	ActivatedTransformers []string
 	ExcludePatterns       []string
 	TestPatterns          []string
-	GoImportRoot          string // Mandatory meta for Go
-	JavaVersion           string // Mandatory meta for JAVA
-	GeneratedConfig       string
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -44,27 +45,38 @@ func (o *Options) Validate() error {
 // Run executes the command.
 func (o *Options) Run() {
 
-	o.collectUserInput()
-
-	o.generateDeepSourceConfig()
-
-	err := o.writeConfigToFile()
+	// Collect user input
+	err := o.collectUserInput()
 	if err != nil {
-		fmt.Println("Error while writing config to project directory. Exiting...")
+		fmt.Println("\nError occured while collecting input.Exiting...")
 		os.Exit(1)
 	}
 
-	cwd, err := os.Getwd()
+	// Generates config based on user input
+	err = o.generateDeepSourceConfig()
+	if err != nil {
+		fmt.Println("\nError occured while generating config from input.Exiting...")
+		os.Exit(1)
+	}
 
-	fmt.Println()
+	// Write the generated config to a file
+	err = o.writeConfigToFile()
+	if err != nil {
+		fmt.Println("\nError while writing config to project directory. Exiting...")
+		os.Exit(1)
+	}
+
+	// Success output ricing
+	cwd, err := os.Getwd()
 	c := color.New(color.FgGreen)
-	successOutput := emoji.Sprintf(":sparkles::tada: DeepSource config generated at %s/.deepsource.toml", cwd)
+	successOutput := emoji.Sprintf("\n:sparkles::tada: DeepSource config generated at %s/.deepsource.toml", cwd)
 	c.Println(successOutput)
-	// emoji.Println(":beer: DeepSource Config Generated :tada::sparkles:")
 }
 
+// Generates DeepSource config based on the inputs from the user in Options struct
 func (o *Options) generateDeepSourceConfig() {
 
+	// Copying everything from Options struct to DeepSource config based struct
 	config := DSConfig{
 		Version:         0,
 		ExcludePatterns: []string{},
@@ -78,6 +90,7 @@ func (o *Options) generateDeepSourceConfig() {
 	config.TestPatterns = o.TestPatterns
 	config.ExcludePatterns = o.ExcludePatterns
 
+	// Copying analyzers from Options struct to DSConfig based "config" struct
 	for index, analyzer := range o.ActivatedAnalyzers {
 
 		config.Analyzers = append(config.Analyzers, Analyzer{
@@ -87,6 +100,8 @@ func (o *Options) generateDeepSourceConfig() {
 			DependencyFilePaths: []string{},
 			Thresholds:          nil,
 		})
+
+		// Adding these conditions since meta of these two analyzers(Go and Java) is mandatory
 		if analyzer == "Go" {
 			config.Analyzers[index].Meta.ImportRoot = o.GoImportRoot
 		}
@@ -96,6 +111,7 @@ func (o *Options) generateDeepSourceConfig() {
 		}
 	}
 
+	// Copying transformers from Options struct to DSConfig based "config" struct
 	for _, transformer := range o.ActivatedTransformers {
 		config.Transformers = append(config.Transformers, Transformer{
 			Name:    transformer,
@@ -103,26 +119,29 @@ func (o *Options) generateDeepSourceConfig() {
 		})
 	}
 
+	// Encoding the DSConfig based "config" struct to TOML
 	var buf bytes.Buffer
 	err := toml.NewEncoder(&buf).Order(toml.OrderPreserve).Encode(config)
 	if err != nil {
 		log.Fatal(err)
 	}
+	// Convert the TOML encoded buffer to string
 	o.GeneratedConfig = buf.String()
 }
 
+// Writes the generated TOML config into a file
 func (o *Options) writeConfigToFile() error {
 
-	f, err := os.Create(".deepsource.toml")
-
+	// Creating file
+	cwd, _ := os.Getwd()
+	f, err := os.Create(filepath.Join(cwd + "/.deepsource.toml"))
 	if err != nil {
 		return err
 	}
-
 	defer f.Close()
 
+	// Writing the string to the file
 	_, writeError := f.WriteString(o.GeneratedConfig)
-
 	if writeError != nil {
 		return writeError
 	}

@@ -1,18 +1,3 @@
-// ============
-// Questions :
-
-// 1. What analyzers do you want to activate for this project?
-// - Multi-select , show a list of analyzers, user selects the ones needed, push them to the activatedAnalyzers slice
-// - Validation : Can't be 0
-
-// 2. Which transformers do you want to activate for this project?
-
-// 3. Exclude Patterns
-// - User writes file name, tab to autocomplete filename
-
-// 4. Test Patterns
-// ===========
-
 package generate
 
 import (
@@ -24,6 +9,7 @@ import (
 	"github.com/AlecAivazis/survey/v2/terminal"
 )
 
+// Collects user
 func (o *Options) collectUserInput() {
 
 	// TODO: Remove this hard coded data
