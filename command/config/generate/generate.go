@@ -3,7 +3,6 @@ package generate
 import (
 	"bytes"
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 
@@ -74,7 +73,7 @@ func (o *Options) Run() {
 }
 
 // Generates DeepSource config based on the inputs from the user in Options struct
-func (o *Options) generateDeepSourceConfig() {
+func (o *Options) generateDeepSourceConfig() error {
 
 	// Copying everything from Options struct to DeepSource config based struct
 	config := DSConfig{
@@ -123,10 +122,13 @@ func (o *Options) generateDeepSourceConfig() {
 	var buf bytes.Buffer
 	err := toml.NewEncoder(&buf).Order(toml.OrderPreserve).Encode(config)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+
 	// Convert the TOML encoded buffer to string
 	o.GeneratedConfig = buf.String()
+
+	return nil
 }
 
 // Writes the generated TOML config into a file
