@@ -1,0 +1,113 @@
+{
+  "data": {
+    "analyzers": {
+      "edges": [
+        {
+          "node": {
+            "shortcode": "test-coverage",
+            "metaSchema": "{}",
+            "transformertoolSet": { "edges": [] }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "docker",
+            "metaSchema": "{\"type\": \"object\", \"properties\": {\"dockerfile_paths\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"title\": \"Custom Dockerfile paths\", \"description\": \"Full path of all custom Dockerfiles used. The Dockerfile in the repository's root is analyzed by default.\", \"placeholder\": \"src/Dockerfile\\nDockerfile.production\"}, \"trusted_registries\": {\"type\": \"array\", \"items\": {\"type\": \"string\", \"title\": \"Trusted registries\", \"description\": \"List of trusted registries from where images are pulled in Dockerfiles.\"}}}, \"optional_required\": [\"dockerfile_paths\"], \"additionalProperties\": false}",
+            "transformertoolSet": { "edges": [] }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "java",
+            "metaSchema": "{\"type\": \"object\", \"properties\": {\"java_version\": {\"enum\": [\"8\", \"9\", \"10\", \"11\", \"12\", \"13\", \"14\"], \"type\": \"string\", \"title\": \"Java Runtime version\", \"description\": \"The version of the Java runtime to use. OpenJDK versions 8 to 14 are supported.\"}, \"gradle_modules\": {\"type\": \"array\", \"items\": {\"type\": \"string\", \"examples\": [\":\", \":mainModule\"]}, \"title\": \"Gradle Modules\", \"description\": \"A list of gradle modules to analyze\"}, \"runtime_version\": {\"enum\": [\"8\", \"9\", \"10\", \"11\", \"12\", \"13\", \"14\"], \"type\": \"string\", \"title\": \"Java Runtime version\", \"description\": \"The version of the Java runtime to use. OpenJDK versions 8 to 14 are supported.\"}}, \"optional_required\": [\"runtime_version\"]}",
+            "transformertoolSet": {
+              "edges": [
+                {
+                  "node": {
+                    "name": "Google Java Format",
+                    "shortcode": "google-java-format"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "python",
+            "metaSchema": "{\"type\": \"object\", \"properties\": {\"type_checker\": {\"enum\": [\"mypy\"], \"type\": \"string\", \"title\": \"Type checker\", \"description\": \"If you're using type annotations in your code, enable type checking with one of the checkers available.\"}, \"max_line_length\": {\"type\": \"integer\", \"title\": \"Maximum line length\", \"default\": 100, \"minimum\": 79, \"description\": \"Customize this according to your project's conventions.\"}, \"runtime_version\": {\"enum\": [\"3.x.x\", \"2.x.x\"], \"type\": \"string\", \"title\": \"Runtime version\", \"default\": \"3.x.x\", \"description\": \"Set it to the least version of Python that your code runs on.\"}, \"skip_doc_coverage\": {\"type\": \"array\", \"items\": {\"enum\": [\"magic\", \"init\", \"class\", \"module\", \"nonpublic\"], \"type\": \"string\"}, \"title\": \"Skip in doc coverage\", \"description\": \"Types of objects that should be skipped while calculating documentation coverage.\", \"additionalProperties\": false}, \"additional_builtins\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"title\": \"Additional builtins\", \"description\": \"Additional names supposed to be defined in builtins\"}}, \"optional_required\": [\"runtime_version\"], \"additionalProperties\": false}",
+            "transformertoolSet": {
+              "edges": [
+                { "node": { "name": "Black", "shortcode": "black" } },
+                { "node": { "name": "Yapf", "shortcode": "yapf" } },
+                { "node": { "name": "Autopep8", "shortcode": "autopep8" } },
+                { "node": { "name": "isort", "shortcode": "isort" } }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "javascript",
+            "metaSchema": "{\"type\": \"object\", \"required\": [], \"properties\": {\"dialect\": {\"enum\": [\"typescript\", \"flow\"], \"type\": \"string\", \"title\": \"Dialect of JavaScript\", \"labels\": {\"flow\": \"Flow\", \"typescript\": \"TypeScript\"}, \"description\": \"The dialect of Javascript used in the Project. Currently supports TypeScript and Flow.\"}, \"plugins\": {\"type\": \"array\", \"items\": {\"enum\": [\"react\", \"vue\", \"ember\", \"meteor\", \"angularjs\", \"angular\"]}, \"title\": \"Frameworks\", \"labels\": {\"vue\": \"Vue\", \"ember\": \"Ember\", \"react\": \"React\", \"meteor\": \"Meteor\", \"angular\": \"Angular\", \"angularjs\": \"AngularJS\"}, \"description\": \"The frameworks used in the Project. Currently supports React, Vue, Ember, Meteor, AngularJS and Angular\"}, \"environment\": {\"type\": \"array\", \"items\": {\"enum\": [\"nodejs\", \"browser\", \"jest\", \"mocha\", \"jasmine\", \"jquery\", \"mongo\", \"cypress\"]}, \"title\": \"Runtime environments\", \"labels\": {\"jest\": \"Jest\", \"mocha\": \"Mocha\", \"mongo\": \"Mongo\", \"jquery\": \"Jquery\", \"nodejs\": \"Node.js\", \"browser\": \"Browser\", \"cypress\": \"Cypress\", \"jasmine\": \"Jasmine\"}, \"description\": \"Define the environments that the application runs in. Helps the analyzer recognize runtime-specific names, like `it`, `console` and `window`. Setting this reduces false-positives.\", \"additionalProperties\": false}, \"style_guide\": {\"enum\": [\"airbnb\", \"google\", \"standard\"], \"type\": \"string\", \"title\": \"Preferred style guide\", \"labels\": {\"airbnb\": \"Airbnb\", \"google\": \"Google\", \"standard\": \"Standard\"}, \"description\": \"The preferred style guide to be used in the project. Currently supports Airbnb,Google and Standard.\", \"additionalProperties\": false}, \"ecma_version\": {\"enum\": [\"3\", \"5\", \"6\", \"2016\", \"2017\", \"2018\", \"2019\", \"2020\"], \"type\": \"string\", \"title\": \"ECMAScript(ES) Version\", \"labels\": {\"3\": \"ES3\", \"5\": \"ES5\", \"6\": \"ES6\", \"2016\": \"ES2016\", \"2017\": \"ES2017\", \"2018\": \"ES2018\", \"2019\": \"ES2019\", \"2020\": \"ES2020\"}, \"default\": \"2020\", \"description\": \"The ECMAScript(ES) version that the project follows.\", \"additionalProperties\": false}, \"module_system\": {\"enum\": [\"commonjs\", \"es-modules\", \"amd\"], \"type\": \"string\", \"title\": \"Module system\", \"labels\": {\"amd\": \"AMD\", \"commonjs\": \"CommonJS\", \"es-modules\": \"ES modules\"}, \"default\": \"commonjs\", \"description\": \"The type of modules used in the project. CommonJS(require/exports) or ESModules(import/export) or AMD(RequireJS)\", \"additionalProperties\": false}, \"dependency_file_paths\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"title\": \"Dependency File Paths\", \"description\": \"These are the directories where package.json file is present. The list is needed to help us analyze the code in a better way and also improve the dependency calculation.\"}}, \"optional_required\": [\"plugins\"], \"additionalProperties\": false}",
+            "transformertoolSet": {
+              "edges": [
+                { "node": { "name": "StandardJS", "shortcode": "standardjs" } },
+                { "node": { "name": "Prettier", "shortcode": "prettier" } }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "ruby",
+            "metaSchema": "{}",
+            "transformertoolSet": {
+              "edges": [
+                { "node": { "name": "StandardRB", "shortcode": "standardrb" } },
+                { "node": { "name": "RuboCop", "shortcode": "rubocop" } }
+              ]
+            }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "shell",
+            "metaSchema": "{\"type\": \"object\", \"properties\": {\"dialect\": {\"enum\": [\"sh\", \"bash\", \"dash\", \"ksh\"], \"type\": \"string\", \"title\": \"Bourne shell dialect\", \"default\": \"Deduce the shell from the file's shell directive or the shebang.\", \"description\": \"Specify Bourne shell dialect. Valid values are `sh`, `bash`, `dash` and `ksh`.\"}}, \"optional_required\": [], \"additionalProperties\": false}",
+            "transformertoolSet": { "edges": [] }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "go",
+            "metaSchema": "{\"type\": \"object\", \"required\": [], \"properties\": {\"build_tags\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"title\": \"Build tags\", \"description\": \"Build tags that will be used to build the packages. This prevents compilation-related issues (due to inclusion/exclusion of files) from being raised.\", \"additionalProperties\": false}, \"cgo_enabled\": {\"type\": \"boolean\", \"title\": \"Run CGo code\", \"default\": true, \"description\": \"If your code depends on CGo code, and would result in compilation error without that, set this to true. If your CGo code relies on packages installed in the OS, set it to false.\"}, \"import_path\": {\"type\": \"string\", \"title\": \"Import path\", \"description\": \"This is a single string, specifying the import path of the project.\"}, \"import_root\": {\"type\": \"string\", \"title\": \"Import root\", \"default\": [\"<%=  vcs_host %>/<%=  login %>/<%=  name %>\"], \"description\": \"The source code will be placed in $GOPATH/src/{import_root}.\"}, \"import_paths\": {\"type\": \"array\", \"items\": {\"type\": \"string\"}, \"title\": \"Import paths\", \"description\": \"This is an array of import paths in the repository. Each Go project in the repository should have its own import path.\"}, \"skip_doc_coverage\": {\"type\": \"array\", \"items\": {\"enum\": [\"file\"], \"type\": \"string\"}, \"title\": \"Skip in doc coverage\", \"description\": \"Types of objects that should be skipped while calculating documentation coverage.\", \"additionalProperties\": false}, \"dependencies_vendored\": {\"type\": \"boolean\", \"title\": \"Are dependencies vendored?\", \"labels\": {\"true\": \"Yes\", \"false\": \"No\"}, \"description\": \"If true, instructs the analyzer not to install dependencies, since they are already available in the `vendor/` directory of the repository\"}}, \"optional_required\": [\"import_root\", \"dependencies_vendored\"], \"additionalProperties\": false}",
+            "transformertoolSet": {
+              "edges": [{ "node": { "name": "Go fmt", "shortcode": "gofmt" } }]
+            }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "sql",
+            "metaSchema": "{\"type\": \"object\", \"properties\": {\"comma_style\": {\"enum\": [\"trailing\", \"leading\"], \"type\": \"string\", \"title\": \"Comma style\", \"default\": \"trailing\", \"description\": \"Comma style to enforce.\"}, \"indent_unit\": {\"enum\": [\"space\", \"tab\"], \"type\": \"string\", \"title\": \"Indent unit\", \"default\": \"space\", \"description\": \"Whether to use tabs or spaces to add new indents.\"}, \"allow_scalar\": {\"type\": \"bool\", \"title\": \"Allow scalar\", \"default\": true, \"description\": \"If True then this rule will not fail if there is only one element in the select clause e.g. SELECT 1 + 2 FROM blah. It will still fail if there are multiple columns.\"}, \"tab_space_size\": {\"type\": \"integer\", \"title\": \"Tab space size\", \"default\": 4, \"description\": \"The number of spaces to consider equal to one tab. Defaults to 4.\"}, \"max_line_length\": {\"type\": \"integer\", \"title\": \"Maximum line length\", \"default\": 80, \"description\": \"Customize this according to your project's conventions.\"}, \"capitalisation_policy\": {\"enum\": [\"consistent\", \"upper\", \"lower\", \"capitalise\"], \"type\": \"string\", \"title\": \"Capitalisation policy\", \"default\": \"consistent\", \"description\": \"The capitalisation policy to enforce.\"}, \"single_table_references\": {\"enum\": [\"consistent\", \"qualified\", \"unqualified\"], \"type\": \"string\", \"title\": \"Single table references\", \"default\": \"consistent\", \"description\": \"The capitalisation policy to enforce.\"}}, \"optional_required\": [], \"additionalProperties\": false}",
+            "transformertoolSet": { "edges": [] }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "secrets",
+            "metaSchema": "{}",
+            "transformertoolSet": { "edges": [] }
+          }
+        },
+        {
+          "node": {
+            "shortcode": "terraform",
+            "metaSchema": "{\"type\": \"object\", \"properties\": {}, \"additionalProperties\": false}",
+            "transformertoolSet": { "edges": [] }
+          }
+        }
+      ]
+    }
+  }
+}

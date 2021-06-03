@@ -1,6 +1,7 @@
 package command
 
 import (
+	"github.com/deepsourcelabs/cli/command/config"
 	"github.com/deepsourcelabs/cli/command/version"
 	"github.com/spf13/cobra"
 )
@@ -9,9 +10,10 @@ func NewCmdRoot() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "deepsource <command> <subcommand> [flags]",
 		Short: "DeepSource CLI",
-		Long:  `Now ship good code directly from the command line.`,
+		Long:  `Now, ship good code directly from command line.`,
 	}
 	cmd.AddCommand(version.NewCmdVersion())
+	cmd.AddCommand(config.NewCmdConfig())
 
 	return cmd
 }
