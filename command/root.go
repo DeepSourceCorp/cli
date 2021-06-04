@@ -1,6 +1,7 @@
 package command
 
 import (
+	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/version"
 	"github.com/spf13/cobra"
 )
@@ -12,6 +13,7 @@ func NewCmdRoot() *cobra.Command {
 		Long:  `Now ship good code directly from the command line.`,
 	}
 	cmd.AddCommand(version.NewCmdVersion())
+	cmd.AddCommand(auth.NewCmdAuth())
 
 	return cmd
 }
