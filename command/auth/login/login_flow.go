@@ -2,6 +2,7 @@ package login
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 	"time"
@@ -15,7 +16,7 @@ type ConfigData struct {
 	// User                string `toml:"user"`
 	JWT                 string `toml:"token"`
 	RefreshToken        string `toml:"refresh_token"`
-	RefreshTokenExpiry  string `toml:"refresh_token_expiry"`
+	RefreshTokenExpiry  int64  `toml:"refresh_token_expiry"`
 	RefreshTokenSetDate int64  `toml:"refresh_token_set_date"`
 }
 
@@ -45,8 +46,8 @@ func (o *LoginOptions) startLoginFlow() error {
 	// Keep polling the mutation at a certain interval till "expiresIn"
 	ticker := time.NewTicker(time.Duration(interval) * time.Second)
 	pollStartTime := time.Now()
-	done := make(chan bool)
-	go func() {
+
+	func() {
 		for {
 			select {
 			case <-ticker.C:
@@ -54,17 +55,15 @@ func (o *LoginOptions) startLoginFlow() error {
 				o.JWT, o.RefreshToken, o.RefreshTokenExpiry = api.GetJWT(o.GraphQLClient, deviceCode)
 				if o.JWT != "" {
 					o.AuthTimedOut = false
-					done <- true
+					return
 				}
-				// Auth polling time out
+
+				// Check auth polling time out
 				timeElapsed := time.Since(pollStartTime)
 				if timeElapsed >= time.Duration(expiresIn)*time.Second {
 					o.AuthTimedOut = true
-					done <- true
+					return
 				}
-			case <-done:
-				ticker.Stop()
-				return
 			}
 		}
 	}()
@@ -107,25 +106,47 @@ func (o *LoginOptions) writeConfigToFile(config string) error {
 		return err
 	}
 
-	// Making a directory .deepsource
-	err = os.Mkdir(filepath.Join(homeDir, ".deepsource"), 0755)
+	// Check if .deepsource directory already exists
+	_, err = os.Stat(filepath.Join(homeDir, "/.deepsource/"))
 	if err != nil {
-		fmt.Println("Error in creating directory to write the authentication data. Exiting ...")
-		return err
+		// Making a directory .deepsource if it doesn't already exist
+		err = os.Mkdir(filepath.Join(homeDir, "/.deepsource/"), 0755)
+		if err != nil {
+			fmt.Println("Error in creating directory to write the authentication data. Exiting ...", err)
+			return err
+		}
 	}
 
-	f, err := os.Create(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
-	if err != nil {
-		fmt.Println("Error in creating the config file to write the authentication data. Exiting ...")
-		return err
-	}
-	defer f.Close()
+	var file *os.File
 
-	_, err = f.WriteString(config)
+	// Check if config.toml file already exists in .deepsource directory
+	_, err = os.Stat(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
+	if err != nil {
+
+		// If the file doesn't exist, then create one
+		file, err = os.Create(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
+		if err != nil {
+			fmt.Println("Error in creating the config file to write the authentication data. Exiting ...")
+			return err
+		}
+	} else {
+
+		// If the file already exists
+		file, err = os.OpenFile("notes.txt", os.O_RDWR|os.O_CREATE, 0755)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+	}
+
+	defer file.Close()
+
+	_, err = file.WriteString(config)
 	if err != nil {
 		fmt.Println("Error in writing authentication data to the config file. Exiting ...")
 		return err
 	}
 
+    fmt.Println("Done")
 	return nil
 }

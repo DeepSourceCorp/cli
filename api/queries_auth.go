@@ -7,10 +7,6 @@ import (
 	"github.com/shurcooL/graphql"
 )
 
-type RequestJWTInput struct {
-	deviceCode graphql.String `graphql:"deviceCode"`
-}
-
 func GetDeviceCode(client *graphql.Client) (string, string, string, int, int, error) {
 
 	// Mutation to get device code
@@ -37,27 +33,30 @@ func GetDeviceCode(client *graphql.Client) (string, string, string, int, int, er
 
 }
 
-func GetJWT(client *graphql.Client, deviceCode string) (string, string, string) {
+func GetJWT(client *graphql.Client, deviceCode string) (string, string, int64) {
 
-	var pollerMut struct {
+	var pollerMutation struct {
 		RequestJWT struct {
-			Payload          map[string]string
+			// Payload          interface{} `graphql:"payload"`
 			Token            string
 			RefreshToken     string
-			refreshExpiresIn string
+			RefreshExpiresIn int64
 		} `graphql:"requestJwt(input: $input)"`
+	}
+
+	type RequestJWTInput struct {
+		DeviceCode graphql.String `json:"deviceCode"`
 	}
 
 	variables := map[string]interface{}{
 		"input": RequestJWTInput{
-			deviceCode: graphql.String(deviceCode),
+			DeviceCode: graphql.String(deviceCode),
 		},
 	}
 
-	_ = client.Mutate(context.Background(), &pollerMut, variables)
-	fmt.Println(pollerMut)
-	if pollerMut.RequestJWT.Token != "" {
-		return pollerMut.RequestJWT.Token, pollerMut.RequestJWT.RefreshToken, pollerMut.RequestJWT.refreshExpiresIn
+	_ = client.Mutate(context.Background(), &pollerMutation, variables)
+	if pollerMutation.RequestJWT.Token != "" {
+		return pollerMutation.RequestJWT.Token, pollerMutation.RequestJWT.RefreshToken, pollerMutation.RequestJWT.RefreshExpiresIn
 	}
-	return "", "", ""
+	return "", "", 0
 }

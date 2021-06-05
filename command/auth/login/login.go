@@ -15,7 +15,7 @@ type LoginOptions struct {
 	GraphQLClient      *graphql.Client
 	JWT                string
 	RefreshToken       string
-	RefreshTokenExpiry string
+	RefreshTokenExpiry int64
 	AuthTimedOut       bool
 }
 
