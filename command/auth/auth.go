@@ -16,6 +16,7 @@ func NewCmdAuth() *cobra.Command {
 		Short: "Authenticate with DeepSource",
 	}
 	cmd.AddCommand(login.NewCmdLogin())
+    }
 	return cmd
 }
 

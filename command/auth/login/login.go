@@ -1,9 +1,6 @@
 package login
 
 import (
-	"fmt"
-	"os"
-
 	"github.com/shurcooL/graphql"
 	"github.com/spf13/cobra"
 )
@@ -24,13 +21,13 @@ func NewCmdLogin() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",
-		Run: func(cmd *cobra.Command, args []string) {
+		RunE: func(cmd *cobra.Command, args []string) error {
 			o := LoginOptions{}
 			err := o.Run()
 			if err != nil {
-				fmt.Println("Error occured")
-				os.Exit(1)
+				return err
 			}
+			return nil
 		},
 	}
 	return cmd

@@ -147,6 +147,6 @@ func (o *LoginOptions) writeConfigToFile(config string) error {
 		return err
 	}
 
-    fmt.Println("Done")
+	fmt.Println("Done")
 	return nil
 }
