@@ -17,6 +17,9 @@ var (
 
 func main() {
 
+	// code := mainRun()
+	// os.Exit(int(code))
+
 	version.SetBuildInfo(Version, Date, "", "")
 
 	if err := command.Execute(); err != nil {

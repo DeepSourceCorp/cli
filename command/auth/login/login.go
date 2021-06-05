@@ -1,6 +1,7 @@
 package login
 
 import (
+	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/shurcooL/graphql"
 	"github.com/spf13/cobra"
 )
@@ -17,7 +18,7 @@ type LoginOptions struct {
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdLogin() *cobra.Command {
+func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",

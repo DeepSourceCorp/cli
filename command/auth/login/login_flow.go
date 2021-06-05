@@ -2,12 +2,10 @@ package login
 
 import (
 	"fmt"
-	"log"
-	"os"
-	"path/filepath"
 	"time"
 
 	"github.com/deepsourcelabs/cli/api"
+	"github.com/deepsourcelabs/cli/internal/config"
 	"github.com/pelletier/go-toml"
 	"github.com/pkg/browser"
 )
@@ -78,75 +76,23 @@ func (o *LoginOptions) startLoginFlow() error {
 	// TODO: Get user email
 
 	// Writing the data into the file $HOME/.deepsource/config.toml
-	config := ConfigData{
+	authConfig := ConfigData{
 		JWT:                 o.JWT,
 		RefreshToken:        o.RefreshToken,
 		RefreshTokenExpiry:  o.RefreshTokenExpiry,
 		RefreshTokenSetDate: time.Now().Unix(),
 	}
-	tomlConfig, err := toml.Marshal(config)
+	tomlConfig, err := toml.Marshal(authConfig)
 	if err != nil {
 		fmt.Println("Error in parsing the authentication data in the TOML format. Exiting ...")
 		return err
 	}
-	err = o.writeConfigToFile(string(tomlConfig))
+
+	err = config.WriteConfigToFile(string(tomlConfig))
 	if err != nil {
 		fmt.Println("Error in writing authentication data to a file. Exiting...")
 		return err
 	}
 
-	return nil
-}
-
-func (o *LoginOptions) writeConfigToFile(config string) error {
-	// Create a folder named as .deepsource in user's home directory
-	homeDir, err := os.UserHomeDir()
-	if err != nil {
-		fmt.Println("Error in writing authentication data to filesystem. Exiting...")
-		return err
-	}
-
-	// Check if .deepsource directory already exists
-	_, err = os.Stat(filepath.Join(homeDir, "/.deepsource/"))
-	if err != nil {
-		// Making a directory .deepsource if it doesn't already exist
-		err = os.Mkdir(filepath.Join(homeDir, "/.deepsource/"), 0755)
-		if err != nil {
-			fmt.Println("Error in creating directory to write the authentication data. Exiting ...", err)
-			return err
-		}
-	}
-
-	var file *os.File
-
-	// Check if config.toml file already exists in .deepsource directory
-	_, err = os.Stat(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
-	if err != nil {
-
-		// If the file doesn't exist, then create one
-		file, err = os.Create(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
-		if err != nil {
-			fmt.Println("Error in creating the config file to write the authentication data. Exiting ...")
-			return err
-		}
-	} else {
-
-		// If the file already exists
-		file, err = os.OpenFile("notes.txt", os.O_RDWR|os.O_CREATE, 0755)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-	}
-
-	defer file.Close()
-
-	_, err = file.WriteString(config)
-	if err != nil {
-		fmt.Println("Error in writing authentication data to the config file. Exiting ...")
-		return err
-	}
-
-	fmt.Println("Done")
 	return nil
 }

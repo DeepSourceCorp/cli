@@ -6,7 +6,7 @@ import (
 	"github.com/shurcooL/graphql"
 )
 
-func GetJWT(client *graphql.Client, deviceCode string) (string, string, int64) {
+func GetJWT(deviceCode string) (string, string, int64) {
 
 	var pollerMutation struct {
 		RequestJWT struct {
