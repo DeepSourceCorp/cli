@@ -1,4 +1,0 @@
-refresh_token = "4b1ac464cd980b5b9104a810f8d9824eec40a498"
-refresh_token_expiry = 1624089193
-refresh_token_set_date = 1622879593
-token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InJvb3RAZGVlcHNvdXJjZS5pbyIsImV4cCI6MTYyMjg4MDQ5Mywib3JpZ0lhdCI6MTYyMjg3OTU5M30.nWejMZW3xiKi3WYDcxlBVrJa1ON8aVS17pAqgNooj88"
