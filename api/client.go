@@ -16,7 +16,7 @@ const DefaultConnectTimeout = 1
 
 type DSClient struct {
 	gqlClient *graphql.Client
-	Token  string
+	Token     string
 }
 
 func NewDSClient(host string, token string) *DSClient {

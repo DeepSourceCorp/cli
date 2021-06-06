@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"fmt"
 	"log"
 
 	"github.com/machinebox/graphql"
@@ -22,7 +21,6 @@ func GetDeviceCode(client *DSClient) (string, string, string, int, int, error) {
 	}
 
 	gq := client.gqlClient
-	fmt.Println(gq)
 
 	query := `
     mutation register {
@@ -37,7 +35,6 @@ func GetDeviceCode(client *DSClient) (string, string, string, int, int, error) {
     }`
 
 	req := graphql.NewRequest(query)
-
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
