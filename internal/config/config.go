@@ -6,22 +6,30 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"time"
 
+	"github.com/deepsourcelabs/cli/api"
 	"github.com/pelletier/go-toml"
 )
 
 type ConfigData struct {
-	Token               string
-	RefreshToken        string
-	RefreshTokenExpiry  int64
-	RefreshTokenSetTime int64
+	User                string `toml:"user"`
+	Token               string `toml:"token"`
+	TokenExpiry         string `toml:"token_expiry"`
+	RefreshToken        string `toml:"refresh_token"`
+	OrigIAT             int64  `toml:"origIat"`
+	RefreshTokenExpiry  int64  `toml:"refresh_token_expiry"`
+	RefreshTokenSetTime int64  `toml:"refresh_token_set_time"`
 }
 
 func ReadConfig() (ConfigData, error) {
 
 	config := ConfigData{
+		User:                "",
 		Token:               "",
+		TokenExpiry:         "",
 		RefreshToken:        "",
+		OrigIAT:             0,
 		RefreshTokenExpiry:  0,
 		RefreshTokenSetTime: 0,
 	}
@@ -42,7 +50,24 @@ func ReadConfig() (ConfigData, error) {
 
 }
 
-func WriteConfigToFile(config string) error {
+func WriteConfigToFile(config *api.FetchJWTResponse) error {
+
+	// Convert incoming config into the ConfigData format
+	finalConfig := ConfigData{
+		User:                config.Requestjwt.Payload.Email,
+		Token:               config.Requestjwt.Token,
+		TokenExpiry:         config.Requestjwt.Payload.Exp,
+		RefreshToken:        config.Requestjwt.Refreshtoken,
+		OrigIAT:             config.Requestjwt.Payload.Origiat,
+		RefreshTokenExpiry:  config.Requestjwt.Refreshexpiresin,
+		RefreshTokenSetTime: time.Now().Unix(),
+	}
+
+	tomlConfig, err := toml.Marshal(finalConfig)
+	if err != nil {
+		fmt.Println("Error in parsing the authentication data in the TOML format. Exiting ...")
+		return err
+	}
 
 	// Create a folder named as .deepsource in user's home directory
 	homeDir, err := os.UserHomeDir()
@@ -54,7 +79,7 @@ func WriteConfigToFile(config string) error {
 	// Check if .deepsource directory already exists
 	_, err = os.Stat(filepath.Join(homeDir, "/.deepsource/"))
 
-    // err should be reported if it doesn't exist already
+	// err should be reported if it doesn't exist already
 	if err != nil {
 		// Making a directory .deepsource if it doesn't already exist
 		err = os.Mkdir(filepath.Join(homeDir, "/.deepsource/"), 0755)
@@ -88,7 +113,7 @@ func WriteConfigToFile(config string) error {
 
 	defer file.Close()
 
-	_, err = file.WriteString(config)
+	_, err = file.WriteString(string(tomlConfig))
 	if err != nil {
 		fmt.Println("Error in writing authentication data to the config file. Exiting ...")
 		return err

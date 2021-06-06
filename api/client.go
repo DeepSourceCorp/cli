@@ -1,7 +1,7 @@
 package api
 
 import (
-	"github.com/machinebox/graphql"
+	"github.com/deepsourcelabs/graphql"
 )
 
 const DefaultReadTimeout = 10

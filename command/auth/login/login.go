@@ -1,15 +1,21 @@
 package login
 
 import (
+	"fmt"
+
+	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
 // Options holds the metadata.
 type LoginOptions struct {
+	graphqlClient *api.DSClient
+	hostName      string
 	AuthTimedOut  bool
-	ConfigFactory *cmdutils.CLIFactory
-	Config        ConfigData
+	TokenExpired  bool
+	Config        config.ConfigData
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -18,9 +24,14 @@ func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			o := LoginOptions{}
-			o.ConfigFactory = cf
-			err := o.Run()
+			opts := LoginOptions{
+				graphqlClient: cf.GQLClient,
+				hostName:      cf.HostName,
+				AuthTimedOut:  false,
+				TokenExpired:  cf.TokenExpired,
+				Config:        cf.Config,
+			}
+			err := opts.Run()
 			if err != nil {
 				return err
 			}
@@ -31,32 +42,32 @@ func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
 }
 
 // Validate impletments the Validate method for the ICommand interface.
-func (o *LoginOptions) Validate() error {
+func (opts *LoginOptions) Validate() error {
 	return nil
 }
 
 // Run executest the command.
-func (o *LoginOptions) Run() error {
+func (opts *LoginOptions) Run() error {
 
-	// TODO: Check here if user is already authenticated before beginning login workflow
-	// Will implement this in auth status and use that function here to get the status
-	// o.LoginStatus = false
+	// Check here if user is already authenticated before beginning login workflow
 
-	// if o.LoginStatus == true {
-	//     // Use survey to display message
-	//     msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", o.LoginEmail)
-	//     helpText := ""
-	//     response, err := api.ConfirmFromUser(msg, helpText)
-	//     if err != nil {
-	//         return err
-	//     }
+	if opts.TokenExpired == true {
 
-	//     if response == false {
-	//         return nil
-	//     }
+		// Use survey to display confirmation message if user wants to reauthenticate
+		msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", opts.Config.User)
+		helpText := ""
+		response, err := cmdutils.ConfirmFromUser(msg, helpText)
+		if err != nil {
+			return err
+		}
+
+		if response == false {
+			return nil
+		}
+	}
 
 	// Login flow starts
-	err := o.startLoginFlow()
+	err := opts.startLoginFlow()
 	if err != nil {
 		return err
 	}

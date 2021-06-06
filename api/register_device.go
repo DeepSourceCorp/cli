@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/machinebox/graphql"
+	"github.com/deepsourcelabs/graphql"
 )
 
 func GetDeviceCode(client *DSClient) (string, string, string, int, int, error) {
@@ -50,5 +50,4 @@ func GetDeviceCode(client *DSClient) (string, string, string, int, int, error) {
 	}
 
 	return respData.Registerdevice.Devicecode, respData.Registerdevice.Usercode, respData.Registerdevice.Verificationuri, respData.Registerdevice.Expiresin, respData.Registerdevice.Interval, nil
-
 }

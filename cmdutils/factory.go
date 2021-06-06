@@ -1,16 +1,13 @@
 package cmdutils
 
-import "net/http"
+import (
+	"github.com/deepsourcelabs/cli/api"
+	"github.com/deepsourcelabs/cli/internal/config"
+)
 
 type CLIFactory struct {
-	Config     ConfigMeta
-	HTTPClient func() (*http.Client, error)
-	HostName   string
-}
-
-type ConfigMeta struct {
-	Token               string
-	RefreshToken        string
-	RefreshTokenExpiry  int64
-	RefreshTokenSetTime int64
+	Config       config.ConfigData
+	GQLClient    *api.DSClient
+	HostName     string
+	TokenExpired bool
 }

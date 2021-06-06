@@ -1,6 +1,9 @@
 package command
 
 import (
+	"log"
+
+	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/version"
@@ -28,25 +31,35 @@ func Execute() error {
 	var authConfigData config.ConfigData
 
 	// Read the config file
+	// If there is a config file already, this returns its data
+	// Else the fields are blank
 	authConfigData, _ = config.ReadConfig()
 
-	// Store the data received in the configData struct
-	cmdFactory.Config = cmdutils.ConfigMeta{
-		Token:               authConfigData.Token,
-		RefreshToken:        authConfigData.RefreshToken,
-		RefreshTokenExpiry:  authConfigData.RefreshTokenExpiry,
-		RefreshTokenSetTime: authConfigData.RefreshTokenSetTime,
-	}
+	cmdFactory.Config = authConfigData
+
+	// // Store the data received in the configData struct
+	// cmdFactory.Config = cmdutils.CLIFactory{
+	//     User:                authConfigData.User,
+	//     Token:               authConfigData.Token,
+	//     TokenExpiry:         authConfigData.TokenExpiry,
+	//     OrigIAT:             authConfigData.OrigIAT,
+	//     RefreshToken:        authConfigData.RefreshToken,
+	//     RefreshTokenExpiry:  authConfigData.RefreshTokenExpiry,
+	//     RefreshTokenSetTime: authConfigData.RefreshTokenSetTime,
+	// }
 
 	cmdFactory.HostName = "http://localhost:8000/graphql/"
 
-	// Creating a GraphQL client
-	// gq := api.GetClient("http://localhost:8000/graphql/", cmdFactory.Config.Token, cmdFactory.Config.RefreshToken)
-	// tokenStatus, err := api.VerifyJWT(gq, cmdFactory.Config.Token)
-	// if err != nil {
-	//     log.Println(err)
-	// }
-	// log.Println(tokenStatus)
+	// Creating a GraphQL client which can be picked up by any command since its in the factory
+	cmdFactory.GQLClient = api.NewDSClient(cmdFactory.HostName, cmdFactory.Config.Token)
+	var err error
+
+	if cmdFactory.Config.Token != "" {
+		cmdFactory.TokenExpired, err = api.CheckTokenExpiry(cmdFactory.GQLClient, cmdFactory.Config.Token)
+		if err != nil {
+			log.Println(err)
+		}
+	}
 
 	// Pass configData struct to all the packages
 	cmd := NewCmdRoot(&cmdFactory)
