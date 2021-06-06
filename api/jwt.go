@@ -12,27 +12,6 @@ func GetJWT(client *DSClient, deviceCode string) (string, string, int64) {
 
 	gq := client.gqlClient
 
-	// var pollerMutation struct {
-	//     RequestJWT struct {
-	//         // Payload          interface{} `graphql:"payload"`
-	//         Token            string
-	//         RefreshToken     string
-	//         RefreshExpiresIn int64
-	//     } `graphql:"requestJwt(input: $input)"`
-	// }
-
-	// variables := map[string]interface{}{
-	//     "input": RequestJWTInput{
-	//         DeviceCode: graphql.String(deviceCode),
-	//     },
-	// }
-
-	// gq := client.gqlClient
-	// _ = gq.Mutate(context.Background(), &pollerMutation, variables)
-	// if pollerMutation.RequestJWT.Token != "" {
-	//     return pollerMutation.RequestJWT.Token, pollerMutation.RequestJWT.RefreshToken, pollerMutation.RequestJWT.RefreshExpiresIn
-	// }
-
 	type QueryResponse struct {
 		Requestjwt struct {
 			Payload struct {
@@ -79,8 +58,6 @@ func GetJWT(client *DSClient, deviceCode string) (string, string, int64) {
 	if err := gq.Run(ctx, req, &respData); err != nil {
 		log.Println(err)
 	}
-
-	log.Println(respData)
 
 	return respData.Requestjwt.Token, respData.Requestjwt.Refreshtoken, respData.Requestjwt.Refreshexpiresin
 }
