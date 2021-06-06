@@ -1,8 +1,11 @@
 package cmdutils
 
-type CLI struct {
-	Config       ConfigMeta
-	TokenExpired bool
+import "net/http"
+
+type CLIFactory struct {
+	Config     ConfigMeta
+	HTTPClient func() (*http.Client, error)
+	HostName   string
 }
 
 type ConfigMeta struct {

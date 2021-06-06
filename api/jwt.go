@@ -1,65 +1,59 @@
 package api
 
-import (
-	"context"
-	"fmt"
+// // Fetches JWT
+// func GetJWT(client *DSGQLClient, deviceCode string) (string, string, int64) {
 
-	"github.com/shurcooL/graphql"
-)
+//     var pollerMutation struct {
+//         RequestJWT struct {
+//             // Payload          interface{} `graphql:"payload"`
+//             Token            string
+//             RefreshToken     string
+//             RefreshExpiresIn int64
+//         } `graphql:"requestJwt(input: $input)"`
+//     }
 
-// Fetches JWT
-func GetJWT(client *DSGQLClient, deviceCode string) (string, string, int64) {
+//     type RequestJWTInput struct {
+//         DeviceCode graphql.String `json:"deviceCode"`
+//     }
 
-	var pollerMutation struct {
-		RequestJWT struct {
-			// Payload          interface{} `graphql:"payload"`
-			Token            string
-			RefreshToken     string
-			RefreshExpiresIn int64
-		} `graphql:"requestJwt(input: $input)"`
-	}
+//     variables := map[string]interface{}{
+//         "input": RequestJWTInput{
+//             DeviceCode: graphql.String(deviceCode),
+//         },
+//     }
 
-	type RequestJWTInput struct {
-		DeviceCode graphql.String `json:"deviceCode"`
-	}
+//     gq := client.gqlClient
+//     _ = gq.Mutate(context.Background(), &pollerMutation, variables)
+//     if pollerMutation.RequestJWT.Token != "" {
+//         return pollerMutation.RequestJWT.Token, pollerMutation.RequestJWT.RefreshToken, pollerMutation.RequestJWT.RefreshExpiresIn
+//     }
+//     return "", "", 0
+// }
 
-	variables := map[string]interface{}{
-		"input": RequestJWTInput{
-			DeviceCode: graphql.String(deviceCode),
-		},
-	}
+// // Verifies the active status of JWT token
+// func VerifyJWT(client *DSGQLClient, token string) (bool, error) {
 
-	gq := client.gqlClient
-	_ = gq.Mutate(context.Background(), &pollerMutation, variables)
-	if pollerMutation.RequestJWT.Token != "" {
-		return pollerMutation.RequestJWT.Token, pollerMutation.RequestJWT.RefreshToken, pollerMutation.RequestJWT.RefreshExpiresIn
-	}
-	return "", "", 0
-}
+//     var verifyToken struct {
+//         VerifyToken struct {
+//             Payload struct {
+//                 Email   graphql.String `json:"email" graphql:"email"`
+//                 Expiry  graphql.String `json:"exp" graphql:"exp"`
+//                 OrigIAT graphql.Int    `json:"origIat" graphql:"origIat"`
+//             } `json:"payload" graphql:"payload"`
+//         } `graphql:"verifyToken(token: $token)"`
+//     }
 
-// Verifies the active status of JWT token
-func VerifyJWT(client *DSGQLClient, token string) (bool, error) {
+//     variables := map[string]interface{}{
+//         "token": graphql.String(token),
+//     }
 
-	var verifyToken struct {
-		VerifyToken struct {
-			Payload struct {
-				Email   graphql.String `json:"email" graphql:"email"`
-				Expiry  graphql.String `json:"exp" graphql:"exp"`
-				OrigIAT graphql.Int    `json:"origIat" graphql:"origIat"`
-			} `json:"payload" graphql:"payload"`
-		} `graphql:"verifyToken(token: $token)"`
-	}
+//     gq := client.gqlClient
+//     resp, err := gq.Mutate(context.Background(), &verifyToken, variables)
+//     log.Println(resp)
+//     if err != nil {
+//         fmt.Println(err)
+//         return false, err
+//     }
 
-	variables := map[string]interface{}{
-		"token": graphql.String(token),
-	}
-
-	gq := client.gqlClient
-	err := gq.Mutate(context.Background(), &verifyToken, variables)
-	if err != nil {
-		fmt.Println(err)
-		return false, err
-	}
-
-	return true, nil
-}
+//     return true, nil
+// }

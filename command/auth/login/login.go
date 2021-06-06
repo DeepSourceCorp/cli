@@ -1,14 +1,12 @@
 package login
 
 import (
-	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/spf13/cobra"
 )
 
 // Options holds the metadata.
 type LoginOptions struct {
-	GraphQLClient *api.DSGQLClient
 	AuthTimedOut  bool
 	ConfigFactory *cmdutils.CLIFactory
 	Config        ConfigData

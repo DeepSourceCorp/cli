@@ -4,35 +4,54 @@ import (
 	"context"
 	"fmt"
 	"log"
+
+	"github.com/machinebox/graphql"
 )
 
-func GetDeviceCode(client *DSGQLClient) (string, string, string, int, int, error) {
+func GetDeviceCode(client *DSClient) (string, string, string, int, int, error) {
 
-	// Mutation to get device code
-	var registerMutation struct {
-		RegisterDevice struct {
-			DeviceCode              string
-			UserCode                string
-			VerificationURI         string
-			VerificationURIComplete string
-			ExpiresIn               int
-			Interval                int
-		} `graphql:"registerDevice(input: {})"`
+	type QueryResponse struct {
+		Registerdevice struct {
+			Devicecode              string `json:"deviceCode"`
+			Usercode                string `json:"userCode"`
+			Verificationuri         string `json:"verificationUri"`
+			Verificationuricomplete string `json:"verificationUriComplete"`
+			Expiresin               int    `json:"expiresIn"`
+			Interval                int    `json:"interval"`
+		} `json:"registerDevice"`
 	}
-	variables := map[string]interface{}{}
 
 	gq := client.gqlClient
+	fmt.Println(gq)
 
-	err := gq.Mutate(context.Background(), &registerMutation, variables)
-	if err != nil {
-		log.Println(err)
-		if err == fmt.Errorf("Signature has expired") {
-			// Refresh the token
+	query := `
+    mutation register {
+        registerDevice(input:{}) {
+            deviceCode
+            userCode
+            verificationUri
+            verificationUriComplete
+            expiresIn
+            interval
+        }
+    }`
 
-		}
-		return "", "", "", 0, 0, err
+	req := graphql.NewRequest(query)
+
+
+	// set header fields
+	req.Header.Set("Cache-Control", "no-cache")
+
+	// define a Context for the request
+	ctx := context.Background()
+
+	// run it and capture the response
+	// var graphqlResponse map[string]interface{}
+	var respData QueryResponse
+	if err := gq.Run(ctx, req, &respData); err != nil {
+		log.Fatal(err)
 	}
 
-	return registerMutation.RegisterDevice.DeviceCode, registerMutation.RegisterDevice.UserCode, registerMutation.RegisterDevice.VerificationURI, registerMutation.RegisterDevice.ExpiresIn, registerMutation.RegisterDevice.Interval, nil
+	return respData.Registerdevice.Devicecode, respData.Registerdevice.Usercode, respData.Registerdevice.Verificationuri, respData.Registerdevice.Expiresin, respData.Registerdevice.Interval, nil
 
 }

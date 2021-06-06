@@ -1,9 +1,6 @@
 package command
 
 import (
-	"log"
-
-	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/version"
@@ -41,13 +38,15 @@ func Execute() error {
 		RefreshTokenSetTime: authConfigData.RefreshTokenSetTime,
 	}
 
+	cmdFactory.HostName = "http://localhost:8000/graphql/"
+
 	// Creating a GraphQL client
-	gq := api.GetClient("http://localhost:8000/graphql/", cmdFactory.Config.Token, cmdFactory.Config.RefreshToken)
-	tokenStatus, err := api.VerifyJWT(gq, cmdFactory.Config.Token)
-	if err != nil {
-		log.Println(err)
-	}
-	log.Println(tokenStatus)
+	// gq := api.GetClient("http://localhost:8000/graphql/", cmdFactory.Config.Token, cmdFactory.Config.RefreshToken)
+	// tokenStatus, err := api.VerifyJWT(gq, cmdFactory.Config.Token)
+	// if err != nil {
+	//     log.Println(err)
+	// }
+	// log.Println(tokenStatus)
 
 	// Pass configData struct to all the packages
 	cmd := NewCmdRoot(&cmdFactory)
