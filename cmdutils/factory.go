@@ -1,6 +1,6 @@
 package cmdutils
 
-type CLIFactory struct {
+type CLI struct {
 	Config       ConfigMeta
 	TokenExpired bool
 }

@@ -43,6 +43,7 @@ func ReadConfig() (ConfigData, error) {
 }
 
 func WriteConfigToFile(config string) error {
+
 	// Create a folder named as .deepsource in user's home directory
 	homeDir, err := os.UserHomeDir()
 	if err != nil {
@@ -52,6 +53,8 @@ func WriteConfigToFile(config string) error {
 
 	// Check if .deepsource directory already exists
 	_, err = os.Stat(filepath.Join(homeDir, "/.deepsource/"))
+
+    // err should be reported if it doesn't exist already
 	if err != nil {
 		// Making a directory .deepsource if it doesn't already exist
 		err = os.Mkdir(filepath.Join(homeDir, "/.deepsource/"), 0755)
@@ -76,7 +79,7 @@ func WriteConfigToFile(config string) error {
 	} else {
 
 		// If the file already exists
-		file, err = os.OpenFile("notes.txt", os.O_RDWR|os.O_CREATE, 0755)
+		file, err = os.OpenFile(filepath.Join(homeDir, "/.deepsource/", "config.toml"), os.O_RDWR|os.O_CREATE, 0755)
 		if err != nil {
 			log.Fatal(err)
 		}

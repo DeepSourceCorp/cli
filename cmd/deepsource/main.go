@@ -17,6 +17,7 @@ var (
 
 func main() {
 
+	log.SetFlags(log.LstdFlags | log.Lshortfile)
 	// code := mainRun()
 	// os.Exit(int(code))
 

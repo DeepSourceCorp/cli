@@ -1,20 +1,17 @@
 package login
 
 import (
+	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
-	"github.com/shurcooL/graphql"
 	"github.com/spf13/cobra"
 )
 
 // Options holds the metadata.
 type LoginOptions struct {
-	LoginStatus        bool
-	LoginEmail         string
-	GraphQLClient      *graphql.Client
-	JWT                string
-	RefreshToken       string
-	RefreshTokenExpiry int64
-	AuthTimedOut       bool
+	GraphQLClient *api.DSGQLClient
+	AuthTimedOut  bool
+	ConfigFactory *cmdutils.CLIFactory
+	Config        ConfigData
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -24,6 +21,7 @@ func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
 		Short: "Login to DeepSource using Command Line Interface",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			o := LoginOptions{}
+			o.ConfigFactory = cf
 			err := o.Run()
 			if err != nil {
 				return err
@@ -65,6 +63,5 @@ func (o *LoginOptions) Run() error {
 		return err
 	}
 
-	// }
 	return nil
 }

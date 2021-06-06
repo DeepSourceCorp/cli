@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.2.12 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/fatih/color v1.12.0 // indirect
 	github.com/getsentry/sentry-go v0.6.0
 	github.com/golang/protobuf v1.5.2 // indirect

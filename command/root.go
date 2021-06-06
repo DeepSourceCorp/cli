@@ -1,24 +1,15 @@
 package command
 
 import (
+	"log"
+
+	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/version"
 	"github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
-
-type CLIFactory struct {
-	Config       ConfigMeta
-	TokenExpired bool
-}
-
-type ConfigMeta struct {
-	Token               string
-	RefreshToken        string
-	RefreshTokenExpiry  int64
-	RefreshTokenSetTime int64
-}
 
 func NewCmdRoot(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 	cmd := &cobra.Command{
@@ -39,10 +30,10 @@ func Execute() error {
 	// Config operations
 	var authConfigData config.ConfigData
 
-	// 1. Read the config file
+	// Read the config file
 	authConfigData, _ = config.ReadConfig()
 
-	// 2. Store the data received in the configData struct
+	// Store the data received in the configData struct
 	cmdFactory.Config = cmdutils.ConfigMeta{
 		Token:               authConfigData.Token,
 		RefreshToken:        authConfigData.RefreshToken,
@@ -50,10 +41,15 @@ func Execute() error {
 		RefreshTokenSetTime: authConfigData.RefreshTokenSetTime,
 	}
 
-	// TODO: Validate if the JWT has expired or not
-	// config.ValidateJWTExpiry(cmdFactory.Config.Token)
+	// Creating a GraphQL client
+	gq := api.GetClient("http://localhost:8000/graphql/", cmdFactory.Config.Token, cmdFactory.Config.RefreshToken)
+	tokenStatus, err := api.VerifyJWT(gq, cmdFactory.Config.Token)
+	if err != nil {
+		log.Println(err)
+	}
+	log.Println(tokenStatus)
 
-	// 4. Pass configData struct to all the packages
+	// Pass configData struct to all the packages
 	cmd := NewCmdRoot(&cmdFactory)
 	if err := cmd.Execute(); err != nil {
 		return err

@@ -11,17 +11,19 @@ import (
 )
 
 type ConfigData struct {
-	// User                string `toml:"user"`
-	JWT                 string `toml:"token"`
-	RefreshToken        string `toml:"refresh_token"`
-	RefreshTokenExpiry  int64  `toml:"refresh_token_expiry"`
-	RefreshTokenSetDate int64  `toml:"refresh_token_set_date"`
+	User                string    `toml:"user"`
+	JWT                 string    `toml:"token"`
+	RefreshToken        string    `toml:"refresh_token"`
+	RefreshTokenExpiry  int64     `toml:"refresh_token_expiry"`
+	RefreshTokenSetDate int64     `toml:"refresh_token_set_date"`
+	JWTExpiry           time.Time `toml:"token_expiry"`
+	OrigIAT             int64     `toml:"orig_iat"`
 }
 
 func (o *LoginOptions) startLoginFlow() error {
 
 	// Creating a GraphQL client
-	o.GraphQLClient = api.GraphQLClient("http://localhost:8000/graphql/")
+	o.GraphQLClient = api.GetClient("http://localhost:8000/graphql/", o.ConfigFactory.Config.Token, o.ConfigFactory.Config.RefreshToken)
 
 	// Send a mutation to register device and get the device code
 	deviceCode, userCode, verificationURI, expiresIn, interval, err := api.GetDeviceCode(o.GraphQLClient)
@@ -31,7 +33,6 @@ func (o *LoginOptions) startLoginFlow() error {
 
 	// Having received the device code, open the browser at verificationURI
 	// Print the user code and the permission to open browser at verificationURI
-
 	fmt.Printf("Please copy your one-time code: %s\n", userCode)
 	fmt.Printf("Press enter to open deepsource.io in your browser...")
 	fmt.Scanln()
@@ -50,8 +51,8 @@ func (o *LoginOptions) startLoginFlow() error {
 			select {
 			case <-ticker.C:
 				// do stuff
-				o.JWT, o.RefreshToken, o.RefreshTokenExpiry = api.GetJWT(o.GraphQLClient, deviceCode)
-				if o.JWT != "" {
+				o.Config.JWT, o.Config.RefreshToken, o.Config.RefreshTokenExpiry = api.GetJWT(o.GraphQLClient, deviceCode)
+				if o.Config.JWT != "" {
 					o.AuthTimedOut = false
 					return
 				}
@@ -72,16 +73,19 @@ func (o *LoginOptions) startLoginFlow() error {
 		return fmt.Errorf("Authentication timed out")
 	}
 
-	// If its a successfull poll, store the token data in the file
-	// TODO: Get user email
+	// Parse the JWT and get the user email, token expiry and origIAT
+	// o.getMetaFromToken()
 
-	// Writing the data into the file $HOME/.deepsource/config.toml
 	authConfig := ConfigData{
-		JWT:                 o.JWT,
-		RefreshToken:        o.RefreshToken,
-		RefreshTokenExpiry:  o.RefreshTokenExpiry,
+		User:                userCode,
+		JWT:                 o.Config.JWT,
+		RefreshToken:        o.Config.RefreshToken,
+		RefreshTokenExpiry:  o.Config.RefreshTokenExpiry,
 		RefreshTokenSetDate: time.Now().Unix(),
+		JWTExpiry:           time.Time{},
+		OrigIAT:             0,
 	}
+
 	tomlConfig, err := toml.Marshal(authConfig)
 	if err != nil {
 		fmt.Println("Error in parsing the authentication data in the TOML format. Exiting ...")

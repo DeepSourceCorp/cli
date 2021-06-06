@@ -2,11 +2,11 @@ package api
 
 import (
 	"context"
-
-	"github.com/shurcooL/graphql"
+	"fmt"
+	"log"
 )
 
-func GetDeviceCode(client *graphql.Client) (string, string, string, int, int, error) {
+func GetDeviceCode(client *DSGQLClient) (string, string, string, int, int, error) {
 
 	// Mutation to get device code
 	var registerMutation struct {
@@ -21,8 +21,15 @@ func GetDeviceCode(client *graphql.Client) (string, string, string, int, int, er
 	}
 	variables := map[string]interface{}{}
 
-	err := client.Mutate(context.Background(), &registerMutation, variables)
+	gq := client.gqlClient
+
+	err := gq.Mutate(context.Background(), &registerMutation, variables)
 	if err != nil {
+		log.Println(err)
+		if err == fmt.Errorf("Signature has expired") {
+			// Refresh the token
+
+		}
 		return "", "", "", 0, 0, err
 	}
 
