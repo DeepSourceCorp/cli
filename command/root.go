@@ -1,7 +1,7 @@
 package command
 
 import (
-	"log"
+	"fmt"
 
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
@@ -37,17 +37,6 @@ func Execute() error {
 
 	cmdFactory.Config = authConfigData
 
-	// // Store the data received in the configData struct
-	// cmdFactory.Config = cmdutils.CLIFactory{
-	//     User:                authConfigData.User,
-	//     Token:               authConfigData.Token,
-	//     TokenExpiry:         authConfigData.TokenExpiry,
-	//     OrigIAT:             authConfigData.OrigIAT,
-	//     RefreshToken:        authConfigData.RefreshToken,
-	//     RefreshTokenExpiry:  authConfigData.RefreshTokenExpiry,
-	//     RefreshTokenSetTime: authConfigData.RefreshTokenSetTime,
-	// }
-
 	cmdFactory.HostName = "http://localhost:8000/graphql/"
 
 	// Creating a GraphQL client which can be picked up by any command since its in the factory
@@ -57,7 +46,7 @@ func Execute() error {
 	if cmdFactory.Config.Token != "" {
 		cmdFactory.TokenExpired, err = api.CheckTokenExpiry(cmdFactory.GQLClient, cmdFactory.Config.Token)
 		if err != nil {
-			log.Println(err)
+			fmt.Println(err)
 		}
 	}
 

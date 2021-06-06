@@ -12,7 +12,7 @@ type FetchJWTResponse struct {
 		Payload struct {
 			Email   string `json:"email"`
 			Exp     string `json:"exp"`
-			Origiat int64    `json:"origIat"`
+			Origiat int64  `json:"origIat"`
 		} `json:"payload"`
 		Token            string `json:"token"`
 		Refreshtoken     string `json:"refreshToken"`
@@ -99,8 +99,8 @@ func CheckTokenExpiry(client *DSClient, token string) (bool, error) {
 	// var graphqlResponse map[string]interface{}
 	var respData VerifyJWTResponse
 	if err := gq.Run(ctx, req, &respData); err != nil {
-		log.Println(err)
+		return true, err
 	}
 
-	return true, nil
+	return false, nil
 }

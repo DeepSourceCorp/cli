@@ -61,9 +61,6 @@ func (opts *LoginOptions) startLoginFlow() error {
 		return fmt.Errorf("Authentication timed out")
 	}
 
-	// Parse the JWT and get the user email, token expiry and origIAT
-	// o.getMetaFromToken()
-
 	err = config.WriteConfigToFile(jwtData)
 	if err != nil {
 		fmt.Println("Error in writing authentication data to a file. Exiting...")

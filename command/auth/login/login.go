@@ -49,13 +49,15 @@ func (opts *LoginOptions) Validate() error {
 // Run executest the command.
 func (opts *LoginOptions) Run() error {
 
-	// Check here if user is already authenticated before beginning login workflow
+	// Check here for two conditions:
+	// 1 - If the token has expired, display a message about it and re-authenticate user
+	// 2 - If the token has not expired,does the user want to re-authenticate?
 
-	if opts.TokenExpired == true {
-
-		// Use survey to display confirmation message if user wants to reauthenticate
+	// Checking for condition 1
+	if opts.TokenExpired == false {
 		msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", opts.Config.User)
 		helpText := ""
+
 		response, err := cmdutils.ConfirmFromUser(msg, helpText)
 		if err != nil {
 			return err
@@ -65,6 +67,8 @@ func (opts *LoginOptions) Run() error {
 			return nil
 		}
 	}
+
+	// Checking for condition 2
 
 	// Login flow starts
 	err := opts.startLoginFlow()
