@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 
 	"github.com/fatih/color"
-	"github.com/kyokomi/emoji/v2"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
 )
@@ -68,7 +67,7 @@ func (o *Options) Run() {
 	// Success output ricing
 	cwd, err := os.Getwd()
 	c := color.New(color.FgGreen)
-	successOutput := emoji.Sprintf("\n:sparkles::tada: DeepSource config generated at %s/.deepsource.toml", cwd)
+	successOutput := fmt.Sprintf("\nDeepSource config generated at %s/.deepsource.toml", cwd)
 	c.Println(successOutput)
 }
 
@@ -136,7 +135,7 @@ func (o *Options) writeConfigToFile() error {
 
 	// Creating file
 	cwd, _ := os.Getwd()
-	f, err := os.Create(filepath.Join(cwd,".deepsource.toml"))
+	f, err := os.Create(filepath.Join(cwd, ".deepsource.toml"))
 	if err != nil {
 		return err
 	}

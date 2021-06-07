@@ -28,7 +28,6 @@ func (o *Options) collectTransformersInput(supportedAnalyzers []string, transfor
 		}
 		err := survey.AskOne(transformerPrompt, &o.ActivatedTransformers)
 		if err != nil {
-			checkInterrupt(err)
 			return err
 		}
 	}
@@ -74,7 +73,6 @@ func (o *Options) collectTransformersInput(supportedAnalyzers []string, transfor
 
 	err := survey.AskOne(transformerPrompt, &o.ActivatedTransformers)
 	if err != nil {
-		checkInterrupt(err)
 		return err
 	}
 
