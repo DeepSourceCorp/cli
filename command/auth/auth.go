@@ -6,6 +6,7 @@ import (
 	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/auth/login"
 	"github.com/deepsourcelabs/cli/command/auth/logout"
+	"github.com/deepsourcelabs/cli/command/auth/refresh"
 )
 
 // Options holds the metadata.
@@ -19,6 +20,7 @@ func NewCmdAuth(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 	}
 	cmd.AddCommand(login.NewCmdLogin(cmdFactory))
 	cmd.AddCommand(logout.NewCmdLogout(cmdFactory))
+	cmd.AddCommand(refresh.NewCmdRefresh(cmdFactory))
 	return cmd
 }
 

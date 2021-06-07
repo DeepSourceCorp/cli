@@ -61,7 +61,18 @@ func (opts *LoginOptions) startLoginFlow() error {
 		return fmt.Errorf("Authentication timed out")
 	}
 
-	err = config.WriteConfigToFile(jwtData)
+	// Convert incoming config into the ConfigData format
+	finalConfig := config.ConfigData{
+		User:                jwtData.Requestjwt.Payload.Email,
+		Token:               jwtData.Requestjwt.Token,
+		TokenExpiry:         jwtData.Requestjwt.Payload.Exp,
+		RefreshToken:        jwtData.Requestjwt.Refreshtoken,
+		OrigIAT:             jwtData.Requestjwt.Payload.Origiat,
+		RefreshTokenExpiry:  jwtData.Requestjwt.Refreshexpiresin,
+		RefreshTokenSetTime: time.Now().Unix(),
+	}
+
+	err = config.WriteConfigToFile(finalConfig)
 	if err != nil {
 		fmt.Println("Error in writing authentication data to a file. Exiting...")
 		return err

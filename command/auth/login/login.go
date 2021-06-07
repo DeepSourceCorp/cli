@@ -12,7 +12,6 @@ import (
 // Options holds the metadata.
 type LoginOptions struct {
 	graphqlClient *api.DSClient
-	hostName      string
 	AuthTimedOut  bool
 	TokenExpired  bool
 	Config        config.ConfigData
@@ -27,7 +26,6 @@ func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
 
 			opts := LoginOptions{
 				graphqlClient: cf.GQLClient,
-				hostName:      cf.HostName,
 				AuthTimedOut:  false,
 				TokenExpired:  cf.TokenExpired,
 				Config:        cf.Config,

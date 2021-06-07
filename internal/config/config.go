@@ -6,9 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"time"
 
-	"github.com/deepsourcelabs/cli/api"
 	"github.com/pelletier/go-toml"
 )
 
@@ -50,20 +48,10 @@ func ReadConfig() (ConfigData, error) {
 
 }
 
-func WriteConfigToFile(config *api.FetchJWTResponse) error {
+func WriteConfigToFile(config ConfigData) error {
 
-	// Convert incoming config into the ConfigData format
-	finalConfig := ConfigData{
-		User:                config.Requestjwt.Payload.Email,
-		Token:               config.Requestjwt.Token,
-		TokenExpiry:         config.Requestjwt.Payload.Exp,
-		RefreshToken:        config.Requestjwt.Refreshtoken,
-		OrigIAT:             config.Requestjwt.Payload.Origiat,
-		RefreshTokenExpiry:  config.Requestjwt.Refreshexpiresin,
-		RefreshTokenSetTime: time.Now().Unix(),
-	}
 
-	tomlConfig, err := toml.Marshal(finalConfig)
+	tomlConfig, err := toml.Marshal(config)
 	if err != nil {
 		fmt.Println("Error in parsing the authentication data in the TOML format. Exiting ...")
 		return err

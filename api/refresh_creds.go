@@ -12,14 +12,14 @@ type RefreshAuthResponse struct {
 		Payload struct {
 			Email   string `json:"email"`
 			Exp     string `json:"exp"`
-			Origiat int    `json:"origIat"`
+			Origiat int64    `json:"origIat"`
 		} `json:"payload"`
-		Refreshexpiresin int    `json:"refreshExpiresIn"`
+		Refreshexpiresin int64    `json:"refreshExpiresIn"`
 		Refreshtoken     string `json:"refreshToken"`
 	} `json:"refreshToken"`
 }
 
-func RefreshAuthCreds(client *DSClient) (*RefreshAuthResponse, error) {
+func RefreshAuthCreds(client *DSClient, refreshToken string) (*RefreshAuthResponse, error) {
 
 	gq := client.gqlClient
 
@@ -37,6 +37,7 @@ func RefreshAuthCreds(client *DSClient) (*RefreshAuthResponse, error) {
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
+	req.Var("token", refreshToken)
 
 	// define a Context for the request
 	ctx := context.Background()
