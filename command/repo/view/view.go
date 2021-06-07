@@ -105,6 +105,7 @@ func (opts *RepoViewOptions) Run() error {
 		opts.RepoName = repoData[2]
 	}
 
+	// Making the "isActivated" query again just to confirm if the user has access to that repo
 	_, err := api.GetRepoStatus(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider)
 	if err != nil {
 		if strings.Contains(err.Error(), "Signature has expired") {
