@@ -6,6 +6,7 @@ import (
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/auth"
+	"github.com/deepsourcelabs/cli/command/repo"
 	"github.com/deepsourcelabs/cli/command/version"
 	"github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
@@ -19,6 +20,7 @@ func NewCmdRoot(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 	}
 	cmd.AddCommand(version.NewCmdVersion())
 	cmd.AddCommand(auth.NewCmdAuth(cmdFactory))
+	cmd.AddCommand(repo.NewCmdRepo(cmdFactory))
 
 	return cmd
 }

@@ -33,6 +33,23 @@ func ConfirmFromUser(msg string, helpText string) (bool, error) {
 	return response, nil
 }
 
+func SelectFromOptions(msg string, helpText string, opts []string) (string, error) {
+	var result string
+	prompt := &survey.Select{
+		Renderer: survey.Renderer{},
+		Message:  msg,
+		Options:  opts,
+		Default:  nil,
+		Help:     helpText,
+	}
+	err := survey.AskOne(prompt, &result)
+	if err != nil {
+		checkInterrupt(err)
+		return "", err
+	}
+	return result, nil
+}
+
 // Utility to check for Ctrl+C interrupts
 // Survey library doesn't exit on Ctrl+c interrupt. This handler helps in that.
 func checkInterrupt(err error) {
