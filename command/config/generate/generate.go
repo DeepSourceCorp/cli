@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/deepsourcelabs/cli/api"
+	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
@@ -13,23 +15,42 @@ import (
 
 // Options holds the metadata.
 type Options struct {
-	GoImportRoot          string // Mandatory meta for Go
-	JavaVersion           string // Mandatory meta for JAVA
-	GeneratedConfig       string
+	gqlClient *api.DSClient
+
+	AnalyzerNames         []string
+	AnalyzerShortcodes    []string
+	AnalyzersMap          map[string]string // Map for {analyzer name : shortcode}
+	TransformerNames      []string
+	TransformerShortcodes []string
+	TransformerMap        map[string]string // Map for {transformer name:shortcode}
+
+	GoImportRoot string // Mandatory meta for Go
+	JavaVersion  string // Mandatory meta for JAVA
+
 	ActivatedAnalyzers    []string
 	ActivatedTransformers []string
 	ExcludePatterns       []string
 	TestPatterns          []string
+
+	GeneratedConfig string
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdConfigGenerate() *cobra.Command {
+func NewCmdConfigGenerate(cf *cmdutils.CLIFactory) *cobra.Command {
+
+	o := Options{
+		gqlClient: cf.GQLClient,
+	}
+
 	cmd := &cobra.Command{
 		Use:   "generate",
 		Short: "Generate config for DeepSource",
-		Run: func(cmd *cobra.Command, args []string) {
-			o := Options{}
-			o.Run()
+		RunE: func(cmd *cobra.Command, args []string) error {
+			err := o.Run()
+			if err != nil {
+				return err
+			}
+			return nil
 		},
 	}
 	return cmd
@@ -41,34 +62,36 @@ func (o *Options) Validate() error {
 }
 
 // Run executes the command.
-func (o *Options) Run() {
+func (o *Options) Run() error {
 
 	// Collect user input
 	err := o.collectUserInput()
 	if err != nil {
 		fmt.Println("\nError occured while collecting input.Exiting...")
-		os.Exit(1)
+		return err
 	}
 
 	// Generates config based on user input
 	err = o.generateDeepSourceConfig()
 	if err != nil {
 		fmt.Println("\nError occured while generating config from input.Exiting...")
-		os.Exit(1)
+		return err
 	}
 
 	// Write the generated config to a file
 	err = o.writeConfigToFile()
 	if err != nil {
 		fmt.Println("\nError while writing config to project directory. Exiting...")
-		os.Exit(1)
+		return err
 	}
 
 	// Success output ricing
 	cwd, err := os.Getwd()
 	c := color.New(color.FgGreen)
-	successOutput := fmt.Sprintf("\nDeepSource config generated at %s/.deepsource.toml", cwd)
+	successOutput := fmt.Sprintf("\nSuccessfully generated DeepSoure config file at %s/.deepsource.toml", cwd)
 	c.Println(successOutput)
+
+	return nil
 }
 
 // Generates DeepSource config based on the inputs from the user in Options struct
@@ -92,7 +115,7 @@ func (o *Options) generateDeepSourceConfig() error {
 	for index, analyzer := range o.ActivatedAnalyzers {
 
 		config.Analyzers = append(config.Analyzers, Analyzer{
-			Name:                analyzer,
+			Name:                o.AnalyzersMap[analyzer],
 			RuntimeVersion:      "",
 			Enabled:             true,
 			DependencyFilePaths: []string{},
@@ -112,7 +135,7 @@ func (o *Options) generateDeepSourceConfig() error {
 	// Copying transformers from Options struct to DSConfig based "config" struct
 	for _, transformer := range o.ActivatedTransformers {
 		config.Transformers = append(config.Transformers, Transformer{
-			Name:    transformer,
+			Name:    o.TransformerMap[transformer],
 			Enabled: true,
 		})
 	}

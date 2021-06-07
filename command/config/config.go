@@ -1,6 +1,7 @@
 package config
 
 import (
+	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/config/generate"
 	"github.com/spf13/cobra"
 )
@@ -9,12 +10,12 @@ import (
 type Options struct{}
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdConfig() *cobra.Command {
+func NewCmdConfig(cf *cmdutils.CLIFactory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "config <command>",
 		Short: "Generate and Validate DeepSource config",
 	}
-	cmd.AddCommand(generate.NewCmdConfigGenerate())
+	cmd.AddCommand(generate.NewCmdConfigGenerate(cf))
 
 	return cmd
 }

@@ -20,7 +20,7 @@ func NewCmdRoot(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 		Long:  `Now ship good code directly from the command line.`,
 	}
 	cmd.AddCommand(version.NewCmdVersion())
-	cmd.AddCommand(config.NewCmdConfig())
+	cmd.AddCommand(config.NewCmdConfig(cmdFactory))
 	cmd.AddCommand(auth.NewCmdAuth(cmdFactory))
 	cmd.AddCommand(repo.NewCmdRepo(cmdFactory))
 

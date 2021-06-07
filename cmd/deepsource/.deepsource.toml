@@ -1,0 +1,27 @@
+version = 1
+exclude_patterns = []
+test_patterns = [""]
+
+[[analyzers]]
+  name = "test-coverage"
+  enabled = true
+
+[[analyzers]]
+  name = "terraform"
+  enabled = true
+
+[[analyzers]]
+  name = "sql"
+  enabled = true
+
+[[transformers]]
+  name = "black"
+  enabled = true
+
+[[transformers]]
+  name = "isort"
+  enabled = true
+
+[[transformers]]
+  name = "yapf"
+  enabled = true
