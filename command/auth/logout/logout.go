@@ -2,6 +2,7 @@ package logout
 
 import (
 	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -9,7 +10,7 @@ type LogoutOptions struct {
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdLogout(cf *cmdutils.CLIFactory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",
 		Short: "Logout from the DeepSource authentication on Command Line",
