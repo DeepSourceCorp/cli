@@ -28,9 +28,18 @@ func NewCmdLogout(cf *cmdutils.CLIFactory) *cobra.Command {
 
 func (opts *LogoutOptions) Run() error {
 
-	err := config.DeleteConfigFile()
+	logoutConfirmationMsg := "Are you sure you want to log out of DeepSource account?"
+	helpText := ""
+	response, err := cmdutils.ConfirmFromUser(logoutConfirmationMsg, helpText)
 	if err != nil {
 		return err
+	}
+
+	if response == true {
+		err := config.DeleteConfigFile()
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil

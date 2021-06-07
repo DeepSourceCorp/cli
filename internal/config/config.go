@@ -132,12 +132,12 @@ func DeleteConfigFile() error {
 	// Check if config.toml file already exists in .deepsource directory
 	_, err = os.Stat(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
 	if err != nil {
-		return err
+		return fmt.Errorf("User not authenticated")
 	}
 
 	err = os.Remove(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
 	if err != nil {
-		return err
+		return fmt.Errorf("Error occurred while logging out user - %v", err)
 	}
 
 	return nil
