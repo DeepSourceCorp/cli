@@ -5,6 +5,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/repo/status"
+	"github.com/deepsourcelabs/cli/command/repo/view"
 )
 
 // Options holds the metadata.
@@ -17,7 +18,7 @@ func NewCmdRepo(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 		Short: "Operations related to the project repository",
 	}
 	cmd.AddCommand(status.NewCmdRepoStatus(cmdFactory))
-	// cmd.AddCommand(view.NewCmdRepoView(cmdFactory))
+	cmd.AddCommand(view.NewCmdRepoView(cmdFactory))
 	return cmd
 }
 
