@@ -6,9 +6,10 @@ import (
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/auth"
+	"github.com/deepsourcelabs/cli/command/config"
 	"github.com/deepsourcelabs/cli/command/repo"
 	"github.com/deepsourcelabs/cli/command/version"
-	"github.com/deepsourcelabs/cli/internal/config"
+	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -19,6 +20,7 @@ func NewCmdRoot(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 		Long:  `Now ship good code directly from the command line.`,
 	}
 	cmd.AddCommand(version.NewCmdVersion())
+	cmd.AddCommand(config.NewCmdConfig())
 	cmd.AddCommand(auth.NewCmdAuth(cmdFactory))
 	cmd.AddCommand(repo.NewCmdRepo(cmdFactory))
 
@@ -32,12 +34,12 @@ func Execute() error {
 	var cmdFactory cmdutils.CLIFactory
 
 	// Config operations
-	var authConfigData config.ConfigData
+	var authConfigData cliConfig.ConfigData
 
 	// Read the config file
 	// If there is a config file already, this returns its data
 	// Else the fields are blank
-	authConfigData, _ = config.ReadConfig()
+	authConfigData, _ = cliConfig.ReadConfig()
 
 	cmdFactory.Config = authConfigData
 

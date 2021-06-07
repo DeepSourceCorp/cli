@@ -2,7 +2,7 @@ package logout
 
 import (
 	"github.com/deepsourcelabs/cli/cmdutils"
-	"github.com/deepsourcelabs/cli/internal/config"
+	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -36,7 +36,7 @@ func (opts *LogoutOptions) Run() error {
 	}
 
 	if response == true {
-		err := config.DeleteConfigFile()
+		err := cliConfig.DeleteConfigFile()
 		if err != nil {
 			return err
 		}

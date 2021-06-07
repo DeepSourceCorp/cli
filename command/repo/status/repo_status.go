@@ -6,14 +6,14 @@ import (
 
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
-	"github.com/deepsourcelabs/cli/internal/config"
+	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
 type RepoStatusOptions struct {
 	graphqlClient *api.DSClient
 	RepoArg       string
-	Config        config.ConfigData
+	Config        cliConfig.ConfigData
 	TokenExpired  bool
 	Owner         string
 	RepoName      string

@@ -5,7 +5,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
-	"github.com/deepsourcelabs/cli/internal/config"
+	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -14,7 +14,7 @@ type LoginOptions struct {
 	graphqlClient *api.DSClient
 	AuthTimedOut  bool
 	TokenExpired  bool
-	Config        config.ConfigData
+	Config        cliConfig.ConfigData
 }
 
 // NewCmdVersion returns the current version of cli being used

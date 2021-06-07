@@ -6,7 +6,7 @@ import (
 
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/api"
-	"github.com/deepsourcelabs/cli/internal/config"
+	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 )
 
 func (opts *LoginOptions) startLoginFlow() error {
@@ -62,7 +62,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 	}
 
 	// Convert incoming config into the ConfigData format
-	finalConfig := config.ConfigData{
+	finalConfig := cliConfig.ConfigData{
 		User:                jwtData.Requestjwt.Payload.Email,
 		Token:               jwtData.Requestjwt.Token,
 		TokenExpiry:         jwtData.Requestjwt.Payload.Exp,
@@ -72,7 +72,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 		RefreshTokenSetTime: time.Now().Unix(),
 	}
 
-	err = config.WriteConfigToFile(finalConfig)
+	err = cliConfig.WriteConfigToFile(finalConfig)
 	if err != nil {
 		fmt.Println("Error in writing authentication data to a file. Exiting...")
 		return err

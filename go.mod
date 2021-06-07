@@ -6,8 +6,10 @@ require (
 	github.com/AlecAivazis/survey/v2 v2.2.12
 	github.com/cli/browser v1.1.0 // indirect
 	github.com/deepsourcelabs/graphql v0.2.2
+	github.com/fatih/color v1.12.0 // indirect
 	github.com/getsentry/sentry-go v0.6.0
 	github.com/google/go-cmp v0.5.5 // indirect
+	github.com/kyokomi/emoji/v2 v2.2.8 // indirect
 	github.com/matryer/is v1.4.0 // indirect
 	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/pelletier/go-toml v1.9.2

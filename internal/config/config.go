@@ -50,7 +50,6 @@ func ReadConfig() (ConfigData, error) {
 
 func WriteConfigToFile(config ConfigData) error {
 
-
 	tomlConfig, err := toml.Marshal(config)
 	if err != nil {
 		fmt.Println("Error in parsing the authentication data in the TOML format. Exiting ...")

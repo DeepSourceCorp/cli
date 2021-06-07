@@ -6,13 +6,13 @@ import (
 
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
-	"github.com/deepsourcelabs/cli/internal/config"
+	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
 type RefreshOptions struct {
 	graphqlClient *api.DSClient
-	Config        config.ConfigData
+	Config        cliConfig.ConfigData
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -45,7 +45,7 @@ func (opts *RefreshOptions) Run() error {
 		}
 
 		// Convert incoming config into the ConfigData format
-		finalConfig := config.ConfigData{
+		finalConfig := cliConfig.ConfigData{
 			User:                refreshedConfigData.Refreshtoken.Payload.Email,
 			Token:               refreshedConfigData.Refreshtoken.Token,
 			TokenExpiry:         refreshedConfigData.Refreshtoken.Payload.Exp,
@@ -55,7 +55,7 @@ func (opts *RefreshOptions) Run() error {
 			RefreshTokenSetTime: time.Now().Unix(),
 		}
 
-		err = config.WriteConfigToFile(finalConfig)
+		err = cliConfig.WriteConfigToFile(finalConfig)
 		if err != nil {
 			fmt.Println("Error in writing authentication data to a file. Exiting...")
 			return err
