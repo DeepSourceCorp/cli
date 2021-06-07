@@ -13,7 +13,6 @@ func (opts *LoginOptions) startLoginFlow() error {
 
 	// Send a mutation to register device and get the device code
 	deviceCode, userCode, verificationURI, expiresIn, interval, err := api.GetDeviceCode(opts.graphqlClient)
-
 	if err != nil {
 		return err
 	}
@@ -34,6 +33,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 	pollStartTime := time.Now()
 	var jwtData *api.FetchJWTResponse
 
+	// Polling for JWT
 	func() {
 		for {
 			select {

@@ -121,3 +121,24 @@ func WriteConfigToFile(config *api.FetchJWTResponse) error {
 
 	return nil
 }
+
+func DeleteConfigFile() error {
+
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		return err
+	}
+
+	// Check if config.toml file already exists in .deepsource directory
+	_, err = os.Stat(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
+	if err != nil {
+		return err
+	}
+
+	err = os.Remove(filepath.Join(homeDir, "/.deepsource/", "config.toml"))
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

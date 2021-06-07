@@ -24,6 +24,7 @@ func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",
 		RunE: func(cmd *cobra.Command, args []string) error {
+
 			opts := LoginOptions{
 				graphqlClient: cf.GQLClient,
 				hostName:      cf.HostName,
@@ -49,26 +50,28 @@ func (opts *LoginOptions) Validate() error {
 // Run executest the command.
 func (opts *LoginOptions) Run() error {
 
-	// Check here for two conditions:
+	// Before starting the login workflow, check here for two conditions:
 	// 1 - If the token has expired, display a message about it and re-authenticate user
 	// 2 - If the token has not expired,does the user want to re-authenticate?
 
 	// Checking for condition 1
 	if opts.TokenExpired == false {
+
+		// The user is already logged in, confirm re-authentication
 		msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", opts.Config.User)
 		helpText := ""
 
 		response, err := cmdutils.ConfirmFromUser(msg, helpText)
 		if err != nil {
+			fmt.Println("Error in getting response. Please try again...")
 			return err
 		}
 
+		// User doesn't waant to re-authenticate
 		if response == false {
 			return nil
 		}
 	}
-
-	// Checking for condition 2
 
 	// Login flow starts
 	err := opts.startLoginFlow()

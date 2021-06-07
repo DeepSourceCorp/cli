@@ -2,7 +2,6 @@ package api
 
 import (
 	"context"
-	"log"
 
 	"github.com/deepsourcelabs/graphql"
 )
@@ -65,8 +64,9 @@ func GetJWT(client *DSClient, deviceCode string) (*FetchJWTResponse, error) {
 	// run it and capture the response
 	// var graphqlResponse map[string]interface{}
 	var respData FetchJWTResponse
+	// TODO: See what error asgard throws here which should be returned
+	// Ignore the graphql: Authorization pending. error
 	if err := gq.Run(ctx, req, &respData); err != nil {
-		log.Println(err)
 	}
 
 	return &respData, nil

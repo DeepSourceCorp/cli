@@ -25,6 +25,8 @@ func NewCmdRoot(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 
 func Execute() error {
 
+	var err error
+
 	var cmdFactory cmdutils.CLIFactory
 
 	// Config operations
@@ -37,16 +39,19 @@ func Execute() error {
 
 	cmdFactory.Config = authConfigData
 
+	// Setting defaults factory settings
 	cmdFactory.HostName = "http://localhost:8000/graphql/"
+	cmdFactory.TokenExpired = true
 
 	// Creating a GraphQL client which can be picked up by any command since its in the factory
 	cmdFactory.GQLClient = api.NewDSClient(cmdFactory.HostName, cmdFactory.Config.Token)
-	var err error
 
 	if cmdFactory.Config.Token != "" {
 		cmdFactory.TokenExpired, err = api.CheckTokenExpiry(cmdFactory.GQLClient, cmdFactory.Config.Token)
 		if err != nil {
-			fmt.Println(err)
+			if err == fmt.Errorf("graphql: Signature has expired") {
+				fmt.Println("The token has expired. Please refresh the token or reauthenticate.")
+			}
 		}
 	}
 
