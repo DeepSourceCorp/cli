@@ -68,6 +68,9 @@ func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
 func (opts *IssuesListOptions) Run() error {
 
 	// We need to specify the repository url by ourselves
+    if opts.LimitArg >100{
+        return fmt.Errorf("The maximum allowed limit to fetch issues is 100. Found %d",opts.LimitArg)
+    }
 
 	if opts.RepoArg == "" {
 
