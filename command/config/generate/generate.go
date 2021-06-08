@@ -88,7 +88,7 @@ func (o *Options) Run() error {
 	// Success output ricing
 	cwd, err := os.Getwd()
 	c := color.New(color.FgGreen)
-	successOutput := fmt.Sprintf("\nSuccessfully generated DeepSoure config file at %s/.deepsource.toml", cwd)
+	successOutput := fmt.Sprintf("\nSuccessfully generated DeepSource config file at %s/.deepsource.toml", cwd)
 	c.Println(successOutput)
 
 	return nil
