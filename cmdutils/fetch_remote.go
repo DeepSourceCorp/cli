@@ -2,6 +2,7 @@ package cmdutils
 
 import (
 	"fmt"
+	"net/url"
 	"os/exec"
 	"regexp"
 	"strings"
@@ -49,11 +50,11 @@ func ListRemotes() (map[string][]string, error) {
 		urlCmdString := fmt.Sprintf("remote.%s.url", remoteParams[0])
 
 		// Fetch the remote URL using the command "git config --get --local remote.<remote-name>.url"
-		url, err := runCmd("git", []string{"config", "--get", "--local", "--null", urlCmdString})
+		rUrl, err := runCmd("git", []string{"config", "--get", "--local", "--null", urlCmdString})
 		if err != nil {
 			return remoteMap, err
 		}
-		remoteURL := string(url)
+		remoteURL := string(rUrl)
 
 		// Parsing out VCS Provider from the remote URL
 		if strings.Contains(remoteURL, "github") {
@@ -72,10 +73,33 @@ func ListRemotes() (map[string][]string, error) {
 		matched := RepoNameRegexp.FindStringSubmatch(remoteURL)
 		repositoryName := strings.TrimSuffix(matched[1], ".git")
 
-		owner, err := runCmd("git", []string{"config", "--get", "--null", "user.name"})
-		if err != nil {
-			continue
+		var owner string
+
+		// git@ ssh urls
+		if strings.HasPrefix(remoteURL, "git@") {
+
+			pathURL := strings.Split(remoteURL, ":")
+			newPathURL := pathURL[1]
+			u, err := url.Parse(newPathURL)
+			if err != nil {
+				continue
+			}
+			splitPath := strings.Split(u.Path, "/")
+			owner = splitPath[0]
+		} else if strings.HasPrefix(remoteURL, "https://") {
+			u, err := url.Parse(remoteURL)
+			if err != nil {
+				continue
+			}
+			splitPath := strings.Split(u.Path, "/")
+
+			owner = splitPath[0]
 		}
+
+		// owner, err := runCmd("git", []string{"config", "--get", "--null", "user.name"})
+		// if err != nil {
+		//     continue
+		// }
 
 		completeRepositoryName := fmt.Sprintf("%s/%s", owner, repositoryName)
 		remoteMap[remoteName] = []string{owner, repositoryName, VCSProvider, completeRepositoryName}

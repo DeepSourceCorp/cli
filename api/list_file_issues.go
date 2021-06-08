@@ -25,7 +25,7 @@ type IssuesListFileResponse struct {
 						} `json:"concreteIssue"`
 					} `json:"node"`
 				} `json:"edges"`
-			} `json:"Issues"`
+			} `json:"issues"`
 		} `json:"file"`
 	} `json:"repository"`
 }
@@ -35,10 +35,10 @@ func GetIssuesForFile(client *DSClient, owner string, repoName string, provider 
 	gq := client.gqlClient
 
 	query := `
-    query{
+    query($name:String!, $owner:String!, $provider:VCSProviderChoices!, $path:String!){
         repository(name:$name, owner:$owner, provider:$provider){
-            file(path:$filepath){
-                Issues{
+            file(path:$path){
+                issues{
                     edges{
                         node{
                             path
@@ -64,7 +64,7 @@ func GetIssuesForFile(client *DSClient, owner string, repoName string, provider 
 	req.Var("name", repoName)
 	req.Var("owner", owner)
 	req.Var("provider", provider)
-	req.Var("filepath", filePath)
+	req.Var("path", filePath)
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")

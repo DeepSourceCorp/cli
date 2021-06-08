@@ -6,6 +6,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -17,25 +18,30 @@ type IssuesListOptions struct {
 	Owner       string
 	RepoName    string
 	VCSProvider string
+
+	issuesData        *api.IssuesListResponse
+	issuesDataForFile *api.IssuesListFileResponse
 }
 
 // NewCmdVersion returns the current version of cli being used
 func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
 
 	opts := IssuesListOptions{
-		graphqlClient: cf.GQLClient,
-		FileArg:       "",
-		RepoArg:       "",
-		Owner:         "",
-		RepoName:      "",
-		VCSProvider:   "",
+		graphqlClient:     cf.GQLClient,
+		FileArg:           "",
+		RepoArg:           "",
+		Owner:             "",
+		RepoName:          "",
+		VCSProvider:       "",
+		issuesData:        &api.IssuesListResponse{},
+		issuesDataForFile: &api.IssuesListFileResponse{},
 	}
 
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List issues reported by DeepSource",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if len(args) > 1 {
+			if len(args) == 1 {
 				opts.FileArg = args[0]
 			}
 			err := opts.Run()
@@ -105,13 +111,72 @@ func (opts *IssuesListOptions) Run() error {
 		opts.RepoName = repoData[2]
 	}
 
+	var err error
+
 	// Case 1 : For a certain FileArg (filepath)
 	if opts.FileArg != "" {
-		issuesDataForFile, err := api.GetIssuesForFile(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg)
+		// opts.issuesDataForFile, err = api.GetIssuesForFile(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg)
+
+		opts.issuesDataForFile, err = api.GetIssuesForFile(opts.graphqlClient, "mohi7solanki", "django_dramatiq", "GITHUB", "django_dramatiq/models.py")
+		if err != nil {
+			return err
+		}
+
+		opts.ShowIssues(true)
+
 	} else {
 		// Case 2 : For the whole project
-		issuesData, err := api.GetIssues(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider)
+		opts.issuesData, err = api.GetIssues(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider)
+		if err != nil {
+			return err
+		}
+
+		opts.ShowIssues(false)
 	}
 
 	return nil
+}
+
+func (opts *IssuesListOptions) ShowIssues(fileMode bool) {
+
+	var nodeData []string
+
+	if fileMode == true {
+
+		pTermTable := make([][]string, len(opts.issuesDataForFile.Repository.File.Issues.Edges))
+		for index, edge := range opts.issuesDataForFile.Repository.File.Issues.Edges {
+
+			filePath := edge.Node.Path
+			beginLine := edge.Node.Beginline
+			issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
+			analyzerShortcode := edge.Node.Concreteissue.Analyzer.Shortcode
+			issueCode := edge.Node.Concreteissue.Shortcode
+			issueTitle := edge.Node.Concreteissue.Title
+
+			nodeData := append(nodeData, issueLocation, analyzerShortcode, issueCode, issueTitle)
+
+			pTermTable[index] = nodeData
+
+			pterm.DefaultTable.WithData(pTermTable).Render()
+		}
+	} else {
+
+		pTermTable := make([][]string, len(opts.issuesData.Repository.Issues.Edges))
+		for index, edge := range opts.issuesData.Repository.Issues.Edges {
+
+			filePath := edge.Node.Path
+			beginLine := edge.Node.Beginline
+			issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
+			analyzerShortcode := edge.Node.Concreteissue.Analyzer.Shortcode
+			issueCode := edge.Node.Concreteissue.Shortcode
+			issueTitle := edge.Node.Concreteissue.Title
+
+			nodeData := append(nodeData, issueLocation, analyzerShortcode, issueCode, issueTitle)
+
+			pTermTable[index] = nodeData
+
+			pterm.DefaultTable.WithData(pTermTable).Render()
+		}
+	}
+
 }

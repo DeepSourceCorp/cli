@@ -11,10 +11,10 @@ import (
 type Options struct{}
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdAuth(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdIssues(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "auth",
-		Short: "Authenticate with DeepSource",
+		Use:   "issues",
+		Short: "Show the list of issues in a file in a repository",
 	}
 	cmd.AddCommand(list.NewCmdIssuesList(cmdFactory))
 	return cmd
