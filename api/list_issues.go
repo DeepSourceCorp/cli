@@ -3,7 +3,6 @@ package api
 import (
 	"context"
 	"fmt"
-	"log"
 
 	"github.com/deepsourcelabs/graphql"
 )
@@ -29,14 +28,14 @@ type IssuesListResponse struct {
 	} `json:"repository"`
 }
 
-func GetIssues(client *DSClient, owner string, repoName string, provider string) (*IssuesListResponse, error) {
+func GetIssues(client *DSClient, owner string, repoName string, provider string, limit int) (*IssuesListResponse, error) {
 
 	gq := client.gqlClient
 
 	query := `
-    query GetAllIssues($name:String!, $owner:String!, $provider:VCSProviderChoices!){
+    query GetAllIssues($name:String!, $owner:String!, $provider:VCSProviderChoices!, $limit:Int!){
         repository(name:$name, owner:$owner, provider:$provider){
-            issues{
+            issues(first:$limit){
                 edges{
                     node{
                         path
@@ -58,10 +57,10 @@ func GetIssues(client *DSClient, owner string, repoName string, provider string)
 	req := graphql.NewRequest(query)
 	header := fmt.Sprintf("JWT %s", client.Token)
 	req.Header.Add("Authorization", header)
-	log.Println(repoName)
 	req.Var("name", repoName)
 	req.Var("owner", owner)
 	req.Var("provider", provider)
+	req.Var("limit", limit)
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")

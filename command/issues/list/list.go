@@ -2,6 +2,7 @@ package list
 
 import (
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/api"
@@ -14,6 +15,7 @@ type IssuesListOptions struct {
 	graphqlClient *api.DSClient
 	FileArg       string
 	RepoArg       string
+	LimitArg      int
 
 	Owner       string
 	RepoName    string
@@ -21,6 +23,7 @@ type IssuesListOptions struct {
 
 	issuesData        *api.IssuesListResponse
 	issuesDataForFile *api.IssuesListFileResponse
+	ptermTable        [][]string
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -30,11 +33,13 @@ func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
 		graphqlClient:     cf.GQLClient,
 		FileArg:           "",
 		RepoArg:           "",
+		LimitArg:          30,
 		Owner:             "",
 		RepoName:          "",
 		VCSProvider:       "",
 		issuesData:        &api.IssuesListResponse{},
 		issuesDataForFile: &api.IssuesListFileResponse{},
+		ptermTable:        [][]string{},
 	}
 
 	cmd := &cobra.Command{
@@ -53,11 +58,16 @@ func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
 	}
 
 	// --repo, -r flag
-	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "Get the activation status of the specified repository")
+	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List the issues of the specified repository")
+
+	// --limit, -l flag
+	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Fetch the issues upto the specified limit")
 	return cmd
 }
 
 func (opts *IssuesListOptions) Run() error {
+
+	// We need to specify the repository url by ourselves
 
 	if opts.RepoArg == "" {
 
@@ -100,6 +110,8 @@ func (opts *IssuesListOptions) Run() error {
 		}
 	} else {
 
+		// If the user has passed the --repo flag
+
 		// Parsing the arguments to --repo flag
 		repoData, err := cmdutils.RepoArgumentResolver(opts.RepoArg)
 		if err != nil {
@@ -117,7 +129,7 @@ func (opts *IssuesListOptions) Run() error {
 	if opts.FileArg != "" {
 		// opts.issuesDataForFile, err = api.GetIssuesForFile(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg)
 
-		opts.issuesDataForFile, err = api.GetIssuesForFile(opts.graphqlClient, "mohi7solanki", "django_dramatiq", "GITHUB", "django_dramatiq/models.py")
+		opts.issuesDataForFile, err = api.GetIssuesForFile(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider, opts.RepoArg, opts.LimitArg)
 		if err != nil {
 			return err
 		}
@@ -126,7 +138,7 @@ func (opts *IssuesListOptions) Run() error {
 
 	} else {
 		// Case 2 : For the whole project
-		opts.issuesData, err = api.GetIssues(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider)
+		opts.issuesData, err = api.GetIssues(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
 		if err != nil {
 			return err
 		}
@@ -143,7 +155,8 @@ func (opts *IssuesListOptions) ShowIssues(fileMode bool) {
 
 	if fileMode == true {
 
-		pTermTable := make([][]string, len(opts.issuesDataForFile.Repository.File.Issues.Edges))
+		opts.ptermTable = make([][]string, len(opts.issuesDataForFile.Repository.File.Issues.Edges))
+
 		for index, edge := range opts.issuesDataForFile.Repository.File.Issues.Edges {
 
 			filePath := edge.Node.Path
@@ -153,15 +166,16 @@ func (opts *IssuesListOptions) ShowIssues(fileMode bool) {
 			issueCode := edge.Node.Concreteissue.Shortcode
 			issueTitle := edge.Node.Concreteissue.Title
 
-			nodeData := append(nodeData, issueLocation, analyzerShortcode, issueCode, issueTitle)
+			nodeData = append(nodeData, issueLocation, analyzerShortcode, issueCode, issueTitle)
+			log.Println(nodeData)
 
-			pTermTable[index] = nodeData
+			opts.ptermTable[index] = nodeData
 
-			pterm.DefaultTable.WithData(pTermTable).Render()
+			nodeData = nil
 		}
 	} else {
 
-		pTermTable := make([][]string, len(opts.issuesData.Repository.Issues.Edges))
+		opts.ptermTable = make([][]string, len(opts.issuesData.Repository.Issues.Edges))
 		for index, edge := range opts.issuesData.Repository.Issues.Edges {
 
 			filePath := edge.Node.Path
@@ -171,12 +185,14 @@ func (opts *IssuesListOptions) ShowIssues(fileMode bool) {
 			issueCode := edge.Node.Concreteissue.Shortcode
 			issueTitle := edge.Node.Concreteissue.Title
 
-			nodeData := append(nodeData, issueLocation, analyzerShortcode, issueCode, issueTitle)
+			nodeData = append(nodeData, issueLocation, analyzerShortcode, issueCode, issueTitle)
 
-			pTermTable[index] = nodeData
+			opts.ptermTable[index] = nodeData
 
-			pterm.DefaultTable.WithData(pTermTable).Render()
+			nodeData = nil
 		}
 	}
+
+	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()
 
 }

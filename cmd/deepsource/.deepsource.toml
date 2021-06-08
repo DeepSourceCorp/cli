@@ -1,0 +1,23 @@
+version = 1
+exclude_patterns = ["main.go"]
+test_patterns = ["deepsource"]
+
+[[analyzers]]
+  name = "sql"
+  enabled = true
+
+[[analyzers]]
+  name = "ruby"
+  enabled = true
+
+[[analyzers]]
+  name = "javascript"
+  enabled = true
+
+[[transformers]]
+  name = "black"
+  enabled = true
+
+[[transformers]]
+  name = "yapf"
+  enabled = true
