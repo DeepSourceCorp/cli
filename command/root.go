@@ -51,7 +51,7 @@ func Execute() error {
 	cmdFactory.Config = authConfigData
 
 	// Setting defaults factory settings
-	cmdFactory.HostName = "https://api.deepsource.icu/graphql/"
+	cmdFactory.HostName = "https://api.deepsource.io/graphql/"
 	cmdFactory.TokenExpired = true
 
 	// Creating a GraphQL client which can be picked up by any command since its in the factory
