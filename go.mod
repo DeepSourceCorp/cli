@@ -11,7 +11,10 @@ require (
 	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/matryer/is v1.4.0 // indirect
 	github.com/pelletier/go-toml v1.9.2
+	github.com/pterm/pterm v0.12.23 // indirect
 	github.com/spf13/cobra v1.1.3
+	github.com/spf13/viper v1.7.1 // indirect
+	github.com/xeipuuv/gojsonschema v1.2.0 // indirect
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
 	golang.org/x/sys v0.0.0-20210423082822-04245dca01da // indirect
 	golang.org/x/text v0.3.6 // indirect

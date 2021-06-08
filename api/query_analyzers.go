@@ -10,14 +10,20 @@ type AnalyzersQueryResponse struct {
 	Analyzers struct {
 		Edges []struct {
 			Node struct {
-				Name      string `json:"name"`
-				Shortcode string `json:"shortcode"`
+				Name       string `json:"name"`
+				Shortcode  string `json:"shortcode"`
+				MetaSchema string `json:"metaSchema"`
 			} `json:"node"`
 		} `json:"edges"`
 	} `json:"analyzers"`
 }
 
-func GetSupportedAnalyzers(client *DSClient) (*AnalyzersQueryResponse, error) {
+func GetSupportedAnalyzers(client *DSClient) ([]string, []string, []string, map[string]string, error) {
+
+	var analyzerNames []string
+	var analyzerShortcodes []string
+	var analyzerMeta []string
+	analyzersMap := make(map[string]string)
 
 	gq := client.gqlClient
 
@@ -28,6 +34,7 @@ func GetSupportedAnalyzers(client *DSClient) (*AnalyzersQueryResponse, error) {
                 node {
                     name
                     shortcode
+                    metaSchema
                 }
             }
         }
@@ -45,9 +52,17 @@ func GetSupportedAnalyzers(client *DSClient) (*AnalyzersQueryResponse, error) {
 	// var graphqlResponse map[string]interface{}
 	var respData AnalyzersQueryResponse
 	if err := gq.Run(ctx, req, &respData); err != nil {
-		return &respData, err
+		return analyzerNames, analyzerShortcodes, analyzerMeta, analyzersMap, err
 	}
 
-	return &respData, nil
+	// Copying data into Options struct
+	for _, edge := range respData.Analyzers.Edges {
+		analyzerNames = append(analyzerNames, edge.Node.Name)
+		analyzerShortcodes = append(analyzerShortcodes, edge.Node.Shortcode)
+		analyzerMeta = append(analyzerMeta, edge.Node.MetaSchema)
+		analyzersMap[edge.Node.Name] = edge.Node.Shortcode
+	}
+
+	return analyzerNames, analyzerShortcodes, analyzerMeta, analyzersMap, nil
 
 }

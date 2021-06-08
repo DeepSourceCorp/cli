@@ -17,7 +17,11 @@ type TransformersQueryResponse struct {
 	} `json:"transformers"`
 }
 
-func GetSupportedTransformers(client *DSClient) (*TransformersQueryResponse, error) {
+func GetSupportedTransformers(client *DSClient) ([]string, []string, map[string]string, error) {
+
+	var transformerNames []string
+	var transformerShortcodes []string
+	transformerMap := make(map[string]string)
 
 	gq := client.gqlClient
 
@@ -45,9 +49,15 @@ func GetSupportedTransformers(client *DSClient) (*TransformersQueryResponse, err
 	// var graphqlResponse map[string]interface{}
 	var respData TransformersQueryResponse
 	if err := gq.Run(ctx, req, &respData); err != nil {
-		return &respData, err
+		return transformerNames, transformerShortcodes, transformerMap, err
 	}
 
-	return &respData, nil
+	for _, edge := range respData.Transformers.Edges {
+		transformerNames = append(transformerNames, edge.Node.Name)
+		transformerShortcodes = append(transformerShortcodes, edge.Node.Shortcode)
+		transformerMap[edge.Node.Name] = edge.Node.Shortcode
+	}
+
+	return transformerNames, transformerShortcodes, transformerMap, nil
 
 }
