@@ -1,13 +1,13 @@
 version = 1
-exclude_patterns = ["main.go"]
-test_patterns = ["deepsource"]
+exclude_patterns = []
+test_patterns = []
 
 [[analyzers]]
-  name = "sql"
+  name = "php"
   enabled = true
 
 [[analyzers]]
-  name = "ruby"
+  name = "python"
   enabled = true
 
 [[analyzers]]
@@ -15,9 +15,17 @@ test_patterns = ["deepsource"]
   enabled = true
 
 [[transformers]]
-  name = "black"
+  name = "google-java-format"
   enabled = true
 
 [[transformers]]
   name = "yapf"
+  enabled = true
+
+[[transformers]]
+  name = "autopep8"
+  enabled = true
+
+[[transformers]]
+  name = "standardjs"
   enabled = true

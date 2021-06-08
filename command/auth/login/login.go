@@ -36,6 +36,7 @@ func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
+		SilenceUsage: true,
 	}
 	return cmd
 }

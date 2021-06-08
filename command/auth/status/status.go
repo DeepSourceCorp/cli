@@ -1,10 +1,9 @@
 package status
 
 import (
-	"fmt"
-
 	"github.com/deepsourcelabs/cli/cmdutils"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +17,7 @@ type AuthStatusOptions struct {
 func NewCmdStatus(cf *cmdutils.CLIFactory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "status",
-		Short: "Refresh stored authentication credentials",
+		Short: "View the authentication status",
 		Run: func(cmd *cobra.Command, args []string) {
 			opts := AuthStatusOptions{
 				TokenExpired:  cf.TokenExpired,
@@ -36,9 +35,9 @@ func (opts *AuthStatusOptions) Run() {
 	if opts.TokenExpired == false {
 		opts.Authenticated = true
 
-		fmt.Printf("Logged in to DeepSource (deepsource.io) as %s\n", opts.Config.User)
+		pterm.Success.Printf("Logged in to DeepSource (deepsource.io) as %s\n", opts.Config.User)
 	} else {
-		fmt.Println("You are not logged into DeepSource. Run \"gh auth login\" to authenticate.")
+		pterm.Error.Println("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
 	}
 
 }

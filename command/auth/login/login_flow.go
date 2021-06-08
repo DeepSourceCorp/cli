@@ -7,6 +7,8 @@ import (
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/api"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/fatih/color"
+	"github.com/pterm/pterm"
 )
 
 func (opts *LoginOptions) startLoginFlow() error {
@@ -19,8 +21,9 @@ func (opts *LoginOptions) startLoginFlow() error {
 
 	// Having received the device code, open the browser at verificationURI
 	// Print the user code and the permission to open browser at verificationURI
-	fmt.Printf("Please copy your one-time code: %s\n", userCode)
-	fmt.Printf("Press enter to open deepsource.io in your browser...")
+	c := color.New(color.FgCyan, color.Bold)
+	c.Printf("Please copy your one-time code: %s\n", userCode)
+	c.Printf("Press enter to open deepsource.io in your browser...")
 	fmt.Scanln()
 
 	err = browser.OpenURL(verificationURI)
@@ -57,7 +60,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 
 	// Check if its a success poll or the auth timed out
 	if opts.AuthTimedOut {
-		fmt.Println("Authentication timed out. Exiting...")
+		pterm.Error.Println("Authentication timed out. Exiting...")
 		return fmt.Errorf("Authentication timed out")
 	}
 
@@ -74,7 +77,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 
 	err = cliConfig.WriteConfigToFile(finalConfig)
 	if err != nil {
-		fmt.Println("Error in writing authentication data to a file. Exiting...")
+		pterm.Error.Println("Error in writing authentication data to a file. Exiting...")
 		return err
 	}
 

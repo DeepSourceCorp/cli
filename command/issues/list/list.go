@@ -55,6 +55,8 @@ func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
+        SilenceErrors:true,
+        SilenceUsage:true,
 	}
 
 	// --repo, -r flag

@@ -19,7 +19,10 @@ func NewCmdRoot(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "deepsource <command> <subcommand> [flags]",
 		Short: "DeepSource CLI",
-		Long:  `Now ship good code directly from the command line.`,
+		Long: `Welcome to DeepSource CLI
+Now ship good code directly from the command line.
+
+Login into DeepSource using the command : deepsource auth login`,
 	}
 	cmd.AddCommand(version.NewCmdVersion())
 	cmd.AddCommand(config.NewCmdConfig(cmdFactory))
@@ -48,7 +51,7 @@ func Execute() error {
 	cmdFactory.Config = authConfigData
 
 	// Setting defaults factory settings
-	cmdFactory.HostName = "http://localhost:8000/graphql/"
+	cmdFactory.HostName = "https://api.deepsource.icu/graphql/"
 	cmdFactory.TokenExpired = true
 
 	// Creating a GraphQL client which can be picked up by any command since its in the factory

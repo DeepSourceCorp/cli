@@ -46,6 +46,8 @@ func NewCmdValidate(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
+		SilenceErrors: true,
+		SilenceUsage:  true,
 	}
 	return cmd
 }

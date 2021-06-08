@@ -3,6 +3,7 @@ package logout
 import (
 	"github.com/deepsourcelabs/cli/cmdutils"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -13,7 +14,7 @@ type LogoutOptions struct {
 func NewCmdLogout(cf *cmdutils.CLIFactory) *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",
-		Short: "Logout from the DeepSource authentication on Command Line",
+		Short: "Logout of your active DeepSource account",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts := LogoutOptions{}
 			err := opts.Run()
@@ -22,6 +23,8 @@ func NewCmdLogout(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
+        SilenceErrors:true,
+        SilenceUsage: true,
 	}
 	return cmd
 }
@@ -42,5 +45,6 @@ func (opts *LogoutOptions) Run() error {
 		}
 	}
 
+	pterm.Info.Println("Logged out from DeepSource (deepsource.io)")
 	return nil
 }

@@ -1,12 +1,12 @@
 package status
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -43,6 +43,8 @@ func NewCmdRepoStatus(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
+		SilenceErrors: true,
+		SilenceUsage:  true,
 	}
 
 	// --repo, -r flag
@@ -57,7 +59,7 @@ func (opts *RepoStatusOptions) Run() error {
 		remotesData, err := cmdutils.ListRemotes()
 		if err != nil {
 			if strings.Contains(err.Error(), "exit status 128") {
-				fmt.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
+				pterm.Info.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
 			}
 			return err
 		}
@@ -112,9 +114,9 @@ func (opts *RepoStatusOptions) Run() error {
 	}
 
 	if activationStatus == true {
-		fmt.Println("Analysis active.")
+		pterm.Info.Println("Analysis active on DeepSource (deepsource.io)")
 	} else {
-		fmt.Println("Analysis is currently not actived on this repository.")
+		pterm.Info.Println("DeepSource analysis is currently not actived on this repository.")
 	}
 
 	return nil

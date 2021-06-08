@@ -8,6 +8,7 @@ import (
 	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -44,6 +45,8 @@ func NewCmdRepoView(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
+        SilenceErrors:true,
+        SilenceUsage:false,
 	}
 
 	// --repo, -r flag
@@ -58,7 +61,7 @@ func (opts *RepoViewOptions) Run() error {
 		remotesData, err := cmdutils.ListRemotes()
 		if err != nil {
 			if strings.Contains(err.Error(), "exit status 128") {
-				fmt.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
+				pterm.Info.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
 			}
 			return err
 		}

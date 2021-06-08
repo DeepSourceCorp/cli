@@ -17,20 +17,22 @@ type RefreshOptions struct {
 
 // NewCmdVersion returns the current version of cli being used
 func NewCmdRefresh(cf *cmdutils.CLIFactory) *cobra.Command {
+	opts := RefreshOptions{
+		graphqlClient: cf.GQLClient,
+		Config:        cf.Config,
+	}
 	cmd := &cobra.Command{
 		Use:   "refresh",
 		Short: "Refresh stored authentication credentials",
 		RunE: func(cmd *cobra.Command, args []string) error {
-			opts := RefreshOptions{
-				graphqlClient: cf.GQLClient,
-				Config:        cf.Config,
-			}
 			err := opts.Run()
 			if err != nil {
 				return err
 			}
 			return nil
 		},
+        SilenceErrors: true,
+		SilenceUsage: true,
 	}
 	return cmd
 }
@@ -61,7 +63,7 @@ func (opts *RefreshOptions) Run() error {
 			return err
 		}
 	} else {
-		return fmt.Errorf("User not authenticated. Please login.")
+		return fmt.Errorf("User not authenticated. Please login using the command - `deepsource auth login`")
 	}
 	return nil
 }

@@ -2,9 +2,11 @@ package main
 
 import (
 	"log"
+	"os"
 
 	"github.com/deepsourcelabs/cli/command"
 	"github.com/deepsourcelabs/cli/version"
+	"github.com/pterm/pterm"
 )
 
 var (
@@ -24,6 +26,7 @@ func main() {
 	version.SetBuildInfo(Version, Date, "", "")
 
 	if err := command.Execute(); err != nil {
-		log.Fatal(err)
+		pterm.Error.Println(err)
+		os.Exit(1)
 	}
 }

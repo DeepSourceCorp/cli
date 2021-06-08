@@ -52,10 +52,11 @@ func NewCmdConfigGenerate(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
+		SilenceErrors: true,
+		SilenceUsage:  true,
 	}
 	return cmd
 }
-
 // Validate impletments the Validate method for the ICommand interface.
 func (o *Options) Validate() error {
 	return nil
