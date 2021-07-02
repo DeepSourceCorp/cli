@@ -6,3 +6,7 @@ enabled = true
 
   [analyzers.meta]
   import_path = "github.com/deepsourcelabs/cli"
+
+[[analyzers]]
+name = "secrets"
+enabled = true
