@@ -12,3 +12,7 @@ enabled = true
   plugins = ["vue"]
   style_guide = "airbnb"
   dialect = "typescript"
+
+[[analyzers]]
+name = "secrets"
+enabled = true
