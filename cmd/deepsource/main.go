@@ -17,6 +17,9 @@ var (
 
 	// Date is the build date.  This is set using ldflags -X
 	Date = "YYYY-MM-DD" // YYYY-MM-DD
+
+	// DSN used for sentry
+	SentryDSN string
 )
 
 func main() {
