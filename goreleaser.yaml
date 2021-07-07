@@ -15,7 +15,7 @@ builds:
       - 386
       - amd64
     ldflags:
-      - "-X  main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}"
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
 archives:
   -
     replacements:
