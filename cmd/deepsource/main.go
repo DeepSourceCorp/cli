@@ -6,14 +6,14 @@ import (
 	"os"
 
 	"github.com/deepsourcelabs/cli/command"
-	"github.com/deepsourcelabs/cli/version"
+	v "github.com/deepsourcelabs/cli/version"
 	"github.com/getsentry/sentry-go"
 	"github.com/pterm/pterm"
 )
 
 var (
 	// Version is the build version.  This is set using ldflags -X
-	Version = "development"
+	version = "development"
 
 	// Date is the build date.  This is set using ldflags -X
 	Date = "YYYY-MM-DD" // YYYY-MM-DD
@@ -33,7 +33,7 @@ func main() {
 		fmt.Println("Could not load sentry.")
 	}
 
-	version.SetBuildInfo(Version, Date, "", "")
+	v.SetBuildInfo(version, Date, "", "")
 
 	if err := command.Execute(); err != nil {
 		// TODO: Handle exit codes here
