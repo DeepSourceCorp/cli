@@ -23,14 +23,12 @@ jobs:
         with:
           go-version: 1.16
 
-      - name: Change directory
-        run: cd cmd/deepsource
-
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
           distribution: goreleaser
           version: latest
+          workdir: ./cmd/deepsource
           args: release --rm-dist --config ../../goreleaser.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
