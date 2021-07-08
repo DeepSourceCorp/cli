@@ -14,6 +14,8 @@ builds:
     goarch:
       - 386
       - amd64
+      - arm
+      - arm64
     ldflags:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
 archives:
