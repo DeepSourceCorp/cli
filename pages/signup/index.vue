@@ -36,7 +36,7 @@
           <div class="flex flex-col space-y-4 text-left leading-relaxed">
             <div class="text-vanilla-400">
               By signing up, you are agreeing to our
-              <a href="/terms" class="text-juniper hover:underline"> Terms of Service </a>
+              <a href="/terms-of-service" class="text-juniper hover:underline"> Terms of Service </a>
               and
               <a href="/privacy" class="text-juniper hover:underline">Privacy Policy</a>.
             </div>
