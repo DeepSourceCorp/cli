@@ -47,7 +47,6 @@
           </div>
         </div>
       </div>
-
       <div class="px-8 lg:px-12 bg-ink-300 min-h-full flex-col justify-center hidden md:flex">
         <div class="h-5/6">
           <z-carousel
@@ -57,26 +56,20 @@
             class="max-w-lg mx-auto block"
           >
             <z-slide v-for="(testimonial, index) in testimonials" :key="index">
-              <div class="space-y-4">
-                <div class="space-y-2">
-                  <div class="w-full">
-                    <img
-                      class="object-contain w-full h-40 lg:h-96"
-                      :src="require(`~/assets/images/${testimonial.avatar}`)"
-                      :alt="testimonial.author"
-                    />
-                  </div>
-                  <div class="mt-4">
-                    <p
-                      class="text-lg leading-normal text-vanilla-300"
-                      v-html="testimonial.body"
-                    ></p>
-                  </div>
-                </div>
-                <div class="desc text-vanilla-300">
-                  <div class="name">{{ testimonial.author }}</div>
-                  <div class="company text-vanilla-400">{{ testimonial.company }}</div>
-                </div>
+              <div class="w-full">
+                <img
+                  class="object-contain w-full h-40 lg:h-96"
+                  :src="require(`~/assets/images/${testimonial.avatar}`)"
+                  :alt="testimonial.author"
+                />
+              </div>
+              <p
+                class="mt-4 text-lg max-w-lg leading-normal text-vanilla-300 box-content"
+                v-html="testimonial.body"
+              ></p>
+              <div class="desc text-vanilla-300 mt-4">
+                <div class="name">{{ testimonial.author }}</div>
+                <div class="company text-vanilla-400">{{ testimonial.company }}</div>
               </div>
             </z-slide>
           </z-carousel>

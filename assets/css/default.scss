@@ -31,6 +31,10 @@
   }
 }
 
+.bg-clip-text {
+  box-decoration-break: clone;
+}
+
 .custom-scroll {
   overflow: hidden !important;
 }
