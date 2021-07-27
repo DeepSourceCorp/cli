@@ -44,7 +44,7 @@
             </div>
             <div class="text-vanilla-400 border-t border-slate pt-4">
               Already have an account?
-              <a href="/terms" class="text-juniper hover:underline">Log in</a>
+              <a href="/login" class="text-juniper hover:underline">Log in</a>
             </div>
           </div>
         </div>
