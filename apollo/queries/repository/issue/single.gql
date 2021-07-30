@@ -1,0 +1,16 @@
+query($shortcode: String!) {
+  issue(shortcode: $shortcode) {
+    shortcode
+    title
+    issueType
+    descriptionRendered
+    analyzer {
+      id
+      shortcode
+      name
+    }
+    issueType
+    shortcode
+    title
+  }
+}

@@ -1,0 +1,5 @@
+mutation($input: UpdateOrCreateRepositoryCollaboratorInput!) {
+  updateOrCreateRepositoryCollaborator(input: $input) {
+    ok
+  }
+}

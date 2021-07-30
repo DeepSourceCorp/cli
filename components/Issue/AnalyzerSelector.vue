@@ -1,0 +1,85 @@
+<template>
+  <z-radio-group v-model="modelValue" class="flex">
+    <z-radio-button value="all">
+      <div class="flex items-center space-x-2 whitespace-nowrap h-4">
+        <z-icon icon="all" size="small"></z-icon>
+        <span v-if="modelValue === 'all'" class="leading-none text-sm">All</span>
+      </div>
+    </z-radio-button>
+    <z-radio-button
+      v-for="analyzer in languageFilters"
+      :key="analyzer.shortcode"
+      :value="analyzer.shortcode"
+    >
+      <div class="flex items-center space-x-2 whitespace-nowrap h-4">
+        <img
+          class="h-4 min-w-4 w-auto flex-shrink-0"
+          :src="analyzer.analyzerLogo"
+          :alt="analyzer.name"
+        />
+        <span v-if="analyzer.shortcode === modelValue" class="leading-none text-sm">{{
+          analyzer.name
+        }}</span>
+      </div>
+    </z-radio-button>
+  </z-radio-group>
+</template>
+<script lang="ts">
+import { Component, mixins } from 'nuxt-property-decorator'
+import { ModelSync } from 'vue-property-decorator'
+
+import { ZIcon, ZRadioGroup, ZRadioButton } from '@deepsourcelabs/zeal'
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { Analyzer, AnalyzerEdge } from '~/types/types'
+
+export interface AnalyzerChoice {
+  name: string
+  shortcode: string
+  analyzerLogo?: string
+}
+
+@Component({
+  components: {
+    ZIcon,
+    ZRadioGroup,
+    ZRadioButton
+  }
+})
+export default class IssueAnalyzerSelector extends mixins(RepoDetailMixin) {
+  @ModelSync('selectedAnalyzer', 'updateAnalyzer', { type: String, default: 'all' })
+  readonly modelValue: string
+
+  async fetch(): Promise<void> {
+    if (!this.repository.availableAnalyzers) {
+      // Separate query later
+      await this.fetchAvailableAnalyzers(this.baseRouteParams)
+    }
+  }
+
+  get languageFilters(): AnalyzerChoice[] {
+    if (this.repository.availableAnalyzers) {
+      const { edges } = this.repository.availableAnalyzers
+      return edges
+        .map((edge) => {
+          const node = (edge as AnalyzerEdge).node as Analyzer
+          return {
+            name: node.name,
+            shortcode: node.shortcode,
+            analyzerLogo: node.analyzerLogo || ''
+          }
+        })
+        .sort((a: Record<string, string>, b: Record<string, string>) => {
+          if (a.shortcode < b.shortcode) {
+            return -1
+          }
+          if (a.shortcode > b.shortcode) {
+            return 1
+          }
+          return 0
+        })
+    }
+
+    return []
+  }
+}
+</script>

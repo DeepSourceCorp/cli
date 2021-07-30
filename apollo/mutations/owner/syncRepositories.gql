@@ -1,0 +1,5 @@
+mutation($ownerId: ID!) {
+  syncRepositoriesForOwner(input: { ownerId: $ownerId }) {
+    ok
+  }
+}

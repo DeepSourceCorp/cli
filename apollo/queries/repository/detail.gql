@@ -1,16 +1,58 @@
-query($repositoryId: ID!) {
-  repository: node(id: $repositoryId) {
-    ... on Repository {
+query RepoDetails($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, name: $name, owner: $owner) {
+    id
+    name
+    isPrivate
+    isStarred
+    canBeActivated
+    userPermissionMeta
+    latestAnalysisRun {
       id
-      name
-      defaultBranchName
-      hasViewerEditAccess
-      vcsUrl
-      vcsHost
-      supportedAnalyzers
-      isCommitPossible
-      isAutofixEnabled
-      autofixGithubAppInstallationUrl
+      runId
+      config
+      commitOid
+      branchRunCount
+      status
+      finishedAt
+    }
+    isActivated
+    blobUrlRoot
+    defaultBranchName
+    vcsDefaultBranchUrl
+    hasViewerEditAccess
+    vcsUrl
+    vcsHost
+    vcsProvider
+    config
+    supportedAnalyzers
+    isCommitPossible
+    isAutofixEnabled
+    autofixGithubAppInstallationUrl
+    autofixBitbucketAddonInstallationUrl
+    availableAnalyzers {
+      edges {
+        node {
+          id
+          shortcode
+          name
+          logo
+          analyzerLogo
+        }
+      }
+    }
+    autofixableIssuesMetadata {
+      autofixableIssueCount
+      estimatedTimeSaved
+    }
+    autofixableIssuesPerAnalyzer {
+      analyzer {
+        shortcode
+        logo
+        analyzerLogo
+        name
+      }
+      filesAffected
+      issueCount
     }
   }
 }

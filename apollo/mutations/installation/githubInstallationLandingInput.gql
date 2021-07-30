@@ -1,0 +1,8 @@
+mutation($input: GithubInstallationLandingInput!) {
+  installation(input: $input) {
+    nextAction
+    message
+    vcsProvider
+    login
+  }
+}

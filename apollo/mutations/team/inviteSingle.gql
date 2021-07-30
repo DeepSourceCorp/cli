@@ -1,0 +1,10 @@
+mutation(
+  $ownerId: ID!
+  $email: String!
+  $action: InviteTeamMemberActionChoice!
+  $role: TeamMemberRoleChoices!
+) {
+  inviteTeamMember(input: { ownerPk: $ownerId, email: $email, action: $action, role: $role }) {
+    invitationUrl
+  }
+}

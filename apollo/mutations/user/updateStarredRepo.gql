@@ -1,0 +1,5 @@
+mutation($repoId: ID!, $action: ActionChoice!) {
+  updateStarredRepository(input: { repoId: $repoId, action: $action }) {
+    ok
+  }
+}

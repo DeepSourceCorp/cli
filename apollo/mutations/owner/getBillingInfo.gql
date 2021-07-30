@@ -1,0 +1,38 @@
+mutation(
+  $productSlug: String!
+  $planSlug: String!
+  $quantity: Int!
+  $couponCode: String
+  $ownerId: ID!
+  $isTrial: Boolean!
+) {
+  getBillingInfo(
+    input: {
+      productSlug: $productSlug
+      planSlug: $planSlug
+      quantity: $quantity
+      couponCode: $couponCode
+      id: $ownerId
+      isTrial: $isTrial
+    }
+  ) {
+    amountPayableThisCycle
+    amountPayableNextCycle
+    nextBillingCycle
+    netPayableThisCycle
+    netPayableNextCycle
+    discounts {
+      credits {
+        isApplied
+        currentCycleDiscount
+        nextCycleDiscount
+      }
+      coupon {
+        isApplied
+        currentCycleDiscount
+        nextCycleDiscount
+        description
+      }
+    }
+  }
+}

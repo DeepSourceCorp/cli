@@ -1,0 +1,5 @@
+mutation($input: GitlabInstallationLandingInput!) {
+  gitlabInstallationLanding(input: $input) {
+    ok
+  }
+}

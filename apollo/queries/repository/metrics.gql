@@ -1,0 +1,7 @@
+query($provider: VCSProviderChoices!, $owner: String!, $name: String!, $lastDays: Int!) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    uniqueNamespaceKeys
+    metricsData(lastDays: $lastDays)
+  }
+}

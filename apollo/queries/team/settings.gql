@@ -1,0 +1,16 @@
+query($login: String!, $provider: VCSProviderChoices!) {
+  team(login: $login, provider: $provider) {
+    id
+    login
+    syncPermissionsWithVcs
+    basePermissionSet {
+      team {
+        id
+      }
+      id
+      defaultRepositoryPermission
+      canMembersIgnoreIssues
+      canContributorsIgnoreIssues
+    }
+  }
+}

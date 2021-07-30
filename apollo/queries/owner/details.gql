@@ -1,0 +1,17 @@
+query($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    isTeam
+    vcsInstallationId
+    hasSubscribedToPlan
+    hasPremiumPlan
+    team {
+      id
+    }
+    primaryUser {
+      id
+      email
+      fullName
+    }
+  }
+}

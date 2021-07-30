@@ -1,0 +1,34 @@
+query BaseRepoQuery($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, name: $name, owner: $owner) {
+    id
+    isActivated
+    isPrivate
+    isStarred
+    errorCode
+    defaultBranchName
+    vcsDefaultBranchUrl
+    errorMessage
+    canBeActivated
+    isAutofixEnabled
+    isCommitPossible
+    blobUrlRoot
+    lastRun {
+      id
+      runId
+      config
+      commitOid
+      branchRunCount
+      status
+      finishedAt
+    }
+    latestAnalysisRun {
+      id
+      runId
+      config
+      commitOid
+      branchRunCount
+      status
+      finishedAt
+    }
+  }
+}

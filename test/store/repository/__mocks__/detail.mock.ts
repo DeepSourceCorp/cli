@@ -1,5 +1,5 @@
-import { Repository } from "~/types/types";
-import { RepositoryDetailModuleState } from "~/store/repository/detail"
+import { Repository } from '~/types/types'
+import { RepositoryDetailModuleState } from '~/store/repository/detail'
 
 /*
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -11,28 +11,24 @@ import { RepositoryDetailModuleState } from "~/store/repository/detail"
  * Mock for repository.
  */
 export const REPOSITORY_DETAIL: Repository = <Repository>{
-  "id": "UmVwb3NpdG9yeToxNjM5",
-  "name": "asgard",
-  "defaultBranchName": "master",
-  "hasViewerEditAccess": true,
-  "vcsUrl": "https://github.com/deepsourcelabs/asgard",
-  "vcsHost": "github.com",
-  "supportedAnalyzers": [
-    "python",
-    "docker",
-    "javascript"
-  ],
-  "isCommitPossible": false,
-  "isAutofixEnabled": false,
-  "autofixGithubAppInstallationUrl": "https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=L29uYm9hcmQvZ2gvZGVlcHNvdXJjZWxhYnMvZ2VuZXJhdGUtY29uZmlnL1VtVndiM05wZEc5eWVUb3hOak01"
+  id: 'UmVwb3NpdG9yeToxNjM5',
+  name: 'asgard',
+  defaultBranchName: 'master',
+  hasViewerEditAccess: true,
+  vcsUrl: 'https://github.com/deepsourcelabs/asgard',
+  vcsHost: 'github.com',
+  supportedAnalyzers: ['python', 'docker', 'javascript'],
+  isCommitPossible: false,
+  isAutofixEnabled: false,
+  autofixGithubAppInstallationUrl:
+    'https://github.com/apps/None/installations/new/permissions?target_id=40287229&state=L29uYm9hcmQvZ2gvZGVlcHNvdXJjZWxhYnMvZ2VuZXJhdGUtY29uZmlnL1VtVndiM05wZEc5eWVUb3hOak01'
 }
-
 
 /**
  * Mock -- Repository detail factory
  * @see REPOSITORY_DETAIL
  */
-export const mockRepositoryDetail = (): Repository => REPOSITORY_DETAIL;
+export const mockRepositoryDetail = (): Repository => REPOSITORY_DETAIL
 
 /**
  * Mock factory
@@ -41,7 +37,7 @@ export const mockRepositoryDetailState = (): RepositoryDetailModuleState => ({
   loading: false as boolean,
   error: {},
   repository: mockRepositoryDetail()
-});
+})
 
 /*
   ++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -53,97 +49,96 @@ export const mockRepositoryDetailState = (): RepositoryDetailModuleState => ({
  * Mock for repository.
  */
 export const REPOSITORY_DETAIL_FOR_WIDGETS: Repository = <Repository>{
-  "id": "UmVwb3NpdG9yeToxNjM5",
-  "widgets": [
-    "antipattern-widget",
-    "bug-risk-widget",
-    "performance-widget",
-    "security-widget",
-    "coverage-widget",
-    "typecheck-widget"
+  id: 'UmVwb3NpdG9yeToxNjM5',
+  widgets: [
+    'antipattern-widget',
+    'bug-risk-widget',
+    'performance-widget',
+    'security-widget',
+    'coverage-widget',
+    'typecheck-widget'
   ],
-  "widgetsDisplay": {
-    "antipattern-widget": {
-      "title": "Anti-patterns",
-      "value_display": 4,
-      "link": "/gh/deepsourcelabs/asgard/issues/?category=antipattern",
-      "description": "Antipattern issues",
-      "hint": null,
-      "has_trend_value": true,
-      "trend_direction": "down",
-      "trend_value": "125%",
-      "trend_display": "since last commit",
-      "trend_positive": false
+  widgetsDisplay: {
+    'antipattern-widget': {
+      title: 'Anti-patterns',
+      value_display: 4,
+      link: '/gh/deepsourcelabs/asgard/issues/?category=antipattern',
+      description: 'Antipattern issues',
+      hint: null,
+      has_trend_value: true,
+      trend_direction: 'down',
+      trend_value: '125%',
+      trend_display: 'since last commit',
+      trend_positive: false
     },
-    "bug-risk-widget": {
-      "title": "Bug Risks",
-      "value_display": 531,
-      "link": "/gh/deepsourcelabs/asgard/issues/?category=bug-risk",
-      "description": "Bug-Risk issues",
-      "hint": null,
-      "has_trend_value": true,
-      "trend_direction": "up",
-      "trend_value": "2113%",
-      "trend_display": "since last commit",
-      "trend_positive": false
+    'bug-risk-widget': {
+      title: 'Bug Risks',
+      value_display: 531,
+      link: '/gh/deepsourcelabs/asgard/issues/?category=bug-risk',
+      description: 'Bug-Risk issues',
+      hint: null,
+      has_trend_value: true,
+      trend_direction: 'up',
+      trend_value: '2113%',
+      trend_display: 'since last commit',
+      trend_positive: false
     },
-    "performance-widget": {
-      "title": "Performance Issues",
-      "value_display": 2,
-      "link": "/gh/deepsourcelabs/asgard/issues/?category=performance",
-      "description": "Performance issues",
-      "hint": null,
-      "has_trend_value": true,
-      "trend_direction": "up",
-      "trend_value": "100%",
-      "trend_display": "since last commit",
-      "trend_positive": false
+    'performance-widget': {
+      title: 'Performance Issues',
+      value_display: 2,
+      link: '/gh/deepsourcelabs/asgard/issues/?category=performance',
+      description: 'Performance issues',
+      hint: null,
+      has_trend_value: true,
+      trend_direction: 'up',
+      trend_value: '100%',
+      trend_display: 'since last commit',
+      trend_positive: false
     },
-    "security-widget": {
-      "title": "Security Issues",
-      "value_display": 6,
-      "link": "/gh/deepsourcelabs/asgard/issues/?category=security",
-      "description": "Security issues",
-      "hint": null,
-      "has_trend_value": true,
-      "trend_direction": "up",
-      "trend_value": "20%",
-      "trend_display": "since last commit",
-      "trend_positive": false
+    'security-widget': {
+      title: 'Security Issues',
+      value_display: 6,
+      link: '/gh/deepsourcelabs/asgard/issues/?category=security',
+      description: 'Security issues',
+      hint: null,
+      has_trend_value: true,
+      trend_direction: 'up',
+      trend_value: '20%',
+      trend_display: 'since last commit',
+      trend_positive: false
     },
-    "coverage-widget": {
-      "title": "Coverage Issues",
-      "value_display": 0,
-      "link": "/gh/deepsourcelabs/asgard/issues/?category=coverage",
-      "description": "Coverage issues",
-      "hint": null,
-      "has_trend_value": true,
-      "trend_display": "no change since last commit",
-      "trend_direction": null,
-      "trend_value": null,
-      "trend_positive": null
+    'coverage-widget': {
+      title: 'Coverage Issues',
+      value_display: 0,
+      link: '/gh/deepsourcelabs/asgard/issues/?category=coverage',
+      description: 'Coverage issues',
+      hint: null,
+      has_trend_value: true,
+      trend_display: 'no change since last commit',
+      trend_direction: null,
+      trend_value: null,
+      trend_positive: null
     },
-    "typecheck-widget": {
-      "title": "Typecheck Issues",
-      "value_display": 0,
-      "link": "/gh/deepsourcelabs/asgard/issues/?category=typecheck",
-      "description": "Typecheck issues",
-      "hint": null,
-      "has_trend_value": true,
-      "trend_display": "no change since last commit",
-      "trend_direction": null,
-      "trend_value": null,
-      "trend_positive": null
+    'typecheck-widget': {
+      title: 'Typecheck Issues',
+      value_display: 0,
+      link: '/gh/deepsourcelabs/asgard/issues/?category=typecheck',
+      description: 'Typecheck issues',
+      hint: null,
+      has_trend_value: true,
+      trend_display: 'no change since last commit',
+      trend_direction: null,
+      trend_value: null,
+      trend_positive: null
     }
   }
 }
-
 
 /**
  * Mock -- Repository detail factory
  * @see REPOSITORY_DETAIL_FOR_WIDGETS
  */
-export const mockRepositoryDetailForWidgets = (): Repository => REPOSITORY_DETAIL_FOR_WIDGETS;
+export const mockRepositoryDetailForWidgets = (): Repository => REPOSITORY_DETAIL_FOR_WIDGETS
 
 /**
  * Mock factory
@@ -152,7 +147,7 @@ export const mockRepositoryDetailStateForWidgets = (): RepositoryDetailModuleSta
   loading: false as boolean,
   error: {},
   repository: mockRepositoryDetailForWidgets()
-});
+})
 
 /*
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -164,117 +159,108 @@ export const mockRepositoryDetailStateForWidgets = (): RepositoryDetailModuleSta
  * Mock for repository.
  */
 export const REPOSITORY_DETAIL_FOR_SETTINGS_GENERAL: Repository = <Repository>{
-  "id": "UmVwb3NpdG9yeToxNjM5",
-  "showInDiscover": true,
-  "analyzeChangesetOnly": true,
-  "defaultBranchName": "master",
-  "isSubmoduleEnabled": false,
-  "config": {
-    "version": 1,
-    "analyzers": [
+  id: 'UmVwb3NpdG9yeToxNjM5',
+  showInDiscover: true,
+  analyzeChangesetOnly: true,
+  defaultBranchName: 'master',
+  isSubmoduleEnabled: false,
+  config: {
+    version: 1,
+    analyzers: [
       {
-        "meta": {
-          "max_line_length": 100,
-          "skip_doc_coverage": [
-            "module",
-            "magic",
-            "class"
-          ]
+        meta: {
+          max_line_length: 100,
+          skip_doc_coverage: ['module', 'magic', 'class']
         },
-        "name": "python",
-        "enabled": true
+        name: 'python',
+        enabled: true
       },
       {
-        "name": "test-coverage",
-        "enabled": true
+        name: 'test-coverage',
+        enabled: true
       },
       {
-        "name": "docker",
-        "enabled": true
+        name: 'docker',
+        enabled: true
       }
     ],
-    "transformers": [
+    transformers: [
       {
-        "name": "black",
-        "enabled": true
+        name: 'black',
+        enabled: true
       }
     ],
-    "test_patterns": [
-      "*/tests/**/test_*.py"
-    ],
-    "exclude_patterns": [
-      "core/migrations/*",
-      "providers/tests/common/test_files/*"
-    ]
+    test_patterns: ['*/tests/**/test_*.py'],
+    exclude_patterns: ['core/migrations/*', 'providers/tests/common/test_files/*']
   },
-  "isActivated": true,
-  "isPrivate": true,
-  "issueTypeSettings": [
+  isActivated: true,
+  isPrivate: true,
+  issueTypeSettings: [
     {
-      "name": "Bug Risk",
-      "slug": "bug-risk",
-      "description": null,
-      "isIgnoredInCheckStatus": false,
-      "isIgnoredToDisplay": false
+      name: 'Bug Risk',
+      slug: 'bug-risk',
+      description: null,
+      isIgnoredInCheckStatus: false,
+      isIgnoredToDisplay: false
     },
     {
-      "name": "Anti-pattern",
-      "slug": "antipattern",
-      "description": null,
-      "isIgnoredInCheckStatus": false,
-      "isIgnoredToDisplay": false
+      name: 'Anti-pattern',
+      slug: 'antipattern',
+      description: null,
+      isIgnoredInCheckStatus: false,
+      isIgnoredToDisplay: false
     },
     {
-      "name": "Performance",
-      "slug": "performance",
-      "description": null,
-      "isIgnoredInCheckStatus": false,
-      "isIgnoredToDisplay": false
+      name: 'Performance',
+      slug: 'performance',
+      description: null,
+      isIgnoredInCheckStatus: false,
+      isIgnoredToDisplay: false
     },
     {
-      "name": "Security",
-      "slug": "security",
-      "description": null,
-      "isIgnoredInCheckStatus": false,
-      "isIgnoredToDisplay": false
+      name: 'Security',
+      slug: 'security',
+      description: null,
+      isIgnoredInCheckStatus: false,
+      isIgnoredToDisplay: false
     },
     {
-      "name": "Typecheck",
-      "slug": "typecheck",
-      "description": null,
-      "isIgnoredInCheckStatus": false,
-      "isIgnoredToDisplay": false
+      name: 'Typecheck',
+      slug: 'typecheck',
+      description: null,
+      isIgnoredInCheckStatus: false,
+      isIgnoredToDisplay: false
     },
     {
-      "name": "Coverage",
-      "slug": "coverage",
-      "description": null,
-      "isIgnoredInCheckStatus": false,
-      "isIgnoredToDisplay": false
+      name: 'Coverage',
+      slug: 'coverage',
+      description: null,
+      isIgnoredInCheckStatus: false,
+      isIgnoredToDisplay: false
     },
     {
-      "name": "Style",
-      "slug": "style",
-      "description": null,
-      "isIgnoredInCheckStatus": true,
-      "isIgnoredToDisplay": false
+      name: 'Style',
+      slug: 'style',
+      description: null,
+      isIgnoredInCheckStatus: true,
+      isIgnoredToDisplay: false
     },
     {
-      "name": "Documentation",
-      "slug": "doc",
-      "description": null,
-      "isIgnoredInCheckStatus": true,
-      "isIgnoredToDisplay": false
+      name: 'Documentation',
+      slug: 'doc',
+      description: null,
+      isIgnoredInCheckStatus: true,
+      isIgnoredToDisplay: false
     }
   ]
 }
-
 
 /**
  * Mock -- Repository detail factory
  * @see REPOSITORY_DETAIL_FOR_SETTINGS_GENERAL
  */
-export const mockRepositoryDetailForSettingsGeneral = (): Repository => REPOSITORY_DETAIL_FOR_SETTINGS_GENERAL;
+export const mockRepositoryDetailForSettingsGeneral = (): Repository =>
+  REPOSITORY_DETAIL_FOR_SETTINGS_GENERAL
 
 /**
  * Mock factory
@@ -283,7 +269,7 @@ export const mockRepositoryDetailStateForSettingsGeneral = (): RepositoryDetailM
   loading: false as boolean,
   error: {},
   repository: mockRepositoryDetailForSettingsGeneral()
-});
+})
 
 /*
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -295,41 +281,43 @@ export const mockRepositoryDetailStateForSettingsGeneral = (): RepositoryDetailM
  * Mock for repository.
  */
 export const REPOSITORY_DETAIL_FOR_SETTINGS_MANAGE_ACCESS: Repository = <Repository>{
-  "id": "UmVwb3NpdG9yeToxNjM5",
-  "collaborators": {
-    "totalCount": 2,
-    "edges": [
+  id: 'UmVwb3NpdG9yeToxNjM5',
+  collaborators: {
+    totalCount: 2,
+    edges: [
       {
-        "node": {
-          "id": "UmVwb3NpdG9yeUNvbGxhYm9yYXRvcjox",
-          "permission": "ADMIN",
-          "repository": {
-            "id": "UmVwb3NpdG9yeToxNjM5"
+        node: {
+          id: 'UmVwb3NpdG9yeUNvbGxhYm9yYXRvcjox',
+          permission: 'ADMIN',
+          repository: {
+            id: 'UmVwb3NpdG9yeToxNjM5'
           },
-          "user": {
-            "id": "VXNlcjo3",
-            "firstName": "Sanket",
-            "lastName": "Saurav",
-            "email": "sanketsaurav@gmail.com",
-            "avatar": "https://s3.us-east-1.amazonaws.com/local-asgard-static/avatars/9a07488f-7295-4546-9727-04362659e451.jpeg",
-            "dateJoined": "2019-01-15T09:38:15.676257+00:00"
+          user: {
+            id: 'VXNlcjo3',
+            firstName: 'Sanket',
+            lastName: 'Saurav',
+            email: 'sanketsaurav@gmail.com',
+            avatar:
+              'https://s3.us-east-1.amazonaws.com/local-asgard-static/avatars/9a07488f-7295-4546-9727-04362659e451.jpeg',
+            dateJoined: '2019-01-15T09:38:15.676257+00:00'
           }
         }
       },
       {
-        "node": {
-          "id": "UmVwb3NpdG9yeUNvbGxhYm9yYXRvcjoy",
-          "permission": "READ",
-          "repository": {
-            "id": "UmVwb3NpdG9yeToxNjM5"
+        node: {
+          id: 'UmVwb3NpdG9yeUNvbGxhYm9yYXRvcjoy',
+          permission: 'READ',
+          repository: {
+            id: 'UmVwb3NpdG9yeToxNjM5'
           },
-          "user": {
-            "id": "VXNlcjozNg==",
-            "firstName": "Sourya",
-            "lastName": "Vatsyayan",
-            "email": "souryavatsyayan@gmail.com",
-            "avatar": "https://s3.us-east-1.amazonaws.com/local-asgard-static/avatars/bc950f22-1090-47b7-adb3-fd971b922a7b.jpeg",
-            "dateJoined": "2019-07-09T13:43:51.769867+00:00"
+          user: {
+            id: 'VXNlcjozNg==',
+            firstName: 'Sourya',
+            lastName: 'Vatsyayan',
+            email: 'souryavatsyayan@gmail.com',
+            avatar:
+              'https://s3.us-east-1.amazonaws.com/local-asgard-static/avatars/bc950f22-1090-47b7-adb3-fd971b922a7b.jpeg',
+            dateJoined: '2019-07-09T13:43:51.769867+00:00'
           }
         }
       }
@@ -337,12 +325,12 @@ export const REPOSITORY_DETAIL_FOR_SETTINGS_MANAGE_ACCESS: Repository = <Reposit
   }
 }
 
-
 /**
  * Mock -- Repository detail factory
  * @see REPOSITORY_DETAIL_FOR_SETTINGS_MANAGE_ACCESS
  */
-export const mockRepositoryDetailForSettingsManageAccess = (): Repository => REPOSITORY_DETAIL_FOR_SETTINGS_MANAGE_ACCESS;
+export const mockRepositoryDetailForSettingsManageAccess = (): Repository =>
+  REPOSITORY_DETAIL_FOR_SETTINGS_MANAGE_ACCESS
 
 /**
  * Mock factory
@@ -351,7 +339,7 @@ export const mockRepositoryDetailStateForSettingsManageAccess = (): RepositoryDe
   loading: false as boolean,
   error: {},
   repository: mockRepositoryDetailForSettingsManageAccess()
-});
+})
 
 /*
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -363,49 +351,51 @@ export const mockRepositoryDetailStateForSettingsManageAccess = (): RepositoryDe
  * Mock for repository.
  */
 export const REPOSITORY_DETAIL_FOR_SETTINGS_IGNORE_RULES: Repository = <Repository>{
-  "hasViewerEditAccess": true,
-  "silenceRules": {
-    "totalCount": 2,
-    "edges": [
+  hasViewerEditAccess: true,
+  silenceRules: {
+    totalCount: 2,
+    edges: [
       {
-        "node": {
-          "silenceLevel": "RL",
-          "id": "U2lsZW5jZVJ1bGU6MTE=",
-          "filePath": null,
-          "createdAt": "2020-11-26T04:14:09.885947+00:00",
-          "metadata": {
-            "type": "forever"
+        node: {
+          silenceLevel: 'RL',
+          id: 'U2lsZW5jZVJ1bGU6MTE=',
+          filePath: null,
+          createdAt: '2020-11-26T04:14:09.885947+00:00',
+          metadata: {
+            type: 'forever'
           },
-          "issue": {
-            "shortcode": "PYL-C0412",
-            "title": "Imports from same package are not grouped"
+          issue: {
+            shortcode: 'PYL-C0412',
+            title: 'Imports from same package are not grouped'
           },
-          "creator": {
-            "firstName": "Aman",
-            "lastName": "Sharma",
-            "email": "aman@deepsource.io",
-            "avatar": "https://s3.us-east-1.amazonaws.com/local-asgard-static/avatars/9e7acac4-9d55-4609-b5c3-a489c5e61459.jpeg"
+          creator: {
+            firstName: 'Aman',
+            lastName: 'Sharma',
+            email: 'aman@deepsource.io',
+            avatar:
+              'https://s3.us-east-1.amazonaws.com/local-asgard-static/avatars/9e7acac4-9d55-4609-b5c3-a489c5e61459.jpeg'
           }
         }
       },
       {
-        "node": {
-          "silenceLevel": "RL",
-          "id": "U2lsZW5jZVJ1bGU6MTA=",
-          "filePath": null,
-          "createdAt": "2020-11-26T04:14:09.728093+00:00",
-          "metadata": {
-            "type": "forever"
+        node: {
+          silenceLevel: 'RL',
+          id: 'U2lsZW5jZVJ1bGU6MTA=',
+          filePath: null,
+          createdAt: '2020-11-26T04:14:09.728093+00:00',
+          metadata: {
+            type: 'forever'
           },
-          "issue": {
-            "shortcode": "PYL-C0412",
-            "title": "Imports from same package are not grouped"
+          issue: {
+            shortcode: 'PYL-C0412',
+            title: 'Imports from same package are not grouped'
           },
-          "creator": {
-            "firstName": "Aman",
-            "lastName": "Sharma",
-            "email": "aman@deepsource.io",
-            "avatar": "https://s3.us-east-1.amazonaws.com/local-asgard-static/avatars/9e7acac4-9d55-4609-b5c3-a489c5e61459.jpeg"
+          creator: {
+            firstName: 'Aman',
+            lastName: 'Sharma',
+            email: 'aman@deepsource.io',
+            avatar:
+              'https://s3.us-east-1.amazonaws.com/local-asgard-static/avatars/9e7acac4-9d55-4609-b5c3-a489c5e61459.jpeg'
           }
         }
       }
@@ -413,12 +403,12 @@ export const REPOSITORY_DETAIL_FOR_SETTINGS_IGNORE_RULES: Repository = <Reposito
   }
 }
 
-
 /**
  * Mock -- Repository detail factory
  * @see REPOSITORY_DETAIL_FOR_SETTINGS_IGNORE_RULES
  */
-export const mockRepositoryDetailForSettingsIgnoreRules = (): Repository => REPOSITORY_DETAIL_FOR_SETTINGS_IGNORE_RULES;
+export const mockRepositoryDetailForSettingsIgnoreRules = (): Repository =>
+  REPOSITORY_DETAIL_FOR_SETTINGS_IGNORE_RULES
 
 /**
  * Mock factory
@@ -427,7 +417,7 @@ export const mockRepositoryDetailStateForSettingsIgnoreRules = (): RepositoryDet
   loading: false as boolean,
   error: {},
   repository: mockRepositoryDetailForSettingsIgnoreRules()
-});
+})
 
 /*
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -439,16 +429,16 @@ export const mockRepositoryDetailStateForSettingsIgnoreRules = (): RepositoryDet
  * Mock for repository.
  */
 export const REPOSITORY_DETAIL_FOR_SETTINGS_SSH: Repository = <Repository>{
-  "id": "UmVwb3NpdG9yeToxNjM5",
-  "encPublicKey": null
+  id: 'UmVwb3NpdG9yeToxNjM5',
+  encPublicKey: null
 }
-
 
 /**
  * Mock -- Repository detail factory
  * @see REPOSITORY_DETAIL_FOR_SETTINGS_SSH
  */
-export const mockRepositoryDetailForSettingsSsh = (): Repository => REPOSITORY_DETAIL_FOR_SETTINGS_SSH;
+export const mockRepositoryDetailForSettingsSsh = (): Repository =>
+  REPOSITORY_DETAIL_FOR_SETTINGS_SSH
 
 /**
  * Mock factory
@@ -457,4 +447,92 @@ export const mockRepositoryDetailStateForSettingsSsh = (): RepositoryDetailModul
   loading: false as boolean,
   error: {},
   repository: mockRepositoryDetailForSettingsSsh()
-});
+})
+
+/*
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +++++++++++++++++++ METRICS MOCK +++++++++++++++++++
+  ++++++++++++++++++++++++++++++++++++++++++++++++++++
+*/
+
+export const REPOSITORY_DETAIL_FOR_METRICS: Repository = <Repository>{
+  id: 'UmVwb3NpdG9yeTp6ZG95eWI=',
+  uniqueNamespaceKeys: ['Go', 'Python'],
+  metricsData: [
+    {
+      name: 'Application Documenatation Coverage',
+      shortcode: 'DCV',
+      display: '57.5%',
+      last_value: 57.5,
+      second_last_value: 57.5,
+      description: 'Application Documenatation Coverage',
+      threshold: null,
+      is_passing: null,
+      namespaces: [
+        {
+          key: 'Go',
+          shortcode: 'go',
+          threshold: null,
+          is_passing: null,
+          display: '34%',
+          trend: [34, 34],
+          modified_at: '2020-04-10T13:00:54.585Z'
+        },
+        {
+          key: 'Python',
+          shortcode: 'python',
+          threshold: null,
+          is_passing: null,
+          display: '81%',
+          trend: [81, 81, 81, 81, 81, 80, 80, 80, 80, 80, 80, 80, 80, 80, 81, 81, 81, 81, 81],
+          modified_at: '2020-05-11T05:50:55.528Z'
+        }
+      ]
+    },
+    {
+      name: 'Direct External Dependencies',
+      shortcode: 'DDP',
+      display: '23',
+      last_value: 23,
+      second_last_value: 23,
+      description: 'Direct dependencies',
+      threshold: null,
+      is_passing: null,
+      namespaces: [
+        {
+          key: 'Go',
+          shortcode: 'go',
+          threshold: null,
+          is_passing: null,
+          display: '5',
+          trend: [5, 5],
+          modified_at: '2020-04-10T13:00:54.523Z'
+        },
+        {
+          key: 'Python',
+          shortcode: 'python',
+          threshold: null,
+          is_passing: null,
+          display: '18',
+          trend: [18, 15, 15, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18],
+          modified_at: '2020-05-11T05:50:55.512Z'
+        }
+      ]
+    }
+  ]
+}
+
+/**
+ * Mock -- Repository detail factory
+ * @see REPOSITORY_DETAIL_FOR_METRICS
+ */
+export const mockRepositoryDetailForMetrics = (): Repository => REPOSITORY_DETAIL_FOR_METRICS
+
+/**
+ * Mock factory
+ */
+export const mockRepositoryDetailStateForMetrics = (): RepositoryDetailModuleState => ({
+  loading: false as boolean,
+  error: {},
+  repository: mockRepositoryDetailForMetrics()
+})

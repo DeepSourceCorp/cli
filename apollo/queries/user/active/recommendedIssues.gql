@@ -1,0 +1,31 @@
+query {
+  viewer {
+    id
+    recommendedIssues(first: 5) {
+      edges {
+        node {
+          id
+          title
+          shortcode
+          issueType
+          modifiedAt
+          createdAt
+          seenIn
+          occurrenceCount
+          autofixAvailable
+          pastValue
+          raisedInFiles
+          repositoryInstance {
+            id
+            name
+            vcsProvider
+            owner {
+              id
+              login
+            }
+          }
+        }
+      }
+    }
+  }
+}

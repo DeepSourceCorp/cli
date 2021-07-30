@@ -1,0 +1,8 @@
+query($provider: VCSProviderChoices!, $owner: String!, $name: String!, $status: String!) {
+  repository(provider: $provider, name: $name, owner: $owner) {
+    id
+    runs(status: $status) {
+      totalCount
+    }
+  }
+}

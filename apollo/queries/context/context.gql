@@ -1,0 +1,24 @@
+query {
+  context {
+    staticRoot
+    apiRoot
+    websocketUrl
+    installationProvidersUrl
+    installationUrls
+    stripePublishableKey
+    appEnv
+    emptyAvatarUrl
+    debug
+    sentryDsn
+    userGroupUrl
+    onPrem
+    deepsourceCloudProduction
+    githubEnabled
+    gitlabEnabled
+    bitbucketEnabled
+    supportEmail
+    isTransformersLicensed
+    toOnboard
+    plans
+  }
+}

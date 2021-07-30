@@ -1,0 +1,69 @@
+<template>
+  <z-menu placement="top">
+    <template slot="trigger">
+      <div
+        class="flex items-center space-x-2 text-sm hover:bg-ink-300 rounded-sm py-1"
+        :class="{
+          'pr-2 pl-1': !isCollapsed,
+          'px-1': isCollapsed
+        }"
+      >
+        <z-avatar
+          :src="viewer.avatar"
+          :userName="viewer.fullName || viewer.email"
+          size="sm"
+          class="rounded-full leading-none flex-shrink-0"
+        />
+        <span v-show="!isCollapsed" class="leading-none">{{
+          viewer.fullName || viewer.email
+        }}</span>
+      </div>
+    </template>
+    <template v-if="viewer" slot="body" class="z-10">
+      <z-menu-section title="Logged In As" class="py-1">
+        <z-menu-item>{{ viewer.email }}</z-menu-item>
+      </z-menu-section>
+      <z-menu-section :divider="false">
+        <z-menu-item @click="() => switchToLegacy()">Switch to DeepSource Retro</z-menu-item>
+        <z-menu-item @click="() => this.$router.push('/me')">Dashboard</z-menu-item>
+        <z-menu-item @click="() => signOut()">Sign out</z-menu-item>
+      </z-menu-section>
+    </template>
+  </z-menu>
+</template>
+
+<script lang="ts">
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
+import { ZAvatar, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
+import SwitchAccountMutation from '~/apollo/mutations/auth/switchAccount.gql'
+
+// mixins
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import AuthMixin from '~/mixins/authMixin'
+
+@Component({
+  components: {
+    ZAvatar,
+    ZMenuItem,
+    ZMenu,
+    ZMenuSection
+  }
+})
+export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {
+  @Prop()
+  isCollapsed: boolean
+
+  async switchToLegacy() {
+    try {
+      await this.$applyGraphqlMutation(SwitchAccountMutation, { input: {} })
+      this.$nuxt.$cookies.remove('bifrost')
+      window.location.href = '/dashboard/'
+    } catch (e) {}
+  }
+
+  public async signOut(): Promise<void> {
+    await this.logOutUser()
+    this.$router.push('/login')
+  }
+}
+</script>

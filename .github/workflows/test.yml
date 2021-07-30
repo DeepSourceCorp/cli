@@ -1,0 +1,42 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      ZEAL_SECRET: ${{secrets.GITHUB_TOKEN}}
+
+    steps:
+      - name: Checkout Bifrost
+        uses: actions/checkout@v2
+
+      - name: Setting Up Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+          always-auth: true
+          registry-url: https://npm.pkg.github.com/
+          scope: '@deepsourcelabs'
+          cache: 'yarn'
+
+      - name: Install packages
+        run: yarn
+
+      - name: Run Test
+        run: yarn test --coverage=true --coverageReporters=cobertura
+
+      - name: Install DeepSource CLI
+        run: curl https://deepsource.io/cli | sh
+
+      - name: Set DEEPSOURCE_DSN
+        run: |
+          ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
+        env:
+          DEEPSOURCE_DSN: ${{ secrets.BIFROST_DSN }}

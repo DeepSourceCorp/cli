@@ -11,6 +11,8 @@ query(
       totalCount
       edges {
         node {
+          id
+          config
           createdAt
           runId
           status

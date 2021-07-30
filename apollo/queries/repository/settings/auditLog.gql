@@ -1,0 +1,26 @@
+query auditLogs($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    name
+    auditLogMeta {
+      events
+      exportFormats
+      possibleActors
+    }
+    logs {
+      edges {
+        node {
+          eventName
+          description
+          ipAddress
+          location
+          createdAt
+          actor {
+            fullName
+            avatar
+          }
+        }
+      }
+    }
+  }
+}

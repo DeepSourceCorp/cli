@@ -1,0 +1,8 @@
+mutation($input: BitbucketInstallationLandingInput!) {
+  bitbucketInstallationLanding(input: $input) {
+    nextAction
+    message
+    vcsProvider
+    login
+  }
+}

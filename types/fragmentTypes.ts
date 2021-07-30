@@ -6,12 +6,15 @@
       }
       const result: PossibleTypesResultData = {
   "possibleTypes": {
-    "Node": [
+    "MaskPrimaryKeyNode": [
+      "ActivityFeed",
       "Analyzer",
       "AnalyzerReview",
+      "AuditLog",
       "AutofixRun",
       "Check",
       "CheckIssue",
+      "FeatureDefinition",
       "Issue",
       "Owner",
       "OwnerSetting",
@@ -21,7 +24,6 @@
       "RepositoryMetricValue",
       "Run",
       "SilenceRule",
-      "SocialNode",
       "Team",
       "TeamBasePermissionSet",
       "TeamMember",
@@ -30,7 +32,11 @@
       "TransformerReview",
       "TransformerRun",
       "TransformerTool",
-      "User"
+      "User",
+      "UserPreference"
+    ],
+    "Node": [
+      "SocialNode"
     ]
   }
 };

@@ -1,0 +1,13 @@
+mutation($input: UpdateRepositorySettingsInput!) {
+  updateRepositorySettings(input: $input) {
+    repository {
+      id
+      showInDiscover
+      analyzeChangesetOnly
+      defaultBranchName
+      isSubmoduleEnabled
+      config
+      isActivated
+    }
+  }
+}

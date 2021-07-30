@@ -1,10 +1,26 @@
 timeout: 30m0s
 
 steps:
+  - name: 'gcr.io/kaniko-project/executor:v1.5.0'
+    args:
+      - --destination=us.gcr.io/deepsource-dev/bifrost:dev
+      - --dockerfile=Dockerfile
+      - --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X
+      - --build-arg=ZEAL_SECRET
+      - --build-arg=STRIPE_PUBLISHABLE_KEY
+      - --build-arg=DISABLE_SENTRY=true
+      - --cache=true
+      - --cache-ttl=24h
+      - --snapshotMode=redo
+    secretEnv:
+      - 'ZEAL_SECRET'
+      - 'STRIPE_PUBLISHABLE_KEY'
 
-- name: 'gcr.io/kaniko-project/executor:v1.0.0'
-  args:
-  - --destination=us.gcr.io/deepsource-dev/bifrost:dev
-  - --dockerfile=Dockerfile
-  - --cache-ttl=500h
-  - --cache=true
+availableSecrets:
+  secretManager:
+    - versionName: projects/821280794258/secrets/bifrost/versions/1
+      env: 'ZEAL_SECRET'
+    - versionName: projects/821280794258/secrets/bifrost-stripe-test-publishable-key/versions/1
+      env: 'STRIPE_PUBLISHABLE_KEY'
+options:
+  machineType: 'E2_HIGHCPU_8'

@@ -19,16 +19,12 @@ query(
           finishedIn
           changedFilesCount
           tools
-          commitStatus
+          committedToBranchStatus
           gitCompareDisplay
           pullRequestNumber
           vcsPrUrl
-          __typename
         }
-        __typename
       }
-      __typename
     }
-    __typename
   }
 }

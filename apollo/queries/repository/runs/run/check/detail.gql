@@ -12,13 +12,17 @@ query($checkId: ID!) {
     }
     filesAffectedByAutofix
     errors
+    errorsRendered
     issuesRaisedCount
     issuesResolvedCount
     run {
       isForDefaultBranch
+      isForCrossRepoPr
     }
     analyzer {
       name
+      shortcode
+      analyzerLogo
       description
     }
     metricsCaptured {
@@ -26,6 +30,7 @@ query($checkId: ID!) {
       name
       valueDisplay
       isPassing
+      extraData
     }
     concreteIssues {
       totalCount

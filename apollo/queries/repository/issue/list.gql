@@ -8,24 +8,20 @@ query(
   $analyzer: String
   $sort: String
   $q: String
+  $autofixAvailable: Boolean
+  $all: Boolean
 ) {
   repository(provider: $provider, owner: $owner, name: $name) {
-    defaultBranchName
-    ownerLogin
-    name
     id
-    hasViewerEditAccess
-    config
-    blobUrlRoot
-    vcsProvider
-    activityModality
     issues(
+      all: $all
       first: $limit
       after: $after
       issueType: $issueType
       analyzer: $analyzer
       sort: $sort
       q: $q
+      autofixAvailable: $autofixAvailable
     ) {
       totalCount
       edges {
@@ -42,8 +38,10 @@ query(
           seenIn
           firstSeen
           lastSeen
+          modifiedAt
           pastValue
           autofixAvailable
+          raisedInFiles
         }
       }
     }

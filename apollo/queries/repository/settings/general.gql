@@ -1,21 +1,19 @@
-query($id: ID!) {
-  repository: node(id: $id) {
-    ... on Repository {
-      id
-      showInDiscover
-      analyzeChangesetOnly
-      defaultBranchName
-      isSubmoduleEnabled
-      config
-      isActivated
-      isPrivate
-      issueTypeSettings {
-        name
-        slug
-        description
-        isIgnoredInCheckStatus
-        isIgnoredToDisplay
-      }
+query($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    showInDiscover
+    analyzeChangesetOnly
+    defaultBranchName
+    isSubmoduleEnabled
+    config
+    isActivated
+    isPrivate
+    issueTypeSettings {
+      name
+      slug
+      description
+      isIgnoredInCheckStatus
+      isIgnoredToDisplay
     }
   }
 }

@@ -22,12 +22,14 @@ query(
           pullRequestStatus
           createdAt
           resolvedIssuesCount
+          changeset
           createdBy {
             fullName
             avatar
           }
           analyzer {
             name
+            shortcode
             analyzerLogo
           }
           issue {
@@ -35,12 +37,8 @@ query(
             issueType
             shortcode
           }
-          __typename
         }
-        __typename
       }
-      __typename
     }
-    __typename
   }
 }

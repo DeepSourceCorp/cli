@@ -1,0 +1,41 @@
+query($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    billingEmail
+    billingAddress
+    vcsInstallationId
+    hasPremiumPlan
+    billingInfo {
+      planSlug
+      status
+      upgradePlans
+      downgradePlans
+      seatsTotal
+      seatsUsed
+      lastBillAmount
+      upcomingBillAmount
+      lastPaymentDate
+      upcomingPaymentDate
+      lastInvoiceUrl
+      cancelAtPeriodEnd
+      upcomingCancellationDate
+      outstandingCredits
+      couponApplied {
+        code
+        description
+      }
+      activeCard {
+        brand
+        endingIn
+        expYear
+        expMonth
+      }
+      invoices {
+        invoiceId
+        date
+        amount
+        url
+      }
+    }
+  }
+}

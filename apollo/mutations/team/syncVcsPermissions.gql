@@ -1,0 +1,5 @@
+mutation($teamId: ID!) {
+  syncVcsPermissions(input: { teamId: $teamId }) {
+    ok
+  }
+}

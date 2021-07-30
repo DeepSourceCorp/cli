@@ -1,0 +1,109 @@
+<template>
+  <div class="flex gap-2 w-full xl:w-4/6 flex-row-reverse xl:flex-row">
+    <!-- Sort menu -->
+    <z-menu direction="right" width="x-small" class="text-vanilla-100">
+      <z-button slot="trigger" size="small" class="text-sm" buttonType="secondary">
+        <div v-if="!sortApplied" class="flex items-center space-x-2">
+          <z-icon icon="amount-down" size="small"></z-icon>
+          <span class="hidden xl:inline-block">Sort</span>
+        </div>
+        <div v-else class="flex items-center space-x-2">
+          <span class="hidden xl:inline-block">Sorted by - {{ selectedFilter }}</span>
+          <z-icon icon="x" size="small" @click="clearFilter()"></z-icon>
+        </div>
+      </z-button>
+      <template slot="body" class="text-vanilla-200">
+        <z-menu-item
+          v-for="filter in sortFilters"
+          v-bind:key="filter.name"
+          :icon="filter.icon"
+          @click="() => sortIssues(filter.name)"
+        >
+          {{ filter.label }}
+        </z-menu-item>
+      </template>
+    </z-menu>
+    <!-- Search -->
+    <div class="flex-grow xl:min-w-80">
+      <z-input
+        v-model="searchIssue"
+        size="small"
+        class="text-sm"
+        backgroundColor="ink-300"
+        placeholder="Search occurences in a file path"
+        :showBorder="false"
+        @debounceInput="searchIssueChildren"
+      >
+        <template slot="left">
+          <div class="pl-1">
+            <z-icon icon="search" size="small"></z-icon>
+          </div>
+        </template>
+      </z-input>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Vue, Component, namespace } from 'nuxt-property-decorator'
+import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem } from '@deepsourcelabs/zeal'
+import IssueEditor from './IssueEditor.vue'
+
+// types
+import { RepositoryIssue } from '~/types/types'
+
+// store
+const issueStore = namespace('issue/detail')
+
+@Component({
+  components: {
+    ZIcon,
+    ZInput,
+    ZButton,
+    ZMenu,
+    ZMenuItem,
+    IssueEditor
+  }
+})
+export default class IssueOccurenceSection extends Vue {
+  @issueStore.State
+  issue!: RepositoryIssue
+
+  public searchIssue: string | (string | null)[] = ''
+
+  public selectedFilter = this.$route.query['sort-by']
+
+  public sortFilters: Array<Record<string, string | boolean>> = [
+    { label: 'First Seen', icon: 'first-seen', name: 'first-seen', isActive: false },
+    { label: 'Last Seen', icon: 'last-seen', name: 'last-seen', isActive: true }
+  ]
+
+  mounted(): void {
+    this.selectedFilter = this.$route.query['sort-by']
+    this.searchIssue = this.$route.query['q']
+  }
+
+  get sortApplied(): boolean {
+    return this.$route.query['sort-by'] ? true : false
+  }
+
+  public clearFilter(): void {
+    this.$emit('filtersUpdated', {
+      sort: null
+    })
+  }
+
+  public sortIssues(name: string): void {
+    this.selectedFilter = name
+    this.$emit('filtersUpdated', {
+      sort: name
+    })
+  }
+
+  public searchIssueChildren(): void {
+    this.$emit('filtersUpdated', {
+      q: this.searchIssue ? this.searchIssue : null
+    })
+  }
+}
+</script>

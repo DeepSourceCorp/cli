@@ -1,0 +1,23 @@
+mutation(
+  $email: String!
+  $name: String!
+  $token: String!
+  $planSlug: String!
+  $seats: Int!
+  $coupon: String!
+  $installationId: String!
+) {
+  subscriptionCheckout(
+    input: {
+      email: $email
+      name: $name
+      token: $token
+      planSlug: $planSlug
+      seats: $seats
+      coupon: $coupon
+      installationId: $installationId
+    }
+  ) {
+    nextAction
+  }
+}

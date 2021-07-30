@@ -1,0 +1,5 @@
+mutation($input: VerifyDeviceInput!) {
+  verifyDevice (input: $input) {
+    ok
+  }
+}

@@ -88,3 +88,11 @@ sw.*
 
 # Vim swap files
 *.swp
+
+# .vscode
+.vscode
+
+# yalc
+.yalc
+yalc.lock
+

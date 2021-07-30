@@ -1,0 +1,89 @@
+<template>
+  <list-section v-if="starredRepos.length" title="Starred repositories">
+    <ul class="overflow-y-scroll hide-scroll divide-y divide-solid divide-ink-300 max-h-52">
+      <list-item
+        v-for="repo in starredRepos"
+        :key="repo.id"
+        :to="generateLink(repo)"
+        :icon="repo.isPrivate ? 'lock' : 'globe'"
+        class="px-4 py-3"
+      >
+        <template slot="label">
+          <div class="flex items-center space-x-3">
+            <span>
+              {{ repo.name }}
+            </span>
+            <span
+              v-if="repo.availableAnalyzers && repo.availableAnalyzers.edges"
+              class="space-x-3 hidden xs:flex"
+            >
+              <analyzer-logo
+                v-for="edge in repo.availableAnalyzers.edges"
+                :key="edge.node.name"
+                v-bind="edge.node"
+              />
+            </span>
+          </div>
+        </template>
+        <template slot="info">
+          <span v-tooltip="formatDate(repo.lastAnalyzedAt, 'lll')">{{
+            repo.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.lastAnalyzedAt) : ''
+          }}</span>
+        </template>
+      </list-item>
+    </ul>
+  </list-section>
+</template>
+
+<script lang="ts">
+import { Component, mixins } from 'nuxt-property-decorator'
+import { ListSection } from '@/components/TeamHome'
+import { ZIcon } from '@deepsourcelabs/zeal'
+import { getHumanizedTimeFromNow, formatDate } from '@/utils/date'
+
+import { Repository } from '~/types/types'
+import ActiveUserMixin from '@/mixins/activeUserMixin'
+
+@Component({
+  components: {
+    ListSection,
+    ZIcon
+  }
+})
+export default class StarredRepoList extends mixins(ActiveUserMixin) {
+  private isLoading = false
+  private formatDate = formatDate
+  private getHumanizedTimeFromNow = getHumanizedTimeFromNow
+
+  async fetch(): Promise<void> {
+    await this.fetchStarredRepos()
+  }
+
+  get starredRepos(): Array<Repository | null> {
+    if (this.viewer?.preference?.starredRepositories) {
+      const { edges } = this.viewer.preference.starredRepositories
+      return edges
+        .map((edge) => {
+          return edge?.node ? edge.node : null
+        })
+        .filter((node) => node?.id)
+    }
+    return []
+  }
+
+  generateLink({
+    vcsProvider,
+    ownerLogin,
+    owner,
+    name
+  }: {
+    vcsProvider: string
+    ownerLogin: string
+    owner: { login: string }
+    name: string
+  }): string {
+    const login = ownerLogin ? ownerLogin : owner.login
+    return ['', this.$providerMetaMap[vcsProvider].shortcode, login, name, 'issues'].join('/')
+  }
+}
+</script>

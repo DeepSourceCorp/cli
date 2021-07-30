@@ -1,0 +1,5 @@
+mutation($input: UpdateRepoMetricThresholdInput!) {
+  updateRepoMetricThreshold(input: $input) {
+    ok
+  }
+}

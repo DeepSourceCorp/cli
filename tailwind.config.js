@@ -1,5 +1,18 @@
 module.exports = {
-  presets: [
-    require('@deepsourcelabs/zeal/tailwind.config')
-  ]
+  presets: [require('@deepsourcelabs/zeal/tailwind.config')],
+  plugins: [require('@tailwindcss/line-clamp')],
+  variants: {
+    extend: {
+      translate: ['group-hover']
+    }
+  },
+  theme: {
+    extend: {
+      spacing: {
+        84: '21rem',
+        88: '22rem',
+        92: '23rem'
+      }
+    }
+  }
 }

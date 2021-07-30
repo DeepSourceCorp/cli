@@ -1,0 +1,5 @@
+query {
+  oauth {
+    socialUrls
+  }
+}

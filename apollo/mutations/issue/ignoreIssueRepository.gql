@@ -1,0 +1,8 @@
+mutation($repoIssueId: ID, $checkId: ID, $issueShortcode: String) {
+  ignoreIssueForRepository(
+    input: { repoIssueId: $repoIssueId, checkId: $checkId, issueShortcode: $issueShortcode }
+  ) {
+    ok
+    checkIssueIds
+  }
+}

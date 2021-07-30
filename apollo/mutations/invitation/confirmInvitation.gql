@@ -1,0 +1,7 @@
+mutation($invitationCode: String!) {
+  confirmInvitation(input: { action: ACCEPT, invitationCode: $invitationCode }) {
+    ok
+    message
+    joined
+  }
+}

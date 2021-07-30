@@ -1,0 +1,52 @@
+*:not(.hide-scroll) {
+  &::-webkit-scrollbar-track {
+    padding: 2px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 12px;
+    background-color: rgb(48, 50, 54);
+  }
+
+  &::-webkit-resizer,
+  &::-webkit-scrollbar-button,
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+}
+
+.hide-scroll {
+  &::-webkit-scrollbar-track,
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-thumb,
+  &::-webkit-resizer,
+  &::-webkit-scrollbar-button,
+  &::-webkit-scrollbar-corner {
+    display: none;
+  }
+}
+
+.custom-scroll {
+  overflow: hidden !important;
+}
+
+.custom-scroll:hover {
+  overflow: scroll !important;
+}
+
+.custom-y-scroll {
+  overflow: hidden !important;
+}
+
+.custom-y-scroll:hover {
+  overflow-y: scroll !important;
+}
+
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}

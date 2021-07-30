@@ -17,6 +17,7 @@ query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: S
       }
       analyzer {
         name
+        shortcode
         analyzerLogo
       }
       issue {

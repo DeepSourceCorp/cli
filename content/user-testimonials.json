@@ -1,20 +1,22 @@
 {
-    "testimonials": [{
-        "body": "DeepSource has made the code base <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'> much more stable and dependable</span>. It allowed us to identify many more areas for improvement.",
-        "author_name": "Peter Ramos",
-        "company": "Chief-engineer, Uber",
-        "avatar_url": "https://images.unsplash.com/photo-1606851578659-47a72e759a0a?ixid=MXwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+  "testimonials": [
+    {
+      "body": "DeepSource has made the code base <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'> much more stable and dependable</span>. It allowed us to identify many more areas for improvement.",
+      "author": "Piero Molino",
+      "company": "Uber",
+      "avatar": "testimonials/piero.png"
     },
     {
-        "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        "author_name": "Peter Ramos",
-        "company": "Chief-engineer, Uber",
-        "avatar_url": "https://images.unsplash.com/photo-1541351555222-2625e7c3adda?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80"
+      "body": "DeepSource provides a very nice <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'>overview of issues</span> in our code.",
+      "author": "Michal Čihař",
+      "company": "Weblate",
+      "avatar": "testimonials/michal.png"
     },
     {
-        "body": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "author_name": "Peter Ramos",
-        "company": "Chief-engineer, Uber",
-        "avatar_url": "https://images.unsplash.com/photo-1422207258071-70754198c4a2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1641&q=80"
-    }]
+      "body": "DeepSource complements projects looking to embrace CI and source code quality as part of a larger DevOps strategy. It's been <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'>very easy and a pleasure to use.</span>",
+      "author": "Lewis McGibbney",
+      "company": "NASA",
+      "avatar": "testimonials/lewis.png"
+    }
+  ]
 }

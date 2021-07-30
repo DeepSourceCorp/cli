@@ -1,0 +1,37 @@
+query ViewerStarredRepos {
+  viewer {
+    id
+    preference {
+      starredRepositories {
+        edges {
+          node {
+            id
+            name
+            vcsProvider
+            ownerLogin
+            lastAnalyzedAt
+            owner {
+              id
+              login
+            }
+            isActivated
+            isFork
+            isPrivate
+            availableAnalyzers {
+              edges {
+                node {
+                  id
+                  shortcode
+                  name
+                  logo
+                  analyzerLogo
+                }
+              }
+            }
+            supportedAnalyzers
+          }
+        }
+      }
+    }
+  }
+}

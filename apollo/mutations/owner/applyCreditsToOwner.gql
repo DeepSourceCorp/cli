@@ -1,0 +1,6 @@
+mutation($ownerId: ID!, $amount: Int!) {
+  applyCreditsToOwner(input: { id: $ownerId, amount: $amount }) {
+    ok
+    availableCredits
+  }
+}

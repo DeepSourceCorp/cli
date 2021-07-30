@@ -1,0 +1,288 @@
+<template>
+  <div>
+    <div
+      class="grid grid-cols-1 gap-2 lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-b border-ink-200"
+    >
+      <div id="header" class="xl:col-span-2">
+        <div class="px-4 pt-3 space-y-2 space-x-2 xl:space-y-0">
+          <h2
+            class="text-lg font-medium xl:text-xl text-vanilla-400 inline-flex space-x-3 items-center leading-none"
+          >
+            <div class="inline-flex space-x-1">
+              <nuxt-link
+                :to="['', provider, owner].join('/')"
+                class="cursor-pointer hover:text-vanilla-300 transition-colors duration-75"
+                >{{ $route.params.owner }}</nuxt-link
+              >
+              <span>/</span>
+              <nuxt-link :to="$generateRoute()" class="font-bold text-vanilla-100">
+                {{ $route.params.repo }}
+              </nuxt-link>
+            </div>
+            <z-button
+              v-if="allowStar"
+              v-tooltip="
+                internalStarredState
+                  ? 'Click to remove from starred repositories'
+                  : 'Star this repository'
+              "
+              buttonType="ghost"
+              icon="z-star"
+              size="x-small"
+              class="p-1"
+              :color="internalStarredState ? 'juniper' : 'ink-200 hover:text-slate'"
+              :iconColor="'current'"
+              @click.prevent="toggleStar(!internalStarredState)"
+            />
+            <a
+              v-if="repository.vcsProvider"
+              :href="repository.vcsUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <z-tag
+                class="border-2 border-ink-200"
+                spacing="p-0.5"
+                bgcolor="ink-200"
+                v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
+                size="base"
+                :iconLeft="repository.vcsProvider.toLowerCase()"
+              ></z-tag>
+            </a>
+            <z-label
+              v-if="repository.isActivated === true"
+              class="inline-block select-none"
+              state="success"
+              >Active</z-label
+            >
+            <z-label
+              v-else-if="repository.isActivated === false"
+              class="inline-block select-none"
+              state="warning"
+              >Inactive</z-label
+            >
+          </h2>
+        </div>
+      </div>
+      <div v-if="repository && lastRun" id="info" class="xl:row-span-2">
+        <repo-header-info
+          :commitId="lastRun.commitOid"
+          :runId="lastRun.runId"
+          :analyzer="lastRun.config.analyzers[0].name"
+          :defaultBranch="repository.defaultBranchName"
+          :lastAnalyzed="lastRun.finishedAt"
+          :vcsUrl="repository.vcsDefaultBranchUrl || repository.vcsUrl"
+          :vcsCommitUrl="lastRun.vcsCommitUrl"
+          :currentlyAnalysing="repository.runs && repository.runs.totalCount"
+          :canChangeBranch="canChangeBranch"
+          class="flex flex-col h-full px-4 md:px-3 py-2 space-y-2 text-sm xl:border-l xl:border-ink-200 text-vanilla-400"
+        ></repo-header-info>
+      </div>
+      <div id="tabs" class="flex xl:col-span-2">
+        <div class="flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll">
+          <template v-for="item in navItems">
+            <nuxt-link
+              v-if="isNavLinkVisible(item)"
+              :key="item.label"
+              :to="$generateRoute(item.link)"
+            >
+              <z-tab :icon="item.icon" :isActive="activeLink(item)">{{ item.label }}</z-tab>
+            </nuxt-link>
+          </template>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, mixins } from 'nuxt-property-decorator'
+import { Run, Maybe } from '~/types/types'
+import RepoHeaderInfo from './RepoHeaderInfo.vue'
+import RouteParamsMixin from '@/mixins/routeParamsMixin'
+
+import { ZLabel, ZButton, ZTab, ZTag, ZIcon } from '@deepsourcelabs/zeal'
+
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import { RepoPerms } from '~/types/permTypes'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+
+interface TabLink {
+  icon: string
+  label: string
+  link?: string
+  loginRequired?: boolean
+  matchName?: string[]
+  perms?: RepoPerms[]
+  pattern?: RegExp
+}
+
+const navItems: TabLink[] = [
+  {
+    icon: 'tachometer-fast',
+    label: 'Overview',
+    pattern: new RegExp(/^provider-owner-repo$/)
+  },
+  {
+    icon: 'flag',
+    label: 'Issues',
+    link: 'issues',
+    pattern: new RegExp(/^provider-owner-repo-issue*/)
+  },
+  {
+    icon: 'autofix',
+    label: 'Autofix',
+    link: 'autofix',
+    pattern: new RegExp(/^provider-owner-repo-autofix*/)
+  },
+  {
+    icon: 'bar-chart',
+    label: 'Metrics',
+    link: 'metrics',
+    pattern: new RegExp(/^provider-owner-repo-metrics$/)
+  },
+  {
+    icon: 'history',
+    label: 'History',
+    link: 'history/runs',
+    pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/)
+  },
+  {
+    icon: 'settings',
+    label: 'Settings',
+    link: 'settings/general',
+    loginRequired: true,
+    perms: [
+      RepoPerms.VIEW_DSN,
+      RepoPerms.GENERATE_SSH_KEY_PAIR,
+      RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
+      RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
+      RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
+      RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY,
+      RepoPerms.ADD_REMOVE_MEMBERS,
+      RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
+      RepoPerms.VIEW_AUDIT_LOGS
+    ],
+    pattern: new RegExp(/^provider-owner-repo-settings-*/)
+  }
+]
+
+@Component({
+  components: {
+    ZTab,
+    ZTag,
+    ZIcon,
+    ZLabel,
+    ZButton,
+    RepoHeaderInfo
+  },
+  data() {
+    return {
+      navItems
+    }
+  }
+})
+export default class RepoHeader extends mixins(
+  RouteParamsMixin,
+  RepoDetailMixin,
+  RoleAccessMixin,
+  ActiveUserMixin
+) {
+  private interval: ReturnType<typeof setInterval>
+  private internalStarredState = false
+
+  async fetch(): Promise<void> {
+    await this.fetchRepoPerms(this.baseRouteParams)
+    await this.fetchBasicRepoDeatils({
+      ...this.baseRouteParams,
+      refetch: true
+    })
+    this.fetchRepoRunCount({
+      ...this.baseRouteParams,
+      status: 'pend'
+    })
+
+    this.internalStarredState = this.repository.isStarred as boolean
+    this.$localStore.set('starred-repos', this.repository.id, this.internalStarredState)
+  }
+
+  updateInterval(reset: Boolean) {
+    clearInterval(this.interval)
+    if (reset) {
+      // refetch data every 3 mins
+      this.interval = setInterval(this.$fetch, 3 * 60 * 1000)
+    }
+  }
+
+  refetchOnSocketEvent(): void {
+    this.$fetch()
+    // restart interval if fetch is triggered to avoid unecessary calling
+    this.updateInterval(true)
+  }
+
+  mounted(): void {
+    this.updateInterval(true)
+    this.internalStarredState = this.$localStore.get('starred-repos', this.repository.id) as boolean
+    this.$socket.$on('repo-analysis-updated', this.refetchOnSocketEvent)
+  }
+
+  beforeDestroy(): void {
+    this.updateInterval(false)
+    this.$socket.$off('repo-analysis-updated', this.refetchOnSocketEvent)
+  }
+
+  get lastRun(): Maybe<Run> {
+    return this.repository?.latestAnalysisRun || null
+  }
+
+  async toggleStar(isStarred: boolean) {
+    this.internalStarredState = isStarred
+
+    await this.updateStarredRepo({
+      action: isStarred ? 'ADD' : 'REMOVE',
+      repoId: this.repository.id
+    })
+
+    this.fetchBasicRepoDeatils({
+      ...this.baseRouteParams,
+      refetch: true
+    })
+
+    this.$localStore.set('starred-repos', this.repository.id, this.internalStarredState)
+  }
+
+  public activeLink(item: TabLink): boolean {
+    if (item.pattern && this.$route.name) {
+      return item.pattern.test(this.$route.name)
+    }
+    return false
+  }
+
+  get canChangeBranch(): boolean {
+    if (this.loggedIn) {
+      return this.$gateKeeper.repo(
+        RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
+        this.repoPerms.permission
+      )
+    }
+    return false
+  }
+
+  get allowStar(): boolean {
+    if (this.loggedIn) {
+      return this.$gateKeeper.repo(RepoPerms.ALLOW_STAR, this.repoPerms.permission)
+    }
+    return false
+  }
+
+  isNavLinkVisible(item: TabLink): boolean {
+    if (item.loginRequired) {
+      return item.perms && this.loggedIn
+        ? this.$gateKeeper.repo(item.perms, this.repoPerms.permission)
+        : this.loggedIn
+    }
+    return true
+  }
+}
+</script>

@@ -8,8 +8,6 @@ query(
 ) {
   owner(login: $login, provider: $provider) {
     id
-    hasPremiumPlan
-    planUpgradeUrl
     repositories(isActivated: $isActivated, first: $limit, after: $after, name_Icontains: $query) {
       totalCount
       edges {
@@ -22,10 +20,26 @@ query(
           isActivated
           isFork
           isPrivate
+          isStarred
           latestCommitOid
           defaultBranchName
           lastAnalyzedAt
-          config
+          availableAnalyzers {
+            edges {
+              node {
+                id
+                name
+                shortcode
+                analyzerLogo
+              }
+            }
+          }
+          primaryAnalyzer {
+            id
+            name
+            shortcode
+            analyzerLogo
+          }
           canBeActivated
           supportedAnalyzers
         }

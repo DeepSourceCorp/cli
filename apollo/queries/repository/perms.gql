@@ -1,0 +1,7 @@
+query RepositoryPermissions($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, name: $name, owner: $owner) {
+    id
+    name
+    userPermissionMeta
+  }
+}

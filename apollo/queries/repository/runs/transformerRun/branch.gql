@@ -1,0 +1,23 @@
+query($provider: VCSProviderChoices!, $owner: String!, $name: String!, $branchName: String!) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    name
+    transformerBranchRuns(branchName: $branchName) {
+      edges {
+        node {
+          createdAt
+          runId
+          status
+          branchName
+          commitOid
+          finishedIn
+          vcsCommitUrl
+          gitCompareDisplay
+          pullRequestNumberDisplay
+          changedFilesCount
+          tools
+        }
+      }
+    }
+  }
+}

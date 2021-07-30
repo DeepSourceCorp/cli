@@ -1,0 +1,7 @@
+mutation($repositoryId: ID!) {
+  generateKeyPairForRepository(input: { repositoryId: $repositoryId }) {
+    repository {
+      encPublicKey
+    }
+  }
+}

@@ -1,0 +1,6 @@
+query($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    alertingMetrics
+  }
+}

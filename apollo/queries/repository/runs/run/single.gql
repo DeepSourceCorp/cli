@@ -1,17 +1,31 @@
 query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: String!) {
   repository(provider: $provider, owner: $owner, name: $name) {
+    id
     run(runId: $runId) {
       createdAt
+      blobUrlRoot
       runId
+      checks {
+        edges {
+          node {
+            id
+            analyzer {
+              name
+              shortcode
+              description
+              analyzerLogo
+            }
+          }
+        }
+      }
       status
       branchName
       commitOid
       finishedIn
       vcsCommitUrl
       gitCompareDisplay
+      vcsPrUrl
       pullRequestNumberDisplay
-      issuesRaisedCount
-      issuesResolvedNum
     }
   }
 }

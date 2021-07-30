@@ -11,10 +11,12 @@
     ],
     "esModuleInterop": true,
     "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "inlineSources": true,
     "sourceRoot": "/",
     "strict": true,
+    "strictPropertyInitialization": false,
     "noEmit": true,
     "experimentalDecorators": true,
     "baseUrl": ".",
@@ -33,7 +35,10 @@
       "vue-apollo/types",
       "@types/express",
       "@types/jest",
-      "cookie-universal-nuxt/types"
+      "cookie-universal-nuxt/types",
+      "@nuxtjs/sentry",
+      "highlight.js/types",
+      "nuxt-stripe-module"
     ],
     "typeRoots": [
       "./node_modules/@types",

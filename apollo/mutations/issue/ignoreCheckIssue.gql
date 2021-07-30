@@ -1,0 +1,5 @@
+mutation($checkIssueId: ID!, $action: IgnoreCheckIssueActionChoice!) {
+  ignoreCheckIssue(input: { checkIssueId: $checkIssueId, action: $action }) {
+    ok
+  }
+}

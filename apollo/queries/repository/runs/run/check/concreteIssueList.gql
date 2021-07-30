@@ -6,11 +6,17 @@ query($checkId: ID!, $q: String, $limit: Int, $after: String, $sort: String, $is
       edges {
         node {
           id
-          issueType
-          title
-          seenIn
+          createdAt
+          modifiedAt
           shortcode
+          title
+          description
+          severity
+          autofixAvailable
+          autofixTitle
           occurrenceCount
+          issueType
+          seenIn
         }
       }
     }

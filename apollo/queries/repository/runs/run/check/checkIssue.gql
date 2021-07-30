@@ -1,0 +1,26 @@
+query($checkId: ID!, $limit: Int, $after: String, $shortcode: String, $q: String, $sort: String) {
+  checkIssues(
+    checkId: $checkId
+    first: $limit
+    after: $after
+    shortcode: $shortcode
+    q: $q
+    sort: $sort
+  ) {
+    totalCount
+    edges {
+      node {
+        id
+        path
+        text
+        path
+        modifiedAt
+        beginLine
+        beginColumn
+        endLine
+        endColumn
+        sourceCodeMarkup
+      }
+    }
+  }
+}

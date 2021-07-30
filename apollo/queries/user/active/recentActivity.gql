@@ -1,0 +1,24 @@
+query {
+  viewer {
+    id
+    recentActivities(first: 15) {
+      edges {
+        node {
+          id
+          eventName
+          description
+          loggedForDisplay
+          createdAt
+          actor {
+            id
+            firstName
+            lastName
+            fullName
+            email
+          }
+          reason
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+mutation($input: RemoveRepositoryCollaboratorInput!) {
+  removeRepositoryCollaborator(input: $input) {
+    ok
+  }
+}

@@ -2,14 +2,33 @@ query($runId: String!) {
   autofixRun(runId: $runId) {
     id
     errors
+    runId
+    staleRedirectUrl
     finishedIn
+    isGeneratedFromPr
     issuesAffected
     committedToBranchStatus
     resolvedIssuesCount
     pullRequestStatus
+    pullRequestTitle
+    pullRequestNumber
     status
     id
     changeset
     vcsPrUrl
+    createdBy {
+      fullName
+      avatar
+    }
+    analyzer {
+      name
+      shortcode
+      analyzerLogo
+    }
+    issue {
+      title
+      issueType
+      shortcode
+    }
   }
 }

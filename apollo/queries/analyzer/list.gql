@@ -5,6 +5,20 @@
         id
         name
         shortcode
+        logo
+        analyzerLogo
+        transformertoolSet {
+          edges {
+            node {
+              id
+              name
+              shortcode
+              logo
+              description
+            }
+          }
+        }
+        metaSchema
       }
     }
   }

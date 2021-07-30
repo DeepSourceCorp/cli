@@ -1,0 +1,30 @@
+query(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $limit: Int
+  $after: String
+  $query: String
+) {
+  team(login: $login, provider: $provider) {
+    id
+    numMembersTotal
+    invitationUrl
+    members: teamMembers(first: $limit, after: $after, q: $query) {
+      totalCount
+      edges {
+        node {
+          id
+          role
+          isPrimaryUser
+          user {
+            id
+            fullName
+            email
+            avatar
+            dateJoined
+          }
+        }
+      }
+    }
+  }
+}

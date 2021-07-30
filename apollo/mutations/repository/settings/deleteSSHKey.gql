@@ -1,0 +1,5 @@
+mutation DeleteSSHKey($repositoryId: ID!) {
+  removeKeyPairForRepository(input: { repositoryId: $repositoryId }) {
+    ok
+  }
+}

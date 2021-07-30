@@ -1,14 +1,19 @@
 query($runId: String!) {
   transformerRun(runId: $runId) {
+    branchName
+    changedFilesCount
+    changeset
+    commitOidShort
+    committedToBranchStatus
+    createdAt
     errors
+    finishedIn
+    gitCompareDisplay
+    id
     pullRequestStatus
     status
     tools
-    changedFilesCount
-    commitStatus
-    id
-    changeset
-    vcsPrUrl
     vcsCommitUrl
+    vcsPrUrl
   }
 }

@@ -5,12 +5,14 @@ query($name: String!, $owner: String!, $provider: VCSProviderChoices!, $q: Strin
       totalCount
       edges {
         node {
+          id
           role
           isPrimaryUser
           user {
             id
             firstName
             lastName
+            fullName
             email
             avatar
             dateJoined

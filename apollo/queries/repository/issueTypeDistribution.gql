@@ -1,0 +1,19 @@
+query(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $issueType: String!
+  $analyzer: String
+  $q: String
+  $autofixAvailable: Boolean
+) {
+  repository(provider: $provider, name: $name, owner: $owner) {
+    id
+    issueTypeDistribution(
+      issueType: $issueType
+      analyzer: $analyzer
+      q: $q
+      autofixAvailable: $autofixAvailable
+    )
+  }
+}

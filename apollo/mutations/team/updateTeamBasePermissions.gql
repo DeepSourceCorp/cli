@@ -1,0 +1,17 @@
+mutation(
+  $teamId: ID!
+  $defaultRepositoryPermission: RepositoryPermissionChoices
+  $canMembersIgnoreIssues: Boolean
+  $canContributorsIgnoreIssues: Boolean
+) {
+  updateTeamBasePermissions(
+    input: {
+      teamId: $teamId
+      defaultRepositoryPermission: $defaultRepositoryPermission
+      canMembersIgnoreIssues: $canMembersIgnoreIssues
+      canContributorsIgnoreIssues: $canContributorsIgnoreIssues
+    }
+  ) {
+    ok
+  }
+}

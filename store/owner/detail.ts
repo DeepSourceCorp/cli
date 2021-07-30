@@ -1,140 +1,543 @@
 import { RootState } from '~/store'
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
+import {
+  IssueTypeSetting,
+  GetBillingInfoPayload,
+  Owner,
+  OwnerSetting,
+  Maybe,
+  SubscriptionCheckoutPayload,
+  UpdateCodeQualitySubscriptionSeatsPayload,
+  UpdatePaymentActionChoice,
+  UpdateDefaultPaymentSourcePayload
+} from '~/types/types'
+import { GraphqlError } from '~/types/apollo-graphql-types'
 
+import OwnerDetailQuery from '~/apollo/queries/owner/details.gql'
+import AccountSetupStatus from '~/apollo/queries/owner/accountSetupStatus.gql'
+import IssueTrendsGQLQuery from '~/apollo/queries/owner/issueTrends.gql'
+import AutofixTrendsGQLQuery from '~/apollo/queries/owner/autofixTrends.gql'
+import SyncRepositories from '~/apollo/mutations/owner/syncRepositories.gql'
+
+// Settings
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
 
-import { IssueTypeSetting, Owner, OwnerSetting, Maybe } from '~/types/types'
-import { GraphqlError } from '~/types/apollo-graphql-types'
-
-export const ACT_FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings'
-export const ACT_SET_OWNER = 'setOwner'
-export const ACT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
-export const ACT_SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings'
-
-export const MUT_SET_ERROR = 'setOwnerDetailError'
-export const MUT_SET_LOADING = 'setOwnerDetailLoading'
-export const MUT_SET_OWNER = 'setOwner'
-export const MUT_SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
-
-export const GET_REFINED_ISSUE_TYPE_SETTINGS = 'refinedIssueTypeSettings'
-
-export type RefinedIssueTypeSetting = {
-  slug?: string;
-  isIgnoredInCheckStatus?: boolean;
-  isIgnoredToDisplay?: boolean;
-};
+// Billing
+import BillingDetails from '~/apollo/queries/owner/billing.gql'
+import ApplyCredits from '~/apollo/mutations/owner/applyCreditsToOwner.gql'
+import UpdateBillingInfo from '~/apollo/mutations/owner/updateBillingInfo.gql'
+import GetBillingInfo from '~/apollo/mutations/owner/getBillingInfo.gql'
+import Checkout from '~/apollo/mutations/owner/checkout.gql'
+import UpdateSeats from '~/apollo/mutations/owner/updateSeats.gql'
+import ChangePlan from '~/apollo/mutations/owner/changePlan.gql'
+import UpdatePaymentSource from '~/apollo/mutations/owner/updatePaymentSource.gql'
 
 export interface OwnerDetailModuleState {
-  loading :boolean,
-  error :Record<string, any>,
-  owner :Owner
+  loading: boolean
+  error: Record<string, unknown>
+  owner: Owner
+  billingInfo?: GetBillingInfoPayload
 }
 
-export const state = () :OwnerDetailModuleState => ({
-  ...<OwnerDetailModuleState>{
-    loading: false,
-    error: {},
-    owner: {
-      ownerSetting: <OwnerSetting> {
-        issueTypeSettings: <Maybe<Array<Maybe<IssueTypeSetting>>>>[]
-      }
-    }
-  },
-})
+export type IssuePreferences = {
+  slug?: Maybe<string>
+  isIgnoredInCheckStatus?: Maybe<boolean>
+  isIgnoredToDisplay?: Maybe<boolean>
+}
 
 export type OwnerDetailModuleActionContext = ActionContext<OwnerDetailModuleState, RootState>
 
+// Getters ------------------------------------------
+
+export enum OwnerDetailGetters {
+  ISSUE_PREFERENCES = 'issuePreferences'
+}
+
+// Interface to set type annotations for issue preferences getter
 interface OwnerDetailModuleGetters extends GetterTree<OwnerDetailModuleState, RootState> {
-  [GET_REFINED_ISSUE_TYPE_SETTINGS]: (state: OwnerDetailModuleState) => RefinedIssueTypeSetting[];
+  [OwnerDetailGetters.ISSUE_PREFERENCES]: (state: OwnerDetailModuleState) => Array<IssuePreferences>
 }
 
 export const getters: OwnerDetailModuleGetters = {
-  [GET_REFINED_ISSUE_TYPE_SETTINGS]: state => {
-    let arr: Maybe<Array<RefinedIssueTypeSetting>> = []
-    state.owner.ownerSetting?.issueTypeSettings?.forEach((obj: Maybe<IssueTypeSetting>) => {
-      let newObj = <RefinedIssueTypeSetting>{
-        slug: obj?.slug,
-        isIgnoredInCheckStatus: obj?.isIgnoredInCheckStatus,
-        isIgnoredToDisplay: obj?.isIgnoredInCheckStatus
-      }
-      arr?.push(newObj)
+  [OwnerDetailGetters.ISSUE_PREFERENCES]: (state) => {
+    const issuePreferences: Array<IssuePreferences> = []
+    state.owner.ownerSetting?.issueTypeSettings?.forEach((issueConfig) => {
+      issuePreferences.push({
+        slug: issueConfig?.slug,
+        isIgnoredInCheckStatus: issueConfig?.isIgnoredInCheckStatus,
+        isIgnoredToDisplay: issueConfig?.isIgnoredInCheckStatus
+      })
     })
-    return arr
+    return issuePreferences
   }
 }
 
-interface OwnerDetailModuleMutations extends MutationTree<OwnerDetailModuleState> {
-  [MUT_SET_LOADING]: (state: OwnerDetailModuleState, value: boolean) => void;
-  [MUT_SET_ERROR]: (state: OwnerDetailModuleState, error: GraphqlError) => void;
-  [MUT_SET_OWNER]: (state: OwnerDetailModuleState, owner: Owner) => void;
-  [MUT_SET_ISSUE_TYPE_SETTING]: (state: OwnerDetailModuleState, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
+// Mutation -----------------------------------------
+
+export enum OwnerDetailMutations {
+  SET_ERROR = 'setOwnerDetailError',
+  SET_LOADING = 'setOwnerDetailLoading',
+  SET_OWNER = 'setOwner',
+  SET_BILLING_INFO = 'setBillingInfo',
+  SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
 }
 
-export const mutations: OwnerDetailModuleMutations = {
-  [MUT_SET_LOADING]: (state, value) => {
+export const mutations: MutationTree<OwnerDetailModuleState> = {
+  [OwnerDetailMutations.SET_LOADING]: (state, value) => {
     state.loading = value
   },
-  [MUT_SET_ERROR]: (state, error) => {
+  [OwnerDetailMutations.SET_ERROR]: (state, error) => {
     state.error = Object.assign({}, state.error, error)
   },
-  [MUT_SET_OWNER]: (state, owner) => {
+  [OwnerDetailMutations.SET_OWNER]: (state, owner) => {
     state.owner = Object.assign({}, state.owner, owner)
   },
-  [MUT_SET_ISSUE_TYPE_SETTING]: (state, args) => {
-    if (state.owner.ownerSetting?.issueTypeSettings?.[args.issueTypeSettingIndex]) {
-      state.owner.ownerSetting.issueTypeSettings[args.issueTypeSettingIndex] = Object.assign({},
-        state.owner.ownerSetting?.issueTypeSettings?.[args.issueTypeSettingIndex], {
-        ...args.issueTypeSetting
+  [OwnerDetailMutations.SET_BILLING_INFO]: (state, billingInfo) => {
+    state.billingInfo = billingInfo
+  },
+  [OwnerDetailMutations.SET_ISSUE_TYPE_SETTING]: (state, args) => {
+    const issueSettings = state.owner.ownerSetting?.issueTypeSettings as Array<IssueTypeSetting>
+    if (issueSettings) {
+      const index = issueSettings.findIndex((issue) => {
+        return issue?.slug === args.issueTypeSettingSlug
+      })
+
+      if (index > -1 && issueSettings[index]) {
+        Object.assign(issueSettings[index], args)
+      } else {
+        issueSettings.push(args)
       }
-      )
     }
   }
 }
 
+// Actions ------------------------------------------
+export enum OwnerDetailActions {
+  FETCH_OWNER_DETAILS = 'fetchOwnerDetails',
+  FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings',
+  FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
+  FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
+  FETCH_ACCOUNT_SETUP_STATUS = 'fetchAccountSetupStatus',
+  SET_OWNER = 'setOwner',
+
+  SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting',
+  SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings',
+  SYNC_REPOS_FOR_OWNER = 'syncReposForOwner',
+
+  FETCH_BILLING_DETAILS = 'fetchBillingDetails',
+  APPLY_CREDITS = 'applyCredits',
+  UPDATE_BILLING_INFO = 'updateBillingInfo',
+  GET_BILLING_INFO = 'getBillingInfo',
+  CHECKOUT = 'checkout',
+  UPDATE_SEATS = 'updateSeats',
+  UPDATE_PAYMENT_SOURCE = 'updatePaymentSource',
+  CHANGE_SUBSCRIPTION_PLAN = 'changeSubscriptionPlan'
+}
+
 interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
-  [ACT_FETCH_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerDetailModuleActionContext, args: { login: string, provider: string }) => Promise<void>;
-  [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]: (this: Store<RootState>, injectee: OwnerDetailModuleActionContext, args?: any) => Promise<void>;
-  [ACT_SET_OWNER]: (injectee: OwnerDetailModuleActionContext, owner: Owner) => void;
-  [ACT_SET_ISSUE_TYPE_SETTING]: (injectee: OwnerDetailModuleActionContext, args: { issueTypeSetting: IssueTypeSetting, issueTypeSettingIndex: number }) => void;
+  [OwnerDetailActions.FETCH_OWNER_DETAILS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_ISSUE_TRENDS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; lastDays: number | null }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_AUTOFIX_TRENDS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; lastDays: number | null }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_BILLING_DETAILS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
+
+  [OwnerDetailActions.SUBMIT_ISSUE_TYPE_SETTINGS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; preferences: IssueTypeSetting[] }
+  ) => Promise<void>
+
+  [OwnerDetailActions.SYNC_REPOS_FOR_OWNER]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext
+  ) => Promise<void>
+
+  [OwnerDetailActions.SET_OWNER]: (injectee: OwnerDetailModuleActionContext, owner: Owner) => void
+
+  [OwnerDetailActions.SET_ISSUE_TYPE_SETTING]: (
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      isIgnoredInCheckStatus: IssueTypeSetting['isIgnoredInCheckStatus']
+      isIgnoredToDisplay: IssueTypeSetting['isIgnoredToDisplay']
+      issueTypeSettingSlug: string
+    }
+  ) => void
+
+  [OwnerDetailActions.APPLY_CREDITS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { amount: number }
+  ) => Promise<void>
+
+  [OwnerDetailActions.UPDATE_BILLING_INFO]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { billingEmail: string; billingAddress: string; login: string; provider: string }
+  ) => Promise<void>
+
+  [OwnerDetailActions.GET_BILLING_INFO]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      productSlug?: string
+      planSlug?: string
+      quantity?: number
+      couponCode?: string
+      isTrial?: boolean
+    }
+  ) => Promise<void>
+
+  [OwnerDetailActions.CHECKOUT]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      email: string
+      name: string
+      token: string
+      planSlug: string
+      seats: number
+      coupon: string
+      installationId: string
+    }
+  ) => Promise<SubscriptionCheckoutPayload>
+
+  [OwnerDetailActions.UPDATE_SEATS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      id: string
+      seats: number
+    }
+  ) => Promise<UpdateCodeQualitySubscriptionSeatsPayload>
+
+  [OwnerDetailActions.UPDATE_PAYMENT_SOURCE]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      id: string
+      token: string
+      action: UpdatePaymentActionChoice
+    }
+  ) => Promise<UpdateDefaultPaymentSourcePayload>
+
+  [OwnerDetailActions.CHANGE_SUBSCRIPTION_PLAN]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      id: string
+      planSlug: string
+    }
+  ) => Promise<void>
 }
 
 export const actions: OwnerDetailModuleActions = {
-  async [ACT_FETCH_ISSUE_TYPE_SETTINGS]({ commit }, args) {
-    commit(MUT_SET_LOADING, true)
-    await this.$fetchGraphqlData(IssueTypeSettingsGQLQuery, {
-      login: args.login,
-      provider: this.$providerMetaMap[args.provider].value
-    }).then((response: { data: { owner: Owner } }) => {
-      // TODO: Toast("Successfully fetched issue preferences")
-      commit(MUT_SET_OWNER, response.data.owner)
-      commit(MUT_SET_LOADING, false)
-    }).catch((e: GraphqlError) => {
-      commit(MUT_SET_ERROR, e)
-      commit(MUT_SET_LOADING, false)
-      // TODO: Toast("Failure in fetching issue preferences", e)
-    })
+  async [OwnerDetailActions.FETCH_OWNER_DETAILS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(OwnerDetailQuery, {
+        login: args.login,
+        provider: this.$providerMetaMap[args.provider].value
+      })
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
   },
-  async [ACT_SUBMIT_ISSUE_TYPE_SETTINGS]({ commit, state, getters }) {
-    commit(MUT_SET_LOADING, true)
-    await this.$applyGraphqlMutation(UpdateOwnerSettingsGQLMutation, {
-      input: {
+
+  async [OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(IssueTypeSettingsGQLQuery, {
+        login: args.login,
+        provider: this.$providerMetaMap[args.provider].value
+      })
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.FETCH_ISSUE_TRENDS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(IssueTrendsGQLQuery, {
+        login: args.login,
+        provider: this.$providerMetaMap[args.provider].value,
+        lastDays: args.lastDays
+      })
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.FETCH_AUTOFIX_TRENDS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(AutofixTrendsGQLQuery, {
+        login: args.login,
+        provider: this.$providerMetaMap[args.provider].value,
+        lastDays: args.lastDays
+      })
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(
+        AccountSetupStatus,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.FETCH_BILLING_DETAILS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(
+        BillingDetails,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.SUBMIT_ISSUE_TYPE_SETTINGS]({ commit, state }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      await this.$applyGraphqlMutation(UpdateOwnerSettingsGQLMutation, {
+        input: {
+          ownerId: state.owner.id,
+          issueTypeSettings: args.preferences
+        }
+      })
+      const response = await this.$fetchGraphqlData(
+        IssueTypeSettingsGQLQuery,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        true
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.SYNC_REPOS_FOR_OWNER]({ commit, state }) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      await this.$applyGraphqlMutation(SyncRepositories, {
+        ownerId: state.owner.id
+      })
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  [OwnerDetailActions.SET_OWNER]({ commit }, owner) {
+    commit(OwnerDetailMutations.SET_OWNER, owner)
+  },
+
+  [OwnerDetailActions.SET_ISSUE_TYPE_SETTING]({ commit }, args) {
+    commit(OwnerDetailMutations.SET_ISSUE_TYPE_SETTING, args)
+  },
+
+  async [OwnerDetailActions.APPLY_CREDITS]({ commit, state, getters }, { amount }) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      await this.$applyGraphqlMutation(ApplyCredits, {
         ownerId: state.owner.id,
-        issueTypeSettings: getters[GET_REFINED_ISSUE_TYPE_SETTINGS]
+        amount
+      })
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.UPDATE_BILLING_INFO](
+    { commit, state },
+    { billingAddress, billingEmail, login, provider }
+  ) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const args = {
+        ownerId: state.owner.id,
+        billingAddress,
+        billingEmail
       }
-    }).then(() => {
-      // TODO: Toast("Successfully submitted issue preferences")
-      commit(MUT_SET_LOADING, false)
-    }).catch((e: GraphqlError) => {
-      commit(MUT_SET_ERROR, e)
-      commit(MUT_SET_LOADING, false)
-      // TODO: Toast("Failure in submitting issue preferences", e)
-    })
+      const refetchQueries = [
+        {
+          query: BillingDetails,
+          variables: {
+            login: login,
+            provider: this.$providerMetaMap[provider].value
+          },
+          fetchPolicy: 'network-only'
+        }
+      ]
+      const response = await this.$applyGraphqlMutation(UpdateBillingInfo, args, refetchQueries)
+      commit(OwnerDetailMutations.SET_OWNER, response.data.updateBillingInfo)
+      return response
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+      throw e
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
   },
-  [ACT_SET_OWNER]({ commit }, owner) {
-    commit(MUT_SET_OWNER, owner)
+
+  async [OwnerDetailActions.GET_BILLING_INFO]({ commit, state }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$applyGraphqlMutation(GetBillingInfo, {
+        ownerId: state.owner.id,
+        ...args
+      })
+      commit(OwnerDetailMutations.SET_BILLING_INFO, response.data.getBillingInfo)
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
   },
-  [ACT_SET_ISSUE_TYPE_SETTING]({ commit }, args) {
-    commit(MUT_SET_ISSUE_TYPE_SETTING, args)
+
+  async [OwnerDetailActions.CHECKOUT]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$applyGraphqlMutation(Checkout, args)
+      return response.data.subscriptionCheckout || {}
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+      throw e
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.UPDATE_SEATS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$applyGraphqlMutation(UpdateSeats, args)
+      return response.data.updateCodeQualitySubscriptionSeats || {}
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+      throw e
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.UPDATE_PAYMENT_SOURCE]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$applyGraphqlMutation(UpdatePaymentSource, args)
+      return response.data.updateDefaultPaymentSource || {}
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+      throw e
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+  async [OwnerDetailActions.CHANGE_SUBSCRIPTION_PLAN]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      await this.$applyGraphqlMutation(ChangePlan, args)
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+      throw e
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
   }
 }
+
+export const state = (): OwnerDetailModuleState => ({
+  ...(<OwnerDetailModuleState>{
+    loading: false,
+    error: {},
+    billingInfo: {},
+    owner: {
+      accountSetupStatus: [],
+      ownerSetting: <OwnerSetting>{
+        issueTypeSettings: <Maybe<Array<Maybe<IssueTypeSetting>>>>[]
+      }
+    }
+  })
+})

@@ -1,0 +1,27 @@
+query($nodeId: ID!, $limit: Int, $after: String, $q: String, $sort: String) {
+  node(id: $nodeId) {
+    ... on RepositoryIssue {
+      shortcode
+      checkIssues(first: $limit, after: $after, q: $q, sort: $sort) {
+        totalCount
+        pageInfo {
+          hasNextPage
+        }
+        edges {
+          node {
+            id
+            severity
+            path
+            text
+            beginLine
+            beginColumn
+            endLine
+            endColumn
+            sourceCodeMarkup
+            createdAt
+          }
+        }
+      }
+    }
+  }
+}

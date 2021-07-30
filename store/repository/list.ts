@@ -1,14 +1,29 @@
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 import { RootState } from '~/store'
 import { RepositoryConnection, PageInfo, Maybe, Scalars, Owner } from '~/types/types'
-import RepositoryListGQLQuery from '~/apollo/queries/repository/list.gql';
-import { GraphqlError } from '~/types/apollo-graphql-types';
+import RepositoryListGQLQuery from '~/apollo/queries/repository/list.gql'
+import { GraphqlError } from '~/types/apollo-graphql-types'
 
-export const ACT_FETCH_REPOSITORY_LIST = 'fetchRepositoryList'
+export interface RepoInterface {
+  id: string
+  language: string
+  isPrivate: boolean
+  name: string
+  supportedAnalyzers: Array<string>
+}
 
-export const MUT_SET_ERROR = 'setRepositoryListError'
-export const MUT_SET_LOADING = 'setRepositoryListLoading'
-export const MUT_SET_REPOSITORY_LIST = 'setRepositoryList';
+export enum RepoListActions {
+  FETCH_REPOSITORY_LIST = 'fetchRepositoryList',
+  FETCH_NEW_REPOSITORY_LIST = 'fetchNewRepoList',
+  FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST = 'fetchActiveAnalysisRepositoryList'
+}
+export enum RepoListMutations {
+  SET_ERROR = 'setRepositoryListError',
+  SET_LOADING = 'setRepositoryListLoading',
+  SET_REPOSITORY_LIST = 'setRepositoryList',
+  SET_NEW_REPOSITORY_LIST = 'setNewRepoList',
+  SET_ACTIVE_ANALYSIS_REPOSITORY_LIST = 'setActiveAnalysisRepositoryList'
+}
 
 export const state = () => ({
   /**
@@ -19,6 +34,16 @@ export const state = () => ({
   loading: false as boolean,
   error: {},
   repositoryList: {
+    pageInfo: {} as PageInfo,
+    totalCount: 0 as Maybe<Scalars['Int']>,
+    edges: []
+  } as RepositoryConnection,
+  newRepos: {
+    pageInfo: {} as PageInfo,
+    totalCount: 0 as Maybe<Scalars['Int']>,
+    edges: []
+  } as RepositoryConnection,
+  repoWithActiveAnalysis: {
     pageInfo: {} as PageInfo,
     totalCount: 0 as Maybe<Scalars['Int']>,
     edges: []
@@ -37,9 +62,20 @@ export const getters: GetterTree<RepositoryListModuleState, RootState> = {
 }
 
 interface RepositoryListModuleMutations extends MutationTree<RepositoryListModuleState> {
-  [MUT_SET_LOADING]: (state: RepositoryListModuleState, value: boolean) => void;
-  [MUT_SET_ERROR]: (state: RepositoryListModuleState, error: GraphqlError) => void;
-  [MUT_SET_REPOSITORY_LIST]: (state: RepositoryListModuleState, repositoryList: RepositoryConnection) => void;
+  [RepoListMutations.SET_LOADING]: (state: RepositoryListModuleState, value: boolean) => void
+  [RepoListMutations.SET_ERROR]: (state: RepositoryListModuleState, error: GraphqlError) => void
+  [RepoListMutations.SET_REPOSITORY_LIST]: (
+    state: RepositoryListModuleState,
+    repositoryList: RepositoryConnection
+  ) => void
+  [RepoListMutations.SET_NEW_REPOSITORY_LIST]: (
+    state: RepositoryListModuleState,
+    repositoryList: RepositoryConnection
+  ) => void
+  [RepoListMutations.SET_ACTIVE_ANALYSIS_REPOSITORY_LIST]: (
+    state: RepositoryListModuleState,
+    repositoryList: RepositoryConnection
+  ) => void
 }
 
 export const mutations: RepositoryListModuleMutations = {
@@ -48,26 +84,57 @@ export const mutations: RepositoryListModuleMutations = {
    * For eg,
    * CHANGE_STATE_PROP: (state, newStateProp: string) => (state.stateProp = newStateProp)
    */
-  [MUT_SET_LOADING]: (state, value) => {
+  [RepoListMutations.SET_LOADING]: (state, value) => {
     state.loading = value
   },
-  [MUT_SET_ERROR]: (state, error) => {
+  [RepoListMutations.SET_ERROR]: (state, error) => {
     state.error = Object.assign({}, state.error, error)
   },
-  [MUT_SET_REPOSITORY_LIST]: (state, repositoryList) => {
+  [RepoListMutations.SET_REPOSITORY_LIST]: (state, repositoryList) => {
     state.repositoryList = Object.assign({}, state.repositoryList, repositoryList)
+  },
+  [RepoListMutations.SET_NEW_REPOSITORY_LIST]: (state, repositoryList) => {
+    state.newRepos = Object.assign({}, state.repositoryList, repositoryList)
+  },
+  [RepoListMutations.SET_ACTIVE_ANALYSIS_REPOSITORY_LIST]: (state, repositoryList) => {
+    state.repoWithActiveAnalysis = Object.assign({}, state.repositoryList, repositoryList)
   }
 }
 
 interface RepositoryListModuleActions extends ActionTree<RepositoryListModuleState, RootState> {
-  [ACT_FETCH_REPOSITORY_LIST]: (this: Store<RootState>, injectee: RepositoryListActionContext, variables: {
-    login: string,
-    provider: string,
-    isActivated: boolean,
-    limit: number,
-    currentPageNumber: number,
-    query: string
-  }) => Promise<void>;
+  [RepoListActions.FETCH_REPOSITORY_LIST]: (
+    this: Store<RootState>,
+    injectee: RepositoryListActionContext,
+    variables: {
+      login: string
+      provider: string
+      limit: number
+      currentPageNumber: number
+      query: string
+      refetch?: boolean
+    }
+  ) => Promise<void>
+  [RepoListActions.FETCH_NEW_REPOSITORY_LIST]: (
+    this: Store<RootState>,
+    injectee: RepositoryListActionContext,
+    variables: {
+      login: string
+      provider: string
+      limit: number
+      currentPageNumber: number
+      query: string
+    }
+  ) => Promise<void>
+  [RepoListActions.FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST]: (
+    this: Store<RootState>,
+    injectee: RepositoryListActionContext,
+    variables: {
+      login: string
+      provider: string
+      limit: number
+      refetch?: boolean
+    }
+  ) => Promise<void>
 }
 
 export const actions: RepositoryListModuleActions = {
@@ -78,23 +145,79 @@ export const actions: RepositoryListModuleActions = {
    *  commit('CHANGE_STATE_PROP', 'New state property')
    * }
    */
-  async [ACT_FETCH_REPOSITORY_LIST]({ commit }, variables) {
-    commit(MUT_SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryListGQLQuery, {
-      login: variables.login,
-      provider: this.$providerMetaMap[variables.provider].value,
-      isActivated: variables.isActivated,
-      limit: variables.limit,
-      after: this.$getGQLAfter(variables.currentPageNumber, variables.limit),
-      query: variables.query
-    }).then((response: { data: { owner: Owner } }) => {
-      // TODO: Toast("Successfully fetched repository list")
-      commit(MUT_SET_REPOSITORY_LIST, response.data.owner.repositories)
-      commit(MUT_SET_LOADING, false)
-    }).catch((e: GraphqlError) => {
-      commit(MUT_SET_ERROR, e)
-      commit(MUT_SET_LOADING, false)
-      // TODO: Toast("Failure in fetching repository list", e)
-    })
+  async [RepoListActions.FETCH_REPOSITORY_LIST](
+    { commit },
+    { login, provider, limit, currentPageNumber, query, refetch }
+  ) {
+    commit(RepoListMutations.SET_LOADING, true)
+    try {
+      const response: { data: { owner: Owner } } = await this.$fetchGraphqlData(
+        RepositoryListGQLQuery,
+        {
+          login: login,
+          provider: this.$providerMetaMap[provider].value,
+          isActivated: true,
+          limit: limit,
+          after: this.$getGQLAfter(currentPageNumber, limit),
+          query: query
+        },
+        refetch
+      )
+
+      commit(RepoListMutations.SET_REPOSITORY_LIST, response.data.owner.repositories)
+      commit(RepoListMutations.SET_LOADING, false)
+    } catch (e) {
+      const error = e as GraphqlError
+      commit(RepoListMutations.SET_ERROR, error)
+      commit(RepoListMutations.SET_LOADING, false)
+    }
+  },
+  async [RepoListActions.FETCH_NEW_REPOSITORY_LIST]({ commit }, variables) {
+    commit(RepoListMutations.SET_LOADING, true)
+    try {
+      const response: { data: { owner: Owner } } = await this.$fetchGraphqlData(
+        RepositoryListGQLQuery,
+        {
+          login: variables.login,
+          provider: this.$providerMetaMap[variables.provider].value,
+          isActivated: false,
+          limit: variables.limit,
+          after: this.$getGQLAfter(variables.currentPageNumber, variables.limit),
+          query: variables.query
+        }
+      )
+
+      commit(RepoListMutations.SET_NEW_REPOSITORY_LIST, response.data.owner.repositories)
+      commit(RepoListMutations.SET_LOADING, false)
+    } catch (e) {
+      const error = e as GraphqlError
+      commit(RepoListMutations.SET_ERROR, error)
+      commit(RepoListMutations.SET_LOADING, false)
+    }
+  },
+  async [RepoListActions.FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST]({ commit }, variables) {
+    commit(RepoListMutations.SET_LOADING, true)
+    try {
+      const response: { data: { owner: Owner } } = await this.$fetchGraphqlData(
+        RepositoryListGQLQuery,
+        {
+          login: variables.login,
+          provider: this.$providerMetaMap[variables.provider].value,
+          isActivated: true,
+          limit: variables.limit
+        },
+        variables.refetch
+      )
+
+      commit(
+        RepoListMutations.SET_ACTIVE_ANALYSIS_REPOSITORY_LIST,
+        response.data.owner.repositories
+      )
+      commit(RepoListMutations.SET_LOADING, false)
+    } catch (e) {
+      const error = e as GraphqlError
+      commit(RepoListMutations.SET_ERROR, error)
+      commit(RepoListMutations.SET_LOADING, false)
+    }
   }
 }

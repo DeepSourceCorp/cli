@@ -1,18 +1,24 @@
 version = 1
 
+test_patterns = ["test/**"]
+
+[[analyzers]]
+name = "test-coverage"
+enabled = true
+
+[[analyzers]]
+name = "secrets"
+enabled = true
+
 [[analyzers]]
 name = "javascript"
 enabled = true
 
   [analyzers.meta]
   environment = [
-    "jest",
-    "browser"
+    "browser",
+    "jest"
   ]
   plugins = ["vue"]
-  style_guide = "airbnb"
   dialect = "typescript"
-
-[[analyzers]]
-name = "secrets"
-enabled = true
+  style_guide = "airbnb"

@@ -1,0 +1,32 @@
+query(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $limit: Int
+  $after: String
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    name
+    groupedRuns(first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          config
+          createdAt
+          runId
+          status
+          branchName
+          branchRunCount
+          commitOid
+          finishedIn
+          vcsCommitUrl
+          gitCompareDisplay
+          pullRequestNumberDisplay
+          issuesRaisedCount
+          issuesResolvedNum
+        }
+      }
+    }
+  }
+}

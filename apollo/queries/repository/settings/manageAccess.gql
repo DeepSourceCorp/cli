@@ -21,6 +21,7 @@ query(
             id
             firstName
             lastName
+            fullName
             email
             avatar
             dateJoined

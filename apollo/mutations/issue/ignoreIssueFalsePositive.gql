@@ -1,0 +1,5 @@
+mutation($checkIssueId: ID!, $comment: String) {
+  reportIssueFalsePositive(input: { checkIssueId: $checkIssueId, comment: $comment }) {
+    ok
+  }
+}

@@ -1,0 +1,5 @@
+mutation($input: CreateAutofixRunInput!) {
+  createAutofixRun(input: $input) {
+    runId
+  }
+}

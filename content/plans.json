@@ -1,0 +1,83 @@
+{
+  "pro": {
+    "planName": "Pro",
+    "planSlugMonthly": "plan-pro-monthly",
+    "planSlugAnnual": "plan-pro-annual",
+    "description": "For open-source maintainers and small teams",
+    "buttonLabel": "Upgrade to Pro",
+    "monthlyAmount": 15,
+    "annualAmount": 12,
+    "features": [
+      "All features in Free",
+      "Unlimited team members",
+      "Unlimited public and private repositories"
+    ]
+  },
+  "starter": {
+    "planName": "Starter",
+    "planSlugMonthly": "plan-starter-monthly",
+    "planSlugAnnual": "plan-starter-annual",
+    "description": "For open-source maintainers and small teams",
+    "buttonLabel": "Upgrade to Starter",
+    "monthlyAmount": 10,
+    "annualAmount": 8,
+    "features": [
+      "All features in Free",
+      "Unlimited team members",
+      "Unlimited public and private repositories"
+    ]
+  },
+  "premium": {
+    "planName": "Premium",
+    "planSlugMonthly": "plan-premium-monthly",
+    "planSlugAnnual": "plan-premium-annual",
+    "description": "For open-source maintainers and small teams",
+    "buttonLabel": "Upgrade to Premium",
+    "monthlyAmount": 30,
+    "annualAmount": 24,
+    "isPrimary": true,
+    "features": [
+      "All features in Starter",
+      "Access to Core, Community, and Custom analyzers",
+      "Transformers, Autofix, Autopilot unlimited",
+      "RBAC",
+      "Audit Logs",
+      "Org-level defaults configuration",
+      "3 years retention of reporting data",
+      "Priority support",
+      "API and webhooks"
+    ]
+  },
+  "business": {
+    "planName": "Business",
+    "planSlugMonthly": "plan-business-monthly",
+    "planSlugAnnual": "plan-business-annual",
+    "description": "For open-source maintainers and small teams",
+    "buttonLabel": "Upgrade to Business",
+    "monthlyAmount": 30,
+    "annualAmount": 24,
+    "isPrimary": true,
+    "features": [
+      "All features in Starter",
+      "Access to Core, Community, and Custom analyzers",
+      "Transformers, Autofix, Autopilot unlimited",
+      "RBAC",
+      "Audit Logs",
+      "Org-level defaults configuration",
+      "3 years retention of reporting data",
+      "Priority support",
+      "API and webhooks"
+    ]
+  },
+  "enterprise": {
+    "planName": "Enterprise",
+    "description": "For large teams with on-premise deployments.",
+    "buttonLabel": "Request a Demo",
+    "routeTo": "/schedule-demo",
+    "features": [
+      "All features in Business",
+      "Pre-defined number of team members",
+      "Unlimited public and private repos"
+    ]
+  }
+}

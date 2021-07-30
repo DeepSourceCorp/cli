@@ -1,4 +1,4 @@
-{
+query {
   viewer {
     id
     fullName
@@ -8,7 +8,12 @@
     avatar
     lastLogin
     isActive
+    isAsgardian
     isStaff
+    dashboardContext
+    availableCredits
+    gitlabAccounts
+    missiveUserHash
     primaryOwner {
       id
       login

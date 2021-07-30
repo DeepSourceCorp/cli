@@ -3,33 +3,38 @@
     "name": "python",
     "label": "Python",
     "icon": "lock",
-    "config": [{
+    "meta": [{
+        "name": "runtime_version",
         "title": "runtime version",
         "type": "boolean",
-        "selected": "2",
+        "selected": "2.x.x",
         "values": [{
-            "value": "2",
+            "value": "2.x.x",
             "label": "2.x.x"
         },{
-            "value": "3",
+            "value": "3.x.x",
             "label": "3.x.x"
         }]
     }],
-    "active": false
+    "active": false,
+    "enabled": false
 },{
     "name": "go",
     "label": "Go",
-    "config": [{
+    "meta": [{
+        "name": "import_path",
         "title": "import path",
         "type": "input",
         "selected": "github.com/deepsourcelabs/marvin..."
     }],
     "icon": "cpu",
-    "active": false
+    "active": false,
+    "enabled": false
 },{
     "name": "javascript",
     "label": "JavaScript",
-    "config": [{
+    "meta": [{
+        "name": "framework",
         "title": "framework",
         "type": "list",
         "selected": "",
@@ -50,6 +55,7 @@
                 "label": "Vue"
             }]
     }, {
+        "name": "dialect",
         "title": "dialect",
         "type": "boolean",
         "selected": "typescript",
@@ -62,42 +68,49 @@
         }]
     }], 
     "icon": "eye",
-    "active": false
+    "active": false,
+    "enabled": false
 },{
     "name": "sql",
     "label": "SQL",
-    "config": [],
+    "meta": [],
     "icon": "anchor",
-    "active": false
+    "active": false,
+    "enabled": false
 },{
     "name": "docker",
     "label": "Docker",
-    "config": [],
+    "meta": [],
     "icon": "archive",
-    "active": false
+    "active": false,
+    "enabled": false
 },{
     "name": "terraform",
     "label": "Terraform",
-    "config": [],
+    "meta": [],
     "icon": "award",
-    "active": false
+    "active": false,
+    "enabled": false
 },{
     "name": "ruby",
     "label": "Ruby",
-    "config": [],
+    "meta": [],
     "icon": "bell",
-    "active": false
+    "active": false,
+    "enabled": false
 },{
     "name": "java",
     "label": "Java",
-    "config": [],
+    "meta": [],
     "icon": "command",
-    "active": false
+    "active": false,
+    "enabled": false
 },{
     "name": "shell",
     "label": "Shell",
-    "config": [],
+    "meta": [],
     "icon": "coffee",
-    "active": false
+    "active": false,
+    "enabled": false
 }]
 }

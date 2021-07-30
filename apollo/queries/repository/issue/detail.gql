@@ -1,6 +1,7 @@
 query($repositoryId: ID!, $shortcode: String!) {
   repository: node(id: $repositoryId) {
     ... on Repository {
+      id
       config
       blobUrlRoot
       vcsProvider
@@ -13,12 +14,14 @@ query($repositoryId: ID!, $shortcode: String!) {
         shortcode
         firstSeen
         lastSeen
+        modifiedAt
         occurrenceCount
         analyzerName
         analyzerShortcode
         analyzerLogo
         autofixAvailable
         newVcsIssueUrl
+        raisedInFiles
         silenceRules {
           silenceLevel
           id
