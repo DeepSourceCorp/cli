@@ -18,6 +18,7 @@ const (
 )
 
 type CLIConfig struct {
+	User                  string
 	Token                 string
 	RefreshToken          string
 	TokenExpiresIn        time.Time

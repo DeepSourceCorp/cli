@@ -1,20 +1,27 @@
 package login
 
 import (
+	"context"
 	"fmt"
 	"time"
 
 	"github.com/cli/browser"
-	"github.com/deepsourcelabs/cli/api"
-	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	cliConfig "github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/auth"
 	"github.com/fatih/color"
 	"github.com/pterm/pterm"
 )
 
 func (opts *LoginOptions) startLoginFlow() error {
 
+	deepsource := deepsource.New()
+	ctx := context.Background()
+
 	// Send a mutation to register device and get the device code
-	deviceCode, userCode, verificationURI, expiresIn, interval, err := api.GetDeviceCode(opts.graphqlClient)
+	// deviceCode, userCode, verificationURI, expiresIn, interval, err := deepsource.RegisterDevice(ctx)
+
+	res, err := deepsource.RegisterDevice(ctx)
 	if err != nil {
 		return err
 	}
@@ -22,19 +29,19 @@ func (opts *LoginOptions) startLoginFlow() error {
 	// Having received the device code, open the browser at verificationURI
 	// Print the user code and the permission to open browser at verificationURI
 	c := color.New(color.FgCyan, color.Bold)
-	c.Printf("Please copy your one-time code: %s\n", userCode)
+	c.Printf("Please copy your one-time code: %s\n", res.Code)
 	c.Printf("Press enter to open deepsource.io in your browser...")
 	fmt.Scanln()
 
-	err = browser.OpenURL(verificationURI)
+	err = browser.OpenURL(res.VerificationURIComplete)
 	if err != nil {
 		return err
 	}
 
 	// // Keep polling the mutation at a certain interval till "expiresIn"
-	ticker := time.NewTicker(time.Duration(interval) * time.Second)
+	ticker := time.NewTicker(time.Duration(res.Interval) * time.Second)
 	pollStartTime := time.Now()
-	var jwtData *api.FetchJWTResponse
+	var jwtData *auth.JWT
 
 	// Polling for JWT
 	func() {
@@ -42,15 +49,15 @@ func (opts *LoginOptions) startLoginFlow() error {
 			select {
 			case <-ticker.C:
 				// do stuff
-				jwtData, _ = api.GetJWT(opts.graphqlClient, deviceCode)
-				if jwtData.Requestjwt.Token != "" {
+				jwtData, err = deepsource.Login(ctx, res.Code)
+				if jwtData.Token != "" {
 					opts.AuthTimedOut = false
 					return
 				}
 
 				// Check auth polling time out
 				timeElapsed := time.Since(pollStartTime)
-				if timeElapsed >= time.Duration(expiresIn)*time.Second {
+				if timeElapsed >= time.Duration(res.ExpiresIn)*time.Second {
 					opts.AuthTimedOut = true
 					return
 				}
@@ -65,17 +72,15 @@ func (opts *LoginOptions) startLoginFlow() error {
 	}
 
 	// Convert incoming config into the ConfigData format
-	finalConfig := cliConfig.ConfigData{
-		User:                jwtData.Requestjwt.Payload.Email,
-		Token:               jwtData.Requestjwt.Token,
-		TokenExpiry:         jwtData.Requestjwt.Payload.Exp,
-		RefreshToken:        jwtData.Requestjwt.Refreshtoken,
-		OrigIAT:             jwtData.Requestjwt.Payload.Origiat,
-		RefreshTokenExpiry:  jwtData.Requestjwt.Refreshexpiresin,
-		RefreshTokenSetTime: time.Now().Unix(),
+	finalConfig := cliConfig.CLIConfig{
+		User:                  jwtData.Payload.Email,
+		Token:                 jwtData.Token,
+		RefreshToken:          jwtData.Refreshtoken,
+		TokenExpiresIn:        time.Unix(jwtData.TokenExpiresIn, 0),
+		RefreshTokenExpiresIn: jwtData.RefreshExpiresIn,
 	}
 
-	err = cliConfig.WriteConfigToFile(finalConfig)
+	err = finalConfig.WriteFile()
 	if err != nil {
 		pterm.Error.Println("Error in writing authentication data to a file. Exiting...")
 		return err

@@ -3,32 +3,31 @@ package login
 import (
 	"fmt"
 
-	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/global"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
 // Options holds the metadata.
 type LoginOptions struct {
-	graphqlClient *api.DSClient
-	AuthTimedOut  bool
-	TokenExpired  bool
-	Config        cliConfig.ConfigData
+	AuthTimedOut bool
+	TokenExpired bool
+	User         string
+	Config       cliConfig.ConfigData
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdLogin() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",
 		RunE: func(cmd *cobra.Command, args []string) error {
 
 			opts := LoginOptions{
-				graphqlClient: cf.GQLClient,
-				AuthTimedOut:  false,
-				TokenExpired:  cf.TokenExpired,
-				Config:        cf.Config,
+				AuthTimedOut: false,
+				TokenExpired: global.TokenExpired,
+				User:         global.User,
 			}
 			err := opts.Run()
 			if err != nil {
@@ -57,7 +56,7 @@ func (opts *LoginOptions) Run() error {
 	if opts.TokenExpired == false {
 
 		// The user is already logged in, confirm re-authentication
-		msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", opts.Config.User)
+		msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", opts.User)
 		helpText := ""
 
 		response, err := cmdutils.ConfirmFromUser(msg, helpText)

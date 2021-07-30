@@ -17,24 +17,30 @@ const refreshTokenQuery = `
         }
     }`
 
-type RefreshTokenRequest struct{}
+type RefreshTokenParams struct {
+	RefreshToken string `json:"refreshToken"`
+}
+
+type RefreshTokenRequest struct {
+	Params RefreshTokenParams
+}
 
 type RefreshTokenResponse struct {
 	auth.RefreshAuthResponse `json:"refreshToken"`
 }
 
-func RefreshAuthCreds(ctx context.Context, client IGQLClient, refreshToken string) (*RefreshTokenResponse, error) {
+func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.RefreshAuthResponse, error) {
 
 	req := graphql.NewRequest(refreshTokenQuery)
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
-	req.Var("token", refreshToken)
+	req.Var("token", r.Params.RefreshToken)
 
 	// run it and capture the response
 	var respData RefreshTokenResponse
 	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return &respData, err
+		return nil, err
 	}
 
 	return &respData, nil

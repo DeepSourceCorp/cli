@@ -10,16 +10,11 @@ import (
 	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/deepsourcelabs/cli/command/version"
 	cliConfig "github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/global"
 	"github.com/spf13/cobra"
 )
 
 const HOSTNAME = "https://api.deepsource.io/graphql/"
-
-var (
-	authToken    string
-	refreshToken string
-	tokenExpired bool = true
-)
 
 func NewCmdRoot() *cobra.Command {
 	cmd := &cobra.Command{
@@ -53,10 +48,14 @@ func Execute() error {
 		return err
 	}
 
+	global.Token = configData.Token
+	global.RefreshToken = configData.RefreshToken
+	global.User = configData.User
+
 	// check if token expired
 	if configData.Token != "" {
-		tokenExpired = cfg.IsExpired()
-		if tokenExpired == true {
+		global.TokenExpired = cfg.IsExpired()
+		if global.TokenExpired == true {
 			fmt.Println("The token has expired. Please refresh the token or reauthenticate.")
 		}
 	}

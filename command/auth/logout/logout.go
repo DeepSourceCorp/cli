@@ -2,16 +2,15 @@ package logout
 
 import (
 	"github.com/deepsourcelabs/cli/cmdutils"
-	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	cliConfig "github.com/deepsourcelabs/cli/config"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
-type LogoutOptions struct {
-}
+type LogoutOptions struct{}
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdLogout(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdLogout() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",
 		Short: "Logout of your active DeepSource account",
@@ -23,8 +22,8 @@ func NewCmdLogout(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
-        SilenceErrors:true,
-        SilenceUsage: true,
+		SilenceErrors: true,
+		SilenceUsage:  true,
 	}
 	return cmd
 }
@@ -39,7 +38,8 @@ func (opts *LogoutOptions) Run() error {
 	}
 
 	if response == true {
-		err := cliConfig.DeleteConfigFile()
+		cfg := cliConfig.CLIConfig{}
+		err := cfg.Delete()
 		if err != nil {
 			return err
 		}

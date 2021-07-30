@@ -5,22 +5,23 @@ import (
 	"time"
 
 	"github.com/deepsourcelabs/cli/api"
-	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/global"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
 type RefreshOptions struct {
-	graphqlClient *api.DSClient
-	Config        cliConfig.ConfigData
+	Token        string
+	RefreshToken string
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdRefresh(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdRefresh() *cobra.Command {
 	opts := RefreshOptions{
-		graphqlClient: cf.GQLClient,
-		Config:        cf.Config,
+		Token:        global.Token,
+		RefreshToken: global.RefreshToken,
 	}
+
 	cmd := &cobra.Command{
 		Use:   "refresh",
 		Short: "Refresh stored authentication credentials",
@@ -31,17 +32,17 @@ func NewCmdRefresh(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
-        SilenceErrors: true,
-		SilenceUsage: true,
+		SilenceErrors: true,
+		SilenceUsage:  true,
 	}
 	return cmd
 }
 
 func (opts *RefreshOptions) Run() error {
 
-	if opts.Config.Token != "" || opts.Config.RefreshToken != "" {
+	if opts.Token != "" || opts.RefreshToken != "" {
 
-		refreshedConfigData, err := api.RefreshAuthCreds(opts.graphqlClient, opts.Config.RefreshToken)
+		refreshedConfigData, err := api.RefreshAuthCreds(opts.RefreshToken)
 		if err != nil {
 			return err
 		}

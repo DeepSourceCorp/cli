@@ -57,6 +57,19 @@ func (c Client) Login(ctx context.Context, deviceCode string) (*auth.JWT, error)
 	return res, nil
 }
 
+func (c Client) RefreshAuthCreds(ctx context.Context, refreshToken string) (*auth.RefreshAuthResponse, error) {
+	req := authmut.RefreshTokenRequest{
+		Params: authmut.RefreshTokenParams{
+			RefreshToken: refreshToken,
+		},
+	}
+	res, err := req.Do(ctx, c)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
 func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]string, []string, []string, map[string]string, error) {
 
 	req := analyzers.AnalyzersRequest{}
