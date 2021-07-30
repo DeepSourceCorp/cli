@@ -6,8 +6,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deepsourcelabs/cli/api"
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
@@ -15,11 +13,10 @@ import (
 
 // Options holds the metadata.
 type Options struct {
-	gqlClient *api.DSClient
+	AnalyzerNames      []string
+	AnalyzerShortcodes []string
+	AnalyzersMap       map[string]string // Map for {analyzer name : shortcode}
 
-	AnalyzerNames         []string
-	AnalyzerShortcodes    []string
-	AnalyzersMap          map[string]string // Map for {analyzer name : shortcode}
 	TransformerNames      []string
 	TransformerShortcodes []string
 	TransformerMap        map[string]string // Map for {transformer name:shortcode}
@@ -36,11 +33,9 @@ type Options struct {
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdConfigGenerate(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdConfigGenerate() *cobra.Command {
 
-	o := Options{
-		gqlClient: cf.GQLClient,
-	}
+	o := Options{}
 
 	cmd := &cobra.Command{
 		Use:   "generate",
@@ -57,6 +52,7 @@ func NewCmdConfigGenerate(cf *cmdutils.CLIFactory) *cobra.Command {
 	}
 	return cmd
 }
+
 // Validate impletments the Validate method for the ICommand interface.
 func (o *Options) Validate() error {
 	return nil

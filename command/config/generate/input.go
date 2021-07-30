@@ -1,20 +1,29 @@
 package generate
 
-import "github.com/deepsourcelabs/cli/api"
+import (
+	"context"
+
+	"github.com/deepsourcelabs/cli/deepsource"
+)
 
 // Collects user input for generating DeepSource config
 func (o *Options) collectUserInput() error {
 
 	var err error
+
+	// Declare a deepsource client
+	deepsource := deepsource.New()
+	ctx := context.Background()
+
 	o.AnalyzersMap = make(map[string]string)
 	o.TransformerMap = make(map[string]string)
 
-	o.AnalyzerNames, o.AnalyzerShortcodes, _,o.AnalyzersMap, err = api.GetSupportedAnalyzers(o.gqlClient)
+	o.AnalyzerNames, o.AnalyzerShortcodes, _, o.AnalyzersMap, err = deepsource.GetSupportedAnalyzers(ctx)
 	if err != nil {
 		return err
 	}
 
-	o.TransformerNames, o.TransformerShortcodes, o.TransformerMap, err = api.GetSupportedTransformers(o.gqlClient)
+	o.TransformerNames, o.TransformerShortcodes, o.TransformerMap, err = deepsource.GetSupportedTransformers(ctx)
 	if err != nil {
 		return err
 	}

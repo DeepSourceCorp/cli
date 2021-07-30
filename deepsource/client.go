@@ -4,8 +4,10 @@ package deepsource
 import (
 	"context"
 
+	analyzers "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	authmut "github.com/deepsourcelabs/cli/deepsource/auth/mutations"
+	transformers "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
 	"github.com/deepsourcelabs/graphql"
 )
 
@@ -53,4 +55,24 @@ func (c Client) Login(ctx context.Context, deviceCode string) (*auth.JWT, error)
 		return nil, err
 	}
 	return res, nil
+}
+
+func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]string, []string, []string, map[string]string, error) {
+
+	req := analyzers.AnalyzersRequest{}
+	names, shortCodes, analyzersMeta, analyzersMap, err := req.Do(ctx, c)
+	if err != nil {
+		return nil, nil, nil, nil, err
+	}
+	return names, shortCodes, analyzersMeta, analyzersMap, nil
+}
+
+func (c Client) GetSupportedTransformers(ctx context.Context) ([]string, []string, map[string]string, error) {
+
+	req := transformers.TransformersRequest{}
+	names, shortCodes, transformersMap, err := req.Do(ctx, c)
+	if err != nil {
+		return nil, nil, nil, err
+	}
+	return names, shortCodes, transformersMap, nil
 }

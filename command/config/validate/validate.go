@@ -1,6 +1,7 @@
 package validate
 
 import (
+	"context"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -9,17 +10,14 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/api"
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/configvalidator"
+	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
 // Options holds the metadata.
 type Options struct {
-	gqlClient *api.DSClient
-
 	AnalyzerNames         []string
 	AnalyzerShortcodes    []string
 	AnalyzersMap          map[string]string // Map for {analyzer name : shortcode}
@@ -30,11 +28,9 @@ type Options struct {
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdValidate(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdValidate() *cobra.Command {
 
-	o := Options{
-		gqlClient: cf.GQLClient,
-	}
+	o := Options{}
 
 	cmd := &cobra.Command{
 		Use:   "validate",
@@ -104,16 +100,19 @@ func (o *Options) Run() error {
 		return err
 	}
 
+	deepsource := deepsource.New()
+	ctx := context.Background()
+
 	// Get supported analyzers and transformers data
 	o.AnalyzersMap = make(map[string]string)
 	o.TransformerMap = make(map[string]string)
 
-	o.AnalyzerNames, o.AnalyzerShortcodes, o.AnalyzersMeta, o.AnalyzersMap, err = api.GetSupportedAnalyzers(o.gqlClient)
+	o.AnalyzerNames, o.AnalyzerShortcodes, o.AnalyzersMeta, o.AnalyzersMap, err = deepsource.GetSupportedAnalyzers(ctx)
 	if err != nil {
 		return err
 	}
 
-	o.TransformerNames, o.TransformerShortcodes, o.TransformerMap, err = api.GetSupportedTransformers(o.gqlClient)
+	o.TransformerNames, o.TransformerShortcodes, o.TransformerMap, err = deepsource.GetSupportedTransformers(ctx)
 	if err != nil {
 		return err
 	}
