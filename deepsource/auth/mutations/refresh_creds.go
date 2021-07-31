@@ -43,5 +43,5 @@ func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.R
 		return nil, err
 	}
 
-	return &respData, nil
+	return &respData.RefreshAuthResponse, nil
 }

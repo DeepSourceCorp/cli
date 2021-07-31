@@ -14,8 +14,6 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const HOSTNAME = "https://api.deepsource.io/graphql/"
-
 func NewCmdRoot() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "deepsource <command> <subcommand> [flags]",

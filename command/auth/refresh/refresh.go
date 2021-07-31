@@ -1,10 +1,11 @@
 package refresh
 
 import (
+	"context"
 	"fmt"
 	"time"
 
-	"github.com/deepsourcelabs/cli/api"
+	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/global"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
@@ -42,7 +43,9 @@ func (opts *RefreshOptions) Run() error {
 
 	if opts.Token != "" || opts.RefreshToken != "" {
 
-		refreshedConfigData, err := api.RefreshAuthCreds(opts.RefreshToken)
+		deepsource := deepsource.New()
+		ctx := context.Background()
+		refreshedConfigData, err := deepsource.RefreshAuthCreds(ctx, opts.RefreshToken)
 		if err != nil {
 			return err
 		}
