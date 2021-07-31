@@ -1,16 +1,33 @@
 apiVersion: config.lighthouse.jenkins-x.io/v1alpha1
 kind: TriggerConfig
+name: bifrost-trigger-config
 spec:
   presubmits:
-  - name: pr
-    context: "pr"
+  - name: bifrost-tests
+    context: "Bifrost-Run-Tests"
     always_run: true
     optional: false
-    source: "pullrequest.yaml"
+    source: "pullrequest-tests.yaml"
+  - name: bifrost-builds
+    context: "Bifrost-Run-Builds"
+    always_run: true
+    optional: false
+    source: "pullrequest-builds.yaml"
+  - name: bifrost-deploy
+    context: "Bifrost-Run-Deploy"
+    always_run: false
+    optional: true
+    source: "pullrequest-deploy.yaml"
+  - name: bifrost-deploy-enterprise
+    context: "Bifrost-Run-Deploy-Enterprise"
+    always_run: false
+    optional: true
+    source: "pullrequest-deploy-enterprise.yaml"
   postsubmits:
-  - name: release
-    context: "release"
-    source: "release.yaml"
+  - name: bifrost-master-builds
+    context: "Bifrost-Run-Master-Builds"
+    optional: false
+    source: "pullrequest-builds-master.yaml"
     branches:
     - ^main$
     - ^master$
