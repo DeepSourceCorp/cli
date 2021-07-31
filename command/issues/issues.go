@@ -3,7 +3,6 @@ package issues
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/issues/list"
 )
 
@@ -11,12 +10,12 @@ import (
 type Options struct{}
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdIssues(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdIssues() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "issues",
 		Short: "Show the list of issues in a file in a repository",
 	}
-	cmd.AddCommand(list.NewCmdIssuesList(cmdFactory))
+	cmd.AddCommand(list.NewCmdIssuesList())
 	return cmd
 }
 

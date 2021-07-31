@@ -1,38 +1,35 @@
 package view
 
 import (
+	"context"
 	"fmt"
 	"strings"
 
 	"github.com/cli/browser"
-	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
-	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/global"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
 type RepoViewOptions struct {
-	graphqlClient *api.DSClient
-	RepoArg       string
-	Config        cliConfig.ConfigData
-	TokenExpired  bool
-	Owner         string
-	RepoName      string
-	VCSProvider   string
+	RepoArg      string
+	TokenExpired bool
+	Owner        string
+	RepoName     string
+	VCSProvider  string
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdRepoView(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdRepoView() *cobra.Command {
 
 	opts := RepoViewOptions{
-		graphqlClient: cf.GQLClient,
-		RepoArg:       "",
-		Config:        cf.Config,
-		TokenExpired:  cf.TokenExpired,
-		Owner:         "",
-		RepoName:      "",
-		VCSProvider:   "",
+		RepoArg:      "",
+		TokenExpired: global.TokenExpired,
+		Owner:        "",
+		RepoName:     "",
+		VCSProvider:  "",
 	}
 
 	cmd := &cobra.Command{
@@ -45,8 +42,8 @@ func NewCmdRepoView(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
-        SilenceErrors:true,
-        SilenceUsage:false,
+		SilenceErrors: true,
+		SilenceUsage:  false,
 	}
 
 	// --repo, -r flag
@@ -108,8 +105,10 @@ func (opts *RepoViewOptions) Run() error {
 		opts.RepoName = repoData[2]
 	}
 
+	deepsource := deepsource.New()
+	ctx := context.Background()
 	// Making the "isActivated" query again just to confirm if the user has access to that repo
-	_, err := api.GetRepoStatus(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider)
+	_, err := deepsource.GetRepoStatus(ctx, opts.Owner, opts.RepoName, opts.VCSProvider)
 	if err != nil {
 		if strings.Contains(err.Error(), "Signature has expired") {
 			fmt.Println("The token has expired. Please refresh the token using the command `deepsource auth refresh`")

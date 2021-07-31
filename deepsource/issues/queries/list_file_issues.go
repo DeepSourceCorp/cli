@@ -34,12 +34,22 @@ const fetchFileIssuesQuery = `
         }
     }`
 
+type FileIssuesListParams struct {
+	Owner    string
+	RepoName string
+	Provider string
+	FilePath string
+	Limit    int
+}
+
 // Request struct
-type FileIssuesRequest struct{}
+type FileIssuesListRequest struct {
+	Params FileIssuesListParams
+}
 
 // Response struct
 type FileIssuesResponse struct {
-	issues.IssuesListFileResponse `json:"repository"`
+	issues.IssuesListFileResponseData `json:"repository"`
 }
 
 // GraphQL client interface
@@ -49,16 +59,16 @@ type IGQLClient interface {
 }
 
 // Function to execute the query
-func (f FileIssuesRequest) Do(ctx context.Context, client IGQLClient, owner string, repoName string, provider string, filePath string, limit int) (*issues.IssuesListFileResponse, error) {
+func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) (*issues.IssuesListFileResponseData, error) {
 
 	req := graphql.NewRequest(fetchFileIssuesQuery)
 	req.Header.Set("Cache-Control", "no-cache")
 
-	req.Var("name", repoName)
-	req.Var("owner", owner)
-	req.Var("provider", provider)
-	req.Var("path", filePath)
-	req.Var("limit", limit)
+	req.Var("name", f.Params.RepoName)
+	req.Var("owner", f.Params.Owner)
+	req.Var("provider", f.Params.Provider)
+	req.Var("path", f.Params.FilePath)
+	req.Var("limit", f.Params.Limit)
 
 	// set header fields
 	header := fmt.Sprintf("JWT %s", client.GetToken())
@@ -69,8 +79,8 @@ func (f FileIssuesRequest) Do(ctx context.Context, client IGQLClient, owner stri
 	// var graphqlResponse map[string]interface{}
 	var respData FileIssuesResponse
 	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return &respData.IssuesListFileResponse, err
+		return &respData.IssuesListFileResponseData, err
 	}
 
-	return &respData.IssuesListFileResponse, nil
+	return &respData.IssuesListFileResponseData, nil
 }

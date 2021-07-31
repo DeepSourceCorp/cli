@@ -33,21 +33,28 @@ const fetchAllIssuesQuery = `
         }
     }`
 
-type IssuesListRequest struct{}
-
-type IssuesListResponse struct {
-	issues.IssuesListResponse `json:"repository"`
+type IssuesListParams struct {
+	Owner    string
+	RepoName string
+	Provider string
+	Limit    int
 }
 
-func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient, owner string, repoName string, provider string, limit int) (*IssuesListResponse, error) {
+type IssuesListRequest struct {
+	Params IssuesListParams
+}
 
-	gq := client.GQL()
+type IssuesListResponse struct {
+	issues.IssuesListResponseData `json:"repository"`
+}
+
+func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) (*issues.IssuesListResponseData, error) {
 
 	req := graphql.NewRequest(fetchAllIssuesQuery)
-	req.Var("name", repoName)
-	req.Var("owner", owner)
-	req.Var("provider", provider)
-	req.Var("limit", limit)
+	req.Var("name", i.Params.RepoName)
+	req.Var("owner", i.Params.Owner)
+	req.Var("provider", i.Params.Provider)
+	req.Var("limit", i.Params.Limit)
 
 	// set header fields
 	header := fmt.Sprintf("JWT %s", client.GetToken())
@@ -57,9 +64,9 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient, owner stri
 	// run it and capture the response
 	// var graphqlResponse map[string]interface{}
 	var respData IssuesListResponse
-	if err := gq.Run(ctx, req, &respData); err != nil {
-		return &respData, err
+	if err := client.GQL().Run(ctx, req, &respData); err != nil {
+		return nil, err
 	}
 
-	return &respData, nil
+	return &respData.IssuesListResponseData, nil
 }

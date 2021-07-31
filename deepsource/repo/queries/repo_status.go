@@ -13,7 +13,15 @@ const repoStatusQuery = `query RepoStatus($name: String!,$owner: String!, $provi
         }
     }`
 
-type RepoStatusRequest struct{}
+type RepoStatusParams struct {
+	Owner    string
+	RepoName string
+	Provider string
+}
+
+type RepoStatusRequest struct {
+	Params RepoStatusParams
+}
 
 type RepoStatusResponse struct {
 	Repository struct {
@@ -27,14 +35,14 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient, owner string, repoName string, provider string) (bool, error) {
+func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (bool, error) {
 
 	req := graphql.NewRequest(repoStatusQuery)
 	header := fmt.Sprintf("JWT %s", client.GetToken())
 	req.Header.Add("Authorization", header)
-	req.Var("name", repoName)
-	req.Var("owner", owner)
-	req.Var("provider", provider)
+	req.Var("name", r.Params.RepoName)
+	req.Var("owner", r.Params.Owner)
+	req.Var("provider", r.Params.Provider)
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")

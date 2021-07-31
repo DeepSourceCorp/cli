@@ -1,36 +1,33 @@
 package status
 
 import (
+	"context"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
-	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/global"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
 type RepoStatusOptions struct {
-	graphqlClient *api.DSClient
-	RepoArg       string
-	Config        cliConfig.ConfigData
-	TokenExpired  bool
-	Owner         string
-	RepoName      string
-	VCSProvider   string
+	RepoArg      string
+	TokenExpired bool
+	Owner        string
+	RepoName     string
+	VCSProvider  string
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdRepoStatus(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdRepoStatus() *cobra.Command {
 
 	opts := RepoStatusOptions{
-		graphqlClient: cf.GQLClient,
-		RepoArg:       "",
-		Config:        cf.Config,
-		TokenExpired:  cf.TokenExpired,
-		Owner:         "",
-		RepoName:      "",
-		VCSProvider:   "",
+		RepoArg:      "",
+		TokenExpired: global.TokenExpired,
+		Owner:        "",
+		RepoName:     "",
+		VCSProvider:  "",
 	}
 
 	cmd := &cobra.Command{
@@ -108,7 +105,9 @@ func (opts *RepoStatusOptions) Run() error {
 
 	// Send the isActivated graphQL request
 
-	activationStatus, err := api.GetRepoStatus(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider)
+	deepsource := deepsource.New()
+	ctx := context.Background()
+	activationStatus, err := deepsource.GetRepoStatus(ctx, opts.Owner, opts.RepoName, opts.VCSProvider)
 	if err != nil {
 		return err
 	}
@@ -120,5 +119,4 @@ func (opts *RepoStatusOptions) Run() error {
 	}
 
 	return nil
-
 }

@@ -7,6 +7,9 @@ import (
 	analyzers "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	authmut "github.com/deepsourcelabs/cli/deepsource/auth/mutations"
+	"github.com/deepsourcelabs/cli/deepsource/issues"
+	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
+	repo "github.com/deepsourcelabs/cli/deepsource/repo/queries"
 	transformers "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
 	"github.com/deepsourcelabs/graphql"
 )
@@ -88,4 +91,57 @@ func (c Client) GetSupportedTransformers(ctx context.Context) ([]string, []strin
 		return nil, nil, nil, err
 	}
 	return names, shortCodes, transformersMap, nil
+}
+
+func (c Client) GetRepoStatus(ctx context.Context, owner string, repoName string, provider string) (bool, error) {
+
+	req := repo.RepoStatusRequest{
+		Params: repo.RepoStatusParams{
+			Owner:    owner,
+			RepoName: repoName,
+			Provider: provider,
+		},
+	}
+
+	res, err := req.Do(ctx, c)
+	if err != nil {
+		return false, err
+	}
+	return res, nil
+}
+
+func (c Client) GetIssues(ctx context.Context, owner string, repoName string, provider string, limit int) (*issues.IssuesListResponseData, error) {
+
+	req := issuesQuery.IssuesListRequest{
+		Params: issuesQuery.IssuesListParams{
+			Owner:    owner,
+			RepoName: repoName,
+			Provider: provider,
+			Limit:    limit,
+		},
+	}
+	res, err := req.Do(ctx, c)
+	if err != nil {
+		return nil, err
+	}
+
+	return res, nil
+}
+
+func (c Client) GetIssuesForFile(ctx context.Context, owner string, repoName string, provider string, filePath string, limit int) (*issues.IssuesListFileResponseData, error) {
+
+	req := issuesQuery.FileIssuesListRequest{
+		Params: issuesQuery.FileIssuesListParams{
+			Owner:    owner,
+			RepoName: repoName,
+			Provider: provider,
+			FilePath: filePath,
+			Limit:    limit,
+		},
+	}
+	res, err := req.Do(ctx, c)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
 }

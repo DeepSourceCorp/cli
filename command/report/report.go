@@ -8,7 +8,6 @@ import (
 	"os"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/getsentry/sentry-go"
 	"github.com/spf13/cobra"
 )
@@ -21,7 +20,7 @@ type ReportOptions struct {
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdReport(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdReport() *cobra.Command {
 	opts := ReportOptions{}
 
 	cmd := &cobra.Command{

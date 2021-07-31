@@ -1,6 +1,6 @@
 package issues
 
-type IssuesListResponse struct {
+type IssuesListResponseData struct {
 	Repository struct {
 		Issues struct {
 			Edges []struct {
@@ -21,7 +21,7 @@ type IssuesListResponse struct {
 	} `json:"repository"`
 }
 
-type IssuesListFileResponse struct {
+type IssuesListFileResponseData struct {
 	Repository struct {
 		File struct {
 			Issues struct {

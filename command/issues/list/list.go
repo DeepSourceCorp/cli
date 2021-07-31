@@ -1,28 +1,29 @@
 package list
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/api"
 	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
 type IssuesListOptions struct {
-	graphqlClient *api.DSClient
-	FileArg       string
-	RepoArg       string
-	LimitArg      int
+	FileArg  string
+	RepoArg  string
+	LimitArg int
 
 	Owner       string
 	RepoName    string
 	VCSProvider string
 
-	issuesData        *api.IssuesListResponse
-	issuesDataForFile *api.IssuesListFileResponse
+	issuesData        *issues.IssuesListResponseData
+	issuesDataForFile *issues.IssuesListFileResponseData
 	ptermTable        [][]string
 }
 
@@ -30,16 +31,13 @@ type IssuesListOptions struct {
 func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
 
 	opts := IssuesListOptions{
-		graphqlClient:     cf.GQLClient,
-		FileArg:           "",
-		RepoArg:           "",
-		LimitArg:          30,
-		Owner:             "",
-		RepoName:          "",
-		VCSProvider:       "",
-		issuesData:        &api.IssuesListResponse{},
-		issuesDataForFile: &api.IssuesListFileResponse{},
-		ptermTable:        [][]string{},
+		FileArg:     "",
+		RepoArg:     "",
+		LimitArg:    30,
+		Owner:       "",
+		RepoName:    "",
+		VCSProvider: "",
+		ptermTable:  [][]string{},
 	}
 
 	cmd := &cobra.Command{
@@ -55,8 +53,8 @@ func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
 			}
 			return nil
 		},
-        SilenceErrors:true,
-        SilenceUsage:true,
+		SilenceErrors: true,
+		SilenceUsage:  true,
 	}
 
 	// --repo, -r flag
@@ -70,9 +68,9 @@ func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
 func (opts *IssuesListOptions) Run() error {
 
 	// We need to specify the repository url by ourselves
-    if opts.LimitArg >100{
-        return fmt.Errorf("The maximum allowed limit to fetch issues is 100. Found %d",opts.LimitArg)
-    }
+	if opts.LimitArg > 100 {
+		return fmt.Errorf("The maximum allowed limit to fetch issues is 100. Found %d", opts.LimitArg)
+	}
 
 	if opts.RepoArg == "" {
 
@@ -130,11 +128,13 @@ func (opts *IssuesListOptions) Run() error {
 
 	var err error
 
+	deepsource := deepsource.New()
+	ctx := context.Background()
 	// Case 1 : For a certain FileArg (filepath)
 	if opts.FileArg != "" {
 		// opts.issuesDataForFile, err = api.GetIssuesForFile(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg)
 
-		opts.issuesDataForFile, err = api.GetIssuesForFile(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider, opts.RepoArg, opts.LimitArg)
+		opts.issuesDataForFile, err = deepsource.GetIssuesForFile(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.RepoArg, opts.LimitArg)
 		if err != nil {
 			return err
 		}
@@ -143,7 +143,7 @@ func (opts *IssuesListOptions) Run() error {
 
 	} else {
 		// Case 2 : For the whole project
-		opts.issuesData, err = api.GetIssues(opts.graphqlClient, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
+		opts.issuesData, err = deepsource.GetIssues(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
 		if err != nil {
 			return err
 		}
