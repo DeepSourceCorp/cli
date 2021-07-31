@@ -49,7 +49,7 @@
                   size="x-small"
                   icon="minus"
                   buttonType="secondary"
-                  :disabled="seats <= 3"
+                  :disabled="seats <= minSeats"
                   v-on:click.shift="updateSeatsInStore(seats - 4)"
                   @click="updateSeatsInStore(seats - 1)"
                 />
@@ -66,6 +66,7 @@
                   size="x-small"
                   icon="plus"
                   buttonType="secondary"
+                  :disabled="seats >= maxSeats"
                   v-on:click.shift="updateSeatsInStore(seats + 4)"
                   @click="updateSeatsInStore(seats + 1)"
                 />
@@ -112,9 +113,7 @@
           </template>
           <div class="flex">
             <label class="w-32 font-medium">Total payable now</label>
-            <div
-              class="flex-grow text-lg font-bold flex justify-end items-center space-x-2"
-            >
+            <div class="flex-grow text-lg font-bold flex justify-end items-center space-x-2">
               <z-icon
                 class="animate-spin"
                 color="juniper"
@@ -122,7 +121,7 @@
                 v-if="loading"
               ></z-icon>
               <z-animated-integer
-                v-if="billingInfo.netPayableThisCycle"
+                v-if="billingInfo.netPayableThisCycle !== null"
                 :value="billingInfo.netPayableThisCycle"
                 :format="formatUSD"
               ></z-animated-integer>
@@ -131,16 +130,14 @@
           <z-divider color="ink-300" />
           <p
             class="text-xs text-vanilla-400 leading-snug tracking-snug"
-            v-if="billingInfo.netPayableNextCycle && billingInfo.nextBillingCycle"
+            v-if="billingInfo.netPayableNextCycle !== null && billingInfo.nextBillingCycle !== null"
           >
             You will be charged
-            <span class="inline">{{
-              formatUSD(billingInfo.netPayableNextCycle)
-            }}</span>
+            <span class="inline">{{ formatUSD(billingInfo.netPayableNextCycle) }}</span>
             when the next billing cycle starts on
             <b class="text-vanilla-100">{{ nextBillingDate }}</b>
           </p>
-          <div v-else class="h-4 w-full bg-ink-300 rounded-md animate-pulse"></div>
+          <div v-else-if="calculating" class="h-4 w-full bg-ink-300 rounded-md animate-pulse"></div>
           <div class="space-y-2">
             <z-input
               v-model="couponCode"
@@ -186,8 +183,9 @@ import SubscriptionMixin, { Plan } from '~/mixins/subscriptionMixin'
 import { formatUSD } from '~/utils/string'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { parseISODate, formatDate } from '~/utils/date'
-import { CouponInfo, CreditsInfo, Maybe } from '~/types/types'
+import { CouponInfo, CreditsInfo } from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'
+import ContextMixin from '~/mixins/contextMixin'
 
 @Component({
   components: {
@@ -214,9 +212,10 @@ import { TeamPerms } from '~/types/permTypes'
     }
   }
 })
-export default class Subscribe extends mixins(SubscriptionMixin, OwnerDetailMixin) {
+export default class Subscribe extends mixins(SubscriptionMixin, OwnerDetailMixin, ContextMixin) {
   private plan: Plan
   private loading = false
+  private calculating = false
   private couponCode = ''
   private couponError = false
   private couponLoading = false
@@ -227,6 +226,7 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerDetailMixi
   }
 
   async fetch(): Promise<void> {
+    await this.fetchContext()
     await this.getOwner()
     await this.calculate()
   }
@@ -241,12 +241,21 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerDetailMixi
   async updateSeatsInStore(seats: number): Promise<void> {
     this.loading = true
     seats = Number(seats)
-    this.setPlan({ seats: seats > 2 ? seats : 3 })
+    this.setPlan({ seats: Math.min(Math.max(seats, this.minSeats), this.maxSeats) })
     await this.calculate()
     this.loading = false
   }
 
+  get maxSeats(): number {
+    return this.context.plans[this.planSlug].max_seats
+  }
+
+  get minSeats(): number {
+    return this.context.plans[this.planSlug].min_seats
+  }
+
   async calculate(): Promise<void> {
+    this.calculating = true
     await this.getBillingInfo({
       productSlug: 'code-quality',
       planSlug: this.planSlug,
@@ -254,6 +263,7 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerDetailMixi
       couponCode: this.couponCode ?? '',
       isTrial: false
     })
+    this.calculating = false
   }
 
   async getOwner(): Promise<void> {
