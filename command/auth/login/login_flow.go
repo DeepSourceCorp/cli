@@ -3,6 +3,7 @@ package login
 import (
 	"context"
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/cli/browser"
@@ -33,7 +34,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 	c.Printf("Press enter to open deepsource.io in your browser...")
 	fmt.Scanln()
 
-	err = browser.OpenURL(res.VerificationURIComplete)
+	err = browser.OpenURL("https://deepsource.io/cli/auth")
 	if err != nil {
 		return err
 	}
@@ -50,14 +51,15 @@ func (opts *LoginOptions) startLoginFlow() error {
 			case <-ticker.C:
 				// do stuff
 				jwtData, err = deepsource.Login(ctx, res.Code)
-				if jwtData.Token != "" {
+				if err == nil {
 					opts.AuthTimedOut = false
 					return
 				}
 
-				// Check auth polling time out
+				// Check auth polling timeout
 				timeElapsed := time.Since(pollStartTime)
 				if timeElapsed >= time.Duration(res.ExpiresIn)*time.Second {
+					log.Println("Timeout")
 					opts.AuthTimedOut = true
 					return
 				}
@@ -71,13 +73,17 @@ func (opts *LoginOptions) startLoginFlow() error {
 		return fmt.Errorf("Authentication timed out")
 	}
 
+	// Parse the token expiry
+	layout := "2006-01-02T15:04:05.999999999"
+	tokenExpiresIn, _ := time.Parse(layout, jwtData.Payload.Exp)
+
 	// Convert incoming config into the ConfigData format
 	finalConfig := cliConfig.CLIConfig{
 		User:                  jwtData.Payload.Email,
 		Token:                 jwtData.Token,
 		RefreshToken:          jwtData.Refreshtoken,
-		TokenExpiresIn:        time.Unix(jwtData.TokenExpiresIn, 0),
-		RefreshTokenExpiresIn: jwtData.RefreshExpiresIn,
+		TokenExpiresIn:        tokenExpiresIn,
+		RefreshTokenExpiresIn: time.Unix(jwtData.RefreshExpiresIn, 0),
 	}
 
 	err = finalConfig.WriteFile()

@@ -65,7 +65,7 @@ func (opts *LoginOptions) Run() error {
 			return err
 		}
 
-		// User doesn't waant to re-authenticate
+		// User doesn't want to re-authenticate
 		if response == false {
 			return nil
 		}

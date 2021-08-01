@@ -14,7 +14,7 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
-const host = "http://localhost:8000/graphql/"
+const host = "https://api.deepsource.io/graphql/"
 
 type Client struct {
 	gql   *graphql.Client
@@ -47,7 +47,6 @@ func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 
 func (c Client) Login(ctx context.Context, deviceCode string) (*auth.JWT, error) {
 	req := authmut.RequestJWTRequest{
-
 		Params: authmut.RequestJWTParams{
 			DeviceCode: deviceCode,
 		},

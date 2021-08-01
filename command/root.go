@@ -35,23 +35,24 @@ Login into DeepSource using the command : deepsource auth login`,
 
 func Execute() error {
 
-	var err error
-
 	// Config operations
 	var cfg cliConfig.CLIConfig
 
 	// Read the DeepSource config file
 	configData, err := cfg.ReadFile()
 	if err != nil {
-		return err
+		global.Token = ""
+		global.RefreshToken = ""
+		global.User = ""
+	} else {
+		// Populating the global package with the config data
+		global.Token = configData.Token
+		global.RefreshToken = configData.RefreshToken
+		global.User = configData.User
 	}
 
-	global.Token = configData.Token
-	global.RefreshToken = configData.RefreshToken
-	global.User = configData.User
-
 	// check if token expired
-	if configData.Token != "" {
+	if global.Token != "" {
 		global.TokenExpired = cfg.IsExpired()
 		if global.TokenExpired == true {
 			fmt.Println("The token has expired. Please refresh the token or reauthenticate.")
