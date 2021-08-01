@@ -73,18 +73,14 @@ func (opts *LoginOptions) startLoginFlow() error {
 		return fmt.Errorf("Authentication timed out")
 	}
 
-	// Parse the token expiry
-	layout := "2006-01-02T15:04:05.999999999"
-	tokenExpiresIn, _ := time.Parse(layout, jwtData.Payload.Exp)
-
 	// Convert incoming config into the ConfigData format
 	finalConfig := cliConfig.CLIConfig{
 		User:                  jwtData.Payload.Email,
 		Token:                 jwtData.Token,
 		RefreshToken:          jwtData.Refreshtoken,
-		TokenExpiresIn:        tokenExpiresIn,
 		RefreshTokenExpiresIn: time.Unix(jwtData.RefreshExpiresIn, 0),
 	}
+	finalConfig.SetTokenExpiry(jwtData.Payload.Exp)
 
 	err = finalConfig.WriteFile()
 	if err != nil {

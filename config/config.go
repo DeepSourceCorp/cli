@@ -25,6 +25,12 @@ type CLIConfig struct {
 	RefreshTokenExpiresIn time.Time
 }
 
+func (cfg *CLIConfig) SetTokenExpiry(str string) {
+	layout := "2006-01-02T15:04:05.999999999"
+	tokenExpiresIn, _ := time.Parse(layout, str)
+	cfg.TokenExpiresIn = tokenExpiresIn
+}
+
 func (cfg CLIConfig) IsExpired() bool {
 	return time.Now().After(cfg.TokenExpiresIn)
 }

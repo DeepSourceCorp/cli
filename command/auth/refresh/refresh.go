@@ -55,9 +55,10 @@ func (opts *RefreshOptions) Run() error {
 			User:                  refreshedConfigData.Refreshtoken.Payload.Email,
 			Token:                 refreshedConfigData.Refreshtoken.Token,
 			RefreshToken:          refreshedConfigData.Refreshtoken.Refreshtoken,
-			TokenExpiresIn:        time.Time{},
-			RefreshTokenExpiresIn: time.Time{},
+			RefreshTokenExpiresIn: time.Unix(refreshedConfigData.Refreshtoken.Refreshexpiresin, 0),
 		}
+
+		finalConfig.SetTokenExpiry(refreshedConfigData.Refreshtoken.Payload.Exp)
 
 		err = finalConfig.WriteFile()
 		if err != nil {
