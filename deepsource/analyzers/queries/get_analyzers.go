@@ -8,22 +8,22 @@ import (
 )
 
 const listAnalyzersQuery = `
-    {
-        analyzers {
-            edges {
-                node {
-                    name
-                    shortcode
-                    metaSchema
-                }
+{
+    analyzers {
+        edges {
+            node {
+                name
+                shortcode
+                metaSchema
             }
         }
-    }`
+    }
+}`
 
 type AnalyzersRequest struct{}
 
 type AnalyzersResponse struct {
-	analyzers.AnalyzersQueryResponse `json:"analyzers"`
+	analyzers.AnalyzersQueryResponse
 }
 
 // GraphQL client interface

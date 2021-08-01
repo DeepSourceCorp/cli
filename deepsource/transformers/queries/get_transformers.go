@@ -8,21 +8,21 @@ import (
 )
 
 const listTransformersQuery = `
-    {
-        transformers{
-            edges{
-                node{
-                    name
-                    shortcode
-                }
+{
+    transformers{
+        edges{
+            node{
+                name
+                shortcode
             }
         }
-    }`
+    }
+}`
 
 type TransformersRequest struct{}
 
 type TransformersResponse struct {
-	transformers.TransformersQueryResponse `json:"transformers"`
+	transformers.TransformersQueryResponse
 }
 
 // GraphQL client interface
