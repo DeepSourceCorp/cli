@@ -20,10 +20,6 @@ var (
 
 	// DSN used for sentry
 	SentryDSN string
-
-	AuthToken    string
-	RefreshToken string
-	TokenExpired bool = true
 )
 
 func main() {

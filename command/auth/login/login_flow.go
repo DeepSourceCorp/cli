@@ -29,7 +29,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 	// Having received the device code, open the browser at verificationURI
 	// Print the user code and the permission to open browser at verificationURI
 	c := color.New(color.FgCyan, color.Bold)
-	c.Printf("Please copy your one-time code: %s\n", res.Code)
+	c.Printf("Please copy your one-time code: %s\n", res.UserCode)
 	c.Printf("Press enter to open deepsource.io in your browser...")
 	fmt.Scanln()
 

@@ -28,7 +28,7 @@ type IssuesListOptions struct {
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdIssuesList(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdIssuesList() *cobra.Command {
 
 	opts := IssuesListOptions{
 		FileArg:     "",
