@@ -11,6 +11,7 @@ import (
 	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
 	repo "github.com/deepsourcelabs/cli/deepsource/repo/queries"
 	transformers "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
+	"github.com/deepsourcelabs/cli/global"
 	"github.com/deepsourcelabs/graphql"
 )
 
@@ -26,7 +27,7 @@ func (c Client) GQL() *graphql.Client {
 }
 
 func (c Client) GetToken() string {
-	return c.token
+	return global.Token
 }
 
 func New() *Client {
@@ -138,6 +139,7 @@ func (c Client) GetIssuesForFile(ctx context.Context, owner string, repoName str
 			Limit:    limit,
 		},
 	}
+
 	res, err := req.Do(ctx, c)
 	if err != nil {
 		return nil, err

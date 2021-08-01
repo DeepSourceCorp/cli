@@ -8,14 +8,14 @@ import (
 )
 
 const refreshTokenQuery = `
-    mutation RefreshToken($token: String!) {
-        refreshToken(refreshToken: $token) {
-            payload
-            token
-            refreshExpiresIn
-            refreshToken
-        }
-    }`
+mutation RefreshToken($token: String!) {
+    refreshToken(refreshToken: $token) {
+        payload
+        token
+        refreshExpiresIn
+        refreshToken
+    }
+}`
 
 type RefreshTokenParams struct {
 	RefreshToken string `json:"refreshToken"`
@@ -26,7 +26,7 @@ type RefreshTokenRequest struct {
 }
 
 type RefreshTokenResponse struct {
-	auth.RefreshAuthResponse `json:"refreshToken"`
+	auth.RefreshAuthResponse
 }
 
 func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.RefreshAuthResponse, error) {

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
+	cliConfig "github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/global"
-	cliConfig "github.com/deepsourcelabs/cli/internal/config"
 	"github.com/spf13/cobra"
 )
 
@@ -51,17 +51,15 @@ func (opts *RefreshOptions) Run() error {
 		}
 
 		// Convert incoming config into the ConfigData format
-		finalConfig := cliConfig.ConfigData{
-			User:                refreshedConfigData.Refreshtoken.Payload.Email,
-			Token:               refreshedConfigData.Refreshtoken.Token,
-			TokenExpiry:         refreshedConfigData.Refreshtoken.Payload.Exp,
-			RefreshToken:        refreshedConfigData.Refreshtoken.Refreshtoken,
-			OrigIAT:             refreshedConfigData.Refreshtoken.Payload.Origiat,
-			RefreshTokenExpiry:  refreshedConfigData.Refreshtoken.Refreshexpiresin,
-			RefreshTokenSetTime: time.Now().Unix(),
+		finalConfig := cliConfig.CLIConfig{
+			User:                  refreshedConfigData.Refreshtoken.Payload.Email,
+			Token:                 refreshedConfigData.Refreshtoken.Token,
+			RefreshToken:          refreshedConfigData.Refreshtoken.Refreshtoken,
+			TokenExpiresIn:        time.Time{},
+			RefreshTokenExpiresIn: time.Time{},
 		}
 
-		err = cliConfig.WriteConfigToFile(finalConfig)
+		err = finalConfig.WriteFile()
 		if err != nil {
 			fmt.Println("Error in writing authentication data to a file. Exiting...")
 			return err
