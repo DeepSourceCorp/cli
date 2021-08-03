@@ -54,7 +54,7 @@ func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (bool, err
 		return false, err
 	}
 
-	if respData.Repository.Isactivated == true {
+	if respData.Repository.Isactivated {
 		return true, nil
 	}
 

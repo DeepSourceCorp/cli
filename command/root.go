@@ -54,7 +54,7 @@ func Execute() error {
 	// check if token expired
 	if global.Token != "" {
 		global.TokenExpired = cfg.IsExpired()
-		if global.TokenExpired == true {
+		if global.TokenExpired {
 			fmt.Println("The token has expired. Please refresh the token or reauthenticate.")
 		}
 	}
