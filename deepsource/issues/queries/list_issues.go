@@ -10,28 +10,26 @@ import (
 )
 
 const fetchAllIssuesQuery = `
-    query($name:String!, $owner:String!, $provider:VCSProviderChoices!, $path:String!, $limit:Int!){
-        repository(name:$name, owner:$owner, provider:$provider){
-            file(path:$path){
-                issues(first:$limit){
-                    edges{
-                        node{
-                            path
-                            beginLine
-                            endLine
-                            concreteIssue{
-                                analyzer {
-                                    shortcode
-                                }
-                                title
-                                shortcode
-                            }
+query GetAllIssues($name:String!, $owner:String!, $provider:VCSProviderChoices!, $limit:Int!){
+    repository(name:$name, owner:$owner, provider:$provider){
+        issues(first:$limit){
+            edges{
+                node{
+                    path
+                    beginLine
+                    endLine
+                    concreteIssue{
+                        analyzer {
+                            shortcode
                         }
+                        title
+                        shortcode
                     }
                 }
             }
         }
-    }`
+    }
+}`
 
 type IssuesListParams struct {
 	Owner    string
@@ -45,7 +43,7 @@ type IssuesListRequest struct {
 }
 
 type IssuesListResponse struct {
-	issues.IssuesListResponseData `json:"repository"`
+	issues.IssuesListResponseData
 }
 
 func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) (*issues.IssuesListResponseData, error) {

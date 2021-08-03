@@ -11,28 +11,28 @@ import (
 
 // Query to fetch issues for a certain file specified by the user
 const fetchFileIssuesQuery = `
-    query($name:String!, $owner:String!, $provider:VCSProviderChoices!, $path:String!, $limit:Int!){
-        repository(name:$name, owner:$owner, provider:$provider){
-            file(path:$path){
-                issues(first:$limit){
-                    edges{
-                        node{
-                            path
-                            beginLine
-                            endLine
-                            concreteIssue{
-                                analyzer {
-                                    shortcode
-                                }
-                                title
+query($name:String!, $owner:String!, $provider:VCSProviderChoices!, $path:String!, $limit:Int!){
+    repository(name:$name, owner:$owner, provider:$provider){
+        file(path:$path){
+            issues(first:$limit){
+                edges{
+                    node{
+                        path
+                        beginLine
+                        endLine
+                        concreteIssue{
+                            analyzer {
                                 shortcode
                             }
+                            title
+                            shortcode
                         }
                     }
                 }
             }
         }
-    }`
+    }
+}`
 
 type FileIssuesListParams struct {
 	Owner    string
@@ -49,7 +49,7 @@ type FileIssuesListRequest struct {
 
 // Response struct
 type FileIssuesResponse struct {
-	issues.IssuesListFileResponseData `json:"repository"`
+	issues.IssuesListFileResponseData
 }
 
 // GraphQL client interface
