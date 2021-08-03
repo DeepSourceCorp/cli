@@ -31,7 +31,7 @@ func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
 		}
 	}
 
-	if countEnabled == 0 {
+	if countEnabled == 0 && len(c.Config.Analyzers) > 0 {
 		c.pushError("There must be atleast one enabled `analyzer`. Found: 0")
 	}
 

@@ -79,15 +79,13 @@ func (o *Options) Run() error {
 		}
 
 		// Removing trailing null characters
-		path := strings.TrimRight(string(output), "\000")
+		path := strings.TrimRight(string(output), "\000\n")
 
 		// Check if the config exists on this path
-		if _, err = os.Stat(filepath.Join(path, "/.deepsource.toml")); err != nil {
-
+		if _, err = os.Stat(filepath.Join(path, ".deepsource.toml")); err != nil {
 			fmt.Println("Error occured while looking for DeepSource config file. Exiting...")
 			return err
 		} else {
-
 			// If found, use this as configpath
 			configPath = filepath.Join(path, "/.deepsource.toml")
 		}
