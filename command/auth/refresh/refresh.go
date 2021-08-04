@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
 	cliConfig "github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/global"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -27,7 +27,7 @@ func NewCmdRefresh() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "refresh",
 		Short: "Refresh stored authentication credentials",
-		Args:  cmdutils.NoArgs,
+		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			err := opts.Run()
 			if err != nil {

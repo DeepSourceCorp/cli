@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/configvalidator"
 	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -36,7 +36,7 @@ func NewCmdValidate() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "validate",
 		Short: "Validate DeepSource config",
-		Args:  cmdutils.NoArgs,
+		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			err := o.Run()
 			if err != nil {

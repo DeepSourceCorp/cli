@@ -3,7 +3,7 @@ package version
 import (
 	"fmt"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/deepsourcelabs/cli/version"
 	"github.com/spf13/cobra"
 )
@@ -19,7 +19,7 @@ func NewCmdVersion() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "version",
 		Short: "Get the version of the DeepSource CLI",
-		Args:  cmdutils.NoArgs,
+		Args:  utils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			o := Options{}
 			fmt.Println(o.Run())

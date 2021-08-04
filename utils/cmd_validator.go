@@ -1,4 +1,4 @@
-package cmdutils
+package utils
 
 import (
 	"errors"
@@ -30,9 +30,9 @@ func ExactArgs(count int) cobra.PositionalArgs {
 	}
 }
 
-// Validates if the number of args passed to a command is more than the max it requires
 func MaxNArgs(count int) cobra.PositionalArgs {
 	return func(cmd *cobra.Command, args []string) error {
+
 		arg := "argument"
 		if count > 1 {
 			arg = "arguments"

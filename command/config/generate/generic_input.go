@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/utils"
 )
 
 // ==========
@@ -16,7 +16,7 @@ func (o *Options) collectExcludePatterns() error {
 	excludePatternsMsg := "Would you like to add any exclude patterns?"
 	helpMsg := "Glob patterns of files that should not be analyzed such as auto-generated files, migrations, compatibility files."
 
-	response, err := cmdutils.ConfirmFromUser(excludePatternsMsg, helpMsg)
+	response, err := utils.ConfirmFromUser(excludePatternsMsg, helpMsg)
 	if err != nil {
 		return err
 	}
@@ -45,7 +45,7 @@ func (o *Options) collectExcludePatterns() error {
 
 			// Confirm from the user if the user wants to add more exclude patterns
 			// Iterating this until user says no
-			response, err := cmdutils.ConfirmFromUser("Add more exclude patterns?", "")
+			response, err := utils.ConfirmFromUser("Add more exclude patterns?", "")
 			if err != nil {
 				return err
 			}
@@ -67,7 +67,7 @@ func (o *Options) collectTestPatterns() error {
 	helpMsg := "Glob patterns of the test files. This helps us reduce false positives."
 
 	// Confirm from the user (y/N) if he/she wants to add test patterns
-	response, err := cmdutils.ConfirmFromUser(testPatternsMsg, helpMsg)
+	response, err := utils.ConfirmFromUser(testPatternsMsg, helpMsg)
 	if err != nil {
 		return err
 	}
@@ -97,7 +97,7 @@ func (o *Options) collectTestPatterns() error {
 
 			// Confirm from the user if the user wants to add more test patterns
 			// Iterating this until user says no
-			response, err := cmdutils.ConfirmFromUser("Add more test patterns?", "")
+			response, err := utils.ConfirmFromUser("Add more test patterns?", "")
 			if err != nil {
 				return err
 			}

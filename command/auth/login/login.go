@@ -3,9 +3,9 @@ package login
 import (
 	"fmt"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/global"
 	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +22,7 @@ func NewCmdLogin() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",
-		Args:  cmdutils.NoArgs,
+		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 
 			opts := LoginOptions{
@@ -54,7 +54,7 @@ func (opts *LoginOptions) Run() error {
 		msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", opts.User)
 		helpText := ""
 
-		response, err := cmdutils.ConfirmFromUser(msg, helpText)
+		response, err := utils.ConfirmFromUser(msg, helpText)
 		if err != nil {
 			fmt.Println("Error in getting response. Please try again...")
 			return err

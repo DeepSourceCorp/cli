@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/cli/browser"
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/global"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -35,7 +35,7 @@ func NewCmdRepoView() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "view",
 		Short: "Open the DeepSource dashboard of a repository",
-		Args:  cmdutils.NoArgs,
+		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			err := opts.Run()
 			if err != nil {
@@ -54,7 +54,7 @@ func (opts *RepoViewOptions) Run() error {
 
 	if opts.RepoArg == "" {
 
-		remotesData, err := cmdutils.ListRemotes()
+		remotesData, err := utils.ListRemotes()
 		if err != nil {
 			if strings.Contains(err.Error(), "exit status 128") {
 				pterm.Info.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
@@ -78,7 +78,7 @@ func (opts *RepoViewOptions) Run() error {
 				promptOpts = append(promptOpts, value[3])
 			}
 
-			selectedRemote, err := cmdutils.SelectFromOptions("Please select which repository you want to view?", "", promptOpts)
+			selectedRemote, err := utils.SelectFromOptions("Please select which repository you want to view?", "", promptOpts)
 			if err != nil {
 				return err
 			}
@@ -94,7 +94,7 @@ func (opts *RepoViewOptions) Run() error {
 	} else {
 
 		// Parsing the arguments to --repo flag
-		repoData, err := cmdutils.RepoArgumentResolver(opts.RepoArg)
+		repoData, err := utils.RepoArgumentResolver(opts.RepoArg)
 		if err != nil {
 			return err
 		}

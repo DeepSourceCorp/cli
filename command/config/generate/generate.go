@@ -6,7 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
@@ -41,7 +41,7 @@ func NewCmdConfigGenerate() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "generate",
 		Short: "Generate config for DeepSource",
-		Args:  cmdutils.NoArgs,
+		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			err := o.Run()
 			if err != nil {

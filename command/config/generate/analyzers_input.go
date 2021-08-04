@@ -2,7 +2,7 @@ package generate
 
 import (
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/utils"
 )
 
 // ==========
@@ -30,7 +30,7 @@ func (o *Options) collectAnalyzerInput() error {
 		if analyzer == "Go" {
 			msg := "Please input the \"import path\" for Go analyzer."
 			helpMsg := "The source code will be placed in $GOPATH/src/{import_root}. An example of import root is - github.com/spf13/viper"
-			o.GoImportRoot, err = cmdutils.GetSingleLineInput(msg, helpMsg)
+			o.GoImportRoot, err = utils.GetSingleLineInput(msg, helpMsg)
 			if err != nil {
 				return err
 			}
@@ -40,7 +40,7 @@ func (o *Options) collectAnalyzerInput() error {
 			msg := "Which Java version does the project use?"
 			helpMsg := "The version of Java runtime to use. OpenJDK versions 8 to 15 are supported."
 			supportedJavaVersions := []string{"8", "9", "10", "11", "12", "13", "14", "15"}
-			o.JavaVersion, err = cmdutils.SelectFromOptions(msg, helpMsg, supportedJavaVersions)
+			o.JavaVersion, err = utils.SelectFromOptions(msg, helpMsg, supportedJavaVersions)
 			if err != nil {
 				return err
 			}

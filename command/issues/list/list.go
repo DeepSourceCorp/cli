@@ -6,9 +6,9 @@ import (
 	"log"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -43,7 +43,7 @@ func NewCmdIssuesList() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List issues reported by DeepSource",
-		Args:  cmdutils.MaxNArgs(1),
+		Args:  utils.MaxNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 1 {
 				opts.FileArg = args[0]
@@ -73,7 +73,7 @@ func (opts *IssuesListOptions) Run() error {
 
 	if opts.RepoArg == "" {
 
-		remotesData, err := cmdutils.ListRemotes()
+		remotesData, err := utils.ListRemotes()
 		if err != nil {
 			if strings.Contains(err.Error(), "exit status 128") {
 				fmt.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
@@ -97,7 +97,7 @@ func (opts *IssuesListOptions) Run() error {
 				promptOpts = append(promptOpts, value[3])
 			}
 
-			selectedRemote, err := cmdutils.SelectFromOptions("Please select which repository you want to check?", "", promptOpts)
+			selectedRemote, err := utils.SelectFromOptions("Please select which repository you want to check?", "", promptOpts)
 			if err != nil {
 				return err
 			}
@@ -115,7 +115,7 @@ func (opts *IssuesListOptions) Run() error {
 		// If the user has passed the --repo flag
 
 		// Parsing the arguments to --repo flag
-		repoData, err := cmdutils.RepoArgumentResolver(opts.RepoArg)
+		repoData, err := utils.RepoArgumentResolver(opts.RepoArg)
 		if err != nil {
 			return err
 		}
