@@ -35,6 +35,7 @@ func NewCmdRepoView() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "view",
 		Short: "Open the DeepSource dashboard of a repository",
+		Args:  cmdutils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			err := opts.Run()
 			if err != nil {
@@ -42,8 +43,6 @@ func NewCmdRepoView() *cobra.Command {
 			}
 			return nil
 		},
-		SilenceErrors: true,
-		SilenceUsage:  false,
 	}
 
 	// --repo, -r flag

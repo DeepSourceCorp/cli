@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -30,7 +29,7 @@ func main() {
 		Dsn: SentryDSN,
 	})
 	if err != nil {
-		fmt.Println("Could not load sentry.")
+		log.Println("Could not load sentry.")
 	}
 
 	v.SetBuildInfo(version, Date, "", "")

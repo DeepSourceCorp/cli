@@ -33,6 +33,7 @@ func NewCmdRepoStatus() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "status",
 		Short: "Refresh stored authentication credentials",
+		Args:  cmdutils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			err := opts.Run()
 			if err != nil {
@@ -40,8 +41,6 @@ func NewCmdRepoStatus() *cobra.Command {
 			}
 			return nil
 		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
 	}
 
 	// --repo, -r flag

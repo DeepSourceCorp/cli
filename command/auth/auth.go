@@ -24,8 +24,3 @@ func NewCmdAuth() *cobra.Command {
 	cmd.AddCommand(status.NewCmdStatus())
 	return cmd
 }
-
-// Validate impletments the Validate method for the ICommand interface.
-func (Options) Validate() error {
-	return nil
-}

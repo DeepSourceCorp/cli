@@ -8,6 +8,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/getsentry/sentry-go"
 	"github.com/spf13/cobra"
 )
@@ -26,6 +27,7 @@ func NewCmdReport() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "report",
 		Short: "Report artifacts to DeepSource",
+		Args:  cmdutils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			returnCode := opts.Run()
 			defer os.Exit(returnCode)

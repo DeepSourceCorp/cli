@@ -1,8 +1,6 @@
 package command
 
 import (
-	"fmt"
-
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/config"
 	"github.com/deepsourcelabs/cli/command/issues"
@@ -11,6 +9,7 @@ import (
 	"github.com/deepsourcelabs/cli/command/version"
 	cliConfig "github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/global"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -22,7 +21,11 @@ func NewCmdRoot() *cobra.Command {
 Now ship good code directly from the command line.
 
 Login into DeepSource using the command : deepsource auth login`,
+		SilenceErrors: true,
+		SilenceUsage:  true,
 	}
+
+	// Child Commands
 	cmd.AddCommand(version.NewCmdVersion())
 	cmd.AddCommand(config.NewCmdConfig())
 	cmd.AddCommand(auth.NewCmdAuth())
@@ -51,15 +54,14 @@ func Execute() error {
 		global.User = configData.User
 	}
 
-	// check if token expired
+	// Check if token expired
 	if global.Token != "" {
 		global.TokenExpired = cfg.IsExpired()
 		if global.TokenExpired == true {
-			fmt.Println("The token has expired. Please refresh the token or reauthenticate.")
+			pterm.Info.Println("The authentication has expired. Please refresh the token using `deepsource auth refresh`")
 		}
 	}
 
-	// Pass configData struct to all the packages
 	cmd := NewCmdRoot()
 	if err := cmd.Execute(); err != nil {
 		return err

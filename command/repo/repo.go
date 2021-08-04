@@ -20,8 +20,3 @@ func NewCmdRepo() *cobra.Command {
 	cmd.AddCommand(view.NewCmdRepoView())
 	return cmd
 }
-
-// Validate impletments the Validate method for the ICommand interface.
-func (Options) Validate() error {
-	return nil
-}

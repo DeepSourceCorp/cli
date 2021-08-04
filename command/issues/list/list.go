@@ -43,6 +43,7 @@ func NewCmdIssuesList() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List issues reported by DeepSource",
+		Args:  cmdutils.MaxNArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 1 {
 				opts.FileArg = args[0]
@@ -53,8 +54,6 @@ func NewCmdIssuesList() *cobra.Command {
 			}
 			return nil
 		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
 	}
 
 	// --repo, -r flag

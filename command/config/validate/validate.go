@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/configvalidator"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/pterm/pterm"
@@ -35,6 +36,7 @@ func NewCmdValidate() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "validate",
 		Short: "Validate DeepSource config",
+		Args:  cmdutils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			err := o.Run()
 			if err != nil {
@@ -42,15 +44,8 @@ func NewCmdValidate() *cobra.Command {
 			}
 			return nil
 		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
 	}
 	return cmd
-}
-
-// Validate impletments the Validate method for the ICommand interface.
-func (o *Options) Validate() error {
-	return nil
 }
 
 // Run executes the command.

@@ -1,6 +1,7 @@
 package status
 
 import (
+	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/global"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -17,6 +18,7 @@ func NewCmdStatus() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "status",
 		Short: "View the authentication status",
+		Args:  cmdutils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			opts := AuthStatusOptions{
 				User:          global.User,

@@ -22,6 +22,7 @@ func NewCmdLogin() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",
+		Args:  cmdutils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 
 			opts := LoginOptions{
@@ -35,14 +36,8 @@ func NewCmdLogin() *cobra.Command {
 			}
 			return nil
 		},
-		SilenceUsage: true,
 	}
 	return cmd
-}
-
-// Validate impletments the Validate method for the ICommand interface.
-func (opts *LoginOptions) Validate() error {
-	return nil
 }
 
 // Run executest the command.

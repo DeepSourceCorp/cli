@@ -14,6 +14,7 @@ func NewCmdLogout() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",
 		Short: "Logout of your active DeepSource account",
+		Args:  cmdutils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts := LogoutOptions{}
 			err := opts.Run()
@@ -22,8 +23,6 @@ func NewCmdLogout() *cobra.Command {
 			}
 			return nil
 		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
 	}
 	return cmd
 }
