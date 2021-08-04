@@ -10,7 +10,6 @@ import (
 
 var configDirFn = os.UserHomeDir
 var readFileFn = os.ReadFile
-var createFn = os.Create
 
 const (
 	ConfigDirName  = "/.deepsource/"
@@ -94,11 +93,10 @@ func (cfg *CLIConfig) WriteFile() error {
 
 	// Create file
 	file, err := os.Create(path)
-	defer file.Close()
-
 	if err != nil {
 		return err
 	}
+	defer file.Close()
 
 	_, err = file.Write(data)
 

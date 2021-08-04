@@ -18,8 +18,7 @@ import (
 const host = "https://api.deepsource.io/graphql/"
 
 type Client struct {
-	gql   *graphql.Client
-	token string
+	gql *graphql.Client
 }
 
 func (c Client) GQL() *graphql.Client {
