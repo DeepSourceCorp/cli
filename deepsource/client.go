@@ -93,7 +93,7 @@ func (c Client) GetSupportedTransformers(ctx context.Context) ([]string, []strin
 	return names, shortCodes, transformersMap, nil
 }
 
-func (c Client) GetRepoStatus(ctx context.Context, owner string, repoName string, provider string) (bool, error) {
+func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (bool, error) {
 
 	req := repo.RepoStatusRequest{
 		Params: repo.RepoStatusParams{
@@ -110,7 +110,7 @@ func (c Client) GetRepoStatus(ctx context.Context, owner string, repoName string
 	return res, nil
 }
 
-func (c Client) GetIssues(ctx context.Context, owner string, repoName string, provider string, limit int) (*issues.IssuesListResponseData, error) {
+func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string, limit int) (*issues.IssuesListResponseData, error) {
 
 	req := issuesQuery.IssuesListRequest{
 		Params: issuesQuery.IssuesListParams{
@@ -128,7 +128,7 @@ func (c Client) GetIssues(ctx context.Context, owner string, repoName string, pr
 	return res, nil
 }
 
-func (c Client) GetIssuesForFile(ctx context.Context, owner string, repoName string, provider string, filePath string, limit int) (*issues.IssuesListFileResponseData, error) {
+func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string, limit int) (*issues.IssuesListFileResponseData, error) {
 
 	req := issuesQuery.FileIssuesListRequest{
 		Params: issuesQuery.FileIssuesListParams{

@@ -57,7 +57,7 @@ func Execute() error {
 	// Check if token expired
 	if global.Token != "" {
 		global.TokenExpired = cfg.IsExpired()
-		if global.TokenExpired == true {
+		if global.TokenExpired {
 			pterm.Info.Println("The authentication has expired. Please refresh the token using `deepsource auth refresh`")
 		}
 	}
