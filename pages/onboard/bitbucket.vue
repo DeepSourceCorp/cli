@@ -8,11 +8,10 @@ import { Context } from '@nuxt/types'
 
 export default Vue.extend({
   middleware: [
-      function ({ redirect, route }: Context): void {
-        const queryParams = route.query
-        queryParams['provider'] = 'bitbucket'
-        redirect(302, `/installation`, queryParams)
-      }
-    ]
-  })
+    function ({ redirect, route }: Context): void {
+      const queryParams = route.query
+      redirect(302, `/installation/bb`, queryParams)
+    }
+  ]
+})
 </script>

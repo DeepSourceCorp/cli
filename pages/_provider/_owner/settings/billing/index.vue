@@ -70,10 +70,7 @@ const PLAN_ORDER = ['starter', 'pro', 'business', 'premium', 'enterprise']
     ZRadioGroup,
     ZRadioButton
   },
-  middleware: ['teamOnly', 'perm'],
-  validate({ params }): boolean {
-    return ['gh', 'gl', 'bb'].includes(params.provider)
-  },
+  middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
     auth: {
       strict: true,

@@ -36,12 +36,10 @@ import { TeamMemberRoleChoices } from '~/types/types'
     ZTab
   },
   layout: 'dashboard',
-  validate({ params }): boolean {
-    return ['gh', 'gl', 'bb'].includes(params.provider)
-  },
   middleware: [
     'perm',
     'teamOnly',
+    'validateProvider',
     function ({ redirect, route, $config }: Context): void {
       if (route.name === 'provider-owner-settings') {
         const { provider, owner } = route.params

@@ -1,9 +1,4 @@
-window['_fs_debug'] = false
-window['_fs_host'] = 'fullstory.com'
-window['_fs_script'] = 'edge.fullstory.com/s/fs.js'
-window['_fs_org'] = 'R2ZKJ'
-window['_fs_namespace'] = 'FS'
-;(function (m, n, e, t, l, o, g, y) {
+function fullStoryInjection(m, n, e, t, l, o, g, y) {
   if (e in m) {
     if (m.console && m.console.log) {
       m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].')
@@ -65,4 +60,15 @@ window['_fs_namespace'] = 'FS'
       return g._w[y].apply(this, arguments)
     }
   g._v = '1.3.0'
-})(window, document, window['_fs_namespace'], 'script', 'user')
+}
+
+export default ({ $config }) => {
+  if (!$config.onPrem) {
+    window['_fs_debug'] = false
+    window['_fs_host'] = 'fullstory.com'
+    window['_fs_script'] = 'edge.fullstory.com/s/fs.js'
+    window['_fs_org'] = 'R2ZKJ'
+    window['_fs_namespace'] = 'FS'
+    fullStoryInjection(window, document, window['_fs_namespace'], 'script', 'user')
+  }
+}

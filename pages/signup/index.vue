@@ -18,7 +18,7 @@
               class="flex flex-col items-center mt-8 space-y-4 left-section__btn-group sm:mt-16 sm:items-start"
             >
               <a
-                v-for="opt in loginOptions.filter((opt) => opt.enabled)"
+                v-for="opt in loginOptions"
                 :key="opt.provider"
                 :href="buildUrl(opt.provider)"
                 class="flex items-center w-full left-section__btn"
@@ -138,49 +138,5 @@ const TESTIMONIALS: Testimonial[] = [
 })
 export default class SignUp extends mixins(AuthMixin) {
   public testimonials = TESTIMONIALS
-  async fetch(): Promise<void> {
-    await this.fetchAuthUrls()
-  }
-
-  buildUrl(provider: string): string {
-    if (provider in this.authUrls) {
-      const oldUrl = this.authUrls[provider]
-      const url = new URL(oldUrl)
-      if (this.nextParam) {
-        const redirectURI = url.searchParams.get('redirect_uri')
-        url.searchParams.set('redirect_uri', `${redirectURI}${this.nextParam}`)
-      }
-      return url.toString()
-    }
-    return ''
-  }
-
-  get nextParam(): string {
-    return 'next' in this.$route.query ? `?next=${this.$route.query.next}` : ''
-  }
-
-  private loginOptions = [
-    {
-      provider: 'github',
-      icon: 'github',
-      label: 'GitHub',
-      bg: 'bg-ink-200',
-      enabled: this.$config.githubEnabled
-    },
-    {
-      provider: 'gitlab',
-      icon: 'gitlab',
-      label: 'GitLab',
-      bg: 'bg-gitlab',
-      enabled: this.$config.gitlabEnabled
-    },
-    {
-      provider: 'bitbucket',
-      icon: 'bitbucket',
-      label: 'Bitbucket',
-      bg: 'bg-bitbucket',
-      enabled: this.$config.bitbucketEnabled
-    }
-  ]
 }
 </script>

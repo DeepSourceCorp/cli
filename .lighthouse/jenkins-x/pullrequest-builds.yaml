@@ -65,6 +65,13 @@ spec:
           workingDir: /workspace/source
         - image: gcr.io/kaniko-project/executor:debug
           name: container-build
+          resources:
+            requests:
+              memory: 3Gi
+              cpu: 3
+            limits:
+              memory: 3Gi
+              cpu: 3
           script: |
             #!/busybox/sh
             source .jx/variables.sh

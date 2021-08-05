@@ -191,11 +191,9 @@ const analyzerListStore = namespace('analyzer/list')
     AnalyzerTitleCard,
     AnalyzerCard
   },
-  middleware: ['perm'],
   meta: {
     auth: {
-      strict: true,
-      teamPerms: [TeamPerms.ONBOARD_ACCOUNT]
+      strict: true
     }
   }
 })

@@ -77,9 +77,7 @@ import { InviteMembersModal } from '@/components/Members'
     InviteMembersModal,
     ZModal
   },
-  validate({ params }): boolean {
-    return ['gh', 'gl', 'bb'].includes(params.provider)
-  },
+  middleware: ['validateProvider'],
   layout: 'dashboard'
 })
 export default class Members extends mixins(TeamDetailMixin) {

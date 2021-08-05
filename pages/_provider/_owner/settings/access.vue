@@ -73,10 +73,7 @@ import { TeamPerms } from '~/types/permTypes'
     ZButton,
     ZConfirm
   },
-  middleware: ['teamOnly', 'perm'],
-  validate({ params }): boolean {
-    return ['gh', 'gl', 'bb'].includes(params.provider)
-  },
+  middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
     auth: {
       strict: true,

@@ -71,7 +71,7 @@ import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import { MemberListItem, UpdateRoleModal, RemoveMemberModal } from '@/components/Members'
 import { ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
 
-import { Maybe, User, UserEdge } from '~/types/types'
+import { User } from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'
 
 @Component({
@@ -83,15 +83,12 @@ import { TeamPerms } from '~/types/permTypes'
     UpdateRoleModal,
     RemoveMemberModal
   },
-  middleware: ['teamOnly', 'perm'],
+  middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
     auth: {
       strict: true,
       teamPerms: [TeamPerms.MANAGE_TEAM_MEMEBERS]
     }
-  },
-  validate({ params }): boolean {
-    return ['gh', 'gl', 'bb'].includes(params.provider)
   },
   layout: 'dashboard'
 })

@@ -227,11 +227,9 @@ const ISSUE_TYPES: Record<string, Issue> = {
     ZCheckbox,
     ZCard
   },
-  middleware: ['perm'],
   meta: {
     auth: {
-      strict: true,
-      teamPerms: [TeamPerms.ONBOARD_ACCOUNT]
+      strict: true
     }
   }
 })

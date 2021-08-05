@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 space-y-4 max-w-3xl">
+  <div class="max-w-3xl p-4 space-y-4">
     <h2 class="text-lg">All Repositories</h2>
     <div class="space-y-2">
       <div class="flex space-x-2">
@@ -26,19 +26,19 @@
           >Activate new repository</z-button
         >
       </div>
-      <div class="text-vanilla-400 text-xs">
+      <div class="text-xs text-vanilla-400">
         Showing
         <z-menu direction="right" class="inline-block text-vanilla-100">
           <span
             slot="trigger"
-            class="bg-ink-200 text-vanilla-400 rounded-md flex px-1 items-center space-x-1"
+            class="flex items-center px-1 space-x-1 rounded-md bg-ink-200 text-vanilla-400"
           >
             {{ pageSize }}
             <z-icon icon="chevron-down" size="small"></z-icon>
           </span>
           <template slot="body">
             <div class="px-2 py-1 space-y-1">
-              <h6 class="uppercase text-xxs text-vanilla-400 font-semibold">
+              <h6 class="font-semibold uppercase text-xxs text-vanilla-400">
                 Select Repos to show
               </h6>
               <div class="grid grid-cols-3 gap-2">
@@ -77,7 +77,7 @@
       >
       </repo-card>
     </transition-group>
-    <div class="space-y-2 h-64 flex items-center justify-center" v-else>No repositories</div>
+    <div class="flex items-center justify-center h-64 space-y-2" v-else>No repositories</div>
     <z-pagination
       class="flex justify-center"
       v-if="pageCount > 1"
@@ -94,7 +94,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Watch, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { ZInput, ZButton, ZIcon, ZMenu, ZMenuItem, ZPagination } from '@deepsourcelabs/zeal'
 import { RepoCard, AddRepoModal } from '@/components/AddRepo'
 
@@ -115,9 +115,7 @@ import { TeamPerms } from '~/types/permTypes'
     ZPagination,
     AddRepoModal
   },
-  validate({ params }): boolean {
-    return ['gh', 'gl', 'bb'].includes(params.provider)
-  },
+  middleware: ['validateProvider'],
   layout: 'dashboard'
 })
 export default class AllRepos extends mixins(ActiveUserMixin, RepoListMixin) {

@@ -16,18 +16,16 @@ declare global {
 }
 
 export default (context: Context, inject: Inject): void => {
-  inject(
-    'rudderTrack', (event: string, data: Record<string, unknown>) => {
-      try {
-        if (window.rudderanalytics) {
-          window.rudderanalytics.track(event, {
-            ...window.baseTrackingInfo,
-            ...data
-          })
-        }
-      } catch (err) {
-        // do nothing
+  inject('rudderTrack', (event: string, data: Record<string, unknown>) => {
+    try {
+      if (window.rudderanalytics && !context.$config.onPrem) {
+        window.rudderanalytics.track(event, {
+          ...window.baseTrackingInfo,
+          ...data
+        })
       }
+    } catch (err) {
+      // do nothing
     }
-  )
+  })
 }

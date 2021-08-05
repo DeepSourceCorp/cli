@@ -8,14 +8,7 @@ export default {
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon-dark.png' }],
-    script: [
-      {
-        src: 'https://assets.deepsource.io/bifrost/muscox.min.js',
-        async: true,
-        crossorigin: 'anonymous'
-      }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon-dark.png' }]
   },
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
@@ -38,9 +31,10 @@ export default {
     csrfClientUri: process.env.CSRF_CLIENT_URI,
     webSocketUri: process.env.WEB_SOCKET_URI,
     onPrem: process.env.ON_PREM,
-    githubEnabled: process.env.ON_PREM ? process.env.GITHUB_ENABLED : true,
     gitlabEnabled: process.env.ON_PREM ? process.env.GITLAB_ENABLED : true,
+    githubEnabled: process.env.ON_PREM ? process.env.GITHUB_ENABLED : true,
     bitbucketEnabled: process.env.ON_PREM ? process.env.BITBUCKET_ENABLED : true,
+    githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
     enableSaml: process.env.ENABLE_SAML,
     supportEmail: process.env.ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io'
   },
@@ -129,10 +123,17 @@ export default {
     extendRoutes(routes, resolve) {
       routes.push({
         name: 'github',
-        path: '/accounts/github/login/callback/bifrost', // <--- change this
+        path: '/accounts/github/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
         meta: { provider: 'github' }
+      })
+      routes.push({
+        name: 'github',
+        path: '/accounts/github-enterprise/login/callback/bifrost',
+        component: resolve(__dirname, 'pages/auth/-index.vue'),
+        chunkName: 'pages/auth',
+        meta: { provider: 'github-enterprise' }
       })
       routes.push({
         name: 'bitbucket',

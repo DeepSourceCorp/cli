@@ -691,6 +691,19 @@ type GetUpgradeCodeQualitySubscriptionPlanInfoPayload {
   clientMutationId: String
 }
 
+input GithubEnterpriseInstallationLandingInput {
+  queryParams: GenericScalar
+  clientMutationId: String
+}
+
+type GithubEnterpriseInstallationLandingPayload {
+  message: String
+  nextAction: NextActionChoice
+  vcsProvider: VCSProviderChoices
+  login: String
+  clientMutationId: String
+}
+
 input GithubInstallationLandingInput {
   queryParams: GenericScalar
   clientMutationId: String
@@ -899,7 +912,7 @@ type Mutation {
   logout(input: LogOutInput!): LogOutPayload
   switchToAsgard(input: SwitchToAsgardInput!): SwitchToAsgardPayload
   verifyToken(token: String): Verify
-  refreshToken(refreshToken: String): Refresh
+  refreshToken(refreshToken: String): RefreshToken
   toggleRepositoryActivation(input: ToggleRepositoryActivationInput!): ToggleRepositoryActivationPayload
   updateRepositorySettings(input: UpdateRepositorySettingsInput!): UpdateRepositorySettingsPayload
   updateOwnerSettings(input: UpdateOwnerSettingsInput!): UpdateOwnerSettingsPayload
@@ -950,6 +963,7 @@ type Mutation {
   updateBookmarkedIssue(input: UpdateBookmarkedIssueInput!): UpdateBookmarkedIssuePayload
   triggerAdhocRun(input: TriggerAdHocRunInput!): TriggerAdHocRunPayload
   installation(input: GithubInstallationLandingInput!): GithubInstallationLandingPayload
+  gheInstallationLanding(input: GithubEnterpriseInstallationLandingInput!): GithubEnterpriseInstallationLandingPayload
   bitbucketInstallationLanding(input: BitbucketInstallationLandingInput!): BitbucketInstallationLandingPayload
   gitlabInstallationLanding(input: GitlabInstallationLandingInput!): GitlabInstallationLandingPayload
   updateStarredRepository(input: UpdateStarredRepositoryInput!): UpdateStarredRepositoryPayload
@@ -1042,8 +1056,9 @@ type OwnerSetting implements MaskPrimaryKeyNode {
 
 enum OwnerVcsProvider {
   GH
-  BB
   GL
+  BB
+  GHE
 }
 
 type PageInfo {
@@ -1076,7 +1091,7 @@ type Query {
   node(id: ID!): MaskPrimaryKeyNode
 }
 
-type Refresh {
+type RefreshToken {
   payload: GenericScalar!
   refreshExpiresIn: Int!
   token: String!
@@ -2073,6 +2088,7 @@ type User implements MaskPrimaryKeyNode {
   preferredTechnologies(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
+  IsBetaTester: Boolean!
   socialAuth(offset: Int, before: String, after: String, first: Int, last: Int, uid: String, uid_In: [String], provider: String, provider_In: [String]): SocialNodeConnection!
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
@@ -2094,6 +2110,7 @@ type User implements MaskPrimaryKeyNode {
   gitlabAccounts: [GenericScalar]
   isAsgardian: Boolean
   missiveUserHash: String
+  isBetaTester: Boolean
 }
 
 type UserConnection {
@@ -2128,6 +2145,7 @@ type UserPreferenceEdge {
 
 enum VCSProviderChoices {
   GITHUB
+  GITHUB_ENTERPRISE
   BITBUCKET
   GITLAB
 }

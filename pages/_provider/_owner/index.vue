@@ -47,10 +47,7 @@ interface SetupStep {
     OwnerIssuesGraph,
     OwnerAutofixGraph
   },
-  validate({ params }): boolean {
-    return ['gh', 'gl', 'bb'].includes(params.provider)
-  },
-  middleware: ['perm'],
+  middleware: ['validateProvider', 'perm'],
   meta: {
     auth: {
       teamPerms: [TeamPerms.VIEW_TEAM_HOME]

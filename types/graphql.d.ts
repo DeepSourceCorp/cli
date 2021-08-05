@@ -98,6 +98,15 @@ declare module '*/bitbucketInstallationLandingInput.gql' {
 }
     
 
+declare module '*/githubEnterpriseInstallation.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/githubInstallationLandingInput.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -578,7 +587,7 @@ declare module '*/availableAnalyzers.gql' {
 declare module '*/base.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const BaseRepoQuery: DocumentNode;
 
   export default defaultDocument;
 }
@@ -722,7 +731,7 @@ declare module '*/group.gql' {
 declare module '*/auditLog.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const auditLogs: DocumentNode;
 
   export default defaultDocument;
 }

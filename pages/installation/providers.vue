@@ -6,9 +6,9 @@
     <p class="text-vanilla-400 text-base mt-4">Connect your team or personal workspace.</p>
     <div class="flex flex-col items-center mt-10 space-y-4">
       <a
-        v-for="opt in loginOptions.filter((opt) => opt.enabled)"
+        v-for="opt in loginOptions"
         :key="opt.provider"
-        :href="opt.link"
+        :href="loginUrls[opt.provider]"
         class="w-full flex items-center left-section__btn"
       >
         <button
@@ -20,7 +20,7 @@
         </button>
       </a>
     </div>
-    <p class="text-vanilla-100 text-base mt-6">
+    <p v-if="!$config.onPrem" class="text-vanilla-100 text-base mt-6">
       You have
       <span
         class="inline"
@@ -62,37 +62,11 @@ import AuthMixin from '~/mixins/authMixin'
   }
 })
 export default class InstallationProvider extends mixins(ContextMixin, ActiveUserMixin, AuthMixin) {
-  async fetch(): Promise<void> {
-    this.fetchAuthUrls()
-  }
-
-  get loginOptions(): Record<string, string | null | undefined>[] {
-    return [
-      {
-        provider: 'github',
-        icon: 'github',
-        label: 'Connect with GitHub',
-        bg: 'bg-ink-200',
-        enabled: this.$config.githubEnabled,
-        link: this.context.installationUrls?.github
-      },
-      {
-        provider: 'gitlab',
-        icon: 'gitlab',
-        label: this.hasGitlabAccounts ? 'Choose GitLab account' : 'Connect with GitLab',
-        bg: 'bg-gitlab',
-        enabled: this.$config.gitlabEnabled,
-        link: this.gitLabLink
-      },
-      {
-        provider: 'bitbucket',
-        icon: 'bitbucket',
-        label: 'Connect with Bitbucket',
-        bg: 'bg-bitbucket',
-        enabled: this.$config.bitbucketEnabled,
-        link: this.context.installationUrls?.bitbucket
-      }
-    ]
+  get loginUrls() {
+    return {
+      ...this.context.installationUrls,
+      gitlab: this.gitLabLink
+    }
   }
 
   get gitLabLink(): string {

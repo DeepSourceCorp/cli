@@ -13,7 +13,7 @@
       <h1 class="leading-tight text-3xl font-bold sm:text-left">Log in to DeepSource</h1>
       <div class="flex flex-col items-center mt-8 space-y-4 left-section__btn-group">
         <a
-          v-for="opt in loginOptions.filter((opt) => opt.enabled)"
+          v-for="opt in loginOptions"
           :key="opt.provider"
           :href="buildUrl(opt.provider)"
           class="w-full flex items-center left-section__btn"
@@ -37,87 +37,39 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
+import { Context } from '@nuxt/types'
 import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
 // Import State & Types
 import AuthMixin from '~/mixins/authMixin'
+import { AuthActionTypes } from '~/store/account/auth'
 
 @Component({
   components: {
     ZButton,
     ZIcon
   },
-  middleware: ['redirectToHome'],
+  middleware: [
+    'redirectToHome',
+    async function ({ redirect, route, $config, store }: Context): Promise<void> {
+      const { provider } = route.query
+      await store.dispatch(`account/auth/${AuthActionTypes.FETCH_AUTH_URLS}`)
+      const authUrls = store.state.account.auth.authUrls
+
+      const validProviders = [
+        ...($config.githubEnabled ? ['github'] : []),
+        ...($config.gitlabEnabled ? ['gitlab'] : []),
+        ...($config.bitbucketEnabled ? ['bitbucket'] : [])
+      ]
+
+      if (provider && typeof provider === 'string' && validProviders.includes(provider)) {
+        // 307 is temporary redirect
+        redirect(307, authUrls[provider])
+      }
+    }
+  ],
   head: {
     title: 'Login — DeepSource'
   }
 })
-export default class SignUp extends mixins(AuthMixin) {
-  async fetch(): Promise<void> {
-    await this.fetchAuthUrls()
-  }
-
-  async mounted() {
-    const { provider } = this.$route.query
-    await this.fetchAuthUrls()
-
-    // XXX: Ugly
-    switch (provider) {
-      case 'github':
-        var url = this.authUrls['github']
-        break
-      case 'bitbucket':
-        var url = this.authUrls['github']
-        window.location.href = url
-        break
-      case 'gitlab':
-        var url = this.authUrls['github']
-        window.location.href = this.authUrls['gitlab']
-        break
-      default:
-        break
-    }
-  }
-
-  buildUrl(provider: string): string {
-    if (provider in this.authUrls) {
-      const oldUrl = this.authUrls[provider]
-      const url = new URL(oldUrl)
-      if (this.nextParam) {
-        const redirectURI = url.searchParams.get('redirect_uri')
-        url.searchParams.set('redirect_uri', `${redirectURI}${this.nextParam}`)
-      }
-
-      return url.toString()
-    }
-    return ''
-  }
-
-  get nextParam(): string {
-    return 'next' in this.$route.query ? `?next=${this.$route.query.next}` : ''
-  }
-
-  private loginOptions = [
-    {
-      provider: 'github',
-      icon: 'github',
-      label: 'GitHub',
-      bg: 'bg-ink-200',
-      enabled: this.$config.githubEnabled
-    },
-    {
-      provider: 'gitlab',
-      icon: 'gitlab',
-      label: 'GitLab',
-      bg: 'bg-gitlab',
-      enabled: this.$config.gitlabEnabled
-    },
-    {
-      provider: 'bitbucket',
-      icon: 'bitbucket',
-      label: 'Bitbucket',
-      bg: 'bg-bitbucket',
-      enabled: this.$config.bitbucketEnabled
-    }
-  ]
-}
+export default class SignUp extends mixins(AuthMixin) {}
 </script>

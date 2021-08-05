@@ -46,7 +46,7 @@
                 bgcolor="ink-200"
                 v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
                 size="base"
-                :iconLeft="repository.vcsProvider.toLowerCase()"
+                :iconLeft="repoVCSIcon"
               ></z-tag>
             </a>
             <z-label
@@ -234,6 +234,11 @@ export default class RepoHeader extends mixins(
 
   get lastRun(): Maybe<Run> {
     return this.repository?.latestAnalysisRun || null
+  }
+
+  get repoVCSIcon(): string {
+    const provider = this.repository.vcsProvider.toLowerCase()
+    return ['github_enterprise', 'github-enterprise'].includes(provider) ? 'github' : provider
   }
 
   async toggleStar(isStarred: boolean) {

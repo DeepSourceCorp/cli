@@ -117,15 +117,12 @@ import { TeamPerms } from '~/types/permTypes'
     UpdateRoleModal,
     RemoveMemberModal
   },
-  middleware: ['teamOnly', 'perm'],
+  middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
     auth: {
       strict: true,
       teamPerms: [TeamPerms.MANAGE_TEAM_MEMEBERS]
     }
-  },
-  validate({ params }): boolean {
-    return ['gh', 'gl', 'bb'].includes(params.provider)
   },
   layout: 'dashboard'
 })
@@ -133,8 +130,8 @@ export default class Invited extends mixins(TeamDetailMixin) {
   private currentPage = 1
   private limit = 10
   private invitedEmailToCancel = ''
-  private showCancelConfirm = false
-  private inviteLoading = false
+  public showCancelConfirm = false
+  public inviteLoading = false
 
   async fetch(): Promise<void> {
     await this.fetchTeamMembers()

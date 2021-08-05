@@ -30,7 +30,7 @@
         <template slot="body">
           <z-menu-item>
             <a :href="vcsUrl" target="blank" rel="noreferrer noopener">
-              View {{ defaultBranch }} on GitHub
+              View {{ defaultBranch }} on {{ $providerMetaMap[repository.vcsProvider].text }}
             </a>
           </z-menu-item>
           <z-menu-item v-if="canChangeBranch" @click="showBranchUpdateModal = true">
