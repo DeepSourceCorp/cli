@@ -16,6 +16,14 @@ const (
 	ConfigFileName = "/config.toml"
 )
 
+var (
+	Host         string = "https://api.deepsource.io/graphql"
+	User         string
+	Token        string
+	RefreshToken string
+	TokenExpired bool = true
+)
+
 type CLIConfig struct {
 	User                  string
 	Token                 string
@@ -53,20 +61,29 @@ func (cfg CLIConfig) configPath() (string, error) {
 }
 
 //ReadFile reads the CLI config file.
-func (cfg *CLIConfig) ReadFile() (*CLIConfig, error) {
+func (cfg *CLIConfig) ReadFile() error {
 	path, err := cfg.configPath()
 	if err != nil {
-		return nil, err
+		return err
 	}
 	data, err := readFileFn(path)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	err = toml.Unmarshal(data, cfg)
 	if err != nil {
-		return nil, err
+		return err
 	}
-	return cfg, nil
+
+	cfg.populateData()
+	return nil
+}
+
+// Populate the config data into global variables
+func (cfg *CLIConfig) populateData() {
+	User = cfg.User
+	Token = cfg.Token
+	RefreshToken = cfg.RefreshToken
 }
 
 //WriteFile writes the CLI config to file.

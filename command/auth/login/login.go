@@ -3,8 +3,7 @@ package login
 import (
 	"fmt"
 
-	"github.com/deepsourcelabs/cli/global"
-	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	config "github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -14,7 +13,6 @@ type LoginOptions struct {
 	AuthTimedOut bool
 	TokenExpired bool
 	User         string
-	Config       cliConfig.ConfigData
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -27,8 +25,8 @@ func NewCmdLogin() *cobra.Command {
 
 			opts := LoginOptions{
 				AuthTimedOut: false,
-				TokenExpired: global.TokenExpired,
-				User:         global.User,
+				TokenExpired: config.TokenExpired,
+				User:         config.User,
 			}
 			err := opts.Run()
 			if err != nil {

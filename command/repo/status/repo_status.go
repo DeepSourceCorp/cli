@@ -4,8 +4,8 @@ import (
 	"context"
 	"strings"
 
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
-	"github.com/deepsourcelabs/cli/global"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -24,7 +24,7 @@ func NewCmdRepoStatus() *cobra.Command {
 
 	opts := RepoStatusOptions{
 		RepoArg:      "",
-		TokenExpired: global.TokenExpired,
+		TokenExpired: config.TokenExpired,
 		Owner:        "",
 		RepoName:     "",
 		VCSProvider:  "",

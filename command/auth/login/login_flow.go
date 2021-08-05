@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/cli/browser"
-	cliConfig "github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	"github.com/fatih/color"
@@ -74,7 +74,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 	}
 
 	// Convert incoming config into the ConfigData format
-	finalConfig := cliConfig.CLIConfig{
+	finalConfig := config.CLIConfig{
 		User:                  jwtData.Payload.Email,
 		Token:                 jwtData.Token,
 		RefreshToken:          jwtData.Refreshtoken,

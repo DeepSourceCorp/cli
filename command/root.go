@@ -1,6 +1,8 @@
 package command
 
 import (
+	"fmt"
+
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/config"
 	"github.com/deepsourcelabs/cli/command/issues"
@@ -8,7 +10,6 @@ import (
 	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/deepsourcelabs/cli/command/version"
 	cliConfig "github.com/deepsourcelabs/cli/config"
-	"github.com/deepsourcelabs/cli/global"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -42,22 +43,15 @@ func Execute() error {
 	var cfg cliConfig.CLIConfig
 
 	// Read the DeepSource config file
-	configData, err := cfg.ReadFile()
+	err := cfg.ReadFile()
 	if err != nil {
-		global.Token = ""
-		global.RefreshToken = ""
-		global.User = ""
-	} else {
-		// Populating the global package with the config data
-		global.Token = configData.Token
-		global.RefreshToken = configData.RefreshToken
-		global.User = configData.User
+		return fmt.Errorf("Error reading config file.")
 	}
 
 	// Check if token expired
-	if global.Token != "" {
-		global.TokenExpired = cfg.IsExpired()
-		if global.TokenExpired {
+	if cliConfig.Token != "" {
+		cliConfig.TokenExpired = cfg.IsExpired()
+		if cliConfig.TokenExpired {
 			pterm.Info.Println("The authentication has expired. Please refresh the token using `deepsource auth refresh`")
 		}
 	}

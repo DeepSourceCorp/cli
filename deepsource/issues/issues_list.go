@@ -1,45 +1,22 @@
 package issues
 
-type IssuesListResponseData struct {
-	Repository struct {
-		Issues struct {
-			Edges []struct {
-				Node struct {
-					Path          string `json:"path"`
-					Beginline     int    `json:"beginLine"`
-					Endline       int    `json:"endLine"`
-					Concreteissue struct {
-						Analyzer struct {
-							Shortcode string `json:"shortcode"`
-						} `json:"analyzer"`
-						Title     string `json:"title"`
-						Shortcode string `json:"shortcode"`
-					} `json:"concreteIssue"`
-				} `json:"node"`
-			} `json:"edges"`
-		} `json:"issues"`
-	} `json:"repository"`
+type Position struct {
+	BeginLine int
+	EndLine   int
 }
 
-type IssuesListFileResponseData struct {
-	Repository struct {
-		File struct {
-			Issues struct {
-				Edges []struct {
-					Node struct {
-						Path          string `json:"path"`
-						Beginline     int    `json:"beginLine"`
-						Endline       int    `json:"endLine"`
-						Concreteissue struct {
-							Analyzer struct {
-								Shortcode string `json:"shortcode"`
-							} `json:"analyzer"`
-							Title     string `json:"title"`
-							Shortcode string `json:"shortcode"`
-						} `json:"concreteIssue"`
-					} `json:"node"`
-				} `json:"edges"`
-			} `json:"issues"`
-		} `json:"file"`
-	} `json:"repository"`
+type Location struct {
+	Path     string
+	Position Position
+}
+
+type AnalyzerMeta struct {
+	Shortcode string
+}
+
+type Issue struct {
+	IssueText string
+	IssueCode string
+	Location  Location
+	Analyzer  AnalyzerMeta
 }

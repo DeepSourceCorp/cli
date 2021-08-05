@@ -1,7 +1,7 @@
 package status
 
 import (
-	"github.com/deepsourcelabs/cli/global"
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -21,8 +21,8 @@ func NewCmdStatus() *cobra.Command {
 		Args:  utils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			opts := AuthStatusOptions{
-				User:          global.User,
-				TokenExpired:  global.TokenExpired,
+				User:          config.User,
+				TokenExpired:  config.TokenExpired,
 				Authenticated: false,
 			}
 			opts.Run()

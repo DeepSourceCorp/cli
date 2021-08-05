@@ -23,7 +23,15 @@ const listAnalyzersQuery = `
 type AnalyzersRequest struct{}
 
 type AnalyzersResponse struct {
-	analyzers.AnalyzersQueryResponse
+	Analyzers struct {
+		Edges []struct {
+			Node struct {
+				Name       string `json:"name"`
+				Shortcode  string `json:"shortcode"`
+				MetaSchema string `json:"metaSchema"`
+			} `json:"node"`
+		} `json:"edges"`
+	} `json:"analyzers"`
 }
 
 // GraphQL client interface
@@ -32,12 +40,7 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]string, []string, []string, map[string]string, error) {
-
-	var analyzerNames []string
-	var analyzerShortcodes []string
-	var analyzerMeta []string
-	analyzersMap := make(map[string]string)
+func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]*analyzers.Analyzer, error) {
 
 	req := graphql.NewRequest(listAnalyzersQuery)
 
@@ -45,20 +48,17 @@ func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]string, 
 	req.Header.Set("Cache-Control", "no-cache")
 
 	// run it and capture the response
-	// var graphqlResponse map[string]interface{}
 	var respData AnalyzersResponse
 	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return analyzerNames, analyzerShortcodes, analyzerMeta, analyzersMap, err
+		return nil, err
 	}
 
-	// Copying data into Options struct
-	for _, edge := range respData.Analyzers.Edges {
-		analyzerNames = append(analyzerNames, edge.Node.Name)
-		analyzerShortcodes = append(analyzerShortcodes, edge.Node.Shortcode)
-		analyzerMeta = append(analyzerMeta, edge.Node.MetaSchema)
-		analyzersMap[edge.Node.Name] = edge.Node.Shortcode
+	var analyzersData []*analyzers.Analyzer
+	for index, edge := range respData.Analyzers.Edges {
+		analyzersData[index].Name = edge.Node.Name
+		analyzersData[index].Shortcode = edge.Node.Shortcode
+		analyzersData[index].MetaSchema = edge.Node.MetaSchema
 	}
 
-	return analyzerNames, analyzerShortcodes, analyzerMeta, analyzersMap, nil
-
+	return analyzersData, nil
 }

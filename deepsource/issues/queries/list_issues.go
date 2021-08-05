@@ -43,10 +43,27 @@ type IssuesListRequest struct {
 }
 
 type IssuesListResponse struct {
-	issues.IssuesListResponseData
+	Repository struct {
+		Issues struct {
+			Edges []struct {
+				Node struct {
+					Path          string `json:"path"`
+					Beginline     int    `json:"beginLine"`
+					Endline       int    `json:"endLine"`
+					Concreteissue struct {
+						Analyzer struct {
+							Shortcode string `json:"shortcode"`
+						} `json:"analyzer"`
+						Title     string `json:"title"`
+						Shortcode string `json:"shortcode"`
+					} `json:"concreteIssue"`
+				} `json:"node"`
+			} `json:"edges"`
+		} `json:"issues"`
+	} `json:"repository"`
 }
 
-func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) (*issues.IssuesListResponseData, error) {
+func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]*issues.Issue, error) {
 
 	req := graphql.NewRequest(fetchAllIssuesQuery)
 	req.Var("name", i.Params.RepoName)
@@ -60,11 +77,23 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) (*issues.I
 	req.Header.Add("Authorization", header)
 
 	// run it and capture the response
-	// var graphqlResponse map[string]interface{}
 	var respData IssuesListResponse
 	if err := client.GQL().Run(ctx, req, &respData); err != nil {
 		return nil, err
 	}
 
-	return &respData.IssuesListResponseData, nil
+	var issuesData []*issues.Issue
+	for index, edge := range respData.Repository.Issues.Edges {
+
+		issuesData[index].IssueText = edge.Node.Concreteissue.Title
+		issuesData[index].IssueCode = edge.Node.Concreteissue.Shortcode
+
+		issuesData[index].Location.Path = edge.Node.Path
+		issuesData[index].Location.Position.BeginLine = edge.Node.Beginline
+		issuesData[index].Location.Position.EndLine = edge.Node.Endline
+
+		issuesData[index].Analyzer.Shortcode = edge.Node.Concreteissue.Analyzer.Shortcode
+	}
+
+	return issuesData, nil
 }

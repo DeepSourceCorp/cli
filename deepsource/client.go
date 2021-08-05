@@ -4,14 +4,17 @@ package deepsource
 import (
 	"context"
 
-	analyzers "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
+	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/deepsource/analyzers"
+	analyzerQuery "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	authmut "github.com/deepsourcelabs/cli/deepsource/auth/mutations"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
-	repo "github.com/deepsourcelabs/cli/deepsource/repo/queries"
-	transformers "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
-	"github.com/deepsourcelabs/cli/global"
+	"github.com/deepsourcelabs/cli/deepsource/repo"
+	repoQuery "github.com/deepsourcelabs/cli/deepsource/repo/queries"
+	"github.com/deepsourcelabs/cli/deepsource/transformers"
+	transformerQuery "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
 	"github.com/deepsourcelabs/graphql"
 )
 
@@ -26,7 +29,7 @@ func (c Client) GQL() *graphql.Client {
 }
 
 func (c Client) GetToken() string {
-	return global.Token
+	return config.Token
 }
 
 func New() *Client {
@@ -72,30 +75,30 @@ func (c Client) RefreshAuthCreds(ctx context.Context, refreshToken string) (*aut
 	return res, nil
 }
 
-func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]string, []string, []string, map[string]string, error) {
+func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]*analyzers.Analyzer, error) {
 
-	req := analyzers.AnalyzersRequest{}
-	names, shortCodes, analyzersMeta, analyzersMap, err := req.Do(ctx, c)
+	req := analyzerQuery.AnalyzersRequest{}
+	res, err := req.Do(ctx, c)
 	if err != nil {
-		return nil, nil, nil, nil, err
+		return nil, err
 	}
-	return names, shortCodes, analyzersMeta, analyzersMap, nil
+	return res, nil
 }
 
-func (c Client) GetSupportedTransformers(ctx context.Context) ([]string, []string, map[string]string, error) {
+func (c Client) GetSupportedTransformers(ctx context.Context) ([]*transformers.Transformer, error) {
 
-	req := transformers.TransformersRequest{}
-	names, shortCodes, transformersMap, err := req.Do(ctx, c)
+	req := transformerQuery.TransformersRequest{}
+	res, err := req.Do(ctx, c)
 	if err != nil {
-		return nil, nil, nil, err
+		return nil, err
 	}
-	return names, shortCodes, transformersMap, nil
+	return res, nil
 }
 
-func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (bool, error) {
+func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (*repo.Repository, error) {
 
-	req := repo.RepoStatusRequest{
-		Params: repo.RepoStatusParams{
+	req := repoQuery.RepoStatusRequest{
+		Params: repoQuery.RepoStatusParams{
 			Owner:    owner,
 			RepoName: repoName,
 			Provider: provider,
@@ -104,12 +107,12 @@ func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider str
 
 	res, err := req.Do(ctx, c)
 	if err != nil {
-		return false, err
+		return nil, err
 	}
 	return res, nil
 }
 
-func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string, limit int) (*issues.IssuesListResponseData, error) {
+func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string, limit int) ([]*issues.Issue, error) {
 
 	req := issuesQuery.IssuesListRequest{
 		Params: issuesQuery.IssuesListParams{
@@ -127,7 +130,7 @@ func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string,
 	return res, nil
 }
 
-func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string, limit int) (*issues.IssuesListFileResponseData, error) {
+func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string, limit int) ([]*issues.Issue, error) {
 
 	req := issuesQuery.FileIssuesListRequest{
 		Params: issuesQuery.FileIssuesListParams{

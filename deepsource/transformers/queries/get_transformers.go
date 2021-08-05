@@ -22,7 +22,14 @@ const listTransformersQuery = `
 type TransformersRequest struct{}
 
 type TransformersResponse struct {
-	transformers.TransformersQueryResponse
+	Transformers struct {
+		Edges []struct {
+			Node struct {
+				Name      string `json:"name"`
+				Shortcode string `json:"shortcode"`
+			} `json:"node"`
+		} `json:"edges"`
+	} `json:"transformers"`
 }
 
 // GraphQL client interface
@@ -31,11 +38,7 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]string, []string, map[string]string, error) {
-
-	var transformerNames []string
-	var transformerShortcodes []string
-	transformerMap := make(map[string]string)
+func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]*transformers.Transformer, error) {
 
 	req := graphql.NewRequest(listTransformersQuery)
 
@@ -43,17 +46,16 @@ func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]strin
 	req.Header.Set("Cache-Control", "no-cache")
 
 	// run it and capture the response
-	// var graphqlResponse map[string]interface{}
 	var respData TransformersResponse
 	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return transformerNames, transformerShortcodes, transformerMap, err
+		return nil, err
 	}
 
-	for _, edge := range respData.Transformers.Edges {
-		transformerNames = append(transformerNames, edge.Node.Name)
-		transformerShortcodes = append(transformerShortcodes, edge.Node.Shortcode)
-		transformerMap[edge.Node.Name] = edge.Node.Shortcode
+	var transformersData []*transformers.Transformer
+	for index, edge := range respData.Transformers.Edges {
+		transformersData[index].Name = edge.Node.Name
+		transformersData[index].Shortcode = edge.Node.Shortcode
 	}
 
-	return transformerNames, transformerShortcodes, transformerMap, nil
+	return transformersData, nil
 }

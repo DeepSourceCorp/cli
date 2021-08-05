@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/deepsource/repo"
 	"github.com/deepsourcelabs/graphql"
 )
 
@@ -35,7 +36,7 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (bool, error) {
+func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repo.Repository, error) {
 
 	req := graphql.NewRequest(repoStatusQuery)
 	header := fmt.Sprintf("JWT %s", client.GetToken())
@@ -48,15 +49,22 @@ func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (bool, err
 	req.Header.Set("Cache-Control", "no-cache")
 
 	// run it and capture the response
-	// var graphqlResponse map[string]interface{}
 	var respData RepoStatusResponse
 	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return false, err
+		return nil, err
 	}
+
+	var repositoryData *repo.Repository
+
+	repositoryData.Name = r.Params.RepoName
+	repositoryData.Owner = r.Params.Owner
+	repositoryData.Provider = r.Params.Provider
 
 	if respData.Repository.Isactivated {
-		return true, nil
+		repositoryData.Activated = true
+	} else {
+		repositoryData.Activated = false
 	}
 
-	return false, nil
+	return repositoryData, nil
 }

@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	cliConfig "github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
-	"github.com/deepsourcelabs/cli/global"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -20,8 +19,8 @@ type RefreshOptions struct {
 // NewCmdVersion returns the current version of cli being used
 func NewCmdRefresh() *cobra.Command {
 	opts := RefreshOptions{
-		Token:        global.Token,
-		RefreshToken: global.RefreshToken,
+		Token:        config.Token,
+		RefreshToken: config.RefreshToken,
 	}
 
 	cmd := &cobra.Command{
@@ -51,7 +50,7 @@ func (opts *RefreshOptions) Run() error {
 		}
 
 		// Convert incoming config into the ConfigData format
-		finalConfig := cliConfig.CLIConfig{
+		finalConfig := config.CLIConfig{
 			User:                  refreshedConfigData.Refreshtoken.Payload.Email,
 			Token:                 refreshedConfigData.Refreshtoken.Token,
 			RefreshToken:          refreshedConfigData.Refreshtoken.Refreshtoken,

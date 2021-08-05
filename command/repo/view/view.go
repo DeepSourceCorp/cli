@@ -6,8 +6,8 @@ import (
 	"strings"
 
 	"github.com/cli/browser"
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
-	"github.com/deepsourcelabs/cli/global"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -26,7 +26,7 @@ func NewCmdRepoView() *cobra.Command {
 
 	opts := RepoViewOptions{
 		RepoArg:      "",
-		TokenExpired: global.TokenExpired,
+		TokenExpired: config.TokenExpired,
 		Owner:        "",
 		RepoName:     "",
 		VCSProvider:  "",

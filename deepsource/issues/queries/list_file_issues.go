@@ -49,7 +49,26 @@ type FileIssuesListRequest struct {
 
 // Response struct
 type FileIssuesResponse struct {
-	issues.IssuesListFileResponseData
+	Repository struct {
+		File struct {
+			Issues struct {
+				Edges []struct {
+					Node struct {
+						Path          string `json:"path"`
+						Beginline     int    `json:"beginLine"`
+						Endline       int    `json:"endLine"`
+						Concreteissue struct {
+							Analyzer struct {
+								Shortcode string `json:"shortcode"`
+							} `json:"analyzer"`
+							Title     string `json:"title"`
+							Shortcode string `json:"shortcode"`
+						} `json:"concreteIssue"`
+					} `json:"node"`
+				} `json:"edges"`
+			} `json:"issues"`
+		} `json:"file"`
+	} `json:"repository"`
 }
 
 // GraphQL client interface
@@ -59,7 +78,7 @@ type IGQLClient interface {
 }
 
 // Function to execute the query
-func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) (*issues.IssuesListFileResponseData, error) {
+func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]*issues.Issue, error) {
 
 	req := graphql.NewRequest(fetchFileIssuesQuery)
 	req.Header.Set("Cache-Control", "no-cache")
@@ -76,11 +95,23 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) (*issu
 	req.Header.Add("Authorization", header)
 
 	// run it and capture the response
-	// var graphqlResponse map[string]interface{}
 	var respData FileIssuesResponse
 	if err := client.GQL().Run(ctx, req, &respData); err != nil {
-		return &respData.IssuesListFileResponseData, err
+		return nil, err
 	}
 
-	return &respData.IssuesListFileResponseData, nil
+	var issuesData []*issues.Issue
+	for index, edge := range respData.Repository.File.Issues.Edges {
+
+		issuesData[index].IssueText = edge.Node.Concreteissue.Title
+		issuesData[index].IssueCode = edge.Node.Concreteissue.Shortcode
+
+		issuesData[index].Location.Path = edge.Node.Path
+		issuesData[index].Location.Position.BeginLine = edge.Node.Beginline
+		issuesData[index].Location.Position.EndLine = edge.Node.Endline
+
+		issuesData[index].Analyzer.Shortcode = edge.Node.Concreteissue.Analyzer.Shortcode
+	}
+
+	return issuesData, nil
 }
