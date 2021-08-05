@@ -78,7 +78,7 @@ type IGQLClient interface {
 }
 
 // Function to execute the query
-func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]*issues.Issue, error) {
+func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.Issue, error) {
 
 	req := graphql.NewRequest(fetchFileIssuesQuery)
 	req.Header.Set("Cache-Control", "no-cache")
@@ -100,7 +100,7 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]*is
 		return nil, err
 	}
 
-	var issuesData []*issues.Issue
+	var issuesData []issues.Issue
 	for index, edge := range respData.Repository.File.Issues.Edges {
 
 		issuesData[index].IssueText = edge.Node.Concreteissue.Title

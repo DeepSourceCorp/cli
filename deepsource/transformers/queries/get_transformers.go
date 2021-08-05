@@ -38,7 +38,7 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]*transformers.Transformer, error) {
+func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]transformers.Transformer, error) {
 
 	req := graphql.NewRequest(listTransformersQuery)
 
@@ -51,7 +51,7 @@ func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]*tran
 		return nil, err
 	}
 
-	var transformersData []*transformers.Transformer
+    transformersData := make([]transformers.Transformer,len(respData.Transformers.Edges))
 	for index, edge := range respData.Transformers.Edges {
 		transformersData[index].Name = edge.Node.Name
 		transformersData[index].Shortcode = edge.Node.Shortcode

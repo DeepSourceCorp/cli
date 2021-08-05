@@ -19,7 +19,7 @@ type IssuesListOptions struct {
 	Owner       string
 	RepoName    string
 	VCSProvider string
-	issuesData  []*issues.Issue
+	issuesData  []issues.Issue
 	ptermTable  [][]string
 }
 
@@ -33,7 +33,7 @@ func NewCmdIssuesList() *cobra.Command {
 		Owner:       "",
 		RepoName:    "",
 		VCSProvider: "",
-		issuesData:  []*issues.Issue{},
+		issuesData:  []issues.Issue{},
 		ptermTable:  [][]string{},
 	}
 
@@ -63,7 +63,6 @@ func NewCmdIssuesList() *cobra.Command {
 
 // Execute the command
 func (opts *IssuesListOptions) Run() error {
-
 	var err error
 	// The current limit of querying issues at once is 100. If the limit passed by user is greater than 100, exit
 	// with an error message
@@ -73,14 +72,12 @@ func (opts *IssuesListOptions) Run() error {
 
 	// Checking if the user passed --repo/-r flag or not
 	if opts.RepoArg == "" {
-
 		// If no --repo flag, parse all the remotes of the cwd through the git config
 		err := opts.extractRepositoryRemotes()
 		if err != nil {
 			return fmt.Errorf("Error while fetching repository URL")
 		}
 	} else {
-
 		// If the user has passed the --repo flag
 		// Parse the repo URL (github.co/owner/reponame) in the argument passed by the user
 		repoData, err := utils.RepoArgumentResolver(opts.RepoArg)
@@ -92,14 +89,13 @@ func (opts *IssuesListOptions) Run() error {
 		opts.RepoName = repoData[2]
 	}
 
-	// Use the issue fetching SDK to fetch the list of issues
+	// Get the deepsource client for using the issue fetching SDK to fetch the list of issues
 	deepsource := deepsource.New()
 	ctx := context.Background()
 
 	// Case 1 : Fetch issues for a certain FileArg (filepath) passed by the user
 	// Example: `deepsource issues list api/hello.py`
 	if opts.FileArg != "" {
-
 		// SDK usage for fetching list of issues in a certain file passed by the user
 		opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg, opts.LimitArg)
 		if err != nil {
@@ -107,7 +103,6 @@ func (opts *IssuesListOptions) Run() error {
 		}
 		opts.showIssues(true)
 	} else {
-
 		// Case 2 : Fetch list of issues for the whole project
 		opts.issuesData, err = deepsource.GetIssues(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
 		if err != nil {
@@ -122,7 +117,6 @@ func (opts *IssuesListOptions) Run() error {
 // Parses the SDK response and formats the data in the form of a TAB separated table
 // and renders it using pterm
 func (opts *IssuesListOptions) showIssues(fileMode bool) {
-
 	var issueList []string
 	opts.ptermTable = make([][]string, len(opts.issuesData))
 	for index, issue := range opts.issuesData {
@@ -135,6 +129,7 @@ func (opts *IssuesListOptions) showIssues(fileMode bool) {
 		issueTitle := issue.IssueText
 
 		issueList = append(issueList, issueLocation, analyzerShortcode, issueCode, issueTitle)
+
 		opts.ptermTable[index] = issueList
 		issueList = nil
 	}
@@ -145,7 +140,6 @@ func (opts *IssuesListOptions) showIssues(fileMode bool) {
 // Extracts various remotes (origin/upstream etc.) present in a certain repository's .git config file
 // Helps in deciding the repo for which issues have to be listed
 func (opts *IssuesListOptions) extractRepositoryRemotes() error {
-
 	remotesData, err := utils.ListRemotes()
 	if err != nil {
 		if strings.Contains(err.Error(), "exit status 128") {

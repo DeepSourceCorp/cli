@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/deepsourcelabs/cli/deepsource/analyzers"
+	"github.com/deepsourcelabs/cli/deepsource/transformers"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
@@ -17,10 +19,12 @@ type Options struct {
 	AnalyzerNames      []string
 	AnalyzerShortcodes []string
 	AnalyzersMap       map[string]string // Map for {analyzer name : shortcode}
+	AnalyzersData      []analyzers.Analyzer
 
 	TransformerNames      []string
 	TransformerShortcodes []string
 	TransformerMap        map[string]string // Map for {transformer name:shortcode}
+	TransformersData      []transformers.Transformer
 
 	GoImportRoot string // Mandatory meta for Go
 	JavaVersion  string // Mandatory meta for JAVA

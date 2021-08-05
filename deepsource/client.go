@@ -75,7 +75,7 @@ func (c Client) RefreshAuthCreds(ctx context.Context, refreshToken string) (*aut
 	return res, nil
 }
 
-func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]*analyzers.Analyzer, error) {
+func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]analyzers.Analyzer, error) {
 
 	req := analyzerQuery.AnalyzersRequest{}
 	res, err := req.Do(ctx, c)
@@ -85,7 +85,7 @@ func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]*analyzers.Analyze
 	return res, nil
 }
 
-func (c Client) GetSupportedTransformers(ctx context.Context) ([]*transformers.Transformer, error) {
+func (c Client) GetSupportedTransformers(ctx context.Context) ([]transformers.Transformer, error) {
 
 	req := transformerQuery.TransformersRequest{}
 	res, err := req.Do(ctx, c)
@@ -112,7 +112,7 @@ func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider str
 	return res, nil
 }
 
-func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string, limit int) ([]*issues.Issue, error) {
+func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string, limit int) ([]issues.Issue, error) {
 
 	req := issuesQuery.IssuesListRequest{
 		Params: issuesQuery.IssuesListParams{
@@ -130,7 +130,7 @@ func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string,
 	return res, nil
 }
 
-func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string, limit int) ([]*issues.Issue, error) {
+func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string, limit int) ([]issues.Issue, error) {
 
 	req := issuesQuery.FileIssuesListRequest{
 		Params: issuesQuery.FileIssuesListParams{

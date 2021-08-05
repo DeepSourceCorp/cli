@@ -12,6 +12,8 @@ import (
 
 	"github.com/deepsourcelabs/cli/configvalidator"
 	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/analyzers"
+	"github.com/deepsourcelabs/cli/deepsource/transformers"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -19,13 +21,16 @@ import (
 
 // Options holds the metadata.
 type Options struct {
-	AnalyzerNames         []string
-	AnalyzerShortcodes    []string
-	AnalyzersMap          map[string]string // Map for {analyzer name : shortcode}
-	AnalyzersMeta         []string
+	AnalyzerNames      []string
+	AnalyzerShortcodes []string
+	AnalyzersMap       map[string]string // Map for {analyzer name : shortcode}
+	AnalyzersMeta      []string
+	AnalyzersData      []analyzers.Analyzer
+
 	TransformerNames      []string
 	TransformerShortcodes []string
 	TransformerMap        map[string]string // Map for {transformer name:shortcode}
+	TransformersData      []transformers.Transformer
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -100,15 +105,16 @@ func (o *Options) Run() error {
 	o.AnalyzersMap = make(map[string]string)
 	o.TransformerMap = make(map[string]string)
 
-	o.AnalyzerNames, o.AnalyzerShortcodes, o.AnalyzersMeta, o.AnalyzersMap, err = deepsource.GetSupportedAnalyzers(ctx)
+	o.AnalyzersData, err = deepsource.GetSupportedAnalyzers(ctx)
 	if err != nil {
 		return err
 	}
 
-	o.TransformerNames, o.TransformerShortcodes, o.TransformerMap, err = deepsource.GetSupportedTransformers(ctx)
+	o.TransformersData, err = deepsource.GetSupportedTransformers(ctx)
 	if err != nil {
 		return err
 	}
+	o.parseSDKResponse()
 
 	// Creating an instance of ConfigValidator struct
 	var validator configvalidator.ConfigValidator
@@ -205,4 +211,22 @@ func printConfigErrors(errors []string) {
 // Handles printing the valid config output
 func printValidConfig() {
 	pterm.Success.Println("Config Valid")
+}
+
+func (o *Options) parseSDKResponse() {
+
+	o.AnalyzersMap = make(map[string]string)
+	o.TransformerMap = make(map[string]string)
+
+	for _, analyzer := range o.AnalyzersData {
+		o.AnalyzerNames = append(o.AnalyzerNames, analyzer.Name)
+		o.AnalyzerShortcodes = append(o.AnalyzerShortcodes, analyzer.Shortcode)
+		o.AnalyzersMap[analyzer.Name] = analyzer.Shortcode
+	}
+
+	for _, transformer := range o.TransformersData {
+		o.TransformerNames = append(o.TransformerNames, transformer.Name)
+		o.TransformerShortcodes = append(o.TransformerShortcodes, transformer.Shortcode)
+		o.TransformerMap[transformer.Name] = transformer.Shortcode
+	}
 }

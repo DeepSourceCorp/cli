@@ -63,7 +63,7 @@ type IssuesListResponse struct {
 	} `json:"repository"`
 }
 
-func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]*issues.Issue, error) {
+func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.Issue, error) {
 
 	req := graphql.NewRequest(fetchAllIssuesQuery)
 	req.Var("name", i.Params.RepoName)
@@ -82,7 +82,7 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]*issues
 		return nil, err
 	}
 
-	var issuesData []*issues.Issue
+	issuesData := make([]issues.Issue, len(respData.Repository.Issues.Edges))
 	for index, edge := range respData.Repository.Issues.Edges {
 
 		issuesData[index].IssueText = edge.Node.Concreteissue.Title

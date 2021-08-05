@@ -15,18 +15,17 @@ func (o *Options) collectUserInput() error {
 	deepsource := deepsource.New()
 	ctx := context.Background()
 
-	o.AnalyzersMap = make(map[string]string)
-	o.TransformerMap = make(map[string]string)
-
-	o.AnalyzerNames, o.AnalyzerShortcodes, _, o.AnalyzersMap, err = deepsource.GetSupportedAnalyzers(ctx)
+	o.AnalyzersData, err = deepsource.GetSupportedAnalyzers(ctx)
 	if err != nil {
 		return err
 	}
 
-	o.TransformerNames, o.TransformerShortcodes, o.TransformerMap, err = deepsource.GetSupportedTransformers(ctx)
+	o.TransformersData, err = deepsource.GetSupportedTransformers(ctx)
 	if err != nil {
 		return err
 	}
+
+	o.parseSDKResponse()
 
 	err = o.collectAnalyzerInput()
 	if err != nil {
@@ -49,4 +48,22 @@ func (o *Options) collectUserInput() error {
 	}
 
 	return nil
+}
+
+func (o *Options) parseSDKResponse() {
+
+	o.AnalyzersMap = make(map[string]string)
+	o.TransformerMap = make(map[string]string)
+
+	for _, analyzer := range o.AnalyzersData {
+		o.AnalyzerNames = append(o.AnalyzerNames, analyzer.Name)
+		o.AnalyzerShortcodes = append(o.AnalyzerShortcodes, analyzer.Shortcode)
+		o.AnalyzersMap[analyzer.Name] = analyzer.Shortcode
+	}
+
+	for _, transformer := range o.TransformersData {
+		o.TransformerNames = append(o.TransformerNames, transformer.Name)
+		o.TransformerShortcodes = append(o.TransformerShortcodes, transformer.Shortcode)
+		o.TransformerMap[transformer.Name] = transformer.Shortcode
+	}
 }

@@ -40,7 +40,7 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]*analyzers.Analyzer, error) {
+func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]analyzers.Analyzer, error) {
 
 	req := graphql.NewRequest(listAnalyzersQuery)
 
@@ -53,7 +53,7 @@ func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]*analyze
 		return nil, err
 	}
 
-	var analyzersData []*analyzers.Analyzer
+	analyzersData := make([]analyzers.Analyzer, len(respData.Analyzers.Edges))
 	for index, edge := range respData.Analyzers.Edges {
 		analyzersData[index].Name = edge.Node.Name
 		analyzersData[index].Shortcode = edge.Node.Shortcode

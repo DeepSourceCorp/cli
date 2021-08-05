@@ -49,9 +49,7 @@ func NewCmdRepoStatus() *cobra.Command {
 }
 
 func (opts *RepoStatusOptions) Run() error {
-
 	if opts.RepoArg == "" {
-
 		remotesData, err := utils.ListRemotes()
 		if err != nil {
 			if strings.Contains(err.Error(), "exit status 128") {
@@ -62,7 +60,6 @@ func (opts *RepoStatusOptions) Run() error {
 
 		// Condition: If only 1 remote, use it
 		// If more that one remote, give the user choice which one they want to choose
-
 		if len(remotesData) == 1 {
 			for _, value := range remotesData {
 				opts.Owner = value[0]
@@ -70,7 +67,6 @@ func (opts *RepoStatusOptions) Run() error {
 				opts.VCSProvider = value[2]
 			}
 		} else {
-
 			var promptOpts []string
 			for _, value := range remotesData {
 				promptOpts = append(promptOpts, value[3])
@@ -90,7 +86,6 @@ func (opts *RepoStatusOptions) Run() error {
 			}
 		}
 	} else {
-
 		// Parsing the arguments to --repo flag
 		repoData, err := utils.RepoArgumentResolver(opts.RepoArg)
 		if err != nil {
@@ -103,19 +98,17 @@ func (opts *RepoStatusOptions) Run() error {
 	}
 
 	// Send the isActivated graphQL request
-
 	deepsource := deepsource.New()
 	ctx := context.Background()
-	activationStatus, err := deepsource.GetRepoStatus(ctx, opts.Owner, opts.RepoName, opts.VCSProvider)
+	statusResponse, err := deepsource.GetRepoStatus(ctx, opts.Owner, opts.RepoName, opts.VCSProvider)
 	if err != nil {
 		return err
 	}
 
-	if activationStatus == true {
+	if statusResponse.Activated == true {
 		pterm.Info.Println("Analysis active on DeepSource (deepsource.io)")
 	} else {
 		pterm.Info.Println("DeepSource analysis is currently not actived on this repository.")
 	}
-
 	return nil
 }
