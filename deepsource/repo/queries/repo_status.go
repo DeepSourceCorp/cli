@@ -54,8 +54,12 @@ func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repo.Rep
 		return nil, err
 	}
 
-	var repositoryData *repo.Repository
-
+	repositoryData := repo.Repository{
+		Activated: false,
+		Name:      r.Params.RepoName,
+		Owner:     r.Params.Owner,
+		Provider:  r.Params.Provider,
+	}
 	repositoryData.Name = r.Params.RepoName
 	repositoryData.Owner = r.Params.Owner
 	repositoryData.Provider = r.Params.Provider
@@ -66,5 +70,5 @@ func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repo.Rep
 		repositoryData.Activated = false
 	}
 
-	return repositoryData, nil
+	return &repositoryData, nil
 }
