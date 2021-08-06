@@ -37,10 +37,10 @@ brews:
   - tap:
       owner: deepsourcelabs
       name: homebrew-cli
-      token: "{{ .Env.GITHUB_TOKEN }}"
+      token: "{{ .Env.DEEPSOURCE_BOT_TOKEN }}"
     commit_author:
-      name: spock1966
-      email: spock1966@deepsource.io
+      name: deepsourcebot
+      email: bot@deepsource.io
     homepage: "https://github.com/deepsourcelabs/cli"
     description: "Command line interface to DeepSource"
     license: "BSD 2-Clause \"Simplified\" License"
