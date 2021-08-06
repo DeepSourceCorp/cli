@@ -14,7 +14,6 @@ builds:
     goarch:
       - 386
       - amd64
-      - arm
       - arm64
     ldflags:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
@@ -32,3 +31,17 @@ changelog:
   filters:
     exclude:
     - '^tests:'
+
+brews:
+  - name: deepsource
+  - tap:
+      owner: deepsourcelabs
+      name: homebrew-cli
+      token: "{{ .Env.HOMEBREW_TOKEN }}"
+    commit_author:
+      name: deepsourcebot
+      email: bot@deepsource.io
+    homepage: "https://github.com/deepsourcelabs/cli"
+    description: "Command line interface to DeepSource"
+    license: "BSD 2-Clause Simplified License"
+    skip_upload: auto
