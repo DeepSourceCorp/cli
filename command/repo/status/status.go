@@ -65,7 +65,7 @@ func (opts *RepoStatusOptions) Run() error {
 	}
 
 	// Check response and show corresponding output
-	if statusResponse.Activated == true {
+	if statusResponse.Activated {
 		pterm.Info.Println("Analysis active on DeepSource (deepsource.io)")
 	} else {
 		pterm.Info.Println("DeepSource analysis is currently not actived on this repository.")

@@ -58,7 +58,7 @@ func (o *Options) collectTestPatterns() error {
 // Single utility function to help in inputting test as well as exclude patterns
 // Keeps asking user for pattern and then confirms if they want to add more patterns
 // Exits when user enters No (n/N)
-func (o *Options) inputFilePatterns(field string, msg string, helpMsg string) error {
+func (o *Options) inputFilePatterns(field, msg, helpMsg string) error {
 	// Infinite loop to keep running until user wants to stop inputting
 	for {
 		var filePattern string
@@ -93,7 +93,7 @@ func (o *Options) inputFilePatterns(field string, msg string, helpMsg string) er
 		if err != nil {
 			return err
 		}
-		if response == false {
+		if !response {
 			break
 		}
 	}

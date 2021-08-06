@@ -34,7 +34,7 @@ func (opts *AuthStatusOptions) Run() {
 	// Check if the user is logged in
 	if opts.Token != "" {
 		// Check if the token has already expired
-		if opts.TokenExpired == false {
+		if !opts.TokenExpired {
 			pterm.Info.Printf("Logged in to DeepSource (deepsource.io) as %s\n", opts.User)
 		} else {
 			pterm.Info.Println("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")

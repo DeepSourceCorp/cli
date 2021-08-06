@@ -130,10 +130,10 @@ func RepoArgumentResolver(arg string) ([]string, error) {
 	switch argComponents[0] {
 	case "gh", "github.com":
 		argComponents[0] = "GITHUB"
-		break
+
 	case "gl", "gitlab.com":
 		argComponents[0] = "GITLAB"
-		break
+
 	case "bb", "bitbucket.com":
 		argComponents[0] = "BITBUCKET"
 	default:
