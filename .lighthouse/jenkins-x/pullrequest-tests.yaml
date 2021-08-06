@@ -62,7 +62,7 @@ spec:
             jx gitops variables
             jx gitops pr variables
           workingDir: /workspace/source
-        - image: node:14.17.4-alpine
+        - image: node:14.8-alpine
           name: run-tests
           script: |
             #!/bin/sh

@@ -20,7 +20,7 @@ function getPermsToCheck(
   const teamPermsArray: Array<TeamPerms[]> = []
 
   // we add them to a sinle array and return it to the main function for testing
-  route.meta?.forEach((meta: { auth?: { repoPerms: RepoPerms[]; teamPerms: TeamPerms[] } }) => {
+  route.meta.forEach((meta: { auth?: { repoPerms: RepoPerms[]; teamPerms: TeamPerms[] } }) => {
     if (meta?.auth?.repoPerms && Array.isArray(meta.auth.repoPerms)) {
       repoPermsArray.push(meta.auth.repoPerms)
     }

@@ -1,4 +1,4 @@
-FROM node:14.17-alpine as builder
+FROM node:14.8-alpine as builder
 
 ARG DISABLE_SENTRY
 ARG ZEAL_SECRET
