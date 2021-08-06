@@ -32,3 +32,15 @@ changelog:
   filters:
     exclude:
     - '^tests:'
+
+brews:
+  - tap:
+      owner: deepsourcelabs
+      name: homebrew-deepsource
+    commit_author:
+      name: spock1966
+      email: spock1966@deepsource.io
+    homepage: "https://github.com/deepsourcelabs/cli"
+    description: "Command line interface to DeepSource"
+    license: "BSD 2-Clause \"Simplified\" License"
+    skip_upload: auto
