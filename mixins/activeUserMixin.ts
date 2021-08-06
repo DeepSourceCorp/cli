@@ -69,7 +69,9 @@ export default class ActiveUserMixin extends Vue {
   }) => Promise<void>
 
   @activeUserStore.Action(ActiveUserActions.UPDATE_DEFAULT_CONTEXT)
-  updateDefaultContextAPI: (args: { contextOwnerId: string }) => {
+  updateDefaultContextAPI: (args: {
+    contextOwnerId: string
+  }) => {
     data: { updateDefaultDashboardContextForUser: UpdateDefaultDashboardContextForUserPayload }
   }
 
@@ -88,11 +90,13 @@ export default class ActiveUserMixin extends Vue {
   }
 
   public logSentryErrorForUser(e: Error, context: string, params: Record<string, unknown>): void {
-    this.$sentry.withScope(() => {
-      this.$sentry.setUser({ email: this.viewer.email })
-      this.$sentry.setContext(context, params)
-      this.$sentry.captureException(e)
-    })
+    if (!this.$config.sentry?.disabled) {
+      this.$sentry.withScope(() => {
+        this.$sentry.setUser({ email: this.viewer.email })
+        this.$sentry.setContext(context, params)
+        this.$sentry.captureException(e)
+      })
+    }
   }
 
   async refetchUser(): Promise<void> {

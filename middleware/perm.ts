@@ -84,18 +84,27 @@ async function getTeamRole(route: Route, store: Store<any>): Promise<TeamMemberR
   }
 }
 
-const permsMiddlware: Middleware = async ({ store, route, error, $gateKeeper, $sentry }) => {
+const permsMiddlware: Middleware = async ({
+  store,
+  route,
+  error,
+  $gateKeeper,
+  $sentry,
+  $config
+}) => {
   const logSentry = (message: string, repoPerms: RepoPerms[][], teamPerms: TeamPerms[][]) => {
     const viewer = store.state.user.active.viewer as User
-    $sentry.withScope(() => {
-      $sentry.setUser({ email: viewer.email })
-      $sentry.setContext('Permission Meta', {
-        path: route.fullPath,
-        repoPerms: repoPerms.map((perm) => perm.join(', ')),
-        teamPerms: teamPerms.map((perm) => perm.join(', '))
+    if (!$config.sentry?.disabled && $sentry) {
+      $sentry.withScope(() => {
+        $sentry.setUser({ email: viewer.email })
+        $sentry.setContext('Permission Meta', {
+          path: route.fullPath,
+          repoPerms: repoPerms.map((perm) => perm.join(', ')),
+          teamPerms: teamPerms.map((perm) => perm.join(', '))
+        })
+        $sentry.captureMessage(message)
       })
-      $sentry.captureMessage(message)
-    })
+    }
   }
 
   if (route.name && passList.includes(route.name)) {

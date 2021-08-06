@@ -36,7 +36,17 @@ export default {
     bitbucketEnabled: process.env.ON_PREM ? process.env.BITBUCKET_ENABLED : true,
     githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
     enableSaml: process.env.ENABLE_SAML,
-    supportEmail: process.env.ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io'
+    supportEmail: process.env.ON_PREM
+      ? 'enterprise-support@deepsource.io'
+      : 'support@deepsource.io',
+    sentry: {
+      clientConfig: {
+        disabled: process.env.ON_PREM
+      },
+      serverConfig: {
+        disabled: process.env.ON_PREM
+      }
+    }
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -53,6 +63,15 @@ export default {
     '~/plugins/components/toasts.client.ts',
     '~/plugins/components/tooltip.ts'
   ],
+
+  sentry: {
+    publishRelease:
+      process.env.ON_PREM || process.env.DISABLE_SENTRY
+        ? false
+        : process.env.NODE_ENV !== 'development',
+    sourceMapStyle: 'hidden-source-map',
+    disabled: process.env.ON_PREM ? true : process.env.DISABLE_SENTRY
+  },
 
   extendPlugins(plugins) {
     const services = [
@@ -80,13 +99,6 @@ export default {
     name: 'pulse',
     color: '#f5f5f5',
     background: '#16181D'
-  },
-
-  sentry: {
-    // DSN will be fetched from process.env.SENTRY_DSN
-    publishRelease: process.env.DISABLE_SENTRY ? false : process.env.NODE_ENV !== 'development',
-    sourceMapStyle: 'hidden-source-map',
-    disabled: process.env.DISABLE_SENTRY || false
   },
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
