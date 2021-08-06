@@ -64,7 +64,7 @@ spec:
           image: gcr.io/kaniko-project/warmer:latest
           args:
             - --cache-dir=/kanikocache
-            - --image=node:14.8-alpine
+            - --image=node:14.17-alpine
             - --image=gcr.io/distroless/nodejs:14
           workingDir: /workspace/source
         - image: gcr.io/kaniko-project/executor:debug

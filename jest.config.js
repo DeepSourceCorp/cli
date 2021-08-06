@@ -18,7 +18,6 @@ module.exports = {
     '.*\\.(vue)$': 'vue-jest',
     ".*\\.(gql|graphql)$": "jest-transform-graphql"
   },
-  cacheDirectory: "/jestcache",
   collectCoverage: true,
   collectCoverageFrom: [
     '<rootDir>/components/**/*.vue',

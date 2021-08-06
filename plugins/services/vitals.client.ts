@@ -37,7 +37,7 @@ function vitalsInit(): void {
 }
 
 declare global {
-  interface Window {
+  interface window {
     doNotTrack: string
   }
 }

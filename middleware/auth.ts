@@ -37,7 +37,7 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
     const authPolicy: boolean[] = []
     const redirectToLoginPolicy: boolean[] = []
 
-    route.meta.forEach((meta: { auth: { strict?: boolean; redirectToLogin?: boolean } }) => {
+    route.meta?.forEach((meta: { auth: { strict?: boolean; redirectToLogin?: boolean } }) => {
       if (meta.auth && typeof meta.auth.strict !== undefined) {
         authPolicy.push(Boolean(meta.auth.strict))
       }
