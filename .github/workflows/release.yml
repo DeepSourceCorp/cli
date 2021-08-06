@@ -32,4 +32,5 @@ jobs:
           args: release --rm-dist --config ../../goreleaser.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DEEPSOURCE_BOT_TOKEN: ${{ secrets.DS_BOT_PAT }}
           DEEPSOURCE_CLI_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
