@@ -6,11 +6,9 @@ import (
 )
 
 // ==========
-// Analyzers Prompt
+// Analyzers Input Prompt
 // ==========
-
 func (o *Options) collectAnalyzerInput() error {
-
 	// Extracting languages and tools being used in the project for Analyzers
 	analyzerPrompt := &survey.MultiSelect{
 		Renderer: survey.Renderer{},
@@ -25,7 +23,6 @@ func (o *Options) collectAnalyzerInput() error {
 
 	// Extracting compulsary meta for Go and Java analyzers
 	for _, analyzer := range o.ActivatedAnalyzers {
-
 		// TODO: Remove this hard coding
 		if analyzer == "Go" {
 			msg := "Please input the \"import path\" for Go analyzer."
@@ -47,5 +44,4 @@ func (o *Options) collectAnalyzerInput() error {
 		}
 	}
 	return nil
-
 }

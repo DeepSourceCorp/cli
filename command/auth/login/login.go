@@ -32,39 +32,36 @@ func NewCmdLogin() *cobra.Command {
 			if err != nil {
 				return err
 			}
-			return nil
+			return err
 		},
 	}
 	return cmd
 }
 
-// Run executest the command.
+// Run executes the auth command
 func (opts *LoginOptions) Run() error {
-
 	// Before starting the login workflow, check here for two conditions:
-	// 1 - If the token has expired, display a message about it and re-authenticate user
-	// 2 - If the token has not expired,does the user want to re-authenticate?
+	// Condition 1 : If the token has expired, display a message about it and re-authenticate user
+	// Condition 2 : If the token has not expired,does the user want to re-authenticate?
 
 	// Checking for condition 1
 	if opts.TokenExpired == false {
-
 		// The user is already logged in, confirm re-authentication
 		msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", opts.User)
-		helpText := ""
-
-		response, err := utils.ConfirmFromUser(msg, helpText)
+		response, err := utils.ConfirmFromUser(msg, "")
 		if err != nil {
-			fmt.Println("Error in getting response. Please try again...")
-			return err
+			return fmt.Errorf("Error in fetching response. Please try again.")
 		}
 
-		// User doesn't want to re-authenticate
+		// If the response is No, it implies that the user doesn't want to re-authenticate
+		// In this case, just exit
 		if response == false {
 			return nil
 		}
 	}
 
-	// Login flow starts
+	// Condition 2
+	// `startLoginFlow` implements the Login flow
 	err := opts.startLoginFlow()
 	if err != nil {
 		return err

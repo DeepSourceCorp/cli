@@ -1,6 +1,7 @@
 package generate
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 
@@ -9,60 +10,32 @@ import (
 )
 
 // ==========
-// Exclude Patterns Prompt
+// Exclude Patterns Input Prompt
 // ==========
 func (o *Options) collectExcludePatterns() error {
-
 	excludePatternsMsg := "Would you like to add any exclude patterns?"
 	helpMsg := "Glob patterns of files that should not be analyzed such as auto-generated files, migrations, compatibility files."
 
+	// Confirm from the user if they want to add an exclude pattern
 	response, err := utils.ConfirmFromUser(excludePatternsMsg, helpMsg)
 	if err != nil {
 		return err
 	}
 
+	// If yes, keep entering patterns until they input n/N
 	if response == true {
-
-		// If yes, then start taking inputs for exclude patterns and keep confirming if
-		// the user wants to add more patterns. As soon as the user enters "n",exit.
-		for {
-			var excludePattern string
-			excludePatternsPrompt := &survey.Input{
-				Renderer: survey.Renderer{},
-				Message:  "Select exclude pattern",
-				Help:     helpMsg,
-				Suggest: func(toComplete string) []string {
-					return getMatchingFiles(toComplete)
-				},
-			}
-			err := survey.AskOne(excludePatternsPrompt, &excludePattern)
-			if err != nil {
-				return err
-			}
-
-			// Having taken the input, append the received pattern to Options struct
-			o.ExcludePatterns = append(o.ExcludePatterns, excludePattern)
-
-			// Confirm from the user if the user wants to add more exclude patterns
-			// Iterating this until user says no
-			response, err := utils.ConfirmFromUser("Add more exclude patterns?", "")
-			if err != nil {
-				return err
-			}
-			if response == false {
-				break
-			}
+		err := o.inputFilePatterns("exclude", "Select exclude pattern", helpMsg)
+		if err != nil {
+			return err
 		}
 	}
-
 	return nil
 }
 
 // ==========
-// Test Patterns Prompt
+// Test Patterns Input Prompt
 // ==========
 func (o *Options) collectTestPatterns() error {
-
 	testPatternsMsg := "Would you like to add any test patterns?"
 	helpMsg := "Glob patterns of the test files. This helps us reduce false positives."
 
@@ -72,53 +45,68 @@ func (o *Options) collectTestPatterns() error {
 		return err
 	}
 
+	// If yes, keep entering patterns until they input n/N
 	if response == true {
-
-		// If yes, then start taking inputs for test patterns and keep confirming if
-		// the user wants to add more patterns. As soon as the user enters "n",exit.
-		for {
-			var testPattern string
-			testPatternsPrompt := &survey.Input{
-				Renderer: survey.Renderer{},
-				Message:  "Select test pattern",
-				Default:  "",
-				Help:     helpMsg,
-				Suggest: func(toComplete string) []string {
-					return getMatchingFiles(toComplete)
-				},
-			}
-			err := survey.AskOne(testPatternsPrompt, &testPattern)
-			if err != nil {
-				return err
-			}
-
-			// Having taken the input of exclude_patterns, append it to the Options struct
-			o.TestPatterns = append(o.TestPatterns, testPattern)
-
-			// Confirm from the user if the user wants to add more test patterns
-			// Iterating this until user says no
-			response, err := utils.ConfirmFromUser("Add more test patterns?", "")
-			if err != nil {
-				return err
-			}
-
-			if response == false {
-				break
-			}
+		err := o.inputFilePatterns("test", "Select test pattern", helpMsg)
+		if err != nil {
+			return err
 		}
 	}
+	return nil
+}
 
+// Single utility function to help in inputting test as well as exclude patterns
+// Keeps asking user for pattern and then confirms if they want to add more patterns
+// Exits when user enters No (n/N)
+func (o *Options) inputFilePatterns(field string, msg string, helpMsg string) error {
+	// Infinite loop to keep running until user wants to stop inputting
+	for {
+		var filePattern string
+
+		// Input the pattern
+		filePatternsPrompt := &survey.Input{
+			Renderer: survey.Renderer{},
+			Message:  msg,
+			Default:  "",
+			Help:     helpMsg,
+			Suggest: func(toComplete string) []string {
+				return getMatchingFiles(toComplete)
+			},
+		}
+		err := survey.AskOne(filePatternsPrompt, &filePattern)
+		if err != nil {
+			return err
+		}
+
+		// Having taken the input of exclude_patterns/test_pattern, append it to the Options struct
+		if field == "test" {
+			o.TestPatterns = append(o.TestPatterns, filePattern)
+		} else {
+			o.ExcludePatterns = append(o.ExcludePatterns, filePattern)
+		}
+
+		// Confirm from the user if the user wants to add more patterns
+		// Iterating this until user says no
+		// Here field contains : "test"/"exclude" depending upon the invoking
+		confirmationMsg := fmt.Sprintf("Add more %s patterns?", field)
+		response, err := utils.ConfirmFromUser(confirmationMsg, "")
+		if err != nil {
+			return err
+		}
+		if response == false {
+			break
+		}
+	}
 	return nil
 }
 
 // Receives a filepath and returns matching dirs and files
 // Used for autocompleting input of "exclude_patterns" and "test_patterns"
 func getMatchingFiles(path string) []string {
-
 	// Geting matching dirs and files using glob
 	files, _ := filepath.Glob(path + "*")
-
 	cwd, _ := os.Getwd()
+
 	// Iterating over files and appending "/" to directories
 	for index, file := range files {
 		fileInfo, _ := os.Stat(filepath.Join(cwd, file))

@@ -8,12 +8,11 @@ import (
 )
 
 type AuthStatusOptions struct {
-	User          string
-	TokenExpired  bool
-	Authenticated bool
+	User         string
+	Token        string
+	TokenExpired bool
 }
 
-// NewCmdVersion returns the current version of cli being used
 func NewCmdStatus() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "status",
@@ -21,9 +20,9 @@ func NewCmdStatus() *cobra.Command {
 		Args:  utils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			opts := AuthStatusOptions{
-				User:          config.User,
-				TokenExpired:  config.TokenExpired,
-				Authenticated: false,
+				User:         config.User,
+				Token:        config.Token,
+				TokenExpired: config.TokenExpired,
 			}
 			opts.Run()
 		},
@@ -32,13 +31,15 @@ func NewCmdStatus() *cobra.Command {
 }
 
 func (opts *AuthStatusOptions) Run() {
-
-	if opts.TokenExpired == false {
-		opts.Authenticated = true
-
-		pterm.Success.Printf("Logged in to DeepSource (deepsource.io) as %s\n", opts.User)
+	// Check if the user is logged in
+	if opts.Token != "" {
+		// Check if the token has already expired
+		if opts.TokenExpired == false {
+			pterm.Info.Printf("Logged in to DeepSource (deepsource.io) as %s\n", opts.User)
+		} else {
+			pterm.Info.Println("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
+		}
 	} else {
-		pterm.Error.Println("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
+		pterm.Info.Println("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
 	}
-
 }

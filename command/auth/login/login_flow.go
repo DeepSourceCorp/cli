@@ -3,7 +3,6 @@ package login
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/cli/browser"
@@ -11,17 +10,14 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	"github.com/fatih/color"
-	"github.com/pterm/pterm"
 )
 
 func (opts *LoginOptions) startLoginFlow() error {
-
+	// Fetching DeepSource client in order to interact with SDK
 	deepsource := deepsource.New()
 	ctx := context.Background()
 
 	// Send a mutation to register device and get the device code
-	// deviceCode, userCode, verificationURI, expiresIn, interval, err := deepsource.RegisterDevice(ctx)
-
 	res, err := deepsource.RegisterDevice(ctx)
 	if err != nil {
 		return err
@@ -34,32 +30,31 @@ func (opts *LoginOptions) startLoginFlow() error {
 	c.Printf("Press enter to open deepsource.io in your browser...")
 	fmt.Scanln()
 
-	err = browser.OpenURL("https://deepsource.io/cli/auth")
+	err = browser.OpenURL(res.VerificationURIComplete)
 	if err != nil {
 		return err
 	}
 
-	// // Keep polling the mutation at a certain interval till "expiresIn"
+	// Keep polling the mutation at a certain interval till the expiry timeperiod
 	ticker := time.NewTicker(time.Duration(res.Interval) * time.Second)
 	pollStartTime := time.Now()
 	var jwtData *auth.JWT
 
-	// Polling for JWT
+	// Polling for fetching JWT
 	func() {
 		for {
 			select {
 			case <-ticker.C:
-				// do stuff
+				// Fetch JWT
 				jwtData, err = deepsource.Login(ctx, res.Code)
 				if err == nil {
 					opts.AuthTimedOut = false
 					return
 				}
 
-				// Check auth polling timeout
+				// Check if polling timed-out
 				timeElapsed := time.Since(pollStartTime)
 				if timeElapsed >= time.Duration(res.ExpiresIn)*time.Second {
-					log.Println("Timeout")
 					opts.AuthTimedOut = true
 					return
 				}
@@ -67,13 +62,13 @@ func (opts *LoginOptions) startLoginFlow() error {
 		}
 	}()
 
-	// Check if its a success poll or the auth timed out
+	// Check if it was a success poll or the Auth timed out
 	if opts.AuthTimedOut {
-		pterm.Error.Println("Authentication timed out. Exiting...")
 		return fmt.Errorf("Authentication timed out")
 	}
 
-	// Convert incoming config into the ConfigData format
+	// Convert incoming config into the local config format
+	// For storing the useful data for future reference and usage
 	finalConfig := config.CLIConfig{
 		User:                  jwtData.Payload.Email,
 		Token:                 jwtData.Token,
@@ -82,10 +77,10 @@ func (opts *LoginOptions) startLoginFlow() error {
 	}
 	finalConfig.SetTokenExpiry(jwtData.Payload.Exp)
 
+	// Having formatted the data, write it into a file in the local filesystem
 	err = finalConfig.WriteFile()
 	if err != nil {
-		pterm.Error.Println("Error in writing authentication data to a file. Exiting...")
-		return err
+		return fmt.Errorf("Error in writing authentication data to a file. Exiting...")
 	}
 
 	return nil

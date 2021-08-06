@@ -2,6 +2,7 @@ package validate
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -33,11 +34,9 @@ type Options struct {
 	TransformersData      []transformers.Transformer
 }
 
-// NewCmdVersion returns the current version of cli being used
 func NewCmdValidate() *cobra.Command {
 
 	o := Options{}
-
 	cmd := &cobra.Command{
 		Use:   "validate",
 		Short: "Validate DeepSource config",
@@ -55,27 +54,87 @@ func NewCmdValidate() *cobra.Command {
 
 // Run executes the command.
 func (o *Options) Run() error {
-
-	pterm.Info.Println("DeepSource config (.deepsource.toml) is always present in the root directory of the project.")
+	// Just an info
+	pterm.Info.Println("DeepSource config (.deepsource.toml) is mostly present in the root directory of the project.")
 	fmt.Println()
 
-	// Get current directory of user
-	cwd, err := os.Getwd()
+	// Extract the path of DeepSource config
+	configPath, err := extractDSConfigPath()
 	if err != nil {
-		fmt.Println("Error occured while fetching current working directory. Exiting...")
 		return err
 	}
 
+	// Read the config in the form of string and send it
+	content, err := ioutil.ReadFile(configPath)
+	if err != nil {
+		return errors.New("Error occured while reading DeepSource config file. Exiting...")
+	}
+
+	// Fetch the list of supported analyzers and transformers' data
+	// using the SDK
+	err = o.getAnalyzersAndTransformersData()
+	if err != nil {
+		return err
+	}
+
+	// Create an instance of ConfigValidator struct
+	var validator configvalidator.ConfigValidator
+	var result configvalidator.Result
+
+	// Copying data into the format accepted by configvalidator package
+	analyzersData := configvalidator.AnalyzersData{
+		AnalyzerNames:      o.AnalyzerNames,
+		AnalyzerShortcodes: o.AnalyzerShortcodes,
+		AnalyzerMap:        o.AnalyzersMap,
+		AnalyzesMeta:       o.AnalyzersMeta,
+	}
+
+	transformersData := configvalidator.TransformersData{
+		TransformerNames:      o.TransformerNames,
+		TransformerShortcodes: o.TransformerShortcodes,
+		TransformerMap:        o.TransformerMap,
+	}
+
+	// Send the config contents to get validated
+	result = validator.ValidateConfig(content, analyzersData, transformersData)
+
+	// Checking for all types of errors (due to viper/valid errors/no errors)
+	// and handling them
+	if result.ConfigReadError == true {
+		// handle printing viper error here
+		printViperError(content, result.Errors)
+	} else if result.Valid == false {
+		// handle printing other errors here
+		printConfigErrors(result.Errors)
+	} else {
+		printValidConfig()
+	}
+
+	return nil
+}
+
+// Extracts the path of DeepSource config (.deepsource.toml) in the user repo
+// Checks in the current working directory as well as the root directory
+// of the project
+func extractDSConfigPath() (string, error) {
+	var configPath string
+
+	// Get current working directory of user from where this command is run
+	cwd, err := os.Getwd()
+	if err != nil {
+		return "", errors.New("Error occured while fetching current working directory. Exiting...")
+	}
+
 	// Form the full path of cwd to search for .deepsource.toml
-	configPath := filepath.Join(cwd, ".deepsource.toml")
+	configPath = filepath.Join(cwd, ".deepsource.toml")
 
 	// Check if there is a deepsource.toml file here
 	if _, err = os.Stat(configPath); err != nil {
-
-		// Fetching top level directory
+		// Since, no .deepsource.toml in the cwd,
+		// fetching the top level directory
 		output, err := exec.Command("git", "rev-parse", "--show-toplevel").Output()
 		if err != nil {
-			return err
+			return "", err
 		}
 
 		// Removing trailing null characters
@@ -83,21 +142,20 @@ func (o *Options) Run() error {
 
 		// Check if the config exists on this path
 		if _, err = os.Stat(filepath.Join(path, ".deepsource.toml")); err != nil {
-			fmt.Println("Error occured while looking for DeepSource config file. Exiting...")
-			return err
+			return "", errors.New("Error occured while looking for DeepSource config file. Exiting...")
 		} else {
 			// If found, use this as configpath
 			configPath = filepath.Join(path, "/.deepsource.toml")
 		}
 	}
+	return configPath, nil
+}
 
-	// Read the config in the form of string and send it
-	content, err := ioutil.ReadFile(configPath)
-	if err != nil {
-		fmt.Println("Error occured while reading DeepSource config file. Exiting...")
-		return err
-	}
-
+// Get the list of all the supported analyzers and transformers with
+// their corresponding data like shortcode, metaschema etc.
+func (o *Options) getAnalyzersAndTransformersData() error {
+	var err error
+	// Fetch the client
 	deepsource := deepsource.New()
 	ctx := context.Background()
 
@@ -115,43 +173,11 @@ func (o *Options) Run() error {
 		return err
 	}
 	o.parseSDKResponse()
-
-	// Creating an instance of ConfigValidator struct
-	var validator configvalidator.ConfigValidator
-	var result configvalidator.Result
-
-	analyzersData := configvalidator.AnalyzersData{
-		AnalyzerNames:      o.AnalyzerNames,
-		AnalyzerShortcodes: o.AnalyzerShortcodes,
-		AnalyzerMap:        o.AnalyzersMap,
-		AnalyzesMeta:       o.AnalyzersMeta,
-	}
-
-	transformersData := configvalidator.TransformersData{
-		TransformerNames:      o.TransformerNames,
-		TransformerShortcodes: o.TransformerShortcodes,
-		TransformerMap:        o.TransformerMap,
-	}
-
-	// Send the config contents to get validated
-	result = validator.ValidateConfig(content, analyzersData, transformersData)
-
-	if result.ConfigReadError == true {
-		// handle printing viper error here
-		printViperError(content, result.Errors)
-	} else if result.Valid == false {
-		// handle printing other errors here
-		printConfigErrors(result.Errors)
-	} else {
-		printValidConfig()
-	}
-
 	return nil
 }
 
 // Handles printing the output when viper fails to read TOML file due to bad syntax
 func printViperError(fileContent []byte, errors []string) {
-
 	var errorString string
 	var errorLine int
 
@@ -160,7 +186,6 @@ func printViperError(fileContent []byte, errors []string) {
 	for _, error := range errors {
 		stripString1 := strings.Split(error, ": ")
 		errorString = stripString1[2]
-
 		errorLine, _ = strconv.Atoi(strings.Trim(strings.Split(stripString1[1], ", ")[0], "("))
 	}
 
@@ -200,9 +225,8 @@ func printViperError(fileContent []byte, errors []string) {
 	}
 }
 
-// Handles printing the errors caused due to invalid config
+// Handles printing the errors in the DeepSource config (.deepsource.toml)
 func printConfigErrors(errors []string) {
-
 	for _, error := range errors {
 		pterm.Error.WithShowLineNumber(false).Println(error)
 	}
@@ -213,8 +237,9 @@ func printValidConfig() {
 	pterm.Success.Println("Config Valid")
 }
 
+// Parses the SDK response of analyzers and transformers data into the format required
+// by this (validator) package
 func (o *Options) parseSDKResponse() {
-
 	o.AnalyzersMap = make(map[string]string)
 	o.TransformerMap = make(map[string]string)
 

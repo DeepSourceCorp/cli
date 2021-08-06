@@ -2,6 +2,7 @@ package status
 
 import (
 	"context"
+	"errors"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/config"
@@ -49,13 +50,41 @@ func NewCmdRepoStatus() *cobra.Command {
 }
 
 func (opts *RepoStatusOptions) Run() error {
+	// extract the repo URL whose status has to be found
+	err := opts.extractRepositoryRemotes()
+	if err != nil {
+		return err
+	}
+
+	// Use the SDK to find the activation status
+	deepsource := deepsource.New()
+	ctx := context.Background()
+	statusResponse, err := deepsource.GetRepoStatus(ctx, opts.Owner, opts.RepoName, opts.VCSProvider)
+	if err != nil {
+		return err
+	}
+
+	// Check response and show corresponding output
+	if statusResponse.Activated == true {
+		pterm.Info.Println("Analysis active on DeepSource (deepsource.io)")
+	} else {
+		pterm.Info.Println("DeepSource analysis is currently not actived on this repository.")
+	}
+	return nil
+}
+
+// Extracts various remotes (origin/upstream etc.) present in a certain repository's .git config file
+// Helps in deciding the repo for which activation status has to be found
+func (opts *RepoStatusOptions) extractRepositoryRemotes() error {
+	// Case: If the user didn't pass a certain repository for which they want to check the
+	// activation status
 	if opts.RepoArg == "" {
+		// List remotes
 		remotesData, err := utils.ListRemotes()
 		if err != nil {
 			if strings.Contains(err.Error(), "exit status 128") {
-				pterm.Info.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
+				return errors.New("This repository has not been initialized with git. Please initialize it with git using `git init`")
 			}
-			return err
 		}
 
 		// Condition: If only 1 remote, use it
@@ -72,11 +101,14 @@ func (opts *RepoStatusOptions) Run() error {
 				promptOpts = append(promptOpts, value[3])
 			}
 
+			// Show the option to user which repo's activation status they want to check
 			selectedRemote, err := utils.SelectFromOptions("Please select which repository you want to check?", "", promptOpts)
 			if err != nil {
 				return err
 			}
 
+			// Iterate over the list and match with the response to find the
+			// target remote
 			for _, value := range remotesData {
 				if value[3] == selectedRemote {
 					opts.Owner = value[0]
@@ -86,29 +118,17 @@ func (opts *RepoStatusOptions) Run() error {
 			}
 		}
 	} else {
+		// Case: The user passed the repository for which they want to check the
+		// activation status using the --repo flag
+
 		// Parsing the arguments to --repo flag
 		repoData, err := utils.RepoArgumentResolver(opts.RepoArg)
 		if err != nil {
 			return err
 		}
-
 		opts.VCSProvider = repoData[0]
 		opts.Owner = repoData[1]
 		opts.RepoName = repoData[2]
-	}
-
-	// Send the isActivated graphQL request
-	deepsource := deepsource.New()
-	ctx := context.Background()
-	statusResponse, err := deepsource.GetRepoStatus(ctx, opts.Owner, opts.RepoName, opts.VCSProvider)
-	if err != nil {
-		return err
-	}
-
-	if statusResponse.Activated == true {
-		pterm.Info.Println("Analysis active on DeepSource (deepsource.io)")
-	} else {
-		pterm.Info.Println("DeepSource analysis is currently not actived on this repository.")
 	}
 	return nil
 }

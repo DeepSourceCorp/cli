@@ -23,7 +23,6 @@ type IssuesListOptions struct {
 	ptermTable  [][]string
 }
 
-// NewCmdVersion returns the current version of cli being used
 func NewCmdIssuesList() *cobra.Command {
 
 	opts := IssuesListOptions{
@@ -63,7 +62,6 @@ func NewCmdIssuesList() *cobra.Command {
 
 // Execute the command
 func (opts *IssuesListOptions) Run() error {
-	var err error
 	// The current limit of querying issues at once is 100. If the limit passed by user is greater than 100, exit
 	// with an error message
 	if opts.LimitArg > 100 {
@@ -71,8 +69,8 @@ func (opts *IssuesListOptions) Run() error {
 	}
 
 	// Checking if the user passed --repo/-r flag or not
+	// If no --repo flag, parse all the remotes of the cwd through the git config
 	if opts.RepoArg == "" {
-		// If no --repo flag, parse all the remotes of the cwd through the git config
 		err := opts.extractRepositoryRemotes()
 		if err != nil {
 			return fmt.Errorf("Error while fetching repository URL")
@@ -89,52 +87,13 @@ func (opts *IssuesListOptions) Run() error {
 		opts.RepoName = repoData[2]
 	}
 
-	// Get the deepsource client for using the issue fetching SDK to fetch the list of issues
-	deepsource := deepsource.New()
-	ctx := context.Background()
-
-	// Case 1 : Fetch issues for a certain FileArg (filepath) passed by the user
-	// Example: `deepsource issues list api/hello.py`
-	if opts.FileArg != "" {
-		// SDK usage for fetching list of issues in a certain file passed by the user
-		opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg, opts.LimitArg)
-		if err != nil {
-			return err
-		}
-		opts.showIssues(true)
-	} else {
-		// Case 2 : Fetch list of issues for the whole project
-		opts.issuesData, err = deepsource.GetIssues(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
-		if err != nil {
-			return err
-		}
-		opts.showIssues(false)
+	// Fetch the list of issues using SDK based on user input
+	err := opts.getIssuesData()
+	if err != nil {
+		return err
 	}
 
 	return nil
-}
-
-// Parses the SDK response and formats the data in the form of a TAB separated table
-// and renders it using pterm
-func (opts *IssuesListOptions) showIssues(fileMode bool) {
-	var issueList []string
-	opts.ptermTable = make([][]string, len(opts.issuesData))
-	for index, issue := range opts.issuesData {
-
-		filePath := issue.Location.Path
-		beginLine := issue.Location.Position.BeginLine
-		issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
-		analyzerShortcode := issue.Analyzer.Shortcode
-		issueCode := issue.IssueCode
-		issueTitle := issue.IssueText
-
-		issueList = append(issueList, issueLocation, analyzerShortcode, issueCode, issueTitle)
-
-		opts.ptermTable[index] = issueList
-		issueList = nil
-	}
-
-	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()
 }
 
 // Extracts various remotes (origin/upstream etc.) present in a certain repository's .git config file
@@ -176,4 +135,56 @@ func (opts *IssuesListOptions) extractRepositoryRemotes() error {
 		}
 	}
 	return nil
+}
+
+// Gets the data about issues using the SDK based on the user input
+// i.e for a single file or for the whole project
+func (opts *IssuesListOptions) getIssuesData() error {
+	var err error
+
+	// Get the deepsource client for using the issue fetching SDK to fetch the list of issues
+	deepsource := deepsource.New()
+	ctx := context.Background()
+
+	// Case 1 : Fetch issues for a certain FileArg (filepath) passed by the user
+	// Example: `deepsource issues list api/hello.py`
+	if opts.FileArg != "" {
+		// SDK usage for fetching list of issues in a certain file passed by the user
+		opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg, opts.LimitArg)
+		if err != nil {
+			return err
+		}
+		opts.showIssues(true)
+	} else {
+		// Case 2 : Fetch list of issues for the whole project
+		opts.issuesData, err = deepsource.GetIssues(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
+		if err != nil {
+			return err
+		}
+		opts.showIssues(false)
+	}
+	return nil
+}
+
+// Parses the SDK response and formats the data in the form of a TAB separated table
+// and renders it using pterm
+func (opts *IssuesListOptions) showIssues(fileMode bool) {
+	var issueList []string
+	opts.ptermTable = make([][]string, len(opts.issuesData))
+	for index, issue := range opts.issuesData {
+
+		filePath := issue.Location.Path
+		beginLine := issue.Location.Position.BeginLine
+		issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
+		analyzerShortcode := issue.Analyzer.Shortcode
+		issueCode := issue.IssueCode
+		issueTitle := issue.IssueText
+
+		issueList = append(issueList, issueLocation, analyzerShortcode, issueCode, issueTitle)
+
+		opts.ptermTable[index] = issueList
+		issueList = nil
+	}
+
+	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()
 }

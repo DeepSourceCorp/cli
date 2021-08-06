@@ -9,7 +9,6 @@ import (
 
 type LogoutOptions struct{}
 
-// NewCmdVersion returns the current version of cli being used
 func NewCmdLogout() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",
@@ -29,13 +28,14 @@ func NewCmdLogout() *cobra.Command {
 
 func (opts *LogoutOptions) Run() error {
 
+	// Confirm from the user if they want to logout
 	logoutConfirmationMsg := "Are you sure you want to log out of DeepSource account?"
-	helpText := ""
-	response, err := utils.ConfirmFromUser(logoutConfirmationMsg, helpText)
+	response, err := utils.ConfirmFromUser(logoutConfirmationMsg, "")
 	if err != nil {
 		return err
 	}
 
+	// If response is true, delete the config file => logged out the user
 	if response == true {
 		cfg := config.CLIConfig{}
 		err := cfg.Delete()
