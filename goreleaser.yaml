@@ -37,7 +37,7 @@ brews:
   - name: deepsource
   - tap:
       owner: deepsourcelabs
-      name: homebrew-deepsource
+      name: homebrew-cli
     commit_author:
       name: spock1966
       email: spock1966@deepsource.io
