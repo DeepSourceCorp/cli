@@ -37,7 +37,6 @@ brews:
   - tap:
       owner: deepsourcelabs
       name: homebrew-cli
-      token: "{{ .Env.GITHUB_TOKEN }}"
     commit_author:
       name: deepsourcebot
       email: bot@deepsource.io
