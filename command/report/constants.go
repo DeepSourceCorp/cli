@@ -30,4 +30,5 @@ Documentation:
     https://deepsource.io/docs/cli#report
 `
 	reportGraphqlQuery = "mutation($input: CreateArtifactInput!) {\r\n  createArtifact(input: $input) {\r\n    ok\r\n    error\r\n  }\r\n}"
+	maxArtifactUploadSize = 20000000
 )
