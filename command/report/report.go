@@ -143,8 +143,8 @@ func (opts *ReportOptions) Run() int {
 			return 1
 		}
 
-		if fileStat.Size() > 5000000 {
-			fmt.Println("DeepSource | Error | Value file too large. Should be less than 5 Megabytes")
+		if fileStat.Size() > maxArtifactUploadSize {
+			fmt.Println("DeepSource | Error | Value file too large. Should be less than 20 Megabytes")
 			return 1
 		}
 
