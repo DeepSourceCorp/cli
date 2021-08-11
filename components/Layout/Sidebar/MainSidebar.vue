@@ -296,6 +296,9 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
     return false
   }
   get allowedAutoOnboard(): boolean {
+    if (!['gh', 'ghe'].includes(this.activeProvider)) {
+      return false
+    }
     if ('role' in this.activeDashboardContext) {
       const role = this.activeDashboardContext.role as TeamMemberRoleChoices
       return this.$gateKeeper.team(
@@ -329,18 +332,18 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
 
     if ('role' in this.activeDashboardContext) {
       const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return this.$gateKeeper.team(
-        [
-          TeamPerms.CHANGE_PLAN,
-          TeamPerms.UPDATE_SEATS,
-          TeamPerms.UPDATE_BILLING_DETAILS,
-          TeamPerms.MANAGE_TEAM_MEMEBERS,
-          TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
-          TeamPerms.DELETE_TEAM_ACCOUNT,
-          TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE,
-          TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE
-        ],
-        role
+      return (
+        this.$gateKeeper.team(
+          [
+            TeamPerms.CHANGE_PLAN,
+            TeamPerms.UPDATE_SEATS,
+            TeamPerms.UPDATE_BILLING_DETAILS,
+            TeamPerms.MANAGE_TEAM_MEMEBERS,
+            TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
+            TeamPerms.DELETE_TEAM_ACCOUNT
+          ],
+          role
+        ) || this.allowedAutoOnboard
       )
     }
 
