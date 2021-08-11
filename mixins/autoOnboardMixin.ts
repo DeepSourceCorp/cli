@@ -88,6 +88,9 @@ export default class AutoOnboardMixin extends Vue {
   @autoOnboard.Mutation(AutoOnboardMutations.SELECT_TEMPLATE_TO_ONBOARD)
   selectTemplateToOnboard: (template?: ConfigTemplate) => void
 
+  @autoOnboard.Mutation(AutoOnboardMutations.RESET_ONBOARDABLE_REPO_LIST)
+  resetOnboardableReposList: () => void
+
   @autoOnboard.Action(AutoOnboardActions.START_ONBOARDING)
   startOnboarding: (args: { shortcode: string; repoIds: string[] }) => Promise<AutoOnboardPayload>
 

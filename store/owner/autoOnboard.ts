@@ -40,6 +40,7 @@ export interface AutoOnboardState {
 
 export enum AutoOnboardMutations {
   SET_ONBOARDABLE_REPOS = 'setOnboardAbleRepos',
+  RESET_ONBOARDABLE_REPO_LIST = 'resetOnboardableReposList',
   SELECT_TEMPLATE_TO_ONBOARD = 'selectTemplateToOnboard',
   SET_CONFIG_TEMPLATE = 'setConfigTemplate',
   RESET_CONFIG_TEMPLATE = 'resetConfigTemplate',
@@ -50,11 +51,17 @@ export enum AutoOnboardMutations {
 export const mutations: MutationTree<AutoOnboardState> = {
   [AutoOnboardMutations.SET_ONBOARDABLE_REPOS]: (state, value: RepositoryConnection) => {
     state.hasMoreReposToOnboard = value.pageInfo.hasNextPage
-    state.onboardableRepositories = value.edges
-      .map((edge) => {
-        return edge?.node ? edge.node : null
-      })
-      .filter((node) => node) as Repository[]
+    state.onboardableRepositories = state.onboardableRepositories.concat(
+      value.edges
+        .map((edge) => {
+          return edge?.node ? edge.node : null
+        })
+        .filter((node) => node) as Repository[]
+    )
+  },
+  [AutoOnboardMutations.RESET_ONBOARDABLE_REPO_LIST]: (state) => {
+    state.hasMoreReposToOnboard = true
+    state.onboardableRepositories = []
   },
   [AutoOnboardMutations.SELECT_TEMPLATE_TO_ONBOARD]: (state, value: ConfigTemplate) => {
     state.selectedTemplate = value

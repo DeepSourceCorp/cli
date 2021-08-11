@@ -27,6 +27,13 @@
       </z-input>
     </div>
     <div class="overflow-scroll flex-grow px-5">
+      <template v-if="fetchingData">
+        <div
+          v-for="ii in 20"
+          :key="ii"
+          class="h-7 animate-pulse w-full rounded-md my-0.5 bg-ink-200 bg-opacity-50"
+        ></div>
+      </template>
       <template v-if="onboardableRepositories.length">
         <z-checkbox
           size="small"
@@ -58,7 +65,7 @@
           >Load more</z-button
         >
       </template>
-      <empty-state v-else>
+      <empty-state v-else-if="!fetchingData && searchCandidate">
         <template slot="title">
           <span class="text-base font-medium">
             Found no repositories matching name "{{ searchCandidate }}"
@@ -77,7 +84,7 @@
   </section>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import {
   ZInput,
   ZIcon,
@@ -108,11 +115,17 @@ export default class SelectReposToOnboard extends mixins(
   private searchCandidate = ''
   private onboardingRepos = false
   private selectAll = false
+  private fetchingData = false
   public selectedRepos: string[] = []
   public limit = 50
   public currentPage = 1
 
+  mounted() {
+    this.resetListConfig()
+  }
+
   async fetch(): Promise<void> {
+    this.fetchingData = true
     await this.fetchAutoOnboardableRepoList({
       login: this.activeOwner,
       provider: this.activeProvider,
@@ -121,14 +134,22 @@ export default class SelectReposToOnboard extends mixins(
       query: this.searchCandidate,
       refetch: true
     })
+    this.fetchingData = false
+  }
+
+  @Watch('activeOwner')
+  resetListConfig(): void {
+    this.currentPage = 1
+    this.resetOnboardableReposList()
   }
 
   async loadMore(): Promise<void> {
-    this.limit = this.limit + 50
+    this.currentPage = this.currentPage + 1
     await this.$fetch()
   }
 
   async search(): Promise<void> {
+    this.resetListConfig()
     await this.$fetch()
   }
 
