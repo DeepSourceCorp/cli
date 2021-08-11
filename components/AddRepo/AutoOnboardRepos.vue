@@ -2,7 +2,7 @@
   <z-tab-pane class="h-full flex flex-col">
     <template v-if="!loadingAutoOnboardData">
       <install-autofix-for-auto-onboard v-if="!owner.isAutofixEnabled" @refetch="refetch" />
-      <template v-else-if="hasTemplate">
+      <template v-else>
         <auto-onboarding-menu
           v-if="currentStage === stages.TOP_MENU"
           @startOnboarding="currentStage = stages.SELECT_TEMPLATE"
@@ -20,14 +20,6 @@
           @onboardingTriggered="onboardingTriggered"
         />
       </template>
-      <div class="grid place-content-center h-full" v-else>
-        <div class="text-center">
-          <h4 class="text-vanilla-400 text-base mb-5">No AutoOnbard templates found.</h4>
-          <nuxt-link :to="settingsLink">
-            <z-button size="small" icon="settings">Open AutoOnboard settings</z-button>
-          </nuxt-link>
-        </div>
-      </div>
     </template>
     <div
       v-else-if="currentStage === stages.SELECT_REPO"
@@ -169,20 +161,6 @@ export default class AutoOnboardRepos extends mixins(
   startOver() {
     this.selectTemplateToOnboard(undefined)
     this.currentStage = Stages.TOP_MENU
-  }
-
-  // if autofix app is not installed anywhere, ask them to install first
-  // block the tab for non github owners
-  // Enable tab and show install autofix app if not installed
-  // If there are no tempaltes, ask for a template
-  // If all done, continue
-  get hasTemplate(): boolean {
-    // this.owner.autoOnboardAvailbale
-    return this.configTemplateList.length > 0
-  }
-
-  get settingsLink(): string {
-    return ['', this.activeProvider, this.activeOwner, 'settings', 'auto-onboard'].join('/')
   }
 }
 </script>

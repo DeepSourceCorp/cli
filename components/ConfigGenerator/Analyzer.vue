@@ -57,7 +57,7 @@
           <template v-if="config.type == 'string'">
             <template v-if="config.enum && config.enum.length">
               <z-radio-group
-                :disabled="readOnly"
+                :readOnly="readOnly"
                 v-model="config.selected"
                 class="grid grid-cols-4 gap-2 -mb-2 text-sm"
               >
@@ -65,7 +65,7 @@
                   class="mb-2 mr-4"
                   v-for="option in config.enum"
                   :key="option"
-                  :disabled="readOnly"
+                  :readOnly="readOnly"
                   :value="option"
                   :label="config.labels ? config.labels[option] : option"
                 ></z-radio>
@@ -73,7 +73,8 @@
             </template>
             <template v-else>
               <z-input
-                :disabled="readOnly || (forTemplate && hasTemplate(config))"
+                :disabled="forTemplate && hasTemplate(config)"
+                :readOnly="readOnly && !(forTemplate && hasTemplate(config))"
                 v-tooltip="forTemplate ? 'This value will be added during runtime' : ''"
                 v-model="config.selected"
                 textSize="xs"
@@ -82,7 +83,7 @@
           </template>
           <template v-else-if="config.type == 'boolean'">
             <z-radio-group
-              :disabled="readOnly"
+              :readOnly="readOnly"
               :modelValue="`${Number(config.selected)}`"
               @change="(val) => (config.selected = Boolean(Number(val)))"
               class="grid grid-cols-8 gap-2 space-x-4 text-sm"
@@ -102,7 +103,7 @@
                 v-for="option in config.items.enum"
                 :key="option"
                 :label="config.labels ? config.labels[option] : option"
-                :disabled="readOnly"
+                :readOnly="readOnly"
                 :value="option"
                 :modelValue="
                   Array.isArray(config.selected) ? config.selected.includes(option) : false
@@ -113,7 +114,8 @@
             <div v-else>
               <z-input
                 :name="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
-                :disabled="readOnly || (forTemplate && hasTemplate(config))"
+                :disabled="forTemplate && hasTemplate(config)"
+                :readOnly="readOnly && !(forTemplate && hasTemplate(config))"
                 v-tooltip="
                   forTemplate && hasTemplate(config)
                     ? 'This value will automatically be filled during runtime'
@@ -126,7 +128,8 @@
           </template>
           <template v-else-if="config.type == 'integer'">
             <z-input
-              :disabled="readOnly || (forTemplate && hasTemplate(config))"
+              :disabled="forTemplate && hasTemplate(config)"
+              :readOnly="readOnly && !(forTemplate && hasTemplate(config))"
               v-tooltip="
                 forTemplate && hasTemplate(config)
                   ? 'This value will automatically be filled during runtime'
@@ -160,7 +163,7 @@
               <span>{{ transformer.name }}</span>
             </div>
             <z-checkbox
-              :disabled="readOnly"
+              :readOnly="readOnly"
               :value="transformer.shortcode"
               v-model="transformer.enabled"
             />

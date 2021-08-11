@@ -18,7 +18,7 @@
         class="p-2"
         :showBorder="false"
         backgroundColor="ink-400"
-        @debounceInput="$emit('search', searchCandidate)"
+        @debounceInput="search"
         placeholder="Search templates..."
       >
         <template slot="left">
@@ -52,6 +52,24 @@
           </template>
         </base-card>
       </template>
+      <div class="grid place-content-center h-full" v-else-if="searchCandidate">
+        <div class="text-center">
+          <h4 class="text-vanilla-400 text-base mb-5">
+            Found no repositories matching name "{{ searchCandidate }}"
+          </h4>
+        </div>
+      </div>
+      <div class="grid place-content-center h-full" v-else-if="!templatesLoading">
+        <div class="text-center">
+          <h4 class="text-vanilla-300 text-base">No AutoOnbard templates found.</h4>
+          <p class="text-vanilla-400 text-sm mb-5">
+            You can create new templates in the AutoOnboard settings.
+          </p>
+          <nuxt-link :to="settingsLink">
+            <z-button size="small" icon="settings">Open settings</z-button>
+          </nuxt-link>
+        </div>
+      </div>
     </div>
   </section>
 </template>
@@ -80,10 +98,19 @@ import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
   }
 })
 export default class SelectTemplate extends mixins(ActiveUserMixin, AutoOnboardMixin) {
-  public searchCandidate = ''
   // make this default
+  public searchCandidate = ''
   hasRunningAutoOnboards(): boolean {
     return false
+  }
+
+  search(newVal: string) {
+    this.searchCandidate = newVal
+    this.$emit('search', newVal)
+  }
+
+  get settingsLink(): string {
+    return ['', this.activeProvider, this.activeOwner, 'settings', 'auto-onboard'].join('/')
   }
 }
 </script>

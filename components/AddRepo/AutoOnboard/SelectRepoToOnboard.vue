@@ -61,8 +61,8 @@
       <empty-state v-else>
         <template slot="title">
           <span class="text-base font-medium">
-            Found no repositories matching name "{{ searchCandidate }}"</span
-          >
+            Found no repositories matching name "{{ searchCandidate }}"
+          </span>
         </template>
       </empty-state>
     </div>
