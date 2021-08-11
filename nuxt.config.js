@@ -41,10 +41,10 @@ export default {
       : 'support@deepsource.io',
     sentry: {
       clientConfig: {
-        disabled: process.env.ON_PREM ? true : false
+        disabled: true
       },
       serverConfig: {
-        disabled: process.env.ON_PREM ? true : false
+        disabled: true
       }
     }
   },
@@ -65,12 +65,9 @@ export default {
   ],
 
   sentry: {
-    publishRelease:
-      process.env.ON_PREM || process.env.DISABLE_SENTRY
-        ? false
-        : process.env.NODE_ENV !== 'development',
+    publishRelease: false,
     sourceMapStyle: 'hidden-source-map',
-    disabled: process.env.ON_PREM ? true : process.env.DISABLE_SENTRY
+    disabled: true
   },
 
   extendPlugins(plugins) {
