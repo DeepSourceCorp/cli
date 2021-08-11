@@ -59,7 +59,7 @@
             :class="{
               'text-cherry': !stat.isPositive,
               'text-juniper': stat.isPositive,
-              'text-vanilla-400': stat.value === 0
+              'text-vanilla-400': Number(stat.value) === 0
             }"
           >
             {{ stat.value }}
@@ -107,11 +107,11 @@ export default class RunCard extends Vue {
   @Prop({ default: '' })
   commitOid!: string
 
-  @Prop({ default: '' })
-  issuesRaisedCount!: string
+  @Prop({ default: 0 })
+  issuesRaisedCount!: number
 
-  @Prop({ default: '' })
-  issuesResolvedNum!: string
+  @Prop({ default: 0 })
+  issuesResolvedNum!: number
 
   @Prop()
   config!: Maybe<Scalars['GenericScalar']>
@@ -170,20 +170,20 @@ export default class RunCard extends Vue {
     return this.$generateRoute(route)
   }
 
-  get issueStats(): Array<Record<string, string | number | boolean>> {
+  get issueStats(): { label: string; value: string; isPositive: boolean | null }[] {
     const stats = []
     if (this.issuesRaisedCount !== null) {
       stats.push({
         label: 'introduced',
-        value: shortenLargeNumber(Number(this.issuesRaisedCount)),
-        isPositive: this.issuesRaisedCount === '0' ? 'null' : false
+        value: shortenLargeNumber(this.issuesRaisedCount),
+        isPositive: this.issuesRaisedCount === 0 ? null : false
       })
     }
     if (this.issuesResolvedNum !== null) {
       stats.push({
         label: 'resolved',
-        value: shortenLargeNumber(Number(this.issuesResolvedNum)),
-        isPositive: this.issuesResolvedNum === '0' ? 'null' : true
+        value: shortenLargeNumber(this.issuesResolvedNum),
+        isPositive: this.issuesResolvedNum === 0 ? null : true
       })
     }
 

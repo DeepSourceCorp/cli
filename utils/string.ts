@@ -18,7 +18,7 @@ function formatIntl(val: number): string {
   return formatter.format(val)
 }
 
-function shortenLargeNumber(candidate: number): string {
+function shortenLargeNumber(candidate: number | string): string {
   let number = 0
   if (typeof candidate === 'number') number = candidate
   else if (typeof candidate === 'string') {
