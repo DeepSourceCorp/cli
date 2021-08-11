@@ -215,6 +215,42 @@ declare module '*/applyCreditsToOwner.gql' {
 }
     
 
+declare module '*/autoOnboard.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const autoOnboard: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/createConfigTemplate.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const createConfigTemplate: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/deleteConfigTemplate.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const deleteConfig: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/updateConfigTemplate.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updateConfigTemplate: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/changePlan.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -498,6 +534,42 @@ declare module '*/accountSetupStatus.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/getAutoOnboardEventsList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const listAutoOnboardEvents: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/getAutoOnboardableRepositoriesList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const autoOnboardableRepositories: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/getTemplateDetails.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const getTemplateInfo: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/getTemplatesList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const listTemplates: DocumentNode;
 
   export default defaultDocument;
 }

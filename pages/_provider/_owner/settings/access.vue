@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 space-y-6">
+  <div class="p-4 space-y-6">
     <h2 class="text-lg font-medium">Access control</h2>
     <form-group label="Provider Permissions">
       <toggle-input
@@ -158,12 +158,12 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     {
       value: TeamBasePermissionSetDefaultRepositoryPermission.Write,
       label: 'Maintain',
-      description: `Members will have full access to all repositories which they have access to, except the ability to add new Members and deactivating or activating analysis on it.`
+      description: `Members will have full access to all repositories which they have access to, <b>except</b> the ability to add new Members and deactivating or activating analysis on it.`
     },
     {
       value: TeamBasePermissionSetDefaultRepositoryPermission.Admin,
       label: 'Administrator',
-      description: `Members will have full access to all repositories which they have access to, including the ability to add new Members and deactivating or activating analysis on it.`
+      description: `Members will have full access to all repositories which they have access to, <b>including</b> the ability to add new Members and deactivating or activating analysis on it.`
     }
   ]
 

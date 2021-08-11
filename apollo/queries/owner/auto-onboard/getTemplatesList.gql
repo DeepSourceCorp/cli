@@ -1,0 +1,21 @@
+query listTemplates(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $q: String
+  $limit: Int
+  $after: String
+) {
+  owner(login: $login, provider: $provider) {
+    id
+    configTemplates(first: $limit, after: $after, title_Icontains: $q) {
+      totalCount
+      edges {
+        node {
+          shortcode
+          title
+          description
+        }
+      }
+    }
+  }
+}

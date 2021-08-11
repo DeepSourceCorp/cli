@@ -1,0 +1,5 @@
+mutation deleteConfig($shortcode: String!) {
+  deleteConfigTemplate(input: { shortcode: $shortcode }) {
+    ok
+  }
+}

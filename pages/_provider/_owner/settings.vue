@@ -16,6 +16,13 @@
             >Access control</z-tab
           >
         </nuxt-link>
+        <nuxt-link v-if="owner.isTeam && autoOnboardAvailable" :to="getRoute('auto-onboard')">
+          <z-tab
+            :isActive="$route.name.startsWith('provider-owner-settings-auto-onboard')"
+            border-active-color="vanilla-400"
+            >AutoOnboard</z-tab
+          >
+        </nuxt-link>
       </div>
     </div>
     <nuxt-child></nuxt-child>
@@ -59,7 +66,9 @@ import { TeamMemberRoleChoices } from '~/types/types'
         TeamPerms.UPDATE_SEATS,
         TeamPerms.DELETE_TEAM_ACCOUNT,
         TeamPerms.UPDATE_BILLING_DETAILS,
-        TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD
+        TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
+        TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE,
+        TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE
       ]
     }
   }
@@ -99,6 +108,14 @@ export default class TeamSettings extends mixins(
     }
     await this.fetchOwnerDetails(params)
     await this.fetchTeamSettings(params)
+  }
+
+  get autoOnboardAvailable() {
+    return (
+      ['gh', 'ghe'].includes(this.activeProvider) &&
+      this.activeDashboardContext.type === 'team' &&
+      this.$gateKeeper.team(TeamPerms.AUTO_ONBOARD_REPOSITORIES, this.teamPerms.permission)
+    )
   }
 
   head(): Record<string, string> {

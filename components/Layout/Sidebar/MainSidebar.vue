@@ -2,7 +2,7 @@
   <aside
     class="absolute h-screen duration-200 flex flex-col border-r transition-width transform-gpu lg:relative lg:left-0 border-ink-200 group bg-ink-400"
     v-outside-click="closeMenu"
-    :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-80']"
+    :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
     <section class="flex items-center p-2.5 pb-0">
       <context-switcher :isCollapsed="isCollapsed" />
@@ -33,8 +33,19 @@
         icon="layers"
         :active="isActive('provider-owner-all-repos')"
         :to="getRoute('all-repos')"
-        >All repositories</sidebar-item
       >
+        <span class="flex justify-between w-full">
+          <span>All repositories</span>
+          <z-tag
+            v-if="repositoryList.totalCount"
+            bgColor="ink-100"
+            textSize="xs"
+            spacing="px-2 py-0.5"
+          >
+            {{ repositoryList.totalCount }}
+          </z-tag>
+        </span>
+      </sidebar-item>
       <sidebar-item
         :isCollapsed="isCollapsed"
         v-if="showTeamMembers"
@@ -49,7 +60,7 @@
         v-if="showTeamSettings"
         icon="settings"
         :active="isActive('provider-owner-settings')"
-        :to="getRoute('settings')"
+        :to="settingsUrl"
       >
         Settings
       </sidebar-item>
@@ -122,8 +133,8 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { Component, Watch, mixins } from 'nuxt-property-decorator'
+import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
 
 import { TeamMemberRoleChoices } from '~/types/types'
 
@@ -131,13 +142,15 @@ import { TeamMemberRoleChoices } from '~/types/types'
 import ContextMixin from '@/mixins/contextMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { TeamPerms } from '~/types/permTypes'
+import RepoListMixin from '~/mixins/repoListMixin'
 
 @Component({
   components: {
-    ZIcon
+    ZIcon,
+    ZTag
   }
 })
-export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin) {
+export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoListMixin) {
   public isCollapsed = false
   public collapsedSidebar = false
   public toggleCollapsed = false
@@ -148,6 +161,23 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin) {
   async fetch(): Promise<void> {
     await this.fetchContext()
     await this.fetchActiveUser()
+    this.fetchRepoCount()
+  }
+
+  @Watch('activeOwner')
+  async fetchRepoCount(refetch?: boolean): Promise<void> {
+    const pageSize =
+      (this.$localStore.get(
+        `${this.activeProvider}-${this.activeProvider}-all-repos`,
+        `currentPageSize`
+      ) as number) || 10
+    await this.fetchRepoList({
+      provider: this.activeProvider,
+      login: this.activeOwner,
+      limit: pageSize,
+      currentPageNumber: 1,
+      query: ''
+    })
   }
 
   mounted() {
@@ -158,6 +188,14 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin) {
       this.collapsedSidebar = false
       this.isOpen = true
     })
+
+    this.$socket.$on('repo-onboarding-completed', () => {
+      this.fetchRepoCount(true)
+    })
+  }
+
+  beforeDestroy() {
+    this.$socket.$off('repo-onboarding-completed')
   }
 
   get modalStyle(): string {
@@ -238,6 +276,50 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin) {
     return false
   }
 
+  get allowedBilling(): boolean {
+    if ('role' in this.activeDashboardContext) {
+      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
+      return this.$gateKeeper.team(
+        [TeamPerms.CHANGE_PLAN, TeamPerms.UPDATE_SEATS, TeamPerms.UPDATE_BILLING_DETAILS],
+        role
+      )
+    }
+    return false
+  }
+
+  get allowedAccessControl(): boolean {
+    if ('role' in this.activeDashboardContext) {
+      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
+      return this.$gateKeeper.team(TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD, role)
+    }
+
+    return false
+  }
+  get allowedAutoOnboard(): boolean {
+    if ('role' in this.activeDashboardContext) {
+      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
+      return this.$gateKeeper.team(
+        [TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE, TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE],
+        role
+      )
+    }
+
+    return false
+  }
+
+  get settingsUrl(): string {
+    if (this.allowedBilling) {
+      return this.getRoute('settings/billing')
+    }
+    if (this.allowedAccessControl) {
+      return this.getRoute('settings/access-control')
+    }
+    if (this.allowedAutoOnboard) {
+      return this.getRoute('settings/auto-onboard')
+    }
+    return this.getRoute('settings')
+  }
+
   get showTeamSettings(): boolean {
     if ('type' in this.activeDashboardContext) {
       if (this.activeDashboardContext.type === 'user') {
@@ -254,7 +336,9 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin) {
           TeamPerms.UPDATE_BILLING_DETAILS,
           TeamPerms.MANAGE_TEAM_MEMEBERS,
           TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
-          TeamPerms.DELETE_TEAM_ACCOUNT
+          TeamPerms.DELETE_TEAM_ACCOUNT,
+          TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE,
+          TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE
         ],
         role
       )

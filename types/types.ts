@@ -342,6 +342,53 @@ export type AuditLogMeta = {
   exportFormats?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+export type AutoOnboardEvent = MaskPrimaryKeyNode & {
+  __typename?: 'AutoOnboardEvent';
+  createdAt: Scalars['DateTime'];
+  modifiedAt: Scalars['DateTime'];
+  alive?: Maybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  pullRequestNumber?: Maybe<Scalars['Int']>;
+  owner: Owner;
+  repository: Repository;
+  template: ConfigTemplate;
+  status: AutoOnboardEventStatus;
+  vcsPrUrl?: Maybe<Scalars['String']>;
+};
+
+export type AutoOnboardEventConnection = {
+  __typename?: 'AutoOnboardEventConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<AutoOnboardEventEdge>>;
+};
+
+export type AutoOnboardEventEdge = {
+  __typename?: 'AutoOnboardEventEdge';
+  node?: Maybe<AutoOnboardEvent>;
+  cursor: Scalars['String'];
+};
+
+export enum AutoOnboardEventStatus {
+  Abrt = 'ABRT',
+  Pend = 'PEND',
+  Clsd = 'CLSD',
+  Fail = 'FAIL',
+  Mrgd = 'MRGD',
+  Open = 'OPEN'
+}
+
+export type AutoOnboardInput = {
+  templateShortcode: Scalars['String'];
+  repoIds: Array<Maybe<Scalars['ID']>>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type AutoOnboardPayload = {
+  __typename?: 'AutoOnboardPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type AutofixRun = MaskPrimaryKeyNode & {
   __typename?: 'AutofixRun';
   createdAt: Scalars['DateTime'];
@@ -690,6 +737,43 @@ export type CommitConfigToVcsPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type ConfigTemplate = MaskPrimaryKeyNode & {
+  __typename?: 'ConfigTemplate';
+  createdAt: Scalars['DateTime'];
+  modifiedAt: Scalars['DateTime'];
+  alive?: Maybe<Scalars['Boolean']>;
+  id: Scalars['ID'];
+  owner: Owner;
+  shortcode: Scalars['String'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  config: Scalars['JSONString'];
+  events: AutoOnboardEventConnection;
+};
+
+
+export type ConfigTemplateEventsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  owner?: Maybe<Scalars['ID']>;
+};
+
+export type ConfigTemplateConnection = {
+  __typename?: 'ConfigTemplateConnection';
+  pageInfo: PageInfo;
+  totalCount?: Maybe<Scalars['Int']>;
+  edges: Array<Maybe<ConfigTemplateEdge>>;
+};
+
+export type ConfigTemplateEdge = {
+  __typename?: 'ConfigTemplateEdge';
+  node?: Maybe<ConfigTemplate>;
+  cursor: Scalars['String'];
+};
+
 export type ConfirmInvitationInput = {
   action?: Maybe<InviteActions>;
   invitationCode: Scalars['String'];
@@ -779,6 +863,20 @@ export type CreateAutofixRunPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type CreateConfigTemplateInput = {
+  ownerId: Scalars['ID'];
+  config: Scalars['JSONString'];
+  title: Scalars['String'];
+  description?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type CreateConfigTemplatePayload = {
+  __typename?: 'CreateConfigTemplatePayload';
+  template?: Maybe<ConfigTemplate>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type CreatePullRequestInput = {
   patches: Array<Maybe<Scalars['Int']>>;
   autofixRunId: Scalars['String'];
@@ -801,6 +899,17 @@ export type CreditsInfo = {
 
 
 
+
+export type DeleteConfigTemplateInput = {
+  shortcode: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DeleteConfigTemplatePayload = {
+  __typename?: 'DeleteConfigTemplatePayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
 
 export type DeleteJsonWebTokenCookie = {
   __typename?: 'DeleteJSONWebTokenCookie';
@@ -1274,6 +1383,10 @@ export type Mutation = {
   updateStarredRepository?: Maybe<UpdateStarredRepositoryPayload>;
   confirmInvitation?: Maybe<ConfirmInvitationPayload>;
   verifyDevice?: Maybe<VerifyDevicePayload>;
+  createConfigTemplate?: Maybe<CreateConfigTemplatePayload>;
+  updateConfigTemplate?: Maybe<UpdateConfigTemplatePayload>;
+  deleteConfigTemplate?: Maybe<DeleteConfigTemplatePayload>;
+  autoOnboard?: Maybe<AutoOnboardPayload>;
 };
 
 
@@ -1587,6 +1700,26 @@ export type MutationVerifyDeviceArgs = {
   input: VerifyDeviceInput;
 };
 
+
+export type MutationCreateConfigTemplateArgs = {
+  input: CreateConfigTemplateInput;
+};
+
+
+export type MutationUpdateConfigTemplateArgs = {
+  input: UpdateConfigTemplateInput;
+};
+
+
+export type MutationDeleteConfigTemplateArgs = {
+  input: DeleteConfigTemplateInput;
+};
+
+
+export type MutationAutoOnboardArgs = {
+  input: AutoOnboardInput;
+};
+
 export enum NextActionChoice {
   GithubLogin = 'GITHUB_LOGIN',
   Dashboard = 'DASHBOARD',
@@ -1608,6 +1741,7 @@ export type Owner = MaskPrimaryKeyNode & {
   avatar?: Maybe<Scalars['String']>;
   vcsProvider: OwnerVcsProvider;
   vcsAccountUid: Scalars['String'];
+  autofixInstallationUrl: Scalars['String'];
   plan?: Maybe<OwnerPlan>;
   billingEmail?: Maybe<Scalars['String']>;
   billingAddress?: Maybe<Scalars['String']>;
@@ -1618,7 +1752,10 @@ export type Owner = MaskPrimaryKeyNode & {
   team?: Maybe<Team>;
   repositories?: Maybe<RepositoryConnection>;
   userSet: UserConnection;
+  configTemplates?: Maybe<ConfigTemplateConnection>;
+  onboardingEvents: AutoOnboardEventConnection;
   ownerSetting?: Maybe<OwnerSetting>;
+  isAutofixEnabled?: Maybe<Scalars['Boolean']>;
   isTeam?: Maybe<Scalars['Boolean']>;
   cards?: Maybe<Scalars['GenericScalar']>;
   stripeInvoices?: Maybe<Scalars['GenericScalar']>;
@@ -1642,6 +1779,10 @@ export type Owner = MaskPrimaryKeyNode & {
   vcsUrl?: Maybe<Scalars['String']>;
   vcsInstallationId?: Maybe<Scalars['String']>;
   canOnboard?: Maybe<Scalars['Boolean']>;
+  configTemplate?: Maybe<ConfigTemplate>;
+  isAutoonboardAllowed?: Maybe<Scalars['Boolean']>;
+  autoonboardableRepositories?: Maybe<RepositoryConnection>;
+  autoonboardingEvents?: Maybe<AutoOnboardEventConnection>;
 };
 
 
@@ -1687,6 +1828,27 @@ export type OwnerUserSetArgs = {
 };
 
 
+export type OwnerConfigTemplatesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  shortcode?: Maybe<Scalars['String']>;
+  title_Icontains?: Maybe<Scalars['String']>;
+};
+
+
+export type OwnerOnboardingEventsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  owner?: Maybe<Scalars['ID']>;
+};
+
+
 export type OwnerAutofixedIssueTrendArgs = {
   lastDays: Scalars['Int'];
 };
@@ -1699,6 +1861,34 @@ export type OwnerIssueTrendArgs = {
 
 export type OwnerResolvedIssueTrendArgs = {
   lastDays: Scalars['Int'];
+};
+
+
+export type OwnerConfigTemplateArgs = {
+  shortcode: Scalars['String'];
+};
+
+
+export type OwnerAutoonboardableRepositoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  vcsProvider?: Maybe<Scalars['String']>;
+  isPrivate?: Maybe<Scalars['Boolean']>;
+  isActivated?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type OwnerAutoonboardingEventsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  owner?: Maybe<Scalars['ID']>;
 };
 
 export type OwnerConnection = {
@@ -2029,6 +2219,7 @@ export type Repository = MaskPrimaryKeyNode & {
   userpreferenceSet: UserPreferenceConnection;
   autofixRuns?: Maybe<AutofixRunConnection>;
   transformerRuns?: Maybe<TransformerRunConnection>;
+  onboardingEvents: AutoOnboardEventConnection;
   runs?: Maybe<RunConnection>;
   repositorycollaboratorSet: RepositoryCollaboratorConnection;
   silenceRules?: Maybe<SilenceRuleConnection>;
@@ -2148,6 +2339,16 @@ export type RepositoryTransformerRunsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   status?: Maybe<Scalars['String']>;
+};
+
+
+export type RepositoryOnboardingEventsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  owner?: Maybe<Scalars['ID']>;
 };
 
 
@@ -3189,6 +3390,20 @@ export type UpdateCodeQualitySubscriptionSeatsPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type UpdateConfigTemplateInput = {
+  shortcode: Scalars['String'];
+  config?: Maybe<Scalars['JSONString']>;
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateConfigTemplatePayload = {
+  __typename?: 'UpdateConfigTemplatePayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type UpdateDefaultDashboardContextForUserInput = {
   contextOwnerId: Scalars['Int'];
   clientMutationId?: Maybe<Scalars['String']>;
@@ -3962,6 +4177,68 @@ export type Unnamed_23_Mutation = (
   )> }
 );
 
+export type AutoOnboardMutationVariables = Exact<{
+  shortcode: Scalars['String'];
+  repoIds: Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>;
+}>;
+
+
+export type AutoOnboardMutation = (
+  { __typename?: 'Mutation' }
+  & { autoOnboard?: Maybe<(
+    { __typename?: 'AutoOnboardPayload' }
+    & Pick<AutoOnboardPayload, 'ok'>
+  )> }
+);
+
+export type CreateConfigTemplateMutationVariables = Exact<{
+  ownerId: Scalars['ID'];
+  title: Scalars['String'];
+  description: Scalars['String'];
+  config: Scalars['JSONString'];
+}>;
+
+
+export type CreateConfigTemplateMutation = (
+  { __typename?: 'Mutation' }
+  & { createConfigTemplate?: Maybe<(
+    { __typename?: 'CreateConfigTemplatePayload' }
+    & { template?: Maybe<(
+      { __typename?: 'ConfigTemplate' }
+      & Pick<ConfigTemplate, 'shortcode'>
+    )> }
+  )> }
+);
+
+export type DeleteConfigMutationVariables = Exact<{
+  shortcode: Scalars['String'];
+}>;
+
+
+export type DeleteConfigMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteConfigTemplate?: Maybe<(
+    { __typename?: 'DeleteConfigTemplatePayload' }
+    & Pick<DeleteConfigTemplatePayload, 'ok'>
+  )> }
+);
+
+export type UpdateConfigTemplateMutationVariables = Exact<{
+  shortcode: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  config?: Maybe<Scalars['JSONString']>;
+}>;
+
+
+export type UpdateConfigTemplateMutation = (
+  { __typename?: 'Mutation' }
+  & { updateConfigTemplate?: Maybe<(
+    { __typename?: 'UpdateConfigTemplatePayload' }
+    & Pick<UpdateConfigTemplatePayload, 'ok'>
+  )> }
+);
+
 export type Unnamed_24_MutationVariables = Exact<{
   id: Scalars['ID'];
   planSlug: Scalars['String'];
@@ -4436,6 +4713,118 @@ export type Unnamed_54_Query = (
   )> }
 );
 
+export type ListAutoOnboardEventsQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type ListAutoOnboardEventsQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { autoonboardingEvents?: Maybe<(
+      { __typename?: 'AutoOnboardEventConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'AutoOnboardEventEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'AutoOnboardEvent' }
+          & Pick<AutoOnboardEvent, 'id' | 'status' | 'pullRequestNumber' | 'vcsPrUrl'>
+          & { repository: (
+            { __typename?: 'Repository' }
+            & Pick<Repository, 'name' | 'vcsProvider' | 'vcsHost' | 'isPrivate' | 'vcsUrl'>
+            & { owner: (
+              { __typename?: 'Owner' }
+              & Pick<Owner, 'login'>
+            ) }
+          ) }
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type AutoOnboardableRepositoriesQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  limit?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  query?: Maybe<Scalars['String']>;
+}>;
+
+
+export type AutoOnboardableRepositoriesQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { repoList?: Maybe<(
+      { __typename?: 'RepositoryConnection' }
+      & Pick<RepositoryConnection, 'totalCount'>
+      & { pageInfo: (
+        { __typename?: 'PageInfo' }
+        & Pick<PageInfo, 'hasNextPage'>
+      ), edges: Array<Maybe<(
+        { __typename?: 'RepositoryEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Repository' }
+          & Pick<Repository, 'id' | 'name' | 'isPrivate' | 'isFork' | 'vcsProvider'>
+          & { owner: (
+            { __typename?: 'Owner' }
+            & Pick<Owner, 'id' | 'login'>
+          ) }
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type GetTemplateInfoQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  shortcode: Scalars['String'];
+}>;
+
+
+export type GetTemplateInfoQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { configTemplate?: Maybe<(
+      { __typename?: 'ConfigTemplate' }
+      & Pick<ConfigTemplate, 'config' | 'shortcode' | 'title' | 'description'>
+    )> }
+  )> }
+);
+
+export type ListTemplatesQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  q?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListTemplatesQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { configTemplates?: Maybe<(
+      { __typename?: 'ConfigTemplateConnection' }
+      & Pick<ConfigTemplateConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'ConfigTemplateEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'ConfigTemplate' }
+          & Pick<ConfigTemplate, 'shortcode' | 'title' | 'description'>
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
 export type Unnamed_55_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
@@ -4655,7 +5044,7 @@ export type BaseRepoQueryQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'isActivated' | 'isPrivate' | 'isStarred' | 'errorCode' | 'defaultBranchName' | 'vcsDefaultBranchUrl' | 'errorMessage' | 'canBeActivated' | 'isAutofixEnabled' | 'isCommitPossible' | 'blobUrlRoot'>
+    & Pick<Repository, 'id' | 'isActivated' | 'isPrivate' | 'isStarred' | 'errorCode' | 'defaultBranchName' | 'vcsProvider' | 'vcsDefaultBranchUrl' | 'errorMessage' | 'canBeActivated' | 'isAutofixEnabled' | 'isCommitPossible' | 'blobUrlRoot'>
     & { lastRun?: Maybe<(
       { __typename?: 'Run' }
       & Pick<Run, 'id' | 'runId' | 'config' | 'commitOid' | 'branchRunCount' | 'status' | 'finishedAt'>
@@ -4711,7 +5100,7 @@ export type Unnamed_65_QueryVariables = Exact<{
 
 export type Unnamed_65_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' }> }
@@ -4725,7 +5114,7 @@ export type Unnamed_66_QueryVariables = Exact<{
 
 export type Unnamed_66_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'config' | 'blobUrlRoot' | 'vcsProvider' | 'hasViewerEditAccess'>
     & { issue?: Maybe<(
@@ -4754,7 +5143,7 @@ export type Unnamed_67_QueryVariables = Exact<{
 
 export type Unnamed_67_Query = (
   { __typename?: 'Query' }
-  & { node?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | (
+  & { node?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | (
     { __typename?: 'RepositoryIssue' }
     & Pick<RepositoryIssue, 'shortcode'>
     & { checkIssues: (
@@ -4833,7 +5222,7 @@ export type Unnamed_70_QueryVariables = Exact<{
 
 export type Unnamed_70_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
@@ -5583,7 +5972,7 @@ export type Unnamed_98_QueryVariables = Exact<{
 
 export type Unnamed_98_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'ActivityFeed' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'Issue' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' }> }

@@ -210,6 +210,49 @@ type AuditLogMeta {
   exportFormats: [String]
 }
 
+type AutoOnboardEvent implements MaskPrimaryKeyNode {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  pullRequestNumber: Int
+  owner: Owner!
+  repository: Repository!
+  template: ConfigTemplate!
+  status: AutoOnboardEventStatus!
+  vcsPrUrl: String
+}
+
+type AutoOnboardEventConnection {
+  pageInfo: PageInfo!
+  edges: [AutoOnboardEventEdge]!
+}
+
+type AutoOnboardEventEdge {
+  node: AutoOnboardEvent
+  cursor: String!
+}
+
+enum AutoOnboardEventStatus {
+  ABRT
+  PEND
+  CLSD
+  FAIL
+  MRGD
+  OPEN
+}
+
+input AutoOnboardInput {
+  templateShortcode: String!
+  repoIds: [ID]!
+  clientMutationId: String
+}
+
+type AutoOnboardPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 type AutofixRun implements MaskPrimaryKeyNode {
   createdAt: DateTime!
   modifiedAt: DateTime!
@@ -461,6 +504,30 @@ type CommitConfigToVCSPayload {
   clientMutationId: String
 }
 
+type ConfigTemplate implements MaskPrimaryKeyNode {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  id: ID!
+  owner: Owner!
+  shortcode: String!
+  title: String!
+  description: String!
+  config: JSONString!
+  events(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
+}
+
+type ConfigTemplateConnection {
+  pageInfo: PageInfo!
+  totalCount: Int
+  edges: [ConfigTemplateEdge]!
+}
+
+type ConfigTemplateEdge {
+  node: ConfigTemplate
+  cursor: String!
+}
+
 input ConfirmInvitationInput {
   action: InviteActions
   invitationCode: String!
@@ -544,6 +611,19 @@ type CreateAutofixRunPayload {
   clientMutationId: String
 }
 
+input CreateConfigTemplateInput {
+  ownerId: ID!
+  config: JSONString!
+  title: String!
+  description: String
+  clientMutationId: String
+}
+
+type CreateConfigTemplatePayload {
+  template: ConfigTemplate
+  clientMutationId: String
+}
+
 input CreatePullRequestInput {
   patches: [Int]!
   autofixRunId: String!
@@ -567,6 +647,16 @@ scalar Date
 scalar DateTime
 
 scalar Decimal
+
+input DeleteConfigTemplateInput {
+  shortcode: String!
+  clientMutationId: String
+}
+
+type DeleteConfigTemplatePayload {
+  ok: Boolean
+  clientMutationId: String
+}
 
 type DeleteJSONWebTokenCookie {
   deleted: Boolean!
@@ -969,6 +1059,10 @@ type Mutation {
   updateStarredRepository(input: UpdateStarredRepositoryInput!): UpdateStarredRepositoryPayload
   confirmInvitation(input: ConfirmInvitationInput!): ConfirmInvitationPayload
   verifyDevice(input: VerifyDeviceInput!): VerifyDevicePayload
+  createConfigTemplate(input: CreateConfigTemplateInput!): CreateConfigTemplatePayload
+  updateConfigTemplate(input: UpdateConfigTemplateInput!): UpdateConfigTemplatePayload
+  deleteConfigTemplate(input: DeleteConfigTemplateInput!): DeleteConfigTemplatePayload
+  autoOnboard(input: AutoOnboardInput!): AutoOnboardPayload
 }
 
 enum NextActionChoice {
@@ -1001,7 +1095,10 @@ type Owner implements MaskPrimaryKeyNode {
   team: Team
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
   userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
+  configTemplates(offset: Int, before: String, after: String, first: Int, last: Int, shortcode: String, title_Icontains: String): ConfigTemplateConnection
+  onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   ownerSetting: OwnerSetting
+  isAutofixEnabled: Boolean
   isTeam: Boolean
   cards: GenericScalar
   stripeInvoices: GenericScalar
@@ -1025,6 +1122,10 @@ type Owner implements MaskPrimaryKeyNode {
   vcsUrl: String
   vcsInstallationId: String
   canOnboard: Boolean
+  configTemplate(shortcode: String!): ConfigTemplate
+  isAutoonboardAllowed: Boolean
+  autoonboardableRepositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  autoonboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection
 }
 
 type OwnerConnection {
@@ -1195,6 +1296,7 @@ type Repository implements MaskPrimaryKeyNode {
   userpreferenceSet(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection
   transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
+  onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   runs(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
   repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   silenceRules(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection
@@ -1930,6 +2032,19 @@ input UpdateCodeQualitySubscriptionSeatsInput {
 type UpdateCodeQualitySubscriptionSeatsPayload {
   ok: Boolean
   totalSeats: Int
+  clientMutationId: String
+}
+
+input UpdateConfigTemplateInput {
+  shortcode: String!
+  config: JSONString
+  title: String
+  description: String
+  clientMutationId: String
+}
+
+type UpdateConfigTemplatePayload {
+  ok: Boolean
   clientMutationId: String
 }
 

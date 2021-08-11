@@ -1,0 +1,12 @@
+mutation updateConfigTemplate(
+  $shortcode: String!
+  $title: String
+  $description: String
+  $config: JSONString
+) {
+  updateConfigTemplate(
+    input: { shortcode: $shortcode, config: $config, title: $title, description: $description }
+  ) {
+    ok
+  }
+}

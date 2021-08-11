@@ -139,7 +139,7 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
   [OwnerDetailActions.FETCH_OWNER_DETAILS]: (
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
-    args: { login: string; provider: string }
+    args: { login: string; provider: string; refetch?: boolean }
   ) => Promise<void>
 
   [OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS]: (
@@ -265,10 +265,14 @@ export const actions: OwnerDetailModuleActions = {
   async [OwnerDetailActions.FETCH_OWNER_DETAILS]({ commit }, args) {
     try {
       commit(OwnerDetailMutations.SET_LOADING, true)
-      const response = await this.$fetchGraphqlData(OwnerDetailQuery, {
-        login: args.login,
-        provider: this.$providerMetaMap[args.provider].value
-      })
+      const response = await this.$fetchGraphqlData(
+        OwnerDetailQuery,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
       commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
       commit(OwnerDetailMutations.SET_LOADING, false)
     } catch (e) {

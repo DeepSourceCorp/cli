@@ -41,6 +41,7 @@ declare interface ToastInterface {
   show(props: string | object): void
   success(message: string): void
   danger(message: string): void
+  info(message: string): void
 }
 
 declare module 'vuex/types/index' {
@@ -80,6 +81,9 @@ export default (context: Context, inject: Inject) => {
     },
     danger(message: string) {
       return spawn('toasts-wrapper', { type: 'danger', message, timeout: 3 }, Toast, Vue)
+    },
+    info(message: string) {
+      return spawn('toasts-wrapper', { type: 'info', message, timeout: 3 }, Toast, Vue)
     }
   }
   inject('toast', ToastProgrammatic)

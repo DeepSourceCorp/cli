@@ -35,7 +35,7 @@ export default class OwnerDetailMixin extends Vue {
   }) => void
 
   @ownerDetailStore.Action(OwnerDetailActions.FETCH_OWNER_DETAILS)
-  fetchOwnerDetails: (args: { login: string; provider: string }) => Promise<void>
+  fetchOwnerDetails: (args: { login: string; provider: string; refetch?: boolean }) => Promise<void>
 
   @ownerDetailStore.Action(OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS)
   fetchIssueTypeSettings: (args: { login: string; provider: string }) => Promise<void>

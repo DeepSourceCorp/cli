@@ -1,0 +1,30 @@
+query autoOnboardableRepositories(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $limit: Int
+  $after: String
+  $query: String
+) {
+  owner(login: $login, provider: $provider) {
+    id
+    repoList: autoonboardableRepositories(first: $limit, after: $after, name_Icontains: $query) {
+      totalCount
+      pageInfo {
+        hasNextPage
+      }
+      edges {
+        node {
+          id
+          name
+          isPrivate
+          owner {
+            id
+            login
+          }
+          isFork
+          vcsProvider
+        }
+      }
+    }
+  }
+}

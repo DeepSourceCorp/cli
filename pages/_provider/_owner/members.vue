@@ -24,17 +24,9 @@
     <div class="p-4 space-y-8 max-w-3xl">
       <div class="space-y-4">
         <div v-if="pageHeading" class="flex justify-between">
-          <h2 class="text-lg">{{ pageHeading }}</h2>
-          <z-button
-            size="small"
-            buttonType="primary"
-            class="whitespace-nowrap"
-            @click="toggleModal(true)"
-          >
-            <div class="flex items-center space-x-2">
-              <z-icon icon="user-plus" size="small" color="ink-400"></z-icon>
-              <span>Invite new member</span>
-            </div>
+          <h2 class="text-lg font-medium">{{ pageHeading }}</h2>
+          <z-button size="small" buttonType="primary" icon="user-plus" @click="toggleModal(true)">
+            Invite new member
           </z-button>
           <portal to="modal">
             <invite-members-modal

@@ -23,10 +23,12 @@
             <div v-if="type === 'success'" class="rounded-full p-1">
               <z-icon icon="check-circle" size="small" color="juniper"></z-icon>
             </div>
-            <div v-if="type === 'danger'" class="rounded-full p-1">
+            <div v-else-if="type === 'danger'" class="rounded-full p-1">
               <z-icon icon="alert-circle" size="small" color="vanilla-100"></z-icon>
             </div>
-            <div v-if="icon" class="rounded-full p-1" v-html="icon"></div>
+            <div v-else-if="type === 'info'" class="rounded-full p-1">
+              <z-icon icon="alert-circle" size="small" color="vanilla-400"></z-icon>
+            </div>
           </div>
           <div class="w-0 flex-1 px-2 mt-0.5">
             <slot>

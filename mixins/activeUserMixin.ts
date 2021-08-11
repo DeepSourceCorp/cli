@@ -16,6 +16,13 @@ export interface SubscribedPlanInfo {
   slug: string
 }
 
+export interface TeamPermissions {
+  permission: TeamMemberRoleChoices
+  canAddMember: boolean
+  isPrimaryUser: boolean
+  hasAllRepoAccess: boolean
+}
+
 export interface DashboardContext {
   id: number
   login: string
@@ -101,6 +108,16 @@ export default class ActiveUserMixin extends Vue {
 
   async refetchUser(): Promise<void> {
     await this.fetchActiveUser({ refetch: true })
+  }
+
+  get teamPerms(): TeamPermissions {
+    const context = this.activeDashboardContext as DashboardContext
+    return {
+      permission: context.role,
+      canAddMember: context.can_add_member,
+      isPrimaryUser: context.is_primary_user_for_owner,
+      hasAllRepoAccess: context.has_granted_all_repo_access
+    }
   }
 
   get activeProvider(): string {

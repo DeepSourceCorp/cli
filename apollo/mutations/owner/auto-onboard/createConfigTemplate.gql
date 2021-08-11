@@ -1,0 +1,14 @@
+mutation createConfigTemplate(
+  $ownerId: ID!
+  $title: String!
+  $description: String!
+  $config: JSONString!
+) {
+  createConfigTemplate(
+    input: { ownerId: $ownerId, config: $config, title: $title, description: $description }
+  ) {
+    template {
+      shortcode
+    }
+  }
+}

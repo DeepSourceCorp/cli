@@ -47,7 +47,10 @@ const TEAM_PERMS_MAP = {
   [TeamPerms.SET_GRANUALAR_IGNORE_PERMISSION]: ['ADMIN'],
   [TeamPerms.ACTIVATE_ANALYSIS]: ['ADMIN', 'MEMBER'],
   [TeamPerms.SYNC_REPO_LIST]: ['ADMIN', 'MEMBER'],
-  [TeamPerms.VIEW_TEAM_HOME]: ['ADMIN', 'MEMBER', 'CONTRIBUTOR']
+  [TeamPerms.VIEW_TEAM_HOME]: ['ADMIN', 'MEMBER', 'CONTRIBUTOR'],
+  [TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE]: ['ADMIN'],
+  [TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE]: ['ADMIN', 'MEMBER'],
+  [TeamPerms.AUTO_ONBOARD_REPOSITORIES]: ['ADMIN', 'MEMBER']
 }
 
 const REPO_PERMS_MAP = {
@@ -81,7 +84,10 @@ export default (context: Context, inject: Inject): void => {
     ): boolean {
       if (Array.isArray(perm)) {
         const allowedMap = perm.map((permItem) => {
-          return TEAM_PERMS_MAP[permItem].includes(role)
+          if (permItem in TEAM_PERMS_MAP) {
+            return TEAM_PERMS_MAP[permItem].includes(role)
+          }
+          return true
         })
 
         if (strict) {
@@ -96,7 +102,10 @@ export default (context: Context, inject: Inject): void => {
     repo(perm: RepoPerms | RepoPerms[], role: 'ADMIN' | 'WRITE' | 'READ', strict = false): boolean {
       if (Array.isArray(perm)) {
         const allowedMap = perm.map((permItem) => {
-          return REPO_PERMS_MAP[permItem].includes(role)
+          if (permItem in REPO_PERMS_MAP) {
+            return REPO_PERMS_MAP[permItem].includes(role)
+          }
+          return true
         })
 
         if (strict) {

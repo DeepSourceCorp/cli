@@ -1,45 +1,12 @@
 <template>
   <div class="w-full space-y-2">
-    <div class="box-content relative z-20" v-outside-click="outsideClickHandler">
-      <z-input
-        v-model="searchCanidate"
-        class="flex-grow p-2"
-        @click="toggleAnalyzerList"
-        @focus="toggleAnalyzerList"
-        placeholder="Search for Analyzer"
-      >
-        <template slot="left">
-          <z-icon icon="search" size="small" class="ml-1 mr-0.5"></z-icon>
-        </template>
-      </z-input>
-      <div v-if="showAnalyzers" class="absolute inline-block w-full mt-1 bg-ink-300 shadow-lg">
-        <ul v-if="searchAnalyzers.length" class="grid grid-cols-3 gap-2 p-2">
-          <li
-            v-for="analyzer in searchAnalyzers"
-            :key="analyzer.name"
-            @click="addAnalyzer(analyzer)"
-            class="flex items-center justify-between px-2 py-2 rounded-md cursor-pointer bg-ink-400 hover:bg-ink-200"
-          >
-            <span class="flex items-center space-x-2">
-              <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
-              <span>{{ analyzer.label }}</span>
-              <z-tag
-                v-if="analyzer.isBeta"
-                text-size="xxs"
-                spacing="py-1 px-3"
-                bgColor="ink-200"
-                class="font-thin leading-none tracking-wider uppercase text-xxs"
-                >Beta</z-tag
-              >
-            </span>
-            <span>
-              <z-icon icon="plus" color="juniper" size="small" />
-            </span>
-          </li>
-        </ul>
-        <div v-else class="flex items-center justify-center h-24">No Matches</div>
-      </div>
-    </div>
+    <analyzer-search
+      ref="analyzer-search-component"
+      :selectedAnalyzers="selectedAnalyzers"
+      :toggleSearch="showAnalyzerList"
+      @addAnalyzer="addAnalyzer"
+      @closeSearch="showAnalyzerList = false"
+    />
     <template v-if="activeAnalyzers.length">
       <analyzer
         class="z-20"
@@ -64,7 +31,7 @@
           written your code in.
         </p>
         <z-button
-          @click="toggleAnalyzerList"
+          @click="showAnalyzerList = true"
           ref="add-analyzer-button"
           buttonType="secondary"
           icon="plus"
@@ -79,8 +46,9 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZStepper, ZStep, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
 import Analyzer from './Analyzer.vue'
+import AnalyzerSearch from './AnalyzerSearch.vue'
 
 import {
   AnalyzerListActions,
@@ -124,12 +92,11 @@ export interface AnalyzerComponent extends Vue {
 @Component({
   components: {
     ZIcon,
-    ZStepper,
-    ZStep,
     ZInput,
     ZTag,
     ZButton,
-    Analyzer
+    Analyzer,
+    AnalyzerSearch
   }
 })
 export default class AnalyzerSelector extends Vue {
@@ -143,27 +110,10 @@ export default class AnalyzerSelector extends Vue {
   @analyzerListStore.Action(AnalyzerListActions.FETCH_ANALYZER_LIST)
   fetchAnalyzers: () => Promise<void>
 
-  private searchCanidate = ''
   private showAnalyzerList = false
 
   async fetch(): Promise<void> {
     await this.fetchAnalyzers()
-  }
-
-  get searchAnalyzers(): AnalyzerInterface[] {
-    const analyzersNotYetSelected = this.analyzerList.filter(
-      (config) => !this.selectedAnalyzers.includes(config.name)
-    )
-    if (this.searchCanidate) {
-      return analyzersNotYetSelected.filter(
-        (config) => config.name.search(this.searchCanidate) >= 0
-      )
-    }
-    return analyzersNotYetSelected
-  }
-
-  get showAnalyzers(): boolean {
-    return Boolean(this.searchCanidate) || this.showAnalyzerList
   }
 
   get selectedAnalyzers(): string[] {
@@ -187,8 +137,6 @@ export default class AnalyzerSelector extends Vue {
       meta: {},
       enabled: true
     })
-    this.showAnalyzerList = false
-    this.searchCanidate = ''
   }
 
   removeAnalyzer(analyzer: AnalyzerInterface): void {
@@ -198,10 +146,6 @@ export default class AnalyzerSelector extends Vue {
       meta: {},
       enabled: false
     })
-  }
-
-  toggleAnalyzerList(): void {
-    this.showAnalyzerList = !this.showAnalyzerList
   }
 
   validateConfig(): boolean {
@@ -215,18 +159,6 @@ export default class AnalyzerSelector extends Vue {
     })
 
     return issueCount > 0 ? false : true
-  }
-
-  outsideClickHandler(event: InputEvent): void {
-    const addButton = this.$refs['add-analyzer-button'] as Vue
-    if (addButton) {
-      const el = addButton.$el
-      if (event.target == el || el.contains(event.target as Element)) {
-        return
-      }
-      this.showAnalyzerList = false
-    }
-    this.showAnalyzerList = false
   }
 
   syncAnalyzer(obj: AnalyzerInterface): void {

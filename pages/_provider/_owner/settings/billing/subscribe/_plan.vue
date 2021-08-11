@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-5xl p-5 space-y-4">
+  <div class="max-w-5xl p-4 space-y-4">
     <div>
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="cursor-pointer text-vanilla-400"

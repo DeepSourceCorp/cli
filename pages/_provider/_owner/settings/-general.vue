@@ -1,5 +1,5 @@
 <template>
-  <div class="p-5 space-y-6">
+  <div class="p-4 space-y-6">
     <h2 class="text-lg font-medium">Organization details</h2>
     <form-group>
       <text-input label="Name" inputId="team-settings-branch" v-model="teamName"></text-input>

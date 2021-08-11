@@ -9,7 +9,10 @@ export enum TeamPerms {
   ACTIVATE_ANALYSIS = 'activateAnalysis',
   SYNC_REPO_LIST = 'syncRepoList',
   ONBOARD_ACCOUNT = 'onboardAccount',
-  VIEW_TEAM_HOME = 'viewTeamHome'
+  VIEW_TEAM_HOME = 'viewTeamHome',
+  AUTO_ONBOARD_CRUD_FOR_TEMPLATE = 'autoOnboardCrudForTemplate',
+  AUTO_ONBOARD_VIEW_TEMPLATE = 'autoOnboardViewTemplate',
+  AUTO_ONBOARD_REPOSITORIES = 'autoOnboardRepositories'
 }
 
 export enum RepoPerms {

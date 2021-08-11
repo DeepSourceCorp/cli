@@ -16,7 +16,7 @@
       class="min-w-4 min-h-4"
     ></z-icon>
     <div
-      class="items-center overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis"
+      class="items-center overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis w-full"
       v-show="!isCollapsed"
     >
       <slot></slot>

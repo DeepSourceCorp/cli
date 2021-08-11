@@ -1,6 +1,6 @@
 <template>
   <div class="text-base font-normal rounded-sm bg-ink-300">
-    <div class="flex items-center justify-between py-2 px-3">
+    <div class="flex items-center justify-between p-4">
       <div
         class="flex items-center space-x-2 font-bold text-vanilla-100 select-none"
         @click="isCollapsed = !isCollapsed"
@@ -26,6 +26,7 @@
       </div>
       <button
         @click="onClose"
+        v-if="!readOnly"
         v-tooltip="{ content: 'Remove Analyzer', delay: { show: 700, hide: 100 } }"
         class="cursor-pointer p-1 hover:bg-light-cherry hover:bg-opacity-20 rounded-md"
       >
@@ -55,22 +56,33 @@
           </span>
           <template v-if="config.type == 'string'">
             <template v-if="config.enum && config.enum.length">
-              <z-radio-group v-model="config.selected" class="grid grid-cols-4 gap-2 -mb-2 text-sm">
+              <z-radio-group
+                :disabled="readOnly"
+                v-model="config.selected"
+                class="grid grid-cols-4 gap-2 -mb-2 text-sm"
+              >
                 <z-radio
                   class="mb-2 mr-4"
                   v-for="option in config.enum"
                   :key="option"
+                  :disabled="readOnly"
                   :value="option"
                   :label="config.labels ? config.labels[option] : option"
                 ></z-radio>
               </z-radio-group>
             </template>
             <template v-else>
-              <z-input v-model="config.selected" textSize="xs" />
+              <z-input
+                :disabled="readOnly || (forTemplate && hasTemplate(config))"
+                v-tooltip="forTemplate ? 'This value will be added during runtime' : ''"
+                v-model="config.selected"
+                textSize="xs"
+              />
             </template>
           </template>
           <template v-else-if="config.type == 'boolean'">
             <z-radio-group
+              :disabled="readOnly"
               :modelValue="`${Number(config.selected)}`"
               @change="(val) => (config.selected = Boolean(Number(val)))"
               class="grid grid-cols-8 gap-2 space-x-4 text-sm"
@@ -90,6 +102,7 @@
                 v-for="option in config.items.enum"
                 :key="option"
                 :label="config.labels ? config.labels[option] : option"
+                :disabled="readOnly"
                 :value="option"
                 :modelValue="
                   Array.isArray(config.selected) ? config.selected.includes(option) : false
@@ -100,13 +113,29 @@
             <div v-else>
               <z-input
                 :name="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
+                :disabled="readOnly || (forTemplate && hasTemplate(config))"
+                v-tooltip="
+                  forTemplate && hasTemplate(config)
+                    ? 'This value will automatically be filled during runtime'
+                    : ''
+                "
                 @input="(value) => updateArray(value, config)"
                 textSize="xs"
               ></z-input>
             </div>
           </template>
           <template v-else-if="config.type == 'integer'">
-            <z-input v-model="config.selected" textSize="xs" type="number" />
+            <z-input
+              :disabled="readOnly || (forTemplate && hasTemplate(config))"
+              v-tooltip="
+                forTemplate && hasTemplate(config)
+                  ? 'This value will automatically be filled during runtime'
+                  : ''
+              "
+              v-model="config.selected"
+              textSize="xs"
+              type="number"
+            />
           </template>
         </div>
       </template>
@@ -116,15 +145,25 @@
           <div
             v-for="transformer in transformerItems"
             :key="transformer.shortcode"
-            @click.prevent="() => (transformer.enabled = !transformer.enabled)"
-            class="flex items-center justify-between p-2 text-sm border rounded-md cursor-pointer"
-            :class="transformer.enabled ? 'bg-ink-200 border-ink-100' : 'border-ink-200'"
+            @click.prevent="toggleTransformer(transformer)"
+            class="flex items-center justify-between p-2 text-sm border rounded-md"
+            :class="[
+              transformer.enabled ? 'bg-ink-200 border-ink-100' : 'border-ink-200',
+              readOnly ? 'cursor-not-allowed' : 'cursor-pointer'
+            ]"
           >
-            <div class="flex items-center space-x-2 text-vanilla-200">
+            <div
+              class="flex items-center space-x-2"
+              :class="readOnly ? 'text-vanilla-400' : 'text-vanilla-200'"
+            >
               <img :src="transformer.logo" class="w-auto h-3" :alt="transformer.name" />
               <span>{{ transformer.name }}</span>
             </div>
-            <z-checkbox :value="transformer.shortcode" v-model="transformer.enabled" />
+            <z-checkbox
+              :disabled="readOnly"
+              :value="transformer.shortcode"
+              v-model="transformer.enabled"
+            />
           </div>
         </div>
       </div>
@@ -190,11 +229,30 @@ export default class Analyzer extends Vue {
   @Prop({ default: [] })
   selectedTransformers: Array<TransformerInterface>
 
+  @Prop({ default: false })
+  forTemplate: Boolean
+
+  @Prop({ default: false })
+  readOnly: Boolean
+
   public configItems: Array<AnalyzerMetaProperitiesInterface> = []
   public transformerItems: Array<TransformerInterface> = []
   public invalidFields: Array<string> = []
   private toSentenceCase = toSentenceCase
   public isCollapsed = false
+
+  @Watch('readOnly')
+  updateIsCollapseOnReadStatusChange(): void {
+    if (this.readOnly) {
+      this.isCollapsed = false
+    }
+  }
+
+  toggleTransformer(transformer: TransformerInterface) {
+    if (!this.readOnly) {
+      transformer.enabled = !transformer.enabled
+    }
+  }
 
   public onClose(): void {
     // remove all transformers
@@ -207,6 +265,9 @@ export default class Analyzer extends Vue {
   }
 
   get showTransformers(): boolean {
+    if (this.forTemplate) {
+      return this.availableTransformers.length > 0
+    }
     return Boolean(this.repository.isAutofixEnabled && this.availableTransformers.length > 0)
   }
 
@@ -216,11 +277,15 @@ export default class Analyzer extends Vue {
   }
 
   parseTemplate(candidate: string): string {
+    if (this.forTemplate) {
+      return candidate
+    }
     const hostmap: Record<string, string> = {
       gh: 'github.com',
       gl: 'gitlab.com',
       bb: 'bitbucket.com'
     }
+
     const { owner, repo, provider } = this.$route.params
     let host = provider in hostmap ? hostmap[provider] : ''
 
@@ -231,6 +296,17 @@ export default class Analyzer extends Vue {
       .replaceAll('<%=  vcs_host %>', host)
       .replaceAll('<%=  login %>', owner)
       .replaceAll('<%=  name %>', repo)
+  }
+
+  hasTemplate(config: AnalyzerMetaProperitiesInterface): boolean {
+    if (typeof config.selected === 'string') {
+      return (
+        config.selected.includes('<%=  vcs_host %>') ||
+        config.selected.includes('<%=  login %>') ||
+        config.selected.includes('<%=  name %>')
+      )
+    }
+    return false
   }
 
   generateConfigItems(): void {

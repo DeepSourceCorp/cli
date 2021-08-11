@@ -1,0 +1,11 @@
+query getTemplateInfo($login: String!, $provider: VCSProviderChoices!, $shortcode: String!) {
+  owner(login: $login, provider: $provider) {
+    id
+    configTemplate(shortcode: $shortcode) {
+      config
+      shortcode
+      title
+      description
+    }
+  }
+}

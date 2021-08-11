@@ -1,0 +1,5 @@
+mutation autoOnboard($shortcode: String!, $repoIds: [ID]!) {
+  autoOnboard(input: { templateShortcode: $shortcode, repoIds: $repoIds }) {
+    ok
+  }
+}

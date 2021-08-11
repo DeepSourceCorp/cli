@@ -124,7 +124,7 @@
         inputWidth="x-small"
       >
         <template slot="description">
-          Chagne the deepsource.toml file in the repository's root to modify the analysis
+          Change the deepsource.toml file in the repository's root to modify the analysis
           configuration.
         </template>
       </button-input>
@@ -168,7 +168,7 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, mixins, Watch } from 'nuxt-property-decorator'
+import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { ToggleInput, TextInput, SelectInput, FormGroup } from '@/components/Form'
 import { Notice, InfoBanner } from '@/components/Settings/index'
 import {

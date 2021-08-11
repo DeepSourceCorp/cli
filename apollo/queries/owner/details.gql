@@ -4,6 +4,9 @@ query($login: String!, $provider: VCSProviderChoices!) {
     isTeam
     vcsInstallationId
     hasSubscribedToPlan
+    autofixInstallationUrl
+    isAutofixEnabled
+    isAutoonboardAllowed
     hasPremiumPlan
     team {
       id

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 gap-6 p-5">
+  <div class="grid grid-cols-1 gap-6 p-4">
     <template v-if="owner.hasPremiumPlan && !loading">
       <h2 class="text-lg font-medium">Billing</h2>
       <plan-info :billing="billing" :id="owner.id"></plan-info>

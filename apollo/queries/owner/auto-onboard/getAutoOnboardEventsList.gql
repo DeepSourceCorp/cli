@@ -1,0 +1,25 @@
+query listAutoOnboardEvents($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    autoonboardingEvents {
+      edges {
+        node {
+          id
+          status
+          pullRequestNumber
+          vcsPrUrl
+          repository {
+            name
+            vcsProvider
+            vcsHost
+            isPrivate
+            vcsUrl
+            owner {
+              login
+            }
+          }
+        }
+      }
+    }
+  }
+}

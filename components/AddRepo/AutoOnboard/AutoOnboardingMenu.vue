@@ -1,0 +1,168 @@
+<template>
+  <section :class="hasAutoOnboardEvents ? 'p-4' : 'px-4'">
+    <div class="p-3 border rounded-md border-ink-200 -mx-1" v-if="hasAutoOnboardEvents">
+      <div class="flex justify-between items-center" :class="isCollapsed ? 'pb-0' : 'pb-3'">
+        <div class="flex items-center space-x-1.5">
+          <span class="text-vanilla-300 text-sm font-medium leading-none">
+            Pending {{ activeProvider === 'gl' ? 'merge' : 'pull' }}-requests
+          </span>
+          <z-tag
+            v-if="openCount || pendingCount"
+            bgColor="ink-400 border border-ink-100"
+            textSize="xxs"
+            spacing="px-2 py-0.5"
+            class="tracking-wider font-semibold"
+          >
+            <template v-if="openCount">{{ openCount }} OPEN</template>
+            <template v-if="openCount && pendingCount">·</template>
+            <template v-if="pendingCount">{{ pendingCount }} PENDING</template>
+          </z-tag>
+        </div>
+        <button class="focus:outline-none">
+          <z-icon
+            @click="isCollapsed = !isCollapsed"
+            class="transform duration-150"
+            :class="{
+              'rotate-180': isCollapsed
+            }"
+            icon="chevron-up"
+          />
+        </button>
+      </div>
+      <div v-if="!isCollapsed" class="max-h-64 overflow-scroll default-scroll">
+        <transition-group move-class="duration-200 transform" tag="ul" class="space-y-2">
+          <li
+            v-for="event in sortedEvents"
+            :key="event.id"
+            class="border border-ink-200 flex items-center justify-between p-1.5 pl-3.5 rounded-md group"
+          >
+            <span class="text-vanilla-200 group-hover:text-vanilla-100 flex items-center space-x-2">
+              <z-icon :icon="event.repository.isPrivate ? 'lock' : 'globe'"></z-icon>
+              <span class="text-sm leading-none">
+                <template v-if="event.repository.owner && event.repository.owner.login">
+                  <span class="text-vanilla-400">{{ event.repository.owner.login }}</span> /
+                  {{ event.repository.name }}
+                </template>
+                <template v-else>
+                  <span class="text-vanilla-400">{{ activeOwner }}</span> /
+                  {{ event.repository.name }}
+                </template>
+              </span>
+            </span>
+            <z-button
+              v-if="event.status === 'OPEN'"
+              size="small"
+              :to="event.vcsPrUrl"
+              target="_blank"
+              buttonType="secondary"
+              rel="noopener noreferrer"
+              icon="external-link"
+              >View {{ prText }}-request</z-button
+            >
+            <z-button
+              v-else-if="event.status === 'PEND'"
+              size="small"
+              buttonType="secondary"
+              :disabled="true"
+              iconColor="vanilla-400 animate-spin"
+              icon="spin-loader"
+            >
+              Creating {{ prText }}-request
+            </z-button>
+          </li>
+        </transition-group>
+      </div>
+    </div>
+    <button-input
+      label="Onboard new repositories"
+      inputId="onboard-new-repositories"
+      buttonLabel="Select template"
+      buttonType="primary"
+      @click="$emit('startOnboarding')"
+      icon="file-plus"
+      inputWidth="x-small"
+    >
+      <template slot="description">
+        Use AutoOnboard to activate DeepSource analysis on multiple repositories.
+      </template>
+    </button-input>
+    <button-input
+      label="Update templates"
+      inputId="autoonboard-settings"
+      buttonLabel="Settings"
+      buttonType="secondary"
+      :to="settingsLink"
+      icon="settings"
+      inputWidth="x-small"
+    >
+      <template slot="description"> Create and edit templates to be used for AutoOnboard.</template>
+    </button-input>
+  </section>
+</template>
+<script lang="ts">
+import { Component, mixins } from 'nuxt-property-decorator'
+import { ZInput, ZButton, ZIcon, ZTabPane, ZTag } from '@deepsourcelabs/zeal'
+import { RepoCard } from '@/components/AddRepo'
+
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
+import { toTitleCase } from '@/utils/string'
+
+@Component({
+  components: {
+    ZInput,
+    ZButton,
+    ZIcon,
+    ZTabPane,
+    ZTag,
+    RepoCard
+  }
+})
+export default class AutoOnboardingMenu extends mixins(ActiveUserMixin, AutoOnboardMixin) {
+  public toTitleCase = toTitleCase
+  public isCollapsed = false
+  public pollingInterval: ReturnType<typeof setInterval>
+
+  mounted() {
+    this.$socket.$on('repo-onboarding-completed', () => {
+      this.refetchEvents()
+    })
+    // refetch every 1 minute
+    this.pollingInterval = setInterval(this.refetchEvents, 0.5 * 60 * 1000)
+  }
+
+  async refetchEvents(): Promise<void> {
+    await this.fetchOnboardingEventList({
+      login: this.activeOwner,
+      provider: this.activeProvider,
+      refetch: true
+    })
+
+    if (this.autoOnboardEvents.length === 0) {
+      clearInterval(this.pollingInterval)
+      this.$socket.$off('repo-onboarding-completed')
+    }
+  }
+
+  beforeDestroy(): void {
+    clearInterval(this.pollingInterval)
+    this.$socket.$off('repo-onboarding-completed')
+  }
+
+  get openCount(): number {
+    return this.sortedEvents.filter((event) => event.status === 'OPEN').length
+  }
+
+  get pendingCount(): number {
+    return this.sortedEvents.filter((event) => event.status === 'PEND').length
+  }
+
+  get prText(): string {
+    return this.activeProvider === 'gl' ? 'merge' : 'pull'
+  }
+
+  get settingsLink(): string {
+    return ['', this.activeProvider, this.activeOwner, 'settings', 'auto-onboard'].join('/')
+  }
+}
+</script>

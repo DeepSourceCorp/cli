@@ -75,10 +75,25 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
 
   async fetch(): Promise<void> {
     await this.fetchActiveUser()
+    await this.fetchRepos()
+  }
+
+  mounted() {
+    this.$socket.$on('repo-onboarding-completed', () => {
+      this.fetchRepos(true)
+    })
+  }
+
+  beforeDestroy() {
+    this.$socket.$off('repo-onboarding-completed')
+  }
+
+  async fetchRepos(refetch?: boolean): Promise<void> {
     await this.fetchActiveAnalysisRepoList({
       login: this.activeOwner,
       provider: this.activeProvider,
-      limit: 10
+      limit: 10,
+      refetch: refetch
     })
   }
 

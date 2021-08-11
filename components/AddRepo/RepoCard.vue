@@ -11,8 +11,8 @@
         <div
           class="text-vanilla-400"
           :class="{
-            'text-base font-normal space-x-0.5': this.size == 'small',
-            'space-x-1': this.size == 'base'
+            'text-base font-normal': size === 'small',
+            'space-x-1': size === 'base'
           }"
         >
           <span>{{ ownerLogin }}</span>
@@ -64,13 +64,13 @@
           <span>Analyzed {{ lastAnalyzedAtString }}</span>
         </div>
         <!-- Created -->
-        <div class="inline-flex items-center space-x-2">
-          <z-icon icon="git-branch" size="small" color="vanilla-400"></z-icon>
+        <div v-if="defaultBranchName" class="inline-flex items-center space-x-2">
+          <z-icon icon="git-branch" size="x-small" color="vanilla-400"></z-icon>
           <span class="text-vanilla-400">{{ defaultBranchName }}</span>
         </div>
         <!-- Analyzer Type -->
         <div v-if="latestCommitOid" class="inline-flex items-center space-x-2">
-          <z-icon icon="git-commit" size="small"></z-icon>
+          <z-icon icon="git-commit" size="x-small"></z-icon>
           <span>{{ latestCommitOid.slice(0, 7) }}</span>
         </div>
       </div>

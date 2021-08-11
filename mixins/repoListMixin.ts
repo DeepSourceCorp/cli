@@ -6,9 +6,12 @@ import { RepositoryConnection } from '~/types/types'
 const repoListStore = namespace('repository/list')
 
 @Component
-export default class IssueListMixin extends Vue {
+export default class RepoListMixin extends Vue {
   @repoListStore.State
   repositoryList: RepositoryConnection
+
+  @repoListStore.State
+  newRepos: RepositoryConnection
 
   @repoListStore.State
   repoWithActiveAnalysis: RepositoryConnection
@@ -24,6 +27,15 @@ export default class IssueListMixin extends Vue {
     currentPageNumber: number
     query: string | null
     refetch?: boolean
+  }) => Promise<void>
+
+  @repoListStore.Action(RepoListActions.FETCH_NEW_REPOSITORY_LIST)
+  fetchNewRepoList: (args: {
+    login: string
+    provider: string
+    limit: number
+    currentPageNumber: number
+    query: string | null
   }) => Promise<void>
 
   @repoListStore.Action(RepoListActions.FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST)

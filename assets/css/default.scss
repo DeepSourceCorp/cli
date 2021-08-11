@@ -1,4 +1,4 @@
-*:not(.hide-scroll) {
+*:not(.hide-scroll):not(.default-scroll) {
   &::-webkit-scrollbar-track {
     padding: 2px;
     background-color: transparent;

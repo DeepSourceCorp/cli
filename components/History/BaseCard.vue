@@ -2,9 +2,11 @@
   <component
     :is="to ? 'nuxt-link' : 'div'"
     :to="to"
+    @click="$emit('click')"
     class="block group"
     :class="{
-      'border rounded-lg border-ink-200 hover:bg-ink-300': !removeDefaultStyle
+      'border rounded-lg border-ink-200': !removeDefaultStyle,
+      'hover:bg-ink-300': to && !removeDefaultStyle
     }"
   >
     <div
@@ -16,13 +18,15 @@
     <div class="flex flex-wrap w-full flex-1">
       <!-- Left Section -->
       <div
-        class="border-ink-300 text-sm text-vanilla-400 px-4 py-3 flex flex-col justify-evenly"
+        class="border-ink-300 text-sm text-vanilla-400 px-4 py-3 flex flex-col justify-evenly space-y-1"
         :class="{ 'w-full md:w-4/5': showInfo }"
       >
-        <div class="text-base sm:text-lg items-center font-semibold flex space-x-2">
-          <slot name="title"></slot>
+        <div
+          class="text-base sm:text-lg items-center font-semibold flex space-x-2 text-vanilla-200"
+        >
+          <slot name="title">{{ title }} </slot>
         </div>
-        <slot name="description"></slot>
+        <slot name="description">{{ description }}</slot>
       </div>
       <!-- Right Section -->
       <div
@@ -44,6 +48,12 @@ export default class BaseCard extends Vue {
 
   @Prop({ default: '' })
   to: string
+
+  @Prop({ default: '' })
+  title: string
+
+  @Prop({ default: '' })
+  description: string
 
   @Prop({ default: false })
   removeDefaultStyle: boolean
