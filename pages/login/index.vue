@@ -26,6 +26,22 @@
             <span>Continue with {{ opt.label }}</span>
           </button>
         </a>
+        <a
+          v-if="$config.enableSaml"
+          href="/saml2/login"
+          class="w-full flex items-center left-section__btn"
+        >
+          <button
+            class="p-2 text-vanilla-100 w-full space-x-2 flex items-center rounded-sm justify-center hover:bg-opacity-90"
+            :class="robin"
+          >
+            <z-icon
+              :icon="samlClicked ? 'spin-loader' : 'shield'"
+              :color="samlClicked ? 'vanilla-100' : 'vanilla-100 animate-spin'"
+            />
+            <span>Continue with {{ opt.label }}</span>
+          </button>
+        </a>
       </div>
       <div class="mt-8 text-vanilla-400" v-if="$config.allowSocialAuth">
         Don't have an account?
@@ -71,5 +87,7 @@ import { AuthActionTypes } from '~/store/account/auth'
     title: 'Login — DeepSource'
   }
 })
-export default class SignUp extends mixins(AuthMixin) {}
+export default class SignUp extends mixins(AuthMixin) {
+  public samlClicked = false
+}
 </script>

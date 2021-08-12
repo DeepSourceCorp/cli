@@ -99,17 +99,6 @@ export default class AuthMixin extends Vue {
       }
     }
 
-    if (enableSaml && !onProvidersPage) {
-      options.push({
-        provider: 'saml',
-        icon: 'key',
-        iconColor: 'vanilla-100',
-        link: '/saml2/login',
-        label: 'SSO',
-        bg: 'bg-robin'
-      })
-    }
-
     return options
   }
 }
