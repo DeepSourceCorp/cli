@@ -29,6 +29,7 @@
         <a
           v-if="$config.enableSaml"
           href="/saml2/login"
+          @click="samlClicked = true"
           class="w-full flex items-center left-section__btn"
         >
           <button
