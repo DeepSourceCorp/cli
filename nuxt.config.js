@@ -30,12 +30,13 @@ export default {
     csrfServerUri: process.env.CSRF_SERVER_URI,
     csrfClientUri: process.env.CSRF_CLIENT_URI,
     webSocketUri: process.env.WEB_SOCKET_URI,
-    onPrem: process.env.ON_PREM,
+    onPrem: Boolean(process.env.ON_PREM),
     gitlabEnabled: process.env.ON_PREM ? process.env.GITLAB_ENABLED : true,
     githubEnabled: process.env.ON_PREM ? process.env.GITHUB_ENABLED : true,
     bitbucketEnabled: process.env.ON_PREM ? process.env.BITBUCKET_ENABLED : true,
     githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
-    enableSaml: process.env.ENABLE_SAML,
+    enableSaml: Boolean(process.env.ENABLE_SAML),
+    allowSocialAuth: process.env.ON_PREM ? process.env.ALLOW_SOCIAL_AUTH : true,
     supportEmail: process.env.ON_PREM
       ? 'enterprise-support@deepsource.io'
       : 'support@deepsource.io',

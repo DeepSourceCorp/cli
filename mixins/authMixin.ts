@@ -9,6 +9,8 @@ export interface LoginOption {
   icon: string
   label: string
   bg: string
+  iconColor?: string
+  link?: string
 }
 @Component
 export default class AuthMixin extends Vue {
@@ -47,49 +49,62 @@ export default class AuthMixin extends Vue {
 
   get loginOptions(): LoginOption[] {
     const options: LoginOption[] = []
+    const {
+      onPrem,
+      githubEnabled,
+      githubServerEnabled,
+      gitlabEnabled,
+      allowSocialAuth,
+      bitbucketEnabled,
+      enableSaml
+    } = this.$config
 
-    if (this.$config.githubEnabled) {
-      options.push({
-        provider: 'github',
-        icon: 'github',
-        label: 'GitHub',
-        bg: 'bg-ink-200'
-      })
+    if (!onPrem || !enableSaml || allowSocialAuth) {
+      if (githubEnabled) {
+        options.push({
+          provider: 'github',
+          icon: 'github',
+          label: 'GitHub',
+          bg: 'bg-ink-200'
+        })
+      }
+
+      if (githubServerEnabled) {
+        options.push({
+          provider: 'github-enterprise',
+          icon: 'github',
+          label: 'GitHub Enterprise',
+          bg: 'bg-ink-200'
+        })
+      }
+
+      if (gitlabEnabled) {
+        options.push({
+          provider: 'gitlab',
+          icon: 'gitlab',
+          label: 'GitLab',
+          bg: 'bg-gitlab'
+        })
+      }
+
+      if (bitbucketEnabled) {
+        options.push({
+          provider: 'bitbucket',
+          icon: 'bitbucket',
+          label: 'Bitbucket',
+          bg: 'bg-bitbucket'
+        })
+      }
     }
 
-    if (this.$config.githubServerEnabled) {
-      options.push({
-        provider: 'github-enterprise',
-        icon: 'github',
-        label: 'GitHub Enterprise',
-        bg: 'bg-ink-200'
-      })
-    }
-
-    if (this.$config.gitlabEnabled) {
-      options.push({
-        provider: 'gitlab',
-        icon: 'gitlab',
-        label: 'GitLab',
-        bg: 'bg-gitlab'
-      })
-    }
-
-    if (this.$config.bitbucketEnabled) {
-      options.push({
-        provider: 'bitbucket',
-        icon: 'bitbucket',
-        label: 'Bitbucket',
-        bg: 'bg-bitbucket'
-      })
-    }
-
-    if (this.$config.enableSaml) {
+    if (enableSaml) {
       options.push({
         provider: 'saml',
-        icon: 'bitbucket',
+        icon: 'key',
+        iconColor: 'vanilla-100',
+        link: '/saml2/login',
         label: 'SSO/SAML',
-        bg: 'bg-bitbucket'
+        bg: 'bg-robin'
       })
     }
 
