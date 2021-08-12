@@ -94,7 +94,9 @@ export default class DashboardHeader extends mixins(ActiveUserMixin, ContextMixi
 
   get repoVCSIcon(): string {
     const provider = this.activeDashboardContext.vcs_provider_display.toLowerCase()
-    return ['github_enterprise', 'github-enterprise'].includes(provider) ? 'github' : provider
+    return ['github enterprise', 'github_enterprise', 'github-enterprise'].includes(provider)
+      ? 'github'
+      : provider
   }
 }
 </script>
