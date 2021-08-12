@@ -59,7 +59,9 @@ export default class AuthMixin extends Vue {
       enableSaml
     } = this.$config
 
-    if (!onPrem || !enableSaml || allowSocialAuth) {
+    const onProvidersPage = this.$route.name === 'installation-providers'
+
+    if (!onPrem || !enableSaml || allowSocialAuth || onProvidersPage) {
       if (githubEnabled) {
         options.push({
           provider: 'github',
@@ -96,8 +98,6 @@ export default class AuthMixin extends Vue {
         })
       }
     }
-
-    const onProvidersPage = this.$route.name === 'installation-provider'
 
     if (enableSaml && !onProvidersPage) {
       options.push({
