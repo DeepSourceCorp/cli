@@ -38,7 +38,10 @@ export default {
     enableSaml: Boolean(process.env.ENABLE_SAML),
     allowSocialAuth: process.env.ON_PREM ? process.env.ALLOW_SOCIAL_AUTH : true,
     stripe: {
-      publishableKey: process.env.ON_PREM ? process.env.STRIPE_KEY : ''
+      publishableKey: process.env.ON_PREM ? '' : process.env.STRIPE_KEY
+    },
+    googleAnalytics: {
+      id: process.env.ON_PREM ? '' : process.env.GOOGLE_ANALYTICS_ID
     },
     supportEmail: process.env.ON_PREM
       ? 'enterprise-support@deepsource.io'
@@ -182,10 +185,6 @@ export default {
     families: {
       Inter: [100, 200, 300, 400, 500, 600, 700]
     }
-  },
-
-  googleAnalytics: {
-    id: process.env.GOOGLE_ANALYTICS_ID
   },
 
   apollo: {
