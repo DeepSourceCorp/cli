@@ -61,7 +61,7 @@
     <template v-slot:footer="{ close }">
       <div class="p-4 space-x-4 text-right text-vanilla-100 border-ink-200">
         <z-button
-          :icon="savingConfig ? 'animate-spin' : 'autofix'"
+          :icon="savingConfig ? 'spin-loader' : 'autofix'"
           :iconColor="savingConfig ? 'ink animate-spin' : ''"
           class="w-48 modal-primary-action"
           buttonType="primary"
