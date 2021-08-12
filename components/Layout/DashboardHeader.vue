@@ -32,7 +32,7 @@
               spacing="p-0.5"
               bgcolor="ink-200"
               size="base"
-              :iconLeft="activeDashboardContext.vcs_provider_display.toLowerCase()"
+              :iconLeft="repoVCSIcon"
             ></z-tag>
           </a>
 
@@ -90,6 +90,13 @@ export default class DashboardHeader extends mixins(ActiveUserMixin, ContextMixi
       (this.activeDashboardContext as DashboardContext).subscribed_plan_info?.slug !==
       FREE_PLAN_SLUG
     )
+  }
+
+  get repoVCSIcon(): string {
+    const provider = this.activeDashboardContext.vcs_provider_display.toLowerCase()
+    return ['github enterprise', 'github_enterprise', 'github-enterprise'].includes(provider)
+      ? 'github'
+      : provider
   }
 }
 </script>

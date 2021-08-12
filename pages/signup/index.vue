@@ -131,7 +131,14 @@ const TESTIMONIALS: Testimonial[] = [
     ZSlide,
     ZCard
   },
-  middleware: ['redirectToHome'],
+  middleware: [
+    'redirectToHome',
+    ({ $config, redirect }) => {
+      if ($config.onPrem) {
+        redirect(302, `/login`)
+      }
+    }
+  ],
   head: {
     title: 'Sign up — DeepSource'
   }
