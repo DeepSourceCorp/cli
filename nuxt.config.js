@@ -108,8 +108,8 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-fonts',
-    ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
+    '@nuxtjs/google-fonts'
+    // ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -118,7 +118,7 @@ export default {
     'cookie-universal-nuxt',
     '@nuxt/content',
     'portal-vue/nuxt',
-    ...(process.env.ON_PREM ? [] : ['@nuxtjs/sentry', 'nuxt-stripe-module'])
+    ...(process.env.ON_PREM ? [] : ['@nuxtjs/sentry'])
   ],
 
   serverMiddleware: [
@@ -179,6 +179,7 @@ export default {
   },
 
   googleFonts: {
+    download: true,
     families: {
       Inter: [100, 200, 300, 400, 500, 600, 700]
     }
