@@ -32,7 +32,7 @@
               spacing="p-0.5"
               bgcolor="ink-200"
               size="base"
-              :iconLeft="activeDashboardContext.vcs_provider_display.toLowerCase()"
+              :iconLeft="repoVCSIcon"
             ></z-tag>
           </a>
 
