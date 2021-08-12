@@ -77,19 +77,19 @@ export default {
     disabled: true
   },
 
-  // extendPlugins(plugins) {
-  //   const services = [
-  //     '~/plugins/services/fullstory.js',
-  //     '~/plugins/services/rudderLoader.client.js',
-  //     '~/plugins/services/rudder.client.ts'
-  //   ]
+  extendPlugins(plugins) {
+    const services = [
+      '~/plugins/services/fullstory.js',
+      '~/plugins/services/rudderLoader.client.js',
+      '~/plugins/services/rudder.client.ts'
+    ]
 
-  //   if (!process.env.ON_PREM) {
-  //     plugins.push(...services)
-  //   }
+    if (!process.env.ON_PREM) {
+      plugins.push(...services)
+    }
 
-  //   return plugins
-  // },
+    return plugins
+  },
 
   ignore: process.env.ON_PREM
     ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*']
@@ -111,7 +111,7 @@ export default {
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts'
-    // ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
+    ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -120,7 +120,7 @@ export default {
     'cookie-universal-nuxt',
     '@nuxt/content',
     'portal-vue/nuxt',
-    ...(process.env.ON_PREM ? [] : ['@nuxtjs/sentry'])
+    ...(process.env.ON_PREM ? [] : ['@nuxtjs/sentry', 'nuxt-stripe-module'])
   ],
 
   serverMiddleware: [
