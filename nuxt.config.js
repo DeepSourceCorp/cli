@@ -37,6 +37,9 @@ export default {
     githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
     enableSaml: Boolean(process.env.ENABLE_SAML),
     allowSocialAuth: process.env.ON_PREM ? process.env.ALLOW_SOCIAL_AUTH : true,
+    stripe: {
+      publishableKey: process.env.ON_PREM ? process.env.STRIPE_KEY : ''
+    },
     supportEmail: process.env.ON_PREM
       ? 'enterprise-support@deepsource.io'
       : 'support@deepsource.io',
@@ -88,10 +91,6 @@ export default {
   ignore: process.env.ON_PREM
     ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*']
     : [],
-
-  stripe: {
-    publishableKey: process.env.STRIPE_KEY
-  },
 
   loadingIndicator: {
     name: 'pulse',
