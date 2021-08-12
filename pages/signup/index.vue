@@ -134,7 +134,7 @@ const TESTIMONIALS: Testimonial[] = [
   middleware: [
     'redirectToHome',
     ({ $config, redirect }) => {
-      if (!$config.allowSocialAuth) {
+      if ($config.onPrem) {
         redirect(302, `/login`)
       }
     }

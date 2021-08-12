@@ -43,7 +43,7 @@
           </button>
         </a>
       </div>
-      <div class="mt-8 text-vanilla-400" v-if="$config.allowSocialAuth">
+      <div class="mt-8 text-vanilla-400" v-if="!$config.onPrem">
         Don't have an account?
         <nuxt-link to="/signup" class="text-juniper hover:underline">Sign up</nuxt-link>
       </div>
