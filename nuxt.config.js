@@ -42,10 +42,10 @@ export default {
       : 'support@deepsource.io',
     sentry: {
       clientConfig: {
-        disabled: process.env.ON_PREM ? true : false
+        disabled: true
       },
       serverConfig: {
-        disabled: process.env.ON_PREM ? true : false
+        disabled: true
       }
     }
   },
@@ -66,27 +66,24 @@ export default {
   ],
 
   sentry: {
-    publishRelease:
-      process.env.ON_PREM || process.env.DISABLE_SENTRY
-        ? false
-        : process.env.NODE_ENV !== 'development',
+    publishRelease: false,
     sourceMapStyle: 'hidden-source-map',
-    disabled: process.env.ON_PREM ? true : process.env.DISABLE_SENTRY
+    disabled: true
   },
 
-  extendPlugins(plugins) {
-    const services = [
-      '~/plugins/services/fullstory.js',
-      '~/plugins/services/rudderLoader.client.js',
-      '~/plugins/services/rudder.client.ts'
-    ]
+  // extendPlugins(plugins) {
+  //   const services = [
+  //     '~/plugins/services/fullstory.js',
+  //     '~/plugins/services/rudderLoader.client.js',
+  //     '~/plugins/services/rudder.client.ts'
+  //   ]
 
-    if (!process.env.ON_PREM) {
-      plugins.push(...services)
-    }
+  //   if (!process.env.ON_PREM) {
+  //     plugins.push(...services)
+  //   }
 
-    return plugins
-  },
+  //   return plugins
+  // },
 
   ignore: process.env.ON_PREM
     ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*']
