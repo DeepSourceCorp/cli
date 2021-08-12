@@ -105,7 +105,7 @@ export default class AuthMixin extends Vue {
         icon: 'key',
         iconColor: 'vanilla-100',
         link: '/saml2/login',
-        label: 'SSO/SAML',
+        label: 'SSO',
         bg: 'bg-robin'
       })
     }
