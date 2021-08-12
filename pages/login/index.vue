@@ -33,12 +33,11 @@
           class="w-full flex items-center left-section__btn"
         >
           <button
-            class="p-2 text-vanilla-100 w-full space-x-2 flex items-center rounded-sm justify-center hover:bg-opacity-90"
-            :class="robin"
+            class="p-2 text-vanilla-100 w-full space-x-2 flex items-center rounded-sm justify-center hover:bg-opacity-90 bg-robin"
           >
             <z-icon
               :icon="samlClicked ? 'spin-loader' : 'shield'"
-              :color="samlClicked ? 'vanilla-100' : 'vanilla-100 animate-spin'"
+              :color="samlClicked ? 'vanilla-100 animate-spin' : 'vanilla-100'"
             />
             <span>Continue with SSO</span>
           </button>
