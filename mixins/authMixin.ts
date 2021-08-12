@@ -97,7 +97,9 @@ export default class AuthMixin extends Vue {
       }
     }
 
-    if (enableSaml) {
+    const onProvidersPage = this.$route.name === 'installation-provider'
+
+    if (enableSaml && !onProvidersPage) {
       options.push({
         provider: 'saml',
         icon: 'key',
