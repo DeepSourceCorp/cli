@@ -48,10 +48,10 @@ export default {
       : 'support@deepsource.io',
     sentry: {
       clientConfig: {
-        disabled: true
+        disabled: process.env.ON_PREM ? true : false
       },
       serverConfig: {
-        disabled: true
+        disabled: process.env.ON_PREM ? true : false
       }
     }
   },
