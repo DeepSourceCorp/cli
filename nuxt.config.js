@@ -113,7 +113,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
-    '@nuxtjs/google-fonts'
+    '@nuxtjs/google-fonts',
     ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
   ],
 
