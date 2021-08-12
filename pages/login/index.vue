@@ -40,7 +40,7 @@
               :icon="samlClicked ? 'spin-loader' : 'shield'"
               :color="samlClicked ? 'vanilla-100' : 'vanilla-100 animate-spin'"
             />
-            <span>Continue with {{ opt.label }}</span>
+            <span>Continue with SSO</span>
           </button>
         </a>
       </div>
