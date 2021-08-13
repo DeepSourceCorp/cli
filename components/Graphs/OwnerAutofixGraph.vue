@@ -1,7 +1,7 @@
 <template>
   <stat-section
     class="min-h-40"
-    title="Autofix issues"
+    title="Autofix overview"
     helpText="Summary of issues resolved using Autofix"
     :fullWidth="false"
     :bodyIsGrid="false"
