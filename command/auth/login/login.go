@@ -25,8 +25,8 @@ func NewCmdLogin() *cobra.Command {
 
 			opts := LoginOptions{
 				AuthTimedOut: false,
-				TokenExpired: config.TokenExpired,
-				User:         config.User,
+				TokenExpired: config.Cfg.IsExpired(),
+				User:         config.Cfg.User,
 			}
 			err := opts.Run()
 			if err != nil {

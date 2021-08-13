@@ -1,6 +1,6 @@
-package repo
+package repository
 
-type Repository struct {
+type Meta struct {
 	Activated bool
 	Name      string
 	Owner     string

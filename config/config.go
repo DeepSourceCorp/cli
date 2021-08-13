@@ -16,14 +16,6 @@ const (
 	ConfigFileName = "/config.toml"
 )
 
-var (
-	Host         string = "https://api.deepsource.io/graphql"
-	User         string
-	Token        string
-	RefreshToken string
-	TokenExpired bool = true
-)
-
 type CLIConfig struct {
 	User                  string
 	Token                 string
@@ -32,17 +24,21 @@ type CLIConfig struct {
 	RefreshTokenExpiresIn time.Time
 }
 
+var Cfg CLIConfig
+
+// Sets the token expiry in the desired format
 func (cfg *CLIConfig) SetTokenExpiry(str string) {
 	layout := "2006-01-02T15:04:05.999999999"
 	tokenExpiresIn, _ := time.Parse(layout, str)
 	cfg.TokenExpiresIn = tokenExpiresIn
 }
 
+// Checks if the token has expired or not
 func (cfg CLIConfig) IsExpired() bool {
 	return time.Now().After(cfg.TokenExpiresIn)
 }
 
-//configDir returns the directory to store the config file.
+// configDir returns the directory to store the config file.
 func (CLIConfig) configDir() (string, error) {
 	home, err := configDirFn()
 	if err != nil {
@@ -51,7 +47,7 @@ func (CLIConfig) configDir() (string, error) {
 	return filepath.Join(home, ConfigDirName), nil
 }
 
-//confgPath returns the file path to the config file.
+// configPath returns the file path to the config file.
 func (cfg CLIConfig) configPath() (string, error) {
 	home, err := cfg.configDir()
 	if err != nil {
@@ -66,6 +62,13 @@ func (cfg *CLIConfig) ReadFile() error {
 	if err != nil {
 		return err
 	}
+
+	// check if config exists
+	_, err = os.Stat(path)
+	if err != nil {
+		return nil
+	}
+
 	data, err := readFileFn(path)
 	if err != nil {
 		return err
@@ -75,18 +78,18 @@ func (cfg *CLIConfig) ReadFile() error {
 		return err
 	}
 
-	cfg.populateData()
 	return nil
 }
 
-// Populate the config data into global variables
-func (cfg *CLIConfig) populateData() {
-	User = cfg.User
-	Token = cfg.Token
-	RefreshToken = cfg.RefreshToken
+// Read and populate the config data into global variables
+func InitConfig() error {
+	if err := Cfg.ReadFile(); err != nil {
+		return err
+	}
+	return nil
 }
 
-//WriteFile writes the CLI config to file.
+// WriteFile writes the CLI config to file.
 func (cfg *CLIConfig) WriteFile() error {
 
 	data, err := toml.Marshal(cfg)
@@ -120,6 +123,7 @@ func (cfg *CLIConfig) WriteFile() error {
 	return err
 }
 
+// Deletes the config during logging out user
 func (cfg *CLIConfig) Delete() error {
 	path, err := cfg.configPath()
 	if err != nil {

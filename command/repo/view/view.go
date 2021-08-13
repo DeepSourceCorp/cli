@@ -25,7 +25,7 @@ func NewCmdRepoView() *cobra.Command {
 
 	opts := RepoViewOptions{
 		RepoArg:      "",
-		TokenExpired: config.TokenExpired,
+		TokenExpired: config.Cfg.IsExpired(),
 		Owner:        "",
 		RepoName:     "",
 		VCSProvider:  "",

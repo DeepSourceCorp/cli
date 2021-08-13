@@ -1,16 +1,12 @@
 package command
 
 import (
-	"fmt"
-
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/config"
 	"github.com/deepsourcelabs/cli/command/issues"
 	"github.com/deepsourcelabs/cli/command/repo"
 	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/deepsourcelabs/cli/command/version"
-	cliConfig "github.com/deepsourcelabs/cli/config"
-	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -38,24 +34,6 @@ Login into DeepSource using the command : deepsource auth login`,
 }
 
 func Execute() error {
-
-	// Config operations
-	var cfg cliConfig.CLIConfig
-
-	// Read the DeepSource config file
-	err := cfg.ReadFile()
-	if err != nil {
-		return fmt.Errorf("Error reading config file.")
-	}
-
-	// Check if token expired
-	if cliConfig.Token != "" {
-		cliConfig.TokenExpired = cfg.IsExpired()
-		if cliConfig.TokenExpired {
-			pterm.Info.Println("The authentication has expired. Please refresh the token using `deepsource auth refresh`")
-		}
-	}
-
 	cmd := NewCmdRoot()
 	if err := cmd.Execute(); err != nil {
 		return err

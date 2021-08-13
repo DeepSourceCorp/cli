@@ -20,9 +20,9 @@ func NewCmdStatus() *cobra.Command {
 		Args:  utils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			opts := AuthStatusOptions{
-				User:         config.User,
-				Token:        config.Token,
-				TokenExpired: config.TokenExpired,
+				User:         config.Cfg.User,
+				Token:        config.Cfg.Token,
+				TokenExpired: config.Cfg.IsExpired(),
 			}
 			opts.Run()
 		},

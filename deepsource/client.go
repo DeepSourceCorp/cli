@@ -11,8 +11,8 @@ import (
 	authmut "github.com/deepsourcelabs/cli/deepsource/auth/mutations"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
-	"github.com/deepsourcelabs/cli/deepsource/repo"
-	repoQuery "github.com/deepsourcelabs/cli/deepsource/repo/queries"
+	"github.com/deepsourcelabs/cli/deepsource/repository"
+	repoQuery "github.com/deepsourcelabs/cli/deepsource/repository/queries"
 	"github.com/deepsourcelabs/cli/deepsource/transformers"
 	transformerQuery "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
 	"github.com/deepsourcelabs/graphql"
@@ -29,7 +29,7 @@ func (c Client) GQL() *graphql.Client {
 }
 
 func (c Client) GetToken() string {
-	return config.Token
+	return config.Cfg.Token
 }
 
 func New() *Client {
@@ -95,7 +95,7 @@ func (c Client) GetSupportedTransformers(ctx context.Context) ([]transformers.Tr
 	return res, nil
 }
 
-func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (*repo.Repository, error) {
+func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (*repository.Meta, error) {
 
 	req := repoQuery.RepoStatusRequest{
 		Params: repoQuery.RepoStatusParams{

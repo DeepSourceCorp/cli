@@ -18,8 +18,8 @@ type RefreshOptions struct {
 
 func NewCmdRefresh() *cobra.Command {
 	opts := RefreshOptions{
-		Token:        config.Token,
-		RefreshToken: config.RefreshToken,
+		Token:        config.Cfg.Token,
+		RefreshToken: config.Cfg.RefreshToken,
 	}
 
 	cmd := &cobra.Command{

@@ -1,10 +1,10 @@
-package repo
+package repository
 
 import (
 	"context"
 	"fmt"
 
-	"github.com/deepsourcelabs/cli/deepsource/repo"
+	"github.com/deepsourcelabs/cli/deepsource/repository"
 	"github.com/deepsourcelabs/graphql"
 )
 
@@ -36,7 +36,7 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repo.Repository, error) {
+func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repository.Meta, error) {
 
 	req := graphql.NewRequest(repoStatusQuery)
 	header := fmt.Sprintf("JWT %s", client.GetToken())
@@ -54,7 +54,7 @@ func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repo.Rep
 		return nil, err
 	}
 
-	repositoryData := repo.Repository{
+	repositoryData := repository.Meta{
 		Activated: false,
 		Name:      r.Params.RepoName,
 		Owner:     r.Params.Owner,
