@@ -72,9 +72,10 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 	req.Var("limit", i.Params.Limit)
 
 	// set header fields
-	header := fmt.Sprintf("JWT %s", client.GetToken())
 	req.Header.Set("Cache-Control", "no-cache")
-	req.Header.Add("Authorization", header)
+	// Adding jwt as header for auth
+	tokenHeader := fmt.Sprintf("JWT %s", client.GetToken())
+	req.Header.Add("Authorization", tokenHeader)
 
 	// run it and capture the response
 	var respData IssuesListResponse

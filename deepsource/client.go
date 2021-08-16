@@ -24,14 +24,17 @@ type Client struct {
 	gql *graphql.Client
 }
 
+// Returns a GraphQL client which can be used to interact with the GQL APIs
 func (c Client) GQL() *graphql.Client {
 	return c.gql
 }
 
+// Returns the jWT which is required for authentication and thus, interacting with the APIs
 func (c Client) GetToken() string {
 	return config.Cfg.Token
 }
 
+// Returns a new GQLClient
 func New() *Client {
 	gql := graphql.NewClient(host)
 	return &Client{
@@ -39,6 +42,8 @@ func New() *Client {
 	}
 }
 
+// Registers the device and allots it a device code which is further used for fetching
+// the JWT and other authentication data
 func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 	req := authmut.RegisterDeviceRequest{}
 	res, err := req.Do(ctx, c)
@@ -48,6 +53,8 @@ func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 	return res, nil
 }
 
+// Logs in the client using the deviceCode and the user Code and returns the JWT, RefreshToken and other
+// data which is required for authentication
 func (c Client) Login(ctx context.Context, deviceCode string) (*auth.JWT, error) {
 	req := authmut.RequestJWTRequest{
 		Params: authmut.RequestJWTParams{
@@ -62,6 +69,7 @@ func (c Client) Login(ctx context.Context, deviceCode string) (*auth.JWT, error)
 	return res, nil
 }
 
+// Refreshes the authentication credentials. Takes the refreshToken as a parameter.
 func (c Client) RefreshAuthCreds(ctx context.Context, refreshToken string) (*auth.RefreshAuthResponse, error) {
 	req := authmut.RefreshTokenRequest{
 		Params: authmut.RefreshTokenParams{
@@ -75,8 +83,8 @@ func (c Client) RefreshAuthCreds(ctx context.Context, refreshToken string) (*aut
 	return res, nil
 }
 
+// Returns the list of Analyzers supported by DeepSource along with their meta like shortcode, metaschema.
 func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]analyzers.Analyzer, error) {
-
 	req := analyzerQuery.AnalyzersRequest{}
 	res, err := req.Do(ctx, c)
 	if err != nil {
@@ -85,8 +93,8 @@ func (c Client) GetSupportedAnalyzers(ctx context.Context) ([]analyzers.Analyzer
 	return res, nil
 }
 
+// Returns the list of Transformers supported by DeepSource along with their meta like shortcode.
 func (c Client) GetSupportedTransformers(ctx context.Context) ([]transformers.Transformer, error) {
-
 	req := transformerQuery.TransformersRequest{}
 	res, err := req.Do(ctx, c)
 	if err != nil {
@@ -95,8 +103,11 @@ func (c Client) GetSupportedTransformers(ctx context.Context) ([]transformers.Tr
 	return res, nil
 }
 
+// Returns the activation status of the repository whose data is sent as parameters.
+// Owner : The username of the owner of the repository
+// repoName : The name of the repository whose activation status has to be queried
+// provider : The VCS provider which hosts the repo (Github/Gitlab/BitBucket) //TODO: confirm name of the VCS
 func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (*repository.Meta, error) {
-
 	req := repoQuery.RepoStatusRequest{
 		Params: repoQuery.RepoStatusParams{
 			Owner:    owner,
@@ -112,8 +123,13 @@ func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider str
 	return res, nil
 }
 
+// Returns the list of issues for a certain repository whose data is sent as parameters.
+// Owner : The username of the owner of the repository
+// repoName : The name of the repository whose activation status has to be queried
+// provider : The VCS provider which hosts the repo (Github/Gitlab/BitBucket) //TODO: confirm name of the VCS
+// limit : The amount of issues to be listed. The default limit is 30 while the maximum limit is currently 100.
+// TODO: Make the maximum limit configurable.
 func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string, limit int) ([]issues.Issue, error) {
-
 	req := issuesQuery.IssuesListRequest{
 		Params: issuesQuery.IssuesListParams{
 			Owner:    owner,
@@ -130,8 +146,14 @@ func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string,
 	return res, nil
 }
 
+// Returns the list of issues reported for a certain file in a certain repository whose data is sent as parameters.
+// Owner : The username of the owner of the repository
+// repoName : The name of the repository whose activation status has to be queried
+// provider : The VCS provider which hosts the repo (Github/Gitlab/BitBucket) //TODO: confirm name of the VCS
+// filePath : The relative path of the file. Eg: "tests/mock.py" if a file `mock.py` is present in `tests` directory which in turn is present in the root dir
+// limit : The amount of issues to be listed. The default limit is 30 while the maximum limit is currently 100.
+// TODO: Make the maximum limit configurable.
 func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string, limit int) ([]issues.Issue, error) {
-
 	req := issuesQuery.FileIssuesListRequest{
 		Params: issuesQuery.FileIssuesListParams{
 			Owner:    owner,

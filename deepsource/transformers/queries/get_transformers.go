@@ -2,11 +2,13 @@ package transformers
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/transformers"
 	"github.com/deepsourcelabs/graphql"
 )
 
+// Query to list supported Transformers
 const listTransformersQuery = `
 {
     transformers{
@@ -44,6 +46,9 @@ func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]trans
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
+	// Adding jwt as header for auth
+	tokenHeader := fmt.Sprintf("JWT %s", client.GetToken())
+	req.Header.Add("Authorization", tokenHeader)
 
 	// run it and capture the response
 	var respData TransformersResponse
@@ -51,7 +56,8 @@ func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]trans
 		return nil, err
 	}
 
-    transformersData := make([]transformers.Transformer,len(respData.Transformers.Edges))
+	// Formatting the query response w.r.t the SDK response ([]transformers.Transformer)
+	transformersData := make([]transformers.Transformer, len(respData.Transformers.Edges))
 	for index, edge := range respData.Transformers.Edges {
 		transformersData[index].Name = edge.Node.Name
 		transformersData[index].Shortcode = edge.Node.Shortcode

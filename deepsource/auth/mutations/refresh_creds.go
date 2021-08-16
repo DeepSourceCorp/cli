@@ -7,6 +7,7 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
+// GraphQL query to refresh token
 const refreshTokenQuery = `
 mutation RefreshToken($token: String!) {
     refreshToken(refreshToken: $token) {

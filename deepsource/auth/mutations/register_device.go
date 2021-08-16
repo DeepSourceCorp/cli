@@ -7,6 +7,7 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
+// GraphQL mutation to register Device get a device code
 const registerDeviceMutation = `mutation register {
 	registerDevice(input:{}) {
 		deviceCode

@@ -2,11 +2,13 @@ package analyzers
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	"github.com/deepsourcelabs/graphql"
 )
 
+// GraphQL query
 const listAnalyzersQuery = `
 {
     analyzers {
@@ -46,6 +48,8 @@ func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]analyzer
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
+	tokenHeader := fmt.Sprintf("JWT %s", client.GetToken())
+	req.Header.Add("Authorization", tokenHeader)
 
 	// run it and capture the response
 	var respData AnalyzersResponse
@@ -53,6 +57,7 @@ func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]analyzer
 		return nil, err
 	}
 
+	// Formatting the query response w.r.t the output format
 	analyzersData := make([]analyzers.Analyzer, len(respData.Analyzers.Edges))
 	for index, edge := range respData.Analyzers.Edges {
 		analyzersData[index].Name = edge.Node.Name

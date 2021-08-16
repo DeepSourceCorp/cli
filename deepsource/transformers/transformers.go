@@ -1,6 +1,6 @@
 package transformers
 
 type Transformer struct {
-	Name      string
-	Shortcode string
+	Name      string // Name of the Transformer
+	Shortcode string // Shortcode of the Transformer
 }

@@ -14,6 +14,7 @@ type RequestJWTRequest struct {
 	Params RequestJWTParams
 }
 
+// GraphQL mutation to request JWT
 const requestJWTMutation = `
 mutation request($input:RequestJWTInput!) {
 	requestJwt(input:$input) {

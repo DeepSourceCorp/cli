@@ -79,7 +79,6 @@ type IGQLClient interface {
 
 // Function to execute the query
 func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.Issue, error) {
-
 	req := graphql.NewRequest(fetchFileIssuesQuery)
 	req.Header.Set("Cache-Control", "no-cache")
 
@@ -90,9 +89,11 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]iss
 	req.Var("limit", f.Params.Limit)
 
 	// set header fields
-	header := fmt.Sprintf("JWT %s", client.GetToken())
 	req.Header.Set("Cache-Control", "no-cache")
-	req.Header.Add("Authorization", header)
+
+	// Adding jwt as header for auth
+	tokenHeader := fmt.Sprintf("JWT %s", client.GetToken())
+	req.Header.Add("Authorization", tokenHeader)
 
 	// run it and capture the response
 	var respData FileIssuesResponse
@@ -100,16 +101,20 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]iss
 		return nil, err
 	}
 
+	// Formatting the query response w.r.t the output format of the SDK as specified in `issues_list.go`
 	var issuesData []issues.Issue
 	for index, edge := range respData.Repository.File.Issues.Edges {
 
+		// Copying issue title and issue code
 		issuesData[index].IssueText = edge.Node.Concreteissue.Title
 		issuesData[index].IssueCode = edge.Node.Concreteissue.Shortcode
 
+		// Copying position info
 		issuesData[index].Location.Path = edge.Node.Path
 		issuesData[index].Location.Position.BeginLine = edge.Node.Beginline
 		issuesData[index].Location.Position.EndLine = edge.Node.Endline
 
+		// Copying the analyzer shortcode which raised the issue
 		issuesData[index].Analyzer.Shortcode = edge.Node.Concreteissue.Analyzer.Shortcode
 	}
 
