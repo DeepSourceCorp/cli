@@ -9,6 +9,7 @@ import (
 
 type LogoutOptions struct{}
 
+// NewCmdLogout handles the logout functionality for the CLI
 func NewCmdLogout() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "logout",

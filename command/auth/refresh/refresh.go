@@ -16,6 +16,7 @@ type RefreshOptions struct {
 	RefreshToken string
 }
 
+// NewCmdRefresh handles the refreshing of authentication credentials
 func NewCmdRefresh() *cobra.Command {
 	opts := RefreshOptions{
 		Token:        config.Cfg.Token,
