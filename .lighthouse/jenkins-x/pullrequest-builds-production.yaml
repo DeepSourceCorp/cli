@@ -1,0 +1,129 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  creationTimestamp: null
+  name: pullrequest
+spec:
+  pipelineSpec:
+    tasks:
+    - name: bifrost-production-builds
+      resources: {}
+      taskSpec:
+        metadata: {}
+        stepTemplate:
+          imagePullPolicy: "IfNotPresent"
+          env:
+          - name: HOME
+            value: /tekton/home
+          - name: GOOGLE_APPLICATION_CREDENTIALS
+            value: /secret/kaniko.json
+          - name: GOOGLE_ANALYTICS_ID
+            value: UA-125031134-1
+          envFrom:
+          - secretRef:
+              name: jx-boot-job-env-vars
+              optional: true
+          - secretRef:
+              name: zeal-secret
+          - secretRef:
+              name: stripe-publishable-prod
+          - secretRef:
+              name: bifrost-sentry
+          - secretRef:
+              name: bifrost-sentry-auth
+          name: ""
+        steps:
+        - image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.19.0
+          name: git-clone
+          resources: {}
+          script: |
+            #!/bin/sh
+            export SUBDIR="source"
+            echo "git cloning url: $REPO_URL version $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER@$PULL_PULL_SHA to dir: $SUBDIR"
+            git config --global user.name ${GIT_AUTHOR_NAME}
+            git config --global user.email ${GIT_AUTHOR_EMAIL}
+            git config --global credential.helper store
+            git clone $REPO_URL $SUBDIR
+            cd $SUBDIR
+            git fetch origin $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER
+            git checkout $(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER
+            git reset --hard $PULL_PULL_SHA
+            echo "checked out revision: $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER@$PULL_PULL_SHA to dir: $SUBDIR"
+          workingDir: /workspace
+        - image: ghcr.io/jenkins-x/jx-boot:3.2.157
+          name: jx-variables
+          resources: {}
+          script: |
+            #!/usr/bin/env sh
+            jx gitops variables
+            jx gitops pr variables
+          workingDir: /workspace/source
+        - image: ghcr.io/jenkins-x/jx-registry:0.1.1
+          name: check-registry
+          resources: {}
+          workingDir: /workspace/source
+        - name: warm-cache
+          image: gcr.io/kaniko-project/warmer:latest
+          args:
+            - --cache-dir=/kanikocache
+            - --image=node:14.8-alpine
+            - --image=gcr.io/distroless/nodejs:14
+          workingDir: /workspace/source
+        - image: gcr.io/kaniko-project/executor:debug
+          name: container-build
+          script: |
+            #!/busybox/sh
+            source .jx/variables.sh
+            /kaniko/executor --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-production/$REPO_NAME:$PULL_BASE_REF --cache=false
+          workingDir: /workspace/source
+        workspaces:
+        - name: kanikocache
+          mountPath: /kanikocache
+        - name: kaniko
+          mountPath: /secret
+        - name: zeal
+        - name: stripe
+        - name: sentry
+        - name: sentry-auth
+      workspaces:
+      - name: kanikocache
+        workspace: bifrost-cache
+        subPath: kanikocache
+      - name: kaniko
+        workspace: kaniko
+      - name: zeal
+        workspace: zeal
+      - name: stripe
+        workspace: stripe
+      - name: sentry
+        workspace: sentry
+      - name: sentry-auth
+        workspace: sentry-auth
+    workspaces:
+    - name: bifrost-cache
+    - name: kaniko
+  workspaces:
+  - name: bifrost-cache
+    persistentVolumeClaim:
+      claimName: bifrost-cache
+  - name: kaniko
+    secret:
+      secretName: kaniko
+  - name: zeal
+    secret:
+      secretName: zeal-secret
+  - name: stripe
+    secret:
+      secretName: stripe-publishable-prod
+  - name: sentry
+    secret:
+      secretName: bifrost-sentry
+  - name: sentry-auth
+    secret:
+      secretName: bifrost-sentry-auth
+  podTemplate:
+    nodeSelector:
+      scheduledBy: jx
+  serviceAccountName: tekton-bot
+  timeout: 12h0m0s
+status: {}

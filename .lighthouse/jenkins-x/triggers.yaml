@@ -31,3 +31,9 @@ spec:
     branches:
     - ^main$
     - ^master$
+  - name: bifrost-production-builds
+    context: "Bifrost-Run-Production-Builds"
+    optional: false
+    source: "pullrequest-builds-production.yaml"
+    branches:
+    - ^v\d+\.\d+\.\d+$
