@@ -47,6 +47,7 @@ func main() {
 	if err := command.Execute(); err != nil {
 		// TODO: Handle exit codes here
 		pterm.Error.Println(err)
+		sentry.CaptureException(err)
 		os.Exit(1)
 	}
 }
