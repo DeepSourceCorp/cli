@@ -37,9 +37,8 @@ type Options struct {
 	GeneratedConfig string
 }
 
-// NewCmdVersion returns the current version of cli being used
+// NewCmdConfigGenerate handles the generation of DeepSource config based on user inputs
 func NewCmdConfigGenerate() *cobra.Command {
-
 	o := Options{}
 
 	cmd := &cobra.Command{
@@ -57,36 +56,30 @@ func NewCmdConfigGenerate() *cobra.Command {
 	return cmd
 }
 
-// Validate impletments the Validate method for the ICommand interface.
-func (o *Options) Validate() error {
-	return nil
-}
-
 // Run executes the command.
 func (o *Options) Run() error {
-
-	// Collect user input
+	// Step 1: Collect user input
 	err := o.collectUserInput()
 	if err != nil {
 		fmt.Println("\nError occured while collecting input.Exiting...")
 		return err
 	}
 
-	// Generates config based on user input
+	// Step 2: Generates config based on user input
 	err = o.generateDeepSourceConfig()
 	if err != nil {
 		fmt.Println("\nError occured while generating config from input.Exiting...")
 		return err
 	}
 
-	// Write the generated config to a file
+	// Step 3: Write the generated config to a file
 	err = o.writeConfigToFile()
 	if err != nil {
 		fmt.Println("\nError while writing config to project directory. Exiting...")
 		return err
 	}
 
-	// Success output ricing
+	// Step 4: If everything is successfull, print the success message
 	cwd, err := os.Getwd()
 	c := color.New(color.FgGreen)
 	successOutput := fmt.Sprintf("\nSuccessfully generated DeepSource config file at %s/.deepsource.toml", cwd)
@@ -97,7 +90,6 @@ func (o *Options) Run() error {
 
 // Generates DeepSource config based on the inputs from the user in Options struct
 func (o *Options) generateDeepSourceConfig() error {
-
 	// Copying everything from Options struct to DeepSource config based struct
 	config := DSConfig{
 		Version:         0,
