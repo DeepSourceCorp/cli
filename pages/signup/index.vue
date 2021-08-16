@@ -36,18 +36,19 @@
           <div class="flex flex-col space-y-4 text-left leading-relaxed">
             <div class="text-vanilla-400">
               By signing up, you are agreeing to our
-              <a href="/terms" class="text-juniper hover:underline"> Terms of Service </a>
+              <a href="/terms-of-service" class="text-juniper hover:underline">
+                Terms of Service
+              </a>
               and
               <a href="/privacy" class="text-juniper hover:underline">Privacy Policy</a>.
             </div>
             <div class="text-vanilla-400 border-t border-slate pt-4">
               Already have an account?
-              <a href="/terms" class="text-juniper hover:underline">Log in</a>
+              <a href="/login" class="text-juniper hover:underline">Log in</a>
             </div>
           </div>
         </div>
       </div>
-
       <div class="px-8 lg:px-12 bg-ink-300 min-h-full flex-col justify-center hidden md:flex">
         <div class="h-5/6">
           <z-carousel
@@ -57,26 +58,20 @@
             class="max-w-lg mx-auto block"
           >
             <z-slide v-for="(testimonial, index) in testimonials" :key="index">
-              <div class="space-y-4">
-                <div class="space-y-2">
-                  <div class="w-full">
-                    <img
-                      class="object-contain w-full h-40 lg:h-96"
-                      :src="require(`~/assets/images/${testimonial.avatar}`)"
-                      :alt="testimonial.author"
-                    />
-                  </div>
-                  <div class="mt-4">
-                    <p
-                      class="text-lg leading-normal text-vanilla-300"
-                      v-html="testimonial.body"
-                    ></p>
-                  </div>
-                </div>
-                <div class="desc text-vanilla-300">
-                  <div class="name">{{ testimonial.author }}</div>
-                  <div class="company text-vanilla-400">{{ testimonial.company }}</div>
-                </div>
+              <div class="w-full">
+                <img
+                  class="object-contain w-full h-40 lg:h-96"
+                  :src="require(`~/assets/images/${testimonial.avatar}`)"
+                  :alt="testimonial.author"
+                />
+              </div>
+              <p
+                class="mt-4 text-lg max-w-lg leading-normal text-vanilla-300 box-content"
+                v-html="testimonial.body"
+              ></p>
+              <div class="desc text-vanilla-300 mt-4">
+                <div class="name">{{ testimonial.author }}</div>
+                <div class="company text-vanilla-400">{{ testimonial.company }}</div>
               </div>
             </z-slide>
           </z-carousel>
