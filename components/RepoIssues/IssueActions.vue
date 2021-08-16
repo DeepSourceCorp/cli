@@ -76,7 +76,7 @@
       size="small"
       class="hidden sm:flex"
     >
-      Create issue on Github
+      Create issue on GitHub
     </z-button>
     <z-button
       v-if="issue.newVcsIssueUrl"
