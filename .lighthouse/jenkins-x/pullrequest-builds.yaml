@@ -67,11 +67,8 @@ spec:
           name: container-build
           resources:
             requests:
-              memory: 4Gi
-              cpu: 3
-            limits:
-              memory: 4Gi
-              cpu: 3
+              memory: 6Gi
+              cpu: 5
           script: |
             #!/busybox/sh
             source .jx/variables.sh

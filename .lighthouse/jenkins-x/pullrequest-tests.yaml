@@ -25,10 +25,6 @@ spec:
               name: zeal-secret
           - secretRef:
               name: bifrost-dsn
-          resources:
-            requests:
-              cpu: 400m
-              memory: 600Mi
         steps:
         - image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.19.0
           name: git-clone
@@ -47,23 +43,12 @@ spec:
             git reset --hard $PULL_PULL_SHA
             echo "checked out revision: $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER@$PULL_PULL_SHA to dir: $SUBDIR"
           workingDir: /workspace
-        - image: ghcr.io/jenkins-x/jx-boot:3.2.147
-          name: git-merge
-          resources: {}
-          script: |
-            #!/usr/bin/env sh
-            jx gitops git merge variables
-          workingDir: /workspace/source
-        - image: ghcr.io/jenkins-x/jx-boot:3.2.147
-          name: jx-variables
-          resources: {}
-          script: |
-            #!/usr/bin/env sh
-            jx gitops variables
-            jx gitops pr variables
-          workingDir: /workspace/source
         - image: node:14.8-alpine
           name: run-tests
+          resources:
+            requests:
+              cpu: 5
+              memory: 6Gi
           script: |
             #!/bin/sh
             apk update && \
