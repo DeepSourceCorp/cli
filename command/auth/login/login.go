@@ -3,7 +3,7 @@ package login
 import (
 	"fmt"
 
-	config "github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -13,24 +13,30 @@ type LoginOptions struct {
 	AuthTimedOut bool
 	TokenExpired bool
 	User         string
+	HostName     string
 }
 
 // NewCmdLogin handles the login functionality for the CLI
 func NewCmdLogin() *cobra.Command {
+
+	opts := LoginOptions{
+		AuthTimedOut: false,
+		TokenExpired: config.Cfg.IsExpired(),
+		User:         config.Cfg.User,
+		HostName:     config.DefaultHostName,
+	}
+
 	cmd := &cobra.Command{
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-
-			opts := LoginOptions{
-				AuthTimedOut: false,
-				TokenExpired: config.Cfg.IsExpired(),
-				User:         config.Cfg.User,
-			}
 			return opts.Run()
 		},
 	}
+
+	// --host, -h flag
+	cmd.Flags().StringVar(&opts.HostName, "hostname", "", "Authenticate with a specific DeepSource Enterprise Server instance")
 	return cmd
 }
 

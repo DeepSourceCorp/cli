@@ -53,6 +53,11 @@ func (opts *LoginOptions) startLoginFlow() error {
 	config.Cfg.RefreshTokenExpiresIn = time.Unix(jwtData.RefreshExpiresIn, 0)
 	config.Cfg.SetTokenExpiry(jwtData.Payload.Exp)
 
+	// Checking if the user passed a hostname. If yes, storing it in the config
+	if opts.HostName != "" {
+		config.Cfg.Host = opts.HostName
+	}
+
 	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
 	err = config.Cfg.WriteFile()
 	if err != nil {
