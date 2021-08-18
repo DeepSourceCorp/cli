@@ -6,8 +6,6 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deepsourcelabs/cli/deepsource/analyzers"
-	"github.com/deepsourcelabs/cli/deepsource/transformers"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
@@ -16,25 +14,14 @@ import (
 
 // Options holds the metadata.
 type Options struct {
-	AnalyzerNames      []string
-	AnalyzerShortcodes []string
-	AnalyzersMap       map[string]string // Map for {analyzer name : shortcode}
-	AnalyzersData      []analyzers.Analyzer
-
-	TransformerNames      []string
-	TransformerShortcodes []string
-	TransformerMap        map[string]string // Map for {transformer name:shortcode}
-	TransformersData      []transformers.Transformer
-
 	GoImportRoot string // Mandatory meta for Go
 	JavaVersion  string // Mandatory meta for JAVA
 
-	ActivatedAnalyzers    []string
-	ActivatedTransformers []string
+	ActivatedAnalyzers    []string // Analyzers activated by user
+	ActivatedTransformers []string // Transformers activated by the user
 	ExcludePatterns       []string
 	TestPatterns          []string
-
-	GeneratedConfig string
+	GeneratedConfig       string
 }
 
 // NewCmdConfigGenerate handles the generation of DeepSource config based on user inputs
@@ -46,11 +33,7 @@ func NewCmdConfigGenerate() *cobra.Command {
 		Short: "Generate config for DeepSource",
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			err := o.Run()
-			if err != nil {
-				return err
-			}
-			return nil
+			return o.Run()
 		},
 	}
 	return cmd
@@ -90,65 +73,51 @@ func (o *Options) Run() error {
 
 // Generates DeepSource config based on the inputs from the user in Options struct
 func (o *Options) generateDeepSourceConfig() error {
-	// Copying everything from Options struct to DeepSource config based struct
+	// Copying version, exclude_patterns and test_patterns into the DSConfig based structure
 	config := DSConfig{
-		Version:         0,
-		ExcludePatterns: []string{},
-		TestPatterns:    []string{},
-		Analyzers:       []Analyzer{},
-		Transformers:    []Transformer{},
+		Version:         DEEPSOURCE_TOML_VERSION,
+		ExcludePatterns: o.ExcludePatterns,
+		TestPatterns:    o.TestPatterns,
 	}
 
-	// TODO: Remove this hard coding of version
-	config.Version = 1
-	config.TestPatterns = o.TestPatterns
-	config.ExcludePatterns = o.ExcludePatterns
-
-	// Copying analyzers from Options struct to DSConfig based "config" struct
+	// Copying activated analyzers from Options struct to DSConfig based "config" struct
 	for index, analyzer := range o.ActivatedAnalyzers {
-
 		config.Analyzers = append(config.Analyzers, Analyzer{
-			Name:                o.AnalyzersMap[analyzer],
-			RuntimeVersion:      "",
-			Enabled:             true,
-			DependencyFilePaths: []string{},
-			Thresholds:          nil,
+			Name:    utils.AnaData.AnalyzersMap[analyzer],
+			Enabled: true,
 		})
 
+		// TODO: Remove this hard coding
 		// Adding these conditions since meta of these two analyzers(Go and Java) is mandatory
 		if analyzer == "Go" {
 			config.Analyzers[index].Meta.ImportRoot = o.GoImportRoot
-		}
-
-		if analyzer == "Java (beta)" {
+		} else if analyzer == "Java (beta)" {
 			config.Analyzers[index].Meta.JavaVersion = o.JavaVersion
 		}
 	}
 
-	// Copying transformers from Options struct to DSConfig based "config" struct
+	// Copying activated transformers from Options struct to DSConfig based "config" struct
 	for _, transformer := range o.ActivatedTransformers {
 		config.Transformers = append(config.Transformers, Transformer{
-			Name:    o.TransformerMap[transformer],
+			Name:    utils.TrData.TransformerMap[transformer],
 			Enabled: true,
 		})
 	}
 
 	// Encoding the DSConfig based "config" struct to TOML
+	// and storing in GeneratedConfig of Options struct
 	var buf bytes.Buffer
 	err := toml.NewEncoder(&buf).Order(toml.OrderPreserve).Encode(config)
 	if err != nil {
 		return err
 	}
-
 	// Convert the TOML encoded buffer to string
 	o.GeneratedConfig = buf.String()
-
 	return nil
 }
 
 // Writes the generated TOML config into a file
 func (o *Options) writeConfigToFile() error {
-
 	// Creating file
 	cwd, _ := os.Getwd()
 	f, err := os.Create(filepath.Join(cwd, ".deepsource.toml"))
@@ -162,6 +131,5 @@ func (o *Options) writeConfigToFile() error {
 	if writeError != nil {
 		return writeError
 	}
-
 	return nil
 }

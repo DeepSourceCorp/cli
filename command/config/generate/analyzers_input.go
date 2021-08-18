@@ -13,7 +13,7 @@ func (o *Options) collectAnalyzerInput() error {
 	analyzerPrompt := &survey.MultiSelect{
 		Renderer: survey.Renderer{},
 		Message:  "Which languages/tools does your project use?",
-		Options:  o.AnalyzerNames,
+		Options:  utils.AnaData.AnalyzerNames,
 		Help:     "Analyzers will find issues in your code. Add an analyzer by selecting a language you've written your code in.",
 	}
 	err := survey.AskOne(analyzerPrompt, &o.ActivatedAnalyzers, survey.WithValidator(survey.Required))

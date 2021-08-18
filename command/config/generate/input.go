@@ -1,10 +1,12 @@
 package generate
 
+import "github.com/deepsourcelabs/cli/utils"
+
 // Responsible for collecting user input for generating DeepSource config
 func (o *Options) collectUserInput() error {
 
 	// Get the list of analyzers and transformers supported by DeepSource
-	err := o.getAnalyzersAndTransformersData()
+	err := utils.GetAnalyzersAndTransformersData()
 	if err != nil {
 		return err
 	}

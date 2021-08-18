@@ -1,7 +1,6 @@
 package validate
 
 import (
-	"context"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -12,28 +11,16 @@ import (
 	"strings"
 
 	"github.com/deepsourcelabs/cli/configvalidator"
-	"github.com/deepsourcelabs/cli/deepsource"
-	"github.com/deepsourcelabs/cli/deepsource/analyzers"
-	"github.com/deepsourcelabs/cli/deepsource/transformers"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
 // Options holds the metadata.
-type Options struct {
-	AnalyzerNames      []string
-	AnalyzerShortcodes []string
-	AnalyzersMap       map[string]string // Map for {analyzer name : shortcode}
-	AnalyzersMeta      []string
-	AnalyzersData      []analyzers.Analyzer
+type Options struct{}
 
-	TransformerNames      []string
-	TransformerShortcodes []string
-	TransformerMap        map[string]string // Map for {transformer name:shortcode}
-	TransformersData      []transformers.Transformer
-}
-
+// NewCmdValidate handles the validation of the DeepSource config (.deepsource.toml)
+// Internally it uses the package `configvalidator` to validate the config
 func NewCmdValidate() *cobra.Command {
 
 	o := Options{}
@@ -42,11 +29,7 @@ func NewCmdValidate() *cobra.Command {
 		Short: "Validate DeepSource config",
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			err := o.Run()
-			if err != nil {
-				return err
-			}
-			return nil
+			return o.Run()
 		},
 	}
 	return cmd
@@ -72,7 +55,7 @@ func (o *Options) Run() error {
 
 	// Fetch the list of supported analyzers and transformers' data
 	// using the SDK
-	err = o.getAnalyzersAndTransformersData()
+	err = utils.GetAnalyzersAndTransformersData()
 	if err != nil {
 		return err
 	}
@@ -83,16 +66,16 @@ func (o *Options) Run() error {
 
 	// Copying data into the format accepted by configvalidator package
 	analyzersData := configvalidator.AnalyzersData{
-		AnalyzerNames:      o.AnalyzerNames,
-		AnalyzerShortcodes: o.AnalyzerShortcodes,
-		AnalyzerMap:        o.AnalyzersMap,
-		AnalyzesMeta:       o.AnalyzersMeta,
+		AnalyzerNames:      utils.AnaData.AnalyzerNames,
+		AnalyzerShortcodes: utils.AnaData.AnalyzerShortcodes,
+		AnalyzerMap:        utils.AnaData.AnalyzersMap,
+		AnalyzesMeta:       utils.AnaData.AnalyzersMeta,
 	}
 
 	transformersData := configvalidator.TransformersData{
-		TransformerNames:      o.TransformerNames,
-		TransformerShortcodes: o.TransformerShortcodes,
-		TransformerMap:        o.TransformerMap,
+		TransformerNames:      utils.TrData.TransformerNames,
+		TransformerShortcodes: utils.TrData.TransformerShortcodes,
+		TransformerMap:        utils.TrData.TransformerMap,
 	}
 
 	// Send the config contents to get validated
@@ -149,31 +132,6 @@ func extractDSConfigPath() (string, error) {
 		}
 	}
 	return configPath, nil
-}
-
-// Get the list of all the supported analyzers and transformers with
-// their corresponding data like shortcode, metaschema etc.
-func (o *Options) getAnalyzersAndTransformersData() error {
-	var err error
-	// Fetch the client
-	deepsource := deepsource.New()
-	ctx := context.Background()
-
-	// Get supported analyzers and transformers data
-	o.AnalyzersMap = make(map[string]string)
-	o.TransformerMap = make(map[string]string)
-
-	o.AnalyzersData, err = deepsource.GetSupportedAnalyzers(ctx)
-	if err != nil {
-		return err
-	}
-
-	o.TransformersData, err = deepsource.GetSupportedTransformers(ctx)
-	if err != nil {
-		return err
-	}
-	o.parseSDKResponse()
-	return nil
 }
 
 // Handles printing the output when viper fails to read TOML file due to bad syntax
@@ -235,23 +193,4 @@ func printConfigErrors(errors []string) {
 // Handles printing the valid config output
 func printValidConfig() {
 	pterm.Success.Println("Config Valid")
-}
-
-// Parses the SDK response of analyzers and transformers data into the format required
-// by this (validator) package
-func (o *Options) parseSDKResponse() {
-	o.AnalyzersMap = make(map[string]string)
-	o.TransformerMap = make(map[string]string)
-
-	for _, analyzer := range o.AnalyzersData {
-		o.AnalyzerNames = append(o.AnalyzerNames, analyzer.Name)
-		o.AnalyzerShortcodes = append(o.AnalyzerShortcodes, analyzer.Shortcode)
-		o.AnalyzersMap[analyzer.Name] = analyzer.Shortcode
-	}
-
-	for _, transformer := range o.TransformersData {
-		o.TransformerNames = append(o.TransformerNames, transformer.Name)
-		o.TransformerShortcodes = append(o.TransformerShortcodes, transformer.Shortcode)
-		o.TransformerMap[transformer.Name] = transformer.Shortcode
-	}
 }
