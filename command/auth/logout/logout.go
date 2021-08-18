@@ -17,11 +17,7 @@ func NewCmdLogout() *cobra.Command {
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts := LogoutOptions{}
-			err := opts.Run()
-			if err != nil {
-				return err
-			}
-			return nil
+			return opts.Run()
 		},
 	}
 	return cmd
@@ -37,14 +33,12 @@ func (opts *LogoutOptions) Run() error {
 	}
 
 	// If response is true, delete the config file => logged out the user
-	if response == true {
-		cfg := config.CLIConfig{}
-		err := cfg.Delete()
+	if response {
+		err := config.Cfg.Delete()
 		if err != nil {
 			return err
 		}
 	}
-
 	pterm.Info.Println("Logged out from DeepSource (deepsource.io)")
 	return nil
 }

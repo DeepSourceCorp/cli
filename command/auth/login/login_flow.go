@@ -15,7 +15,8 @@ import (
 // Starts the login flow for the CLI
 func (opts *LoginOptions) startLoginFlow() error {
 	// Register the device and get a device code through the response
-	deviceRegistrationResponse, err := registerDevice()
+	ctx := context.Background()
+	deviceRegistrationResponse, err := registerDevice(ctx)
 	if err != nil {
 		return err
 	}
@@ -34,7 +35,7 @@ func (opts *LoginOptions) startLoginFlow() error {
 
 	// Fetch the JWT using the device registration resonse
 	var jwtData *auth.JWT
-	jwtData, opts.AuthTimedOut, err = fetchJWT(deviceRegistrationResponse)
+	jwtData, opts.AuthTimedOut, err = fetchJWT(ctx, deviceRegistrationResponse)
 	if err != nil {
 		return err
 	}
@@ -44,28 +45,25 @@ func (opts *LoginOptions) startLoginFlow() error {
 		return fmt.Errorf("Authentication timed out")
 	}
 
-	// Convert incoming config into the local config format
-	// For storing the useful data for future reference and usage
-	finalConfig := config.CLIConfig{
-		User:                  jwtData.Payload.Email,
-		Token:                 jwtData.Token,
-		RefreshToken:          jwtData.Refreshtoken,
-		RefreshTokenExpiresIn: time.Unix(jwtData.RefreshExpiresIn, 0),
-	}
-	finalConfig.SetTokenExpiry(jwtData.Payload.Exp)
+	// Storing the useful data for future reference and usage
+	// in a global config object (Cfg)
+	config.Cfg.User = jwtData.Payload.Email
+	config.Cfg.Token = jwtData.Token
+	config.Cfg.RefreshToken = jwtData.Refreshtoken
+	config.Cfg.RefreshTokenExpiresIn = time.Unix(jwtData.RefreshExpiresIn, 0)
+	config.Cfg.SetTokenExpiry(jwtData.Payload.Exp)
 
-	// Having formatted the data, write it into a file in the local filesystem
-	err = finalConfig.WriteFile()
+	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
+	err = config.Cfg.WriteFile()
 	if err != nil {
 		return fmt.Errorf("Error in writing authentication data to a file. Exiting...")
 	}
 	return nil
 }
 
-func registerDevice() (*auth.Device, error) {
+func registerDevice(ctx context.Context) (*auth.Device, error) {
 	// Fetching DeepSource client in order to interact with SDK
 	deepsource := deepsource.New()
-	ctx := context.Background()
 
 	// Send a mutation to register device and get the device code
 	res, err := deepsource.RegisterDevice(ctx)
@@ -75,10 +73,9 @@ func registerDevice() (*auth.Device, error) {
 	return res, nil
 }
 
-func fetchJWT(deviceRegistrationData *auth.Device) (*auth.JWT, bool, error) {
+func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.JWT, bool, error) {
 	// Fetching DeepSource client in order to interact with SDK
 	deepsource := deepsource.New()
-	ctx := context.Background()
 
 	// Keep polling the mutation at a certain interval till the expiry timeperiod
 	ticker := time.NewTicker(time.Duration(deviceRegistrationData.Interval) * time.Second)
