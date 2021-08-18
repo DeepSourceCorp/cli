@@ -3,7 +3,6 @@ package list
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
@@ -12,28 +11,23 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const MAX_ISSUE_LIMIT = 100
+
 type IssuesListOptions struct {
-	FileArg     string
-	RepoArg     string
-	LimitArg    int
-	Owner       string
-	RepoName    string
-	VCSProvider string
-	issuesData  []issues.Issue
-	ptermTable  [][]string
+	FileArg        string
+	RepoArg        string
+	LimitArg       int
+	SelectedRemote *utils.RemoteData
+	issuesData     []issues.Issue
+	ptermTable     [][]string
 }
 
 func NewCmdIssuesList() *cobra.Command {
 
 	opts := IssuesListOptions{
-		FileArg:     "",
-		RepoArg:     "",
-		LimitArg:    30,
-		Owner:       "",
-		RepoName:    "",
-		VCSProvider: "",
-		issuesData:  []issues.Issue{},
-		ptermTable:  [][]string{},
+		FileArg:  "",
+		RepoArg:  "",
+		LimitArg: 30,
 	}
 
 	cmd := &cobra.Command{
@@ -44,11 +38,7 @@ func NewCmdIssuesList() *cobra.Command {
 			if len(args) == 1 {
 				opts.FileArg = args[0]
 			}
-			err := opts.Run()
-			if err != nil {
-				return err
-			}
-			return nil
+			return opts.Run()
 		},
 	}
 
@@ -62,117 +52,61 @@ func NewCmdIssuesList() *cobra.Command {
 
 // Execute the command
 func (opts *IssuesListOptions) Run() error {
-	// The current limit of querying issues at once is 100. If the limit passed by user is greater than 100, exit
+	var err error
+	// The current limit of querying issues at once is 100.
+	// If the limit passed by user is greater than 100, exit
 	// with an error message
-	if opts.LimitArg > 100 {
+	if opts.LimitArg > MAX_ISSUE_LIMIT {
 		return fmt.Errorf("The maximum allowed limit to fetch issues is 100. Found %d", opts.LimitArg)
 	}
 
-	// Checking if the user passed --repo/-r flag or not
-	// If no --repo flag, parse all the remotes of the cwd through the git config
-	if opts.RepoArg == "" {
-		err := opts.extractRepositoryRemotes()
-		if err != nil {
-			return fmt.Errorf("Error while fetching repository URL")
-		}
-	} else {
-		// If the user has passed the --repo flag
-		// Parse the repo URL (github.co/owner/reponame) in the argument passed by the user
-		repoData, err := utils.RepoArgumentResolver(opts.RepoArg)
-		if err != nil {
-			return err
-		}
-		opts.VCSProvider = repoData[0]
-		opts.Owner = repoData[1]
-		opts.RepoName = repoData[2]
+	// Get the remote repository URL for which issues have to
+	// be listed
+	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
+	if err != nil {
+		return err
 	}
 
 	// Fetch the list of issues using SDK based on user input
-	err := opts.getIssuesData()
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
-// Extracts various remotes (origin/upstream etc.) present in a certain repository's .git config file
-// Helps in deciding the repo for which issues have to be listed
-func (opts *IssuesListOptions) extractRepositoryRemotes() error {
-	remotesData, err := utils.ListRemotes()
-	if err != nil {
-		if strings.Contains(err.Error(), "exit status 128") {
-			fmt.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
-		}
-		return err
-	}
-
-	// Condition: If only 1 remote, use it
-	// If more that one remote, give the user choice which one they want to choose
-	if len(remotesData) == 1 {
-		for _, value := range remotesData {
-			opts.Owner = value[0]
-			opts.RepoName = value[1]
-			opts.VCSProvider = value[2]
-		}
-	} else {
-		var promptOpts []string
-		for _, value := range remotesData {
-			promptOpts = append(promptOpts, value[3])
-		}
-
-		selectedRemote, err := utils.SelectFromOptions("Please select which repository you want to check?", "", promptOpts)
-		if err != nil {
-			return err
-		}
-
-		for _, value := range remotesData {
-			if value[3] == selectedRemote {
-				opts.Owner = value[0]
-				opts.RepoName = value[1]
-				opts.VCSProvider = value[2]
-			}
-		}
-	}
-	return nil
+	ctx := context.Background()
+	return opts.getIssuesData(ctx)
 }
 
 // Gets the data about issues using the SDK based on the user input
 // i.e for a single file or for the whole project
-func (opts *IssuesListOptions) getIssuesData() error {
+func (opts *IssuesListOptions) getIssuesData(ctx context.Context) error {
 	var err error
-
 	// Get the deepsource client for using the issue fetching SDK to fetch the list of issues
 	deepsource := deepsource.New()
-	ctx := context.Background()
 
-	// Case 1 : Fetch issues for a certain FileArg (filepath) passed by the user
+	// Fetch issues for a certain FileArg (filepath) passed by the user
 	// Example: `deepsource issues list api/hello.py`
 	if opts.FileArg != "" {
-		// SDK usage for fetching list of issues in a certain file passed by the user
 		opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg, opts.LimitArg)
 		if err != nil {
 			return err
 		}
 		opts.showIssues(true)
-	} else {
-		// Case 2 : Fetch list of issues for the whole project
-		opts.issuesData, err = deepsource.GetIssues(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
-		if err != nil {
-			return err
-		}
-		opts.showIssues(false)
+		return nil
 	}
+
+	// Fetch list of issues for the whole project
+	opts.issuesData, err = deepsource.GetIssues(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
+	if err != nil {
+		return err
+	}
+	opts.showIssues(false)
 	return nil
 }
 
 // Parses the SDK response and formats the data in the form of a TAB separated table
 // and renders it using pterm
 func (opts *IssuesListOptions) showIssues(fileMode bool) {
-	var issueList []string
+	// A 2d array to contain list of issues details arrays
 	opts.ptermTable = make([][]string, len(opts.issuesData))
-	for index, issue := range opts.issuesData {
 
+	// Curating the data and appending to the 2d array
+	for index, issue := range opts.issuesData {
 		filePath := issue.Location.Path
 		beginLine := issue.Location.Position.BeginLine
 		issueLocation := fmt.Sprintf("%s:%d", filePath, beginLine)
@@ -180,11 +114,8 @@ func (opts *IssuesListOptions) showIssues(fileMode bool) {
 		issueCode := issue.IssueCode
 		issueTitle := issue.IssueText
 
-		issueList = append(issueList, issueLocation, analyzerShortcode, issueCode, issueTitle)
-
-		opts.ptermTable[index] = issueList
-		issueList = nil
+		opts.ptermTable[index] = []string{issueLocation, analyzerShortcode, issueCode, issueTitle}
 	}
-
+	// Using pterm to render the list of list
 	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()
 }

@@ -17,6 +17,7 @@ const (
 )
 
 type CLIConfig struct {
+	Host                  string
 	User                  string
 	Token                 string
 	RefreshToken          string
