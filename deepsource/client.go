@@ -18,8 +18,6 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
-const host = "https://api.deepsource.io/graphql/"
-
 type Client struct {
 	gql *graphql.Client
 }
@@ -36,7 +34,7 @@ func (c Client) GetToken() string {
 
 // Returns a new GQLClient
 func New() *Client {
-	gql := graphql.NewClient(host)
+	gql := graphql.NewClient(config.Cfg.Host)
 	return &Client{
 		gql: gql,
 	}
