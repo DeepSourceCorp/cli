@@ -14,7 +14,7 @@ var readFileFn = os.ReadFile
 const (
 	ConfigDirName   = "/.deepsource/"
 	ConfigFileName  = "/config.toml"
-	DefaultHostName = "https://deepsource.io"
+	DefaultHostName = "deepsource.io"
 )
 
 type CLIConfig struct {
@@ -31,8 +31,9 @@ var Cfg CLIConfig
 // Sets the token expiry in the desired format
 func (cfg *CLIConfig) SetTokenExpiry(str string) {
 	layout := "2006-01-02T15:04:05.999999999"
-	tokenExpiresIn, _ := time.Parse(layout, str)
-	cfg.TokenExpiresIn = tokenExpiresIn
+	t, _ := time.Parse(layout, str)
+	timeStamp := t.Unix()
+	cfg.TokenExpiresIn = time.Unix(timeStamp, 0)
 }
 
 // Checks if the token has expired or not

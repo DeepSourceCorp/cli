@@ -46,6 +46,11 @@ func (opts *LoginOptions) Run() error {
 	// Condition 1 : If the token has expired, display a message about it and re-authenticate user
 	// Condition 2 : If the token has not expired,does the user want to re-authenticate?
 
+	// Checking if the user passed a hostname. If yes, storing it in the config
+	if opts.HostName != "" {
+		config.Cfg.Host = opts.HostName
+	}
+
 	// Checking for condition 1
 	if !opts.TokenExpired {
 		// The user is already logged in, confirm re-authentication.

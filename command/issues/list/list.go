@@ -77,7 +77,10 @@ func (opts *IssuesListOptions) Run() error {
 func (opts *IssuesListOptions) getIssuesData(ctx context.Context) error {
 	var err error
 	// Get the deepsource client for using the issue fetching SDK to fetch the list of issues
-	deepsource := deepsource.New()
+	deepsource, err := deepsource.New()
+	if err != nil {
+		return err
+	}
 
 	// Fetch issues for a certain FileArg (filepath) passed by the user
 	// Example: `deepsource issues list api/hello.py`

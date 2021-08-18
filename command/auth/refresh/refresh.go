@@ -44,7 +44,10 @@ func (opts *RefreshOptions) Run() error {
 	}
 
 	// Fetching DS Client
-	deepsource := deepsource.New()
+	deepsource, err := deepsource.New()
+	if err != nil {
+		return err
+	}
 	ctx := context.Background()
 	// Use the SDK to fetch the new auth data
 	refreshedConfigData, err := deepsource.RefreshAuthCreds(ctx, opts.RefreshToken)

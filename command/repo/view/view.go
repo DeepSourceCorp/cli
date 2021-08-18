@@ -57,7 +57,10 @@ func (opts *RepoViewOptions) Run() error {
 	}
 
 	// Making the "isActivated" (repo status) query again just to confirm if the user has access to that repo
-	deepsource := deepsource.New()
+	deepsource, err := deepsource.New()
+	if err != nil {
+		return err
+	}
 	ctx := context.Background()
 	_, err = deepsource.GetRepoStatus(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider)
 	if err != nil {
@@ -75,7 +78,7 @@ func (opts *RepoViewOptions) Run() error {
 	VCSShortcode := VCSMap[opts.SelectedRemote.VCSProvider]
 
 	// Framing the complete URL
-	dashboardURL := fmt.Sprintf("%s/%s/%s/%s/", config.Cfg.Host, VCSShortcode, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName)
+	dashboardURL := fmt.Sprintf("https://%s/%s/%s/%s/", config.Cfg.Host, VCSShortcode, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName)
 	fmt.Printf("Press enter to open %s in your browser...", dashboardURL)
 	fmt.Scanln()
 	return browser.OpenURL(dashboardURL)

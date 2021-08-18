@@ -53,11 +53,6 @@ func (opts *LoginOptions) startLoginFlow() error {
 	config.Cfg.RefreshTokenExpiresIn = time.Unix(jwtData.RefreshExpiresIn, 0)
 	config.Cfg.SetTokenExpiry(jwtData.Payload.Exp)
 
-	// Checking if the user passed a hostname. If yes, storing it in the config
-	if opts.HostName != "" {
-		config.Cfg.Host = opts.HostName
-	}
-
 	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
 	err = config.Cfg.WriteFile()
 	if err != nil {
@@ -68,7 +63,10 @@ func (opts *LoginOptions) startLoginFlow() error {
 
 func registerDevice(ctx context.Context) (*auth.Device, error) {
 	// Fetching DeepSource client in order to interact with SDK
-	deepsource := deepsource.New()
+	deepsource, err := deepsource.New()
+	if err != nil {
+		return nil, err
+	}
 
 	// Send a mutation to register device and get the device code
 	res, err := deepsource.RegisterDevice(ctx)
@@ -79,16 +77,19 @@ func registerDevice(ctx context.Context) (*auth.Device, error) {
 }
 
 func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.JWT, bool, error) {
+	var jwtData *auth.JWT
+	var err error
+	authTimedOut := true
+
 	// Fetching DeepSource client in order to interact with SDK
-	deepsource := deepsource.New()
+	deepsource, err := deepsource.New()
+	if err != nil {
+		return nil, authTimedOut, err
+	}
 
 	// Keep polling the mutation at a certain interval till the expiry timeperiod
 	ticker := time.NewTicker(time.Duration(deviceRegistrationData.Interval) * time.Second)
 	pollStartTime := time.Now()
-
-	var jwtData *auth.JWT
-	var err error
-	authTimedOut := true
 
 	// Polling for fetching JWT
 	func() {

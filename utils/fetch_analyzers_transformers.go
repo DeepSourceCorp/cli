@@ -32,7 +32,10 @@ var TrData TransformersData
 func GetAnalyzersAndTransformersData() error {
 	var err error
 	// Fetch the client
-	deepsource := deepsource.New()
+	deepsource, err := deepsource.New()
+	if err != nil {
+		return err
+	}
 	ctx := context.Background()
 
 	// Get supported analyzers and transformers data
