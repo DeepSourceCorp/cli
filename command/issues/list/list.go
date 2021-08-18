@@ -82,7 +82,7 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) error {
 	// Fetch issues for a certain FileArg (filepath) passed by the user
 	// Example: `deepsource issues list api/hello.py`
 	if opts.FileArg != "" {
-		opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.FileArg, opts.LimitArg)
+		opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.FileArg, opts.LimitArg)
 		if err != nil {
 			return err
 		}
@@ -91,7 +91,7 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) error {
 	}
 
 	// Fetch list of issues for the whole project
-	opts.issuesData, err = deepsource.GetIssues(ctx, opts.Owner, opts.RepoName, opts.VCSProvider, opts.LimitArg)
+	opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
 	if err != nil {
 		return err
 	}

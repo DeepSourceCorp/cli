@@ -49,7 +49,7 @@ func (opts *RepoStatusOptions) Run() error {
 	// Use the SDK to find the activation status
 	deepsource := deepsource.New()
 	ctx := context.Background()
-	statusResponse, err := deepsource.GetRepoStatus(ctx, opts.Owner, opts.RepoName, opts.VCSProvider)
+	statusResponse, err := deepsource.GetRepoStatus(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider)
 	if err != nil {
 		return err
 	}
