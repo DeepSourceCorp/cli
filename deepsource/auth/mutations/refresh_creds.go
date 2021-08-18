@@ -27,10 +27,10 @@ type RefreshTokenRequest struct {
 }
 
 type RefreshTokenResponse struct {
-	auth.RefreshAuthResponse
+	auth.JWT `json:"refreshToken"`
 }
 
-func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.RefreshAuthResponse, error) {
+func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.JWT, error) {
 
 	req := graphql.NewRequest(refreshTokenQuery)
 
@@ -44,5 +44,5 @@ func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.R
 		return nil, err
 	}
 
-	return &respData.RefreshAuthResponse, nil
+	return &respData.JWT, nil
 }

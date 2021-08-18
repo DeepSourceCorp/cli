@@ -75,7 +75,7 @@ func (c Client) Login(ctx context.Context, deviceCode string) (*auth.JWT, error)
 }
 
 // Refreshes the authentication credentials. Takes the refreshToken as a parameter.
-func (c Client) RefreshAuthCreds(ctx context.Context, refreshToken string) (*auth.RefreshAuthResponse, error) {
+func (c Client) RefreshAuthCreds(ctx context.Context, refreshToken string) (*auth.JWT, error) {
 	req := authmut.RefreshTokenRequest{
 		Params: authmut.RefreshTokenParams{
 			RefreshToken: refreshToken,
@@ -111,7 +111,7 @@ func (c Client) GetSupportedTransformers(ctx context.Context) ([]transformers.Tr
 // Returns the activation status of the repository whose data is sent as parameters.
 // Owner : The username of the owner of the repository
 // repoName : The name of the repository whose activation status has to be queried
-// provider : The VCS provider which hosts the repo (Github/Gitlab/BitBucket) //TODO: confirm name of the VCS
+// provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
 func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider string) (*repository.Meta, error) {
 	req := repoQuery.RepoStatusRequest{
 		Params: repoQuery.RepoStatusParams{
@@ -131,9 +131,8 @@ func (c Client) GetRepoStatus(ctx context.Context, owner, repoName, provider str
 // Returns the list of issues for a certain repository whose data is sent as parameters.
 // Owner : The username of the owner of the repository
 // repoName : The name of the repository whose activation status has to be queried
-// provider : The VCS provider which hosts the repo (Github/Gitlab/BitBucket) //TODO: confirm name of the VCS
+// provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
 // limit : The amount of issues to be listed. The default limit is 30 while the maximum limit is currently 100.
-// TODO: Make the maximum limit configurable.
 func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string, limit int) ([]issues.Issue, error) {
 	req := issuesQuery.IssuesListRequest{
 		Params: issuesQuery.IssuesListParams{
@@ -154,10 +153,9 @@ func (c Client) GetIssues(ctx context.Context, owner, repoName, provider string,
 // Returns the list of issues reported for a certain file in a certain repository whose data is sent as parameters.
 // Owner : The username of the owner of the repository
 // repoName : The name of the repository whose activation status has to be queried
-// provider : The VCS provider which hosts the repo (Github/Gitlab/BitBucket) //TODO: confirm name of the VCS
+// provider : The VCS provider which hosts the repo (GITHUB/GITLAB/BITBUCKET)
 // filePath : The relative path of the file. Eg: "tests/mock.py" if a file `mock.py` is present in `tests` directory which in turn is present in the root dir
 // limit : The amount of issues to be listed. The default limit is 30 while the maximum limit is currently 100.
-// TODO: Make the maximum limit configurable.
 func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider, filePath string, limit int) ([]issues.Issue, error) {
 	req := issuesQuery.FileIssuesListRequest{
 		Params: issuesQuery.FileIssuesListParams{

@@ -56,11 +56,11 @@ func (opts *RefreshOptions) Run() error {
 	}
 
 	// Convert incoming config into the local CLI config format
-	config.Cfg.User = refreshedConfigData.Refreshtoken.Payload.Email
-	config.Cfg.Token = refreshedConfigData.Refreshtoken.Token
-	config.Cfg.RefreshToken = refreshedConfigData.Refreshtoken.Refreshtoken
-	config.Cfg.RefreshTokenExpiresIn = time.Unix(refreshedConfigData.Refreshtoken.Refreshexpiresin, 0)
-	config.Cfg.SetTokenExpiry(refreshedConfigData.Refreshtoken.Payload.Exp)
+	config.Cfg.User = refreshedConfigData.Payload.Email
+	config.Cfg.Token = refreshedConfigData.Token
+	config.Cfg.RefreshToken = refreshedConfigData.Refreshtoken
+	config.Cfg.RefreshTokenExpiresIn = time.Unix(refreshedConfigData.RefreshExpiresIn, 0)
+	config.Cfg.SetTokenExpiry(refreshedConfigData.Payload.Exp)
 
 	// Having formatted the data, write it to the config file
 	err = config.Cfg.WriteFile()
