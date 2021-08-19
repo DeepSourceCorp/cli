@@ -1,7 +1,7 @@
 <template>
   <div class="box-content relative z-20" v-outside-click="outsideClickHandler">
     <z-input
-      v-model="searchCanidate"
+      v-model="searchCandidate"
       class="flex-grow p-2"
       v-if="!disabled"
       @click="toggleAnalyzerList"
@@ -13,7 +13,7 @@
       </template>
     </z-input>
     <div
-      v-if="searchCanidate || showAnalyzerList || toggleSearch"
+      v-if="searchCandidate || showAnalyzerList || toggleSearch"
       class="absolute inline-block w-full mt-1 shadow-lg"
       :class="dropdownBgClass"
     >
@@ -41,15 +41,18 @@
           </span>
         </li>
       </ul>
-      <div v-else-if="searchCanidate" class="flex items-center justify-center h-24">
-        No matches found for <b>{{ searchCanidate }}</b>
+      <div v-else-if="searchCandidate" class="flex items-center justify-center h-24">
+        <div>
+          No matches found for "<b>{{ searchCandidate }}</b
+          >"
+        </div>
       </div>
       <div v-else class="flex items-center justify-center h-24">No Analyzers found</div>
     </div>
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop, Watch, namespace } from 'nuxt-property-decorator'
+import { Component, Vue, Prop, namespace } from 'nuxt-property-decorator'
 import { ZIcon, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
 import Analyzer from './Analyzer.vue'
 
@@ -66,7 +69,7 @@ const analyzerListStore = namespace('analyzer/list')
     Analyzer
   }
 })
-export default class AnalyzerSelector extends Vue {
+export default class AnalyzerSearch extends Vue {
   @Prop({ default: () => [] })
   selectedAnalyzers: string[] = []
 
@@ -88,7 +91,7 @@ export default class AnalyzerSelector extends Vue {
   @analyzerListStore.Action(AnalyzerListActions.FETCH_ANALYZER_LIST)
   fetchAnalyzers: () => Promise<void>
 
-  private searchCanidate = ''
+  private searchCandidate = ''
   private showAnalyzerList = false
 
   async fetch(): Promise<void> {
@@ -100,16 +103,16 @@ export default class AnalyzerSelector extends Vue {
     if (this.closeOnAdd) {
       this.showAnalyzerList = false
     }
-    this.searchCanidate = ''
+    this.searchCandidate = ''
   }
 
   get searchAnalyzers(): AnalyzerInterface[] {
     const analyzersNotYetSelected = this.analyzerList.filter(
       (config) => !this.selectedAnalyzers.includes(config.name)
     )
-    if (this.searchCanidate) {
+    if (this.searchCandidate) {
       return analyzersNotYetSelected.filter(
-        (config) => config.name.search(this.searchCanidate) >= 0
+        (config) => config.name.toLowerCase().search(this.searchCandidate.toLowerCase()) >= 0
       )
     }
     return analyzersNotYetSelected
