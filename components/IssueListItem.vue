@@ -2,7 +2,7 @@
   <base-card :to="issueLink" :removeDefaultStyle="removeDefaultStyle">
     <template slot="header"> <slot name="header"></slot> </template>
     <template slot="title">
-      <div class="font-normal flex flex-wrap text-lg text-vanilla-400 items-baseline mb-1">
+      <div class="font-normal flex flex-wrap text-lg text-vanilla-400 items-baseline">
         <span
           class="font-semibold text-vanilla-100 pr-2 line-clamp-1"
           :to="issueLink"
