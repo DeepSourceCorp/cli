@@ -66,6 +66,7 @@ export default {
   ],
 
   sentry: {
+    tracing: true,
     publishRelease:
       process.env.ON_PREM || process.env.DISABLE_SENTRY
         ? false

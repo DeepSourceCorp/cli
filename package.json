@@ -16,6 +16,7 @@
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
     "@nuxtjs/sentry": "^5.0.3",
+    "@sentry/tracing": "^6.11.0",
     "@tailwindcss/line-clamp": "^0.2.0",
     "@types/lodash": "^4.14.170",
     "axios": "^0.21.0",
