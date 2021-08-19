@@ -42,6 +42,7 @@ import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZModal, ZButton, ZCheckbox, ZTextarea } from '@deepsourcelabs/zeal'
 
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 @Component({
   components: {
@@ -52,7 +53,7 @@ import IssueDetailMixin from '~/mixins/issueDetailMixin'
     ZTextarea
   }
 })
-export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin) {
+export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin, ActiveUserMixin) {
   @Prop({ default: '' })
   checkIssueId!: string
 
@@ -73,11 +74,25 @@ export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin) {
   }
 
   public async confirm(): Promise<void> {
-    await this.ignoreIssueFalsePositive({
-      checkIssueId: this.checkIssueId,
-      comment: this.comment
-    })
-    this.$emit('ignore')
+    try {
+      const response = await this.ignoreIssueFalsePositive({
+        checkIssueId: this.checkIssueId,
+        comment: this.comment
+      })
+      if (response.ok) {
+        this.$emit('ignore', [this.checkIssueId])
+      } else {
+        throw new Error(`Received a non-ok response for this check`)
+      }
+    } catch (e) {
+      this.$toast.danger('Something went wrong while reporting this false positive')
+      this.logSentryErrorForUser(e, 'Ignore Issue', {
+        method: 'Report false positive',
+        shortcode: this.shortcode,
+        checkIssueId: this.checkIssueId,
+        comment: this.comment
+      })
+    }
   }
 }
 </script>

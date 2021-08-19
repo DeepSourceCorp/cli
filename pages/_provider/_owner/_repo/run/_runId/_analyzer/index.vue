@@ -8,7 +8,7 @@
       :currentAnalyzer="$route.params.analyzer"
     ></run-header>
     <div v-else class="h-24 w-full bg-ink-200 animate-pulse"></div>
-    <div v-if="loading">
+    <div v-if="runDetailLoading">
       <!-- Header -->
       <div class="flex w-full rounded-sm flex-1 p-4 space-x-2">
         <!-- Left Section -->
@@ -44,14 +44,12 @@
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
 // Import State & Types
-import { RunDetailActions } from '@/store/run/detail'
-import { Maybe, Run, Check, CheckEdge } from '~/types/types'
+import { Maybe, Check, CheckEdge } from '~/types/types'
+import { RepoPerms } from '~/types/permTypes'
 import { RunHeader, AnalyzerRun } from '@/components/Run'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { RepoPerms } from '~/types/permTypes'
-
-const runDetailStore = namespace('run/detail')
+import RunDetailMixin from '~/mixins/runDetailMixin'
 
 @Component({
   components: {
@@ -60,47 +58,51 @@ const runDetailStore = namespace('run/detail')
   },
   layout: 'repository'
 })
-export default class AnalyzerDetails extends mixins(RepoDetailMixin, RoleAccessMixin) {
-  @runDetailStore.State
-  run: Run
-
-  @runDetailStore.State
-  check: Check
-
-  @runDetailStore.State
-  loading: boolean
-
+export default class AnalyzerDetails extends mixins(
+  RepoDetailMixin,
+  RoleAccessMixin,
+  RunDetailMixin
+) {
   async fetch(): Promise<void> {
     await this.fetchRepoPerms(this.baseRouteParams)
-    await this.fetchRun()
-    await this.fetchCheck()
+    await this.fetchCurrentRun()
+    await this.fetchCheck({ checkId: this.currentCheck.id })
     await this.fetchIssues()
+  }
+
+  async refetchCheck(checkId: string): Promise<void> {
+    if (this.currentCheck.id === checkId) {
+      await this.fetchCheck({ checkId: this.currentCheck.id, refetch: true })
+      await this.fetchIssues(true)
+    }
   }
 
   created(): void {
     this.setAnalysisUpdateEvent()
   }
 
-  async fetchCheck(): Promise<void> {
-    return this.$store.dispatch(`run/detail/${RunDetailActions.FETCH_CHECK}`, {
-      checkId: this.currentCheck.id
+  mounted(): void {
+    this.$root.$on('refetchCheck', this.refetchCheck)
+  }
+
+  async fetchCurrentRun(): Promise<void> {
+    const { runId, repo, owner, provider } = this.$route.params
+    return this.fetchRun({
+      provider,
+      owner,
+      name: repo,
+      runId
     })
   }
 
-  async fetchRun(): Promise<void> {
-    return this.$store.dispatch(`run/detail/${RunDetailActions.FETCH_RUN}`, {
-      provider: this.$route.params.provider,
-      owner: this.$route.params.owner,
-      name: this.$route.params.repo,
-      runId: this.$route.params.runId
-    })
-  }
-
-  async fetchIssues(): Promise<void> {
-    await this.$store.dispatch(`run/detail/${RunDetailActions.FETCH_CONCRETE_ISSUE_LIST}`, {
+  async fetchIssues(refetch = false): Promise<void> {
+    await this.fetchConcreteIssueList({
       checkId: this.check.id,
       currentPageNumber: 1,
-      limit: 30
+      limit: 30,
+      sort: '',
+      issueType: '',
+      refetch
     })
   }
 

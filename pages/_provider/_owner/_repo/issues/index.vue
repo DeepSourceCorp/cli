@@ -161,13 +161,18 @@ export default class Issues extends mixins(
   async fetch(): Promise<void> {
     await this.fetchRepoDetails(this.baseRouteParams)
     await this.fetchRepoPerms(this.baseRouteParams)
+    await this.fetchIssuesForOwner()
+  }
+
+  async fetchIssuesForOwner(refetch = false): Promise<void> {
     const { q, page, sort, analyzer, category, autofixAvailable, all } = this.parsedParams
     await this.fetchIssueTypeDistribution({
       ...this.baseRouteParams,
       q,
       analyzer,
       issueType: '',
-      autofixAvailable: autofixAvailable as boolean | null
+      autofixAvailable: autofixAvailable as boolean | null,
+      refetch
     })
 
     await this.fetchIssueList({
@@ -179,7 +184,14 @@ export default class Issues extends mixins(
       analyzer,
       issueType: category,
       autofixAvailable: autofixAvailable as boolean | null,
-      all
+      all,
+      refetch
+    })
+  }
+
+  mounted(): void {
+    this.$root.$on('refetchCheck', () => {
+      this.fetchIssuesForOwner(true)
     })
   }
 

@@ -72,6 +72,7 @@ interface IssueListModuleActions extends ActionTree<IssueListModuleState, RootSt
       q?: string
       autofixAvailable?: boolean
       all?: boolean
+      refetch?: boolean
     }
   ) => Promise<void>
 }
@@ -80,19 +81,23 @@ export const actions: IssueListModuleActions = {
   async [IssueListActions.FETCH_ISSUE_LIST]({ commit }, args) {
     commit(IssueListMutations.SET_LOADING, true)
 
-    await this.$fetchGraphqlData(RepositoryIssuesListGQLQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name,
-      after: this.$getGQLAfter(args.currentPageNumber || 1, args.limit),
-      limit: args.limit,
-      issueType: args.issueType,
-      analyzer: args.analyzer,
-      sort: args.sort,
-      q: args.q,
-      autofixAvailable: args.autofixAvailable,
-      all: args.all
-    })
+    await this.$fetchGraphqlData(
+      RepositoryIssuesListGQLQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name,
+        after: this.$getGQLAfter(args.currentPageNumber || 1, args.limit),
+        limit: args.limit,
+        issueType: args.issueType,
+        analyzer: args.analyzer,
+        sort: args.sort,
+        q: args.q,
+        autofixAvailable: args.autofixAvailable,
+        all: args.all
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         commit(IssueListMutations.SET_ISSUE_LIST, response.data.repository?.issues)
         commit(IssueListMutations.SET_LOADING, false)

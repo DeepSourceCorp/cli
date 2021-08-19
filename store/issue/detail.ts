@@ -18,7 +18,9 @@ import {
   CheckIssueConnection,
   IgnoreCheckIssueActionChoice,
   CreateAutofixRunInput,
-  IgnoreIssueForFilePatternInRepositoryPayload
+  IgnoreIssueForFilePatternInRepositoryPayload,
+  ReportIssueFalsePositivePayload,
+  IgnoreCheckIssuePayload
 } from '~/types/types'
 import { RootState } from '~/store'
 
@@ -166,7 +168,7 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
       checkIssueId: string
       action?: IgnoreCheckIssueActionChoice
     }
-  ) => Promise<void>
+  ) => Promise<IgnoreCheckIssuePayload>
   [IssueDetailActions.IGNORE_ISSUE_FALSE_POSITIVE]: (
     this: Store<RootState>,
     injectee: IssueDetailActionContext,
@@ -174,7 +176,7 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
       checkIssueId: string
       comment: string
     }
-  ) => Promise<void>
+  ) => Promise<ReportIssueFalsePositivePayload>
   [IssueDetailActions.CREATE_AUTOFIX_RUN]: (
     this: Store<RootState>,
     injectee: IssueDetailActionContext,
@@ -249,33 +251,19 @@ export const actions: IssueDetailModuleActions = {
     const response = await this.$applyGraphqlMutation(IgnoreIssueForFile, args)
     return response.data.ignoreIssueForRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_CHECK_ISSUE]({ commit }, args) {
-    try {
-      commit(IssueDetailMutations.SET_LOADING, true)
-      await this.$applyGraphqlMutation(IgnoreCheckIssue, {
-        checkIssueId: args.checkIssueId,
-        action: args.action ?? IgnoreCheckIssueActionChoice.Delete
-      })
-      commit(IssueDetailMutations.SET_LOADING, false)
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(IssueDetailMutations.SET_ERROR, error)
-      commit(IssueDetailMutations.SET_LOADING, false)
-    }
+  async [IssueDetailActions.IGNORE_ISSUE_CHECK_ISSUE](_, args) {
+    const response = await this.$applyGraphqlMutation(IgnoreCheckIssue, {
+      checkIssueId: args.checkIssueId,
+      action: args.action ?? IgnoreCheckIssueActionChoice.Delete
+    })
+    return response.data.ignoreCheckIssue
   },
-  async [IssueDetailActions.IGNORE_ISSUE_FALSE_POSITIVE]({ commit }, args) {
-    try {
-      commit(IssueDetailMutations.SET_LOADING, true)
-      await this.$applyGraphqlMutation(IgnoreIssueFalsePositive, {
-        checkIssueId: args.checkIssueId,
-        comment: args.comment
-      })
-      commit(IssueDetailMutations.SET_LOADING, false)
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(IssueDetailMutations.SET_ERROR, error)
-      commit(IssueDetailMutations.SET_LOADING, false)
-    }
+  async [IssueDetailActions.IGNORE_ISSUE_FALSE_POSITIVE](_, { checkIssueId, comment }) {
+    const response = await this.$applyGraphqlMutation(IgnoreIssueFalsePositive, {
+      checkIssueId,
+      comment
+    })
+    return response.data.reportIssueFalsePositive
   },
   async [IssueDetailActions.CREATE_AUTOFIX_RUN]({ commit }, args) {
     const response = await this.$applyGraphqlMutation(CreateAutofixRun, {

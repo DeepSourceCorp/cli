@@ -112,6 +112,7 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
     injectee: RunDetailActionContext,
     args: {
       checkId: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [RunDetailActions.FETCH_CHECK_ISSUES]: (
@@ -142,6 +143,7 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
       currentPageNumber: number
       sort: string
       issueType: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [RunDetailActions.CREATE_AUTOFIX_PR]: (
@@ -185,20 +187,23 @@ export const actions: RunDetailModuleActions = {
         commit(RunDetailMutations.SET_LOADING, false)
       })
   },
-  async [RunDetailActions.FETCH_CHECK]({ commit }, args) {
+  async [RunDetailActions.FETCH_CHECK]({ commit }, { checkId, refetch }) {
     commit(RunDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryRunCheckGQLQuery, {
-      checkId: args.checkId
-    })
-      .then((response: GraphqlQueryResponse) => {
-        const check = response.data.check as Check
-        commit(RunDetailMutations.SET_CHECK, check)
-        commit(RunDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(RunDetailMutations.SET_ERROR, e)
-        commit(RunDetailMutations.SET_LOADING, false)
-      })
+    try {
+      const response = await this.$fetchGraphqlData(
+        RepositoryRunCheckGQLQuery,
+        {
+          checkId: checkId
+        },
+        refetch
+      )
+      const check = response.data.check as Check
+      commit(RunDetailMutations.SET_CHECK, check)
+    } catch (e) {
+      commit(RunDetailMutations.SET_ERROR, e)
+    } finally {
+      commit(RunDetailMutations.SET_LOADING, false)
+    }
   },
   async [RunDetailActions.FETCH_CHECK_ISSUES]({ commit }, args) {
     commit(RunDetailMutations.SET_LOADING, true)
@@ -235,21 +240,24 @@ export const actions: RunDetailModuleActions = {
   },
   async [RunDetailActions.FETCH_CONCRETE_ISSUE_LIST]({ commit }, args) {
     commit(RunDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RunConcreteIssueListGQLQuery, {
-      checkId: args.checkId,
-      limit: args.limit,
-      after: this.$getGQLAfter(args.currentPageNumber, args.limit),
-      sort: args.sort,
-      issueType: args.issueType
-    })
-      .then((response: GraphqlQueryResponse) => {
-        commit(RunDetailMutations.SET_CONCRETE_ISSUE_LIST, response.data.check?.concreteIssues)
-        commit(RunDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(RunDetailMutations.SET_ERROR, e)
-        commit(RunDetailMutations.SET_LOADING, false)
-      })
+    try {
+      const response = await this.$fetchGraphqlData(
+        RunConcreteIssueListGQLQuery,
+        {
+          checkId: args.checkId,
+          limit: args.limit,
+          after: this.$getGQLAfter(args.currentPageNumber, args.limit),
+          sort: args.sort,
+          issueType: args.issueType
+        },
+        args.refetch
+      )
+      commit(RunDetailMutations.SET_CONCRETE_ISSUE_LIST, response.data.check?.concreteIssues)
+    } catch (e) {
+      commit(RunDetailMutations.SET_ERROR, e)
+    } finally {
+      commit(RunDetailMutations.SET_LOADING, false)
+    }
   },
   async [RunDetailActions.CREATE_AUTOFIX_PR]({ commit }, args) {
     try {

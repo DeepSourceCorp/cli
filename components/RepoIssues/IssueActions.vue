@@ -157,6 +157,7 @@ export default class IssueActions extends mixins(RoleAccessMixin) {
   }
 
   public markAllOccurrenceDisabled(issueIds: string[]): void {
+    this.$root.$emit('refetchCheck', this.checkId)
     this.$emit('ignoreIssues', issueIds)
     this.close()
   }

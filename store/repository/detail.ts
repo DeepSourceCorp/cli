@@ -239,6 +239,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       analyzer: string
       q: string
       autofixAvailable: boolean | null
+      refetch?: boolean
     }
   ) => Promise<void>
   [RepositoryDetailActions.FETCH_REPOSITORY_DETAIL]: (
@@ -536,15 +537,19 @@ export const actions: RepositoryDetailModuleActions = {
   async [RepositoryDetailActions.FETCH_ISSUE_TYPE_DISTRIBUTION]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
     // use metrics query later
-    await this.$fetchGraphqlData(RepositoryIssueTypeDistributionQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name,
-      issueType: args.issueType,
-      analyzer: args.analyzer,
-      q: args.q,
-      autofixAvailable: args.autofixAvailable
-    })
+    await this.$fetchGraphqlData(
+      RepositoryIssueTypeDistributionQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name,
+        issueType: args.issueType,
+        analyzer: args.analyzer,
+        q: args.q,
+        autofixAvailable: args.autofixAvailable
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched widgets")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)

@@ -41,6 +41,7 @@
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZModal, ZButton, ZCheckbox } from '@deepsourcelabs/zeal'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 @Component({
   components: {
@@ -50,7 +51,7 @@ import IssueDetailMixin from '~/mixins/issueDetailMixin'
     ZCheckbox
   }
 })
-export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin) {
+export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin, ActiveUserMixin) {
   @Prop({ default: '' })
   checkIssueId!: string
 
@@ -71,10 +72,23 @@ export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin) {
   }
 
   public async confirm(): Promise<void> {
-    await this.updateIgnoreCheckIssue({
-      checkIssueId: this.checkIssueId
-    })
-    this.$emit('ignore')
+    try {
+      const response = await this.updateIgnoreCheckIssue({
+        checkIssueId: this.checkIssueId
+      })
+      if (response.ok) {
+        this.$emit('ignore', [this.checkIssueId])
+      } else {
+        throw new Error(`Received a non-ok response for this check`)
+      }
+    } catch (e) {
+      this.$toast.danger('Something went wrong while ignoring this issue')
+      this.logSentryErrorForUser(e, 'Ignore Issue', {
+        method: 'Ignore issue intentional',
+        shortcode: this.shortcode,
+        checkIssueId: this.checkIssueId
+      })
+    }
   }
 }
 </script>

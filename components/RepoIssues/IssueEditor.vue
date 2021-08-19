@@ -65,7 +65,7 @@
       :checkIssueId="id"
       :shortcode="shortcode"
       @close="close"
-      @ignore="markOccurrenceDisabled"
+      @ignore="markOccurrencesDisabled"
     ></ignore-issue-intentional>
     <ignore-issue-false-positive
       v-if="currentComponent === 'falsePositive'"
@@ -74,7 +74,7 @@
       :shortcode="shortcode"
       :checkIssueId="id"
       @close="close"
-      @ignore="markOccurrenceDisabled"
+      @ignore="markOccurrencesDisabled"
     ></ignore-issue-false-positive>
     <ignore-issue-occurrence
       v-if="currentComponent === 'occurence'"
@@ -151,8 +151,8 @@ export default class IssueEditor extends Vue {
   @Prop({ default: [] })
   checkIssueIds!: Array<string>
 
-  @Prop({ default: false })
-  checkId!: Boolean
+  @Prop()
+  checkId!: string
 
   @Prop()
   shortcode!: string
@@ -195,13 +195,10 @@ export default class IssueEditor extends Vue {
     return fromNow(this.modifiedAt)
   }
 
-  public markOccurrenceDisabled(): void {
+  public markOccurrencesDisabled(checkIssueIds: Array<string>): void {
     this.isIgnored = true
     this.close()
-  }
-
-  public markOccurrencesDisabled(checkIssueIds: Array<string>): void {
-    this.close()
+    this.$root.$emit('refetchCheck', this.checkId)
     this.$emit('ignoreIssues', checkIssueIds)
     this.$socket.$emit('ignore-issue-occurrence-file', checkIssueIds)
   }

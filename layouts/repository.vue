@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { RepoHeader, MobileNav, LoggedOutSidebar } from '@/components/Layout'
 import { Sidebar } from '@/components/Layout/Sidebar'
 import AuthMixin from '@/mixins/authMixin'
@@ -132,6 +132,11 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
 
   beforeDestroy(): void {
     this.$socket.$off('repo-analysis-updated', this.refetchRepoDetailsEvent)
+  }
+
+  @Watch('$route.params.repo')
+  removeRefetchEvents(): void {
+    this.$root.$off('refetchCheck')
   }
 
   get isAnalyzed(): boolean {

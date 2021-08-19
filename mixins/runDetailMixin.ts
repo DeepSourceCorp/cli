@@ -41,7 +41,7 @@ export default class RunDetailMixin extends Vue {
   }) => Promise<void>
 
   @runDetailStore.Action(RunDetailActions.FETCH_CHECK)
-  fetchCheck: (args: { checkId: string }) => Promise<void>
+  fetchCheck: (args: { checkId: string; refetch?: boolean }) => Promise<void>
 
   @runDetailStore.Action(RunDetailActions.FETCH_CHECK_ISSUES)
   fetchCheckIssues: (args: {
@@ -63,6 +63,7 @@ export default class RunDetailMixin extends Vue {
     currentPageNumber: number
     sort: string
     issueType: string
+    refetch?: boolean
   }) => Promise<void>
 
   @runDetailStore.Action(RunDetailActions.CREATE_AUTOFIX_PR)

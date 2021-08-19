@@ -76,7 +76,7 @@ export default class IssuesDetails extends mixins(
 
   public pageSize = PAGE_SIZE
 
-  public currentPage: Maybe<number> = null
+  public currentPage: Maybe<number> = 1
 
   public issuesIgnored: Array<string> = []
 

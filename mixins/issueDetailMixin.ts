@@ -10,7 +10,9 @@ import {
   CreateAutofixRunPayload,
   IgnoreIssueForRepositoryPayload,
   IgnoreIssueForFilePatternInRepositoryPayload,
-  IgnoreIssueForTestPatternsInRepositoryPayload
+  IgnoreIssueForTestPatternsInRepositoryPayload,
+  ReportIssueFalsePositivePayload,
+  IgnoreCheckIssuePayload
 } from '~/types/types'
 
 const issueStore = namespace('issue/detail')
@@ -77,10 +79,13 @@ export default class IssueDetailMixin extends Vue {
   updateIgnoreCheckIssue: (arg: {
     checkIssueId: string
     action?: IgnoreCheckIssueActionChoice
-  }) => Promise<void>
+  }) => Promise<IgnoreCheckIssuePayload>
 
   @issueStore.Action(IssueDetailActions.IGNORE_ISSUE_FALSE_POSITIVE)
-  ignoreIssueFalsePositive: (arg: { checkIssueId: string; comment: string }) => Promise<void>
+  ignoreIssueFalsePositive: (arg: {
+    checkIssueId: string
+    comment: string
+  }) => Promise<ReportIssueFalsePositivePayload>
 
   @issueStore.Action(IssueDetailActions.CREATE_AUTOFIX_RUN)
   createAutofixRun: (arg: CreateAutofixRunInput) => Promise<CreateAutofixRunPayload>

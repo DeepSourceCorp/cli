@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Back to Issue list Page -->
-    <div class="px-4 py-2 min-h-13 border-b border-ink-300 flex flex-row items-center">
+    <div class="px-4 py-2 min-h-13 border-b border-ink-200 flex flex-row items-center">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="routeToPrevious">All issues</nuxt-link>

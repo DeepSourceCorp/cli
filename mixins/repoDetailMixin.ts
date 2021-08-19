@@ -196,6 +196,7 @@ export default class RepoDetailMixin extends Vue {
     analyzer?: string
     q?: string
     autofixAvailable?: boolean | null
+    refetch?: boolean
   }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_ADDABLE_MEMBERS)
