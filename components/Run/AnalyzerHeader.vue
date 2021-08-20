@@ -130,7 +130,7 @@ export default class AnalyzerHeader extends Vue {
       [RunStatus.Fail]: 'Finished',
       [RunStatus.Pend]: 'Analysis in progress',
       [RunStatus.Timo]: 'Timed out',
-      [RunStatus.Cncl]: 'Cancelled after'
+      [RunStatus.Cncl]: 'Cancelled'
     }
     return types[this.status || 'PASS']
   }
