@@ -186,8 +186,17 @@ export default {
     }
   },
 
+  render: {
+    // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-render#fallback
+    fallback: {
+      static: {
+        handlers: false
+      }
+    }
+  },
+
   googleFonts: {
-    download: process.env.NODE_ENV !== 'development',
+    download: process.env.ON_PREM,
     families: {
       Inter: [100, 200, 300, 400, 500, 600, 700]
     }
