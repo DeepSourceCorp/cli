@@ -24,12 +24,13 @@ func (c *ConfigValidator) validateVersion() {
 		// Value of version must be an integer
 		if reflect.TypeOf(viper.Get("version")).Kind().String() != "int64" {
 			c.pushError(fmt.Sprintf("Value of `version` must be an integer. Got %s", reflect.TypeOf(viper.Get("version")).Kind().String()))
+			return
 		}
 
 		// Should not be zero
 		versionInt, _ := strconv.Atoi(viper.GetString("version"))
 		if versionInt < 1 {
-			c.pushError(fmt.Sprintf("Value for `version` cannot be zero. Got %d", versionInt))
+			c.pushError(fmt.Sprintf("Value for `version` cannot be less than 1. Got %d", versionInt))
 		}
 
 		// Value for version must be less than ALLOWED VERSION
@@ -53,6 +54,7 @@ func (c *ConfigValidator) validateExcludePatterns() {
 		exPatternType := reflect.TypeOf(excludePatterns).Kind().String()
 		if exPatternType != "slice" {
 			c.pushError(fmt.Sprintf("Value of `exclude_patterns` should be an array of strings. Found: %v", exPatternType))
+			return
 		}
 
 		// Value of each exclude pattern can only be a string

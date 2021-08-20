@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -26,18 +25,19 @@ func main() {
 
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
+	// Init sentry
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn: SentryDSN,
 	})
 	if err != nil {
-		fmt.Println("Could not load sentry.")
+		log.Println("Could not load sentry.")
 	}
-
 	v.SetBuildInfo(version, Date, "", "")
 
 	if err := command.Execute(); err != nil {
 		// TODO: Handle exit codes here
 		pterm.Error.Println(err)
+		sentry.CaptureException(err)
 		os.Exit(1)
 	}
 }

@@ -1,85 +1,117 @@
 package login
 
 import (
+	"context"
 	"fmt"
 	"time"
 
 	"github.com/cli/browser"
-	"github.com/deepsourcelabs/cli/api"
-	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/deepsource"
+	"github.com/deepsourcelabs/cli/deepsource/auth"
 	"github.com/fatih/color"
-	"github.com/pterm/pterm"
 )
 
-func (opts *LoginOptions) startLoginFlow() error {
-
-	// Send a mutation to register device and get the device code
-	deviceCode, userCode, verificationURI, expiresIn, interval, err := api.GetDeviceCode(opts.graphqlClient)
+// Starts the login flow for the CLI
+func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
+	// Register the device and get a device code through the response
+	ctx := context.Background()
+	deviceRegistrationResponse, err := registerDevice(ctx)
 	if err != nil {
 		return err
 	}
 
-	// Having received the device code, open the browser at verificationURI
 	// Print the user code and the permission to open browser at verificationURI
 	c := color.New(color.FgCyan, color.Bold)
-	c.Printf("Please copy your one-time code: %s\n", userCode)
+	c.Printf("Please copy your one-time code: %s\n", deviceRegistrationResponse.UserCode)
 	c.Printf("Press enter to open deepsource.io in your browser...")
 	fmt.Scanln()
 
-	err = browser.OpenURL(verificationURI)
+	// Having received the user code, open the browser at verificationURIComplete
+	err = browser.OpenURL(deviceRegistrationResponse.VerificationURIComplete)
 	if err != nil {
 		return err
 	}
 
-	// // Keep polling the mutation at a certain interval till "expiresIn"
-	ticker := time.NewTicker(time.Duration(interval) * time.Second)
-	pollStartTime := time.Now()
-	var jwtData *api.FetchJWTResponse
+	// Fetch the JWT using the device registration resonse
+	var jwtData *auth.JWT
+	jwtData, opts.AuthTimedOut, err = fetchJWT(ctx, deviceRegistrationResponse)
+	if err != nil {
+		return err
+	}
 
-	// Polling for JWT
+	// Check if it was a success poll or the Auth timed out
+	if opts.AuthTimedOut {
+		return fmt.Errorf("Authentication timed out")
+	}
+
+	// Storing the useful data for future reference and usage
+	// in a global config object (Cfg)
+	cfg.User = jwtData.Payload.Email
+	cfg.Token = jwtData.Token
+	cfg.RefreshToken = jwtData.Refreshtoken
+	cfg.RefreshTokenExpiresIn = time.Unix(jwtData.RefreshExpiresIn, 0)
+	cfg.SetTokenExpiry(jwtData.Payload.Exp)
+
+	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
+	err = cfg.WriteFile()
+	if err != nil {
+		return fmt.Errorf("Error in writing authentication data to a file. Exiting...")
+	}
+	return nil
+}
+
+func registerDevice(ctx context.Context) (*auth.Device, error) {
+	// Fetching DeepSource client in order to interact with SDK
+	deepsource, err := deepsource.New()
+	if err != nil {
+		return nil, err
+	}
+
+	// Send a mutation to register device and get the device code
+	res, err := deepsource.RegisterDevice(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return res, nil
+}
+
+func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.JWT, bool, error) {
+	var jwtData *auth.JWT
+	var err error
+	authTimedOut := true
+
+	// Fetching DeepSource client in order to interact with SDK
+	deepsource, err := deepsource.New()
+	if err != nil {
+		return nil, authTimedOut, err
+	}
+
+	// Keep polling the mutation at a certain interval till the expiry timeperiod
+	ticker := time.NewTicker(time.Duration(deviceRegistrationData.Interval) * time.Second)
+	pollStartTime := time.Now()
+
+	// Polling for fetching JWT
 	func() {
 		for {
 			select {
 			case <-ticker.C:
-				// do stuff
-				jwtData, _ = api.GetJWT(opts.graphqlClient, deviceCode)
-				if jwtData.Requestjwt.Token != "" {
-					opts.AuthTimedOut = false
+				// Fetch JWT
+				jwtData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
+				if err == nil {
+					authTimedOut = false
 					return
 				}
 
-				// Check auth polling time out
+				// Check if polling timed-out
 				timeElapsed := time.Since(pollStartTime)
-				if timeElapsed >= time.Duration(expiresIn)*time.Second {
-					opts.AuthTimedOut = true
+				if timeElapsed >= time.Duration(deviceRegistrationData.ExpiresIn)*time.Second {
+					authTimedOut = true
 					return
 				}
 			}
 		}
 	}()
 
-	// Check if its a success poll or the auth timed out
-	if opts.AuthTimedOut {
-		pterm.Error.Println("Authentication timed out. Exiting...")
-		return fmt.Errorf("Authentication timed out")
-	}
-
-	// Convert incoming config into the ConfigData format
-	finalConfig := cliConfig.ConfigData{
-		User:                jwtData.Requestjwt.Payload.Email,
-		Token:               jwtData.Requestjwt.Token,
-		TokenExpiry:         jwtData.Requestjwt.Payload.Exp,
-		RefreshToken:        jwtData.Requestjwt.Refreshtoken,
-		OrigIAT:             jwtData.Requestjwt.Payload.Origiat,
-		RefreshTokenExpiry:  jwtData.Requestjwt.Refreshexpiresin,
-		RefreshTokenSetTime: time.Now().Unix(),
-	}
-
-	err = cliConfig.WriteConfigToFile(finalConfig)
-	if err != nil {
-		pterm.Error.Println("Error in writing authentication data to a file. Exiting...")
-		return err
-	}
-
-	return nil
+	return jwtData, authTimedOut, nil
 }

@@ -1,24 +1,17 @@
 package generate
 
-import "github.com/deepsourcelabs/cli/api"
+import "github.com/deepsourcelabs/cli/utils"
 
-// Collects user input for generating DeepSource config
+// Responsible for collecting user input for generating DeepSource config
 func (o *Options) collectUserInput() error {
 
-	var err error
-	o.AnalyzersMap = make(map[string]string)
-	o.TransformerMap = make(map[string]string)
-
-	o.AnalyzerNames, o.AnalyzerShortcodes, _,o.AnalyzersMap, err = api.GetSupportedAnalyzers(o.gqlClient)
+	// Get the list of analyzers and transformers supported by DeepSource
+	err := utils.GetAnalyzersAndTransformersData()
 	if err != nil {
 		return err
 	}
 
-	o.TransformerNames, o.TransformerShortcodes, o.TransformerMap, err = api.GetSupportedTransformers(o.gqlClient)
-	if err != nil {
-		return err
-	}
-
+	// Get input for analyzers to be activated
 	err = o.collectAnalyzerInput()
 	if err != nil {
 		return err

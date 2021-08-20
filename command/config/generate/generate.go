@@ -6,8 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/deepsourcelabs/cli/api"
-	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
 	"github.com/spf13/cobra"
@@ -15,78 +15,65 @@ import (
 
 // Options holds the metadata.
 type Options struct {
-	gqlClient *api.DSClient
-
-	AnalyzerNames         []string
-	AnalyzerShortcodes    []string
-	AnalyzersMap          map[string]string // Map for {analyzer name : shortcode}
-	TransformerNames      []string
-	TransformerShortcodes []string
-	TransformerMap        map[string]string // Map for {transformer name:shortcode}
-
 	GoImportRoot string // Mandatory meta for Go
 	JavaVersion  string // Mandatory meta for JAVA
 
-	ActivatedAnalyzers    []string
-	ActivatedTransformers []string
+	ActivatedAnalyzers    []string // Analyzers activated by user
+	ActivatedTransformers []string // Transformers activated by the user
 	ExcludePatterns       []string
 	TestPatterns          []string
-
-	GeneratedConfig string
+	GeneratedConfig       string
 }
 
-// NewCmdVersion returns the current version of cli being used
-func NewCmdConfigGenerate(cf *cmdutils.CLIFactory) *cobra.Command {
-
-	o := Options{
-		gqlClient: cf.GQLClient,
-	}
+// NewCmdConfigGenerate handles the generation of DeepSource config based on user inputs
+func NewCmdConfigGenerate() *cobra.Command {
+	o := Options{}
 
 	cmd := &cobra.Command{
 		Use:   "generate",
 		Short: "Generate config for DeepSource",
+		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			err := o.Run()
-			if err != nil {
-				return err
-			}
-			return nil
+			return o.Run()
 		},
-		SilenceErrors: true,
-		SilenceUsage:  true,
 	}
 	return cmd
-}
-// Validate impletments the Validate method for the ICommand interface.
-func (o *Options) Validate() error {
-	return nil
 }
 
 // Run executes the command.
 func (o *Options) Run() error {
+	// Fetch config
+	cfg, err := config.GetConfig()
+	if err != nil {
+		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	err = cfg.VerifyAuthentication()
+	if err != nil {
+		return err
+	}
 
-	// Collect user input
-	err := o.collectUserInput()
+	// Step 1: Collect user input
+	err = o.collectUserInput()
 	if err != nil {
 		fmt.Println("\nError occured while collecting input.Exiting...")
 		return err
 	}
 
-	// Generates config based on user input
+	// Step 2: Generates config based on user input
 	err = o.generateDeepSourceConfig()
 	if err != nil {
 		fmt.Println("\nError occured while generating config from input.Exiting...")
 		return err
 	}
 
-	// Write the generated config to a file
+	// Step 3: Write the generated config to a file
 	err = o.writeConfigToFile()
 	if err != nil {
 		fmt.Println("\nError while writing config to project directory. Exiting...")
 		return err
 	}
 
-	// Success output ricing
+	// Step 4: If everything is successfull, print the success message
 	cwd, err := os.Getwd()
 	c := color.New(color.FgGreen)
 	successOutput := fmt.Sprintf("\nSuccessfully generated DeepSource config file at %s/.deepsource.toml", cwd)
@@ -97,66 +84,51 @@ func (o *Options) Run() error {
 
 // Generates DeepSource config based on the inputs from the user in Options struct
 func (o *Options) generateDeepSourceConfig() error {
-
-	// Copying everything from Options struct to DeepSource config based struct
+	// Copying version, exclude_patterns and test_patterns into the DSConfig based structure
 	config := DSConfig{
-		Version:         0,
-		ExcludePatterns: []string{},
-		TestPatterns:    []string{},
-		Analyzers:       []Analyzer{},
-		Transformers:    []Transformer{},
+		Version:         DEEPSOURCE_TOML_VERSION,
+		ExcludePatterns: o.ExcludePatterns,
+		TestPatterns:    o.TestPatterns,
 	}
 
-	// TODO: Remove this hard coding of version
-	config.Version = 1
-	config.TestPatterns = o.TestPatterns
-	config.ExcludePatterns = o.ExcludePatterns
-
-	// Copying analyzers from Options struct to DSConfig based "config" struct
+	// Copying activated analyzers from Options struct to DSConfig based "config" struct
 	for index, analyzer := range o.ActivatedAnalyzers {
-
 		config.Analyzers = append(config.Analyzers, Analyzer{
-			Name:                o.AnalyzersMap[analyzer],
-			RuntimeVersion:      "",
-			Enabled:             true,
-			DependencyFilePaths: []string{},
-			Thresholds:          nil,
+			Name:    utils.AnaData.AnalyzersMap[analyzer],
+			Enabled: true,
 		})
 
+		// TODO: Remove this hard coding
 		// Adding these conditions since meta of these two analyzers(Go and Java) is mandatory
 		if analyzer == "Go" {
 			config.Analyzers[index].Meta.ImportRoot = o.GoImportRoot
-		}
-
-		if analyzer == "Java (beta)" {
+		} else if analyzer == "Java (beta)" {
 			config.Analyzers[index].Meta.JavaVersion = o.JavaVersion
 		}
 	}
 
-	// Copying transformers from Options struct to DSConfig based "config" struct
+	// Copying activated transformers from Options struct to DSConfig based "config" struct
 	for _, transformer := range o.ActivatedTransformers {
 		config.Transformers = append(config.Transformers, Transformer{
-			Name:    o.TransformerMap[transformer],
+			Name:    utils.TrData.TransformerMap[transformer],
 			Enabled: true,
 		})
 	}
 
 	// Encoding the DSConfig based "config" struct to TOML
+	// and storing in GeneratedConfig of Options struct
 	var buf bytes.Buffer
 	err := toml.NewEncoder(&buf).Order(toml.OrderPreserve).Encode(config)
 	if err != nil {
 		return err
 	}
-
 	// Convert the TOML encoded buffer to string
 	o.GeneratedConfig = buf.String()
-
 	return nil
 }
 
 // Writes the generated TOML config into a file
 func (o *Options) writeConfigToFile() error {
-
 	// Creating file
 	cwd, _ := os.Getwd()
 	f, err := os.Create(filepath.Join(cwd, ".deepsource.toml"))
@@ -170,6 +142,5 @@ func (o *Options) writeConfigToFile() error {
 	if writeError != nil {
 		return writeError
 	}
-
 	return nil
 }

@@ -3,7 +3,6 @@ package repo
 import (
 	"github.com/spf13/cobra"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
 	"github.com/deepsourcelabs/cli/command/repo/status"
 	"github.com/deepsourcelabs/cli/command/repo/view"
 )
@@ -12,17 +11,12 @@ import (
 type Options struct{}
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdRepo(cmdFactory *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdRepo() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "repo",
 		Short: "Operations related to the project repository",
 	}
-	cmd.AddCommand(status.NewCmdRepoStatus(cmdFactory))
-	cmd.AddCommand(view.NewCmdRepoView(cmdFactory))
+	cmd.AddCommand(status.NewCmdRepoStatus())
+	cmd.AddCommand(view.NewCmdRepoView())
 	return cmd
-}
-
-// Validate impletments the Validate method for the ICommand interface.
-func (Options) Validate() error {
-	return nil
 }

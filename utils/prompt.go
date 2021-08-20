@@ -1,4 +1,4 @@
-package cmdutils
+package utils
 
 import (
 	"fmt"
@@ -13,7 +13,7 @@ import (
 // ==========
 
 // Used for (Yes/No) questions
-func ConfirmFromUser(msg string, helpText string) (bool, error) {
+func ConfirmFromUser(msg, helpText string) (bool, error) {
 
 	response := false
 
@@ -38,7 +38,7 @@ func ConfirmFromUser(msg string, helpText string) (bool, error) {
 // > * 1
 //   * 2
 //   * 3
-func SelectFromOptions(msg string, helpText string, opts []string) (string, error) {
+func SelectFromOptions(msg, helpText string, opts []string) (string, error) {
 	var result string
 	prompt := &survey.Select{
 		Renderer: survey.Renderer{},
@@ -57,7 +57,7 @@ func SelectFromOptions(msg string, helpText string, opts []string) (string, erro
 
 // Used for Single Line Text Input
 // Being used for getting "Import root" of user for configuring meta of Go analyzer
-func GetSingleLineInput(msg string, helpText string) (string, error) {
+func GetSingleLineInput(msg, helpText string) (string, error) {
 
 	response := ""
 

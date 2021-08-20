@@ -3,80 +3,78 @@ package login
 import (
 	"fmt"
 
-	"github.com/deepsourcelabs/cli/api"
-	"github.com/deepsourcelabs/cli/cmdutils"
-	cliConfig "github.com/deepsourcelabs/cli/internal/config"
+	"github.com/deepsourcelabs/cli/config"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
 
-// Options holds the metadata.
+// LoginOptions hold the metadata related to login operation
 type LoginOptions struct {
-	graphqlClient *api.DSClient
-	AuthTimedOut  bool
-	TokenExpired  bool
-	Config        cliConfig.ConfigData
+	AuthTimedOut bool
+	TokenExpired bool
+	User         string
+	HostName     string
 }
 
-// NewCmdVersion returns the current version of cli being used
-func NewCmdLogin(cf *cmdutils.CLIFactory) *cobra.Command {
+// NewCmdLogin handles the login functionality for the CLI
+func NewCmdLogin() *cobra.Command {
+
+	opts := LoginOptions{
+		AuthTimedOut: false,
+		TokenExpired: true,
+		User:         "",
+		HostName:     "",
+	}
+
 	cmd := &cobra.Command{
 		Use:   "login",
 		Short: "Login to DeepSource using Command Line Interface",
+		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
-
-			opts := LoginOptions{
-				graphqlClient: cf.GQLClient,
-				AuthTimedOut:  false,
-				TokenExpired:  cf.TokenExpired,
-				Config:        cf.Config,
-			}
-			err := opts.Run()
-			if err != nil {
-				return err
-			}
-			return nil
+			return opts.Run()
 		},
-		SilenceUsage: true,
 	}
+
+	// --host, -h flag
+	cmd.Flags().StringVar(&opts.HostName, "hostname", "", "Authenticate with a specific DeepSource Enterprise Server instance")
 	return cmd
 }
 
-// Validate impletments the Validate method for the ICommand interface.
-func (opts *LoginOptions) Validate() error {
-	return nil
-}
-
-// Run executest the command.
+// Run executes the auth command and starts the login flow if not already authenticated
 func (opts *LoginOptions) Run() error {
+	// Fetch config
+	cfg, _ := config.GetConfig()
+	opts.User = cfg.User
+	opts.TokenExpired = cfg.IsExpired()
+
+	// Checking if the user passed a hostname. If yes, storing it in the config
+	// Else using the default hostname (deepsource.io)
+	if opts.HostName != "" {
+		cfg.Host = opts.HostName
+	} else {
+		cfg.Host = config.DefaultHostName
+	}
 
 	// Before starting the login workflow, check here for two conditions:
-	// 1 - If the token has expired, display a message about it and re-authenticate user
-	// 2 - If the token has not expired,does the user want to re-authenticate?
+	// Condition 1 : If the token has expired, display a message about it and re-authenticate user
+	// Condition 2 : If the token has not expired,does the user want to re-authenticate?
 
 	// Checking for condition 1
-	if opts.TokenExpired == false {
-
-		// The user is already logged in, confirm re-authentication
-		msg := fmt.Sprintf("You're already logged into deepsource.io as %s. Do you want to re-authenticate?", opts.Config.User)
-		helpText := ""
-
-		response, err := cmdutils.ConfirmFromUser(msg, helpText)
+	if !opts.TokenExpired {
+		// The user is already logged in, confirm re-authentication.
+		msg := fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)
+		response, err := utils.ConfirmFromUser(msg, "")
 		if err != nil {
-			fmt.Println("Error in getting response. Please try again...")
-			return err
+			return fmt.Errorf("Error in fetching response. Please try again.")
 		}
-
-		// User doesn't waant to re-authenticate
-		if response == false {
+		// If the response is No, it implies that the user doesn't want to re-authenticate
+		// In this case, just exit
+		if !response {
 			return nil
 		}
 	}
 
-	// Login flow starts
-	err := opts.startLoginFlow()
-	if err != nil {
-		return err
-	}
-
-	return nil
+	// Condition 2
+	// `startLoginFlow` implements the authentication flow for the CLI
+	return opts.startLoginFlow(cfg)
 }

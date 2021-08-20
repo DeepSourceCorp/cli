@@ -1,4 +1,4 @@
-package cmdutils
+package utils
 
 import (
 	"fmt"
@@ -118,27 +118,4 @@ func runCmd(command string, args []string) (string, error) {
 	// Removing trailing null characters
 	return strings.TrimRight(string(output), "\000"), nil
 
-}
-
-// Utility to parse the --repo flag
-func RepoArgumentResolver(arg string) ([]string, error) {
-
-	// github.com/deepsourcelabs/cli or gh/deepsourcelabs/cli
-
-	argComponents := strings.Split(arg, "/")
-
-	switch argComponents[0] {
-	case "gh", "github.com":
-		argComponents[0] = "GITHUB"
-		break
-	case "gl", "gitlab.com":
-		argComponents[0] = "GITLAB"
-		break
-	case "bb", "bitbucket.com":
-		argComponents[0] = "BITBUCKET"
-	default:
-		return argComponents, fmt.Errorf("VCSProvider `%s` not supported", argComponents[0])
-	}
-
-	return argComponents, nil
 }

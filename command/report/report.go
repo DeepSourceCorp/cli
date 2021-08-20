@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/cmdutils"
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/getsentry/sentry-go"
 	"github.com/spf13/cobra"
 )
@@ -21,12 +21,13 @@ type ReportOptions struct {
 }
 
 // NewCmdVersion returns the current version of cli being used
-func NewCmdReport(cf *cmdutils.CLIFactory) *cobra.Command {
+func NewCmdReport() *cobra.Command {
 	opts := ReportOptions{}
 
 	cmd := &cobra.Command{
 		Use:   "report",
 		Short: "Report artifacts to DeepSource",
+		Args:  utils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			returnCode := opts.Run()
 			defer os.Exit(returnCode)
