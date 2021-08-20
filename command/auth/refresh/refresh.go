@@ -2,26 +2,22 @@ package refresh
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/utils"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
-type RefreshOptions struct {
-	Token        string
-	RefreshToken string
-}
+type RefreshOptions struct{}
 
 // NewCmdRefresh handles the refreshing of authentication credentials
 func NewCmdRefresh() *cobra.Command {
-	opts := RefreshOptions{
-		Token:        config.Cfg.Token,
-		RefreshToken: config.Cfg.RefreshToken,
-	}
+	opts := RefreshOptions{}
 
 	cmd := &cobra.Command{
 		Use:   "refresh",
@@ -35,12 +31,22 @@ func NewCmdRefresh() *cobra.Command {
 }
 
 func (opts *RefreshOptions) Run() error {
+	// Fetch config
+	cfg, err := config.GetConfig()
+	if err != nil {
+		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	// Checking if the user has authenticated / logged in or not
+	if cfg.Token == "" {
+		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
+	}
+
 	// Check if token as well as refresh token are present since they
 	// are required for refreshing auth
-	if opts.Token == "" || opts.RefreshToken == "" {
+	if cfg.Token == "" || cfg.RefreshToken == "" {
 		// In case, there is no token as well as refresh token, ask the user to login instead
 		// TODO: Add ability to automatically run `login` command here
-		return fmt.Errorf("User not authenticated. Please login using the command - `deepsource auth login`")
+		return fmt.Errorf("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
 	}
 
 	// Fetching DS Client
@@ -50,23 +56,24 @@ func (opts *RefreshOptions) Run() error {
 	}
 	ctx := context.Background()
 	// Use the SDK to fetch the new auth data
-	refreshedConfigData, err := deepsource.RefreshAuthCreds(ctx, opts.RefreshToken)
+	refreshedConfigData, err := deepsource.RefreshAuthCreds(ctx, cfg.RefreshToken)
 	if err != nil {
 		return err
 	}
 
 	// Convert incoming config into the local CLI config format
-	config.Cfg.User = refreshedConfigData.Payload.Email
-	config.Cfg.Token = refreshedConfigData.Token
-	config.Cfg.RefreshToken = refreshedConfigData.Refreshtoken
-	config.Cfg.RefreshTokenExpiresIn = time.Unix(refreshedConfigData.RefreshExpiresIn, 0)
-	config.Cfg.SetTokenExpiry(refreshedConfigData.Payload.Exp)
+	cfg.User = refreshedConfigData.Payload.Email
+	cfg.Token = refreshedConfigData.Token
+	cfg.RefreshToken = refreshedConfigData.Refreshtoken
+	cfg.RefreshTokenExpiresIn = time.Unix(refreshedConfigData.RefreshExpiresIn, 0)
+	cfg.SetTokenExpiry(refreshedConfigData.Payload.Exp)
 
 	// Having formatted the data, write it to the config file
-	err = config.Cfg.WriteFile()
+	err = cfg.WriteFile()
 	if err != nil {
 		fmt.Println("Error in writing authentication data to a file. Exiting...")
 		return err
 	}
+	pterm.Info.Println("Authentication successfully refreshed.")
 	return nil
 }

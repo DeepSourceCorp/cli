@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"os"
 	"path/filepath"
 	"time"
@@ -38,6 +39,9 @@ func (cfg *CLIConfig) SetTokenExpiry(str string) {
 
 // Checks if the token has expired or not
 func (cfg CLIConfig) IsExpired() bool {
+	if cfg.TokenExpiresIn.IsZero() {
+		return true
+	}
 	return time.Now().After(cfg.TokenExpiresIn)
 }
 
@@ -60,7 +64,7 @@ func (cfg CLIConfig) configPath() (string, error) {
 }
 
 //ReadFile reads the CLI config file.
-func (cfg *CLIConfig) ReadFile() error {
+func (cfg *CLIConfig) ReadConfigFile() error {
 	path, err := cfg.configPath()
 	if err != nil {
 		return err
@@ -84,12 +88,17 @@ func (cfg *CLIConfig) ReadFile() error {
 	return nil
 }
 
-// Read and populate the config data into global variables
-func InitConfig() error {
-	if err := Cfg.ReadFile(); err != nil {
-		return err
+func GetConfig() (*CLIConfig, error) {
+
+	if Cfg.Token != "" {
+		return &Cfg, nil
 	}
-	return nil
+
+	err := Cfg.ReadConfigFile()
+	if err != nil {
+		return &Cfg, err
+	}
+	return &Cfg, nil
 }
 
 // WriteFile writes the CLI config to file.
@@ -133,4 +142,18 @@ func (cfg *CLIConfig) Delete() error {
 		return err
 	}
 	return os.Remove(path)
+}
+
+func (cfg *CLIConfig) VerifyAuthentication() error {
+
+	// Checking if the user has authenticated / logged in or not
+	if cfg.Token == "" {
+		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
+	}
+
+	// Check if the token has already expired
+	if cfg.IsExpired() {
+		return errors.New("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
+	}
+	return nil
 }

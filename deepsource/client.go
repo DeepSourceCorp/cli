@@ -4,7 +4,6 @@ package deepsource
 import (
 	"context"
 	"fmt"
-	"net/url"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
@@ -36,11 +35,8 @@ func (c Client) GetToken() string {
 
 // Returns a new GQLClient
 func New() (*Client, error) {
-	u, err := url.Parse(config.Cfg.Host)
-	if err != nil {
-		return nil, err
-	}
-	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", u.Hostname())
+	// TODO: Figure out better way to resolve host here
+	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", config.Cfg.Host)
 	gql := graphql.NewClient(apiClientURL)
 	return &Client{
 		gql: gql,

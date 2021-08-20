@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/deepsourcelabs/cli/utils"
@@ -53,6 +54,17 @@ func NewCmdIssuesList() *cobra.Command {
 // Execute the command
 func (opts *IssuesListOptions) Run() error {
 	var err error
+
+	// Fetch config
+	cfg, err := config.GetConfig()
+	if err != nil {
+		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	err = cfg.VerifyAuthentication()
+	if err != nil {
+		return err
+	}
+
 	// The current limit of querying issues at once is 100.
 	// If the limit passed by user is greater than 100, exit
 	// with an error message

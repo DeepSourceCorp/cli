@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
 	toml "github.com/pelletier/go-toml"
@@ -41,8 +42,18 @@ func NewCmdConfigGenerate() *cobra.Command {
 
 // Run executes the command.
 func (o *Options) Run() error {
+	// Fetch config
+	cfg, err := config.GetConfig()
+	if err != nil {
+		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	err = cfg.VerifyAuthentication()
+	if err != nil {
+		return err
+	}
+
 	// Step 1: Collect user input
-	err := o.collectUserInput()
+	err = o.collectUserInput()
 	if err != nil {
 		fmt.Println("\nError occured while collecting input.Exiting...")
 		return err

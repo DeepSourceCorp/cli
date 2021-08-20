@@ -2,6 +2,7 @@ package status
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
@@ -40,6 +41,17 @@ func NewCmdRepoStatus() *cobra.Command {
 
 func (opts *RepoStatusOptions) Run() error {
 	var err error
+
+	// Fetch config
+	cfg, err := config.GetConfig()
+	if err != nil {
+		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	err = cfg.VerifyAuthentication()
+	if err != nil {
+		return err
+	}
+
 	// Get the remote repository URL for which issues have to
 	// be listed
 	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)

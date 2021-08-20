@@ -1,6 +1,9 @@
 package logout
 
 import (
+	"errors"
+	"fmt"
+
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
@@ -24,6 +27,15 @@ func NewCmdLogout() *cobra.Command {
 }
 
 func (opts *LogoutOptions) Run() error {
+	// Fetch config
+	cfg, err := config.GetConfig()
+	if err != nil {
+		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	// Checking if the user has authenticated / logged in or not
+	if cfg.Token == "" {
+		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
+	}
 
 	// Confirm from the user if they want to logout
 	logoutConfirmationMsg := "Are you sure you want to log out of DeepSource account?"
@@ -34,7 +46,7 @@ func (opts *LogoutOptions) Run() error {
 
 	// If response is true, delete the config file => logged out the user
 	if response {
-		err := config.Cfg.Delete()
+		err := cfg.Delete()
 		if err != nil {
 			return err
 		}

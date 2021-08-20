@@ -64,6 +64,7 @@ func parseSDKResponse() {
 	for _, analyzer := range AnaData.AnalyzersData {
 		AnaData.AnalyzerNames = append(AnaData.AnalyzerNames, analyzer.Name)
 		AnaData.AnalyzerShortcodes = append(AnaData.AnalyzerShortcodes, analyzer.Shortcode)
+		AnaData.AnalyzersMeta = append(AnaData.AnalyzersMeta, analyzer.MetaSchema)
 		AnaData.AnalyzersMap[analyzer.Name] = analyzer.Shortcode
 	}
 

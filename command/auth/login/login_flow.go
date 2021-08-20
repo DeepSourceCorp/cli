@@ -13,7 +13,7 @@ import (
 )
 
 // Starts the login flow for the CLI
-func (opts *LoginOptions) startLoginFlow() error {
+func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 	// Register the device and get a device code through the response
 	ctx := context.Background()
 	deviceRegistrationResponse, err := registerDevice(ctx)
@@ -47,14 +47,14 @@ func (opts *LoginOptions) startLoginFlow() error {
 
 	// Storing the useful data for future reference and usage
 	// in a global config object (Cfg)
-	config.Cfg.User = jwtData.Payload.Email
-	config.Cfg.Token = jwtData.Token
-	config.Cfg.RefreshToken = jwtData.Refreshtoken
-	config.Cfg.RefreshTokenExpiresIn = time.Unix(jwtData.RefreshExpiresIn, 0)
-	config.Cfg.SetTokenExpiry(jwtData.Payload.Exp)
+	cfg.User = jwtData.Payload.Email
+	cfg.Token = jwtData.Token
+	cfg.RefreshToken = jwtData.Refreshtoken
+	cfg.RefreshTokenExpiresIn = time.Unix(jwtData.RefreshExpiresIn, 0)
+	cfg.SetTokenExpiry(jwtData.Payload.Exp)
 
 	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
-	err = config.Cfg.WriteFile()
+	err = cfg.WriteFile()
 	if err != nil {
 		return fmt.Errorf("Error in writing authentication data to a file. Exiting...")
 	}

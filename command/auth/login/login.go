@@ -21,9 +21,9 @@ func NewCmdLogin() *cobra.Command {
 
 	opts := LoginOptions{
 		AuthTimedOut: false,
-		TokenExpired: config.Cfg.IsExpired(),
-		User:         config.Cfg.User,
-		HostName:     config.DefaultHostName,
+		TokenExpired: true,
+		User:         "",
+		HostName:     "",
 	}
 
 	cmd := &cobra.Command{
@@ -42,14 +42,22 @@ func NewCmdLogin() *cobra.Command {
 
 // Run executes the auth command and starts the login flow if not already authenticated
 func (opts *LoginOptions) Run() error {
+	// Fetch config
+	cfg, _ := config.GetConfig()
+	opts.User = cfg.User
+	opts.TokenExpired = cfg.IsExpired()
+
+	// Checking if the user passed a hostname. If yes, storing it in the config
+	// Else using the default hostname (deepsource.io)
+	if opts.HostName != "" {
+		cfg.Host = opts.HostName
+	} else {
+		cfg.Host = config.DefaultHostName
+	}
+
 	// Before starting the login workflow, check here for two conditions:
 	// Condition 1 : If the token has expired, display a message about it and re-authenticate user
 	// Condition 2 : If the token has not expired,does the user want to re-authenticate?
-
-	// Checking if the user passed a hostname. If yes, storing it in the config
-	if opts.HostName != "" {
-		config.Cfg.Host = opts.HostName
-	}
 
 	// Checking for condition 1
 	if !opts.TokenExpired {
@@ -68,5 +76,5 @@ func (opts *LoginOptions) Run() error {
 
 	// Condition 2
 	// `startLoginFlow` implements the authentication flow for the CLI
-	return opts.startLoginFlow()
+	return opts.startLoginFlow(cfg)
 }

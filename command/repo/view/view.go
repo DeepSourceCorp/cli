@@ -29,7 +29,6 @@ func NewCmdRepoView() *cobra.Command {
 
 	opts := RepoViewOptions{
 		RepoArg:        "",
-		TokenExpired:   config.Cfg.IsExpired(),
 		SelectedRemote: &utils.RemoteData{},
 	}
 
@@ -49,6 +48,17 @@ func NewCmdRepoView() *cobra.Command {
 
 func (opts *RepoViewOptions) Run() error {
 	var err error
+
+	// Fetch config
+	cfg, err := config.GetConfig()
+	if err != nil {
+		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	err = cfg.VerifyAuthentication()
+	if err != nil {
+		return err
+	}
+
 	// Get the remote repository URL for which issues have to
 	// be listed
 	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
@@ -79,7 +89,7 @@ func (opts *RepoViewOptions) Run() error {
 
 	// Framing the complete URL
 	dashboardURL := fmt.Sprintf("https://%s/%s/%s/%s/", config.Cfg.Host, VCSShortcode, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName)
-	fmt.Printf("Press enter to open %s in your browser...", dashboardURL)
+	fmt.Printf("Press Enter to open %s in your browser...", dashboardURL)
 	fmt.Scanln()
 	return browser.OpenURL(dashboardURL)
 }

@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/configvalidator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
@@ -37,6 +38,17 @@ func NewCmdValidate() *cobra.Command {
 
 // Run executes the command.
 func (o *Options) Run() error {
+
+	// Fetch config
+	cfg, err := config.GetConfig()
+	if err != nil {
+		return fmt.Errorf("Error while reading DeepSource CLI config : %v", err)
+	}
+	err = cfg.VerifyAuthentication()
+	if err != nil {
+		return err
+	}
+
 	// Just an info
 	pterm.Info.Println("DeepSource config (.deepsource.toml) is mostly present in the root directory of the project.")
 	fmt.Println()
