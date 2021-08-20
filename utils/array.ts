@@ -10,7 +10,7 @@ function getLastTwoTrends(trendData?: Record<string, number[]>): number[] {
   return [0, 0]
 }
 
-function getChangeFromTrend(trendData?: Record<string, number[]>, percentage = false): number {
+function getChangeFromTrend(trendData?: Record<string, number[]>, percentage = true): number {
   const [current, prev] = getLastTwoTrends(trendData)
   return percentage ? Math.round(((current - prev) / prev) * 100) : current - prev
 }

@@ -52,7 +52,7 @@ interface Trend {
   components: { BaseGraph }
 })
 export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
-  private lastDays = 30
+  public lastDays = 30
 
   get autofixTrend(): Trend {
     if (this.owner.autofixedIssueTrend) {

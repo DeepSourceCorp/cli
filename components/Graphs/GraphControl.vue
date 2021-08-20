@@ -67,8 +67,8 @@ export default class GraphControl extends Vue {
   @Prop({ default: 'line' })
   chartType: string
 
-  private currentFilterValue: number = 30
-  private currentChartType: string = 'line'
+  public currentFilterValue: number = 30
+  public currentChartType: string = 'line'
 
   created() {
     this.currentFilterValue = this.filterValue

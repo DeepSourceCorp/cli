@@ -17,6 +17,7 @@
       <div v-else>0</div>
       <ticker
         v-if="showTrends"
+        v-tooltip="tooltipText"
         :trendDirection="trendDirection"
         :trendValue="trendValue"
         :isPercent="isPercent"
@@ -73,6 +74,21 @@ export default class GraphLegend extends Vue {
   @Prop({ required: false })
   trendDirection: string
 
+  @Prop({ default: '' })
+  trendHint: string
+
   public shortenLargeNumber = shortenLargeNumber
+
+  get tooltipText(): string {
+    if (this.trendHint) {
+      return this.trendHint
+    }
+
+    if (this.trendDirection === 'up') {
+      return `Increased by ${this.trendValue}${this.isPercent ? '%' : ''} since yesterday`
+    }
+
+    return `Decreased by ${Math.abs(this.trendValue)}${this.isPercent ? '%' : ''} since yesterday`
+  }
 }
 </script>

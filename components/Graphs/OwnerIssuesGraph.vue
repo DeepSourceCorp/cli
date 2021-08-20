@@ -21,6 +21,7 @@
         :trendPositive="activeIssuesTickerData < 0"
         :trendDirection="activeIssuesTickerData >= 0 ? 'up' : 'down'"
         :trendValue="activeIssuesTickerData"
+        :trendHint="getTooltipText(activeIssuesTickerDataCount, activeIssuesTickerData >= 0)"
         :isPercent="true"
         :value="currentActiveIssues"
         label="Active issues"
@@ -31,6 +32,7 @@
         :trendPositive="resolvedIssuesTickerData > 0"
         :trendDirection="resolvedIssuesTickerData >= 0 ? 'up' : 'down'"
         :trendValue="resolvedIssuesTickerData"
+        :trendHint="getTooltipText(resolvedIssuesTickerDataCount, resolvedIssuesTickerData >= 0)"
         :isPercent="true"
         :value="currentResolvedIssues"
         label="Resolved issues"
@@ -68,7 +70,7 @@ interface Trend {
   components: { BaseGraph, GraphControl, GraphLegend, ZChart }
 })
 export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
-  private lastDays = 30
+  public lastDays = 30
 
   get currentActiveIssues(): number {
     return getLastTwoTrends(this.owner.issueTrend)[0]
@@ -79,11 +81,26 @@ export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
   }
 
   get activeIssuesTickerData(): number {
-    return getChangeFromTrend(this.owner.issueTrend, true)
+    return getChangeFromTrend(this.owner.issueTrend)
+  }
+
+  get activeIssuesTickerDataCount(): number {
+    return getChangeFromTrend(this.owner.issueTrend, false)
   }
 
   get resolvedIssuesTickerData(): number {
-    return getChangeFromTrend(this.owner.resolvedIssueTrend, true)
+    return getChangeFromTrend(this.owner.resolvedIssueTrend)
+  }
+
+  get resolvedIssuesTickerDataCount(): number {
+    return getChangeFromTrend(this.owner.resolvedIssueTrend, false)
+  }
+
+  getTooltipText(count: number, isUpward: boolean): string {
+    if (isUpward) {
+      return `Increased by ${count} since yesterday`
+    }
+    return `Decreased by ${Math.abs(count)} since yesterday`
   }
 
   get resolvedIssueData(): Trend {

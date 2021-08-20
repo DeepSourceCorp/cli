@@ -14,7 +14,9 @@
           :trendPositive="activeIssuesTickerData < 0"
           :trendDirection="activeIssuesTickerData >= 0 ? 'up' : 'down'"
           :trendValue="activeIssuesTickerData"
+          :trendHint="getTooltipText(activeIssuesTickerDataCount, activeIssuesTickerData >= 0)"
           :value="currentActiveIssues"
+          :isPercent="true"
           label="Active issues"
         />
         <graph-legend
@@ -24,7 +26,9 @@
           :trendPositive="resolvedIssuesTickerData > 0"
           :trendDirection="resolvedIssuesTickerData >= 0 ? 'up' : 'down'"
           :trendValue="resolvedIssuesTickerData"
+          :trendHint="getTooltipText(resolvedIssuesTickerDataCount, resolvedIssuesTickerData >= 0)"
           :value="currentResolvedIssues"
+          :isPercent="true"
           label="Resolved issues"
           labelBgClass="bg-robin"
         />
@@ -49,7 +53,6 @@
       <div class="flex justify-end space-x-2 w-full">
         <graph-control
           class="h-8 w-full md:w-auto"
-          :filterValue="filterValue"
           :allowChartTypeToggle="false"
           @updateFilter="updateLastDays"
         ></graph-control>
@@ -130,8 +133,8 @@ export default class CodeQualityGraph extends mixins(RepoDetailMixin, RouteParam
 
   public shortenLargeNumber = shortenLargeNumber
   public formatIntl = formatIntl
-  private showActiveIssues = true
-  private showResolvedIssues = true
+  public showActiveIssues = true
+  public showResolvedIssues = true
 
   toggleActiveIssues() {
     this.showActiveIssues = !this.showActiveIssues
@@ -149,6 +152,13 @@ export default class CodeQualityGraph extends mixins(RepoDetailMixin, RouteParam
     this.buildChart()
   }
 
+  getTooltipText(count: number, isUpward: boolean): string {
+    if (isUpward) {
+      return `Increased by ${count} since yesterday`
+    }
+    return `Decreased by ${Math.abs(count)} since yesterday`
+  }
+
   get currentActiveIssues(): number {
     return getLastTwoTrends(this.repository.issueTrend)[0]
   }
@@ -161,8 +171,16 @@ export default class CodeQualityGraph extends mixins(RepoDetailMixin, RouteParam
     return getChangeFromTrend(this.repository.issueTrend)
   }
 
+  get activeIssuesTickerDataCount(): number {
+    return getChangeFromTrend(this.repository.issueTrend, false)
+  }
+
   get resolvedIssuesTickerData(): number {
     return getChangeFromTrend(this.repository.resolvedIssueTrend)
+  }
+
+  get resolvedIssuesTickerDataCount(): number {
+    return getChangeFromTrend(this.repository.resolvedIssueTrend, false)
   }
 
   buildChart(): void {
