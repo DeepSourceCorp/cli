@@ -6,7 +6,7 @@
     >
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400 cursor-pointer">
-          <span @click="$emit('back')">AutoOnboard</span>
+          <span @click="$emit('back')">Auto Onboard</span>
         </z-breadcrumb-item>
         <z-breadcrumb-item>All templates</z-breadcrumb-item>
       </z-breadcrumb>
@@ -63,7 +63,7 @@
         <div class="text-center">
           <h4 class="text-vanilla-300 text-base">No AutoOnbard templates found.</h4>
           <p class="text-vanilla-400 text-sm mb-5">
-            You can create new templates in the AutoOnboard settings.
+            You can create new templates in the Auto Onboard settings.
           </p>
           <nuxt-link :to="settingsLink">
             <z-button size="small" icon="settings">Open settings</z-button>

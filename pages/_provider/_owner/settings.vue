@@ -20,7 +20,7 @@
           <z-tab
             :isActive="$route.name.startsWith('provider-owner-settings-auto-onboard')"
             border-active-color="vanilla-400"
-            >AutoOnboard</z-tab
+            >Auto Onboard</z-tab
           >
         </nuxt-link>
       </div>

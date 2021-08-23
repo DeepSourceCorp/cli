@@ -14,7 +14,7 @@
                   <span>Activate a repository</span>
                 </z-tab-item>
                 <z-tab-item v-if="autoOnboardAvailable" class="flex items-center space-x-1">
-                  <span>Use AutoOnboard</span>
+                  <span>Use Auto Onboard</span>
                 </z-tab-item>
               </z-tab-list>
               <z-button

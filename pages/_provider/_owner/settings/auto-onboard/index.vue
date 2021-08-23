@@ -57,8 +57,8 @@
       <empty-state
         v-else-if="!searchCandidate"
         class="border border-dashed rounded-lg border-2 border-ink-200 py-20"
-        title="No AutoOnboard templates found"
-        :subtitle="`AutoOnboard helps you active DeepSource on multiple repositories at once. ${
+        title="No Auto Onboard templates found"
+        :subtitle="`Auto Onboard helps you active DeepSource on multiple repositories at once. ${
           allowCrud
             ? 'Start with a new template.'
             : 'Ask your organization admin to create a new template'

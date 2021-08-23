@@ -145,7 +145,7 @@ export default class NewOnboardingTemplateModal extends mixins(
       this.$toast.danger(
         'There was a problem saving this config, please check your config for errors or contact support.'
       )
-      this.logSentryErrorForUser(e, 'AutoOnboard template creation', this.baseConfig)
+      this.logSentryErrorForUser(e, 'Auto Onboard template creation', this.baseConfig)
     } finally {
       this.savingConfig = false
     }

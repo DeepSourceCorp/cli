@@ -83,7 +83,7 @@
       inputWidth="x-small"
     >
       <template slot="description">
-        Use AutoOnboard to activate DeepSource analysis on multiple repositories.
+        Use Auto Onboard to activate DeepSource analysis on multiple repositories.
       </template>
     </button-input>
     <button-input
@@ -95,7 +95,7 @@
       icon="settings"
       inputWidth="x-small"
     >
-      <template slot="description"> Create and edit templates to be used for AutoOnboard.</template>
+      <template slot="description"> Create and edit templates to be used for Auto Onboard.</template>
     </button-input>
   </section>
 </template>

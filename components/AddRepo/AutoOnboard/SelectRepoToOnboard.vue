@@ -3,7 +3,7 @@
     <div class="px-4 py-3 border-b border-ink-200 flex flex-row items-center">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item v-if="hasAutoOnboardEvents" class="text-vanilla-400 cursor-pointer">
-          <span @click="$emit('backToStart')">AutoOnboard</span>
+          <span @click="$emit('backToStart')">Auto Onboard</span>
         </z-breadcrumb-item>
         <z-breadcrumb-item class="text-vanilla-400 cursor-pointer">
           <span @click="$emit('back')">All templates</span>

@@ -74,7 +74,7 @@ export default class SaveTemplateConfig extends mixins(AutoOnboardMixin, ActiveU
       }
     } catch (e) {
       this.$toast.danger('There was a problem deleting this config')
-      this.logSentryErrorForUser(e, 'AutoOnboard template deletion', {
+      this.logSentryErrorForUser(e, 'Auto Onboard template deletion', {
         shortcode
       })
     } finally {
