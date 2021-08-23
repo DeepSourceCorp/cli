@@ -87,6 +87,7 @@ export default {
     const services = [
       '~/plugins/services/fullstory.js',
       '~/plugins/services/rudderLoader.client.js',
+      '~/plugins/services/plausibleLoader.client.js',
       '~/plugins/services/rudder.client.ts'
     ]
 
