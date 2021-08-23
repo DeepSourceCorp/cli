@@ -76,7 +76,8 @@
           Dashboard
         </sidebar-item>
         <sidebar-item
-          :to="encodeURI(`mailto:${$config.supportEmail}?body=\n\nPath: ${$route.path}`)"
+          to="/support"
+          :active="$route.path === '/support'"
           :isCollapsed="isCollapsed"
           icon="support"
         >

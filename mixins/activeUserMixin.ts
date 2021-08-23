@@ -60,8 +60,8 @@ export default class ActiveUserMixin extends Vue {
   @activeUserStore.Action(ActiveUserActions.FETCH_STARRED_REPOS)
   fetchStarredRepos: () => Promise<void>
 
-  @activeUserStore.Action(ActiveUserActions.FETCH_ACTIVITY)
-  fetchActivityFeed: () => Promise<void>
+  // @activeUserStore.Action(ActiveUserActions.FETCH_ACTIVITY)
+  // fetchActivityFeed: () => Promise<void>
 
   @activeUserStore.Action(ActiveUserActions.FETCH_RECOMMENDED_ISSUES)
   fetchRecommendedIssues: () => Promise<void>

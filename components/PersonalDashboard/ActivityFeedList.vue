@@ -30,7 +30,7 @@ import { fromNow } from '@/utils/date'
 })
 export default class ActivityFeedList extends mixins(ActiveUserMixin) {
   async fetch(): Promise<void> {
-    await this.fetchActivityFeed()
+    // await this.fetchActivityFeed()
   }
 
   // get activityFeed(): Array<ActivityFeed | null> {

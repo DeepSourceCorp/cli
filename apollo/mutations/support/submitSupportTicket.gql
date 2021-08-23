@@ -1,0 +1,5 @@
+mutation($input: SubmitSupportTicketInput!) {
+  submitSupportTicket(input: $input) {
+    ok
+  }
+}

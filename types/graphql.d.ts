@@ -413,6 +413,15 @@ declare module '*/updateRepoMetricThreshold.gql' {
 }
     
 
+declare module '*/submitSupportTicket.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/inviteMembers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -882,15 +891,6 @@ declare module '*/inviteUrl.gql' {
     
 
 declare module '*/invites.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/recentActivity.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

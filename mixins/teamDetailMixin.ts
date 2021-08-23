@@ -79,13 +79,13 @@ export default class TeamDetailMixin extends Vue {
   @teamStore.Action(TeamActions.RESET_INVITE_LINK)
   resetInviteUrl: (args: { ownerId: string }) => Promise<void>
 
-  @teamStore.Action(TeamActions.FETCH_RECENT_ACTIVITY)
-  fetchRecentActivity: (args: {
-    login: string
-    provider: string
-    limit: number
-    currentPage: number
-  }) => Promise<void>
+  // @teamStore.Action(TeamActions.FETCH_RECENT_ACTIVITY)
+  // fetchRecentActivity: (args: {
+  //   login: string
+  //   provider: string
+  //   limit: number
+  //   currentPage: number
+  // }) => Promise<void>
 
   @teamStore.Action(TeamActions.UPDATE_ACCESS_CONTROL_SETTINGS)
   updateAccessControlSettings: (args: {

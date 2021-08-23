@@ -1,20 +1,20 @@
-query($login: String!, $provider: VCSProviderChoices!, $limit: Int, $after: String) {
-  team(login: $login, provider: $provider) {
-    id
-    recentActivities(first: $limit, after: $after) {
-      edges {
-        node {
-          id
-          description
-          createdAt
-          loggedForDisplay
-          actor {
-            avatar
-            fullName
-            email
-          }
-        }
-      }
-    }
-  }
-}
+# query($login: String!, $provider: VCSProviderChoices!, $limit: Int, $after: String) {
+#   team(login: $login, provider: $provider) {
+#     id
+#     recentActivities(first: $limit, after: $after) {
+#       edges {
+#         node {
+#           id
+#           description
+#           createdAt
+#           loggedForDisplay
+#           actor {
+#             avatar
+#             fullName
+#             email
+#           }
+#         }
+#       }
+#     }
+#   }
+# }

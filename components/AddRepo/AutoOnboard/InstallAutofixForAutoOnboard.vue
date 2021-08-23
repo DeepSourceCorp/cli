@@ -53,7 +53,7 @@ export default class InstallAutofixForAutoOnboard extends mixins(
     const installationUrl = this.owner.autofixInstallationUrl
 
     // open the window
-    this.installWindow = window.open(installationUrl, '', 'resizable=no,width=1000,height=600')
+    this.installWindow = window.open(installationUrl?.toString(), '', 'resizable=no,width=1000,height=600')
 
     this.popUpTimer = setInterval(() => {
       if (this.installWindow?.closed) {

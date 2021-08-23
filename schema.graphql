@@ -8,30 +8,6 @@ enum ActionChoice {
   REMOVE
 }
 
-type ActivityFeed implements MaskPrimaryKeyNode {
-  createdAt: DateTime!
-  modifiedAt: DateTime!
-  alive: Boolean
-  id: ID!
-  eventName: String!
-  description: String!
-  actor: User
-  ipAddress: String
-  location: String
-  reason: String
-  objectId: Int
-  loggedForDisplay: String
-}
-type ActivityFeedConnection {
-  pageInfo: PageInfo!
-  edges: [ActivityFeedEdge]!
-  totalCount: Int
-}
-type ActivityFeedEdge {
-  node: ActivityFeed
-  cursor: String!
-}
-
 input AddAnalyzerFeedbackInput {
   feedback: String!
   analyzerShortcode: String!
@@ -179,6 +155,11 @@ type ApplyCreditsToOwnerPayload {
   clientMutationId: String
 }
 
+input Attachment {
+  base64Data: String!
+  filename: String!
+}
+
 type AuditLog implements MaskPrimaryKeyNode {
   createdAt: DateTime!
   modifiedAt: DateTime!
@@ -219,6 +200,7 @@ type AutoOnboardEvent implements MaskPrimaryKeyNode {
   owner: Owner!
   repository: Repository!
   template: ConfigTemplate!
+  createdBy: User
   status: AutoOnboardEventStatus!
   vcsPrUrl: String
 }
@@ -234,7 +216,6 @@ type AutoOnboardEventEdge {
 }
 
 enum AutoOnboardEventStatus {
-  ABRT
   PEND
   CLSD
   FAIL
@@ -519,8 +500,8 @@ type ConfigTemplate implements MaskPrimaryKeyNode {
 
 type ConfigTemplateConnection {
   pageInfo: PageInfo!
-  totalCount: Int
   edges: [ConfigTemplateEdge]!
+  totalCount: Int
 }
 
 type ConfigTemplateEdge {
@@ -1063,6 +1044,7 @@ type Mutation {
   updateConfigTemplate(input: UpdateConfigTemplateInput!): UpdateConfigTemplatePayload
   deleteConfigTemplate(input: DeleteConfigTemplateInput!): DeleteConfigTemplatePayload
   autoOnboard(input: AutoOnboardInput!): AutoOnboardPayload
+  submitSupportTicket(input: SubmitSupportTicketInput!): SubmitSupportTicketPayload
 }
 
 enum NextActionChoice {
@@ -1099,6 +1081,7 @@ type Owner implements MaskPrimaryKeyNode {
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   ownerSetting: OwnerSetting
   isAutofixEnabled: Boolean
+  autofixInstallationUrl: String
   isTeam: Boolean
   cards: GenericScalar
   stripeInvoices: GenericScalar
@@ -1611,6 +1594,20 @@ type SocialType {
   modified: DateTime!
 }
 
+input SubmitSupportTicketInput {
+  fromEmail: String!
+  ccEmails: String
+  subject: String!
+  body: String!
+  attachments: [Attachment]
+  clientMutationId: String
+}
+
+type SubmitSupportTicketPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input SubscriptionCheckoutInput {
   email: String!
   name: String!
@@ -1704,7 +1701,6 @@ type Team implements MaskPrimaryKeyNode {
   invitationUrl: String
   logs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
   auditLogMeta: AuditLogMeta
-  recentActivities(offset: Int, before: String, after: String, first: Int, last: Int): ActivityFeedConnection
   accountSetupStatus: GenericScalar
 }
 
@@ -2212,6 +2208,7 @@ type User implements MaskPrimaryKeyNode {
   repositorySet(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
   transactions(offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!
   autofixrunSet(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
+  onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   silenceRulesCreated(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection!
   fullName: String
@@ -2220,7 +2217,6 @@ type User implements MaskPrimaryKeyNode {
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
   dashboardContext: GenericScalar
   bookmarkedIssueCount: Int
-  recentActivities(offset: Int, before: String, after: String, first: Int, last: Int): ActivityFeedConnection
   recommendedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
   gitlabAccounts: [GenericScalar]
   isAsgardian: Boolean

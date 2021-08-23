@@ -15,7 +15,7 @@ import TeamMembersListQuery from '~/apollo/queries/team/list.gql'
 import TeamSettings from '~/apollo/queries/team/settings.gql'
 import InvitedUsersListQuery from '~/apollo/queries/team/invites.gql'
 import TeamInviteUrlQuery from '~/apollo/queries/team/inviteUrl.gql'
-import RecentActivityQuery from '~/apollo/queries/team/recentActivity.gql'
+// import RecentActivityQuery from '~/apollo/queries/team/recentActivity.gql'
 
 // Mutations
 import inviteMembers from '~/apollo/mutations/team/inviteMembers.gql'
@@ -176,16 +176,16 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
       ownerId: string
     }
   ) => Promise<void>
-  [TeamActions.FETCH_RECENT_ACTIVITY]: (
-    this: Store<RootState>,
-    injectee: TeamActionContext,
-    args: {
-      login: string
-      provider: string
-      limit: number
-      currentPage: number
-    }
-  ) => Promise<void>
+  // [TeamActions.FETCH_RECENT_ACTIVITY]: (
+  //   this: Store<RootState>,
+  //   injectee: TeamActionContext,
+  //   args: {
+  //     login: string
+  //     provider: string
+  //     limit: number
+  //     currentPage: number
+  //   }
+  // ) => Promise<void>
   [TeamActions.UPDATE_ACCESS_CONTROL_SETTINGS]: (
     this: Store<RootState>,
     injectee: TeamActionContext,
@@ -376,23 +376,23 @@ export const actions: TeamModuleActions = {
     }
   },
 
-  async [TeamActions.FETCH_RECENT_ACTIVITY]({ commit }, { login, provider, currentPage, limit }) {
-    try {
-      commit(TeamMutations.SET_LOADING, true)
-      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(RecentActivityQuery, {
-        provider: this.$providerMetaMap[provider].value,
-        after: this.$getGQLAfter(currentPage, limit),
-        limit,
-        login
-      })
-      commit(TeamMutations.SET_TEAM, response.data.team)
-      commit(TeamMutations.SET_LOADING, false)
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(TeamMutations.SET_ERROR, error)
-      commit(TeamMutations.SET_LOADING, false)
-    }
-  },
+  // async [TeamActions.FETCH_RECENT_ACTIVITY]({ commit }, { login, provider, currentPage, limit }) {
+  //   try {
+  //     commit(TeamMutations.SET_LOADING, true)
+  //     const response: GraphqlQueryResponse = await this.$fetchGraphqlData(RecentActivityQuery, {
+  //       provider: this.$providerMetaMap[provider].value,
+  //       after: this.$getGQLAfter(currentPage, limit),
+  //       limit,
+  //       login
+  //     })
+  //     commit(TeamMutations.SET_TEAM, response.data.team)
+  //     commit(TeamMutations.SET_LOADING, false)
+  //   } catch (e) {
+  //     const error = e as GraphqlError
+  //     commit(TeamMutations.SET_ERROR, error)
+  //     commit(TeamMutations.SET_LOADING, false)
+  //   }
+  // },
 
   async [TeamActions.UPDATE_ACCESS_CONTROL_SETTINGS](
     { commit },

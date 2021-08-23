@@ -7,7 +7,6 @@
       const result: PossibleTypesResultData = {
   "possibleTypes": {
     "MaskPrimaryKeyNode": [
-      "ActivityFeed",
       "Analyzer",
       "AnalyzerReview",
       "AuditLog",

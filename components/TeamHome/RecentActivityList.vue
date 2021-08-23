@@ -35,12 +35,12 @@ export default class RecentlyActiveRepoList extends mixins(TeamDetailMixin) {
 
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
-    await this.fetchRecentActivity({
-      login: owner,
-      limit: 10,
-      currentPage: 1,
-      provider
-    })
+    // await this.fetchRecentActivity({
+    //   login: owner,
+    //   limit: 10,
+    //   currentPage: 1,
+    //   provider
+    // })
   }
 
   // get activity(): (Maybe<ActivityFeed> | undefined)[] {
