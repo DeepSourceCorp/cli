@@ -5,9 +5,7 @@
       <h4 class="flex items-center space-x-2 text-md text-vanilla-400">
         <z-icon :icon="repository.isPrivate ? 'lock' : 'globe'" size="small"></z-icon>
         <span>
-          <nuxt-link :to="['', this.$route.params.provider, owner].join('/')">{{
-            owner
-          }}</nuxt-link>
+          <nuxt-link :to="['', $route.params.provider, owner].join('/')">{{ owner }}</nuxt-link>
           /
           <b class="text-vanilla-100">{{ repo }}</b>
         </span>
@@ -86,6 +84,7 @@
           :repoId="repository.id"
           :isCommitPossible="repository.isCommitPossible"
           :actionDisabled="actionDisabled"
+          :isAutofixEnabled="repository.isAutofixEnabled"
           :canBeActivated="repository.canBeActivated"
           :isActivated="repository.isActivated"
           :canViewerUpgrade="canViewerUpgrade"
@@ -116,7 +115,7 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZStepper, ZStep, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
 import { TomlBox, AnalyzerSelector, PatternsSelector } from '@/components/ConfigGenerator'
 import InstallAutofixModal from '@/components/Autofix/Modals/InstallAutofixModal.vue'
@@ -230,15 +229,29 @@ export default class GenerateConfig extends mixins(
     await this.routeToRepoHome()
   }
 
-  async commitConfig(): Promise<void> {
+  async commitConfig(createPullRequest = false): Promise<void> {
     const selector = this.$refs['analyzer-selector'] as AnalyzerSelector
+    const pullLabel = this.$route.params.provider === 'gl' ? 'merge' : 'pull'
     const isConfigValid = selector.validateConfig()
     if (isConfigValid) {
       await this.commitConfigToVcs({
         config: this.toml,
-        repositoryId: this.repository.id
+        repositoryId: this.repository.id,
+        createPullRequest
       })
       await this.routeToRepoHome()
+
+      if (createPullRequest) {
+        this.$toast.show({
+          type: 'success',
+          message: `<p>We have created a ${pullLabel} request with the configuration.</p><p class="mt-1">Analysis will start automatically once you merge the ${pullLabel} request.</p>`,
+          timeout: 10
+        })
+      } else {
+        this.$toast.success(
+          `Successfully activated ${this.repository.name}, the first run may take a while to finish`
+        )
+      }
       return
     }
 

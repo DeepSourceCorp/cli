@@ -30,7 +30,7 @@
             <div class="flex items-center w-full space-x-2">
               <z-icon icon="lock" size="small"></z-icon>
               <!-- TODO: Get Repo name and handle name -->
-              <div class="flex-1 text-sm">{{ $route.params.login }}/{{ selectedRepo.name }}</div>
+              <div class="flex-1 text-sm">{{ $route.params.login }}/{{ selectedRepoName }}</div>
               <button @click="showFilters()">
                 <z-icon icon="x" size="small" class="cursor-pointer"></z-icon>
               </button>
@@ -86,22 +86,31 @@
         </transition>
         <div class="fixed bottom-0 left-0 w-full md:static space-y-2">
           <z-button
-            v-if="repository.isCommitPossible || true"
+            v-if="repository.isCommitPossible"
             class="w-full"
             buttonType="primary"
             icon="plus"
             label="Add configuration and start analysis"
             loadingLabel="Activating Repository"
-            :disabled="!isAnalyzer || selectedAnalyzers.length == 0"
+            :disabled="actionDisabled"
             :isLoading="commitLoading"
             @click="commitConfig"
           >
           </z-button>
           <z-button
+            v-else-if="repository.isAutofixEnabled"
+            buttonType="primary"
+            class="w-full"
+            :disabled="actionDisabled"
+            @click="commitConfig(true)"
+          >
+            Create {{ $route.params.provider === 'gl' ? 'merge' : 'pull' }} request with config
+          </z-button>
+          <z-button
             v-else
             buttonType="primary"
             class="w-full"
-            :disabled="!isAnalyzer || selectedAnalyzers.length == 0"
+            :disabled="actionDisabled"
             @click="showNextStepsModal = true"
           >
             Show next steps
@@ -175,7 +184,6 @@ import { RepoInterface } from '~/store/repository/list'
 import AdHocRunMixin from '~/mixins/adHocRunMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import { TeamPerms } from '~/types/permTypes'
 
 const analyzerListStore = namespace('analyzer/list')
 
@@ -201,11 +209,11 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
   @analyzerListStore.Getter(AnalyzerListGetters.ANALYZERS)
   analyzerList: Array<AnalyzerInterface>
 
-  private isAnalyzer = false
-  private showNextStepsModal = false
-  private selectedRepo: RepoInterface | null
-  private selectedRepoName = ''
-  private selectedAnalyzers: Array<AnalyzerInterface> = []
+  public isAnalyzer = false
+  public showNextStepsModal = false
+  public selectedRepo: RepoInterface | null
+  public selectedRepoName = ''
+  public selectedAnalyzers: Array<AnalyzerInterface> = []
 
   async fetch(): Promise<void> {
     await this.$store.dispatch(`analyzer/list/${AnalyzerListActions.FETCH_ANALYZER_LIST}`)
@@ -216,6 +224,10 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
     this.selectedRepo = null
     this.selectedRepoName = ''
     this.isAnalyzer = false
+  }
+
+  get actionDisabled(): boolean {
+    return !this.isAnalyzer || this.selectedAnalyzers.length == 0
   }
 
   repoSelected(repo: RepoInterface): void {
@@ -279,14 +291,28 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
 
   public commitLoading = false
 
-  async commitConfig(): Promise<void> {
+  async commitConfig(createPullRequest = false): Promise<void> {
     this.commitLoading = true
+    const pullLabel = this.$route.params.provider === 'gl' ? 'merge' : 'pull'
     const { provider, login } = this.$route.params
 
     await this.commitConfigToVcs({
       config: this.toml,
-      repositoryId: this.repository.id
+      repositoryId: this.repository.id,
+      createPullRequest
     })
+
+    if (createPullRequest) {
+      this.$toast.show({
+        type: 'success',
+        message: `<p>We have created a ${pullLabel} request with the configuration.</p><p class="mt-1">Analysis will start automatically once you merge the ${pullLabel} request.</p>`,
+        timeout: 10
+      })
+    } else {
+      this.$toast.success(
+        `Successfully activated ${this.repository.name}, the first run may take a while to finish`
+      )
+    }
 
     try {
       this.fetchBasicRepoDeatils({
@@ -321,7 +347,7 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
     this.$router.push(`/${provider}/${login}/${this.selectedRepoName}/issues`)
   }
 
-  private copyIcon = 'clipboard'
+  public copyIcon = 'clipboard'
 
   copyToml(): void {
     this.$copyToClipboard(this.toml)
@@ -341,26 +367,3 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
   // }
 }
 </script>
-
-<style>
-.hljs {
-  @apply text-vanilla-400;
-}
-.hljs-attr {
-  @apply text-juniper;
-}
-.hljs-literal {
-  @apply text-lilac;
-}
-.hljs-string {
-  @apply text-vanilla-200;
-}
-.hljs-section {
-  @apply text-lavender font-semibold;
-}
-
-.toml-box {
-  height: calc(100vh - 16rem);
-  /* screenHeight - yPadding - twoButtons*/
-}
-</style>

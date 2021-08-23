@@ -37,6 +37,15 @@
         Add configuration and start analysis
       </z-button>
       <z-button
+        v-else-if="isAutofixEnabled"
+        buttonType="primary"
+        class="w-full"
+        :disabled="actionDisabled"
+        @click="commitConfigToVCS(true)"
+      >
+        Create {{ $route.params.provider === 'gl' ? 'merge' : 'pull' }} request with config
+      </z-button>
+      <z-button
         v-else
         buttonType="primary"
         class="w-full"
@@ -103,6 +112,9 @@ export default class TomlBox extends Vue {
   @Prop({ default: false })
   isCommitPossible: boolean
 
+  @Prop({ default: false })
+  isAutofixEnabled: boolean
+
   private copyIcon = 'clipboard'
   private copyIconColor = 'vanilla-400'
 
@@ -114,8 +126,8 @@ export default class TomlBox extends Vue {
     this.$emit('toggleNextSteps')
   }
 
-  commitConfigToVCS(): void {
-    this.$emit('commitConfig')
+  commitConfigToVCS(createPullRequest = false): void {
+    this.$emit('commitConfig', createPullRequest)
   }
 
   copyToml(): void {

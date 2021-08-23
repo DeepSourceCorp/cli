@@ -729,10 +729,7 @@ export const actions: RepositoryDetailModuleActions = {
   async [RepositoryDetailActions.COMMIT_CONFIG_TO_VCS]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
     await this.$applyGraphqlMutation(CommitConfigToVcsGQLMutation, {
-      input: {
-        repositoryId: args.repositoryId,
-        config: args.config
-      }
+      input: args
     })
       .then(() => {
         // TODO: Toast("Successfully committed config to VCS")
