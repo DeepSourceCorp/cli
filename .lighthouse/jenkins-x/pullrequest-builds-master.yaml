@@ -65,7 +65,7 @@ spec:
           script: |
             #!/busybox/sh
             source .jx/variables.sh
-            /kaniko/executor --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-dev/$REPO_NAME:master --cache=true --snapshotMode=redo --cache-dir=/kanikocache
+            /kaniko/executor --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X --build-arg=DISABLE_SENTRY=true --build-arg=ZEAL_SECRET=$ZEAL_SECRET --build-arg=STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-dev/$REPO_NAME:master --cache=true --snapshotMode=redo --cache-dir=/kanikocache
           workingDir: /workspace/source
         workspaces:
         - name: kanikocache
