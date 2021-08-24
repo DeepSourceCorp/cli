@@ -72,18 +72,12 @@ spec:
           mountPath: /kanikocache
         - name: kaniko
           mountPath: /secret
-        - name: zeal
-        - name: stripe
       workspaces:
       - name: kanikocache
         workspace: bifrost-cache
         subPath: kanikocache
       - name: kaniko
         workspace: kaniko
-      - name: zeal
-        workspace: zeal
-      - name: stripe
-        workspace: stripe
     workspaces:
     - name: bifrost-cache
     - name: kaniko
