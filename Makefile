@@ -7,7 +7,8 @@ build:
 	yarn build
 
 sync-files:
-	aws s3 sync . $(S3_BUCKET)/$(VERSION)/bifrost --exclude "*" --include ".nuxt"  --include "static" --acl public-read --cache-control max-age=31536000 --size-only --delete
+	aws s3 sync .nuxt/dist/client $(S3_BUCKET)/$(VERSION)/bifrost  --acl public-read --cache-control max-age=31536000 --size-only --delete && \
+	aws s3 cp --recursive static $(S3_BUCKET)/$(VERSION)/bifrost  --acl public-read --cache-control max-age=31536000
 
 major:
 	@git pull --tags; \
