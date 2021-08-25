@@ -13,6 +13,9 @@ module.exports = {
         88: '22rem',
         92: '23rem',
         98: '27rem'
+      },
+      gridTemplateColumns: {
+        support: '5fr 7fr'
       }
     }
   }
