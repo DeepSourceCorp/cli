@@ -41,6 +41,7 @@ COPY --from=builder /app/content /app/content
 COPY --from=builder /app/server /app/server
 COPY --from=builder /app/static /app/static
 COPY --from=builder /app/Makefile /app/Makefile
+COPY --from=builder /app/.git /app/.git
 
 WORKDIR /app
 
