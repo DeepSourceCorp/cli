@@ -10,6 +10,8 @@ steps:
       - --build-arg=STRIPE_PUBLISHABLE_KEY
       - --build-arg=DSN
       - --build-arg=SENTRY_TOKEN
+      - --build-arg=NODE_ENV=prod
+      - --build-arg=DOMAIN=assets.deepsource.io
       - --cache=false
       - --snapshotMode=redo
     secretEnv:

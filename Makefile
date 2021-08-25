@@ -1,3 +1,14 @@
+VERSION?=$(shell git rev-parse --short HEAD)
+
+.ONESHELL:
+
+build:
+	export CDN_URL=https://$(DOMAIN)/$(VERSION)/bifrost && \
+	yarn build
+
+sync-files:
+	aws s3 sync . $(S3_BUCKET)/$(VERSION)/bifrost --exclude "*" --include ".nuxt"  --include "static" --acl public-read --cache-control max-age=31536000 --size-only --delete
+
 major:
 	@git pull --tags; \
 	IFS='.' read -ra tag <<< "$$(git describe --tags `git rev-list --tags --max-count=1`)"; \

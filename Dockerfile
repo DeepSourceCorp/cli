@@ -1,4 +1,4 @@
-FROM node:14.8-alpine as builder
+FROM node:14.13-alpine as builder
 
 ARG DISABLE_SENTRY
 ARG ZEAL_SECRET
@@ -6,13 +6,15 @@ ARG DSN
 ARG SENTRY_TOKEN
 ARG STRIPE_PUBLISHABLE_KEY
 ARG GOOGLE_ANALYTICS_ID
+ARG NODE_ENV
 
 ENV SENTRY_DSN=$DSN
 ENV SENTRY_AUTH_TOKEN=$SENTRY_TOKEN
 ENV STRIPE_KEY=$STRIPE_PUBLISHABLE_KEY
 ENV SENTRY_RELEASE=1
 
-RUN apk update
+RUN apk update && \
+    apk add git make 
 
 COPY package.json yarn.lock .npmrc /app/
 
@@ -22,10 +24,10 @@ RUN yarn
 
 COPY . /app
 
-RUN yarn build && \
+RUN make build && \
     rm -rf .npmrc
 
-FROM gcr.io/distroless/nodejs:14
+FROM sleavely/node-awscli:14.x
 
 ENV NUXT_HOST=0.0.0.0
 

@@ -61,7 +61,7 @@ spec:
           args:
             - --cache-dir=/kanikocache
             - --image=node:14.8-alpine
-            - --image=gcr.io/distroless/base
+            - --image=sleavely/node-awscli:14.x
           workingDir: /workspace/source
         - image: gcr.io/kaniko-project/executor:debug
           name: container-build
@@ -72,7 +72,7 @@ spec:
           script: |
             #!/busybox/sh
             source .jx/variables.sh
-            /kaniko/executor --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X --build-arg=DISABLE_SENTRY=true --build-arg=ZEAL_SECRET=$ZEAL_SECRET --build-arg=STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-dev/$REPO_NAME:$BRANCH_NAME --cache=true --snapshotMode=redo --cache-dir=/kanikocache
+            /kaniko/executor --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X --build-arg=DISABLE_SENTRY=true --build-arg=ZEAL_SECRET=$ZEAL_SECRET --build-arg=STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY --build-arg=NODE_ENV=staging --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-dev/$REPO_NAME:$BRANCH_NAME --cache=true --snapshotMode=redo --cache-dir=/kanikocache
           workingDir: /workspace/source
         workspaces:
         - name: kanikocache
