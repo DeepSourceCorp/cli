@@ -40,6 +40,7 @@ COPY --from=builder /app/nuxt.config.js /app/nuxt.config.js
 COPY --from=builder /app/content /app/content
 COPY --from=builder /app/server /app/server
 COPY --from=builder /app/static /app/static
+COPY --from=builder /app/Makefile /app/Makefile
 
 WORKDIR /app
 
