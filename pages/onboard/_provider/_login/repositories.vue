@@ -296,36 +296,50 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
     const pullLabel = this.$route.params.provider === 'gl' ? 'merge' : 'pull'
     const { provider, login } = this.$route.params
 
-    await this.commitConfigToVcs({
+    const args = {
       config: this.toml,
       repositoryId: this.repository.id,
       createPullRequest
-    })
-
-    if (createPullRequest) {
-      this.$toast.show({
-        type: 'success',
-        message: `<p>We have created a ${pullLabel} request with the configuration.</p><p class="mt-1">Analysis will start automatically once you merge the ${pullLabel} request.</p>`,
-        timeout: 10
-      })
-    } else {
-      this.$toast.success(
-        `Successfully activated ${this.repository.name}, the first run may take a while to finish`
-      )
     }
 
     try {
-      this.fetchBasicRepoDeatils({
-        provider,
-        owner: login,
-        name: this.selectedRepoName,
-        refetch: true
-      })
-    } catch (e) {}
+      const response = await this.commitConfigToVcs(args)
 
-    this.commitLoading = false
+      if (response.ok) {
+        if (createPullRequest) {
+          this.$toast.show({
+            type: 'success',
+            message: `<p>We have created a ${pullLabel} request with the configuration.</p><p class="mt-1">Analysis will start automatically once you merge the ${pullLabel} request.</p>`,
+            timeout: 10
+          })
+        } else {
+          this.$toast.success(
+            `Successfully activated ${this.repository.name}, the first run may take a while to finish`
+          )
+        }
+        try {
+          this.fetchBasicRepoDeatils({
+            provider,
+            owner: login,
+            name: this.selectedRepoName,
+            refetch: true
+          })
+        } catch (e) {}
 
-    this.$router.push(`/${provider}/${login}/${this.selectedRepoName}/issues`)
+        this.commitLoading = false
+
+        this.$router.push(`/${provider}/${login}/${this.selectedRepoName}/issues`)
+      } else {
+        this.$toast.danger(
+          'Something went wrong while creating the configuration for this repository, contact support'
+        )
+      }
+    } catch (e) {
+      this.logSentryErrorForUser(e, 'Generate config - Onboarding', args)
+      this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+    } finally {
+      this.commitLoading = false
+    }
   }
 
   async activateRepo(): Promise<void> {

@@ -1139,96 +1139,6 @@ describe('[Store] Repository/Detail', () => {
         test('successfully calls the api', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
-
-        test('successfully commits mutations', async () => {
-          expect(commit).toHaveBeenCalledTimes(2)
-        })
-
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
-          // Storing the first commit call made
-          const {
-            mock: {
-              calls: [firstCall, secondCall]
-            }
-          } = commit
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(secondCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(secondCall[1]).toEqual(false)
-        })
-      })
-      describe(`Failure`, () => {
-        beforeEach(async () => {
-          localThis = {
-            $providerMetaMap: {
-              gh: {
-                text: 'Github',
-                shortcode: 'gh',
-                value: 'GITHUB'
-              }
-            },
-            $getGQLAfter: jest.fn(),
-            async $applyGraphqlMutation(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
-            }
-          }
-
-          // Setting the global spy on `localThis.$applyGraphqlMutation`
-          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
-
-          await actions[RepositoryDetailActions.COMMIT_CONFIG_TO_VCS].call(localThis, actionCxt, {
-            repositoryId: 'string',
-            config: 'string'
-          })
-        })
-
-        test('successfully commits mutations', () => {
-          expect(commit).toHaveBeenCalledTimes(3)
-        })
-
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
-          // Storing the first commit call made
-          const {
-            mock: {
-              calls: [firstCall, , thirdCall]
-            }
-          } = commit
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
-        })
-
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, () => {
-          // Storing the second commit call made
-          const {
-            mock: {
-              calls: [, secondCall]
-            }
-          } = commit
-
-          // Assert if `RepositoryDetailMutations.SET_ERROR` is being commited or not.
-          expect(secondCall[0]).toEqual(RepositoryDetailMutations.SET_ERROR)
-
-          // Assert if the payload passed to the mutation was empty.
-          expect(secondCall[1]).toEqual(Error('ERR1'))
-        })
       })
     })
 
@@ -1324,7 +1234,7 @@ describe('[Store] Repository/Detail', () => {
             $getGQLAfter: jest.fn(),
             async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
-                resolve({ data: { commitConfigToVcs: { ok: true } } })
+                resolve({ data: { updateRepoMetricThreshold: { ok: true } } })
               )
             }
           }
@@ -1389,9 +1299,11 @@ describe('[Store] Repository/Detail', () => {
           // Setting the global spy on `localThis.$applyGraphqlMutation`
           spy = jest.spyOn(localThis, '$applyGraphqlMutation')
 
-          await actions[RepositoryDetailActions.COMMIT_CONFIG_TO_VCS].call(localThis, actionCxt, {
-            repositoryId: 'string',
-            config: 'string'
+          await actions[RepositoryDetailActions.SET_METRIC_THRESHOLD].call(localThis, actionCxt, {
+            metricShortcode: 'DCV',
+            repositoryId: 'UmVwb3NpdG9yeTp6ZG95eWI',
+            thresholdValue: 55,
+            key: 'Python'
           })
         })
 

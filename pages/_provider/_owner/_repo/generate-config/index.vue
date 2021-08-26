@@ -235,30 +235,39 @@ export default class GenerateConfig extends mixins(
     const pullLabel = this.$route.params.provider === 'gl' ? 'merge' : 'pull'
     const isConfigValid = selector.validateConfig()
     if (isConfigValid) {
-      await this.commitConfigToVcs({
+      const args = {
         config: this.toml,
         repositoryId: this.repository.id,
         createPullRequest
-      })
-      await this.routeToRepoHome()
-
-      if (createPullRequest) {
-        this.$toast.show({
-          type: 'success',
-          message: `<p>We have created a ${pullLabel} request with the configuration.</p><p class="mt-1">Analysis will start automatically once you merge the ${pullLabel} request.</p>`,
-          timeout: 10
-        })
-      } else {
-        this.$toast.success(
-          `Successfully activated ${this.repository.name}, the first run may take a while to finish`
-        )
       }
-      return
-    }
 
-    this.$toast.danger(
-      "Your configuration is invalid, please ensure you've filled all required fields"
-    )
+      try {
+        const response = await this.commitConfigToVcs(args)
+        if (response.ok) {
+          await this.routeToRepoHome()
+          if (createPullRequest) {
+            this.$toast.show({
+              type: 'success',
+              message: `<p>We have created a ${pullLabel} request with the configuration.</p><p class="mt-1">Analysis will start automatically once you merge the ${pullLabel} request.</p>`,
+              timeout: 5
+            })
+          } else {
+            this.$toast.success(
+              `Successfully activated ${this.repository.name}, the first run may take a while to finish`
+            )
+          }
+        } else {
+          this.$toast.danger(
+            'Something went wrong while creating the configuration for this repository, contact support'
+          )
+        }
+      } catch (e) {
+        this.logSentryErrorForUser(e, 'Generate config', args)
+        this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+      } finally {
+        this.fetchBasicRepoDeatils({ ...this.baseRouteParams, refetch: true })
+      }
+    }
   }
 
   async routeToRepoHome(): Promise<void> {

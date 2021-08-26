@@ -9,7 +9,8 @@ import {
   UpdateOrCreateRepositoryCollaboratorInput,
   RemoveRepositoryCollaboratorInput,
   UpdateOrCreateRepositoryCollaboratorPayload,
-  RepositoryPermissionChoices
+  RepositoryPermissionChoices,
+  CommitConfigToVcsPayload
 } from '~/types/types'
 
 const repoStore = namespace('repository/detail')
@@ -167,7 +168,7 @@ export default class RepoDetailMixin extends Vue {
 
   // Mutations
   @repoStore.Action(RepositoryDetailActions.COMMIT_CONFIG_TO_VCS)
-  commitConfigToVcs: (args: CommitConfigToVcsInput) => Promise<void>
+  commitConfigToVcs: (args: CommitConfigToVcsInput) => Promise<CommitConfigToVcsPayload>
 
   @repoStore.Action(RepositoryDetailActions.SET_METRIC_THRESHOLD)
   setRepoMetricsThreshold: (args: UpdateRepoMetricThresholdInput) => Promise<void>

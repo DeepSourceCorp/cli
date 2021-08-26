@@ -37,7 +37,8 @@ import {
   Repository,
   ToggleRepositoryActivationInput,
   UpdateRepositorySettingsInput,
-  RemoveRepositoryCollaboratorInput
+  RemoveRepositoryCollaboratorInput,
+  CommitConfigToVcsPayload
 } from '~/types/types'
 import { TransformerInterface } from '~/store/analyzer/list'
 import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
@@ -318,7 +319,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
     args: CommitConfigToVcsInput
-  ) => Promise<void>
+  ) => Promise<CommitConfigToVcsPayload>
   [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -726,20 +727,11 @@ export const actions: RepositoryDetailModuleActions = {
       commit(RepositoryDetailMutations.SET_LOADING, false)
     }
   },
-  async [RepositoryDetailActions.COMMIT_CONFIG_TO_VCS]({ commit }, args) {
-    commit(RepositoryDetailMutations.SET_LOADING, true)
-    await this.$applyGraphqlMutation(CommitConfigToVcsGQLMutation, {
+  async [RepositoryDetailActions.COMMIT_CONFIG_TO_VCS](_, args) {
+    const response = await this.$applyGraphqlMutation(CommitConfigToVcsGQLMutation, {
       input: args
     })
-      .then(() => {
-        // TODO: Toast("Successfully committed config to VCS")
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(RepositoryDetailMutations.SET_ERROR, e)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-        // TODO: Toast("Failure in committing config to VCS", e)
-      })
+    return response.data.commitConfigToVcs
   },
   async [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION]({ commit }, { isActivated, id }) {
     try {
