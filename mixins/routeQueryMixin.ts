@@ -32,7 +32,7 @@ export default class RouteQueryMixin extends Vue {
     this.replaceRoute()
   }
 
-  emptyFilters() {
+  emptyFilters(): void  {
     this.queryParams = {}
     this.replaceRoute()
   }
