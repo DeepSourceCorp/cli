@@ -141,7 +141,8 @@ export default class AutofixListItem extends mixins(RoleAccessMixin) {
       PEND: 'vanilla-100',
       CNCL: 'vanilla-400',
       FAIL: 'cherry',
-      STAL: 'slate'
+      STAL: 'slate',
+      TIMO: 'honey'
     }
     return colors[this.status]
   }
@@ -152,7 +153,8 @@ export default class AutofixListItem extends mixins(RoleAccessMixin) {
       PEND: 'This Autofix is pending',
       CNCL: 'Autofix cancelled',
       FAIL: 'Autofix failed',
-      STAL: 'Stale Autofix'
+      STAL: 'Stale Autofix',
+      TIMO: 'Autofix timed out'
     }
     return types[this.status || 'PASS']
   }
@@ -163,7 +165,8 @@ export default class AutofixListItem extends mixins(RoleAccessMixin) {
       PEND: 'refresh-ccw',
       CNCL: 'slash',
       FAIL: 'x',
-      STAL: 'stale'
+      STAL: 'stale',
+      TIMO: 'clock'
     }
     return icons[this.status]
   }
