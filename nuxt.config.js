@@ -148,7 +148,7 @@ export default {
         meta: { provider: 'github' }
       })
       routes.push({
-        name: 'github',
+        name: 'github-enterprise',
         path: '/accounts/github-enterprise/login/callback/bifrost',
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
