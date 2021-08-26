@@ -9,7 +9,7 @@
         }"
       >
         <z-avatar
-          :src="viewer.avatar"
+          :image="viewer.avatar"
           :userName="viewer.fullName || viewer.email"
           size="sm"
           class="rounded-full leading-none flex-shrink-0"
