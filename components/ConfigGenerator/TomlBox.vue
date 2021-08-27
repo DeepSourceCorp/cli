@@ -29,7 +29,7 @@
     <template v-if="canBeActivated || isActivated">
       <z-button
         v-if="isCommitPossible"
-        @click="commitConfigToVCS"
+        @click="commitConfigToVCS(false)"
         buttonType="primary"
         class="w-full"
         :disabled="actionDisabled"
