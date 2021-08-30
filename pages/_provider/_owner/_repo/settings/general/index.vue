@@ -189,6 +189,8 @@ import { IssueTypeSetting, Maybe, TeamMemberRoleChoices } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import RepoListMixin from '~/mixins/repoListMixin'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
 @Component({
   components: {
@@ -225,7 +227,12 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
     }
   }
 })
-export default class General extends mixins(ActiveUserMixin, RepoDetailMixin) {
+export default class General extends mixins(
+  ActiveUserMixin,
+  RepoDetailMixin,
+  RepoListMixin,
+  OwnerDetailMixin
+) {
   public branch: Maybe<string> | undefined = ''
   public enableGitMod = false
   public isActive = true
@@ -378,6 +385,31 @@ export default class General extends mixins(ActiveUserMixin, RepoDetailMixin) {
     })
     this.isRepoActivated = this.repository.isActivated
     this.isHovered = false
+    this.refetchData()
+  }
+
+  async refetchData(): Promise<void> {
+    const { owner, provider } = this.$route.params
+    const baseParams = {
+      provider,
+      login: owner,
+      refetch: true
+    }
+    const pageSize =
+      (this.$localStore.get(`${provider}-${owner}-all-repos`, `currentPageSize`) as number) || 10
+
+    this.fetchBasicRepoDeatils({ ...this.baseRouteParams, refetch: true })
+    this.fetchOwnerDetails(baseParams)
+    this.fetchActiveAnalysisRepoList({
+      ...baseParams,
+      limit: 10
+    })
+    this.fetchRepoList({
+      ...baseParams,
+      limit: pageSize,
+      currentPageNumber: 0,
+      query: null
+    })
   }
 
   public updateHoverStyle(isHover: boolean): void {
