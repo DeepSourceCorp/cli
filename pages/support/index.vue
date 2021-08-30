@@ -145,6 +145,7 @@
                     label="Add files"
                     :disabled="isFileProcessing || isFormSubmitting"
                     multiple
+                    accept="image/gif,image/jpeg,image/jpg,.mov,.mp4,image/png,.csv,.docx,.gz,.log,.md,.odf,.odp,.ods,.odt,.pdf,.pptx,.txt,.xls,.xlsx,.zip"
                     @change="uploadFiles"
                     @files-emptied="uploadedFiles = []"
                   >
@@ -346,6 +347,19 @@ export default class Support extends mixins(ActiveUserMixin) {
     return true
   }
 
+  validateFileNames(arrOfFiles: File[]): boolean {
+    const validFilenameRegex = /^[^\:\/\\\<\>\"\|\?\*\^]{1,255}$/
+    const filenameChecker = (val: File) =>
+      validFilenameRegex.test(val.name) && val.name.length <= 255
+    if (!arrOfFiles.every(filenameChecker)) {
+      this.$toast.danger(
+        'File names must be shorter than 256 characters and cannot contain the characters :/<>"|?*^ in them.'
+      )
+      return false
+    }
+    return true
+  }
+
   closeDialog(): void {
     this.showNotif = false
   }
@@ -367,7 +381,7 @@ export default class Support extends mixins(ActiveUserMixin) {
       this.isFileProcessing = true
       const arrayOfFiles = Array.from(target.files)
       try {
-        if (this.validateFileSize(arrayOfFiles))
+        if (this.validateFileSize(arrayOfFiles) && this.validateFileNames(arrayOfFiles))
           this.uploadedFiles = await getBase64Files(arrayOfFiles)
       } catch (err) {
         this.$toast.danger('An error occured while processing files')
