@@ -18,9 +18,9 @@
     >
       <span
         >{{ autofixableIssues.length }}
-        {{ autofixableIssues.length === 1 ? 'issue' : 'issues' }} can be autofixed in
+        {{ autofixableIssues.length === 1 ? 'issue' : 'issues' }} can be Autofixed in
         {{ filesAffectedByAutofix }}
-        {{ filesAffectedByAutofix.length === 1 ? 'file' : 'files' }}</span
+        {{ filesAffectedByAutofix > 1 ? 'files' : 'file' }}</span
       >
       <z-button
         buttonType="primary"
