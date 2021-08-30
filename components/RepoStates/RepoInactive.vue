@@ -1,11 +1,20 @@
 <template>
   <base-state :title="noticeTitle">
     <template slot="hero">
-      <div class="text-4xl text-center mb-4">⚙️</div>
+      <div class="text-4xl text-center mb-4 leading-none">⚙️</div>
     </template>
     <div
       v-if="(repository.canBeActivated || repository.isActivated) && canActivateRepo"
-      class="grid gris-cols-1 sm:grid-cols-2 max-w-4xl mt-5 divide-y sm:divide-y-0 sm:divide-x divide-ink-300"
+      class="
+        grid
+        gris-cols-1
+        sm:grid-cols-2
+        max-w-4xl
+        mt-5
+        divide-y
+        sm:divide-y-0 sm:divide-x
+        divide-ink-300
+      "
     >
       <div class="px-5">
         <h3 class="text-lg font-bold text-vanilla-200">Need help with the config?</h3>
@@ -14,14 +23,16 @@
           <strong class="text-vanilla-200">.deepsource.toml</strong> file for this repository.
         </p>
         <nuxt-link :to="$generateRoute(['generate-config'])">
-          <z-button icon="settings" size="small" class="mt-4">Generate Config</z-button>
+          <z-button icon="settings" size="small" button-type="secondary" class="mt-4"
+            >Generate Config</z-button
+          >
         </nuxt-link>
       </div>
       <div class="px-5">
         <h3 class="text-lg font-bold text-vanilla-200">Already added the config?</h3>
         <p class="mt-2">
-          Ensure that you've added the configuration in the repository's root folder, and committed
-          it to the <strong class="text-vanilla-200">{{ defaultBranchName }}</strong> branch.
+          Ensure that the configuration is added to the repository's root folder of the
+          <strong class="text-vanilla-200">{{ defaultBranchName }}</strong> branch.
         </p>
         <z-button
           v-if="!activateLoading"
@@ -50,6 +61,12 @@
         <z-button icon="arrow-up" size="small" class="mt-4"> Upgrade Plan </z-button>
       </nuxt-link>
     </div>
+    <div v-else-if="canRequestRepoActivation">
+      <p class="mt-2 max-w-xl">
+        Please get in touch with the owner of your organization to activate analysis for this
+        repository.
+      </p>
+    </div>
   </base-state>
 </template>
 <script lang="ts">
@@ -58,7 +75,7 @@ import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
 import { BaseState } from '.'
 
 import { Repository, TeamMemberRoleChoices } from '~/types/types'
-import { TeamPerms } from '~/types/permTypes'
+import { RepoPerms, TeamPerms } from '~/types/permTypes'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
@@ -104,7 +121,14 @@ export default class RepoInactive extends mixins(RepoDetailMixin, RoleAccessMixi
 
   get canActivateRepo(): boolean {
     const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-    return this.$gateKeeper.team(TeamPerms.ACTIVATE_ANALYSIS, role)
+    return (
+      this.$gateKeeper.team(TeamPerms.ACTIVATE_ANALYSIS, role) ||
+      this.$gateKeeper.repo(RepoPerms.ACTIVATE_REPOSITORY, this.repoPerms.permission)
+    )
+  }
+
+  get canRequestRepoActivation(): boolean {
+    return this.$gateKeeper.repo(RepoPerms.READ_REPO, this.repoPerms.permission)
   }
 
   async activateAnalysis(): Promise<void> {

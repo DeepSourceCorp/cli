@@ -19,7 +19,7 @@
       -->
 
       <!-- If the repository is activated continue, else show activate repository CTA -->
-      <template v-if="repository.isActivated">
+      <template v-if="repository.isActivated || allowedOnBroken">
         <!--
             Show the route page if 
               the repo is already active and analyzed

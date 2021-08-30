@@ -1,5 +1,5 @@
-// Team Permission Levels: https://deepsource.io/docs/access-control/people-access/permission-levels.html
-// Repository Permission Levels: https://deepsource.io/docs/access-control/repository-access/permission-levels.html
+// Team Permission Levels: https://deepsource.io/docs/access-control/people-access
+// Repository Permission Levels: https://deepsource.io/docs/access-control/repository-access
 // Usage: `this.$gateKeeper.team(TeamPerms.CHANGE_PLAN, 'ADMIN')`
 
 import { Inject, Context } from '@nuxt/types/app'
@@ -72,7 +72,9 @@ const REPO_PERMS_MAP = {
   [RepoPerms.ADD_REMOVE_MEMBERS]: ['ADMIN'],
   [RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS]: ['ADMIN'],
   [RepoPerms.IGNORE_ISSUES]: ['ADMIN'],
-  [RepoPerms.VIEW_AUDIT_LOGS]: ['ADMIN']
+  [RepoPerms.VIEW_AUDIT_LOGS]: ['ADMIN'],
+  [RepoPerms.READ_REPO]: ['ADMIN', 'WRITE', 'READ'],
+  [RepoPerms.ACTIVATE_REPOSITORY]: ['ADMIN', 'WRITE']
 }
 
 export default (context: Context, inject: Inject): void => {
