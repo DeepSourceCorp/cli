@@ -94,7 +94,7 @@
             loadingLabel="Activating Repository"
             :disabled="actionDisabled"
             :isLoading="commitLoading"
-            @click="commitConfig"
+            @click="commitConfig(false)"
           >
           </z-button>
           <z-button
