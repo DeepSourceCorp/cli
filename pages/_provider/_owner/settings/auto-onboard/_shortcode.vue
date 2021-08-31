@@ -10,28 +10,20 @@
     </div>
     <div v-if="fetchingTemplate" class="animate-pulse max-w-3xl p-4 space-y-5">
       <div class="grid grid-cols-4 gap-2">
-        <div class="h-8 bg-ink-200 col-span-2"></div>
+        <div class="h-8 bg-ink-300 col-span-2"></div>
         <div></div>
-        <div class="h-8 bg-ink-200"></div>
-        <div class="h-16 bg-ink-200 col-span-2"></div>
+        <div class="h-8 bg-ink-300"></div>
+        <div class="h-16 bg-ink-300 col-span-2"></div>
       </div>
       <div class="grid grid-cols-1 gap-4">
-        <div class="h-8 bg-ink-200"></div>
-        <div class="h-32 bg-ink-200"></div>
-        <div class="h-32 bg-ink-200"></div>
+        <div class="h-8 bg-ink-300"></div>
+        <div class="h-32 bg-ink-300"></div>
+        <div class="h-32 bg-ink-300"></div>
       </div>
     </div>
     <div v-else class="w-full max-w-3xl p-4 mb-10" :key="$route.fullPath">
-      <div class="flex justify-between items-start mb-6">
-        <div class="space-y-2">
-          <h2 class="text-lg font-medium">
-            {{ title }}
-          </h2>
-          <p class="max-w-sm text-sm text-vanilla-400">
-            {{ description }}
-          </p>
-        </div>
-        <div class="flex items-center space-x-4">
+      <page-title :title="title" :description="description">
+        <template slot="actions">
           <template v-if="readOnly">
             <z-button
               v-if="allowEdit"
@@ -79,8 +71,8 @@
               @refetch="fetchTemplate"
             />
           </template>
-        </div>
-      </div>
+        </template>
+      </page-title>
       <section class="space-y-4">
         <analyzer-search
           ref="analyzer-search-component"

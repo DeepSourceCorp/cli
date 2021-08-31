@@ -34,7 +34,10 @@
       "TransformerRun",
       "TransformerTool",
       "User",
-      "UserPreference"
+      "UserPreference",
+      "Webhook",
+      "WebhookEventDelivery",
+      "WebhookEventTypes"
     ],
     "Node": [
       "SocialNode"

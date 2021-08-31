@@ -1,0 +1,5 @@
+mutation testWebhook($webhookId: ID!) {
+  testWebhook(input: { webhookId: $webhookId }) {
+    ok
+  }
+}

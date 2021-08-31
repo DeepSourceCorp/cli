@@ -106,10 +106,10 @@ type AnalyzerEdge {
 }
 
 type AnalyzerReview implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   analyzer: Analyzer!
   name: String!
   avatar: String!
@@ -161,10 +161,10 @@ input Attachment {
 }
 
 type AuditLog implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   eventName: String!
   description: String!
   actor: User
@@ -192,10 +192,10 @@ type AuditLogMeta {
 }
 
 type AutoOnboardEvent implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   pullRequestNumber: Int
   owner: Owner!
   repository: Repository!
@@ -235,10 +235,10 @@ type AutoOnboardPayload {
 }
 
 type AutofixRun implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   runId: UUID!
   commitOid: String
   status: AutofixRunStatus!
@@ -334,6 +334,9 @@ type BillingInfo {
   billingEmail: String
   billingAddress: String
   cancelAtPeriodEnd: Boolean
+  billingBackend: String
+  pendingUpdate: Boolean
+  synced: Boolean
 }
 
 input BitbucketInstallationLandingInput {
@@ -368,10 +371,10 @@ type Card {
 }
 
 type Check implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   checkSeq: Int!
   analyzer: Analyzer
   status: CheckStatus!
@@ -406,10 +409,10 @@ type CheckEdge {
 }
 
 type CheckIssue implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   checkInstance: Check!
   concreteIssue: Issue
   severity: CheckIssueSeverity!
@@ -486,10 +489,10 @@ type CommitConfigToVCSPayload {
 }
 
 type ConfigTemplate implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   owner: Owner!
   shortcode: String!
   title: String!
@@ -617,6 +620,20 @@ type CreatePullRequestPayload {
   clientMutationId: String
 }
 
+input CreateWebhookInput {
+  url: String!
+  secret: String!
+  apiSigning: Boolean!
+  eventsSubscribed: [String]!
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type CreateWebhookPayload {
+  webhook: Webhook
+  clientMutationId: String
+}
+
 type CreditsInfo {
   currentCycleDiscount: Float!
   nextCycleDiscount: Float!
@@ -653,6 +670,26 @@ input DeleteSilenceRuleInput {
 }
 
 type DeleteSilenceRulePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteWebhookInput {
+  webhookId: ID!
+  clientMutationId: String
+}
+
+type DeleteWebhookPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DisableWebhookInput {
+  webhookId: ID!
+  clientMutationId: String
+}
+
+type DisableWebhookPayload {
   ok: Boolean
   clientMutationId: String
 }
@@ -905,10 +942,10 @@ type Invoice {
 }
 
 type Issue implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   shortcode: String!
   title: String!
   description: String!
@@ -1045,6 +1082,11 @@ type Mutation {
   deleteConfigTemplate(input: DeleteConfigTemplateInput!): DeleteConfigTemplatePayload
   autoOnboard(input: AutoOnboardInput!): AutoOnboardPayload
   submitSupportTicket(input: SubmitSupportTicketInput!): SubmitSupportTicketPayload
+  createWebhook(input: CreateWebhookInput!): CreateWebhookPayload
+  testWebhook(input: TestWebhookInput!): TestWebhookPayload
+  updateWebhook(input: UpdateWebhookInput!): UpdateWebhookPayload
+  disableWebhook(input: DisableWebhookInput!): DisableWebhookPayload
+  deleteWebhook(input: DeleteWebhookInput!): DeleteWebhookPayload
 }
 
 enum NextActionChoice {
@@ -1059,10 +1101,10 @@ interface Node {
 }
 
 type Owner implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   login: String!
   avatar: String
   vcsProvider: OwnerVcsProvider!
@@ -1080,6 +1122,7 @@ type Owner implements MaskPrimaryKeyNode {
   configTemplates(offset: Int, before: String, after: String, first: Int, last: Int, shortcode: String, title_Icontains: String): ConfigTemplateConnection
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   ownerSetting: OwnerSetting
+  webhooks(offset: Int, before: String, after: String, first: Int, last: Int): WebhookConnection!
   isAutofixEnabled: Boolean
   autofixInstallationUrl: String
   isTeam: Boolean
@@ -1128,10 +1171,10 @@ enum OwnerPlan {
 }
 
 type OwnerSetting implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   owner: Owner!
   publicKey: String
   privateKey: String
@@ -1153,6 +1196,11 @@ type PageInfo {
 }
 
 type Query {
+  webhookEventTypes(offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventTypesConnection
+  webhookEventDeliveries(ownerId: ID!, offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventDeliveryConnection
+  webhookEventDelivery(ownerId: ID!, deliveryId: ID!): WebhookEventDelivery
+  webhook(webhookId: ID!): Webhook
+  webhooks(ownerId: ID!, offset: Int, before: String, after: String, first: Int, last: Int): WebhookConnection
   transformer(shortcode: String!): TransformerTool
   transformers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, language: [String]): TransformerToolConnection
   transformerRun(runId: String!): TransformerRun!
@@ -1236,10 +1284,10 @@ type ReportIssueFalsePositivePayload {
 }
 
 type Repository implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   name: String!
   vcsType: RepositoryVcsType!
   vcsProvider: VCSProviderChoices!
@@ -1288,6 +1336,7 @@ type Repository implements MaskPrimaryKeyNode {
   lastAnalyzedAt: DateTime
   blobUrlRoot: String
   fullName: String
+  renderedErrorMessage: String
   activityModality: String
   issueTypeSettings: [IssueTypeSetting]
   widgetsDisplay: GenericScalar
@@ -1372,10 +1421,10 @@ type RepositoryEdge {
 }
 
 type RepositoryIssue implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   repositoryInstance: Repository!
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   shouldIgnore: Boolean!
@@ -1421,10 +1470,10 @@ enum RepositoryIssueSeverityChoices {
 }
 
 type RepositoryMetricValue implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   value: Decimal!
   extraData: JSONString!
   commitOid: String!
@@ -1473,10 +1522,10 @@ type Revoke {
 }
 
 type Run implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   runId: UUID!
   status: RunStatus!
   branchName: String
@@ -1521,10 +1570,10 @@ enum RunStatus {
 }
 
 type SilenceRule implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   silenceLevel: SilenceRuleSilenceLevel!
   filePath: String
   repository: Repository!
@@ -1672,10 +1721,10 @@ type SyncVcsPermissionsPayload {
 }
 
 type Team implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   login: String!
   avatar: String
   vcsProvider: OwnerVcsProvider!
@@ -1705,10 +1754,10 @@ type Team implements MaskPrimaryKeyNode {
 }
 
 type TeamBasePermissionSet implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   team: Team!
   defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
   canMembersIgnoreIssues: Boolean!
@@ -1734,10 +1783,10 @@ type TeamEdge {
 }
 
 type TeamMember implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   role: TeamMemberRoleChoices
   team: Team!
   user: User!
@@ -1756,11 +1805,11 @@ type TeamMemberEdge {
 }
 
 type TeamMemberInvitation implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
   role: TeamMemberRoleChoices
-  id: ID!
   team: Team!
   invitationCode: String!
   email: String!
@@ -1789,6 +1838,16 @@ enum TeamMemberRoleChoices {
   CONTRIBUTOR
 }
 
+input TestWebhookInput {
+  webhookId: ID!
+  clientMutationId: String
+}
+
+type TestWebhookPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input ToggleRepositoryActivationInput {
   isActivated: Boolean!
   id: ID!
@@ -1801,10 +1860,10 @@ type ToggleRepositoryActivationPayload {
 }
 
 type Transaction implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   transactionType: TransactionTransactionType!
   amount: Int!
   user: User!
@@ -1836,10 +1895,10 @@ enum TransactionTransactionType {
 }
 
 type TransformerReview implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   transformerTool: TransformerTool!
   name: String!
   avatar: String!
@@ -1858,10 +1917,10 @@ type TransformerReviewEdge {
 }
 
 type TransformerRun implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   runId: UUID!
   commitOid: String!
   baseOid: String
@@ -1927,10 +1986,10 @@ enum TransformerRunStatus {
 }
 
 type TransformerTool implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   analyzer: Analyzer
   documentationUrl: String
   discussUrl: String
@@ -2185,6 +2244,20 @@ type UpdateTechnologyPreferencePayload {
   clientMutationId: String
 }
 
+input UpdateWebhookInput {
+  webhookId: ID!
+  url: String
+  secret: String
+  apiSigning: Boolean
+  eventsSubscribed: [String]
+  clientMutationId: String
+}
+
+type UpdateWebhookPayload {
+  webhook: Webhook
+  clientMutationId: String
+}
+
 type User implements MaskPrimaryKeyNode {
   id: ID!
   lastLogin: DateTime
@@ -2236,10 +2309,10 @@ type UserEdge {
 }
 
 type UserPreference implements MaskPrimaryKeyNode {
+  id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  id: ID!
   starredRepositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
   user: User
 }
@@ -2274,4 +2347,79 @@ input VerifyDeviceInput {
 type VerifyDevicePayload {
   ok: Boolean
   clientMutationId: String
+}
+
+type Webhook implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  owner: Owner!
+  url: String!
+  secret: String!
+  apiSigning: Boolean!
+  eventsSubscribed(offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventTypesConnection!
+  version: String!
+  active: DateTime
+  deliveries(offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventDeliveryConnection!
+}
+
+type WebhookConnection {
+  pageInfo: PageInfo!
+  edges: [WebhookEdge]!
+  totalCount: Int
+}
+
+type WebhookEdge {
+  node: Webhook
+  cursor: String!
+}
+
+type WebhookEventDelivery implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  deliveryId: String
+  eventId: String
+  httpStatusCode: Int
+  retryCount: Int
+  webhook: Webhook!
+  eventType: WebhookEventTypes!
+  payload: GenericScalar
+  finishedIn: Float
+}
+
+type WebhookEventDeliveryConnection {
+  pageInfo: PageInfo!
+  edges: [WebhookEventDeliveryEdge]!
+  totalCount: Int
+}
+
+type WebhookEventDeliveryEdge {
+  node: WebhookEventDelivery
+  cursor: String!
+}
+
+type WebhookEventTypes implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  name: String!
+  shortcode: String!
+  shortDescription: String!
+  webhooks(offset: Int, before: String, after: String, first: Int, last: Int): WebhookConnection!
+  deliveries(offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventDeliveryConnection!
+}
+
+type WebhookEventTypesConnection {
+  pageInfo: PageInfo!
+  edges: [WebhookEventTypesEdge]!
+  totalCount: Int
+}
+
+type WebhookEventTypesEdge {
+  node: WebhookEventTypes
+  cursor: String!
 }

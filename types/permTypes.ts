@@ -12,7 +12,8 @@ export enum TeamPerms {
   VIEW_TEAM_HOME = 'viewTeamHome',
   AUTO_ONBOARD_CRUD_FOR_TEMPLATE = 'autoOnboardCrudForTemplate',
   AUTO_ONBOARD_VIEW_TEMPLATE = 'autoOnboardViewTemplate',
-  AUTO_ONBOARD_REPOSITORIES = 'autoOnboardRepositories'
+  AUTO_ONBOARD_REPOSITORIES = 'autoOnboardRepositories',
+  MANAGE_WEBHOOKS = 'manageWebhooks'
 }
 
 export enum RepoPerms {

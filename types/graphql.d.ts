@@ -155,7 +155,7 @@ declare module '*/createAutofixRun.gql' {
 declare module '*/ignoreCheckIssue.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const IgnoreCheckIssue: DocumentNode;
 
   export default defaultDocument;
 }
@@ -164,7 +164,7 @@ declare module '*/ignoreCheckIssue.gql' {
 declare module '*/ignoreIssueFalsePositive.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const ReportFalsePositive: DocumentNode;
 
   export default defaultDocument;
 }
@@ -318,6 +318,51 @@ declare module '*/updateSeats.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/create.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const createWebhook: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/delete.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const deletewebhook: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/disable.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const disablewebhook: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/test.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const testWebhook: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/update.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updateWebhook: DocumentNode;
 
   export default defaultDocument;
 }
@@ -515,7 +560,7 @@ declare module '*/updateStarredRepo.gql' {
 declare module '*/list.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const listWebhooks: DocumentNode;
 
   export default defaultDocument;
 }
@@ -629,6 +674,34 @@ declare module '*/IssueTypeSettings.gql' {
 }
     
 
+declare module '*/single.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const webhookEventDelivery: DocumentNode;
+export const getSingleWebhook: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/webhookDeliveries.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const webhookDeliveries: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/listEventTypes.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const listWebhookEvents: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/addableMembers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -693,15 +766,6 @@ declare module '*/detailForActivation.gql' {
     
 
 declare module '*/issueChildren.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
-declare module '*/single.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

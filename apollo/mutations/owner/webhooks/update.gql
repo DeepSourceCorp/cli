@@ -1,0 +1,21 @@
+mutation updateWebhook(
+  $webhookId: ID!
+  $url: String
+  $secret: String
+  $apiSigning: Boolean
+  $eventsSubscribed: [String]
+) {
+  updateWebhook(
+    input: {
+      webhookId: $webhookId
+      url: $url
+      secret: $secret
+      apiSigning: $apiSigning
+      eventsSubscribed: $eventsSubscribed
+    }
+  ) {
+    webhook {
+      id
+    }
+  }
+}

@@ -141,26 +141,3 @@ export default class TomlBox extends Vue {
   }
 }
 </script>
-
-<style>
-.hljs {
-  @apply text-vanilla-400;
-}
-.hljs-attr {
-  @apply text-juniper;
-}
-.hljs-literal {
-  @apply text-lilac;
-}
-.hljs-string {
-  @apply text-vanilla-200;
-}
-.hljs-section {
-  @apply text-lavender font-semibold;
-}
-
-.toml-box {
-  height: calc(100vh - 16rem);
-  /* screenHeight - yPadding - twoButtons*/
-}
-</style>

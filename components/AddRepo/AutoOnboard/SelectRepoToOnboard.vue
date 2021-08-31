@@ -112,10 +112,10 @@ export default class SelectReposToOnboard extends mixins(
   AutoOnboardMixin,
   ActiveUserMixin
 ) {
-  private searchCandidate = ''
-  private onboardingRepos = false
-  private selectAll = false
-  private fetchingData = false
+  public searchCandidate = ''
+  public onboardingRepos = false
+  public selectAll = false
+  public fetchingData = false
   public selectedRepos: string[] = []
   public limit = 50
   public currentPage = 1

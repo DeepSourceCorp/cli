@@ -8,13 +8,7 @@
         <z-divider color="ink-200"></z-divider>
       </div>
     </div>
-    <div
-      class="max-w-2xl"
-      :class="{
-        'divide-y divide-ink-300': divide,
-        [bodyClass]: bodyClass
-      }"
-    >
+    <div :class="[bodyWidthClass, bodyClass, divide ? 'divide-y divide-ink-300' : '']">
       <slot></slot>
     </div>
   </div>
@@ -35,5 +29,8 @@ export default class FormGroup extends Vue {
 
   @Prop({ default: '' })
   bodyClass: string
+
+  @Prop({ default: 'max-w-2xl' })
+  bodyWidthClass: string
 }
 </script>

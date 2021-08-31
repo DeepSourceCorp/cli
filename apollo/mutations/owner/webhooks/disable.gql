@@ -1,0 +1,5 @@
+mutation disablewebhook($webhookId: ID!) {
+  disableWebhook(input: { webhookId: $webhookId }) {
+    ok
+  }
+}

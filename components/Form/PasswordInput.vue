@@ -11,16 +11,24 @@
     <template slot="description">
       <slot name="description"></slot>
     </template>
-    <div>
+    <div class="relative">
       <z-input
         :id="inputId"
         v-model="modelValue"
+        type="password"
+        placeholder="A randomly generated secret with at least 16 characters"
         :disabled="disabled"
         :readOnly="readOnly"
         @blur="triggerBlur"
         class="px-2"
         size="small"
       ></z-input>
+      <password-strength
+        v-if="modelValue && showStrength && !(disabled || readOnly)"
+        size="small"
+        class="absolute top-1 right-1 bg-ink-400 pl-0.5"
+        :password="modelValue"
+      />
     </div>
   </input-wrapper>
 </template>
@@ -57,6 +65,9 @@ export default class TextInput extends Vue {
 
   @Prop({ default: false })
   readOnly: boolean
+
+  @Prop({ default: true })
+  showStrength: boolean
 
   triggerBlur(ev: InputEvent): void {
     this.$emit('blur', ev)

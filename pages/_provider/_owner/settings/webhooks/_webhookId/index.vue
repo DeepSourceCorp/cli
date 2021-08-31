@@ -1,0 +1,323 @@
+<template>
+  <section>
+    <section class="px-4 py-3.5 min-h-13 border-b border-ink-200 flex flex-row items-center">
+      <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
+        <z-breadcrumb-item class="text-vanilla-400">
+          <nuxt-link :to="$generateRoute(['settings', 'webhooks'])">All endpoints</nuxt-link>
+        </z-breadcrumb-item>
+        <z-breadcrumb-item>
+          {{ title }}
+        </z-breadcrumb-item>
+      </z-breadcrumb>
+    </section>
+    <section v-if="$fetchState.pending" class="animate-pulse max-w-2xl p-4 space-y-8">
+      <div class="grid grid-cols-4 gap-2">
+        <div class="h-8 bg-ink-300 col-span-2"></div>
+        <div></div>
+        <div class="h-8 bg-ink-300"></div>
+        <div class="h-4 bg-ink-300 col-span-2"></div>
+      </div>
+      <div class="grid grid-cols-1 gap-4">
+        <div v-for="ii in 4" :key="ii" class="h-20 bg-ink-300"></div>
+      </div>
+    </section>
+    <section v-else class="w-full mb-10 p-4" :key="$route.fullPath">
+      <page-title
+        class="max-w-2xl"
+        :title="title"
+        :description="`Created ${formatDate(localEndpoint.createdAt)} · ${localEndpoint.version}`"
+      >
+        <template slot="title-info">
+          <z-label v-if="localEndpoint.active" class="inline-block select-none" state="success">
+            Enabled
+          </z-label>
+          <z-label v-else class="inline-block select-none" state="warning"> Disabled </z-label>
+        </template>
+        <template slot="actions" v-if="allowEdit">
+          <template v-if="readOnly">
+            <z-button @click="readOnly = false" size="small" buttonType="secondary" icon="edit">
+              Edit
+            </z-button>
+            <test-webhook-endpoint v-if="localEndpoint.active"></test-webhook-endpoint>
+            <enable-webhook-endpoint v-if="!localEndpoint.active" @reset="reset(false)">
+              <template v-slot:default="{ toggleModal }">
+                <z-button @click="toggleModal" size="small" icon="play-circle">
+                  Enable endpoint
+                </z-button>
+              </template>
+            </enable-webhook-endpoint>
+          </template>
+          <template v-else>
+            <z-button
+              @click="reset"
+              size="small"
+              buttonType="ghost"
+              iconColor="vanilla-300"
+              v-tooltip="'Discard changes'"
+              icon="corner-up-left"
+            />
+            <z-button @click="showSaveModal = true" size="small" icon="save">
+              Save Configuration
+            </z-button>
+            <portal to="modal">
+              <z-confirm
+                v-if="showSaveModal"
+                @onClose="showSaveModal = false"
+                title="Save endpoint configuration"
+                subtitle="Once updated, you won't be able to revert to previous changes"
+              >
+                <template v-slot:footer="{ close }">
+                  <div
+                    class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end"
+                  >
+                    <z-button
+                      buttonType="ghost"
+                      class="text-vanilla-100"
+                      size="small"
+                      @click="close"
+                    >
+                      Cancel
+                    </z-button>
+                    <z-button
+                      :isLoading="savingConfig"
+                      loadingLabel="Updating endpoint"
+                      icon="save"
+                      class="modal-primary-action"
+                      size="small"
+                      @click="saveConifg"
+                      >Yes, update this endpoint</z-button
+                    >
+                  </div>
+                </template>
+              </z-confirm>
+            </portal>
+          </template>
+        </template>
+      </page-title>
+      <!-- Endpoint configuration -->
+      <div class="space-y-6">
+        <form-group label="Configuration" :divide="false" bodyWidthClass="max-w-2xl">
+          <text-input
+            inputWidth="wide"
+            label="Endpoint URL"
+            description="A public url to send events to as they happen."
+            inputId="webhook-endpoint-url"
+            v-model="localEndpoint.url"
+            :readOnly="readOnly"
+          ></text-input>
+          <toggle-input
+            v-if="Object.keys(localEndpoint).includes('apiSigning')"
+            label="Enable API signing"
+            inputId="enable-api-signing"
+            :disabled="readOnly"
+            v-model="localEndpoint.apiSigning"
+          >
+            <template slot="description">
+              Signing of the webhook payload allows you to verify incoming requests.
+              <span class="text-vanilla-200 font-medium">We recommend enabling this.</span>
+            </template>
+          </toggle-input>
+          <password-input
+            v-if="localEndpoint.apiSigning"
+            inputWidth="wide"
+            label="Secret"
+            description="This secret will be used to sign the payload sent from DeepSource."
+            inputId="webhook-endpoint-secret"
+            v-model="localEndpoint.secret"
+            :readOnly="readOnly"
+          ></password-input>
+          <div class="space-y-2 py-4">
+            <h4 class="text-sm text-vanilla-100">Selected events</h4>
+            <span
+              v-for="event in subscribedEvents"
+              :key="event.shortcode"
+              class="block px-3 pt-2 pb-3 border border-ink-200 rounded-md space-y-0.5"
+            >
+              <code class="text-sm">{{ event.shortcode }}</code>
+              <p class="text-xs text-vanilla-400">{{ event.shortDescription }}</p>
+            </span>
+          </div>
+          <section v-if="endpointDeliveriesCount && readOnly" class="space-y-2 py-4">
+            <h4 class="text-sm text-vanilla-100">Webhook deliveries</h4>
+            <webhook-log-list :key="$route.params.webhookId" />
+          </section>
+        </form-group>
+
+        <!-- Endpoint Settings -->
+        <form-group
+          v-if="allowEdit && readOnly"
+          label="Settings"
+          :divide="false"
+          bodyWidthClass="max-w-2xl"
+        >
+          <button-input
+            v-if="localEndpoint.active"
+            inputId="webhook-settings-disable"
+            buttonLabel="Disable endpoint"
+            buttonType="secondary"
+            icon="pause-circle"
+            description="This will immediately disable all events for this endpoint."
+            @click="disable"
+          >
+            <template slot="label">
+              Disable <b>{{ title }}</b>
+            </template>
+          </button-input>
+          <enable-webhook-endpoint v-else @reset="reset(false)">
+            <template v-slot:default="{ toggleModal }">
+              <button-input
+                inputId="webhook-settings-enable"
+                buttonLabel="Enable endpoint"
+                buttonType="secondary"
+                icon="play-circle"
+                description="This will enable all events for this endpoint."
+                @click="toggleModal"
+              >
+                <template slot="label">
+                  Enable <b>{{ title }}</b>
+                </template>
+              </button-input>
+            </template></enable-webhook-endpoint
+          >
+          <delete-webhook-endpoint :title="title" :webhookId="$route.params.webhookId" />
+        </form-group>
+      </div>
+    </section>
+  </section>
+</template>
+
+<script lang="ts">
+import { Component, mixins } from 'nuxt-property-decorator'
+import {
+  ZIcon,
+  ZTag,
+  ZLabel,
+  ZInput,
+  ZButton,
+  ZConfirm,
+  ZBreadcrumb,
+  ZBreadcrumbItem
+} from '@deepsourcelabs/zeal'
+
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import WebhookMixin from '~/mixins/webhookMixin'
+import { WebhookEventTypes, Webhook } from '~/types/types'
+import { formatDate } from '~/utils/date'
+import { TeamPerms } from '~/types/permTypes'
+
+@Component({
+  components: {
+    ZIcon,
+    ZTag,
+    ZLabel,
+    ZInput,
+    ZButton,
+    ZConfirm,
+    ZBreadcrumb,
+    ZBreadcrumbItem
+  },
+  meta: {
+    auth: {
+      teamPerms: [TeamPerms.MANAGE_WEBHOOKS]
+    }
+  },
+  middleware: ['perm', 'teamOnly'],
+  layout: 'dashboard'
+})
+export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixin) {
+  public readOnly = true
+  public allowEdit = true
+  public showSaveModal = false
+  public savingConfig = false
+  public formatDate = formatDate
+  public localEndpoint: Webhook = { url: '' } as Webhook
+
+  async fetch(): Promise<void> {
+    const { webhookId } = this.$route.params
+    await this.fetchSingleEndpoint({ webhookId })
+    await this.fetchEndpointDeliveries({
+      webhookId,
+      currentPage: 1,
+      limit: 8
+    })
+    this.localEndpoint = JSON.parse(JSON.stringify(this.endpoint))
+  }
+
+  async reset(refetch = true): Promise<void> {
+    const { webhookId } = this.$route.params
+    await this.fetchSingleEndpoint({ webhookId, refetch: refetch })
+    this.localEndpoint = JSON.parse(JSON.stringify(this.endpoint))
+    this.readOnly = true
+  }
+
+  async disable(): Promise<void> {
+    const { webhookId } = this.$route.params
+    try {
+      const response = await this.disableEndpoint({ webhookId: webhookId })
+      if (response.ok) {
+        await this.reset()
+        this.$toast.success('You disabled this webhook.')
+      }
+    } catch (e) {
+      this.logSentryErrorForUser(e, 'Disable webhook', { webhookId: webhookId })
+      this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+    }
+  }
+
+  async saveConifg(): Promise<void> {
+    try {
+      this.validateWebhookForm(
+        this.localEndpoint.url,
+        this.localEndpoint.apiSigning,
+        this.localEndpoint.secret,
+        this.subscribedEventNames
+      )
+    } catch (e) {
+      this.$toast.info(e.message)
+      return
+    }
+
+    const { webhookId } = this.$route.params
+    this.savingConfig = true
+    try {
+      await this.updateEndpoint({
+        webhookId: webhookId,
+        url: this.localEndpoint.url,
+        secret: this.localEndpoint.secret,
+        apiSigning: this.localEndpoint.apiSigning
+      })
+      await this.reset()
+      this.$toast.success('Successfully updated the endpoint details.')
+    } catch (e) {
+      this.logSentryErrorForUser(e, 'Update webhook', { webhookId: webhookId })
+      this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+    } finally {
+      this.savingConfig = false
+    }
+  }
+
+  get title(): string {
+    if (this.endpoint.url) {
+      const url = new URL(this.endpoint.url)
+      return url.hostname
+    }
+    return ''
+  }
+
+  get subscribedEvents(): WebhookEventTypes[] {
+    if (this.localEndpoint?.eventsSubscribed?.edges.length) {
+      return this.localEndpoint.eventsSubscribed.edges.map((edge) => {
+        if (edge) {
+          return edge.node as WebhookEventTypes
+        }
+        return null
+      }) as WebhookEventTypes[]
+    }
+    return []
+  }
+
+  get subscribedEventNames(): string[] {
+    return this.subscribedEvents.map((event) => event.shortcode)
+  }
+}
+</script>

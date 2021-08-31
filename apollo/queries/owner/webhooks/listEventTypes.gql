@@ -1,0 +1,11 @@
+query listWebhookEvents {
+  webhookEventTypes {
+    edges {
+      node {
+        name
+        shortcode
+        shortDescription
+      }
+    }
+  }
+}

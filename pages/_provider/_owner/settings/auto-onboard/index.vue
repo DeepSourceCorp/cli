@@ -1,7 +1,7 @@
 <template>
   <section class="grid grid-cols-1 max-w-3xl p-4">
     <div class="flex justify-between mb-4">
-      <h2 class="text-lg font-medium">AutoOnboard</h2>
+      <h2 class="text-lg font-medium">Auto Onboard</h2>
       <z-button
         v-if="configTemplateList.length && allowCrud"
         @click="showNewTemplateModal = true"

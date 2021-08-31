@@ -1,0 +1,21 @@
+query getSingleWebhook($webhookId: ID!) {
+  webhook(webhookId: $webhookId) {
+    id
+    url
+    active
+    secret
+    version
+    apiSigning
+    createdAt
+    modifiedAt
+    eventsSubscribed {
+      edges {
+        node {
+          shortcode
+          name
+          shortDescription
+        }
+      }
+    }
+  }
+}

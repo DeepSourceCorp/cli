@@ -1,0 +1,21 @@
+query listWebhooks($login: String!, $provider: VCSProviderChoices!, $limit: Int, $after: String) {
+  owner(login: $login, provider: $provider) {
+    id
+    webhooks(first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          id
+          createdAt
+          modifiedAt
+          url
+          alive
+          active
+          eventsSubscribed {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}

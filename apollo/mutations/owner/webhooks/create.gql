@@ -1,0 +1,21 @@
+mutation createWebhook(
+  $url: String!
+  $secret: String!
+  $apiSigning: Boolean!
+  $ownerId: ID!
+  $eventsSubscribed: [String]!
+) {
+  createWebhook(
+    input: {
+      ownerId: $ownerId
+      url: $url
+      secret: $secret
+      apiSigning: $apiSigning
+      eventsSubscribed: $eventsSubscribed
+    }
+  ) {
+    webhook {
+      id
+    }
+  }
+}

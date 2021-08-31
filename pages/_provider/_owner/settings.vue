@@ -2,27 +2,37 @@
   <div>
     <div id="tabs" class="flex xl:col-span-2 pt-2.5 pb-0 border-b border-ink-200">
       <div class="flex self-end px-2 md:px-4 space-x-5 overflow-auto flex-nowrap">
-        <nuxt-link v-if="owner.isTeam && showBilling" :to="getRoute('billing')">
-          <z-tab
-            :isActive="$route.name.startsWith('provider-owner-settings-billing')"
-            border-active-color="vanilla-400"
-            >Billing</z-tab
+        <template v-for="settings in settingsOptions">
+          <nuxt-link
+            v-if="owner.isTeam && settings.validator"
+            :key="settings.name"
+            :to="getRoute(settings.name)"
           >
-        </nuxt-link>
-        <nuxt-link v-if="owner.isTeam && canViewAccessControl" :to="getRoute('access')">
-          <z-tab
-            :isActive="$route.name.startsWith('provider-owner-settings-access')"
-            border-active-color="vanilla-400"
-            >Access control</z-tab
-          >
-        </nuxt-link>
-        <nuxt-link v-if="owner.isTeam && autoOnboardAvailable" :to="getRoute('auto-onboard')">
-          <z-tab
-            :isActive="$route.name.startsWith('provider-owner-settings-auto-onboard')"
-            border-active-color="vanilla-400"
-            >Auto Onboard</z-tab
-          >
-        </nuxt-link>
+            <z-tab
+              class="flex items-center space-x-1"
+              :class="settings.isBeta ? 'pb-2.5' : ''"
+              :isActive="$route && $route.name && $route.name.startsWith(settings.routeName)"
+              border-active-color="vanilla-400"
+            >
+              <span>
+                {{ settings.label }}
+              </span>
+              <z-tag
+                v-if="settings.isBeta"
+                :bgColor="
+                  $route && $route.name && $route.name.startsWith(settings.routeName)
+                    ? 'ink-200'
+                    : 'ink-200 opacity-50'
+                "
+                textSize="xxs"
+                spacing="px-2 py-1"
+                class="tracking-wider font-semibold uppercase leading-none text-current"
+              >
+                Beta
+              </z-tag>
+            </z-tab>
+          </nuxt-link>
+        </template>
       </div>
     </div>
     <nuxt-child></nuxt-child>
@@ -31,7 +41,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { Context } from '@nuxt/types'
-import { ZTab } from '@deepsourcelabs/zeal'
+import { ZTab, ZTag } from '@deepsourcelabs/zeal'
 import TeamDetailMixin from '~/mixins/teamDetailMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -40,7 +50,8 @@ import { TeamMemberRoleChoices } from '~/types/types'
 
 @Component({
   components: {
-    ZTab
+    ZTab,
+    ZTag
   },
   layout: 'dashboard',
   middleware: [
@@ -82,6 +93,36 @@ export default class TeamSettings extends mixins(
     return this.$generateRoute(['settings', candidate])
   }
 
+  get settingsOptions() {
+    return [
+      {
+        name: 'billing',
+        label: 'Billing',
+        routeName: 'provider-owner-settings-billing',
+        validator: this.showBilling
+      },
+      {
+        name: 'access',
+        label: 'Access control',
+        routeName: 'provider-owner-settings-access',
+        validator: this.canViewAccessControl
+      },
+      {
+        name: 'auto-onboard',
+        label: 'Auto Onboard',
+        routeName: 'provider-owner-settings-auto-onboard',
+        validator: this.autoOnboardAvailable
+      },
+      {
+        name: 'webhooks',
+        label: 'Webhooks',
+        isBeta: true,
+        routeName: 'provider-owner-settings-webhooks',
+        validator: this.webhooksAvailable
+      }
+    ]
+  }
+
   get showBilling(): boolean {
     if (this.$config.onPrem) {
       return false
@@ -115,6 +156,13 @@ export default class TeamSettings extends mixins(
       ['gh', 'ghe'].includes(this.activeProvider) &&
       this.activeDashboardContext.type === 'team' &&
       this.$gateKeeper.team(TeamPerms.AUTO_ONBOARD_REPOSITORIES, this.teamPerms.permission)
+    )
+  }
+
+  get webhooksAvailable(): boolean {
+    return (
+      this.activeDashboardContext.type === 'team' &&
+      this.$gateKeeper.team(TeamPerms.MANAGE_WEBHOOKS, this.teamPerms.permission)
     )
   }
 

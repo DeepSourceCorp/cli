@@ -1,0 +1,25 @@
+query webhookDeliveries($webhookId: ID!, $limit: Int, $after: String) {
+  webhook(webhookId: $webhookId) {
+    id
+    deliveries(first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          id
+          eventId
+          payload
+          createdAt
+          retryCount
+          finishedIn
+          deliveryId
+          httpStatusCode
+          eventType {
+            id
+            name
+            shortcode
+          }
+        }
+      }
+    }
+  }
+}

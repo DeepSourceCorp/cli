@@ -1,0 +1,22 @@
+query webhookEventDelivery($ownerId: ID!, $deliveryId: ID!) {
+  webhookEventDelivery(ownerId: $ownerId, deliveryId: $deliveryId) {
+    id
+    eventId
+    deliveryId
+    finishedIn
+    createdAt
+    retryCount
+    httpStatusCode
+    webhook {
+      id
+      url
+    }
+    eventType {
+      id
+      name
+      shortcode
+      shortDescription
+    }
+    payload
+  }
+}

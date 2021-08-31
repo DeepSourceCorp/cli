@@ -1,0 +1,5 @@
+mutation deletewebhook($webhookId: ID!) {
+  deleteWebhook(input: { webhookId: $webhookId }) {
+    ok
+  }
+}
