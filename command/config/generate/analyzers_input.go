@@ -71,7 +71,7 @@ func (o *Options) extractRequiredAnalyzerMeta() {
 						break
 					}
 				}
-				if optionalFieldPresent == false {
+				if !optionalFieldPresent {
 					continue
 				}
 
@@ -151,7 +151,7 @@ func (o *Options) extractRequiredAnalyzerMeta() {
 				if err != nil {
 					log.Println(err)
 				}
-				if res == false {
+				if !res {
 					metaFields[i].UserInput = "false"
 				}
 			case "Enum":
