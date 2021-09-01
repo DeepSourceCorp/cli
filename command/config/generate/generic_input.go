@@ -23,7 +23,7 @@ func (o *Options) collectExcludePatterns() error {
 	}
 
 	// If yes, keep entering patterns until they input n/N
-	if response == true {
+	if response {
 		err := o.inputFilePatterns("exclude", "Select exclude pattern", helpMsg)
 		if err != nil {
 			return err
@@ -46,7 +46,7 @@ func (o *Options) collectTestPatterns() error {
 	}
 
 	// If yes, keep entering patterns until they input n/N
-	if response == true {
+	if response {
 		err := o.inputFilePatterns("test", "Select test pattern", helpMsg)
 		if err != nil {
 			return err

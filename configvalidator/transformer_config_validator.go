@@ -25,7 +25,7 @@ func (c *ConfigValidator) validateTransformersConfig(transformerData Transformer
 				break
 			}
 		}
-		if supported == false {
+		if !supported {
 			c.pushError(fmt.Sprintf("The Tranformer %s is not supported yet.", activatedTransformer.Name))
 		}
 	}

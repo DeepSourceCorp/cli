@@ -26,7 +26,7 @@ func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
 			c.pushError(fmt.Sprintf("The `enabled` property should be of boolean type. Found: %v", enabledType))
 		}
 
-		if analyzer.Enabled == true {
+		if analyzer.Enabled {
 			countEnabled++
 		}
 	}
@@ -41,7 +41,7 @@ func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
 
 		for _, supportedAnalyzer := range analyzers.AnalyzerShortcodes {
 			if analyzer.Name == supportedAnalyzer {
-				if analyzer.Enabled == true {
+				if analyzer.Enabled {
 					activatedAnalyzers[analyzer.Name] = analyzer.Meta
 				}
 				supported = true
@@ -49,7 +49,7 @@ func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
 			}
 		}
 
-		if supported == false {
+		if !supported {
 			c.pushError(fmt.Sprintf("Analyzer for \"%s\" is not supported yet.", analyzer.Name))
 		}
 

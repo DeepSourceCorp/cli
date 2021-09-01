@@ -95,10 +95,10 @@ func (o *Options) Run() error {
 
 	// Checking for all types of errors (due to viper/valid errors/no errors)
 	// and handling them
-	if result.ConfigReadError == true {
+	if result.ConfigReadError {
 		// handle printing viper error here
 		printViperError(content, result.Errors)
-	} else if result.Valid == false {
+	} else if !result.Valid {
 		// handle printing other errors here
 		printConfigErrors(result.Errors)
 	} else {
