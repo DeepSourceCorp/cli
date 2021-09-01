@@ -165,8 +165,7 @@ export default {
   // TODO: Remove this configuration
   // https://github.com/nuxt-community/tailwindcss-module/issues/79#issuecomment-609693459
   build: {
-    publicPath:
-      process.env.NODE_ENV === 'prod' ? process.env.CDN_URL : '/_nuxt/',
+    publicPath: process.env.NODE_ENV === 'prod' ? process.env.CDN_URL : '/_nuxt/',
     parallel: true,
     cache: true,
     sourceMap: true,

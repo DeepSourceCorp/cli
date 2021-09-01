@@ -6,6 +6,7 @@ steps:
       - --destination=us.gcr.io/deepsource-production/bifrost-enterprise:$TAG_NAME
       - --dockerfile=Dockerfile
       - --build-arg=ZEAL_SECRET
+      - --build-arg=ON_PREM=true
       - --cache=false
       - --snapshotMode=redo
     secretEnv:
