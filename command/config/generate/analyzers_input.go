@@ -7,6 +7,8 @@ import (
 	"github.com/deepsourcelabs/cli/utils"
 )
 
+// Struct to hold the data regarding the compulsary meta fields as required by analyzers
+// Also, the userinput for that field
 type AnalyzerMetadata struct {
 	FieldName   string
 	Type        string
@@ -41,9 +43,11 @@ func (o *Options) collectAnalyzerInput() error {
 	return nil
 }
 
-func isContains(arr []string, value string) bool {
-	for _, v := range arr {
-		if value == v {
+// Checks if the field is present in the array containing list of `optional_required`
+// analyzer meta fields
+func isContains(requiredFieldsList []string, field string) bool {
+	for _, v := range requiredFieldsList {
+		if field == v {
 			return true
 		}
 	}
@@ -110,6 +114,9 @@ func extractMetaProperties(analyzerMetaProperties map[string]interface{}, option
 	return requiredPropertiesData
 }
 
+// Having got the data regarding the compulsary meta fields whose input is needed from the user,
+// this uses the `survey` prompt API to gather user input and store in `Options` struct
+// `Options` struct is later used for config generation
 func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMetadata) error {
 	var err error
 	// Iterate over the map and fetch the input for the fields from the user
@@ -143,6 +150,9 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 	return nil
 }
 
+// The parent function to parse the API response of meta schema, filter out the `optional_required` fields
+// and then gather information about these fields and finally collect user input
+// Does all this with the code present in the function + the helper functions above
 func (o *Options) extractRequiredAnalyzerMetaFields() error {
 	var optionalFields []string
 	var requiredFieldsData []AnalyzerMetadata
