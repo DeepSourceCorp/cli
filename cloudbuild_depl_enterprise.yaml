@@ -1,0 +1,20 @@
+timeout: 30m0s
+
+steps:
+  - name: 'gcr.io/kaniko-project/executor:v1.5.0'
+    args:
+      - --destination=us.gcr.io/deepsource-production/bifrost-enterprise:$TAG_NAME
+      - --dockerfile=Dockerfile
+      - --build-arg=ZEAL_SECRET
+      - --cache=false
+      - --snapshotMode=redo
+    secretEnv:
+      - 'ZEAL_SECRET'
+
+availableSecrets:
+  secretManager:
+    - versionName: projects/66550703913/secrets/bifrost/versions/1
+      env: 'ZEAL_SECRET'
+
+options:
+  machineType: 'N1_HIGHCPU_8'

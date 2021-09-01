@@ -37,17 +37,7 @@ export default {
     githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
     enableSaml: Boolean(process.env.ENABLE_SAML),
     allowSocialAuth: process.env.ON_PREM ? process.env.ALLOW_SOCIAL_AUTH : true,
-    supportEmail: process.env.ON_PREM
-      ? 'enterprise-support@deepsource.io'
-      : 'support@deepsource.io',
-    sentry: {
-      clientConfig: {
-        disabled: process.env.ON_PREM ? true : false
-      },
-      serverConfig: {
-        disabled: process.env.ON_PREM ? true : false
-      }
-    }
+    supportEmail: process.env.ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io'
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -175,7 +165,8 @@ export default {
   // TODO: Remove this configuration
   // https://github.com/nuxt-community/tailwindcss-module/issues/79#issuecomment-609693459
   build: {
-    publicPath: (process.env.NODE_ENV == 'prod') ? process.env.CDN_URL : '/_nuxt/',
+    publicPath:
+      process.env.NODE_ENV === 'prod' ? process.env.CDN_URL : '/_nuxt/',
     parallel: true,
     cache: true,
     sourceMap: true,
