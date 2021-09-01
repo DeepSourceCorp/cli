@@ -92,7 +92,7 @@ func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
 		} else {
 			finalErrString := fmt.Sprintf("Errors found while validating meta of %s analyzer", analyzer)
 			for _, err := range result.Errors() {
-				errString := fmt.Sprintf("%s", err)
+				errString := err.String()
 				finalErrString = finalErrString + errString
 			}
 			c.pushError(finalErrString)
