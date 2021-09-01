@@ -117,7 +117,8 @@ export default {
     'cookie-universal-nuxt',
     '@nuxt/content',
     'portal-vue/nuxt',
-    ...(process.env.ON_PREM ? [] : ['@nuxtjs/sentry', 'nuxt-stripe-module'])
+    '@nuxtjs/sentry',
+    ...(process.env.ON_PREM ? [] : ['nuxt-stripe-module'])
   ],
 
   serverMiddleware: [
