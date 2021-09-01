@@ -16,6 +16,7 @@ function parseArray(arr: string[], indent = 1) {
   }
 
   const candidates = arr
+    .filter(Boolean)
     .map((val: string): string => {
       return JSON.stringify(val)
     })
@@ -33,11 +34,15 @@ export default class TomlGeneratorMixin extends Vue {
     const toml = [`version = ${JSON.stringify(config.version)}`]
 
     if (testPatterns && testPatterns.length) {
-      toml.push(this.testPatternsTemplate(testPatterns))
+      if (testPatterns.filter(Boolean).length) {
+        toml.push(this.testPatternsTemplate(testPatterns))
+      }
     }
 
     if (excludePatterns && excludePatterns.length) {
-      toml.push(this.excludePatternsTemplate(excludePatterns))
+      if (excludePatterns.filter(Boolean).length) {
+        toml.push(this.excludePatternsTemplate(excludePatterns))
+      }
     }
 
     if (config.analyzers && config.analyzers.length) {

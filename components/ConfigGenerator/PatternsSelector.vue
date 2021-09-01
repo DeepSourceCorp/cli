@@ -95,8 +95,8 @@ export default class PatternSelector extends Vue {
   @Watch('excludePatternsModel')
   updatePatterns(): void {
     this.$emit('updatePatterns', {
-      test_patterns: this.testPatternsModel.split('\n').filter((pattern) => pattern),
-      exclude_patterns: this.excludePatternsModel.split('\n').filter((pattern) => pattern)
+      test_patterns: this.testPatternsModel.split('\n'),
+      exclude_patterns: this.excludePatternsModel.split('\n')
     })
   }
 }
