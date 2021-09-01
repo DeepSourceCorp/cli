@@ -49,18 +49,24 @@
                 :iconLeft="repoVCSIcon"
               ></z-tag>
             </a>
+
+            <z-label v-if="repository.errorCode" class="inline-block select-none" state="error">
+              Error
+            </z-label>
             <z-label
-              v-if="repository.isActivated === true"
+              v-else-if="repository.isActivated === true"
               class="inline-block select-none"
               state="success"
-              >Active</z-label
             >
+              Active
+            </z-label>
             <z-label
               v-else-if="repository.isActivated === false"
               class="inline-block select-none"
               state="warning"
-              >Inactive</z-label
             >
+              Inactive
+            </z-label>
           </h2>
         </div>
       </div>

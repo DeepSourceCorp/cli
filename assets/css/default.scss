@@ -75,3 +75,15 @@ input[type='number']::-webkit-inner-spin-button {
   height: calc(100vh - 16rem);
   /* screenHeight - yPadding - twoButtons*/
 }
+
+.error-state {
+  @apply text-sm;
+
+  code {
+    @apply font-semibold text-sm;
+  }
+
+  a {
+    @apply underline;
+  }
+}

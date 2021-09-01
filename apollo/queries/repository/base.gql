@@ -5,6 +5,8 @@ query BaseRepoQuery($provider: VCSProviderChoices!, $owner: String!, $name: Stri
     isPrivate
     isStarred
     errorCode
+    renderedErrorMessage
+    fullName
     defaultBranchName
     vcsProvider
     vcsDefaultBranchUrl

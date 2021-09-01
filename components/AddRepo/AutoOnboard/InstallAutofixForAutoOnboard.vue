@@ -21,7 +21,7 @@
         class="w-48 modal-primary-action"
         buttonType="primary"
         size="small"
-        @click="openAutofixInstallationUrl(close)"
+        @click="openAutofixInstallationUrl"
         >Install Autofix app</z-button
       >
     </div>
@@ -32,6 +32,7 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 @Component({
   name: 'InstallAutofixModal',
@@ -42,37 +43,48 @@ import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 })
 export default class InstallAutofixForAutoOnboard extends mixins(
   InstallAutofixMixin,
-  OwnerDetailMixin
+  OwnerDetailMixin,
+  ActiveUserMixin
 ) {
-  openAutofixInstallationUrl(close?: () => void): void {
+  async openAutofixInstallationUrl(): Promise<void> {
     // Assign the close recieved from the modal
-    this.close = close ? close : null
     this.installing = true
 
     // fetch installation url from repository
-    const installationUrl = this.owner.autofixInstallationUrl
+    let installationUrl = this.owner?.autofixInstallationUrl
+    if (!installationUrl) {
+      await this.fetchOwnerDetails({
+        login: this.activeOwner,
+        provider: this.activeProvider,
+        refetch: true
+      })
 
-    // open the window
-    this.installWindow = window.open(installationUrl?.toString(), '', 'resizable=no,width=1000,height=600')
+      installationUrl = this.owner?.autofixInstallationUrl
+    }
 
-    this.popUpTimer = setInterval(() => {
-      if (this.installWindow?.closed) {
-        this.failTimeout = setTimeout(this.fail, 5000)
-        clearInterval(this.popUpTimer)
-      }
-    }, 1000)
+    if (installationUrl) {
+      // open the window
+      this.installWindow = window.open(installationUrl, '', 'resizable=no,width=1000,height=600')
 
-    this.pollTimer = setInterval(async () => {
-      await this.refetchRepo()
-      if (this.repository.isAutofixEnabled) {
-        clearInterval(this.pollTimer)
+      this.popUpTimer = setInterval(() => {
+        if (this.installWindow?.closed) {
+          this.failTimeout = setTimeout(this.fail, 5000)
+          clearInterval(this.popUpTimer)
+        }
+      }, 1000)
+
+      this.pollTimer = setInterval(async () => {
+        await this.refetchRepo()
+        if (this.repository.isAutofixEnabled) {
+          clearInterval(this.pollTimer)
+          await this.success()
+        }
+      }, 1200)
+
+      this.$socket.$on('autofix-installation-complete', async () => {
         await this.success()
-      }
-    }, 1200)
-
-    this.$socket.$on('autofix-installation-complete', async () => {
-      await this.success()
-    })
+      })
+    }
   }
 
   async finish(): Promise<void> {

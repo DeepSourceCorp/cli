@@ -5,6 +5,9 @@ query RepoDetails($provider: VCSProviderChoices!, $owner: String!, $name: String
     isPrivate
     isStarred
     canBeActivated
+    fullName
+    errorCode
+    renderedErrorMessage
     userPermissionMeta
     latestAnalysisRun {
       id

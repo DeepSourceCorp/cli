@@ -26,6 +26,16 @@
               OR it's a page like settings or history which is always visible
               OR if the page is loading
           -->
+        <div v-if="repository.name === $route.params.repo && repository.errorCode && !loading">
+          <div
+            class="bg-cherry bg-opacity-10 p-4 flex items-center space-x-2 border-b border-cherry border-opacity-20"
+          >
+            <p
+              class="max-w-4xl text-cherry error-state"
+              v-html="repository.renderedErrorMessage"
+            ></p>
+          </div>
+        </div>
         <Nuxt class="z-20" v-if="isAnalyzed || allowedOnBroken || loading" />
 
         <!-- Check if the repository has been analyzed or no -->
@@ -69,6 +79,7 @@
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { RepoHeader, MobileNav, LoggedOutSidebar } from '@/components/Layout'
 import { Sidebar } from '@/components/Layout/Sidebar'
+import { ZLabel } from '@deepsourcelabs/zeal'
 import AuthMixin from '@/mixins/authMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import FullStoryMixin from '~/mixins/fullStoryMixin'
@@ -92,7 +103,8 @@ import { RunStatus } from '~/types/types'
     RepoInactive,
     RepoTimeout,
     RepoWaiting,
-    MobileNav
+    MobileNav,
+    ZLabel
   },
   middleware: ['hidePrivateRepo'],
   head: {
