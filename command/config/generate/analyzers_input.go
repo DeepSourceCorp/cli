@@ -8,7 +8,7 @@ import (
 )
 
 type AnalyzerMetadata struct {
-	Field       string
+	FieldName   string
 	Type        string
 	Title       string
 	Description string
@@ -103,7 +103,7 @@ func extractMetaProperties(analyzerMetaProperties map[string]interface{}, option
 				}
 			}
 		}
-		analyzerPropertyData.Field = key
+		analyzerPropertyData.FieldName = key
 
 		requiredPropertiesData = append(requiredPropertiesData, analyzerPropertyData)
 	}

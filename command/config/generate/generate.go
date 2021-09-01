@@ -95,7 +95,7 @@ func (o *Options) generateDeepSourceConfig() error {
 		metaMap := make(map[string]interface{})
 		if o.AnalyzerMetaMap[analyzer] != nil {
 			for _, meta := range o.AnalyzerMetaMap[analyzer] {
-				metaMap[meta.Field] = meta.UserInput
+				metaMap[meta.FieldName] = meta.UserInput
 			}
 		}
 
