@@ -34,12 +34,26 @@
       <div class="flex justify-around items-center">
         <!-- introduced issues -->
         <div class="flex flex-col space-y-1 items-center">
-          <div class="text-2xl font-medium text-cherry">{{ issuesRaisedCount }}</div>
+          <div
+            class="text-2xl font-medium text-cherry"
+            v-tooltip="
+              `${issuesRaisedCount > 1000 ? formatIntl(issuesRaisedCount) : ''} issues introduced`
+            "
+          >
+            {{ shortenNumber(issuesRaisedCount) }}
+          </div>
           <div class="text-xs text-vanilla-400">introduced</div>
         </div>
         <!-- resolved issues -->
         <div class="flex flex-col space-y-1 items-center">
-          <div class="text-2xl font-medium text-vanilla-400">{{ issuesResolvedCount }}</div>
+          <div
+            class="text-2xl font-medium text-vanilla-400"
+            v-tooltip="
+              `${issuesResolvedCount > 1000 ? formatIntl(issuesResolvedCount) : ''} issues resolved`
+            "
+          >
+            {{ shortenNumber(issuesResolvedCount) }}
+          </div>
           <div class="text-xs text-vanilla-400">resolved</div>
         </div>
       </div>
@@ -51,6 +65,8 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import { RunStatus } from '~/types/types'
+import { shortenLargeNumber, formatIntl } from '~/utils/string'
+
 @Component({
   components: {
     ZIcon
@@ -80,6 +96,9 @@ export default class AnalyzerHeader extends Vue {
 
   @Prop({ default: 0 })
   alertingMetricsCount: number
+
+  public shortenNumber = shortenLargeNumber
+  public formatIntl = formatIntl
 
   get alertingMetricsMessage(): string {
     if (this.alertingMetricsCount === 1) {

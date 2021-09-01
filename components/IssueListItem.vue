@@ -56,15 +56,20 @@
           :class="{ 'py-4': !showTrend, 'py-2': showTrend }"
         >
           <!-- Count -->
-          <div class="heading3 text-vanilla-100">{{ occurrenceCount }}</div>
+          <div
+            class="heading3 text-vanilla-100"
+            v-tooltip="occurrenceCount > 1000 ? `${formatIntl(occurrenceCount)} occurrences` : ''"
+          >
+            {{ shortenNumber(occurrenceCount) }}
+          </div>
           <!-- Info -->
           <div v-if="showTrend" class="hidden text-vanilla-400 sm:block text-center px-1">
             <span
               :class="{
-                'text-cherry': !this.isTrendPositive,
-                'text-juniper': this.isTrendPositive
+                'text-cherry': !isTrendPositive,
+                'text-juniper': isTrendPositive
               }"
-              >{{ `${this.isTrendPositive ? '-' : '+'}${trendValue}` }}</span
+              >{{ `${isTrendPositive ? '-' : '+'}${trendValue}` }}</span
             >
             since last week
           </div>
@@ -95,6 +100,7 @@ import { ZIcon } from '@deepsourcelabs/zeal'
 import IssueType from '@/components/Repository/IssueType.vue'
 import { formatDate } from '~/utils/date'
 import { BaseCard } from '@/components/History'
+import { formatIntl, shortenLargeNumber } from '~/utils/string'
 
 const PERCENTAGE = 100
 
@@ -108,40 +114,60 @@ const PERCENTAGE = 100
 export default class IssueListItem extends Vue {
   @Prop({ default: '' })
   id!: string
+
   @Prop({ default: '' })
   title!: string
+
   @Prop({ default: '' })
   shortcode!: string
+
   @Prop({ default: '' })
   issueType!: string
+
   @Prop({ default: '' })
   modifiedAt!: string
+
   @Prop({ default: '' })
   createdAt!: string
+
   @Prop({ default: '' })
   seenIn!: string
+
   @Prop({ default: '' })
-  occurrenceCount!: string
+  occurrenceCount!: number
+
   @Prop()
   autofixAvailable!: boolean
+
   @Prop({ default: '' })
   hideProgress!: boolean
   @Prop({ default: true })
   showComparisonStat!: boolean
+
   @Prop({ default: '' })
   centerContent!: boolean
+
   @Prop()
-  pastValue!: string
+  pastValue!: number
+
   @Prop()
   raisedInFiles!: Array<string>
+
   @Prop()
   issueLink!: string
+
   @Prop({ default: false })
   removeDefaultStyle!: boolean
+
   @Prop({ default: true })
   showAutofixButton!: boolean
+
   @Prop({ default: false })
   disableAutofixButton!: boolean
+
+  public formatDate = formatDate
+  public shortenNumber = shortenLargeNumber
+  public formatIntl = formatIntl
 
   public handleClick(): void {
     this.$emit('autofix', {
@@ -198,7 +224,5 @@ export default class IssueListItem extends Vue {
      */
     return `${dayjs(this.createdAt).fromNow(true)} old`
   }
-
-  private formatDate = formatDate
 }
 </script>
