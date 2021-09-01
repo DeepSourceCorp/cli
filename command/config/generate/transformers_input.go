@@ -1,8 +1,6 @@
 package generate
 
 import (
-	"fmt"
-
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/deepsourcelabs/cli/utils"
 )
@@ -11,7 +9,7 @@ import (
 // Transformers Input Prompt
 // ==========
 func (o *Options) collectTransformersInput() error {
-	transformerQues := fmt.Sprintf("Would you like to activate any Transformers for any languages?")
+	transformerQues := "Would you like to activate any Transformers for any languages?"
 
 	// Multi-select prompt for selecting transformers
 	transformerPrompt := &survey.MultiSelect{
