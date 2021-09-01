@@ -117,6 +117,9 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
     function ({ redirect, route }: Context): void {
       if (route.name === 'provider-owner-repo-issue-issueId') {
         const { provider, owner, repo, issueId } = route.params
+        if (!issueId) {
+          return redirect(`/${provider}/${owner}/${repo}/issues`)
+        }
         redirect(`/${provider}/${owner}/${repo}/issue/${issueId}/occurrences`)
       }
     }
