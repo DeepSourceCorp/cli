@@ -53,7 +53,7 @@ func isContains(arr []string, value string) bool {
 // Iterates over all the properties analyzer supports and
 // extract data needed by only `optional_required` fields
 // This data is then, used to get input from user
-func extractMetaProperties(analyzerMetaProperties map[string]interface{}, optionalFields []string, analyzer string) []AnalyzerMetadata {
+func extractMetaProperties(analyzerMetaProperties map[string]interface{}, optionalFields []string) []AnalyzerMetadata {
 	var requiredPropertiesData []AnalyzerMetadata
 	var analyzerPropertyData AnalyzerMetadata
 
@@ -190,7 +190,7 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 				// analyzer's metaschema
 				analyzerMetaProperties := meta["properties"].(map[string]interface{})
 
-				requiredFieldsData = extractMetaProperties(analyzerMetaProperties, optionalFields, activatedAnalyzer)
+				requiredFieldsData = extractMetaProperties(analyzerMetaProperties, optionalFields)
 				combinedRequiredFieldsData[activatedAnalyzer] = requiredFieldsData
 			}
 		}
