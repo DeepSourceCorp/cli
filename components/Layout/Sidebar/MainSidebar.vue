@@ -278,6 +278,10 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   }
 
   get allowedBilling(): boolean {
+    if (this.$config.onPrem) {
+      return false
+    }
+
     if ('role' in this.activeDashboardContext) {
       const role = this.activeDashboardContext.role as TeamMemberRoleChoices
       return this.$gateKeeper.team(
