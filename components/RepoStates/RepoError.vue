@@ -1,10 +1,14 @@
 <template>
   <base-state title="Analysis has been halted">
     <template slot="hero">
-      <div class="text-4xl text-center mb-4">😵</div>
+      <img
+        class="mx-auto mb-4"
+        :src="require('~/assets/images/ui-states/repo/error.svg')"
+        alt="Repo Error"
+      />
     </template>
     <p>
-      We have been unable to analyze the code due to issues with analysis configuration.<br />These
+      We have been unable to analyze the code due to issues with analysis configuration. These
       issues must be resolved before we can continue.
     </p>
   </base-state>

@@ -1,7 +1,11 @@
 <template>
   <base-state title="Analysis timed out">
     <template slot="hero">
-      <div class="text-4xl text-center mb-4">😴</div>
+      <img
+        class="mx-auto mb-4"
+        :src="require('~/assets/images/ui-states/repo/timeout.svg')"
+        alt="Repo Timeout"
+      />
     </template>
     <div class="max-w-xl">
       <p>

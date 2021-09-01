@@ -1,53 +1,39 @@
 <template>
   <base-state :title="noticeTitle">
     <template slot="hero">
-      <div class="text-4xl text-center mb-4 leading-none">⚙️</div>
+      <img
+        class="mx-auto mb-4"
+        :src="require('~/assets/images/ui-states/repo/inactive.svg')"
+        alt="Repo Inactive"
+      />
     </template>
+    <p>
+      This repository is not activated, generate a new config or activate the repository directly if
+      a <code class="text-vanilla-200 font-medium">.deepsource.toml</code> already exists.
+    </p>
     <div
       v-if="(repository.canBeActivated || repository.isActivated) && canActivateRepo"
-      class="
-        grid
-        gris-cols-1
-        sm:grid-cols-2
-        max-w-4xl
-        mt-5
-        divide-y
-        sm:divide-y-0 sm:divide-x
-        divide-ink-300
-      "
+      class="flex items-center space-x-5 justify-center"
     >
-      <div class="px-5">
-        <h3 class="text-lg font-bold text-vanilla-200">Need help with the config?</h3>
-        <p class="mt-2">
-          Use the generator to easily customize and create a
-          <strong class="text-vanilla-200">.deepsource.toml</strong> file for this repository.
-        </p>
-        <nuxt-link :to="$generateRoute(['generate-config'])">
-          <z-button icon="settings" size="small" button-type="secondary" class="mt-4"
-            >Generate Config</z-button
-          >
-        </nuxt-link>
-      </div>
-      <div class="px-5">
-        <h3 class="text-lg font-bold text-vanilla-200">Already added the config?</h3>
-        <p class="mt-2">
-          Ensure that the configuration is added to the repository's root folder of the
-          <strong class="text-vanilla-200">{{ defaultBranchName }}</strong> branch.
-        </p>
-        <z-button
-          v-if="!activateLoading"
-          @click="activateAnalysis"
-          icon="check-circle"
-          size="small"
-          class="mt-4"
+      <nuxt-link :to="$generateRoute(['generate-config'])">
+        <z-button icon="settings" size="small" button-type="secondary" class="mt-4"
+          >Generate Config</z-button
         >
-          Activate Repository
-        </z-button>
-        <z-button v-else size="small" class="mt-4">
-          <z-icon class="animate-spin" icon="spin-loader" color="ink"></z-icon>
-          <span>Activating Repository</span>
-        </z-button>
-      </div>
+      </nuxt-link>
+
+      <z-button
+        v-if="!activateLoading"
+        @click="activateAnalysis"
+        icon="check-circle"
+        size="small"
+        class="mt-4"
+      >
+        Activate Repository
+      </z-button>
+      <z-button v-else size="small" class="mt-4">
+        <z-icon class="animate-spin" icon="spin-loader" color="ink"></z-icon>
+        <span>Activating Repository</span>
+      </z-button>
     </div>
     <div v-else-if="canViewerUpgrade">
       <p class="mt-2 max-w-xl">

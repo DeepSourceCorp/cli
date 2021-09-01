@@ -1,7 +1,11 @@
 <template>
   <base-state title="No code found in the repository">
     <template slot="hero">
-      <div class="text-4xl text-center mb-4">📭</div>
+      <img
+        class="mx-auto mb-4"
+        :src="require('~/assets/images/ui-states/repo/empty.svg')"
+        alt="Repo Empty"
+      />
     </template>
     This repository seems to be empty. Please add code and check back later.
   </base-state>
