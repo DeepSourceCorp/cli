@@ -2,7 +2,6 @@ package generate
 
 import (
 	"encoding/json"
-	"log"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/deepsourcelabs/cli/utils"
@@ -34,7 +33,10 @@ func (o *Options) collectAnalyzerInput() error {
 		return err
 	}
 
-	o.extractRequiredAnalyzerMeta()
+	err = o.extractRequiredAnalyzerMetaFields()
+	if err != nil {
+		return err
+	}
 
 	return nil
 }
@@ -48,10 +50,103 @@ func isContains(arr []string, value string) bool {
 	return false
 }
 
-func (o *Options) extractRequiredAnalyzerMeta() {
-	var optionalFields []string
+// Iterates over all the properties analyzer supports and
+// extract data needed by only `optional_required` fields
+// This data is then, used to get input from user
+func extractMetaProperties(analyzerMetaProperties map[string]interface{}, optionalFields []string, analyzer string) []AnalyzerMetadata {
+	var requiredPropertiesData []AnalyzerMetadata
+	var analyzerPropertyData AnalyzerMetadata
 
-	analyzerRequiredFieds := make(map[string][]AnalyzerMetadata)
+	for key, value := range analyzerMetaProperties {
+		// Check if the field is `optional_required`
+		if !isContains(optionalFields, key) {
+			continue
+		}
+		// If yes, parse its properties and append the data to a map
+		// with the layout : map[analyzer]:[]OptionalFieldsProperties
+		propertiesData := value.(map[string]interface{})
+
+		// Setting default input type of the field to be String (single line input)
+		analyzerPropertyData.InputType = "String"
+
+		// Iterating over properties/fields and extracting necessary data of optional_required fields.
+		// Like title, description, options. Help in generating prompt for user input
+		for k, v := range propertiesData {
+			switch k {
+			case "type":
+				analyzerPropertyData.Type = v.(string)
+				if v.(string) == "boolean" {
+					analyzerPropertyData.InputType = "Boolean"
+				}
+			case "title":
+				analyzerPropertyData.Title = v.(string)
+			case "description":
+				analyzerPropertyData.Description = v.(string)
+			case "enum":
+				enumValues := v.([]interface{})
+				for _, enumValue := range enumValues {
+					analyzerPropertyData.Options = append(analyzerPropertyData.Options, enumValue.(string))
+				}
+				analyzerPropertyData.InputType = "Enum"
+			case "items":
+				analyzerPropertyData.InputType = "Enum"
+				itemsValues := v.(map[string]interface{})
+				for key, itemValue := range itemsValues {
+					if key != "enum" {
+						analyzerPropertyData.InputType = "String"
+						break
+					}
+					enumValues := itemValue.([]interface{})
+					for _, enumValue := range enumValues {
+						analyzerPropertyData.Options = append(analyzerPropertyData.Options, enumValue.(string))
+					}
+				}
+			}
+		}
+		analyzerPropertyData.Field = key
+
+		requiredPropertiesData = append(requiredPropertiesData, analyzerPropertyData)
+	}
+	return requiredPropertiesData
+}
+
+func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMetadata) error {
+	var err error
+	// Iterate over the map and fetch the input for the fields from the user
+	for analyzer, metaFields := range requiredFieldsData {
+		for i := 0; i < len(metaFields); i++ {
+			switch metaFields[i].InputType {
+			case "Boolean":
+				metaFields[i].UserInput = "true"
+				res, err := utils.ConfirmFromUser(metaFields[i].Title, metaFields[i].Description)
+				if err != nil {
+					return err
+				}
+				if !res {
+					metaFields[i].UserInput = "false"
+				}
+			case "Enum":
+				metaFields[i].UserInput, err = utils.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
+				if err != nil {
+					return err
+				}
+			default:
+				metaFields[i].UserInput, err = utils.GetSingleLineInput(metaFields[i].Title, metaFields[i].Description)
+				if err != nil {
+					return err
+				}
+			}
+		}
+		requiredFieldsData[analyzer] = metaFields
+	}
+	o.AnalyzerMetaMap = requiredFieldsData
+	return nil
+}
+
+func (o *Options) extractRequiredAnalyzerMetaFields() error {
+	var optionalFields []string
+	var requiredFieldsData []AnalyzerMetadata
+	var combinedRequiredFieldsData = make(map[string][]AnalyzerMetadata)
 
 	// Extract `optional_required` fields of analyzer meta of selected analyzers
 	for _, activatedAnalyzer := range o.ActivatedAnalyzers {
@@ -63,110 +158,42 @@ func (o *Options) extractRequiredAnalyzerMeta() {
 				// Parse the JSON metaschema
 				var meta map[string]interface{}
 				json.Unmarshal([]byte(analyzerMeta), &meta)
-				optionalFieldPresent := false
+				optionalRequiredFieldPresent := false
 
+				// Check if the meta contains the `optional_required` field
 				for key := range meta {
 					if key == "optional_required" {
-						optionalFieldPresent = true
+						optionalRequiredFieldPresent = true
 						break
 					}
 				}
-				if !optionalFieldPresent {
+				// If not present, move to check for next analyzer
+				// by moving to next iteration
+				if !optionalRequiredFieldPresent {
 					continue
 				}
 
-				// Filter out `optional_required` fields in a string array
+				// Filter out `optional_required` fields
 				optionalRequiredFields := meta["optional_required"].([]interface{})
+				// if no optional_required field is present, move to checking for next
+				// analyzer
 				if len(optionalRequiredFields) == 0 {
 					continue
 				}
 
+				// Creating a list of optional_required fields of the analyzer
 				for _, value := range optionalRequiredFields {
 					optionalFields = append(optionalFields, value.(string))
 				}
 
-				// Extract the list of `fields`/`properties` analyzer has in the meta
+				// Extract the list of all supported `fields`/`properties` present in
+				// analyzer's metaschema
 				analyzerMetaProperties := meta["properties"].(map[string]interface{})
 
-				// Iterate over all the properties analyzer supports and
-				// extract data needed by only `optional_required` fields
-				count := 0
-				for key, value := range analyzerMetaProperties {
-					// Check if the field is `optional_required`
-					if !isContains(optionalFields, key) {
-						continue
-					}
-					// If yes, parse its properties and append the data to a map
-					// with the layout : map[analyzer]:[]OptionalFieldsProperties
-					propertiesData := value.(map[string]interface{})
-					analyzerFieldsData := make([]AnalyzerMetadata, len(propertiesData))
-					analyzerFieldsData[count].InputType = "String"
-
-					for k, v := range propertiesData {
-						switch k {
-						case "type":
-							analyzerFieldsData[count].Type = v.(string)
-							if v.(string) == "boolean" {
-								analyzerFieldsData[count].InputType = "Boolean"
-							}
-						case "title":
-							analyzerFieldsData[count].Title = v.(string)
-						case "description":
-							analyzerFieldsData[count].Description = v.(string)
-						case "enum":
-							enumValues := v.([]interface{})
-							for _, enumValue := range enumValues {
-								analyzerFieldsData[count].Options = append(analyzerFieldsData[count].Options, enumValue.(string))
-							}
-							analyzerFieldsData[count].InputType = "Enum"
-						case "items":
-							itemsValues := v.(map[string]interface{})
-							for _, itemValue := range itemsValues {
-								enumValues := itemValue.([]interface{})
-								for _, enumValue := range enumValues {
-									analyzerFieldsData[count].Options = append(analyzerFieldsData[count].Options, enumValue.(string))
-								}
-							}
-							analyzerFieldsData[count].InputType = "Enum"
-						}
-					}
-					analyzerFieldsData[count].Field = key
-					analyzerRequiredFieds[activatedAnalyzer] = append(analyzerRequiredFieds[activatedAnalyzer], analyzerFieldsData[count])
-					count++
-				}
+				requiredFieldsData = extractMetaProperties(analyzerMetaProperties, optionalFields, activatedAnalyzer)
+				combinedRequiredFieldsData[activatedAnalyzer] = requiredFieldsData
 			}
 		}
 	}
-
-	var err error
-	// Iterate over the map and fetch the input for the fields from the user
-	for analyzer, metaFields := range analyzerRequiredFieds {
-
-		for i := 0; i < len(metaFields); i++ {
-
-			switch metaFields[i].InputType {
-			case "Boolean":
-				metaFields[i].UserInput = "true"
-				res, err := utils.ConfirmFromUser(metaFields[i].Title, metaFields[i].Description)
-				if err != nil {
-					log.Println(err)
-				}
-				if !res {
-					metaFields[i].UserInput = "false"
-				}
-			case "Enum":
-				metaFields[i].UserInput, err = utils.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
-				if err != nil {
-					log.Println(err)
-				}
-			default:
-				metaFields[i].UserInput, err = utils.GetSingleLineInput(metaFields[i].Title, metaFields[i].Description)
-				if err != nil {
-					log.Println(err)
-				}
-			}
-		}
-		analyzerRequiredFieds[analyzer] = metaFields
-	}
-	o.AnalyzerMetaMap = analyzerRequiredFieds
+	return o.inputAnalyzerMeta(combinedRequiredFieldsData)
 }

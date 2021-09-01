@@ -91,6 +91,7 @@ func (o *Options) generateDeepSourceConfig() error {
 
 	// Copying activated analyzers from Options struct to DSConfig based "config" struct
 	for _, analyzer := range o.ActivatedAnalyzers {
+		// Configuring the analyzer meta data
 		metaMap := make(map[string]interface{})
 		if o.AnalyzerMetaMap[analyzer] != nil {
 			for _, meta := range o.AnalyzerMetaMap[analyzer] {
@@ -101,11 +102,11 @@ func (o *Options) generateDeepSourceConfig() error {
 		activatedAnalyzerData := Analyzer{
 			Name:    utils.AnaData.AnalyzersMap[analyzer],
 			Enabled: true,
-			Meta:    metaMap,
 		}
-
+		if len(metaMap) != 0 {
+			activatedAnalyzerData.Meta = metaMap
+		}
 		config.Analyzers = append(config.Analyzers, activatedAnalyzerData)
-
 	}
 
 	// Copying activated transformers from Options struct to DSConfig based "config" struct
