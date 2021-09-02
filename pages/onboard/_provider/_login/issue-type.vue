@@ -227,6 +227,7 @@ const ISSUE_TYPES: Record<string, Issue> = {
     ZCheckbox,
     ZCard
   },
+  middleware: ['restrictOnboarding'],
   meta: {
     auth: {
       strict: true

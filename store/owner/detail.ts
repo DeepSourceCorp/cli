@@ -51,15 +51,20 @@ export type OwnerDetailModuleActionContext = ActionContext<OwnerDetailModuleStat
 // Getters ------------------------------------------
 
 export enum OwnerDetailGetters {
+  CAN_ONBOARD = 'canOnboard',
   ISSUE_PREFERENCES = 'issuePreferences'
 }
 
 // Interface to set type annotations for issue preferences getter
 interface OwnerDetailModuleGetters extends GetterTree<OwnerDetailModuleState, RootState> {
+  [OwnerDetailGetters.CAN_ONBOARD]: (state: OwnerDetailModuleState) => boolean
   [OwnerDetailGetters.ISSUE_PREFERENCES]: (state: OwnerDetailModuleState) => Array<IssuePreferences>
 }
 
 export const getters: OwnerDetailModuleGetters = {
+  [OwnerDetailGetters.CAN_ONBOARD]: (state): boolean => {
+    return Boolean(state.owner.canOnboard)
+  },
   [OwnerDetailGetters.ISSUE_PREFERENCES]: (state) => {
     const issuePreferences: Array<IssuePreferences> = []
     state.owner.ownerSetting?.issueTypeSettings?.forEach((issueConfig) => {

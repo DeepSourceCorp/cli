@@ -8,6 +8,7 @@ query($login: String!, $provider: VCSProviderChoices!) {
     isAutofixEnabled
     isAutoonboardAllowed
     hasPremiumPlan
+    canOnboard
     team {
       id
     }
