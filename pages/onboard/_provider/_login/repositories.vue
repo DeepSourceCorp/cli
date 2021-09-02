@@ -199,7 +199,6 @@ const analyzerListStore = namespace('analyzer/list')
     AnalyzerTitleCard,
     AnalyzerCard
   },
-  middleware: ['restrictOnboarding'],
   meta: {
     auth: {
       strict: true
