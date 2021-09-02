@@ -3,6 +3,7 @@ import { RootState } from '~/store'
 
 import RepositoryDetailGQLQuery from '~/apollo/queries/repository/detail.gql'
 import RepositoryBaseDetailGQLQuery from '~/apollo/queries/repository/base.gql'
+import RepositoryIsCommitPossible from '~/apollo/queries/repository/isCommitPossible.gql'
 import RepositoryAnalyzerGQLQuery from '~/apollo/queries/repository/availableAnalyzers.gql'
 import RepositoryPermsGQLQuery from '~/apollo/queries/repository/perms.gql'
 import RepositoryCurrentRunAnalysisQuery from '~/apollo/queries/repository/analysisRun.gql'
@@ -84,6 +85,7 @@ export interface RepoConfigInterface {
 export enum RepositoryDetailActions {
   FETCH_REPOSITORY_DETAIL = 'fetchRepositoryDetail',
   FETCH_REPOSITORY_BASE_DETAILS = 'fetchBasicRepoDetails',
+  FETCH_REPOSITORY_COMMIT_POSSIBLE = 'fetchRepositoryCommitPossible',
   FETCH_AVAILABLE_ANALYZERS = 'fetchAvailableAnalyzers',
   FETCH_REPOSITORY_PERMS = 'fetchRepositoryPerms',
   FETCH_WIDGETS = 'fetchWidgets',
@@ -381,6 +383,15 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       owner: string
       name: string
       refetch?: boolean
+    }
+  ) => Promise<void>
+  [RepositoryDetailActions.FETCH_REPOSITORY_COMMIT_POSSIBLE]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
     }
   ) => Promise<void>
   [RepositoryDetailActions.FETCH_AVAILABLE_ANALYZERS]: (
@@ -866,10 +877,8 @@ export const actions: RepositoryDetailModuleActions = {
       commit(RepositoryDetailMutations.SET_LOADING, false)
     }
   },
-  async [RepositoryDetailActions.FETCH_REPOSITORY_BASE_DETAILS](
-    { commit },
-    { provider, owner, name, refetch }
-  ) {
+  async [RepositoryDetailActions.FETCH_REPOSITORY_BASE_DETAILS]({ commit }, args) {
+    const { provider, owner, name, refetch } = args
     const response = await this.$fetchGraphqlData(
       RepositoryBaseDetailGQLQuery,
       {
@@ -878,6 +887,18 @@ export const actions: RepositoryDetailModuleActions = {
         name
       },
       refetch
+    )
+    commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+  },
+  async [RepositoryDetailActions.FETCH_REPOSITORY_COMMIT_POSSIBLE]({ commit }, args) {
+    const response = await this.$fetchGraphqlData(
+      RepositoryIsCommitPossible,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name
+      },
+      true
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
   },

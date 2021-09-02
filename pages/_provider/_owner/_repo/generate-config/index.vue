@@ -212,6 +212,7 @@ export default class GenerateConfig extends mixins(
 
   async fetch(): Promise<void> {
     await this.fetchBasicRepoDeatils({ ...this.baseRouteParams, refetch: true })
+    await this.fetchIsCommitPossible(this.baseRouteParams)
     await this.fetchRepoDetails(this.baseRouteParams)
     await this.fetchRepoPerms(this.baseRouteParams)
     // create a deep copy, this is safe enough for now

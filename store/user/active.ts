@@ -1,11 +1,14 @@
 import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { GetterTree, ActionTree, MutationTree, Store, ActionContext } from 'vuex'
-import ActiveUserDetailGQLQuery from '~/apollo/queries/user/active/detail.gql'
+
 import UpdateDefaultContextMutation from '~/apollo/mutations/user/updateDefaultContext.gql'
-import ActiveUserStarredRepos from '~/apollo/queries/user/active/starredRepos.gql'
-// import ActiveUserActivityFeed from '~/apollo/queries/user/active/recentActivity.gql'
-import ActiveUserRecommendedIssues from '~/apollo/queries/user/active/recommendedIssues.gql'
 import UpdateStarredRepos from '~/apollo/mutations/user/updateStarredRepo.gql'
+
+import ActiveUserDetailGQLQuery from '~/apollo/queries/user/active/detail.gql'
+import ActiveUserGitlabAccounts from '~/apollo/queries/user/active/userGitlabAccounts.gql'
+import ActiveUserStarredRepos from '~/apollo/queries/user/active/starredRepos.gql'
+import ActiveUserRecommendedIssues from '~/apollo/queries/user/active/recommendedIssues.gql'
+
 import { User } from '~/types/types'
 import { RootState } from '~/store'
 
@@ -93,11 +96,11 @@ export const mutations: ActiveUserModuleMutations = {
 // Actions ------------------------------------------
 export enum ActiveUserActions {
   FETCH_VIEWER_INFO = 'fetchViewerInfo',
-  UPDATE_DEFAULT_CONTEXT = 'updateDefaultContext',
   FETCH_STARRED_REPOS = 'fetchStarredRepos',
+  FETCH_GITLAB_ACCOUNTS = 'fetchGitlabAccounts',
+  FETCH_RECOMMENDED_ISSUES = 'fetchRecommendedIssues',
   UPDATE_STARRED_REPO = 'udpateStarredRepo',
-  FETCH_ACTIVITY = 'fetchActivity',
-  FETCH_RECOMMENDED_ISSUES = 'fetchRecommendedIssues'
+  UPDATE_DEFAULT_CONTEXT = 'updateDefaultContext'
 }
 
 interface ActiveUserModuleActions extends ActionTree<ActiveUserState, RootState> {
@@ -122,6 +125,10 @@ interface ActiveUserModuleActions extends ActionTree<ActiveUserState, RootState>
       refetch?: boolean
     }
   ) => Promise<void>
+  [ActiveUserActions.FETCH_GITLAB_ACCOUNTS]: (
+    this: Store<RootState>,
+    injectee: ActiveUserActionContext
+  ) => Promise<void>
   [ActiveUserActions.UPDATE_STARRED_REPO]: (
     this: Store<RootState>,
     injectee: ActiveUserActionContext,
@@ -130,10 +137,6 @@ interface ActiveUserModuleActions extends ActionTree<ActiveUserState, RootState>
       action: 'ADD' | 'REMOVE'
     }
   ) => Promise<void>
-  // [ActiveUserActions.FETCH_ACTIVITY]: (
-  //   this: Store<RootState>,
-  //   injectee: ActiveUserActionContext
-  // ) => Promise<void>
   [ActiveUserActions.FETCH_RECOMMENDED_ISSUES]: (
     this: Store<RootState>,
     injectee: ActiveUserActionContext
@@ -179,6 +182,17 @@ export const actions: ActiveUserModuleActions = {
       commit(ActiveUserMutations.SET_LOADING, false)
     }
   },
+  async [ActiveUserActions.FETCH_GITLAB_ACCOUNTS]({ commit }) {
+    try {
+      commit(ActiveUserMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(ActiveUserGitlabAccounts, {}, true)
+      commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
+      commit(ActiveUserMutations.SET_LOADING, false)
+    } catch (e) {
+      commit(ActiveUserMutations.SET_ERROR, e)
+      commit(ActiveUserMutations.SET_LOADING, false)
+    }
+  },
   async [ActiveUserActions.UPDATE_STARRED_REPO]({ commit, dispatch }, { repoId, action }) {
     try {
       await this.$applyGraphqlMutation(UpdateStarredRepos, { repoId, action })
@@ -187,17 +201,6 @@ export const actions: ActiveUserModuleActions = {
       commit(ActiveUserMutations.SET_ERROR, e)
     }
   },
-  // async [ActiveUserActions.FETCH_ACTIVITY]({ commit }) {
-  //   try {
-  //     commit(ActiveUserMutations.SET_LOADING, true)
-  //     const response = await this.$fetchGraphqlData(ActiveUserActivityFeed, {})
-  //     commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
-  //     commit(ActiveUserMutations.SET_LOADING, false)
-  //   } catch (e) {
-  //     commit(ActiveUserMutations.SET_ERROR, e)
-  //     commit(ActiveUserMutations.SET_LOADING, false)
-  //   }
-  // },
   async [ActiveUserActions.FETCH_RECOMMENDED_ISSUES]({ commit }) {
     try {
       commit(ActiveUserMutations.SET_LOADING, true)

@@ -28,7 +28,6 @@ query RepoDetails($provider: VCSProviderChoices!, $owner: String!, $name: String
     vcsProvider
     config
     supportedAnalyzers
-    isCommitPossible
     isAutofixEnabled
     autofixGithubAppInstallationUrl
     autofixBitbucketAddonInstallationUrl

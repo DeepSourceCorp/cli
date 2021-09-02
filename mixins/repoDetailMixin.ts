@@ -61,6 +61,9 @@ export default class RepoDetailMixin extends Vue {
     refetch?: boolean
   }) => Promise<void>
 
+  @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_COMMIT_POSSIBLE)
+  fetchIsCommitPossible: (args: { provider: string; owner: string; name: string }) => Promise<void>
+
   @repoStore.Action(RepositoryDetailActions.FETCH_AVAILABLE_ANALYZERS)
   fetchAvailableAnalyzers: (args: {
     provider: string

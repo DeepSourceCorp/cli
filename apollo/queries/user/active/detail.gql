@@ -12,7 +12,6 @@ query {
     isStaff
     dashboardContext
     availableCredits
-    gitlabAccounts
     missiveUserHash
     primaryOwner {
       id

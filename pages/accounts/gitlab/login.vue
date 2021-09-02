@@ -78,6 +78,7 @@ import GitlabMutation from '@/apollo/mutations/installation/gitlabInstallationLa
 export default class InstallationProvider extends mixins(ContextMixin, ActiveUserMixin) {
   async fetch(): Promise<void> {
     await this.fetchActiveUser()
+    await this.fetchActiveUserGitlabAccounts()
   }
 
   loading = false

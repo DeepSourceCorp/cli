@@ -13,7 +13,6 @@ query BaseRepoQuery($provider: VCSProviderChoices!, $owner: String!, $name: Stri
     errorMessage
     canBeActivated
     isAutofixEnabled
-    isCommitPossible
     blobUrlRoot
     lastRun {
       id

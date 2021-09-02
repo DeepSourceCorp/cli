@@ -4630,6 +4630,85 @@ export type Unnamed_29_Mutation = (
   )> }
 );
 
+export type CreateWebhookMutationVariables = Exact<{
+  url: Scalars['String'];
+  secret: Scalars['String'];
+  apiSigning: Scalars['Boolean'];
+  ownerId: Scalars['ID'];
+  eventsSubscribed: Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>;
+}>;
+
+
+export type CreateWebhookMutation = (
+  { __typename?: 'Mutation' }
+  & { createWebhook?: Maybe<(
+    { __typename?: 'CreateWebhookPayload' }
+    & { webhook?: Maybe<(
+      { __typename?: 'Webhook' }
+      & Pick<Webhook, 'id'>
+    )> }
+  )> }
+);
+
+export type DeletewebhookMutationVariables = Exact<{
+  webhookId: Scalars['ID'];
+}>;
+
+
+export type DeletewebhookMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteWebhook?: Maybe<(
+    { __typename?: 'DeleteWebhookPayload' }
+    & Pick<DeleteWebhookPayload, 'ok'>
+  )> }
+);
+
+export type DisablewebhookMutationVariables = Exact<{
+  webhookId: Scalars['ID'];
+}>;
+
+
+export type DisablewebhookMutation = (
+  { __typename?: 'Mutation' }
+  & { disableWebhook?: Maybe<(
+    { __typename?: 'DisableWebhookPayload' }
+    & Pick<DisableWebhookPayload, 'ok'>
+  )> }
+);
+
+export type TestWebhookMutationVariables = Exact<{
+  webhookId: Scalars['ID'];
+}>;
+
+
+export type TestWebhookMutation = (
+  { __typename?: 'Mutation' }
+  & { testWebhook?: Maybe<(
+    { __typename?: 'TestWebhookPayload' }
+    & Pick<TestWebhookPayload, 'ok'>
+  )> }
+);
+
+export type UpdateWebhookMutationVariables = Exact<{
+  webhookId: Scalars['ID'];
+  url?: Maybe<Scalars['String']>;
+  secret?: Maybe<Scalars['String']>;
+  apiSigning?: Maybe<Scalars['Boolean']>;
+  eventsSubscribed?: Maybe<Array<Maybe<Scalars['String']>> | Maybe<Scalars['String']>>;
+}>;
+
+
+export type UpdateWebhookMutation = (
+  { __typename?: 'Mutation' }
+  & { updateWebhook?: Maybe<(
+    { __typename?: 'UpdateWebhookPayload' }
+    & { webhook?: Maybe<(
+      { __typename?: 'Webhook' }
+      & Pick<Webhook, 'id'>
+    )> }
+  )> }
+);
+
 export type Unnamed_30_MutationVariables = Exact<{
   input: CommitConfigToVcsInput;
 }>;
@@ -5201,6 +5280,128 @@ export type Unnamed_58_Query = (
   )> }
 );
 
+export type WebhookEventDeliveryQueryVariables = Exact<{
+  ownerId: Scalars['ID'];
+  deliveryId: Scalars['ID'];
+}>;
+
+
+export type WebhookEventDeliveryQuery = (
+  { __typename?: 'Query' }
+  & { webhookEventDelivery?: Maybe<(
+    { __typename?: 'WebhookEventDelivery' }
+    & Pick<WebhookEventDelivery, 'id' | 'eventId' | 'deliveryId' | 'finishedIn' | 'createdAt' | 'retryCount' | 'httpStatusCode' | 'payload'>
+    & { webhook: (
+      { __typename?: 'Webhook' }
+      & Pick<Webhook, 'id' | 'url'>
+    ), eventType: (
+      { __typename?: 'WebhookEventTypes' }
+      & Pick<WebhookEventTypes, 'id' | 'name' | 'shortcode' | 'shortDescription'>
+    ) }
+  )> }
+);
+
+export type WebhookDeliveriesQueryVariables = Exact<{
+  webhookId: Scalars['ID'];
+  limit?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type WebhookDeliveriesQuery = (
+  { __typename?: 'Query' }
+  & { webhook?: Maybe<(
+    { __typename?: 'Webhook' }
+    & Pick<Webhook, 'id'>
+    & { deliveries: (
+      { __typename?: 'WebhookEventDeliveryConnection' }
+      & Pick<WebhookEventDeliveryConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'WebhookEventDeliveryEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'WebhookEventDelivery' }
+          & Pick<WebhookEventDelivery, 'id' | 'eventId' | 'payload' | 'createdAt' | 'retryCount' | 'finishedIn' | 'deliveryId' | 'httpStatusCode'>
+          & { eventType: (
+            { __typename?: 'WebhookEventTypes' }
+            & Pick<WebhookEventTypes, 'id' | 'name' | 'shortcode'>
+          ) }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+export type ListWebhooksQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  limit?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type ListWebhooksQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { webhooks: (
+      { __typename?: 'WebhookConnection' }
+      & Pick<WebhookConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'WebhookEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Webhook' }
+          & Pick<Webhook, 'id' | 'createdAt' | 'modifiedAt' | 'url' | 'alive' | 'active'>
+          & { eventsSubscribed: (
+            { __typename?: 'WebhookEventTypesConnection' }
+            & Pick<WebhookEventTypesConnection, 'totalCount'>
+          ) }
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
+export type ListWebhookEventsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ListWebhookEventsQuery = (
+  { __typename?: 'Query' }
+  & { webhookEventTypes?: Maybe<(
+    { __typename?: 'WebhookEventTypesConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'WebhookEventTypesEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'WebhookEventTypes' }
+        & Pick<WebhookEventTypes, 'name' | 'shortcode' | 'shortDescription'>
+      )> }
+    )>> }
+  )> }
+);
+
+export type GetSingleWebhookQueryVariables = Exact<{
+  webhookId: Scalars['ID'];
+}>;
+
+
+export type GetSingleWebhookQuery = (
+  { __typename?: 'Query' }
+  & { webhook?: Maybe<(
+    { __typename?: 'Webhook' }
+    & Pick<Webhook, 'id' | 'url' | 'active' | 'secret' | 'version' | 'apiSigning' | 'createdAt' | 'modifiedAt'>
+    & { eventsSubscribed: (
+      { __typename?: 'WebhookEventTypesConnection' }
+      & { edges: Array<Maybe<(
+        { __typename?: 'WebhookEventTypesEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'WebhookEventTypes' }
+          & Pick<WebhookEventTypes, 'shortcode' | 'name' | 'shortDescription'>
+        )> }
+      )>> }
+    ) }
+  )> }
+);
+
 export type Unnamed_59_QueryVariables = Exact<{
   name: Scalars['String'];
   owner: Scalars['String'];
@@ -5319,7 +5520,7 @@ export type BaseRepoQueryQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'isActivated' | 'isPrivate' | 'isStarred' | 'errorCode' | 'renderedErrorMessage' | 'fullName' | 'defaultBranchName' | 'vcsProvider' | 'vcsDefaultBranchUrl' | 'errorMessage' | 'canBeActivated' | 'isAutofixEnabled' | 'isCommitPossible' | 'blobUrlRoot'>
+    & Pick<Repository, 'id' | 'isActivated' | 'isPrivate' | 'isStarred' | 'errorCode' | 'renderedErrorMessage' | 'fullName' | 'defaultBranchName' | 'vcsProvider' | 'vcsDefaultBranchUrl' | 'errorMessage' | 'canBeActivated' | 'isAutofixEnabled' | 'blobUrlRoot'>
     & { lastRun?: Maybe<(
       { __typename?: 'Run' }
       & Pick<Run, 'id' | 'runId' | 'config' | 'commitOid' | 'branchRunCount' | 'status' | 'finishedAt'>
@@ -5341,7 +5542,7 @@ export type RepoDetailsQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'name' | 'isPrivate' | 'isStarred' | 'canBeActivated' | 'fullName' | 'errorCode' | 'renderedErrorMessage' | 'userPermissionMeta' | 'isActivated' | 'blobUrlRoot' | 'defaultBranchName' | 'vcsDefaultBranchUrl' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'vcsProvider' | 'config' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl' | 'autofixBitbucketAddonInstallationUrl'>
+    & Pick<Repository, 'id' | 'name' | 'isPrivate' | 'isStarred' | 'canBeActivated' | 'fullName' | 'errorCode' | 'renderedErrorMessage' | 'userPermissionMeta' | 'isActivated' | 'blobUrlRoot' | 'defaultBranchName' | 'vcsDefaultBranchUrl' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'vcsProvider' | 'config' | 'supportedAnalyzers' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl' | 'autofixBitbucketAddonInstallationUrl'>
     & { latestAnalysisRun?: Maybe<(
       { __typename?: 'Run' }
       & Pick<Run, 'id' | 'runId' | 'config' | 'commitOid' | 'branchRunCount' | 'status' | 'finishedAt'>
@@ -5379,6 +5580,21 @@ export type Unnamed_64_Query = (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+);
+
+export type IsCommitPossibleQueryVariables = Exact<{
+  provider: VcsProviderChoices;
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type IsCommitPossibleQuery = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id' | 'isCommitPossible'>
+  )> }
 );
 
 export type Unnamed_65_QueryVariables = Exact<{
@@ -6374,7 +6590,7 @@ export type Unnamed_103_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'fullName' | 'firstName' | 'lastName' | 'email' | 'avatar' | 'lastLogin' | 'isActive' | 'isAsgardian' | 'isStaff' | 'dashboardContext' | 'availableCredits' | 'gitlabAccounts' | 'missiveUserHash'>
+    & Pick<User, 'id' | 'fullName' | 'firstName' | 'lastName' | 'email' | 'avatar' | 'lastLogin' | 'isActive' | 'isAsgardian' | 'isStaff' | 'dashboardContext' | 'availableCredits' | 'missiveUserHash'>
     & { primaryOwner?: Maybe<(
       { __typename?: 'Owner' }
       & Pick<Owner, 'id' | 'login' | 'vcsProvider' | 'billingEmail'>
@@ -6445,5 +6661,16 @@ export type ViewerStarredReposQuery = (
         )>> }
       ) }
     )> }
+  )> }
+);
+
+export type Unnamed_105_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type Unnamed_105_Query = (
+  { __typename?: 'Query' }
+  & { viewer?: Maybe<(
+    { __typename?: 'User' }
+    & Pick<User, 'id' | 'gitlabAccounts'>
   )> }
 );

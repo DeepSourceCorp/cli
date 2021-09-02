@@ -765,6 +765,15 @@ declare module '*/detailForActivation.gql' {
 }
     
 
+declare module '*/isCommitPossible.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const IsCommitPossible: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/issueChildren.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -985,6 +994,15 @@ declare module '*/starredRepos.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ViewerStarredRepos: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/userGitlabAccounts.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
 
   export default defaultDocument;
 }

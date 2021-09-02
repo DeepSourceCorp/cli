@@ -62,6 +62,10 @@ import AuthMixin from '~/mixins/authMixin'
   }
 })
 export default class InstallationProvider extends mixins(ContextMixin, ActiveUserMixin, AuthMixin) {
+  async fetch(): Promise<void> {
+    await this.fetchActiveUserGitlabAccounts()
+  }
+
   get loginUrls() {
     return {
       ...this.context.installationUrls,

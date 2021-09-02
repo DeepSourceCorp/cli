@@ -57,6 +57,9 @@ export default class ActiveUserMixin extends Vue {
   @activeUserStore.Action(ActiveUserActions.FETCH_VIEWER_INFO)
   fetchActiveUser: (args?: { refetch: boolean }) => Promise<void>
 
+  @activeUserStore.Action(ActiveUserActions.FETCH_GITLAB_ACCOUNTS)
+  fetchActiveUserGitlabAccounts: () => Promise<void>
+
   @activeUserStore.Action(ActiveUserActions.FETCH_STARRED_REPOS)
   fetchStarredRepos: () => Promise<void>
 
