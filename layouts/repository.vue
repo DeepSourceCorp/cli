@@ -138,7 +138,7 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
     }
   }
 
-  mounted(): void {
+  created(): void {
     this.$socket.$on('repo-analysis-updated', this.refetchRepoDetailsEvent)
   }
 

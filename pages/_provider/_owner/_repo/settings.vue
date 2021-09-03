@@ -110,7 +110,7 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     return true
   }
 
-  mounted(): void {
+  created(): void {
     this.setAnalysisUpdateEvent()
   }
 

@@ -133,7 +133,7 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
     await this.fetchIssueData()
   }
 
-  mounted(): void {
+  created(): void {
     this.setAnalysisUpdateEvent()
   }
 

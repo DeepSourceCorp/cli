@@ -54,9 +54,6 @@ export default class ActiveUserMixin extends Vue {
   @activeUserStore.State('loading')
   viewerLoading: boolean
 
-  @activeUserStore.Getter(ActiveUserGetterTypes.GET_HOME_URL)
-  userHomeUrl: string
-
   @activeUserStore.Action(ActiveUserActions.FETCH_VIEWER_INFO)
   fetchActiveUser: (args?: { refetch: boolean }) => Promise<void>
 

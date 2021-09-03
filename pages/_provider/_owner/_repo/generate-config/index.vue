@@ -206,7 +206,7 @@ export default class GenerateConfig extends mixins(
     )
   }
 
-  mounted(): void {
+  created(): void {
     this.setAnalysisUpdateEvent()
   }
 

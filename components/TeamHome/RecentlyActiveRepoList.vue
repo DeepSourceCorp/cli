@@ -107,13 +107,10 @@ export default class RecentlyActiveRepoList extends Vue {
 
   get loaderCount(): number {
     const { provider, owner } = this.$route.params
-    let localCountFromStore
-    if (process.client) {
-      localCountFromStore = this.$localStore.get(
-        `${provider}-${owner}`,
-        'recently-active-repo-count'
-      ) as number
-    }
+    const localCountFromStore = this.$localStore.get(
+      `${provider}-${owner}`,
+      'recently-active-repo-count'
+    ) as number
     return localCountFromStore ?? 10
   }
 

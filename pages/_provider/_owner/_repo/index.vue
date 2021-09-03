@@ -48,7 +48,7 @@ export interface Widget {
 export default class Overview extends mixins(RepoDetailMixin) {
   private loading = false
 
-  mounted(): void {
+  created(): void {
     this.setAnalysisUpdateEvent()
   }
 

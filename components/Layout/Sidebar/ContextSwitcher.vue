@@ -42,7 +42,7 @@
               <z-icon
                 icon="star"
                 size="small"
-                :color="context.is_default ? 'juniper' : 'slate'"
+                :color="context.is_default ? 'juniper' : slate"
                 class="min-w-4 min-h-4"
                 @click.stop.prevent="updateDefaultContext(context)"
                 :class="{

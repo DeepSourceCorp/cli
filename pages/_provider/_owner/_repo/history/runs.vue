@@ -118,6 +118,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
     if (this.$route.query.page) {
       this.currentPage = Number(this.$route.query.page)
     }
+    this.setAnalysisUpdateEvent()
   }
 
   get baseParams(): { name: string; provider: string; owner: string } {
@@ -189,7 +190,6 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
     }
   }
   mounted(): void {
-    this.setAnalysisUpdateEvent()
     this.$socket.$on('repo-analysis-updated', (data: Record<string, string>) => {
       if (this.repository.id === data.repository_id) {
         this.fetchRuns(true)

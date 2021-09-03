@@ -106,7 +106,7 @@ const parseCookieString = (str: string): string => {
 const getCSRFHeaders = async ({
   $cookies,
   $config
-}: NuxtAppOptions): Promise<Record<string, Record<string, string>>> => {
+}: NuxtAppOptions): Promise<Record<string, unknown>> => {
   let csrfToken = $cookies.get('csrftoken')
 
   if (!csrfToken) {
@@ -130,33 +130,6 @@ const getCSRFHeaders = async ({
   }
 }
 
-const getContext = async (app: NuxtAppOptions): Promise<Record<string, Record<string, string>>> => {
-  if (process.client) {
-    return getCSRFHeaders(app)
-  }
-
-  const { $cookies } = app
-  const token = $cookies.get('JWT') as string
-  const refreshToken = $cookies.get('JWT-refresh-token') as string
-
-  if (!token && !refreshToken) {
-    // if both token and refresh token are not preset return as is
-    return getCSRFHeaders(app)
-  }
-
-  const context = await getCSRFHeaders(app)
-  if (token) {
-    context.headers.Cookie += `; JWT=${token};`
-  }
-  if (refreshToken) {
-    context.headers.Cookie += `; JWT-refresh-token=${refreshToken}`
-  }
-
-  // Set bifrost source for query debugging
-  context.headers['X-BIFROST-SSR'] = 'ENABLED'
-  return context
-}
-
 const refreshIfTokenExpired = async (
   app: NuxtAppOptions
 ): Promise<GraphqlMutationResponse | void> => {
@@ -166,7 +139,7 @@ const refreshIfTokenExpired = async (
     if (now > expiry) {
       const client = app.apolloProvider?.defaultClient
 
-      const context = await getContext(app)
+      const context = await getCSRFHeaders(app)
       const params = { mutation: refreshTokenMutation, variables: {}, context }
       if (client) {
         // don't call the action directly unless you have a thing for infinite loops
@@ -203,7 +176,7 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
         await refreshIfTokenExpired(app)
       }
 
-      const context = await getContext(app)
+      const context = await getCSRFHeaders(app)
 
       const params = { query, variables, context } as GraphqlQueryOptions
       if (refetch) {
@@ -236,7 +209,7 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
         await refreshIfTokenExpired(app)
       }
 
-      const context = await getContext(app)
+      const context = await getCSRFHeaders(app)
       return app.apolloProvider.defaultClient.mutate({
         mutation,
         variables,

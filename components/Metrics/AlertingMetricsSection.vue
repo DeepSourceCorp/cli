@@ -118,13 +118,10 @@ export default class AlertingMetricsSection extends mixins(RepoDetailMixin) {
 
   get loaderCount(): number {
     const { provider, owner, repo } = this.$route.params
-    let localCountFromStore
-    if (process.client) {
-      localCountFromStore = this.$localStore.get(
-        `${provider}-${owner}-${repo}`,
-        'alerting-metrics-loader-count'
-      ) as number
-    }
+    const localCountFromStore = this.$localStore.get(
+      `${provider}-${owner}-${repo}`,
+      'alerting-metrics-loader-count'
+    ) as number
     return localCountFromStore ?? 4
   }
 }

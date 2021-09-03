@@ -115,7 +115,7 @@ export default class Issues extends mixins(RepoDetailMixin) {
     await this.fetchTransformerRun()
   }
 
-  mounted(): void {
+  created(): void {
     this.setAnalysisUpdateEvent()
   }
 
