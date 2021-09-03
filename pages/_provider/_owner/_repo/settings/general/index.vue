@@ -112,7 +112,7 @@
         </div>
         <div class="absolute top-0 left-full px-4">
           <info-banner
-            info="If <b>Granular</b> is selected,  issuses would be reported only for lines that have been added or modified across all the files affected. <br> <br> If <b>Broad</b> is selected, all issues will be reported in files that have been updated or added, beware, this can be noisy."
+            info="If <b>Granular</b> is selected, issues would be reported only for lines that have been added or modified across all the files affected. <br> <br> If <b>Broad</b> is selected, all issues will be reported in files that have been updated or added, beware, this can be noisy."
           ></info-banner>
         </div>
       </div>
