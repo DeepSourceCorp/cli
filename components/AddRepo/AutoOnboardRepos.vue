@@ -11,7 +11,6 @@
           v-else-if="currentStage === stages.SELECT_TEMPLATE"
           @back="currentStage = stages.TOP_MENU"
           @selectTemplate="selectTemplate"
-          @search="fetchTemplates"
         />
         <select-repo-to-onboard
           v-else-if="currentStage === stages.SELECT_REPO"
@@ -92,7 +91,6 @@ export default class AutoOnboardRepos extends mixins(
       provider: this.activeProvider,
       refetch: true
     })
-    await this.fetchTemplates()
     this.setPage()
     this.loadingAutoOnboardData = false
   }
@@ -120,18 +118,6 @@ export default class AutoOnboardRepos extends mixins(
 
   created() {
     this.setPage()
-  }
-
-  async fetchTemplates(search?: string): Promise<void> {
-    search = search ? search : ''
-
-    await this.fetchConfigTemplatesList({
-      login: this.activeOwner,
-      provider: this.activeProvider,
-      limit: 25,
-      q: search,
-      currentPage: 1
-    })
   }
 
   async fetchEvents(refetch?: boolean): Promise<void> {

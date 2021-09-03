@@ -18,7 +18,7 @@
         class="p-2"
         :showBorder="false"
         backgroundColor="ink-400"
-        @debounceInput="search"
+        @debounceInput="fetchTemplates"
         placeholder="Search templates..."
       >
         <template slot="left">
@@ -27,16 +27,16 @@
       </z-input>
     </div>
     <div class="overflow-scroll flex-grow space-y-2 px-4 pb-4">
-      <template v-if="templatesLoading">
+      <template v-if="$fetchState.pending">
         <div
           v-for="index in 3"
           :key="index"
           class="h-20 bg-ink-300 animate-pulse opacity-50 rounded-md"
         ></div>
       </template>
-      <template v-else-if="configTemplateList.length">
+      <template v-else-if="currentTemplateList.length">
         <base-card
-          v-for="template in configTemplateList"
+          v-for="template in currentTemplateList"
           :showInfo="false"
           class="cursor-pointer hover:bg-ink-200"
           :key="template.shortcode"
@@ -59,7 +59,7 @@
           </h4>
         </div>
       </div>
-      <div class="grid place-content-center h-full" v-else-if="!templatesLoading">
+      <div class="grid place-content-center h-full" v-else-if="!$fetchState.pending">
         <div class="text-center">
           <h4 class="text-vanilla-300 text-base">No AutoOnbard templates found.</h4>
           <p class="text-vanilla-400 text-sm mb-5">
@@ -74,7 +74,7 @@
   </section>
 </template>
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import {
   ZInput,
   ZButton,
@@ -86,6 +86,7 @@ import {
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
+import { ConfigTemplate } from '../../../types/types'
 
 @Component({
   components: {
@@ -98,15 +99,28 @@ import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
   }
 })
 export default class SelectTemplate extends mixins(ActiveUserMixin, AutoOnboardMixin) {
-  // make this default
+  public currentTemplateList: ConfigTemplate[] = []
   public searchCandidate = ''
-  hasRunningAutoOnboards(): boolean {
-    return false
+
+  async fetch(): Promise<void> {
+    await this.fetchTemplates()
   }
 
-  search(newVal: string) {
-    this.searchCandidate = newVal
-    this.$emit('search', newVal)
+  async fetchTemplates(): Promise<void> {
+    const connection = await this.fetchConfigTemplatesList({
+      login: this.activeOwner,
+      provider: this.activeProvider,
+      limit: 25,
+      q: this.searchCandidate,
+      currentPage: 1,
+      refetch: true
+    })
+
+    this.currentTemplateList = connection.edges
+      .map((edge) => {
+        return edge?.node ? edge.node : null
+      })
+      .filter(Boolean) as ConfigTemplate[]
   }
 
   get settingsLink(): string {

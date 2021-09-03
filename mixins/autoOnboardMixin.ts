@@ -4,6 +4,7 @@ import {
   AutoOnboardEvent,
   AutoOnboardPayload,
   ConfigTemplate,
+  ConfigTemplateConnection,
   CreateConfigTemplatePayload,
   DeleteConfigTemplatePayload,
   Repository,
@@ -83,7 +84,8 @@ export default class AutoOnboardMixin extends Vue {
     limit: number
     q?: string
     refetch?: boolean
-  }) => Promise<void>
+    commit?: boolean
+  }) => Promise<ConfigTemplateConnection>
 
   @autoOnboard.Mutation(AutoOnboardMutations.SELECT_TEMPLATE_TO_ONBOARD)
   selectTemplateToOnboard: (template?: ConfigTemplate) => void
@@ -106,7 +108,8 @@ export default class AutoOnboardMixin extends Vue {
       login: owner,
       limit: 25,
       currentPage: 1,
-      refetch: true
+      refetch: true,
+      commit: true
     })
   }
 

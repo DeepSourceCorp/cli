@@ -168,7 +168,8 @@ export default class AutoOnboard extends mixins(AutoOnboardMixin, ActiveUserMixi
       currentPage: this.currentPage,
       limit: this.pageSize,
       q: this.searchCandidate,
-      refetch: true
+      refetch: true,
+      commit: true
     })
   }
 

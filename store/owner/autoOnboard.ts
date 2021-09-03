@@ -129,8 +129,9 @@ interface AutoOnboardModuleActions extends ActionTree<AutoOnboardState, RootStat
       limit: number
       q?: string
       refetch?: boolean
+      commit?: boolean
     }
-  ) => Promise<void>
+  ) => Promise<ConfigTemplateConnection>
   [AutoOnboardActions.FETCH_AUTO_ONBOARDABLE_REPO_LIST]: (
     this: Store<RootState>,
     injectee: AutoOnboardModuleActionContext,
@@ -201,7 +202,10 @@ export const actions: AutoOnboardModuleActions = {
         },
         args.refetch
       )
-      commit(AutoOnboardMutations.SET_CONFIG_TEMPLATE_LIST, response.data.owner.configTemplates)
+      if (args.commit) {
+        commit(AutoOnboardMutations.SET_CONFIG_TEMPLATE_LIST, response.data.owner.configTemplates)
+      }
+      return response.data.owner.configTemplates
     } catch (e) {
       this.$toast.danger('There was an error fetching templates')
     }
