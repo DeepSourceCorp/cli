@@ -1,11 +1,35 @@
 <template>
   <div class="grid grid-cols-1 gap-6 p-4">
     <template v-if="owner.hasPremiumPlan && !loading">
-      <h2 class="text-lg font-medium">Billing</h2>
+      <div class="max-w-2xl">
+        <h2 class="text-lg font-medium">Billing</h2>
+        <alert-box
+          v-if="billing.synced === false"
+          text-color="text-light-honey"
+          bg-color="bg-honey"
+          class="mt-2"
+        >
+          <p>
+            We are having trouble fetching the latest billing information from
+            {{ billingBackendHandler }}. Please check your GitHub billing page for recent updates.
+          </p>
+        </alert-box>
+        <alert-box
+          v-else-if="billing.pendingUpdate"
+          bg-color="bg-robin"
+          text-color="text-light-robin"
+          class="mt-2"
+        >
+          <p>
+            The billing information displayed might be outdated. Please check your GitHub billing
+            page for recent updates.
+          </p>
+        </alert-box>
+      </div>
       <plan-info :billing="billing" :id="owner.id"></plan-info>
-      <billing-info></billing-info>
-      <invoice-list></invoice-list>
-      <form-group label="Subscription Settings">
+      <billing-info :billing="billing" :billed-by="billingBackendHandler" />
+      <invoice-list v-if="isBilledByDeepSource" />
+      <form-group v-if="isBilledByDeepSource" label="Subscription Settings">
         <upgrade-plan :billing="billing" @refetch="refetch" />
         <downgrade-plan :billing="billing" @refetch="refetch" />
       </form-group>
@@ -62,6 +86,7 @@ import { ZRadioGroup, ZRadioButton } from '@deepsourcelabs/zeal'
 import { BillingInfo } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { TeamPerms } from '~/types/permTypes'
+import BillingBackend from '~/types/billingBackend'
 
 const PLAN_ORDER = ['starter', 'pro', 'business', 'premium', 'enterprise']
 
@@ -126,6 +151,18 @@ export default class BillingSettings extends mixins(
 
   get billing(): BillingInfo | {} {
     return this.owner.billingInfo ? this.owner.billingInfo : {}
+  }
+
+  get billingBackendHandler(): string {
+    if (Object.keys(this.billing).length)
+      return ((this.billing as BillingInfo).billingBackend as BillingBackend) === 'st'
+        ? 'Stripe'
+        : 'GitHub'
+    return ''
+  }
+
+  get isBilledByDeepSource(): boolean {
+    return this.billingBackendHandler === 'Stripe'
   }
 
   subscribe(plan: string): void {

@@ -1,6 +1,7 @@
 query($login: String!, $provider: VCSProviderChoices!) {
   owner(login: $login, provider: $provider) {
     id
+    login
     billingEmail
     billingAddress
     vcsInstallationId
@@ -20,6 +21,9 @@ query($login: String!, $provider: VCSProviderChoices!) {
       cancelAtPeriodEnd
       upcomingCancellationDate
       outstandingCredits
+      billingBackend
+      synced
+      pendingUpdate
       couponApplied {
         code
         description

@@ -16,6 +16,11 @@ module.exports = {
       },
       gridTemplateColumns: {
         support: '5fr 7fr'
+      },
+      colors: {
+        //TODO: migrate to zeal when alert component is finalized
+        'light-robin': '#bfceff',
+        'light-honey': '#fff1c5'
       }
     }
   }

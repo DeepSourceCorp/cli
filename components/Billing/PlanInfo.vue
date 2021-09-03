@@ -43,7 +43,12 @@
         </div>
       </div>
       <div class="flex items-end justify-end">
-        <z-button @click="toggleAddMoreSeats" buttonType="primary" size="small">
+        <z-button
+          v-if="isBilledByDeepSource"
+          @click="toggleAddMoreSeats"
+          buttonType="primary"
+          size="small"
+        >
           <div class="flex items-center">
             Add more seats
             <z-icon
@@ -116,6 +121,7 @@ import ContextMixin from '@/mixins/contextMixin'
 
 import { BillingInfo } from '~/types/types'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import BillingBackend from '~/types/billingBackend'
 
 interface ZModalInterface extends Vue {
   close?: () => void
@@ -139,6 +145,10 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerDetailMixin) {
 
   mounted() {
     this.seatsCount = Number(this.billing.seatsTotal)
+  }
+
+  get isBilledByDeepSource(): boolean {
+    return (this.billing.billingBackend as BillingBackend) === 'st'
   }
 
   get currentPlan(): Record<string, string | number> {
@@ -180,8 +190,10 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerDetailMixin) {
   }
 
   toggleAddMoreSeats(): void {
-    this.seatsCount = Number(this.billing.seatsTotal)
-    this.showUpdateSeatsModal = !this.showUpdateSeatsModal
+    if (this.isBilledByDeepSource) {
+      this.seatsCount = Number(this.billing.seatsTotal)
+      this.showUpdateSeatsModal = !this.showUpdateSeatsModal
+    }
   }
 
   async updateSeatsMutation(close: () => void): Promise<void> {
