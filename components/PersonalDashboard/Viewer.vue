@@ -160,7 +160,8 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
         name: 'activate-repo',
         title: 'Activate analysis on a repository',
         description: 'Activate a repository to start automated analysis and quality checks.',
-        isComplete: this.$localStore.get(this.storeKey, 'activate-repo') as boolean,
+        isComplete:
+          process.client && (this.$localStore.get(this.storeKey, 'activate-repo') as boolean),
         action: this.showActivateRepoModal,
         actionLabel: 'Activate a repo',
         actionIcon: 'plus'
@@ -168,7 +169,8 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
       {
         name: 'add-new-account',
         title: 'Add a new account',
-        isComplete: this.$localStore.get(this.storeKey, 'add-new-account') as boolean,
+        isComplete:
+          process.client && (this.$localStore.get(this.storeKey, 'add-new-account') as boolean),
         description:
           'Have a project that needs analysing? You can add multiple accounts and gain deeper insights about your code.',
         actionUrl: '/installation/providers',
@@ -189,7 +191,8 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
         title: 'Join User Group on Slack',
         description:
           'Get in touch with our engineering team, get your questions answered, give feedback.',
-        isComplete: this.$localStore.get(this.storeKey, 'join-slack') as boolean,
+        isComplete:
+          process.client && (this.$localStore.get(this.storeKey, 'join-slack') as boolean),
         action: this.joinSlackGroup,
         actionLabel: 'Join Slack',
         actionIcon: 'slack'
@@ -198,7 +201,8 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
         name: 'follow-twitter',
         title: 'Follow us on Twitter',
         description: 'Follow us to get to know about upcoming features and new updates',
-        isComplete: this.$localStore.get(this.storeKey, 'follow-twitter') as boolean,
+        isComplete:
+          process.client && (this.$localStore.get(this.storeKey, 'follow-twitter') as boolean),
         actionUrl: 'https://twitter.com/intent/user?screen_name=DeepSourceHQ',
         actionLabel: 'Follow @DeepSourceHQ',
         actionIcon: 'twitter'

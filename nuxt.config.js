@@ -1,5 +1,4 @@
 export default {
-  ssr: false,
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'DeepSource',
@@ -75,7 +74,7 @@ export default {
 
   extendPlugins(plugins) {
     const services = [
-      '~/plugins/services/fullstory.js',
+      '~/plugins/services/fullstory.client.js',
       '~/plugins/services/rudderLoader.client.js',
       '~/plugins/services/plausibleLoader.client.js',
       '~/plugins/services/rudder.client.ts'

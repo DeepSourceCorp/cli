@@ -96,7 +96,7 @@ export default class Metrics extends mixins(RepoDetailMixin) {
     this.$fetch()
   }
 
-  created(): void {
+  mounted(): void {
     this.setAnalysisUpdateEvent()
   }
 

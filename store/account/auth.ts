@@ -73,7 +73,8 @@ export const mutations: AuthModuleMutations = {
   },
   [AuthMutationTypes.SET_LOGGED_IN]: (state, token: string) => {
     try {
-      const data = JSON.parse(atob(token.split('.')[1]))
+      const decodeStr = process.client ? atob : require('atob')
+      const data = JSON.parse(decodeStr(token.split('.')[1]))
       state.tokenExpiresIn = data.exp
     } catch (e) {}
     state.loggedIn = true
