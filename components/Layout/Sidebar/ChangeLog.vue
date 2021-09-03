@@ -2,7 +2,17 @@
   <z-menu width="2x-large" placement="top" bodySpacing="p-0 border border-ink-200">
     <template slot="trigger">
       <div
-        class="flex items-center justify-center w-4 h-4 mb-2 bg-opacity-50 rounded-full cursor-pointer"
+        class="
+          flex
+          items-center
+          justify-center
+          w-4
+          h-4
+          mb-2
+          bg-opacity-50
+          rounded-full
+          cursor-pointer
+        "
         :class="unseenCount > 0 ? 'bg-juniper' : 'bg-ink-200'"
         @click="markAll"
         v-tooltip="helpText"
@@ -14,21 +24,29 @@
       </div>
     </template>
     <template slot="body">
-      <div class="flex items-center justify-between p-2 pl-3 border-b cursor-auto border-ink-200">
+      <div
+        class="flex items-center justify-between px-4 py-2.5 border-b cursor-auto border-ink-200"
+      >
         <span class="text-xs font-semibold text-vanilla-100"> Updates </span>
-        <a href="https://changelog.deepsource.io/" target="_blank" rel="noopener noreferrer">
-          <z-button class="text-vanilla-400 flex items-center" size="x-small" buttonType="ghost">
-            <z-icon
-              icon="external-link"
-              size="x-small"
-              color="vanilla-400"
-              class="mr-1.5 mb-0.5"
-            ></z-icon>
-            View all updates
-          </z-button>
-        </a>
+        <z-button
+          type="link"
+          buttonType="link"
+          size="x-small"
+          href="https://changelog.deepsource.io/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-vanilla-400 -mx-2"
+        >
+          <z-icon
+            icon="external-link"
+            size="x-small"
+            color="vanilla-400"
+            class="mr-1.5 mb-0.5"
+          ></z-icon>
+          View all updates
+        </z-button>
       </div>
-      <div class="hide-scroll overflow-hidden overflow-y-scroll cursor-auto h-72">
+      <div class="hide-scroll overflow-hidden overflow-y-scroll cursor-auto max-h-72">
         <a
           v-for="log in changeLog"
           :key="log.id"
@@ -36,27 +54,35 @@
           @click="() => markRead(log)"
           target="blank"
           rel="noopener noreferrer"
-          class="p-2 space-y-2 border-b border-ink-100 cursor-pointer hover:bg-ink-200 hover:bg-opacity-50 block"
+          class="
+            px-4
+            py-3.5
+            space-y-2
+            border-b border-ink-100
+            cursor-pointer
+            hover:bg-ink-200 hover:bg-opacity-50
+            block
+          "
           :class="{
             'bg-ink-200': !log.read
           }"
         >
-          <div class="flex items-center justify-between space-x-2 text-xs">
-            <div class="flex items-center space-x-1">
+          <h6 class="font-medium text-vanilla-100 -mt-1.5 pt-px">{{ log.title }}</h6>
+          <div class="flex align-baseline justify-between w-full">
+            <div class="flex items-center space-x-2">
               <z-tag
                 v-for="category in log.categories"
                 :key="category"
-                spacing="px-2 py-1 leading-none"
+                spacing="px-2 py-1"
                 textSize="xs"
                 bgColor="ink-100"
-                >{{ category }}</z-tag
+                class="capitalize leading-none"
               >
+                {{ category }}
+              </z-tag>
             </div>
-            <p class="text-vanilla-400">{{ fromNow(log.dateTime) }}</p>
+            <p class="text-vanilla-400 text-xxs mt-0.5">{{ getHumanizedTimeFromNow(log.dateTime) }}</p>
           </div>
-          <p class="text-vanilla-100 text-xs font-medium">
-            {{ log.content.short }}
-          </p>
         </a>
       </div>
     </template>
@@ -66,7 +92,7 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import { ZMenu, ZButton, ZIcon, ZTag } from '@deepsourcelabs/zeal'
-import { fromNow } from '@/utils/date'
+import { getHumanizedTimeFromNow } from '@/utils/date'
 
 export interface ChangeLogItem {
   categories: string[]
@@ -104,7 +130,7 @@ export interface Headway {
 export default class ChangeLog extends Vue {
   public helpText = 'Latest updates'
   public changeLog: ChangeLogItem[] = []
-  public fromNow = fromNow
+  public getHumanizedTimeFromNow = getHumanizedTimeFromNow
   public widget: Headway = {}
   public currentLog: ChangeLogItem | undefined = undefined
 
