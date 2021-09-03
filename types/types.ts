@@ -5232,7 +5232,7 @@ export type Unnamed_56_Query = (
   { __typename?: 'Query' }
   & { owner?: Maybe<(
     { __typename?: 'Owner' }
-    & Pick<Owner, 'id' | 'isTeam' | 'vcsInstallationId' | 'hasSubscribedToPlan' | 'autofixInstallationUrl' | 'isAutofixEnabled' | 'isAutoonboardAllowed' | 'hasPremiumPlan'>
+    & Pick<Owner, 'id' | 'isTeam' | 'vcsInstallationId' | 'hasSubscribedToPlan' | 'autofixInstallationUrl' | 'isAutofixEnabled' | 'isAutoonboardAllowed' | 'hasPremiumPlan' | 'canOnboard'>
     & { team?: Maybe<(
       { __typename?: 'Team' }
       & Pick<Team, 'id'>
