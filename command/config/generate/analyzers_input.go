@@ -1,9 +1,8 @@
 package generate
 
 import (
-	"encoding/json"
-
 	"github.com/AlecAivazis/survey/v2"
+	"github.com/Jeffail/gabs/v2"
 	"github.com/deepsourcelabs/cli/utils"
 )
 
@@ -15,7 +14,6 @@ type AnalyzerMetadata struct {
 	Title       string
 	Description string
 	Options     []string
-	InputType   string
 	UserInput   string
 }
 
@@ -43,87 +41,15 @@ func (o *Options) collectAnalyzerInput() error {
 	return nil
 }
 
-// Checks if the field is present in the array containing list of `optional_required`
-// analyzer meta fields
-func isContains(requiredFieldsList []string, field string) bool {
-	for _, v := range requiredFieldsList {
-		if field == v {
-			return true
-		}
-	}
-	return false
-}
-
-// Iterates over all the properties analyzer supports and
-// extract data needed by only `optional_required` fields
-// This data is then, used to get input from user
-func extractMetaProperties(analyzerMetaProperties map[string]interface{}, optionalFields []string) []AnalyzerMetadata {
-	var requiredPropertiesData []AnalyzerMetadata
-	var analyzerPropertyData AnalyzerMetadata
-
-	for key, value := range analyzerMetaProperties {
-		// Check if the field is `optional_required`
-		if !isContains(optionalFields, key) {
-			continue
-		}
-		// If yes, parse its properties and append the data to a map
-		// with the layout : map[analyzer]:[]OptionalFieldsProperties
-		propertiesData := value.(map[string]interface{})
-
-		// Setting default input type of the field to be String (single line input)
-		analyzerPropertyData.InputType = "String"
-
-		// Iterating over properties/fields and extracting necessary data of optional_required fields.
-		// Like title, description, options. Help in generating prompt for user input
-		for k, v := range propertiesData {
-			switch k {
-			case "type":
-				analyzerPropertyData.Type = v.(string)
-				if v.(string) == "boolean" {
-					analyzerPropertyData.InputType = "Boolean"
-				}
-			case "title":
-				analyzerPropertyData.Title = v.(string)
-			case "description":
-				analyzerPropertyData.Description = v.(string)
-			case "enum":
-				enumValues := v.([]interface{})
-				for _, enumValue := range enumValues {
-					analyzerPropertyData.Options = append(analyzerPropertyData.Options, enumValue.(string))
-				}
-				analyzerPropertyData.InputType = "Enum"
-			case "items":
-				analyzerPropertyData.InputType = "Enum"
-				itemsValues := v.(map[string]interface{})
-				for key, itemValue := range itemsValues {
-					if key != "enum" {
-						analyzerPropertyData.InputType = "String"
-						break
-					}
-					enumValues := itemValue.([]interface{})
-					for _, enumValue := range enumValues {
-						analyzerPropertyData.Options = append(analyzerPropertyData.Options, enumValue.(string))
-					}
-				}
-			}
-		}
-		analyzerPropertyData.FieldName = key
-
-		requiredPropertiesData = append(requiredPropertiesData, analyzerPropertyData)
-	}
-	return requiredPropertiesData
-}
-
-// Having got the data regarding the compulsary meta fields whose input is needed from the user,
-// this uses the `survey` prompt API to gather user input and store in `Options` struct
+// Uses the `survey` prompt API to gather user input and store in `Options` struct
 // `Options` struct is later used for config generation
 func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMetadata) error {
 	var err error
 	// Iterate over the map and fetch the input for the fields from the user
 	for analyzer, metaFields := range requiredFieldsData {
 		for i := 0; i < len(metaFields); i++ {
-			switch metaFields[i].InputType {
-			case "Boolean":
+			switch metaFields[i].Type {
+			case "boolean":
 				metaFields[i].UserInput = "true"
 				res, err := utils.ConfirmFromUser(metaFields[i].Title, metaFields[i].Description)
 				if err != nil {
@@ -132,7 +58,7 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 				if !res {
 					metaFields[i].UserInput = "false"
 				}
-			case "Enum":
+			case "enum":
 				metaFields[i].UserInput, err = utils.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
 				if err != nil {
 					return err
@@ -150,60 +76,78 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 	return nil
 }
 
-// The parent function to parse the API response of meta schema, filter out the `optional_required` fields
-// and then gather information about these fields and finally collect user input
-// Does all this with the code present in the function + the helper functions above
+// Checks if the field is present in the array containing list of `optional_required`
+// analyzer meta fields
+func isContains(requiredFieldsList []string, field string) bool {
+	for _, v := range requiredFieldsList {
+		if field == v {
+			return true
+		}
+	}
+	return false
+}
+
+// The primary function to parse the API response of meta schema, filter out the `optional_required` fields
+// and then gather user input by calling the above function `inputAnalyzerMeta`
+// It iterates over all the properties the analyzer supports and extracts data needed by only `optional_required` fields.
+// This data is then, used to get input from user
 func (o *Options) extractRequiredAnalyzerMetaFields() error {
 	var optionalFields []string
 	var requiredFieldsData []AnalyzerMetadata
-	var combinedRequiredFieldsData = make(map[string][]AnalyzerMetadata)
+	var analyzerFieldsData = make(map[string][]AnalyzerMetadata)
 
 	// Extract `optional_required` fields of analyzer meta of selected analyzers
 	for _, activatedAnalyzer := range o.ActivatedAnalyzers {
+		optionalFields = nil
+		requiredFieldsData = nil
 		for idx, supportedAnalyzer := range utils.AnaData.AnalyzerNames {
-			if activatedAnalyzer == supportedAnalyzer {
-				// If the analyzer matches, find the meta
-				analyzerMeta := utils.AnaData.AnalyzersMeta[idx]
+			if activatedAnalyzer != supportedAnalyzer {
+				continue
+			}
+			analyzerMeta := utils.AnaData.AnalyzersMeta[idx]
+			// Parse the analyzer meta of the analyzer using `gabs`
+			jsonParsed, err := gabs.ParseJSON([]byte(analyzerMeta))
+			if err != nil {
+				return err
+			}
+			// Search for "optional_required" fields in the metaschema
+			for _, child := range jsonParsed.Search("optional_required").Children() {
+				optionalFields = append(optionalFields, child.Data().(string))
+			}
+			// Move on to next analyzer if no "optional_required" fields found
+			if len(optionalFields) == 0 {
+				continue
+			}
 
-				// Parse the JSON metaschema
-				var meta map[string]interface{}
-				json.Unmarshal([]byte(analyzerMeta), &meta)
-				optionalRequiredFieldPresent := false
-
-				// Check if the meta contains the `optional_required` field
-				for key := range meta {
-					if key == "optional_required" {
-						optionalRequiredFieldPresent = true
-						break
-					}
-				}
-				// If not present, move to check for next analyzer
-				// by moving to next iteration
-				if !optionalRequiredFieldPresent {
+			requiredFieldsData = make([]AnalyzerMetadata, len(optionalFields))
+			// Iterate through the properties and extract the data of the
+			// required analyzer meta fields
+			count := 0
+			for key, child := range jsonParsed.Search("properties").ChildrenMap() {
+				if !isContains(optionalFields, key) {
 					continue
 				}
-
-				// Filter out `optional_required` fields
-				optionalRequiredFields := meta["optional_required"].([]interface{})
-				// if no optional_required field is present, move to checking for next
-				// analyzer
-				if len(optionalRequiredFields) == 0 {
-					continue
+				propertyJSON, _ := gabs.ParseJSON(child.Bytes())
+				requiredFieldsData[count].FieldName = key
+				requiredFieldsData[count].Title = propertyJSON.Search("title").Data().(string)
+				requiredFieldsData[count].Description = propertyJSON.Search("description").Data().(string)
+				requiredFieldsData[count].Type = propertyJSON.Search("type").Data().(string)
+				// Check for enum
+				for _, child := range propertyJSON.Search("enum").Children() {
+					requiredFieldsData[count].Options = append(requiredFieldsData[count].Options, child.Data().(string))
+					requiredFieldsData[count].Type = "enum"
 				}
-
-				// Creating a list of optional_required fields of the analyzer
-				for _, value := range optionalRequiredFields {
-					optionalFields = append(optionalFields, value.(string))
+				// Check for items
+				itemsPath := propertyJSON.Path("items")
+				itemsJSON, _ := gabs.ParseJSON(itemsPath.Bytes())
+				for _, child := range itemsJSON.Search("enum").Children() {
+					requiredFieldsData[count].Options = append(requiredFieldsData[count].Options, child.Data().(string))
+					requiredFieldsData[count].Type = "enum"
 				}
-
-				// Extract the list of all supported `fields`/`properties` present in
-				// analyzer's metaschema
-				analyzerMetaProperties := meta["properties"].(map[string]interface{})
-
-				requiredFieldsData = extractMetaProperties(analyzerMetaProperties, optionalFields)
-				combinedRequiredFieldsData[activatedAnalyzer] = requiredFieldsData
+				count++
 			}
 		}
+		analyzerFieldsData[activatedAnalyzer] = requiredFieldsData
 	}
-	return o.inputAnalyzerMeta(combinedRequiredFieldsData)
+	return o.inputAnalyzerMeta(analyzerFieldsData)
 }
