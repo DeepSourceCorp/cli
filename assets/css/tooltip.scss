@@ -9,10 +9,12 @@
   border: 1px solid #2c303a;
   border-radius: 3px;
   overflow: hidden;
-  background: rgba(44, 48, 58, 0.3);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
+  background: rgba(44, 48, 58, 0.95);
+  @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    background: rgba(44, 48, 58, 0.3);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
   .tooltip-inner {
     color: #ffffff;
     padding: 3px 6px;
