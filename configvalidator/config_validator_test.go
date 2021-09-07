@@ -16,13 +16,14 @@ func TestValidateConfig(t *testing.T) {
 
 	tests := map[string]test{
 		"blank config": {
-			inputConfig: "{}",
+			inputConfig: "",
 			valid:       false,
 		},
 		"analyzer should be array": {
 			inputConfig: `
             version = 1
-            analyzers = "python"`,
+            analyzers = "python",
+            enabled = true`,
 			valid: false,
 		},
 		"zero analyzers": {
@@ -102,21 +103,23 @@ func TestValidateConfig(t *testing.T) {
             name = "python"
             enabled = true
 
-            transformers = "egg"`,
+            transformers = "egg"
+            enabled = true`,
 			valid: false,
 		},
 	}
-	for name, tc := range tests {
-		c := &ConfigValidator{}
-		c.ValidateConfig([]byte(tc.inputConfig))
-		if !reflect.DeepEqual(tc.valid, c.Result.Valid) {
-			t.Errorf("%s : expected: %v, got: %v. Error: %v", name, tc.valid, c.Result.Valid, c.Result.Errors)
-		}
+	for testName, tc := range tests {
+		t.Run(testName, func(t *testing.T) {
+			c := &ConfigValidator{}
+			c.ValidateConfig([]byte(tc.inputConfig))
+			if !reflect.DeepEqual(tc.valid, c.Result.Valid) {
+				t.Errorf("%s: expected: %v, got: %v. Error: %v", testName, tc.valid, c.Result.Valid, c.Result.Errors)
+			}
+		})
 	}
 }
 
 func setDummyAnalyzerTransformerData() {
-
 	utils.AnaData.AnalyzerShortcodes = []string{"python", "test-coverage"}
 	utils.AnaData.AnalyzersMeta = []string{`{
    "type": "object",

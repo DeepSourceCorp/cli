@@ -15,13 +15,7 @@ import (
 
 // Validates version field of the DeepSource config
 func (c *ConfigValidator) validateVersion() {
-
-	// ======== Version Validation ========
-
-	// Version is mandatory
-	if viper.Get("version") == nil {
-		c.pushError("Property `version` is mandatory.")
-	} else {
+	if viper.Get("version") != nil {
 		// Value of version must be an integer
 		if reflect.TypeOf(viper.Get("version")).Kind().String() != "int64" {
 			c.pushError(fmt.Sprintf("Value of `version` must be an integer. Got %s", reflect.TypeOf(viper.Get("version")).Kind().String()))
@@ -34,24 +28,23 @@ func (c *ConfigValidator) validateVersion() {
 			c.pushError(fmt.Sprintf("Value for `version` cannot be less than 1. Got %d", versionInt))
 		}
 
-		// Value for version must be less than ALLOWED VERSION
+		// Must be less than MAX_ALLOWED VERSION
 		if versionInt > MAX_ALLOWED_VERSION {
 			c.pushError(fmt.Sprintf("Value for `version` cannot be greater than %d. Got %d", MAX_ALLOWED_VERSION, versionInt))
 		}
+		return
 	}
+	// if version is nil(not present in config)
+	c.pushError("Property `version` is mandatory.")
 }
 
 // Validates `exclude_patterns` field of the DeepSource config
 func (c *ConfigValidator) validateExcludePatterns() {
-
-	// ======== Exclude Patterns Validation ========
-
 	excludePatterns := viper.Get("exclude_patterns")
 
 	// Sometimes the user doesn't add `exclude_patterns` to the code
 	// Validate only if excludePatterns present
 	if excludePatterns != nil {
-
 		// Must be a slice of string
 		exPatternType := reflect.TypeOf(excludePatterns).Kind().String()
 		if exPatternType != "slice" {
@@ -71,14 +64,11 @@ func (c *ConfigValidator) validateExcludePatterns() {
 
 // Validates `test_patterns` field of the DeepSource config
 func (c *ConfigValidator) validateTestPatterns() {
-
-	// ======== Test Patterns Validation ========
 	testPatterns := viper.Get("test_patterns")
 
 	// Sometimes the user doesn't add `test_patterns` to the code
 	// Validate only if testPatterns present
 	if testPatterns != nil {
-
 		// Must be a slice
 		testPatternType := reflect.TypeOf(testPatterns).Kind().String()
 		if testPatternType != "slice" {
@@ -97,7 +87,6 @@ func (c *ConfigValidator) validateTestPatterns() {
 
 // Validates generic DeepSource config
 func (c *ConfigValidator) validateGenericConfig() {
-
 	c.validateVersion()
 	c.validateExcludePatterns()
 	c.validateTestPatterns()

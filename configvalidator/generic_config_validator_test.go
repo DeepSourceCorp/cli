@@ -11,155 +11,158 @@ import (
 func TestValidateVersion(t *testing.T) {
 	type test struct {
 		inputConfig string
-		result      bool
+		valid       bool
 	}
 
-	tests := []test{
-		{
+	tests := map[string]test{
+		"valid config": {
 			inputConfig: "version = 1",
-			result:      true,
+			valid:       true,
 		},
-		{
+		"wrong version": {
 			inputConfig: "version = \"foobar\"",
-			result:      false,
+			valid:       false,
 		},
-		{
+		"version greater than maximum allowed": {
 			inputConfig: "version = 352",
-			result:      false,
+			valid:       false,
 		},
-		{
+		"version missing": {
 			inputConfig: "",
-			result:      false,
+			valid:       false,
 		},
-		{
+		"version of wrong type": {
 			inputConfig: "version = \"2\"",
-			result:      false,
+			valid:       false,
 		},
 	}
-	for _, tc := range tests {
-		testConfig, err := getConfig([]byte(tc.inputConfig))
-		if err != nil {
-			t.Error(err)
-		}
-		c := &ConfigValidator{
-			Config: *testConfig,
-			Result: Result{
-				Valid:           true,
-				Errors:          []string{},
-				ConfigReadError: false,
-			},
-		}
-
-		c.validateVersion()
-		if !reflect.DeepEqual(tc.result, c.Result.Valid) {
-			t.Fatalf("expected: %v, got: %v. Error: %v", tc.result, c.Result.Valid, c.Result.Errors)
-		}
+	for testName, tc := range tests {
+		t.Run(testName, func(t *testing.T) {
+			testConfig, err := getConfig([]byte(tc.inputConfig))
+			if err != nil {
+				t.Error(err)
+			}
+			c := &ConfigValidator{
+				Config: *testConfig,
+				Result: Result{
+					Valid:           true,
+					Errors:          []string{},
+					ConfigReadError: false,
+				},
+			}
+			c.validateVersion()
+			if !reflect.DeepEqual(tc.valid, c.Result.Valid) {
+				t.Fatalf("%v: expected: %v, got: %v. Error: %v", testName, tc.valid, c.Result.Valid, c.Result.Errors)
+			}
+		})
 	}
 }
 
 func TestValidateExcludePatterns(t *testing.T) {
 	type test struct {
 		inputConfig string
-		result      bool
+		valid       bool
 	}
 
-	tests := []test{
-		{
+	tests := map[string]test{
+		"valid exclude_patterns": {
 			inputConfig: "version= 1\nexclude_patterns = 23",
-			result:      false,
+			valid:       false,
 		},
-		{
+		"should be array of string": {
 			inputConfig: "version= 1\nexclude_patterns = [23,43]",
-			result:      false,
+			valid:       false,
 		},
-		{
+		"valid array of string": {
 			inputConfig: "version = 1\nexclude_patterns = ['hello', 'world']",
-			result:      true,
+			valid:       true,
 		},
-		{
+		"strings with double quotes": {
 			inputConfig: "exclude_patterns = [\"hello\",\"world\"]",
-			result:      true,
+			valid:       true,
 		},
-		{
+		"empty exclude_patterns": {
 			inputConfig: "exclude_patterns = []",
-			result:      true,
+			valid:       true,
 		},
-		{
+		"cannot be only string, should be an array": {
 			inputConfig: "version = 1\nexclude_patterns = 'hello'",
-			result:      false,
+			valid:       false,
 		},
 	}
-	for _, tc := range tests {
-		testConfig, err := getConfig([]byte(tc.inputConfig))
-		if err != nil {
-			t.Error(err)
-		}
-		c := &ConfigValidator{
-			Config: *testConfig,
-			Result: Result{
-				Valid:           true,
-				Errors:          []string{},
-				ConfigReadError: false,
-			},
-		}
-
-		c.validateExcludePatterns()
-		if !reflect.DeepEqual(tc.result, c.Result.Valid) {
-			t.Fatalf("Config : %v, expected: %v, got: %v. Error: %v", tc.inputConfig, tc.result, c.Result.Valid, c.Result.Errors)
-		}
+	for testName, tc := range tests {
+		t.Run(testName, func(t *testing.T) {
+			testConfig, err := getConfig([]byte(tc.inputConfig))
+			if err != nil {
+				t.Error(err)
+			}
+			c := &ConfigValidator{
+				Config: *testConfig,
+				Result: Result{
+					Valid:           true,
+					Errors:          []string{},
+					ConfigReadError: false,
+				},
+			}
+			c.validateExcludePatterns()
+			if !reflect.DeepEqual(tc.valid, c.Result.Valid) {
+				t.Fatalf("%v: Config : %v, expected: %v, got: %v. Error: %v", testName, tc.inputConfig, tc.valid, c.Result.Valid, c.Result.Errors)
+			}
+		})
 	}
 }
 
 func TestValidateTestPatterns(t *testing.T) {
 	type test struct {
 		inputConfig string
-		result      bool
+		valid       bool
 	}
 
-	tests := []test{
-		{
+	tests := map[string]test{
+		"cannot be an integer": {
 			inputConfig: "test_patterns = 23",
-			result:      false,
+			valid:       false,
 		},
-		{
+		"cannot be an array of integers": {
 			inputConfig: "test_patterns = [23,43]",
-			result:      false,
+			valid:       false,
 		},
-		{
+		"should be array of strings": {
 			inputConfig: "test_patterns = ['hello', 'world']",
-			result:      true,
+			valid:       true,
 		},
-		{
+		"strings with double quotes": {
 			inputConfig: "test_patterns = [\"hello\",\"world\"]",
-			result:      true,
+			valid:       true,
 		},
-		{
+		"empty test_patterns": {
 			inputConfig: "test_patterns = []",
-			result:      true,
+			valid:       true,
 		},
-		{
+		"cannot be only string, should be an array of string": {
 			inputConfig: "test_patterns = 'hello'",
-			result:      false,
+			valid:       false,
 		},
 	}
-	for _, tc := range tests {
-		testConfig, err := getConfig([]byte(tc.inputConfig))
-		if err != nil {
-			t.Error(err)
-		}
-		c := &ConfigValidator{
-			Config: *testConfig,
-			Result: Result{
-				Valid:           true,
-				Errors:          []string{},
-				ConfigReadError: false,
-			},
-		}
-
-		c.validateTestPatterns()
-		if !reflect.DeepEqual(tc.result, c.Result.Valid) {
-			t.Fatalf("Config : %v, expected: %v, got: %v. Error: %v", tc.inputConfig, tc.result, c.Result.Valid, c.Result.Errors)
-		}
+	for testName, tc := range tests {
+		t.Run(testName, func(t *testing.T) {
+			testConfig, err := getConfig([]byte(tc.inputConfig))
+			if err != nil {
+				t.Error(err)
+			}
+			c := &ConfigValidator{
+				Config: *testConfig,
+				Result: Result{
+					Valid:           true,
+					Errors:          []string{},
+					ConfigReadError: false,
+				},
+			}
+			c.validateTestPatterns()
+			if !reflect.DeepEqual(tc.valid, c.Result.Valid) {
+				t.Fatalf("%v: Config : %v, expected: %v, got: %v. Error: %v", testName, tc.inputConfig, tc.valid, c.Result.Valid, c.Result.Errors)
+			}
+		})
 	}
 }
 
