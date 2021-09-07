@@ -1,6 +1,10 @@
 <template>
   <portal to="modal">
-    <z-modal v-if="isOpen" @onClose="close" title="Choose files you want to run Autofix on">
+    <z-modal
+      v-if="isOpen"
+      @onClose="$emit('close')"
+      title="Choose files you want to run Autofix on"
+    >
       <div class="flex space-x-2 py-4 text-vanilla-400">
         <div
           class="text-vanilla-400 custom-y-scroll max-h-40 text-sm leading-7 w-full flex flex-col space-y-2"
@@ -68,7 +72,7 @@
           </div>
         </div>
       </div>
-      <template slot="footer">
+      <template v-slot:footer="{ close }">
         <div class="py-3 px-3 space-x-2 text-right text-vanilla-100 border-t border-ink-200">
           <z-button buttonType="secondary" size="small" @click="close">Cancel</z-button>
           <z-button
@@ -77,7 +81,7 @@
             spacing="px-2"
             buttonType="primary"
             size="small"
-            @click="autofixSelectedIssues()"
+            @click="autofixSelectedIssues(close)"
           >
             <span class="text-xs text-ink-300"
               >Run Autofix on {{ this.selectedIssues.length || 0 }} files</span
@@ -174,11 +178,7 @@ export default class AutofixIssuesChooser extends Vue {
     }
   }
 
-  public close(): void {
-    this.$emit('close')
-  }
-
-  public async autofixSelectedIssues(): Promise<void> {
+  public async autofixSelectedIssues(close: () => void): Promise<void> {
     const { owner, provider, repo } = this.$route.params
     // TODO: Add a try-catch block and the catch block will have an error toast
     const response: {
@@ -189,7 +189,12 @@ export default class AutofixIssuesChooser extends Vue {
         checkId: this.checkId
       }
     })
-    this.close()
+    if (close) {
+      close()
+    } else {
+      this.$emit('close')
+    }
+
     this.$router.push(
       `/${provider}/${owner}/${repo}/autofix/${response.data.createAutofixRunForPullRequest.autofixRunId}`
     )

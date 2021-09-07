@@ -34,7 +34,7 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
   }
 
   openAutofixInstallationUrl(close?: () => void): void {
-    // Assign the close recieved from the modal
+    // Assign the close received from the modal
     this.close = close ? close : null
     this.installing = true
 
@@ -89,7 +89,7 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
     clearInterval(this.pollTimer)
     this.$socket.$off('autofix-installation-complete')
 
-    if (this.close) {
+    if (this.close && typeof this.close === 'function') {
       this.close()
     } else {
       this.$emit('close')

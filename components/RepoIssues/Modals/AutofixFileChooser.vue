@@ -59,7 +59,7 @@
           </z-list>
         </div>
       </div>
-      <template>
+      <template v-slot:footer="{ close }">
         <div class="p-2 space-x-1 text-right text-vanilla-100 border-t border-ink-200 leading-none">
           <button
             @click="close()"
