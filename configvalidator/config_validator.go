@@ -3,7 +3,6 @@ package configvalidator
 import (
 	"bytes"
 
-	"github.com/mitchellh/mapstructure"
 	"github.com/spf13/viper"
 )
 
@@ -42,9 +41,7 @@ func (c *ConfigValidator) ValidateConfig(inputConfig []byte) Result {
 		return c.Result
 	}
 	// Unmarshaling the configdata into DSConfig struct
-	viper.UnmarshalExact(&config, func(m *mapstructure.DecoderConfig) {
-		m.WeaklyTypedInput = false
-	})
+	viper.UnmarshalExact(&config)
 	c.Config = config
 
 	// Validate generic config which applies to all analyzers and transformers
