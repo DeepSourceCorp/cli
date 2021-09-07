@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="toml-box hide-scroll overflow-x-hidden text-sm rounded-md bg-ink-300">
-      <div class="flex space-x-2 sticky top-0 bg-ink-200 items-start p-3">
+    <div class="toml-box hide-scroll overflow-x-scroll text-sm rounded-md bg-ink-300">
+      <div class="flex space-x-2 sticky top-0 left-0 bg-ink-200 items-start p-3">
         <p v-if="$slots.message" class="text-vanilla-400">
           <slot name="message"></slot>
         </p>
