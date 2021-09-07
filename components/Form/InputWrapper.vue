@@ -1,6 +1,6 @@
 <template>
   <div class="grid gap-4" :class="[gridClass, removeYPadding ? '' : 'py-4']">
-    <div>
+    <div :class="{ 'col-span-full md:col-auto': cascadeInput }">
       <label :for="inputId" class="text-sm text-vanilla-100 flex-1">
         <slot name="label"> {{ label }} </slot>
       </label>
@@ -32,6 +32,10 @@ export default class InputWrapper extends Vue {
 
   @Prop({ default: false })
   removeYPadding: boolean
+
+  //TODO: Phase out prop with responsive behavior for all inputs
+  @Prop({ default: false })
+  cascadeInput: boolean
 
   get gridClass(): string {
     if (this.inputWidth === 'xx-small') return 'grid-cols-fr-8'

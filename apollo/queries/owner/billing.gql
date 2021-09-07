@@ -6,6 +6,7 @@ query($login: String!, $provider: VCSProviderChoices!) {
     billingAddress
     vcsInstallationId
     hasPremiumPlan
+    login
     billingInfo {
       planSlug
       status

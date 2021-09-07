@@ -1,56 +1,40 @@
 <template>
   <div>
     <button-input
-      label="Cancel Plan"
+      label="Cancel subscription"
       inputId="billing-settings-cancel-plan"
       buttonType="danger"
-      buttonLabel="Cancel Plan"
+      buttonLabel="Cancel subscription"
       icon="x"
-      @click="showCancelPlanModal"
+      @click="showCancelPlanModal = true"
     >
       <template slot="description">
-        Deleting this organization will permanently delete the deepsource.toml from your
-        repositories.
-        <a href="#" class="text-juniper hover:underline">Learn more.</a>
+        Cancelling your subscription will downgrade analysis to only 1 private repository, and all
+        the other members except up to 3 recently active members will be converted to contributors.
+        <a
+          href="/pricing"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-juniper hover:underline"
+          >Learn more.</a
+        >
       </template>
     </button-input>
-    <portal to="modal">
-      <z-confirm
-        v-if="showConfirmDialog"
-        primaryActionType="danger"
-        primaryActionLabel="Yes, cancel my plan"
-        secondaryActionLabel="I changed my mind"
-        title="Are you sure you want to cancel your DeepSource subscription"
-        :subtitle="message"
-        @primaryAction="removeMember"
-        @onClose="close"
-      >
-      </z-confirm>
+    <portal to="modal" v-if="showCancelPlanModal">
+      <cancel-plan-modal @close="showCancelPlanModal = false" />
     </portal>
   </div>
 </template>
 <script lang="ts">
-import { mixins, Component } from 'nuxt-property-decorator'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
-import SubscriptionMixin from '~/mixins/subscriptionMixin'
-import { ZIcon, ZConfirm } from '@deepsourcelabs/zeal'
+import { Vue, Component } from 'nuxt-property-decorator'
+import CancelPlanModal from './Modals/CancelPlanModal.vue'
 
 @Component({
   components: {
-    ZIcon,
-    ZConfirm
+    CancelPlanModal
   }
 })
-export default class CancelPlan extends mixins(OwnerDetailMixin, SubscriptionMixin) {
-  showConfirmDialog = false
-  message = `Your team will be downgraded to analysis on only 3 private repositories, and all other members except up to 3 recently active members will be converted to contributors`
-
-  showCancelPlanModal() {
-    this.showConfirmDialog = true
-  }
-
-  close() {
-    this.showConfirmDialog = false
-  }
+export default class CancelPlan extends Vue {
+  private showCancelPlanModal = false
 }
 </script>

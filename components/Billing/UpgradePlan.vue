@@ -1,7 +1,7 @@
 <template>
   <div v-if="Object.keys(availableUpgradePlans).length > 0">
     <button-input
-      label="Upgrade Plan"
+      label="Upgrade plan"
       inputId="billing-settings-upgrade-plan"
       buttonType="primary"
       :buttonLabel="`Upgrade to ${availableUpgradePlans.name}`"

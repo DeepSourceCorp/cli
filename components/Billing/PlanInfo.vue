@@ -1,64 +1,71 @@
 <template>
   <section class="space-y-2">
-    <div v-if="Object.keys(this.currentPlan)" class="grid max-w-2xl gap-4 grid-cols-fr-16">
-      <div class="flex items-center space-x-2 text-lg font-medium leading-none">
-        <div
-          v-if="currentPlan.name"
-          class="px-2 py-1.5 tracking-wider uppercase rounded-md bg-ink-200 leading-none"
-        >
-          <template>{{ currentPlan.name }}</template>
-        </div>
-        <div v-else class="w-12 h-8 rounded-md bg-ink-300 animate-pulse"></div>
-        <div>Plan</div>
-      </div>
-      <div v-if="currentPlan.amount" class="flex justify-end space-x-1">
-        <div class="flex space-x-1">
-          <div class="text-2xl">$</div>
-          <div class="text-4xl font-semibold leading-none">{{ monthlyAmount }}</div>
-        </div>
-        <div class="self-end mb-1 text-sm">/user /month</div>
-      </div>
-      <div v-else class="flex justify-end">
-        <div class="h-16 rounded-md w-44 bg-ink-300 animate-pulse"></div>
-      </div>
-    </div>
-    <div class="grid max-w-2xl gap-4 grid-cols-fr-10">
-      <div class="space-y-2">
-        <div v-if="billing && billing.seatsUsed" class="text-sm font-semibold tracking-snug">
-          {{ billing.seatsUsed }} of {{ billing.seatsTotal }} seats used
-        </div>
-        <div v-else class="w-32 h-4 bg-ink-300 animate-pulse"></div>
-        <div class="w-full h-2 rounded-full bg-ink-200">
-          <div
-            class="h-2 transition-all duration-200 ease-in-out transform rounded-full"
-            :class="{
-              'bg-juniper': 50 >= completion,
-              'bg-honey': 80 >= completion && completion > 50,
-              'bg-cherry': completion > 80
-            }"
-            :style="{
-              width: `${completion}%`
-            }"
-          ></div>
-        </div>
-      </div>
-      <div class="flex items-end justify-end">
-        <z-button
-          v-if="isBilledByDeepSource"
-          @click="toggleAddMoreSeats"
-          buttonType="primary"
-          size="small"
-        >
-          <div class="flex items-center">
-            Add more seats
-            <z-icon
-              icon="arrow-right"
-              size="x-small"
-              color="ink-400"
-              class="stroke-2 ml-1.5"
-            ></z-icon>
+    <div class="flex max-w-2xl flex-wrap md:flex-nowrap">
+      <div class="flex-grow">
+        <div v-if="Object.keys(this.currentPlan)">
+          <div class="flex items-center space-x-2 text-lg font-medium leading-none h-16">
+            <div
+              v-if="currentPlan.name"
+              class="px-2 py-1.5 tracking-wider uppercase rounded-md bg-ink-200 leading-none"
+            >
+              <span>{{ currentPlan.name }}</span>
+            </div>
+            <div v-else class="w-24 h-8 rounded-md bg-ink-300 animate-pulse"></div>
+            <div>Plan</div>
           </div>
-        </z-button>
+        </div>
+        <div class="md:mt-3.5">
+          <div v-if="billing && billing.seatsUsed" class="text-sm font-semibold tracking-snug">
+            {{ billing.seatsUsed }} of {{ billing.seatsTotal }} seats used
+          </div>
+          <div v-else class="w-32 h-4 bg-ink-300 animate-pulse"></div>
+          <div class="w-full h-2 rounded-full bg-ink-200 mt-1">
+            <div
+              class="h-2 transition-all duration-200 ease-in-out transform rounded-full"
+              :class="{
+                'bg-juniper': 50 >= completion,
+                'bg-honey': 80 >= completion && completion > 50,
+                'bg-cherry': completion > 80
+              }"
+              :style="{
+                width: `${completion}%`
+              }"
+            ></div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 md:mt-0 flex md:block justify-between md:justify-start w-full md:w-auto">
+        <div v-if="Object.keys(this.currentPlan)" class="mt-1.5">
+          <div v-if="currentPlan.amount" class="flex justify-end space-x-1">
+            <div class="flex space-x-1">
+              <div class="text-2xl">$</div>
+              <div class="text-3xl md:text-4xl font-semibold leading-none">{{ monthlyAmount }}</div>
+            </div>
+            <div class="self-end mb-1 text-sm">/user /month</div>
+          </div>
+          <div v-else class="flex justify-end">
+            <div class="h-16 rounded-md w-44 bg-ink-300 animate-pulse"></div>
+          </div>
+        </div>
+        <div class="text-right pt-1 mt-2">
+          <z-button
+            v-if="owner.billingInfo && !owner.billingInfo.cancelAtPeriodEnd"
+            @click="toggleAddMoreSeats"
+            buttonType="primary"
+            size="small"
+            class=""
+          >
+            <div class="flex items-center">
+              Add more seats
+              <z-icon
+                icon="arrow-right"
+                size="x-small"
+                color="ink-400"
+                class="stroke-2 ml-1.5"
+              ></z-icon>
+            </div>
+          </z-button>
+        </div>
       </div>
     </div>
     <portal to="modal">
@@ -138,6 +145,9 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerDetailMixin) {
   @Prop({ required: true })
   id: string
 
+  @Prop({ required: true })
+  currentPlan: Record<string, string | number>
+
   showUpdateSeatsModal = false
   updateSeatsError = false
   loading = false
@@ -149,10 +159,6 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerDetailMixin) {
 
   get isBilledByDeepSource(): boolean {
     return (this.billing.billingBackend as BillingBackend) === 'st'
-  }
-
-  get currentPlan(): Record<string, string | number> {
-    return this.billing?.planSlug ? this.context.plans[this.billing.planSlug] : {}
   }
 
   get monthlyAmount(): number {

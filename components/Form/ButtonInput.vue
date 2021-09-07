@@ -4,6 +4,7 @@
     :description="description"
     :inputId="inputId"
     :inputWidth="inputWidth"
+    :cascadeInput="true"
   >
     <template slot="label">
       <slot name="label"></slot>
@@ -11,7 +12,7 @@
     <template slot="description">
       <slot name="description"></slot>
     </template>
-    <div class="text-right">
+    <div class="text-left md:text-right">
       <slot>
         <nuxt-link v-if="to" :to="to">
           <z-button :buttonType="buttonType" size="small" :icon="icon">

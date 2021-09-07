@@ -32,6 +32,8 @@ import Checkout from '~/apollo/mutations/owner/checkout.gql'
 import UpdateSeats from '~/apollo/mutations/owner/updateSeats.gql'
 import ChangePlan from '~/apollo/mutations/owner/changePlan.gql'
 import UpdatePaymentSource from '~/apollo/mutations/owner/updatePaymentSource.gql'
+import CancelPlan from '~/apollo/mutations/owner/cancelPlan.gql'
+import ResumePlan from '~/apollo/mutations/owner/resumePlan.gql'
 
 export interface OwnerDetailModuleState {
   loading: boolean
@@ -137,7 +139,9 @@ export enum OwnerDetailActions {
   CHECKOUT = 'checkout',
   UPDATE_SEATS = 'updateSeats',
   UPDATE_PAYMENT_SOURCE = 'updatePaymentSource',
-  CHANGE_SUBSCRIPTION_PLAN = 'changeSubscriptionPlan'
+  CHANGE_SUBSCRIPTION_PLAN = 'changeSubscriptionPlan',
+  CANCEL_SUBSCRIPTION_PLAN = 'cancelSubscriptionPlan',
+  REVERT_SUBSCRIPTION_CANCELLATION = 'revertSubscriptionCancellation'
 }
 
 interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
@@ -528,6 +532,28 @@ export const actions: OwnerDetailModuleActions = {
     try {
       commit(OwnerDetailMutations.SET_LOADING, true)
       await this.$applyGraphqlMutation(ChangePlan, args)
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+      throw e
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+  async [OwnerDetailActions.CANCEL_SUBSCRIPTION_PLAN]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      await this.$applyGraphqlMutation(CancelPlan, args)
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+      throw e
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+  async [OwnerDetailActions.REVERT_SUBSCRIPTION_CANCELLATION]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      await this.$applyGraphqlMutation(ResumePlan, args)
     } catch (e) {
       commit(OwnerDetailMutations.SET_ERROR, e)
       throw e

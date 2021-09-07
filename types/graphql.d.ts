@@ -251,6 +251,15 @@ declare module '*/updateConfigTemplate.gql' {
 }
     
 
+declare module '*/cancelPlan.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/changePlan.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -270,6 +279,15 @@ declare module '*/checkout.gql' {
     
 
 declare module '*/getBillingInfo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/resumePlan.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

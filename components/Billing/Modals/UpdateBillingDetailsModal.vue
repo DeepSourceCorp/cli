@@ -12,25 +12,40 @@
           required="true"
           type="email"
           size="small"
-          :showBorder="validBillingEmail"
-          :class="{
-            'border border-cherry': !validBillingEmail
-          }"
+          :showBorder="validBillingEmail || !emailEmpty"
+          :class="!validBillingEmail || emailEmpty ? 'border border-cherry' : ''"
+          :validate-on-blur="true"
           v-model="billingEmail"
           @blur="(ev) => validateEmail(ev.target)"
           placeholder="jane@deepsource.io"
         ></z-input>
-        <p v-if="!validBillingEmail" class="text-xs text-cherry">Please enter a valid email.</p>
         <p v-if="emailEmpty" class="text-xs text-cherry">This field is required.</p>
+        <p v-else-if="!validBillingEmail" class="text-xs text-cherry">
+          Please enter a valid email.
+        </p>
       </fieldset>
       <fieldset class="text-sm space-y-1">
         <label class="text-vanilla-400">Billing Address</label>
         <textarea
-          class="w-full h-full p-2 text-xs bg-ink-400 border outline-none resize-none min-h-20 border-ink-100 text-vanilla-400 focus:border-vanilla-100"
+          class="
+            w-full
+            h-full
+            p-2
+            text-xs
+            bg-ink-400
+            border
+            outline-none
+            resize-none
+            min-h-20
+            text-vanilla-400
+            focus:border-vanilla-100
+          "
+          :class="addressEmpty ? 'border-cherry' : 'border-ink-100'"
           required="true"
           size="small"
           v-model="billingAddress"
           placeholder="Jane Doe"
+          @blur="validateAddress"
         ></textarea>
         <p v-if="addressEmpty" class="text-xs text-cherry">This field is required.</p>
       </fieldset>
@@ -93,29 +108,38 @@ export default class UpdateBillingDetailsModal extends mixins(OwnerDetailMixin) 
     this.billingAddress = this.owner.billingAddress || ''
   }
 
+  validateAddress(): void {
+    if (!this.billingAddress) {
+      this.addressEmpty = true
+      return
+    }
+    this.addressEmpty = false
+  }
+
   validateEmail(el: HTMLInputElement): void {
+    this.validBillingEmail = el.checkValidity()
     if (!this.billingEmail) {
       this.emailEmpty = true
       return
     }
-    this.validBillingEmail = el.checkValidity()
+    this.emailEmpty = false
   }
 
   async updateDetails(): Promise<void> {
     const modal = this.$refs['udpate-billing-details-modal'] as ZModalInterface
     if (!this.billingEmail) {
-      this.emailEmpty == true
+      this.emailEmpty = true
+      return
     }
 
     if (!this.billingAddress) {
-      this.addressEmpty == true
+      this.addressEmpty = true
+      return
     }
 
-    if (this.billingEmail && this.billingAddress) {
+    if (this.billingEmail && this.billingAddress && this.validBillingEmail) {
       const { owner, provider } = this.$route.params
-
       this.loading = true
-
       try {
         await this.updateBillingInfo({
           billingEmail: this.billingEmail,
@@ -123,9 +147,7 @@ export default class UpdateBillingDetailsModal extends mixins(OwnerDetailMixin) 
           login: owner,
           provider
         })
-
         this.$toast.success('Billing email and address updated successfully')
-
         if (modal && modal.close) {
           modal.close()
         } else {

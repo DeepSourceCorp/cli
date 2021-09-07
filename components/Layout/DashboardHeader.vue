@@ -1,14 +1,15 @@
 <template>
   <div>
-    <div class="bg-ink-300 border-b border-ink-200">
+    <div class="bg-ink-300 border-b border-ink-200 overflow-x-scroll">
       <div id="header" class="p-4">
-        <h2 class="inline-flex items-center space-x-3 mr-3 font-medium text-vanilla-100">
-          <nuxt-link class="inline-flex items-center space-x-2" :to="$generateRoute()">
+        <h2 class="inline-flex items-center space-x-3 font-medium text-vanilla-100">
+          <nuxt-link class="inline-flex items-center space-x-2 flex-shrink-0" :to="$generateRoute()">
             <!-- account avatar -->
             <z-avatar
               v-if="activeDashboardContext.avatar_url"
               :image="activeDashboardContext.avatar_url"
               :user-name="activeDashboardContext.login"
+              class="flex-shrink-0"
             ></z-avatar>
 
             <!-- account display name -->
@@ -48,7 +49,17 @@
             <nuxt-link v-else-if="!$config.onPrem" :to="$generateRoute(['settings', 'billing'])">
               <z-tag
                 icon-left="star"
-                class="border-ink-100 border text-center leading-none uppercase font-semibold tracking-wider text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
+                class="
+                  border-ink-100 border
+                  text-center
+                  leading-none
+                  uppercase
+                  font-semibold
+                  tracking-wider
+                  text-vanilla-300
+                  hover:text-vanilla-100
+                  hover:bg-ink-100
+                "
                 spacing="py-1.5 px-3"
                 bgColor="ink-200"
                 v-tooltip="'See upgrade options'"

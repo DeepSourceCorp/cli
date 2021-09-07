@@ -1,7 +1,7 @@
 <template>
   <div v-if="Object.keys(availableDowngradePlans).length > 0">
     <button-input
-      label="Downgrade Plan"
+      label="Downgrade plan"
       inputId="billing-settings-downgrade-plan"
       buttonType="secondary"
       :buttonLabel="`Downgrade to ${availableDowngradePlans.name}`"

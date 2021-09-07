@@ -1,13 +1,13 @@
 <template>
   <div class="grid grid-cols-1 gap-6 p-4">
     <template v-if="owner.hasPremiumPlan && !loading">
+      <h2 class="text-lg font-medium">Billing</h2>
       <div class="max-w-2xl">
-        <h2 class="text-lg font-medium">Billing</h2>
         <alert-box
           v-if="billing.synced === false"
           text-color="text-light-honey"
           bg-color="bg-honey"
-          class="mt-2"
+          class="mb-1"
         >
           <p>
             We are having trouble fetching the latest billing information from
@@ -18,20 +18,43 @@
           v-else-if="billing.pendingUpdate"
           bg-color="bg-robin"
           text-color="text-light-robin"
-          class="mt-2"
+          class="mb-1"
         >
           <p>
             The billing information displayed might be outdated. Please check your GitHub billing
             page for recent updates.
           </p>
         </alert-box>
+        <alert-box
+          v-if="billing.cancelAtPeriodEnd"
+          text-color="text-light-honey"
+          bg-color="bg-honey"
+          class="mb-1"
+        >
+          <p>
+            Your subscription to <span class="font-semibold"> {{ currentPlan.name }}</span> plan is
+            scheduled to be canceled at the end of the current billing cycle. You will have access
+            to all features in this plan until
+            <span class="font-semibold">{{
+              formatDate(parseISODate(owner.billingInfo.upcomingCancellationDate))
+            }}</span
+            >.
+          </p>
+        </alert-box>
+        <plan-info :billing="billing" :id="owner.id" :current-plan="currentPlan"></plan-info>
       </div>
-      <plan-info :billing="billing" :id="owner.id"></plan-info>
       <billing-info :billing="billing" :billed-by="billingBackendHandler" />
       <invoice-list v-if="isBilledByDeepSource" />
-      <form-group v-if="isBilledByDeepSource" label="Subscription Settings">
+      <form-group
+        v-if="billing.cancelAtPeriodEnd && isBilledByDeepSource"
+        label="Subscription Settings"
+      >
+        <resume-plan />
+      </form-group>
+      <form-group v-else-if="isBilledByDeepSource" label="Subscription Settings">
         <upgrade-plan :billing="billing" @refetch="refetch" />
         <downgrade-plan :billing="billing" @refetch="refetch" />
+        <cancel-plan />
       </form-group>
     </template>
     <template v-else-if="!loading">
@@ -57,21 +80,6 @@
         ></plan-card>
       </div>
     </template>
-    <!-- form-group label="Account Settings">
-      <button-input
-        label="Delete DeepSource"
-        inputId="repo-settings-analysis-config"
-        buttonType="danger"
-        buttonLabel="Delete DeepSource"
-        inputWidth="small"
-        icon="x"
-      >
-        <template slot="description">
-          Deleting this organization will permanently delete the deepsource.toml from your
-          repositories. <a href="#" class="text-juniper hover:underline">Learn more.</a>
-        </template>
-      </button-input>
-    </form-group>-->
   </div>
 </template>
 
@@ -87,6 +95,7 @@ import { BillingInfo } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { TeamPerms } from '~/types/permTypes'
 import BillingBackend from '~/types/billingBackend'
+import { getHumanizedTimeFromNow } from '~/utils/date'
 
 const PLAN_ORDER = ['starter', 'pro', 'business', 'premium', 'enterprise']
 
@@ -163,6 +172,20 @@ export default class BillingSettings extends mixins(
 
   get isBilledByDeepSource(): boolean {
     return this.billingBackendHandler === 'Stripe'
+  }
+
+  get cancellationDate(): string | undefined {
+    if (this.owner.billingInfo)
+      return getHumanizedTimeFromNow(this.owner.billingInfo.upcomingCancellationDate)
+    return undefined
+  }
+
+  get currentPlan(): Record<string, string | number> {
+    if (Object.keys(this.billing).length) {
+      const { planSlug } = this.billing as BillingInfo
+      if (planSlug) return this.context.plans[planSlug]
+    }
+    return {}
   }
 
   subscribe(plan: string): void {

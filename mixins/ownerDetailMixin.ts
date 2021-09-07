@@ -124,4 +124,10 @@ export default class OwnerDetailMixin extends Vue {
 
   @ownerDetailStore.Action(OwnerDetailActions.SYNC_REPOS_FOR_OWNER)
   syncReposForOwner: () => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.CANCEL_SUBSCRIPTION_PLAN)
+  cancelSubscriptionPlan: (args: { id: string }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.REVERT_SUBSCRIPTION_CANCELLATION)
+  revertSubscriptionCancellation: (args: { id: string }) => Promise<void>
 }

@@ -1,8 +1,8 @@
 <template>
   <form-group label="Billing Information" :divide="false" bodyClass="space-y-4">
     <div v-if="billedBy === 'Stripe'">
-      <div class="grid w-full grid-cols-2 border rounded-md min-h-36 border-ink-300">
-        <div class="flex flex-col justify-between px-4 py-3 bg-ink-300">
+      <div class="grid w-full grid-cols-1 md:grid-cols-2 border rounded-md min-h-36 border-ink-300">
+        <div class="flex flex-col justify-between px-4 py-3 bg-ink-300 min-h-36">
           <div>
             <label class="text-sm leading-none tracking-wide text-vanilla-300">Next payment</label>
             <div
@@ -11,7 +11,6 @@
             >
               {{ formatDate(parseISODate(billing.upcomingPaymentDate)) }}
             </div>
-            <div v-else class="h-10 rounded-md w-44 bg-ink-200 animate-pulse"></div>
           </div>
           <div class="flex items-center justify-between text-sm leading-none text-vanilla-400">
             <span>Credits</span>
@@ -79,7 +78,7 @@
           </div>
         </div>
       </div>
-      <div>
+      <div class="mt-3">
         <h5 class="text-vanilla-100 font-semibold text-sm">Payment method</h5>
         <div class="mt-5">
           <div v-if="billing.activeCard" class="flex items-center justify-between w-full">
@@ -101,10 +100,9 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="billedBy === 'GitHub'">
       <alert-box bg-color="bg-robin" text-color="text-light-robin">
         <div
-          v-if="billedBy === 'GitHub'"
           class="
             flex flex-col
             md:flex-row
@@ -143,6 +141,7 @@
         </div>
       </alert-box>
     </div>
+    <div v-else class="h-36 w-full bg-ink-300 rounded-md animate-pulse"></div>
     <portal to="modal">
       <update-billing-details-modal
         v-if="showUpdateBillingsModal"
@@ -159,7 +158,7 @@ import { BillingInfo } from '~/types/types'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
 import { FormGroup } from '~/components/Form'
-import UpdateBillingDetailsModal from './UpdateBillingDetailsModal.vue'
+import UpdateBillingDetailsModal from './Modals/UpdateBillingDetailsModal.vue'
 import { ZButton, ZRadioGroup, ZRadio, ZIcon } from '@deepsourcelabs/zeal'
 
 import { parseISODate, formatDate } from '~/utils/date'
