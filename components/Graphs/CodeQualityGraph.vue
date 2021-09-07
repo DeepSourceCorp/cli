@@ -100,6 +100,7 @@ export default class CodeQualityGraph extends mixins(RepoDetailMixin, RouteParam
 
   mounted() {
     this.chart = this.$refs['code-quality-chart'] as ChartComponent
+    this.$socket.$on('repo-analysis-updated', this.refetchData)
   }
 
   lastDays = 30
@@ -118,14 +119,20 @@ export default class CodeQualityGraph extends mixins(RepoDetailMixin, RouteParam
   } = {
     data: [],
     labels: [],
-    colors: ['vanilla-400', 'robin']
+    colors: ['vanilla-400', 'robin-500']
+  }
+
+  beforeDestroy() {
+    this.$socket.$off('repo-analysis-updated', this.refetchData)
+  }
+
+  async refetchData(): Promise<void> {
+    await this.fetchIssueTrends({ ...this.baseRouteParams, lastDays: this.lastDays, refetch: true })
   }
 
   async fetch(): Promise<void> {
     await this.fetchIssueTrends({
-      provider: this.provider,
-      name: this.repo,
-      owner: this.owner,
+      ...this.baseRouteParams,
       lastDays: this.lastDays
     })
     this.buildChart()
@@ -201,7 +208,7 @@ export default class CodeQualityGraph extends mixins(RepoDetailMixin, RouteParam
         name: 'Resolved Issues',
         values: this.repository?.resolvedIssueTrend?.values || []
       })
-      colors.push('robin')
+      colors.push('robin-500')
       labels = this.repository.resolvedIssueTrend.labels
     }
 

@@ -62,7 +62,7 @@
         :key="namespace.is_passing"
         class="flex-grow md:mx-auto"
         v-bind="chartData"
-        :colors="namespace.is_passing === false ? ['cherry'] : ['robin']"
+        :colors="namespace.is_passing === false ? ['cherry-500'] : ['robin-500']"
         :height="chartHeight"
         :type="chartType"
         :tooltipOptions="{

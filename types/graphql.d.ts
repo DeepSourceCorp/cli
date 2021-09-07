@@ -747,6 +747,15 @@ declare module '*/analysisRun.gql' {
 }
     
 
+declare module '*/autofixStats.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const RepoAutofixStats: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/availableAnalyzers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

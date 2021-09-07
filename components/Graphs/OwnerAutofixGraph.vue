@@ -29,7 +29,7 @@
       :datasets="dataSets"
       :labels="formattedLabels"
       :showControl="false"
-      :colors="['robin']"
+      :colors="['robin-500']"
       :spline="false"
       type="line"
     ></base-graph>

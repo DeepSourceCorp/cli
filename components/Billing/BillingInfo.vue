@@ -101,16 +101,9 @@
       </div>
     </div>
     <div v-else-if="billedBy === 'GitHub'">
-      <alert-box bg-color="bg-robin" text-color="text-light-robin">
+      <alert-box bg-color="bg-robin" text-color="text-robin-150">
         <div
-          class="
-            flex flex-col
-            md:flex-row
-            space-y-4
-            md:space-y-0 md:space-x-10
-            md:justify-between
-            items-start
-          "
+          class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-10 md:justify-between items-start"
         >
           <div>
             <p class="font-medium mb-2 text-base leading-none">

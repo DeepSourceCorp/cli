@@ -2,7 +2,10 @@
   <div>
     <!-- Analyzer Tab -->
     <div class="flex justify-between py-2 px-2 space-x-2 border-b border-ink-200">
-      <issue-analyzer-selector v-model="queryParams.analyzer" />
+      <issue-analyzer-selector
+        @updateAnalyzer="updateAnalyzer"
+        :selectedAnalyzer="queryParams.analyzer"
+      />
       <div class="flex items-center space-x-2 w-auto justify-end">
         <issue-sort v-model="queryParams.sort" />
         <autofix-available v-model="queryParams.autofixAvailable" />
@@ -12,7 +15,10 @@
     <!-- Main Content -->
     <div class="flex w-full">
       <!-- Group by Filter Section -->
-      <issue-category-selector v-model="queryParams.category" />
+      <issue-category-selector
+        @updateCategory="updateCategory"
+        :selectedCategory="queryParams.category"
+      />
       <!-- List of issues -->
       <div v-if="issueListLoading" class="flex-1 flex-grow min-h-screen p-4 space-y-2">
         <div v-for="idx in 7" :key="idx" class="h-26 rounded-md bg-ink-300 animate-pulse"></div>
@@ -22,7 +28,7 @@
         class="flex flex-col flex-1 flex-grow p-4 space-y-4"
         :class="{
           'max-h-64 min-h-64': issueList.totalCount === 0,
-          'min-h-screen max-h-auto': issueList.totalCount > 0
+          'min-h-screen max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
         }"
       >
         <div
@@ -40,6 +46,7 @@
           @autofix="openAutofixModal"
         ></issue-list-item>
         <z-pagination
+          :key="$route.fullPath"
           class="flex justify-center"
           v-if="pageCount > 1"
           :totalPages="pageCount"
@@ -82,7 +89,7 @@ import { RepoPerms } from '~/types/permTypes'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 
 const PAGE_SIZE = 25
-const VISIBLE_PAGES = 3
+const VISIBLE_PAGES = 5
 
 export interface IssueListFilters {
   page?: number
@@ -119,6 +126,16 @@ export default class Issues extends mixins(
   public currentPage: Maybe<number> = null
   public urlFilterState: Record<string, string | (string | null)[]> = {}
   public autofixIssue: Record<string, string | Array<string>> = {}
+
+  updateCategory(newVal: string): void {
+    this.queryParams.category = newVal
+    this.queryParams.page = 1
+  }
+
+  updateAnalyzer(newVal: string): void {
+    this.queryParams.analyzer = newVal
+    this.queryParams.page = 1
+  }
 
   created() {
     this.queryParams as IssueListFilters

@@ -5,7 +5,7 @@
       <div class="max-w-2xl">
         <alert-box
           v-if="billing.synced === false"
-          text-color="text-light-honey"
+          text-color="text-honey-300"
           bg-color="bg-honey"
           class="mb-1"
         >
@@ -17,7 +17,7 @@
         <alert-box
           v-else-if="billing.pendingUpdate"
           bg-color="bg-robin"
-          text-color="text-light-robin"
+          text-color="text-robin-150"
           class="mb-1"
         >
           <p>
@@ -27,7 +27,7 @@
         </alert-box>
         <alert-box
           v-if="billing.cancelAtPeriodEnd"
-          text-color="text-light-honey"
+          text-color="text-honey-300"
           bg-color="bg-honey"
           class="mb-1"
         >

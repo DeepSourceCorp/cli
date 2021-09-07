@@ -109,15 +109,24 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin) {
     }
   }
 
+  mounted() {
+    this.$socket.$on('repo-analysis-updated', this.refetchData)
+  }
+
+  beforeDestroy() {
+    this.$socket.$off('repo-analysis-updated', this.refetchData)
+  }
+
+  async refetchData(): Promise<void> {
+    await this.fetchWidgets({
+      ...this.baseRouteParams,
+      refetch: true
+    })
+  }
+
   async fetch(): Promise<void> {
     this.loading = true
-    const { provider, owner, repo } = this.$route.params
-    await this.fetchWidgets({
-      name: repo,
-      provider,
-      owner
-    })
-
+    await this.fetchWidgets(this.baseRouteParams)
     this.loading = false
   }
 

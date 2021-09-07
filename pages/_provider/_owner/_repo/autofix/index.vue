@@ -193,26 +193,38 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
   private selectedRun = this.options[0]
 
   mounted(): void {
-    this.$socket.$on('refetch-autofix-run', (data: Record<string, string>) => {
-      this.fetchAutofixRunList({
-        ...this.baseRouteParams,
-        refetch: true
-      })
-    })
+    this.$socket.$on('refetch-autofix-run', this.refetchData)
+    this.$socket.$on('repo-analysis-updated', this.refetchData)
+  }
+  beforeDestroy(): void {
+    this.$socket.$off('refetch-autofix-run', this.refetchData)
+    this.$socket.$off('repo-analysis-updated', this.refetchData)
   }
 
   created(): void {
     this.setAnalysisUpdateEvent()
   }
 
+  async refetchData(): Promise<void> {
+    this.fetchAutofixRunList({
+      ...this.baseRouteParams,
+      refetch: true
+    })
+  }
+
   async fetch(): Promise<void> {
     this.fetchingData = true
-    await this.fetchBasicRepoDeatils(this.baseRouteParams)
-    await this.fetchRepoPerms(this.baseRouteParams)
-    await this.fetchAutofixRunList({
-      ...this.baseRouteParams,
-      refetch: false
-    })
+
+    await Promise.all([
+      this.fetchBasicRepoDeatils(this.baseRouteParams),
+      this.fetchRepoAutofixStats(this.baseRouteParams),
+      this.fetchRepoPerms(this.baseRouteParams),
+      this.fetchAutofixRunList({
+        ...this.baseRouteParams,
+        refetch: false
+      })
+    ])
+
     this.fetchingData = false
     this.setLoaderCount(this.repository.autofixableIssuesPerAnalyzer?.length ?? 4)
   }

@@ -73,6 +73,19 @@ export default class AlertingMetricsSection extends mixins(RepoDetailMixin) {
   @Prop({ default: false })
   routeToMetricsPage: boolean
 
+  mounted() {
+    this.$socket.$on('repo-analysis-updated', this.refetchData)
+  }
+
+  beforeDestroy() {
+    this.$socket.$off('repo-analysis-updated', this.refetchData)
+  }
+
+  async refetchData(): Promise<void> {
+    await this.fetchAlertingMetrics({ ...this.baseRouteParams, refetch: true })
+    this.setLoaderCount()
+  }
+
   async fetch(): Promise<void> {
     this.loading = true
     await this.fetchAlertingMetrics(this.baseRouteParams)

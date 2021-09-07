@@ -86,7 +86,7 @@ export default class BaseGraph extends Vue {
   @Prop({ default: () => [] })
   metrics: Array<Record<string, string>>
 
-  @Prop({ default: ['robin'] })
+  @Prop({ default: ['robin-500'] })
   colors: Array<string>
 
   @Prop({ default: true })

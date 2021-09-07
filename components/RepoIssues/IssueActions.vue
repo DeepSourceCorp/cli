@@ -67,16 +67,16 @@
 
     <!-- Create issue on VCS -->
     <z-button
-      v-if="issue.newVcsIssueUrl"
+      v-if="issue.newVcsIssueUrl && $route.params.provider !== 'bb'"
       :to="issue.newVcsIssueUrl"
       target="_blank"
       rel="noopener noreferrer"
       buttonType="secondary"
-      icon="github"
+      :icon="$route.params.provider === 'gl' ? 'gitlab' : 'github'"
       size="small"
       class="hidden sm:flex"
     >
-      Create issue on GitHub
+      Create issue on {{ $route.params.provider === 'gl' ? 'GitLab' : 'GitHub' }}
     </z-button>
     <z-button
       v-if="issue.newVcsIssueUrl"

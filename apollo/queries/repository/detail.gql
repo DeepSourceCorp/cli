@@ -42,19 +42,5 @@ query RepoDetails($provider: VCSProviderChoices!, $owner: String!, $name: String
         }
       }
     }
-    autofixableIssuesMetadata {
-      autofixableIssueCount
-      estimatedTimeSaved
-    }
-    autofixableIssuesPerAnalyzer {
-      analyzer {
-        shortcode
-        logo
-        analyzerLogo
-        name
-      }
-      filesAffected
-      issueCount
-    }
   }
 }

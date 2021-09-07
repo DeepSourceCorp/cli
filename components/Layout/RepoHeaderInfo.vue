@@ -6,7 +6,7 @@
         <span class="whitespace-nowrap">Last analyzed</span>
         <nuxt-link
           :to="$generateRoute(['run', runId, analyzer])"
-          class="bg-ink-200 cursor-pointer rounded-md inline-flex px-1 items-center gap-1"
+          class="bg-ink-200 cursor-pointer rounded-md inline-flex px-1 items-center gap-1 font-mono"
         >
           <z-icon icon="git-commit" size="x-small"></z-icon>
           {{ commitId.slice(0, 7) }}
@@ -17,27 +17,34 @@
       </div>
     </div>
     <div v-if="defaultBranch" class="flex items-center space-x-2">
-      <z-icon size="small" icon="git-branch"></z-icon>
-      <span>Default analysis branch is</span>
-      <z-menu direction="left" size="base" class="text-vanilla-100">
-        <span
-          slot="trigger"
-          class="bg-ink-200 text-vanilla-400 rounded-md flex px-1 items-center gap-1"
-        >
-          {{ defaultBranch }}
-          <z-icon icon="chevron-down" size="small"></z-icon>
-        </span>
-        <template slot="body">
-          <z-menu-item>
+      <z-icon size="small" icon="git-branch" class="flex-shrink-0"></z-icon>
+      <div>
+        <span>Default analysis branch is</span>
+        <z-menu direction="left" size="base" class="text-vanilla-100 inline">
+          <span
+            slot="trigger"
+            class="bg-ink-200 text-vanilla-400 rounded-md flex px-1 items-center gap-1"
+          >
+            <span class="truncate font-mono" :class="defaultBranch.length > 12 ? 'w-24' : ''">
+              {{ defaultBranch }}
+            </span>
+            <z-icon icon="chevron-down" size="small"></z-icon>
+          </span>
+          <template slot="body">
             <a :href="vcsUrl" target="blank" rel="noreferrer noopener">
-              View {{ defaultBranch }} on {{ $providerMetaMap[repository.vcsProvider].text }}
+              <z-menu-item>
+                <span class="leading-snug">
+                  View <span class="font-mono inline">{{ defaultBranch }}</span> on
+                  {{ $providerMetaMap[repository.vcsProvider].text }}
+                </span>
+              </z-menu-item>
             </a>
-          </z-menu-item>
-          <z-menu-item v-if="canChangeBranch" @click="showBranchUpdateModal = true">
-            Change default analysis branch
-          </z-menu-item>
-        </template>
-      </z-menu>
+            <z-menu-item v-if="canChangeBranch" @click="showBranchUpdateModal = true">
+              Change default analysis branch
+            </z-menu-item>
+          </template>
+        </z-menu>
+      </div>
     </div>
     <div v-if="currentlyAnalysing > 0" class="flex items-center gap-2">
       <z-pulse></z-pulse>

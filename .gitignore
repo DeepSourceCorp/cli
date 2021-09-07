@@ -79,6 +79,7 @@ dist
 
 # IDE / Editor
 .idea
+.nova
 
 # Service worker
 sw.*

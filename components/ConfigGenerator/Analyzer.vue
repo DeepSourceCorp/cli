@@ -28,7 +28,7 @@
         @click="onClose"
         v-if="!readOnly"
         v-tooltip="{ content: 'Remove Analyzer', delay: { show: 700, hide: 100 } }"
-        class="cursor-pointer p-1 hover:bg-light-cherry hover:bg-opacity-20 rounded-md"
+        class="cursor-pointer p-1 hover:bg-cherry-600 hover:bg-opacity-20 rounded-md"
       >
         <z-icon icon="trash-2" color="cherry" size="small"></z-icon>
       </button>

@@ -61,6 +61,14 @@ export default class RepoDetailMixin extends Vue {
     refetch?: boolean
   }) => Promise<void>
 
+  @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_AUTOFIX_STATS)
+  fetchRepoAutofixStats: (args: {
+    provider: string
+    owner: string
+    name: string
+    refetch?: boolean
+  }) => Promise<void>
+
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_COMMIT_POSSIBLE)
   fetchIsCommitPossible: (args: { provider: string; owner: string; name: string }) => Promise<void>
 
@@ -84,7 +92,12 @@ export default class RepoDetailMixin extends Vue {
   fetchRepoPerms: (args: { provider: string; owner: string; name: string }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_WIDGETS)
-  fetchWidgets: (args: { provider: string; owner: string; name: string }) => Promise<void>
+  fetchWidgets: (args: {
+    provider: string
+    owner: string
+    name: string
+    refetch?: boolean
+  }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_METRICS)
   fetchMetrics: (args: {
@@ -109,6 +122,7 @@ export default class RepoDetailMixin extends Vue {
     owner: string
     name: string
     lastDays: number
+    refetch?: boolean
   }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_AUTOFIX_TRENDS)

@@ -5230,7 +5230,7 @@ export type Unnamed_57_Query = (
   { __typename?: 'Query' }
   & { owner?: Maybe<(
     { __typename?: 'Owner' }
-    & Pick<Owner, 'id' | 'billingEmail' | 'billingAddress' | 'vcsInstallationId' | 'hasPremiumPlan' | 'login'>
+    & Pick<Owner, 'id' | 'login' | 'billingEmail' | 'billingAddress' | 'vcsInstallationId' | 'hasPremiumPlan'>
     & { billingInfo?: Maybe<(
       { __typename?: 'BillingInfo' }
       & Pick<BillingInfo, 'planSlug' | 'status' | 'upgradePlans' | 'downgradePlans' | 'seatsTotal' | 'seatsUsed' | 'lastBillAmount' | 'upcomingBillAmount' | 'lastPaymentDate' | 'upcomingPaymentDate' | 'lastInvoiceUrl' | 'cancelAtPeriodEnd' | 'upcomingCancellationDate' | 'outstandingCredits' | 'billingBackend' | 'synced' | 'pendingUpdate'>
@@ -5494,6 +5494,32 @@ export type Unnamed_63_Query = (
   )> }
 );
 
+export type RepoAutofixStatsQueryVariables = Exact<{
+  provider: VcsProviderChoices;
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type RepoAutofixStatsQuery = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id'>
+    & { autofixableIssuesMetadata?: Maybe<(
+      { __typename?: 'AutofixableIssuesMetadata' }
+      & Pick<AutofixableIssuesMetadata, 'autofixableIssueCount' | 'estimatedTimeSaved'>
+    )>, autofixableIssuesPerAnalyzer?: Maybe<Array<Maybe<(
+      { __typename?: 'AnalyzerAutofixableIssues' }
+      & Pick<AnalyzerAutofixableIssues, 'filesAffected' | 'issueCount'>
+      & { analyzer?: Maybe<(
+        { __typename?: 'Analyzer' }
+        & Pick<Analyzer, 'shortcode' | 'logo' | 'analyzerLogo' | 'name'>
+      )> }
+    )>>> }
+  )> }
+);
+
 export type Unnamed_64_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
@@ -5581,17 +5607,7 @@ export type RepoDetailsQuery = (
           & Pick<Analyzer, 'id' | 'shortcode' | 'name' | 'logo' | 'analyzerLogo'>
         )> }
       )>> }
-    )>, autofixableIssuesMetadata?: Maybe<(
-      { __typename?: 'AutofixableIssuesMetadata' }
-      & Pick<AutofixableIssuesMetadata, 'autofixableIssueCount' | 'estimatedTimeSaved'>
-    )>, autofixableIssuesPerAnalyzer?: Maybe<Array<Maybe<(
-      { __typename?: 'AnalyzerAutofixableIssues' }
-      & Pick<AnalyzerAutofixableIssues, 'filesAffected' | 'issueCount'>
-      & { analyzer?: Maybe<(
-        { __typename?: 'Analyzer' }
-        & Pick<Analyzer, 'shortcode' | 'logo' | 'analyzerLogo' | 'name'>
-      )> }
-    )>>> }
+    )> }
   )> }
 );
 

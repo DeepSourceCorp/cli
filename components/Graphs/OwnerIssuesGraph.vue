@@ -45,7 +45,7 @@
       :labels="formattedLabels"
       :showControl="false"
       :height="290"
-      :colors="['vanilla-400', 'robin']"
+      :colors="['vanilla-400', 'robin-500']"
       :spline="false"
       type="line"
     ></base-graph>

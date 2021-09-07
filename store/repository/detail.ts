@@ -9,6 +9,7 @@ import RepositoryPermsGQLQuery from '~/apollo/queries/repository/perms.gql'
 import RepositoryCurrentRunAnalysisQuery from '~/apollo/queries/repository/analysisRun.gql'
 import RepositoryIssueTrendsQuery from '~/apollo/queries/repository/issueTrends.gql'
 import RepositoryAutofixTrendsQuery from '~/apollo/queries/repository/autofixTrends.gql'
+import RepositoryAutofixStatsQuery from '~/apollo/queries/repository/autofixStats.gql'
 import RepositoryIssueTypeDistributionQuery from '~/apollo/queries/repository/issueTypeDistribution.gql'
 import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
 import RepositoryMetricsGQLQuery from '~/apollo/queries/repository/metrics.gql'
@@ -85,6 +86,7 @@ export interface RepoConfigInterface {
 export enum RepositoryDetailActions {
   FETCH_REPOSITORY_DETAIL = 'fetchRepositoryDetail',
   FETCH_REPOSITORY_BASE_DETAILS = 'fetchBasicRepoDetails',
+  FETCH_REPOSITORY_AUTOFIX_STATS = 'fetchRepoAutofixStats',
   FETCH_REPOSITORY_COMMIT_POSSIBLE = 'fetchRepositoryCommitPossible',
   FETCH_AVAILABLE_ANALYZERS = 'fetchAvailableAnalyzers',
   FETCH_REPOSITORY_PERMS = 'fetchRepositoryPerms',
@@ -178,6 +180,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       provider: string
       owner: string
       name: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [RepositoryDetailActions.FETCH_METRICS]: (
@@ -209,6 +212,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       owner: string
       name: string
       lastDays: number
+      refetch?: boolean
     }
   ) => Promise<void>
   [RepositoryDetailActions.FETCH_AUTOFIX_TRENDS]: (
@@ -385,6 +389,16 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       refetch?: boolean
     }
   ) => Promise<void>
+  [RepositoryDetailActions.FETCH_REPOSITORY_AUTOFIX_STATS]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
+      refetch?: boolean
+    }
+  ) => Promise<void>
   [RepositoryDetailActions.FETCH_REPOSITORY_COMMIT_POSSIBLE]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -419,11 +433,15 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
 export const actions: RepositoryDetailModuleActions = {
   async [RepositoryDetailActions.FETCH_WIDGETS]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryWidgetsGQLQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name
-    })
+    await this.$fetchGraphqlData(
+      RepositoryWidgetsGQLQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched widgets")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
@@ -509,12 +527,16 @@ export const actions: RepositoryDetailModuleActions = {
   async [RepositoryDetailActions.FETCH_ISSUE_TRENDS]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
     // use metrics query later
-    await this.$fetchGraphqlData(RepositoryIssueTrendsQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name,
-      lastDays: args.lastDays
-    })
+    await this.$fetchGraphqlData(
+      RepositoryIssueTrendsQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name,
+        lastDays: args.lastDays
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched widgets")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
@@ -881,6 +903,19 @@ export const actions: RepositoryDetailModuleActions = {
     const { provider, owner, name, refetch } = args
     const response = await this.$fetchGraphqlData(
       RepositoryBaseDetailGQLQuery,
+      {
+        provider: this.$providerMetaMap[provider].value,
+        owner,
+        name
+      },
+      refetch
+    )
+    commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+  },
+  async [RepositoryDetailActions.FETCH_REPOSITORY_AUTOFIX_STATS]({ commit }, args) {
+    const { provider, owner, name, refetch } = args
+    const response = await this.$fetchGraphqlData(
+      RepositoryAutofixStatsQuery,
       {
         provider: this.$providerMetaMap[provider].value,
         owner,
