@@ -17,7 +17,7 @@
     >
       <nuxt-link :to="$generateRoute(['generate-config'])">
         <z-button icon="settings" size="small" button-type="secondary" class="mt-4"
-          >Generate Config</z-button
+          >Generate config</z-button
         >
       </nuxt-link>
 
@@ -28,7 +28,7 @@
         size="small"
         class="mt-4"
       >
-        Activate Repository
+        Activate repository
       </z-button>
       <z-button v-else size="small" class="mt-4">
         <z-icon class="animate-spin" icon="spin-loader" color="ink"></z-icon>
