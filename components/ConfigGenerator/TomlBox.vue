@@ -9,7 +9,7 @@
           @click="copyToml"
           v-tooltip="{
             placement: 'top',
-            content: 'Copy to Clipboard',
+            content: 'Copy to clipboard',
             delay: { show: 700, hide: 100 },
             classes: 'shadow-lg'
           }"
@@ -115,8 +115,8 @@ export default class TomlBox extends Vue {
   @Prop({ default: false })
   isAutofixEnabled: boolean
 
-  private copyIcon = 'clipboard'
-  private copyIconColor = 'vanilla-400'
+  public copyIcon = 'clipboard'
+  public copyIconColor = 'vanilla-400'
 
   activateRepo(): void {
     this.$emit('activateRepo')

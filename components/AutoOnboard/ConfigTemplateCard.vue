@@ -11,6 +11,7 @@
     <template slot="info">
       <div class="flex items-center justify-around h-full">
         <z-button
+          v-tooltip="'Edit template'"
           v-if="allowCrud"
           icon="edit"
           buttonType="ghost"
@@ -19,6 +20,7 @@
           size="small"
         ></z-button>
         <z-button
+          v-tooltip="'Use template'"
           @click.stop.prevent="onboard"
           :icon="loadOnboarding ? 'spin-loader' : 'fast-forward'"
           :iconColor="
