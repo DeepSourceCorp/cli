@@ -3,6 +3,9 @@ export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'DeepSource',
+    bodyAttrs: {
+      class: 'antialiased stroke-2'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -37,6 +40,7 @@ export default {
     githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
     enableSaml: Boolean(process.env.ENABLE_SAML),
     allowSocialAuth: process.env.ON_PREM ? process.env.ALLOW_SOCIAL_AUTH : true,
+    licenseExpiry: process.env.ON_PREM ? new Date(process.env.LICENSE_EXPIRY) : null,
     supportEmail: process.env.ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io'
   },
 
@@ -129,7 +133,7 @@ export default {
   ],
 
   router: {
-    middleware: ['auth'],
+    middleware: ['auth', 'licenseValidation'],
     extendRoutes(routes, resolve) {
       routes.push({
         name: 'github',
@@ -189,7 +193,7 @@ export default {
   },
 
   googleFonts: {
-    download: process.env.ON_PREM,
+    download: process.env.NODE_ENV !== 'development' && process.env.ON_PREM,
     families: {
       Inter: [100, 200, 300, 400, 500, 600, 700]
     }

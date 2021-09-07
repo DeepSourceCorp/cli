@@ -1,6 +1,6 @@
 <template>
   <list-section title="Recently active repositories">
-    <template slot="controls">
+    <template v-if="canActivateRepo" slot="controls">
       <div class="text-right hidden md:block">
         <z-button
           v-tooltip="'Activate new repository'"
@@ -27,71 +27,75 @@
       </div>
     </template>
     <template v-else-if="repoWithActiveAnalysis.edges.length">
-      <list-item
-        v-for="repo in repoWithActiveAnalysis.edges"
-        :key="repo.node.id"
-        :to="generateLink(repo.node)"
-        :icon="repo.node.isPrivate ? 'lock' : 'globe'"
-        class="px-4 py-3"
-      >
-        <template slot="label">
-          <div class="flex items-center space-x-3">
-            <span>
-              {{ repo.node.name }}
-            </span>
-            <span
-              v-if="repo.node.availableAnalyzers && repo.node.availableAnalyzers.edges"
-              class="space-x-3 hidden xs:flex"
-            >
-              <analyzer-logo
-                v-for="edge in repo.node.availableAnalyzers.edges"
-                :key="edge.node.name"
-                v-bind="edge.node"
-              />
-            </span>
-          </div>
-        </template>
-        <template slot="info">
-          <span v-tooltip="formatDate(repo.node.lastAnalyzedAt, 'lll')">{{
-            repo.node.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.node.lastAnalyzedAt) : ''
-          }}</span>
-        </template>
-      </list-item>
+      <template v-for="repo in repoWithActiveAnalysis.edges">
+        <list-item
+          v-if="repo && repo.node"
+          :key="repo.node.id"
+          :to="generateLink(repo.node)"
+          :icon="repo.node.isPrivate ? 'lock' : 'globe'"
+          class="px-4 py-3"
+        >
+          <template slot="label">
+            <div class="flex items-center space-x-3">
+              <span>
+                {{ repo.node.name }}
+              </span>
+              <span
+                v-if="repo.node.availableAnalyzers && repo.node.availableAnalyzers.edges"
+                class="space-x-3 hidden xs:flex"
+              >
+                <template v-for="edge in repo.node.availableAnalyzers.edges">
+                  <analyzer-logo
+                    v-if="edge && edge.node"
+                    :key="edge.node.name"
+                    v-bind="edge.node"
+                  />
+                </template>
+              </span>
+            </div>
+          </template>
+          <template slot="info">
+            <span v-tooltip="formatDate(repo.node.lastAnalyzedAt, 'lll')">{{
+              repo.node.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.node.lastAnalyzedAt) : ''
+            }}</span>
+          </template>
+        </list-item>
+      </template>
     </template>
   </list-section>
 </template>
 <script lang="ts">
-import { Vue, Component, namespace } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
 import { getHumanizedTimeFromNow, formatDate } from '@/utils/date'
 import { AddRepoModal } from '@/components/AddRepo'
 import AnalyzerLogo from '@/components/AnalyzerLogo.vue'
 
-import { RepoListActions } from '~/store/repository/list'
-
 // types
-import { RepositoryConnection } from '~/types/types'
-
-const repoListStore = namespace('repository/list')
+import { TeamMemberRoleChoices, Repository } from '~/types/types'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import RepoListMixin from '~/mixins/repoListMixin'
+import { TeamPerms } from '../../types/permTypes'
 
 @Component({
   components: { ZButton, ZIcon, AddRepoModal, AnalyzerLogo }
 })
-export default class RecentlyActiveRepoList extends Vue {
-  @repoListStore.State
-  repoWithActiveAnalysis: RepositoryConnection
+export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, RepoListMixin) {
+  public loading = false
+  public showAddRepoModal = false
+  public formatDate = formatDate
+  public getHumanizedTimeFromNow = getHumanizedTimeFromNow
 
-  private loading: boolean = false
-  private showAddRepoModal = false
-
-  @repoListStore.Action(RepoListActions.FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST)
-  fetchRepoList: (params: Record<string, string | number>) => Promise<void>
+  get canActivateRepo(): boolean {
+    const role = this.activeDashboardContext.role as TeamMemberRoleChoices
+    return this.$gateKeeper.team(TeamPerms.ACTIVATE_ANALYSIS, role)
+  }
 
   async fetch(): Promise<void> {
     this.loading = true
     const { provider, owner } = this.$route.params
 
-    await this.fetchRepoList({
+    await this.fetchActiveAnalysisRepoList({
       login: this.$route.params.owner,
       provider: this.$route.params.provider,
       limit: 10
@@ -114,11 +118,7 @@ export default class RecentlyActiveRepoList extends Vue {
     return localCountFromStore ?? 10
   }
 
-  private formatDate = formatDate
-
-  private getHumanizedTimeFromNow = getHumanizedTimeFromNow
-
-  generateLink({ vcsProvider, ownerLogin, name }: Record<string, string>): string {
+  generateLink({ vcsProvider, ownerLogin, name }: Repository): string {
     return ['', this.$providerMetaMap[vcsProvider].shortcode, ownerLogin, name].join('/')
   }
 }

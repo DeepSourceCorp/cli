@@ -316,11 +316,11 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   }
 
   get settingsUrl(): string {
-    if (this.allowedBilling) {
+    if (this.allowedBilling && !this.$config.onPrem) {
       return this.getRoute('settings/billing')
     }
     if (this.allowedAccessControl) {
-      return this.getRoute('settings/access-control')
+      return this.getRoute('settings/access')
     }
     if (this.allowedAutoOnboard) {
       return this.getRoute('settings/auto-onboard')
