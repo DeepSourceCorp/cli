@@ -5,11 +5,12 @@ import (
 	"fmt"
 	"reflect"
 
+	"github.com/deepsourcelabs/cli/utils"
 	"github.com/xeipuuv/gojsonschema"
 )
 
 // Analyzer Config Validator
-func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
+func (c *ConfigValidator) validateAnalyzersConfig() {
 
 	activatedAnalyzers := make(map[string]interface{})
 
@@ -38,8 +39,7 @@ func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
 	// ==== Analyzer shortcode validation ====
 	supported := false
 	for _, analyzer := range c.Config.Analyzers {
-
-		for _, supportedAnalyzer := range analyzers.AnalyzerShortcodes {
+		for _, supportedAnalyzer := range utils.AnaData.AnalyzerShortcodes {
 			if analyzer.Name == supportedAnalyzer {
 				if analyzer.Enabled {
 					activatedAnalyzers[analyzer.Name] = analyzer.Meta
@@ -48,7 +48,6 @@ func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
 				break
 			}
 		}
-
 		if !supported {
 			c.pushError(fmt.Sprintf("Analyzer for \"%s\" is not supported yet.", analyzer.Name))
 		}
@@ -64,9 +63,9 @@ func (c *ConfigValidator) validateAnalyzersConfig(analyzers AnalyzersData) {
 	// Iterating over the activated analyzers and
 	// validating the meta_schema
 	for analyzer, meta := range activatedAnalyzers {
-		for index, supportedAnalyzer := range analyzers.AnalyzerShortcodes {
+		for index, supportedAnalyzer := range utils.AnaData.AnalyzerShortcodes {
 			if analyzer == supportedAnalyzer {
-				analyzerMetaSchema = analyzers.AnalyzesMeta[index]
+				analyzerMetaSchema = utils.AnaData.AnalyzersMeta[index]
 				userActivatedSchema = meta
 			}
 		}

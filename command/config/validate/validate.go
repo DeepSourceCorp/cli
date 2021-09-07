@@ -76,22 +76,8 @@ func (o *Options) Run() error {
 	var validator configvalidator.ConfigValidator
 	var result configvalidator.Result
 
-	// Copying data into the format accepted by configvalidator package
-	analyzersData := configvalidator.AnalyzersData{
-		AnalyzerNames:      utils.AnaData.AnalyzerNames,
-		AnalyzerShortcodes: utils.AnaData.AnalyzerShortcodes,
-		AnalyzerMap:        utils.AnaData.AnalyzersMap,
-		AnalyzesMeta:       utils.AnaData.AnalyzersMeta,
-	}
-
-	transformersData := configvalidator.TransformersData{
-		TransformerNames:      utils.TrData.TransformerNames,
-		TransformerShortcodes: utils.TrData.TransformerShortcodes,
-		TransformerMap:        utils.TrData.TransformerMap,
-	}
-
 	// Send the config contents to get validated
-	result = validator.ValidateConfig(content, analyzersData, transformersData)
+	result = validator.ValidateConfig(content)
 
 	// Checking for all types of errors (due to viper/valid errors/no errors)
 	// and handling them

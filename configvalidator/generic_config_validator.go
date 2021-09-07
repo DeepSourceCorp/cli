@@ -13,6 +13,7 @@ import (
 // - Exclude_Patterns
 // - Test_Patterns
 
+// Validates version field of the DeepSource config
 func (c *ConfigValidator) validateVersion() {
 
 	// ======== Version Validation ========
@@ -40,6 +41,7 @@ func (c *ConfigValidator) validateVersion() {
 	}
 }
 
+// Validates `exclude_patterns` field of the DeepSource config
 func (c *ConfigValidator) validateExcludePatterns() {
 
 	// ======== Exclude Patterns Validation ========
@@ -59,13 +61,15 @@ func (c *ConfigValidator) validateExcludePatterns() {
 
 		// Value of each exclude pattern can only be a string
 		for _, ex_pattern := range c.Config.ExcludePatterns {
-			if reflect.TypeOf(ex_pattern).Kind().String() != "string" {
-				c.pushError(fmt.Sprintf("Value of `exclude_patterns` paths can only be string. Found: %v", reflect.TypeOf(ex_pattern).Kind().String()))
+			numValue, err := strconv.Atoi(ex_pattern)
+			if err == nil {
+				c.pushError(fmt.Sprintf("Value of `exclude_patterns` paths can only be string. Found: %v", numValue))
 			}
 		}
 	}
 }
 
+// Validates `test_patterns` field of the DeepSource config
 func (c *ConfigValidator) validateTestPatterns() {
 
 	// ======== Test Patterns Validation ========
@@ -83,8 +87,9 @@ func (c *ConfigValidator) validateTestPatterns() {
 
 		// Value of each test pattern can only be a string
 		for _, test_pattern := range c.Config.TestPatterns {
-			if reflect.TypeOf(test_pattern).Kind().String() != "string" {
-				c.pushError(fmt.Sprintf("Value of `test_pattern` paths can only be string. Found %v", reflect.TypeOf(test_pattern).Kind().String()))
+			numValue, err := strconv.Atoi(test_pattern)
+			if err == nil {
+				c.pushError(fmt.Sprintf("Value of `test_patterns` paths can only be string. Found: %v", numValue))
 			}
 		}
 	}
