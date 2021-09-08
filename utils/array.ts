@@ -1,3 +1,5 @@
+import { Maybe } from '~/types/types'
+
 function resize(arr: Array<unknown>, newSize: number): Array<unknown> {
   return [...arr, ...Array(Math.max(newSize - arr.length, 0)).fill(0)].splice(0, newSize)
 }
@@ -15,4 +17,18 @@ function getChangeFromTrend(trendData?: Record<string, number[]>, percentage = t
   return percentage ? Math.round(((current - prev) / prev) * 100) : current - prev
 }
 
-export { resize, getLastTwoTrends, getChangeFromTrend }
+function resolveNodes(
+  connection?: { edges: Array<Maybe<{ node?: Maybe<unknown> }>> } | null | undefined
+): unknown[] {
+  if (!connection || !connection.edges) {
+    return []
+  }
+
+  return connection.edges
+    .map((edge) => {
+      return edge?.node ? edge.node : null
+    })
+    .filter(Boolean)
+}
+
+export { resize, getLastTwoTrends, getChangeFromTrend, resolveNodes }

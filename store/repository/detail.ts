@@ -743,14 +743,11 @@ export const actions: RepositoryDetailModuleActions = {
   async [RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_AUDIT_LOGS]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
     try {
-      const response: { data: { repository: Repository } } = await this.$fetchGraphqlData(
-        RepositorySettingsAuditLogGQLQuery,
-        {
-          provider: this.$providerMetaMap[args.provider].value,
-          owner: args.owner,
-          name: args.name
-        }
-      )
+      const response = await this.$fetchGraphqlData(RepositorySettingsAuditLogGQLQuery, {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name
+      })
 
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
       commit(RepositoryDetailMutations.SET_LOADING, false)

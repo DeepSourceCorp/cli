@@ -3,21 +3,22 @@
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">Audit log</div>
     <!-- Timeline -->
-    <div v-if="fetchingLogs" class="space-y-2">
+    <div v-if="$fetchState.pending" class="space-y-2">
       <div v-for="idx in 4" :key="idx" class="w-2/3 h-20 rounded-md bg-ink-300 animate-pulse"></div>
     </div>
-    <div v-else-if="repository.logs && repository.logs.edges && repository.logs.edges.length">
+    <div v-else-if="auditLogs.length">
       <z-timeline>
-        <z-timeline-item class="h-20" v-for="log in repository.logs.edges" :key="log.node.id">
+        <z-timeline-item class="h-20" v-for="log in auditLogs" :key="log.id">
           <template slot="icon">
             <z-avatar
-              :image="log.node.actor.avatar"
-              :user-name="log.node.actor.fullName"
+              v-if="log.actor"
+              :image="log.actor.avatar"
+              :user-name="log.actor.fullName"
               size="sm"
               class="flex-shrink-0"
             ></z-avatar
           ></template>
-          <log v-bind="log.node"></log>
+          <log v-bind="log"></log>
         </z-timeline-item>
       </z-timeline>
     </div>
@@ -31,6 +32,8 @@ import { ZIcon, ZTimeline, ZTimelineItem, ZAvatar } from '@deepsourcelabs/zeal'
 import { RepoPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
+import { AuditLog } from '~/types/types'
+import { resolveNodes } from '~/utils/array'
 
 @Component({
   components: {
@@ -52,14 +55,15 @@ export default class SettingsAuditLog extends mixins(RepoDetailMixin, ActiveUser
   public searchRule = ''
   public fetchingLogs = false
 
+  get auditLogs(): AuditLog[] {
+    return resolveNodes(this.repository.logs) as AuditLog[]
+  }
+
   async fetch(): Promise<void> {
-    this.fetchingLogs = true
     try {
       await this.fetchRepositorySettingsAuditLogs(this.baseRouteParams)
     } catch (e) {
-      this.logSentryErrorForUser(e, 'Audit Log', this.baseRouteParams)
-    } finally {
-      this.fetchingLogs = false
+      this.logSentryErrorForUser(e as Error, 'Audit Log', this.baseRouteParams)
     }
   }
 }
