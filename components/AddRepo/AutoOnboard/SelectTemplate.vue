@@ -87,6 +87,7 @@ import {
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import { ConfigTemplate } from '../../../types/types'
+import { resolveNodes } from '~/utils/array'
 
 @Component({
   components: {
@@ -116,11 +117,7 @@ export default class SelectTemplate extends mixins(ActiveUserMixin, AutoOnboardM
       refetch: true
     })
 
-    this.currentTemplateList = connection.edges
-      .map((edge) => {
-        return edge?.node ? edge.node : null
-      })
-      .filter(Boolean) as ConfigTemplate[]
+    this.currentTemplateList = resolveNodes(connection) as ConfigTemplate[]
   }
 
   get settingsLink(): string {

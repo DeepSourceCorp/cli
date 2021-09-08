@@ -31,6 +31,7 @@ import IssueListItem from '@/components/IssueListItem.vue'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
 
 import { RepositoryIssue } from '~/types/types'
+import { resolveNodes } from '~/utils/array'
 
 @Component({
   components: {
@@ -49,12 +50,7 @@ export default class RecommendedIssues extends mixins(ActiveUserMixin) {
 
   get issueList(): Array<RepositoryIssue | null> {
     if (this.viewer?.recommendedIssues) {
-      const { edges } = this.viewer.recommendedIssues
-      return edges
-        .map((edge) => {
-          return edge?.node ? edge.node : null
-        })
-        .filter((node) => node?.id)
+      return resolveNodes(this.viewer.recommendedIssues) as RepositoryIssue[]
     }
     return []
   }

@@ -24,6 +24,7 @@ import autoOnboard from '~/apollo/mutations/owner/auto-onboard/autoOnboard.gql'
 import createConfigTemplate from '~/apollo/mutations/owner/auto-onboard/createConfigTemplate.gql'
 import deleteConfigTemplate from '~/apollo/mutations/owner/auto-onboard/deleteConfigTemplate.gql'
 import updateConfigTemplate from '~/apollo/mutations/owner/auto-onboard/updateConfigTemplate.gql'
+import { resolveNodes } from '~/utils/array'
 
 export interface AutoOnboardState {
   configTemplate?: ConfigTemplate
@@ -52,11 +53,7 @@ export const mutations: MutationTree<AutoOnboardState> = {
   [AutoOnboardMutations.SET_ONBOARDABLE_REPOS]: (state, value: RepositoryConnection) => {
     state.hasMoreReposToOnboard = value.pageInfo.hasNextPage
     state.onboardableRepositories = state.onboardableRepositories.concat(
-      value.edges
-        .map((edge) => {
-          return edge?.node ? edge.node : null
-        })
-        .filter((node) => node) as Repository[]
+      resolveNodes(value) as Repository[]
     )
   },
   [AutoOnboardMutations.RESET_ONBOARDABLE_REPO_LIST]: (state) => {
@@ -74,18 +71,10 @@ export const mutations: MutationTree<AutoOnboardState> = {
   },
   [AutoOnboardMutations.SET_CONFIG_TEMPLATE_LIST]: (state, value: ConfigTemplateConnection) => {
     state.totalTemplates = value.totalCount ?? 0
-    state.configTemplateList = value.edges
-      .map((edge) => {
-        return edge?.node ? edge.node : null
-      })
-      .filter((node) => node) as ConfigTemplate[]
+    state.configTemplateList = resolveNodes(value) as ConfigTemplate[]
   },
   [AutoOnboardMutations.SET_EVENT_LIST]: (state, value: AutoOnboardEventConnection) => {
-    state.autoOnboardEvents = value.edges
-      .map((edge) => {
-        return edge?.node ? edge.node : null
-      })
-      .filter((node) => node) as AutoOnboardEvent[]
+    state.autoOnboardEvents = resolveNodes(value) as AutoOnboardEvent[]
   }
 }
 

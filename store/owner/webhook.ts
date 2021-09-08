@@ -32,6 +32,7 @@ import disableEndpoint from '~/apollo/mutations/owner/webhooks/disable.gql'
 import deleteEndpoint from '~/apollo/mutations/owner/webhooks/delete.gql'
 import testEndpoint from '~/apollo/mutations/owner/webhooks/test.gql'
 import updateEndpoint from '~/apollo/mutations/owner/webhooks/update.gql'
+import { resolveNodes } from '~/utils/array'
 
 export interface WebhookState {
   endpoint: Webhook
@@ -56,13 +57,8 @@ export enum WebhookMutations {
 
 export const mutations: MutationTree<WebhookState> = {
   [WebhookMutations.SET_WEBHOOK_EVENTS_TYPES_LIST]: (state, value: WebhookEventTypesConnection) => {
-    state.webhookEventTypes = value.edges
-      .map((edge) => {
-        return edge?.node ? edge.node : null
-      })
-      .filter((node) => node)
-      .filter((node) => node?.shortcode !== 'test.event') as WebhookEventTypes[]
-    // TODO: Change this in backend
+    const nodes = resolveNodes(value) as WebhookEventTypes[]
+    state.webhookEventTypes = nodes.filter((node) => node?.shortcode !== 'test.event')
   },
   [WebhookMutations.SET_ENDPOINT]: (state, value: Webhook) => {
     state.endpoint = value
@@ -71,11 +67,7 @@ export const mutations: MutationTree<WebhookState> = {
     state.delivery = value
   },
   [WebhookMutations.SET_ENDPOINT_DELIVERIES]: (state, value: WebhookEventDeliveryConnection) => {
-    state.endpointDeliveries = value.edges
-      .map((edge) => {
-        return edge?.node ? edge.node : null
-      })
-      .filter((node) => node) as WebhookEventDelivery[]
+    state.endpointDeliveries = resolveNodes(value) as WebhookEventDelivery[]
     state.endpointDeliveriesCount = value.totalCount ?? 0
   },
   [WebhookMutations.EMPTY_ENDPOINT_DELIVERIES]: (state) => {
@@ -84,11 +76,7 @@ export const mutations: MutationTree<WebhookState> = {
   },
   [WebhookMutations.SET_WEBHOOK_ENDPOINTS]: (state, value: WebhookConnection) => {
     state.totalWebhookEndpoints = value.totalCount || 0
-    state.webhookEndpoints = value.edges
-      .map((edge) => {
-        return edge?.node ? edge.node : null
-      })
-      .filter((node) => node) as Webhook[]
+    state.webhookEndpoints = resolveNodes(value) as Webhook[]
   }
 }
 

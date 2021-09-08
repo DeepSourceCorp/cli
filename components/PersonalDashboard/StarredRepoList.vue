@@ -43,6 +43,7 @@ import { getHumanizedTimeFromNow, formatDate } from '@/utils/date'
 
 import { Repository } from '~/types/types'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
+import { resolveNodes } from '~/utils/array'
 
 @Component({
   components: {
@@ -51,9 +52,9 @@ import ActiveUserMixin from '@/mixins/activeUserMixin'
   }
 })
 export default class StarredRepoList extends mixins(ActiveUserMixin) {
-  private isLoading = false
-  private formatDate = formatDate
-  private getHumanizedTimeFromNow = getHumanizedTimeFromNow
+  public isLoading = false
+  public formatDate = formatDate
+  public getHumanizedTimeFromNow = getHumanizedTimeFromNow
 
   async fetch(): Promise<void> {
     await this.fetchStarredRepos()
@@ -61,12 +62,7 @@ export default class StarredRepoList extends mixins(ActiveUserMixin) {
 
   get starredRepos(): Array<Repository | null> {
     if (this.viewer?.preference?.starredRepositories) {
-      const { edges } = this.viewer.preference.starredRepositories
-      return edges
-        .map((edge) => {
-          return edge?.node ? edge.node : null
-        })
-        .filter((node) => node?.id)
+      return resolveNodes(this.viewer.preference.starredRepositories) as Repository[]
     }
     return []
   }
