@@ -16,7 +16,7 @@
           <h2 class="text-lg font-medium">Confirm your subscription</h2>
           <p class="text-xs text-vanilla-400">
             You’re subscribing for the <b class="text-vanilla-100">deepsourcelabs</b> team on
-            Github.
+            GitHub.
           </p>
         </div>
         <div class="text-sm space-y-5">
