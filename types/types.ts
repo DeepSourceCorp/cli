@@ -4150,7 +4150,7 @@ export type Unnamed_4_Mutation = (
   { __typename?: 'Mutation' }
   & { refreshToken?: Maybe<(
     { __typename?: 'RefreshToken' }
-    & Pick<RefreshToken, 'token' | 'refreshToken' | 'refreshExpiresIn'>
+    & Pick<RefreshToken, 'token'>
   )> }
 );
 

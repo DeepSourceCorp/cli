@@ -10,7 +10,9 @@
         </div>
       </div>
       <div>
-        <viewer />
+        <client-only>
+          <viewer />
+        </client-only>
       </div>
     </section>
   </div>

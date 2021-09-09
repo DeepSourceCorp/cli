@@ -25,10 +25,12 @@ export enum AuthActionTypes {
 export enum AuthGetterTypes {
   GET_AUTH_URL = 'getAuthUrls',
   GET_LOGGED_IN = 'isLoggedIn',
+  TOKEN = 'getJWT',
   EXPIRY = 'getJWTExpiry'
 }
 
 export interface AuthModuleState {
+  token: string
   tokenExpiresIn: number
   loggedIn: boolean
   authUrls: Record<string, string>
@@ -36,6 +38,7 @@ export interface AuthModuleState {
 }
 
 export const state = (): AuthModuleState => ({
+  token: '',
   tokenExpiresIn: 0,
   loggedIn: false,
   authUrls: {},
@@ -52,6 +55,9 @@ export const getters: GetterTree<AuthModuleState, RootState> = {
   },
   [AuthGetterTypes.GET_LOGGED_IN]: (state): boolean => {
     return state.loggedIn
+  },
+  [AuthGetterTypes.TOKEN]: (state): string => {
+    return state.token
   },
   [AuthGetterTypes.EXPIRY]: (state): number => {
     return state.tokenExpiresIn
@@ -73,8 +79,10 @@ export const mutations: AuthModuleMutations = {
   },
   [AuthMutationTypes.SET_LOGGED_IN]: (state, token: string) => {
     try {
-      const data = JSON.parse(atob(token.split('.')[1]))
+      const decodeStr = process.client ? atob : require('atob')
+      const data = JSON.parse(decodeStr(token.split('.')[1]))
       state.tokenExpiresIn = data.exp
+      state.token = token
     } catch (e) {}
     state.loggedIn = true
   },

@@ -193,16 +193,13 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
   private selectedRun = this.options[0]
 
   mounted(): void {
+    this.setAnalysisUpdateEvent()
     this.$socket.$on('refetch-autofix-run', this.refetchData)
     this.$socket.$on('repo-analysis-updated', this.refetchData)
   }
   beforeDestroy(): void {
     this.$socket.$off('refetch-autofix-run', this.refetchData)
     this.$socket.$off('repo-analysis-updated', this.refetchData)
-  }
-
-  created(): void {
-    this.setAnalysisUpdateEvent()
   }
 
   async refetchData(): Promise<void> {

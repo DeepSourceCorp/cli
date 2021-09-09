@@ -111,10 +111,13 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
 
   get loaderCount(): number {
     const { provider, owner } = this.$route.params
-    const localCountFromStore = this.$localStore.get(
-      `${provider}-${owner}`,
-      'recently-active-repo-count'
-    ) as number
+    let localCountFromStore
+    if (process.client) {
+      localCountFromStore = this.$localStore.get(
+        `${provider}-${owner}`,
+        'recently-active-repo-count'
+      ) as number
+    }
     return localCountFromStore ?? 10
   }
 

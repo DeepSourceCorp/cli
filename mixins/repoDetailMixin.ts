@@ -271,7 +271,9 @@ export default class RepoDetailMixin extends Vue {
 
   setAnalysisUpdateEvent(): void {
     // https://vuejs.org/v2/api/#vm-on
-    this.$socket.$on('repo-analysis-updated', this.onRepoAnalysisUpdated)
+    if (process.client) {
+      this.$socket.$on('repo-analysis-updated', this.onRepoAnalysisUpdated)
+    }
   }
 
   beforeDestroy(): void {

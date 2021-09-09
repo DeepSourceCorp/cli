@@ -51,7 +51,7 @@ export default class Transforms extends mixins(RepoDetailMixin) {
     await this.fetchTransformRuns()
   }
 
-  created(): void {
+  mounted(): void {
     this.setAnalysisUpdateEvent()
   }
 

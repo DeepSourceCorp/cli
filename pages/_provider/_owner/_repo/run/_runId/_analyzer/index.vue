@@ -77,11 +77,8 @@ export default class AnalyzerDetails extends mixins(
     }
   }
 
-  created(): void {
-    this.setAnalysisUpdateEvent()
-  }
-
   mounted(): void {
+    this.setAnalysisUpdateEvent()
     this.$root.$on('refetchCheck', this.refetchCheck)
   }
 

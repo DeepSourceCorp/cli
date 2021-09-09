@@ -1,7 +1,5 @@
 mutation {
   refreshToken {
     token
-    refreshToken
-    refreshExpiresIn
   }
 }

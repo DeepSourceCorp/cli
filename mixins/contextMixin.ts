@@ -13,6 +13,9 @@ export default class ContextMixin extends Vue {
   @contextStore.Getter(ContextGetterTypes.TO_ONBOARD)
   toOnboard: boolean
 
+  @contextStore.Getter(ContextGetterTypes.INSTALLATION_URL)
+  contextInstallationUrl: (provider: string) => string
+
   @contextStore.Action(ContextActionTypes.FETCH_CONTEXT)
   fetchContext: () => Promise<void>
 

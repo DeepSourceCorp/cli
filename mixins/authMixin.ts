@@ -23,6 +23,9 @@ export default class AuthMixin extends Vue {
   @authStore.Action(AuthActionTypes.LOG_OUT)
   logOutUser: () => Promise<void>
 
+  @authStore.Action(AuthActionTypes.LOG_IN)
+  logInUser: (args: { code: string; provider: string }) => Promise<void>
+
   @authStore.Action(AuthActionTypes.FETCH_AUTH_URLS)
   fetchAuthUrls: () => Promise<void>
 
