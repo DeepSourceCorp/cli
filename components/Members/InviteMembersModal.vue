@@ -1,7 +1,7 @@
 <template>
   <z-modal v-if="showModal" title="Invite new members" @onClose="close" :primaryActionLabel="''">
     <div class="p-4 text-sm font-normal space-y-4">
-      <div class="space-y-2">
+      <div class="space-y-2" v-if="$config.emailEnabled">
         <div>
           <h3 class="text-vanilla-100 text-base font-medium">Invite via email</h3>
           <p class="text-vanilla-400 text-sm">
@@ -46,7 +46,7 @@
           </z-button>
         </div>
       </div>
-      <z-divider></z-divider>
+      <z-divider v-if="$config.emailEnabled"></z-divider>
       <div class="space-y-2">
         <div class="flex items-start justify-between">
           <div>
@@ -135,10 +135,10 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin) {
   @Prop({ default: false })
   showModal: boolean
 
-  private membersToInvite = INPUT_DATA
-  private roles = ROLES
-  private clipboardIcon = 'copy'
-  private clipboardColor = 'vanilla-100'
+  membersToInvite = INPUT_DATA
+  roles = ROLES
+  clipboardIcon = 'copy'
+  clipboardColor = 'vanilla-100'
 
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
@@ -180,7 +180,6 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin) {
       }
       return member
     })
-    
 
     return this.membersToInvite.map((member) => member.isValid).some((el) => el === false)
   }

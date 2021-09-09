@@ -38,6 +38,7 @@ export default {
     bitbucketEnabled: process.env.ON_PREM ? process.env.BITBUCKET_ENABLED : true,
     githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
     enableSaml: Boolean(process.env.ENABLE_SAML),
+    emailEnabled: process.env.ON_PREM ? Boolean(process.env.EMAIL_ENABLED) : true,
     allowSocialAuth: process.env.ON_PREM ? process.env.ALLOW_SOCIAL_AUTH : true,
     licenseExpiry: process.env.ON_PREM ? new Date(process.env.LICENSE_EXPIRY) : null,
     supportEmail: process.env.ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io'
