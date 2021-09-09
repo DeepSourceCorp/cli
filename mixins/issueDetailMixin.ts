@@ -12,7 +12,8 @@ import {
   IgnoreIssueForFilePatternInRepositoryPayload,
   IgnoreIssueForTestPatternsInRepositoryPayload,
   ReportIssueFalsePositivePayload,
-  IgnoreCheckIssuePayload
+  IgnoreCheckIssuePayload,
+  SilenceRule
 } from '~/types/types'
 
 const issueStore = namespace('issue/detail')
@@ -26,11 +27,24 @@ export default class IssueDetailMixin extends Vue {
   singleIssue!: Issue
 
   @issueStore.State
+  silenceRules!: SilenceRule[]
+
+  @issueStore.State
   checkIssues!: CheckIssueConnection
 
   // Queries
   @issueStore.Action(IssueDetailActions.FETCH_ISSUE)
   fetchIssueDetails: (args: { repositoryId: string; shortcode: string }) => Promise<void>
+
+  @issueStore.Action(IssueDetailActions.FETCH_SILENCE_RULES)
+  fetchSilenceRules: (args: {
+    provider: string
+    owner: string
+    name: string
+    limit?: number
+    currentPage?: number
+    issueCode: string
+  }) => Promise<void>
 
   @issueStore.Action(IssueDetailActions.FETCH_SINGLE_ISSUE)
   fetchSingleIssue: (args: { shortcode: string }) => Promise<void>

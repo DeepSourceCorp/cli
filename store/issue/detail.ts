@@ -1,6 +1,7 @@
 import RepositoryIssueDetailGQLQuery from '~/apollo/queries/repository/issue/detail.gql'
 import RepositoryNodeIssueDetailGQLQuery from '~/apollo/queries/repository/issue/issueChildren.gql'
 import SingleIssueDetailGQLQuery from '~/apollo/queries/repository/issue/single.gql'
+import SilenceRulesGQLQuery from '~/apollo/queries/repository/issue/silenceRules.gql'
 
 import IgnoreIssueFilePatternMutation from '~/apollo/mutations/issue/ignoreIssueFilePattern.gql'
 import IgnoreIssueTestPatternMutation from '~/apollo/mutations/issue/ignoreIssueTestPattern.gql'
@@ -20,14 +21,18 @@ import {
   CreateAutofixRunInput,
   IgnoreIssueForFilePatternInRepositoryPayload,
   ReportIssueFalsePositivePayload,
-  IgnoreCheckIssuePayload
+  IgnoreCheckIssuePayload,
+  SilenceRule,
+  SilenceRuleConnection
 } from '~/types/types'
 import { RootState } from '~/store'
+import { resolveNodes } from '~/utils/array'
 
 export enum IssueDetailActions {
   FETCH_SINGLE_ISSUE = 'fetchSingleIssue',
   FETCH_ISSUE = 'fetchIssue',
   FETCH_ISSUE_CHILDREN = 'fetchIssueChildren',
+  FETCH_SILENCE_RULES = 'fetchSilenceRules',
   IGNORE_ISSUE_FILE_PATTERN = 'ignoreIssueFilePattern',
   IGNORE_ISSUE_TEST_PATTERN = 'ignoreIssueTestPattern',
   IGNORE_ISSUE_REPOSITORY = 'ignoreIssueRepository',
@@ -42,13 +47,15 @@ export enum IssueDetailMutations {
   SET_ERROR = 'setIssueDetailError',
   SET_SINGLE_ISSUE = 'setSingleIssue',
   SET_ISSUE = 'setIssue',
-  SET_ISSUE_CHILDREN = 'setIssueChildren'
+  SET_ISSUE_CHILDREN = 'setIssueChildren',
+  SET_SILENCE_RULE = 'setSilenceRule'
 }
 
 export interface IssueDetailModuleState {
   loading: boolean
   error: Record<string, any>
   issue: RepositoryIssue
+  silenceRules: SilenceRule[]
   singleIssue: Issue
   checkIssues: CheckIssueConnection
 }
@@ -72,6 +79,10 @@ interface IssueDetailModuleMutations extends MutationTree<IssueDetailModuleState
   [IssueDetailMutations.SET_ERROR]: (state: IssueDetailModuleState, error: GraphqlError) => void
   [IssueDetailMutations.SET_ISSUE]: (state: IssueDetailModuleState, issue: RepositoryIssue) => void
   [IssueDetailMutations.SET_SINGLE_ISSUE]: (state: IssueDetailModuleState, issue: Issue) => void
+  [IssueDetailMutations.SET_SILENCE_RULE]: (
+    state: IssueDetailModuleState,
+    rules: SilenceRuleConnection
+  ) => void
   [IssueDetailMutations.SET_ISSUE_CHILDREN]: (
     state: IssueDetailModuleState,
     checkIssues: CheckIssueConnection
@@ -90,6 +101,9 @@ export const mutations: IssueDetailModuleMutations = {
   },
   [IssueDetailMutations.SET_ISSUE_CHILDREN]: (state, checkIssues: CheckIssueConnection) => {
     state.checkIssues = Object.assign({}, state.checkIssues, checkIssues)
+  },
+  [IssueDetailMutations.SET_SILENCE_RULE]: (state, rules: SilenceRuleConnection) => {
+    state.silenceRules = resolveNodes(rules) as SilenceRule[]
   },
   [IssueDetailMutations.SET_SINGLE_ISSUE]: (state, issue: Issue) => {
     state.singleIssue = Object.assign({}, state.issue, issue)
@@ -121,6 +135,18 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
     injectee: IssueDetailActionContext,
     args: {
       shortcode: string
+    }
+  ) => Promise<void>
+  [IssueDetailActions.FETCH_SILENCE_RULES]: (
+    this: Store<RootState>,
+    injectee: IssueDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
+      limit?: number
+      currentPage?: number
+      issueCode: string
     }
   ) => Promise<void>
   [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN]: (
@@ -213,6 +239,17 @@ export const actions: IssueDetailModuleActions = {
         commit(IssueDetailMutations.SET_ERROR, e)
         commit(IssueDetailMutations.SET_LOADING, false)
       })
+  },
+  async [IssueDetailActions.FETCH_SILENCE_RULES]({ commit }, args) {
+    const response = await this.$fetchGraphqlData(SilenceRulesGQLQuery, {
+      provider: this.$providerMetaMap[args.provider].value,
+      owner: args.owner,
+      name: args.name,
+      limit: args.limit ?? 30,
+      after: this.$getGQLAfter(args.currentPage ?? 1, args.limit ?? 30),
+      issueCode: args.issueCode
+    })
+    commit(IssueDetailMutations.SET_SILENCE_RULE, response.data.repository?.silenceRules)
   },
   async [IssueDetailActions.FETCH_ISSUE_CHILDREN]({ commit }, args) {
     commit(IssueDetailMutations.SET_LOADING, true)

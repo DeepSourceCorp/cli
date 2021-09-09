@@ -3,29 +3,29 @@ import { Inject } from '@nuxt/types/app'
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $providerMetaMap: any
+    $providerMetaMap: Record<string, ProviderMeta>
   }
 }
 
 declare module 'vuex/types/index' {
   interface Store<S> {
-    $providerMetaMap: any
+    $providerMetaMap: Record<string, ProviderMeta>
   }
 }
 
 class ProviderMeta {
-  text: String
-  shortcode: String
-  value: String
+  text: string
+  shortcode: string
+  value: string
 
-  constructor(text: String, shortcode: String, value: String) {
+  constructor(text: string, shortcode: string, value: string) {
     this.text = text
     this.shortcode = shortcode
     this.value = value
   }
 }
 
-export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void  => {
+export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
   inject('providerMetaMap', {
     gh: new ProviderMeta('GitHub', 'gh', 'GITHUB'),
     ghe: new ProviderMeta('GitHub Enterprise', 'ghe', 'GITHUB_ENTERPRISE'),

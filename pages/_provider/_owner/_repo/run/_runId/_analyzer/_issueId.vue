@@ -66,7 +66,52 @@
             @page="(val) => (currentPage = val)"
           ></issue-list>
         </z-tab-pane>
-        <z-tab-pane>There are the list of issues.</z-tab-pane>
+        <z-tab-pane v-if="!$fetchState.pending">
+          <div v-if="Array.isArray(silenceRules) && silenceRules.length" class="space-y-4">
+            <template v-for="rule in silenceRules">
+              <div class="flex items-center" :key="rule.id">
+                <div class="flex-1 flex flex-col space-y-2 text-sm">
+                  <div class="flex space-x-2 w-full">
+                    <div class="flex-1">
+                      <span v-if="rule.issue" class="font-bold text-vanilla-100">{{
+                        rule.issue.shortcode
+                      }}</span>
+                      <span>Ignored</span>
+                      <span v-if="rule.metadata.type === 'pattern'">
+                        for all files matching with pattern
+                      </span>
+                      <span v-else-if="rule.metadata.type === 'test-pattern'">
+                        for all test files in the repository
+                      </span>
+                      <span v-else-if="rule.metadata.type === 'forever'">
+                        <span v-if="rule.silenceLevel === 'FL'"> for file </span>
+                        <span v-else> for all files in this repository </span>
+                      </span>
+                      <span class="font-semibold text-vanilla-100">{{
+                        rule.metadata.glob_pattern || rule.filePath
+                      }}</span>
+                    </div>
+                  </div>
+                  <div v-if="rule.creator" class="flex space-x-4 text-xs">
+                    <span class="flex items-center space-x-1">
+                      <img
+                        :src="rule.creator.avatar"
+                        alt="Creator Avatar"
+                        class="w-4 h-4 overflow-hidden inline-block rounded-full"
+                      />
+                      <span class="text-vanilla-400">{{ rule.creator.email }}</span>
+                    </span>
+                    <span class="flex items-center space-x-2 leading-none">
+                      <z-icon icon="clock" color="vanilla-400" size="small"></z-icon>
+                      <span class="text-vanilla-400">Added {{ fromNow(rule.createdAt) }}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div v-else class="max-w-4xl p-12 text-center">No ignore rules found.</div>
+        </z-tab-pane>
       </z-tab-panes>
     </z-tabs>
   </div>
@@ -84,12 +129,13 @@ import { IssueList } from '@/components/RepoIssues'
 import ShowMore from '@/components/ShowMore.vue'
 
 // Import State & Types
-import { Check, Maybe, CheckEdge } from '~/types/types'
+import { Check, Maybe, CheckEdge, SilenceRule } from '~/types/types'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import { fromNow } from '~/utils/date'
 
 const PAGE_SIZE = 25
 
@@ -122,6 +168,7 @@ export default class RunIssueDetails extends mixins(
   public sort: Maybe<string> = null
   public pageSize = PAGE_SIZE
   public loading = false
+  public fromNow = fromNow
 
   created() {
     const { page, sort, q } = this.$route.query
@@ -180,9 +227,9 @@ export default class RunIssueDetails extends mixins(
     await this.fetchIssues()
     await Promise.all([
       this.fetchSingleIssue({ shortcode: issueId }),
-      this.fetchIssueDetails({
-        repositoryId: this.repository.id,
-        shortcode: issueId
+      this.fetchSilenceRules({
+        ...this.baseRouteParams,
+        issueCode: issueId
       })
     ])
     this.loading = false

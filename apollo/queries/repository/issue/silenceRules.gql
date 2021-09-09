@@ -1,0 +1,34 @@
+query RepoSilenceRules(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $limit: Int
+  $after: String
+  $issueCode: String!
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    silenceRules(first: $limit, after: $after, issueCode: $issueCode) {
+      totalCount
+      edges {
+        node {
+          silenceLevel
+          id
+          filePath
+          createdAt
+          metadata
+          issue {
+            shortcode
+            title
+          }
+          creator {
+            firstName
+            lastName
+            email
+            avatar
+          }
+        }
+      }
+    }
+  }
+}
