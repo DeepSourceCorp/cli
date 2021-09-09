@@ -21,15 +21,16 @@
       <div>
         <span>Default analysis branch is</span>
         <z-menu direction="left" size="base" class="text-vanilla-100 inline">
-          <span
-            slot="trigger"
-            class="bg-ink-200 text-vanilla-400 rounded-md flex px-1 items-center gap-1"
-          >
-            <span class="truncate font-mono" :class="defaultBranch.length > 12 ? 'w-24' : ''">
-              {{ defaultBranch }}
-            </span>
-            <z-icon icon="chevron-down" size="small"></z-icon>
-          </span>
+          <template v-slot:trigger="{ toggle }">
+            <button type="button" class="outline-none focus:outline-none" @click="toggle">
+              <span class="bg-ink-200 text-vanilla-400 rounded-md flex px-1 items-center gap-1">
+                <span class="truncate font-mono" :class="defaultBranch.length > 12 ? 'w-24' : ''">
+                  {{ defaultBranch }}
+                </span>
+                <z-icon icon="chevron-down" size="small"></z-icon>
+              </span>
+            </button>
+          </template>
           <template slot="body">
             <a :href="vcsUrl" target="blank" rel="noreferrer noopener">
               <z-menu-item>

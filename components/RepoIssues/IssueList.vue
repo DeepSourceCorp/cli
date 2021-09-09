@@ -3,9 +3,17 @@
     <div class="flex gap-2 w-full xl:w-4/6 flex-row-reverse xl:flex-row">
       <!-- Sort menu -->
       <z-menu direction="right" width="x-small" class="text-vanilla-100">
-        <z-button slot="trigger" buttonType="secondary" icon="amount-down" size="small">
-          Sort
-        </z-button>
+        <template v-slot:trigger="{ toggle }">
+          <z-button
+            type="button"
+            buttonType="secondary"
+            icon="amount-down"
+            size="small"
+            @click="toggle"
+          >
+            Sort
+          </z-button>
+        </template>
         <template slot="body" class="text-vanilla-200">
           <z-menu-item
             v-for="filter in sortFilters"

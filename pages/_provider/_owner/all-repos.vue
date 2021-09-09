@@ -29,13 +29,16 @@
       <div class="text-xs text-vanilla-400">
         Showing
         <z-menu direction="right" class="inline-block text-vanilla-100">
-          <span
-            slot="trigger"
-            class="flex items-center px-1 space-x-1 rounded-md bg-ink-200 text-vanilla-400"
-          >
-            {{ pageSize }}
-            <z-icon icon="chevron-down" size="small"></z-icon>
-          </span>
+          <template v-slot:trigger="{ toggle }">
+            <button
+              slot="trigger"
+              class="flex items-center px-1 space-x-1 rounded-md bg-ink-200 text-vanilla-400 outline-none focus:outline-none"
+              @click="toggle"
+            >
+              {{ pageSize }}
+              <z-icon icon="chevron-down" size="small"></z-icon>
+            </button>
+          </template>
           <template slot="body">
             <div class="px-2 py-1 space-y-1">
               <h6 class="font-semibold uppercase text-xxs text-vanilla-400">
