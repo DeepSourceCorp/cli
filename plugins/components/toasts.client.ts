@@ -65,7 +65,7 @@ declare module 'vue/types/vue' {
   }
 }
 
-export default (context: Context, inject: Inject) => {
+export default (context: Context, inject: Inject): void  => {
   const toasts = document.createElement('div')
   containerClasses.forEach((c) => toasts.classList.add(c))
   toasts.setAttribute('id', 'toasts-wrapper')

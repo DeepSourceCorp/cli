@@ -25,7 +25,7 @@ class ProviderMeta {
   }
 }
 
-export default ({ app }: { app: NuxtAppOptions }, inject: Inject) => {
+export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void  => {
   inject('providerMetaMap', {
     gh: new ProviderMeta('GitHub', 'gh', 'GITHUB'),
     ghe: new ProviderMeta('GitHub Enterprise', 'ghe', 'GITHUB_ENTERPRISE'),
