@@ -15,25 +15,11 @@
 
     <!-- Ignore issue actions -->
     <z-menu v-if="canIgnoreIssues" direction="left" width="40" class="text-vanilla-100">
-      <template v-slot:trigger="{ toggle }">
-        <z-button
-          type="button"
-          buttonType="secondary"
-          size="small"
-          icon="slash"
-          class="hidden sm:flex"
-          @click="toggle"
+      <template slot="trigger">
+        <z-button buttonType="secondary" size="small" icon="slash" class="hidden sm:flex"
+          >Ignore this issue</z-button
         >
-          Ignore this issue
-        </z-button>
-        <z-button
-          type="button"
-          buttonType="secondary"
-          size="small"
-          icon="slash"
-          class="sm:hidden"
-          @click="toggle"
-        ></z-button>
+        <z-button buttonType="secondary" size="small" icon="slash" class="sm:hidden"></z-button>
       </template>
       <template slot="body" class="text-vanilla-200">
         <z-menu-item

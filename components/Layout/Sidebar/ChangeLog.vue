@@ -1,23 +1,27 @@
 <template>
   <z-menu width="2x-large" placement="top" bodySpacing="p-0 border border-ink-200">
-    <template v-slot:trigger="{ toggle }">
-      <button
-        type="button"
-        class="flex items-center justify-center w-4 h-4 mb-2 bg-opacity-50 rounded-full cursor-pointer outline-none focus:outline-none"
-        :class="unseenCount > 0 ? 'bg-juniper' : 'bg-ink-200'"
-        @click="
-          () => {
-            markAll()
-            toggle()
-          }
+    <template slot="trigger">
+      <div
+        class="
+          flex
+          items-center
+          justify-center
+          w-4
+          h-4
+          mb-2
+          bg-opacity-50
+          rounded-full
+          cursor-pointer
         "
+        :class="unseenCount > 0 ? 'bg-juniper' : 'bg-ink-200'"
+        @click="markAll"
         v-tooltip="helpText"
       >
         <div
           class="w-2 h-2 rounded-full"
           :class="unseenCount > 0 ? 'bg-juniper' : 'bg-ink-200'"
         ></div>
-      </button>
+      </div>
     </template>
     <template slot="body">
       <div
@@ -50,7 +54,15 @@
           @click="() => markRead(log)"
           target="blank"
           rel="noopener noreferrer"
-          class="px-4 py-3.5 space-y-2 border-b border-ink-100 cursor-pointer hover:bg-ink-200 hover:bg-opacity-50 block"
+          class="
+            px-4
+            py-3.5
+            space-y-2
+            border-b border-ink-100
+            cursor-pointer
+            hover:bg-ink-200 hover:bg-opacity-50
+            block
+          "
           :class="{
             'bg-ink-200': !log.read
           }"
@@ -69,9 +81,7 @@
                 {{ category }}
               </z-tag>
             </div>
-            <p class="text-vanilla-400 text-xxs mt-0.5">
-              {{ getHumanizedTimeFromNow(log.dateTime) }}
-            </p>
+            <p class="text-vanilla-400 text-xxs mt-0.5">{{ getHumanizedTimeFromNow(log.dateTime) }}</p>
           </div>
         </a>
       </div>

@@ -27,17 +27,15 @@
       </div>
       <div class="flex justify-end">
         <z-menu v-if="canIgnoreIssues">
-          <template v-slot:trigger="{ isOpen, toggle }">
+          <template v-slot:trigger="{ isOpen }">
             <z-button
               v-tooltip="'Ignore this occurance'"
-              type="button"
               buttonType="ghost"
               icon="slash"
               iconColor="vanilla-400"
               size="small"
               class="focus:outline-none hover:bg-ink-200 -mt-1 -mr-1"
               :class="isOpen ? 'bg-ink-200' : ''"
-              @click="toggle"
             />
           </template>
           <template slot="body">

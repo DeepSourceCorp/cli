@@ -1,12 +1,7 @@
 <template>
   <z-menu width="2x-large">
-    <template v-slot:trigger="{ isOpen, toggle }">
-      <button
-        type="button"
-        class="hover:bg-ink-300 rounded-md p-2"
-        :class="{ 'bg-ink-300': isOpen }"
-        @click="toggle"
-      >
+    <template v-slot:trigger="{ isOpen }">
+      <button class="hover:bg-ink-300 rounded-md p-2" :class="{ 'bg-ink-300': isOpen }">
         <z-icon icon="bell" color="vanilla-400"></z-icon>
       </button>
     </template>

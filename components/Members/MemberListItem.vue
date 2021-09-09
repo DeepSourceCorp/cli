@@ -11,15 +11,11 @@
       <div class="text-right">
         <div v-if="isPrimaryUser && !isRepo" class="text-juniper">Owner</div>
         <z-menu v-else width="large">
-          <template v-slot:trigger="{ toggle }">
-            <button
-              type="button"
-              class="flex items-center space-x-2 outline-none focus:outline-none"
-              @click="toggle"
-            >
+          <template slot="trigger">
+            <div class="flex items-center space-x-2">
               <span>{{ roles[role].title }}</span>
               <z-icon size="small" icon="chevron-down"></z-icon>
-            </button>
+            </div>
           </template>
           <template slot="body">
             <z-menu-section class="text-left">

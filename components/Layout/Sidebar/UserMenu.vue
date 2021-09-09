@@ -1,14 +1,12 @@
 <template>
   <z-menu placement="top">
-    <template v-slot:trigger="{ toggle }">
-      <button
-        type="button"
-        class="flex items-center space-x-2 text-sm hover:bg-ink-300 rounded-sm py-1 outline-none focus:outline-none"
+    <template slot="trigger">
+      <div
+        class="flex items-center space-x-2 text-sm hover:bg-ink-300 rounded-sm py-1"
         :class="{
           'pr-2 pl-1': !isCollapsed,
           'px-1': isCollapsed
         }"
-        @click="toggle"
       >
         <z-avatar
           :image="viewer.avatar"
@@ -19,7 +17,7 @@
         <span v-show="!isCollapsed" class="leading-none">{{
           viewer.fullName || viewer.email
         }}</span>
-      </button>
+      </div>
     </template>
     <template v-if="viewer" slot="body" class="z-10">
       <z-menu-section title="Logged In As" class="py-1">

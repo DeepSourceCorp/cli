@@ -1,35 +1,28 @@
 <template>
   <div class="space-y-1">
-    <z-menu ref="recently-active-repo-menu" v-if="isCollapsed">
-      <template v-slot:trigger="{ toggle }">
-        <button
-          type="button"
-          class="flex items-center justify-center space-x-2 text-sm hover:bg-ink-300 rounded-sm py-1 min-w-8 h-8 outline-none focus:outline-none"
-          @click="toggle"
+    <z-menu v-if="isCollapsed">
+      <template slot="trigger">
+        <div
+          class="flex items-center justify-center space-x-2 text-sm hover:bg-ink-300 rounded-sm py-1 min-w-8 h-8"
         >
           <z-icon icon="activity" size="small" class="min-w-4 min-h-4"></z-icon>
-        </button>
+        </div>
       </template>
       <template slot="body" class="z-10">
         <z-menu-section :divider="false">
-          <z-menu-item
-            v-for="repo in repoList"
-            as="nuxt-link"
-            :key="repo.id"
-            :to="buildRoute(repo)"
-            class="w-full"
-            @click.native="closeMenu"
-          >
-            <div class="flex space-x-2 leading-none items-center">
-              <z-icon
-                :icon="repo.icon"
-                size="small"
-                :color="repo.isActive ? 'juniper' : ''"
-                class="min-w-4 min-h-4"
-              ></z-icon>
-              <div class="text-sm">{{ repo.name }}</div>
-            </div>
-          </z-menu-item>
+          <nuxt-link v-for="repo in repoList" :key="repo.id" :to="buildRoute(repo)" class="w-full">
+            <z-menu-item>
+              <div class="flex space-x-2 leading-none items-center">
+                <z-icon
+                  :icon="repo.icon"
+                  size="small"
+                  :color="repo.isActive ? 'juniper' : ''"
+                  class="min-w-4 min-h-4"
+                ></z-icon>
+                <div class="text-sm">{{ repo.name }}</div>
+              </div>
+            </z-menu-item>
+          </nuxt-link>
         </z-menu-section>
       </template>
     </z-menu>
@@ -66,10 +59,6 @@ import { RepositoryEdge, Maybe } from '~/types/types'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
-
-interface ZMenuT extends Vue {
-  close: () => void
-}
 
 @Component({
   components: {
@@ -134,10 +123,6 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
 
   public getRoute(params: string): string {
     return `/${this.activeProvider}/${this.activeOwner}/${params}`
-  }
-
-  public closeMenu(): void {
-    ;(this.$refs['recently-active-repo-menu'] as ZMenuT).close()
   }
 }
 </script>

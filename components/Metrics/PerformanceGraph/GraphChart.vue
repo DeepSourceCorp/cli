@@ -32,10 +32,8 @@
           {{ isNumberType ? currentThreshold : `${currentThreshold}%` }}
         </span>
         <z-menu direction="left" width="small" size="small">
-          <template v-slot:trigger="{ toggle }">
-            <button type="button" class="outline-none focus:outline-none" @click="toggle">
-              <z-icon class="inline" icon="more-vertical"></z-icon>
-            </button>
+          <template slot="trigger">
+            <z-icon class="inline" icon="more-vertical"></z-icon>
           </template>
           <template slot="body">
             <z-menu-item @click="showThresholdUpdate = true" class="text-sm" icon="edit-2"
