@@ -74,10 +74,8 @@ func (o *Options) Run() error {
 
 	// Create an instance of ConfigValidator struct
 	var validator configvalidator.ConfigValidator
-	var result configvalidator.Result
-
 	// Send the config contents to get validated
-	result = validator.ValidateConfig(content)
+	var result configvalidator.Result = validator.ValidateConfig(content)
 
 	// Checking for all types of errors (due to viper/valid errors/no errors)
 	// and handling them
