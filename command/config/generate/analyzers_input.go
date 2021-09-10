@@ -134,13 +134,14 @@ func populateMetaData(optionalFields []string, jsonParsed *gabs.Container) []Ana
 // and handling prompt for inputting these fields
 func (o *Options) extractRequiredAnalyzerMetaFields() error {
 	var optionalFields []string
-	var requireMetaData []AnalyzerMetadata
+	var requiredMetaData []AnalyzerMetadata
 	var analyzerFieldsData = make(map[string][]AnalyzerMetadata)
 
 	// Extract `optional_required` fields of analyzer meta of selected analyzers
 	for _, activatedAnalyzer := range o.ActivatedAnalyzers {
 		// Assigning optional fields to nil before checking for an analyzer
 		optionalFields = nil
+		requiredMetaData = nil
 		for idx, supportedAnalyzer := range utils.AnaData.AnalyzerNames {
 			if activatedAnalyzer != supportedAnalyzer {
 				continue
@@ -163,9 +164,9 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 				continue
 			}
 			// Extract the the data to be input for all the required analyzer meta properties
-			requireMetaData = populateMetaData(optionalFields, jsonParsed)
+			requiredMetaData = populateMetaData(optionalFields, jsonParsed)
 		}
-		analyzerFieldsData[activatedAnalyzer] = requireMetaData
+		analyzerFieldsData[activatedAnalyzer] = requiredMetaData
 	}
 	return o.inputAnalyzerMeta(analyzerFieldsData)
 }
