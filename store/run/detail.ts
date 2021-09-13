@@ -265,11 +265,11 @@ export const actions: RunDetailModuleActions = {
       const response = await this.$applyGraphqlMutation(CreateAutofixRunForPullRequestMutation, {
         input: args.input
       })
-      commit(RunDetailMutations.SET_LOADING, false)
-      return response
+      return response.data.createAutofixRunForPullRequest
     } catch (e) {
       const error = e as GraphqlError
       commit(RunDetailMutations.SET_ERROR, error)
+    } finally {
       commit(RunDetailMutations.SET_LOADING, false)
     }
   },

@@ -3,6 +3,7 @@ import {
   Check,
   CheckIssueConnection,
   CreateAutofixRunForPullRequestInput,
+  CreateAutofixRunForPullRequestPayload,
   CreatePullRequestInput,
   IssueConnection,
   Maybe,
@@ -67,7 +68,9 @@ export default class RunDetailMixin extends Vue {
   }) => Promise<void>
 
   @runDetailStore.Action(RunDetailActions.CREATE_AUTOFIX_PR)
-  createAutofixPullRequest: (args: { input: CreateAutofixRunForPullRequestInput }) => Promise<void>
+  createAutofixPullRequest: (args: {
+    input: CreateAutofixRunForPullRequestInput
+  }) => Promise<CreateAutofixRunForPullRequestPayload>
 
   @runDetailStore.Action(RunDetailActions.COMMIT_TO_PR)
   commitToPullRequest: (args: { input: CreatePullRequestInput }) => Promise<void>
