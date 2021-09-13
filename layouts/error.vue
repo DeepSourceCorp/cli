@@ -29,14 +29,14 @@
       <h1 class="text-7xl font-black text-center">{{ error.statusCode }}</h1>
       <p class="text-center text-vanilla-100 font-semibold text-lg">{{ error.message }}</p>
       <p v-if="error.statusCode === 404" class="text-vanilla-400">
-        Just like the theory that says '404' was named after a
-        room at CERN where the first web servers were located.
+        Just like the theory that says '404' was named after a room at CERN where the first web
+        servers were located.
       </p>
       <div class="flex items-center justify-center space-x-3">
         <NuxtLink class="text-center text-juniper text-sm hover:underline" to="/"
           >Home page</NuxtLink
         >
-        <NuxtLink class="text-center text-juniper text-sm hover:underline" to="/login"
+        <NuxtLink class="text-center text-juniper text-sm hover:underline" :to="loginUrl"
           >Login</NuxtLink
         >
       </div>
@@ -58,5 +58,9 @@ export default class ErrorLayout extends Vue {
   error: NuxtError
 
   public formatDate = formatDate
+
+  get loginUrl(): string {
+    return `/login?next=${this.$route.fullPath}`
+  }
 }
 </script>
