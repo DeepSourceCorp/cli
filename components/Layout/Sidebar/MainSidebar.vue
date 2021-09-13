@@ -165,19 +165,30 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
     this.fetchRepoCount()
   }
 
-  @Watch('activeOwner')
-  async fetchRepoCount(refetch?: boolean): Promise<void> {
-    const pageSize =
+  getPageSize(): number {
+    if (!process.client) {
+      return 10
+    }
+
+    return (
       (this.$localStore.get(
         `${this.activeProvider}-${this.activeProvider}-all-repos`,
         `currentPageSize`
       ) as number) || 10
+    )
+  }
+
+  @Watch('activeOwner')
+  async fetchRepoCount(refetch?: boolean): Promise<void> {
+    const pageSize = this.getPageSize()
+
     await this.fetchRepoList({
       provider: this.activeProvider,
       login: this.activeOwner,
       limit: pageSize,
       currentPageNumber: 1,
-      query: ''
+      query: '',
+      refetch
     })
   }
 
