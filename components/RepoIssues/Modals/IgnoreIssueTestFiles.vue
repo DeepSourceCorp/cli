@@ -26,7 +26,7 @@
           ><br />
           You can look at the
           <a
-            href="https://deepsource.io/docs/config/deepsource-toml.html#test-patterns"
+            href="https://deepsource.io/docs/concepts#test_patterns"
             target="_blank"
             rel="noopener noreferrer"
             class="text-juniper hover:underline"
