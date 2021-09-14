@@ -60,6 +60,7 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 	var err error
 	// Iterate over the map and fetch the input for the fields from the user
 	for analyzer, metaFields := range requiredFieldsData {
+		log.Println(analyzer, metaFields)
 		for i := 0; i < len(metaFields); i++ {
 			switch metaFields[i].Type {
 			case "boolean":
@@ -72,6 +73,7 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 					metaFields[i].UserInput = "false"
 				}
 			case "enum":
+				log.Println(metaFields[i].Title)
 				metaFields[i].UserInput, err = utils.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
 				if err != nil {
 					return err
@@ -95,7 +97,6 @@ func populateMetaData(optionalFields []string, jsonParsed *gabs.Container) []Ana
 
 	// Iterate through the properties using the parsed json (jsonParsed) and extract the data of the
 	// required analyzer meta fields
-	count := 0
 	for key, child := range jsonParsed.Search("properties").ChildrenMap() {
 		if !isContains(optionalFields, key) {
 			continue
@@ -105,26 +106,28 @@ func populateMetaData(optionalFields []string, jsonParsed *gabs.Container) []Ana
 			log.Printf("Error occured while parsing analyzer meta property: %v\n", err)
 			continue
 		}
-		requiredFieldsData[count].FieldName = key
-		requiredFieldsData[count].Title = propertyJSON.Search("title").Data().(string)
-		requiredFieldsData[count].Description = propertyJSON.Search("description").Data().(string)
-		requiredFieldsData[count].Type = propertyJSON.Search("type").Data().(string)
+
+		singleRequiredFieldData := AnalyzerMetadata{
+			FieldName:   key,
+			Type:        propertyJSON.Search("type").Data().(string),
+			Title:       propertyJSON.Search("title").Data().(string),
+			Description: propertyJSON.Search("description").Data().(string),
+		}
 
 		// Check for enum property
 		for _, child := range propertyJSON.Search("enum").Children() {
-			requiredFieldsData[count].Options = append(requiredFieldsData[count].Options, child.Data().(string))
-			requiredFieldsData[count].Type = "enum"
+			singleRequiredFieldData.Options = append(singleRequiredFieldData.Options, child.Data().(string))
+			singleRequiredFieldData.Type = "enum"
 		}
 
 		// Check for items property
 		itemsPath := propertyJSON.Path("items")
 		itemsJSON, _ := gabs.ParseJSON(itemsPath.Bytes())
 		for _, child := range itemsJSON.Search("enum").Children() {
-			requiredFieldsData[count].Options = append(requiredFieldsData[count].Options, child.Data().(string))
-			requiredFieldsData[count].Type = "enum"
+			singleRequiredFieldData.Options = append(singleRequiredFieldData.Options, child.Data().(string))
+			singleRequiredFieldData.Type = "enum"
 		}
-		// Increment count to accomodate the next required field in next index
-		count++
+		requiredFieldsData = append(requiredFieldsData, singleRequiredFieldData)
 	}
 	return requiredFieldsData
 }
@@ -161,7 +164,7 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 			}
 			// Move on to next analyzer if no "optional_required" fields found
 			if len(optionalFields) == 0 {
-				continue
+				break
 			}
 			// Extract the the data to be input for all the required analyzer meta properties
 			requiredMetaData = populateMetaData(optionalFields, jsonParsed)
