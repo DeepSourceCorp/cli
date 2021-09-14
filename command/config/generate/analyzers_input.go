@@ -90,9 +90,8 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 }
 
 // Extracts the fields that are compulsary according to the meta schema and require input
-func populateMetaData(optionalFields []string, jsonParsed *gabs.Container) []AnalyzerMetadata {
-	requiredFieldsData := make([]AnalyzerMetadata, len(optionalFields))
-	requiredFieldsData = nil
+func populateMetadata(optionalFields []string, jsonParsed *gabs.Container) []AnalyzerMetadata {
+	requiredFieldsData := make([]AnalyzerMetadata, 0)
 
 	// Iterate through the properties using the parsed json (jsonParsed) and extract the data of the
 	// required analyzer meta fields
@@ -162,7 +161,7 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 			continue
 		}
 		// Extract the the data to be input for all the required analyzer meta properties
-		requiredMetaData = populateMetaData(optionalFields, jsonParsed)
+		requiredMetaData = populateMetadata(optionalFields, jsonParsed)
 		analyzerFieldsData[activatedAnalyzer] = requiredMetaData
 	}
 	return o.inputAnalyzerMeta(analyzerFieldsData)
