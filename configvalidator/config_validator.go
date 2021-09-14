@@ -22,30 +22,15 @@ type ConfigValidator struct {
 	Result Result
 }
 
-type AnalyzersData struct {
-	AnalyzerNames      []string
-	AnalyzerShortcodes []string
-	AnalyzerMap        map[string]string
-	AnalyzesMeta       []string
-}
-
-type TransformersData struct {
-	TransformerNames      []string
-	TransformerShortcodes []string
-	TransformerMap        map[string]string
-}
-
 // Entrypoint to the package `configvalidator`
-// Accepts a string of deepsource config and validates it
-func (c *ConfigValidator) ValidateConfig(inputConfig []byte, analyzersData AnalyzersData, transformersData TransformersData) Result {
+// Accepts DeepSource config as a parameter and validates it
+func (c *ConfigValidator) ValidateConfig(inputConfig []byte) Result {
+	// Base cases
+	c.Result.Valid = true
+	c.Result.ConfigReadError = false
 
 	// Making a "config" struct based on DSConfig to store the DeepSource config
 	config := DSConfig{}
-
-	// Base case. Optimism++
-	c.Result.Valid = true
-
-	// Unmarshaling the received config into "config" struct based on DSConfig
 	viper.SetConfigType("toml")
 	err := viper.ReadConfig(bytes.NewBuffer(inputConfig))
 	if err != nil {
@@ -55,25 +40,19 @@ func (c *ConfigValidator) ValidateConfig(inputConfig []byte, analyzersData Analy
 		c.Result.ConfigReadError = true
 		return c.Result
 	}
-
-	// Now since viper has read the config successfully, we won't have the chance
-	// of a "ConfigReadError"
-	c.Result.ConfigReadError = false
-
 	// Unmarshaling the configdata into DSConfig struct
 	viper.UnmarshalExact(&config)
 	c.Config = config
 
 	// Validate generic config which applies to all analyzers and transformers
-	// Example: Version, Exclude Patterns, Test Patterns
+	// Includes : Version, Exclude Patterns, Test Patterns
 	c.validateGenericConfig()
 
-	// Validate the analyzers related config
-	c.validateAnalyzersConfig(analyzersData)
+	// Validate the Analyzers configuration
+	c.validateAnalyzersConfig()
 
-	// Validate the transformers related config
-	c.validateTransformersConfig(transformersData)
-
+	// Validate the Transformers configuration
+	c.validateTransformersConfig()
 	return c.Result
 }
 

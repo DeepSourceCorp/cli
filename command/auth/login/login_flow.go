@@ -93,22 +93,16 @@ func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.J
 
 	// Polling for fetching JWT
 	func() {
-		for {
-			select {
-			case <-ticker.C:
-				// Fetch JWT
-				jwtData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
-				if err == nil {
-					authTimedOut = false
-					return
-				}
-
-				// Check if polling timed-out
-				timeElapsed := time.Since(pollStartTime)
-				if timeElapsed >= time.Duration(deviceRegistrationData.ExpiresIn)*time.Second {
-					authTimedOut = true
-					return
-				}
+		for range ticker.C {
+			jwtData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
+			if err == nil {
+				authTimedOut = false
+				return
+			}
+			timeElapsed := time.Since(pollStartTime)
+			if timeElapsed >= time.Duration(deviceRegistrationData.ExpiresIn)*time.Second {
+				authTimedOut = true
+				return
 			}
 		}
 	}()

@@ -44,7 +44,7 @@ func GetRepoStatus(client *DSClient, owner string, repoName string, provider str
 		return false, err
 	}
 
-	if respData.Repository.Isactivated == true {
+	if respData.Repository.Isactivated {
 		return true, nil
 	}
 
