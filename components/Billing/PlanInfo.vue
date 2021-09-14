@@ -90,7 +90,15 @@
               v-model="seatsCount"
             ></z-input>
             <p class="mt-3 text-sm text-vanilla-400">
-              In your current plan, you can have up to {{ currentPlan.max_seats }} seats in total.
+              You can add up to {{ currentPlan.max_seats }} seats. If you need more seats, please
+              write to us at
+              <a
+                href="mailto:support@deepsource.io"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-juniper hover:underline"
+                >support@deepsource.io</a
+              >.
             </p>
             <div class="space-x-4 text-right text-vanilla-100 mt-4">
               <z-button
