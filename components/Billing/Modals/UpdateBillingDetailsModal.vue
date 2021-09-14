@@ -7,47 +7,35 @@
   >
     <div class="p-4 space-y-4">
       <fieldset class="text-sm space-y-1">
-        <label class="leading-loose text-vanilla-400">Billing Email</label>
-        <z-input
-          required="true"
-          type="email"
-          size="small"
-          :showBorder="validBillingEmail || !emailEmpty"
-          :class="!validBillingEmail || emailEmpty ? 'border border-cherry' : ''"
-          :validate-on-blur="true"
-          v-model="billingEmail"
-          @blur="(ev) => validateEmail(ev.target)"
-          placeholder="jane@deepsource.io"
-        ></z-input>
+        <label class="leading-loose text-vanilla-400"
+          >Billing email
+          <z-input
+            :required="true"
+            type="email"
+            size="small"
+            :is-invalid="emailEmpty || !validBillingEmail"
+            :validate-on-blur="true"
+            v-model="billingEmail"
+            @blur="(ev) => validateEmail(ev.target)"
+            placeholder="jane@deepsource.io"
+            class="mt-0.5"
+          ></z-input>
+        </label>
         <p v-if="emailEmpty" class="text-xs text-cherry">This field is required.</p>
         <p v-else-if="!validBillingEmail" class="text-xs text-cherry">
           Please enter a valid email.
         </p>
       </fieldset>
       <fieldset class="text-sm space-y-1">
-        <label class="text-vanilla-400">Billing Address</label>
-        <textarea
-          class="
-            w-full
-            h-full
-            p-2
-            text-xs
-            bg-ink-400
-            border
-            outline-none
-            resize-none
-            min-h-20
-            text-vanilla-400
-            focus:border-vanilla-100
-          "
-          :class="addressEmpty ? 'border-cherry' : 'border-ink-100'"
-          required="true"
-          size="small"
-          v-model="billingAddress"
-          placeholder="Jane Doe"
-          @blur="validateAddress"
-        ></textarea>
-        <p v-if="addressEmpty" class="text-xs text-cherry">This field is required.</p>
+        <label class="leading-loose text-vanilla-400"
+          >Billing address
+          <textarea
+            v-model="billingAddress"
+            class="w-full h-full p-2 text-xs bg-ink-400 border outline-none resize-none min-h-20 text-vanilla-400 focus:border-vanilla-100 mt-0.5"
+            size="small"
+            :placeholder="`Avengers Tower \n200 Park Avenue, New York`"
+          ></textarea>
+        </label>
       </fieldset>
     </div>
     <template slot="footer">
@@ -95,7 +83,6 @@ export default class UpdateBillingDetailsModal extends mixins(OwnerDetailMixin) 
   private validBillingEmail = true
   private emailEmpty = false
   private loading = false
-  private addressEmpty = false
 
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
@@ -106,14 +93,6 @@ export default class UpdateBillingDetailsModal extends mixins(OwnerDetailMixin) 
 
     this.billingEmail = this.owner.billingEmail || ''
     this.billingAddress = this.owner.billingAddress || ''
-  }
-
-  validateAddress(): void {
-    if (!this.billingAddress) {
-      this.addressEmpty = true
-      return
-    }
-    this.addressEmpty = false
   }
 
   validateEmail(el: HTMLInputElement): void {
@@ -132,12 +111,7 @@ export default class UpdateBillingDetailsModal extends mixins(OwnerDetailMixin) 
       return
     }
 
-    if (!this.billingAddress) {
-      this.addressEmpty = true
-      return
-    }
-
-    if (this.billingEmail && this.billingAddress && this.validBillingEmail) {
+    if (this.billingEmail && this.validBillingEmail) {
       const { owner, provider } = this.$route.params
       this.loading = true
       try {
@@ -147,14 +121,14 @@ export default class UpdateBillingDetailsModal extends mixins(OwnerDetailMixin) 
           login: owner,
           provider
         })
-        this.$toast.success('Billing email and address updated successfully')
+        this.$toast.success('Billing email and address updated successfully.')
         if (modal && modal.close) {
           modal.close()
         } else {
           this.$emit('onClose')
         }
       } catch (e) {
-        this.$toast.danger('Unable to update billing info. Please verify the details entered')
+        this.$toast.danger('Unable to update billing info. Please verify the details entered.')
       } finally {
         this.loading = false
       }
