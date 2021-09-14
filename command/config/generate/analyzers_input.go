@@ -60,7 +60,6 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 	var err error
 	// Iterate over the map and fetch the input for the fields from the user
 	for analyzer, metaFields := range requiredFieldsData {
-		log.Println(analyzer, metaFields)
 		for i := 0; i < len(metaFields); i++ {
 			switch metaFields[i].Type {
 			case "boolean":
@@ -73,7 +72,6 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 					metaFields[i].UserInput = "false"
 				}
 			case "enum":
-				log.Println(metaFields[i].Title)
 				metaFields[i].UserInput, err = utils.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
 				if err != nil {
 					return err
@@ -94,6 +92,7 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 // Extracts the fields that are compulsary according to the meta schema and require input
 func populateMetaData(optionalFields []string, jsonParsed *gabs.Container) []AnalyzerMetadata {
 	requiredFieldsData := make([]AnalyzerMetadata, len(optionalFields))
+	requiredFieldsData = nil
 
 	// Iterate through the properties using the parsed json (jsonParsed) and extract the data of the
 	// required analyzer meta fields
@@ -107,7 +106,7 @@ func populateMetaData(optionalFields []string, jsonParsed *gabs.Container) []Ana
 			continue
 		}
 
-		singleRequiredFieldData := AnalyzerMetadata{
+		individualFieldRequiredData := AnalyzerMetadata{
 			FieldName:   key,
 			Type:        propertyJSON.Search("type").Data().(string),
 			Title:       propertyJSON.Search("title").Data().(string),
@@ -116,18 +115,18 @@ func populateMetaData(optionalFields []string, jsonParsed *gabs.Container) []Ana
 
 		// Check for enum property
 		for _, child := range propertyJSON.Search("enum").Children() {
-			singleRequiredFieldData.Options = append(singleRequiredFieldData.Options, child.Data().(string))
-			singleRequiredFieldData.Type = "enum"
+			individualFieldRequiredData.Options = append(individualFieldRequiredData.Options, child.Data().(string))
+			individualFieldRequiredData.Type = "enum"
 		}
 
 		// Check for items property
 		itemsPath := propertyJSON.Path("items")
 		itemsJSON, _ := gabs.ParseJSON(itemsPath.Bytes())
 		for _, child := range itemsJSON.Search("enum").Children() {
-			singleRequiredFieldData.Options = append(singleRequiredFieldData.Options, child.Data().(string))
-			singleRequiredFieldData.Type = "enum"
+			individualFieldRequiredData.Options = append(individualFieldRequiredData.Options, child.Data().(string))
+			individualFieldRequiredData.Type = "enum"
 		}
-		requiredFieldsData = append(requiredFieldsData, singleRequiredFieldData)
+		requiredFieldsData = append(requiredFieldsData, individualFieldRequiredData)
 	}
 	return requiredFieldsData
 }
@@ -145,30 +144,25 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 		// Assigning optional fields to nil before checking for an analyzer
 		optionalFields = nil
 		requiredMetaData = nil
-		for idx, supportedAnalyzer := range utils.AnaData.AnalyzerNames {
-			if activatedAnalyzer != supportedAnalyzer {
-				continue
-			}
-			analyzerMeta := utils.AnaData.AnalyzersMeta[idx]
 
-			// Parse the analyzer meta of the analyzer using `gabs`
-			jsonParsed, err := gabs.ParseJSON([]byte(analyzerMeta))
-			if err != nil {
-				log.Printf("Error occured while parsing meta for %s analyzer.\n", activatedAnalyzer)
-				return err
-			}
-
-			// Search for "optional_required" fields in the meta-schema
-			for _, child := range jsonParsed.Search("optional_required").Children() {
-				optionalFields = append(optionalFields, child.Data().(string))
-			}
-			// Move on to next analyzer if no "optional_required" fields found
-			if len(optionalFields) == 0 {
-				break
-			}
-			// Extract the the data to be input for all the required analyzer meta properties
-			requiredMetaData = populateMetaData(optionalFields, jsonParsed)
+		analyzerMeta := utils.AnaData.AnalyzersMetaMap[activatedAnalyzer]
+		// Parse the analyzer meta of the analyzer using `gabs`
+		jsonParsed, err := gabs.ParseJSON([]byte(analyzerMeta))
+		if err != nil {
+			log.Printf("Error occured while parsing meta for %s analyzer.\n", activatedAnalyzer)
+			return err
 		}
+
+		// Search for "optional_required" fields in the meta-schema
+		for _, child := range jsonParsed.Search("optional_required").Children() {
+			optionalFields = append(optionalFields, child.Data().(string))
+		}
+		// Move on to next analyzer if no "optional_required" fields found
+		if optionalFields == nil {
+			continue
+		}
+		// Extract the the data to be input for all the required analyzer meta properties
+		requiredMetaData = populateMetaData(optionalFields, jsonParsed)
 		analyzerFieldsData[activatedAnalyzer] = requiredMetaData
 	}
 	return o.inputAnalyzerMeta(analyzerFieldsData)
