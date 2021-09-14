@@ -1055,11 +1055,12 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@deepsourcelabs/zeal@^0.6.11":
-  version "0.6.11"
-  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.6.11/543a6259dd03d81e87a765954f15e2ed5dd45e1757be27bb38ed9b1cad4f55ec#df2d7cfc967bd9b08e32cf3854205900252ee401"
-  integrity sha512-Cql3qhKcrECFbY/mbcfyUNWKs8nkcfNXLu9kQ7HaesqHRlUZ3opH/I1kKp5G+e6x+Z2M6nxhBUuaalHksqJegA==
+"@deepsourcelabs/zeal@^0.6.17":
+  version "0.6.17"
+  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.6.17/37443cfe2796349e0ca67c2399f66cfd6b6fcdc74a0ef449dd37996444bc21df#ffc67cc49591fce8ef475fc36962d5776bac4009"
+  integrity sha512-UgreaYwxVKqFzkdZV/tqSs1LXbFqUpeHm13GPSutJN8FDxSakgR2tO3MIE4HXQE2o/XdX3Y+xCeefuIhOy/hhg==
   dependencies:
+    "@tailwindcss/line-clamp" "^0.2.1"
     "@tailwindcss/postcss7-compat" "^2.2.7"
     "@tailwindcss/typography" "^0.4.1"
     "@tiptap/extension-bubble-menu" "^2.0.0-beta.25"
@@ -2690,6 +2691,11 @@
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.2.0.tgz#7f30f26ed3835d64d1eb5a9b0d60cf5291dd2a3b"
   integrity sha512-+jXSdRK3/9V/BCPCr+iNpMMhxWMMv62vn/AS2b3/ClmueGuhCijW3bUwO1IiHnE7uCaF74Sli8jUCv9djwvpLg==
+
+"@tailwindcss/line-clamp@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/line-clamp/-/line-clamp-0.2.1.tgz#efafe556719c26a3926f0679a98307c4bc9270d2"
+  integrity sha512-Hq2KJY1+T2v7jw/mnT3mnC7CKbp5kj1XTqzSb2xbEt1j+JkxIR6N3ijsN/WevZtsKJfVE1KOejA/3IRKuhZEsQ==
 
 "@tailwindcss/postcss7-compat@^2.2.7":
   version "2.2.7"
