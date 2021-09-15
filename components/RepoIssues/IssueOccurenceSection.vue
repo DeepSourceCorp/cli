@@ -2,16 +2,18 @@
   <div class="flex gap-2 w-full xl:w-4/6 flex-row-reverse xl:flex-row">
     <!-- Sort menu -->
     <z-menu direction="right" width="x-small" class="text-vanilla-100">
-      <z-button slot="trigger" size="small" class="text-sm" buttonType="secondary">
-        <div v-if="!sortApplied" class="flex items-center space-x-2">
-          <z-icon icon="amount-down" size="small"></z-icon>
-          <span class="hidden xl:inline-block">Sort</span>
-        </div>
-        <div v-else class="flex items-center space-x-2">
-          <span class="hidden xl:inline-block">Sorted by - {{ selectedFilter }}</span>
-          <z-icon icon="x" size="small" @click="clearFilter()"></z-icon>
-        </div>
-      </z-button>
+      <template v-slot:trigger="{ toggle }">
+        <z-button type="button" size="small" class="text-sm" buttonType="secondary" @click="toggle">
+          <div v-if="!sortApplied" class="flex items-center space-x-2">
+            <z-icon icon="amount-down" size="small"></z-icon>
+            <span class="hidden xl:inline-block">Sort</span>
+          </div>
+          <div v-else class="flex items-center space-x-2">
+            <span class="hidden xl:inline-block">Sorted by - {{ selectedFilter }}</span>
+            <z-icon icon="x" size="small" @click="clearFilter()"></z-icon>
+          </div>
+        </z-button>
+      </template>
       <template slot="body" class="text-vanilla-200">
         <z-menu-item
           v-for="filter in sortFilters"

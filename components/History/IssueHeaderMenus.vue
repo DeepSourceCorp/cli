@@ -2,9 +2,17 @@
   <div class="flex gap-2 w-full flex-row-reverse xl:flex-row py-4">
     <!-- Sort menu -->
     <z-menu direction="left" width="40" class="text-vanilla-100">
-      <z-button slot="trigger" buttonType="secondary" icon="amount-down" size="small">
-        Sort
-      </z-button>
+      <template v-slot:trigger="{ toggle }">
+        <z-button
+          type="button"
+          buttonType="secondary"
+          icon="amount-down"
+          size="small"
+          @click="toggle"
+        >
+          Sort
+        </z-button>
+      </template>
       <template slot="body" class="text-vanilla-200">
         <z-menu-item v-for="filter in sortFilters" v-bind:key="filter.name" :icon="filter.icon">
           {{ filter.label }}
@@ -13,14 +21,18 @@
     </z-menu>
     <!-- Filter Menu -->
     <z-menu direction="left" width="40" class="text-vanilla-100">
-      <z-badge slot="trigger" type="success" is-dot :hidden="false">
-        <button
-          class="inline-flex items-center px-3 py-2 space-x-2 text-sm leading-none rounded-sm shadow-sm outline-none lg:px-4 bg-ink-300 hover:bg-ink-200 text-vanilla-100 focus:outline-none"
-        >
-          <z-icon icon="z-filter" size="small"></z-icon>
-          <span class="hidden lg:inline-block">Filter</span>
-        </button>
-      </z-badge>
+      <template v-slot:trigger="{ toggle }">
+        <z-badge slot="trigger" type="success" is-dot :hidden="false">
+          <button
+            type="button"
+            class="inline-flex items-center px-3 py-2 space-x-2 text-sm leading-none rounded-sm shadow-sm outline-none lg:px-4 bg-ink-300 hover:bg-ink-200 text-vanilla-100 focus:outline-none"
+            @click="toggle"
+          >
+            <z-icon icon="z-filter" size="small"></z-icon>
+            <span class="hidden lg:inline-block">Filter</span>
+          </button>
+        </z-badge>
+      </template>
       <template slot="body">
         <z-menu-item icon="autofix">Autofix Available</z-menu-item>
       </template>
