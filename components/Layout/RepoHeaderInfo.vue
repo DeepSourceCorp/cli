@@ -48,7 +48,10 @@
     </div>
     <div v-if="currentlyAnalysing > 0" class="flex items-center gap-2">
       <z-pulse></z-pulse>
-      <span>Currently analyzing {{ currentlyAnalysing }} runs</span>
+      <span
+        >Currently analyzing {{ currentlyAnalysing }}
+        {{ currentlyAnalysing > 1 ? 'runs' : 'run' }}</span
+      >
     </div>
     <portal to="modal">
       <z-modal
