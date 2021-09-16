@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="lg:col-span-1 col-span-2 space-y-2">
-      <template v-if="runList.edges && selectedRun.name == 'Analysis runs'">
+      <template v-if="runList.edges && selectedRun.name == 'Analyses'">
         <run-card
           v-for="run in runList.edges"
           :key="run.node.runId"
@@ -37,7 +37,7 @@
           v-for="run in autofixRunList.edges"
           :key="run.node.runId"
           :removeDefaultStyle="false"
-          :showInfo="false"
+          :showInfo="true"
           :status="run.node.status"
           v-bind="run.node"
         ></autofix-list-item>
@@ -52,7 +52,7 @@
           size="small"
         >
           <div class="text-xs flex items-center leading-none space-x-1">
-            <span>View all {{ selectedRun.name.toLowerCase() }}</span>
+            <span>View all {{ selectedRun.name }}</span>
             <z-icon
               class="transform-gpu duration-100 group-hover:translate-x-0.5"
               icon="arrow-right"
@@ -115,7 +115,7 @@ export default class RecentRunsSection extends Vue {
   fetchAutofixRunList: (args: Record<string, string | number>) => Promise<void>
 
   private runOptions = [
-    { name: 'Analysis runs', link: ['history', 'runs'] },
+    { name: 'Analyses', link: ['history', 'runs'] },
     { name: 'Autofixes', link: 'autofix' },
     { name: 'Transforms', link: ['history', 'transforms'] }
   ]

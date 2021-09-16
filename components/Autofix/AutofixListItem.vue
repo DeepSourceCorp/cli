@@ -14,7 +14,7 @@
         {{ pullRequestTitle.trim() || (issue && issue.title) }}
       </h3>
 
-      <span class="text-vanilla-400 font-normal inline md:flex flex-shrink-0" v-if="issue">
+      <span class="text-sm text-vanilla-400 font-normal inline md:flex flex-shrink-0" v-if="issue">
         {{ issue.shortcode }}
       </span>
     </template>
@@ -48,7 +48,12 @@
     <template slot="info">
       <div class="flex justify-around items-center space-x-2 h-full">
         <div class="flex flex-col items-center">
-          <div class="text-2xl font-medium">{{ resolvedIssuesCount }}</div>
+          <div
+            class="text-2xl font-medium"
+            :class="resolvedIssuesCount > 0 ? 'text-juniper' : 'text-vanilla-400'"
+          >
+            {{ resolvedIssuesCount || 0 }}
+          </div>
           <div v-if="isPending" class="text-xs text-vanilla-400">Occurrences fixable</div>
           <div v-else class="text-xs text-vanilla-400">Occurrences fixed</div>
         </div>

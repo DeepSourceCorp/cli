@@ -13,7 +13,7 @@
       >
         {{ branchName }}
       </h3>
-      <span class="text-vanilla-400 font-normal inline md:flex flex-shrink-0"
+      <span class="text-sm text-vanilla-400 font-normal inline md:flex flex-shrink-0"
         >@{{ commitOid.slice(0, 7) }}</span
       >
     </template>

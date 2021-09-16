@@ -10,7 +10,7 @@
         >
         </span>
         <!-- Issue ID -->
-        <span class="block md:flex flex-shrink-0 text-base">{{ shortcode }}</span>
+        <span class="text-sm block md:flex flex-shrink-0">{{ shortcode }}</span>
       </div>
     </template>
     <template slot="description">

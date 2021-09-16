@@ -13,7 +13,7 @@
       >
         {{ branchName }}
       </h3>
-      <span class="text-vanilla-400 font-normal inline md:flex flex-shrink-0"
+      <span class="text-sm text-vanilla-400 font-normal inline md:flex flex-shrink-0"
         >@{{ commitOid.slice(0, 7) }}</span
       >
     </template>
@@ -35,7 +35,8 @@
         <!-- Created -->
         <div v-if="!isPending" class="items-center hidden space-x-1.5 md:flex">
           <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
-          <span class="text-sm text-vanilla-400">{{ statusText }} {{ finishedString }}</span>
+          <span v-if="finishedIn" class="text-sm text-vanilla-400">{{ statusText }} {{ finishedString }}</span>
+          <span v-else class="text-sm text-vanilla-400">{{ absentTimeStatusText }}</span>
         </div>
         <!-- introduced resolved -->
         <div class="items-center flex space-x-1.5 md:hidden">
@@ -156,6 +157,17 @@ export default class RunCard extends Vue {
       [RunStatus.Pend]: 'Analysis in progress',
       [RunStatus.Timo]: 'Timed out after',
       [RunStatus.Cncl]: 'Cancelled after'
+    }
+    return types[this.status || 'PASS']
+  }
+
+  get absentTimeStatusText(): string {
+    const types: Record<string, string> = {
+      [RunStatus.Pass]: 'Passed',
+      [RunStatus.Fail]: 'Failed',
+      [RunStatus.Pend]: 'Analysis in progress',
+      [RunStatus.Timo]: 'Timed out',
+      [RunStatus.Cncl]: 'Cancelled'
     }
     return types[this.status || 'PASS']
   }

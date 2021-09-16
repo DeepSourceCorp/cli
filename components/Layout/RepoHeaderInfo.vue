@@ -54,6 +54,10 @@
         {{ currentlyAnalysing > 1 ? 'runs' : 'run' }}</span
       >
     </div>
+    <div v-else class="flex items-center gap-2">
+      <z-pulse :active="false"></z-pulse>
+      <span>No analysis running</span>
+    </div>
     <portal to="modal">
       <z-modal
         v-if="showBranchUpdateModal"
