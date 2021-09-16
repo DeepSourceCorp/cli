@@ -54,11 +54,11 @@ const PLANS: Record<string, Plan> = {
     ]
   },
   premium: {
-    planName: 'Premium',
+    planName: 'Business',
     planSlugMonthly: 'plan-premium-monthly',
     planSlugAnnual: 'plan-premium-annual',
     description: 'For open-source maintainers and small teams',
-    buttonLabel: 'Upgrade to Premium',
+    buttonLabel: 'Upgrade to Business',
     monthlyAmount: 30,
     annualAmount: 24,
     isPrimary: true,
