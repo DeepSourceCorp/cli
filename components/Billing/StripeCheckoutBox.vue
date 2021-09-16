@@ -50,6 +50,7 @@
       v-else-if="checkoutState === 'SUCCESS'"
       class="mt-3 text-vanilla-100 hover:bg-ink-300"
       icon="check-circle"
+      iconColor="vanilla-100"
       :disabled="true"
       buttonType="primary"
     >

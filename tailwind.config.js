@@ -1,6 +1,30 @@
 module.exports = {
   presets: [require('@deepsourcelabs/zeal/tailwind.config')],
   plugins: [require('@tailwindcss/line-clamp')],
+  purge: {
+    content: [
+      './node_modules/@deepsourcelabs/**/*.vue',
+      `components/**/*.{vue,js}`,
+      `mixins/**/*.{vue,js}`,
+      `layouts/**/*.vue`,
+      `pages/**/*.vue`,
+      `plugins/**/*.{js,ts}`,
+      `nuxt.config.{js,ts}`
+    ],
+    safelist: [
+      'text-vanilla-100',
+      'text-vanilla-200',
+      'text-vanilla-300',
+      'text-vanilla-400',
+      'text-ink-100',
+      'text-ink-200',
+      'text-ink-300',
+      'text-ink-400',
+      'text-juniper',
+      'text-cherry',
+      'text-current'
+    ]
+  },
   variants: {
     extend: {
       translate: ['group-hover']

@@ -15,8 +15,6 @@ export default {
 
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
-    '@deepsourcelabs/zeal/dist/tailwind.css',
-    '@deepsourcelabs/zeal/dist/layout.css',
     '@deepsourcelabs/zeal/dist/typography.css',
     '@deepsourcelabs/zeal/dist/chart.css',
     '@assets/css/default.scss',
@@ -37,7 +35,7 @@ export default {
     githubEnabled: process.env.ON_PREM ? process.env.GITHUB_ENABLED : true,
     bitbucketEnabled: process.env.ON_PREM ? process.env.BITBUCKET_ENABLED : true,
     githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
-    enableSaml: process.env.ENABLE_SAML === "true",
+    enableSaml: process.env.ENABLE_SAML === 'true',
     emailEnabled: process.env.ON_PREM ? Boolean(process.env.EMAIL_ENABLED) : true,
     allowSocialAuth: process.env.ON_PREM ? process.env.ALLOW_SOCIAL_AUTH : true,
     licenseExpiry: process.env.ON_PREM ? new Date(process.env.LICENSE_EXPIRY) : null,

@@ -45,7 +45,7 @@
               key="not-starred"
               class="p-2 pt-3.5 h-10 transform-gpu transition-all ease-in-out duration-150"
             >
-              <z-icon icon="z-star" color="ink-200" />
+              <z-icon icon="z-star" color="ink-200 text-ink-200" />
             </div>
           </transition>
         </div>
@@ -161,7 +161,7 @@ export default class RepoCard extends Vue {
     this.internalStarredState = isStarred
   }
 
-  private internalStarredState = false
+  internalStarredState = false
 
   get lastAnalyzedAtString(): string {
     return fromNow(this.lastAnalyzedAt)

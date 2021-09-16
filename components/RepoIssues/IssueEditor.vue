@@ -106,7 +106,6 @@ import {
   IgnoreIssueOccurrence
 } from '@/components/RepoIssues'
 import { fromNow } from '~/utils/date'
-import '@deepsourcelabs/zeal/dist/zeal.css'
 
 @Component({
   components: {
