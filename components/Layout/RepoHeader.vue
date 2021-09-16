@@ -195,7 +195,6 @@ export default class RepoHeader extends mixins(
   RoleAccessMixin,
   ActiveUserMixin
 ) {
-  private interval: ReturnType<typeof setInterval>
   private internalStarredState = false
 
   async fetch(): Promise<void> {
@@ -213,28 +212,19 @@ export default class RepoHeader extends mixins(
     this.$localStore.set('starred-repos', this.repository.id, this.internalStarredState)
   }
 
-  updateInterval(reset: Boolean) {
-    clearInterval(this.interval)
-    if (reset) {
-      // refetch data every 3 mins
-      this.interval = setInterval(this.$fetch, 3 * 60 * 1000)
-    }
-  }
-
   refetchOnSocketEvent(): void {
-    this.$fetch()
-    // restart interval if fetch is triggered to avoid unecessary calling
-    this.updateInterval(true)
+    this.fetchRepoRunCount({
+      ...this.baseRouteParams,
+      status: 'pend'
+    })
   }
 
   mounted(): void {
-    this.updateInterval(true)
     this.internalStarredState = this.$localStore.get('starred-repos', this.repository.id) as boolean
     this.$socket.$on('repo-analysis-updated', this.refetchOnSocketEvent)
   }
 
   beforeDestroy(): void {
-    this.updateInterval(false)
     this.$socket.$off('repo-analysis-updated', this.refetchOnSocketEvent)
   }
 
