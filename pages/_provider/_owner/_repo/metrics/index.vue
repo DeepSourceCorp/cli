@@ -97,7 +97,15 @@ export default class Metrics extends mixins(RepoDetailMixin) {
   }
 
   mounted(): void {
-    this.setAnalysisUpdateEvent()
+    this.$socket.$on('repo-analysis-updated', this.refetchData)
+    this.$socket.$on('autofixrun-fixes-ready', this.refetchData)
+    this.$socket.$on('transformerrun-patches-ready', this.refetchData)
+  }
+
+  beforeDestroy(): void {
+    this.$socket.$off('repo-analysis-updated', this.refetchData)
+    this.$socket.$off('autofixrun-fixes-ready', this.refetchData)
+    this.$socket.$off('transformerrun-patches-ready', this.refetchData)
   }
 
   @Provide()

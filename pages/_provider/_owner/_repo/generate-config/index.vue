@@ -206,12 +206,8 @@ export default class GenerateConfig extends mixins(
     )
   }
 
-  mounted(): void {
-    this.setAnalysisUpdateEvent()
-  }
-
   async fetch(): Promise<void> {
-    await this.fetchBasicRepoDeatils({ ...this.baseRouteParams, refetch: true })
+    await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
     await this.fetchIsCommitPossible(this.baseRouteParams)
     await this.fetchRepoDetails(this.baseRouteParams)
     await this.fetchRepoPerms(this.baseRouteParams)
@@ -266,13 +262,13 @@ export default class GenerateConfig extends mixins(
         this.logSentryErrorForUser(e, 'Generate config', args)
         this.$toast.danger(e.message.replace('GraphQL error: ', ''))
       } finally {
-        this.fetchBasicRepoDeatils({ ...this.baseRouteParams, refetch: true })
+        this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
       }
     }
   }
 
   async routeToRepoHome(): Promise<void> {
-    await this.fetchBasicRepoDeatils({ ...this.baseRouteParams, refetch: true })
+    await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
     this.fetchRepoDetails({
       ...this.baseRouteParams,
       refetch: true

@@ -27,7 +27,7 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
   }
 
   async refetchRepo(): Promise<void> {
-    await this.fetchBasicRepoDeatils({
+    await this.fetchBasicRepoDetails({
       ...this.baseRouteParams,
       refetch: true
     })

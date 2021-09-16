@@ -106,13 +106,34 @@ export default class RecentRunsSection extends Vue {
   autofixRunList: AutofixRunConnection
 
   @runListStore.Action(RunListActions.FETCH_RUN_LIST)
-  fetchRunList: (args: Record<string, string | number>) => Promise<void>
+  fetchRunList: (args: {
+    provider: string
+    owner: string
+    name: string
+    currentPageNumber: number
+    limit: number
+    refetch?: boolean
+  }) => Promise<void>
 
   @transformRunListStore.Action(TransformListActions.FETCH_TRANSFORMER_RUN_LIST)
-  fetchTransformList: (args: Record<string, string | number>) => Promise<void>
+  fetchTransformList: (args: {
+    provider: string
+    owner: string
+    name: string
+    currentPageNumber: number
+    limit: number
+    refetch?: boolean
+  }) => Promise<void>
 
   @autofixRunListStore.Action(AutofixRunListActions.FETCH_AUTOFIX_RUN_LIST)
-  fetchAutofixRunList: (args: Record<string, string | number>) => Promise<void>
+  fetchAutofixRunList: (args: {
+    provider: string
+    owner: string
+    name: string
+    currentPageNumber: number
+    limit: number
+    refetch?: boolean
+  }) => Promise<void>
 
   private runOptions = [
     { name: 'Analyses', link: ['history', 'runs'] },
@@ -120,31 +141,55 @@ export default class RecentRunsSection extends Vue {
     { name: 'Transforms', link: ['history', 'transforms'] }
   ]
 
-  private selectedRun = this.runOptions[0]
+  public selectedRun = this.runOptions[0]
 
-  get baseArgs(): { provider: string; owner: string; name: string } {
+  get baseArgs(): {
+    provider: string
+    owner: string
+    name: string
+    currentPageNumber: number
+    limit: number
+  } {
     const { provider, repo, owner } = this.$route.params
     return {
       name: repo,
       provider,
-      owner
+      owner,
+      currentPageNumber: 1,
+      limit: 5
     }
   }
 
+  mounted(): void {
+    this.$socket.$on('repo-analysis-updated', this.refetchRuns)
+    this.$socket.$on('repo-autofix-created', this.refetchAutofix)
+    this.$socket.$on('committed-to-branch', this.refetchAutofix)
+    this.$socket.$on('repo-transform-created', this.refetchRuns)
+  }
+
+  beforeDestroy(): void {
+    this.$socket.$off('repo-analysis-updated', this.refetchRuns)
+    this.$socket.$off('repo-autofix-created', this.refetchAutofix)
+    this.$socket.$off('committed-to-branch', this.refetchAutofix)
+    this.$socket.$off('repo-transform-created', this.refetchRuns)
+  }
+
+  refetchAutofix(): void {
+    this.fetchAutofixRunList({ ...this.baseArgs, refetch: true })
+  }
+
+  refetchRuns(): void {
+    this.fetchRunList({ ...this.baseArgs, refetch: true })
+  }
+
+  refetchTransformers(): void {
+    this.fetchTransformList({ ...this.baseArgs, refetch: true })
+  }
+
   async fetch(): Promise<void> {
-    await this.fetchAutofixRunList({ ...this.baseArgs, limit: 5 })
-
-    await this.fetchRunList({
-      ...this.baseArgs,
-      currentPageNumber: 0,
-      limit: 5
-    })
-
-    await this.fetchTransformList({
-      ...this.baseArgs,
-      currentPageNumber: 0,
-      limit: 5
-    })
+    await this.fetchAutofixRunList(this.baseArgs)
+    await this.fetchRunList(this.baseArgs)
+    await this.fetchTransformList(this.baseArgs)
   }
 }
 </script>

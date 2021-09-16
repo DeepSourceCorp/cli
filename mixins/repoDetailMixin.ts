@@ -54,7 +54,7 @@ export default class RepoDetailMixin extends Vue {
   }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_BASE_DETAILS)
-  fetchBasicRepoDeatils: (args: {
+  fetchBasicRepoDetails: (args: {
     provider: string
     owner: string
     name: string
@@ -225,22 +225,6 @@ export default class RepoDetailMixin extends Vue {
     q?: string
   }) => Promise<void>
 
-  onRepoAnalysisUpdated(data: Record<string, string>): void {
-    if (data.repository_id === this.repository.id && data.is_for_default_branch) {
-      this.$toast.show({
-        type: 'success',
-        message: `Results for latest analysis run on branch`,
-        primary: {
-          label: 'Refresh',
-          action: () => {
-            window.location.reload()
-          }
-        },
-        timeout: 10
-      })
-    }
-  }
-
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_MANAGE_ACCESS)
   fetchRepoCollaborators: (args: {
     provider: string
@@ -267,17 +251,5 @@ export default class RepoDetailMixin extends Vue {
       provider,
       owner
     }
-  }
-
-  setAnalysisUpdateEvent(): void {
-    // https://vuejs.org/v2/api/#vm-on
-    if (process.client) {
-      this.$socket.$on('repo-analysis-updated', this.onRepoAnalysisUpdated)
-    }
-  }
-
-  beforeDestroy(): void {
-    // https://vuejs.org/v2/api/#vm-off
-    this.$socket.$off('repo-analysis-updated', this.onRepoAnalysisUpdated)
   }
 }

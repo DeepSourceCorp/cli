@@ -117,6 +117,7 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
     args: {
       repositoryId: string
       shortcode: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [IssueDetailActions.FETCH_ISSUE_CHILDREN]: (
@@ -213,10 +214,14 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
 export const actions: IssueDetailModuleActions = {
   async [IssueDetailActions.FETCH_ISSUE]({ commit }, args) {
     commit(IssueDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryIssueDetailGQLQuery, {
-      repositoryId: args.repositoryId,
-      shortcode: args.shortcode
-    })
+    await this.$fetchGraphqlData(
+      RepositoryIssueDetailGQLQuery,
+      {
+        repositoryId: args.repositoryId,
+        shortcode: args.shortcode
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         commit(IssueDetailMutations.SET_ISSUE, response.data.repository?.issue)
         commit(IssueDetailMutations.SET_LOADING, false)

@@ -206,10 +206,20 @@ export default class Issues extends mixins(
     })
   }
 
+  refetchIssues(): void {
+    this.fetchIssuesForOwner(true)
+  }
+
   mounted(): void {
-    this.$root.$on('refetchCheck', () => {
-      this.fetchIssuesForOwner(true)
-    })
+    this.$root.$on('refetchCheck', this.refetchIssues)
+    this.$socket.$on('repo-analysis-updated', this.refetchIssues)
+    this.$socket.$on('autofixrun-fixes-ready', this.refetchIssues)
+  }
+
+  beforeDestroy(): void {
+    this.$root.$off('refetchCheck', this.refetchIssues)
+    this.$socket.$off('repo-analysis-updated', this.refetchIssues)
+    this.$socket.$off('autofixrun-fixes-ready', this.refetchIssues)
   }
 
   public openAutofixModal(issue: Record<string, string | Array<string>>): void {

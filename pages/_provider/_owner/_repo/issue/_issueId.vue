@@ -133,8 +133,23 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
     await this.fetchIssueData()
   }
 
+  refetchIssueData(): void {
+    const {  issueId } = this.$route.params
+    this.fetchIssueDetails({
+      repositoryId: this.repository.id,
+      shortcode: issueId,
+      refetch: true
+    })
+  }
+
   mounted(): void {
-    this.setAnalysisUpdateEvent()
+    this.$socket.$on('repo-analysis-updated', this.refetchIssueData)
+    this.$socket.$on('autofixrun-fixes-ready', this.refetchIssueData)
+  }
+  
+  beforeDestroy(): void {
+    this.$socket.$off('repo-analysis-updated', this.refetchIssueData)
+    this.$socket.$off('autofixrun-fixes-ready', this.refetchIssueData)
   }
 
   get localKey(): string {

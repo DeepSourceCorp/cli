@@ -121,7 +121,7 @@ export default class SettingsAutofix extends mixins(RepoDetailMixin) {
 
   async fetch(): Promise<void> {
     if (!this.repository.id) {
-      await this.fetchBasicRepoDeatils(this.baseRouteParams)
+      await this.fetchBasicRepoDetails(this.baseRouteParams)
     }
     await this.fetchRepositorySettingsSsh({ id: this.repository.id })
   }

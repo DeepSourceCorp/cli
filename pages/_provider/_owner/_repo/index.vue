@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 // Internals
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 
 // Components
 import { ZAnimatedInteger } from '@deepsourcelabs/zeal'
@@ -46,21 +46,13 @@ export interface Widget {
   layout: 'repository'
 })
 export default class Overview extends mixins(RepoDetailMixin) {
-  private loading = false
-
-  mounted(): void {
-    this.setAnalysisUpdateEvent()
-  }
-
   async fetch(): Promise<void> {
-    this.loading = true
     try {
-      await this.fetchBasicRepoDeatils({ ...this.baseRouteParams, refetch: true })
+      await this.fetchBasicRepoDetails(this.baseRouteParams)
       this.fetchRepoDetails(this.baseRouteParams)
     } catch (e) {
       this.$toast.danger('There was a problem loading this repository')
     }
-    this.loading = false
   }
 
   head(): Record<string, string> {

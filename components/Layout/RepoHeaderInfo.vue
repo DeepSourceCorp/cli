@@ -167,7 +167,7 @@ export default class RepoHeaderInfo extends mixins(RepoDetailMixin) {
         defaultBranchName: this.currentAnalysisBranch
       }
     })
-    await this.fetchBasicRepoDeatils({
+    await this.fetchBasicRepoDetails({
       ...this.baseRouteParams,
       refetch: true
     })

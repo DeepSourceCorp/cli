@@ -116,7 +116,13 @@ export default class Issues extends mixins(RepoDetailMixin) {
   }
 
   mounted(): void {
-    this.setAnalysisUpdateEvent()
+    this.$socket.$on('transformerrun-patches-ready', this.fetchTransformerRun)
+    this.$socket.$on('repo-transform-created', this.fetchTransformerRun)
+  }
+  
+  beforeDestroy(): void {
+    this.$socket.$off('transformerrun-patches-ready', this.fetchTransformerRun)
+    this.$socket.$off('repo-transform-created', this.fetchTransformerRun)
   }
 
   async fetchTransformerRun(): Promise<void> {

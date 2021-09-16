@@ -78,9 +78,17 @@ export default class AnalyzerDetails extends mixins(
   }
 
   mounted(): void {
-    this.setAnalysisUpdateEvent()
     this.$root.$on('refetchCheck', this.refetchCheck)
+    this.$socket.$on('repo-analysis-updated', this.refetchCheck)
+    this.$socket.$on('autofixrun-fixes-ready', this.refetchCheck)
   }
+
+  beforeDestroy(): void {
+    this.$root.$on('refetchCheck', this.refetchCheck)
+    this.$socket.$on('repo-analysis-updated', this.refetchCheck)
+    this.$socket.$on('autofixrun-fixes-ready', this.refetchCheck)
+  }
+
 
   async fetchCurrentRun(): Promise<void> {
     const { runId, repo, owner, provider } = this.$route.params

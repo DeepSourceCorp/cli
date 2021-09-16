@@ -90,7 +90,7 @@ interface RunListModuleActions extends ActionTree<RunListModuleState, RootState>
       name: string
       currentPageNumber: number
       limit: number
-      refetch: boolean
+      refetch?: boolean
     }
   ) => Promise<void>
   [RunListActions.FETCH_GROUPED_RUN_LIST]: (
@@ -114,6 +114,7 @@ interface RunListModuleActions extends ActionTree<RunListModuleState, RootState>
       name: string
       branchName: string
       limit?: number
+      refetch?: boolean
     }
   ) => Promise<void>
 }
@@ -165,13 +166,17 @@ export const actions: RunListModuleActions = {
   },
   async [RunListActions.FETCH_BRANCH_RUNS_LIST]({ commit }, args) {
     commit(RunListMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryBranchRunGQLQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name,
-      branchName: args.branchName,
-      limit: args.limit || 30
-    })
+    await this.$fetchGraphqlData(
+      RepositoryBranchRunGQLQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name,
+        branchName: args.branchName,
+        limit: args.limit || 30
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         const branch = args.branchName
         commit(RunListMutations.SET_BRANCH_RUNS_LIST, {

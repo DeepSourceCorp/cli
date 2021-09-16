@@ -2,12 +2,12 @@
   <div>
     <sub-nav active="transforms"></sub-nav>
     <div class="grid gap-4 w-full px-2 md:px-4 py-2 md:py-4">
-      <template v-if="transformerRunList.edges">
-        <template v-if="transformerRunList.edges.length">
+      <template v-if="transformRuns">
+        <template v-if="transformRuns.length">
           <transform-branches
-            v-for="run in transformerRunList.edges"
-            :key="run.node.branchName"
-            :run="run.node"
+            v-for="run in transformRuns"
+            :key="run.branchName"
+            :run="run"
           >
           </transform-branches>
         </template>
@@ -31,8 +31,9 @@ import { SubNav, TransformBranches } from '@/components/History'
 
 // Store & Types
 import { TransformListActions } from '@/store/transformerRun/list'
-import { TransformerRunConnection } from '~/types/types'
+import { TransformerRun, TransformerRunConnection } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { resolveNodes } from '~/utils/array'
 
 const transformRunListStore = namespace('transformerRun/list')
 
@@ -51,8 +52,18 @@ export default class Transforms extends mixins(RepoDetailMixin) {
     await this.fetchTransformRuns()
   }
 
+  get transformRuns(): TransformerRun[] {
+    return resolveNodes(this.transformerRunList) as TransformerRun[]
+  }
+
   mounted(): void {
-    this.setAnalysisUpdateEvent()
+    this.$socket.$on('transformerrun-patches-ready', this.fetchTransformRuns)
+    this.$socket.$on('repo-transform-created', this.fetchTransformRuns)
+  }
+  
+  beforeDestroy(): void {
+    this.$socket.$off('transformerrun-patches-ready', this.fetchTransformRuns)
+    this.$socket.$off('transformerrun-patches-ready', this.fetchTransformRuns)
   }
 
   async fetchTransformRuns(): Promise<void> {

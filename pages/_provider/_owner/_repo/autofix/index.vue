@@ -193,12 +193,11 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
   private selectedRun = this.options[0]
 
   mounted(): void {
-    this.setAnalysisUpdateEvent()
-    this.$socket.$on('refetch-autofix-run', this.refetchData)
+    this.$root.$on('refetch-autofix-run', this.refetchData)
     this.$socket.$on('repo-analysis-updated', this.refetchData)
   }
   beforeDestroy(): void {
-    this.$socket.$off('refetch-autofix-run', this.refetchData)
+    this.$root.$off('refetch-autofix-run', this.refetchData)
     this.$socket.$off('repo-analysis-updated', this.refetchData)
   }
 
@@ -213,7 +212,7 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
     this.fetchingData = true
 
     await Promise.all([
-      this.fetchBasicRepoDeatils(this.baseRouteParams),
+      this.fetchBasicRepoDetails(this.baseRouteParams),
       this.fetchRepoAutofixStats(this.baseRouteParams),
       this.fetchRepoPerms(this.baseRouteParams),
       this.fetchAutofixRunList({
@@ -273,7 +272,7 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
         }
       })
       this.$toast.success('PR is created for the Autofix run successfully')
-      this.$socket.$emit('refetch-autofix-run')
+      this.$root.$emit('refetch-autofix-run')
     } catch (e) {
       this.$toast.danger('Something went wrong')
     }

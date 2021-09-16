@@ -34,7 +34,11 @@ export default class IssueDetailMixin extends Vue {
 
   // Queries
   @issueStore.Action(IssueDetailActions.FETCH_ISSUE)
-  fetchIssueDetails: (args: { repositoryId: string; shortcode: string }) => Promise<void>
+  fetchIssueDetails: (args: {
+    repositoryId: string
+    shortcode: string
+    refetch?: boolean
+  }) => Promise<void>
 
   @issueStore.Action(IssueDetailActions.FETCH_SILENCE_RULES)
   fetchSilenceRules: (args: {

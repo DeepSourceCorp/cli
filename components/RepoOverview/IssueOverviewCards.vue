@@ -7,12 +7,11 @@
     spacingClass="p-0 gap-px"
     customGridClass="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
   >
-    <template v-if="loading">
+    <template v-if="$fetchState.pending">
       <div
         v-for="idx in loaderCount"
         :key="idx"
         class="p-2 h-22 sm:h-24 space-y-4 outline-ink-300"
-        v-once
       >
         <div class="bg-ink-300 h-6 w-36 rounded-md animate-pulse"></div>
         <div class="bg-ink-300 h-6 w-14 rounded-md animate-pulse"></div>
@@ -76,8 +75,6 @@ export interface Widget {
   layout: 'repository'
 })
 export default class IssueOverviewCards extends mixins(RepoDetailMixin) {
-  public loading = false
-
   isTrendPositive(widget: Widget): boolean | null {
     if (!widget.trend_value) {
       return true
@@ -117,17 +114,15 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin) {
     this.$socket.$off('repo-analysis-updated', this.refetchData)
   }
 
-  async refetchData(): Promise<void> {
-    await this.fetchWidgets({
+  refetchData(): void {
+    this.fetchWidgets({
       ...this.baseRouteParams,
       refetch: true
     })
   }
 
   async fetch(): Promise<void> {
-    this.loading = true
     await this.fetchWidgets(this.baseRouteParams)
-    this.loading = false
   }
 
   get issueWidgets(): Array<Widget> {

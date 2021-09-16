@@ -317,9 +317,9 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
   ) => { data: { input: CreatePullRequestInput } }
 
   mounted(): void {
+    this.$root.$on('refetch-autofix-run', this.fetchAutofixRun)
     this.$socket.$on('pull-request-created', this.fetchAutofixRun)
     this.$socket.$on('committed-to-branch', this.fetchAutofixRun)
-    this.$socket.$on('refetch-autofix-run', this.fetchAutofixRun)
     this.$socket.$on('repo-autofix-created', this.fetchAutofixRun)
     this.$socket.$on('autofixrun-fixes-ready', this.fetchAutofixRun)
     this.$socket.$on('autofix-installation-complete', this.fetchAutofixRun)
@@ -334,12 +334,12 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
   }
 
   beforeDestroy(): void {
-    this.$socket.$off('pull-request-created')
-    this.$socket.$off('committed-to-branch')
-    this.$socket.$off('refetch-autofix-run')
-    this.$socket.$off('repo-autofix-created')
-    this.$socket.$off('autofixrun-fixes-ready')
-    this.$socket.$off('autofix-installation-complete')
+    this.$root.$off('refetch-autofix-run', this.fetchAutofixRun)
+    this.$socket.$off('pull-request-created', this.fetchAutofixRun)
+    this.$socket.$off('committed-to-branch', this.fetchAutofixRun)
+    this.$socket.$off('repo-autofix-created', this.fetchAutofixRun)
+    this.$socket.$off('autofixrun-fixes-ready', this.fetchAutofixRun)
+    this.$socket.$off('autofix-installation-complete', this.fetchAutofixRun)
   }
 
   @Watch('autofixRun')

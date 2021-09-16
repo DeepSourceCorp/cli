@@ -218,7 +218,7 @@ export default class RunIssueDetails extends mixins(
     this.loading = true
     const { runId, issueId } = this.$route.params
     await Promise.all([
-      this.fetchBasicRepoDeatils(this.baseRouteParams),
+      this.fetchBasicRepoDetails(this.baseRouteParams),
       this.fetchRepoPerms(this.baseRouteParams),
       this.fetchRun({ ...this.baseRouteParams, runId })
     ])

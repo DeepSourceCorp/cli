@@ -88,12 +88,19 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   branchRunList: Record<string, RunConnection>
 
   @runListStore.Action(RunListActions.FETCH_BRANCH_RUNS_LIST)
-  fetchBranchRuns: (args: Record<string, string | number>) => Promise<void>
+  fetchBranchRuns: (args: {
+    provider: string
+    owner: string
+    name: string
+    branchName: string
+    limit?: number
+    refetch?: boolean
+  }) => Promise<void>
 
-  private fetching = true
-  private mainBranchFetching = true
-  private currentPage = 1
-  private pageSize = 30
+  public fetching = true
+  public mainBranchFetching = true
+  public currentPage = 1
+  public pageSize = 30
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
@@ -130,33 +137,44 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }
 
   async fetch(): Promise<void> {
+    this.fetching = true
     await this.fetchRepoDetails(this.baseParams)
+    this.mainBranchFetching = true
     await this.fetchMainBranch()
+    this.mainBranchFetching = false
     await this.fetchRuns()
+    this.fetching = false
   }
 
   async fetchRuns(refetch = false): Promise<void> {
-    this.fetching = true
-
     await this.$store.dispatch(`run/list/${RunListActions.FETCH_GROUPED_RUN_LIST}`, {
       ...this.baseParams,
       currentPageNumber: this.currentPage,
       limit: this.pageSize,
       refetch
     })
-
-    this.fetching = false
   }
 
-  async fetchMainBranch(): Promise<void> {
+  refetchRuns(): void {
+    this.fetchRuns(true)
+    this.fetchMainBranch(true)
+  }
+
+  mounted(): void {
+    this.$socket.$on('repo-analysis-updated', this.refetchRuns)
+  }
+
+  beforeDestroy(): void {
+    this.$socket.$off('repo-analysis-updated', this.refetchRuns)
+  }
+
+  async fetchMainBranch(refetch = false): Promise<void> {
     if (this.repository.defaultBranchName) {
-      this.mainBranchFetching = true
       await this.fetchBranchRuns({
         ...this.baseParams,
         branchName: this.repository.defaultBranchName,
-        limit: 1
-      }).then(() => {
-        this.mainBranchFetching = false
+        limit: 1,
+        refetch: refetch
       })
     }
   }
@@ -187,14 +205,6 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
       description:
         'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
     }
-  }
-  mounted(): void {
-    this.setAnalysisUpdateEvent()
-    this.$socket.$on('repo-analysis-updated', (data: Record<string, string>) => {
-      if (this.repository.id === data.repository_id) {
-        this.fetchRuns(true)
-      }
-    })
   }
 }
 </script>

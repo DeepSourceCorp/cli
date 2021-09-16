@@ -199,7 +199,7 @@ export default class RepoHeader extends mixins(
 
   async fetch(): Promise<void> {
     await this.fetchRepoPerms(this.baseRouteParams)
-    await this.fetchBasicRepoDeatils({
+    await this.fetchBasicRepoDetails({
       ...this.baseRouteParams,
       refetch: true
     })
@@ -245,7 +245,7 @@ export default class RepoHeader extends mixins(
       repoId: this.repository.id
     })
 
-    this.fetchBasicRepoDeatils({
+    this.fetchBasicRepoDetails({
       ...this.baseRouteParams,
       refetch: true
     })

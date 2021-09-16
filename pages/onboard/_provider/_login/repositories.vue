@@ -240,7 +240,7 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
       this.updateRepository(this.selectedRepo.id.trim())
       const { provider, login } = this.$route.params
       this.fetchIsCommitPossible(this.baseRouteParams)
-      this.fetchBasicRepoDeatils({
+      this.fetchBasicRepoDetails({
         provider,
         owner: login,
         name: this.selectedRepoName,
@@ -320,7 +320,7 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
           )
         }
         try {
-          this.fetchBasicRepoDeatils({
+          this.fetchBasicRepoDetails({
             provider,
             owner: login,
             name: this.selectedRepoName,
@@ -352,7 +352,7 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
     })
 
     try {
-      this.fetchBasicRepoDeatils({
+      this.fetchBasicRepoDetails({
         provider,
         owner: login,
         name: this.selectedRepoName,

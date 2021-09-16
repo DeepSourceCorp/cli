@@ -92,6 +92,7 @@ interface TransformerRunListModuleActions
       name: string
       currentPageNumber: number
       limit: number
+      refetch?: boolean
     }
   ) => Promise<void>
   [TransformListActions.FETCH_BRANCH_TRANSFORMER_RUNS_LIST]: (
@@ -109,13 +110,17 @@ interface TransformerRunListModuleActions
 export const actions: TransformerRunListModuleActions = {
   async [TransformListActions.FETCH_TRANSFORMER_RUN_LIST]({ commit }, args) {
     commit(TransformListMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryTransformerGroupGQLQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name,
-      after: this.$getGQLAfter(args.currentPageNumber, args.limit),
-      limit: args.limit
-    })
+    await this.$fetchGraphqlData(
+      RepositoryTransformerGroupGQLQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name,
+        after: this.$getGQLAfter(args.currentPageNumber, args.limit),
+        limit: args.limit
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         commit(
           TransformListMutations.SET_TRANSFORMER_RUN_LIST,

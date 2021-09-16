@@ -118,7 +118,7 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
   async fetch(): Promise<void> {
     this.loading = true
     try {
-      await this.fetchBasicRepoDeatils(this.baseRouteParams)
+      await this.fetchBasicRepoDetails(this.baseRouteParams)
     } catch (e) {
       this.$toast.danger('There was a problem loading this repository')
     }
@@ -126,24 +126,20 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
   }
 
   refetchData(): Promise<void> {
-    return this.fetchBasicRepoDeatils({
+    return this.fetchBasicRepoDetails({
       ...this.baseRouteParams,
       refetch: true
     })
   }
 
-  refetchRepoDetailsEvent(data: Record<string, string>): void {
-    if (data.repository_id === this.repository.id) {
-      this.refetchData()
-    }
-  }
-
   mounted(): void {
-    this.$socket.$on('repo-analysis-updated', this.refetchRepoDetailsEvent)
+    this.$socket.$on('repo-analysis-updated', this.refetchData)
+    this.$socket.$on('autofix-installation-complete', this.refetchData)
   }
 
   beforeDestroy(): void {
-    this.$socket.$off('repo-analysis-updated', this.refetchRepoDetailsEvent)
+    this.$socket.$off('repo-analysis-updated', this.refetchData)
+    this.$socket.$on('autofix-installation-complete', this.refetchData)
   }
 
   @Watch('$route.params.repo')

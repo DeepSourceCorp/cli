@@ -398,7 +398,7 @@ export default class General extends mixins(
     const pageSize =
       (this.$localStore.get(`${provider}-${owner}-all-repos`, `currentPageSize`) as number) || 10
 
-    this.fetchBasicRepoDeatils({ ...this.baseRouteParams, refetch: true })
+    this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
     this.fetchOwnerDetails(baseParams)
     this.fetchActiveAnalysisRepoList({
       ...baseParams,

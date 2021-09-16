@@ -110,10 +110,6 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     return true
   }
 
-  mounted(): void {
-    this.setAnalysisUpdateEvent()
-  }
-
   head(): Record<string, string> {
     const { repo, owner } = this.$route.params
     return {

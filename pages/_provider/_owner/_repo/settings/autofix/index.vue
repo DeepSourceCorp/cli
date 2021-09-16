@@ -49,7 +49,7 @@ export default class SettingsAutofix extends mixins(RepoDetailMixin) {
 
   close() {
     this.showInstallAutofixModal = false
-    this.fetchBasicRepoDeatils({
+    this.fetchBasicRepoDetails({
       ...this.baseRouteParams,
       refetch: true
     })
