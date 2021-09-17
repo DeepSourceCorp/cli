@@ -813,7 +813,7 @@ declare module '*/issueChildren.gql' {
 declare module '*/silenceRules.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const RepoSilenceRules: DocumentNode;
 
   export default defaultDocument;
 }

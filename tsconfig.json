@@ -38,7 +38,8 @@
       "cookie-universal-nuxt/types",
       "@nuxtjs/sentry",
       "highlight.js/types",
-      "nuxt-stripe-module"
+      "nuxt-stripe-module",
+      "@types/intercom-web"
     ],
     "typeRoots": [
       "./node_modules/@types",

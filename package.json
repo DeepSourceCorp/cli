@@ -44,6 +44,7 @@
     "@nuxtjs/tailwindcss": "^3.1.0",
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.8",
+    "@types/intercom-web": "^2.8.13",
     "@types/jest": "^26.0.19",
     "@vue/test-utils": "^1.1.0",
     "babel-core": "7.0.0-bridge.0",

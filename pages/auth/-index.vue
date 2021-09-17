@@ -15,6 +15,7 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import AuthMixin from '~/mixins/authMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
+import { User } from '~/types/types'
 
 @Component({
   middleware: [
@@ -41,6 +42,18 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     })
 
     await Promise.all([this.fetchActiveUser(), this.fetchContext()])
+
+    if (window.Intercom && typeof window.Intercom === 'function' && !this.$config.onPrem) {
+      const viewer = this.$store.state.user.active.viewer as User
+      if (viewer.intercomUserHash)
+        Intercom('update', {
+          name: viewer.fullName || undefined,
+          user_id: viewer.id,
+          email: viewer.email,
+          created_at: viewer.dateJoined,
+          user_hash: viewer.intercomUserHash
+        })
+    }
 
     const toOnboard = this.toOnboard
     const homePage = this.userHomeUrl

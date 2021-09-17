@@ -80,7 +80,8 @@ export default {
       '~/plugins/services/fullstory.client.js',
       '~/plugins/services/rudderLoader.client.js',
       '~/plugins/services/plausibleLoader.client.js',
-      '~/plugins/services/rudder.client.ts'
+      '~/plugins/services/rudder.client.ts',
+      '~/plugins/services/intercom.client.js'
     ]
 
     if (!process.env.ON_PREM) {

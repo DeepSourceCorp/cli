@@ -142,6 +142,11 @@ export const actions: AuthModuleActions = {
     try {
       await this.$applyGraphqlMutation(logoutMutation, {}, null, false)
       commit(AuthMutationTypes.SET_LOGGED_OUT)
+      if (window.Intercom && typeof window.Intercom === "function") {
+        Intercom('shutdown')
+        if (window.intercomSettings)
+          Intercom('boot', window.intercomSettings)
+      }
     } catch (e) {
       throw new Error('Something went wrong while logging you out.')
     }

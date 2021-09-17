@@ -31,7 +31,8 @@ export const state = (): ActiveUserState => ({
 // Getters ------------------------------------------
 
 export enum ActiveUserGetterTypes {
-  GET_HOME_URL = 'getHomeUrl'
+  GET_HOME_URL = 'getHomeUrl',
+  GET_VIEWER = 'getViewer'
 }
 
 export const getters: GetterTree<ActiveUserState, RootState> = {
@@ -64,6 +65,9 @@ export const getters: GetterTree<ActiveUserState, RootState> = {
     // if all fails, that means there's no owner associated to the user,
     // send them to installation page
     return `/installation/providers`
+  },
+  [ActiveUserGetterTypes.GET_VIEWER]: (state) => {
+    return state.viewer
   }
 }
 

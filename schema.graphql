@@ -44,6 +44,7 @@ type Analyzer implements MaskPrimaryKeyNode {
   discussUrl: String
   version: String!
   shortcode: String!
+  macroPath: String
   name: String!
   accessKey: UUID!
   logo: String
@@ -59,13 +60,14 @@ type Analyzer implements MaskPrimaryKeyNode {
   metaSchema: JSONString!
   runtimeVersions: [String!]!
   trigger: AnalyzerTrigger!
+  repository: Repository
   owner: String
   isPrimary: Boolean!
-  starIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection!
+  starIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection!
   exampleConfig: String
   defaultTestPatterns: [String!]!
   supportedFilesRegex: String
-  issues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection!
+  issues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection!
   reviews(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerReviewConnection!
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection!
@@ -387,7 +389,7 @@ type Check implements MaskPrimaryKeyNode {
   metrics: JSONString!
   metricsCaptured: [RepositoryMetricValue]
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
-  concreteIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String): IssueConnection
+  concreteIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection
   finishedIn: Int
   finishedInDisplay: String
   errorsRendered: GenericScalar
@@ -1219,6 +1221,7 @@ type Query {
   repositoryIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
   repository(name: String!, owner: String!, provider: VCSProviderChoices!): Repository
   trendingRepositories(count: Int = 5, offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean): RepositoryConnection
+  editorsPickRepository: Repository
   context: Context
   node(id: ID!): MaskPrimaryKeyNode
 }
@@ -1323,6 +1326,7 @@ type Repository implements MaskPrimaryKeyNode {
   weightCutoff: Int!
   tree: JSONString!
   latestTrainedRun: Run
+  analyzer: Analyzer
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   userpreferenceSet(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection
@@ -2293,6 +2297,7 @@ type User implements MaskPrimaryKeyNode {
   recommendedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
   gitlabAccounts: [GenericScalar]
   isAsgardian: Boolean
+  intercomUserHash: String
   missiveUserHash: String
   isBetaTester: Boolean
 }

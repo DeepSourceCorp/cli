@@ -13,6 +13,7 @@ query {
     dashboardContext
     availableCredits
     missiveUserHash
+    intercomUserHash
     primaryOwner {
       id
       login
