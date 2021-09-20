@@ -135,7 +135,13 @@ export const actions: AuthModuleActions = {
 
   async [AuthActionTypes.REFRESH]({ commit }) {
     const response = await this.$applyGraphqlMutation(refreshTokenMutation, {}, null, false)
-    commit(AuthMutationTypes.SET_LOGGED_IN, response.data.refreshToken.token)
+    if (response.data.refreshToken.token) {
+      commit(AuthMutationTypes.SET_LOGGED_IN, response.data.refreshToken.token)
+    } else {
+      // To suppress JSONWebToken errors in Asgard, we implemented silent breakage on Asgard.
+      // In case the refresh fails, Asgard will return a blank token.
+      throw new Error('Failed to refresh token, please login again')
+    }
   },
 
   async [AuthActionTypes.LOG_OUT]({ commit }) {
