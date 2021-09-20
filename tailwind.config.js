@@ -5,7 +5,7 @@ module.exports = {
     content: [
       './node_modules/@deepsourcelabs/**/*.vue',
       `components/**/*.{vue,js}`,
-      `mixins/**/*.{vue,js}`,
+      `mixins/**/*.{vue,js,ts}`,
       `layouts/**/*.vue`,
       `pages/**/*.vue`,
       `plugins/**/*.{js,ts}`,
@@ -22,7 +22,9 @@ module.exports = {
       'text-ink-400',
       'text-juniper',
       'text-cherry',
-      'text-current'
+      'text-current',
+      'bg-gitlab',
+      'bg-bitbucket'
     ]
   },
   variants: {
