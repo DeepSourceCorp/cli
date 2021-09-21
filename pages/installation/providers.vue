@@ -73,7 +73,7 @@ export default class InstallationProvider extends mixins(ContextMixin, ActiveUse
   get loginUrls(): Record<string, string> {
     return {
       ...this.context.installationUrls,
-      gitlab: this.hasGitlabAccounts ? '' : this.authUrls.gitlab
+      gitlab: this.hasGitlabAccounts ? '/accounts/gitlab/login' : this.authUrls.gitlab
     }
   }
 
