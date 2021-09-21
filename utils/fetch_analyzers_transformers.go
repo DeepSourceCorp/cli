@@ -15,6 +15,7 @@ type AnalyzersData struct {
 	AnalyzersMap       map[string]string // Map for {analyzer name : shortcode}
 	AnalyzersMeta      []string
 	AnalyzersData      []analyzers.Analyzer
+	AnalyzersMetaMap   map[string]string // Map for {analyzer name: analyzer meta-schema}
 }
 
 type TransformersData struct {
@@ -59,6 +60,7 @@ func GetAnalyzersAndTransformersData() error {
 // by the validator and generator package
 func parseSDKResponse() {
 	AnaData.AnalyzersMap = make(map[string]string)
+	AnaData.AnalyzersMetaMap = make(map[string]string)
 	TrData.TransformerMap = make(map[string]string)
 
 	for _, analyzer := range AnaData.AnalyzersData {
@@ -66,6 +68,7 @@ func parseSDKResponse() {
 		AnaData.AnalyzerShortcodes = append(AnaData.AnalyzerShortcodes, analyzer.Shortcode)
 		AnaData.AnalyzersMeta = append(AnaData.AnalyzersMeta, analyzer.MetaSchema)
 		AnaData.AnalyzersMap[analyzer.Name] = analyzer.Shortcode
+		AnaData.AnalyzersMetaMap[analyzer.Name] = analyzer.MetaSchema
 	}
 
 	for _, transformer := range TrData.TransformersData {

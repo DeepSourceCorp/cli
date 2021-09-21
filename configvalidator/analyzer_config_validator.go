@@ -62,18 +62,17 @@ func (c *ConfigValidator) validateAnalyzersConfig() {
 	}
 
 	// ==== Meta Schema Validation ====
+
+	// Contains the meta-schema of the particular activated analyzer
 	var analyzerMetaSchema string
+	// Contains the user supplied meta
 	var userActivatedSchema interface{}
 
 	// Iterating over the activated analyzers and
 	// validating the meta_schema
 	for analyzer, meta := range activatedAnalyzers {
-		for index, supportedAnalyzer := range utils.AnaData.AnalyzerShortcodes {
-			if analyzer == supportedAnalyzer {
-				analyzerMetaSchema = utils.AnaData.AnalyzersMeta[index]
-				userActivatedSchema = meta
-			}
-		}
+		analyzerMetaSchema = utils.AnaData.AnalyzersMetaMap[analyzer]
+		userActivatedSchema = meta
 
 		// Loading the Meta Schema obtained from API
 		schema := gojsonschema.NewStringLoader(analyzerMetaSchema)

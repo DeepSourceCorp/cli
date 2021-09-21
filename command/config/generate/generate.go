@@ -15,10 +15,8 @@ import (
 
 // Options holds the metadata.
 type Options struct {
-	GoImportRoot string // Mandatory meta for Go
-	JavaVersion  string // Mandatory meta for JAVA
-
 	ActivatedAnalyzers    []string // Analyzers activated by user
+	AnalyzerMetaMap       map[string][]AnalyzerMetadata
 	ActivatedTransformers []string // Transformers activated by the user
 	ExcludePatterns       []string
 	TestPatterns          []string
@@ -92,19 +90,23 @@ func (o *Options) generateDeepSourceConfig() error {
 	}
 
 	// Copying activated analyzers from Options struct to DSConfig based "config" struct
-	for index, analyzer := range o.ActivatedAnalyzers {
-		config.Analyzers = append(config.Analyzers, Analyzer{
+	for _, analyzer := range o.ActivatedAnalyzers {
+		// Configuring the analyzer meta data
+		metaMap := make(map[string]interface{})
+		if o.AnalyzerMetaMap[analyzer] != nil {
+			for _, meta := range o.AnalyzerMetaMap[analyzer] {
+				metaMap[meta.FieldName] = meta.UserInput
+			}
+		}
+
+		activatedAnalyzerData := Analyzer{
 			Name:    utils.AnaData.AnalyzersMap[analyzer],
 			Enabled: true,
-		})
-
-		// TODO: Remove this hard coding
-		// Adding these conditions since meta of these two analyzers(Go and Java) is mandatory
-		if analyzer == "Go" {
-			config.Analyzers[index].Meta.ImportRoot = o.GoImportRoot
-		} else if analyzer == "Java (beta)" {
-			config.Analyzers[index].Meta.JavaVersion = o.JavaVersion
 		}
+		if len(metaMap) != 0 {
+			activatedAnalyzerData.Meta = metaMap
+		}
+		config.Analyzers = append(config.Analyzers, activatedAnalyzerData)
 	}
 
 	// Copying activated transformers from Options struct to DSConfig based "config" struct
