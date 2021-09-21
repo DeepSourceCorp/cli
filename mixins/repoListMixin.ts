@@ -1,7 +1,7 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
 
 import { RepoListActions } from '~/store/repository/list'
-import { RepositoryConnection } from '~/types/types'
+import { Repository, RepositoryConnection } from '~/types/types'
 
 const repoListStore = namespace('repository/list')
 
@@ -14,7 +14,10 @@ export default class RepoListMixin extends Vue {
   newRepos: RepositoryConnection
 
   @repoListStore.State
-  repoWithActiveAnalysis: RepositoryConnection
+  repoWithActiveAnalysis: Repository[]
+  
+  @repoListStore.State
+  repoWithActiveAnalysisWithAnalyzers: Repository[]
 
   @repoListStore.State
   loading: boolean
@@ -38,8 +41,16 @@ export default class RepoListMixin extends Vue {
     query: string | null
   }) => Promise<void>
 
-  @repoListStore.Action(RepoListActions.FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST)
+  @repoListStore.Action(RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST)
   fetchActiveAnalysisRepoList: (params: {
+    login: string
+    provider: string
+    limit: number
+    refetch?: boolean
+  }) => Promise<void>
+  
+  @repoListStore.Action(RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS)
+  fetchActiveAnalysisRepoListWithAnalyzers: (params: {
     login: string
     provider: string
     limit: number

@@ -58,6 +58,7 @@ export default {
   ],
 
   sentry: {
+    lazy: true,
     tracing: true,
     publishRelease:
       process.env.ON_PREM || process.env.DISABLE_SENTRY
@@ -107,12 +108,18 @@ export default {
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     // https://go.nuxtjs.dev/typescript
+    'nuxt-timings',
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
     '@nuxtjs/google-fonts',
     ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
   ],
+
+  timings: {
+    // default value
+    enabled: process.env.NODE_ENV === 'development'
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [

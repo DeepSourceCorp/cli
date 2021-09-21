@@ -864,6 +864,24 @@ declare module '*/perms.gql' {
 }
     
 
+declare module '*/recentlyActiveRepoList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/recentlyActiveRepoListWithAnalyzer.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/globalStateIndicator.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

@@ -1,0 +1,35 @@
+query(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $limit: Int
+  $after: String
+) {
+  owner(login: $login, provider: $provider) {
+    id
+    repositories(isActivated: true, first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          vcsProvider
+          ownerLogin
+          isActivated
+          isFork
+          isPrivate
+          lastAnalyzedAt
+          availableAnalyzers {
+            edges {
+              node {
+                id
+                name
+                shortcode
+                analyzerLogo
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -3,7 +3,9 @@
     <issue-overview-cards />
     <alerting-metrics-section :routeToMetricsPage="true" />
     <code-quality-graph />
-    <recent-runs-section />
+    <client-only>
+      <recent-runs-section />
+    </client-only>
   </div>
 </template>
 <script lang="ts">

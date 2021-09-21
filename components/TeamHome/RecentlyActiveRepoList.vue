@@ -26,25 +26,24 @@
         <div class="h-full rounded-md bg-ink-300 animate-pulse w-1/5"></div>
       </div>
     </template>
-    <template v-else-if="repoWithActiveAnalysis.edges.length">
-      <template v-for="repo in repoWithActiveAnalysis.edges">
+    <template v-else-if="Array.isArray(repoWithActiveAnalysisWithAnalyzers) && repoWithActiveAnalysisWithAnalyzers.length">
         <list-item
-          v-if="repo && repo.node"
-          :key="repo.node.id"
-          :to="generateLink(repo.node)"
-          :icon="repo.node.isPrivate ? 'lock' : 'globe'"
+        v-for="repo in repoWithActiveAnalysisWithAnalyzers"
+          :key="repo.id"
+          :to="generateLink(repo)"
+          :icon="repo.isPrivate ? 'lock' : 'globe'"
           class="px-4 py-3"
         >
           <template slot="label">
             <div class="flex items-center space-x-3">
               <span>
-                {{ repo.node.name }}
+                {{ repo.name }}
               </span>
               <span
-                v-if="repo.node.availableAnalyzers && repo.node.availableAnalyzers.edges"
+                v-if="repo.availableAnalyzers && repo.availableAnalyzers.edges"
                 class="space-x-3 hidden xs:flex"
               >
-                <template v-for="edge in repo.node.availableAnalyzers.edges">
+                <template v-for="edge in repo.availableAnalyzers.edges">
                   <analyzer-logo
                     v-if="edge && edge.node"
                     :key="edge.node.name"
@@ -55,12 +54,11 @@
             </div>
           </template>
           <template slot="info">
-            <span v-tooltip="formatDate(repo.node.lastAnalyzedAt, 'lll')">{{
-              repo.node.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.node.lastAnalyzedAt) : ''
+            <span v-tooltip="formatDate(repo.lastAnalyzedAt, 'lll')">{{
+              repo.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.lastAnalyzedAt) : ''
             }}</span>
           </template>
         </list-item>
-      </template>
     </template>
   </list-section>
 </template>
@@ -75,7 +73,7 @@ import AnalyzerLogo from '@/components/AnalyzerLogo.vue'
 import { TeamMemberRoleChoices, Repository } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
-import { TeamPerms } from '../../types/permTypes'
+import { TeamPerms } from '~/types/permTypes'
 
 @Component({
   components: { ZButton, ZIcon, AddRepoModal, AnalyzerLogo }
@@ -95,7 +93,7 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
     this.loading = true
     const { provider, owner } = this.$route.params
 
-    await this.fetchActiveAnalysisRepoList({
+    await this.fetchActiveAnalysisRepoListWithAnalyzers({
       login: this.$route.params.owner,
       provider: this.$route.params.provider,
       limit: 10
@@ -104,7 +102,7 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
     this.$localStore.set(
       `${provider}-${owner}`,
       'recently-active-repo-count',
-      this.repoWithActiveAnalysis.edges.length
+      this.repoWithActiveAnalysisWithAnalyzers.length
     )
     this.loading = false
   }

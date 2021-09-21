@@ -105,14 +105,13 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
   }
 
   get repoList(): Array<Record<string, unknown>> {
-    if (this.repoWithActiveAnalysis.edges) {
-      return this.repoWithActiveAnalysis.edges.map((edge: Maybe<RepositoryEdge>) => {
-        const node = edge?.node
+    if (this.repoWithActiveAnalysis) {
+      return this.repoWithActiveAnalysis.map((repo) => {
         return {
-          name: node?.name,
-          id: node?.id,
-          owner: node?.ownerLogin,
-          icon: node?.isPrivate ? 'lock' : 'globe',
+          name: repo.name,
+          id: repo.id,
+          owner: repo.ownerLogin,
+          icon: repo.isPrivate ? 'lock' : 'globe',
           isActive: false
         }
       })

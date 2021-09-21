@@ -1,8 +1,11 @@
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 import { RootState } from '~/store'
-import { RepositoryConnection, PageInfo, Maybe, Scalars, Owner } from '~/types/types'
+import { RepositoryConnection, PageInfo, Maybe, Scalars, Owner, Repository } from '~/types/types'
 import RepositoryListGQLQuery from '~/apollo/queries/repository/list.gql'
+import RecentlyActiveRepoList from '~/apollo/queries/repository/recentlyActiveRepoList.gql'
+import recentlyActiveRepoListWithAnalyzer from '~/apollo/queries/repository/recentlyActiveRepoListWithAnalyzer.gql'
 import { GraphqlError } from '~/types/apollo-graphql-types'
+import { resolveNodes } from '~/utils/array'
 
 export interface RepoInterface {
   id: string
@@ -15,14 +18,16 @@ export interface RepoInterface {
 export enum RepoListActions {
   FETCH_REPOSITORY_LIST = 'fetchRepositoryList',
   FETCH_NEW_REPOSITORY_LIST = 'fetchNewRepoList',
-  FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST = 'fetchActiveAnalysisRepositoryList'
+  FETCH_ACTIVE_REPOSITORY_LIST = 'fetchActiveAnalysisRepositoryList',
+  FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS = 'fetchActiveAnalysisRepositoryListWithAnalyzers'
 }
 export enum RepoListMutations {
   SET_ERROR = 'setRepositoryListError',
   SET_LOADING = 'setRepositoryListLoading',
   SET_REPOSITORY_LIST = 'setRepositoryList',
   SET_NEW_REPOSITORY_LIST = 'setNewRepoList',
-  SET_ACTIVE_ANALYSIS_REPOSITORY_LIST = 'setActiveAnalysisRepositoryList'
+  SET_ACTIVE_REPOSITORY_LIST = 'setActiveAnalysisRepositoryList',
+  SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS = 'setActiveAnalysisRepositoryListWithAnalyzers'
 }
 
 export const state = () => ({
@@ -43,11 +48,8 @@ export const state = () => ({
     totalCount: 0 as Maybe<Scalars['Int']>,
     edges: []
   } as RepositoryConnection,
-  repoWithActiveAnalysis: {
-    pageInfo: {} as PageInfo,
-    totalCount: 0 as Maybe<Scalars['Int']>,
-    edges: []
-  } as RepositoryConnection
+  repoWithActiveAnalysis: [] as Repository[],
+  repoWithActiveAnalysisWithAnalyzers: [] as Repository[]
 })
 
 export type RepositoryListModuleState = ReturnType<typeof state>
@@ -72,7 +74,15 @@ interface RepositoryListModuleMutations extends MutationTree<RepositoryListModul
     state: RepositoryListModuleState,
     repositoryList: RepositoryConnection
   ) => void
-  [RepoListMutations.SET_ACTIVE_ANALYSIS_REPOSITORY_LIST]: (
+  [RepoListMutations.SET_ACTIVE_REPOSITORY_LIST]: (
+    state: RepositoryListModuleState,
+    repositoryList: RepositoryConnection
+  ) => void
+  [RepoListMutations.SET_ACTIVE_REPOSITORY_LIST]: (
+    state: RepositoryListModuleState,
+    repositoryList: RepositoryConnection
+  ) => void
+  [RepoListMutations.SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]: (
     state: RepositoryListModuleState,
     repositoryList: RepositoryConnection
   ) => void
@@ -96,8 +106,11 @@ export const mutations: RepositoryListModuleMutations = {
   [RepoListMutations.SET_NEW_REPOSITORY_LIST]: (state, repositoryList) => {
     state.newRepos = Object.assign({}, state.repositoryList, repositoryList)
   },
-  [RepoListMutations.SET_ACTIVE_ANALYSIS_REPOSITORY_LIST]: (state, repositoryList) => {
-    state.repoWithActiveAnalysis = Object.assign({}, state.repositoryList, repositoryList)
+  [RepoListMutations.SET_ACTIVE_REPOSITORY_LIST]: (state, repositoryList) => {
+    state.repoWithActiveAnalysis = resolveNodes(repositoryList) as Repository[]
+  },
+  [RepoListMutations.SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]: (state, repositoryList) => {
+    state.repoWithActiveAnalysisWithAnalyzers = resolveNodes(repositoryList) as Repository[]
   }
 }
 
@@ -125,7 +138,7 @@ interface RepositoryListModuleActions extends ActionTree<RepositoryListModuleSta
       query: string
     }
   ) => Promise<void>
-  [RepoListActions.FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST]: (
+  [RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST]: (
     this: Store<RootState>,
     injectee: RepositoryListActionContext,
     variables: {
@@ -195,22 +208,21 @@ export const actions: RepositoryListModuleActions = {
       commit(RepoListMutations.SET_LOADING, false)
     }
   },
-  async [RepoListActions.FETCH_ACTIVE_ANALYSIS_REPOSITORY_LIST]({ commit }, variables) {
+  async [RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST]({ commit }, variables) {
     commit(RepoListMutations.SET_LOADING, true)
     try {
       const response: { data: { owner: Owner } } = await this.$fetchGraphqlData(
-        RepositoryListGQLQuery,
+        RecentlyActiveRepoList,
         {
           login: variables.login,
           provider: this.$providerMetaMap[variables.provider].value,
-          isActivated: true,
           limit: variables.limit
         },
         variables.refetch
       )
 
       commit(
-        RepoListMutations.SET_ACTIVE_ANALYSIS_REPOSITORY_LIST,
+        RepoListMutations.SET_ACTIVE_REPOSITORY_LIST,
         response.data.owner.repositories
       )
       commit(RepoListMutations.SET_LOADING, false)
@@ -218,6 +230,27 @@ export const actions: RepositoryListModuleActions = {
       const error = e as GraphqlError
       commit(RepoListMutations.SET_ERROR, error)
       commit(RepoListMutations.SET_LOADING, false)
+    }
+  },
+  async [RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]({ commit }, variables) {
+    try {
+      const response: { data: { owner: Owner } } = await this.$fetchGraphqlData(
+        recentlyActiveRepoListWithAnalyzer,
+        {
+          login: variables.login,
+          provider: this.$providerMetaMap[variables.provider].value,
+          limit: variables.limit
+        },
+        variables.refetch
+      )
+
+      commit(
+        RepoListMutations.SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS,
+        response.data.owner.repositories
+      )
+    } catch (e) {
+      const error = e as GraphqlError
+      commit(RepoListMutations.SET_ERROR, error)
     }
   }
 }

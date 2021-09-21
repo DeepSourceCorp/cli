@@ -162,7 +162,6 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   async fetch(): Promise<void> {
     await this.fetchContext()
     await this.fetchActiveUser()
-    this.fetchRepoCount()
   }
 
   @Watch('activeOwner')
@@ -177,11 +176,13 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
       login: this.activeOwner,
       limit: pageSize,
       currentPageNumber: 1,
-      query: ''
+      query: '',
+      refetch
     })
   }
 
   mounted() {
+    this.fetchRepoCount()
     this.isCollapsed = Boolean(this.$localStore.get('ui-state', 'sidebar-collapsed'))
     this.collapsedSidebar = Boolean(this.$localStore.get('ui-state', 'sidebar-collapsed'))
     this.$root.$on('ui:show-sidebar-menu', () => {
@@ -189,7 +190,8 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
       this.collapsedSidebar = false
       this.isOpen = true
     })
-
+    
+    this.fetchRepoCount()
     this.$socket.$on('repo-onboarding-completed', () => {
       this.fetchRepoCount(true)
     })
