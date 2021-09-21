@@ -63,21 +63,18 @@ import AuthMixin from '~/mixins/authMixin'
 })
 export default class InstallationProvider extends mixins(ContextMixin, ActiveUserMixin, AuthMixin) {
   async fetch(): Promise<void> {
-    await this.fetchActiveUserGitlabAccounts()
+    await Promise.all([
+      this.fetchContext(),
+      this.fetchAuthUrls(),
+      this.fetchActiveUserGitlabAccounts()
+    ])
   }
 
-  get loginUrls() {
+  get loginUrls(): Record<string, string> {
     return {
       ...this.context.installationUrls,
-      gitlab: this.gitLabLink
+      gitlab: this.hasGitlabAccounts ? '' : this.authUrls.gitlab
     }
-  }
-
-  get gitLabLink(): string {
-    if (!this.hasGitlabAccounts) {
-      return this.authUrls.gitlab
-    }
-    return '/accounts/gitlab/login'
   }
 
   get hasGitlabAccounts(): boolean {
