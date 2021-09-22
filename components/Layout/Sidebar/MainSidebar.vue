@@ -27,6 +27,9 @@
       >
         {{ activeDashboardContext.type === 'team' ? 'Team home' : 'Home' }}
       </sidebar-item>
+      <client-only>
+        <pending-adhoc-repos :isCollapsed="isCollapsed" />
+      </client-only>
       <recently-active-repo :isCollapsed="isCollapsed" />
       <sidebar-item
         :isCollapsed="isCollapsed"

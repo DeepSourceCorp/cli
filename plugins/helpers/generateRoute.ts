@@ -24,14 +24,19 @@ declare module 'vuex/types/index' {
 }
 
 export default (context: Context, inject: Inject): void => {
-  const generateRoute = (path: Array<string>): string => {
+  const generateRoute = (path?: Array<string> | string): string => {
     const { params } = context.route
     const baseRoute = ['', params.provider, params.owner]
     if (params.repo) {
       baseRoute.push(params.repo)
     }
+    if (path && Array.isArray(path)) {
+      return baseRoute.concat(...path).join('/')
+    } else if (path) {
+      return baseRoute.concat(path).join('/')
+    }
 
-    return baseRoute.concat(path).join('/')
+    return baseRoute.join('/')
   }
   inject('generateRoute', generateRoute)
 }

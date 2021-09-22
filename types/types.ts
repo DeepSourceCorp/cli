@@ -156,6 +156,7 @@ export type AnalyzerRepositoriesArgs = {
   vcsProvider?: Maybe<Scalars['String']>;
   isPrivate?: Maybe<Scalars['Boolean']>;
   isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1402,6 +1403,7 @@ export type Mutation = {
   bitbucketInstallationLanding?: Maybe<BitbucketInstallationLandingPayload>;
   gitlabInstallationLanding?: Maybe<GitlabInstallationLandingPayload>;
   updateStarredRepository?: Maybe<UpdateStarredRepositoryPayload>;
+  updateWatchedRepository?: Maybe<UpdateWatchedRepositoryPayload>;
   confirmInvitation?: Maybe<ConfirmInvitationPayload>;
   verifyDevice?: Maybe<VerifyDevicePayload>;
   createConfigTemplate?: Maybe<CreateConfigTemplatePayload>;
@@ -1718,6 +1720,11 @@ export type MutationUpdateStarredRepositoryArgs = {
 };
 
 
+export type MutationUpdateWatchedRepositoryArgs = {
+  input: UpdateWatchedRepositoryInput;
+};
+
+
 export type MutationConfirmInvitationArgs = {
   input: ConfirmInvitationInput;
 };
@@ -1874,6 +1881,7 @@ export type OwnerRepositoriesArgs = {
   vcsProvider?: Maybe<Scalars['String']>;
   isPrivate?: Maybe<Scalars['Boolean']>;
   isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1946,6 +1954,7 @@ export type OwnerAutoonboardableRepositoriesArgs = {
   vcsProvider?: Maybe<Scalars['String']>;
   isPrivate?: Maybe<Scalars['Boolean']>;
   isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
 };
 
 
@@ -2214,6 +2223,7 @@ export type QueryTrendingRepositoriesArgs = {
   vcsProvider?: Maybe<Scalars['String']>;
   isPrivate?: Maybe<Scalars['Boolean']>;
   isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
 };
 
 
@@ -2331,6 +2341,7 @@ export type Repository = MaskPrimaryKeyNode & {
   analyzer?: Maybe<Analyzer>;
   checks: CheckConnection;
   userpreferenceSet: UserPreferenceConnection;
+  watchedBy: UserPreferenceConnection;
   autofixRuns?: Maybe<AutofixRunConnection>;
   transformerRuns?: Maybe<TransformerRunConnection>;
   onboardingEvents: AutoOnboardEventConnection;
@@ -2386,6 +2397,8 @@ export type Repository = MaskPrimaryKeyNode & {
   recommendedIssueCount?: Maybe<Scalars['Int']>;
   totalIssueCount?: Maybe<Scalars['Int']>;
   isStarred?: Maybe<Scalars['Boolean']>;
+  isWatched?: Maybe<Scalars['Boolean']>;
+  hasAdhocRuns?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -2427,6 +2440,15 @@ export type RepositoryChecksArgs = {
 
 
 export type RepositoryUserpreferenceSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type RepositoryWatchedByArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -3687,6 +3709,18 @@ export type UpdateTechnologyPreferencePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type UpdateWatchedRepositoryInput = {
+  repoId: Scalars['ID'];
+  action: ActionChoice;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateWatchedRepositoryPayload = {
+  __typename?: 'UpdateWatchedRepositoryPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type UpdateWebhookInput = {
   webhookId: Scalars['ID'];
   url?: Maybe<Scalars['String']>;
@@ -3838,6 +3872,7 @@ export type UserRepositorySetArgs = {
   vcsProvider?: Maybe<Scalars['String']>;
   isPrivate?: Maybe<Scalars['Boolean']>;
   isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3908,6 +3943,7 @@ export type UserRepositoriesArgs = {
   vcsProvider?: Maybe<Scalars['String']>;
   isPrivate?: Maybe<Scalars['Boolean']>;
   isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3946,6 +3982,7 @@ export type UserPreference = MaskPrimaryKeyNode & {
   modifiedAt: Scalars['DateTime'];
   alive?: Maybe<Scalars['Boolean']>;
   starredRepositories: RepositoryConnection;
+  watchedRepositories: RepositoryConnection;
   user?: Maybe<User>;
 };
 
@@ -3960,6 +3997,21 @@ export type UserPreferenceStarredRepositoriesArgs = {
   vcsProvider?: Maybe<Scalars['String']>;
   isPrivate?: Maybe<Scalars['Boolean']>;
   isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserPreferenceWatchedRepositoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  vcsProvider?: Maybe<Scalars['String']>;
+  isPrivate?: Maybe<Scalars['Boolean']>;
+  isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
 };
 
 export type UserPreferenceConnection = {
@@ -5879,6 +5931,31 @@ export type Unnamed_74_Query = (
             { __typename?: 'Analyzer' }
             & Pick<Analyzer, 'id' | 'name' | 'shortcode' | 'analyzerLogo'>
           )> }
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type ListAdhocRunPendingQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type ListAdhocRunPendingQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { repositories?: Maybe<(
+      { __typename?: 'RepositoryConnection' }
+      & Pick<RepositoryConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'RepositoryEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Repository' }
+          & Pick<Repository, 'id' | 'name' | 'errorCode' | 'vcsProvider' | 'ownerLogin' | 'isActivated' | 'isFork' | 'isPrivate' | 'canBeActivated'>
         )> }
       )>> }
     )> }

@@ -3,12 +3,19 @@
     <div
       class="text-vanilla-400 text-sm text-center flex flex-col justify-between min-h-screen pb-24 pt-32"
     >
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="max-h-84 mx-auto"
+        :poster="require('~/assets/loader/installation-loader.png')"
+      >
+        <source src="~/assets/loader/loader.webm" type="video/webm" />
+      </video>
       <div class="space-y-2">
-        <video class="max-w-xl mx-auto" poster="/installation-loader.png" autoplay>
-          <source src="/loading.mp4" type="video/mp4" />
-        </video>
         <h1 class="text-2xl text-vanilla-100 font-semibold">
-          Analyzing {{ this.$route.params.login }}/{{ this.$route.params.repo }}
+          Analyzing {{ $route.params.login }}/{{ $route.params.repo }}
         </h1>
         <transition enter-active-class="animate-slide-bottom-enter-active" mode="out-in">
           <p v-bind:key="status">{{ status }}</p>
@@ -23,7 +30,10 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { RunStatus } from '~/types/types'
+import { WSRepoAnalysisUpdatedPayload } from '~/types/websockets'
 
 @Component({
   meta: {
@@ -32,27 +42,45 @@ import { Vue, Component } from 'nuxt-property-decorator'
     }
   }
 })
-export default class Running extends Vue {
+export default class Running extends mixins(RepoDetailMixin) {
   public status = 'Waking up marvin'
   public timer: ReturnType<typeof setTimeout>
 
   public stages = [
-    { status: 'Waking up marvin', duration: 3 },
-    { status: 'Setting up analyzer', duration: 5 },
-    { status: 'Analyzing the repository for issues, this may take a while', duration: 30 },
-    { status: 'Calculating Metrics', duration: 15 }
+    { status: 'Waking up marvin', duration: 8 },
+    { status: 'Setting up analyzer', duration: 12 },
+    { status: 'Analyzing the repository for issues, this may take a while', duration: 90 },
+    { status: 'Calculating metrics', duration: 15 }
   ]
 
   mounted(): void {
     this.next(0)
-    this.$socket.$on('repo-analysis-updated', (data: Record<string, string>) => {
-      clearTimeout(this.timer)
+    this.$socket.$on('repo-analysis-updated', this.openIssuesPage)
+  }
+
+  beforeDestroy(): void {
+    this.$socket.$off('repo-analysis-updated', this.openIssuesPage)
+  }
+
+  async openIssuesPage(data: WSRepoAnalysisUpdatedPayload): Promise<void> {
+    if (data.status === RunStatus.Pend) {
+      return
+    }
+    
+    clearTimeout(this.timer)
+    setTimeout(() => {
       this.status = 'Finishing Run'
-      const { provider, login, repo } = this.$route.params
-      setTimeout(() => {
-        this.$router.push(`/${provider}/${login}/${repo}/issues`)
-      }, 300)
+    }, 300)
+    const { provider, login, repo } = this.$route.params
+    await this.fetchBasicRepoDetails({
+      provider,
+      owner: login,
+      name: repo,
+      refetch: true
     })
+    setTimeout(() => {
+      this.$router.push(`/${provider}/${login}/${repo}/issues`)
+    }, 1000)
   }
 
   next(index: number): void {

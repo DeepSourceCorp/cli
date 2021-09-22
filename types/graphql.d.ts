@@ -837,6 +837,15 @@ declare module '*/issueTypeDistribution.gql' {
 }
     
 
+declare module '*/listAdHocPending.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const listAdhocRunPending: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/listForAnalyzerDirectory.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

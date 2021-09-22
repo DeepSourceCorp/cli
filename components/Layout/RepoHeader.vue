@@ -43,16 +43,23 @@
               <z-tag
                 class="border-2 border-ink-200"
                 spacing="p-0.5"
-                bgcolor="ink-200"
+                bg-color="ink-200"
                 v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
                 size="base"
                 :iconLeft="repoVCSIcon"
               ></z-tag>
             </a>
 
-            <z-label v-if="repository.errorCode" class="inline-block select-none" state="error">
-              Error
-            </z-label>
+            <template v-if="repository.errorCode">
+              <z-label
+                v-if="repository.errorCode === 3003"
+                class="inline-block select-none"
+                state="info"
+              >
+                Pending commit
+              </z-label>
+              <z-label v-else class="inline-block select-none" state="error"> Error </z-label>
+            </template>
             <z-label
               v-else-if="repository.isActivated === true"
               class="inline-block select-none"
@@ -195,7 +202,7 @@ export default class RepoHeader extends mixins(
   RoleAccessMixin,
   ActiveUserMixin
 ) {
-  private internalStarredState = false
+  internalStarredState = false
 
   async fetch(): Promise<void> {
     await this.fetchRepoPerms(this.baseRouteParams)

@@ -37,7 +37,10 @@
       <div
         class="flex items-center py-1 px-2 space-x-2 text-sm"
         :class="
-          isActive('provider-owner-repo') ? 'text-vanilla-100 font-semibold' : 'text-vanilla-400'
+          isActive('provider-owner-repo') &&
+          !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
+            ? 'text-vanilla-100 font-semibold'
+            : 'text-vanilla-400'
         "
       >
         <z-icon icon="activity" />

@@ -24,19 +24,19 @@
       <!-- Repo list -->
       <div
         class="flex flex-col overflow-scroll h-96 md:h-72"
-        :class="this.repoCount === 0 ? 'space-y-3 pr-0' : 'pr-3'"
+        :class="repoCount === 0 ? 'space-y-3 pr-0' : 'pr-3'"
       >
-        <template v-if="this.repoCount">
+        <template v-if="repoCount">
           <repo-list-item
             class="p-1 px-2 rounded-sm"
-            v-for="(repo, index) in newRepos.edges"
+            v-for="(repo, index) in repositoriesToOnboard"
             :key="index"
-            :handleName="repo.node.ownerLogin"
-            :language="repo.node.supportedAnalyzers ? repo.node.supportedAnalyzers[0] : ''"
-            :analyzer="repo.node.primaryAnalyzer"
-            :icon="repo.node.isPrivate ? 'lock' : 'globe'"
-            :repoName="repo.node.name"
-            @click="pickRepo(repo.node)"
+            :handleName="repo.ownerLogin"
+            :language="repo.supportedAnalyzers ? repo.supportedAnalyzers[0] : ''"
+            :analyzer="repo.primaryAnalyzer"
+            :icon="repo.isPrivate ? 'lock' : 'globe'"
+            :repoName="repo.name"
+            @click="pickRepo(repo)"
           >
           </repo-list-item>
         </template>
@@ -45,8 +45,8 @@
           class="flex flex-col items-center justify-center flex-1 w-full p-6 text-sm text-center border border-dashed text-vanilla-400 border-ink-200 rounded-md"
         >
           <div v-if="loading" class="flex flex-col space-y-2 items-center">
-            <z-icon class="animate-spin" :icon="'refresh-cw'"></z-icon>
-            <span class="text-vanilla-400">Loading Repositories</span>
+            <z-icon class="animate-spin" icon="spin-loader"></z-icon>
+            <span class="text-vanilla-400">Loading repositories</span>
           </div>
           <div v-else class="space-y-5">
             <template v-if="searchCandidate">
@@ -91,17 +91,17 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, namespace, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZInput, ZDivider, ZIcon } from '@deepsourcelabs/zeal'
 import { RepoListItem } from '.'
 
-import { RepoListActions, RepoInterface } from '~/store/repository/list'
-
 // types
-import { RepositoryConnection } from '~/types/types'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import { Repository } from '~/types/types'
 
-const repoListStore = namespace('repository/list')
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import RepoListMixin from '~/mixins/repoListMixin'
+
+import { resolveNodes } from '~/utils/array'
 
 @Component({
   components: {
@@ -115,15 +115,9 @@ const repoListStore = namespace('repository/list')
     event: 'pickRepo'
   }
 })
-export default class RepoSelector extends mixins(OwnerDetailMixin) {
-  @repoListStore.State
-  newRepos: RepositoryConnection
-
-  @repoListStore.State
-  loading: boolean
-
-  private searchCandidate = null
-  private repoSyncLoading = false
+export default class RepoSelector extends mixins(OwnerDetailMixin, RepoListMixin) {
+  searchCandidate = null
+  repoSyncLoading = false
 
   async fetch(): Promise<void> {
     const { login, provider } = this.$route.params
@@ -135,9 +129,10 @@ export default class RepoSelector extends mixins(OwnerDetailMixin) {
   }
 
   async fetchRepositories(): Promise<void> {
-    await this.$store.dispatch(`repository/list/${RepoListActions.FETCH_NEW_REPOSITORY_LIST}`, {
+    await this.fetchNewRepoList({
       login: this.$route.params.login,
       provider: this.$route.params.provider,
+      currentPageNumber: 1,
       limit: 30,
       query: this.searchCandidate ? this.searchCandidate : null
     })
@@ -167,12 +162,16 @@ export default class RepoSelector extends mixins(OwnerDetailMixin) {
     this.repoSyncLoading = false
   }
 
-  pickRepo(repo: RepoInterface): void {
+  pickRepo(repo: Repository): void {
     this.$emit('pickRepo', repo)
   }
 
   get repoCount(): number {
     return this.newRepos.edges.length
+  }
+
+  get repositoriesToOnboard(): Repository[] {
+    return resolveNodes(this.newRepos) as Repository[]
   }
 
   getRepoCountText(): string {

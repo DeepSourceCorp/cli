@@ -26,7 +26,7 @@
               OR it's a page like settings or history which is always visible
               OR if the page is loading
           -->
-        <div v-if="repository.name === $route.params.repo && repository.errorCode && !loading">
+        <div v-if="repository.name === $route.params.repo && repository.errorCode && repository.errorCode !== 3003 && !loading">
           <div
             class="bg-cherry bg-opacity-10 p-4 flex items-center space-x-2 border-b border-cherry border-opacity-20"
           >
@@ -160,6 +160,11 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
   }
 
   get allowedOnBroken(): boolean {
+    if (this.repository.errorCode === 3003) {
+      // For ad-hoc runs
+      return true
+    }
+    
     const allowedRoutes = [
       'provider-owner-repo-settings',
       'provider-owner-repo-generate-config',

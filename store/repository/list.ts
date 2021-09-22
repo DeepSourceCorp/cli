@@ -4,6 +4,7 @@ import { RepositoryConnection, PageInfo, Maybe, Scalars, Owner, Repository } fro
 import RepositoryListGQLQuery from '~/apollo/queries/repository/list.gql'
 import RecentlyActiveRepoList from '~/apollo/queries/repository/recentlyActiveRepoList.gql'
 import recentlyActiveRepoListWithAnalyzer from '~/apollo/queries/repository/recentlyActiveRepoListWithAnalyzer.gql'
+import RepositoryAdHocPending from '~/apollo/queries/repository/listAdHocPending.gql'
 import { GraphqlError } from '~/types/apollo-graphql-types'
 import { resolveNodes } from '~/utils/array'
 
@@ -17,6 +18,7 @@ export interface RepoInterface {
 
 export enum RepoListActions {
   FETCH_REPOSITORY_LIST = 'fetchRepositoryList',
+  FETCH_PENDING_ADHOC_REPOSITORY_LIST = 'fetchRepositoryListWithPendingAdhocRun',
   FETCH_NEW_REPOSITORY_LIST = 'fetchNewRepoList',
   FETCH_ACTIVE_REPOSITORY_LIST = 'fetchActiveAnalysisRepositoryList',
   FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS = 'fetchActiveAnalysisRepositoryListWithAnalyzers'
@@ -27,7 +29,8 @@ export enum RepoListMutations {
   SET_REPOSITORY_LIST = 'setRepositoryList',
   SET_NEW_REPOSITORY_LIST = 'setNewRepoList',
   SET_ACTIVE_REPOSITORY_LIST = 'setActiveAnalysisRepositoryList',
-  SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS = 'setActiveAnalysisRepositoryListWithAnalyzers'
+  SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS = 'setActiveAnalysisRepositoryListWithAnalyzers',
+  SET_ADHOC_RUN_REPOS = 'setRepoWithPendingAdhocRuns'
 }
 
 export const state = () => ({
@@ -49,7 +52,8 @@ export const state = () => ({
     edges: []
   } as RepositoryConnection,
   repoWithActiveAnalysis: [] as Repository[],
-  repoWithActiveAnalysisWithAnalyzers: [] as Repository[]
+  repoWithActiveAnalysisWithAnalyzers: [] as Repository[],
+  repoWithPendingAdhocRuns: [] as Repository[]
 })
 
 export type RepositoryListModuleState = ReturnType<typeof state>
@@ -86,6 +90,10 @@ interface RepositoryListModuleMutations extends MutationTree<RepositoryListModul
     state: RepositoryListModuleState,
     repositoryList: RepositoryConnection
   ) => void
+  [RepoListMutations.SET_ADHOC_RUN_REPOS]: (
+    state: RepositoryListModuleState,
+    repoConnect: RepositoryConnection
+  ) => void
 }
 
 export const mutations: RepositoryListModuleMutations = {
@@ -111,6 +119,9 @@ export const mutations: RepositoryListModuleMutations = {
   },
   [RepoListMutations.SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]: (state, repositoryList) => {
     state.repoWithActiveAnalysisWithAnalyzers = resolveNodes(repositoryList) as Repository[]
+  },
+  [RepoListMutations.SET_ADHOC_RUN_REPOS]: (state, repoConnect) => {
+    state.repoWithPendingAdhocRuns = resolveNodes(repoConnect) as Repository[]
   }
 }
 
@@ -124,6 +135,15 @@ interface RepositoryListModuleActions extends ActionTree<RepositoryListModuleSta
       limit: number
       currentPageNumber: number
       query: string
+      refetch?: boolean
+    }
+  ) => Promise<void>
+  [RepoListActions.FETCH_PENDING_ADHOC_REPOSITORY_LIST]: (
+    this: Store<RootState>,
+    injectee: RepositoryListActionContext,
+    variables: {
+      login: string
+      provider: string
       refetch?: boolean
     }
   ) => Promise<void>
@@ -185,6 +205,25 @@ export const actions: RepositoryListModuleActions = {
       commit(RepoListMutations.SET_LOADING, false)
     }
   },
+  async [RepoListActions.FETCH_PENDING_ADHOC_REPOSITORY_LIST](
+    { commit },
+    { login, provider, refetch }
+  ) {
+    try {
+      const response = await this.$fetchGraphqlData(
+        RepositoryAdHocPending,
+        {
+          login: login,
+          provider: this.$providerMetaMap[provider].value
+        },
+        refetch
+      )
+      commit(RepoListMutations.SET_ADHOC_RUN_REPOS, response.data.owner.repositories)
+    } catch (e) {
+      const error = e as GraphqlError
+      commit(RepoListMutations.SET_ERROR, error)
+    }
+  },
   async [RepoListActions.FETCH_NEW_REPOSITORY_LIST]({ commit }, variables) {
     commit(RepoListMutations.SET_LOADING, true)
     try {
@@ -221,10 +260,7 @@ export const actions: RepositoryListModuleActions = {
         variables.refetch
       )
 
-      commit(
-        RepoListMutations.SET_ACTIVE_REPOSITORY_LIST,
-        response.data.owner.repositories
-      )
+      commit(RepoListMutations.SET_ACTIVE_REPOSITORY_LIST, response.data.owner.repositories)
       commit(RepoListMutations.SET_LOADING, false)
     } catch (e) {
       const error = e as GraphqlError

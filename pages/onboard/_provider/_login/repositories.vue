@@ -8,8 +8,8 @@
         <div class="hidden w-full lg:block">
           <z-stepper>
             <z-step title="Step 1" description="Connect provider" status="completed"></z-step>
-            <z-step title="Step 2" description="Set preferences" status="active"></z-step>
-            <z-step title="Step 3" description="Pick a repository"></z-step>
+            <z-step title="Step 2" description="Set preferences" status="completed"></z-step>
+            <z-step title="Step 3" description="Pick a repository" status="active"></z-step>
           </z-stepper>
         </div>
 
@@ -22,9 +22,9 @@
             @pickRepo="repoSelected"
           ></repo-selector>
           <!-- Analyzer Selection -->
-          <div
+          <section
             v-else
-            class="flex flex-col w-full h-auto p-3 space-y-3 rounded-md bg-ink-300 max-h-102 sm:max-h-100 sm:h-4/5"
+            class="flex flex-col w-full h-auto p-3 space-y-3 rounded-md bg-ink-300 max-h-102 sm:h-4/5"
           >
             <!-- Heading -->
             <div class="flex items-center w-full space-x-2">
@@ -69,7 +69,7 @@
             <!-- Add more Analyzer -->
             <div class="text-xs tracking-wider uppercase text-vanilla-400">Add more analyzers</div>
             <!-- Analyzers -->
-            <div class="grid grid-cols-2 gap-2 overflow-scroll auto-rows-max">
+            <div class="grid grid-cols-2 gap-2 overflow-scroll auto-rows-max max-h-52">
               <template v-for="analyzer in analyzerList">
                 <analyzer-title-card
                   v-if="!analyzer.enabled"
@@ -82,78 +82,22 @@
                 </analyzer-title-card>
               </template>
             </div>
-          </div>
+          </section>
         </transition>
         <div class="fixed bottom-0 left-0 w-full md:static space-y-2">
           <z-button
-            v-if="repository.isCommitPossible"
             class="w-full"
             buttonType="primary"
-            icon="plus"
-            label="Add configuration and start analysis"
-            loadingLabel="Activating Repository"
+            icon="zap"
+            label="Start analysis"
+            loadingLabel="Triggering analysis"
             :disabled="actionDisabled"
             :isLoading="commitLoading"
-            @click="commitConfig(false)"
-          >
-          </z-button>
-          <z-button
-            v-else-if="repository.isAutofixEnabled"
-            buttonType="primary"
-            class="w-full"
-            :disabled="actionDisabled"
-            @click="commitConfig(true)"
-          >
-            Create {{ $route.params.provider === 'gl' ? 'merge' : 'pull' }} request with config
-          </z-button>
-          <z-button
-            v-else
-            buttonType="primary"
-            class="w-full"
-            :disabled="actionDisabled"
-            @click="showNextStepsModal = true"
-          >
-            Show next steps
-          </z-button>
-          <z-button
-            :disabled="!selectedRepoName"
-            class="w-full"
-            buttonType="secondary"
-            @click="activateRepo"
-          >
-            I’ve added .deepsource.toml, activate repo
-          </z-button>
+            @click="triggerRun()"
+          />
         </div>
       </div>
     </div>
-    <z-modal
-      v-if="showNextStepsModal"
-      @primaryAction="activateRepo"
-      @onClose="showNextStepsModal = false"
-      title="Setup DeepSource config"
-      primaryActionLabel="I’ve added deepsource.toml, move on to analysis"
-    >
-      <div class="p-4">
-        <p class="text-sm text-vanilla-400">
-          Create a new file called
-          <span class="font-mono text-vanilla-300">.deepsource.toml</span> in the root folder of the
-          repository and commit the following configuration. Make sure you’re on the default branch.
-        </p>
-        <div class="p-3 mt-4 overflow-y-scroll text-sm rounded-md max-h-64 bg-ink-400">
-          <highlightjs language="toml" :code="toml" />
-        </div>
-        <z-button
-          @click="copyToml"
-          :icon="copyIcon"
-          size="small"
-          buttonType="primary"
-          color="vanilla-200"
-          class="w-full mt-2 bg-ink-200 hover:bg-ink-100"
-        >
-          Copy config
-        </z-button>
-      </div>
-    </z-modal>
     <!-- Preview Component - Right section -->
     <div class="flex-row-reverse items-center hidden w-5/12 bg-ink-300 bg-opacity-40 xl:flex">
       <analyzer-preview
@@ -211,7 +155,6 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
   analyzerList: Array<AnalyzerInterface>
 
   public isAnalyzer = false
-  public showNextStepsModal = false
   public selectedRepo: RepoInterface | null
   public selectedRepoName = ''
   public selectedAnalyzers: Array<AnalyzerInterface> = []
@@ -239,7 +182,6 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
       // Set the repo id in store
       this.updateRepository(this.selectedRepo.id.trim())
       const { provider, login } = this.$route.params
-      this.fetchIsCommitPossible(this.baseRouteParams)
       this.fetchBasicRepoDetails({
         provider,
         owner: login,
@@ -291,95 +233,17 @@ export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, R
     this.resetPreferences()
   }
 
-  public commitLoading = false
+  commitLoading = false
 
-  async commitConfig(createPullRequest = false): Promise<void> {
+  async triggerRun(): Promise<void> {
     this.commitLoading = true
-    const pullLabel = this.$route.params.provider === 'gl' ? 'merge' : 'pull'
     const { provider, login } = this.$route.params
-
-    const args = {
-      config: this.toml,
-      repositoryId: this.repository.id,
-      createPullRequest
-    }
-
-    try {
-      const response = await this.commitConfigToVcs(args)
-
-      if (response.ok) {
-        if (createPullRequest) {
-          this.$toast.show({
-            type: 'success',
-            message: `<p>We have created a ${pullLabel} request with the configuration.</p><p class="mt-1">Analysis will start automatically once you merge the ${pullLabel} request.</p>`,
-            timeout: 10
-          })
-        } else {
-          this.$toast.success(
-            `Successfully activated ${this.repository.name}, the first run may take a while to finish`
-          )
-        }
-        try {
-          this.fetchBasicRepoDetails({
-            provider,
-            owner: login,
-            name: this.selectedRepoName,
-            refetch: true
-          })
-        } catch (e) {}
-
-        this.commitLoading = false
-
-        this.$router.push(`/${provider}/${login}/${this.selectedRepoName}/issues`)
-      } else {
-        this.$toast.danger(
-          'Something went wrong while creating the configuration for this repository, contact support'
-        )
-      }
-    } catch (e) {
-      this.logSentryErrorForUser(e, 'Generate config - Onboarding', args)
-      this.$toast.danger(e.message.replace('GraphQL error: ', ''))
-    } finally {
-      this.commitLoading = false
-    }
-  }
-
-  async activateRepo(): Promise<void> {
-    const { provider, login } = this.$route.params
-    await this.toggleRepoActivation({
-      id: this.repository.id,
-      isActivated: true
+    // trigger the run
+    await this.triggerAdHocRun({ config: this.toml })
+    this.$router.push({
+      path: `/onboard/${provider}/${login}/running/${this.selectedRepoName}`
     })
-
-    try {
-      this.fetchBasicRepoDetails({
-        provider,
-        owner: login,
-        name: this.selectedRepoName,
-        refetch: true
-      })
-    } catch (e) {}
-
-    this.$router.push(`/${provider}/${login}/${this.selectedRepoName}/issues`)
+    this.commitLoading = false
   }
-
-  public copyIcon = 'clipboard'
-
-  copyToml(): void {
-    this.$copyToClipboard(this.toml)
-    this.copyIcon = 'check'
-    setTimeout(() => {
-      this.copyIcon = 'clipboard'
-    }, 500)
-  }
-
-  // async triggerRun(): Promise<void> {
-  //   const { provider, login } = this.$route.params
-  //   // trigger the run
-  //   await this.triggerAdHocRun({ config: this.toml })
-  //   this.$router.push({
-  //     path: `/onboard/${provider}/${login}/running/${this.selectedRepoName}`
-  //   })
-  // }
 }
 </script>

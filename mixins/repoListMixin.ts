@@ -20,6 +20,9 @@ export default class RepoListMixin extends Vue {
   repoWithActiveAnalysisWithAnalyzers: Repository[]
 
   @repoListStore.State
+  repoWithPendingAdhocRuns: Repository[]
+
+  @repoListStore.State
   loading: boolean
 
   @repoListStore.Action(RepoListActions.FETCH_REPOSITORY_LIST)
@@ -29,6 +32,13 @@ export default class RepoListMixin extends Vue {
     limit: number
     currentPageNumber: number
     query: string | null
+    refetch?: boolean
+  }) => Promise<void>
+
+  @repoListStore.Action(RepoListActions.FETCH_PENDING_ADHOC_REPOSITORY_LIST)
+  fetchPendingAdHocRepoList: (args: {
+    login: string
+    provider: string
     refetch?: boolean
   }) => Promise<void>
 

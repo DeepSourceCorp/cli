@@ -31,13 +31,13 @@
               v-if="activeDashboardContext.vcs_provider_display"
               class="border-2 border-ink-200"
               spacing="p-0.5"
-              bgcolor="ink-200"
+              bg-color="ink-200"
               size="base"
               :iconLeft="repoVCSIcon"
             ></z-tag>
           </a>
 
-          <template v-if="!context.on_prem && activeDashboardContext.type === 'team'">
+          <template v-if="!context.onPrem && activeDashboardContext.type === 'team'">
             <z-tag
               v-if="hasPaidPlan"
               class="border-ink-100 border text-center cursor leading-none"

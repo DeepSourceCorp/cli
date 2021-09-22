@@ -1,0 +1,21 @@
+query listAdhocRunPending($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    repositories(isActivated: false, errorCode: 3003) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          errorCode
+          vcsProvider
+          ownerLogin
+          isActivated
+          isFork
+          isPrivate
+          canBeActivated
+        }
+      }
+    }
+  }
+}

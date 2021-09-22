@@ -1,73 +1,104 @@
 <template>
-  <div>
+  <div class="grid grid-cols-1 lg:grid-cols-16-fr">
     <!-- Analyzer Tab -->
-    <div class="flex justify-between py-2 px-2 space-x-2 border-b border-ink-200">
+    <div
+      class="z-50 flex flex-col justify-between px-2 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
+    >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"
         :selectedAnalyzer="queryParams.analyzer"
       />
-      <div class="flex items-center space-x-2 w-auto justify-end">
+      <div class="flex items-center justify-end w-auto space-x-2">
         <issue-sort v-model="queryParams.sort" />
         <autofix-available v-model="queryParams.autofixAvailable" />
         <issue-search v-model="queryParams.q" />
       </div>
     </div>
     <!-- Main Content -->
-    <div class="flex w-full">
-      <!-- Group by Filter Section -->
-      <issue-category-selector
-        @updateCategory="updateCategory"
-        :selectedCategory="queryParams.category"
-      />
-      <!-- List of issues -->
-      <div v-if="issueListLoading" class="flex-1 flex-grow min-h-screen p-4 space-y-2">
-        <div v-for="idx in 7" :key="idx" class="h-26 rounded-md bg-ink-300 animate-pulse"></div>
-      </div>
-      <div
-        v-else
-        class="flex flex-col flex-1 flex-grow p-4 space-y-4"
-        :class="{
-          'max-h-64 min-h-64': issueList.totalCount === 0,
-          'min-h-screen max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
-        }"
-      >
-        <div
-          v-if="issueList.totalCount === 0"
-          class="flex flex-col items-center justify-center w-full h-screen space-y-2 text-center"
-        >
-          <div>There are no issues, developer asked "Is this a dream?"</div>
+    <!-- Group by Filter Section -->
+    <issue-category-selector
+      class="sticky top-36 category-sidebar"
+      @updateCategory="updateCategory"
+      :selectedCategory="queryParams.category"
+    >
+      <template v-slot:cta v-if="repository.errorCode === 3003">
+        <div class="p-4 pb-5 bg-gradient-to-t from-ink-200 to-ink-400 via-ink-300">
+          <h4 class="text-base font-bold leading-none text-vanilla-100">
+            Happy with analysis result?
+          </h4>
+          <p class="mt-2 text-sm font-medium leading-snug">
+            <span
+              class="bg-clip-text text-vanilla-100 text-opacity-50 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
+            >
+              Commit the configuration to continue analysis with every pull request.
+            </span>
+          </p>
+          <z-button
+            v-if="repository.isCommitPossible || repository.isAutofixEnabled"
+            @click="isActivationModalOpen = true"
+            size="small"
+            icon="play-circle"
+            class="w-full mt-5"
+            buttonType="primary"
+            label="Activate analysis"
+          />
+          <nuxt-link v-else :to="$generateRoute(['generate-config'])">
+            <z-button size="small" icon="play-circle" class="w-full mt-5" buttonType="primary">
+              Activate analysis
+            </z-button>
+          </nuxt-link>
         </div>
-        <issue-list-item
-          v-for="issue in issueList.edges"
-          v-bind="issue.node"
-          :key="issue.node.id"
-          :disableAutofixButton="!canCreateAutofix"
-          :issueLink="$generateRoute(['issue', issue.node.shortcode, 'occurrences'])"
-          @autofix="openAutofixModal"
-        ></issue-list-item>
-        <z-pagination
-          :key="$route.fullPath"
-          class="flex justify-center"
-          v-if="pageCount > 1"
-          :totalPages="pageCount"
-          :totalVisible="totalVisible"
-          v-model="queryParams.page"
-        ></z-pagination>
-      </div>
-      <!-- Autofix Modal -->
-      <autofix-file-chooser
-        repositoryId="repository.id"
-        v-bind="autofixIssue"
-        :isOpen="isAutofixOpen"
-        @close="isAutofixOpen = false"
-      ></autofix-file-chooser>
+      </template>
+    </issue-category-selector>
+    <!-- List of issues -->
+    <div v-if="issueListLoading" class="flex-1 flex-grow min-h-screen p-4 space-y-2">
+      <div v-for="idx in 7" :key="idx" class="rounded-md h-26 bg-ink-300 animate-pulse"></div>
     </div>
+    <div
+      v-else
+      class="flex flex-col flex-1 flex-grow p-4 space-y-4 pb-10"
+      :class="{
+        'max-h-64 min-h-64': issueList.totalCount === 0,
+        'min-h-screen max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
+      }"
+    >
+      <empty-state
+        v-if="issueList.totalCount === 0"
+        class="border border-dashed rounded-lg border-2 border-ink-200 py-15"
+        title="No issues in this category"
+        :subtitle="`There are no issues, developer asked &quot;Is this a dream?&quot;`"
+      >
+      </empty-state>
+      <issue-list-item
+        v-for="issue in resolveIssueNodes(issueList)"
+        v-bind="issue"
+        :key="issue.id"
+        :disableAutofixButton="!canCreateAutofix"
+        :issueLink="$generateRoute(['issue', issue.shortcode || '', 'occurrences'])"
+        @autofix="openAutofixModal"
+      ></issue-list-item>
+      <z-pagination
+        :key="$route.fullPath"
+        class="flex justify-center"
+        v-if="pageCount > 1"
+        :totalPages="pageCount"
+        :totalVisible="totalVisible"
+        v-model="queryParams.page"
+      ></z-pagination>
+    </div>
+    <!-- Autofix Modal -->
+    <autofix-file-chooser
+      v-bind="autofixIssue"
+      :isOpen="isAutofixOpen"
+      @close="isAutofixOpen = false"
+    />
+    <activate-analysis-modal v-if="isActivationModalOpen" @close="isActivationModalOpen = false" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTag, ZPagination } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZTag, ZPagination } from '@deepsourcelabs/zeal'
 import {
   IssueAnalyzerSelector,
   IssueCategorySelector,
@@ -79,7 +110,7 @@ import IssueListItem from '@/components/IssueListItem.vue'
 import { AutofixFileChooser } from '@/components/RepoIssues'
 
 // types
-import { Maybe } from '~/types/types'
+import { RepositoryIssueConnection, Maybe, RepositoryIssue } from '~/types/types'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
@@ -87,6 +118,7 @@ import IssueListMixin from '~/mixins/issueListMixin'
 
 import { RepoPerms } from '~/types/permTypes'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
+import { resolveNodes } from '~/utils/array'
 
 const PAGE_SIZE = 25
 const VISIBLE_PAGES = 5
@@ -105,6 +137,7 @@ export interface IssueListFilters {
   components: {
     ZTag,
     ZIcon,
+    ZButton,
     ZPagination,
     IssueAnalyzerSelector,
     IssueListItem,
@@ -123,6 +156,7 @@ export default class Issues extends mixins(
   RouteQueryMixin
 ) {
   public isAutofixOpen = false
+  public isActivationModalOpen = false
   public currentPage: Maybe<number> = null
   public urlFilterState: Record<string, string | (string | null)[]> = {}
   public autofixIssue: Record<string, string | Array<string>> = {}
@@ -179,6 +213,7 @@ export default class Issues extends mixins(
     await this.fetchRepoDetails(this.baseRouteParams)
     await this.fetchRepoPerms(this.baseRouteParams)
     await this.fetchIssuesForOwner()
+    this.fetchIsCommitPossible(this.baseRouteParams)
   }
 
   async fetchIssuesForOwner(refetch = false): Promise<void> {
@@ -240,6 +275,10 @@ export default class Issues extends mixins(
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
   }
 
+  resolveIssueNodes(conn: RepositoryIssueConnection) {
+    return resolveNodes(conn) as RepositoryIssue[]
+  }
+
   head(): Record<string, string> {
     const { repo, owner } = this.$route.params
     return {
@@ -250,3 +289,8 @@ export default class Issues extends mixins(
   }
 }
 </script>
+<style scoped>
+.category-sidebar {
+  height: calc(100vh - 144px);
+}
+</style>
