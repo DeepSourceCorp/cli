@@ -71,7 +71,7 @@ export default class AnalyzerDetails extends mixins(
   }
 
   async refetchCheck(checkId: string): Promise<void> {
-    if (this.currentCheck.id === checkId) {
+    if (this.currentCheck?.id === checkId) {
       await this.fetchCheck({ checkId: this.currentCheck.id, refetch: true })
       await this.fetchIssues(true)
     }
