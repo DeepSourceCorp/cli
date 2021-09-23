@@ -46,7 +46,7 @@
       <z-pagination
         class="flex justify-center w-full xl:w-4/6"
         :totalPages="pageCount"
-        :totalVisible="totalVisible"
+        :totalVisible="5"
         :page="currentPage"
         @selected="updatePage"
       ></z-pagination>

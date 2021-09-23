@@ -57,7 +57,7 @@
           class="flex justify-center"
           v-if="pageCount > 1"
           :totalPages="pageCount"
-          :totalVisible="totalVisible"
+          :totalVisible="5"
           :page="startPage"
           @selected="updatePage"
         ></z-pagination>

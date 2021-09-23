@@ -82,7 +82,7 @@
         class="flex justify-center"
         v-if="pageCount > 1"
         :totalPages="pageCount"
-        :totalVisible="totalVisible"
+        :totalVisible="5"
         v-model="queryParams.page"
       ></z-pagination>
     </div>
