@@ -5,7 +5,7 @@
     <div class="flex flex-col w-full px-4 py-6 space-y-2">
       <link-to-prev :link="routeToPrevious" title="All analyses"></link-to-prev>
       <!-- Details Header -->
-      <div class="w-3/4 sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly">
+      <div class="w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly">
         <gist-card-title
           :icon="statusIcon"
           :iconColor="statusIconColor"

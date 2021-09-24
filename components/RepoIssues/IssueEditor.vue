@@ -7,57 +7,63 @@
     }"
   >
     <!-- heading -->
-    <div class="grid gap-4 grid-cols-fr-8 p-3 bg-ink-300">
-      <div class="flex flex-col space-y-1 rounded-md">
-        <span class="font-medium text-vanilla-100 text-base">{{ text }}</span>
-        <div class="grid grid-cols-2 xl:flex xl:space-x-4 items-center">
-          <a
-            class="text-vanilla-400 text-xs flex space-x-1 items-center"
-            target="_blank"
-            :href="blobUrl"
-          >
-            <z-icon icon="file-text" size="x-small" color="vanilla-400"></z-icon>
-            <span>{{ path }}</span>
-          </a>
-          <div class="text-vanilla-400 text-xs flex space-x-1 items-center flex-1">
-            <z-icon icon="eye" size="x-small"></z-icon>
-            <span>Seen {{ lastSeen }}</span>
-          </div>
+    <div class="p-3 bg-ink-300 space-y-1">
+      <div class="flex justify-between">
+        <span class="font-medium text-vanilla-100 text-base flex-grow">{{ text }}</span>
+        <div class="flex justify-end w-12">
+          <z-menu v-if="canIgnoreIssues">
+            <template v-slot:trigger="{ isOpen, toggle }">
+              <z-button
+                v-tooltip="'Ignore this occurance'"
+                type="button"
+                buttonType="ghost"
+                icon="slash"
+                iconColor="vanilla-400"
+                size="small"
+                class="focus:outline-none hover:bg-ink-200 -mt-1 -mr-1"
+                :class="isOpen ? 'bg-ink-200' : ''"
+                @click="toggle"
+              />
+            </template>
+            <template slot="body">
+              <z-menu-section>
+                <z-menu-item @click="() => openIgnoreIssueModal('intentional')"
+                  >This is intentional</z-menu-item
+                >
+                <z-menu-item @click="() => openIgnoreIssueModal('falsePositive')"
+                  ><span class="text-cherry">This is a false-positive</span></z-menu-item
+                >
+              </z-menu-section>
+              <z-menu-section title="Other actions" :divider="false" class="text-left">
+                <z-menu-item @click="() => openIgnoreIssueModal('occurence')"
+                  ><span class="leading-6 overflow-ellipsis overflow-hidden"
+                    >Ignore all occurrences in {{ path }}</span
+                  ></z-menu-item
+                >
+              </z-menu-section>
+            </template>
+          </z-menu>
         </div>
       </div>
-      <div class="flex justify-end">
-        <z-menu v-if="canIgnoreIssues">
-          <template v-slot:trigger="{ isOpen, toggle }">
-            <z-button
-              v-tooltip="'Ignore this occurance'"
-              type="button"
-              buttonType="ghost"
-              icon="slash"
-              iconColor="vanilla-400"
-              size="small"
-              class="focus:outline-none hover:bg-ink-200 -mt-1 -mr-1"
-              :class="isOpen ? 'bg-ink-200' : ''"
-              @click="toggle"
-            />
-          </template>
-          <template slot="body">
-            <z-menu-section>
-              <z-menu-item @click="() => openIgnoreIssueModal('intentional')"
-                >This is intentional</z-menu-item
-              >
-              <z-menu-item @click="() => openIgnoreIssueModal('falsePositive')"
-                ><span class="text-cherry">This is a false-positive</span></z-menu-item
-              >
-            </z-menu-section>
-            <z-menu-section title="Other actions" :divider="false" class="text-left">
-              <z-menu-item @click="() => openIgnoreIssueModal('occurence')"
-                ><span class="leading-6 overflow-ellipsis overflow-hidden"
-                  >Ignore all occurrences in {{ path }}</span
-                ></z-menu-item
-              >
-            </z-menu-section>
-          </template>
-        </z-menu>
+      <div class="items-center block space-y-1 sm:space-y-0 md:flex md:items-center md:space-x-4">
+        <a
+          class="text-vanilla-400 text-xs flex space-x-1 items-center truncate"
+          target="_blank"
+          rel="noreferrer noopener"
+          :href="blobUrl"
+        >
+          <z-icon
+            icon="file-text"
+            size="x-small"
+            class="flex-shrink-0"
+            color="vanilla-400"
+          ></z-icon>
+          <span>{{ path }}</span>
+        </a>
+        <span class="text-vanilla-400 text-xs flex space-x-1 items-center flex-1">
+          <z-icon class="flex-shrink-0" icon="eye" size="x-small"></z-icon>
+          <span>Seen {{ lastSeen }}</span>
+        </span>
       </div>
     </div>
     <ignore-issue-intentional
@@ -90,7 +96,7 @@
     ></ignore-issue-occurrence>
     <!-- Code -->
     <div class="flex flex-col space-y-1">
-      <div class="text-xs xl:text-sm word-break">
+      <div class="text-xs xl:text-sm">
         <z-code :content="sourceCodeMarkup"></z-code>
       </div>
     </div>

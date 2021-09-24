@@ -11,18 +11,30 @@
           >
             No results
           </div>
-          <div v-for="(child, index) in this.checkIssues.edges" :key="index">
-            <issue-editor
-              v-bind="child.node"
-              :blobUrlRoot="repository.blobUrlRoot"
-              :checkIssueIds="issuesIgnored"
-              :canIgnoreIssues="canIgnoreIssues"
-              @ignoreIssues="ignoreIssues"
-            ></issue-editor>
-          </div>
+          <template v-if="$fetchState.pending">
+            <div
+              v-for="ii in 3"
+              :key="ii"
+              class="h-36 w-full bg-ink-300 rounded-md animate-pulse"
+            ></div>
+          </template>
+          <template v-else>
+            <div v-for="(child, index) in issuesInCheck" :key="index">
+              <issue-editor
+                v-bind="child"
+                :blobUrlRoot="repository.blobUrlRoot"
+                :checkIssueIds="issuesIgnored"
+                :canIgnoreIssues="canIgnoreIssues"
+                @ignoreIssues="ignoreIssues"
+              ></issue-editor>
+            </div>
+          </template>
         </div>
         <!-- Description -->
-        <issue-description :description="issue.descriptionRendered"></issue-description>
+        <div v-if="$fetchState.pending" class="hidden xl:block px-4 w-2/6">
+          <div class="h-44 bg-ink-300 rounded-md animate-pulse"></div>
+        </div>
+        <issue-description v-else :description="issue.descriptionRendered"></issue-description>
       </div>
     </div>
     <z-pagination
@@ -36,20 +48,19 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, Watch, Inject, mixins, namespace } from 'nuxt-property-decorator'
+import { Component, Watch, Inject, mixins } from 'nuxt-property-decorator'
 import { ZPagination } from '@deepsourcelabs/zeal'
 import { IssueDescription, IssueOccurenceSection } from '@/components/RepoIssues/index'
 
 import IssueDetailMixin from '@/mixins/issueDetailMixin'
 import RepoDetailMixin from '@/mixins/repoDetailMixin'
 
-import { Maybe, Repository } from '@/types/types'
+import { CheckIssue, Maybe } from '@/types/types'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import { resolveNodes } from '~/utils/array'
 
 const PAGE_SIZE = 5
 const VISIBLE_PAGES = 3
-
-const repoStore = namespace('repository/detail')
 
 @Component({
   components: {
@@ -64,24 +75,21 @@ export default class IssuesDetails extends mixins(
   RepoDetailMixin,
   RoleAccessMixin
 ) {
-  @repoStore.State
-  repository!: Repository
-
-  @Prop({ default: '' })
-  link!: string
-
   private urlFilters: Record<string, string | (string | null)[]> = {}
+  pageSize = PAGE_SIZE
+  currentPage: Maybe<number> = 1
+  issuesIgnored: Array<string> = []
 
-  public loadingIssue = false
+  async fetch(): Promise<void> {
+    await this.fetchIssueData()
+    await this.fetchRepoPerms(this.baseRouteParams)
 
-  public pageSize = PAGE_SIZE
-
-  public currentPage: Maybe<number> = 1
-
-  public issuesIgnored: Array<string> = []
-
-  @Inject('fetchIssueData')
-  readonly fetchIssueData: () => Promise<void>
+    this.updateFilters({
+      sort: this.$route.query['sort-by'],
+      q: this.$route.query.q
+    })
+    this.currentPage = this.$route.query.page ? Number(this.$route.query.page) : 1
+  }
 
   mounted() {
     this.loadIgnoredIssues()
@@ -92,48 +100,14 @@ export default class IssuesDetails extends mixins(
     this.$root.$off('update-ignored-issues-occurences', this.loadIgnoredIssues)
   }
 
-  loadIgnoredIssues(): void {
-    this.issuesIgnored =
-      (this.$localStore.get('repo-issue-occurences', this.localKey) as string[]) ?? []
-  }
-
-  get canIgnoreIssues() {
-    return this.repoPerms.canIgnoreIssues
-  }
-
-  get localKey(): string {
-    const { owner, repo, issueId } = this.$route.params
-    return `${owner}-${repo}-${issueId}-ignored-issues`
-  }
-
-  ignoreIssues(issueIds: string[]): void {
-    this.issuesIgnored = [...new Set(this.issuesIgnored.concat(issueIds))]
-    this.$localStore.set('repo-issue-occurences', this.localKey, this.issuesIgnored)
-  }
-
-  async fetch(): Promise<void> {
-    this.loadingIssue = true
-
-    await this.fetchIssueData()
-    await this.fetchRepoPerms(this.baseRouteParams)
-
-    this.updateFilters({
-      sort: this.$route.query['sort-by'],
-      q: this.$route.query.q
+  public async fetchChildren(): Promise<void> {
+    await this.fetchIssueChildren({
+      nodeId: this.issue.id,
+      sort: this.urlFilters.sort,
+      q: this.urlFilters.q,
+      currentPageNumber: this.currentPage ? this.currentPage : 1,
+      limit: this.pageSize
     })
-    this.currentPage = this.$route.query.page ? Number(this.$route.query.page) : 1
-    this.loadingIssue = false
-  }
-
-  get pageCount(): number {
-    if (this.checkIssues && this.checkIssues.totalCount) {
-      return Math.ceil(this.checkIssues.totalCount / this.pageSize)
-    }
-    return 0
-  }
-
-  get totalVisible(): number {
-    return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
   }
 
   @Watch('urlFilters', { deep: true })
@@ -160,21 +134,48 @@ export default class IssuesDetails extends mixins(
     await this.fetchChildren()
   }
 
-  public async fetchChildren(): Promise<void> {
-    await this.fetchIssueChildren({
-      nodeId: this.issue.id,
-      sort: this.urlFilters.sort,
-      q: this.urlFilters.q,
-      currentPageNumber: this.currentPage ? this.currentPage : 1,
-      limit: this.pageSize
-    })
-  }
-
   public updateFilters(payload: Record<string, string | (string | null)[]>): void {
     this.urlFilters = {
       ...this.urlFilters,
       ...payload
     }
+  }
+
+  @Inject('fetchIssueData')
+  readonly fetchIssueData: () => Promise<void>
+
+  loadIgnoredIssues(): void {
+    this.issuesIgnored =
+      (this.$localStore.get('repo-issue-occurences', this.localKey) as string[]) ?? []
+  }
+
+  ignoreIssues(issueIds: string[]): void {
+    this.issuesIgnored = [...new Set(this.issuesIgnored.concat(issueIds))]
+    this.$localStore.set('repo-issue-occurences', this.localKey, this.issuesIgnored)
+  }
+
+  get pageCount(): number {
+    if (this.checkIssues && this.checkIssues.totalCount) {
+      return Math.ceil(this.checkIssues.totalCount / this.pageSize)
+    }
+    return 0
+  }
+
+  get issuesInCheck(): CheckIssue[] {
+    return resolveNodes(this.checkIssues) as CheckIssue[]
+  }
+
+  get canIgnoreIssues(): boolean {
+    return this.repoPerms.canIgnoreIssues
+  }
+
+  get localKey(): string {
+    const { owner, repo, issueId } = this.$route.params
+    return `${owner}-${repo}-${issueId}-ignored-issues`
+  }
+
+  get totalVisible(): number {
+    return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
   }
 }
 </script>

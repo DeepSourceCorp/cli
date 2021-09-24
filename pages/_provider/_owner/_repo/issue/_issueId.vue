@@ -17,31 +17,16 @@
       ></issue-actions>
     </div>
     <div class="flex flex-col space-y-1 px-4 py-3">
-      <div v-if="loading">
-        <div class="flex w-full rounded-sm flex-1 p-4 space-x-2">
-          <!-- Left Section -->
-          <div class="w-3/5 md:w-4/5 flex flex-col space-y-2 justify-evenly">
-            <div class="h-10 bg-ink-300 rounded-md animate-pulse"></div>
-            <div class="h-6 bg-ink-300 rounded-md animate-pulse"></div>
-          </div>
-          <!-- Right Section -->
-          <div class="relative w-2/5 md:w-1/5">
-            <div class="h-full bg-ink-300 rounded-md animate-pulse"></div>
-          </div>
-        </div>
-        <div class="flex p-4 space-x-2">
-          <div class="h-8 w-1/2 bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-8 w-1/2 bg-ink-300 rounded-md animate-pulse"></div>
-        </div>
-        <div class="p-4 space-y-2">
-          <div class="h-28 w-full bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-28 w-full bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-28 w-full bg-ink-300 rounded-md animate-pulse"></div>
+      <div class="space-y-2" v-if="$fetchState.pending">
+        <!-- Left Section -->
+        <div class="w-3/5 md:w-4/5 h-10 bg-ink-300 rounded-md animate-pulse"></div>
+        <div class="w-1/3 flex space-x-2">
+          <div class="h-6 w-1/4 bg-ink-300 rounded-md animate-pulse"></div>
+          <div class="h-6 w-1/4 bg-ink-300 rounded-md animate-pulse"></div>
+          <div class="h-6 w-1/2 bg-ink-300 rounded-md animate-pulse"></div>
         </div>
       </div>
-      <div v-if="!loadingIssue">
-        <issue-details-header :showMeta="true" v-bind="issue"> </issue-details-header>
-      </div>
+      <issue-details-header v-else :showMeta="true" v-bind="issue"> </issue-details-header>
     </div>
     <div id="tabs" class="flex xl:col-span-2 border-b border-ink-300 mt-3">
       <div class="flex self-end px-4 space-x-4 overflow-auto flex-nowrap">
@@ -126,15 +111,12 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
   ]
 })
 export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin, RoleAccessMixin) {
-  public occurrenceCount = 0
-  public loadingIssue = false
-
   async fetch(): Promise<void> {
     await this.fetchIssueData()
   }
 
   refetchIssueData(): void {
-    const {  issueId } = this.$route.params
+    const { issueId } = this.$route.params
     this.fetchIssueDetails({
       repositoryId: this.repository.id,
       shortcode: issueId,
@@ -146,7 +128,7 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
     this.$socket.$on('repo-analysis-updated', this.refetchIssueData)
     this.$socket.$on('autofixrun-fixes-ready', this.refetchIssueData)
   }
-  
+
   beforeDestroy(): void {
     this.$socket.$off('repo-analysis-updated', this.refetchIssueData)
     this.$socket.$off('autofixrun-fixes-ready', this.refetchIssueData)

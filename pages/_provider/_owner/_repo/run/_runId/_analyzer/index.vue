@@ -89,7 +89,6 @@ export default class AnalyzerDetails extends mixins(
     this.$socket.$on('autofixrun-fixes-ready', this.refetchCheck)
   }
 
-
   async fetchCurrentRun(): Promise<void> {
     const { runId, repo, owner, provider } = this.$route.params
     return this.fetchRun({

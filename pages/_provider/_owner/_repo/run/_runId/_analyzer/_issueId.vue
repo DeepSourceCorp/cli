@@ -10,20 +10,30 @@
     <div v-else class="h-24 w-full bg-ink-200 animate-pulse"></div>
     <div class="px-4 pt-4 relative">
       <!-- Back to Issue list Page -->
-      <link-to-prev :link="routeToPrevious" title="All issues"></link-to-prev>
-      <issue-actions
-        class="absolute top-4 right-4"
-        :issue="singleIssue"
-        :checkId="currentCheck ? currentCheck.id : ''"
-        :shortcode="$route.params.issueId"
-        @ignoreIssues="ignoreIssues"
-        :repository="repository"
-      ></issue-actions>
+      <div class="flex items-center justify-between">
+        <link-to-prev :link="routeToPrevious" title="All issues"></link-to-prev>
+        <issue-actions
+          class="absolute top-4 right-4"
+          :issue="singleIssue"
+          :checkId="currentCheck ? currentCheck.id : ''"
+          :shortcode="$route.params.issueId"
+          @ignoreIssues="ignoreIssues"
+          :repository="repository"
+        ></issue-actions>
+      </div>
 
       <!-- Issue details -->
-      <div class="flex flex-col p-4 space-y-3 xl:flex-row xl:p-0 xl:space-y-0 mt-2">
+      <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0 mt-2">
+        <div class="space-y-2 w-full" v-if="$fetchState.pending">
+          <!-- Left Section -->
+          <div class="w-3/5 md:w-4/5 h-10 bg-ink-300 rounded-md animate-pulse"></div>
+          <div class="w-1/3 flex space-x-2">
+            <div class="h-6 w-1/3 bg-ink-300 rounded-md animate-pulse"></div>
+            <div class="h-6 w-1/3 bg-ink-300 rounded-md animate-pulse"></div>
+          </div>
+        </div>
         <issue-details-header
-          v-if="!loading"
+          v-else
           :analyzerName="currentAnalyzer.name"
           :analyzerShortcode="currentAnalyzer.shortcode"
           :issueType="singleIssue.issueType"
@@ -52,7 +62,20 @@
       </z-tab-list>
       <z-tab-panes class="p-4">
         <z-tab-pane>
+          <div class="flex" v-if="$fetchState.pending">
+            <div class="w-full lg:w-4/6 space-y-4">
+              <div
+                v-for="ii in 3"
+                :key="ii"
+                class="h-36 w-full bg-ink-300 rounded-md animate-pulse"
+              ></div>
+            </div>
+            <div class="hidden lg:block px-4 w-2/6 h-full">
+              <div class="h-44 bg-ink-300 rounded-md animate-pulse"></div>
+            </div>
+          </div>
           <issue-list
+            v-else
             v-bind="checkIssues"
             :description="singleIssue.descriptionRendered"
             :checkId="currentCheck ? currentCheck.id : ''"
@@ -129,7 +152,7 @@ import { IssueList } from '@/components/RepoIssues'
 import ShowMore from '@/components/ShowMore.vue'
 
 // Import State & Types
-import { Check, Maybe, CheckEdge, SilenceRule } from '~/types/types'
+import { Check, Maybe, CheckEdge } from '~/types/types'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
@@ -167,7 +190,7 @@ export default class RunIssueDetails extends mixins(
   public currentPage: Maybe<number> = 1
   public sort: Maybe<string> = null
   public pageSize = PAGE_SIZE
-  public loading = false
+  public loading = true
   public fromNow = fromNow
 
   created() {
@@ -215,7 +238,6 @@ export default class RunIssueDetails extends mixins(
   }
 
   async fetch(): Promise<void> {
-    this.loading = true
     const { runId, issueId } = this.$route.params
     await Promise.all([
       this.fetchBasicRepoDetails(this.baseRouteParams),
@@ -232,7 +254,6 @@ export default class RunIssueDetails extends mixins(
         issueCode: issueId
       })
     ])
-    this.loading = false
   }
 
   get currentCheck(): Check {

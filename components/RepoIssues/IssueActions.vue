@@ -78,30 +78,29 @@
       :raisedInFiles="issue.raisedInFiles"
       @close="close"
     ></autofix-file-chooser>
-
     <!-- Create issue on VCS -->
-    <z-button
-      v-if="issue.newVcsIssueUrl && $route.params.provider !== 'bb'"
-      :to="issue.newVcsIssueUrl"
-      target="_blank"
-      rel="noopener noreferrer"
-      buttonType="secondary"
-      :icon="$route.params.provider === 'gl' ? 'gitlab' : 'github'"
-      size="small"
-      class="hidden sm:flex"
-    >
-      Create issue on {{ $route.params.provider === 'gl' ? 'GitLab' : 'GitHub' }}
-    </z-button>
-    <z-button
-      v-if="issue.newVcsIssueUrl"
-      :to="issue.newVcsIssueUrl"
-      target="_blank"
-      rel="noopener noreferrer"
-      buttonType="secondary"
-      icon="github"
-      size="small"
-      class="sm:hidden"
-    ></z-button>
+    <template v-if="issue.newVcsIssueUrl && $route.params.provider !== 'bb'">
+      <z-button
+        :to="issue.newVcsIssueUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        buttonType="secondary"
+        :icon="$route.params.provider === 'gl' ? 'gitlab' : 'github'"
+        size="small"
+        class="hidden sm:block"
+      >
+        Create issue on {{ $route.params.provider === 'gl' ? 'GitLab' : 'GitHub' }}
+      </z-button>
+      <z-button
+        :to="issue.newVcsIssueUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        buttonType="secondary"
+        icon="github"
+        size="small"
+        class="sm:hidden"
+      ></z-button>
+    </template>
   </div>
 </template>
 
