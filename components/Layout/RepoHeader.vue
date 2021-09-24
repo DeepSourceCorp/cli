@@ -30,7 +30,8 @@
               icon="z-star"
               size="x-small"
               class="p-1"
-              :color="internalStarredState ? 'juniper' : 'ink-200 hover:text-slate'"
+              :color="internalStarredState ? 'juniper' : 'hover:text-slate'"
+              :class="internalStarredState ? 'opacity-1' : 'opacity-40 hover:opacity-70'"
               :iconColor="'current'"
               @click.prevent="toggleStar(!internalStarredState)"
             />
