@@ -1,7 +1,13 @@
 <template>
   <div class="grid gap-4" :class="[gridClass, removeYPadding ? '' : 'py-4']">
     <div :class="{ 'col-span-full md:col-auto': cascadeInput }">
-      <label :for="inputId" class="text-sm text-vanilla-100 flex-1">
+      <label
+        :for="inputId"
+        class="text-sm text-vanilla-100"
+        :class="{
+          'mb-1 block': description || $slots.description
+        }"
+      >
         <slot name="label"> {{ label }} </slot>
       </label>
       <div class="text-xs text-vanilla-400 leading-5">
