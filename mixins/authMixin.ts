@@ -33,21 +33,21 @@ export default class AuthMixin extends Vue {
     await this.fetchAuthUrls()
   }
 
-  buildUrl(provider: string): string {
-    if (provider in this.authUrls) {
-      const oldUrl = this.authUrls[provider]
-      const url = new URL(oldUrl)
-      if (this.nextParam) {
-        const redirectURI = url.searchParams.get('redirect_uri')
-        url.searchParams.set('redirect_uri', `${redirectURI}${this.nextParam}`)
-      }
-      return url.toString()
+  mounted(): void  {
+    const { next } = this.$route.query
+    if (next) {
+      const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
+      this.$nuxt.$cookies.set('bifrost-post-auth-redirect', next, {
+        expires: new Date(expiry)
+      })
     }
-    return ''
   }
 
-  get nextParam(): string {
-    return 'next' in this.$route.query ? `?next=${this.$route.query.next}` : ''
+  buildUrl(provider: string): string {
+    if (provider in this.authUrls) {
+      return this.authUrls[provider]
+    }
+    return ''
   }
 
   get loginOptions(): LoginOption[] {

@@ -47,7 +47,15 @@ interface VCSResponse {
   login?: Maybe<Scalars['String']>
 }
 
-@Component({ middleware: 'auth' })
+@Component({
+  middleware: 'auth',
+  meta: {
+    auth: {
+      strict: true,
+      redirectToLogin: true
+    }
+  }
+})
 export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
   private pollingInterval: ReturnType<typeof setInterval>
 

@@ -269,9 +269,8 @@ type SupportValidationData = {
   },
   meta: {
     auth: {
-      strict: true
-      //TODO: fix flag functionality before enabling
-      // redirectToLogin: true
+      strict: true,
+      redirectToLogin: true
     }
   },
   layout: 'sidebar-only'

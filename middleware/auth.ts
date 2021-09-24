@@ -55,8 +55,10 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
     } catch (e) {
       if (strict) {
         if (redirectToLogin) {
-          if (route.path !== '/') {
-            redirect(302, `/login?next=${route.path}`)
+          if (route.fullPath !== '/') {
+            redirect(302, `/login`, {
+              next: route.fullPath
+            })
           } else {
             redirect(302, '/login')
           }

@@ -58,6 +58,13 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     const toOnboard = this.toOnboard
     const homePage = this.userHomeUrl
     const installationUrl = this.contextInstallationUrl(provider)
+    const nextUrl = this.$nuxt.$cookies.get('bifrost-post-auth-redirect')
+
+    if (nextUrl) {
+      this.$nuxt.$cookies.remove('bifrost-post-auth-redirect')
+      this.$router.push(nextUrl)
+      return
+    }
 
     if (!toOnboard) {
       this.$router.push(homePage)
