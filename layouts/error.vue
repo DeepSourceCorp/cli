@@ -33,12 +33,8 @@
         servers were located.
       </p>
       <div class="flex items-center justify-center space-x-3">
-        <NuxtLink class="text-center text-juniper text-sm hover:underline" to="/"
-          >Home page</NuxtLink
-        >
-        <NuxtLink class="text-center text-juniper text-sm hover:underline" :to="loginUrl"
-          >Login</NuxtLink
-        >
+        <a href="/" class="text-center text-juniper text-sm hover:underline"> Home page </a>
+        <a class="text-center text-juniper text-sm hover:underline" :href="loginUrl">Login</a>
       </div>
     </div>
   </div>

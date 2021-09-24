@@ -87,7 +87,7 @@
         buttonType="secondary"
         :icon="$route.params.provider === 'gl' ? 'gitlab' : 'github'"
         size="small"
-        class="hidden sm:block"
+        class="hidden sm:flex"
       >
         Create issue on {{ $route.params.provider === 'gl' ? 'GitLab' : 'GitHub' }}
       </z-button>
