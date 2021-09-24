@@ -37,8 +37,15 @@
               {{ widget.title }}
             </h5>
           </template>
-          <span :class="isTrendPositive(widget) ? '' : 'text-cherry'">
-            {{ widget.value_display }}
+          <span
+            :class="isTrendPositive(widget) ? '' : 'text-cherry'"
+            v-tooltip="
+              widget.value_display > 1000
+                ? `${formatIntl(widget.value_display)} ${widget.title}`
+                : ''
+            "
+          >
+            {{ shortenNumber(widget.value_display) }}
           </span>
         </stat-card>
       </template>
@@ -50,6 +57,7 @@ import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import { StatCard, StatSection } from '@/components/Metrics'
 import { ZButton, ZIcon, ZTicker } from '@deepsourcelabs/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { formatIntl, shortenLargeNumber } from '~/utils/string'
 
 export interface Widget {
   title: string
@@ -75,6 +83,9 @@ export interface Widget {
   layout: 'repository'
 })
 export default class IssueOverviewCards extends mixins(RepoDetailMixin) {
+  public shortenNumber = shortenLargeNumber
+  public formatIntl = formatIntl
+
   isTrendPositive(widget: Widget): boolean | null {
     if (!widget.trend_value) {
       return true
