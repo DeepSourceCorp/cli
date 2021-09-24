@@ -3,7 +3,6 @@ package login
 import (
 	"context"
 	"fmt"
-	"log"
 	"time"
 
 	"github.com/cli/browser"
@@ -21,7 +20,6 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 	if err != nil {
 		return err
 	}
-	log.Println("Registered")
 
 	// Print the user code and the permission to open browser at verificationURI
 	c := color.New(color.FgCyan, color.Bold)

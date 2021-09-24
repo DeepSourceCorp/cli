@@ -38,7 +38,7 @@ func (c Client) GetToken() string {
 func New() (*Client, error) {
 	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", config.DefaultHostName)
 	if isEnterprise() {
-		apiClientURL = fmt.Sprintf("https://%s/graphql/", config.EnterpriseAPIEndpoint)
+		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", config.EnterpriseAPIEndpoint)
 	}
 	gql := graphql.NewClient(apiClientURL)
 	return &Client{

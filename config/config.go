@@ -16,7 +16,7 @@ const (
 	ConfigDirName         = "/.deepsource/"
 	ConfigFileName        = "/config.toml"
 	DefaultHostName       = "deepsource.io"
-	EnterpriseAPIEndpoint = "enterprise.deepsource.icu/asgard-api"
+	EnterpriseAPIEndpoint = "enterprise.deepsource.icu"
 )
 
 type CLIConfig struct {
