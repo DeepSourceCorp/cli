@@ -213,7 +213,7 @@
     <template else>
       <div class="flex flex-col space-y-3 text-center justify-center items-center h-80 px-4">
         <template v-if="autofixRun.status === AUTOFIX_STATUS.PENDING">
-          <z-icon class="animate-spin" icon="refresh-cw" color="vanilla-400" size="large"></z-icon>
+          <z-icon class="animate-spin" icon="spin-loader" color="juniper" size="large"></z-icon>
           <h3>Generating fixes&hellip;</h3>
           <p class="text-sm">
             Please give us a moment while we generate a patch with fixes for this issue.
