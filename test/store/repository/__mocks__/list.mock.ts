@@ -1,5 +1,6 @@
-import { RepositoryConnection } from '~/types/types'
+import { Repository, RepositoryConnection } from '~/types/types'
 import { RepositoryListModuleState } from '~/store/repository/list'
+import { resolveNodes } from '~/utils/array'
 
 /**
  * Mock for repository list.
@@ -253,5 +254,7 @@ export const mockRepositoryListState = (): RepositoryListModuleState => ({
   error: {},
   repositoryList: mockRepositoryList(),
   newRepos: mockRepositoryList(),
-  repoWithActiveAnalysis: mockRepositoryList()
+  repoWithActiveAnalysis: resolveNodes(mockRepositoryList()) as Repository[],
+  repoWithActiveAnalysisWithAnalyzers: [] as Repository[],
+  repoWithPendingAdhocRuns: [] as Repository[]
 })

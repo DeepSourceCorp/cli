@@ -213,15 +213,6 @@ export default class AutofixListItem extends mixins(RoleAccessMixin) {
     return files
   }
 
-  public handleClick(): void {
-    this.populateSelectedIds()
-    this.$emit('autofix', {
-      autofix: this.autofixRun,
-      filesAffected: this.selectedFiles,
-      selectedHunkIds: this.selectedHunkIds
-    })
-  }
-
   get showCreatePullRequest(): boolean {
     return (
       this.loggedIn && this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)

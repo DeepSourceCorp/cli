@@ -1,13 +1,20 @@
-query(
+query AutofixRuns(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!
   $limit: Int
   $after: String
+  $statusIn: [String]
+  $prStatusIn: [String]
 ) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id
-    autofixRuns(first: $limit, after: $after) {
+    autofixRuns(
+      first: $limit
+      after: $after
+      pullRequestStatus_In: $prStatusIn
+      status_In: $statusIn
+    ) {
       totalCount
       edges {
         node {

@@ -6,16 +6,16 @@
       v-if="
         (repository.autofixableIssuesPerAnalyzer &&
           repository.autofixableIssuesPerAnalyzer.length) ||
-        (fetchingData && loaderCount > 0)
+        ($fetchState.pending && loaderCount > 0)
       "
       title="Available Autofixes"
       helpText="Summary of issues that can be Autofixed"
       :showBorder="false"
       spacingClass="gap-3"
       customGridClass="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
-      :bodyIsGrid="fetchingData || showAvailableAutofixes"
+      :bodyIsGrid="$fetchState.pending || showAvailableAutofixes"
     >
-      <template v-if="fetchingData">
+      <template v-if="$fetchState.pending">
         <div
           v-for="idx in loaderCount"
           :key="idx"
@@ -44,9 +44,11 @@
     <!-- Autofix Stats -->
     <autofix-issues-graph />
     <!-- Recent Autofixes -->
-    <div v-if="loading">
-      <div class="w-full h-full flex space-x-2">
-        <div class="h-full w-full flex flex-col space-y-3">
+    <div v-if="$fetchState.pending">
+      <div class="grid grid-cols-12-fr gap-2">
+        <div class="bg-ink-300 rounded-md animate-pulse col-span-full h-12"></div>
+        <div class="bg-ink-300 rounded-md animate-pulse"></div>
+        <div class="h-full w-full flex flex-col space-y-2">
           <div class="h-20 bg-ink-300 rounded-md animate-pulse"></div>
           <div class="h-20 bg-ink-300 rounded-md animate-pulse"></div>
           <div class="h-20 bg-ink-300 rounded-md animate-pulse"></div>
@@ -54,68 +56,54 @@
         </div>
       </div>
     </div>
-    <div v-if="!loading && autofixRunList.edges.length > 0" class="w-full flex flex-col space-y-4">
-      <stat-section
-        v-if="autofixListItems.length > 0"
-        title="Recent Autofixes"
-        customGridClass="grid grid-cols-12-fr"
-        :gridSpacing="2"
-      >
-        <div class="md:space-y-2 col-span-2 md:col-span-1 grid grid-cols-3 gap-1 md:block">
+    <stat-section title="Recent Autofixes" customGridClass="grid grid-cols-12-fr" :gridSpacing="2">
+      <div class="md:space-y-2 col-span-2 md:col-span-1 grid grid-cols-3 gap-1 md:block">
+        <div
+          v-for="opt in options"
+          :key="opt.name"
+          class="p-2 space-y-2 rounded-md hover:bg-ink-300 cursor-pointer text-center md:text-left"
+          :class="{
+            'bg-ink-300': selectedRun.name == opt.name
+          }"
+          @click="selectedRun = opt"
+        >
+          <h4 class="text-sm">{{ opt.name }}</h4>
+        </div>
+      </div>
+      <div class="lg:col-span-1 col-span-2 space-y-2">
+        <template v-if="selectedRun.name == 'Action needed'">
           <div
-            v-for="opt in options"
-            :key="opt.name"
-            class="p-2 space-y-2 rounded-md hover:bg-ink-300 cursor-pointer text-center md:text-left"
-            :class="{
-              'bg-ink-300': selectedRun.name == opt.name
-            }"
-            @click="selectedRun = opt"
+            v-if="pendingAutofixList && pendingAutofixList.length > 0"
+            class="w-full flex flex-col space-y-3"
           >
-            <h4 class="text-sm font-semi">{{ opt.name }}</h4>
+            <autofix-list-item
+              v-for="run in pendingAutofixList"
+              :key="run.runId"
+              :autofixRun="run"
+              v-bind="run"
+              :showInfo="false"
+            ></autofix-list-item>
           </div>
-        </div>
-        <div class="lg:col-span-1 col-span-2 space-y-2">
-          <template v-if="selectedRun.name == 'Action needed'">
-            <div
-              v-if="pendingListItems && pendingListItems.length > 0"
-              class="w-full flex flex-col space-y-3"
-            >
-              <autofix-list-item
-                v-for="run in pendingListItems"
-                :key="run.runId"
-                :autofixRun="run"
-                @autofix="createPullRequest"
-                v-bind="run"
-                :showInfo="false"
-              ></autofix-list-item>
-            </div>
-            <div v-else class="w-full h-40 flex items-center justify-center">
-              No pending commits
-            </div>
-          </template>
-          <template v-else-if="selectedRun.name == 'History'">
-            <div
-              v-if="autofixListItems && autofixListItems.length > 0"
-              class="w-full flex flex-col space-y-3"
-            >
-              <autofix-list-item
-                v-for="run in autofixListItems"
-                :key="run.runId"
-                :autofixRun="run"
-                @autofix="createPullRequest"
-                v-bind="run"
-              ></autofix-list-item>
-            </div>
-            <div v-else class="w-full h-40 flex items-center justify-center">
-              No autofix runs available
-            </div>
-          </template>
-        </div>
-        <template slot="footer">
-          <div class="border-t border-ink-300 flex justify-center py-1"></div>
+          <div v-else class="w-full h-40 flex items-center justify-center">No pending commits</div>
         </template>
-      </stat-section>
-    </div>
+        <template v-else-if="selectedRun.name == 'History'">
+          <div
+            v-if="autofixListItems && autofixListItems.length > 0"
+            class="w-full flex flex-col space-y-3"
+          >
+            <autofix-list-item
+              v-for="run in autofixListItems"
+              :key="run.runId"
+              :autofixRun="run"
+              v-bind="run"
+            ></autofix-list-item>
+          </div>
+          <div v-else class="w-full h-40 flex items-center justify-center">
+            No autofix runs available
+          </div>
+        </template>
+      </div>
+    </stat-section>
   </div>
 </template>
 
@@ -124,21 +112,14 @@ import { Component, namespace, mixins } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import { InfoIcon, AutofixCard, AutofixListItem } from '@/components/Autofix/index'
 import { AutofixRunListActions } from '~/store/autofixRun/list'
-import {
-  AutofixRun,
-  AutofixRunConnection,
-  AutofixRunStatus,
-  CreatePullRequestInput,
-  Maybe
-} from '~/types/types'
-import { RunDetailActions } from '~/store/run/detail'
+import { AutofixRun, AutofixRunConnection, AutofixRunStatus } from '~/types/types'
 import { AutofixIssuesGraph } from '@/components/Graphs'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import { resolveNodes } from '~/utils/array'
 
 const autofixRunListStore = namespace('autofixRun/list')
-const runStore = namespace('run/detail')
 
 interface Trend {
   labels: string[]
@@ -162,35 +143,35 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
   @autofixRunListStore.State
   loading!: boolean
 
+  @autofixRunListStore.State
+  pendingAutofixList: AutofixRun[]
+
   @autofixRunListStore.Action(AutofixRunListActions.FETCH_AUTOFIX_RUN_LIST)
   fetchAutofixRunList: (args: {
     provider: string
     owner: string
     name: string
-    refetch: boolean
+    limit?: number
+    statusIn?: AutofixRunStatus[]
+    refetch?: boolean
   }) => Promise<void>
 
-  @runStore.Action(RunDetailActions.CREATE_PR)
-  createPR: (
-    params: Record<string, Record<string, string[] | string>>
-  ) => { data: { input: CreatePullRequestInput } }
+  @autofixRunListStore.Action(AutofixRunListActions.FETCH_PENDING_AUTOFIX_RUNS)
+  fetchPendingAutofixRuns: (args: {
+    provider: string
+    owner: string
+    name: string
+    refetch?: boolean
+  }) => Promise<void>
 
-  @runStore.Action(RunDetailActions.COMMIT_TO_PR)
-  commitFixToPR: (
-    params: Record<string, Record<string, string[] | string>>
-  ) => { data: { input: CreatePullRequestInput } }
-
-  public unCommittedCommits = 0
-  public lastDays = 30
-  public autofixRun: AutofixRun | null = null
-  public selectedHunkIds: Array<string> = []
-  public filesAffected: AutofixRun | Array<string> = []
-  public fetchingData = false
-  private options = [
+  autofixRun: AutofixRun | null = null
+  selectedHunkIds: Array<string> = []
+  filesAffected: AutofixRun | Array<string> = []
+  options = [
     { name: 'Action needed', link: ['history', 'runs'] },
     { name: 'History', link: 'autofix' }
   ]
-  private selectedRun = this.options[0]
+  selectedRun = this.options[0]
 
   mounted(): void {
     this.$root.$on('refetch-autofix-run', this.refetchData)
@@ -202,26 +183,37 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
   }
 
   async refetchData(): Promise<void> {
+    await this.fetchRunLists(true)
+  }
+
+  async fetchRunLists(refetch = false): Promise<void> {
     this.fetchAutofixRunList({
       ...this.baseRouteParams,
-      refetch: true
+      limit: 10,
+      statusIn: [
+        AutofixRunStatus.Pass,
+        AutofixRunStatus.Timo,
+        AutofixRunStatus.Cncl,
+        AutofixRunStatus.Fail,
+        AutofixRunStatus.Stal
+      ],
+      refetch
+    })
+
+    this.fetchPendingAutofixRuns({
+      ...this.baseRouteParams,
+      refetch
     })
   }
 
   async fetch(): Promise<void> {
-    this.fetchingData = true
-
     await Promise.all([
       this.fetchBasicRepoDetails(this.baseRouteParams),
       this.fetchRepoAutofixStats(this.baseRouteParams),
-      this.fetchRepoPerms(this.baseRouteParams),
-      this.fetchAutofixRunList({
-        ...this.baseRouteParams,
-        refetch: false
-      })
+      this.fetchRunLists()
     ])
 
-    this.fetchingData = false
+    this.fetchRepoPerms(this.baseRouteParams)
     this.setLoaderCount(this.repository.autofixableIssuesPerAnalyzer?.length ?? 4)
   }
 
@@ -230,52 +222,8 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
     return Boolean(available && available.length > 0)
   }
 
-  get pendingListItems(): Array<Maybe<AutofixRun> | undefined> {
-    const items: Array<Maybe<AutofixRun> | undefined> = []
-    if (this.autofixRunList.edges && this.autofixRunList.edges.length > 0) {
-      this.autofixRunList.edges.forEach((run) => {
-        if (run?.node?.status === AutofixRunStatus.Pend) {
-          this.unCommittedCommits++
-          items.push(run?.node)
-        }
-      })
-    }
-    return items
-  }
-
-  get autofixListItems(): Array<Maybe<AutofixRun> | undefined> {
-    const items: Array<Maybe<AutofixRun> | undefined> = []
-    if (this.autofixRunList.edges && this.autofixRunList.edges.length > 0) {
-      this.autofixRunList.edges.forEach((run) => {
-        if (run?.node?.status !== AutofixRunStatus.Pend) {
-          items.push(run?.node)
-        }
-      })
-    }
-    return items
-  }
-
-  public async createPullRequest(autofixItem: {
-    autofix: AutofixRun
-    filesAffected: Array<string>
-    selectedHunkIds: Array<string>
-  }): Promise<void> {
-    this.autofixRun = { ...autofixItem.autofix }
-    this.filesAffected = autofixItem.filesAffected
-    this.selectedHunkIds = autofixItem.selectedHunkIds
-    try {
-      await this.createPR({
-        input: {
-          patches: this.selectedHunkIds,
-          repoId: this.repository.id,
-          autofixRunId: this.autofixRun?.runId
-        }
-      })
-      this.$toast.success('PR is created for the Autofix run successfully')
-      this.$root.$emit('refetch-autofix-run')
-    } catch (e) {
-      this.$toast.danger('Something went wrong')
-    }
+  get autofixListItems(): AutofixRun[] {
+    return resolveNodes(this.autofixRunList) as AutofixRun[]
   }
 
   setLoaderCount(count: number): void {

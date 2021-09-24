@@ -40,7 +40,6 @@ describe('[Store] AutofixRun/List', () => {
   describe('[[State]]', () => {
     test('has the right initial data', () => {
       const initState = state()
-      expect(initState.loading).toEqual(false)
       expect(initState.error).toEqual({})
       expect(initState.autofixRunList).toEqual({
         pageInfo: {},
@@ -97,42 +96,22 @@ describe('[Store] AutofixRun/List', () => {
         })
 
         test('successfully commits mutations', async () => {
-          expect(commit).toHaveBeenCalledTimes(3)
-        })
-
-        test(`successfully commits mutation ${AutofixRunListMutations.SET_LOADING}`, async () => {
-          const {
-            mock: {
-              calls: [firstCall, , thirdCall]
-            }
-          } = commit
-
-          // Assert if `AutofixRunListMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(AutofixRunListMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `AutofixRunListMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(AutofixRunListMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
+          expect(commit).toHaveBeenCalledTimes(1)
         })
 
         test(`successfully commits mutation ${AutofixRunListMutations.SET_AUTOFIX_RUN_LIST}`, async () => {
           const {
             mock: {
-              calls: [, secondCall]
+              calls: [firstCall]
             }
           } = commit
           const apiResponse = await localThis.$fetchGraphqlData()
 
           // Assert if `AutofixRunListMutations.SET_AUTOFIX_RUN_LIST` is being commited or not.
-          expect(secondCall[0]).toEqual(AutofixRunListMutations.SET_AUTOFIX_RUN_LIST)
+          expect(firstCall[0]).toEqual(AutofixRunListMutations.SET_AUTOFIX_RUN_LIST)
 
           // Assert if the response from api is same as the one passed to the mutation.
-          expect(secondCall[1]).toEqual(apiResponse.data.repository.autofixRuns)
+          expect(firstCall[1]).toEqual(apiResponse.data.repository.autofixRuns)
         })
       })
       describe(`Failure`, () => {
@@ -164,41 +143,21 @@ describe('[Store] AutofixRun/List', () => {
         })
 
         test('successfully commits mutations', async () => {
-          expect(commit).toHaveBeenCalledTimes(3)
-        })
-
-        test(`successfully commits mutation ${AutofixRunListMutations.SET_LOADING}`, async () => {
-          const {
-            mock: {
-              calls: [firstCall, , thirdCall]
-            }
-          } = commit
-
-          // Assert if `AutofixRunListMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(AutofixRunListMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `AutofixRunListMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(AutofixRunListMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
+          expect(commit).toHaveBeenCalledTimes(1)
         })
 
         test(`successfully commits mutation ${AutofixRunListMutations.SET_ERROR}`, async () => {
           const {
             mock: {
-              calls: [, secondCall]
+              calls: [firstCall]
             }
           } = commit
 
           // Assert if `AutofixRunListMutations.SET_ERROR` is being commited or not.
-          expect(secondCall[0]).toEqual(AutofixRunListMutations.SET_ERROR)
+          expect(firstCall[0]).toEqual(AutofixRunListMutations.SET_ERROR)
 
           // Assert if the payload passed to the mutation was empty.
-          expect(secondCall[1]).toEqual(Error('ERR1'))
+          expect(firstCall[1]).toEqual(Error('ERR1'))
         })
       })
     })
@@ -210,13 +169,6 @@ describe('[Store] AutofixRun/List', () => {
     +++++++++++++++++++++++++++++++++++++++++++++++++
   */
   describe('[[Mutations]]', () => {
-    describe(`Mutation "${AutofixRunListMutations.SET_LOADING}"`, () => {
-      test('successfully updates loading field in state', () => {
-        mutations[AutofixRunListMutations.SET_LOADING](autofixRunListState, true)
-        expect(autofixRunListState.loading).toEqual(true)
-      })
-    })
-
     describe(`Mutation "${AutofixRunListMutations.SET_ERROR}"`, () => {
       test('successfully updates loading field in state', () => {
         const dummyError = {

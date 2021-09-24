@@ -204,6 +204,7 @@ export const mockIssueDetailState = (): IssueDetailModuleState => ({
   loading: false,
   error: {},
   issue: mockIssueDetail(),
+  silenceRules: [],
   singleIssue: mockIssueSingleIssueDetail(),
   checkIssues: mockIssueCheckIssueDetail()
 })
