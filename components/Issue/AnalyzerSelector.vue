@@ -50,10 +50,23 @@ export default class IssueAnalyzerSelector extends mixins(RepoDetailMixin) {
   readonly modelValue: string
 
   async fetch(): Promise<void> {
-    if (!this.repository.availableAnalyzers) {
-      // Separate query later
-      await this.fetchAvailableAnalyzers(this.baseRouteParams)
-    }
+    // Separate query later
+    await this.fetchAvailableAnalyzers(this.baseRouteParams)
+  }
+
+  async refetchAnalyzers(): Promise<void> {
+    this.fetchAvailableAnalyzers({
+      ...this.baseRouteParams,
+      refetch: true
+    })
+  }
+
+  mounted(): void {
+    this.$socket.$on('repo-analysis-updated', this.refetchAnalyzers)
+  }
+
+  beforeDestroy(): void {
+    this.$socket.$off('repo-analysis-updated', this.refetchAnalyzers)
   }
 
   get languageFilters(): AnalyzerChoice[] {
