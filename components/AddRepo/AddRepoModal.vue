@@ -27,7 +27,7 @@
             </div>
             <z-tab-panes class="h-102">
               <activate-single-repo />
-              <auto-onboard-repos />
+              <auto-onboard-repos @close="close" />
             </z-tab-panes>
           </z-tabs>
         </div>

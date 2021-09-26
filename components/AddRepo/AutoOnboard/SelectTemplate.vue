@@ -66,7 +66,9 @@
             You can create new templates in the Auto Onboard settings.
           </p>
           <nuxt-link :to="settingsLink">
-            <z-button size="small" icon="settings">Open settings</z-button>
+            <z-button size="small" icon="settings" @click="optionallyCloseModal">
+              Open settings
+            </z-button>
           </nuxt-link>
         </div>
       </div>
@@ -122,6 +124,14 @@ export default class SelectTemplate extends mixins(ActiveUserMixin, AutoOnboardM
 
   get settingsLink(): string {
     return ['', this.activeProvider, this.activeOwner, 'settings', 'auto-onboard'].join('/')
+  }
+
+  get onAutoOnboardPage(): boolean {
+    return this.$route.path === this.settingsLink
+  }
+
+  optionallyCloseModal(): void {
+    if (this.onAutoOnboardPage) this.$emit('close')
   }
 }
 </script>

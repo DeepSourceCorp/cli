@@ -11,6 +11,7 @@
           v-else-if="currentStage === stages.SELECT_TEMPLATE"
           @back="currentStage = stages.TOP_MENU"
           @selectTemplate="selectTemplate"
+          @close="closeModal"
         />
         <select-repo-to-onboard
           v-else-if="currentStage === stages.SELECT_REPO"
@@ -147,6 +148,10 @@ export default class AutoOnboardRepos extends mixins(
   startOver() {
     this.selectTemplateToOnboard(undefined)
     this.currentStage = Stages.TOP_MENU
+  }
+
+  closeModal() {
+    this.$emit('close')
   }
 }
 </script>
