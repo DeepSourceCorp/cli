@@ -2,6 +2,7 @@
   <z-tab-pane class="h-full flex flex-col">
     <div class="p-4 pb-0 space-y-2">
       <z-input
+        ref="search-repo-input"
         :name="searchCandidate"
         icon="search"
         @debounceInput="searchRepo"
@@ -82,6 +83,10 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 
+interface ZInputT extends Vue {
+  focus: () => void
+}
+
 @Component({
   components: {
     ZInput,
@@ -109,11 +114,15 @@ export default class ActivateSingleRepo extends mixins(
       currentPageNumber: 1,
       query: this.searchCandidate ? this.searchCandidate : null
     })
+    const searchBox = this.$refs['search-repo-input'] as ZInputT
+    if (searchBox) searchBox.focus()
   }
 
   searchRepo(val: string): void {
     this.searchCandidate = val
     this.getData()
+    const searchBox = this.$refs['search-repo-input'] as ZInputT
+    if (searchBox) searchBox.focus()
   }
 
   async fetch(): Promise<void> {
