@@ -62,7 +62,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
+import { Component, Prop, mixins, Watch } from 'nuxt-property-decorator'
 import { ZIcon, ZButton, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
 
 import { RepositoryEdge, Maybe } from '~/types/types'
@@ -105,6 +105,11 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
       limit: 10,
       refetch: refetch
     })
+  }
+
+  @Watch('activeDashboardContext.id')
+  refetchRepos(): void {
+    this.fetchRepos(true).catch(() => {})
   }
 
   get repoList(): Array<Record<string, unknown>> {
