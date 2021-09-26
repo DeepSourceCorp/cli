@@ -60,13 +60,23 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     const installationUrl = this.contextInstallationUrl(provider)
     const nextUrl = this.$nuxt.$cookies.get('bifrost-post-auth-redirect')
 
-    if (nextUrl) {
-      this.$nuxt.$cookies.remove('bifrost-post-auth-redirect')
+    // A next URL with installation will happen only if the user is
+    // coming from GitHub marketplace installation
+    // Removing this snippet will break marketplace installation
+    if (nextUrl.startsWith('/installation')) {
       this.$router.push(nextUrl)
       return
     }
 
     if (!toOnboard) {
+      // In case the user is landing for the first time
+      // onboarding and installation will always take precedence
+      if (nextUrl) {
+        this.$nuxt.$cookies.remove('bifrost-post-auth-redirect')
+        this.$router.push(nextUrl)
+        return
+      }
+
       this.$router.push(homePage)
       return
     }
