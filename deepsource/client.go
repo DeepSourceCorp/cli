@@ -4,7 +4,6 @@ package deepsource
 import (
 	"context"
 	"fmt"
-	"strings"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
@@ -36,22 +35,22 @@ func (c Client) GetToken() string {
 
 // Returns a new GQLClient
 func New() (*Client, error) {
-	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", config.DefaultHostName)
-	if isEnterprise() {
-		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", config.Cfg.Host)
-	}
+	apiClientURL := getAPIClientURL()
 	gql := graphql.NewClient(apiClientURL)
 	return &Client{
 		gql: gql,
 	}, nil
 }
 
-// Checks whether the host is an enterprise host
-func isEnterprise() bool {
-	if strings.HasSuffix(config.Cfg.Host, "."+config.DefaultHostName) && config.Cfg.Host != config.DefaultHostName {
-		return true
+// Formats and returns the DeepSource Public API client URL
+func getAPIClientURL() string {
+	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", config.Cfg.Host)
+
+	// Check if the domain is different from the default domain (In case of Enterprise users)
+	if config.Cfg.Host != config.DefaultHostName {
+		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", config.Cfg.Host)
 	}
-	return false
+	return apiClientURL
 }
 
 // Registers the device and allots it a device code which is further used for fetching
