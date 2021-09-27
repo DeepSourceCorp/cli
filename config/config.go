@@ -13,10 +13,9 @@ var configDirFn = os.UserHomeDir
 var readFileFn = os.ReadFile
 
 const (
-	ConfigDirName         = "/.deepsource/"
-	ConfigFileName        = "/config.toml"
-	DefaultHostName       = "deepsource.io"
-	EnterpriseAPIEndpoint = "enterprise.deepsource.icu"
+	ConfigDirName   = "/.deepsource/"
+	ConfigFileName  = "/config.toml"
+	DefaultHostName = "deepsource.io"
 )
 
 type CLIConfig struct {
