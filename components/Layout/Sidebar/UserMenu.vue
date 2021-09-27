@@ -27,6 +27,9 @@
       </z-menu-section>
       <z-menu-section :divider="false">
         <z-menu-item @click="() => switchToLegacy()">Switch to DeepSource Retro</z-menu-item>
+        <z-menu-item as="a" href="https://deepsource.io/discord" target="_blank" rel="noopener noreferrer"
+          >Join Discord</z-menu-item
+        >
         <z-menu-item @click="() => this.$router.push('/me')">Dashboard</z-menu-item>
         <z-menu-item @click="() => signOut()">Sign out</z-menu-item>
       </z-menu-section>
