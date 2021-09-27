@@ -29,7 +29,9 @@ module.exports = {
   },
   variants: {
     extend: {
-      translate: ['group-hover']
+      translate: ['group-hover'],
+      cursor: ['hover'],
+      borderStyle: ['hover', 'focus'],
     }
   },
   theme: {
@@ -42,7 +44,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         support: '5fr 7fr'
-      }
+      },
     }
   }
 }

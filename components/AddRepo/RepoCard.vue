@@ -147,6 +147,12 @@ export default class RepoCard extends Vue {
   @Prop({ default: '' })
   route: string
 
+  @Prop({ default: '' })
+  analyzerShortcode: string
+
+  @Prop({ default: '' })
+  transformerShortcode: string
+
   @Watch('isStarred', { immediate: true })
   updateStarred(): void {
     this.internalStarredState = this.isStarred
@@ -188,7 +194,16 @@ export default class RepoCard extends Vue {
       route.push(this.route)
     }
 
-    return route.join('/')
+    const routeToRepo = route.join('/')
+    let queryParams = ''
+
+    if (this.analyzerShortcode) {
+      queryParams = `?preset-analyzer=${this.analyzerShortcode}`
+      if (this.transformerShortcode)
+        queryParams = queryParams.concat(`&preset-transformer=${this.transformerShortcode}`)
+    }
+
+    return routeToRepo.concat(queryParams)
   }
 }
 </script>

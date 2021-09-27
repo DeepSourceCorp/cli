@@ -98,20 +98,26 @@ function getNextYear(): Date {
 }
 
 function getHumanizedTimeFromNow(timestamp: string): string {
-    /**
-     * Return the time display from now in a better human readable form.
-     */
-    const diff = dayjs().diff(timestamp, 'hour')
-    if (diff <= 12) {
-      return fromNow(timestamp)
-    }
-    return dayjs(timestamp).calendar(undefined, {
-      sameDay: '[Earlier today]',
-      lastDay: '[Yesterday]',
-      lastWeek: '[Last] dddd',
-      sameElse: 'll'
-    })
+  /**
+   * Return the time display from now in a better human readable form.
+   */
+  const diff = dayjs().diff(timestamp, 'hour')
+  if (diff <= 12) {
+    return fromNow(timestamp)
   }
+  return dayjs(timestamp).calendar(undefined, {
+    sameDay: '[Earlier today]',
+    lastDay: '[Yesterday]',
+    lastWeek: '[Last] dddd',
+    sameElse: 'll'
+  })
+}
+
+function getDaysDiffInDays(day1: number | string, day2: number | string): number {
+  const date1 = dayjs(day1)
+  const date2 = dayjs(day2)
+  return date1.diff(date2, 'days')
+}
 
 export {
   getHumanizedTimeFromNow,
@@ -121,5 +127,6 @@ export {
   formatDate,
   parseISODate,
   getNextMonth,
-  getNextYear
+  getNextYear,
+  getDaysDiffInDays
 }

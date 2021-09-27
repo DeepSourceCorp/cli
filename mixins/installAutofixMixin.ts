@@ -1,9 +1,11 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import { Maybe } from '~/types/types'
+import ActiveUserMixin from './activeUserMixin'
+import OwnerDetailMixin from './ownerDetailMixin'
 import RepoDetailMixin from './repoDetailMixin'
 
 @Component
-export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
+export default class InstallAutofixMixin extends mixins(RepoDetailMixin, OwnerDetailMixin, ActiveUserMixin) {
   public installing = false
 
   // Will trigger a fail 5 seconds after window closing if autofix is not enabled
@@ -22,8 +24,20 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
   // VCS installation window
   public installWindow: Window | null = null
 
+  get isRepoLevel(): boolean {
+    return !!this.baseRouteParams.name
+  }
+
+  get ownerParams(): { login: string, provider: string } {
+    return { login: this.activeOwner, provider: this.activeProvider }
+  }
+
   async fetch(): Promise<void> {
-    await this.fetchRepoDetails(this.baseRouteParams)
+    if (this.isRepoLevel)
+      await this.fetchRepoDetails(this.baseRouteParams)
+    else {
+      await this.fetchOwnerDetails(this.ownerParams)
+    }
   }
 
   async refetchRepo(): Promise<void> {
@@ -33,41 +47,67 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
     })
   }
 
+  async refetchOwner(): Promise<void> {
+    await this.fetchOwnerDetails({
+      ...this.ownerParams,
+      refetch: true
+    })
+  }
+
+  clearTimers(): void {
+    clearTimeout(this.failTimeout)
+    clearInterval(this.popUpTimer)
+    clearInterval(this.pollTimer)
+  }
+
   openAutofixInstallationUrl(close?: () => void): void {
     // Assign the close received from the modal
     this.close = close ? close : null
     this.installing = true
 
     // fetch installation url from repository
-    const installationUrl =
+    const installationUrl = this.isRepoLevel ?
       this.repository.vcsProvider === 'GITHUB'
-        ? (this.repository.autofixGithubAppInstallationUrl as string)
-        : (this.repository.autofixBitbucketAddonInstallationUrl as string)
+        ? (this.repository.autofixGithubAppInstallationUrl)
+        : (this.repository.autofixBitbucketAddonInstallationUrl)
+      : (this.owner.autofixInstallationUrl)
+    if (installationUrl) {
+      // open the window
+      this.installWindow = window.open(installationUrl, '', 'resizable=no,width=1000,height=600')
 
-    // open the window
-    this.installWindow = window.open(installationUrl, '', 'resizable=no,width=1000,height=600')
+      this.popUpTimer = setInterval(() => {
+        if (this.installWindow?.closed) {
+          this.failTimeout = setTimeout(this.fail, 5000)
+          clearInterval(this.popUpTimer)
+        }
+      }, 1000)
 
-    this.popUpTimer = setInterval(() => {
-      if (this.installWindow?.closed) {
-        this.failTimeout = setTimeout(this.fail, 5000)
-        clearInterval(this.popUpTimer)
+      if (this.isRepoLevel) {
+        this.pollTimer = setInterval(async () => {
+          await this.refetchRepo()
+          if (this.repository.isAutofixEnabled) {
+            clearInterval(this.pollTimer)
+            await this.success()
+          }
+        }, 1200)
+      } else {
+        this.pollTimer = setInterval(async () => {
+          await this.refetchOwner()
+          if (this.owner.isAutofixEnabled) {
+            clearInterval(this.pollTimer)
+            await this.success()
+          }
+        }, 1200)
       }
-    }, 1000)
 
-    this.pollTimer = setInterval(async () => {
-      await this.refetchRepo()
-      if (this.repository.isAutofixEnabled) {
-        clearInterval(this.pollTimer)
+      this.$socket.$on('autofix-installation-complete', async () => {
         await this.success()
-      }
-    }, 1200)
-
-    this.$socket.$on('autofix-installation-complete', async () => {
-      await this.success()
-    })
+      })
+    }
   }
 
   async success(): Promise<void> {
+    this.clearTimers()
     // close the install window on success
     this.installWindow?.close()
     this.$toast.success('Successfully installed Autofix app')
@@ -75,6 +115,7 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
   }
 
   async fail(): Promise<void> {
+    this.clearTimers()
     this.$toast.danger(
       'Autofix app was not installed. It could take a while to reflect these changes on DeepSource, check back in a few minutes '
     )
@@ -84,9 +125,7 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
   async finish(): Promise<void> {
     await this.refetchRepo()
 
-    clearTimeout(this.failTimeout)
-    clearInterval(this.popUpTimer)
-    clearInterval(this.pollTimer)
+    this.clearTimers()
     this.$socket.$off('autofix-installation-complete')
 
     if (this.close && typeof this.close === 'function') {
@@ -98,9 +137,7 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin) {
   }
 
   beforeDestroy(): void {
-    clearTimeout(this.failTimeout)
-    clearInterval(this.popUpTimer)
-    clearInterval(this.pollTimer)
+    this.clearTimers()
     this.$socket.$off('autofix-installation-complete')
   }
 }

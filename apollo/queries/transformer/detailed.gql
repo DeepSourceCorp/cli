@@ -1,0 +1,19 @@
+query($shortcode: String!) {
+  transformer(shortcode: $shortcode) {
+    name
+    descriptionRendered
+    updatedOn
+    language
+    version
+    shortcode
+    publishedOn
+    logo
+    owner
+    documentationUrl
+    discussUrl
+    exampleConfig
+    analyzer {
+      shortcode
+    }
+  }
+}

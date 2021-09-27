@@ -3,7 +3,7 @@
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="flex items-center justify-center w-4 h-4 mb-2 bg-opacity-50 rounded-full cursor-pointer outline-none focus:outline-none"
+        class="flex items-center justify-center w-4 h-4 mr-1 mb-2 bg-opacity-50 rounded-full cursor-pointer outline-none focus:outline-none"
         :class="unseenCount > 0 ? 'bg-juniper' : 'bg-ink-200'"
         @click="
           () => {

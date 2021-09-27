@@ -1,0 +1,5 @@
+mutation($input: AddTransformerFeedbackInput!) {
+  addTransformerFeedback(input: $input) {
+    ok
+  }
+}

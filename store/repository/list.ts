@@ -288,5 +288,26 @@ export const actions: RepositoryListModuleActions = {
       const error = e as GraphqlError
       commit(RepoListMutations.SET_ERROR, error)
     }
+  },
+  async [RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS]({ commit }, variables) {
+    try {
+      const response: { data: { owner: Owner } } = await this.$fetchGraphqlData(
+        recentlyActiveRepoListWithAnalyzer,
+        {
+          login: variables.login,
+          provider: this.$providerMetaMap[variables.provider].value,
+          limit: variables.limit
+        },
+        variables.refetch
+      )
+
+      commit(
+        RepoListMutations.SET_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS,
+        response.data.owner.repositories
+      )
+    } catch (e) {
+      const error = e as GraphqlError
+      commit(RepoListMutations.SET_ERROR, error)
+    }
   }
 }

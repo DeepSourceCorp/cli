@@ -16,7 +16,7 @@
         class="flex items-center w-full p-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
         @click="showAddRepoModal = true"
       >
-        <z-icon icon="book" size="small" color="vanilla-400" class="min-w-4 min-h-4"></z-icon>
+        <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4"></z-icon>
         <span class="text-sm font-medium" v-show="!isCollapsed">Activate new repository</span>
       </button>
       <sidebar-item
@@ -56,7 +56,7 @@
         :active="isActive('provider-owner-members')"
         :to="getRoute('members/active')"
       >
-        My team
+        Team members
       </sidebar-item>
       <sidebar-item
         :isCollapsed="isCollapsed"
@@ -71,14 +71,6 @@
     <section class="justify-self-end self-end w-full relative group">
       <div class="p-2.5 border-t border-ink-200 space-y-2">
         <sidebar-item
-          :isCollapsed="isCollapsed"
-          icon="dashboard"
-          :active="$route.path === '/me'"
-          to="/me"
-        >
-          Dashboard
-        </sidebar-item>
-        <sidebar-item
           to="/support"
           :active="$route.path === '/support'"
           :isCollapsed="isCollapsed"
@@ -86,13 +78,24 @@
         >
           Get help
         </sidebar-item>
+        <div class="flex items-center">
+          <sidebar-item
+            :isCollapsed="isCollapsed"
+            icon="dashboard"
+            :active="$route.path === '/me'"
+            to="/me"
+          >
+            Dashboard
+          </sidebar-item>
+          <extras-menu v-if="!isCollapsed" />
+        </div>
         <div
           class="items-center hidden lg:flex"
           :class="{ 'lg:space-x-1 w-full justify-between': !isCollapsed, 'w-8': isCollapsed }"
         >
           <user-menu :isCollapsed="isCollapsed" />
           <client-only>
-            <change-log v-show="!isCollapsed" />
+            <change-log v-show="!isCollapsed" class="pr-px" />
           </client-only>
         </div>
       </div>
@@ -193,7 +196,7 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
       this.collapsedSidebar = false
       this.isOpen = true
     })
-    
+
     this.fetchRepoCount()
     this.$socket.$on('repo-onboarding-completed', () => {
       this.fetchRepoCount(true)

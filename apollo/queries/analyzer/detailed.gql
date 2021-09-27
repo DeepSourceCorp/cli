@@ -1,0 +1,35 @@
+query($shortcode: String!, $first: Int) {
+  analyzer(shortcode: $shortcode) {
+    analyzerLogo
+    description
+    issueTypeDistribution
+    category
+    version
+    updatedOn
+    exampleConfig
+    issuesCount
+    autofixableIssuesCount
+    documentationUrl
+    discussUrl
+    # reviews {
+    #   edges {
+    #     node {
+    #       avatar
+    #       name
+    #       comment
+    #     }
+    #   }
+    # }
+    starIssues(first: $first) {
+      edges {
+        node {
+          title
+          shortcode
+          issueType
+          shortDescriptionRendered
+          autofixAvailable
+        }
+      }
+    }
+  }
+}

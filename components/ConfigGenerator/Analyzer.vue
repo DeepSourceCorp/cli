@@ -226,10 +226,10 @@ export default class Analyzer extends Vue {
     meta: Record<string, unknown>
   }
 
-  @Prop({ default: [] })
+  @Prop({ default: () => [] })
   availableTransformers: Array<TransformerTool>
 
-  @Prop({ default: [] })
+  @Prop({ default: () => [] })
   selectedTransformers: Array<TransformerInterface>
 
   @Prop({ default: false })
@@ -377,6 +377,11 @@ export default class Analyzer extends Vue {
         enabled: selected.includes(transformer.shortcode)
       }
     })
+  }
+
+  @Watch('selectedTransformers.length')
+  updateTransformerItems(): void {
+    this.generateTransformerItems()
   }
 
   updateChecks(option: string, isChecked: number, objectToUpdate: Record<string, string[]>): void {

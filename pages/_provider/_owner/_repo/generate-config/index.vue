@@ -50,6 +50,7 @@
             <analyzer-selector
               class="mt-2"
               ref="analyzer-selector"
+              :is-processing="isProcessing"
               :userConfig="userConfig"
               @updateAnalyzers="updateAnalyzerConfig"
               @updateTransformers="updateTransformersConfig"
@@ -115,7 +116,7 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import { ZIcon, ZStepper, ZStep, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
 import { TomlBox, AnalyzerSelector, PatternsSelector } from '@/components/ConfigGenerator'
 import InstallAutofixModal from '@/components/Autofix/Modals/InstallAutofixModal.vue'
@@ -133,9 +134,15 @@ import { toTitleCase } from '@/utils/string'
 
 // Store
 import { TransformerInterface } from '~/store/analyzer/list'
+import { AnalyzerListActions } from '~/store/analyzer/list'
+import { DirectoryGetters } from '~/store/directory/directory'
 import { RepoConfigInterface, RepoConfigAnalyzerMeta } from '~/store/repository/detail'
 
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
+import { Analyzer, TransformerTool } from '~/types/types'
+
+const analyzerListStore = namespace('analyzer/list')
+const directoryStore = namespace('directory/directory')
 
 /**
  * Building the UI
@@ -182,6 +189,21 @@ export default class GenerateConfig extends mixins(
   RoleAccessMixin,
   RepoListMixin
 ) {
+  @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
+  analyzerList: Analyzer[]
+
+  @directoryStore.Getter(DirectoryGetters.DIRECTORY_TRANSFORMERS)
+  transformerList: TransformerTool[]
+
+  @analyzerListStore.Action(AnalyzerListActions.CHECK_ANALYZER_EXISTS)
+  checkAnalyzerExists: (arg?: { shortcode: string }) => Promise<boolean>
+
+  @analyzerListStore.Action(AnalyzerListActions.CHECK_TRANSFORMER_EXISTS)
+  checkTransformerExists: (arg?: {
+    shortcode: string
+    analyzerShortcode: string
+  }) => Promise<boolean>
+
   public userConfig: RepoConfigInterface = {
     version: 1,
     analyzers: [],
@@ -192,6 +214,7 @@ export default class GenerateConfig extends mixins(
 
   public showInstallAutofixAppModal = false
   public showNextSteps = false
+  public isProcessing = false
 
   showNextStepsModal() {
     const selector = this.$refs['analyzer-selector'] as AnalyzerSelector
@@ -217,6 +240,57 @@ export default class GenerateConfig extends mixins(
       this.userConfig,
       JSON.parse(JSON.stringify(this.repository.config))
     )
+    //? Pre-select an analyzer if shortcode is present in url
+    const presetAnalyzer = this.$route.query['preset-analyzer'] as string
+    if (typeof presetAnalyzer === 'string' && presetAnalyzer) {
+      this.isProcessing = true
+      const analyzerInStore = this.analyzerList.find(
+        (analyzer: Analyzer) => analyzer.shortcode === presetAnalyzer
+      )
+      let analyzerExists = false
+      if (!analyzerInStore) {
+        analyzerExists = await this.checkAnalyzerExists({
+          shortcode: presetAnalyzer.toString()
+        })
+      }
+      if (analyzerInStore || analyzerExists) {
+        this.updateAnalyzerConfig({
+          name: this.$route.query['preset-analyzer'].toString(),
+          meta: {},
+          enabled: true
+        })
+        //? Pre-select an transformer if shortcode is present in url
+        const presetTransformer = this.$route.query['preset-transformer'] as string
+        if (
+          typeof presetTransformer === 'string' &&
+          presetTransformer &&
+          this.repository.isAutofixEnabled
+        ) {
+          this.isProcessing = true
+          const transformerInStore = this.transformerList.find(
+            (transformer: TransformerTool) => transformer.shortcode === presetTransformer
+          )
+          let transformerExists = false
+          if (!transformerInStore) {
+            transformerExists = await this.checkTransformerExists({
+              shortcode: presetTransformer.toString(),
+              analyzerShortcode: presetAnalyzer
+            })
+          }
+          if (transformerInStore || transformerExists) {
+            const transformerShortcode = this.$route.query['preset-transformer'].toString()
+            const newTransformerObj = {} as Record<string, TransformerInterface>
+            newTransformerObj[transformerShortcode] = {
+              name: transformerShortcode,
+              shortcode: transformerShortcode,
+              enabled: true
+            }
+            this.updateTransformersConfig(newTransformerObj)
+          }
+        }
+      }
+    }
+    this.isProcessing = false
   }
 
   async activateRepo(): Promise<void> {

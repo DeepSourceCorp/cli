@@ -1,0 +1,37 @@
+query(
+  $shortcode: String!
+  $first: Int
+  $offset: Int
+  $autofixAvailable: Boolean
+  $q: String
+  $issueType: String
+) {
+  analyzer(shortcode: $shortcode) {
+    name
+    owner
+    analyzerLogo
+    issueTypeDistribution(autofixAvailable: $autofixAvailable, q: $q, issueType: $issueType)
+    issuesCount
+    documentationUrl
+    discussUrl
+    issues(
+      first: $first
+      offset: $offset
+      autofixAvailable: $autofixAvailable
+      q: $q
+      issueType: $issueType
+    ) {
+      totalCount
+      edges {
+        node {
+          title
+          shortcode
+          issueType
+          shortDescriptionRendered
+          autofixAvailable
+          severity
+        }
+      }
+    }
+  }
+}

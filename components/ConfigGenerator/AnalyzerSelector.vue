@@ -4,6 +4,7 @@
       ref="analyzer-search-component"
       :selectedAnalyzers="selectedAnalyzers"
       :toggleSearch="showAnalyzerList"
+      :is-processing="isProcessing"
       @addAnalyzer="addAnalyzer"
       @closeSearch="showAnalyzerList = false"
     />
@@ -36,6 +37,7 @@
           buttonType="secondary"
           icon="plus"
           size="small"
+          :disabled="isProcessing"
         >
           Add Analyzer
         </z-button>
@@ -103,6 +105,9 @@ export default class AnalyzerSelector extends Vue {
   // This is the repository config updated by the user
   @Prop({ default: {} })
   userConfig: RepoConfigInterface
+
+  @Prop({ default: false })
+  isProcessing: boolean
 
   @analyzerListStore.Getter(AnalyzerListGetters.ANALYZERS)
   analyzerList: AnalyzerInterface[]

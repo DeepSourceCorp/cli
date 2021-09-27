@@ -76,11 +76,13 @@ type Analyzer implements MaskPrimaryKeyNode {
   transformertoolSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, language: [String]): TransformerToolConnection!
   transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
   analyzerLogo: String
+  descriptionRendered: String
   publishedOn: Date
   updatedOn: Date
   issuesCount: Int
   autofixableIssuesCount: Int
   issueDistribution: GenericScalar
+  issueTypeDistribution(q: String, sort: String, issueType: String, autofixAvailable: Boolean): GenericScalar
 }
 
 enum AnalyzerAnalyzerType {
@@ -465,6 +467,18 @@ enum CheckStatus {
   CNCL
   READ
   NEUT
+}
+
+input CommitAdhocConfigInput {
+  repositoryId: ID!
+  createPullRequest: Boolean = false
+  clientMutationId: String
+}
+
+type CommitAdhocConfigPayload {
+  ok: Boolean
+  vcsPrUrl: String
+  clientMutationId: String
 }
 
 input CommitChangesToPRInput {
@@ -964,6 +978,8 @@ type Issue implements MaskPrimaryKeyNode {
   issueType: String
   seenIn: String
   descriptionRendered: String
+  shortDescription: String
+  shortDescriptionRendered: String
 }
 
 type IssueConnection {
@@ -1060,6 +1076,7 @@ type Mutation {
   createAutofixRunForPullRequest(input: CreateAutofixRunForPullRequestInput!): CreateAutofixRunForPullRequestPayload
   createAutofixRunForAnalyzer(input: CreateAutofixRunForAnalyzerInput!): CreateAutofixRunForAnalyzerPayload
   commitChangesToPr(input: CommitChangesToPRInput!): CommitChangesToPRPayload
+  commitAdhocConfig(input: CommitAdhocConfigInput!): CommitAdhocConfigPayload
   resetInvitationLink(input: ResetTeamInvitationLinkInput!): ResetTeamInvitationLinkPayload
   updateTeamBasePermissions(input: UpdateTeamBasePermissionsInput!): UpdateTeamBasePermissionsPayload
   addAnalyzerFeedback(input: AddAnalyzerFeedbackInput!): AddAnalyzerFeedbackPayload
@@ -1293,6 +1310,7 @@ type Repository implements MaskPrimaryKeyNode {
   modifiedAt: DateTime!
   alive: Boolean
   name: String!
+  description: String
   vcsType: RepositoryVcsType!
   vcsProvider: VCSProviderChoices!
   vcsUrl: String!
@@ -2009,6 +2027,7 @@ type TransformerTool implements MaskPrimaryKeyNode {
   description: String!
   transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
   reviews(offset: Int, before: String, after: String, first: Int, last: Int): TransformerReviewConnection!
+  descriptionRendered: String
   language: String
   publishedOn: Date
   updatedOn: Date

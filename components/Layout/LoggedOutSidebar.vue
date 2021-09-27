@@ -1,10 +1,10 @@
 <template>
   <div
-    class="absolute h-screen duration-200 transition-width lg:relative w-80 lg:left-0"
+    class="absolute h-screen duration-200 transition-width lg:relative w-80 lg:w-72 lg:left-0"
     :class="isOpen ? 'left-0' : '-left-full'"
   >
     <sidebar-menu
-      width="full"
+      width="lg:w-full"
       @open="openModal()"
       @close="closeModal()"
       :collapsible="false"
@@ -12,35 +12,59 @@
       footerBrandClass="bg-ink-300 px-4"
     >
       <template slot="header">
-        <div class="p-2">
-          <img class="h-4" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
+        <div class="-mx-2">
+          <div class="px-4 py-5">
+            <img class="h-4" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
+          </div>
+          <hr class="border-ink-200" />
         </div>
       </template>
       <template slot="default">
-        <div class="grid gap-2">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://deepsource.io/features"
-            class="px-2 py-1 rounded-md hover:bg-ink-200"
-            >Features</a
+        <div class="grid gap-2 text-sm">
+          <nuxt-link to="/me" class="px-2 py-1 rounded-md hover:bg-ink-200 flex items-center"
+            ><z-icon icon="dashboard" color="vanilla-300" class="mr-2.5" />
+            <span>Dashboard</span></nuxt-link
           >
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://deepsource.io/docs/"
-            class="px-2 py-1 rounded-md hover:bg-ink-200"
-            >Documentation</a
+            class="px-2 py-1 rounded-md hover:bg-ink-200 flex items-center"
           >
+            <z-icon icon="resources" color="vanilla-300" class="mr-2.5" />
+            <span>Resources</span>
+          </a>
+          <!-- TODO Enable when enterprise page from marketing is live  -->
+          <!-- <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://deepsource.io/docs/"
+            class="px-2 py-1 rounded-md hover:bg-ink-200 flex items-center"
+          >
+            <z-icon icon="enterprise" color="vanilla-300" class="mr-2.5" />
+            <span>Enterprise</span>
+          </a> -->
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="/pricing"
-            class="px-2 py-1 rounded-md hover:bg-ink-200"
-            >Pricing</a
+            class="px-2 py-1 rounded-md hover:bg-ink-200 flex items-center"
           >
-          <nuxt-link to="/login" class="px-2 py-1 rounded-md hover:bg-ink-200 text-juniper"
-            >Log in</nuxt-link
+            <z-icon icon="pricing" color="vanilla-300" class="mr-2.5" />
+            <span>Pricing</span>
+          </a>
+          <nuxt-link to="/discover" class="px-2 py-1 rounded-md hover:bg-ink-200 flex items-center"
+            ><z-icon icon="discover" color="vanilla-300" class="mr-2.5" />
+            <span>Discover</span></nuxt-link
+          >
+          <nuxt-link to="/directory" class="px-2 py-1 rounded-md hover:bg-ink-200 flex items-center"
+            ><z-icon icon="book" color="vanilla-300" class="mr-2.5" />
+            <span>Directory</span></nuxt-link
+          >
+          <nuxt-link
+            to="/login"
+            class="px-2 py-1 rounded-md hover:bg-ink-200 text-juniper flex items-center"
+            ><z-icon icon="log-in" color="juniper" class="mr-2.5" /> <span>Log in</span></nuxt-link
           >
         </div>
       </template>
@@ -84,7 +108,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Watch } from 'nuxt-property-decorator'
+import { Vue, Component } from 'nuxt-property-decorator'
 import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
 
 @Component({

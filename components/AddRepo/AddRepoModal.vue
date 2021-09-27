@@ -13,7 +13,10 @@
                 >
                   <span>Activate a repository</span>
                 </z-tab-item>
-                <z-tab-item v-if="autoOnboardAvailable" class="flex items-center space-x-1">
+                <z-tab-item
+                  v-if="autoOnboardAvailable && showAutoOnboard"
+                  class="flex items-center space-x-1"
+                >
                   <span>Use Auto Onboard</span>
                 </z-tab-item>
               </z-tab-list>
@@ -26,7 +29,10 @@
               ></z-button>
             </div>
             <z-tab-panes class="h-102">
-              <activate-single-repo />
+              <activate-single-repo
+                :analyzer-shortcode="analyzerShortcode"
+                :transformer-shortcode="transformerShortcode"
+              />
               <auto-onboard-repos @close="close" />
             </z-tab-panes>
           </z-tabs>
@@ -69,6 +75,15 @@ export default class AddNewRepo extends mixins(AutoOnboardMixin, ActiveUserMixin
 
   @Prop({ default: 0 })
   currentTab: number
+
+  @Prop({ default: true })
+  showAutoOnboard: boolean
+
+  @Prop({ default: '' })
+  analyzerShortcode: string
+
+  @Prop({ default: '' })
+  transformerShortcode: string
 
   get autoOnboardAvailable() {
     return (

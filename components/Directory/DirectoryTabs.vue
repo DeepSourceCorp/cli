@@ -1,0 +1,49 @@
+<template>
+  <div
+    class="border-ink-200 border-b flex gap-x-5 pt-3 px-4 sticky top-23 lg:top-13 bg-ink-400 z-10"
+  >
+    <nuxt-link v-for="(tab, id) in tabList" :key="tab.label" :to="tab.link">
+      <z-tab :icon="tab.icon" :isActive="id === activeTab" border-active-color="vanilla-100">
+        {{ tab.label }}
+      </z-tab>
+    </nuxt-link>
+  </div>
+</template>
+<script lang="ts">
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
+
+import { ZTab } from '@deepsourcelabs/zeal'
+
+interface TabListT {
+  label: string
+  link: string
+  icon: string
+}
+
+@Component({
+  components: { ZTab },
+  name: 'DirectoryTabs'
+})
+export default class DirectoryTabs extends Vue {
+  @Prop({ default: 0 })
+  activeTab: number
+
+  @Prop({ default: '#' })
+  analyzerUrl: string
+
+  get tabList(): TabListT[] {
+    return [
+      {
+        label: 'Overview',
+        link: this.analyzerUrl,
+        icon: 'tachometer-fast'
+      },
+      {
+        label: 'Issues',
+        link: `${this.analyzerUrl}/issues`,
+        icon: 'code'
+      }
+    ]
+  }
+}
+</script>

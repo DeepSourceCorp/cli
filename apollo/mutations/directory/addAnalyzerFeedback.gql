@@ -1,0 +1,5 @@
+mutation($input: AddAnalyzerFeedbackInput!) {
+  addAnalyzerFeedback(input: $input) {
+    ok
+  }
+}

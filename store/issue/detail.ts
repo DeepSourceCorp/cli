@@ -2,6 +2,7 @@ import RepositoryIssueDetailGQLQuery from '~/apollo/queries/repository/issue/det
 import RepositoryNodeIssueDetailGQLQuery from '~/apollo/queries/repository/issue/issueChildren.gql'
 import SingleIssueDetailGQLQuery from '~/apollo/queries/repository/issue/single.gql'
 import SilenceRulesGQLQuery from '~/apollo/queries/repository/issue/silenceRules.gql'
+import IssueDirectoryDetailGQLQuery from '~/apollo/queries/issue/getAnIssue.gql'
 
 import IgnoreIssueFilePatternMutation from '~/apollo/mutations/issue/ignoreIssueFilePattern.gql'
 import IgnoreIssueTestPatternMutation from '~/apollo/mutations/issue/ignoreIssueTestPattern.gql'
@@ -39,7 +40,8 @@ export enum IssueDetailActions {
   IGNORE_ISSUE_FOR_FILE = 'ignoreIssueForFile',
   IGNORE_ISSUE_CHECK_ISSUE = 'updateIgnoreCheckIssue',
   IGNORE_ISSUE_FALSE_POSITIVE = 'ignoreIssueFalsePositive',
-  CREATE_AUTOFIX_RUN = 'createAutofixRun'
+  CREATE_AUTOFIX_RUN = 'createAutofixRun',
+  FETCH_ISSUE_DETAILS = 'fetchIssueDetails'
 }
 
 export enum IssueDetailMutations {
@@ -48,7 +50,8 @@ export enum IssueDetailMutations {
   SET_SINGLE_ISSUE = 'setSingleIssue',
   SET_ISSUE = 'setIssue',
   SET_ISSUE_CHILDREN = 'setIssueChildren',
-  SET_SILENCE_RULE = 'setSilenceRule'
+  SET_SILENCE_RULE = 'setSilenceRule',
+  SET_ISSUE_DIR_DETAILS = 'setIssueDirDetails'
 }
 
 export interface IssueDetailModuleState {
@@ -57,7 +60,8 @@ export interface IssueDetailModuleState {
   issue: RepositoryIssue
   silenceRules: SilenceRule[]
   singleIssue: Issue
-  checkIssues: CheckIssueConnection
+  checkIssues: CheckIssueConnection,
+  issueDirDetails: Issue
 }
 
 export const state = (): IssueDetailModuleState => ({
@@ -66,7 +70,8 @@ export const state = (): IssueDetailModuleState => ({
     error: {},
     issue: {},
     singleIssue: {},
-    checkIssues: {}
+    checkIssues: {},
+    issueDirDetails: {}
   })
 })
 
@@ -86,6 +91,9 @@ interface IssueDetailModuleMutations extends MutationTree<IssueDetailModuleState
   [IssueDetailMutations.SET_ISSUE_CHILDREN]: (
     state: IssueDetailModuleState,
     checkIssues: CheckIssueConnection
+  ) => void
+  [IssueDetailMutations.SET_ISSUE_DIR_DETAILS]: (
+    state: IssueDetailModuleState, issue: Issue
   ) => void
 }
 
@@ -107,6 +115,9 @@ export const mutations: IssueDetailModuleMutations = {
   },
   [IssueDetailMutations.SET_SINGLE_ISSUE]: (state, issue: Issue) => {
     state.singleIssue = Object.assign({}, state.issue, issue)
+  },
+  [IssueDetailMutations.SET_ISSUE_DIR_DETAILS]: (state, issue: Issue) => {
+    state.issueDirDetails = Object.assign({}, state.issueDirDetails, issue)
   }
 }
 
@@ -209,6 +220,11 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
     injectee: IssueDetailActionContext,
     args: CreateAutofixRunInput
   ) => Promise<void>
+  [IssueDetailActions.FETCH_ISSUE_DETAILS]: (
+    this: Store<RootState>,
+    injectee: IssueDetailActionContext,
+    args: { shortcode: string }
+  ) => Promise<Issue | undefined>
 }
 
 export const actions: IssueDetailModuleActions = {
@@ -277,19 +293,19 @@ export const actions: IssueDetailModuleActions = {
         commit(IssueDetailMutations.SET_LOADING, false)
       })
   },
-  async [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN]({}, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN]({ }, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueFilePatternMutation, args)
     return response.data.ignoreIssueForFilePatternInRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_TEST_PATTERN]({}, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_TEST_PATTERN]({ }, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueTestPatternMutation, args)
     return response.data.ignoreIssueForTestPatternsInRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_REPOSITORY]({}, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_REPOSITORY]({ }, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueRepository, args)
     return response.data.ignoreIssueForRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_FOR_FILE]({}, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_FOR_FILE]({ }, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueForFile, args)
     return response.data.ignoreIssueForRepository
   },
@@ -313,5 +329,23 @@ export const actions: IssueDetailModuleActions = {
     })
     commit(IssueDetailMutations.SET_LOADING, false)
     return response.data.createAutofixRun
-  }
+  },
+  async [IssueDetailActions.FETCH_ISSUE_DETAILS]({ commit }, args) {
+    commit(IssueDetailMutations.SET_LOADING, true)
+    try {
+      const issueResponse = await this.$fetchGraphqlData(IssueDirectoryDetailGQLQuery, {
+        shortcode: args.shortcode
+      })
+      if (issueResponse && issueResponse.data && issueResponse.data.issue) {
+        return issueResponse.data.issue as Issue
+      }
+      return undefined
+    }
+    catch (e) {
+      commit(IssueDetailMutations.SET_ERROR, e as GraphqlError)
+    }
+    finally {
+      commit(IssueDetailMutations.SET_LOADING, false)
+    }
+  },
 }

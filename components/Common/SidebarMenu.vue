@@ -41,7 +41,7 @@
         <slot :isCollapsed="isCollapsed"></slot>
       </div>
       <footer
-        class="w-full px-2 py-4 border-t border-solid border-ink-200"
+        class="w-full px-2 py-4 border-t border-solid border-ink-200 bg-gradient-dark-dawn backdrop-blur-xl"
         :class="footerClass"
         v-if="$scopedSlots.footer"
       >
@@ -73,7 +73,7 @@ import { ZIcon } from '@deepsourcelabs/zeal'
   }
 })
 export default class SidebarMenu extends Vue {
-  @Prop({ default: '64' })
+  @Prop({ default: 'lg:w-64' })
   width!: string
 
   @Prop({ default: false })
@@ -82,7 +82,7 @@ export default class SidebarMenu extends Vue {
   @Prop({ default: true })
   collapsible!: boolean
 
-  @Prop({ default: '16' })
+  @Prop({ default: 'lg:w-16' })
   widthCollapsed!: string
 
   @Prop({ default: 'left' })
@@ -110,10 +110,6 @@ export default class SidebarMenu extends Vue {
     })
   }
 
-  get sidebarWidth(): string {
-    return this.isCollapsed ? this.widthCollapsed : this.width
-  }
-
   get directionClasses(): string {
     const directionStyle: Record<string, string> = {
       left: 'lg:left-0 -left-3/4',
@@ -139,8 +135,8 @@ export default class SidebarMenu extends Vue {
   }
 
   get modalWidth(): string {
-    if (this.isCollapsed) return `lg:w-${this.widthCollapsed} w-9/12`
-    return `lg:w-${this.width} w-9/12`
+    if (this.isCollapsed && this.collapsible) return `w-9/12 ${this.widthCollapsed}`
+    return `w-9/12 ${this.width}`
   }
 
   get hoverStyle(): string {

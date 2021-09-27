@@ -89,6 +89,24 @@ declare module '*/verifyDevice.gql' {
 }
     
 
+declare module '*/addAnalyzerFeedback.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/addTransformerFeedback.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/bitbucketInstallationLandingInput.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -575,10 +593,47 @@ declare module '*/updateStarredRepo.gql' {
 }
     
 
+declare module '*/checkExists.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/detailed.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/list.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const listWebhooks: DocumentNode;
+export const AutofixRuns: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/listIssues.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
 
   export default defaultDocument;
 }
@@ -594,6 +649,15 @@ declare module '*/socialAuthUrls.gql' {
     
 
 declare module '*/context.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/getAnIssue.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

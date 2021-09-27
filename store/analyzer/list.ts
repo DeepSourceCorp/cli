@@ -1,6 +1,8 @@
 import { GetterTree, ActionTree, MutationTree, Store, ActionContext } from 'vuex'
 import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import AnalyzersGQLQuery from '~/apollo/queries/analyzer/list.gql'
+import CheckAnalyzerExistsQuery from '~/apollo/queries/analyzer/checkExists.gql'
+import CheckTransformerExistsQuery from '~/apollo/queries/transformer/checkExists.gql'
 import { AnalyzerConnection, Analyzer, TransformerTool, PageInfo } from '~/types/types'
 import { RootState } from '~/store'
 
@@ -37,7 +39,9 @@ export interface AnalyzerInterface extends Analyzer {
 }
 
 export enum AnalyzerListActions {
-  FETCH_ANALYZER_LIST = 'fetchAnalyzerList'
+  FETCH_ANALYZER_LIST = 'fetchAnalyzerList',
+  CHECK_ANALYZER_EXISTS = 'checkAnalyzerExists',
+  CHECK_TRANSFORMER_EXISTS = 'checkTransformerExists'
 }
 
 export enum AnalyzerListGetters {
@@ -63,7 +67,7 @@ export const state = (): AnalyzerListModuleState => ({
     analyzerList: {
       pageInfo: {} as PageInfo,
       edges: []
-    }
+    },
   })
 })
 
@@ -125,6 +129,18 @@ interface AnalyzerListModuleActions extends ActionTree<AnalyzerListModuleState, 
     this: Store<RootState>,
     injectee: AnalyzerListActionContext
   ) => Promise<void>
+
+  [AnalyzerListActions.CHECK_ANALYZER_EXISTS]: (
+    this: Store<RootState>,
+    injectee: AnalyzerListActionContext,
+    args: { shortcode: string }
+  ) => Promise<boolean>
+
+  [AnalyzerListActions.CHECK_TRANSFORMER_EXISTS]: (
+    this: Store<RootState>,
+    injectee: AnalyzerListActionContext,
+    args: { shortcode: string, analyzerShortcode: string }
+  ) => Promise<boolean>
 }
 
 export const actions: AnalyzerListModuleActions = {
@@ -139,5 +155,29 @@ export const actions: AnalyzerListModuleActions = {
         commit(AnalyzerListMutations.SET_ERROR, e)
         commit(AnalyzerListMutations.SET_LOADING, false)
       })
-  }
+  },
+  async [AnalyzerListActions.CHECK_ANALYZER_EXISTS]({ commit }, args) {
+    commit(AnalyzerListMutations.SET_LOADING, true)
+    try {
+      const checkAnalyzerExistsResponse = await this.$fetchGraphqlData(CheckAnalyzerExistsQuery, args) as GraphqlQueryResponse
+      if (checkAnalyzerExistsResponse.data.analyzer?.name) {
+        return true
+      }
+    }
+    catch (e) { }
+    commit(AnalyzerListMutations.SET_LOADING, false)
+    return false
+  },
+  async [AnalyzerListActions.CHECK_TRANSFORMER_EXISTS]({ commit }, { analyzerShortcode, ...rest }) {
+    commit(AnalyzerListMutations.SET_LOADING, true)
+    try {
+      const checkAnalyzerExistsResponse = await this.$fetchGraphqlData(CheckTransformerExistsQuery, { ...rest }) as GraphqlQueryResponse
+      if (checkAnalyzerExistsResponse.data.transformer?.name && checkAnalyzerExistsResponse.data.transformer?.analyzer?.shortcode === analyzerShortcode) {
+        return true
+      }
+    }
+    catch (e) { }
+    commit(AnalyzerListMutations.SET_LOADING, false)
+    return false
+  },
 }

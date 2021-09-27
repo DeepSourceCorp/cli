@@ -19,13 +19,15 @@
       <div class="space-y-2 p-4" v-if="newRepos.edges && newRepos.edges.length">
         <repo-card
           v-for="repo in newRepos.edges"
+          :key="repo.node.id"
           v-bind="repo.node"
           class="hover:bg-ink-200 border rounded-lg border-ink-200"
           size="small"
           route="generate-config"
-          :key="repo.node.id"
           :removeDefaultStyle="true"
           :showInfo="false"
+          :analyzer-shortcode="analyzerShortcode"
+          :transformer-shortcode="transformerShortcode"
         ></repo-card>
       </div>
       <div v-else-if="fetchingRepos" class="space-y-2 p-4 animate-pulse">
@@ -75,7 +77,7 @@
   </z-tab-pane>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 import { ZInput, ZButton, ZIcon, ZTabPane } from '@deepsourcelabs/zeal'
 import { RepoCard } from '@/components/AddRepo'
 
@@ -101,6 +103,12 @@ export default class ActivateSingleRepo extends mixins(
   OwnerDetailMixin,
   RepoListMixin
 ) {
+  @Prop({ default: '' })
+  analyzerShortcode: string
+
+  @Prop({ default: '' })
+  transformerShortcode: string
+
   public searchCandidate = ''
   public pageSize = 20
   public repoSyncLoading = false

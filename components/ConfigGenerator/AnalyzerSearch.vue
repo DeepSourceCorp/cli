@@ -4,12 +4,18 @@
       v-model="searchCandidate"
       class="flex-grow p-2"
       v-if="!disabled"
+      :disabled="isProcessing"
       @click="toggleAnalyzerList"
       @focus="toggleAnalyzerList"
-      placeholder="Search Analyzers..."
+      :placeholder="isProcessing ? 'Processing preset...' : 'Search Analyzers...'"
     >
       <template slot="left">
-        <z-icon icon="search" size="small" class="ml-1 mr-0.5"></z-icon>
+        <z-icon
+          :icon="isProcessing ? 'spin-loader' : 'search'"
+          size="small"
+          class="ml-1 mr-0.5"
+          :class="{ 'animate-spin': isProcessing }"
+        ></z-icon>
       </template>
     </z-input>
     <div
@@ -84,6 +90,9 @@ export default class AnalyzerSearch extends Vue {
 
   @Prop({ default: 'bg-ink-300' })
   dropdownBgClass: string
+
+  @Prop({ default: false })
+  isProcessing: boolean
 
   @analyzerListStore.Getter(AnalyzerListGetters.ANALYZERS)
   analyzerList: AnalyzerInterface[]

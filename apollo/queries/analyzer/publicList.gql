@@ -1,0 +1,19 @@
+query($q: String) {
+  analyzers(q: $q) {
+    edges {
+      node {
+        shortcode
+        name
+        owner
+        descriptionRendered
+        issuesCount
+        autofixableIssuesCount
+        updatedOn
+        version
+        category
+        analyzerLogo
+        publishedOn
+      }
+    }
+  }
+}

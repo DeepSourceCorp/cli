@@ -1,18 +1,14 @@
 <template>
   <section class="w-full p-12">
-    <picture class="w-1/2 mx-auto">
-      <source :srcSet="require('~/assets/images/ui-states/empty.webp')" type="image/webp" />
-      <source :srcSet="require('~/assets/images/ui-states/empty.png')" type="image/png" />
-      <img
-        class="w-1/2 mx-auto"
-        :src="require('~/assets/images/ui-states/empty.png')"
-        alt="This page has no data"
-      />
+    <picture class="mx-auto" :class="[imageWidth]">
+      <source :srcset="webpImagePath" type="image/webp" />
+      <source :srcset="pngImagePath" type="image/png" />
+      <img :src="pngImagePath" :alt="altText" class="mx-auto" :class="[imageWidth]" />
     </picture>
     <h3 class="text-lg font-semibold text-center mt-5">
       <slot name="title"> {{ title }}</slot>
     </h3>
-    <p class="text-vanilla-400 text-center max-w-md mx-auto">
+    <p class="text-vanilla-400 text-center max-w-md mx-auto text-sm mt-3">
       <slot name="subtitle">{{ subtitle }} </slot>
     </p>
     <div class="text-center mt-5"><slot name="action"></slot></div>
@@ -28,5 +24,17 @@ export default class EmptyState extends Vue {
 
   @Prop({ required: false, default: '' })
   subtitle: string
+
+  @Prop({ default: require('~/assets/images/ui-states/empty.webp') })
+  webpImagePath: () => any
+
+  @Prop({ default: require('~/assets/images/ui-states/empty.png') })
+  pngImagePath: () => any
+
+  @Prop({ default: 'w-28' })
+  imageWidth: string
+
+  @Prop({ default: 'This page has no data' })
+  altText: string
 }
 </script>

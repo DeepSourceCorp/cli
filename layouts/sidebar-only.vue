@@ -2,7 +2,7 @@
   <div class="relative h-screen flex mx-auto overflow-hidden bg-ink-400 text-vanilla-100">
     <sidebar v-if="loggedIn" class="top-0 z-50" />
     <logged-out-sidebar v-else class="top-0 z-50" />
-    <div class="w-full overflow-y-scroll hide-scroll">
+    <div ref="scrolling-div" class="w-full overflow-y-scroll hide-scroll">
       <mobile-nav
         class="sticky h-10 lg:hidden w-full top-0 z-30 bg-ink-300 border-b border-ink-200"
       ></mobile-nav>
@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { LoggedOutSidebar, MobileNav } from '@/components/Layout'
 import { Sidebar } from '@/components/Layout/Sidebar'
 import AuthMixin from '@/mixins/authMixin'
@@ -31,5 +31,11 @@ import AuthMixin from '@/mixins/authMixin'
     }
   }
 })
-export default class SidebarOnlyLayout extends mixins(AuthMixin) {}
+export default class SidebarOnlyLayout extends mixins(AuthMixin) {
+  @Watch('$route.path')
+  resetScroll() {
+    const divThatScrolls = this.$refs['scrolling-div'] as HTMLElement
+    if (divThatScrolls) divThatScrolls.scrollTop = 0
+  }
+}
 </script>
