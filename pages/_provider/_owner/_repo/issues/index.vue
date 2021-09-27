@@ -2,7 +2,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-16-fr">
     <!-- Analyzer Tab -->
     <div
-      class="z-50 flex flex-col justify-between px-2 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
+      class="flex flex-col justify-between px-2 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
     >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"

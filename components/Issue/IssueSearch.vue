@@ -22,7 +22,7 @@
           icon="x"
           size="small"
           class="cursor-pointer"
-          :class="{ 'opacity-10': !(searchFocused || modelValue) }"
+          v-show="modelValue"
           @click="modelValue = null"
         ></z-icon>
       </template>
@@ -40,7 +40,7 @@ import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
     ZInput
   }
 })
-export default class AutofixAvailable extends Vue {
+export default class IssueSearch extends Vue {
   @ModelSync('searchCandidate', 'updateSearch', { type: String, default: null })
   readonly modelValue: string
 
