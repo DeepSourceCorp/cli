@@ -63,7 +63,7 @@ export default class Running extends mixins(RepoDetailMixin) {
   }
 
   async openIssuesPage(data: WSRepoAnalysisUpdatedPayload): Promise<void> {
-    if (data.status === RunStatus.Pend) {
+    if ([RunStatus.Pend, "pend", "PEND", "Pend"].includes(data.status)) {
       return
     }
     
