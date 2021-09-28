@@ -325,7 +325,6 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
     }
     this.$localStore.set('discover', 'selected-analyzers', this.analyzerIdList)
     this.$root.$emit('discover:update-analyzers')
-    await this.fetchDiscoverRepositories({ preferredTechnologies: this.analyzerIdList })
   }
 }
 </script>
