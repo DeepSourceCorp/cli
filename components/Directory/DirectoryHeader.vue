@@ -174,10 +174,7 @@
       :transformer-shortcode="isAnalyzer ? '' : shortcode"
       @close="showAddRepoModal = false"
     />
-    <lazy-install-autofix-modal
-      v-if="showInstallAutofixModal"
-      @close="showInstallAutofixModal = false"
-    />
+    <lazy-install-autofix-modal v-if="showInstallAutofixModal" @close="closeAutofixModal" />
   </div>
 </template>
 
@@ -258,6 +255,11 @@ export default class DirectoryHeader extends mixins(AuthMixin, OwnerDetailMixin,
   openActionModal(): void {
     if (this.isAnalyzer || (this.owner && this.owner.isAutofixEnabled)) this.showAddRepoModal = true
     else if (this.owner && !this.owner.isAutofixEnabled) this.showInstallAutofixModal = true
+  }
+
+  closeAutofixModal(): void {
+    this.showInstallAutofixModal = false
+    this.fetchOwnerDetails({ login: this.activeOwner, provider: this.activeProvider })
   }
 }
 </script>

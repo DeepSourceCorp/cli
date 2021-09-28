@@ -123,7 +123,8 @@ export default class InstallAutofixMixin extends mixins(RepoDetailMixin, OwnerDe
   }
 
   async finish(): Promise<void> {
-    await this.refetchRepo()
+    if (this.isRepoLevel)
+      await this.refetchRepo()
 
     this.clearTimers()
     this.$socket.$off('autofix-installation-complete')
