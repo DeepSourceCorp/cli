@@ -39,11 +39,8 @@
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
 import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
 
-import { AnalyzerListActions, AnalyzerListGetters } from '~/store/analyzer/list'
 import { DiscoverRepoActions } from '~/store/discover/repositories'
-import { Analyzer, Scalars } from '~/types/types'
 
-const analyzerListStore = namespace('analyzer/list')
 const discoverRepositoriesStore = namespace('discover/repositories')
 
 @Component({
@@ -55,12 +52,6 @@ const discoverRepositoriesStore = namespace('discover/repositories')
 })
 export default class Discover extends Vue {
   searchTerm = ''
-
-  @analyzerListStore.Getter(AnalyzerListGetters.GET_ANALYZER_INFO)
-  analyzerInfo: Analyzer
-
-  @analyzerListStore.Action(AnalyzerListActions.FETCH_ANALYZER_INFO)
-  fetchAnalyzerinfo: (args: { shortcode: Scalars['String']; refetch?: boolean }) => Promise<void>
 
   @discoverRepositoriesStore.Action(DiscoverRepoActions.FETCH_DISCOVER_REPOSITORIES)
   fetchDiscoverRepositories: (args?: { q: string; refetch?: boolean }) => Promise<void>

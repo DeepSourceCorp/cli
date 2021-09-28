@@ -5,18 +5,7 @@
     <loading v-if="$fetchState.pending" />
 
     <div v-else>
-      <div v-if="!discoverRepositories.edges.length">
-        <base-state title="No results found">
-          <template slot="hero">
-            <img
-              class="mx-auto mb-4"
-              :src="require('~/assets/images/ui-states/repo/empty.svg')"
-              alt="Repo Empty"
-            />
-          </template>
-        </base-state>
-      </div>
-      <div v-else class="grid gap-2">
+      <div v-if="resolveNodes(discoverRepositories).length" class="grid gap-2">
         <repo-card
           v-for="edge in discoverRepositories.edges"
           :key="edge.node.id"
@@ -32,6 +21,18 @@
           </template>
         </repo-card>
       </div>
+
+      <div v-else>
+        <base-state title="No results found">
+          <template slot="hero">
+            <img
+              class="mx-auto mb-4"
+              :src="require('~/assets/images/ui-states/repo/empty.svg')"
+              alt="Empty feed"
+            />
+          </template>
+        </base-state>
+      </div>
     </div>
   </div>
 </template>
@@ -40,13 +41,14 @@
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
 import { ZDivider, ZIcon } from '@deepsourcelabs/zeal'
 
-import BaseState from '@/components/RepoStates/BaseState.vue'
-import RepoCard from './RepoCard.vue'
-import SectionHeader from './SectionHeader.vue'
-
+import { resolveNodes } from '@/utils/array'
 import { fromNow } from '@/utils/date'
 import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
 import { Maybe, RepositoryConnection, Scalars } from '~/types/types'
+
+import BaseState from '@/components/RepoStates/BaseState.vue'
+import RepoCard from './RepoCard.vue'
+import SectionHeader from './SectionHeader.vue'
 
 const discoverRepositoriesStore = namespace('discover/repositories')
 
@@ -61,6 +63,7 @@ const discoverRepositoriesStore = namespace('discover/repositories')
 })
 export default class RepoFeed extends Vue {
   private fromNow = fromNow
+  private resolveNodes = resolveNodes
 
   @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_DISCOVER_REPOSITORIES)
   discoverRepositories: Maybe<RepositoryConnection>
