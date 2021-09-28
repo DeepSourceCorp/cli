@@ -31,7 +31,7 @@
     <div class="hidden md:grid text-vanilla-100">
       <div class="grid gap-4 px-4 grid-cols-discover">
         <!-- Discover repo feed -->
-        <repo-feed :loading="$fetchState.pending" />
+        <repo-feed :loading="loading" />
         <!-- Editor's pick repository -->
         <div>
           <editors-pick />
@@ -64,6 +64,7 @@ const discoverRepositoriesStore = namespace('discover/repositories')
 })
 export default class Discover extends Vue {
   searchTerm = ''
+  loading = false
   preferredTechnology: string[] = []
 
   @discoverRepositoriesStore.Action(DiscoverRepoActions.FETCH_DISCOVER_REPOSITORIES)
@@ -77,14 +78,19 @@ export default class Discover extends Vue {
   discoverRepositories: Maybe<RepositoryConnection>
 
   async mounted(): Promise<void> {
-    this.preferredTechnology =
-      (this.$localStore.get('discover', 'selected-analyzers') as string[]) ?? []
-    this.$root.$on('discover:update-analyzers', this.$fetch)
-    await this.$fetch()
+    this.$root.$on('discover:update-analyzers', this.getRepos)
+    await this.getRepos()
   }
 
   beforeDestroy(): void {
-    this.$root.$off('discover:update-analyzers', this.$fetch)
+    this.$root.$off('discover:update-analyzers', this.getRepos)
+  }
+
+  async getRepos(data?: string[]): Promise<void> {
+    this.loading = true
+    this.preferredTechnology = data ?? []
+    await this.$fetch()
+    this.loading = false
   }
 
   async fetch(): Promise<void> {

@@ -276,6 +276,7 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   public analyzerIdList: string[] = []
   public showInDiscoverInfoDialog = false
   public showUpdateTechnologiesModal = false
+  public debounceTimer: ReturnType<typeof setTimeout>
 
   async fetch(): Promise<void> {
     await this.fetchAnalyzers()
@@ -287,10 +288,6 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
         this.fetchWatchedRepositories()
       ])
     }
-  }
-
-  mounted() {
-    this.analyzerIdList = (this.$localStore.get('discover', 'selected-analyzers') as string[]) ?? []
   }
 
   containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
@@ -317,14 +314,18 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   }
 
   async applyFilter(id: Scalars['ID']) {
+    clearTimeout(this.debounceTimer)
+
     if (this.analyzerIdList.includes(id)) {
       const idx = this.analyzerIdList.indexOf(id)
       this.analyzerIdList.splice(idx, 1)
     } else {
       this.analyzerIdList.push(id)
     }
-    this.$localStore.set('discover', 'selected-analyzers', this.analyzerIdList)
-    this.$root.$emit('discover:update-analyzers')
+
+    this.debounceTimer = setTimeout(() => {
+      this.$root.$emit('discover:update-analyzers', this.analyzerIdList)
+    }, 600)
   }
 }
 </script>
