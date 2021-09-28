@@ -62,7 +62,7 @@
       </div>
     </div>
     <template v-if="repoListloading">
-      <div v-for="idx in pageSize" :key="idx" class="h-17 rouded bg-ink-300 animate-pulse"></div>
+      <div v-for="idx in pageSize" :key="idx" class="h-17 rounded bg-ink-300 animate-pulse"></div>
     </template>
     <transition-group
       v-else-if="repositoryList.edges && repositoryList.edges.length"

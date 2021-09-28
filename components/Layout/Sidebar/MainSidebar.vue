@@ -174,7 +174,7 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   async fetchRepoCount(refetch?: boolean): Promise<void> {
     const pageSize =
       (this.$localStore.get(
-        `${this.activeProvider}-${this.activeProvider}-all-repos`,
+        `${this.activeProvider}-${this.activeOwner}-all-repos`,
         `currentPageSize`
       ) as number) || 10
     await this.fetchRepoList({
