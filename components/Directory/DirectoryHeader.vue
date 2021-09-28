@@ -217,8 +217,8 @@ export default class DirectoryHeader extends mixins(AuthMixin, OwnerDetailMixin,
   private showInstallAutofixModal = false
 
   async fetch(): Promise<void> {
-    if (!this.isAnalyzer)
-      this.fetchOwnerDetails({ login: this.activeOwner, provider: this.activeProvider })
+    if (!this.isAnalyzer && this.loggedIn)
+      await this.fetchOwnerDetails({ login: this.activeOwner, provider: this.activeProvider })
   }
 
   mounted() {
@@ -257,9 +257,13 @@ export default class DirectoryHeader extends mixins(AuthMixin, OwnerDetailMixin,
     else if (this.owner && !this.owner.isAutofixEnabled) this.showInstallAutofixModal = true
   }
 
-  closeAutofixModal(): void {
+  async closeAutofixModal(): Promise<void> {
+    await this.fetchOwnerDetails({
+      login: this.activeOwner,
+      provider: this.activeProvider,
+      refetch: true
+    })
     this.showInstallAutofixModal = false
-    this.fetchOwnerDetails({ login: this.activeOwner, provider: this.activeProvider })
   }
 }
 </script>
