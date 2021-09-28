@@ -11,6 +11,7 @@ query($q: String) {
         shortcode
         publishedOn
         logo
+        createdAt
       }
     }
   }

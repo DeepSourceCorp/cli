@@ -75,7 +75,7 @@ export default class DirectoryCard extends Vue {
   }
 
   get isNew(): boolean {
-    return getDaysDiffInDays(Date.now(), this.infoObj.updatedOn || this.infoObj.publishedOn) <= 60
+    return getDaysDiffInDays(Date.now(), this.infoObj.createdAt) <= 30
   }
 }
 </script>

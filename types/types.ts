@@ -5246,7 +5246,7 @@ export type Unnamed_58_Query = (
             { __typename?: 'TransformerToolEdge' }
             & { node?: Maybe<(
               { __typename?: 'TransformerTool' }
-              & Pick<TransformerTool, 'id' | 'name' | 'shortcode' | 'description'>
+              & Pick<TransformerTool, 'id' | 'name' | 'shortcode' | 'logo' | 'description'>
             )> }
           )>> }
         ) }
@@ -5297,7 +5297,7 @@ export type Unnamed_60_Query = (
       { __typename?: 'AnalyzerEdge' }
       & { node?: Maybe<(
         { __typename?: 'Analyzer' }
-        & Pick<Analyzer, 'id' | 'shortcode' | 'name' | 'owner' | 'descriptionRendered' | 'issuesCount' | 'autofixableIssuesCount' | 'updatedOn' | 'version' | 'category' | 'analyzerLogo' | 'publishedOn'>
+        & Pick<Analyzer, 'id' | 'shortcode' | 'name' | 'owner' | 'descriptionRendered' | 'issuesCount' | 'autofixableIssuesCount' | 'updatedOn' | 'version' | 'category' | 'analyzerLogo' | 'publishedOn' | 'createdAt'>
       )> }
     )>> }
   )> }
@@ -7173,7 +7173,7 @@ export type Unnamed_122_Query = (
       { __typename?: 'TransformerToolEdge' }
       & { node?: Maybe<(
         { __typename?: 'TransformerTool' }
-        & Pick<TransformerTool, 'name' | 'owner' | 'descriptionRendered' | 'updatedOn' | 'language' | 'version' | 'shortcode' | 'publishedOn' | 'logo'>
+        & Pick<TransformerTool, 'name' | 'owner' | 'descriptionRendered' | 'updatedOn' | 'language' | 'version' | 'shortcode' | 'publishedOn' | 'logo' | 'createdAt'>
       )> }
     )>> }
   )> }
