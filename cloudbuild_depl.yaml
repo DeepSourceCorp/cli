@@ -22,7 +22,7 @@ steps:
 
 availableSecrets:
   secretManager:
-    - versionName: projects/66550703913/secrets/bifrost/versions/1
+    - versionName: projects/66550703913/secrets/bifrost/versions/2
       env: 'ZEAL_SECRET'
     - versionName: projects/66550703913/secrets/bifrost-sentry/versions/1
       env: 'DSN'
