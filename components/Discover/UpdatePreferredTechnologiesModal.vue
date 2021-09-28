@@ -16,7 +16,7 @@
           >
             <span class="flex items-center space-x-2">
               <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
-              <span>{{ analyzer.label }}</span>
+              <span>{{ analyzer.name }}</span>
             </span>
             <span>
               <img
@@ -36,11 +36,11 @@
 <script lang="ts">
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
 import { ZButton, ZIcon, ZModal } from '@deepsourcelabs/zeal'
-import { AnalyzerInterface, AnalyzerListActions, AnalyzerListGetters } from '~/store/analyzer/list'
 import { DiscoverUserGetters, DiscoverUserActions } from '~/store/discover/user'
-import { AnalyzerConnection, Maybe, Scalars, UpdateTechnologyPreferenceInput } from '~/types/types'
+import { Analyzer, AnalyzerConnection, Maybe, Scalars, UpdateTechnologyPreferenceInput } from '~/types/types'
+import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 
-const analyzerListStore = namespace('analyzer/list')
+const directoryStore = namespace('directory/directory')
 const discoverUserStore = namespace('discover/user')
 
 @Component({
@@ -51,10 +51,10 @@ const discoverUserStore = namespace('discover/user')
   }
 })
 export default class UpdatePreferredTechnologies extends Vue {
-  @analyzerListStore.Getter(AnalyzerListGetters.ANALYZERS)
-  analyzerList: AnalyzerInterface[]
+  @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
+  analyzerList: Analyzer[]
 
-  @analyzerListStore.Action(AnalyzerListActions.FETCH_ANALYZER_LIST)
+  @directoryStore.Action(DirectoryActions.FETCH_ANALYZER_DIR_LIST)
   fetchAnalyzers: () => Promise<void>
 
   @discoverUserStore.Getter(DiscoverUserGetters.GET_PREFERRED_TECHNOLOGIES)

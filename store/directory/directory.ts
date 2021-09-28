@@ -58,6 +58,7 @@ export const state = (): DirectoryModuleState => ({
 export type DirectoryActionContext = ActionContext<DirectoryModuleState, RootState>
 
 export const getters: GetterTree<DirectoryModuleState, RootState> = {
+  //! Also used by Discover components
   [DirectoryGetters.DIRECTORY_ANALYZERS]: (state) => {
     return resolveNodes(state.analyzerList) as Analyzer[]
   },
@@ -146,6 +147,7 @@ interface DirectoryModuleActions extends ActionTree<DirectoryModuleState, RootSt
 }
 
 export const actions: DirectoryModuleActions = {
+  //! Also used by Discover components
   async [DirectoryActions.FETCH_ANALYZER_DIR_LIST]({ commit }, args) {
     commit(DirectoryMutations.SET_LOADING, true)
     await this.$fetchGraphqlData(AnalyzersGQLPublicQuery, args)

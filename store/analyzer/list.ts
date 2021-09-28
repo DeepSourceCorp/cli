@@ -1,11 +1,10 @@
 import { GetterTree, ActionTree, MutationTree, Store, ActionContext } from 'vuex'
 import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
-import { AnalyzerConnection, Analyzer, TransformerTool, PageInfo, Scalars } from '~/types/types'
+import { AnalyzerConnection, Analyzer, TransformerTool, PageInfo } from '~/types/types'
 import { RootState } from '~/store'
 
 import AnalyzersGQLQuery from '~/apollo/queries/analyzer/list.gql'
-import AnalyzerInfoGQLQuery from '~/apollo/queries/analyzer/info.gql'
 import CheckAnalyzerExistsQuery from '~/apollo/queries/analyzer/checkExists.gql'
 import CheckTransformerExistsQuery from '~/apollo/queries/transformer/checkExists.gql'
 
@@ -63,7 +62,6 @@ export enum AnalyzerListMutations {
 export interface AnalyzerListModuleState {
   loading: boolean
   error: Record<string, any>
-  analyzerInfo: Analyzer
   analyzerList: AnalyzerConnection
 }
 
@@ -71,7 +69,6 @@ export const state = (): AnalyzerListModuleState => ({
   ...(<AnalyzerListModuleState>{
     loading: false,
     error: {},
-    analyzerInfo: {} as Analyzer,
     analyzerList: {
       pageInfo: {} as PageInfo,
       edges: []
@@ -80,11 +77,8 @@ export const state = (): AnalyzerListModuleState => ({
 })
 
 export type AnalyzerListActionContext = ActionContext<AnalyzerListModuleState, RootState>
-
+//! DO NOT MODIFY, unless changing /generate-config logic
 export const getters: GetterTree<AnalyzerListModuleState, RootState> = {
-  [AnalyzerListGetters.GET_ANALYZER_INFO]: (state) => {
-    return state.analyzerInfo
-  },
   [AnalyzerListGetters.ANALYZERS]: (state) => {
     // Make sure all edges have nodes
     const analyzers: Array<Analyzer> = []
@@ -97,8 +91,7 @@ export const getters: GetterTree<AnalyzerListModuleState, RootState> = {
 
     return analyzers.map((node) => {
       return {
-        id: node.id,
-        name: node.name,
+        name: node.shortcode,
         shortcode: node.shortcode,
         label: node.name,
         analyzerLogo: node.analyzerLogo,
@@ -118,10 +111,6 @@ export const getters: GetterTree<AnalyzerListModuleState, RootState> = {
 interface AnalyzerListModuleMutations extends MutationTree<AnalyzerListModuleState> {
   [AnalyzerListMutations.SET_LOADING]: (state: AnalyzerListModuleState, value: boolean) => void
   [AnalyzerListMutations.SET_ERROR]: (state: AnalyzerListModuleState, error: GraphqlError) => void
-  [AnalyzerListMutations.SET_ANALYZER_INFO]: (
-    state: AnalyzerListModuleState,
-    analyzerList: Analyzer
-  ) => void
   [AnalyzerListMutations.SET_ANALYZER_LIST]: (
     state: AnalyzerListModuleState,
     analyzerList: AnalyzerConnection
@@ -135,20 +124,12 @@ export const mutations: AnalyzerListModuleMutations = {
   [AnalyzerListMutations.SET_ERROR]: (state, error) => {
     state.error = Object.assign({}, state.error, error)
   },
-  [AnalyzerListMutations.SET_ANALYZER_INFO]: (state, analyzerInfo) => {
-    state.analyzerInfo = analyzerInfo
-  },
   [AnalyzerListMutations.SET_ANALYZER_LIST]: (state, analyzerList) => {
     state.analyzerList = Object.assign({}, state.analyzerList, analyzerList)
   }
 }
 
 interface AnalyzerListModuleActions extends ActionTree<AnalyzerListModuleState, RootState> {
-  [AnalyzerListActions.FETCH_ANALYZER_INFO]: (
-    this: Store<RootState>,
-    injectee: AnalyzerListActionContext,
-    args: { refetch?: boolean; shortcode: Scalars['String'] }
-  ) => Promise<void>
   [AnalyzerListActions.FETCH_ANALYZER_LIST]: (
     this: Store<RootState>,
     injectee: AnalyzerListActionContext
@@ -168,20 +149,6 @@ interface AnalyzerListModuleActions extends ActionTree<AnalyzerListModuleState, 
 }
 
 export const actions: AnalyzerListModuleActions = {
-  async [AnalyzerListActions.FETCH_ANALYZER_INFO]({ commit }, args) {
-    try {
-      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
-        AnalyzerInfoGQLQuery,
-        args,
-        args.refetch
-      )
-      commit(AnalyzerListMutations.SET_ANALYZER_INFO, response.data.analyzer)
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(AnalyzerListMutations.SET_ANALYZER_INFO, {})
-      commit(AnalyzerListMutations.SET_ERROR, error)
-    }
-  },
   async [AnalyzerListActions.FETCH_ANALYZER_LIST]({ commit }) {
     commit(AnalyzerListMutations.SET_LOADING, true)
     await this.$fetchGraphqlData(AnalyzersGQLQuery, {})

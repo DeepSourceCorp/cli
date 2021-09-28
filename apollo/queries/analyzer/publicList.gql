@@ -2,6 +2,7 @@ query($q: String) {
   analyzers(q: $q) {
     edges {
       node {
+        id
         shortcode
         name
         owner

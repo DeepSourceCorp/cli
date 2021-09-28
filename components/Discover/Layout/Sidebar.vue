@@ -225,12 +225,12 @@ import AuthMixin from '~/mixins/authMixin'
 
 import { UpdatePreferredTechnologies } from '~/components/Discover'
 
-import { AnalyzerInterface, AnalyzerListActions, AnalyzerListGetters } from '~/store/analyzer/list'
+import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { DiscoverUserActions, DiscoverUserGetters } from '~/store/discover/user'
-import { AnalyzerConnection, RepositoryConnection, Scalars } from '~/types/types'
+import { Analyzer, AnalyzerConnection, RepositoryConnection, Scalars } from '~/types/types'
 import { DiscoverRepoActions } from '~/store/discover/repositories'
 
-const analyzerListStore = namespace('analyzer/list')
+const directoryStore = namespace('directory/directory')
 const discoverUserStore = namespace('discover/user')
 const discoverRepositoriesStore = namespace('discover/repositories')
 
@@ -244,10 +244,10 @@ const discoverRepositoriesStore = namespace('discover/repositories')
   }
 })
 export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
-  @analyzerListStore.Getter(AnalyzerListGetters.ANALYZERS)
-  analyzerList: AnalyzerInterface[]
+  @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
+  analyzerList: Analyzer[]
 
-  @analyzerListStore.Action(AnalyzerListActions.FETCH_ANALYZER_LIST)
+  @directoryStore.Action(DirectoryActions.FETCH_ANALYZER_DIR_LIST)
   fetchAnalyzers: () => Promise<void>
 
   @discoverUserStore.Getter(DiscoverUserGetters.GET_PREFERRED_TECHNOLOGIES)

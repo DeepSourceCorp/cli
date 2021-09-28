@@ -1,5 +1,0 @@
-query($shortcode: String!) {
-  analyzer(shortcode: $shortcode) {
-    id
-  }
-}
