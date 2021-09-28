@@ -63,7 +63,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     // A next URL with installation will happen only if the user is
     // coming from GitHub marketplace installation
     // Removing this snippet will break marketplace installation
-    if (nextUrl.startsWith('/installation')) {
+    if (nextUrl?.startsWith('/installation')) {
       this.$router.push(nextUrl)
       return
     }
