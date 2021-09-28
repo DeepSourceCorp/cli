@@ -2,7 +2,9 @@
   <div :class="{ 'md:mt-4': editorsPickRepository.fullName }">
     <section-header title="Trending" />
 
-    <loading v-if="$fetchState.pending" />
+    <div v-if="$fetchState.pending" class="grid gap-2 animate-pulse">
+      <div v-for="ii in 5" :key="ii" class="rounded-md h-17 bg-ink-300"/>
+    </div>
 
     <div v-else class="grid gap-2">
       <repo-card

@@ -1055,10 +1055,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@deepsourcelabs/zeal@^0.7.13":
-  version "0.7.13"
-  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.7.13/a4990ada5c1ff6f4bdcb57c6abde38cfe6bcc85e234e7fbf1b15c32d88fdb7ec#09b5eb658a2f3c29c4fb6d1392c41fe9de91488e"
-  integrity sha512-5posn+1uOj73Pi77ZH1IhUrnxL0JA991fPhIgSIWf8ENviHoI52hiByNWWzOU+r6WbT82HUD37xfYu15iEkexg==
+"@deepsourcelabs/zeal@^0.7.15":
+  version "0.7.15"
+  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.7.15/33665fba809c6f6da40cdbc40a20b3bbe69272e9c01e51f838af1b88ffa77903#79439048c17391aef63edcb4585942b4fbd79e27"
+  integrity sha512-27UH9eN06J+xWnChURsyqOrZhD5CzpMTJNU5k/FDyVoVT58agHmixIP8MBbFhGIqNDsnsNlNSz7q4ezO9mDesw==
   dependencies:
     "@tailwindcss/line-clamp" "^0.2.1"
     "@tailwindcss/postcss7-compat" "^2.2.8"

@@ -1,13 +1,9 @@
 <template>
-  <div>
-    <loading v-if="$fetchState.pending" />
+  <div v-if="editorsPickRepository.fullName">
+    <section-header title="Editor's pick" />
 
-    <div v-else-if="editorsPickRepository.fullName">
-      <section-header title="Editor's pick" />
-
-      <div class="p-0.5 rounded-lg bg-gradient-dawn">
-        <repo-card :show-info="false" :repo-info="editorsPickRepository" class="bg-ink-400" />
-      </div>
+    <div class="p-0.5 rounded-lg bg-gradient-dawn">
+      <repo-card :show-info="false" :repo-info="editorsPickRepository" class="bg-ink-400" />
     </div>
   </div>
 </template>

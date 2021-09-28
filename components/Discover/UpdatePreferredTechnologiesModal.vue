@@ -1,8 +1,8 @@
 <template>
   <portal to="modal">
-    <z-modal title="Update technology preference" width="wide" @onClose="$emit('close')">
+    <z-modal title="Select your favourite languages" width="wide" @onClose="$emit('close')">
       <div>
-        <ul class="grid grid-cols-2 md:grid-cols-3 gap-2 p-6">
+        <ul class="grid grid-cols-2 gap-3 p-4 md:grid-cols-3">
           <li
             v-for="analyzer in analyzerList"
             :key="analyzer.name"
@@ -37,7 +37,13 @@
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
 import { ZButton, ZIcon, ZModal } from '@deepsourcelabs/zeal'
 import { DiscoverUserGetters, DiscoverUserActions } from '~/store/discover/user'
-import { Analyzer, AnalyzerConnection, Maybe, Scalars, UpdateTechnologyPreferenceInput } from '~/types/types'
+import {
+  Analyzer,
+  AnalyzerConnection,
+  Maybe,
+  Scalars,
+  UpdateTechnologyPreferenceInput
+} from '~/types/types'
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 
 const directoryStore = namespace('directory/directory')

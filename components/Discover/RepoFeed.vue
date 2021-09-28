@@ -1,9 +1,9 @@
 <template>
   <div>
     <section-header title="Recommended projects" />
-
-    <loading v-if="$fetchState.pending" />
-
+    <div v-if="loading" class="grid gap-2 animate-pulse">
+      <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300" />
+    </div>
     <div v-else>
       <div v-if="resolveNodes(discoverRepositories).length" class="grid gap-2">
         <repo-card
@@ -38,13 +38,13 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, namespace, Vue } from 'nuxt-property-decorator'
 import { ZDivider, ZIcon } from '@deepsourcelabs/zeal'
 
 import { resolveNodes } from '@/utils/array'
 import { fromNow } from '@/utils/date'
-import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
-import { Maybe, RepositoryConnection, Scalars } from '~/types/types'
+import { DiscoverRepoGetters } from '~/store/discover/repositories'
+import { Maybe, RepositoryConnection } from '~/types/types'
 
 import BaseState from '@/components/RepoStates/BaseState.vue'
 import RepoCard from './RepoCard.vue'
@@ -62,21 +62,24 @@ const discoverRepositoriesStore = namespace('discover/repositories')
   }
 })
 export default class RepoFeed extends Vue {
+  @Prop({ default: false })
+  loading: boolean
+
   private fromNow = fromNow
   private resolveNodes = resolveNodes
 
   @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_DISCOVER_REPOSITORIES)
   discoverRepositories: Maybe<RepositoryConnection>
 
-  @discoverRepositoriesStore.Action(DiscoverRepoActions.FETCH_DISCOVER_REPOSITORIES)
-  fetchDiscoverRepositories: (args?: {
-    name_Icontains?: string
-    preferredTechnologies?: Array<Scalars['ID']>
-    refetch?: boolean
-  }) => Promise<void>
+  // @discoverRepositoriesStore.Action(DiscoverRepoActions.FETCH_DISCOVER_REPOSITORIES)
+  // fetchDiscoverRepositories: (args?: {
+  //   name_Icontains?: string
+  //   preferredTechnologies?: Array<Scalars['ID']>
+  //   refetch?: boolean
+  // }) => Promise<void>
 
-  async fetch() {
-    await this.fetchDiscoverRepositories()
-  }
+  // async fetch() {
+  //   await this.fetchDiscoverRepositories()
+  // }
 }
 </script>

@@ -8,20 +8,25 @@
         <span class="pr-2 font-semibold text-vanilla-100 line-clamp-1">
           {{ repoInfo.fullName }}
         </span>
-        <span class="flex-shrink-0 block text-sm md:flex">
-          <img
-            :key="repoInfo.id"
-            v-tooltip="repoInfo.isWatched ? 'Remove from watchlist' : 'Add to watchlist'"
-            :src="
-              require(`~/assets/images/discover/${
-                repoInfo.isWatched ? 'watched-repo-icon.svg' : 'unwatched-repo-icon.svg'
-              }`)
-            "
-            alt="Watch list"
-            :class="showInfo ? 'h-4 w-4' : 'h-3 w-3'"
-            role="button"
+        <span v-if="this.loggedIn" class="flex-shrink-0 block text-sm md:flex">
+          <button
+            :disabled="updatingWatchlist"
+            class="focus:outline-none"
             @click.stop.prevent="updateWatchList(repoInfo.id, repoInfo.isWatched)"
-          />
+          >
+            <z-icon
+              v-if="updatingWatchlist"
+              icon="spin-loader"
+              color="juniper"
+              class="animate-spin"
+            />
+            <z-icon
+              v-else
+              v-tooltip="repoInfo.isWatched ? 'Remove from watchlist' : 'Add to watchlist'"
+              :key="repoInfo.id"
+              :icon="repoInfo.isWatched ? 'remove-watchlist' : 'add-watchlist'"
+            />
+          </button>
         </span>
       </div>
     </template>
@@ -119,14 +124,14 @@ export default class RepoCard extends mixins(AuthMixin) {
   @Prop({ default: true })
   showInfo: boolean
 
+  updatingWatchlist = false
+
   get issuesPageUrl(): string {
     return `/gh/${this.repoInfo?.fullName}/issues`
   }
 
   public async updateWatchList(id: string, isWatched: boolean): Promise<void> {
-    if (!this.loggedIn) {
-      return this.$toast.info('Please sign in to update the watchlist')
-    }
+    this.updatingWatchlist = true
 
     const { Add, Remove } = ActionChoice
     try {
@@ -146,6 +151,7 @@ export default class RepoCard extends mixins(AuthMixin) {
     } catch (err) {
       this.$toast.danger('Something went wrong while updating the watchlist')
     }
+    this.updatingWatchlist = false
   }
 }
 </script>

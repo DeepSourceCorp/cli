@@ -20,7 +20,7 @@
           :show-border="false"
           :name="searchTerm"
           class="mt-6 rounded-md shadow-lg"
-          @debounceInput="searchRepo"
+          @debounceInput="$fetch"
         >
           <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
         </z-input>
@@ -28,7 +28,18 @@
     </div>
 
     <!-- Layout for larger screens -->
-    <grid-layout />
+    <div class="hidden md:grid text-vanilla-100">
+      <div class="grid gap-4 px-4 grid-cols-discover">
+        <!-- Discover repo feed -->
+        <repo-feed :loading="$fetchState.pending" />
+        <!-- Editor's pick repository -->
+        <div>
+          <editors-pick />
+          <!-- Trending repositories -->
+          <trending />
+        </div>
+      </div>
+    </div>
 
     <!-- Mobile layout -->
     <tab-layout />
@@ -39,7 +50,8 @@
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
 import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
 
-import { DiscoverRepoActions } from '~/store/discover/repositories'
+import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
+import { Maybe, RepositoryConnection } from '~/types/types'
 
 const discoverRepositoriesStore = namespace('discover/repositories')
 
@@ -52,12 +64,34 @@ const discoverRepositoriesStore = namespace('discover/repositories')
 })
 export default class Discover extends Vue {
   searchTerm = ''
+  preferredTechnology: string[] = []
 
   @discoverRepositoriesStore.Action(DiscoverRepoActions.FETCH_DISCOVER_REPOSITORIES)
-  fetchDiscoverRepositories: (args?: { q: string; refetch?: boolean }) => Promise<void>
+  fetchDiscoverRepositories: (args?: {
+    q: string
+    preferredTechnologies: string[]
+    refetch?: boolean
+  }) => Promise<void>
 
-  async searchRepo() {
-    await this.fetchDiscoverRepositories({ q: this.searchTerm })
+  @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_DISCOVER_REPOSITORIES)
+  discoverRepositories: Maybe<RepositoryConnection>
+
+  async mounted(): Promise<void> {
+    this.preferredTechnology =
+      (this.$localStore.get('discover', 'selected-analyzers') as string[]) ?? []
+    this.$root.$on('discover:update-analyzers', this.$fetch)
+    await this.$fetch()
+  }
+
+  beforeDestroy(): void {
+    this.$root.$off('discover:update-analyzers', this.$fetch)
+  }
+
+  async fetch(): Promise<void> {
+    await this.fetchDiscoverRepositories({
+      q: this.searchTerm,
+      preferredTechnologies: this.preferredTechnology
+    })
   }
 }
 </script>

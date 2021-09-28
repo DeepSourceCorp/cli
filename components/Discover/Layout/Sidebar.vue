@@ -58,23 +58,21 @@
         </nuxt-link>
 
         <div v-if="loggedIn && !isCollapsed" class="mt-2 border rounded-sm border-ink-200">
-          <sidebar-item
-            :isCollapsed="isCollapsed"
-            icon="heart"
-            class="border-b rounded-none border-ink-200"
+          <button
+            v-tooltip="'Update your favourites'"
+            class="flex items-center justify-between w-full px-2 py-1 text-sm rounded-none hover:bg-ink-300 focus:outline-none"
+            @click="showUpdateTechnologiesModal = true"
           >
             Favourites
-            <span class="float-right mt-0.5"
-              ><z-icon icon="edit-2" @click="showUpdateTechnologiesModal = true"
-            /></span>
-          </sidebar-item>
+            <z-icon icon="edit-2" />
+          </button>
           <div
             v-if="
               preferredTechnologies &&
               preferredTechnologies.edges &&
               preferredTechnologies.edges.length
             "
-            class="grid grid-cols-6 gap-1 p-1"
+            class="grid grid-cols-6 gap-1.5 p-2 border-t border-ink-200"
           >
             <img
               v-for="edge in preferredTechnologies.edges"
@@ -91,13 +89,15 @@
         <span class="text-xs font-medium tracking-wider uppercase text-vanilla-400"
           >Filter by technology</span
         >
-        <div class="flex flex-wrap gap-2 mt-2">
+        <div class="flex flex-wrap gap-1.5 mt-2">
           <div
             v-for="analyzer in analyzerList"
             :key="analyzer.id"
-            class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer text-vanilla-100"
+            class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
             :class="[
-              analyzerIdList.includes(analyzer.id) ? 'bg-robin' : 'bg-ink-200 hover:bg-ink-100'
+              analyzerIdList.includes(analyzer.id)
+                ? 'bg-ink-50'
+                : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
             ]"
             role="button"
             @click="applyFilter(analyzer.id)"
@@ -108,7 +108,7 @@
               :alt="analyzer.name"
               class="flex-shrink-0 w-auto h-4"
             />
-            <span class="text-xs text-vanilla-400"> {{ analyzer.name }} </span>
+            <span class="text-xs"> {{ analyzer.name }} </span>
           </div>
         </div>
       </div>
@@ -273,7 +273,7 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   public collapsedSidebar = false
   public toggleCollapsed = false
   public isOpen = false
-  public analyzerIdList: Array<Scalars['ID']> = []
+  public analyzerIdList: string[] = []
   public showInDiscoverInfoDialog = false
   public showUpdateTechnologiesModal = false
 
@@ -290,13 +290,7 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   }
 
   mounted() {
-    this.isCollapsed = Boolean(this.$localStore.get('ui-state', 'sidebar-collapsed'))
-    this.collapsedSidebar = Boolean(this.$localStore.get('ui-state', 'sidebar-collapsed'))
-    this.$root.$on('ui:show-sidebar-menu', () => {
-      this.isCollapsed = false
-      this.collapsedSidebar = false
-      this.isOpen = true
-    })
+    this.analyzerIdList = (this.$localStore.get('discover', 'selected-analyzers') as string[]) ?? []
   }
 
   containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
@@ -329,6 +323,8 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
     } else {
       this.analyzerIdList.push(id)
     }
+    this.$localStore.set('discover', 'selected-analyzers', this.analyzerIdList)
+    this.$root.$emit('discover:update-analyzers')
     await this.fetchDiscoverRepositories({ preferredTechnologies: this.analyzerIdList })
   }
 }
