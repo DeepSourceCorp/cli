@@ -1,5 +1,5 @@
-query($q: String) {
-  discoverRepositories(q: $q) {
+query($preferredTechnologies: [ID], $q: String) {
+  discoverRepositories(preferredTechnologies: $preferredTechnologies, q: $q) {
     totalCount
     edges {
       node {
