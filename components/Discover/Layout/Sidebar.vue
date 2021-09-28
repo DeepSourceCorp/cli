@@ -5,21 +5,7 @@
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
     <section class="p-4 border-b border-ink-200">
-      <div class="flex items-center space-x-2 leading-none">
-        <z-icon
-          icon="logo"
-          size="small"
-          color="vanilla-100"
-          class="flex-shrink-0 min-w-4 min-h-4"
-        />
-        <span
-          :class="{
-            'opacity-0 hidden delay-300': isCollapsed,
-            'opacity-1 flex delay-0': !isCollapsed
-          }"
-          >deepsource</span
-        >
-      </div>
+      <img class="w-auto h-5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
     </section>
 
     <section
