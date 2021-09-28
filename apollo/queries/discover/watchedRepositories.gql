@@ -1,0 +1,28 @@
+query {
+  viewer {
+    id
+    preference {
+      watchedRepositories {
+        totalCount
+        edges {
+          node {
+            id
+            modifiedAt
+            name
+            description
+            vcsProvider
+            fullName
+            recommendedIssueCount
+            isWatched
+            primaryAnalyzer {
+              id
+              name
+              shortcode
+              analyzerLogo
+            }
+          }
+        }
+      }
+    }
+  }
+}

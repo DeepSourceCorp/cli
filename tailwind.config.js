@@ -31,7 +31,7 @@ module.exports = {
     extend: {
       translate: ['group-hover'],
       cursor: ['hover'],
-      borderStyle: ['hover', 'focus'],
+      borderStyle: ['hover', 'focus']
     }
   },
   theme: {
@@ -43,8 +43,9 @@ module.exports = {
         98: '27rem'
       },
       gridTemplateColumns: {
-        support: '5fr 7fr'
-      },
+        support: '5fr 7fr',
+        discover: '8fr 4fr'
+      }
     }
   }
 }

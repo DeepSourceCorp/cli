@@ -107,6 +107,24 @@ declare module '*/addTransformerFeedback.gql' {
 }
     
 
+declare module '*/updateTechnologyPreference.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/updateWatchedRepositories.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/bitbucketInstallationLandingInput.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -611,6 +629,15 @@ declare module '*/detailed.gql' {
 }
     
 
+declare module '*/info.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/list.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -649,6 +676,51 @@ declare module '*/socialAuthUrls.gql' {
     
 
 declare module '*/context.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/discoverRepositories.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/editorsPickRepository.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/preferredTechnologies.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/trendingRepositories.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/watchedRepositories.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

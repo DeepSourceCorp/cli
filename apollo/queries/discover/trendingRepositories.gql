@@ -1,0 +1,22 @@
+query {
+  trendingRepositories {
+    totalCount
+    edges {
+      node {
+        id
+        name
+        description
+        vcsProvider
+        fullName
+        recommendedIssueCount
+        isWatched
+        primaryAnalyzer {
+          id
+          name
+          shortcode
+          analyzerLogo
+        }
+      }
+    }
+  }
+}

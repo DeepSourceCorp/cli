@@ -1,0 +1,16 @@
+query {
+  editorsPickRepository {
+    id
+    name
+    description
+    fullName
+    recommendedIssueCount
+    isWatched
+    primaryAnalyzer {
+      id
+      name
+      shortcode
+      analyzerLogo
+    }
+  }
+}

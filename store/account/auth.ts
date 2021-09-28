@@ -79,12 +79,16 @@ export const mutations: AuthModuleMutations = {
   },
   [AuthMutationTypes.SET_LOGGED_IN]: (state, token: string) => {
     try {
-      const decodeStr = process.client ? atob : require('atob')
-      const data = JSON.parse(decodeStr(token.split('.')[1]))
-      state.tokenExpiresIn = data.exp
-      state.token = token
-    } catch (e) {}
-    state.loggedIn = true
+      if (token) {
+        const decodeStr = process.client ? atob : require('atob')
+        const data = JSON.parse(decodeStr(token.split('.')[1]))
+        state.loggedIn = true
+        state.token = token
+        state.tokenExpiresIn = data.exp
+      }
+    } catch (e) {
+    	state.loggedIn = false
+    }
   },
   [AuthMutationTypes.SET_LOGGED_OUT]: (state) => {
     state.loggedIn = false
@@ -148,10 +152,9 @@ export const actions: AuthModuleActions = {
     try {
       await this.$applyGraphqlMutation(logoutMutation, {}, null, false)
       commit(AuthMutationTypes.SET_LOGGED_OUT)
-      if (window.Intercom && typeof window.Intercom === "function") {
+      if (window.Intercom && typeof window.Intercom === 'function') {
         Intercom('shutdown')
-        if (window.intercomSettings)
-          Intercom('boot', window.intercomSettings)
+        if (window.intercomSettings) Intercom('boot', window.intercomSettings)
       }
     } catch (e) {
       throw new Error('Something went wrong while logging you out.')

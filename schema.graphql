@@ -1240,6 +1240,7 @@ type Query {
   repository(name: String!, owner: String!, provider: VCSProviderChoices!): Repository
   trendingRepositories(count: Int = 5, offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   editorsPickRepository: Repository
+  discoverRepositories(preferredTechnologies: [ID] = [], q: String = "", offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   context: Context
   node(id: ID!): MaskPrimaryKeyNode
 }

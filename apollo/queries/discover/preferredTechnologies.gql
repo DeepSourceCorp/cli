@@ -1,0 +1,15 @@
+query {
+  viewer {
+    id
+    preferredTechnologies {
+      totalCount
+      edges {
+        node {
+          id
+          shortcode
+          analyzerLogo
+        }
+      }
+    }
+  }
+}

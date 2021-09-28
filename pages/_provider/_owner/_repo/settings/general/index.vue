@@ -164,6 +164,32 @@
         </div>
       </div>
     </form-group>
+
+    <z-divider margin="my-2 mx-0" />
+
+    <form-group>
+      <div class="relative">
+        <button-input
+          label="Add to discover"
+          inputId="add-to-discover"
+          :buttonLabel="repository.showInDiscover ? 'Remove your project' : 'Add your project'"
+          inputWidth="x-small"
+          @click="updateDiscoverFeedPreference"
+        >
+          <template slot="description">
+            Add your repository to
+            <nuxt-link to="/discover" class="text-juniper font-medium">Discover</nuxt-link> to allow
+            others to find issues and fix them.
+          </template>
+        </button-input>
+
+        <div class="absolute top-0 left-full px-4">
+          <info-banner
+            info="Control whether your repository is listed on Discover.Once listed, other users would be able to find your repository, and look at the detected issues."
+          />
+        </div>
+      </div>
+    </form-group>
   </div>
 </template>
 
@@ -296,17 +322,18 @@ export default class General extends mixins(
 
   async fetch(): Promise<void> {
     this.isFetchingData = true
-    await this.$store.dispatch(
-      `repository/detail/${RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_GENERAL}`,
-      {
-        provider: this.$route.params.provider,
-        owner: this.$route.params.owner,
-        name: this.$route.params.repo
-      }
-    )
+    await this.fetchRepoSettings()
     this.populateValue()
     this.refinedIssueTypeSettings()
     this.isFetchingData = false
+  }
+
+  public async fetchRepoSettings() {
+    await this.fetchRepositorySettingsGeneral({
+      provider: this.$route.params.provider,
+      owner: this.$route.params.owner,
+      name: this.$route.params.repo
+    })
   }
 
   public refinedIssueTypeSettings(): void {
@@ -341,6 +368,14 @@ export default class General extends mixins(
     }
   }
 
+  public showSuccessToast() {
+    this.$toast.show({
+      type: 'success',
+      message: 'Repository settings updated successfully',
+      timeout: 5
+    })
+  }
+
   public async updateRepositorySettings(showSuccess = true): Promise<void> {
     if (
       this.repository?.id &&
@@ -362,11 +397,7 @@ export default class General extends mixins(
         }
       })
       if (showSuccess) {
-        this.$toast.show({
-          type: 'success',
-          message: 'Repository settings updated successfully',
-          timeout: 5
-        })
+        this.showSuccessToast()
       }
     }
   }
@@ -414,6 +445,18 @@ export default class General extends mixins(
 
   public updateHoverStyle(isHover: boolean): void {
     this.isHovered = isHover
+  }
+
+  public async updateDiscoverFeedPreference() {
+    await this.updateRepoSettings({
+      input: {
+        id: this.repository.id,
+        showInDiscover: !this.repository.showInDiscover
+      }
+    })
+    await this.fetchRepoSettings()
+
+    this.showSuccessToast()
   }
 }
 </script>

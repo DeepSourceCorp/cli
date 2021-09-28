@@ -1,6 +1,6 @@
 <template>
   <aside
-    class="absolute h-screen duration-200 flex flex-col border-r transition-width transform-gpu lg:relative lg:left-0 border-ink-200 group bg-ink-400"
+    class="absolute flex flex-col h-screen duration-200 border-r transition-width transform-gpu lg:relative lg:left-0 border-ink-200 group bg-ink-400"
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
@@ -68,7 +68,7 @@
         Settings
       </sidebar-item>
     </section>
-    <section class="justify-self-end self-end w-full relative group">
+    <section class="relative self-end w-full justify-self-end group">
       <div class="p-2.5 border-t border-ink-200 space-y-2">
         <sidebar-item
           to="/support"
@@ -105,10 +105,10 @@
             icon="logo"
             size="small"
             color="vanilla-100"
-            class="min-w-4 min-h-4 flex-shrink-0"
+            class="flex-shrink-0 min-w-4 min-h-4"
           ></z-icon>
           <span
-            class="text-xs text-vanilla-300 self-end transition-all"
+            class="self-end text-xs transition-all text-vanilla-300"
             :class="{
               'opacity-0 hidden delay-300': isCollapsed,
               'opacity-1 flex delay-0': !isCollapsed
@@ -120,13 +120,13 @@
       <div class="absolute -top-2.5 -right-2.5 md:group-hover:block hidden">
         <button
           @click="toggleSidebarCollapse"
-          class="bg-ink-100 w-5 h-5 flex items-center justify-center rounded-full hover:bg-slate cursor-pointer group focus:outline-none"
+          class="flex items-center justify-center w-5 h-5 rounded-full cursor-pointer bg-ink-100 hover:bg-slate group focus:outline-none"
         >
           <z-icon
             icon="chevron-left"
             size="small"
             color="vanilla-400"
-            class="transition-transform transform-gpu duration-300"
+            class="transition-transform duration-300 transform-gpu"
             :class="isCollapsed ? 'rotate-180' : ''"
           />
         </button>
