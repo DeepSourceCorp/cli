@@ -139,11 +139,12 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 
 	// Extract `optional_required` fields of analyzer meta of selected analyzers
 	for _, activatedAnalyzer := range o.ActivatedAnalyzers {
+		analyzerShortcode := utils.AnalyzersData.AnalyzersMap[activatedAnalyzer]
 		// Assigning optional fields to nil before checking for an analyzer
 		optionalFields = nil
 		requiredMetaData = nil
 
-		analyzerMeta := utils.AnalyzersData.AnalyzersMetaMap[activatedAnalyzer]
+		analyzerMeta := utils.AnalyzersData.AnalyzersMetaMap[analyzerShortcode]
 		// Parse the analyzer meta of the analyzer using `gabs`
 		jsonParsed, err := gabs.ParseJSON([]byte(analyzerMeta))
 		if err != nil {
