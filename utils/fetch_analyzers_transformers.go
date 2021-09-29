@@ -8,47 +8,39 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/transformers"
 )
 
-// Options holds the metadata.
-type AnalyzersData struct {
+type DeepSourceAnalyzersData struct {
 	AnalyzerNames      []string
 	AnalyzerShortcodes []string
 	AnalyzersMap       map[string]string // Map for {analyzer name : shortcode}
 	AnalyzersMeta      []string
-	AnalyzersData      []analyzers.Analyzer
 	AnalyzersMetaMap   map[string]string // Map for {analyzer name: analyzer meta-schema}
 }
 
-type TransformersData struct {
+type DeepSourceTransformersData struct {
 	TransformerNames      []string
 	TransformerShortcodes []string
 	TransformerMap        map[string]string // Map for {transformer name:shortcode}
-	TransformersData      []transformers.Transformer
 }
 
-var AnaData AnalyzersData
-var TrData TransformersData
+var AnalyzersData DeepSourceAnalyzersData
+var TransformersData DeepSourceTransformersData
+
+var AnalyzersAPIResponse []analyzers.Analyzer
+var TransformersAPIResponse []transformers.Transformer
 
 // Get the list of all the supported analyzers and transformers with
 // their corresponding data like shortcode, metaschema etc.
-func GetAnalyzersAndTransformersData() error {
-	var err error
-	// Fetch the client
-	deepsource, err := deepsource.New()
-	if err != nil {
-		return err
-	}
-	ctx := context.Background()
-
+func GetAnalyzersAndTransformersData(ctx context.Context, deepsource deepsource.Client) (err error) {
 	// Get supported analyzers and transformers data
-	AnaData.AnalyzersMap = make(map[string]string)
-	TrData.TransformerMap = make(map[string]string)
+	AnalyzersData.AnalyzersMap = make(map[string]string)
+	TransformersData.TransformerMap = make(map[string]string)
 
-	AnaData.AnalyzersData, err = deepsource.GetSupportedAnalyzers(ctx)
+	AnalyzersAPIResponse, err = deepsource.GetSupportedAnalyzers(ctx)
 	if err != nil {
 		return err
 	}
 
-	TrData.TransformersData, err = deepsource.GetSupportedTransformers(ctx)
+	TransformersAPIResponse, err = deepsource.GetSupportedTransformers(ctx)
 	if err != nil {
 		return err
 	}
@@ -59,21 +51,21 @@ func GetAnalyzersAndTransformersData() error {
 // Parses the SDK response of analyzers and transformers data into the format required
 // by the validator and generator package
 func parseSDKResponse() {
-	AnaData.AnalyzersMap = make(map[string]string)
-	AnaData.AnalyzersMetaMap = make(map[string]string)
-	TrData.TransformerMap = make(map[string]string)
+	AnalyzersData.AnalyzersMap = make(map[string]string)
+	AnalyzersData.AnalyzersMetaMap = make(map[string]string)
+	TransformersData.TransformerMap = make(map[string]string)
 
-	for _, analyzer := range AnaData.AnalyzersData {
-		AnaData.AnalyzerNames = append(AnaData.AnalyzerNames, analyzer.Name)
-		AnaData.AnalyzerShortcodes = append(AnaData.AnalyzerShortcodes, analyzer.Shortcode)
-		AnaData.AnalyzersMeta = append(AnaData.AnalyzersMeta, analyzer.MetaSchema)
-		AnaData.AnalyzersMap[analyzer.Name] = analyzer.Shortcode
-		AnaData.AnalyzersMetaMap[analyzer.Name] = analyzer.MetaSchema
+	for _, analyzer := range AnalyzersAPIResponse {
+		AnalyzersData.AnalyzerNames = append(AnalyzersData.AnalyzerNames, analyzer.Name)
+		AnalyzersData.AnalyzerShortcodes = append(AnalyzersData.AnalyzerShortcodes, analyzer.Shortcode)
+		AnalyzersData.AnalyzersMeta = append(AnalyzersData.AnalyzersMeta, analyzer.MetaSchema)
+		AnalyzersData.AnalyzersMap[analyzer.Name] = analyzer.Shortcode
+		AnalyzersData.AnalyzersMetaMap[analyzer.Shortcode] = analyzer.MetaSchema
 	}
 
-	for _, transformer := range TrData.TransformersData {
-		TrData.TransformerNames = append(TrData.TransformerNames, transformer.Name)
-		TrData.TransformerShortcodes = append(TrData.TransformerShortcodes, transformer.Shortcode)
-		TrData.TransformerMap[transformer.Name] = transformer.Shortcode
+	for _, transformer := range TransformersAPIResponse {
+		TransformersData.TransformerNames = append(TransformersData.TransformerNames, transformer.Name)
+		TransformersData.TransformerShortcodes = append(TransformersData.TransformerShortcodes, transformer.Shortcode)
+		TransformersData.TransformerMap[transformer.Name] = transformer.Shortcode
 	}
 }

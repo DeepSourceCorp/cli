@@ -50,7 +50,10 @@ func (opts *RefreshOptions) Run() error {
 	}
 
 	// Fetching DS Client
-	deepsource, err := deepsource.New()
+	deepsource, err := deepsource.New(deepsource.ClientOpts{
+		Token:    config.Cfg.Token,
+		HostName: config.Cfg.Host,
+	})
 	if err != nil {
 		return err
 	}

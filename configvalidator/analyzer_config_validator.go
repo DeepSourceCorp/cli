@@ -43,7 +43,7 @@ func (c *ConfigValidator) validateAnalyzersConfig() {
 	// ==== Analyzer shortcode validation ====
 	supported := false
 	for _, analyzer := range c.Config.Analyzers {
-		for _, supportedAnalyzer := range utils.AnaData.AnalyzerShortcodes {
+		for _, supportedAnalyzer := range utils.AnalyzersData.AnalyzerShortcodes {
 			if analyzer.Name == supportedAnalyzer {
 				// Copy the meta of activated analyzer for usage in
 				// analyzer meta validation
@@ -71,7 +71,7 @@ func (c *ConfigValidator) validateAnalyzersConfig() {
 	// Iterating over the activated analyzers and
 	// validating the meta_schema
 	for analyzer, meta := range activatedAnalyzers {
-		analyzerMetaSchema = utils.AnaData.AnalyzersMetaMap[analyzer]
+		analyzerMetaSchema = utils.AnalyzersData.AnalyzersMetaMap[analyzer]
 		userActivatedSchema = meta
 
 		// Loading the Meta Schema obtained from API

@@ -100,7 +100,7 @@ func (o *Options) generateDeepSourceConfig() error {
 		}
 
 		activatedAnalyzerData := Analyzer{
-			Name:    utils.AnaData.AnalyzersMap[analyzer],
+			Name:    utils.AnalyzersData.AnalyzersMap[analyzer],
 			Enabled: true,
 		}
 		if len(metaMap) != 0 {
@@ -112,7 +112,7 @@ func (o *Options) generateDeepSourceConfig() error {
 	// Copying activated transformers from Options struct to DSConfig based "config" struct
 	for _, transformer := range o.ActivatedTransformers {
 		config.Transformers = append(config.Transformers, Transformer{
-			Name:    utils.TrData.TransformerMap[transformer],
+			Name:    utils.TransformersData.TransformerMap[transformer],
 			Enabled: true,
 		})
 	}

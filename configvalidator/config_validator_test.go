@@ -120,8 +120,8 @@ func TestValidateConfig(t *testing.T) {
 }
 
 func setDummyAnalyzerTransformerData() {
-	utils.AnaData.AnalyzerShortcodes = []string{"python", "test-coverage"}
-	utils.AnaData.AnalyzersMeta = []string{`{
+	utils.AnalyzersData.AnalyzerShortcodes = []string{"python", "test-coverage"}
+	utils.AnalyzersData.AnalyzersMeta = []string{`{
    "type": "object",
    "properties": {
       "max_line_length": {
@@ -164,5 +164,5 @@ func setDummyAnalyzerTransformerData() {
    "additionalProperties": false
 }`, "{}"}
 
-	utils.TrData.TransformerShortcodes = []string{"black", "prettier"}
+	utils.TransformersData.TransformerShortcodes = []string{"black", "prettier"}
 }

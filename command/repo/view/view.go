@@ -46,9 +46,7 @@ func NewCmdRepoView() *cobra.Command {
 	return cmd
 }
 
-func (opts *RepoViewOptions) Run() error {
-	var err error
-
+func (opts *RepoViewOptions) Run() (err error) {
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {
@@ -67,7 +65,10 @@ func (opts *RepoViewOptions) Run() error {
 	}
 
 	// Making the "isActivated" (repo status) query again just to confirm if the user has access to that repo
-	deepsource, err := deepsource.New()
+	deepsource, err := deepsource.New(deepsource.ClientOpts{
+		Token:    config.Cfg.Token,
+		HostName: config.Cfg.Host,
+	})
 	if err != nil {
 		return err
 	}

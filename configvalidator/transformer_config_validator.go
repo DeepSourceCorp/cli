@@ -32,7 +32,7 @@ func (c *ConfigValidator) validateTransformersConfig() {
 	// ==== Transformer shortcode validation ====
 	supported := false
 	for _, activatedTransformer := range c.Config.Transformers {
-		for _, supportedTransformer := range utils.TrData.TransformerShortcodes {
+		for _, supportedTransformer := range utils.TransformersData.TransformerShortcodes {
 			if activatedTransformer.Name == supportedTransformer {
 				supported = true
 				break

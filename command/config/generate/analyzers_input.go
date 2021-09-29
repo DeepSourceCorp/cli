@@ -27,7 +27,7 @@ func (o *Options) collectAnalyzerInput() error {
 	analyzerPrompt := &survey.MultiSelect{
 		Renderer: survey.Renderer{},
 		Message:  "Which languages/tools does your project use?",
-		Options:  utils.AnaData.AnalyzerNames,
+		Options:  utils.AnalyzersData.AnalyzerNames,
 		Help:     "Analyzers will find issues in your code. Add an analyzer by selecting a language you've written your code in.",
 	}
 	err := survey.AskOne(analyzerPrompt, &o.ActivatedAnalyzers, survey.WithValidator(survey.Required))
@@ -56,8 +56,7 @@ func isContains(requiredFieldsList []string, field string) bool {
 
 // Uses the `survey` prompt API to gather user input and store in `Options` struct
 // `Options` struct is later used for config generation
-func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMetadata) error {
-	var err error
+func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMetadata) (err error) {
 	// Iterate over the map and fetch the input for the fields from the user
 	for analyzer, metaFields := range requiredFieldsData {
 		for i := 0; i < len(metaFields); i++ {
@@ -140,11 +139,12 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 
 	// Extract `optional_required` fields of analyzer meta of selected analyzers
 	for _, activatedAnalyzer := range o.ActivatedAnalyzers {
+		analyzerShortcode := utils.AnalyzersData.AnalyzersMap[activatedAnalyzer]
 		// Assigning optional fields to nil before checking for an analyzer
 		optionalFields = nil
 		requiredMetaData = nil
 
-		analyzerMeta := utils.AnaData.AnalyzersMetaMap[activatedAnalyzer]
+		analyzerMeta := utils.AnalyzersData.AnalyzersMetaMap[analyzerShortcode]
 		// Parse the analyzer meta of the analyzer using `gabs`
 		jsonParsed, err := gabs.ParseJSON([]byte(analyzerMeta))
 		if err != nil {

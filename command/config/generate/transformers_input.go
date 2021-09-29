@@ -15,7 +15,7 @@ func (o *Options) collectTransformersInput() error {
 	transformerPrompt := &survey.MultiSelect{
 		Renderer: survey.Renderer{},
 		Message:  transformerQues,
-		Options:  utils.TrData.TransformerNames,
+		Options:  utils.TransformersData.TransformerNames,
 		Help:     "DeepSource Transformers automatically help to achieve auto-formatting of code. Add a transformer by selecting the code formatting tool of your choice.",
 	}
 	err := survey.AskOne(transformerPrompt, &o.ActivatedTransformers)
