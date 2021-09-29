@@ -185,7 +185,7 @@
 
         <div class="absolute top-0 left-full px-4">
           <info-banner
-            info="Control whether your repository is listed on Discover.Once listed, other users would be able to find your repository, and look at the detected issues."
+            info="Control whether your repository is listed on Discover. Once listed, other users would be able to find your repository, and look at the detected issues."
           />
         </div>
       </div>
