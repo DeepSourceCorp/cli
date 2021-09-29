@@ -23,15 +23,7 @@
       </div>
 
       <div v-else>
-        <base-state title="No results found">
-          <template slot="hero">
-            <img
-              class="mx-auto mb-4"
-              :src="require('~/assets/images/ui-states/repo/empty.svg')"
-              alt="Empty feed"
-            />
-          </template>
-        </base-state>
+        <lazy-empty-state title="No results found" />
       </div>
     </div>
   </div>
@@ -46,7 +38,6 @@ import { fromNow } from '@/utils/date'
 import { DiscoverRepoGetters } from '~/store/discover/repositories'
 import { Maybe, RepositoryConnection } from '~/types/types'
 
-import BaseState from '@/components/RepoStates/BaseState.vue'
 import RepoCard from './RepoCard.vue'
 import SectionHeader from './SectionHeader.vue'
 
@@ -54,7 +45,6 @@ const discoverRepositoriesStore = namespace('discover/repositories')
 
 @Component({
   components: {
-    BaseState,
     RepoCard,
     SectionHeader,
     ZDivider,

@@ -3,7 +3,7 @@
     <section-header title="Projects on your watchlist" />
 
     <div v-if="$fetchState.pending" class="grid gap-2 animate-pulse">
-      <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300"/>
+      <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300" />
     </div>
 
     <div v-else-if="resolveNodes(watchedRepositories).length" class="mt-1.5 grid gap-2">
@@ -24,15 +24,7 @@
       </repo-card>
     </div>
     <div v-else>
-      <base-state title="No projects found">
-        <template slot="hero">
-          <img
-            class="mx-auto mb-4"
-            :src="require('~/assets/images/ui-states/repo/empty.svg')"
-            alt="Empty feed"
-          />
-        </template>
-      </base-state>
+      <lazy-empty-state title="No projects found" />
     </div>
   </div>
 </template>
@@ -46,14 +38,12 @@ import { fromNow } from '@/utils/date'
 import { DiscoverUserActions, DiscoverUserGetters } from '~/store/discover/user'
 import { RepositoryConnection } from '~/types/types'
 
-import BaseState from '@/components/RepoStates/BaseState.vue'
 import RepoCard from './RepoCard.vue'
 
 const discoverUserStore = namespace('discover/user')
 
 @Component({
   components: {
-    BaseState,
     RepoCard,
     ZIcon
   }
