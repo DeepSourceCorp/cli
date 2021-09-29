@@ -1,7 +1,7 @@
 <template>
   <div class="border border-ink-200 rounded-md col-span-1 xl:col-span-2">
     <div v-if="completion > 0" class="p-2">Account is {{ completion }}% setup</div>
-    <div v-else class="p-2">Setup Your Account</div>
+    <div v-else class="p-2">Setup your account</div>
     <div class="w-full h-1 bg-ink-200">
       <div
         class="h-1 bg-juniper transform transition-all duration-100 ease-in-out"
@@ -33,7 +33,7 @@
           </h5>
           <template v-if="!getStatus(step)">
             <p v-if="step.description" class="text-sm text-vanilla-400">{{ step.description }}</p>
-            <z-button @click="step.action" size="small" buttonType="secondary">{{
+            <z-button @click="step.action" size="small" buttonType="secondary" :icon="step.icon">{{
               step.actionLabel
             }}</z-button>
           </template>
@@ -157,19 +157,23 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
   setupOptions: Record<string, unknown> = {
     'activate-repository': {
       action: this.activateRepo,
-      actionLabel: 'Activate Repo'
+      actionLabel: 'Activate repo',
+      icon: 'plus'
     },
     'install-autofix': {
       action: this.installAutofix,
-      actionLabel: 'Install Autofix'
+      actionLabel: 'Install Autofix',
+      icon: 'autofix'
     },
     'invite-team': {
       action: this.inviteMembers,
-      actionLabel: 'Invite Team'
+      actionLabel: 'Invite team',
+      icon: 'user-plus'
     },
     'configure-transformers': {
       action: this.activateRepo,
-      actionLabel: 'Setup Transformers'
+      actionLabel: 'Setup Transformers',
+      icon: 'plus'
     }
   }
 

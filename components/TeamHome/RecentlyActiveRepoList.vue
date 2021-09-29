@@ -26,40 +26,62 @@
         <div class="h-full rounded-md bg-ink-300 animate-pulse w-1/5"></div>
       </div>
     </template>
-    <template v-else-if="Array.isArray(repoWithActiveAnalysisWithAnalyzers) && repoWithActiveAnalysisWithAnalyzers.length">
-        <list-item
+    <template
+      v-else-if="
+        Array.isArray(repoWithActiveAnalysisWithAnalyzers) &&
+        repoWithActiveAnalysisWithAnalyzers.length
+      "
+    >
+      <list-item
         v-for="repo in repoWithActiveAnalysisWithAnalyzers"
-          :key="repo.id"
-          :to="generateLink(repo)"
-          :icon="repo.isPrivate ? 'lock' : 'globe'"
-          class="px-4 py-3"
-        >
-          <template slot="label">
-            <div class="flex items-center space-x-3">
-              <span>
-                {{ repo.name }}
-              </span>
-              <span
-                v-if="repo.availableAnalyzers && repo.availableAnalyzers.edges"
-                class="space-x-3 hidden xs:flex"
-              >
-                <template v-for="edge in repo.availableAnalyzers.edges">
-                  <analyzer-logo
-                    v-if="edge && edge.node"
-                    :key="edge.node.name"
-                    v-bind="edge.node"
-                  />
-                </template>
-              </span>
-            </div>
-          </template>
-          <template slot="info">
-            <span v-tooltip="formatDate(repo.lastAnalyzedAt, 'lll')">{{
-              repo.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.lastAnalyzedAt) : ''
-            }}</span>
-          </template>
-        </list-item>
+        :key="repo.id"
+        :to="generateLink(repo)"
+        :icon="repo.isPrivate ? 'lock' : 'globe'"
+        class="px-4 py-3"
+      >
+        <template slot="label">
+          <div class="flex items-center space-x-3">
+            <span>
+              {{ repo.name }}
+            </span>
+            <span
+              v-if="repo.availableAnalyzers && repo.availableAnalyzers.edges"
+              class="space-x-3 hidden xs:flex"
+            >
+              <template v-for="edge in repo.availableAnalyzers.edges">
+                <analyzer-logo v-if="edge && edge.node" :key="edge.node.name" v-bind="edge.node" />
+              </template>
+            </span>
+          </div>
+        </template>
+        <template slot="info">
+          <span v-tooltip="formatDate(repo.lastAnalyzedAt, 'lll')">{{
+            repo.lastAnalyzedAt ? getHumanizedTimeFromNow(repo.lastAnalyzedAt) : ''
+          }}</span>
+        </template>
+      </list-item>
     </template>
+    <empty-state
+      v-else
+      title="No active repositories found"
+      :svg-image-path="require('~/assets/images/ui-states/repo/inactive.svg')"
+    >
+      <span v-if="canActivateRepo" slot="subtitle">
+        No repositories activated, generate a new config or activate a repository directly if a
+        <code class="text-vanilla-200 font-medium">.deepsource.toml</code> already exists.
+      </span>
+      <span v-else slot="subtitle">
+        Please get in touch with the owner of your organization to activate analysis for a
+        repository.
+      </span>
+      <z-button
+        slot="action"
+        icon="plus"
+        size="small"
+        label="Activate new repository"
+        @click="showAddRepoModal = true"
+      ></z-button>
+    </empty-state>
   </list-section>
 </template>
 <script lang="ts">

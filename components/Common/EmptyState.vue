@@ -1,7 +1,8 @@
 <template>
   <section class="w-full p-12">
     <picture class="mx-auto" :class="[imageWidth]">
-      <source :srcset="webpImagePath" type="image/webp" />
+      <source v-if="svgImagePath" :srcset="svgImagePath" type="image/svg+xml" />
+      <source v-else :srcset="webpImagePath" type="image/webp" />
       <source :srcset="pngImagePath" type="image/png" />
       <img :src="pngImagePath" :alt="altText" class="mx-auto" :class="[imageWidth]" />
     </picture>
@@ -30,6 +31,9 @@ export default class EmptyState extends Vue {
 
   @Prop({ default: require('~/assets/images/ui-states/empty.png') })
   pngImagePath: () => any
+
+  @Prop({ default: '' })
+  svgImagePath: () => any
 
   @Prop({ default: 'w-28' })
   imageWidth: string
