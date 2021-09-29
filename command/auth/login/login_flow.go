@@ -63,7 +63,7 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 
 func registerDevice(ctx context.Context) (*auth.Device, error) {
 	// Fetching DeepSource client in order to interact with SDK
-	deepsource, err := deepsource.New(deepsource.ClientProperties{
+	deepsource, err := deepsource.New(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
 		HostName: config.Cfg.Host,
 	})
@@ -85,7 +85,7 @@ func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.J
 	authTimedOut := true
 
 	// Fetching DeepSource client in order to interact with SDK
-	deepsource, err := deepsource.New(deepsource.ClientProperties{
+	deepsource, err := deepsource.New(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
 		HostName: config.Cfg.Host,
 	})

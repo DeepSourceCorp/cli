@@ -65,7 +65,7 @@ func (opts *RepoViewOptions) Run() (err error) {
 	}
 
 	// Making the "isActivated" (repo status) query again just to confirm if the user has access to that repo
-	deepsource, err := deepsource.New(deepsource.ClientProperties{
+	deepsource, err := deepsource.New(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
 		HostName: config.Cfg.Host,
 	})

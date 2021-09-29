@@ -68,7 +68,7 @@ func (o *Options) Run() error {
 	}
 
 	// Fetch the client
-	deepsource, err := deepsource.New(deepsource.ClientProperties{
+	deepsource, err := deepsource.New(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
 		HostName: config.Cfg.Host,
 	})

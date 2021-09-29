@@ -87,7 +87,7 @@ func (opts *IssuesListOptions) Run() (err error) {
 // i.e for a single file or for the whole project
 func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 	// Get the deepsource client for using the issue fetching SDK to fetch the list of issues
-	deepsource, err := deepsource.New(deepsource.ClientProperties{
+	deepsource, err := deepsource.New(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
 		HostName: config.Cfg.Host,
 	})

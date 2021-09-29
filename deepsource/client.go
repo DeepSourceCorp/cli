@@ -20,7 +20,7 @@ import (
 
 var defaultHostName = "deepsource.io"
 
-type ClientProperties struct {
+type ClientOpts struct {
 	Token    string
 	HostName string
 }
@@ -41,7 +41,7 @@ func (c Client) GetToken() string {
 }
 
 // Returns a new GQLClient
-func New(cp ClientProperties) (*Client, error) {
+func New(cp ClientOpts) (*Client, error) {
 	apiClientURL := getAPIClientURL(cp.HostName)
 	gql := graphql.NewClient(apiClientURL)
 	return &Client{
