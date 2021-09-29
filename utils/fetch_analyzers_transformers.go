@@ -25,8 +25,8 @@ type DeepSourceTransformersData struct {
 var AnalyzersData DeepSourceAnalyzersData
 var TransformersData DeepSourceTransformersData
 
-var AnalyzersAPIResponse []analyzers.Analyzer
-var TransformersAPIResponse []transformers.Transformer
+var analyzersAPIResponse []analyzers.Analyzer
+var transformersAPIResponse []transformers.Transformer
 
 // Get the list of all the supported analyzers and transformers with
 // their corresponding data like shortcode, metaschema etc.
@@ -35,12 +35,12 @@ func GetAnalyzersAndTransformersData(ctx context.Context, deepsource deepsource.
 	AnalyzersData.AnalyzersMap = make(map[string]string)
 	TransformersData.TransformerMap = make(map[string]string)
 
-	AnalyzersAPIResponse, err = deepsource.GetSupportedAnalyzers(ctx)
+	analyzersAPIResponse, err = deepsource.GetSupportedAnalyzers(ctx)
 	if err != nil {
 		return err
 	}
 
-	TransformersAPIResponse, err = deepsource.GetSupportedTransformers(ctx)
+	transformersAPIResponse, err = deepsource.GetSupportedTransformers(ctx)
 	if err != nil {
 		return err
 	}
@@ -54,18 +54,28 @@ func parseSDKResponse() {
 	AnalyzersData.AnalyzersMap = make(map[string]string)
 	AnalyzersData.AnalyzersMetaMap = make(map[string]string)
 	TransformersData.TransformerMap = make(map[string]string)
+	analyzersMap := make(map[string]string)
+	analyzersMetaMap := make(map[string]string)
+	transformersMap := make(map[string]string)
 
-	for _, analyzer := range AnalyzersAPIResponse {
-		AnalyzersData.AnalyzerNames = append(AnalyzersData.AnalyzerNames, analyzer.Name)
-		AnalyzersData.AnalyzerShortcodes = append(AnalyzersData.AnalyzerShortcodes, analyzer.Shortcode)
-		AnalyzersData.AnalyzersMeta = append(AnalyzersData.AnalyzersMeta, analyzer.MetaSchema)
-		AnalyzersData.AnalyzersMap[analyzer.Name] = analyzer.Shortcode
-		AnalyzersData.AnalyzersMetaMap[analyzer.Shortcode] = analyzer.MetaSchema
+	for _, analyzer := range analyzersAPIResponse {
+		analyzersMap[analyzer.Name] = analyzer.Shortcode
+		analyzersMetaMap[analyzer.Shortcode] = analyzer.MetaSchema
+		AnalyzersData = DeepSourceAnalyzersData{
+			AnalyzerNames:      append(AnalyzersData.AnalyzerNames, analyzer.Name),
+			AnalyzerShortcodes: append(AnalyzersData.AnalyzerShortcodes, analyzer.Shortcode),
+			AnalyzersMap:       analyzersMap,
+			AnalyzersMeta:      append(AnalyzersData.AnalyzersMeta, analyzer.MetaSchema),
+			AnalyzersMetaMap:   analyzersMetaMap,
+		}
 	}
 
-	for _, transformer := range TransformersAPIResponse {
-		TransformersData.TransformerNames = append(TransformersData.TransformerNames, transformer.Name)
-		TransformersData.TransformerShortcodes = append(TransformersData.TransformerShortcodes, transformer.Shortcode)
-		TransformersData.TransformerMap[transformer.Name] = transformer.Shortcode
+	for _, transformer := range transformersAPIResponse {
+		transformersMap[transformer.Name] = transformer.Shortcode
+		TransformersData = DeepSourceTransformersData{
+			TransformerNames:      append(TransformersData.TransformerNames, transformer.Name),
+			TransformerShortcodes: append(TransformersData.TransformerShortcodes, transformer.Shortcode),
+			TransformerMap:        transformersMap,
+		}
 	}
 }
