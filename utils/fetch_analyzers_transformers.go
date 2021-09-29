@@ -51,9 +51,6 @@ func GetAnalyzersAndTransformersData(ctx context.Context, deepsource deepsource.
 // Parses the SDK response of analyzers and transformers data into the format required
 // by the validator and generator package
 func parseSDKResponse() {
-	AnalyzersData.AnalyzersMap = make(map[string]string)
-	AnalyzersData.AnalyzersMetaMap = make(map[string]string)
-	TransformersData.TransformerMap = make(map[string]string)
 	analyzersMap := make(map[string]string)
 	analyzersMetaMap := make(map[string]string)
 	transformersMap := make(map[string]string)
@@ -61,6 +58,7 @@ func parseSDKResponse() {
 	for _, analyzer := range analyzersAPIResponse {
 		analyzersMap[analyzer.Name] = analyzer.Shortcode
 		analyzersMetaMap[analyzer.Shortcode] = analyzer.MetaSchema
+
 		AnalyzersData = DeepSourceAnalyzersData{
 			AnalyzerNames:      append(AnalyzersData.AnalyzerNames, analyzer.Name),
 			AnalyzerShortcodes: append(AnalyzersData.AnalyzerShortcodes, analyzer.Shortcode),
@@ -72,6 +70,7 @@ func parseSDKResponse() {
 
 	for _, transformer := range transformersAPIResponse {
 		transformersMap[transformer.Name] = transformer.Shortcode
+
 		TransformersData = DeepSourceTransformersData{
 			TransformerNames:      append(TransformersData.TransformerNames, transformer.Name),
 			TransformerShortcodes: append(TransformersData.TransformerShortcodes, transformer.Shortcode),
