@@ -1,6 +1,7 @@
 package validate
 
 import (
+	"context"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -12,6 +13,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/configvalidator"
+	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
@@ -65,9 +67,18 @@ func (o *Options) Run() error {
 		return errors.New("Error occured while reading DeepSource config file. Exiting...")
 	}
 
+	// Fetch the client
+	deepsource, err := deepsource.New(deepsource.ClientProperties{
+		Token:    config.Cfg.Token,
+		HostName: config.Cfg.Host,
+	})
+	if err != nil {
+		return err
+	}
+	ctx := context.Background()
 	// Fetch the list of supported analyzers and transformers' data
 	// using the SDK
-	err = utils.GetAnalyzersAndTransformersData()
+	err = utils.GetAnalyzersAndTransformersData(ctx, *deepsource)
 	if err != nil {
 		return err
 	}

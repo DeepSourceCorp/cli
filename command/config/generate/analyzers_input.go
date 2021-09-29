@@ -56,8 +56,7 @@ func isContains(requiredFieldsList []string, field string) bool {
 
 // Uses the `survey` prompt API to gather user input and store in `Options` struct
 // `Options` struct is later used for config generation
-func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMetadata) error {
-	var err error
+func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMetadata) (err error) {
 	// Iterate over the map and fetch the input for the fields from the user
 	for analyzer, metaFields := range requiredFieldsData {
 		for i := 0; i < len(metaFields); i++ {

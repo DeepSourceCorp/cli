@@ -45,8 +45,7 @@ func NewCmdLogin() *cobra.Command {
 }
 
 // Run executes the auth command and starts the login flow if not already authenticated
-func (opts *LoginOptions) Run() error {
-	var err error
+func (opts *LoginOptions) Run() (err error) {
 
 	// Fetch config
 	cfg, _ := config.GetConfig()

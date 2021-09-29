@@ -52,8 +52,7 @@ func NewCmdIssuesList() *cobra.Command {
 }
 
 // Execute the command
-func (opts *IssuesListOptions) Run() error {
-	var err error
+func (opts *IssuesListOptions) Run() (err error) {
 
 	// Fetch config
 	cfg, err := config.GetConfig()
@@ -86,10 +85,12 @@ func (opts *IssuesListOptions) Run() error {
 
 // Gets the data about issues using the SDK based on the user input
 // i.e for a single file or for the whole project
-func (opts *IssuesListOptions) getIssuesData(ctx context.Context) error {
-	var err error
+func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 	// Get the deepsource client for using the issue fetching SDK to fetch the list of issues
-	deepsource, err := deepsource.New()
+	deepsource, err := deepsource.New(deepsource.ClientProperties{
+		Token:    config.Cfg.Token,
+		HostName: config.Cfg.Host,
+	})
 	if err != nil {
 		return err
 	}

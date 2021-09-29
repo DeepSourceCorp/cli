@@ -39,9 +39,7 @@ func NewCmdRepoStatus() *cobra.Command {
 	return cmd
 }
 
-func (opts *RepoStatusOptions) Run() error {
-	var err error
-
+func (opts *RepoStatusOptions) Run() (err error) {
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {
@@ -59,7 +57,10 @@ func (opts *RepoStatusOptions) Run() error {
 		return err
 	}
 	// Use the SDK to find the activation status
-	deepsource, err := deepsource.New()
+	deepsource, err := deepsource.New(deepsource.ClientProperties{
+		Token:    config.Cfg.Token,
+		HostName: config.Cfg.Host,
+	})
 	if err != nil {
 		return err
 	}

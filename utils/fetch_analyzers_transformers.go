@@ -30,14 +30,7 @@ var TrData TransformersData
 
 // Get the list of all the supported analyzers and transformers with
 // their corresponding data like shortcode, metaschema etc.
-func GetAnalyzersAndTransformersData() error {
-	var err error
-	// Fetch the client
-	deepsource, err := deepsource.New()
-	if err != nil {
-		return err
-	}
-	ctx := context.Background()
+func GetAnalyzersAndTransformersData(ctx context.Context, deepsource deepsource.Client) (err error) {
 
 	// Get supported analyzers and transformers data
 	AnaData.AnalyzersMap = make(map[string]string)

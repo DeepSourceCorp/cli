@@ -5,7 +5,6 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
 	analyzerQuery "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
@@ -19,8 +18,16 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
+var defaultHostName = "deepsource.io"
+
+type ClientProperties struct {
+	Token    string
+	HostName string
+}
+
 type Client struct {
-	gql *graphql.Client
+	gql   *graphql.Client
+	token string
 }
 
 // Returns a GraphQL client which can be used to interact with the GQL APIs
@@ -30,25 +37,26 @@ func (c Client) GQL() *graphql.Client {
 
 // Returns the jWT which is required for authentication and thus, interacting with the APIs
 func (c Client) GetToken() string {
-	return config.Cfg.Token
+	return c.token
 }
 
 // Returns a new GQLClient
-func New() (*Client, error) {
-	apiClientURL := getAPIClientURL()
+func New(cp ClientProperties) (*Client, error) {
+	apiClientURL := getAPIClientURL(cp.HostName)
 	gql := graphql.NewClient(apiClientURL)
 	return &Client{
-		gql: gql,
+		gql:   gql,
+		token: cp.Token,
 	}, nil
 }
 
-// Formats and returns the DeepSource Public API client URL
-func getAPIClientURL() string {
-	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", config.Cfg.Host)
+// // Formats and returns the DeepSource Public API client URL
+func getAPIClientURL(hostName string) string {
+	apiClientURL := fmt.Sprintf("https://api.%s/graphql/", defaultHostName)
 
 	// Check if the domain is different from the default domain (In case of Enterprise users)
-	if config.Cfg.Host != config.DefaultHostName {
-		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", config.Cfg.Host)
+	if hostName != defaultHostName {
+		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", hostName)
 	}
 	return apiClientURL
 }
