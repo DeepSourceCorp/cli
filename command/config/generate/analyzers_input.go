@@ -27,7 +27,7 @@ func (o *Options) collectAnalyzerInput() error {
 	analyzerPrompt := &survey.MultiSelect{
 		Renderer: survey.Renderer{},
 		Message:  "Which languages/tools does your project use?",
-		Options:  utils.AnaData.AnalyzerNames,
+		Options:  utils.AnalyzersData.AnalyzerNames,
 		Help:     "Analyzers will find issues in your code. Add an analyzer by selecting a language you've written your code in.",
 	}
 	err := survey.AskOne(analyzerPrompt, &o.ActivatedAnalyzers, survey.WithValidator(survey.Required))
@@ -143,7 +143,7 @@ func (o *Options) extractRequiredAnalyzerMetaFields() error {
 		optionalFields = nil
 		requiredMetaData = nil
 
-		analyzerMeta := utils.AnaData.AnalyzersMetaMap[activatedAnalyzer]
+		analyzerMeta := utils.AnalyzersData.AnalyzersMetaMap[activatedAnalyzer]
 		// Parse the analyzer meta of the analyzer using `gabs`
 		jsonParsed, err := gabs.ParseJSON([]byte(analyzerMeta))
 		if err != nil {
