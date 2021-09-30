@@ -10,7 +10,7 @@
       />
       <div class="flex items-center justify-end w-auto space-x-2">
         <issue-sort v-model="queryParams.sort" />
-        <autofix-available v-model="queryParams.autofixAvailable" />
+        <autofix-available v-if="hasRepoReadAccess" v-model="queryParams.autofixAvailable" />
         <issue-search v-model="queryParams.q" />
       </div>
     </div>
@@ -73,6 +73,7 @@
         v-for="issue in resolveIssueNodes(issueList)"
         v-bind="issue"
         :key="issue.id"
+        :showAutofixButton="hasRepoReadAccess"
         :disableAutofixButton="!canCreateAutofix"
         :issueLink="$generateRoute(['issue', issue.shortcode || '', 'occurrences'])"
         @autofix="openAutofixModal"
@@ -213,6 +214,7 @@ export default class Issues extends mixins(
     await this.fetchRepoDetails(this.baseRouteParams)
     await this.fetchRepoPerms(this.baseRouteParams)
     await this.fetchIssuesForOwner()
+    this.fetchRepoAutofixStats(this.baseRouteParams)
     this.fetchIsCommitPossible(this.baseRouteParams)
   }
 

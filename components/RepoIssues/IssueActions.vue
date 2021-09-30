@@ -1,8 +1,8 @@
 <template>
-  <div class="flex items-center space-x-2 justify-end flex-auto">
+  <div class="flex items-center justify-end flex-auto space-x-2">
     <!-- Autofix -->
     <z-button
-      v-if="issue.autofixAvailable"
+      v-if="issue.autofixAvailable && hasRepoReadAccess"
       buttonType="primary"
       size="small"
       custom-classes="hidden xl:flex items-center space-x-2"
@@ -79,7 +79,7 @@
       @close="close"
     ></autofix-file-chooser>
     <!-- Create issue on VCS -->
-    <template v-if="issue.newVcsIssueUrl && $route.params.provider !== 'bb'">
+    <template v-if="issue.newVcsIssueUrl && $route.params.provider !== 'bb' && hasRepoReadAccess">
       <z-button
         :to="issue.newVcsIssueUrl"
         target="_blank"

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 w-full space-y-6">
+  <div class="w-full p-4 space-y-6">
     <!-- Available Autofixes -->
     <install-autofix-notice v-if="!repository.isAutofixEnabled && canEnableAutofix" />
     <stat-section
@@ -19,13 +19,13 @@
         <div
           v-for="idx in loaderCount"
           :key="idx"
-          class="flex flex-col justify-between h-28 p-2 space-y-2 bg-ink-300 rounded-md"
+          class="flex flex-col justify-between p-2 space-y-2 rounded-md h-28 bg-ink-300"
         >
           <div class="flex justify-between space-x-2">
             <div class="w-48 h-5 rounded-md bg-ink-200 animate-pulse"></div>
             <div class="w-5 h-5 rounded-md bg-ink-200 animate-pulse"></div>
           </div>
-          <div class="h-8 rounded-md bg-ink-200 w-40 animate-pulse"></div>
+          <div class="w-40 h-8 rounded-md bg-ink-200 animate-pulse"></div>
           <div class="w-16 h-4 rounded-md bg-ink-200 animate-pulse"></div>
         </div>
       </template>
@@ -37,7 +37,7 @@
         ></autofix-card>
       </template>
       <!-- TODO: Empty state -->
-      <div v-else class="w-full h-full flex justify-center items-center p-2">
+      <div v-else class="flex items-center justify-center w-full h-full p-2">
         No Autofixes available
       </div>
     </stat-section>
@@ -45,23 +45,23 @@
     <autofix-issues-graph />
     <!-- Recent Autofixes -->
     <div v-if="$fetchState.pending">
-      <div class="grid grid-cols-12-fr gap-2">
-        <div class="bg-ink-300 rounded-md animate-pulse col-span-full h-12"></div>
-        <div class="bg-ink-300 rounded-md animate-pulse"></div>
-        <div class="h-full w-full flex flex-col space-y-2">
-          <div class="h-20 bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-20 bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-20 bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-20 bg-ink-300 rounded-md animate-pulse"></div>
+      <div class="grid gap-2 grid-cols-12-fr">
+        <div class="h-12 rounded-md bg-ink-300 animate-pulse col-span-full"></div>
+        <div class="rounded-md bg-ink-300 animate-pulse"></div>
+        <div class="flex flex-col w-full h-full space-y-2">
+          <div class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
         </div>
       </div>
     </div>
     <stat-section title="Recent Autofixes" customGridClass="grid grid-cols-12-fr" :gridSpacing="2">
-      <div class="md:space-y-2 col-span-2 md:col-span-1 grid grid-cols-3 gap-1 md:block">
+      <div class="grid grid-cols-3 col-span-2 gap-1 md:space-y-2 md:col-span-1 md:block">
         <div
           v-for="opt in options"
           :key="opt.name"
-          class="p-2 space-y-2 rounded-md hover:bg-ink-300 cursor-pointer text-center md:text-left"
+          class="p-2 space-y-2 text-center rounded-md cursor-pointer hover:bg-ink-300 md:text-left"
           :class="{
             'bg-ink-300': selectedRun.name == opt.name
           }"
@@ -70,11 +70,11 @@
           <h4 class="text-sm">{{ opt.name }}</h4>
         </div>
       </div>
-      <div class="lg:col-span-1 col-span-2 space-y-2">
+      <div class="col-span-2 space-y-2 lg:col-span-1">
         <template v-if="selectedRun.name == 'Action needed'">
           <div
             v-if="pendingAutofixList && pendingAutofixList.length > 0"
-            class="w-full flex flex-col space-y-3"
+            class="flex flex-col w-full space-y-3"
           >
             <autofix-list-item
               v-for="run in pendingAutofixList"
@@ -84,12 +84,12 @@
               :showInfo="false"
             ></autofix-list-item>
           </div>
-          <div v-else class="w-full h-40 flex items-center justify-center">No pending commits</div>
+          <div v-else class="flex items-center justify-center w-full h-40">No pending commits</div>
         </template>
         <template v-else-if="selectedRun.name == 'History'">
           <div
             v-if="autofixListItems && autofixListItems.length > 0"
-            class="w-full flex flex-col space-y-3"
+            class="flex flex-col w-full space-y-3"
           >
             <autofix-list-item
               v-for="run in autofixListItems"
@@ -98,7 +98,7 @@
               v-bind="run"
             ></autofix-list-item>
           </div>
-          <div v-else class="w-full h-40 flex items-center justify-center">
+          <div v-else class="flex items-center justify-center w-full h-40">
             No autofix runs available
           </div>
         </template>
@@ -133,6 +133,12 @@ interface Trend {
     AutofixCard,
     AutofixListItem,
     AutofixIssuesGraph
+  },
+  meta: {
+    auth: {
+      strict: true,
+      RepoPerms: [RepoPerms.READ_REPO]
+    }
   },
   layout: 'repository'
 })

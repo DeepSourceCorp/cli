@@ -1,17 +1,17 @@
 <template>
   <div>
     <div
-      class="grid grid-cols-1 gap-2 lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-b border-ink-200"
+      class="grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200"
     >
       <div id="header" class="xl:col-span-2">
-        <div class="px-4 pt-3 space-y-2 space-x-2 xl:space-y-0">
+        <div class="px-4 pt-3 space-x-2 space-y-2 xl:space-y-0">
           <h2
-            class="text-lg font-medium xl:text-xl text-vanilla-400 inline-flex space-x-3 items-center leading-none"
+            class="inline-flex items-center space-x-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400"
           >
             <div class="inline-flex space-x-1">
               <nuxt-link
                 :to="['', provider, owner].join('/')"
-                class="cursor-pointer hover:text-vanilla-300 transition-colors duration-75"
+                class="transition-colors duration-75 cursor-pointer hover:text-vanilla-300"
                 >{{ $route.params.owner }}</nuxt-link
               >
               <span>/</span>
@@ -89,7 +89,7 @@
           :vcsCommitUrl="lastRun.vcsCommitUrl"
           :currentlyAnalysing="repository.runs && repository.runs.totalCount"
           :canChangeBranch="canChangeBranch"
-          class="flex flex-col h-full px-4 md:px-3 py-2 space-y-2 text-sm xl:border-l xl:border-ink-200 text-vanilla-400"
+          class="flex flex-col h-full px-4 py-2 space-y-2 text-sm md:px-3 xl:border-l xl:border-ink-200 text-vanilla-400"
         ></repo-header-info>
       </div>
       <div id="tabs" class="flex xl:col-span-2">
@@ -148,7 +148,9 @@ const navItems: TabLink[] = [
     icon: 'autofix',
     label: 'Autofix',
     link: 'autofix',
-    pattern: new RegExp(/^provider-owner-repo-autofix*/)
+    pattern: new RegExp(/^provider-owner-repo-autofix*/),
+    loginRequired: true,
+    perms: [RepoPerms.READ_REPO]
   },
   {
     icon: 'bar-chart',

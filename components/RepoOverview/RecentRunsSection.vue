@@ -1,21 +1,23 @@
 <template>
   <stat-section title="Recent runs" customGridClass="grid grid-cols-12-fr" :gridSpacing="2">
-    <div class="md:space-y-2 col-span-2 md:col-span-1 grid grid-cols-3 gap-1 md:block">
-      <div
-        v-for="opt in runOptions"
-        :key="opt.name"
-        class="p-2 space-y-2 rounded-md hover:bg-ink-300 cursor-pointer text-center md:text-left"
-        :class="{
-          'bg-ink-300': selectedRun.name == opt.name
-        }"
-        @click="selectedRun = opt"
-      >
-        <h4 class="text-base font-semi whitespace-nowrap overflow-x-hidden overflow-ellipsis">
-          {{ opt.name }}
-        </h4>
-      </div>
+    <div class="grid grid-cols-3 col-span-2 gap-1 md:space-y-2 md:col-span-1 md:block">
+      <template v-for="opt in runOptions">
+        <div
+          v-if="allowOptions(opt.repoPerms)"
+          :key="opt.name"
+          class="p-2 space-y-2 text-center rounded-md cursor-pointer hover:bg-ink-300 md:text-left"
+          :class="{
+            'bg-ink-300': selectedRun.name == opt.name
+          }"
+          @click="selectedRun = opt"
+        >
+          <h4 class="overflow-x-hidden text-base font-semi whitespace-nowrap overflow-ellipsis">
+            {{ opt.name }}
+          </h4>
+        </div>
+      </template>
     </div>
-    <div class="lg:col-span-1 col-span-2 space-y-2">
+    <div class="col-span-2 space-y-2 lg:col-span-1">
       <template v-if="runList.edges && selectedRun.name == 'Analyses'">
         <run-card
           v-for="run in runList.edges"
@@ -44,14 +46,14 @@
       </template>
     </div>
     <template slot="footer">
-      <div class="border-t border-ink-300 flex justify-center py-1">
+      <div class="flex justify-center py-1 border-t border-ink-300">
         <z-button
           :to="$generateRoute(selectedRun.link)"
           buttonType="ghost"
           class="text-vanilla-400"
           size="small"
         >
-          <div class="text-xs flex items-center leading-none space-x-1">
+          <div class="flex items-center space-x-1 text-xs leading-none">
             <span>View all {{ selectedRun.name }}</span>
             <z-icon
               class="transform-gpu duration-100 group-hover:translate-x-0.5"
@@ -65,7 +67,7 @@
   </stat-section>
 </template>
 <script lang="ts">
-import { Vue, Component, namespace } from 'nuxt-property-decorator'
+import { Component, namespace, mixins } from 'nuxt-property-decorator'
 import { TrendCard, StatSection } from '@/components/Metrics'
 import { ZButton, ZIcon, ZTicker } from '@deepsourcelabs/zeal'
 import { RunCard, TransformCard } from '@/components/History'
@@ -78,6 +80,8 @@ import { AutofixRunListActions } from '~/store/autofixRun/list'
 import { TransformerRunConnection } from '~/types/types'
 import { RunConnection } from '~/types/types'
 import { AutofixRunConnection } from '~/types/types'
+import { RepoPerms } from '~/types/permTypes'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 const runListStore = namespace('run/list')
 const transformRunListStore = namespace('transformerRun/list')
@@ -95,7 +99,7 @@ const autofixRunListStore = namespace('autofixRun/list')
   },
   layout: 'repository'
 })
-export default class RecentRunsSection extends Vue {
+export default class RecentRunsSection extends mixins(RoleAccessMixin) {
   @runListStore.State
   runList: RunConnection // Stores all the runs groubed by branch
 
@@ -137,7 +141,7 @@ export default class RecentRunsSection extends Vue {
 
   private runOptions = [
     { name: 'Analyses', link: ['history', 'runs'] },
-    { name: 'Autofixes', link: 'autofix' },
+    { name: 'Autofixes', link: 'autofix', repoPerms: [RepoPerms.READ_REPO] },
     { name: 'Transforms', link: ['history', 'transforms'] }
   ]
 
@@ -186,9 +190,17 @@ export default class RecentRunsSection extends Vue {
     this.fetchTransformList({ ...this.baseArgs, refetch: true })
   }
 
+  allowOptions(perms?: RepoPerms[]): boolean {
+    if (perms && Array.isArray(perms)) {
+      return this.$gateKeeper.repo(perms, this.repoPerms.permission)
+    }
+    return true
+  }
+
   async fetch(): Promise<void> {
     await this.fetchAutofixRunList(this.baseArgs)
     await this.fetchRunList(this.baseArgs)
+    await this.fetchRepoPerms(this.baseArgs)
     await this.fetchTransformList(this.baseArgs)
   }
 }

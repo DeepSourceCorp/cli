@@ -1,5 +1,5 @@
 <template>
-  <div class="relative top-0 pb-6 w-full flex flex-col space-y-6">
+  <div class="relative top-0 flex flex-col w-full pb-6 space-y-6">
     <div class="px-4 py-3.5 min-h-13 border-b border-ink-200 flex flex-row items-center">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
@@ -9,11 +9,11 @@
       </z-breadcrumb>
     </div>
     <!-- heading -->
-    <div class="flex flex-col space-y-3 px-4">
+    <div class="flex flex-col px-4 space-y-3">
       <div
-        class="sm:flex text-xs lg:text-lg lg:leading-9 text-vanilla-400 font-normal items-center space-x-2"
+        class="items-center space-x-2 text-xs font-normal sm:flex lg:text-lg lg:leading-9 text-vanilla-400"
       >
-        <span class="text-vanilla-100 font-bold text-lg">{{ title }}</span>
+        <span class="text-lg font-bold text-vanilla-100">{{ title }}</span>
         <span class="inline md:flex" v-if="autofixRun.issue">{{ autofixRun.issue.shortcode }}</span>
       </div>
       <div class="flex space-x-6">
@@ -31,12 +31,12 @@
     <template v-if="isAutofixConcluded">
       <!-- TODO: flash message shown for autofix status - stale, commit status - failed, Pull request status - failed  -->
       <!-- banner -->
-      <div class="bg-ink-300 flex items-center space-x-4 rounded-sm px-4 py-2">
+      <div class="flex items-center px-4 py-2 space-x-4 rounded-sm bg-ink-300">
         <div class="flex items-center space-x-2">
           <z-icon icon="autofix" size="small" color="vanilla-400"></z-icon>
-          <span class="text-sm text-vanilla-400 uppercase">Autofix Session</span>
+          <span class="text-sm uppercase text-vanilla-400">Autofix Session</span>
         </div>
-        <div class="flex items-center space-x-6 flex-1">
+        <div class="flex items-center flex-1 space-x-6">
           <!-- issues being fixed -->
           <info v-if="autofixRun.isGeneratedFromPr">
             <z-icon icon="circle" size="small" color="vanilla-400"></z-icon>
@@ -75,7 +75,7 @@
             "
             @click="triggerRun()"
           >
-            <div class="flex space-x-2 items-center px-4 py-2">
+            <div class="flex items-center px-4 py-2 space-x-2">
               <template v-if="triggeringAutofix">
                 <z-icon
                   icon="spin-loader"
@@ -167,11 +167,11 @@
         </div>
       </div>
       <!-- Code snippets -->
-      <div class="space-y-3 relative px-4">
+      <div class="relative px-4 space-y-3">
         <!-- Group Head -->
         <div
           v-if="isGroup"
-          class="group-head bg-ink-300 py-2 px-2 inline-flex items-center space-x-2 rounded-sm"
+          class="inline-flex items-center px-2 py-2 space-x-2 rounded-sm group-head bg-ink-300"
         >
           <z-checkbox
             v-if="!isReadOnly"
@@ -184,8 +184,8 @@
             @change="selectFile(key)"
           />
           <z-icon icon="bug-risk" size="small" color="vanilla-400"></z-icon>
-          <span class="font-bold text-sm">Missing argument in function call</span>
-          <span class="text-vanilla-400 text-sm">PYL-43WQ</span>
+          <span class="text-sm font-bold">Missing argument in function call</span>
+          <span class="text-sm text-vanilla-400">PYL-43WQ</span>
         </div>
         <div
           :class="{
@@ -211,7 +211,7 @@
       </div>
     </template>
     <template else>
-      <div class="flex flex-col space-y-3 text-center justify-center items-center h-80 px-4">
+      <div class="flex flex-col items-center justify-center px-4 space-y-3 text-center h-80">
         <template v-if="autofixRun.status === AUTOFIX_STATUS.PENDING">
           <z-icon class="animate-spin" icon="spin-loader" color="juniper" size="large"></z-icon>
           <h3>Generating fixes&hellip;</h3>
@@ -286,6 +286,12 @@ const runStore = namespace('run/detail')
     AutofixCard,
     AutofixListItem,
     AutofixCodeDiff
+  },
+  meta: {
+    auth: {
+      strict: true,
+      RepoPerms: [RepoPerms.READ_REPO]
+    }
   },
   layout: 'repository'
 })

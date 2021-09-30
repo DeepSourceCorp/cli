@@ -2,11 +2,11 @@
   <div>
     <div v-if="commitId" class="flex items-center space-x-2">
       <z-icon size="small" icon="clock"></z-icon>
-      <div class="sm:flex sm:items-center space-x-1 overflow-hidden overflow-ellipsis">
+      <div class="space-x-1 overflow-hidden sm:flex sm:items-center overflow-ellipsis">
         <span class="whitespace-nowrap">Last analyzed</span>
         <nuxt-link
           :to="$generateRoute(['run', runId, analyzer])"
-          class="bg-ink-200 cursor-pointer rounded-md inline-flex px-1 items-center gap-1 font-mono"
+          class="inline-flex items-center gap-1 px-1 font-mono rounded-md cursor-pointer bg-ink-200"
         >
           <z-icon icon="git-commit" size="x-small"></z-icon>
           {{ commitId.slice(0, 7) }}
@@ -20,11 +20,11 @@
       <z-icon size="small" icon="git-branch" class="flex-shrink-0"></z-icon>
       <div>
         <span>Default analysis branch is</span>
-        <z-menu direction="left" size="base" class="text-vanilla-100 inline">
+        <z-menu direction="left" size="base" class="inline text-vanilla-100">
           <template v-slot:trigger="{ toggle }">
             <button type="button" class="outline-none focus:outline-none" @click="toggle">
-              <span class="bg-ink-200 text-vanilla-400 rounded-md flex px-1 items-center gap-1">
-                <span class="truncate font-mono" :class="defaultBranch.length > 12 ? 'w-24' : ''">
+              <span class="flex items-center gap-1 px-1 rounded-md bg-ink-200 text-vanilla-400">
+                <span class="font-mono truncate" :class="defaultBranch.length > 12 ? 'w-24' : ''">
                   {{ defaultBranch }}
                 </span>
                 <z-icon icon="chevron-down" size="small"></z-icon>
@@ -35,7 +35,7 @@
             <a :href="vcsUrl" target="blank" rel="noreferrer noopener">
               <z-menu-item>
                 <span class="leading-snug">
-                  View <span class="font-mono inline">{{ defaultBranch }}</span> on
+                  View <span class="inline font-mono">{{ defaultBranch }}</span> on
                   {{ $providerMetaMap[repository.vcsProvider].text }}
                 </span>
               </z-menu-item>
@@ -54,10 +54,6 @@
         {{ currentlyAnalysing > 1 ? 'runs' : 'run' }}</span
       >
     </div>
-    <div v-else class="flex items-center gap-2">
-      <z-pulse :active="false"></z-pulse>
-      <span>No analysis running</span>
-    </div>
     <portal to="modal">
       <z-modal
         v-if="showBranchUpdateModal"
@@ -74,15 +70,15 @@
               placeholder="New Branch name"
               v-model="currentAnalysisBranch"
             ></z-input>
-            <div class="space-x-4 text-right text-vanilla-100 mt-4">
+            <div class="mt-4 space-x-4 text-right text-vanilla-100">
               <z-button
                 v-if="updating"
-                class="w-54 flex items-center"
+                class="flex items-center w-54"
                 buttonType="primary"
                 size="small"
                 :disabled="true"
               >
-                <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2"></z-icon>
+                <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin"></z-icon>
                 Updating Branch
               </z-button>
               <z-button

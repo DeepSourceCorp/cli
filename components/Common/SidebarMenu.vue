@@ -10,7 +10,7 @@
     </div>
     <!-- Sidebar modal -->
     <div
-      class="absolute top-0 z-30 flex flex-col h-screen transition-width duration-200 cursor-pointer group bg-ink-400 sidebar-menu border-ink-200 text-vanilla-100"
+      class="absolute top-0 z-30 flex flex-col h-screen duration-200 cursor-pointer transition-width group bg-ink-400 sidebar-menu border-ink-200 text-vanilla-100"
       :class="[modalWidth, directionClasses, borderClasses, isOpen && 'shadow-black']"
     >
       <!-- Hover Gradient border -->
@@ -18,22 +18,22 @@
         v-if="collapsible"
         class="absolute top-0 hidden w-px h-full lg:group-hover:block -right-px bg-gradient-juniper"
       ></div>
-      <header class="w-full p-2 relative" v-if="$scopedSlots.header">
+      <header class="relative w-full" v-if="$scopedSlots.header">
         <slot name="header" :isCollapsed="isCollapsed"></slot>
         <div
           v-if="collapsible"
-          class="lg:group-hover:block hidden bg-juniper p-1 rounded-full relative lg:absolute top-full transform-gpu -translate-y-1/2"
+          class="relative hidden p-1 -translate-y-1/2 rounded-full lg:group-hover:block bg-juniper lg:absolute top-full transform-gpu"
           @click.stop="collapseSidebar()"
           :class="[hoverStyle]"
         >
           <z-icon :icon="arrow" size="small" color="ink-400" boxWidth="16"></z-icon>
         </div>
       </header>
-      <div class="w-full px-2 flex justify-center">
+      <div class="flex justify-center w-full px-2">
         <slot name="subHeader" :isCollapsed="isCollapsed"></slot>
       </div>
       <div
-        class="flex-1 w-full px-2 pb-4 pt-2 sidebar-items"
+        class="flex-1 w-full px-2 pt-2 pb-4 sidebar-items"
         :class="{
           'custom-y-scroll': !isCollapsed
         }"

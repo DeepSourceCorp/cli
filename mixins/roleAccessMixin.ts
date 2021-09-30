@@ -6,6 +6,7 @@ import RepoDetailMixin from './repoDetailMixin'
 import AuthMixin from './authMixin'
 import ActiveUserMixin from './activeUserMixin'
 import { RepositoryCollaboratorPermission } from '~/types/types'
+import { RepoPerms } from '~/types/permTypes'
 
 export interface RepoPermissions {
   canIgnoreIssues: boolean
@@ -25,5 +26,12 @@ export default class RoleAccessMixin extends mixins(RepoDetailMixin, AuthMixin, 
       canModifyThresholds: this.repository.userPermissionMeta?.can_modify_metric_thresholds,
       permission: this.repository.userPermissionMeta?.permission
     }
+  }
+
+  get hasRepoReadAccess(): boolean {
+    if (this.repoPerms.permission) {
+      return this.$gateKeeper.repo(RepoPerms.READ_REPO, this.repoPerms.permission)
+    }
+    return false
   }
 }
