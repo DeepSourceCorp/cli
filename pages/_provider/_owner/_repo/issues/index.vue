@@ -17,7 +17,7 @@
     <!-- Main Content -->
     <!-- Group by Filter Section -->
     <issue-category-selector
-      class="sticky overflow-y-scroll hide-scroll top-36 category-sidebar"
+      class="sticky top-36 category-sidebar"
       @updateCategory="updateCategory"
       :selectedCategory="queryParams.category"
     >

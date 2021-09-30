@@ -1,7 +1,7 @@
 <template>
-  <div class="hidden border-r border-ink-200 space-y-1 lg:flex flex-col justify-between">
+  <div class="flex-col justify-between hidden space-y-1 border-r border-ink-200 lg:flex">
     <!-- Issue Types View -->
-    <section class="p-2 space-y-1">
+    <section class="flex-shrink p-2 space-y-1 overflow-y-scroll hide-scroll">
       <div
         v-for="issueType in issueCategories"
         :key="issueType.shortcode"
