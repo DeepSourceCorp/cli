@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.2.12
-	github.com/Jeffail/gabs/v2 v2.6.1 // indirect
+	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/cli/browser v1.1.0
 	github.com/deepsourcelabs/graphql v0.2.2
 	github.com/fatih/color v1.12.0
@@ -12,7 +12,7 @@ require (
 	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/matryer/is v1.4.0 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
-	github.com/mitchellh/mapstructure v1.4.1
+	github.com/mitchellh/mapstructure v1.4.1 // indirect
 	github.com/pelletier/go-toml v1.9.2
 	github.com/pterm/pterm v0.12.23
 	github.com/spf13/cobra v1.1.3
