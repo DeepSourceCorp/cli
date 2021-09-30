@@ -1,6 +1,6 @@
 <template>
   <div
-    class="rounded-md px-2"
+    class="px-2 rounded-md"
     :class="{
       'opacity-50': !isActive,
       'hover:bg-ink-300 cursor-pointer': allowHover
@@ -16,7 +16,7 @@
       ></z-animated-integer>
       <div v-else>0</div>
       <ticker
-        v-if="showTrends"
+        v-if="showTrends && isFinite(trendValue)"
         v-tooltip="tooltipText"
         :trendDirection="trendDirection"
         :trendValue="trendValue"
@@ -25,8 +25,8 @@
       />
     </div>
 
-    <div class="text-sm flex space-x-2 items-center ml-px">
-      <div class="h-2 w-2 rounded-full" :class="labelBgClass"></div>
+    <div class="flex items-center ml-px space-x-2 text-sm">
+      <div class="w-2 h-2 rounded-full" :class="labelBgClass"></div>
       <span class="text-vanilla-400">{{ label }}</span>
     </div>
   </div>
