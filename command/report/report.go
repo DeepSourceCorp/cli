@@ -41,7 +41,7 @@ func NewCmdReport() *cobra.Command {
 
 	cmd.Flags().StringVar(&opts.ValueFile, "value-file", "", "Path to the value file")
 
-	cmd.Flags().StringVar(&opts.ValueFile, "value", "", "Value of the artifact")
+	cmd.Flags().StringVar(&opts.Value, "value", "", "Value of the artifact")
 
 	return cmd
 }
@@ -139,7 +139,7 @@ func (opts *ReportOptions) Run() int {
 		// Check file size
 		fileStat, err := os.Stat(reportCommandValueFile)
 		if err != nil {
-			fmt.Println("DeepSource | Error | Unable to read specified value file: " + reportCommandValueFile)
+			fmt.Println("DeepSource error | Error | Unable to read specified value file: " + reportCommandValueFile)
 			sentry.CaptureException(err)
 			return 1
 		}
@@ -151,7 +151,7 @@ func (opts *ReportOptions) Run() int {
 
 		valueBytes, err := ioutil.ReadFile(reportCommandValueFile)
 		if err != nil {
-			fmt.Println("DeepSource | Error | Unable to read specified value file: ", reportCommandValueFile)
+			fmt.Println("DeepSource error| Error | Unable to read specified value file: ", reportCommandValueFile)
 			sentry.CaptureException(err)
 			return 1
 		}
