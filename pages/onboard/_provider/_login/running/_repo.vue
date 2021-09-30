@@ -1,20 +1,20 @@
 <template>
   <div class="container mx-auto">
     <div
-      class="text-vanilla-400 text-sm text-center flex flex-col justify-between min-h-screen pb-24 pt-32"
+      class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
     >
       <video
         autoplay
         loop
         muted
         playsinline
-        class="max-h-84 mx-auto"
+        class="mx-auto max-h-84"
         :poster="require('~/assets/loader/installation-loader.png')"
       >
         <source src="~/assets/loader/loader.webm" type="video/webm" />
       </video>
       <div class="space-y-2">
-        <h1 class="text-2xl text-vanilla-100 font-semibold">
+        <h1 class="text-2xl font-semibold text-vanilla-100">
           Analyzing {{ $route.params.login }}/{{ $route.params.repo }}
         </h1>
         <transition enter-active-class="animate-slide-bottom-enter-active" mode="out-in">
@@ -31,6 +31,8 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { RunStatus } from '~/types/types'
 import { WSRepoAnalysisUpdatedPayload } from '~/types/websockets'
@@ -42,7 +44,7 @@ import { WSRepoAnalysisUpdatedPayload } from '~/types/websockets'
     }
   }
 })
-export default class Running extends mixins(RepoDetailMixin) {
+export default class Running extends mixins(RepoDetailMixin, ActiveUserMixin, OwnerDetailMixin) {
   public status = 'Waking up marvin'
   public timer: ReturnType<typeof setTimeout>
 
@@ -63,21 +65,33 @@ export default class Running extends mixins(RepoDetailMixin) {
   }
 
   async openIssuesPage(data: WSRepoAnalysisUpdatedPayload): Promise<void> {
-    if ([RunStatus.Pend, "pend", "PEND", "Pend"].includes(data.status)) {
+    if ([RunStatus.Pend, 'pend', 'PEND', 'Pend'].includes(data.status)) {
       return
     }
-    
+
     clearTimeout(this.timer)
     setTimeout(() => {
       this.status = 'Finishing Run'
     }, 300)
     const { provider, login, repo } = this.$route.params
-    await this.fetchBasicRepoDetails({
-      provider,
-      owner: login,
-      name: repo,
-      refetch: true
-    })
+
+    await Promise.all([
+      this.fetchBasicRepoDetails({
+        provider,
+        owner: login,
+        name: repo,
+        refetch: true
+      }),
+      this.fetchActiveUser({
+        refetch: true
+      }),
+      this.fetchOwnerDetails({
+        login,
+        provider,
+        refetch: true
+      })
+    ])
+
     setTimeout(() => {
       this.$router.push(`/${provider}/${login}/${repo}/issues`)
     }, 1000)

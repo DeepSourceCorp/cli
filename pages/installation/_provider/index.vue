@@ -1,13 +1,20 @@
 <template>
   <div class="container mx-auto">
     <div
-      class="text-vanilla-400 text-sm text-center flex flex-col justify-between min-h-screen pb-24 pt-32"
+      class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
     >
       <div class="space-y-2">
-        <video class="max-w-xl mx-auto" poster="/installation-loader.png" autoplay>
-          <source src="/loading.mp4" type="video/mp4" />
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          class="mx-auto max-h-84"
+          :poster="require('~/assets/loader/installation-loader.png')"
+        >
+          <source src="~/assets/loader/loader.webm" type="video/webm" />
         </video>
-        <h1 class="text-2xl text-vanilla-100 font-semibold">
+        <h1 class="text-2xl font-semibold text-vanilla-100">
           Waiting for installation to complete
         </h1>
         <p>Please give us a moment while we wait to hear back from your VCS provider.</p>

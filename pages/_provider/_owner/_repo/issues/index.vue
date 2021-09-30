@@ -17,7 +17,7 @@
     <!-- Main Content -->
     <!-- Group by Filter Section -->
     <issue-category-selector
-      class="sticky top-36 category-sidebar"
+      class="sticky overflow-y-scroll hide-scroll top-36 category-sidebar"
       @updateCategory="updateCategory"
       :selectedCategory="queryParams.category"
     >
@@ -28,7 +28,7 @@
           </h4>
           <p class="mt-2 text-sm font-medium leading-snug">
             <span
-              class="bg-clip-text text-vanilla-100 text-opacity-50 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
+              class="text-opacity-50 bg-clip-text text-vanilla-100 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
             >
               Commit the configuration to continue analysis with every pull request.
             </span>
@@ -56,7 +56,7 @@
     </div>
     <div
       v-else
-      class="flex flex-col flex-1 flex-grow p-4 space-y-4 pb-10"
+      class="flex flex-col flex-1 flex-grow p-4 pb-10 space-y-4"
       :class="{
         'max-h-64 min-h-64': issueList.totalCount === 0,
         'min-h-screen max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
@@ -64,7 +64,7 @@
     >
       <empty-state
         v-if="issueList.totalCount === 0"
-        class="border border-dashed rounded-lg border-2 border-ink-200 py-15"
+        class="border border-2 border-dashed rounded-lg border-ink-200 py-15"
         title="No issues in this category"
         :subtitle="`There are no issues, developer asked &quot;Is this a dream?&quot;`"
       >
