@@ -5,9 +5,14 @@
         class="flex flex-wrap items-baseline mb-1 font-normal text-vanilla-400"
         :class="showInfo ? 'text-lg' : 'text-base'"
       >
-        <span class="pr-2 font-semibold text-vanilla-100 line-clamp-1">
-          {{ repoInfo.fullName }}
-        </span>
+        <div class="pr-2">
+          <span class="transition-colors duration-75 cursor-pointer hover:text-vanilla-300">{{
+            repoInfo.owner.login
+          }}</span>
+          <span>/</span>
+          <span class="font-bold text-vanilla-100"> {{ repoInfo.name }} </span>
+        </div>
+
         <span v-if="this.loggedIn" class="flex-shrink-0 block text-sm md:flex">
           <button
             :disabled="updatingWatchlist"

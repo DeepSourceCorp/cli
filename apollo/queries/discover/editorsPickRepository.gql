@@ -3,9 +3,11 @@ query {
     id
     name
     description
-    fullName
     recommendedIssueCount
     isWatched
+    owner {
+      login
+    }
     primaryAnalyzer {
       id
       name

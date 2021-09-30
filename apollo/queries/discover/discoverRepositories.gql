@@ -8,9 +8,11 @@ query($preferredTechnologies: [ID], $q: String) {
         name
         description
         vcsProvider
-        fullName
         recommendedIssueCount
         isWatched
+        owner {
+          login
+        }
         primaryAnalyzer {
           id
           name

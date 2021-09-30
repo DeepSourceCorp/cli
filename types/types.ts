@@ -5340,8 +5340,11 @@ export type Unnamed_63_Query = (
       { __typename?: 'RepositoryEdge' }
       & { node?: Maybe<(
         { __typename?: 'Repository' }
-        & Pick<Repository, 'id' | 'modifiedAt' | 'name' | 'description' | 'vcsProvider' | 'fullName' | 'recommendedIssueCount' | 'isWatched'>
-        & { primaryAnalyzer?: Maybe<(
+        & Pick<Repository, 'id' | 'modifiedAt' | 'name' | 'description' | 'vcsProvider' | 'recommendedIssueCount' | 'isWatched'>
+        & { owner: (
+          { __typename?: 'Owner' }
+          & Pick<Owner, 'login'>
+        ), primaryAnalyzer?: Maybe<(
           { __typename?: 'Analyzer' }
           & Pick<Analyzer, 'id' | 'name' | 'shortcode' | 'analyzerLogo'>
         )> }
@@ -5357,8 +5360,11 @@ export type Unnamed_64_Query = (
   { __typename?: 'Query' }
   & { editorsPickRepository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'name' | 'description' | 'fullName' | 'recommendedIssueCount' | 'isWatched'>
-    & { primaryAnalyzer?: Maybe<(
+    & Pick<Repository, 'id' | 'name' | 'description' | 'recommendedIssueCount' | 'isWatched'>
+    & { owner: (
+      { __typename?: 'Owner' }
+      & Pick<Owner, 'login'>
+    ), primaryAnalyzer?: Maybe<(
       { __typename?: 'Analyzer' }
       & Pick<Analyzer, 'id' | 'name' | 'shortcode' | 'analyzerLogo'>
     )> }
@@ -5399,8 +5405,11 @@ export type Unnamed_66_Query = (
       { __typename?: 'RepositoryEdge' }
       & { node?: Maybe<(
         { __typename?: 'Repository' }
-        & Pick<Repository, 'id' | 'name' | 'description' | 'vcsProvider' | 'fullName' | 'recommendedIssueCount' | 'isWatched'>
-        & { primaryAnalyzer?: Maybe<(
+        & Pick<Repository, 'id' | 'name' | 'description' | 'vcsProvider' | 'recommendedIssueCount' | 'isWatched'>
+        & { owner: (
+          { __typename?: 'Owner' }
+          & Pick<Owner, 'login'>
+        ), primaryAnalyzer?: Maybe<(
           { __typename?: 'Analyzer' }
           & Pick<Analyzer, 'id' | 'name' | 'shortcode' | 'analyzerLogo'>
         )> }
@@ -5426,8 +5435,11 @@ export type Unnamed_67_Query = (
           { __typename?: 'RepositoryEdge' }
           & { node?: Maybe<(
             { __typename?: 'Repository' }
-            & Pick<Repository, 'id' | 'modifiedAt' | 'name' | 'description' | 'vcsProvider' | 'fullName' | 'recommendedIssueCount' | 'isWatched'>
-            & { primaryAnalyzer?: Maybe<(
+            & Pick<Repository, 'id' | 'modifiedAt' | 'name' | 'description' | 'vcsProvider' | 'recommendedIssueCount' | 'isWatched'>
+            & { owner: (
+              { __typename?: 'Owner' }
+              & Pick<Owner, 'login'>
+            ), primaryAnalyzer?: Maybe<(
               { __typename?: 'Analyzer' }
               & Pick<Analyzer, 'id' | 'name' | 'shortcode' | 'analyzerLogo'>
             )> }
