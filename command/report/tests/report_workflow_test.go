@@ -17,7 +17,7 @@ import (
 
 // Sample values to the run the analyzer on
 const (
-	analyzer  = "test_coverage"
+	analyzer  = "test-coverage"
 	dsn       = "http://f59ab9314307@localhost:8081"
 	commitOID = "c2d16c69dbcba139002757b6734ee43c714845a3"
 	key       = "python"

@@ -120,6 +120,7 @@ func TestValidateConfig(t *testing.T) {
 }
 
 func setDummyAnalyzerTransformerData() {
+	analyzersMetaMap := make(map[string]string)
 	utils.AnalyzersData.AnalyzerShortcodes = []string{"python", "test-coverage"}
 	utils.AnalyzersData.AnalyzersMeta = []string{`{
    "type": "object",
@@ -163,6 +164,10 @@ func setDummyAnalyzerTransformerData() {
    ],
    "additionalProperties": false
 }`, "{}"}
+
+	analyzersMetaMap["python"] = utils.AnalyzersData.AnalyzersMeta[0]
+	analyzersMetaMap["test-coverage"] = utils.AnalyzersData.AnalyzersMeta[1]
+	utils.AnalyzersData.AnalyzersMetaMap = analyzersMetaMap
 
 	utils.TransformersData.TransformerShortcodes = []string{"black", "prettier"}
 }
