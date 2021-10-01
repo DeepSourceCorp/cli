@@ -21,16 +21,14 @@
       @updateCategory="updateCategory"
       :selectedCategory="queryParams.category"
     >
-      <template v-slot:cta v-if="repository.errorCode === 3003">
+      <template v-slot:cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
         <div class="p-4 pb-5 bg-gradient-to-t from-ink-200 to-ink-400 via-ink-300">
-          <h4 class="text-base font-bold leading-none text-vanilla-100">
-            Happy with analysis result?
-          </h4>
+          <h4 class="text-base font-bold leading-none text-vanilla-100">Happy with the results?</h4>
           <p class="mt-2 text-sm font-medium leading-snug">
             <span
               class="text-opacity-50 bg-clip-text text-vanilla-100 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
             >
-              Commit the configuration to continue analysis with every pull request.
+              To activate analysis with every pull request, please commit the configuration.
             </span>
           </p>
           <z-button

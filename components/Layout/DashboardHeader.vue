@@ -1,10 +1,10 @@
 <template>
   <div>
-    <div class="bg-ink-300 border-b border-ink-200 overflow-x-scroll">
-      <div id="header" class="p-4 flex items-center">
+    <div class="overflow-x-scroll border-b bg-ink-300 border-ink-200">
+      <div id="header" class="flex items-center p-4">
         <h2 class="inline-flex items-center space-x-3 font-medium text-vanilla-100">
           <nuxt-link
-            class="inline-flex items-center space-x-2 flex-shrink-0"
+            class="inline-flex items-center flex-shrink-0 space-x-2"
             :to="$generateRoute()"
           >
             <!-- account avatar -->
@@ -16,7 +16,7 @@
             ></z-avatar>
 
             <!-- account display name -->
-            <span class="cursor-pointer text-xl lg:text-xl xl:text-2xl font-semibold">{{
+            <span class="text-xl font-semibold cursor-pointer lg:text-xl xl:text-2xl">{{
               activeDashboardContext.team_name || activeDashboardContext.login
             }}</span>
           </nuxt-link>
@@ -39,11 +39,15 @@
               :iconLeft="repoVCSIcon"
             ></z-tag>
           </a>
-          <!-- !TODO onPrem is returned as a string ("false") from backend, this cause the following to be always false. Confirm with backend... -->
-          <template v-if="!context.onPrem && activeDashboardContext.type === 'team'">
+          <template
+            v-if="
+              (!context.onPrem || context.onPrem === 'false') &&
+              activeDashboardContext.type === 'team'
+            "
+          >
             <z-tag
               v-if="hasPaidPlan"
-              class="border-ink-100 border text-center cursor leading-none"
+              class="leading-none text-center border border-ink-100 cursor"
               spacing="py-1.5 px-3"
               bgColor="ink-200"
               v-tooltip="`This account is on the ${planName} plan`"
@@ -52,7 +56,7 @@
             <nuxt-link v-else-if="!$config.onPrem" :to="$generateRoute(['settings', 'billing'])">
               <z-tag
                 icon-left="star"
-                class="border-ink-100 border text-center leading-none uppercase font-semibold tracking-wider text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
+                class="font-semibold leading-none tracking-wider text-center uppercase border border-ink-100 text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
                 spacing="py-1.5 px-3"
                 bgColor="ink-200"
                 v-tooltip="'See upgrade options'"
