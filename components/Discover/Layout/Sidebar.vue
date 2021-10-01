@@ -46,30 +46,32 @@
           >Filter by technology</span
         >
         <div class="flex flex-wrap gap-1.5 mt-2">
-          <nuxt-link
-            v-for="analyzer in analyzerList"
-            :key="analyzer.id"
-            class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
-            :class="[
-              $route.params.lang === analyzer.shortcode
-                ? 'bg-gradient-dawn'
-                : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
-            ]"
-            :to="
-              $route.params.lang === analyzer.shortcode
-                ? `/discover`
-                : `/discover/${analyzer.shortcode}`
-            "
-            role="button"
-          >
-            <img
-              v-if="analyzer.analyzerLogo"
-              :src="analyzer.analyzerLogo"
-              :alt="analyzer.name"
-              class="flex-shrink-0 w-auto h-4"
-            />
-            <span class="text-xs"> {{ analyzer.name }} </span>
-          </nuxt-link>
+          <template v-for="analyzer in analyzerList">
+            <nuxt-link
+              v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
+              :key="analyzer.id"
+              class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
+              :class="[
+                $route.params.lang === analyzer.shortcode
+                  ? 'bg-gradient-dawn'
+                  : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
+              ]"
+              :to="
+                $route.params.lang === analyzer.shortcode
+                  ? `/discover`
+                  : `/discover/${analyzer.shortcode}`
+              "
+              role="button"
+            >
+              <img
+                v-if="analyzer.analyzerLogo"
+                :src="analyzer.analyzerLogo"
+                :alt="analyzer.name"
+                class="flex-shrink-0 w-auto h-4"
+              />
+              <span class="text-xs"> {{ analyzer.name }} </span>
+            </nuxt-link>
+          </template>
         </div>
       </div>
     </section>

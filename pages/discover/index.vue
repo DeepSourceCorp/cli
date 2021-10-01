@@ -136,7 +136,9 @@ export default class Discover extends Vue {
   }
 
   async fetch(): Promise<void> {
+    this.loading = true
     await this.getRepos()
+    this.loading = false
   }
 }
 </script>
