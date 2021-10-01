@@ -6,14 +6,13 @@
       <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300" />
     </div>
 
-    <div v-else-if="resolveNodes(watchedRepositories).length" class="mt-1.5 grid gap-2">
+    <div v-else-if="resolveNodes(watchedRepositories).length" class="grid gap-2">
       <repo-card
         v-for="(edge, key) in watchedRepositories.edges"
         :key="key"
         :repo-info="edge.node"
         :show-description="true"
         :show-info="true"
-        class="mt-2.5"
       >
         <template slot="stats" v-if="edge.node && edge.node.modifiedAt">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
@@ -49,8 +48,8 @@ const discoverUserStore = namespace('discover/user')
   }
 })
 export default class WatchedRepoFeed extends Vue {
-  private fromNow = fromNow
-  private resolveNodes = resolveNodes
+  fromNow = fromNow
+  resolveNodes = resolveNodes
 
   @discoverUserStore.Getter(DiscoverUserGetters.GET_WATCHED_REPOSITORIES)
   watchedRepositories: RepositoryConnection

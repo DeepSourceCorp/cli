@@ -1,5 +1,5 @@
 <template>
-  <div v-if="editorsPickRepository.fullName">
+  <div v-if="editorsPickRepository.id">
     <section-header title="Editor's pick" />
 
     <div class="p-0.5 rounded-lg bg-gradient-dawn">

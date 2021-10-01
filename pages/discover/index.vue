@@ -1,15 +1,15 @@
 <template>
   <div class="pb-8">
     <div
-      class="flex flex-col items-center md:flex-row md:items-baseline min-h-56 md:min-h-64 discover-mobile-hero md:discover-hero"
+      class="flex flex-col items-center md:flex-row md:items-baseline discover-mobile-hero md:discover-hero"
     >
-      <div class="px-4 my-10 text-center md:mt-10 md:mb-0 md:text-left">
+      <div class="px-4 my-8 text-center md:my-10 md:text-left">
         <h1
-          class="text-2xl font-bold leading-none md:text-3xl discover-mobile-hero-text md:bg-none"
+          class="text-2xl font-bold leading-none md:text-2.5xl discover-mobile-hero-text md:bg-none"
         >
           Discover
         </h1>
-        <p class="max-w-lg mt-3 text-md md:max-w-2xl md:text-lg text-vanilla-400">
+        <p class="max-w-md mt-3 md:max-w-2xl md:text-lg text-vanilla-400">
           Discover and fix bug risks, anti-patterns, performance issues and security flaws.
         </p>
         <z-input
@@ -32,35 +32,69 @@
       <div class="grid gap-4 px-4 grid-cols-discover">
         <!-- Discover repo feed -->
         <repo-feed :loading="loading" />
-        <!-- Editor's pick repository -->
-        <div>
+        <section class="space-y-4">
+          <!-- Editor's pick repository -->
           <editors-pick />
           <!-- Trending repositories -->
           <trending />
-        </div>
+        </section>
       </div>
     </div>
 
     <!-- Mobile layout -->
-    <tab-layout />
+    <div class="flex flex-col items-center md:hidden">
+      <z-tabs class="w-full -mb-px">
+        <div class="flex justify-between px-4 border-b border-ink-200">
+          <z-tab-list class="flex pt-4 space-x-4 overflow-auto sm:w-auto hide-scroll">
+            <z-tab-item class="flex items-center flex-shrink-0" icon="rss">
+              <span>Recommended Projects</span>
+            </z-tab-item>
+            <z-tab-item class="flex items-center flex-shrink-0" icon="trending-up">
+              <span>Trending</span>
+            </z-tab-item>
+          </z-tab-list>
+        </div>
+
+        <z-tab-panes class="px-4 pt-4 min-h-48">
+          <!-- Discover repo feed -->
+          <repo-feed :loading="loading" />
+
+          <z-tab-pane>
+            <!-- Editor's pick repository -->
+            <editors-pick class="mb-2" />
+            <!-- Trending repositories -->
+            <trending />
+          </z-tab-pane>
+        </z-tab-panes>
+      </z-tabs>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
-import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
 
 import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
-import { Maybe, RepositoryConnection } from '~/types/types'
+import { Maybe, Repository, RepositoryConnection } from '~/types/types'
+import { ZIcon, ZInput, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem } from '@deepsourcelabs/zeal'
+import EditorsPick from '@/components/Discover/EditorsPick.vue'
+import Trending from '@/components/Discover/Trending.vue'
 
 const discoverRepositoriesStore = namespace('discover/repositories')
 
 @Component({
   components: {
     ZInput,
-    ZIcon
+    ZIcon,
+    ZTabs,
+    ZTabList,
+    ZTabPane,
+    ZTabPanes,
+    ZTabItem,
+    EditorsPick,
+    Trending
   },
-  layout: 'sidebar-only'
+  layout: 'discover'
 })
 export default class Discover extends Vue {
   searchTerm = ''
@@ -71,15 +105,19 @@ export default class Discover extends Vue {
   fetchDiscoverRepositories: (args?: {
     q: string
     preferredTechnologies: string[]
+    limit?: number
     refetch?: boolean
   }) => Promise<void>
 
   @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_DISCOVER_REPOSITORIES)
   discoverRepositories: Maybe<RepositoryConnection>
 
-  async mounted(): Promise<void> {
+  @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_EDITORS_PICK_REPOSITORY)
+  editorsPickRepository: Maybe<Repository>
+
+  mounted(): void {
     this.$root.$on('discover:update-analyzers', this.getRepos)
-    await this.getRepos()
+    this.$fetch()
   }
 
   beforeDestroy(): void {
@@ -87,17 +125,18 @@ export default class Discover extends Vue {
   }
 
   async getRepos(data?: string[]): Promise<void> {
-    this.loading = true
     this.preferredTechnology = data ?? []
     await this.$fetch()
-    this.loading = false
   }
 
   async fetch(): Promise<void> {
+    this.loading = true
     await this.fetchDiscoverRepositories({
       q: this.searchTerm,
-      preferredTechnologies: this.preferredTechnology
+      preferredTechnologies: this.preferredTechnology,
+      limit: process.server ? 25 : 100
     })
+    this.loading = false
   }
 }
 </script>

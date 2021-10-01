@@ -5,7 +5,11 @@
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
     <section class="p-4 border-b border-ink-200">
-      <img class="w-auto h-5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
+      <img
+        class="w-auto h-5 mt-0.5"
+        src="~/assets/images/logo-wordmark-white.svg"
+        alt="DeepSource"
+      />
     </section>
 
     <section
@@ -42,33 +46,6 @@
             </span>
           </z-button>
         </nuxt-link>
-
-        <div v-if="loggedIn && !isCollapsed" class="mt-2 border rounded-sm border-ink-200">
-          <button
-            v-tooltip="'Update your favourites'"
-            class="flex items-center justify-between w-full px-2 py-1 text-sm rounded-none hover:bg-ink-300 focus:outline-none"
-            @click="showUpdateTechnologiesModal = true"
-          >
-            Favourites
-            <z-icon icon="edit-2" />
-          </button>
-          <div
-            v-if="
-              preferredTechnologies &&
-              preferredTechnologies.edges &&
-              preferredTechnologies.edges.length
-            "
-            class="grid grid-cols-6 gap-1.5 p-2 border-t border-ink-200"
-          >
-            <img
-              v-for="edge in preferredTechnologies.edges"
-              :key="edge.node.id"
-              :src="edge.node.analyzerLogo"
-              :alt="edge.node.shortcode"
-              class="w-5 h-5"
-            />
-          </div>
-        </div>
       </div>
 
       <div v-if="!isCollapsed" class="p-2.5" :class="{ 'mt-8': !loggedIn }">
@@ -82,7 +59,7 @@
             class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
             :class="[
               analyzerIdList.includes(analyzer.id)
-                ? 'bg-ink-50'
+                ? 'bg-gradient-dawn'
                 : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
             ]"
             role="button"
@@ -194,11 +171,6 @@
         @primaryAction="showInDiscoverInfoDialog = false"
       />
     </portal>
-
-    <update-preferred-technologies
-      v-if="showUpdateTechnologiesModal"
-      @close="showUpdateTechnologiesModal = false"
-    />
   </aside>
 </template>
 
@@ -280,6 +252,20 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
     return Boolean(
       parentCandidate && (target === parentCandidate || parentCandidate.contains(target))
     )
+  }
+
+  openSidebar() {
+    this.isCollapsed = false
+    this.collapsedSidebar = false
+    this.isOpen = true
+  }
+
+  mounted() {
+    this.$root.$on('ui:show-sidebar-menu', this.openSidebar)
+  }
+
+  beforeDestroy() {
+    this.$root.$off('ui:show-sidebar-menu', this.openSidebar)
   }
 
   closeMenu(event: Event): void {

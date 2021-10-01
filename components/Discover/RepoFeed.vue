@@ -1,32 +1,29 @@
 <template>
-  <div>
+  <section>
     <section-header title="Recommended projects" />
     <div v-if="loading" class="grid gap-2 animate-pulse">
       <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300" />
     </div>
-    <div v-else>
-      <div v-if="resolveNodes(discoverRepositories).length" class="grid gap-2">
-        <repo-card
-          v-for="edge in discoverRepositories.edges"
-          :key="edge.node.id"
-          :repo-info="edge.node"
-          :show-description="true"
-          :show-info="true"
-        >
-          <template slot="stats">
-            <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
-            <span class="text-sm text-vanilla-400">
-              Updated {{ fromNow(edge.node.modifiedAt) }}
-            </span>
-          </template>
-        </repo-card>
-      </div>
-
-      <div v-else>
-        <lazy-empty-state title="No results found" />
-      </div>
+    <div v-else-if="resolveNodes(discoverRepositories).length" class="grid gap-2">
+      <repo-card
+        v-for="edge in discoverRepositories.edges"
+        :key="edge.node.id"
+        :repo-info="edge.node"
+        :show-description="true"
+        :show-info="true"
+      >
+        <template slot="stats">
+          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <span class="text-sm text-vanilla-400">
+            Updated {{ fromNow(edge.node.modifiedAt) }}
+          </span>
+        </template>
+      </repo-card>
     </div>
-  </div>
+    <div v-else>
+      <lazy-empty-state title="No results found" />
+    </div>
+  </section>
 </template>
 
 <script lang="ts">
@@ -55,21 +52,10 @@ export default class RepoFeed extends Vue {
   @Prop({ default: false })
   loading: boolean
 
-  private fromNow = fromNow
-  private resolveNodes = resolveNodes
+  resolveNodes = resolveNodes
+  fromNow = fromNow
 
   @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_DISCOVER_REPOSITORIES)
   discoverRepositories: Maybe<RepositoryConnection>
-
-  // @discoverRepositoriesStore.Action(DiscoverRepoActions.FETCH_DISCOVER_REPOSITORIES)
-  // fetchDiscoverRepositories: (args?: {
-  //   name_Icontains?: string
-  //   preferredTechnologies?: Array<Scalars['ID']>
-  //   refetch?: boolean
-  // }) => Promise<void>
-
-  // async fetch() {
-  //   await this.fetchDiscoverRepositories()
-  // }
 }
 </script>

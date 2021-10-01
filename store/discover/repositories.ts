@@ -2,7 +2,14 @@ import { ActionContext, ActionTree, GetterTree, MutationTree, Store } from 'vuex
 
 import { RootState } from '~/store'
 import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
-import { Maybe, PageInfo, Repository, RepositoryConnection, Scalars } from '~/types/types'
+import {
+  Maybe,
+  PageInfo,
+  Repository,
+  RepositoryConnection,
+  RepositoryEdge,
+  Scalars
+} from '~/types/types'
 import DiscoverRepositoriesGQLQuery from '~/apollo/queries/discover/discoverRepositories.gql'
 import TrendingRepositoriesGQLQuery from '~/apollo/queries/discover/trendingRepositories.gql'
 import EditorsPickRepositoryGQLQuery from '~/apollo/queries/discover/editorsPickRepository.gql'
@@ -16,7 +23,8 @@ export enum DiscoverRepoGetters {
 export enum DiscoverRepoActions {
   FETCH_DISCOVER_REPOSITORIES = 'fetchDiscoverRepositories',
   FETCH_TRENDING_REPOSITORIES = 'fetchTrendingRepositories',
-  FETCH_EDITORS_PICK_REPOSITORY = 'fetchEditorsPickRepository'
+  FETCH_EDITORS_PICK_REPOSITORY = 'fetchEditorsPickRepository',
+  SET_WATCHING_STATE = 'setWatchingState'
 }
 
 export enum DiscoverRepoMutations {
@@ -121,6 +129,7 @@ interface DiscoverRepoModuleActions extends ActionTree<DiscoverRepoState, RootSt
     args: {
       name_Icontains?: string
       preferredTechnologies?: Array<Scalars['ID']>
+      limit?: number
       refetch?: boolean
     }
   ) => Promise<void>
@@ -140,16 +149,28 @@ interface DiscoverRepoModuleActions extends ActionTree<DiscoverRepoState, RootSt
       refetch?: boolean
     }
   ) => Promise<void>
+
+  [DiscoverRepoActions.SET_WATCHING_STATE]: (
+    this: Store<RootState>,
+    injectee: DiscoverRepoActionContext,
+    args: {
+      repoId: string
+      isWatched: boolean
+    }
+  ) => void
 }
 
 export const actions: DiscoverRepoModuleActions = {
   async [DiscoverRepoActions.FETCH_DISCOVER_REPOSITORIES]({ commit }, args) {
     try {
-      const refetch = args ? args.refetch : false
       const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
         DiscoverRepositoriesGQLQuery,
-        args,
-        refetch
+        {
+          ...args,
+          after: this.$getGQLAfter(1, args.limit ?? 100),
+          first: args.limit ?? 100
+        },
+        args.refetch
       )
       commit(DiscoverRepoMutations.SET_DISCOVER_REPOSITORIES, response.data.discoverRepositories)
     } catch (e) {
@@ -185,6 +206,39 @@ export const actions: DiscoverRepoModuleActions = {
     } catch (e) {
       const error = e as GraphqlError
       commit(DiscoverRepoMutations.SET_ERROR, error)
+    }
+  },
+
+  [DiscoverRepoActions.SET_WATCHING_STATE]({ commit, state }, args) {
+    const updateFn = (edge: Maybe<RepositoryEdge>) => {
+      if (edge?.node && edge.node.id === args.repoId) {
+        edge.node.isWatched = args.isWatched
+      }
+      return edge
+    }
+
+    commit(
+      DiscoverRepoMutations.SET_DISCOVER_REPOSITORIES,
+      Object.assign({}, state.discoverRepositories, {
+        edges: state.discoverRepositories?.edges.map(updateFn)
+      })
+    )
+
+    commit(
+      DiscoverRepoMutations.SET_TRENDING_REPOSITORIES,
+      Object.assign({}, state.trendingRepositories, {
+        edges: state.trendingRepositories?.edges.map(updateFn)
+      })
+    )
+
+    if (state.editorsPickRepository?.id === args.repoId) {
+      commit(
+        DiscoverRepoMutations.SET_EDITORS_PICK_REPOSITORY,
+        Object.assign({}, state.editorsPickRepository, {
+          ...state.editorsPickRepository,
+          isWatched: args.isWatched
+        })
+      )
     }
   }
 }

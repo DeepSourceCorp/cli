@@ -1,9 +1,7 @@
 <template>
   <div class="relative flex h-screen mx-auto overflow-hidden bg-ink-400 text-vanilla-100">
     <!-- Discover page uses a different sidebar -->
-
-    <sidebar v-if="loggedIn" class="top-0 z-50" />
-    <logged-out-sidebar v-else class="top-0 z-50" />
+    <discover-sidebar class="top-0 z-50" />
     <div ref="scrolling-div" class="w-full overflow-y-scroll hide-scroll">
       <mobile-nav
         class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-ink-200"
@@ -17,14 +15,13 @@
 
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
-import { LoggedOutSidebar, MobileNav } from '@/components/Layout'
-import { Sidebar } from '@/components/Layout/Sidebar'
+import { MobileNav } from '@/components/Layout'
+import { DiscoverSidebar } from '@/components/Discover/Layout'
 import AuthMixin from '@/mixins/authMixin'
 
 @Component({
   components: {
-    Sidebar,
-    LoggedOutSidebar,
+    DiscoverSidebar,
     MobileNav
   },
   head: {
@@ -33,7 +30,7 @@ import AuthMixin from '@/mixins/authMixin'
     }
   }
 })
-export default class SidebarOnlyLayout extends mixins(AuthMixin) {
+export default class DiscoverLayout extends mixins(AuthMixin) {
   @Watch('$route.path')
   resetScroll() {
     const divThatScrolls = this.$refs['scrolling-div'] as HTMLElement

@@ -1,49 +1,84 @@
 <template>
   <div>
-    <div class="watchlist-mobile-hero md:watchlist-hero">
-      <div>
-        <div class="mt-3.5 ml-3">
-          <span class="font-semibold">
-            <span class="text-vanilla-400">Discover</span
-            ><span class="text-vanilla-100"> / Watchlist</span>
-          </span>
-        </div>
-      </div>
-
-      <div class="mt-3">
-        <hr class="flex-grow border-ink-300" />
-      </div>
-
-      <div class="flex min-h-22">
-        <nuxt-link to="/discover">
-          <z-button
-            class="mt-5 ml-3 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
-          >
-            <z-icon icon="arrow-left" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
-            <span class="text-sm font-medium text-vanilla-100"> Back to discover </span>
-          </z-button>
-        </nuxt-link>
-      </div>
+    <div class="space-x-0.5 font-medium p-3.5 pb-4 border-b border-ink-200">
+      <span class="leading-none text-vanilla-400">Discover</span>
+      <span class="leading-none text-vanilla-100">/</span>
+      <span class="leading-none text-vanilla-100"> Watchlist</span>
+    </div>
+    <div class="px-4 py-5 watchlist-mobile-hero md:watchlist-hero">
+      <nuxt-link to="/discover">
+        <z-button button-type="secondary" icon="arrow-left"> Back to discover </z-button>
+      </nuxt-link>
     </div>
 
     <!-- Layout for larger screens -->
-    <grid-layout />
+    <div class="hidden gap-4 px-4 md:grid text-vanilla-100 grid-cols-discover">
+      <!-- Discover repo feed -->
+      <watched-repo-feed />
+      <section class="space-y-4">
+        <!-- Editor's pick repository -->
+        <editors-pick />
+        <!-- Trending repositories -->
+        <trending />
+      </section>
+    </div>
 
     <!-- Mobile layout -->
-    <tab-layout />
+    <div class="flex flex-col items-center md:hidden">
+      <z-tabs class="w-full -mb-px">
+        <div class="flex justify-between px-4 border-b border-ink-200">
+          <z-tab-list class="flex pt-4 space-x-4 overflow-auto sm:w-auto hide-scroll">
+            <z-tab-item class="flex items-center flex-shrink-0" icon="rss">
+              <span>Watchlist</span>
+            </z-tab-item>
+            <z-tab-item class="flex items-center flex-shrink-0" icon="trending-up">
+              <span>Trending</span>
+            </z-tab-item>
+          </z-tab-list>
+        </div>
+
+        <z-tab-panes class="px-4 pt-4 min-h-48">
+          <!-- Discover repo feed -->
+          <watched-repo-feed />
+
+          <z-tab-pane>
+            <!-- Editor's pick repository -->
+            <editors-pick class="mb-2" />
+            <!-- Trending repositories -->
+            <trending />
+          </z-tab-pane>
+        </z-tab-panes>
+      </z-tabs>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZInput } from '@deepsourcelabs/zeal'
+import {
+  ZIcon,
+  ZButton,
+  ZTabs,
+  ZTabList,
+  ZTabPane,
+  ZTabPanes,
+  ZTabItem
+} from '@deepsourcelabs/zeal'
+import EditorsPick from '@/components/Discover/EditorsPick.vue'
+import Trending from '@/components/Discover/Trending.vue'
 import { Context } from '@nuxt/types'
 
 @Component({
   components: {
+    ZIcon,
     ZButton,
-    ZInput,
-    ZIcon
+    ZTabs,
+    ZTabList,
+    ZTabPane,
+    ZTabPanes,
+    ZTabItem,
+    Trending,
+    EditorsPick
   },
   middleware: [
     ({ redirect, store }: Context) => {
@@ -53,7 +88,7 @@ import { Context } from '@nuxt/types'
       }
     }
   ],
-  layout: 'sidebar-only'
+  layout: 'discover'
 })
 export default class Watchlist extends Vue {}
 </script>

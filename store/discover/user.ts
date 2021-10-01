@@ -194,7 +194,7 @@ export const actions: DiscoverUserModuleActions = {
   ) {
     try {
       await this.$applyGraphqlMutation(UpdateWatchedRepositoriesGQLMutation, { repoId, action })
-      await dispatch(DiscoverUserActions.FETCH_WATCHED_REPOSITORIES, { refetch: true })
+      dispatch(DiscoverUserActions.FETCH_WATCHED_REPOSITORIES, { refetch: true })
     } catch (e) {
       const error = e as GraphqlError
       commit(DiscoverUserMutations.SET_ERROR, error)

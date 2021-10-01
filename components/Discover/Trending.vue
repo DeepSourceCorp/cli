@@ -1,9 +1,9 @@
 <template>
-  <div :class="{ 'md:mt-4': editorsPickRepository.fullName }">
+  <div>
     <section-header title="Trending" />
 
     <div v-if="$fetchState.pending" class="grid gap-2 animate-pulse">
-      <div v-for="ii in 5" :key="ii" class="rounded-md h-17 bg-ink-300"/>
+      <div v-for="ii in 5" :key="ii" class="rounded-md h-17 bg-ink-300" />
     </div>
 
     <div v-else class="grid gap-2">
