@@ -404,6 +404,7 @@ export type AutofixRun = MaskPrimaryKeyNode & {
   filesAffected?: Maybe<Scalars['Int']>;
   issuesAffected?: Maybe<Scalars['Int']>;
   changeset?: Maybe<Scalars['GenericScalar']>;
+  errorsRendered?: Maybe<Scalars['GenericScalar']>;
   finishedIn?: Maybe<Scalars['Int']>;
   vcsPrUrl?: Maybe<Scalars['String']>;
   resolvedIssuesCount?: Maybe<Scalars['Int']>;
@@ -3422,6 +3423,7 @@ export type TransformerRun = MaskPrimaryKeyNode & {
   gitCompareDisplay?: Maybe<Scalars['String']>;
   gitCompareUrl?: Maybe<Scalars['String']>;
   staleRedirectUrl?: Maybe<Scalars['String']>;
+  errorsRendered?: Maybe<Scalars['GenericScalar']>;
 };
 
 export enum TransformerRunCommittedToBranchStatus {
@@ -6419,7 +6421,7 @@ export type Unnamed_93_Query = (
   { __typename?: 'Query' }
   & { autofixRun: (
     { __typename?: 'AutofixRun' }
-    & Pick<AutofixRun, 'id' | 'errors' | 'runId' | 'staleRedirectUrl' | 'finishedIn' | 'isGeneratedFromPr' | 'issuesAffected' | 'committedToBranchStatus' | 'resolvedIssuesCount' | 'pullRequestStatus' | 'pullRequestTitle' | 'pullRequestNumber' | 'status' | 'changeset' | 'vcsPrUrl'>
+    & Pick<AutofixRun, 'id' | 'errorsRendered' | 'runId' | 'staleRedirectUrl' | 'finishedIn' | 'isGeneratedFromPr' | 'issuesAffected' | 'committedToBranchStatus' | 'resolvedIssuesCount' | 'pullRequestStatus' | 'pullRequestTitle' | 'pullRequestNumber' | 'status' | 'changeset' | 'vcsPrUrl'>
     & { createdBy?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'fullName' | 'avatar'>
@@ -6780,7 +6782,7 @@ export type Unnamed_105_Query = (
   { __typename?: 'Query' }
   & { transformerRun: (
     { __typename?: 'TransformerRun' }
-    & Pick<TransformerRun, 'branchName' | 'changedFilesCount' | 'changeset' | 'commitOidShort' | 'committedToBranchStatus' | 'createdAt' | 'errors' | 'finishedIn' | 'gitCompareDisplay' | 'id' | 'pullRequestStatus' | 'status' | 'tools' | 'vcsCommitUrl' | 'vcsPrUrl'>
+    & Pick<TransformerRun, 'branchName' | 'changedFilesCount' | 'changeset' | 'errorsRendered' | 'commitOidShort' | 'committedToBranchStatus' | 'createdAt' | 'finishedIn' | 'gitCompareDisplay' | 'id' | 'pullRequestStatus' | 'status' | 'tools' | 'vcsCommitUrl' | 'vcsPrUrl'>
   ) }
 );
 

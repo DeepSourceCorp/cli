@@ -1,7 +1,7 @@
 query($runId: String!) {
   autofixRun(runId: $runId) {
     id
-    errors
+    errorsRendered
     runId
     staleRedirectUrl
     finishedIn

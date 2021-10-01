@@ -3,10 +3,10 @@ query($runId: String!) {
     branchName
     changedFilesCount
     changeset
+    errorsRendered
     commitOidShort
     committedToBranchStatus
     createdAt
-    errors
     finishedIn
     gitCompareDisplay
     id

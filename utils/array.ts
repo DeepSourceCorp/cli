@@ -31,4 +31,15 @@ function resolveNodes(
     .filter(Boolean)
 }
 
-export { resize, getLastTwoTrends, getChangeFromTrend, resolveNodes }
+function parseArrayString(candidate: string | null): unknown[] {
+  if (candidate) {
+    try {
+      return JSON.parse(candidate)
+    } catch {
+      return []
+    }
+  }
+  return []
+}
+
+export { resize, getLastTwoTrends, getChangeFromTrend, resolveNodes, parseArrayString }

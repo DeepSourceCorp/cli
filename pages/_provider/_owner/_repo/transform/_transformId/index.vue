@@ -9,9 +9,9 @@
       <!-- Transform section banner -->
       <div class="flex w-full bg-ink-300 px-4 py-2 text-vanilla-400 items-center space-x-2">
         <z-icon icon="zap" color="vanilla-400" size="small"></z-icon>
-        <span class="uppercase tracking-normal sm:tracking-wide text-xxs sm:text-sm"
-          >transform session</span
-        >
+        <span class="uppercase tracking-normal sm:tracking-wide text-xxs sm:text-sm">
+          transform session
+        </span>
         <div class="w-px bg-ink-200 h-full"></div>
         <div class="flex-1 space-x-2">
           <z-tag
@@ -52,6 +52,9 @@
             <z-icon icon="arrow-up-right" size="small"></z-icon>
           </z-button>
         </a>
+      </div>
+      <div class="px-4" v-if="!$fetchState.pending && parseArrayString(transformerRun.errors).length">
+        <run-error-box :errorsRendered="parseArrayString(transformerRun.errors)" />
       </div>
       <!-- Code Diff -->
       <div class="p-4 space-y-4">
@@ -94,6 +97,8 @@ import { TransformerRunActions } from '@/store/transformerRun/detail'
 import { TransformerRun } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
+import { parseArrayString } from '~/utils/array'
+
 const transformDetailStore = namespace('transformerRun/detail')
 
 @Component({
@@ -111,6 +116,29 @@ export default class Issues extends mixins(RepoDetailMixin) {
   @transformDetailStore.State
   transformerRun: TransformerRun
 
+  TRANSFORM_STATUS = {
+    PASS: 'PASS',
+    TIMO: 'TIMO',
+    FAIL: 'FAIL',
+    STAL: 'STAL'
+  }
+
+  COMMIT_STATUS = {
+    COMMITTED: 'CTB',
+    NOT_COMMITTED: 'NCB',
+    FAILED: 'CTF'
+  }
+
+  PULL_REQUEST_STATUS = {
+    NOT_CREATED: 'PNC',
+    OPENED: 'PRO',
+    CREATED: 'PRC',
+    MERGED: 'PRM',
+    FAILED: 'PRF'
+  }
+
+  parseArrayString = parseArrayString
+
   async fetch(): Promise<void> {
     await this.fetchTransformerRun()
   }
@@ -119,7 +147,7 @@ export default class Issues extends mixins(RepoDetailMixin) {
     this.$socket.$on('transformerrun-patches-ready', this.fetchTransformerRun)
     this.$socket.$on('repo-transform-created', this.fetchTransformerRun)
   }
-  
+
   beforeDestroy(): void {
     this.$socket.$off('transformerrun-patches-ready', this.fetchTransformerRun)
     this.$socket.$off('repo-transform-created', this.fetchTransformerRun)

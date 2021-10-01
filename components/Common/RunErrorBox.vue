@@ -23,18 +23,16 @@
             {{ getErrorTypeLabel(key) }}
           </z-label>
           <ul class="mt-4 space-y-2">
-            <li
-              v-for="(error, index) in errors"
-              :key="index"
-              class="flex items-start ml-1 space-x-2"
-            >
-              <span
-                class="h-5 w-5 rounded-full grid place-content-center bg-ink-300 text-xs mt-0.5 select-none"
-              >
-                {{ index + 1 }}
-              </span>
-              <p class="max-w-4xl prose-sm prose prose-indigo" v-html="error.message"></p>
-            </li>
+            <template v-for="(error, index) in errors">
+              <li v-if="error.message" :key="index" class="flex items-start ml-1 space-x-2">
+                <span
+                  class="h-5 w-5 rounded-full grid place-content-center bg-ink-300 text-xs mt-0.5 select-none"
+                >
+                  {{ index + 1 }}
+                </span>
+                <p class="max-w-4xl prose-sm prose prose-indigo" v-html="error.message"></p>
+              </li>
+            </template>
           </ul>
         </div>
       </template>
@@ -61,7 +59,8 @@ import { ZIcon, ZLabel, ZButton } from '@deepsourcelabs/zeal'
 
 export interface RunError {
   level: number
-  message: string
+  message?: string
+  hmessage?: string
 }
 
 @Component({
@@ -72,7 +71,7 @@ export interface RunError {
   },
   layout: 'repository'
 })
-export default class AnalyzerRunError extends Vue {
+export default class RunErrorBox extends Vue {
   @Prop({ default: () => [] })
   errorsRendered: RunError[]
 

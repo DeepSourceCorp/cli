@@ -261,6 +261,7 @@ type AutofixRun implements MaskPrimaryKeyNode {
   filesAffected: Int
   issuesAffected: Int
   changeset: GenericScalar
+  errorsRendered: GenericScalar
   finishedIn: Int
   vcsPrUrl: String
   resolvedIssuesCount: Int
@@ -1976,6 +1977,7 @@ type TransformerRun implements MaskPrimaryKeyNode {
   gitCompareDisplay: String
   gitCompareUrl: String
   staleRedirectUrl: String
+  errorsRendered: GenericScalar
 }
 
 enum TransformerRunCommittedToBranchStatus {

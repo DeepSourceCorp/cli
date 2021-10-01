@@ -28,144 +28,145 @@
         ></info>
       </div>
     </div>
-    <template v-if="isAutofixConcluded">
-      <!-- TODO: flash message shown for autofix status - stale, commit status - failed, Pull request status - failed  -->
-      <!-- banner -->
-      <div class="flex items-center px-4 py-2 space-x-4 rounded-sm bg-ink-300">
-        <div class="flex items-center space-x-2">
-          <z-icon icon="autofix" size="small" color="vanilla-400"></z-icon>
-          <span class="text-sm uppercase text-vanilla-400">Autofix Session</span>
-        </div>
-        <div class="flex items-center flex-1 space-x-6">
-          <!-- issues being fixed -->
-          <info v-if="autofixRun.isGeneratedFromPr">
-            <z-icon icon="circle" size="small" color="vanilla-400"></z-icon>
-            <span class="text-sm">
-              <span class="text-semibold">{{ autofixRun.issuesAffected }} issues</span>
-              <span v-if="!isReadOnly">may be</span>
-              <span>fixed</span>
-            </span>
-          </info>
-          <!-- Total occurrences fixed -->
-          <info>
-            <z-icon icon="circle" size="small" color="vanilla-400"></z-icon>
-            <span class="text-sm">
-              <span class="text-semibold">{{ autofixRun.resolvedIssuesCount }} occurrences</span>
-              <span v-if="!isReadOnly">may be</span>
-              <span>fixed</span>
-            </span>
-          </info>
-          <!-- Total files being affected -->
-          <info>
-            <z-icon icon="circle" size="small" color="vanilla-400"></z-icon>
-            <span class="text-sm">
-              <span class="text-semibold">{{ filesAffected.length }} files</span>
-              <span v-if="!isReadOnly">will be</span>
-              <span>affected</span>
-            </span>
-          </info>
-        </div>
-        <div v-if="!isReadOnly">
+    <!-- banner -->
+    <div
+      v-if="isAutofixConcluded"
+      class="flex items-center px-4 py-2 space-x-4 rounded-sm bg-ink-300"
+    >
+      <div class="flex items-center space-x-2">
+        <z-icon icon="autofix" size="small" color="vanilla-400"></z-icon>
+        <span class="text-sm uppercase text-vanilla-400">Autofix Session</span>
+      </div>
+      <div class="flex items-center flex-1 space-x-6">
+        <!-- issues being fixed -->
+        <info v-if="autofixRun.isGeneratedFromPr">
+          <z-icon icon="flag" size="small" color="vanilla-400"></z-icon>
+          <span class="text-sm">
+            <span class="text-semibold">{{ autofixRun.issuesAffected }} issues</span>
+            <span v-if="!isReadOnly">can be</span>
+            <span>fixed</span>
+          </span>
+        </info>
+        <!-- Total occurrences fixed -->
+        <info v-if="autofixRun.resolvedIssuesCount">
+          <z-icon icon="target" size="small" color="vanilla-400"></z-icon>
+          <span class="text-sm">
+            <span class="text-semibold">{{ autofixRun.resolvedIssuesCount }} occurrences</span>
+            <span v-if="!isReadOnly">can be</span>
+            <span>fixed</span>
+          </span>
+        </info>
+        <!-- Total files being affected -->
+        <info v-if="filesAffected.length">
+          <z-icon icon="file-text" size="small" color="vanilla-400"></z-icon>
+          <span class="text-sm">
+            <span class="text-semibold">{{ filesAffected.length }} files</span>
+            <span v-if="!isReadOnly">will be</span>
+            <span>affected</span>
+          </span>
+        </info>
+      </div>
+      <div v-if="!isReadOnly">
+        <z-button
+          v-if="repository.isAutofixEnabled"
+          buttonType="primary"
+          size="small"
+          :disabled="
+            selectedHunkIds.length === 0 || shouldDisableActionButtons || triggeringAutofix
+          "
+          @click="triggerRun()"
+        >
+          <div class="flex items-center px-4 py-2 space-x-2">
+            <template v-if="triggeringAutofix">
+              <z-icon icon="spin-loader" size="small" color="ink-300" class="animate-spin"></z-icon>
+              <span class="text-xs text-ink-300">Creating Autofix</span>
+            </template>
+            <template v-else-if="autofixRun.isGeneratedFromPr">
+              <z-icon icon="git-pull-request" size="small" color="ink-300"></z-icon>
+              <span class="text-xs text-ink-300">{{ pullRequestStatusText.COMMIT }}</span>
+            </template>
+            <template v-else>
+              <z-icon icon="git-pull-request" size="small" color="ink-300"></z-icon>
+              <span class="text-xs text-ink-300">{{ pullRequestStatusText.CREATE }}</span>
+            </template>
+          </div>
+        </z-button>
+        <z-button
+          v-else-if="canEnableAutofix"
+          size="small"
+          icon="autofix"
+          @click="showInstallModal = true"
+        >
+          Install Autofix
+        </z-button>
+      </div>
+      <div v-else>
+        <template v-if="autofixRun.isGeneratedFromPr">
           <z-button
-            v-if="repository.isAutofixEnabled"
+            v-if="autofixRun.committedToBranchStatus === COMMIT_STATUS.IN_PROGRESS"
             buttonType="primary"
             size="small"
-            :disabled="
-              selectedHunkIds.length === 0 || shouldDisableActionButtons || triggeringAutofix
-            "
-            @click="triggerRun()"
+            :disabled="true"
+            class="cursor-wait"
           >
-            <div class="flex items-center px-4 py-2 space-x-2">
-              <template v-if="triggeringAutofix">
-                <z-icon
-                  icon="spin-loader"
-                  size="small"
-                  color="ink-300"
-                  class="animate-spin"
-                ></z-icon>
-                <span class="text-xs text-ink-300">Creating Autofix</span>
-              </template>
-              <template v-else-if="autofixRun.isGeneratedFromPr">
-                <z-icon icon="git-pull-request" size="small" color="ink-300"></z-icon>
-                <span class="text-xs text-ink-300">{{ pullRequestStatusText.COMMIT }}</span>
-              </template>
-              <template v-else>
-                <z-icon icon="git-pull-request" size="small" color="ink-300"></z-icon>
-                <span class="text-xs text-ink-300">{{ pullRequestStatusText.CREATE }}</span>
-              </template>
-            </div>
+            <z-icon class="animate-spin" icon="spin-loader" color="ink-300"></z-icon>
+            <span>{{ pullRequestStatusText.COMMITTING }}</span>
           </z-button>
           <z-button
-            v-else-if="canEnableAutofix"
+            v-if="autofixRun.committedToBranchStatus === COMMIT_STATUS.COMMITTED"
+            buttonType="primary"
             size="small"
-            icon="autofix"
-            @click="showInstallModal = true"
+            target="_blank"
+            rel="noopener noreferrer"
+            :to="autofixRun.vcsPrUrl"
           >
-            Install Autofix
+            <z-icon icon="external-link" color="ink-300"></z-icon>
+            <span>{{ pullRequestStatusText.VIEW }}</span>
           </z-button>
-        </div>
-        <div v-else>
-          <template v-if="autofixRun.isGeneratedFromPr">
-            <z-button
-              v-if="autofixRun.committedToBranchStatus === COMMIT_STATUS.IN_PROGRESS"
-              buttonType="primary"
-              size="small"
-              :disabled="true"
-              class="cursor-wait"
-            >
-              <z-icon class="animate-spin" icon="spin-loader" color="ink-300"></z-icon>
-              <span>{{ pullRequestStatusText.COMMITTING }}</span>
-            </z-button>
-            <z-button
-              v-if="autofixRun.committedToBranchStatus === COMMIT_STATUS.COMMITTED"
-              buttonType="primary"
-              size="small"
-              target="_blank"
-              rel="noopener noreferrer"
-              :to="autofixRun.vcsPrUrl"
-            >
-              <z-icon icon="external-link" color="ink-300"></z-icon>
-              <span>{{ pullRequestStatusText.VIEW }}</span>
-            </z-button>
-          </template>
-          <template v-else>
-            <z-button
-              buttonType="primary"
-              size="small"
-              class="cursor-wait"
-              v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.IN_PROGRESS"
-            >
-              <z-icon class="animate-spin" icon="spin-loader" color="ink-300"></z-icon>
-              <span>{{ pullRequestStatusText.CREATING }}</span>
-            </z-button>
-            <z-button
-              v-if="
-                autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.OPENED ||
-                autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.MERGED
-              "
-              buttonType="primary"
-              size="small"
-              target="_blank"
-              rel="noopener noreferrer"
-              :to="autofixRun.vcsPrUrl"
-            >
-              <z-icon icon="external-link" color="ink-300"></z-icon>
-              <span>{{ pullRequestStatusText.VIEW }}</span>
-            </z-button>
-            <z-button
-              buttonType="primary"
-              size="small"
-              target="_blank"
-              :to="autofixRun.vcsPrUrl"
-              rel="noopener noreferrer"
-              v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.CREATED"
-            >
-              <z-icon icon="git-pull-request" color="ink-300"></z-icon>
-              <span>{{ pullRequestStatusText.CLOSED }}</span>
-            </z-button>
-          </template>
-        </div>
+        </template>
+        <template v-else>
+          <z-button
+            buttonType="primary"
+            size="small"
+            class="cursor-wait"
+            v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.IN_PROGRESS"
+          >
+            <z-icon class="animate-spin" icon="spin-loader" color="ink-300"></z-icon>
+            <span>{{ pullRequestStatusText.CREATING }}</span>
+          </z-button>
+          <z-button
+            v-if="
+              autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.OPENED ||
+              autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.MERGED
+            "
+            buttonType="primary"
+            size="small"
+            target="_blank"
+            rel="noopener noreferrer"
+            :to="autofixRun.vcsPrUrl"
+          >
+            <z-icon icon="external-link" color="ink-300"></z-icon>
+            <span>{{ pullRequestStatusText.VIEW }}</span>
+          </z-button>
+          <z-button
+            buttonType="primary"
+            size="small"
+            target="_blank"
+            :to="autofixRun.vcsPrUrl"
+            rel="noopener noreferrer"
+            v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.CREATED"
+          >
+            <z-icon icon="git-pull-request" color="ink-300"></z-icon>
+            <span>{{ pullRequestStatusText.CLOSED }}</span>
+          </z-button>
+        </template>
       </div>
+    </div>
+    <div class="px-4" v-if="!$fetchState.pending && parseArrayString(autofixRun.errors).length">
+      <run-error-box :errorsRendered="parseArrayString(autofixRun.errors)" />
+    </div>
+    <template v-if="isAutofixConcluded">
+      <!-- TODO: flash message shown for autofix status - stale, commit status - failed, Pull request status - failed  -->
       <!-- Code snippets -->
       <div class="relative px-4 space-y-3">
         <!-- Group Head -->
@@ -266,6 +267,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 import { fromNow } from '@/utils/date'
 import AutofixRunMixin from '~/mixins/autofixRunMixin'
+import { parseArrayString } from '~/utils/array'
 
 interface DOMElement extends Element {
   offsetHeight: number
@@ -301,6 +303,7 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
   public isReadOnly = false
   public showInstallModal = false
   public triggeringAutofix = false
+  public parseArrayString = parseArrayString
 
   public PULL_REQUEST_MAP: Record<string, string> = {
     PRO: 'Pull-request open',

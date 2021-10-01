@@ -14,7 +14,7 @@
     <!-- Autofix -->
     <div
       v-if="autofixableIssues.length && !run.isForDefaultBranch && !run.isForCrossRepoPr"
-      class="flex items-center justify-between px-4 py-2 text-sm bg-ink-300 mb-4"
+      class="flex items-center justify-between px-4 py-2 mb-4 text-sm bg-ink-300"
     >
       <span
         >{{ autofixableIssues.length }}
@@ -53,7 +53,7 @@
         </z-tab-list>
         <z-tab-panes class="p-4">
           <z-tab-pane class="flex flex-col space-y-4">
-            <analyzer-run-error v-if="errorsRendered.length" :errorsRendered="errorsRendered" />
+            <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" />
             <run-loading v-if="status === 'PEND'" />
             <run-pass v-else-if="status === 'PASS' && issueCount === 0"></run-pass>
             <run-cancelled v-else-if="status === 'CNCL' && issueCount === 0"></run-cancelled>
