@@ -4,6 +4,7 @@ query {
     name
     description
     recommendedIssueCount
+    hasHacktoberfestEnabled
     isWatched
     owner {
       login

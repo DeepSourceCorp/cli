@@ -4,66 +4,63 @@
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
-    <section class="p-4 border-b border-ink-200">
+    <section class="px-2.5 py-4 border-b border-ink-200">
       <img
         class="w-auto h-5 mt-0.5"
         src="~/assets/images/logo-wordmark-white.svg"
         alt="DeepSource"
       />
     </section>
-
     <section
-      class="p-2.5 hide-scroll flex flex-col flex-grow border-b border-ink-200 min-h-20"
-      :class="[isCollapsed ? '' : 'overflow-y-scroll', loggedIn ? 'justify-between' : '']"
+      class="p-2.5 hide-scroll flex flex-col flex-grow border-ink-200 min-h-20 justify-between"
+      :class="[isCollapsed ? '' : 'overflow-y-scroll']"
     >
       <div>
-        <nuxt-link :to="loggedIn ? '/discover/watchlist' : '/'">
+        <nuxt-link v-if="loggedIn" to="/discover/watchlist">
           <z-button
             v-if="!isCollapsed"
-            class="justify-start w-full leading-none border bg-ink-300 border-ink-200 hover:bg-ink-200"
+            icon="add-watchlist"
+            button-type="secondary"
+            size="small"
+            class="w-full border bg-ink-300 border-ink-200 hover:bg-ink-200"
           >
-            <img
-              v-if="loggedIn"
-              :src="require('@/assets/images/discover/unwatched-repo-icon.svg')"
-              alt="Watched repos"
-              class="w-4 h-4"
-            />
-            <z-icon
-              v-else
-              icon="arrow-left"
-              size="small"
-              color="vanilla-400"
-              class="min-w-4 min-h-4"
-            />
-            <span class="text-sm font-medium text-vanilla-100">
-              {{
-                loggedIn
-                  ? `Watching ${watchedRepositories.totalCount} ${
-                      watchedRepositories.totalCount === 1 ? 'project' : 'projects'
-                    }`
-                  : 'Back to deepsource.io'
-              }}
-            </span>
+            Watching {{ watchedRepositories.totalCount }}
+            {{ watchedRepositories.totalCount === 1 ? 'project' : 'projects' }}
           </z-button>
         </nuxt-link>
+        <z-button
+          v-else
+          to="https://deepsource.io"
+          icon="arrow-left"
+          color="vanilla-200"
+          size="small"
+          button-type="secondary"
+          class="w-full border bg-ink-300 border-ink-200 hover:bg-ink-200"
+        >
+          Back to deepsource.io
+        </z-button>
       </div>
 
-      <div v-if="!isCollapsed" class="p-2.5" :class="{ 'mt-8': !loggedIn }">
-        <span class="text-xs font-medium tracking-wider uppercase text-vanilla-400"
+      <div v-if="!isCollapsed" :class="{ 'mt-4': !loggedIn }">
+        <span class="ml-0.5 text-xs font-medium tracking-wider uppercase text-vanilla-400"
           >Filter by technology</span
         >
         <div class="flex flex-wrap gap-1.5 mt-2">
-          <div
+          <nuxt-link
             v-for="analyzer in analyzerList"
             :key="analyzer.id"
             class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
             :class="[
-              analyzerIdList.includes(analyzer.id)
+              $route.params.lang === analyzer.shortcode
                 ? 'bg-gradient-dawn'
                 : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
             ]"
+            :to="
+              $route.params.lang === analyzer.shortcode
+                ? `/discover`
+                : `/discover/${analyzer.shortcode}`
+            "
             role="button"
-            @click="applyFilter(analyzer.id)"
           >
             <img
               v-if="analyzer.analyzerLogo"
@@ -72,14 +69,14 @@
               class="flex-shrink-0 w-auto h-4"
             />
             <span class="text-xs"> {{ analyzer.name }} </span>
-          </div>
+          </nuxt-link>
         </div>
       </div>
     </section>
 
-    <section class="relative self-end w-full justify-self-end group">
+    <section class="relative self-end w-full border-t border-ink-200 justify-self-end group">
       <div v-if="loggedIn">
-        <div class="p-2.5 border-t border-ink-200 space-y-2">
+        <div class="p-2.5 space-y-2">
           <z-button
             v-if="!isCollapsed"
             button-type="primary"
@@ -119,45 +116,44 @@
             </client-only>
           </div>
         </div>
-
-        <div class="p-4 border-t border-ink-200">
-          <div class="flex items-center justify-between space-x-2 leading-none">
-            <z-icon
-              icon="logo"
-              size="small"
-              color="vanilla-100"
-              class="flex-shrink-0 min-w-4 min-h-4"
-            />
-            <span
-              class="self-end text-xs transition-all text-vanilla-300"
-              :class="{
-                'opacity-0 hidden delay-300': isCollapsed,
-                'opacity-1 flex delay-0': !isCollapsed
-              }"
-              >© {{ currentYear }} DeepSource Corp.</span
-            >
-          </div>
-        </div>
       </div>
 
-      <div v-else>
+      <div v-else class="p-2.5 space-y-2.5">
         <z-button
           v-if="!isCollapsed"
           to="/signup"
           button-type="secondary"
-          size="medium"
-          class="w-full mt-2"
+          size="small"
+          icon="plus"
+          class="w-full"
         >
-          <z-icon icon="plus" size="small" color="vanilla-400"></z-icon>
-          <span class="text-sm">Add your project</span>
+          Add your project
         </z-button>
-        <footer class="w-full px-4 py-4 border-t border-solid border-ink-200">
+        <footer class="w-full border-solid border-ink-200">
           <h3 class="text-lg font-semibold">Code quality made simple.</h3>
           <p class="mt-2 text-sm text-vanilla-400">
             Avoid the grunt work of fixing issues. Save developer time. Maintain code quality.
           </p>
           <z-button to="/signup" buttonType="primary" class="w-full mt-4">Get started</z-button>
         </footer>
+      </div>
+      <div class="py-4 px-2.5 border-t border-ink-200">
+        <div class="flex items-center justify-between space-x-2 leading-none">
+          <z-icon
+            icon="logo"
+            size="small"
+            color="vanilla-100"
+            class="flex-shrink-0 min-w-4 min-h-4"
+          />
+          <span
+            class="self-end text-xs transition-all text-vanilla-300"
+            :class="{
+              'opacity-0 hidden delay-300': isCollapsed,
+              'opacity-1 flex delay-0': !isCollapsed
+            }"
+            >© {{ currentYear }} DeepSource Corp.</span
+          >
+        </div>
       </div>
     </section>
 
@@ -231,13 +227,21 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   public collapsedSidebar = false
   public toggleCollapsed = false
   public isOpen = false
-  public analyzerIdList: string[] = []
+  public currentAnalyzer = ''
   public showInDiscoverInfoDialog = false
   public showUpdateTechnologiesModal = false
   public debounceTimer: ReturnType<typeof setTimeout>
 
   async fetch(): Promise<void> {
     await this.fetchAnalyzers()
+    const currentAnalyzerShortcode = this.$route.query.lang as string
+
+    if (currentAnalyzerShortcode) {
+      const idx = this.analyzerList.findIndex(
+        (analyzer) => analyzer.shortcode === currentAnalyzerShortcode
+      )
+      this.currentAnalyzer = this.analyzerList[idx].id
+    }
 
     if (this.loggedIn) {
       await Promise.all([
@@ -285,19 +289,14 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
     return new Date().getFullYear()
   }
 
-  async applyFilter(id: Scalars['ID']) {
-    clearTimeout(this.debounceTimer)
-
-    if (this.analyzerIdList.includes(id)) {
-      const idx = this.analyzerIdList.indexOf(id)
-      this.analyzerIdList.splice(idx, 1)
-    } else {
-      this.analyzerIdList.push(id)
-    }
-
-    this.debounceTimer = setTimeout(() => {
-      this.$root.$emit('discover:update-analyzers', this.analyzerIdList)
-    }, 600)
-  }
+  // async applyFilter(analyzer: Analyzer, isSelected: boolean) {
+  //   if (isSelected) {
+  //     this.currentAnalyzer = analyzer.id
+  //     this.$nuxt.$router.replace({ query: { lang: analyzer.shortcode } })
+  //   } else {
+  //     this.currentAnalyzer = ''
+  //     this.$nuxt.$router.replace({ query: {} })
+  //   }
+  // }
 }
 </script>

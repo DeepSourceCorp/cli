@@ -12,6 +12,7 @@ query {
             description
             vcsProvider
             recommendedIssueCount
+            hasHacktoberfestEnabled
             isWatched
             owner {
               login

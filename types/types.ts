@@ -2449,6 +2449,7 @@ export type Repository = MaskPrimaryKeyNode & {
   isStarred?: Maybe<Scalars['Boolean']>;
   isWatched?: Maybe<Scalars['Boolean']>;
   hasAdhocRuns?: Maybe<Scalars['Boolean']>;
+  hasHacktoberfestEnabled?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -5330,6 +5331,8 @@ export type Unnamed_62_Query = (
 export type Unnamed_63_QueryVariables = Exact<{
   preferredTechnologies?: Maybe<Array<Maybe<Scalars['ID']>> | Maybe<Scalars['ID']>>;
   q?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -5342,7 +5345,7 @@ export type Unnamed_63_Query = (
       { __typename?: 'RepositoryEdge' }
       & { node?: Maybe<(
         { __typename?: 'Repository' }
-        & Pick<Repository, 'id' | 'modifiedAt' | 'name' | 'description' | 'vcsProvider' | 'recommendedIssueCount' | 'isWatched'>
+        & Pick<Repository, 'id' | 'modifiedAt' | 'name' | 'description' | 'vcsProvider' | 'hasHacktoberfestEnabled' | 'recommendedIssueCount' | 'isWatched'>
         & { owner: (
           { __typename?: 'Owner' }
           & Pick<Owner, 'login'>

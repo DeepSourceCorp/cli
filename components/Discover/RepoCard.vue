@@ -1,11 +1,8 @@
 <template>
   <base-card :to="issuesPageUrl" :show-info="showInfo">
     <template slot="title">
-      <div
-        class="flex flex-wrap items-baseline mb-1 font-normal text-vanilla-400"
-        :class="showInfo ? 'text-lg' : 'text-base'"
-      >
-        <div class="pr-2">
+      <div class="font-normal text-vanilla-400" :class="showInfo ? 'text-lg' : 'text-base'">
+        <div class="inline mr-2">
           <span class="transition-colors duration-75 cursor-pointer">{{
             repoInfo.owner.login
           }}</span>
@@ -13,7 +10,7 @@
           <span class="font-bold text-vanilla-100"> {{ repoInfo.name }} </span>
         </div>
 
-        <span v-if="this.loggedIn" class="flex-shrink-0 block text-sm md:flex">
+        <span v-if="this.loggedIn" class="flex-shrink-0 inline">
           <button
             :disabled="updatingWatchlist"
             class="focus:outline-none"
@@ -43,22 +40,32 @@
             <span class="text-sm tracking-wide text-vanilla-400">{{ repoInfo.description }}</span>
           </div>
         </div>
-        <div class="flex flex-shrink-0 space-x-2 rounded-md place-items-center">
+        <div class="flex space-x-3 md:flex-row">
           <div v-if="repoInfo.primaryAnalyzer" class="flex items-center space-x-1">
             <img :src="repoInfo.primaryAnalyzer.analyzerLogo" alt="Analyzer" class="w-5 h-5" />
             <span class="text-sm tracking-wide text-vanilla-400">{{
               repoInfo.primaryAnalyzer.name
             }}</span>
           </div>
-          <slot name="stats">
-            <div class="flex items-center space-x-1">
+          <div class="items-center hidden space-x-1 md:flex">
+            <slot name="stats">
               <z-icon icon="flag" size="x-small" color="vanilla-400" />
               <span class="text-sm text-vanilla-400">
                 {{ shortenNumber(repoInfo.recommendedIssueCount) }}
                 {{ repoInfo.recommendedIssueCount === 1 ? 'issue' : 'issues' }}
               </span>
+            </slot>
+          </div>
+          <div class="w-auto">
+            <div
+              v-tooltip="'This repository is accepting Hacktoberfest contributions'"
+              class="flex items-center px-3 py-1.5 space-x-1 rounded-full bg-ink-200 w-auto"
+              v-if="repoInfo.hasHacktoberfestEnabled"
+            >
+              <img class="w-auto h-3.5 mr-0.5" src="~/assets/images/hacktoberfest.svg" />
+              <span class="text-sm leading-none text-vanilla-300"> Hacktoberfest </span>
             </div>
-          </slot>
+          </div>
         </div>
       </div>
     </template>

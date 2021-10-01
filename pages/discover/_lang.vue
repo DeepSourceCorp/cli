@@ -80,6 +80,8 @@ import { ZIcon, ZInput, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem } from '@
 import EditorsPick from '@/components/Discover/EditorsPick.vue'
 import Trending from '@/components/Discover/Trending.vue'
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
+import { AnalyzerListActions } from '~/store/analyzer/list'
+import { Context } from '@nuxt/types'
 
 const directoryStore = namespace('directory/directory')
 const discoverRepositoriesStore = namespace('discover/repositories')
@@ -96,6 +98,21 @@ const discoverRepositoriesStore = namespace('discover/repositories')
     EditorsPick,
     Trending
   },
+  middleware: [
+    async function ({ redirect, route, store }: Context): Promise<void> {
+      const { lang } = route.params
+      const analyzerExists = await store.dispatch(
+        `analyzer/list/${AnalyzerListActions.CHECK_ANALYZER_EXISTS}`,
+        {
+          shortcode: lang
+        }
+      )
+
+      if (!analyzerExists) {
+        redirect('/discover')
+      }
+    }
+  ],
   layout: 'discover'
 })
 export default class Discover extends Vue {
@@ -128,9 +145,23 @@ export default class Discover extends Vue {
   }
 
   async getRepos(): Promise<void> {
+    const currentAnalyzerShortcode = this.$route.params.lang
+
+    if (currentAnalyzerShortcode) {
+      const idx = this.analyzerList.findIndex(
+        (analyzer) => analyzer.shortcode === currentAnalyzerShortcode
+      )
+
+      if (idx) {
+        this.preferredTechnology = [this.analyzerList[idx].id]
+      } else {
+        this.preferredTechnology = []
+      }
+    }
+
     await this.fetchDiscoverRepositories({
       q: this.searchTerm,
-      preferredTechnologies: [],
+      preferredTechnologies: this.preferredTechnology,
       limit: process.server ? 15 : 100
     })
   }

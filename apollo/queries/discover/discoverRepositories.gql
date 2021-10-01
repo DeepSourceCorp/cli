@@ -13,6 +13,7 @@ query($preferredTechnologies: [ID], $q: String, $first: Int, $after: String) {
         name
         description
         vcsProvider
+        hasHacktoberfestEnabled
         recommendedIssueCount
         isWatched
         owner {
