@@ -170,7 +170,8 @@ export const actions: DiscoverRepoModuleActions = {
           after: this.$getGQLAfter(1, args.limit ?? 100),
           first: args.limit ?? 100
         },
-        args.refetch
+        args.refetch,
+        false
       )
       commit(DiscoverRepoMutations.SET_DISCOVER_REPOSITORIES, response.data.discoverRepositories)
     } catch (e) {
@@ -185,7 +186,8 @@ export const actions: DiscoverRepoModuleActions = {
       const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
         TrendingRepositoriesGQLQuery,
         args,
-        refetch
+        refetch,
+        false
       )
       commit(DiscoverRepoMutations.SET_TRENDING_REPOSITORIES, response.data.trendingRepositories)
     } catch (e) {
@@ -200,7 +202,8 @@ export const actions: DiscoverRepoModuleActions = {
       const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
         EditorsPickRepositoryGQLQuery,
         args,
-        refetch
+        refetch,
+        false
       )
       commit(DiscoverRepoMutations.SET_EDITORS_PICK_REPOSITORY, response.data.editorsPickRepository)
     } catch (e) {

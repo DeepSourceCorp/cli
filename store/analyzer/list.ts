@@ -166,7 +166,9 @@ export const actions: AnalyzerListModuleActions = {
     try {
       const checkAnalyzerExistsResponse = (await this.$fetchGraphqlData(
         CheckAnalyzerExistsQuery,
-        args
+        args,
+        false,
+        false
       )) as GraphqlQueryResponse
       if (checkAnalyzerExistsResponse.data.analyzer?.name) {
         return true
