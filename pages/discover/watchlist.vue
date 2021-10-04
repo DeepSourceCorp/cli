@@ -28,7 +28,7 @@
       <z-tabs class="w-full -mb-px">
         <div class="flex justify-between px-4 border-b border-ink-200">
           <z-tab-list class="flex pt-4 space-x-4 overflow-auto sm:w-auto hide-scroll">
-            <z-tab-item class="flex items-center flex-shrink-0" icon="rss">
+            <z-tab-item class="flex items-center flex-shrink-0" icon="tachometer-fast">
               <span>Watchlist</span>
             </z-tab-item>
             <z-tab-item class="flex items-center flex-shrink-0" icon="trending-up">

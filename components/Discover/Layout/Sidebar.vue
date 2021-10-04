@@ -179,8 +179,6 @@ import { ZButton, ZConfirm, ZIcon, ZTag } from '@deepsourcelabs/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'
 
-import { UpdatePreferredTechnologies } from '~/components/Discover'
-
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { DiscoverUserActions, DiscoverUserGetters } from '~/store/discover/user'
 import { Analyzer, AnalyzerConnection, RepositoryConnection, Scalars } from '~/types/types'
@@ -195,8 +193,7 @@ const discoverRepositoriesStore = namespace('discover/repositories')
     ZButton,
     ZConfirm,
     ZIcon,
-    ZTag,
-    UpdatePreferredTechnologies
+    ZTag
   }
 })
 export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
