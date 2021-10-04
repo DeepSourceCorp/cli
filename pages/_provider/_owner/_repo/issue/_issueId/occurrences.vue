@@ -1,13 +1,13 @@
 <template>
-  <div class="relative top-0 p-4 flex flex-col space-y-0 xl:space-y-4">
+  <div class="relative top-0 flex flex-col p-4 space-y-0 xl:space-y-4">
     <div class="flex flex-col space-y-4">
       <issue-occurence-section @filtersUpdated="updateFilters"></issue-occurence-section>
       <div class="flex w-full">
         <!-- Issue list -->
-        <div class="flex flex-col w-full xl:w-4/6 space-y-4">
+        <div class="flex flex-col w-full space-y-4 xl:w-4/6">
           <div
             v-if="checkIssues.totalCount === 0"
-            class="h-full w-full flex items-center justify-center"
+            class="flex items-center justify-center w-full h-full"
           >
             No results
           </div>
@@ -15,7 +15,7 @@
             <div
               v-for="ii in 3"
               :key="ii"
-              class="h-36 w-full bg-ink-300 rounded-md animate-pulse"
+              class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
             ></div>
           </template>
           <template v-else>
@@ -31,8 +31,8 @@
           </template>
         </div>
         <!-- Description -->
-        <div v-if="$fetchState.pending" class="hidden xl:block px-4 w-2/6">
-          <div class="h-44 bg-ink-300 rounded-md animate-pulse"></div>
+        <div v-if="$fetchState.pending" class="hidden w-2/6 px-4 xl:block">
+          <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
         </div>
         <issue-description v-else :description="issue.descriptionRendered"></issue-description>
       </div>
@@ -120,7 +120,7 @@ export default class IssuesDetails extends mixins(
     if (sort) query['sort-by'] = sort
     if (q) query.q = q
 
-    this.$router.push({
+    this.$router.replace({
       path: this.$route.path,
       query
     })
