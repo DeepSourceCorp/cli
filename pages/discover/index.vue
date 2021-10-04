@@ -31,7 +31,7 @@
     <div class="hidden md:grid text-vanilla-100">
       <div class="grid gap-4 px-4 grid-cols-discover">
         <!-- Discover repo feed -->
-        <repo-feed :loading="loading" />
+        <repo-feed :loading="$fetchState.pending" />
         <section class="space-y-4">
           <!-- Editor's pick repository -->
           <editors-pick />
@@ -131,14 +131,12 @@ export default class Discover extends Vue {
     await this.fetchDiscoverRepositories({
       q: this.searchTerm,
       preferredTechnologies: [],
-      limit: process.server ? 15 : 100
+      limit: 100
     })
   }
 
   async fetch(): Promise<void> {
-    this.loading = true
     await this.getRepos()
-    this.loading = false
   }
 }
 </script>

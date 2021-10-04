@@ -31,7 +31,7 @@
     <div class="hidden md:grid text-vanilla-100">
       <div class="grid gap-4 px-4 grid-cols-discover">
         <!-- Discover repo feed -->
-        <repo-feed :loading="loading" />
+        <repo-feed :loading="$fetchState.pending" />
         <section class="space-y-4">
           <!-- Editor's pick repository -->
           <editors-pick />
@@ -100,7 +100,34 @@ const discoverRepositoriesStore = namespace('discover/repositories')
   },
   middleware: [
     async function ({ redirect, route, store }: Context): Promise<void> {
+      const allowList = [
+        'shell',
+        'python',
+        'rust',
+        'go',
+        'java',
+        'docker',
+        'ruby',
+        'javascript',
+        'terraform',
+        'php',
+        'scala',
+        'sql'
+      ]
       const { lang } = route.params
+
+      // See if it's a standard analyzer
+      if (allowList.includes(lang)) {
+        return
+      }
+
+      // See if it's a blocked analyzer
+      const blockList = ['test-coverage', 'secrets']
+      if (blockList.includes(lang)) {
+        redirect('/discover')
+      }
+
+      // fallback
       const analyzerExists = await store.dispatch(
         `analyzer/list/${AnalyzerListActions.CHECK_ANALYZER_EXISTS}`,
         {
@@ -140,10 +167,6 @@ export default class Discover extends Vue {
   @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_EDITORS_PICK_REPOSITORY)
   editorsPickRepository: Maybe<Repository>
 
-  mounted(): void {
-    this.getRepos()
-  }
-
   async getRepos(): Promise<void> {
     const currentAnalyzerShortcode = this.$route.params.lang
 
@@ -162,14 +185,12 @@ export default class Discover extends Vue {
     await this.fetchDiscoverRepositories({
       q: this.searchTerm,
       preferredTechnologies: this.preferredTechnology,
-      limit: process.server ? 15 : 100
+      limit: 100
     })
   }
 
   async fetch(): Promise<void> {
-    this.loading = true
     await this.getRepos()
-    this.loading = false
   }
 }
 </script>
