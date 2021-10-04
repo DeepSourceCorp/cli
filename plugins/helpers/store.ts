@@ -158,8 +158,9 @@ const refreshIfTokenExpired = async (
 ): Promise<GraphqlMutationResponse | void> => {
   if (app.store) {
     const now = (new Date().getTime() + 30_000) / 1000
+    const isLoggedIn = app.store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]
     const expiry = app.store.getters[`account/auth/${AuthGetterTypes.EXPIRY}`]
-    if (now > expiry) {
+    if (isLoggedIn && now > expiry) {
       const client = app.apolloProvider?.defaultClient
 
       const context = await getContext(app)

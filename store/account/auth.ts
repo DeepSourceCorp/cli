@@ -87,11 +87,8 @@ export const mutations: AuthModuleMutations = {
         state.tokenExpiresIn = data.exp
       }
     } catch (e) {
-    	state.loggedIn = false
+      state.loggedIn = false
     }
-  },
-  [AuthMutationTypes.SET_LOGGED_OUT]: (state) => {
-    state.loggedIn = false
   }
 }
 
