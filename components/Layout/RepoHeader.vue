@@ -10,10 +10,12 @@
           >
             <div class="inline-flex space-x-1">
               <nuxt-link
+                v-if="canReadTeamPage"
                 :to="['', provider, owner].join('/')"
                 class="transition-colors duration-75 cursor-pointer hover:text-vanilla-300"
                 >{{ $route.params.owner }}</nuxt-link
               >
+              <span v-else>{{ $route.params.owner }}</span>
               <span>/</span>
               <nuxt-link :to="$generateRoute()" class="font-bold text-vanilla-100">
                 {{ $route.params.repo }}
@@ -119,7 +121,7 @@ import { ZLabel, ZButton, ZTab, ZTag, ZIcon } from '@deepsourcelabs/zeal'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { RepoPerms } from '~/types/permTypes'
+import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 interface TabLink {
@@ -240,6 +242,13 @@ export default class RepoHeader extends mixins(
 
   get lastRun(): Maybe<Run> {
     return this.repository?.latestAnalysisRun || null
+  }
+
+  get canReadTeamPage(): boolean {
+    if (this.teamPerms.permission) {
+      return this.$gateKeeper.team(TeamPerms.VIEW_TEAM_HOME, this.teamPerms.permission)
+    }
+    return false
   }
 
   get repoVCSIcon(): string {
