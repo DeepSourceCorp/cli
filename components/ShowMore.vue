@@ -11,7 +11,7 @@
         {{ content }}
       </slot>
     </div>
-    <slot v-if="readMore && labelsVisible" name="show-more-label">
+    <slot v-if="readMore" name="show-more-label">
       <z-button buttonType="ghost" size="small" @click="showLessContent">
         <div class="flex items-center space-x-2 text-juniper text-sm">
           <span>Show less</span>
@@ -19,7 +19,7 @@
         </div>
       </z-button>
     </slot>
-    <slot v-if="!readMore && labelsVisible" name="show-less-label">
+    <slot v-if="!readMore" name="show-less-label">
       <z-button buttonType="ghost" size="small" @click="showMoreContent">
         <div class="flex items-center space-x-2 text-juniper text-sm">
           <span>Show more</span>
@@ -49,10 +49,6 @@ export default class ShowMore extends Vue {
   isReadMore!: boolean
   @Prop({ default: '' })
   content!: string
-  @Prop({ default: 0 })
-  contentLength!: number
-  @Prop({ default: 400 })
-  maxLength!: number
 
   private readMore = this.isReadMore
 
@@ -61,10 +57,6 @@ export default class ShowMore extends Vue {
   }
   private showLessContent(): void {
     this.readMore = false
-  }
-
-  get labelsVisible(): boolean {
-    return this.contentLength > this.maxLength
   }
 }
 </script>
