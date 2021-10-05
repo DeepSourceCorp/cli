@@ -35,8 +35,5 @@ Login into DeepSource using the command : deepsource auth login`,
 
 func Execute() error {
 	cmd := NewCmdRoot()
-	if err := cmd.Execute(); err != nil {
-		return err
-	}
-	return nil
+	return cmd.Execute()
 }

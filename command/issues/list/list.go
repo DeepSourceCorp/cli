@@ -102,7 +102,7 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		if err != nil {
 			return err
 		}
-		opts.showIssues(true)
+		opts.showIssues()
 		return nil
 	}
 
@@ -111,13 +111,13 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 	if err != nil {
 		return err
 	}
-	opts.showIssues(false)
+	opts.showIssues()
 	return nil
 }
 
 // Parses the SDK response and formats the data in the form of a TAB separated table
 // and renders it using pterm
-func (opts *IssuesListOptions) showIssues(fileMode bool) {
+func (opts *IssuesListOptions) showIssues() {
 	// A 2d array to contain list of issues details arrays
 	opts.ptermTable = make([][]string, len(opts.issuesData))
 

@@ -72,7 +72,7 @@ func (o *Options) Run() error {
 	}
 
 	// Step 4: If everything is successfull, print the success message
-	cwd, err := os.Getwd()
+	cwd, _ := os.Getwd()
 	c := color.New(color.FgGreen)
 	successOutput := fmt.Sprintf("\nSuccessfully generated DeepSource config file at %s/.deepsource.toml", cwd)
 	c.Println(successOutput)

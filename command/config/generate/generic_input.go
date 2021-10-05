@@ -69,9 +69,7 @@ func (o *Options) inputFilePatterns(field, msg, helpMsg string) error {
 			Message:  msg,
 			Default:  "",
 			Help:     helpMsg,
-			Suggest: func(toComplete string) []string {
-				return getMatchingFiles(toComplete)
-			},
+			Suggest:  getMatchingFiles,
 		}
 		err := survey.AskOne(filePatternsPrompt, &filePattern)
 		if err != nil {

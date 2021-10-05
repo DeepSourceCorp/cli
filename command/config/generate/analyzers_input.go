@@ -3,7 +3,6 @@ package generate
 import (
 	"log"
 
-	"github.com/AlecAivazis/survey/v2"
 	"github.com/Jeffail/gabs/v2"
 	"github.com/deepsourcelabs/cli/utils"
 )
@@ -22,19 +21,17 @@ type AnalyzerMetadata struct {
 // ==========
 // Analyzers Input Prompt
 // ==========
-func (o *Options) collectAnalyzerInput() error {
+func (o *Options) collectAnalyzerInput() (err error) {
 	// Extracting languages and tools being used in the project for Analyzers
-	analyzerPrompt := &survey.MultiSelect{
-		Renderer: survey.Renderer{},
-		Message:  "Which languages/tools does your project use?",
-		Options:  utils.AnalyzersData.AnalyzerNames,
-		Help:     "Analyzers will find issues in your code. Add an analyzer by selecting a language you've written your code in.",
-	}
-	err := survey.AskOne(analyzerPrompt, &o.ActivatedAnalyzers, survey.WithValidator(survey.Required))
+	analyzerPromptMsg := "Which languages/tools does your project use?"
+	analyzerPromptHelpText := "Analyzers will find issues in your code. Add an analyzer by selecting a language you've written your code in."
+
+	o.ActivatedAnalyzers, err = utils.SelectFromMultipleOptions(analyzerPromptMsg, analyzerPromptHelpText, utils.AnalyzersData.AnalyzerNames)
 	if err != nil {
 		return err
 	}
 
+	// Extract the compulsary analyzer meta for analyzers
 	err = o.extractRequiredAnalyzerMetaFields()
 	if err != nil {
 		return err

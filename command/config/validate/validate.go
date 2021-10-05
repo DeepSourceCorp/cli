@@ -40,7 +40,6 @@ func NewCmdValidate() *cobra.Command {
 
 // Run executes the command.
 func (o *Options) Run() error {
-
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {
