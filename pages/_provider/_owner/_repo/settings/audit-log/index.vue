@@ -13,7 +13,7 @@
             <z-avatar
               v-if="log.actor"
               :image="log.actor.avatar"
-              :user-name="log.actor.fullName"
+              :user-name="getName(log)"
               size="sm"
               class="flex-shrink-0"
             ></z-avatar
@@ -57,6 +57,22 @@ export default class SettingsAuditLog extends mixins(RepoDetailMixin, ActiveUser
 
   get auditLogs(): AuditLog[] {
     return resolveNodes(this.repository.logs) as AuditLog[]
+  }
+
+  getName(log: AuditLog): string {
+    if (log?.actor?.fullName) {
+      return log.actor.fullName
+    }
+
+    if (log?.actor?.firstName) {
+      return log.actor.firstName
+    }
+
+    if (log?.actor?.email) {
+      return log.actor.email
+    }
+
+    return ''
   }
 
   async fetch(): Promise<void> {

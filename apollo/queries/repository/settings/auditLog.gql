@@ -18,6 +18,8 @@ query auditLogs($provider: VCSProviderChoices!, $owner: String!, $name: String!)
           createdAt
           actor {
             fullName
+            firstName
+            email
             avatar
           }
         }
