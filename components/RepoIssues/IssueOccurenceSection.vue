@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-2 w-full xl:w-4/6 flex-row-reverse xl:flex-row">
+  <div class="flex flex-row-reverse w-full gap-2 xl:w-4/6 xl:flex-row">
     <!-- Sort menu -->
     <z-menu direction="right" width="x-small" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
@@ -73,7 +73,7 @@ export default class IssueOccurenceSection extends Vue {
 
   public searchIssue: string | (string | null)[] = ''
 
-  public selectedFilter = this.$route.query['sort-by']
+  public selectedFilter = this.$route.query['sort']
 
   public sortFilters: Array<Record<string, string | boolean>> = [
     { label: 'First Seen', icon: 'first-seen', name: 'first-seen', isActive: false },
@@ -81,12 +81,12 @@ export default class IssueOccurenceSection extends Vue {
   ]
 
   mounted(): void {
-    this.selectedFilter = this.$route.query['sort-by']
+    this.selectedFilter = this.$route.query['sort']
     this.searchIssue = this.$route.query['q']
   }
 
   get sortApplied(): boolean {
-    return this.$route.query['sort-by'] ? true : false
+    return this.$route.query['sort'] ? true : false
   }
 
   public clearFilter(): void {

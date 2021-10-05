@@ -56,8 +56,8 @@ export default class IssueDetailMixin extends Vue {
   @issueStore.Action(IssueDetailActions.FETCH_ISSUE_CHILDREN)
   fetchIssueChildren: (args: {
     nodeId: string
-    sort: string | (string | null)[]
-    q: string | (string | null)[]
+    sort?: string
+    q?: string
     currentPageNumber: number
     limit: number | null
   }) => Promise<void>

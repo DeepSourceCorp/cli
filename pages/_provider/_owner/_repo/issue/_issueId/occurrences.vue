@@ -1,13 +1,13 @@
 <template>
-  <div class="relative top-0 p-4 flex flex-col space-y-0 xl:space-y-4">
+  <div class="relative top-0 flex flex-col p-4 space-y-0 xl:space-y-4">
     <div class="flex flex-col space-y-4">
-      <issue-occurence-section @filtersUpdated="updateFilters"></issue-occurence-section>
+      <issue-occurence-section @filtersUpdated="addFilters"></issue-occurence-section>
       <div class="flex w-full">
         <!-- Issue list -->
-        <div class="flex flex-col w-full xl:w-4/6 space-y-4">
+        <div class="flex flex-col w-full space-y-4 xl:w-4/6">
           <div
             v-if="checkIssues.totalCount === 0"
-            class="h-full w-full flex items-center justify-center"
+            class="flex items-center justify-center w-full h-full"
           >
             No results
           </div>
@@ -15,7 +15,7 @@
             <div
               v-for="ii in 3"
               :key="ii"
-              class="h-36 w-full bg-ink-300 rounded-md animate-pulse"
+              class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
             ></div>
           </template>
           <template v-else>
@@ -31,8 +31,8 @@
           </template>
         </div>
         <!-- Description -->
-        <div v-if="$fetchState.pending" class="hidden xl:block px-4 w-2/6">
-          <div class="h-44 bg-ink-300 rounded-md animate-pulse"></div>
+        <div v-if="$fetchState.pending" class="hidden w-2/6 px-4 xl:block">
+          <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
         </div>
         <issue-description v-else :description="issue.descriptionRendered"></issue-description>
       </div>
@@ -48,16 +48,18 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Watch, Inject, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { ZPagination } from '@deepsourcelabs/zeal'
 import { IssueDescription, IssueOccurenceSection } from '@/components/RepoIssues/index'
 
 import IssueDetailMixin from '@/mixins/issueDetailMixin'
 import RepoDetailMixin from '@/mixins/repoDetailMixin'
 
-import { CheckIssue, Maybe } from '@/types/types'
+import { CheckIssue } from '@/types/types'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { resolveNodes } from '~/utils/array'
+import RouteQueryMixin from '~/mixins/routeQueryMixin'
+import { makeSafeNumber } from '~/utils/string'
 
 const PAGE_SIZE = 5
 const VISIBLE_PAGES = 3
@@ -73,22 +75,23 @@ const VISIBLE_PAGES = 3
 export default class IssuesDetails extends mixins(
   IssueDetailMixin,
   RepoDetailMixin,
-  RoleAccessMixin
+  RoleAccessMixin,
+  RouteQueryMixin
 ) {
-  private urlFilters: Record<string, string | (string | null)[]> = {}
-  pageSize = PAGE_SIZE
-  currentPage: Maybe<number> = 1
   issuesIgnored: Array<string> = []
+
+  created() {
+    this.queryParams = Object.assign(this.queryParams, this.$route.query)
+  }
+
+  get currentPage(): number {
+    return makeSafeNumber(this.queryParams.page as string, 1)
+  }
 
   async fetch(): Promise<void> {
     await this.fetchIssueData()
+    await this.fetchChildren()
     await this.fetchRepoPerms(this.baseRouteParams)
-
-    this.updateFilters({
-      sort: this.$route.query['sort-by'],
-      q: this.$route.query.q
-    })
-    this.currentPage = this.$route.query.page ? Number(this.$route.query.page) : 1
   }
 
   mounted() {
@@ -103,46 +106,33 @@ export default class IssuesDetails extends mixins(
   public async fetchChildren(): Promise<void> {
     await this.fetchIssueChildren({
       nodeId: this.issue.id,
-      sort: this.urlFilters.sort,
-      q: this.urlFilters.q,
-      currentPageNumber: this.currentPage ? this.currentPage : 1,
-      limit: this.pageSize
+      sort: this.queryParams.sort as string,
+      q: this.queryParams.q as string,
+      currentPageNumber: this.queryParams.page ? Number(this.queryParams.page) : 1,
+      limit: PAGE_SIZE
     })
-  }
-
-  @Watch('urlFilters', { deep: true })
-  @Watch('currentPage')
-  async filtersUpdated(): Promise<void> {
-    const { sort, q } = this.urlFilters
-    const query: Record<string, any> = {}
-
-    if (this.currentPage) query.page = String(this.currentPage)
-    if (sort) query['sort-by'] = sort
-    if (q) query.q = q
-
-    this.$router.push({
-      path: this.$route.path,
-      query
-    })
-    if (this.issue.id) {
-      await this.fetchChildren()
-    }
   }
 
   public async updatePage(pageNumber: number): Promise<void> {
-    this.currentPage = pageNumber
+    this.addFilter('page', pageNumber)
     await this.fetchChildren()
   }
 
-  public updateFilters(payload: Record<string, string | (string | null)[]>): void {
-    this.urlFilters = {
-      ...this.urlFilters,
-      ...payload
+  async fetchIssueData(): Promise<void> {
+    const { repo, provider, owner, issueId } = this.$route.params
+    if (!this.repository.id) {
+      await this.fetchBasicRepoDetails({
+        name: repo,
+        provider,
+        owner
+      })
     }
-  }
 
-  @Inject('fetchIssueData')
-  readonly fetchIssueData: () => Promise<void>
+    await this.fetchIssueDetails({
+      repositoryId: this.repository.id,
+      shortcode: issueId
+    })
+  }
 
   loadIgnoredIssues(): void {
     this.issuesIgnored =
@@ -156,7 +146,7 @@ export default class IssuesDetails extends mixins(
 
   get pageCount(): number {
     if (this.checkIssues && this.checkIssues.totalCount) {
-      return Math.ceil(this.checkIssues.totalCount / this.pageSize)
+      return Math.ceil(this.checkIssues.totalCount / PAGE_SIZE)
     }
     return 0
   }

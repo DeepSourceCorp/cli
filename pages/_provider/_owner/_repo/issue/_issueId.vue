@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Back to Issue list Page -->
-    <div class="px-4 py-2 min-h-13 border-b border-ink-200 flex flex-row items-center">
+    <div class="flex flex-row items-center px-4 py-2 border-b min-h-13 border-ink-200">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="routeToPrevious">All issues</nuxt-link>
@@ -16,19 +16,19 @@
         @ignoreIssues="ignoreIssues"
       ></issue-actions>
     </div>
-    <div class="flex flex-col space-y-1 px-4 py-3">
+    <div class="flex flex-col px-4 py-3 space-y-1">
       <div class="space-y-2" v-if="$fetchState.pending">
         <!-- Left Section -->
-        <div class="w-3/5 md:w-4/5 h-10 bg-ink-300 rounded-md animate-pulse"></div>
-        <div class="w-1/3 flex space-x-2">
-          <div class="h-6 w-1/4 bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-6 w-1/4 bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-6 w-1/2 bg-ink-300 rounded-md animate-pulse"></div>
+        <div class="w-3/5 h-10 rounded-md md:w-4/5 bg-ink-300 animate-pulse"></div>
+        <div class="flex w-1/3 space-x-2">
+          <div class="w-1/4 h-6 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="w-1/4 h-6 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="w-1/2 h-6 rounded-md bg-ink-300 animate-pulse"></div>
         </div>
       </div>
       <issue-details-header v-else :showMeta="true" v-bind="issue"> </issue-details-header>
     </div>
-    <div id="tabs" class="flex xl:col-span-2 border-b border-ink-300 mt-3">
+    <div id="tabs" class="flex mt-3 border-b xl:col-span-2 border-ink-300">
       <div class="flex self-end px-4 space-x-4 overflow-auto flex-nowrap">
         <nuxt-link :to="getRoute('occurrences')">
           <z-tab
@@ -41,7 +41,7 @@
               text-size="xxs"
               :spacing="String(issue.occurrenceCount).length === 1 ? 'px-0 py-0' : 'px-0.5'"
               bgColor="ink-100"
-              class="leading-none h-4 items-center justify-center"
+              class="items-center justify-center h-4 leading-none"
               :class="{
                 'w-4': String(issue.occurrenceCount).length === 1,
                 'w-6': String(issue.occurrenceCount).length === 2,
@@ -64,7 +64,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Provide, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import {
   ZIcon,
   ZTag,
@@ -148,7 +148,6 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
     this.$root.$emit('update-ignored-issues-occurences')
   }
 
-  @Provide()
   async fetchIssueData(): Promise<void> {
     const { repo, provider, owner, issueId } = this.$route.params
     if (!this.repository.id) {

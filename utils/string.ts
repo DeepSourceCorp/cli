@@ -46,4 +46,8 @@ function formatUSD(amount: number): string {
   return usdFormatter.format(amount)
 }
 
-export { toTitleCase, toSentenceCase, shortenLargeNumber, formatUSD, formatIntl }
+function makeSafeNumber(candidate: string, defaultReturnValue = 0): number {
+  return isFinite(Number(candidate)) ? Number(candidate) : defaultReturnValue
+}
+
+export { toTitleCase, toSentenceCase, shortenLargeNumber, formatUSD, formatIntl, makeSafeNumber }
