@@ -236,7 +236,8 @@ export const actions: RepositoryListModuleActions = {
           limit: variables.limit,
           after: this.$getGQLAfter(variables.currentPageNumber, variables.limit),
           query: variables.query
-        }
+        },
+        true
       )
 
       commit(RepoListMutations.SET_NEW_REPOSITORY_LIST, response.data.owner.repositories)
