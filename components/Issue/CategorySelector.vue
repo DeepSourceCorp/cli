@@ -54,12 +54,12 @@ const issuesSortOrder = [
   'recommended',
   'bug-risk',
   'antipattern',
-  'style',
   'security',
   'performance',
-  'doc',
   'typecheck',
-  'coverage'
+  'coverage',
+  'style',
+  'doc'
 ]
 
 @Component({
