@@ -245,7 +245,7 @@ export default class RepoHeader extends mixins(
   }
 
   get canReadTeamPage(): boolean {
-    if (this.teamPerms.permission) {
+    if (this.teamPerms.permission && this.activeOwner === this.$route.params.owner) {
       return this.$gateKeeper.team(TeamPerms.VIEW_TEAM_HOME, this.teamPerms.permission)
     }
     return false
