@@ -40,7 +40,7 @@
             <span class="text-sm tracking-wide text-vanilla-400">{{ repoInfo.description }}</span>
           </div>
         </div>
-        <div class="flex space-x-3 md:flex-row">
+        <div class="flex flex-wrap gap-3">
           <div v-if="repoInfo.primaryAnalyzer" class="flex items-center space-x-1">
             <img :src="repoInfo.primaryAnalyzer.analyzerLogo" alt="Analyzer" class="w-5 h-5" />
             <span class="text-sm tracking-wide text-vanilla-400">{{

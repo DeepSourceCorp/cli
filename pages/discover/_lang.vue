@@ -35,9 +35,11 @@
         <repo-feed :loading="$fetchState.pending" />
         <section class="space-y-4">
           <!-- Editor's pick repository -->
-          <editors-pick />
-          <!-- Trending repositories -->
-          <trending />
+          <div class="sticky top-0">
+            <editors-pick />
+            <!-- Trending repositories -->
+            <trending />
+          </div>
         </section>
       </div>
     </div>
