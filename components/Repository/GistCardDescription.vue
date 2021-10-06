@@ -14,7 +14,9 @@
       <!-- Created -->
       <div class="items-center hidden space-x-2 md:flex">
         <z-icon icon="clock" size="small" color="vanilla-400"></z-icon>
-        <span class="text-sm text-vanilla-400">{{ finishedInLabel }} {{ finishedString }}</span>
+        <span class="text-sm text-vanilla-400"
+          >{{ finishedInLabel }} <span v-if="showFinishedInTime"> {{ finishedString }}</span>
+        </span>
       </div>
     </slot>
   </div>
@@ -31,19 +33,22 @@ import { formatSeconds, fromNow } from '@/utils/date'
 })
 export default class GistCardTitle extends Vue {
   @Prop({ default: '' })
-  createdAt!: string
+  createdAt: string
 
   @Prop({ default: '' })
-  finishedIn!: number
+  finishedIn: number
 
   @Prop({ default: '' })
-  compareHash!: string
+  compareHash: string
 
   @Prop({ default: 'Found' })
-  actionText!: string
+  actionText: string
 
   @Prop({ default: 'Finished in' })
-  finishedInLabel!: string
+  finishedInLabel: string
+
+  @Prop({ default: true })
+  showFinishedInTime: boolean
 
   get createdString(): string {
     return fromNow(this.createdAt)

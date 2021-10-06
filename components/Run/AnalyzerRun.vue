@@ -1,7 +1,7 @@
 <template>
   <div>
     <analyzer-header
-      v-if="analyzer"
+      v-if="analyzer && analyzer.name && analyzer.shortcode && status"
       :title="analyzer.name"
       :icon="analyzer.shortcode"
       :status="status"
@@ -127,7 +127,8 @@ import {
   IssueConnection,
   AutofixableIssueDetail,
   RunStatus,
-  Run
+  Run,
+  Analyzer
 } from '@/types/types'
 
 const runDetailStore = namespace('run/detail')
@@ -172,7 +173,7 @@ export default class AnalyzerRun extends Vue {
   issuesResolvedCount: number
 
   @Prop({ default: () => ({}) })
-  analyzer: Record<string, string>
+  analyzer: Analyzer
 
   @Prop({ default: () => [] })
   metricsCaptured: Array<RepositoryMetricValue>

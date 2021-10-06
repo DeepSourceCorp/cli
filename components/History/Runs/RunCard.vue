@@ -35,7 +35,9 @@
         <!-- Created -->
         <div v-if="!isPending" class="items-center hidden space-x-1.5 md:flex">
           <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
-          <span v-if="finishedIn" class="text-sm text-vanilla-400">{{ statusText }} {{ finishedString }}</span>
+          <span v-if="statusText && finishedIn" class="text-sm text-vanilla-400">
+            {{ statusText }} {{ finishedString }}
+          </span>
           <span v-else class="text-sm text-vanilla-400">{{ absentTimeStatusText }}</span>
         </div>
         <!-- introduced resolved -->
@@ -87,7 +89,7 @@ import { Maybe, RunStatus, Scalars } from '~/types/types'
   }
 })
 export default class RunCard extends Vue {
-  @Prop({ default: 'pass' })
+  @Prop({ default: 'PASS' })
   status: string
 
   @Prop({ default: '' })
@@ -97,24 +99,24 @@ export default class RunCard extends Vue {
   runId: string
 
   @Prop({ default: '' })
-  createdAt!: string
+  createdAt: string
 
   @Prop({ default: '' })
-  finishedIn!: number
+  finishedIn: number
 
   @Prop({ default: '' })
-  gitCompareDisplay!: string
+  gitCompareDisplay: string
 
   @Prop({ default: '' })
-  commitOid!: string
+  commitOid: string
 
   @Prop({ default: 0 })
-  issuesRaisedCount!: number
+  issuesRaisedCount: number
 
   @Prop({ default: 0 })
-  issuesResolvedNum!: number
+  issuesResolvedNum: number
 
-  @Prop()
+  @Prop({ required: true })
   config!: Maybe<Scalars['GenericScalar']>
 
   get icon(): string {

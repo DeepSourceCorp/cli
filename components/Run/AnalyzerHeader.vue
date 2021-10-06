@@ -1,6 +1,6 @@
 <template>
   <!-- Header -->
-  <div class="flex w-full rounded-sm flex-1">
+  <div class="flex w-full rounded-sm flex-1 min-h-24">
     <!-- Left Section -->
     <div class="w-3/5 md:w-4/5 py-2 flex flex-col space-y-1 justify-evenly">
       <!-- heading -->
@@ -17,9 +17,10 @@
         <!-- Found -->
         <div class="flex items-center space-x-2">
           <z-icon :icon="statusIcon" size="small" :color="statusIconColor"></z-icon>
-          <span v-if="finishedInDisplay" class="text-sm text-vanilla-400"
-            >{{ statusText }} {{ finishedInDisplay }}</span
-          >
+          <div v-if="statusText && finishedInDisplay" class="text-sm text-vanilla-400">
+            <span v-if="isPending"> {{ statusText }} (Time elapsed: {{ finishedInDisplay }}) </span>
+            <span v-else> {{ statusText }} {{ finishedInDisplay }} </span>
+          </div>
           <span v-else class="text-sm text-vanilla-400">{{ statusDescription }} </span>
         </div>
         <!-- Issue type -->
@@ -73,16 +74,13 @@ import { shortenLargeNumber, formatIntl } from '~/utils/string'
   }
 })
 export default class AnalyzerHeader extends Vue {
-  @Prop({ default: '' })
-  link!: string
-
-  @Prop({ default: '' })
+  @Prop({ required: true })
   title!: string
 
-  @Prop({ default: '' })
+  @Prop({ required: true })
   icon!: string
 
-  @Prop({ default: 'pass' })
+  @Prop({ required: true })
   status!: string
 
   @Prop()
@@ -152,6 +150,10 @@ export default class AnalyzerHeader extends Vue {
       [RunStatus.Cncl]: 'Cancelled'
     }
     return types[this.status || 'PASS']
+  }
+
+  get isPending(): boolean {
+    return this.status === RunStatus.Pend
   }
 }
 </script>

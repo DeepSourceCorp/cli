@@ -16,11 +16,12 @@
           :id="commitOid.slice(0, 7)"
         ></gist-card-title>
         <gist-card-description
-          actionText="Analyzed"
+          :actionText="isPending ? 'Started' : 'Analyzed'"
           :createdAt="createdAt"
           :finishedIn="finishedIn"
           :finishedInLabel="statusText"
           :compareHash="gitCompareDisplay"
+          :show-finished-in-time="!isPending"
         >
         </gist-card-description>
       </div>
@@ -126,6 +127,10 @@ export default class RunHeader extends Vue {
       [RunStatus.Cncl]: 'Cancelled after'
     }
     return types[this.status || 'PASS']
+  }
+
+  get isPending(): boolean {
+    return this.status === RunStatus.Pend
   }
 
   getRoute(lang: string): string {
