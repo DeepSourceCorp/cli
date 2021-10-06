@@ -7,7 +7,9 @@
             repoInfo.owner.login
           }}</span>
           <span>/</span>
-          <span class="font-bold text-vanilla-100"> {{ repoInfo.name }} </span>
+          <span class="font-bold text-vanilla-100">
+            {{ repoInfo.name }}
+          </span>
         </div>
 
         <span v-if="this.loggedIn" class="flex-shrink-0 inline">
@@ -20,10 +22,11 @@
               v-if="updatingWatchlist"
               icon="spin-loader"
               color="juniper"
-              class="animate-spin"
+              class="-mb-px animate-spin"
             />
             <z-icon
               v-else
+              class="-mb-px"
               v-tooltip="repoInfo.isWatched ? 'Remove from watchlist' : 'Add to watchlist'"
               :key="repoInfo.id"
               :icon="repoInfo.isWatched ? 'remove-watchlist' : 'add-watchlist'"

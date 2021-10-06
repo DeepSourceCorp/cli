@@ -119,7 +119,7 @@
         </div>
         <div
           class="items-center hidden lg:flex"
-          :class="[ isCollapsed ? 'w-8' : 'lg:space-x-1 w-full justify-between' ]"
+          :class="[isCollapsed ? 'w-8' : 'lg:space-x-1 w-full justify-between']"
         >
           <user-menu :isCollapsed="isCollapsed" />
           <client-only>
@@ -212,7 +212,6 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   public collapsedSidebar = false
   public toggleCollapsed = false
   public isOpen = false
-  public currentAnalyzer = ''
   public showInDiscoverInfoDialog = false
   public showUpdateTechnologiesModal = false
   public debounceTimer: ReturnType<typeof setTimeout>
@@ -221,16 +220,7 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
     if (this.loggedIn) {
       await this.fetchActiveUser()
     }
-
     await this.fetchAnalyzers()
-    const currentAnalyzerShortcode = this.$route.query.lang as string
-
-    if (currentAnalyzerShortcode) {
-      const idx = this.analyzerList.findIndex(
-        (analyzer) => analyzer.shortcode === currentAnalyzerShortcode
-      )
-      this.currentAnalyzer = this.analyzerList[idx].id
-    }
   }
 
   containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
@@ -272,15 +262,5 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
      */
     return new Date().getFullYear()
   }
-
-  // async applyFilter(analyzer: Analyzer, isSelected: boolean) {
-  //   if (isSelected) {
-  //     this.currentAnalyzer = analyzer.id
-  //     this.$nuxt.$router.replace({ query: { lang: analyzer.shortcode } })
-  //   } else {
-  //     this.currentAnalyzer = ''
-  //     this.$nuxt.$router.replace({ query: {} })
-  //   }
-  // }
 }
 </script>

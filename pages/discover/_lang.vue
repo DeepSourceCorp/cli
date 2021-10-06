@@ -71,6 +71,7 @@
         </z-tab-panes>
       </z-tabs>
     </div>
+    <analyzer-filter-mobile class="block md:hidden" />
   </div>
 </template>
 
