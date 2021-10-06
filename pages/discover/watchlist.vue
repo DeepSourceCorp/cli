@@ -1,15 +1,19 @@
 <template>
-  <div>
-    <div class="space-x-0.5 font-medium p-3.5 pb-4 border-b border-ink-200">
-      <span class="leading-none text-vanilla-400">Discover</span>
-      <span class="leading-none text-vanilla-100">/</span>
-      <span class="leading-none text-vanilla-100"> Watchlist</span>
+  <div class="pb-8">
+    <div class="p-4 border-b border-ink-200">
+      <z-breadcrumb separator="/" class="mb-px text-sm text-vanilla-100">
+        <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
+          <nuxt-link to="/discover">Discover</nuxt-link>
+        </z-breadcrumb-item>
+        <z-breadcrumb-item>Watchlist</z-breadcrumb-item>
+      </z-breadcrumb>
     </div>
-    <div class="px-4 py-5 watchlist-mobile-hero md:watchlist-hero">
-      <nuxt-link to="/discover">
-        <z-button button-type="secondary" icon="arrow-left"> Back to discover </z-button>
-      </nuxt-link>
-    </div>
+
+    <hero-header
+      title="Watchlist"
+      class="watchlist-mobile-hero md:watchlist-hero"
+      subtitle="Keep track of new issues in the projects you love and care about."
+    />
 
     <!-- Layout for larger screens -->
     <div class="hidden gap-4 px-4 md:grid text-vanilla-100 grid-cols-discover">
@@ -62,7 +66,9 @@ import {
   ZTabList,
   ZTabPane,
   ZTabPanes,
-  ZTabItem
+  ZTabItem,
+  ZBreadcrumb,
+  ZBreadcrumbItem
 } from '@deepsourcelabs/zeal'
 import EditorsPick from '@/components/Discover/EditorsPick.vue'
 import Trending from '@/components/Discover/Trending.vue'
@@ -77,6 +83,8 @@ import { Context } from '@nuxt/types'
     ZTabPane,
     ZTabPanes,
     ZTabItem,
+    ZBreadcrumb,
+    ZBreadcrumbItem,
     Trending,
     EditorsPick
   },
@@ -90,7 +98,14 @@ import { Context } from '@nuxt/types'
   ],
   layout: 'discover'
 })
-export default class Watchlist extends Vue {}
+export default class Watchlist extends Vue {
+  head(): Record<string, string> {
+    return {
+      title: `Watchlist of your favourite open source projects`,
+      description: 'Keep track of new issues in the projects you love and care about.'
+    }
+  }
+}
 </script>
 
 <style scoped>

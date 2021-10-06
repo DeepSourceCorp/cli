@@ -1,35 +1,26 @@
 <template>
   <div class="pb-8">
-    <div
-      class="flex flex-col items-center md:flex-row md:items-baseline discover-mobile-hero md:discover-hero"
+    <hero-header
+      title="Discover"
+      class="discover-mobile-hero md:discover-hero"
+      subtitle="Discover and fix bug risks, anti-patterns, performance issues and security flaws."
     >
-      <div class="px-4 my-8 text-center md:my-10 md:text-left">
-        <h1
-          class="text-2xl font-bold leading-none md:text-2.5xl discover-mobile-hero-text md:bg-none"
-        >
-          Discover
-        </h1>
-        <p class="max-w-md mt-3 md:max-w-2xl md:text-lg text-vanilla-400">
-          Discover and fix bug risks, anti-patterns, performance issues and security flaws.
-        </p>
-        <z-input
-          size="large"
-          placeholder="Search for a repository, technology, or by language"
-          background-color="ink-300"
-          v-model="searchTerm"
-          :show-border="false"
-          :name="searchTerm"
-          class="mt-6 rounded-md shadow-lg"
-          @debounceInput="$fetch"
-        >
-          <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
-        </z-input>
-      </div>
-    </div>
+      <z-input
+        size="large"
+        placeholder="Search for a repository, technology, or by language"
+        background-color="ink-300"
+        v-model="searchTerm"
+        :show-border="false"
+        :name="searchTerm"
+        class="mt-4 rounded-md shadow-lg"
+        @debounceInput="$fetch"
+      >
+        <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
+      </z-input>
+    </hero-header>
 
     <!-- Layout for larger screens -->
-    <div class="hidden md:grid text-vanilla-100">
-      <div class="grid gap-4 px-4 grid-cols-discover">
+    <div class="hidden gap-4 px-4 grid-cols-discover md:grid text-vanilla-100">
         <!-- Discover repo feed -->
         <repo-feed :loading="$fetchState.pending" />
         <section class="space-y-4">
@@ -38,7 +29,6 @@
           <!-- Trending repositories -->
           <trending />
         </section>
-      </div>
     </div>
 
     <!-- Mobile layout -->
@@ -137,6 +127,14 @@ export default class Discover extends Vue {
 
   async fetch(): Promise<void> {
     await this.getRepos()
+  }
+
+  head(): Record<string, string> {
+    return {
+      title: `Discover • Issues from popular open source projects`,
+      description:
+        'Discover and fix bug risks, anti-patterns, performance issues and security flaws.'
+    }
   }
 }
 </script>

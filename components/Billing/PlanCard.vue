@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="border border-ink-300 min-h-24 rounded-md">
+    <div class="border rounded-md border-ink-300 min-h-24">
       <div
         class="p-5 space-y-8"
         :class="{
@@ -14,7 +14,7 @@
             <p class="text-sm text-vanilla-400">{{ description }}</p>
           </div>
           <template v-if="monthlyAmount">
-            <div class="flex space-x-1 items-start">
+            <div class="flex items-start space-x-1">
               <div class="text-2xl leading-tight">$</div>
               <div class="text-3xl font-semibold leading-none">{{ amount }}</div>
               <div class="mb-1 text-sm">/month</div>
@@ -24,7 +24,7 @@
             </p>
           </template>
           <template v-else>
-            <div class="h-11 rounded-md w-44 bg-ink-300"></div>
+            <div class="rounded-md h-11 w-44 bg-ink-300"></div>
             <p class="text-sm text-vanilla-400">
               Custom pricing, based on usage and number of seats.
             </p>
@@ -44,11 +44,11 @@
       </div>
       <div class="p-5" v-if="features.length">
         <ul class="space-y-2">
-          <li v-for="feature in features" :key="feature" class="text-sm flex items-start space-x-2">
-            <span class="flex-shrink-0 h-5 inline-flex items-center">
+          <li v-for="feature in features" :key="feature" class="flex items-start space-x-2 text-sm">
+            <span class="inline-flex items-center flex-shrink-0 h-5">
               <z-icon icon="check" color="juniper"></z-icon>
             </span>
-            <span class="leading-6 text-vanilla-400 text-sm">{{ feature }}</span>
+            <span class="text-sm leading-6 text-vanilla-400">{{ feature }}</span>
           </li>
         </ul>
       </div>

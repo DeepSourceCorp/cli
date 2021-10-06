@@ -1,10 +1,10 @@
 <template>
   <section>
     <section-header title="Recommended projects" />
-    <div v-if="loading" class="grid gap-2 animate-pulse">
+    <div v-if="loading" class="grid gap-4 animate-pulse">
       <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300" />
     </div>
-    <div v-else-if="resolveNodes(discoverRepositories).length" class="grid gap-2">
+    <div v-else-if="resolveNodes(discoverRepositories).length" class="grid gap-4">
       <repo-card
         v-for="edge in discoverRepositories.edges"
         :key="edge.node.id"

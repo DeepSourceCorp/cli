@@ -1,12 +1,12 @@
 <template>
   <div>
-    <section-header title="Projects on your watchlist" />
+    <section-header title="Projects" />
 
-    <div v-if="$fetchState.pending" class="grid gap-2 animate-pulse">
+    <div v-if="$fetchState.pending" class="grid gap-4 animate-pulse">
       <div v-for="ii in 5" :key="ii" class="h-32 rounded-md bg-ink-300" />
     </div>
 
-    <div v-else-if="resolveNodes(watchedRepositories).length" class="grid gap-2">
+    <div v-else-if="resolveNodes(watchedRepositories).length" class="grid gap-4">
       <repo-card
         v-for="(edge, key) in watchedRepositories.edges"
         :key="key"

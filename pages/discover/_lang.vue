@@ -1,31 +1,32 @@
 <template>
   <div class="pb-8">
-    <div
-      class="flex flex-col items-center md:flex-row md:items-baseline discover-mobile-hero md:discover-hero"
-    >
-      <div class="px-4 my-8 text-center md:my-10 md:text-left">
-        <h1
-          class="text-2xl font-bold leading-none md:text-2.5xl discover-mobile-hero-text md:bg-none"
-        >
-          Discover
-        </h1>
-        <p class="max-w-md mt-3 md:max-w-2xl md:text-lg text-vanilla-400">
-          Discover and fix bug risks, anti-patterns, performance issues and security flaws.
-        </p>
-        <z-input
-          size="large"
-          placeholder="Search for a repository, technology, or by language"
-          background-color="ink-300"
-          v-model="searchTerm"
-          :show-border="false"
-          :name="searchTerm"
-          class="mt-6 rounded-md shadow-lg"
-          @debounceInput="$fetch"
-        >
-          <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
-        </z-input>
-      </div>
+    <div class="p-4 border-b border-ink-200">
+      <z-breadcrumb separator="/" class="mb-px text-sm text-vanilla-100">
+        <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
+          <nuxt-link to="/discover">Discover</nuxt-link>
+        </z-breadcrumb-item>
+        <z-breadcrumb-item>{{ analyzerName }}</z-breadcrumb-item>
+      </z-breadcrumb>
     </div>
+
+    <hero-header
+      :title="analyzerName ? `Discover ${analyzerName} projects` : 'Discover'"
+      class="discover-mobile-hero md:discover-hero"
+      subtitle="Discover and fix bug risks, anti-patterns, performance issues and security flaws."
+    >
+      <z-input
+        size="large"
+        placeholder="Search for a repository, technology, or by language"
+        background-color="ink-300"
+        v-model="searchTerm"
+        :show-border="false"
+        :name="searchTerm"
+        class="mt-4 rounded-md shadow-lg"
+        @debounceInput="$fetch"
+      >
+        <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
+      </z-input>
+    </hero-header>
 
     <!-- Layout for larger screens -->
     <div class="hidden md:grid text-vanilla-100">
@@ -76,7 +77,17 @@ import { Component, namespace, Vue } from 'nuxt-property-decorator'
 
 import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
 import { Analyzer, Maybe, Repository, RepositoryConnection } from '~/types/types'
-import { ZIcon, ZInput, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem } from '@deepsourcelabs/zeal'
+import {
+  ZIcon,
+  ZInput,
+  ZTabs,
+  ZTabList,
+  ZTabPane,
+  ZTabPanes,
+  ZTabItem,
+  ZBreadcrumb,
+  ZBreadcrumbItem
+} from '@deepsourcelabs/zeal'
 import EditorsPick from '@/components/Discover/EditorsPick.vue'
 import Trending from '@/components/Discover/Trending.vue'
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
@@ -95,6 +106,8 @@ const discoverRepositoriesStore = namespace('discover/repositories')
     ZTabPane,
     ZTabPanes,
     ZTabItem,
+    ZBreadcrumb,
+    ZBreadcrumbItem,
     EditorsPick,
     Trending
   },
@@ -167,6 +180,14 @@ export default class Discover extends Vue {
   @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_EDITORS_PICK_REPOSITORY)
   editorsPickRepository: Maybe<Repository>
 
+  head(): Record<string, string> {
+    return {
+      title: `Discover ${this.analyzerName} • Issues from popular open source projects`,
+      description:
+        'Discover and fix bug risks, anti-patterns, performance issues and security flaws.'
+    }
+  }
+
   async getRepos(): Promise<void> {
     const currentAnalyzerShortcode = this.$route.params.lang
 
@@ -189,7 +210,19 @@ export default class Discover extends Vue {
     })
   }
 
+  get analyzerName(): string {
+    const { lang } = this.$route.params
+    if (lang) {
+      const analyzer = this.analyzerList.filter((analyzer) => analyzer.shortcode === lang)
+      if (Array.isArray(analyzer) && analyzer.length) {
+        return analyzer[0].name.replace(' (beta)', '')
+      }
+    }
+    return ''
+  }
+
   async fetch(): Promise<void> {
+    this.fetchAnalyzers()
     await this.getRepos()
   }
 }

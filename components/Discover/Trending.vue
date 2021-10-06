@@ -2,11 +2,11 @@
   <div>
     <section-header title="Trending" />
 
-    <div v-if="$fetchState.pending" class="grid gap-2 animate-pulse">
+    <div v-if="$fetchState.pending" class="grid gap-4 animate-pulse">
       <div v-for="ii in 5" :key="ii" class="rounded-md h-17 bg-ink-300" />
     </div>
 
-    <div v-else class="grid gap-2">
+    <div v-else class="grid gap-4">
       <repo-card
         v-for="(edge, key) in trendingRepositories.edges"
         :key="key"

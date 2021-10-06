@@ -1,41 +1,39 @@
 <template>
-  <div class="mb-12">
-    <div ref="analyzer-dir-hero" class="min-h-72 flex">
-      <div class="px-4 mt-13">
-        <h1 class="text-3xl font-bold leading-none text-center md:text-left">Directory</h1>
-        <p class="max-w-2xl mt-3 text-vanilla-400 text-center md:text-left">
-          The Analyzer directory has documentation, links, and a smart search experience
-        </p>
-        <z-input
-          size="large"
-          placeholder="Look up a programming language or linter..."
-          background-color="ink-300"
-          :show-border="false"
-          :name="searchTerm"
-          class="mt-6 shadow-lg rounded-md"
-          @debounceInput="searchDir"
-        >
-          <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
-        </z-input>
-      </div>
-    </div>
-    <section class="px-4 -mt-3">
-      <!-- <h2 class="text-vanilla-400 font-semibold text-2xl">Analyzers</h2> -->
+  <div class="pb-8">
+    <hero-header
+      title="Directory"
+      class="directory-hero"
+      subtitle="Documentation, links, and a smart search experience for all our Analyzers and Transformers."
+    >
+      <z-input
+        size="large"
+        placeholder="Look up a programming language or linter..."
+        background-color="ink-300"
+        :show-border="false"
+        :name="searchTerm"
+        class="mt-4 rounded-md shadow-lg"
+        @debounceInput="searchDir"
+      >
+        <z-icon icon="search" size="base" color="vanilla-400" class="ml-3 mr-1" slot="left" />
+      </z-input>
+    </hero-header>
+    <section class="px-4">
+      <!-- <h2 class="text-2xl font-semibold text-vanilla-400">Analyzers</h2> -->
       <div class="flex items-center space-x-3">
-        <h2 class="uppercase text-vanilla-400 flex-shrink-0 font-medium tracking-wider">
+        <h2 class="flex-shrink-0 font-medium tracking-wider uppercase text-vanilla-400">
           Analyzers
         </h2>
-        <hr class="border-ink-200 flex-grow" />
+        <hr class="flex-grow border-ink-200" />
       </div>
       <div
         v-if="areAnalyzersLoading"
-        class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
+        class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 xl:grid-cols-4"
       >
         <directory-card-skeleton v-for="loader in 8" :key="loader" />
       </div>
       <div
         v-else-if="analyzerList.length"
-        class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
+        class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 xl:grid-cols-4"
       >
         <directory-card
           v-for="analyzer in analyzerList"
@@ -51,22 +49,22 @@
         image-width="w-28"
       />
     </section>
-    <section class="mt-10 px-4 pb-4">
+    <section class="px-4 pb-4 mt-10">
       <div class="flex items-center space-x-3">
-        <h2 class="uppercase text-vanilla-400 tracking-wider flex-shrink-0 font-medium">
+        <h2 class="flex-shrink-0 font-medium tracking-wider uppercase text-vanilla-400">
           Transformers
         </h2>
-        <hr class="border-ink-200 flex-grow" />
+        <hr class="flex-grow border-ink-200" />
       </div>
       <div
         v-if="areTransformersLoading"
-        class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
+        class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 xl:grid-cols-4"
       >
         <directory-card-skeleton v-for="loader in 8" :key="loader" type="transformer" />
       </div>
       <div
         v-else-if="transformerList.length"
-        class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
+        class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-3 xl:grid-cols-4"
       >
         <directory-card
           v-for="transformer in transformerList"
@@ -114,9 +112,9 @@ export default class AnalyzersDirectory extends Vue {
   @directoryStore.Action(DirectoryActions.FETCH_TRANSFORMERS_DIR_LIST)
   fetchTransformers: (arg?: { q: string }) => Promise<void>
 
-  private searchTerm = ''
-  private areAnalyzersLoading = false
-  private areTransformersLoading = false
+  public searchTerm = ''
+  public areAnalyzersLoading = false
+  public areTransformersLoading = false
 
   async fetch(): Promise<void> {
     this.areAnalyzersLoading = true
@@ -129,12 +127,6 @@ export default class AnalyzersDirectory extends Vue {
         this.areTransformersLoading = false
       })
     ])
-  }
-
-  mounted(): void {
-    //? The following two lines ensure that background image is lazily loaded for the header
-    const heroDiv = this.$refs['analyzer-dir-hero'] as HTMLElement
-    if (heroDiv) heroDiv.classList.add('directory-hero')
   }
 
   async filterResults(): Promise<void> {
@@ -154,6 +146,14 @@ export default class AnalyzersDirectory extends Vue {
   searchDir(val: string): void {
     this.searchTerm = val
     this.filterResults()
+  }
+
+  head(): Record<string, string> {
+    return {
+      title: `Directory • DeepSource`,
+      description:
+        'Documentation, links, and a smart search experience for all our Analyzers and Transformers.'
+    }
   }
 }
 </script>

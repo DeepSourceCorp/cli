@@ -12,6 +12,7 @@ import {
 // Queries
 import PreferredTechnologiesGQLQuery from '~/apollo/queries/discover/preferredTechnologies.gql'
 import WatchedRepositoriesGQLQuery from '~/apollo/queries/discover/watchedRepositories.gql'
+import WatchedRepositoriesCountGQLQuery from '~/apollo/queries/discover/watchedRepositoriesCount.gql'
 
 // Mutations
 import UpdateTechnologyPreferenceGQLMutation from '~/apollo/mutations/discover/updateTechnologyPreference.gql'
@@ -26,13 +27,15 @@ export enum DiscoverUserActions {
   FETCH_PREFERRED_TECHNOLOGIES = 'fetchPreferredTechnologies',
   UPDATE_PREFERRED_TECHNOLOGIES = 'updatePreferredTechnologies',
   FETCH_WATCHED_REPOSITORIES = 'fetchWatchedRepositories',
+  FETCH_WATCHED_REPOSITORIES_COUNT = 'fetchWatchedRepositoriesCount',
   UPDATE_WATCHED_REPOSITORIES = 'updateWatchedRepositories'
 }
 
 export enum DiscoverUserMutations {
   SET_ERROR = 'setError',
   SET_PREFERRED_TECHNOLOGIES = 'setPreferredTechnologies',
-  SET_WATCHED_REPOSITORIES = 'setWatchedRepositories'
+  SET_WATCHED_REPOSITORIES = 'setWatchedRepositories',
+  SET_WATCHED_REPOSITORIES_COUNT = 'setWatchedRepositoriesCount'
 }
 
 export const state = () => ({
@@ -42,6 +45,7 @@ export const state = () => ({
     totalCount: 0,
     edges: []
   } as AnalyzerConnection,
+  watchedRepositoriesCount: 0,
   watchedRepositories: {
     pageInfo: {} as PageInfo,
     totalCount: 0,
@@ -75,6 +79,11 @@ interface DiscoverUserModuleMutations extends MutationTree<DiscoverUserState> {
     state: DiscoverUserState,
     preferredTechnologies: RepositoryConnection
   ) => void
+
+  [DiscoverUserMutations.SET_WATCHED_REPOSITORIES_COUNT]: (
+    state: DiscoverUserState,
+    preferredTechnologies: RepositoryConnection
+  ) => void
 }
 
 export const mutations: DiscoverUserModuleMutations = {
@@ -98,6 +107,12 @@ export const mutations: DiscoverUserModuleMutations = {
     watchedRepositories: RepositoryConnection
   ) => {
     state.watchedRepositories = Object.assign({}, state.watchedRepositories, watchedRepositories)
+  },
+  [DiscoverUserMutations.SET_WATCHED_REPOSITORIES_COUNT]: (
+    state: DiscoverUserState,
+    watchedRepositories: RepositoryConnection
+  ) => {
+    state.watchedRepositoriesCount = watchedRepositories.totalCount ?? 0
   }
 }
 
@@ -124,6 +139,11 @@ interface DiscoverUserModuleActions extends ActionTree<DiscoverUserState, RootSt
     args: {
       refetch?: boolean
     }
+  ) => Promise<void>
+
+  [DiscoverUserActions.FETCH_WATCHED_REPOSITORIES_COUNT]: (
+    this: Store<RootState>,
+    injectee: DiscoverUserActionContext
   ) => Promise<void>
 
   [DiscoverUserActions.UPDATE_WATCHED_REPOSITORIES]: (
@@ -187,6 +207,26 @@ export const actions: DiscoverUserModuleActions = {
       commit(DiscoverUserMutations.SET_ERROR, error)
     }
   },
+  async [DiscoverUserActions.FETCH_WATCHED_REPOSITORIES_COUNT]({ commit }) {
+    try {
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        WatchedRepositoriesCountGQLQuery,
+        {},
+        true
+      )
+
+      const {
+        data: { viewer }
+      } = response
+      commit(
+        DiscoverUserMutations.SET_WATCHED_REPOSITORIES_COUNT,
+        viewer?.preference?.watchedRepositories
+      )
+    } catch (e) {
+      const error = e as GraphqlError
+      commit(DiscoverUserMutations.SET_ERROR, error)
+    }
+  },
 
   async [DiscoverUserActions.UPDATE_WATCHED_REPOSITORIES](
     { commit, dispatch },
@@ -195,6 +235,7 @@ export const actions: DiscoverUserModuleActions = {
     try {
       await this.$applyGraphqlMutation(UpdateWatchedRepositoriesGQLMutation, { repoId, action })
       dispatch(DiscoverUserActions.FETCH_WATCHED_REPOSITORIES, { refetch: true })
+      dispatch(DiscoverUserActions.FETCH_WATCHED_REPOSITORIES_COUNT)
     } catch (e) {
       const error = e as GraphqlError
       commit(DiscoverUserMutations.SET_ERROR, error)

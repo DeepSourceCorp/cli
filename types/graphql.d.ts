@@ -720,6 +720,15 @@ declare module '*/watchedRepositories.gql' {
 }
     
 
+declare module '*/watchedRepositoriesCount.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/getAnIssue.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

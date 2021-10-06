@@ -4,142 +4,143 @@
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
-    <section class="px-2.5 py-4 border-b border-ink-200">
-      <img
-        class="w-auto h-5 mt-0.5"
-        src="~/assets/images/logo-wordmark-white.svg"
-        alt="DeepSource"
-      />
+    <section class="px-3 py-4 border-b border-ink-200">
+      <nuxt-link to="/discover">
+        <img
+          class="w-auto h-5 mt-0.5 mx-auto"
+          src="~/assets/images/logo-wordmark-white.svg"
+          alt="DeepSource"
+        />
+      </nuxt-link>
     </section>
     <section
-      class="p-2.5 hide-scroll flex flex-col flex-grow border-ink-200 min-h-20 justify-between"
-      :class="[isCollapsed ? '' : 'overflow-y-scroll']"
+      class="flex flex-col justify-between flex-grow h-full p-3 space-y-3 overflow-y-scroll hide-scroll border-ink-200"
     >
-      <div>
-        <nuxt-link v-if="loggedIn" to="/discover/watchlist">
-          <z-button
-            v-if="!isCollapsed"
-            icon="add-watchlist"
-            button-type="secondary"
-            size="small"
-            class="w-full border bg-ink-300 border-ink-200 hover:bg-ink-200"
+      <div class="space-y-3">
+        <sidebar-item
+          v-if="loggedIn"
+          icon="add-watchlist"
+          :active="$route.name === 'discover-watchlist'"
+          class="border border-ink-200"
+          to="/discover/watchlist"
+        >
+          <span class="flex justify-between w-full">
+            <span>Watchlist</span>
+            <z-tag
+              v-if="watchedRepositoriesCount"
+              bgColor="ink-100"
+              textSize="xs"
+              spacing="px-2 py-0.5"
+            >
+              {{ watchedRepositoriesCount }}
+            </z-tag>
+          </span>
+        </sidebar-item>
+        <div>
+          <span
+            class="ml-0.5 text-xs leading-none font-medium tracking-wider uppercase text-vanilla-400"
           >
-            Watching {{ watchedRepositories.totalCount }}
-            {{ watchedRepositories.totalCount === 1 ? 'project' : 'projects' }}
-          </z-button>
-        </nuxt-link>
+            Filter by technology
+          </span>
+          <div class="flex flex-wrap gap-1.5 mt-2">
+            <template v-for="analyzer in analyzerList">
+              <nuxt-link
+                v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
+                :key="analyzer.id"
+                class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
+                :class="[
+                  $route.params.lang === analyzer.shortcode
+                    ? 'bg-gradient-dawn'
+                    : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
+                ]"
+                :to="
+                  $route.params.lang === analyzer.shortcode
+                    ? `/discover`
+                    : `/discover/${analyzer.shortcode}`
+                "
+                role="button"
+              >
+                <img
+                  v-if="analyzer.analyzerLogo"
+                  :src="analyzer.analyzerLogo"
+                  :alt="analyzer.name"
+                  class="flex-shrink-0 w-auto h-4"
+                />
+                <span class="text-xs"> {{ analyzer.name }} </span>
+              </nuxt-link>
+            </template>
+          </div>
+        </div>
+      </div>
+      <div class="justify-self-end">
+        <z-button
+          v-if="loggedIn"
+          button-type="primary"
+          size="small"
+          class="w-full"
+          icon="plus"
+          @click="showInDiscoverInfoDialog = true"
+        >
+          Add your project
+        </z-button>
         <z-button
           v-else
-          to="https://deepsource.io"
-          icon="arrow-left"
-          color="vanilla-200"
-          size="small"
+          to="/signup"
           button-type="secondary"
-          class="w-full border bg-ink-300 border-ink-200 hover:bg-ink-200"
+          size="small"
+          class="w-full"
+          icon="plus"
         >
-          Back to deepsource.io
+          Add your project
         </z-button>
-      </div>
-
-      <div v-if="!isCollapsed" :class="{ 'mt-4': !loggedIn }">
-        <span class="ml-0.5 text-xs font-medium tracking-wider uppercase text-vanilla-400"
-          >Filter by technology</span
-        >
-        <div class="flex flex-wrap gap-1.5 mt-2">
-          <template v-for="analyzer in analyzerList">
-            <nuxt-link
-              v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
-              :key="analyzer.id"
-              class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
-              :class="[
-                $route.params.lang === analyzer.shortcode
-                  ? 'bg-gradient-dawn'
-                  : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
-              ]"
-              :to="
-                $route.params.lang === analyzer.shortcode
-                  ? `/discover`
-                  : `/discover/${analyzer.shortcode}`
-              "
-              role="button"
-            >
-              <img
-                v-if="analyzer.analyzerLogo"
-                :src="analyzer.analyzerLogo"
-                :alt="analyzer.name"
-                class="flex-shrink-0 w-auto h-4"
-              />
-              <span class="text-xs"> {{ analyzer.name }} </span>
-            </nuxt-link>
-          </template>
-        </div>
       </div>
     </section>
 
     <section class="relative self-end w-full border-t border-ink-200 justify-self-end group">
-      <div v-if="loggedIn">
-        <div class="p-2.5 space-y-2">
-          <z-button
-            v-if="!isCollapsed"
-            button-type="primary"
-            size="small"
-            class="w-full mt-2"
-            icon="plus"
-            @click="showInDiscoverInfoDialog = true"
-          >
-            Add your project
-          </z-button>
+      <div v-if="loggedIn" class="p-2.5 space-y-2">
+        <sidebar-item
+          to="/support"
+          :active="$route.path === '/support'"
+          :isCollapsed="isCollapsed"
+          icon="support"
+        >
+          Get help
+        </sidebar-item>
+        <div class="flex items-center">
           <sidebar-item
-            to="/support"
-            :active="$route.path === '/support'"
             :isCollapsed="isCollapsed"
-            icon="support"
+            icon="dashboard"
+            :active="$route.path === '/me'"
+            to="/me"
           >
-            Get help
+            Dashboard
           </sidebar-item>
-          <div class="flex items-center">
-            <sidebar-item
-              :isCollapsed="isCollapsed"
-              icon="dashboard"
-              :active="$route.path === '/me'"
-              to="/me"
-            >
-              Dashboard
-            </sidebar-item>
-            <extras-menu />
-          </div>
-          <div
-            class="items-center hidden lg:flex"
-            :class="{ 'lg:space-x-1 w-full justify-between': !isCollapsed, 'w-8': isCollapsed }"
-          >
-            <user-menu :isCollapsed="isCollapsed" />
-            <client-only>
-              <change-log v-show="!isCollapsed" />
-            </client-only>
-          </div>
+          <extras-menu />
+        </div>
+        <div
+          class="items-center hidden lg:flex"
+          :class="[ isCollapsed ? 'w-8' : 'lg:space-x-1 w-full justify-between' ]"
+        >
+          <user-menu :isCollapsed="isCollapsed" />
+          <client-only>
+            <change-log v-show="!isCollapsed" />
+          </client-only>
         </div>
       </div>
 
-      <div v-else class="p-2.5 space-y-2.5">
-        <z-button
-          v-if="!isCollapsed"
-          to="/signup"
-          button-type="secondary"
-          size="small"
-          icon="plus"
-          class="w-full"
-        >
-          Add your project
-        </z-button>
-        <footer class="w-full border-solid border-ink-200">
-          <h3 class="text-lg font-semibold">Code quality made simple.</h3>
-          <p class="mt-2 text-sm text-vanilla-400">
-            Avoid the grunt work of fixing issues. Save developer time. Maintain code quality.
-          </p>
-          <z-button to="/signup" buttonType="primary" class="w-full mt-4">Get started</z-button>
-        </footer>
-      </div>
-      <div class="py-4 px-2.5 border-t border-ink-200">
+      <footer
+        v-else
+        class="w-full p-3 border-solid border-ink-200 bg-gradient-dark-dawn backdrop-blur-xl"
+      >
+        <h3 class="text-lg font-semibold">Code quality made simple.</h3>
+        <p class="mt-2 text-sm text-vanilla-400">
+          Avoid the grunt work of fixing issues. Save developer time. Maintain code quality.
+        </p>
+        <nuxt-link to="/signup">
+          <z-button button-type="primary" class="w-full mt-4">Get started</z-button>
+        </nuxt-link>
+      </footer>
+      <div class="px-2 py-4 border-t border-ink-200">
         <div class="flex items-center justify-between space-x-2 leading-none">
           <z-icon
             icon="logo"
@@ -180,13 +181,11 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'
 
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
-import { DiscoverUserActions, DiscoverUserGetters } from '~/store/discover/user'
-import { Analyzer, AnalyzerConnection, RepositoryConnection, Scalars } from '~/types/types'
-import { DiscoverRepoActions } from '~/store/discover/repositories'
+import { DiscoverUserActions } from '~/store/discover/user'
+import { Analyzer } from '~/types/types'
 
 const directoryStore = namespace('directory/directory')
 const discoverUserStore = namespace('discover/user')
-const discoverRepositoriesStore = namespace('discover/repositories')
 
 @Component({
   components: {
@@ -203,24 +202,11 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   @directoryStore.Action(DirectoryActions.FETCH_ANALYZER_DIR_LIST)
   fetchAnalyzers: () => Promise<void>
 
-  @discoverUserStore.Getter(DiscoverUserGetters.GET_PREFERRED_TECHNOLOGIES)
-  preferredTechnologies: AnalyzerConnection
+  @discoverUserStore.State
+  watchedRepositoriesCount: number
 
-  @discoverUserStore.Action(DiscoverUserActions.FETCH_PREFERRED_TECHNOLOGIES)
-  fetchPreferredTechnologies: (args?: { refetch?: boolean }) => Promise<void>
-
-  @discoverUserStore.Getter(DiscoverUserGetters.GET_WATCHED_REPOSITORIES)
-  watchedRepositories: RepositoryConnection
-
-  @discoverUserStore.Action(DiscoverUserActions.FETCH_WATCHED_REPOSITORIES)
-  fetchWatchedRepositories: (args?: { refetch?: boolean }) => Promise<void>
-
-  @discoverRepositoriesStore.Action(DiscoverRepoActions.FETCH_DISCOVER_REPOSITORIES)
-  fetchDiscoverRepositories: (args?: {
-    name_Icontains?: string
-    preferredTechnologies?: Array<Scalars['ID']>
-    refetch?: boolean
-  }) => Promise<void>
+  @discoverUserStore.Action(DiscoverUserActions.FETCH_WATCHED_REPOSITORIES_COUNT)
+  fetchWatchedRepositoriesCount: () => Promise<void>
 
   public isCollapsed = false
   public collapsedSidebar = false
@@ -232,6 +218,10 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   public debounceTimer: ReturnType<typeof setTimeout>
 
   async fetch(): Promise<void> {
+    if (this.loggedIn) {
+      await this.fetchActiveUser()
+    }
+
     await this.fetchAnalyzers()
     const currentAnalyzerShortcode = this.$route.query.lang as string
 
@@ -240,14 +230,6 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
         (analyzer) => analyzer.shortcode === currentAnalyzerShortcode
       )
       this.currentAnalyzer = this.analyzerList[idx].id
-    }
-
-    if (this.loggedIn) {
-      await Promise.all([
-        this.fetchActiveUser(),
-        this.fetchPreferredTechnologies(),
-        this.fetchWatchedRepositories()
-      ])
     }
   }
 
@@ -264,6 +246,9 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   }
 
   mounted() {
+    if (this.loggedIn) {
+      this.fetchWatchedRepositoriesCount()
+    }
     this.$root.$on('ui:show-sidebar-menu', this.openSidebar)
   }
 

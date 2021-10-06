@@ -1,0 +1,10 @@
+query {
+  viewer {
+    id
+    preference {
+      watchedRepositories {
+        totalCount
+      }
+    }
+  }
+}

@@ -41,7 +41,7 @@
         <slot :isCollapsed="isCollapsed"></slot>
       </div>
       <footer
-        class="w-full px-2 py-4 border-t border-solid border-ink-200 bg-gradient-dark-dawn backdrop-blur-xl"
+        class="w-full p-3 border-t border-solid border-ink-200 bg-gradient-dark-dawn backdrop-blur-xl"
         :class="footerClass"
         v-if="$scopedSlots.footer"
       >
