@@ -124,7 +124,6 @@ export default class RepoInactive extends mixins(RepoDetailMixin, RoleAccessMixi
       id: this.id
     })
     this.activateLoading = false
-    this.$toast.success(`Successfully activated ${this.name}`)
     this.$emit('refetch')
   }
 }

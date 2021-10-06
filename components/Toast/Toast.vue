@@ -99,10 +99,12 @@ export default class Toast extends Vue {
   @Prop({})
   classTimeout!: string
 
-  @Prop({ default: {} })
+  @Prop({ default: () => {} })
   defaults!: object
 
-  @Prop({ default: {} })
+  @Prop({
+    default: () => ({ label: '', action: () => {} })
+  })
   primary!: PrimaryAction
 
   public active = false

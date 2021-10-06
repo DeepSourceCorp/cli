@@ -43,7 +43,7 @@ import {
   CommitConfigToVcsPayload
 } from '~/types/types'
 import { TransformerInterface } from '~/store/analyzer/list'
-import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { GraphqlError, GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 export interface MetricsNamespace {
   key: string
@@ -763,15 +763,19 @@ export const actions: RepositoryDetailModuleActions = {
     })
     return response.data.commitConfigToVcs
   },
-  async [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION]({ commit }, { isActivated, id }) {
+  async [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION]({ commit, state }, { isActivated, id }) {
     try {
       const response = await this.$applyGraphqlMutation(ToggleRepositoryActivationMutation, {
         input: { id, isActivated }
-      })
-      commit(
-        RepositoryDetailMutations.SET_REPOSITORY,
-        response.data.toggleRepositoryActivation.repository
-      )
+      }) as GraphqlMutationResponse
+      if (response?.data?.toggleRepositoryActivation) {
+        commit(
+          RepositoryDetailMutations.SET_REPOSITORY,
+          response.data.toggleRepositoryActivation.repository
+        )
+        if (response.data.toggleRepositoryActivation.repository?.isActivated)
+          this.$toast.success(`Successfully activated ${state.repository.name}.`)
+      }
     } catch (e) {
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
       commit(RepositoryDetailMutations.SET_ERROR, e)
