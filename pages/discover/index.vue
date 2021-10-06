@@ -60,7 +60,7 @@
         </z-tab-panes>
       </z-tabs>
     </div>
-    <analyzer-filter-mobile class="block md:hidden" />
+    <analyzer-filter-mobile />
   </div>
 </template>
 

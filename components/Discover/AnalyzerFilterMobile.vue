@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="absolute bottom-0 z-20 flex justify-center w-screen p-3 pb-5 lg:hidden">
+    <div class="absolute z-20 flex justify-center w-screen p-3 pb-5 filter-wrapper md:hidden">
       <z-button
         button-type="primary"
         @click="isModalOpen = true"
@@ -76,6 +76,11 @@ export default class AnalyzerFilterMobile extends Vue {
   @directoryStore.Action(DirectoryActions.FETCH_ANALYZER_DIR_LIST)
   fetchAnalyzers: () => Promise<void>
 
+  mounted() {
+    let vh = window.innerHeight
+    document.documentElement.style.setProperty('--window-inner-height', `${vh}px`)
+  }
+
   get currentAnalyzer(): Maybe<Analyzer> {
     const { lang } = this.$route.params
     if (lang) {
@@ -92,3 +97,9 @@ export default class AnalyzerFilterMobile extends Vue {
   }
 }
 </script>
+<style scoped>
+.filter-wrapper {
+  bottom: 0px;
+  bottom: calc(100vh - var(--window-inner-height, 1vh));
+}
+</style>

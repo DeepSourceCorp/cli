@@ -1,15 +1,17 @@
 <template>
   <div>
-    <div class="lg:hidden absolute w-screen bottom-0 z-20 flex justify-center p-3 pb-5">
+    <div
+      class="absolute bottom-0 z-20 flex justify-center w-screen p-3 pb-5 lg:hidden filter-wrapper"
+    >
       <z-button
         button-type="primary"
         @click="isModalOpen = true"
         class="flex items-center min-w-48"
       >
         <z-icon :icon="activeFilter || 'list'" size="small" color="ink-400" class="mr-0.5" />
-        <span class="leading-none text-sm">{{ activeFilterTitle || 'All issues' }}</span>
+        <span class="text-sm leading-none">{{ activeFilterTitle || 'All issues' }}</span>
         <div class="flex-grow"></div>
-        <div class="place-self-end text-sm rounded-full w-9 bg-juniper-400">
+        <div class="text-sm rounded-full place-self-end w-9 bg-juniper-400">
           {{ shortenNumber(totalIssueCount) }}
         </div>
       </z-button>
@@ -30,13 +32,13 @@
               <div class="flex items-center w-full">
                 <z-icon icon="list" size="small" color="currentColor" class="mr-2" />
                 <span
-                  class="text-xs flex-grow-0 overflow-ellipsis w-17 text-left overflow-x-hidden"
+                  class="flex-grow-0 overflow-x-hidden text-xs text-left overflow-ellipsis w-17"
                 >
                   All issues
                 </span>
                 <div class="flex-grow"></div>
                 <div
-                  class="place-self-end text-xs rounded-full w-9"
+                  class="text-xs rounded-full place-self-end w-9"
                   :class="activeFilter === '' ? 'bg-juniper-400' : 'bg-ink-100'"
                 >
                   {{ shortenNumber(allFilterCount) }}
@@ -65,15 +67,15 @@
                   :icon="issueType.shortcode"
                   size="small"
                   color="currentColor"
-                  class="mr-2 flex-shrink-0"
+                  class="flex-shrink-0 mr-2"
                 />
                 <span
-                  class="text-xs flex-grow-0 overflow-ellipsis w-17 text-left overflow-x-hidden"
+                  class="flex-grow-0 overflow-x-hidden text-xs text-left overflow-ellipsis w-17"
                   >{{ issueType.title }}</span
                 >
                 <div class="flex-grow"></div>
                 <div
-                  class="place-self-end text-xs rounded-full w-9"
+                  class="text-xs rounded-full place-self-end w-9"
                   :class="activeFilter === issueType.shortcode ? 'bg-juniper-400' : 'bg-ink-100'"
                 >
                   {{ shortenNumber(issueType.count) }}
@@ -109,6 +111,11 @@ export default class AnalyzerIssuesFilterMobile extends Vue {
 
   private isModalOpen = false
 
+  mounted() {
+    let vh = window.innerHeight
+    document.documentElement.style.setProperty('--window-inner-height', `${vh}px`)
+  }
+
   get filteredIssueDistribution(): IssueTypeT[] {
     return this.issueDistribution.slice(1)
   }
@@ -136,3 +143,9 @@ export default class AnalyzerIssuesFilterMobile extends Vue {
   }
 }
 </script>
+<style scoped>
+.filter-wrapper {
+  bottom: 0px;
+  bottom: calc(100vh - var(--window-inner-height, 1vh));
+}
+</style>
