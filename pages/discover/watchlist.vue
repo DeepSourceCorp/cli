@@ -16,77 +16,22 @@
     />
 
     <!-- Layout for larger screens -->
-    <div class="hidden gap-4 px-4 md:grid text-vanilla-100 grid-cols-discover">
+    <div class="grid gap-4 px-4 mt-4 text-vanilla-100 md:mt-0">
       <!-- Discover repo feed -->
       <watched-repo-feed />
-      <section class="space-y-4">
-        <!-- Editor's pick repository -->
-        <editors-pick />
-        <!-- Trending repositories -->
-        <trending />
-      </section>
-    </div>
-
-    <!-- Mobile layout -->
-    <div class="flex flex-col items-center md:hidden">
-      <z-tabs class="w-full -mb-px">
-        <div class="flex justify-between px-4 border-b border-ink-200">
-          <z-tab-list class="flex pt-4 space-x-4 overflow-auto sm:w-auto hide-scroll">
-            <z-tab-item class="flex items-center flex-shrink-0" icon="tachometer-fast">
-              <span>Watchlist</span>
-            </z-tab-item>
-            <z-tab-item class="flex items-center flex-shrink-0" icon="trending-up">
-              <span>Trending</span>
-            </z-tab-item>
-          </z-tab-list>
-        </div>
-
-        <z-tab-panes class="px-4 pt-4 min-h-48">
-          <!-- Discover repo feed -->
-          <watched-repo-feed />
-
-          <z-tab-pane>
-            <!-- Editor's pick repository -->
-            <editors-pick class="mb-2" />
-            <!-- Trending repositories -->
-            <trending />
-          </z-tab-pane>
-        </z-tab-panes>
-      </z-tabs>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import {
-  ZIcon,
-  ZButton,
-  ZTabs,
-  ZTabList,
-  ZTabPane,
-  ZTabPanes,
-  ZTabItem,
-  ZBreadcrumb,
-  ZBreadcrumbItem
-} from '@deepsourcelabs/zeal'
-import EditorsPick from '@/components/Discover/EditorsPick.vue'
-import Trending from '@/components/Discover/Trending.vue'
+import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
 import { Context } from '@nuxt/types'
 
 @Component({
   components: {
-    ZIcon,
-    ZButton,
-    ZTabs,
-    ZTabList,
-    ZTabPane,
-    ZTabPanes,
-    ZTabItem,
     ZBreadcrumb,
-    ZBreadcrumbItem,
-    Trending,
-    EditorsPick
+    ZBreadcrumbItem
   },
   middleware: [
     ({ redirect, store }: Context) => {

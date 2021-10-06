@@ -21,14 +21,16 @@
 
     <!-- Layout for larger screens -->
     <div class="hidden gap-4 px-4 grid-cols-discover md:grid text-vanilla-100">
-        <!-- Discover repo feed -->
-        <repo-feed :loading="$fetchState.pending" />
-        <section class="space-y-4">
-          <!-- Editor's pick repository -->
+      <!-- Discover repo feed -->
+      <repo-feed :loading="$fetchState.pending" />
+      <section class="space-y-4">
+        <!-- Editor's pick repository -->
+        <div class="sticky top-0">
           <editors-pick />
           <!-- Trending repositories -->
           <trending />
-        </section>
+        </div>
+      </section>
     </div>
 
     <!-- Mobile layout -->
