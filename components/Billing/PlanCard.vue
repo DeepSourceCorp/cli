@@ -20,7 +20,7 @@
               <div class="mb-1 text-sm">/month</div>
             </div>
             <p class="text-sm text-vanilla-400">
-              Per team member. <br />Billed {{ billingCycle === 'annual' ? 'yearly' : 'monthly' }}.
+              Per team member. <br />Billed {{ billingCycle }}.
             </p>
           </template>
           <template v-else>
