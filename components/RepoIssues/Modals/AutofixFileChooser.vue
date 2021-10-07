@@ -76,7 +76,8 @@
             @click="autofixSelectedFiles(close)"
           >
             <span class="text-xs text-ink-300"
-              >Run Autofix on {{ selectedFiles.length || 0 }} files</span
+              >Run Autofix on {{ selectedFiles.length || 0 }}
+              {{ selectedFiles.length === 1 ? 'file' : 'files' }}</span
             >
           </z-button>
         </div>
