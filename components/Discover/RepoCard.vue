@@ -39,8 +39,8 @@
     <template slot="description">
       <div class="flex flex-col space-y-1">
         <div v-if="showDescription && repoInfo.description" class="flex flex-wrap space-x-4">
-          <div class="flex items-center space-x-1.5 mb-2">
-            <span class="text-sm tracking-wide text-vanilla-400">{{ repoInfo.description }}</span>
+          <div class="flex items-center space-x-1.5 mb-2 line-clamp-3">
+            <span class="text-sm tracking-wide text-vanilla-400">{{ repoInfo.description }} </span>
           </div>
         </div>
         <div class="flex flex-wrap gap-3">
