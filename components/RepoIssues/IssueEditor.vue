@@ -1,15 +1,15 @@
 <template>
   <div
-    class="border border-ink-200 rounded-md w-full"
+    class="w-full border rounded-md border-ink-200"
     :class="{
       'opacity-60 pointer-events-none filter-grayscale':
         isIgnored || (checkIssueIds.length && checkIssueIds.includes(id))
     }"
   >
     <!-- heading -->
-    <div class="p-3 bg-ink-300 space-y-1">
+    <div class="p-3 space-y-1 bg-ink-300">
       <div class="flex justify-between">
-        <span class="font-medium text-vanilla-100 text-base flex-grow">{{ text }}</span>
+        <span class="flex-grow text-base font-medium text-vanilla-100">{{ text }}</span>
         <div class="flex justify-end w-12">
           <z-menu v-if="canIgnoreIssues">
             <template v-slot:trigger="{ isOpen, toggle }">
@@ -20,7 +20,7 @@
                 icon="slash"
                 iconColor="vanilla-400"
                 size="small"
-                class="focus:outline-none hover:bg-ink-200 -mt-1 -mr-1"
+                class="-mt-1 -mr-1 focus:outline-none hover:bg-ink-200"
                 :class="isOpen ? 'bg-ink-200' : ''"
                 @click="toggle"
               />
@@ -36,7 +36,7 @@
               </z-menu-section>
               <z-menu-section title="Other actions" :divider="false" class="text-left">
                 <z-menu-item @click="() => openIgnoreIssueModal('occurence')"
-                  ><span class="leading-6 overflow-ellipsis overflow-hidden"
+                  ><span class="overflow-hidden leading-6 overflow-ellipsis"
                     >Ignore all occurrences in {{ path }}</span
                   ></z-menu-item
                 >
@@ -47,7 +47,7 @@
       </div>
       <div class="items-center block space-y-1 sm:space-y-0 md:flex md:items-center md:space-x-4">
         <a
-          class="text-vanilla-400 text-xs flex space-x-1 items-center truncate"
+          class="flex items-center space-x-1 text-xs truncate text-vanilla-400"
           target="_blank"
           rel="noreferrer noopener"
           :href="blobUrl"
@@ -60,7 +60,7 @@
           ></z-icon>
           <span>{{ path }}</span>
         </a>
-        <span class="text-vanilla-400 text-xs flex space-x-1 items-center flex-1">
+        <span v-if="lastSeen" class="flex items-center flex-1 space-x-1 text-xs text-vanilla-400">
           <z-icon class="flex-shrink-0" icon="eye" size="x-small"></z-icon>
           <span>Seen {{ lastSeen }}</span>
         </span>
@@ -141,6 +141,9 @@ export default class IssueEditor extends Vue {
   modifiedAt: string
 
   @Prop()
+  createdAt: string
+
+  @Prop()
   sourceCodeMarkup: string
 
   @Prop()
@@ -199,7 +202,9 @@ export default class IssueEditor extends Vue {
   }
 
   get lastSeen(): string {
-    return fromNow(this.modifiedAt)
+    if (this.createdAt) return fromNow(this.createdAt)
+    if (this.modifiedAt) return fromNow(this.modifiedAt)
+    return ''
   }
 
   public markOccurrencesDisabled(checkIssueIds: Array<string>): void {

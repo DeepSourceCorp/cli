@@ -15,6 +15,7 @@ query($checkId: ID!, $limit: Int, $after: String, $shortcode: String, $q: String
         text
         path
         modifiedAt
+        createdAt
         beginLine
         beginColumn
         endLine
