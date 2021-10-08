@@ -54,7 +54,7 @@
           size="small"
         >
           <div class="flex items-center space-x-1 text-xs leading-none">
-            <span>View all {{ selectedRun.name }}</span>
+            <span>{{ selectedRun.showMoreLabel }}</span>
             <z-icon
               class="transform-gpu duration-100 group-hover:translate-x-0.5"
               icon="arrow-right"
@@ -140,9 +140,18 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
   }) => Promise<void>
 
   private runOptions = [
-    { name: 'Analyses', link: ['history', 'runs'] },
-    { name: 'Autofixes', link: 'autofix', repoPerms: [RepoPerms.READ_REPO] },
-    { name: 'Transforms', link: ['history', 'transforms'] }
+    { name: 'Analyses', showMoreLabel: 'View all analysis runs', link: ['history', 'runs'] },
+    {
+      name: 'Autofixes',
+      showMoreLabel: 'View all Autofix runs',
+      link: 'autofix',
+      repoPerms: [RepoPerms.READ_REPO]
+    },
+    {
+      name: 'Transforms',
+      showMoreLabel: 'View all transform runs',
+      link: ['history', 'transforms']
+    }
   ]
 
   public selectedRun = this.runOptions[0]
