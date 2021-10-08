@@ -115,6 +115,7 @@ const discoverRepositoriesStore = namespace('discover/repositories')
     Trending
   },
   middleware: [
+    'disableDiscoverOnPrem',
     async function ({ redirect, route, store }: Context): Promise<void> {
       const allowList = [
         'shell',

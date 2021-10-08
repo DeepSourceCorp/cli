@@ -1,3 +1,5 @@
+import { toBool } from "./utils/string"
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -30,16 +32,17 @@ export default {
     csrfServerUri: process.env.CSRF_SERVER_URI,
     csrfClientUri: process.env.CSRF_CLIENT_URI,
     webSocketUri: process.env.WEB_SOCKET_URI,
-    onPrem: Boolean(process.env.ON_PREM),
-    gitlabEnabled: process.env.ON_PREM ? process.env.GITLAB_ENABLED : true,
-    githubEnabled: process.env.ON_PREM ? process.env.GITHUB_ENABLED : true,
-    bitbucketEnabled: process.env.ON_PREM ? process.env.BITBUCKET_ENABLED : true,
-    githubServerEnabled: process.env.ON_PREM ? process.env.GHE_SERVER_ENABLED : false,
-    enableSaml: process.env.ENABLE_SAML === 'true',
-    emailEnabled: process.env.ON_PREM ? Boolean(process.env.EMAIL_ENABLED) : true,
-    allowSocialAuth: process.env.ON_PREM ? process.env.ALLOW_SOCIAL_AUTH : true,
-    licenseExpiry: process.env.ON_PREM ? new Date(process.env.LICENSE_EXPIRY) : null,
-    supportEmail: process.env.ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io'
+    onPrem: toBool(process.env.ON_PREM),
+    gitlabEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GITLAB_ENABLED) : true,
+    githubEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GITHUB_ENABLED) : true,
+    bitbucketEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.BITBUCKET_ENABLED) : true,
+    githubServerEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GHE_SERVER_ENABLED) : false,
+    enableSaml: toBool(process.env.ENABLE_SAML),
+    emailEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.EMAIL_ENABLED) : true,
+    allowSocialAuth: toBool(process.env.ON_PREM) ? toBool(process.env.ALLOW_SOCIAL_AUTH) : true,
+    licenseExpiry: toBool(process.env.ON_PREM) ? new Date(process.env.LICENSE_EXPIRY) : null,
+    supportEmail: toBool(process.env.ON_PREM) ? 'enterprise-support@deepsource.io' : 'support@deepsource.io',
+    discoverEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.IS_DISCOVER_ENABLED) : true
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -92,7 +95,7 @@ export default {
     return plugins
   },
 
-  ignore: process.env.ON_PREM
+  ignore: toBool(process.env.ON_PREM)
     ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*']
     : [],
 

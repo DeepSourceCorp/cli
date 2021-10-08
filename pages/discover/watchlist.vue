@@ -34,6 +34,7 @@ import { Context } from '@nuxt/types'
     ZBreadcrumbItem
   },
   middleware: [
+    'disableDiscoverOnPrem',
     ({ redirect, store }: Context) => {
       const { loggedIn } = store.state.account.auth
       if (!loggedIn) {
