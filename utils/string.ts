@@ -50,37 +50,18 @@ function makeSafeNumber(candidate: string, defaultReturnValue = 0): number {
   return isFinite(Number(candidate)) ? Number(candidate) : defaultReturnValue
 }
 
-function toBool(item: unknown): boolean {
-  switch (typeof item) {
-    case 'boolean':
-      return item
-    case 'function':
-      return true
-    case 'number':
-      return item > 0 || item < 0
-    case 'object':
-      return !!item
-    case 'string':
-      item = item.toLowerCase()
-      return ['true', '1'].includes(item as string)
-    case 'symbol':
-      return true
-    case 'undefined':
-      return false
-
-    default:
-      throw new TypeError('Unrecognised type: unable to convert to boolean')
-  }
-}
-
-function toWrappableString(path: string, ...options: [maxLength?: number, separater?: string]): string {
+function toWrappableString(
+  path: string,
+  ...options: [maxLength?: number, separater?: string]
+): string {
   const [maxLength = 50, separator = '/'] = options
   const pathTokens = path.split(separator)
   if (pathTokens.length > 2 && path.length > maxLength) {
     const filename = pathTokens.pop()
     const rootFolder = pathTokens.shift()
     if (filename && rootFolder) {
-      const reducer = (previousVal: string, currentVal: string): string => `${previousVal}<span>/${currentVal}</span>`
+      const reducer = (previousVal: string, currentVal: string): string =>
+        `${previousVal}<span>/${currentVal}</span>`
       const folderPath = pathTokens.reduce(reducer, rootFolder)
       return `${folderPath}<span>/${filename}</span>`
     }
@@ -95,6 +76,5 @@ export {
   formatUSD,
   formatIntl,
   makeSafeNumber,
-  toBool,
   toWrappableString
 }
