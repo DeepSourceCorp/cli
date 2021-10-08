@@ -45,24 +45,29 @@
           </z-menu>
         </div>
       </div>
-      <div class="items-center block space-y-1 sm:space-y-0 md:flex md:items-center md:space-x-4">
+      <div class="items-center block space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4">
         <a
           class="flex items-center space-x-1 text-xs truncate text-vanilla-400"
           target="_blank"
           rel="noreferrer noopener"
           :href="blobUrl"
         >
-          <z-icon
-            icon="file-text"
-            size="x-small"
-            class="flex-shrink-0"
-            color="vanilla-400"
-          ></z-icon>
-          <span>{{ path }}</span>
+          <span>
+            <z-icon
+              icon="file-text"
+              size="x-small"
+              class="flex-shrink-0 -mb-0.5"
+              color="vanilla-400"
+            ></z-icon>
+          </span>
+          <span
+            v-html="getWrappablePath(path)"
+            class="max-w-lg flex items-baseline flex-wrap"
+          ></span>
         </a>
         <span v-if="lastSeen" class="flex items-center flex-1 space-x-1 text-xs text-vanilla-400">
           <z-icon class="flex-shrink-0" icon="eye" size="x-small"></z-icon>
-          <span>Seen {{ lastSeen }}</span>
+          <span class="flex-shrink-0">Seen {{ lastSeen }}</span>
         </span>
       </div>
     </div>
@@ -112,6 +117,7 @@ import {
   IgnoreIssueOccurrence
 } from '@/components/RepoIssues'
 import { fromNow } from '~/utils/date'
+import { toWrappableString } from '~/utils/string'
 
 @Component({
   components: {
@@ -213,6 +219,10 @@ export default class IssueEditor extends Vue {
     this.$root.$emit('refetchCheck', this.checkId)
     this.$emit('ignoreIssues', checkIssueIds)
     this.$socket.$emit('ignore-issue-occurrence-file', checkIssueIds)
+  }
+
+  public getWrappablePath(path: string): string {
+    return toWrappableString(path, 100)
   }
 }
 </script>

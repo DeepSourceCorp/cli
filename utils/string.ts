@@ -73,6 +73,21 @@ function toBool(item: unknown): boolean {
   }
 }
 
+function toWrappableString(path: string, ...options: [maxLength?: number, separater?: string]): string {
+  const [maxLength = 50, separator = '/'] = options
+  const pathTokens = path.split(separator)
+  if (pathTokens.length > 2 && path.length > maxLength) {
+    const filename = pathTokens.pop()
+    const rootFolder = pathTokens.shift()
+    if (filename && rootFolder) {
+      const reducer = (previousVal: string, currentVal: string): string => `${previousVal}<span>/${currentVal}</span>`
+      const folderPath = pathTokens.reduce(reducer, rootFolder)
+      return `${folderPath}<span>/${filename}</span>`
+    }
+  }
+  return path
+}
+
 export {
   toTitleCase,
   toSentenceCase,
@@ -80,5 +95,6 @@ export {
   formatUSD,
   formatIntl,
   makeSafeNumber,
-  toBool
+  toBool,
+  toWrappableString
 }
