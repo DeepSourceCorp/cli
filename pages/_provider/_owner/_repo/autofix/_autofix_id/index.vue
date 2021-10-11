@@ -258,7 +258,7 @@ import {
 } from '@/components/Autofix/index'
 
 import { RunDetailActions } from '~/store/run/detail'
-import { CreatePullRequestInput } from '~/types/types'
+import { AutofixRunPullRequestStatus, CreatePullRequestInput } from '~/types/types'
 
 import { RepoPerms } from '~/types/permTypes'
 
@@ -318,20 +318,33 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
   @runStore.Action(RunDetailActions.CREATE_PR)
   createPR: (
     params: Record<string, Record<string, string[] | string>>
-  ) => { data: { input: CreatePullRequestInput } }
+  ) => Promise<{ data: { input: CreatePullRequestInput } }>
 
   @runStore.Action(RunDetailActions.COMMIT_TO_PR)
   commitFixToPR: (
     params: Record<string, Record<string, string[] | string>>
-  ) => { data: { input: CreatePullRequestInput } }
+  ) => Promise<{ data: { input: CreatePullRequestInput } }>
 
   mounted(): void {
     this.$root.$on('refetch-autofix-run', this.fetchAutofixRun)
-    this.$socket.$on('pull-request-created', this.fetchAutofixRun)
-    this.$socket.$on('committed-to-branch', this.fetchAutofixRun)
+    this.$socket.$on('pull-request-created', this.showSuccess)
+    this.$socket.$on('committed-to-branch', this.showSuccess)
     this.$socket.$on('repo-autofix-created', this.fetchAutofixRun)
     this.$socket.$on('autofixrun-fixes-ready', this.fetchAutofixRun)
     this.$socket.$on('autofix-installation-complete', this.fetchAutofixRun)
+  }
+
+  async showSuccess(): Promise<void> {
+    await this.fetchAutofixRun()
+    if (this.autofixRun.pullRequestStatus === AutofixRunPullRequestStatus.Prf) {
+      this.$toast.danger('Autofix failed')
+    } else {
+      if (this.autofixRun.isGeneratedFromPr) {
+        this.$toast.success(this.pullRequestStatusText.SUCCESS_COMMIT)
+      } else {
+        this.$toast.success(this.pullRequestStatusText.SUCCESS_PR)
+      }
+    }
   }
 
   async fetchAutofixRun(): Promise<void> {
@@ -344,8 +357,8 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
 
   beforeDestroy(): void {
     this.$root.$off('refetch-autofix-run', this.fetchAutofixRun)
-    this.$socket.$off('pull-request-created', this.fetchAutofixRun)
-    this.$socket.$off('committed-to-branch', this.fetchAutofixRun)
+    this.$socket.$off('pull-request-created', this.showSuccess)
+    this.$socket.$off('committed-to-branch', this.showSuccess)
     this.$socket.$off('repo-autofix-created', this.fetchAutofixRun)
     this.$socket.$off('autofixrun-fixes-ready', this.fetchAutofixRun)
     this.$socket.$off('autofix-installation-complete', this.fetchAutofixRun)
@@ -439,7 +452,9 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
           CREATE: 'Create merge-request',
           CREATING: 'Creating merge-request',
           VIEW: 'View merge-request',
-          CLOSED: 'Merge-request closed'
+          CLOSED: 'Merge-request closed',
+          SUCCESS_COMMIT: 'Fix committed to the merge request successfully',
+          SUCCESS_PR: 'Merge request created successfully'
         }
 
       default:
@@ -449,7 +464,9 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
           CREATE: 'Create pull-request',
           CREATING: 'Creating pull-request',
           VIEW: 'View pull-request',
-          CLOSED: 'Pull-request closed'
+          CLOSED: 'Pull-request closed',
+          SUCCESS_COMMIT: 'Fix committed to the pull request successfully',
+          SUCCESS_PR: 'Pull request created successfully'
         }
     }
   }
@@ -573,7 +590,6 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
       }
     })
     await this.fetchAutofixRun()
-    this.$toast.success('PR created successfully')
   }
 
   public async commitFixToPullRequest(hunkIds: string[]): Promise<void> {
@@ -584,7 +600,6 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
       }
     })
     await this.fetchAutofixRun()
-    this.$toast.success('Fix committed to the PR successfully')
   }
 }
 </script>

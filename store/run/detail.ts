@@ -274,31 +274,19 @@ export const actions: RunDetailModuleActions = {
     }
   },
   async [RunDetailActions.COMMIT_TO_PR]({ commit }, args) {
-    try {
-      commit(RunDetailMutations.SET_LOADING, true)
-      const response = await this.$applyGraphqlMutation(CommitFixToPullRequest, {
-        input: args.input
-      })
-      commit(RunDetailMutations.SET_LOADING, false)
-      return response
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(RunDetailMutations.SET_ERROR, error)
-      commit(RunDetailMutations.SET_LOADING, false)
-    }
+    commit(RunDetailMutations.SET_LOADING, true)
+    const response = await this.$applyGraphqlMutation(CommitFixToPullRequest, {
+      input: args.input
+    })
+    commit(RunDetailMutations.SET_LOADING, false)
+    return response
   },
   async [RunDetailActions.CREATE_PR]({ commit }, args) {
-    try {
-      commit(RunDetailMutations.SET_LOADING, true)
-      const response = await this.$applyGraphqlMutation(CreatePullRequest, {
-        input: args.input
-      })
-      commit(RunDetailMutations.SET_LOADING, false)
-      return response
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(RunDetailMutations.SET_ERROR, error)
-      commit(RunDetailMutations.SET_LOADING, false)
-    }
+    commit(RunDetailMutations.SET_LOADING, true)
+    const response = await this.$applyGraphqlMutation(CreatePullRequest, {
+      input: args.input
+    })
+    commit(RunDetailMutations.SET_LOADING, false)
+    return response
   }
 }

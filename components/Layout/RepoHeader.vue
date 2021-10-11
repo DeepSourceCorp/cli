@@ -6,18 +6,18 @@
       <div id="header" class="xl:col-span-2">
         <div class="px-4 pt-3 space-x-2 space-y-2 xl:space-y-0">
           <h2
-            class="inline-flex items-center space-x-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400"
+            class="flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400"
           >
-            <div class="inline-flex space-x-1">
+            <div class="space-x-0.5 md:space-x-1">
               <nuxt-link
                 v-if="canReadTeamPage"
                 :to="['', provider, owner].join('/')"
-                class="transition-colors duration-75 cursor-pointer hover:text-vanilla-300"
+                class="inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300"
                 >{{ $route.params.owner }}</nuxt-link
               >
-              <span v-else>{{ $route.params.owner }}</span>
-              <span>/</span>
-              <nuxt-link :to="$generateRoute()" class="font-bold text-vanilla-100">
+              <span v-else class="inline">{{ $route.params.owner }}</span>
+              <span class="inline">/</span>
+              <nuxt-link :to="$generateRoute()" class="inline font-bold text-vanilla-100">
                 {{ $route.params.repo }}
               </nuxt-link>
             </div>
