@@ -114,7 +114,8 @@ export default class AnalyzerHeader extends Vue {
       [RunStatus.Fail]: 'x',
       [RunStatus.Pend]: 'refresh-cw',
       [RunStatus.Timo]: 'clock',
-      [RunStatus.Cncl]: 'alert-circle'
+      [RunStatus.Cncl]: 'alert-circle',
+      [RunStatus.Read]: 'check-circle'
     }
     return types[this.status || 'PASS']
   }
@@ -125,7 +126,8 @@ export default class AnalyzerHeader extends Vue {
       [RunStatus.Fail]: 'cherry',
       [RunStatus.Pend]: 'vanilla-100',
       [RunStatus.Timo]: 'honey',
-      [RunStatus.Cncl]: 'honey'
+      [RunStatus.Cncl]: 'honey',
+      [RunStatus.Read]: 'juniper-100'
     }
     return types[this.status || 'PASS']
   }
@@ -136,7 +138,8 @@ export default class AnalyzerHeader extends Vue {
       [RunStatus.Fail]: 'Failed after',
       [RunStatus.Pend]: 'Analysis in progress',
       [RunStatus.Timo]: 'Timed out after',
-      [RunStatus.Cncl]: 'Cancelled after'
+      [RunStatus.Cncl]: 'Cancelled after',
+      [RunStatus.Read]: 'Completed in'
     }
     return types[this.status || 'PASS']
   }
@@ -147,7 +150,8 @@ export default class AnalyzerHeader extends Vue {
       [RunStatus.Fail]: 'Finished',
       [RunStatus.Pend]: 'Analysis in progress',
       [RunStatus.Timo]: 'Timed out',
-      [RunStatus.Cncl]: 'Cancelled'
+      [RunStatus.Cncl]: 'Cancelled',
+      [RunStatus.Read]: 'Ready'
     }
     return types[this.status || 'PASS']
   }

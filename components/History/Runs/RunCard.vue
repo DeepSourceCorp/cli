@@ -125,7 +125,8 @@ export default class RunCard extends Vue {
       [RunStatus.Fail]: 'x',
       [RunStatus.Pend]: 'refresh-cw',
       [RunStatus.Timo]: 'clock',
-      [RunStatus.Cncl]: 'alert-circle'
+      [RunStatus.Cncl]: 'alert-circle',
+      [RunStatus.Read]: 'check-circle'
     }
     return types[this.status || 'PASS']
   }
@@ -136,7 +137,8 @@ export default class RunCard extends Vue {
       [RunStatus.Fail]: 'cherry',
       [RunStatus.Pend]: 'vanilla-100',
       [RunStatus.Timo]: 'honey',
-      [RunStatus.Cncl]: 'honey'
+      [RunStatus.Cncl]: 'honey',
+      [RunStatus.Read]: 'ink-300'
     }
     return types[this.status || 'PASS']
   }
@@ -147,7 +149,8 @@ export default class RunCard extends Vue {
       [RunStatus.Fail]: 'Run failed',
       [RunStatus.Pend]: 'Analysis in progress',
       [RunStatus.Timo]: 'Analysis timed out',
-      [RunStatus.Cncl]: 'Analysis cancelled'
+      [RunStatus.Cncl]: 'Analysis cancelled',
+      [RunStatus.Read]: 'Analysis ready'
     }
     return types[this.status || 'PASS']
   }
@@ -158,7 +161,8 @@ export default class RunCard extends Vue {
       [RunStatus.Fail]: 'Failed after',
       [RunStatus.Pend]: 'Analysis in progress',
       [RunStatus.Timo]: 'Timed out after',
-      [RunStatus.Cncl]: 'Cancelled after'
+      [RunStatus.Cncl]: 'Cancelled after',
+      [RunStatus.Read]: 'Completed in'
     }
     return types[this.status || 'PASS']
   }
@@ -169,7 +173,8 @@ export default class RunCard extends Vue {
       [RunStatus.Fail]: 'Failed',
       [RunStatus.Pend]: 'Analysis in progress',
       [RunStatus.Timo]: 'Timed out',
-      [RunStatus.Cncl]: 'Cancelled'
+      [RunStatus.Cncl]: 'Cancelled',
+      [RunStatus.Read]: 'Ready'
     }
     return types[this.status || 'PASS']
   }
