@@ -1,14 +1,25 @@
 <template>
-  <div class="flex w-full items-center justify-between p-2">
-    <z-button
-      id="mobile-menu-toggle"
-      icon="menu"
-      buttonType="ghost"
-      size="small"
-      color="vanilla-100"
-      @click="triggerExpand"
-    />
-    <user-menu :isCollapsed="true" />
+  <div class="grid items-center justify-between w-full grid-cols-4">
+    <div>
+      <z-button
+        id="mobile-menu-toggle"
+        icon="menu"
+        buttonType="ghost"
+        size="small"
+        color="vanilla-100"
+        @click="triggerExpand"
+      />
+    </div>
+    <div class="col-span-2">
+      <img
+        class="w-auto h-5 mt-0.5 mx-auto"
+        src="~/assets/images/logo-wordmark-white.svg"
+        alt="DeepSource"
+      />
+    </div>
+    <div class="flex justify-end">
+      <user-menu :isCollapsed="true" />
+    </div>
   </div>
 </template>
 
