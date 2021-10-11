@@ -4,7 +4,7 @@
       <template v-slot:trigger="{ toggle }">
         <button
           type="button"
-          class="flex items-center justify-center space-x-2 text-sm hover:bg-ink-300 rounded-sm py-1 min-w-8 h-8 outline-none focus:outline-none"
+          class="flex items-center justify-center h-8 py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 min-w-8 focus:outline-none"
           @click="toggle"
         >
           <z-icon icon="activity" size="small" class="min-w-4 min-h-4"></z-icon>
@@ -20,7 +20,7 @@
             class="w-full"
             @click.native="close"
           >
-            <div class="flex space-x-2 leading-none items-center">
+            <div class="flex items-center space-x-2 leading-none">
               <z-icon
                 :icon="repo.icon"
                 size="small"
@@ -34,38 +34,57 @@
       </template>
     </z-menu>
     <template v-else>
-      <div
-        class="flex items-center py-1 px-2 space-x-2 text-sm"
-        :class="
+      <button
+        type="button"
+        @click.prevent="toggleDropdown"
+        class="flex items-center justify-between w-full px-2 py-1 text-sm outline-none focus:outline-none"
+        :class="[
           isActive('provider-owner-repo') &&
           !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
             ? 'text-vanilla-100 font-semibold'
-            : 'text-vanilla-400'
-        "
+            : 'text-vanilla-400',
+          { cursor: repoList.length === 0 }
+        ]"
       >
-        <z-icon icon="activity" />
-        <span>Recently active</span>
-      </div>
-      <sidebar-item
-        v-for="repo in repoList"
-        :key="repo.id"
-        :icon="repo.icon"
-        :active="$route.params.repo === repo.name"
-        :icon-color="repo.isActive ? 'juniper' : ''"
-        class="pl-7"
-        :to="buildRoute(repo)"
-        :class="isCollapsed ? 'hidden' : 'block'"
+        <div class="flex items-center space-x-2">
+          <z-icon icon="activity" />
+          <span>Recently active</span>
+        </div>
+
+        <z-tag bgColor="ink-100" textSize="xs" spacing="pl-2 pr-1.5 py-0.5">
+          {{ repoList.length }}
+          <z-icon class="pl-1" :icon="dropdownCollapsed ? 'chevron-up' : 'chevron-down'"></z-icon>
+        </z-tag>
+      </button>
+      <transition
+        enter-active-class="duration-300 ease-out"
+        enter-class="-translate-y-full opacity-0"
+        enter-to-class="translate-y-0 opacity-100"
+        leave-active-class="duration-200 ease-in"
+        leave-class="translate-y-0 opacity-100"
+        leave-to-class="-translate-y-full opacity-0"
       >
-        {{ repo.name }}
-      </sidebar-item>
+        <div class="space-y-0.5" v-show="dropdownCollapsed">
+          <sidebar-item
+            v-for="repo in repoList"
+            :key="repo.id"
+            :icon="repo.icon"
+            :active="$route.params.repo === repo.name"
+            :icon-color="repo.isActive ? 'juniper' : ''"
+            class="pl-7"
+            :to="buildRoute(repo)"
+            :class="isCollapsed ? 'hidden' : 'block'"
+          >
+            {{ repo.name }}
+          </sidebar-item>
+        </div>
+      </transition>
     </template>
   </div>
 </template>
 <script lang="ts">
 import { Component, Prop, mixins, Watch } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
-
-import { RepositoryEdge, Maybe } from '~/types/types'
+import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZTag } from '@deepsourcelabs/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
@@ -73,15 +92,17 @@ import RepoListMixin from '~/mixins/repoListMixin'
 @Component({
   components: {
     ZIcon,
-    ZButton,
     ZMenuItem,
     ZMenu,
-    ZMenuSection
+    ZMenuSection,
+    ZTag
   }
 })
 export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoListMixin) {
   @Prop({ default: false })
   isCollapsed: boolean
+
+  public dropdownCollapsed = false
 
   async fetch(): Promise<void> {
     await this.fetchActiveUser()
@@ -92,6 +113,12 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
     this.$socket.$on('repo-onboarding-completed', () => {
       this.fetchRepos(true)
     })
+    const { provider, owner } = this.$route.params
+
+    this.dropdownCollapsed = this.$localStore.get(
+      'ui-state',
+      `is-sidebar-collapsed-${provider}-${owner}`
+    ) as boolean
   }
 
   beforeDestroy() {
@@ -112,6 +139,17 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
     this.fetchRepos(true).catch(() => {})
   }
 
+  @Watch('dropdownCollapsed')
+  updateLocalState(): void {
+    const { provider, owner } = this.$route.params
+
+    this.$localStore.set(
+      'ui-state',
+      `is-sidebar-collapsed-${provider}-${owner}`,
+      this.dropdownCollapsed
+    )
+  }
+
   get repoList(): Array<Record<string, unknown>> {
     if (this.repoWithActiveAnalysis) {
       return this.repoWithActiveAnalysis.map((repo) => {
@@ -129,6 +167,12 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
 
   buildRoute(repo: Record<string, unknown>): string {
     return `/${this.activeProvider}/${repo.owner ?? this.activeOwner}/${repo.name}`
+  }
+
+  toggleDropdown(): void {
+    if (this.repoList.length > 0) {
+      this.dropdownCollapsed = !this.dropdownCollapsed
+    }
   }
 
   public isActive(params: string): boolean {
