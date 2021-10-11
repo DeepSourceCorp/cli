@@ -1,3 +1,7 @@
+:root {
+  color-scheme: dark;
+}
+
 *:not(.hide-scroll):not(.default-scroll) {
   &::-webkit-scrollbar-track {
     padding: 2px;
