@@ -1,7 +1,7 @@
 <template>
   <!-- Title -->
-  <div class="max-w-6xl p-4 space-y-4">
-    <div class="flex items-center justify-between">
+  <div>
+    <div class="flex items-center justify-between p-4 border-b border-ink-200">
       <h4 class="flex items-center space-x-2 text-md text-vanilla-400">
         <z-icon :icon="repository.isPrivate ? 'lock' : 'globe'" size="small"></z-icon>
         <span>
@@ -11,13 +11,13 @@
         </span>
       </h4>
       <div
-        class="border border-ink-200 rounded-md p-1 px-2 text-sm flex items-center space-x-2 text-vanilla-400"
+        class="flex items-center p-1 px-2 space-x-2 text-sm border rounded-md border-ink-200 text-vanilla-400"
         v-if="!repository.isAutofixEnabled"
       >
         <span
           class="w-3.5 h-3.5 flex items-center justify-center rounded-full bg-honey bg-opacity-50"
         >
-          <span class="w-2 h-2 rounded-full bg-honey bg-opacity-100"></span>
+          <span class="w-2 h-2 bg-opacity-100 rounded-full bg-honey"></span>
         </span>
         <span class="leading-none">Autofix app is not installed</span>
         <z-button
@@ -34,7 +34,7 @@
         @close="showInstallAutofixAppModal = false"
       />
     </div>
-    <div class="grid grid-cols-9 space-x-4">
+    <div class="grid max-w-6xl grid-cols-9 p-4 space-x-4">
       <!-- Steps -->
       <z-stepper align="vertical" :showNumbers="true" class="w-full col-span-5">
         <z-step class="w-full">
