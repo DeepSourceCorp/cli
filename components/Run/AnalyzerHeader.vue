@@ -36,10 +36,11 @@
         <!-- introduced issues -->
         <div class="flex flex-col space-y-1 items-center">
           <div
-            class="text-2xl font-medium text-cherry"
             v-tooltip="
               `${issuesRaisedCount > 1000 ? formatIntl(issuesRaisedCount) : ''} issues introduced`
             "
+            class="text-2xl font-medium"
+            :class="issuesRaisedCount > 0 ? 'text-cherry' : 'text-vanilla-400'"
           >
             {{ shortenNumber(issuesRaisedCount) }}
           </div>
@@ -48,10 +49,11 @@
         <!-- resolved issues -->
         <div class="flex flex-col space-y-1 items-center">
           <div
-            class="text-2xl font-medium text-vanilla-400"
             v-tooltip="
               `${issuesResolvedCount > 1000 ? formatIntl(issuesResolvedCount) : ''} issues resolved`
             "
+            class="text-2xl font-medium"
+            :class="issuesResolvedCount > 0 ? 'text-juniper' : 'text-vanilla-400'"
           >
             {{ shortenNumber(issuesResolvedCount) }}
           </div>
