@@ -1,12 +1,12 @@
 <template>
-  <div class="relative h-screen flex mx-auto overflow-hidden bg-ink-400 text-vanilla-100">
+  <div class="relative flex h-screen mx-auto overflow-hidden bg-ink-400 text-vanilla-100">
     <sidebar v-if="loggedIn" class="top-0 z-50" />
     <logged-out-sidebar v-else class="top-0 z-50" />
     <div class="w-full overflow-y-scroll hide-scroll">
       <mobile-nav
-        class="sticky h-10 lg:hidden w-full top-0 z-30 bg-ink-300 border-b border-ink-200"
+        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-ink-200"
       ></mobile-nav>
-      <repo-header :key="repository.id" class="w-full md:sticky top-10 lg:top-0 z-30"></repo-header>
+      <repo-header :key="repository.id" class="z-30 w-full md:sticky top-10 lg:top-0"></repo-header>
       <!--
         if the repository is activated:
           - if there hasn't been at least one analysis: show the waiting state with an
@@ -26,9 +26,16 @@
               OR it's a page like settings or history which is always visible
               OR if the page is loading
           -->
-        <div v-if="repository.name === $route.params.repo && repository.errorCode && repository.errorCode !== 3003 && !loading">
+        <div
+          v-if="
+            repository.name === $route.params.repo &&
+            repository.errorCode &&
+            repository.errorCode !== 3003 &&
+            !loading
+          "
+        >
           <div
-            class="bg-cherry bg-opacity-10 p-4 flex items-center space-x-2 border-b border-cherry border-opacity-20"
+            class="flex items-center p-4 space-x-2 border-b bg-cherry bg-opacity-10 border-cherry border-opacity-20"
           >
             <p
               class="max-w-4xl text-cherry error-state"
@@ -82,7 +89,6 @@ import { Sidebar } from '@/components/Layout/Sidebar'
 import { ZLabel } from '@deepsourcelabs/zeal'
 import AuthMixin from '@/mixins/authMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import FullStoryMixin from '~/mixins/fullStoryMixin'
 
 import {
   RepoEmpty,
@@ -113,7 +119,7 @@ import { RunStatus } from '~/types/types'
     }
   }
 })
-export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin, FullStoryMixin) {
+export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin) {
   public loading = false
   async fetch(): Promise<void> {
     this.loading = true
@@ -164,7 +170,7 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
       // For ad-hoc runs
       return true
     }
-    
+
     const allowedRoutes = [
       'provider-owner-repo-settings',
       'provider-owner-repo-generate-config',

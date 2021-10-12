@@ -103,7 +103,6 @@ export default {
 
   extendPlugins(plugins) {
     const services = [
-      '~/plugins/services/fullstory.client.js',
       '~/plugins/services/rudderLoader.client.js',
       '~/plugins/services/plausibleLoader.client.js',
       '~/plugins/services/rudder.client.ts',

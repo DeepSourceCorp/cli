@@ -4,8 +4,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
-import FullStoryMixin from '~/mixins/fullStoryMixin'
+import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component({
   components: {},
@@ -15,5 +14,5 @@ import FullStoryMixin from '~/mixins/fullStoryMixin'
     }
   }
 })
-export default class DefaultLayout extends mixins(FullStoryMixin) {}
+export default class DefaultLayout extends Vue {}
 </script>
