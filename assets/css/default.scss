@@ -2,6 +2,10 @@
   color-scheme: dark;
 }
 
+#card-input-container {
+  color-scheme: auto;
+}
+
 *:not(.hide-scroll):not(.default-scroll) {
   &::-webkit-scrollbar-track {
     padding: 2px;
