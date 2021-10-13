@@ -6614,7 +6614,7 @@ export type Unnamed_99_Query = (
       { __typename?: 'CheckIssueEdge' }
       & { node?: Maybe<(
         { __typename?: 'CheckIssue' }
-        & Pick<CheckIssue, 'id' | 'path' | 'text' | 'modifiedAt' | 'beginLine' | 'beginColumn' | 'endLine' | 'endColumn' | 'sourceCodeMarkup'>
+        & Pick<CheckIssue, 'id' | 'path' | 'text' | 'modifiedAt' | 'createdAt' | 'beginLine' | 'beginColumn' | 'endLine' | 'endColumn' | 'sourceCodeMarkup'>
       )> }
     )>> }
   )> }
@@ -6756,7 +6756,7 @@ export type Unnamed_104_Query = (
           { __typename?: 'CheckEdge' }
           & { node?: Maybe<(
             { __typename?: 'Check' }
-            & Pick<Check, 'id'>
+            & Pick<Check, 'id' | 'issuesRaisedCount'>
             & { analyzer?: Maybe<(
               { __typename?: 'Analyzer' }
               & Pick<Analyzer, 'name' | 'shortcode' | 'description' | 'analyzerLogo'>

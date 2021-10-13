@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="w-full border-b border-ink-200">
-      <div class="flex self-end space-x-5 overflow-auto flex-nowrap px-4">
+      <div class="flex self-end px-4 space-x-5 overflow-auto flex-nowrap">
         <nuxt-link v-for="check in checks" :key="check.id" :to="getRoute(check.analyzer.shortcode)">
           <z-tab
             :icon="check.analyzer.shortcode"
@@ -36,6 +36,14 @@
             border-active-color="vanilla-400"
           >
             {{ check.analyzer.name }}
+            <z-tag
+              text-size="xxs"
+              spacing="px-1.5 py-0.5 items-center"
+              bg-color="ink-100"
+              class="leading-none"
+            >
+              <span class="mb-px">{{ check.issuesRaisedCount }}</span>
+            </z-tag>
           </z-tab>
         </nuxt-link>
       </div>
@@ -45,7 +53,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import LinkToPrev from '@/components/LinkToPrev.vue'
-import { ZTab } from '@deepsourcelabs/zeal'
+import { ZTab, ZTag } from '@deepsourcelabs/zeal'
 import { SubNav } from '@/components/History'
 import { GistCardTitle, GistCardDescription } from '@/components/Repository'
 import { Check, RunStatus } from '~/types/types'
@@ -53,6 +61,7 @@ import { Check, RunStatus } from '~/types/types'
 @Component({
   components: {
     ZTab,
+    ZTag,
     SubNav,
     LinkToPrev,
     GistCardTitle,

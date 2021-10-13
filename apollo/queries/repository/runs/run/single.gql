@@ -9,6 +9,7 @@ query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: S
         edges {
           node {
             id
+            issuesRaisedCount
             analyzer {
               name
               shortcode
