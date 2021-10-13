@@ -21,7 +21,6 @@ function toBool(item) {
   }
 }
 
-
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -58,12 +57,16 @@ export default {
     gitlabEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GITLAB_ENABLED) : true,
     githubEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GITHUB_ENABLED) : true,
     bitbucketEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.BITBUCKET_ENABLED) : true,
-    githubServerEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GHE_SERVER_ENABLED) : false,
+    githubServerEnabled: toBool(process.env.ON_PREM)
+      ? toBool(process.env.GHE_SERVER_ENABLED)
+      : false,
     enableSaml: toBool(process.env.ENABLE_SAML),
     emailEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.EMAIL_ENABLED) : true,
     allowSocialAuth: toBool(process.env.ON_PREM) ? toBool(process.env.ALLOW_SOCIAL_AUTH) : true,
     licenseExpiry: toBool(process.env.ON_PREM) ? new Date(process.env.LICENSE_EXPIRY) : null,
-    supportEmail: toBool(process.env.ON_PREM) ? 'enterprise-support@deepsource.io' : 'support@deepsource.io',
+    supportEmail: toBool(process.env.ON_PREM)
+      ? 'enterprise-support@deepsource.io'
+      : 'support@deepsource.io',
     discoverEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.IS_DISCOVER_ENABLED) : true
   },
 
@@ -148,6 +151,7 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     '@nuxtjs/apollo',
+    '@nuxtjs/sitemap',
     'cookie-universal-nuxt',
     '@nuxt/content',
     'portal-vue/nuxt',
@@ -161,6 +165,41 @@ export default {
       handler: '~/server/health'
     }
   ],
+
+  sitemap: {
+    path: '/sitemap-bifrost.xml',
+    gzip: true,
+    exclude: [
+      '/',
+      '/autofix-installation',
+      '/dashboard',
+      '/installation',
+      '/invitation',
+      '/me',
+      '/cli/auth',
+      '/discover/watchlist',
+      '/installation/providers',
+      '/onboard/bitbucket',
+      '/accounts/gitlab/login',
+      '/accounts/github/login/callback/bifrost',
+      '/accounts/github-enterprise/login/callback/bifrost',
+      '/accounts/bitbucket_oauth2/login/callback/bifrost',
+      '/accounts/gitlab/login/callback/bifrost'
+    ],
+
+    routes: [
+      {
+        url: '/discover',
+        changefreq: 'daily',
+        priority: 1
+      },
+      {
+        url: '/directory',
+        changefreq: 'daily',
+        priority: 1
+      }
+    ]
+  },
 
   router: {
     middleware: ['auth', 'licenseValidation'],

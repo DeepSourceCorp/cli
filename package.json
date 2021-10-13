@@ -16,6 +16,7 @@
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
     "@nuxtjs/sentry": "^5.1.4",
+    "@nuxtjs/sitemap": "^2.4.0",
     "@sentry/tracing": "^6.13.3",
     "@tailwindcss/line-clamp": "^0.2.0",
     "cookie-universal-nuxt": "^2.1.4",
