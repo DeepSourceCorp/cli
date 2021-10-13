@@ -8,7 +8,7 @@
         class="flex text-xs lg:text-lg lg:leading-9 text-vanilla-400 font-normal items-center space-x-2"
       >
         <!-- Issue title -->
-        <z-icon :icon="icon" size="small" color="transparent"></z-icon>
+        <z-icon :icon="icon" size="small" color="transparent" />
         <!-- Issue ID -->
         <span class="text-base font-bold text-vanilla-100">{{ title }}</span>
       </div>
@@ -16,7 +16,12 @@
       <div class="sm:flex space-x-6">
         <!-- Found -->
         <div class="flex items-center space-x-2">
-          <z-icon :icon="statusIcon" size="small" :color="statusIconColor"></z-icon>
+          <z-icon
+            :icon="statusIcon"
+            size="small"
+            :color="statusIconColor"
+            :class="{ 'motion-safe:animate-spin': isPending }"
+          />
           <div v-if="statusText && finishedInDisplay" class="text-sm text-vanilla-400">
             <span v-if="isPending"> {{ statusText }} (Time elapsed: {{ finishedInDisplay }}) </span>
             <span v-else> {{ statusText }} {{ finishedInDisplay }} </span>
@@ -25,7 +30,7 @@
         </div>
         <!-- Issue type -->
         <div v-if="alertingMetricsCount" class="hidden md:flex items-center space-x-2">
-          <z-icon icon="bar-chart" size="small" color="honey"></z-icon>
+          <z-icon icon="bar-chart" size="small" color="honey" />
           <span class="text-xs sm:text-sm text-vanilla-400">{{ alertingMetricsMessage }}</span>
         </div>
       </div>
@@ -114,7 +119,7 @@ export default class AnalyzerHeader extends Vue {
     const types: Record<string, string> = {
       [RunStatus.Pass]: 'check',
       [RunStatus.Fail]: 'x',
-      [RunStatus.Pend]: 'refresh-cw',
+      [RunStatus.Pend]: 'spin-loader',
       [RunStatus.Timo]: 'clock',
       [RunStatus.Cncl]: 'alert-circle',
       [RunStatus.Read]: 'check-circle'

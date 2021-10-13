@@ -8,19 +8,20 @@
       <div class="w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly">
         <gist-card-title
           :icon="statusIcon"
-          :iconColor="statusIconColor"
+          :icon-color="statusIconColor"
           :title="branchName.trim()"
-          :vcsCommitUrl="vcsCommitUrl"
-          :vcsPrUrl="vcsPrUrl"
-          :vcsPrNumber="pullRequestNumberDisplay"
+          :vcs-commit-url="vcsCommitUrl"
+          :vcs-pr-url="vcsPrUrl"
+          :vcs-pr-number="pullRequestNumberDisplay"
           :id="commitOid.slice(0, 7)"
+          :spin-icon="isPending"
         ></gist-card-title>
         <gist-card-description
-          :actionText="isPending ? 'Started' : 'Analyzed'"
-          :createdAt="createdAt"
-          :finishedIn="finishedIn"
-          :finishedInLabel="statusText"
-          :compareHash="gitCompareDisplay"
+          :action-text="isPending ? 'Started' : 'Analyzed'"
+          :created-at="createdAt"
+          :finished-in="finishedIn"
+          :finished-in-label="statusText"
+          :compare-hash="gitCompareDisplay"
           :show-finished-in-time="!isPending"
         >
         </gist-card-description>
@@ -100,7 +101,7 @@ export default class RunHeader extends Vue {
     const types: Record<string, string> = {
       [RunStatus.Pass]: 'check',
       [RunStatus.Fail]: 'x',
-      [RunStatus.Pend]: 'refresh-cw',
+      [RunStatus.Pend]: 'spin-loader',
       [RunStatus.Timo]: 'clock',
       [RunStatus.Cncl]: 'alert-circle',
       [RunStatus.Read]: 'check-circle'

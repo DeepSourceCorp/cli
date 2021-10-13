@@ -31,7 +31,8 @@ module.exports = {
     extend: {
       translate: ['group-hover'],
       cursor: ['hover'],
-      borderStyle: ['hover', 'focus']
+      borderStyle: ['hover', 'focus'],
+      animation: ['motion-safe']
     }
   },
   theme: {

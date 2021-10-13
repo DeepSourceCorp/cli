@@ -4,11 +4,12 @@
     <div class="flex items-center space-x-2">
       <z-icon
         v-if="icon"
-        class="flex-shrink-0"
         :icon="icon"
         size="small"
         :color="iconColor"
-      ></z-icon>
+        class="flex-shrink-0"
+        :class="{ 'motion-safe:animate-spin': spinIcon }"
+      />
       <span
         v-if="title"
         class="inline mr-1 overflow-hidden text-xl font-bold leading-9 whitespace-pre text-vanilla-100 overflow-ellipsis"
@@ -57,28 +58,31 @@ import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
   }
 })
 export default class GistCardTitle extends Vue {
-  @Prop({ default: '' })
-  icon!: string
+  @Prop({ required: true })
+  icon: string
+
+  @Prop({ required: true })
+  iconColor: string
+
+  @Prop({ required: true })
+  title: string
 
   @Prop({ default: '' })
-  iconColor!: string
+  id: string
 
   @Prop({ default: '' })
-  link!: string
+  link: string
 
   @Prop({ default: '' })
-  vcsCommitUrl!: string
+  vcsCommitUrl: string
 
   @Prop({ default: '' })
-  vcsPrUrl!: string
+  vcsPrUrl: string
 
   @Prop({ default: '' })
-  vcsPrNumber!: string
+  vcsPrNumber: string
 
-  @Prop({ default: '' })
-  title!: string
-
-  @Prop({ default: '' })
-  id!: string
+  @Prop({ default: false })
+  spinIcon: boolean
 }
 </script>

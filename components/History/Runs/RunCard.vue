@@ -5,9 +5,10 @@
         v-tooltip="tooltipText"
         :icon="icon"
         size="small"
-        class="flex-shrink-0"
         :color="iconColor"
-      ></z-icon>
+        class="flex-shrink-0"
+        :class="{ 'motion-safe:animate-spin': isPending }"
+      />
       <h3
         class="text-vanilla-100 cursor-pointer whitespace-nowrap overflow-ellipsis overflow-hidden"
       >
@@ -20,21 +21,21 @@
     <template slot="description">
       <div class="items-center space-y-1 md:space-y-0 md:flex md:space-x-4 mt-2 ml-6">
         <div v-if="!isPending" class="flex items-center space-x-1.5">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">Analyzed {{ createdString }}</span>
         </div>
         <div v-else class="flex items-center space-x-1.5">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">{{ statusText }}</span>
         </div>
         <!-- Issue type -->
         <div class="items-center hidden space-x-1.5 md:flex">
-          <z-icon icon="git-commit" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="git-commit" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">{{ gitCompareDisplay }}</span>
         </div>
         <!-- Created -->
         <div v-if="!isPending" class="items-center hidden space-x-1.5 md:flex">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span v-if="statusText && finishedIn" class="text-sm text-vanilla-400">
             {{ statusText }} {{ finishedString }}
           </span>
@@ -42,7 +43,7 @@
         </div>
         <!-- introduced resolved -->
         <div class="items-center flex space-x-1.5 md:hidden">
-          <z-icon icon="zap" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="zap" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">
             <template v-if="issuesRaisedCount">{{ issuesRaisedCount }} introduced</template>
             <template v-if="issuesRaisedCount && issuesResolvedNum">,</template>
@@ -123,7 +124,7 @@ export default class RunCard extends Vue {
     const types: Record<string, string> = {
       [RunStatus.Pass]: 'check',
       [RunStatus.Fail]: 'x',
-      [RunStatus.Pend]: 'refresh-cw',
+      [RunStatus.Pend]: 'spin-loader',
       [RunStatus.Timo]: 'clock',
       [RunStatus.Cncl]: 'alert-circle',
       [RunStatus.Read]: 'check-circle'

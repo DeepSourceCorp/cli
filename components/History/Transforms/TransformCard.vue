@@ -5,9 +5,10 @@
         v-tooltip="tooltipText"
         :icon="icon"
         size="small"
-        class="flex-shrink-0"
         :color="iconColor"
-      ></z-icon>
+        class="flex-shrink-0"
+        :class="{ 'motion-safe:animate-spin': isPending }"
+      />
       <h3
         class="text-vanilla-100 cursor-pointer whitespace-nowrap overflow-ellipsis overflow-hidden"
       >
@@ -20,30 +21,28 @@
     <template slot="description">
       <div class="items-center space-y-1 md:space-y-0 md:flex md:space-x-4 mt-2 ml-6">
         <div v-if="!isPending" class="flex items-center space-x-1.5">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm sm:text-sm text-vanilla-400">Transformed {{ createdString }}</span>
         </div>
         <div v-else class="flex items-center space-x-1.5">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
-          <span class="text-sm sm:text-sm text-vanilla-400"
-            >Transform in progress {{ createdString }}</span
-          >
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
+          <span class="text-sm sm:text-sm text-vanilla-400">Transform in progress</span>
         </div>
         <!-- Issue type -->
         <div class="items-center hidden space-x-1.5 md:flex">
-          <z-icon icon="git-commit" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="git-commit" size="x-small" color="vanilla-400" />
           <span class="text-sm sm:text-sm text-vanilla-400">{{ gitCompareDisplay }}</span>
         </div>
         <!-- Created -->
         <div v-if="!isPending" class="items-center hidden space-x-1.5 md:flex">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm sm:text-sm text-vanilla-400">
             {{ statusText }} {{ finishedString }}
           </span>
         </div>
         <!-- files transformed -->
         <div v-if="changedFilesCount !== null" class="items-center flex space-x-1.5 md:hidden">
-          <z-icon icon="code" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="code" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400"> {{ changedFilesCount }} files transformed </span>
         </div>
       </div>
@@ -129,7 +128,7 @@ export default class TransformCard extends Vue {
       [TransformerRunStatus.Fail]: 'x',
       [TransformerRunStatus.Stal]: 'stale',
       [TransformerRunStatus.Timo]: 'clock',
-      [TransformerRunStatus.Pend]: 'refresh-cw',
+      [TransformerRunStatus.Pend]: 'spin-loader',
       [TransformerRunStatus.Empt]: 'minus-circle'
     }
     return types[this.status || TransformerRunStatus.Pass]

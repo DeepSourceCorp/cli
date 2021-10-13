@@ -8,16 +8,19 @@
       <div class="w-3/4 sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly">
         <gist-card-title
           :icon="statusIcon"
-          :iconColor="statusIconColor"
+          :icon-color="statusIconColor"
           :title="branchName"
           :id="commitOidShort"
           link="/history/runs/details"
+          :spin-icon="isPending"
         ></gist-card-title>
         <gist-card-description
-          actionText="Transformed"
-          :createdAt="createdAt"
-          :finishedIn="finishedIn"
-          :compareHash="gitCompareDisplay"
+          :action-text="isPending ? 'Started' : 'Transformed'"
+          :created-at="createdAt"
+          :finished-in="finishedIn"
+          :compare-hash="gitCompareDisplay"
+          :finished-in-label="isPending ? 'Transform in progress' : undefined"
+          :show-finished-in-time="!isPending"
         >
         </gist-card-description>
       </div>
@@ -29,7 +32,7 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import LinkToPrev from '@/components/LinkToPrev.vue'
 import { SubNav } from '@/components/History'
 import { GistCardTitle, GistCardDescription } from '@/components/Repository'
-import { TransformerRunStatus } from '~/types/types'
+import { RunStatus, TransformerRunStatus } from '~/types/types'
 
 export interface Changeset {
   id: number
@@ -99,7 +102,7 @@ export default class TransformHeader extends Vue {
       [TransformerRunStatus.Fail]: 'x',
       [TransformerRunStatus.Stal]: 'stale',
       [TransformerRunStatus.Timo]: 'clock',
-      [TransformerRunStatus.Pend]: 'refresh-cw',
+      [TransformerRunStatus.Pend]: 'spin-loader',
       [TransformerRunStatus.Empt]: 'minus-circle'
     }
     return types[this.status || TransformerRunStatus.Pass]
@@ -115,6 +118,10 @@ export default class TransformHeader extends Vue {
       [TransformerRunStatus.Empt]: 'honey'
     }
     return types[this.status || TransformerRunStatus.Pass]
+  }
+
+  get isPending(): boolean {
+    return this.status === RunStatus.Pend
   }
 
   getRoute(lang: string): string {
