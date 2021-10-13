@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="overflow-x-scroll border-b bg-ink-300 border-ink-200">
+    <div class="overflow-x-auto border-b bg-ink-300 border-ink-200">
       <div id="header" class="flex items-center p-4">
         <h2 class="inline-flex items-center space-x-3 font-medium text-vanilla-100">
           <nuxt-link
@@ -26,6 +26,7 @@
             :href="activeDashboardContext.vcs_url"
             target="_blank"
             rel="noopener noreferrer"
+            class="flex items-center"
             v-tooltip="
               `Open ${activeDashboardContext.login} on ${activeDashboardContext.vcs_provider_display}`
             "
