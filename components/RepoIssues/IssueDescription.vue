@@ -1,10 +1,10 @@
 <template>
   <!-- Description -->
-  <div class="hidden xl:flex flex-col w-2/6 px-4">
-    <div class="text-vanilla-100 font-medium text-sm tracking-wider uppercase">Description</div>
-    <show-more class="prose">
+  <div class="flex-col hidden w-2/6 px-4 xl:flex">
+    <div class="text-sm font-medium tracking-wider uppercase text-vanilla-100">Description</div>
+    <div class="text-sm prose text-vanilla-400">
       <p v-html="description"></p>
-    </show-more>
+    </div>
   </div>
 </template>
 
