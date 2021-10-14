@@ -6,11 +6,11 @@
     @onClose="close"
   >
     <div v-if="selectedMember" class="p-4 space-y-5">
-      <div class="relative rounded-lg border px-2 border-ink-200 group">
+      <div class="relative px-2 border rounded-lg border-ink-200 group">
         <span
           v-tooltip="'Back to search'"
           @click="selectedMember = null"
-          class="group-hover:flex hidden w-5 h-5 rounded-full items-center cursor-pointer justify-center absolute -top-2 -right-2 bg-ink-100 hover:bg-slate"
+          class="absolute items-center justify-center hidden w-5 h-5 rounded-full cursor-pointer group-hover:flex -top-2 -right-2 bg-ink-100 hover:bg-slate"
         >
           <z-icon icon="corner-up-left" size="x-small" />
         </span>
@@ -24,7 +24,7 @@
       </div>
       <z-radio-group v-model="selectedRole" @change="updateValue" class="space-y-3">
         <div
-          class="text-sm space-y-1 cursor-pointer hover:bg-ink-200 rounded-lg p-2"
+          class="p-2 space-y-1 text-sm rounded-lg cursor-pointer hover:bg-ink-200"
           v-for="opt in repoPerms"
           :key="opt.value"
           @click="selectedRole = opt.value"
@@ -32,7 +32,7 @@
           <z-radio :value="opt.value" :label="opt.label"></z-radio>
           <p
             v-if="opt.description"
-            class="text-xs text-vanilla-400 ml-6 leading-5 md:mr-5 lg:mr-12 xl:mr-15"
+            class="ml-6 text-xs leading-5 text-vanilla-400 md:mr-5 lg:mr-12 xl:mr-15"
             v-html="opt.description"
           ></p>
         </div>
@@ -72,7 +72,7 @@
         />
       </div>
       <div v-else-if="memberSearchCandidate && !fetching" class="flex items-center p-4 min-h-40">
-        <div class="text-center w-full space-y-2">
+        <div class="w-full space-y-2 text-center">
           <h3 class="font-semibold">We couldn't find {{ memberSearchCandidate }}.</h3>
           <p class="text-xs text-vanilla-400">
             If you are unable to find a user, please add them to the team first.
@@ -141,8 +141,11 @@ export default class AddCollaboratorModal extends mixins(RepoDetailMixin) {
         this.$emit('close')
         this.selectedMember = null
       }
-    } catch (e) {
-      this.$toast.danger(`Failed to add collaborator`)
+    } catch ({ message }) {
+      const toastMsg = message
+        ? message.replace('GraphQL error: ', '')
+        : 'Failed to add collaborator.'
+      this.$toast.danger(toastMsg)
     }
   }
 
