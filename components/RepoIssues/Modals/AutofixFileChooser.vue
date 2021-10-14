@@ -1,9 +1,9 @@
 <template>
   <portal to="modal">
     <z-modal v-if="isOpen" @onClose="close" title="Choose files you want to run Autofix on">
-      <div class="flex space-x-2 p-4 text-vanilla-400">
+      <div class="flex p-4 space-x-2 text-vanilla-400">
         <div
-          class="text-vanilla-400 custom-y-scroll min-h-40 max-h-102 text-sm leading-7 w-full flex flex-col space-y-2"
+          class="flex flex-col w-full space-y-2 text-sm leading-7 text-vanilla-400 custom-y-scroll min-h-40 max-h-102"
         >
           <z-input
             v-model="searchCandidate"
@@ -13,10 +13,10 @@
             class="py-1.5 leading-6 px-2"
           >
             <template slot="left">
-              <z-icon icon="search" size="small" class="pl-2 w-6"></z-icon>
+              <z-icon icon="search" size="small" class="w-6 pl-2"></z-icon>
             </template>
           </z-input>
-          <z-list class="flex flex-col space-y-2 px-1">
+          <z-list class="flex flex-col px-1 space-y-2">
             <z-list-item>
               <div class="flex space-x-0.5">
                 <z-checkbox
@@ -51,25 +51,25 @@
             </z-list-item>
             <div
               v-if="!searchResults.length"
-              class="h-24 w-full flex flex-col space-y-1 justify-center items-center"
+              class="flex flex-col items-center justify-center w-full h-24 space-y-1"
             >
-              <h2 class="text-md font-bold">No matching files found</h2>
+              <h2 class="font-bold text-md">No matching files found</h2>
               <p class="text-md">Try changing the search query.</p>
             </div>
           </z-list>
         </div>
       </div>
       <template v-slot:footer="{ close }">
-        <div class="p-2 space-x-1 text-right text-vanilla-100 border-t border-ink-200 leading-none">
+        <div class="p-2 space-x-1 leading-none text-right border-t text-vanilla-100 border-ink-200">
           <button
             @click="close()"
-            class="bg-ink-200 inline-flex items-center justify-center font-medium transition-colors duration-300 ease-in-out rounded-sm focus:outline-none whitespace-nowrap h-8 px-4 py-1 text-xs space-x-1 leading-loose text-vanilla-100 hover:bg-ink-100"
+            class="inline-flex items-center justify-center h-8 px-4 py-1 space-x-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out rounded-sm bg-ink-200 focus:outline-none whitespace-nowrap text-vanilla-100 hover:bg-ink-100"
           >
             <span> Cancel </span>
           </button>
           <z-button
             :disabled="selectedFiles.length < 1"
-            class="modal-primary-action flex space-x-2 items-center"
+            class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
             buttonType="primary"
             size="small"
@@ -91,9 +91,11 @@ import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZModal, ZButton, ZCheckbox, ZList, ZListItem, ZInput } from '@deepsourcelabs/zeal'
 
 // types
-import { Maybe } from '~/types/types'
-import IssueDetailMixin from '~/mixins/issueDetailMixin'
+import { AutofixRunStatus, Maybe } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
+import AutofixRunMixin from '~/mixins/autofixRunMixin'
+import IssueDetailMixin from '~/mixins/issueDetailMixin'
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 @Component({
   name: 'AutofixFileChooser',
@@ -107,7 +109,12 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
     ZInput
   }
 })
-export default class AutofixFileChooser extends mixins(IssueDetailMixin, ActiveUserMixin) {
+export default class AutofixFileChooser extends mixins(
+  ActiveUserMixin,
+  AutofixRunMixin,
+  IssueDetailMixin,
+  RepoDetailMixin
+) {
   @Prop()
   isOpen!: boolean
 
@@ -178,6 +185,20 @@ export default class AutofixFileChooser extends mixins(IssueDetailMixin, ActiveU
       const response = await this.createAutofixRun({
         inputFiles: this.selectedFiles,
         repoIssueId: this.issueId
+      })
+
+      // Refetch Autofix list
+      this.fetchAutofixRunList({
+        ...this.baseRouteParams,
+        limit: 10,
+        statusIn: [
+          AutofixRunStatus.Pass,
+          AutofixRunStatus.Timo,
+          AutofixRunStatus.Cncl,
+          AutofixRunStatus.Fail,
+          AutofixRunStatus.Stal
+        ],
+        refetch: true
       })
 
       if (close) {

@@ -84,7 +84,7 @@
               :showInfo="false"
             ></autofix-list-item>
           </div>
-          <div v-else class="flex items-center justify-center w-full h-40">No pending commits</div>
+          <empty-state v-else title="No pending commits" />
         </template>
         <template v-else-if="selectedRun.name == 'History'">
           <div
@@ -98,9 +98,7 @@
               v-bind="run"
             ></autofix-list-item>
           </div>
-          <div v-else class="flex items-center justify-center w-full h-40">
-            No autofix runs available
-          </div>
+          <empty-state v-else title="No autofix runs available" />
         </template>
       </div>
     </stat-section>

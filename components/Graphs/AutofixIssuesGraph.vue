@@ -1,14 +1,14 @@
 <template>
   <stat-section
-    title="Autofix issues"
+    title="Autofixed issues"
     helpText="Summary of issues resolved using Autofix"
     :bodyIsGrid="false"
     :bodySpacing="0"
   >
     <template slot="controls">
-      <div class="flex justify-end space-x-2 w-full">
+      <div class="flex justify-end w-full space-x-2">
         <graph-control
-          class="w-full sm:w-auto float-right"
+          class="float-right w-full sm:w-auto"
           :filterValue="30"
           @updateFilter="updateLastDays"
         ></graph-control>
@@ -17,23 +17,23 @@
     <div class="sm:flex sm:flex-row-reverse">
       <div
         v-if="repository.autofixableIssuesMetadata"
-        class="flex sm:flex-col w-full sm:w-64 divide-ink-200 divide-y"
+        class="flex w-full divide-y sm:flex-col sm:w-64 divide-ink-200"
       >
-        <div class="sm:flex sm:flex-col sm:justify-end sm:h-1/2 p-4">
-          <h5 class="font-medium text-2xl">
+        <div class="p-4 sm:flex sm:flex-col sm:justify-end sm:h-1/2">
+          <h5 class="text-2xl font-medium">
             {{ repository.autofixableIssuesMetadata.autofixableIssueCount }}
           </h5>
           <p class="text-xs text-vanilla-400">Issues to Autofix</p>
         </div>
-        <div class="sm:flex sm:flex-col justify-end sm:h-1/2 p-4">
-          <h5 class="font-medium text-2xl">
+        <div class="justify-end p-4 sm:flex sm:flex-col sm:h-1/2">
+          <h5 class="text-2xl font-medium">
             {{ estimatedTimeSaved || 0 }}
           </h5>
           <p class="text-xs text-vanilla-400">Estimated time to be saved</p>
         </div>
       </div>
       <div class="w-full sm:w-4/5 sm:border-r border-ink-200">
-        <div class="flex items-start space-x-5 p-4 -ml-2">
+        <div class="flex items-start p-4 -ml-2 space-x-5">
           <graph-legend
             class="w-1/2 md:w-auto"
             :allowHover="false"

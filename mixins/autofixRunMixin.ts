@@ -1,5 +1,6 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
 import { AutofixRunDetailActions } from '~/store/autofixRun/detail'
+import { AutofixRunListActions } from '~/store/autofixRun/list'
 import {
   AutofixRun,
   AutofixRunStatus,
@@ -8,6 +9,7 @@ import {
 } from '~/types/types'
 
 const autofixRunStore = namespace('autofixRun/detail')
+const autofixRunListStore = namespace('autofixRun/list')
 
 @Component
 export default class AutofixRunMixin extends Vue {
@@ -44,4 +46,14 @@ export default class AutofixRunMixin extends Vue {
 
   @autofixRunStore.Action(AutofixRunDetailActions.FETCH_AUTOFIX_RUN)
   fetchAutofixRunDetails: (args: { runId: string; refetch: boolean }) => Promise<void>
+
+  @autofixRunListStore.Action(AutofixRunListActions.FETCH_AUTOFIX_RUN_LIST)
+  fetchAutofixRunList: (args: {
+    provider: string
+    owner: string
+    name: string
+    limit?: number
+    statusIn?: AutofixRunStatus[]
+    refetch?: boolean
+  }) => Promise<void>
 }
