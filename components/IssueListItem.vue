@@ -2,24 +2,24 @@
   <base-card :to="issueLink" :removeDefaultStyle="removeDefaultStyle">
     <template slot="header"> <slot name="header"></slot> </template>
     <template slot="title">
-      <div class="font-normal flex flex-wrap text-lg text-vanilla-400 items-baseline">
+      <div class="flex flex-wrap items-baseline text-lg font-normal text-vanilla-400">
         <span
-          class="font-semibold text-vanilla-100 pr-2 line-clamp-1"
+          class="pr-2 font-semibold text-vanilla-100 line-clamp-1"
           :to="issueLink"
           v-html="title"
         >
         </span>
         <!-- Issue ID -->
-        <span class="text-sm block md:flex flex-shrink-0">{{ shortcode }}</span>
+        <span class="flex-shrink-0 block text-sm md:flex">{{ shortcode }}</span>
       </div>
     </template>
     <template slot="description">
       <div class="flex flex-col space-y-1">
-        <div class="space-x-4 flex flex-wrap">
+        <div class="flex flex-wrap space-x-4">
           <!-- Issue type -->
           <issue-type :issueType="issueType"></issue-type>
           <!-- First seen and last seen -->
-          <div class="items-center space-x-2 flex">
+          <div class="flex items-center space-x-2">
             <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
             <span class="text-sm text-vanilla-400">
               <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">{{
@@ -34,7 +34,7 @@
           <!-- Occurences in files -->
         </div>
         <div
-          class="flex items-center w-full space-x-1 text-sm text-vanilla-400 sm:w-auto leading-6"
+          class="flex items-center w-full space-x-1 text-sm leading-6 text-vanilla-400 sm:w-auto"
         >
           <z-icon icon="file-text" size="x-small" color="vanilla-400"></z-icon>
           <span class="overflow-hidden whitespace-pre overflow-ellipsis"
@@ -52,7 +52,7 @@
       >
         <!-- Occurence count and Trend  -->
         <div
-          class="flex-col items-center justify-center flex-grow text-xs lg:space-y-2 hidden sm:flex leading-none"
+          class="flex-col items-center justify-center flex-grow hidden text-xs leading-none lg:space-y-2 sm:flex"
           :class="{ 'py-4': !showTrend, 'py-2': showTrend }"
         >
           <!-- Count -->
@@ -63,7 +63,7 @@
             {{ shortenNumber(occurrenceCount) }}
           </div>
           <!-- Info -->
-          <div v-if="showTrend" class="hidden text-vanilla-400 sm:block text-center px-1">
+          <div v-if="showTrend" class="hidden px-1 text-center text-vanilla-400 sm:block">
             <span
               :class="{
                 'text-cherry': !isTrendPositive,
@@ -141,6 +141,7 @@ export default class IssueListItem extends Vue {
 
   @Prop({ default: '' })
   hideProgress!: boolean
+
   @Prop({ default: true })
   showComparisonStat!: boolean
 
@@ -183,10 +184,17 @@ export default class IssueListItem extends Vue {
 
         If the past value is the same as current value of
         number of occurrences, do not show the trend.
+
+        If the past value is zero, don't show
       */
-    if (this.showComparisonStat) {
+    if (this.pastValue === 0) {
+      return false
+    }
+
+    if (this.showComparisonStat && Number.isNaN(this.pastValue) && Number(this.pastValue)) {
       return this.occurrenceCount !== this.pastValue
     }
+
     return false
   }
   get isTrendPositive(): boolean {
