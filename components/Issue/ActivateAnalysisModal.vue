@@ -10,7 +10,7 @@
               : `create a ${pullLabel} request with the following`
           }}
           configuration in a <span class="font-mono text-vanilla-200">.deepsource.toml</span> file.
-          <div class="p-3 text-xs rounded-md my-3 bg-ink-200">
+          <div class="p-3 my-3 text-xs rounded-md bg-ink-200">
             <highlightjs language="toml" :code="toml" />
           </div>
         </div>
@@ -146,8 +146,14 @@ export default class ActivateAnalysisModal extends mixins(
       } else {
         this.$toast.show({
           type: 'danger',
-          message: `Something went wrong while creating the configuration for this repository, please contact support.`,
-          timeout: 10
+          message: `Something went wrong while creating the configuration for this repository.`,
+          timeout: 10,
+          primary: {
+            label: 'Contact suppport',
+            action: () => {
+              this.$router.push('/support')
+            }
+          }
         })
       }
     } catch (e) {

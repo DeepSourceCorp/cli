@@ -1,32 +1,32 @@
 <template>
   <transition
-    enter-active-class="transform-gpu ease-out duration-200 transition"
+    enter-active-class="transition duration-200 ease-out transform-gpu"
     enter-class="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-full"
     enter-to-class="translate-y-0 opacity-100 sm:translate-x-0"
-    leave-active-class="transform-gpu ease-in duration-100"
-    leave-class="opacity-100 sm:translate-x-0 translate-y-0"
-    leave-to-class="opacity-0 sm:translate-x-1 translate-y-1 sm:translate-y-0"
+    leave-active-class="duration-100 ease-in transform-gpu"
+    leave-class="translate-y-0 opacity-100 sm:translate-x-0"
+    leave-to-class="translate-y-1 opacity-0 sm:translate-x-1 sm:translate-y-0"
   >
     <div
       v-if="active"
       :class="classToastAll"
-      class="max-w-sm w-full shadow-lg rounded-lg pointer-events-auto mb-4 overflow-hidden"
+      class="w-full max-w-sm mb-4 overflow-hidden rounded-lg shadow-lg pointer-events-auto"
     >
-      <div :class="classToastAll" class="rounded-lg shadow-xs overflow-hidden z-100">
+      <div :class="classToastAll" class="overflow-hidden rounded-lg shadow-xs z-100">
         <div
-          class="p-2 flex items-start leading-none"
+          class="flex items-start p-2 leading-none"
           :class="{
             'bg-cherry': type === 'danger'
           }"
         >
           <div class="flex-shrink-0">
-            <div v-if="type === 'success'" class="rounded-full p-1">
+            <div v-if="type === 'success'" class="p-1 rounded-full">
               <z-icon icon="check-circle" size="small" color="juniper"></z-icon>
             </div>
-            <div v-else-if="type === 'danger'" class="rounded-full p-1">
+            <div v-else-if="type === 'danger'" class="p-1 rounded-full">
               <z-icon icon="alert-circle" size="small" color="vanilla-100"></z-icon>
             </div>
-            <div v-else-if="type === 'info'" class="rounded-full p-1">
+            <div v-else-if="type === 'info'" class="p-1 rounded-full">
               <z-icon icon="alert-circle" size="small" color="vanilla-400"></z-icon>
             </div>
           </div>
@@ -35,15 +35,20 @@
               <p
                 v-if="message"
                 :class="message"
-                class="text-sm leading-5 font-medium text-vanilla-100"
+                class="text-sm font-medium leading-5 text-vanilla-100"
                 v-html="message"
               ></p>
             </slot>
           </div>
-          <div class="flex-shrink-0 flex">
+          <div class="flex flex-shrink-0">
             <button
               v-if="primary.label"
-              class="inline-flex bg-ink-400 hover:bg-ink-500 p-2 rounded-sm text-sm cursor-pointer text-vanilla-100 transition ease-in-out duration-150 focus:outline-none"
+              class="inline-flex p-2 text-sm transition duration-150 ease-in-out rounded-sm cursor-pointer text-vanilla-100 focus:outline-none"
+              :class="
+                type === 'danger'
+                  ? 'bg-cherry-600 hover:bg-cherry-400'
+                  : 'bg-ink-400 hover:bg-ink-500'
+              "
               @click="primaryAction()"
             >
               {{ primary.label }}
