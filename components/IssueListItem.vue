@@ -69,7 +69,7 @@
                 'text-cherry': !isTrendPositive,
                 'text-juniper': isTrendPositive
               }"
-              >{{ `${isTrendPositive ? '-' : '+'}${trendValue}` }}</span
+              >{{ `${isTrendPositive ? '-' : '+'}${trendValue}%` }}</span
             >
             since last week
           </div>
@@ -191,7 +191,11 @@ export default class IssueListItem extends Vue {
       return false
     }
 
-    if (this.showComparisonStat && Number.isNaN(this.pastValue) && Number(this.pastValue)) {
+    if (this.trendValue === 100) {
+      return false
+    }
+
+    if (this.showComparisonStat && Number.isFinite(this.pastValue) && Number(this.pastValue)) {
       return this.occurrenceCount !== this.pastValue
     }
 
@@ -204,19 +208,19 @@ export default class IssueListItem extends Vue {
     return Number(this.occurrenceCount) < Number(this.pastValue)
   }
 
-  get trendValue(): string {
+  get trendValue(): number {
     /*
         Return the trend percentage display.
       */
     let changePercentage = PERCENTAGE
     // newly introduced issue, 100% increased
-    if (Number.isNaN(this.pastValue) && Number(this.pastValue)) {
+    if (Number.isFinite(this.pastValue)) {
       const maxValue = Math.max(Number(this.pastValue), Number(this.occurrenceCount))
       const minValue = Math.min(Number(this.pastValue), Number(this.occurrenceCount))
       const delta = maxValue - minValue
-      changePercentage = Math.ceil((delta / maxValue) * PERCENTAGE)
+      changePercentage = Math.round((delta / maxValue) * PERCENTAGE)
     }
-    return `${changePercentage}%`
+    return changePercentage
   }
 
   get lastSeenDisplay(): string {
