@@ -137,14 +137,18 @@ export default class ActivateAnalysisModal extends mixins(
             timeout: 5
           })
         } else {
-          this.$toast.success(
-            `Successfully activated ${this.repository.name}, the first run may take a while to finish`
-          )
+          this.$toast.show({
+            type: 'success',
+            message: `Successfully activated ${this.repository.name}, the first run may take a while to finish.`,
+            timeout: 5
+          })
         }
       } else {
-        this.$toast.danger(
-          'Something went wrong while creating the configuration for this repository, contact support'
-        )
+        this.$toast.show({
+          type: 'danger',
+          message: `Something went wrong while creating the configuration for this repository, please contact support.`,
+          timeout: 10
+        })
       }
     } catch (e) {
       this.logSentryErrorForUser(e as Error, 'Generate config', args)
