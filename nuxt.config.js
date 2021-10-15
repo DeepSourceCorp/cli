@@ -28,6 +28,11 @@ export default {
     bodyAttrs: {
       class: 'antialiased stroke-2'
     },
+    script: [
+      {
+        src: "https://dwlkwbmqzv11.statuspage.io/embed/script.js",
+      },
+    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
