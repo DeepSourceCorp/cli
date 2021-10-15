@@ -31,6 +31,7 @@ export default {
     script: [
       {
         src: "https://dwlkwbmqzv11.statuspage.io/embed/script.js",
+        body: true
       },
     ],
     meta: [
