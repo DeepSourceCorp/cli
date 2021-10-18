@@ -17,9 +17,10 @@
     <!-- Main Content -->
     <!-- Group by Filter Section -->
     <issue-category-selector
+      :loading="$fetchState.pending"
+      :selected-category="queryParams.category"
       class="sticky top-36 category-sidebar"
       @updateCategory="updateCategory"
-      :selectedCategory="queryParams.category"
     >
       <template v-slot:cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
         <div class="p-4 pb-5 bg-gradient-to-t from-ink-200 to-ink-400 via-ink-300">
@@ -49,7 +50,7 @@
       </template>
     </issue-category-selector>
     <!-- List of issues -->
-    <div v-if="issueListLoading" class="flex-1 flex-grow min-h-screen p-4 space-y-2">
+    <div v-if="$fetchState.pending" class="flex-1 flex-grow min-h-screen p-4 space-y-2">
       <div v-for="idx in 7" :key="idx" class="rounded-md h-26 bg-ink-300 animate-pulse"></div>
     </div>
     <div

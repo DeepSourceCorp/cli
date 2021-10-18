@@ -24,20 +24,21 @@
           {{ issueType.name }}
         </span>
         <z-tag
+          v-if="!loading"
           v-tooltip="`${issueType.count} occurrences for this category`"
           class="group-hover:bg-ink-200 xl:text-sm"
           text-size="xs"
           spacing="py-0.5 px-2"
           :bg-color="issueType.shortcode === modelValue ? 'ink-200' : 'ink-300'"
-          >{{ issueType.count }}</z-tag
-        >
+          >{{ issueType.count }}
+        </z-tag>
       </div>
     </section>
     <slot name="cta"></slot>
   </div>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
 
 import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
@@ -69,6 +70,9 @@ const issuesSortOrder = [
   }
 })
 export default class IssueCategorySelector extends mixins(RepoDetailMixin) {
+  @Prop({ required: true })
+  loading: boolean
+
   @ModelSync('selectedCategory', 'updateCategory', { type: String, default: 'recommended' })
   readonly modelValue: string
 
