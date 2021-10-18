@@ -6,7 +6,7 @@
     class="relative"
   >
     <template slot="title">
-      <div class="space-x-2 inline-flex items-center">
+      <div class="inline-flex items-center space-x-2">
         <z-icon :icon="isPrivate ? 'lock' : 'globe'" size="small"></z-icon>
         <div
           class="text-vanilla-400"
@@ -21,7 +21,7 @@
         </div>
       </div>
       <template v-if="allowStar">
-        <transition enter-class="opacity-0 duration-200" leave-class="opacity-0 duration-150">
+        <transition enter-class="duration-200 opacity-0" leave-class="duration-150 opacity-0">
           <div
             v-if="internalStarredState"
             class="absolute right-1 -top-1.5 transform-gpu transition-all ease-in-out"
@@ -60,7 +60,7 @@
         }"
       >
         <div v-if="lastAnalyzedAt" class="inline-flex items-center space-x-2">
-          <z-icon icon="clock" size="small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
           <span>Analyzed {{ lastAnalyzedAtString }}</span>
         </div>
         <!-- Created -->

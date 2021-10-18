@@ -32,7 +32,7 @@
           <template v-slot:trigger="{ toggle }">
             <button
               slot="trigger"
-              class="flex items-center px-1 space-x-1 rounded-md bg-ink-200 text-vanilla-400 outline-none focus:outline-none"
+              class="flex items-center px-1 space-x-1 rounded-md outline-none bg-ink-200 text-vanilla-400 focus:outline-none"
               @click="toggle"
             >
               {{ pageSize }}
@@ -62,13 +62,13 @@
       </div>
     </div>
     <template v-if="repoListloading">
-      <div v-for="idx in pageSize" :key="idx" class="h-17 rounded bg-ink-300 animate-pulse"></div>
+      <div v-for="idx in pageSize" :key="idx" class="rounded h-17 bg-ink-300 animate-pulse"></div>
     </template>
     <transition-group
       v-else-if="repositoryList.edges && repositoryList.edges.length"
       move-class="duration-200 transform"
       tag="ul"
-      class="space-y-2"
+      class="space-y-4"
     >
       <repo-card
         v-for="repo in repositoryList.edges"
@@ -76,9 +76,8 @@
         @star-repo="starRepo"
         @un-star-repo="unStarRepo"
         :key="repo.node.id"
-        :allowStar="true"
-      >
-      </repo-card>
+        :allow-star="true"
+      />
     </transition-group>
     <div class="flex items-center justify-center h-64 space-y-2" v-else>No repositories</div>
     <z-pagination
