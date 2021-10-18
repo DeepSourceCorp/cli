@@ -2,7 +2,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-16-fr">
     <!-- Analyzer Tab -->
     <div
-      class="flex flex-col justify-between px-2 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
+      class="z-20 flex flex-col justify-between px-2 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
     >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"
@@ -50,7 +50,11 @@
     </issue-category-selector>
     <!-- List of issues -->
     <div v-if="$fetchState.pending" class="flex-1 flex-grow min-h-screen p-4 space-y-4">
-      <div v-for="idx in 7" :key="idx" class="rounded-md h-26 bg-ink-300 animate-pulse"></div>
+      <div
+        v-for="idx in 7"
+        :key="idx"
+        class="relative z-0 rounded-md h-26 bg-ink-300 animate-pulse"
+      ></div>
     </div>
     <div
       v-else
