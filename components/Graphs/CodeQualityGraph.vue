@@ -57,6 +57,7 @@
           @updateFilter="updateLastDays"
         ></graph-control>
         <z-button
+          v-if="isAddBadgeBtnVisible"
           :to="$generateRoute(['settings', 'badges'])"
           buttonType="secondary"
           icon="award"
@@ -79,7 +80,10 @@ import { GraphControl, GraphLegend } from '.'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RouteParamsMixin from '~/mixins/routeParamsMixin'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
+
 import { getChangeFromTrend, getLastTwoTrends } from '~/utils/array'
+import { RepoPerms } from '~/types/permTypes'
 
 interface ChartComponent extends Vue {
   initChart?: () => void
@@ -94,7 +98,11 @@ interface ChartComponent extends Vue {
     ZChart
   }
 })
-export default class CodeQualityGraph extends mixins(RepoDetailMixin, RouteParamsMixin) {
+export default class CodeQualityGraph extends mixins(
+  RepoDetailMixin,
+  RouteParamsMixin,
+  RoleAccessMixin
+) {
   @Ref('code-quality-chart')
   chart: ChartComponent
 
@@ -188,6 +196,10 @@ export default class CodeQualityGraph extends mixins(RepoDetailMixin, RouteParam
 
   get resolvedIssuesTickerDataCount(): number {
     return getChangeFromTrend(this.repository.resolvedIssueTrend, false)
+  }
+
+  get isAddBadgeBtnVisible(): boolean {
+    return this.$gateKeeper.repo(RepoPerms.VIEW_BADGES, this.repoPerms.permission)
   }
 
   buildChart(): void {

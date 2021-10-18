@@ -18,7 +18,7 @@ export enum TeamPerms {
 
 export enum RepoPerms {
   VIEW_ISSUES = 'viewIssues',
-  VIEW_BADGES = 'viewIssues',
+  VIEW_BADGES = 'viewBadges',
   VIEW_PAST_RUNS = 'viewPastRuns',
   VIEW_METRICS = 'viewMetrics',
   VIEW_OVERVIEW_WIDGETS = 'viewOverviewWidgets',
