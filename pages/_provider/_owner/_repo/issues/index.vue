@@ -17,7 +17,6 @@
     <!-- Main Content -->
     <!-- Group by Filter Section -->
     <issue-category-selector
-      :loading="$fetchState.pending"
       :selected-category="queryParams.category"
       class="sticky top-36 category-sidebar"
       @updateCategory="updateCategory"
@@ -50,7 +49,7 @@
       </template>
     </issue-category-selector>
     <!-- List of issues -->
-    <div v-if="$fetchState.pending" class="flex-1 flex-grow min-h-screen p-4 space-y-2">
+    <div v-if="$fetchState.pending" class="flex-1 flex-grow min-h-screen p-4 space-y-4">
       <div v-for="idx in 7" :key="idx" class="rounded-md h-26 bg-ink-300 animate-pulse"></div>
     </div>
     <div
