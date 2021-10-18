@@ -12,7 +12,7 @@
         v-if="viewer && viewer.dashboardContext && viewer.dashboardContext.length"
         class="space-y-2"
       >
-        <h6 class="uppercase tracking-wide text-xs font-medium text-vanilla-400">Your Teams</h6>
+        <h6 class="text-xs font-medium tracking-wide uppercase text-vanilla-400">Your Teams</h6>
         <div class="space-x-2">
           <nuxt-link
             v-for="ctx in viewer.dashboardContext"
@@ -56,7 +56,7 @@
             >
               {{ step.title }}
             </h5>
-            <template v-if="!step.isComplete && step.name === currentActiveStep">
+            <template v-if="!step.isComplete">
               <p v-if="step.description" class="text-sm text-vanilla-400">{{ step.description }}</p>
               <z-button @click="triggerStep(step)" size="small" buttonType="secondary">{{
                 step.actionLabel
@@ -135,14 +135,6 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
     if (this.viewer.referralUrl) {
       this.$copyToClipboard(this.viewer.referralUrl)
       this.$toast.success('Copied referral URL to clipboard')
-    }
-  }
-
-  get currentActiveStep(): string | void {
-    const incompleteSteps = this.steps.filter((step) => !step.isComplete)
-
-    if (incompleteSteps.length) {
-      return incompleteSteps[0].name
     }
   }
 
