@@ -131,8 +131,13 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin)
     this.loading = false
   }
 
-  refetchData(): Promise<void> {
-    return this.fetchBasicRepoDetails({
+  refetchData() {
+    this.fetchBasicRepoDetails({
+      ...this.baseRouteParams,
+      refetch: true
+    })
+
+    this.fetchWidgets({
       ...this.baseRouteParams,
       refetch: true
     })

@@ -333,8 +333,8 @@ export default class GenerateConfig extends mixins(
           )
         }
       } catch (e) {
-        this.logSentryErrorForUser(e, 'Generate config', args)
-        this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+        this.logSentryErrorForUser(e as Error, 'Generate config', args)
+        this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
       } finally {
         this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
       }
