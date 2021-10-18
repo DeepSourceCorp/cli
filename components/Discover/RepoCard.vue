@@ -147,7 +147,14 @@ export default class RepoCard extends mixins(AuthMixin) {
   updatingWatchlist = false
 
   get issuesPageUrl(): string {
-    return `/gh/${this.repoInfo?.owner.login}/${this.repoInfo?.name}/issues`
+    return `/${this.vcsProviderShortcode}/${this.repoInfo?.owner.login}/${this.repoInfo?.name}/issues`
+  }
+
+  get vcsProviderShortcode(): string {
+    if (this.repoInfo) {
+      return this.$providerMetaMap[this.repoInfo?.vcsProvider].shortcode || 'gh'
+    }
+    return 'gh'
   }
 
   public shortenNumber = shortenLargeNumber
