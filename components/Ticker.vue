@@ -1,11 +1,11 @@
 <template>
   <span
     v-if="trendValue"
-    class="bg-opacity-10 rounded-md font-semibold text-xs p-1 leading-none text-center flex items-center space-x-1 cursor"
+    class="flex items-center p-1 space-x-1 text-xs font-semibold leading-none text-center rounded-md bg-opacity-10 cursor"
     :class="bgClass"
   >
     <z-icon v-if="icon" :icon="icon" :color="iconColor" size="small"></z-icon>
-    <span class="leading-none"> {{ trendSign }}{{ valueDisplay }} </span>
+    <span class="leading-none"> {{ trendSign }}{{ valueDisplay }} {{ trendHint }} </span>
   </span>
 </template>
 <script lang="ts">
@@ -33,6 +33,9 @@ export default class CodeQualityGraph extends Vue {
 
   @Prop({ default: null })
   icon: string
+
+  @Prop({ default: null })
+  trendHint: string
 
   get trendSign(): string {
     if (this.icon) {

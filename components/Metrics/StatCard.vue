@@ -2,16 +2,16 @@
   <component
     :is="to ? 'nuxt-link' : 'div'"
     :to="to"
-    class="flex flex-col space-y-2 flex-grow justify-between"
+    class="flex flex-col justify-between flex-grow space-y-2"
     :class="{ 'bg-ink-300 rounded-md min-h-26': !removeStyles }"
   >
     <div class="flex flex-row justify-between pt-3 pr-4 space-x-2" :class="color ? 'pl-2' : 'pl-4'">
       <div class="text-sm leading-6 flex items-start space-x-1.5">
         <div v-if="color" class="flex w-1 h-3.5 mt-0.5 rounded-full" :class="`bg-${color}`"></div>
         <slot name="title">
-          <h5 class="text-vanilla-100 font-medium">
+          <h5 class="font-medium text-vanilla-100">
             {{ title }}
-            <span class="text-vanilla-400 font-normal" v-if="subtitle"> / {{ subtitle }}</span>
+            <span class="font-normal text-vanilla-400" v-if="subtitle"> / {{ subtitle }}</span>
           </h5>
         </slot>
       </div>
@@ -25,7 +25,7 @@
         ></z-icon>
       </div>
     </div>
-    <div class="px-4 pb-3 flex items-center space-x-2">
+    <div class="flex items-center px-4 pb-3 space-x-2">
       <span class="text-xl font-bold leading-none text-vanilla-100">
         <slot> {{ value }} </slot>
       </span>
@@ -33,11 +33,12 @@
         <slot name="info">
           <ticker
             v-if="trendValue"
-            v-tooltip="trendHint"
-            :trendValue="trendValue"
+            v-tooltip="hideTooltip ? '' : trendHint"
             :icon="trendIcon"
-            :trendDirection="trendDirection"
-            :trendPositive="trendPositive"
+            :trend-direction="trendDirection"
+            :trend-hint="trendHint"
+            :trend-positive="trendPositive"
+            :trend-value="trendValue"
           />
         </slot>
       </div>
@@ -91,5 +92,8 @@ export default class StatCard extends Vue {
 
   @Prop({ default: null })
   to!: string
+
+  @Prop({ default: false })
+  hideTooltip!: boolean
 }
 </script>

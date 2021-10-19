@@ -8,13 +8,9 @@
     customGridClass="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
   >
     <template v-if="$fetchState.pending">
-      <div
-        v-for="idx in loaderCount"
-        :key="idx"
-        class="p-2 h-22 sm:h-24 space-y-4 outline-ink-300"
-      >
-        <div class="bg-ink-300 h-6 w-36 rounded-md animate-pulse"></div>
-        <div class="bg-ink-300 h-6 w-14 rounded-md animate-pulse"></div>
+      <div v-for="idx in loaderCount" :key="idx" class="p-2 space-y-4 h-22 sm:h-24 outline-ink-300">
+        <div class="h-6 rounded-md bg-ink-300 w-36 animate-pulse"></div>
+        <div class="h-6 rounded-md bg-ink-300 w-14 animate-pulse"></div>
       </div>
     </template>
     <template v-else>
@@ -23,17 +19,16 @@
           v-if="widget.value_display !== null"
           :key="key"
           :to="widget.link"
-          :roundedCorners="false"
-          :showBorder="false"
-          :trendValue="widget.trend_value"
-          :trendHint="`Change ${widget.trend_display}`"
-          :trendDirection="widget.trend_direction"
-          :trendPositive="isTrendPositive(widget)"
-          :removeStyles="true"
+          :hide-tooltip="true"
+          :trend-direction="widget.trend_direction"
+          :trend-hint="widget.trend_display"
+          :trend-positive="isTrendPositive(widget)"
+          :trend-value="widget.trend_value"
+          :remove-styles="true"
           class="outline-ink-200 hover:bg-ink-300 min-h-22 sm:min-h-24"
         >
           <template slot="title">
-            <h5 class="text-base text-vanilla-100 font-medium">
+            <h5 class="text-base font-medium text-vanilla-100">
               {{ widget.title }}
             </h5>
           </template>
