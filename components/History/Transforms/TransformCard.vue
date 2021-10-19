@@ -19,7 +19,7 @@
       >
     </template>
     <template slot="description">
-      <div class="items-center space-y-1 md:space-y-0 md:flex md:space-x-4 mt-2 ml-6">
+      <div class="space-y-1 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-x-4 mt-2 ml-6">
         <div v-if="!isPending" class="flex items-center space-x-1.5">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm sm:text-sm text-vanilla-400">Transformed {{ createdString }}</span>

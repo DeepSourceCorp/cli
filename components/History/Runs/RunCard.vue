@@ -14,27 +14,27 @@
       >
         {{ branchName }}
       </h3>
-      <span class="text-sm text-vanilla-400 font-normal inline md:flex flex-shrink-0"
+      <span class="text-sm text-vanilla-400 font-normal inline md:flex md:flex-shrink-0"
         >@{{ commitOid.slice(0, 7) }}</span
       >
     </template>
     <template slot="description">
-      <div class="items-center space-y-1 md:space-y-0 md:flex md:space-x-4 mt-2 ml-6">
-        <div v-if="!isPending" class="flex items-center space-x-1.5">
+      <div class="space-y-1 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-x-4 mt-2 ml-6">
+        <div v-if="!isPending" class="flex items-center gap-x-1.5">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">Analyzed {{ createdString }}</span>
         </div>
-        <div v-else class="flex items-center space-x-1.5">
+        <div v-else class="flex items-center gap-x-1.5">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">{{ statusText }}</span>
         </div>
         <!-- Issue type -->
-        <div class="items-center hidden space-x-1.5 md:flex">
+        <div class="hidden gap-x-1.5 md:flex md:items-center">
           <z-icon icon="git-commit" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">{{ gitCompareDisplay }}</span>
         </div>
         <!-- Created -->
-        <div v-if="!isPending" class="items-center hidden space-x-1.5 md:flex">
+        <div v-if="!isPending" class="hidden gap-x-1.5 md:flex md:items-center">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span v-if="statusText && finishedIn" class="text-sm text-vanilla-400">
             {{ statusText }} {{ finishedString }}
@@ -42,11 +42,15 @@
           <span v-else class="text-sm text-vanilla-400">{{ absentTimeStatusText }}</span>
         </div>
         <!-- introduced resolved -->
-        <div class="items-center flex space-x-1.5 md:hidden">
+        <div
+          v-if="!isPending && (issuesRaisedCount || issuesResolvedNum)"
+          class="flex items-center gap-x-1.5 md:hidden"
+        >
           <z-icon icon="zap" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">
-            <template v-if="issuesRaisedCount">{{ issuesRaisedCount }} introduced</template>
-            <template v-if="issuesRaisedCount && issuesResolvedNum">,</template>
+            <!-- ! Prevents a space before `,`, the following 2 templates should be continuous -->
+            <template v-if="issuesRaisedCount">{{ issuesRaisedCount }} introduced</template
+            ><template v-if="issuesRaisedCount && issuesResolvedNum">,</template>
             <template v-if="issuesResolvedNum">{{ issuesResolvedNum }} resolved</template>
           </span>
         </div>
@@ -55,7 +59,7 @@
     <template slot="info">
       <div
         v-if="issueStats.length && !isPending"
-        class="flex justify-around items-center space-x-2 h-full"
+        class="flex justify-around items-center gap-x-2 h-full"
       >
         <div v-for="stat in issueStats" :key="stat.label" class="flex flex-col items-center">
           <div

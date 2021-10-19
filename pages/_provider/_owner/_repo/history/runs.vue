@@ -1,7 +1,7 @@
 <template>
   <div class="pb-12">
     <sub-nav active="runs"></sub-nav>
-    <div class="grid gap-4 w-full p-4">
+    <div class="grid grid-cols-1 gap-y-4 p-4">
       <run-branches
         v-if="defaultBranchRun"
         :key="defaultBranchRun.branchName"
