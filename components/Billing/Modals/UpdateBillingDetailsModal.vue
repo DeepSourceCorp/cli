@@ -63,7 +63,7 @@
 import { Vue, Component, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZInput, ZIcon, ZModal } from '@deepsourcelabs/zeal'
 
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 interface ZModalInterface extends Vue {
   close?: () => void
@@ -77,7 +77,7 @@ interface ZModalInterface extends Vue {
     ZModal
   }
 })
-export default class UpdateBillingDetailsModal extends mixins(OwnerDetailMixin) {
+export default class UpdateBillingDetailsModal extends mixins(OwnerBillingMixin) {
   private billingEmail = ''
   private billingAddress = ''
   private validBillingEmail = true

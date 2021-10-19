@@ -55,9 +55,9 @@
 </template>
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 import { ZIcon, ZConfirm, ZButton } from '@deepsourcelabs/zeal'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   components: {
@@ -66,7 +66,7 @@ import { ZIcon, ZConfirm, ZButton } from '@deepsourcelabs/zeal'
     ZButton
   }
 })
-export default class CancelPlan extends mixins(OwnerDetailMixin, SubscriptionMixin) {
+export default class CancelPlan extends mixins(OwnerBillingMixin, SubscriptionMixin) {
   showConfirmDialog = false
   message =
     'Confirm to void the plan cancellation request. This will give you full access to your existing plan.'

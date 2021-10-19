@@ -61,11 +61,11 @@
 </template>
 <script lang="ts">
 import { mixins, Component, Prop } from 'nuxt-property-decorator'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 import { ZIcon, ZConfirm, ZButton } from '@deepsourcelabs/zeal'
 import { BillingInfo } from '~/types/types'
 import ContextMixin from '~/mixins/contextMixin'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   components: {
@@ -76,7 +76,7 @@ import ContextMixin from '~/mixins/contextMixin'
 })
 export default class DowngradePlan extends mixins(
   ContextMixin,
-  OwnerDetailMixin,
+  OwnerBillingMixin,
   SubscriptionMixin
 ) {
   @Prop({ default: {} })

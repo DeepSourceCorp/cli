@@ -36,13 +36,13 @@ import { FormGroup } from '~/components/Form'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import { parseISODate, formatDate } from '~/utils/date'
 import { BillingInfo } from '~/types/types'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   components: { FormGroup, ZIcon },
   layout: 'dashboard'
 })
-export default class InvoiceList extends mixins(OwnerDetailMixin) {
+export default class InvoiceList extends mixins(OwnerBillingMixin) {
   get billing(): BillingInfo | {} {
     return this.owner.billingInfo ? this.owner.billingInfo : {}
   }

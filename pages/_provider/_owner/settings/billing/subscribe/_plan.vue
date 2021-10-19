@@ -181,11 +181,11 @@ import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
 import { ZButton, ZIcon, ZDivider, ZInput, ZAnimatedInteger } from '@deepsourcelabs/zeal'
 import SubscriptionMixin, { Plan } from '~/mixins/subscriptionMixin'
 import { formatUSD } from '~/utils/string'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { parseISODate, formatDate } from '~/utils/date'
 import { CouponInfo, CreditsInfo } from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'
 import ContextMixin from '~/mixins/contextMixin'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   components: {
@@ -212,7 +212,7 @@ import ContextMixin from '~/mixins/contextMixin'
     }
   }
 })
-export default class Subscribe extends mixins(SubscriptionMixin, OwnerDetailMixin, ContextMixin) {
+export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMixin, ContextMixin) {
   private plan: Plan
   private loading = false
   private calculating = false

@@ -1,9 +1,9 @@
 <template>
   <section class="space-y-2">
-    <div class="flex max-w-2xl flex-wrap md:flex-nowrap">
+    <div class="flex flex-wrap max-w-2xl md:flex-nowrap">
       <div class="flex-grow">
         <div v-if="Object.keys(this.currentPlan)">
-          <div class="flex items-center space-x-2 text-lg font-medium leading-none h-16">
+          <div class="flex items-center h-16 space-x-2 text-lg font-medium leading-none">
             <div
               v-if="currentPlan.name"
               class="px-2 py-1.5 tracking-wider uppercase rounded-md bg-ink-200 leading-none"
@@ -15,11 +15,14 @@
           </div>
         </div>
         <div class="md:mt-3.5">
-          <div v-if="billing && billing.seatsUsed" class="text-sm font-semibold tracking-snug">
-            {{ billing.seatsUsed }} of {{ billing.seatsTotal }} seats used
+          <div
+            v-if="ownerBillingInfo && ownerBillingInfo.seatsUsed"
+            class="text-sm font-semibold tracking-snug"
+          >
+            {{ ownerBillingInfo.seatsUsed }} of {{ ownerBillingInfo.seatsTotal }} seats used
           </div>
           <div v-else class="w-32 h-4 bg-ink-300 animate-pulse"></div>
-          <div class="w-full h-2 rounded-full bg-ink-200 mt-1">
+          <div class="w-full h-2 mt-1 rounded-full bg-ink-200">
             <div
               class="h-2 transition-all duration-200 ease-in-out transform rounded-full"
               :class="{
@@ -34,12 +37,12 @@
           </div>
         </div>
       </div>
-      <div class="mt-4 md:mt-0 flex md:block justify-between md:justify-start w-full md:w-auto">
+      <div class="flex justify-between w-full mt-4 md:mt-0 md:block md:justify-start md:w-auto">
         <div v-if="Object.keys(this.currentPlan)" class="mt-1.5">
           <div v-if="currentPlan.amount" class="flex justify-end space-x-1">
             <div class="flex space-x-1">
               <div class="text-2xl">$</div>
-              <div class="text-3xl md:text-4xl font-semibold leading-none">{{ monthlyAmount }}</div>
+              <div class="text-3xl font-semibold leading-none md:text-4xl">{{ monthlyAmount }}</div>
             </div>
             <div class="self-end mb-1 text-sm">/user /month</div>
           </div>
@@ -47,11 +50,11 @@
             <div class="h-16 rounded-md w-44 bg-ink-300 animate-pulse"></div>
           </div>
         </div>
-        <div class="text-right pt-1 mt-2">
+        <div class="pt-1 mt-2 text-right">
           <z-button
-            v-if="owner.billingInfo && !owner.billingInfo.cancelAtPeriodEnd"
+            v-if="ownerBillingInfo && !ownerBillingInfo.cancelAtPeriodEnd && !isBilledManually"
             @click="toggleAddMoreSeats"
-            buttonType="primary"
+            button-type="primary"
             size="small"
             class=""
           >
@@ -100,15 +103,15 @@
                 >support@deepsource.io</a
               >.
             </p>
-            <div class="space-x-4 text-right text-vanilla-100 mt-4">
+            <div class="mt-4 space-x-4 text-right text-vanilla-100">
               <z-button
                 v-if="loading"
-                class="w-36 flex items-center"
-                buttonType="primary"
+                class="flex items-center w-36"
+                button-type="primary"
                 size="small"
                 :disabled="true"
               >
-                <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2"></z-icon>
+                <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
                 Updating seats
               </z-button>
               <z-button
@@ -134,9 +137,7 @@ import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZIcon, ZModal, ZInput } from '@deepsourcelabs/zeal'
 import ContextMixin from '@/mixins/contextMixin'
 
-import { BillingInfo } from '~/types/types'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
-import BillingBackend from '~/types/billingBackend'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 interface ZModalInterface extends Vue {
   close?: () => void
@@ -146,10 +147,7 @@ interface ZModalInterface extends Vue {
   components: { ZButton, ZIcon, ZModal, ZInput },
   layout: 'dashboard'
 })
-export default class PlanInfo extends mixins(ContextMixin, OwnerDetailMixin) {
-  @Prop({ default: {} })
-  billing: BillingInfo
-
+export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
   @Prop({ required: true })
   id: string
 
@@ -162,11 +160,7 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerDetailMixin) {
   seatsCount: number = 0
 
   mounted() {
-    this.seatsCount = Number(this.billing.seatsTotal)
-  }
-
-  get isBilledByDeepSource(): boolean {
-    return (this.billing.billingBackend as BillingBackend) === 'st'
+    this.seatsCount = Number(this.ownerBillingInfo.seatsTotal)
   }
 
   get monthlyAmount(): number {
@@ -178,8 +172,8 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerDetailMixin) {
   }
 
   get completion(): number {
-    if (this.billing) {
-      const { seatsUsed, seatsTotal } = this.billing
+    if (this.ownerBillingInfo) {
+      const { seatsUsed, seatsTotal } = this.ownerBillingInfo
       return seatsUsed && seatsTotal ? (seatsUsed / seatsTotal) * 100 : 0
     }
     return 0
@@ -204,8 +198,8 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerDetailMixin) {
   }
 
   toggleAddMoreSeats(): void {
-    if (this.isBilledByDeepSource) {
-      this.seatsCount = Number(this.billing.seatsTotal)
+    if (this.isBilledByStripe) {
+      this.seatsCount = Number(this.ownerBillingInfo.seatsTotal)
       this.showUpdateSeatsModal = !this.showUpdateSeatsModal
     }
   }

@@ -81,9 +81,9 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZModal, ZButton, ZInput } from '@deepsourcelabs/zeal'
 
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 import { parseISODate, formatDate } from '~/utils/date'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   name: 'CancelPlanModal',
@@ -94,7 +94,7 @@ import { parseISODate, formatDate } from '~/utils/date'
     ZInput
   }
 })
-export default class CancelPlanModal extends mixins(OwnerDetailMixin, SubscriptionMixin) {
+export default class CancelPlanModal extends mixins(OwnerBillingMixin, SubscriptionMixin) {
   private updating = false
   private userEnteredOwner = ''
 

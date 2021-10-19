@@ -4,7 +4,7 @@
       <h2 class="text-lg font-medium">Billing</h2>
       <div class="max-w-2xl">
         <alert-box
-          v-if="billing.synced === false"
+          v-if="ownerBillingInfo.synced === false"
           text-color="text-honey-300"
           bg-color="bg-honey"
           class="mb-1"
@@ -15,7 +15,7 @@
           </p>
         </alert-box>
         <alert-box
-          v-else-if="billing.pendingUpdate"
+          v-else-if="ownerBillingInfo.pendingUpdate"
           bg-color="bg-robin"
           text-color="text-robin-150"
           class="mb-1"
@@ -26,7 +26,7 @@
           </p>
         </alert-box>
         <alert-box
-          v-if="billing.cancelAtPeriodEnd"
+          v-if="ownerBillingInfo.cancelAtPeriodEnd"
           text-color="text-honey-300"
           bg-color="bg-honey"
           class="mb-1"
@@ -41,19 +41,19 @@
             >.
           </p>
         </alert-box>
-        <plan-info :billing="billing" :id="owner.id" :current-plan="currentPlan"></plan-info>
+        <plan-info :id="owner.id" :current-plan="currentPlan"></plan-info>
       </div>
-      <billing-info :billing="billing" :billed-by="billingBackendHandler" />
-      <invoice-list v-if="isBilledByDeepSource" />
+      <billing-info />
+      <invoice-list v-if="isBilledByStripe" />
       <form-group
-        v-if="billing.cancelAtPeriodEnd && isBilledByDeepSource"
+        v-if="ownerBillingInfo.cancelAtPeriodEnd && isBilledByStripe"
         label="Subscription Settings"
       >
         <resume-plan />
       </form-group>
-      <form-group v-else-if="isBilledByDeepSource" label="Subscription Settings">
-        <upgrade-plan :billing="billing" @refetch="refetch" />
-        <downgrade-plan :billing="billing" @refetch="refetch" />
+      <form-group v-else-if="isBilledByStripe" label="Subscription Settings">
+        <upgrade-plan :billing="ownerBillingInfo" @refetch="refetch" />
+        <downgrade-plan :billing="ownerBillingInfo" @refetch="refetch" />
         <cancel-plan />
       </form-group>
     </template>
@@ -69,7 +69,7 @@
         </z-radio-button>
         <z-radio-button value="monthly"> Pay monthly </z-radio-button>
       </z-radio-group>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-3xl rounded">
+      <div class="grid max-w-3xl grid-cols-1 gap-5 rounded md:grid-cols-3">
         <plan-card
           v-for="name in plansInContext"
           :key="name"
@@ -85,7 +85,7 @@
 
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import { parseISODate, formatDate } from '~/utils/date'
@@ -94,7 +94,6 @@ import { ZRadioGroup, ZRadioButton } from '@deepsourcelabs/zeal'
 import { BillingInfo } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { TeamPerms } from '~/types/permTypes'
-import BillingBackend from '~/types/billingBackend'
 import { getHumanizedTimeFromNow } from '~/utils/date'
 
 const PLAN_ORDER = ['starter', 'pro', 'business', 'premium', 'enterprise']
@@ -119,7 +118,7 @@ const PLAN_ORDER = ['starter', 'pro', 'business', 'premium', 'enterprise']
   layout: 'dashboard'
 })
 export default class BillingSettings extends mixins(
-  OwnerDetailMixin,
+  OwnerBillingMixin,
   SubscriptionMixin,
   ActiveUserMixin,
   ContextMixin
@@ -158,22 +157,6 @@ export default class BillingSettings extends mixins(
     return []
   }
 
-  get billing(): BillingInfo | {} {
-    return this.owner.billingInfo ? this.owner.billingInfo : {}
-  }
-
-  get billingBackendHandler(): string {
-    if (Object.keys(this.billing).length)
-      return ((this.billing as BillingInfo).billingBackend as BillingBackend) === 'st'
-        ? 'Stripe'
-        : 'GitHub'
-    return ''
-  }
-
-  get isBilledByDeepSource(): boolean {
-    return this.billingBackendHandler === 'Stripe'
-  }
-
   get cancellationDate(): string | undefined {
     if (this.owner.billingInfo)
       return getHumanizedTimeFromNow(this.owner.billingInfo.upcomingCancellationDate)
@@ -181,8 +164,8 @@ export default class BillingSettings extends mixins(
   }
 
   get currentPlan(): Record<string, string | number> {
-    if (Object.keys(this.billing).length) {
-      const { planSlug } = this.billing as BillingInfo
+    if (Object.keys(this.ownerBillingInfo).length) {
+      const { planSlug } = this.ownerBillingInfo as BillingInfo
       if (planSlug) return this.context.plans[planSlug]
     }
     return {}
@@ -201,8 +184,8 @@ export default class BillingSettings extends mixins(
     })
   }
 
-  private parseISODate = parseISODate
-  private formatDate = formatDate
-  private loading = true
+  public parseISODate = parseISODate
+  public formatDate = formatDate
+  public loading = true
 }
 </script>

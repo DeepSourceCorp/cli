@@ -1,12 +1,12 @@
 <template>
-  <div class="bg-ink-300 rounded-md grid grid-cols-1 gap-4 p-3 relative">
+  <div class="relative grid grid-cols-1 gap-4 p-3 rounded-md bg-ink-300">
     <div
       class="absolute right-0 top-0 leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400"
     >
       Powered by
       <img class="inline" width="30" height="14" alt="stripe" src="~/assets/images/stripe.svg" />
     </div>
-    <fieldset class="text-sm space-y-1">
+    <fieldset class="space-y-1 text-sm">
       <label class="leading-loose">Billing email</label>
       <z-input
         required="true"
@@ -18,18 +18,18 @@
         v-model="billingEmail"
         @blur="(ev) => validateEmail(ev.target)"
         placeholder="jane@deepsource.io"
-      ></z-input>
+      />
       <p v-if="!validBillingEmail" class="text-xs text-cherry">Please enter a valid email.</p>
     </fieldset>
-    <fieldset class="text-sm space-y-1">
+    <fieldset class="space-y-1 text-sm">
       <label class="leading-loose">Name</label>
-      <z-input required="true" v-model="fullName" placeholder="Jane Doe"></z-input>
+      <z-input required="true" v-model="fullName" placeholder="Jane Doe" />
     </fieldset>
-    <fieldset class="text-sm space-y-1">
+    <fieldset class="space-y-1 text-sm">
       <label class="leading-loose">Credit card number</label>
       <div
         id="card-input-container"
-        class="bg-ink-400 py-3 px-3 text-sm border"
+        class="px-3 py-3 text-sm border bg-ink-400"
         :class="{
           'border-vanilla-200': cardInputFocus,
           'border-ink-100': !cardInputFocus
@@ -68,10 +68,10 @@
     </z-button>
     <z-button
       v-else
-      class="mt-3 text-vanilla-100 hover:bg-ink-300 cursor-wait"
-      buttonType="secondary"
+      class="mt-3 cursor-wait text-vanilla-100 hover:bg-ink-300"
+      button-type="secondary"
     >
-      <z-icon class="animate-spin" icon="spin-loader" color="juniper"></z-icon>
+      <z-icon class="animate-spin" icon="spin-loader" color="juniper" />
       <span>Processing payment</span>
     </z-button>
   </div>
@@ -81,10 +81,10 @@
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
 import { ZButton, ZInput, ZIcon } from '@deepsourcelabs/zeal'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
 import { StripeCardElement } from '@stripe/stripe-js'
 import { SubscriptionCheckoutPayload } from '~/types/types'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   components: {
@@ -93,7 +93,7 @@ import { SubscriptionCheckoutPayload } from '~/types/types'
     ZIcon
   }
 })
-export default class Subscribe extends mixins(SubscriptionMixin, OwnerDetailMixin) {
+export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMixin) {
   @Prop({ required: true })
   planSlug: string
 
