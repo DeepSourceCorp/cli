@@ -47,7 +47,7 @@
       </div>
       <div class="items-center block space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4">
         <a
-          class="flex items-center space-x-1 text-xs truncate text-vanilla-400"
+          class="flex items-baseline space-x-1 text-xs truncate text-vanilla-400"
           target="_blank"
           rel="noreferrer noopener"
           :href="blobUrl"
@@ -62,7 +62,7 @@
           </span>
           <span
             v-html="getWrappablePath(path)"
-            class="max-w-lg flex items-baseline flex-wrap"
+            class="flex flex-wrap items-baseline max-w-lg"
           ></span>
         </a>
         <span v-if="lastSeen" class="flex items-center flex-1 space-x-1 text-xs text-vanilla-400">

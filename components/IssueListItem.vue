@@ -34,10 +34,10 @@
           <!-- Occurences in files -->
         </div>
         <div
-          class="flex items-center w-full space-x-1 text-sm leading-6 text-vanilla-400 sm:w-auto"
+          class="flex items-baseline w-full space-x-1 text-sm leading-6 text-vanilla-400 sm:w-auto"
         >
-          <z-icon icon="file-text" size="x-small" color="vanilla-400"></z-icon>
-          <span class="overflow-hidden whitespace-pre overflow-ellipsis"
+          <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0"></z-icon>
+          <span class="max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis"
             >Found in {{ seenIn }}</span
           >
         </div>
