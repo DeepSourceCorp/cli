@@ -32,7 +32,7 @@ export default class RouteQueryMixin extends Vue {
     this.replaceRoute()
   }
 
-  emptyFilters(): void  {
+  emptyFilters(): void {
     this.queryParams = {}
     this.replaceRoute()
   }
@@ -42,12 +42,18 @@ export default class RouteQueryMixin extends Vue {
     this.replaceRoute()
   }
 
-  @Watch('queryParams', { deep: true })
+  @Watch('queryParams', { deep: true, immediate: false })
   async replaceRoute() {
+    // don't run on server
+    if (process.server) {
+      return
+    }
+
     // remove nullish values
     Object.keys(this.queryParams).forEach(
       (k) => this.queryParams[k] === null && delete this.queryParams[k]
     )
+
     this.$nuxt.$router.replace({ query: { ...this.queryParams } as Location['query'] })
     await this.$fetch()
   }

@@ -180,7 +180,7 @@ export default class Issues extends mixins(
 
     // load query params from URL
     this.queryParams = {
-      page: query.page,
+      page: query.page ? Number(query.page) : null,
       category: query.category || 'recommended',
       analyzer: query.analyzer || 'all',
       q: query.q || null,
