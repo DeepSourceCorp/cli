@@ -69,7 +69,7 @@
           </div>
           <div v-else>
             <z-input
-              :name="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
+              :value="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
               @input="(value) => updateArray(value, config)"
               size="small"
             ></z-input>

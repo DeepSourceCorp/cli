@@ -4,7 +4,7 @@
     :class="searchFocused || modelValue ? 'md:w-84 duration-150' : 'md:w-44 duration-200'"
   >
     <z-input
-      :name="modelValue"
+      :value="modelValue"
       size="small"
       class="text-sm"
       backgroundColor="ink-300"

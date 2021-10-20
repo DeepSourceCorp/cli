@@ -11,7 +11,7 @@
         background-color="ink-300"
         v-model="searchTerm"
         :show-border="false"
-        :name="searchTerm"
+        :value="searchTerm"
         class="mt-4 rounded-md shadow-lg"
         @debounceInput="$fetch"
       >

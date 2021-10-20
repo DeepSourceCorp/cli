@@ -3,7 +3,7 @@
     <div class="p-4 pb-0 space-y-2">
       <z-input
         ref="search-repo-input"
-        :name="searchCandidate"
+        :value="searchCandidate"
         icon="search"
         @debounceInput="searchRepo"
         class="flex-grow"

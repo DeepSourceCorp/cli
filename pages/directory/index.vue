@@ -10,7 +10,7 @@
         placeholder="Look up a programming language or linter..."
         background-color="ink-300"
         :show-border="false"
-        :name="searchTerm"
+        :value="searchTerm"
         class="mt-4 rounded-md shadow-lg"
         @debounceInput="searchDir"
       >

@@ -113,7 +113,7 @@
             </div>
             <div v-else>
               <z-input
-                :name="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
+                :value="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
                 :disabled="forTemplate && hasTemplate(config)"
                 :readOnly="readOnly && !(forTemplate && hasTemplate(config))"
                 v-tooltip="

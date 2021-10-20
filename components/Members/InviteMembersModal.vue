@@ -64,7 +64,7 @@
             </z-button>
           </div>
         </div>
-        <z-input :disabled="true" :name="team.invitationUrl" :showBorder="true">
+        <z-input :disabled="true" :value="team.invitationUrl" :showBorder="true">
           <template slot="right">
             <z-button buttonType="secondary" size="small" @click="copyInviteLink" spacing="px-2">
               <div class="flex items-center space-x-2">

@@ -37,7 +37,7 @@
         placeholder="Search for issue title or issue code"
         background-color="ink-300"
         :show-border="false"
-        :name="searchTerm"
+        :value="searchTerm"
         :disabled="!isLoaded"
         class="w-full lg:max-w-xs"
         @debounceInput="searchDir"
