@@ -33,10 +33,10 @@
         <slot name="info">
           <ticker
             v-if="trendValue"
-            v-tooltip="hideTooltip ? '' : trendHint"
+            v-tooltip="hintAsTooltip ? trendHint : ''"
             :icon="trendIcon"
             :trend-direction="trendDirection"
-            :trend-hint="trendHint"
+            :trend-hint="hintAsTooltip ? '' : trendHint"
             :trend-positive="trendPositive"
             :trend-value="trendValue"
           />
@@ -93,7 +93,7 @@ export default class StatCard extends Vue {
   @Prop({ default: null })
   to!: string
 
-  @Prop({ default: false })
-  hideTooltip!: boolean
+  @Prop({ default: true })
+  hintAsTooltip!: boolean
 }
 </script>

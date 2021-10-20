@@ -19,7 +19,7 @@
           v-if="widget.value_display !== null"
           :key="key"
           :to="widget.link"
-          :hide-tooltip="true"
+          :hint-as-tooltip="false"
           :trend-direction="widget.trend_direction"
           :trend-hint="widget.trend_display"
           :trend-positive="isTrendPositive(widget)"
