@@ -165,6 +165,11 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   public showAddRepoModal = false
   public largeScreenSize = 1024
 
+  created() {
+    this.isCollapsed = Boolean(this.$nuxt.$cookies.get('ui-state-sidebar-collapsed'))
+    this.collapsedSidebar = Boolean(this.$nuxt.$cookies.get('ui-state-sidebar-collapsed'))
+  }
+
   async fetch(): Promise<void> {
     await this.fetchContext()
     await this.fetchActiveUser()
@@ -188,9 +193,8 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   }
 
   mounted() {
-    this.fetchRepoCount()
-    this.isCollapsed = Boolean(this.$localStore.get('ui-state', 'sidebar-collapsed'))
-    this.collapsedSidebar = Boolean(this.$localStore.get('ui-state', 'sidebar-collapsed'))
+    // this.isCollapsed = Boolean(this.$nuxt.$cookies.get('ui-state-sidebar-collapsed'))
+    // this.collapsedSidebar = Boolean(this.$nuxt.$cookies.get('ui-state-sidebar-collapsed'))
     this.$root.$on('ui:show-sidebar-menu', () => {
       this.isCollapsed = false
       this.collapsedSidebar = false
@@ -230,7 +234,7 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
       }, 100)
     }
 
-    this.$localStore.set('ui-state', 'sidebar-collapsed', newVal)
+    this.$nuxt.$cookies.set('ui-state-sidebar-collapsed', newVal)
   }
 
   containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {

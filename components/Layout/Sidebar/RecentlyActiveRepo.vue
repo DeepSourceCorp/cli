@@ -57,12 +57,12 @@
         </z-tag>
       </button>
       <transition
-        enter-active-class="duration-300 ease-out"
-        enter-class="-translate-y-full opacity-0"
-        enter-to-class="translate-y-0 opacity-100"
-        leave-active-class="duration-200 ease-in"
-        leave-class="translate-y-0 opacity-100"
-        leave-to-class="-translate-y-full opacity-0"
+        :enter-active-class="$fetchState.pending ? '' : 'duration-300 ease-out'"
+        :enter-class="$fetchState.pending ? '' : '-translate-y-full opacity-0'"
+        :enter-to-class="$fetchState.pending ? '' : 'translate-y-0 opacity-100'"
+        :leave-active-class="$fetchState.pending ? '' : 'duration-200 ease-in'"
+        :leave-class="$fetchState.pending ? '' : 'translate-y-0 opacity-100'"
+        :leave-to-class="$fetchState.pending ? '' : '-translate-y-full opacity-0'"
       >
         <div class="space-y-0.5" v-show="dropdownCollapsed">
           <sidebar-item

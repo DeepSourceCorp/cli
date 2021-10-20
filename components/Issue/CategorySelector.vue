@@ -25,11 +25,12 @@
         </span>
         <z-tag
           v-tooltip="`${issueType.count} occurrences for this category`"
-          class="group-hover:bg-ink-200 xl:text-sm"
+          class="leading-none group-hover:bg-ink-200 tabular-nums"
           text-size="xs"
-          spacing="py-0.5 px-2"
+          spacing="py-1 px-2"
           :bg-color="issueType.shortcode === modelValue ? 'ink-200' : 'ink-300'"
-          >{{ issueType.count }}
+        >
+          <span class="mt-px">{{ formatIntl(issueType.count) }}</span>
         </z-tag>
       </div>
     </section>
@@ -42,6 +43,7 @@ import { ModelSync } from 'vue-property-decorator'
 
 import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { formatIntl } from '~/utils/string'
 
 export interface IssueCategoryChoice {
   name: string
@@ -71,6 +73,8 @@ const issuesSortOrder = [
 export default class IssueCategorySelector extends mixins(RepoDetailMixin) {
   @ModelSync('selectedCategory', 'updateCategory', { type: String, default: 'recommended' })
   readonly modelValue: string
+
+  formatIntl = formatIntl
 
   iconMap: Record<string, string> = {
     recommended: 'star',
