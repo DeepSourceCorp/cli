@@ -1,6 +1,6 @@
 <template>
   <div
-    class="border-ink-200 border-b flex gap-x-5 pt-3 px-4 sticky top-23 lg:top-13 bg-ink-400 z-10"
+    class="sticky z-10 flex px-4 pt-3 border-b border-ink-200 gap-x-5 top-23 lg:top-14 bg-ink-400"
   >
     <nuxt-link v-for="(tab, id) in tabList" :key="tab.label" :to="tab.link">
       <z-tab :icon="tab.icon" :isActive="id === activeTab" border-active-color="vanilla-100">

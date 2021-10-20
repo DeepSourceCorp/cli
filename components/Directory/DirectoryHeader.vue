@@ -1,9 +1,9 @@
 <template>
   <div>
     <div
-      class="px-4 h-13 flex items-center border-b border-ink-200 fixed top-10 lg:top-0 w-full bg-ink-400 z-10"
+      class="fixed z-10 flex items-center w-full px-4 py-4 border-b border-ink-200 top-10 lg:top-0 bg-ink-400"
     >
-      <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
+      <z-breadcrumb separator="/" class="py-px text-sm text-vanilla-100">
         <z-breadcrumb-item
           ><nuxt-link to="/directory" class="text-vanilla-400"
             >All {{ isAnalyzer ? 'analyzers' : 'transformers' }}</nuxt-link
@@ -16,10 +16,10 @@
         >
       </z-breadcrumb>
     </div>
-    <div ref="analyzer-dir-header" class="px-4 py-7 border-b border-ink-200 mt-14">
+    <div ref="analyzer-dir-header" class="px-4 border-b py-7 border-ink-200 mt-14">
       <div class="flex items-center space-x-5">
         <div
-          class="h-26 w-26 flex place-items-center p-4 bg-ink-300 rounded-md flex-shrink-0"
+          class="flex flex-shrink-0 p-4 rounded-md h-26 w-26 place-items-center bg-ink-300"
           :class="{ 'animate-pulse': isLoading }"
         >
           <img
@@ -37,10 +37,10 @@
           >
             {{ infoObj.name }}
           </component>
-          <div v-else class="h-8 w-40 bg-ink-300 animate-pulse"></div>
+          <div v-else class="w-40 h-8 bg-ink-300 animate-pulse"></div>
           <p v-if="infoObj.owner" class="pl-px text-sm text-vanilla-400">By {{ infoObj.owner }}</p>
-          <div v-else class="h-4 w-24 bg-ink-300 animate-pulse mt-2"></div>
-          <div class="mt-4 flex gap-2 flex-wrap lg:flex-nowrap">
+          <div v-else class="w-24 h-4 mt-2 bg-ink-300 animate-pulse"></div>
+          <div class="flex flex-wrap gap-2 mt-4 lg:flex-nowrap">
             <z-button
               v-if="loggedIn"
               icon="play"
@@ -52,7 +52,7 @@
             <nuxt-link
               v-else
               :to="{ path: '/login', query: { next: `${$route.path}?use-action=true` } }"
-              class="inline-flex items-center justify-center font-medium transition-colors duration-300 ease-in-out rounded-sm focus:outline-none whitespace-nowrap text-ink-400 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-juniper hover:bg-juniper-600"
+              class="inline-flex items-center justify-center h-8 p-0 px-4 py-1 space-x-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out rounded-sm focus:outline-none whitespace-nowrap text-ink-400 bg-juniper hover:bg-juniper-600"
             >
               <z-icon icon="play" color="currentColor" size="small" class="mr-1.5" />
               Use {{ isAnalyzer ? 'Analyzer' : 'Transformer' }}
@@ -91,7 +91,7 @@
                     target="_blank"
                     rel="noreferrer noopener"
                     :disabled="isLoading"
-                    class="w-full flex items-center py-3"
+                    class="flex items-center w-full py-3"
                   >
                     <span>Docs</span>
                   </z-menu-item>
@@ -103,7 +103,7 @@
                     target="_blank"
                     rel="noreferrer noopener"
                     :disabled="isLoading"
-                    class="w-full flex items-center py-3"
+                    class="flex items-center w-full py-3"
                   >
                     <span>Discuss</span>
                   </z-menu-item>
@@ -113,7 +113,7 @@
                     color="vanilla-300"
                     icon="feather"
                     :disabled="isLoading"
-                    class="w-full flex items-center py-3 mb-3"
+                    class="flex items-center w-full py-3 mb-3"
                     @click="
                       () => {
                         showAnalyzerFeedbackModal = true

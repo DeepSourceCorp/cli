@@ -12,6 +12,9 @@ query($q: String) {
         publishedOn
         logo
         createdAt
+        analyzer {
+          analyzerLogo
+        }
       }
     }
   }

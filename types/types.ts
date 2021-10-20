@@ -7047,14 +7047,14 @@ export type Unnamed_115_Query = (
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
-export type Unnamed_116_QueryVariables = Exact<{
+export type RepositoryWidgetsQueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
 }>;
 
 
-export type Unnamed_116_Query = (
+export type RepositoryWidgetsQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -7062,13 +7062,13 @@ export type Unnamed_116_Query = (
   )> }
 );
 
-export type Unnamed_117_QueryVariables = Exact<{
+export type Unnamed_116_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
 }>;
 
 
-export type Unnamed_117_Query = (
+export type Unnamed_116_Query = (
   { __typename?: 'Query' }
   & { owner?: Maybe<(
     { __typename?: 'Owner' }
@@ -7080,7 +7080,7 @@ export type Unnamed_117_Query = (
   )> }
 );
 
-export type Unnamed_118_QueryVariables = Exact<{
+export type Unnamed_117_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
   limit?: Maybe<Scalars['Int']>;
@@ -7088,7 +7088,7 @@ export type Unnamed_118_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_118_Query = (
+export type Unnamed_117_Query = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
@@ -7107,7 +7107,7 @@ export type Unnamed_118_Query = (
   )> }
 );
 
-export type Unnamed_119_QueryVariables = Exact<{
+export type Unnamed_118_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
   limit?: Maybe<Scalars['Int']>;
@@ -7116,7 +7116,7 @@ export type Unnamed_119_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_119_Query = (
+export type Unnamed_118_Query = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
@@ -7139,13 +7139,13 @@ export type Unnamed_119_Query = (
   )> }
 );
 
-export type Unnamed_120_QueryVariables = Exact<{
+export type Unnamed_119_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
 }>;
 
 
-export type Unnamed_120_Query = (
+export type Unnamed_119_Query = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
@@ -7161,12 +7161,12 @@ export type Unnamed_120_Query = (
   )> }
 );
 
-export type Unnamed_121_QueryVariables = Exact<{
+export type Unnamed_120_QueryVariables = Exact<{
   shortcode: Scalars['String'];
 }>;
 
 
-export type Unnamed_121_Query = (
+export type Unnamed_120_Query = (
   { __typename?: 'Query' }
   & { transformer?: Maybe<(
     { __typename?: 'TransformerTool' }
@@ -7178,12 +7178,12 @@ export type Unnamed_121_Query = (
   )> }
 );
 
-export type Unnamed_122_QueryVariables = Exact<{
+export type Unnamed_121_QueryVariables = Exact<{
   shortcode: Scalars['String'];
 }>;
 
 
-export type Unnamed_122_Query = (
+export type Unnamed_121_Query = (
   { __typename?: 'Query' }
   & { transformer?: Maybe<(
     { __typename?: 'TransformerTool' }
@@ -7195,12 +7195,12 @@ export type Unnamed_122_Query = (
   )> }
 );
 
-export type Unnamed_123_QueryVariables = Exact<{
+export type Unnamed_122_QueryVariables = Exact<{
   q?: Maybe<Scalars['String']>;
 }>;
 
 
-export type Unnamed_123_Query = (
+export type Unnamed_122_Query = (
   { __typename?: 'Query' }
   & { transformers?: Maybe<(
     { __typename?: 'TransformerToolConnection' }
@@ -7208,16 +7208,20 @@ export type Unnamed_123_Query = (
       { __typename?: 'TransformerToolEdge' }
       & { node?: Maybe<(
         { __typename?: 'TransformerTool' }
-        & Pick<TransformerTool, 'name' | 'owner' | 'descriptionRendered' | 'updatedOn' | 'language' | 'version' | 'shortcode' | 'publishedOn' | 'logo' | 'createdAt'>
+        & Pick<TransformerTool, 'name' | 'owner' | 'descriptionRendered' | 'updatedOn' | 'language' | 'version' | 'shortcode' | 'publishedOn' | 'createdAt'>
+        & { analyzer?: Maybe<(
+          { __typename?: 'Analyzer' }
+          & Pick<Analyzer, 'analyzerLogo'>
+        )> }
       )> }
     )>> }
   )> }
 );
 
-export type Unnamed_124_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_123_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_124_Query = (
+export type Unnamed_123_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
@@ -7229,10 +7233,10 @@ export type Unnamed_124_Query = (
   )> }
 );
 
-export type Unnamed_125_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_124_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_125_Query = (
+export type Unnamed_124_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
@@ -7295,10 +7299,10 @@ export type ViewerStarredReposQuery = (
   )> }
 );
 
-export type Unnamed_126_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_125_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_126_Query = (
+export type Unnamed_125_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }

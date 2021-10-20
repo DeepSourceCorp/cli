@@ -13,7 +13,11 @@
     >
       <template slot="header">
         <section class="p-4 border-b border-ink-200">
-          <img src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" class="w-auto h-5" />
+          <img
+            src="~/assets/images/logo-wordmark-white.svg"
+            alt="DeepSource"
+            class="w-auto h-5 mt-0.5 mb-px"
+          />
         </section>
       </template>
       <template slot="default">

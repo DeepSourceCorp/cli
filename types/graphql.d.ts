@@ -1147,7 +1147,7 @@ declare module '*/ssh.gql' {
 declare module '*/widgets.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const RepositoryWidgets: DocumentNode;
 
   export default defaultDocument;
 }

@@ -6,11 +6,11 @@
         ? `/directory/analyzers/${infoObj.shortcode}`
         : `/directory/transformers/${infoObj.shortcode}`
     "
-    class="flex flex-col border border-ink-200 rounded-md min-h-60 p-4"
+    class="flex flex-col p-4 border rounded-md border-ink-200 min-h-60"
     :class="{ 'hover:bg-ink-300 hover:cursor-pointer': infoObj.shortcode }"
   >
     <div class="flex justify-between space-x-2">
-      <div class="h-15 w-15 flex place-items-center p-2 bg-ink-200 rounded-md flex-shrink-0">
+      <div class="flex flex-shrink-0 p-2 rounded-md h-15 w-15 place-items-center bg-ink-200">
         <img
           v-if="isAnalyzer ? infoObj.analyzerLogo : infoObj.logo"
           :src="isAnalyzer ? infoObj.analyzerLogo : infoObj.logo"
@@ -23,37 +23,45 @@
         <z-tag v-if="isNew" spacing="px-2.5 py-1" text-size="xxs" bg-color="robin"> New </z-tag>
       </div>
     </div>
-    <h6 class="font-semibold mt-5 text-lg">
+    <h6 class="mt-5 text-lg font-semibold">
       {{ infoObj.name }}
     </h6>
-    <div v-if="infoObj.owner" class="text-vanilla-400 text-xs">By {{ infoObj.owner }}</div>
+    <div v-if="infoObj.owner" class="text-xs text-vanilla-400">By {{ infoObj.owner }}</div>
     <div v-else class="h-5"></div>
-    <p class="prose text-xs mt-2" v-html="infoObj.descriptionRendered"></p>
+    <p class="mt-2 text-xs prose" v-html="infoObj.descriptionRendered"></p>
     <div class="flex-grow"></div>
     <div v-if="isAnalyzer" class="flex mt-4">
       <div class="w-20">
         <div class="text-xs text-vanilla-400">Total issues</div>
         <div class="text-lg">{{ infoObj.issuesCount }}</div>
       </div>
-      <div>
+      <div v-if="infoObj.autofixableIssuesCount">
         <div class="text-xs text-vanilla-400">Autofix issues</div>
         <div class="text-lg">{{ infoObj.autofixableIssuesCount }}</div>
       </div>
     </div>
-    <div class="mt-3 flex items-center justify-between text-xs leading-none py-1">
-      <span v-if="infoObj.category || infoObj.language" class="flex">
+    <div class="py-1 mt-3 text-xs leading-none">
+      <span v-if="isAnalyzer && infoObj.category" class="flex items-center">
         <z-icon icon="box" size="x-small" class="mr-1" />
-        {{ isAnalyzer ? infoObj.category : infoObj.language }}
+        {{ infoObj.category }}
       </span>
-      <span v-else></span>
-      <span>{{ infoObj.version }}</span>
+      <span v-else-if="infoObj.language" class="flex items-center">
+        <img
+          v-if="infoObj.analyzer && infoObj.analyzer.analyzerLogo"
+          :src="infoObj.analyzer.analyzerLogo"
+          :alt="`${infoObj.language}'s logo`"
+          class="w-3 h-3 mr-1"
+        />
+        <z-icon v-else icon="box" size="x-small" class="mr-1" />
+        {{ infoObj.language }}
+      </span>
     </div>
   </component>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZTag, ZIcon } from '@deepsourcelabs/zeal'
-import { parseISODate, formatDate, getDaysDiffInDays } from '~/utils/date'
+import { getDaysDiffInDays } from '~/utils/date'
 import { Analyzer, TransformerTool } from '~/types/types'
 
 @Component({
