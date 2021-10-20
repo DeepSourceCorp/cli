@@ -126,10 +126,9 @@ export default class ActivateAnalysisModal extends mixins(
 
     try {
       const response = await this.commitConfigToVcs(args)
+      await this.refetchData()
+      await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
       if (response.ok) {
-        await this.refetchData()
-        await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
-        close()
         if (createPullRequest) {
           this.$toast.show({
             type: 'success',
@@ -143,6 +142,8 @@ export default class ActivateAnalysisModal extends mixins(
             timeout: 5
           })
         }
+        this.$root.$emit('repo-activation-triggered')
+        close()
       } else {
         this.$toast.show({
           type: 'danger',

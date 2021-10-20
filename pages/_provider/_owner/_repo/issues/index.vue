@@ -213,9 +213,12 @@ export default class Issues extends mixins(
   }
 
   async fetch(): Promise<void> {
-    await this.fetchRepoDetails(this.baseRouteParams)
-    await this.fetchRepoPerms(this.baseRouteParams)
-    await this.fetchIssuesForOwner()
+    await Promise.all([
+      this.fetchRepoDetails(this.baseRouteParams),
+      this.fetchRepoPerms(this.baseRouteParams),
+      this.fetchIssuesForOwner()
+    ])
+
     this.fetchRepoAutofixStats(this.baseRouteParams)
     this.fetchIsCommitPossible(this.baseRouteParams)
   }
@@ -249,14 +252,20 @@ export default class Issues extends mixins(
     this.fetchIssuesForOwner(true)
   }
 
+  refetchRepoDetails(): void {
+    this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
+  }
+
   mounted(): void {
     this.$root.$on('refetchCheck', this.refetchIssues)
+    this.$root.$on('repo-activation-triggered', this.refetchRepoDetails)
     this.$socket.$on('repo-analysis-updated', this.refetchIssues)
     this.$socket.$on('autofixrun-fixes-ready', this.refetchIssues)
   }
 
   beforeDestroy(): void {
     this.$root.$off('refetchCheck', this.refetchIssues)
+    this.$root.$off('repo-activation-triggered', this.refetchRepoDetails)
     this.$socket.$off('repo-analysis-updated', this.refetchIssues)
     this.$socket.$off('autofixrun-fixes-ready', this.refetchIssues)
   }
