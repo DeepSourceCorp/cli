@@ -65,14 +65,17 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, Vue } from 'nuxt-property-decorator'
+import { ZIcon, ZInput, ZTabItem, ZTabList, ZTabPane, ZTabPanes, ZTabs } from '@deepsourcelabs/zeal'
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
-import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
-import { Analyzer, Maybe, Repository, RepositoryConnection } from '~/types/types'
-import { ZIcon, ZInput, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem } from '@deepsourcelabs/zeal'
 import EditorsPick from '@/components/Discover/EditorsPick.vue'
 import Trending from '@/components/Discover/Trending.vue'
+
+import MetaMixin from '~/mixins/metaMixin'
+
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
+import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
+import { Analyzer, Maybe, Repository, RepositoryConnection } from '~/types/types'
 
 const directoryStore = namespace('directory/directory')
 const discoverRepositoriesStore = namespace('discover/repositories')
@@ -92,10 +95,14 @@ const discoverRepositoriesStore = namespace('discover/repositories')
   middleware: ['disableDiscoverOnPrem'],
   layout: 'discover'
 })
-export default class Discover extends Vue {
+export default class Discover extends mixins(MetaMixin) {
   searchTerm = ''
   loading = false
   preferredTechnology: string[] = []
+
+  metaTitle = 'Discover • Issues from popular open source projects'
+  metaDescription =
+    'Discover and fix bug risks, anti-patterns, performance issues and security flaws.'
 
   @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
   analyzerList: Analyzer[]
@@ -131,14 +138,6 @@ export default class Discover extends Vue {
 
   async fetch(): Promise<void> {
     await this.getRepos()
-  }
-
-  head(): Record<string, string> {
-    return {
-      title: `Discover • Issues from popular open source projects`,
-      description:
-        'Discover and fix bug risks, anti-patterns, performance issues and security flaws.'
-    }
   }
 }
 </script>

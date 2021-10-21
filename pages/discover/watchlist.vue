@@ -24,9 +24,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
 import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
 import { Context } from '@nuxt/types'
+import { Component, mixins } from 'nuxt-property-decorator'
+
+import MetaMixin from '~/mixins/metaMixin'
 
 @Component({
   components: {
@@ -44,13 +46,9 @@ import { Context } from '@nuxt/types'
   ],
   layout: 'discover'
 })
-export default class Watchlist extends Vue {
-  head(): Record<string, string> {
-    return {
-      title: `Watchlist of your favourite open source projects`,
-      description: 'Keep track of new issues in the projects you love and care about.'
-    }
-  }
+export default class Watchlist extends mixins(MetaMixin) {
+  metaTitle = 'Watchlist of your favourite open source projects'
+  metaDescription = 'Keep track of new issues in the projects you love and care about.'
 }
 </script>
 

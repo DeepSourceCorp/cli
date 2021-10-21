@@ -76,26 +76,30 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, Vue } from 'nuxt-property-decorator'
-
-import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
-import { Analyzer, Maybe, Repository, RepositoryConnection } from '~/types/types'
 import {
+  ZBreadcrumb,
+  ZBreadcrumbItem,
   ZIcon,
   ZInput,
-  ZTabs,
+  ZTabItem,
   ZTabList,
   ZTabPane,
   ZTabPanes,
-  ZTabItem,
-  ZBreadcrumb,
-  ZBreadcrumbItem
+  ZTabs
 } from '@deepsourcelabs/zeal'
+
+import { Context } from '@nuxt/types'
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
+
 import EditorsPick from '@/components/Discover/EditorsPick.vue'
 import Trending from '@/components/Discover/Trending.vue'
-import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
+
+import MetaMixin from '~/mixins/metaMixin'
+
 import { AnalyzerListActions } from '~/store/analyzer/list'
-import { Context } from '@nuxt/types'
+import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
+import { DiscoverRepoActions, DiscoverRepoGetters } from '~/store/discover/repositories'
+import { Analyzer, Maybe, Repository, RepositoryConnection } from '~/types/types'
 
 const directoryStore = namespace('directory/directory')
 const discoverRepositoriesStore = namespace('discover/repositories')
@@ -159,7 +163,7 @@ const discoverRepositoriesStore = namespace('discover/repositories')
   ],
   layout: 'discover'
 })
-export default class Discover extends Vue {
+export default class Discover extends mixins(MetaMixin) {
   searchTerm = ''
   loading = false
   preferredTechnology: string[] = []
@@ -183,14 +187,6 @@ export default class Discover extends Vue {
 
   @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_EDITORS_PICK_REPOSITORY)
   editorsPickRepository: Maybe<Repository>
-
-  head(): Record<string, string> {
-    return {
-      title: `Discover ${this.analyzerName} • Issues from popular open source projects`,
-      description:
-        'Discover and fix bug risks, anti-patterns, performance issues and security flaws.'
-    }
-  }
 
   async getRepos(): Promise<void> {
     const currentAnalyzerShortcode = this.$route.params.lang
@@ -228,6 +224,10 @@ export default class Discover extends Vue {
   async fetch(): Promise<void> {
     this.fetchAnalyzers()
     await this.getRepos()
+
+    this.metaTitle = `Discover ${this.analyzerName} • Issues from popular open source projects`
+    this.metaDescription =
+      'Discover and fix bug risks, anti-patterns, performance issues and security flaws.'
   }
 }
 </script>

@@ -30,14 +30,15 @@ export default {
     },
     script: [
       {
-        src: "https://dwlkwbmqzv11.statuspage.io/embed/script.js",
+        src: 'https://dwlkwbmqzv11.statuspage.io/embed/script.js',
         body: true
-      },
+      }
     ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: '' },
+      { hid: 'og:type', content: 'website' }
     ],
     link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon/default.svg' }]
   },
@@ -73,7 +74,8 @@ export default {
     supportEmail: toBool(process.env.ON_PREM)
       ? 'enterprise-support@deepsource.io'
       : 'support@deepsource.io',
-    discoverEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.IS_DISCOVER_ENABLED) : true
+    discoverEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.IS_DISCOVER_ENABLED) : true,
+    domain: process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io'
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
