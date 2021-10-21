@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex flex-col space-y-4 max-w-3xl pb-48">
+  <div class="flex flex-col max-w-3xl p-4 pb-48 space-y-4">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">Badges</div>
     <!-- description -->
@@ -11,8 +11,8 @@
       <div class="space-y-2">
         <label class="text-sm text-vanilla-100">Preview</label>
         <!-- Preview component -->
-        <div class="border border-ink-200 p-2 h-40 flex flex-col items-center">
-          <div class="flex-1 flex item-center justify-center">
+        <div class="flex flex-col items-center h-40 p-2 border border-ink-200">
+          <div class="flex justify-center flex-1 item-center">
             <img :src="badgeImageURL" alt="badge" />
           </div>
           <z-input v-model="embedCode" class="self-end pr-0.5">
@@ -21,7 +21,7 @@
                 buttonType="secondary"
                 size="small"
                 spacing="px-2"
-                class="flex space-x-2 items-center w-32"
+                class="flex items-center w-32 space-x-2"
                 @click="copyEmbedCode"
               >
                 <z-icon :icon="clipboardIcon" size="small"></z-icon>
@@ -34,17 +34,17 @@
       <!-- Badge type -->
       <div class="divide-y divide-ink-200">
         <div class="flex items-center py-2">
-          <div class="text-sm text-vanilla-100 flex-1">Badge type</div>
+          <div class="flex-1 text-sm text-vanilla-100">Badge type</div>
           <z-radio-group v-model="badgeType" class="flex">
             <z-radio-button value="active issues" label="Active issues"></z-radio-button>
             <z-radio-button value="resolved issues" label="Resolved issues"></z-radio-button>
           </z-radio-group>
         </div>
         <!-- Show trend -->
-        <div class="flex items-center relative py-4">
-          <div class="text-sm text-vanilla-100 flex-1">Show trend</div>
+        <div class="relative flex items-center py-4">
+          <div class="flex-1 text-sm text-vanilla-100">Show trend</div>
           <z-toggle v-model="showTrend"></z-toggle>
-          <div class="absolute top-0 left-full px-4">
+          <div class="absolute top-0 px-4 left-full">
             <info-banner
               info="Add a trendline showing how the value of this metric has varied in the last 6 months."
             ></info-banner>
@@ -52,7 +52,7 @@
         </div>
         <!-- Format -->
         <div class="flex items-center py-2">
-          <div class="text-sm text-vanilla-100 flex-1">Format</div>
+          <div class="flex-1 text-sm text-vanilla-100">Format</div>
           <div class="w-1/4">
             <z-select v-model="selectedFormat" spacing="py-1" class="text-sm">
               <z-option
@@ -66,8 +66,8 @@
           </div>
         </div>
         <!-- Add referral -->
-        <div class="flex items-center relative py-4">
-          <div class="text-sm text-vanilla-100 flex-1">Add referral to badge</div>
+        <div class="relative flex items-center py-4">
+          <div class="flex-1 text-sm text-vanilla-100">Add referral to badge</div>
           <z-toggle v-model="addReferral"></z-toggle>
         </div>
       </div>
@@ -176,16 +176,22 @@ export default class Badges extends Vue {
     return imgURL
   }
 
+  get badgeTargetURL(): string {
+    return this.addReferral
+      ? this.repository.badge?.target_url
+      : this.repository.badge?.target_url.split('?')[0]
+  }
+
   get embedCode(): string {
     switch (this.selectedFormat) {
       case this.FORMATS.MARKDOWN:
-        return `[![DeepSource](${this.badgeImageURL})](${this.repository.badge?.target_url})`
+        return `[![DeepSource](${this.badgeImageURL})](${this.badgeTargetURL})`
       case this.FORMATS.HTML:
-        return `<a href="${this.repository.badge?.target_url}}" target="_blank"><img alt="DeepSource" title="DeepSource" src="${this.badgeImageURL}"/></a>`
+        return `<a href="${this.badgeTargetURL}}" target="_blank"><img alt="DeepSource" title="DeepSource" src="${this.badgeImageURL}"/></a>`
       case this.FORMATS.REST:
-        return `.. image:: ${this.badgeImageURL}\n  :target: ${this.repository.badge?.target_url}`
+        return `.. image:: ${this.badgeImageURL}\n  :target: ${this.badgeTargetURL}`
       case this.FORMATS.ASCIIDOC:
-        return `image:${this.badgeImageURL}["DeepSource", link="${this.repository.badge?.target_url}"]`
+        return `image:${this.badgeImageURL}["DeepSource", link="${this.badgeTargetURL}"]`
       default:
         return ''
     }
