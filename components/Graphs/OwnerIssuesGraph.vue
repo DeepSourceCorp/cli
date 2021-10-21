@@ -9,12 +9,12 @@
   >
     <template slot="controls">
       <graph-control
-        class="float-right h-8 w-full xl:w-auto"
+        class="float-right w-full h-8 xl:w-auto"
         :filterValue="lastDays"
         @updateFilter="updateLastDays"
       ></graph-control>
     </template>
-    <div class="flex items-start space-x-5 p-4 -ml-2">
+    <div class="flex items-start p-4 -ml-2 space-x-5">
       <graph-legend
         class="w-1/2 md:w-auto"
         :allowHover="false"
@@ -52,7 +52,7 @@
   </stat-section>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import { formatDate, parseISODate } from '@/utils/date'
 import { ZChart } from '@deepsourcelabs/zeal'
 import { BaseGraph, GraphLegend } from '.'
@@ -60,11 +60,9 @@ import { BaseGraph, GraphLegend } from '.'
 import GraphControl from './GraphControl.vue'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { getChangeFromTrend, getLastTwoTrends } from '~/utils/array'
+import { Trend } from '~/store/owner/detail'
 
-interface Trend {
-  labels: string[]
-  values: number[]
-}
+const ownerDetailStore = namespace('owner/detail')
 
 @Component({
   components: { BaseGraph, GraphControl, GraphLegend, ZChart }
@@ -72,28 +70,34 @@ interface Trend {
 export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
   public lastDays = 30
 
+  @ownerDetailStore.State
+  issueTrend: Trend
+
+  @ownerDetailStore.State
+  resolvedIssueTrend: Trend
+
   get currentActiveIssues(): number {
-    return getLastTwoTrends(this.owner.issueTrend)[0]
+    return getLastTwoTrends(this.issueTrend)[0]
   }
 
   get currentResolvedIssues(): number {
-    return getLastTwoTrends(this.owner.resolvedIssueTrend)[0]
+    return getLastTwoTrends(this.resolvedIssueTrend)[0]
   }
 
   get activeIssuesTickerData(): number {
-    return getChangeFromTrend(this.owner.issueTrend)
+    return getChangeFromTrend(this.issueTrend)
   }
 
   get activeIssuesTickerDataCount(): number {
-    return getChangeFromTrend(this.owner.issueTrend, false)
+    return getChangeFromTrend(this.issueTrend, false)
   }
 
   get resolvedIssuesTickerData(): number {
-    return getChangeFromTrend(this.owner.resolvedIssueTrend)
+    return getChangeFromTrend(this.resolvedIssueTrend)
   }
 
   get resolvedIssuesTickerDataCount(): number {
-    return getChangeFromTrend(this.owner.resolvedIssueTrend, false)
+    return getChangeFromTrend(this.resolvedIssueTrend, false)
   }
 
   getTooltipText(count: number, isUpward: boolean): string {
@@ -104,15 +108,15 @@ export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
   }
 
   get resolvedIssueData(): Trend {
-    if (this.owner.resolvedIssueTrend) {
-      return this.owner.resolvedIssueTrend
+    if (this.resolvedIssueTrend) {
+      return this.resolvedIssueTrend
     }
     return { labels: [], values: [] }
   }
 
   get issueData(): Trend {
-    if (this.owner.issueTrend) {
-      return this.owner.issueTrend
+    if (this.issueTrend) {
+      return this.issueTrend
     }
     return { labels: [], values: [] }
   }

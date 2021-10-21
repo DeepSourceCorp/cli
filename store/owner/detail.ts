@@ -35,10 +35,17 @@ import UpdatePaymentSource from '~/apollo/mutations/owner/updatePaymentSource.gq
 import CancelPlan from '~/apollo/mutations/owner/cancelPlan.gql'
 import ResumePlan from '~/apollo/mutations/owner/resumePlan.gql'
 
+export interface Trend {
+  labels: string[]
+  values: number[]
+}
 export interface OwnerDetailModuleState {
   loading: boolean
   error: Record<string, unknown>
   owner: Owner
+  autofixTrend: Trend
+  issueTrend: Trend
+  resolvedIssueTrend: Trend
   billingInfo?: GetBillingInfoPayload
 }
 
@@ -86,6 +93,9 @@ export enum OwnerDetailMutations {
   SET_ERROR = 'setOwnerDetailError',
   SET_LOADING = 'setOwnerDetailLoading',
   SET_OWNER = 'setOwner',
+  SET_OWNER_AUTOFIX_TREND = 'setOwnerAutofixTrend',
+  SET_OWNER_ISSUES_TREND = 'setOwnerIssuesTrend',
+  SET_OWNER_RESOLVED_ISSUES_TREND = 'setOwnerResolvedIssuesTrend',
   SET_BILLING_INFO = 'setBillingInfo',
   SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
 }
@@ -99,6 +109,15 @@ export const mutations: MutationTree<OwnerDetailModuleState> = {
   },
   [OwnerDetailMutations.SET_OWNER]: (state, owner) => {
     state.owner = Object.assign({}, state.owner, owner)
+  },
+  [OwnerDetailMutations.SET_OWNER_AUTOFIX_TREND]: (state, owner: Owner) => {
+    state.autofixTrend = owner.autofixedIssueTrend
+  },
+  [OwnerDetailMutations.SET_OWNER_ISSUES_TREND]: (state, owner: Owner) => {
+    state.issueTrend = owner.issueTrend
+  },
+  [OwnerDetailMutations.SET_OWNER_RESOLVED_ISSUES_TREND]: (state, owner: Owner) => {
+    state.resolvedIssueTrend = owner.resolvedIssueTrend
   },
   [OwnerDetailMutations.SET_BILLING_INFO]: (state, billingInfo) => {
     state.billingInfo = billingInfo
@@ -315,7 +334,8 @@ export const actions: OwnerDetailModuleActions = {
         provider: this.$providerMetaMap[args.provider].value,
         lastDays: args.lastDays
       })
-      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_OWNER_ISSUES_TREND, response.data.owner)
+      commit(OwnerDetailMutations.SET_OWNER_RESOLVED_ISSUES_TREND, response.data.owner)
       commit(OwnerDetailMutations.SET_LOADING, false)
     } catch (e) {
       const err = e as GraphqlError
@@ -332,7 +352,7 @@ export const actions: OwnerDetailModuleActions = {
         provider: this.$providerMetaMap[args.provider].value,
         lastDays: args.lastDays
       })
-      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+      commit(OwnerDetailMutations.SET_OWNER_AUTOFIX_TREND, response.data.owner)
       commit(OwnerDetailMutations.SET_LOADING, false)
     } catch (e) {
       const err = e as GraphqlError
@@ -568,6 +588,9 @@ export const state = (): OwnerDetailModuleState => ({
     loading: false,
     error: {},
     billingInfo: {},
+    autofixTrend: {},
+    issueTrend: {},
+    resolvedIssueTrend: {},
     owner: {
       accountSetupStatus: [],
       ownerSetting: <OwnerSetting>{

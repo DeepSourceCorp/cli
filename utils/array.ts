@@ -1,10 +1,11 @@
+import { Trend } from '~/store/owner/detail'
 import { Maybe } from '~/types/types'
 
 function resize(arr: Array<unknown>, newSize: number): Array<unknown> {
   return [...arr, ...Array(Math.max(newSize - arr.length, 0)).fill(0)].splice(0, newSize)
 }
 
-function getLastTwoTrends(trendData?: Record<string, number[]>): number[] {
+function getLastTwoTrends(trendData?: Trend): number[] {
   if (trendData && Array.isArray(trendData.values)) {
     const length = trendData.values.length
     return [trendData.values[length - 1], trendData.values[length - 2]]
@@ -12,7 +13,7 @@ function getLastTwoTrends(trendData?: Record<string, number[]>): number[] {
   return [0, 0]
 }
 
-function getChangeFromTrend(trendData?: Record<string, number[]>, percentage = true): number {
+function getChangeFromTrend(trendData?: Trend, percentage = true): number {
   const [current, prev] = getLastTwoTrends(trendData)
   return percentage ? Math.round(((current - prev) / prev) * 100) : current - prev
 }

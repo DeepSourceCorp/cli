@@ -9,12 +9,12 @@
   >
     <template slot="controls">
       <graph-control
-        class="float-right h-8 w-full xl:w-auto"
+        class="float-right w-full h-8 xl:w-auto"
         :filterValue="lastDays"
         @updateFilter="updateLastDays"
       ></graph-control>
     </template>
-    <div class="flex items-start space-x-5 p-4 -ml-2">
+    <div class="flex items-start p-4 -ml-2 space-x-5">
       <graph-legend
         class="w-1/2 md:w-auto"
         :allowHover="false"
@@ -36,17 +36,15 @@
   </stat-section>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, namespace, mixins } from 'nuxt-property-decorator'
 import { formatDate, parseISODate } from '@/utils/date'
 import BaseGraph from './BaseGraph.vue'
 import { getLastTwoTrends } from '~/utils/array'
 
+import { Trend } from '~/store/owner/detail'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
-interface Trend {
-  labels: string[]
-  values: number[]
-}
+const ownerDetailStore = namespace('owner/detail')
 
 @Component({
   components: { BaseGraph }
@@ -54,15 +52,11 @@ interface Trend {
 export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
   public lastDays = 30
 
-  get autofixTrend(): Trend {
-    if (this.owner.autofixedIssueTrend) {
-      return this.owner.autofixedIssueTrend
-    }
-    return { labels: [], values: [] }
-  }
+  @ownerDetailStore.State
+  autofixTrend: Trend
 
   get currentAutofixCount(): number {
-    return getLastTwoTrends(this.owner.autofixedIssueTrend)[0]
+    return getLastTwoTrends(this.autofixTrend)[0]
   }
 
   async fetch(): Promise<void> {
