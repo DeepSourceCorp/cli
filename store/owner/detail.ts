@@ -474,16 +474,15 @@ export const actions: OwnerDetailModuleActions = {
         billingAddress,
         billingEmail
       }
-      const refetchQueries = [
-        {
-          query: BillingDetails,
-          variables: {
-            login: login,
-            provider: this.$providerMetaMap[provider].value
-          },
-          fetchPolicy: 'network-only'
-        }
-      ]
+      const refetchQueries = {
+        query: BillingDetails,
+        variables: {
+          login: login,
+          provider: this.$providerMetaMap[provider].value
+        },
+        fetchPolicy: 'network-only'
+      }
+
       const response = await this.$applyGraphqlMutation(UpdateBillingInfo, args, refetchQueries)
       commit(OwnerDetailMutations.SET_OWNER, response.data.updateBillingInfo)
       return response
