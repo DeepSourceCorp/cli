@@ -60,7 +60,7 @@ spec:
             - --image=node:14.8-alpine
             - --image=sleavely/node-awscli:14.x
           workingDir: /workspace/source
-        - image: gcr.io/kaniko-project/executor:debug
+        - image: gcr.io/kaniko-project/executor:v1.6.0-debug
           name: container-build
           script: |
             #!/busybox/sh
