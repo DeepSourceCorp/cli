@@ -56,7 +56,12 @@
                 <input
                   aria-label="Seats"
                   id="seats-count"
-                  class="w-12 text-center bg-transparent focus:outline-none focus:ring focus:border-ink-100"
+                  class="
+                    w-12
+                    text-center
+                    bg-transparent
+                    focus:outline-none focus:ring focus:border-ink-100
+                  "
                   :value="seats"
                   @debounceInput="updateSeatsInStore"
                   @blur="(e) => updateSeatsInStore(e.target.value)"

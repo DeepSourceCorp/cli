@@ -2,7 +2,20 @@
   <div class="grid grid-cols-1 lg:grid-cols-16-fr">
     <!-- Analyzer Tab -->
     <div
-      class="z-20 flex flex-col justify-between px-2 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
+      class="
+        z-20
+        flex flex-col
+        justify-between
+        px-2
+        py-2
+        space-y-2
+        border-b
+        lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2
+        border-ink-200
+        lg:sticky lg:top-24
+        bg-ink-400
+        col-span-full
+      "
     >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"
@@ -26,7 +39,15 @@
           <h4 class="text-base font-bold leading-none text-vanilla-100">Happy with the results?</h4>
           <p class="mt-2 text-sm font-medium leading-snug">
             <span
-              class="text-opacity-50 bg-clip-text text-vanilla-100 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
+              class="
+                text-opacity-50
+                bg-clip-text
+                text-vanilla-100
+                bg-gradient-to-br
+                from-ink-200
+                to-ink-400
+                via-ink-300
+              "
             >
               To activate analysis with every pull request, please commit the configuration.
             </span>

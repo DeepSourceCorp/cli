@@ -9,7 +9,19 @@
         <div class="w-full flex flex-col space-y-2" v-if="repository.encPublicKey">
           <div class="h-36 relative">
             <z-textarea
-              class="w-full h-full p-2 text-xs bg-transparent border outline-none resize-none border-ink-200 text-vanilla-400 hide-scroll"
+              class="
+                w-full
+                h-full
+                p-2
+                text-xs
+                bg-transparent
+                border
+                outline-none
+                resize-none
+                border-ink-200
+                text-vanilla-400
+                hide-scroll
+              "
               v-model="this.repository.encPublicKey"
             >
             </z-textarea>

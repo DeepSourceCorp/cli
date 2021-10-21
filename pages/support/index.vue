@@ -175,12 +175,27 @@
                 <div
                   v-for="(uploadedFile, index) in uploadedFiles"
                   :key="index"
-                  class="bg-ink-300 py-2 px-4 mt-2 flex justify-between items-center rounded-sm text-vanilla-400"
+                  class="
+                    bg-ink-300
+                    py-2
+                    px-4
+                    mt-2
+                    flex
+                    justify-between
+                    items-center
+                    rounded-sm
+                    text-vanilla-400
+                  "
                 >
                   <span>{{ uploadedFile.filename }}</span>
                   <button
                     type="button"
-                    class="p-1 hover:bg-cherry-600 hover:bg-opacity-20 rounded-sm disabled:opacity-50"
+                    class="
+                      p-1
+                      hover:bg-cherry-600 hover:bg-opacity-20
+                      rounded-sm
+                      disabled:opacity-50
+                    "
                     :class="
                       isFileProcessing || isFormSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'
                     "

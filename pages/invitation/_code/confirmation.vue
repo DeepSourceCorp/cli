@@ -27,7 +27,20 @@
         </p>
         <button
           @click="confirm"
-          class="bg-ink-200 hover:bg-ink-300 rounded-md w-full text-vanilla-100 px-3 py-2 flex items-center space-x-2 group mt-2"
+          class="
+            bg-ink-200
+            hover:bg-ink-300
+            rounded-md
+            w-full
+            text-vanilla-100
+            px-3
+            py-2
+            flex
+            items-center
+            space-x-2
+            group
+            mt-2
+          "
         >
           <z-avatar
             v-if="viewer.avatar"

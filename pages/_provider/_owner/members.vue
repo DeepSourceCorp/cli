@@ -12,7 +12,17 @@
             <div v-if="pendingInvitesCount" class="flex items-center space-x-2">
               <span>Pending invites</span>
               <span
-                class="bg-cherry w-auto px-1.5 h-4 flex items-center justify-center rounded-full text-vanilla-100 text-xs"
+                class="
+                  bg-cherry
+                  w-auto
+                  px-1.5
+                  h-4
+                  flex
+                  items-center
+                  justify-center
+                  rounded-full
+                  text-vanilla-100 text-xs
+                "
                 >{{ pendingInvitesCount > 9 ? '9+' : pendingInvitesCount }}</span
               >
             </div>

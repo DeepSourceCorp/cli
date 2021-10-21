@@ -111,8 +111,20 @@
         </h3>
         <hr class="border-ink-200 flex-grow" />
         <nuxt-link
-          :to="`/directory/analyzers/${this.analyzer.shortcode || this.$route.params.analyzer}/issues`"
-          class="text-sm text-vanilla-400 flex items-center flex-shrink-0 leading-none hover:bg-ink-300 px-2 py-1 rounded-xs"
+          :to="`/directory/analyzers/${
+            this.analyzer.shortcode || this.$route.params.analyzer
+          }/issues`"
+          class="
+            text-sm text-vanilla-400
+            flex
+            items-center
+            flex-shrink-0
+            leading-none
+            hover:bg-ink-300
+            px-2
+            py-1
+            rounded-xs
+          "
         >
           View all
           <z-icon icon="arrow-up-right" color="vanilla-400" class="ml-0.5" />

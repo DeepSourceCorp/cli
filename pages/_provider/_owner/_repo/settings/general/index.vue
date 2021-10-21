@@ -142,7 +142,21 @@
               @click="toggleState()"
               @mouseenter="updateHoverStyle(true)"
               @mouseleave="updateHoverStyle(false)"
-              class="flex items-center justify-center space-x-2 self-end h-8 px-4 rounded-sm w-52 transition-all duration-150 ease-in-out font-medium"
+              class="
+                flex
+                items-center
+                justify-center
+                space-x-2
+                self-end
+                h-8
+                px-4
+                rounded-sm
+                w-52
+                transition-all
+                duration-150
+                ease-in-out
+                font-medium
+              "
               :class="{
                 'bg-transparent text-cherry border border-cherry': isRepoActivated && isHovered,
                 'bg-transparent text-juniper border border-juniper': !isRepoActivated && isHovered,

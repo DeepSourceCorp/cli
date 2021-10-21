@@ -11,7 +11,18 @@
         </span>
       </h4>
       <div
-        class="flex items-center p-1 px-2 space-x-2 text-sm border rounded-md border-ink-200 text-vanilla-400"
+        class="
+          flex
+          items-center
+          p-1
+          px-2
+          space-x-2
+          text-sm
+          border
+          rounded-md
+          border-ink-200
+          text-vanilla-400
+        "
         v-if="!repository.isAutofixEnabled"
       >
         <span
@@ -40,7 +51,15 @@
         <z-step class="w-full">
           <template slot="title">
             <div
-              class="mt-1 text-xs font-medium leading-snug tracking-wider uppercase text-vanilla-400"
+              class="
+                mt-1
+                text-xs
+                font-medium
+                leading-snug
+                tracking-wider
+                uppercase
+                text-vanilla-400
+              "
             >
               Analyzers
             </div>
@@ -60,7 +79,15 @@
         <z-step class="w-full">
           <template slot="title">
             <div
-              class="mt-1 text-xs font-medium leading-snug tracking-wider uppercase text-vanilla-400"
+              class="
+                mt-1
+                text-xs
+                font-medium
+                leading-snug
+                tracking-wider
+                uppercase
+                text-vanilla-400
+              "
             >
               Patterns
             </div>

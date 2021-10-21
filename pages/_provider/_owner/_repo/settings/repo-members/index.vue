@@ -49,7 +49,16 @@
       </transition-group>
       <div
         v-else
-        class="flex flex-col h-40 justify-center items-center space-y-2 border-ink-300 border-2 rounded-md border-dashed"
+        class="
+          flex flex-col
+          h-40
+          justify-center
+          items-center
+          space-y-2
+          border-ink-300 border-2
+          rounded-md
+          border-dashed
+        "
       >
         <template v-if="searchCandidate">
           <h3 class="text-lg font-semibold">We couldn't find {{ searchCandidate }}.</h3>

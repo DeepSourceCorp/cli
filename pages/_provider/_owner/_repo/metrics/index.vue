@@ -21,7 +21,16 @@
         ></div>
       </div>
       <div
-        class="col-span-1 -m-2 border-l lg:col-span-2 xl:col-span-3 2xl:col-span-4 border-ink-300 flex flex-col"
+        class="
+          col-span-1
+          -m-2
+          border-l
+          lg:col-span-2
+          xl:col-span-3
+          2xl:col-span-4
+          border-ink-300
+          flex flex-col
+        "
       >
         <div class="h-23 px-4 pt-4 flex items-start justify-between flex-shrink-0">
           <div class="bg-ink-300 rounded-md animate-pulse h-full w-28"></div>

@@ -4,11 +4,7 @@
     <div class="grid grid-cols-1 gap-y-4 w-full p-4">
       <template v-if="transformRuns">
         <template v-if="transformRuns.length">
-          <transform-branches
-            v-for="run in transformRuns"
-            :key="run.branchName"
-            :run="run"
-          >
+          <transform-branches v-for="run in transformRuns" :key="run.branchName" :run="run">
           </transform-branches>
         </template>
         <template v-else>No transforms</template>
@@ -60,7 +56,7 @@ export default class Transforms extends mixins(RepoDetailMixin) {
     this.$socket.$on('transformerrun-patches-ready', this.fetchTransformRuns)
     this.$socket.$on('repo-transform-created', this.fetchTransformRuns)
   }
-  
+
   beforeDestroy(): void {
     this.$socket.$off('transformerrun-patches-ready', this.fetchTransformRuns)
     this.$socket.$off('transformerrun-patches-ready', this.fetchTransformRuns)

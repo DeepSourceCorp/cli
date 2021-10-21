@@ -23,7 +23,20 @@
           </z-input>
           <div
             v-if="hideContents"
-            class="absolute top-0 flex items-center justify-center w-full h-full border backdrop-blur no-filter:bg-opacity-100 bg-ink-400 bg-opacity-10 border-ink-200"
+            class="
+              absolute
+              top-0
+              flex
+              items-center
+              justify-center
+              w-full
+              h-full
+              border
+              backdrop-blur
+              no-filter:bg-opacity-100
+              bg-ink-400 bg-opacity-10
+              border-ink-200
+            "
           >
             <div
               class="flex items-center space-x-2 text-sm leading-none cursor-pointer"
@@ -33,7 +46,21 @@
               <span>Reveal</span>
             </div>
             <button
-              class="absolute w-36 right-0.5 text-xs flex space-x-2 justify-center items-center p-2 bg-ink-300 text-vanilla-100 rounded-sm h-8"
+              class="
+                absolute
+                w-36
+                right-0.5
+                text-xs
+                flex
+                space-x-2
+                justify-center
+                items-center
+                p-2
+                bg-ink-300
+                text-vanilla-100
+                rounded-sm
+                h-8
+              "
               @click="copyDSN()"
             >
               <z-icon :icon="clipboardIcon" size="small"></z-icon>

@@ -3,7 +3,16 @@
     <!-- Left section -->
     <div class="flex items-center justify-center w-full xl:w-7/12 bg-ink-400">
       <div
-        class="flex flex-col items-center justify-center w-full h-full p-6 space-y-6 md:p-0 md:h-auto md:w-3/5"
+        class="
+          flex flex-col
+          items-center
+          justify-center
+          w-full
+          h-full
+          p-6
+          space-y-6
+          md:p-0 md:h-auto md:w-3/5
+        "
       >
         <div class="hidden w-full lg:block">
           <z-stepper>
@@ -24,7 +33,17 @@
           <!-- Analyzer Selection -->
           <section
             v-else
-            class="flex flex-col w-full h-auto p-3 space-y-3 rounded-md bg-ink-300 max-h-102 sm:h-4/5"
+            class="
+              flex flex-col
+              w-full
+              h-auto
+              p-3
+              space-y-3
+              rounded-md
+              bg-ink-300
+              max-h-102
+              sm:h-4/5
+            "
           >
             <!-- Heading -->
             <div class="flex items-center w-full space-x-2">
@@ -39,7 +58,15 @@
             <div class="text-xs tracking-wider uppercase text-vanilla-400">Suggested analyzer</div>
             <!-- Selected Analyzers -->
             <div
-              class="flex flex-col w-full py-1 space-y-2 overflow-x-scroll hide-scroll md:flex-row md:space-y-0 md:space-x-2"
+              class="
+                flex flex-col
+                w-full
+                py-1
+                space-y-2
+                overflow-x-scroll
+                hide-scroll
+                md:flex-row md:space-y-0 md:space-x-2
+              "
             >
               <!-- Analyzer Example -->
               <analyzer-card
@@ -58,7 +85,19 @@
               <!-- Empty Placeholder -->
               <div
                 v-if="selectedAnalyzers.length == 0"
-                class="box-border flex items-center h-24 p-6 text-sm text-center border border-dashed rounded-sm md:h-40 border-vanilla-400 md:min-w-1/2 md:w-1/2"
+                class="
+                  box-border
+                  flex
+                  items-center
+                  h-24
+                  p-6
+                  text-sm text-center
+                  border border-dashed
+                  rounded-sm
+                  md:h-40
+                  border-vanilla-400
+                  md:min-w-1/2 md:w-1/2
+                "
               >
                 <div>
                   Add new analyzer by clicking the

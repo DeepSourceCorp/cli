@@ -53,7 +53,10 @@
           </z-button>
         </a>
       </div>
-      <div class="px-4" v-if="!$fetchState.pending && parseArrayString(transformerRun.errors).length">
+      <div
+        class="px-4"
+        v-if="!$fetchState.pending && parseArrayString(transformerRun.errors).length"
+      >
         <run-error-box :errorsRendered="parseArrayString(transformerRun.errors)" />
       </div>
       <!-- Code Diff -->

@@ -1,7 +1,14 @@
 <template>
   <div class="container mx-auto">
     <div
-      class="text-vanilla-400 text-sm text-center flex flex-col justify-between min-h-screen pb-24 pt-32"
+      class="
+        text-vanilla-400 text-sm text-center
+        flex flex-col
+        justify-between
+        min-h-screen
+        pb-24
+        pt-32
+      "
     >
       <div class="space-y-2">
         <video class="max-w-xl mx-auto" poster="/installation-loader.png" autoplay>

@@ -11,7 +11,15 @@
     <!-- heading -->
     <div class="flex flex-col px-4 space-y-3">
       <div
-        class="items-center space-x-2 text-xs font-normal sm:flex lg:text-lg lg:leading-9 text-vanilla-400"
+        class="
+          items-center
+          space-x-2
+          text-xs
+          font-normal
+          sm:flex
+          lg:text-lg lg:leading-9
+          text-vanilla-400
+        "
       >
         <span class="text-lg font-bold text-vanilla-100">{{ title }}</span>
         <span class="inline md:flex" v-if="autofixRun.issue">{{ autofixRun.issue.shortcode }}</span>

@@ -3,7 +3,21 @@
     <!-- Left Section -->
     <div class="w-full xl:w-7/12 mx-auto bg-ink-400 flex flex-col justify-center items-center">
       <div
-        class="p-6 md:p-0 flex flex-col h-full md:h-auto w-full overflow-scroll md:overflow-hidden items-center justify-center md:w-3/5 2xl:gap-y-16 sm:gap-y-8"
+        class="
+          p-6
+          md:p-0
+          flex flex-col
+          h-full
+          md:h-auto
+          w-full
+          overflow-scroll
+          md:overflow-hidden
+          items-center
+          justify-center
+          md:w-3/5
+          2xl:gap-y-16
+          sm:gap-y-8
+        "
       >
         <!-- Stepper Component -->
         <div class="w-full hidden md:block">
@@ -28,7 +42,14 @@
           <div class="w-full pb-12 md:pb-0 grid grid-cols-1 md:grid-cols-2 auto-rows-max gap-4">
             <div
               v-for="issue in issueTypes"
-              class="p-3 cursor-pointer rounded-md border border-ink-300 transition-all duration-100"
+              class="
+                p-3
+                cursor-pointer
+                rounded-md
+                border border-ink-300
+                transition-all
+                duration-100
+              "
               :key="issue.name"
               :class="issue.isChecked ? 'bg-ink-300' : 'bg-ink-400 '"
               @click.prevent="issue.isChecked = !issue.isChecked"

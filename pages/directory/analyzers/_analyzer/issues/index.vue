@@ -1,7 +1,16 @@
 <template>
   <div>
     <div
-      class="px-4 py-3 flex gap-x-2 items-center border-b border-ink-200 flex-row-reverse lg:flex-row"
+      class="
+        px-4
+        py-3
+        flex
+        gap-x-2
+        items-center
+        border-b border-ink-200
+        flex-row-reverse
+        lg:flex-row
+      "
     >
       <div
         class="border border-ink-200 rounded-md duration-300 ease-in-out"

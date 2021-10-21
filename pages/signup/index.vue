@@ -3,7 +3,18 @@
     <div class="grid grid-cols-1 md:grid-cols-2 text-vanilla-100 min-h-screen">
       <div class="flex flex-col justify-center h-full">
         <div
-          class="flex flex-col justify-between space-y-16 max-w-md mx-auto text-center lg:text-left px-6 py-24 lg:px-0 lg:py-0"
+          class="
+            flex flex-col
+            justify-between
+            space-y-16
+            max-w-md
+            mx-auto
+            text-center
+            lg:text-left
+            px-6
+            py-24
+            lg:px-0 lg:py-0
+          "
         >
           <div class="space-y-8">
             <img
@@ -15,7 +26,14 @@
               Join the world's best developers
             </h1>
             <div
-              class="flex flex-col items-center mt-8 space-y-4 left-section__btn-group sm:mt-16 sm:items-start"
+              class="
+                flex flex-col
+                items-center
+                mt-8
+                space-y-4
+                left-section__btn-group
+                sm:mt-16 sm:items-start
+              "
             >
               <a
                 v-for="opt in loginOptions"
@@ -24,7 +42,17 @@
                 class="flex items-center w-full left-section__btn"
               >
                 <button
-                  class="p-2 text-vanilla-100 w-full space-x-2 flex items-center rounded-sm justify-center hover:bg-opacity-90"
+                  class="
+                    p-2
+                    text-vanilla-100
+                    w-full
+                    space-x-2
+                    flex
+                    items-center
+                    rounded-sm
+                    justify-center
+                    hover:bg-opacity-90
+                  "
                   :class="opt.bg"
                 >
                   <z-icon :icon="opt.icon" />
@@ -95,22 +123,19 @@ export interface Testimonial {
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    body:
-      "DeepSource has made the code base <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'> much more stable and dependable</span>. It allowed us to identify many more areas for improvement.",
+    body: "DeepSource has made the code base <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'> much more stable and dependable</span>. It allowed us to identify many more areas for improvement.",
     author: 'Piero Molino',
     company: 'Uber',
     avatar: 'testimonials/piero.png'
   },
   {
-    body:
-      "DeepSource provides a very nice <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'>overview of issues</span> in our code.",
+    body: "DeepSource provides a very nice <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'>overview of issues</span> in our code.",
     author: 'Michal Čihař',
     company: 'Weblate',
     avatar: 'testimonials/michal.png'
   },
   {
-    body:
-      "DeepSource complements projects looking to embrace CI and source code quality as part of a larger DevOps strategy. It's been <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'>very easy and a pleasure to use.</span>",
+    body: "DeepSource complements projects looking to embrace CI and source code quality as part of a larger DevOps strategy. It's been <span class='bg-clip-text bg-gradient-to-r from-lavender to-pink text-transparent'>very easy and a pleasure to use.</span>",
     author: 'Lewis McGibbney',
     company: 'NASA',
     avatar: 'testimonials/lewis.png'
