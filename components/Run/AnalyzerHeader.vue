@@ -1,19 +1,27 @@
 <template>
   <!-- Header -->
-  <div class="flex w-full rounded-sm flex-1 min-h-24">
+  <div class="flex flex-1 w-full rounded-sm min-h-24">
     <!-- Left Section -->
-    <div class="w-3/5 md:w-4/5 py-2 flex flex-col space-y-1 justify-evenly">
+    <div class="flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly">
       <!-- heading -->
       <div
-        class="flex text-xs lg:text-lg lg:leading-9 text-vanilla-400 font-normal items-center space-x-2"
+        class="
+          flex
+          items-center
+          space-x-2
+          text-xs
+          font-normal
+          lg:text-lg lg:leading-9
+          text-vanilla-400
+        "
       >
         <!-- Issue title -->
         <z-icon :icon="icon" size="small" color="transparent" />
         <!-- Issue ID -->
-        <span class="text-base font-bold text-vanilla-100">{{ title }}</span>
+        <span class="text-base font-bold text-vanilla-100">{{ toSentenceCase(title) }}</span>
       </div>
       <!-- Description -->
-      <div class="sm:flex space-x-6">
+      <div class="space-x-6 sm:flex">
         <!-- Found -->
         <div class="flex items-center space-x-2">
           <z-icon
@@ -29,17 +37,17 @@
           <span v-else class="text-sm text-vanilla-400">{{ statusDescription }} </span>
         </div>
         <!-- Issue type -->
-        <div v-if="alertingMetricsCount" class="hidden md:flex items-center space-x-2">
+        <div v-if="alertingMetricsCount" class="items-center hidden space-x-2 md:flex">
           <z-icon icon="bar-chart" size="small" color="honey" />
           <span class="text-xs sm:text-sm text-vanilla-400">{{ alertingMetricsMessage }}</span>
         </div>
       </div>
     </div>
     <!-- Right Section -->
-    <div v-if="status !== 'PEND'" class="relative w-2/5 md:w-1/5 p-4">
-      <div class="flex justify-around items-center">
+    <div v-if="status !== 'PEND'" class="relative w-2/5 p-4 md:w-1/5">
+      <div class="flex items-center justify-around">
         <!-- introduced issues -->
-        <div class="flex flex-col space-y-1 items-center">
+        <div class="flex flex-col items-center space-y-1">
           <div
             v-tooltip="
               `${issuesRaisedCount > 1000 ? formatIntl(issuesRaisedCount) : ''} issues introduced`
@@ -52,7 +60,7 @@
           <div class="text-xs text-vanilla-400">introduced</div>
         </div>
         <!-- resolved issues -->
-        <div class="flex flex-col space-y-1 items-center">
+        <div class="flex flex-col items-center space-y-1">
           <div
             v-tooltip="
               `${issuesResolvedCount > 1000 ? formatIntl(issuesResolvedCount) : ''} issues resolved`
@@ -70,10 +78,11 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
 import { RunStatus } from '~/types/types'
-import { shortenLargeNumber, formatIntl } from '~/utils/string'
+import { formatIntl, shortenLargeNumber, toSentenceCase } from '~/utils/string'
 
 @Component({
   components: {
@@ -102,8 +111,9 @@ export default class AnalyzerHeader extends Vue {
   @Prop({ default: 0 })
   alertingMetricsCount: number
 
-  public shortenNumber = shortenLargeNumber
   public formatIntl = formatIntl
+  public shortenNumber = shortenLargeNumber
+  public toSentenceCase = toSentenceCase
 
   get alertingMetricsMessage(): string {
     if (this.alertingMetricsCount === 1) {

@@ -35,7 +35,7 @@
             :isActive="currentAnalyzer == check.analyzer.shortcode"
             border-active-color="vanilla-400"
           >
-            {{ check.analyzer.name }}
+            {{ toSentenceCase(check.analyzer.name) }}
             <z-tag
               text-size="xxs"
               spacing="px-1.5 py-0.5 items-center"
@@ -51,12 +51,14 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import LinkToPrev from '@/components/LinkToPrev.vue'
 import { ZTab, ZTag } from '@deepsourcelabs/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
 import { SubNav } from '@/components/History'
-import { GistCardTitle, GistCardDescription } from '@/components/Repository'
+import LinkToPrev from '@/components/LinkToPrev.vue'
+import { GistCardDescription, GistCardTitle } from '@/components/Repository'
 import { Check, RunStatus } from '~/types/types'
+import { toSentenceCase } from '~/utils/string'
 
 @Component({
   components: {
@@ -105,6 +107,8 @@ export default class RunHeader extends Vue {
 
   @Prop({ default: '' })
   currentAnalyzer: string
+
+  public toSentenceCase = toSentenceCase
 
   get statusIcon(): string {
     const types: Record<string, string> = {
