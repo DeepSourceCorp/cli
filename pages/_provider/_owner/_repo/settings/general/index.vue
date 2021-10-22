@@ -179,9 +179,9 @@
       </div>
     </form-group>
 
-    <z-divider margin="my-2 mx-0" />
+    <z-divider v-if="!repository.isPrivate" margin="my-2 mx-0" />
 
-    <form-group>
+    <form-group v-if="!repository.isPrivate">
       <div class="relative">
         <button-input
           label="Add to discover"
@@ -192,12 +192,12 @@
         >
           <template slot="description">
             Add your repository to
-            <nuxt-link to="/discover" class="text-juniper font-medium">Discover</nuxt-link> to allow
+            <nuxt-link to="/discover" class="font-medium text-juniper">Discover</nuxt-link> to allow
             others to find issues and fix them.
           </template>
         </button-input>
 
-        <div class="absolute top-0 left-full px-4">
+        <div class="absolute top-0 px-4 left-full">
           <info-banner
             info="Control whether your repository is listed on Discover. Once listed, other users would be able to find your repository, and look at the detected issues."
           />
