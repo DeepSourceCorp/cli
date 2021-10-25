@@ -18,7 +18,7 @@
         <!-- Issue title -->
         <z-icon :icon="icon" size="small" color="transparent" />
         <!-- Issue ID -->
-        <span class="text-base font-bold text-vanilla-100">{{ toSentenceCase(title) }}</span>
+        <span class="text-base font-bold text-vanilla-100">{{ title }}</span>
       </div>
       <!-- Description -->
       <div class="space-x-6 sm:flex">
@@ -82,7 +82,7 @@ import { ZIcon } from '@deepsourcelabs/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { RunStatus } from '~/types/types'
-import { formatIntl, shortenLargeNumber, toSentenceCase } from '~/utils/string'
+import { formatIntl, shortenLargeNumber } from '~/utils/string'
 
 @Component({
   components: {
@@ -113,7 +113,6 @@ export default class AnalyzerHeader extends Vue {
 
   public formatIntl = formatIntl
   public shortenNumber = shortenLargeNumber
-  public toSentenceCase = toSentenceCase
 
   get alertingMetricsMessage(): string {
     if (this.alertingMetricsCount === 1) {

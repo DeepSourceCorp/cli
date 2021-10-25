@@ -35,7 +35,7 @@
             :isActive="currentAnalyzer == check.analyzer.shortcode"
             border-active-color="vanilla-400"
           >
-            {{ toSentenceCase(check.analyzer.name) }}
+            {{ check.analyzer.name }}
             <z-tag
               text-size="xxs"
               spacing="px-1.5 py-0.5 items-center"
@@ -58,7 +58,6 @@ import { SubNav } from '@/components/History'
 import LinkToPrev from '@/components/LinkToPrev.vue'
 import { GistCardDescription, GistCardTitle } from '@/components/Repository'
 import { Check, RunStatus } from '~/types/types'
-import { toSentenceCase } from '~/utils/string'
 
 @Component({
   components: {
@@ -107,8 +106,6 @@ export default class RunHeader extends Vue {
 
   @Prop({ default: '' })
   currentAnalyzer: string
-
-  public toSentenceCase = toSentenceCase
 
   get statusIcon(): string {
     const types: Record<string, string> = {
