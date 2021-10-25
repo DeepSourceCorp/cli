@@ -5217,7 +5217,7 @@ export type Unnamed_57_Query = (
   { __typename?: 'Query' }
   & { analyzer?: Maybe<(
     { __typename?: 'Analyzer' }
-    & Pick<Analyzer, 'analyzerLogo' | 'description' | 'issueTypeDistribution' | 'category' | 'version' | 'updatedOn' | 'exampleConfig' | 'issuesCount' | 'autofixableIssuesCount' | 'documentationUrl' | 'discussUrl'>
+    & Pick<Analyzer, 'name' | 'analyzerLogo' | 'description' | 'issueTypeDistribution' | 'category' | 'version' | 'updatedOn' | 'exampleConfig' | 'issuesCount' | 'autofixableIssuesCount' | 'documentationUrl' | 'discussUrl'>
     & { starIssues: (
       { __typename?: 'IssueConnection' }
       & { edges: Array<Maybe<(
@@ -7208,7 +7208,7 @@ export type Unnamed_122_Query = (
       { __typename?: 'TransformerToolEdge' }
       & { node?: Maybe<(
         { __typename?: 'TransformerTool' }
-        & Pick<TransformerTool, 'name' | 'owner' | 'descriptionRendered' | 'updatedOn' | 'language' | 'version' | 'shortcode' | 'publishedOn' | 'createdAt'>
+        & Pick<TransformerTool, 'name' | 'owner' | 'descriptionRendered' | 'updatedOn' | 'language' | 'version' | 'shortcode' | 'publishedOn' | 'logo' | 'createdAt'>
         & { analyzer?: Maybe<(
           { __typename?: 'Analyzer' }
           & Pick<Analyzer, 'analyzerLogo'>

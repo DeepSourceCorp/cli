@@ -6,6 +6,7 @@ export default class MetaMixin extends Vue {
   metaDescription = ''
   metaImage = ''
   metaImageAlt = ''
+  metaTwitterSiteAttribution = '@DeepSourceHQ'
 
   get pageImageAltText(): string {
     return this.metaImageAlt || this.metaTitle
@@ -44,9 +45,10 @@ export default class MetaMixin extends Vue {
       { hid: 'twitter:title', name: 'twitter:title', content: this.metaTitle },
       { hid: 'twitter:description', name: 'twitter:description', content: this.metaDescription },
       { hid: 'twitter:url', property: 'twitter:url', content: this.pageUrl },
+      { hid: 'twitter:site', name: 'twitter:site', content: this.metaTwitterSiteAttribution },
       ...(this.metaImage
         ? [
-            { hid: 'twitter:card', property: 'twitter:card', content: 'summary_large_image' },
+            { hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image' },
             { hid: 'twitter:image', property: 'twitter:image', content: this.metaImage },
             { hid: 'twitter:image:alt', name: 'twitter:image:alt', content: this.pageImageAltText }
           ]

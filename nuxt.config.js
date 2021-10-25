@@ -24,6 +24,9 @@ function toBool(item) {
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
+    htmlAttrs: {
+      lang: 'en'
+    },
     title: 'DeepSource',
     bodyAttrs: {
       class: 'antialiased stroke-2'
@@ -38,7 +41,7 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { hid: 'og:type', content: 'website' }
+      { hid: 'og:type', property: 'og:type', content: 'website' }
     ],
     link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon/default.svg' }]
   },

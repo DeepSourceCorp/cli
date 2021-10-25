@@ -85,10 +85,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace } from 'nuxt-property-decorator'
+import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
 import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
 
+import MetaMixin from '~/mixins/metaMixin'
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { Analyzer, TransformerTool } from '~/types/types'
 
@@ -99,7 +100,7 @@ const directoryStore = namespace('directory/directory')
   layout: 'sidebar-only',
   scrollToTop: true
 })
-export default class AnalyzersDirectory extends Vue {
+export default class AnalyzersDirectory extends mixins(MetaMixin) {
   @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
   analyzerList: Analyzer[]
 
@@ -115,6 +116,15 @@ export default class AnalyzersDirectory extends Vue {
   public searchTerm = ''
   public areAnalyzersLoading = false
   public areTransformersLoading = false
+
+  created() {
+    this.metaTitle = `Directory • DeepSource`
+    this.metaDescription =
+      'Documentation, links, and a smart search experience for all our Analyzers and Transformers.'
+    this.metaImage = require('~/assets/images/analyzer-dir/directory_meta_banner.png')
+    this.metaImageAlt =
+      'An image with the text DeepSource | Directory with logos of Python, JavaScript, Ruby, Docker, Go, Prettier and Black in the background indicating that our analyzers support them.'
+  }
 
   async fetch(): Promise<void> {
     this.areAnalyzersLoading = true
@@ -146,14 +156,6 @@ export default class AnalyzersDirectory extends Vue {
   searchDir(val: string): void {
     this.searchTerm = val
     this.filterResults()
-  }
-
-  head(): Record<string, string> {
-    return {
-      title: `Directory • DeepSource`,
-      description:
-        'Documentation, links, and a smart search experience for all our Analyzers and Transformers.'
-    }
   }
 }
 </script>

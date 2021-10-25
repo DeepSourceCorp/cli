@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-full flex flex-col">
+  <div class="flex flex-col min-h-full">
     <directory-header
       :info-obj="analyzer"
       :heading-level="isIssuesPage ? 'h1' : 'h2'"
@@ -10,7 +10,7 @@
     <div class="flex flex-grow">
       <div
         v-if="analyzer && analyzer.issues"
-        class="w-full max-w-min border-r border-ink-200 p-4 text-sm hidden lg:block"
+        class="hidden w-full p-4 text-sm border-r max-w-min border-ink-200 lg:block"
       >
         <analyzer-issues-filter
           :active-filter="issueCategory"
@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, namespace, Watch } from 'nuxt-property-decorator'
+import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
 
 import { ZButton, ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
 
@@ -53,6 +53,7 @@ import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { Analyzer, Issue } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 import IssueTypeT from '~/types/issueDistribution'
+import MetaMixin from '~/mixins/metaMixin'
 
 const directoryStore = namespace('directory/directory')
 
@@ -70,7 +71,7 @@ interface IssuesFilterT {
   layout: 'sidebar-only',
   scrollToTop: true
 })
-export default class AnalyzerDirectoryDetails extends Vue {
+export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
   analyzerList: Analyzer[]
 
@@ -95,6 +96,12 @@ export default class AnalyzerDirectoryDetails extends Vue {
   private perPageCount = 5
   private currentPage = 1
   private filterVisible = true
+
+  created() {
+    this.metaImage = require('~/assets/images/analyzer-dir/directory_meta_banner.png')
+    this.metaImageAlt =
+      'An image with the text DeepSource | Directory with logos of Python, JavaScript, Ruby, Docker, Go, Prettier and Black in the background indicating that our analyzers support them.'
+  }
 
   async fetch(): Promise<void> {
     const shortcode = this.$route.params.analyzer

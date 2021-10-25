@@ -2,18 +2,18 @@
   <div>
     <div
       class="
+        flex flex-row-reverse
+        items-center
         px-4
         py-3
-        flex
+        border-b
         gap-x-2
-        items-center
-        border-b border-ink-200
-        flex-row-reverse
+        border-ink-200
         lg:flex-row
       "
     >
       <div
-        class="border border-ink-200 rounded-md duration-300 ease-in-out"
+        class="duration-300 ease-in-out border rounded-md border-ink-200"
         :class="
           onlyAutofix
             ? 'border-solid bg-vanilla-100 bg-opacity-5'
@@ -29,12 +29,12 @@
           @click="filterByAutofixable"
         >
           <z-icon icon="autofix" size="small" color="vanilla-200" />
-          <span class="truncate px-1">Filter by Autofix</span>
+          <span class="px-1 truncate">Filter by Autofix</span>
           <z-icon
             icon="plus"
             size="small"
             color="vanilla-200"
-            class="transform duration-75"
+            class="duration-75 transform"
             :class="{
               'rotate-45': onlyAutofix
             }"
@@ -64,9 +64,9 @@
         :issue="issue"
         :issue-type-title="issueTypeTitles[issue.issueType]"
         :analyzer-url="analyzerUrl"
-        class="mb-3 block"
+        class="block mb-3"
       />
-      <div class="mt-6 flex justify-center text-sm">
+      <div class="flex justify-center mt-6 text-sm">
         <z-pagination
           v-if="totalPageCount > 1"
           :page="currentPage"
@@ -87,19 +87,20 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'nuxt-property-decorator'
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
 
 import { ZButton, ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
 
 import { Analyzer, Issue } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
+import MetaMixin from '~/mixins/metaMixin'
 
 @Component({
   components: { ZButton, ZIcon, ZInput, ZPagination },
   layout: 'sidebar-only',
   scrollToTop: true
 })
-export default class AnalyzerDirectoryDetails extends Vue {
+export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   @Prop()
   analyzer!: Analyzer
 
@@ -117,6 +118,11 @@ export default class AnalyzerDirectoryDetails extends Vue {
 
   private onlyAutofix = false
   private searchTerm = ''
+
+  created() {
+    this.metaTitle = `Issues • ${this.analyzer.name} Analyzer by DeepSource`
+    this.metaDescription = this.getMetaDescription(this.analyzer)
+  }
 
   get analyzerUrl(): string {
     return `/directory/analyzers/${this.analyzer.shortcode || this.$route.params.analyzer}`
@@ -144,6 +150,18 @@ export default class AnalyzerDirectoryDetails extends Vue {
 
   updatePageNum(val: number): void {
     this.$emit('update-page', val)
+  }
+
+  getMetaDescription(analyzer: Analyzer): string {
+    if (analyzer.shortcode === 'test-coverage')
+      return "DeepSource's Test Coverage Analyzer tracks the test coverage of your code. Learn all about it here."
+    if (analyzer.shortcode === 'secrets')
+      return "DeepSource's Secrets Analyzer runs continuous static analysis on your code and helps you find various security issues. Learn all about it here."
+    return `DeepSource's ${analyzer.name} Analyzer continuously analyzes your ${
+      analyzer.name
+    } code and helps you find${
+      analyzer.autofixableIssuesCount ? ' and fix' : ''
+    } various code quality issues. Learn all about it here.`
   }
 }
 </script>
