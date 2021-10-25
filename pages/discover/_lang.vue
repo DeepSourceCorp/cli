@@ -1,13 +1,6 @@
 <template>
   <div class="pb-8">
-    <div class="p-4 border-b border-ink-200">
-      <z-breadcrumb separator="/" class="mb-px text-sm text-vanilla-100">
-        <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
-          <nuxt-link to="/discover">Discover</nuxt-link>
-        </z-breadcrumb-item>
-        <z-breadcrumb-item>{{ analyzerName }}</z-breadcrumb-item>
-      </z-breadcrumb>
-    </div>
+    <breadcrumb-container :current-item="analyzerName" />
 
     <hero-header
       :title="analyzerName ? `Discover ${analyzerName} projects` : 'Discover'"
@@ -76,18 +69,7 @@
 </template>
 
 <script lang="ts">
-import {
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZIcon,
-  ZInput,
-  ZTabItem,
-  ZTabList,
-  ZTabPane,
-  ZTabPanes,
-  ZTabs
-} from '@deepsourcelabs/zeal'
-
+import { ZIcon, ZInput, ZTabItem, ZTabList, ZTabPane, ZTabPanes, ZTabs } from '@deepsourcelabs/zeal'
 import { Context } from '@nuxt/types'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
@@ -113,8 +95,6 @@ const discoverRepositoriesStore = namespace('discover/repositories')
     ZTabPane,
     ZTabPanes,
     ZTabItem,
-    ZBreadcrumb,
-    ZBreadcrumbItem,
     EditorsPick,
     Trending
   },

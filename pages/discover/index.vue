@@ -1,5 +1,7 @@
 <template>
   <div class="pb-8">
+    <breadcrumb-container current-item="All" />
+
     <hero-header
       title="Discover"
       class="discover-mobile-hero md:discover-hero"

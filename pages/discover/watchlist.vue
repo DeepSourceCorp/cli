@@ -1,13 +1,6 @@
 <template>
   <div class="pb-8">
-    <div class="p-4 border-b border-ink-200">
-      <z-breadcrumb separator="/" class="mb-px text-sm text-vanilla-100">
-        <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
-          <nuxt-link to="/discover">Discover</nuxt-link>
-        </z-breadcrumb-item>
-        <z-breadcrumb-item>Watchlist</z-breadcrumb-item>
-      </z-breadcrumb>
-    </div>
+    <breadcrumb-container current-item="Watchlist" />
 
     <hero-header
       title="Watchlist"
@@ -24,17 +17,12 @@
 </template>
 
 <script lang="ts">
-import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
 import { Context } from '@nuxt/types'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import MetaMixin from '~/mixins/metaMixin'
 
 @Component({
-  components: {
-    ZBreadcrumb,
-    ZBreadcrumbItem
-  },
   middleware: [
     'disableDiscoverOnPrem',
     ({ redirect, store }: Context) => {

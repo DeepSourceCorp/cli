@@ -1,20 +1,38 @@
 <template>
   <aside
-    class="absolute flex flex-col h-screen duration-200 border-r transition-width transform-gpu lg:relative lg:left-0 border-ink-200 group bg-ink-400"
+    class="
+      absolute
+      flex flex-col
+      h-screen
+      duration-200
+      border-r
+      transition-width
+      transform-gpu
+      lg:relative lg:left-0
+      border-ink-200
+      group
+      bg-ink-400
+    "
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
     <section class="px-3 py-4 border-b border-ink-200">
       <nuxt-link to="/discover">
-        <img
-          class="w-auto h-5 mt-0.5 mx-auto"
-          src="~/assets/images/logo-wordmark-white.svg"
-          alt="DeepSource"
-        />
+        <img class="h-5 mt-0.5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
       </nuxt-link>
     </section>
     <section
-      class="flex flex-col justify-between flex-grow h-full p-3 space-y-3 overflow-y-scroll hide-scroll border-ink-200"
+      class="
+        flex flex-col
+        justify-between
+        flex-grow
+        h-full
+        p-3
+        space-y-3
+        overflow-y-scroll
+        hide-scroll
+        border-ink-200
+      "
     >
       <div class="space-y-3">
         <sidebar-item
@@ -38,7 +56,15 @@
         </sidebar-item>
         <div>
           <span
-            class="ml-0.5 text-xs leading-none font-medium tracking-wider uppercase text-vanilla-400"
+            class="
+              ml-0.5
+              text-xs
+              leading-none
+              font-medium
+              tracking-wider
+              uppercase
+              text-vanilla-400
+            "
           >
             Filter by technology
           </span>
@@ -47,10 +73,22 @@
               <nuxt-link
                 v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
                 :key="analyzer.id"
-                class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
+                class="
+                  inline-flex
+                  items-center
+                  justify-center
+                  px-2
+                  py-1
+                  mb-0.5
+                  mr-0.5
+                  space-x-1
+                  text-sm
+                  rounded-full
+                  cursor-pointer
+                "
                 :class="[
                   $route.params.lang === analyzer.shortcode
-                    ? 'bg-gradient-dawn'
+                    ? 'bg-robin'
                     : 'bg-ink-200 hover:bg-ink-100 bg-opacity-80 text-vanilla-400'
                 ]"
                 :to="
@@ -60,12 +98,7 @@
                 "
                 role="button"
               >
-                <img
-                  v-if="analyzer.analyzerLogo"
-                  :src="analyzer.analyzerLogo"
-                  :alt="analyzer.name"
-                  class="flex-shrink-0 w-auto h-4"
-                />
+                <analyzer-logo :shortcode="analyzer.shortcode" />
                 <span class="text-xs"> {{ analyzer.name }} </span>
               </nuxt-link>
             </template>

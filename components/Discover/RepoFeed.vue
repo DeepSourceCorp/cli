@@ -21,7 +21,7 @@
       </repo-card>
     </div>
     <div v-else>
-      <lazy-empty-state title="No results found" />
+      <lazy-empty-state title="No results found" class="font-medium text-vanilla-400" />
     </div>
   </section>
 </template>

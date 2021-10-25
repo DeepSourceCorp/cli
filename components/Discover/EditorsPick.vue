@@ -2,8 +2,13 @@
   <div v-if="editorsPickRepository.id">
     <section-header title="Editor's pick" />
 
-    <div class="p-0.5 rounded-lg bg-gradient-dawn">
-      <repo-card :show-info="false" :repo-info="editorsPickRepository" class="bg-ink-400" />
+    <div class="p-0.5 rounded-md bg-gradient-dawn">
+      <repo-card
+        :remove-default-style="true"
+        :show-info="false"
+        :repo-info="editorsPickRepository"
+        class="rounded-sm bg-ink-400"
+      />
     </div>
   </div>
 </template>

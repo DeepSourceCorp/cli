@@ -1,5 +1,12 @@
 <template>
-  <base-card :to="issuesPageUrl" :show-info="showInfo">
+  <base-card :to="issuesPageUrl" :remove-default-style="removeDefaultStyle" :show-info="showInfo">
+    <template v-if="repoInfo.hasHacktoberfestEnabled" slot="header">
+      <div class="pl-1">
+        <img class="inline h-3.5 mr-0.5" src="~/assets/images/hacktoberfest.svg" />
+        <span class="leading-none text-vanilla-300"> Hacktoberfest </span>
+      </div>
+    </template>
+
     <template slot="title">
       <div class="font-normal text-vanilla-400" :class="showInfo ? 'text-lg' : 'text-base'">
         <div class="inline mr-2">
@@ -45,7 +52,7 @@
         </div>
         <div class="flex flex-wrap gap-3">
           <div v-if="repoInfo.primaryAnalyzer" class="flex items-center space-x-1">
-            <img :src="repoInfo.primaryAnalyzer.analyzerLogo" alt="Analyzer" class="w-5 h-5" />
+            <analyzer-logo :shortcode="repoInfo.primaryAnalyzer.shortcode" />
             <span class="text-sm tracking-wide text-vanilla-400">{{
               repoInfo.primaryAnalyzer.name
             }}</span>
@@ -59,16 +66,6 @@
               </span>
             </slot>
           </div>
-          <div class="w-auto">
-            <div
-              v-tooltip="'This repository is accepting Hacktoberfest contributions'"
-              class="flex items-center px-3 py-1.5 space-x-1 rounded-full bg-ink-200 w-auto"
-              v-if="repoInfo.hasHacktoberfestEnabled"
-            >
-              <img class="w-auto h-3.5 mr-0.5" src="~/assets/images/hacktoberfest.svg" />
-              <span class="text-sm leading-none text-vanilla-300"> Hacktoberfest </span>
-            </div>
-          </div>
         </div>
       </div>
     </template>
@@ -76,7 +73,17 @@
     <template slot="info">
       <div class="hidden h-full md:flex">
         <div
-          class="flex-col justify-center flex-grow hidden py-4 text-xs leading-none lg:space-y-2 sm:flex"
+          class="
+            flex-col
+            justify-center
+            flex-grow
+            hidden
+            py-4
+            text-xs
+            leading-none
+            lg:space-y-2
+            sm:flex
+          "
         >
           <div class="text-center heading3 text-vanilla-100">
             {{ shortenNumber(repoInfo.recommendedIssueCount) }}
@@ -134,6 +141,9 @@ export default class RepoCard extends mixins(AuthMixin) {
     refetch?: boolean
     repoId: Scalars['ID']
   }) => Promise<void>
+
+  @Prop({ default: false })
+  removeDefaultStyle: boolean
 
   @Prop({ required: true })
   repoInfo: Maybe<Repository>
