@@ -1,11 +1,25 @@
 <template>
   <span
     v-if="trendValue"
-    class="flex items-center p-1 space-x-1 text-xs font-semibold leading-none text-center rounded-md bg-opacity-10 cursor"
+    class="
+      flex
+      items-center
+      p-1
+      space-x-1
+      text-xs
+      font-semibold
+      leading-none
+      text-center
+      rounded-md
+      bg-opacity-10
+      cursor
+    "
     :class="bgClass"
   >
     <z-icon v-if="icon" :icon="icon" :color="iconColor" size="small"></z-icon>
-    <span class="leading-none"> {{ trendSign }}{{ valueDisplay }} {{ trendHint }} </span>
+    <span class="leading-none">
+      <span v-html="trendSign"></span> {{ valueDisplay }} {{ trendHint }}
+    </span>
   </span>
 </template>
 <script lang="ts">
@@ -42,11 +56,11 @@ export default class CodeQualityGraph extends Vue {
       return ''
     }
     if (this.trendDirection === 'up') {
-      return '+'
+      return '&#9650;'
     }
 
     if (this.trendDirection === 'down') {
-      return '-'
+      return '&#9660;'
     }
 
     return ''

@@ -52,7 +52,17 @@
       >
         <!-- Occurence count and Trend  -->
         <div
-          class="flex-col items-center justify-center flex-grow hidden text-xs leading-none lg:space-y-2 sm:flex"
+          class="
+            flex-col
+            items-center
+            justify-center
+            flex-grow
+            hidden
+            text-xs
+            leading-none
+            lg:space-y-2
+            sm:flex
+          "
           :class="{ 'py-4': !showTrend, 'py-2': showTrend }"
         >
           <!-- Count -->
@@ -69,7 +79,8 @@
                 'text-cherry': !isTrendPositive,
                 'text-juniper': isTrendPositive
               }"
-              >{{ `${isTrendPositive ? '-' : '+'}${trendValue}%` }}</span
+              ><span v-html="isTrendPositive ? '&#9660;' : '&#9650;'"></span>
+              {{ `${trendValue}%` }}</span
             >
             since last week
           </div>
@@ -79,7 +90,18 @@
           v-if="autofixAvailable && showAutofixButton"
           @click.stop.prevent="handleClick()"
           :disabled="disableAutofixButton"
-          class="flex items-center justify-center w-full h-auto p-2 border-t sm:space-x-2 border-ink-300 group-hover:border-ink-200"
+          class="
+            flex
+            items-center
+            justify-center
+            w-full
+            h-auto
+            p-2
+            border-t
+            sm:space-x-2
+            border-ink-300
+            group-hover:border-ink-200
+          "
           :class="{
             'cursor-pointer hover:bg-ink-200': !disableAutofixButton
           }"
