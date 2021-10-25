@@ -176,6 +176,7 @@ export default {
 
   sitemap: {
     path: '/sitemap-bifrost.xml',
+    hostname: 'https://deepsource.io',
     gzip: true,
     exclude: [
       '/',
