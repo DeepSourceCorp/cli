@@ -90,6 +90,7 @@
               "
             >
               Patterns
+              <z-tag text-size="xxs" class="ml-2 text-vanilla-400">Optional</z-tag>
             </div>
           </template>
           <template slot="description">
