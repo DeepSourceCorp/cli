@@ -202,7 +202,7 @@ export default class Issues extends mixins(
     // load query params from URL
     this.queryParams = {
       page: query.page ? Number(query.page) : null,
-      category: query.category || 'recommended',
+      category: query.category,
       analyzer: query.analyzer || 'all',
       q: query.q || null,
       sort: query.sort || null,
@@ -245,7 +245,7 @@ export default class Issues extends mixins(
   }
 
   async fetchIssuesForOwner(refetch = false): Promise<void> {
-    const { q, page, sort, analyzer, category, autofixAvailable, all } = this.parsedParams
+    const { q, page, sort, analyzer, autofixAvailable } = this.parsedParams
     await this.fetchIssueTypeDistribution({
       ...this.baseRouteParams,
       q,
@@ -254,6 +254,21 @@ export default class Issues extends mixins(
       autofixAvailable: autofixAvailable as boolean | null,
       refetch
     })
+
+    // only apply default category when no category is specified in query params
+    if (!this.$route.query.category && Array.isArray(this.repository.issueTypeDistribution)) {
+      const recommendedTypePos = this.repository.issueTypeDistribution?.findIndex(
+        (issueType) => issueType.shortcode === 'recommended'
+      )
+
+      if (this.repository.issueTypeDistribution[recommendedTypePos].count < 1) {
+        this.updateCategory('all')
+      } else {
+        this.updateCategory('recommended')
+      }
+    }
+
+    const { all, category } = this.parsedParams
 
     await this.fetchIssueList({
       ...this.baseRouteParams,

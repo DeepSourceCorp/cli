@@ -27,5 +27,5 @@ export default class IssueListMixin extends Vue {
     autofixAvailable?: boolean | null
     all?: boolean | null
     refetch?: boolean
-  }) => void
+  }) => Promise<void>
 }
