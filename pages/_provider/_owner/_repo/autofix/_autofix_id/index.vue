@@ -170,8 +170,8 @@
         </template>
       </div>
     </div>
-    <div class="px-4" v-if="!$fetchState.pending && parseArrayString(autofixRun.errors).length">
-      <run-error-box :errorsRendered="parseArrayString(autofixRun.errors)" />
+    <div class="px-4" v-if="!$fetchState.pending && autofixRun.errorsRendered.length">
+      <run-error-box :errors-rendered="autofixRun.errorsRendered" />
     </div>
     <template v-if="isAutofixConcluded">
       <!-- TODO: flash message shown for autofix status - stale, commit status - failed, Pull request status - failed  -->
@@ -275,7 +275,6 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 import { fromNow } from '@/utils/date'
 import AutofixRunMixin from '~/mixins/autofixRunMixin'
-import { parseArrayString } from '~/utils/array'
 
 interface DOMElement extends Element {
   offsetHeight: number
@@ -311,7 +310,6 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
   public isReadOnly = false
   public showInstallModal = false
   public triggeringAutofix = false
-  public parseArrayString = parseArrayString
 
   public PULL_REQUEST_MAP: Record<string, string> = {
     PRO: 'Pull-request open',

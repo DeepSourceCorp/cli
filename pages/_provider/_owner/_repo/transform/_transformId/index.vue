@@ -53,11 +53,8 @@
           </z-button>
         </a>
       </div>
-      <div
-        class="px-4"
-        v-if="!$fetchState.pending && parseArrayString(transformerRun.errors).length"
-      >
-        <run-error-box :errorsRendered="parseArrayString(transformerRun.errors)" />
+      <div class="px-4" v-if="!$fetchState.pending && transformerRun.errorsRendered.length">
+        <run-error-box :errors-rendered="transformerRun.errorsRendered" />
       </div>
       <!-- Code Diff -->
       <div class="p-4 space-y-4">
@@ -100,8 +97,6 @@ import { TransformerRunActions } from '@/store/transformerRun/detail'
 import { TransformerRun } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
-import { parseArrayString } from '~/utils/array'
-
 const transformDetailStore = namespace('transformerRun/detail')
 
 @Component({
@@ -139,8 +134,6 @@ export default class Issues extends mixins(RepoDetailMixin) {
     MERGED: 'PRM',
     FAILED: 'PRF'
   }
-
-  parseArrayString = parseArrayString
 
   async fetch(): Promise<void> {
     await this.fetchTransformerRun()
