@@ -7,9 +7,9 @@
           :key="opt.name"
           class="p-2 space-y-2 text-center rounded-md cursor-pointer hover:bg-ink-300 md:text-left"
           :class="{
-            'bg-ink-300': selectedRun.name == opt.name
+            'bg-ink-300': selectedRun === opt.name
           }"
-          @click="selectedRun = opt"
+          @click="updateSelectedRun(opt)"
         >
           <h4 class="overflow-x-hidden text-base font-semi whitespace-nowrap overflow-ellipsis">
             {{ opt.name }}
@@ -18,7 +18,7 @@
       </template>
     </div>
     <div class="col-span-2 space-y-2 lg:col-span-1">
-      <template v-if="runList.edges && selectedRun.name == 'Analyses'">
+      <template v-if="runList.edges && selectedRun === 'Analyses'">
         <run-card
           v-for="run in runList.edges"
           :key="run.node.runId"
@@ -26,7 +26,7 @@
           actionText="Analyzed"
         ></run-card>
       </template>
-      <template v-else-if="transformerRunList.edges && selectedRun.name == 'Transforms'">
+      <template v-else-if="transformerRunList.edges && selectedRun === 'Transforms'">
         <transform-card
           v-for="run in transformerRunList.edges"
           :key="run.node.runId"
@@ -34,7 +34,7 @@
           actionText="Run"
         ></transform-card>
       </template>
-      <template v-else-if="selectedRun.name == 'Autofixes'">
+      <template v-else-if="selectedRun === 'Autofixes'">
         <autofix-list-item
           v-for="run in autofixRunList.edges"
           :key="run.node.runId"
@@ -48,13 +48,13 @@
     <template slot="footer">
       <div class="flex justify-center py-1 border-t border-ink-300">
         <z-button
-          :to="$generateRoute(selectedRun.link)"
+          :to="$generateRoute(selectedRunInfo.link)"
           buttonType="ghost"
           class="text-vanilla-400"
           size="small"
         >
           <div class="flex items-center space-x-1 text-xs leading-none">
-            <span>{{ selectedRun.showMoreLabel }}</span>
+            <span>{{ selectedRunInfo.showMoreLabel }}</span>
             <z-icon
               class="transform-gpu duration-100 group-hover:translate-x-0.5"
               icon="arrow-right"
@@ -86,6 +86,13 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 const runListStore = namespace('run/list')
 const transformRunListStore = namespace('transformerRun/list')
 const autofixRunListStore = namespace('autofixRun/list')
+
+interface IRunOptions {
+  name: string
+  showMoreLabel: string
+  link: string | string[]
+  repoPerms?: RepoPerms[]
+}
 
 @Component({
   components: {
@@ -139,7 +146,7 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
     refetch?: boolean
   }) => Promise<void>
 
-  private runOptions = [
+  private runOptions: IRunOptions[] = [
     { name: 'Analyses', showMoreLabel: 'View all analysis runs', link: ['history', 'runs'] },
     {
       name: 'Autofixes',
@@ -154,7 +161,14 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
     }
   ]
 
-  public selectedRun = this.runOptions[0]
+  public selectedRun = ''
+
+  get selectedRunInfo() {
+    if (this.selectedRun) {
+      return this.runOptions.find(({ name }) => this.selectedRun === name)
+    }
+    return this.runOptions[0]
+  }
 
   get baseArgs(): {
     provider: string
@@ -178,6 +192,11 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
     this.$socket.$on('repo-autofix-created', this.refetchAutofix)
     this.$socket.$on('committed-to-branch', this.refetchAutofix)
     this.$socket.$on('repo-transform-created', this.refetchRuns)
+
+    const { provider, owner, repo } = this.$route.params
+    this.selectedRun =
+      (this.$localStore.get(`${provider}-${owner}-${repo}`, 'selected-run') as string) ??
+      this.runOptions[0].name
   }
 
   beforeDestroy(): void {
@@ -204,6 +223,12 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
       return this.$gateKeeper.repo(perms, this.repoPerms.permission)
     }
     return true
+  }
+
+  updateSelectedRun(opt: IRunOptions): void {
+    this.selectedRun = opt.name
+    const { provider, owner, repo } = this.$route.params
+    this.$localStore.set(`${provider}-${owner}-${repo}`, 'selected-run', opt.name)
   }
 
   async fetch(): Promise<void> {
