@@ -1,7 +1,18 @@
 <template>
   <div class="relative grid grid-cols-1 gap-4 p-3 rounded-md bg-ink-300">
     <div
-      class="absolute right-0 top-0 leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400"
+      class="
+        absolute
+        right-0
+        top-0
+        leading-none
+        bg-ink-200
+        rounded-bl-md
+        text-xs
+        px-2
+        py-1.5
+        text-vanilla-400
+      "
     >
       Powered by
       <img class="inline" width="30" height="14" alt="stripe" src="~/assets/images/stripe.svg" />
@@ -27,14 +38,11 @@
     </fieldset>
     <fieldset class="space-y-1 text-sm">
       <label class="leading-loose">Credit card number</label>
-      <div
-        id="card-input-container"
+      <stripe-card-input
+        ref="checkout-box-stripe-input"
         class="px-3 py-3 text-sm border bg-ink-400"
-        :class="{
-          'border-vanilla-200': cardInputFocus,
-          'border-ink-100': !cardInputFocus
-        }"
-      ></div>
+        @change="handleStripeCardChange"
+      />
     </fieldset>
     <z-button
       v-if="!checkoutLoading && checkoutState === null"
@@ -78,13 +86,14 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
+import { Component, mixins, Prop, Ref } from 'nuxt-property-decorator'
 import { ZButton, ZInput, ZIcon } from '@deepsourcelabs/zeal'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 
-import { StripeCardElement } from '@stripe/stripe-js'
+import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js'
 import { SubscriptionCheckoutPayload } from '~/types/types'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
+import StripeCardInput from './StripeCardInput.vue'
 
 @Component({
   components: {
@@ -100,19 +109,22 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
   @Prop({ required: true })
   coupon: string
 
-  private billingEmail = ''
-  private validBillingEmail = true
-  private fullName = ''
-  private cardDetails = ''
-  private validCardDetails = false
-  private cardInputFocus = false
-  private checkoutLoading = false
-  private checkoutState: null | 'SUCCESS' | 'FAIL' = null
+  public billingEmail = ''
+  public validBillingEmail = true
+  public fullName = ''
+  public cardDetails = ''
+  public validCardDetails = false
+  public cardInputFocus = false
+  public checkoutLoading = false
+  public checkoutState: null | 'SUCCESS' | 'FAIL' = null
 
-  private cardElement: StripeCardElement
+  public cardElement: StripeCardElement
 
-  mounted() {
-    this.createStripCardInput()
+  @Ref('checkout-box-stripe-input')
+  stripeInput: StripeCardInput
+
+  handleStripeCardChange(event: StripeCardElementChangeEvent) {
+    this.validCardDetails = event.error ? false : true
   }
 
   async fetch(): Promise<void> {
@@ -125,33 +137,6 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
     if (this.owner.primaryUser) {
       this.billingEmail = this.owner.primaryUser.email
       this.fullName = this.owner.primaryUser.fullName || ''
-    }
-  }
-
-  createStripCardInput(): void {
-    if (this.$stripe) {
-      const elements = this.$stripe.elements()
-      const card = elements.create('card', {
-        iconStyle: 'solid',
-        style: {
-          base: {
-            iconColor: '#373c49',
-            color: '#fff',
-            fontWeight: 500,
-            fontSize: '14px',
-            fontSmoothing: 'antialiased'
-          },
-          invalid: {
-            iconColor: '#D6435B',
-            color: '#da5565'
-          }
-        }
-      })
-      card.mount('#card-input-container')
-      card.on('focus', () => (this.cardInputFocus = true))
-      card.on('blur', () => (this.cardInputFocus = false))
-      card.on('change', (event) => (this.validCardDetails = event.error ? false : true))
-      this.cardElement = card
     }
   }
 
@@ -173,7 +158,7 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
     }
 
     try {
-      const res = await this.$stripe?.createToken(this.cardElement, {
+      const res = await this.$stripe?.createToken(this.stripeInput.cardElement, {
         name: this.fullName
       })
       if (res && res.token) {
@@ -215,10 +200,20 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
         }, 1200)
       }
     } catch (e) {
-      this.checkoutState = 'FAIL'
-      this.$toast.danger(
-        'Something went wrong processing your card payment. Please check your card details or contact support.'
-      )
+      try {
+        const err = e as Error
+        const errorMessage = JSON.parse(err.message.replace('GraphQL error: ', ''))
+        if (Array.isArray(errorMessage)) {
+          this.$toast.danger(errorMessage.join('\n'))
+        } else {
+          this.$toast.danger(errorMessage)
+        }
+      } catch {
+        this.checkoutState = 'FAIL'
+        this.$toast.danger(
+          'Something went wrong processing your card payment. Please check your card details or contact support.'
+        )
+      }
     } finally {
       this.checkoutLoading = false
     }

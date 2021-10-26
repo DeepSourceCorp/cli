@@ -88,10 +88,24 @@
           </div>
         </div>
       </div>
-      <div class="mt-3">
-        <h5 class="text-sm font-semibold text-vanilla-100">Payment method</h5>
-        <div class="mt-5">
-          <div v-if="isBilledByStripe && ownerBillingInfo.activeCard" class="flex items-center justify-between w-full">
+      <div class="mt-5">
+        <div class="flex items-center justify-between">
+          <h5 class="text-sm font-semibold text-vanilla-100">Payment method</h5>
+          <z-button
+            @click="showUpdateCardModal = true"
+            size="x-small"
+            button-type="secondary"
+            class="uppercase bg-ink-400 text-vanilla-400"
+          >
+            <z-icon icon="edit" size="x-small" class="mr-1.5" />
+            Update card
+          </z-button>
+        </div>
+        <div class="mt-3">
+          <div
+            v-if="isBilledByStripe && ownerBillingInfo.activeCard"
+            class="flex items-center justify-between w-full p-4 border rounded-md border-ink-300"
+          >
             <div class="flex items-center space-x-4">
               <img
                 :src="
@@ -106,9 +120,9 @@
                 {{ ownerBillingInfo.activeCard.brand }}
               </div>
             </div>
-            <div class="text-vanilla-400">
-              <span>•••• •••• ••••</span>
-              <span>{{ ownerBillingInfo.activeCard.endingIn }}</span>
+            <div class="flex items-center space-x-1.5 text-vanilla-400">
+              <div>•••• •••• ••••</div>
+              <div>{{ ownerBillingInfo.activeCard.endingIn }}</div>
             </div>
           </div>
         </div>
@@ -117,7 +131,12 @@
     <div v-else-if="isBilledByGithub">
       <alert-box bg-color="bg-robin" text-color="text-robin-150">
         <div
-          class="flex flex-col items-start space-y-4 md:flex-row md:space-y-0 md:space-x-10 md:justify-between"
+          class="
+            flex flex-col
+            items-start
+            space-y-4
+            md:flex-row md:space-y-0 md:space-x-10 md:justify-between
+          "
         >
           <div>
             <p class="mb-2 text-base font-medium leading-none">
@@ -152,7 +171,12 @@
     <div v-if="isBilledManually">
       <alert-box bg-color="bg-robin" text-color="text-robin-150">
         <div
-          class="flex flex-col items-start space-y-4 md:flex-row md:space-y-0 md:space-x-10 md:justify-between"
+          class="
+            flex flex-col
+            items-start
+            space-y-4
+            md:flex-row md:space-y-0 md:space-x-10 md:justify-between
+          "
         >
           <div>
             <p class="mb-2 text-base font-medium leading-none">Your billing is managed manually.</p>
@@ -184,6 +208,7 @@
         @setLoading="setLoadingForBillingDetails"
         @onClose="toggleBillingDetailUpdateModal"
       />
+      <update-card-modal v-if="showUpdateCardModal" @close="showUpdateCardModal = false" />
     </portal>
   </form-group>
 </template>
@@ -252,13 +277,14 @@ export default class BillingInfoBox extends mixins(OwnerBillingMixin) {
     return 'stripe'
   }
 
-  private parseISODate = parseISODate
-  private formatDate = formatDate
-  private activeCard = 'active-card'
-  private showCouponInput = false
-  private couponCode = ''
-  private formatUSD = formatUSD
-  private showUpdateBillingsModal = false
-  private showBillingDetailsLoading = false
+  public parseISODate = parseISODate
+  public formatDate = formatDate
+  public activeCard = 'active-card'
+  public showCouponInput = false
+  public couponCode = ''
+  public formatUSD = formatUSD
+  public showUpdateBillingsModal = false
+  public showBillingDetailsLoading = false
+  public showUpdateCardModal = false
 }
 </script>
