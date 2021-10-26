@@ -68,6 +68,7 @@
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import { MemberListItem, UpdateRoleModal, RemoveMemberModal } from '@/components/Members'
 import { ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
 
@@ -92,7 +93,7 @@ import { TeamPerms } from '~/types/permTypes'
   },
   layout: 'dashboard'
 })
-export default class Member extends mixins(TeamDetailMixin) {
+export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   private searchCandidate = ''
   private limit = 10
   private currentPage = 1
@@ -102,7 +103,14 @@ export default class Member extends mixins(TeamDetailMixin) {
   public userToUpdate: Record<string, string> = {}
 
   async fetch(): Promise<void> {
-    await this.fetchTeamMembers()
+    await this.refetchData()
+  }
+
+  async refetchData(refetch = false) {
+    const { owner, provider } = this.$route.params
+    await this.fetchTeamMembers(refetch)
+    await this.fetchOwnerDetails({ login: owner, provider })
+    await this.fetchBillingDetails({ login: owner, provider, refetch })
   }
 
   async searchActiveUsers(): Promise<void> {
@@ -150,7 +158,7 @@ export default class Member extends mixins(TeamDetailMixin) {
       ownerId: this.team.id,
       email
     })
-    await this.fetchTeamMembers(true)
+    await this.refetchData(true)
     this.closeRemoveMemberModal()
   }
 

@@ -1,17 +1,17 @@
 <template>
   <z-modal v-if="showModal" title="Invite new members" @onClose="close" :primaryActionLabel="''">
-    <div class="p-4 text-sm font-normal space-y-4">
+    <div class="p-4 space-y-4 text-sm font-normal">
       <div class="space-y-2" v-if="$config.emailEnabled">
         <div>
-          <h3 class="text-vanilla-100 text-base font-medium">Invite via email</h3>
-          <p class="text-vanilla-400 text-sm">
+          <h3 class="text-base font-medium text-vanilla-100">Invite via email</h3>
+          <p class="text-sm text-vanilla-400">
             Teammates will create an account via the sent email
           </p>
         </div>
         <div
           v-for="member in membersToInvite"
           :key="member.index"
-          class="grid grid-cols-fr-10 gap-2"
+          class="grid gap-2 grid-cols-fr-10"
         >
           <z-input
             v-model="member.email"
@@ -23,7 +23,14 @@
             placeholder="name@email.com"
           >
           </z-input>
-          <z-select v-model="member.role" class="bg-ink-400">
+          <z-select
+            v-model="member.role"
+            :read-only="!member.modifyAllowed"
+            v-tooltip="
+              member.modifyAllowed ? '' : 'This is disabled because the seats are exhausted'
+            "
+            class="bg-ink-400"
+          >
             <z-option v-for="opt in roles" :key="opt.value" :label="opt.label" :value="opt.value">
             </z-option>
           </z-select>
@@ -50,8 +57,8 @@
       <div class="space-y-2">
         <div class="flex items-start justify-between">
           <div>
-            <h3 class="text-vanilla-100 text-base font-medium">Invite via link</h3>
-            <p class="text-vanilla-400 text-sm">Teammates will create an account via the link</p>
+            <h3 class="text-base font-medium text-vanilla-100">Invite via link</h3>
+            <p class="text-sm text-vanilla-400">Teammates will create an account via the link</p>
           </div>
           <div>
             <z-button
@@ -81,26 +88,40 @@
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import { ZIcon, ZModal, ZInput, ZButton, ZDivider, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { resolveNodes } from '~/utils/array'
+import { TeamMember } from '~/types/types'
 
-const INPUT_DATA = [
+interface member {
+  index: number
+  email: string
+  isValid: boolean
+  modifyAllowed: boolean
+  role: string
+}
+
+const INPUT_DATA: member[] = [
   {
     index: 0,
     email: '',
     isValid: true,
-    role: 'MEMBER'
+    modifyAllowed: false,
+    role: 'CONTRIBUTOR'
   },
   {
     index: 1,
     email: '',
     isValid: true,
-    role: 'MEMBER'
+    modifyAllowed: false,
+    role: 'CONTRIBUTOR'
   },
   {
     index: 2,
     email: '',
     isValid: true,
-    role: 'MEMBER'
+    modifyAllowed: false,
+    role: 'CONTRIBUTOR'
   }
 ]
 
@@ -131,21 +152,19 @@ const ROLES = [
   },
   layout: 'dashboard'
 })
-export default class InviteMembersModal extends mixins(TeamDetailMixin) {
+export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   @Prop({ default: false })
   showModal: boolean
 
-  membersToInvite = INPUT_DATA
+  membersToInvite: member[] = []
   roles = ROLES
   clipboardIcon = 'copy'
   clipboardColor = 'vanilla-100'
 
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
-    await this.fetchInviteUrl({
-      login: owner,
-      provider
-    })
+    await this.fetchInviteUrl({ login: owner, provider })
+    this.membersToInvite = this.initialMembersToInvites
   }
 
   copyInviteLink(): void {
@@ -175,6 +194,7 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin) {
           index: member.index,
           email: member.email,
           role: member.role,
+          modifyAllowed: member.modifyAllowed,
           isValid: this.validEmail(member.email)
         }
       }
@@ -185,7 +205,8 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin) {
   }
 
   validEmail(email: string): boolean {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(email)
   }
 
@@ -219,7 +240,7 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin) {
         invitees,
         ...refetchArgs
       })
-      this.membersToInvite = INPUT_DATA
+      this.membersToInvite = this.initialMembersToInvites
 
       this.$emit('inviteSuccess')
       this.close()
@@ -229,11 +250,13 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin) {
   }
 
   addMore(): void {
+    let modifyAllowed = this.seatsLeftCount - this.membersToInvite.length > 0 ? true : false
     this.membersToInvite.push({
       index: this.membersToInvite.length + 1,
       email: '',
       isValid: true,
-      role: 'MEMBER'
+      modifyAllowed,
+      role: 'CONTRIBUTOR'
     })
   }
 
@@ -245,8 +268,53 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin) {
     )
   }
 
+  get pendingInvites(): number {
+    let count = 0
+    this.team.invites?.edges.forEach((invitee) => {
+      // no limit on CONTRIBUTORS, so we only count ADMINs & MEMBERs
+      if (invitee?.node?.role !== 'CONTRIBUTOR') {
+        count += 1
+      }
+    })
+    return count
+  }
+
+  get seatsUsed(): number {
+    let count = 0
+    const members = resolveNodes(this.team.members) as TeamMember[]
+    members.forEach((member) => {
+      // no limit on CONTRIBUTORS, so we only count ADMINs & MEMBERs
+      if (member.role !== 'CONTRIBUTOR') {
+        count += 1
+      }
+    })
+    return count
+  }
+
+  get seatsLeftCount(): number {
+    const { seatsTotal } = this.ownerBillingInfo
+    if (seatsTotal) {
+      return seatsTotal - this.seatsUsed - this.pendingInvites
+    }
+    return 0
+  }
+
+  get initialMembersToInvites(): member[] {
+    let seatsAvailable = this.seatsLeftCount
+    return INPUT_DATA.map((member) => {
+      if (seatsAvailable-- > 0) {
+        return {
+          ...member,
+          modifyAllowed: true
+        }
+      } else {
+        return member
+      }
+    })
+  }
+
   close(): void {
-    this.membersToInvite = INPUT_DATA
+    this.membersToInvite = this.initialMembersToInvites
     this.$emit('close')
   }
 }
