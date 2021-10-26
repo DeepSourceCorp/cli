@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex flex-col space-y-6 max-w-3xl">
+  <div class="p-4 flex flex-col space-y-6 max-w-2xl">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">Autofix settings</div>
     <!-- Description -->

@@ -10,7 +10,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
   components: {},
   head: {
     bodyAttrs: {
-      class: 'antialiased stroke-2'
+      class: 'antialiased stroke-2 hide-scroll'
     }
   }
 })

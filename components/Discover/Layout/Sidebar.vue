@@ -1,14 +1,17 @@
 <template>
+  <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <aside
     class="
-      absolute
+      fixed
+      top-0
+      z-50
       flex flex-col
       h-screen
       duration-200
       border-r
+      lg:sticky lg:z-10 lg:left-0
       transition-width
       transform-gpu
-      lg:relative lg:left-0
       border-ink-200
       group
       bg-ink-400
@@ -207,7 +210,7 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
 import { ZButton, ZConfirm, ZIcon, ZTag } from '@deepsourcelabs/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -294,6 +297,15 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
      * Return the current year.
      */
     return new Date().getFullYear()
+  }
+
+  @Watch('isOpen')
+  disableScroll(newIsOpen: boolean) {
+    if (newIsOpen && process.client) {
+      document.body.classList.add('no-scroll')
+    } else if (process.client) {
+      document.body.classList.remove('no-scroll')
+    }
   }
 }
 </script>

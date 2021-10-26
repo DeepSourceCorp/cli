@@ -1,12 +1,15 @@
 <template>
   <section>
-    <div class="flex xl:col-span-2 border-b border-ink-200">
-      <div class="flex self-end px-4 pt-2 space-x-8 overflow-auto flex-nowrap">
+    <div
+      class="flex border-b xl:col-span-2 border-ink-200 lg:sticky lg:top-24 lg:bg-ink-400 lg:z-10"
+    >
+      <div class="flex self-end px-4 pt-2 space-x-8 overflow-x-auto flex-nowrap">
         <template v-for="item in navItems">
           <nuxt-link
             v-if="isNavLinkVisible(item)"
             :key="item.label"
             :to="$generateRoute(item.link)"
+            class="flex-shrink-0"
           >
             <z-tab
               :isActive="$route.path.includes(item.link.join('/'))"

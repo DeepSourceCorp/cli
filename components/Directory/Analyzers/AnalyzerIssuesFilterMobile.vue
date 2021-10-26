@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div
-      class="absolute bottom-0 z-20 flex justify-center w-screen p-3 pb-5 lg:hidden filter-wrapper"
-    >
+    <div class="fixed z-20 flex justify-center w-screen p-3 pb-8 lg:hidden filter-wrapper">
       <z-button
         button-type="primary"
         @click="isModalOpen = true"

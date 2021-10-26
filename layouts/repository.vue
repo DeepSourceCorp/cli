@@ -1,12 +1,12 @@
 <template>
-  <div class="relative flex h-screen mx-auto overflow-hidden bg-ink-400 text-vanilla-100">
-    <sidebar v-if="loggedIn" class="top-0 z-50" />
-    <logged-out-sidebar v-else class="top-0 z-50" />
-    <div class="w-full overflow-y-scroll hide-scroll">
+  <div class="flex min-h-screen mx-auto bg-ink-400 text-vanilla-100">
+    <sidebar v-if="loggedIn" />
+    <logged-out-sidebar v-else />
+    <div class="w-full">
       <mobile-nav
         class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-ink-200"
-      ></mobile-nav>
-      <repo-header :key="repository.id" class="z-30 w-full md:sticky top-10 lg:top-0"></repo-header>
+      />
+      <repo-header :key="repository.id" class="z-10 w-full md:sticky top-10 lg:top-0" />
       <!--
         if the repository is activated:
           - if there hasn't been at least one analysis: show the waiting state with an
@@ -35,7 +35,15 @@
           "
         >
           <div
-            class="flex items-center p-4 space-x-2 border-b bg-cherry bg-opacity-10 border-cherry border-opacity-20"
+            class="
+              flex
+              items-center
+              p-4
+              space-x-2
+              border-b
+              bg-cherry bg-opacity-10
+              border-cherry border-opacity-20
+            "
           >
             <p
               class="max-w-4xl text-cherry error-state"
@@ -43,7 +51,7 @@
             ></p>
           </div>
         </div>
-        <Nuxt class="z-20" v-if="isAnalyzed || allowedOnBroken || loading" />
+        <Nuxt v-if="isAnalyzed || allowedOnBroken || loading" />
 
         <!-- Check if the repository has been analyzed or no -->
         <div class="p-5" v-else-if="repository.errorCode">
@@ -78,7 +86,7 @@
       </div>
     </div>
     <!-- remove this later and inject via zeal -->
-    <portal-target class="z-1000" name="modal"></portal-target>
+    <portal-target class="z-1000" name="modal" @change="modalToggled"></portal-target>
   </div>
 </template>
 
@@ -89,6 +97,7 @@ import { Sidebar } from '@/components/Layout/Sidebar'
 import { ZLabel } from '@deepsourcelabs/zeal'
 import AuthMixin from '@/mixins/authMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import PortalMixin from '@/mixins/portalMixin'
 
 import {
   RepoEmpty,
@@ -115,11 +124,11 @@ import { RunStatus } from '~/types/types'
   middleware: ['hidePrivateRepo'],
   head: {
     bodyAttrs: {
-      class: 'antialiased stroke-2'
+      class: 'antialiased stroke-2 hide-scroll'
     }
   }
 })
-export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin) {
+export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin, PortalMixin) {
   public loading = false
   async fetch(): Promise<void> {
     this.loading = true

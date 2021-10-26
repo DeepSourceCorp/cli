@@ -1,6 +1,6 @@
 <template>
   <div class="border-l-4 border-ink-200 px-2">
-    <div class="text-vanilla-400 w-96 text-xs">
+    <div class="text-vanilla-400 max-w-sm text-xs">
       <slot>
         <p v-html="info"></p>
       </slot>

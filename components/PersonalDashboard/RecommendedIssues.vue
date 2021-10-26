@@ -40,7 +40,7 @@ import { resolveNodes } from '~/utils/array'
   }
 })
 export default class RecommendedIssues extends mixins(ActiveUserMixin) {
-  public autofixIssue: Record<string, string | Array<string>>
+  public autofixIssue: Record<string, string | Array<string>> = {}
   public repoParams: Record<string, string | Array<string>> = {}
   public isAutofixOpen = false
 

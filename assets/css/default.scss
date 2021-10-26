@@ -43,7 +43,8 @@
   box-decoration-break: clone;
 }
 
-.custom-scroll {
+.custom-scroll,
+.no-scroll {
   overflow: hidden !important;
 }
 

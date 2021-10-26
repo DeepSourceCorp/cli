@@ -60,6 +60,7 @@
     />
     <portal to="modal">
       <invite-members-modal
+        v-if="showInviteMembersModal"
         :showModal="showInviteMembersModal"
         @close="
           () => {

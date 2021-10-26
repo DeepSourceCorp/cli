@@ -1,15 +1,15 @@
 <template>
-  <div class="relative flex h-screen mx-auto overflow-hidden bg-ink-400 text-vanilla-100">
+  <div class="flex min-h-screen mx-auto bg-ink-400 text-vanilla-100">
     <!-- Discover page uses a different sidebar -->
-    <discover-sidebar class="top-0 z-50" />
-    <div ref="scrolling-div" class="w-full overflow-y-scroll hide-scroll">
+    <discover-sidebar />
+    <div ref="scrolling-div" class="w-full">
       <mobile-nav
         class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-ink-200"
-      ></mobile-nav>
-      <Nuxt class="z-20" />
+      />
+      <Nuxt />
     </div>
     <!-- remove this later and inject via zeal -->
-    <portal-target class="z-1000" name="modal"></portal-target>
+    <portal-target class="z-1000" name="modal" @change="modalToggled"></portal-target>
   </div>
 </template>
 
@@ -18,6 +18,7 @@ import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { MobileNav } from '@/components/Layout'
 import { DiscoverSidebar } from '@/components/Discover/Layout'
 import AuthMixin from '@/mixins/authMixin'
+import PortalMixin from '@/mixins/portalMixin'
 
 @Component({
   components: {
@@ -26,11 +27,11 @@ import AuthMixin from '@/mixins/authMixin'
   },
   head: {
     bodyAttrs: {
-      class: 'antialiased stroke-2'
+      class: 'antialiased stroke-2 hide-scroll'
     }
   }
 })
-export default class DiscoverLayout extends mixins(AuthMixin) {
+export default class DiscoverLayout extends mixins(AuthMixin, PortalMixin) {
   @Watch('$route.path')
   resetScroll() {
     const divThatScrolls = this.$refs['scrolling-div'] as HTMLElement

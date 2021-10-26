@@ -1,21 +1,22 @@
 <template>
-  <div class="p-4 flex flex-col space-y-6 max-w-2xl">
+  <div class="flex flex-col p-4 space-y-6">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">General</div>
     <!-- Default Analysis Branch -->
-    <form-group>
-      <div class="relative">
+    <form-group :divide="false" body-width-class="">
+      <div class="flex gap-x-4">
         <text-input
           inputWidth="x-small"
           label="Default analysis branch"
           inputId="team-settings-branch"
           v-model="branch"
+          class="flex-grow max-w-2xl"
           @blur="updateBranch"
         ></text-input>
-        <div class="absolute top-0 left-full px-4 py-2">
+        <div class="hidden lg:block">
           <info-banner
             info="This is the base branch for analysis by DeepSource. Your issues tab will be populated with the issues found on this branch."
-          ></info-banner>
+          />
         </div>
       </div>
       <toggle-input
@@ -23,187 +24,193 @@
         label="Enable git submodules"
         inputId="enable-git-submodules"
         v-model="enableGitMod"
+        class="max-w-2xl border-t border-ink-300"
         @input="updateRepositorySettings"
       >
         <template slot="description">
           If you are using private submodules, ensure that DeepSource has access to them via an
           <nuxt-link
             :to="$generateRoute(['settings', 'ssh-access'])"
-            class="text-juniper font-medium"
+            class="font-medium text-juniper"
             >SSH key</nuxt-link
           >.
         </template>
       </toggle-input>
     </form-group>
-    <z-divider margin="my-2 mx-0"></z-divider>
+    <z-divider color="ink-300" margin="my-2 mx-0 max-w-2xl" />
     <!-- Issue Configuration -->
-    <div class="flex flex-col gap-y-4 relative">
-      <div class="text-sm text-vanilla-100 flex-1">Issue configuration</div>
-      <z-table class="text-vanilla-100">
-        <template v-slot:head>
-          <z-table-row>
-            <z-table-cell
-              v-for="head in headerData"
-              :key="head.title"
-              class="text-sm font-bold"
-              :class="head.align"
-              >{{ head.title }}</z-table-cell
+    <div class="flex gap-x-4">
+      <div class="flex-grow max-w-2xl">
+        <h6 class="mb-4 text-sm text-vanilla-100">Issue configuration</h6>
+        <z-table class="text-vanilla-100">
+          <template v-slot:head>
+            <z-table-row>
+              <z-table-cell
+                v-for="head in headerData"
+                :key="head.title"
+                class="text-sm font-bold"
+                :class="head.align"
+                >{{ head.title }}</z-table-cell
+              >
+            </z-table-row>
+          </template>
+          <template v-slot:body>
+            <z-table-row
+              v-for="type in repoSettings"
+              :key="type.name"
+              class="text-vanilla-100 hover:bg-ink-300"
             >
-          </z-table-row>
-        </template>
-        <template v-slot:body>
-          <z-table-row
-            v-for="type in repoSettings"
-            :key="type.name"
-            class="text-vanilla-100 hover:bg-ink-300"
-          >
-            <z-table-cell class="text-sm font-normal" text-align="left">{{
-              type.name
-            }}</z-table-cell>
-            <z-table-cell
-              class="text-sm font-normal flex justify-center items-center"
-              text-align="center"
-            >
-              <z-checkbox
-                v-model="type.isIgnoredToDisplay"
-                class="h-full"
-                :true-value="false"
-                :false-value="true"
-                spacing="4"
-                fontSize="base"
-                @change="updateRepositorySettings"
-              />
-            </z-table-cell>
-            <z-table-cell
-              class="text-sm font-normal flex justify-center items-center"
-              text-align="center"
-            >
-              <z-checkbox
-                v-model="type.isIgnoredInCheckStatus"
-                class="h-full m-0"
-                :true-value="false"
-                :false-value="true"
-                spacing="4"
-                fontSize="base"
-                @change="updateRepositorySettings"
-              />
-            </z-table-cell>
-          </z-table-row>
-        </template>
-      </z-table>
-      <div class="absolute top-0 left-full px-4">
+              <z-table-cell class="text-sm font-normal" text-align="left">{{
+                type.name
+              }}</z-table-cell>
+              <z-table-cell
+                class="flex items-center justify-center text-sm font-normal"
+                text-align="center"
+              >
+                <z-checkbox
+                  v-model="type.isIgnoredToDisplay"
+                  class="h-full"
+                  :true-value="false"
+                  :false-value="true"
+                  spacing="4"
+                  fontSize="base"
+                  @change="updateRepositorySettings"
+                />
+              </z-table-cell>
+              <z-table-cell
+                class="flex items-center justify-center text-sm font-normal"
+                text-align="center"
+              >
+                <z-checkbox
+                  v-model="type.isIgnoredInCheckStatus"
+                  class="h-full m-0"
+                  :true-value="false"
+                  :false-value="true"
+                  spacing="4"
+                  fontSize="base"
+                  @change="updateRepositorySettings"
+                />
+              </z-table-cell>
+            </z-table-row>
+          </template>
+        </z-table>
+      </div>
+      <div class="hidden lg:block">
         <info-banner
           info="Control what issues are reported by DeepSource and what issues block pull requests."
-        ></info-banner>
+        />
       </div>
     </div>
-    <form-group label="Analysis settings">
-      <div class="relative">
-        <div class="grid py-4 gap-4 grid-cols-fr-16">
-          <div>
-            <label for="repo-settings-analysis-scope" class="text-sm text-vanilla-100 flex-1">
-              Analysis scope
-            </label>
-          </div>
-          <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
-            <z-option label="Granular (recommended)" value="granular"></z-option>
-            <z-option label="Broad" value="broad"></z-option>
-          </z-select>
-        </div>
-        <div class="absolute top-0 left-full px-4">
-          <info-banner
-            info="If <b>Granular</b> is selected, issues would be reported only for lines that have been added or modified across all the files affected. <br> <br> If <b>Broad</b> is selected, all issues will be reported in files that have been updated or added, beware, this can be noisy."
-          ></info-banner>
-        </div>
-      </div>
-      <button-input
-        label="Analysis configuration"
-        inputId="repo-settings-analysis-config"
-        buttonLabel="Generate configuration"
-        :to="$generateRoute(['generate-config'])"
-        inputWidth="x-small"
-      >
-        <template slot="description">
-          Change the deepsource.toml file in the repository's root to modify the analysis
-          configuration.
-        </template>
-      </button-input>
-      <div class="relative" v-if="canActivateRepo">
-        <div class="grid py-4 gap-4 grid-cols-fr-16">
-          <div>
-            <label :for="inputId" class="text-sm text-vanilla-100 flex-1"> Analysis status </label>
-            <div class="text-xs text-vanilla-400 leading-5">
-              Careful! DeepSource will stop monitoring changes to your code if analysis is
-              deactivated
+    <div class="flex gap-x-4">
+      <form-group label="Analysis settings" class="flex-grow max-w-2xl">
+        <div>
+          <div class="grid gap-4 py-4 grid-cols-fr-16">
+            <div>
+              <label for="repo-settings-analysis-scope" class="flex-1 text-sm text-vanilla-100">
+                Analysis scope
+              </label>
             </div>
-          </div>
-          <div class="text-right flex flex-col">
-            <button
-              @click="toggleState()"
-              @mouseenter="updateHoverStyle(true)"
-              @mouseleave="updateHoverStyle(false)"
-              class="
-                flex
-                items-center
-                justify-center
-                space-x-2
-                self-end
-                h-8
-                px-4
-                rounded-sm
-                w-52
-                transition-all
-                duration-150
-                ease-in-out
-                font-medium
-              "
-              :class="{
-                'bg-transparent text-cherry border border-cherry': isRepoActivated && isHovered,
-                'bg-transparent text-juniper border border-juniper': !isRepoActivated && isHovered,
-                'bg-cherry text-vanilla-100': !isRepoActivated && !isHovered,
-                'bg-juniper text-ink-400': isRepoActivated && !isHovered
-              }"
-            >
-              <z-icon
-                :icon="icon"
-                size="small"
-                :color="{
-                  'vanilla-100': !isRepoActivated && !isHovered,
-                  'ink-400': isRepoActivated && !isHovered
-                }"
-              ></z-icon>
-              <span class="text-sm leading-none">{{ buttonText }}</span>
-            </button>
+            <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
+              <z-option label="Granular (recommended)" value="granular"></z-option>
+              <z-option label="Broad" value="broad"></z-option>
+            </z-select>
           </div>
         </div>
-      </div>
-    </form-group>
-
-    <z-divider v-if="!repository.isPrivate" margin="my-2 mx-0" />
-
-    <form-group v-if="!repository.isPrivate">
-      <div class="relative">
         <button-input
-          label="Add to discover"
-          inputId="add-to-discover"
-          :buttonLabel="repository.showInDiscover ? 'Remove your project' : 'Add your project'"
+          label="Analysis configuration"
+          inputId="repo-settings-analysis-config"
+          buttonLabel="Generate configuration"
+          :to="$generateRoute(['generate-config'])"
           inputWidth="x-small"
-          @click="updateDiscoverFeedPreference"
         >
           <template slot="description">
-            Add your repository to
-            <nuxt-link to="/discover" class="font-medium text-juniper">Discover</nuxt-link> to allow
-            others to find issues and fix them.
+            Change the deepsource.toml file in the repository's root to modify the analysis
+            configuration.
           </template>
         </button-input>
-
-        <div class="absolute top-0 px-4 left-full">
-          <info-banner
-            info="Control whether your repository is listed on Discover. Once listed, other users would be able to find your repository, and look at the detected issues."
-          />
+        <div v-if="canActivateRepo">
+          <div class="grid gap-4 py-4 grid-cols-fr-16">
+            <div>
+              <label :for="inputId" class="flex-1 text-sm text-vanilla-100">
+                Analysis status
+              </label>
+              <div class="text-xs leading-5 text-vanilla-400">
+                Careful! DeepSource will stop monitoring changes to your code if analysis is
+                deactivated
+              </div>
+            </div>
+            <div class="flex flex-col text-right">
+              <button
+                @click="toggleState()"
+                @mouseenter="updateHoverStyle(true)"
+                @mouseleave="updateHoverStyle(false)"
+                class="
+                  flex
+                  items-center
+                  self-end
+                  justify-center
+                  h-8
+                  px-4
+                  space-x-2
+                  font-medium
+                  transition-all
+                  duration-150
+                  ease-in-out
+                  rounded-sm
+                  w-52
+                "
+                :class="{
+                  'bg-transparent text-cherry border border-cherry': isRepoActivated && isHovered,
+                  'bg-transparent text-juniper border border-juniper':
+                    !isRepoActivated && isHovered,
+                  'bg-cherry text-vanilla-100': !isRepoActivated && !isHovered,
+                  'bg-juniper text-ink-400': isRepoActivated && !isHovered
+                }"
+              >
+                <z-icon
+                  :icon="icon"
+                  size="small"
+                  :color="{
+                    'vanilla-100': !isRepoActivated && !isHovered,
+                    'ink-400': isRepoActivated && !isHovered
+                  }"
+                ></z-icon>
+                <span class="text-sm leading-none">{{ buttonText }}</span>
+              </button>
+            </div>
+          </div>
         </div>
+      </form-group>
+      <div class="hidden mt-16 lg:block">
+        <info-banner
+          info="If <b>Granular</b> is selected, issues would be reported only for lines that have been added or modified across all the files affected. <br> <br> If <b>Broad</b> is selected, all issues will be reported in files that have been updated or added, beware, this can be noisy."
+        />
       </div>
-    </form-group>
+    </div>
+    <div class="flex gap-x-4">
+      <form-group label="Discover settings" class="flex-grow max-w-2xl">
+        <div>
+          <button-input
+            label="Add to discover"
+            inputId="add-to-discover"
+            :buttonLabel="repository.showInDiscover ? 'Remove your project' : 'Add your project'"
+            inputWidth="x-small"
+            @click="updateDiscoverFeedPreference"
+          >
+            <template slot="description">
+              Add your repository to
+              <nuxt-link to="/discover" class="font-medium text-juniper">Discover</nuxt-link> to
+              allow others to find issues and fix them.
+            </template>
+          </button-input>
+        </div>
+      </form-group>
+      <div class="hidden mt-16 lg:block">
+        <info-banner
+          info="Control whether your repository is listed on Discover. Once listed, other users would be able to find your repository, and look at the detected issues."
+        />
+      </div>
+    </div>
   </div>
 </template>
 

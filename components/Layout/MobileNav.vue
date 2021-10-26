@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-full items-center justify-between p-2">
+  <div class="flex items-center justify-between w-full p-2">
     <z-button
       id="mobile-menu-toggle"
       icon="menu"

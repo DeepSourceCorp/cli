@@ -1,6 +1,21 @@
 <template>
+  <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <aside
-    class="absolute flex flex-col h-screen duration-200 border-r transition-width transform-gpu lg:relative lg:left-0 border-ink-200 group bg-ink-400"
+    class="
+      fixed
+      top-0
+      z-50
+      flex flex-col
+      h-screen
+      duration-200
+      border-r
+      lg:sticky lg:z-10 lg:left-0
+      transition-width
+      transform-gpu
+      border-ink-200
+      group
+      bg-ink-400
+    "
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
@@ -13,7 +28,19 @@
     >
       <button
         v-if="canActivateRepo"
-        class="flex items-center w-full p-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
+        class="
+          flex
+          items-center
+          w-full
+          p-2
+          space-x-2
+          leading-none
+          border
+          rounded-sm
+          bg-ink-300
+          border-ink-200
+          hover:bg-ink-200
+        "
         @click="showAddRepoModal = true"
       >
         <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4"></z-icon>
@@ -120,7 +147,19 @@
       <div class="absolute -top-2.5 -right-2.5 md:group-hover:block hidden">
         <button
           @click="toggleSidebarCollapse"
-          class="flex items-center justify-center w-5 h-5 rounded-full cursor-pointer bg-ink-100 hover:bg-slate group focus:outline-none"
+          class="
+            flex
+            items-center
+            justify-center
+            w-5
+            h-5
+            rounded-full
+            cursor-pointer
+            bg-ink-100
+            hover:bg-slate
+            group
+            focus:outline-none
+          "
         >
           <z-icon
             icon="chevron-left"
@@ -372,6 +411,15 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
      * Return the current year.
      */
     return new Date().getFullYear()
+  }
+
+  @Watch('isOpen')
+  disableScroll(newIsOpen: boolean) {
+    if (newIsOpen && process.client) {
+      document.body.classList.add('no-scroll')
+    } else if (process.client) {
+      document.body.classList.remove('no-scroll')
+    }
   }
 }
 </script>

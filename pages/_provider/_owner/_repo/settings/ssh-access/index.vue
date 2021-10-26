@@ -1,91 +1,73 @@
 <template>
-  <div class="flex flex-col max-w-3xl p-4 space-y-6">
+  <div class="flex flex-col p-4 space-y-6">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">SSH Access</div>
     <!-- Public key description -->
-    <div class="flex relative">
-      <div class="flex-1 text-sm text-vanilla-100">Public key</div>
-      <div class="flex flex-col w-2/3 space-y-3">
-        <div class="w-full flex flex-col space-y-2" v-if="repository.encPublicKey">
-          <div class="h-36 relative">
-            <z-textarea
-              class="
-                w-full
-                h-full
-                p-2
-                text-xs
-                bg-transparent
-                border
-                outline-none
-                resize-none
-                border-ink-200
-                text-vanilla-400
-                hide-scroll
-              "
-              v-model="this.repository.encPublicKey"
-            >
-            </z-textarea>
-          </div>
-          <div class="flex justify-between space-x-2">
-            <z-button
-              buttonType="secondary"
-              :icon="clipboardIcon"
-              size="small"
-              class="w-28"
-              iconColor="vanilla-100"
-              @click="copyKeys()"
-              >{{ clipboardLabel }}</z-button
-            >
-            <div class="space-x-2">
+    <div class="flex gap-x-4">
+      <div class="flex flex-grow max-w-2xl">
+        <div class="flex-1 text-sm text-vanilla-100">Public key</div>
+        <div class="flex flex-col w-2/3 space-y-3">
+          <div class="flex flex-col w-full space-y-2" v-if="repository.encPublicKey">
+            <div class="h-36">
+              <z-textarea
+                class="
+                  w-full
+                  h-full
+                  p-2
+                  text-xs
+                  bg-transparent
+                  border
+                  outline-none
+                  resize-none
+                  border-ink-200
+                  text-vanilla-400
+                  hide-scroll
+                "
+                v-model="this.repository.encPublicKey"
+              >
+              </z-textarea>
+            </div>
+            <div class="flex justify-between space-x-2">
               <z-button
                 buttonType="secondary"
+                :icon="clipboardIcon"
                 size="small"
-                icon="refresh-ccw"
-                @click="isGenerateSSHConfirmModalOpen = true"
+                class="w-28"
+                iconColor="vanilla-100"
+                @click="copyKeys()"
+                >{{ clipboardLabel }}</z-button
               >
-                Regenerate
-              </z-button>
-              <z-button
-                buttonType="danger"
-                size="small"
-                icon="trash-2"
-                @click="isRemoveSSHConfirmModalOpen = true"
-              >
-                Remove Keys
-              </z-button>
+              <div class="space-x-2">
+                <z-button
+                  buttonType="secondary"
+                  size="small"
+                  icon="refresh-ccw"
+                  @click="isGenerateSSHConfirmModalOpen = true"
+                >
+                  Regenerate
+                </z-button>
+                <z-button
+                  buttonType="danger"
+                  size="small"
+                  icon="trash-2"
+                  @click="isRemoveSSHConfirmModalOpen = true"
+                >
+                  Remove Keys
+                </z-button>
+              </div>
             </div>
           </div>
-        </div>
-        <div v-else class="flex flex-col justify-center w-full space-y-3">
-          <p class="text-small">An SSH key pair has not been generated for this repository yet.</p>
-          <z-button buttonType="secondary" icon="plus" @click="generateKeyPair()">
-            Generate SSH key pair
-          </z-button>
+          <div v-else class="flex flex-col justify-center w-full space-y-3">
+            <p class="text-small">
+              An SSH key pair has not been generated for this repository yet.
+            </p>
+            <z-button buttonType="secondary" icon="plus" @click="generateKeyPair()">
+              Generate SSH key pair
+            </z-button>
+          </div>
         </div>
       </div>
-      <portal to="modal">
-        <z-confirm
-          v-if="isGenerateSSHConfirmModalOpen"
-          @onClose="isGenerateSSHConfirmModalOpen = false"
-          title="Confirm regenerate SSH keys for this repository?"
-          subtitle="This action is irreversible, and will invalidate the old keys. You must replace the old keys with the new one everywhere you're using it."
-          primaryActionLabel="Confirm and regenerate keys"
-          @primaryAction="generateKeyPair"
-        >
-        </z-confirm>
-        <z-confirm
-          v-if="isRemoveSSHConfirmModalOpen"
-          @onClose="isRemoveSSHConfirmModalOpen = false"
-          title="Confirm delete SSH keys for this repository?"
-          subtitle="This action is irreversible. You will have to generate a new key pair and add them to all your private dependencies again."
-          primaryActionLabel="Confirm and remove keys"
-          primaryActionType="danger"
-          primaryActionIcon="trash-2"
-          @primaryAction="removeKeyPair"
-        >
-        </z-confirm>
-      </portal>
-      <div class="absolute top-0 left-full px-4">
+      <div class="hidden lg:block">
         <info-banner>
           <div>
             If your repository has external private dependencies, you need to grant DeepSource
@@ -94,6 +76,28 @@
         </info-banner>
       </div>
     </div>
+    <portal to="modal">
+      <z-confirm
+        v-if="isGenerateSSHConfirmModalOpen"
+        @onClose="isGenerateSSHConfirmModalOpen = false"
+        title="Confirm regenerate SSH keys for this repository?"
+        subtitle="This action is irreversible, and will invalidate the old keys. You must replace the old keys with the new one everywhere you're using it."
+        primaryActionLabel="Confirm and regenerate keys"
+        @primaryAction="generateKeyPair"
+      >
+      </z-confirm>
+      <z-confirm
+        v-if="isRemoveSSHConfirmModalOpen"
+        @onClose="isRemoveSSHConfirmModalOpen = false"
+        title="Confirm delete SSH keys for this repository?"
+        subtitle="This action is irreversible. You will have to generate a new key pair and add them to all your private dependencies again."
+        primaryActionLabel="Confirm and remove keys"
+        primaryActionType="danger"
+        primaryActionIcon="trash-2"
+        @primaryAction="removeKeyPair"
+      >
+      </z-confirm>
+    </portal>
   </div>
 </template>
 

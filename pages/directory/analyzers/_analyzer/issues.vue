@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col min-h-full">
+  <div class="flex flex-col min-h-full bg-ink-400">
     <directory-header
       :info-obj="analyzer"
       :heading-level="isIssuesPage ? 'h1' : 'h2'"
@@ -7,7 +7,7 @@
     />
     <directory-tabs :active-tab="1" :analyzer-url="analyzerUrl" />
     <!-- <div class="grid grid-cols-1 lg:grid-cols-12"> -->
-    <div class="flex flex-grow">
+    <div class="lg:flex lg:flex-grow">
       <div
         v-if="analyzer && analyzer.issues"
         class="hidden w-full p-4 text-sm border-r max-w-min border-ink-200 lg:block"
@@ -28,7 +28,7 @@
         :total-issue-count="analyzer.issues.totalCount"
         @selected="filterByIssueType"
       />
-      <div class="flex-grow mb-12">
+      <div class="flex-grow w-screen pb-12 bg-ink-400 lg:w-auto">
         <nuxt-child
           :analyzer="analyzer"
           :is-loaded="isLoaded"

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="absolute z-20 flex justify-center w-screen p-3 pb-5 filter-wrapper md:hidden">
+    <div class="fixed z-20 flex justify-center w-screen p-3 pb-5 filter-wrapper md:hidden">
       <z-button
         button-type="primary"
         @click="isModalOpen = true"
@@ -27,7 +27,16 @@
             <nuxt-link
               v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
               :key="analyzer.id"
-              class="inline-flex items-center justify-center p-2 space-x-1 text-sm rounded-md cursor-pointer"
+              class="
+                inline-flex
+                items-center
+                justify-center
+                p-2
+                space-x-1
+                text-sm
+                rounded-md
+                cursor-pointer
+              "
               :class="[
                 $route.params.lang === analyzer.shortcode
                   ? 'bg-gradient-dawn'

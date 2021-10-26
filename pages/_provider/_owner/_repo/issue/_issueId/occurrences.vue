@@ -1,50 +1,52 @@
 <template>
-  <div class="relative top-0 flex flex-col p-4 space-y-0 xl:space-y-4">
-    <div class="flex flex-col space-y-4">
-      <issue-occurence-section @filtersUpdated="addFilters"></issue-occurence-section>
-      <div class="flex w-full">
-        <!-- Issue list -->
-        <div class="flex flex-col w-full space-y-4 xl:w-4/6">
+  <div class="flex flex-col p-4 gap-y-4">
+    <issue-occurence-section @filtersUpdated="addFilters"></issue-occurence-section>
+    <div class="grid grid-cols-12">
+      <!-- Issue list -->
+      <div class="flex flex-col col-span-full xl:col-span-8 gap-y-4">
+        <div
+          v-if="checkIssues.totalCount === 0"
+          class="flex items-center justify-center w-full h-full"
+        >
+          No results
+        </div>
+        <template v-if="$fetchState.pending">
           <div
-            v-if="checkIssues.totalCount === 0"
-            class="flex items-center justify-center w-full h-full"
-          >
-            No results
+            v-for="ii in 3"
+            :key="ii"
+            class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
+          ></div>
+        </template>
+        <template v-else>
+          <div v-for="(child, index) in issuesInCheck" :key="index">
+            <issue-editor
+              v-bind="child"
+              :blobUrlRoot="repository.blobUrlRoot"
+              :checkIssueIds="issuesIgnored"
+              :canIgnoreIssues="canIgnoreIssues"
+              @ignoreIssues="ignoreIssues"
+            ></issue-editor>
           </div>
-          <template v-if="$fetchState.pending">
-            <div
-              v-for="ii in 3"
-              :key="ii"
-              class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
-            ></div>
-          </template>
-          <template v-else>
-            <div v-for="(child, index) in issuesInCheck" :key="index">
-              <issue-editor
-                v-bind="child"
-                :blobUrlRoot="repository.blobUrlRoot"
-                :checkIssueIds="issuesIgnored"
-                :canIgnoreIssues="canIgnoreIssues"
-                @ignoreIssues="ignoreIssues"
-              ></issue-editor>
-            </div>
-          </template>
-        </div>
-        <!-- Description -->
-        <div v-if="$fetchState.pending" class="hidden w-2/6 px-4 xl:block">
-          <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
-        </div>
-        <issue-description v-else :description="issue.descriptionRendered"></issue-description>
+        </template>
+        <z-pagination
+          class="flex justify-center w-full"
+          v-if="pageCount > 1"
+          :totalPages="pageCount"
+          :totalVisible="5"
+          :page="currentPage"
+          @selected="updatePage"
+        />
       </div>
+      <!-- Description -->
+      <div v-if="$fetchState.pending" class="hidden col-span-4 px-4 xl:block">
+        <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
+      </div>
+      <issue-description
+        v-else
+        :description="issue.descriptionRendered"
+        class="col-span-4"
+      ></issue-description>
     </div>
-    <z-pagination
-      class="flex justify-center w-full xl:w-4/6"
-      v-if="pageCount > 1"
-      :totalPages="pageCount"
-      :totalVisible="5"
-      :page="currentPage"
-      @selected="updatePage"
-    ></z-pagination>
   </div>
 </template>
 <script lang="ts">

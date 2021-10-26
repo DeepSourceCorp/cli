@@ -1,6 +1,17 @@
 <template>
+  <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <div
-    class="absolute h-screen duration-200 transition-width lg:relative w-80 lg:w-72 lg:left-0"
+    class="
+      fixed
+      top-0
+      z-50
+      h-screen
+      duration-200
+      lg:sticky lg:z-10 lg:left-0
+      transition-width
+      w-80
+      lg:w-72
+    "
     :class="isOpen ? 'left-0' : '-left-full'"
   >
     <sidebar-menu
@@ -109,7 +120,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Vue, Component, Watch } from 'nuxt-property-decorator'
 import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
 
 @Component({
@@ -127,6 +138,15 @@ export default class LoggedOutSidebar extends Vue {
 
   closeModal(): void {
     this.isOpen = false
+  }
+
+  @Watch('isOpen')
+  disableScroll(newIsOpen: boolean) {
+    if (newIsOpen && process.client) {
+      document.body.classList.add('no-scroll')
+    } else if (process.client) {
+      document.body.classList.remove('no-scroll')
+    }
   }
 }
 </script>

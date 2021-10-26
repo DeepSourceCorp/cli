@@ -40,6 +40,7 @@
           </z-button>
           <portal to="modal">
             <invite-members-modal
+              v-if="showInviteModal"
               :showModal="showInviteModal"
               @close="toggleModal(false)"
               @inviteSuccess="inviteSuccess"

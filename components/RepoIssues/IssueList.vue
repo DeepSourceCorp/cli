@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col space-y-4">
-    <div class="flex gap-2 w-full xl:w-4/6 flex-row-reverse xl:flex-row">
+    <div class="flex flex-row-reverse w-full gap-2 xl:w-4/6 xl:flex-row">
       <!-- Sort menu -->
       <z-menu direction="right" width="x-small" class="text-vanilla-100">
         <template v-slot:trigger="{ toggle }">
@@ -27,7 +27,7 @@
         </template>
       </z-menu>
       <!-- Search -->
-      <div class="flex-grow xl:min-w-80 h-full">
+      <div class="flex-grow h-full xl:min-w-80">
         <z-input
           icon="search"
           backgroundColor="ink-300"
@@ -39,9 +39,9 @@
         ></z-input>
       </div>
     </div>
-    <div class="flex w-full">
+    <div class="grid grid-cols-12">
       <!-- Issue list -->
-      <div class="flex flex-col w-full xl:w-4/6 space-y-4">
+      <div class="flex flex-col col-span-full xl:col-span-8 gap-y-4">
         <issue-editor
           v-for="edge in edges"
           v-bind="edge.node"
@@ -63,7 +63,7 @@
         ></z-pagination>
       </div>
       <!-- Description -->
-      <issue-description :description="description"></issue-description>
+      <issue-description :description="description" class="col-span-4"></issue-description>
     </div>
   </div>
 </template>

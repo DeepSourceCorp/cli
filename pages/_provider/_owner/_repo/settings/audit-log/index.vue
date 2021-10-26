@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-3xl p-4 space-y-4">
+  <div class="flex flex-col max-w-2xl p-4 space-y-4">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">Audit log</div>
     <!-- Timeline -->
