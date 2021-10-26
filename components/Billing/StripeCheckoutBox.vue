@@ -200,6 +200,7 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
         }, 1200)
       }
     } catch (e) {
+      this.checkoutState = 'FAIL'
       try {
         const err = e as Error
         const errorMessage = JSON.parse(err.message.replace('GraphQL error: ', ''))
@@ -208,8 +209,7 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
         } else {
           this.$toast.danger(errorMessage)
         }
-      } catch {
-        this.checkoutState = 'FAIL'
+      } catch (e) {
         this.$toast.danger(
           'Something went wrong processing your card payment. Please check your card details or contact support.'
         )
