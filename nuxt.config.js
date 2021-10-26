@@ -174,6 +174,11 @@ export default {
     {
       path: '/healthz',
       handler: '~/server/health'
+    },
+    {
+      path: '/directory',
+      handler: '~/server/directoryRedirects',
+      prefix: false
     }
   ],
 
