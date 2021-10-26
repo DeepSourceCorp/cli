@@ -29,7 +29,7 @@
               <span>Credits</span>
               <span
                 :class="ownerBillingInfo.outstandingCredits > 0 ? 'text-juniper' : ''"
-                v-if="billing && ownerBillingInfo.outstandingCredits >= 0"
+                v-if="ownerBillingInfo && ownerBillingInfo.outstandingCredits >= 0"
               >
                 {{ formatUSD(ownerBillingInfo.outstandingCredits) }}
               </span>
