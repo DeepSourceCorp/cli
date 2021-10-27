@@ -7,7 +7,7 @@
       p-1
       space-x-1
       text-xs
-      font-semibold
+      font-normal
       leading-none
       text-center
       rounded-md
