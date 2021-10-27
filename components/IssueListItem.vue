@@ -73,12 +73,15 @@
             {{ shortenNumber(occurrenceCount) }}
           </div>
           <!-- Info -->
-          <div v-if="showTrend" class="hidden px-1 text-center text-vanilla-400 sm:block">
+          <div
+            v-if="showTrend"
+            class="hidden px-1 text-center sm:block"
+            :class="{
+              'text-cherry': !isTrendPositive,
+              'text-juniper': isTrendPositive
+            }"
+          >
             <span
-              :class="{
-                'text-cherry': !isTrendPositive,
-                'text-juniper': isTrendPositive
-              }"
               ><span v-html="isTrendPositive ? '&#9660;' : '&#9650;'"></span>
               {{ `${trendValue}%` }}</span
             >
