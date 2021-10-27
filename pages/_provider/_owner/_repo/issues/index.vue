@@ -230,7 +230,7 @@ export default class Issues extends mixins(
   }
 
   initializeQueryParams(): void {
-    if (this.repository.errorCode) {
+    if (this.repository.errorCode && this.repository.errorCode !== 3003) {
       this.queryParams = {}
     } else {
       this.queryParams as IssueListFilters
