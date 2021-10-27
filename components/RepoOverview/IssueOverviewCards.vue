@@ -8,7 +8,7 @@
     customGridClass="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
   >
     <template v-if="$fetchState.pending">
-      <div v-for="idx in loaderCount" :key="idx" class="p-2 space-y-4 h-22 sm:h-24 outline-ink-300">
+      <div v-for="idx in loaderCount" :key="idx" class="p-2 space-y-4 h-22 sm:h-24 outline-ink-200">
         <div class="h-6 rounded-md bg-ink-300 w-36 animate-pulse"></div>
         <div class="h-6 rounded-md bg-ink-300 w-14 animate-pulse"></div>
       </div>
@@ -33,7 +33,6 @@
             </h5>
           </template>
           <span
-            :class="isTrendPositive(widget) ? '' : 'text-cherry'"
             v-tooltip="
               widget.value_display > 1000
                 ? `${formatIntl(widget.value_display)} ${widget.title}`
