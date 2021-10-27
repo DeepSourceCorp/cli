@@ -46,18 +46,38 @@
               activeDashboardContext.type === 'team'
             "
           >
-            <z-tag
-              v-if="hasPaidPlan"
-              class="leading-none text-center border border-ink-100 cursor"
-              spacing="py-1.5 px-3"
-              bgColor="ink-200"
-              v-tooltip="`This account is on the ${planName} plan`"
-              >{{ planName }}</z-tag
-            >
+            <template v-if="hasPaidPlan">
+              <nuxt-link v-if="canVisitBillingPage" :to="$generateRoute(['settings', 'billing'])">
+                <z-tag
+                  class="leading-none text-center border border-ink-100"
+                  spacing="py-1.5 px-3"
+                  bgColor="ink-200"
+                  v-tooltip="`This account is on the ${planName} plan`"
+                  >{{ planName }}</z-tag
+                >
+              </nuxt-link>
+              <z-tag
+                v-else
+                class="leading-none text-center border border-ink-100 cursor"
+                spacing="py-1.5 px-3"
+                bgColor="ink-200"
+                v-tooltip="`This account is on the ${planName} plan`"
+                >{{ planName }}</z-tag
+              >
+            </template>
             <nuxt-link v-else-if="!$config.onPrem" :to="$generateRoute(['settings', 'billing'])">
               <z-tag
                 icon-left="star"
-                class="font-semibold leading-none tracking-wider text-center uppercase border border-ink-100 text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
+                class="
+                  font-semibold
+                  leading-none
+                  tracking-wider
+                  text-center
+                  uppercase
+                  border border-ink-100
+                  text-vanilla-300
+                  hover:text-vanilla-100 hover:bg-ink-100
+                "
                 spacing="py-1.5 px-3"
                 bgColor="ink-200"
                 v-tooltip="'See upgrade options'"
@@ -79,6 +99,7 @@ import { ZIcon, ZTag, ZAvatar, ZAvatarGroup } from '@deepsourcelabs/zeal'
 import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import AuthMixin from '~/mixins/authMixin'
+import { TeamPerms } from '~/types/permTypes'
 
 const FREE_PLAN_SLUG = 'free'
 
@@ -94,11 +115,27 @@ export default class DashboardHeader extends mixins(ActiveUserMixin, ContextMixi
   get planName(): string {
     return (this.activeDashboardContext as DashboardContext).subscribed_plan_info?.name
   }
+
   get hasPaidPlan(): boolean {
     return (
       (this.activeDashboardContext as DashboardContext).subscribed_plan_info?.slug !==
       FREE_PLAN_SLUG
     )
+  }
+
+  get canVisitBillingPage(): boolean {
+    if (this.teamPerms.permission && this.activeOwner === this.$route.params.owner) {
+      return this.$gateKeeper.team(
+        [
+          TeamPerms.CHANGE_PLAN,
+          TeamPerms.UPDATE_SEATS,
+          TeamPerms.DELETE_TEAM_ACCOUNT,
+          TeamPerms.UPDATE_BILLING_DETAILS
+        ],
+        this.teamPerms.permission
+      )
+    }
+    return false
   }
 
   get repoVCSIcon(): string {
