@@ -104,7 +104,8 @@ export default {
         ? false
         : process.env.NODE_ENV !== 'development',
     sourceMapStyle: 'hidden-source-map',
-    disabled: process.env.ON_PREM ? true : process.env.DISABLE_SENTRY
+    disabled: true
+    // disabled: process.env.ON_PREM ? true : process.env.DISABLE_SENTRY
   },
 
   stripe: {
