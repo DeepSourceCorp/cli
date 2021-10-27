@@ -14,11 +14,12 @@
       :show-legend="false"
       :axis-options="axisOptions"
       :line-options="lineOptions"
+      :yAxisMin="0"
     />
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZChart } from '@deepsourcelabs/zeal'
 import { formatIntl } from '@/utils/string'
 

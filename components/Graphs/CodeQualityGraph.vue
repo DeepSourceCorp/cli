@@ -44,6 +44,7 @@
           }"
           :colors="codeQualityData.colors"
           type="line"
+          :yAxisMin="0"
           :showLegend="false"
           :axisOptions="axisOptions"
         ></z-chart>
