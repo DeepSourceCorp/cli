@@ -13,6 +13,7 @@ query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: S
       resolvedIssuesCount
       createdBy {
         fullName
+        email
         avatar
       }
       analyzer {

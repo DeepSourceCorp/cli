@@ -32,6 +32,7 @@ query AutofixRuns(
           changeset
           createdBy {
             fullName
+            email
             avatar
           }
           analyzer {

@@ -108,7 +108,7 @@
         </div>
         <p
           class="text-sm leading-relaxed text-vanilla-400"
-          v-html="getRoleMessage(newMemberRole, member.user.fullName)"
+          v-html="getRoleMessage(newMemberRole, member.user.fullName || member.user.email)"
         ></p>
       </z-confirm>
       <z-confirm
@@ -233,14 +233,16 @@ export default class RepositoryMembers extends mixins(RepoDetailMixin) {
         }
         this.fetchRepoMembers(true)
         this.$toast.success(
-          `${this.member.user.fullName}'s permission successfully updated to ${
-            this.repoPerms[this.newMemberRole].label
-          }.`
+          `${
+            this.member.user.fullName ?? this.member.user.email
+          }'s permission successfully updated to ${this.repoPerms[this.newMemberRole].label}.`
         )
       }
     } catch (e) {
-      if (this.member?.user) {
+      if (this.member?.user?.fullName) {
         this.$toast.danger(`Failed to update permission for ${this.member.user.fullName}.`)
+      } else if (this.member?.user?.email) {
+        this.$toast.danger(`Failed to update permission for ${this.member.user.email}.`)
       } else {
         this.$toast.danger(`Failed to update permission`)
       }
@@ -264,12 +266,18 @@ export default class RepositoryMembers extends mixins(RepoDetailMixin) {
         })
         this.fetchRepoMembers(true)
         this.$toast.success(
-          `${this.member.user.fullName} successfully removed from this repository.`
+          `${
+            this.member.user.fullName ?? this.member.user.email
+          } successfully removed from this repository.`
         )
       }
     } catch (e) {
       if (this.member) {
-        this.$toast.danger(`Failed to remove ${this.member.user.fullName} from this repository.`)
+        this.$toast.danger(
+          `Failed to remove ${
+            this.member.user.fullName ?? this.member.user.email
+          } from this repository.`
+        )
       } else {
         this.$toast.danger(`Failed to remove member from this repository.`)
       }

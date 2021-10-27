@@ -18,6 +18,7 @@ query($runId: String!) {
     vcsPrUrl
     createdBy {
       fullName
+      email
       avatar
     }
     analyzer {

@@ -41,7 +41,9 @@
             alt="Creator Avatar"
             class="w-4 h-4 overflow-hidden inline-block rounded-full"
           />
-          <span class="text-sm text-vanilla-400">Created by {{ createdBy.fullName }}</span>
+          <span class="text-sm text-vanilla-400"
+            >Created by {{ createdBy.fullName || createdBy.email }}</span
+          >
         </div>
       </div>
     </template>

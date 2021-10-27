@@ -2,7 +2,7 @@
   <div class="flex flex-col space-y-2">
     <div class="text-md text-vanilla-400">
       <span class="font-semibold text-vanilla-100">{{ eventDescription }}</span>
-      — {{ actor.fullName }}
+      — {{ actor.fullName || actor.email }}
     </div>
     <div class="flex space-x-4">
       <info v-tooltip="this.createdAt" v-if="createdAt" icon="clock" :title="formatDuration"></info>

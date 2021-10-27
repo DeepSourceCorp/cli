@@ -16,7 +16,7 @@
         <div
           class="flex items-center space-x-2 text-base font-medium cursor-pointer text-vanilla-200"
         >
-          {{ viewer.firstName }}
+          {{ viewer.firstName || viewer.email }}
           <z-icon icon="chevron-down" size="small" color="vanilla-200"></z-icon>
         </div>
       </div>
@@ -77,7 +77,16 @@
           <!-- Recently added analyzer in expanded state -->
           <div
             v-if="index == selectedAnalyzers.length - 1"
-            class="inline-flex items-center px-2 py-1 space-x-1 border-2 border-solid bg-ink-200 border-ink-400"
+            class="
+              inline-flex
+              items-center
+              px-2
+              py-1
+              space-x-1
+              border-2 border-solid
+              bg-ink-200
+              border-ink-400
+            "
           >
             <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
             <span class="text-sm font-bold text-vanilla-200">{{ analyzer.label }}</span>
