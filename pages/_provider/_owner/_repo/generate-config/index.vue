@@ -87,10 +87,14 @@
                 tracking-wider
                 uppercase
                 text-vanilla-400
+                flex
+                items-center
               "
             >
               Patterns
-              <z-tag text-size="xxs" class="ml-2 text-vanilla-400">Optional</z-tag>
+              <z-tag text-size="xxs" spacing="py-1 px-3" class="ml-2 text-vanilla-400"
+                >Optional</z-tag
+              >
             </div>
           </template>
           <template slot="description">
