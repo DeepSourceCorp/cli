@@ -19,7 +19,7 @@
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
-    <section class="px-3 py-4 border-b border-ink-200">
+    <section class="p-4 border-b border-ink-200">
       <nuxt-link to="/discover">
         <img class="h-5 mt-0.5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
       </nuxt-link>
