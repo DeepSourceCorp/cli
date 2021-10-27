@@ -54,8 +54,8 @@
           >
             {{ resolvedIssuesCount || 0 }}
           </div>
-          <div v-if="isPending" class="text-xs text-vanilla-400">Occurrences fixable</div>
-          <div v-else class="text-xs text-vanilla-400">Occurrences fixed</div>
+          <div v-if="isPending" class="text-xs text-vanilla-400">occurrences fixable</div>
+          <div v-else class="text-xs text-vanilla-400">occurrences fixed</div>
         </div>
       </div>
     </template>
