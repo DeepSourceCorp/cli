@@ -5,19 +5,19 @@
       :routeToPrevious="routeToPrevious"
       :currentAnalyzer="$route.params.analyzer"
     ></transform-header>
-    <div class="flex flex-col space-y-3 w-full">
+    <div class="flex flex-col w-full space-y-3">
       <!-- Transform section banner -->
-      <div class="flex w-full bg-ink-300 px-4 py-2 text-vanilla-400 items-center space-x-2">
+      <div class="flex items-center w-full px-4 py-2 space-x-2 bg-ink-300 text-vanilla-400">
         <z-icon icon="zap" color="vanilla-400" size="small"></z-icon>
-        <span class="uppercase tracking-normal sm:tracking-wide text-xxs sm:text-sm">
+        <span class="tracking-normal uppercase sm:tracking-wide text-xxs sm:text-sm">
           transform session
         </span>
-        <div class="w-px bg-ink-200 h-full"></div>
+        <div class="w-px h-full bg-ink-200"></div>
         <div class="flex-1 space-x-2">
           <z-tag
             v-for="tool in transformerRun.tools"
             :key="tool.shortcode"
-            class="text-vanilla-300 flex items-center space-x-1"
+            class="flex items-center space-x-1 text-vanilla-300"
             textSize="xs"
             spacing="py-1 px-2"
             bgColor="ink-200"
@@ -61,23 +61,23 @@
         <div
           v-for="(changes, name) in transformerRun.changeset"
           :key="name"
-          class="w-full border border-ink-200 rounded-md"
+          class="w-full border rounded-md border-ink-200"
         >
           <!-- Heading -->
-          <div class="px-4 py-2 bg-ink-300 text-vanilla-100 font-medium">
+          <div class="px-4 py-2 font-medium bg-ink-300 text-vanilla-100">
             {{ name }}
           </div>
           <!-- Code -->
           <div
             v-for="(change, index) in changes"
             :key="change.id"
-            class="flex w-full"
+            class="grid w-full grid-cols-2"
             :class="{ 'border-b-4 border-ink-200': index !== changes.length - 1 }"
           >
-            <div class="after_html w-1/2 border-r border-ink-200">
+            <div class="col-span-1 border-r after_html border-ink-200">
               <z-code :content="change.before_html"></z-code>
             </div>
-            <div class="before_html w-1/2">
+            <div class="col-span-1 before_html">
               <z-code :content="change.after_html"></z-code>
             </div>
           </div>

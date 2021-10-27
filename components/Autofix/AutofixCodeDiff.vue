@@ -4,14 +4,14 @@
     <div
       v-for="(change, name) in changeSet"
       :key="name"
-      class="code relative flex flex-col border border-ink-200 rounded-sm"
+      class="relative flex flex-col border rounded-sm code border-ink-200"
     >
       <div
         v-if="isGroup"
         class="absolute w-6 h-0.5 bg-juniper transform -translate-x-full top-4"
       ></div>
       <!-- title -->
-      <div class="bg-ink-300 p-2 text-sm flex items-center space-x-1 border-b border-ink-200">
+      <div class="flex items-center p-2 space-x-1 text-sm border-b bg-ink-300 border-ink-200">
         <z-checkbox
           v-if="!isReadOnly"
           v-model="selectedFiles"
@@ -23,7 +23,7 @@
           @change="selectFile(name)"
         />
         <span
-          class="font-medium flex-1"
+          class="flex-1 font-medium"
           :class="{
             'text-cherry': change.patches && change.patches[0].action === 'deleted',
             'text-vanilla-400': change.patches && change.patches[0].action === 'modified'
@@ -61,7 +61,7 @@
         :class="{ 'border-b-2 border-ink-200': index !== change.patches.length - 1 }"
       >
         <div
-          class="bg-ink-300 flex items-start pt-4"
+          class="flex items-start pt-4 bg-ink-300"
           :class="{
             'pl-2': !isReadOnly && code.action === 'modified' && code.action !== 'deleted'
           }"
@@ -85,21 +85,23 @@
           </div>
         </template>
         <template v-else>
-          <div
-            class="after_html w-1/2 border-r border-ink-200"
-            :class="{
-              'bg-ink-300 opacity-20': !isHunkSelected(code.id)
-            }"
-          >
-            <z-code :content="code.before_html"></z-code>
-          </div>
-          <div
-            class="before_html w-1/2"
-            :class="{
-              'bg-ink-300 opacity-20': !isHunkSelected(code.id)
-            }"
-          >
-            <z-code :content="code.after_html"></z-code>
+          <div class="grid w-full grid-cols-2">
+            <div
+              class="col-span-1 border-r after_html border-ink-200"
+              :class="{
+                'bg-ink-300 opacity-20': !isHunkSelected(code.id)
+              }"
+            >
+              <z-code :content="code.before_html"></z-code>
+            </div>
+            <div
+              class="col-span-1 before_html"
+              :class="{
+                'bg-ink-300 opacity-20': !isHunkSelected(code.id)
+              }"
+            >
+              <z-code :content="code.after_html"></z-code>
+            </div>
           </div>
         </template>
       </div>
