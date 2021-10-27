@@ -195,21 +195,6 @@ export default class Issues extends mixins(
     this.queryParams.page = 1
   }
 
-  created() {
-    this.queryParams as IssueListFilters
-    const { query } = this.$route
-
-    // load query params from URL
-    this.queryParams = {
-      page: query.page ? Number(query.page) : null,
-      category: query.category,
-      analyzer: query.analyzer || 'all',
-      q: query.q || null,
-      sort: query.sort || null,
-      autofixAvailable: query.autofixAvailable || null
-    }
-  }
-
   get parsedParams(): IssueListFilters {
     const parsed = {} as IssueListFilters
     const { q, page, sort, analyzer, category, autofixAvailable } = this.queryParams
@@ -235,13 +220,37 @@ export default class Issues extends mixins(
 
   async fetch(): Promise<void> {
     await Promise.all([
-      this.fetchRepoDetails(this.baseRouteParams),
+      this.fetchRepoDetailsLocal(),
       this.fetchRepoPerms(this.baseRouteParams),
       this.fetchIssuesForOwner()
     ])
 
     this.fetchRepoAutofixStats(this.baseRouteParams)
     this.fetchIsCommitPossible(this.baseRouteParams)
+  }
+
+  initializeQueryParams(): void {
+    if (this.repository.errorCode) {
+      this.queryParams = {}
+    } else {
+      this.queryParams as IssueListFilters
+      const { query } = this.$route
+
+      // load query params from URL
+      this.queryParams = {
+        page: query.page ? Number(query.page) : null,
+        category: query.category,
+        analyzer: query.analyzer || 'all',
+        q: query.q || null,
+        sort: query.sort || null,
+        autofixAvailable: query.autofixAvailable || null
+      }
+    }
+  }
+
+  async fetchRepoDetailsLocal() {
+    await this.fetchRepoDetails(this.baseRouteParams)
+    this.initializeQueryParams()
   }
 
   async fetchIssuesForOwner(refetch = false): Promise<void> {
@@ -288,8 +297,9 @@ export default class Issues extends mixins(
     this.fetchIssuesForOwner(true)
   }
 
-  refetchRepoDetails(): void {
-    this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
+  async refetchRepoDetails(): Promise<void> {
+    await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
+    this.initializeQueryParams()
   }
 
   mounted(): void {
