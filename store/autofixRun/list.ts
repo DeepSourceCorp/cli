@@ -133,10 +133,11 @@ export const actions: AutofixRunListModuleActions = {
           name: args.name,
           prStatusIn: [
             AutofixRunPullRequestStatus.Pnc.toLowerCase(),
-            AutofixRunPullRequestStatus.Prc.toLowerCase(),
-            AutofixRunPullRequestStatus.Pro.toLowerCase()
+            AutofixRunPullRequestStatus.Prf.toLowerCase(),
+            AutofixRunPullRequestStatus.Pro.toLowerCase(),
+            AutofixRunPullRequestStatus.Prp.toLowerCase()
           ],
-          statusIn: [AutofixRunStatus.Pend.toLowerCase()],
+          statusIn: [AutofixRunStatus.Pend.toLowerCase(), AutofixRunStatus.Pass.toLowerCase()],
           after: this.$getGQLAfter(args.currentPageNumber, args.limit),
           limit: args.limit || 10
         },
