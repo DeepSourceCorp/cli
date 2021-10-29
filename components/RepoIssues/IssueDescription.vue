@@ -1,6 +1,6 @@
 <template>
   <!-- Description -->
-  <div class="flex-col hidden xl:flex">
+  <div class="hidden lg:block">
     <div class="px-4 text-sm font-medium tracking-wider uppercase text-vanilla-100">
       Description
     </div>

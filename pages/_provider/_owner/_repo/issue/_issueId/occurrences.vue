@@ -3,7 +3,7 @@
     <issue-occurence-section @filtersUpdated="addFilters"></issue-occurence-section>
     <div class="grid grid-cols-12">
       <!-- Issue list -->
-      <div class="flex flex-col col-span-full xl:col-span-8 gap-y-4">
+      <div class="flex flex-col col-span-full lg:col-span-8 gap-y-4">
         <div
           v-if="checkIssues.totalCount === 0"
           class="flex items-center justify-center w-full h-full"
@@ -38,7 +38,7 @@
         />
       </div>
       <!-- Description -->
-      <div v-if="$fetchState.pending" class="hidden col-span-4 px-4 xl:block">
+      <div v-if="$fetchState.pending" class="hidden col-span-4 px-4 lg:block">
         <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
       </div>
       <issue-description

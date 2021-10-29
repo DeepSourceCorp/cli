@@ -41,7 +41,7 @@
     </div>
     <div class="grid grid-cols-12">
       <!-- Issue list -->
-      <div class="flex flex-col col-span-full xl:col-span-8 gap-y-4">
+      <div class="flex flex-col col-span-full lg:col-span-8 gap-y-4">
         <issue-editor
           v-for="edge in edges"
           v-bind="edge.node"
