@@ -3,7 +3,17 @@
     <form-group label="Billing Information" :divide="false" bodyClass="space-y-4">
       <div v-if="isBilledByStripe || isBilledManually">
         <div
-          class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 min-h-36 border-ink-300"
+          class="
+            grid
+            w-full
+            grid-cols-1
+            border
+            rounded-md
+            border-opacity-70
+            md:grid-cols-2
+            min-h-36
+            border-ink-200
+          "
         >
           <div class="flex flex-col justify-between px-4 py-3 bg-ink-300 min-h-40">
             <div v-if="ownerBillingInfo.upcomingBillAmount">
@@ -186,7 +196,18 @@
       class="mt-5"
       v-if="isBilledByStripe && ownerBillingInfo.activeCard"
     >
-      <div class="flex items-center justify-between w-full p-4 border rounded-md border-ink-300">
+      <div
+        class="
+          flex
+          items-center
+          justify-between
+          w-full
+          p-4
+          border
+          rounded-md
+          border-ink-200 border-opacity-70
+        "
+      >
         <div class="flex items-center space-x-4">
           <img
             :src="

@@ -7,7 +7,21 @@
         rel="noopener noreferrer"
         v-for="inv in billing.invoices"
         :key="inv.invoiceId"
-        class="flex items-center w-full p-4 space-x-4 border rounded-md cursor-pointer group border-ink-300 hover:bg-ink-300 hover:border-ink-200 text-vanilla-400 hover:text-vanilla-100"
+        class="
+          flex
+          items-center
+          w-full
+          p-4
+          space-x-4
+          border
+          rounded-md
+          cursor-pointer
+          group
+          border-ink-200 border-opacity-70
+          hover:bg-ink-300 hover:border-ink-200
+          text-vanilla-400
+          hover:text-vanilla-100
+        "
       >
         <!-- Replace with PDF -->
         <z-icon icon="file-text" size="medium" color="current"></z-icon>
@@ -24,7 +38,7 @@
       <div
         v-for="idx in 6"
         :key="idx"
-        class="h-14 w-full bg-ink-300 animate-pulse rounded-md"
+        class="w-full rounded-md h-14 bg-ink-300 animate-pulse"
       ></div>
     </template>
   </form-group>
