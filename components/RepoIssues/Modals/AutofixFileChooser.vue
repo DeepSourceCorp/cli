@@ -3,7 +3,17 @@
     <z-modal v-if="isOpen" @onClose="close" title="Choose files you want to run Autofix on">
       <div class="flex p-4 space-x-2 text-vanilla-400">
         <div
-          class="flex flex-col w-full space-y-2 text-sm leading-7 text-vanilla-400 custom-y-scroll min-h-40 max-h-102"
+          class="
+            flex flex-col
+            w-full
+            space-y-2
+            text-sm
+            leading-7
+            text-vanilla-400
+            custom-y-scroll
+            min-h-40
+            max-h-102
+          "
         >
           <z-input
             v-model="searchCandidate"
@@ -63,12 +73,34 @@
         <div class="p-2 space-x-1 leading-none text-right border-t text-vanilla-100 border-ink-200">
           <button
             @click="close()"
-            class="inline-flex items-center justify-center h-8 px-4 py-1 space-x-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out rounded-sm bg-ink-200 focus:outline-none whitespace-nowrap text-vanilla-100 hover:bg-ink-100"
+            class="
+              inline-flex
+              items-center
+              justify-center
+              h-8
+              px-4
+              py-1
+              space-x-1
+              text-xs
+              font-medium
+              leading-loose
+              transition-colors
+              duration-300
+              ease-in-out
+              rounded-sm
+              bg-ink-200
+              focus:outline-none
+              whitespace-nowrap
+              text-vanilla-100
+              hover:bg-ink-100
+            "
           >
             <span> Cancel </span>
           </button>
           <z-button
-            :disabled="selectedFiles.length < 1"
+            :disabled="selectedFiles.length < 1 || autofixLoading"
+            :isLoading="autofixLoading"
+            loadingLabel="Creating Autofix"
             class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
             buttonType="primary"
@@ -137,6 +169,8 @@ export default class AutofixFileChooser extends mixins(
 
   public maxFilesAutofixRun = 50
 
+  public autofixLoading = false
+
   mounted() {
     this.selectAll = true
     this.updateFiles()
@@ -181,6 +215,7 @@ export default class AutofixFileChooser extends mixins(
   }
 
   public async autofixSelectedFiles(close: () => void): Promise<void> {
+    this.autofixLoading = true
     try {
       const response = await this.createAutofixRun({
         inputFiles: this.selectedFiles,
@@ -201,12 +236,6 @@ export default class AutofixFileChooser extends mixins(
         refetch: true
       })
 
-      if (close) {
-        close()
-      } else {
-        this.close()
-      }
-
       if (this.$route.name?.startsWith('provider-owner-repo')) {
         this.$router.push(this.$generateRoute(['autofix', response.runId as string]))
       } else if (this.repoParams) {
@@ -215,6 +244,12 @@ export default class AutofixFileChooser extends mixins(
           ['', provider, login, name, 'autofix', response.runId as string].join('/')
         )
       }
+
+      if (close) {
+        close()
+      } else {
+        this.close()
+      }
     } catch (e) {
       this.$toast.danger('There was a problem running Autofix')
       this.logSentryErrorForUser(e, 'AutofixError', {
@@ -222,6 +257,8 @@ export default class AutofixFileChooser extends mixins(
         inputFiles: this.selectedFiles,
         repoIssueId: this.issueId
       })
+    } finally {
+      this.autofixLoading = false
     }
   }
 }
