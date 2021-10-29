@@ -1,18 +1,41 @@
 <template>
   <div>
     <sub-nav active="transforms"></sub-nav>
-    <div class="grid grid-cols-1 gap-y-4 w-full p-4">
+    <div class="grid w-full grid-cols-1 p-4 gap-y-4">
       <template v-if="transformRuns">
         <template v-if="transformRuns.length">
           <transform-branches v-for="run in transformRuns" :key="run.branchName" :run="run">
           </transform-branches>
         </template>
-        <template v-else>No transforms</template>
+        <template v-else>
+          <empty-state
+            title="Looks empty here"
+            :subtitle="
+              allowConfigGeneration
+                ? 'This repository has no transform runs, you can activate Transformers using the config generator.'
+                : 'This repository has no transform runs, the repository owner can activate Transformers using the config generator.'
+            "
+          >
+            <template #action>
+              <nuxt-link v-if="allowConfigGeneration" :to="$generateRoute(['generate-config'])">
+                <z-button size="small" icon="plus"> Add Transformers </z-button>
+              </nuxt-link>
+              <z-button
+                button-type="secondary"
+                to="https://deepsource.io/docs/concepts/#transformers"
+                size="small"
+                icon="doc"
+              >
+                Read documentation
+              </z-button>
+            </template>
+          </empty-state>
+        </template>
       </template>
       <template v-else>
         <div v-for="key in 6" :key="key" class="space-y-2 animate-pulse">
-          <div class="h-8 w-24 bg-ink-200 rounded-md"></div>
-          <div class="h-24 w-full bg-ink-200 rounded-md"></div>
+          <div class="w-24 h-8 rounded-md bg-ink-200"></div>
+          <div class="w-full h-24 rounded-md bg-ink-200"></div>
         </div>
       </template>
     </div>
@@ -24,28 +47,31 @@ import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
 // Components
 import { SubNav, TransformBranches } from '@/components/History'
-
+import { ZButton } from '@deepsourcelabs/zeal'
 // Store & Types
 import { TransformListActions } from '@/store/transformerRun/list'
 import { TransformerRun, TransformerRunConnection } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { resolveNodes } from '~/utils/array'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import { RepoPerms } from '~/types/permTypes'
 
 const transformRunListStore = namespace('transformerRun/list')
 
 @Component({
   components: {
     TransformBranches,
-    SubNav
+    SubNav,
+    ZButton
   },
   layout: 'repository'
 })
-export default class Transforms extends mixins(RepoDetailMixin) {
+export default class Transforms extends mixins(RepoDetailMixin, RoleAccessMixin) {
   @transformRunListStore.State
   transformerRunList: TransformerRunConnection
 
   async fetch(): Promise<void> {
-    await this.fetchTransformRuns()
+    await Promise.all([this.fetchTransformRuns(), this.fetchRepoPerms(this.baseRouteParams)])
   }
 
   get transformRuns(): TransformerRun[] {
@@ -60,6 +86,10 @@ export default class Transforms extends mixins(RepoDetailMixin) {
   beforeDestroy(): void {
     this.$socket.$off('transformerrun-patches-ready', this.fetchTransformRuns)
     this.$socket.$off('transformerrun-patches-ready', this.fetchTransformRuns)
+  }
+
+  get allowConfigGeneration(): boolean {
+    return this.$gateKeeper.repo(RepoPerms.ACTIVATE_REPOSITORY, this.repoPerms.permission)
   }
 
   async fetchTransformRuns(): Promise<void> {
