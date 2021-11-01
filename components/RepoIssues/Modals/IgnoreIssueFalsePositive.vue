@@ -4,11 +4,11 @@
       <template slot="title">
         <span class="text-sm font-medium text-vanilla-400">
           Ignore and mark this occurrence of
-          <span class="text-vanilla-100 font-bold">{{ issueShortcode }}</span> as a
-          <span class="text-vanilla-100 font-bold">false-positive</span>
+          <span class="font-bold text-vanilla-100">{{ issueShortcode }}</span> as a
+          <span class="font-bold text-vanilla-100">false-positive</span>
         </span>
       </template>
-      <div class="text-vanilla-400 text-sm leading-7 flex flex-col space-y-4 p-4">
+      <div class="flex flex-col p-4 space-y-4 text-sm leading-7 text-vanilla-400">
         <span>
           This will <span class="font-bold">remove the current occurrence</span> of this issue and
           notify our team who will be available to respond to your questions.</span
@@ -21,17 +21,19 @@
         </div>
       </div>
       <template slot="footer">
-        <div class="py-3 px-3 space-x-2 text-right text-vanilla-100 border-ink-200 border-t">
+        <div class="px-3 py-3 space-x-2 text-right border-t text-vanilla-100 border-ink-200">
           <z-button
-            class="modal-primary-action flex space-x-2 items-center"
+            class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
             buttonType="primary"
             size="small"
+            icon="check"
+            label="Confirm and ignore"
+            loadingLabel="Updating issue"
             @click="confirm"
-          >
-            <z-icon icon="check" size="small" color="ink-300"></z-icon>
-            <span class="text-xs text-ink-300">Confirm and ignore</span>
-          </z-button>
+            :disabled="isLoading"
+            :isLoading="isLoading"
+          />
         </div>
       </template>
     </z-modal>
@@ -63,6 +65,8 @@ export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin, A
   @Prop()
   shortcode?: string
 
+  isLoading = false
+
   get issueShortcode(): string {
     return this.shortcode ?? this.issue.shortcode ?? this.singleIssue.shortcode
   }
@@ -74,6 +78,7 @@ export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin, A
   }
 
   public async confirm(): Promise<void> {
+    this.isLoading = true
     try {
       const response = await this.ignoreIssueFalsePositive({
         checkIssueId: this.checkIssueId,
@@ -92,6 +97,8 @@ export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin, A
         checkIssueId: this.checkIssueId,
         comment: this.comment
       })
+    } finally {
+      this.isLoading = false
     }
   }
 }

@@ -4,30 +4,32 @@
       <template slot="title">
         <span class="text-sm font-medium text-vanilla-400">
           Ignore issue
-          <span class="text-vanilla-100 font-bold">{{ issueShortcode }}</span> for
-          <span class="text-vanilla-100 font-bold">{{ filePath }}</span
+          <span class="font-bold text-vanilla-100">{{ issueShortcode }}</span> for
+          <span class="font-bold text-vanilla-100">{{ filePath }}</span
           >?
         </span>
       </template>
-      <div class="flex space-x-2 p-4 text-vanilla-400">
+      <div class="flex p-4 space-x-2 text-vanilla-400">
         <z-icon icon="alert-circle" size="medium" color="vanilla-400"></z-icon>
-        <div class="text-vanilla-400 text-sm leading-7 flex flex-col space-y-2">
+        <div class="flex flex-col space-y-2 text-sm leading-7 text-vanilla-400">
           Doing this will remove all current occurrences of this issue and silence all the future
           ones in this file.
         </div>
       </div>
       <template slot="footer">
-        <div class="py-3 px-3 space-x-2 text-right text-vanilla-100 border-ink-200 border-t">
+        <div class="px-3 py-3 space-x-2 text-right border-t text-vanilla-100 border-ink-200">
           <z-button
-            class="modal-primary-action flex space-x-2 items-center"
+            class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
             buttonType="primary"
             size="small"
+            icon="check"
+            label="Confirm and ignore"
+            loadingLabel="Updating issue"
             @click="confirm"
-          >
-            <z-icon icon="check" size="small" color="ink-300"></z-icon>
-            <span class="text-xs text-ink-300">Confirm and ignore</span>
-          </z-button>
+            :disabled="isLoading"
+            :isLoading="isLoading"
+          />
         </div>
       </template>
     </z-modal>
@@ -61,6 +63,7 @@ export default class IgnoreIssueOccurence extends mixins(IssueDetailMixin, Activ
   shortcode?: string
 
   public selectedValue = false
+  public isLoading = false
 
   public close(): void {
     this.$emit('close')
@@ -86,6 +89,9 @@ export default class IgnoreIssueOccurence extends mixins(IssueDetailMixin, Activ
       params.checkId = this.checkId
       params.issueShortcode = this.issueShortcode
     }
+
+    this.isLoading = true
+
     try {
       const response = await this.ignoreIssueForFile(params)
       this.$emit('ignoreForever', response.checkIssueIds)
@@ -95,6 +101,8 @@ export default class IgnoreIssueOccurence extends mixins(IssueDetailMixin, Activ
         method: 'Ignore Issue Occurence for Single File',
         ...params
       })
+    } finally {
+      this.isLoading = false
     }
   }
 }

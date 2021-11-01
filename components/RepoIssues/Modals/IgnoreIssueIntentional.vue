@@ -4,12 +4,12 @@
       <template slot="title">
         <span class="text-sm font-medium text-vanilla-400">
           Ignore and mark this occurrence of
-          <span class="text-vanilla-100 font-bold">{{ issueShortcode }}</span> as intentional
+          <span class="font-bold text-vanilla-100">{{ issueShortcode }}</span> as intentional
         </span>
       </template>
-      <div class="flex space-x-2 p-4 text-vanilla-400">
+      <div class="flex p-4 space-x-2 text-vanilla-400">
         <z-icon icon="alert-circle" size="medium" color="vanilla-400"></z-icon>
-        <div class="text-vanilla-400 text-sm leading-7 flex flex-col space-y-2">
+        <div class="flex flex-col space-y-2 text-sm leading-7 text-vanilla-400">
           <span>This will only remove the current occurrence of this issue.</span>
           <span
             ><span class="font-bold"
@@ -21,17 +21,19 @@
         </div>
       </div>
       <template slot="footer">
-        <div class="py-2 px-3 space-x-2 text-right text-vanilla-100 border-ink-200 border-t">
+        <div class="px-3 py-2 space-x-2 text-right border-t text-vanilla-100 border-ink-200">
           <z-button
-            class="modal-primary-action flex space-x-2 items-center"
+            class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"
             buttonType="primary"
             size="small"
+            icon="check"
+            label="Confirm and ignore"
+            :isLoading="isLoading"
+            :disabled="isLoading"
+            loadingLabel="Updating issue"
             @click="confirm"
-          >
-            <z-icon icon="check" size="small" color="ink-300"></z-icon>
-            <span class="text-xs text-ink-300">Confirm and ignore</span>
-          </z-button>
+          />
         </div>
       </template>
     </z-modal>
@@ -61,6 +63,8 @@ export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin, Act
   @Prop()
   shortcode?: string
 
+  isLoading = false
+
   get issueShortcode(): string {
     return this.shortcode ?? this.issue.shortcode ?? this.singleIssue.shortcode
   }
@@ -72,6 +76,7 @@ export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin, Act
   }
 
   public async confirm(): Promise<void> {
+    this.isLoading = true
     try {
       const response = await this.updateIgnoreCheckIssue({
         checkIssueId: this.checkIssueId
@@ -88,6 +93,8 @@ export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin, Act
         shortcode: this.shortcode,
         checkIssueId: this.checkIssueId
       })
+    } finally {
+      this.isLoading = false
     }
   }
 }
