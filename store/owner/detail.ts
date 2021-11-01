@@ -9,7 +9,8 @@ import {
   SubscriptionCheckoutPayload,
   UpdateCodeQualitySubscriptionSeatsPayload,
   UpdatePaymentActionChoice,
-  UpdateDefaultPaymentSourcePayload
+  UpdateDefaultPaymentSourcePayload,
+  SubscriptionStatusChoice
 } from '~/types/types'
 import { GraphqlError } from '~/types/apollo-graphql-types'
 
@@ -25,6 +26,7 @@ import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/up
 
 // Billing
 import BillingDetails from '~/apollo/queries/owner/billing.gql'
+import BillingStatus from '~/apollo/queries/owner/billing.gql'
 import ApplyCredits from '~/apollo/mutations/owner/applyCreditsToOwner.gql'
 import UpdateBillingInfo from '~/apollo/mutations/owner/updateBillingInfo.gql'
 import GetBillingInfo from '~/apollo/mutations/owner/getBillingInfo.gql'
@@ -34,6 +36,7 @@ import ChangePlan from '~/apollo/mutations/owner/changePlan.gql'
 import UpdatePaymentSource from '~/apollo/mutations/owner/updatePaymentSource.gql'
 import CancelPlan from '~/apollo/mutations/owner/cancelPlan.gql'
 import ResumePlan from '~/apollo/mutations/owner/resumePlan.gql'
+import { GraphqlQueryResponse } from '~/types/apolloTypes'
 
 export interface Trend {
   labels: string[]
@@ -152,6 +155,7 @@ export enum OwnerDetailActions {
   SYNC_REPOS_FOR_OWNER = 'syncReposForOwner',
 
   FETCH_BILLING_DETAILS = 'fetchBillingDetails',
+  FETCH_BILLING_STATUS = 'fetchBillingStatus',
   APPLY_CREDITS = 'applyCredits',
   UPDATE_BILLING_INFO = 'updateBillingInfo',
   GET_BILLING_INFO = 'getBillingInfo',
@@ -199,6 +203,12 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
     injectee: OwnerDetailModuleActionContext,
     args: { login: string; provider: string; refetch?: boolean }
   ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_BILLING_STATUS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<{ status?: SubscriptionStatusChoice | undefined }>
 
   [OwnerDetailActions.SUBMIT_ISSUE_TYPE_SETTINGS]: (
     this: Store<RootState>,
@@ -399,6 +409,28 @@ export const actions: OwnerDetailModuleActions = {
       commit(OwnerDetailMutations.SET_ERROR, err)
       commit(OwnerDetailMutations.SET_LOADING, false)
     }
+  },
+  async [OwnerDetailActions.FETCH_BILLING_STATUS]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = (await this.$fetchGraphqlData(
+        BillingStatus,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )) as GraphqlQueryResponse
+      if (response.data.owner?.billingInfo?.status) {
+        commit(OwnerDetailMutations.SET_LOADING, false)
+        return { status: response.data.owner.billingInfo.status }
+      }
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+    }
+    commit(OwnerDetailMutations.SET_LOADING, false)
+    return { status: undefined }
   },
 
   async [OwnerDetailActions.SUBMIT_ISSUE_TYPE_SETTINGS]({ commit, state }, args) {

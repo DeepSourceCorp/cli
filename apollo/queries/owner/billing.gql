@@ -25,6 +25,7 @@ query($login: String!, $provider: VCSProviderChoices!) {
       billingBackend
       synced
       pendingUpdate
+      clientSecret
       couponApplied {
         code
         description

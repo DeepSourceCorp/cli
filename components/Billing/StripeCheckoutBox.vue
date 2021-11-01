@@ -75,6 +75,17 @@
       Retry payment
     </z-button>
     <z-button
+      v-else-if="checkoutState === 'PARTIAL'"
+      class="mt-3 text-vanilla-100 hover:bg-ink-300"
+      icon="spin-loader"
+      iconColor="vanilla-100"
+      :disabled="true"
+      :is-loading="true"
+      buttonType="secondary"
+    >
+      <span>Authorization failed, redirecting...</span>
+    </z-button>
+    <z-button
       v-else
       class="mt-3 cursor-wait text-vanilla-100 hover:bg-ink-300"
       button-type="secondary"
@@ -91,9 +102,10 @@ import { ZButton, ZInput, ZIcon } from '@deepsourcelabs/zeal'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 
 import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js'
-import { SubscriptionCheckoutPayload } from '~/types/types'
+import { SubscriptionCheckoutPayload, SubscriptionStatusChoice } from '~/types/types'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import StripeCardInput from './StripeCardInput.vue'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 @Component({
   components: {
@@ -102,7 +114,11 @@ import StripeCardInput from './StripeCardInput.vue'
     ZIcon
   }
 })
-export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMixin) {
+export default class Subscribe extends mixins(
+  SubscriptionMixin,
+  OwnerBillingMixin,
+  ActiveUserMixin
+) {
   @Prop({ required: true })
   planSlug: string
 
@@ -116,7 +132,7 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
   public validCardDetails = false
   public cardInputFocus = false
   public checkoutLoading = false
-  public checkoutState: null | 'SUCCESS' | 'FAIL' = null
+  public checkoutState: null | 'SUCCESS' | 'FAIL' | 'PARTIAL' = null
 
   public cardElement: StripeCardElement
 
@@ -148,6 +164,25 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
     return Boolean(
       this.billingEmail && this.validBillingEmail && this.fullName && this.validCardDetails
     )
+  }
+
+  async tempAwaitStripeScaUpdate(): Promise<void> {
+    let RETRY_COUNT = 5
+    const { owner, provider } = this.$route.params
+    const retryFunction = async () => {
+      const statusResponse = await this.fetchBillingStatus({
+        login: owner,
+        provider,
+        refetch: true
+      })
+      if (RETRY_COUNT >= 0 && statusResponse.status === SubscriptionStatusChoice.ScaRequired) {
+        RETRY_COUNT -= 1
+        await new Promise((resolve) => setTimeout(resolve, 1000))
+        await retryFunction()
+      }
+      return
+    }
+    await retryFunction()
   }
 
   async checkout(): Promise<void> {
@@ -182,22 +217,57 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
           refetch: true
         })
 
-        this.checkoutState = 'SUCCESS'
-
         let redirectRoute = this.$generateRoute([])
+
         if (checkoutResponse.nextAction === 'BILLING') {
-          this.$toast.success('🎉 Subscription Activated! Redirecting you to the billing Page.')
+          this.checkoutState = 'SUCCESS'
+          this.$toast.success('🎉 Subscription activated! Redirecting you to the billing page.')
           redirectRoute = this.$generateRoute(['settings', 'billing'])
+          setTimeout(() => {
+            this.$router.push(redirectRoute)
+          }, 1200)
         } else if (checkoutResponse.nextAction === 'ACTIVATE_NEW_REPO') {
+          this.checkoutState = 'SUCCESS'
           this.$toast.success(
-            "🎉 Subscription Activated! Let's activate a repository and get started."
+            "🎉 Subscription activated! Let's activate a repository and get started."
           )
           redirectRoute = this.$generateRoute(['all-repos'])
-        }
+          setTimeout(() => {
+            this.$router.push(redirectRoute)
+          }, 1200)
+        } else if (checkoutResponse.nextAction === 'SCA') {
+          const result = await this.$stripe?.confirmCardPayment(
+            checkoutResponse.clientSecret as string
+          )
 
-        setTimeout(() => {
-          this.$router.push(redirectRoute)
-        }, 1200)
+          if (result?.paymentIntent && result.paymentIntent.status === 'succeeded') {
+            await this.tempAwaitStripeScaUpdate()
+            this.checkoutState = 'SUCCESS'
+            this.$toast.success('🎉 Subscription activated! Redirecting you to the billing page.')
+            setTimeout(() => {
+              this.$router.push(this.$generateRoute(['settings', 'billing']))
+            }, 1200)
+          } else {
+            this.checkoutState = 'PARTIAL'
+            if (result?.error?.message) {
+              this.$toast.show({
+                type: 'danger',
+                message: result.error.message,
+                duration: 10000
+              })
+            } else {
+              this.$toast.show({
+                type: 'danger',
+                message:
+                  'We are unable to authenticate your payment method. Please choose a different payment method and try again.',
+                duration: 6000
+              })
+            }
+            setTimeout(() => {
+              this.$router.push(this.$generateRoute(['settings', 'billing']))
+            }, 6200)
+          }
+        }
       }
     } catch (e) {
       this.checkoutState = 'FAIL'
@@ -213,6 +283,8 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
         this.$toast.danger(
           'Something went wrong processing your card payment. Please check your card details or contact support.'
         )
+      } finally {
+        this.logSentryErrorForUser(e as Error, 'Billing error', {})
       }
     } finally {
       this.checkoutLoading = false

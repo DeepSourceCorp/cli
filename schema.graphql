@@ -3,6 +3,30 @@ schema {
   mutation: Mutation
 }
 
+type AccessToken implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  description: String!
+  expiryDate: DateTime!
+  scopesSubscribed(offset: Int, before: String, after: String, first: Int, last: Int): TokenScopeConnection!
+  lastUsed: DateTime
+  objectId: Int
+  createdBy: User!
+}
+
+type AccessTokenConnection {
+  pageInfo: PageInfo!
+  edges: [AccessTokenEdge]!
+  totalCount: Int
+}
+
+type AccessTokenEdge {
+  node: AccessToken
+  cursor: String!
+}
+
 enum ActionChoice {
   ADD
   REMOVE
@@ -342,6 +366,7 @@ type BillingInfo {
   billingBackend: String
   pendingUpdate: Boolean
   synced: Boolean
+  clientSecret: String
 }
 
 input BitbucketInstallationLandingInput {
@@ -578,6 +603,31 @@ type CouponInfo {
   description: String!
 }
 
+type CreateAccessToken implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  description: String!
+  expiryDate: DateTime!
+  scopesSubscribed(offset: Int, before: String, after: String, first: Int, last: Int): TokenScopeConnection!
+  lastUsed: DateTime
+  objectId: Int
+  createdBy: User!
+  token: String!
+}
+
+type CreateAccessTokenConnection {
+  pageInfo: PageInfo!
+  edges: [CreateAccessTokenEdge]!
+  totalCount: Int
+}
+
+type CreateAccessTokenEdge {
+  node: CreateAccessToken
+  cursor: String!
+}
+
 input CreateAutofixRunForAnalyzerInput {
   analyzerId: ID!
   repositoryId: ID!
@@ -625,6 +675,19 @@ type CreateConfigTemplatePayload {
   clientMutationId: String
 }
 
+input CreateOwnerAccessTokenInput {
+  description: String!
+  scopesSubscribed: [String]!
+  expiryDays: Int
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type CreateOwnerAccessTokenPayload {
+  accessToken: CreateAccessToken
+  clientMutationId: String
+}
+
 input CreatePullRequestInput {
   patches: [Int]!
   autofixRunId: String!
@@ -634,6 +697,18 @@ input CreatePullRequestInput {
 
 type CreatePullRequestPayload {
   ok: Boolean
+  clientMutationId: String
+}
+
+input CreateUserAccessTokenInput {
+  description: String!
+  scopesSubscribed: [String]!
+  expiryDays: Int
+  clientMutationId: String
+}
+
+type CreateUserAccessTokenPayload {
+  accessToken: CreateAccessToken
   clientMutationId: String
 }
 
@@ -662,6 +737,26 @@ scalar Date
 scalar DateTime
 
 scalar Decimal
+
+input DeleteAccessTokenInput {
+  tokenId: ID!
+  clientMutationId: String
+}
+
+type DeleteAccessTokenPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteAllAccessTokensInput {
+  ownerId: ID
+  clientMutationId: String
+}
+
+type DeleteAllAccessTokensPayload {
+  ok: Boolean
+  clientMutationId: String
+}
 
 input DeleteConfigTemplateInput {
   shortcode: String!
@@ -1108,6 +1203,12 @@ type Mutation {
   updateWebhook(input: UpdateWebhookInput!): UpdateWebhookPayload
   disableWebhook(input: DisableWebhookInput!): DisableWebhookPayload
   deleteWebhook(input: DeleteWebhookInput!): DeleteWebhookPayload
+  createUserAccessToken(input: CreateUserAccessTokenInput!): CreateUserAccessTokenPayload
+  createOwnerAccessToken(input: CreateOwnerAccessTokenInput!): CreateOwnerAccessTokenPayload
+  updateAccessToken(input: UpdateAccessTokenInput!): UpdateAccessTokenPayload
+  deleteAccessToken(input: DeleteAccessTokenInput!): DeleteAccessTokenPayload
+  deleteAllAccessTokens(input: DeleteAllAccessTokensInput!): DeleteAllAccessTokensPayload
+  webhookSecret(input: WebhookSecretInput!): WebhookSecretPayload
 }
 
 enum NextActionChoice {
@@ -1173,6 +1274,7 @@ type Owner implements MaskPrimaryKeyNode {
   isAutoonboardAllowed: Boolean
   autoonboardableRepositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   autoonboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection
+  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): AccessTokenConnection
 }
 
 type OwnerConnection {
@@ -1217,6 +1319,10 @@ type PageInfo {
 }
 
 type Query {
+  ownerAccessTokens(ownerId: ID!, offset: Int, before: String, after: String, first: Int, last: Int, q: String): AccessTokenConnection
+  userAccessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): AccessTokenConnection
+  accessToken(tokenId: ID!): AccessToken
+  tokenScopes(forOwner: Boolean, offset: Int, before: String, after: String, first: Int, last: Int): TokenScopeConnection
   webhookEventTypes(offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventTypesConnection
   webhookEventDeliveries(ownerId: ID!, offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventDeliveryConnection
   webhookEventDelivery(ownerId: ID!, deliveryId: ID!): WebhookEventDelivery
@@ -1347,6 +1453,8 @@ type Repository implements MaskPrimaryKeyNode {
   weightCutoff: Int!
   tree: JSONString!
   latestTrainedRun: Run
+  primaryAnalyzer: Analyzer
+  majorityAnalyzer: Analyzer
   analyzer: Analyzer
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   userpreferenceSet(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
@@ -1374,7 +1482,6 @@ type Repository implements MaskPrimaryKeyNode {
   vcsHost: String
   configGenerationRoute: String
   activeIssueCount: Int
-  primaryAnalyzer: Analyzer
   vcsDefaultBranchUrl: String
   issue(shortcode: String!): RepositoryIssue
   lastRun: Run
@@ -1699,6 +1806,7 @@ input SubscriptionCheckoutInput {
 
 type SubscriptionCheckoutPayload {
   nextAction: String
+  clientSecret: String
   clientMutationId: String
 }
 
@@ -1718,6 +1826,7 @@ enum SubscriptionStatusChoice {
   ACTIVE
   INACTIVE
   PAST_DUE
+  SCA_REQUIRED
 }
 
 input SwitchToAsgardInput {
@@ -1886,6 +1995,34 @@ input ToggleRepositoryActivationInput {
 type ToggleRepositoryActivationPayload {
   repository: Repository
   clientMutationId: String
+}
+
+type TokenScope implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  scopeFor: TokenScopeScopeFor!
+  resource: String!
+  operation: String!
+  shortDescription: String!
+  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): CreateAccessTokenConnection!
+}
+
+type TokenScopeConnection {
+  pageInfo: PageInfo!
+  edges: [TokenScopeEdge]!
+  totalCount: Int
+}
+
+type TokenScopeEdge {
+  node: TokenScope
+  cursor: String!
+}
+
+enum TokenScopeScopeFor {
+  USER
+  OWNER
 }
 
 type Transaction implements MaskPrimaryKeyNode {
@@ -2080,6 +2217,19 @@ input UpdateAccessControlSettingsInput {
 
 type UpdateAccessControlSettingsPayload {
   ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateAccessTokenInput {
+  description: String
+  scopesSubscribed: [String]
+  expiryDays: Int
+  tokenId: ID!
+  clientMutationId: String
+}
+
+type UpdateAccessTokenPayload {
+  accessToken: CreateAccessToken
   clientMutationId: String
 }
 
@@ -2315,6 +2465,7 @@ type User implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
+  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): CreateAccessTokenConnection!
   socialAuth(offset: Int, before: String, after: String, first: Int, last: Int, uid: String, uid_In: [String], provider: String, provider_In: [String]): SocialNodeConnection!
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
@@ -2466,4 +2617,13 @@ type WebhookEventTypesConnection {
 type WebhookEventTypesEdge {
   node: WebhookEventTypes
   cursor: String!
+}
+
+input WebhookSecretInput {
+  clientMutationId: String
+}
+
+type WebhookSecretPayload {
+  secret: String
+  clientMutationId: String
 }

@@ -17,7 +17,7 @@ function fromNow(time: string): string {
   return dayjs(time).fromNow()
 }
 
-function parseISODate(dateString: string): Date {
+function parseISODate(dateString: string | number): Date {
   return dayjs(dateString).toDate()
 }
 

@@ -1,46 +1,76 @@
 <template>
-  <div class="grid grid-cols-1 gap-6 p-4">
+  <div class="grid grid-cols-1 gap-4 p-4">
     <template v-if="owner.hasPremiumPlan && !loading">
       <h2 class="text-lg font-medium">Billing</h2>
       <div class="max-w-2xl">
-        <alert-box
+        <lazy-alert-box
           v-if="ownerBillingInfo.synced === false"
           text-color="text-honey-300"
           bg-color="bg-honey"
-          class="mb-1"
+          class="mb-2"
         >
           <p>
             We are having trouble fetching the latest billing information from
             {{ billingBackendHandler }}. Please check your GitHub billing page for recent updates.
           </p>
-        </alert-box>
-        <alert-box
+        </lazy-alert-box>
+        <lazy-alert-box
           v-else-if="ownerBillingInfo.pendingUpdate"
           bg-color="bg-robin"
           text-color="text-robin-150"
-          class="mb-1"
+          class="mb-2"
         >
           <p>
-            The billing information displayed might be outdated. Please check your GitHub billing
-            page for recent updates.
+            There are upcoming changes to your billing at the end of the current billing cycle.
+            Please check your GitHub billing page for more updates.
           </p>
-        </alert-box>
-        <alert-box
+        </lazy-alert-box>
+        <lazy-alert-box
           v-if="ownerBillingInfo.cancelAtPeriodEnd"
           text-color="text-honey-300"
           bg-color="bg-honey"
-          class="mb-1"
+          class="mb-2"
         >
           <p>
             Your subscription to <span class="font-semibold"> {{ currentPlan.name }}</span> plan is
             scheduled to be canceled at the end of the current billing cycle. You will have access
             to all features in this plan until
             <span class="font-semibold">{{
-              formatDate(parseISODate(owner.billingInfo.upcomingCancellationDate))
+              formatDate(parseISODate(ownerBillingInfo.upcomingCancellationDate))
             }}</span
             >.
           </p>
-        </alert-box>
+        </lazy-alert-box>
+        <lazy-stripe-sca-pending-alert
+          v-if="isBillingScaPending"
+          :is-billing-sca-pending="isBillingScaPending"
+          :current-plan-name="currentPlan.name"
+          :owner-billing-info="ownerBillingInfo"
+          class="mb-2"
+        />
+        <lazy-alert-box
+          v-if="isBillingPastDue"
+          text-color="text-cherry-200"
+          bg-color="bg-cherry"
+          class="mb-2"
+        >
+          <p>
+            Your subscription to the <span class="font-semibold"> {{ currentPlan.name }}</span> plan
+            is past its due date of
+            <span class="font-semibold">{{
+              formatDate(parseISODate(ownerBillingInfo.upcomingPaymentDate))
+            }}</span
+            >. Please check your email in order to resolve the payment.
+          </p>
+          <p class="mt-2">
+            If no payment is made within 15 days of
+            <span class="font-semibold">{{
+              formatDate(parseISODate(ownerBillingInfo.upcomingPaymentDate))
+            }}</span
+            >, your organisation will be downgraded to the
+            <span class="font-semibold">Free</span> plan.
+          </p>
+        </lazy-alert-box>
         <plan-info :id="owner.id" :current-plan="currentPlan"></plan-info>
       </div>
       <billing-info />
@@ -123,6 +153,10 @@ export default class BillingSettings extends mixins(
   ActiveUserMixin,
   ContextMixin
 ) {
+  public parseISODate = parseISODate
+  public formatDate = formatDate
+  public loading = true
+
   async fetch(): Promise<void> {
     this.loading = true
     const { owner, provider } = this.$route.params
@@ -183,9 +217,5 @@ export default class BillingSettings extends mixins(
       billingCycle: newValue
     })
   }
-
-  public parseISODate = parseISODate
-  public formatDate = formatDate
-  public loading = true
 }
 </script>

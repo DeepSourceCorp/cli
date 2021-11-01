@@ -7,6 +7,7 @@
       const result: PossibleTypesResultData = {
   "possibleTypes": {
     "MaskPrimaryKeyNode": [
+      "AccessToken",
       "Analyzer",
       "AnalyzerReview",
       "AuditLog",
@@ -15,6 +16,7 @@
       "Check",
       "CheckIssue",
       "ConfigTemplate",
+      "CreateAccessToken",
       "FeatureDefinition",
       "Issue",
       "Owner",
@@ -29,6 +31,7 @@
       "TeamBasePermissionSet",
       "TeamMember",
       "TeamMemberInvitation",
+      "TokenScope",
       "Transaction",
       "TransformerReview",
       "TransformerRun",

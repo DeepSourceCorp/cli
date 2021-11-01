@@ -1,6 +1,7 @@
 # types
 types/types.ts
 types/graphql.d.ts
+types/fragmentTypes.ts
 schema.graphql
 
 # yarn

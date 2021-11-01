@@ -8,7 +8,8 @@ import {
   UpdateCodeQualitySubscriptionSeatsPayload,
   UpdatePaymentActionChoice,
   UpdateDefaultPaymentSourcePayload,
-  BillingInfo
+  BillingInfo,
+  SubscriptionStatusChoice
 } from '~/types/types'
 import OwnerDetailMixin from './ownerDetailMixin'
 
@@ -25,6 +26,13 @@ export default class OwnerBillingMixin extends mixins(OwnerDetailMixin) {
     provider: string
     refetch?: boolean
   }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_BILLING_STATUS)
+  fetchBillingStatus: (args: {
+    login: string
+    provider: string
+    refetch?: boolean
+  }) => Promise<{ status: SubscriptionStatusChoice | undefined }>
 
   @ownerDetailStore.Action(OwnerDetailActions.APPLY_CREDITS)
   applyCredits: (args: { amount: number }) => Promise<void>
@@ -106,5 +114,13 @@ export default class OwnerBillingMixin extends mixins(OwnerDetailMixin) {
 
   get isBilledManually(): boolean {
     return this.ownerBillingInfo.billingBackend === BillingBackend.mb
+  }
+
+  get isBillingScaPending(): boolean {
+    return this.ownerBillingInfo.status === SubscriptionStatusChoice.ScaRequired
+  }
+
+  get isBillingPastDue(): boolean {
+    return this.ownerBillingInfo.status === SubscriptionStatusChoice.PastDue
   }
 }

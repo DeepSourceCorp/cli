@@ -828,6 +828,15 @@ declare module '*/IssueTypeSettings.gql' {
 }
     
 
+declare module '*/statusCheck.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/single.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
