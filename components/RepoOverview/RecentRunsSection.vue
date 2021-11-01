@@ -19,6 +19,11 @@
     </div>
     <div class="col-span-2 space-y-2 lg:col-span-1">
       <template v-if="runList.edges && selectedRun === 'Analyses'">
+        <empty-state v-if="runList.edges.length < 1">
+          <template slot="title">
+            <p class="text-base text-vanilla-300">No recent Analyses</p>
+          </template>
+        </empty-state>
         <run-card
           v-for="run in runList.edges"
           :key="run.node.runId"
@@ -27,6 +32,11 @@
         ></run-card>
       </template>
       <template v-else-if="transformerRunList.edges && selectedRun === 'Transforms'">
+        <empty-state v-if="transformerRunList.edges.length < 1">
+          <template slot="title">
+            <p class="text-base text-vanilla-300">No recent Transforms</p>
+          </template>
+        </empty-state>
         <transform-card
           v-for="run in transformerRunList.edges"
           :key="run.node.runId"
@@ -35,6 +45,11 @@
         ></transform-card>
       </template>
       <template v-else-if="selectedRun === 'Autofixes'">
+        <empty-state v-if="autofixRunList.edges.length < 1">
+          <template slot="title">
+            <p class="text-base text-vanilla-300">No recent Autofixes</p>
+          </template></empty-state
+        >
         <autofix-list-item
           v-for="run in autofixRunList.edges"
           :key="run.node.runId"
@@ -147,16 +162,16 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
   }) => Promise<void>
 
   private runOptions: IRunOptions[] = [
-    { name: 'Analyses', showMoreLabel: 'View all analysis runs', link: ['history', 'runs'] },
+    { name: 'Analyses', showMoreLabel: 'View all Analyses', link: ['history', 'runs'] },
     {
       name: 'Autofixes',
-      showMoreLabel: 'View all Autofix runs',
+      showMoreLabel: 'View all Autofixes',
       link: 'autofix',
       repoPerms: [RepoPerms.READ_REPO]
     },
     {
       name: 'Transforms',
-      showMoreLabel: 'View all transform runs',
+      showMoreLabel: 'View all Transforms',
       link: ['history', 'transforms']
     }
   ]
