@@ -10,6 +10,7 @@ import {
   UpdateCodeQualitySubscriptionSeatsPayload,
   UpdatePaymentActionChoice,
   UpdateDefaultPaymentSourcePayload,
+  GetUpgradeCodeQualitySubscriptionPlanInfoPayload,
   SubscriptionStatusChoice
 } from '~/types/types'
 import { GraphqlError } from '~/types/apollo-graphql-types'
@@ -36,6 +37,7 @@ import ChangePlan from '~/apollo/mutations/owner/changePlan.gql'
 import UpdatePaymentSource from '~/apollo/mutations/owner/updatePaymentSource.gql'
 import CancelPlan from '~/apollo/mutations/owner/cancelPlan.gql'
 import ResumePlan from '~/apollo/mutations/owner/resumePlan.gql'
+import GetUpgradePlanInfo from '~/apollo/mutations/owner/getUpgradePlanInfo.gql'
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 
 export interface Trend {
@@ -164,7 +166,8 @@ export enum OwnerDetailActions {
   UPDATE_PAYMENT_SOURCE = 'updatePaymentSource',
   CHANGE_SUBSCRIPTION_PLAN = 'changeSubscriptionPlan',
   CANCEL_SUBSCRIPTION_PLAN = 'cancelSubscriptionPlan',
-  REVERT_SUBSCRIPTION_CANCELLATION = 'revertSubscriptionCancellation'
+  REVERT_SUBSCRIPTION_CANCELLATION = 'revertSubscriptionCancellation',
+  GET_UPGRADE_PLAN_INFO = 'getUpgradePlanInfo'
 }
 
 interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
@@ -297,6 +300,15 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
       planSlug: string
     }
   ) => Promise<void>
+
+  [OwnerDetailActions.GET_UPGRADE_PLAN_INFO]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      id: string
+      planSlug: string
+    }
+  ) => Promise<GetUpgradeCodeQualitySubscriptionPlanInfoPayload>
 }
 
 export const actions: OwnerDetailModuleActions = {
@@ -605,6 +617,18 @@ export const actions: OwnerDetailModuleActions = {
     try {
       commit(OwnerDetailMutations.SET_LOADING, true)
       await this.$applyGraphqlMutation(ResumePlan, args)
+    } catch (e) {
+      commit(OwnerDetailMutations.SET_ERROR, e)
+      throw e
+    } finally {
+      commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+  async [OwnerDetailActions.GET_UPGRADE_PLAN_INFO]({ commit }, args) {
+    try {
+      commit(OwnerDetailMutations.SET_LOADING, true)
+      const response = await this.$applyGraphqlMutation(GetUpgradePlanInfo, args, true)
+      return response.data.planInfo as GetUpgradeCodeQualitySubscriptionPlanInfoPayload
     } catch (e) {
       commit(OwnerDetailMutations.SET_ERROR, e)
       throw e

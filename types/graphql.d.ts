@@ -323,6 +323,15 @@ declare module '*/getBillingInfo.gql' {
 }
     
 
+declare module '*/getUpgradePlanInfo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/resumePlan.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

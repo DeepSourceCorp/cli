@@ -87,6 +87,7 @@ export default {
     '~/plugins/helpers/provider.ts',
     '~/plugins/helpers/generateRoute.ts',
     '~/plugins/helpers/highlight.ts',
+    '~/plugins/helpers/filters.ts',
     '~/plugins/helpers/gateKeeper.ts',
     '~/plugins/helpers/websocket.client.ts',
     '~/plugins/helpers/clipboard.client.ts',

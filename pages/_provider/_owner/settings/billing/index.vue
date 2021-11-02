@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-1 gap-4 p-4">
-    <template v-if="owner.hasPremiumPlan && !loading">
+  <div class="grid grid-cols-1 gap-5 p-4">
+    <template v-if="owner.hasPremiumPlan && !$fetchState.pending">
       <h2 class="text-lg font-medium">Billing</h2>
       <div class="max-w-2xl">
         <lazy-alert-box
@@ -71,9 +71,10 @@
             <span class="font-semibold">Free</span> plan.
           </p>
         </lazy-alert-box>
-        <plan-info :id="owner.id" :current-plan="currentPlan"></plan-info>
+        <plan-info :id="owner.id"></plan-info>
       </div>
       <billing-info />
+      <payment-info />
       <invoice-list v-if="isBilledByStripe" />
       <form-group
         v-if="ownerBillingInfo.cancelAtPeriodEnd && isBilledByStripe"
@@ -87,7 +88,7 @@
         <cancel-plan />
       </form-group>
     </template>
-    <template v-else-if="!loading">
+    <template v-else-if="!$fetchState.pending">
       <h2 class="text-lg font-medium">Upgrade to get more for your team</h2>
       <z-radio-group
         :modelValue="billingCycle"
@@ -158,14 +159,12 @@ export default class BillingSettings extends mixins(
   public loading = true
 
   async fetch(): Promise<void> {
-    this.loading = true
     const { owner, provider } = this.$route.params
     const params = {
       login: owner,
       provider
     }
     await this.fetchOwnerDetails(params)
-    this.loading = false
     await this.fetchBillingDetails(params)
   }
 
@@ -195,14 +194,6 @@ export default class BillingSettings extends mixins(
     if (this.owner.billingInfo)
       return getHumanizedTimeFromNow(this.owner.billingInfo.upcomingCancellationDate)
     return undefined
-  }
-
-  get currentPlan(): Record<string, string | number> {
-    if (Object.keys(this.ownerBillingInfo).length) {
-      const { planSlug } = this.ownerBillingInfo as BillingInfo
-      if (planSlug) return this.context.plans[planSlug]
-    }
-    return {}
   }
 
   subscribe(plan: string): void {

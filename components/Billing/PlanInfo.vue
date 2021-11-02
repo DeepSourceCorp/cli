@@ -151,9 +151,6 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
   @Prop({ required: true })
   id: string
 
-  @Prop({ required: true })
-  currentPlan: Record<string, string | number>
-
   showUpdateSeatsModal = false
   updateSeatsError = false
   loading = false

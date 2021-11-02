@@ -25,7 +25,7 @@
       />
     </div>
     <base-graph
-      v-if="autofixTrend.values.length"
+      v-if="autofixTrend.values && autofixTrend.values.length"
       :datasets="dataSets"
       :labels="formattedLabels"
       :showControl="false"

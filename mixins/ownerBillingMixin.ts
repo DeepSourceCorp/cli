@@ -9,14 +9,16 @@ import {
   UpdatePaymentActionChoice,
   UpdateDefaultPaymentSourcePayload,
   BillingInfo,
+  GetUpgradeCodeQualitySubscriptionPlanInfoPayload,
   SubscriptionStatusChoice
 } from '~/types/types'
+import ContextMixin from './contextMixin'
 import OwnerDetailMixin from './ownerDetailMixin'
 
 const ownerDetailStore = namespace('owner/detail')
 
 @Component
-export default class OwnerBillingMixin extends mixins(OwnerDetailMixin) {
+export default class OwnerBillingMixin extends mixins(OwnerDetailMixin, ContextMixin) {
   @ownerDetailStore.State
   billingInfo: GetBillingInfoPayload
 
@@ -87,6 +89,17 @@ export default class OwnerBillingMixin extends mixins(OwnerDetailMixin) {
   @ownerDetailStore.Action(OwnerDetailActions.REVERT_SUBSCRIPTION_CANCELLATION)
   revertSubscriptionCancellation: (args: { id: string }) => Promise<void>
 
+  @ownerDetailStore.Action(OwnerDetailActions.GET_UPGRADE_PLAN_INFO)
+  getUpgradePlanInfo: (args: {
+    id: string
+    planSlug: string
+  }) => Promise<GetUpgradeCodeQualitySubscriptionPlanInfoPayload>
+
+  MODE = {
+    MONTHLY: 'monthly',
+    ANNUAL: 'annual'
+  }
+
   get ownerBillingInfo(): BillingInfo {
     return (this.owner.billingInfo ?? {}) as BillingInfo
   }
@@ -102,6 +115,14 @@ export default class OwnerBillingMixin extends mixins(OwnerDetailMixin) {
       return billingHandlerMap[this.ownerBillingInfo.billingBackend as BillingBackend]
 
     return ''
+  }
+
+  get currentPlan(): Record<string, string | number> {
+    if (Object.keys(this.ownerBillingInfo).length) {
+      const { planSlug } = this.ownerBillingInfo as BillingInfo
+      if (planSlug) return this.context.plans[planSlug]
+    }
+    return {}
   }
 
   get isBilledByStripe(): boolean {
