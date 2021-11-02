@@ -1,4 +1,4 @@
-package main
+package report
 
 import (
 	"bytes"
@@ -14,7 +14,7 @@ func makeQuery(url string, body []byte, bodyMimeType string) ([]byte, error) {
 	var resBody []byte
 
 	httpClient := &http.Client{
-		Timeout: time.Second * 10,
+		Timeout: time.Second * 60,
 	}
 
 	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(body))

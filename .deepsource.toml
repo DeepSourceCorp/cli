@@ -10,3 +10,11 @@ enabled = true
 [[analyzers]]
 name = "secrets"
 enabled = true
+
+[[analyzers]]
+name = "test-coverage"
+enabled = true
+
+[[transformers]]
+name = "gofmt"
+enabled = true

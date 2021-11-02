@@ -1,4 +1,4 @@
-package main
+package report
 
 // ReportQueryInput is the schema for variables of artifacts
 // report GraphQL query

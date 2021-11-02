@@ -17,7 +17,7 @@ import (
 
 // Sample values to the run the analyzer on
 const (
-	analyzer  = "test_coverage"
+	analyzer  = "test-coverage"
 	dsn       = "http://f59ab9314307@localhost:8081"
 	commitOID = "c2d16c69dbcba139002757b6734ee43c714845a3"
 	key       = "python"
@@ -102,7 +102,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 
 	err = cmd.Run()
 
-	outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
+	outStr, errStr := stdout.String(), stderr.String()
 	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
 
 	if err != nil {
@@ -146,7 +146,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 
 	err := cmd.Run()
 
-	outStr, errStr := string(stdout.Bytes()), string(stderr.Bytes())
+	outStr, errStr := stdout.String(), stderr.String()
 	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
 
 	if err != nil {
