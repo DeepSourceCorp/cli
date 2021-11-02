@@ -84,6 +84,14 @@ func (opts *ReportOptions) Run() int {
 	// Protocol
 	dsnSplitProtocolBody := strings.Split(dsn, "://")
 
+	// Validate DSN parsing
+	if len(dsnSplitProtocolBody) != 2 {
+		err = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
+		fmt.Println(err)
+		sentry.CaptureException(err)
+		return 1
+	}
+
 	// Check for valid protocol
 	if !strings.HasPrefix(dsnSplitProtocolBody[0], "http") {
 		err = errors.New("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
