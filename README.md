@@ -38,13 +38,20 @@ brew install deepsourcelabs/cli/deepsource
 ```sh
 curl https://deepsource.io/cli | sh
 ```
-This script will detect the operating system and architecture and puts deepsource binary in ./bin/deepsource.
+This script will detect the operating system and architecture and puts deepsource binary in `./bin/deepsource`.
 
-### Usage
+## Configuration
+
+In order to use the `report` command of CLI which is used to report
+test-coverage reports, an environment variable named as `DEEPSOURCE_DSN` has to
+be set. It's value will be available under 'Settings' tab of the repository page.
+
+## Usage
+
+The CLI provides access to a wide range of commands. Here is a list of the
+commands along with their brief description.
 
 ```
-DeepSource Command Line Interface v0.x.x
-
 Usage:
     deepsource <command> [<arguments>]
 
@@ -58,13 +65,24 @@ Available commands are:
     version     Get the version of the DeepSource CLI
 
 Help:
-    Use 'deepsource <command> --help' for more information about the command.
+    Use 'deepsource <command> --help/-h' for more information about the command.
 ```
 
-### Documentation
+## Documentation
 
-[https://deepsource.io/docs/config/cli](https://deepsource.io/docs/config/cli.html)
+For complete documentation, refer to the [CLI Documentation](https://deepsource.io/docs/cli/usage)
 
-### Support
+## Feedback/Support
 
-[support@deepsource.io](mailto:support@deepsource.io)
+Want to share any feedback or need any help regarding the CLI? Feel free to
+reach out to us at [support@deepsource.io](mailto:support@deepsource.io) or at
+our [Discord server](https://discord.gg/3aNjyD9k2q).
+
+## Community
+
+Interested in DeepSource and want to chat with the community? Feel free to join at our [Discord server](http://deepsource.io/discord).
+
+## License
+
+Licensed under the [BSD 2-Clause "Simplified"
+License](https://github.com/deepsourcelabs/cli/blob/master/LICENSE)
