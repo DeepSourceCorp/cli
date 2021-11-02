@@ -47,7 +47,6 @@ func NewCmdReport() *cobra.Command {
 }
 
 func (opts *ReportOptions) Run() int {
-
 	// Verify the env variables
 	dsn := os.Getenv("DEEPSOURCE_DSN")
 	if dsn == "" {
@@ -96,6 +95,14 @@ func (opts *ReportOptions) Run() int {
 
 	// Parse body of the DSN
 	dsnSplitTokenHost := strings.Split(dsnSplitProtocolBody[1], "@")
+
+	// Validate DSN parsing
+	if len(dsnSplitTokenHost) != 2 {
+		err = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
+		fmt.Println(err)
+		sentry.CaptureException(err)
+		return 1
+	}
 
 	// Set values parsed from DSN
 	dsnHost := dsnSplitTokenHost[1]
@@ -240,5 +247,4 @@ func (opts *ReportOptions) Run() int {
 	fmt.Printf("Key       %s \n", artifactKey)
 
 	return 0
-
 }
