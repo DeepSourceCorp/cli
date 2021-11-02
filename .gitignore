@@ -7,3 +7,7 @@ cmd/deepsource/deepsource
 # Goreleaser artifacts
 dist
 
+# Test coverage reports
+coverage.out
+cover.out
+
