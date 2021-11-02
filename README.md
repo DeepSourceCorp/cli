@@ -79,7 +79,7 @@ our [Discord server](https://discord.gg/3aNjyD9k2q).
 
 ## Community
 
-Interested in DeepSource and want to chat with the community? Feel free to join at our [Discord server](http://deepsource.io/discord).
+Interested in DeepSource and want to chat with the community? Feel free to join our [Discord server](http://deepsource.io/discord).
 
 ## License
 
