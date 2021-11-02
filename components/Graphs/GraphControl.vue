@@ -1,11 +1,14 @@
 <template>
   <div class="flex space-x-2">
-    <div class="flex-grow lg:flex-grow-0 lg:w-56 h-8">
+    <div class="flex-grow h-8 lg:flex-grow-0 lg:w-56">
       <z-select
         v-model="currentFilterValue"
         backgroundClass="bg-ink-300"
         borderClass="border-ink-300"
       >
+        <template #icon>
+          <z-icon color="vanilla-400" icon="duration-30" />
+        </template>
         <z-option
           v-for="opt in dayOptions"
           :key="opt"
@@ -18,7 +21,7 @@
       <div
         :class="currentChartType == 'bar' ? 'bg-ink-200' : 'hover:bg-ink-300'"
         @click="toggleChart('bar')"
-        class="h-8 w-8 flex items-center justify-center rounded-sm cursor-pointer"
+        class="flex items-center justify-center w-8 h-8 rounded-sm cursor-pointer"
       >
         <z-icon
           icon="bar-chart-2"
@@ -29,7 +32,7 @@
       <div
         :class="currentChartType == 'line' ? 'bg-ink-200' : 'hover:bg-ink-300'"
         @click="toggleChart('line')"
-        class="h-8 w-8 flex items-center justify-center rounded-s cursor-pointer"
+        class="flex items-center justify-center w-8 h-8 cursor-pointer rounded-s"
       >
         <z-icon
           icon="trending-up"
