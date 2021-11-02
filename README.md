@@ -40,10 +40,9 @@ curl https://deepsource.io/cli | sh
 ```
 This script will detect the operating system and architecture and puts deepsource binary in `./bin/deepsource`.
 
-## Configuration
+## Configuring DSN
 
-In order to use the `report` command of CLI which is used to report
-test-coverage reports, an environment variable named as `DEEPSOURCE_DSN` has to
+In order to report test-coverage to DeepSource using the `report` command, an environment variable named as `DEEPSOURCE_DSN` has to
 be set. It's value will be available under 'Settings' tab of the repository page.
 
 ## Usage
@@ -85,4 +84,4 @@ Interested in DeepSource and want to chat with the community? Feel free to join 
 ## License
 
 Licensed under the [BSD 2-Clause "Simplified"
-License](https://github.com/deepsourcelabs/cli/blob/master/LICENSE)
+License](https://github.com/deepsourcelabs/cli/blob/master/LICENSE).
