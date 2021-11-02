@@ -20,8 +20,25 @@
 
 Command line interface to DeepSource
 
-[![DeepSource](https://deepsource.io/gh/deepsourcelabs/cli.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)[![CircleCI](https://circleci.com/gh/deepsourcelabs/cli.svg?style=svg)](https://circleci.com/gh/deepsourcelabs/cli)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/deepsourcelabs/cli)
+[![DeepSource](https://deepsource.io/gh/deepsourcelabs/cli.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)
 [![Gitopia](https://img.shields.io/endpoint?style=&url=https://gitopia.org/mirror-badge.json)](https://gitopia.org/#/WU8MwK_wNu7had5xKwuD2dilKn9gzCFH6carv-QmIKs/deepsource-cli)
+
+## Installation
+
+### macOS
+
+DeepSource CLI is available on macOS via [Homebrew](https://brew.sh/):
+
+```sh
+brew install deepsourcelabs/cli/deepsource
+```
+### Binary Installation
+
+```sh
+curl https://deepsource.io/cli | sh
+```
+This script will detect the operating system and architecture and puts deepsource binary in ./bin/deepsource.
 
 ### Usage
 
@@ -32,7 +49,13 @@ Usage:
     deepsource <command> [<arguments>]
 
 Available commands are:
-    report        Report an artifact to an analyzer
+    report      Report an artifact to an analyzer
+    config      Generate and Validate DeepSource config
+    help        Help about any command
+    issues      Show the list of issues in a file in a repository
+    repo        Operations related to the project repository
+    report      Report artifacts to DeepSource
+    version     Get the version of the DeepSource CLI
 
 Help:
     Use 'deepsource <command> --help' for more information about the command.
