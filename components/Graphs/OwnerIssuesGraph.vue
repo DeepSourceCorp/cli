@@ -14,25 +14,23 @@
         @updateFilter="updateLastDays"
       ></graph-control>
     </template>
-    <div class="flex items-start p-4 -ml-2 space-x-5">
+    <div class="grid grid-cols-1 gap-5 p-4 -ml-2 md:grid-cols-2">
       <graph-legend
-        class="w-1/2 md:w-auto"
         :allowHover="false"
         :trendPositive="activeIssuesTickerData < 0"
         :trendDirection="activeIssuesTickerData >= 0 ? 'up' : 'down'"
         :trendValue="activeIssuesTickerData"
-        :trendHint="getTooltipText(activeIssuesTickerDataCount, activeIssuesTickerData >= 0)"
+        trendHint="since yesterday"
         :isPercent="true"
         :value="currentActiveIssues"
         label="Active issues"
       />
       <graph-legend
-        class="w-1/2 md:w-auto"
         :allowHover="false"
         :trendPositive="resolvedIssuesTickerData > 0"
         :trendDirection="resolvedIssuesTickerData >= 0 ? 'up' : 'down'"
         :trendValue="resolvedIssuesTickerData"
-        :trendHint="getTooltipText(resolvedIssuesTickerDataCount, resolvedIssuesTickerData >= 0)"
+        trendHint="since yesterday"
         :isPercent="true"
         :value="currentResolvedIssues"
         label="Resolved issues"
@@ -98,13 +96,6 @@ export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
 
   get resolvedIssuesTickerDataCount(): number {
     return getChangeFromTrend(this.resolvedIssueTrend, false)
-  }
-
-  getTooltipText(count: number, isUpward: boolean): string {
-    if (isUpward) {
-      return `Increased by ${count} since yesterday`
-    }
-    return `Decreased by ${Math.abs(count)} since yesterday`
   }
 
   get resolvedIssueData(): Trend {

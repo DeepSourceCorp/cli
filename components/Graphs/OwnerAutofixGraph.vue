@@ -14,9 +14,8 @@
         @updateFilter="updateLastDays"
       ></graph-control>
     </template>
-    <div class="flex items-start p-4 -ml-2 space-x-5">
+    <div class="grid grid-cols-1 gap-5 p-4 -ml-2 md:grid-cols-2">
       <graph-legend
-        class="w-1/2 md:w-auto"
         :allowHover="false"
         :showTrends="false"
         :value="currentAutofixCount"

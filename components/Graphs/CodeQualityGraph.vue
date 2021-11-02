@@ -6,27 +6,25 @@
     :bodySpacing="0"
   >
     <div class="grid grid-cols-1">
-      <div class="flex items-start space-x-5 p-4 -ml-2">
+      <div class="grid grid-cols-1 gap-5 p-4 -ml-2 md:grid-cols-4">
         <graph-legend
-          class="w-1/2 md:w-auto"
           :isActive="showActiveIssues"
           @toggle="toggleActiveIssues"
           :trendPositive="activeIssuesTickerData < 0"
           :trendDirection="activeIssuesTickerData >= 0 ? 'up' : 'down'"
           :trendValue="activeIssuesTickerData"
-          :trendHint="getTooltipText(activeIssuesTickerDataCount, activeIssuesTickerData >= 0)"
+          trendHint="since yesterday"
           :value="currentActiveIssues"
           :isPercent="true"
           label="Active issues"
         />
         <graph-legend
-          class="w-1/2 md:w-auto"
           :isActive="showResolvedIssues"
           @toggle="toggleResolvedIssues"
           :trendPositive="resolvedIssuesTickerData > 0"
           :trendDirection="resolvedIssuesTickerData >= 0 ? 'up' : 'down'"
           :trendValue="resolvedIssuesTickerData"
-          :trendHint="getTooltipText(resolvedIssuesTickerDataCount, resolvedIssuesTickerData >= 0)"
+          trendHint="since yesterday"
           :value="currentResolvedIssues"
           :isPercent="true"
           label="Resolved issues"
@@ -51,9 +49,9 @@
       </div>
     </div>
     <template slot="controls">
-      <div class="flex justify-end space-x-2 w-full">
+      <div class="flex justify-end w-full space-x-2">
         <graph-control
-          class="h-8 w-full md:w-auto"
+          class="w-full h-8 md:w-auto"
           :allowChartTypeToggle="false"
           @updateFilter="updateLastDays"
         ></graph-control>
@@ -166,13 +164,6 @@ export default class CodeQualityGraph extends mixins(
       this.showActiveIssues = true
     }
     this.buildChart()
-  }
-
-  getTooltipText(count: number, isUpward: boolean): string {
-    if (isUpward) {
-      return `Increased by ${count} since yesterday`
-    }
-    return `Decreased by ${Math.abs(count)} since yesterday`
   }
 
   get currentActiveIssues(): number {

@@ -17,7 +17,7 @@
       <div v-else>0</div>
       <ticker
         v-if="showTrends && isFinite(trendValue)"
-        v-tooltip="tooltipText"
+        :trendHint="trendHint"
         :trendDirection="trendDirection"
         :trendValue="trendValue"
         :isPercent="isPercent"
