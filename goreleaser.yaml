@@ -33,7 +33,6 @@ changelog:
     - '^tests:'
 
 brews:
-  - name: deepsource
   - tap:
       owner: deepsourcelabs
       name: homebrew-cli
