@@ -83,5 +83,4 @@ Interested in DeepSource and want to chat with the community? Feel free to join 
 
 ## License
 
-Licensed under the [BSD 2-Clause "Simplified"
-License](https://github.com/deepsourcelabs/cli/blob/master/LICENSE).
+Licensed under the [BSD 2-Clause "Simplified" License](https://github.com/deepsourcelabs/cli/blob/master/LICENSE).
