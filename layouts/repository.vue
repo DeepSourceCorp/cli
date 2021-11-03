@@ -155,12 +155,14 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
   mounted(): void {
     this.$socket.$on('repo-analysis-updated', this.refetchData)
     this.$socket.$on('repo-config-committed', this.refetchData)
+    this.$socket.$on('repo-config-updated', this.refetchData)
     this.$socket.$on('autofix-installation-complete', this.refetchData)
   }
 
   beforeDestroy(): void {
     this.$socket.$off('repo-analysis-updated', this.refetchData)
     this.$socket.$off('repo-config-committed', this.refetchData)
+    this.$socket.$off('repo-config-updated', this.refetchData)
     this.$socket.$off('autofix-installation-complete', this.refetchData)
   }
 
