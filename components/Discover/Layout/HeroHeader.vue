@@ -1,5 +1,5 @@
 <template>
-  <div class="px-4 py-5 text-center md:py-10 md:text-left">
+  <div class="px-4 py-12 text-center md:py-10 md:text-left">
     <div class="max-w-2xl">
       <h1
         class="text-2xl font-bold leading-none md:text-2.5xl discover-mobile-hero-text md:bg-none"

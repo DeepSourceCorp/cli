@@ -144,6 +144,11 @@ export default class AnalyzerIssuesFilterMobile extends Vue {
 <style scoped>
 .filter-wrapper {
   bottom: 0px;
-  bottom: calc(100vh - var(--window-inner-height, 1vh));
+}
+
+@-moz-document url-prefix() {
+  .filter-wrapper {
+    bottom: calc(100vh - var(--window-inner-height, 1vh));
+  }
 }
 </style>
