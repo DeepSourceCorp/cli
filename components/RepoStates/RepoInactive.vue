@@ -9,11 +9,11 @@
     </template>
     <p>
       This repository is not activated, generate a new config or activate the repository directly if
-      a <code class="text-vanilla-200 font-medium">.deepsource.toml</code> already exists.
+      a <code class="font-medium text-vanilla-200">.deepsource.toml</code> already exists.
     </p>
     <div
       v-if="(repository.canBeActivated || repository.isActivated) && canActivateRepo"
-      class="flex items-center space-x-5 justify-center"
+      class="flex items-center justify-center space-x-5"
     >
       <nuxt-link :to="$generateRoute(['generate-config'])">
         <z-button icon="settings" size="small" button-type="secondary" class="mt-4"
@@ -22,7 +22,10 @@
       </nuxt-link>
 
       <z-button
-        v-if="!activateLoading"
+        v-if="!configNotAdded"
+        :is-loading="activateLoading"
+        :disabled="activateLoading"
+        loading-label="Activating Repository"
         @click="activateAnalysis"
         icon="check-circle"
         size="small"
@@ -30,13 +33,9 @@
       >
         Activate repository
       </z-button>
-      <z-button v-else size="small" class="mt-4">
-        <z-icon class="animate-spin" icon="spin-loader" color="ink"></z-icon>
-        <span>Activating Repository</span>
-      </z-button>
     </div>
     <div v-else-if="canViewerUpgrade">
-      <p class="mt-2 max-w-xl">
+      <p class="max-w-xl mt-2">
         You have reached the limit for the number of private repositories you can activate on this
         account, upgrade plan to activate this repository.
       </p>
@@ -48,7 +47,7 @@
       </nuxt-link>
     </div>
     <div v-else-if="canRequestRepoActivation">
-      <p class="mt-2 max-w-xl">
+      <p class="max-w-xl mt-2">
         Please get in touch with the owner of your organization to activate analysis for this
         repository.
       </p>
@@ -87,6 +86,10 @@ export default class RepoInactive extends mixins(RepoDetailMixin, RoleAccessMixi
 
   get canViewerUpgrade(): boolean {
     return this.$gateKeeper.team(TeamPerms.CHANGE_PLAN, this.teamPerms.permission)
+  }
+
+  get configNotAdded(): boolean {
+    return this.repository.errorCode === 3001
   }
 
   get noticeTitle(): string {
