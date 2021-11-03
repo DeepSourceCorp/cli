@@ -1,12 +1,5 @@
 <template>
   <base-card :to="issuesPageUrl" :remove-default-style="removeDefaultStyle" :show-info="showInfo">
-    <template v-if="repoInfo.hasHacktoberfestEnabled" slot="header">
-      <div class="pl-1">
-        <img class="inline h-3.5 mr-0.5" src="~/assets/images/hacktoberfest.svg" />
-        <span class="leading-none text-vanilla-300"> Hacktoberfest </span>
-      </div>
-    </template>
-
     <template slot="title">
       <div class="font-normal text-vanilla-400" :class="showInfo ? 'text-lg' : 'text-base'">
         <div class="inline mr-2">
