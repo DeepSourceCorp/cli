@@ -18,10 +18,10 @@
       </template>
     </div>
     <div class="col-span-2 space-y-2 lg:col-span-1">
-      <template v-if="runList.edges && selectedRun === 'Analyses'">
+      <template v-if="runList.edges && selectedRun === 'Analysis runs'">
         <empty-state v-if="runList.edges.length < 1">
           <template slot="title">
-            <p class="text-base text-vanilla-300">No recent Analyses</p>
+            <p class="text-base text-vanilla-300">No recent Analysis runs</p>
           </template>
         </empty-state>
         <run-card
@@ -162,7 +162,7 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
   }) => Promise<void>
 
   private runOptions: IRunOptions[] = [
-    { name: 'Analyses', showMoreLabel: 'View all Analyses', link: ['history', 'runs'] },
+    { name: 'Analysis runs', showMoreLabel: 'View all Analysis runs', link: ['history', 'runs'] },
     {
       name: 'Autofixes',
       showMoreLabel: 'View all Autofixes',
@@ -209,9 +209,15 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
     this.$socket.$on('repo-transform-created', this.refetchRuns)
 
     const { provider, owner, repo } = this.$route.params
-    this.selectedRun =
+    let runName =
       (this.$localStore.get(`${provider}-${owner}-${repo}`, 'selected-run') as string) ??
       this.runOptions[0].name
+
+    if (this.runOptions.some(({ name }) => name === runName)) {
+      this.selectedRun = runName
+    } else {
+      this.selectedRun = this.runOptions[0].name
+    }
   }
 
   beforeDestroy(): void {
