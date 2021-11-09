@@ -23,6 +23,10 @@ declare module 'vuex/types/index' {
   }
 }
 
+function stripTrailingSlash(path: string) {
+  return path.endsWith('/') ? path.slice(0, -1) : path
+}
+
 export default (context: Context, inject: Inject): void => {
   const generateRoute = (path?: Array<string> | string, includeRepoInPath = true): string => {
     const { params } = context.route
@@ -31,8 +35,9 @@ export default (context: Context, inject: Inject): void => {
       baseRoute.push(params.repo)
     }
     if (path && Array.isArray(path)) {
-      return baseRoute.concat(...path).join('/')
+      return stripTrailingSlash(baseRoute.concat(...path).join('/'))
     } else if (path) {
+      path = stripTrailingSlash(path)
       return baseRoute.concat(path).join('/')
     }
 
