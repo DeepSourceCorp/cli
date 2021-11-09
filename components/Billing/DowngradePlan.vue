@@ -10,10 +10,12 @@
     >
       <template slot="description">
         You will be downgraded to the {{ availableDowngradePlans.name }} plan.
-        <nuxt-link
-          :to="$generateRoute(['settings', 'billing', 'plans'])"
+        <a
+          href="/pricing"
+          target="_blank"
+          rel="noopener noreferrer"
           class="text-juniper hover:underline"
-          >See pricing.</nuxt-link
+          >See pricing.</a
         >
       </template>
     </button-input>

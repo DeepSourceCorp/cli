@@ -24,18 +24,14 @@
         "
       >
         <!-- Replace with PDF -->
-        <z-icon icon="file-text" size="base" color="current" />
-        <span
-          class="w-1/3 text-vanilla-300 tracking-tighter leading-6 group-hover:text-vanilla-100"
-        >
+        <z-icon icon="file-text" size="medium" color="current"></z-icon>
+        <span class="w-1/3 text-vanilla-300 group-hover:text-vanilla-100">
           Invoice {{ formatDate(parseISODate(inv.date), 'MMM YYYY') }}
         </span>
-        <span
-          class="flex-grow text-vanilla-300 tracking-tighter leading-6 group-hover:text-vanilla-100"
-        >
+        <span class="flex-grow text-vanilla-300 group-hover:text-vanilla-100">
           Generated on {{ formatDate(parseISODate(inv.date)) }}
         </span>
-        <z-icon icon="download" size="base" color="current" />
+        <z-icon icon="download" size="medium" color="current"></z-icon>
       </a>
     </template>
     <template v-else>

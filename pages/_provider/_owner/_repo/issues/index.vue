@@ -115,13 +115,8 @@
       v-bind="autofixIssue"
       :isOpen="isAutofixOpen"
       @close="isAutofixOpen = false"
-      @runQuotaExhausted="openUpgradeAccountModal"
     />
     <activate-analysis-modal v-if="isActivationModalOpen" @close="isActivationModalOpen = false" />
-    <upgrade-account-modal
-      v-if="isUpgradeAccountModalOpen"
-      @close="isUpgradeAccountModalOpen = false"
-    />
   </div>
 </template>
 
@@ -186,7 +181,6 @@ export default class Issues extends mixins(
 ) {
   public isAutofixOpen = false
   public isActivationModalOpen = false
-  public isUpgradeAccountModalOpen = false
   public currentPage: Maybe<number> = null
   public urlFilterState: Record<string, string | (string | null)[]> = {}
   public autofixIssue: Record<string, string | Array<string>> = {}
@@ -325,11 +319,6 @@ export default class Issues extends mixins(
   public openAutofixModal(issue: Record<string, string | Array<string>>): void {
     this.autofixIssue = { ...issue }
     this.isAutofixOpen = true
-  }
-
-  public openUpgradeAccountModal() {
-    this.isAutofixOpen = false
-    this.isUpgradeAccountModalOpen = true
   }
 
   get canCreateAutofix(): boolean {
