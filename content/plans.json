@@ -1,58 +1,25 @@
 {
-  "pro": {
-    "planName": "Pro",
-    "planSlugMonthly": "plan-pro-monthly",
-    "planSlugAnnual": "plan-pro-annual",
-    "description": "For open-source maintainers and small teams",
-    "buttonLabel": "Upgrade to Pro",
-    "monthlyAmount": 15,
-    "annualAmount": 12,
-    "features": [
-      "All features in Free",
-      "Unlimited team members",
-      "Unlimited public and private repositories"
-    ]
-  },
   "starter": {
     "planName": "Starter",
     "planSlugMonthly": "plan-starter-monthly",
     "planSlugAnnual": "plan-starter-annual",
-    "description": "For open-source maintainers and small teams",
+    "description": "For small teams who're just getting started with code reviews",
     "buttonLabel": "Upgrade to Starter",
     "monthlyAmount": 10,
     "annualAmount": 8,
     "features": [
-      "All features in Free",
-      "Unlimited team members",
-      "Unlimited public and private repositories"
-    ]
-  },
-  "premium": {
-    "planName": "Business",
-    "planSlugMonthly": "plan-premium-monthly",
-    "planSlugAnnual": "plan-premium-annual",
-    "description": "For open-source maintainers and small teams",
-    "buttonLabel": "Upgrade to Business",
-    "monthlyAmount": 30,
-    "annualAmount": 24,
-    "isPrimary": true,
-    "features": [
-      "All features in Starter",
-      "Access to Core, Community, and Custom analyzers",
-      "Transformers, Autofix, Autopilot unlimited",
-      "RBAC",
-      "Audit Logs",
-      "Org-level defaults configuration",
-      "3 years retention of reporting data",
-      "Priority support",
-      "API and webhooks"
+      "All features in Free plan",
+      "Access to Core and Community analyzers",
+      "10 private repositories",
+      "Limited usage of Transformers and Autofix",
+      "Standard support"
     ]
   },
   "business": {
     "planName": "Business",
     "planSlugMonthly": "plan-business-monthly",
     "planSlugAnnual": "plan-business-annual",
-    "description": "For open-source maintainers and small teams",
+    "description": "For growing teams who want to systematically automate code reviews",
     "buttonLabel": "Upgrade to Business",
     "monthlyAmount": 30,
     "annualAmount": 24,
@@ -60,24 +27,26 @@
     "features": [
       "All features in Starter",
       "Access to Core, Community, and Custom analyzers",
-      "Transformers, Autofix, Autopilot unlimited",
-      "RBAC",
+      "Unlimited private repositories",
+      "Unlimited usage of Transformers and Autofix",
+      "Role-based Access Control",
       "Audit Logs",
-      "Org-level defaults configuration",
-      "3 years retention of reporting data",
-      "Priority support",
-      "API and webhooks"
+      "2 years retention of reporting data",
+      "API and webhooks",
+      "Priority support"
     ]
   },
   "enterprise": {
     "planName": "Enterprise",
-    "description": "For large teams with on-premise deployments.",
-    "buttonLabel": "Request a Demo",
+    "description": "For organizations with advanced controls, on-premise deployments and support needs",
+    "buttonLabel": "Schedule a demo",
     "routeTo": "/schedule-demo",
     "features": [
       "All features in Business",
-      "Pre-defined number of team members",
-      "Unlimited public and private repos"
+      "On-premise / self-hosted deployment",
+      "Single sign-on",
+      "Support and Uptime SLA guarantees",
+      "Custom invoicing"
     ]
   }
 }
