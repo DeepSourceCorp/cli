@@ -2,6 +2,7 @@ query($login: String!, $provider: VCSProviderChoices!) {
   owner(login: $login, provider: $provider) {
     id
     isTeam
+    avatar
     vcsInstallationId
     hasSubscribedToPlan
     autofixInstallationUrl
