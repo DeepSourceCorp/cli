@@ -40,6 +40,10 @@ import ResumePlan from '~/apollo/mutations/owner/resumePlan.gql'
 import GetUpgradePlanInfo from '~/apollo/mutations/owner/getUpgradePlanInfo.gql'
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 
+// Usage details
+import UsageDetailsGQLQuery from '~/apollo/queries/owner/usageDetails.gql'
+import MaxUsagePercentageGQLQuery from '~/apollo/queries/owner/maxUsagePercentage.gql'
+
 export interface Trend {
   labels: string[]
   values: number[]
@@ -167,7 +171,10 @@ export enum OwnerDetailActions {
   CHANGE_SUBSCRIPTION_PLAN = 'changeSubscriptionPlan',
   CANCEL_SUBSCRIPTION_PLAN = 'cancelSubscriptionPlan',
   REVERT_SUBSCRIPTION_CANCELLATION = 'revertSubscriptionCancellation',
-  GET_UPGRADE_PLAN_INFO = 'getUpgradePlanInfo'
+  GET_UPGRADE_PLAN_INFO = 'getUpgradePlanInfo',
+
+  FETCH_MAX_USAGE_PERCENTAGE = 'fetchmaxUsagePercentage',
+  FETCH_USAGE_DETAILS = 'fetchUsageDetails'
 }
 
 interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
@@ -309,6 +316,18 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
       planSlug: string
     }
   ) => Promise<GetUpgradeCodeQualitySubscriptionPlanInfoPayload>
+
+  [OwnerDetailActions.FETCH_USAGE_DETAILS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_MAX_USAGE_PERCENTAGE]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
 }
 
 export const actions: OwnerDetailModuleActions = {
@@ -635,6 +654,40 @@ export const actions: OwnerDetailModuleActions = {
     } finally {
       commit(OwnerDetailMutations.SET_LOADING, false)
     }
+  },
+
+  async [OwnerDetailActions.FETCH_USAGE_DETAILS]({ commit }, args) {
+    try {
+      const response = await this.$fetchGraphqlData(
+        UsageDetailsGQLQuery,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+    }
+  },
+
+  async [OwnerDetailActions.FETCH_MAX_USAGE_PERCENTAGE]({ commit }, args) {
+    try {
+      const response = await this.$fetchGraphqlData(
+        MaxUsagePercentageGQLQuery,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+    } catch (e) {
+      const err = e as GraphqlError
+      commit(OwnerDetailMutations.SET_ERROR, err)
+    }
   }
 }
 
@@ -647,10 +700,13 @@ export const state = (): OwnerDetailModuleState => ({
     issueTrend: {},
     resolvedIssueTrend: {},
     owner: {
+      features: [],
       accountSetupStatus: [],
       ownerSetting: <OwnerSetting>{
         issueTypeSettings: <Maybe<Array<Maybe<IssueTypeSetting>>>>[]
-      }
+      },
+      maxUsagePercentage: 0,
+      featureUsage: []
     }
   })
 })

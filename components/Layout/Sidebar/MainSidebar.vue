@@ -94,6 +94,29 @@
       >
         Settings
       </sidebar-item>
+
+      <div
+        v-if="
+          !isCollapsed &&
+          $route.name.startsWith('provider-owner-settings') &&
+          owner.maxUsagePercentage >= 100
+        "
+        class="p-3"
+      >
+        <h4 class="text-sm font-medium leading-6 text-vanilla-100">Usage quota exhausted :(</h4>
+        <p class="mt-4 text-xs font-normal leading-5 text-vanilla-400">
+          You have exhausted your usage quota for this month. Upgrade your plan to keep things
+          running.
+        </p>
+        <z-button
+          button-type="primary"
+          icon="zap"
+          label="Upgrade plan"
+          size="small"
+          class="w-full mt-5"
+          @click="$router.push($generateRoute(['settings', 'billing', 'plans']))"
+        />
+      </div>
     </section>
     <section class="relative self-end w-full justify-self-end group">
       <div class="p-2.5 border-t border-ink-200 space-y-2">
@@ -180,23 +203,30 @@
 
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
-
-import { TeamMemberRoleChoices } from '~/types/types'
+import { ZButton, ZIcon, ZTag } from '@deepsourcelabs/zeal'
 
 // types
-import ContextMixin from '@/mixins/contextMixin'
-import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { TeamPerms } from '~/types/permTypes'
+import { TeamMemberRoleChoices } from '~/types/types'
+
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import ContextMixin from '@/mixins/contextMixin'
+import OwnerDetailMixin from '@/mixins/ownerDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 
 @Component({
   components: {
+    ZButton,
     ZIcon,
     ZTag
   }
 })
-export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoListMixin) {
+export default class Sidebar extends mixins(
+  ActiveUserMixin,
+  ContextMixin,
+  OwnerDetailMixin,
+  RepoListMixin
+) {
   public isCollapsed = false
   public collapsedSidebar = false
   public toggleCollapsed = false
@@ -210,8 +240,12 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   }
 
   async fetch(): Promise<void> {
-    await this.fetchContext()
-    await this.fetchActiveUser()
+    await Promise.all([this.fetchContext(), this.fetchActiveUser()])
+    if (this.$route?.name?.startsWith('provider-owner-settings')) {
+      const { owner: login, provider } = this.$route.params
+      const params = { login, provider }
+      await this.fetchMaxUsagePercentage(params)
+    }
   }
 
   @Watch('activeOwner')
@@ -293,15 +327,11 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   }
 
   public getRoute(params: string): string {
-    return `/${this.provider}/${this.owner}/${params}`
+    return `/${this.provider}/${this.activeOwner}/${params}`
   }
 
   get provider(): string {
     return this.activeProvider
-  }
-
-  get owner(): string {
-    return this.activeOwner
   }
 
   public isActive(params: string): boolean {

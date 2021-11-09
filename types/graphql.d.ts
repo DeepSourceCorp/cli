@@ -828,6 +828,15 @@ declare module '*/issueTrends.gql' {
 }
     
 
+declare module '*/maxUsagePercentage.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/IssueTypeSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -838,6 +847,15 @@ declare module '*/IssueTypeSettings.gql' {
     
 
 declare module '*/statusCheck.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/usageDetails.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

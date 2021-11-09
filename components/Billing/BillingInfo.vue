@@ -1,5 +1,5 @@
 <template>
-  <form-group label="Billing Information" :divide="false" bodyClass="space-y-4">
+  <form-group label="Billing Information" :divide="false" bodyClass="space-y-4" class="mt-5">
     <div v-if="isBilledByStripe || isBilledManually">
       <div
         class="

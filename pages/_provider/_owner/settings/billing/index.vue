@@ -71,8 +71,10 @@
             <span class="font-semibold">Free</span> plan.
           </p>
         </lazy-alert-box>
-        <plan-info :id="owner.id"></plan-info>
+        <plan-info :id="owner.id" :current-plan="currentPlan" />
       </div>
+
+      <usage-details />
       <billing-info />
       <payment-info />
       <invoice-list v-if="isBilledByStripe" />
@@ -89,45 +91,21 @@
       </form-group>
     </template>
     <template v-else-if="!$fetchState.pending">
-      <h2 class="text-lg font-medium">Upgrade to get more for your team</h2>
-      <z-radio-group
-        :modelValue="billingCycle"
-        @change="updateBillingCycle"
-        class="flex font-medium"
-      >
-        <z-radio-button value="yearly">
-          Pay yearly <span class="inline text-juniper">(Save 20%)</span>
-        </z-radio-button>
-        <z-radio-button value="monthly"> Pay monthly </z-radio-button>
-      </z-radio-group>
-      <div class="grid max-w-3xl grid-cols-1 gap-5 rounded md:grid-cols-3">
-        <plan-card
-          v-for="name in plansInContext"
-          :key="name"
-          :name="name"
-          :billingCycle="billingCycle"
-          v-bind="planDetails[name]"
-          @next="subscribe"
-        ></plan-card>
-      </div>
+      <plan-cards />
     </template>
   </div>
 </template>
 
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
-import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
-import SubscriptionMixin from '~/mixins/subscriptionMixin'
-import ContextMixin from '~/mixins/contextMixin'
 import { parseISODate, formatDate } from '~/utils/date'
 import { ZRadioGroup, ZRadioButton } from '@deepsourcelabs/zeal'
 
-import { BillingInfo } from '~/types/types'
-import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { TeamPerms } from '~/types/permTypes'
 import { getHumanizedTimeFromNow } from '~/utils/date'
 
-const PLAN_ORDER = ['starter', 'pro', 'business', 'premium', 'enterprise']
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import UpgradePlanDetailMixin from '~/mixins/upgradePlanDetailMixin'
 
 @Component({
   components: {
@@ -148,12 +126,7 @@ const PLAN_ORDER = ['starter', 'pro', 'business', 'premium', 'enterprise']
   },
   layout: 'dashboard'
 })
-export default class BillingSettings extends mixins(
-  OwnerBillingMixin,
-  SubscriptionMixin,
-  ActiveUserMixin,
-  ContextMixin
-) {
+export default class BillingSettings extends mixins(ActiveUserMixin, UpgradePlanDetailMixin) {
   public parseISODate = parseISODate
   public formatDate = formatDate
   public loading = true
@@ -172,41 +145,10 @@ export default class BillingSettings extends mixins(
     await this.refetchUser()
   }
 
-  get plansInContext(): Record<string, string>[] {
-    if (this.context.plans) {
-      return [
-        ...new Set(
-          Object.keys(this.context.plans)
-            .filter((planName) => planName !== 'plan-github-education-annual')
-            .map((planName) => {
-              return this.context.plans[planName].slug
-            })
-        ),
-        'enterprise'
-      ].sort((curr, next) => {
-        return PLAN_ORDER.indexOf(curr) - PLAN_ORDER.indexOf(next)
-      })
-    }
-    return []
-  }
-
   get cancellationDate(): string | undefined {
     if (this.owner.billingInfo)
       return getHumanizedTimeFromNow(this.owner.billingInfo.upcomingCancellationDate)
     return undefined
-  }
-
-  subscribe(plan: string): void {
-    this.setPlan({
-      selectedPlan: plan
-    })
-    this.$router.push(this.$generateRoute(['settings', 'billing', 'subscribe', plan]))
-  }
-
-  updateBillingCycle(newValue: 'yearly' | 'monthly'): void {
-    this.setPlan({
-      billingCycle: newValue
-    })
   }
 }
 </script>

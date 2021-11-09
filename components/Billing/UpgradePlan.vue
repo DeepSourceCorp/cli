@@ -10,12 +10,10 @@
     >
       <template slot="description">
         Upgrade to the {{ availableUpgradePlans.name }} plan and get more for your team.
-        <a
-          href="/pricing"
-          target="_blank"
-          rel="noopener noreferrer"
+        <nuxt-link
+          :to="$generateRoute(['settings', 'billing', 'plans'])"
           class="text-juniper hover:underline"
-          >See pricing.</a
+          >See pricing.</nuxt-link
         >
       </template>
     </button-input>
