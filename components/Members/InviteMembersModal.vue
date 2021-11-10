@@ -20,6 +20,7 @@
             :id="member.index"
             :showBorder="true"
             :isInvalid="!member.isValid"
+            @debounceInput="areEmailsInvalid"
             placeholder="name@email.com"
           >
           </z-input>

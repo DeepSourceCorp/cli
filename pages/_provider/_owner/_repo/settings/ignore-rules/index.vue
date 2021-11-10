@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex flex-col space-y-4 max-w-2xl">
+  <div class="flex flex-col max-w-2xl p-4 space-y-4">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">Ignored rules</div>
     <!-- Search and filter -->
@@ -38,7 +38,7 @@
     </div> -->
     <!-- List of Ignored rules -->
     <div v-if="loadingRules" class="space-y-2">
-      <div v-for="idx in 3" :key="idx" class="h-20 bg-ink-300 rounded-md animate-pulse"></div>
+      <div v-for="idx in 3" :key="idx" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
     </div>
     <div
       v-else-if="repository.silenceRules && repository.silenceRules.totalCount > 0"
@@ -51,16 +51,18 @@
         :rule="rule.node"
       ></ignored-rule>
     </div>
-    <div v-else class="flex justify-center items-center h-80">No ignored rules</div>
+    <empty-state
+      v-else
+      title="No ignored rules"
+      class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
+    ></empty-state>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, namespace, mixins } from 'nuxt-property-decorator'
+import { Component, namespace, mixins } from 'nuxt-property-decorator'
 import { IgnoredRule } from '@/components/Repository/index'
 import { ZDivider, ZInput, ZMenu, ZMenuItem, ZIcon } from '@deepsourcelabs/zeal'
-import { RepositoryDetailActions } from '~/store/repository/detail'
-import { Repository } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 const repoStore = namespace('repository/detail')

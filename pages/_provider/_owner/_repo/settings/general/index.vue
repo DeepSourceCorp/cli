@@ -103,19 +103,12 @@
     </div>
     <div class="flex gap-x-4">
       <form-group label="Analysis settings" class="flex-grow max-w-2xl">
-        <div>
-          <div class="grid gap-4 py-4 grid-cols-fr-16">
-            <div>
-              <label for="repo-settings-analysis-scope" class="flex-1 text-sm text-vanilla-100">
-                Analysis scope
-              </label>
-            </div>
-            <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
-              <z-option label="Granular (recommended)" value="granular"></z-option>
-              <z-option label="Broad" value="broad"></z-option>
-            </z-select>
-          </div>
-        </div>
+        <input-wrapper label="Analysis scope" input-width="x-small">
+          <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
+            <z-option label="Granular (recommended)" value="granular"></z-option>
+            <z-option label="Broad" value="broad"></z-option>
+          </z-select>
+        </input-wrapper>
         <button-input
           label="Analysis configuration"
           inputId="repo-settings-analysis-config"
@@ -128,58 +121,55 @@
             configuration.
           </template>
         </button-input>
-        <div v-if="canActivateRepo">
-          <div class="grid gap-4 py-4 grid-cols-fr-16">
-            <div>
-              <label :for="inputId" class="flex-1 text-sm text-vanilla-100">
-                Analysis status
-              </label>
-              <div class="text-xs leading-5 text-vanilla-400">
-                Careful! DeepSource will stop monitoring changes to your code if analysis is
-                deactivated
-              </div>
-            </div>
-            <div class="flex flex-col text-right">
-              <button
-                @click="toggleState()"
-                @mouseenter="updateHoverStyle(true)"
-                @mouseleave="updateHoverStyle(false)"
-                class="
-                  flex
-                  items-center
-                  self-end
-                  justify-center
-                  h-8
-                  px-4
-                  space-x-2
-                  font-medium
-                  transition-all
-                  duration-150
-                  ease-in-out
-                  rounded-sm
-                  w-52
-                "
-                :class="{
-                  'bg-transparent text-cherry border border-cherry': isRepoActivated && isHovered,
-                  'bg-transparent text-juniper border border-juniper':
-                    !isRepoActivated && isHovered,
-                  'bg-cherry text-vanilla-100': !isRepoActivated && !isHovered,
-                  'bg-juniper text-ink-400': isRepoActivated && !isHovered
-                }"
-              >
-                <z-icon
-                  :icon="icon"
-                  size="small"
-                  :color="{
-                    'vanilla-100': !isRepoActivated && !isHovered,
-                    'ink-400': isRepoActivated && !isHovered
-                  }"
-                ></z-icon>
-                <span class="text-sm leading-none">{{ buttonText }}</span>
-              </button>
-            </div>
-          </div>
-        </div>
+        <button-input
+          v-if="canActivateRepo"
+          label="Analysis status"
+          inputId="repo-settings-analysis-status"
+          inputWidth="x-small"
+        >
+          <button
+            id="repo-settings-analysis-status"
+            @click="toggleState()"
+            @mouseenter="updateHoverStyle(true)"
+            @mouseleave="updateHoverStyle(false)"
+            class="
+              flex
+              items-center
+              self-end
+              justify-center
+              h-8
+              px-4
+              space-x-2
+              font-medium
+              transition-all
+              duration-150
+              ease-in-out
+              rounded-sm
+              md:-ml-4
+              w-52
+            "
+            :class="{
+              'bg-transparent text-cherry border border-cherry': isRepoActivated && isHovered,
+              'bg-transparent text-juniper border border-juniper': !isRepoActivated && isHovered,
+              'bg-cherry text-vanilla-100': !isRepoActivated && !isHovered,
+              'bg-juniper text-ink-400': isRepoActivated && !isHovered
+            }"
+          >
+            <z-icon
+              :icon="icon"
+              size="small"
+              :color="{
+                'vanilla-100': !isRepoActivated && !isHovered,
+                'ink-400': isRepoActivated && !isHovered
+              }"
+            ></z-icon>
+            <span class="text-sm leading-none">{{ buttonText }}</span>
+          </button>
+
+          <template slot="description">
+            Careful! DeepSource will stop monitoring changes to your code if analysis is deactivated
+          </template>
+        </button-input>
       </form-group>
       <div class="hidden mt-16 lg:block">
         <info-banner
@@ -286,8 +276,8 @@ export default class General extends mixins(
 
   public headerData = [
     { title: 'Issue type', align: 'text-left' },
-    { title: 'Report Issues', align: 'text-center' },
-    { title: 'Block Pull Requests', align: 'text-center' }
+    { title: 'Report issues', align: 'text-center' },
+    { title: 'Block pull requests', align: 'text-center' }
   ]
 
   public selectedScope = ''

@@ -5,7 +5,7 @@
       — {{ actor.fullName || actor.email }}
     </div>
     <div class="flex space-x-4">
-      <info v-tooltip="this.createdAt" v-if="createdAt" icon="clock" :title="formatDuration"></info>
+      <info v-tooltip="formattedDate" v-if="createdAt" icon="clock" :title="formatDuration"></info>
       <info v-if="location" icon="map-pin" :title="location"></info>
       <info v-if="ipAddress" icon="globe" :title="ipAddress"></info>
     </div>
@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { fromNow } from '@/utils/date'
+import { fromNow, formatDate, parseISODate } from '@/utils/date'
 import { Info } from '@/components/Autofix/index'
 
 @Component({
@@ -47,6 +47,10 @@ export default class Log extends Vue {
     }
 
     return this.description
+  }
+
+  get formattedDate(): string {
+    return formatDate(parseISODate(this.createdAt), 'lll')
   }
 
   get formatDuration(): string {

@@ -2,12 +2,17 @@
   <li class="flex items-center py-2 space-x-3 text-sm border-b border-ink-300">
     <div class="items-center w-1/2 space-y-2 leading-none text-vanilla-100">
       <div>{{ email }}</div>
-      <button @click="cancelInvite" class="text-xs cursor-pointer text-cherry">
+      <z-button
+        buttonType="ghost"
+        size="x-small"
+        @click="cancelInvite"
+        class="text-xs cursor-pointer text-cherry"
+      >
         Cancel Invite
-      </button>
+      </z-button>
     </div>
     <div class="flex items-center justify-end w-1/2">
-      <div class="text-right space-y-2">
+      <div class="space-y-2 text-right">
         <!-- z-menu>
           <template slot="trigger">
             <div class="flex items-center space-x-2">

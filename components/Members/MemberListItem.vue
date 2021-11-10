@@ -40,7 +40,7 @@
             </z-menu-section>
             <z-menu-section :divider="false" class="-mt-2">
               <z-menu-item @click="removeMember" icon="alert-triangle" class="text-cherry"
-                >Remove from {{ isRepo ? 'repository' : 'Team' }}</z-menu-item
+                >Remove from {{ isRepo ? 'repository' : 'team' }}</z-menu-item
               >
             </z-menu-section>
           </template>
@@ -89,13 +89,13 @@ const TEAM_PERMS = {
     description:
       'Full access to all repositories and the team, including billing, adding, or removing members.'
   },
-  CONTRIBUTOR: {
-    title: 'Contributor',
-    description: 'Full access to repositories that they have been granted access to'
-  },
   MEMBER: {
     title: 'Member',
-    description: 'Add and edit specific repositories'
+    description: 'Add and edit specific repositories.'
+  },
+  CONTRIBUTOR: {
+    title: 'Contributor',
+    description: 'Full access to repositories that they have been granted access to.'
   }
 }
 

@@ -22,7 +22,11 @@
         </z-timeline-item>
       </z-timeline>
     </div>
-    <div v-else class="flex items-center justify-center h-80">No Audit logs</div>
+    <empty-state
+      v-else
+      title="No Audit logs"
+      class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
+    ></empty-state>
   </div>
 </template>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex flex-col space-y-4 max-w-2xl">
+  <div class="flex flex-col max-w-2xl p-4 space-y-4">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">Repository members</div>
     <div class="flex space-x-2">
@@ -51,13 +51,13 @@
         v-else
         class="
           flex flex-col
-          h-40
-          justify-center
           items-center
+          justify-center
+          h-40
           space-y-2
-          border-ink-300 border-2
+          border-2 border-dashed
           rounded-md
-          border-dashed
+          border-ink-300
         "
       >
         <template v-if="searchCandidate">
@@ -92,7 +92,7 @@
     <portal to="modal">
       <add-collaborator-modal
         v-if="showAddCollaboratorModal"
-        @refetch="() => fetchRepoMembers(true)"
+        @refetch="fetchRepoMembers(true)"
         @close="showAddCollaboratorModal = false"
       />
       <z-confirm
@@ -102,7 +102,7 @@
         primaryActionLabel="Confirm and grant permissions"
         @primaryAction="updatePermission"
       >
-        <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">
+        <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
           <z-icon icon="alert-circle" size="small" class="mr-2"></z-icon> Update member role to
           {{ repoPerms[newMemberRole].label }}
         </div>

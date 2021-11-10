@@ -1,16 +1,6 @@
 <template>
   <div class="space-y-4">
-    <z-input
-      v-model="searchCandidate"
-      icon="search"
-      class="p-2"
-      :showBorder="false"
-      backgroundColor="ink-300"
-      placeholder="Search for an invited member"
-    >
-      <template slot="left"> <z-icon icon="search" class="ml-1.5" size="small"></z-icon> </template>
-    </z-input>
-    <template v-if="team.invites && team.invites.edges">
+    <template v-if="team.invites.edges.length > 0">
       <transition-group class="duration-200 transform" tag="ul">
         <invited-member-list-item
           v-for="invite in team.invites.edges"
@@ -40,17 +30,10 @@
         <div class="flex-grow h-8 rounded-md bg-ink-300"></div>
       </div>
     </div>
-    <div v-else class="flex flex-col space-y-2">
-      <div class="w-full h-60 rounded-md bg-ink-300 bg-opacity-50 flex items-center justify-center">
-        <div class="text-center">
-          <span class="text-4xl">📨</span>
-          <p class="font-semibold text-vanilla-400">No Pending Invites</p>
-        </div>
-      </div>
-    </div>
+    <empty-state v-else title="No Pending Invites"> </empty-state>
     <portal to="modal">
       <z-confirm v-if="showCancelConfirm" @primaryAction="cancelInviteForMember" @onClose="close">
-        <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">
+        <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
           <z-icon icon="alert-circle" size="small" class="mr-2"></z-icon>
           Do you want to cancel this invite?
         </div>
@@ -59,7 +42,7 @@
           <b class="text-vanilla-100">This action cannot be reversed.</b>
         </p>
         <template slot="footer">
-          <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
             <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close"
               >Cancel</z-button
             >
