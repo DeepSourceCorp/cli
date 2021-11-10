@@ -1,6 +1,6 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-
+import { stripTrailingSlash } from '~/utils/string'
 // Import State & Types
 import { RunDetailActions } from '@/store/run/detail'
 
@@ -18,7 +18,7 @@ import { RunDetailActions } from '@/store/run/detail'
 
       if (checks?.edges) {
         const code = checks.edges[0].node.analyzer.shortcode
-        redirect(302, `${route.path}/${code}`)
+        redirect(302, `${stripTrailingSlash(route.path)}/${code}`)
       }
     }
   ],

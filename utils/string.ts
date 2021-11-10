@@ -69,6 +69,10 @@ function toWrappableString(
   return path
 }
 
+function stripTrailingSlash(path: string): string {
+  return path.replace(/\/$/, '')
+}
+
 export {
   toTitleCase,
   toSentenceCase,
@@ -76,5 +80,6 @@ export {
   formatUSD,
   formatIntl,
   makeSafeNumber,
-  toWrappableString
+  toWrappableString,
+  stripTrailingSlash
 }

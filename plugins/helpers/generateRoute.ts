@@ -1,4 +1,5 @@
 import { Inject, Context } from '@nuxt/types/app'
+import { stripTrailingSlash } from '~/utils/string'
 
 // import { Plugin } from '@nuxt/types'
 
@@ -21,10 +22,6 @@ declare module 'vuex/types/index' {
   interface Store<S> {
     $generateRoute: (path: Array<string>) => string
   }
-}
-
-function stripTrailingSlash(path: string) {
-  return path.endsWith('/') ? path.slice(0, -1) : path
 }
 
 export default (context: Context, inject: Inject): void => {
