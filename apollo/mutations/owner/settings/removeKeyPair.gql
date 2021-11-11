@@ -1,0 +1,5 @@
+mutation removeKeyPairForOwner($ownerId: ID!) {
+  removeKeyPairForOwner(input: { ownerId: $ownerId }) {
+    ok
+  }
+}

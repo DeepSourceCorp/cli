@@ -23,6 +23,9 @@ import SyncRepositories from '~/apollo/mutations/owner/syncRepositories.gql'
 
 // Settings
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
+import OwnerSSHPublicKeyQuery from '~/apollo/queries/owner/settings/publicKey.gql'
+import GenerateOwnerSSHPublicKey from '~/apollo/mutations/owner/settings/generateKeyPair.gql'
+import RemoveOwnerSSHPublicKey from '~/apollo/mutations/owner/settings/removeKeyPair.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
 
 // Billing
@@ -151,6 +154,9 @@ export enum OwnerDetailActions {
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
   FETCH_ACCOUNT_SETUP_STATUS = 'fetchAccountSetupStatus',
   SET_OWNER = 'setOwner',
+  FETCH_OWNER_SSH_KEY = 'fetchOwnerSSHKey',
+  GENERATE_OWNER_SSH_KEY = 'generateOwnerSSHKey',
+  REMOVE_OWNER_SSH_KEY = 'removeOwnerSSHKey',
 
   SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting',
   SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings',
@@ -309,6 +315,24 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
       planSlug: string
     }
   ) => Promise<GetUpgradeCodeQualitySubscriptionPlanInfoPayload>
+
+  [OwnerDetailActions.FETCH_OWNER_SSH_KEY]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string }
+  ) => Promise<void>
+
+  [OwnerDetailActions.GENERATE_OWNER_SSH_KEY]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { ownerId: string }
+  ) => Promise<void>
+
+  [OwnerDetailActions.REMOVE_OWNER_SSH_KEY]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { ownerId: string }
+  ) => Promise<void>
 }
 
 export const actions: OwnerDetailModuleActions = {
@@ -634,6 +658,26 @@ export const actions: OwnerDetailModuleActions = {
       throw e
     } finally {
       commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+  async [OwnerDetailActions.FETCH_OWNER_SSH_KEY]({ commit }, args) {
+    const response = await this.$fetchGraphqlData(
+      OwnerSSHPublicKeyQuery,
+      {
+        login: args.login,
+        provider: this.$providerMetaMap[args.provider].value
+      },
+      true
+    )
+    commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+  },
+  async [OwnerDetailActions.GENERATE_OWNER_SSH_KEY](_, args) {
+    await this.$applyGraphqlMutation(GenerateOwnerSSHPublicKey, args, true)
+  },
+  async [OwnerDetailActions.REMOVE_OWNER_SSH_KEY](_, args) {
+    const response = await this.$applyGraphqlMutation(RemoveOwnerSSHPublicKey, args, true)
+    if (!response.data.removeKeyPairForOwner.ok) {
+      throw Error('There was a problem removing the key pair, please try later')
     }
   }
 }

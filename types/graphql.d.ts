@@ -341,6 +341,24 @@ declare module '*/resumePlan.gql' {
 }
     
 
+declare module '*/generateKeyPair.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const generateKeyPairForOwner: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/removeKeyPair.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const removeKeyPairForOwner: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updateOwnerSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -832,6 +850,15 @@ declare module '*/IssueTypeSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicKey.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ownerPublicKey: DocumentNode;
 
   export default defaultDocument;
 }

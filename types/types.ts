@@ -5055,6 +5055,32 @@ export type Unnamed_31_Mutation = (
   )> }
 );
 
+export type GenerateKeyPairForOwnerMutationVariables = Exact<{
+  ownerId: Scalars['ID'];
+}>;
+
+
+export type GenerateKeyPairForOwnerMutation = (
+  { __typename?: 'Mutation' }
+  & { generateKeyPairForOwner?: Maybe<(
+    { __typename?: 'GenerateKeyPairForOwnerPayload' }
+    & Pick<GenerateKeyPairForOwnerPayload, 'publicKey'>
+  )> }
+);
+
+export type RemoveKeyPairForOwnerMutationVariables = Exact<{
+  ownerId: Scalars['ID'];
+}>;
+
+
+export type RemoveKeyPairForOwnerMutation = (
+  { __typename?: 'Mutation' }
+  & { removeKeyPairForOwner?: Maybe<(
+    { __typename?: 'RemoveKeyPairForOwnerPayload' }
+    & Pick<RemoveKeyPairForOwnerPayload, 'ok'>
+  )> }
+);
+
 export type Unnamed_32_MutationVariables = Exact<{
   input: UpdateOwnerSettingsInput;
 }>;
@@ -5970,7 +5996,7 @@ export type Unnamed_74_Query = (
   { __typename?: 'Query' }
   & { owner?: Maybe<(
     { __typename?: 'Owner' }
-    & Pick<Owner, 'id' | 'isTeam' | 'vcsInstallationId' | 'hasSubscribedToPlan' | 'autofixInstallationUrl' | 'isAutofixEnabled' | 'isAutoonboardAllowed' | 'hasPremiumPlan' | 'canOnboard'>
+    & Pick<Owner, 'id' | 'isTeam' | 'avatar' | 'vcsInstallationId' | 'hasSubscribedToPlan' | 'autofixInstallationUrl' | 'isAutofixEnabled' | 'isAutoonboardAllowed' | 'hasPremiumPlan' | 'canOnboard'>
     & { team?: Maybe<(
       { __typename?: 'Team' }
       & Pick<Team, 'id'>
@@ -6014,6 +6040,23 @@ export type Unnamed_76_Query = (
         { __typename?: 'IssueTypeSetting' }
         & Pick<IssueTypeSetting, 'slug' | 'name' | 'isIgnoredInCheckStatus' | 'isIgnoredToDisplay' | 'description'>
       )>>> }
+    )> }
+  )> }
+);
+
+export type OwnerPublicKeyQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type OwnerPublicKeyQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & { ownerSetting?: Maybe<(
+      { __typename?: 'OwnerSetting' }
+      & Pick<OwnerSetting, 'publicKey'>
     )> }
   )> }
 );

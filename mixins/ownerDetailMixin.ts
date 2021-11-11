@@ -59,4 +59,13 @@ export default class OwnerDetailMixin extends Vue {
 
   @ownerDetailStore.Action(OwnerDetailActions.SYNC_REPOS_FOR_OWNER)
   syncReposForOwner: () => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_OWNER_SSH_KEY)
+  fetchOwnerSSHKey: (args: { login: string; provider: string }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.GENERATE_OWNER_SSH_KEY)
+  generateOwnerSSHKey: (args: { ownerId: string }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.REMOVE_OWNER_SSH_KEY)
+  removeOwnerSSHKey: (args: { ownerId: string }) => Promise<void>
 }

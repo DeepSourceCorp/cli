@@ -4,6 +4,7 @@ export enum TeamPerms {
   UPDATE_BILLING_DETAILS = 'updateBillingDetails',
   MANAGE_TEAM_MEMEBERS = 'manageTeamMemebers',
   VIEW_ACCESS_CONTROL_DASHBOARD = 'viewAccessControlDashboard',
+  GENERATE_OWNER_SSH_KEY_PAIR = 'generateOwnerSSHKeyPair',
   DELETE_TEAM_ACCOUNT = 'deleteTeamAccount',
   SET_GRANUALAR_IGNORE_PERMISSION = 'setGranualarIgnorePermission',
   ACTIVATE_ANALYSIS = 'activateAnalysis',

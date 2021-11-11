@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="tabs" class="flex xl:col-span-2 pt-2.5 pb-0 border-b border-ink-200">
-      <div class="flex self-end px-2 md:px-4 space-x-5 overflow-auto flex-nowrap">
+      <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
         <template v-for="settings in settingsOptions">
           <nuxt-link
             v-if="owner.isTeam && settings.validator"
@@ -26,7 +26,7 @@
                 "
                 textSize="xxs"
                 spacing="px-2 py-1"
-                class="tracking-wider font-semibold uppercase leading-none text-current"
+                class="font-semibold leading-none tracking-wider text-current uppercase"
               >
                 Beta
               </z-tag>
@@ -79,6 +79,7 @@ import { TeamMemberRoleChoices } from '~/types/types'
         TeamPerms.UPDATE_BILLING_DETAILS,
         TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
         TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE,
+        TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR,
         TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE
       ]
     }
@@ -106,6 +107,12 @@ export default class TeamSettings extends mixins(
         label: 'Access control',
         routeName: 'provider-owner-settings-access',
         validator: this.canViewAccessControl
+      },
+      {
+        name: 'ssh-access',
+        label: 'SSH access',
+        routeName: 'provider-owner-settings-ssh-access',
+        validator: this.canGenerateSSHKeyPair
       },
       {
         name: 'auto-onboard',
@@ -168,6 +175,10 @@ export default class TeamSettings extends mixins(
 
   get canViewAccessControl(): boolean {
     return this.$gateKeeper.team(TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD, this.teamPerms.permission)
+  }
+
+  get canGenerateSSHKeyPair(): boolean {
+    return this.$gateKeeper.team(TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR, this.teamPerms.permission)
   }
 
   head(): Record<string, string> {

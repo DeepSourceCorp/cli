@@ -1,0 +1,8 @@
+query ownerPublicKey($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    ownerSetting {
+      publicKey
+    }
+  }
+}

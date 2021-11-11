@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between items-start mb-6">
+  <div class="flex items-start justify-between mb-6">
     <div class="space-y-2">
       <div class="flex items-center space-x-2">
         <h2 class="text-lg font-medium">
@@ -7,7 +7,7 @@
         </h2>
         <slot name="title-info"></slot>
       </div>
-      <p class="max-w-md text-xs text-vanilla-400">
+      <p class="text-xs text-vanilla-400" :class="[descriptionWidthClass]">
         <slot name="description">{{ description }} </slot>
       </p>
     </div>
@@ -26,5 +26,8 @@ export default class PageTitle extends Vue {
 
   @Prop()
   description!: string
+
+  @Prop({ default: 'max-w-md' })
+  descriptionWidthClass: string
 }
 </script>
