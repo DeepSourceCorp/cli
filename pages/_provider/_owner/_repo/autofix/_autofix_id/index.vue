@@ -1,5 +1,5 @@
 <template>
-  <div class="relative top-0 flex flex-col w-full pb-6 space-y-6">
+  <div class="relative top-0 flex flex-col w-full pb-6 space-y-5">
     <div class="px-4 py-3.5 min-h-13 border-b border-ink-200 flex flex-row items-center">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
@@ -170,6 +170,48 @@
         </template>
       </div>
     </div>
+    <section v-if="isAutofixConcluded" class="px-4 space-y-4">
+      <alert-box
+        v-if="autofixRun.status === AUTOFIX_STATUS.STALE"
+        text-color="text-honey-300"
+        bg-color="bg-honey"
+      >
+        <div class="flex items-start space-x-4">
+          <p>
+            New changes were pushed since this Autofix was created which has invalidated these
+            changes. Please check the results from the latest analysis run to see if this issue
+            still exists and re-run Autofix.
+          </p>
+          <z-button
+            :to="autofixRun.staleRedirectUrl"
+            button-type="custom"
+            class="bg-honey-500"
+            size="small"
+            color="ink-400"
+          >
+            View latest analysis
+          </z-button>
+        </div>
+      </alert-box>
+
+      <alert-box
+        v-if="autofixRun.committedToBranchStatus === COMMIT_STATUS.FAILED"
+        text-color="text-honey-300"
+        bg-color="bg-honey"
+      >
+        Something went wrong when trying to commit your changes. Please try running this again in a
+        few minutes. We're terribly sorry about this.
+      </alert-box>
+
+      <alert-box
+        v-if="autofixRun.pullRequestStatus === PULL_REQUEST_STATUS.FAILED"
+        text-color="text-honey-300"
+        bg-color="bg-honey"
+      >
+        Something went wrong when trying to create the pull-request. Please try running this again
+        in a few minutes. We're terribly sorry about this.
+      </alert-box>
+    </section>
     <div class="px-4" v-if="!$fetchState.pending && autofixRun.errorsRendered.length">
       <run-error-box :errors-rendered="autofixRun.errorsRendered" />
     </div>
