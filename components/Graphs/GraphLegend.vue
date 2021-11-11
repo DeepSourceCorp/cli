@@ -8,13 +8,13 @@
     @click="$emit('toggle')"
   >
     <div class="flex items-center space-x-2">
+      <div v-if="loading" class="h-10 my-2 w-15 bg-ink-300 rounded-md animate-pulse"></div>
       <z-animated-integer
-        v-if="!Number.isNaN(value)"
+        v-else-if="!Number.isNaN(value)"
         class="text-2.5xl font-medium"
         :format="shortenLargeNumber"
         :value="value"
-      ></z-animated-integer>
-      <div v-else>0</div>
+      />
       <ticker
         v-if="showTrends && isFinite(trendValue)"
         :trendHint="trendHint"
@@ -76,6 +76,9 @@ export default class GraphLegend extends Vue {
 
   @Prop({ default: '' })
   trendHint: string
+
+  @Prop({ default: false })
+  loading: boolean
 
   public shortenLargeNumber = shortenLargeNumber
 

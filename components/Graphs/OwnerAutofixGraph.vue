@@ -21,10 +21,14 @@
         :value="currentAutofixCount"
         labelBgClass="bg-robin"
         label="Autofixed issues"
+        :loading="$fetchState.pending"
       />
     </div>
+    <div v-if="$fetchState.pending" class="p-4">
+      <div style="height: 258px" class="rounded-md bg-ink-300 animate-pulse"></div>
+    </div>
     <base-graph
-      v-if="autofixTrend.values && autofixTrend.values.length"
+      v-else-if="autofixTrend.values && autofixTrend.values.length"
       :datasets="dataSets"
       :labels="formattedLabels"
       :showControl="false"
@@ -58,12 +62,16 @@ export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
     return getLastTwoTrends(this.autofixTrend)[0]
   }
 
-  async fetch(): Promise<void> {
-    await this.fetchAutofixTrends({
+  fetchData() {
+    return this.fetchAutofixTrends({
       login: this.$route.params.owner,
       provider: this.$route.params.provider,
       lastDays: this.lastDays
     })
+  }
+
+  async fetch(): Promise<void> {
+    await this.fetchData()
   }
 
   get formattedLabels(): string[] {
@@ -89,7 +97,7 @@ export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
 
   updateLastDays(newVal: number): void {
     this.lastDays = newVal
-    this.$fetch()
+    this.fetchData()
   }
 }
 </script>

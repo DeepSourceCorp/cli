@@ -41,10 +41,14 @@
             :value="currentAutofixCount"
             labelBgClass="bg-robin"
             label="Autofixed issues"
+            :loading="$fetchState.pending"
           />
         </div>
+        <div v-if="$fetchState.pending" class="p-4">
+          <div class="h-52 rounded-md bg-ink-300 animate-pulse"></div>
+        </div>
         <base-graph
-          v-if="autofixTrend.values && autofixTrend.values.length"
+          v-else-if="autofixTrend.values && autofixTrend.values.length"
           :datasets="dataSets"
           :showControl="false"
           :labels="formattedLabels"

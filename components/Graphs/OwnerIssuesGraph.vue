@@ -24,6 +24,7 @@
         :isPercent="true"
         :value="currentActiveIssues"
         label="Active issues"
+        :loading="$fetchState.pending"
       />
       <graph-legend
         :allowHover="false"
@@ -35,10 +36,14 @@
         :value="currentResolvedIssues"
         label="Resolved issues"
         labelBgClass="bg-robin"
+        :loading="$fetchState.pending"
       />
     </div>
+    <div v-if="$fetchState.pending" class="p-4">
+      <div style="height: 258px" class="rounded-md bg-ink-300 animate-pulse"></div>
+    </div>
     <base-graph
-      v-if="issueData.values.length || resolvedIssueData.values.length"
+      v-else
       :datasets="dataSets"
       :labels="formattedLabels"
       :showControl="false"
@@ -112,14 +117,17 @@ export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
     return { labels: [], values: [] }
   }
 
-  async fetch(): Promise<void> {
+  fetchData() {
     const { owner, provider } = this.$route.params
-
-    await this.fetchIssueTrends({
+    return this.fetchIssueTrends({
       provider,
       login: owner,
       lastDays: this.lastDays
     })
+  }
+
+  async fetch(): Promise<void> {
+    await this.fetchData()
   }
 
   get formattedLabels(): string[] {
@@ -159,7 +167,7 @@ export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
 
   updateLastDays(newVal: number): void {
     this.lastDays = newVal
-    this.$fetch()
+    this.fetchData()
   }
 }
 </script>

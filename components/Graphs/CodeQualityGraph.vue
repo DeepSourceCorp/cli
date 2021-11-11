@@ -17,6 +17,7 @@
           :value="currentActiveIssues"
           :isPercent="true"
           label="Active issues"
+          :loading="$fetchState.pending"
         />
         <graph-legend
           :isActive="showResolvedIssues"
@@ -29,10 +30,16 @@
           :isPercent="true"
           label="Resolved issues"
           labelBgClass="bg-robin"
+          :loading="$fetchState.pending"
         />
       </div>
+
       <div class="h-full col-span-2">
+        <div v-if="$fetchState.pending" class="p-4">
+          <div style="height: 268px" class="rounded-md bg-ink-300 animate-pulse"></div>
+        </div>
         <z-chart
+          v-else
           ref="code-quality-chart"
           :dataSets="codeQualityData.data"
           :labels="codeQualityData.labels"
@@ -45,7 +52,7 @@
           :yAxisMin="0"
           :showLegend="false"
           :axisOptions="axisOptions"
-        ></z-chart>
+        />
       </div>
     </div>
     <template slot="controls">
@@ -134,15 +141,23 @@ export default class CodeQualityGraph extends mixins(
   }
 
   async refetchData(): Promise<void> {
-    await this.fetchIssueTrends({ ...this.baseRouteParams, lastDays: this.lastDays, refetch: true })
+    await this.fetchIssueTrends({
+      ...this.baseRouteParams,
+      lastDays: this.lastDays,
+      refetch: true
+    })
   }
 
-  async fetch(): Promise<void> {
+  async fetchData() {
     await this.fetchIssueTrends({
       ...this.baseRouteParams,
       lastDays: this.lastDays
     })
     this.buildChart()
+  }
+
+  async fetch(): Promise<void> {
+    await this.fetchData()
   }
 
   public shortenLargeNumber = shortenLargeNumber
@@ -235,7 +250,7 @@ export default class CodeQualityGraph extends mixins(
 
   updateLastDays(newVal: number): void {
     this.lastDays = newVal
-    this.$fetch()
+    this.fetchData()
   }
 
   public chartType = 'line'
