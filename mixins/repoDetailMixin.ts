@@ -10,7 +10,9 @@ import {
   RemoveRepositoryCollaboratorInput,
   UpdateOrCreateRepositoryCollaboratorPayload,
   RepositoryPermissionChoices,
-  CommitConfigToVcsPayload
+  CommitConfigToVcsPayload,
+  UpdateRepositoryWidgetsInput,
+  UpdateRepositoryWidgetsPayload
 } from '~/types/types'
 
 const repoStore = namespace('repository/detail')
@@ -90,6 +92,9 @@ export default class RepoDetailMixin extends Vue {
 
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_PERMS)
   fetchRepoPerms: (args: { provider: string; owner: string; name: string }) => Promise<void>
+
+  @repoStore.Action(RepositoryDetailActions.UPDATE_REPO_WIDGETS)
+  updateRepoWidgets: (args: UpdateRepositoryWidgetsInput) => Promise<UpdateRepositoryWidgetsPayload>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_WIDGETS)
   fetchWidgets: (args: {

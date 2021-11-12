@@ -3,5 +3,7 @@ query RepositoryWidgets($provider: VCSProviderChoices!, $owner: String!, $name: 
     id
     widgets
     widgetsDisplay
+    widgetsAvailable
+    allWidgets
   }
 }

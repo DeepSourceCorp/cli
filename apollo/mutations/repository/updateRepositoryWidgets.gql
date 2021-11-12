@@ -1,0 +1,5 @@
+mutation($input: UpdateRepositoryWidgetsInput!) {
+  updateRepositoryWidgets(input: $input) {
+    widgetCodes
+  }
+}

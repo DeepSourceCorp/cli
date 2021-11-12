@@ -32,6 +32,7 @@ import DeleteSSHKey from '~/apollo/mutations/repository/settings/deleteSSHKey.gq
 import UpdateRepositorySettings from '~/apollo/mutations/repository/settings/updateRepositorySettings.gql'
 import UpdatePermission from '~/apollo/mutations/repository/settings/updatePermission.gql'
 import RemoveCollaborator from '~/apollo/mutations/repository/settings/removeCollaborator.gql'
+import UpdateRepositoryWidgets from '~/apollo/mutations/repository/updateRepositoryWidgets.gql'
 
 import {
   UpdateRepoMetricThresholdInput,
@@ -40,7 +41,9 @@ import {
   ToggleRepositoryActivationInput,
   UpdateRepositorySettingsInput,
   RemoveRepositoryCollaboratorInput,
-  CommitConfigToVcsPayload
+  CommitConfigToVcsPayload,
+  UpdateRepositoryWidgetsInput,
+  UpdateRepositoryWidgetsPayload
 } from '~/types/types'
 import { TransformerInterface } from '~/store/analyzer/list'
 import {
@@ -118,6 +121,7 @@ export enum RepositoryDetailActions {
   UPDATE_MEMBER_PERMISSION = 'updateMemberPermission',
   REMOVE_MEMBER = 'removeMember',
   FETCH_ADDABLE_MEMBERS = 'fetchAddableMembers',
+  UPDATE_REPO_WIDGETS = 'udateRepositoryWidgets',
   UPDATE_REPOSITORY_IN_STORE = 'updateRepositoryInStore'
 }
 
@@ -433,6 +437,11 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       q?: string
     }
   ) => Promise<void>
+  [RepositoryDetailActions.UPDATE_REPO_WIDGETS]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: UpdateRepositoryWidgetsInput
+  ) => Promise<UpdateRepositoryWidgetsPayload>
   [RepositoryDetailActions.UPDATE_REPOSITORY_IN_STORE]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -453,14 +462,12 @@ export const actions: RepositoryDetailModuleActions = {
       args.refetch
     )
       .then((response: GraphqlQueryResponse) => {
-        // TODO: Toast("Successfully fetched widgets")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
       .catch((e: GraphqlError) => {
         commit(RepositoryDetailMutations.SET_ERROR, e)
         commit(RepositoryDetailMutations.SET_LOADING, false)
-        // TODO: Toast("Failure in fetching widgets", e)
       })
   },
   async [RepositoryDetailActions.FETCH_METRICS]({ commit }, args) {
@@ -983,6 +990,12 @@ export const actions: RepositoryDetailModuleActions = {
     } finally {
       commit(RepositoryDetailMutations.SET_LOADING, false)
     }
+  },
+  async [RepositoryDetailActions.UPDATE_REPO_WIDGETS](_, args) {
+    const response = await this.$applyGraphqlMutation(UpdateRepositoryWidgets, {
+      input: args
+    })
+    return response.data.updateRepositoryWidgets
   },
   [RepositoryDetailActions.UPDATE_REPOSITORY_IN_STORE]({ commit }, repo) {
     commit(RepositoryDetailMutations.SET_REPOSITORY, repo)

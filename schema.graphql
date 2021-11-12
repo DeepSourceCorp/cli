@@ -830,16 +830,6 @@ type FeatureDefinition implements MaskPrimaryKeyNode {
   id: ID!
 }
 
-type FeatureDefinitionConnection {
-  pageInfo: PageInfo!
-  edges: [FeatureDefinitionEdge]!
-}
-
-type FeatureDefinitionEdge {
-  node: FeatureDefinition
-  cursor: String!
-}
-
 enum FeatureFeatureType {
   A_1
   A_2
@@ -1476,6 +1466,8 @@ type Repository implements MaskPrimaryKeyNode {
   activityModality: String
   issueTypeSettings: [IssueTypeSetting]
   widgetsDisplay: GenericScalar
+  allWidgets: GenericScalar
+  widgetsAvailable: [String]
   isAutofixEnabled: Boolean
   availableAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection
   metricsData(lastDays: Int!): GenericScalar

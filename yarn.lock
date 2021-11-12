@@ -1055,10 +1055,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@deepsourcelabs/zeal@^0.9.5":
-  version "0.9.5"
-  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.9.5/90bfb5010f993f76bf5a801ca7c72dd41e79fd734207a9b3952a5983c8f56dbd#28889eb2a8bb1148864f0481d8027e59e4a5aa60"
-  integrity sha512-izP1y101wytw9ns0J60g1Co1oTAmZerbketf0rZ7mEnICzBl5GcrLD7+UVDH88oicmejYWVosnUieylbo1fBtw==
+"@deepsourcelabs/zeal@^0.9.9":
+  version "0.9.9"
+  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.9.9/152bd266fbb009e67e57ab20884ee76dec26e3a906573b3da5505d33e0a8e812#8745ad35bf2301f6086b752f75bfcd6e2ab63e71"
+  integrity sha512-Sgdwty6m4jh/f7reer9QWYuO/tMsiGn2Y1aQTv36NbEu1Rm0qkpYNcCtNJiN0BLUPgYcO5ctiG2cvaqtRBiy5w==
   dependencies:
     "@tailwindcss/line-clamp" "^0.2.2"
     "@tailwindcss/postcss7-compat" "^2.2.16"
@@ -14859,6 +14859,11 @@ sort-keys@^2.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
+sortablejs@1.10.2:
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/sortablejs/-/sortablejs-1.10.2.tgz#6e40364d913f98b85a14f6678f92b5c1221f5290"
+  integrity sha512-YkPGufevysvfwn5rfdlGyrGjt7/CRHwvRPogD/lC+TnvcN29jDpCifKP+rBqf+LRldfXSTh+0CGLcSg0VIxq3A==
+
 source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
@@ -16578,6 +16583,13 @@ vue@^2.6.10, vue@^2.6.12:
   version "2.6.12"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.12.tgz#f5ebd4fa6bd2869403e29a896aed4904456c9123"
   integrity sha512-uhmLFETqPPNyuLLbsKz6ioJ4q7AZHzD8ZVFNATNyICSZouqP2Sz0rotWQC8UNBF6VGSCs5abnKJoStA6JbCbfg==
+
+vuedraggable@^2.24.3:
+  version "2.24.3"
+  resolved "https://registry.yarnpkg.com/vuedraggable/-/vuedraggable-2.24.3.tgz#43c93849b746a24ce503e123d5b259c701ba0d19"
+  integrity sha512-6/HDXi92GzB+Hcs9fC6PAAozK1RLt1ewPTLjK0anTYguXLAeySDmcnqE8IC0xa7shvSzRjQXq3/+dsZ7ETGF3g==
+  dependencies:
+    sortablejs "1.10.2"
 
 vuex-class@^0.3.2:
   version "0.3.2"

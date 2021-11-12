@@ -539,6 +539,15 @@ declare module '*/updateRepoMetricThreshold.gql' {
 }
     
 
+declare module '*/updateRepositoryWidgets.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/submitSupportTicket.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

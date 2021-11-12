@@ -21,6 +21,8 @@ query RepoDetails($provider: VCSProviderChoices!, $owner: String!, $name: String
     isActivated
     blobUrlRoot
     defaultBranchName
+    widgetsAvailable
+    allWidgets
     vcsDefaultBranchUrl
     hasViewerEditAccess
     vcsUrl
