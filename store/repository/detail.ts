@@ -43,7 +43,11 @@ import {
   CommitConfigToVcsPayload
 } from '~/types/types'
 import { TransformerInterface } from '~/store/analyzer/list'
-import { GraphqlError, GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import {
+  GraphqlError,
+  GraphqlMutationResponse,
+  GraphqlQueryResponse
+} from '~/types/apollo-graphql-types'
 
 export interface MetricsNamespace {
   key: string
@@ -113,7 +117,8 @@ export enum RepositoryDetailActions {
   UPDATE_REPO_SETTINGS = 'updateRepoSettings',
   UPDATE_MEMBER_PERMISSION = 'updateMemberPermission',
   REMOVE_MEMBER = 'removeMember',
-  FETCH_ADDABLE_MEMBERS = 'fetchAddableMembers'
+  FETCH_ADDABLE_MEMBERS = 'fetchAddableMembers',
+  UPDATE_REPOSITORY_IN_STORE = 'updateRepositoryInStore'
 }
 
 export enum RepositoryDetailMutations {
@@ -428,6 +433,11 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       q?: string
     }
   ) => Promise<void>
+  [RepositoryDetailActions.UPDATE_REPOSITORY_IN_STORE]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: Repository
+  ) => void
 }
 
 export const actions: RepositoryDetailModuleActions = {
@@ -765,9 +775,9 @@ export const actions: RepositoryDetailModuleActions = {
   },
   async [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION]({ commit, state }, { isActivated, id }) {
     try {
-      const response = await this.$applyGraphqlMutation(ToggleRepositoryActivationMutation, {
+      const response = (await this.$applyGraphqlMutation(ToggleRepositoryActivationMutation, {
         input: { id, isActivated }
-      }) as GraphqlMutationResponse
+      })) as GraphqlMutationResponse
       if (response?.data?.toggleRepositoryActivation) {
         commit(
           RepositoryDetailMutations.SET_REPOSITORY,
@@ -973,5 +983,8 @@ export const actions: RepositoryDetailModuleActions = {
     } finally {
       commit(RepositoryDetailMutations.SET_LOADING, false)
     }
+  },
+  [RepositoryDetailActions.UPDATE_REPOSITORY_IN_STORE]({ commit }, repo) {
+    commit(RepositoryDetailMutations.SET_REPOSITORY, repo)
   }
 }

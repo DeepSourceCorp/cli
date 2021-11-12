@@ -244,6 +244,9 @@ export default class RepoDetailMixin extends Vue {
   @repoStore.Action(RepositoryDetailActions.REMOVE_MEMBER)
   removeMemberAPI: (args: { input: RemoveRepositoryCollaboratorInput }) => Promise<void>
 
+  @repoStore.Action(RepositoryDetailActions.UPDATE_REPOSITORY_IN_STORE)
+  updateRepositoryInStore: (args: Repository) => void
+
   get baseRouteParams(): { name: string; provider: string; owner: string } {
     const { provider, owner, repo } = this.$route.params
     return {

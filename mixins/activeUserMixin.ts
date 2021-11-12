@@ -5,6 +5,7 @@ import { ActiveUserActions, ActiveUserGetterTypes } from '~/store/user/active'
 import {
   TeamMemberRoleChoices,
   UpdateDefaultDashboardContextForUserPayload,
+  UpdateStarredRepositoryPayload,
   User
 } from '~/types/types'
 
@@ -79,12 +80,10 @@ export default class ActiveUserMixin extends Vue {
   }: {
     repoId: string
     action: 'ADD' | 'REMOVE'
-  }) => Promise<void>
+  }) => Promise<UpdateStarredRepositoryPayload>
 
   @activeUserStore.Action(ActiveUserActions.UPDATE_DEFAULT_CONTEXT)
-  updateDefaultContextAPI: (args: {
-    contextOwnerId: string
-  }) => {
+  updateDefaultContextAPI: (args: { contextOwnerId: string }) => {
     data: { updateDefaultDashboardContextForUser: UpdateDefaultDashboardContextForUserPayload }
   }
 

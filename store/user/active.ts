@@ -199,8 +199,9 @@ export const actions: ActiveUserModuleActions = {
   },
   async [ActiveUserActions.UPDATE_STARRED_REPO]({ commit, dispatch }, { repoId, action }) {
     try {
-      await this.$applyGraphqlMutation(UpdateStarredRepos, { repoId, action })
+      const res = await this.$applyGraphqlMutation(UpdateStarredRepos, { repoId, action })
       await dispatch(ActiveUserActions.FETCH_STARRED_REPOS, { refetch: true })
+      return res.data.updateStarredRepository
     } catch (e) {
       commit(ActiveUserMutations.SET_ERROR, e)
     }

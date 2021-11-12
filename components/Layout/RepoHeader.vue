@@ -1,12 +1,32 @@
 <template>
   <div>
     <div
-      class="grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200"
+      class="
+        grid grid-cols-1
+        gap-2
+        border-b
+        lg:gap-0
+        grid-row-3
+        xl:grid-cols-fr-fr-22 xl:grid-rows-2
+        auto-rows-auto
+        bg-ink-300
+        min-h-24
+        border-ink-200
+      "
     >
       <div id="header" class="xl:col-span-2">
         <div class="px-4 pt-3 space-x-2 space-y-2 xl:space-y-0">
           <h2
-            class="flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400"
+            class="
+              flex flex-wrap
+              items-center
+              gap-3
+              text-lg
+              font-medium
+              leading-none
+              xl:text-xl
+              text-vanilla-400
+            "
           >
             <div class="space-x-0.5 md:space-x-1">
               <nuxt-link
@@ -24,7 +44,7 @@
             <z-button
               v-if="allowStar"
               v-tooltip="
-                internalStarredState
+                repository.isStarred
                   ? 'Click to remove from starred repositories'
                   : 'Star this repository'
               "
@@ -32,10 +52,10 @@
               icon="z-star"
               size="x-small"
               class="p-1"
-              :color="internalStarredState ? 'juniper' : 'hover:text-slate'"
-              :class="internalStarredState ? 'opacity-1' : 'opacity-40 hover:opacity-70'"
+              :color="repository.isStarred ? 'juniper' : 'hover:text-slate'"
+              :class="repository.isStarred ? 'opacity-1' : 'opacity-40 hover:opacity-70'"
               :iconColor="'current'"
-              @click.prevent="toggleStar(!internalStarredState)"
+              @click.prevent="toggleStar(!repository.isStarred)"
             />
             <a
               v-if="repository.vcsProvider"
@@ -91,7 +111,17 @@
           :vcsCommitUrl="lastRun.vcsCommitUrl"
           :currentlyAnalysing="repository.runs && repository.runs.totalCount"
           :canChangeBranch="canChangeBranch"
-          class="flex flex-col h-full px-4 py-2 space-y-2 text-sm md:px-3 xl:border-l xl:border-ink-200 text-vanilla-400"
+          class="
+            flex flex-col
+            h-full
+            px-4
+            py-2
+            space-y-2
+            text-sm
+            md:px-3
+            xl:border-l xl:border-ink-200
+            text-vanilla-400
+          "
         ></repo-header-info>
       </div>
       <div id="tabs" class="flex xl:col-span-2">
@@ -112,7 +142,7 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { Run, Maybe } from '~/types/types'
 import RepoHeaderInfo from './RepoHeaderInfo.vue'
 import RouteParamsMixin from '@/mixins/routeParamsMixin'
@@ -207,24 +237,20 @@ export default class RepoHeader extends mixins(
   RoleAccessMixin,
   ActiveUserMixin
 ) {
-  internalStarredState = false
-
   async fetch(): Promise<void> {
-    await this.fetchRepoPerms(this.baseRouteParams)
-    await this.fetchBasicRepoDetails({
-      ...this.baseRouteParams,
-      refetch: true
-    })
+    await Promise.all([
+      this.fetchRepoPerms(this.baseRouteParams),
+      this.fetchBasicRepoDetails(this.baseRouteParams)
+    ])
+
     this.fetchRepoRunCount({
       ...this.baseRouteParams,
       status: 'pend'
     })
-
-    this.internalStarredState = this.repository.isStarred as boolean
-    this.$localStore.set('starred-repos', this.repository.id, this.internalStarredState)
   }
 
   refetchOnSocketEvent(): void {
+    this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
     this.fetchRepoRunCount({
       ...this.baseRouteParams,
       status: 'pend'
@@ -232,7 +258,6 @@ export default class RepoHeader extends mixins(
   }
 
   mounted(): void {
-    this.internalStarredState = this.$localStore.get('starred-repos', this.repository.id) as boolean
     this.$socket.$on('repo-analysis-updated', this.refetchOnSocketEvent)
   }
 
@@ -257,19 +282,24 @@ export default class RepoHeader extends mixins(
   }
 
   async toggleStar(isStarred: boolean) {
-    this.internalStarredState = isStarred
+    this.updateRepositoryInStore({ ...this.repository, isStarred: isStarred })
 
-    await this.updateStarredRepo({
+    const response = await this.updateStarredRepo({
       action: isStarred ? 'ADD' : 'REMOVE',
       repoId: this.repository.id
     })
+
+    if (!response.ok) {
+      this.updateRepositoryInStore({ ...this.repository, isStarred: !isStarred })
+      this.$toast.danger(
+        "Couldn't star this repository, if the issue persists please contact support"
+      )
+    }
 
     this.fetchBasicRepoDetails({
       ...this.baseRouteParams,
       refetch: true
     })
-
-    this.$localStore.set('starred-repos', this.repository.id, this.internalStarredState)
   }
 
   public activeLink(item: TabLink): boolean {
