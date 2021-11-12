@@ -10,12 +10,10 @@
     >
       <template slot="description">
         Upgrade to the {{ availableUpgradePlans.name }} plan and get more for your team.
-        <a
-          href="/pricing"
-          target="_blank"
-          rel="noopener noreferrer"
+        <nuxt-link
+          :to="$generateRoute(['settings', 'billing', 'plans'])"
           class="text-juniper hover:underline"
-          >See pricing.</a
+          >See pricing.</nuxt-link
         >
       </template>
     </button-input>
@@ -60,11 +58,11 @@
 </template>
 <script lang="ts">
 import { mixins, Component, Prop } from 'nuxt-property-decorator'
-import SubscriptionMixin from '~/mixins/subscriptionMixin'
 import { ZIcon, ZConfirm, ZButton } from '@deepsourcelabs/zeal'
+
 import { BillingInfo } from '~/types/types'
-import ContextMixin from '~/mixins/contextMixin'
-import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
+
+import PlanDetailMixin from '~/mixins/planDetailMixin'
 
 @Component({
   components: {
@@ -73,11 +71,7 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
     ZButton
   }
 })
-export default class UpgradePlan extends mixins(
-  ContextMixin,
-  OwnerBillingMixin,
-  SubscriptionMixin
-) {
+export default class UpgradePlan extends mixins(PlanDetailMixin) {
   @Prop({ default: {} })
   billing: BillingInfo
 
@@ -87,32 +81,6 @@ export default class UpgradePlan extends mixins(
 
   async fetch() {
     await this.fetchContext()
-  }
-
-  get upgradeOptions(): string[] {
-    if (this.billing.planSlug) {
-      return this.planUpgradeOptions[this.billing.planSlug]
-    }
-    return []
-  }
-
-  get availableUpgradePlans(): Record<string, string> {
-    const plans = this.upgradeOptions
-      .map((planSlug) => {
-        if (planSlug in this.context.plans) {
-          return {
-            planSlug,
-            ...this.context.plans[planSlug]
-          }
-        }
-        return null
-      })
-      .filter((plan) => plan !== null)
-
-    if (plans.length > 0) {
-      return plans[0]
-    }
-    return {}
   }
 
   async upgrade(close: () => void): Promise<void> {
@@ -135,15 +103,6 @@ export default class UpgradePlan extends mixins(
       await this.refetchData()
       this.updating = false
     }
-  }
-
-  async refetchData(): Promise<void> {
-    const { owner, provider } = this.$route.params
-    await this.fetchBillingDetails({
-      login: owner,
-      provider,
-      refetch: true
-    })
   }
 
   showUpgradeConfirmModal() {

@@ -116,6 +116,7 @@
           </sidebar-item>
           <extras-menu v-if="!isCollapsed" />
         </div>
+
         <div
           class="items-center hidden lg:flex"
           :class="{ 'lg:space-x-1 w-full justify-between': !isCollapsed, 'w-8': isCollapsed }"
@@ -126,6 +127,32 @@
           </client-only>
         </div>
       </div>
+
+      <div
+        v-if="
+          !isCollapsed &&
+          owner.maxUsagePercentage >= 100 &&
+          Object.keys(availableUpgradePlans).length
+        "
+        class="p-4 border-t border-ink-200"
+      >
+        <h4 class="mb-2 text-sm font-medium leading-6 text-vanilla-100">
+          Usage quota exhausted :(
+        </h4>
+        <p class="mb-4 text-xs font-normal leading-5 text-vanilla-400">
+          You have exhausted your usage quota for this month. Upgrade your plan to keep things
+          running.
+        </p>
+        <z-button
+          button-type="primary"
+          icon="zap"
+          label="Upgrade plan"
+          size="small"
+          class="w-full"
+          @click="$router.push($generateRoute(['settings', 'billing', 'plans'], false))"
+        />
+      </div>
+
       <div class="p-4 border-t border-ink-200">
         <div class="flex items-center justify-between space-x-2 leading-none">
           <z-icon
@@ -180,23 +207,32 @@
 
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
-
-import { TeamMemberRoleChoices } from '~/types/types'
+import { ZButton, ZIcon, ZTag } from '@deepsourcelabs/zeal'
 
 // types
-import ContextMixin from '@/mixins/contextMixin'
-import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { TeamPerms } from '~/types/permTypes'
+import { TeamMemberRoleChoices } from '~/types/types'
+
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import ContextMixin from '@/mixins/contextMixin'
+import OwnerDetailMixin from '@/mixins/ownerDetailMixin'
+import PlanDetailMixin from '~/mixins/planDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 
 @Component({
   components: {
+    ZButton,
     ZIcon,
     ZTag
   }
 })
-export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoListMixin) {
+export default class Sidebar extends mixins(
+  ActiveUserMixin,
+  ContextMixin,
+  OwnerDetailMixin,
+  PlanDetailMixin,
+  RepoListMixin
+) {
   public isCollapsed = false
   public collapsedSidebar = false
   public toggleCollapsed = false
@@ -210,8 +246,19 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   }
 
   async fetch(): Promise<void> {
-    await this.fetchContext()
-    await this.fetchActiveUser()
+    const { owner: login, provider } = this.$route.params
+    await Promise.all([
+      this.fetchContext(),
+      this.fetchActiveUser(),
+      this.fetchMaxUsagePercentage({ login, provider })
+    ])
+  }
+
+  @Watch('$route.params.owner')
+  async fetchMaxUsageInfo() {
+    const { owner: login, provider } = this.$route.params
+    const params = { login, provider, refetch: true }
+    await this.fetchMaxUsagePercentage(params)
   }
 
   @Watch('activeOwner')
@@ -293,15 +340,11 @@ export default class Sidebar extends mixins(ContextMixin, ActiveUserMixin, RepoL
   }
 
   public getRoute(params: string): string {
-    return `/${this.provider}/${this.owner}/${params}`
+    return `/${this.provider}/${this.activeOwner}/${params}`
   }
 
   get provider(): string {
     return this.activeProvider
-  }
-
-  get owner(): string {
-    return this.activeOwner
   }
 
   public isActive(params: string): boolean {

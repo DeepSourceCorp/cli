@@ -251,12 +251,16 @@ export default class AutofixFileChooser extends mixins(
         this.close()
       }
     } catch (e) {
-      this.$toast.danger('There was a problem running Autofix')
-      this.logSentryErrorForUser(e, 'AutofixError', {
-        method: 'Create Autofix Run',
-        inputFiles: this.selectedFiles,
-        repoIssueId: this.issueId
-      })
+      if (e.message.includes('Your autofix run quota has been exhausted')) {
+        this.$emit('runQuotaExhausted')
+      } else {
+        this.$toast.danger('There was a problem running Autofix')
+        this.logSentryErrorForUser(e, 'AutofixError', {
+          method: 'Create Autofix Run',
+          inputFiles: this.selectedFiles,
+          repoIssueId: this.issueId
+        })
+      }
     } finally {
       this.autofixLoading = false
     }

@@ -68,4 +68,14 @@ export default class OwnerDetailMixin extends Vue {
 
   @ownerDetailStore.Action(OwnerDetailActions.REMOVE_OWNER_SSH_KEY)
   removeOwnerSSHKey: (args: { ownerId: string }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_USAGE_DETAILS)
+  fetchUsageDetails: (args: { login: string; provider: string; refetch?: boolean }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_MAX_USAGE_PERCENTAGE)
+  fetchMaxUsagePercentage: (args: {
+    login: string
+    provider: string
+    refetch?: boolean
+  }) => Promise<void>
 }

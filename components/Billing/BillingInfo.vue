@@ -1,5 +1,5 @@
 <template>
-  <form-group label="Billing Information" :divide="false" bodyClass="space-y-4">
+  <form-group label="Billing Information" :divide="false" bodyClass="space-y-4" class="mt-5">
     <div v-if="isBilledByStripe || isBilledManually">
       <div
         class="
@@ -13,7 +13,7 @@
           border-ink-200
         "
       >
-        <div class="grid grid-cols-1 gap-4 p-3 md:grid-cols-2 bg-ink-300">
+        <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 bg-ink-300">
           <div v-if="ownerBillingInfo.upcomingPaymentDate">
             <label class="text-sm leading-none tracking-wide text-vanilla-300"> Renews on </label>
             <div class="text-lg font-medium text-vanilla-100 tracking-snug">
@@ -55,7 +55,7 @@
             </div>
           </div>
         </div>
-        <div class="flex flex-col justify-between p-3">
+        <div class="flex flex-col justify-between p-4">
           <div class="space-y-2.5 flex-grow">
             <div v-if="owner.billingEmail !== undefined" class="flex items-center justify-between">
               <label class="w-1/3 text-sm text-vanilla-300">Billing email</label>

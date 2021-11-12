@@ -1236,7 +1236,7 @@ type Owner implements MaskPrimaryKeyNode {
   billingAddress: String
   customerId: String
   primaryUser: User
-  features(offset: Int, before: String, after: String, first: Int, last: Int): FeatureDefinitionConnection!
+  features: GenericScalar
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   team: Team
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
@@ -1275,6 +1275,8 @@ type Owner implements MaskPrimaryKeyNode {
   autoonboardableRepositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   autoonboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): AccessTokenConnection
+  maxUsagePercentage: Float
+  featureUsage: GenericScalar
 }
 
 type OwnerConnection {

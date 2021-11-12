@@ -1,0 +1,40 @@
+<template>
+  <div class="grid gap-5">
+    <div class="border-b border-ink-200 px-4 py-3">
+      <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
+        <z-breadcrumb-item class="cursor-pointer text-vanilla-400"
+          ><nuxt-link :to="$generateRoute(['settings', 'billing'])"
+            >Billing</nuxt-link
+          ></z-breadcrumb-item
+        >
+        <z-breadcrumb-item class="cursor-pointer">Plans</z-breadcrumb-item>
+      </z-breadcrumb>
+    </div>
+
+    <plan-cards :show-current-plan="true" class="px-4" />
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, mixins } from 'nuxt-property-decorator'
+import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
+
+import PlanDetailMixin from '~/mixins/planDetailMixin'
+
+@Component({
+  components: {
+    ZBreadcrumb,
+    ZBreadcrumbItem
+  }
+})
+export default class Plans extends mixins(PlanDetailMixin) {
+  async fetch() {
+    const { owner, provider } = this.$route.params
+    const params = {
+      login: owner,
+      provider
+    }
+    await this.fetchBillingDetails(params)
+  }
+}
+</script>
