@@ -11,7 +11,7 @@
     "generate-types": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "@deepsourcelabs/zeal": "^0.9.9",
+    "@deepsourcelabs/zeal": "^0.9.11",
     "@nuxt/content": "^1.11.1",
     "@nuxt/typescript-runtime": "^2.0.0",
     "@nuxtjs/apollo": "^4.0.1-rc.4",

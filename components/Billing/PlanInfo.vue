@@ -61,58 +61,47 @@
     </div>
     <portal to="modal">
       <z-modal
-        ref="update-billing-seats-modal"
         v-if="showUpdateSeatsModal"
+        ref="update-billing-seats-modal"
         @onClose="showUpdateSeatsModal = false"
-        width="narrow"
         title="Add or remove seats"
       >
         <template v-slot:default="{ close }">
-          <div class="p-4">
-            <label class="text-sm text-vanilla-400">New number of seats in total</label>
-            <z-input
-              :min="currentPlan.min_seats"
-              :max="currentPlan.max_seats"
-              @blur="validateSeats"
-              size="small"
-              class="mt-2"
-              placeholder="Seats"
-              type="number"
-              v-model="seatsCount"
-            ></z-input>
-            <p class="mt-3 text-sm text-vanilla-400">
-              You can add up to {{ currentPlan.max_seats }} seats. If you need more seats, please
-              write to us at
+          <div class="flex flex-col p-4 space-y-3">
+            <div class="flex justify-between">
+              <label class="text-sm text-vanilla-400">New number of seats in total</label>
+              <z-number-input
+                :min="ownerBillingInfo.seatsUsed"
+                :max="currentPlan.max_seats"
+                class="w-24 text-sm"
+                v-model="seatsCount"
+              />
+            </div>
+            <p class="text-sm text-vanilla-400">
+              You can add up to {{ currentPlan.max_seats }} seats, contributors are not counted
+              against your seats usage. You can manage team members
+              <nuxt-link :to="$generateRoute(['members'])" class="text-juniper"> here</nuxt-link>,
+              or write to us at
               <a
                 href="mailto:support@deepsource.io"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-juniper hover:underline"
                 >support@deepsource.io</a
-              >.
+              >
+              if you need more seats.
             </p>
-            <div class="mt-4 space-x-4 text-right text-vanilla-100">
-              <z-button
-                v-if="loading"
-                class="flex items-center w-36"
-                button-type="primary"
-                size="small"
-                :disabled="true"
-              >
-                <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin" />
-                Updating seats
-              </z-button>
-              <z-button
-                v-else
-                icon="check-circle"
-                class="modal-primary-action w-36"
-                buttonType="primary"
-                size="small"
-                :disabled="!isValid"
-                @click="() => updateSeatsMutation(close)"
-                >Update seats</z-button
-              >
-            </div>
+            <z-button
+              label="Update seats"
+              icon="check-circle"
+              class="ml-auto modal-primary-action w-36"
+              buttonType="primary"
+              size="small"
+              :disabled="!isValid || loading"
+              :is-loading="loading"
+              loading-label="Updating seats"
+              @click="() => updateSeatsMutation(close)"
+            />
           </div>
         </template>
       </z-modal>
@@ -122,7 +111,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZModal, ZInput } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZModal, ZNumberInput } from '@deepsourcelabs/zeal'
 import ContextMixin from '@/mixins/contextMixin'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
@@ -132,7 +121,7 @@ interface ZModalInterface extends Vue {
 }
 
 @Component({
-  components: { ZButton, ZIcon, ZModal, ZInput },
+  components: { ZButton, ZIcon, ZModal, ZNumberInput },
   layout: 'dashboard'
 })
 export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
@@ -220,3 +209,16 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
   }
 }
 </script>
+
+<style>
+input[type='number'].hide-input-spinners::-webkit-inner-spin-button,
+input[type='number'].hide-input-spinners::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+  opacity: 0;
+}
+
+input[type='number'].hide-input-spinners {
+  -moz-appearance: textfield; /*For FireFox*/
+}
+</style>
