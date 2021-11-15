@@ -97,7 +97,7 @@
       </div>
       <div class="hidden lg:block">
         <info-banner
-          info="Control what issues are reported by DeepSource and what issues block pull requests."
+          info="Control which category of issues are reported, and when analysis run is marked as failed."
         />
       </div>
     </div>
@@ -275,9 +275,9 @@ export default class General extends mixins(
   public isActive = true
 
   public headerData = [
-    { title: 'Issue type', align: 'text-left' },
-    { title: 'Report issues', align: 'text-center' },
-    { title: 'Block pull requests', align: 'text-center' }
+    { title: 'Issue category', align: 'text-left' },
+    { title: 'Issues reported?', align: 'text-center' },
+    { title: 'Mark runs as failed?', align: 'text-center' }
   ]
 
   public selectedScope = ''
