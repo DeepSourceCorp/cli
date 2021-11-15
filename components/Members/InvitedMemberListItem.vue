@@ -76,7 +76,8 @@ export default class MemberListItem extends Vue {
     },
     CONTRIBUTOR: {
       title: 'Contributor',
-      description: 'Full access to repositories that they have been granted access to'
+      description:
+        "Contributors don't have any team level access or any access to change repo level settings."
     },
     MEMBER: {
       title: 'Member',
