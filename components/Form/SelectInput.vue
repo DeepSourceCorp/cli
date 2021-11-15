@@ -11,7 +11,7 @@
     <template slot="description">
       <slot name="description"></slot>
     </template>
-    <div>
+    <div class="h-8">
       <z-select
         v-model="modelValue"
         :selected="modelValue"

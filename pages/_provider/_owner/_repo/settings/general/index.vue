@@ -104,10 +104,12 @@
     <div class="flex gap-x-4">
       <form-group label="Analysis settings" class="flex-grow max-w-2xl">
         <input-wrapper label="Analysis scope" input-width="x-small">
-          <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
-            <z-option label="Granular (recommended)" value="granular"></z-option>
-            <z-option label="Broad" value="broad"></z-option>
-          </z-select>
+          <div class="h-8">
+            <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
+              <z-option label="Granular (recommended)" value="granular"></z-option>
+              <z-option label="Broad" value="broad"></z-option>
+            </z-select>
+          </div>
         </input-wrapper>
         <button-input
           label="Analysis configuration"
