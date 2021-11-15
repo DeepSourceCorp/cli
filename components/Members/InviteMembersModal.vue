@@ -24,17 +24,19 @@
             placeholder="name@email.com"
           >
           </z-input>
-          <z-select
-            v-model="member.role"
-            :read-only="!member.modifyAllowed"
-            v-tooltip="
-              member.modifyAllowed ? '' : 'This is disabled because the seats are exhausted'
-            "
-            class="bg-ink-400"
-          >
-            <z-option v-for="opt in roles" :key="opt.value" :label="opt.label" :value="opt.value">
-            </z-option>
-          </z-select>
+          <div class="h-8">
+            <z-select
+              v-model="member.role"
+              :read-only="!member.modifyAllowed"
+              v-tooltip="
+                member.modifyAllowed ? '' : 'This is disabled because the seats are exhausted'
+              "
+              class="bg-ink-400"
+            >
+              <z-option v-for="opt in roles" :key="opt.value" :label="opt.label" :value="opt.value">
+              </z-option>
+            </z-select>
+          </div>
         </div>
         <div class="flex justify-between">
           <z-button buttonType="link" spacing="px-0" size="small" @click="addMore"
@@ -246,7 +248,7 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
       this.$emit('inviteSuccess')
       this.close()
     } catch (e) {
-      this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     }
   }
 
