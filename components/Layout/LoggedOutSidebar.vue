@@ -1,17 +1,7 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <div
-    class="
-      fixed
-      top-0
-      z-50
-      h-screen
-      duration-200
-      lg:sticky lg:z-10 lg:left-0
-      transition-width
-      w-80
-      lg:w-72
-    "
+    class="fixed top-0 z-50 h-screen duration-200 lg:sticky lg:left-0 transition-width w-80 lg:w-72"
     :class="isOpen ? 'left-0' : '-left-full'"
   >
     <sidebar-menu

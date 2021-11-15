@@ -9,7 +9,7 @@
       h-screen
       duration-200
       border-r
-      lg:sticky lg:z-10 lg:left-0
+      lg:sticky lg:left-0
       transition-width
       transform-gpu
       border-ink-200
