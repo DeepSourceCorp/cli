@@ -135,7 +135,6 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
         this.$router.push('/login')
         break
       case NextActionChoice.Dashboard:
-        await this.refetchUser()
         nextUrl = this.homeUrl
         this.$router.push(nextUrl)
         break
@@ -177,6 +176,9 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
       default:
         throw new Error(`Something went wrong while setting up your account.`)
     }
+
+    // Refetch active user post installation
+    await this.refetchUser()
 
     if (!this.vcsResponse?.nextAction) {
       return
