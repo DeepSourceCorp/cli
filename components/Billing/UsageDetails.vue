@@ -1,11 +1,11 @@
 <template>
   <form-group label="Usage details" class="mt-5">
     <div class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 bg-ink-400 border-ink-200">
-      <div class="p-4 space-y-3 border-r border-ink-200">
+      <div class="p-4 space-y-4 border-r border-ink-200">
         <h5 class="text-xs font-medium leading-none tracking-wider text-vanilla-400">
           CURRENT USAGE
         </h5>
-        <ul class="space-y-2">
+        <ul class="space-y-4">
           <li v-for="(feature, id) in owner.featureUsage" :key="id">
             <div class="text-sm tracking-wide text-vanilla-400">
               <span class="font-semibold text-vanilla-100">{{ feature.value }} </span>
@@ -23,11 +23,11 @@
         </ul>
       </div>
 
-      <div class="p-4 space-y-3">
+      <div class="p-4 space-y-4">
         <h5 class="text-xs font-medium leading-none tracking-wider text-vanilla-400">FEATURES</h5>
-        <ul class="space-y-2">
+        <ul class="space-y-3">
           <li
-            v-for="(feature, id) in owner.features"
+            v-for="(feature, id) in features"
             :key="id"
             class="flex items-start space-x-2 text-sm"
           >
@@ -78,6 +78,17 @@ export default class UsageDetails extends mixins(OwnerDetailMixin, PlanDetailMix
     const { owner: login, provider } = this.$route.params
     const params = { login, provider }
     await this.fetchUsageDetails(params)
+  }
+
+  get features() {
+    const availableFeatures = this.owner.features.filter(
+      ({ enabled }: Record<string, string>) => enabled
+    )
+    const unAvailableFeatures = this.owner.features.filter(
+      (feature: Record<string, string>) => !availableFeatures.includes(feature)
+    )
+
+    return [...availableFeatures, ...unAvailableFeatures]
   }
 
   getCompletion({ value, max }: Record<string, number>): number {

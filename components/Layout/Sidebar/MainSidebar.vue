@@ -95,6 +95,28 @@
         Settings
       </sidebar-item>
     </section>
+
+    <section
+      v-if="
+        !isCollapsed && owner.maxUsagePercentage >= 100 && Object.keys(availableUpgradePlans).length
+      "
+      class="p-4 border-t border-ink-200"
+    >
+      <h4 class="mb-2 text-sm font-medium leading-6 text-vanilla-100">Usage quota exhausted :(</h4>
+      <p class="mb-4 text-xs font-normal leading-5 text-vanilla-400">
+        You have exhausted your usage quota for this month. Upgrade your plan to keep things
+        running.
+      </p>
+      <z-button
+        button-type="primary"
+        icon="zap"
+        label="Upgrade plan"
+        size="small"
+        class="w-full"
+        @click="$router.push($generateRoute(['settings', 'billing', 'plans'], false))"
+      />
+    </section>
+
     <section class="relative self-end w-full justify-self-end group">
       <div class="p-2.5 border-t border-ink-200 space-y-2">
         <sidebar-item
@@ -126,31 +148,6 @@
             <change-log v-show="!isCollapsed" class="pr-px" />
           </client-only>
         </div>
-      </div>
-
-      <div
-        v-if="
-          !isCollapsed &&
-          owner.maxUsagePercentage >= 100 &&
-          Object.keys(availableUpgradePlans).length
-        "
-        class="p-4 border-t border-ink-200"
-      >
-        <h4 class="mb-2 text-sm font-medium leading-6 text-vanilla-100">
-          Usage quota exhausted :(
-        </h4>
-        <p class="mb-4 text-xs font-normal leading-5 text-vanilla-400">
-          You have exhausted your usage quota for this month. Upgrade your plan to keep things
-          running.
-        </p>
-        <z-button
-          button-type="primary"
-          icon="zap"
-          label="Upgrade plan"
-          size="small"
-          class="w-full"
-          @click="$router.push($generateRoute(['settings', 'billing', 'plans'], false))"
-        />
       </div>
 
       <div class="p-4 border-t border-ink-200">
