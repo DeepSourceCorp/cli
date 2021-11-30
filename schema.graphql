@@ -1612,6 +1612,7 @@ type RepositoryMetricValue implements MaskPrimaryKeyNode {
   name: String
   valueDisplay: String
   isPassing: Boolean
+  namespace: GenericScalar
 }
 
 enum RepositoryPermissionChoices {

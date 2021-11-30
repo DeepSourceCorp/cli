@@ -3037,6 +3037,7 @@ export type RepositoryMetricValue = MaskPrimaryKeyNode & {
   name?: Maybe<Scalars['String']>;
   valueDisplay?: Maybe<Scalars['String']>;
   isPassing?: Maybe<Scalars['Boolean']>;
+  namespace?: Maybe<Scalars['GenericScalar']>;
 };
 
 export enum RepositoryPermissionChoices {
@@ -7062,7 +7063,7 @@ export type Unnamed_106_Query = (
       & Pick<Analyzer, 'name' | 'shortcode' | 'analyzerLogo' | 'description'>
     )>, metricsCaptured?: Maybe<Array<Maybe<(
       { __typename?: 'RepositoryMetricValue' }
-      & Pick<RepositoryMetricValue, 'id' | 'name' | 'valueDisplay' | 'isPassing' | 'extraData'>
+      & Pick<RepositoryMetricValue, 'id' | 'name' | 'valueDisplay' | 'isPassing' | 'extraData' | 'namespace'>
     )>>>, concreteIssues?: Maybe<(
       { __typename?: 'IssueConnection' }
       & Pick<IssueConnection, 'totalCount'>

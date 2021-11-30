@@ -1,50 +1,55 @@
 <template>
-  <component
-    :is="to ? 'nuxt-link' : 'div'"
-    :to="to"
-    class="flex flex-col justify-between flex-grow space-y-2"
-    :class="{ 'bg-ink-300 rounded-md min-h-26': !removeStyles }"
-  >
-    <div class="flex flex-row justify-between pt-3 pr-4 space-x-2" :class="color ? 'pl-2' : 'pl-4'">
-      <div class="text-sm leading-6 flex items-start space-x-1.5">
-        <div v-if="color" class="flex w-1 h-3.5 mt-0.5 rounded-full" :class="`bg-${color}`"></div>
-        <slot name="title">
-          <h5 class="font-medium text-vanilla-100">
-            {{ title }}
-            <span class="font-normal text-vanilla-400" v-if="subtitle"> / {{ subtitle }}</span>
-          </h5>
-        </slot>
+  <transition :appear="withTransition" :name="withTransition && 'flash'">
+    <component
+      :is="to ? 'nuxt-link' : 'div'"
+      :to="to"
+      class="flex flex-col justify-between flex-grow space-y-2"
+      :class="{ 'bg-ink-300 rounded-md min-h-26': !removeStyles }"
+    >
+      <div
+        class="flex flex-row justify-between pt-3 pr-4 space-x-2"
+        :class="color ? 'pl-2' : 'pl-4'"
+      >
+        <div class="text-sm leading-6 flex items-start space-x-1.5">
+          <div v-if="color" class="flex w-1 h-3.5 mt-0.5 rounded-full" :class="`bg-${color}`"></div>
+          <slot name="title">
+            <h5 class="font-medium text-vanilla-100">
+              {{ title }}
+              <span class="font-normal text-vanilla-400" v-if="subtitle"> / {{ subtitle }}</span>
+            </h5>
+          </slot>
+        </div>
+        <div class="flex-shrink-0">
+          <z-icon
+            v-if="icon"
+            class="float-right p-px"
+            :icon="icon"
+            size="medium"
+            color="transparent"
+          ></z-icon>
+        </div>
       </div>
-      <div class="flex-shrink-0">
-        <z-icon
-          v-if="icon"
-          class="float-right p-px"
-          :icon="icon"
-          size="medium"
-          color="transparent"
-        ></z-icon>
+      <div class="flex items-center px-4 pb-3 space-x-2">
+        <span class="text-xl font-bold leading-none text-vanilla-100">
+          <slot> {{ value }} </slot>
+        </span>
+        <div class="space-y-1">
+          <slot name="info">
+            <ticker
+              class="hidden md:flex"
+              v-if="trendValue"
+              v-tooltip="hintAsTooltip ? trendHint : ''"
+              :icon="trendIcon"
+              :trend-direction="trendDirection"
+              :trend-hint="hintAsTooltip ? '' : trendHint"
+              :trend-positive="trendPositive"
+              :trend-value="trendValue"
+            />
+          </slot>
+        </div>
       </div>
-    </div>
-    <div class="flex items-center px-4 pb-3 space-x-2">
-      <span class="text-xl font-bold leading-none text-vanilla-100">
-        <slot> {{ value }} </slot>
-      </span>
-      <div class="space-y-1">
-        <slot name="info">
-          <ticker
-            class="hidden md:flex"
-            v-if="trendValue"
-            v-tooltip="hintAsTooltip ? trendHint : ''"
-            :icon="trendIcon"
-            :trend-direction="trendDirection"
-            :trend-hint="hintAsTooltip ? '' : trendHint"
-            :trend-positive="trendPositive"
-            :trend-value="trendValue"
-          />
-        </slot>
-      </div>
-    </div>
-  </component>
+    </component>
+  </transition>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
@@ -96,5 +101,26 @@ export default class StatCard extends Vue {
 
   @Prop({ default: true })
   hintAsTooltip!: boolean
+
+  @Prop({ default: false })
+  withTransition!: boolean
 }
 </script>
+
+<style scoped>
+.flash-leave-active {
+  transition: background-color 0.5s ease-in-out, transform 0.5s ease;
+}
+.flash-enter-active {
+  transition: background-color 0.5s ease-in-out, transform 0.5s ease;
+  transition-delay: 0.5s;
+}
+.flash-enter,
+.flash-leave-to {
+  @apply bg-cherry bg-opacity-10;
+}
+.flash-enter-to,
+.flash-leave {
+  @apply bg-ink-300;
+}
+</style>

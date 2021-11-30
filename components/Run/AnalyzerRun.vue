@@ -85,15 +85,24 @@
             <run-timeout v-else-if="status === 'TIMO'"></run-timeout>
             <div
               v-else
-              class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+              class="
+                grid grid-cols-1
+                gap-4
+                sm:grid-cols-2
+                lg:grid-cols-3
+                xl:grid-cols-4
+                2xl:grid-cols-5
+              "
             >
               <stat-card
                 v-for="stat in metricsCaptured"
                 :key="stat.id"
                 :title="stat.name"
+                :subtitle="stat.namespace.key"
                 :value="stat.valueDisplay"
                 :icon="analyzer.shortcode"
                 :color="stat.isPassing === false ? 'cherry' : 'juniper'"
+                :with-transition="stat.isPassing === false"
               >
               </stat-card>
             </div>
