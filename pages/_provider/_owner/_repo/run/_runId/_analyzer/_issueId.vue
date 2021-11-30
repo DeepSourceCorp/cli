@@ -133,7 +133,9 @@
               </div>
             </template>
           </div>
-          <div v-else class="max-w-4xl p-12 text-center">No ignore rules found.</div>
+          <div v-else class="max-w-4xl p-12">
+            <empty-state title="No ignore rules found" />
+          </div>
         </z-tab-pane>
       </z-tab-panes>
     </z-tabs>

@@ -3,7 +3,9 @@
     <div v-if="issue.silenceRules && issue.silenceRules.length" class="flex flex-col space-y-2">
       <ignored-rule v-for="rule in issue.silenceRules" :key="rule.id" :rule="rule"></ignored-rule>
     </div>
-    <div v-else class="w-full h-72 flex justify-center items-center">No ignore rules found.</div>
+    <div v-else class="w-full h-72 flex items-center justify-center text-vanilla-400">
+      <empty-state title="No ignore rules found" />
+    </div>
   </div>
 </template>
 <script lang="ts">
