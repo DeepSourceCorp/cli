@@ -1,101 +1,128 @@
 <template>
-  <div class="flex flex-col p-4 space-y-6">
+  <div class="max-w-3xl p-4 space-y-2">
     <!-- title -->
-    <div class="text-lg font-medium text-vanilla-100">SSH Access</div>
+    <page-title
+      class="max-w-3xl"
+      title="SSH Access"
+      description-width-class="max-w-2xl"
+      description="If your repository has external private dependencies, you need to grant DeepSource access to fetch those dependencies via this public key."
+    />
     <!-- Public key description -->
-    <div class="flex gap-x-4">
-      <div class="flex flex-grow max-w-2xl">
-        <div class="flex-1 text-sm text-vanilla-100">Public key</div>
-        <div class="flex flex-col w-2/3 space-y-3">
-          <div class="flex flex-col w-full space-y-2" v-if="repository.encPublicKey">
-            <div class="h-36">
-              <z-textarea
-                class="
-                  w-full
-                  h-full
-                  p-2
-                  text-xs
-                  bg-transparent
-                  border
-                  outline-none
-                  resize-none
-                  border-ink-200
-                  text-vanilla-400
-                  hide-scroll
-                "
-                v-model="this.repository.encPublicKey"
-              >
-              </z-textarea>
-            </div>
-            <div class="flex justify-between space-x-2">
-              <z-button
-                buttonType="secondary"
-                :icon="clipboardIcon"
-                size="small"
-                class="w-28"
-                iconColor="vanilla-100"
-                @click="copyKeys()"
-                >{{ clipboardLabel }}</z-button
-              >
-              <div class="space-x-2">
-                <z-button
-                  buttonType="secondary"
-                  size="small"
-                  icon="refresh-ccw"
-                  @click="isGenerateSSHConfirmModalOpen = true"
-                >
-                  Regenerate
-                </z-button>
-                <z-button
-                  buttonType="danger"
-                  size="small"
-                  icon="trash-2"
-                  @click="isRemoveSSHConfirmModalOpen = true"
-                >
-                  Remove Keys
-                </z-button>
-              </div>
-            </div>
-          </div>
-          <div v-else class="flex flex-col justify-center w-full space-y-3">
-            <p class="text-small">
-              An SSH key pair has not been generated for this repository yet.
-            </p>
-            <z-button buttonType="secondary" icon="plus" @click="generateKeyPair()">
-              Generate SSH key pair
-            </z-button>
-          </div>
+    <section v-if="repository.encPublicKey">
+      <div
+        class="
+          max-w-3xl
+          p-3
+          font-mono
+          text-sm
+          break-words
+          border
+          rounded-md
+          border-ink-200
+          text-vanilla-400
+        "
+      >
+        {{ this.repository.encPublicKey }}
+      </div>
+
+      <div class="flex justify-between mt-2 space-x-2">
+        <z-button
+          buttonType="secondary"
+          :icon="clipboardIcon"
+          size="small"
+          class="w-28"
+          iconColor="vanilla-100"
+          @click="copyKeys()"
+          >{{ clipboardLabel }}</z-button
+        >
+        <div class="space-x-2">
+          <z-button
+            buttonType="secondary"
+            size="small"
+            icon="refresh-ccw"
+            @click="isGenerateSSHConfirmModalOpen = true"
+          >
+            Regenerate
+          </z-button>
+          <z-button
+            buttonType="danger"
+            size="small"
+            icon="trash-2"
+            @click="isRemoveSSHConfirmModalOpen = true"
+          >
+            Remove Keys
+          </z-button>
         </div>
       </div>
-      <div class="hidden lg:block">
-        <info-banner>
-          <div>
-            If your repository has external private dependencies, you need to grant DeepSource
-            access to fetch those dependencies via this repository's public key.
-          </div>
-        </info-banner>
-      </div>
-    </div>
+    </section>
+
+    <empty-state
+      v-else-if="!$fetchState.pending"
+      class="py-20 border-2 border-dashed rounded-lg border-ink-200"
+      subtitle="An SSH key pair has not been generated yet."
+    >
+      <template slot="action">
+        <z-button
+          size="small"
+          :disabled="updatePending"
+          :is-loading="updatePending"
+          loading-label="Generating SSH key pair"
+          @click="generateKeyPair()"
+          icon="plus"
+        >
+          Generate SSH key pair
+        </z-button>
+      </template>
+    </empty-state>
     <portal to="modal">
       <z-confirm
         v-if="isGenerateSSHConfirmModalOpen"
         @onClose="isGenerateSSHConfirmModalOpen = false"
         title="Confirm regenerate SSH keys for this repository?"
         subtitle="This action is irreversible, and will invalidate the old keys. You must replace the old keys with the new one everywhere you're using it."
-        primaryActionLabel="Confirm and regenerate keys"
-        @primaryAction="generateKeyPair"
       >
+        <template v-slot:footer="{ close }">
+          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+            <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
+              Cancel
+            </z-button>
+            <z-button
+              :disabled="updatePending"
+              :is-loading="updatePending"
+              icon="refresh-ccw"
+              loading-label="Generating a new key pair"
+              size="small"
+              @click="generateKeyPair(close)"
+            >
+              Confirm and regenerate keys
+            </z-button>
+          </div>
+        </template>
       </z-confirm>
       <z-confirm
         v-if="isRemoveSSHConfirmModalOpen"
         @onClose="isRemoveSSHConfirmModalOpen = false"
         title="Confirm delete SSH keys for this repository?"
         subtitle="This action is irreversible. You will have to generate a new key pair and add them to all your private dependencies again."
-        primaryActionLabel="Confirm and remove keys"
-        primaryActionType="danger"
-        primaryActionIcon="trash-2"
-        @primaryAction="removeKeyPair"
       >
+        <template v-slot:footer="{ close }">
+          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+            <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
+              Cancel
+            </z-button>
+            <z-button
+              :disabled="updatePending"
+              :is-loading="updatePending"
+              icon="trash-2"
+              button-type="danger"
+              loading-label="Removing the SSH key pair"
+              size="small"
+              @click="removeKeyPair(close)"
+            >
+              Confirm and remove keys
+            </z-button>
+          </div>
+        </template>
       </z-confirm>
     </portal>
   </div>
@@ -127,6 +154,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
   }
 })
 export default class SettingsAutofix extends mixins(RepoDetailMixin) {
+  public updatePending = false
   public isGenerateSSHConfirmModalOpen = false
   public isRemoveSSHConfirmModalOpen = false
 
@@ -142,20 +170,44 @@ export default class SettingsAutofix extends mixins(RepoDetailMixin) {
     await this.fetchRepositorySettingsSsh({ id: this.repository.id })
   }
 
-  public async generateKeyPair(): Promise<void> {
-    await this.generateSSHKey({
-      repositoryId: this.repository.id
-    })
-    this.isGenerateSSHConfirmModalOpen = false
-    await this.fetchRepositorySettingsSsh({ id: this.repository.id, refetch: true })
+  public async generateKeyPair(close?: () => Promise<void>): Promise<void> {
+    this.updatePending = true
+
+    try {
+      await this.generateSSHKey({
+        repositoryId: this.repository.id
+      })
+      await this.fetchRepositorySettingsSsh({ id: this.repository.id, refetch: true })
+
+      if (close && typeof close === 'function') {
+        close()
+      } else {
+        this.isGenerateSSHConfirmModalOpen = false
+      }
+    } catch (e) {
+      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
+    } finally {
+      this.updatePending = false
+    }
   }
 
-  public async removeKeyPair(): Promise<void> {
-    await this.deleteSSHKey({
-      repositoryId: this.repository.id
-    })
-    this.isRemoveSSHConfirmModalOpen = false
-    await this.fetchRepositorySettingsSsh({ id: this.repository.id, refetch: true })
+  public async removeKeyPair(close?: () => Promise<void>): Promise<void> {
+    this.updatePending = true
+    try {
+      await this.deleteSSHKey({
+        repositoryId: this.repository.id
+      })
+      await this.fetchRepositorySettingsSsh({ id: this.repository.id, refetch: true })
+      if (close) {
+        close()
+      } else {
+        this.isRemoveSSHConfirmModalOpen = false
+      }
+    } catch (e) {
+      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
+    } finally {
+      this.updatePending = false
+    }
   }
 
   public copyKeys(): void {

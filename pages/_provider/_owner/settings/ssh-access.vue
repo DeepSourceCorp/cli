@@ -11,13 +11,13 @@
         class="
           max-w-3xl
           p-3
+          font-mono
           text-sm
           break-words
           border
           rounded-md
           border-ink-200
           text-vanilla-400
-          font-mono
         "
       >
         {{ owner.ownerSetting.publicKey }}
@@ -75,7 +75,7 @@
         title="Confirm regenerate SSH keys?"
         subtitle="This action is irreversible and will invalidate the old key pair. You must replace the old key with the new one everywhere you're using it."
       >
-        <template slot="footer">
+        <template v-slot:footer="{ close }">
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
@@ -98,7 +98,7 @@
         title="Confirm delete SSH keys?"
         subtitle="This action is irreversible. You will have to generate a new key pair and add them to all your private dependencies again."
       >
-        <template slot="footer">
+        <template v-slot:footer="{ close }">
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
             <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
               Cancel
