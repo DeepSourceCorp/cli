@@ -40,7 +40,7 @@
         >
           <template slot="title">
             <h5 class="text-base font-medium text-vanilla-100">
-              {{ issueWidgets[widget].title }}
+              {{ toSentenceCase(issueWidgets[widget].title) }}
             </h5>
           </template>
           <span
@@ -68,7 +68,7 @@ import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import { StatCard, StatSection } from '@/components/Metrics'
 import { ZButton, ZIcon, ZTicker } from '@deepsourcelabs/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import { formatIntl, shortenLargeNumber } from '~/utils/string'
+import { formatIntl, shortenLargeNumber, toSentenceCase } from '~/utils/string'
 import { RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
@@ -98,6 +98,7 @@ export interface Widget {
 export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAccessMixin) {
   public shortenNumber = shortenLargeNumber
   public formatIntl = formatIntl
+  public toSentenceCase = toSentenceCase
   public showCustomizeModal = false
 
   isTrendPositive(widget: Widget): boolean | null {

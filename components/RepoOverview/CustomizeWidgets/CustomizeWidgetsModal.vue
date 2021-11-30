@@ -1,21 +1,9 @@
 <template>
   <z-modal width="custom" title="Customize overview widgets" @onClose="$emit('close')">
-    <section
-      class="
-        grid grid-cols-1
-        gap-2
-        px-4
-        pt-3
-        pb-0
-        overflow-y-scroll
-        sm:w-98
-        md:max-h-98
-        hide-scroll
-      "
-    >
+    <section class="p-4 space-y-2 overflow-y-scroll sm:w-98 md:h-98 hide-scroll">
       <z-input
         v-model="searchCandidate"
-        class="flex-grow mb-2"
+        class="flex-grow mb-4"
         size="small"
         :show-border="false"
         background-color="ink-200"
@@ -24,6 +12,7 @@
         <template slot="left"> <z-icon icon="search" size="small" class="ml-1.5" /> </template>
       </z-input>
       <draggable
+        v-show="enabledWidgetsSearchResults.length"
         :list="enabledWidgets"
         key="enabled-widgets"
         :animation="200"
@@ -35,18 +24,16 @@
         @start="dragging = true"
         @end="dragging = false"
       >
-        <transition-group tag="ul" name="enabled-list" class="grid grid-cols-1 gap-2">
-          <customize-widget-modal-row
-            v-for="widget in enabledWidgetsSearchResults"
-            :key="widget"
-            v-model="enabledWidgets"
-            :icon="WIDGET_ICON_MAP[widget]"
-            :widget-name="widget"
-            :title="repository.allWidgets[widget].title"
-          />
-        </transition-group>
+        <customize-widget-modal-row
+          v-for="widget in enabledWidgetsSearchResults"
+          :key="widget"
+          v-model="enabledWidgets"
+          :icon="WIDGET_ICON_MAP[widget]"
+          :widget-name="widget"
+          :title="repository.allWidgets[widget].title"
+        />
       </draggable>
-      <ul class="grid grid-cols-1 gap-2 mb-3">
+      <ul class="grid grid-cols-1 gap-2">
         <customize-widget-modal-row
           v-for="widget in availableWidgetsSearchResults"
           :key="widget"
@@ -57,6 +44,12 @@
           :title="repository.allWidgets[widget].title"
         />
       </ul>
+      <empty-state
+        v-if="
+          enabledWidgetsSearchResults.length === 0 && availableWidgetsSearchResults.length === 0
+        "
+        subtitle="No widgets matched the search term"
+      />
     </section>
     <template v-slot:footer="{ close }">
       <div
@@ -92,7 +85,7 @@
           :disabled="enabledWidgets.length > MAX_WIDGETS || enabledWidgets.length < MIN_WIDGETS"
           @click="savePreferences(close)"
         >
-          Update Widgets
+          Update widgets
         </z-button>
       </div>
     </template>
@@ -128,11 +121,11 @@ export default class CustomizeWidgetsModal extends mixins(RepoDetailMixin) {
   public MIN_WIDGETS = MIN_WIDGETS
 
   WIDGET_ICON_MAP = {
-    'ddp-widget': 'code',
-    'idp-widget': 'code',
-    'tcv-widget': 'code',
-    'bcv-widget': 'code',
-    'dcv-widget': 'code',
+    'ddp-widget': 'direct-dependency',
+    'idp-widget': 'indirect-dependency',
+    'tcv-widget': 'test-coverage-2',
+    'bcv-widget': 'branch-coverage',
+    'dcv-widget': 'application-documentation-coverage',
     'bug-risk-widget': 'bug-risk',
     'antipattern-widget': 'antipattern',
     'style-widget': 'style',

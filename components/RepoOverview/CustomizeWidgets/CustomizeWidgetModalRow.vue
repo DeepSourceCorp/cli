@@ -1,20 +1,39 @@
 <template>
   <li
     :class="draggable ? 'bg-ink-200' : 'ignore-element'"
-    class="flex items-center p-2 space-x-2 border rounded-md border-ink-200"
+    class="
+      flex
+      items-center
+      p-2
+      space-x-2
+      border
+      rounded-md
+      cursor-pointer
+      border-ink-200
+      drag-handler
+    "
+    @click="updateRowCheck"
   >
     <z-icon
       icon="drag"
-      :color="draggable ? 'vanilla-200' : 'ink-100'"
+      :color="draggable ? 'vanilla-200' : 'vanilla-400'"
       size="x-small"
       class="flex-shrink-0 m-px"
       :class="draggable ? 'drag-handler cursor-move' : 'cursor-not-allowed'"
     />
     <z-icon :icon="icon" color="vanilla-100" class="flex-shrink-0" />
     <label
-      class="flex-grow overflow-hidden text-xs whitespace-nowrap overflow-ellipsis vanilla-100"
+      class="
+        flex-grow
+        overflow-hidden
+        text-sm
+        cursor-pointer
+        whitespace-nowrap
+        overflow-ellipsis
+        vanilla-100
+      "
     >
-      {{ title }}
+      {{ toSentenceCase(title) }}
     </label>
     <z-checkbox
       v-model="modelValue"
@@ -28,6 +47,7 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZButton, ZCheckbox } from '@deepsourcelabs/zeal'
 import { ModelSync } from 'vue-property-decorator'
+import { toSentenceCase } from '~/utils/string'
 
 @Component({
   components: {
@@ -39,7 +59,7 @@ import { ModelSync } from 'vue-property-decorator'
 })
 export default class CustomizeWidgetsModalRow extends Vue {
   @ModelSync('value', 'input', { type: Array })
-  readonly modelValue: string | number
+  readonly modelValue: string[]
 
   @Prop({ default: true })
   draggable: boolean
@@ -52,5 +72,18 @@ export default class CustomizeWidgetsModalRow extends Vue {
 
   @Prop({ required: true })
   icon: string
+
+  toSentenceCase = toSentenceCase
+
+  updateRowCheck(): void {
+    if (this.modelValue.includes(this.widgetName)) {
+      this.$emit(
+        'input',
+        this.modelValue.filter((val) => val !== this.widgetName)
+      )
+    } else {
+      this.$emit('input', [...this.modelValue, this.widgetName])
+    }
+  }
 }
 </script>
