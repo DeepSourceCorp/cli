@@ -35,37 +35,44 @@
       @updateCategory="updateCategory"
     >
       <template v-slot:cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
-        <div class="p-4 pb-5 bg-gradient-to-t from-ink-200 to-ink-400 via-ink-300">
-          <h4 class="text-base font-bold leading-none text-vanilla-100">Happy with the results?</h4>
-          <p class="mt-2 text-sm font-medium leading-snug">
-            <span
-              class="
-                text-opacity-50
-                bg-clip-text
-                text-vanilla-100
-                bg-gradient-to-br
-                from-ink-200
-                to-ink-400
-                via-ink-300
-              "
-            >
-              To activate analysis with every pull request, please commit the configuration.
-            </span>
-          </p>
-          <z-button
-            v-if="repository.isCommitPossible || repository.isAutofixEnabled"
-            @click="isActivationModalOpen = true"
-            size="small"
-            icon="play-circle"
-            class="w-full mt-5"
-            buttonType="primary"
-            label="Activate analysis"
-          />
-          <nuxt-link v-else :to="$generateRoute(['generate-config'])">
-            <z-button size="small" icon="play-circle" class="w-full mt-5" buttonType="primary">
-              Activate analysis
-            </z-button>
-          </nuxt-link>
+        <div class="p-px mx-2 mt-2 rounded-md bg-gradient-dawn">
+          <div class="p-3 rounded-md bg-ink-300 from-ink-200 to-ink-400 via-ink-300">
+            <h4 class="font-medium leading-tight">Activate continuous analysis</h4>
+            <p class="mt-2 text-xs font-medium leading-snug">
+              <span
+                class="
+                  text-opacity-60
+                  bg-clip-text
+                  text-vanilla-100
+                  bg-gradient-to-br
+                  from-ink-200
+                  to-ink-400
+                  via-ink-300
+                "
+              >
+                To analyze analysis on every pull request, commit the config file to your
+                repository.
+              </span>
+            </p>
+            <z-button
+              v-if="repository.isCommitPossible || repository.isAutofixEnabled"
+              @click="isActivationModalOpen = true"
+              size="small"
+              icon="play-circle"
+              class="w-full mt-4 bg-robin hover:bg-robin-600"
+              color="vanilla-200"
+              label="Activate analysis"
+            />
+            <nuxt-link v-else :to="$generateRoute(['generate-config'])">
+              <z-button
+                size="small"
+                icon="play-circle"
+                class="w-full mt-4 bg-robin hover:bg-robin-600"
+                color="vanilla-200"
+                label="Activate analysis"
+              />
+            </nuxt-link>
+          </div>
         </div>
       </template>
     </issue-category-selector>

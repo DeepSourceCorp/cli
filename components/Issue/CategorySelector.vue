@@ -1,7 +1,8 @@
 <template>
-  <div class="flex-col justify-between hidden space-y-1 border-r border-ink-200 lg:flex">
+  <div class="flex-col hidden p-2 space-y-4 border-r border-ink-200 lg:flex">
     <!-- Issue Types View -->
-    <section class="flex-shrink p-2 space-y-1 overflow-y-scroll hide-scroll">
+    <slot name="cta"></slot>
+    <section class="flex-shrink space-y-1 overflow-y-scroll hide-scroll">
       <div
         v-for="issueType in issueCategories"
         :key="issueType.shortcode"
@@ -34,7 +35,6 @@
         </z-tag>
       </div>
     </section>
-    <slot name="cta"></slot>
   </div>
 </template>
 <script lang="ts">
