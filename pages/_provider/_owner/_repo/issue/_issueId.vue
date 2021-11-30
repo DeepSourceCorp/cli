@@ -34,19 +34,15 @@
           <z-tab
             :isActive="$route.path === getRoute('occurrences')"
             border-active-color="vanilla-400"
+            class="flex items-center"
           >
             <span>Occurences</span>
             <z-tag
               v-if="issue.occurrenceCount"
-              text-size="xxs"
-              :spacing="String(issue.occurrenceCount).length === 1 ? 'px-0 py-0' : 'px-0.5'"
+              text-size="xs"
+              spacing="px-2 py-1"
+              class="leading-none"
               bgColor="ink-100"
-              class="items-center justify-center h-4 leading-none"
-              :class="{
-                'w-4': String(issue.occurrenceCount).length === 1,
-                'w-6': String(issue.occurrenceCount).length === 2,
-                'w-8': String(issue.occurrenceCount).length >= 3
-              }"
               >{{ issue.occurrenceCount }}</z-tag
             >
           </z-tab>

@@ -34,15 +34,11 @@
             :icon="check.analyzer.shortcode"
             :isActive="currentAnalyzer == check.analyzer.shortcode"
             border-active-color="vanilla-400"
+            class="flex items-center"
           >
             {{ check.analyzer.name }}
-            <z-tag
-              text-size="xxs"
-              spacing="px-1.5 py-0.5 items-center"
-              bg-color="ink-100"
-              class="leading-none"
-            >
-              <span class="mb-px">{{ check.issuesRaisedCount }}</span>
+            <z-tag text-size="xs" spacing="px-2 py-1" bg-color="ink-100" class="leading-none">
+              {{ check.issuesRaisedCount }}
             </z-tag>
           </z-tab>
         </nuxt-link>

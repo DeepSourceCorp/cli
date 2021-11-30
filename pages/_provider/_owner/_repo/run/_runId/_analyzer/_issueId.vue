@@ -53,8 +53,9 @@
           <z-tag
             v-if="checkIssues.totalCount"
             text-size="xs"
-            spacing="py-0.5 px-3.5"
+            spacing="px-2 py-1"
             bgColor="ink-100"
+            class="leading-none"
             >{{ checkIssues.totalCount }}</z-tag
           >
         </z-tab-item>

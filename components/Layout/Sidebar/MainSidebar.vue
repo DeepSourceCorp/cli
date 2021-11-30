@@ -70,9 +70,10 @@
             v-if="repositoryList.totalCount"
             bgColor="ink-100"
             textSize="xs"
-            spacing="px-2 py-0.5"
+            spacing="px-2 py-1"
+            class="leading-none"
           >
-            {{ repositoryList.totalCount }}
+            <span class="mt-px">{{ repositoryList.totalCount }}</span>
           </z-tag>
         </span>
       </sidebar-item>
