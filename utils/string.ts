@@ -69,8 +69,33 @@ function toWrappableString(
   return path
 }
 
+/**
+ * Utility to remove extra trailing slashes in URLs
+ *
+ * @param  {string} path
+ * @returns string
+ */
 function stripTrailingSlash(path: string): string {
   return path.replace(/\/$/, '')
+}
+
+/**
+ * A lightweight utility to escape strings
+ * It is meant to be used for overcoming rendering issues
+ * but not for security.
+ *
+ * @param  {string} unsafeCandidate
+ * @returns string
+ */
+function escapeHtml(unsafeCandidate: string): string {
+  return unsafeCandidate
+    ? unsafeCandidate
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;')
+    : ''
 }
 
 export {
@@ -81,5 +106,6 @@ export {
   formatIntl,
   makeSafeNumber,
   toWrappableString,
-  stripTrailingSlash
+  stripTrailingSlash,
+  escapeHtml
 }

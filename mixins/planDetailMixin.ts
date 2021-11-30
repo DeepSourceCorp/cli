@@ -18,7 +18,9 @@ export default class PlanDetailMixin extends mixins(
 
   get availableDowngradePlans(): Record<string, string> {
     const { planSlug } = this.ownerBillingInfo
-    const downgradeOptions = planSlug ? this.planDowngradeOptions[planSlug] : []
+    const downgradeOptions =
+      planSlug && this.planDowngradeOptions[planSlug] ? this.planDowngradeOptions[planSlug] : []
+
     const plans = downgradeOptions
       .map((planSlug) => {
         if (planSlug in this.context.plans) {
@@ -39,7 +41,8 @@ export default class PlanDetailMixin extends mixins(
 
   get availableUpgradePlans(): Record<string, string> {
     const { planSlug } = this.ownerBillingInfo
-    const upgradeOptions = planSlug ? this.planUpgradeOptions[planSlug] : []
+    const upgradeOptions =
+      planSlug && this.planUpgradeOptions[planSlug] ? this.planUpgradeOptions[planSlug] : []
 
     const plans = upgradeOptions
       .map((planSlug) => {

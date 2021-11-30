@@ -6,7 +6,7 @@
         <span
           class="pr-2 font-semibold text-vanilla-100 line-clamp-1"
           :to="issueLink"
-          v-html="title"
+          v-html="escapeHtml(title)"
         >
         </span>
         <!-- Issue ID -->
@@ -125,7 +125,7 @@ import { ZIcon } from '@deepsourcelabs/zeal'
 import IssueType from '@/components/Repository/IssueType.vue'
 import { formatDate } from '~/utils/date'
 import { BaseCard } from '@/components/History'
-import { formatIntl, shortenLargeNumber } from '~/utils/string'
+import { formatIntl, shortenLargeNumber, escapeHtml } from '~/utils/string'
 
 const PERCENTAGE = 100
 
@@ -194,6 +194,7 @@ export default class IssueListItem extends Vue {
   public formatDate = formatDate
   public shortenNumber = shortenLargeNumber
   public formatIntl = formatIntl
+  public escapeHtml = escapeHtml
 
   public handleClick(): void {
     this.$emit('autofix', {
