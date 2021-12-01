@@ -3,20 +3,34 @@
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="flex items-center space-x-1 text-vanilla-200 p-1 text-sm rounded-sm hover:bg-ink-200 transition-all duration-75 outline-none focus:outline-none"
+        class="
+          flex
+          items-center
+          space-x-2
+          text-vanilla-200
+          p-1
+          text-sm
+          rounded-sm
+          hover:bg-ink-200
+          transition-all
+          duration-75
+          outline-none
+          focus:outline-none
+        "
         @click="toggle"
       >
         <z-avatar
-          type="span"
+          v-if="activeDashboardContext.avatar_url"
           size="sm"
-          class="flex-shrink-0"
           :image="activeDashboardContext.avatar_url"
           :user-name="activeDashboardContext.login"
+          class="flex-shrink-0"
+          stroke="bg-ink-100 p-1"
         ></z-avatar>
-        <span v-show="!isCollapsed">
-          {{ activeDashboardContext.team_name || activeDashboardContext.login }}
+        <span v-show="!isCollapsed" class="flex space-x-1 items-center">
+          <span>{{ activeDashboardContext.team_name || activeDashboardContext.login }}</span>
+          <z-icon icon="chevron-down" size="small" color="vanilla-200"></z-icon>
         </span>
-        <z-icon icon="chevron-down" size="small" color="vanilla-200" v-show="!isCollapsed"></z-icon>
       </button>
     </template>
     <template v-slot:body="{ close }">
