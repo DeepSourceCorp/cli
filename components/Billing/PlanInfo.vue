@@ -69,27 +69,38 @@
         <template v-slot:default="{ close }">
           <div class="flex flex-col p-4 space-y-3">
             <div class="flex justify-between">
-              <label class="text-sm text-vanilla-400">New number of seats in total</label>
+              <label for="seats-count" class="text-sm text-vanilla-400">
+                New number of seats in total
+              </label>
               <z-number-input
                 :min="ownerBillingInfo.seatsUsed"
                 :max="currentPlan.max_seats"
+                id="seats-count"
                 class="w-24 text-sm"
                 v-model="seatsCount"
               />
             </div>
+            <alert-box
+              v-if="seatsCount === ownerBillingInfo.seatsUsed"
+              bg-color="bg-honey"
+              text-color="text-honey-400"
+            >
+              <p>Remove or demote admins/members to contributor to reduce seats further.</p>
+              <nuxt-link :to="$generateRoute(['members'])" class="flex items-center space-x-2 mt-3">
+                <span class="hover:underline">Manage members</span>
+                <z-icon color="honey-400" icon="arrow-right" class="mt-1" />
+              </nuxt-link>
+            </alert-box>
             <p class="text-sm text-vanilla-400">
               You can add up to {{ currentPlan.max_seats }} seats, contributors are not counted
-              against your seats usage. You can manage team members
-              <nuxt-link :to="$generateRoute(['members'])" class="text-juniper"> here</nuxt-link>,
-              or write to us at
+              against your seats usage. If you need more seats, please write to us at
               <a
                 href="mailto:support@deepsource.io"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="text-juniper hover:underline"
                 >support@deepsource.io</a
-              >
-              if you need more seats.
+              >.
             </p>
             <z-button
               label="Update seats"
