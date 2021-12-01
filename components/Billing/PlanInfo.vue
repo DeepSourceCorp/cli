@@ -85,7 +85,10 @@
               text-color="text-honey-400"
             >
               <p>Remove or demote admins/members to contributor to reduce seats further.</p>
-              <nuxt-link :to="$generateRoute(['members'])" class="flex items-center space-x-2 mt-3">
+              <nuxt-link
+                :to="$generateRoute(['members'])"
+                class="inline-flex items-center space-x-2 mt-3 cursor-pointer"
+              >
                 <span class="hover:underline">Manage members</span>
                 <z-icon color="honey-400" icon="arrow-right" class="mt-1" />
               </nuxt-link>
