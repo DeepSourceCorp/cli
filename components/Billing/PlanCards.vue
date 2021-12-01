@@ -13,11 +13,11 @@
     </z-radio-group>
     <div class="grid max-w-4xl grid-cols-1 gap-5 rounded md:grid-cols-3">
       <plan-card
-        v-for="name in plansInContext"
+        v-for="name in plans"
         :key="name"
         :name="name"
         :billing-cycle="billingCycle"
-        :current-plan-name="showCurrentPlan ? currentPlan.name : null"
+        :current-plan-name="hasPaidPlan ? currentPlan.name : null"
         v-bind="planDetails[name]"
         @next="subscribe"
       />
@@ -39,7 +39,15 @@ import PlanDetailMixin from '~/mixins/planDetailMixin'
 })
 export default class PlanCards extends mixins(PlanDetailMixin) {
   @Prop({ default: false })
-  showCurrentPlan!: boolean
+  hasPaidPlan!: boolean
+
+  get plans() {
+    // Show all plan cards for the free tier
+    if (!this.hasPaidPlan) {
+      return this.plansInContext
+    }
+    return this.plansInContext.filter((plan) => plan !== this.currentPlan.slug)
+  }
 
   subscribe(plan: string): void {
     this.setPlan({

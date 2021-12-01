@@ -11,7 +11,7 @@
       </z-breadcrumb>
     </div>
 
-    <plan-cards :show-current-plan="true" class="px-4" />
+    <plan-cards :has-paid-plan="true" class="px-4" />
   </div>
 </template>
 
@@ -19,7 +19,7 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
 
-import PlanDetailMixin from '~/mixins/planDetailMixin'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   components: {
@@ -27,7 +27,7 @@ import PlanDetailMixin from '~/mixins/planDetailMixin'
     ZBreadcrumbItem
   }
 })
-export default class Plans extends mixins(PlanDetailMixin) {
+export default class Plans extends mixins(OwnerBillingMixin) {
   async fetch() {
     const { owner, provider } = this.$route.params
     const params = {

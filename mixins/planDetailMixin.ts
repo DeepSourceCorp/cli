@@ -62,7 +62,7 @@ export default class PlanDetailMixin extends mixins(
     return {}
   }
 
-  get plansInContext(): Record<string, string>[] {
+  get plansInContext(): string[] {
     const PLAN_ORDER = ['starter', 'pro', 'business', 'premium', 'enterprise']
     if (this.context.plans) {
       return [

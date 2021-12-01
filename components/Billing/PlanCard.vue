@@ -4,7 +4,7 @@
       <div
         class="p-5 space-y-8"
         :class="{
-          'bg-ink-300': isPrimary && !isCurrentPlan,
+          'bg-ink-300': isPrimary,
           'border-b border-ink-300': features.length
         }"
       >
@@ -43,33 +43,14 @@
         </div>
         <div class="flex justify-center">
           <z-button
-            :button-type="isPrimary && !isCurrentPlan ? 'primary' : 'secondary'"
-            :disabled="isCurrentPlan"
+            :button-type="isPrimary ? 'primary' : 'secondary'"
             :to="routeTo"
             target="blank"
             class="w-80"
-            :class="{ 'opacity-100': isCurrentPlan }"
             @click="nextSteps"
           >
-            <div
-              v-if="isCurrentPlan"
-              class="
-                flex
-                items-center
-                justify-center
-                w-4
-                h-4
-                bg-opacity-50
-                rounded-full
-                outline-none
-                focus:outline-none
-                bg-juniper
-              "
-            >
-              <div class="w-2.5 h-2.5 rounded-full bg-juniper"></div>
-            </div>
             <z-icon
-              v-else-if="updating"
+              v-if="updating"
               icon="spin-loader"
               :color="isPrimary ? 'ink-400' : 'vanilla-100'"
               class="animate-spin"
@@ -149,11 +130,11 @@ export default class PlanCard extends mixins(PlanDetailMixin) {
     return this.billingCycle === 'yearly' ? this.annualAmount : this.monthlyAmount
   }
 
-  get ctaLabel(): string {
-    if (this.isCurrentPlan) {
-      return 'Currenty active'
-    }
+  get billingCycleInPlanSlug(): string {
+    return this.billingCycle === 'monthly' ? 'monthly' : 'annual'
+  }
 
+  get ctaLabel(): string {
     // If the current plan is 'Business', button label for the 'Starter' plan
     // should start with 'Downgrade to'
     if (this.currentPlanName === 'Business' && this.planName === 'Starter') {
@@ -164,11 +145,23 @@ export default class PlanCard extends mixins(PlanDetailMixin) {
       return 'Upgrading subscription'
     }
 
-    return this.buttonLabel ? this.buttonLabel : `Upgrade to ${this.planName}`
+    return this.buttonLabel || `Upgrade to ${this.planName}`
   }
 
-  get isCurrentPlan() {
-    return this.currentPlanName === this.planName
+  get downgradePlanSlug(): string {
+    const planSlugWithoutBillingCycle = this.availableDowngradePlans.planSlug
+      .split('-') // ['plan', 'starter', 'monthly/annual']
+      .slice(0, -1) // ['plan', 'starter']
+
+    return [...planSlugWithoutBillingCycle, this.billingCycleInPlanSlug].join('-') // plan-starter-monthly/annual
+  }
+
+  get upgradePlanSlug(): string {
+    const planSlugWithoutBillingCycle = this.availableUpgradePlans.planSlug
+      .split('-') // ['plan', 'premium', 'monthly/annual']
+      .slice(0, -1) // ['plan', 'premium']
+
+    return [...planSlugWithoutBillingCycle, this.billingCycleInPlanSlug].join('-') // plan-premium-monthly/annual
   }
 
   async nextSteps() {
@@ -185,30 +178,28 @@ export default class PlanCard extends mixins(PlanDetailMixin) {
     // Handle subscription change accordingly
     if (this.name === 'premium') {
       // Upgrade to 'Business'
-      const { planSlug } = this.availableUpgradePlans
       this.updating = true
       try {
         await this.changeSubscriptionPlan({
           id: this.owner.id,
-          planSlug
+          planSlug: this.upgradePlanSlug
         })
       } catch (e) {
-        this.$toast.danger('Something went wrong while upgrading your plan')
+        this.$toast.danger('Something went wrong while upgrading your plan.')
       } finally {
         await this.refetchData()
         this.updating = false
       }
     } else if (this.name === 'starter') {
       // Downgrade to 'Starter'
-      const { planSlug } = this.availableDowngradePlans
       this.updating = true
       try {
         await this.changeSubscriptionPlan({
           id: this.owner.id,
-          planSlug
+          planSlug: this.downgradePlanSlug
         })
       } catch (e) {
-        this.$toast.danger('Something went wrong while upgrading your plan')
+        this.$toast.danger('Something went wrong while downgrading your plan.')
       } finally {
         await this.refetchData()
         this.updating = false

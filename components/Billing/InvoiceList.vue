@@ -1,11 +1,11 @@
 <template>
   <form-group label="Invoices" :divide="false" bodyClass="space-y-2">
-    <template v-if="Array.isArray(billing.invoices)">
+    <template v-if="Array.isArray(invoices)">
       <a
         :href="inv.url"
         target="blank"
         rel="noopener noreferrer"
-        v-for="inv in billing.invoices"
+        v-for="inv in invoices"
         :key="inv.invoiceId"
         class="
           flex
@@ -33,6 +33,18 @@
         </span>
         <z-icon icon="download" size="base" color="current" />
       </a>
+
+      <div
+        v-if="invoices.length !== billing.invoices.length"
+        class="flex items-center justify-center w-full space-x-2"
+      >
+        <z-divider color="ink-300" class="border-dashed" />
+        <z-button button-type="secondary" size="small" @click="itemsCount += 5">
+          <span> Load more </span>
+          <z-icon icon="chevron-down" />
+        </z-button>
+        <z-divider color="ink-300" class="border-dashed" />
+      </div>
     </template>
     <template v-else>
       <div
@@ -47,18 +59,24 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { FormGroup } from '~/components/Form'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZDivider, ZIcon } from '@deepsourcelabs/zeal'
 import { parseISODate, formatDate } from '~/utils/date'
 import { BillingInfo } from '~/types/types'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
-  components: { FormGroup, ZIcon },
+  components: { FormGroup, ZButton, ZDivider, ZIcon },
   layout: 'dashboard'
 })
 export default class InvoiceList extends mixins(OwnerBillingMixin) {
+  itemsCount = 5
+
   get billing(): BillingInfo | {} {
     return this.owner.billingInfo ? this.owner.billingInfo : {}
+  }
+
+  get invoices() {
+    return this.owner?.billingInfo?.invoices?.slice(0, this.itemsCount)
   }
 
   async fetch(): Promise<void> {

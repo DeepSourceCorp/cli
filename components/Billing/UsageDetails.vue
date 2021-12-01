@@ -2,21 +2,16 @@
   <form-group label="Usage details" class="mt-5">
     <div class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 bg-ink-400 border-ink-200">
       <div class="p-4 space-y-4 border-r border-ink-200">
-        <h5 class="text-xs font-medium leading-none tracking-wider text-vanilla-400">
-          CURRENT USAGE
+        <h5 class="text-xs font-medium leading-none tracking-wider uppercase text-vanilla-400">
+          Usage this month
         </h5>
         <ul class="space-y-4">
           <li v-for="(feature, id) in owner.featureUsage" :key="id">
             <div class="text-sm tracking-wide text-vanilla-400">
               <span class="font-semibold text-vanilla-100">{{ feature.value }} </span>
               <span v-if="feature.max"> of {{ feature.max }} </span>
+              <span v-else> of ∞ </span>
               {{ getUsageText(feature) }}
-              <z-icon
-                v-if="getTooltipText(feature)"
-                class="inline mb-0.5"
-                v-tooltip="getTooltipText(feature)"
-                icon="help"
-              />
             </div>
             <usage-info v-if="feature.max" :completion="getCompletion(feature)" />
           </li>
@@ -95,32 +90,17 @@ export default class UsageDetails extends mixins(OwnerDetailMixin, PlanDetailMix
     return value && max ? (value / max) * 100 : 0
   }
 
-  getTooltipText({ max, shortcode }: Record<string, number | string>): string {
-    if (max) {
-      return ''
-    }
-
-    const textMap = {
-      analysis: 'Analysis runs',
-      transformers: 'Transforms',
-      autofix: 'Autofixes'
-    } as Record<string, string>
-    return `This plan has unlimited ${textMap[shortcode] || shortcode}`
-  }
-
   getUsageText({ max, shortcode, value }: Record<string, number | string>): string {
     if (shortcode === 'analysis') {
       return max ? 'commits analyzed' : `${value === 1 ? 'commit' : 'commits'} analyzed`
     }
 
     if (shortcode === 'transformers') {
-      return max
-        ? 'Transform runs used'
-        : `${value === 1 ? 'Transform run' : 'Transform runs'} used`
+      return max ? 'Transform runs' : `${value === 1 ? 'Transform run' : 'Transform runs'} used`
     }
 
     if (shortcode === 'autofix') {
-      return max ? 'Autofix runs used' : `${value === 1 ? 'Autofix run' : 'Autofix runs'} used`
+      return max ? 'Autofix runs' : `${value === 1 ? 'Autofix run' : 'Autofix runs'} used`
     }
 
     return `${shortcode} used`

@@ -3,11 +3,10 @@
     <div class="flex flex-wrap max-w-2xl md:flex-nowrap">
       <div class="flex-grow">
         <div v-if="Object.keys(this.currentPlan)">
-          <div class="flex items-center h-16 space-x-2 text-lg font-medium leading-none">
-            <div
-              v-if="currentPlan.name"
-              class="px-2 py-1.5 tracking-wider uppercase rounded-md bg-ink-200 leading-none"
-            >
+          <div
+            class="flex items-center h-16 space-x-2 text-lg tracking-wider font-medium leading-none"
+          >
+            <div v-if="currentPlan.name" class="px-2 py-1.5 uppercase rounded-md bg-ink-200">
               <span>{{ currentPlan.name }}</span>
             </div>
             <div v-else class="w-24 h-8 rounded-md bg-ink-300 animate-pulse"></div>
@@ -32,13 +31,13 @@
               <div class="text-2xl">$</div>
               <div class="text-3xl font-semibold leading-none md:text-4xl">{{ monthlyAmount }}</div>
             </div>
-            <div class="self-end mb-1 text-sm">/user /month</div>
+            <div class="self-end mb-1 text-sm">/user/month</div>
           </div>
           <div v-else class="flex justify-end">
             <div class="h-16 rounded-md w-44 bg-ink-300 animate-pulse"></div>
           </div>
         </div>
-        <div class="pt-1 mt-2 text-right">
+        <div class="pt-1 mt-1 text-right">
           <z-button
             v-if="ownerBillingInfo && !ownerBillingInfo.cancelAtPeriodEnd && !isBilledManually"
             @click="toggleAddMoreSeats"
