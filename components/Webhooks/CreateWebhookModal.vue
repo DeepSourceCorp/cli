@@ -35,9 +35,17 @@
           ></z-input>
           <password-strength
             v-if="secret"
-            class="absolute top-1 right-1 bg-ink-400"
+            class="absolute top-1 right-10 bg-ink-400"
             :class="enableApiSigning ? '' : 'opacity-20'"
             :password="secret"
+          />
+          <z-button
+            v-tooltip="'Generate new secret'"
+            button-type="secondary"
+            icon="refresh-cw"
+            size="small"
+            class="absolute top-1 right-1"
+            @click="generateSecret"
           />
         </div>
       </label>
@@ -162,6 +170,10 @@ export default class CreateWebhookModal extends mixins(
     } finally {
       this.savingWebhookEndpoint = false
     }
+  }
+
+  async generateSecret() {
+    this.secret = await this.generateWebhookSecret()
   }
 
   @Watch('$route.path')

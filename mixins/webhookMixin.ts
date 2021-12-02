@@ -86,6 +86,9 @@ export default class WebhookMixin extends mixins(OwnerDetailMixin) {
   @webhook.Action(WebhookActions.FETCH_WEBHOOK_EVENT_TYPES_LIST)
   fetchWebhookEventTypesList: () => Promise<void>
 
+  @webhook.Action(WebhookActions.GENERATE_WEBHOOK_SECRET)
+  generateWebhookSecret: () => Promise<string>
+
   async refetchEndpointList(): Promise<void> {
     const { owner, provider } = this.$route.params
     await this.fetchWebhookEndpoints({

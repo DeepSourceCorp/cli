@@ -32,6 +32,8 @@ import disableEndpoint from '~/apollo/mutations/owner/webhooks/disable.gql'
 import deleteEndpoint from '~/apollo/mutations/owner/webhooks/delete.gql'
 import testEndpoint from '~/apollo/mutations/owner/webhooks/test.gql'
 import updateEndpoint from '~/apollo/mutations/owner/webhooks/update.gql'
+import generateWebhookSecret from '~/apollo/mutations/owner/webhooks/secret.gql'
+
 import { resolveNodes } from '~/utils/array'
 
 export interface WebhookState {
@@ -91,7 +93,8 @@ export enum WebhookActions {
   DELETE_ENDPOINT = 'deleteEndpoint',
   DISABLE_ENDPOINT = 'disableEndpoint',
   TEST_ENDPOINT = 'testEndpoint',
-  UPDATE_ENDPOINT = 'updateEndpoint'
+  UPDATE_ENDPOINT = 'updateEndpoint',
+  GENERATE_WEBHOOK_SECRET = 'generateWebhookSecret'
 }
 
 export type WebhookModuleActionContext = ActionContext<WebhookState, RootState>
@@ -163,6 +166,10 @@ interface WebhookModuleActions extends ActionTree<WebhookState, RootState> {
     injectee: WebhookModuleActionContext,
     args: UpdateWebhookInput
   ) => Promise<UpdateWebhookPayload>
+  [WebhookActions.GENERATE_WEBHOOK_SECRET]: (
+    this: Store<RootState>,
+    injectee: WebhookModuleActionContext
+  ) => Promise<string>
 }
 
 export const actions: WebhookModuleActions = {
@@ -230,6 +237,10 @@ export const actions: WebhookModuleActions = {
   async [WebhookActions.UPDATE_ENDPOINT](_, args) {
     const response = await this.$applyGraphqlMutation(updateEndpoint, args)
     return response.data.updateWebhook
+  },
+  async [WebhookActions.GENERATE_WEBHOOK_SECRET]() {
+    const response = await this.$applyGraphqlMutation(generateWebhookSecret, { input: {} })
+    return response.data.webhookSecret.secret
   }
 }
 
