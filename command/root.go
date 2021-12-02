@@ -19,7 +19,7 @@ Now ship good code directly from the command line.
 
 Login into DeepSource using the command : deepsource auth login`,
 		SilenceErrors: true,
-		SilenceUsage:  true,
+		SilenceUsage:  true
 	}
 
 	// Child Commands
