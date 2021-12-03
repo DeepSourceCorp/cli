@@ -33,6 +33,7 @@ import UpdateRepositorySettings from '~/apollo/mutations/repository/settings/upd
 import UpdatePermission from '~/apollo/mutations/repository/settings/updatePermission.gql'
 import RemoveCollaborator from '~/apollo/mutations/repository/settings/removeCollaborator.gql'
 import UpdateRepositoryWidgets from '~/apollo/mutations/repository/updateRepositoryWidgets.gql'
+import TriggerGSRRun from '~/apollo/mutations/repository/triggerGSRRun.gql'
 
 import {
   UpdateRepoMetricThresholdInput,
@@ -43,7 +44,8 @@ import {
   RemoveRepositoryCollaboratorInput,
   CommitConfigToVcsPayload,
   UpdateRepositoryWidgetsInput,
-  UpdateRepositoryWidgetsPayload
+  UpdateRepositoryWidgetsPayload,
+  ActivateGsrRepositoryInput
 } from '~/types/types'
 import { TransformerInterface } from '~/store/analyzer/list'
 import {
@@ -122,7 +124,8 @@ export enum RepositoryDetailActions {
   REMOVE_MEMBER = 'removeMember',
   FETCH_ADDABLE_MEMBERS = 'fetchAddableMembers',
   UPDATE_REPO_WIDGETS = 'udateRepositoryWidgets',
-  UPDATE_REPOSITORY_IN_STORE = 'updateRepositoryInStore'
+  UPDATE_REPOSITORY_IN_STORE = 'updateRepositoryInStore',
+  TRIGGER_GSR_ACTIVATION = 'triggerGSRActivation'
 }
 
 export enum RepositoryDetailMutations {
@@ -446,6 +449,11 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
     args: Repository
+  ) => void
+  [RepositoryDetailActions.TRIGGER_GSR_ACTIVATION]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: ActivateGsrRepositoryInput
   ) => void
 }
 
@@ -999,5 +1007,11 @@ export const actions: RepositoryDetailModuleActions = {
   },
   [RepositoryDetailActions.UPDATE_REPOSITORY_IN_STORE]({ commit }, repo) {
     commit(RepositoryDetailMutations.SET_REPOSITORY, repo)
+  },
+  async [RepositoryDetailActions.TRIGGER_GSR_ACTIVATION](_, args) {
+    const response = await this.$applyGraphqlMutation(TriggerGSRRun, {
+      input: args
+    })
+    return response.data.activateGsrRepository.ok
   }
 }

@@ -1,0 +1,5 @@
+mutation($ownerId: ID!) {
+  verifyGsrPermissions(input: { ownerId: $ownerId }) {
+    ok
+  }
+}

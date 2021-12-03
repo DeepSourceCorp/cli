@@ -12,7 +12,8 @@ import {
   RepositoryPermissionChoices,
   CommitConfigToVcsPayload,
   UpdateRepositoryWidgetsInput,
-  UpdateRepositoryWidgetsPayload
+  UpdateRepositoryWidgetsPayload,
+  ActivateGsrRepositoryInput
 } from '~/types/types'
 
 const repoStore = namespace('repository/detail')
@@ -251,6 +252,9 @@ export default class RepoDetailMixin extends Vue {
 
   @repoStore.Action(RepositoryDetailActions.UPDATE_REPOSITORY_IN_STORE)
   updateRepositoryInStore: (args: Repository) => void
+
+  @repoStore.Action(RepositoryDetailActions.TRIGGER_GSR_ACTIVATION)
+  triggerGSRActivation: (args: ActivateGsrRepositoryInput) => void
 
   get baseRouteParams(): { name: string; provider: string; owner: string } {
     const { provider, owner, repo } = this.$route.params

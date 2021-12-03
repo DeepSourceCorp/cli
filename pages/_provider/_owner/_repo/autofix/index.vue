@@ -113,7 +113,7 @@ import { AutofixRunListActions } from '~/store/autofixRun/list'
 import { AutofixRun, AutofixRunConnection, AutofixRunStatus } from '~/types/types'
 import { AutofixIssuesGraph } from '@/components/Graphs'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { resolveNodes } from '~/utils/array'
 
@@ -132,11 +132,13 @@ interface Trend {
     AutofixListItem,
     AutofixIssuesGraph
   },
+  middleware: ['validateProvider', 'featureGate', 'perm'],
   meta: {
     auth: {
       strict: true,
       RepoPerms: [RepoPerms.READ_REPO]
-    }
+    },
+    gateFeature: AppFeatures.AUTOFIX
   },
   layout: 'repository'
 })

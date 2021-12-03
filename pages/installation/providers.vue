@@ -78,20 +78,30 @@ export default class InstallationProvider extends mixins(ContextMixin, ActiveUse
     await Promise.all([
       this.fetchContext(),
       this.fetchAuthUrls(),
-      this.fetchActiveUserGitlabAccounts()
+      this.fetchActiveUserGitlabAccounts(),
+      this.fetchActiveUserGSRProjects()
     ])
   }
 
   get loginUrls(): Record<string, string> {
     return {
       ...this.context.installationUrls,
-      gitlab: this.hasGitlabAccounts ? '/accounts/gitlab/login' : this.authUrls.gitlab
+      gitlab: this.hasGitlabAccounts ? '/accounts/gitlab/login' : this.authUrls.gitlab,
+      gsr: this.hasGSRProjects ? '/accounts/gsr/projects' : this.authUrls.gsr
     }
   }
 
   get hasGitlabAccounts(): boolean {
     const gla = this.viewer.gitlabAccounts
     if (Array.isArray(gla) && gla.length) {
+      return true
+    }
+    return false
+  }
+
+  get hasGSRProjects(): boolean {
+    const gsrProjects = this.viewer.gsrProjects
+    if (Array.isArray(gsrProjects) && gsrProjects.length) {
       return true
     }
     return false

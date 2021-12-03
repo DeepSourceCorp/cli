@@ -88,7 +88,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, namespace, mixins } from 'nuxt-property-decorator'
+import { Component, namespace, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZButton, ZTag, ZDivider, ZCode } from '@deepsourcelabs/zeal'
 import { TransformHeader } from '@/components/Transform'
 
@@ -96,6 +96,7 @@ import { TransformHeader } from '@/components/Transform'
 import { TransformerRunActions } from '@/store/transformerRun/detail'
 import { TransformerRun } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { AppFeatures } from '~/types/permTypes'
 
 const transformDetailStore = namespace('transformerRun/detail')
 
@@ -107,6 +108,10 @@ const transformDetailStore = namespace('transformerRun/detail')
     ZDivider,
     ZCode,
     TransformHeader
+  },
+  middleware: ['validateProvider', 'featureGate'],
+  meta: {
+    gateFeature: AppFeatures.TRANSFORMS
   },
   layout: 'repository'
 })

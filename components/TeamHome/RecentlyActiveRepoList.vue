@@ -1,7 +1,7 @@
 <template>
   <list-section title="Recently active repositories">
     <template v-if="canActivateRepo" slot="controls">
-      <div class="text-right hidden md:block">
+      <div class="hidden text-right md:block">
         <z-button
           v-tooltip="'Activate new repository'"
           buttonType="ghost"
@@ -17,13 +17,13 @@
       <div
         v-for="idx in loaderCount"
         :key="idx"
-        class="h-12 w-full px-4 py-3 border-b border-ink-300 last:border-none flex space-x-3"
+        class="flex w-full h-12 px-4 py-3 space-x-3 border-b border-ink-300 last:border-none"
       >
-        <div class="h-full rounded-md bg-ink-300 animate-pulse w-5"></div>
-        <div class="h-full rounded-md bg-ink-300 animate-pulse w-1/4"></div>
-        <div class="h-full rounded-md bg-ink-300 animate-pulse w-1/6"></div>
+        <div class="w-5 h-full rounded-md bg-ink-300 animate-pulse"></div>
+        <div class="w-1/4 h-full rounded-md bg-ink-300 animate-pulse"></div>
+        <div class="w-1/6 h-full rounded-md bg-ink-300 animate-pulse"></div>
         <div class="flex-grow"></div>
-        <div class="h-full rounded-md bg-ink-300 animate-pulse w-1/5"></div>
+        <div class="w-1/5 h-full rounded-md bg-ink-300 animate-pulse"></div>
       </div>
     </template>
     <template
@@ -46,7 +46,7 @@
             </span>
             <span
               v-if="repo.availableAnalyzers && repo.availableAnalyzers.edges"
-              class="space-x-3 hidden xs:flex"
+              class="hidden space-x-3 xs:flex"
             >
               <template v-for="edge in repo.availableAnalyzers.edges">
                 <analyzer-logo v-if="edge && edge.node" :key="edge.node.name" v-bind="edge.node" />
@@ -68,7 +68,7 @@
     >
       <span v-if="canActivateRepo" slot="subtitle">
         No repositories activated, generate a new config or activate a repository directly if a
-        <code class="text-vanilla-200 font-medium">.deepsource.toml</code> already exists.
+        <code class="font-medium text-vanilla-200">.deepsource.toml</code> already exists.
       </span>
       <span v-else slot="subtitle">
         Please get in touch with the owner of your organization to activate analysis for a
@@ -124,7 +124,7 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
     this.$localStore.set(
       `${provider}-${owner}`,
       'recently-active-repo-count',
-      this.repoWithActiveAnalysisWithAnalyzers.length
+      this.repoWithActiveAnalysisWithAnalyzers?.length ?? 0
     )
     this.loading = false
   }

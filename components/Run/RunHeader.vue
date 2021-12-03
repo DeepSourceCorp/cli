@@ -1,6 +1,6 @@
 <template>
   <div>
-    <sub-nav active="runs"></sub-nav>
+    <sub-nav v-if="transformersAllowed" active="runs"></sub-nav>
     <!-- Back to Run List Page -->
     <div class="flex flex-col w-full px-4 py-6 space-y-2">
       <link-to-prev :link="routeToPrevious" title="All analysis runs"></link-to-prev>
@@ -54,6 +54,7 @@ import { SubNav } from '@/components/History'
 import LinkToPrev from '@/components/LinkToPrev.vue'
 import { GistCardDescription, GistCardTitle } from '@/components/Repository'
 import { Check, RunStatus } from '~/types/types'
+import { AppFeatures } from '~/types/permTypes'
 
 @Component({
   components: {
@@ -141,6 +142,10 @@ export default class RunHeader extends Vue {
 
   get isPending(): boolean {
     return this.status === RunStatus.Pend
+  }
+
+  get transformsAllowed(): boolean {
+    return this.$gateKeeper.provider(AppFeatures.TRANSFORMS)
   }
 
   getRoute(lang: string): string {

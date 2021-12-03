@@ -95,7 +95,7 @@ import { mixins, Component, Watch } from 'nuxt-property-decorator'
 import { ZInput, ZIcon, ZButton, ZPagination } from '@deepsourcelabs/zeal'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import { ConfigTemplate } from '~/types/types'
-import { TeamPerms } from '~/types/permTypes'
+import { AppFeatures, TeamPerms } from '~/types/permTypes'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 @Component({
@@ -105,21 +105,13 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
     ZButton,
     ZPagination
   },
-  middleware: [
-    'perm',
-    'teamOnly',
-    'validateProvider',
-    ({ route, error }) => {
-      if (!['gh', 'ghe'].includes(route.params.provider)) {
-        error({ statusCode: 404, message: 'This page is not real' })
-      }
-    }
-  ],
+  middleware: ['perm', 'teamOnly', 'validateProvider', 'featureGate'],
   meta: {
     auth: {
       strict: true,
       teamPerms: [TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE, TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE]
-    }
+    },
+    gateFeature: AppFeatures.AUTO_ONBOARD
   },
   layout: 'dashboard'
 })

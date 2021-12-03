@@ -123,10 +123,18 @@
             </div>
           </section>
         </transition>
-        <div class="fixed bottom-0 left-0 w-full md:static space-y-2">
+        <div class="fixed bottom-0 left-0 w-full space-y-2 md:static">
           <z-button
+            v-if="$route.params.provider === 'gsr'"
             class="w-full"
-            buttonType="primary"
+            label="Continue with analysis"
+            icon="zap"
+            @click="showGSRActivationModal = true"
+            :disabled="actionDisabled"
+          />
+          <z-button
+            v-else
+            class="w-full"
             icon="zap"
             label="Start analysis"
             loadingLabel="Triggering analysis"
@@ -137,6 +145,16 @@
         </div>
       </div>
     </div>
+    <portal to="modal">
+      <add-default-branch-modal
+        v-if="showGSRActivationModal"
+        @onClose="showGSRActivationModal = false"
+        :login="$route.params.login"
+        :repo-name="selectedRepoName"
+        :toml="toml"
+        :repo-id="selectedRepoName ? selectedRepo.id : ''"
+      />
+    </portal>
     <!-- Preview Component - Right section -->
     <div class="flex-row-reverse items-center hidden w-5/12 bg-ink-300 bg-opacity-40 xl:flex">
       <analyzer-preview
@@ -149,8 +167,8 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZStepper, ZStep, ZModal } from '@deepsourcelabs/zeal'
+import { Component, mixins } from 'nuxt-property-decorator'
+import { ZButton, ZIcon, ZStepper, ZStep, ZModal, ZInput } from '@deepsourcelabs/zeal'
 
 import {
   RepoSelector,
@@ -160,15 +178,14 @@ import {
 } from '@/components/Onboard'
 
 import { AdHocRunAnalyzer } from '~/store/repository/adHocRun'
-import { AnalyzerListActions, AnalyzerListGetters, AnalyzerInterface } from '~/store/analyzer/list'
+import { AnalyzerListActions, AnalyzerInterface } from '~/store/analyzer/list'
 
 // types
 import { RepoInterface } from '~/store/repository/list'
 import AdHocRunMixin from '~/mixins/adHocRunMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-
-const analyzerListStore = namespace('analyzer/list')
+import AnalyzerListMixin from '~/mixins/analyzerListMixin'
 
 @Component({
   components: {
@@ -176,6 +193,7 @@ const analyzerListStore = namespace('analyzer/list')
     ZStepper,
     ZStep,
     ZIcon,
+    ZInput,
     ZModal,
     RepoSelector,
     AnalyzerPreview,
@@ -189,14 +207,18 @@ const analyzerListStore = namespace('analyzer/list')
     }
   }
 })
-export default class ChooseRepo extends mixins(AdHocRunMixin, ActiveUserMixin, RepoDetailMixin) {
-  @analyzerListStore.Getter(AnalyzerListGetters.ANALYZERS)
-  analyzerList: Array<AnalyzerInterface>
-
+export default class ChooseRepo extends mixins(
+  AdHocRunMixin,
+  ActiveUserMixin,
+  RepoDetailMixin,
+  AnalyzerListMixin
+) {
   public isAnalyzer = false
   public selectedRepo: RepoInterface | null
   public selectedRepoName = ''
   public selectedAnalyzers: Array<AnalyzerInterface> = []
+  public showGSRActivationModal = false
+  public gsrDefaultBranch = ''
 
   async fetch(): Promise<void> {
     await this.$store.dispatch(`analyzer/list/${AnalyzerListActions.FETCH_ANALYZER_LIST}`)

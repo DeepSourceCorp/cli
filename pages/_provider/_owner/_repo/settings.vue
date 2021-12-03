@@ -30,7 +30,7 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import { ZTab } from '@deepsourcelabs/zeal'
 
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 interface TabLink {
@@ -38,6 +38,7 @@ interface TabLink {
   link: string | string[]
   perms?: RepoPerms[]
   forTeams?: boolean
+  gateFeature?: AppFeatures[]
 }
 
 @Component({
@@ -84,11 +85,16 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
         RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY
       ]
     },
+    {
+      label: 'Configuration',
+      link: ['settings', 'config']
+    },
     { label: 'Badges', link: ['settings', 'badges'] },
     {
       label: 'Autofix settings',
       link: ['settings', 'autofix'],
-      perms: [RepoPerms.INSTALL_AUTOFIX_APP, RepoPerms.CREATE_AUTOFIXES]
+      perms: [RepoPerms.INSTALL_AUTOFIX_APP, RepoPerms.CREATE_AUTOFIXES],
+      gateFeature: [AppFeatures.AUTOFIX]
     },
     { label: 'Ignore rules', link: ['settings', 'ignore-rules'] },
     {
@@ -123,9 +129,14 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
   }
 
   isNavLinkVisible(item: TabLink): boolean {
+    if (Array.isArray(item.gateFeature)) {
+      return this.$gateKeeper.provider(item.gateFeature)
+    }
+
     if (item.forTeams && !this.isTeamAccount) {
       return false
     }
+
     if (item.perms) {
       const allowedMap = item.perms.map((perm) => {
         return this.$gateKeeper.repo(perm, this.repoPerms.permission)

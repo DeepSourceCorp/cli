@@ -3,8 +3,12 @@
 // Usage: `this.$gateKeeper.team(TeamPerms.CHANGE_PLAN, 'ADMIN')`
 
 import { Inject, Context } from '@nuxt/types/app'
-import { TeamPerms, RepoPerms } from '~/types/permTypes'
-import { RepositoryCollaboratorPermission, TeamMemberRoleChoices } from '~/types/types'
+import { TeamPerms, RepoPerms, AppFeatures } from '~/types/permTypes'
+import {
+  RepositoryCollaboratorPermission,
+  TeamMemberRoleChoices,
+  VcsProviderChoices
+} from '~/types/types'
 
 declare interface GateKeeperInterface {
   team(perm: TeamPerms | TeamPerms[], role: TeamMemberRoleChoices, strict?: boolean): boolean
@@ -13,6 +17,7 @@ declare interface GateKeeperInterface {
     role: RepositoryCollaboratorPermission,
     strict?: boolean
   ): boolean
+  provider(feature: AppFeatures | AppFeatures[], provider?: VcsProviderChoices | string): boolean
 }
 
 declare module 'vue/types/vue' {
@@ -37,55 +42,146 @@ declare module 'vuex/types/index' {
 }
 
 const TEAM_PERMS_MAP = {
-  [TeamPerms.CHANGE_PLAN]: ['ADMIN'],
-  [TeamPerms.UPDATE_SEATS]: ['ADMIN'],
-  [TeamPerms.UPDATE_BILLING_DETAILS]: ['ADMIN'],
-  [TeamPerms.MANAGE_TEAM_MEMEBERS]: ['ADMIN'],
-  [TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD]: ['ADMIN'],
-  [TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR]: ['ADMIN'],
-  [TeamPerms.DELETE_TEAM_ACCOUNT]: ['ADMIN'],
-  [TeamPerms.ONBOARD_ACCOUNT]: ['ADMIN'],
-  [TeamPerms.SET_GRANUALAR_IGNORE_PERMISSION]: ['ADMIN'],
-  [TeamPerms.ACTIVATE_ANALYSIS]: ['ADMIN', 'MEMBER'],
-  [TeamPerms.SYNC_REPO_LIST]: ['ADMIN', 'MEMBER'],
-  [TeamPerms.VIEW_TEAM_HOME]: ['ADMIN', 'MEMBER', 'CONTRIBUTOR'],
-  [TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE]: ['ADMIN'],
-  [TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE]: ['ADMIN', 'MEMBER'],
-  [TeamPerms.AUTO_ONBOARD_REPOSITORIES]: ['ADMIN', 'MEMBER'],
-  [TeamPerms.MANAGE_WEBHOOKS]: ['ADMIN']
+  [TeamPerms.CHANGE_PLAN]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.UPDATE_SEATS]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.UPDATE_BILLING_DETAILS]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.MANAGE_TEAM_MEMEBERS]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.DELETE_TEAM_ACCOUNT]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.ONBOARD_ACCOUNT]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.SET_GRANUALAR_IGNORE_PERMISSION]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.ACTIVATE_ANALYSIS]: [TeamMemberRoleChoices.Admin, TeamMemberRoleChoices.Member],
+  [TeamPerms.SYNC_REPO_LIST]: [TeamMemberRoleChoices.Admin, TeamMemberRoleChoices.Member],
+  [TeamPerms.VIEW_TEAM_HOME]: [
+    TeamMemberRoleChoices.Admin,
+    TeamMemberRoleChoices.Member,
+    TeamMemberRoleChoices.Contributor
+  ],
+  [TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE]: [
+    TeamMemberRoleChoices.Admin,
+    TeamMemberRoleChoices.Member
+  ],
+  [TeamPerms.AUTO_ONBOARD_REPOSITORIES]: [
+    TeamMemberRoleChoices.Admin,
+    TeamMemberRoleChoices.Member
+  ],
+  [TeamPerms.MANAGE_WEBHOOKS]: [TeamMemberRoleChoices.Admin]
 }
 
 const REPO_PERMS_MAP = {
-  [RepoPerms.VIEW_BADGES]: ['ADMIN', 'WRITE', 'READ'],
-  [RepoPerms.VIEW_ISSUES]: ['ADMIN', 'WRITE', 'READ'],
-  [RepoPerms.VIEW_PAST_RUNS]: ['ADMIN', 'WRITE', 'READ'],
-  [RepoPerms.VIEW_METRICS]: ['ADMIN', 'WRITE', 'READ'],
-  [RepoPerms.VIEW_OVERVIEW_WIDGETS]: ['ADMIN', 'WRITE', 'READ'],
-  [RepoPerms.ALLOW_STAR]: ['ADMIN', 'WRITE', 'READ'],
-  [RepoPerms.CUSTOMIZE_OVERVIEW_WIDGETS]: ['ADMIN', 'WRITE'],
-  [RepoPerms.INSTALL_AUTOFIX_APP]: ['ADMIN', 'WRITE'],
-  [RepoPerms.CREATE_AUTOFIXES]: ['ADMIN', 'WRITE'],
-  [RepoPerms.VIEW_DSN]: ['ADMIN', 'WRITE'],
-  [RepoPerms.GENERATE_SSH_KEY_PAIR]: ['ADMIN', 'WRITE'],
-  [RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH]: ['ADMIN', 'WRITE'],
-  [RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT]: ['ADMIN', 'WRITE'],
-  [RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON]: ['ADMIN', 'WRITE'],
-  [RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY]: ['ADMIN', 'WRITE'],
-  [RepoPerms.ADD_REMOVE_MEMBERS]: ['ADMIN'],
-  [RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS]: ['ADMIN'],
-  [RepoPerms.IGNORE_ISSUES]: ['ADMIN'],
-  [RepoPerms.VIEW_AUDIT_LOGS]: ['ADMIN'],
-  [RepoPerms.READ_REPO]: ['ADMIN', 'WRITE', 'READ'],
-  [RepoPerms.ACTIVATE_REPOSITORY]: ['ADMIN', 'WRITE']
+  [RepoPerms.VIEW_BADGES]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write,
+    RepositoryCollaboratorPermission.Read
+  ],
+  [RepoPerms.VIEW_ISSUES]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write,
+    RepositoryCollaboratorPermission.Read
+  ],
+  [RepoPerms.VIEW_PAST_RUNS]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write,
+    RepositoryCollaboratorPermission.Read
+  ],
+  [RepoPerms.VIEW_METRICS]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write,
+    RepositoryCollaboratorPermission.Read
+  ],
+  [RepoPerms.VIEW_OVERVIEW_WIDGETS]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write,
+    RepositoryCollaboratorPermission.Read
+  ],
+  [RepoPerms.ALLOW_STAR]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write,
+    RepositoryCollaboratorPermission.Read
+  ],
+  [RepoPerms.CUSTOMIZE_OVERVIEW_WIDGETS]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.INSTALL_AUTOFIX_APP]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.CREATE_AUTOFIXES]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.VIEW_DSN]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.GENERATE_SSH_KEY_PAIR]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ],
+  [RepoPerms.ADD_REMOVE_MEMBERS]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.IGNORE_ISSUES]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.VIEW_AUDIT_LOGS]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.READ_REPO]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write,
+    RepositoryCollaboratorPermission.Read
+  ],
+  [RepoPerms.ACTIVATE_REPOSITORY]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ]
 }
 
-export default (context: Context, inject: Inject): void => {
+const FEATURES_PROVIDER_MAP = {
+  [AppFeatures.AUTOFIX]: [
+    VcsProviderChoices.Github,
+    VcsProviderChoices.GithubEnterprise,
+    VcsProviderChoices.Bitbucket,
+    VcsProviderChoices.Gitlab
+  ],
+  [AppFeatures.TRANSFORMS]: [
+    VcsProviderChoices.Github,
+    VcsProviderChoices.GithubEnterprise,
+    VcsProviderChoices.Bitbucket,
+    VcsProviderChoices.Gitlab
+  ],
+  [AppFeatures.WEBHOOKS]: [
+    VcsProviderChoices.Github,
+    VcsProviderChoices.GithubEnterprise,
+    VcsProviderChoices.Bitbucket,
+    VcsProviderChoices.Gitlab,
+    VcsProviderChoices.Gsr
+  ],
+  [AppFeatures.AUTO_ONBOARD]: [VcsProviderChoices.Github, VcsProviderChoices.GithubEnterprise],
+  [AppFeatures.SYNC_ACCESS_SETTINGS]: [
+    VcsProviderChoices.Github,
+    VcsProviderChoices.GithubEnterprise
+  ]
+}
+
+export default ({ $providerMetaMap, route }: Context, inject: Inject): void => {
   const gateKeeper: GateKeeperInterface = {
-    team(
-      perm: TeamPerms | TeamPerms[],
-      role: 'ADMIN' | 'MEMBER' | 'CONTRIBUTOR',
-      strict = false
-    ): boolean {
+    team(perm: TeamPerms | TeamPerms[], role: TeamMemberRoleChoices, strict = false): boolean {
       if (Array.isArray(perm)) {
         const allowedMap = perm.map((permItem) => {
           if (permItem in TEAM_PERMS_MAP) {
@@ -103,7 +199,11 @@ export default (context: Context, inject: Inject): void => {
 
       return TEAM_PERMS_MAP[perm].includes(role)
     },
-    repo(perm: RepoPerms | RepoPerms[], role: 'ADMIN' | 'WRITE' | 'READ', strict = false): boolean {
+    repo(
+      perm: RepoPerms | RepoPerms[],
+      role: RepositoryCollaboratorPermission,
+      strict = false
+    ): boolean {
       if (Array.isArray(perm)) {
         const allowedMap = perm.map((permItem) => {
           if (permItem in REPO_PERMS_MAP) {
@@ -120,6 +220,35 @@ export default (context: Context, inject: Inject): void => {
       }
 
       return REPO_PERMS_MAP[perm].includes(role)
+    },
+    provider(
+      feature: AppFeatures | AppFeatures[],
+      provider?: VcsProviderChoices | string
+    ): boolean {
+      let providerToTest: VcsProviderChoices
+
+      if (!provider && route.params.provider) {
+        provider = route.params.provider as string
+      }
+
+      if (provider && Object.keys($providerMetaMap).includes(provider)) {
+        providerToTest = $providerMetaMap[provider].value
+      } else {
+        return false
+      }
+
+      if (Array.isArray(feature)) {
+        const allowedMap = feature.map((feature) => {
+          if (feature in FEATURES_PROVIDER_MAP) {
+            return FEATURES_PROVIDER_MAP[feature].includes(providerToTest)
+          }
+          return true
+        })
+
+        return allowedMap.indexOf(true) > -1 ? true : false
+      }
+
+      return FEATURES_PROVIDER_MAP[feature].includes(providerToTest)
     }
   }
   inject('gateKeeper', gateKeeper)

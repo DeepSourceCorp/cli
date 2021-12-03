@@ -13,7 +13,9 @@
     ></analyzer-header>
     <!-- Autofix -->
     <div
-      v-if="autofixableIssues.length && !run.isForDefaultBranch && !run.isForCrossRepoPr"
+      v-if="
+        allowAutofix && autofixableIssues.length && !run.isForDefaultBranch && !run.isForCrossRepoPr
+      "
       class="flex items-center justify-between px-4 py-2 mb-4 text-sm bg-ink-300"
     >
       <span
@@ -139,6 +141,7 @@ import {
   Run,
   Analyzer
 } from '@/types/types'
+import { AppFeatures } from '~/types/permTypes'
 
 const runDetailStore = namespace('run/detail')
 
@@ -210,6 +213,10 @@ export default class AnalyzerRun extends Vue {
 
   get alertingMetrics(): Array<RepositoryMetricValue> {
     return this.metricsCaptured.filter((metric) => metric.isPassing === false)
+  }
+
+  get allowAutofix(): boolean {
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX)
   }
 
   get issueCount(): number {

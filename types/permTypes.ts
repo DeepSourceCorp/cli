@@ -40,3 +40,11 @@ export enum RepoPerms {
   READ_REPO = 'readRepository',
   ACTIVATE_REPOSITORY = 'activateRepository'
 }
+
+export enum AppFeatures {
+  AUTOFIX = 'autofix',
+  TRANSFORMS = 'transforms',
+  WEBHOOKS = 'webhooks',
+  AUTO_ONBOARD = 'autoOnboard',
+  SYNC_ACCESS_SETTINGS = 'syncAccessSettings'
+}

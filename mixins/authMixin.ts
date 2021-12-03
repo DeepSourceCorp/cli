@@ -33,7 +33,7 @@ export default class AuthMixin extends Vue {
     await this.fetchAuthUrls()
   }
 
-  mounted(): void  {
+  mounted(): void {
     const { next } = this.$route.query
     if (next) {
       const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
@@ -59,6 +59,7 @@ export default class AuthMixin extends Vue {
       gitlabEnabled,
       allowSocialAuth,
       bitbucketEnabled,
+      gsrEnabled,
       enableSaml
     } = this.$config
 
@@ -98,6 +99,15 @@ export default class AuthMixin extends Vue {
           icon: 'bitbucket',
           label: 'Bitbucket',
           bg: 'bg-bitbucket'
+        })
+      }
+
+      if (gsrEnabled) {
+        options.push({
+          provider: 'gsr',
+          icon: 'google-cloud',
+          label: 'Google Cloud Source',
+          bg: 'bg-ink-200'
         })
       }
     }

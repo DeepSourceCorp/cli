@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 flex flex-col space-y-6 max-w-2xl">
+  <div class="flex flex-col max-w-2xl p-4 space-y-6">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">Autofix settings</div>
     <!-- Description -->
@@ -28,7 +28,7 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import { Notice } from '@/components/Settings/index'
 import { ZButton } from '@deepsourcelabs/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 
 @Component({
   components: {
@@ -36,12 +36,13 @@ import { RepoPerms } from '~/types/permTypes'
     ZButton
   },
   layout: 'repository',
-  middleware: ['perm'],
+  middleware: ['perm', 'validateProvider', 'featureGate'],
   meta: {
     auth: {
       strict: true,
       repoPerms: [RepoPerms.INSTALL_AUTOFIX_APP, RepoPerms.CREATE_AUTOFIXES]
-    }
+    },
+    gateFeature: AppFeatures.AUTOFIX
   }
 })
 export default class SettingsAutofix extends mixins(RepoDetailMixin) {

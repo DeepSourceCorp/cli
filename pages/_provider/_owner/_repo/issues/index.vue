@@ -23,7 +23,10 @@
       />
       <div class="flex items-center justify-end w-auto space-x-2">
         <issue-sort v-model="queryParams.sort" />
-        <autofix-available v-if="hasRepoReadAccess" v-model="queryParams.autofixAvailable" />
+        <autofix-available
+          v-if="allowAutofix && hasRepoReadAccess"
+          v-model="queryParams.autofixAvailable"
+        />
         <issue-search v-model="queryParams.q" />
       </div>
     </div>
@@ -103,9 +106,9 @@
         v-for="issue in resolveIssueNodes(issueList)"
         v-bind="issue"
         :key="issue.id"
-        :showAutofixButton="hasRepoReadAccess"
-        :disableAutofixButton="!canCreateAutofix"
-        :issueLink="$generateRoute(['issue', issue.shortcode || '', 'occurrences'])"
+        :show-autofix-button="allowAutofix && hasRepoReadAccess"
+        :disable-autofix-button="!canCreateAutofix"
+        :issue-link="$generateRoute(['issue', issue.shortcode || '', 'occurrences'])"
         @autofix="openAutofixModal"
       ></issue-list-item>
       <z-pagination
@@ -152,7 +155,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import IssueListMixin from '~/mixins/issueListMixin'
 
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import { resolveNodes } from '~/utils/array'
 
@@ -340,6 +343,9 @@ export default class Issues extends mixins(
   }
 
   get canCreateAutofix(): boolean {
+    if (!this.allowAutofix) {
+      return false
+    }
     return this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)
   }
 

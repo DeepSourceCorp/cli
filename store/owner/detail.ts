@@ -11,7 +11,15 @@ import {
   UpdatePaymentActionChoice,
   UpdateDefaultPaymentSourcePayload,
   GetUpgradeCodeQualitySubscriptionPlanInfoPayload,
-  SubscriptionStatusChoice
+  SubscriptionStatusChoice,
+  VerifyGsrPermissionsInput,
+  VerifyGsrPermissionsPayload,
+  TriggerVerifyGsrsshInput,
+  TriggerVerifyGsrsshPayload,
+  VerifyGsrSetupInput,
+  VerifyGsrSetupPayload,
+  VerifyGsrWebhooksInput,
+  VerifyGsrWebhooksPayload
 } from '~/types/types'
 import { GraphqlError } from '~/types/apollo-graphql-types'
 
@@ -41,12 +49,18 @@ import UpdatePaymentSource from '~/apollo/mutations/owner/updatePaymentSource.gq
 import CancelPlan from '~/apollo/mutations/owner/cancelPlan.gql'
 import ResumePlan from '~/apollo/mutations/owner/resumePlan.gql'
 import GetUpgradePlanInfo from '~/apollo/mutations/owner/getUpgradePlanInfo.gql'
-import { GraphqlQueryResponse } from '~/types/apolloTypes'
 
 // Usage details
 import UsageDetailsGQLQuery from '~/apollo/queries/owner/usageDetails.gql'
 import MaxUsagePercentageGQLQuery from '~/apollo/queries/owner/maxUsagePercentage.gql'
 
+// GSR Verification
+import VerifyGsrPermissions from '~/apollo/mutations/owner/gsr/verifyGsrPermissions.gql'
+import VerifyGsrWebhooks from '~/apollo/mutations/owner/gsr/verifyGsrWebhooks.gql'
+import TriggerVerifyGsrSsh from '~/apollo/mutations/owner/gsr/triggerVerifyGsrSsh.gql'
+import VerifyGsrSetup from '~/apollo/mutations/owner/gsr/verifyGsrSetup.gql'
+
+import { GraphqlQueryResponse } from '~/types/apolloTypes'
 export interface Trend {
   labels: string[]
   values: number[]
@@ -180,7 +194,12 @@ export enum OwnerDetailActions {
   GET_UPGRADE_PLAN_INFO = 'getUpgradePlanInfo',
 
   FETCH_MAX_USAGE_PERCENTAGE = 'fetchmaxUsagePercentage',
-  FETCH_USAGE_DETAILS = 'fetchUsageDetails'
+  FETCH_USAGE_DETAILS = 'fetchUsageDetails',
+
+  VERIFY_GSR_PERMISSIONS = 'verifyGsrPermissions',
+  VERIFY_GSR_WEBHOOKS = 'verifyGsrWebhooks',
+  VERIFY_GSR_SSH = 'verifyGsrSsh',
+  VERIFY_GSR_SETUP = 'verifyGsrSetup'
 }
 
 interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
@@ -352,6 +371,30 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
     injectee: OwnerDetailModuleActionContext,
     args: { login: string; provider: string; refetch?: boolean }
   ) => Promise<void>
+
+  [OwnerDetailActions.VERIFY_GSR_PERMISSIONS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: VerifyGsrPermissionsInput
+  ) => Promise<VerifyGsrPermissionsPayload>
+
+  [OwnerDetailActions.VERIFY_GSR_SSH]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: TriggerVerifyGsrsshInput
+  ) => Promise<TriggerVerifyGsrsshPayload>
+
+  [OwnerDetailActions.VERIFY_GSR_WEBHOOKS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: VerifyGsrWebhooksInput
+  ) => Promise<VerifyGsrWebhooksPayload>
+
+  [OwnerDetailActions.VERIFY_GSR_SETUP]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: VerifyGsrSetupInput
+  ) => Promise<VerifyGsrSetupPayload>
 }
 
 export const actions: OwnerDetailModuleActions = {
@@ -730,6 +773,22 @@ export const actions: OwnerDetailModuleActions = {
       const err = e as GraphqlError
       commit(OwnerDetailMutations.SET_ERROR, err)
     }
+  },
+  async [OwnerDetailActions.VERIFY_GSR_PERMISSIONS](_, args) {
+    const response = await this.$applyGraphqlMutation(VerifyGsrPermissions, args, true)
+    return response.data.verifyGsrPermissions
+  },
+  async [OwnerDetailActions.VERIFY_GSR_WEBHOOKS](_, args) {
+    const response = await this.$applyGraphqlMutation(VerifyGsrWebhooks, args, true)
+    return response.data.verifyGsrWebhooks
+  },
+  async [OwnerDetailActions.VERIFY_GSR_SSH](_, args) {
+    const response = await this.$applyGraphqlMutation(TriggerVerifyGsrSsh, args, true)
+    return response.data.triggerVerifyGsrSsh
+  },
+  async [OwnerDetailActions.VERIFY_GSR_SETUP](_, args) {
+    const response = await this.$applyGraphqlMutation(VerifyGsrSetup, args, true)
+    return response.data.verifyGsrSetup
   }
 }
 

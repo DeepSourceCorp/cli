@@ -5,6 +5,8 @@ query($login: String!, $provider: VCSProviderChoices!) {
     avatar
     vcsInstallationId
     hasSubscribedToPlan
+    isGsrSshRegistered
+    gsrSetupPending
     autofixInstallationUrl
     isAutofixEnabled
     isAutoonboardAllowed

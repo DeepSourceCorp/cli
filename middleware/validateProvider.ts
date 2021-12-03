@@ -5,7 +5,8 @@ const validateRoute: Middleware = ({ route, $config, error }) => {
     ...($config.githubEnabled ? ['gh'] : []),
     ...($config.gitlabEnabled ? ['gl'] : []),
     ...($config.bitbucketEnabled ? ['bb'] : []),
-    ...($config.onPrem && $config.githubServerEnabled ? ['ghe'] : [])
+    ...($config.onPrem && $config.githubServerEnabled ? ['ghe'] : []),
+    ...($config.onPrem && $config.gsrEnabled ? ['gsr'] : [])
   ]
 
   if (!validRoutes.includes(route.params.provider)) {

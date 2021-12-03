@@ -161,6 +161,15 @@ declare module '*/gitlabInstallationLanding.gql' {
 }
     
 
+declare module '*/gsrInstallationLanding.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/confirmInvitation.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -324,6 +333,42 @@ declare module '*/getBillingInfo.gql' {
     
 
 declare module '*/getUpgradePlanInfo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/triggerVerifyGsrSsh.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/verifyGsrPermissions.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/verifyGsrSetup.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/verifyGsrWebhooks.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -531,6 +576,15 @@ declare module '*/toggleRepositoryActivation.gql' {
     
 
 declare module '*/triggerAdHocRun.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/triggerGSRRun.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
@@ -1274,6 +1328,15 @@ declare module '*/starredRepos.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ViewerStarredRepos: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/userGSRProjects.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
 
   export default defaultDocument;
 }

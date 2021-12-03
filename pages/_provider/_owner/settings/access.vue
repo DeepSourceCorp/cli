@@ -1,7 +1,7 @@
 <template>
   <div class="p-4 space-y-6">
     <h2 class="text-lg font-medium">Access control</h2>
-    <form-group label="Provider Permissions">
+    <form-group v-if="allowSyncAccessSettings" label="Provider Permissions">
       <toggle-input
         label="Automatically sync access settings from GitHub"
         description="Issues would be reported only for lines that have been added or modified across all the files affected."
@@ -41,7 +41,7 @@
         primaryActionIcon="alert-circle"
         @primaryAction="syncAccessSettings"
       >
-        <div class="mb-2 text-base leading-relaxed text-vanilla-100 flex items-center">
+        <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
           Confirm and sync
         </div>
         <p class="text-sm leading-relaxed text-vanilla-400">
@@ -62,7 +62,7 @@ import { ZButton, ZConfirm } from '@deepsourcelabs/zeal'
 import { CheckInput, FormGroup, RadioGroupInput, ToggleInput } from '~/components/Form'
 
 import { TeamBasePermissionSetDefaultRepositoryPermission, Maybe } from '~/types/types'
-import { TeamPerms } from '~/types/permTypes'
+import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
 @Component({
   components: {
@@ -93,6 +93,10 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
 
   private isFetching = false
   private showSyncModal = false
+
+  get allowSyncAccessSettings(): boolean {
+    return this.$gateKeeper.provider(AppFeatures.SYNC_ACCESS_SETTINGS)
+  }
 
   closeSyncModal() {
     this.showSyncModal = false

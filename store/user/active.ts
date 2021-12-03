@@ -6,6 +6,7 @@ import UpdateStarredRepos from '~/apollo/mutations/user/updateStarredRepo.gql'
 
 import ActiveUserDetailGQLQuery from '~/apollo/queries/user/active/detail.gql'
 import ActiveUserGitlabAccounts from '~/apollo/queries/user/active/userGitlabAccounts.gql'
+import ActiveUserGSRProjects from '~/apollo/queries/user/active/userGSRProjects.gql'
 import ActiveUserStarredRepos from '~/apollo/queries/user/active/starredRepos.gql'
 import ActiveUserRecommendedIssues from '~/apollo/queries/user/active/recommendedIssues.gql'
 
@@ -102,6 +103,7 @@ export enum ActiveUserActions {
   FETCH_VIEWER_INFO = 'fetchViewerInfo',
   FETCH_STARRED_REPOS = 'fetchStarredRepos',
   FETCH_GITLAB_ACCOUNTS = 'fetchGitlabAccounts',
+  FETCH_GSR_PROJECTS = 'fetchGSRProjects',
   FETCH_RECOMMENDED_ISSUES = 'fetchRecommendedIssues',
   UPDATE_STARRED_REPO = 'udpateStarredRepo',
   UPDATE_DEFAULT_CONTEXT = 'updateDefaultContext'
@@ -130,6 +132,10 @@ interface ActiveUserModuleActions extends ActionTree<ActiveUserState, RootState>
     }
   ) => Promise<void>
   [ActiveUserActions.FETCH_GITLAB_ACCOUNTS]: (
+    this: Store<RootState>,
+    injectee: ActiveUserActionContext
+  ) => Promise<void>
+  [ActiveUserActions.FETCH_GSR_PROJECTS]: (
     this: Store<RootState>,
     injectee: ActiveUserActionContext
   ) => Promise<void>
@@ -196,6 +202,10 @@ export const actions: ActiveUserModuleActions = {
       commit(ActiveUserMutations.SET_ERROR, e)
       commit(ActiveUserMutations.SET_LOADING, false)
     }
+  },
+  async [ActiveUserActions.FETCH_GSR_PROJECTS]({ commit }) {
+    const response = await this.$fetchGraphqlData(ActiveUserGSRProjects, {}, true)
+    commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
   },
   async [ActiveUserActions.UPDATE_STARRED_REPO]({ commit, dispatch }, { repoId, action }) {
     try {

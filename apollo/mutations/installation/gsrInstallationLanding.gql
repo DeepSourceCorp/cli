@@ -1,0 +1,6 @@
+mutation($input: GSRInstallationLandingInput!) {
+  gsrInstallationLanding(input: $input) {
+    ok
+    reauth
+  }
+}

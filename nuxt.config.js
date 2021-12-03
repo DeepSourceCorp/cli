@@ -70,6 +70,7 @@ export default {
     githubServerEnabled: toBool(process.env.ON_PREM)
       ? toBool(process.env.GHE_SERVER_ENABLED)
       : false,
+    gsrEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GSR_ENABLED) : false,
     enableSaml: toBool(process.env.ENABLE_SAML),
     emailEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.EMAIL_ENABLED) : true,
     allowSocialAuth: toBool(process.env.ON_PREM) ? toBool(process.env.ALLOW_SOCIAL_AUTH) : true,
@@ -249,6 +250,13 @@ export default {
         component: resolve(__dirname, 'pages/auth/-index.vue'),
         chunkName: 'pages/auth',
         meta: { provider: 'gitlab' }
+      })
+      routes.push({
+        name: 'gsr',
+        path: '/accounts/google/login/callback/bifrost',
+        component: resolve(__dirname, 'pages/auth/-index.vue'),
+        chunkName: 'pages/auth',
+        meta: { provider: 'google-oauth2' }
       })
     }
   },

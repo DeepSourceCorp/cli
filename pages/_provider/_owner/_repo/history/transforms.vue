@@ -54,7 +54,7 @@ import { TransformerRun, TransformerRunConnection } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { resolveNodes } from '~/utils/array'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 
 const transformRunListStore = namespace('transformerRun/list')
 
@@ -63,6 +63,10 @@ const transformRunListStore = namespace('transformerRun/list')
     TransformBranches,
     SubNav,
     ZButton
+  },
+  middleware: ['validateProvider', 'featureGate'],
+  meta: {
+    gateFeature: AppFeatures.TRANSFORMS
   },
   layout: 'repository'
 })

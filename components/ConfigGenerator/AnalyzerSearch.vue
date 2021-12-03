@@ -28,7 +28,17 @@
           v-for="analyzer in searchAnalyzers"
           :key="analyzer.name"
           @click="addAnalyzer(analyzer)"
-          class="flex items-center justify-between px-2 py-2 rounded-md cursor-pointer bg-ink-400 hover:bg-ink-200"
+          class="
+            flex
+            items-center
+            justify-between
+            px-2
+            py-2
+            rounded-md
+            cursor-pointer
+            bg-ink-400
+            hover:bg-ink-200
+          "
         >
           <span class="flex items-center space-x-2">
             <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
@@ -58,13 +68,12 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop, namespace } from 'nuxt-property-decorator'
+import { Component, Vue, Prop, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
 import Analyzer from './Analyzer.vue'
 
-import { AnalyzerListActions, AnalyzerListGetters, AnalyzerInterface } from '~/store/analyzer/list'
-
-const analyzerListStore = namespace('analyzer/list')
+import { AnalyzerInterface } from '~/store/analyzer/list'
+import AnalyzerListMixin from '~/mixins/analyzerListMixin'
 
 @Component({
   components: {
@@ -75,7 +84,7 @@ const analyzerListStore = namespace('analyzer/list')
     Analyzer
   }
 })
-export default class AnalyzerSearch extends Vue {
+export default class AnalyzerSearch extends mixins(AnalyzerListMixin) {
   @Prop({ default: () => [] })
   selectedAnalyzers: string[] = []
 
@@ -93,12 +102,6 @@ export default class AnalyzerSearch extends Vue {
 
   @Prop({ default: false })
   isProcessing: boolean
-
-  @analyzerListStore.Getter(AnalyzerListGetters.ANALYZERS)
-  analyzerList: AnalyzerInterface[]
-
-  @analyzerListStore.Action(AnalyzerListActions.FETCH_ANALYZER_LIST)
-  fetchAnalyzers: () => Promise<void>
 
   private searchCandidate = ''
   private showAnalyzerList = false

@@ -1,0 +1,11 @@
+query {
+  viewer {
+    id
+    gsrProjects {
+      login
+      name
+      isSetupPending
+      hasInstalled
+    }
+  }
+}

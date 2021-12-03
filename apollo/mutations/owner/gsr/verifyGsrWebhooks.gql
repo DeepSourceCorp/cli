@@ -1,0 +1,5 @@
+mutation($ownerId: ID!) {
+  verifyGsrWebhooks(input: { ownerId: $ownerId }) {
+    ok
+  }
+}

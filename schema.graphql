@@ -32,6 +32,18 @@ enum ActionChoice {
   REMOVE
 }
 
+input ActivateGSRRepositoryInput {
+  config: String!
+  defaultBranchName: String!
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type ActivateGSRRepositoryPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input AddAnalyzerFeedbackInput {
   feedback: String!
   analyzerShortcode: String!
@@ -840,6 +852,24 @@ type FeatureInfo {
   enabled: Boolean
 }
 
+input GSRInstallationLandingInput {
+  login: String!
+  clientMutationId: String
+}
+
+type GSRInstallationLandingPayload {
+  ok: Boolean
+  reauth: Boolean
+  clientMutationId: String
+}
+
+type GSRProject {
+  login: String
+  name: String
+  hasInstalled: Boolean
+  isSetupPending: Boolean
+}
+
 input GenerateKeyPairForOwnerInput {
   ownerId: ID!
   clientMutationId: String
@@ -1175,10 +1205,12 @@ type Mutation {
   updateTechnologyPreference(input: UpdateTechnologyPreferenceInput!): UpdateTechnologyPreferencePayload
   updateBookmarkedIssue(input: UpdateBookmarkedIssueInput!): UpdateBookmarkedIssuePayload
   triggerAdhocRun(input: TriggerAdHocRunInput!): TriggerAdHocRunPayload
+  activateGsrRepository(input: ActivateGSRRepositoryInput!): ActivateGSRRepositoryPayload
   installation(input: GithubInstallationLandingInput!): GithubInstallationLandingPayload
   gheInstallationLanding(input: GithubEnterpriseInstallationLandingInput!): GithubEnterpriseInstallationLandingPayload
   bitbucketInstallationLanding(input: BitbucketInstallationLandingInput!): BitbucketInstallationLandingPayload
   gitlabInstallationLanding(input: GitlabInstallationLandingInput!): GitlabInstallationLandingPayload
+  gsrInstallationLanding(input: GSRInstallationLandingInput!): GSRInstallationLandingPayload
   updateStarredRepository(input: UpdateStarredRepositoryInput!): UpdateStarredRepositoryPayload
   updateWatchedRepository(input: UpdateWatchedRepositoryInput!): UpdateWatchedRepositoryPayload
   confirmInvitation(input: ConfirmInvitationInput!): ConfirmInvitationPayload
@@ -1199,6 +1231,10 @@ type Mutation {
   deleteAccessToken(input: DeleteAccessTokenInput!): DeleteAccessTokenPayload
   deleteAllAccessTokens(input: DeleteAllAccessTokensInput!): DeleteAllAccessTokensPayload
   webhookSecret(input: WebhookSecretInput!): WebhookSecretPayload
+  verifyGsrPermissions(input: VerifyGSRPermissionsInput!): VerifyGSRPermissionsPayload
+  verifyGsrWebhooks(input: VerifyGSRWebhooksInput!): VerifyGSRWebhooksPayload
+  triggerVerifyGsrSsh(input: TriggerVerifyGSRSSHInput!): TriggerVerifyGSRSSHPayload
+  verifyGsrSetup(input: VerifyGSRSetupInput!): VerifyGSRSetupPayload
 }
 
 enum NextActionChoice {
@@ -1227,6 +1263,7 @@ type Owner implements MaskPrimaryKeyNode {
   customerId: String
   primaryUser: User
   features: GenericScalar
+  gsrSetupPending: Boolean!
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   team: Team
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
@@ -1267,6 +1304,7 @@ type Owner implements MaskPrimaryKeyNode {
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): AccessTokenConnection
   maxUsagePercentage: Float
   featureUsage: GenericScalar
+  isGsrSshRegistered: Boolean
 }
 
 type OwnerConnection {
@@ -1301,6 +1339,7 @@ enum OwnerVcsProvider {
   GL
   BB
   GHE
+  GSR
 }
 
 type PageInfo {
@@ -1867,6 +1906,7 @@ type Team implements MaskPrimaryKeyNode {
   billingAddress: String
   customerId: String
   primaryUser: User
+  gsrSetupPending: Boolean!
   ownerPtr: Owner!
   name: String!
   members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
@@ -2202,6 +2242,16 @@ type TriggerAnalysisForRepositoryPayload {
   clientMutationId: String
 }
 
+input TriggerVerifyGSRSSHInput {
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type TriggerVerifyGSRSSHPayload {
+  status: String
+  clientMutationId: String
+}
+
 scalar UUID
 
 input UpdateAccessControlSettingsInput {
@@ -2480,6 +2530,7 @@ type User implements MaskPrimaryKeyNode {
   bookmarkedIssueCount: Int
   recommendedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
   gitlabAccounts: [GenericScalar]
+  gsrProjects: [GSRProject]
   isAsgardian: Boolean
   intercomUserHash: String
   missiveUserHash: String
@@ -2522,6 +2573,7 @@ enum VCSProviderChoices {
   GITHUB_ENTERPRISE
   BITBUCKET
   GITLAB
+  GSR
 }
 
 type Verify {
@@ -2535,6 +2587,36 @@ input VerifyDeviceInput {
 }
 
 type VerifyDevicePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input VerifyGSRPermissionsInput {
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type VerifyGSRPermissionsPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input VerifyGSRSetupInput {
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type VerifyGSRSetupPayload {
+  ok: Boolean!
+  clientMutationId: String
+}
+
+input VerifyGSRWebhooksInput {
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type VerifyGSRWebhooksPayload {
   ok: Boolean
   clientMutationId: String
 }

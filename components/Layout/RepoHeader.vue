@@ -151,7 +151,7 @@ import { ZLabel, ZButton, ZTab, ZTag, ZIcon } from '@deepsourcelabs/zeal'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { RepoPerms, TeamPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms, TeamPerms } from '~/types/permTypes'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 interface TabLink {
@@ -162,6 +162,7 @@ interface TabLink {
   matchName?: string[]
   perms?: RepoPerms[]
   pattern?: RegExp
+  gateFeature?: AppFeatures[]
 }
 
 const navItems: TabLink[] = [
@@ -182,7 +183,8 @@ const navItems: TabLink[] = [
     link: 'autofix',
     pattern: new RegExp(/^provider-owner-repo-autofix*/),
     loginRequired: true,
-    perms: [RepoPerms.READ_REPO]
+    perms: [RepoPerms.READ_REPO],
+    gateFeature: [AppFeatures.AUTOFIX]
   },
   {
     icon: 'bar-chart',
@@ -278,6 +280,9 @@ export default class RepoHeader extends mixins(
 
   get repoVCSIcon(): string {
     const provider = this.repository.vcsProvider.toLowerCase()
+    if (provider === 'gsr') {
+      return 'google-cloud'
+    }
     return ['github_enterprise', 'github-enterprise'].includes(provider) ? 'github' : provider
   }
 
@@ -327,11 +332,16 @@ export default class RepoHeader extends mixins(
   }
 
   isNavLinkVisible(item: TabLink): boolean {
+    if (Array.isArray(item.gateFeature)) {
+      return this.$gateKeeper.provider(item.gateFeature)
+    }
+
     if (item.loginRequired) {
       return item.perms && this.loggedIn
         ? this.$gateKeeper.repo(item.perms, this.repoPerms.permission)
         : this.loggedIn
     }
+
     return true
   }
 }

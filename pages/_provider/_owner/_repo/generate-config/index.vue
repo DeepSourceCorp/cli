@@ -23,7 +23,7 @@
           border-ink-200
           text-vanilla-400
         "
-        v-if="!repository.isAutofixEnabled"
+        v-if="allowAutofix && !repository.isAutofixEnabled"
       >
         <span
           class="w-3.5 h-3.5 flex items-center justify-center rounded-full bg-honey bg-opacity-50"
@@ -41,7 +41,7 @@
         >
       </div>
       <install-autofix-modal
-        v-if="showInstallAutofixAppModal"
+        v-if="allowAutofix && showInstallAutofixAppModal"
         @close="showInstallAutofixAppModal = false"
       />
     </div>
@@ -80,6 +80,8 @@
           <template slot="title">
             <div
               class="
+                flex
+                items-center
                 mt-1
                 text-xs
                 font-medium
@@ -87,8 +89,6 @@
                 tracking-wider
                 uppercase
                 text-vanilla-400
-                flex
-                items-center
               "
             >
               Patterns
@@ -124,6 +124,7 @@
           @activateRepo="activateRepo"
           @toggleNextSteps="showNextStepsModal"
           @commitConfig="commitConfig"
+          @commitGSR="handleCommitGSR"
         >
           <template slot="message">
             You'll be adding a
@@ -135,6 +136,15 @@
         </toml-box>
       </div>
       <portal to="modal">
+        <add-default-branch-modal
+          v-if="showAddDefaultBranchModal"
+          @onClose="showAddDefaultBranchModal = false"
+          :login="$route.params.owner"
+          :repo-name="repository.name"
+          :toml="toml"
+          :repo-id="repository.id"
+          @onActivate="showSuccessToast"
+        />
         <next-steps-modal
           v-if="showNextSteps"
           @close="showNextSteps = false"
@@ -166,14 +176,13 @@ import { toTitleCase } from '@/utils/string'
 
 // Store
 import { TransformerInterface } from '~/store/analyzer/list'
-import { AnalyzerListActions } from '~/store/analyzer/list'
 import { DirectoryGetters } from '~/store/directory/directory'
 import { RepoConfigInterface, RepoConfigAnalyzerMeta } from '~/store/repository/detail'
 
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import { Analyzer, TransformerTool } from '~/types/types'
+import AnalyzerListMixin from '~/mixins/analyzerListMixin'
 
-const analyzerListStore = namespace('analyzer/list')
 const directoryStore = namespace('directory/directory')
 
 /**
@@ -219,22 +228,14 @@ export default class GenerateConfig extends mixins(
   TomlGeneratorMixin,
   RepoDetailMixin,
   RoleAccessMixin,
-  RepoListMixin
+  RepoListMixin,
+  AnalyzerListMixin
 ) {
   @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
-  analyzerList: Analyzer[]
+  directoryAnalyzerList: Analyzer[]
 
   @directoryStore.Getter(DirectoryGetters.DIRECTORY_TRANSFORMERS)
   transformerList: TransformerTool[]
-
-  @analyzerListStore.Action(AnalyzerListActions.CHECK_ANALYZER_EXISTS)
-  checkAnalyzerExists: (arg?: { shortcode: string }) => Promise<boolean>
-
-  @analyzerListStore.Action(AnalyzerListActions.CHECK_TRANSFORMER_EXISTS)
-  checkTransformerExists: (arg?: {
-    shortcode: string
-    analyzerShortcode: string
-  }) => Promise<boolean>
 
   public userConfig: RepoConfigInterface = {
     version: 1,
@@ -245,6 +246,7 @@ export default class GenerateConfig extends mixins(
   }
 
   public showInstallAutofixAppModal = false
+  public showAddDefaultBranchModal = false
   public showNextSteps = false
   public isProcessing = false
 
@@ -262,10 +264,12 @@ export default class GenerateConfig extends mixins(
   }
 
   async fetch(): Promise<void> {
-    await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
-    await this.fetchIsCommitPossible(this.baseRouteParams)
-    await this.fetchRepoDetails(this.baseRouteParams)
-    await this.fetchRepoPerms(this.baseRouteParams)
+    Promise.all([
+      this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true }),
+      this.fetchIsCommitPossible(this.baseRouteParams),
+      this.fetchRepoDetails(this.baseRouteParams),
+      this.fetchRepoPerms(this.baseRouteParams)
+    ])
     // create a deep copy, this is safe enough for now
     // deep copy to avoid mutating the state directly
     this.userConfig = Object.assign(
@@ -276,7 +280,7 @@ export default class GenerateConfig extends mixins(
     const presetAnalyzer = this.$route.query['preset-analyzer'] as string
     if (typeof presetAnalyzer === 'string' && presetAnalyzer) {
       this.isProcessing = true
-      const analyzerInStore = this.analyzerList.find(
+      const analyzerInStore = this.directoryAnalyzerList.find(
         (analyzer: Analyzer) => analyzer.shortcode === presetAnalyzer
       )
       let analyzerExists = false
@@ -331,6 +335,53 @@ export default class GenerateConfig extends mixins(
       isActivated: true
     })
     await this.routeToRepoHome()
+  }
+
+  showSuccessToast(): void {
+    this.$toast.success(
+      `Successfully activated ${this.repository.name}, the first run may take a while to finish.`
+    )
+  }
+
+  async handleCommitGSR(): Promise<void> {
+    const selector = this.$refs['analyzer-selector'] as AnalyzerSelector
+    const isConfigValid = selector.validateConfig()
+
+    if (!isConfigValid) {
+      this.$toast.danger(
+        "There's something wrong with the repository config, please fill all the necessary details"
+      )
+    }
+    if (this.repository.defaultBranchName) {
+      this.commitGSRConfig()
+    } else {
+      this.showAddDefaultBranchModal = true
+    }
+  }
+
+  async commitGSRConfig() {
+    try {
+      await this.triggerGSRActivation({
+        config: this.toml,
+        defaultBranchName: this.repository.defaultBranchName as string,
+        repositoryId: this.repository.id as string
+      })
+
+      await this.fetchBasicRepoDetails({
+        ...this.baseRouteParams,
+        refetch: true
+      })
+
+      setTimeout(() => {
+        this.$router.push(this.$generateRoute([]))
+      }, 500)
+
+      this.showSuccessToast()
+    } catch {
+      this.$toast.danger(
+        'Something went wrong while creating the configuration for this repository, contact support.'
+      )
+    }
   }
 
   async commitConfig(createPullRequest = false): Promise<void> {
@@ -407,6 +458,9 @@ export default class GenerateConfig extends mixins(
   }
 
   get actionDisabled(): boolean {
+    if (this.$config.onPrem && this.$config.gsrEnabled && this.$route.params.provider === 'gsr') {
+      return this.userConfig.analyzers.length ? false : true
+    }
     if (this.repository.isActivated || this.repository.canBeActivated) {
       return this.userConfig.analyzers.length ? false : true
     }

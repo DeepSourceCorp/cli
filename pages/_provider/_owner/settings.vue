@@ -45,7 +45,7 @@ import { ZTab, ZTag } from '@deepsourcelabs/zeal'
 import TeamDetailMixin from '~/mixins/teamDetailMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
-import { TeamPerms } from '~/types/permTypes'
+import { AppFeatures, TeamPerms } from '~/types/permTypes'
 import { TeamMemberRoleChoices } from '~/types/types'
 
 @Component({
@@ -160,7 +160,7 @@ export default class TeamSettings extends mixins(
 
   get autoOnboardAvailable(): boolean {
     return (
-      ['gh', 'ghe'].includes(this.activeProvider) &&
+      this.$gateKeeper.provider(AppFeatures.AUTO_ONBOARD) &&
       this.activeDashboardContext.type === 'team' &&
       this.$gateKeeper.team(TeamPerms.AUTO_ONBOARD_REPOSITORIES, this.teamPerms.permission)
     )

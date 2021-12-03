@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="toml-box hide-scroll overflow-x-scroll text-sm rounded-md bg-ink-300">
-      <div class="flex space-x-2 sticky top-0 left-0 bg-ink-200 items-start p-3">
+    <div class="overflow-x-scroll text-sm rounded-md toml-box hide-scroll bg-ink-300">
+      <div class="sticky top-0 left-0 flex items-start p-3 space-x-2 bg-ink-200">
         <p v-if="$slots.message" class="text-vanilla-400">
           <slot name="message"></slot>
         </p>
@@ -13,12 +13,16 @@
             delay: { show: 700, hide: 100 },
             classes: 'shadow-lg'
           }"
-          class="cursor-pointer p-1 hover:bg-ink-100 rounded-md"
+          class="p-1 rounded-md cursor-pointer hover:bg-ink-100"
         >
           <z-icon
             :icon="copyIcon"
             :color="copyIconColor"
-            class="cursor-pointer motion-reduce:transition-none motion-reduce:transform-none duration-75"
+            class="
+              duration-75
+              cursor-pointer
+              motion-reduce:transition-none motion-reduce:transform-none
+            "
           ></z-icon>
         </button>
       </div>
@@ -26,12 +30,24 @@
         <highlightjs language="toml" :code="toml" />
       </div>
     </div>
-    <template v-if="canBeActivated || isActivated">
+    <template v-if="$route.params.provider === 'gsr'">
+      <z-button
+        @click="commitGSRConfigToVCS"
+        buttonType="primary"
+        class="w-full"
+        icon="zap"
+        :disabled="actionDisabled"
+      >
+        Add configuration and start analysis
+      </z-button>
+    </template>
+    <template v-else-if="canBeActivated || isActivated">
       <z-button
         v-if="isCommitPossible"
         @click="commitConfigToVCS(false)"
         buttonType="primary"
         class="w-full"
+        icon="zap"
         :disabled="actionDisabled"
       >
         Add configuration and start analysis
@@ -40,6 +56,7 @@
         v-else-if="isAutofixEnabled"
         buttonType="primary"
         class="w-full"
+        icon="git-pull-request"
         :disabled="actionDisabled"
         @click="commitConfigToVCS(true)"
       >
@@ -49,6 +66,7 @@
         v-else
         buttonType="primary"
         class="w-full"
+        icon="arrow-up-right"
         :disabled="actionDisabled"
         @click="toggleNextSteps()"
       >
@@ -67,7 +85,7 @@
           Upgrade to Activate this Repo
         </z-button>
       </nuxt-link>
-      <p class="text-vanilla-400 text-sm text-center">
+      <p class="text-sm text-center text-vanilla-400">
         You have reached the limit for the number of private repositories you can activate on this
         account, please upgrade to start analysis on this repository.
       </p>
@@ -76,7 +94,7 @@
       <z-button buttonType="secondary" class="w-full" :disabled="true">
         Unavailable in current plan
       </z-button>
-      <p class="text-vanilla-400 text-sm text-center">
+      <p class="text-sm text-center text-vanilla-400">
         You have reached the limit for the number of private repositories you can activate on this
         account, please upgrade to start analysis on this repository.
       </p>
@@ -128,6 +146,10 @@ export default class TomlBox extends Vue {
 
   commitConfigToVCS(createPullRequest = false): void {
     this.$emit('commitConfig', createPullRequest)
+  }
+
+  commitGSRConfigToVCS(): void {
+    this.$emit('commitGSR')
   }
 
   copyToml(): void {

@@ -2,7 +2,7 @@
   <div class="text-base font-normal rounded-sm bg-ink-300">
     <div class="flex items-center justify-between p-4">
       <div
-        class="flex items-center space-x-2 font-bold text-vanilla-100 select-none"
+        class="flex items-center space-x-2 font-bold select-none text-vanilla-100"
         @click="isCollapsed = !isCollapsed"
         :class="{
           'cursor-pointer': configItems.length > 0 || showTransformers
@@ -16,8 +16,8 @@
         />
         <span>{{ label }}</span>
         <z-icon
-          v-if="configItems.length > 0 || showTransformers"
-          class="transform duration-150"
+          v-if="collapsible && (configItems.length > 0 || showTransformers)"
+          class="duration-150 transform"
           :class="{
             'rotate-180': isCollapsed
           }"
@@ -28,7 +28,7 @@
         @click="onClose"
         v-if="!readOnly"
         v-tooltip="{ content: 'Remove Analyzer', delay: { show: 700, hide: 100 } }"
-        class="cursor-pointer p-1 hover:bg-cherry-600 hover:bg-opacity-20 rounded-md"
+        class="p-1 rounded-md cursor-pointer hover:bg-cherry-600 hover:bg-opacity-20"
       >
         <z-icon icon="trash-2" color="cherry" size="small"></z-icon>
       </button>
@@ -73,6 +73,7 @@
             </template>
             <template v-else>
               <z-input
+                class="font-mono"
                 :disabled="forTemplate && hasTemplate(config)"
                 :readOnly="readOnly && !(forTemplate && hasTemplate(config))"
                 v-tooltip="forTemplate ? 'This value will be added during runtime' : ''"
@@ -113,6 +114,7 @@
             </div>
             <div v-else>
               <z-input
+                class="font-mono"
                 :value="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
                 :disabled="forTemplate && hasTemplate(config)"
                 :readOnly="readOnly && !(forTemplate && hasTemplate(config))"
@@ -128,6 +130,7 @@
           </template>
           <template v-else-if="config.type == 'integer'">
             <z-input
+              class="font-mono"
               :disabled="forTemplate && hasTemplate(config)"
               :readOnly="readOnly && !(forTemplate && hasTemplate(config))"
               v-tooltip="
@@ -189,6 +192,7 @@ import {
   TransformerInterface,
   AnalyzerMetaProperitiesInterface
 } from '~/store/analyzer/list'
+import { AppFeatures } from '~/types/permTypes'
 
 @Component({
   components: {
@@ -238,6 +242,9 @@ export default class Analyzer extends Vue {
   @Prop({ default: false })
   readOnly: Boolean
 
+  @Prop({ default: true })
+  collapsible: Boolean
+
   public configItems: Array<AnalyzerMetaProperitiesInterface> = []
   public transformerItems: Array<TransformerInterface> = []
   public invalidFields: Array<string> = []
@@ -268,9 +275,14 @@ export default class Analyzer extends Vue {
   }
 
   get showTransformers(): boolean {
+    if (!this.$gateKeeper.provider(AppFeatures.TRANSFORMS)) {
+      return false
+    }
+
     if (this.forTemplate) {
       return this.availableTransformers.length > 0
     }
+
     return Boolean(this.repository.isAutofixEnabled && this.availableTransformers.length > 0)
   }
 

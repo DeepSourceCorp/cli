@@ -1,7 +1,7 @@
 <template>
   <div class="pb-12">
-    <sub-nav active="runs"></sub-nav>
-    <div class="grid grid-cols-1 gap-y-4 p-4">
+    <sub-nav v-if="transformsAllowed" active="runs"></sub-nav>
+    <div class="grid grid-cols-1 p-4 gap-y-4">
       <run-branches
         v-if="defaultBranchRun"
         :key="defaultBranchRun.branchName"
@@ -21,7 +21,7 @@
           </template>
         </template>
         <template v-else>
-          <div class="flex items-center justify-center min-h-102 text-center">
+          <div class="flex items-center justify-center text-center min-h-102">
             <div class="max-w-lg">
               <span class="text-2xl font-semibold text-vanilla-300">No Runs to Show</span>
               <p class="text-vanilla-400">
@@ -33,12 +33,12 @@
         </template>
       </template>
       <template v-else>
-        <div v-for="key in pageSize" :key="key" class="space-y-2 animate-pulse -mx-1">
+        <div v-for="key in pageSize" :key="key" class="-mx-1 space-y-2 animate-pulse">
           <div class="flex space-x-2">
-            <div class="h-6 w-24 bg-ink-200 rounded-md"></div>
-            <div class="h-6 w-40 bg-ink-200 rounded-md"></div>
+            <div class="w-24 h-6 rounded-md bg-ink-200"></div>
+            <div class="w-40 h-6 rounded-md bg-ink-200"></div>
           </div>
-          <div class="h-20 w-full bg-ink-200 rounded-md"></div>
+          <div class="w-full h-20 rounded-md bg-ink-200"></div>
         </div>
       </template>
     </div>
@@ -64,6 +64,7 @@ import { RunListActions } from '@/store/run/list'
 import { Maybe, Run, RunConnection, RunEdge } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
+import { AppFeatures } from '~/types/permTypes'
 
 const runListStore = namespace('run/list')
 
@@ -127,18 +128,9 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
     }
   }
 
-  get baseParams(): { name: string; provider: string; owner: string } {
-    const { provider, owner, repo } = this.$route.params
-    return {
-      name: repo,
-      provider,
-      owner
-    }
-  }
-
   async fetch(): Promise<void> {
     this.fetching = true
-    await this.fetchRepoDetails(this.baseParams)
+    await this.fetchRepoDetails(this.baseRouteParams)
     this.mainBranchFetching = true
     await this.fetchMainBranch()
     this.mainBranchFetching = false
@@ -148,7 +140,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
 
   async fetchRuns(refetch = false): Promise<void> {
     await this.$store.dispatch(`run/list/${RunListActions.FETCH_GROUPED_RUN_LIST}`, {
-      ...this.baseParams,
+      ...this.baseRouteParams,
       currentPageNumber: this.currentPage,
       limit: this.pageSize,
       refetch
@@ -171,7 +163,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   async fetchMainBranch(refetch = false): Promise<void> {
     if (this.repository.defaultBranchName) {
       await this.fetchBranchRuns({
-        ...this.baseParams,
+        ...this.baseRouteParams,
         branchName: this.repository.defaultBranchName,
         limit: 1,
         refetch: refetch
@@ -196,6 +188,10 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
     }
 
     return 0
+  }
+
+  get transformsAllowed(): boolean {
+    return this.$gateKeeper.provider(AppFeatures.TRANSFORMS)
   }
 
   head(): Record<string, string> {

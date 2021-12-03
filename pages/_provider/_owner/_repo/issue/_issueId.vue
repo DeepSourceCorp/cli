@@ -12,6 +12,7 @@
         :issue="issue"
         :repository="repository"
         :shortcode="$route.params.issueId"
+        :isAutofixEnabled="isAutofixEnabled"
         :canCreateAutofix="canCreateAutofix"
         @ignoreIssues="ignoreIssues"
       ></issue-actions>
@@ -77,7 +78,7 @@ import IssueDetailMixin from '@/mixins/issueDetailMixin'
 import RepoDetailMixin from '@/mixins/repoDetailMixin'
 
 import { Context } from '@nuxt/types'
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 @Component({
@@ -179,6 +180,10 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
 
   get canCreateAutofix(): boolean {
     return this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)
+  }
+
+  get isAutofixEnabled(): boolean {
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX)
   }
 }
 </script>

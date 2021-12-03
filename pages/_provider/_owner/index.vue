@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 space-y-4">
-    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7 gap-4">
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-7">
       <recently-active-repo-list
         :class="
           steps.length && completion < 100
@@ -12,9 +12,9 @@
         <account-setup-card :completion="completion" />
       </template>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <owner-issues-graph></owner-issues-graph>
-      <owner-autofix-graph></owner-autofix-graph>
+    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <owner-issues-graph :full-width="!showAutofixGraph" />
+      <owner-autofix-graph v-if="showAutofixGraph" />
     </div>
     <!-- recent-activity-list class="grid grid-cols-1"> </recent-activity-list -->
   </div>
@@ -28,7 +28,7 @@ import { OwnerIssuesGraph, OwnerAutofixGraph } from '@/components/Graphs'
 
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
-import { TeamPerms } from '~/types/permTypes'
+import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
 interface SetupStep {
   completed: boolean
@@ -72,6 +72,10 @@ export default class TeamHome extends mixins(OwnerDetailMixin, ActiveUserMixin) 
   get allowAccountSetupCard(): boolean {
     const context = this.activeDashboardContext as DashboardContext
     return ['ADMIN', 'MEMBER'].includes(context.role)
+  }
+
+  get showAutofixGraph(): boolean {
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX)
   }
 
   get steps(): Array<SetupStep> {

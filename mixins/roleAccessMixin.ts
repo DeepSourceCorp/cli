@@ -6,7 +6,7 @@ import RepoDetailMixin from './repoDetailMixin'
 import AuthMixin from './authMixin'
 import ActiveUserMixin from './activeUserMixin'
 import { RepositoryCollaboratorPermission } from '~/types/types'
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 
 export interface RepoPermissions {
   canIgnoreIssues: boolean
@@ -33,5 +33,9 @@ export default class RoleAccessMixin extends mixins(RepoDetailMixin, AuthMixin, 
       return this.$gateKeeper.repo(RepoPerms.READ_REPO, this.repoPerms.permission)
     }
     return false
+  }
+
+  get allowAutofix(): boolean {
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX)
   }
 }

@@ -3,8 +3,8 @@
     <z-dialog-generic v-if="showModal" @onClose="closeModal">
       <template v-slot:default="{ close }" @click.stop>
         <div @click.stop>
-          <z-tabs :defaultActive="currentTab" class="-mb-px w-full sm:w-120 max-w-xl">
-            <div class="flex justify-between border-ink-200 border-b px-4">
+          <z-tabs :defaultActive="currentTab" class="w-full max-w-xl -mb-px sm:w-120">
+            <div class="flex justify-between px-4 border-b border-ink-200">
               <z-tab-list class="pt-4">
                 <z-tab-item
                   class="flex items-center space-x-1"
@@ -55,7 +55,7 @@ import {
 } from '@deepsourcelabs/zeal'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
-import { TeamPerms } from '~/types/permTypes'
+import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
 @Component({
   components: {
@@ -87,7 +87,7 @@ export default class AddNewRepo extends mixins(AutoOnboardMixin, ActiveUserMixin
 
   get autoOnboardAvailable() {
     return (
-      ['gh', 'ghe'].includes(this.activeProvider) &&
+      this.$gateKeeper.provider(AppFeatures.AUTO_ONBOARD, this.activeProvider) &&
       this.activeDashboardContext.type === 'team' &&
       this.$gateKeeper.team(TeamPerms.AUTO_ONBOARD_REPOSITORIES, this.teamPerms.permission)
     )

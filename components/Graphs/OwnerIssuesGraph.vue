@@ -1,6 +1,7 @@
 <template>
   <stat-section
     class="min-h-40"
+    :class="fullWidth ? 'col-span-full' : ''"
     title="Code quality overview"
     helpText="Summary of active and resolved issues<br/> for this account"
     :fullWidth="false"
@@ -14,7 +15,10 @@
         @updateFilter="updateLastDays"
       ></graph-control>
     </template>
-    <div class="grid grid-cols-1 gap-5 p-4 -ml-2 md:grid-cols-2">
+    <div
+      class="grid grid-cols-1 gap-5 p-4 -ml-2"
+      :class="fullWidth ? 'md:grid-cols-4' : 'md:grid-cols-2'"
+    >
       <graph-legend
         :allowHover="false"
         :trendPositive="activeIssuesTickerData < 0"
@@ -55,7 +59,7 @@
   </stat-section>
 </template>
 <script lang="ts">
-import { Component, mixins, namespace } from 'nuxt-property-decorator'
+import { Component, Prop, mixins, namespace } from 'nuxt-property-decorator'
 import { formatDate, parseISODate } from '@/utils/date'
 import { ZChart } from '@deepsourcelabs/zeal'
 import { BaseGraph, GraphLegend } from '.'
@@ -72,6 +76,9 @@ const ownerDetailStore = namespace('owner/detail')
 })
 export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
   public lastDays = 30
+
+  @Prop({ default: false })
+  fullWidth: boolean
 
   @ownerDetailStore.State
   issueTrend: Trend

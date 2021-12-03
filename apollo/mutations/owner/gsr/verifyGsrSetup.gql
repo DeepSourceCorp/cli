@@ -1,0 +1,5 @@
+mutation($ownerId: ID!) {
+  verifyGsrSetup(input: { ownerId: $ownerId }) {
+    ok
+  }
+}

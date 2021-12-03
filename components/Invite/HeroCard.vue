@@ -1,32 +1,53 @@
 <template>
-  <main class="min-h-screen flex flex-col relative">
+  <main class="relative flex flex-col min-h-screen">
     <img
-      class="h-6 w-auto mx-auto my-5"
+      class="w-auto h-6 mx-auto my-5"
       src="~/assets/images/logo-wordmark-white.svg"
       alt="DeepSource"
     />
-    <div class="grid place-content-center relative flex-grow">
-      <div v-if="showBackground" class="h-full w-full absolute grid place-content-center">
+    <div class="relative grid flex-grow place-content-center">
+      <div v-if="showBackground" class="absolute grid w-full h-full place-content-center">
         <img src="~/assets/images/installation-provider-bg.png" alt="bg" />
       </div>
       <transition
         enter-active-class="transition-all duration-500 ease-in-out"
         leave-active-class="transition-all duration-500 ease-in-out"
-        enter-class="translate-y-0 scale-95 opacity-0"
-        leave-to-class="translate-y-0 scale-105 opacity-0"
+        enter-class="scale-95 translate-y-0 opacity-0"
+        leave-to-class="scale-105 translate-y-0 opacity-0"
       >
         <div class="relative" :class="{ [customClass]: customClass }">
           <div
             v-if="showGlow"
-            class="glow absolute inset-0 opacity-40 transform-gpu rounded-md scale-95"
+            class="
+              absolute
+              inset-0
+              scale-95
+              rounded-md
+              glow
+              opacity-40
+              no-filter:bg-opacity-80
+              transform-gpu
+            "
           ></div>
           <div
             v-if="show"
-            class="bg-ink-300 bg-opacity-40 blur border border-ink-100 rounded-lg transform-gpu p-6 sm:p-10 mx-2 sm:mx-0"
+            class="
+              p-6
+              mx-2
+              border
+              rounded-lg
+              bg-ink-400 bg-opacity-40
+              blur
+              border-ink-100
+              transform-gpu
+              sm:p-10 sm:mx-0
+            "
             :class="{
               'max-w-sm': width === 'sm',
               'max-w-md': width === 'md',
-              'max-w-lg': width === 'lg'
+              'max-w-lg': width === 'lg',
+              'max-w-xl': width === 'xl',
+              'max-w-2xl': width === '2xl'
             }"
           >
             <slot></slot>

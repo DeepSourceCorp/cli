@@ -128,7 +128,7 @@ import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ConfigGeneratorMixin from '~/mixins/configGeneratorMixin'
-import { TeamPerms } from '~/types/permTypes'
+import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
 @Component({
   components: {
@@ -139,21 +139,13 @@ import { TeamPerms } from '~/types/permTypes'
     ZBreadcrumbItem,
     Analyzer
   },
-  middleware: [
-    'perm',
-    'teamOnly',
-    'validateProvider',
-    ({ route, error }) => {
-      if (!['gh', 'ghe'].includes(route.params.provider)) {
-        error({ statusCode: 404, message: 'This page is not real' })
-      }
-    }
-  ],
+  middleware: ['perm', 'teamOnly', 'validateProvider', 'featureGate'],
   meta: {
     auth: {
       strict: true,
       teamPerms: [TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE, TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE]
-    }
+    },
+    gateFeature: AppFeatures.AUTO_ONBOARD
   },
   layout: 'dashboard'
 })

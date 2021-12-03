@@ -1,10 +1,12 @@
 <template>
-  <div class="bg-ink-400">
+  <div class="min-h-screen bg-ink-400">
     <Nuxt />
+    <portal-target class="z-1000" name="modal" @change="modalToggled"></portal-target>
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
+import PortalMixin from '@/mixins/portalMixin'
 
 @Component({
   components: {},
@@ -14,5 +16,5 @@ import { Component, Vue } from 'nuxt-property-decorator'
     }
   }
 })
-export default class DefaultLayout extends Vue {}
+export default class DefaultLayout extends mixins(PortalMixin) {}
 </script>

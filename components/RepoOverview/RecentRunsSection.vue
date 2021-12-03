@@ -1,6 +1,13 @@
 <template>
-  <stat-section title="Recent runs" customGridClass="grid grid-cols-12-fr" :gridSpacing="2">
-    <div class="grid grid-cols-3 col-span-2 gap-1 md:space-y-2 md:col-span-1 md:block">
+  <stat-section
+    title="Recent runs"
+    :custom-grid-class="`grid ${runOptions.length > 1 ? 'grid-cols-12-fr' : 'grid-cols-1'}`"
+    :grid-spacing="2"
+  >
+    <div
+      v-if="runOptions.length > 1"
+      class="grid grid-cols-3 col-span-2 gap-1 md:space-y-2 md:col-span-1 md:block"
+    >
       <template v-for="opt in runOptions">
         <div
           v-if="allowOptions(opt.repoPerms)"
@@ -95,7 +102,7 @@ import { AutofixRunListActions } from '~/store/autofixRun/list'
 import { TransformerRunConnection } from '~/types/types'
 import { RunConnection } from '~/types/types'
 import { AutofixRunConnection } from '~/types/types'
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 const runListStore = namespace('run/list')
@@ -161,20 +168,30 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
     refetch?: boolean
   }) => Promise<void>
 
-  private runOptions: IRunOptions[] = [
-    { name: 'Analysis runs', showMoreLabel: 'View all Analysis runs', link: ['history', 'runs'] },
-    {
-      name: 'Autofixes',
-      showMoreLabel: 'View all Autofixes',
-      link: 'autofix',
-      repoPerms: [RepoPerms.READ_REPO]
-    },
-    {
-      name: 'Transforms',
-      showMoreLabel: 'View all Transforms',
-      link: ['history', 'transforms']
+  get runOptions(): IRunOptions[] {
+    const options: IRunOptions[] = [
+      { name: 'Analysis runs', showMoreLabel: 'View all Analysis runs', link: ['history', 'runs'] }
+    ]
+
+    if (this.$gateKeeper.provider(AppFeatures.AUTOFIX)) {
+      options.push({
+        name: 'Autofixes',
+        showMoreLabel: 'View all Autofixes',
+        link: 'autofix',
+        repoPerms: [RepoPerms.READ_REPO]
+      })
     }
-  ]
+
+    if (this.$gateKeeper.provider(AppFeatures.TRANSFORMS)) {
+      options.push({
+        name: 'Transforms',
+        showMoreLabel: 'View all Transforms',
+        link: ['history', 'transforms']
+      })
+    }
+
+    return options
+  }
 
   public selectedRun = ''
 

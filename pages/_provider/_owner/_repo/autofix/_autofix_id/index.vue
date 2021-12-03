@@ -310,7 +310,7 @@ import {
 import { RunDetailActions } from '~/store/run/detail'
 import { AutofixRunPullRequestStatus, CreatePullRequestInput } from '~/types/types'
 
-import { RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -338,11 +338,13 @@ const runStore = namespace('run/detail')
     AutofixListItem,
     AutofixCodeDiff
   },
+  middleware: ['validateProvider', 'featureGate', 'perm'],
   meta: {
     auth: {
       strict: true,
       RepoPerms: [RepoPerms.READ_REPO]
-    }
+    },
+    gateFeature: AppFeatures.AUTOFIX
   },
   layout: 'repository'
 })

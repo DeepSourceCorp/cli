@@ -2,7 +2,7 @@
   <div class="flex items-center justify-end flex-auto space-x-2">
     <!-- Autofix -->
     <z-button
-      v-if="issue.autofixAvailable && hasRepoReadAccess"
+      v-if="isAutofixEnabled && issue.autofixAvailable && hasRepoReadAccess"
       buttonType="primary"
       size="small"
       custom-classes="hidden xl:flex items-center space-x-2"
@@ -136,6 +136,9 @@ export default class IssueActions extends mixins(RoleAccessMixin) {
 
   @Prop({ default: true })
   canCreateAutofix!: boolean
+
+  @Prop({ default: true })
+  isAutofixEnabled!: boolean
 
   @Prop()
   repository!: Repository
