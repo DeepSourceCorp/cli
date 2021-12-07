@@ -1,26 +1,40 @@
 <template>
-  <section>
-    <div
-      class="flex border-b xl:col-span-2 border-ink-200 lg:sticky lg:top-24 lg:bg-ink-400 lg:z-10"
+  <section class="grid grid-cols-1 lg:grid-cols-16-fr">
+    <nav
+      class="
+        flex
+        gap-x-8
+        top-24
+        overflow-x-auto
+        px-4
+        pt-2
+        hide-scroll
+        border-b border-ink-200
+        lg:sticky lg:flex-col lg:gap-y-1 lg:px-2 lg:pt-4 lg:border-r lg:h-nav-sidebar
+      "
     >
-      <div class="flex self-end px-4 pt-2 space-x-8 overflow-x-auto flex-nowrap">
-        <template v-for="item in navItems">
-          <nuxt-link
-            v-if="isNavLinkVisible(item)"
-            :key="item.label"
-            :to="$generateRoute(item.link)"
-            class="flex-shrink-0"
+      <template v-for="item in navItems">
+        <nuxt-link
+          v-if="isNavLinkVisible(item)"
+          :key="item.label"
+          :to="$generateRoute(item.link)"
+          class="flex-shrink-0 text-sm group hover:bg-ink-300"
+        >
+          <span
+            class="p-2 rounded-md hidden group-hover:text-vanilla-100 lg:block"
+            :class="$route.path.includes(item.link.join('/')) ? 'bg-ink-300' : 'text-vanilla-400'"
+            >{{ item.label }}</span
           >
-            <z-tab
-              :isActive="$route.path.includes(item.link.join('/'))"
-              border-active-color="vanilla-400"
-            >
-              <span class="text-sm cursor-pointer">{{ item.label }}</span>
-            </z-tab>
-          </nuxt-link>
-        </template>
-      </div>
-    </div>
+          <z-tab
+            class="lg:hidden"
+            :isActive="$route.path.includes(item.link.join('/'))"
+            border-active-color="vanilla-400"
+          >
+            <span class="text-sm cursor-pointer">{{ item.label }}</span>
+          </z-tab>
+        </nuxt-link>
+      </template>
+    </nav>
     <NuxtChild />
   </section>
 </template>

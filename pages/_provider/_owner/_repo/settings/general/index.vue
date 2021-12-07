@@ -3,8 +3,8 @@
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">General</div>
     <!-- Default Analysis Branch -->
-    <form-group :divide="false" body-width-class="">
-      <div class="flex gap-x-4">
+    <div class="flex gap-x-4">
+      <form-group class="flex-grow max-w-2xl">
         <text-input
           inputWidth="x-small"
           label="Default analysis branch"
@@ -13,30 +13,32 @@
           class="flex-grow max-w-2xl"
           @blur="updateBranch"
         ></text-input>
-        <div class="hidden lg:block">
-          <info-banner
-            info="This is the base branch for analysis by DeepSource. Your issues tab will be populated with the issues found on this branch."
-          />
-        </div>
+
+        <toggle-input
+          inputWidth="x-small"
+          label="Enable git submodules"
+          inputId="enable-git-submodules"
+          v-model="enableGitMod"
+          class="max-w-2xl border-t border-ink-300 grid-cols-16-fr lg:grid-cols-fr-12"
+          @input="updateRepositorySettings"
+        >
+          <template slot="description">
+            If you are using private submodules, ensure that DeepSource has access to them via an
+            <nuxt-link
+              :to="$generateRoute(['settings', 'ssh-access'])"
+              class="font-medium text-juniper"
+              >SSH key</nuxt-link
+            >.
+          </template>
+        </toggle-input>
+      </form-group>
+      <div class="hidden lg:block">
+        <info-banner
+          class="w-84"
+          info="This is the base branch for analysis by DeepSource. Your issues tab will be populated with the issues found on this branch."
+        />
       </div>
-      <toggle-input
-        inputWidth="x-small"
-        label="Enable git submodules"
-        inputId="enable-git-submodules"
-        v-model="enableGitMod"
-        class="max-w-2xl border-t border-ink-300"
-        @input="updateRepositorySettings"
-      >
-        <template slot="description">
-          If you are using private submodules, ensure that DeepSource has access to them via an
-          <nuxt-link
-            :to="$generateRoute(['settings', 'ssh-access'])"
-            class="font-medium text-juniper"
-            >SSH key</nuxt-link
-          >.
-        </template>
-      </toggle-input>
-    </form-group>
+    </div>
     <z-divider color="ink-300" margin="my-2 mx-0 max-w-2xl" />
     <!-- Issue Configuration -->
     <div class="flex gap-x-4">
@@ -97,6 +99,7 @@
       </div>
       <div class="hidden lg:block">
         <info-banner
+          class="w-84"
           info="Control which category of issues are reported, and when analysis run is marked as failed."
         />
       </div>
@@ -175,6 +178,7 @@
       </form-group>
       <div class="hidden mt-16 lg:block">
         <info-banner
+          class="w-84"
           info="If <b>Granular</b> is selected, issues would be reported only for lines that have been added or modified across all the files affected. <br> <br> If <b>Broad</b> is selected, all issues will be reported in files that have been updated or added, beware, this can be noisy."
         />
       </div>
@@ -199,6 +203,7 @@
       </form-group>
       <div class="hidden mt-16 lg:block">
         <info-banner
+          class="w-84"
           info="Control whether your repository is listed on Discover. Once listed, other users would be able to find your repository, and look at the detected issues."
         />
       </div>

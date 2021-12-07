@@ -1,14 +1,12 @@
 <template>
-  <div class="flex flex-col p-4 pb-48 gap-y-4">
-    <div class="max-w-2xl">
-      <!-- title -->
-      <div class="text-lg font-medium text-vanilla-100">Badges</div>
-      <!-- description -->
-      <p class="text-sm text-vanilla-400">
-        Embeddable badges that can be used to link to the DeepSource dashboard for this project. Add
-        these badges in the project's README, wiki or the website.
-      </p>
-    </div>
+  <div class="flex flex-col p-4 gap-y-4">
+    <page-title
+      class="max-w-3xl"
+      title="Badges"
+      description-width-class="max-w-2xl"
+      description="Embeddable badges that can be used to link to the DeepSource dashboard for this project. Add
+        these badges in the project's README, wiki or the website."
+    />
     <div class="flex flex-col gap-y-2">
       <div class="max-w-2xl gap-y-2">
         <label class="text-sm text-vanilla-100">Preview</label>
@@ -49,6 +47,7 @@
         </div>
         <div class="hidden lg:block">
           <info-banner
+            class="w-56 2xl:w-auto"
             info="Add a trendline showing how the value of this metric has varied in the
           last 6 months."
           />

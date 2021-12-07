@@ -46,6 +46,9 @@ module.exports = {
       gridTemplateColumns: {
         support: '5fr 7fr',
         discover: '8fr 4fr'
+      },
+      height: {
+        'nav-sidebar': 'calc(100vh - 96px)'
       }
     }
   }
