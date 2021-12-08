@@ -104,8 +104,16 @@ import { AuthActionTypes } from '~/store/account/auth'
       }
     }
   ],
-  head: {
-    title: 'Login — DeepSource'
+  head() {
+    return {
+      title: 'Login — DeepSource',
+      link: [
+        {
+          rel: 'canonical',
+          href: `https://${this.$config.domain}/login`
+        }
+      ]
+    }
   }
 })
 export default class SignUp extends mixins(AuthMixin) {

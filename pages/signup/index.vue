@@ -159,8 +159,16 @@ const TESTIMONIALS: Testimonial[] = [
       }
     }
   ],
-  head: {
-    title: 'Sign up — DeepSource'
+  head() {
+    return {
+      title: 'Sign up — DeepSource',
+      link: [
+        {
+          rel: 'canonical',
+          href: `https://${this.$config.domain}/signup`
+        }
+      ]
+    }
   }
 })
 export default class SignUp extends mixins(AuthMixin) {
