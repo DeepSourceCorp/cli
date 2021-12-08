@@ -80,7 +80,7 @@
       </template>
     </issue-category-selector>
     <!-- List of issues -->
-    <div v-if="$fetchState.pending" class="flex-1 flex-grow min-h-screen p-4 space-y-4">
+    <div v-if="issuesLoading" class="flex-1 flex-grow min-h-screen p-4 space-y-4">
       <div
         v-for="idx in 7"
         :key="idx"
@@ -200,6 +200,7 @@ export default class Issues extends mixins(
   public currentPage: Maybe<number> = null
   public urlFilterState: Record<string, string | (string | null)[]> = {}
   public autofixIssue: Record<string, string | Array<string>> = {}
+  public issuesLoading = false
 
   updateCategory(newVal: string): void {
     this.queryParams.category = newVal
@@ -235,6 +236,7 @@ export default class Issues extends mixins(
   }
 
   async fetch(): Promise<void> {
+    this.issuesLoading = true
     await Promise.all([
       this.fetchRepoDetailsLocal(),
       this.fetchRepoPerms(this.baseRouteParams),
@@ -243,6 +245,7 @@ export default class Issues extends mixins(
 
     this.fetchRepoAutofixStats(this.baseRouteParams)
     this.fetchIsCommitPossible(this.baseRouteParams)
+    this.issuesLoading = false
   }
 
   initializeQueryParams(): void {
