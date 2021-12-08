@@ -1,10 +1,26 @@
 <template>
   <div class="space-y-1">
-    <z-menu v-if="isCollapsed">
+    <z-menu
+      v-if="isCollapsed"
+      v-tooltip="{ content: isCollapsed ? 'Recently active' : '', placement: 'right' }"
+    >
       <template v-slot:trigger="{ toggle }">
         <button
           type="button"
-          class="flex items-center justify-center h-8 py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 min-w-8 focus:outline-none"
+          class="
+            flex
+            items-center
+            justify-center
+            h-8
+            py-1
+            space-x-2
+            text-sm
+            rounded-sm
+            outline-none
+            hover:bg-ink-300
+            min-w-8
+            focus:outline-none
+          "
           @click="toggle"
         >
           <z-icon icon="activity" size="small" class="min-w-4 min-h-4"></z-icon>
@@ -37,7 +53,17 @@
       <button
         type="button"
         @click.prevent="toggleDropdown"
-        class="flex items-center justify-between w-full px-2 py-1 text-sm outline-none focus:outline-none"
+        class="
+          flex
+          items-center
+          justify-between
+          w-full
+          px-2
+          py-1
+          text-sm
+          outline-none
+          focus:outline-none
+        "
         :class="[
           isActive('provider-owner-repo') &&
           !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)

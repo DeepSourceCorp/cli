@@ -27,6 +27,10 @@
       :class="isCollapsed ? '' : 'overflow-y-scroll'"
     >
       <button
+        v-tooltip="{
+          content: isCollapsed ? 'Activate new repository' : '',
+          placement: 'right'
+        }"
         v-if="canActivateRepo"
         class="
           flex
@@ -47,18 +51,26 @@
         <span class="text-sm font-medium" v-show="!isCollapsed">Activate new repository</span>
       </button>
       <sidebar-item
+        v-tooltip="{
+          content: isCollapsed ? activeDashboardHome : '',
+          placement: 'right'
+        }"
         :isCollapsed="isCollapsed"
         icon="home"
         :active="$route.path === `/${provider}/${owner}/`"
         :to="getRoute('')"
       >
-        {{ activeDashboardContext.type === 'team' ? 'Team home' : 'Home' }}
+        {{ activeDashboardHome }}
       </sidebar-item>
       <client-only>
         <pending-adhoc-repos :isCollapsed="isCollapsed" />
       </client-only>
       <recently-active-repo :isCollapsed="isCollapsed" />
       <sidebar-item
+        v-tooltip="{
+          content: isCollapsed ? 'All repositories' : '',
+          placement: 'right'
+        }"
         :isCollapsed="isCollapsed"
         icon="layers"
         :active="isActive('provider-owner-all-repos')"
@@ -78,6 +90,10 @@
         </span>
       </sidebar-item>
       <sidebar-item
+        v-tooltip="{
+          content: isCollapsed ? 'Team members' : '',
+          placement: 'right'
+        }"
         :isCollapsed="isCollapsed"
         v-if="showTeamMembers"
         icon="users"
@@ -87,6 +103,10 @@
         Team members
       </sidebar-item>
       <sidebar-item
+        v-tooltip="{
+          content: isCollapsed ? 'Settings' : '',
+          placement: 'right'
+        }"
         :isCollapsed="isCollapsed"
         v-if="showTeamSettings"
         icon="settings"
@@ -121,6 +141,10 @@
     <section class="relative self-end w-full justify-self-end group">
       <div class="p-2.5 border-t border-ink-200 space-y-2">
         <sidebar-item
+          v-tooltip="{
+            content: isCollapsed ? 'Get help' : '',
+            placement: 'right'
+          }"
           to="/support"
           :active="$route.path === '/support'"
           :isCollapsed="isCollapsed"
@@ -130,6 +154,10 @@
         </sidebar-item>
         <div class="flex items-center">
           <sidebar-item
+            v-tooltip="{
+              content: isCollapsed ? 'Dashboard' : '',
+              placement: 'right'
+            }"
             :isCollapsed="isCollapsed"
             icon="dashboard"
             :active="$route.path === '/me'"
@@ -367,6 +395,10 @@ export default class Sidebar extends mixins(
       return this.$gateKeeper.team(TeamPerms.MANAGE_TEAM_MEMEBERS, role)
     }
     return false
+  }
+
+  get activeDashboardHome(): string {
+    return this.activeDashboardContext.type === 'team' ? 'Team home' : 'Home'
   }
 
   get allowedBilling(): boolean {
