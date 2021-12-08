@@ -20,8 +20,14 @@ function formatIntl(val: number): string {
 
 function shortenLargeNumber(candidate: number | string): string {
   let number = 0
-  if (typeof candidate === 'number') number = candidate
-  else if (typeof candidate === 'string') {
+
+  if (typeof candidate === 'number') {
+    number = candidate
+  } else if (typeof candidate === 'string') {
+    // Return early if the candidate includes a '%' character.
+    if (candidate.includes('%')) {
+      return candidate
+    }
     number = Number(candidate)
   }
 
