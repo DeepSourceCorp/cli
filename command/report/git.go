@@ -1,8 +1,10 @@
 package report
 
 import (
+	"fmt"
 	"os"
 
+	"github.com/getsentry/sentry-go"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 )
@@ -37,11 +39,15 @@ func gitGetHead(workspaceDir string) (string, error) {
 	// nor a travis env with PR. Continue to fetch the headOID via the git command.
 	headOID, err := fetchHeadManually(workspaceDir)
 	if err != nil {
+		fmt.Println(err)
+		sentry.CaptureException(err)
 		return "", err
 	}
 	return headOID, nil
 }
 
+// Fetches the latest commit hash using the command `git rev-parse HEAD`
+// through go-git
 func fetchHeadManually(directoryPath string) (string, error) {
 	// Open a new repository targeting the given path (the .git folder)
 	repo, err := git.PlainOpen(directoryPath)
@@ -49,6 +55,7 @@ func fetchHeadManually(directoryPath string) (string, error) {
 		return "", err
 	}
 
+	// Resolve revision into a sha1 commit
 	commitHash, err := repo.ResolveRevision(plumbing.Revision("HEAD"))
 	if err != nil {
 		return "", err

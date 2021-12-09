@@ -1,7 +1,7 @@
 build:
 	cd cmd/deepsource && GOOS=linux GOARCH=amd64 go build -tags static_all -o /tmp/deepsource .
 
-build_local:
+build_osx:
 	cd cmd/deepsource && GOOS=darwin GOARCH=amd64 go build -tags static_all -o /tmp/deepsource .
 
 test:
