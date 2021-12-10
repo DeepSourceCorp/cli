@@ -169,7 +169,7 @@ export default class AutofixListItem extends mixins(RoleAccessMixin) {
   get runIcon(): string {
     const icons: Record<string, string> = {
       PASS: 'check',
-      PEND: 'refresh-ccw',
+      PEND: 'refresh-cw',
       CNCL: 'slash',
       FAIL: 'x',
       STAL: 'stale',

@@ -1,0 +1,20 @@
+query($q: String, $first: Int, $offset: Int) {
+  enterprise {
+    groups(q: $q, first: $first, offset: $offset) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          createdAt
+          members {
+            totalCount
+          }
+          teams {
+            totalCount
+          }
+        }
+      }
+    }
+  }
+}

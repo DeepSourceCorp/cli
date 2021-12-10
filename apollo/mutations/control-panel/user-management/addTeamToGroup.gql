@@ -1,0 +1,5 @@
+mutation($groupId: ID!, $teamId: ID!, $role: TeamMemberRoleChoices) {
+  addTeamToGroup(input: { groupId: $groupId, teamId: $teamId, role: $role }) {
+    ok
+  }
+}

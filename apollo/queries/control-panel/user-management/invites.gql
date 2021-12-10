@@ -1,0 +1,13 @@
+query {
+  enterprise {
+    groups {
+      edges {
+        node {
+          name
+          id
+          invitationUrl
+        }
+      }
+    }
+  }
+}

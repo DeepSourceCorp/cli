@@ -47,7 +47,10 @@
       <div style="height: 258px" class="rounded-md bg-ink-300 animate-pulse"></div>
     </div>
     <base-graph
-      v-else
+      v-else-if="
+        (issueData.values && issueData.values.length) ||
+        (resolvedIssueData.values && resolvedIssueData.values.length)
+      "
       :datasets="dataSets"
       :labels="formattedLabels"
       :showControl="false"

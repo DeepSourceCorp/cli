@@ -25,6 +25,26 @@
         </z-button>
       </div>
     </section>
+    <section v-else-if="$config.onPrem && areSeatsFull" class="text-center space-y-8 max-w-xl">
+      <img
+        class="mx-auto mb-8 w-56 max-w-xs"
+        :src="require('~/assets/images/ui-states/app/license-expired.png')"
+        alt="Repo Inactive"
+      />
+      <div class="space-y-4">
+        <h3 class="text-center text-vanilla-100 font-semibold text-lg">
+          You have exhausted all seats in your DeepSource license.
+        </h3>
+        <p class="text-vanilla-400 text-sm">
+          Please contact your administrator for upgrading the license.
+        </p>
+      </div>
+      <div class="flex items-center justify-center space-x-3">
+        <z-button size="small" :to="`mailto:${$config.supportEmail}`" icon="support">
+          Contact support
+        </z-button>
+      </div>
+    </section>
     <div
       v-else-if="[500, 501, 502, 503, 504].includes(error.statusCode)"
       class="max-w-xl space-y-5 text-center"
@@ -97,6 +117,12 @@ export default class ErrorLayout extends Vue {
 
   get loginUrl(): string {
     return `/login?next=${this.$route.fullPath}`
+  }
+
+  get areSeatsFull(): boolean {
+    if (this.error.message)
+      return this.error.message.indexOf('You have exhausted all the seats') > 0
+    return false
   }
 }
 </script>

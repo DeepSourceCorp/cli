@@ -14,6 +14,7 @@
       :show-legend="false"
       :axis-options="axisOptions"
       :line-options="lineOptions"
+      :bar-options="barOptions"
       :yAxisMin="0"
     />
   </div>
@@ -50,6 +51,9 @@ export default class BaseGraph extends Vue {
 
   @Prop({ default: true })
   xIsSeries: boolean
+
+  @Prop({ default: () => {} })
+  barOptions: Object
 
   public chartType = ''
   public selectedMetric = ''

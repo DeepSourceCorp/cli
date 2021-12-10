@@ -60,6 +60,7 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar } from '@deepsourcelabs/zeal'
 import { formatDate } from '@/utils/date'
+import TEAM_PERMS from '~/utils/teamPerms'
 
 import { User } from '~/types/types'
 
@@ -80,23 +81,6 @@ const REPO_PERMS = {
     title: 'Read-only',
     value: 'READ',
     description: `Members will be able to only view the issues and metrics on private repositories they have access to, but won't be able to take any actions on issues or create Autofixes.`
-  }
-}
-
-const TEAM_PERMS = {
-  ADMIN: {
-    title: 'Administrator',
-    description:
-      'Full access to all repositories and the team, including billing, adding, or removing members.'
-  },
-  MEMBER: {
-    title: 'Member',
-    description: 'Add and edit specific repositories.'
-  },
-  CONTRIBUTOR: {
-    title: 'Contributor',
-    description:
-      "Contributors don't have any team level access or any access to change repo level settings."
   }
 }
 

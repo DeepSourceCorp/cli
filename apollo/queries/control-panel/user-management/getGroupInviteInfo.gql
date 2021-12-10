@@ -1,0 +1,5 @@
+query($invitationCode: String!) {
+  getGroupInviteInfo(invitationCode: $invitationCode) {
+    name
+  }
+}

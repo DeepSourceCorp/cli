@@ -1,5 +1,9 @@
 // Internal Types
-import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import {
+  GraphqlError,
+  GraphqlMutationResponse,
+  GraphqlQueryResponse
+} from '~/types/apollo-graphql-types'
 import { ActionTree, MutationTree, Store, ActionContext } from 'vuex'
 import { RootState } from '~/store'
 
@@ -321,7 +325,12 @@ export const actions: TeamModuleActions = {
   async [TeamActions.REMOVE_MEMBER]({ commit }, args) {
     try {
       commit(TeamMutations.SET_LOADING, true)
-      await this.$applyGraphqlMutation(removeMember, { ownerPk: args.ownerId, email: args.email })
+      const response = (await this.$applyGraphqlMutation(removeMember, {
+        ownerPk: args.ownerId,
+        email: args.email
+      })) as GraphqlMutationResponse
+      if (response.data.removeTeamMember?.ok)
+        this.$toast.success('Team member removed successfully.')
     } catch (e) {
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
       commit(TeamMutations.SET_ERROR, e)

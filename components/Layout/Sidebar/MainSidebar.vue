@@ -115,6 +115,14 @@
       >
         Settings
       </sidebar-item>
+      <sidebar-item
+        v-if="$config.onPrem && isViewerSuperadmin"
+        :isCollapsed="isCollapsed"
+        icon="window"
+        to="/control-panel"
+      >
+        Control panel
+      </sidebar-item>
     </section>
 
     <section
@@ -244,6 +252,7 @@ import ContextMixin from '@/mixins/contextMixin'
 import OwnerDetailMixin from '@/mixins/ownerDetailMixin'
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
+import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 
 @Component({
   components: {
@@ -257,7 +266,8 @@ export default class Sidebar extends mixins(
   ContextMixin,
   OwnerDetailMixin,
   PlanDetailMixin,
-  RepoListMixin
+  RepoListMixin,
+  ControlPanelBaseMixin
 ) {
   public isCollapsed = false
   public collapsedSidebar = false
@@ -276,7 +286,8 @@ export default class Sidebar extends mixins(
     await Promise.all([
       this.fetchContext(),
       this.fetchActiveUser(),
-      this.fetchMaxUsagePercentage({ login, provider })
+      this.fetchMaxUsagePercentage({ login, provider }),
+      ...(this.$config.onPrem ? [this.getViewerSuperadminStatus()] : [])
     ])
   }
 

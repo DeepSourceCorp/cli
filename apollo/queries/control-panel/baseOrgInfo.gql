@@ -1,0 +1,9 @@
+query {
+  enterprise {
+    installation {
+      name
+      logo
+    }
+    managementConsoleUrl
+  }
+}

@@ -1,0 +1,30 @@
+query($id: ID!, $q: String, $first: Int, $offset: Int) {
+  enterprise {
+    user(id: $id) {
+      id
+      fullName
+      avatar
+      email
+      dateJoined
+      groupsCount: scimGroups {
+        totalCount
+      }
+      teams(q: $q, first: $first, offset: $offset) {
+        totalCount
+        edges {
+          node {
+            id
+            name
+            login
+            avatar
+            vcsProvider
+            isDirectMember
+            members {
+              totalCount
+            }
+          }
+        }
+      }
+    }
+  }
+}

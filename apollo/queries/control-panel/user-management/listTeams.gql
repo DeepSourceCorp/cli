@@ -1,0 +1,13 @@
+query($q: String, $first: Int, $offset: Int) {
+  enterprise {
+    teams(q: $q, first: $first, offset: $offset) {
+      edges {
+        node {
+          id
+          name
+          login
+        }
+      }
+    }
+  }
+}

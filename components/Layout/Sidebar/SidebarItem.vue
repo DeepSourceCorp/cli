@@ -2,7 +2,18 @@
   <component
     :is="linkAttrs.is"
     v-bind="linkAttrs"
-    class="flex items-center h-8 px-2 space-x-2 text-sm rounded-sm cursor-pointer sidebar-item hover:bg-ink-300"
+    class="
+      flex
+      items-center
+      h-8
+      px-2
+      text-sm
+      rounded-sm
+      cursor-pointer
+      gap-x-2
+      sidebar-item
+      hover:bg-ink-300
+    "
     :class="[
       active ? 'bg-ink-300 text-vanilla-100 font-semibold' : 'text-vanilla-400',
       isCollapsed ? 'max-w-0 w-8' : 'max-w-full w-full'
@@ -16,8 +27,16 @@
       class="min-w-4 min-h-4"
     ></z-icon>
     <div
-      class="items-center overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis w-full"
       v-show="!isCollapsed"
+      class="
+        w-full
+        overflow-x-hidden
+        text-sm
+        whitespace-nowrap
+        overflow-ellipsis
+        leading-none
+        py-0.5
+      "
     >
       <slot></slot>
     </div>

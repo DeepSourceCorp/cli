@@ -30,7 +30,12 @@
             <span>{{ tool.name }}</span>
           </z-tag>
         </div>
-        <a v-if="transformerRun.vcsCommitUrl" :href="transformerRun.vcsCommitUrl" target="_blank">
+        <a
+          v-if="transformerRun.vcsCommitUrl"
+          :href="transformerRun.vcsCommitUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <z-button
             buttonType="secondary"
             size="small"
@@ -41,7 +46,12 @@
             <z-icon icon="arrow-up-right" size="small"></z-icon>
           </z-button>
         </a>
-        <a v-else-if="transformerRun.vcsPrUrl" :href="transformerRun.vcsPrUrl" target="_blank">
+        <a
+          v-else-if="transformerRun.vcsPrUrl"
+          :href="transformerRun.vcsPrUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <z-button
             buttonType="secondary"
             size="small"

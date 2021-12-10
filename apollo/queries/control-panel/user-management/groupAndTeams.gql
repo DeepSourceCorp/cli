@@ -1,0 +1,36 @@
+query($id: ID!, $q: String, $first: Int, $offset: Int) {
+  enterprise {
+    group(id: $id) {
+      id
+      name
+      createdAt
+      membersCount: members {
+        totalCount
+      }
+      teamsCount: groupTeams {
+        totalCount
+      }
+      groupTeams(q: $q, first: $first, offset: $offset) {
+        totalCount
+        edges {
+          node {
+            id
+            role
+            createdAt
+            modifiedAt
+            team {
+              id
+              name
+              avatar
+              login
+              vcsProvider
+              members {
+                totalCount
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

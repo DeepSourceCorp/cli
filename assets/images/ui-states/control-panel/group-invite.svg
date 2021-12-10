@@ -1,0 +1,40 @@
+<svg width="96" height="96" fill="none" xmlns="http://www.w3.org/2000/svg" class="mx-auto">
+  <mask
+    id="invites-a"
+    style="mask-type: alpha"
+    maskUnits="userSpaceOnUse"
+    x="0"
+    y="0"
+    width="96"
+    height="96"
+  >
+    <circle cx="48" cy="48" r="48" fill="#23262E" />
+  </mask>
+  <g mask="url(#invites-a)">
+    <circle cx="48" cy="48" r="48" fill="#23262E" />
+    <path
+      d="M39.557 58.89c-5.452 9.083-19.718 11.902-25.186 5.1-2.714-3.375-6-11.774.474-12.793 1.243-.196 5.31-.293 5.398 6.215.09 6.509-5.822 16.024-13.308 16.394"
+      stroke="#4568DC"
+      stroke-width="1.8"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-dasharray="1.43 2.87"
+    />
+    <path
+      d="M70.24 26.624 55.072 69.965l-8.668-19.503L26.9 41.794l43.342-15.17Zm.001 0L46.403 50.462"
+      stroke="#fff"
+      stroke-width="3.702"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <circle cx="69.799" cy="51.069" fill="#33CB9A" r="10.324" />
+    <path d="m65.153 52.311 2.575 2.552 6.89-6.805" fill="#33CB9A" />
+    <path
+      d="m65.153 52.311 2.575 2.552 6.89-6.805"
+      stroke="#F9F9FA"
+      stroke-width="1.4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+</svg>

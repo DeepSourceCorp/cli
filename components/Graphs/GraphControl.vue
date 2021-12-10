@@ -10,9 +10,9 @@
           <z-icon color="vanilla-400" icon="duration-30" />
         </template>
         <z-option
-          v-for="opt in dayOptions"
+          v-for="(opt, index) in dayOptions"
           :key="opt"
-          :label="`Last ${opt} Days`"
+          :label="`Last ${displayDayOptions[index]} ${displayDurationType}`"
           :value="opt"
         ></z-option>
       </z-select>
@@ -47,6 +47,8 @@
 import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
 import { ZIcon, ZDivider, ZChart, ZSelect, ZOption } from '@deepsourcelabs/zeal'
 
+import { createDuration, DurationTypeT } from '~/utils/date'
+
 @Component({
   components: {
     ZIcon,
@@ -70,12 +72,21 @@ export default class GraphControl extends Vue {
   @Prop({ default: 'line' })
   chartType: string
 
+  @Prop({ default: DurationTypeT.days })
+  displayDurationType: DurationTypeT
+
   public currentFilterValue: number = 30
   public currentChartType: string = 'line'
 
   created() {
     this.currentFilterValue = this.filterValue
     this.currentChartType = this.chartType
+  }
+
+  get displayDayOptions(): number[] {
+    return this.dayOptions.map((dayOption: number) =>
+      createDuration(dayOption, 'days').as(this.displayDurationType)
+    )
   }
 
   @Watch('currentFilterValue')

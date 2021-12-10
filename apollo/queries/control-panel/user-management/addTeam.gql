@@ -1,0 +1,21 @@
+query($groupId: ID!, $q: String) {
+  enterprise {
+    group(id: $groupId) {
+      id
+      allTeams(q: $q) {
+        edges {
+          node {
+            id
+            login
+            name
+            avatar
+            teamMembers {
+              totalCount
+            }
+            roleInGroup
+          }
+        }
+      }
+    }
+  }
+}

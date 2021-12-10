@@ -1,0 +1,24 @@
+query($q: String, $first: Int, $offset: Int) {
+  enterprise {
+    users(q: $q, first: $first, offset: $offset) {
+      totalCount
+      edges {
+        node {
+          id
+          avatar
+          fullName
+          email
+          isActive
+          isSuperuser
+          teams {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

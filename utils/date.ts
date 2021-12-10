@@ -10,6 +10,17 @@ dayjs.extend(LocalizedFormat)
 dayjs.extend(LocalizedFormat)
 dayjs.extend(Calendar)
 
+enum DurationTypeT {
+  milliseconds = 'milliseconds',
+  seconds = 'seconds',
+  minutes = 'minutes',
+  hours = 'hours',
+  days = 'days',
+  months = 'months',
+  years = 'years',
+  weeks = 'weeks'
+}
+
 /**
  * @param  {string} time
  */
@@ -119,6 +130,8 @@ function getDaysDiffInDays(day1: number | string, day2: number | string): number
   return date1.diff(date2, 'days')
 }
 
+const { duration: createDuration } = dayjs
+
 export {
   getHumanizedTimeFromNow,
   fromNow,
@@ -128,5 +141,7 @@ export {
   parseISODate,
   getNextMonth,
   getNextYear,
-  getDaysDiffInDays
+  getDaysDiffInDays,
+  createDuration,
+  DurationTypeT
 }

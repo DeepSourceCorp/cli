@@ -1,0 +1,10 @@
+query($lastDays: Int!, $trendType: TrendType!) {
+  enterprise {
+    license {
+      seatsTotal
+      seatsUsed
+      licenseExpiry
+      seatUsageTrend(lastDays: $lastDays, trendType: $trendType)
+    }
+  }
+}
