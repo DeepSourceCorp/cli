@@ -27,15 +27,13 @@
         </p>
       </fieldset>
       <fieldset class="text-sm space-y-1">
-        <label class="leading-loose text-vanilla-400"
-          >Billing address
-          <textarea
-            v-model="billingAddress"
-            class="w-full h-full p-2 text-xs bg-ink-400 border outline-none resize-none min-h-20 text-vanilla-400 focus:border-vanilla-100 mt-0.5"
-            size="small"
-            :placeholder="`Avengers Tower \n200 Park Avenue, New York`"
-          ></textarea>
-        </label>
+        <label for="billing-address" class="leading-loose text-vanilla-400">Billing address</label>
+        <z-textarea
+          v-model="billingAddress"
+          id="billing-address"
+          :placeholder="`Avengers Tower \n200 Park Avenue, New York`"
+          class="focus-within:border-vanilla-400 border-ink-100 bg-ink-400 text-vanilla-300"
+        ></z-textarea>
       </fieldset>
     </div>
     <template slot="footer">
@@ -61,7 +59,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZInput, ZIcon, ZModal } from '@deepsourcelabs/zeal'
+import { ZButton, ZInput, ZIcon, ZModal, ZTextarea } from '@deepsourcelabs/zeal'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
@@ -74,7 +72,8 @@ interface ZModalInterface extends Vue {
     ZButton,
     ZInput,
     ZIcon,
-    ZModal
+    ZModal,
+    ZTextarea
   }
 })
 export default class UpdateBillingDetailsModal extends mixins(OwnerBillingMixin) {
