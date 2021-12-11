@@ -1,11 +1,16 @@
 <template>
-  <ZModal v-if="showModal" title="Follow these steps to start analysis" @onClose="$emit('close')">
+  <ZModal
+    v-if="showModal"
+    title="Follow these steps to start the analysis"
+    @onClose="$emit('close')"
+  >
     <div class="text-sm font-normal space-y-4">
       <div class="flex space-x-2 items-start p-4">
         <div class="flex-grow text-vanilla-400">
           <p>
-            Complete these steps manually to start analysis, since automatically comitting to the
-            master branch on this repository is not possible due to branch protection rules.
+            The default branch on this repository has branch protection enabled, so we're not able
+            to automatically add the configuration file. Please follow these steps to configure the
+            analysis manually.
           </p>
         </div>
       </div>
@@ -30,7 +35,7 @@
           buttonType="primary"
           :actionDisabled="actionDisabled"
           @click="triggerAction"
-          >I’ve added deepsource.toml, move on to analysis</z-button
+          >I’ve added .deepsource.toml to my repository</z-button
         >
       </div>
     </template>
@@ -68,18 +73,19 @@ export default class NextStepsModal extends Vue {
 
   private steps = [
     {
-      title: 'Create Config TOML',
+      title: 'Create the configuration file',
       description:
-        'Create a new file called <span class="font-mono text-vanilla-300">.deepsource.toml</span> in the root folder of the repository. Make sure you’re on the master branch.'
+        'Create a new file called <span class="font-mono text-vanilla-300">.deepsource.toml</span> in the root folder of the repository. Make sure you’re on the default branch.'
     },
     {
-      title: 'Commit to VCS',
+      title: 'Commit to the default branch',
       description:
-        'Paste the generated configuration in this file. Create a new commit and push to remote.'
+        'Paste the generated configuration in this file and commit it to the default branch.'
     },
     {
-      title: 'Activate Analysis',
-      description: 'Click on the “Activate analysis” button to start analyzing code.'
+      title: 'Wait for the results',
+      description:
+        "The analysis should start automatically after the commit. Once the analysis is complete, you’ll be able to view all the issues we've found in the repository."
     }
   ]
 }
