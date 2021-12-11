@@ -1,8 +1,8 @@
 build:
 	cd cmd/deepsource && GOOS=linux GOARCH=amd64 go build -tags static_all -o /tmp/deepsource .
 
-build_osx:
-	cd cmd/deepsource && GOOS=darwin GOARCH=amd64 go build -tags static_all -o /tmp/deepsource .
+build_local:
+	cd cmd/deepsource && go build -tags static_all -o /tmp/deepsource .
 
 test:
 	CGO_ENABLED=0 go test --cover -coverprofile=coverage.out -v ./command/report/tests/... -run TestReportKeyValueWorkflow
