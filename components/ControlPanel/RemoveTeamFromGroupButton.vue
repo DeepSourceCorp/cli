@@ -8,7 +8,7 @@
         icon-color="cherry"
         color="cherry"
         label="Remove team"
-        @click="showConfirm"
+        @click.stop.prevent="showConfirm"
       />
     </slot>
     <portal to="modal">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <slot name="activator" :showConfirm="showConfirm">
-      <z-button size="small" button-type="secondary" @click="showConfirm">
+      <z-button size="small" button-type="secondary" @click.stop.prevent="showConfirm">
         <span class="inline-flex items-center gap-x-2 text-xs text-cherry">
           <z-icon size="small" icon="user-x" color="currentColor" />
           <span>Remove from team</span>

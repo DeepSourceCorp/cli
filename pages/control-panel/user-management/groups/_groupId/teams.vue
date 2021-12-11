@@ -15,16 +15,12 @@
     />
     <div class="flex items-center justify-between px-4 border-b border-ink-200">
       <div class="flex gap-5 pt-3 overflow-auto flex-nowrap">
-        <z-tab icon="users">
-          <nuxt-link :to="`/control-panel/user-management/groups/${$route.params.groupId}`">
-            Users
-          </nuxt-link>
-        </z-tab>
-        <z-tab icon="kayak" border-active-color="vanilla-100" is-active>
-          <nuxt-link :to="`/control-panel/user-management/groups/${$route.params.groupId}/teams`">
-            Teams
-          </nuxt-link>
-        </z-tab>
+        <nuxt-link :to="`/control-panel/user-management/groups/${$route.params.groupId}`">
+          <z-tab icon="users"> Users </z-tab>
+        </nuxt-link>
+        <nuxt-link :to="`/control-panel/user-management/groups/${$route.params.groupId}/teams`">
+          <z-tab icon="kayak" border-active-color="vanilla-100" is-active> Teams </z-tab>
+        </nuxt-link>
       </div>
       <z-input
         placeholder="Search for a team..."

@@ -11,16 +11,12 @@
     <control-panel-user-header :org-user="orgUser" :loading="$fetchState.pending" />
     <div class="flex items-center justify-between px-4 border-b border-ink-200">
       <div class="flex gap-5 pt-3 overflow-auto flex-nowrap">
-        <z-tab icon="building" border-active-color="vanilla-100" is-active>
-          <nuxt-link :to="`/control-panel/user-management/users/${$route.params.userId}`">
-            Groups
-          </nuxt-link>
-        </z-tab>
-        <z-tab icon="kayak">
-          <nuxt-link :to="`/control-panel/user-management/users/${$route.params.userId}/teams`">
-            Teams
-          </nuxt-link>
-        </z-tab>
+        <nuxt-link :to="`/control-panel/user-management/users/${$route.params.userId}`">
+          <z-tab icon="building" border-active-color="vanilla-100" is-active> Groups </z-tab>
+        </nuxt-link>
+        <nuxt-link :to="`/control-panel/user-management/users/${$route.params.userId}/teams`">
+          <z-tab icon="kayak"> Teams </z-tab>
+        </nuxt-link>
       </div>
       <z-input
         placeholder="Search for a group..."
