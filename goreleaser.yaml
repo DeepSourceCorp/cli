@@ -36,7 +36,7 @@ brews:
   - tap:
       owner: deepsourcelabs
       name: homebrew-cli
-      branch: "cli-v{{ .Tag }}"
+      branch: cli-release
       token: "{{ .Env.HOMEBREW_TOKEN }}"
     commit_author:
       name: deepsourcebot
