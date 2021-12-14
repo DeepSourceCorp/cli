@@ -59,7 +59,7 @@
               <z-radio-group
                 :readOnly="readOnly"
                 v-model="config.selected"
-                class="grid grid-cols-4 gap-2 -mb-2 text-sm"
+                class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 -mb-2 text-sm"
               >
                 <z-radio
                   class="mb-2 mr-4"
@@ -87,7 +87,7 @@
               :readOnly="readOnly"
               :modelValue="`${Number(config.selected)}`"
               @change="(val) => (config.selected = Boolean(Number(val)))"
-              class="grid grid-cols-8 gap-2 space-x-4 text-sm"
+              class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-8 gap-2 space-x-4 text-sm"
             >
               <!--Make these values boolean true and false-->
               <z-radio value="1" label="Yes"></z-radio>
@@ -97,7 +97,7 @@
           <template v-else-if="config.type == 'array'">
             <div
               v-if="config.items && config.items.enum"
-              class="grid grid-cols-4 gap-2 -mb-2 text-sm"
+              class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 -mb-2 text-sm"
             >
               <z-checkbox
                 class="mb-2 mr-4"

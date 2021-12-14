@@ -22,21 +22,22 @@
       >
         {{ owner.ownerSetting.publicKey }}
       </div>
-      <div class="flex justify-between mt-2 space-x-2">
+      <div class="flex flex-col md:flex-row justify-between gap-2 mt-2">
         <z-button
           button-type="secondary"
           :icon="clipboardIcon"
           size="small"
-          class="w-28"
+          class="w-full md:w-28"
           iconColor="vanilla-100"
           @click="copyKeys()"
           >{{ clipboardLabel }}</z-button
         >
-        <div class="space-x-2">
+        <div class="flex flex-wrap md:flex-nowrap gap-2">
           <z-button
             button-type="secondary"
             size="small"
             icon="refresh-ccw"
+            class="w-full md:w-auto"
             @click="showGenerateConfirmModal = true"
           >
             Regenerate
@@ -45,6 +46,7 @@
             button-type="danger"
             size="small"
             icon="trash-2"
+            class="w-full md:w-auto"
             @click="showRemoveConfirmModal = true"
           >
             Remove Keys

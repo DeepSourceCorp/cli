@@ -25,21 +25,22 @@
         {{ this.repository.encPublicKey }}
       </div>
 
-      <div class="flex justify-between gap-x-2 mt-2">
+      <div class="flex flex-col md:flex-row justify-between gap-2 mt-2">
         <z-button
           buttonType="secondary"
           :icon="clipboardIcon"
           size="small"
-          class="w-28"
+          class="w-full md:w-28"
           iconColor="vanilla-100"
           @click="copyKeys()"
           >{{ clipboardLabel }}</z-button
         >
-        <div class="flex gap-x-2">
+        <div class="flex flex-wrap md:flex-nowrap gap-2">
           <z-button
             buttonType="secondary"
             size="small"
             icon="refresh-ccw"
+            class="w-full md:w-auto"
             @click="isGenerateSSHConfirmModalOpen = true"
           >
             Regenerate
@@ -48,6 +49,7 @@
             buttonType="danger"
             size="small"
             icon="trash-2"
+            class="w-full md:w-auto"
             @click="isRemoveSSHConfirmModalOpen = true"
           >
             Remove Keys

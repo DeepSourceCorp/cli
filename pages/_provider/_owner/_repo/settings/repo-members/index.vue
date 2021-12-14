@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
-    <div class="text-lg font-medium mb-4">Repository members</div>
+    <div class="mb-4 text-lg font-medium">Repository members</div>
     <div class="flex space-x-2">
       <z-input
         v-model="searchCandidate"
@@ -54,6 +54,7 @@
           items-center
           justify-center
           h-40
+          p-4
           space-y-2
           border-2 border-dashed
           rounded-md
@@ -69,7 +70,7 @@
         <template v-else>
           <h3 class="text-lg font-semibold">You haven't yet added any collaborators.</h3>
           <p class="text-sm text-vanilla-400">
-            Please add collaborators from your team, by clicking on the button "Add collaborator"
+            Please add collaborators from your team, by clicking on the button "Add collaborator".
           </p>
         </template>
       </div>
@@ -92,7 +93,7 @@
     <portal to="modal">
       <add-collaborator-modal
         v-if="showAddCollaboratorModal"
-        @refetch="fetchRepoMembers(true)"
+        @refetch="fetchRepoMembers"
         @close="showAddCollaboratorModal = false"
       />
       <z-confirm
@@ -180,11 +181,15 @@ export default class RepositoryMembers extends mixins(RepoDetailMixin) {
   }
 
   async fetch(): Promise<void> {
-    await this.fetchRepoMembers()
+    await this.fetchRepoMembers(false)
   }
 
   @Watch('currentPageNumber')
-  public fetchRepoMembers(refetch = false): void {
+  public refetchOnPageUpdate(): void {
+    this.fetchRepoMembers(false)
+  }
+
+  public fetchRepoMembers(refetch = true): void {
     this.fetchRepoCollaborators({
       ...this.baseRouteParams,
       q: this.searchCandidate,
@@ -203,7 +208,7 @@ export default class RepositoryMembers extends mixins(RepoDetailMixin) {
   }
 
   async searchRepoMembers(): Promise<void> {
-    await this.fetchRepoMembers()
+    await this.fetchRepoMembers(false)
   }
 
   public triggerUpdateRole(

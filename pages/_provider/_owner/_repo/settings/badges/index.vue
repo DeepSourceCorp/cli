@@ -62,7 +62,7 @@
         <!-- Format -->
         <div class="flex items-center max-w-2xl py-4 border-t border-ink-200">
           <div class="flex-1 text-sm text-vanilla-100">Format</div>
-          <div class="w-1/4 h-8">
+          <div class="w-1/3 md:w-1/4 h-8">
             <z-select v-model="selectedFormat" spacing="py-1" class="text-sm">
               <z-option
                 v-for="item in formats"
