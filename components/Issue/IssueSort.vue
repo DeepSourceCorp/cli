@@ -1,10 +1,25 @@
 <template>
   <z-badge type="success" :is-dot="sortApplied ? true : false" size="md">
-    <z-menu v-if="!sortApplied" direction="left" width="small" class="text-vanilla-100">
+    <z-menu v-if="!sortApplied" direction="right" width="small" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
         <button
           type="button"
-          class="inline-flex items-center px-4 py-2 space-x-2 text-sm leading-none rounded-sm shadow-sm outline-none bg-ink-300 hover:bg-ink-200 text-vanilla-100 focus:outline-none"
+          class="
+            inline-flex
+            items-center
+            px-4
+            py-2
+            space-x-2
+            text-sm
+            leading-none
+            rounded-sm
+            shadow-sm
+            outline-none
+            bg-ink-300
+            hover:bg-ink-200
+            text-vanilla-100
+            focus:outline-none
+          "
           @click="toggle"
         >
           <div class="flex items-center space-x-2">
@@ -28,7 +43,22 @@
     <button
       v-else
       @click="modelValue = null"
-      class="inline-flex items-center px-4 py-2 space-x-2 text-sm leading-none rounded-sm shadow-sm outline-none bg-ink-300 hover:bg-ink-200 text-vanilla-100 focus:outline-none"
+      class="
+        inline-flex
+        items-center
+        px-4
+        py-2
+        space-x-2
+        text-sm
+        leading-none
+        rounded-sm
+        shadow-sm
+        outline-none
+        bg-ink-300
+        hover:bg-ink-200
+        text-vanilla-100
+        focus:outline-none
+      "
     >
       <div class="flex items-center space-x-2">
         <span class="hidden xl:inline-block">Sort by {{ filterLabel.toLowerCase() }}</span>
