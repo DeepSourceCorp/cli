@@ -11,7 +11,18 @@
         <!-- Branch Name -->
         <div class="flex items-center">
           <div
-            class="flex items-center space-x-2 py-2 px-3 leading-none rounded-full hover:bg-ink-200 text-vanilla-200 text-xs cursor-pointer"
+            class="
+              flex
+              items-center
+              space-x-2
+              py-2
+              px-3
+              leading-none
+              rounded-full
+              hover:bg-ink-200
+              text-vanilla-200 text-xs
+              cursor-pointer
+            "
             :class="isExpanded ? 'bg-ink-200' : 'bg-ink-300'"
             @click="toggleItems"
           >
@@ -24,39 +35,14 @@
           class="flex items-center space-x-2 cursor-pointer"
           @click="toggleItems"
         >
-          <template v-if="loading">
-            <span class="text-juniper">
-              <svg
-                class="animate-spin h-4 w-4 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  class="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  stroke-width="4"
-                ></circle>
-                <path
-                  class="opacity-100"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-            </span>
+          <div v-if="loading" class="flex items-center space-x-1 text-xs px-2">
+            <z-icon color="juniper" icon="spin-loader" size="x-small" class="animate-spin" />
             <span>Loading</span>
-          </template>
-          <z-button v-else buttonType="ghost" size="x-small" color="vanilla-400">
-            <div class="flex items-center space-x-1 text-vanilla-400" v-if="isExpanded">
-              <span>Collapse</span>
-              <z-icon icon="chevron-up" size="small"></z-icon>
-            </div>
-            <div class="flex items-center space-x-1 text-vanilla-400" v-else>
-              <span>{{ countText }}</span>
-              <z-icon icon="chevron-down" size="small"></z-icon>
+          </div>
+          <z-button v-else button-type="ghost" color="vanilla-400" size="x-small">
+            <div class="flex items-center space-x-1 text-vanilla-400">
+              <span> {{ isExpanded ? 'Collapse' : countText }} </span>
+              <z-icon :icon="isExpanded ? 'chevron-up' : 'chevron-down'" size="small" />
             </div>
           </z-button>
         </div>
