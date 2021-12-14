@@ -134,11 +134,7 @@ export default class Invitation extends mixins(ActiveUserMixin, ContextMixin) {
     try {
       this.inviteCode = this.$route.params.inviteCode
       this.dataState = REQUEST_STATES.FETCHING
-      const now = (new Date().getTime() + 30_000) / 1000
-      const expiry = this.jwtExpiry
-      if (now < expiry) {
-        await this.fetchActiveUser()
-      }
+      await this.fetchActiveUserIfLoggedIn()
       const response = (await this.$fetchGraphqlData(GetGroupInviteInfoQuery, {
         invitationCode: this.inviteCode
       })) as GraphqlQueryResponse

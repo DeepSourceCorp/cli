@@ -97,6 +97,10 @@ export default class ActiveUserMixin extends Vue {
   jwtExpiry: number
 
   async fetch(): Promise<void> {
+    await this.fetchActiveUserIfLoggedIn()
+  }
+
+  async fetchActiveUserIfLoggedIn(): Promise<void> {
     const now = (new Date().getTime() + 30_000) / 1000
     const expiry = this.jwtExpiry
     if (now < expiry) {

@@ -154,6 +154,7 @@ export default class Invitation extends mixins(ContextMixin, ActiveUserMixin) {
   async fetch(): Promise<void> {
     try {
       this.dataState = REQUEST_STATES.FETCHING
+      await this.fetchActiveUserIfLoggedIn()
       const response = await this.$applyGraphqlMutation(getInvitationDetailsMutation, {
         invitationCode: this.$route.params.code
       })
@@ -161,7 +162,7 @@ export default class Invitation extends mixins(ContextMixin, ActiveUserMixin) {
       this.dataState = REQUEST_STATES.COMPLETED
     } catch (e) {
       this.dataState = REQUEST_STATES.ERRORED
-      this.error = e
+      this.error = e as string
     }
   }
 
@@ -183,7 +184,7 @@ export default class Invitation extends mixins(ContextMixin, ActiveUserMixin) {
       }
     } catch (e) {
       this.acceptInviteState = REQUEST_STATES.ERRORED
-      this.error = e
+      this.error = e as string
     }
   }
 }
