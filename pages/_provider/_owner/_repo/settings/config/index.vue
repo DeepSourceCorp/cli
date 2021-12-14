@@ -1,18 +1,24 @@
 <template>
-  <main class="flex flex-col max-w-2xl p-4 mb-24 space-y-4">
-    <section class="mb-5 space-y-2">
-      <div class="text-lg font-medium text-vanilla-100">Analysis configuration</div>
-      <p v-if="$route.params.provider !== 'gsr'" class="text-sm text-vanilla-400">
-        The analysis configuration for a repository on DeepSource is defined in a
-        <code class="font-medium text-vanilla-200">.deepsource.toml</code>
-        file in the repository's root. This file must be present at the said location for analysis
-        to be run.
-      </p>
-      <p v-else class="text-sm text-vanilla-400">
-        The analysis configuration for a repository on DeepSource is defined here. Unlike other VCS
-        providers, you don't need to store this configuration in your repository.
-      </p>
-    </section>
+  <main class="flex flex-col max-w-2xl p-4 mb-24 gap-y-2">
+    <page-title
+      title="Analysis configuration"
+      description-width-class="max-w-2xl"
+      class="max-w-2xl"
+    >
+      <template slot="description">
+        <p v-if="$route.params.provider !== 'gsr'">
+          The analysis configuration for a repository on DeepSource is defined in a
+          <code class="font-medium text-vanilla-200">.deepsource.toml</code>
+          file in the repository's root. This file must be present at the said location for analysis
+          to be run.
+        </p>
+        <p v-else>
+          The analysis configuration for a repository on DeepSource is defined here. Unlike other
+          VCS providers, you don't need to store this configuration in your repository.
+        </p>
+      </template>
+    </page-title>
+
     <section class="flex items-center justify-between">
       <z-radio-group v-model="configMode" class="flex">
         <z-radio-button value="cards" v-tooltip="'View as cards'">

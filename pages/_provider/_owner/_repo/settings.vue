@@ -10,7 +10,7 @@
         pt-2
         hide-scroll
         border-b border-ink-200
-        lg:sticky lg:flex-col lg:gap-y-1 lg:px-2 lg:pt-4 lg:border-r lg:h-nav-sidebar
+        lg:sticky lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r lg:h-nav-sidebar
       "
     >
       <template v-for="item in navItems">
@@ -18,7 +18,7 @@
           v-if="isNavLinkVisible(item)"
           :key="item.label"
           :to="$generateRoute(item.link)"
-          class="flex-shrink-0 text-sm group hover:bg-ink-300"
+          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
         >
           <span
             class="p-2 rounded-md hidden group-hover:text-vanilla-100 lg:block"

@@ -1,8 +1,8 @@
 <template>
-  <div class="max-w-3xl p-4 space-y-2">
+  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
     <page-title
-      class="max-w-3xl"
+      class="max-w-2xl"
       title="SSH Access"
       description-width-class="max-w-2xl"
       description="If your repository has external private dependencies, you need to grant DeepSource access to fetch those dependencies via this public key."
@@ -25,7 +25,7 @@
         {{ this.repository.encPublicKey }}
       </div>
 
-      <div class="flex justify-between mt-2 space-x-2">
+      <div class="flex justify-between gap-x-2 mt-2">
         <z-button
           buttonType="secondary"
           :icon="clipboardIcon"
@@ -35,7 +35,7 @@
           @click="copyKeys()"
           >{{ clipboardLabel }}</z-button
         >
-        <div class="space-x-2">
+        <div class="flex gap-x-2">
           <z-button
             buttonType="secondary"
             size="small"

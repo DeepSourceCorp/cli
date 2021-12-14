@@ -1,12 +1,13 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 space-y-6">
+  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
-    <div class="text-lg font-medium text-vanilla-100">Autofix settings</div>
-    <!-- Description -->
-    <div class="text-sm text-vanilla-400">
-      To use Autofix on this repository, DeepSource needs the necessary permissions to automatically
-      create pull-requests.
-    </div>
+    <page-title
+      class="max-w-2xl"
+      title="Autofix settings"
+      description-width-class="max-w-2xl"
+      description="To use Autofix on this repository, DeepSource needs the necessary permissions to automatically
+      create pull-requests."
+    />
     <!-- Notice -->
     <notice class="items-baseline" v-if="repository.isAutofixEnabled">
       <p class="relative top-px">

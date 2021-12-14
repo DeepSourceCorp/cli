@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 space-y-4">
+  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
-    <div class="text-lg font-medium text-vanilla-100">Audit log</div>
+    <h2 class="text-lg font-medium mb-4">Audit log</h2>
     <!-- Timeline -->
     <div v-if="$fetchState.pending" class="space-y-2">
       <div v-for="idx in 4" :key="idx" class="w-2/3 h-20 rounded-md bg-ink-300 animate-pulse"></div>

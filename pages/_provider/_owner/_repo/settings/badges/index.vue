@@ -1,14 +1,14 @@
 <template>
-  <div class="flex flex-col p-4 gap-y-4">
+  <div class="flex flex-col p-4 gap-y-2 max-w-2xl">
     <page-title
-      class="max-w-3xl"
+      class="max-w-2xl"
       title="Badges"
       description-width-class="max-w-2xl"
       description="Embeddable badges that can be used to link to the DeepSource dashboard for this project. Add
         these badges in the project's README, wiki or the website."
     />
     <div class="flex flex-col gap-y-2">
-      <div class="max-w-2xl gap-y-2">
+      <div class="max-w-2xl flex flex-col gap-y-2">
         <label class="text-sm text-vanilla-100">Preview</label>
         <!-- Preview component -->
         <div class="flex flex-col items-center h-40 p-2 border border-ink-200">
@@ -18,7 +18,7 @@
           <z-input v-model="embedCode" class="self-end pr-0.5">
             <template slot="right">
               <z-button
-                buttonType="secondary"
+                button-type="secondary"
                 size="small"
                 spacing="px-2"
                 class="flex items-center w-32 space-x-2"
@@ -32,47 +32,54 @@
         </div>
       </div>
       <!-- Badge type -->
-      <div class="flex items-center max-w-2xl py-2">
-        <div class="flex-1 text-sm text-vanilla-100">Badge type</div>
-        <z-radio-group v-model="badgeType" class="flex">
-          <z-radio-button value="active issues" label="Active issues"></z-radio-button>
-          <z-radio-button value="resolved issues" label="Resolved issues"></z-radio-button>
-        </z-radio-group>
-      </div>
-      <!-- Show trend -->
-      <div class="flex gap-x-4">
-        <div class="flex flex-grow max-w-2xl py-4 border-t border-ink-200">
-          <div class="flex-1 text-sm text-vanilla-100">Show trend</div>
-          <z-toggle v-model="showTrend"></z-toggle>
+      <form-group>
+        <div class="flex items-center max-w-2xl py-4">
+          <div class="flex-1 text-sm text-vanilla-100">Badge type</div>
+          <z-radio-group v-model="badgeType" class="flex">
+            <z-radio-button value="active issues" label="Active issues"></z-radio-button>
+            <z-radio-button value="resolved issues" label="Resolved issues"></z-radio-button>
+          </z-radio-group>
         </div>
-        <div class="hidden lg:block">
-          <info-banner
-            class="w-56 2xl:w-auto"
-            info="Add a trendline showing how the value of this metric has varied in the
-          last 6 months."
-          />
+        <!-- Show trend -->
+        <toggle-input
+          input-width="x-small"
+          label="Show trend"
+          input-id="show-trend"
+          v-model="showTrend"
+          class="max-w-2xl border-t border-ink-300"
+        >
+          <template slot="description">
+            <p class="max-w-sm">
+              If you are using private submodules, ensure that DeepSource has access to them via an
+              <nuxt-link
+                :to="$generateRoute(['settings', 'ssh-access'])"
+                class="font-medium text-juniper"
+                >SSH key</nuxt-link
+              >.
+            </p>
+          </template>
+        </toggle-input>
+        <!-- Format -->
+        <div class="flex items-center max-w-2xl py-4 border-t border-ink-200">
+          <div class="flex-1 text-sm text-vanilla-100">Format</div>
+          <div class="w-1/4 h-8">
+            <z-select v-model="selectedFormat" spacing="py-1" class="text-sm">
+              <z-option
+                v-for="item in formats"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </z-option>
+            </z-select>
+          </div>
         </div>
-      </div>
-      <!-- Format -->
-      <div class="flex items-center max-w-2xl py-4 border-t border-ink-200">
-        <div class="flex-1 text-sm text-vanilla-100">Format</div>
-        <div class="w-1/4 h-8">
-          <z-select v-model="selectedFormat" spacing="py-1" class="text-sm">
-            <z-option
-              v-for="item in formats"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
-            >
-            </z-option>
-          </z-select>
+        <!-- Add referral -->
+        <div class="flex items-center max-w-2xl py-4 border-t border-ink-200">
+          <div class="flex-1 text-sm text-vanilla-100">Add referral to badge</div>
+          <z-toggle v-model="addReferral"></z-toggle>
         </div>
-      </div>
-      <!-- Add referral -->
-      <div class="flex items-center max-w-2xl py-4 border-t border-ink-200">
-        <div class="flex-1 text-sm text-vanilla-100">Add referral to badge</div>
-        <z-toggle v-model="addReferral"></z-toggle>
-      </div>
+      </form-group>
     </div>
   </div>
 </template>
@@ -80,6 +87,7 @@
 <script lang="ts">
 import { Vue, Component, namespace } from 'nuxt-property-decorator'
 import { Notice } from '@/components/Settings/index'
+import { ToggleInput, FormGroup } from '@/components/Form'
 import {
   ZInput,
   ZRadioGroup,
@@ -108,7 +116,9 @@ const repoStore = namespace('repository/detail')
     ZDivider,
     ZSelect,
     ZOption,
-    ZToggle
+    ZToggle,
+    ToggleInput,
+    FormGroup
   },
   layout: 'repository'
 })

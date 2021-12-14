@@ -4,6 +4,7 @@
     :description="description"
     :inputId="inputId"
     :inputWidth="inputWidth"
+    :cascadeInput="cascadeInput"
   >
     <template slot="label">
       <slot name="label"></slot>
@@ -57,6 +58,9 @@ export default class TextInput extends Vue {
 
   @Prop({ default: false })
   readOnly: boolean
+
+  @Prop({ default: false })
+  cascadeInput: boolean
 
   triggerBlur(ev: InputEvent): void {
     this.$emit('blur', ev)

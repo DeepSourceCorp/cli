@@ -12,14 +12,28 @@
     <template slot="description">
       <slot name="description"></slot>
     </template>
-    <div class="text-left md:text-right">
+    <div class="text-left md:text-right" :class="fullWidth && 'col-span-full md:col-span-1'">
       <slot>
         <nuxt-link v-if="to" :to="to">
-          <z-button :buttonType="buttonType" size="small" :icon="icon">
+          <z-button
+            :button-type="buttonType"
+            size="small"
+            :icon="icon"
+            :full-width="fullWidth"
+            :class="fullWidth && 'h-10 md:h-8'"
+          >
             {{ buttonLabel }}
           </z-button>
         </nuxt-link>
-        <z-button v-else :buttonType="buttonType" size="small" :icon="icon" @click="triggerClick">
+        <z-button
+          v-else
+          :button-type="buttonType"
+          size="small"
+          :icon="icon"
+          :full-width="fullWidth"
+          :class="fullWidth && 'h-10 md:h-8'"
+          @click="triggerClick"
+        >
           {{ buttonLabel }}
         </z-button>
       </slot>
@@ -61,6 +75,9 @@ export default class ButtonInput extends Vue {
 
   @Prop({ default: null })
   icon: string
+
+  @Prop({ default: false })
+  fullWidth: boolean
 
   triggerClick(event: Event) {
     this.$emit('click', event)

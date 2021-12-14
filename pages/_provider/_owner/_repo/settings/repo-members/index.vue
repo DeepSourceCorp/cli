@@ -1,7 +1,7 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 space-y-4">
+  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
-    <div class="text-lg font-medium text-vanilla-100">Repository members</div>
+    <div class="text-lg font-medium mb-4">Repository members</div>
     <div class="flex space-x-2">
       <z-input
         v-model="searchCandidate"
