@@ -8,8 +8,8 @@
       create pull-requests.
     </div>
     <!-- Notice -->
-    <notice v-if="repository.isAutofixEnabled">
-      <p>
+    <notice class="items-baseline" v-if="repository.isAutofixEnabled">
+      <p class="relative top-px">
         The Autofix app has been installed and has all the necessary permissions on this repository.
       </p>
     </notice>

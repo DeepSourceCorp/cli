@@ -87,11 +87,13 @@
       <div class="flex-col flex-grow max-w-2xl space-y-4">
         <div class="text-sm text-vanilla-100">Test Coverage</div>
         <!-- Notice -->
-        <notice :enabled="repository.hasTestCoverage">
-          <p v-if="repository.hasTestCoverage">
+        <notice class="items-baseline" :enabled="repository.hasTestCoverage">
+          <p class="relative top-px" v-if="repository.hasTestCoverage">
             Test coverage tracking is enabled, and we're ready to receive coverage data.
           </p>
-          <p v-else>Test coverage has not been set up for this repository yet.</p>
+          <p class="relative top-px" v-else>
+            Test coverage has not been set up for this repository yet.
+          </p>
         </notice>
       </div>
       <div class="hidden lg:block">
