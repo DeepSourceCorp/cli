@@ -159,7 +159,12 @@
         </ul>
       </div>
 
-      <input-wrapper label="Analysis scope" input-width="x-small" class="hidden lg:grid">
+      <input-wrapper
+        input-id="repo-analysis-scope"
+        label="Analysis scope"
+        input-width="x-small"
+        class="hidden lg:grid"
+      >
         <div class="h-8">
           <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
             <z-option label="Granular (recommended)" value="granular"></z-option>
@@ -234,14 +239,7 @@
             'bg-juniper text-ink-400': isRepoActivated && !isHovered
           }"
         >
-          <z-icon
-            :icon="icon"
-            size="small"
-            :color="{
-              'vanilla-100': !isRepoActivated && !isHovered,
-              'ink-400': isRepoActivated && !isHovered
-            }"
-          ></z-icon>
+          <z-icon :icon="icon" size="small" color="currentColor" />
           <span class="text-sm leading-none">{{ buttonText }}</span>
         </button>
 
@@ -253,7 +251,7 @@
       </button-input>
     </form-group>
 
-    <form-group label="Discover settings" class="flex-grow max-w-2xl">
+    <form-group v-if="!repository.isPrivate" label="Discover settings" class="flex-grow max-w-2xl">
       <div>
         <button-input
           label="Add to discover"
