@@ -54,7 +54,7 @@
             }}</span>
             <p class="mt-1 text-xs text-vanilla-400">
               {{ context.vcs_provider_display }}
-              {{ context.type === 'user' ? 'Account' : 'Organization' }}
+              {{ context.type === 'user' ? 'Account' : 'Team' }}
             </p>
           </div>
           <div class="pr-2">
