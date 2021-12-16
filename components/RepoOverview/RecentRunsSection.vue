@@ -173,7 +173,9 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
       { name: 'Analysis runs', showMoreLabel: 'View all Analysis runs', link: ['history', 'runs'] }
     ]
 
-    if (this.$gateKeeper.provider(AppFeatures.AUTOFIX)) {
+    const { provider } = this.$route.params
+
+    if (this.$gateKeeper.provider(AppFeatures.AUTOFIX, provider)) {
       options.push({
         name: 'Autofixes',
         showMoreLabel: 'View all Autofixes',
@@ -182,7 +184,7 @@ export default class RecentRunsSection extends mixins(RoleAccessMixin) {
       })
     }
 
-    if (this.$gateKeeper.provider(AppFeatures.TRANSFORMS)) {
+    if (this.$gateKeeper.provider(AppFeatures.TRANSFORMS, provider)) {
       options.push({
         name: 'Transforms',
         showMoreLabel: 'View all Transforms',

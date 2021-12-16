@@ -216,7 +216,8 @@ export default class AnalyzerRun extends Vue {
   }
 
   get allowAutofix(): boolean {
-    return this.$gateKeeper.provider(AppFeatures.AUTOFIX)
+    const { provider } = this.$route.params
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX, provider)
   }
 
   get issueCount(): number {

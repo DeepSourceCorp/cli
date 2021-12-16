@@ -36,6 +36,6 @@ export default class RoleAccessMixin extends mixins(RepoDetailMixin, AuthMixin, 
   }
 
   get allowAutofix(): boolean {
-    return this.$gateKeeper.provider(AppFeatures.AUTOFIX)
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.activeProvider)
   }
 }

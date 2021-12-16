@@ -24,7 +24,9 @@ module.exports = {
       'text-cherry',
       'text-current',
       'bg-gitlab',
-      'bg-bitbucket'
+      'bg-bitbucket',
+      'opacity-100',
+      'opacity-25'
     ]
   },
   variants: {

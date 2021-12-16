@@ -332,8 +332,9 @@ export default class RepoHeader extends mixins(
   }
 
   isNavLinkVisible(item: TabLink): boolean {
+    const { provider } = this.$route.params
     if (Array.isArray(item.gateFeature)) {
-      return this.$gateKeeper.provider(item.gateFeature)
+      return this.$gateKeeper.provider(item.gateFeature, provider)
     }
 
     if (item.loginRequired) {

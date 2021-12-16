@@ -191,7 +191,8 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }
 
   get transformsAllowed(): boolean {
-    return this.$gateKeeper.provider(AppFeatures.TRANSFORMS)
+    const { provider } = this.$route.params
+    return this.$gateKeeper.provider(AppFeatures.TRANSFORMS, provider)
   }
 
   head(): Record<string, string> {

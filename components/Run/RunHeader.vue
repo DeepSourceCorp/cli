@@ -145,7 +145,8 @@ export default class RunHeader extends Vue {
   }
 
   get transformsAllowed(): boolean {
-    return this.$gateKeeper.provider(AppFeatures.TRANSFORMS)
+    const { provider } = this.$route.params
+    return this.$gateKeeper.provider(AppFeatures.TRANSFORMS, provider)
   }
 
   getRoute(lang: string): string {

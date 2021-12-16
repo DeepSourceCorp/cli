@@ -75,7 +75,8 @@ export default class TeamHome extends mixins(OwnerDetailMixin, ActiveUserMixin) 
   }
 
   get showAutofixGraph(): boolean {
-    return this.$gateKeeper.provider(AppFeatures.AUTOFIX)
+    const { provider } = this.$route.params
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX, provider)
   }
 
   get steps(): Array<SetupStep> {

@@ -95,7 +95,8 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
   private showSyncModal = false
 
   get allowSyncAccessSettings(): boolean {
-    return this.$gateKeeper.provider(AppFeatures.SYNC_ACCESS_SETTINGS)
+    const { provider } = this.$route.params
+    return this.$gateKeeper.provider(AppFeatures.SYNC_ACCESS_SETTINGS, provider)
   }
 
   closeSyncModal() {

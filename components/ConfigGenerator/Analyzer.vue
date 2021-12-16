@@ -344,7 +344,8 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
   }
 
   get showTransformers(): boolean {
-    if (!this.$gateKeeper.provider(AppFeatures.TRANSFORMS)) {
+    const { provider } = this.$route.params
+    if (!this.$gateKeeper.provider(AppFeatures.TRANSFORMS, provider)) {
       return false
     }
 

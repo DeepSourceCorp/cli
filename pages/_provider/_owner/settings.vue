@@ -159,8 +159,9 @@ export default class TeamSettings extends mixins(
   }
 
   get autoOnboardAvailable(): boolean {
+    const { provider } = this.$route.params
     return (
-      this.$gateKeeper.provider(AppFeatures.AUTO_ONBOARD) &&
+      this.$gateKeeper.provider(AppFeatures.AUTO_ONBOARD, provider) &&
       this.activeDashboardContext.type === 'team' &&
       this.$gateKeeper.team(TeamPerms.AUTO_ONBOARD_REPOSITORIES, this.teamPerms.permission)
     )
