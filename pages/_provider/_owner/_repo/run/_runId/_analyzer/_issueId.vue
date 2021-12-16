@@ -152,7 +152,6 @@ import LinkToPrev from '@/components/LinkToPrev.vue'
 import { IssueDetailsHeader, IssueActions } from '@/components/RepoIssues/index'
 import { SubNav } from '@/components/History/index'
 import { IssueList } from '@/components/RepoIssues'
-import ShowMore from '@/components/ShowMore.vue'
 
 // Import State & Types
 import { Check, Maybe, CheckEdge } from '~/types/types'
@@ -177,7 +176,6 @@ const PAGE_SIZE = 25
     IssueDetailsHeader,
     SubNav,
     IssueList,
-    ShowMore,
     IssueActions
   },
   layout: 'repository'

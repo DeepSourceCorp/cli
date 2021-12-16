@@ -12,13 +12,8 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import ShowMore from '@/components/ShowMore.vue'
 
-@Component({
-  components: {
-    ShowMore
-  }
-})
+@Component({})
 export default class IssueDescription extends Vue {
   @Prop()
   description: string
