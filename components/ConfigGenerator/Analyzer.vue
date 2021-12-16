@@ -5,7 +5,7 @@
         class="flex items-center space-x-2 font-bold select-none text-vanilla-100"
         @click="isCollapsed = !isCollapsed"
         :class="{
-          'cursor-pointer': configItems.length > 0 || showTransformers
+          'cursor-pointer': hasCollapsibleContent
         }"
       >
         <analyzer-logo
@@ -16,7 +16,7 @@
         />
         <span>{{ label }}</span>
         <z-icon
-          v-if="collapsible && (configItems.length > 0 || showTransformers)"
+          v-if="collapsible && hasCollapsibleContent"
           class="duration-150 transform"
           :class="{
             'rotate-180': isCollapsed
@@ -145,7 +145,7 @@
           </template>
         </div>
       </template>
-      <div class="p-3 space-y-1" v-if="showTransformers">
+      <div v-if="showTransformers" class="p-3 space-y-1">
         <label class="text-sm tracking-wide text-vanilla-400">Transformers</label>
         <div class="grid grid-cols-2 gap-2">
           <div
@@ -173,29 +173,77 @@
           </div>
         </div>
       </div>
+
+      <div v-else-if="showInstallAutofixAppCTA" class="p-3 space-y-2">
+        <label class="text-sm tracking-wide text-vanilla-400">Transformers</label>
+        <div class="px-4 py-6 text-sm text-center space-y-5 border border-ink-100">
+          <h4 class="text-vanilla-100 text-base font-medium">
+            Enable Autofix app on {{ $providerMetaMap[$route.params.provider].text }}
+          </h4>
+
+          <p class="text-vanilla-400">
+            To create commits and pull-requests automatically, we need the Autofix app installed on
+            the account with access to this repository.
+          </p>
+
+          <div v-if="canEnableAutofix">
+            <z-button
+              v-if="installing"
+              :disabled="true"
+              button-type="ghost"
+              color="vanilla-100"
+              size="small"
+              class="w-48 flex items-center bg-ink-200"
+            >
+              <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2" />
+              Verifying installation
+            </z-button>
+            <z-button
+              v-else
+              button-type="ghost"
+              color="vanilla-100"
+              icon="autofix"
+              size="small"
+              class="modal-primary-action w-48 bg-ink-200"
+              @click="openAutofixInstallationUrl(close)"
+              >Install Autofix app</z-button
+            >
+          </div>
+        </div>
+      </div>
     </form>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZCheckbox, ZOption, ZRadioGroup, ZRadio } from '@deepsourcelabs/zeal'
-import { TransformerTool } from '~/types/types'
 import { toSentenceCase } from '@/utils/string'
+import {
+  ZButton,
+  ZCheckbox,
+  ZIcon,
+  ZInput,
+  ZOption,
+  ZRadio,
+  ZRadioGroup
+} from '@deepsourcelabs/zeal'
+import { Component, mixins, namespace, Prop, Watch } from 'nuxt-property-decorator'
 
-import { Repository } from '~/types/types'
-
-const repoDetailStore = namespace('repository/detail')
+import InstallAutofixMixin from '~/mixins/installAutofixMixin'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 import {
   AnalyzerMetaInterface,
-  TransformerInterface,
-  AnalyzerMetaProperitiesInterface
+  AnalyzerMetaProperitiesInterface,
+  TransformerInterface
 } from '~/store/analyzer/list'
-import { AppFeatures } from '~/types/permTypes'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
+import { Repository, TransformerTool } from '~/types/types'
+
+const repoDetailStore = namespace('repository/detail')
 
 @Component({
   components: {
+    ZButton,
     ZIcon,
     ZInput,
     ZCheckbox,
@@ -204,7 +252,7 @@ import { AppFeatures } from '~/types/permTypes'
     ZRadio
   }
 })
-export default class Analyzer extends Vue {
+export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixin) {
   @repoDetailStore.State
   repository: Repository
 
@@ -270,8 +318,29 @@ export default class Analyzer extends Vue {
     this.$emit('onClose')
   }
 
+  get canEnableAutofix(): boolean {
+    return this.$gateKeeper.repo(RepoPerms.INSTALL_AUTOFIX_APP, this.repoPerms.permission)
+  }
+
+  get hasCollapsibleContent(): boolean {
+    return this.configItems.length > 0 || this.showTransformers || this.showInstallAutofixAppCTA
+  }
+
   get properties(): AnalyzerMetaInterface['properties'] {
     return this.analyzerMeta.properties
+  }
+
+  get showInstallAutofixAppCTA(): boolean {
+    // Show the CTA to install Autofix app only on config generator page
+    if (this.$route.name !== 'provider-owner-repo-generate-config') {
+      return false
+    }
+
+    return (
+      this.availableTransformers.length > 0 &&
+      this.allowAutofix &&
+      !this.repository.isAutofixEnabled
+    )
   }
 
   get showTransformers(): boolean {

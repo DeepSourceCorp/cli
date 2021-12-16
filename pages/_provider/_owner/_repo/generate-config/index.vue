@@ -10,40 +10,6 @@
           <b class="text-vanilla-100">{{ repo }}</b>
         </span>
       </h4>
-      <div
-        class="
-          flex
-          items-center
-          p-1
-          px-2
-          space-x-2
-          text-sm
-          border
-          rounded-md
-          border-ink-200
-          text-vanilla-400
-        "
-        v-if="allowAutofix && !repository.isAutofixEnabled"
-      >
-        <span
-          class="w-3.5 h-3.5 flex items-center justify-center rounded-full bg-honey bg-opacity-50"
-        >
-          <span class="w-2 h-2 bg-opacity-100 rounded-full bg-honey"></span>
-        </span>
-        <span class="leading-none">Autofix app is not installed</span>
-        <z-button
-          size="x-small"
-          icon="autofix"
-          buttonType="secondary"
-          v-if="canEnableAutofix"
-          @click="showInstallAutofixAppModal = true"
-          >Install Now</z-button
-        >
-      </div>
-      <install-autofix-modal
-        v-if="allowAutofix && showInstallAutofixAppModal"
-        @close="showInstallAutofixAppModal = false"
-      />
     </div>
     <div class="grid max-w-6xl grid-cols-9 p-4 space-x-4">
       <!-- Steps -->
@@ -179,7 +145,7 @@ import { TransformerInterface } from '~/store/analyzer/list'
 import { DirectoryGetters } from '~/store/directory/directory'
 import { RepoConfigInterface, RepoConfigAnalyzerMeta } from '~/store/repository/detail'
 
-import { RepoPerms, TeamPerms } from '~/types/permTypes'
+import { TeamPerms } from '~/types/permTypes'
 import { Analyzer, TransformerTool } from '~/types/types'
 import AnalyzerListMixin from '~/mixins/analyzerListMixin'
 
@@ -245,7 +211,6 @@ export default class GenerateConfig extends mixins(
     exclude_patterns: []
   }
 
-  public showInstallAutofixAppModal = false
   public showAddDefaultBranchModal = false
   public showNextSteps = false
   public isProcessing = false
@@ -267,8 +232,7 @@ export default class GenerateConfig extends mixins(
     Promise.all([
       this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true }),
       this.fetchIsCommitPossible(this.baseRouteParams),
-      this.fetchRepoDetails(this.baseRouteParams),
-      this.fetchRepoPerms(this.baseRouteParams)
+      this.fetchRepoDetails(this.baseRouteParams)
     ])
     // create a deep copy, this is safe enough for now
     // deep copy to avoid mutating the state directly
@@ -522,10 +486,6 @@ export default class GenerateConfig extends mixins(
 
   updatePatternsConfig(patterns: Record<string, string[]>): void {
     Object.assign(this.userConfig, patterns)
-  }
-
-  get canEnableAutofix(): boolean {
-    return this.$gateKeeper.repo(RepoPerms.INSTALL_AUTOFIX_APP, this.repoPerms.permission)
   }
 }
 </script>
