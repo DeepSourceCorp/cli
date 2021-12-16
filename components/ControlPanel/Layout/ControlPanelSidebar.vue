@@ -35,7 +35,7 @@
         :key="getPageTitle(cpItem.title)"
         :isCollapsed="isCollapsed"
         :icon="cpItem.icon"
-        icon-color="currentColor"
+        icon-color="current"
         :active="parentRoute === cpItem.to"
         :to="cpItem.to ? cpItem.to : cpItem.href ? cpItem.href : managementConsoleUrl"
         :target="cpItem.to ? false : '_blank'"

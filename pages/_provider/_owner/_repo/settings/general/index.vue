@@ -239,7 +239,7 @@
             'bg-juniper text-ink-400': isRepoActivated && !isHovered
           }"
         >
-          <z-icon :icon="icon" size="small" color="currentColor" />
+          <z-icon :icon="icon" size="small" color="current" />
           <span class="text-sm leading-none">{{ buttonText }}</span>
         </button>
 

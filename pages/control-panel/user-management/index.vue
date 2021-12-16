@@ -71,7 +71,7 @@
                 {{ orgUser.fullName || orgUser.email }}
               </p>
               <div class="flex items-center gap-x-1.5 text-vanilla-400">
-                <z-icon icon="mail" size="x-small" color="currentColor" class="flex-shrink-0" />
+                <z-icon icon="mail" size="x-small" color="current" class="flex-shrink-0" />
                 <span class="text-xs">{{ orgUser.email }}</span>
               </div>
             </div>

@@ -71,7 +71,7 @@
               </p>
               <div class="flex items-center gap-x-3">
                 <div v-if="user.email" class="flex items-center gap-x-1.5 text-vanilla-400">
-                  <z-icon icon="mail" size="x-small" color="currentColor" class="flex-shrink-0" />
+                  <z-icon icon="mail" size="x-small" color="current" class="flex-shrink-0" />
                   <span class="text-xs">{{ user.email }}</span>
                 </div>
               </div>

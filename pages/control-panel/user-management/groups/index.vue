@@ -61,7 +61,7 @@
                   v-if="group.members && group.members.totalCount"
                   class="flex items-center gap-x-1.5 text-vanilla-400"
                 >
-                  <z-icon icon="users" size="x-small" color="currentColor" class="flex-shrink-0" />
+                  <z-icon icon="users" size="x-small" color="current" class="flex-shrink-0" />
                   <span class="text-xs"
                     >{{ group.members.totalCount }} member<span v-if="group.members.totalCount > 1"
                       >s</span
@@ -72,7 +72,7 @@
                   v-if="group.teams && group.teams.totalCount"
                   class="flex items-center gap-x-1.5 text-vanilla-400"
                 >
-                  <z-icon icon="globe" size="x-small" color="currentColor" class="flex-shrink-0" />
+                  <z-icon icon="globe" size="x-small" color="current" class="flex-shrink-0" />
                   <span class="text-xs"
                     >{{ group.teams.totalCount }} team<span v-if="group.teams.totalCount > 1"
                       >s</span

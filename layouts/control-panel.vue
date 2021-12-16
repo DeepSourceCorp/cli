@@ -105,7 +105,7 @@
             v-for="cpItem in pageSubroutes"
             :key="getPageTitle(cpItem.title)"
             :icon="cpItem.icon"
-            icon-color="currentColor"
+            icon-color="current"
             :active="subRoute === cpItem.to || subRoute === cpItem.navTo"
             :to="cpItem.to ? cpItem.to : cpItem.href"
           >

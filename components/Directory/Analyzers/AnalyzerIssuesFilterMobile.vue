@@ -21,14 +21,9 @@
             class="rounded-md"
             :class="activeFilter === '' ? 'bg-juniper text-ink-400' : 'bg-ink-200 text-vanilla-100'"
           >
-            <z-button
-              button-type="ghost"
-              color="currentColor"
-              class="w-full"
-              @click="updateFilter('')"
-            >
+            <z-button button-type="ghost" color="current" class="w-full" @click="updateFilter('')">
               <div class="flex items-center w-full">
-                <z-icon icon="list" size="small" color="currentColor" class="mr-2" />
+                <z-icon icon="list" size="small" color="current" class="mr-2" />
                 <span
                   class="flex-grow-0 overflow-x-hidden text-xs text-left overflow-ellipsis w-17"
                 >
@@ -56,7 +51,7 @@
           >
             <z-button
               button-type="ghost"
-              color="currentColor"
+              color="current"
               class="w-full"
               @click="updateFilter(issueType.shortcode)"
             >
@@ -64,7 +59,7 @@
                 <z-icon
                   :icon="issueType.shortcode"
                   size="small"
-                  color="currentColor"
+                  color="current"
                   class="flex-shrink-0 mr-2"
                 />
                 <span

@@ -1,7 +1,19 @@
 <template>
   <div>
     <div
-      class="fixed z-10 flex items-center w-full px-4 py-4 border-b border-ink-200 top-10 lg:top-0 bg-ink-400"
+      class="
+        fixed
+        z-10
+        flex
+        items-center
+        w-full
+        px-4
+        py-4
+        border-b border-ink-200
+        top-10
+        lg:top-0
+        bg-ink-400
+      "
     >
       <z-breadcrumb separator="/" class="py-px text-sm text-vanilla-100">
         <z-breadcrumb-item
@@ -52,9 +64,30 @@
             <nuxt-link
               v-else
               :to="{ path: '/login', query: { next: `${$route.path}?use-action=true` } }"
-              class="inline-flex items-center justify-center h-8 p-0 px-4 py-1 space-x-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out rounded-sm focus:outline-none whitespace-nowrap text-ink-400 bg-juniper hover:bg-juniper-600"
+              class="
+                inline-flex
+                items-center
+                justify-center
+                h-8
+                p-0
+                px-4
+                py-1
+                space-x-1
+                text-xs
+                font-medium
+                leading-loose
+                transition-colors
+                duration-300
+                ease-in-out
+                rounded-sm
+                focus:outline-none
+                whitespace-nowrap
+                text-ink-400
+                bg-juniper
+                hover:bg-juniper-600
+              "
             >
-              <z-icon icon="play" color="currentColor" size="small" class="mr-1.5" />
+              <z-icon icon="play" color="current" size="small" class="mr-1.5" />
               Use {{ isAnalyzer ? 'Analyzer' : 'Transformer' }}
             </nuxt-link>
             <div class="flex gap-2">

@@ -2,8 +2,21 @@
   <div>
     <component
       :is="isIssuesPage ? 'button' : 'nuxt-link'"
-      :to="isIssuesPage && !analyzerShortcode ? '' : `/directory/analyzers/${analyzerShortcode}/issues`"
-      class="flex justify-between w-72 rounded-md p-2 mb-3 hover:bg-ink-200 hover:text-vanilla-100 focus:text-vanilla-100 outline-none focus:outline-none"
+      :to="
+        isIssuesPage && !analyzerShortcode ? '' : `/directory/analyzers/${analyzerShortcode}/issues`
+      "
+      class="
+        flex
+        justify-between
+        w-72
+        rounded-md
+        p-2
+        mb-3
+        hover:bg-ink-200 hover:text-vanilla-100
+        focus:text-vanilla-100
+        outline-none
+        focus:outline-none
+      "
       :class="{
         'bg-ink-200 text-vanilla-100': activeFilter === '',
         'text-vanilla-400': activeFilter !== ''
@@ -11,7 +24,7 @@
       @click="updateFilter('')"
     >
       <p class="flex items-center gap-x-2 text-sm">
-        <z-icon icon="list" size="small" color="currentColor" />
+        <z-icon icon="list" size="small" color="current" />
         <span>All issues</span>
       </p>
       <z-tag bg-color="ink-200" text-size="xs" spacing="py-0.5 px-2">
@@ -30,7 +43,18 @@
       button-type="ghost"
       :type="isIssuesPage ? 'button' : ''"
       :color="activeFilter === issueType.shortcode ? '' : 'vanilla-400'"
-      class="flex justify-between w-72 rounded-md p-2 mb-3 hover:bg-ink-200 hover:text-vanilla-100 focus:text-vanilla-100 outline-none focus:outline-none"
+      class="
+        flex
+        justify-between
+        w-72
+        rounded-md
+        p-2
+        mb-3
+        hover:bg-ink-200 hover:text-vanilla-100
+        focus:text-vanilla-100
+        outline-none
+        focus:outline-none
+      "
       :class="{
         'bg-ink-200 text-vanilla-100': activeFilter === issueType.shortcode,
         'text-vanilla-400': activeFilter !== issueType.shortcode
@@ -38,7 +62,7 @@
       @click="updateFilter(issueType.shortcode)"
     >
       <p class="flex items-center gap-x-2 text-sm">
-        <z-icon :icon="issueType.shortcode" size="small" color="currentColor" />
+        <z-icon :icon="issueType.shortcode" size="small" color="current" />
         <span>{{ issueType.title }}</span>
       </p>
       <z-tag bg-color="ink-200" text-size="xs" spacing="py-0.5 px-2">

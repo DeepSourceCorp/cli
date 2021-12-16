@@ -3,7 +3,7 @@
     <slot name="activator" :showConfirm="showConfirm">
       <z-button size="small" button-type="secondary" @click.stop.prevent="showConfirm">
         <span class="inline-flex items-center gap-x-2 text-xs text-cherry">
-          <z-icon size="small" icon="user-x" color="currentColor" />
+          <z-icon size="small" icon="user-x" color="current" />
           <span>Remove user</span>
         </span>
       </z-button>

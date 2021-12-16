@@ -44,7 +44,7 @@
                 class="flex items-center justify-center gap-x-2"
                 :class="[statusTextColorMap[addOn.status]]"
               >
-                <z-icon :icon="statusIconMap[addOn.status]" size="x-small" color="currentColor" />
+                <z-icon :icon="statusIconMap[addOn.status]" size="x-small" color="current" />
                 <span class="font-semibold leading-none tracking-wide uppercase">{{
                   addOn.status
                 }}</span>

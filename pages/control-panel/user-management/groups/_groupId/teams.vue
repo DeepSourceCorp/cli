@@ -70,7 +70,7 @@
                   v-if="team.team.members && team.team.members.totalCount"
                   class="flex items-center gap-x-1.5 text-vanilla-400"
                 >
-                  <z-icon icon="users" size="x-small" color="currentColor" class="flex-shrink-0" />
+                  <z-icon icon="users" size="x-small" color="current" class="flex-shrink-0" />
                   <span class="text-xs"
                     >{{ team.team.members.totalCount }} member<span
                       v-if="team.team.members.totalCount > 1"
