@@ -26,15 +26,11 @@
       </div>
 
       <div class="flex flex-col md:flex-row justify-between gap-2 mt-2">
-        <z-button
-          buttonType="secondary"
-          :icon="clipboardIcon"
-          size="small"
+        <copy-button
+          :value="repository.encPublicKey"
+          :disabled="!repository.encPublicKey"
           class="w-full md:w-28"
-          iconColor="vanilla-100"
-          @click="copyKeys()"
-          >{{ clipboardLabel }}</z-button
-        >
+        />
         <div class="flex flex-wrap md:flex-nowrap gap-2">
           <z-button
             buttonType="secondary"
@@ -160,9 +156,6 @@ export default class SettingsAutofix extends mixins(RepoDetailMixin) {
   public isGenerateSSHConfirmModalOpen = false
   public isRemoveSSHConfirmModalOpen = false
 
-  public clipboardIcon = 'clipboard'
-  public clipboardLabel = 'Copy'
-
   public hideContents = true
 
   async fetch(): Promise<void> {
@@ -209,18 +202,6 @@ export default class SettingsAutofix extends mixins(RepoDetailMixin) {
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     } finally {
       this.updatePending = false
-    }
-  }
-
-  public copyKeys(): void {
-    if (this.repository.encPublicKey) {
-      this.$copyToClipboard(this.repository.encPublicKey)
-      this.clipboardIcon = 'check'
-      this.clipboardLabel = 'Copied'
-      setTimeout(() => {
-        this.clipboardIcon = 'clipboard'
-        this.clipboardLabel = 'Copy'
-      }, 1000)
     }
   }
 

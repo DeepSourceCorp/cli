@@ -17,16 +17,7 @@
           </div>
           <z-input v-model="embedCode" class="self-end pr-0.5">
             <template slot="right">
-              <z-button
-                button-type="secondary"
-                size="small"
-                spacing="px-2"
-                class="flex items-center w-32 space-x-2"
-                @click="copyEmbedCode"
-              >
-                <z-icon :icon="clipboardIcon" size="small"></z-icon>
-                <span>{{ copyText }}</span>
-              </z-button>
+              <copy-button :value="embedCode" :disabled="!embedCode" class="w-36" />
             </template>
           </z-input>
         </div>
@@ -161,8 +152,6 @@ export default class Badges extends Vue {
     REST: 'reStructuredText',
     ASCIIDOC: 'AsciiDoc'
   }
-  public clipboardIcon = 'clipboard'
-  public copyText = 'Copy'
 
   async fetch(): Promise<void> {
     await this.$store.dispatch(
@@ -230,18 +219,6 @@ export default class Badges extends Vue {
       return `${this.repository.badge?.image_url}?${queryString}`
     }
     return ''
-  }
-
-  public copyEmbedCode(): void {
-    if (this.embedCode) {
-      this.$copyToClipboard(this.embedCode)
-      this.clipboardIcon = 'check'
-      this.copyText = 'Copied'
-      setTimeout(() => {
-        this.clipboardIcon = 'clipboard'
-        this.copyText = 'Copy'
-      }, 1000)
-    }
   }
 }
 </script>

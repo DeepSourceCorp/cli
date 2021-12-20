@@ -9,18 +9,9 @@
         <div class="relative">
           <label for="repo-setting-dsn" class="text-sm text-vanilla-100">
             Data Source Name (DSN)
-            <z-input id="repo-setting-dsn" :read-only="true" v-model="repository.dsn" class="mt-2">
+            <z-input :value="repository.dsn" id="repo-setting-dsn" :read-only="true" class="mt-2">
               <template slot="right">
-                <z-button
-                  button-type="secondary"
-                  size="small"
-                  spacing="px-2"
-                  class="flex items-center space-x-2"
-                  @click="copyDSN()"
-                >
-                  <z-icon :icon="clipboardIcon" size="small"></z-icon>
-                  <span>{{ copyText }}</span>
-                </z-button>
+                <copy-button :value="repository.dsn" :disabled="!repository.dsn" class="w-32" />
               </template>
             </z-input>
           </label>
@@ -42,21 +33,14 @@
               border-ink-200
             "
           >
-            <div
+            <button
               class="flex items-center gap-x-2 text-sm leading-none cursor-pointer mx-auto"
               @click="showContents()"
             >
               <z-icon size="small" icon="eye" color="vanilla-100"></z-icon>
               <span>Reveal</span>
-            </div>
-            <z-button
-              buttonType="secondary"
-              size="small"
-              spacing="px-2"
-              :icon="clipboardIcon"
-              @click="copyDSN()"
-              >{{ copyText }}
-            </z-button>
+            </button>
+            <copy-button :value="repository.dsn" :disabled="!repository.dsn" class="w-26" />
           </div>
         </div>
       </div>
@@ -130,10 +114,6 @@ export default class Reporting extends Vue {
 
   public hideContents = true
 
-  public clipboardIcon = 'clipboard'
-
-  public copyText = 'Copy'
-
   async fetch(): Promise<void> {
     await this.$store.dispatch(
       `repository/detail/${RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_REPORTING}`,
@@ -147,18 +127,6 @@ export default class Reporting extends Vue {
 
   public showContents(): void {
     this.hideContents = false
-  }
-
-  public copyDSN(): void {
-    if (this.repository.dsn) {
-      this.$copyToClipboard(this.repository.dsn)
-      this.clipboardIcon = 'check'
-      this.copyText = 'Copied'
-      setTimeout(() => {
-        this.clipboardIcon = 'clipboard'
-        this.copyText = 'Copy'
-      }, 1000)
-    }
   }
 }
 </script>

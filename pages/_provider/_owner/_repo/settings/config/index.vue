@@ -55,26 +55,19 @@
     <section v-else class="overflow-x-scroll text-sm rounded-sm toml-box hide-scroll bg-ink-300">
       <div class="sticky top-0 left-0 flex items-center justify-between p-3 space-x-2 bg-ink-200">
         <code class="font-bold text-vanilla-200">.deepsource.toml</code>
-        <button
-          @click="copyToml"
+        <copy-button
+          :value="toml"
+          :disabled="!toml"
+          button-type="ghost"
+          :icon-only="true"
           v-tooltip="{
             placement: 'top',
             content: 'Copy to clipboard',
             delay: { show: 700, hide: 100 },
             classes: 'shadow-lg'
           }"
-          class="p-1 rounded-md cursor-pointer hover:bg-ink-100"
-        >
-          <z-icon
-            :icon="copyIcon"
-            :color="copyIconColor"
-            class="
-              duration-75
-              cursor-pointer
-              motion-reduce:transition-none motion-reduce:transform-none
-            "
-          ></z-icon>
-        </button>
+          class="hover:bg-vanilla-400 hover:bg-opacity-5"
+        />
       </div>
       <div class="p-3 text-sm bg-ink-300">
         <highlightjs language="toml" :code="toml" />
@@ -117,8 +110,6 @@ export default class Configuration extends mixins(
   AnalyzerListMixin
 ) {
   public configMode: 'cards' | 'toml' = 'cards'
-  public copyIcon = 'clipboard'
-  public copyIconColor = 'vanilla-400'
 
   async fetch(): Promise<void> {
     await Promise.all([
@@ -167,16 +158,6 @@ export default class Configuration extends mixins(
   getConfig(name: string): RepoConfigAnalyzerMeta | Record<string, unknown> {
     const filteredList = this.userConfig.analyzers.filter((config) => config.name === name)
     return filteredList.length ? filteredList[0] : {}
-  }
-
-  copyToml(): void {
-    this.$copyToClipboard(this.toml)
-    this.copyIcon = 'check'
-    this.copyIconColor = 'juniper'
-    setTimeout(() => {
-      this.copyIcon = 'clipboard'
-      this.copyIconColor = 'vanilla-400'
-    }, 800)
   }
 }
 </script>

@@ -5,26 +5,19 @@
         <p v-if="$slots.message" class="text-vanilla-400">
           <slot name="message"></slot>
         </p>
-        <button
-          @click="copyToml"
+        <copy-button
+          :value="toml"
+          :disabled="!toml"
+          button-type="ghost"
+          :icon-only="true"
           v-tooltip="{
             placement: 'top',
             content: 'Copy to clipboard',
             delay: { show: 700, hide: 100 },
             classes: 'shadow-lg'
           }"
-          class="p-1 rounded-md cursor-pointer hover:bg-ink-100"
-        >
-          <z-icon
-            :icon="copyIcon"
-            :color="copyIconColor"
-            class="
-              duration-75
-              cursor-pointer
-              motion-reduce:transition-none motion-reduce:transform-none
-            "
-          ></z-icon>
-        </button>
+          class="hover:bg-vanilla-400 hover:bg-opacity-5"
+        />
       </div>
       <div class="p-3 text-sm min-h-44 bg-ink-300">
         <highlightjs language="toml" :code="toml" />
@@ -133,9 +126,6 @@ export default class TomlBox extends Vue {
   @Prop({ default: false })
   isAutofixEnabled: boolean
 
-  public copyIcon = 'clipboard'
-  public copyIconColor = 'vanilla-400'
-
   activateRepo(): void {
     this.$emit('activateRepo')
   }
@@ -150,16 +140,6 @@ export default class TomlBox extends Vue {
 
   commitGSRConfigToVCS(): void {
     this.$emit('commitGSR')
-  }
-
-  copyToml(): void {
-    this.$copyToClipboard(this.toml)
-    this.copyIcon = 'check'
-    this.copyIconColor = 'juniper'
-    setTimeout(() => {
-      this.copyIcon = 'clipboard'
-      this.copyIconColor = 'vanilla-400'
-    }, 800)
   }
 }
 </script>

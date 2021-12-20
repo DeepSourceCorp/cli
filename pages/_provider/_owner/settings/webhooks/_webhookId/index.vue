@@ -119,13 +119,45 @@
           </toggle-input>
           <password-input
             v-if="localEndpoint.apiSigning"
-            inputWidth="wide"
+            :value="localEndpoint.secret"
+            input-id="webhook-endpoint-secret"
+            input-width="wide"
             label="Secret"
             description="This secret will be used to sign the payload sent from DeepSource."
-            inputId="webhook-endpoint-secret"
-            v-model="localEndpoint.secret"
-            :readOnly="readOnly"
-          ></password-input>
+            :read-only="true"
+            :show-password="!isSecretHidden"
+          >
+            <template #input-utilities>
+              <div class="absolute top-1 right-1 flex gap-x-1 bg-ink-400">
+                <z-button
+                  v-tooltip="isSecretHidden ? 'Reveal secret' : 'Hide secret'"
+                  button-type="secondary"
+                  :icon="isSecretHidden ? 'eye' : 'eye-off'"
+                  size="x-small"
+                  icon-size="x-small"
+                  :disabled="!localEndpoint.secret"
+                  @click="toggleSecretVisibility"
+                />
+                <z-button
+                  v-if="!readOnly"
+                  v-tooltip="'Generate new secret'"
+                  button-type="secondary"
+                  icon="refresh-cw"
+                  size="x-small"
+                  icon-size="x-small"
+                  @click="generateSecret"
+                />
+                <copy-button
+                  v-tooltip="'Copy secret'"
+                  :value="localEndpoint.secret"
+                  :icon-only="true"
+                  :disabled="!localEndpoint.secret"
+                  size="x-small"
+                  icon-size="x-small"
+                />
+              </div>
+            </template>
+          </password-input>
           <div class="space-y-2 py-4">
             <h4 class="text-sm text-vanilla-100">Selected events</h4>
             <span
@@ -231,6 +263,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
   public savingConfig = false
   public formatDate = formatDate
   public localEndpoint: Webhook = { url: '' } as Webhook
+  isSecretHidden = true
 
   async fetch(): Promise<void> {
     const { webhookId } = this.$route.params
@@ -259,8 +292,8 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
         this.$toast.success('You disabled this webhook.')
       }
     } catch (e) {
-      this.logSentryErrorForUser(e, 'Disable webhook', { webhookId: webhookId })
-      this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+      this.logSentryErrorForUser(e as Error, 'Disable webhook', { webhookId: webhookId })
+      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     }
   }
 
@@ -273,7 +306,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
         this.subscribedEventNames
       )
     } catch (e) {
-      this.$toast.info(e.message)
+      this.$toast.info((e as Error).message)
       return
     }
 
@@ -289,8 +322,8 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
       await this.reset()
       this.$toast.success('Successfully updated the endpoint details.')
     } catch (e) {
-      this.logSentryErrorForUser(e, 'Update webhook', { webhookId: webhookId })
-      this.$toast.danger(e.message.replace('GraphQL error: ', ''))
+      this.logSentryErrorForUser(e as Error, 'Update webhook', { webhookId: webhookId })
+      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     } finally {
       this.savingConfig = false
     }
@@ -318,6 +351,20 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
 
   get subscribedEventNames(): string[] {
     return this.subscribedEvents.map((event) => event.shortcode)
+  }
+
+  async generateSecret(): Promise<void> {
+    this.localEndpoint.secret = await this.generateWebhookSecret()
+    if (this.isSecretHidden) {
+      this.isSecretHidden = false
+      setTimeout(() => {
+        this.isSecretHidden = true
+      }, 1000)
+    }
+  }
+
+  toggleSecretVisibility(): void {
+    this.isSecretHidden = !this.isSecretHidden
   }
 }
 </script>

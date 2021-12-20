@@ -61,15 +61,7 @@
             <span class="overflow-x-scroll font-mono text-sm text-vanilla-300 default-scroll">
               {{ webhookUrl }}
             </span>
-            <z-button
-              :icon="webhookBtnIcon"
-              :icon-color="webhookBtnIconColor"
-              size="small"
-              class="flex-shrink-0 w-24"
-              button-type="secondary"
-              :label="webhookBtnLabel"
-              @click="copyWebhookUrl"
-            />
+            <copy-button :value="webhookUrl" :disabled="!webhookUrl" class="flex-shrink-0 w-24" />
           </div>
         </client-only>
         <p class="text-sm text-vanilla-300">
@@ -123,14 +115,11 @@
           {{ owner.ownerSetting.publicKey }}
         </div>
         <div class="flex items-center">
-          <z-button
-            :icon="btnIcon"
-            :icon-color="btnIconColor"
-            size="small"
+          <copy-button
+            :value="ownerPublicKey"
+            :disabled="!ownerPublicKey"
+            label="Copy public key"
             class="w-44"
-            button-type="secondary"
-            :label="btnLabel"
-            @click="copySSHKey"
           />
         </div>
       </verification-step>
@@ -222,9 +211,6 @@ export default class GSRInstallationVerify extends mixins(
   public steps: ('TOKEN' | 'WEBHOOK' | 'SSH')[] = ['TOKEN', 'WEBHOOK', 'SSH']
   public verifiedSteps: ('TOKEN' | 'WEBHOOK' | 'SSH')[] = []
   public currentStep: 'TOKEN' | 'WEBHOOK' | 'SSH' = this.steps[0]
-  public btnIcon = 'clipboard'
-  public btnLabel = 'Copy public key'
-  public btnIconColor = 'vanilla-100'
   public verifying = false
 
   public gsrPermsList = [
@@ -237,10 +223,6 @@ export default class GSRInstallationVerify extends mixins(
       description: 'Clone, fetch, and browse repositories.'
     }
   ]
-
-  public webhookBtnIcon = 'clipboard'
-  public webhookBtnLabel = 'Copy'
-  public webhookBtnIconColor = 'vanilla-100'
 
   get isWebhookVerified(): boolean {
     return false
@@ -260,6 +242,10 @@ export default class GSRInstallationVerify extends mixins(
       return `https://${window.location.host}/services/webhooks/gsr`
     }
     return ''
+  }
+
+  get ownerPublicKey(): string {
+    return this.owner.ownerSetting?.publicKey || ''
   }
 
   nextStep(): void {
@@ -383,32 +369,6 @@ export default class GSRInstallationVerify extends mixins(
     } else {
       this.$toast.danger('Verification failed, please check your configuration again')
     }
-  }
-
-  copySSHKey(): void {
-    if (this.owner.ownerSetting?.publicKey) {
-      this.$copyToClipboard(this.owner.ownerSetting?.publicKey)
-      this.btnIcon = 'check'
-      this.btnLabel = 'Copied'
-      this.btnIconColor = 'juniper'
-      setTimeout(() => {
-        this.btnIcon = 'clipboard'
-        this.btnLabel = 'Copy public key'
-        this.btnIconColor = 'vanilla-100'
-      }, 800)
-    }
-  }
-
-  copyWebhookUrl(): void {
-    this.$copyToClipboard(this.webhookUrl)
-    this.webhookBtnIcon = 'check'
-    this.webhookBtnLabel = 'Copied'
-    this.webhookBtnIconColor = 'juniper'
-    setTimeout(() => {
-      this.webhookBtnIcon = 'clipboard'
-      this.webhookBtnLabel = 'Copy'
-      this.webhookBtnIconColor = 'vanilla-100'
-    }, 800)
   }
 }
 </script>

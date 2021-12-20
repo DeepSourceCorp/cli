@@ -30,8 +30,8 @@ import { ModelSync } from 'vue-property-decorator'
   }
 })
 export default class ToggleInput extends Vue {
-  @ModelSync('value', 'input', { type: String || Number })
-  readonly modelValue: string | number | boolean
+  @ModelSync('value', 'input', { type: [String, Number, Boolean] })
+  readonly modelValue: [string, number, boolean]
 
   @Prop({ required: true })
   label: string

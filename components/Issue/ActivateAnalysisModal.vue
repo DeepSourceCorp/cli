@@ -76,8 +76,6 @@ export default class ActivateAnalysisModal extends mixins(
   RepoListMixin
 ) {
   triggeringActivation = false
-  copyIcon = 'clipboard'
-  copyIconColor = 'vanilla-400'
 
   get toml(): string {
     return this.tomlTemplate(
@@ -89,16 +87,6 @@ export default class ActivateAnalysisModal extends mixins(
 
   get pullLabel(): string {
     return this.$route.params.provider === 'gl' ? 'merge' : 'pull'
-  }
-
-  copyToml(): void {
-    this.$copyToClipboard(this.toml)
-    this.copyIcon = 'check'
-    this.copyIconColor = 'juniper'
-    setTimeout(() => {
-      this.copyIcon = 'clipboard'
-      this.copyIconColor = 'vanilla-400'
-    }, 800)
   }
 
   async refetchData(): Promise<void> {

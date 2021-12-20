@@ -22,17 +22,7 @@
           <z-input :value="inviteLink" size="large" read-only class="self-end pr-0.5">
             <template slot="right">
               <div class="pr-1">
-                <z-button
-                  button-type="secondary"
-                  size="small"
-                  spacing="px-2"
-                  :disabled="!inviteLink.length"
-                  class="flex items-center w-32 gap-x-2"
-                  @click="copyInviteLink"
-                >
-                  <z-icon :icon="clipboardIcon" size="small" />
-                  <span>{{ copyText }}</span>
-                </z-button>
+                <copy-button :value="inviteLink" :disabled="!inviteLink" class="w-36" />
               </div>
             </template>
           </z-input>
@@ -83,8 +73,6 @@ export default class ControlPanelInvite extends mixins(ControlPanelBaseMixin) {
 
   selectedGroup = ''
   inviteLink = ''
-  clipboardIcon = 'clipboard'
-  copyText = 'Copy'
   resettingLink = false
 
   async fetch(): Promise<void> {
@@ -107,18 +95,6 @@ export default class ControlPanelInvite extends mixins(ControlPanelBaseMixin) {
     this.inviteLink =
       this.groupInvites.find((groupInvite: EnterpriseGroup) => groupInvite.id === value)
         ?.invitationUrl || ''
-  }
-
-  async copyInviteLink(): Promise<void> {
-    if (this.inviteLink) {
-      this.$copyToClipboard(this.inviteLink)
-      this.clipboardIcon = 'check'
-      this.copyText = 'Copied'
-      setTimeout(() => {
-        this.clipboardIcon = 'clipboard'
-        this.copyText = 'Copy'
-      }, 1000)
-    }
   }
 
   async resetLink(): Promise<void> {

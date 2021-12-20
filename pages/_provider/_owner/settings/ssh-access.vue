@@ -23,15 +23,7 @@
         {{ owner.ownerSetting.publicKey }}
       </div>
       <div class="flex flex-col md:flex-row justify-between gap-2 mt-2">
-        <z-button
-          button-type="secondary"
-          :icon="clipboardIcon"
-          size="small"
-          class="w-full md:w-28"
-          iconColor="vanilla-100"
-          @click="copyKeys()"
-          >{{ clipboardLabel }}</z-button
-        >
+        <copy-button :value="ownerPublicKey" :disabled="!ownerPublicKey" class="w-full md:w-28" />
         <div class="flex flex-wrap md:flex-nowrap gap-2">
           <z-button
             button-type="secondary"
@@ -139,20 +131,6 @@ export default class SSHAccess extends mixins(OwnerDetailMixin) {
   public updatePending = false
   public showGenerateConfirmModal = false
   public showRemoveConfirmModal = false
-  public clipboardIcon = 'clipboard'
-  public clipboardLabel = 'Copy'
-
-  public copyKeys(): void {
-    if (this.owner.ownerSetting?.publicKey) {
-      this.$copyToClipboard(this.owner.ownerSetting?.publicKey)
-      this.clipboardIcon = 'check'
-      this.clipboardLabel = 'Copied'
-      setTimeout(() => {
-        this.clipboardIcon = 'clipboard'
-        this.clipboardLabel = 'Copy'
-      }, 1000)
-    }
-  }
 
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
@@ -161,6 +139,10 @@ export default class SSHAccess extends mixins(OwnerDetailMixin) {
       login: owner,
       provider
     })
+  }
+
+  get ownerPublicKey(): string {
+    return this.owner.ownerSetting?.publicKey || ''
   }
 
   async generateSSHKeyPair(close?: () => Promise<void>): Promise<void> {

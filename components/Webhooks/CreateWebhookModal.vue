@@ -1,5 +1,5 @@
 <template>
-  <z-modal title="Add new endpoint" @onClose="$emit('close')">
+  <z-modal title="Add new endpoint" @onClose="onModalClose">
     <fieldset class="p-4 space-y-4">
       <label for="title" class="block text-sm font-medium text-vanilla-400">
         <span class="mb-2 sr-only">Endpoint URL</span>
@@ -7,46 +7,56 @@
           v-model="url"
           placeholder="URL of the endpoint"
           id="Title"
-          required="true"
+          :required="true"
         ></z-input>
       </label>
       <toggle-input
+        v-model="enableApiSigning"
         inputWidth="xx-small"
         label="Enable API signing"
         inputId="enable-api-signing"
-        v-model="enableApiSigning"
         :remove-y-padding="true"
       >
         <template slot="description">
           Signing of the webhook payload allows you to verify incoming requests.
-          <span class="text-vanilla-200 font-medium">We recommend enabling this.</span>
+          <span class="font-medium text-vanilla-200">We recommend enabling this.</span>
         </template>
       </toggle-input>
       <label for="secret" class="block text-sm font-medium text-vanilla-400">
         <span class="mb-2 sr-only">Secret</span>
         <div class="relative">
           <z-input
-            v-model="secret"
-            type="password"
-            placeholder="A randomly generated secret with at least 16 characters"
             id="Title"
-            required="true"
+            :value="secret"
+            :type="isSecretHidden ? 'password' : 'text'"
+            :read-only="true"
+            :required="enableApiSigning"
             :disabled="!enableApiSigning"
-          ></z-input>
-          <password-strength
-            v-if="secret"
-            class="absolute top-1 right-10 bg-ink-400"
-            :class="enableApiSigning ? '' : 'opacity-20'"
-            :password="secret"
+            placeholder="A randomly generated secret with at least 16 characters"
           />
-          <z-button
-            v-tooltip="'Generate new secret'"
-            button-type="secondary"
-            icon="refresh-cw"
-            size="small"
-            class="absolute top-1 right-1"
-            @click="generateSecret"
-          />
+          <div class="absolute top-1 right-1 flex gap-x-1 bg-ink-400">
+            <z-button
+              v-tooltip="isSecretHidden ? 'Reveal secret' : 'Hide secret'"
+              button-type="secondary"
+              :icon="isSecretHidden ? 'eye' : 'eye-off'"
+              size="small"
+              :disabled="!secret"
+              @click="toggleSecretVisibility"
+            />
+            <z-button
+              v-tooltip="'Generate new secret'"
+              button-type="secondary"
+              icon="refresh-cw"
+              size="small"
+              @click="generateSecret"
+            />
+            <copy-button
+              v-tooltip="'Copy secret'"
+              :icon-only="true"
+              :disabled="!secret"
+              :value="secret"
+            />
+          </div>
         </div>
       </label>
     </fieldset>
@@ -119,6 +129,7 @@ export default class CreateWebhookModal extends mixins(
   public url = ''
   public secret = ''
   public enableApiSigning = true
+  public isSecretHidden = true
   public selectedEvents: string[] = []
 
   async fetch() {
@@ -132,7 +143,7 @@ export default class CreateWebhookModal extends mixins(
     try {
       this.validateWebhookForm(this.url, this.enableApiSigning, this.secret, this.selectedEvents)
     } catch (e) {
-      this.$toast.info(e.message)
+      this.$toast.info((e as Error).message)
       return
     }
 
@@ -162,18 +173,33 @@ export default class CreateWebhookModal extends mixins(
       })
       close()
     } catch (e) {
-      this.$toast.danger(e.message)
+      this.$toast.danger((e as Error).message)
       this.$toast.danger(
         'There was a problem saving this endpoint. If this issue persists, contact support.'
       )
-      this.logSentryErrorForUser(e, 'webhook endpoint creation', args)
+      this.logSentryErrorForUser(e as Error, 'webhook endpoint creation', args)
     } finally {
       this.savingWebhookEndpoint = false
     }
   }
 
-  async generateSecret() {
+  async generateSecret(): Promise<void> {
     this.secret = await this.generateWebhookSecret()
+    if (this.isSecretHidden) {
+      this.isSecretHidden = false
+      setTimeout(() => {
+        this.isSecretHidden = true
+      }, 1000)
+    }
+  }
+
+  toggleSecretVisibility(): void {
+    this.isSecretHidden = !this.isSecretHidden
+  }
+
+  onModalClose(): void {
+    if (!this.isSecretHidden) this.isSecretHidden = true
+    this.$emit('close')
   }
 
   @Watch('$route.path')

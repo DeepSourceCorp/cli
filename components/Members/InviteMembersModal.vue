@@ -76,12 +76,12 @@
         </div>
         <z-input :disabled="true" :value="team.invitationUrl" :showBorder="true">
           <template slot="right">
-            <z-button buttonType="secondary" size="small" @click="copyInviteLink" spacing="px-2">
-              <div class="flex items-center space-x-2">
-                <z-icon :icon="clipboardIcon" size="small" :color="clipboardColor"></z-icon>
-                <span>Copy Link</span>
-              </div>
-            </z-button>
+            <copy-button
+              :value="team.invitationUrl"
+              label="Copy link"
+              :disabled="!team.invitationUrl"
+              class="w-36"
+            />
           </template>
         </z-input>
       </div>
@@ -161,26 +161,11 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
 
   membersToInvite: member[] = []
   roles = ROLES
-  clipboardIcon = 'copy'
-  clipboardColor = 'vanilla-100'
 
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
     await this.fetchInviteUrl({ login: owner, provider })
     this.membersToInvite = this.initialMembersToInvites
-  }
-
-  copyInviteLink(): void {
-    if (this.team.invitationUrl) {
-      this.$copyToClipboard(this.team.invitationUrl)
-      this.clipboardIcon = 'check'
-      this.clipboardColor = 'juniper'
-      this.$toast.success('Invite link copied to your clipboard')
-      setTimeout(() => {
-        this.clipboardIcon = 'copy'
-        this.clipboardColor = 'vanilla-100'
-      }, 800)
-    }
   }
 
   async resetInviteLink(): Promise<void> {
