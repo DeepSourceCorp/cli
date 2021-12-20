@@ -76,7 +76,7 @@
         :active="isActive('provider-owner-all-repos')"
         :to="getRoute('all-repos')"
       >
-        <span class="flex justify-between w-full">
+        <span class="flex items-center justify-between w-full">
           <span>All repositories</span>
           <z-tag
             v-if="repositoryList.totalCount"
