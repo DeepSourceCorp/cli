@@ -1,5 +1,9 @@
 import { GetterTree, ActionTree, MutationTree, Store, ActionContext } from 'vuex'
-import { GraphqlError, GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import {
+  GraphqlError,
+  GraphqlMutationResponse,
+  GraphqlQueryResponse
+} from '~/types/apollo-graphql-types'
 import AnalyzersGQLPublicQuery from '~/apollo/queries/analyzer/publicList.gql'
 import AnalyzerDetailsQuery from '~/apollo/queries/analyzer/detailed.gql'
 import AnalyzerIssuesQuery from '~/apollo/queries/analyzer/listIssues.gql'
@@ -7,7 +11,15 @@ import TransformersGQLPublicQuery from '~/apollo/queries/transformer/publicList.
 import TransformersDetailsQuery from '~/apollo/queries/transformer/detailed.gql'
 import AddAnalyzerFeedbackMutation from '~/apollo/mutations/directory/addAnalyzerFeedback.gql'
 import AddTransformerFeedbackMutation from '~/apollo/mutations/directory/addTransformerFeedback.gql'
-import { AnalyzerConnection, Analyzer, TransformerTool, TransformerToolConnection, PageInfo, AddAnalyzerFeedbackInput, AddTransformerFeedbackInput } from '~/types/types'
+import {
+  AnalyzerConnection,
+  Analyzer,
+  TransformerTool,
+  TransformerToolConnection,
+  PageInfo,
+  AddAnalyzerFeedbackInput,
+  AddTransformerFeedbackInput
+} from '~/types/types'
 import { RootState } from '~/store'
 import { resolveNodes } from '~/utils/array'
 
@@ -51,7 +63,7 @@ export const state = (): DirectoryModuleState => ({
     transformerList: {
       pageInfo: {} as PageInfo,
       edges: []
-    },
+    }
   })
 })
 
@@ -107,19 +119,21 @@ interface DirectoryModuleActions extends ActionTree<DirectoryModuleState, RootSt
   [DirectoryActions.FETCH_ANALYZER_DETAILS]: (
     this: Store<RootState>,
     injectee: DirectoryActionContext,
-    args: { shortcode: string, first?: number }) => Promise<Analyzer | undefined>
+    args: { shortcode: string; first?: number }
+  ) => Promise<Analyzer | undefined>
 
   [DirectoryActions.FETCH_ANALYZER_ISSUES]: (
     this: Store<RootState>,
     injectee: DirectoryActionContext,
     args: {
-      shortcode: string,
-      first: number,
-      offset: number,
-      autofixAvailable: boolean,
+      shortcode: string
+      first: number
+      offset: number
+      autofixAvailable: boolean
       q: string
       issueType: string
-    }) => Promise<Analyzer | undefined>
+    }
+  ) => Promise<Analyzer | undefined>
 
   [DirectoryActions.FETCH_TRANSFORMERS_DIR_LIST]: (
     this: Store<RootState>,
@@ -163,33 +177,35 @@ export const actions: DirectoryModuleActions = {
   async [DirectoryActions.FETCH_ANALYZER_DETAILS]({ commit }, { shortcode, first = 5 }) {
     commit(DirectoryMutations.SET_LOADING, true)
     try {
-      const analyzerResponse = await this.$fetchGraphqlData(AnalyzerDetailsQuery, { shortcode, first }) as GraphqlQueryResponse
+      const analyzerResponse = (await this.$fetchGraphqlData(AnalyzerDetailsQuery, {
+        shortcode,
+        first
+      })) as GraphqlQueryResponse
       if (analyzerResponse && analyzerResponse.data) {
         return analyzerResponse.data.analyzer as Analyzer
       }
-      return undefined
-    }
-    catch (e) {
+    } catch (e) {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
-    }
-    finally {
+    } finally {
       commit(DirectoryMutations.SET_LOADING, false)
+      return undefined
     }
   },
   async [DirectoryActions.FETCH_ANALYZER_ISSUES]({ commit }, { first = 5, ...rest }) {
     commit(DirectoryMutations.SET_LOADING, true)
     try {
-      const analyzerResponse = await this.$fetchGraphqlData(AnalyzerIssuesQuery, { first, ...rest }) as GraphqlQueryResponse
+      const analyzerResponse = (await this.$fetchGraphqlData(AnalyzerIssuesQuery, {
+        first,
+        ...rest
+      })) as GraphqlQueryResponse
       if (analyzerResponse && analyzerResponse.data) {
         return analyzerResponse.data.analyzer as Analyzer
       }
-      return undefined
-    }
-    catch (e) {
+    } catch (e) {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
-    }
-    finally {
+    } finally {
       commit(DirectoryMutations.SET_LOADING, false)
+      return undefined
     }
   },
   async [DirectoryActions.FETCH_TRANSFORMERS_DIR_LIST]({ commit }, args) {
@@ -206,13 +222,14 @@ export const actions: DirectoryModuleActions = {
   },
   async [DirectoryActions.ADD_ANALYZER_FEEDBACK]({ commit }, { input }) {
     try {
-      const feedbackResponse = await this.$applyGraphqlMutation(AddAnalyzerFeedbackMutation, { input }) as GraphqlMutationResponse
+      const feedbackResponse = (await this.$applyGraphqlMutation(AddAnalyzerFeedbackMutation, {
+        input
+      })) as GraphqlMutationResponse
       if (feedbackResponse?.data.addAnalyzerFeedback?.ok) {
         this.$toast.success('Feedback successfully submitted.')
         return true
       }
-    }
-    catch (e) {
+    } catch (e) {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
       this.$toast.danger('There was an error submitting your feedback.')
     }
@@ -221,31 +238,33 @@ export const actions: DirectoryModuleActions = {
   async [DirectoryActions.FETCH_TRANSFORMER_DETAILS]({ commit }, args) {
     commit(DirectoryMutations.SET_LOADING, true)
     try {
-      const transformerResposne = await this.$fetchGraphqlData(TransformersDetailsQuery, args) as GraphqlQueryResponse
+      const transformerResposne = (await this.$fetchGraphqlData(
+        TransformersDetailsQuery,
+        args
+      )) as GraphqlQueryResponse
       if (transformerResposne && transformerResposne.data) {
         return transformerResposne.data.transformer as TransformerTool
       }
       return undefined
-    }
-    catch (e) {
+    } catch (e) {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
-    }
-    finally {
+    } finally {
       commit(DirectoryMutations.SET_LOADING, false)
     }
   },
   async [DirectoryActions.ADD_TRANSFORMER_FEEDBACK]({ commit }, { input }) {
     try {
-      const feedbackResponse = await this.$applyGraphqlMutation(AddTransformerFeedbackMutation, { input }) as GraphqlMutationResponse
+      const feedbackResponse = (await this.$applyGraphqlMutation(AddTransformerFeedbackMutation, {
+        input
+      })) as GraphqlMutationResponse
       if (feedbackResponse?.data.addTransformerFeedback?.ok) {
         this.$toast.success('Feedback successfully submitted.')
         return true
       }
-    }
-    catch (e) {
+    } catch (e) {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
       this.$toast.danger('There was an error submitting your feedback.')
     }
     return false
-  },
+  }
 }

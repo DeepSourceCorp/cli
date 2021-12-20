@@ -94,7 +94,9 @@
       </div>
       <div class="mt-4">
         <lazy-empty-state
-          v-if="fullyLoaded && !analyzer.issueTypeDistribution.length"
+          v-if="
+            fullyLoaded && analyzer.issueTypeDistribution && !analyzer.issueTypeDistribution.length
+          "
           title="No issue statistics found!"
           image-width="w-28"
         />
