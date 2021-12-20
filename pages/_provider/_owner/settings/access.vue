@@ -16,12 +16,13 @@
         </template>
       </toggle-input>
     </form-group>
-    <form-group label="Member Permissions">
+    <form-group label="Access permissions">
       <radio-group-input
-        label="Base Permissions"
+        label="Member Base Permissions"
         inputId="team-settings-access-base-perms"
         inputWidth="wide"
         :options="basePermOptions"
+        @change="updateBasePerms"
         v-model="basePerm"
       ></radio-group-input>
       <check-input
@@ -29,7 +30,16 @@
         inputId="team-settings-access-issue-perms"
         inputWidth="wide"
         :options="issuePermOptions"
+        @change="updateBasePerms"
         v-model="issuePerms"
+      ></check-input>
+      <check-input
+        label="Metric Thresholds Permission"
+        inputId="team-settings-access-metric-perms"
+        inputWidth="wide"
+        :options="metricPermOptions"
+        @change="updateBasePerms"
+        v-model="metricPerms"
       ></check-input>
     </form-group>
     <portal to="modal">
@@ -88,6 +98,10 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     canMembersIgnoreIssues: false,
     canContributorsIgnoreIssues: false
   }
+  private metricPerms: Record<string, boolean | undefined> = {
+    canMembersModifyMetricThresholds: false,
+    canContributorsModifyMetricThresholds: false
+  }
   private basePerm: TeamBasePermissionSetDefaultRepositoryPermission =
     TeamBasePermissionSetDefaultRepositoryPermission.Write
 
@@ -114,11 +128,16 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
   }
 
   async fetch(): Promise<void> {
+    await this.refetchPerms(false)
+  }
+
+  async refetchPerms(refetch?: boolean): Promise<void> {
     this.isFetching = true
     const { owner, provider } = this.$route.params
     await this.fetchTeamSettings({
       login: owner,
-      provider
+      provider,
+      refetch
     })
     this.syncPermissionsWithVcs = this.team.syncPermissionsWithVcs
     if (this.team.basePermissionSet?.defaultRepositoryPermission) {
@@ -127,6 +146,12 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     this.issuePerms = {
       canMembersIgnoreIssues: this.team.basePermissionSet?.canMembersIgnoreIssues,
       canContributorsIgnoreIssues: this.team.basePermissionSet?.canContributorsIgnoreIssues
+    }
+    this.metricPerms = {
+      canMembersModifyMetricThresholds:
+        this.team.basePermissionSet?.canMembersModifyMetricThresholds,
+      canContributorsModifyMetricThresholds:
+        this.team.basePermissionSet?.canContributorsModifyMetricThresholds
     }
     this.isFetching = false
   }
@@ -141,16 +166,29 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     }
   }
 
-  @Watch('issuePerms', { immediate: false, deep: true })
-  @Watch('basePerm', { immediate: false })
-  updateBasePerms() {
+  async updateBasePerms() {
     if (!this.isFetching) {
-      this.updateTeamBasePermissions({
-        teamId: this.team.id,
-        defaultRepositoryPermission: this.basePerm,
-        canMembersIgnoreIssues: this.issuePerms.canMembersIgnoreIssues || false,
-        canContributorsIgnoreIssues: this.issuePerms.canContributorsIgnoreIssues || false
-      })
+      try {
+        const res = await this.updateTeamBasePermissions({
+          teamId: this.team.id,
+          defaultRepositoryPermission: this.basePerm,
+          canMembersIgnoreIssues: this.issuePerms.canMembersIgnoreIssues || false,
+          canContributorsIgnoreIssues: this.issuePerms.canContributorsIgnoreIssues || false,
+          canMembersModifyMetricThresholds:
+            this.metricPerms.canMembersModifyMetricThresholds || false,
+          canContributorsModifyMetricThresholds:
+            this.metricPerms.canContributorsModifyMetricThresholds || false
+        })
+
+        if (res.ok) {
+          await this.refetchPerms(true)
+          this.$toast.success('Access permissions updates successfully.')
+        } else {
+          throw new Error('Unable to update access permissions.')
+        }
+      } catch (e) {
+        this.$toast.danger('Error while updating access permissions. Please try again.')
+      }
     }
   }
 
@@ -174,7 +212,18 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
 
   private issuePermOptions = [
     { value: 'canMembersIgnoreIssues', label: 'Allow members to ignore issues' },
-    { value: 'canContributorsIgnoreIssues', label: 'Allow members to modify metric thresholds ' }
+    { value: 'canContributorsIgnoreIssues', label: 'Allow contributors to ignore issues' }
+  ]
+
+  private metricPermOptions = [
+    {
+      value: 'canMembersModifyMetricThresholds',
+      label: 'Allow members to modify metric thresholds'
+    },
+    {
+      value: 'canContributorsModifyMetricThresholds',
+      label: 'Allow contributors to modify metric thresholds'
+    }
   ]
 }
 </script>

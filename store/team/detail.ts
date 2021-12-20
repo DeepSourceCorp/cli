@@ -11,7 +11,8 @@ import { RootState } from '~/store'
 import {
   Team,
   TeamBasePermissionSetDefaultRepositoryPermission,
-  TeamMemberRoleChoices
+  TeamMemberRoleChoices,
+  UpdateTeamBasePermissionsPayload
 } from '~/types/types'
 
 // Queries
@@ -122,6 +123,7 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
     args: {
       login: string
       provider: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [TeamActions.FETCH_INVITED_USERS]: (
@@ -206,8 +208,10 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
       defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
       canMembersIgnoreIssues: boolean
       canContributorsIgnoreIssues: boolean
+      canMembersModifyMetricThresholds: boolean
+      canContributorsModifyMetricThresholds: boolean
     }
-  ) => Promise<void>
+  ) => Promise<UpdateTeamBasePermissionsPayload>
   [TeamActions.SYNC_VCS_PERMISSIONS]: (
     this: Store<RootState>,
     injectee: TeamActionContext,
@@ -272,13 +276,17 @@ export const actions: TeamModuleActions = {
       commit(TeamMutations.SET_LOADING, false)
     }
   },
-  async [TeamActions.FETCH_TEAM_SETTINGS]({ commit }, { login, provider }) {
+  async [TeamActions.FETCH_TEAM_SETTINGS]({ commit }, { login, provider, refetch }) {
     try {
       commit(TeamMutations.SET_LOADING, true)
-      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(TeamSettings, {
-        provider: this.$providerMetaMap[provider].value,
-        login
-      })
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        TeamSettings,
+        {
+          provider: this.$providerMetaMap[provider].value,
+          login
+        },
+        refetch
+      )
       commit(TeamMutations.SET_TEAM, response.data.team)
       commit(TeamMutations.SET_LOADING, false)
     } catch (e) {
@@ -423,17 +431,27 @@ export const actions: TeamModuleActions = {
 
   async [TeamActions.UPDATE_TEAM_BASE_PERMS](
     { commit },
-    { teamId, defaultRepositoryPermission, canMembersIgnoreIssues, canContributorsIgnoreIssues }
+    {
+      teamId,
+      defaultRepositoryPermission,
+      canMembersIgnoreIssues,
+      canContributorsIgnoreIssues,
+      canMembersModifyMetricThresholds,
+      canContributorsModifyMetricThresholds
+    }
   ) {
     try {
       commit(TeamMutations.SET_LOADING, true)
-      await this.$applyGraphqlMutation(UpdateTeamBasePermissions, {
+      const response = await this.$applyGraphqlMutation(UpdateTeamBasePermissions, {
         teamId,
         defaultRepositoryPermission,
         canMembersIgnoreIssues,
-        canContributorsIgnoreIssues
+        canContributorsIgnoreIssues,
+        canMembersModifyMetricThresholds,
+        canContributorsModifyMetricThresholds
       })
       commit(TeamMutations.SET_LOADING, false)
+      return response.data?.updateTeamBasePermissions || {}
     } catch (e) {
       const error = e as GraphqlError
       commit(TeamMutations.SET_ERROR, error)

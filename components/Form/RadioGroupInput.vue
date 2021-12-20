@@ -6,7 +6,7 @@
     :inputWidth="inputWidth"
   >
     <div>
-      <z-radio-group v-model="modelValue" @change="updateValue" :id="inputId" class="space-y-5">
+      <z-radio-group v-model="modelValue" @change="$emit('change')" :id="inputId" class="space-y-5">
         <div class="text-sm space-y-1" v-for="opt in options" :key="opt.value">
           <z-radio :value="opt.value" :label="opt.label"></z-radio>
           <p

@@ -1,6 +1,10 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
 import { TeamActions } from '~/store/team/detail'
-import { Team, TeamBasePermissionSetDefaultRepositoryPermission } from '~/types/types'
+import {
+  Team,
+  TeamBasePermissionSetDefaultRepositoryPermission,
+  UpdateTeamBasePermissionsPayload
+} from '~/types/types'
 
 const teamStore = namespace('team/detail')
 
@@ -26,7 +30,7 @@ export default class TeamDetailMixin extends Vue {
   ) => Promise<void>
 
   @teamStore.Action(TeamActions.FETCH_TEAM_SETTINGS)
-  fetchTeamSettings: (args: { login: string; provider: string }) => Promise<void>
+  fetchTeamSettings: (args: { login: string; provider: string; refetch?: boolean }) => Promise<void>
 
   @teamStore.Action(TeamActions.FETCH_INVITED_USERS)
   fetchInvitedUsers: (args: {
@@ -99,7 +103,9 @@ export default class TeamDetailMixin extends Vue {
     defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
     canMembersIgnoreIssues: boolean
     canContributorsIgnoreIssues: boolean
-  }) => Promise<void>
+    canMembersModifyMetricThresholds: boolean
+    canContributorsModifyMetricThresholds: boolean
+  }) => Promise<UpdateTeamBasePermissionsPayload>
 
   @teamStore.Action(TeamActions.SYNC_VCS_PERMISSIONS)
   syncVcsPermissionss: (args: { teamId: string }) => Promise<void>

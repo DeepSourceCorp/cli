@@ -3,6 +3,8 @@ mutation(
   $defaultRepositoryPermission: RepositoryPermissionChoices
   $canMembersIgnoreIssues: Boolean
   $canContributorsIgnoreIssues: Boolean
+  $canMembersModifyMetricThresholds: Boolean
+  $canContributorsModifyMetricThresholds: Boolean
 ) {
   updateTeamBasePermissions(
     input: {
@@ -10,6 +12,8 @@ mutation(
       defaultRepositoryPermission: $defaultRepositoryPermission
       canMembersIgnoreIssues: $canMembersIgnoreIssues
       canContributorsIgnoreIssues: $canContributorsIgnoreIssues
+      canMembersModifyMetricThresholds: $canMembersModifyMetricThresholds
+      canContributorsModifyMetricThresholds: $canContributorsModifyMetricThresholds
     }
   ) {
     ok

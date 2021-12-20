@@ -11,6 +11,8 @@ query($login: String!, $provider: VCSProviderChoices!) {
       defaultRepositoryPermission
       canMembersIgnoreIssues
       canContributorsIgnoreIssues
+      canMembersModifyMetricThresholds
+      canContributorsModifyMetricThresholds
     }
   }
 }
