@@ -5,7 +5,7 @@
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['autofix'])">Autofix</nuxt-link>
         </z-breadcrumb-item>
-        <z-breadcrumb-item>{{ title }}</z-breadcrumb-item>
+        <z-breadcrumb-item>{{ autofixRun.issue.shortcode }}</z-breadcrumb-item>
       </z-breadcrumb>
     </div>
     <!-- heading -->
@@ -36,21 +36,25 @@
         ></info>
       </div>
     </div>
+    <z-divider color="ink-200" />
     <!-- banner -->
     <div
       v-if="isAutofixConcluded"
-      class="flex items-center px-4 py-2 space-x-4 rounded-sm bg-ink-300"
+      class="flex items-center px-4 py-2 space-x-4 rounded-sm bg-ink-300 border-t border-ink-200"
     >
-      <div class="flex items-center space-x-2">
-        <z-icon icon="autofix" size="small" color="vanilla-400"></z-icon>
-        <span class="text-sm uppercase text-vanilla-400">Autofix Session</span>
-      </div>
       <div class="flex items-center flex-1 space-x-6">
+        <div class="flex items-center space-x-2">
+          <z-icon icon="autofix" size="small" color="vanilla-400"></z-icon>
+          <span class="text-sm uppercase text-vanilla-400">Autofix Session</span>
+        </div>
         <!-- issues being fixed -->
         <info v-if="autofixRun.isGeneratedFromPr">
           <z-icon icon="flag" size="small" color="vanilla-400"></z-icon>
           <span class="text-sm">
-            <span class="text-semibold">{{ autofixRun.issuesAffected }} issues</span>
+            <span class="text-semibold">
+              {{ autofixRun.issuesAffected }}
+              {{ autofixRun.issuesAffected > 1 ? 'issues' : 'issue' }}
+            </span>
             <span v-if="!isReadOnly">can be</span>
             <span>fixed</span>
           </span>
@@ -59,7 +63,10 @@
         <info v-if="autofixRun.resolvedIssuesCount">
           <z-icon icon="target" size="small" color="vanilla-400"></z-icon>
           <span class="text-sm">
-            <span class="text-semibold">{{ autofixRun.resolvedIssuesCount }} occurrences</span>
+            <span class="text-semibold">
+              {{ autofixRun.resolvedIssuesCount }}
+              {{ autofixRun.resolvedIssuesCount > 1 ? 'occurrences' : 'occurrence' }}
+            </span>
             <span v-if="!isReadOnly">can be</span>
             <span>fixed</span>
           </span>
@@ -68,7 +75,10 @@
         <info v-if="filesAffected.length">
           <z-icon icon="file-text" size="small" color="vanilla-400"></z-icon>
           <span class="text-sm">
-            <span class="text-semibold">{{ filesAffected.length }} files</span>
+            <span class="text-semibold">
+              {{ filesAffected.length }}
+              {{ filesAffected.length > 1 ? 'files' : 'file' }}
+            </span>
             <span v-if="!isReadOnly">will be</span>
             <span>affected</span>
           </span>
@@ -170,7 +180,7 @@
         </template>
       </div>
     </div>
-    <section v-if="isAutofixConcluded" class="px-4 space-y-4">
+    <section v-if="isAutofixConcluded && autofixHasErrors" class="px-4 space-y-4">
       <alert-box
         v-if="autofixRun.status === AUTOFIX_STATUS.STALE"
         text-color="text-honey-300"
@@ -218,7 +228,7 @@
     <template v-if="isAutofixConcluded">
       <!-- TODO: flash message shown for autofix status - stale, commit status - failed, Pull request status - failed  -->
       <!-- Code snippets -->
-      <div class="relative px-4 space-y-3">
+      <div class="relative px-4 gap-y-3">
         <!-- Group Head -->
         <div
           v-if="isGroup"
@@ -298,7 +308,14 @@
 
 <script lang="ts">
 import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZCheckbox, ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
+import {
+  ZIcon,
+  ZButton,
+  ZCheckbox,
+  ZBreadcrumb,
+  ZBreadcrumbItem,
+  ZDivider
+} from '@deepsourcelabs/zeal'
 import {
   InfoIcon,
   AutofixCard,
@@ -332,6 +349,7 @@ const runStore = namespace('run/detail')
     ZCheckbox,
     ZBreadcrumb,
     ZBreadcrumbItem,
+    ZDivider,
     InfoIcon,
     Info,
     AutofixCard,
@@ -481,6 +499,14 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     return (
       this.autofixRun.status === this.AUTOFIX_STATUS.SUCCESS ||
       this.autofixRun.status === this.AUTOFIX_STATUS.STALE
+    )
+  }
+
+  get autofixHasErrors(): boolean {
+    return (
+      this.autofixRun.status === this.AUTOFIX_STATUS.STALE ||
+      this.autofixRun.committedToBranchStatus === this.COMMIT_STATUS.FAILED ||
+      this.autofixRun.pullRequestStatus === this.PULL_REQUEST_STATUS.FAILED
     )
   }
 
