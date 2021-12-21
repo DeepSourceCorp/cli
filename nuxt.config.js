@@ -31,12 +31,6 @@ export default {
     bodyAttrs: {
       class: 'antialiased stroke-2'
     },
-    script: [
-      {
-        src: 'https://dwlkwbmqzv11.statuspage.io/embed/script.js',
-        body: true
-      }
-    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -123,7 +117,8 @@ export default {
       '~/plugins/services/rudderLoader.client.js',
       '~/plugins/services/plausibleLoader.client.js',
       '~/plugins/services/rudder.client.ts',
-      '~/plugins/services/intercom.client.js'
+      '~/plugins/services/intercom.client.js',
+      '~/plugins/components/statuspage.client.ts'
     ]
 
     if (!process.env.ON_PREM) {
