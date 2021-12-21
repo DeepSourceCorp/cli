@@ -237,11 +237,10 @@ export default class Issues extends mixins(
 
   async fetch(): Promise<void> {
     this.issuesLoading = true
-    await Promise.all([
-      this.fetchRepoDetailsLocal(),
-      this.fetchRepoPerms(this.baseRouteParams),
-      this.fetchIssuesForOwner()
-    ])
+    await Promise.all([this.fetchRepoDetailsLocal(), this.fetchRepoPerms(this.baseRouteParams)])
+
+    // Ensure updates to query params happen before accessing
+    await this.fetchIssuesForOwner()
 
     this.fetchRepoAutofixStats(this.baseRouteParams)
     this.fetchIsCommitPossible(this.baseRouteParams)
