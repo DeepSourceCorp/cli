@@ -149,7 +149,7 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
       email
     })
 
-    await this.fetchTeamMembers(true)
+    await this.refetchData(true)
     this.closeUpdateRoleModal()
   }
 
