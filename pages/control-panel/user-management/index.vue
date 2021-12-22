@@ -1,15 +1,7 @@
 <template>
   <div>
     <div
-      class="
-        px-4
-        py-3.5
-        flex flex-col
-        lg:items-center lg:flex-row
-        gap-4
-        justify-between
-        border-b border-ink-200
-      "
+      class="px-4 py-3.5 flex flex-col lg:items-center lg:flex-row gap-4 justify-between border-b border-ink-200"
     >
       <h1 class="text-lg font-medium leading-none">All users</h1>
       <div class="flex items-center justify-end w-full max-w-lg gap-x-2">
@@ -49,18 +41,7 @@
           v-for="orgUser in orgUsers"
           :key="orgUser.id"
           :to="`/control-panel/user-management/users/${orgUser.id}`"
-          class="
-            grid
-            items-center
-            grid-cols-1
-            p-4
-            border
-            rounded-md
-            md:grid-cols-3
-            gap-x-4 gap-y-1
-            border-ink-200
-            hover:bg-ink-300
-          "
+          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-3 gap-x-4 gap-y-1 border-ink-200 hover:bg-ink-300"
         >
           <control-panel-user-card-info
             :org-user="orgUser"

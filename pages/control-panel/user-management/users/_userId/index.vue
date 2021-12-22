@@ -44,18 +44,7 @@
           v-for="group in userGroups"
           :key="group.id"
           :to="`/control-panel/user-management/groups/${group.id}`"
-          class="
-            grid
-            items-center
-            grid-cols-1
-            p-4
-            border
-            rounded-md
-            md:grid-cols-2
-            gap-x-10 gap-y-2
-            border-ink-200
-            hover:bg-ink-300
-          "
+          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-2 gap-x-10 gap-y-2 border-ink-200 hover:bg-ink-300"
         >
           <div class="flex items-center gap-x-3">
             <okta-icon-wrapper :is-okta="group.scimEnabled" class="flex-shrink-0">
@@ -92,14 +81,7 @@
             </div>
           </div>
           <div
-            class="
-              flex flex-wrap
-              justify-start
-              gap-2
-              mt-1
-              ml-12
-              md:flex-nowrap md:justify-self-end md:ml-0 md:mt-0
-            "
+            class="flex flex-wrap justify-start gap-2 mt-1 ml-12 md:flex-nowrap md:justify-self-end md:ml-0 md:mt-0"
           >
             <remove-user-from-group-button
               v-if="!group.scimEnabled"

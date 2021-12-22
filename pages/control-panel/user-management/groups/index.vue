@@ -1,15 +1,7 @@
 <template>
   <div>
     <div
-      class="
-        px-4
-        py-3.5
-        flex flex-col
-        lg:items-center lg:flex-row
-        gap-4
-        justify-between
-        border-b border-ink-200
-      "
+      class="px-4 py-3.5 flex flex-col lg:items-center lg:flex-row gap-4 justify-between border-b border-ink-200"
     >
       <h1 class="text-lg font-medium leading-none">Groups</h1>
       <div class="flex items-center justify-end w-full max-w-lg gap-x-2">
@@ -58,20 +50,7 @@
           v-for="group in groups"
           :key="group.id"
           :to="`/control-panel/user-management/groups/${group.id}`"
-          class="
-            grid
-            items-center
-            grid-cols-1
-            p-4
-            border
-            rounded-md
-            md:grid-cols-2
-            gap-x-6
-            lg:gap-x-10
-            gap-y-1
-            border-ink-200
-            hover:bg-ink-300
-          "
+          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-2 gap-x-6 lg:gap-x-10 gap-y-1 border-ink-200 hover:bg-ink-300"
         >
           <div class="flex items-center gap-x-3">
             <okta-icon-wrapper :is-okta="group.scimEnabled" class="flex-shrink-0">

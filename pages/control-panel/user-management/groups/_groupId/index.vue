@@ -44,18 +44,7 @@
           v-for="user in groupUsers"
           :key="user.id"
           :to="`/control-panel/user-management/users/${user.id}`"
-          class="
-            grid
-            items-center
-            grid-cols-1
-            p-4
-            border
-            rounded-md
-            md:grid-cols-3
-            gap-x-4 gap-y-2
-            border-ink-200
-            hover:bg-ink-300
-          "
+          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-3 gap-x-4 gap-y-2 border-ink-200 hover:bg-ink-300"
         >
           <control-panel-user-card-info
             :org-user="user"
@@ -63,14 +52,7 @@
             class="md:col-span-2"
           />
           <div
-            class="
-              flex flex-wrap
-              justify-start
-              gap-2
-              mt-1
-              ml-12
-              md:flex-nowrap md:justify-self-end md:ml-0 md:mt-0
-            "
+            class="flex flex-wrap justify-start gap-2 mt-1 ml-12 md:flex-nowrap md:justify-self-end md:ml-0 md:mt-0"
           >
             <remove-user-from-group-button
               v-if="!user.scimEnabled"
