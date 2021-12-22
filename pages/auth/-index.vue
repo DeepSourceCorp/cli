@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen flex items-center justify-center">
     <div class="text-center">
-      <div class="text-4xl text-center mb-5">👋</div>
+      <div class="text-4xl text-center mb-5">{{ emoji }}</div>
       <h1 class="text-xl text-vanilla-100 font-semibold">Logging you in...</h1>
       <p class="text-vanilla-400 mt-2 max-w-xs">
         Please wait while we redirect you to the dashboard
@@ -82,6 +82,20 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     }
 
     this.$router.push(installationUrl)
+  }
+
+  get emoji(): string {
+    const today = new Date()
+    if (today.getMonth() === 9 && today.getDate() === 31) {
+      // Halloween
+      return '🎃'
+    }
+    if (today.getMonth() === 11 && today.getDate() >= 20) {
+      // Christmas
+      const christmasEmojis = ['☃️', '🔔', '🎄']
+      return christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)]
+    }
+    return '👋'
   }
 }
 </script>

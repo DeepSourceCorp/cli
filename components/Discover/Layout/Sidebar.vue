@@ -1,21 +1,7 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <aside
-    class="
-      fixed
-      top-0
-      z-50
-      flex flex-col
-      h-screen
-      duration-200
-      border-r
-      lg:sticky lg:left-0
-      transition-width
-      transform-gpu
-      border-ink-200
-      group
-      bg-ink-400
-    "
+    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-ink-200 group bg-ink-400"
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
@@ -25,17 +11,7 @@
       </nuxt-link>
     </section>
     <section
-      class="
-        flex flex-col
-        justify-between
-        flex-grow
-        h-full
-        p-3
-        space-y-3
-        overflow-y-scroll
-        hide-scroll
-        border-ink-200
-      "
+      class="flex flex-col justify-between flex-grow h-full p-3 space-y-3 overflow-y-scroll hide-scroll border-ink-200"
     >
       <div class="space-y-3">
         <sidebar-item
@@ -59,15 +35,7 @@
         </sidebar-item>
         <div>
           <span
-            class="
-              ml-0.5
-              text-xs
-              leading-none
-              font-medium
-              tracking-wider
-              uppercase
-              text-vanilla-400
-            "
+            class="ml-0.5 text-xs leading-none font-medium tracking-wider uppercase text-vanilla-400"
           >
             Filter by technology
           </span>
@@ -76,19 +44,7 @@
               <nuxt-link
                 v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
                 :key="analyzer.id"
-                class="
-                  inline-flex
-                  items-center
-                  justify-center
-                  px-2
-                  py-1
-                  mb-0.5
-                  mr-0.5
-                  space-x-1
-                  text-sm
-                  rounded-full
-                  cursor-pointer
-                "
+                class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
                 :class="[
                   $route.params.lang === analyzer.shortcode
                     ? 'bg-robin'
@@ -176,12 +132,11 @@
           <z-button button-type="primary" class="w-full mt-4">Get started</z-button>
         </nuxt-link>
       </footer>
-      <div class="px-2 py-4 border-t border-ink-200">
+      <div class="p-4 pt-2 border-t border-ink-200">
         <div class="flex items-center justify-between space-x-2 leading-none">
-          <z-icon
-            icon="logo"
-            size="small"
-            color="vanilla-100"
+          <img
+            src="~/assets/images/christmas-logo.svg"
+            alt="Deepsource logo"
             class="flex-shrink-0 min-w-4 min-h-4"
           />
           <span

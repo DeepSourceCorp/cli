@@ -11,15 +11,7 @@
     <!-- heading -->
     <div class="flex flex-col px-4 space-y-3">
       <div
-        class="
-          items-center
-          space-x-2
-          text-xs
-          font-normal
-          sm:flex
-          lg:text-lg lg:leading-9
-          text-vanilla-400
-        "
+        class="items-center space-x-2 text-xs font-normal sm:flex lg:text-lg lg:leading-9 text-vanilla-400"
       >
         <span class="text-lg font-bold text-vanilla-100">{{ title }}</span>
         <span class="inline md:flex" v-if="autofixRun.issue">{{ autofixRun.issue.shortcode }}</span>
@@ -303,6 +295,12 @@
       </div>
     </template>
     <install-autofix-modal v-if="showInstallModal" @close="showInstallModal = false" />
+    <audio
+      id="bell-sound"
+      src="https://public-bifrost-static-assets.s3.amazonaws.com/bell.mp3"
+      hidden
+      type="audio/mp3"
+    ></audio>
   </div>
 </template>
 
@@ -412,6 +410,7 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
       } else {
         this.$toast.success(this.pullRequestStatusText.SUCCESS_PR)
       }
+      this.playAudio()
     }
   }
 
@@ -465,6 +464,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
       refetch: false
     })
     this.updateSelectedFiles()
+  }
+
+  playAudio() {
+    const audio = document.getElementById('bell-sound') as HTMLAudioElement
+    audio?.play()
   }
 
   get title(): string | undefined {

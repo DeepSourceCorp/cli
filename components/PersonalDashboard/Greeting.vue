@@ -30,6 +30,11 @@ export default class Greeting extends Vue {
       // Halloween
       return '🎃'
     }
+    if (today.getMonth() === 11 && today.getDate() >= 20) {
+      // Christmas
+      const christmasEmojis = ['☃️', '🔔', '🎄']
+      return christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)]
+    }
     return '👋'
   }
 

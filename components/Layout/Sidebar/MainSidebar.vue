@@ -1,21 +1,7 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <aside
-    class="
-      fixed
-      top-0
-      z-50
-      flex flex-col
-      h-screen
-      duration-200
-      border-r
-      lg:sticky lg:left-0
-      transition-width
-      transform-gpu
-      border-ink-200
-      group
-      bg-ink-400
-    "
+    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-ink-200 group bg-ink-400"
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
@@ -32,19 +18,7 @@
           placement: 'right'
         }"
         v-if="canActivateRepo"
-        class="
-          flex
-          items-center
-          w-full
-          p-2
-          space-x-2
-          leading-none
-          border
-          rounded-sm
-          bg-ink-300
-          border-ink-200
-          hover:bg-ink-200
-        "
+        class="flex items-center w-full p-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
         @click="showAddRepoModal = true"
       >
         <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4"></z-icon>
@@ -187,14 +161,13 @@
         </div>
       </div>
 
-      <div class="p-4 border-t border-ink-200">
+      <div class="p-4 pt-2 border-t border-ink-200">
         <div class="flex items-center justify-between space-x-2 leading-none">
-          <z-icon
-            icon="logo"
-            size="small"
-            color="vanilla-100"
+          <img
+            src="~/assets/images/christmas-logo.svg"
+            alt="Deepsource logo"
             class="flex-shrink-0 min-w-4 min-h-4"
-          ></z-icon>
+          />
           <span
             class="self-end text-xs transition-all text-vanilla-300"
             :class="{
@@ -208,19 +181,7 @@
       <div class="absolute -top-2.5 -right-2.5 md:group-hover:block hidden">
         <button
           @click="toggleSidebarCollapse"
-          class="
-            flex
-            items-center
-            justify-center
-            w-5
-            h-5
-            rounded-full
-            cursor-pointer
-            bg-ink-100
-            hover:bg-slate
-            group
-            focus:outline-none
-          "
+          class="flex items-center justify-center w-5 h-5 rounded-full cursor-pointer bg-ink-100 hover:bg-slate group focus:outline-none"
         >
           <z-icon
             icon="chevron-left"
