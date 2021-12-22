@@ -80,8 +80,6 @@ interface Trend {
   layout: 'repository'
 })
 export default class Autofix extends mixins(RepoDetailMixin) {
-  public lastDays = 30
-
   async fetch(): Promise<void> {
     await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
     await this.fetchRepo()

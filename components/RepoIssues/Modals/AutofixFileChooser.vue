@@ -236,6 +236,16 @@ export default class AutofixFileChooser extends mixins(
         refetch: true
       })
 
+      this.fetchPendingAutofixRuns({
+        ...this.baseRouteParams,
+        refetch: true
+      })
+
+      this.fetchAutofixTrends({
+        ...this.baseRouteParams,
+        lastDays: this.lastDays
+      })
+
       if (this.$route.name?.startsWith('provider-owner-repo')) {
         this.$router.push(this.$generateRoute(['autofix', response.runId as string]))
       } else if (this.repoParams) {

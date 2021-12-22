@@ -106,23 +106,16 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import { InfoIcon, AutofixCard, AutofixListItem } from '@/components/Autofix/index'
-import { AutofixRunListActions } from '~/store/autofixRun/list'
-import { AutofixRun, AutofixRunConnection, AutofixRunStatus } from '~/types/types'
+import { AutofixRun, AutofixRunStatus } from '~/types/types'
 import { AutofixIssuesGraph } from '@/components/Graphs'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import AutofixRunMixin from '~/mixins/autofixRunMixin'
 import { resolveNodes } from '~/utils/array'
-
-const autofixRunListStore = namespace('autofixRun/list')
-
-interface Trend {
-  labels: string[]
-  values: number[]
-}
 
 @Component({
   components: {
@@ -142,35 +135,7 @@ interface Trend {
   },
   layout: 'repository'
 })
-export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin) {
-  @autofixRunListStore.State
-  autofixRunList!: AutofixRunConnection
-
-  @autofixRunListStore.State
-  loading!: boolean
-
-  @autofixRunListStore.State
-  pendingAutofixList: AutofixRun[]
-
-  @autofixRunListStore.Action(AutofixRunListActions.FETCH_AUTOFIX_RUN_LIST)
-  fetchAutofixRunList: (args: {
-    provider: string
-    owner: string
-    name: string
-    limit?: number
-    statusIn?: AutofixRunStatus[]
-    refetch?: boolean
-  }) => Promise<void>
-
-  @autofixRunListStore.Action(AutofixRunListActions.FETCH_PENDING_AUTOFIX_RUNS)
-  fetchPendingAutofixRuns: (args: {
-    provider: string
-    owner: string
-    name: string
-    refetch?: boolean
-  }) => Promise<void>
-
-  autofixRun: AutofixRun | null = null
+export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin, AutofixRunMixin) {
   selectedHunkIds: Array<string> = []
   filesAffected: AutofixRun | Array<string> = []
   options = [

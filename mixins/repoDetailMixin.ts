@@ -46,6 +46,8 @@ export default class RepoDetailMixin extends Vue {
   @repoStore.State('loading')
   repoStoreLoading: boolean
 
+  public lastDays = 30
+
   // Query
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_DETAIL)
   fetchRepoDetails: (args: {

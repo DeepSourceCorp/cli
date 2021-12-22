@@ -5,7 +5,8 @@ import {
   AutofixRun,
   AutofixRunStatus,
   AutofixRunCommittedToBranchStatus,
-  AutofixRunPullRequestStatus
+  AutofixRunPullRequestStatus,
+  AutofixRunConnection
 } from '~/types/types'
 
 const autofixRunStore = namespace('autofixRun/detail')
@@ -44,6 +45,12 @@ export default class AutofixRunMixin extends Vue {
   @autofixRunStore.State
   loading!: boolean
 
+  @autofixRunListStore.State
+  autofixRunList!: AutofixRunConnection
+
+  @autofixRunListStore.State
+  pendingAutofixList: AutofixRun[]
+
   @autofixRunStore.Action(AutofixRunDetailActions.FETCH_AUTOFIX_RUN)
   fetchAutofixRunDetails: (args: { runId: string; refetch: boolean }) => Promise<void>
 
@@ -54,6 +61,14 @@ export default class AutofixRunMixin extends Vue {
     name: string
     limit?: number
     statusIn?: AutofixRunStatus[]
+    refetch?: boolean
+  }) => Promise<void>
+
+  @autofixRunListStore.Action(AutofixRunListActions.FETCH_PENDING_AUTOFIX_RUNS)
+  fetchPendingAutofixRuns: (args: {
+    provider: string
+    owner: string
+    name: string
     refetch?: boolean
   }) => Promise<void>
 }
