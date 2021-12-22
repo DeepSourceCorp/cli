@@ -1,5 +1,6 @@
 query($shortcode: String!, $first: Int) {
   analyzer(shortcode: $shortcode) {
+    id
     name
     analyzerLogo
     description

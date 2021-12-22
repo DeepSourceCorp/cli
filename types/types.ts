@@ -6676,7 +6676,7 @@ export type Unnamed_75_Query = (
   { __typename?: 'Query' }
   & { analyzer?: Maybe<(
     { __typename?: 'Analyzer' }
-    & Pick<Analyzer, 'name'>
+    & Pick<Analyzer, 'id' | 'name'>
   )> }
 );
 
@@ -6690,7 +6690,7 @@ export type Unnamed_76_Query = (
   { __typename?: 'Query' }
   & { analyzer?: Maybe<(
     { __typename?: 'Analyzer' }
-    & Pick<Analyzer, 'name' | 'analyzerLogo' | 'description' | 'issueTypeDistribution' | 'category' | 'version' | 'updatedOn' | 'exampleConfig' | 'issuesCount' | 'autofixableIssuesCount' | 'documentationUrl' | 'discussUrl'>
+    & Pick<Analyzer, 'id' | 'name' | 'analyzerLogo' | 'description' | 'issueTypeDistribution' | 'category' | 'version' | 'updatedOn' | 'exampleConfig' | 'issuesCount' | 'autofixableIssuesCount' | 'documentationUrl' | 'discussUrl'>
     & { starIssues: (
       { __typename?: 'IssueConnection' }
       & { edges: Array<Maybe<(
@@ -6745,7 +6745,7 @@ export type Unnamed_78_Query = (
   { __typename?: 'Query' }
   & { analyzer?: Maybe<(
     { __typename?: 'Analyzer' }
-    & Pick<Analyzer, 'name' | 'owner' | 'analyzerLogo' | 'issueTypeDistribution' | 'issuesCount' | 'documentationUrl' | 'discussUrl'>
+    & Pick<Analyzer, 'id' | 'name' | 'owner' | 'analyzerLogo' | 'issueTypeDistribution' | 'issuesCount' | 'documentationUrl' | 'discussUrl'>
     & { issues: (
       { __typename?: 'IssueConnection' }
       & Pick<IssueConnection, 'totalCount'>
@@ -9087,7 +9087,7 @@ export type Unnamed_156_Query = (
   { __typename?: 'Query' }
   & { transformer?: Maybe<(
     { __typename?: 'TransformerTool' }
-    & Pick<TransformerTool, 'name' | 'descriptionRendered' | 'updatedOn' | 'language' | 'version' | 'shortcode' | 'publishedOn' | 'logo' | 'owner' | 'documentationUrl' | 'discussUrl' | 'exampleConfig'>
+    & Pick<TransformerTool, 'id' | 'name' | 'descriptionRendered' | 'updatedOn' | 'language' | 'version' | 'shortcode' | 'publishedOn' | 'logo' | 'owner' | 'documentationUrl' | 'discussUrl' | 'exampleConfig'>
     & { analyzer?: Maybe<(
       { __typename?: 'Analyzer' }
       & Pick<Analyzer, 'shortcode'>

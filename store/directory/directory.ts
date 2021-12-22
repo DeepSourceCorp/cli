@@ -188,7 +188,6 @@ export const actions: DirectoryModuleActions = {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
     } finally {
       commit(DirectoryMutations.SET_LOADING, false)
-      return undefined
     }
   },
   async [DirectoryActions.FETCH_ANALYZER_ISSUES]({ commit }, { first = 5, ...rest }) {
@@ -205,7 +204,6 @@ export const actions: DirectoryModuleActions = {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
     } finally {
       commit(DirectoryMutations.SET_LOADING, false)
-      return undefined
     }
   },
   async [DirectoryActions.FETCH_TRANSFORMERS_DIR_LIST]({ commit }, args) {
@@ -245,7 +243,6 @@ export const actions: DirectoryModuleActions = {
       if (transformerResposne && transformerResposne.data) {
         return transformerResposne.data.transformer as TransformerTool
       }
-      return undefined
     } catch (e) {
       commit(DirectoryMutations.SET_ERROR, e as GraphqlError)
     } finally {
