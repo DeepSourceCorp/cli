@@ -1055,10 +1055,10 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
-"@deepsourcelabs/zeal@^0.9.16":
-  version "0.9.16"
-  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.9.16/4a6ec029436516f62d7619d4598a7ac7d009036763e28d0e94fc85bd3d23f5e3#fef4d378bcda292ef806c92fc97f31871eb04c38"
-  integrity sha512-93MuNIEPGBD+9RE66pmInciQmWEq5/Lh7Zghs+aa64TC0bpNVvypSUUH+fRCjj4012yIufpfj2HnCS9q0tglGA==
+"@deepsourcelabs/zeal@^0.9.23":
+  version "0.9.23"
+  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.9.23/b80e98376e4f5a4cae1a08cfa4b012d830c5cc37e5bb27fc72f4bfe61ff7bbee#3c404c1c974bc4e192822b5756c2e16d5a585a67"
+  integrity sha512-JxNS+Kn8UMy3L2Rcy07NS5uhDATvs6hXjSjd6ftKXUwlJOYtowARzNABRUsyqN0ysJi7NzRHLcVJ6B3Uw0RFSg==
   dependencies:
     "@tailwindcss/line-clamp" "^0.2.2"
     "@tailwindcss/postcss7-compat" "^2.2.16"
@@ -1074,7 +1074,6 @@
     frappe-charts "^2.0.0-rc20"
     postcss "^7.0.38"
     postcss-cli "7.1.2"
-    smoothscroll-polyfill "^0.4.4"
     tailwindcss "npm:@tailwindcss/postcss7-compat"
     v-tooltip "^2.1.3"
     vue "^2.6.12"
@@ -14801,11 +14800,6 @@ slice-ansi@^2.1.0:
     ansi-styles "^3.2.0"
     astral-regex "^1.0.0"
     is-fullwidth-code-point "^2.0.0"
-
-smoothscroll-polyfill@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/smoothscroll-polyfill/-/smoothscroll-polyfill-0.4.4.tgz#3a259131dc6930e6ca80003e1cb03b603b69abf8"
-  integrity sha512-TK5ZA9U5RqCwMpfoMq/l1mrH0JAR7y7KRvOBx0n2869aLxch+gT9GhN3yUfjiw+d/DiF1mKo14+hd62JyMmoBg==
 
 snake-case@^3.0.4:
   version "3.0.4"
