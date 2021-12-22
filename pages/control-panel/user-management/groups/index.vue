@@ -27,6 +27,29 @@
         <create-group-modal @refetch="refetchData" />
       </div>
     </div>
+    <div v-if="isScimEnabled" class="p-4 pb-0">
+      <notice :enabled="isScimEnabled">
+        <template #indicator>
+          <div class="flex flex-shrink-0 justify-center items-center w-4 h-4">
+            <span class="w-4 h-4 rounded-full flex-shrink-0 bg-juniper opacity-40 absolute"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-juniper"></span>
+          </div>
+        </template>
+        <span class="leading-none py-2 px-1 flex-grow">SCIM provisioning is enabled.</span>
+        <z-button
+          type="link"
+          button-type="link"
+          size="x-small"
+          href="https://deepsource.io/docs/control-panel/scim-provisioning"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-vanilla-400 items-center"
+        >
+          <span class="leading-none"> Learn more </span>
+          <z-icon icon="arrow-up-right" size="x-small" color="vanilla-400" />
+        </z-button>
+      </notice>
+    </div>
     <control-panel-cards-skeleton v-if="$fetchState.pending" :card-count="7" />
     <!-- HOTFIX: Nuxt SSR adds ghost a tags into dom during SSR -->
     <client-only v-else-if="groups.length">
@@ -51,7 +74,9 @@
           "
         >
           <div class="flex items-center gap-x-3">
-            <z-avatar :user-name="group.name" class="flex-shrink-0" />
+            <okta-icon-wrapper :is-okta="group.scimEnabled" class="flex-shrink-0">
+              <z-avatar :user-name="group.name" class="flex-shrink-0" />
+            </okta-icon-wrapper>
             <div>
               <p class="overflow-hidden text-sm w-44 overflow-ellipsis">
                 {{ group.name }}
@@ -85,7 +110,12 @@
           <div
             class="flex mt-1 ml-12 justify-self-start md:justify-self-end gap-x-2 md:ml-0 md:mt-0"
           >
-            <delete-group-button :group="group" :emit-refetch="true" @refetch="refetchData" />
+            <delete-group-button
+              v-if="!group.scimEnabled"
+              :group="group"
+              :emit-refetch="true"
+              @refetch="refetchData"
+            />
           </div>
         </nuxt-link>
         <div class="flex justify-center mt-6 text-sm">
@@ -128,6 +158,9 @@ const groupManagementStore = namespace('control-panel/groups')
 export default class GroupsHome extends mixins(ControlPanelBaseMixin, PaginationMixin) {
   @groupManagementStore.Getter(OrgGroupsGetters.ORG_GROUPS_DATA)
   groups: EnterpriseGroup[]
+
+  @groupManagementStore.Getter(OrgGroupsGetters.ENTERPRISE_SCIM_ENABLED)
+  isScimEnabled: boolean
 
   @groupManagementStore.Action(OrgGroupsActions.FETCH_ORG_GROUPS_DATA)
   fetchOrgGroupsData: (args?: {

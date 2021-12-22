@@ -51,32 +51,17 @@
             p-4
             border
             rounded-md
-            md:grid-cols-2
-            gap-x-10 gap-y-2
+            md:grid-cols-3
+            gap-x-4 gap-y-2
             border-ink-200
             hover:bg-ink-300
           "
         >
-          <div class="flex items-center gap-x-3">
-            <!-- <okta-icon-wrapper :is-okta="false"> -->
-            <z-avatar
-              :image="user.avatar"
-              :user-name="user.fullName || user.email"
-              class="flex-shrink-0"
-            />
-            <!-- </okta-icon-wrapper> -->
-            <div>
-              <p class="overflow-hidden text-sm w-44 overflow-ellipsis">
-                {{ user.fullName || user.email }}
-              </p>
-              <div class="flex items-center gap-x-3">
-                <div v-if="user.email" class="flex items-center gap-x-1.5 text-vanilla-400">
-                  <z-icon icon="mail" size="x-small" color="current" class="flex-shrink-0" />
-                  <span class="text-xs">{{ user.email }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <control-panel-user-card-info
+            :org-user="user"
+            :loading="$fetchState.pending"
+            class="md:col-span-2"
+          />
           <div
             class="
               flex flex-wrap
@@ -87,7 +72,12 @@
               md:flex-nowrap md:justify-self-end md:ml-0 md:mt-0
             "
           >
-            <remove-user-from-group-button :org-user="user" :group="group" @refetch="refetchData" />
+            <remove-user-from-group-button
+              v-if="!user.scimEnabled"
+              :org-user="user"
+              :group="group"
+              @refetch="refetchData"
+            />
           </div>
         </nuxt-link>
         <div class="flex justify-center mt-6 text-sm">
@@ -115,16 +105,10 @@
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import {
   ZInput,
-  ZButton,
   ZIcon,
-  ZAvatar,
   ZBreadcrumb,
   ZBreadcrumbItem,
   ZTab,
-  ZModal,
-  ZMenu,
-  ZMenuSection,
-  ZMenuItem,
   ZPagination
 } from '@deepsourcelabs/zeal'
 
@@ -140,16 +124,10 @@ const groupManagementStore = namespace('control-panel/groups')
 @Component({
   components: {
     ZInput,
-    ZButton,
     ZIcon,
-    ZAvatar,
     ZBreadcrumb,
     ZBreadcrumbItem,
     ZTab,
-    ZModal,
-    ZMenu,
-    ZMenuSection,
-    ZMenuItem,
     ZPagination
   },
   layout: 'control-panel'

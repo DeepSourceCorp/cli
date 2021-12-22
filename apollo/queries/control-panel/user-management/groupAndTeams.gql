@@ -4,6 +4,7 @@ query($id: ID!, $q: String, $first: Int, $offset: Int) {
       id
       name
       createdAt
+      scimEnabled
       membersCount: members {
         totalCount
       }

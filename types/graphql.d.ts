@@ -161,6 +161,15 @@ declare module '*/resetGroupInvite.gql' {
 }
     
 
+declare module '*/toggleUserActive.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updateGroup.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

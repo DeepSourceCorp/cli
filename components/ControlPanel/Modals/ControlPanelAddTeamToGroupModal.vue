@@ -162,11 +162,13 @@ export default class ControlPanelAddTeamToGroupModal extends mixins(AddTeamToGro
     this.$fetch()
   }
 
-  @Watch('groupId')
+  @Watch('groupId', { immediate: true })
   refetchTeams(): void {
-    this.addTeamSearchCandidate = ''
-    this.refetch = true
-    this.$fetch()
+    if (process.client) {
+      this.addTeamSearchCandidate = ''
+      this.refetch = true
+      this.$fetch()
+    }
   }
 }
 </script>

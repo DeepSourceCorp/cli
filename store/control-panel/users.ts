@@ -6,6 +6,7 @@ import OrgUserTeamQuery from '~/apollo/queries/control-panel/user-management/use
 
 import RemoveUserFromGroupMutation from '~/apollo/mutations/control-panel/user-management/removeUserFromGroup.gql'
 import DeleteUserMutation from '~/apollo/mutations/control-panel/user-management/deleteUser.gql'
+import ToggleUserActiveMutation from '~/apollo/mutations/control-panel/user-management/toggleUserActive.gql'
 
 import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
@@ -19,7 +20,8 @@ export enum OrgUsersActions {
   FETCH_ORG_USER_GROUP_DATA = 'fetchOrgUserGroupData',
   FETCH_ORG_USER_TEAM_DATA = 'fetchOrgUserTeamData',
   REMOVE_USER_FROM_GROUP = 'removeUserFromGroup',
-  DELETE_USER = 'deleteUser'
+  DELETE_USER = 'deleteUser',
+  TOGGLE_USER_ACTIVE = 'toggleUserActive'
 }
 
 export enum OrgUsersGetters {
@@ -108,6 +110,11 @@ interface OrgUsersModuleActions extends ActionTree<OrgUsersModuleState, RootStat
     injectee: OrgUsersActionContext,
     args: { userId: string }
   ) => Promise<boolean>
+  [OrgUsersActions.TOGGLE_USER_ACTIVE]: (
+    this: Store<RootState>,
+    injectee: OrgUsersActionContext,
+    args: { userId: string; isActive: boolean }
+  ) => Promise<boolean>
 }
 
 export const actions: OrgUsersModuleActions = {
@@ -167,6 +174,20 @@ export const actions: OrgUsersModuleActions = {
         args
       )) as GraphqlMutationResponse
       if (response.data?.deleteUser?.ok) {
+        return true
+      }
+    } catch (e) {
+      commit(OrgUsersMutations.SET_ERROR, e as GraphqlError)
+    }
+    return false
+  },
+  async [OrgUsersActions.TOGGLE_USER_ACTIVE]({ commit }, args) {
+    try {
+      const response = (await this.$applyGraphqlMutation(
+        ToggleUserActiveMutation,
+        args
+      )) as GraphqlMutationResponse
+      if (response.data?.toggleUserActive?.ok) {
         return true
       }
     } catch (e) {

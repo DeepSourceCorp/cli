@@ -6,6 +6,9 @@ query($id: ID!, $q: String, $first: Int, $offset: Int) {
       avatar
       email
       dateJoined
+      isActive
+      isSuperuser
+      scimEnabled
       groupsCount: scimGroups {
         totalCount
       }

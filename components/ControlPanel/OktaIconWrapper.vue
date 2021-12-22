@@ -5,7 +5,12 @@
     </div>
     <img
       v-if="isOkta"
+      v-tooltip="{
+        content: 'Synced with Okta',
+        delay: { show: 0, hide: 100 }
+      }"
       src="~/assets/images/control-panel/okta-indicator.svg"
+      alt="Synced with Okta"
       class="absolute bottom-0 right-0"
       :class="[dimensions]"
     />

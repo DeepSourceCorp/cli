@@ -23,6 +23,8 @@ module.exports = {
       'text-juniper',
       'text-cherry',
       'text-current',
+      'text-robin',
+      'text-honey',
       'bg-gitlab',
       'bg-bitbucket',
       'opacity-100',

@@ -8,7 +8,11 @@
         <z-breadcrumb-item> {{ orgUser.fullName || orgUser.email }} </z-breadcrumb-item>
       </z-breadcrumb>
     </div>
-    <control-panel-user-header :org-user="orgUser" :loading="$fetchState.pending" />
+    <control-panel-user-header
+      :org-user="orgUser"
+      :loading="$fetchState.pending"
+      @refetch="refetchData"
+    />
     <div class="flex items-center justify-between px-4 border-b border-ink-200">
       <div class="flex gap-5 pt-3 overflow-auto flex-nowrap">
         <nuxt-link :to="`/control-panel/user-management/users/${$route.params.userId}`">

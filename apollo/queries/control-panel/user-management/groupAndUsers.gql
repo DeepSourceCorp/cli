@@ -4,6 +4,7 @@ query($id: ID!, $q: String, $first: Int, $offset: Int) {
       id
       name
       createdAt
+      scimEnabled
       membersCount: members {
         totalCount
       }
@@ -15,6 +16,12 @@ query($id: ID!, $q: String, $first: Int, $offset: Int) {
             avatar
             fullName
             email
+            isActive
+            isSuperuser
+            scimEnabled
+            groupsCount: scimGroups {
+              totalCount
+            }
           }
         }
       }

@@ -912,6 +912,7 @@ type EnterpriseGroup implements MaskPrimaryKeyNode {
   groupUsers(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupUserMembershipConnection
   allTeams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
   invitationUrl: String
+  scimEnabled: Boolean
 }
 
 type EnterpriseGroupConnection {
@@ -935,6 +936,7 @@ type EnterpriseInstallationRoot {
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
   personalAccounts(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection
   managementConsoleUrl: String
+  isScimEnabled: Boolean
 }
 
 type EnterpriseInstallationSetup {
@@ -983,6 +985,7 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   modifiedAt: DateTime!
   fullName: String
   team(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
+  scimEnabled: Boolean
 }
 
 type EnterpriseUserConnection {

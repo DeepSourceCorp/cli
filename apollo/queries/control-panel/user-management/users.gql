@@ -10,12 +10,16 @@ query($q: String, $first: Int, $offset: Int) {
           email
           isActive
           isSuperuser
+          scimEnabled
           teams {
             edges {
               node {
                 name
               }
             }
+          }
+          groupsCount: scimGroups {
+            totalCount
           }
         }
       }

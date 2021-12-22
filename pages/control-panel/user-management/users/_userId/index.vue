@@ -8,7 +8,11 @@
         <z-breadcrumb-item> {{ orgUser.fullName || orgUser.email }} </z-breadcrumb-item>
       </z-breadcrumb>
     </div>
-    <control-panel-user-header :org-user="orgUser" :loading="$fetchState.pending" />
+    <control-panel-user-header
+      :org-user="orgUser"
+      :loading="$fetchState.pending"
+      @refetch="refetchData"
+    />
     <div class="flex items-center justify-between px-4 border-b border-ink-200">
       <div class="flex gap-5 pt-3 overflow-auto flex-nowrap">
         <nuxt-link :to="`/control-panel/user-management/users/${$route.params.userId}`">
@@ -54,9 +58,9 @@
           "
         >
           <div class="flex items-center gap-x-3">
-            <!-- <okta-icon-wrapper :is-okta="false"> -->
-            <z-avatar :user-name="group.name" class="flex-shrink-0" />
-            <!-- </okta-icon-wrapper> -->
+            <okta-icon-wrapper :is-okta="group.scimEnabled" class="flex-shrink-0">
+              <z-avatar :user-name="group.name" class="flex-shrink-0" />
+            </okta-icon-wrapper>
             <div>
               <p class="overflow-hidden text-sm w-44 overflow-ellipsis">
                 {{ group.name }}
@@ -98,6 +102,7 @@
             "
           >
             <remove-user-from-group-button
+              v-if="!group.scimEnabled"
               :org-user="orgUser"
               :group="group"
               @refetch="refetchData"

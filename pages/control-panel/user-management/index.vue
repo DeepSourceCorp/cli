@@ -56,26 +56,17 @@
             p-4
             border
             rounded-md
-            md:grid-cols-2
-            gap-x-6
-            lg:gap-x-10
-            gap-y-1
+            md:grid-cols-3
+            gap-x-4 gap-y-1
             border-ink-200
             hover:bg-ink-300
           "
         >
-          <div class="flex items-center gap-x-3">
-            <z-avatar :image="orgUser.avatar" :user-name="orgUser.fullName" class="flex-shrink-0" />
-            <div>
-              <p class="overflow-hidden text-sm w-44 overflow-ellipsis">
-                {{ orgUser.fullName || orgUser.email }}
-              </p>
-              <div class="flex items-center gap-x-1.5 text-vanilla-400">
-                <z-icon icon="mail" size="x-small" color="current" class="flex-shrink-0" />
-                <span class="text-xs">{{ orgUser.email }}</span>
-              </div>
-            </div>
-          </div>
+          <control-panel-user-card-info
+            :org-user="orgUser"
+            :loading="$fetchState.pending"
+            class="md:col-span-2"
+          />
           <div class="ml-12 md:ml-0 md:justify-self-end">
             <span
               v-if="resolveNodes(orgUser.teams).length"
@@ -117,7 +108,7 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZAvatar, ZPagination } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
 
 import { OrgUsersGetters, OrgUsersActions } from '~/store/control-panel/users'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
@@ -128,7 +119,7 @@ import { resolveNodes } from '~/utils/array'
 const userManagementStore = namespace('control-panel/users')
 
 @Component({
-  components: { ZInput, ZButton, ZIcon, ZAvatar, ZPagination },
+  components: { ZInput, ZButton, ZIcon, ZPagination },
   layout: 'control-panel'
 })
 export default class UserManagementHome extends mixins(ControlPanelBaseMixin, PaginationMixin) {

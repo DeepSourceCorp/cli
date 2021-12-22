@@ -1,12 +1,11 @@
 <template>
-  <div class="bg-ink-300 px-4 py-3 text-vanilla-400 text-sm flex space-x-2 items-center rounded-sm">
-    <span
-      class="w-2 h-2 rounded-full flex-shrink-0"
-      :class="{
-        'bg-juniper': enabled,
-        'bg-slate': !enabled
-      }"
-    ></span>
+  <div class="bg-ink-300 px-4 py-3 text-vanilla-400 text-sm flex gap-x-2 items-center rounded-sm">
+    <slot name="indicator">
+      <span
+        class="w-2 h-2 rounded-full flex-shrink-0"
+        :class="[enabled ? 'bg-juniper' : 'bg-slate']"
+      ></span>
+    </slot>
     <slot></slot>
   </div>
 </template>

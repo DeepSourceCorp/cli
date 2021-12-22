@@ -40,7 +40,8 @@ export enum OrgGroupsGetters {
   ORG_GROUPS_DATA = 'getOrgGroupsData',
   ORG_GROUP_INVITES_DATA = 'getOrgGroupInvitesData',
   TEAMS_TO_ADD = 'getTeamsToAdd',
-  ORG_GROUP_DATA = 'getOrgUserData'
+  ORG_GROUP_DATA = 'getOrgUserData',
+  ENTERPRISE_SCIM_ENABLED = 'getIsScimEnabled'
 }
 
 export enum OrgGroupsMutations {
@@ -48,13 +49,15 @@ export enum OrgGroupsMutations {
   SET_ORG_GROUP_DATA = 'setOrgUserData',
   SET_ORG_GROUP_INVITES_DATA = 'setOrgInvitesData',
   SET_TEAMS_TO_ADD = 'setTeamsToAdd',
-  SET_ERROR = 'setError'
+  SET_ERROR = 'setError',
+  SET_ENTERPRISE_SCIM_ENABLED = 'setEnterpriseScimEnabled'
 }
 
 export interface OrgGroupsModuleState {
   OrgGroupsData: EnterpriseGroup[]
   OrgGroupData: EnterpriseGroup
   OrgGroupInvitesData: EnterpriseGroup[]
+  EnterpriseScimEnabled: boolean
   teamsToAdd: EnterpriseGroup
   error: GraphqlError | Record<string, unknown>
 }
@@ -65,7 +68,7 @@ export const state = (): OrgGroupsModuleState => ({
     OrgGroupData: {} as EnterpriseGroup,
     OrgGroupInvitesData: [] as EnterpriseGroup[],
     teamsToAdd: {} as EnterpriseGroup,
-    isViewerSuperadmin: false,
+    EnterpriseScimEnabled: false,
     error: {}
   })
 })
@@ -84,6 +87,9 @@ export const getters: GetterTree<OrgGroupsModuleState, RootState> = {
   },
   [OrgGroupsGetters.ORG_GROUP_DATA]: (state) => {
     return state.OrgGroupData as EnterpriseGroup
+  },
+  [OrgGroupsGetters.ENTERPRISE_SCIM_ENABLED]: (state) => {
+    return state.EnterpriseScimEnabled || false
   }
 }
 interface OrgGroupsModuleMutations extends MutationTree<OrgGroupsModuleState> {
@@ -103,6 +109,10 @@ interface OrgGroupsModuleMutations extends MutationTree<OrgGroupsModuleState> {
     state: OrgGroupsModuleState,
     OrgGroupInvitesData: EnterpriseGroup[]
   ) => void
+  [OrgGroupsMutations.SET_ENTERPRISE_SCIM_ENABLED]: (
+    state: OrgGroupsModuleState,
+    EnterpriseScimEnabled: boolean
+  ) => void
   [OrgGroupsMutations.SET_ERROR]: (state: OrgGroupsModuleState, error: GraphqlError) => void
 }
 
@@ -118,6 +128,9 @@ export const mutations: OrgGroupsModuleMutations = {
   },
   [OrgGroupsMutations.SET_ORG_GROUP_INVITES_DATA]: (state, OrgGroupInvitesData) => {
     state.OrgGroupInvitesData = OrgGroupInvitesData
+  },
+  [OrgGroupsMutations.SET_ENTERPRISE_SCIM_ENABLED]: (state, EnterpriseScimEnabled) => {
+    state.EnterpriseScimEnabled = EnterpriseScimEnabled
   },
   [OrgGroupsMutations.SET_ERROR]: (state, error) => {
     state.error = Object.assign({}, state.error, error)
@@ -196,6 +209,12 @@ export const actions: OrgGroupsModuleActions = {
         args?.refetch
       )) as GraphqlQueryResponse
       commit(OrgGroupsMutations.SET_ORG_GROUPS_DATA, resolveNodes(response.data.enterprise?.groups))
+      if (response.data.enterprise?.isScimEnabled) {
+        commit(
+          OrgGroupsMutations.SET_ENTERPRISE_SCIM_ENABLED,
+          response.data.enterprise.isScimEnabled
+        )
+      }
       if (response.data.enterprise?.groups?.totalCount)
         return response.data.enterprise.groups.totalCount
     } catch (e) {

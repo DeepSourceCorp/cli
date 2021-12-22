@@ -3,9 +3,13 @@
     <div class="flex flex-col md:flex-row gap-y-0.5">
       <div>
         <div class="flex items-center gap-x-4">
-          <!-- <okta-icon-wrapper dimensions="w-5 h-5" :is-okta="false"> -->
-          <z-avatar :user-name="group.name" size="lg" :loading="loading" class="flex-shrink-0" />
-          <!-- </okta-icon-wrapper> -->
+          <okta-icon-wrapper
+            dimensions="w-5 h-5"
+            :is-okta="group.scimEnabled"
+            class="flex-shrink-0"
+          >
+            <z-avatar :user-name="group.name" size="lg" :loading="loading" class="flex-shrink-0" />
+          </okta-icon-wrapper>
           <div v-if="loading" class="h-10 w-56 py-px bg-ink-300 animate-pulse"></div>
           <div v-else>
             <p class="font-medium">
@@ -45,14 +49,21 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap gap-3 mt-4 items-cente">
+    <div class="flex flex-wrap gap-3 mt-4 items-center">
       <control-panel-add-team-to-group-modal
         :group-id="$route.params.groupId"
         @refetch="refetchData"
       />
-      <control-panel-group-invite-modal :group-id="$route.params.groupId" />
-      <control-panel-edit-group-modal :group="group" @refetch="refetchData" />
-      <delete-group-button :group="group" @refetch="refetchData" />
+      <control-panel-group-invite-modal
+        v-if="!group.scimEnabled"
+        :group-id="$route.params.groupId"
+      />
+      <control-panel-edit-group-modal
+        v-if="!group.scimEnabled"
+        :group="group"
+        @refetch="refetchData"
+      />
+      <delete-group-button v-if="!group.scimEnabled" :group="group" @refetch="refetchData" />
     </div>
   </div>
 </template>
