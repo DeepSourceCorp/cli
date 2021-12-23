@@ -135,9 +135,11 @@
       <div class="p-4 pt-2 border-t border-ink-200">
         <div class="flex items-center justify-between space-x-2 leading-none">
           <img
+            @click="toggleSnow"
+            v-tooltip="`'Tis the season`"
             src="~/assets/images/christmas-logo.svg"
             alt="Deepsource logo"
-            class="flex-shrink-0 min-w-4 min-h-4"
+            class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
           />
           <span
             class="self-end text-xs transition-all text-vanilla-300"
@@ -150,8 +152,8 @@
         </div>
       </div>
     </section>
-
     <portal to="modal">
+      <snow v-if="isSnowFallEnabled" class="hidden z-1000 md:block" />
       <z-confirm
         v-if="showInDiscoverInfoDialog"
         @onClose="showInDiscoverInfoDialog = false"
@@ -206,6 +208,7 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   public showInDiscoverInfoDialog = false
   public showUpdateTechnologiesModal = false
   public debounceTimer: ReturnType<typeof setTimeout>
+  public isSnowFallEnabled = false
 
   async fetch(): Promise<void> {
     if (this.loggedIn) {
@@ -231,6 +234,7 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
       this.fetchWatchedRepositoriesCount()
     }
     this.$root.$on('ui:show-sidebar-menu', this.openSidebar)
+    this.isSnowFallEnabled = Boolean(this.$localStore.get('easter-eggs', 'snowfall'))
   }
 
   beforeDestroy() {
@@ -252,6 +256,11 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
      * Return the current year.
      */
     return new Date().getFullYear()
+  }
+
+  toggleSnow() {
+    this.isSnowFallEnabled = !this.isSnowFallEnabled
+    this.$localStore.set('easter-eggs', 'snowfall', Number(this.isSnowFallEnabled))
   }
 
   @Watch('isOpen')

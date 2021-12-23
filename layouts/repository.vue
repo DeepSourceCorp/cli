@@ -35,15 +35,7 @@
           "
         >
           <div
-            class="
-              flex
-              items-center
-              p-4
-              space-x-2
-              border-b
-              bg-cherry bg-opacity-10
-              border-cherry border-opacity-20
-            "
+            class="flex items-center p-4 space-x-2 border-b bg-cherry bg-opacity-10 border-cherry border-opacity-20"
           >
             <p
               class="max-w-4xl text-cherry error-state"

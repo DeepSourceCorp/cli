@@ -32,7 +32,7 @@
     <!-- banner -->
     <div
       v-if="isAutofixConcluded"
-      class="flex items-center px-4 py-2 space-x-4 rounded-sm bg-ink-300 border-t border-ink-200"
+      class="flex items-center px-4 py-2 space-x-4 border-t rounded-sm bg-ink-300 border-ink-200"
     >
       <div class="flex items-center flex-1 space-x-6">
         <div class="flex items-center space-x-2">
@@ -295,12 +295,7 @@
       </div>
     </template>
     <install-autofix-modal v-if="showInstallModal" @close="showInstallModal = false" />
-    <audio
-      id="bell-sound"
-      src="https://public-bifrost-static-assets.s3.amazonaws.com/bell.mp3"
-      hidden
-      type="audio/mp3"
-    ></audio>
+    <audio id="bell-sound" src="~/assets/audio/bell.mp3" hidden type="audio/mp3"></audio>
   </div>
 </template>
 

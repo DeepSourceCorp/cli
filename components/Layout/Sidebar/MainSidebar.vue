@@ -5,6 +5,7 @@
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
+    <snow v-if="isSnowFallEnabled" class="hidden z-1000 md:block" />
     <section class="flex items-center p-2.5 pb-0">
       <context-switcher :isCollapsed="isCollapsed" />
     </section>
@@ -164,9 +165,11 @@
       <div class="p-4 pt-2 border-t border-ink-200">
         <div class="flex items-center justify-between space-x-2 leading-none">
           <img
+            @click="toggleSnow"
+            v-tooltip="`'Tis the season`"
             src="~/assets/images/christmas-logo.svg"
             alt="Deepsource logo"
-            class="flex-shrink-0 min-w-4 min-h-4"
+            class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
           />
           <span
             class="self-end text-xs transition-all text-vanilla-300"
@@ -236,6 +239,7 @@ export default class Sidebar extends mixins(
   public isOpen = false
   public showAddRepoModal = false
   public largeScreenSize = 1024
+  public isSnowFallEnabled = false
 
   created() {
     this.isCollapsed = Boolean(this.$nuxt.$cookies.get('ui-state-sidebar-collapsed'))
@@ -284,11 +288,17 @@ export default class Sidebar extends mixins(
       this.collapsedSidebar = false
       this.isOpen = true
     })
+    this.isSnowFallEnabled = Boolean(this.$localStore.get('easter-eggs', 'snowfall'))
 
     this.fetchRepoCount()
     this.$socket.$on('repo-onboarding-completed', () => {
       this.fetchRepoCount(true)
     })
+  }
+
+  toggleSnow() {
+    this.isSnowFallEnabled = !this.isSnowFallEnabled
+    this.$localStore.set('easter-eggs', 'snowfall', Number(this.isSnowFallEnabled))
   }
 
   beforeDestroy() {

@@ -270,6 +270,12 @@ export default {
           'focus-within-pseudo-class': false
         }
       }
+    },
+    extend(config) {
+      config.module.rules.push({
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        loader: 'file-loader'
+      })
     }
   },
 
