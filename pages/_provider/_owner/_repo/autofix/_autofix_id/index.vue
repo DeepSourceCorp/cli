@@ -28,11 +28,10 @@
         ></info>
       </div>
     </div>
-    <z-divider color="ink-200" />
     <!-- banner -->
     <div
       v-if="isAutofixConcluded"
-      class="flex items-center px-4 py-2 space-x-4 border-t rounded-sm bg-ink-300 border-ink-200"
+      class="flex items-center px-4 py-3 space-x-4 border-t border-b bg-ink-300 border-ink-200"
     >
       <div class="flex items-center flex-1 space-x-6">
         <div class="flex items-center space-x-2">
