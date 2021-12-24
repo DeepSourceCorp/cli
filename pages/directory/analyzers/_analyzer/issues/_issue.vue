@@ -8,27 +8,30 @@
         <z-breadcrumb-item isCurrent>{{ issue.shortcode }}</z-breadcrumb-item>
       </z-breadcrumb>
     </div>
-    <div class="p-4">
-      <div class="pb-4 border-b border-ink-200">
+    <div class="p-4 border-b border-ink-200">
+      <div class="max-w-prose">
         <h1 v-if="isLoaded" class="text-2xl font-semibold">
           <span>{{ issue.title }}</span
-          ><span class="ml-2 text-lg font-normal text-vanilla-400">{{ issue.shortcode }}</span>
+          ><span class="ml-3 text-lg font-normal text-vanilla-400 whitespace-nowrap">{{
+            issue.shortcode
+          }}</span>
         </h1>
         <div v-else class="w-full h-9 bg-ink-300 animate-pulse"></div>
-        <div class="flex mt-3 space-x-5 text-sm text-vanilla-400">
-          <div v-if="isLoaded" class="flex space-x-1.5 items-center">
-            <z-icon :icon="issue.issueType" size="x-small" color="vanilla-400" />
-            <!-- TODO -->
-            <span>{{ issueTypeTitles[issue.issueType] }}</span>
-          </div>
-          <div v-else class="w-16 h-6 bg-ink-300 animate-pulse"></div>
-          <div v-if="isLoaded && issue.autofixAvailable" class="flex space-x-1.5 items-center">
-            <z-icon icon="autofix" size="x-small" color="vanilla-400" />
-            <span>Has Autofix</span>
-          </div>
-          <div v-else-if="!isLoaded" class="w-16 h-6 bg-ink-300 animate-pulse"></div>
-        </div>
       </div>
+      <div class="flex mt-3 space-x-5 text-sm text-vanilla-400">
+        <div v-if="isLoaded" class="flex space-x-1.5 items-center">
+          <z-icon :icon="issue.issueType" size="x-small" color="vanilla-400" />
+          <span>{{ issueTypeTitles[issue.issueType] }}</span>
+        </div>
+        <div v-else class="w-16 h-6 bg-ink-300 animate-pulse"></div>
+        <div v-if="isLoaded && issue.autofixAvailable" class="flex space-x-1.5 items-center">
+          <z-icon icon="autofix" size="x-small" color="vanilla-400" />
+          <span>Has Autofix</span>
+        </div>
+        <div v-else-if="!isLoaded" class="w-16 h-6 bg-ink-300 animate-pulse"></div>
+      </div>
+    </div>
+    <div class="p-4">
       <div
         v-if="isLoaded && issue.descriptionRendered"
         v-html="issue.descriptionRendered"
