@@ -8065,6 +8065,10 @@ export type RepoSilenceRulesQuery = (
           & { issue: (
             { __typename?: 'Issue' }
             & Pick<Issue, 'shortcode' | 'title'>
+            & { analyzer: (
+              { __typename?: 'Analyzer' }
+              & Pick<Analyzer, 'shortcode'>
+            ) }
           ), creator?: Maybe<(
             { __typename?: 'EnterpriseUser' }
             & Pick<EnterpriseUser, 'firstName' | 'lastName' | 'email' | 'avatar'>
@@ -8873,6 +8877,10 @@ export type Unnamed_147_Query = (
           & { issue: (
             { __typename?: 'Issue' }
             & Pick<Issue, 'shortcode' | 'title'>
+            & { analyzer: (
+              { __typename?: 'Analyzer' }
+              & Pick<Analyzer, 'shortcode'>
+            ) }
           ), creator?: Maybe<(
             { __typename?: 'EnterpriseUser' }
             & Pick<EnterpriseUser, 'firstName' | 'lastName' | 'email' | 'avatar'>

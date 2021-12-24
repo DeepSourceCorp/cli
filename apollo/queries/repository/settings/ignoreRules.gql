@@ -20,6 +20,9 @@ query(
           issue {
             shortcode
             title
+            analyzer {
+              shortcode
+            }
           }
           creator {
             firstName

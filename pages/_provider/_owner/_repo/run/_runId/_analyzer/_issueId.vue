@@ -97,9 +97,16 @@
                 <div class="flex-1 flex flex-col space-y-2 text-sm">
                   <div class="flex space-x-2 w-full">
                     <div class="flex-1">
-                      <span v-if="rule.issue" class="font-bold text-vanilla-100">{{
-                        rule.issue.shortcode
-                      }}</span>
+                      <nuxt-link
+                        v-if="rule.issue"
+                        :to="`/directory/analyzers/${rule.issue.analyzer.shortcode}/issues/${rule.issue.shortcode}`"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <span class="font-bold text-juniper hover:underline">{{
+                          rule.issue.shortcode
+                        }}</span>
+                      </nuxt-link>
                       <span>Ignored</span>
                       <span v-if="rule.metadata.type === 'pattern'">
                         for all files matching with pattern
