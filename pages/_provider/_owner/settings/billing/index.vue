@@ -1,6 +1,6 @@
 <template>
   <div class="grid grid-cols-1 gap-5 p-4">
-    <template v-if="owner.hasPremiumPlan && !$fetchState.pending">
+    <template v-if="activeDashboardContext.has_premium_plan">
       <h2 class="text-lg font-medium">Billing</h2>
       <div class="max-w-2xl">
         <lazy-alert-box
@@ -71,7 +71,7 @@
             <span class="font-semibold">Free</span> plan.
           </p>
         </lazy-alert-box>
-        <plan-info :id="owner.id" :current-plan="currentPlan" />
+        <plan-info :id="owner.id" />
       </div>
 
       <usage-details />
@@ -90,7 +90,7 @@
         <cancel-plan />
       </form-group>
     </template>
-    <template v-else-if="!$fetchState.pending">
+    <template v-else>
       <plan-cards />
     </template>
   </div>

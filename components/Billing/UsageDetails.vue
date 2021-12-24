@@ -1,7 +1,7 @@
 <template>
   <form-group label="Usage details" class="mt-5">
     <div class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 bg-ink-400 border-ink-200">
-      <div class="p-4 space-y-4 border-r border-ink-200">
+      <div v-if="owner.featureUsage" class="p-4 space-y-4 border-r border-ink-200">
         <h5 class="text-xs font-medium leading-none tracking-wider uppercase text-vanilla-400">
           Usage this month
         </h5>
@@ -17,8 +17,9 @@
           </li>
         </ul>
       </div>
+      <div v-else class="bg-ink-300 animate-pulse" style="width: 335px; height: 180px"></div>
 
-      <div class="p-4 space-y-4">
+      <div v-if="features" class="p-4 space-y-4">
         <h5 class="text-xs font-medium leading-none tracking-wider text-vanilla-400">FEATURES</h5>
         <ul class="space-y-3">
           <li
@@ -51,6 +52,7 @@
           Upgrade plan
         </z-button>
       </div>
+      <div v-else class="bg-ink-300 animate-pulse" style="width: 335px; height: 180px"></div>
     </div>
   </form-group>
 </template>
