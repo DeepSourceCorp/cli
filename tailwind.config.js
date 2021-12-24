@@ -11,25 +11,27 @@ module.exports = {
       `plugins/**/*.{js,ts}`,
       `nuxt.config.{js,ts}`
     ],
-    safelist: [
-      'text-vanilla-100',
-      'text-vanilla-200',
-      'text-vanilla-300',
-      'text-vanilla-400',
-      'text-ink-100',
-      'text-ink-200',
-      'text-ink-300',
-      'text-ink-400',
-      'text-juniper',
-      'text-cherry',
-      'text-current',
-      'text-robin',
-      'text-honey',
-      'bg-gitlab',
-      'bg-bitbucket',
-      'opacity-100',
-      'opacity-25'
-    ]
+    options: {
+      safelist: [
+        'text-vanilla-100',
+        'text-vanilla-200',
+        'text-vanilla-300',
+        'text-vanilla-400',
+        'text-ink-100',
+        'text-ink-200',
+        'text-ink-300',
+        'text-ink-400',
+        'text-juniper',
+        'text-cherry',
+        'text-current',
+        'text-robin',
+        'text-honey',
+        'bg-gitlab',
+        'bg-bitbucket',
+        'opacity-100',
+        'opacity-25'
+      ]
+    }
   },
   variants: {
     extend: {

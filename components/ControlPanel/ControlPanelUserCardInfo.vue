@@ -25,7 +25,6 @@
           >
             {{ orgUser.isActive ? 'Active' : 'Inactive' }}
           </z-tag>
-          <!-- text-robin ==> hack to try prevent purging of class -->
           <z-tag
             v-if="orgUser.isSuperuser"
             icon-left="solid-circle"
