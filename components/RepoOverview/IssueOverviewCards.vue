@@ -105,15 +105,13 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
     if (!widget.trend_value) {
       return true
     }
+
+    // skipcq: JS-D009
     if (widget.trend_direction && widget.trend_value) {
-      if (
+      return (
         (widget.trend_direction === 'down' && !widget.trend_positive) ||
         (widget.trend_direction === 'up' && widget.trend_positive)
-      ) {
-        return true
-      } else {
-        return false
-      }
+      )
     } else {
       return false
     }

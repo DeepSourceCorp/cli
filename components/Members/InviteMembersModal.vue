@@ -290,6 +290,7 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
   get initialMembersToInvites(): member[] {
     let seatsAvailable = this.seatsLeftCount
     return INPUT_DATA.map((member) => {
+      // skipcq: JS-D009
       if (seatsAvailable-- > 0) {
         return {
           ...member,

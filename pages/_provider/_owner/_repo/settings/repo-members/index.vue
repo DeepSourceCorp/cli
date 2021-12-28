@@ -49,17 +49,7 @@
       </transition-group>
       <div
         v-else
-        class="
-          flex flex-col
-          items-center
-          justify-center
-          h-40
-          p-4
-          space-y-2
-          border-2 border-dashed
-          rounded-md
-          border-ink-300
-        "
+        class="flex flex-col items-center justify-center h-40 p-4 space-y-2 border-2 border-dashed rounded-md border-ink-300"
       >
         <template v-if="searchCandidate">
           <h3 class="text-lg font-semibold">We couldn't find {{ searchCandidate }}.</h3>
@@ -172,7 +162,7 @@ export default class RepositoryMembers extends mixins(RepoDetailMixin) {
 
   getRoleMessage(newRole: RepositoryPermissionChoices, name: string): string {
     const role = this.repoPerms[newRole].label
-
+    // skipcq: JS-D009
     if (newRole == 'ADMIN') {
       return `Are you sure you want to make ${name} <b class="text-vanilla-100">${role}</b> of this repo?`
     } else {

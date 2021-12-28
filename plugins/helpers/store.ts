@@ -125,7 +125,7 @@ const getCSRFHeaders = async ({
   return {
     headers: {
       'X-CSRFToken': csrfToken as string,
-      Cookie: `csrftoken=${csrfToken}` as string
+      Cookie: `csrftoken=${csrfToken as string}`
     }
   }
 }
@@ -240,7 +240,7 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
         context,
         refetchQueries,
         awaitRefetchQueries: true
-      }) as GraphqlMutationResponse
+      })
     }
   )
 

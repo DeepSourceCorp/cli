@@ -262,37 +262,35 @@
         ></div>
       </div>
     </template>
-    <template else>
-      <div class="flex flex-col items-center justify-center px-4 space-y-3 text-center h-80">
-        <template v-if="autofixRun.status === AUTOFIX_STATUS.PENDING">
-          <z-icon class="animate-spin" icon="spin-loader" color="juniper" size="large"></z-icon>
-          <h3>Generating fixes&hellip;</h3>
-          <p class="text-sm">
-            Please give us a moment while we generate a patch with fixes for this issue.
-          </p>
-        </template>
-        <template v-if="autofixRun.status === AUTOFIX_STATUS.TIMEOUT">
-          <z-icon icon="alert-circle"></z-icon>
-          <h3>Autofix timed out</h3>
-          <p>
-            The generation of fixes took too long to complete, so we had to exit without any
-            results. Please try again.
-          </p>
-        </template>
-        <template v-if="autofixRun.status === AUTOFIX_STATUS.CANCEL">
-          <z-icon icon="slash"></z-icon>
-          <h3>Autofix cancelled</h3>
-          <p>
-            The generation of fixes was stopped before completion either due to an external trigger
-            <br />or the repository state not being available any longer. Please try again.
-          </p>
-        </template>
-        <template v-if="autofixRun.status === AUTOFIX_STATUS.FAIL">
-          <h3 class="">Autofix failed</h3>
-          <p class="">There were errors generating fixes for some files. Please try again.</p>
-        </template>
-      </div>
-    </template>
+    <div v-else class="flex flex-col items-center justify-center px-4 space-y-3 text-center h-80">
+      <template v-if="autofixRun.status === AUTOFIX_STATUS.PENDING">
+        <z-icon class="animate-spin" icon="spin-loader" color="juniper" size="large"></z-icon>
+        <h3>Generating fixes&hellip;</h3>
+        <p class="text-sm">
+          Please give us a moment while we generate a patch with fixes for this issue.
+        </p>
+      </template>
+      <template v-if="autofixRun.status === AUTOFIX_STATUS.TIMEOUT">
+        <z-icon icon="alert-circle"></z-icon>
+        <h3>Autofix timed out</h3>
+        <p>
+          The generation of fixes took too long to complete, so we had to exit without any results.
+          Please try again.
+        </p>
+      </template>
+      <template v-if="autofixRun.status === AUTOFIX_STATUS.CANCEL">
+        <z-icon icon="slash"></z-icon>
+        <h3>Autofix cancelled</h3>
+        <p>
+          The generation of fixes was stopped before completion either due to an external trigger
+          <br />or the repository state not being available any longer. Please try again.
+        </p>
+      </template>
+      <template v-if="autofixRun.status === AUTOFIX_STATUS.FAIL">
+        <h3 class="">Autofix failed</h3>
+        <p class="">There were errors generating fixes for some files. Please try again.</p>
+      </template>
+    </div>
     <install-autofix-modal v-if="showInstallModal" @close="showInstallModal = false" />
     <audio id="bell-sound" src="~/assets/audio/bell.mp3" hidden type="audio/mp3"></audio>
   </div>
@@ -399,6 +397,7 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     if (this.autofixRun.pullRequestStatus === AutofixRunPullRequestStatus.Prf) {
       this.$toast.danger('Autofix failed')
     } else {
+      // skipcq: JS-D009
       if (this.autofixRun.isGeneratedFromPr) {
         this.$toast.success(this.pullRequestStatusText.SUCCESS_COMMIT)
       } else {

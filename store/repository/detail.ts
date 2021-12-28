@@ -799,7 +799,7 @@ export const actions: RepositoryDetailModuleActions = {
           response.data.toggleRepositoryActivation.repository
         )
         if (response.data.toggleRepositoryActivation.repository?.isActivated)
-          this.$toast.success(`Successfully activated ${state.repository.name}.`)
+          this.$toast.success(`Successfully activated ${state.repository.name as string}.`)
       }
     } catch (e) {
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))

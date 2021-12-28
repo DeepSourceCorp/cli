@@ -7,7 +7,7 @@ import { Toast } from '~/components/Toast/index'
 // add the component w/ the specified props
 export function spawn(
   id: string,
-  propsData: object,
+  propsData: Record<string, unknown>,
   Component: VueConstructor<Vue>,
   Vue: VueConstructor
 ) {
@@ -38,7 +38,7 @@ const containerClasses = [
 ]
 
 declare interface ToastInterface {
-  show(props: string | object): void
+  show(props: string | Record<string, unknown>): void
   success(message: string): void
   danger(message: string): void
   info(message: string): void
@@ -65,14 +65,14 @@ declare module 'vue/types/vue' {
   }
 }
 
-export default (context: Context, inject: Inject): void  => {
+export default (context: Context, inject: Inject): void => {
   const toasts = document.createElement('div')
   containerClasses.forEach((c) => toasts.classList.add(c))
   toasts.setAttribute('id', 'toasts-wrapper')
   document.body.appendChild(toasts)
 
   const ToastProgrammatic: ToastInterface = {
-    show(props: object | string) {
+    show(props: Record<string, unknown> | string) {
       if (typeof props === 'string') props = { message: props }
       return spawn('toasts-wrapper', props, Toast, Vue)
     },

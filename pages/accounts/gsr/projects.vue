@@ -133,6 +133,7 @@ export default class GSRProjectSelector extends mixins(ContextMixin, ActiveUserM
     if (!this.searchCandidate) {
       return projectsList.slice(0, this.MAX_PROJECTS_ON_SCREEN)
     }
+
     return projectsList
       .filter(
         (project) =>

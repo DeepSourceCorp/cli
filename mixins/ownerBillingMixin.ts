@@ -119,7 +119,7 @@ export default class OwnerBillingMixin extends mixins(OwnerDetailMixin, ContextM
 
   get currentPlan(): Record<string, string | number> {
     if (Object.keys(this.ownerBillingInfo).length) {
-      const { planSlug } = this.ownerBillingInfo as BillingInfo
+      const { planSlug } = this.ownerBillingInfo
       if (planSlug) return this.context.plans[planSlug]
     }
     return {}

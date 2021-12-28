@@ -62,7 +62,7 @@ class WebSocketManager {
     }
   }
 
-  send(message: string | object) {
+  send(message: string | Record<string, unknown>) {
     return this.ready().then(() => {
       const parsedMessage = typeof message === 'string' ? message : JSON.stringify(message)
       return this.ws.send(parsedMessage)

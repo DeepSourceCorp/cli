@@ -40,6 +40,7 @@ function shortenLargeNumber(candidate: number | string): string {
   let shortened = Math.pow(10, p - l * 3) * +(number / Math.pow(10, p)).toFixed(1)
 
   // Correct for floating point error upto 2 decimal places
+  // skipcq: JS-0377
   return Math.round(shortened * 100) / 100 + ['', 'k', 'm', 'b', 't'][l]
 }
 
