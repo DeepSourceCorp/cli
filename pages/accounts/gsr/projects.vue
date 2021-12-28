@@ -31,19 +31,7 @@
             :key="project.login"
             @click="selectAccount(project)"
             :disabled="loading"
-            class="
-              flex
-              items-center
-              w-full
-              px-3
-              py-2
-              mt-2
-              space-x-2
-              rounded-md
-              text-vanilla-100
-              group
-              bg-ink-100
-            "
+            class="flex items-center w-full px-3 py-2 mt-2 space-x-2 rounded-md text-vanilla-100 group bg-ink-100"
           >
             <div class="flex-grow overflow-hidden text-left overflow-ellipsis">
               <div>{{ project.name || project.login }}</div>
@@ -142,17 +130,16 @@ export default class GSRProjectSelector extends mixins(ContextMixin, ActiveUserM
 
   get projectsInSearch(): GsrProject[] {
     const projectsList = this.viewer.gsrProjects as GsrProject[]
-    if (this.searchCandidate) {
-      return projectsList
-        .filter(
-          (project) =>
-            project.login?.toLowerCase().includes(this.searchCandidate) ||
-            project.login?.toLowerCase().includes(this.searchCandidate)
-        )
-        .slice(0, this.MAX_PROJECTS_ON_SCREEN)
-    } else {
+    if (!this.searchCandidate) {
       return projectsList.slice(0, this.MAX_PROJECTS_ON_SCREEN)
     }
+    return projectsList
+      .filter(
+        (project) =>
+          project.login?.toLowerCase().includes(this.searchCandidate) ||
+          project.login?.toLowerCase().includes(this.searchCandidate)
+      )
+      .slice(0, this.MAX_PROJECTS_ON_SCREEN)
   }
 
   async selectAccount({
