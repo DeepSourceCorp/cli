@@ -16,8 +16,15 @@
               >We recommend adding a <span class="bg-ink-200 px-1.5 pb-0.5">skipcq</span> rule</span
             >
             in your source code so this occurrence does not repeat in the future. For help, please
-            read the documentation.</span
-          >
+            read the
+            <a
+              href="https://deepsource.io/docs/setup-analysis#silencing-a-specific-issue"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-juniper hover:underline"
+              >documentation</a
+            >.
+          </span>
         </div>
       </div>
       <template slot="footer">
