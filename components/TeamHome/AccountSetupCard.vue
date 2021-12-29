@@ -1,6 +1,6 @@
 <template>
   <div class="border border-ink-200 rounded-md col-span-1 xl:col-span-2">
-    <div v-if="completion > 0" class="p-2">Account is {{ completion }}% setup</div>
+    <div v-if="completion > 0" class="p-2">Account setup is {{ completion }}% complete</div>
     <div v-else class="p-2">Setup your account</div>
     <div class="w-full h-1 bg-ink-200">
       <div
