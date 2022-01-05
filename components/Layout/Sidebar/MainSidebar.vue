@@ -5,7 +5,6 @@
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
-    <snow v-if="isSnowFallEnabled" class="hidden z-1000 md:block" />
     <section class="flex items-center p-2.5 pb-0">
       <context-switcher :isCollapsed="isCollapsed" />
     </section>
@@ -162,13 +161,20 @@
         </div>
       </div>
 
-      <div class="p-4 pt-2 border-t border-ink-200">
+      <div class="p-4 border-t border-ink-200" :class="{ 'pt-2': isChristmasSeason() }">
         <div class="flex items-center justify-between space-x-2 leading-none">
           <img
-            @click="toggleSnow"
+            v-if="isChristmasSeason()"
             v-tooltip="`'Tis the season`"
             src="~/assets/images/christmas-logo.svg"
             alt="Deepsource logo"
+            class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
+          />
+          <z-icon
+            v-else
+            icon="logo"
+            size="small"
+            color="vanilla-100"
             class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
           />
           <span
@@ -217,6 +223,7 @@ import OwnerDetailMixin from '@/mixins/ownerDetailMixin'
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
+import { isChristmasSeason } from '~/utils/easter'
 
 @Component({
   components: {
@@ -239,7 +246,7 @@ export default class Sidebar extends mixins(
   public isOpen = false
   public showAddRepoModal = false
   public largeScreenSize = 1024
-  public isSnowFallEnabled = false
+  public isChristmasSeason = isChristmasSeason
 
   created() {
     this.isCollapsed = Boolean(this.$nuxt.$cookies.get('ui-state-sidebar-collapsed'))
@@ -288,17 +295,11 @@ export default class Sidebar extends mixins(
       this.collapsedSidebar = false
       this.isOpen = true
     })
-    this.isSnowFallEnabled = Boolean(this.$localStore.get('easter-eggs', 'snowfall'))
 
     this.fetchRepoCount()
     this.$socket.$on('repo-onboarding-completed', () => {
       this.fetchRepoCount(true)
     })
-  }
-
-  toggleSnow() {
-    this.isSnowFallEnabled = !this.isSnowFallEnabled
-    this.$localStore.set('easter-eggs', 'snowfall', Number(this.isSnowFallEnabled))
   }
 
   beforeDestroy() {

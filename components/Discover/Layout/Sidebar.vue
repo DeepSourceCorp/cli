@@ -132,13 +132,23 @@
           <z-button button-type="primary" class="w-full mt-4">Get started</z-button>
         </nuxt-link>
       </footer>
-      <div class="p-4 pt-2 border-t border-ink-200">
+      <div
+        class="border-t border-ink-200"
+        :class="[isChristmasSeason() ? 'p-4 pt-2' : 'px-2 py-4']"
+      >
         <div class="flex items-center justify-between space-x-2 leading-none">
           <img
-            @click="toggleSnow"
+            v-if="isChristmasSeason()"
             v-tooltip="`'Tis the season`"
             src="~/assets/images/christmas-logo.svg"
             alt="Deepsource logo"
+            class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
+          />
+          <z-icon
+            v-else
+            icon="logo"
+            size="small"
+            color="vanilla-100"
             class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
           />
           <span
@@ -153,7 +163,6 @@
       </div>
     </section>
     <portal to="modal">
-      <snow v-if="isSnowFallEnabled" class="hidden z-1000 md:block" />
       <z-confirm
         v-if="showInDiscoverInfoDialog"
         @onClose="showInDiscoverInfoDialog = false"
@@ -172,6 +181,7 @@ import { ZButton, ZConfirm, ZIcon, ZTag } from '@deepsourcelabs/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'
+import { isChristmasSeason } from '~/utils/easter'
 
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { DiscoverUserActions } from '~/store/discover/user'
@@ -208,7 +218,7 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   public showInDiscoverInfoDialog = false
   public showUpdateTechnologiesModal = false
   public debounceTimer: ReturnType<typeof setTimeout>
-  public isSnowFallEnabled = false
+  public isChristmasSeason = isChristmasSeason
 
   async fetch(): Promise<void> {
     if (this.loggedIn) {
@@ -234,7 +244,6 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
       this.fetchWatchedRepositoriesCount()
     }
     this.$root.$on('ui:show-sidebar-menu', this.openSidebar)
-    this.isSnowFallEnabled = Boolean(this.$localStore.get('easter-eggs', 'snowfall'))
   }
 
   beforeDestroy() {
@@ -256,11 +265,6 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
      * Return the current year.
      */
     return new Date().getFullYear()
-  }
-
-  toggleSnow() {
-    this.isSnowFallEnabled = !this.isSnowFallEnabled
-    this.$localStore.set('easter-eggs', 'snowfall', Number(this.isSnowFallEnabled))
   }
 
   @Watch('isOpen')

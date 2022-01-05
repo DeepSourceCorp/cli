@@ -292,7 +292,13 @@
       </template>
     </div>
     <install-autofix-modal v-if="showInstallModal" @close="showInstallModal = false" />
-    <audio id="bell-sound" src="~/assets/audio/bell.mp3" hidden type="audio/mp3"></audio>
+    <audio
+      v-if="isChristmasSeason()"
+      id="bell-sound"
+      src="~/assets/audio/bell.mp3"
+      hidden
+      type="audio/mp3"
+    ></audio>
   </div>
 </template>
 
@@ -322,7 +328,8 @@ import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
-import { fromNow } from '@/utils/date'
+import { fromNow } from '~/utils/date'
+import { isChristmasSeason } from '~/utils/easter'
 import AutofixRunMixin from '~/mixins/autofixRunMixin'
 
 interface DOMElement extends Element {
@@ -362,6 +369,7 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
   public isReadOnly = false
   public showInstallModal = false
   public triggeringAutofix = false
+  public isChristmasSeason = isChristmasSeason
 
   public PULL_REQUEST_MAP: Record<string, string> = {
     PRO: 'Pull-request open',
@@ -403,7 +411,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
       } else {
         this.$toast.success(this.pullRequestStatusText.SUCCESS_PR)
       }
-      this.playAudio()
+
+      // Play bell sound
+      if (this.isChristmasSeason()) {
+        this.playAudio()
+      }
     }
   }
 
