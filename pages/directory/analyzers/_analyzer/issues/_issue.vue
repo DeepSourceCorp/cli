@@ -47,7 +47,7 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, Prop, mixins } from 'nuxt-property-decorator'
+import { Component, namespace, Prop, mixins, Watch } from 'nuxt-property-decorator'
 
 import { ZBreadcrumb, ZBreadcrumbItem, ZIcon } from '@deepsourcelabs/zeal'
 
@@ -87,13 +87,24 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
           message: `Issue "${issueShortcode}" does not exist!`
         })
     }
-    this.metaTitle = `${this.issue?.shortcode} • ${this.analyzer.name} Analyzer by DeepSource`
-    this.metaDescription = `Issue ${this.issue?.shortcode}: ${this.issue?.title}`
+
     this.isLoaded = true
   }
 
   get analyzerUrl(): string {
     return `/directory/analyzers/${this.analyzer.shortcode || this.$route.params.analyzer}`
+  }
+
+  get isMetaReady(): boolean {
+    return Boolean(this.issue?.shortcode && this.analyzer.name)
+  }
+
+  @Watch('isMetaReady')
+  setMetaInfo(newIsMetaReady: boolean): void {
+    if (newIsMetaReady) {
+      this.metaTitle = `${this.issue?.shortcode} • ${this.analyzer.name} Analyzer by DeepSource`
+      this.metaDescription = `Issue ${this.issue?.shortcode}: ${this.issue?.title}`
+    }
   }
 }
 </script>

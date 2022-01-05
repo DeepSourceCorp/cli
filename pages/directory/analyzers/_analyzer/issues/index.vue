@@ -1,16 +1,7 @@
 <template>
   <div>
     <div
-      class="
-        flex flex-row-reverse
-        items-center
-        px-4
-        py-3
-        border-b
-        gap-x-2
-        border-ink-200
-        lg:flex-row
-      "
+      class="flex flex-row-reverse items-center px-4 py-3 border-b gap-x-2 border-ink-200 lg:flex-row"
     >
       <div
         class="duration-300 ease-in-out border rounded-md border-ink-200"
@@ -87,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
+import { Component, Prop, mixins, Watch } from 'nuxt-property-decorator'
 
 import { ZButton, ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
 
@@ -119,9 +110,12 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   private onlyAutofix = false
   private searchTerm = ''
 
-  created() {
-    this.metaTitle = `Issues • ${this.analyzer.name} Analyzer by DeepSource`
-    this.metaDescription = this.getMetaDescription(this.analyzer)
+  @Watch('analyzer.shortcode', { immediate: true })
+  generateMeta(newShortcode: string): void {
+    if (newShortcode) {
+      this.metaTitle = `Issues • ${this.analyzer.name} Analyzer by DeepSource`
+      this.metaDescription = this.getMetaDescription(this.analyzer)
+    }
   }
 
   get analyzerUrl(): string {
@@ -153,15 +147,20 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   }
 
   getMetaDescription(analyzer: Analyzer): string {
-    if (analyzer.shortcode === 'test-coverage')
-      return "DeepSource's Test Coverage Analyzer tracks the test coverage of your code. Learn all about it here."
-    if (analyzer.shortcode === 'secrets')
-      return "DeepSource's Secrets Analyzer runs continuous static analysis on your code and helps you find various security issues. Learn all about it here."
-    return `DeepSource's ${analyzer.name} Analyzer continuously analyzes your ${
-      analyzer.name
-    } code and helps you find${
-      analyzer.autofixableIssuesCount ? ' and fix' : ''
-    } various code quality issues. Learn all about it here.`
+    switch (analyzer.shortcode) {
+      case 'test-coverage':
+        return "DeepSource's Test Coverage Analyzer tracks the test coverage of your code. Learn all about it here."
+
+      case 'secrets':
+        return "DeepSource's Secrets Analyzer runs continuous static analysis on your code and helps you find various security issues. Learn all about it here."
+
+      default:
+        return `DeepSource's ${analyzer.name} Analyzer continuously analyzes your ${
+          analyzer.name
+        } code and helps you find${
+          analyzer.autofixableIssuesCount ? ' and fix' : ''
+        } various code quality issues. Learn all about it here.`
+    }
   }
 }
 </script>

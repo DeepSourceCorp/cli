@@ -57,16 +57,21 @@ export default class MetaMixin extends Vue {
   }
 
   head() {
+    //? This is a hack to make the variables reactive. Ref: https://vue-meta.nuxtjs.org/guide/caveats.html#reactive-variables-in-template-functions
+    const metaTitle = this.metaTitle
+    const metaDescription = this.metaDescription
+    const openGraphMeta = this.generateOpenGraphMeta
+    const twitterMeta = this.generateTwitterMeta
     return {
-      title: this.metaTitle,
+      title: metaTitle,
       meta: [
         {
           hid: 'description',
           name: 'description',
-          content: this.metaDescription
+          content: metaDescription
         },
-        ...this.generateOpenGraphMeta,
-        ...this.generateTwitterMeta
+        ...openGraphMeta,
+        ...twitterMeta
       ]
     }
   }
