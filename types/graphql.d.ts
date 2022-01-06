@@ -864,6 +864,15 @@ declare module '*/socialAuthUrls.gql' {
 }
     
 
+declare module '*/changelog.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/context.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

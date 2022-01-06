@@ -445,6 +445,30 @@ type Card {
   expMonth: Int
 }
 
+type Changelog {
+  logEntries: [ChangelogItem]
+}
+
+type ChangelogItem {
+  id: ID!
+  url: String!
+  status: StatusOptions!
+  created: String
+  title: String
+  labels: [ChangelogItemLabel]
+  markdownDetails: String
+  plaintextDetails: String
+  publishedAt: String
+}
+
+type ChangelogItemLabel {
+  id: String
+  created: String
+  entryCount: Int
+  name: String
+  url: String
+}
+
 type Check implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -1584,6 +1608,7 @@ type PageInfo {
 }
 
 type Query {
+  changelog: Changelog
   isViewerSuperadmin: Boolean
   getGroupInviteInfo(invitationCode: String!): GroupInviteInfo
   enterprise: EnterpriseInstallationRoot
@@ -2080,6 +2105,12 @@ type SocialType {
   extraData: SocialCamelJSON
   created: DateTime!
   modified: DateTime!
+}
+
+enum StatusOptions {
+  PUBLISHED
+  DRAFT
+  PLANNED
 }
 
 input SubmitSupportTicketInput {

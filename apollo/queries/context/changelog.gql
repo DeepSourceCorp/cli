@@ -1,0 +1,16 @@
+query {
+  changelog {
+    logEntries {
+      id
+      title
+      created
+      labels {
+        id
+        name
+      }
+      publishedAt
+      status
+      url
+    }
+  }
+}

@@ -115,7 +115,7 @@
         >
           <user-menu :isCollapsed="isCollapsed" />
           <client-only>
-            <change-log v-show="!isCollapsed" />
+            <change-log v-show="!isCollapsed" v-if="!$config.onPrem" />
           </client-only>
         </div>
       </div>
