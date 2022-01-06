@@ -362,9 +362,6 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
   }
 
   parseTemplate(candidate: string): string {
-    if (this.forTemplate) {
-      return candidate
-    }
     const hostmap: Record<string, string> = {
       gh: 'github.com',
       gl: 'gitlab.com',
@@ -380,7 +377,7 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     return candidate
       .replaceAll('<%=  vcs_host %>', host)
       .replaceAll('<%=  login %>', owner)
-      .replaceAll('<%=  name %>', repo)
+      .replaceAll('<%=  name %>', this.forTemplate ? '<repository-name>' : repo)
   }
 
   hasTemplate(config: AnalyzerMetaProperitiesInterface): boolean {
