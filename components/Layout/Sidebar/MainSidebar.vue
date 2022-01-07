@@ -175,7 +175,7 @@
             icon="logo"
             size="small"
             color="vanilla-100"
-            class="flex-shrink-0 cursor-pointer min-w-4 min-h-4"
+            class="flex-shrink-0 min-w-4 min-h-4"
           />
           <span
             class="self-end text-xs transition-all text-vanilla-300"
