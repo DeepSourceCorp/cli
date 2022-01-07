@@ -127,6 +127,7 @@ const userManagementStore = namespace('control-panel/users')
 
 @Component({
   components: { ZInput, ZButton, ZIcon, ZAvatar, ZBreadcrumb, ZBreadcrumbItem, ZTab, ZPagination },
+  methods: { parseISODate, formatDate },
   layout: 'control-panel'
 })
 export default class UserManagementUserDetails extends mixins(
@@ -148,8 +149,6 @@ export default class UserManagementUserDetails extends mixins(
   @userManagementStore.Action(OrgUsersActions.DELETE_USER)
   deleteUserFromOrg: (args: { userId: string }) => Promise<boolean>
 
-  parseISODate = parseISODate
-  formatDate = formatDate
   q = ''
   perPageCount = 10
   refetch = true

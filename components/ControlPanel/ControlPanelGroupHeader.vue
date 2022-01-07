@@ -10,12 +10,12 @@
           >
             <z-avatar :user-name="group.name" size="lg" :loading="loading" class="flex-shrink-0" />
           </okta-icon-wrapper>
-          <div v-if="loading" class="h-10 w-56 py-px bg-ink-300 animate-pulse"></div>
+          <div v-if="loading" class="w-56 h-10 py-px bg-ink-300 animate-pulse"></div>
           <div v-else>
             <p class="font-medium">
               {{ group.name }}
             </p>
-            <div class="flex flex-wrap md:flex-nowrap items-center gap-x-3 text-vanilla-400">
+            <div class="flex flex-wrap items-center md:flex-nowrap gap-x-3 text-vanilla-400">
               <div
                 v-if="group.membersCount && group.membersCount.totalCount"
                 class="flex items-center gap-x-1.5"
@@ -49,7 +49,7 @@
         </div>
       </div>
     </div>
-    <div class="flex flex-wrap gap-3 mt-4 items-center">
+    <div class="flex flex-wrap items-center gap-3 mt-4">
       <control-panel-add-team-to-group-modal
         :group-id="$route.params.groupId"
         @refetch="refetchData"
@@ -77,7 +77,11 @@ import { formatDate, parseISODate } from '~/utils/date'
 
 @Component({
   components: { ZButton, ZAvatar, ZIcon },
-  name: 'ControlPanelUserHeader'
+  name: 'ControlPanelUserHeader',
+  methods: {
+    parseISODate,
+    formatDate
+  }
 })
 export default class ControlPanelUserHeader extends Vue {
   @Prop({ required: true })
@@ -85,9 +89,6 @@ export default class ControlPanelUserHeader extends Vue {
 
   @Prop({ default: false })
   loading: boolean
-
-  parseISODate = parseISODate
-  formatDate = formatDate
 
   refetchData(): void {
     this.$emit('refetch')

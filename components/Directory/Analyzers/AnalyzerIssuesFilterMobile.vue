@@ -10,7 +10,7 @@
         <span class="text-sm leading-none">{{ activeFilterTitle || 'All issues' }}</span>
         <div class="flex-grow"></div>
         <div class="text-sm rounded-full place-self-end w-9 bg-juniper-400">
-          {{ shortenNumber(totalIssueCount) }}
+          {{ shortenLargeNumber(totalIssueCount) }}
         </div>
       </z-button>
     </div>
@@ -34,7 +34,7 @@
                   class="text-xs rounded-full place-self-end w-9"
                   :class="activeFilter === '' ? 'bg-juniper-400' : 'bg-ink-100'"
                 >
-                  {{ shortenNumber(allFilterCount) }}
+                  {{ shortenLargeNumber(allFilterCount) }}
                 </div>
               </div>
             </z-button>
@@ -71,7 +71,7 @@
                   class="text-xs rounded-full place-self-end w-9"
                   :class="activeFilter === issueType.shortcode ? 'bg-juniper-400' : 'bg-ink-100'"
                 >
-                  {{ shortenNumber(issueType.count) }}
+                  {{ shortenLargeNumber(issueType.count) }}
                 </div>
               </div>
             </z-button>
@@ -82,7 +82,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, Vue, Prop, Watch } from 'nuxt-property-decorator'
+import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { ZButton, ZIcon, ZModal } from '@deepsourcelabs/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
@@ -90,6 +90,7 @@ import IssueTypeT from '~/types/issueDistribution'
 
 @Component({
   components: { ZButton, ZIcon, ZModal },
+  methods: { shortenLargeNumber },
   name: 'AnalyzerIssuesFilterMobile'
 })
 export default class AnalyzerIssuesFilterMobile extends Vue {
@@ -129,10 +130,6 @@ export default class AnalyzerIssuesFilterMobile extends Vue {
 
   closeModal() {
     this.isModalOpen = false
-  }
-
-  shortenNumber(val: number): string {
-    return shortenLargeNumber(val)
   }
 }
 </script>

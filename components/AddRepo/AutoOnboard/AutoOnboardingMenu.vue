@@ -95,7 +95,7 @@
       icon="settings"
       inputWidth="x-small"
     >
-      <template slot="description"> Create and edit templates to be used for Auto Onboard.</template>
+      <template slot="description">Create and edit templates to be used for Auto Onboard.</template>
     </button-input>
   </section>
 </template>
@@ -106,7 +106,6 @@ import { RepoCard } from '@/components/AddRepo'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
-import { toTitleCase } from '@/utils/string'
 
 @Component({
   components: {
@@ -119,7 +118,6 @@ import { toTitleCase } from '@/utils/string'
   }
 })
 export default class AutoOnboardingMenu extends mixins(ActiveUserMixin, AutoOnboardMixin) {
-  public toTitleCase = toTitleCase
   public isCollapsed = false
   public pollingInterval: ReturnType<typeof setInterval>
 

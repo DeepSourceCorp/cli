@@ -5,15 +5,7 @@
     <div class="flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly">
       <!-- heading -->
       <div
-        class="
-          flex
-          items-center
-          space-x-2
-          text-xs
-          font-normal
-          lg:text-lg lg:leading-9
-          text-vanilla-400
-        "
+        class="flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400"
       >
         <!-- Issue title -->
         <z-icon :icon="icon" size="small" color="transparent" />
@@ -55,7 +47,7 @@
             class="text-2xl font-medium"
             :class="issuesRaisedCount > 0 ? 'text-cherry' : 'text-vanilla-400'"
           >
-            {{ shortenNumber(issuesRaisedCount) }}
+            {{ shortenLargeNumber(issuesRaisedCount) }}
           </div>
           <div class="text-xs text-vanilla-400">introduced</div>
         </div>
@@ -68,7 +60,7 @@
             class="text-2xl font-medium"
             :class="issuesResolvedCount > 0 ? 'text-juniper' : 'text-vanilla-400'"
           >
-            {{ shortenNumber(issuesResolvedCount) }}
+            {{ shortenLargeNumber(issuesResolvedCount) }}
           </div>
           <div class="text-xs text-vanilla-400">resolved</div>
         </div>
@@ -87,6 +79,10 @@ import { formatIntl, shortenLargeNumber } from '~/utils/string'
 @Component({
   components: {
     ZIcon
+  },
+  methods: {
+    formatIntl,
+    shortenLargeNumber
   }
 })
 export default class AnalyzerHeader extends Vue {
@@ -110,9 +106,6 @@ export default class AnalyzerHeader extends Vue {
 
   @Prop({ default: 0 })
   alertingMetricsCount: number
-
-  public formatIntl = formatIntl
-  public shortenNumber = shortenLargeNumber
 
   get alertingMetricsMessage(): string {
     if (this.alertingMetricsCount === 1) {

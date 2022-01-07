@@ -361,7 +361,10 @@ const runStore = namespace('run/detail')
     },
     gateFeature: AppFeatures.AUTOFIX
   },
-  layout: 'repository'
+  layout: 'repository',
+  methods: {
+    isChristmasSeason
+  }
 })
 export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, AutofixRunMixin) {
   public height = '1px'
@@ -369,7 +372,6 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
   public isReadOnly = false
   public showInstallModal = false
   public triggeringAutofix = false
-  public isChristmasSeason = isChristmasSeason
 
   public PULL_REQUEST_MAP: Record<string, string> = {
     PRO: 'Pull-request open',
@@ -413,7 +415,7 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
       }
 
       // Play bell sound
-      if (this.isChristmasSeason()) {
+      if (isChristmasSeason()) {
         this.playAudio()
       }
     }

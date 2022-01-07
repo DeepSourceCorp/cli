@@ -250,7 +250,8 @@ const repoDetailStore = namespace('repository/detail')
     ZOption,
     ZRadioGroup,
     ZRadio
-  }
+  },
+  methods: { toSentenceCase }
 })
 export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixin) {
   @repoDetailStore.State
@@ -296,7 +297,6 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
   public configItems: Array<AnalyzerMetaProperitiesInterface> = []
   public transformerItems: Array<TransformerInterface> = []
   public invalidFields: Array<string> = []
-  private toSentenceCase = toSentenceCase
   public isCollapsed = false
 
   @Watch('readOnly')

@@ -2,7 +2,7 @@
   <nuxt-link
     :to="$generateRoute(['settings', 'webhooks', $route.params.webhookId, 'log', id])"
     as="li"
-    class="h-12 items-center px-3 grid grid-cols-6 text-sm hover:bg-ink-300"
+    class="grid items-center h-12 grid-cols-6 px-3 text-sm hover:bg-ink-300"
   >
     <span>
       <z-tag
@@ -10,7 +10,7 @@
         bgColor="ink-400 bg-opacity-20"
         textSize="xs"
         spacing="px-2 py-0.5"
-        class="tracking-wider font-semibold border"
+        class="font-semibold tracking-wider border"
         :class="{
           'border-juniper': httpStatusCode >= 200 && httpStatusCode < 300,
           'border-honey': httpStatusCode >= 300 && httpStatusCode < 400,
@@ -28,7 +28,7 @@
         {{ id }}
       </template>
     </code>
-    <span class="col-span-2 leading-none text-vanilla-400 text-right" v-tooltip="createdAt">
+    <span class="col-span-2 leading-none text-right text-vanilla-400" v-tooltip="createdAt">
       {{ fromNow(createdAt) }}
     </span>
     <span v-if="finishedIn" class="col-span-1 text-right text-vanilla-400">
@@ -45,7 +45,8 @@ import { fromNow } from '~/utils/date'
 @Component({
   components: {
     ZTag
-  }
+  },
+  methods: { fromNow }
 })
 export default class WebhookLogListItem extends Vue {
   @Prop({ required: true })
@@ -62,7 +63,5 @@ export default class WebhookLogListItem extends Vue {
 
   @Prop({ required: true })
   finishedIn: string
-
-  public fromNow = fromNow
 }
 </script>

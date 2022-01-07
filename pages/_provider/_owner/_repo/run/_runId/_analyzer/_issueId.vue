@@ -7,8 +7,8 @@
       :checks="checks"
       :currentAnalyzer="$route.params.analyzer"
     ></run-header>
-    <div v-else class="h-24 w-full bg-ink-200 animate-pulse"></div>
-    <div class="px-4 pt-4 relative">
+    <div v-else class="w-full h-24 bg-ink-200 animate-pulse"></div>
+    <div class="relative px-4 pt-4">
       <!-- Back to Issue list Page -->
       <div class="flex items-center justify-between">
         <link-to-prev :link="routeToPrevious" title="All issues"></link-to-prev>
@@ -23,13 +23,13 @@
       </div>
 
       <!-- Issue details -->
-      <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0 mt-2">
-        <div class="space-y-2 w-full" v-if="$fetchState.pending">
+      <div class="flex flex-col mt-2 space-y-3 xl:flex-row xl:space-y-0">
+        <div class="w-full space-y-2" v-if="$fetchState.pending">
           <!-- Left Section -->
-          <div class="w-3/5 md:w-4/5 h-10 bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="w-1/3 flex space-x-2">
-            <div class="h-6 w-1/3 bg-ink-300 rounded-md animate-pulse"></div>
-            <div class="h-6 w-1/3 bg-ink-300 rounded-md animate-pulse"></div>
+          <div class="w-3/5 h-10 rounded-md md:w-4/5 bg-ink-300 animate-pulse"></div>
+          <div class="flex w-1/3 space-x-2">
+            <div class="w-1/3 h-6 rounded-md bg-ink-300 animate-pulse"></div>
+            <div class="w-1/3 h-6 rounded-md bg-ink-300 animate-pulse"></div>
           </div>
         </div>
         <issue-details-header
@@ -64,15 +64,15 @@
       <z-tab-panes class="p-4">
         <z-tab-pane>
           <div class="flex" v-if="$fetchState.pending">
-            <div class="w-full lg:w-4/6 space-y-4">
+            <div class="w-full space-y-4 lg:w-4/6">
               <div
                 v-for="ii in 3"
                 :key="ii"
-                class="h-36 w-full bg-ink-300 rounded-md animate-pulse"
+                class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
               ></div>
             </div>
-            <div class="hidden lg:block px-4 w-2/6 h-full">
-              <div class="h-44 bg-ink-300 rounded-md animate-pulse"></div>
+            <div class="hidden w-2/6 h-full px-4 lg:block">
+              <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
             </div>
           </div>
           <issue-list
@@ -94,8 +94,8 @@
           <div v-if="Array.isArray(silenceRules) && silenceRules.length" class="space-y-4">
             <template v-for="rule in silenceRules">
               <div class="flex items-center" :key="rule.id">
-                <div class="flex-1 flex flex-col space-y-2 text-sm">
-                  <div class="flex space-x-2 w-full">
+                <div class="flex flex-col flex-1 space-y-2 text-sm">
+                  <div class="flex w-full space-x-2">
                     <div class="flex-1">
                       <nuxt-link
                         v-if="rule.issue"
@@ -128,7 +128,7 @@
                       <img
                         :src="rule.creator.avatar"
                         alt="Creator Avatar"
-                        class="w-4 h-4 overflow-hidden inline-block rounded-full"
+                        class="inline-block w-4 h-4 overflow-hidden rounded-full"
                       />
                       <span class="text-vanilla-400">{{ rule.creator.email }}</span>
                     </span>
@@ -185,7 +185,10 @@ const PAGE_SIZE = 25
     IssueList,
     IssueActions
   },
-  layout: 'repository'
+  layout: 'repository',
+  methods: {
+    fromNow
+  }
 })
 export default class RunIssueDetails extends mixins(
   RouteQueryMixin,
@@ -199,7 +202,6 @@ export default class RunIssueDetails extends mixins(
   public sort: Maybe<string> = null
   public pageSize = PAGE_SIZE
   public loading = true
-  public fromNow = fromNow
 
   created() {
     const { page, sort, q } = this.$route.query

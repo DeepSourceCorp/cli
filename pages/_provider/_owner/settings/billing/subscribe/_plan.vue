@@ -19,14 +19,14 @@
             GitHub.
           </p>
         </div>
-        <div class="text-sm space-y-5">
+        <div class="space-y-5 text-sm">
           <div class="flex">
             <label class="w-32 font-medium">Plan</label>
             <div v-if="plan" class="flex-grow text-right">
               {{ plan.planName }}
             </div>
             <div v-else class="flex-grow">
-              <div class="h-5 w-24 bg-ink-300 rounded-md animate-pulse float-right"></div>
+              <div class="float-right w-24 h-5 rounded-md bg-ink-300 animate-pulse"></div>
             </div>
           </div>
           <div class="flex">
@@ -34,7 +34,7 @@
             <div class="flex-grow text-right">
               <div>{{ billingCycle | capitalize }}</div>
               <span
-                class="text-vanilla-400 cursor-pointer text-xs hover:text-vanilla-100"
+                class="text-xs cursor-pointer text-vanilla-400 hover:text-vanilla-100"
                 @click="updateBillingCycle(billingCycle === 'yearly' ? 'monthly' : 'yearly')"
               >
                 Change to {{ billingCycle === 'yearly' ? 'monthly' : 'yearly' }}
@@ -44,7 +44,7 @@
           <div class="flex">
             <label for="seats-count" class="w-32 font-medium">Seats</label>
             <div class="flex-grow">
-              <div class="flex items-center space-x-1 float-right">
+              <div class="flex items-center float-right space-x-1">
                 <z-button
                   size="x-small"
                   icon="minus"
@@ -56,12 +56,7 @@
                 <input
                   aria-label="Seats"
                   id="seats-count"
-                  class="
-                    w-12
-                    text-center
-                    bg-transparent
-                    focus:outline-none focus:ring focus:border-ink-100
-                  "
+                  class="w-12 text-center bg-transparent focus:outline-none focus:ring focus:border-ink-100"
                   :value="seats"
                   @debounceInput="updateSeatsInStore"
                   @blur="(e) => updateSeatsInStore(e.target.value)"
@@ -81,7 +76,7 @@
           <z-divider color="ink-300" />
           <template v-if="coupon.isApplied || credits.isApplied">
             <div class="flex">
-              <label class="w-72 font-medium"
+              <label class="font-medium w-72"
                 >Amount
                 <span class="text-vanilla-400"
                   >({{ seats }} × {{ formatUSD(seatAmount) }}, paid {{ billingCycle }})</span
@@ -96,7 +91,7 @@
             </div>
             <div class="flex" v-if="coupon.isApplied">
               <label class="w-32 font-medium">Coupon Applied</label>
-              <div class="flex-grow text-right font-bold text-juniper">
+              <div class="flex-grow font-bold text-right text-juniper">
                 -
                 <z-animated-integer
                   :value="coupon.currentCycleDiscount"
@@ -106,7 +101,7 @@
             </div>
             <div class="flex" v-if="credits.isApplied">
               <label class="w-32 font-medium">Credits Applied</label>
-              <div class="flex-grow text-right font-bold">
+              <div class="flex-grow font-bold text-right">
                 -
                 <z-animated-integer
                   :value="credits.currentCycleDiscount"
@@ -118,7 +113,7 @@
           </template>
           <div class="flex">
             <label class="w-32 font-medium">Total payable now</label>
-            <div class="flex-grow text-lg font-bold flex justify-end items-center space-x-2">
+            <div class="flex items-center justify-end flex-grow space-x-2 text-lg font-bold">
               <z-icon
                 class="animate-spin"
                 color="juniper"
@@ -134,7 +129,7 @@
           </div>
           <z-divider color="ink-300" />
           <p
-            class="text-xs text-vanilla-400 leading-snug tracking-snug"
+            class="text-xs leading-snug text-vanilla-400 tracking-snug"
             v-if="billingInfo.netPayableNextCycle !== null && billingInfo.nextBillingCycle !== null"
           >
             You will be charged
@@ -142,7 +137,7 @@
             when the next billing cycle starts on
             <b class="text-vanilla-100">{{ nextBillingDate }}</b>
           </p>
-          <div v-else-if="calculating" class="h-4 w-full bg-ink-300 rounded-md animate-pulse"></div>
+          <div v-else-if="calculating" class="w-full h-4 rounded-md bg-ink-300 animate-pulse"></div>
           <div class="space-y-2">
             <z-input
               v-model="couponCode"
@@ -156,7 +151,7 @@
                 <z-button
                   @click="redeemCoupon"
                   buttonType="secondary"
-                  class="text-vanilla-100 w-24"
+                  class="w-24 text-vanilla-100"
                   size="small"
                 >
                   <template v-if="couponLoading">
@@ -166,7 +161,7 @@
                 </z-button>
               </template>
             </z-input>
-            <p v-if="coupon.description" class="text-xs text-vanilla-100 font-bold">
+            <p v-if="coupon.description" class="text-xs font-bold text-vanilla-100">
               {{ coupon.description }}
             </p>
             <p v-if="couponError" class="text-xs text-cherry">This Coupon is Invalid</p>
@@ -203,6 +198,7 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
     ZAnimatedInteger
   },
   middleware: ['teamOnly', 'perm'],
+  methods: { formatUSD },
   filters: {
     capitalize: function (value: string) {
       if (!value) return ''
@@ -304,8 +300,6 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
   get credits(): CreditsInfo | {} {
     return this.billingInfo.discounts?.credits || {}
   }
-
-  private formatUSD = formatUSD
 
   get seatAmount(): number {
     if (this.plan.annualAmount && this.plan.monthlyAmount) {

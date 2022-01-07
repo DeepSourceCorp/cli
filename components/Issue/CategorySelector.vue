@@ -68,13 +68,14 @@ const issuesSortOrder = [
   components: {
     ZIcon,
     ZTag
+  },
+  methods: {
+    formatIntl
   }
 })
 export default class IssueCategorySelector extends mixins(RepoDetailMixin) {
   @ModelSync('selectedCategory', 'updateCategory', { type: String, default: 'recommended' })
   readonly modelValue: string
-
-  formatIntl = formatIntl
 
   iconMap: Record<string, string> = {
     recommended: 'star',

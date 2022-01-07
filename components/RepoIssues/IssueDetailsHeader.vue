@@ -43,7 +43,11 @@ import { escapeHtml } from '~/utils/string'
     ZIcon,
     IssueType
   },
-  layout: 'repository'
+  layout: 'repository',
+  methods: {
+    escapeHtml,
+    formatDate
+  }
 })
 export default class IssueDetailsHeader extends Vue {
   @Prop()
@@ -66,9 +70,6 @@ export default class IssueDetailsHeader extends Vue {
 
   @Prop()
   title: string
-
-  formatDate = formatDate
-  escapeHtml = escapeHtml
 
   get lastSeenDisplay(): string {
     /**

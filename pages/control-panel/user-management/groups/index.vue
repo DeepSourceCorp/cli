@@ -22,12 +22,12 @@
     <div v-if="isScimEnabled" class="p-4 pb-0">
       <notice :enabled="isScimEnabled">
         <template #indicator>
-          <div class="flex flex-shrink-0 justify-center items-center w-4 h-4">
-            <span class="w-4 h-4 rounded-full flex-shrink-0 bg-juniper opacity-40 absolute"></span>
+          <div class="flex items-center justify-center flex-shrink-0 w-4 h-4">
+            <span class="absolute flex-shrink-0 w-4 h-4 rounded-full bg-juniper opacity-40"></span>
             <span class="w-2.5 h-2.5 rounded-full bg-juniper"></span>
           </div>
         </template>
-        <span class="leading-none py-2 px-1 flex-grow">SCIM provisioning is enabled.</span>
+        <span class="flex-grow px-1 py-2 leading-none">SCIM provisioning is enabled.</span>
         <z-button
           type="link"
           button-type="link"
@@ -35,7 +35,7 @@
           href="https://deepsource.io/docs/control-panel/scim-provisioning"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-vanilla-400 items-center"
+          class="items-center text-vanilla-400"
         >
           <span class="leading-none"> Learn more </span>
           <z-icon icon="arrow-up-right" size="x-small" color="vanilla-400" />
@@ -132,6 +132,7 @@ const groupManagementStore = namespace('control-panel/groups')
 
 @Component({
   components: { ZInput, ZButton, ZIcon, ZAvatar, ZModal, ZPagination },
+  methods: { parseISODate, formatDate },
   layout: 'control-panel'
 })
 export default class GroupsHome extends mixins(ControlPanelBaseMixin, PaginationMixin) {
@@ -149,8 +150,6 @@ export default class GroupsHome extends mixins(ControlPanelBaseMixin, Pagination
     refetch?: boolean
   }) => Promise<number>
 
-  parseISODate = parseISODate
-  formatDate = formatDate
   perPageCount = 10
   q = ''
   refetch = true

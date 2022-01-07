@@ -80,7 +80,7 @@
 import { Component, Ref, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZAnimatedInteger, ZChart } from '@deepsourcelabs/zeal'
 import { parseISODate, formatDate } from '@/utils/date'
-import { shortenLargeNumber, formatIntl } from '@/utils/string'
+import { formatIntl } from '@/utils/string'
 
 import { GraphControl, GraphLegend } from '.'
 
@@ -160,7 +160,6 @@ export default class CodeQualityGraph extends mixins(
     await this.fetchData()
   }
 
-  public shortenLargeNumber = shortenLargeNumber
   public formatIntl = formatIntl
   public showActiveIssues = true
   public showResolvedIssues = true

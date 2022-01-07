@@ -124,11 +124,10 @@ import PlanDetailMixin from '~/mixins/planDetailMixin'
       ]
     }
   },
-  layout: 'dashboard'
+  layout: 'dashboard',
+  methods: { parseISODate, formatDate }
 })
 export default class BillingSettings extends mixins(ActiveUserMixin, PlanDetailMixin) {
-  public parseISODate = parseISODate
-  public formatDate = formatDate
   public loading = true
 
   async fetch(): Promise<void> {

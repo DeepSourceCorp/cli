@@ -28,11 +28,10 @@ import { ZButton, ZIcon, ZAvatar } from '@deepsourcelabs/zeal'
 import { fromNow } from '@/utils/date'
 
 @Component({
-  components: { ZButton, ZIcon, ZAvatar }
+  components: { ZButton, ZIcon, ZAvatar },
+  methods: { fromNow }
 })
 export default class RecentlyActiveRepoList extends mixins(TeamDetailMixin) {
-  private fromNow = fromNow
-
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
     // await this.fetchRecentActivity({

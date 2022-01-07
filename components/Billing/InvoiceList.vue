@@ -7,28 +7,14 @@
         rel="noopener noreferrer"
         v-for="inv in invoices"
         :key="inv.invoiceId"
-        class="
-          flex
-          items-center
-          w-full
-          p-4
-          space-x-4
-          border
-          rounded-md
-          cursor-pointer
-          group
-          border-ink-200 border-opacity-70
-          hover:bg-ink-300 hover:border-ink-200
-          text-vanilla-400
-          hover:text-vanilla-100
-        "
+        class="flex items-center w-full p-4 space-x-4 border rounded-md cursor-pointer group border-ink-200 border-opacity-70 hover:bg-ink-300 hover:border-ink-200 text-vanilla-400 hover:text-vanilla-100"
       >
         <!-- Replace with PDF -->
         <z-icon icon="file-text" size="base" color="current" />
-        <span class="w-1/3 text-vanilla-300 leading-6 group-hover:text-vanilla-100">
+        <span class="w-1/3 leading-6 text-vanilla-300 group-hover:text-vanilla-100">
           Invoice {{ formatDate(parseISODate(inv.date), 'MMM YYYY') }}
         </span>
-        <span class="flex-grow text-vanilla-300 leading-6 group-hover:text-vanilla-100">
+        <span class="flex-grow leading-6 text-vanilla-300 group-hover:text-vanilla-100">
           Generated on {{ formatDate(parseISODate(inv.date)) }}
         </span>
         <z-icon icon="download" size="base" color="current" />
@@ -66,7 +52,11 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({
   components: { FormGroup, ZButton, ZDivider, ZIcon },
-  layout: 'dashboard'
+  layout: 'dashboard',
+  methods: {
+    parseISODate,
+    formatDate
+  }
 })
 export default class InvoiceList extends mixins(OwnerBillingMixin) {
   itemsCount = 5
@@ -88,8 +78,5 @@ export default class InvoiceList extends mixins(OwnerBillingMixin) {
       })
     }
   }
-
-  private parseISODate = parseISODate
-  private formatDate = formatDate
 }
 </script>

@@ -1,50 +1,23 @@
 <template>
   <div class="p-4">
     <h1 class="text-lg font-medium">License overview</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-4 gap-4">
+    <div class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-3">
       <div
-        class="
-          border border-ink-200
-          rounded-md
-          py-3
-          px-3.5
-          bg-ink-300
-          flex flex-col
-          justify-between
-          min-h-23
-        "
+        class="border border-ink-200 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
       >
-        <p class="uppercase text-vanilla-400 text-sm font-medium tracking-wider">Total seats</p>
+        <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Total seats</p>
         <span class="text-xl font-semibold">{{ orgLicenseData.seatsTotal }}</span>
       </div>
       <div
-        class="
-          border border-ink-200
-          rounded-md
-          py-3
-          px-3.5
-          bg-ink-300
-          flex flex-col
-          justify-between
-          min-h-23
-        "
+        class="border border-ink-200 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
       >
-        <p class="uppercase text-vanilla-400 text-sm font-medium tracking-wider">Seats used</p>
+        <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Seats used</p>
         <span class="text-xl font-semibold">{{ orgLicenseData.seatsUsed }}</span>
       </div>
       <div
-        class="
-          border border-ink-200
-          rounded-md
-          py-3
-          px-3.5
-          bg-ink-300
-          flex flex-col
-          justify-between
-          min-h-23
-        "
+        class="border border-ink-200 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
       >
-        <p class="uppercase text-vanilla-400 text-sm font-medium tracking-wider">Valid till</p>
+        <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Valid till</p>
         <span class="text-xl font-semibold">{{
           formatDate(parseISODate(orgLicenseData.licenseExpiry))
         }}</span>
@@ -106,7 +79,8 @@ const licenseStore = namespace('control-panel/license')
 
 @Component({
   components: { ZIcon, ZButton },
-  layout: 'control-panel'
+  layout: 'control-panel',
+  methods: { formatDate, parseISODate }
 })
 export default class LicenseHome extends mixins(ControlPanelBaseMixin) {
   @licenseStore.Getter(OrgLicenseGetters.ORG_LICENSE_DATA)
@@ -115,8 +89,6 @@ export default class LicenseHome extends mixins(ControlPanelBaseMixin) {
   @licenseStore.Action(OrgLicenseActions.FETCH_ORG_LICENSE_DATA)
   fetchOrgLicenseData: (args: { lastDays: number; trendType: TrendType }) => Promise<void>
 
-  formatDate = formatDate
-  parseISODate = parseISODate
   DurationTypeMonths = DurationTypeT.months
   lastDays = 180
 

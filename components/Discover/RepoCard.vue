@@ -54,7 +54,7 @@
             <slot name="stats">
               <z-icon icon="flag" size="x-small" color="vanilla-400" />
               <span class="text-sm text-vanilla-400">
-                {{ shortenNumber(repoInfo.recommendedIssueCount) }}
+                {{ shortenLargeNumber(repoInfo.recommendedIssueCount) }}
                 {{ repoInfo.recommendedIssueCount === 1 ? 'issue' : 'issues' }}
               </span>
             </slot>
@@ -66,20 +66,10 @@
     <template slot="info">
       <div class="hidden h-full md:flex">
         <div
-          class="
-            flex-col
-            justify-center
-            flex-grow
-            hidden
-            py-4
-            text-xs
-            leading-none
-            lg:space-y-2
-            sm:flex
-          "
+          class="flex-col justify-center flex-grow hidden py-4 text-xs leading-none lg:space-y-2 sm:flex"
         >
           <div class="text-center heading3 text-vanilla-100">
-            {{ shortenNumber(repoInfo.recommendedIssueCount) }}
+            {{ shortenLargeNumber(repoInfo.recommendedIssueCount) }}
             <span class="block text-sm font-medium text-vanilla-400">{{
               repoInfo.recommendedIssueCount === 1 ? 'issue' : 'issues'
             }}</span>
@@ -100,7 +90,6 @@ import { DiscoverUserActions } from '~/store/discover/user'
 import AuthMixin from '@/mixins/authMixin'
 import { DiscoverRepoActions } from '~/store/discover/repositories'
 import { shortenLargeNumber } from '~/utils/string'
-import { fromNow } from '~/utils/date'
 
 const discoverRepositoriesStore = namespace('discover/repositories')
 const discoverUserStore = namespace('discover/user')
@@ -109,6 +98,9 @@ const discoverUserStore = namespace('discover/user')
   components: {
     BaseCard,
     ZIcon
+  },
+  methods: {
+    shortenLargeNumber
   }
 })
 export default class RepoCard extends mixins(AuthMixin) {
@@ -159,9 +151,6 @@ export default class RepoCard extends mixins(AuthMixin) {
     }
     return 'gh'
   }
-
-  public shortenNumber = shortenLargeNumber
-  public fromNow = fromNow
 
   public async updateWatchList(id: string, isWatched: boolean): Promise<void> {
     this.updatingWatchlist = true

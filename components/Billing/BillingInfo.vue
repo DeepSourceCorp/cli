@@ -2,16 +2,7 @@
   <form-group label="Billing Information" :divide="false" bodyClass="space-y-4" class="mt-5">
     <div v-if="isBilledByStripe || isBilledManually">
       <div
-        class="
-          grid
-          w-full
-          grid-cols-1
-          border
-          rounded-md
-          border-opacity-70
-          md:grid-cols-2
-          border-ink-200
-        "
+        class="grid w-full grid-cols-1 border rounded-md border-opacity-70 md:grid-cols-2 border-ink-200"
       >
         <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 bg-ink-300">
           <div v-if="ownerBillingInfo.upcomingPaymentDate">
@@ -114,12 +105,7 @@
     <div v-else-if="isBilledByGithub">
       <alert-box bg-color="bg-robin" text-color="text-robin-150">
         <div
-          class="
-            flex flex-col
-            items-start
-            space-y-4
-            md:flex-row md:space-y-0 md:space-x-10 md:justify-between
-          "
+          class="flex flex-col items-start space-y-4 md:flex-row md:space-y-0 md:space-x-10 md:justify-between"
         >
           <div>
             <p class="mb-2 text-base font-medium leading-none">
@@ -154,12 +140,7 @@
     <div v-if="isBilledManually">
       <alert-box bg-color="bg-robin" text-color="text-robin-150">
         <div
-          class="
-            flex flex-col
-            items-start
-            space-y-4
-            md:flex-row md:space-y-0 md:space-x-10 md:justify-between
-          "
+          class="flex flex-col items-start space-y-4 md:flex-row md:space-y-0 md:space-x-10 md:justify-between"
         >
           <div>
             <p class="mb-2 text-base font-medium leading-none">Your billing is managed manually.</p>
@@ -218,7 +199,12 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
     ZIcon,
     UpdateBillingDetailsModal
   },
-  layout: 'dashboard'
+  layout: 'dashboard',
+  methods: {
+    parseISODate,
+    formatDate,
+    formatUSD
+  }
 })
 export default class BillingInfoBox extends mixins(OwnerBillingMixin) {
   async fetch(): Promise<void> {
@@ -247,9 +233,6 @@ export default class BillingInfoBox extends mixins(OwnerBillingMixin) {
     this.showBillingDetailsLoading = val
   }
 
-  public parseISODate = parseISODate
-  public formatDate = formatDate
-  public formatUSD = formatUSD
   public showCouponInput = false
   public couponCode = ''
   public togglePlanLoading = false

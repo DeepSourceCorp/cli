@@ -92,7 +92,11 @@ import { formatDate, parseISODate } from '~/utils/date'
 
 @Component({
   components: { ZButton, ZAvatar, ZIcon, ZTag },
-  name: 'ControlPanelUserHeader'
+  name: 'ControlPanelUserHeader',
+  methods: {
+    parseISODate,
+    formatDate
+  }
 })
 export default class ControlPanelUserHeader extends Vue {
   @Prop({ required: true })
@@ -100,8 +104,5 @@ export default class ControlPanelUserHeader extends Vue {
 
   @Prop({ default: false })
   loading: boolean
-
-  parseISODate = parseISODate
-  formatDate = formatDate
 }
 </script>

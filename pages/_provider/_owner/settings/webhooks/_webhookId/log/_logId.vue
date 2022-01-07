@@ -15,19 +15,19 @@
         </z-breadcrumb-item>
       </z-breadcrumb>
     </section>
-    <section v-if="$fetchState.pending" class="animate-pulse max-w-2xl p-4 space-y-8">
+    <section v-if="$fetchState.pending" class="max-w-2xl p-4 space-y-8 animate-pulse">
       <div class="space-y-2">
-        <div class="h-8 bg-ink-300 w-2/3 rounded-sm"></div>
-        <div class="h-3 bg-ink-300 w-1/3 rounded-sm"></div>
+        <div class="w-2/3 h-8 rounded-sm bg-ink-300"></div>
+        <div class="w-1/3 h-3 rounded-sm bg-ink-300"></div>
       </div>
       <div class="grid grid-cols-3 gap-5">
-        <div v-for="ii in 5" :key="ii" class="h-12 bg-ink-300 rounded-sm"></div>
+        <div v-for="ii in 5" :key="ii" class="h-12 rounded-sm bg-ink-300"></div>
         <div></div>
-        <div class="h-12 bg-ink-300 rounded-sm col-span-3"></div>
-        <div class="h-32 bg-ink-300 rounded-sm col-span-3"></div>
+        <div class="h-12 col-span-3 rounded-sm bg-ink-300"></div>
+        <div class="h-32 col-span-3 rounded-sm bg-ink-300"></div>
       </div>
     </section>
-    <section v-else class="w-full mb-10 p-4" :key="$route.fullPath">
+    <section v-else class="w-full p-4 mb-10" :key="$route.fullPath">
       <page-title class="max-w-2xl">
         <template slot="title" v-if="delivery.eventType">
           {{ delivery.eventType.name }}
@@ -37,7 +37,7 @@
           Created {{ formatDate(delivery.createdAt) }} · Finished in {{ delivery.finishedIn }}s
         </template>
       </page-title>
-      <div class="rounded-md max-w-2xl grid grid-cols-2 sm:grid-cols-3 gap-y-6 gap-x-5 mt-8">
+      <div class="grid max-w-2xl grid-cols-2 mt-8 rounded-md sm:grid-cols-3 gap-y-6 gap-x-5">
         <template v-for="stat in stats">
           <div
             v-if="stat.value !== null || stat.value !== undefined"
@@ -45,7 +45,7 @@
             class="flex flex-col space-y-1"
             :class="{ 'col-span-full': stat.fullwidth }"
           >
-            <div class="text-xs text-vanilla-400 font-medium flex items-center space-x-2">
+            <div class="flex items-center space-x-2 text-xs font-medium text-vanilla-400">
               <span>{{ stat.label }}</span>
               <z-icon
                 v-if="stat.help"
@@ -55,7 +55,7 @@
                 v-tooltip="{ content: stat.help, delay: { show: 0, hide: 100 } }"
               ></z-icon>
             </div>
-            <div v-if="stat.isCode && stat.value" class="p-3 bg-ink-300 rounded-md text-sm">
+            <div v-if="stat.isCode && stat.value" class="p-3 text-sm rounded-md bg-ink-300">
               <highlightjs langugage="json" :code="stat.value"></highlightjs>
             </div>
             <span v-else>
@@ -90,12 +90,11 @@ import { TeamPerms } from '~/types/permTypes'
       teamPerms: [TeamPerms.MANAGE_WEBHOOKS]
     }
   },
+  methods: { formatDate },
   middleware: ['perm', 'teamOnly'],
   layout: 'dashboard'
 })
 export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixin) {
-  public formatDate = formatDate
-
   async fetch(): Promise<void> {
     const { webhookId, logId } = this.$route.params
     const { owner, provider } = this.$route.params

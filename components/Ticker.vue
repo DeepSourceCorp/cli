@@ -1,19 +1,7 @@
 <template>
   <span
     v-if="trendValue"
-    class="
-      flex
-      items-center
-      p-1
-      space-x-1
-      text-xs
-      font-normal
-      leading-none
-      text-center
-      rounded-md
-      bg-opacity-10
-      cursor
-    "
+    class="flex items-center p-1 space-x-1 text-xs font-normal leading-none text-center rounded-md bg-opacity-10 cursor"
     :class="bgClass"
   >
     <z-icon v-if="icon" :icon="icon" :color="iconColor" size="small"></z-icon>
@@ -107,7 +95,5 @@ export default class CodeQualityGraph extends Vue {
 
     return 'vanilla-100'
   }
-
-  public shortenLargeNumber = shortenLargeNumber
 }
 </script>

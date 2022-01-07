@@ -20,10 +20,10 @@
           You will no longer be able to activate analysis on more than one private repository.
         </li>
       </ul>
-      <h6 class="text-sm text-vanilla-100 mt-4">Confirm cancellation</h6>
+      <h6 class="mt-4 text-sm text-vanilla-100">Confirm cancellation</h6>
       <p>
         To confirm cancellation, enter
-        <span class="text-juniper font-medium"> {{ owner.login }} </span>
+        <span class="font-medium text-juniper"> {{ owner.login }} </span>
         in the textbox.
       </p>
       <label for="cancel-sub-confirm" class="sr-only">Organization name</label>
@@ -39,33 +39,25 @@
     </div>
     <template v-slot:footer="{ close }">
       <div
-        class="
-          p-4
-          text-right text-vanilla-100
-          border-ink-200
-          flex
-          space-x-4
-          items-center
-          justify-end
-        "
+        class="flex items-center justify-end p-4 space-x-4 text-right text-vanilla-100 border-ink-200"
       >
         <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
           I've changed my mind
         </z-button>
         <z-button
           v-if="updating"
-          class="w-48 flex items-center"
+          class="flex items-center w-48"
           buttonType="danger"
           size="small"
           :disabled="true"
         >
-          <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2"></z-icon>
+          <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin"></z-icon>
           Cancelling plan
         </z-button>
         <z-button
           v-else
           icon="x-circle"
-          class="modal-primary-action w-48"
+          class="w-48 modal-primary-action"
           buttonType="danger"
           size="small"
           :disabled="owner.login && userEnteredOwner.toLowerCase() !== owner.login.toLowerCase()"

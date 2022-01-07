@@ -52,17 +52,7 @@
       >
         <!-- Occurence count and Trend  -->
         <div
-          class="
-            flex-col
-            items-center
-            justify-center
-            flex-grow
-            hidden
-            text-xs
-            leading-none
-            lg:space-y-2
-            sm:flex
-          "
+          class="flex-col items-center justify-center flex-grow hidden text-xs leading-none lg:space-y-2 sm:flex"
           :class="{ 'py-4': !showTrend, 'py-2': showTrend }"
         >
           <!-- Count -->
@@ -70,7 +60,7 @@
             class="heading3 text-vanilla-100"
             v-tooltip="occurrenceCount > 1000 ? `${formatIntl(occurrenceCount)} occurrences` : ''"
           >
-            {{ shortenNumber(occurrenceCount) }}
+            {{ shortenLargeNumber(occurrenceCount) }}
           </div>
           <!-- Info -->
           <div
@@ -93,18 +83,7 @@
           v-if="autofixAvailable && showAutofixButton"
           @click.stop.prevent="handleClick()"
           :disabled="disableAutofixButton"
-          class="
-            flex
-            items-center
-            justify-center
-            w-full
-            h-auto
-            p-2
-            border-t
-            sm:space-x-2
-            border-ink-300
-            group-hover:border-ink-200
-          "
+          class="flex items-center justify-center w-full h-auto p-2 border-t sm:space-x-2 border-ink-300 group-hover:border-ink-200"
           :class="{
             'cursor-pointer hover:bg-ink-200': !disableAutofixButton
           }"
@@ -134,7 +113,8 @@ const PERCENTAGE = 100
     ZIcon,
     IssueType,
     BaseCard
-  }
+  },
+  methods: { formatDate, shortenLargeNumber, formatIntl, escapeHtml }
 })
 export default class IssueListItem extends Vue {
   @Prop({ default: '' })
@@ -190,11 +170,6 @@ export default class IssueListItem extends Vue {
 
   @Prop({ default: false })
   disableAutofixButton!: boolean
-
-  public formatDate = formatDate
-  public shortenNumber = shortenLargeNumber
-  public formatIntl = formatIntl
-  public escapeHtml = escapeHtml
 
   public handleClick(): void {
     this.$emit('autofix', {

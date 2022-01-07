@@ -46,14 +46,12 @@ const discoverRepositoriesStore = namespace('discover/repositories')
     SectionHeader,
     ZDivider,
     ZIcon
-  }
+  },
+  methods: { fromNow, resolveNodes }
 })
 export default class RepoFeed extends Vue {
   @Prop({ default: false })
   loading: boolean
-
-  resolveNodes = resolveNodes
-  fromNow = fromNow
 
   @discoverRepositoriesStore.Getter(DiscoverRepoGetters.GET_DISCOVER_REPOSITORIES)
   discoverRepositories: Maybe<RepositoryConnection>

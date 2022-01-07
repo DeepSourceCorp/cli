@@ -43,17 +43,7 @@
         <div
           v-for="team in groupTeams"
           :key="team.id"
-          class="
-            grid
-            items-center
-            grid-cols-1
-            p-4
-            border
-            rounded-md
-            md:grid-cols-2
-            gap-x-10 gap-y-2
-            border-ink-200
-          "
+          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-2 gap-x-10 gap-y-2 border-ink-200"
         >
           <div class="flex items-center gap-x-3">
             <z-avatar
@@ -82,14 +72,7 @@
             </div>
           </div>
           <div
-            class="
-              flex
-              items-center
-              mt-1
-              justify-between
-              md:justify-end md:justify-self-end md:mt-0
-              gap-x-8
-            "
+            class="flex items-center justify-between mt-1 md:justify-end md:justify-self-end md:mt-0 gap-x-8"
           >
             <div class="flex items-center gap-x-1.5 leading-none">
               <div class="text-sm text-vanilla-400">Role:</div>
@@ -207,6 +190,7 @@ const groupManagementStore = namespace('control-panel/groups')
     ZMenuItem,
     ZPagination
   },
+  methods: { parseISODate, formatDate },
   layout: 'control-panel'
 })
 export default class UserManagementUserDetails extends mixins(
@@ -226,8 +210,6 @@ export default class UserManagementUserDetails extends mixins(
     refetch?: boolean
   }) => Promise<void>
 
-  parseISODate = parseISODate
-  formatDate = formatDate
   q = ''
   perPageCount = 10
   refetch = true

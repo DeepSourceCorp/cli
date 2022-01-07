@@ -134,7 +134,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import IssueListMixin from '~/mixins/issueListMixin'
 
-import { AppFeatures, RepoPerms } from '~/types/permTypes'
+import { RepoPerms } from '~/types/permTypes'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import { resolveNodes } from '~/utils/array'
 

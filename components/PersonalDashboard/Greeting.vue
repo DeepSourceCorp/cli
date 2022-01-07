@@ -6,13 +6,10 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { isChristmasSeason, isHalloween } from '~/utils/easter'
 
-@Component({})
+@Component
 export default class Greeting extends Vue {
   @Prop({ default: null })
   firstName: string
-
-  public isChristmasSeason = isChristmasSeason
-  public isHalloween = isHalloween
 
   get greeting(): string {
     const now = new Date().getHours()
@@ -30,11 +27,11 @@ export default class Greeting extends Vue {
 
   get emoji(): string {
     const today = new Date()
-    if (this.isHalloween()) {
+    if (isHalloween()) {
       // Halloween
       return '🎃'
     }
-    if (this.isChristmasSeason()) {
+    if (isChristmasSeason()) {
       // Christmas
       const christmasEmojis = ['☃️', '🔔', '🎄']
       return christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)]

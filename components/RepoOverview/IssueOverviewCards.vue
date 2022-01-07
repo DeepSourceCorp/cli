@@ -50,7 +50,7 @@
                 : ''
             "
           >
-            {{ shortenNumber(issueWidgets[widget].value_display) }}
+            {{ shortenLargeNumber(issueWidgets[widget].value_display) }}
           </span>
         </stat-card>
       </template>
@@ -93,12 +93,14 @@ export interface Widget {
     ZIcon,
     ZTicker
   },
-  layout: 'repository'
+  layout: 'repository',
+  methods: {
+    shortenLargeNumber,
+    formatIntl,
+    toSentenceCase
+  }
 })
 export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAccessMixin) {
-  public shortenNumber = shortenLargeNumber
-  public formatIntl = formatIntl
-  public toSentenceCase = toSentenceCase
   public showCustomizeModal = false
 
   isTrendPositive(widget: Widget): boolean | null {

@@ -45,12 +45,10 @@ const discoverUserStore = namespace('discover/user')
   components: {
     RepoCard,
     ZIcon
-  }
+  },
+  methods: { fromNow, resolveNodes }
 })
 export default class WatchedRepoFeed extends Vue {
-  fromNow = fromNow
-  resolveNodes = resolveNodes
-
   @discoverUserStore.Getter(DiscoverUserGetters.GET_WATCHED_REPOSITORIES)
   watchedRepositories: RepositoryConnection
 

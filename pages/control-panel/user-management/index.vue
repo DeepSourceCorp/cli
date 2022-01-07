@@ -101,7 +101,10 @@ const userManagementStore = namespace('control-panel/users')
 
 @Component({
   components: { ZInput, ZButton, ZIcon, ZPagination },
-  layout: 'control-panel'
+  layout: 'control-panel',
+  methods: {
+    resolveNodes
+  }
 })
 export default class UserManagementHome extends mixins(ControlPanelBaseMixin, PaginationMixin) {
   @userManagementStore.Getter(OrgUsersGetters.ORG_USERS_DATA)
@@ -110,7 +113,6 @@ export default class UserManagementHome extends mixins(ControlPanelBaseMixin, Pa
   @userManagementStore.Action(OrgUsersActions.FETCH_ORG_USERS_DATA)
   fetchOrgUsersData: (args?: { q?: string; first?: number; offset?: number }) => Promise<number>
 
-  resolveNodes = resolveNodes
   perPageCount = 10
   q = ''
 

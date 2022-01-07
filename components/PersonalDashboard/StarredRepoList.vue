@@ -49,12 +49,11 @@ import { resolveNodes } from '~/utils/array'
   components: {
     ListSection,
     ZIcon
-  }
+  },
+  methods: { getHumanizedTimeFromNow, formatDate }
 })
 export default class StarredRepoList extends mixins(ActiveUserMixin) {
   public isLoading = false
-  public formatDate = formatDate
-  public getHumanizedTimeFromNow = getHumanizedTimeFromNow
 
   async fetch(): Promise<void> {
     await this.fetchStarredRepos()

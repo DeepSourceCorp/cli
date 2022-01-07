@@ -1,17 +1,7 @@
 <template>
   <li
     :class="draggable ? 'bg-ink-200' : 'ignore-element'"
-    class="
-      flex
-      items-center
-      p-2
-      space-x-2
-      border
-      rounded-md
-      cursor-pointer
-      border-ink-200
-      drag-handler
-    "
+    class="flex items-center p-2 space-x-2 border rounded-md cursor-pointer border-ink-200 drag-handler"
     @click="updateRowCheck"
   >
     <z-icon
@@ -23,15 +13,7 @@
     />
     <z-icon :icon="icon" color="vanilla-100" class="flex-shrink-0" />
     <label
-      class="
-        flex-grow
-        overflow-hidden
-        text-sm
-        cursor-pointer
-        whitespace-nowrap
-        overflow-ellipsis
-        vanilla-100
-      "
+      class="flex-grow overflow-hidden text-sm cursor-pointer whitespace-nowrap overflow-ellipsis vanilla-100"
     >
       {{ toSentenceCase(title) }}
     </label>
@@ -55,7 +37,10 @@ import { toSentenceCase } from '~/utils/string'
     ZButton,
     ZCheckbox
   },
-  layout: 'dashboard'
+  layout: 'dashboard',
+  methods: {
+    toSentenceCase
+  }
 })
 export default class CustomizeWidgetsModalRow extends Vue {
   @ModelSync('value', 'input', { type: Array })
@@ -72,8 +57,6 @@ export default class CustomizeWidgetsModalRow extends Vue {
 
   @Prop({ required: true })
   icon: string
-
-  toSentenceCase = toSentenceCase
 
   updateRowCheck(): void {
     if (this.modelValue.includes(this.widgetName)) {

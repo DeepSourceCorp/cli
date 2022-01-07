@@ -98,13 +98,12 @@ import RepoListMixin from '~/mixins/repoListMixin'
 import { TeamPerms } from '~/types/permTypes'
 
 @Component({
-  components: { ZButton, ZIcon, AddRepoModal, AnalyzerLogo }
+  components: { ZButton, ZIcon, AddRepoModal, AnalyzerLogo },
+  methods: { getHumanizedTimeFromNow, formatDate }
 })
 export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, RepoListMixin) {
   public loading = false
   public showAddRepoModal = false
-  public formatDate = formatDate
-  public getHumanizedTimeFromNow = getHumanizedTimeFromNow
 
   get canActivateRepo(): boolean {
     const role = this.activeDashboardContext.role as TeamMemberRoleChoices

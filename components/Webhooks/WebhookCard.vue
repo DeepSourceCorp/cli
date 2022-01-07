@@ -15,7 +15,7 @@
       <h3 class="text-base">{{ urlHost }}</h3>
     </template>
     <template slot="description">
-      <div class="items-center space-y-1 md:space-y-0 md:flex md:space-x-4 mt-2">
+      <div class="items-center mt-2 space-y-1 md:space-y-0 md:flex md:space-x-4">
         <div class="flex items-center space-x-1.5">
           <z-icon icon="calendar" size="x-small" color="vanilla-400"></z-icon>
           <span class="text-sm text-vanilla-400">
@@ -50,6 +50,9 @@ import { getHumanizedTimeFromNow } from '~/utils/date'
   components: {
     ZIcon,
     ZButton
+  },
+  methods: {
+    ghtf: getHumanizedTimeFromNow
   }
 })
 export default class WebhookCard extends Vue {
@@ -70,8 +73,6 @@ export default class WebhookCard extends Vue {
 
   @Prop({ default: false })
   eventsSubscribed: WebhookEventTypesConnection
-
-  public ghtf = getHumanizedTimeFromNow
 
   get urlHost(): string {
     const url = new URL(this.url)

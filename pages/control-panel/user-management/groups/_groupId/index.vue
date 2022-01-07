@@ -112,6 +112,7 @@ const groupManagementStore = namespace('control-panel/groups')
     ZTab,
     ZPagination
   },
+  methods: { parseISODate, formatDate },
   layout: 'control-panel'
 })
 export default class UserManagementUserDetails extends mixins(
@@ -130,8 +131,6 @@ export default class UserManagementUserDetails extends mixins(
     refetch?: boolean
   }) => Promise<void>
 
-  parseISODate = parseISODate
-  formatDate = formatDate
   q = ''
   perPageCount = 10
   refetch = true

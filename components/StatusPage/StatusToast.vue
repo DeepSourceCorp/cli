@@ -9,20 +9,10 @@
   >
     <div
       v-if="active"
-      class="
-        w-full
-        max-w-md
-        text-black
-        mb-4
-        overflow-hidden
-        rounded-md
-        shadow-lg
-        text-sm
-        pointer-events-auto
-      "
+      class="w-full max-w-md mb-4 overflow-hidden text-sm text-black rounded-md shadow-lg pointer-events-auto"
     >
       <div class="overflow-hidden rounded-md shadow-xs z-100">
-        <div class="bg-honey flex flex-col gap-y-2 p-4">
+        <div class="flex flex-col p-4 bg-honey gap-y-2">
           <div class="flex items-center justify-between text-base">
             <div class="flex items-center gap-x-2">
               <z-icon icon="alert-circle" size="small" color="current"></z-icon>
@@ -67,6 +57,10 @@ import { parseISODate, formatDate } from '~/utils/date'
   components: {
     ZIcon,
     ZButton
+  },
+  methods: {
+    parseISODate,
+    formatDate
   }
 })
 export default class StatusToast extends Vue {
@@ -85,8 +79,6 @@ export default class StatusToast extends Vue {
   @Prop({ default: '' })
   shortLink: string
 
-  public parseISODate = parseISODate
-  public formatDate = formatDate
   public active = true
 
   public removeElement(el: Element): void {

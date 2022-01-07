@@ -10,18 +10,18 @@
         </z-breadcrumb-item>
       </z-breadcrumb>
     </section>
-    <section v-if="$fetchState.pending" class="animate-pulse max-w-2xl p-4 space-y-8">
+    <section v-if="$fetchState.pending" class="max-w-2xl p-4 space-y-8 animate-pulse">
       <div class="grid grid-cols-4 gap-2">
-        <div class="h-8 bg-ink-300 col-span-2"></div>
+        <div class="h-8 col-span-2 bg-ink-300"></div>
         <div></div>
         <div class="h-8 bg-ink-300"></div>
-        <div class="h-4 bg-ink-300 col-span-2"></div>
+        <div class="h-4 col-span-2 bg-ink-300"></div>
       </div>
       <div class="grid grid-cols-1 gap-4">
         <div v-for="ii in 4" :key="ii" class="h-20 bg-ink-300"></div>
       </div>
     </section>
-    <section v-else class="w-full mb-10 p-4" :key="$route.fullPath">
+    <section v-else class="w-full p-4 mb-10" :key="$route.fullPath">
       <page-title
         class="max-w-2xl"
         :title="title"
@@ -68,7 +68,7 @@
               >
                 <template v-slot:footer="{ close }">
                   <div
-                    class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end"
+                    class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100"
                   >
                     <z-button
                       buttonType="ghost"
@@ -114,7 +114,7 @@
           >
             <template slot="description">
               Signing of the webhook payload allows you to verify incoming requests.
-              <span class="text-vanilla-200 font-medium">We recommend enabling this.</span>
+              <span class="font-medium text-vanilla-200">We recommend enabling this.</span>
             </template>
           </toggle-input>
           <password-input
@@ -128,7 +128,7 @@
             :show-password="!isSecretHidden"
           >
             <template #input-utilities>
-              <div class="absolute top-1 right-1 flex gap-x-1 bg-ink-400">
+              <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
                 <z-button
                   v-tooltip="isSecretHidden ? 'Reveal secret' : 'Hide secret'"
                   button-type="secondary"
@@ -158,7 +158,7 @@
               </div>
             </template>
           </password-input>
-          <div class="space-y-2 py-4">
+          <div class="py-4 space-y-2">
             <h4 class="text-sm text-vanilla-100">Selected events</h4>
             <span
               v-for="event in subscribedEvents"
@@ -169,7 +169,7 @@
               <p class="text-xs text-vanilla-400">{{ event.shortDescription }}</p>
             </span>
           </div>
-          <section v-if="endpointDeliveriesCount && readOnly" class="space-y-2 py-4">
+          <section v-if="endpointDeliveriesCount && readOnly" class="py-4 space-y-2">
             <h4 class="text-sm text-vanilla-100">Webhook deliveries</h4>
             <webhook-log-list :key="$route.params.webhookId" />
           </section>
@@ -253,6 +253,9 @@ import { TeamPerms } from '~/types/permTypes'
       teamPerms: [TeamPerms.MANAGE_WEBHOOKS]
     }
   },
+  methods: {
+    formatDate
+  },
   middleware: ['perm', 'teamOnly'],
   layout: 'dashboard'
 })
@@ -261,7 +264,6 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
   public allowEdit = true
   public showSaveModal = false
   public savingConfig = false
-  public formatDate = formatDate
   public localEndpoint: Webhook = { url: '' } as Webhook
   isSecretHidden = true
 

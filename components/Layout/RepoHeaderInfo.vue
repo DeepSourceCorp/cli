@@ -11,9 +11,7 @@
           <z-icon icon="git-commit" size="x-small"></z-icon>
           {{ commitId.slice(0, 7) }}
         </nuxt-link>
-        <span class="whitespace-nowrap" v-if="lastAnalyzed">{{
-          formatDuration(lastAnalyzed)
-        }}</span>
+        <span class="whitespace-nowrap" v-if="lastAnalyzed">{{ fromNow(lastAnalyzed) }}</span>
       </div>
     </div>
     <div v-if="defaultBranch" class="flex items-center space-x-2">
@@ -113,7 +111,8 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
     ZMenu,
     ZMenuItem,
     ZButton
-  }
+  },
+  methods: { fromNow }
 })
 export default class RepoHeaderInfo extends mixins(RepoDetailMixin) {
   @Prop({ default: '' })
@@ -140,7 +139,6 @@ export default class RepoHeaderInfo extends mixins(RepoDetailMixin) {
   @Prop()
   currentlyAnalysing!: number
 
-  public formatDuration = fromNow
   public showBranchUpdateModal = false
   public currentAnalysisBranch = ''
 

@@ -230,6 +230,9 @@ import { isChristmasSeason } from '~/utils/easter'
     ZButton,
     ZIcon,
     ZTag
+  },
+  methods: {
+    isChristmasSeason
   }
 })
 export default class Sidebar extends mixins(
@@ -246,7 +249,6 @@ export default class Sidebar extends mixins(
   public isOpen = false
   public showAddRepoModal = false
   public largeScreenSize = 1024
-  public isChristmasSeason = isChristmasSeason
 
   created() {
     this.isCollapsed = Boolean(this.$nuxt.$cookies.get('ui-state-sidebar-collapsed'))

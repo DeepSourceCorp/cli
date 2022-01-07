@@ -196,6 +196,9 @@ const discoverUserStore = namespace('discover/user')
     ZConfirm,
     ZIcon,
     ZTag
+  },
+  methods: {
+    isChristmasSeason
   }
 })
 export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
@@ -218,7 +221,6 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
   public showInDiscoverInfoDialog = false
   public showUpdateTechnologiesModal = false
   public debounceTimer: ReturnType<typeof setTimeout>
-  public isChristmasSeason = isChristmasSeason
 
   async fetch(): Promise<void> {
     if (this.loggedIn) {

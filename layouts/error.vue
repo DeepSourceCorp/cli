@@ -25,17 +25,17 @@
         </z-button>
       </div>
     </section>
-    <section v-else-if="$config.onPrem && areSeatsFull" class="text-center space-y-8 max-w-xl">
+    <section v-else-if="$config.onPrem && areSeatsFull" class="max-w-xl space-y-8 text-center">
       <img
-        class="mx-auto mb-8 w-56 max-w-xs"
+        class="w-56 max-w-xs mx-auto mb-8"
         :src="require('~/assets/images/ui-states/app/license-expired.png')"
         alt="Repo Inactive"
       />
       <div class="space-y-4">
-        <h3 class="text-center text-vanilla-100 font-semibold text-lg">
+        <h3 class="text-lg font-semibold text-center text-vanilla-100">
           You have exhausted all seats in your DeepSource license.
         </h3>
-        <p class="text-vanilla-400 text-sm">
+        <p class="text-sm text-vanilla-400">
           Please contact your administrator for upgrading the license.
         </p>
       </div>
@@ -107,13 +107,14 @@ import { ZButton } from '@deepsourcelabs/zeal'
 import { formatDate } from '~/utils/date'
 
 @Component({
-  components: { ZButton }
+  components: { ZButton },
+  methods: {
+    formatDate
+  }
 })
 export default class ErrorLayout extends Vue {
   @Prop({ required: true })
   error: NuxtError
-
-  public formatDate = formatDate
 
   get loginUrl(): string {
     return `/login?next=${this.$route.fullPath}`

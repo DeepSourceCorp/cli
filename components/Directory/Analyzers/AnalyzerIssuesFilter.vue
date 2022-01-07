@@ -5,18 +5,7 @@
       :to="
         isIssuesPage && !analyzerShortcode ? '' : `/directory/analyzers/${analyzerShortcode}/issues`
       "
-      class="
-        flex
-        justify-between
-        w-72
-        rounded-md
-        p-2
-        mb-3
-        hover:bg-ink-200 hover:text-vanilla-100
-        focus:text-vanilla-100
-        outline-none
-        focus:outline-none
-      "
+      class="flex justify-between w-72 rounded-md p-2 mb-3 hover:bg-ink-200 hover:text-vanilla-100 focus:text-vanilla-100 outline-none focus:outline-none"
       :class="{
         'bg-ink-200 text-vanilla-100': activeFilter === '',
         'text-vanilla-400': activeFilter !== ''
@@ -28,7 +17,7 @@
         <span>All issues</span>
       </p>
       <z-tag bg-color="ink-200" text-size="xs" spacing="py-0.5 px-2">
-        {{ shortenNumber(allFilterCount) }}
+        {{ shortenLargeNumber(allFilterCount) }}
       </z-tag>
     </component>
     <component
@@ -43,18 +32,7 @@
       button-type="ghost"
       :type="isIssuesPage ? 'button' : ''"
       :color="activeFilter === issueType.shortcode ? '' : 'vanilla-400'"
-      class="
-        flex
-        justify-between
-        w-72
-        rounded-md
-        p-2
-        mb-3
-        hover:bg-ink-200 hover:text-vanilla-100
-        focus:text-vanilla-100
-        outline-none
-        focus:outline-none
-      "
+      class="flex justify-between w-72 rounded-md p-2 mb-3 hover:bg-ink-200 hover:text-vanilla-100 focus:text-vanilla-100 outline-none focus:outline-none"
       :class="{
         'bg-ink-200 text-vanilla-100': activeFilter === issueType.shortcode,
         'text-vanilla-400': activeFilter !== issueType.shortcode
@@ -66,7 +44,7 @@
         <span>{{ issueType.title }}</span>
       </p>
       <z-tag bg-color="ink-200" text-size="xs" spacing="py-0.5 px-2">
-        {{ shortenNumber(issueType.count) }}
+        {{ shortenLargeNumber(issueType.count) }}
       </z-tag>
     </component>
   </div>
@@ -80,6 +58,7 @@ import IssueTypeT from '~/types/issueDistribution'
 
 @Component({
   components: { ZButton, ZIcon, ZTag },
+  methods: { shortenLargeNumber },
   name: 'AnalyzerIssuesFilter'
 })
 export default class AnalyzerIssuesFilter extends Vue {
@@ -108,10 +87,6 @@ export default class AnalyzerIssuesFilter extends Vue {
 
   updateFilter(val: string) {
     this.$emit('selected', val)
-  }
-
-  shortenNumber(val: number): string {
-    return shortenLargeNumber(val)
   }
 }
 </script>

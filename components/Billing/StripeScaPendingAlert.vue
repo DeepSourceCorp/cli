@@ -42,8 +42,6 @@ export default class StripeScaPendingAlert extends Vue {
   @Prop({ required: true })
   ownerBillingInfo: BillingInfo
 
-  public parseISODate = parseISODate
-  public formatDate = formatDate
   public loading = false
   public lastPaymentAttemptDate = -1
 
@@ -53,7 +51,7 @@ export default class StripeScaPendingAlert extends Vue {
 
   get failedPaymentDate(): string | undefined {
     if (this.lastPaymentAttemptDate >= 0)
-      return this.formatDate(this.parseISODate(this.lastPaymentAttemptDate), 'lll')
+      return formatDate(parseISODate(this.lastPaymentAttemptDate), 'lll')
     return undefined
   }
 

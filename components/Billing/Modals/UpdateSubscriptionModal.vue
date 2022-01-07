@@ -136,14 +136,16 @@ import { formatDate, parseISODate } from '~/utils/date'
     ZModal,
     ZButton,
     ZAvatar
+  },
+  methods: {
+    parseISODate,
+    formatDate,
+    formatUSD
   }
 })
 export default class UpdateSubscriptionModal extends mixins(OwnerBillingMixin) {
   planInfo: GetUpgradeCodeQualitySubscriptionPlanInfoPayload
   updatingSubscription = false
-  public formatUSD = formatUSD
-  public parseISODate = parseISODate
-  public formatDate = formatDate
 
   @Prop({ required: true })
   newPlanName: string

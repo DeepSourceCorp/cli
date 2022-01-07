@@ -26,7 +26,8 @@ import { fromNow } from '@/utils/date'
 @Component({
   components: {
     ListSection
-  }
+  },
+  methods: { fromNow }
 })
 export default class ActivityFeedList extends mixins(ActiveUserMixin) {
   async fetch(): Promise<void> {
@@ -44,7 +45,5 @@ export default class ActivityFeedList extends mixins(ActiveUserMixin) {
   //   }
   //   return []
   // }
-
-  private fromNow = fromNow
 }
 </script>

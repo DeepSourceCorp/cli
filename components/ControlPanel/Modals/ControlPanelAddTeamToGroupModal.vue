@@ -129,14 +129,16 @@ import { resolveNodes } from '~/utils/array'
 
 @Component({
   components: { ZAvatar, ZButton, ZModal, ZIcon, ZInput, ZMenu, ZMenuSection, ZMenuItem },
-  name: 'ControlPanelAddTeamToGroupModal'
+  name: 'ControlPanelAddTeamToGroupModal',
+  methods: {
+    parseISODate,
+    formatDate
+  }
 })
 export default class ControlPanelAddTeamToGroupModal extends mixins(AddTeamToGroupMixin) {
   @Prop({ required: true })
   groupId: string
 
-  parseISODate = parseISODate
-  formatDate = formatDate
   showAddTeamModal = false
   addTeamSearchCandidate = ''
   refetch = false
