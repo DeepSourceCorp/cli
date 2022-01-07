@@ -5,7 +5,7 @@
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['autofix'])">Autofix</nuxt-link>
         </z-breadcrumb-item>
-        <z-breadcrumb-item>{{ autofixRun.issue.shortcode }}</z-breadcrumb-item>
+        <z-breadcrumb-item>{{ title }}</z-breadcrumb-item>
       </z-breadcrumb>
     </div>
     <!-- heading -->
