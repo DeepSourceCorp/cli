@@ -2,20 +2,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-16-fr">
     <!-- Analyzer Tab -->
     <div
-      class="
-        z-20
-        flex flex-col
-        justify-between
-        px-2
-        py-2
-        space-y-2
-        border-b
-        lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2
-        border-ink-200
-        lg:sticky lg:top-24
-        bg-ink-400
-        col-span-full
-      "
+      class="z-20 flex flex-col justify-between pl-2 pr-4 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
     >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"
@@ -43,15 +30,7 @@
             <h4 class="font-medium leading-tight">Activate continuous analysis</h4>
             <p class="mt-2 text-xs font-medium leading-snug">
               <span
-                class="
-                  text-opacity-60
-                  bg-clip-text
-                  text-vanilla-100
-                  bg-gradient-to-br
-                  from-ink-200
-                  to-ink-400
-                  via-ink-300
-                "
+                class="text-opacity-60 bg-clip-text text-vanilla-100 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
               >
                 To analyze analysis on every pull request, commit the config file to your
                 repository.
@@ -80,7 +59,7 @@
       </template>
     </issue-category-selector>
     <!-- List of issues -->
-    <div v-if="issuesLoading" class="flex-1 flex-grow min-h-screen p-4 space-y-4">
+    <div v-if="issuesLoading" class="flex-1 flex-grow min-h-screen p-4 gap-y-4">
       <div
         v-for="idx in 7"
         :key="idx"
@@ -89,7 +68,7 @@
     </div>
     <div
       v-else
-      class="flex flex-col flex-1 flex-grow p-4 pb-10 space-y-4"
+      class="flex flex-col flex-1 flex-grow p-4 pb-10 gap-y-4"
       :class="{
         'max-h-64 min-h-64': issueList.totalCount === 0,
         'min-h-screen max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
