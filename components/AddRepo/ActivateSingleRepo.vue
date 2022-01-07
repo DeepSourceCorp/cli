@@ -29,6 +29,37 @@
           :analyzer-shortcode="analyzerShortcode"
           :transformer-shortcode="transformerShortcode"
         />
+
+        <div
+          v-if="$route.params.provider === 'gl'"
+          class="flex flex-col items-center p-4 space-y-4"
+        >
+          <p class="text-sm font-normal text-vanilla-100">
+            Can't find the repository that you're looking for?
+          </p>
+
+          <z-button
+            v-if="repoSyncLoading"
+            button-type="ghost"
+            size="small"
+            :disabled="true"
+            class="flex items-center bg-ink-200 text-vanilla-100"
+          >
+            <z-icon icon="spin-loader" class="mr-2 animate-spin" size="small" color="vanilla-100" />
+            <span>Syncing repositories</span>
+          </z-button>
+          <z-button
+            v-else
+            button-type="ghost"
+            icon-color="vanilla-100"
+            size="small"
+            class="bg-ink-200 text-vanilla-100 hover:bg-opacity-80"
+            icon="refresh-cw"
+            @click="syncRepos"
+          >
+            Sync repositories
+          </z-button>
+        </div>
       </div>
       <div v-else-if="$fetchState.pending" class="p-4 space-y-2 animate-pulse">
         <div
@@ -84,6 +115,9 @@ interface ZInputT extends Vue {
   focus: () => void
 }
 
+/**
+ * Component to activate new repositories
+ */
 @Component({
   components: {
     ZInput,
@@ -108,6 +142,12 @@ export default class ActivateSingleRepo extends mixins(
   public pageSize = 20
   public repoSyncLoading = false
 
+  /**
+   * Search repo input change handler
+   *
+   * @param {string} val
+   * @returns {Promise<void>}
+   */
   async searchRepo(val: string): Promise<void> {
     this.searchCandidate = val
     await this.$fetch()
@@ -117,6 +157,11 @@ export default class ActivateSingleRepo extends mixins(
     }
   }
 
+  /**
+   * The fetch hook
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await this.fetchNewRepoList({
       login: this.activeOwner,
@@ -131,6 +176,11 @@ export default class ActivateSingleRepo extends mixins(
     }
   }
 
+  /**
+   * Method to sync repositories
+   *
+   * @returns {Promise<void>}
+   */
   async syncRepos(): Promise<void> {
     this.repoSyncLoading = true
     try {
@@ -150,6 +200,11 @@ export default class ActivateSingleRepo extends mixins(
     })
   }
 
+  /**
+   * beforeDestroy hook for Vue component
+   *
+   * @returns {void}
+   */
   beforeDestroy(): void {
     this.$socket.$off('repo-sync')
     this.repoSyncLoading = false
