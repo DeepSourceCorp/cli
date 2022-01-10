@@ -361,6 +361,12 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     this.generateTransformerItems()
   }
 
+  /**
+   * Replace template with actual/placeholder data
+   *
+   * @param {string} candidate
+   * @returns {string}
+   */
   parseTemplate(candidate: string): string {
     const hostmap: Record<string, string> = {
       gh: 'github.com',
@@ -391,6 +397,11 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     return false
   }
 
+  /**
+   * Generate config items from analyzer meta properties
+   *
+   * @returns {void}
+   */
   generateConfigItems(): void {
     if (this.analyzerMeta?.required || this.analyzerMeta?.optional_required) {
       let props: Array<string> = []
@@ -413,6 +424,16 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
           let selected
           if (this.selectedAnalyzer.enabled && this.selectedAnalyzer?.meta?.[name]) {
             selected = this.selectedAnalyzer.meta[name]
+
+            if (typeof selected === 'string') {
+              selected = this.parseTemplate(selected)
+            }
+
+            if (Array.isArray(selected) && selected.length) {
+              selected = selected.map((item) =>
+                typeof item === 'string' ? this.parseTemplate(item) : item
+              )
+            }
           }
 
           if (config.type === 'boolean') {
