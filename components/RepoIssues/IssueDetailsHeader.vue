@@ -7,13 +7,13 @@
     </div>
     <div class="flex items-center w-full text-vanilla-400 sm:w-auto">
       <!-- Meta data -->
-      <div class="flex flex-wrap items-center leading-none">
-        <issue-type v-if="issueType" :issueType="issueType" class="mr-4"></issue-type>
-        <div v-if="analyzerName" class="flex items-center mr-4 space-x-2">
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 leading-none">
+        <issue-type v-if="issueType" :issueType="issueType"></issue-type>
+        <div v-if="analyzerName" class="flex items-center space-x-2">
           <z-icon :icon="analyzerShortcode"></z-icon>
           <span class="text-sm">{{ analyzerName }}</span>
         </div>
-        <div v-if="firstSeen && lastSeen" class="flex items-center mr-4 space-x-2">
+        <div v-if="firstSeen && lastSeen" class="flex items-center space-x-2">
           <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
           <span class="text-sm text-vanilla-400">
             <span v-tooltip="`Last seen on ${formatDate(lastSeen, 'lll')}`">{{
