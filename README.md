@@ -23,7 +23,6 @@ Command line interface to DeepSource
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/deepsourcelabs/cli)
 [![DeepSource](https://deepsource.io/gh/deepsourcelabs/cli.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)
 [![DeepSource](https://deepsource.io/gh/deepsourcelabs/cli.svg/?label=resolved+issues&show_trend=true&token=j4U3e5C2BSIdTefFeY7uXNT6)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)
-[![Gitopia](https://img.shields.io/endpoint?style=&url=https://gitopia.org/mirror-badge.json)](https://gitopia.org/#/WU8MwK_wNu7had5xKwuD2dilKn9gzCFH6carv-QmIKs/deepsource-cli)
 
 ## Installation
 
