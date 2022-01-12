@@ -28,7 +28,7 @@
           type="link"
           buttonType="link"
           size="x-small"
-          href="https://deepsource.canny.io/changelog"
+          href="https://roadmap.deepsource.io/changelog"
           target="_blank"
           rel="noopener noreferrer"
           class="-mx-2 text-vanilla-400"
