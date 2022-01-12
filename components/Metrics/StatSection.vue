@@ -40,7 +40,7 @@
       </div>
       <div
         v-if="$slots.controls"
-        class="col-span-full -mr-2"
+        class="col-span-full"
         :class="{
           'md:col-span-2 xl:col-span-2 2xl:col-span-3': fullWidth,
           'xl:col-span-1': !fullWidth

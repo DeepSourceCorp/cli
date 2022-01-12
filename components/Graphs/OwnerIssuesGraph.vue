@@ -16,7 +16,7 @@
       ></graph-control>
     </template>
     <div
-      class="grid grid-cols-1 gap-5 p-4 -ml-2"
+      class="grid grid-cols-1 gap-4 p-4"
       :class="fullWidth ? 'md:grid-cols-4' : 'md:grid-cols-2'"
     >
       <graph-legend

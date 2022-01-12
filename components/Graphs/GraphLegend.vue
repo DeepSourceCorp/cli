@@ -1,9 +1,9 @@
 <template>
   <div
-    class="px-2 rounded-md"
+    class="px-4 py-3 rounded-md bg-ink-300"
     :class="{
       'opacity-50': !isActive,
-      'hover:bg-ink-300 cursor-pointer': allowHover
+      'cursor-pointer': allowHover
     }"
     @click="$emit('toggle')"
   >
@@ -37,6 +37,9 @@ import { ZAnimatedInteger } from '@deepsourcelabs/zeal'
 import { shortenLargeNumber } from '@/utils/string'
 import Ticker from '@/components/Ticker.vue'
 
+/**
+ * Component to show current value and increment/decrement trend
+ */
 @Component({
   components: {
     ZAnimatedInteger,

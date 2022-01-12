@@ -6,7 +6,7 @@
     :bodySpacing="0"
   >
     <div class="grid grid-cols-1">
-      <div class="grid grid-cols-1 gap-5 p-4 -ml-2 md:grid-cols-4">
+      <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-4">
         <graph-legend
           :isActive="showActiveIssues"
           @toggle="toggleActiveIssues"
@@ -95,6 +95,10 @@ interface ChartComponent extends Vue {
   initChart?: () => void
 }
 
+/**
+ * Component to show current count & graph of active
+ * and resolved issues
+ */
 @Component({
   components: {
     GraphControl,
@@ -112,6 +116,11 @@ export default class CodeQualityGraph extends mixins(
   @Ref('code-quality-chart')
   chart: ChartComponent
 
+  /**
+   * Mounted hook for Vue component.
+   *
+   * @returns void
+   */
   mounted() {
     this.chart = this.$refs['code-quality-chart'] as ChartComponent
     this.$socket.$on('repo-analysis-updated', this.refetchData)
@@ -136,10 +145,21 @@ export default class CodeQualityGraph extends mixins(
     colors: ['vanilla-400', 'robin-500']
   }
 
+  /**
+   * Before destroy hook for Vue component.
+   * Called right before a Vue instance is destroyed.
+   *
+   * @returns void
+   */
   beforeDestroy() {
     this.$socket.$off('repo-analysis-updated', this.refetchData)
   }
 
+  /**
+   * Function to fetch latest Issues trend data with cleared cache
+   *
+   * @returns Promise<void>
+   */
   async refetchData(): Promise<void> {
     await this.fetchIssueTrends({
       ...this.baseRouteParams,
@@ -148,6 +168,11 @@ export default class CodeQualityGraph extends mixins(
     })
   }
 
+  /**
+   * Function to fetch Issues trend data
+   *
+   * @returns Promise<void>
+   */
   async fetchData() {
     await this.fetchIssueTrends({
       ...this.baseRouteParams,
@@ -156,6 +181,11 @@ export default class CodeQualityGraph extends mixins(
     this.buildChart()
   }
 
+  /**
+   * Fetch hook for Vue component
+   *
+   * @returns Promise<void>
+   */
   async fetch(): Promise<void> {
     await this.fetchData()
   }
@@ -164,6 +194,11 @@ export default class CodeQualityGraph extends mixins(
   public showActiveIssues = true
   public showResolvedIssues = true
 
+  /**
+   * Function to toggle show/hide active issues data in graph
+   *
+   * @returns void
+   */
   toggleActiveIssues() {
     this.showActiveIssues = !this.showActiveIssues
     if (!this.showActiveIssues && !this.showResolvedIssues) {
@@ -172,6 +207,11 @@ export default class CodeQualityGraph extends mixins(
     this.buildChart()
   }
 
+  /**
+   * Function to toggle show/hide resolved issues data in graph
+   *
+   * @returns void
+   */
   toggleResolvedIssues() {
     this.showResolvedIssues = !this.showResolvedIssues
     if (!this.showActiveIssues && !this.showResolvedIssues) {
@@ -208,6 +248,11 @@ export default class CodeQualityGraph extends mixins(
     return this.$gateKeeper.repo(RepoPerms.VIEW_BADGES, this.repoPerms.permission)
   }
 
+  /**
+   * Function to build chart with all its props
+   *
+   * @returns void
+   */
   buildChart(): void {
     const data = []
     const colors = []
@@ -241,12 +286,24 @@ export default class CodeQualityGraph extends mixins(
     })
   }
 
+  /**
+   * Function to refresh chart by initializing it again
+   *
+   * @returns void
+   */
   refreshChart() {
     if (this.chart?.initChart) {
       this.chart.initChart()
     }
   }
 
+  /**
+   * Update the value of lastDays and refetch data for graph
+   *
+   * @param {number} newVal - new value for number of days
+   * for which data is shown in graph
+   * @returns void
+   */
   updateLastDays(newVal: number): void {
     this.lastDays = newVal
     this.fetchData()

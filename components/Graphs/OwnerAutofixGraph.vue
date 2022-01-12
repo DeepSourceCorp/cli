@@ -14,7 +14,7 @@
         @updateFilter="updateLastDays"
       ></graph-control>
     </template>
-    <div class="grid grid-cols-1 gap-5 p-4 -ml-2 md:grid-cols-2">
+    <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
       <graph-legend
         :allowHover="false"
         :showTrends="false"
@@ -49,6 +49,9 @@ import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
 const ownerDetailStore = namespace('owner/detail')
 
+/**
+ * Component to show Autofix trends on owner dashboard
+ */
 @Component({
   components: { BaseGraph }
 })
@@ -62,6 +65,11 @@ export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
     return getLastTwoTrends(this.autofixTrend)[0]
   }
 
+  /**
+   * Function to fetch Autofix trend data
+   *
+   * @returns Promise<void>
+   */
   fetchData() {
     return this.fetchAutofixTrends({
       login: this.$route.params.owner,
@@ -70,6 +78,11 @@ export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
     })
   }
 
+  /**
+   * Fetch hook for Vue component
+   *
+   * @returns Promise<void>
+   */
   async fetch(): Promise<void> {
     await this.fetchData()
   }
@@ -95,6 +108,13 @@ export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
     return []
   }
 
+  /**
+   * Update the value of lastDays and refetch data for graph
+   *
+   * @param {number} newVal - new value for number of days
+   * for which data is shown in graph
+   * @returns void
+   */
   updateLastDays(newVal: number): void {
     this.lastDays = newVal
     this.fetchData()
