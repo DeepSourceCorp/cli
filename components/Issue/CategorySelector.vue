@@ -39,31 +39,14 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ModelSync } from 'vue-property-decorator'
-
 import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
-import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import IssueCategoryMixin from '~/mixins/issueCategoryMixin'
+
 import { formatIntl } from '~/utils/string'
 
-export interface IssueCategoryChoice {
-  name: string
-  shortcode: string
-  icon?: string
-}
-
-const issuesSortOrder = [
-  'all',
-  'recommended',
-  'bug-risk',
-  'antipattern',
-  'security',
-  'performance',
-  'typecheck',
-  'coverage',
-  'style',
-  'doc'
-]
-
+/**
+ * Component to add issue filtering based on category for a repo
+ */
 @Component({
   components: {
     ZIcon,
@@ -73,34 +56,7 @@ const issuesSortOrder = [
     formatIntl
   }
 })
-export default class IssueCategorySelector extends mixins(RepoDetailMixin) {
-  @ModelSync('selectedCategory', 'updateCategory', { type: String, default: 'recommended' })
-  readonly modelValue: string
-
-  iconMap: Record<string, string> = {
-    recommended: 'star',
-    all: 'all'
-  }
-
-  get issueCategories(): IssueCategoryChoice[] {
-    if (this.repository.issueTypeDistribution) {
-      return this.repository.issueTypeDistribution
-        .map(({ name, shortcode, count }) => {
-          return {
-            name,
-            shortcode,
-            count,
-            icon: this.iconMap[shortcode] ?? shortcode
-          }
-        })
-        .sort((curr, next) => {
-          const currIndex = issuesSortOrder.indexOf(curr.shortcode)
-          const nextIndex = issuesSortOrder.indexOf(next.shortcode)
-          return currIndex - nextIndex
-        })
-    }
-
-    return []
-  }
+export default class IssueCategorySelector extends mixins(IssueCategoryMixin) {
+  formatIntl = formatIntl
 }
 </script>

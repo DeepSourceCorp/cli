@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-16-fr">
+  <div class="grid grid-cols-1 lg:grid-cols-16-fr pb-16 lg:pb-0">
     <!-- Analyzer Tab -->
     <div
       class="z-20 flex flex-col justify-between pl-2 pr-4 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
@@ -18,46 +18,28 @@
       </div>
     </div>
     <!-- Main Content -->
+    <!-- Activate CTA for mobile views -->
+    <activate-repo-cta
+      v-if="repository.errorCode === 3003 && hasRepoReadAccess"
+      :repository="repository"
+      class="col-span-full lg:hidden m-4 mb-0"
+    />
     <!-- Group by Filter Section -->
-    <issue-category-selector
-      :selected-category="queryParams.category"
-      class="sticky top-36 category-sidebar"
-      @updateCategory="updateCategory"
-    >
-      <template v-slot:cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
-        <div class="p-px mx-2 mt-2 rounded-md bg-gradient-dawn">
-          <div class="p-3 rounded-md bg-ink-300 from-ink-200 to-ink-400 via-ink-300">
-            <h4 class="font-medium leading-tight">Activate continuous analysis</h4>
-            <p class="mt-2 text-xs font-medium leading-snug">
-              <span
-                class="text-opacity-60 bg-clip-text text-vanilla-100 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
-              >
-                To analyze analysis on every pull request, commit the config file to your
-                repository.
-              </span>
-            </p>
-            <z-button
-              v-if="repository.isCommitPossible || repository.isAutofixEnabled"
-              @click="isActivationModalOpen = true"
-              size="small"
-              icon="play-circle"
-              class="w-full mt-4 bg-robin hover:bg-robin-600"
-              color="vanilla-200"
-              label="Activate analysis"
-            />
-            <nuxt-link v-else :to="$generateRoute(['generate-config'])">
-              <z-button
-                size="small"
-                icon="play-circle"
-                class="w-full mt-4 bg-robin hover:bg-robin-600"
-                color="vanilla-200"
-                label="Activate analysis"
-              />
-            </nuxt-link>
-          </div>
-        </div>
-      </template>
-    </issue-category-selector>
+    <div>
+      <category-selector-mobile
+        :selected-category="queryParams.category"
+        @updateCategory="updateCategory"
+      />
+      <issue-category-selector
+        :selected-category="queryParams.category"
+        class="sticky top-36 category-sidebar"
+        @updateCategory="updateCategory"
+      >
+        <template v-slot:cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
+          <activate-repo-cta :repository="repository" class="mx-2 mt-2" />
+        </template>
+      </issue-category-selector>
+    </div>
     <!-- List of issues -->
     <div v-if="issuesLoading" class="flex-1 flex-grow min-h-screen p-4 gap-y-4">
       <div
@@ -70,15 +52,15 @@
       v-else
       class="flex flex-col flex-1 flex-grow p-4 pb-10 gap-y-4"
       :class="{
-        'max-h-64 min-h-64': issueList.totalCount === 0,
+        'lg:h-64': issueList.totalCount === 0,
         'min-h-screen max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
       }"
     >
       <empty-state
         v-if="issueList.totalCount === 0"
-        class="border border-2 border-dashed rounded-lg border-ink-200 py-15"
         title="No issues in this category"
-        :subtitle="`There are no issues, developer asked &quot;Is this a dream?&quot;`"
+        :subtitle="`There are no issues, a developer asked &quot;Is this a dream?&quot;`"
+        class="border border-2 border-dashed rounded-lg border-ink-200 py-15"
       >
       </empty-state>
       <issue-list-item
@@ -106,7 +88,6 @@
       @close="isAutofixOpen = false"
       @runQuotaExhausted="openUpgradeAccountModal"
     />
-    <activate-analysis-modal v-if="isActivationModalOpen" @close="isActivationModalOpen = false" />
     <upgrade-account-modal
       v-if="isUpgradeAccountModalOpen"
       @close="isUpgradeAccountModalOpen = false"
