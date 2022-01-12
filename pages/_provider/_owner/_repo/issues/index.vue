@@ -2,7 +2,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-16-fr pb-16 lg:pb-0">
     <!-- Analyzer Tab -->
     <div
-      class="z-20 flex flex-col justify-between pl-2 pr-4 py-2 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
+      class="z-20 flex flex-col justify-between py-2 pl-2 pr-4 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
     >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"
@@ -41,7 +41,7 @@
       </issue-category-selector>
     </div>
     <!-- List of issues -->
-    <div v-if="issuesLoading" class="flex-1 flex-grow min-h-screen p-4 gap-y-4">
+    <div v-if="issuesLoading" class="flex flex-col flex-grow min-h-screen p-4 gap-y-4">
       <div
         v-for="idx in 7"
         :key="idx"
