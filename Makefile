@@ -7,11 +7,11 @@ build_local:
 test:
 	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueWorkflow -coverprofile=cover.out 
 	cat cover.out >> coverage.out
-	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueFileWorkflow  -coverprofile=cover.out
+	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueFileWorkflow -coverprofile=cover.out
 	cat cover.out >> coverage.out
 	echo "\n====TESTING CONFIG VALIDATOR PACKAGE====\n"
-	cd configvalidator && go test -v . -count=1 -coverprofile=cover.out
-	cat cover.out >> coverage.out
+	cd configvalidator && go test -v . -count=1 -coverprofile=cover.out && cd ..
+	cat configvalidator/cover.out >> coverage.out
 
 test_setup:
 	mkdir -p ${CODE_PATH}
