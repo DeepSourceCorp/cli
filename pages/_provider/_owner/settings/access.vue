@@ -5,38 +5,46 @@
       <toggle-input
         label="Automatically sync access settings from GitHub"
         description="Issues would be reported only for lines that have been added or modified across all the files affected."
-        inputId="team-settings-access-sync"
+        input-id="team-settings-access-sync"
         v-model="syncPermissionsWithVcs"
       >
         <template slot="description">
           <p>GitHub allows access settings to be synced automatically.</p>
-          <z-button buttonType="secondary" size="small" class="mt-2" @click="triggerUpdateSettings"
-            >Manually sync access settings</z-button
-          >
+          <z-button
+            :is-loading="isSyncing"
+            :disabled="isSyncing"
+            icon="refresh-cw"
+            label="Manually sync access settings"
+            loading-label="Sync in progress..."
+            button-type="secondary"
+            size="small"
+            class="mt-2"
+            @click="triggerUpdateSettings"
+          />
         </template>
       </toggle-input>
     </form-group>
     <form-group label="Access permissions">
       <radio-group-input
         label="Member Base Permissions"
-        inputId="team-settings-access-base-perms"
-        inputWidth="wide"
+        input-id="team-settings-access-base-perms"
+        input-width="wide"
         :options="basePermOptions"
         @change="updateBasePerms"
         v-model="basePerm"
       ></radio-group-input>
       <check-input
         label="Issue Permissions"
-        inputId="team-settings-access-issue-perms"
-        inputWidth="wide"
+        input-id="team-settings-access-issue-perms"
+        input-width="wide"
         :options="issuePermOptions"
         @change="updateBasePerms"
         v-model="issuePerms"
       ></check-input>
       <check-input
         label="Metric Thresholds Permission"
-        inputId="team-settings-access-metric-perms"
-        inputWidth="wide"
+        input-id="team-settings-access-metric-perms"
+        input-width="wide"
         :options="metricPermOptions"
         @change="updateBasePerms"
         v-model="metricPerms"
@@ -47,8 +55,8 @@
         v-if="showSyncModal"
         @onClose="closeSyncModal"
         title="Proceed with sync?"
-        primaryActionLabel="Sync access settings"
-        primaryActionIcon="alert-circle"
+        primary-action-label="Sync access settings"
+        primary-action-icon="alert-circle"
         @primaryAction="syncAccessSettings"
       >
         <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
@@ -74,6 +82,9 @@ import { CheckInput, FormGroup, RadioGroupInput, ToggleInput } from '~/component
 import { TeamBasePermissionSetDefaultRepositoryPermission, Maybe } from '~/types/types'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
+/**
+ * Class for `AccessControlSettings` page. Handles controls for provider permissions and access permissions.
+ */
 @Component({
   components: {
     CheckInput,
@@ -107,30 +118,89 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
 
   private isFetching = false
   private showSyncModal = false
+  private isSyncing = false
+
+  /**
+   * Fetch hook for AccessControlSettings page.
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    await this.refetchPerms(false)
+  }
+
+  /**
+   * Mounted hook for AccessControlSettings page.
+   *
+   * @returns {void} void
+   */
+  mounted(): void {
+    this.$socket.$on('permission-sync', this.toggleSyncingOff)
+  }
+
+  /**
+   * BeforeDestroy hook for AccessControlSettings page.
+   *
+   * @returns {void} void
+   */
+  beforeDestroy(): void {
+    this.$socket.$off('permission-sync', this.toggleSyncingOff)
+  }
 
   get allowSyncAccessSettings(): boolean {
     const { provider } = this.$route.params
     return this.$gateKeeper.provider(AppFeatures.SYNC_ACCESS_SETTINGS, provider)
   }
 
-  closeSyncModal() {
+  /**
+   * Close the "Confirm and sync" modal.
+   *
+   * @returns {void} void
+   */
+  closeSyncModal(): void {
     this.showSyncModal = false
   }
 
-  triggerUpdateSettings() {
+  /**
+   * Open the "Confirm and sync" modal.
+   *
+   * @returns {void} void
+   */
+  triggerUpdateSettings(): void {
     this.showSyncModal = true
   }
 
-  async syncAccessSettings() {
+  /**
+   * Show success/fail toast as per status in WebSocket event and toggle off the syncing state for "Manually sync access settings" button.
+   *
+   * @returns {void} void
+   */
+  toggleSyncingOff({ status }: { status: string }): void {
+    if (status === 'success') {
+      this.$toast.success('Access settings synced.')
+    } else {
+      this.$toast.danger('A problem occured while attempting to sync access settings.')
+    }
+    this.isSyncing = false
+  }
+
+  /**
+   * Trigger mutation to manually sync access settings.
+   *
+   * @returns {Promise<void>} Promise<void>
+   */
+  async syncAccessSettings(): Promise<void> {
+    this.isSyncing = true
     await this.syncVcsPermissionss({
       teamId: this.team.id
     })
   }
 
-  async fetch(): Promise<void> {
-    await this.refetchPerms(false)
-  }
-
+  /**
+   * Refetches team settings for sync with provider and access permissions for members, issues, and metrics.
+   *
+   * @returns {Promise<void>} Promise<void>
+   */
   async refetchPerms(refetch?: boolean): Promise<void> {
     this.isFetching = true
     const { owner, provider } = this.$route.params
@@ -156,8 +226,13 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     this.isFetching = false
   }
 
+  /**
+   * Watcher for `syncPermissionsWithVcs`. Triggers `updateAccessControlSettings` with the new value of `syncPermissionsWithVcs`.
+   *
+   * @returns {void} void
+   */
   @Watch('syncPermissionsWithVcs', { immediate: false })
-  updateVcsPermSync(newVal: boolean, oldVal: boolean) {
+  updateVcsPermSync(newVal: boolean, oldVal: boolean): void {
     if (!this.isFetching && newVal !== oldVal) {
       this.updateAccessControlSettings({
         teamId: this.team.id,
@@ -166,7 +241,12 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     }
   }
 
-  async updateBasePerms() {
+  /**
+   * Updates base access permission for members and permissions for issue and metrics.
+   *
+   * @returns {Promise<void>} Promise<void>
+   */
+  async updateBasePerms(): Promise<void> {
     if (!this.isFetching) {
       try {
         const res = await this.updateTeamBasePermissions({
