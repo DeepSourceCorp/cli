@@ -14,8 +14,16 @@ export interface RepoPermissions {
   permission: RepositoryCollaboratorPermission
 }
 
+/**
+ * Mixin with access permission-related information
+ */
 @Component
 export default class RoleAccessMixin extends mixins(RepoDetailMixin, AuthMixin, ActiveUserMixin) {
+  /**
+   * Fetch hook
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await this.fetchRepoPerms(this.baseRouteParams)
   }
@@ -37,5 +45,9 @@ export default class RoleAccessMixin extends mixins(RepoDetailMixin, AuthMixin, 
 
   get allowAutofix(): boolean {
     return this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.activeProvider)
+  }
+
+  get canEnableAutofix(): boolean {
+    return this.$gateKeeper.repo(RepoPerms.INSTALL_AUTOFIX_APP, this.repoPerms.permission)
   }
 }

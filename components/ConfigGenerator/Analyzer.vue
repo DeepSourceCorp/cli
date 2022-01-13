@@ -236,11 +236,14 @@ import {
   AnalyzerMetaProperitiesInterface,
   TransformerInterface
 } from '~/store/analyzer/list'
-import { AppFeatures, RepoPerms } from '~/types/permTypes'
+import { AppFeatures } from '~/types/permTypes'
 import { Repository, TransformerTool } from '~/types/types'
 
 const repoDetailStore = namespace('repository/detail')
 
+/**
+ * Analyzer component
+ */
 @Component({
   components: {
     ZButton,
@@ -299,6 +302,11 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
   public invalidFields: Array<string> = []
   public isCollapsed = false
 
+  /**
+   * Update collapse state based on the value for readOnly prop
+   *
+   * @returns {void}
+   */
   @Watch('readOnly')
   updateIsCollapseOnReadStatusChange(): void {
     if (this.readOnly) {
@@ -306,20 +314,26 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     }
   }
 
+  /**
+   * Toggle transformer enabled state based on the value for readOnly prop
+   *
+   * @returns {void}
+   */
   toggleTransformer(transformer: TransformerInterface) {
     if (!this.readOnly) {
       transformer.enabled = !transformer.enabled
     }
   }
 
+  /**
+   * Discards Transformers and emit `onClose` event
+   *
+   * @returns {void}
+   */
   public onClose(): void {
     // remove all transformers
     this.removeAllTransformers()
     this.$emit('onClose')
-  }
-
-  get canEnableAutofix(): boolean {
-    return this.$gateKeeper.repo(RepoPerms.INSTALL_AUTOFIX_APP, this.repoPerms.permission)
   }
 
   get hasCollapsibleContent(): boolean {
@@ -386,6 +400,12 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
       .replaceAll('<%=  name %>', this.forTemplate ? '<repository-name>' : repo)
   }
 
+  /**
+   * Check if the config selected property has template data
+   *
+   * @param {AnalyzerMetaProperitiesInterface} config
+   * @returns {boolean}
+   */
   hasTemplate(config: AnalyzerMetaProperitiesInterface): boolean {
     if (typeof config.selected === 'string') {
       return (
@@ -466,6 +486,11 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     }
   }
 
+  /**
+   * Generate Transformer items based on the selection
+   *
+   * @returns {void}
+   */
   generateTransformerItems(): void {
     const selected = this.selectedTransformers.map((transformer) => {
       return transformer.name
@@ -479,11 +504,24 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     })
   }
 
+  /**
+   * Update Transformer items when selectedTransformers list changes
+   *
+   * @returns {void}
+   */
   @Watch('selectedTransformers.length')
   updateTransformerItems(): void {
     this.generateTransformerItems()
   }
 
+  /**
+   * Update the value for selected key based on the value for isChecked
+   *
+   * @param {string} option
+   * @param {number} isChcked
+   * @param {Record<string, string[]>} objectToUpdate
+   * @returns {void}
+   */
   updateChecks(option: string, isChecked: number, objectToUpdate: Record<string, string[]>): void {
     if (!objectToUpdate.selected) {
       objectToUpdate.selected = []
@@ -496,13 +534,25 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     }
   }
 
+  /**
+   * Update the value for selected key
+   *
+   * @param {string} option
+   * @param {Record<string, string[]>} objectToUpdate
+   * @returns {void}
+   */
   updateArray(option: string, objectToUpdate: Record<string, string[]>): void {
     objectToUpdate.selected = option
       .split(',') // comma separeted
       .filter((val) => val) // non empty
-      .map((val) => val.trim()) // no traling or leading spaces
+      .map((val) => val.trim()) // no trailing or leading spaces
   }
 
+  /**
+   * Compute invalid fields from config items
+   *
+   * @returns {number}
+   */
   validateConfig(): number {
     const requiredFields = this.analyzerMeta.required || []
     this.invalidFields = this.configItems
@@ -510,11 +560,15 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
         return requiredFields.includes(configItem.name) && !configItem.selected
       })
       .map((configItem: AnalyzerMetaProperitiesInterface) => configItem.name)
-
     this.isCollapsed = this.invalidFields.length == 0
     return this.invalidFields.length
   }
 
+  /**
+   * Update analyzer entries when configItems change
+   *
+   * @returns {void}
+   */
   @Watch('configItems', { deep: true })
   analyzersUpdated(): void {
     const meta: Record<string, string | number | boolean> = {}
@@ -531,6 +585,11 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     })
   }
 
+  /**
+   * Update Transformer entries when transformerItems change
+   *
+   * @returns {void}
+   */
   @Watch('transformerItems', { deep: true })
   transformersUpdated(): void {
     const transformers: Record<string, Record<string, string | boolean>> = {}
@@ -544,6 +603,11 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
     this.$emit('transformersUpdated', transformers)
   }
 
+  /**
+   * Remove all Transformer entries
+   *
+   * @returns {void}
+   */
   removeAllTransformers(): void {
     const transformers: Record<string, Record<string, string | boolean>> = {}
     this.transformerItems.forEach((transformer) => {

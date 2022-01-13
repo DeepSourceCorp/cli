@@ -339,6 +339,9 @@ interface DOMElement extends Element {
 // store
 const runStore = namespace('run/detail')
 
+/**
+ * Component for Autofix ID page
+ */
 @Component({
   components: {
     ZIcon,
@@ -393,6 +396,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     params: Record<string, Record<string, string[] | string>>
   ) => Promise<{ data: { input: CreatePullRequestInput } }>
 
+  /**
+   * Mounted hook for Vue component
+   *
+   * @returns {void}
+   */
   mounted(): void {
     this.$root.$on('refetch-autofix-run', this.fetchAutofixRun)
     this.$socket.$on('pull-request-created', this.showSuccess)
@@ -402,6 +410,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     this.$socket.$on('autofix-installation-complete', this.fetchAutofixRun)
   }
 
+  /**
+   * Show Autofix status toast
+   *
+   * @returns {Promise<void>}
+   */
   async showSuccess(): Promise<void> {
     await this.fetchAutofixRun()
     if (this.autofixRun.pullRequestStatus === AutofixRunPullRequestStatus.Prf) {
@@ -421,6 +434,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     }
   }
 
+  /**
+   * Fetch Autofix run details
+   *
+   * @returns {Promise<void>}
+   */
   async fetchAutofixRun(): Promise<void> {
     await this.fetchRepoPerms(this.baseRouteParams)
     await this.fetchAutofixRunDetails({
@@ -429,6 +447,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     })
   }
 
+  /**
+   * BeforeDestroy hook for Vue component
+   *
+   * @returns {void}
+   */
   beforeDestroy(): void {
     this.$root.$off('refetch-autofix-run', this.fetchAutofixRun)
     this.$socket.$off('pull-request-created', this.showSuccess)
@@ -438,6 +461,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     this.$socket.$off('autofix-installation-complete', this.fetchAutofixRun)
   }
 
+  /**
+   * Update selected files based on autofixRun
+   *
+   * @returns {void}
+   */
   @Watch('autofixRun')
   public updateSelectedFiles(): void {
     this.selectedHunkIds = []
@@ -464,6 +492,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     }
   }
 
+  /**
+   * Fetch hook
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await this.fetchRepoPerms(this.baseRouteParams)
     await this.fetchAutofixRunDetails({
@@ -473,6 +506,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     this.updateSelectedFiles()
   }
 
+  /**
+   * Play the bell sound (Easter egg for Christmas)
+   *
+   * @returns {void}
+   */
   playAudio() {
     const audio = document.getElementById('bell-sound') as HTMLAudioElement
     audio?.play()
@@ -558,27 +596,13 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     }
   }
 
-  get canEnableAutofix(): boolean {
-    return this.$gateKeeper.repo(RepoPerms.INSTALL_AUTOFIX_APP, this.repoPerms.permission)
-  }
-
-  public calculateHeight(): void {
-    const codeBlockHeader = 16,
-      codeVerticalSpacing = 16
-    let branchHeight = 0
-    const $code = document.querySelectorAll('.code')
-    Array.from($code).forEach((code, index) => {
-      const $el = code as DOMElement
-      branchHeight += index === $code.length - 1 ? codeBlockHeader : $el.offsetHeight
-      branchHeight += codeVerticalSpacing
-    })
-    this.height = `${branchHeight}px`
-  }
-
+  /**
+   * Select/Remove a file, and select or remove hunks from that file, accordingly
+   *
+   * @param {string} file
+   * @returns {void}
+   */
   public selectFile(file: string): void {
-    /**
-     * Select/Remove a file, and select or remove hunks from that file, accordingly.
-     */
     // If the file is already selected, deselect the file and its respective hunks
     if (this.selectedFiles.includes(file)) {
       this.removeHunksFromFile(file)
@@ -588,9 +612,14 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     }
   }
 
+  /**
+   * Add hunk ids from the autofix run object to the fileIdMapping and the selectedHunkID list
+   *
+   * @param {string} file
+   * @returns {void}
+   */
   public selectHunksFromFile(file: string): void {
     this.selectedFiles.push(file)
-    // Add hunk ids from the autofix run object to the fileIdMapping and the selectedHunkID list
     this.autofixRun.changeset[file].patches.forEach((change: Record<string, string>) => {
       if (!this.selectedHunkIds.includes(change.id)) {
         this.selectedHunkIds.push(change.id) // Add hunk id to selectedHunkIds
@@ -618,14 +647,13 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     )
   }
 
+  /**
+   * Selects file if all the hunkIds of this file are selected.
+   *
+   * @param {string} file - file which contains the hunkId
+   * @param {number} hunkId - id of an hunk
+   */
   public selectFileIfAllHunksSelected(file: string, hunkId: string): void {
-    /**
-     * Selects file if all the hunkIds of this file are selected.
-     *
-     * @param {String} file - file which contains the hunkId
-     * @param {Number} hunkId - id of an hunk
-     *
-     */
     // If the selected hunk id's file is not present, add it to the map along with the Id
     if (this.isFileMappingEmpty(file)) {
       this.selectedFileIdMapping[file] = []
@@ -652,6 +680,11 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     }
   }
 
+  /**
+   * Trigger Autofix run
+   *
+   * @returns {Promise<void>}
+   */
   async triggerRun(): Promise<void> {
     this.triggeringAutofix = true
     const hunkIds = this.selectedHunkIds.map((id) => String(id))
@@ -668,6 +701,12 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     }
   }
 
+  /**
+   * Execute createPullRequest GQL mutation
+   *
+   * @param {string[]} hunkIds
+   * @returns {Promise<void>}
+   */
   public async createPullRequest(hunkIds: string[]): Promise<void> {
     await this.createPR({
       input: {
@@ -679,6 +718,12 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     await this.fetchAutofixRun()
   }
 
+  /**
+   * Execute commitFixToPullRequest GQL mutation
+   *
+   * @param {string[]} hunkIds
+   * @returns {Promise<void>}
+   */
   public async commitFixToPullRequest(hunkIds: string[]): Promise<void> {
     await this.commitFixToPR({
       input: {

@@ -27,21 +27,33 @@
               OR if the page is loading
           -->
         <div
-          v-if="
-            repository.name === $route.params.repo &&
-            repository.errorCode &&
-            repository.errorCode !== 3003 &&
-            !loading
-          "
+          v-if="repository.name === $route.params.repo && repository.errorCode && !loading"
+          class="px-4 pt-4"
         >
-          <div
-            class="flex items-center p-4 space-x-2 border-b bg-cherry bg-opacity-10 border-cherry border-opacity-20"
-          >
-            <p
-              class="max-w-4xl text-cherry error-state"
-              v-html="repository.renderedErrorMessage"
-            ></p>
-          </div>
+          <z-alert v-if="repository.errorCode === 3007" type="danger" :dismissible="true">
+            <div class="mr-2 space-y-4 md:space-y-0 md:flex md:items-center md:justify-between">
+              <p class="font-medium" v-html="repository.renderedErrorMessage"></p>
+              <div v-if="canEnableAutofix" class="bg-cherry bg-opacity-40" style="width: 168px">
+                <z-button
+                  :disabled="installing"
+                  :is-loading="installing"
+                  button-type="ghost"
+                  color="vanilla-100"
+                  icon="autofix"
+                  label="Install Autofix app"
+                  loading-label="Verifying installation"
+                  size="small"
+                  class="modal-primary-action bg-cherry bg-opacity-40 hover:bg-opacity-0"
+                  style="width: 168px"
+                  @click="openAutofixInstallationUrl(close)"
+                />
+              </div>
+            </div>
+          </z-alert>
+
+          <z-alert v-else-if="repository.errorCode !== 3003" type="danger" :dismissible="true">
+            <p class="font-medium" v-html="repository.renderedErrorMessage"></p>
+          </z-alert>
         </div>
         <Nuxt v-if="isAnalyzed || allowedOnBroken || loading" />
 
@@ -86,7 +98,7 @@
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { RepoHeader, MobileNav, LoggedOutSidebar } from '@/components/Layout'
 import { Sidebar } from '@/components/Layout/Sidebar'
-import { ZLabel } from '@deepsourcelabs/zeal'
+import { ZAlert, ZButton, ZIcon, ZLabel } from '@deepsourcelabs/zeal'
 import AuthMixin from '@/mixins/authMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import PortalMixin from '@/mixins/portalMixin'
@@ -99,7 +111,12 @@ import {
   RepoWaiting
 } from '~/components/RepoStates'
 import { RunStatus } from '~/types/types'
+import InstallAutofixMixin from '~/mixins/installAutofixMixin'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
+/**
+ * Component for the repository layout
+ */
 @Component({
   components: {
     Sidebar,
@@ -111,6 +128,9 @@ import { RunStatus } from '~/types/types'
     RepoTimeout,
     RepoWaiting,
     MobileNav,
+    ZAlert,
+    ZButton,
+    ZIcon,
     ZLabel
   },
   middleware: ['hidePrivateRepo'],
@@ -120,8 +140,20 @@ import { RunStatus } from '~/types/types'
     }
   }
 })
-export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin, PortalMixin) {
+export default class RepositoryLayout extends mixins(
+  AuthMixin,
+  InstallAutofixMixin,
+  RepoDetailMixin,
+  PortalMixin,
+  RoleAccessMixin
+) {
   public loading = false
+
+  /**
+   * Fetch hook
+   *
+   * @returns {void}
+   */
   async fetch(): Promise<void> {
     this.loading = true
     try {
@@ -132,6 +164,11 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
     this.loading = false
   }
 
+  /**
+   * Refetch data on refetch and websocket events
+   *
+   * @returns {void}
+   */
   refetchData() {
     this.fetchBasicRepoDetails({
       ...this.baseRouteParams,
@@ -144,6 +181,11 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
     })
   }
 
+  /**
+   * Mounted hook for Vue component
+   *
+   * @returns {void}
+   */
   mounted(): void {
     this.$socket.$on('repo-analysis-updated', this.refetchData)
     this.$socket.$on('repo-config-committed', this.refetchData)
@@ -151,6 +193,11 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
     this.$socket.$on('autofix-installation-complete', this.refetchData)
   }
 
+  /**
+   * BeforeDestroy hook for Vue component
+   *
+   * @returns {void}
+   */
   beforeDestroy(): void {
     this.$socket.$off('repo-analysis-updated', this.refetchData)
     this.$socket.$off('repo-config-committed', this.refetchData)
@@ -158,6 +205,11 @@ export default class RepositoryLayout extends mixins(AuthMixin, RepoDetailMixin,
     this.$socket.$off('autofix-installation-complete', this.refetchData)
   }
 
+  /**
+   * Remove refetch events when repo route param changes
+   *
+   * @returns {void}
+   */
   @Watch('$route.params.repo')
   removeRefetchEvents(): void {
     this.$root.$off('refetchCheck')

@@ -117,6 +117,9 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import AutofixRunMixin from '~/mixins/autofixRunMixin'
 import { resolveNodes } from '~/utils/array'
 
+/**
+ * Component for the Autofix page
+ */
 @Component({
   components: {
     ZIcon,
@@ -144,19 +147,40 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin, Au
   ]
   selectedRun = this.options[0]
 
+  /**
+   * Mounted hook for Vue component
+   *
+   * @returns {void}
+   */
   mounted(): void {
     this.$root.$on('refetch-autofix-run', this.refetchData)
     this.$socket.$on('repo-analysis-updated', this.refetchData)
   }
+
+  /**
+   * BeforeDestroy hook for Vue component
+   *
+   * @returns {void}
+   */
   beforeDestroy(): void {
     this.$root.$off('refetch-autofix-run', this.refetchData)
     this.$socket.$off('repo-analysis-updated', this.refetchData)
   }
 
+  /**
+   * Refetch run list data
+   *
+   * @returns {Promise<void>}
+   */
   async refetchData(): Promise<void> {
     await this.fetchRunLists(true)
   }
 
+  /**
+   * Fetch run list data
+   *
+   * @returns {Promise<void>}
+   */
   async fetchRunLists(refetch = false): Promise<void> {
     this.fetchAutofixRunList({
       ...this.baseRouteParams,
@@ -177,6 +201,11 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin, Au
     })
   }
 
+  /**
+   * Fetch hook
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await Promise.all([
       this.fetchBasicRepoDetails(this.baseRouteParams),
@@ -197,13 +226,14 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin, Au
     return resolveNodes(this.autofixRunList) as AutofixRun[]
   }
 
+  /**
+   * Set available Autofix count on local storage
+   *
+   * @returns {void}
+   */
   setLoaderCount(count: number): void {
     const { provider, owner, repo } = this.$route.params
     this.$localStore.set(`${provider}-${owner}-${repo}`, 'autofix-available-autofixes-count', count)
-  }
-
-  get canEnableAutofix(): boolean {
-    return this.$gateKeeper.repo(RepoPerms.INSTALL_AUTOFIX_APP, this.repoPerms.permission)
   }
 
   get loaderCount(): number {
