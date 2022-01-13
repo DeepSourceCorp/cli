@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col p-4 gap-y-2 max-w-2xl">
+  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
     <div class="text-lg font-medium text-vanilla-100">General</div>
     <form-group :divide="false">
@@ -21,7 +21,7 @@
             />
           </div>
         </div>
-        <p class="max-w-sm text-xs text-vanilla-400 leading-5">
+        <p class="max-w-sm text-xs leading-5 text-vanilla-400">
           This is the base branch for analysis by DeepSource. Your issues tab will be populated with
           the issues found on this branch.
         </p>
@@ -34,7 +34,7 @@
         input-id="team-settings-branch"
         :cascade-input="true"
         @blur="updateBranch"
-        class="flex-grow max-w-2xl hidden lg:grid"
+        class="flex-grow hidden max-w-2xl lg:grid"
       >
         <template slot="description">
           <p class="max-w-sm">
@@ -69,8 +69,8 @@
 
     <div class="flex-grow max-w-2xl">
       <div class="mb-4">
-        <h6 class="text-sm text-vanilla-100 mb-1">Issue configuration</h6>
-        <p class="text-xs text-vanilla-400 leading-5">
+        <h6 class="mb-1 text-sm text-vanilla-100">Issue configuration</h6>
+        <p class="text-xs leading-5 text-vanilla-400">
           Control which category of issues are reported, and when analysis run is marked as failed.
         </p>
       </div>
@@ -130,61 +130,63 @@
 
     <form-group label="Analysis settings" class="flex-grow max-w-2xl">
       <!-- needed custom markup for mobile view cause we're rearranging order of title, description & z-select -->
-      <div class="grid gap-4 py-4 lg:hidden">
-        <div class="col-span-full md:col-auto">
-          <label for="repo-setting-analysis-scope" class="text-sm text-vanilla-100">
-            Analysis scope
-          </label>
+      <section>
+        <div class="grid gap-4 py-4 lg:hidden">
+          <div class="col-span-full md:col-auto">
+            <label for="repo-setting-analysis-scope" class="text-sm text-vanilla-100">
+              Analysis scope
+            </label>
 
-          <div class="h-8 mt-2">
+            <div class="h-8 mt-2">
+              <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
+                <z-option label="Granular (recommended)" value="granular"></z-option>
+                <z-option label="Broad" value="broad"></z-option>
+              </z-select>
+            </div>
+          </div>
+          <ul class="max-w-sm ml-4 text-xs leading-5 list-disc list-outside text-vanilla-400">
+            <li>
+              <span class="relative -left-1">
+                If <b>Granular</b> is selected, issues would be reported only for lines that have
+                been added or modified across all the files affected.
+              </span>
+            </li>
+            <li class="mt-1.5">
+              <span class="relative -left-1">
+                If <b>Broad</b> is selected, all issues will be reported in files that have been
+                updated or added, beware, this can be noisy.
+              </span>
+            </li>
+          </ul>
+        </div>
+
+        <input-wrapper
+          input-id="repo-analysis-scope"
+          label="Analysis scope"
+          input-width="x-small"
+          class="hidden lg:grid"
+        >
+          <div class="h-8">
             <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
               <z-option label="Granular (recommended)" value="granular"></z-option>
               <z-option label="Broad" value="broad"></z-option>
             </z-select>
           </div>
-        </div>
-        <ul class="max-w-sm text-xs text-vanilla-400 leading-5 list-outside list-disc ml-4">
-          <li>
-            <span class="relative -left-1">
-              If <b>Granular</b> is selected, issues would be reported only for lines that have been
-              added or modified across all the files affected.
-            </span>
-          </li>
-          <li class="mt-1.5">
-            <span class="relative -left-1">
-              If <b>Broad</b> is selected, all issues will be reported in files that have been
-              updated or added, beware, this can be noisy.
-            </span>
-          </li>
-        </ul>
-      </div>
 
-      <input-wrapper
-        input-id="repo-analysis-scope"
-        label="Analysis scope"
-        input-width="x-small"
-        class="hidden lg:grid"
-      >
-        <div class="h-8">
-          <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
-            <z-option label="Granular (recommended)" value="granular"></z-option>
-            <z-option label="Broad" value="broad"></z-option>
-          </z-select>
-        </div>
-
-        <template slot="description">
-          <ul class="max-w-sm list-outside list-disc ml-4">
-            <li>
-              If <b>Granular</b> is selected, issues would be reported only for lines that have been
-              added or modified across all the files affected.
-            </li>
-            <li class="mt-1.5">
-              If <b>Broad</b> is selected, all issues will be reported in files that have been
-              updated or added, beware, this can be noisy.
-            </li>
-          </ul>
-        </template>
-      </input-wrapper>
+          <template slot="description">
+            <ul class="max-w-sm ml-4 list-disc list-outside">
+              <li>
+                If <b>Granular</b> is selected, issues would be reported only for lines that have
+                been added or modified across all the files affected.
+              </li>
+              <li class="mt-1.5">
+                If <b>Broad</b> is selected, all issues will be reported in files that have been
+                updated or added, beware, this can be noisy.
+              </li>
+            </ul>
+          </template>
+        </input-wrapper>
+      </section>
 
       <button-input
         label="Analysis configuration"
@@ -213,25 +215,7 @@
           @click="toggleState()"
           @mouseenter="updateHoverStyle(true)"
           @mouseleave="updateHoverStyle(false)"
-          class="
-            flex
-            items-center
-            self-end
-            justify-center
-            h-10
-            md:h-8
-            px-4
-            py-1
-            space-x-2
-            font-medium
-            transition-all
-            duration-150
-            ease-in-out
-            rounded-sm
-            md:-ml-4
-            w-full
-            md:w-52
-          "
+          class="flex items-center self-end justify-center w-full h-10 px-4 py-1 space-x-2 font-medium transition-all duration-150 ease-in-out rounded-sm md:h-8 md:-ml-4 md:w-52"
           :class="{
             'bg-transparent text-cherry border border-cherry': isRepoActivated && isHovered,
             'bg-transparent text-juniper border border-juniper': !isRepoActivated && isHovered,
