@@ -10,21 +10,16 @@
           ></z-icon>
           <span class="font-semibold text-vanilla-100"
             >{{ namespace.key }}
-            <span v-if="currentMetric.name" class="text-vanilla-400 font-normal"
+            <span v-if="currentMetric.name" class="font-normal text-vanilla-400"
               >/ {{ currentMetric.name }}</span
             ></span
           >
         </div>
-        <z-animated-integer
-          v-if="namespace.trend"
-          class="font-normal text-2.5xl tracking-snug"
-          :format="
-            namespace.display.endsWith('%') && !isNumberType ? formatPercentage : (val) => val
-          "
-          :value="namespace.trend.values[namespace.trend.values.length - 1]"
-        ></z-animated-integer>
+        <span v-if="namespace.trend" class="font-normal text-2.5xl tracking-snug">
+          {{ trendValueForLegend }}
+        </span>
       </div>
-      <div v-if="currentThreshold" class="text-sm text-vanilla-200 text-right">
+      <div v-if="currentThreshold" class="text-sm text-right text-vanilla-200">
         <span class="text-xs text-vanilla-400">Threshold</span>
         <span
           class="inline px-1.5 py-1 text-sm font-medium leading-5 rounded-md font-base bg-ink-300"
@@ -38,19 +33,19 @@
             </button>
           </template>
           <template slot="body">
-            <z-menu-item @click="showThresholdUpdate = true" class="text-sm" icon="edit-2"
-              >Update Threshold</z-menu-item
-            >
-            <z-menu-item @click="deleteThreshold" class="text-cherry text-sm" icon="trash-2"
-              >Delete Threshold</z-menu-item
-            >
+            <z-menu-item class="text-sm" icon="edit-2" @click="showThresholdUpdate = true">
+              Update Threshold
+            </z-menu-item>
+            <z-menu-item class="text-sm text-cherry" icon="trash-2" @click="deleteThreshold">
+              Delete Threshold
+            </z-menu-item>
           </template>
         </z-menu>
       </div>
-      <div v-else class="text-sm text-vanilla-200 text-right flex justify-end">
+      <div v-else class="flex justify-end text-sm text-right text-vanilla-200">
         <button
+          class="flex items-center h-8 px-2 py-1 space-x-2 text-sm border border-dashed rounded-md border-ink-300 hover:border-ink-200 text-vanilla-400 hover:text-vanilla-200"
           @click="showThresholdUpdate = true"
-          class="flex items-center space-x-2 px-2 py-1 border border-dashed rounded-md border-ink-300 hover:border-ink-200 text-sm h-8 text-vanilla-400 hover:text-vanilla-200"
         >
           <z-icon size="small" icon="plus"></z-icon>
           <span class="leading-none">Add threshold</span>
@@ -60,10 +55,10 @@
     <div class="min-h-40">
       <z-chart
         v-if="chartData.labels.length"
-        ref="wrapper"
-        :key="namespace.is_passing"
-        class="flex-grow md:mx-auto"
         v-bind="chartData"
+        ref="wrapper"
+        class="flex-grow md:mx-auto"
+        :key="namespace.is_passing"
         :colors="namespace.is_passing === false ? ['cherry-500'] : ['robin-500']"
         :height="chartHeight"
         :type="chartType"
@@ -96,17 +91,17 @@
               size="small"
               class="mt-2"
               min="0"
-              :max="isNumberType ? null : 100"
-              @blur="validateThreshold"
               placeholder="New threshold value"
               type="number"
-              @debounceInput="validateThreshold"
               v-model="newThresholdValue"
+              :max="isNumberType ? null : 100"
+              @blur="validateThreshold"
+              @debounceInput="validateThreshold"
             ></z-input>
             <p v-if="thresholdInputError" class="text-xs text-cherry">
               {{ thresholdInputErrorMessage }}
             </p>
-            <div class="space-x-4 text-right text-vanilla-100 mt-4">
+            <div class="mt-4 space-x-4 text-right text-vanilla-100">
               <z-button
                 icon="check-circle"
                 class="modal-primary-action"
@@ -124,16 +119,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Inject, Watch } from 'nuxt-property-decorator'
-import {
-  ZChart,
-  ZIcon,
-  ZMenu,
-  ZMenuItem,
-  ZInput,
-  ZModal,
-  ZButton,
-  ZAnimatedInteger
-} from '@deepsourcelabs/zeal'
+import { ZChart, ZIcon, ZMenu, ZMenuItem, ZInput, ZModal, ZButton } from '@deepsourcelabs/zeal'
 import { Metrics, MetricsNamespace } from '~/store/repository/detail'
 import { formatIntl } from '@/utils/string'
 
@@ -141,6 +127,9 @@ import { RepositoryDetailActions } from '~/store/repository/detail'
 
 const NUMBER_TYPES = ['IDP', 'DDP']
 
+/**
+ * Chart component for the metrics page
+ */
 @Component({
   components: {
     ZChart,
@@ -149,8 +138,10 @@ const NUMBER_TYPES = ['IDP', 'DDP']
     ZMenuItem,
     ZInput,
     ZModal,
-    ZButton,
-    ZAnimatedInteger
+    ZButton
+  },
+  methods: {
+    formatIntl
   }
 })
 export default class GraphChart extends Vue {
@@ -189,8 +180,22 @@ export default class GraphChart extends Vue {
   public thresholdInputError: boolean = false
   public thresholdInputErrorMessage: string = ''
   public showThresholdUpdate: boolean = false
-  public formatIntl = formatIntl
 
+  /**
+   * Mounted hook to set the threshold values
+   * @return {any}
+   */
+  mounted() {
+    if (this.namespace?.threshold) {
+      this.newThresholdValue = this.namespace.threshold
+      this.currentThreshold = this.namespace.threshold
+    }
+  }
+
+  /**
+   * Update the threshold values when current namespace is changed
+   * @return {void}
+   */
   @Watch('namespace')
   updateNS(): void {
     if (this.namespace?.threshold) {
@@ -199,21 +204,18 @@ export default class GraphChart extends Vue {
     }
   }
 
-  get isNumberType(): boolean {
-    return NUMBER_TYPES.includes(this.shortcode)
-  }
-
-  validateThreshold() {
+  /**
+   * If the new threshold is not a correct value, set it to 100
+   * @return {void}
+   */
+  validateThreshold(): void {
     if (!this.isNumberType && this.newThresholdValue && this.newThresholdValue > 100) {
       this.newThresholdValue = 100
     }
   }
 
-  mounted() {
-    if (this.namespace?.threshold) {
-      this.newThresholdValue = this.namespace.threshold
-      this.currentThreshold = this.namespace.threshold
-    }
+  get isNumberType(): boolean {
+    return NUMBER_TYPES.includes(this.shortcode)
   }
 
   get axisOptions(): Record<string, string | boolean> {
@@ -222,6 +224,16 @@ export default class GraphChart extends Vue {
     }
   }
 
+  get trendValueForLegend(): string | number {
+    const val = this.namespace.trend.values[this.namespace.trend.values.length - 1]
+    return this.namespace.display.endsWith('%') && !this.isNumberType ? `${val}%` : val
+  }
+
+  /**
+   * Trigger GQL mutation to set the threshold value for the metric
+   * @param {number} value
+   * @return {Promise<void>}
+   */
   async setThreshold(value: number): Promise<void> {
     await this.$store.dispatch(
       `repository/detail/${RepositoryDetailActions.SET_METRIC_THRESHOLD}`,
@@ -240,6 +252,11 @@ export default class GraphChart extends Vue {
     await this.refetchData()
   }
 
+  /**
+   * Wrapper function for `setThreshold` that clears the modal
+   * @param {(} close
+   * @return {=> void): Promise<void>}
+   */
   async updateThreshold(close: () => void): Promise<void> {
     const newVal = Number(this.newThresholdValue)
     if (this.isNumberType || newVal <= 100) {
@@ -261,12 +278,12 @@ export default class GraphChart extends Vue {
     }
   }
 
+  /**
+   * Trigger GQL mutation to set the threshold to zero
+   * @return {void}
+   */
   deleteThreshold(): void {
     this.setThreshold(0)
-  }
-
-  formatPercentage(value: number): string {
-    return `${value}%`
   }
 }
 </script>

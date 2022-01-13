@@ -78,7 +78,7 @@
 </template>
 <script lang="ts">
 import { Component, Ref, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZAnimatedInteger, ZChart } from '@deepsourcelabs/zeal'
+import { ZButton, ZChart } from '@deepsourcelabs/zeal'
 import { parseISODate, formatDate } from '@/utils/date'
 import { formatIntl } from '@/utils/string'
 
@@ -104,7 +104,6 @@ interface ChartComponent extends Vue {
     GraphControl,
     GraphLegend,
     ZButton,
-    ZAnimatedInteger,
     ZChart
   }
 })

@@ -8,13 +8,10 @@
     @click="$emit('toggle')"
   >
     <div class="flex items-center space-x-2">
-      <div v-if="loading" class="h-10 my-2 w-15 bg-ink-300 rounded-md animate-pulse"></div>
-      <z-animated-integer
-        v-else-if="!Number.isNaN(value)"
-        class="text-2.5xl font-medium"
-        :format="shortenLargeNumber"
-        :value="value"
-      />
+      <div v-if="loading" class="h-10 my-2 rounded-md w-15 bg-ink-300 animate-pulse"></div>
+      <span v-else-if="!Number.isNaN(value)" class="text-2.5xl font-medium">
+        {{ shortenLargeNumber(value) }}
+      </span>
       <ticker
         v-if="showTrends && isFinite(trendValue)"
         :trendHint="trendHint"
@@ -33,7 +30,6 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZAnimatedInteger } from '@deepsourcelabs/zeal'
 import { shortenLargeNumber } from '@/utils/string'
 import Ticker from '@/components/Ticker.vue'
 
@@ -42,8 +38,10 @@ import Ticker from '@/components/Ticker.vue'
  */
 @Component({
   components: {
-    ZAnimatedInteger,
     Ticker
+  },
+  methods: {
+    shortenLargeNumber
   }
 })
 export default class GraphLegend extends Vue {
@@ -82,8 +80,6 @@ export default class GraphLegend extends Vue {
 
   @Prop({ default: false })
   loading: boolean
-
-  public shortenLargeNumber = shortenLargeNumber
 
   get tooltipText(): string {
     if (this.trendHint) {

@@ -83,30 +83,25 @@
                 ></label
               >
               <div class="flex-grow text-right">
-                <z-animated-integer
-                  :value="billingInfo.amountPayableThisCycle"
-                  :format="formatUSD"
-                ></z-animated-integer>
+                <span>{{ formatUSD(billingInfo.amountPayableThisCycle) }}</span>
               </div>
             </div>
             <div class="flex" v-if="coupon.isApplied">
               <label class="w-32 font-medium">Coupon Applied</label>
               <div class="flex-grow font-bold text-right text-juniper">
                 -
-                <z-animated-integer
-                  :value="coupon.currentCycleDiscount"
-                  :format="formatUSD"
-                ></z-animated-integer>
+                <span>
+                  {{ formatUSD(coupon.currentCycleDiscount) }}
+                </span>
               </div>
             </div>
             <div class="flex" v-if="credits.isApplied">
               <label class="w-32 font-medium">Credits Applied</label>
               <div class="flex-grow font-bold text-right">
                 -
-                <z-animated-integer
-                  :value="credits.currentCycleDiscount"
-                  :format="formatUSD"
-                ></z-animated-integer>
+                <span>
+                  {{ formatUSD(coupon.currentCycleDiscount) }}
+                </span>
               </div>
             </div>
             <z-divider color="ink-300" />
@@ -120,11 +115,9 @@
                 icon="spin-loader"
                 v-if="loading"
               ></z-icon>
-              <z-animated-integer
-                v-if="billingInfo.netPayableThisCycle !== null"
-                :value="billingInfo.netPayableThisCycle"
-                :format="formatUSD"
-              ></z-animated-integer>
+              <span v-if="billingInfo.netPayableThisCycle !== null">
+                {{ formatUSD(billingInfo.netPayableThisCycle) }}
+              </span>
             </div>
           </div>
           <z-divider color="ink-300" />
@@ -178,7 +171,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
-import { ZButton, ZIcon, ZDivider, ZInput, ZAnimatedInteger } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZDivider, ZInput } from '@deepsourcelabs/zeal'
 import SubscriptionMixin, { Plan } from '~/mixins/subscriptionMixin'
 import { formatUSD } from '~/utils/string'
 import { parseISODate, formatDate } from '~/utils/date'
@@ -187,6 +180,9 @@ import { TeamPerms } from '~/types/permTypes'
 import ContextMixin from '~/mixins/contextMixin'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
+/**
+ * Subscribe page for the user to subscribe to a plan
+ */
 @Component({
   components: {
     ZBreadcrumb,
@@ -194,8 +190,7 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
     ZButton,
     ZIcon,
     ZDivider,
-    ZInput,
-    ZAnimatedInteger
+    ZInput
   },
   middleware: ['teamOnly', 'perm'],
   methods: { formatUSD },
@@ -214,24 +209,39 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
   }
 })
 export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMixin, ContextMixin) {
-  private plan: Plan
-  private loading = false
-  private calculating = false
-  private couponCode = ''
-  private couponError = false
-  private couponLoading = false
+  plan: Plan
+  loading = false
+  calculating = false
+  couponCode = ''
+  couponError = false
+  couponLoading = false
 
+  /**
+   * Nuxt created hook, we just fetch he current plan from the route
+   * and get the plan details from `planDetails` object
+   * @return {any}
+   */
   created() {
     const { plan } = this.$route.params
     this.plan = this.planDetails[plan]
   }
 
+  /**
+   * Nuxt fetch hook, fetch the context, owner and calculate
+   * the pricing for the current configuration set by the user
+   * @return {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await this.fetchContext()
     await this.getOwner()
     await this.calculate()
   }
 
+  /**
+   * Update the billing cycle to either monthly or yearly
+   * @param {'yearly'|'monthly'} billingCycle
+   * @return {Promise<void>}
+   */
   async updateBillingCycle(billingCycle: 'yearly' | 'monthly'): Promise<void> {
     this.loading = true
     this.setPlan({ billingCycle })
@@ -239,6 +249,12 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
     this.loading = false
   }
 
+  /**
+   * Update the number of seats. This function also ensures that
+   * the number is between the limits for the plan
+   * @param {number} seats
+   * @return {Promise<void>}
+   */
   async updateSeatsInStore(seats: number): Promise<void> {
     this.loading = true
     seats = Number(seats)
@@ -247,14 +263,11 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
     this.loading = false
   }
 
-  get maxSeats(): number {
-    return this.context.plans[this.planSlug].max_seats
-  }
-
-  get minSeats(): number {
-    return this.context.plans[this.planSlug].min_seats
-  }
-
+  /**
+   * Trigger the billing info GQL mutation to get the billing details
+   * for the current configuration and plan
+   * @return {Promise<void>}
+   */
   async calculate(): Promise<void> {
     this.calculating = true
     await this.getBillingInfo({
@@ -267,6 +280,10 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
     this.calculating = false
   }
 
+  /**
+   * Method to fetch owner
+   * @return {Promise<void>}
+   */
   async getOwner(): Promise<void> {
     const { owner, provider } = this.$route.params
     await this.fetchOwnerDetails({
@@ -275,6 +292,10 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
     })
   }
 
+  /**
+   * Apply the coupon, trigger calculate and check if the coupon is applied or not
+   * @return {Promise<void>}
+   */
   async redeemCoupon(): Promise<void> {
     this.couponLoading = true
     await this.calculate()
@@ -291,6 +312,14 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
       return this.billingCycle === 'yearly' ? this.plan.planSlugAnnual : this.plan.planSlugMonthly
     }
     return ''
+  }
+
+  get maxSeats(): number {
+    return this.context.plans[this.planSlug].max_seats
+  }
+
+  get minSeats(): number {
+    return this.context.plans[this.planSlug].min_seats
   }
 
   get coupon(): CouponInfo | {} {

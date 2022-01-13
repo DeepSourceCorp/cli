@@ -13,7 +13,6 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 
 // Components
-import { ZAnimatedInteger } from '@deepsourcelabs/zeal'
 import { CodeQualityGraph } from '@/components/Graphs'
 import { AlertingMetricsSection } from '@/components/Metrics'
 import { TransformCard } from '@/components/History'
@@ -35,12 +34,14 @@ export interface Widget {
   trend_positive: boolean
 }
 
+/**
+ * Repo home page
+ */
 @Component({
   components: {
     AlertingMetricsSection,
     IssueOverviewCards,
     RecentRunsSection,
-    ZAnimatedInteger,
     CodeQualityGraph,
     TransformCard,
     AutofixListItem
@@ -48,6 +49,10 @@ export interface Widget {
   layout: 'repository'
 })
 export default class Overview extends mixins(RepoDetailMixin) {
+  /**
+   * Fetch hook to fetch all the basic details for a repository
+   * @return {Promise<void>}
+   */
   async fetch(): Promise<void> {
     try {
       await this.fetchBasicRepoDetails(this.baseRouteParams)
@@ -57,6 +62,10 @@ export default class Overview extends mixins(RepoDetailMixin) {
     }
   }
 
+  /**
+   * Head hook to add meta details to the page
+   * @return {Record<string, string>}
+   */
   head(): Record<string, string> {
     const { repo, owner } = this.$route.params
     return {
