@@ -1,13 +1,24 @@
 <template>
   <stat-section
-    title="Codebase report"
-    helpText="Overview of issues currently present"
-    :bodySpacing="0"
-    :gridSpacing="0"
-    spacingClass="p-0 gap-px"
+    :body-spacing="0"
+    :grid-spacing="0"
+    spacing-class="p-0 gap-px"
+    header-spacing-class="pl-4 pr-2 py-2"
     customGridClass="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
   >
-    <div slot="controls" class="flex justify-end">
+    <div slot="title" class="flex items-center justify-between">
+      <div class="flex items-center h-full space-x-2">
+        <span class="text-base font-semibold tracking-snug">Codebase report</span>
+        <z-icon
+          v-tooltip="{
+            content: 'Overview of issues currently present',
+            delay: { show: 0, hide: 100 }
+          }"
+          color="vanilla-400"
+          icon="help"
+          class="stroke-1.5 transition-opacity duration-75 flex-shrink-0"
+        />
+      </div>
       <z-button
         v-if="canCustomizeWidgets"
         button-type="secondary"
@@ -85,6 +96,7 @@ export interface Widget {
   trend_positive: boolean
 }
 
+/** Show the issue overview widgets for the repository*/
 @Component({
   components: {
     StatSection,
@@ -103,6 +115,13 @@ export interface Widget {
 export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAccessMixin) {
   public showCustomizeModal = false
 
+  /**
+   * Check if the trend is positive or not
+   *
+   * @param {Widget} widget
+   *
+   * @return {boolean | null}
+   */
   isTrendPositive(widget: Widget): boolean | null {
     if (!widget.trend_value) {
       return true
@@ -119,6 +138,11 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
     }
   }
 
+  /**
+   * Set the loader count in localstore the generate loading states the next time
+   *
+   * @return {void}
+   */
   @Watch('issueWidgets', { deep: true })
   setLoaderCount(): void {
     const { provider, owner, repo } = this.$route.params
@@ -132,14 +156,29 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
     }
   }
 
+  /**
+   * Vue mounted hook to set the repo-analysis event
+   *
+   * @return {void}
+   */
   mounted() {
     this.$socket.$on('repo-analysis-updated', this.refetchData)
   }
 
+  /**
+   * Vue beforeDestroy hook to remove the repo-analysis event
+   *
+   * @return {void}
+   */
   beforeDestroy() {
     this.$socket.$off('repo-analysis-updated', this.refetchData)
   }
 
+  /**
+   * Refetch the widget data
+   *
+   * @return {void}
+   */
   refetchData(): void {
     this.fetchWidgets({
       ...this.baseRouteParams,
@@ -147,11 +186,21 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
     })
   }
 
+  /**
+   * Close customize modal and refetch data
+   *
+   * @return {Promise<void>}
+   */
   async closeAndRefetchData(): Promise<void> {
     this.showCustomizeModal = false
     await this.refetchData()
   }
 
+  /**
+   * Fetch hook to get the widgets from the backend
+   *
+   * @return {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await this.fetchWidgets(this.baseRouteParams)
   }

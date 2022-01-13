@@ -12,10 +12,11 @@
         'md:gap-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5': fullWidth,
         'xl:gap-0 xl:grid-cols-2': !fullWidth,
         'border-b border-ink-200 px-4': showBorder,
-        'py-2': $slots.controls && showBorder,
-        'py-3': !$slots.controls && showBorder,
-        'pt-0 pb-2': $slots.controls && !showBorder,
-        'pt-0 pb-3': !$slots.controls && !showBorder
+        'py-2': $slots.controls && showBorder && !headerSpacingClass,
+        'py-3': !$slots.controls && showBorder && !headerSpacingClass,
+        'pt-0 pb-2': $slots.controls && !showBorder && !headerSpacingClass,
+        'pt-0 pb-3': !$slots.controls && !showBorder && !headerSpacingClass,
+        [headerSpacingClass]: headerSpacingClass
       }"
     >
       <div
@@ -27,7 +28,7 @@
       >
         <slot name="title">
           <div class="flex items-center h-full space-x-2">
-            <span class="font-semibold tracking-snug text-base">{{ title }}</span>
+            <span class="text-base font-semibold tracking-snug">{{ title }}</span>
             <z-icon
               v-if="helpText"
               icon="help"
@@ -76,6 +77,10 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
 
+/**
+ * A wrapper with a header to encapsulate
+ * multiple type of sections for the various pages
+ */
 @Component({
   components: {
     ZIcon
@@ -102,6 +107,9 @@ export default class StatSection extends Vue {
 
   @Prop({ default: null })
   spacingClass!: string
+
+  @Prop({ default: null })
+  headerSpacingClass!: string
 
   @Prop({ default: true })
   showBorder!: boolean
