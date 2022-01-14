@@ -2,7 +2,7 @@
   <div class="flex flex-col space-y-2">
     <div class="text-md text-vanilla-400">
       <span class="font-semibold text-vanilla-100">{{ eventDescription }}</span>
-      — {{ actor.fullName || actor.email }}
+      <template v-if="actorName"> — {{ actorName }} </template>
     </div>
     <div class="flex space-x-4">
       <info v-tooltip="formattedDate" v-if="createdAt" icon="clock" :title="formatDuration"></info>
@@ -47,6 +47,19 @@ export default class Log extends Vue {
     }
 
     return this.description
+  }
+
+  get actorName(): string {
+    if (this.actor?.fullName) {
+      return this.actor.fullName
+    }
+    if (this.actor?.firstName) {
+      return this.actor.firstName
+    }
+    if (this.actor?.email) {
+      return this.actor.email
+    }
+    return ''
   }
 
   get formattedDate(): string {

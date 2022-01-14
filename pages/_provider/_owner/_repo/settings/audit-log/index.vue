@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
-    <h2 class="text-lg font-medium mb-4">Audit log</h2>
+    <h2 class="mb-4 text-lg font-medium">Audit log</h2>
     <!-- Timeline -->
     <div v-if="$fetchState.pending" class="space-y-2">
       <div v-for="idx in 4" :key="idx" class="w-2/3 h-20 rounded-md bg-ink-300 animate-pulse"></div>
@@ -16,8 +16,11 @@
               :user-name="getName(log)"
               size="sm"
               class="flex-shrink-0"
-            ></z-avatar
-          ></template>
+            ></z-avatar>
+            <div v-else class="flex items-center justify-center w-6 h-6 rounded-full bg-ink-200">
+              <z-icon icon="circle" />
+            </div>
+          </template>
           <log v-bind="log"></log>
         </z-timeline-item>
       </z-timeline>
