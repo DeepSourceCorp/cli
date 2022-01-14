@@ -22,6 +22,7 @@ import RepositorySettingsReportingGQLQuery from '~/apollo/queries/repository/set
 import RepositorySettingsManageAccessGQLQuery from '~/apollo/queries/repository/settings/manageAccess.gql'
 import RepositorySettingsAuditLogGQLQuery from '~/apollo/queries/repository/settings/auditLog.gql'
 import RepositoryAddableMembersGQLQuery from '~/apollo/queries/repository/addableMembers.gql'
+import RepoStatusPollQuery from '~/apollo/queries/repository/statusPoll.gql'
 
 import ToggleRepositoryActivationMutation from '~/apollo/mutations/repository/toggleRepositoryActivation.gql'
 import CommitConfigToVcsGQLMutation from '~/apollo/mutations/repository/commitConfigToVcs.gql'
@@ -125,7 +126,8 @@ export enum RepositoryDetailActions {
   FETCH_ADDABLE_MEMBERS = 'fetchAddableMembers',
   UPDATE_REPO_WIDGETS = 'udateRepositoryWidgets',
   UPDATE_REPOSITORY_IN_STORE = 'updateRepositoryInStore',
-  TRIGGER_GSR_ACTIVATION = 'triggerGSRActivation'
+  TRIGGER_GSR_ACTIVATION = 'triggerGSRActivation',
+  POLL_REPO_STATUS = 'pollRepoStatus'
 }
 
 export enum RepositoryDetailMutations {
@@ -455,6 +457,16 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
     injectee: RepositoryDetailActionContext,
     args: ActivateGsrRepositoryInput
   ) => void
+  [RepositoryDetailActions.POLL_REPO_STATUS]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
+      refetch?: boolean
+    }
+  ) => Promise<void>
 }
 
 export const actions: RepositoryDetailModuleActions = {
@@ -1013,5 +1025,18 @@ export const actions: RepositoryDetailModuleActions = {
       input: args
     })
     return response.data.activateGsrRepository.ok
+  },
+  async [RepositoryDetailActions.POLL_REPO_STATUS]({ commit }, args) {
+    const { provider, owner, name, refetch = true } = args
+    const response = await this.$fetchGraphqlData(
+      RepoStatusPollQuery,
+      {
+        provider: this.$providerMetaMap[provider].value,
+        owner,
+        name
+      },
+      refetch
+    )
+    commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
   }
 }

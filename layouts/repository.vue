@@ -27,7 +27,9 @@
               OR if the page is loading
           -->
         <div
-          v-if="repository.name === $route.params.repo && repository.errorCode && !loading"
+          v-if="
+            repository.name === $route.params.repo && repository.errorCode && !$fetchState.pending
+          "
           class="px-4 pt-4"
         >
           <z-alert v-if="repository.errorCode === 3007" type="danger" :dismissible="true">
@@ -55,10 +57,10 @@
             <p class="font-medium" v-html="repository.renderedErrorMessage"></p>
           </z-alert>
         </div>
-        <Nuxt v-if="isAnalyzed || allowedOnBroken || loading" />
-
-        <!-- Check if the repository has been analyzed or no -->
-        <div class="p-5" v-else-if="repository.errorCode">
+        <!-- Check if the repository has been analyzed or not -->
+        <Nuxt v-if="isAnalyzed || allowedOnBroken || $fetchState.pending" />
+        <!-- If not analyzed and an error code is present -->
+        <div v-else-if="repository.errorCode" class="p-5">
           <repo-inactive
             v-if="repository.errorCode === 3001"
             :id="repository.id"
@@ -68,7 +70,8 @@
           />
           <repo-error v-else />
         </div>
-        <div class="p-5" v-else>
+        <!-- If not analyzed and has no error code -->
+        <div v-else class="p-5">
           <repo-empty v-if="!repoHasCode" />
           <repo-timeout
             v-else-if="hasLastRunTimedOut"
@@ -115,7 +118,7 @@ import InstallAutofixMixin from '~/mixins/installAutofixMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 /**
- * Component for the repository layout
+ * Layout file for `repository` views.
  */
 @Component({
   components: {
@@ -147,42 +150,43 @@ export default class RepositoryLayout extends mixins(
   PortalMixin,
   RoleAccessMixin
 ) {
-  public loading = false
+  private pollingId = 0
 
   /**
-   * Fetch hook
+   * Fetch hook for the repository layout.
+   * Fetches:
+   * - Base repo details
    *
-   * @returns {void}
+   * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    this.loading = true
     try {
       await this.fetchBasicRepoDetails(this.baseRouteParams)
     } catch (e) {
       this.$toast.danger('There was a problem loading this repository')
     }
-    this.loading = false
   }
 
   /**
-   * Refetch data on refetch and websocket events
+   * Refetches base repo details and widgets for a repository.
    *
-   * @returns {void}
+   * @returns {Promise<void>}
    */
-  refetchData() {
-    this.fetchBasicRepoDetails({
-      ...this.baseRouteParams,
-      refetch: true
-    })
-
-    this.fetchWidgets({
-      ...this.baseRouteParams,
-      refetch: true
-    })
+  async refetchData(): Promise<void> {
+    await Promise.all([
+      this.fetchBasicRepoDetails({
+        ...this.baseRouteParams,
+        refetch: true
+      }),
+      this.fetchWidgets({
+        ...this.baseRouteParams,
+        refetch: true
+      })
+    ])
   }
 
   /**
-   * Mounted hook for Vue component
+   * Mounted hook for repository layout, initializes handlers for socket events.
    *
    * @returns {void}
    */
@@ -194,7 +198,7 @@ export default class RepositoryLayout extends mixins(
   }
 
   /**
-   * BeforeDestroy hook for Vue component
+   * BeforeDestroy hook for repository layout, removes handlers for socket events.
    *
    * @returns {void}
    */
@@ -203,10 +207,11 @@ export default class RepositoryLayout extends mixins(
     this.$socket.$off('repo-config-committed', this.refetchData)
     this.$socket.$off('repo-config-updated', this.refetchData)
     this.$socket.$off('autofix-installation-complete', this.refetchData)
+    clearTimeout(this.pollingId)
   }
 
   /**
-   * Remove refetch events when repo route param changes
+   * Remove refetch events when repo route param changes.
    *
    * @returns {void}
    */
@@ -248,6 +253,50 @@ export default class RepositoryLayout extends mixins(
     })
 
     return matchResults.indexOf(true) > -1 ? true : false
+  }
+
+  get isRepoWaiting(): boolean {
+    return (
+      !this.isAnalyzed &&
+      !this.allowedOnBroken &&
+      this.$fetchState &&
+      !this.$fetchState.pending &&
+      !this.repository.errorCode &&
+      this.repoHasCode &&
+      !this.hasLastRunTimedOut
+    )
+  }
+
+  /**
+   * Watcher function to activate polling a repo if it's in waiting state.
+   * Triggers immediately!
+   *
+   * @param {boolean} newIsRepoWaiting
+   * @returns {Promise<void>}
+   */
+  @Watch('isRepoWaiting', { immediate: true })
+  triggerPoll(newIsRepoWaiting: boolean): void {
+    clearTimeout(this.pollingId)
+    if (newIsRepoWaiting) {
+      this.pollRepo()
+    }
+  }
+
+  /**
+   * Polling function that polls the status of a repo and keeps polling if the repo is in waiting state (first run).
+   *
+   * @returns {Promise<void>}
+   */
+  async pollRepo(): Promise<void> {
+    const POLLING_INTERVAL = 5000
+    if (process.client) {
+      this.pollingId = window.setTimeout(async () => {
+        await this.pollRepoStatus(this.baseRouteParams)
+        if (this.isRepoWaiting) {
+          this.pollRepo()
+        }
+      }, POLLING_INTERVAL)
+    }
   }
 }
 </script>

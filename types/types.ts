@@ -6833,7 +6833,7 @@ export type Unnamed_81_Query = (
     { __typename?: 'Changelog' }
     & { logEntries?: Maybe<Array<Maybe<(
       { __typename?: 'ChangelogItem' }
-      & Pick<ChangelogItem, 'id' | 'created' | 'publishedAt' | 'status' | 'url'>
+      & Pick<ChangelogItem, 'id' | 'title' | 'created' | 'publishedAt' | 'status' | 'url'>
       & { labels?: Maybe<Array<Maybe<(
         { __typename?: 'ChangelogItemLabel' }
         & Pick<ChangelogItemLabel, 'id' | 'name'>
@@ -9005,6 +9005,28 @@ export type Unnamed_151_Query = (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'TokenScope' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+);
+
+export type RepoStatusPollQueryQueryVariables = Exact<{
+  provider: VcsProviderChoices;
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type RepoStatusPollQueryQuery = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id' | 'errorCode' | 'defaultBranchName'>
+    & { lastRun?: Maybe<(
+      { __typename?: 'Run' }
+      & Pick<Run, 'id' | 'runId' | 'config' | 'commitOid' | 'branchRunCount' | 'status' | 'finishedAt'>
+    )>, latestAnalysisRun?: Maybe<(
+      { __typename?: 'Run' }
+      & Pick<Run, 'id' | 'runId' | 'config' | 'commitOid' | 'branchRunCount' | 'status' | 'finishedAt'>
+    )> }
+  )> }
 );
 
 export type RepositoryWidgetsQueryVariables = Exact<{

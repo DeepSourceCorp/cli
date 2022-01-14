@@ -1,0 +1,25 @@
+query RepoStatusPollQuery($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+  repository(provider: $provider, name: $name, owner: $owner) {
+    id
+    errorCode
+    defaultBranchName
+    lastRun {
+      id
+      runId
+      config
+      commitOid
+      branchRunCount
+      status
+      finishedAt
+    }
+    latestAnalysisRun {
+      id
+      runId
+      config
+      commitOid
+      branchRunCount
+      status
+      finishedAt
+    }
+  }
+}

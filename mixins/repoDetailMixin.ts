@@ -258,6 +258,14 @@ export default class RepoDetailMixin extends Vue {
   @repoStore.Action(RepositoryDetailActions.TRIGGER_GSR_ACTIVATION)
   triggerGSRActivation: (args: ActivateGsrRepositoryInput) => void
 
+  @repoStore.Action(RepositoryDetailActions.POLL_REPO_STATUS)
+  pollRepoStatus: (args: {
+    provider: string
+    owner: string
+    name: string
+    refetch?: boolean
+  }) => Promise<void>
+
   get baseRouteParams(): { name: string; provider: string; owner: string } {
     const { provider, owner, repo } = this.$route.params
     return {
