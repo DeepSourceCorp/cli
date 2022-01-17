@@ -3,11 +3,11 @@
     <hero-header
       title="Directory"
       class="directory-hero"
-      subtitle="Documentation, links, and a smart search experience for all our Analyzers and Transformers."
+      subtitle="Discover Analyzers and Transformers for your favorite technologies."
     >
       <z-input
         size="large"
-        placeholder="Look up a programming language or linter..."
+        placeholder="Search programming languages or linters..."
         background-color="ink-300"
         :show-border="false"
         :value="searchTerm"
@@ -18,7 +18,6 @@
       </z-input>
     </hero-header>
     <section class="px-4">
-      <!-- <h2 class="text-2xl font-semibold text-vanilla-400">Analyzers</h2> -->
       <div class="flex items-center space-x-3">
         <h2 class="flex-shrink-0 font-medium tracking-wider uppercase text-vanilla-400">
           Analyzers
@@ -119,8 +118,7 @@ export default class AnalyzersDirectory extends mixins(MetaMixin) {
 
   created() {
     this.metaTitle = `Directory • DeepSource`
-    this.metaDescription =
-      'Documentation, links, and a smart search experience for all our Analyzers and Transformers.'
+    this.metaDescription = 'Discover Analyzers and Transformers for your favorite technologies.'
     this.metaImage = require('~/assets/images/analyzer-dir/directory_meta_banner.png')
     this.metaImageAlt =
       'An image with the text DeepSource | Directory with logos of Python, JavaScript, Ruby, Docker, Go, Prettier and Black in the background indicating that our analyzers support them.'

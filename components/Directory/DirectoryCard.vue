@@ -6,7 +6,7 @@
         ? `/directory/analyzers/${infoObj.shortcode}`
         : `/directory/transformers/${infoObj.shortcode}`
     "
-    class="flex flex-col p-4 border rounded-md border-ink-200 min-h-60"
+    class="flex flex-col p-4 border rounded-md border-ink-200 min-h-48"
     :class="{ 'hover:bg-ink-300 hover:cursor-pointer': infoObj.shortcode }"
   >
     <div class="flex justify-between space-x-2">
@@ -28,15 +28,13 @@
     </h6>
     <div v-if="infoObj.owner" class="text-xs text-vanilla-400">By {{ infoObj.owner }}</div>
     <div v-else class="h-5"></div>
-    <p class="mt-2 text-xs prose" v-html="infoObj.descriptionRendered"></p>
-    <div class="flex-grow"></div>
     <div v-if="isAnalyzer" class="flex mt-4">
-      <div class="w-20">
-        <div class="text-xs text-vanilla-400">Total issues</div>
+      <div class="flex-auto">
+        <div class="text-xs text-vanilla-400">Issues</div>
         <div class="text-lg">{{ infoObj.issuesCount }}</div>
       </div>
-      <div v-if="infoObj.autofixableIssuesCount">
-        <div class="text-xs text-vanilla-400">Autofix issues</div>
+      <div v-if="infoObj.autofixableIssuesCount" class="flex-auto">
+        <div class="text-xs text-vanilla-400">Autofix</div>
         <div class="text-lg">{{ infoObj.autofixableIssuesCount }}</div>
       </div>
     </div>

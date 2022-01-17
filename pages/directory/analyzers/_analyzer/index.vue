@@ -37,12 +37,12 @@
       <div class="grid max-w-4xl grid-cols-1 lg:grid-cols-3 min-h-28 auto-rows-min gap-y-6">
         <div class="grid grid-cols-2 lg:grid-cols-1">
           <div>
-            <p class="text-vanilla-400">Total issues</p>
+            <p class="text-vanilla-400">Issues</p>
             <p v-if="isPartiallyLoaded" class="text-1.5xl">{{ analyzer.issuesCount }}</p>
             <div v-else class="h-8 w-17 bg-ink-300 animate-pulse"></div>
           </div>
           <div>
-            <p class="text-vanilla-400 lg:mt-7">Autofix issues</p>
+            <p class="text-vanilla-400 lg:mt-7">Autofix</p>
             <p v-if="isPartiallyLoaded" class="text-1.5xl">
               {{ analyzer.autofixableIssuesCount }}
             </p>
@@ -64,7 +64,7 @@
             rel="noopener noreferrer"
             class="flex items-center mt-5 text-sm text-vanilla-400 hover:underline focus:underline"
           >
-            <span>Read the documentation and full reference</span>
+            <span>Read full documentation</span>
             <z-icon icon="arrow-up-right" color="vanilla-400" class="ml-0.5" />
           </a>
         </div>
