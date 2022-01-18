@@ -52,7 +52,7 @@
           <z-tab
             :isActive="$route.path === getRoute('ignore-rules')"
             border-active-color="vanilla-400"
-            >Ignore Rules</z-tab
+            >Ignore rules</z-tab
           >
         </nuxt-link>
       </div>

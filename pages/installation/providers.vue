@@ -1,10 +1,12 @@
 <template>
   <hero-card>
     <h1 class="text-vanilla-100 font-bold text-2xl leading-snug">
-      Connect a new account with DeepSource
+      Create a new DeepSource workspace
     </h1>
-    <p class="text-vanilla-400 text-base mt-4">Connect your team or personal workspace.</p>
-    <div class="flex flex-col items-center mt-10 space-y-4">
+    <p class="text-vanilla-400 text-base mt-2">
+      You can connect an existing personal or organization account.
+    </p>
+    <div class="flex flex-col items-center mt-6 space-y-4">
       <a
         v-for="opt in loginOptions"
         :key="opt.provider"
@@ -12,19 +14,7 @@
         class="w-full flex items-center left-section__btn"
       >
         <button
-          class="
-            p-2
-            text-vanilla-100
-            w-full
-            space-x-2
-            flex
-            items-center
-            font-medium
-            text-base
-            rounded-sm
-            justify-center
-            hover:bg-opacity-90
-          "
+          class="p-2 text-vanilla-100 w-full space-x-2 flex items-center font-medium text-base rounded-sm justify-center hover:bg-opacity-90"
           :class="opt.bg"
         >
           <z-icon :icon="opt.icon" size="base" />
@@ -32,7 +22,7 @@
         </button>
       </a>
     </div>
-    <p v-if="!$config.onPrem" class="text-vanilla-100 text-base mt-6">
+    <p v-if="!$config.onPrem && viewer.availableCredits" class="text-vanilla-100 text-base mt-6">
       You have
       <span
         class="inline"
@@ -49,7 +39,7 @@
         :href="`mailto:${$config.supportEmail}`"
         class="text-juniper hover:underline cursor-pointer"
         >{{ $config.supportEmail }}</a
-      >
+      >.
     </p>
   </hero-card>
 </template>
@@ -60,6 +50,7 @@ import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import AuthMixin from '~/mixins/authMixin'
+import MetaMixin from '~/mixins/metaMixin'
 
 @Component({
   components: {
@@ -73,7 +64,16 @@ import AuthMixin from '~/mixins/authMixin'
     }
   }
 })
-export default class InstallationProvider extends mixins(ContextMixin, ActiveUserMixin, AuthMixin) {
+export default class InstallationProvider extends mixins(
+  ContextMixin,
+  ActiveUserMixin,
+  AuthMixin,
+  MetaMixin
+) {
+  created() {
+    this.metaTitle = `Create new workspace • DeepSource`
+  }
+
   async fetch(): Promise<void> {
     await Promise.all([
       this.fetchContext(),

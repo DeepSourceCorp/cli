@@ -59,8 +59,8 @@
     >
       <empty-state
         v-if="issueList.totalCount === 0"
-        title="No issues in this category"
-        :subtitle="`There are no issues, a developer asked &quot;Is this a dream?&quot;`"
+        title="No issues found"
+        :subtitle="`That's a good thing, right?!`"
         class="border border-2 border-dashed rounded-lg border-ink-200 py-15"
       >
       </empty-state>

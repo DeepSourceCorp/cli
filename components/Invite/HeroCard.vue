@@ -1,7 +1,7 @@
 <template>
   <main class="relative flex flex-col min-h-screen">
     <img
-      class="w-auto h-6 mx-auto my-5"
+      class="w-auto h-6 mx-auto mt-12 md:mt-24"
       src="~/assets/images/logo-wordmark-white.svg"
       alt="DeepSource"
     />
@@ -18,30 +18,11 @@
         <div class="relative" :class="{ [customClass]: customClass }">
           <div
             v-if="showGlow"
-            class="
-              absolute
-              inset-0
-              scale-95
-              rounded-md
-              glow
-              opacity-40
-              no-filter:bg-opacity-80
-              transform-gpu
-            "
+            class="absolute inset-0 scale-95 rounded-md glow opacity-40 no-filter:bg-opacity-80 transform-gpu"
           ></div>
           <div
             v-if="show"
-            class="
-              p-6
-              mx-2
-              border
-              rounded-lg
-              bg-ink-400 bg-opacity-40
-              blur
-              border-ink-100
-              transform-gpu
-              sm:p-10 sm:mx-0
-            "
+            class="p-6 mx-2 border rounded-lg bg-ink-400 bg-opacity-40 blur border-ink-100 transform-gpu sm:p-10 sm:mx-0"
             :class="{
               'max-w-sm': width === 'sm',
               'max-w-md': width === 'md',
