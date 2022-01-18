@@ -2,7 +2,7 @@
   <div class="grid grid-cols-1 lg:grid-cols-16-fr pb-16 lg:pb-0">
     <!-- Analyzer Tab -->
     <div
-      class="z-20 flex flex-col justify-between py-2 pl-2 pr-4 space-y-2 border-b lg:flex-row lg:h-12 lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full"
+      class="z-20 flex flex-col justify-between py-2 pl-2 pr-4 space-y-2 border-b lg:flex-row lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full analyzer-tab"
     >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"
@@ -32,7 +32,8 @@
       />
       <issue-category-selector
         :selected-category="queryParams.category"
-        class="sticky top-36 category-sidebar"
+        class="sticky category-sidebar"
+        style="top: 147px"
         @updateCategory="updateCategory"
       >
         <template v-slot:cta v-if="repository.errorCode === 3003 && hasRepoReadAccess">
@@ -132,6 +133,9 @@ export interface IssueListFilters {
   all?: boolean
 }
 
+/**
+ * Class for `Issues` page. Lists the issues reported for the repository under various categories.
+ */
 @Component({
   components: {
     ZTag,
@@ -162,11 +166,23 @@ export default class Issues extends mixins(
   public autofixIssue: Record<string, string | Array<string>> = {}
   public issuesLoading = false
 
+  /**
+   * Function to update category query param based on the new value received
+   *
+   * @param {string} newVal
+   * @returns {void}
+   */
   updateCategory(newVal: string): void {
     this.queryParams.category = newVal
     this.queryParams.page = 1
   }
 
+  /**
+   * Function to update analyzer query param based on the new value received
+   *
+   * @param {string} newVal
+   * @returns {void}
+   */
   updateAnalyzer(newVal: string): void {
     this.queryParams.analyzer = newVal
     this.queryParams.page = 1
@@ -195,6 +211,11 @@ export default class Issues extends mixins(
     return parsed
   }
 
+  /**
+   * The fetch hook
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     this.issuesLoading = true
     await Promise.all([this.fetchRepoDetailsLocal(), this.fetchRepoPerms(this.baseRouteParams)])
@@ -207,6 +228,11 @@ export default class Issues extends mixins(
     this.issuesLoading = false
   }
 
+  /**
+   * Initialize query params
+   *
+   * @returns {void}
+   */
   initializeQueryParams(): void {
     if (this.repository.errorCode && this.repository.errorCode !== 3003) {
       this.queryParams = {}
@@ -226,11 +252,22 @@ export default class Issues extends mixins(
     }
   }
 
+  /**
+   * Fetch repo details followed by initializing query params
+   *
+   * @returns {Promise<void>}
+   */
   async fetchRepoDetailsLocal() {
     await this.fetchRepoDetails(this.baseRouteParams)
     this.initializeQueryParams()
   }
 
+  /**
+   * Fetch issue list and type distribution info
+   *
+   * @param {boolean} [refetch=false]
+   * @returns {Promise<void>}
+   */
   async fetchIssuesForOwner(refetch = false): Promise<void> {
     const { q, page, sort, analyzer, autofixAvailable } = this.parsedParams
     await this.fetchIssueTypeDistribution({
@@ -271,15 +308,30 @@ export default class Issues extends mixins(
     })
   }
 
+  /**
+   * Refetch issues on websocket event
+   *
+   * @returns {Promise<void>}
+   */
   refetchIssues(): void {
     this.fetchIssuesForOwner(true)
   }
 
+  /**
+   * Refetch repo details on websocket event
+   *
+   * @returns {Promise<void>}
+   */
   async refetchRepoDetails(): Promise<void> {
     await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
     this.initializeQueryParams()
   }
 
+  /**
+   * Mounted hook for the page
+   *
+   * @returns {void}
+   */
   mounted(): void {
     this.$root.$on('refetchCheck', this.refetchIssues)
     this.$root.$on('repo-activation-triggered', this.refetchRepoDetails)
@@ -287,6 +339,11 @@ export default class Issues extends mixins(
     this.$socket.$on('autofixrun-fixes-ready', this.refetchIssues)
   }
 
+  /**
+   * BeforeDestroy hook for the page
+   *
+   * @returns {void}
+   */
   beforeDestroy(): void {
     this.$root.$off('refetchCheck', this.refetchIssues)
     this.$root.$off('repo-activation-triggered', this.refetchRepoDetails)
@@ -294,11 +351,22 @@ export default class Issues extends mixins(
     this.$socket.$off('autofixrun-fixes-ready', this.refetchIssues)
   }
 
+  /**
+   * Function to open Autofix modal on the autofix event
+   *
+   * @param {issue: Record<string, string | Array<string>>} issue
+   * @returns {void}
+   */
   public openAutofixModal(issue: Record<string, string | Array<string>>): void {
     this.autofixIssue = { ...issue }
     this.isAutofixOpen = true
   }
 
+  /**
+   * Function to open Upgrade account modal on the runQuotaExhausted event
+   *
+   * @returns {void}
+   */
   public openUpgradeAccountModal() {
     this.isAutofixOpen = false
     this.isUpgradeAccountModalOpen = true
@@ -320,10 +388,21 @@ export default class Issues extends mixins(
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
   }
 
+  /**
+   * Function to construct an array with the nodes alone
+   *
+   * @param {RepositoryIssueConnection} conn
+   * @returns {RepositoryIssue[]}
+   */
   resolveIssueNodes(conn: RepositoryIssueConnection) {
     return resolveNodes(conn) as RepositoryIssue[]
   }
 
+  /**
+   * The head method to set the HTML Head tags for issues page
+   *
+   * @returns {Record<string, string>}
+   */
   head(): Record<string, string> {
     const { repo, owner } = this.$route.params
     return {
@@ -336,6 +415,6 @@ export default class Issues extends mixins(
 </script>
 <style scoped>
 .category-sidebar {
-  height: calc(100vh - 144px);
+  height: calc(100vh - 147px);
 }
 </style>
