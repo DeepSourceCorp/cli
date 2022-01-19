@@ -1,9 +1,9 @@
 <template>
   <div>
-    <sub-nav v-if="transformersAllowed" active="runs"></sub-nav>
+    <sub-nav v-if="transformersAllowed" active="runs" />
     <!-- Back to Run List Page -->
     <div class="flex flex-col w-full px-4 py-6 space-y-2">
-      <link-to-prev :link="routeToPrevious" title="All analysis runs"></link-to-prev>
+      <link-to-prev :link="routeToPrevious" title="All analysis runs" />
       <!-- Details Header -->
       <div class="w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly">
         <gist-card-title
@@ -56,6 +56,12 @@ import { GistCardDescription, GistCardTitle } from '@/components/Repository'
 import { Check, RunStatus } from '~/types/types'
 import { AppFeatures } from '~/types/permTypes'
 
+/**
+ * Nav header component for run details page. Lists:
+ *
+ * - Information about run like branch name, PR, commits, time taken and time created.
+ * - Tabs for switching between analyzer checks in a run.
+ */
 @Component({
   components: {
     ZTab,
@@ -149,8 +155,18 @@ export default class RunHeader extends Vue {
     return this.$gateKeeper.provider(AppFeatures.TRANSFORMS, provider)
   }
 
-  getRoute(lang: string): string {
-    const path = ['run', this.$route.params.runId, lang]
+  get transformersAllowed(): boolean {
+    return this.$route.params.provider !== 'gsr'
+  }
+
+  /**
+   * Get route for a given analyzer shortcode.
+   *
+   * @param {string} shortcode Shortcode of an analyzer
+   * @returns {string} Route to given analyzer's check
+   */
+  getRoute(shortcode: string): string {
+    const path = ['run', this.$route.params.runId, shortcode]
     return this.$generateRoute(path)
   }
 }

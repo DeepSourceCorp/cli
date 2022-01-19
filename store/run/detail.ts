@@ -105,6 +105,7 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
       owner: string
       name: string
       runId: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [RunDetailActions.FETCH_CHECK]: (
@@ -172,12 +173,16 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
 export const actions: RunDetailModuleActions = {
   async [RunDetailActions.FETCH_RUN]({ commit }, args) {
     commit(RunDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryRunGQLQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name,
-      runId: args.runId
-    })
+    await this.$fetchGraphqlData(
+      RepositoryRunGQLQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name,
+        runId: args.runId
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         commit(RunDetailMutations.SET_RUN, response.data.repository?.run)
         commit(RunDetailMutations.SET_LOADING, false)

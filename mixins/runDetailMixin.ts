@@ -13,6 +13,9 @@ import { RunDetailActions } from '@/store/run/detail'
 
 const runDetailStore = namespace('run/detail')
 
+/**
+ * Mixin for adding store actions and states related to a run to a component.
+ */
 @Component
 export default class RunDetailMixin extends Vue {
   @runDetailStore.State
@@ -39,6 +42,7 @@ export default class RunDetailMixin extends Vue {
     owner: string
     name: string
     runId: string
+    refetch?: boolean
   }) => Promise<void>
 
   @runDetailStore.Action(RunDetailActions.FETCH_CHECK)

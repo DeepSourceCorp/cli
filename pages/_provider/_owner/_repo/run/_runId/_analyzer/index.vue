@@ -41,7 +41,7 @@
 </template>
 
 <script lang="ts">
-import { Component, namespace, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 
 // Import State & Types
 import { Maybe, Check, CheckEdge } from '~/types/types'
@@ -51,6 +51,9 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 
+/**
+ * Page that provides detailed information about generated issues for a specific analyzer run.
+ */
 @Component({
   components: {
     AnalyzerRun,
@@ -63,6 +66,11 @@ export default class AnalyzerDetails extends mixins(
   RoleAccessMixin,
   RunDetailMixin
 ) {
+  /**
+   * Fetch hook for the page.
+   *
+   * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
+   */
   async fetch(): Promise<void> {
     await this.fetchRepoPerms(this.baseRouteParams)
     await this.fetchCurrentRun()
@@ -70,6 +78,12 @@ export default class AnalyzerDetails extends mixins(
     await this.fetchIssues()
   }
 
+  /**
+   * Network only refetch of details of a check and its issues.
+   *
+   * @param {string} checkId `id` of the check whose details are to be refetched.
+   * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
+   */
   async refetchCheck(checkId: string): Promise<void> {
     if (this.currentCheck?.id === checkId) {
       await this.fetchCheck({ checkId: this.currentCheck.id, refetch: true })
@@ -77,28 +91,72 @@ export default class AnalyzerDetails extends mixins(
     }
   }
 
+  /**
+   * Network only refetch of details of a run, specifed check and its issues.
+   *
+   * @param {{run_id: string, check_id?: string}} websocketData Object containing `run_id` and `check_id` of the checks that are completed.
+   * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
+   */
+  async refetchRunAndCheck({
+    run_id,
+    check_id
+  }: {
+    run_id: string
+    check_id?: string
+  }): Promise<void> {
+    if (this.$route.params.runId === run_id) {
+      Promise.all([
+        this.fetchCurrentRun(true),
+        this.refetchCheck(check_id || this.currentCheck?.id)
+      ])
+    }
+  }
+
+  /**
+   * Mounted lifecycle hook for the page. Binds event bus and socket event listeners.
+   *
+   * @returns {void}
+   */
   mounted(): void {
     this.$root.$on('refetchCheck', this.refetchCheck)
-    this.$socket.$on('repo-analysis-updated', this.refetchCheck)
-    this.$socket.$on('autofixrun-fixes-ready', this.refetchCheck)
+    this.$socket.$on('repo-analysis-updated', this.refetchRunAndCheck)
+    this.$socket.$on('autofixrun-fixes-ready', this.refetchRunAndCheck)
   }
 
+  /**
+   * BeforeDestroy lifecycle hook for the page. Unbinds event bus and socket event listeners.
+   *
+   * @returns {void}
+   */
   beforeDestroy(): void {
-    this.$root.$on('refetchCheck', this.refetchCheck)
-    this.$socket.$on('repo-analysis-updated', this.refetchCheck)
-    this.$socket.$on('autofixrun-fixes-ready', this.refetchCheck)
+    this.$root.$off('refetchCheck', this.refetchCheck)
+    this.$socket.$off('repo-analysis-updated', this.refetchRunAndCheck)
+    this.$socket.$off('autofixrun-fixes-ready', this.refetchRunAndCheck)
   }
 
-  async fetchCurrentRun(): Promise<void> {
+  /**
+   * Fetch of details of the current page's run.
+   *
+   * @param {boolean} refetch Whether to refetch data from server or use cache. Has a default value of **false**.
+   * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
+   */
+  async fetchCurrentRun(refetch = false): Promise<void> {
     const { runId, repo, owner, provider } = this.$route.params
     return this.fetchRun({
       provider,
       owner,
       name: repo,
-      runId
+      runId,
+      refetch
     })
   }
 
+  /**
+   * Fetch a list of maximum 30 concrete issues for a given check.
+   *
+   * @param {boolean} refetch Whether to refetch data from server or use cache. Has a default value of **false**.
+   * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
+   */
   async fetchIssues(refetch = false): Promise<void> {
     await this.fetchConcreteIssueList({
       checkId: this.check.id,
@@ -135,6 +193,11 @@ export default class AnalyzerDetails extends mixins(
     return this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)
   }
 
+  /**
+   * Function that returns `head` property to configure page metadata.
+   *
+   * @returns {Record<string, string>} A record containing meta properties against their values.
+   */
   head(): Record<string, string> {
     const { owner, repo } = this.$route.params
     let title = ''
