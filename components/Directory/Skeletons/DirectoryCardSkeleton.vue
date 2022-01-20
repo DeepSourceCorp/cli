@@ -12,7 +12,6 @@
       <div class="h-6 w-52 bg-ink-300 animate-pulse"></div>
     </h6>
     <div class="h-4 w-23 bg-ink-300 animate-pulse mt-1.5"></div>
-    <div class="h-24 w-full bg-ink-300 animate-pulse mt-3"></div>
     <div class="flex-grow"></div>
     <div v-if="isAnalyzer" class="flex mt-4">
       <div class="w-17 mr-2 h-9 bg-ink-300 animate-pulse"></div>

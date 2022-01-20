@@ -1,6 +1,6 @@
 <template>
   <z-modal width="custom" title="Customize overview widgets" @onClose="$emit('close')">
-    <section class="p-4 space-y-2 overflow-y-scroll sm:w-98 md:h-98 hide-scroll">
+    <section class="p-4 space-y-2 overflow-y-auto sm:w-98 max-h-98 md:h-98 hide-scroll">
       <z-input
         v-model="searchCandidate"
         class="flex-grow mb-4"
@@ -9,7 +9,9 @@
         background-color="ink-200"
         placeholder="Search for a widget..."
       >
-        <template slot="left"> <z-icon icon="search" size="small" class="ml-1.5" /> </template>
+        <template slot="left">
+          <z-icon icon="search" size="small" class="ml-1.5" />
+        </template>
       </z-input>
       <draggable
         v-show="enabledWidgetsSearchResults.length"
@@ -53,17 +55,7 @@
     </section>
     <template v-slot:footer="{ close }">
       <div
-        class="
-          flex
-          items-center
-          justify-between
-          px-4
-          py-3
-          space-x-4
-          border-t
-          text-vanilla-100
-          border-ink-200
-        "
+        class="flex items-center justify-between px-4 py-3 space-x-4 border-t text-vanilla-100 border-ink-200"
       >
         <span v-if="enabledWidgets.length < MIN_WIDGETS" class="text-xs font-medium text-honey">
           You need to select at least {{ MIN_WIDGETS }} widgets
