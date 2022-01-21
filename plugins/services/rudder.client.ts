@@ -1,31 +1,29 @@
-import { Inject, Context } from '@nuxt/types/app'
+import { Context, Inject } from '@nuxt/types/app'
+import * as rudderAnalytics from 'rudder-sdk-js'
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $rudderTrack: (candidate: string) => string
+    $rudder: typeof rudderAnalytics
   }
 }
 
-declare global {
-  interface Window {
-    rudderanalytics: {
-      track: (event: string, data: Record<string, unknown>) => void
-    }
-    baseTrackingInfo: Record<string, unknown>
+declare module '@nuxt/types' {
+  interface Context {
+    $rudder: typeof rudderAnalytics
   }
 }
 
+/**
+ * Implement Rudder JS SDK as a Nuxt.js plugin
+ *
+ * @param {Context} context
+ * @param {Inject} inject
+ * @returns {void}
+ */
 export default (context: Context, inject: Inject): void => {
-  inject('rudderTrack', (event: string, data: Record<string, unknown>) => {
-    try {
-      if (window.rudderanalytics && !context.$config.onPrem) {
-        window.rudderanalytics.track(event, {
-          ...window.baseTrackingInfo,
-          ...data
-        })
-      }
-    } catch (err) {
-      // do nothing
-    }
-  })
+  const { $config } = context
+
+  inject('rudder', rudderAnalytics)
+
+  rudderAnalytics.load($config.rudderWriteKey, $config.rudderDataPlaneUrl)
 }

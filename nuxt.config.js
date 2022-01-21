@@ -73,7 +73,9 @@ export default {
       ? 'enterprise-support@deepsource.io'
       : 'support@deepsource.io',
     discoverEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.IS_DISCOVER_ENABLED) : true,
-    domain: process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io'
+    domain: process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io',
+    rudderWriteKey: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_WRITE_KEY,
+    rudderDataPlaneUrl: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_DATA_PLANE_URL
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -114,7 +116,6 @@ export default {
 
   extendPlugins(plugins) {
     const services = [
-      '~/plugins/services/rudderLoader.client.js',
       '~/plugins/services/plausibleLoader.client.js',
       '~/plugins/services/rudder.client.ts',
       '~/plugins/services/intercom.client.js',

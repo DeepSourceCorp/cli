@@ -14459,6 +14459,11 @@ rsvp@^4.8.4:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
 
+rudder-sdk-js@^1.2.20:
+  version "1.2.20"
+  resolved "https://registry.yarnpkg.com/rudder-sdk-js/-/rudder-sdk-js-1.2.20.tgz#f647cca8604666e4ec0cc0b0f2c04d65531efeaf"
+  integrity sha512-YNaSvxZ1N6MDjItBjEJoIMF+TQVbOFfcKnsj9HDIrrqjDy7wmWkg9oatvo+PQ8AARrw1aMu17gi4hSTQ9yM8OQ==
+
 run-async@^2.4.0:
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-2.4.1.tgz#8440eccf99ea3e70bd409d49aab88e10c189a455"
