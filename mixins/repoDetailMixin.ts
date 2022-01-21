@@ -38,6 +38,9 @@ export const REPO_PERMS = {
   }
 }
 
+/**
+ * Repo Detail Mixin, this hosts all the APIs as methods
+ */
 @Component
 export default class RepoDetailMixin extends Vue {
   @repoStore.State
@@ -265,6 +268,9 @@ export default class RepoDetailMixin extends Vue {
     name: string
     refetch?: boolean
   }) => Promise<void>
+
+  @repoStore.Action(RepositoryDetailActions.TRIGGER_ADHOC_RUN)
+  triggerAdHocRun: (args: { config: string }) => void
 
   get baseRouteParams(): { name: string; provider: string; owner: string } {
     const { provider, owner, repo } = this.$route.params

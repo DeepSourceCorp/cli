@@ -1,9 +1,13 @@
 <template>
   <div class="box-content relative z-20" v-outside-click="outsideClickHandler">
     <z-input
-      v-model="searchCandidate"
-      class="flex-grow p-2"
       v-if="!disabled"
+      v-model="searchCandidate"
+      class="flex-grow p-2 rounded-md"
+      icon-position="left"
+      spacing="tight"
+      background-color="ink-300"
+      :show-border="false"
       :disabled="isProcessing"
       @click="toggleAnalyzerList"
       @focus="toggleAnalyzerList"
@@ -20,27 +24,18 @@
     </z-input>
     <div
       v-if="searchCandidate || showAnalyzerList || toggleSearch"
-      class="absolute inline-block w-full mt-1 shadow-lg"
+      class="absolute inline-block w-full mt-1 shadow-double-dark"
       :class="dropdownBgClass"
     >
       <ul v-if="searchAnalyzers.length" class="grid grid-cols-3 gap-2 p-2">
         <li
           v-for="analyzer in searchAnalyzers"
           :key="analyzer.name"
-          @click="addAnalyzer(analyzer)"
-          class="
-            flex
-            items-center
-            justify-between
-            px-2
-            py-2
-            rounded-md
-            cursor-pointer
-            bg-ink-400
-            hover:bg-ink-200
-          "
+          @click="toggleAnalyzer(analyzer)"
+          class="flex items-center justify-between px-2 py-2 rounded-md cursor-pointer hover:bg-ink-200"
+          :class="selectedAnalyzers.includes(analyzer.name) ? 'bg-ink-200' : 'bg-ink-400'"
         >
-          <span class="flex items-center space-x-2">
+          <span class="flex items-center w-full space-x-2">
             <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
             <span>{{ analyzer.label }}</span>
             <z-tag
@@ -52,8 +47,11 @@
               >Beta</z-tag
             >
           </span>
-          <span>
-            <z-icon icon="plus" color="juniper" size="small" />
+          <span
+            v-show="selectedAnalyzers.includes(analyzer.name)"
+            class="flex items-center justify-center p-0.5 rounded-full"
+          >
+            <z-icon icon="check" size="small" class="stroke-2" color="vanilla-100" />
           </span>
         </li>
       </ul>
@@ -103,25 +101,48 @@ export default class AnalyzerSearch extends mixins(AnalyzerListMixin) {
   @Prop({ default: false })
   isProcessing: boolean
 
+  @Prop({ default: false })
+  showSelectedAnalyzers: boolean
+
   private searchCandidate = ''
   private showAnalyzerList = false
 
+  /**
+   * Fetch hook for analyzer search, this fetches list of all analyzers
+   *
+   * @return {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await this.fetchAnalyzers()
   }
 
-  addAnalyzer(analyzer: AnalyzerInterface) {
-    this.$emit('addAnalyzer', analyzer)
+  /**
+   * trigger the add analyzers event
+   * and close the search if specified so
+   *
+   * @param {AnalyzerInterface} analyzer
+   *
+   * @return {any}
+   */
+  toggleAnalyzer(analyzer: AnalyzerInterface) {
+    if (this.selectedAnalyzers.includes(analyzer.name)) {
+      this.$emit('removeAnalyzer', analyzer)
+    } else {
+      this.$emit('addAnalyzer', analyzer)
+    }
+
     if (this.closeOnAdd) {
       this.showAnalyzerList = false
     }
+
     this.searchCandidate = ''
   }
 
   get searchAnalyzers(): AnalyzerInterface[] {
-    const analyzersNotYetSelected = this.analyzerList.filter(
-      (config) => !this.selectedAnalyzers.includes(config.name)
-    )
+    const analyzersNotYetSelected = this.showSelectedAnalyzers
+      ? this.analyzerList.filter((config) => !this.selectedAnalyzers.includes(config.name))
+      : this.analyzerList
+
     if (this.searchCandidate) {
       return analyzersNotYetSelected.filter(
         (config) => config.name.toLowerCase().search(this.searchCandidate.toLowerCase()) >= 0
@@ -130,10 +151,21 @@ export default class AnalyzerSearch extends mixins(AnalyzerListMixin) {
     return analyzersNotYetSelected
   }
 
+  /**
+   * toggle the search dropdown
+   * @return {void}
+   */
   toggleAnalyzerList(): void {
     this.showAnalyzerList = !this.showAnalyzerList
   }
 
+  /**
+   * Outside click handler to ignore the add analyzer button
+   *
+   * @param {InputEvent} event
+   *
+   * @return {void}
+   */
   outsideClickHandler(event: InputEvent): void {
     const addButton = this.$parent.$refs['add-analyzer-button'] as Vue
     if (addButton) {

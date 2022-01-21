@@ -1,23 +1,28 @@
 <template>
   <base-card
-    :showInfo="false"
+    :show-info="false"
     :to="repoRoute"
     :removeDefaultStyle="removeDefaultStyle"
-    class="relative"
+    class="group"
+    @click="$emit('click')"
+    @click.native="$emit('click')"
   >
     <template slot="title">
-      <div class="inline-flex items-center space-x-2">
-        <z-icon :icon="isPrivate ? 'lock' : 'globe'" size="small"></z-icon>
+      <div class="inline-flex items-center gap-x-2">
+        <z-icon
+          :icon="isPrivate ? 'lock' : 'globe'"
+          :size="size === 'small' ? 'x-small' : 'small'"
+        ></z-icon>
         <div
-          class="text-vanilla-400"
+          class="font-normal text-vanilla-100"
           :class="{
-            'text-base font-normal': size === 'small',
-            'space-x-1': size === 'base'
+            'text-base': size === 'small',
+            'gap-x-1': size === 'base'
           }"
         >
           <span>{{ ownerLogin }}</span>
           <span>/</span>
-          <span class="text-vanilla-100">{{ name }}</span>
+          <span>{{ name }}</span>
         </div>
       </div>
       <template v-if="allowStar">
@@ -53,43 +58,75 @@
     </template>
     <template slot="description">
       <div
-        class="flex items-center space-x-4 text-vanilla-400"
+        class="flex flex-wrap items-center gap-x-4 gap-y-2 text-vanilla-400"
         :class="{
           'text-xs font-normal': this.size == 'small',
           'text-sm font-normal': this.size == 'base'
         }"
       >
-        <div v-if="lastAnalyzedAt" class="inline-flex items-center space-x-2">
+        <div
+          v-if="lastAnalyzedAt"
+          v-tooltip="`Last analyzed at`"
+          class="inline-flex items-center gap-x-2"
+        >
           <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
           <span>Analyzed {{ lastAnalyzedAtString }}</span>
         </div>
         <!-- Created -->
-        <div v-if="defaultBranchName" class="inline-flex items-center space-x-2">
+        <div
+          v-if="defaultBranchName"
+          v-tooltip="`Default branch name`"
+          class="inline-flex items-center gap-x-2"
+        >
           <z-icon icon="git-branch" size="x-small" color="vanilla-400"></z-icon>
           <span class="text-vanilla-400">{{ defaultBranchName }}</span>
         </div>
         <!-- Analyzer Type -->
-        <div v-if="latestCommitOid" class="inline-flex items-center space-x-2">
+        <div
+          v-if="latestCommitOid"
+          v-tooltip="`Latest commit hash`"
+          class="inline-flex items-center gap-x-2"
+        >
           <z-icon icon="git-commit" size="x-small"></z-icon>
           <span>{{ latestCommitOid.slice(0, 7) }}</span>
+        </div>
+        <!-- Supported Analyzers -->
+        <div
+          v-if="showAnalyzers && Array.isArray(supportedAnalyzers) && supportedAnalyzers.length"
+          v-tooltip="`Supported analyzers`"
+          class="inline-flex items-center"
+        >
+          <span
+            v-for="(analyzer, index) in supportedAnalyzersLogos"
+            :key="analyzer.shortcode"
+            class="p-px transition-transform duration-200 transform border-2 rounded-full bg-ink-200 border-ink-400 group-hover:border-ink-300 group-hover:translate-x-0"
+            :class="`-translate-x-${index * 2}`"
+          >
+            <analyzer-logo v-bind="analyzer" :hideTooltip="true" size="small" />
+          </span>
         </div>
       </div>
     </template>
   </base-card>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
+import { Vue, Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import { BaseCard } from '@/components/History'
 import { fromNow } from '~/utils/date'
+import AnalyzerListMixin from '~/mixins/analyzerListMixin'
+import { Analyzer } from '~/types/types'
 
+/**
+ * Repo card component
+ */
 @Component({
   components: {
     BaseCard,
     ZIcon
   }
 })
-export default class RepoCard extends Vue {
+export default class RepoCard extends mixins(AnalyzerListMixin) {
   @Prop({ default: false })
   removeDefaultStyle: boolean
 
@@ -147,18 +184,37 @@ export default class RepoCard extends Vue {
   @Prop({ default: '' })
   route: string
 
+  @Prop({ default: true })
+  isLink: boolean
+
   @Prop({ default: '' })
   analyzerShortcode: string
 
   @Prop({ default: '' })
   transformerShortcode: string
 
+  @Prop({ default: false })
+  showAnalyzers: boolean
+
+  /**
+   * Watcher to toggle the internal starred state based on
+   * the data in the store as it's updated
+   *
+   * @return {void}
+   */
   @Watch('isStarred', { immediate: true })
   updateStarred(): void {
     this.internalStarredState = this.isStarred
   }
 
-  toggleStar(isStarred: boolean) {
+  /**
+   * toggle isStarred state and trigger event
+   *
+   * @param {boolean} isStarred
+   *
+   * @return {void}
+   */
+  toggleStar(isStarred: boolean): void {
     if (isStarred) {
       this.$emit('star-repo', this.id)
     } else {
@@ -167,12 +223,33 @@ export default class RepoCard extends Vue {
     this.internalStarredState = isStarred
   }
 
+  /**
+   * Fetch analyzer list in case showAnalyzer is selected
+   *
+   * @return {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    if (this.showAnalyzers) {
+      await this.fetchAnalyzers()
+    }
+  }
+
   internalStarredState = false
 
   get lastAnalyzedAtString(): string {
     return fromNow(this.lastAnalyzedAt)
   }
+
+  get supportedAnalyzersLogos(): Analyzer[] {
+    return this.analyzerList.filter((analyzer) =>
+      this.supportedAnalyzers.includes(analyzer.shortcode)
+    )
+  }
+
   get repoRoute(): string {
+    if (!this.isLink) {
+      return ''
+    }
     const { provider, owner } = this.$route.params
     const route = ['']
 

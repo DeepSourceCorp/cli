@@ -32,17 +32,7 @@
           <template v-slot:trigger="{ toggle }">
             <button
               slot="trigger"
-              class="
-                flex
-                items-center
-                px-1
-                space-x-1
-                rounded-md
-                outline-none
-                bg-ink-200
-                text-vanilla-400
-                focus:outline-none
-              "
+              class="flex items-center px-1 space-x-1 rounded-md outline-none bg-ink-200 text-vanilla-400 focus:outline-none"
               @click="toggle"
             >
               {{ pageSize }}
@@ -83,6 +73,7 @@
       <repo-card
         v-for="repo in repositoryList.edges"
         v-bind="repo.node"
+        size="small"
         @star-repo="starRepo"
         @un-star-repo="unStarRepo"
         :key="repo.node.id"

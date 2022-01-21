@@ -1,6 +1,6 @@
 <template>
   <div
-    class="px-2 py-2 bg-ink-400 rounded-md flex items-center space-x-2 cursor-pointer"
+    class="flex items-center h-12 max-w-lg p-2 space-x-2 rounded-md cursor-pointer bg-ink-300 hover:bg-ink-200"
     @click="handleClick()"
   >
     <analyzer-logo
@@ -8,9 +8,8 @@
       :shortcode="icon"
       :name="name"
       :hideTooltip="true"
-      size="small"
     />
-    <div class="flex-1 text-sm text-vanilla-200 font-bold">{{ name }}</div>
+    <div class="flex-1 text-sm text-vanilla-200">{{ name }}</div>
     <z-icon icon="plus" size="small" class="cursor-pointer" color="vanilla-200"></z-icon>
   </div>
 </template>

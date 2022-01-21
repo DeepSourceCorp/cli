@@ -6,13 +6,13 @@
       <source :srcset="pngImagePath" type="image/png" />
       <img :src="pngImagePath" :alt="altText" class="mx-auto" :class="[imageWidth]" />
     </picture>
-    <h3 class="text-lg font-semibold text-center mt-5">
+    <h3 class="mt-5 text-lg font-semibold text-center">
       <slot name="title"> {{ title }}</slot>
     </h3>
-    <p class="text-vanilla-400 text-center max-w-md mx-auto text-sm mt-3">
+    <p class="max-w-md mx-auto mt-1 text-sm text-center text-vanilla-400">
       <slot name="subtitle">{{ subtitle }} </slot>
     </p>
-    <div class="text-center mt-5"><slot name="action"></slot></div>
+    <div class="mt-6 text-center"><slot name="action"></slot></div>
   </section>
 </template>
 <script lang="ts">

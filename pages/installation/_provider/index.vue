@@ -1,14 +1,7 @@
 <template>
   <div class="container mx-auto">
     <div
-      class="
-        flex flex-col
-        justify-between
-        min-h-screen
-        pt-32
-        pb-24
-        text-sm text-center text-vanilla-400
-      "
+      class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
     >
       <div class="space-y-2">
         <video
@@ -61,6 +54,9 @@ interface VCSResponse {
   login?: Maybe<Scalars['String']>
 }
 
+/**
+ * This page triggers the installation mutation
+ */
 @Component({
   middleware: 'auth',
   meta: {
@@ -73,9 +69,18 @@ interface VCSResponse {
 export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
   private pollingInterval: ReturnType<typeof setInterval>
 
+  /**
+   * Start the polling interval after the component is created
+   * @return {void}
+   */
   created(): void {
     this.pollingInterval = setInterval(this.pollInstallationStatus, POLLING_INTERVAL)
   }
+
+  /**
+   * Mount the websocket listener
+   * @return {void}
+   */
   mounted(): void {
     this.$socket.$on('vcs-installation-complete', (data: Record<string, string>) => {
       // TODO: fix/refactor this to work with asgard
@@ -89,6 +94,11 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
   //  `/onboard/gitlab` = `gl`
   // Todo: Fix this by unifying the post installation flow.
 
+  /**
+   * Trigger github installation mutation
+   * @param {any} payload
+   * @return {Promise<GithubInstallationLandingPayload | null>}
+   */
   async sendGithubInstallationMutation(
     payload: any
   ): Promise<GithubInstallationLandingPayload | null> {
@@ -102,6 +112,11 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
     return response.data.installation
   }
 
+  /**
+   * Trigger github enterprise installation mutation
+   * @param {any} payload
+   * @return {Promise<GithubEnterpriseInstallationLandingPayload | null>}
+   */
   async sendGithubEnterpriseInstallationMutation(
     payload: any
   ): Promise<GithubEnterpriseInstallationLandingPayload | null> {
@@ -115,6 +130,11 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
     return response.data.gheInstallationLanding
   }
 
+  /**
+   * Trigger bitbucket installation mutation
+   * @param {any} payload
+   * @return {Promise<BitbucketInstallationLandingPayload | null>}
+   */
   async sendBitbucketInstallationMutation(
     payload: any
   ): Promise<BitbucketInstallationLandingPayload | null> {
@@ -128,6 +148,10 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
     return response.data.bitbucketInstallationLanding
   }
 
+  /**
+   * handle the next action after the installation is triggered
+   * @return {any}
+   */
   async handleNextAction() {
     let nextUrl = '/login'
     switch (this.vcsResponse?.nextAction) {
@@ -141,7 +165,7 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
       case NextActionChoice.Onboard:
         const providerKey = this.vcsResponse?.vcsProvider as string
         const providerShortCode = this.$providerMetaMap[providerKey].shortcode
-        nextUrl = `/onboard/${providerShortCode}/${this.vcsResponse.login}`
+        nextUrl = `/onboard/${providerShortCode}/${this.vcsResponse.login}/repositories`
         this.$router.push(nextUrl)
         break
       case NextActionChoice.GithubLogin:
@@ -156,6 +180,10 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
 
   private vcsResponse: VCSResponse | null
 
+  /**
+   * Triggers the installation mutation and then triggers the next action
+   * @return {Promise<void>}
+   */
   async pollInstallationStatus(): Promise<void> {
     const provider = this.$route.params.provider
 

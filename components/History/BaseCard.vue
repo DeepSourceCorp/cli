@@ -18,7 +18,7 @@
     <div class="flex flex-wrap flex-1 w-full">
       <!-- Left Section -->
       <div
-        class="flex flex-col px-4 py-3 space-y-1 text-sm border-ink-300 text-vanilla-400 justify-evenly"
+        class="flex flex-col px-4 py-3 space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly"
         :class="{ 'w-full md:w-4/5': showInfo }"
       >
         <div

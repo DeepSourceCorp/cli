@@ -35,6 +35,7 @@ import UpdatePermission from '~/apollo/mutations/repository/settings/updatePermi
 import RemoveCollaborator from '~/apollo/mutations/repository/settings/removeCollaborator.gql'
 import UpdateRepositoryWidgets from '~/apollo/mutations/repository/updateRepositoryWidgets.gql'
 import TriggerGSRRun from '~/apollo/mutations/repository/triggerGSRRun.gql'
+import triggerAdhocRunGQLMutation from '~/apollo/mutations/repository/triggerAdHocRun.gql'
 
 import {
   UpdateRepoMetricThresholdInput,
@@ -127,7 +128,8 @@ export enum RepositoryDetailActions {
   UPDATE_REPO_WIDGETS = 'udateRepositoryWidgets',
   UPDATE_REPOSITORY_IN_STORE = 'updateRepositoryInStore',
   TRIGGER_GSR_ACTIVATION = 'triggerGSRActivation',
-  POLL_REPO_STATUS = 'pollRepoStatus'
+  POLL_REPO_STATUS = 'pollRepoStatus',
+  TRIGGER_ADHOC_RUN = 'triggerAdHocRun'
 }
 
 export enum RepositoryDetailMutations {
@@ -466,6 +468,11 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       name: string
       refetch?: boolean
     }
+  ) => Promise<void>
+  [RepositoryDetailActions.TRIGGER_ADHOC_RUN]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: { config: string }
   ) => Promise<void>
 }
 
@@ -1038,5 +1045,13 @@ export const actions: RepositoryDetailModuleActions = {
       refetch
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+  },
+  async [RepositoryDetailActions.TRIGGER_ADHOC_RUN]({ state }, args) {
+    await this.$applyGraphqlMutation(triggerAdhocRunGQLMutation, {
+      input: {
+        config: args.config,
+        repositoryId: state.repository.id
+      }
+    })
   }
 }

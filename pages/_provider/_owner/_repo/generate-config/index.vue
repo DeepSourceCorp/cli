@@ -17,15 +17,7 @@
         <z-step class="w-full">
           <template slot="title">
             <div
-              class="
-                mt-1
-                text-xs
-                font-medium
-                leading-snug
-                tracking-wider
-                uppercase
-                text-vanilla-400
-              "
+              class="mt-1 text-xs font-medium leading-snug tracking-wider uppercase text-vanilla-400"
             >
               Analyzers
             </div>
@@ -45,17 +37,7 @@
         <z-step class="w-full">
           <template slot="title">
             <div
-              class="
-                flex
-                items-center
-                mt-1
-                text-xs
-                font-medium
-                leading-snug
-                tracking-wider
-                uppercase
-                text-vanilla-400
-              "
+              class="flex items-center mt-1 text-xs font-medium leading-snug tracking-wider uppercase text-vanilla-400"
             >
               Patterns
               <z-tag text-size="xxs" spacing="py-1 px-3" class="ml-2 text-vanilla-400"
@@ -104,11 +86,11 @@
       <portal to="modal">
         <add-default-branch-modal
           v-if="showAddDefaultBranchModal"
-          @onClose="showAddDefaultBranchModal = false"
           :login="$route.params.owner"
           :repo-name="repository.name"
           :toml="toml"
           :repo-id="repository.id"
+          @onClose="showAddDefaultBranchModal = false"
           @onActivate="showSuccessToast"
         />
         <next-steps-modal
