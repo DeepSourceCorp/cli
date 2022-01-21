@@ -75,6 +75,8 @@ export const OWNER_DETAIL_ISSUE_TYPE_SETTINGS: Owner = <Owner>{
  */
 export const mockOwnerDetailIssueTypeSettings = (): Owner => OWNER_DETAIL_ISSUE_TYPE_SETTINGS
 
+const emptyTrend = { labels: [], values: [] }
+
 /**
  * Mock factory
  */
@@ -82,5 +84,8 @@ export const mockOwnerDetail = (): OwnerDetailModuleState => ({
   loading: false,
   error: {},
   owner: mockOwnerDetailIssueTypeSettings(),
+  autofixTrend: emptyTrend,
+  issueTrend: emptyTrend,
+  resolvedIssueTrend: emptyTrend,
   billingInfo: undefined
 })

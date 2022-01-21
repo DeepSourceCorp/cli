@@ -206,5 +206,6 @@ export const mockIssueDetailState = (): IssueDetailModuleState => ({
   issue: mockIssueDetail(),
   silenceRules: [],
   singleIssue: mockIssueSingleIssueDetail(),
-  checkIssues: mockIssueCheckIssueDetail()
+  checkIssues: mockIssueCheckIssueDetail(),
+  issueDirDetails: mockIssueSingleIssueDetail()
 })

@@ -1,13 +1,13 @@
 <template>
   <div
-    class="flex w-full overflow-hidden flex-row"
+    class="flex flex-row w-full overflow-hidden"
     :class="{
       'rounded-md': roundedCorners
     }"
   >
     <div v-if="showAccent" :class="`w-1 bg-${color}`"></div>
     <div
-      class="flex flex-col space-y-2 flex-grow py-2 px-3"
+      class="flex flex-col flex-grow px-3 py-2 space-y-2"
       :class="{
         'border border-ink-300': showBorder,
         'border-l-0': showAccent && showBorder,

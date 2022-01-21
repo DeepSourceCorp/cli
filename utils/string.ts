@@ -1,21 +1,24 @@
 function toTitleCase(candidate: string): string {
+  if (!candidate) return ''
   return candidate
-    .replace('-', ' ')
-    .replace('_', ' ')
+    .replace(/[-, _]/g, ' ')
+    .toLowerCase()
     .replace(/\w\S*/g, (txt) => {
-      return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+      return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase()
     })
 }
 
 function toSentenceCase(candidate: string): string {
-  const sentence = candidate.replace('-', ' ').replace('_', ' ').toLowerCase()
-  return sentence.charAt(0).toUpperCase() + sentence.substr(1)
+  if (!candidate) return ''
+
+  const sentence = candidate.replace(/[-, _]/g, ' ').toLowerCase()
+  return sentence.charAt(0).toUpperCase() + sentence.substring(1)
 }
 
 const formatter = new Intl.NumberFormat()
 
 function formatIntl(val: number): string {
-  return formatter.format(val)
+  return isFinite(val) ? formatter.format(val) : ''
 }
 
 function shortenLargeNumber(candidate: number | string): string {
@@ -50,10 +53,10 @@ const usdFormatter = new Intl.NumberFormat('en-US', {
 })
 
 function formatUSD(amount: number): string {
-  return usdFormatter.format(amount)
+  return isFinite(amount) ? usdFormatter.format(amount) : ''
 }
 
-function makeSafeNumber(candidate: string, defaultReturnValue = 0): number {
+function makeSafeNumber(candidate: string | number, defaultReturnValue = 0): number {
   return isFinite(Number(candidate)) ? Number(candidate) : defaultReturnValue
 }
 

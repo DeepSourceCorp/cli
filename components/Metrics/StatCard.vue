@@ -1,5 +1,5 @@
 <template>
-  <transition :appear="withTransition" :name="withTransition && 'flash'">
+  <transition :appear="withTransition" :name="withTransition ? 'flash' : ''">
     <component
       :is="to ? 'nuxt-link' : 'div'"
       :to="to"
@@ -117,7 +117,7 @@ export default class StatCard extends Vue {
 }
 .flash-enter,
 .flash-leave-to {
-  @apply bg-cherry bg-opacity-10;
+  @apply bg-cherry-500 bg-opacity-10;
 }
 .flash-enter-to,
 .flash-leave {
