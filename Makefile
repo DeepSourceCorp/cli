@@ -5,13 +5,12 @@ build_local:
 	cd cmd/deepsource && go build -tags static_all -o /tmp/deepsource .
 
 test:
-	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueWorkflow -coverprofile=cover.out 
-	cat cover.out >> coverage.out
-	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueFileWorkflow -coverprofile=cover.out
-	cat cover.out >> coverage.out
+	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueWorkflow -count=1
+	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueFileWorkflow -count=1
 	echo "\n====TESTING CONFIG VALIDATOR PACKAGE====\n"
-	cd configvalidator && go test -v . -count=1 -coverprofile=cover.out && cd ..
-	cat configvalidator/cover.out >> coverage.out
+	go test -v ./configvalidator/... -count=1
+	echo "\n====CALCULATING TEST COVERAGE FOR ENTIRE PACKAGE====\n"
+	go test -v -coverpkg=./... -coverprofile=coverage.out -count=1 ./...
 
 test_setup:
 	mkdir -p ${CODE_PATH}

@@ -19,6 +19,9 @@ jobs:
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Build the binary
         run: make build
@@ -34,9 +37,8 @@ jobs:
           CODE_PATH: /home/runner/code
 
       - name: Report test coverage to DeepSource
-        uses: deepsourcelabs/test-coverage-action@master
-        with:
-          key: go
-          coverage-file: ./coverage.out
-          dsn: ${{ secrets.DEEPSOURCE_DSN }}
-          fail-ci-on-error: true
+        run: |
+          curl https://deepsource.io/cli | sh
+          ./bin/deepsource report --analyzer test-coverage --key go --value-file ./coverage.out
+        env:
+          DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}

@@ -44,7 +44,6 @@ type Summary struct {
 }
 
 func NewCmdIssuesList() *cobra.Command {
-
 	opts := IssuesListOptions{
 		FileArg:  "",
 		RepoArg:  "",
@@ -86,7 +85,6 @@ func NewCmdIssuesList() *cobra.Command {
 
 // Execute the command
 func (opts *IssuesListOptions) Run() (err error) {
-
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {
