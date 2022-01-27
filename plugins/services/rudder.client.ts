@@ -25,5 +25,7 @@ export default (context: Context, inject: Inject): void => {
 
   inject('rudder', rudderAnalytics)
 
-  rudderAnalytics.load($config.rudderWriteKey, $config.rudderDataPlaneUrl)
+  if ($config.rudderWriteKey && $config.rudderDataPlaneUrl) {
+    rudderAnalytics.load($config.rudderWriteKey, $config.rudderDataPlaneUrl)
+  }
 }
