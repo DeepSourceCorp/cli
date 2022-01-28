@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
-    <h2 class="text-lg font-medium mb-4">Ignored rules</h2>
+    <h2 class="mb-4 text-lg font-medium">Ignored rules</h2>
     <!-- Search and filter -->
     <!-- <div class="flex space-x-2">
       TODO: API pending
@@ -42,9 +42,10 @@
     </div>
     <div
       v-else-if="repository.silenceRules && repository.silenceRules.totalCount > 0"
-      class="flex flex-col gap-y-8 divide-y divide-ink-300"
+      class="flex flex-col divide-y divide-ink-300"
     >
       <ignored-rule
+        class="py-4"
         v-for="rule in repository.silenceRules.edges"
         :key="rule.node.id"
         :rule="rule.node"

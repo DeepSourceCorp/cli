@@ -4,10 +4,13 @@ import { ActiveUserActions, ActiveUserGetterTypes } from '~/store/user/active'
 
 const restrictOnboarding: Middleware = async ({ store, redirect, route }) => {
   try {
-    const { login, provider } = route.params
+    const { owner, provider } = route.params
 
     await Promise.all([
-      store.dispatch(`owner/detail/${OwnerDetailActions.FETCH_OWNER_DETAILS}`, { login, provider }),
+      store.dispatch(`owner/detail/${OwnerDetailActions.FETCH_OWNER_DETAILS}`, {
+        login: owner,
+        provider
+      }),
       store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
     ])
 

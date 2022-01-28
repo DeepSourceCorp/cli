@@ -129,7 +129,7 @@ export default class RunHeader extends Vue {
       [RunStatus.Pend]: 'vanilla-100',
       [RunStatus.Timo]: 'honey',
       [RunStatus.Cncl]: 'honey',
-      [RunStatus.Read]: 'juniper-100'
+      [RunStatus.Read]: 'vanilla-400'
     }
     return types[this.status || 'PASS']
   }

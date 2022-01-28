@@ -3,20 +3,7 @@
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="
-          flex
-          items-center
-          space-x-2
-          text-vanilla-200
-          p-1
-          text-sm
-          rounded-sm
-          hover:bg-ink-200
-          transition-all
-          duration-75
-          outline-none
-          focus:outline-none
-        "
+        class="flex items-center p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 hover:bg-ink-200 focus:outline-none"
         @click="toggle"
       >
         <z-avatar
@@ -27,7 +14,7 @@
           class="flex-shrink-0"
           stroke="bg-ink-100 p-1"
         ></z-avatar>
-        <span v-show="!isCollapsed" class="flex space-x-1 items-center">
+        <span v-show="!isCollapsed" class="flex items-center space-x-1">
           <span>{{ activeDashboardContext.team_name || activeDashboardContext.login }}</span>
           <z-icon icon="chevron-down" size="small" color="vanilla-200"></z-icon>
         </span>
@@ -36,7 +23,7 @@
     <template v-slot:body="{ close }">
       <z-menu-section
         title="Select dashboard view"
-        class="max-h-64 overflow-y-scroll hide-scroll"
+        class="overflow-y-scroll max-h-64 hide-scroll"
         :divider="true"
       >
         <z-menu-item
@@ -44,7 +31,7 @@
           as="nuxt-link"
           :key="context.id"
           :to="`/${context.vcs_provider}/${context.login}`"
-          class="flex space-x-2 items-center w-full"
+          class="flex items-center w-full space-x-2"
           @click.native="close"
         >
           <z-avatar type="span" :image="context.avatar_url" :user-name="context.login"></z-avatar>
@@ -72,11 +59,9 @@
         </z-menu-item>
       </z-menu-section>
       <z-menu-section :divider="false">
-        <z-menu-item icon="plus"
-          ><nuxt-link :to="context.installationProvidersUrl"
-            >Add new account</nuxt-link
-          ></z-menu-item
-        >
+        <z-menu-item :to="context.installationProvidersUrl" icon="plus" as="nuxt-link">
+          Add new account
+        </z-menu-item>
       </z-menu-section>
     </template>
   </z-menu>

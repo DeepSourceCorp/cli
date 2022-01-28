@@ -28,7 +28,10 @@
           -->
         <div
           v-if="
-            repository.name === $route.params.repo && repository.errorCode && !$fetchState.pending
+            repository.name === $route.params.repo &&
+            repository.errorCode &&
+            repository.errorCode !== 3003 &&
+            !$fetchState.pending
           "
           class="px-4 pt-4"
         >
@@ -53,7 +56,7 @@
             </div>
           </z-alert>
 
-          <z-alert v-else-if="repository.errorCode !== 3003" type="danger" :dismissible="true">
+          <z-alert v-else type="danger" :dismissible="true">
             <p class="font-medium" v-html="repository.renderedErrorMessage"></p>
           </z-alert>
         </div>

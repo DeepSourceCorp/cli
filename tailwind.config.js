@@ -29,7 +29,13 @@ module.exports = {
         'bg-gitlab',
         'bg-bitbucket',
         'opacity-100',
-        'opacity-25'
+        'opacity-25',
+        '-translate-x-2',
+        '-translate-x-4',
+        '-translate-x-6',
+        '-translate-x-8',
+        '-translate-x-10',
+        '-translate-x-12'
       ]
     }
   },

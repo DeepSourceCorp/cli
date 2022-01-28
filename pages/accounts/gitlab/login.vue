@@ -1,9 +1,9 @@
 <template>
   <hero-card>
-    <h1 class="text-vanilla-100 font-bold text-2xl leading-snug text-center">
+    <h1 class="text-2xl font-bold leading-snug text-center text-vanilla-100">
       Choose a GitLab account
     </h1>
-    <p class="text-vanilla-400 text-base text-center mt-4">
+    <p class="mt-4 text-base text-center text-vanilla-400">
       You would be able to use DeepSource on all repositories that you have access to.
     </p>
     <div class="flex flex-col items-center mt-10 space-y-4">
@@ -12,7 +12,7 @@
         :key="account.login"
         @click="selectAccount(account)"
         :disabled="loading"
-        class="rounded-md w-full text-vanilla-100 px-3 py-2 flex items-center space-x-2 group mt-2"
+        class="flex items-center w-full px-3 py-2 mt-2 space-x-2 rounded-md text-vanilla-100 group"
         :class="account.installed ? 'bg-ink-200 cursor' : 'bg-ink-200 hover:bg-ink-300'"
       >
         <z-avatar
@@ -21,7 +21,7 @@
           :userName="account.login"
           class="flex-shrink-0"
         ></z-avatar>
-        <div class="flex-grow text-left overflow-ellipsis overflow-hidden">
+        <div class="flex-grow overflow-hidden text-left overflow-ellipsis">
           <div>{{ account.login }}</div>
           <p class="text-xs text-vanilla-400">
             {{ account.is_team ? 'Team Account' : 'Personal Account' }}
@@ -39,15 +39,15 @@
           v-else
           icon="chevron-right"
           size="medium"
-          class="transform duration-100 ease-linear group-hover:translate-x-1 flex-shrink-0"
+          class="flex-shrink-0 duration-100 ease-linear transform group-hover:translate-x-1"
         ></z-icon>
       </button>
     </div>
-    <p class="text-vanilla-400 mt-4 text-sm">
+    <p class="mt-4 text-sm text-vanilla-400">
       Need help? Write to us at
       <a
         :href="`mailto:${$config.supportEmail}`"
-        class="text-juniper hover:underline cursor-pointer"
+        class="cursor-pointer text-juniper hover:underline"
         >{{ $config.supportEmail }}</a
       >
     </p>
@@ -96,7 +96,7 @@ export default class InstallationProvider extends mixins(ContextMixin, ActiveUse
       await this.$applyGraphqlMutation(GitlabMutation, { input: { login } })
       this.$toast.success(`Successfully connected ${login} with DeepSource.`)
       setTimeout(() => {
-        this.$router.push(['', 'onboard', 'gl', login, 'issue-type'].join('/'))
+        this.$router.push(['', 'onboard', 'gl', login, 'repositories'].join('/'))
       }, 300)
     } catch (e) {
       this.$toast.danger('Something went wrong while connecting your account')

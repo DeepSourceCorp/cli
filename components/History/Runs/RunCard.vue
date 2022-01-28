@@ -10,16 +10,16 @@
         :class="{ 'motion-safe:animate-spin': isPending }"
       />
       <h3
-        class="text-vanilla-100 cursor-pointer whitespace-nowrap overflow-ellipsis overflow-hidden"
+        class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
       >
         {{ branchName }}
       </h3>
-      <span class="text-sm text-vanilla-400 font-normal inline md:flex md:flex-shrink-0"
+      <span class="inline text-sm font-normal text-vanilla-400 md:flex md:flex-shrink-0"
         >@{{ commitOid.slice(0, 7) }}</span
       >
     </template>
     <template slot="description">
-      <div class="space-y-1 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-x-4 mt-2 ml-6">
+      <div class="mt-2 ml-6 space-y-1 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-x-4">
         <div v-if="!isPending" class="flex items-center gap-x-1.5">
           <z-icon icon="clock" size="x-small" color="vanilla-400" />
           <span class="text-sm text-vanilla-400">Analyzed {{ createdString }}</span>
@@ -59,7 +59,7 @@
     <template slot="info">
       <div
         v-if="issueStats.length && !isPending"
-        class="flex justify-around items-center gap-x-2 h-full"
+        class="flex items-center justify-around h-full gap-x-2"
       >
         <div v-for="stat in issueStats" :key="stat.label" class="flex flex-col items-center">
           <div
@@ -143,7 +143,7 @@ export default class RunCard extends Vue {
       [RunStatus.Pend]: 'vanilla-100',
       [RunStatus.Timo]: 'honey',
       [RunStatus.Cncl]: 'honey',
-      [RunStatus.Read]: 'ink-300'
+      [RunStatus.Read]: 'vanilla-400'
     }
     return types[this.status || 'PASS']
   }

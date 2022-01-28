@@ -2,9 +2,7 @@
   <div class="flex flex-col space-y-2">
     <div class="text-md text-vanilla-400">
       <span class="font-semibold text-vanilla-100">{{ eventDescription }}</span>
-      <template v-if="actor && (actor.fullName || actor.email)">
-        — {{ actor.fullName || actor.email }}
-      </template>
+      <template v-if="actorName"> — {{ actorName }} </template>
     </div>
     <div class="flex space-x-4">
       <info v-tooltip="formattedDate" v-if="createdAt" icon="clock" :title="formatDuration"></info>
