@@ -74,6 +74,8 @@ export default {
       : 'support@deepsource.io',
     discoverEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.IS_DISCOVER_ENABLED) : true,
     domain: process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io',
+    posthogApiKey: toBool(process.env.ON_PREM) ? '' : process.env.POSTHOG_API_KEY,
+    posthogApiHost: toBool(process.env.ON_PREM) ? '' : process.env.POSTHOG_API_HOST,
     rudderWriteKey: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_WRITE_KEY,
     rudderDataPlaneUrl: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_DATA_PLANE_URL
   },
@@ -119,7 +121,8 @@ export default {
       '~/plugins/services/plausibleLoader.client.js',
       '~/plugins/services/rudder.client.ts',
       '~/plugins/services/intercom.client.js',
-      '~/plugins/components/statuspage.client.ts'
+      '~/plugins/components/statuspage.client.ts',
+      '~/plugins/services/posthog.client.ts'
     ]
 
     if (!process.env.ON_PREM) {

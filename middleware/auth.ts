@@ -22,7 +22,15 @@ import { ActiveUserActions } from '~/store/user/active'
 
 const passList = ['github', 'bitbucket', 'gitlab']
 
-const authMiddleware: Middleware = async ({ app, store, route, redirect, error }) => {
+const authMiddleware: Middleware = async ({
+  app,
+  store,
+  route,
+  redirect,
+  error,
+  $config,
+  $posthog
+}) => {
   let strict = false
   let redirectToLogin = false
 
@@ -33,6 +41,15 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
   }
   const now = (new Date().getTime() + 30_000) / 1000
   const expiry = store.getters[`account/auth/${AuthGetterTypes.EXPIRY}`]
+
+  const identifyUserForPosthog = () => {
+    // Identify the logged in user with PostHog
+    const { id, email, fullName } = store.state.user.active.viewer
+    if (!$config.onPrem && id && email) {
+      $posthog.identify(id, { email, fullName })
+    }
+  }
+
   if (now > expiry) {
     const authPolicy: boolean[] = []
     const redirectToLoginPolicy: boolean[] = []
@@ -48,10 +65,15 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
 
     strict = authPolicy.indexOf(true) > -1 ? true : false
     redirectToLogin = redirectToLoginPolicy.indexOf(true) > -1 ? true : false
+
     try {
       await store.dispatch(`account/auth/${AuthActionTypes.REFRESH}`)
       store.dispatch(`account/context/${ContextActionTypes.FETCH_CONTEXT}`)
-      store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
+
+      // Ensure the posthog identify function call happens only after the viewer info is fetched
+      store
+        .dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
+        .then(() => identifyUserForPosthog())
     } catch (e) {
       if (strict) {
         if (redirectToLogin) {

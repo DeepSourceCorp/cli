@@ -3,7 +3,7 @@
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="flex items-center space-x-2 text-sm hover:bg-ink-300 rounded-sm py-1 outline-none focus:outline-none"
+        class="flex items-center py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 focus:outline-none"
         :class="{
           'pr-2 pl-1': !isCollapsed,
           'px-1': isCollapsed
@@ -14,7 +14,7 @@
           :image="viewer.avatar"
           :userName="viewer.fullName || viewer.email"
           size="sm"
-          class="rounded-full leading-none flex-shrink-0"
+          class="flex-shrink-0 leading-none rounded-full"
         />
         <span v-show="!isCollapsed" class="leading-none">{{
           viewer.fullName || viewer.email
@@ -27,7 +27,11 @@
       </z-menu-section>
       <z-menu-section :divider="false">
         <z-menu-item @click="() => switchToLegacy()">Switch to DeepSource Retro</z-menu-item>
-        <z-menu-item as="a" href="https://deepsource.io/discord" target="_blank" rel="noopener noreferrer"
+        <z-menu-item
+          as="a"
+          href="https://deepsource.io/discord"
+          target="_blank"
+          rel="noopener noreferrer"
           >Join Discord</z-menu-item
         >
         <z-menu-item @click="() => this.$router.push('/me')">Dashboard</z-menu-item>
@@ -69,6 +73,11 @@ export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {
   public async signOut(): Promise<void> {
     await this.logOutUser()
     this.$router.push('/login')
+
+    // Unset distinct IDs post logout
+    if (!this.$config.onPrem) {
+      this.$posthog.reset()
+    }
   }
 }
 </script>
