@@ -22,8 +22,8 @@
       >
         <z-icon icon="analyzers" size="large" color="vanilla-300" />
         <p class="max-w-sm mx-auto text-sm leading-relaxed text-center text-vanilla-300">
-          Analyzers will find issues in your code. Add an analyzer by selecting a language you've
-          written your code in.
+          Analyzers scan your code and find code health issues. Start by adding one for a technology
+          that you use in this repository.
         </p>
         <z-button
           size="small"
