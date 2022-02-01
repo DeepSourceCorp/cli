@@ -1,7 +1,7 @@
 <template>
   <section class="space-y-4">
     <div class="border rounded-md bg-ink-400 border-ink-200">
-      <div class="p-5 font-medium border-ink-200">Your first analysis is running ...</div>
+      <div class="p-5 font-medium border-ink-200">Your first analysis is running...</div>
       <div
         v-for="(stage, index) in stages"
         :key="stage.title"
@@ -82,7 +82,7 @@ export default class OnboardRunning extends mixins(
 
   public stages = [
     { title: 'Fetching your code', duration: 8, status: STATUS.IN_PROGRESS },
-    { title: 'Setting up analyzer', duration: 10, status: STATUS.PENDING },
+    { title: 'Setting up Analyzers', duration: 10, status: STATUS.PENDING },
     {
       title: 'Analyzing your code',
       message: 'This might take a few seconds, hang tight!',
