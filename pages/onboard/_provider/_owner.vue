@@ -57,7 +57,7 @@
           <client-only>
             <z-stepper align="vertical" :showNumbers="false" class="w-full mb-2">
               <z-step
-                v-for="(step, index) in STEPS"
+                v-for="(step, index) in steps"
                 :key="step.route"
                 :title="`Step ${index + 1}`"
                 :status="getStepStatus(step, index)"
@@ -145,26 +145,28 @@ export default class OnboardLogin extends mixins(
 ) {
   public syncingRepositories = false
 
-  STEPS = [
-    {
-      title: 'Pick a repository',
-      route: 'onboard-provider-owner-repositories',
-      link: this.repoSelectorRoute,
-      showRepo: true
-    },
-    {
-      title: 'Set preferences',
-      route: 'onboard-provider-owner-repo-preferences',
-      link: this.preferencesRoute,
-      showRepo: false
-    },
-    {
-      title: 'Activate analysis',
-      route: 'onboard-provider-owner-repo-config',
-      link: this.analysisConfigRoute,
-      showRepo: false
-    }
-  ]
+  get steps(): { title: string; route: string; link: string; showRepo: boolean }[] {
+    return [
+      {
+        title: 'Pick a repository',
+        route: 'onboard-provider-owner-repositories',
+        link: this.repoSelectorRoute,
+        showRepo: true
+      },
+      {
+        title: 'Set preferences',
+        route: 'onboard-provider-owner-repo-preferences',
+        link: this.preferencesRoute,
+        showRepo: false
+      },
+      {
+        title: 'Activate analysis',
+        route: 'onboard-provider-owner-repo-config',
+        link: this.analysisConfigRoute,
+        showRepo: false
+      }
+    ]
+  }
 
   /**
    * If the running stage is on, don't allow links on steps
@@ -221,7 +223,7 @@ export default class OnboardLogin extends mixins(
       return 'completed'
     }
 
-    const currentActiveStepIndex = this.STEPS.findIndex((step) => step.route == this.$route.name)
+    const currentActiveStepIndex = this.steps.findIndex((step) => step.route == this.$route.name)
 
     if (index === currentActiveStepIndex) {
       return 'active'

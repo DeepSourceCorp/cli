@@ -97,10 +97,9 @@
           class="inline-flex items-center"
         >
           <span
-            v-for="(analyzer, index) in supportedAnalyzersLogos"
+            v-for="analyzer in supportedAnalyzersLogos"
             :key="analyzer.shortcode"
-            class="p-px transition-transform duration-200 transform border-2 rounded-full bg-ink-200 border-ink-400 group-hover:border-ink-300 group-hover:translate-x-0"
-            :class="`-translate-x-${index * 2}`"
+            class="p-px border-2 rounded-full bg-ink-200 border-ink-400 group-hover:border-ink-300"
           >
             <analyzer-logo v-bind="analyzer" :hideTooltip="true" size="small" />
           </span>
