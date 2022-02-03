@@ -78,26 +78,44 @@
           :alt="searchCandidate"
         />
         <div>
-          <template v-if="searchCandidate">
-            We couldn’t find any matches for "{{ searchCandidate }}"
-          </template>
-          <template v-else> We couldn’t find any repositories linked to this account. </template>
-          <p class="mt-1 text-sm text-vanilla-400">
-            You can sync your repositories from VCS Provider
+          <p class="text-vanilla-100 font-semibold">
+            {{
+              searchCandidate
+                ? `No results found for "${searchCandidate}"`
+                : 'We couldn’t find any repositories linked to this account.'
+            }}
+          </p>
+
+          <p class="max-w-md mt-1 text-sm text-vanilla-400">
+            {{
+              owner.hasGrantedAllRepoAccess
+                ? 'You can sync your repositories from VCS Provider'
+                : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
+            }}
           </p>
         </div>
-        <z-button
-          v-if="repoSyncLoading"
-          size="small"
-          class="flex items-center w-48"
-          :disabled="true"
-        >
-          <z-icon icon="spin-loader" class="mr-2 animate-spin" size="small" color="ink-400" />
-          <span>Syncing repositories</span>
-        </z-button>
-        <z-button v-else size="small" class="w-48" icon="refresh-cw" @click="syncRepos">
-          Sync repositories
-        </z-button>
+        <div class="flex gap-x-2">
+          <z-button
+            v-if="!owner.hasGrantedAllRepoAccess && owner.appConfigurationUrl"
+            label="Manage Permissions"
+            size="small"
+            :to="owner.appConfigurationUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            icon="settings"
+            icon-color="vanilla-100"
+            class="bg-ink-200 hover:bg-ink-200 hover:opacity-80 text-vanilla-100"
+          />
+          <z-button
+            label="Sync repositories"
+            icon="refresh-cw"
+            loading-label="Syncing repositories"
+            :is-loading="repoSyncLoading"
+            :disabled="repoSyncLoading"
+            size="small"
+            @click="syncRepos"
+          />
+        </div>
       </div>
     </div>
   </z-tab-pane>
@@ -143,6 +161,15 @@ export default class ActivateSingleRepo extends mixins(
   public repoSyncLoading = false
 
   /**
+   * Mounted hook for Vue component
+   *
+   * @returns {void}
+   */
+  mounted(): void {
+    this.$socket.$on('vcs-installed-repos-updated', this.refetchData)
+  }
+
+  /**
    * Search repo input change handler
    *
    * @param {string} val
@@ -150,7 +177,13 @@ export default class ActivateSingleRepo extends mixins(
    */
   async searchRepo(val: string): Promise<void> {
     this.searchCandidate = val
-    await this.$fetch()
+    await this.fetchNewRepoList({
+      login: this.activeOwner,
+      provider: this.activeProvider,
+      limit: this.pageSize,
+      currentPageNumber: 1,
+      query: this.searchCandidate ? this.searchCandidate : null
+    })
     const searchBox = this.$refs['search-repo-input'] as ZInputT
     if (searchBox) {
       searchBox.focus()
@@ -163,17 +196,49 @@ export default class ActivateSingleRepo extends mixins(
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    await this.fetchNewRepoList({
-      login: this.activeOwner,
-      provider: this.activeProvider,
-      limit: this.pageSize,
-      currentPageNumber: 1,
-      query: this.searchCandidate ? this.searchCandidate : null
-    })
+    await this.refetchData()
+
     const searchBox = this.$refs['search-repo-input'] as ZInputT
     if (searchBox) {
       searchBox.focus()
     }
+  }
+
+  /**
+   * Refetch repo list and app config
+   *
+   * @returns {Promise<void>}
+   */
+  async refetchData(): Promise<void> {
+    await Promise.all([
+      await this.fetchNewRepoList({
+        login: this.activeOwner,
+        provider: this.activeProvider,
+        limit: this.pageSize,
+        currentPageNumber: 1,
+        query: this.searchCandidate ? this.searchCandidate : null
+      }),
+      await this.fetchAppConfig({
+        login: this.activeOwner,
+        provider: this.activeProvider,
+        refetch: true
+      })
+    ])
+  }
+
+  /**
+   * Callback function for repo-sync event
+   *
+   * @returns {Promise<void>}
+   */
+  async repoSyncCallback(data: { status: string }): Promise<void> {
+    if (data.status === 'success') {
+      await this.$fetch()
+      this.$toast.success('Repositories synced successfully.')
+    } else if (data.status === 'failure') {
+      this.$toast.danger('Error while syncing repositories. Please try again.')
+    }
+    this.repoSyncLoading = false
   }
 
   /**
@@ -189,15 +254,7 @@ export default class ActivateSingleRepo extends mixins(
       this.$toast.danger('Error while syncing repositories. Please try again.')
     }
 
-    this.$socket.$on('repo-sync', async (data: { status: string }) => {
-      if (data.status === 'success') {
-        await this.$fetch()
-        this.$toast.success('Repositories synced successfully.')
-      } else if (data.status === 'failure') {
-        this.$toast.danger('Error while syncing repositories. Please try again.')
-      }
-      this.repoSyncLoading = false
-    })
+    this.$socket.$on('repo-sync', this.repoSyncCallback)
   }
 
   /**
@@ -206,7 +263,8 @@ export default class ActivateSingleRepo extends mixins(
    * @returns {void}
    */
   beforeDestroy(): void {
-    this.$socket.$off('repo-sync')
+    this.$socket.$off('repo-sync', this.repoSyncCallback)
+    this.$socket.$off('vcs-installed-repos-updated', this.refetchData)
     this.repoSyncLoading = false
   }
 }

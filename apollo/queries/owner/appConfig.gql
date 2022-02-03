@@ -1,0 +1,7 @@
+query appConfig($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    appConfigurationUrl
+    hasGrantedAllRepoAccess
+  }
+}

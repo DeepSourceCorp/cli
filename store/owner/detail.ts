@@ -25,6 +25,7 @@ import { GraphqlError } from '~/types/apollo-graphql-types'
 
 import OwnerDetailQuery from '~/apollo/queries/owner/details.gql'
 import AccountSetupStatus from '~/apollo/queries/owner/accountSetupStatus.gql'
+import AppConfig from '~/apollo/queries/owner/appConfig.gql'
 import IssueTrendsGQLQuery from '~/apollo/queries/owner/issueTrends.gql'
 import AutofixTrendsGQLQuery from '~/apollo/queries/owner/autofixTrends.gql'
 import SyncRepositories from '~/apollo/mutations/owner/syncRepositories.gql'
@@ -171,6 +172,7 @@ export enum OwnerDetailActions {
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
   FETCH_ACCOUNT_SETUP_STATUS = 'fetchAccountSetupStatus',
+  FETCH_APP_CONFIG = 'fetchAppConfig',
   SET_OWNER = 'setOwner',
   FETCH_OWNER_SSH_KEY = 'fetchOwnerSSHKey',
   GENERATE_OWNER_SSH_KEY = 'generateOwnerSSHKey',
@@ -228,6 +230,12 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
   ) => Promise<void>
 
   [OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_APP_CONFIG]: (
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
     args: { login: string; provider: string; refetch?: boolean }
@@ -486,6 +494,22 @@ export const actions: OwnerDetailModuleActions = {
       const err = e as GraphqlError
       commit(OwnerDetailMutations.SET_ERROR, err)
       commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+
+  async [OwnerDetailActions.FETCH_APP_CONFIG]({ commit }, args) {
+    try {
+      const response = await this.$fetchGraphqlData(
+        AppConfig,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+    } catch (e) {
+      this.$toast.danger('There was an error fetching configuration from VCS provider.')
     }
   },
 

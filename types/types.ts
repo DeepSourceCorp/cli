@@ -7385,6 +7385,20 @@ export type Unnamed_103_Query = (
   )> }
 );
 
+export type AppConfigQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type AppConfigQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id' | 'appConfigurationUrl' | 'hasGrantedAllRepoAccess'>
+  )> }
+);
+
 export type ListAutoOnboardEventsQueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;

@@ -1071,6 +1071,15 @@ declare module '*/accountSetupStatus.gql' {
 }
     
 
+declare module '*/appConfig.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const appConfig: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/getAutoOnboardEventsList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

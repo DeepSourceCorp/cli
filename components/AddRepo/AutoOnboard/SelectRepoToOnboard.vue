@@ -65,13 +65,58 @@
           >Load more</z-button
         >
       </template>
-      <empty-state v-else-if="!fetchingData && searchCandidate">
-        <template slot="title">
-          <span class="text-base font-medium">
-            Found no repositories matching name "{{ searchCandidate }}"
-          </span>
-        </template>
-      </empty-state>
+      <div
+        v-else-if="!fetchingData"
+        class="flex flex-col items-center justify-center p-2 gap-y-5 text-center"
+      >
+        <img
+          v-if="searchCandidate"
+          class="mx-auto"
+          height="100px"
+          width="auto"
+          src="~/assets/images/ui-states/directory/empty-search.png"
+          :alt="searchCandidate"
+        />
+        <div>
+          <p class="text-vanilla-100 font-semibold">
+            {{
+              searchCandidate
+                ? `No results found for "${searchCandidate}"`
+                : 'We couldn’t find any repositories linked to this account.'
+            }}
+          </p>
+
+          <p class="max-w-md mt-1 text-sm text-vanilla-400">
+            {{
+              owner.hasGrantedAllRepoAccess
+                ? 'You can sync your repositories from VCS Provider'
+                : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
+            }}
+          </p>
+        </div>
+        <div class="flex gap-x-2">
+          <z-button
+            v-if="!owner.hasGrantedAllRepoAccess && owner.appConfigurationUrl"
+            label="Manage Permissions"
+            size="small"
+            :to="owner.appConfigurationUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            icon="settings"
+            icon-color="vanilla-100"
+            class="bg-ink-200 hover:bg-ink-200 hover:opacity-80 text-vanilla-100"
+          />
+          <z-button
+            label="Sync repositories"
+            icon="refresh-cw"
+            loading-label="Syncing repositories"
+            :is-loading="fetchingData"
+            :disabled="fetchingData"
+            size="small"
+            @click="refetchData"
+          />
+        </div>
+      </div>
     </div>
     <div class="flex items-center justify-between gap-4 px-4 pb-4">
       <span
@@ -96,6 +141,7 @@ import {
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
 @Component({
   components: {
@@ -110,7 +156,7 @@ import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 export default class SelectReposToOnboard extends mixins(
   ActiveUserMixin,
   AutoOnboardMixin,
-  ActiveUserMixin
+  OwnerDetailMixin
 ) {
   public searchCandidate = ''
   public onboardingRepos = false
@@ -120,11 +166,22 @@ export default class SelectReposToOnboard extends mixins(
   public limit = 50
   public currentPage = 1
 
-  mounted() {
+  /**
+   * Mounted hook for Vue component
+   *
+   * @returns {void}
+   */
+  mounted(): void {
     this.resetListConfig()
+    this.$socket.$on('vcs-installed-repos-updated', this.refetchData)
   }
 
-  async fetch(): Promise<void> {
+  /**
+   * Refetch repos that can be auto-onboarded
+   *
+   * @returns {Promise<void>}
+   */
+  async refetchData(): Promise<void> {
     this.fetchingData = true
     await this.fetchAutoOnboardableRepoList({
       login: this.activeOwner,
@@ -137,6 +194,15 @@ export default class SelectReposToOnboard extends mixins(
     this.fetchingData = false
   }
 
+  /**
+   * The fetch hook
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    await this.refetchData()
+  }
+
   @Watch('activeOwner')
   resetListConfig(): void {
     this.currentPage = 1
@@ -145,12 +211,12 @@ export default class SelectReposToOnboard extends mixins(
 
   async loadMore(): Promise<void> {
     this.currentPage = this.currentPage + 1
-    await this.$fetch()
+    await this.refetchData()
   }
 
   async search(): Promise<void> {
     this.resetListConfig()
-    await this.$fetch()
+    await this.refetchData()
   }
 
   async triggerOnboarding() {
@@ -209,6 +275,15 @@ export default class SelectReposToOnboard extends mixins(
         ...new Set(this.selectedRepos.filter((repoId) => !availableRepos.includes(repoId)))
       ]
     }
+  }
+
+  /**
+   * beforeDestroy hook for Vue component
+   *
+   * @returns {void}
+   */
+  beforeDestroy(): void {
+    this.$socket.$off('vcs-installed-repos-updated', this.refetchData)
   }
 }
 </script>

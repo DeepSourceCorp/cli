@@ -84,14 +84,35 @@ export default class AutoOnboardRepos extends mixins(
   public currentStage = Stages.SELECT_TEMPLATE
   public loadingAutoOnboardData = false
 
+  /**
+   * Mounted hook for Vue component
+   *
+   * @returns {void}
+   */
+  mounted(): void {
+    this.$socket.$on('vcs-installed-repos-updated', this.refetchAppConfig)
+  }
+
+  /**
+   * The fetch hook
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     this.loadingAutoOnboardData = true
-    await this.fetchEvents()
-    await this.fetchOwnerDetails({
-      login: this.activeOwner,
-      provider: this.activeProvider,
-      refetch: true
-    })
+    await Promise.all([
+      this.fetchEvents(),
+      this.fetchOwnerDetails({
+        login: this.activeOwner,
+        provider: this.activeProvider,
+        refetch: true
+      }),
+      this.fetchAppConfig({
+        login: this.activeOwner,
+        provider: this.activeProvider,
+        refetch: true
+      })
+    ])
     this.setPage()
     this.loadingAutoOnboardData = false
   }
@@ -105,6 +126,19 @@ export default class AutoOnboardRepos extends mixins(
     })
     this.setPage()
     this.loadingAutoOnboardData = false
+  }
+
+  /**
+   * Method to refetch app configuration
+   *
+   * @returns {Promise<void>}
+   */
+  async refetchAppConfig(): Promise<void> {
+    await this.fetchAppConfig({
+      login: this.activeOwner,
+      provider: this.activeProvider,
+      refetch: true
+    })
   }
 
   setPage(): void {
@@ -152,6 +186,15 @@ export default class AutoOnboardRepos extends mixins(
 
   closeModal() {
     this.$emit('close')
+  }
+
+  /**
+   * beforeDestroy hook for Vue component
+   *
+   * @returns {void}
+   */
+  beforeDestroy(): void {
+    this.$socket.$off('vcs-installed-repos-updated', this.refetchAppConfig)
   }
 }
 </script>

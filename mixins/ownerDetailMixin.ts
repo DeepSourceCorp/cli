@@ -50,6 +50,9 @@ export default class OwnerDetailMixin extends Vue {
     refetch?: boolean
   }) => Promise<void>
 
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_APP_CONFIG)
+  fetchAppConfig: (args: { login: string; provider: string; refetch?: boolean }) => Promise<void>
+
   @ownerDetailStore.Action(OwnerDetailActions.SUBMIT_ISSUE_TYPE_SETTINGS)
   submitIssueTypeSettings: (args: {
     login: string
