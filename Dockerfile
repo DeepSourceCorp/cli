@@ -16,7 +16,7 @@ ENV STRIPE_KEY=$STRIPE_PUBLISHABLE_KEY
 ENV SENTRY_RELEASE=1
 
 RUN apk update && \
-    apk add git make 
+    apk add git make
 
 COPY package.json yarn.lock .npmrc /app/
 
@@ -29,7 +29,11 @@ COPY . /app
 RUN make build && \
     rm -rf .npmrc
 
-FROM sleavely/node-awscli:14.x
+FROM node:14.13-alpine
+
+RUN apk update && \
+    apk add build-base git make python3 py3-pip && \
+    pip3 install awscli
 
 ENV NUXT_HOST=0.0.0.0
 
