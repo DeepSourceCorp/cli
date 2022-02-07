@@ -90,14 +90,7 @@
 
     <section class="relative self-end w-full border-t border-ink-200 justify-self-end group">
       <div v-if="loggedIn" class="p-2.5 space-y-2">
-        <sidebar-item
-          to="/support"
-          :active="$route.path === '/support'"
-          :isCollapsed="isCollapsed"
-          icon="support"
-        >
-          Get help
-        </sidebar-item>
+        <support-menu :is-collapsed="isCollapsed" />
         <div class="flex items-center">
           <sidebar-item
             :isCollapsed="isCollapsed"
@@ -113,7 +106,7 @@
           class="items-center hidden lg:flex"
           :class="[isCollapsed ? 'w-8' : 'lg:space-x-1 w-full justify-between']"
         >
-          <user-menu :isCollapsed="isCollapsed" />
+          <user-menu :is-collapsed="isCollapsed" />
           <client-only>
             <change-log v-show="!isCollapsed" v-if="!$config.onPrem" />
           </client-only>

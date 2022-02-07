@@ -23,7 +23,7 @@
     <template v-slot:body="{ close }">
       <z-menu-section
         title="Select dashboard view"
-        class="overflow-y-scroll max-h-64 hide-scroll"
+        class="overflow-y-scroll hide-scroll"
         :divider="true"
       >
         <z-menu-item
@@ -31,7 +31,7 @@
           as="nuxt-link"
           :key="context.id"
           :to="`/${context.vcs_provider}/${context.login}`"
-          class="flex items-center w-full space-x-2"
+          class="flex items-center w-full space-x-1"
           @click.native="close"
         >
           <z-avatar type="span" :image="context.avatar_url" :user-name="context.login"></z-avatar>

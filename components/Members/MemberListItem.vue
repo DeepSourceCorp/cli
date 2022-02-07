@@ -38,7 +38,7 @@
                 </div>
               </z-menu-item>
             </z-menu-section>
-            <z-menu-section :divider="false" class="-mt-2">
+            <z-menu-section :divider="false">
               <z-menu-item @click="removeMember" icon="alert-triangle" class="text-cherry"
                 >Remove from {{ isRepo ? 'repository' : 'team' }}</z-menu-item
               >

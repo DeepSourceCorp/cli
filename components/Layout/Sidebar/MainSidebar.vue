@@ -6,7 +6,7 @@
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
     <section class="flex items-center p-2.5 pb-0">
-      <context-switcher :isCollapsed="isCollapsed" />
+      <context-switcher :is-collapsed="isCollapsed" />
     </section>
     <section
       class="p-2.5 space-y-2 hide-scroll flex-grow"
@@ -37,9 +37,9 @@
         {{ activeDashboardHome }}
       </sidebar-item>
       <client-only>
-        <pending-adhoc-repos :isCollapsed="isCollapsed" />
+        <pending-adhoc-repos :is-collapsed="isCollapsed" />
       </client-only>
-      <recently-active-repo :isCollapsed="isCollapsed" />
+      <recently-active-repo :is-collapsed="isCollapsed" />
       <sidebar-item
         v-tooltip="{
           content: isCollapsed ? 'All repositories' : '',
@@ -122,18 +122,7 @@
 
     <section class="relative self-end w-full justify-self-end group">
       <div class="p-2.5 border-t border-ink-200 space-y-2">
-        <sidebar-item
-          v-tooltip="{
-            content: isCollapsed ? 'Get help' : '',
-            placement: 'right'
-          }"
-          to="/support"
-          :active="$route.path === '/support'"
-          :isCollapsed="isCollapsed"
-          icon="support"
-        >
-          Get help
-        </sidebar-item>
+        <support-menu :is-collapsed="isCollapsed" />
         <div class="flex items-center">
           <sidebar-item
             v-tooltip="{
@@ -154,7 +143,7 @@
           class="items-center hidden lg:flex"
           :class="{ 'lg:space-x-1 w-full justify-between': !isCollapsed, 'w-8': isCollapsed }"
         >
-          <user-menu :isCollapsed="isCollapsed" />
+          <user-menu :is-collapsed="isCollapsed" />
           <client-only>
             <change-log v-if="!$config.onPrem" v-show="!isCollapsed" class="pr-px" />
           </client-only>
