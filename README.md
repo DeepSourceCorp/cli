@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://deepsource.io/images/logo-wordmark-dark.svg" />
+  <img src="https://cms.deepsource.io/logo-wordmark-dark.svg" />
 </p>
 
 <p align="center">
