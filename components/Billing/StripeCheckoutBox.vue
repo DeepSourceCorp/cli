@@ -1,18 +1,7 @@
 <template>
   <div class="relative grid grid-cols-1 gap-4 p-3 rounded-md bg-ink-300">
     <div
-      class="
-        absolute
-        right-0
-        top-0
-        leading-none
-        bg-ink-200
-        rounded-bl-md
-        text-xs
-        px-2
-        py-1.5
-        text-vanilla-400
-      "
+      class="absolute right-0 top-0 leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400"
     >
       Powered by
       <img class="inline" width="30" height="14" alt="stripe" src="~/assets/images/stripe.svg" />
@@ -107,14 +96,18 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import StripeCardInput from './StripeCardInput.vue'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
+/**
+ * Checkout component built with Stripe for handling payments.
+ */
 @Component({
   components: {
     ZButton,
     ZInput,
     ZIcon
-  }
+  },
+  name: 'StripeCheckoutBox'
 })
-export default class Subscribe extends mixins(
+export default class StripeCheckoutBox extends mixins(
   SubscriptionMixin,
   OwnerBillingMixin,
   ActiveUserMixin
@@ -139,10 +132,20 @@ export default class Subscribe extends mixins(
   @Ref('checkout-box-stripe-input')
   stripeInput: StripeCardInput
 
-  handleStripeCardChange(event: StripeCardElementChangeEvent) {
+  /**
+   * Event handler for stripe card element `change` event. Updates card validity status.
+   *
+   * @returns {void}
+   */
+  handleStripeCardChange(event: StripeCardElementChangeEvent): void {
     this.validCardDetails = event.error ? false : true
   }
 
+  /**
+   * Fetch hook for checkout box component. Fetches owner details.
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
     await this.fetchOwnerDetails({
@@ -156,6 +159,11 @@ export default class Subscribe extends mixins(
     }
   }
 
+  /**
+   * Verifies if the given email in the email input is valid or not.
+   *
+   * @returns {void}
+   */
   validateEmail(el: HTMLInputElement): void {
     this.validBillingEmail = el.checkValidity()
   }
@@ -166,10 +174,21 @@ export default class Subscribe extends mixins(
     )
   }
 
+  /**
+   * Polling function that retries fetching billing status for an owner for 5 times.
+   * This is used once a user performs SCA verification to verify if the payment succeeded or not.
+   *
+   * @returns {Promise<void>}
+   */
   async tempAwaitStripeScaUpdate(): Promise<void> {
     let RETRY_COUNT = 5
     const { owner, provider } = this.$route.params
-    const retryFunction = async () => {
+    /**
+     * Function that attempts `network-only` refetch of billing status for an owner.
+     *
+     * @returns {Promise<void>}
+     */
+    const retryFunction = async (): Promise<void> => {
       const statusResponse = await this.fetchBillingStatus({
         login: owner,
         provider,
@@ -185,6 +204,14 @@ export default class Subscribe extends mixins(
     await retryFunction()
   }
 
+  /**
+   * Checks out the user with their given payment details and attempts verification of the payment.
+   * - Updates `checkoutState` to a valid state based on if the payment succeded or not.
+   * - Redirects user to the billing page if payment succeded or SCA is pending.
+   * - Shows an error message if payment failed.
+   *
+   * @returns {Promise<void>}
+   */
   async checkout(): Promise<void> {
     this.checkoutLoading = true
     this.checkoutState = null
@@ -220,6 +247,7 @@ export default class Subscribe extends mixins(
         let redirectRoute = this.$generateRoute([])
 
         if (checkoutResponse.nextAction === 'BILLING') {
+          await this.fetchActiveUser({ refetch: true })
           this.checkoutState = 'SUCCESS'
           this.$toast.success('🎉 Subscription activated! Redirecting you to the billing page.')
           redirectRoute = this.$generateRoute(['settings', 'billing'])
@@ -227,6 +255,7 @@ export default class Subscribe extends mixins(
             this.$router.push(redirectRoute)
           }, 1200)
         } else if (checkoutResponse.nextAction === 'ACTIVATE_NEW_REPO') {
+          await this.fetchActiveUser({ refetch: true })
           this.checkoutState = 'SUCCESS'
           this.$toast.success(
             "🎉 Subscription activated! Let's activate a repository and get started."
@@ -242,12 +271,14 @@ export default class Subscribe extends mixins(
 
           if (result?.paymentIntent && result.paymentIntent.status === 'succeeded') {
             await this.tempAwaitStripeScaUpdate()
+            await this.fetchActiveUser({ refetch: true })
             this.checkoutState = 'SUCCESS'
             this.$toast.success('🎉 Subscription activated! Redirecting you to the billing page.')
             setTimeout(() => {
               this.$router.push(this.$generateRoute(['settings', 'billing']))
             }, 1200)
           } else {
+            await this.fetchActiveUser({ refetch: true })
             this.checkoutState = 'PARTIAL'
             if (result?.error?.message) {
               this.$toast.show({
