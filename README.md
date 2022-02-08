@@ -25,7 +25,7 @@ Command line interface to DeepSource
 [![DeepSource](https://deepsource.io/gh/deepsourcelabs/cli.svg/?label=resolved+issues&show_trend=true&token=j4U3e5C2BSIdTefFeY7uXNT6)](https://deepsource.io/gh/deepsourcelabs/cli/?ref=repository-badge)
 
 **Note**: Some commands of the CLI are breaking due to recent changes in the
-API on Feb 8,2022. We are actively working to make them support the new APIs.
+API on February 8,2022. We are actively working to make them support the new APIs.
 
 ## Installation
 
