@@ -1,7 +1,7 @@
 timeout: 30m0s
 
 steps:
-  - name: 'gcr.io/kaniko-project/executor:v0.19.0'
+  - name: 'gcr.io/kaniko-project/executor:v1.6.0'
     args:
       - --destination=us.gcr.io/deepsource-production/bifrost-enterprise:$TAG_NAME
       - --dockerfile=Dockerfile

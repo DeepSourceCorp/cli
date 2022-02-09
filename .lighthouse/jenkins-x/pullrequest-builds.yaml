@@ -61,7 +61,6 @@ spec:
               args:
                 - --cache-dir=/kanikocache
                 - --image=node:14.19-alpine
-                - --image=frolvlad/alpine-glibc:alpine-3.15_glibc-2.34
               workingDir: /workspace/source
             - image: gcr.io/kaniko-project/executor:v1.6.0-debug
               name: container-build
