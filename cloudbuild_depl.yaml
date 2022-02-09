@@ -1,7 +1,7 @@
 timeout: 30m0s
 
 steps:
-  - name: 'gcr.io/kaniko-project/executor:v1.5.0'
+  - name: 'gcr.io/kaniko-project/executor:v0.19.0'
     args:
       - --destination=us.gcr.io/deepsource-production/bifrost:$TAG_NAME
       - --dockerfile=Dockerfile
@@ -13,7 +13,6 @@ steps:
       - --build-arg=NODE_ENV=prod
       - --build-arg=DOMAIN=assets.deepsource.io
       - --cache=false
-      - --snapshotMode=redo
     secretEnv:
       - 'ZEAL_SECRET'
       - 'DSN'
