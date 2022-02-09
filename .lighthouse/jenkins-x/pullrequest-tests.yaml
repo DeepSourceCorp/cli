@@ -43,7 +43,7 @@ spec:
                 git reset --hard $PULL_PULL_SHA
                 echo "checked out revision: $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER@$PULL_PULL_SHA to dir: $SUBDIR"
               workingDir: /workspace
-            - image: node:14.18-alpine
+            - image: node:14.19-alpine
               name: run-tests
               resources:
                 requests:

@@ -6,101 +6,101 @@ metadata:
 spec:
   pipelineSpec:
     tasks:
-    - name: bifrost-pr-builds
-      resources: {}
-      taskSpec:
-        metadata: {}
-        stepTemplate:
-          imagePullPolicy: "IfNotPresent"
-          env:
-          - name: HOME
-            value: /tekton/home
-          - name: GOOGLE_APPLICATION_CREDENTIALS
-            value: /secret/kaniko.json
-          envFrom:
-          - secretRef:
-              name: jx-boot-job-env-vars
-              optional: true
-          - secretRef:
-              name: zeal-secret
-          - secretRef:
-              name: stripe-publishable
-          name: ""
-        steps:
-        - image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.19.0
-          name: git-clone
-          resources: {}
-          script: |
-            #!/bin/sh
-            export SUBDIR="source"
-            echo "git cloning url: $REPO_URL version $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER@$PULL_PULL_SHA to dir: $SUBDIR"
-            git config --global user.name ${GIT_AUTHOR_NAME}
-            git config --global user.email ${GIT_AUTHOR_EMAIL}
-            git config --global credential.helper store
-            git clone $REPO_URL $SUBDIR
-            cd $SUBDIR
-            git fetch origin $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER
-            git checkout $(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER
-            git reset --hard $PULL_PULL_SHA
-            echo "checked out revision: $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER@$PULL_PULL_SHA to dir: $SUBDIR"
-          workingDir: /workspace
-        - image: ghcr.io/jenkins-x/jx-boot:3.2.157
-          name: jx-variables
-          resources: {}
-          script: |
-            #!/usr/bin/env sh
-            jx gitops variables
-            jx gitops pr variables
-          workingDir: /workspace/source
-        - image: ghcr.io/jenkins-x/jx-registry:0.1.1
-          name: check-registry
-          resources: {}
-          workingDir: /workspace/source
-        - name: warm-cache
-          image: gcr.io/kaniko-project/warmer:latest
-          args:
-            - --cache-dir=/kanikocache
-            - --image=node:14.8-alpine
-            - --image=sleavely/node-awscli:14.x
-          workingDir: /workspace/source
-        - image: gcr.io/kaniko-project/executor:v1.6.0-debug
-          name: container-build
-          resources:
-            requests:
-              memory: 6Gi
-              cpu: 5
-          script: |
-            #!/busybox/sh
-            source .jx/variables.sh
-            /kaniko/executor --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X --build-arg=DISABLE_SENTRY=true --build-arg=ZEAL_SECRET=$ZEAL_SECRET --build-arg=STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY --build-arg=NODE_ENV=staging --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-dev/$REPO_NAME:$BRANCH_NAME --cache=true --snapshotMode=redo --cache-dir=/kanikocache
-          workingDir: /workspace/source
+      - name: bifrost-pr-builds
+        resources: {}
+        taskSpec:
+          metadata: {}
+          stepTemplate:
+            imagePullPolicy: 'IfNotPresent'
+            env:
+              - name: HOME
+                value: /tekton/home
+              - name: GOOGLE_APPLICATION_CREDENTIALS
+                value: /secret/kaniko.json
+            envFrom:
+              - secretRef:
+                  name: jx-boot-job-env-vars
+                  optional: true
+              - secretRef:
+                  name: zeal-secret
+              - secretRef:
+                  name: stripe-publishable
+            name: ''
+          steps:
+            - image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.19.0
+              name: git-clone
+              resources: {}
+              script: |
+                #!/bin/sh
+                export SUBDIR="source"
+                echo "git cloning url: $REPO_URL version $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER@$PULL_PULL_SHA to dir: $SUBDIR"
+                git config --global user.name ${GIT_AUTHOR_NAME}
+                git config --global user.email ${GIT_AUTHOR_EMAIL}
+                git config --global credential.helper store
+                git clone $REPO_URL $SUBDIR
+                cd $SUBDIR
+                git fetch origin $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER
+                git checkout $(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER
+                git reset --hard $PULL_PULL_SHA
+                echo "checked out revision: $PULL_PULL_REF:$(echo $JOB_NAME | tr '[:lower:]' '[:upper:]')-$PULL_NUMBER@$PULL_PULL_SHA to dir: $SUBDIR"
+              workingDir: /workspace
+            - image: ghcr.io/jenkins-x/jx-boot:3.2.157
+              name: jx-variables
+              resources: {}
+              script: |
+                #!/usr/bin/env sh
+                jx gitops variables
+                jx gitops pr variables
+              workingDir: /workspace/source
+            - image: ghcr.io/jenkins-x/jx-registry:0.1.1
+              name: check-registry
+              resources: {}
+              workingDir: /workspace/source
+            - name: warm-cache
+              image: gcr.io/kaniko-project/warmer:latest
+              args:
+                - --cache-dir=/kanikocache
+                - --image=node:14.19-alpine
+                - --image=frolvlad/alpine-glibc:alpine-3.15_glibc-2.34
+              workingDir: /workspace/source
+            - image: gcr.io/kaniko-project/executor:v1.6.0-debug
+              name: container-build
+              resources:
+                requests:
+                  memory: 6Gi
+                  cpu: 5
+              script: |
+                #!/busybox/sh
+                source .jx/variables.sh
+                /kaniko/executor --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X --build-arg=DISABLE_SENTRY=true --build-arg=ZEAL_SECRET=$ZEAL_SECRET --build-arg=STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY --build-arg=NODE_ENV=staging --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-dev/$REPO_NAME:$BRANCH_NAME --cache=true --snapshotMode=redo --cache-dir=/kanikocache
+              workingDir: /workspace/source
+          workspaces:
+            - name: kanikocache
+              mountPath: /kanikocache
+            - name: kaniko
+              mountPath: /secret
         workspaces:
-        - name: kanikocache
-          mountPath: /kanikocache
-        - name: kaniko
-          mountPath: /secret
-      workspaces:
-      - name: kanikocache
-        workspace: bifrost-cache
-        subPath: kanikocache
-      - name: kaniko
-        workspace: kaniko
+          - name: kanikocache
+            workspace: bifrost-cache
+            subPath: kanikocache
+          - name: kaniko
+            workspace: kaniko
     workspaces:
-    - name: bifrost-cache
-    - name: kaniko
+      - name: bifrost-cache
+      - name: kaniko
   workspaces:
-  - name: bifrost-cache
-    persistentVolumeClaim:
-      claimName: bifrost-cache
-  - name: kaniko
-    secret:
-      secretName: kaniko
-  - name: zeal
-    secret:
-      secretName: zeal-secret
-  - name: stripe
-    secret:
-      secretName: stripe-publishable
+    - name: bifrost-cache
+      persistentVolumeClaim:
+        claimName: bifrost-cache
+    - name: kaniko
+      secret:
+        secretName: kaniko
+    - name: zeal
+      secret:
+        secretName: zeal-secret
+    - name: stripe
+      secret:
+        secretName: stripe-publishable
   podTemplate:
     nodeSelector:
       scheduledBy: jx

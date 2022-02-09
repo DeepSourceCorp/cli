@@ -1,4 +1,4 @@
-FROM node:14.18-alpine as builder
+FROM node:14.19-alpine AS builder
 
 ARG DISABLE_SENTRY
 ARG ZEAL_SECRET
@@ -29,13 +29,17 @@ COPY . /app
 RUN make build && \
     rm -rf .npmrc
 
-FROM node:14.13-alpine
+FROM node:14.19-alpine AS node
 
-RUN apk update && \
-    apk add build-base git make python3 py3-pip && \
-    pip3 install awscli
+FROM frolvlad/alpine-glibc:alpine-3.15_glibc-2.34
 
 ENV NUXT_HOST=0.0.0.0
+
+COPY --from=node /usr/lib /usr/lib
+COPY --from=node /usr/local/share /usr/local/share
+COPY --from=node /usr/local/lib /usr/local/lib
+COPY --from=node /usr/local/include /usr/local/include
+COPY --from=node /usr/local/bin /usr/local/bin
 
 COPY --from=builder /app/.nuxt /app/.nuxt
 COPY --from=builder /app/package.json /app/package.json
@@ -47,6 +51,12 @@ COPY --from=builder /app/server /app/server
 COPY --from=builder /app/static /app/static
 COPY --from=builder /app/Makefile /app/Makefile
 COPY --from=builder /app/.git /app/.git
+
+RUN apk update && \
+    apk add --no-cache curl && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install
 
 WORKDIR /app
 
