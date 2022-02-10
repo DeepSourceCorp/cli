@@ -1,6 +1,11 @@
 import { Component, Vue } from 'nuxt-property-decorator'
+import { ZPagination } from '@deepsourcelabs/zeal'
 
-@Component
+@Component({
+  components: {
+    ZPagination
+  }
+})
 export default class PaginationMixin extends Vue {
   public perPageCount = 5
   public currentPage = 1

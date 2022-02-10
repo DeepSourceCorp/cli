@@ -14,16 +14,11 @@ type AcceptGroupInvitePayload {
 }
 
 type AccessToken implements MaskPrimaryKeyNode {
-  id: ID!
-  createdAt: DateTime!
-  modifiedAt: DateTime!
-  alive: Boolean
   description: String!
-  expiryDate: DateTime!
-  scopesSubscribed(offset: Int, before: String, after: String, first: Int, last: Int): TokenScopeConnection!
-  lastUsed: DateTime
-  objectId: Int
-  createdBy: EnterpriseUser!
+  expiresAt: DateTime!
+  lastUsedAt: DateTime
+  id: ID!
+  expirationStatus: AccessTokenExpirationStatus
 }
 
 type AccessTokenConnection {
@@ -35,6 +30,12 @@ type AccessTokenConnection {
 type AccessTokenEdge {
   node: AccessToken
   cursor: String!
+}
+
+enum AccessTokenExpirationStatus {
+  ACTIVE
+  DOES_NOT_EXPIRE
+  EXPIRED
 }
 
 enum ActionChoice {
@@ -672,29 +673,16 @@ type CouponInfo {
   description: String!
 }
 
-type CreateAccessToken implements MaskPrimaryKeyNode {
-  id: ID!
-  createdAt: DateTime!
-  modifiedAt: DateTime!
-  alive: Boolean
+input CreateAccessTokenInput {
   description: String!
-  expiryDate: DateTime!
-  scopesSubscribed(offset: Int, before: String, after: String, first: Int, last: Int): TokenScopeConnection!
-  lastUsed: DateTime
-  objectId: Int
-  createdBy: EnterpriseUser!
-  token: String!
+  expireInDays: Int
+  clientMutationId: String
 }
 
-type CreateAccessTokenConnection {
-  pageInfo: PageInfo!
-  edges: [CreateAccessTokenEdge]!
-  totalCount: Int
-}
-
-type CreateAccessTokenEdge {
-  node: CreateAccessToken
-  cursor: String!
+type CreateAccessTokenPayload {
+  token: String
+  accessToken: AccessToken
+  clientMutationId: String
 }
 
 input CreateAutofixRunForAnalyzerInput {
@@ -754,19 +742,6 @@ type CreateGroupPayload {
   clientMutationId: String
 }
 
-input CreateOwnerAccessTokenInput {
-  description: String!
-  scopesSubscribed: [String]!
-  expiryDays: Int
-  ownerId: ID!
-  clientMutationId: String
-}
-
-type CreateOwnerAccessTokenPayload {
-  accessToken: CreateAccessToken
-  clientMutationId: String
-}
-
 input CreatePullRequestInput {
   patches: [Int]!
   autofixRunId: String!
@@ -776,18 +751,6 @@ input CreatePullRequestInput {
 
 type CreatePullRequestPayload {
   ok: Boolean
-  clientMutationId: String
-}
-
-input CreateUserAccessTokenInput {
-  description: String!
-  scopesSubscribed: [String]!
-  expiryDays: Int
-  clientMutationId: String
-}
-
-type CreateUserAccessTokenPayload {
-  accessToken: CreateAccessToken
   clientMutationId: String
 }
 
@@ -828,7 +791,6 @@ type DeleteAccessTokenPayload {
 }
 
 input DeleteAllAccessTokensInput {
-  ownerId: ID
   clientMutationId: String
 }
 
@@ -990,7 +952,6 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
-  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): CreateAccessTokenConnection!
   socialAuth(offset: Int, before: String, after: String, first: Int, last: Int, uid: String, uid_In: [String], provider: String, provider_In: [String]): SocialNodeConnection!
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
@@ -1004,6 +965,7 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   silenceRulesCreated(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection!
+  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection!
   isSuperuser: Boolean!
   createdAt: DateTime!
   modifiedAt: DateTime!
@@ -1483,9 +1445,9 @@ type Mutation {
   updateWebhook(input: UpdateWebhookInput!): UpdateWebhookPayload
   disableWebhook(input: DisableWebhookInput!): DisableWebhookPayload
   deleteWebhook(input: DeleteWebhookInput!): DeleteWebhookPayload
-  createUserAccessToken(input: CreateUserAccessTokenInput!): CreateUserAccessTokenPayload
-  createOwnerAccessToken(input: CreateOwnerAccessTokenInput!): CreateOwnerAccessTokenPayload
+  createAccessToken(input: CreateAccessTokenInput!): CreateAccessTokenPayload
   updateAccessToken(input: UpdateAccessTokenInput!): UpdateAccessTokenPayload
+  rotateAccessToken(input: RotateAccessTokenInput!): RotateAccessTokenPayload
   deleteAccessToken(input: DeleteAccessTokenInput!): DeleteAccessTokenPayload
   deleteAllAccessTokens(input: DeleteAllAccessTokensInput!): DeleteAllAccessTokensPayload
   webhookSecret(input: WebhookSecretInput!): WebhookSecretPayload
@@ -1559,7 +1521,7 @@ type Owner implements MaskPrimaryKeyNode {
   isAutoonboardAllowed: Boolean
   autoonboardableRepositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   autoonboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection
-  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): AccessTokenConnection
+  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection
   maxUsagePercentage: Float
   featureUsage: GenericScalar
   isGsrSshRegistered: Boolean
@@ -1612,10 +1574,7 @@ type Query {
   isViewerSuperadmin: Boolean
   getGroupInviteInfo(invitationCode: String!): GroupInviteInfo
   enterprise: EnterpriseInstallationRoot
-  ownerAccessTokens(ownerId: ID!, offset: Int, before: String, after: String, first: Int, last: Int, q: String): AccessTokenConnection
-  userAccessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): AccessTokenConnection
   accessToken(tokenId: ID!): AccessToken
-  tokenScopes(forOwner: Boolean, offset: Int, before: String, after: String, first: Int, last: Int): TokenScopeConnection
   webhookEventTypes(offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventTypesConnection
   webhookEventDeliveries(ownerId: ID!, offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventDeliveryConnection
   webhookEventDelivery(ownerId: ID!, deliveryId: ID!): WebhookEventDelivery
@@ -1985,6 +1944,16 @@ type Revoke {
   revoked: Int!
 }
 
+input RotateAccessTokenInput {
+  tokenId: ID!
+  clientMutationId: String
+}
+
+type RotateAccessTokenPayload {
+  token: String
+  clientMutationId: String
+}
+
 type Run implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -2156,9 +2125,9 @@ type SubscriptionPlanSwitchPayload {
 }
 
 enum SubscriptionStatusChoice {
-  TRIAL
   ACTIVE
   INACTIVE
+  TRIAL
   PAST_DUE
   SCA_REQUIRED
 }
@@ -2348,34 +2317,6 @@ type ToggleUserActivePayload {
   clientMutationId: String
 }
 
-type TokenScope implements MaskPrimaryKeyNode {
-  id: ID!
-  createdAt: DateTime!
-  modifiedAt: DateTime!
-  alive: Boolean
-  scopeFor: TokenScopeScopeFor!
-  resource: String!
-  operation: String!
-  shortDescription: String!
-  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): CreateAccessTokenConnection!
-}
-
-type TokenScopeConnection {
-  pageInfo: PageInfo!
-  edges: [TokenScopeEdge]!
-  totalCount: Int
-}
-
-type TokenScopeEdge {
-  node: TokenScope
-  cursor: String!
-}
-
-enum TokenScopeScopeFor {
-  USER
-  OWNER
-}
-
 type Transaction implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -2538,8 +2479,8 @@ type TransformerToolEdge {
 }
 
 enum TrendType {
-  MONTHLY
   YEARLY
+  MONTHLY
 }
 
 input TriggerAdHocRunInput {
@@ -2587,15 +2528,14 @@ type UpdateAccessControlSettingsPayload {
 }
 
 input UpdateAccessTokenInput {
-  description: String
-  scopesSubscribed: [String]
-  expiryDays: Int
   tokenId: ID!
+  description: String
+  expireInDays: Int
   clientMutationId: String
 }
 
 type UpdateAccessTokenPayload {
-  accessToken: CreateAccessToken
+  ok: Boolean
   clientMutationId: String
 }
 
@@ -2868,7 +2808,6 @@ type User implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
-  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int, q: String): CreateAccessTokenConnection!
   socialAuth(offset: Int, before: String, after: String, first: Int, last: Int, uid: String, uid_In: [String], provider: String, provider_In: [String]): SocialNodeConnection!
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
@@ -2882,6 +2821,7 @@ type User implements MaskPrimaryKeyNode {
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   silenceRulesCreated(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection!
+  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection
   fullName: String
   availableCredits: Float
   referralUrl: String
@@ -2919,9 +2859,9 @@ type UserPreferenceEdge {
 
 enum VCSProviderChoices {
   GITHUB
-  GITHUB_ENTERPRISE
-  BITBUCKET
   GITLAB
+  BITBUCKET
+  GITHUB_ENTERPRISE
   GSR
 }
 
@@ -3030,6 +2970,7 @@ type WebhookEventTypes implements MaskPrimaryKeyNode {
   name: String!
   shortcode: String!
   shortDescription: String!
+  isPrivate: Boolean!
   webhooks(offset: Int, before: String, after: String, first: Int, last: Int): WebhookConnection!
   deliveries(offset: Int, before: String, after: String, first: Int, last: Int): WebhookEventDeliveryConnection!
 }

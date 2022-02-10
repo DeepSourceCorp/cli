@@ -91,6 +91,7 @@ export default {
     '~/plugins/helpers/websocket.client.ts',
     '~/plugins/helpers/clipboard.client.ts',
     '~/plugins/helpers/outsideClick.client.ts',
+    '~/plugins/helpers/directives.client.ts',
     '~/plugins/helpers/localstorage.client.ts',
     '~/plugins/components/toasts.client.ts',
     '~/plugins/components/tooltip.ts'

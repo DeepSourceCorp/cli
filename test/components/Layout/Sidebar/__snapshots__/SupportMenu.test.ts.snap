@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders SupportMenu with all props: {"isCollapsed":false} 1`] = `"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template class=\\"z-10\\"></template></zmenu-stub>"`;
+exports[`renders SupportMenu with all props: {"isCollapsed":false} 1`] = `"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" class=\\"w-full\\"> <template class=\\"z-10\\"></template></zmenu-stub>"`;
 
-exports[`renders SupportMenu with all props: {"isCollapsed":null} 1`] = `"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template class=\\"z-10\\"></template></zmenu-stub>"`;
+exports[`renders SupportMenu with all props: {"isCollapsed":null} 1`] = `"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" class=\\"w-full\\"> <template class=\\"z-10\\"></template></zmenu-stub>"`;
 
-exports[`renders SupportMenu with all props: {"isCollapsed":true} 1`] = `"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template class=\\"z-10\\"></template></zmenu-stub>"`;
+exports[`renders SupportMenu with all props: {"isCollapsed":true} 1`] = `"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" class=\\"w-full\\"> <template class=\\"z-10\\"></template></zmenu-stub>"`;
 
-exports[`renders SupportMenu with all props: {} 1`] = `"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template class=\\"z-10\\"></template></zmenu-stub>"`;
+exports[`renders SupportMenu with all props: {} 1`] = `"<zmenu-stub direction=\\"right\\" placement=\\"top\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" class=\\"w-full\\"> <template class=\\"z-10\\"></template></zmenu-stub>"`;

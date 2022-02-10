@@ -1,53 +1,32 @@
 <template>
-  <div>
-    <greeting :firstName="viewer.firstName || viewer.email"></greeting>
-    <section class="flex flex-col-reverse lg:grid lg:grid-cols-fr-20 px-4 gap-4">
-      <div class="grid grid-cols-2 gap-4">
-        <starred-repo-list class="col-span-full" />
-        <!-- activity-feed-list /-->
-        <div class="col-span-full">
-          <recommended-issues />
-        </div>
+  <section class="flex flex-col-reverse gap-4 p-4 pb-12 lg:grid lg:grid-cols-fr-20">
+    <div class="grid grid-cols-2 gap-4">
+      <starred-repo-list class="col-span-full" />
+      <!-- activity-feed-list /-->
+      <div class="col-span-full">
+        <recommended-issues />
       </div>
-      <div>
-        <client-only>
-          <viewer />
-        </client-only>
-      </div>
-    </section>
-  </div>
+    </div>
+    <div class="pt-9">
+      <client-only>
+        <viewer />
+      </client-only>
+    </div>
+  </section>
 </template>
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
 
-import { StatSection } from '@/components/Metrics'
-
-import {
-  Greeting,
-  Viewer,
-  RecommendedIssues,
-  StarredRepoList,
-  ActivityFeedList
-} from '@/components/PersonalDashboard'
-
 @Component({
-  components: {
-    StatSection,
-    Greeting,
-    Viewer,
-    RecommendedIssues,
-    StarredRepoList,
-    ActivityFeedList
-  },
   meta: {
     auth: {
       strict: true,
       redirectToLogin: true
     }
   },
-  layout: 'sidebar-only'
+  layout: 'user'
 })
 export default class PersonalDashboard extends mixins(ActiveUserMixin) {
   head(): Record<string, string> {

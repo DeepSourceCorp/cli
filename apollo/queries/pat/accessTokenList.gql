@@ -1,0 +1,17 @@
+query accessTokenList($limit: Int, $after: String) {
+  viewer {
+    id
+    accessTokens(first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          id
+          description
+          expirationStatus
+          expiresAt
+          lastUsedAt
+        }
+      }
+    }
+  }
+}

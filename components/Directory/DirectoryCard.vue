@@ -59,7 +59,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZTag, ZIcon } from '@deepsourcelabs/zeal'
-import { getDaysDiffInDays } from '~/utils/date'
+import { getDateDiffInDays } from '~/utils/date'
 import { Analyzer, TransformerTool } from '~/types/types'
 
 @Component({
@@ -81,7 +81,7 @@ export default class DirectoryCard extends Vue {
   }
 
   get isNew(): boolean {
-    return getDaysDiffInDays(Date.now(), this.infoObj.createdAt) <= 30
+    return getDateDiffInDays(Date.now(), this.infoObj.createdAt) <= 30
   }
 }
 </script>

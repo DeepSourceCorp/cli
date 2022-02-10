@@ -116,6 +116,7 @@ function getHumanizedTimeFromNow(timestamp: string): string {
   if (diff <= 12) {
     return fromNow(timestamp)
   }
+
   return dayjs(timestamp).calendar(undefined, {
     sameDay: '[Earlier today]',
     lastDay: '[Yesterday]',
@@ -124,10 +125,22 @@ function getHumanizedTimeFromNow(timestamp: string): string {
   })
 }
 
-function getDaysDiffInDays(day1: number | string, day2: number | string): number {
+/**
+ * Get the difference between two dates in number of days
+ *
+ * @param {number|string} day1
+ * @param {number|string} day2
+ *
+ * @return {number}
+ */
+function getDateDiffInDays(
+  day1: number | string,
+  day2: number | string,
+  includeCurrentDay = false
+): number {
   const date1 = dayjs(day1)
   const date2 = dayjs(day2)
-  return date1.diff(date2, 'days')
+  return includeCurrentDay ? date1.diff(date2, 'days') + 1 : date1.diff(date2, 'days')
 }
 
 const { duration: createDuration } = dayjs
@@ -141,7 +154,7 @@ export {
   parseISODate,
   getNextMonth,
   getNextYear,
-  getDaysDiffInDays,
+  getDateDiffInDays,
   createDuration,
   DurationTypeT
 }

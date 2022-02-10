@@ -1,0 +1,9 @@
+query accessToken($tokenId: ID!) {
+  accessToken(tokenId: $tokenId) {
+    id
+    description
+    lastUsedAt
+    expirationStatus
+    expiresAt
+  }
+}

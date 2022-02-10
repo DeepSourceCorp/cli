@@ -1,5 +1,0 @@
-mutation{
-  switchToAsgard(input: {}){
-  	ok
-  }
-}

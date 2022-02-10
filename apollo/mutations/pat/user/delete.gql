@@ -1,0 +1,5 @@
+mutation($tokenId: ID!) {
+  deleteAccessToken(input: { tokenId: $tokenId }) {
+    ok
+  }
+}

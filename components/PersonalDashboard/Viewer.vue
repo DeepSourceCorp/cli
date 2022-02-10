@@ -31,7 +31,7 @@
     </div>
     <div>
       <div class="p-2 px-4">Recommended actions</div>
-      <div class="w-full h-0.5 bg-ink-200">
+      <div class="w-full h-px bg-ink-200">
         <div
           class="h-0.5 bg-juniper transform transition-all duration-100 ease-in-out"
           :style="{

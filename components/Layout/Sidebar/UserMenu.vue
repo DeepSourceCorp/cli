@@ -26,8 +26,9 @@
         <z-menu-item>{{ viewer.email }}</z-menu-item>
       </z-menu-section>
       <z-menu-section :divider="false">
-        <z-menu-item @click="() => this.$router.push('/me')">Dashboard</z-menu-item>
-        <z-menu-item @click="() => signOut()">Sign out</z-menu-item>
+        <z-menu-item icon="settings" as="nuxt-link" to="/settings">Settings</z-menu-item>
+        <z-menu-item icon="dashboard" as="nuxt-link" to="/me">Dashboard</z-menu-item>
+        <z-menu-item icon="log-out" @click="() => signOut()">Sign out</z-menu-item>
       </z-menu-section>
     </template>
   </z-menu>

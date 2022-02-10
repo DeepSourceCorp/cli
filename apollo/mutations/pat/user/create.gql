@@ -1,0 +1,12 @@
+mutation($description: String!, $expiryDays: Int) {
+  createAccessToken(input: { description: $description, expireInDays: $expiryDays }) {
+    token
+    accessToken {
+      id
+      description
+      expirationStatus
+      expiresAt
+      lastUsedAt
+    }
+  }
+}

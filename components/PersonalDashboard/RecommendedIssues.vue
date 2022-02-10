@@ -1,5 +1,10 @@
 <template>
-  <stat-section title="Recommended Issues" :showBorder="false" :bodySpacing="0" :bodyIsGrid="false">
+  <stat-section
+    title="Recommended issues"
+    :show-border="false"
+    :body-spacing="0"
+    :body-is-grid="false"
+  >
     <div class="space-y-3">
       <issue-list-item
         v-for="issue in issueList"

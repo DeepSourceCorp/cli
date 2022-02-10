@@ -44,15 +44,6 @@ declare module '*/socialAuth.gql' {
 }
     
 
-declare module '*/switchAccount.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/commitFixToPullRequest.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -597,6 +588,15 @@ declare module '*/update.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const updateWebhook: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/deleteAll.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
 
   export default defaultDocument;
 }
@@ -1220,6 +1220,24 @@ declare module '*/listEventTypes.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const listWebhookEvents: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/accessToken.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const accessToken: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/accessTokenList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const accessTokenList: DocumentNode;
 
   export default defaultDocument;
 }

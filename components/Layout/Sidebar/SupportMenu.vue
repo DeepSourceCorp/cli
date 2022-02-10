@@ -1,5 +1,5 @@
 <template>
-  <z-menu placement="top">
+  <z-menu placement="top" class="w-full">
     <template v-slot:trigger="{ toggle, isOpen }">
       <sidebar-item
         :is-collapsed="isCollapsed"

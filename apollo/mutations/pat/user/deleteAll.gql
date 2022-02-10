@@ -1,0 +1,5 @@
+mutation {
+  deleteAllAccessTokens(input: {}) {
+    ok
+  }
+}

@@ -13,7 +13,7 @@
       <slot name="description"></slot>
     </template>
     <div class="text-right">
-      <z-toggle :id="inputId" v-model="modelValue" :disabled="disabled"></z-toggle>
+      <z-toggle v-model="modelValue" :id="inputId" :disabled="disabled" :class="toggleClass" />
     </div>
   </input-wrapper>
 </template>
@@ -44,6 +44,9 @@ export default class ToggleInput extends Vue {
 
   @Prop({ default: 'small' })
   inputWidth: string
+
+  @Prop({ default: '' })
+  toggleClass: string
 
   @Prop({ default: false })
   removeYPadding: boolean
