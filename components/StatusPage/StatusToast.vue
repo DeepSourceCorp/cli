@@ -64,6 +64,9 @@ import { parseISODate, formatDate } from '~/utils/date'
   }
 })
 export default class StatusToast extends Vue {
+  @Prop({ required: true })
+  id: string
+
   @Prop({ default: '' })
   title: string
 
@@ -89,6 +92,7 @@ export default class StatusToast extends Vue {
   }
 
   public destroy(): void {
+    localStorage.setItem(this.id, new Date().toISOString())
     this.active = false
   }
 

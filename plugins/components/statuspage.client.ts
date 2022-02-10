@@ -1,3 +1,4 @@
+import dayjs from 'dayjs'
 import Vue from 'vue'
 import { VueConstructor } from 'vue/types'
 
@@ -39,6 +40,20 @@ const containerClasses = [
 
 const STATUS_API_URL = 'https://dwlkwbmqzv11.statuspage.io/api/v2/summary.json'
 
+function allowUpdateForUser(id: string) {
+  if (localStorage.getItem(id)) {
+    const today = dayjs()
+    const toastDismissDate = dayjs(localStorage.getItem(id))
+    if (today > toastDismissDate.add(1, 'day')) {
+      localStorage.removeItem(id)
+      return true
+    } else {
+      return false
+    }
+  }
+  return true
+}
+
 export async function refetchStatus(): Promise<void> {
   const statuspageSummary = await fetch(STATUS_API_URL, {
     headers: {
@@ -51,31 +66,35 @@ export async function refetchStatus(): Promise<void> {
   const scheduled_maintenances: ScheduledMaintainenceT[] = data.scheduled_maintenances
 
   if (scheduled_maintenances.length > 0) {
-    scheduled_maintenances.forEach((item) => {
-      const {
-        name: title,
-        scheduled_for: scheduledFrom,
-        scheduled_until: scheduledTill,
-        shortlink: shortLink,
-        components
-      } = item
-      const componentAffected = components.map((component) => component.name).join(', ')
+    scheduled_maintenances
+      .filter((update) => allowUpdateForUser(update.id))
+      .forEach((item) => {
+        const {
+          id,
+          name: title,
+          scheduled_for: scheduledFrom,
+          scheduled_until: scheduledTill,
+          shortlink: shortLink,
+          components
+        } = item
+        const componentAffected = components.map((component) => component.name).join(', ')
 
-      if (item.status === 'scheduled') {
-        spawn(
-          'status-toasts-wrapper',
-          {
-            title,
-            scheduledFrom,
-            scheduledTill,
-            componentAffected,
-            shortLink
-          },
-          StatusToast,
-          Vue
-        )
-      }
-    })
+        if (item.status === 'scheduled') {
+          spawn(
+            'status-toasts-wrapper',
+            {
+              id,
+              title,
+              scheduledFrom,
+              scheduledTill,
+              componentAffected,
+              shortLink
+            },
+            StatusToast,
+            Vue
+          )
+        }
+      })
   } else {
     setTimeout(refetchStatus, 60 * 1000)
   }

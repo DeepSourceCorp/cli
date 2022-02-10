@@ -24,7 +24,7 @@
         <z-confirm
           v-if="showDeleteConfirm"
           title="Are you sure you want to delete this token?"
-          subtitle="Any applications or scripts using this token will no longer be able to access the DeepSource API. You cannot undo this action."
+          subtitle="Any application or script using this token will no longer be able to access the DeepSource API. You cannot undo this action."
           primary-action-type="danger"
           primary-action-label="Delete"
           @onClose="showDeleteConfirm = false"
@@ -47,7 +47,7 @@
         <z-confirm
           v-if="showDeleteAllConfirmation"
           title="Are you sure you want to delete all tokens?"
-          subtitle="Any applications or scripts using these tokens will no longer be able to access the DeepSource API. You cannot undo this action."
+          subtitle="Any application or script using these tokens will no longer be able to access the DeepSource API. You cannot undo this action."
           primary-action-type="danger"
           primary-action-label="Delete"
           @onClose="showDeleteAllConfirmation = false"

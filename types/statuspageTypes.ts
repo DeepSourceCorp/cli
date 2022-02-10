@@ -54,6 +54,7 @@ export interface ScheduledMaintainenceT {
 }
 
 export interface StatusToastPropsT {
+  id: string
   title: string
   scheduledFrom: string
   scheduledTill: string
