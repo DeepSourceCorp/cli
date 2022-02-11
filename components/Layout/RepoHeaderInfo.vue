@@ -18,9 +18,13 @@
       <z-icon size="small" icon="git-branch" class="flex-shrink-0"></z-icon>
       <div>
         <span>Default analysis branch is</span>
-        <z-menu direction="left" size="base" class="inline text-vanilla-100">
+        <z-menu direction="left" size="base" class="inline-block text-vanilla-100">
           <template v-slot:trigger="{ toggle }">
-            <button type="button" class="outline-none focus:outline-none" @click="toggle">
+            <button
+              type="button"
+              class="inline-block outline-none focus:outline-none"
+              @click="toggle"
+            >
               <span class="flex items-center gap-1 px-1 rounded-md bg-ink-200 text-vanilla-400">
                 <span class="font-mono truncate" :class="defaultBranch.length > 12 ? 'w-24' : ''">
                   {{ defaultBranch }}
