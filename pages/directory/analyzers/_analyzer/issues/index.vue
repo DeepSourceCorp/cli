@@ -38,7 +38,6 @@
         background-color="ink-300"
         :show-border="false"
         :value="searchTerm"
-        :disabled="!isLoaded"
         class="w-full lg:max-w-xs"
         @debounceInput="searchDir"
       >
@@ -86,6 +85,9 @@ import { Analyzer, Issue } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 import MetaMixin from '~/mixins/metaMixin'
 
+/**
+ * Issues page for a particular analyzer in analyzer directory.
+ */
 @Component({
   components: { ZButton, ZIcon, ZInput, ZPagination },
   layout: 'sidebar-only',
@@ -110,6 +112,12 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   private onlyAutofix = false
   private searchTerm = ''
 
+  /**
+   * Watcher for analyzer shortcode that updates meta information on change.
+   *
+   * @param {string} newShortcode - New value of `analyzer.shortcode`.
+   * @returns {void}
+   */
   @Watch('analyzer.shortcode', { immediate: true })
   generateMeta(newShortcode: string): void {
     if (newShortcode) {
@@ -132,20 +140,43 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
     return 0
   }
 
+  /**
+   * Emits an event for `filter-by-autofix` to toggle filter value.
+   *
+   * @returns {void}
+   */
   filterByAutofixable(): void {
     this.onlyAutofix = !this.onlyAutofix
     this.$emit('filter-by-autofix')
   }
 
+  /**
+   * Emits an event for `filter-by-text` to filter data by search term.
+   *
+   * @param {string} val - Search term to emit.
+   * @returns {voids}
+   */
   searchDir(val: string): void {
     this.searchTerm = val
     this.$emit('filter-by-text', val)
   }
 
+  /**
+   * Emits an event for `update-page` to update pagination.
+   *
+   * @param {number} val - Page number to update to.
+   * @returns {void}
+   */
   updatePageNum(val: number): void {
     this.$emit('update-page', val)
   }
 
+  /**
+   * Function to return appropriate meta description for a given analyzer.
+   *
+   * @param {Analyzer} analyzer
+   * @returns {void}
+   */
   getMetaDescription(analyzer: Analyzer): string {
     switch (analyzer.shortcode) {
       case 'test-coverage':

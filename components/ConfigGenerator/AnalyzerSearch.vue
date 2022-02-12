@@ -3,15 +3,14 @@
     <z-input
       v-if="!disabled"
       v-model="searchCandidate"
-      class="flex-grow p-2 rounded-md"
       icon-position="left"
       spacing="tight"
       background-color="ink-300"
       :show-border="false"
-      :disabled="isProcessing"
-      @click="toggleAnalyzerList"
-      @focus="toggleAnalyzerList"
       :placeholder="isProcessing ? 'Processing preset...' : 'Search Analyzers...'"
+      class="flex-grow p-2 rounded-md"
+      @focus="toggleAnalyzerList"
+      @click="toggleAnalyzerList"
     >
       <template slot="left">
         <z-icon
@@ -73,6 +72,9 @@ import Analyzer from './Analyzer.vue'
 import { AnalyzerInterface } from '~/store/analyzer/list'
 import AnalyzerListMixin from '~/mixins/analyzerListMixin'
 
+/**
+ * Search component for searching Analyzers.
+ */
 @Component({
   components: {
     ZIcon,
