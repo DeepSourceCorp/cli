@@ -278,6 +278,24 @@ declare module '*/getInvitationDetails.gql' {
 }
     
 
+declare module '*/unsetIssuePriority.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/updateIssuePriority.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/createAutofixRun.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1045,6 +1063,24 @@ declare module '*/watchedRepositories.gql' {
     
 
 declare module '*/watchedRepositoriesCount.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/issuesWithPriority.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/singleIssueWithPriority.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

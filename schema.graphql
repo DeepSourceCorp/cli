@@ -1287,6 +1287,7 @@ type Issue implements MaskPrimaryKeyNode {
   isRecommended: Boolean!
   weight: Int!
   starIssueInAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
+  issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
   occurrenceCount: Int
@@ -1295,6 +1296,7 @@ type Issue implements MaskPrimaryKeyNode {
   descriptionRendered: String
   shortDescription: String
   shortDescriptionRendered: String
+  issuePriority(repositoryId: ID!): IssuePriority
 }
 
 type IssueConnection {
@@ -1305,6 +1307,58 @@ type IssueConnection {
 
 type IssueEdge {
   node: Issue
+  cursor: String!
+}
+
+type IssuePriority implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  issuePriorityType: IssuePriorityType!
+  concreteIssue: Issue!
+  repository: Repository
+  owner: Owner
+  repositoryIssuePriority: IssuePriorityType
+}
+
+type IssuePriorityConnection {
+  pageInfo: PageInfo!
+  edges: [IssuePriorityEdge]!
+}
+
+type IssuePriorityEdge {
+  node: IssuePriority
+  cursor: String!
+}
+
+type IssuePrioritySetting {
+  slug: String
+  weight: Int
+  verboseName: String
+  isIgnoredInCheckStatus: Boolean
+  isIgnoredToDisplay: Boolean
+}
+
+type IssuePriorityType implements Node {
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  weight: Int
+  slug: String
+  verboseName: String
+  issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
+  id: ID!
+}
+
+type IssuePriorityTypeConnection {
+  pageInfo: PageInfo!
+  edges: [IssuePriorityTypeEdge]!
+  totalCount: Int
+}
+
+type IssuePriorityTypeEdge {
+  node: IssuePriorityType
   cursor: String!
 }
 
@@ -1455,6 +1509,8 @@ type Mutation {
   verifyGsrWebhooks(input: VerifyGSRWebhooksInput!): VerifyGSRWebhooksPayload
   triggerVerifyGsrSsh(input: TriggerVerifyGSRSSHInput!): TriggerVerifyGSRSSHPayload
   verifyGsrSetup(input: VerifyGSRSetupInput!): VerifyGSRSetupPayload
+  updateIssuePriority(input: UpdateIssuePriorityInput!): UpdateIssuePriorityPayload
+  unsetIssuePriority(input: UnsetIssuePriorityInput!): UnsetIssuePriorityPayload
 }
 
 enum NextActionChoice {
@@ -1485,6 +1541,7 @@ type Owner implements MaskPrimaryKeyNode {
   features: GenericScalar
   gsrSetupPending: Boolean!
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
+  issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   team: Team
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   userSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection!
@@ -1585,7 +1642,9 @@ type Query {
   transformerRun(runId: String!): TransformerRun!
   autofixRun(runId: String!): AutofixRun!
   oauth: SocialAuthURL
+  issuePriorityType(offset: Int, before: String, after: String, first: Int, last: Int, weight: Int, verboseName: String, slug: String): IssuePriorityTypeConnection
   issue(shortcode: String!): Issue
+  issuesWithPriority(isRepositoryIssuePrioritySet: Boolean!, repositoryId: ID, analyzerShortcode: String, offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection
   transactions(userId: Int!, offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection
   owner(login: String!, provider: VCSProviderChoices!): Owner
   team(login: String!, provider: VCSProviderChoices!): Team
@@ -1730,6 +1789,7 @@ type Repository implements MaskPrimaryKeyNode {
   primaryAnalyzer: Analyzer
   majorityAnalyzer: Analyzer
   analyzer: Analyzer
+  issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   userpreferenceSet(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
   watchedBy(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
@@ -1747,6 +1807,7 @@ type Repository implements MaskPrimaryKeyNode {
   renderedErrorMessage: String
   activityModality: String
   issueTypeSettings: [IssueTypeSetting]
+  issuePrioritySettings: [IssuePrioritySetting]
   widgetsDisplay: GenericScalar
   allWidgets: GenericScalar
   widgetsAvailable: [String]
@@ -1873,6 +1934,14 @@ type RepositoryIssueConnection {
 type RepositoryIssueEdge {
   node: RepositoryIssue
   cursor: String!
+}
+
+input RepositoryIssuePrioritySettingsInput {
+  slug: String
+  weight: Int
+  verboseName: String
+  isIgnoredInCheckStatus: Boolean
+  isIgnoredToDisplay: Boolean
 }
 
 enum RepositoryIssueSeverityChoices {
@@ -2516,6 +2585,17 @@ type TriggerVerifyGSRSSHPayload {
 
 scalar UUID
 
+input UnsetIssuePriorityInput {
+  issueShortcode: String!
+  repositoryId: ID
+  clientMutationId: String
+}
+
+type UnsetIssuePriorityPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input UpdateAccessControlSettingsInput {
   teamId: ID!
   syncPermissionsWithVcs: Boolean
@@ -2648,6 +2728,18 @@ type UpdateGroupTeamRolePayload {
   clientMutationId: String
 }
 
+input UpdateIssuePriorityInput {
+  issueShortcode: String!
+  issuePriorityType: ID!
+  repositoryId: ID
+  clientMutationId: String
+}
+
+type UpdateIssuePriorityPayload {
+  issue: Issue
+  clientMutationId: String
+}
+
 input UpdateOrCreateRepositoryCollaboratorInput {
   userId: ID!
   repositoryId: ID!
@@ -2696,6 +2788,7 @@ input UpdateRepositorySettingsInput {
   analyzeChangesetOnly: Boolean
   keepExistingIssues: Boolean
   issueTypeSettings: [IssueTypeSettingInput]
+  issuePrioritySettings: [RepositoryIssuePrioritySettingsInput]
   id: ID!
   clientMutationId: String
 }

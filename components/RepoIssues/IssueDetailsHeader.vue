@@ -25,6 +25,14 @@
             }}</span>
           </span>
         </div>
+        <template v-if="issuePriority">
+          <priority-type-select
+            v-if="canEditPriority"
+            :priority="issuePriority.repositoryIssuePriority.slug"
+            @priority-changed="$emit('priority-edited', $event)"
+          />
+          <priority-type-badge v-else :priority="issuePriority.repositoryIssuePriority.slug" />
+        </template>
       </div>
     </div>
   </div>
@@ -34,14 +42,18 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import dayjs from 'dayjs'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import IssueType from '@/components/Repository/IssueType.vue'
+import { PriorityTypeBadge, PriorityTypeSelect } from '@/components/IssuePriority/index'
 
 import { formatDate } from '@/utils/date'
 import { escapeHtml } from '~/utils/string'
+import { IssuePriority } from '~/types/types'
 
 @Component({
   components: {
     ZIcon,
-    IssueType
+    IssueType,
+    PriorityTypeBadge,
+    PriorityTypeSelect
   },
   layout: 'repository',
   methods: {
@@ -70,6 +82,12 @@ export default class IssueDetailsHeader extends Vue {
 
   @Prop()
   title: string
+
+  @Prop()
+  issuePriority: IssuePriority | null
+
+  @Prop({ default: false })
+  canEditPriority!: boolean
 
   get lastSeenDisplay(): string {
     /**

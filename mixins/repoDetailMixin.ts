@@ -163,6 +163,7 @@ export default class RepoDetailMixin extends Vue {
     provider: string
     owner: string
     name: string
+    refetch?: boolean
   }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_SSH)

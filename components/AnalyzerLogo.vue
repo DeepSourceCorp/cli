@@ -3,7 +3,7 @@
     <img
       v-tooltip="hideTooltip ? '' : name"
       v-if="analyzerLogo"
-      class="w-auto flex-shrink-0"
+      class="flex-shrink-0 w-auto"
       :class="sizeStyle"
       :src="analyzerLogo"
       :alt="name"
@@ -51,7 +51,7 @@ export default class AnalyzerLogo extends Vue {
       large: 'w-8 h-8'
     }
 
-    return sizes[this.size] || 'w-5 h-5'
+    return sizes[this.size] || 'w-5 h-4'
   }
 }
 </script>

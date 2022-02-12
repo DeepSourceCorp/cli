@@ -18,8 +18,8 @@
     <div class="flex flex-wrap flex-1 w-full">
       <!-- Left Section -->
       <div
-        class="flex flex-col px-4 py-3 space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly"
-        :class="{ 'w-full md:w-4/5': showInfo }"
+        class="flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly"
+        :class="[{ 'w-full md:w-4/5': showInfo }, customPadding]"
       >
         <div
           class="flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200"
@@ -31,7 +31,10 @@
       <!-- Right Section -->
       <div
         v-if="showInfo"
-        class="hidden w-full md:block md:w-1/5 sm:border-l border-ink-300 group-hover:border-ink-200"
+        class="hidden w-full md:block md:w-1/5"
+        :class="{
+          'sm:border-l border-ink-300 group-hover:border-ink-200': !removeDefaultStyle
+        }"
       >
         <slot name="info"></slot>
       </div>
@@ -57,5 +60,8 @@ export default class BaseCard extends Vue {
 
   @Prop({ default: false })
   removeDefaultStyle: boolean
+
+  @Prop({ default: 'px-4 py-3' })
+  customPadding: string
 }
 </script>

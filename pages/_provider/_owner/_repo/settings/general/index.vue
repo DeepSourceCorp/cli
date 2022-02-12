@@ -64,69 +64,6 @@
         </template>
       </toggle-input>
     </form-group>
-    <z-divider color="ink-300" margin="my-2 mx-0 max-w-2xl" />
-    <!-- Issue Configuration -->
-
-    <div class="flex-grow max-w-2xl">
-      <div class="mb-4">
-        <h6 class="mb-1 text-sm text-vanilla-100">Issue configuration</h6>
-        <p class="text-xs leading-5 text-vanilla-400">
-          Control which category of issues are reported, and when analysis run is marked as failed.
-        </p>
-      </div>
-      <z-table class="text-vanilla-100">
-        <template v-slot:head>
-          <z-table-row>
-            <z-table-cell
-              v-for="head in headerData"
-              :key="head.title"
-              class="text-sm font-bold"
-              :class="head.align"
-              >{{ head.title }}</z-table-cell
-            >
-          </z-table-row>
-        </template>
-        <template v-slot:body>
-          <z-table-row
-            v-for="type in repoSettings"
-            :key="type.name"
-            class="text-vanilla-100 hover:bg-ink-300"
-          >
-            <z-table-cell text-align="left" class="text-sm font-normal">{{
-              type.name
-            }}</z-table-cell>
-            <z-table-cell
-              text-align="center"
-              class="flex items-center justify-center text-sm font-normal"
-            >
-              <z-checkbox
-                v-model="type.isIgnoredToDisplay"
-                class="h-full"
-                :true-value="false"
-                :false-value="true"
-                spacing="4"
-                fontSize="base"
-                @change="updateRepositorySettings"
-              />
-            </z-table-cell>
-            <z-table-cell
-              class="flex items-center justify-center text-sm font-normal"
-              text-align="center"
-            >
-              <z-checkbox
-                v-model="type.isIgnoredInCheckStatus"
-                class="h-full m-0"
-                :true-value="false"
-                :false-value="true"
-                spacing="4"
-                fontSize="base"
-                @change="updateRepositorySettings"
-              />
-            </z-table-cell>
-          </z-table-row>
-        </template>
-      </z-table>
-    </div>
 
     <form-group label="Analysis settings" class="flex-grow max-w-2xl">
       <!-- needed custom markup for mobile view cause we're rearranging order of title, description & z-select -->
@@ -262,21 +199,8 @@
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { ToggleInput, TextInput, SelectInput, FormGroup } from '@/components/Form'
 import { Notice, InfoBanner } from '@/components/Settings/index'
-import {
-  ZDivider,
-  ZInput,
-  ZTable,
-  ZTableRow,
-  ZTableCell,
-  ZIcon,
-  ZCheckbox,
-  ZButton,
-  ZToggle,
-  ZSelect,
-  ZOption
-} from '@deepsourcelabs/zeal'
-import { RepositoryDetailActions } from '~/store/repository/detail'
-import { IssueTypeSetting, Maybe, TeamMemberRoleChoices } from '~/types/types'
+import { ZDivider, ZInput, ZIcon, ZButton, ZToggle, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { Maybe, TeamMemberRoleChoices } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -291,10 +215,6 @@ import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
     ZDivider,
     ZToggle,
     ZButton,
-    ZTable,
-    ZTableRow,
-    ZTableCell,
-    ZCheckbox,
     ZSelect,
     ZOption,
     ZIcon,
@@ -311,8 +231,7 @@ import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
       strict: true,
       repoPerms: [
         RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
-        RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
-        RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
+
         RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY
       ]
     }
@@ -328,15 +247,7 @@ export default class General extends mixins(
   public enableGitMod = false
   public isActive = true
 
-  public headerData = [
-    { title: 'Issue category', align: 'text-left' },
-    { title: 'Issues reported?', align: 'text-center' },
-    { title: 'Mark runs as failed?', align: 'text-center' }
-  ]
-
   public selectedScope = ''
-
-  public repoSettings: Array<IssueTypeSetting> = []
 
   public scopes = [
     {
@@ -389,7 +300,6 @@ export default class General extends mixins(
     this.isFetchingData = true
     await this.fetchRepoSettings()
     this.populateValue()
-    this.refinedIssueTypeSettings()
     this.isFetchingData = false
   }
 
@@ -399,19 +309,6 @@ export default class General extends mixins(
       owner: this.$route.params.owner,
       name: this.$route.params.repo
     })
-  }
-
-  public refinedIssueTypeSettings(): void {
-    if (this.repository && this.repository.issueTypeSettings) {
-      this.repository?.issueTypeSettings.forEach((setting: Maybe<IssueTypeSetting>) => {
-        const newObj: IssueTypeSetting = {}
-        newObj.slug = setting?.slug
-        newObj.name = setting?.name
-        newObj.isIgnoredToDisplay = setting?.isIgnoredToDisplay
-        newObj.isIgnoredInCheckStatus = setting?.isIgnoredInCheckStatus
-        this.repoSettings.push(newObj)
-      })
-    }
   }
 
   async updateBranch(): Promise<void> {
@@ -442,12 +339,7 @@ export default class General extends mixins(
   }
 
   public async updateRepositorySettings(showSuccess = true): Promise<void> {
-    if (
-      this.repository?.id &&
-      this.repository?.issueTypeSettings &&
-      this.repoSettings.length &&
-      !this.isFetchingData
-    ) {
+    if (this.repository?.id && this.repository?.issueTypeSettings && !this.isFetchingData) {
       await this.updateRepoSettings({
         input: {
           id: this.repository.id,
@@ -455,10 +347,7 @@ export default class General extends mixins(
           defaultBranchName: this.branch,
           isSubmoduleEnabled: this.enableGitMod,
           analyzeChangesetOnly: this.selectedScope == 'granular' ? true : false,
-          keepExistingIssues: true,
-          issueTypeSettings: this.repoSettings.length
-            ? this.repoSettings
-            : this.repository.issueTypeSettings
+          keepExistingIssues: true
         }
       })
       if (showSuccess) {

@@ -27,7 +27,15 @@
           <div class="w-1/2 h-6 rounded-md bg-ink-300 animate-pulse"></div>
         </div>
       </div>
-      <issue-details-header v-else :showMeta="true" v-bind="issue"> </issue-details-header>
+      <issue-details-header
+        v-else
+        v-bind="issue"
+        :show-meta="true"
+        :issue-priority="issuePriority"
+        :can-edit-priority="canEditPriority"
+        @priority-edited="editPriority"
+      >
+      </issue-details-header>
     </div>
     <div id="tabs" class="flex mt-3 border-b xl:col-span-2 border-ink-300">
       <div class="flex self-end px-4 space-x-4 overflow-auto flex-nowrap">
@@ -80,6 +88,7 @@ import RepoDetailMixin from '@/mixins/repoDetailMixin'
 import { Context } from '@nuxt/types'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import { IssuePriority } from '~/types/types'
 
 @Component({
   components: {
@@ -108,6 +117,8 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
   ]
 })
 export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin, RoleAccessMixin) {
+  public issuePriority: IssuePriority | null = null
+
   async fetch(): Promise<void> {
     await this.fetchIssueData()
   }
@@ -145,6 +156,25 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
     this.$root.$emit('update-ignored-issues-occurences')
   }
 
+  /**
+   * Method to edit priority of the issue
+   *
+   * @param {string} priorityValue
+   * @returns {Promise<void>}
+   */
+  async editPriority(priorityValue: string): Promise<void> {
+    if (this.canEditPriority) {
+      this.issuePriority = await this.updateIssuePriority({
+        repositoryId: this.repository.id,
+        input: {
+          issueShortcode: this.$route.params.issueId,
+          repositoryId: this.repository.id,
+          issuePriorityType: priorityValue
+        }
+      })
+    }
+  }
+
   async fetchIssueData(): Promise<void> {
     const { repo, provider, owner, issueId } = this.$route.params
     if (!this.repository.id) {
@@ -156,6 +186,11 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
     }
 
     await this.fetchIssueDetails({
+      repositoryId: this.repository.id,
+      shortcode: issueId
+    })
+
+    this.issuePriority = await this.fetchIssuePriority({
       repositoryId: this.repository.id,
       shortcode: issueId
     })
@@ -180,6 +215,10 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
 
   get canCreateAutofix(): boolean {
     return this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)
+  }
+
+  get canEditPriority(): boolean {
+    return this.$gateKeeper.repo(RepoPerms.CHANGE_ISSUE_PRIORITY, this.repoPerms.permission)
   }
 
   get isAutofixEnabled(): boolean {

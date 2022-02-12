@@ -1,0 +1,12 @@
+query($shortcode: String!, $repositoryId: ID!) {
+  issue(shortcode: $shortcode) {
+    id
+    issuePriority(repositoryId: $repositoryId) {
+      repositoryIssuePriority {
+        slug
+        verboseName
+        weight
+      }
+    }
+  }
+}

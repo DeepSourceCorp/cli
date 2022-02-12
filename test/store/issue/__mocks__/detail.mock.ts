@@ -178,6 +178,13 @@ export const SINGLE_ISSUE: Issue = {
       hasNextPage: false,
       hasPreviousPage: false
     }
+  },
+  issuePriorities: {
+    edges: [],
+    pageInfo: {
+      hasNextPage: false,
+      hasPreviousPage: false
+    }
   }
 }
 

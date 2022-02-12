@@ -22,6 +22,7 @@
       "GroupTeamMembership",
       "GroupUserMembership",
       "Issue",
+      "IssuePriority",
       "Owner",
       "OwnerSetting",
       "Repository",
@@ -45,6 +46,7 @@
       "WebhookEventTypes"
     ],
     "Node": [
+      "IssuePriorityType",
       "SocialNode"
     ]
   }

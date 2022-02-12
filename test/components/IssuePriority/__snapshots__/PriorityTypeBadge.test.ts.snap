@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders PriorityTypeBadge with all prop options: {"priority":"high"} 1`] = `
+"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor has-tooltip\\" data-original-title=\\"null\\"><span class=\\"h-2 rounded-full w-2 bg-cherry\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+    High
+  </span></div>"
+`;
+
+exports[`renders PriorityTypeBadge with all prop options: {"priority":"low"} 1`] = `
+"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor has-tooltip\\" data-original-title=\\"null\\"><span class=\\"h-2 rounded-full w-2 bg-vanilla-400\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+    Low
+  </span></div>"
+`;
+
+exports[`renders PriorityTypeBadge with all prop options: {"priority":"medium"} 1`] = `
+"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor has-tooltip\\" data-original-title=\\"null\\"><span class=\\"h-2 rounded-full w-2 bg-honey\\"></span> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+    Medium
+  </span></div>"
+`;
+
+exports[`renders PriorityTypeBadge with all prop options: {"priority":"noop"} 1`] = `
+"<div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor has-tooltip\\" data-original-title=\\"null\\">
+  <zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
+    No priority
+  </span>
+</div>"
+`;

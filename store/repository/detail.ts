@@ -301,6 +301,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       provider: string
       owner: string
       name: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_MANAGE_ACCESS]: (
@@ -748,21 +749,22 @@ export const actions: RepositoryDetailModuleActions = {
   },
   async [RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_REPORTING]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositorySettingsReportingGQLQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name
-    })
-      .then((response: GraphqlQueryResponse) => {
-        // TODO: Toast("Successfully fetched repository settings detail -- Ignore rules")
-        commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(RepositoryDetailMutations.SET_ERROR, e)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-        // TODO: Toast("Failure in fetching repository settings detail -- Ignore rules", e)
-      })
+    try {
+      const response = await this.$fetchGraphqlData(
+        RepositorySettingsReportingGQLQuery,
+        {
+          provider: this.$providerMetaMap[args.provider].value,
+          owner: args.owner,
+          name: args.name
+        },
+        args.refetch
+      )
+      commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+      commit(RepositoryDetailMutations.SET_LOADING, false)
+    } catch (error) {
+      commit(RepositoryDetailMutations.SET_ERROR, error)
+      commit(RepositoryDetailMutations.SET_LOADING, false)
+    }
   },
   async [RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_SSH]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)

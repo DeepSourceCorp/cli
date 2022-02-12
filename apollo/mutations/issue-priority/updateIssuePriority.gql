@@ -1,0 +1,22 @@
+mutation($input: UpdateIssuePriorityInput!, $repositoryId: ID!) {
+  updateIssuePriority(input: $input) {
+    issue {
+      id
+      issueType
+      title
+      shortcode
+      description
+      analyzer {
+        name
+        logo
+      }
+      issuePriority(repositoryId: $repositoryId) {
+        repositoryIssuePriority {
+          slug
+          weight
+          verboseName
+        }
+      }
+    }
+  }
+}

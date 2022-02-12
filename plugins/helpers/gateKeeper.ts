@@ -133,6 +133,8 @@ const REPO_PERMS_MAP = {
     RepositoryCollaboratorPermission.Admin,
     RepositoryCollaboratorPermission.Write
   ],
+  [RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_REPORT]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON]: [RepositoryCollaboratorPermission.Admin],
   [RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY]: [
     RepositoryCollaboratorPermission.Admin,
     RepositoryCollaboratorPermission.Write
@@ -149,7 +151,8 @@ const REPO_PERMS_MAP = {
   [RepoPerms.ACTIVATE_REPOSITORY]: [
     RepositoryCollaboratorPermission.Admin,
     RepositoryCollaboratorPermission.Write
-  ]
+  ],
+  [RepoPerms.CHANGE_ISSUE_PRIORITY]: [RepositoryCollaboratorPermission.Admin]
 }
 
 const FEATURES_PROVIDER_MAP = {

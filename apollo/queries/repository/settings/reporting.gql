@@ -4,5 +4,19 @@ query($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
     name
     dsn
     hasTestCoverage
+    issueTypeSettings {
+      name
+      slug
+      description
+      isIgnoredInCheckStatus
+      isIgnoredToDisplay
+    }
+    issuePrioritySettings {
+      slug
+      weight
+      verboseName
+      isIgnoredInCheckStatus
+      isIgnoredToDisplay
+    }
   }
 }

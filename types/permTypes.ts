@@ -38,7 +38,10 @@ export enum RepoPerms {
   VIEW_AUDIT_LOGS = 'viewAuditLogs',
   ALLOW_STAR = 'allowStar',
   READ_REPO = 'readRepository',
-  ACTIVATE_REPOSITORY = 'activateRepository'
+  ACTIVATE_REPOSITORY = 'activateRepository',
+  CHANGE_ISSUE_PRIORITY = 'changeIssuePriority',
+  CHANGE_PRIORITY_SETTINGS_TO_REPORT = 'changePrioritySettingsToReport',
+  CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON = 'changePrioritySettingsToBlockPrsOn'
 }
 
 export enum AppFeatures {

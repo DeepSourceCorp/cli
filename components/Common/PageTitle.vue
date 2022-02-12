@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-start justify-between mb-4">
-    <div class="space-y-2">
+    <div class="gap-y-2">
       <div class="flex items-center space-x-2">
         <h2 class="text-lg font-medium">
           <slot name="title">{{ title }}</slot>

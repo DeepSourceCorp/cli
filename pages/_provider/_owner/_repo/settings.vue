@@ -1,17 +1,7 @@
 <template>
   <section class="grid grid-cols-1 lg:grid-cols-16-fr">
     <nav
-      class="
-        flex
-        gap-x-8
-        top-24
-        overflow-x-auto
-        px-4
-        pt-2
-        hide-scroll
-        border-b border-ink-200
-        lg:sticky lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r lg:h-nav-sidebar
-      "
+      class="flex gap-x-8 top-24 overflow-x-auto px-4 pt-2 hide-scroll border-b border-ink-200 lg:sticky lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r lg:h-nav-sidebar"
     >
       <template v-for="item in navItems">
         <nuxt-link
@@ -78,11 +68,14 @@ interface TabLink {
         RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
         RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
         RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
+        RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_REPORT,
+        RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON,
         RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY,
         RepoPerms.ADD_REMOVE_MEMBERS,
         RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
         RepoPerms.VIEW_AUDIT_LOGS,
-        RepoPerms.VIEW_BADGES
+        RepoPerms.VIEW_BADGES,
+        RepoPerms.CHANGE_ISSUE_PRIORITY
       ]
     }
   }
@@ -92,16 +85,27 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     {
       label: 'General',
       link: ['settings', 'general'],
-      perms: [
-        RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH,
-        RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
-        RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
-        RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY
-      ]
+      perms: [RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH, RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY]
     },
     {
       label: 'Configuration',
       link: ['settings', 'config']
+    },
+    {
+      label: 'Reporting',
+      link: ['settings', 'reporting'],
+      perms: [
+        RepoPerms.VIEW_DSN,
+        RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
+        RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
+        RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_REPORT,
+        RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON
+      ]
+    },
+    {
+      label: 'Issue priority',
+      link: ['settings', 'issue-priority'],
+      perms: [RepoPerms.CHANGE_ISSUE_PRIORITY]
     },
     { label: 'Badges', link: ['settings', 'badges'] },
     {
@@ -116,7 +120,7 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
       link: ['settings', 'ssh-access'],
       perms: [RepoPerms.GENERATE_SSH_KEY_PAIR]
     },
-    { label: 'Reporting', link: ['settings', 'reporting'], perms: [RepoPerms.VIEW_DSN] },
+
     { label: 'Audit log', link: ['settings', 'audit-log'], perms: [RepoPerms.VIEW_AUDIT_LOGS] },
     {
       label: 'Repository members',

@@ -1,0 +1,45 @@
+query(
+  $isRepositoryIssuePrioritySet: Boolean!
+  $repositoryId: ID!
+  $first: Int
+  $after: String
+  $sort: String
+  $q: String
+  $offset: Int
+  $analyzerShortcode: String
+) {
+  issuesWithPriority(
+    isRepositoryIssuePrioritySet: $isRepositoryIssuePrioritySet
+    repositoryId: $repositoryId
+    first: $first
+    after: $after
+    sort: $sort
+    q: $q
+    offset: $offset
+    analyzerShortcode: $analyzerShortcode
+  ) {
+    totalCount
+    edges {
+      node {
+        id
+        issueType
+        title
+        shortcode
+        description
+        analyzer {
+          name
+          logo
+          analyzerLogo
+          shortcode
+        }
+        issuePriority(repositoryId: $repositoryId) {
+          repositoryIssuePriority {
+            slug
+            weight
+            verboseName
+          }
+        }
+      }
+    }
+  }
+}

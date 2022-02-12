@@ -8,12 +8,5 @@ query($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
     config
     isActivated
     isPrivate
-    issueTypeSettings {
-      name
-      slug
-      description
-      isIgnoredInCheckStatus
-      isIgnoredToDisplay
-    }
   }
 }

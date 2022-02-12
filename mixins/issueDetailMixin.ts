@@ -13,7 +13,9 @@ import {
   IgnoreIssueForTestPatternsInRepositoryPayload,
   ReportIssueFalsePositivePayload,
   IgnoreCheckIssuePayload,
-  SilenceRule
+  SilenceRule,
+  IssuePriority,
+  UpdateIssuePriorityInput
 } from '~/types/types'
 
 const issueStore = namespace('issue/detail')
@@ -61,6 +63,18 @@ export default class IssueDetailMixin extends Vue {
     currentPageNumber: number
     limit: number | null
   }) => Promise<void>
+
+  @issueStore.Action(IssueDetailActions.FETCH_ISSUE_PRIORITY)
+  fetchIssuePriority: (args: {
+    repositoryId: string
+    shortcode: string
+  }) => Promise<IssuePriority | null>
+
+  @issueStore.Action(IssueDetailActions.UPDATE_ISSUE_PRIORITY)
+  updateIssuePriority: (args: {
+    input: UpdateIssuePriorityInput
+    repositoryId: string
+  }) => Promise<IssuePriority | null>
 
   // Mutations
   @issueStore.Action(IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN)

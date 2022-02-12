@@ -3,6 +3,8 @@ import RepositoryNodeIssueDetailGQLQuery from '~/apollo/queries/repository/issue
 import SingleIssueDetailGQLQuery from '~/apollo/queries/repository/issue/single.gql'
 import SilenceRulesGQLQuery from '~/apollo/queries/repository/issue/silenceRules.gql'
 import IssueDirectoryDetailGQLQuery from '~/apollo/queries/issue/getAnIssue.gql'
+import SingleIssueWithPriorityGQLQuery from '~/apollo/queries/issue-priority/singleIssueWithPriority.gql'
+import UpdateIssuePriorityGQLMutation from '~/apollo/mutations/issue-priority/updateIssuePriority.gql'
 
 import IgnoreIssueFilePatternMutation from '~/apollo/mutations/issue/ignoreIssueFilePattern.gql'
 import IgnoreIssueTestPatternMutation from '~/apollo/mutations/issue/ignoreIssueTestPattern.gql'
@@ -24,7 +26,9 @@ import {
   ReportIssueFalsePositivePayload,
   IgnoreCheckIssuePayload,
   SilenceRule,
-  SilenceRuleConnection
+  SilenceRuleConnection,
+  IssuePriority,
+  UpdateIssuePriorityInput
 } from '~/types/types'
 import { RootState } from '~/store'
 import { resolveNodes } from '~/utils/array'
@@ -41,7 +45,9 @@ export enum IssueDetailActions {
   IGNORE_ISSUE_CHECK_ISSUE = 'updateIgnoreCheckIssue',
   IGNORE_ISSUE_FALSE_POSITIVE = 'ignoreIssueFalsePositive',
   CREATE_AUTOFIX_RUN = 'createAutofixRun',
-  FETCH_ISSUE_DETAILS = 'fetchIssueDetails'
+  FETCH_ISSUE_DETAILS = 'fetchIssueDetails',
+  FETCH_ISSUE_PRIORITY = 'fetchIssuePriority',
+  UPDATE_ISSUE_PRIORITY = 'updateIssuePriority'
 }
 
 export enum IssueDetailMutations {
@@ -60,7 +66,7 @@ export interface IssueDetailModuleState {
   issue: RepositoryIssue
   silenceRules: SilenceRule[]
   singleIssue: Issue
-  checkIssues: CheckIssueConnection,
+  checkIssues: CheckIssueConnection
   issueDirDetails: Issue
 }
 
@@ -93,7 +99,8 @@ interface IssueDetailModuleMutations extends MutationTree<IssueDetailModuleState
     checkIssues: CheckIssueConnection
   ) => void
   [IssueDetailMutations.SET_ISSUE_DIR_DETAILS]: (
-    state: IssueDetailModuleState, issue: Issue
+    state: IssueDetailModuleState,
+    issue: Issue
   ) => void
 }
 
@@ -225,6 +232,23 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
     injectee: IssueDetailActionContext,
     args: { shortcode: string }
   ) => Promise<Issue | undefined>
+  [IssueDetailActions.FETCH_ISSUE_PRIORITY]: (
+    this: Store<RootState>,
+    injectee: IssueDetailActionContext,
+    args: {
+      repositoryId: string
+      shortcode: string
+    }
+  ) => Promise<IssuePriority | null>
+  [IssueDetailActions.UPDATE_ISSUE_PRIORITY]: (
+    this: Store<RootState>,
+    injectee: IssueDetailActionContext,
+    args: {
+      input: UpdateIssuePriorityInput
+      repositoryId: string
+      refetch?: boolean
+    }
+  ) => Promise<IssuePriority | null>
 }
 
 export const actions: IssueDetailModuleActions = {
@@ -293,19 +317,19 @@ export const actions: IssueDetailModuleActions = {
         commit(IssueDetailMutations.SET_LOADING, false)
       })
   },
-  async [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN]({ }, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN]({}, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueFilePatternMutation, args)
     return response.data.ignoreIssueForFilePatternInRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_TEST_PATTERN]({ }, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_TEST_PATTERN]({}, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueTestPatternMutation, args)
     return response.data.ignoreIssueForTestPatternsInRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_REPOSITORY]({ }, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_REPOSITORY]({}, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueRepository, args)
     return response.data.ignoreIssueForRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_FOR_FILE]({ }, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_FOR_FILE]({}, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueForFile, args)
     return response.data.ignoreIssueForRepository
   },
@@ -340,12 +364,37 @@ export const actions: IssueDetailModuleActions = {
         return issueResponse.data.issue as Issue
       }
       return undefined
-    }
-    catch (e) {
+    } catch (e) {
       commit(IssueDetailMutations.SET_ERROR, e as GraphqlError)
-    }
-    finally {
+    } finally {
       commit(IssueDetailMutations.SET_LOADING, false)
     }
   },
+  async [IssueDetailActions.FETCH_ISSUE_PRIORITY]({ commit }, args) {
+    commit(IssueDetailMutations.SET_LOADING, true)
+    try {
+      const issueResponse = await this.$fetchGraphqlData(SingleIssueWithPriorityGQLQuery, {
+        shortcode: args.shortcode,
+        repositoryId: args.repositoryId
+      })
+      return issueResponse?.data?.issue?.issuePriority
+    } catch (e) {
+      commit(IssueDetailMutations.SET_ERROR, e as GraphqlError)
+    } finally {
+      commit(IssueDetailMutations.SET_LOADING, false)
+    }
+  },
+  async [IssueDetailActions.UPDATE_ISSUE_PRIORITY]({ commit }, args) {
+    try {
+      const response = await this.$applyGraphqlMutation(
+        UpdateIssuePriorityGQLMutation,
+        args,
+        args.refetch
+      )
+      return response?.data?.updateIssuePriority?.issue?.issuePriority
+    } catch (e) {
+      const error = e as GraphqlError
+      commit(IssueDetailMutations.SET_ERROR, error)
+    }
+  }
 }
