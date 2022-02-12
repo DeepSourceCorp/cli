@@ -139,6 +139,10 @@ export default class ActiveUserMixin extends Vue {
     return this.$route.params.provider
   }
 
+  get activeProviderName(): string {
+    return this.$providerMetaMap[this.activeProvider].text
+  }
+
   get activeOwner(): string {
     if ('login' in this.activeDashboardContext) {
       return this.activeDashboardContext.login

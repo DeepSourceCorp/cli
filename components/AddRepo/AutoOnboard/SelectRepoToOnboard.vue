@@ -89,7 +89,7 @@
           <p class="max-w-md mt-1 text-sm text-vanilla-400">
             {{
               owner.hasGrantedAllRepoAccess
-                ? 'You can sync your repositories from VCS Provider'
+                ? `You can sync your repositories from ${activeProviderName}`
                 : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
             }}
           </p>
