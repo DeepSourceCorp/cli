@@ -44,7 +44,7 @@ function allowUpdateForUser(id: string) {
   if (localStorage.getItem(id)) {
     const today = dayjs()
     const toastDismissDate = dayjs(localStorage.getItem(id))
-    if (today > toastDismissDate.add(1, 'day')) {
+    if (today > toastDismissDate.add(15, 'day')) {
       localStorage.removeItem(id)
       return true
     } else {
