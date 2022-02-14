@@ -1,8 +1,10 @@
 approvers:
 - shivam-deepsource
 - vishnu-deepsource
+- yash-deepsource
 reviewers:
 - james-deepsource
+- rohan-deepsource
 - shivam-deepsource
-- vishnu-deepsource
+- vaibhav-deepsource
 - yash-deepsource
