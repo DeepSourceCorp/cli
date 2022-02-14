@@ -26,7 +26,7 @@
               labelFontSize,
               {
                 'min-w-20': currentPriority === 'noop' && size !== 'small',
-                'font-medium tracking-wide': currentPriority
+                'font-medium tracking-wide uppercase': currentPriority
               }
             ]"
           >
@@ -73,6 +73,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { ZIcon, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
+import { IssuePriorityTypes, IssuePriorityTypesVerbose } from '~/types/issuePriorityTypes'
 
 /**
  * Component to select priority level for an issue.
@@ -98,6 +99,9 @@ export default class PriorityTypeSelect extends Vue {
 
   @Prop({ default: 'right' })
   direction: string
+
+  @Prop({ default: false })
+  verboseTitle: boolean
 
   public open = false
   public currentPriority = this.priority
@@ -134,17 +138,32 @@ export default class PriorityTypeSelect extends Vue {
   }
 
   get priorityLabel() {
-    switch (this.currentPriority) {
-      case 'high':
-        return 'HIGH'
-      case 'medium':
-        return 'MEDIUM'
-      case 'low':
-        return 'LOW'
-      case 'noop':
-        return 'NO PRIORITY'
-      default:
-        return 'Set priority'
+    if (this.verboseTitle) {
+      switch (this.currentPriority) {
+        case 'high':
+          return IssuePriorityTypesVerbose.HIGH
+        case 'medium':
+          return IssuePriorityTypesVerbose.MEDIUM
+        case 'low':
+          return IssuePriorityTypesVerbose.LOW
+        case 'noop':
+          return IssuePriorityTypesVerbose.NOOP
+        default:
+          return ''
+      }
+    } else {
+      switch (this.currentPriority) {
+        case 'high':
+          return IssuePriorityTypes.HIGH
+        case 'medium':
+          return IssuePriorityTypes.MEDIUM
+        case 'low':
+          return IssuePriorityTypes.LOW
+        case 'noop':
+          return IssuePriorityTypes.NOOP
+        default:
+          return IssuePriorityTypes.SET_PRIORITY
+      }
     }
   }
 

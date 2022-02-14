@@ -1,7 +1,7 @@
 import { render } from '@testing-library/vue'
 import { shallowMount } from '@vue/test-utils'
 import { PriorityTypeSelect } from '~/components/IssuePriority'
-import { cartesian, generateStringProps } from '~/test/utils'
+import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 
 test('renders PriorityTypeSelect with all prop options', () => {
   const priorityOptions = generateStringProps(
@@ -10,8 +10,9 @@ test('renders PriorityTypeSelect with all prop options', () => {
     false
   )
   const sizeOptions = generateStringProps('size', ['small', 'large', ''], false)
+  const verboseTitleOptions = generateBooleanProps('verboseTitle', false)
 
-  cartesian(priorityOptions, sizeOptions).forEach((propCombination) => {
+  cartesian(priorityOptions, sizeOptions, verboseTitleOptions).forEach((propCombination) => {
     const props = {
       ...propCombination
     }

@@ -32,7 +32,7 @@
       </div>
     </template>
 
-    <template slot="info">
+    <template v-if="canChangePriority" slot="info">
       <div class="flex items-center justify-end h-full">
         <z-button
           v-tooltip="`Remove priority assignment`"

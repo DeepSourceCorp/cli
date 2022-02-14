@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority":""} 1`] = `
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"","priority":""} 1`] = `
 "<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xs\\">
           Set priority
         </span>
@@ -11,9 +11,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority"
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority":"high"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-cherry h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
-          HIGH
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"","priority":"high"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-cherry h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          high
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -22,9 +22,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority"
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority":"low"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-vanilla-400 h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
-          LOW
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"","priority":"low"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-vanilla-400 h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          low
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -33,9 +33,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority"
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority":"medium"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-honey h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
-          MEDIUM
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"","priority":"medium"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-honey h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          medium
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -44,9 +44,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority"
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority":"noop"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xxs min-w-20 font-medium tracking-wide\\">
-          NO PRIORITY
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"","priority":"noop"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xxs min-w-20 font-medium tracking-wide uppercase\\">
+          no priority
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -55,7 +55,7 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"","priority"
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"large","priority":""} 1`] = `
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"large","priority":""} 1`] = `
 "<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><!----> <span class=\\"text-vanilla-100 text-xs\\">
           Set priority
         </span>
@@ -66,9 +66,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"large","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"large","priority":"high"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-cherry h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide\\">
-          HIGH
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"large","priority":"high"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-cherry h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide uppercase\\">
+          high
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -77,9 +77,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"large","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"large","priority":"low"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-vanilla-400 h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide\\">
-          LOW
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"large","priority":"low"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-vanilla-400 h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide uppercase\\">
+          low
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -88,9 +88,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"large","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"large","priority":"medium"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-honey h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide\\">
-          MEDIUM
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"large","priority":"medium"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-honey h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide uppercase\\">
+          medium
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -99,9 +99,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"large","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"large","priority":"noop"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xs min-w-20 font-medium tracking-wide\\">
-          NO PRIORITY
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"large","priority":"noop"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xs min-w-20 font-medium tracking-wide uppercase\\">
+          no priority
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -110,7 +110,7 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"large","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"small","priority":""} 1`] = `
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"small","priority":""} 1`] = `
 "<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xs\\">
           Set priority
         </span>
@@ -121,9 +121,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"small","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"small","priority":"high"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-cherry h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
-          HIGH
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"small","priority":"high"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-cherry h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          high
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -132,9 +132,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"small","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"small","priority":"low"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-vanilla-400 h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
-          LOW
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"small","priority":"low"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-vanilla-400 h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          low
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -143,9 +143,9 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"small","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"small","priority":"medium"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-honey h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
-          MEDIUM
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"small","priority":"medium"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-honey h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          medium
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
@@ -154,9 +154,174 @@ exports[`renders PriorityTypeSelect with all prop options: {"size":"small","prio
 </span>"
 `;
 
-exports[`renders PriorityTypeSelect with all prop options: {"size":"small","priority":"noop"} 1`] = `
-"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
-          NO PRIORITY
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":false,"size":"small","priority":"noop"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          no priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"","priority":""} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xs\\">
+          
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"","priority":"high"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-cherry h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          high priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"","priority":"low"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-vanilla-400 h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          low priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"","priority":"medium"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-honey h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          medium priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"","priority":"noop"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xxs min-w-20 font-medium tracking-wide uppercase\\">
+          no priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"large","priority":""} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><!----> <span class=\\"text-vanilla-100 text-xs\\">
+          
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"large","priority":"high"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-cherry h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide uppercase\\">
+          high priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"large","priority":"low"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-vanilla-400 h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide uppercase\\">
+          low priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"large","priority":"medium"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><span class=\\"rounded-full bg-honey h-2.5 w-2.5\\"></span> <span class=\\"text-vanilla-100 text-xs font-medium tracking-wide uppercase\\">
+          medium priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"large","priority":"noop"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none pl-2 pr-1.5 py-1.5\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xs min-w-20 font-medium tracking-wide uppercase\\">
+          no priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"small","priority":""} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xs\\">
+          
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"small","priority":"high"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-cherry h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          high priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"small","priority":"low"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-vanilla-400 h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          low priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"small","priority":"medium"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><span class=\\"rounded-full bg-honey h-2 w-2\\"></span> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          medium priority
+        </span>
+<zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
+<transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">
+  <!---->
+</transition-stub>
+</span>"
+`;
+
+exports[`renders PriorityTypeSelect with all prop options: {"verboseTitle":true,"size":"small","priority":"noop"} 1`] = `
+"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          no priority
         </span>
 <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
 <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">

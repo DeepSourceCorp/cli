@@ -164,14 +164,21 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
    */
   async editPriority(priorityValue: string): Promise<void> {
     if (this.canEditPriority) {
-      this.issuePriority = await this.updateIssuePriority({
-        repositoryId: this.repository.id,
-        input: {
-          issueShortcode: this.$route.params.issueId,
+      try {
+        this.issuePriority = await this.updateIssuePriority({
           repositoryId: this.repository.id,
-          issuePriorityType: priorityValue
-        }
-      })
+          input: {
+            issueShortcode: this.$route.params.issueId,
+            repositoryId: this.repository.id,
+            issuePriorityType: priorityValue
+          }
+        })
+        this.$toast.success('Priority updated successfully.')
+      } catch (error) {
+        this.$toast.danger(
+          `An error occurred while updating priority for the issue '${this.$route.params.issueId}'. Please try again.`
+        )
+      }
     }
   }
 

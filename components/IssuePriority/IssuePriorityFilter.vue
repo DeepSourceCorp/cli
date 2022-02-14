@@ -33,7 +33,7 @@
       <div class="flex items-center gap-x-2">
         <span class="items-center xl:flex gap-x-1">
           <template v-if="languageFilters[modelValue]">
-            <analyzer-logo v-bind="languageFilters[modelValue]" />
+            <analyzer-logo v-bind="languageFilters[modelValue]" class="flex-shrink-0 w-5" />
             <span class="hidden md:block">
               {{ languageFilters[modelValue].name }}
             </span>

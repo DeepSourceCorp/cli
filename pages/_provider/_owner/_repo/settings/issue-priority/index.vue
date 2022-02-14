@@ -176,7 +176,7 @@ export default class SettingsIssuePriority extends mixins(
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    await this.refetchIssues(false)
+    await this.refetchIssues()
   }
 
   /**
@@ -252,6 +252,9 @@ export default class SettingsIssuePriority extends mixins(
 
     if (response?.ok) {
       this.$toast.success(`Priority removed for ${shortcode}.`)
+      if (this.issueList.length <= 1) {
+        this.currentPage = this.currentPage - 1
+      }
       await this.refetchIssues()
     }
   }

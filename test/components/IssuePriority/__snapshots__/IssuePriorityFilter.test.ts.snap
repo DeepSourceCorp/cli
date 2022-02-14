@@ -3,7 +3,7 @@
 exports[`[[ IssuePriorityFilter ]] renders IssuePriorityFilter with the store 1`] = `
 "<zbadge-stub isdot=\\"true\\" size=\\"md\\" type=\\"success\\" textcolor=\\"vanilla-100\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap outline-none text-vanilla-100 focus:outline-none text-ink-400 justify-center h-8 px-4 py-1 text-xs space-x-1 leading-loose bg-juniper hover:bg-juniper-600 bg-ink-300 hover:bg-ink-200\\">
     <!---->
-    <div class=\\"flex items-center gap-x-2\\"><span class=\\"items-center xl:flex gap-x-1\\"><analyzerlogo-stub analyzerlogo=\\"\\" name=\\"Dockerfile\\" shortcode=\\"docker\\" size=\\"base\\"></analyzerlogo-stub> <span class=\\"hidden md:block\\">
+    <div class=\\"flex items-center gap-x-2\\"><span class=\\"items-center xl:flex gap-x-1\\"><analyzerlogo-stub analyzerlogo=\\"\\" name=\\"Dockerfile\\" shortcode=\\"docker\\" size=\\"base\\" class=\\"flex-shrink-0 w-5\\"></analyzerlogo-stub> <span class=\\"hidden md:block\\">
             Dockerfile
           </span></span>
       <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>

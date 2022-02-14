@@ -25,11 +25,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </div>
       </div>
     </div>
-    <div class=\\"hidden w-full md:block md:w-1/5\\">
-      <div class=\\"flex items-center justify-end h-full\\">
-        <zbutton-stub color=\\"cherry\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"minus-circle\\" data-testid=\\"unset-issue-priority\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
-      </div>
-    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5\\"></div>
   </div>
 </div>"
 `;
@@ -59,11 +55,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </div>
       </div>
     </div>
-    <div class=\\"hidden w-full md:block md:w-1/5\\">
-      <div class=\\"flex items-center justify-end h-full\\">
-        <zbutton-stub color=\\"cherry\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"minus-circle\\" data-testid=\\"unset-issue-priority\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
-      </div>
-    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5\\"></div>
   </div>
 </div>"
 `;
@@ -93,11 +85,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </div>
       </div>
     </div>
-    <div class=\\"hidden w-full md:block md:w-1/5\\">
-      <div class=\\"flex items-center justify-end h-full\\">
-        <zbutton-stub color=\\"cherry\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"minus-circle\\" data-testid=\\"unset-issue-priority\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
-      </div>
-    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5\\"></div>
   </div>
 </div>"
 `;
@@ -114,7 +102,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
       <div class=\\"flex flex-wrap text-xs gap-x-4\\">
         <div class=\\"flex items-center gap-x-1 uppercase bg-ink-200 rounded-full px-1.5 py-1 cursor has-tooltip\\" data-original-title=\\"null\\">
           <zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-xxs text-vanilla-400 tracking-wide font-medium\\">
-    No priority
+    no priority
   </span>
         </div>
         <div class=\\"flex items-center gap-x-1.5\\">
@@ -127,11 +115,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </div>
       </div>
     </div>
-    <div class=\\"hidden w-full md:block md:w-1/5\\">
-      <div class=\\"flex items-center justify-end h-full\\">
-        <zbutton-stub color=\\"cherry\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"minus-circle\\" data-testid=\\"unset-issue-priority\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
-      </div>
-    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5\\"></div>
   </div>
 </div>"
 `;
@@ -145,7 +129,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
-      <div class=\\"flex flex-wrap text-xs gap-x-4\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
+      <div class=\\"flex flex-wrap text-xs gap-x-4\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
           Set priority
         </span>
         <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
@@ -180,7 +164,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
-      <div class=\\"flex flex-wrap text-xs gap-x-4\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
+      <div class=\\"flex flex-wrap text-xs gap-x-4\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
           Set priority
         </span>
         <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
@@ -215,7 +199,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
-      <div class=\\"flex flex-wrap text-xs gap-x-4\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
+      <div class=\\"flex flex-wrap text-xs gap-x-4\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><!----> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
           Set priority
         </span>
         <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
@@ -250,8 +234,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
-      <div class=\\"flex flex-wrap text-xs gap-x-4\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide\\">
-          NO PRIORITY
+      <div class=\\"flex flex-wrap text-xs gap-x-4\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none py-1 pl-1.5 pr-1\\"><zicon-stub icon=\\"ellipsis-small\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-mx-0.5\\"></zicon-stub> <span class=\\"text-vanilla-100 text-xxs font-medium tracking-wide uppercase\\">
+          no priority
         </span>
         <zicon-stub icon=\\"chevron-down\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform -ml-0.5 rotate-0\\"></zicon-stub></button></div>
       <transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\">

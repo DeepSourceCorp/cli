@@ -29,9 +29,15 @@
           <priority-type-select
             v-if="canEditPriority"
             :priority="issuePriority.repositoryIssuePriority.slug"
+            :verbose-title="true"
+            menu-title="Change priority"
             @priority-changed="$emit('priority-edited', $event)"
           />
-          <priority-type-badge v-else :priority="issuePriority.repositoryIssuePriority.slug" />
+          <priority-type-badge
+            v-else-if="issuePriority.repositoryIssuePriority.slug !== 'noop'"
+            :priority="issuePriority.repositoryIssuePriority.slug"
+            :verbose-title="true"
+          />
         </template>
       </div>
     </div>

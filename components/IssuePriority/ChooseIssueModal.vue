@@ -196,14 +196,20 @@ export default class ChooseIssueModal extends mixins(IssuePriorityListMixin, Pag
    * @returns {Promise<void>}
    */
   async setPriority(shortcode: string, priorityValue: string): Promise<void> {
-    await this.updateIssuePriority({
-      repositoryId: this.repoId,
-      input: {
-        issueShortcode: shortcode,
+    try {
+      await this.updateIssuePriority({
         repositoryId: this.repoId,
-        issuePriorityType: priorityValue
-      }
-    })
+        input: {
+          issueShortcode: shortcode,
+          repositoryId: this.repoId,
+          issuePriorityType: priorityValue
+        }
+      })
+    } catch (error) {
+      this.$toast.danger(
+        `An error occurred while setting priority for the issue '${shortcode}'. Please try again.`
+      )
+    }
   }
 
   /**
