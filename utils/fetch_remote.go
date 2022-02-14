@@ -77,7 +77,6 @@ func ListRemotes() (map[string][]string, error) {
 
 		// git@ ssh urls
 		if strings.HasPrefix(remoteURL, "git@") {
-
 			pathURL := strings.Split(remoteURL, ":")
 			newPathURL := pathURL[1]
 			u, err := url.Parse(newPathURL)
@@ -87,13 +86,9 @@ func ListRemotes() (map[string][]string, error) {
 			splitPath := strings.Split(u.Path, "/")
 			owner = splitPath[0]
 		} else if strings.HasPrefix(remoteURL, "https://") {
-			u, err := url.Parse(remoteURL)
-			if err != nil {
-				continue
-			}
-			splitPath := strings.Split(u.Path, "/")
-
-			owner = splitPath[0]
+			remoteRegexp := regexp.MustCompile(`.+//(.+)/(.+)/(.+)(\.git)?$`)
+			matched := remoteRegexp.FindStringSubmatch(remoteURL)
+			owner = matched[2]
 		}
 
 		// owner, err := runCmd("git", []string{"config", "--get", "--null", "user.name"})
