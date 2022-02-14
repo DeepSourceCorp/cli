@@ -8,6 +8,9 @@ import (
 	"strings"
 )
 
+// execContext provides a way to mock OS commands.
+type execContext = func(name string, args ...string) *exec.Cmd
+
 // 1. Run git remote -v
 // 2. Parse the output and get the list of remotes
 // 3. Do git config --get --local remote.<remote-name>.url
@@ -17,11 +20,11 @@ import (
 // Returns a map of remotes to their urls
 // { "origin":["reponame","owner","provider"]}
 // { "upstream":["reponame","owner","provider"]}
-func ListRemotes() (map[string][]string, error) {
+func ListRemotes(mockRemotes execContext, mockRemoteURL execContext) (map[string][]string, error) {
 
 	remoteMap := make(map[string][]string)
 
-	remotes, err := runCmd("git", []string{"remote", "-v"})
+	remotes, err := runCmd(mockRemotes, "git", []string{"remote", "-v"})
 	if err != nil {
 		return remoteMap, err
 	}
@@ -50,7 +53,7 @@ func ListRemotes() (map[string][]string, error) {
 		urlCmdString := fmt.Sprintf("remote.%s.url", remoteParams[0])
 
 		// Fetch the remote URL using the command "git config --get --local remote.<remote-name>.url"
-		rUrl, err := runCmd("git", []string{"config", "--get", "--local", "--null", urlCmdString})
+		rUrl, err := runCmd(mockRemoteURL, "git", []string{"config", "--get", "--local", "--null", urlCmdString})
 		if err != nil {
 			return remoteMap, err
 		}
@@ -91,11 +94,6 @@ func ListRemotes() (map[string][]string, error) {
 			owner = matched[2]
 		}
 
-		// owner, err := runCmd("git", []string{"config", "--get", "--null", "user.name"})
-		// if err != nil {
-		//     continue
-		// }
-
 		completeRepositoryName := fmt.Sprintf("%s/%s", owner, repositoryName)
 		remoteMap[remoteName] = []string{owner, repositoryName, VCSProvider, completeRepositoryName}
 	}
@@ -103,9 +101,17 @@ func ListRemotes() (map[string][]string, error) {
 	return remoteMap, nil
 }
 
-func runCmd(command string, args []string) (string, error) {
+func runCmd(cmdContext execContext, command string, args []string) (string, error) {
+	var cmd *exec.Cmd
 
-	output, err := exec.Command(command, args...).Output()
+	// checks if a mock command has been provided or not
+	if cmdContext != nil {
+		cmd = cmdContext(command, args...)
+	} else {
+		cmd = exec.Command(command, args...)
+	}
+
+	output, err := cmd.Output()
 	if err != nil {
 		return "", err
 	}

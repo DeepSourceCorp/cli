@@ -28,7 +28,7 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 
 	// If the user didn't pass --repo flag
 	// Figure out list of remotes by reading git config
-	remotesData, err := ListRemotes()
+	remotesData, err := ListRemotes(nil, nil)
 	if err != nil {
 		if strings.Contains(err.Error(), "exit status 128") {
 			fmt.Println("This repository has not been initialized with git. Please initialize it with git using `git init`")
