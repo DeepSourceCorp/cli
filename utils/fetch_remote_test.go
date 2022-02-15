@@ -11,12 +11,19 @@ var remotesPATMap = map[string][]string{
 }
 var remotesPATList = []string{"origin	https://username:ghp_pat@github.com/username/repo (fetch)", "origin	https://username:ghp_pat@github.com/username/repo (push)"}
 
+// Test data for multiple remotes with PATs
+var multiRemotePATMap = map[string][]string{
+	"origin":   {"username", "repo", "GITHUB", "username/repo"},
+	"upstream": {"company", "repo", "GITHUB", "company/repo"},
+}
+var multiRemotePATList = []string{"origin	https://username:ghp_pat@github.com/username/repo (fetch)", "origin	https://username:ghp_pat@github.com/username/repo (push)", "upstream	https://username:ghp_pat@github.com/company/repo (fetch)", "upstream	https://username:ghp_pat@github.com/company/repo (push)"}
+
 // Test data for multiple remotes
 var multiRemoteMap = map[string][]string{
 	"origin":   {"username", "repo", "GITHUB", "username/repo"},
 	"upstream": {"company", "repo", "GITHUB", "company/repo"},
 }
-var multiRemoteList = []string{"origin	https://username:ghp_pat@github.com/username/repo (fetch)", "origin	https://username:ghp_pat@github.com/username/repo (push)", "upstream	https://username:ghp_pat@github.com/company/repo (fetch)", "upstream	https://username:ghp_pat@github.com/company/repo (push)"}
+var multiRemoteList = []string{"origin	https://github.com/username/repo (fetch)", "origin	https://github.com/username/repo (push)", "upstream	https://github.com/company/repo (fetch)", "upstream	https://github.com/company/repo (push)"}
 
 // Test data for SSH URLs
 var sshRemoteMap = map[string][]string{
@@ -35,6 +42,11 @@ func TestGetRemoteMap(t *testing.T) {
 			"remote URLs with PATs",
 			remotesPATList,
 			remotesPATMap,
+		},
+		{
+			"multiple remote URLs with PATs",
+			multiRemotePATList,
+			multiRemotePATMap,
 		},
 		{
 			"multiple remote URLs",
