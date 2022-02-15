@@ -8,56 +8,17 @@ import (
 	"strings"
 )
 
-// execContext provides a way to mock OS commands.
-type execContext = func(name string, args ...string) *exec.Cmd
-
-// 1. Run git remote -v
-// 2. Parse the output and get the list of remotes
-// 3. Do git config --get --local remote.<remote-name>.url
-// 4. Parse the urls to filter out reponame,owner,provider
-// 5. Send them back
-
-// Returns a map of remotes to their urls
-// { "origin":["reponame","owner","provider"]}
-// { "upstream":["reponame","owner","provider"]}
-func ListRemotes(mockRemotes execContext, mockRemoteURL execContext) (map[string][]string, error) {
-
+func getRemoteMap(remoteList []string) (map[string][]string, error) {
 	remoteMap := make(map[string][]string)
-
-	remotes, err := runCmd(mockRemotes, "git", []string{"remote", "-v"})
-	if err != nil {
-		return remoteMap, err
-	}
-
-	// Split the remotes into single remote array
-	remoteList := strings.Split(string(remotes), "\n")
-
-	if len(remoteList) <= 1 {
-		return remoteMap, fmt.Errorf("No remotes found")
-	}
-
-	// Removing the last blank element
-	remoteList = remoteList[:len(remoteList)-1]
-
-	// Iterating over the remotes to parse values
 	for _, remoteData := range remoteList {
 
 		var VCSProvider string
 
-		// Split the single remote to fetch the name of the remote
-		// TLDR; Fetch "origin" from "origin <url>"
-		remoteParams := strings.Split(remoteData, "\t")
+		// Split the single remote to fetch the name and URL of the remote
+		// TLDR; Fetch "origin" and "<url>" from "origin <url>"
+		remoteParams := strings.Fields(remoteData)
 		remoteName := remoteParams[0]
-
-		// Making the argument for the upcoming command to fetch remote url
-		urlCmdString := fmt.Sprintf("remote.%s.url", remoteParams[0])
-
-		// Fetch the remote URL using the command "git config --get --local remote.<remote-name>.url"
-		rUrl, err := runCmd(mockRemoteURL, "git", []string{"config", "--get", "--local", "--null", urlCmdString})
-		if err != nil {
-			return remoteMap, err
-		}
-		remoteURL := string(rUrl)
+		remoteURL := remoteParams[1]
 
 		// Parsing out VCS Provider from the remote URL
 		if strings.Contains(remoteURL, "github") {
@@ -101,22 +62,48 @@ func ListRemotes(mockRemotes execContext, mockRemoteURL execContext) (map[string
 	return remoteMap, nil
 }
 
-func runCmd(cmdContext execContext, command string, args []string) (string, error) {
-	var cmd *exec.Cmd
+// 1. Run git remote -v
+// 2. Parse the output and get the list of remotes
+// 3. Do git config --get --local remote.<remote-name>.url
+// 4. Parse the urls to filter out reponame,owner,provider
+// 5. Send them back
 
-	// checks if a mock command has been provided or not
-	if cmdContext != nil {
-		cmd = cmdContext(command, args...)
-	} else {
-		cmd = exec.Command(command, args...)
+// Returns a map of remotes to their urls
+// { "origin":["reponame","owner","provider"]}
+// { "upstream":["reponame","owner","provider"]}
+func ListRemotes() (map[string][]string, error) {
+	remoteMap := make(map[string][]string)
+
+	remotes, err := runCmd("git", []string{"remote", "-v"})
+	if err != nil {
+		return remoteMap, err
 	}
 
-	output, err := cmd.Output()
+	// Split the remotes into single remote array
+	remoteList := strings.Split(string(remotes), "\n")
+
+	if len(remoteList) <= 1 {
+		return remoteMap, fmt.Errorf("no remotes found")
+	}
+
+	// Removing the last blank element
+	remoteList = remoteList[:len(remoteList)-1]
+
+	// Get remote map
+	remoteMap, err = getRemoteMap(remoteList)
+	if err != nil {
+		return remoteMap, err
+	}
+
+	return remoteMap, nil
+}
+
+func runCmd(command string, args []string) (string, error) {
+	output, err := exec.Command(command, args...).Output()
 	if err != nil {
 		return "", err
 	}
 
 	// Removing trailing null characters
 	return strings.TrimRight(string(output), "\000"), nil
-
 }

@@ -1,61 +1,69 @@
 package utils
 
 import (
-	"fmt"
-	"os"
-	"os/exec"
+	"reflect"
 	"testing"
 )
 
-var testRemotes = "origin	https://username:ghp_pat@github.com/username/repo\norigin	https://username:ghp_pat@github.com/username/repo"
-
-var testRemoteURL = "https://github.com/username/repo"
-
-func TestShellRemotes(t *testing.T) {
-	if os.Getenv("GO_TEST_PROCESS") != "1" {
-		return
-	}
-	fmt.Fprintln(os.Stdout, testRemotes)
-	os.Exit(0)
+// Test data for PAT-based remote URLs
+var remotesPATMap = map[string][]string{
+	"origin": {"username", "repo", "GITHUB", "username/repo"},
 }
+var remotesPATList = []string{"origin	https://username:ghp_pat@github.com/username/repo (fetch)", "origin	https://username:ghp_pat@github.com/username/repo (push)"}
 
-func TestShellRemoteURL(t *testing.T) {
-	if os.Getenv("GO_TEST_PROCESS") != "1" {
-		return
-	}
-	fmt.Fprint(os.Stdout, testRemoteURL)
-	os.Exit(0)
+// Test data for multiple remotes
+var multiRemoteMap = map[string][]string{
+	"origin":   {"username", "repo", "GITHUB", "username/repo"},
+	"upstream": {"company", "repo", "GITHUB", "company/repo"},
 }
+var multiRemoteList = []string{"origin	https://username:ghp_pat@github.com/username/repo (fetch)", "origin	https://username:ghp_pat@github.com/username/repo (push)", "upstream	https://username:ghp_pat@github.com/company/repo (fetch)", "upstream	https://username:ghp_pat@github.com/company/repo (push)"}
 
-// returns a mock command for getting git remotes
-func mockRemotes(command string, args ...string) *exec.Cmd {
-	cs := []string{"-test.run=TestShellRemotes", "--", command}
-	cs = append(cs, args...)
-	cmd := exec.Command(os.Args[0], cs...)
-	cmd.Env = []string{"GO_TEST_PROCESS=1"}
-	return cmd
+// Test data for SSH URLs
+var sshRemoteMap = map[string][]string{
+	"origin":   {"username", "repo", "GITHUB", "username/repo"},
+	"upstream": {"company", "repo", "GITHUB", "company/repo"},
 }
+var sshRemoteList = []string{"origin	git@github.com:username/repo.git (fetch)", "origin	git@github.com:username/repo.git (push)", "upstream	git@github.com:company/repo.git (fetch)", "upstream	git@github.com:company/repo.git (push)"}
 
-// returns a mock command for getting git remote URL
-func mockRemoteURL(command string, args ...string) *exec.Cmd {
-	cs := []string{"-test.run=TestShellRemoteURL", "--", command}
-	cs = append(cs, args...)
-	cmd := exec.Command(os.Args[0], cs...)
-	cmd.Env = []string{"GO_TEST_PROCESS=1"}
-	return cmd
-}
-
-func TestListRemotes(t *testing.T) {
-	remoteMap, err := ListRemotes(mockRemotes, mockRemoteURL)
-	if err != nil {
-		t.Error(err)
-		return
+func TestGetRemoteMap(t *testing.T) {
+	tests := []struct {
+		name    string
+		remotes []string
+		want    map[string][]string
+	}{
+		{
+			"remote URLs with PATs",
+			remotesPATList,
+			remotesPATMap,
+		},
+		{
+			"multiple remote URLs",
+			multiRemoteList,
+			multiRemoteMap,
+		},
+		{
+			"SSH URLs",
+			sshRemoteList,
+			sshRemoteMap,
+		},
 	}
 
-	got := remoteMap["origin"][0]
-	expected := "username"
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			remoteMap, err := getRemoteMap(tt.remotes)
+			if err != nil {
+				t.Error(err)
+				return
+			}
 
-	if got != expected {
-		t.Errorf("got: %s; expected: %s\n", got, expected)
+			for remote := range remoteMap {
+				got := remoteMap[remote]
+				want := tt.want[remote]
+
+				if !reflect.DeepEqual(got, want) {
+					t.Errorf("got: %s; want: %s\n", got, want)
+				}
+			}
+		})
 	}
 }
