@@ -7,7 +7,7 @@
     >
       <div class="flex space-x-2 py-4 text-vanilla-400">
         <div
-          class="text-vanilla-400 default-scroll max-h-40 text-sm leading-7 w-full flex flex-col space-y-2"
+          class="text-vanilla-400 default-scroll min-h-40 max-h-102 text-sm leading-7 w-full flex flex-col space-y-2"
         >
           <div class="flex-grow px-4">
             <z-input
@@ -23,10 +23,9 @@
               ></template>
             </z-input>
           </div>
-          <div class="flex flex-col space-y-2">
-            <label class="flex space-x-0.5 px-4 cursor-pointer">
+          <div class="flex flex-col gap-y-2 overflow-y-auto">
+            <label class="flex gap-x-0.5 px-4 cursor-pointer">
               <z-checkbox
-                :value="true"
                 v-model="selectAll"
                 :true-value="true"
                 :false-value="false"
@@ -58,8 +57,10 @@
                     spacing="4"
                   />
                   <div class="flex w-full space-x-2">
-                    <span class="text-vanilla-300">{{ issue.title }}</span>
-                    <span class="text-vanilla-400 flex-1">{{ issue.shortcode }}</span>
+                    <span class="flex-grow">
+                      <span class="text-vanilla-300 mr-1.5">{{ issue.title }}</span>
+                      <span class="text-vanilla-400">{{ issue.shortcode }}</span>
+                    </span>
                     <span class="text-vanilla-400 flex space-x-1">
                       <span class="text-xs">×</span>
                       <span>{{ issue.occurrenceCount }}</span>
@@ -109,6 +110,9 @@ import IssueType from '@/components/Repository/IssueType.vue'
 
 import RunDetailMixin from '~/mixins/runDetailMixin'
 
+/**
+ * Modal component that allows selecting issues to autofix for an analysis run.
+ */
 @Component({
   name: 'AutofixIssuesChooser',
   components: {
@@ -123,13 +127,13 @@ import RunDetailMixin from '~/mixins/runDetailMixin'
   }
 })
 export default class AutofixIssuesChooser extends mixins(RunDetailMixin) {
-  @Prop()
+  @Prop({ required: true, type: Boolean })
   isOpen!: boolean
 
-  @Prop()
+  @Prop({ required: true, type: String })
   checkId!: string
 
-  @Prop()
+  @Prop({ required: true, type: Array })
   autofixableIssues!: Array<Record<string, string>>
 
   public searchedIssue = ''
@@ -154,10 +158,10 @@ export default class AutofixIssuesChooser extends mixins(RunDetailMixin) {
     return allIssues
   }
 
+  /**
+   * @returns {Array<string>} Returns an array of shortcodes of the selectedIssues.
+   */
   get selectedIssueShortcodeArray(): Array<string> {
-    /**
-     * Returns an array of shortcodes of the selectedIssues
-     */
     let shortcodeArray: Array<string> = []
     shortcodeArray = this.selectedIssues.map((issue) => {
       return issue.shortcode
@@ -165,6 +169,12 @@ export default class AutofixIssuesChooser extends mixins(RunDetailMixin) {
     return shortcodeArray
   }
 
+  /**
+   * Watcher for `selectAll`. Selects all issues (w/ searched filter if available) when `newVal` is true.
+   *
+   * @param {boolean} newVal - Updated value of `selectAll`.
+   * @returns {void}
+   */
   @Watch('selectAll')
   public updateSelectAll(newVal: boolean): void {
     if (newVal) {
@@ -174,35 +184,49 @@ export default class AutofixIssuesChooser extends mixins(RunDetailMixin) {
     }
   }
 
+  /**
+   * Creates autofixes for selected issues and redirects user to the created autofix run.
+   *
+   * @param {() => void} close - Function to close the selector modal on success.
+   * @returns {Promise<void>}
+   */
   public async autofixSelectedIssues(close: () => void): Promise<void> {
     const { owner, provider, repo } = this.$route.params
-    // TODO: Add a try-catch block and the catch block will have an error toast
-    const response = await this.createAutofixPullRequest({
-      input: {
-        issues: this.selectedIssueShortcodeArray,
-        checkId: this.checkId
+    try {
+      const response = await this.createAutofixPullRequest({
+        input: {
+          issues: this.selectedIssueShortcodeArray,
+          checkId: this.checkId
+        }
+      })
+      if (close) {
+        close()
+      } else {
+        this.$emit('close')
       }
-    })
-    if (close) {
-      close()
-    } else {
-      this.$emit('close')
+      if (response.autofixRunId) {
+        this.$router.push(`/${provider}/${owner}/${repo}/autofix/${response.autofixRunId}`)
+      } else {
+        this.$toast.danger(
+          'An error occured while redirecting you to autofixes for selected issues.'
+        )
+      }
+    } catch (e) {
+      this.$toast.danger('An error occured while creating autofixes for selected issues.')
     }
-
-    this.$router.push(`/${provider}/${owner}/${repo}/autofix/${response.autofixRunId}`)
   }
 
+  /**
+   * Function to check if a given `issue` is already present in list of `selectedIssues` or not.
+   *
+   * @param {Record<string, string>[]} selectedIssues
+   * @param {Record<string, string>} issue
+   * @returns {boolean} - Returns `true` if an issue is already selected.
+   */
   public isIssueSelected(
     selectedIssues: Record<string, string>[],
     issue: Record<string, string>
   ): boolean {
-    /**
-     * Return true if a issue is already selected
-     *
-     * @param {String} issue
-     * @param {Array} selectedIssues
-     *
-     */
     return selectedIssues.includes(issue)
   }
 }

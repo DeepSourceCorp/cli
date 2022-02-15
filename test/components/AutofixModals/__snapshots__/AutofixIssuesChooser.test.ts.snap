@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ AutofixIssuesChooser ]] Doesn\`t render AutofixIssuesChooser when 'isOpen' is false 1`] = `
+"<portal-stub to=\\"modal\\">
+  <!---->
+</portal-stub>"
+`;
+
+exports[`[[ AutofixIssuesChooser ]] Renders AutofixIssuesChooser when 'isOpen' is true 1`] = `
+"<portal-stub to=\\"modal\\">
+  <zmodal-stub title=\\"Choose files you want to run Autofix on\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+    <div class=\\"flex space-x-2 py-4 text-vanilla-400\\">
+      <div class=\\"text-vanilla-400 default-scroll min-h-40 max-h-102 text-sm leading-7 w-full flex flex-col space-y-2\\">
+        <div class=\\"flex-grow px-4\\">
+          <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for files\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" spacing=\\"tight\\" class=\\"py-1.5 leading-6 px-2\\"><template></template></zinput-stub>
+        </div>
+        <div class=\\"flex flex-col gap-y-2 overflow-y-auto\\"><label class=\\"flex gap-x-0.5 px-4 cursor-pointer\\">
+            <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" size=\\"small\\" spacing=\\"4\\"></zcheckbox-stub> <span class=\\"text-vanilla-400\\">Select all</span>
+          </label>
+          <div>
+            <div class=\\"flex flex-col w-full bg-transparent\\"><label class=\\"w-full flex space-x-1 items-center leading-7 py-2 px-4 cursor-pointer\\">
+                <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" spacing=\\"4\\"></zcheckbox-stub>
+                <div class=\\"flex w-full space-x-2\\"><span class=\\"flex-grow\\"><span class=\\"text-vanilla-300 mr-1.5\\">Assert statement used outside of tests</span> <span class=\\"text-vanilla-400\\">BAN-B101</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>1</span></span></div>
+              </label></div>
+            <div class=\\"flex flex-col w-full bg-transparent\\"><label class=\\"w-full flex space-x-1 items-center leading-7 py-2 px-4 cursor-pointer\\">
+                <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" spacing=\\"4\\"></zcheckbox-stub>
+                <div class=\\"flex w-full space-x-2\\"><span class=\\"flex-grow\\"><span class=\\"text-vanilla-300 mr-1.5\\">Dangerous default argument</span> <span class=\\"text-vanilla-400\\">PYL-W0102</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>1</span></span></div>
+              </label></div>
+            <div class=\\"flex flex-col w-full bg-transparent\\"><label class=\\"w-full flex space-x-1 items-center leading-7 py-2 px-4 cursor-pointer\\">
+                <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" spacing=\\"4\\"></zcheckbox-stub>
+                <div class=\\"flex w-full space-x-2\\"><span class=\\"flex-grow\\"><span class=\\"text-vanilla-300 mr-1.5\\">No use of \`self\`</span> <span class=\\"text-vanilla-400\\">PYL-R0201</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>2</span></span></div>
+              </label></div>
+            <div class=\\"flex flex-col w-full bg-transparent\\"><label class=\\"w-full flex space-x-1 items-center leading-7 py-2 px-4 cursor-pointer\\">
+                <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" spacing=\\"4\\"></zcheckbox-stub>
+                <div class=\\"flex w-full space-x-2\\"><span class=\\"flex-grow\\"><span class=\\"text-vanilla-300 mr-1.5\\">\`raise NotImplemented\` should be \`raise NotImplementedError\`</span> <span class=\\"text-vanilla-400\\">FLK-F901</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>1</span></span></div>
+              </label></div>
+            <div class=\\"flex flex-col w-full bg-transparent\\"><label class=\\"w-full flex space-x-1 items-center leading-7 py-2 px-4 cursor-pointer\\">
+                <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" spacing=\\"4\\"></zcheckbox-stub>
+                <div class=\\"flex w-full space-x-2\\"><span class=\\"flex-grow\\"><span class=\\"text-vanilla-300 mr-1.5\\">Unnecessary comprehension</span> <span class=\\"text-vanilla-400\\">PTC-W0016</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>1</span></span></div>
+              </label></div>
+          </div>
+          <!---->
+        </div>
+      </div>
+    </div>
+  </zmodal-stub>
+</portal-stub>"
+`;

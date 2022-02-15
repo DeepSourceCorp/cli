@@ -3,17 +3,7 @@
     <z-modal v-if="isOpen" @onClose="close" title="Choose files you want to run Autofix on">
       <div class="flex p-4 space-x-2 text-vanilla-400">
         <div
-          class="
-            flex flex-col
-            w-full
-            space-y-2
-            text-sm
-            leading-7
-            text-vanilla-400
-            custom-y-scroll
-            min-h-40
-            max-h-102
-          "
+          class="flex flex-col w-full space-y-2 text-sm leading-7 text-vanilla-400 custom-y-scroll min-h-40 max-h-102"
         >
           <z-input
             v-model="searchCandidate"
@@ -30,7 +20,6 @@
             <z-list-item>
               <div class="flex space-x-0.5">
                 <z-checkbox
-                  :value="true"
                   v-model="selectAll"
                   :true-value="true"
                   :false-value="false"
@@ -73,27 +62,7 @@
         <div class="p-2 space-x-1 leading-none text-right border-t text-vanilla-100 border-ink-200">
           <button
             @click="close()"
-            class="
-              inline-flex
-              items-center
-              justify-center
-              h-8
-              px-4
-              py-1
-              space-x-1
-              text-xs
-              font-medium
-              leading-loose
-              transition-colors
-              duration-300
-              ease-in-out
-              rounded-sm
-              bg-ink-200
-              focus:outline-none
-              whitespace-nowrap
-              text-vanilla-100
-              hover:bg-ink-100
-            "
+            class="inline-flex items-center justify-center h-8 px-4 py-1 space-x-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out rounded-sm bg-ink-200 focus:outline-none whitespace-nowrap text-vanilla-100 hover:bg-ink-100"
           >
             <span> Cancel </span>
           </button>
@@ -129,6 +98,9 @@ import AutofixRunMixin from '~/mixins/autofixRunMixin'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
+/**
+ * Modal component that allows selecting files to create autofixes for a specified issue.
+ */
 @Component({
   name: 'AutofixFileChooser',
   components: {
@@ -160,25 +132,30 @@ export default class AutofixFileChooser extends mixins(
   issueId!: string
 
   public searchCandidate = ''
-
   public selectedValue = ''
-
   public allFiles: { fileName: string; isSelected: boolean }[] = []
-
   public selectAll = true
-
   public maxFilesAutofixRun = 50
-
   public autofixLoading = false
 
-  mounted() {
+  /**
+   * Mounted lifecycle hook for the modal.
+   *
+   * @returns {void}
+   */
+  mounted(): void {
     this.selectAll = true
-    this.updateFiles()
   }
 
-  @Watch('raisedInFiles')
-  updateFiles() {
-    this.allFiles = this.raisedInFiles.map((file) => {
+  /**
+   * Watcher for `raisedInFiles`. Updates list of `allFiles` with files passed via the `raisedInFiles` prop.
+   *
+   * @param {Array<string>} newRaisedInFiles - New value for `raisedInFiles` prop.
+   * @returns {void}
+   */
+  @Watch('raisedInFiles', { immediate: true })
+  updateFiles(newRaisedInFiles: Array<string>): void {
+    this.allFiles = newRaisedInFiles.map((file) => {
       return {
         fileName: file,
         isSelected: this.selectAll
@@ -200,6 +177,11 @@ export default class AutofixFileChooser extends mixins(
     return this.allFiles.filter((file) => file.isSelected).map((file) => file.fileName)
   }
 
+  /**
+   * Watcher for `selectAll` data property. Selects all files (w/ searched filter if available).
+   *
+   * @returns {void}
+   */
   @Watch('selectAll')
   public updateSelectAll(): void {
     const searchedFiles = this.searchResults.map((file) => file.fileName)
@@ -210,10 +192,21 @@ export default class AutofixFileChooser extends mixins(
     })
   }
 
+  /**
+   * Emits the `close` event.
+   *
+   * @returns {void}
+   */
   public close(): void {
     this.$emit('close')
   }
 
+  /**
+   * Creates autofixes for selected files and redirects user to the created autofix run.
+   *
+   * @param {() => void} close - Function to close the selector modal on success.
+   * @returns {Promise<void>}
+   */
   public async autofixSelectedFiles(close: () => void): Promise<void> {
     this.autofixLoading = true
     try {
@@ -261,11 +254,11 @@ export default class AutofixFileChooser extends mixins(
         this.close()
       }
     } catch (e) {
-      if (e.message.includes('Your autofix run quota has been exhausted')) {
+      if ((e as Error).message.includes('Your autofix run quota has been exhausted')) {
         this.$emit('runQuotaExhausted')
       } else {
-        this.$toast.danger('There was a problem running Autofix')
-        this.logSentryErrorForUser(e, 'AutofixError', {
+        this.$toast.danger('There was a problem running Autofix.')
+        this.logSentryErrorForUser(e as Error, 'AutofixError', {
           method: 'Create Autofix Run',
           inputFiles: this.selectedFiles,
           repoIssueId: this.issueId
