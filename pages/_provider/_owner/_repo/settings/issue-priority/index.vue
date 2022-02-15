@@ -154,7 +154,14 @@ import { resolveNodes } from '~/utils/array'
     ChooseIssueModal,
     IssuePriorityCard
   },
-  layout: 'repository'
+  layout: 'repository',
+  middleware: ['perm'],
+  meta: {
+    auth: {
+      strict: true,
+      repoPerms: [RepoPerms.CHANGE_ISSUE_PRIORITY]
+    }
+  }
 })
 export default class SettingsIssuePriority extends mixins(
   RoleAccessMixin,
