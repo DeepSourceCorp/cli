@@ -22,9 +22,9 @@ type CLIConfig struct {
 	Host                  string
 	User                  string
 	Token                 string
-	RefreshToken          string
-	TokenExpiresIn        time.Time
-	RefreshTokenExpiresIn time.Time
+	RefreshToken          string    `toml:",omitempty"`
+	TokenExpiresIn        time.Time `toml:",omitempty"`
+	RefreshTokenExpiresIn time.Time `toml:",omitempty"`
 }
 
 var Cfg CLIConfig
