@@ -11,7 +11,7 @@ import (
 
 // Query to fetch issues for a certain file specified by the user
 const fetchFileIssuesQuery = `
-query($name:String!, $owner:String!, $provider:VCSProviderChoices!, $path:String!, $limit:Int!){
+query($name:String!, $owner:String!, $provider:VCSProvider!, $path:String!, $limit:Int!){
     repository(name:$name, owner:$owner, provider:$provider){
         file(path:$path){
             issues(first:$limit){
@@ -91,8 +91,8 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]iss
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
 
-	// Adding jwt as header for auth
-	tokenHeader := fmt.Sprintf("JWT %s", client.GetToken())
+	// Adding token as header for auth
+	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
 	req.Header.Add("Authorization", tokenHeader)
 
 	// run it and capture the response

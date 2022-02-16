@@ -48,7 +48,7 @@ func (a AnalyzersRequest) Do(ctx context.Context, client IGQLClient) ([]analyzer
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
-	tokenHeader := fmt.Sprintf("JWT %s", client.GetToken())
+	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
 	req.Header.Add("Authorization", tokenHeader)
 
 	// run it and capture the response
