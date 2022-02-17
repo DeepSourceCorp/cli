@@ -64,7 +64,7 @@ func NewCmdIssuesList() *cobra.Command {
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Fetch the issues upto the specified limit")
 
 	// --output, -o flag
-	cmd.Flags().StringVarP(&opts.OutputArg, "output", "o", "", "Filename for exporting issues")
+	cmd.Flags().StringVarP(&opts.OutputArg, "output-file", "o", "", "Filename for exporting issues")
 
 	// --json flag
 	cmd.Flags().BoolVar(&opts.JSONArg, "json", false, "Export issues to JSON")
