@@ -17,19 +17,19 @@ import (
 const MAX_ISSUE_LIMIT = 100
 
 type IssuesListOptions struct {
-	FileArg        string
-	RepoArg        string
-	LimitArg       int
-	OutputArg      string
-	JSONArg        bool
-	SelectedRemote *utils.RemoteData
-	issuesData     []issues.Issue
-	ptermTable     [][]string
+	FileArg           string
+	RepoArg           string
+	LimitArg          int
+	OutputFilenameArg string
+	JSONArg           bool
+	SelectedRemote    *utils.RemoteData
+	issuesData        []issues.Issue
+	ptermTable        [][]string
 }
 
 type ExportData struct {
-	Occurences []issues.IssueJSON `json:"occurences"`
-	Summary    Summary            `json:"summary"`
+	Occurences []IssueJSON `json:"occurences"`
+	Summary    Summary     `json:"summary"`
 }
 
 type Summary struct {
@@ -64,10 +64,10 @@ func NewCmdIssuesList() *cobra.Command {
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Fetch the issues upto the specified limit")
 
 	// --output-file, -o flag
-	cmd.Flags().StringVarP(&opts.OutputArg, "output-file", "o", "", "Filename for exporting issues")
+	cmd.Flags().StringVarP(&opts.OutputFilenameArg, "output-file", "o", "", "Output file to write the reported issues to")
 
 	// --json flag
-	cmd.Flags().BoolVar(&opts.JSONArg, "json", false, "Export issues to JSON")
+	cmd.Flags().BoolVar(&opts.JSONArg, "json", false, "Output reported issues in JSON format")
 
 	return cmd
 }
@@ -108,7 +108,7 @@ func (opts *IssuesListOptions) Run() (err error) {
 
 	// if --json is passed, export issue data to JSON
 	if opts.JSONArg {
-		opts.exportJSON(opts.OutputArg)
+		opts.exportJSON(opts.OutputFilenameArg)
 	} else {
 		opts.showIssues()
 	}
@@ -167,10 +167,10 @@ func (opts *IssuesListOptions) showIssues() {
 	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()
 }
 
-// exportJSON exports issues as JSON
+// Handles exporting issues as JSON
 func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
 	var issueJSON ExportData
-	issueJSON, err = convertJSON(opts.issuesData)
+	issueJSON = convertJSON(opts.issuesData)
 	if err != nil {
 		return err
 	}
@@ -182,41 +182,40 @@ func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
 
 	if filename == "" {
 		pterm.Println(string(data))
-	} else {
-		err = ioutil.WriteFile(filename, data, 0644)
-		if err != nil {
-			return err
-		}
-
-		pterm.Info.Printf("Saved issues to %s!\n", filename)
+		return nil
 	}
 
+	if err = ioutil.WriteFile(filename, data, 0644); err != nil {
+		return err
+	}
+
+	pterm.Info.Printf("Saved issues to %s!\n", filename)
 	return nil
 }
 
-// convertJSON converts issueData to a JSON-compatible struct
-func convertJSON(issueData []issues.Issue) (ExportData, error) {
-	var occurences []issues.IssueJSON
+// Converts issueData to a JSON-compatible struct
+func convertJSON(issueData []issues.Issue) ExportData {
+	var occurences []IssueJSON
 	var issueExport ExportData
 
 	set := make(map[string]string)
 	total_occurences := 0
 
 	for _, issue := range issueData {
-		issueNew := issues.IssueJSON{
+		issueNew := IssueJSON{
 			Analyzer:       issue.Analyzer.Shortcode,
 			IssueCode:      issue.IssueCode,
 			IssueTitle:     issue.IssueText,
 			OccurenceTitle: issue.IssueText,
 			IssueCategory:  "",
-			Location: issues.LocationJSON{
+			Location: LocationJSON{
 				Path: issue.Location.Path,
-				Position: issues.PositionJSON{
-					Begin: issues.LineColumn{
+				Position: PositionJSON{
+					Begin: LineColumn{
 						Line:   issue.Location.Position.BeginLine,
 						Column: 0,
 					},
-					End: issues.LineColumn{
+					End: LineColumn{
 						Line:   issue.Location.Position.EndLine,
 						Column: 0,
 					},
@@ -234,5 +233,5 @@ func convertJSON(issueData []issues.Issue) (ExportData, error) {
 	issueExport.Summary.TotalOccurences = total_occurences
 	issueExport.Summary.UniqueIssues = len(set)
 
-	return issueExport, nil
+	return issueExport
 }
