@@ -17,6 +17,7 @@ type LoginOptions struct {
 	User         string
 	HostName     string
 	Interactive  bool
+	PAT          string
 }
 
 // NewCmdLogin handles the login functionality for the CLI
@@ -41,6 +42,8 @@ func NewCmdLogin() *cobra.Command {
 	// --host, -h flag
 	cmd.Flags().StringVar(&opts.HostName, "hostname", "", "Authenticate with a specific DeepSource instance")
 	cmd.Flags().BoolVarP(&opts.Interactive, "interactive", "i", false, "Interactive login prompt for authenticating with DeepSource")
+	cmd.Flags().StringVar(&opts.PAT, "with-token", "", "Personal Access Token (PAT) for DeepSource")
+
 	return cmd
 }
 
@@ -85,6 +88,11 @@ func (opts *LoginOptions) Run() (err error) {
 		if !response {
 			return nil
 		}
+	}
+
+	// If PAT is passed, start the login flow through PAT
+	if opts.PAT != "" {
+		return opts.startPATLoginFlow(cfg, opts.PAT)
 	}
 
 	// Condition 2

@@ -9,7 +9,7 @@ import (
 )
 
 // Query to fetch the status of the repo data sent as param
-const repoStatusQuery = `query RepoStatus($name: String!,$owner: String!, $provider: VCSProviderChoices!){
+const repoStatusQuery = `query RepoStatus($name: String!,$owner: String!, $provider: VCSProvider!){
         repository(name:$name, owner:$owner, provider:$provider){
             isActivated
         }
@@ -47,7 +47,7 @@ func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*reposito
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
 	// Adding jwt as header for auth
-	tokenHeader := fmt.Sprintf("JWT %s", client.GetToken())
+	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
 	req.Header.Add("Authorization", tokenHeader)
 
 	// run it and capture the response

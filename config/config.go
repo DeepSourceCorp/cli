@@ -19,12 +19,12 @@ const (
 )
 
 type CLIConfig struct {
-	Host                  string
-	User                  string
-	Token                 string
-	RefreshToken          string
-	TokenExpiresIn        time.Time
-	RefreshTokenExpiresIn time.Time
+	Host                  string    `toml:"host"`
+	User                  string    `toml:"user"`
+	Token                 string    `toml:"token"`
+	RefreshToken          string    `toml:"refresh_token,omitempty"`
+	TokenExpiresIn        time.Time `toml:"token_expires_in,omitempty"`
+	RefreshTokenExpiresIn time.Time `toml:"refresh_token_expires_in,omitempty"`
 }
 
 var Cfg CLIConfig
@@ -151,9 +151,10 @@ func (cfg *CLIConfig) VerifyAuthentication() error {
 		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
 	}
 
-	// Check if the token has already expired
-	if cfg.IsExpired() {
-		return errors.New("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
-	}
+	// // Check if the token has already expired
+	// if cfg.IsExpired() {
+	// 	return errors.New("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
+	// }
+
 	return nil
 }

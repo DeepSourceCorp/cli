@@ -10,7 +10,7 @@ import (
 )
 
 const fetchAllIssuesQuery = `
-query GetAllIssues($name:String!, $owner:String!, $provider:VCSProviderChoices!, $limit:Int!){
+query GetAllIssues($name:String!, $owner:String!, $provider:VCSProvider!, $limit:Int!){
     repository(name:$name, owner:$owner, provider:$provider){
         issues(first:$limit){
             edges{
@@ -74,7 +74,7 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
 	// Adding jwt as header for auth
-	tokenHeader := fmt.Sprintf("JWT %s", client.GetToken())
+	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
 	req.Header.Add("Authorization", tokenHeader)
 
 	// run it and capture the response
