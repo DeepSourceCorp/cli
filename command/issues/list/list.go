@@ -2,7 +2,9 @@ package list
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
@@ -15,12 +17,24 @@ import (
 const MAX_ISSUE_LIMIT = 100
 
 type IssuesListOptions struct {
-	FileArg        string
-	RepoArg        string
-	LimitArg       int
-	SelectedRemote *utils.RemoteData
-	issuesData     []issues.Issue
-	ptermTable     [][]string
+	FileArg           string
+	RepoArg           string
+	LimitArg          int
+	OutputFilenameArg string
+	JSONArg           bool
+	SelectedRemote    *utils.RemoteData
+	issuesData        []issues.Issue
+	ptermTable        [][]string
+}
+
+type ExportData struct {
+	Occurences []IssueJSON `json:"occurences"`
+	Summary    Summary     `json:"summary"`
+}
+
+type Summary struct {
+	TotalOccurences int `json:"total_occurences"`
+	UniqueIssues    int `json:"unique_issues"`
 }
 
 func NewCmdIssuesList() *cobra.Command {
@@ -48,6 +62,13 @@ func NewCmdIssuesList() *cobra.Command {
 
 	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Fetch the issues upto the specified limit")
+
+	// --output-file, -o flag
+	cmd.Flags().StringVarP(&opts.OutputFilenameArg, "output-file", "o", "", "Output file to write the reported issues to")
+
+	// --json flag
+	cmd.Flags().BoolVar(&opts.JSONArg, "json", false, "Output reported issues in JSON format")
+
 	return cmd
 }
 
@@ -80,7 +101,19 @@ func (opts *IssuesListOptions) Run() (err error) {
 
 	// Fetch the list of issues using SDK based on user input
 	ctx := context.Background()
-	return opts.getIssuesData(ctx)
+	err = opts.getIssuesData(ctx)
+	if err != nil {
+		return err
+	}
+
+	// if --json is passed, export issue data to JSON
+	if opts.JSONArg {
+		opts.exportJSON(opts.OutputFilenameArg)
+	} else {
+		opts.showIssues()
+	}
+
+	return nil
 }
 
 // Gets the data about issues using the SDK based on the user input
@@ -102,7 +135,6 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		if err != nil {
 			return err
 		}
-		opts.showIssues()
 		return nil
 	}
 
@@ -111,7 +143,6 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 	if err != nil {
 		return err
 	}
-	opts.showIssues()
 	return nil
 }
 
@@ -134,4 +165,72 @@ func (opts *IssuesListOptions) showIssues() {
 	}
 	// Using pterm to render the list of list
 	pterm.DefaultTable.WithSeparator("\t").WithData(opts.ptermTable).Render()
+}
+
+// Handles exporting issues as JSON
+func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
+	issueJSON := convertJSON(opts.issuesData)
+	if err != nil {
+		return err
+	}
+
+	data, err := json.MarshalIndent(issueJSON, "", "	")
+	if err != nil {
+		return err
+	}
+
+	if filename == "" {
+		pterm.Println(string(data))
+		return nil
+	}
+
+	if err = ioutil.WriteFile(filename, data, 0644); err != nil {
+		return err
+	}
+
+	pterm.Info.Printf("Saved issues to %s!\n", filename)
+	return nil
+}
+
+// Converts issueData to a JSON-compatible struct
+func convertJSON(issueData []issues.Issue) ExportData {
+	var occurences []IssueJSON
+	var issueExport ExportData
+
+	set := make(map[string]string)
+	total_occurences := 0
+
+	for _, issue := range issueData {
+		issueNew := IssueJSON{
+			Analyzer:       issue.Analyzer.Shortcode,
+			IssueCode:      issue.IssueCode,
+			IssueTitle:     issue.IssueText,
+			OccurenceTitle: issue.IssueText,
+			IssueCategory:  "",
+			Location: LocationJSON{
+				Path: issue.Location.Path,
+				Position: PositionJSON{
+					Begin: LineColumn{
+						Line:   issue.Location.Position.BeginLine,
+						Column: 0,
+					},
+					End: LineColumn{
+						Line:   issue.Location.Position.EndLine,
+						Column: 0,
+					},
+				},
+			},
+		}
+
+		total_occurences += 1
+		set[issue.IssueCode] = ""
+
+		occurences = append(occurences, issueNew)
+	}
+
+	issueExport.Occurences = occurences
+	issueExport.Summary.TotalOccurences = total_occurences
+	issueExport.Summary.UniqueIssues = len(set)
+
+	return issueExport
 }
