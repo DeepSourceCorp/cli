@@ -55,13 +55,8 @@ export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {
   isCollapsed: boolean
 
   public async signOut(): Promise<void> {
-    await this.logOutUser()
+    await this.logOutUser({ onPrem: this.$config.onPrem })
     this.$router.push('/login')
-
-    // Unset distinct IDs post logout
-    if (!this.$config.onPrem) {
-      this.$posthog.reset()
-    }
   }
 }
 </script>

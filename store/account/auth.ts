@@ -106,7 +106,13 @@ interface AuthModuleActions extends ActionTree<AuthModuleState, RootState> {
     }
   ) => void
   [AuthActionTypes.REFRESH]: (this: Store<RootState>, injectee: AuthActionContext) => void
-  [AuthActionTypes.LOG_OUT]: (this: Store<RootState>, injectee: AuthActionContext) => void
+  [AuthActionTypes.LOG_OUT]: (
+    this: Store<RootState>,
+    injectee: AuthActionContext,
+    args: {
+      onPrem: boolean
+    }
+  ) => void
 }
 
 // TODO: Add proper error handling.
@@ -145,13 +151,18 @@ export const actions: AuthModuleActions = {
     }
   },
 
-  async [AuthActionTypes.LOG_OUT]({ commit }) {
+  async [AuthActionTypes.LOG_OUT]({ commit }, args) {
     try {
       await this.$applyGraphqlMutation(logoutMutation, {}, null, false)
       commit(AuthMutationTypes.SET_LOGGED_OUT)
       if (window.Intercom && typeof window.Intercom === 'function') {
         Intercom('shutdown')
         if (window.intercomSettings) Intercom('boot', window.intercomSettings)
+      }
+
+      // Unset distinct IDs post logout
+      if (!args.onPrem) {
+        this.$posthog.reset()
       }
     } catch (e) {
       throw new Error('Something went wrong while logging you out.')

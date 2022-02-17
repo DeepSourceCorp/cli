@@ -1,9 +1,9 @@
 <template>
-  <div class="h-screen flex items-center justify-center">
+  <div class="flex items-center justify-center h-screen">
     <div class="text-center">
-      <div class="text-4xl text-center mb-5">{{ emoji }}</div>
-      <h1 class="text-xl text-vanilla-100 font-semibold">Logging you in...</h1>
-      <p class="text-vanilla-400 mt-2 max-w-xs">
+      <div class="mb-5 text-4xl text-center">{{ emoji }}</div>
+      <h1 class="text-xl font-semibold text-vanilla-100">Logging you in...</h1>
+      <p class="max-w-xs mt-2 text-vanilla-400">
         Please wait while we redirect you to the dashboard
       </p>
     </div>
@@ -43,16 +43,22 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
     await Promise.all([this.fetchActiveUser(), this.fetchContext()])
 
-    if (window.Intercom && typeof window.Intercom === 'function' && !this.$config.onPrem) {
+    if (!this.$config.onPrem) {
       const viewer = this.$store.state.user.active.viewer as User
-      if (viewer.intercomUserHash)
-        Intercom('update', {
-          name: viewer.fullName || undefined,
-          user_id: viewer.id,
-          email: viewer.email,
-          created_at: viewer.dateJoined,
-          user_hash: viewer.intercomUserHash
-        })
+      if (window.Intercom && typeof window.Intercom === 'function') {
+        if (viewer.intercomUserHash)
+          Intercom('update', {
+            name: viewer.fullName || undefined,
+            user_id: viewer.id,
+            email: viewer.email,
+            created_at: viewer.dateJoined,
+            user_hash: viewer.intercomUserHash
+          })
+      }
+
+      // Identify user with PostHog
+      const { id, email, fullName, dateJoined } = viewer
+      this.$posthog.identify(id, { email, fullName, createdAt: dateJoined })
     }
 
     const toOnboard = this.toOnboard
