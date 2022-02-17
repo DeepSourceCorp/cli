@@ -169,8 +169,7 @@ func (opts *IssuesListOptions) showIssues() {
 
 // Handles exporting issues as JSON
 func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
-	var issueJSON ExportData
-	issueJSON = convertJSON(opts.issuesData)
+	issueJSON := convertJSON(opts.issuesData)
 	if err != nil {
 		return err
 	}
