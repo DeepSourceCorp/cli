@@ -155,11 +155,6 @@ export const actions: AuthModuleActions = {
     try {
       await this.$applyGraphqlMutation(logoutMutation, {}, null, false)
       commit(AuthMutationTypes.SET_LOGGED_OUT)
-      if (window.Intercom && typeof window.Intercom === 'function') {
-        Intercom('shutdown')
-        if (window.intercomSettings) Intercom('boot', window.intercomSettings)
-      }
-
       // Unset distinct IDs post logout
       if (!args.onPrem) {
         this.$posthog.reset()

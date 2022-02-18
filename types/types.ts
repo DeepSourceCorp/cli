@@ -9445,7 +9445,7 @@ export type Unnamed_165_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'fullName' | 'firstName' | 'lastName' | 'email' | 'avatar' | 'lastLogin' | 'isActive' | 'isAsgardian' | 'isStaff' | 'dashboardContext' | 'availableCredits' | 'missiveUserHash' | 'intercomUserHash'>
+    & Pick<User, 'id' | 'fullName' | 'firstName' | 'lastName' | 'email' | 'avatar' | 'lastLogin' | 'isActive' | 'isAsgardian' | 'isStaff' | 'dashboardContext' | 'availableCredits' | 'missiveUserHash'>
     & { primaryOwner?: Maybe<(
       { __typename?: 'Owner' }
       & Pick<Owner, 'id' | 'login' | 'vcsProvider' | 'billingEmail'>

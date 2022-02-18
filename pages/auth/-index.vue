@@ -44,20 +44,8 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     await Promise.all([this.fetchActiveUser(), this.fetchContext()])
 
     if (!this.$config.onPrem) {
-      const viewer = this.$store.state.user.active.viewer as User
-      if (window.Intercom && typeof window.Intercom === 'function') {
-        if (viewer.intercomUserHash)
-          Intercom('update', {
-            name: viewer.fullName || undefined,
-            user_id: viewer.id,
-            email: viewer.email,
-            created_at: viewer.dateJoined,
-            user_hash: viewer.intercomUserHash
-          })
-      }
-
       // Identify user with PostHog
-      const { id, email, fullName, dateJoined } = viewer
+      const { id, email, fullName, dateJoined } = this.$store.state.user.active.viewer as User
       this.$posthog.identify(id, { email, fullName, createdAt: dateJoined })
     }
 
