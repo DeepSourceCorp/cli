@@ -9,7 +9,7 @@
         <div
           class="text-vanilla-400 default-scroll min-h-40 max-h-102 text-sm leading-7 w-full flex flex-col space-y-2"
         >
-          <div class="flex-grow px-4">
+          <div class="px-4">
             <z-input
               v-model="searchedIssue"
               spacing="tight"
