@@ -12,6 +12,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/deepsourcelabs/cli/utils"
+	"github.com/owenrumney/go-sarif/v2/sarif"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -25,6 +26,7 @@ type IssuesListOptions struct {
 	OutputFilenameArg string
 	JSONArg           bool
 	CSVArg            bool
+	SARIFArg          bool
 	SelectedRemote    *utils.RemoteData
 	issuesData        []issues.Issue
 	ptermTable        [][]string
@@ -75,6 +77,9 @@ func NewCmdIssuesList() *cobra.Command {
 	// --csv flag
 	cmd.Flags().BoolVar(&opts.CSVArg, "csv", false, "Output reported issues in CSV format")
 
+	// --sarif flag
+	cmd.Flags().BoolVar(&opts.SARIFArg, "sarif", false, "Output reported issues in SARIF format")
+
 	return cmd
 }
 
@@ -116,6 +121,8 @@ func (opts *IssuesListOptions) Run() (err error) {
 		opts.exportJSON(opts.OutputFilenameArg)
 	} else if opts.CSVArg {
 		opts.exportCSV(opts.OutputFilenameArg)
+	} else if opts.SARIFArg {
+		opts.exportSARIF(opts.OutputFilenameArg)
 	} else {
 		opts.showIssues()
 	}
@@ -245,11 +252,7 @@ func (opts *IssuesListOptions) exportCSV(filename string) error {
 	if filename == "" {
 		// write to stdout
 		w := csv.NewWriter(os.Stdout)
-		w.WriteAll(records)
-		if err := w.Error(); err != nil {
-			return err
-		}
-		return nil
+		return w.WriteAll(records)
 	}
 
 	// create file
@@ -280,4 +283,58 @@ func convertCSV(issueData []issues.Issue) [][]string {
 	}
 
 	return records
+}
+
+// Handles exporting issues as a SARIF file
+func (opts *IssuesListOptions) exportSARIF(filename string) (err error) {
+	report := convertSARIF(opts.issuesData)
+	if filename == "" {
+		err = report.PrettyWrite(os.Stdout)
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+
+	// write report to file
+	if err := report.WriteFile(filename); err != nil {
+		return err
+	}
+	pterm.Info.Printf("Saved issues to %s!\n", filename)
+	return nil
+}
+
+// Converts issueData to a SARIF report
+func convertSARIF(issueData []issues.Issue) *sarif.Report {
+	report, err := sarif.New(sarif.Version210)
+	if err != nil {
+		return nil
+	}
+
+	run := sarif.NewRunWithInformationURI("deepsource", "https://deepsource.io")
+	for i, issue := range issueData {
+		pb := sarif.NewPropertyBag()
+		pb.Add("category", "")
+		pb.Add("recommended", "")
+
+		// add rule
+		run.AddRule(issue.IssueCode).WithName(issue.IssueText).WithDescription("").WithHelpURI("").WithProperties(pb.Properties)
+
+		// add result
+		run.CreateResultForRule(issue.IssueCode).WithLevel("error").WithKind("fail").WithMessage(sarif.NewTextMessage(
+			issue.IssueText,
+		)).WithRuleIndex(i).AddLocation(
+			sarif.NewLocationWithPhysicalLocation(
+				sarif.NewPhysicalLocation().WithArtifactLocation(
+					sarif.NewSimpleArtifactLocation(issue.Location.Path),
+				).WithRegion(
+					sarif.NewSimpleRegion(issue.Location.Position.BeginLine, issue.Location.Position.EndLine),
+				),
+			),
+		)
+	}
+
+	report.AddRun(run)
+
+	return report
 }
