@@ -35,11 +35,6 @@ type ExportData struct {
 	Summary    Summary     `json:"summary"`
 }
 
-// type ExportDataCSV struct {
-// 	Occurences [][]string `json:"occurences"`
-// 	Summary    Summary    `json:"summary"`
-// }
-
 type Summary struct {
 	TotalOccurences int `json:"total_occurences"`
 	UniqueIssues    int `json:"unique_issues"`
