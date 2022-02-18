@@ -2,9 +2,11 @@ package list
 
 import (
 	"context"
+	"encoding/csv"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"os"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
@@ -22,6 +24,7 @@ type IssuesListOptions struct {
 	LimitArg          int
 	OutputFilenameArg string
 	JSONArg           bool
+	CSVArg            bool
 	SelectedRemote    *utils.RemoteData
 	issuesData        []issues.Issue
 	ptermTable        [][]string
@@ -31,6 +34,11 @@ type ExportData struct {
 	Occurences []IssueJSON `json:"occurences"`
 	Summary    Summary     `json:"summary"`
 }
+
+// type ExportDataCSV struct {
+// 	Occurences [][]string `json:"occurences"`
+// 	Summary    Summary    `json:"summary"`
+// }
 
 type Summary struct {
 	TotalOccurences int `json:"total_occurences"`
@@ -69,6 +77,9 @@ func NewCmdIssuesList() *cobra.Command {
 	// --json flag
 	cmd.Flags().BoolVar(&opts.JSONArg, "json", false, "Output reported issues in JSON format")
 
+	// --csv flag
+	cmd.Flags().BoolVar(&opts.CSVArg, "csv", false, "Output reported issues in CSV format")
+
 	return cmd
 }
 
@@ -106,9 +117,10 @@ func (opts *IssuesListOptions) Run() (err error) {
 		return err
 	}
 
-	// if --json is passed, export issue data to JSON
 	if opts.JSONArg {
 		opts.exportJSON(opts.OutputFilenameArg)
+	} else if opts.CSVArg {
+		opts.exportCSV(opts.OutputFilenameArg)
 	} else {
 		opts.showIssues()
 	}
@@ -170,10 +182,6 @@ func (opts *IssuesListOptions) showIssues() {
 // Handles exporting issues as JSON
 func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
 	issueJSON := convertJSON(opts.issuesData)
-	if err != nil {
-		return err
-	}
-
 	data, err := json.MarshalIndent(issueJSON, "", "	")
 	if err != nil {
 		return err
@@ -233,4 +241,48 @@ func convertJSON(issueData []issues.Issue) ExportData {
 	issueExport.Summary.UniqueIssues = len(set)
 
 	return issueExport
+}
+
+// Handles exporting issues as CSV
+func (opts *IssuesListOptions) exportCSV(filename string) error {
+	records := convertCSV(opts.issuesData)
+
+	if filename == "" {
+		// write to stdout
+		w := csv.NewWriter(os.Stdout)
+		w.WriteAll(records)
+		if err := w.Error(); err != nil {
+			return err
+		}
+		return nil
+	}
+
+	// create file
+	file, err := os.Create(filename)
+	if err != nil {
+		return err
+	}
+
+	// write to file
+	w := csv.NewWriter(file)
+	w.WriteAll(records)
+	if err := w.Error(); err != nil {
+		return err
+	}
+
+	pterm.Info.Printf("Saved issues to %s!\n", filename)
+	return nil
+}
+
+// Converts issueData to a CSV records
+func convertCSV(issueData []issues.Issue) [][]string {
+	records := [][]string{{"analyzer", "issue_code", "issue_title", "occurence_title", "issue_category", "path", "begin_line", "begin_column", "end_line", "end_column"}}
+
+	for _, issue := range issueData {
+		issueNew := []string{issue.Analyzer.Shortcode, issue.IssueCode, issue.IssueText, issue.IssueText, "", issue.Location.Path, fmt.Sprint(issue.Location.Position.BeginLine), "0", fmt.Sprint(issue.Location.Position.EndLine), "0"}
+
+		records = append(records, issueNew)
+	}
+
+	return records
 }
