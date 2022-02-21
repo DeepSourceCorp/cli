@@ -90,7 +90,9 @@
 
     <section class="relative self-end w-full border-t border-ink-200 justify-self-end group">
       <div v-if="loggedIn" class="p-2.5 space-y-2">
-        <support-menu :is-collapsed="isCollapsed" />
+        <div class="lg:flex">
+          <support-menu :is-collapsed="isCollapsed" />
+        </div>
         <div class="flex items-center">
           <sidebar-item
             :isCollapsed="isCollapsed"

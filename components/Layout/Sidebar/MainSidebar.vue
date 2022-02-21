@@ -122,7 +122,9 @@
 
     <section class="relative self-end w-full justify-self-end group">
       <div class="p-2.5 border-t border-ink-200 space-y-2">
-        <support-menu :is-collapsed="isCollapsed" />
+        <div class="lg:flex">
+          <support-menu :is-collapsed="isCollapsed" />
+        </div>
         <div class="flex items-center">
           <sidebar-item
             v-tooltip="{

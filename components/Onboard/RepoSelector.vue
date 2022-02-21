@@ -42,9 +42,9 @@
         </template>
         <div
           v-else
-          class="flex flex-col items-center justify-center flex-1 w-full p-6 text-sm text-center border border-dashed text-vanilla-400 border-ink-200 rounded-md"
+          class="flex flex-col items-center justify-center flex-1 w-full p-6 text-sm text-center border border-dashed rounded-md text-vanilla-400 border-ink-200"
         >
-          <div v-if="loading" class="flex flex-col space-y-2 items-center">
+          <div v-if="loading" class="flex flex-col items-center space-y-2">
             <z-icon class="animate-spin" icon="spin-loader"></z-icon>
             <span class="text-vanilla-400">Loading repositories</span>
           </div>
@@ -66,7 +66,7 @@
               >
                 <z-icon
                   icon="spin-loader"
-                  class="animate-spin mr-2"
+                  class="mr-2 animate-spin"
                   size="small"
                   color="ink-400"
                 ></z-icon>
@@ -102,6 +102,7 @@ import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 
 import { resolveNodes } from '~/utils/array'
+import RepoSyncMixin from '~/mixins/repoSyncMixin'
 
 @Component({
   components: {
@@ -115,7 +116,7 @@ import { resolveNodes } from '~/utils/array'
     event: 'pickRepo'
   }
 })
-export default class RepoSelector extends mixins(OwnerDetailMixin, RepoListMixin) {
+export default class RepoSelector extends mixins(OwnerDetailMixin, RepoListMixin, RepoSyncMixin) {
   searchCandidate = null
   repoSyncLoading = false
 
@@ -128,6 +129,15 @@ export default class RepoSelector extends mixins(OwnerDetailMixin, RepoListMixin
     await this.fetchRepositories()
   }
 
+  /**
+   * Proxy for fetch repos
+   *
+   * @return {Promise<void>}
+   */
+  async fetchReposAfterSync(): Promise<void> {
+    await this.fetchRepositories()
+  }
+
   async fetchRepositories(): Promise<void> {
     await this.fetchNewRepoList({
       login: this.$route.params.login,
@@ -136,30 +146,6 @@ export default class RepoSelector extends mixins(OwnerDetailMixin, RepoListMixin
       limit: 30,
       query: this.searchCandidate ? this.searchCandidate : null
     })
-  }
-
-  async syncRepos(): Promise<void> {
-    this.repoSyncLoading = true
-    try {
-      await this.syncReposForOwner()
-    } catch {
-      this.$toast.danger('Error while syncing repositories. Please try again.')
-    }
-
-    this.$socket.$on('repo-sync', async (data: { status: string }) => {
-      if (data.status === 'success') {
-        await this.fetchRepositories()
-        this.$toast.success('Repositories synced successfully.')
-      } else if (data.status === 'failure') {
-        this.$toast.danger('Error while syncing repositories. Please try again.')
-      }
-      this.repoSyncLoading = false
-    })
-  }
-
-  beforeDestroy(): void {
-    this.$socket.$off('repo-sync')
-    this.repoSyncLoading = false
   }
 
   pickRepo(repo: Repository): void {

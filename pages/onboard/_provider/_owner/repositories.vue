@@ -53,8 +53,8 @@
             icon="refresh-ccw"
             label="Sync repositories"
             loading-label="Syncing repositories"
-            :is-loading="syncingRepositories"
-            @click="syncRepositories"
+            :is-loading="repoSyncLoading"
+            @click="syncRepos"
           />
           <z-button
             button-type="secondary"
@@ -81,6 +81,7 @@ import { Repository } from '~/types/types'
 import { RepoCard } from '~/components/AddRepo'
 import { resolveNodes } from '~/utils/array'
 import MetaMixin from '~/mixins/metaMixin'
+import RepoSyncMixin from '~/mixins/repoSyncMixin'
 
 /**
  * Page in onboarding step to select the repository
@@ -103,11 +104,11 @@ import MetaMixin from '~/mixins/metaMixin'
 export default class OnboardRepositories extends mixins(
   OwnerDetailMixin,
   RepoListMixin,
-  MetaMixin
+  MetaMixin,
+  RepoSyncMixin
 ) {
   public searchCandidate = ''
   public searching = false
-  public syncingRepositories = false
 
   metaTitle = 'Pick a repository • DeepSource'
   metaDescription = 'Select what type of issues do you want to track on DeepSource'
@@ -153,26 +154,12 @@ export default class OnboardRepositories extends mixins(
   }
 
   /**
-   * Sync repositories from the VCS provider
+   * Proxy for fetch repos
+   *
    * @return {Promise<void>}
    */
-  async syncRepositories(): Promise<void> {
-    this.syncingRepositories = true
-    try {
-      await this.syncReposForOwner()
-    } catch {
-      this.$toast.danger('Error while syncing repositories. Please try again.')
-    }
-
-    this.$socket.$on('repo-sync', async (data: { status: string }) => {
-      if (data.status === 'success') {
-        await this.fetchRepositories()
-        this.$toast.success('Repositories synced successfully.')
-      } else if (data.status === 'failure') {
-        this.$toast.danger('Error while syncing repositories. Please try again.')
-      }
-      this.syncingRepositories = false
-    })
+  async fetchReposAfterSync(): Promise<void> {
+    await this.fetchRepositories()
   }
 
   /**

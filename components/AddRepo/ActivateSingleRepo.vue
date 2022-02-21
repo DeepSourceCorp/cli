@@ -78,7 +78,7 @@
           :alt="searchCandidate"
         />
         <div>
-          <p class="text-vanilla-100 font-semibold">
+          <p class="font-semibold text-vanilla-100">
             {{
               searchCandidate
                 ? `No results found for "${searchCandidate}"`
@@ -128,6 +128,7 @@ import { RepoCard } from '@/components/AddRepo'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
+import RepoSyncMixin from '~/mixins/repoSyncMixin'
 
 interface ZInputT extends Vue {
   focus: () => void
@@ -148,7 +149,8 @@ interface ZInputT extends Vue {
 export default class ActivateSingleRepo extends mixins(
   ActiveUserMixin,
   OwnerDetailMixin,
-  RepoListMixin
+  RepoListMixin,
+  RepoSyncMixin
 ) {
   @Prop({ default: '' })
   analyzerShortcode: string
@@ -158,7 +160,6 @@ export default class ActivateSingleRepo extends mixins(
 
   public searchCandidate = ''
   public pageSize = 20
-  public repoSyncLoading = false
 
   /**
    * Mounted hook for Vue component
@@ -167,6 +168,15 @@ export default class ActivateSingleRepo extends mixins(
    */
   mounted(): void {
     this.$socket.$on('vcs-installed-repos-updated', this.refetchData)
+  }
+
+  /**
+   * Proxy for fetch repos
+   *
+   * @return {Promise<void>}
+   */
+  async fetchReposAfterSync(): Promise<void> {
+    this.$fetch()
   }
 
   /**
@@ -224,37 +234,6 @@ export default class ActivateSingleRepo extends mixins(
         refetch: true
       })
     ])
-  }
-
-  /**
-   * Callback function for repo-sync event
-   *
-   * @returns {Promise<void>}
-   */
-  async repoSyncCallback(data: { status: string }): Promise<void> {
-    if (data.status === 'success') {
-      await this.$fetch()
-      this.$toast.success('Repositories synced successfully.')
-    } else if (data.status === 'failure') {
-      this.$toast.danger('Error while syncing repositories. Please try again.')
-    }
-    this.repoSyncLoading = false
-  }
-
-  /**
-   * Method to sync repositories
-   *
-   * @returns {Promise<void>}
-   */
-  async syncRepos(): Promise<void> {
-    this.repoSyncLoading = true
-    try {
-      await this.syncReposForOwner()
-    } catch {
-      this.$toast.danger('Error while syncing repositories. Please try again.')
-    }
-
-    this.$socket.$on('repo-sync', this.repoSyncCallback)
   }
 
   /**

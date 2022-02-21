@@ -143,7 +143,7 @@ export default class OnboardLogin extends mixins(
   ActiveUserMixin,
   RepoDetailMixin
 ) {
-  public syncingRepositories = false
+  public repoSyncLoading = false
 
   get steps(): { title: string; route: string; link: string; showRepo: boolean }[] {
     return [
@@ -234,28 +234,6 @@ export default class OnboardLogin extends mixins(
     }
 
     return 'default'
-  }
-
-  /**
-   * Sync repositories from the VCS provider
-   * @return {Promise<void>}
-   */
-  async syncRepositories(): Promise<void> {
-    this.syncingRepositories = true
-    try {
-      await this.syncReposForOwner()
-    } catch {
-      this.$toast.danger('Error while syncing repositories. Please try again.')
-    }
-
-    this.$socket.$on('repo-sync', async (data: { status: string }) => {
-      if (data.status === 'success') {
-        this.$toast.success('Repositories synced successfully.')
-      } else if (data.status === 'failure') {
-        this.$toast.danger('Error while syncing repositories. Please try again.')
-      }
-      this.syncingRepositories = false
-    })
   }
 
   /**
