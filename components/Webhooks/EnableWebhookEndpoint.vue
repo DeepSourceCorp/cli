@@ -55,12 +55,11 @@ export default class DeleteWebhookEndpoint extends mixins(WebhookMixin, ActiveUs
   public showEnableModal = false
   get testPayload(): string {
     return `{
-  "id": "370440586387259393",
+  "id": "370847944204618991",
   "type": "test.event",
-  "created": "${new Date().toISOString()}",
-  "version": "v1.0.0",
+  "createdAt": 1642070207,
   "data": {
-    "Test": true
+    "test": true
   }
 }`
   }

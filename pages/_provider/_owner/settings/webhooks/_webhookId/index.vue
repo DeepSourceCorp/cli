@@ -25,7 +25,7 @@
       <page-title
         class="max-w-2xl"
         :title="title"
-        :description="`Created ${formatDate(localEndpoint.createdAt)} · ${localEndpoint.version}`"
+        :description="`Created ${formatDate(localEndpoint.createdAt)}`"
       >
         <template slot="title-info">
           <z-label v-if="localEndpoint.active" class="inline-block select-none" state="success">
@@ -158,16 +158,46 @@
               </div>
             </template>
           </password-input>
-          <div class="py-4 space-y-2">
-            <h4 class="text-sm text-vanilla-100">Selected events</h4>
-            <span
-              v-for="event in subscribedEvents"
-              :key="event.shortcode"
-              class="block px-3 pt-2 pb-3 border border-ink-200 rounded-md space-y-0.5"
-            >
-              <code class="text-sm">{{ event.shortcode }}</code>
-              <p class="text-xs text-vanilla-400">{{ event.shortDescription }}</p>
-            </span>
+          <div class="py-4">
+            <h4 class="text-sm text-vanilla-100 mb-2">Selected events</h4>
+            <div class="border border-ink-200 rounded-md">
+              <template v-if="readOnly">
+                <span
+                  v-for="(event, position) in subscribedEvents"
+                  :key="event.shortcode"
+                  class="block px-3 pt-2 pb-3 border-ink-200 space-y-0.5"
+                  :class="{
+                    'border-t': position !== 0
+                  }"
+                >
+                  <code class="text-sm">{{ event.shortcode }}</code>
+                  <p class="text-xs text-vanilla-400">{{ event.shortDescription }}</p>
+                </span>
+              </template>
+              <template v-else>
+                <label
+                  v-for="(event, position) in subscribedEvents"
+                  :key="event.shortcode"
+                  class="block p-3 cursor-pointer border-ink-200"
+                  :class="{
+                    'border-t': position !== 0,
+                    'bg-ink-300': selectedEvents.includes(event.shortcode)
+                  }"
+                >
+                  <div class="flex items-center mb-1">
+                    <z-checkbox
+                      v-model="selectedEvents"
+                      :value="event.shortcode"
+                      :name="event.shortcode"
+                      size="small"
+                    >
+                    </z-checkbox>
+                    <code class="text-sm">{{ event.shortcode }}</code>
+                  </div>
+                  <p class="text-xs text-vanilla-400 ml-6">{{ event.shortDescription }}</p>
+                </label>
+              </template>
+            </div>
           </div>
           <section v-if="endpointDeliveriesCount && readOnly" class="py-4 space-y-2">
             <h4 class="text-sm text-vanilla-100">Webhook deliveries</h4>
@@ -228,7 +258,8 @@ import {
   ZButton,
   ZConfirm,
   ZBreadcrumb,
-  ZBreadcrumbItem
+  ZBreadcrumbItem,
+  ZCheckbox
 } from '@deepsourcelabs/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
@@ -246,7 +277,8 @@ import { TeamPerms } from '~/types/permTypes'
     ZButton,
     ZConfirm,
     ZBreadcrumb,
-    ZBreadcrumbItem
+    ZBreadcrumbItem,
+    ZCheckbox
   },
   meta: {
     auth: {
@@ -264,6 +296,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
   public allowEdit = true
   public showSaveModal = false
   public savingConfig = false
+  public selectedEvents: string[] = []
   public localEndpoint: Webhook = { url: '' } as Webhook
   isSecretHidden = true
 
@@ -276,12 +309,14 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
       limit: 8
     })
     this.localEndpoint = JSON.parse(JSON.stringify(this.endpoint))
+    this.selectedEvents = this.subscribedEvents.map((event) => event.shortcode)
   }
 
   async reset(refetch = true): Promise<void> {
     const { webhookId } = this.$route.params
     await this.fetchSingleEndpoint({ webhookId, refetch: refetch })
     this.localEndpoint = JSON.parse(JSON.stringify(this.endpoint))
+    this.selectedEvents = this.subscribedEvents.map((event) => event.shortcode)
     this.readOnly = true
   }
 
@@ -305,7 +340,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
         this.localEndpoint.url,
         this.localEndpoint.apiSigning,
         this.localEndpoint.secret,
-        this.subscribedEventNames
+        this.selectedEvents
       )
     } catch (e) {
       this.$toast.info((e as Error).message)
@@ -319,7 +354,8 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
         webhookId: webhookId,
         url: this.localEndpoint.url,
         secret: this.localEndpoint.secret,
-        apiSigning: this.localEndpoint.apiSigning
+        apiSigning: this.localEndpoint.apiSigning,
+        eventsSubscribed: this.selectedEvents
       })
       await this.reset()
       this.$toast.success('Successfully updated the endpoint details.')
@@ -349,10 +385,6 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
       }) as WebhookEventTypes[]
     }
     return []
-  }
-
-  get subscribedEventNames(): string[] {
-    return this.subscribedEvents.map((event) => event.shortcode)
   }
 
   async generateSecret(): Promise<void> {

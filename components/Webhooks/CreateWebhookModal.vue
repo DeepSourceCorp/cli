@@ -62,26 +62,31 @@
     </fieldset>
     <section class="p-4 pt-0 space-y-2">
       <h4 class="text-sm font-medium text-vanilla-400">Select events</h4>
-      <label
-        v-for="event in webhookEventTypes"
-        :key="event.shortcode"
-        class="block p-3 border rounded-md cursor-pointer"
-        :class="
-          selectedEvents.includes(event.shortcode) ? 'border-ink-100 bg-ink-200' : 'border-ink-200'
-        "
-      >
-        <div class="flex items-center mb-1">
-          <z-checkbox
-            v-model="selectedEvents"
-            :value="event.shortcode"
-            :name="event.shortcode"
-            size="small"
-          >
-          </z-checkbox>
-          <code class="text-sm">{{ event.shortcode }}</code>
-        </div>
-        <p class="text-xs text-vanilla-400">{{ event.shortDescription }}</p>
-      </label>
+      <!-- h-52 is the height of 3 cards (we had 3 cards at the time) -->
+      <div class="max-h-52 overflow-y-scroll space-y-2">
+        <label
+          v-for="event in webhookEventTypes"
+          :key="event.shortcode"
+          class="block p-3 border rounded-md cursor-pointer"
+          :class="
+            selectedEvents.includes(event.shortcode)
+              ? 'border-ink-100 bg-ink-200'
+              : 'border-ink-200'
+          "
+        >
+          <div class="flex items-center mb-1">
+            <z-checkbox
+              v-model="selectedEvents"
+              :value="event.shortcode"
+              :name="event.shortcode"
+              size="small"
+            >
+            </z-checkbox>
+            <code class="text-sm">{{ event.shortcode }}</code>
+          </div>
+          <p class="text-xs text-vanilla-400 ml-6">{{ event.shortDescription }}</p>
+        </label>
+      </div>
       <alert-box>
         Webhooks are still in beta, we're going to enable more events in the weeks to come.
       </alert-box>
@@ -134,9 +139,6 @@ export default class CreateWebhookModal extends mixins(
 
   async fetch() {
     await this.fetchWebhookEventTypesList()
-    if (this.webhookEventTypes.length) {
-      this.selectedEvents = [this.webhookEventTypes[0].shortcode]
-    }
   }
 
   async saveConfig(close: () => void): Promise<void> {
