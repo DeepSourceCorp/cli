@@ -17,17 +17,19 @@
     </div>
     <div class="flex flex-wrap flex-1 w-full">
       <!-- Left Section -->
-      <div
-        class="flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly"
-        :class="[{ 'w-full md:w-4/5': showInfo }, customPadding]"
-      >
+      <slot name="left-section">
         <div
-          class="flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200"
+          class="flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly"
+          :class="[{ 'w-full md:w-4/5': showInfo }, customPadding]"
         >
-          <slot name="title">{{ title }} </slot>
+          <div
+            class="flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200"
+          >
+            <slot name="title">{{ title }} </slot>
+          </div>
+          <slot name="description">{{ description }}</slot>
         </div>
-        <slot name="description">{{ description }}</slot>
-      </div>
+      </slot>
       <!-- Right Section -->
       <div
         v-if="showInfo"

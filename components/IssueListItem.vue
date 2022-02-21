@@ -1,45 +1,49 @@
 <template>
   <base-card :to="issueLink" :removeDefaultStyle="removeDefaultStyle">
     <template slot="header"> <slot name="header"></slot> </template>
-    <template slot="title">
-      <div class="flex flex-wrap items-baseline text-lg font-normal text-vanilla-400">
-        <span
-          class="pr-2 font-semibold text-vanilla-100 line-clamp-1"
-          :to="issueLink"
-          v-html="escapeHtml(title)"
-        >
-        </span>
-        <!-- Issue ID -->
-        <span class="flex-shrink-0 block text-sm md:flex">{{ shortcode }}</span>
-      </div>
-    </template>
-    <template slot="description">
-      <div class="flex flex-col space-y-1">
-        <div class="flex flex-wrap space-x-4">
-          <!-- Issue type -->
-          <issue-type :issueType="issueType"></issue-type>
-          <!-- First seen and last seen -->
-          <div class="flex items-center space-x-2">
-            <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
-            <span class="text-sm text-vanilla-400">
-              <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">{{
-                lastSeenDisplay
-              }}</span>
-              &mdash;
-              <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">{{
-                firstSeenDisplay
-              }}</span>
+    <template slot="left-section">
+      <div
+        class="flex flex-col text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 px-4 py-3"
+      >
+        <div class="flex items-center gap-x-2 text-base font-semibold sm:text-lg text-vanilla-200">
+          <div class="flex flex-wrap items-baseline text-lg font-normal text-vanilla-400">
+            <span
+              v-html="escapeHtml(title)"
+              :to="issueLink"
+              class="pr-2 font-semibold text-vanilla-100 line-clamp-1"
+            >
             </span>
+            <!-- Issue ID -->
+            <span class="flex-shrink-0 block text-sm md:flex">{{ shortcode }}</span>
           </div>
-          <!-- Occurences in files -->
         </div>
-        <div
-          class="flex items-baseline w-full space-x-1 text-sm leading-6 text-vanilla-400 sm:w-auto"
-        >
-          <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0"></z-icon>
-          <span class="max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis"
-            >Found in {{ seenIn }}</span
+        <div class="flex flex-col gap-y-1">
+          <div class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
+            <!-- Issue type -->
+            <issue-type :issueType="issueType"></issue-type>
+            <!-- First seen and last seen -->
+            <div class="flex items-center gap-x-2">
+              <z-icon icon="clock" size="x-small" color="vanilla-400" />
+              <span class="text-sm text-vanilla-400">
+                <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">
+                  {{ lastSeenDisplay }}
+                </span>
+                &mdash;
+                <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">
+                  {{ firstSeenDisplay }}
+                </span>
+              </span>
+            </div>
+            <!-- Occurences in files -->
+          </div>
+          <div
+            class="flex items-baseline w-full gap-x-1 text-sm leading-6 text-vanilla-400 sm:w-auto"
           >
+            <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0" />
+            <span class="max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis"
+              >Found in {{ seenIn }}</span
+            >
+          </div>
         </div>
       </div>
     </template>
@@ -52,7 +56,7 @@
       >
         <!-- Occurence count and Trend  -->
         <div
-          class="flex-col items-center justify-center flex-grow hidden text-xs leading-none lg:space-y-2 sm:flex"
+          class="flex-col items-center justify-center flex-grow hidden text-xs leading-none lg:gap-y-2 sm:flex"
           :class="{ 'py-4': !showTrend, 'py-2': showTrend }"
         >
           <!-- Count -->
@@ -83,7 +87,7 @@
           v-if="autofixAvailable && showAutofixButton"
           @click.stop.prevent="handleClick()"
           :disabled="disableAutofixButton"
-          class="flex items-center justify-center w-full h-auto p-2 border-t sm:space-x-2 border-ink-300 group-hover:border-ink-200"
+          class="flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-300 group-hover:border-ink-200"
           :class="{
             'cursor-pointer hover:bg-ink-200': !disableAutofixButton
           }"
