@@ -13,7 +13,7 @@
         <add-repo-modal :showModal="showAddRepoModal" @close="showAddRepoModal = false" />
       </div>
     </template>
-    <template v-if="loading">
+    <template v-if="repoListLoading">
       <div
         v-for="idx in loaderCount"
         :key="idx"
@@ -102,7 +102,7 @@ import { TeamPerms } from '~/types/permTypes'
   methods: { getHumanizedTimeFromNow, formatDate }
 })
 export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, RepoListMixin) {
-  public loading = false
+  public repoListLoading = false
   public showAddRepoModal = false
 
   get canActivateRepo(): boolean {
@@ -111,7 +111,7 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
   }
 
   async fetch(): Promise<void> {
-    this.loading = true
+    this.repoListLoading = true
     const { provider, owner } = this.$route.params
 
     await this.fetchActiveAnalysisRepoListWithAnalyzers({
@@ -125,7 +125,7 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
       'recently-active-repo-count',
       this.repoWithActiveAnalysisWithAnalyzers?.length ?? 0
     )
-    this.loading = false
+    this.repoListLoading = false
   }
 
   get loaderCount(): number {
