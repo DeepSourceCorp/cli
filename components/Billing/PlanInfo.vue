@@ -39,7 +39,7 @@
         </div>
         <div class="pt-1 mt-1 text-right">
           <z-button
-            v-if="ownerBillingInfo && !ownerBillingInfo.cancelAtPeriodEnd && !isBilledManually"
+            v-if="ownerBillingInfo && !ownerBillingInfo.cancelAtPeriodEnd && isBilledByStripe"
             @click="toggleAddMoreSeats"
             button-type="primary"
             size="small"
@@ -133,6 +133,9 @@ interface ZModalInterface extends Vue {
   close?: () => void
 }
 
+/**
+ * Plan information component with information for plan type, seats used, per seat price and `Add more seats` CTA.
+ */
 @Component({
   components: { ZButton, ZIcon, ZModal, ZNumberInput },
   layout: 'dashboard'
@@ -146,7 +149,12 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
   loading = false
   seatsCount: number = 0
 
-  mounted() {
+  /**
+   * Mounted lifecycle hook for the page, updates `seatCount` value from store.
+   *
+   * @returns {void}
+   */
+  mounted(): void {
     this.seatsCount = Number(this.ownerBillingInfo.seatsTotal)
   }
 
@@ -173,7 +181,12 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
     return Number(this.seatsCount) <= maxSeats && Number(this.seatsCount) >= minSeats
   }
 
-  validateSeats() {
+  /**
+   * Validate the value of `seatsCount` against `maxSeats` and `minSeats`.
+   *
+   * @returns {void}
+   */
+  validateSeats(): void {
     const maxSeats = this.currentPlan.max_seats as number
     const minSeats = this.currentPlan.min_seats as number
 
@@ -184,6 +197,11 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
     }
   }
 
+  /**
+   * Show the `Add more seats` modal for the user to update seats.
+   *
+   * @returns {void}
+   */
   toggleAddMoreSeats(): void {
     if (this.isBilledByStripe) {
       this.seatsCount = Number(this.ownerBillingInfo.seatsTotal)
@@ -191,6 +209,11 @@ export default class PlanInfo extends mixins(ContextMixin, OwnerBillingMixin) {
     }
   }
 
+  /**
+   * Run the `updateSeats` mutation to update the count for seats that the user has subscribed to.
+   *
+   * @returns {Promise<void>}
+   */
   async updateSeatsMutation(close: () => void): Promise<void> {
     this.loading = true
     const modal = this.$refs['update-billing-seats-modal'] as ZModalInterface

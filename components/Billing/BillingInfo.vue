@@ -102,7 +102,7 @@
         </div>
       </div>
     </div>
-    <div v-else-if="isBilledByGithub">
+    <div v-else-if="isBilledByGitHub">
       <alert-box bg-color="bg-robin" text-color="text-robin-150">
         <div
           class="flex flex-col items-start space-y-4 md:flex-row md:space-y-0 md:space-x-10 md:justify-between"
@@ -113,7 +113,7 @@
             </p>
             <p>
               Please check your GitHub billing page for more updates and to make changes to your
-              plan.
+              plan, including adding or removing seats.
             </p>
           </div>
           <span
@@ -192,6 +192,11 @@ import { parseISODate, formatDate } from '~/utils/date'
 import { formatUSD } from '~/utils/string'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
+/**
+ * Billing information component for the billing page that shows renewal date, renewal amount,
+ * billing interval, billing email & address. Allows editing the billing email and address.
+ * Allows switching between monthly and yearly billing.
+ */
 @Component({
   components: {
     FormGroup,
@@ -207,6 +212,18 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
   }
 })
 export default class BillingInfoBox extends mixins(OwnerBillingMixin) {
+  public showCouponInput = false
+  public couponCode = ''
+  public togglePlanLoading = false
+  public showUpdateBillingsModal = false
+  public showPlanUpdateModal = false
+  public showBillingDetailsLoading = false
+
+  /**
+   * Fetch hook for the component.
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
     await this.fetchBillingDetails({
@@ -221,23 +238,31 @@ export default class BillingInfoBox extends mixins(OwnerBillingMixin) {
     }`
   }
 
-  async togglePlanChange(): Promise<void> {
+  /**
+   * Toggles hide/show state for billing interval modal.
+   *
+   * @returns {void}
+   */
+  togglePlanChange(): void {
     this.showPlanUpdateModal = !this.showPlanUpdateModal
   }
 
+  /**
+   * Toggles hide/show state for edit billing email and address modal.
+   *
+   * @returns {void}
+   */
   toggleBillingDetailUpdateModal(): void {
     this.showUpdateBillingsModal = !this.showUpdateBillingsModal
   }
 
+  /**
+   * Sets `BillingInfoBox` into loading state.
+   *
+   * @returns {void}
+   */
   setLoadingForBillingDetails(val: boolean): void {
     this.showBillingDetailsLoading = val
   }
-
-  public showCouponInput = false
-  public couponCode = ''
-  public togglePlanLoading = false
-  public showUpdateBillingsModal = false
-  public showPlanUpdateModal = false
-  public showBillingDetailsLoading = false
 }
 </script>
