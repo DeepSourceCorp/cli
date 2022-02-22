@@ -1,5 +1,5 @@
 <template>
-  <main class="pb-12">
+  <main class="pb-12 md:pb-60">
     <template v-if="!$fetchState.pending">
       <analyzer-header
         v-if="check.analyzer && check.analyzer.name && check.analyzer.shortcode && check.status"
