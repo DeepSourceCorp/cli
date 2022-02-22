@@ -1,16 +1,19 @@
 package list
 
 import (
+	"io/ioutil"
+	"os"
 	"reflect"
+	"strings"
 	"testing"
 
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 )
 
-func TestListCSV(t *testing.T) {
-	want := [][]string{{"analyzer", "issue_code", "issue_title", "occurence_title", "issue_category", "path", "begin_line", "begin_column", "end_line", "end_column"}, {"go", "RVV-B0013", "Unused method receiver detected", "Unused method receiver detected", "", "deepsource/transformers/queries/get_transformers.go", "34", "0", "34", "0"}, {"go", "RVV-B0013", "Unused method receiver detected", "Unused method receiver detected", "", "deepsource/transformers/queries/get_transformers.go", "44", "0", "44", "0"}}
+var issues_data []issues.Issue
 
-	issues := []issues.Issue{
+func init() {
+	issues_data = []issues.Issue{
 		{
 			Analyzer: issues.AnalyzerMeta{
 				Shortcode: "go",
@@ -40,8 +43,12 @@ func TestListCSV(t *testing.T) {
 			},
 		},
 	}
+}
 
-	got := convertCSV(issues)
+func TestListCSV(t *testing.T) {
+	want := [][]string{{"analyzer", "issue_code", "issue_title", "occurence_title", "issue_category", "path", "begin_line", "begin_column", "end_line", "end_column"}, {"go", "RVV-B0013", "Unused method receiver detected", "Unused method receiver detected", "", "deepsource/transformers/queries/get_transformers.go", "34", "0", "34", "0"}, {"go", "RVV-B0013", "Unused method receiver detected", "Unused method receiver detected", "", "deepsource/transformers/queries/get_transformers.go", "44", "0", "44", "0"}}
+
+	got := convertCSV(issues_data)
 
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("got: %s; want: %s\n", got, want)
@@ -135,6 +142,24 @@ func TestListJSON(t *testing.T) {
 	}
 
 	got := convertJSON(issues)
+
+	if !reflect.DeepEqual(got, want) {
+		t.Errorf("got: %v; want: %v\n", got, want)
+	}
+}
+
+func TestListSARIF(t *testing.T) {
+	opts := IssuesListOptions{issuesData: issues_data}
+	opts.exportSARIF("./testdata/exported.sarif")
+
+	exported, _ := ioutil.ReadFile("./testdata/exported.sarif")
+	test, _ := ioutil.ReadFile("./testdata/test.sarif")
+
+	got := string(exported)
+	want := strings.TrimSuffix(string(test), "\n")
+
+	// cleanup after test
+	_ = os.Remove("./testdata/exported.sarif")
 
 	if !reflect.DeepEqual(got, want) {
 		t.Errorf("got: %v; want: %v\n", got, want)
