@@ -21,6 +21,17 @@ export const issuesSortOrder = [
   'doc'
 ]
 
+export enum IssueTypeOptions {
+  BUG_RISK = 'bug-risk',
+  ANTI_PATTERN = 'antipattern',
+  SECURITY = 'security',
+  STYLE = 'style',
+  PERFORMANCE = 'performance',
+  DOCUMENTATION = 'doc',
+  TYPECHECK = 'typecheck',
+  COVERAGE = 'coverage'
+}
+
 /**
  * Mixin to add utilities that help with issue filtering in a  repo
  */

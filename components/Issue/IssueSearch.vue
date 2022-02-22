@@ -8,7 +8,7 @@
       size="small"
       class="text-sm"
       backgroundColor="ink-300"
-      placeholder="Search for issue or file"
+      :placeholder="placeholder"
       :showBorder="false"
       @focus="searchFocused = true"
       @blur="searchFocused = false"
@@ -31,7 +31,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ModelSync } from 'vue-property-decorator'
+import { ModelSync, Prop } from 'vue-property-decorator'
 import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
 
 @Component({
@@ -43,6 +43,9 @@ import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
 export default class IssueSearch extends Vue {
   @ModelSync('searchCandidate', 'updateSearch', { type: String, default: null })
   readonly modelValue: string
+
+  @Prop({ default: 'Search for issue or file' })
+  placeholder: string
 
   private searchFocused = false
 }

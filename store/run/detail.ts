@@ -142,8 +142,9 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
       checkId: string
       limit: number
       currentPageNumber: number
-      sort: string
-      issueType: string
+      sort?: string
+      issueType?: string
+      q?: string
       refetch?: boolean
     }
   ) => Promise<void>
@@ -253,7 +254,8 @@ export const actions: RunDetailModuleActions = {
           limit: args.limit,
           after: this.$getGQLAfter(args.currentPageNumber, args.limit),
           sort: args.sort,
-          issueType: args.issueType
+          issueType: args.issueType,
+          q: args.q
         },
         args.refetch
       )

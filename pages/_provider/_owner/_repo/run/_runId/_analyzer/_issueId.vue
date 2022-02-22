@@ -1,13 +1,5 @@
 <template>
   <div class="pb-6">
-    <run-header
-      v-if="run"
-      v-bind="run"
-      :routeToPrevious="$generateRoute(['history', 'runs'])"
-      :checks="checks"
-      :currentAnalyzer="$route.params.analyzer"
-    ></run-header>
-    <div v-else class="w-full h-24 bg-ink-200 animate-pulse"></div>
     <div class="relative px-4 pt-4">
       <!-- Back to Issue list Page -->
       <div class="flex items-center justify-between">

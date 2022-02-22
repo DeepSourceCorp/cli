@@ -10,6 +10,7 @@ import {
   Run
 } from '~/types/types'
 import { RunDetailActions } from '@/store/run/detail'
+import { resolveNodes } from '~/utils/array'
 
 const runDetailStore = namespace('run/detail')
 
@@ -66,8 +67,9 @@ export default class RunDetailMixin extends Vue {
     checkId: string
     limit: number
     currentPageNumber: number
-    sort: string
-    issueType: string
+    q?: string
+    sort?: string
+    issueType?: string
     refetch?: boolean
   }) => Promise<void>
 
@@ -81,4 +83,8 @@ export default class RunDetailMixin extends Vue {
 
   @runDetailStore.Action(RunDetailActions.CREATE_PR)
   createPullRequest: (args: { input: CreatePullRequestInput }) => Promise<void>
+
+  get checks(): Check[] {
+    return resolveNodes(this.run.checks) as Check[]
+  }
 }

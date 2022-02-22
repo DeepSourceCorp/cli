@@ -1,4 +1,11 @@
-query($checkId: ID!, $q: String, $limit: Int, $after: String, $sort: String, $issueType: String) {
+query concreteIssues(
+  $checkId: ID!
+  $q: String
+  $limit: Int
+  $after: String
+  $sort: String
+  $issueType: String
+) {
   check(checkId: $checkId) {
     id
     concreteIssues(q: $q, first: $limit, after: $after, sort: $sort, issueType: $issueType) {

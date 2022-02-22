@@ -43,6 +43,11 @@ export default class RouteQueryMixin extends Vue {
     this.replaceRoute()
   }
 
+  // Callback for route replace
+  refetchAfterRouteChange(): void {
+    this.$fetch()
+  }
+
   @Watch('queryParams', { deep: true, immediate: false })
   replaceRoute(): void {
     // don't run on server
@@ -57,7 +62,7 @@ export default class RouteQueryMixin extends Vue {
 
     this.$nextTick(async () => {
       await this.$nuxt.$router.replace({ query: { ...this.queryParams } as Location['query'] })
-      await this.$fetch()
+      this.refetchAfterRouteChange()
     })
   }
 }

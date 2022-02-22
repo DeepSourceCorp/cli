@@ -1,55 +1,126 @@
 <template>
-  <div>
-    <run-header
-      v-if="run"
-      v-bind="run"
-      :routeToPrevious="$generateRoute(['history', 'runs'])"
-      :checks="checks"
-      :currentAnalyzer="$route.params.analyzer"
-    ></run-header>
-    <div v-else class="h-24 w-full bg-ink-200 animate-pulse"></div>
-    <div v-if="runDetailLoading">
+  <main class="pb-12">
+    <template v-if="!$fetchState.pending">
+      <analyzer-header
+        v-if="check.analyzer && check.analyzer.name && check.analyzer.shortcode && check.status"
+        :title="check.analyzer.name"
+        :icon="check.analyzer.shortcode"
+        :alerting-metrics-count="alertingMetrics.length"
+        v-bind="check"
+        class="px-4"
+      />
+      <run-autofix-bar
+        v-if="
+          allowAutofix &&
+          check.autofixableIssues.length &&
+          !run.isForDefaultBranch &&
+          !run.isForCrossRepoPr
+        "
+        v-bind="check"
+      />
+      <z-tabs>
+        <z-tab-list class="px-4 py-0 pt-2 border-b border-ink-200">
+          <z-tab-item
+            icon="flag"
+            class="flex items-center space-x-1"
+            border-active-color="vanilla-400"
+          >
+            <span>Issues</span>
+          </z-tab-item>
+          <z-tab-item
+            icon="bar-chart"
+            class="flex items-center space-x-1"
+            border-active-color="vanilla-400"
+          >
+            <span>Metrics</span>
+          </z-tab-item>
+        </z-tab-list>
+        <z-tab-panes class="p-4">
+          <z-tab-pane>
+            <analyzer-run :canCreateAutofix="canCreateAutofix" v-bind="check">
+              <template #controls>
+                <div class="flex w-auto space-x-2 md:w-3/5">
+                  <issue-sort
+                    v-model="queryParams.sort"
+                    :show-seen-options="false"
+                    @reset="removeFilter('sort')"
+                  />
+                  <issue-category-filter
+                    v-model="queryParams.category"
+                    @reset="removeFilter('category')"
+                  />
+                </div>
+                <issue-search
+                  v-focus
+                  :search-candidate="queryParams.q"
+                  placeholder="Search for issue title or shortcode"
+                  class="w-full md:w-1/3"
+                  @updateSearch="updateSearch"
+                />
+              </template>
+            </analyzer-run>
+          </z-tab-pane>
+          <z-tab-pane>
+            <run-loading v-if="check.status === 'PEND'" />
+            <run-cancelled v-else-if="check.status === 'CNCL'" />
+            <run-timeout v-else-if="check.status === 'TIMO'" />
+            <div
+              v-else
+              class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+            >
+              <stat-card
+                v-for="stat in check.metricsCaptured"
+                :key="stat.id"
+                :title="stat.name"
+                :subtitle="stat.namespace.key"
+                :value="stat.valueDisplay"
+                :icon="check.analyzer.shortcode"
+                :color="stat.isPassing === false ? 'cherry' : 'juniper'"
+                :with-transition="stat.isPassing === false"
+              />
+            </div>
+          </z-tab-pane>
+        </z-tab-panes>
+      </z-tabs>
+    </template>
+    <template v-else>
       <!-- Header -->
-      <div class="flex w-full rounded-sm flex-1 p-4 space-x-2">
+      <div class="flex flex-1 w-full p-4 space-x-2 rounded-sm">
         <!-- Left Section -->
-        <div class="w-3/5 md:w-4/5 flex flex-col space-y-2 justify-evenly">
-          <div class="h-10 bg-ink-300 rounded-md animate-pulse"></div>
-          <div class="h-6 bg-ink-300 rounded-md animate-pulse"></div>
+        <div class="flex flex-col w-3/5 space-y-2 md:w-4/5 justify-evenly">
+          <div class="h-10 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="h-6 rounded-md bg-ink-300 animate-pulse"></div>
         </div>
         <!-- Right Section -->
         <div class="relative w-2/5 md:w-1/5">
-          <div class="h-full bg-ink-300 rounded-md animate-pulse"></div>
+          <div class="h-full rounded-md bg-ink-300 animate-pulse"></div>
         </div>
       </div>
       <div class="flex p-4 space-x-2">
-        <div class="h-8 w-24 bg-ink-300 rounded-md animate-pulse"></div>
-        <div class="h-8 w-28 bg-ink-300 rounded-md animate-pulse"></div>
+        <div class="w-24 h-8 rounded-md bg-ink-300 animate-pulse"></div>
+        <div class="h-8 rounded-md w-28 bg-ink-300 animate-pulse"></div>
       </div>
 
       <div class="p-4 space-y-2">
-        <div class="h-28 w-full bg-ink-300 rounded-md animate-pulse"></div>
-        <div class="h-28 w-full bg-ink-300 rounded-md animate-pulse"></div>
+        <div class="w-full rounded-md h-28 bg-ink-300 animate-pulse"></div>
+        <div class="w-full rounded-md h-28 bg-ink-300 animate-pulse"></div>
       </div>
-    </div>
-    <analyzer-run
-      v-else
-      :key="$route.params.analyzer"
-      :canCreateAutofix="canCreateAutofix"
-      v-bind="check"
-    ></analyzer-run>
-  </div>
+    </template>
+  </main>
 </template>
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 
 // Import State & Types
-import { Maybe, Check, CheckEdge } from '~/types/types'
-import { RepoPerms } from '~/types/permTypes'
+import { Check, RepositoryMetricValue } from '~/types/types'
+import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import { RunHeader, AnalyzerRun } from '@/components/Run'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
+import { ZIcon, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem } from '@deepsourcelabs/zeal'
+import RouteQueryMixin from '~/mixins/routeQueryMixin'
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -57,15 +128,31 @@ import RunDetailMixin from '~/mixins/runDetailMixin'
 @Component({
   components: {
     AnalyzerRun,
-    RunHeader
+    RunHeader,
+    ZIcon,
+    ZTabs,
+    ZTabList,
+    ZTabPane,
+    ZTabPanes,
+    ZTabItem
   },
   layout: 'repository'
 })
 export default class AnalyzerDetails extends mixins(
   RepoDetailMixin,
   RoleAccessMixin,
-  RunDetailMixin
+  RunDetailMixin,
+  RouteQueryMixin
 ) {
+  /**
+   * Created hook to update query params from route query mixin
+   *
+   * @return {any}
+   */
+  created() {
+    this.queryParams = Object.assign(this.queryParams, this.$route.query)
+  }
+
   /**
    * Fetch hook for the page.
    *
@@ -112,6 +199,19 @@ export default class AnalyzerDetails extends mixins(
     }
   }
 
+  get currentCheck(): Check {
+    const filteredCheck = this.checks.filter((edge) => {
+      return edge.analyzer?.shortcode == this.$route.params.analyzer
+    })
+
+    return filteredCheck[0]
+  }
+
+  get alertingMetrics(): Array<RepositoryMetricValue> {
+    const metrics = (this.check?.metricsCaptured || []) as RepositoryMetricValue[]
+    return metrics.filter((metric) => metric.isPassing === false)
+  }
+
   /**
    * Mounted lifecycle hook for the page. Binds event bus and socket event listeners.
    *
@@ -132,6 +232,15 @@ export default class AnalyzerDetails extends mixins(
     this.$root.$off('refetchCheck', this.refetchCheck)
     this.$socket.$off('repo-analysis-updated', this.refetchRunAndCheck)
     this.$socket.$off('autofixrun-fixes-ready', this.refetchRunAndCheck)
+  }
+
+  /**
+   * Route query callback
+   *
+   * @return {Promise<void>}
+   */
+  async refetchAfterRouteChange(): Promise<void> {
+    await this.fetchIssues()
   }
 
   /**
@@ -161,57 +270,32 @@ export default class AnalyzerDetails extends mixins(
     await this.fetchConcreteIssueList({
       checkId: this.check.id,
       currentPageNumber: 1,
-      limit: 30,
-      sort: '',
-      issueType: '',
+      limit: 50,
+      sort: (this.queryParams.sort as string) || '',
+      issueType: (this.queryParams.category as string) || '',
+      q: (this.queryParams.q as string) || '',
       refetch
     })
   }
 
-  get currentCheck(): Check {
-    const filteredCheck = this.checks.filter((edge) => {
-      return edge.analyzer?.shortcode == this.currentAnalyzer
-    })
-
-    return filteredCheck[0]
+  /**
+   * Update search in queryParams, but remove filter for empty string
+   *
+   * @param {string} val
+   *
+   * @return {void}
+   */
+  updateSearch(val: string): void {
+    val ? this.addFilter('q', val) : this.removeFilter('q')
   }
 
-  get currentAnalyzer(): string {
-    return this.$route.params.analyzer
-  }
-
-  get checks(): Array<Check> {
-    if (this.run?.checks?.edges) {
-      return this.run.checks.edges.map((edge: Maybe<CheckEdge>) => {
-        return edge?.node as Check
-      })
-    }
-    return []
+  get allowAutofix(): boolean {
+    const { provider } = this.$route.params
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX, provider)
   }
 
   get canCreateAutofix(): boolean {
     return this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)
-  }
-
-  /**
-   * Function that returns `head` property to configure page metadata.
-   *
-   * @returns {Record<string, string>} A record containing meta properties against their values.
-   */
-  head(): Record<string, string> {
-    const { owner, repo } = this.$route.params
-    let title = ''
-    if (this.run.branchName) {
-      title = `${this.run.branchName} ${title}`
-    }
-    if (this.run.commitOid) {
-      title = `${title} @ ${this.run.commitOid?.slice(0, 7)} `
-    }
-    return {
-      title: `${title || 'Run'} • ${owner}/${repo}`,
-      description:
-        'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
-    }
   }
 }
 </script>

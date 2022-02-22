@@ -9,7 +9,7 @@
         :selectedAnalyzer="queryParams.analyzer"
       />
       <div class="flex items-center justify-end w-auto space-x-2">
-        <issue-sort v-model="queryParams.sort" />
+        <issue-sort v-model="queryParams.sort" @reset="removeFilter('sort')" />
         <autofix-available
           v-if="allowAutofix && hasRepoReadAccess"
           v-model="queryParams.autofixAvailable"

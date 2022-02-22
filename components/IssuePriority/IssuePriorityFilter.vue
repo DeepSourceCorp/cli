@@ -1,5 +1,5 @@
 <template>
-  <z-badge type="success" :is-dot="filterApplied" size="md">
+  <z-badge :is-dot="filterApplied" type="success" size="md">
     <z-menu v-if="!filterApplied" direction="right" width="small" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
         <z-button
@@ -148,7 +148,7 @@ export default class IssuePriorityFilter extends mixins(RepoDetailMixin) {
   }
 
   get filterApplied(): boolean {
-    return this.modelValue ? true : false
+    return Boolean(this.modelValue)
   }
 }
 </script>
