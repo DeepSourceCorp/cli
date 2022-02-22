@@ -149,13 +149,16 @@ func TestListJSON(t *testing.T) {
 }
 
 func TestListSARIF(t *testing.T) {
+	// export issues to SARIF
 	opts := IssuesListOptions{issuesData: issues_data}
 	opts.exportSARIF("./testdata/exported.sarif")
 
+	// read exported and test SARIF files
 	exported, _ := ioutil.ReadFile("./testdata/exported.sarif")
 	test, _ := ioutil.ReadFile("./testdata/test.sarif")
 
-	got := string(exported)
+	// trim carriage returns
+	got := strings.TrimSuffix(string(exported), "\n")
 	want := strings.TrimSuffix(string(test), "\n")
 
 	// cleanup after test

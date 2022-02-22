@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
@@ -311,14 +312,34 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 		return nil
 	}
 
-	run := sarif.NewRunWithInformationURI("deepsource", "https://deepsource.io")
+	// run := sarif.NewRunWithInformationURI("deepsource", "https://deepsource.io")
 	for i, issue := range issueData {
+		textDescription := ""
+		fullDescription := sarif.MultiformatMessageString{
+			Text: &textDescription,
+		}
+
+		driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer"
+		informationURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode)
+
+		tool := sarif.Tool{
+			Driver: &sarif.ToolComponent{
+				Name:           driverName,
+				InformationURI: &informationURI,
+			},
+		}
+
+		run := sarif.NewRun(tool)
+
+		// TODO: fetch category and recommended fields
 		pb := sarif.NewPropertyBag()
 		pb.Add("category", "")
 		pb.Add("recommended", "")
 
+		helpURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode) + "/issues/" + string(issue.IssueCode)
+
 		// add rule
-		run.AddRule(issue.IssueCode).WithName(issue.IssueText).WithDescription("").WithHelpURI("").WithProperties(pb.Properties)
+		run.AddRule(issue.IssueCode).WithName(issue.IssueText).WithFullDescription(&fullDescription).WithHelpURI(helpURI).WithProperties(pb.Properties)
 
 		// add result
 		run.CreateResultForRule(issue.IssueCode).WithLevel("error").WithKind("fail").WithMessage(sarif.NewTextMessage(
@@ -332,9 +353,9 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 				),
 			),
 		)
-	}
 
-	report.AddRun(run)
+		report.AddRun(run)
+	}
 
 	return report
 }

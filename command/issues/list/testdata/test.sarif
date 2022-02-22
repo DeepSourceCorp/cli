@@ -5,16 +5,17 @@
     {
       "tool": {
         "driver": {
-          "informationUri": "https://deepsource.io",
-          "name": "deepsource",
+          "informationUri": "https://deepsource.io/directory/analyzers/go",
+          "name": "DeepSource Go Analyzer",
           "rules": [
             {
               "id": "RVV-B0013",
               "name": "Unused method receiver detected",
-              "shortDescription": {
+              "shortDescription": null,
+              "fullDescription": {
                 "text": ""
               },
-              "helpUri": "",
+              "helpUri": "https://deepsource.io/directory/analyzers/go/issues/RVV-B0013",
               "properties": {
                 "category": "",
                 "recommended": ""
@@ -45,7 +46,32 @@
               }
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "tool": {
+        "driver": {
+          "informationUri": "https://deepsource.io/directory/analyzers/go",
+          "name": "DeepSource Go Analyzer",
+          "rules": [
+            {
+              "id": "RVV-B0013",
+              "name": "Unused method receiver detected",
+              "shortDescription": null,
+              "fullDescription": {
+                "text": ""
+              },
+              "helpUri": "https://deepsource.io/directory/analyzers/go/issues/RVV-B0013",
+              "properties": {
+                "category": "",
+                "recommended": ""
+              }
+            }
+          ]
+        }
+      },
+      "results": [
         {
           "ruleId": "RVV-B0013",
           "ruleIndex": 1,
