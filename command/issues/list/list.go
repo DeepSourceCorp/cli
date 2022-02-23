@@ -321,6 +321,7 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 	var runs []*sarif.Run
 	count := 0
 
+    // Adding the tools data to the SARIF report corresponding to the number of analyzers activated
 	for _, issue := range issueData {
 		if !shortcodes[issue.Analyzer.Shortcode].exists {
 			driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer"
