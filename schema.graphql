@@ -2928,6 +2928,7 @@ type User implements MaskPrimaryKeyNode {
   intercomUserHash: String
   missiveUserHash: String
   isBetaTester: Boolean
+  connectedVcsProviders: [VCSProviderChoices]
 }
 
 type UserPreference implements MaskPrimaryKeyNode {

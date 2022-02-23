@@ -222,6 +222,7 @@ export default {
   router: {
     middleware: ['auth', 'licenseValidation'],
     extendRoutes(routes, resolve) {
+      //! In case of updates to `meta.provider`, update corresponding data in `plugins/helpers/provider.ts` as well.
       routes.push({
         name: 'github',
         path: '/accounts/github/login/callback/bifrost',

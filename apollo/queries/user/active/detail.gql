@@ -1,6 +1,7 @@
 query {
   viewer {
     id
+    connectedVcsProviders
     fullName
     firstName
     lastName

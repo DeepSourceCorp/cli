@@ -12,6 +12,10 @@ export interface LoginOption {
   iconColor?: string
   link?: string
 }
+
+/**
+ * Mixin that provides access to common data and functions for authentication.
+ */
 @Component
 export default class AuthMixin extends Vue {
   @authStore.State
@@ -29,20 +33,37 @@ export default class AuthMixin extends Vue {
   @authStore.Action(AuthActionTypes.FETCH_AUTH_URLS)
   fetchAuthUrls: () => Promise<void>
 
+  /**
+   * Default fetch hook for pages/components using Auth mixin.
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await this.fetchAuthUrls()
   }
 
+  /**
+   * Default mounted hook for pages/components using Auth mixin.
+   *
+   * @returns {void}
+   */
   mounted(): void {
     const { next } = this.$route.query
     if (next) {
       const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
       this.$nuxt.$cookies.set('bifrost-post-auth-redirect', next, {
-        expires: new Date(expiry)
+        expires: new Date(expiry),
+        path: '/'
       })
     }
   }
 
+  /**
+   * Return appropriate auth url for a provider.
+   *
+   * @param provider - VCS provider
+   * @returns {string}
+   */
   buildUrl(provider: string): string {
     if (provider in this.authUrls) {
       return this.authUrls[provider]

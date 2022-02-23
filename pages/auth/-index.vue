@@ -17,6 +17,9 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import { User } from '~/types/types'
 
+/**
+ * Auth page that is responsible for logging in the user with `code` from providers.
+ */
 @Component({
   middleware: [
     async ({ route }) => {
@@ -32,7 +35,22 @@ import { User } from '~/types/types'
   ]
 })
 export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixin) {
-  async mounted() {
+  /**
+   * Mounted hook for the "logging in..." page
+   *
+   * - This page fetches the `code` from the query parameters of the URL and `provider` from router meta and logs in the user.
+   * - Once logged in, it fetches the active user's data and context.
+   * - Next, it initializes the Intercom instances used for tracking purposes.
+   *
+   * Finally, it determines to which route should the user be forwarded to:
+   * - If there is a `next` query parameter in the URL, it redirects the user to that URL.
+   * - If not, it checks if user needs to be onboarded.
+   *   - If the user needs to be onboared, it redirects user to the installation url of VCS provider.
+   *   - If not, it sends user to their `userHomeUrl`.
+   *
+   * @returns {Promise<void>} Returns a `void` promise that resolves once function is complete.
+   */
+  async mounted(): Promise<void> {
     const { provider } = this.$route.meta
     const { code } = this.$route.query
 
@@ -51,31 +69,33 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
     const toOnboard = this.toOnboard
     const homePage = this.userHomeUrl
-    const installationUrl = this.contextInstallationUrl(provider)
+    const installationUrl = this.installationUrls[provider]
     const nextUrl = this.$nuxt.$cookies.get('bifrost-post-auth-redirect')
 
-    // A next URL with installation will happen only if the user is
-    // coming from GitHub marketplace installation
-    // Removing this snippet will break marketplace installation
-    if (nextUrl?.startsWith('/installation')) {
+    if (nextUrl) {
+      this.$nuxt.$cookies.remove('bifrost-post-auth-redirect')
       this.$router.push(nextUrl)
       return
     }
 
-    if (!toOnboard) {
-      // In case the user is landing for the first time
-      // onboarding and installation will always take precedence
-      if (nextUrl) {
-        this.$nuxt.$cookies.remove('bifrost-post-auth-redirect')
-        this.$router.push(nextUrl)
-        return
-      }
-
-      this.$router.push(homePage)
+    if (toOnboard) {
+      installationUrl.startsWith('http')
+        ? window.location.assign(installationUrl)
+        : this.$router.push(installationUrl)
       return
     }
 
-    this.$router.push(installationUrl)
+    this.$router.push(homePage)
+  }
+
+  /**
+   * ! This method overrides fetch calls in mixins, we do not want these calls till authentication is over.
+   * ! Do not remove!
+   *
+   * @returns {Promise<void>} Returns a `void` promise that resolves once function is complete.
+   */
+  async fetch(): Promise<void> {
+    //! empty call
   }
 
   get emoji(): string {

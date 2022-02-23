@@ -1,6 +1,6 @@
-import { NuxtAppOptions } from '@nuxt/types'
+import { Context } from '@nuxt/types'
 import { Inject } from '@nuxt/types/app'
-import { VcsProviderChoices } from '~/types/types'
+import { VcsProviderChoices } from '../../types/types'
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -23,37 +23,69 @@ declare module 'vuex/types/index' {
   }
 }
 
+/**
+ * ProviderMeta class whose instance store the text, shortcode, VCSProvider and auth values for a provider.
+ */
 class ProviderMeta {
   text: string
   shortcode: string
   value: VcsProviderChoices
+  auth: string
 
-  constructor(text: string, shortcode: string, value: VcsProviderChoices) {
+  constructor(text: string, shortcode: string, value: VcsProviderChoices, auth: string) {
     this.text = text
     this.shortcode = shortcode
     this.value = value
+    this.auth = auth
   }
 }
 
-export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
-  inject('providerMetaMap', {
-    gh: new ProviderMeta('GitHub', 'gh', VcsProviderChoices.Github),
-    ghe: new ProviderMeta('GitHub Enterprise', 'ghe', VcsProviderChoices.GithubEnterprise),
-    gl: new ProviderMeta('GitLab', 'gl', VcsProviderChoices.Gitlab),
-    bb: new ProviderMeta('Bitbucket', 'bb', VcsProviderChoices.Bitbucket),
-    gsr: new ProviderMeta('Google Cloud', 'gsr', VcsProviderChoices.Gsr),
-    [VcsProviderChoices.Github]: new ProviderMeta('GitHub', 'gh', VcsProviderChoices.Github),
-    [VcsProviderChoices.GithubEnterprise]: new ProviderMeta(
-      'GitHub Enterprise',
-      'ghe',
-      VcsProviderChoices.GithubEnterprise
-    ),
-    [VcsProviderChoices.Gitlab]: new ProviderMeta('GitLab', 'gl', VcsProviderChoices.Gitlab),
-    [VcsProviderChoices.Bitbucket]: new ProviderMeta(
-      'Bitbucket',
-      'bb',
-      VcsProviderChoices.Bitbucket
-    ),
-    [VcsProviderChoices.Gsr]: new ProviderMeta('Google Cloud', 'gsr', VcsProviderChoices.Gsr)
-  })
+/**
+ * ! In case of updates to `auth` value, update corresponding data in `nuxt.config.js` as well.
+ */
+export const providerMetaMap = {
+  gh: new ProviderMeta('GitHub', 'gh', VcsProviderChoices.Github, 'github'),
+  ghe: new ProviderMeta(
+    'GitHub Enterprise',
+    'ghe',
+    VcsProviderChoices.GithubEnterprise,
+    'github-enterprise'
+  ),
+  gl: new ProviderMeta('GitLab', 'gl', VcsProviderChoices.Gitlab, 'gitlab'),
+  bb: new ProviderMeta('Bitbucket', 'bb', VcsProviderChoices.Bitbucket, 'bitbucket-oauth2'),
+  gsr: new ProviderMeta('Google Cloud', 'gsr', VcsProviderChoices.Gsr, 'google-oauth2'),
+  [VcsProviderChoices.Github]: new ProviderMeta(
+    'GitHub',
+    'gh',
+    VcsProviderChoices.Github,
+    'github'
+  ),
+  [VcsProviderChoices.GithubEnterprise]: new ProviderMeta(
+    'GitHub Enterprise',
+    'ghe',
+    VcsProviderChoices.GithubEnterprise,
+    'github-enterprise'
+  ),
+  [VcsProviderChoices.Gitlab]: new ProviderMeta(
+    'GitLab',
+    'gl',
+    VcsProviderChoices.Gitlab,
+    'gitlab'
+  ),
+  [VcsProviderChoices.Bitbucket]: new ProviderMeta(
+    'Bitbucket',
+    'bb',
+    VcsProviderChoices.Bitbucket,
+    'bitbucket-oauth2'
+  ),
+  [VcsProviderChoices.Gsr]: new ProviderMeta(
+    'Google Cloud',
+    'gsr',
+    VcsProviderChoices.Gsr,
+    'google-oauth2'
+  )
+}
+
+export default (_context: Context, inject: Inject): void => {
+  inject('providerMetaMap', providerMetaMap)
 }
