@@ -321,7 +321,7 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 	var runs []*sarif.Run
 	count := 0
 
-    // Adding the tools data to the SARIF report corresponding to the number of analyzers activated
+	// Adding the tools data to the SARIF report corresponding to the number of analyzers activated
 	for _, issue := range issueData {
 		if !shortcodes[issue.Analyzer.Shortcode].exists {
 			driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer"
@@ -346,9 +346,9 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 	// use an index map for updating rule index value
 	idxMap := make(map[int]int)
 
-    // Adding the results data for each analyzer in the report
+	// Adding the results data for each analyzer in the report
 	for _, issue := range issueData {
-        // TODO: Fetch issue description from the API and populate here
+		// TODO: Fetch issue description from the API and populate here
 		textDescription := ""
 		fullDescription := sarif.MultiformatMessageString{
 			Text: &textDescription,
