@@ -7,11 +7,13 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/deepsourcelabs/cli/utils"
+	"github.com/owenrumney/go-sarif/v2/sarif"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -25,6 +27,7 @@ type IssuesListOptions struct {
 	OutputFilenameArg string
 	JSONArg           bool
 	CSVArg            bool
+	SARIFArg          bool
 	SelectedRemote    *utils.RemoteData
 	issuesData        []issues.Issue
 	ptermTable        [][]string
@@ -75,6 +78,9 @@ func NewCmdIssuesList() *cobra.Command {
 	// --csv flag
 	cmd.Flags().BoolVar(&opts.CSVArg, "csv", false, "Output reported issues in CSV format")
 
+	// --sarif flag
+	cmd.Flags().BoolVar(&opts.SARIFArg, "sarif", false, "Output reported issues in SARIF format")
+
 	return cmd
 }
 
@@ -116,6 +122,8 @@ func (opts *IssuesListOptions) Run() (err error) {
 		opts.exportJSON(opts.OutputFilenameArg)
 	} else if opts.CSVArg {
 		opts.exportCSV(opts.OutputFilenameArg)
+	} else if opts.SARIFArg {
+		opts.exportSARIF(opts.OutputFilenameArg)
 	} else {
 		opts.showIssues()
 	}
@@ -245,11 +253,7 @@ func (opts *IssuesListOptions) exportCSV(filename string) error {
 	if filename == "" {
 		// write to stdout
 		w := csv.NewWriter(os.Stdout)
-		w.WriteAll(records)
-		if err := w.Error(); err != nil {
-			return err
-		}
-		return nil
+		return w.WriteAll(records)
 	}
 
 	// create file
@@ -280,4 +284,112 @@ func convertCSV(issueData []issues.Issue) [][]string {
 	}
 
 	return records
+}
+
+// Handles exporting issues as a SARIF file
+func (opts *IssuesListOptions) exportSARIF(filename string) (err error) {
+	report := convertSARIF(opts.issuesData)
+	if filename == "" {
+		err = report.PrettyWrite(os.Stdout)
+		if err != nil {
+			return err
+		}
+		return nil
+	}
+
+	// write report to file
+	if err := report.WriteFile(filename); err != nil {
+		return err
+	}
+	pterm.Info.Printf("Saved issues to %s!\n", filename)
+	return nil
+}
+
+// Converts issueData to a SARIF report
+func convertSARIF(issueData []issues.Issue) *sarif.Report {
+	report, err := sarif.New(sarif.Version210)
+	if err != nil {
+		return nil
+	}
+
+	// use a map of shortcodes to append rules and results
+	type boolIndex struct {
+		exists bool
+		index  int
+	}
+	shortcodes := make(map[string]boolIndex)
+	var runs []*sarif.Run
+	count := 0
+
+    // Adding the tools data to the SARIF report corresponding to the number of analyzers activated
+	for _, issue := range issueData {
+		if !shortcodes[issue.Analyzer.Shortcode].exists {
+			driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer"
+			informationURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode)
+
+			tool := sarif.Tool{
+				Driver: &sarif.ToolComponent{
+					Name:           driverName,
+					InformationURI: &informationURI,
+				},
+			}
+
+			run := sarif.NewRun(tool)
+			runs = append(runs, run)
+
+			// update boolIndex
+			shortcodes[issue.Analyzer.Shortcode] = boolIndex{exists: true, index: count}
+			count += 1
+		}
+	}
+
+	// use an index map for updating rule index value
+	idxMap := make(map[int]int)
+
+    // Adding the results data for each analyzer in the report
+	for _, issue := range issueData {
+        // TODO: Fetch issue description from the API and populate here
+		textDescription := ""
+		fullDescription := sarif.MultiformatMessageString{
+			Text: &textDescription,
+		}
+
+		// check if the shortcode exists in the map
+		if shortcodes[issue.Analyzer.Shortcode].exists {
+			// fetch shortcode index
+			idx := shortcodes[issue.Analyzer.Shortcode].index
+
+			// TODO: fetch category and recommended fields
+			pb := sarif.NewPropertyBag()
+			pb.Add("category", "")
+			pb.Add("recommended", "")
+
+			helpURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode) + "/issues/" + string(issue.IssueCode)
+
+			// add rule
+			runs[idx].AddRule(issue.IssueCode).WithName(issue.IssueText).WithFullDescription(&fullDescription).WithHelpURI(helpURI).WithProperties(pb.Properties)
+
+			// add result
+			runs[idx].CreateResultForRule(issue.IssueCode).WithLevel("error").WithKind("fail").WithMessage(sarif.NewTextMessage(
+				issue.IssueText,
+			)).WithRuleIndex(idxMap[idx]).AddLocation(
+				sarif.NewLocationWithPhysicalLocation(
+					sarif.NewPhysicalLocation().WithArtifactLocation(
+						sarif.NewSimpleArtifactLocation(issue.Location.Path),
+					).WithRegion(
+						sarif.NewSimpleRegion(issue.Location.Position.BeginLine, issue.Location.Position.EndLine),
+					),
+				),
+			)
+
+			idxMap[idx] += 1
+		}
+	}
+
+	// add all runs to report
+	for _, run := range runs {
+		report.AddRun(run)
+	}
+
+	return report
 }

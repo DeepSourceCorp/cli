@@ -1,0 +1,122 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://json.schemastore.org/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "informationUri": "https://deepsource.io/directory/analyzers/go",
+          "name": "DeepSource Go Analyzer",
+          "rules": [
+            {
+              "id": "RVV-B0013",
+              "name": "Unused method receiver detected",
+              "shortDescription": null,
+              "fullDescription": {
+                "text": ""
+              },
+              "helpUri": "https://deepsource.io/directory/analyzers/go/issues/RVV-B0013",
+              "properties": {
+                "category": "",
+                "recommended": ""
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "RVV-B0013",
+          "ruleIndex": 0,
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Unused method receiver detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deepsource/transformers/queries/get_transformers.go"
+                },
+                "region": {
+                  "startLine": 34,
+                  "endLine": 34
+                }
+              }
+            }
+          ]
+        },
+        {
+          "ruleId": "RVV-B0013",
+          "ruleIndex": 1,
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Unused method receiver detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "deepsource/transformers/queries/get_transformers.go"
+                },
+                "region": {
+                  "startLine": 44,
+                  "endLine": 44
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tool": {
+        "driver": {
+          "informationUri": "https://deepsource.io/directory/analyzers/docker",
+          "name": "DeepSource Docker Analyzer",
+          "rules": [
+            {
+              "id": "DOK-DL3025",
+              "name": "Use arguments JSON notation for CMD and ENTRYPOINT arguments",
+              "shortDescription": null,
+              "fullDescription": {
+                "text": ""
+              },
+              "helpUri": "https://deepsource.io/directory/analyzers/docker/issues/DOK-DL3025",
+              "properties": {
+                "category": "",
+                "recommended": ""
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "DOK-DL3025",
+          "ruleIndex": 0,
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Use arguments JSON notation for CMD and ENTRYPOINT arguments"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile"
+                },
+                "region": {
+                  "startLine": 64,
+                  "endLine": 64
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

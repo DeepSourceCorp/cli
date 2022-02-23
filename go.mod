@@ -11,7 +11,6 @@ require (
 	github.com/deepsourcelabs/graphql v0.2.2
 	github.com/fatih/color v1.12.0
 	github.com/getsentry/sentry-go v0.6.0
-	github.com/go-git/go-git v4.7.0+incompatible
 	github.com/go-git/go-git-fixtures/v4 v4.2.2 // indirect
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/google/go-cmp v0.5.5 // indirect
@@ -20,6 +19,7 @@ require (
 	github.com/matryer/is v1.4.0 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mitchellh/mapstructure v1.4.1 // indirect
+	github.com/owenrumney/go-sarif/v2 v2.1.0
 	github.com/pelletier/go-toml v1.9.2
 	github.com/pterm/pterm v0.12.23
 	github.com/rogpeppe/go-internal v1.8.0 // indirect
