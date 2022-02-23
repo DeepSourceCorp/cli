@@ -346,6 +346,7 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 	idxMap := make(map[int]int)
 
 	for _, issue := range issueData {
+        // TODO: Fetch issue description from the API and populate here
 		textDescription := ""
 		fullDescription := sarif.MultiformatMessageString{
 			Text: &textDescription,
