@@ -346,6 +346,7 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 	// use an index map for updating rule index value
 	idxMap := make(map[int]int)
 
+    // Adding the results data for each analyzer in the report
 	for _, issue := range issueData {
         // TODO: Fetch issue description from the API and populate here
 		textDescription := ""
