@@ -70,6 +70,53 @@
           ]
         }
       ]
+    },
+    {
+      "tool": {
+        "driver": {
+          "informationUri": "https://deepsource.io/directory/analyzers/docker",
+          "name": "DeepSource Docker Analyzer",
+          "rules": [
+            {
+              "id": "DOK-DL3025",
+              "name": "Use arguments JSON notation for CMD and ENTRYPOINT arguments",
+              "shortDescription": null,
+              "fullDescription": {
+                "text": ""
+              },
+              "helpUri": "https://deepsource.io/directory/analyzers/docker/issues/DOK-DL3025",
+              "properties": {
+                "category": "",
+                "recommended": ""
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "DOK-DL3025",
+          "ruleIndex": 0,
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Use arguments JSON notation for CMD and ENTRYPOINT arguments"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "Dockerfile"
+                },
+                "region": {
+                  "startLine": 64,
+                  "endLine": 64
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

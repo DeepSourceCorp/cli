@@ -312,48 +312,79 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 		return nil
 	}
 
-	// run := sarif.NewRunWithInformationURI("deepsource", "https://deepsource.io")
-	for i, issue := range issueData {
+	// use a map of shortcodes to append rules and results
+	type boolIndex struct {
+		exists bool
+		index  int
+	}
+	shortcodes := make(map[string]boolIndex)
+	var runs []*sarif.Run
+	count := 0
+
+	for _, issue := range issueData {
+		if !shortcodes[issue.Analyzer.Shortcode].exists {
+			driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer"
+			informationURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode)
+
+			tool := sarif.Tool{
+				Driver: &sarif.ToolComponent{
+					Name:           driverName,
+					InformationURI: &informationURI,
+				},
+			}
+
+			run := sarif.NewRun(tool)
+			runs = append(runs, run)
+
+			// update boolIndex
+			shortcodes[issue.Analyzer.Shortcode] = boolIndex{exists: true, index: count}
+			count += 1
+		}
+	}
+
+	// use an index map for updating rule index value
+	idxMap := make(map[int]int)
+
+	for _, issue := range issueData {
 		textDescription := ""
 		fullDescription := sarif.MultiformatMessageString{
 			Text: &textDescription,
 		}
 
-		driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer"
-		informationURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode)
+		// check if the shortcode exists in the map
+		if shortcodes[issue.Analyzer.Shortcode].exists {
+			// fetch shortcode index
+			idx := shortcodes[issue.Analyzer.Shortcode].index
 
-		tool := sarif.Tool{
-			Driver: &sarif.ToolComponent{
-				Name:           driverName,
-				InformationURI: &informationURI,
-			},
-		}
+			// TODO: fetch category and recommended fields
+			pb := sarif.NewPropertyBag()
+			pb.Add("category", "")
+			pb.Add("recommended", "")
 
-		run := sarif.NewRun(tool)
+			helpURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode) + "/issues/" + string(issue.IssueCode)
 
-		// TODO: fetch category and recommended fields
-		pb := sarif.NewPropertyBag()
-		pb.Add("category", "")
-		pb.Add("recommended", "")
+			// add rule
+			runs[idx].AddRule(issue.IssueCode).WithName(issue.IssueText).WithFullDescription(&fullDescription).WithHelpURI(helpURI).WithProperties(pb.Properties)
 
-		helpURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode) + "/issues/" + string(issue.IssueCode)
-
-		// add rule
-		run.AddRule(issue.IssueCode).WithName(issue.IssueText).WithFullDescription(&fullDescription).WithHelpURI(helpURI).WithProperties(pb.Properties)
-
-		// add result
-		run.CreateResultForRule(issue.IssueCode).WithLevel("error").WithKind("fail").WithMessage(sarif.NewTextMessage(
-			issue.IssueText,
-		)).WithRuleIndex(i).AddLocation(
-			sarif.NewLocationWithPhysicalLocation(
-				sarif.NewPhysicalLocation().WithArtifactLocation(
-					sarif.NewSimpleArtifactLocation(issue.Location.Path),
-				).WithRegion(
-					sarif.NewSimpleRegion(issue.Location.Position.BeginLine, issue.Location.Position.EndLine),
+			// add result
+			runs[idx].CreateResultForRule(issue.IssueCode).WithLevel("error").WithKind("fail").WithMessage(sarif.NewTextMessage(
+				issue.IssueText,
+			)).WithRuleIndex(idxMap[idx]).AddLocation(
+				sarif.NewLocationWithPhysicalLocation(
+					sarif.NewPhysicalLocation().WithArtifactLocation(
+						sarif.NewSimpleArtifactLocation(issue.Location.Path),
+					).WithRegion(
+						sarif.NewSimpleRegion(issue.Location.Position.BeginLine, issue.Location.Position.EndLine),
+					),
 				),
-			),
-		)
+			)
 
+			idxMap[idx] += 1
+		}
+	}
+
+	// add all runs to report
+	for _, run := range runs {
 		report.AddRun(run)
 	}
 

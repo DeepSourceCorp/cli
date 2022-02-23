@@ -11,6 +11,7 @@ import (
 )
 
 var issues_data []issues.Issue
+var issues_data_multi []issues.Issue
 
 func init() {
 	issues_data = []issues.Issue{
@@ -39,6 +40,51 @@ func init() {
 				Position: issues.Position{
 					BeginLine: 44,
 					EndLine:   44,
+				},
+			},
+		},
+	}
+
+	issues_data_multi = []issues.Issue{
+		{
+			Analyzer: issues.AnalyzerMeta{
+				Shortcode: "go",
+			},
+			IssueCode: "RVV-B0013",
+			IssueText: "Unused method receiver detected",
+			Location: issues.Location{
+				Path: "deepsource/transformers/queries/get_transformers.go",
+				Position: issues.Position{
+					BeginLine: 34,
+					EndLine:   34,
+				},
+			},
+		},
+		{
+			Analyzer: issues.AnalyzerMeta{
+				Shortcode: "go",
+			},
+			IssueCode: "RVV-B0013",
+			IssueText: "Unused method receiver detected",
+			Location: issues.Location{
+				Path: "deepsource/transformers/queries/get_transformers.go",
+				Position: issues.Position{
+					BeginLine: 44,
+					EndLine:   44,
+				},
+			},
+		},
+		{
+			Analyzer: issues.AnalyzerMeta{
+				Shortcode: "docker",
+			},
+			IssueCode: "DOK-DL3025",
+			IssueText: "Use arguments JSON notation for CMD and ENTRYPOINT arguments",
+			Location: issues.Location{
+				Path: "Dockerfile",
+				Position: issues.Position{
+					BeginLine: 64,
+					EndLine:   64,
 				},
 			},
 		},
@@ -149,22 +195,46 @@ func TestListJSON(t *testing.T) {
 }
 
 func TestListSARIF(t *testing.T) {
-	// export issues to SARIF
-	opts := IssuesListOptions{issuesData: issues_data}
-	opts.exportSARIF("./testdata/exported.sarif")
 
-	// read exported and test SARIF files
-	exported, _ := ioutil.ReadFile("./testdata/exported.sarif")
-	test, _ := ioutil.ReadFile("./testdata/test.sarif")
+	t.Run("must work with single language repositories", func(t *testing.T) {
+		// export issues to SARIF
+		opts := IssuesListOptions{issuesData: issues_data}
+		opts.exportSARIF("./testdata/exported.sarif")
 
-	// trim carriage returns
-	got := strings.TrimSuffix(string(exported), "\n")
-	want := strings.TrimSuffix(string(test), "\n")
+		// read exported and test SARIF files
+		exported, _ := ioutil.ReadFile("./testdata/exported.sarif")
+		test, _ := ioutil.ReadFile("./testdata/test.sarif")
 
-	// cleanup after test
-	_ = os.Remove("./testdata/exported.sarif")
+		// trim carriage returns
+		got := strings.TrimSuffix(string(exported), "\n")
+		want := strings.TrimSuffix(string(test), "\n")
 
-	if !reflect.DeepEqual(got, want) {
-		t.Errorf("got: %v; want: %v\n", got, want)
-	}
+		// cleanup after test
+		_ = os.Remove("./testdata/exported.sarif")
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got: %v; want: %v\n", got, want)
+		}
+	})
+
+	t.Run("must work with repositories containing multiple languages", func(t *testing.T) {
+		// export issues to SARIF
+		opts := IssuesListOptions{issuesData: issues_data_multi}
+		opts.exportSARIF("./testdata/exported_multi.sarif")
+
+		// read exported and test SARIF files
+		exported, _ := ioutil.ReadFile("./testdata/exported_multi.sarif")
+		test, _ := ioutil.ReadFile("./testdata/test_multi.sarif")
+
+		// trim carriage returns
+		got := strings.TrimSuffix(string(exported), "\n")
+		want := strings.TrimSuffix(string(test), "\n")
+
+		// cleanup after test
+		_ = os.Remove("./testdata/exported_multi.sarif")
+
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got: %v; want: %v\n", got, want)
+		}
+	})
 }
