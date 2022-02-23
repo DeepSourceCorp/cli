@@ -64,7 +64,8 @@ module.exports = {
         'nav-sidebar': 'calc(100vh - 96px)'
       },
       maxWidth: {
-        prose: '65ch'
+        prose: '65ch',
+        '3xs': '12rem'
       }
     }
   }

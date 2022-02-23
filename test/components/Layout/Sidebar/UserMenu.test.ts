@@ -1,15 +1,14 @@
 import '@testing-library/jest-dom'
-import { render } from '@testing-library/vue'
-import { createLocalVue } from '@vue/test-utils'
+import { createLocalVue, mount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import UserMenu from '~/components/Layout/Sidebar/UserMenu.vue'
+import VTooltip from 'v-tooltip'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 
 describe('[[ UserMenu ]]', () => {
-  beforeEach(() => {
-    const localVue = createLocalVue()
-    localVue.use(Vuex)
-  })
+  const localVue = createLocalVue()
+  localVue.use(Vuex)
+  localVue.use(VTooltip)
 
   test('renders UserMenu with all props', () => {
     const mocks = {
@@ -40,7 +39,6 @@ describe('[[ UserMenu ]]', () => {
     })
 
     const stubs = {
-      ZMenu: true,
       ZMenuItem: true,
       ZMenuSection: true,
       ZAvatar: true
@@ -49,8 +47,14 @@ describe('[[ UserMenu ]]', () => {
     const collapsedOptions = generateBooleanProps('isCollapsed')
 
     cartesian(collapsedOptions).forEach((props) => {
-      const { html } = render(UserMenu, { props, mocks, store, stubs })
-      expect(html()).toMatchSnapshot(JSON.stringify(props))
+      const wrapper = mount(UserMenu, {
+        store,
+        mocks,
+        propsData: props,
+        stubs,
+        localVue
+      })
+      expect(wrapper.html()).toMatchSnapshot(JSON.stringify(props))
     })
   })
 })
