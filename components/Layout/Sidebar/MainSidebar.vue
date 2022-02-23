@@ -105,7 +105,7 @@
       </section>
     </template>
     <!-- Dummy menu when user isn't onboarded -->
-    <section v-else class="hide-scroll flex-grow">
+    <section v-else class="flex-grow hide-scroll">
       <div class="p-4 px-5 border-b border-ink-200">
         <img src="~/assets/images/logo-wordmark-white.svg" alt="" class="h-5" />
       </div>
@@ -117,7 +117,7 @@
             placement: 'right'
           }"
           :href="installationUrl"
-          class="flex items-center w-full p-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200 mb-2"
+          class="flex items-center w-full p-2 mb-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
         >
           <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
           <span v-show="!isCollapsed" class="text-sm font-medium">Activate new repository</span>
@@ -129,7 +129,7 @@
             placement: 'right'
           }"
           :to="installationUrl"
-          class="flex items-center w-full p-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200 mb-2"
+          class="flex items-center w-full p-2 mb-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
         >
           <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
           <span v-show="!isCollapsed" class="text-sm font-medium">Activate new repository</span>
@@ -331,11 +331,9 @@ export default class Sidebar extends mixins(
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    const { owner: login, provider } = this.$route.params
     await Promise.all([
       this.fetchContext(),
       this.fetchActiveUser(),
-      this.fetchMaxUsagePercentage({ login, provider }),
       ...(this.$config.onPrem ? [this.getViewerSuperadminStatus()] : [])
     ])
   }
@@ -380,16 +378,20 @@ export default class Sidebar extends mixins(
    * @returns {void}
    */
   mounted(): void {
+    const { owner: login, provider } = this.$route.params
+
     this.$root.$on('ui:show-sidebar-menu', () => {
       this.isCollapsed = false
       this.collapsedSidebar = false
       this.isOpen = true
     })
 
-    this.fetchRepoCount()
     this.$socket.$on('repo-onboarding-completed', () => {
       this.fetchRepoCount(true)
     })
+
+    this.fetchRepoCount()
+    this.fetchMaxUsagePercentage({ login, provider })
   }
 
   /**
