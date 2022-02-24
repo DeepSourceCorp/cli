@@ -69,6 +69,7 @@ export default ({
 
   return {
     defaultHttpLink: false,
+    ssrMode: process.server,
     cache: new InMemoryCache({} as InMemoryCacheConfig),
     link: from([errorLink, forwardHeadersMiddleware, httpLink])
   }
