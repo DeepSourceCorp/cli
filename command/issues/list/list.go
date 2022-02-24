@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/config"
@@ -21,7 +22,7 @@ import (
 const MAX_ISSUE_LIMIT = 100
 
 type IssuesListOptions struct {
-	FileArg           string
+	FileArg           []string
 	RepoArg           string
 	LimitArg          int
 	OutputFilenameArg string
@@ -46,7 +47,7 @@ type Summary struct {
 func NewCmdIssuesList() *cobra.Command {
 
 	opts := IssuesListOptions{
-		FileArg:  "",
+		FileArg:  []string{""},
 		RepoArg:  "",
 		LimitArg: 30,
 	}
@@ -54,11 +55,12 @@ func NewCmdIssuesList() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List issues reported by DeepSource",
-		Args:  utils.MaxNArgs(1),
+		Args:  utils.MaxNArgs(15),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if len(args) == 1 {
-				opts.FileArg = args[0]
-			}
+			// if len(args) == 1 {
+			// 	opts.FileArg = args[0]
+			// }
+			opts.FileArg = args
 			return opts.Run()
 		},
 	}
@@ -145,11 +147,39 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 
 	// Fetch issues for a certain FileArg (filepath) passed by the user
 	// Example: `deepsource issues list api/hello.py`
-	if opts.FileArg != "" {
-		opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.FileArg, opts.LimitArg)
-		if err != nil {
-			return err
+	if len(opts.FileArg) != 0 {
+		var fetchedIssues []issues.Issue
+		var filteredIssues []issues.Issue
+
+		for _, arg := range opts.FileArg {
+			// use regex to segregate directory and file names
+			var pathRegexp = regexp.MustCompile(`^(.*/)?(?:$|(.+?)(?:(\.[^.]*$)|$))`)
+			matched := pathRegexp.FindStringSubmatch(arg)
+
+			// if the argument contains a directory, fetch issues for the directory
+			if matched[1] != "" {
+				opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
+				if err != nil {
+					return err
+				}
+
+				filteredIssues, err = FilterIssuesByPath(ctx, arg, opts.issuesData)
+				if err != nil {
+					return err
+				}
+
+				fetchedIssues = append(fetchedIssues, filteredIssues[:]...)
+			} else {
+				opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, arg, opts.LimitArg)
+				if err != nil {
+					return err
+				}
+				return nil
+			}
 		}
+
+		// set fetched issues as issue data
+		opts.issuesData = fetchedIssues
 		return nil
 	}
 
