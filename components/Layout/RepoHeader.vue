@@ -1,32 +1,12 @@
 <template>
   <div>
     <div
-      class="
-        grid grid-cols-1
-        gap-2
-        border-b
-        lg:gap-0
-        grid-row-3
-        xl:grid-cols-fr-fr-22 xl:grid-rows-2
-        auto-rows-auto
-        bg-ink-300
-        min-h-24
-        border-ink-200
-      "
+      class="grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200"
     >
       <div id="header" class="xl:col-span-2">
         <div class="px-4 pt-3 space-x-2 space-y-2 xl:space-y-0">
           <h2
-            class="
-              flex flex-wrap
-              items-center
-              gap-3
-              text-lg
-              font-medium
-              leading-none
-              xl:text-xl
-              text-vanilla-400
-            "
+            class="flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400"
           >
             <div class="space-x-0.5 md:space-x-1">
               <nuxt-link
@@ -111,17 +91,7 @@
           :vcsCommitUrl="lastRun.vcsCommitUrl"
           :currentlyAnalysing="repository.runs && repository.runs.totalCount"
           :canChangeBranch="canChangeBranch"
-          class="
-            flex flex-col
-            h-full
-            px-4
-            py-2
-            space-y-2
-            text-sm
-            md:px-3
-            xl:border-l xl:border-ink-200
-            text-vanilla-400
-          "
+          class="flex flex-col h-full px-4 py-2 space-y-2 text-sm md:px-3 xl:border-l xl:border-ink-200 text-vanilla-400"
         ></repo-header-info>
       </div>
       <div id="tabs" class="flex xl:col-span-2">
@@ -333,17 +303,20 @@ export default class RepoHeader extends mixins(
 
   isNavLinkVisible(item: TabLink): boolean {
     const { provider } = this.$route.params
-    if (Array.isArray(item.gateFeature)) {
-      return this.$gateKeeper.provider(item.gateFeature, provider)
+
+    if (item.loginRequired && !this.loggedIn) {
+      return false
     }
 
-    if (item.loginRequired) {
-      return item.perms && this.loggedIn
-        ? this.$gateKeeper.repo(item.perms, this.repoPerms.permission)
-        : this.loggedIn
-    }
+    const autofixAllowedForProvider = item.gateFeature
+      ? this.$gateKeeper.provider(item.gateFeature, provider)
+      : true
 
-    return true
+    const autofixAllowedForUser = item.perms
+      ? this.$gateKeeper.repo(item.perms, this.repoPerms.permission)
+      : true
+
+    return autofixAllowedForUser && autofixAllowedForProvider
   }
 }
 </script>
