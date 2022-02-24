@@ -51,7 +51,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
    * @returns {Promise<void>} Returns a `void` promise that resolves once function is complete.
    */
   async mounted(): Promise<void> {
-    const { provider } = this.$route.meta
+    const { provider } = this.$route.meta as Record<string, string>
     const { code } = this.$route.query
 
     await this.logInUser({

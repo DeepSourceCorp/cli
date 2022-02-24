@@ -143,7 +143,7 @@ export default {
   },
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
-  components: true,
+  components: [{ path: '~/components', pathPrefix: false, extensions: ['vue'] }],
 
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
@@ -175,11 +175,11 @@ export default {
   serverMiddleware: [
     {
       path: '/healthz',
-      handler: '~/server/health'
+      handler: '~/server/health.ts'
     },
     {
       path: '/directory',
-      handler: '~/server/directoryRedirects',
+      handler: '~/server/directoryRedirects.ts',
       prefix: false
     }
   ],

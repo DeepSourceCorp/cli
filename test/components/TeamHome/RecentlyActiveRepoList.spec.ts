@@ -1,8 +1,7 @@
 import '@testing-library/jest-dom'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import VTooltip from 'v-tooltip'
-import { VueConstructor } from 'vue'
-import Vuex, { Store } from 'vuex'
+import Vuex from 'vuex'
 import { RecentlyActiveRepoList } from '~/components/TeamHome'
 
 const mocks = {
@@ -32,11 +31,11 @@ interface IRecentlyActiveRepoList {
 
 describe('[[ RecentlyActiveRepoList ]]', () => {
   const getInstance = () => {
-    const localVue: VueConstructor<RecentlyActiveRepoList> = createLocalVue()
+    const localVue = createLocalVue()
     localVue.use(Vuex)
     localVue.use(VTooltip)
 
-    const store: Store<any> = new Vuex.Store({
+    const store = new Vuex.Store({
       modules: {
         'repository/list': {
           namespaced: true,
@@ -134,7 +133,7 @@ describe('[[ RecentlyActiveRepoList ]]', () => {
 
   test('`canActivateRepo` is computed based on the user role access', () => {
     const vm = getInstance()
-    vm.$gateKeeper.team = jest.fn().mockImplementation(() => true)
+    vm.$gateKeeper.team = jest.fn().mockImplementationOnce(() => true)
     expect(vm.canActivateRepo).toBe(true)
   })
 

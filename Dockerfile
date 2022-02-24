@@ -62,4 +62,4 @@ WORKDIR /app
 
 EXPOSE 3000
 
-CMD ["node_modules/@nuxt/typescript-runtime/bin/nuxt-ts.js", "start", "--dotenv", "/config/.env"]
+CMD ["node_modules/@nuxt/cli/bin/nuxt-cli.js", "start", "--dotenv", "/config/.env"]

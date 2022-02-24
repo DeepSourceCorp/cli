@@ -5,7 +5,7 @@ import { VcsProviderChoices } from '~/types/types'
 const checkFeatureAllowed: Middleware = ({ route, error, $providerMetaMap, $gateKeeper }) => {
   const featuresArray: AppFeatures[] = []
 
-  route.meta.forEach((meta: { gateFeature?: AppFeatures | AppFeatures[] }) => {
+  route.meta?.forEach((meta: { gateFeature?: AppFeatures | AppFeatures[] }) => {
     if (meta?.gateFeature) {
       featuresArray.push(
         ...(Array.isArray(meta.gateFeature) ? meta.gateFeature : [meta.gateFeature])

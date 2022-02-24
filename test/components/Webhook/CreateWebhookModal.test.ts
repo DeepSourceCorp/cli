@@ -26,7 +26,7 @@ interface CreateWebhookModalT extends Vue {
 }
 
 describe('[[ CreateWebhookModal ]]', () => {
-  let localVue: VueConstructor<CreateWebhookModal>, store: Store<any>
+  let localVue: VueConstructor<Vue>, store: Store<any>
   beforeEach(() => {
     localVue = createLocalVue()
     localVue.use(Vuex)
@@ -86,7 +86,7 @@ describe('[[ CreateWebhookModal ]]', () => {
       store,
       localVue
     })
-    const vm: CreateWebhookModalT = wrapper.vm as CreateWebhookModalT
+    const vm: CreateWebhookModalT = wrapper.vm as unknown as CreateWebhookModalT
     const payload = '5a79e73c99734f8c87c0ff501eafa53b'
 
     vm.generateWebhookSecret = jest.fn(() => {
