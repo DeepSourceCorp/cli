@@ -55,11 +55,7 @@ func NewCmdIssuesList() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List issues reported by DeepSource",
-		Args:  utils.MaxNArgs(15),
 		RunE: func(cmd *cobra.Command, args []string) error {
-			// if len(args) == 1 {
-			// 	opts.FileArg = args[0]
-			// }
 			opts.FileArg = args
 			return opts.Run()
 		},
@@ -163,12 +159,12 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 					return err
 				}
 
-				filteredIssues, err = FilterIssuesByPath(ctx, arg, opts.issuesData)
+				filteredIssues, err = FilterIssuesByPath(arg, opts.issuesData)
 				if err != nil {
 					return err
 				}
 
-				fetchedIssues = append(fetchedIssues, filteredIssues[:]...)
+				fetchedIssues = append(fetchedIssues, filteredIssues...)
 			} else {
 				opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, arg, opts.LimitArg)
 				if err != nil {

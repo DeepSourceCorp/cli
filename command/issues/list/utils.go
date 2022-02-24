@@ -1,7 +1,6 @@
 package list
 
 import (
-	"context"
 	"os"
 	"path/filepath"
 	"strings"
@@ -9,7 +8,7 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 )
 
-func FilterIssuesByPath(ctx context.Context, path string, issuesData []issues.Issue) ([]issues.Issue, error) {
+func FilterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue, error) {
 	var filteredIssues []issues.Issue
 	for _, issue := range issuesData {
 		up := ".." + string(os.PathSeparator)
