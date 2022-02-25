@@ -39,7 +39,6 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 		// check if the relative path has a parent directory
 		if !strings.HasPrefix(rel, up) && rel != ".." {
 			filteredIssues = append(filteredIssues, issue)
-			// set.Add(issue)
 		}
 	}
 

@@ -155,12 +155,6 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 				fetchedIssues = append(fetchedIssues, filteredIssues...)
 				continue
 			}
-
-			filteredIssues, err = deepsource.GetIssuesForFile(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, arg, opts.LimitArg)
-			if err != nil {
-				return err
-			}
-			fetchedIssues = append(fetchedIssues, filteredIssues...)
 		}
 
 		// set fetched issues as issue data
