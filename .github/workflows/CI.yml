@@ -1,8 +1,11 @@
 name: CI
 
 on:
-  pull_request:
-    branches: [master]
+  pull_request_target:
+    types:
+      - [opened, reopened, synchronize]
+    branches:
+      - 'master'
   push:
     branches:
       - master
