@@ -15,7 +15,7 @@
           v-if="isAnalyzer ? infoObj.analyzerLogo : infoObj.logo"
           :src="isAnalyzer ? infoObj.analyzerLogo : infoObj.logo"
           :alt="infoObj.name"
-          class="m-px"
+          class="h-auto m-px w-11"
         />
         <img v-else src="~/assets/images/analyzer-dir/placeholder.svg" class="opacity-40" />
       </div>
