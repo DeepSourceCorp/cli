@@ -111,7 +111,7 @@ func TestListSARIF(t *testing.T) {
 	})
 }
 
-func TestGetIssuesData(t *testing.T) {
+func TestFilterIssuesByPath(t *testing.T) {
 
 	t.Run("must work with files", func(t *testing.T) {
 		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
