@@ -1,6 +1,8 @@
 name: CI
 
 on:
+  pull_request_target:
+    types: [opened, reopened, edited, synchronize]
   pull_request:
     branches: [master]
   push:
@@ -19,6 +21,9 @@ jobs:
 
       - name: Check out code into the Go module directory
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Build the binary
         run: make build

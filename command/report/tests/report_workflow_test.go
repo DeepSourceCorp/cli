@@ -54,26 +54,11 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	if string(requestBodyData) == string(req) {
 		w.Write([]byte(successResponseBodyData))
 	} else {
-
 		w.Write([]byte(errorResponseBodyData))
 	}
 }
 
 func TestReportKeyValueWorkflow(t *testing.T) {
-	// Start GraphQL server for test
-	srv := &http.Server{
-		Addr: ":8081",
-	}
-
-	http.HandleFunc("/", graphQLAPIMock)
-
-	go func() {
-		err := srv.ListenAndServe()
-		if err != nil {
-			t.Errorf("Error starting HTTP mock server")
-		}
-	}()
-
 	// Read test artifact file
 	data, err := ioutil.ReadFile("./dummy/python_coverage.xml")
 	if err != nil {
@@ -111,20 +96,6 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 }
 
 func TestReportKeyValueFileWorkflow(t *testing.T) {
-	// Start GraphQL server for test
-	srv := &http.Server{
-		Addr: ":8081",
-	}
-
-	http.HandleFunc("/", graphQLAPIMock)
-
-	go func() {
-		err := srv.ListenAndServe()
-		if err != nil {
-			t.Errorf("Error starting HTTP mock server")
-		}
-	}()
-
 	cmd := exec.Command("/tmp/deepsource",
 		"report",
 		"--analyzer",
