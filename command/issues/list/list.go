@@ -89,8 +89,7 @@ func (opts *IssuesListOptions) Run() (err error) {
 		return fmt.Errorf("The maximum allowed limit to fetch issues is 100. Found %d", opts.LimitArg)
 	}
 
-	// Get the remote repository URL for which issues have to
-	// be listed
+	// Get the remote repository URL for which issues have to be listed
 	opts.SelectedRemote, err = utils.ResolveRemote(opts.RepoArg)
 	if err != nil {
 		return err
