@@ -1,6 +1,7 @@
 <template>
   <div
     id="card-input-container"
+    class="ph-ignore-input ph-no-capture"
     :class="{
       'border-vanilla-200': cardInputFocus,
       'border-ink-100': !cardInputFocus

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative grid grid-cols-1 gap-4 p-3 rounded-md bg-ink-300">
+  <div class="relative grid grid-cols-1 gap-4 p-3 rounded-md bg-ink-300 ph-no-capture">
     <div
       class="absolute right-0 top-0 leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400"
     >

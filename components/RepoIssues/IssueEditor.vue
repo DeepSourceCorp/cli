@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full border rounded-md border-ink-200"
+    class="w-full border rounded-md border-ink-200 ph-no-capture"
     :class="{
       'opacity-60 pointer-events-none filter-grayscale':
         isIgnored || (checkIssueIds.length && checkIssueIds.includes(id))

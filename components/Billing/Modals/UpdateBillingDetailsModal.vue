@@ -2,6 +2,7 @@
   <z-modal
     ref="udpate-billing-details-modal"
     title="Update billing details"
+    class="ph-no-capture"
     width="narrow"
     @onClose="() => $emit('onClose')"
   >
