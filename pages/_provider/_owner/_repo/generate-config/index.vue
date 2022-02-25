@@ -386,7 +386,7 @@ export default class GenerateConfig extends mixins(
       refetch: true
     })
 
-    this.$router.push(this.$generateRoute([]))
+    this.$router.push(this.$generateRoute(['issues']))
   }
 
   head(): Record<string, string> {
