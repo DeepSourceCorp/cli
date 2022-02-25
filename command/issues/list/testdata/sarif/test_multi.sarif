@@ -117,6 +117,53 @@
           ]
         }
       ]
+    },
+    {
+      "tool": {
+        "driver": {
+          "informationUri": "https://deepsource.io/directory/analyzers/python",
+          "name": "DeepSource Python Analyzer",
+          "rules": [
+            {
+              "id": "PY-W2000",
+              "name": "Imported name is not used anywhere in the module",
+              "shortDescription": null,
+              "fullDescription": {
+                "text": ""
+              },
+              "helpUri": "https://deepsource.io/directory/analyzers/python/issues/PY-W2000",
+              "properties": {
+                "category": "",
+                "recommended": ""
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "PY-W2000",
+          "ruleIndex": 0,
+          "kind": "fail",
+          "level": "error",
+          "message": {
+            "text": "Imported name is not used anywhere in the module"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "python/demo.py"
+                },
+                "region": {
+                  "startLine": 1,
+                  "endLine": 1
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

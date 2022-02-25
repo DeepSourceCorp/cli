@@ -102,9 +102,8 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]iss
 	}
 
 	// Formatting the query response w.r.t the output format of the SDK as specified in `issues_list.go`
-	var issuesData []issues.Issue
+	issuesData := make([]issues.Issue, len(respData.Repository.File.Issues.Edges))
 	for index, edge := range respData.Repository.File.Issues.Edges {
-
 		// Copying issue title and issue code
 		issuesData[index].IssueText = edge.Node.Concreteissue.Title
 		issuesData[index].IssueCode = edge.Node.Concreteissue.Shortcode

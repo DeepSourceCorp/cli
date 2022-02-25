@@ -1,0 +1,48 @@
+{
+	"occurences": [
+		{
+			"analyzer": "go",
+			"issue_code": "RVV-B0013",
+			"issue_title": "Unused method receiver detected",
+			"occurence_title": "Unused method receiver detected",
+			"issue_category": "",
+			"location": {
+				"path": "deepsource/transformers/queries/get_transformers.go",
+				"position": {
+					"begin": {
+						"line": 34,
+						"column": 0
+					},
+					"end": {
+						"line": 34,
+						"column": 0
+					}
+				}
+			}
+		},
+		{
+			"analyzer": "go",
+			"issue_code": "RVV-B0013",
+			"issue_title": "Unused method receiver detected",
+			"occurence_title": "Unused method receiver detected",
+			"issue_category": "",
+			"location": {
+				"path": "deepsource/transformers/queries/get_transformers.go",
+				"position": {
+					"begin": {
+						"line": 44,
+						"column": 0
+					},
+					"end": {
+						"line": 44,
+						"column": 0
+					}
+				}
+			}
+		}
+	],
+	"summary": {
+		"total_occurences": 2,
+		"unique_issues": 1
+	}
+}
