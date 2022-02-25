@@ -64,21 +64,29 @@
             <run-loading v-if="check.status === 'PEND'" />
             <run-cancelled v-else-if="check.status === 'CNCL'" />
             <run-timeout v-else-if="check.status === 'TIMO'" />
-            <div
-              v-else
-              class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-            >
-              <stat-card
-                v-for="stat in check.metricsCaptured"
-                :key="stat.id"
-                :title="stat.name"
-                :subtitle="stat.namespace.key"
-                :value="stat.valueDisplay"
-                :icon="check.analyzer.shortcode"
-                :color="stat.isPassing === false ? 'cherry' : 'juniper'"
-                :with-transition="stat.isPassing === false"
+            <template v-else>
+              <div
+                v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
+                class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+              >
+                <stat-card
+                  v-for="stat in check.metricsCaptured"
+                  :key="stat.id"
+                  :title="stat.name"
+                  :subtitle="stat.namespace.key"
+                  :value="stat.valueDisplay"
+                  :icon="check.analyzer.shortcode"
+                  :color="stat.isPassing === false ? 'cherry' : 'juniper'"
+                  :with-transition="stat.isPassing === false"
+                />
+              </div>
+              <empty-state
+                v-else
+                :show-border="true"
+                title="No metrics captured for this run"
+                class="text-vanilla-200"
               />
-            </div>
+            </template>
           </z-tab-pane>
         </z-tab-panes>
       </z-tabs>

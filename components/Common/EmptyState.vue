@@ -1,5 +1,8 @@
 <template>
-  <section class="w-full p-12">
+  <section
+    class="w-full p-12"
+    :class="showBorder ? 'border-2 border-dashed rounded-md border-ink-200' : ''"
+  >
     <picture class="mx-auto" :class="[imageWidth]">
       <source v-if="svgImagePath" :srcset="svgImagePath" type="image/svg+xml" />
       <source v-else :srcset="webpImagePath" type="image/webp" />
@@ -34,6 +37,9 @@ export default class EmptyState extends Vue {
 
   @Prop({ default: '' })
   svgImagePath: () => any
+
+  @Prop({ default: false })
+  showBorder: boolean
 
   @Prop({ default: 'w-28' })
   imageWidth: string
