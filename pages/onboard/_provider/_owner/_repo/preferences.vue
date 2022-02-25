@@ -1,7 +1,7 @@
 <template>
   <section class="space-y-4">
     <label class="text-base font-medium">What type of issues are important to you?</label>
-    <div class="grid grid-cols-1 gap-4 overflow-y-scroll 2xl:grid-cols-3 lg:grid-cols-2 max-h-102">
+    <div class="grid grid-cols-1 gap-4 overflow-y-scroll lg:grid-cols-2 max-h-102">
       <div
         v-for="issue in issueTypes"
         class="p-5 transition-all duration-100 border rounded-md cursor-pointer"
