@@ -95,7 +95,7 @@ func (opts *IssuesListOptions) Run() (err error) {
 		return err
 	}
 
-	// Fetch the list of issues using SDK based on user input
+	// Fetch the list of issues using SDK (deepsource package) based on user input
 	ctx := context.Background()
 	err = opts.getIssuesData(ctx)
 	if err != nil {
