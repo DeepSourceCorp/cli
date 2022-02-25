@@ -3,6 +3,8 @@ name: CI
 on:
   pull_request_target:
     types: [opened, reopened, edited, synchronize]
+  pull_request:
+    branches: [master]
   push:
     branches:
       - master
