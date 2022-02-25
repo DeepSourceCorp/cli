@@ -1,0 +1,3 @@
+analyzer,issue_code,issue_title,occurence_title,issue_category,path,begin_line,begin_column,end_line,end_column
+go,RVV-B0013,Unused method receiver detected,Unused method receiver detected,,deepsource/transformers/queries/get_transformers.go,34,0,34,0
+go,RVV-B0013,Unused method receiver detected,Unused method receiver detected,,deepsource/transformers/queries/get_transformers.go,44,0,44,0

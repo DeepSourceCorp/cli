@@ -47,15 +47,18 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 		}
 	}
 
-	return filteredIssues, nil
+	return getUniqueIssues(filteredIssues), nil
 }
 
 // Returns de-duplicated issues.
 func getUniqueIssues(fetchedIssues []issues.Issue) []issues.Issue {
 	var uniqueIssues []issues.Issue
+
+	// inUnique is a map which is used for checking whether an issue exists already or not
 	inUnique := make(map[issues.Issue]bool)
 
 	for _, issue := range fetchedIssues {
+		// if the issue isn't present in inUnique, append the issue to uniqueIssues and update inUnique
 		if _, ok := inUnique[issue]; !ok {
 			inUnique[issue] = true
 			uniqueIssues = append(uniqueIssues, issue)

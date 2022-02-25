@@ -1,0 +1,1 @@
+[{"issue_title":"Use arguments JSON notation for CMD and ENTRYPOINT arguments","issue_code":"DOK-DL3025","location":{"path":"Dockerfile","position":{"begin":64,"end":64}},"Analyzer":{"analyzer":"docker"}}]
