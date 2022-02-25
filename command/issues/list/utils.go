@@ -36,6 +36,11 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 			return nil, err
 		}
 
+		// handle files
+		if rel == "." {
+			filteredIssues = append(filteredIssues, issue)
+		}
+
 		// check if the relative path has a parent directory
 		if !strings.HasPrefix(rel, up) && rel != ".." {
 			filteredIssues = append(filteredIssues, issue)
@@ -45,17 +50,15 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 	return filteredIssues, nil
 }
 
-// Returns de-duplicated issues based on a unique identifier.
-func getUniqueIssues(identifier string, fetchedIssues []issues.Issue) []issues.Issue {
+// Returns de-duplicated issues.
+func getUniqueIssues(fetchedIssues []issues.Issue) []issues.Issue {
 	var uniqueIssues []issues.Issue
-	inUnique := make(map[string]bool)
+	inUnique := make(map[issues.Issue]bool)
 
-	if identifier == "issue_path" {
-		for _, issue := range fetchedIssues {
-			if _, ok := inUnique[issue.Location.Path]; !ok {
-				inUnique[issue.Location.Path] = true
-				uniqueIssues = append(uniqueIssues, issue)
-			}
+	for _, issue := range fetchedIssues {
+		if _, ok := inUnique[issue]; !ok {
+			inUnique[issue] = true
+			uniqueIssues = append(uniqueIssues, issue)
 		}
 	}
 

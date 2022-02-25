@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	"regexp"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
@@ -141,24 +140,16 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		}
 
 		for _, arg := range opts.FileArg {
-			// use regex to segregate directory and file names
-			var pathRegexp = regexp.MustCompile(`^(.*/)?(?:$|(.+?)(?:(\.[^.]*$)|$))`)
-			matched := pathRegexp.FindStringSubmatch(arg)
-
-			// if the argument contains a directory, fetch issues for the directory
-			if matched[1] != "" {
-				filteredIssues, err = filterIssuesByPath(arg, opts.issuesData)
-				if err != nil {
-					return err
-				}
-
-				fetchedIssues = append(fetchedIssues, filteredIssues...)
-				continue
+			// Filter issues for the valid directories/files
+			filteredIssues, err = filterIssuesByPath(arg, opts.issuesData)
+			if err != nil {
+				return err
 			}
+			fetchedIssues = append(fetchedIssues, filteredIssues...)
 		}
 
 		// set fetched issues as issue data
-		opts.issuesData = getUniqueIssues("issue_path", fetchedIssues)
+		opts.issuesData = getUniqueIssues(fetchedIssues)
 		return nil
 	}
 
