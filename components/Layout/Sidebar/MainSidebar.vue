@@ -106,8 +106,8 @@
     </template>
     <!-- Dummy menu when user isn't onboarded -->
     <section v-else class="flex-grow hide-scroll">
-      <div class="p-4 px-5 border-b border-ink-200">
-        <img src="~/assets/images/logo-wordmark-white.svg" alt="" class="h-5" />
+      <div class="border-b border-ink-200" :class="[isCollapsed ? 'py-4 pl-5' : 'py-4 pl-5']">
+        <deep-source-logo :is-collapsed="isCollapsed" />
       </div>
       <nav class="p-2.5 space-y-2">
         <a
