@@ -8,13 +8,11 @@ import (
 	"io/ioutil"
 	"os"
 	"regexp"
-	"strings"
 
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/deepsourcelabs/cli/utils"
-	"github.com/owenrumney/go-sarif/v2/sarif"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -32,16 +30,6 @@ type IssuesListOptions struct {
 	SelectedRemote    *utils.RemoteData
 	issuesData        []issues.Issue
 	ptermTable        [][]string
-}
-
-type ExportData struct {
-	Occurences []IssueJSON `json:"occurences"`
-	Summary    Summary     `json:"summary"`
-}
-
-type Summary struct {
-	TotalOccurences int `json:"total_occurences"`
-	UniqueIssues    int `json:"unique_issues"`
 }
 
 func NewCmdIssuesList() *cobra.Command {
@@ -147,6 +135,11 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		var fetchedIssues []issues.Issue
 		var filteredIssues []issues.Issue
 
+		opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
+		if err != nil {
+			return err
+		}
+
 		for _, arg := range opts.FileArg {
 			// use regex to segregate directory and file names
 			var pathRegexp = regexp.MustCompile(`^(.*/)?(?:$|(.+?)(?:(\.[^.]*$)|$))`)
@@ -154,28 +147,24 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 
 			// if the argument contains a directory, fetch issues for the directory
 			if matched[1] != "" {
-				opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
-				if err != nil {
-					return err
-				}
-
-				filteredIssues, err = FilterIssuesByPath(arg, opts.issuesData)
+				filteredIssues, err = filterIssuesByPath(arg, opts.issuesData)
 				if err != nil {
 					return err
 				}
 
 				fetchedIssues = append(fetchedIssues, filteredIssues...)
-			} else {
-				opts.issuesData, err = deepsource.GetIssuesForFile(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, arg, opts.LimitArg)
-				if err != nil {
-					return err
-				}
-				return nil
+				continue
 			}
+
+			filteredIssues, err = deepsource.GetIssuesForFile(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, arg, opts.LimitArg)
+			if err != nil {
+				return err
+			}
+			fetchedIssues = append(fetchedIssues, filteredIssues...)
 		}
 
 		// set fetched issues as issue data
-		opts.issuesData = fetchedIssues
+		opts.issuesData = getUniqueIssues("issue_path", fetchedIssues)
 		return nil
 	}
 
@@ -229,49 +218,6 @@ func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
 	return nil
 }
 
-// Converts issueData to a JSON-compatible struct
-func convertJSON(issueData []issues.Issue) ExportData {
-	var occurences []IssueJSON
-	var issueExport ExportData
-
-	set := make(map[string]string)
-	total_occurences := 0
-
-	for _, issue := range issueData {
-		issueNew := IssueJSON{
-			Analyzer:       issue.Analyzer.Shortcode,
-			IssueCode:      issue.IssueCode,
-			IssueTitle:     issue.IssueText,
-			OccurenceTitle: issue.IssueText,
-			IssueCategory:  "",
-			Location: LocationJSON{
-				Path: issue.Location.Path,
-				Position: PositionJSON{
-					Begin: LineColumn{
-						Line:   issue.Location.Position.BeginLine,
-						Column: 0,
-					},
-					End: LineColumn{
-						Line:   issue.Location.Position.EndLine,
-						Column: 0,
-					},
-				},
-			},
-		}
-
-		total_occurences += 1
-		set[issue.IssueCode] = ""
-
-		occurences = append(occurences, issueNew)
-	}
-
-	issueExport.Occurences = occurences
-	issueExport.Summary.TotalOccurences = total_occurences
-	issueExport.Summary.UniqueIssues = len(set)
-
-	return issueExport
-}
-
 // Handles exporting issues as CSV
 func (opts *IssuesListOptions) exportCSV(filename string) error {
 	records := convertCSV(opts.issuesData)
@@ -299,19 +245,6 @@ func (opts *IssuesListOptions) exportCSV(filename string) error {
 	return nil
 }
 
-// Converts issueData to a CSV records
-func convertCSV(issueData []issues.Issue) [][]string {
-	records := [][]string{{"analyzer", "issue_code", "issue_title", "occurence_title", "issue_category", "path", "begin_line", "begin_column", "end_line", "end_column"}}
-
-	for _, issue := range issueData {
-		issueNew := []string{issue.Analyzer.Shortcode, issue.IssueCode, issue.IssueText, issue.IssueText, "", issue.Location.Path, fmt.Sprint(issue.Location.Position.BeginLine), "0", fmt.Sprint(issue.Location.Position.EndLine), "0"}
-
-		records = append(records, issueNew)
-	}
-
-	return records
-}
-
 // Handles exporting issues as a SARIF file
 func (opts *IssuesListOptions) exportSARIF(filename string) (err error) {
 	report := convertSARIF(opts.issuesData)
@@ -329,93 +262,4 @@ func (opts *IssuesListOptions) exportSARIF(filename string) (err error) {
 	}
 	pterm.Info.Printf("Saved issues to %s!\n", filename)
 	return nil
-}
-
-// Converts issueData to a SARIF report
-func convertSARIF(issueData []issues.Issue) *sarif.Report {
-	report, err := sarif.New(sarif.Version210)
-	if err != nil {
-		return nil
-	}
-
-	// use a map of shortcodes to append rules and results
-	type boolIndex struct {
-		exists bool
-		index  int
-	}
-	shortcodes := make(map[string]boolIndex)
-	var runs []*sarif.Run
-	count := 0
-
-	// Adding the tools data to the SARIF report corresponding to the number of analyzers activated
-	for _, issue := range issueData {
-		if !shortcodes[issue.Analyzer.Shortcode].exists {
-			driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer"
-			informationURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode)
-
-			tool := sarif.Tool{
-				Driver: &sarif.ToolComponent{
-					Name:           driverName,
-					InformationURI: &informationURI,
-				},
-			}
-
-			run := sarif.NewRun(tool)
-			runs = append(runs, run)
-
-			// update boolIndex
-			shortcodes[issue.Analyzer.Shortcode] = boolIndex{exists: true, index: count}
-			count += 1
-		}
-	}
-
-	// use an index map for updating rule index value
-	idxMap := make(map[int]int)
-
-	// Adding the results data for each analyzer in the report
-	for _, issue := range issueData {
-		// TODO: Fetch issue description from the API and populate here
-		textDescription := ""
-		fullDescription := sarif.MultiformatMessageString{
-			Text: &textDescription,
-		}
-
-		// check if the shortcode exists in the map
-		if shortcodes[issue.Analyzer.Shortcode].exists {
-			// fetch shortcode index
-			idx := shortcodes[issue.Analyzer.Shortcode].index
-
-			// TODO: fetch category and recommended fields
-			pb := sarif.NewPropertyBag()
-			pb.Add("category", "")
-			pb.Add("recommended", "")
-
-			helpURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode) + "/issues/" + string(issue.IssueCode)
-
-			// add rule
-			runs[idx].AddRule(issue.IssueCode).WithName(issue.IssueText).WithFullDescription(&fullDescription).WithHelpURI(helpURI).WithProperties(pb.Properties)
-
-			// add result
-			runs[idx].CreateResultForRule(issue.IssueCode).WithLevel("error").WithKind("fail").WithMessage(sarif.NewTextMessage(
-				issue.IssueText,
-			)).WithRuleIndex(idxMap[idx]).AddLocation(
-				sarif.NewLocationWithPhysicalLocation(
-					sarif.NewPhysicalLocation().WithArtifactLocation(
-						sarif.NewSimpleArtifactLocation(issue.Location.Path),
-					).WithRegion(
-						sarif.NewSimpleRegion(issue.Location.Position.BeginLine, issue.Location.Position.EndLine),
-					),
-				),
-			)
-
-			idxMap[idx] += 1
-		}
-	}
-
-	// add all runs to report
-	for _, run := range runs {
-		report.AddRun(run)
-	}
-
-	return report
 }
