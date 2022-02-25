@@ -25,7 +25,7 @@
         </nuxt-link>
       </template>
     </nav>
-    <NuxtChild />
+    <NuxtChild class="mb-24" />
   </section>
 </template>
 

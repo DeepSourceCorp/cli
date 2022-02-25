@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 pb-24 gap-y-2">
+  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
     <page-title
       class="max-w-2xl items-center"

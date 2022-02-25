@@ -1,5 +1,5 @@
 <template>
-  <main class="flex flex-col max-w-2xl p-4 mb-24 gap-y-2">
+  <main class="flex flex-col max-w-2xl p-4 gap-y-2">
     <page-title
       title="Analysis configuration"
       description-width-class="max-w-2xl"
