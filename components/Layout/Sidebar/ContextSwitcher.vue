@@ -1,9 +1,9 @@
 <template>
-  <z-menu v-if="viewer.dashboardContext">
+  <z-menu v-if="viewer.dashboardContext" class="w-full">
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="flex items-center space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none"
+        class="flex items-center w-full space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none"
         :class="isCollapsed ? 'hover:opacity-75' : 'p-1 hover:bg-ink-200'"
         @click="toggle"
       >
@@ -15,10 +15,9 @@
           class="flex-shrink-0"
           stroke="bg-ink-100 p-1"
         ></z-avatar>
-        <span v-show="!isCollapsed" class="flex items-center space-x-1">
-          <span>{{ activeDashboardContext.team_name || activeDashboardContext.login }}</span>
-          <z-icon icon="chevron-down" size="small" color="vanilla-200"></z-icon>
-        </span>
+        <span v-show="!isCollapsed">{{
+          activeDashboardContext.team_name || activeDashboardContext.login
+        }}</span>
       </button>
     </template>
     <template v-slot:body="{ close }">

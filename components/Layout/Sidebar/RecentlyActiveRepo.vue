@@ -7,20 +7,7 @@
       <template v-slot:trigger="{ toggle }">
         <button
           type="button"
-          class="
-            flex
-            items-center
-            justify-center
-            h-8
-            py-1
-            space-x-2
-            text-sm
-            rounded-sm
-            outline-none
-            hover:bg-ink-300
-            min-w-8
-            focus:outline-none
-          "
+          class="flex items-center justify-center h-8 py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 min-w-8 focus:outline-none"
           @click="toggle"
         >
           <z-icon icon="activity" size="small" class="min-w-4 min-h-4"></z-icon>
@@ -53,17 +40,7 @@
       <button
         type="button"
         @click.prevent="toggleDropdown"
-        class="
-          flex
-          items-center
-          justify-between
-          w-full
-          px-2
-          py-1
-          text-sm
-          outline-none
-          focus:outline-none
-        "
+        class="flex items-center justify-between w-full px-2 py-1 text-sm outline-none focus:outline-none"
         :class="[
           isActive('provider-owner-repo') &&
           !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
@@ -82,29 +59,20 @@
           <z-icon class="pl-1" :icon="dropdownCollapsed ? 'chevron-up' : 'chevron-down'"></z-icon>
         </z-tag>
       </button>
-      <transition
-        :enter-active-class="$fetchState.pending ? '' : 'duration-300 ease-out'"
-        :enter-class="$fetchState.pending ? '' : '-translate-y-full opacity-0'"
-        :enter-to-class="$fetchState.pending ? '' : 'translate-y-0 opacity-100'"
-        :leave-active-class="$fetchState.pending ? '' : 'duration-200 ease-in'"
-        :leave-class="$fetchState.pending ? '' : 'translate-y-0 opacity-100'"
-        :leave-to-class="$fetchState.pending ? '' : '-translate-y-full opacity-0'"
-      >
-        <div class="space-y-0.5" v-show="dropdownCollapsed">
-          <sidebar-item
-            v-for="repo in repoList"
-            :key="repo.id"
-            :icon="repo.icon"
-            :active="$route.params.repo === repo.name"
-            :icon-color="repo.isActive ? 'juniper' : ''"
-            class="pl-7"
-            :to="buildRoute(repo)"
-            :class="isCollapsed ? 'hidden' : 'block'"
-          >
-            {{ repo.name }}
-          </sidebar-item>
-        </div>
-      </transition>
+      <div class="space-y-0.5" v-show="dropdownCollapsed">
+        <sidebar-item
+          v-for="repo in repoList"
+          :key="repo.id"
+          :icon="repo.icon"
+          :active="$route.params.repo === repo.name"
+          :icon-color="repo.isActive ? 'juniper' : ''"
+          class="pl-7"
+          :to="buildRoute(repo)"
+          :class="isCollapsed ? 'hidden' : 'block'"
+        >
+          {{ repo.name }}
+        </sidebar-item>
+      </div>
     </template>
   </div>
 </template>
