@@ -21,6 +21,7 @@ const MAX_ISSUE_LIMIT = 100
 type IssuesListOptions struct {
 	FileArg           []string
 	RepoArg           string
+	AnalyzerArg       []string
 	LimitArg          int
 	OutputFilenameArg string
 	JSONArg           bool
@@ -49,6 +50,9 @@ func NewCmdIssuesList() *cobra.Command {
 
 	// --repo, -r flag
 	cmd.Flags().StringVarP(&opts.RepoArg, "repo", "r", "", "List the issues of the specified repository")
+
+	// --analyzer, -a flag
+	cmd.Flags().StringArrayVarP(&opts.AnalyzerArg, "analyzer", "a", nil, "List the issues for the specified analyzer")
 
 	// --limit, -l flag
 	cmd.Flags().IntVarP(&opts.LimitArg, "limit", "l", 30, "Fetch the issues upto the specified limit")
@@ -125,17 +129,18 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		return err
 	}
 
+	// Fetch list of issues for the whole project
+	opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
+	if err != nil {
+		return err
+	}
+
+	var filteredIssues []issues.Issue
+
 	// Fetch issues for a certain FileArg (filepath) passed by the user
 	// Example: `deepsource issues list api/hello.py`
 	if len(opts.FileArg) != 0 {
 		var fetchedIssues []issues.Issue
-		var filteredIssues []issues.Issue
-
-		opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
-		if err != nil {
-			return err
-		}
-
 		for _, arg := range opts.FileArg {
 			// Filter issues for the valid directories/files
 			filteredIssues, err = filterIssuesByPath(arg, opts.issuesData)
@@ -147,14 +152,22 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 
 		// set fetched issues as issue data
 		opts.issuesData = getUniqueIssues(fetchedIssues)
-		return nil
 	}
 
-	// Fetch list of issues for the whole project
-	opts.issuesData, err = deepsource.GetIssues(ctx, opts.SelectedRemote.Owner, opts.SelectedRemote.RepoName, opts.SelectedRemote.VCSProvider, opts.LimitArg)
-	if err != nil {
-		return err
+	if len(opts.AnalyzerArg) != 0 {
+		var fetchedIssues []issues.Issue
+
+		// Filter issues based on the analyzer shortcode
+		filteredIssues, err = filterIssuesByAnalyzer(opts.AnalyzerArg, opts.issuesData)
+		if err != nil {
+			return err
+		}
+		fetchedIssues = append(fetchedIssues, filteredIssues...)
+
+		// set fetched issues as issue data
+		opts.issuesData = getUniqueIssues(fetchedIssues)
 	}
+
 	return nil
 }
 
