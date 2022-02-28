@@ -135,3 +135,28 @@ func TestFilterIssuesByPath(t *testing.T) {
 		}
 	})
 }
+
+func TestFilterIssuesByAnalyzer(t *testing.T) {
+
+	t.Run("must work with a single analyzer", func(t *testing.T) {
+		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
+		issues_docker := ReadIssues("./testdata/dummy/issues_docker.json")
+
+		got, _ := filterIssuesByAnalyzer([]string{"docker"}, issues_data)
+		want := issues_docker
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got: %v; want: %v\n", got, want)
+		}
+	})
+
+	t.Run("must work with multiple analyzers", func(t *testing.T) {
+		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
+		issues_multi_analyzers := ReadIssues("./testdata/dummy/issues_multiple_analyzers.json")
+
+		got, _ := filterIssuesByAnalyzer([]string{"docker", "python"}, issues_data)
+		want := issues_multi_analyzers
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got: %v; want: %v\n", got, want)
+		}
+	})
+}

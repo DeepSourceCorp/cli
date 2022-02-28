@@ -50,6 +50,25 @@ func filterIssuesByPath(path string, issuesData []issues.Issue) ([]issues.Issue,
 	return getUniqueIssues(filteredIssues), nil
 }
 
+// Filters issues based on the analyzer shortcode.
+func filterIssuesByAnalyzer(analyzer []string, issuesData []issues.Issue) ([]issues.Issue, error) {
+	var filteredIssues []issues.Issue
+
+	// maintain a map of analyzer shortcodes
+	analyzerMap := make(map[string]bool)
+	for _, shortcode := range analyzer {
+		analyzerMap[shortcode] = true
+	}
+
+	for _, issue := range issuesData {
+		if analyzerMap[issue.Analyzer.Shortcode] {
+			filteredIssues = append(filteredIssues, issue)
+		}
+	}
+
+	return getUniqueIssues(filteredIssues), nil
+}
+
 // Returns de-duplicated issues.
 func getUniqueIssues(fetchedIssues []issues.Issue) []issues.Issue {
 	var uniqueIssues []issues.Issue
