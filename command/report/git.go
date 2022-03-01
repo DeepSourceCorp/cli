@@ -63,8 +63,12 @@ func gitGetHead(workspaceDir string) (string, error) {
 // Fetches the latest commit hash using the command `git rev-parse HEAD`
 // through go-git
 func fetchHeadManually(directoryPath string) (string, error) {
+	gitOpts := &git.PlainOpenOptions{
+		DetectDotGit: true,
+	}
+
 	// Open a new repository targeting the given path (the .git folder)
-	repo, err := git.PlainOpen(directoryPath)
+	repo, err := git.PlainOpenWithOptions(directoryPath, gitOpts)
 	if err != nil {
 		return "", err
 	}
