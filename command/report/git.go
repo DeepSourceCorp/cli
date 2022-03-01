@@ -58,7 +58,6 @@ func gitGetHead(workspaceDir string) (string, error) {
 		sentry.CaptureException(err)
 		return "", err
 	}
-	fmt.Println(headOID)
 	return headOID, nil
 }
 
