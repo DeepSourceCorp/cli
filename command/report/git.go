@@ -64,7 +64,7 @@ func gitGetHead(workspaceDir string) (string, error) {
 // Fetches the latest commit hash using the command `git rev-parse HEAD`
 // through git
 func fetchHeadManually(directoryPath string) (string, error) {
-	cmd := exec.Command("git", "--no-pager", "rev-parse", "HEAD")
+	cmd := exec.Command("git", "rev-parse", "--no-pager", "HEAD")
 	cmd.Dir = directoryPath
 
 	var stdout, stderr bytes.Buffer
