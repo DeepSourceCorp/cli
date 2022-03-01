@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/getsentry/sentry-go"
@@ -30,6 +31,7 @@ func NewCmdReport() *cobra.Command {
 		Args:  utils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			returnCode := opts.Run()
+			sentry.Flush(2 * time.Second)
 			defer os.Exit(returnCode)
 		},
 	}

@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"time"
 
 	"github.com/deepsourcelabs/cli/command"
 	v "github.com/deepsourcelabs/cli/version"
@@ -22,7 +23,6 @@ var (
 )
 
 func main() {
-
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	// Init sentry
@@ -38,6 +38,7 @@ func main() {
 		// TODO: Handle exit codes here
 		pterm.Error.Println(err)
 		sentry.CaptureException(err)
+		sentry.Flush(2 * time.Second)
 		os.Exit(1)
 	}
 }
