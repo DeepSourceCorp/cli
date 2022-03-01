@@ -1,12 +1,13 @@
 package report
 
 import (
+	"bytes"
 	"fmt"
 	"os"
+	"os/exec"
+	"strings"
 
 	"github.com/getsentry/sentry-go"
-	"github.com/go-git/go-git/v5"
-	"github.com/go-git/go-git/v5/plumbing"
 )
 
 // gitGetHead accepts a git directory and returns head commit OID / error
@@ -57,26 +58,26 @@ func gitGetHead(workspaceDir string) (string, error) {
 		sentry.CaptureException(err)
 		return "", err
 	}
+	fmt.Println(headOID)
 	return headOID, nil
 }
 
 // Fetches the latest commit hash using the command `git rev-parse HEAD`
-// through go-git
+// through git
 func fetchHeadManually(directoryPath string) (string, error) {
-	gitOpts := &git.PlainOpenOptions{
-		DetectDotGit: true,
-	}
+	cmd := exec.Command("git", "--no-pager", "rev-parse", "HEAD")
+	cmd.Dir = directoryPath
 
-	// Open a new repository targeting the given path (the .git folder)
-	repo, err := git.PlainOpenWithOptions(directoryPath, gitOpts)
+	var stdout, stderr bytes.Buffer
+	cmd.Stdout = &stdout
+	cmd.Stderr = &stderr
+
+	err := cmd.Run()
+	outStr, _ := stdout.String(), stderr.String()
 	if err != nil {
 		return "", err
 	}
 
-	// Resolve revision into a sha1 commit
-	commitHash, err := repo.ResolveRevision(plumbing.Revision("HEAD"))
-	if err != nil {
-		return "", err
-	}
-	return commitHash.String(), nil
+	// Trim newline suffix from Commit OID
+	return strings.TrimSuffix(outStr, "\n"), nil
 }
