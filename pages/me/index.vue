@@ -19,6 +19,9 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
 
+import { Context } from '@nuxt/types'
+import { ContextGetterTypes } from '~/store/account/context'
+
 @Component({
   meta: {
     auth: {
@@ -26,7 +29,14 @@ import ActiveUserMixin from '@/mixins/activeUserMixin'
       redirectToLogin: true
     }
   },
-  layout: 'user'
+  layout: 'user',
+  middleware: [
+    function ({ redirect, store, route }: Context): void {
+      if (store.getters[`account/context/${ContextGetterTypes.TO_ONBOARD}`]) {
+        redirect('/installation/pending')
+      }
+    }
+  ]
 })
 export default class PersonalDashboard extends mixins(ActiveUserMixin) {
   head(): Record<string, string> {
