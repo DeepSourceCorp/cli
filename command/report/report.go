@@ -37,7 +37,10 @@ func NewCmdReport() *cobra.Command {
 
 		Use %[3]s to specify the value of the artifact:
 		%[4]s
-		`, y.Sprintf("--analyzer"), c.Sprintf("deepsource report --analyzer python"), y.Sprintf("--value"), c.Sprintf("deepsource report --key value"))
+
+		You can flag combinations as well:
+		%[5]s
+		`, y.Sprintf("--analyzer"), c.Sprintf("deepsource report --analyzer python"), y.Sprintf("--value"), c.Sprintf("deepsource report --key value"), c.Sprintf("deepsource report --analyzer go --value-file coverage.out"))
 
 	cmd := &cobra.Command{
 		Use:   "report",
