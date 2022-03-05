@@ -6,6 +6,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
@@ -27,9 +28,18 @@ type Options struct {
 func NewCmdConfigGenerate() *cobra.Command {
 	o := Options{}
 
+	home, _ := os.UserHomeDir()
+	c := color.New(color.FgCyan, color.Bold)
+	doc := heredoc.Docf(`
+		Generate config for the DeepSource CLI.
+
+		Configs are stored in: %[1]s
+		`, c.Sprintf(filepath.Join(home, "deepsource", "config.toml")))
+
 	cmd := &cobra.Command{
 		Use:   "generate",
 		Short: "Generate config for DeepSource",
+		Long:  doc,
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return o.Run()

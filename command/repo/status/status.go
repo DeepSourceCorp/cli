@@ -4,9 +4,11 @@ import (
 	"context"
 	"fmt"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/utils"
+	"github.com/fatih/color"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -25,9 +27,22 @@ func NewCmdRepoStatus() *cobra.Command {
 		TokenExpired: config.Cfg.IsExpired(),
 	}
 
+	c := color.New(color.FgCyan, color.Bold)
+	y := color.New(color.FgYellow, color.Bold)
+	doc := heredoc.Docf(`
+		View the activation status for the repository.
+
+		To check if the current repository is activated on DeepSource, run:
+		%[1]s
+
+		To check if a specific repository is activated on DeepSource, use the %[2]s flag:
+		%[3]s
+		`, c.Sprintf("deepsource repo status"), y.Sprintf("--repo"), c.Sprintf("deepsource repo status --repo repo_name"))
+
 	cmd := &cobra.Command{
 		Use:   "status",
-		Short: "Refresh stored authentication credentials",
+		Short: "View the activation status for the repository.",
+		Long:  doc,
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run()

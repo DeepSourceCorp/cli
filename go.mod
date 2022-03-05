@@ -5,6 +5,7 @@ go 1.16
 require (
 	github.com/AlecAivazis/survey/v2 v2.2.12
 	github.com/Jeffail/gabs/v2 v2.6.1
+	github.com/MakeNowJust/heredoc v1.0.0
 	github.com/cli/browser v1.1.0
 	github.com/deepsourcelabs/graphql v0.2.2
 	github.com/fatih/color v1.12.0
