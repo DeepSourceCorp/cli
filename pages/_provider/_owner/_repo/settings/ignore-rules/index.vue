@@ -45,17 +45,17 @@
       class="flex flex-col divide-y divide-ink-300"
     >
       <ignored-rule
-        class="py-4"
-        v-for="rule in repository.silenceRules.edges"
+        v-for="(rule, idx) in repository.silenceRules.edges"
         :key="rule.node.id"
         :rule="rule.node"
-      ></ignored-rule>
+        :class="idx === 0 ? 'pb-4' : 'py-4'"
+      />
     </div>
     <empty-state
       v-else
       title="No ignored rules"
       class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
-    ></empty-state>
+    />
   </div>
 </template>
 
