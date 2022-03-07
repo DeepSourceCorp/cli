@@ -1,4 +1,4 @@
-mutation($input: UpdateIssuePriorityInput!, $repositoryId: ID!) {
+mutation($input: UpdateIssuePriorityInput!, $objectId: ID!, $level: IssuePriorityLevel!) {
   updateIssuePriority(input: $input) {
     issue {
       id
@@ -10,12 +10,18 @@ mutation($input: UpdateIssuePriorityInput!, $repositoryId: ID!) {
         name
         logo
       }
-      issuePriority(repositoryId: $repositoryId) {
+      issuePriority(level: $level, objectId: $objectId) {
         repositoryIssuePriority {
           slug
           weight
           verboseName
         }
+        cascadingIssuePriority {
+          slug
+          verboseName
+          weight
+        }
+        source
       }
     }
   }

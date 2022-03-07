@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col max-w-2xl p-4 gap-y-2">
+  <div class="flex flex-col max-w-3xl p-4 pb-24 gap-y-2">
     <!-- title -->
     <page-title
-      class="max-w-2xl items-center"
       title="Issue priority"
-      description-width-class="max-w-2xl"
+      description-width-class="max-w-3xl"
+      class="max-w-3xl items-center"
     >
       <template v-if="showCtaAndControls" slot="actions">
         <z-button
@@ -22,29 +22,29 @@
     <div v-show="showCtaAndControls" class="flex justify-between">
       <div class="flex gap-x-2 mr-2">
         <issue-priority-sort v-model="sortType" />
-        <issue-priority-filter v-model="analyzerType" :level="repoLevel" />
+        <issue-priority-filter v-model="analyzerType" :level="ownerLevel" />
       </div>
       <!-- add debounce triggered search when API is done -->
       <z-input
         v-model="query"
+        :show-border="false"
         size="small"
         icon="search"
-        :showBorder="false"
         background-color="ink-300"
         placeholder="Search issues..."
         @debounceInput="onSearchQueryChange"
       >
         <template slot="left">
-          <z-icon icon="search" class="ml-1.5" size="small"></z-icon>
+          <z-icon icon="search" size="small" class="ml-1.5" />
         </template>
         <template slot="right">
           <z-icon
+            v-show="query"
             icon="x"
             size="small"
             class="cursor-pointer"
-            v-show="query"
             @click="clearSearch"
-          ></z-icon>
+          />
         </template>
       </z-input>
     </div>
@@ -62,7 +62,7 @@
         v-for="(issue, position) in issueList"
         :key="issue.shortcode"
         v-bind="issue"
-        :priority="issue.issuePriority.repositoryIssuePriority.slug"
+        :priority="issue.issuePriority.ownerIssuePriority.slug"
         :can-change-priority="canChangePriority"
         :class="{
           'border-b border-ink-200': position < issueList.length - 1
@@ -110,8 +110,8 @@
     <portal to="modal">
       <choose-issue-modal
         v-if="isIssueSelectModalOpen"
-        :object-id="repository.id"
-        :level="repoLevel"
+        :object-id="owner.id"
+        :level="ownerLevel"
         @close="isIssueSelectModalOpen = false"
         @issues-selected="refetchIssues"
       />
@@ -130,18 +130,18 @@ import {
   IssuePriorityCard
 } from '@/components/IssuePriority'
 
-import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import RepoDetailMixin from '@/mixins/repoDetailMixin'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 import IssuePriorityListMixin from '~/mixins/issuePriorityListMixin'
 
-import { RepoPerms } from '~/types/permTypes'
+import { TeamPerms } from '~/types/permTypes'
 import { Issue, IssuePriorityLevel } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
 /**
  * Page that shows list of issue with priority set and allows to change priority
- * for a specific repository.
+ * for a specific team.
  */
 @Component({
   components: {
@@ -155,18 +155,18 @@ import { resolveNodes } from '~/utils/array'
     ChooseIssueModal,
     IssuePriorityCard
   },
-  layout: 'repository',
-  middleware: ['perm'],
+  layout: 'dashboard',
+  middleware: ['perm', 'teamOnly'],
   meta: {
     auth: {
       strict: true,
-      repoPerms: [RepoPerms.CHANGE_ISSUE_PRIORITY]
+      teamPerms: [TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY]
     }
   }
 })
 export default class SettingsIssuePriority extends mixins(
-  RoleAccessMixin,
-  RepoDetailMixin,
+  ActiveUserMixin,
+  OwnerDetailMixin,
   PaginationMixin,
   IssuePriorityListMixin
 ) {
@@ -195,19 +195,15 @@ export default class SettingsIssuePriority extends mixins(
    */
   async refetchIssues(refetch = true): Promise<void> {
     this.isLoading = true
-    const { repo, provider, owner } = this.$route.params
-    if (!this.repository.id) {
-      await this.fetchBasicRepoDetails({
-        name: repo,
-        provider,
-        owner
-      })
+    const { owner, provider } = this.$route.params
+    if (!this.owner.id) {
+      await this.fetchOwnerDetails({ login: owner, provider })
     }
 
     await this.fetchIssuesWithPriority({
       isIssuePrioritySet: true,
-      objectId: this.repository.id,
-      level: IssuePriorityLevel.Repository,
+      objectId: this.owner.id,
+      level: IssuePriorityLevel.Owner,
       q: this.query,
       first: this.perPageCount,
       offset: this.queryOffset,
@@ -230,12 +226,12 @@ export default class SettingsIssuePriority extends mixins(
   async editPriority(shortcode: string, priorityValue: string): Promise<void> {
     try {
       await this.updateIssuePriority({
-        objectId: this.repository.id,
-        level: IssuePriorityLevel.Repository,
+        objectId: this.owner.id,
+        level: IssuePriorityLevel.Owner,
         input: {
           issueShortcode: shortcode,
-          objectId: this.repository.id,
-          level: IssuePriorityLevel.Repository,
+          objectId: this.owner.id,
+          level: IssuePriorityLevel.Owner,
           issuePriorityType: priorityValue
         }
       })
@@ -257,8 +253,8 @@ export default class SettingsIssuePriority extends mixins(
     const response = await this.unsetIssuePriority({
       input: {
         issueShortcode: shortcode,
-        objectId: this.repository.id,
-        level: IssuePriorityLevel.Repository
+        objectId: this.owner.id,
+        level: IssuePriorityLevel.Owner
       }
     })
 
@@ -293,22 +289,22 @@ export default class SettingsIssuePriority extends mixins(
     await this.refetchIssues()
   }
 
-  get repoLevel(): IssuePriorityLevel {
-    return IssuePriorityLevel.Repository
+  get ownerLevel(): IssuePriorityLevel {
+    return IssuePriorityLevel.Owner
   }
 
   get canChangePriority(): boolean {
-    return this.$gateKeeper.repo(RepoPerms.CHANGE_ISSUE_PRIORITY, this.repoPerms.permission)
+    return this.$gateKeeper.team(TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY, this.teamPerms.permission)
   }
 
   get emptyStateTitle(): string {
     if (this.query.length) {
       return `No results found for '${this.query}'`
-    } else if (this.analyzerType.length) {
-      return `No issues found for '${this.analyzerType}' analyzer`
-    } else {
-      return 'No issues found'
     }
+    if (this.analyzerType.length) {
+      return `No issues found for '${this.analyzerType}' analyzer`
+    }
+    return 'No issues found'
   }
 
   get showCtaAndControls(): boolean {

@@ -12,14 +12,16 @@
         />
       </template>
       <template slot="body" class="text-vanilla-200">
-        <z-menu-item
-          v-for="filter in languageFilters"
-          :key="filter.shortcode"
-          :icon="filter.shortcode"
-          @click="modelValue = filter.shortcode"
-        >
-          {{ filter.name }}
-        </z-menu-item>
+        <div class="max-h-56 overflow-y-auto">
+          <z-menu-item
+            v-for="filter in languageFilters"
+            :key="filter.shortcode"
+            :icon="filter.shortcode"
+            @click="modelValue = filter.shortcode"
+          >
+            {{ filter.name }}
+          </z-menu-item>
+        </div>
       </template>
     </z-menu>
 
@@ -52,14 +54,17 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
+import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
 import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsourcelabs/zeal'
+import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
+import { Analyzer, AnalyzerConnection, IssuePriorityLevel, Maybe } from '~/types/types'
+import { resolveNodes } from '~/utils/array'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import { Analyzer } from '~/types/types'
-import { resolveNodes } from '~/utils/array'
-import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
+import AnalyzerListMixin from '~/mixins/analyzerListMixin'
+
+const analyzerListStore = namespace('analyzer/list')
 
 export interface AnalyzerChoice {
   name: string
@@ -81,12 +86,18 @@ export interface AnalyzerChoice {
     AnalyzerLogo
   }
 })
-export default class IssuePriorityFilter extends mixins(RepoDetailMixin) {
+export default class IssuePriorityFilter extends mixins(AnalyzerListMixin, RepoDetailMixin) {
   @ModelSync('selectedAnalyzer', 'updateAnalyzer', { type: String })
   readonly modelValue: string
 
   @Prop({ default: 'bg-ink-300 hover:bg-ink-200' })
   buttonBackground: string
+
+  @Prop({ default: IssuePriorityLevel.Repository })
+  level: IssuePriorityLevel
+
+  @analyzerListStore.State('analyzerList')
+  stateAnalyzerList: AnalyzerConnection
 
   /**
    * fetch hook for vue component
@@ -94,7 +105,9 @@ export default class IssuePriorityFilter extends mixins(RepoDetailMixin) {
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    await this.fetchAvailableAnalyzers(this.baseRouteParams)
+    this.level === IssuePriorityLevel.Repository
+      ? await this.fetchAvailableAnalyzers(this.baseRouteParams)
+      : await this.fetchAnalyzers()
   }
 
   /**
@@ -115,7 +128,9 @@ export default class IssuePriorityFilter extends mixins(RepoDetailMixin) {
    * @returns {void}
    */
   mounted(): void {
-    this.$socket.$on('repo-analysis-updated', this.refetchAnalyzers)
+    if (this.level === IssuePriorityLevel.Repository) {
+      this.$socket.$on('repo-analysis-updated', this.refetchAnalyzers)
+    }
   }
 
   /**
@@ -124,27 +139,27 @@ export default class IssuePriorityFilter extends mixins(RepoDetailMixin) {
    * @returns {void}
    */
   beforeDestroy(): void {
-    this.$socket.$off('repo-analysis-updated', this.refetchAnalyzers)
+    if (this.level === IssuePriorityLevel.Repository) {
+      this.$socket.$off('repo-analysis-updated', this.refetchAnalyzers)
+    }
   }
 
-  get languageFilters() {
-    if (this.repository.availableAnalyzers) {
-      const connection = this.repository.availableAnalyzers
-      const repoAnalyzers = resolveNodes(connection) as Analyzer[]
+  get languageFilters(): Record<string, AnalyzerChoice> {
+    const repoAnalyzers =
+      this.level === IssuePriorityLevel.Repository
+        ? (resolveNodes(this.repository.availableAnalyzers) as Analyzer[])
+        : (resolveNodes(this.stateAnalyzerList) as Analyzer[])
 
-      const analyzerFilters: Record<string, AnalyzerChoice> = {}
-      repoAnalyzers.forEach((repoAnalyzer) => {
-        const { name, shortcode, analyzerLogo } = repoAnalyzer
-        analyzerFilters[shortcode] = {
-          name,
-          shortcode,
-          analyzerLogo: analyzerLogo || ''
-        }
-      })
-      return analyzerFilters
-    }
-
-    return {}
+    const analyzerFilters: Record<string, AnalyzerChoice> = {}
+    repoAnalyzers.forEach((repoAnalyzer) => {
+      const { name, shortcode, analyzerLogo } = repoAnalyzer
+      analyzerFilters[shortcode] = {
+        name,
+        shortcode,
+        analyzerLogo: analyzerLogo || ''
+      }
+    })
+    return analyzerFilters
   }
 
   get filterApplied(): boolean {

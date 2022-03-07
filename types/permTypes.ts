@@ -14,7 +14,8 @@ export enum TeamPerms {
   AUTO_ONBOARD_CRUD_FOR_TEMPLATE = 'autoOnboardCrudForTemplate',
   AUTO_ONBOARD_VIEW_TEMPLATE = 'autoOnboardViewTemplate',
   AUTO_ONBOARD_REPOSITORIES = 'autoOnboardRepositories',
-  MANAGE_WEBHOOKS = 'manageWebhooks'
+  MANAGE_WEBHOOKS = 'manageWebhooks',
+  MANAGE_OWNER_ISSUE_PRIORITY = 'manageIssuePriority'
 }
 
 export enum RepoPerms {

@@ -86,9 +86,9 @@ import IssueDetailMixin from '@/mixins/issueDetailMixin'
 import RepoDetailMixin from '@/mixins/repoDetailMixin'
 
 import { Context } from '@nuxt/types'
-import { AppFeatures, RepoPerms } from '~/types/permTypes'
+import { AppFeatures, RepoPerms, TeamPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { IssuePriority } from '~/types/types'
+import { IssuePriority, IssuePriorityLevel } from '~/types/types'
 
 @Component({
   components: {
@@ -163,13 +163,19 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
    * @returns {Promise<void>}
    */
   async editPriority(priorityValue: string): Promise<void> {
-    if (this.canEditPriority) {
+    if (this.issuePriority && this.canEditPriority) {
       try {
+        const { source } = this.issuePriority
+        const objectId =
+          source === IssuePriorityLevel.Owner ? this.repository.owner.id : this.repository.id
+        const level = source || IssuePriorityLevel.Repository
         this.issuePriority = await this.updateIssuePriority({
-          repositoryId: this.repository.id,
+          objectId,
+          level,
           input: {
             issueShortcode: this.$route.params.issueId,
-            repositoryId: this.repository.id,
+            objectId,
+            level,
             issuePriorityType: priorityValue
           }
         })
@@ -198,7 +204,8 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
     })
 
     this.issuePriority = await this.fetchIssuePriority({
-      repositoryId: this.repository.id,
+      objectId: this.repository.id,
+      level: IssuePriorityLevel.Repository,
       shortcode: issueId
     })
   }
@@ -225,7 +232,13 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
   }
 
   get canEditPriority(): boolean {
-    return this.$gateKeeper.repo(RepoPerms.CHANGE_ISSUE_PRIORITY, this.repoPerms.permission)
+    if (this.issuePriority) {
+      const { source } = this.issuePriority
+      return source === IssuePriorityLevel.Owner
+        ? this.$gateKeeper.team(TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY, this.teamPerms.permission)
+        : this.$gateKeeper.repo(RepoPerms.CHANGE_ISSUE_PRIORITY, this.repoPerms.permission)
+    }
+    return false
   }
 
   get isAutofixEnabled(): boolean {

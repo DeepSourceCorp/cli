@@ -1,6 +1,7 @@
 query(
-  $isRepositoryIssuePrioritySet: Boolean!
-  $repositoryId: ID!
+  $level: IssuePriorityLevel!
+  $objectId: ID!
+  $isIssuePrioritySet: Boolean
   $first: Int
   $after: String
   $sort: String
@@ -9,8 +10,9 @@ query(
   $analyzerShortcode: String
 ) {
   issuesWithPriority(
-    isRepositoryIssuePrioritySet: $isRepositoryIssuePrioritySet
-    repositoryId: $repositoryId
+    level: $level
+    objectId: $objectId
+    isIssuePrioritySet: $isIssuePrioritySet
     first: $first
     after: $after
     sort: $sort
@@ -32,8 +34,13 @@ query(
           analyzerLogo
           shortcode
         }
-        issuePriority(repositoryId: $repositoryId) {
+        issuePriority(level: $level, objectId: $objectId) {
           repositoryIssuePriority {
+            slug
+            weight
+            verboseName
+          }
+          ownerIssuePriority {
             slug
             weight
             verboseName

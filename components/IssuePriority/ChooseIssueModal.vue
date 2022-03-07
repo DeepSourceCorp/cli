@@ -13,6 +13,7 @@
         <div class="flex gap-x-2 mr-2">
           <issue-priority-filter
             v-model="analyzerType"
+            :level="level"
             button-background="bg-ink-200 hover:bg-ink-100"
           />
         </div>
@@ -130,7 +131,7 @@ import { escapeHtml } from '~/utils/string'
 import PaginationMixin from '~/mixins/paginationMixin'
 import IssuePriorityListMixin from '~/mixins/issuePriorityListMixin'
 import { resolveNodes } from '~/utils/array'
-import { Issue } from '~/types/types'
+import { Issue, IssuePriorityLevel } from '~/types/types'
 
 /**
  * Modal component to set priorities for issues
@@ -152,8 +153,11 @@ import { Issue } from '~/types/types'
   }
 })
 export default class ChooseIssueModal extends mixins(IssuePriorityListMixin, PaginationMixin) {
-  @Prop()
-  repoId: string
+  @Prop({ required: true })
+  objectId: string
+
+  @Prop({ required: true, default: IssuePriorityLevel.Repository })
+  level: IssuePriorityLevel
 
   public query = ''
   public analyzerType = ''
@@ -176,8 +180,9 @@ export default class ChooseIssueModal extends mixins(IssuePriorityListMixin, Pag
    */
   async refetchIssues(): Promise<void> {
     await this.fetchIssuesWithPriority({
-      isRepositoryIssuePrioritySet: false,
-      repositoryId: this.repoId,
+      isIssuePrioritySet: false,
+      objectId: this.objectId,
+      level: this.level,
       q: this.query,
       first: this.perPageCount,
       offset: this.queryOffset,
@@ -198,10 +203,12 @@ export default class ChooseIssueModal extends mixins(IssuePriorityListMixin, Pag
   async setPriority(shortcode: string, priorityValue: string): Promise<void> {
     try {
       await this.updateIssuePriority({
-        repositoryId: this.repoId,
+        objectId: this.objectId,
+        level: this.level,
         input: {
           issueShortcode: shortcode,
-          repositoryId: this.repoId,
+          objectId: this.objectId,
+          level: this.level,
           issuePriorityType: priorityValue
         }
       })

@@ -28,15 +28,19 @@
         <template v-if="issuePriority">
           <priority-type-select
             v-if="canEditPriority"
-            :priority="issuePriority.repositoryIssuePriority.slug"
+            :priority="issuePriority.cascadingIssuePriority.slug"
+            :source="issuePriority.source"
             :verbose-title="true"
+            :show-tooltip="true"
             menu-title="Change priority"
             @priority-changed="$emit('priority-edited', $event)"
           />
           <priority-type-badge
-            v-else-if="issuePriority.repositoryIssuePriority.slug !== 'noop'"
-            :priority="issuePriority.repositoryIssuePriority.slug"
+            v-else-if="issuePriority.cascadingIssuePriority.slug !== 'noop'"
+            :source="issuePriority.source"
+            :priority="issuePriority.cascadingIssuePriority.slug"
             :verbose-title="true"
+            :show-tooltip="true"
           />
         </template>
       </div>

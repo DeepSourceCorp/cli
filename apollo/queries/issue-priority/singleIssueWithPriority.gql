@@ -1,12 +1,13 @@
-query($shortcode: String!, $repositoryId: ID!) {
+query($shortcode: String!, $objectId: ID!, $level: IssuePriorityLevel!) {
   issue(shortcode: $shortcode) {
     id
-    issuePriority(repositoryId: $repositoryId) {
-      repositoryIssuePriority {
+    issuePriority(level: $level, objectId: $objectId) {
+      cascadingIssuePriority {
         slug
         verboseName
         weight
       }
+      source
     }
   }
 }

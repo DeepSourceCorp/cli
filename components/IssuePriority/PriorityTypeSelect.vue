@@ -3,6 +3,7 @@
     <template v-slot:trigger="{ toggle }">
       <slot name="trigger" :toggle="toggle">
         <button
+          v-tooltip="{ content: tooltipCopy, delay: { show: 200, hide: 100 }, classes: 'w-64' }"
           class="flex items-center gap-x-1 bg-ink-200 rounded-full cursor-pointer focus:outline-none"
           :class="pillPadding"
           @click="toggle"
@@ -74,6 +75,7 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { ZIcon, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
 import { IssuePriorityTypes, IssuePriorityTypesVerbose } from '~/types/issuePriorityTypes'
+import { IssuePriorityLevel } from '~/types/types'
 
 /**
  * Component to select priority level for an issue.
@@ -102,6 +104,12 @@ export default class PriorityTypeSelect extends Vue {
 
   @Prop({ default: false })
   verboseTitle: boolean
+
+  @Prop({ default: IssuePriorityLevel.Repository })
+  source: IssuePriorityLevel
+
+  @Prop({ default: false })
+  showTooltip: boolean
 
   public open = false
   public currentPriority = this.priority
@@ -232,6 +240,21 @@ export default class PriorityTypeSelect extends Vue {
         return 'small'
       default:
         return 'x-small'
+    }
+  }
+
+  get tooltipCopy() {
+    if (!this.showTooltip) {
+      return ''
+    }
+
+    switch (this.source) {
+      case IssuePriorityLevel.Owner:
+        return `This issue is marked as ${this.priority} priority in team settings`
+      case IssuePriorityLevel.Repository:
+        return `This issue is marked as ${this.priority} priority in repository settings`
+      default:
+        return `This issue is marked as ${this.priority} priority in repository settings`
     }
   }
 }

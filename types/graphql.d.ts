@@ -1080,6 +1080,15 @@ declare module '*/issuesWithPriority.gql' {
 }
     
 
+declare module '*/issuesWithPriorityCount.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const issuesWithPriorityCount: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/singleIssueWithPriority.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1489,7 +1498,7 @@ declare module '*/checkIssue.gql' {
 declare module '*/concreteIssueList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const concreteIssues: DocumentNode;
 
   export default defaultDocument;
 }

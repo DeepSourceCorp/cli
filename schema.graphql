@@ -1296,7 +1296,7 @@ type Issue implements MaskPrimaryKeyNode {
   descriptionRendered: String
   shortDescription: String
   shortDescriptionRendered: String
-  issuePriority(repositoryId: ID!): IssuePriority
+  issuePriority(objectId: ID!, level: IssuePriorityLevel!): IssuePriority
 }
 
 type IssueConnection {
@@ -1320,6 +1320,9 @@ type IssuePriority implements MaskPrimaryKeyNode {
   repository: Repository
   owner: Owner
   repositoryIssuePriority: IssuePriorityType
+  ownerIssuePriority: IssuePriorityType
+  cascadingIssuePriority: IssuePriorityType
+  source: IssuePriorityLevel
 }
 
 type IssuePriorityConnection {
@@ -1330,6 +1333,12 @@ type IssuePriorityConnection {
 type IssuePriorityEdge {
   node: IssuePriority
   cursor: String!
+}
+
+enum IssuePriorityLevel {
+  REPOSITORY
+  OWNER
+  ENTERPRISE
 }
 
 type IssuePrioritySetting {
@@ -1607,7 +1616,6 @@ type OwnerSetting implements MaskPrimaryKeyNode {
   alive: Boolean
   owner: Owner!
   publicKey: String
-  privateKey: String
   issueTypeSettings: [IssueTypeSetting]
 }
 
@@ -1644,7 +1652,7 @@ type Query {
   oauth: SocialAuthURL
   issuePriorityType(offset: Int, before: String, after: String, first: Int, last: Int, weight: Int, verboseName: String, slug: String): IssuePriorityTypeConnection
   issue(shortcode: String!): Issue
-  issuesWithPriority(isRepositoryIssuePrioritySet: Boolean!, repositoryId: ID, analyzerShortcode: String, offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection
+  issuesWithPriority(isIssuePrioritySet: Boolean = false, objectId: ID!, level: IssuePriorityLevel!, analyzerShortcode: String, offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection
   transactions(userId: Int!, offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection
   owner(login: String!, provider: VCSProviderChoices!): Owner
   team(login: String!, provider: VCSProviderChoices!): Team
@@ -2587,7 +2595,9 @@ scalar UUID
 
 input UnsetIssuePriorityInput {
   issueShortcode: String!
-  repositoryId: ID
+  level: IssuePriorityLevel!
+  objectId: ID!
+  issuePriorityType: String
   clientMutationId: String
 }
 
@@ -2730,8 +2740,9 @@ type UpdateGroupTeamRolePayload {
 
 input UpdateIssuePriorityInput {
   issueShortcode: String!
-  issuePriorityType: ID!
-  repositoryId: ID
+  level: IssuePriorityLevel!
+  objectId: ID!
+  issuePriorityType: String
   clientMutationId: String
 }
 
@@ -2786,7 +2797,7 @@ input UpdateRepositorySettingsInput {
   isSubmoduleEnabled: Boolean
   showInDiscover: Boolean
   analyzeChangesetOnly: Boolean
-  keepExistingIssues: Boolean
+  keepExistingIssues: Boolean = true
   issueTypeSettings: [IssueTypeSettingInput]
   issuePrioritySettings: [RepositoryIssuePrioritySettingsInput]
   id: ID!

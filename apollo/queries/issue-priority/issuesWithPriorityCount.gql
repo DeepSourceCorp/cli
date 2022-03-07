@@ -1,0 +1,9 @@
+query issuesWithPriorityCount(
+  $level: IssuePriorityLevel!
+  $objectId: ID!
+  $isIssuePrioritySet: Boolean
+) {
+  issuesWithPriority(level: $level, objectId: $objectId, isIssuePrioritySet: $isIssuePrioritySet) {
+    totalCount
+  }
+}

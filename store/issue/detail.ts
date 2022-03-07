@@ -28,7 +28,8 @@ import {
   SilenceRule,
   SilenceRuleConnection,
   IssuePriority,
-  UpdateIssuePriorityInput
+  UpdateIssuePriorityInput,
+  IssuePriorityLevel
 } from '~/types/types'
 import { RootState } from '~/store'
 import { resolveNodes } from '~/utils/array'
@@ -236,8 +237,10 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
     this: Store<RootState>,
     injectee: IssueDetailActionContext,
     args: {
-      repositoryId: string
+      objectId: string
+      level: IssuePriorityLevel
       shortcode: string
+      refetch?: boolean
     }
   ) => Promise<IssuePriority | null>
   [IssueDetailActions.UPDATE_ISSUE_PRIORITY]: (
@@ -245,7 +248,8 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
     injectee: IssueDetailActionContext,
     args: {
       input: UpdateIssuePriorityInput
-      repositoryId: string
+      objectId: string
+      level: IssuePriorityLevel
       refetch?: boolean
     }
   ) => Promise<IssuePriority | null>
@@ -373,10 +377,11 @@ export const actions: IssueDetailModuleActions = {
   async [IssueDetailActions.FETCH_ISSUE_PRIORITY]({ commit }, args) {
     commit(IssueDetailMutations.SET_LOADING, true)
     try {
-      const issueResponse = await this.$fetchGraphqlData(SingleIssueWithPriorityGQLQuery, {
-        shortcode: args.shortcode,
-        repositoryId: args.repositoryId
-      })
+      const issueResponse = await this.$fetchGraphqlData(
+        SingleIssueWithPriorityGQLQuery,
+        args,
+        true
+      )
       return issueResponse?.data?.issue?.issuePriority
     } catch (e) {
       commit(IssueDetailMutations.SET_ERROR, e as GraphqlError)

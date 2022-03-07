@@ -15,7 +15,8 @@ import {
   IgnoreCheckIssuePayload,
   SilenceRule,
   IssuePriority,
-  UpdateIssuePriorityInput
+  UpdateIssuePriorityInput,
+  IssuePriorityLevel
 } from '~/types/types'
 
 const issueStore = namespace('issue/detail')
@@ -66,14 +67,16 @@ export default class IssueDetailMixin extends Vue {
 
   @issueStore.Action(IssueDetailActions.FETCH_ISSUE_PRIORITY)
   fetchIssuePriority: (args: {
-    repositoryId: string
+    objectId: string
+    level: IssuePriorityLevel
     shortcode: string
   }) => Promise<IssuePriority | null>
 
   @issueStore.Action(IssueDetailActions.UPDATE_ISSUE_PRIORITY)
   updateIssuePriority: (args: {
     input: UpdateIssuePriorityInput
-    repositoryId: string
+    objectId: string
+    level: IssuePriorityLevel
   }) => Promise<IssuePriority | null>
 
   // Mutations

@@ -3,18 +3,22 @@ import { ActionContext, ActionTree, GetterTree, MutationTree, Store } from 'vuex
 import UpdateIssuePriorityGQLMutation from '~/apollo/mutations/issue-priority/updateIssuePriority.gql'
 import UnsetIssuePriorityGQLMutation from '~/apollo/mutations/issue-priority/unsetIssuePriority.gql'
 import IssuesWithPriorityGQLQuery from '~/apollo/queries/issue-priority/issuesWithPriority.gql'
+import IssuesWithPriorityCountGQLQuery from '~/apollo/queries/issue-priority/issuesWithPriorityCount.gql'
 
 import { RootState } from '~/store'
-import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import {
   IssueConnection,
+  IssuePriorityLevel,
   UnsetIssuePriorityInput,
   UnsetIssuePriorityPayload,
-  UpdateIssuePriorityInput
+  UpdateIssuePriorityInput,
+  UpdateIssuePriorityPayload
 } from '~/types/types'
 
 export enum IssuePriorityListActions {
-  FETCH_ISSUES_WITH_PRIORITY = 'fetchIssuesWithPrioritySettings',
+  FETCH_ISSUES_WITH_PRIORITY = 'fetchIssuesWithPriority',
+  FETCH_ISSUES_WITH_PRIORITY_COUNT = 'fetchIssuesWithPriorityCount',
   UPDATE_ISSUE_PRIORITY = 'updateIssuePriority',
   UNSET_ISSUE_PRIORITY = 'unsetIssuePriority'
 }
@@ -24,7 +28,6 @@ export enum IssuePriorityListMutations {
 }
 
 export interface IssuePriorityListModuleState {
-  error: GraphqlError
   issuesWithPriority: IssueConnection
 }
 
@@ -35,7 +38,6 @@ export interface IssuePriorityListModuleState {
  */
 export const state = (): IssuePriorityListModuleState => ({
   ...(<IssuePriorityListModuleState>{
-    error: {},
     issuesWithPriority: {}
   })
 })
@@ -44,14 +46,14 @@ export type IssuePriorityListActionContext = ActionContext<IssuePriorityListModu
 
 export const getters: GetterTree<IssuePriorityListModuleState, RootState> = {}
 
-interface RunListModuleMutations extends MutationTree<IssuePriorityListModuleState> {
+interface IssuePriorityListModuleMutations extends MutationTree<IssuePriorityListModuleState> {
   [IssuePriorityListMutations.SET_ISSUES_WITH_PRIORITY]: (
     state: IssuePriorityListModuleState,
     issuesWithPriority: IssueConnection
   ) => void
 }
 
-export const mutations: RunListModuleMutations = {
+export const mutations: IssuePriorityListModuleMutations = {
   [IssuePriorityListMutations.SET_ISSUES_WITH_PRIORITY]: (state, issuesWithPriority) => {
     state.issuesWithPriority = Object.assign({}, state.issuesWithPriority, issuesWithPriority)
   }
@@ -63,8 +65,9 @@ interface IssuePriorityListModuleActions
     this: Store<RootState>,
     injectee: IssuePriorityListActionContext,
     args: {
-      isRepositoryIssuePrioritySet: boolean
-      repositoryId?: string
+      isIssuePrioritySet: boolean
+      objectId: string
+      level: IssuePriorityLevel
       offset?: number
       before?: string
       after?: string
@@ -78,15 +81,27 @@ interface IssuePriorityListModuleActions
     }
   ) => Promise<void>
 
+  [IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY_COUNT]: (
+    this: Store<RootState>,
+    injectee: IssuePriorityListActionContext,
+    args: {
+      isIssuePrioritySet: boolean
+      objectId: string
+      level: IssuePriorityLevel
+      refetch?: boolean
+    }
+  ) => Promise<number>
+
   [IssuePriorityListActions.UPDATE_ISSUE_PRIORITY]: (
     this: Store<RootState>,
     injectee: IssuePriorityListActionContext,
     args: {
       input: UpdateIssuePriorityInput
-      repositoryId: string
+      objectId: string
+      level: IssuePriorityLevel
       refetch?: boolean
     }
-  ) => Promise<void>
+  ) => Promise<UpdateIssuePriorityPayload>
 
   [IssuePriorityListActions.UNSET_ISSUE_PRIORITY]: (
     this: Store<RootState>,
@@ -111,6 +126,20 @@ export const actions: IssuePriorityListModuleActions = {
       )
     } catch (e) {
       this.$toast.danger('There was an error fetching issues.')
+    }
+  },
+  async [IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY_COUNT](_, args) {
+    try {
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        IssuesWithPriorityCountGQLQuery,
+        args,
+        args.refetch
+      )
+
+      return response?.data?.issuesWithPriority?.totalCount || 0
+    } catch (e) {
+      this.$toast.danger('There was an error fetching issues.')
+      return 0
     }
   },
   async [IssuePriorityListActions.UPDATE_ISSUE_PRIORITY](_, args) {

@@ -2,6 +2,7 @@ import { Component, Vue, namespace } from 'nuxt-property-decorator'
 import { IssuePriorityListActions } from '~/store/issuePriority/list'
 import {
   IssueConnection,
+  IssuePriorityLevel,
   UnsetIssuePriorityInput,
   UnsetIssuePriorityPayload,
   UpdateIssuePriorityInput
@@ -19,8 +20,9 @@ export default class IssuePriorityListMixin extends Vue {
 
   @issuePriorityListStore.Action(IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY)
   fetchIssuesWithPriority: (args: {
-    isRepositoryIssuePrioritySet: boolean
-    repositoryId?: string
+    isIssuePrioritySet: boolean
+    objectId: string
+    level: IssuePriorityLevel
     offset?: number
     before?: string
     after?: string
@@ -33,10 +35,19 @@ export default class IssuePriorityListMixin extends Vue {
     refetch?: boolean
   }) => Promise<void>
 
+  @issuePriorityListStore.Action(IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY_COUNT)
+  fetchIssuesWithPriorityCount: (args: {
+    isIssuePrioritySet: boolean
+    objectId: string
+    level: IssuePriorityLevel
+    refetch?: boolean
+  }) => Promise<number>
+
   @issuePriorityListStore.Action(IssuePriorityListActions.UPDATE_ISSUE_PRIORITY)
   updateIssuePriority: (args: {
     input: UpdateIssuePriorityInput
-    repositoryId: string
+    objectId: string
+    level: IssuePriorityLevel
   }) => Promise<void>
 
   @issuePriorityListStore.Action(IssuePriorityListActions.UNSET_ISSUE_PRIORITY)

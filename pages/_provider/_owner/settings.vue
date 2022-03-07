@@ -80,7 +80,8 @@ import { TeamMemberRoleChoices } from '~/types/types'
         TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
         TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE,
         TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR,
-        TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE
+        TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE,
+        TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY
       ]
     }
   }
@@ -126,6 +127,13 @@ export default class TeamSettings extends mixins(
         isBeta: true,
         routeName: 'provider-owner-settings-webhooks',
         validator: this.webhooksAvailable
+      },
+      {
+        name: 'issue-priority',
+        label: 'Issue priority',
+        isBeta: true,
+        routeName: 'provider-owner-settings-issue-priority',
+        validator: this.issuePriorityAvailable
       }
     ]
   }
@@ -171,6 +179,13 @@ export default class TeamSettings extends mixins(
     return (
       this.activeDashboardContext.type === 'team' &&
       this.$gateKeeper.team(TeamPerms.MANAGE_WEBHOOKS, this.teamPerms.permission)
+    )
+  }
+
+  get issuePriorityAvailable(): boolean {
+    return (
+      this.activeDashboardContext.type === 'team' &&
+      this.$gateKeeper.team(TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY, this.teamPerms.permission)
     )
   }
 
