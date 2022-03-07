@@ -11,7 +11,6 @@ import (
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/utils"
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -34,12 +33,11 @@ func NewCmdRepoView() *cobra.Command {
 		SelectedRemote: &utils.RemoteData{},
 	}
 
-	c := color.New(color.FgCyan, color.Bold)
 	doc := heredoc.Docf(`
 		Open the DeepSource dashboard of a repository.
 
 		Run %[1]s to open the DeepSource dashboard inside the browser.
-		`, c.Sprintf("deepsource repo view"))
+		`, utils.Cyan("deepsource repo view"))
 
 	cmd := &cobra.Command{
 		Use:   "view",

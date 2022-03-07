@@ -29,12 +29,11 @@ func NewCmdConfigGenerate() *cobra.Command {
 	o := Options{}
 
 	home, _ := os.UserHomeDir()
-	c := color.New(color.FgCyan, color.Bold)
 	doc := heredoc.Docf(`
 		Generate config for the DeepSource CLI.
 
 		Configs are stored in: %[1]s
-		`, c.Sprintf(filepath.Join(home, "deepsource", "config.toml")))
+		`, utils.Cyan(filepath.Join(home, "deepsource", "config.toml")))
 
 	cmd := &cobra.Command{
 		Use:   "generate",

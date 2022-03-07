@@ -10,7 +10,6 @@ import (
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/utils"
-	"github.com/fatih/color"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -20,22 +19,21 @@ type RefreshOptions struct{}
 // NewCmdRefresh handles the refreshing of authentication credentials
 func NewCmdRefresh() *cobra.Command {
 
-	c := color.New(color.FgCyan, color.Bold)
 	doc := heredoc.Docf(`
 		Refresh stored authentication credentials.
 
 		Authentication credentials expire after a certain amount of time.
 
 		To renew the authentication credentials, use %[1]s
-		`, c.Sprintf("deepsource auth refresh"))
+		`, utils.Yellow("deepsource auth refresh"))
 
 	opts := RefreshOptions{}
 
 	cmd := &cobra.Command{
 		Use:   "refresh",
 		Short: "Refresh stored authentication credentials",
-		Long: doc,
-		Args: utils.NoArgs,
+		Long:  doc,
+		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run()
 		},

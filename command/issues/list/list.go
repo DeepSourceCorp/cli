@@ -13,7 +13,6 @@ import (
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
 	"github.com/deepsourcelabs/cli/utils"
-	"github.com/fatih/color"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
@@ -41,8 +40,6 @@ func NewCmdIssuesList() *cobra.Command {
 		LimitArg: 30,
 	}
 
-	c := color.New(color.FgCyan, color.Bold)
-	y := color.New(color.FgYellow, color.Bold)
 	doc := heredoc.Docf(`
 		List issues reported by DeepSource.
 
@@ -69,7 +66,7 @@ func NewCmdIssuesList() *cobra.Command {
 
 		To export listed issues to a SARIF file, use the %[14]s flag:
 		%[15]s
-		`, c.Sprintf("deepsource issues list"), y.Sprintf("--repo"), c.Sprintf("deepsource issues list --repo repo_name"), y.Sprintf("--analyzer"), c.Sprintf("deepsource issues list --analyzer python"), y.Sprintf("--limit"), c.Sprintf("deepsource issues list --limit 100"), y.Sprintf("--output-file"), c.Sprintf("deepsource issues list --output-file file_name"), y.Sprintf("--json"), c.Sprintf("deepsource issues list --json --output-file example.json"), y.Sprintf("--csv"), c.Sprintf("deepsource issues list --csv --output-file example.csv"), y.Sprintf("--sarif"), c.Sprintf("deepsource issues list --sarif --output-file example.sarif"))
+		`, utils.Cyan("deepsource issues list"), utils.Yellow("--repo"), utils.Cyan("deepsource issues list --repo repo_name"), utils.Yellow("--analyzer"), utils.Cyan("deepsource issues list --analyzer python"), utils.Yellow("--limit"), utils.Cyan("deepsource issues list --limit 100"), utils.Yellow("--output-file"), utils.Cyan("deepsource issues list --output-file file_name"), utils.Yellow("--json"), utils.Cyan("deepsource issues list --json --output-file example.json"), utils.Yellow("--csv"), utils.Cyan("deepsource issues list --csv --output-file example.csv"), utils.Yellow("--sarif"), utils.Cyan("deepsource issues list --sarif --output-file example.sarif"))
 
 	cmd := &cobra.Command{
 		Use:   "list",

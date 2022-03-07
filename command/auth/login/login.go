@@ -6,7 +6,6 @@ import (
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
-	"github.com/fatih/color"
 	"github.com/spf13/cobra"
 )
 
@@ -25,8 +24,6 @@ type LoginOptions struct {
 // NewCmdLogin handles the login functionality for the CLI
 func NewCmdLogin() *cobra.Command {
 
-	c := color.New(color.FgCyan, color.Bold)
-	y := color.New(color.FgYellow, color.Bold)
 	doc := heredoc.Docf(`
 		Log in to DeepSource using the CLI.
 
@@ -38,7 +35,7 @@ func NewCmdLogin() *cobra.Command {
 
 		Use %[3]s to authenticate with a specific DeepSource instance, for example:
 		%[4]s
-		`, y.Sprintf("--with-token"), c.Sprintf("deepsource auth login --with-token dsp_abcd"), y.Sprintf("--hostname"), c.Sprintf("deepsource auth login --hostname my_instance"))
+		`, utils.Yellow("--with-token"), utils.Cyan("deepsource auth login --with-token dsp_abcd"), utils.Yellow("--hostname"), utils.Cyan("deepsource auth login --hostname my_instance"))
 
 	opts := LoginOptions{
 		AuthTimedOut: false,

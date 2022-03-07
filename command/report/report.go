@@ -11,7 +11,6 @@ import (
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/utils"
-	"github.com/fatih/color"
 	"github.com/getsentry/sentry-go"
 	"github.com/spf13/cobra"
 )
@@ -27,8 +26,6 @@ type ReportOptions struct {
 func NewCmdReport() *cobra.Command {
 	opts := ReportOptions{}
 
-	c := color.New(color.FgCyan, color.Bold)
-	y := color.New(color.FgYellow, color.Bold)
 	doc := heredoc.Docf(`
 		Report artifacts to DeepSource.
 
@@ -40,7 +37,7 @@ func NewCmdReport() *cobra.Command {
 
 		You can flag combinations as well:
 		%[5]s
-		`, y.Sprintf("--analyzer"), c.Sprintf("deepsource report --analyzer python"), y.Sprintf("--value"), c.Sprintf("deepsource report --key value"), c.Sprintf("deepsource report --analyzer go --value-file coverage.out"))
+		`, utils.Yellow("--analyzer"), utils.Cyan("deepsource report --analyzer python"), utils.Yellow("--value"), utils.Cyan("deepsource report --key value"), utils.Cyan("deepsource report --analyzer go --value-file coverage.out"))
 
 	cmd := &cobra.Command{
 		Use:   "report",
