@@ -3,37 +3,44 @@ kind: TriggerConfig
 name: bifrost-trigger-config
 spec:
   presubmits:
-  - name: bifrost-tests
-    context: "Bifrost-Run-Tests"
-    always_run: true
-    optional: false
-    source: "pullrequest-tests.yaml"
-  - name: bifrost-builds
-    context: "Bifrost-Run-Builds"
-    always_run: true
-    optional: false
-    source: "pullrequest-builds.yaml"
-  - name: bifrost-deploy
-    context: "Bifrost-Run-Deploy"
-    always_run: false
-    optional: true
-    source: "pullrequest-deploy.yaml"
-  - name: bifrost-deploy-enterprise
-    context: "Bifrost-Run-Deploy-Enterprise"
-    always_run: false
-    optional: true
-    source: "pullrequest-deploy-enterprise.yaml"
+    - name: bifrost-tests
+      context: 'Bifrost-Run-Tests'
+      always_run: true
+      optional: false
+      source: 'pullrequest-tests.yaml'
+    - name: bifrost-builds
+      context: 'Bifrost-Run-Builds'
+      always_run: true
+      optional: false
+      source: 'pullrequest-builds.yaml'
+    - name: bifrost-rc-builds
+      context: 'Bifrost-Run-RC-Builds'
+      optional: false
+      source: 'pullrequest-builds.yaml'
+      branches:
+        - ^rc\d+\.\d+\.\d+$
+        - ^hf\d+\.\d+\.\d+$
+    - name: bifrost-deploy
+      context: 'Bifrost-Run-Deploy'
+      always_run: false
+      optional: true
+      source: 'pullrequest-deploy.yaml'
+    - name: bifrost-deploy-enterprise
+      context: 'Bifrost-Run-Deploy-Enterprise'
+      always_run: false
+      optional: true
+      source: 'pullrequest-deploy-enterprise.yaml'
   postsubmits:
-  - name: bifrost-master-builds
-    context: "Bifrost-Run-Master-Builds"
-    optional: false
-    source: "pullrequest-builds-master.yaml"
-    branches:
-    - ^main$
-    - ^master$
-  - name: bifrost-production-builds
-    context: "Bifrost-Run-Production-Builds"
-    optional: false
-    source: "pullrequest-builds-production.yaml"
-    branches:
-    - ^v\d+\.\d+\.\d+$
+    - name: bifrost-master-builds
+      context: 'Bifrost-Run-Master-Builds'
+      optional: false
+      source: 'pullrequest-builds-master.yaml'
+      branches:
+        - ^main$
+        - ^master$
+    - name: bifrost-production-builds
+      context: 'Bifrost-Run-Production-Builds'
+      optional: false
+      source: 'pullrequest-builds-production.yaml'
+      branches:
+        - ^production$
