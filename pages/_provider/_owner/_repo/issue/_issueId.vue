@@ -242,7 +242,7 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
   }
 
   get isAutofixEnabled(): boolean {
-    return this.$gateKeeper.provider(AppFeatures.AUTOFIX)
+    return this.$gateKeeper.provider(AppFeatures.AUTOFIX, this.$route.params.provider)
   }
 }
 </script>
