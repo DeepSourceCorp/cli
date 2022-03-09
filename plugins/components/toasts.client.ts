@@ -1,25 +1,8 @@
 import Vue from 'vue'
-import { VueConstructor } from 'vue/types'
 import { Inject, Context } from '@nuxt/types/app'
 
 import { Toast } from '~/components/Toast/index'
-
-// add the component w/ the specified props
-export function spawn(
-  id: string,
-  propsData: Record<string, unknown>,
-  Component: VueConstructor<Vue>,
-  Vue: VueConstructor
-) {
-  const Instance = Vue.extend(Component)
-
-  if (document) {
-    return new Instance({
-      el: document.getElementById(id)?.appendChild(document.createElement('div')),
-      propsData
-    })
-  }
-}
+import { spawn } from '~/utils/component'
 
 const containerClasses = [
   'z-1000',

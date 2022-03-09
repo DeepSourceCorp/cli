@@ -1,7 +1,7 @@
 <template>
   <section class="grid grid-cols-1 lg:grid-cols-16-fr">
     <nav
-      class="flex gap-x-8 top-24 overflow-x-auto px-4 pt-2 hide-scroll border-b border-ink-200 lg:sticky lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r lg:h-nav-sidebar"
+      class="flex px-4 pt-2 overflow-x-auto border-b gap-x-8 top-24 hide-scroll border-ink-200 lg:sticky lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r lg:h-nav-sidebar"
     >
       <template v-for="item in navItems">
         <nuxt-link
@@ -11,7 +11,7 @@
           class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
         >
           <span
-            class="p-2 rounded-md hidden group-hover:text-vanilla-100 lg:block"
+            class="hidden p-2 rounded-md group-hover:text-vanilla-100 lg:block"
             :class="$route.path.includes(item.link.join('/')) ? 'bg-ink-300' : 'text-vanilla-400'"
             >{{ item.label }}</span
           >
@@ -39,7 +39,8 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 interface TabLink {
   label: string
-  link: string | string[]
+  link: string[]
+  icon: string
   perms?: RepoPerms[]
   forTeams?: boolean
   gateFeature?: AppFeatures[]
@@ -85,15 +86,18 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     {
       label: 'General',
       link: ['settings', 'general'],
+      icon: 'settings',
       perms: [RepoPerms.CHANGE_DEFAULT_ANALYSIS_BRANCH, RepoPerms.DEACTIVATE_ANALYSIS_ON_REPOSITORY]
     },
     {
       label: 'Configuration',
+      icon: 'sliders',
       link: ['settings', 'config']
     },
     {
       label: 'Reporting',
       link: ['settings', 'reporting'],
+      icon: 'bar-chart',
       perms: [
         RepoPerms.VIEW_DSN,
         RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
@@ -104,31 +108,48 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     },
     {
       label: 'Issue priority',
+      icon: 'flag',
       link: ['settings', 'issue-priority'],
       perms: [RepoPerms.CHANGE_ISSUE_PRIORITY]
     },
-    { label: 'Badges', link: ['settings', 'badges'] },
+    { label: 'Badges', icon: 'droplet', link: ['settings', 'badges'] },
     {
       label: 'Autofix settings',
       link: ['settings', 'autofix'],
+      icon: 'autofix',
       perms: [RepoPerms.INSTALL_AUTOFIX_APP, RepoPerms.CREATE_AUTOFIXES],
       gateFeature: [AppFeatures.AUTOFIX]
     },
-    { label: 'Ignore rules', link: ['settings', 'ignore-rules'] },
+    { label: 'Ignore rules', link: ['settings', 'ignore-rules'], icon: 'list' },
     {
       label: 'SSH access',
       link: ['settings', 'ssh-access'],
+      icon: 'key',
       perms: [RepoPerms.GENERATE_SSH_KEY_PAIR]
     },
-
-    { label: 'Audit log', link: ['settings', 'audit-log'], perms: [RepoPerms.VIEW_AUDIT_LOGS] },
+    {
+      label: 'Audit log',
+      icon: 'list',
+      link: ['settings', 'audit-log'],
+      perms: [RepoPerms.VIEW_AUDIT_LOGS]
+    },
     {
       label: 'Repository members',
+      icon: 'users',
       link: ['settings', 'repo-members'],
       perms: [RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS],
       forTeams: true
     }
   ]
+
+  /**
+   * Mounted hook
+   *
+   * @return {void}
+   */
+  mounted(): void {
+    this.setCommands()
+  }
 
   get isTeamAccount(): boolean {
     if (this.activeDashboardContext && this.activeDashboardContext.type) {
@@ -137,6 +158,11 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     return true
   }
 
+  /**
+   * Set meta tags
+   *
+   * @return {Record<string, string>}
+   */
   head(): Record<string, string> {
     const { repo, owner } = this.$route.params
     return {
@@ -146,6 +172,40 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     }
   }
 
+  /**
+   * Set commands for current context
+   *
+   *  @return {void}
+   */
+  setCommands(): void {
+    this.$palette.registerCommands(
+      this.navItems
+        .filter((opt) => this.isNavLinkVisible(opt))
+        .map((opt) => {
+          return {
+            id: `open-${opt.link.join('-')}-settings`,
+            label: `<span class="text-vanilla-400">Repo Settings</span> / ${opt.label}`,
+            icon: opt.icon,
+            scope: 'repo',
+            condition: (route) => {
+              return Boolean(this.$route.name?.startsWith('provider-owner-repo-settings'))
+            },
+            action: () => {
+              this.$router.push(this.$generateRoute(opt.link))
+            }
+          }
+        }),
+      'provider-owner-repo-settings'
+    )
+  }
+
+  /**
+   * Validate if Navlinks should be shown or not
+   *
+   * @param {TabLink} item
+   *
+   * @return {boolean}
+   */
   isNavLinkVisible(item: TabLink): boolean {
     if (Array.isArray(item.gateFeature)) {
       return this.$gateKeeper.provider(item.gateFeature)

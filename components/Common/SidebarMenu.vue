@@ -90,11 +90,28 @@ export default class SidebarMenu extends Vue {
   public isOpen = false
   public largeScreenSize = 1024
 
+  /**
+   * Mounted component hook
+   *
+   * @return {void}
+   */
   mounted(): void {
     this.$root.$on('ui:show-sidebar-menu', () => {
       this.isCollapsed = false
       this.isOpen = true
       this.$emit('open')
+    })
+
+    this.$root.$on('ui:hide-sidebar-menu', () => {
+      this.isCollapsed = true
+      this.isOpen = false
+      this.$emit('collapse')
+    })
+
+    this.$root.$on('ui:toggle-sidebar-menu', () => {
+      this.isCollapsed = !this.isCollapsed
+      this.isOpen = !this.isOpen
+      this.$emit(this.isCollapsed ? 'collapse' : 'open')
     })
 
     this.$nextTick(() => {
@@ -106,6 +123,17 @@ export default class SidebarMenu extends Vue {
         }
       })
     })
+  }
+
+  /**
+   * Before destroy component hook
+   *
+   * @return {void}
+   */
+  beforeDestroy(): void {
+    this.$root.$off('ui:show-sidebar-menu')
+    this.$root.$off('ui:hide-sidebar-menu')
+    this.$root.$off('ui:toggle-sidebar-menu')
   }
 
   get directionClasses(): string {
@@ -165,12 +193,27 @@ export default class SidebarMenu extends Vue {
     this.$emit('open')
   }
 
+  /**
+   * Check if a element is a parent of the other
+   *
+   * @param {HTMLElement} parentCandidate
+   * @param {HTMLElement} target
+   *
+   * @return {boolean}
+   */
   containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
     return Boolean(
       parentCandidate && (target === parentCandidate || parentCandidate.contains(target))
     )
   }
 
+  /**
+   * Close the sidebar
+   *
+   * @param {Event} event
+   *
+   * @return {void}
+   */
   public closeSidebar(event: Event): void {
     if (event && event.target) {
       const target = event.target as HTMLElement
@@ -186,6 +229,11 @@ export default class SidebarMenu extends Vue {
     }
   }
 
+  /**
+   * toggle the ui state and emit close event
+   *
+   * @return {any}
+   */
   public toggleClose() {
     this.isOpen = false
     this.$emit('close')

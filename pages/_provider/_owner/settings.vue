@@ -48,6 +48,15 @@ import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 import { TeamMemberRoleChoices } from '~/types/types'
 
+export interface LinkOptions {
+  name: string
+  label: string
+  icon: string
+  routeName: string
+  validator: boolean
+  isBeta?: boolean
+}
+
 @Component({
   components: {
     ZTab,
@@ -95,41 +104,47 @@ export default class TeamSettings extends mixins(
     return this.$generateRoute(['settings', candidate])
   }
 
-  get settingsOptions() {
+  get settingsOptions(): LinkOptions[] {
     return [
       {
         name: 'billing',
         label: 'Billing',
+        icon: 'credit-card',
         routeName: 'provider-owner-settings-billing',
         validator: this.showBilling
       },
       {
         name: 'access',
         label: 'Access control',
+        icon: 'lock',
         routeName: 'provider-owner-settings-access',
         validator: this.canViewAccessControl
       },
       {
         name: 'ssh-access',
         label: 'SSH access',
+        icon: 'key',
         routeName: 'provider-owner-settings-ssh-access',
         validator: this.canGenerateSSHKeyPair
       },
       {
         name: 'auto-onboard',
         label: 'Auto Onboard',
+        icon: 'fast-forward',
         routeName: 'provider-owner-settings-auto-onboard',
         validator: this.autoOnboardAvailable
       },
       {
         name: 'webhooks',
         label: 'Webhooks',
+        icon: 'corner-up-right',
         isBeta: true,
         routeName: 'provider-owner-settings-webhooks',
         validator: this.webhooksAvailable
       },
       {
         name: 'issue-priority',
+        icon: 'flag',
         label: 'Issue priority',
         isBeta: true,
         routeName: 'provider-owner-settings-issue-priority',
@@ -164,6 +179,17 @@ export default class TeamSettings extends mixins(
     }
     await this.fetchOwnerDetails(params)
     await this.fetchTeamSettings(params)
+  }
+
+  /**
+   * Mounted hook
+   *
+   * @return {any}
+   */
+  mounted() {
+    this.$nextTick(() => {
+      this.setCommands()
+    })
   }
 
   get autoOnboardAvailable(): boolean {
@@ -204,6 +230,39 @@ export default class TeamSettings extends mixins(
       description:
         'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
     }
+  }
+
+  /**
+   * Set commands for current context
+   *
+   *  @return {void}
+   */
+  setCommands(): void {
+    const { owner } = this.$route.params
+
+    this.$palette.registerCommands(
+      this.settingsOptions
+        .filter((opt) => opt.validator)
+        .map((opt) => {
+          return {
+            id: `open-${opt.routeName}-settings`,
+            label: `<span class="text-vanilla-400">Settings</span> / ${opt.label}`,
+            hint: `${owner}`,
+            icon: opt.icon,
+            scope: 'owner',
+            condition: (route) => {
+              if (this.activeDashboardContext.type === 'team') {
+                return route.name?.startsWith('provider-owner-settings') ?? false
+              }
+              return false
+            },
+            action: () => {
+              this.$router.push(this.$generateRoute(['settings', opt.name], false))
+            }
+          }
+        }),
+      this.$route.name ?? ''
+    )
   }
 }
 </script>

@@ -30,7 +30,8 @@
       "cookie-universal-nuxt/types",
       "@nuxtjs/sentry",
       "highlight.js/types",
-      "nuxt-stripe-module"
+      "nuxt-stripe-module",
+      "./node_modules/user-agent-data-types"
     ],
     "typeRoots": ["./node_modules/@types", "./types"]
   },

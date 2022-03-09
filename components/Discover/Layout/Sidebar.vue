@@ -236,15 +236,31 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
     this.isOpen = true
   }
 
+  closeSidebar() {
+    this.isCollapsed = true
+    this.collapsedSidebar = true
+    this.isOpen = false
+  }
+
+  toggleSidebar() {
+    this.isCollapsed = !this.isCollapsed
+    this.collapsedSidebar = !this.collapsedSidebar
+    this.isOpen = !this.isOpen
+  }
+
   mounted() {
     if (this.loggedIn) {
       this.fetchWatchedRepositoriesCount()
     }
     this.$root.$on('ui:show-sidebar-menu', this.openSidebar)
+    this.$root.$on('ui:hide-sidebar-menu', this.closeSidebar)
+    this.$root.$on('ui:toggle-sidebar-menu', this.toggleSidebar)
   }
 
   beforeDestroy() {
     this.$root.$off('ui:show-sidebar-menu', this.openSidebar)
+    this.$root.$off('ui:hide-sidebar-menu', this.closeSidebar)
+    this.$root.$off('ui:toggle-sidebar-menu', this.toggleSidebar)
   }
 
   closeMenu(event: Event): void {

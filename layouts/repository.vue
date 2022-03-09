@@ -33,7 +33,7 @@
             repository.errorCode !== 3003 &&
             !$fetchState.pending
           "
-          class="px-4 pt-4"
+          class="px-4"
         >
           <z-alert v-if="repository.errorCode === 3007" type="danger" :dismissible="true">
             <div class="mr-2 space-y-4 md:space-y-0 md:flex md:items-center md:justify-between">
@@ -61,7 +61,7 @@
           </z-alert>
         </div>
         <!-- Check if the repository has been analyzed or not -->
-        <Nuxt v-if="isAnalyzed || allowedOnBroken || $fetchState.pending" />
+        <Nuxt ref="page" v-if="isAnalyzed || allowedOnBroken || $fetchState.pending" />
         <!-- If not analyzed and an error code is present -->
         <div v-else-if="repository.errorCode" class="p-5">
           <repo-inactive
@@ -97,6 +97,14 @@
     </div>
     <!-- remove this later and inject via zeal -->
     <portal-target class="z-1000" name="modal" @change="modalToggled"></portal-target>
+    <client-only>
+      <palette
+        v-if="showPalette && allowPalette"
+        @close="showPalette = false"
+        @toggle="showPalette = !showPalette"
+        class="z-1000"
+      ></palette>
+    </client-only>
   </div>
 </template>
 
@@ -119,6 +127,7 @@ import {
 import { RunStatus } from '~/types/types'
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import PaletteMixin from '~/mixins/paletteMixin'
 
 /**
  * Layout file for `repository` views.
@@ -151,7 +160,8 @@ export default class RepositoryLayout extends mixins(
   InstallAutofixMixin,
   RepoDetailMixin,
   PortalMixin,
-  RoleAccessMixin
+  RoleAccessMixin,
+  PaletteMixin
 ) {
   private pollingId = 0
 
@@ -198,6 +208,8 @@ export default class RepositoryLayout extends mixins(
     this.$socket.$on('repo-config-committed', this.refetchData)
     this.$socket.$on('repo-config-updated', this.refetchData)
     this.$socket.$on('autofix-installation-complete', this.refetchData)
+    this.setPaletteEvent()
+    this.registerCommands()
   }
 
   /**
@@ -211,6 +223,7 @@ export default class RepositoryLayout extends mixins(
     this.$socket.$off('repo-config-updated', this.refetchData)
     this.$socket.$off('autofix-installation-complete', this.refetchData)
     clearTimeout(this.pollingId)
+    this.removePaletteEvent()
   }
 
   /**
@@ -300,6 +313,105 @@ export default class RepositoryLayout extends mixins(
         }
       }, POLLING_INTERVAL)
     }
+  }
+
+  /**
+   * Register repo level commands
+   *
+   * @return {any}
+   */
+  registerCommands() {
+    this.$palette.registerCommands(
+      [
+        {
+          id: 'open-repo-issues',
+          label: `Issues`,
+          shortkey: 'I',
+          icon: `flag`,
+          scope: 'repo',
+          condition: (route) => {
+            return route.name ? !route.name?.startsWith('provider-owner-repo-issues') : true
+          },
+          keywords: ['issues', 'bugs', 'risks'],
+          action: () => {
+            this.$router.push(this.$generateRoute(['issues']))
+          }
+        },
+        {
+          id: 'open-repo-autofix',
+          label: `Autofix`,
+          shortkey: 'A',
+          icon: `autofix`,
+          keywords: ['autofix', 'fix'],
+          scope: 'repo',
+          condition: (route) => {
+            return route.name ? !route.name?.startsWith('provider-owner-repo-autofix') : true
+          },
+          action: () => {
+            this.$router.push(this.$generateRoute(['autofix']))
+          }
+        },
+        {
+          id: 'open-repo-metrics',
+          label: `Metrics`,
+          shortkey: 'M',
+          icon: `bar-chart`,
+          keywords: ['metrics', 'stats', 'numbers', 'charts'],
+          scope: 'repo',
+          condition: (route) => {
+            return route.name ? !route.name?.startsWith('provider-owner-repo-metrics') : true
+          },
+          action: () => {
+            this.$router.push(this.$generateRoute(['metrics']))
+          }
+        },
+        {
+          id: 'open-repo-run-history',
+          label: `Analysis history`,
+          icon: `history`,
+          shortkey: ['H', 'A'],
+          keywords: ['metrics', 'stats', 'numbers', 'charts'],
+          scope: 'repo',
+          condition: (route) => {
+            return route.name ? !route.name?.startsWith('provider-owner-repo-history-runs') : true
+          },
+          action: () => {
+            this.$router.push(this.$generateRoute(['history', 'runs']))
+          }
+        },
+        {
+          id: 'open-repo-transforms-history',
+          label: `Transforms history`,
+          shortkey: ['H', 'T'],
+          icon: `history`,
+          keywords: ['metrics', 'stats', 'numbers', 'charts'],
+          scope: 'repo',
+          condition: (route) => {
+            return route.name
+              ? !route.name?.startsWith('provider-owner-repo-history-transforms')
+              : true
+          },
+          action: () => {
+            this.$router.push(this.$generateRoute(['history', 'transforms']))
+          }
+        },
+        {
+          id: 'open-repo-settings',
+          label: `Settings`,
+          icon: `settings`,
+          shortkey: ['Opt', 'S'],
+          keywords: ['settings', 'badges', 'audit', 'members', 'configuration'],
+          scope: 'repo',
+          condition: (route) => {
+            return route.name ? !route.name?.startsWith('provider-owner-repo-settings') : true
+          },
+          action: () => {
+            this.$router.push(this.$generateRoute(['settings']))
+          }
+        }
+      ],
+      'provider-owner-repo'
+    )
   }
 }
 </script>

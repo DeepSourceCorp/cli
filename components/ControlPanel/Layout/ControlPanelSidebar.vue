@@ -1,21 +1,7 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <nav
-    class="
-      fixed
-      top-0
-      z-50
-      flex flex-col
-      h-screen
-      duration-200
-      border-r
-      lg:sticky lg:left-0
-      transition-width
-      transform-gpu
-      border-ink-200
-      group
-      bg-ink-400
-    "
+    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-ink-200 group bg-ink-400"
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
@@ -62,19 +48,7 @@
       <div class="absolute -top-2.5 -right-2.5 md:group-hover:block hidden">
         <button
           @click="toggleSidebarCollapse"
-          class="
-            flex
-            items-center
-            justify-center
-            w-5
-            h-5
-            rounded-full
-            cursor-pointer
-            bg-ink-100
-            hover:bg-slate
-            group
-            focus:outline-none
-          "
+          class="flex items-center justify-center w-5 h-5 rounded-full cursor-pointer bg-ink-100 hover:bg-slate group focus:outline-none"
         >
           <z-icon
             icon="chevron-left"
@@ -118,10 +92,17 @@ export default class Sidebar extends mixins(ControlPanelBaseMixin) {
       this.collapsedSidebar = false
       this.isOpen = true
     })
+
+    this.$root.$on('ui:toggle-sidebar-menu', () => {
+      this.isCollapsed = !this.isCollapsed
+      this.collapsedSidebar = !this.collapsedSidebar
+      this.isOpen = !this.isOpen
+    })
   }
 
   beforeDestroy() {
     this.$root.$off('ui:show-sidebar-menu')
+    this.$root.$off('ui:toggle-sidebar-menu')
   }
 
   get mainControlPanelMenus(): ControlPanelRouteT[] {

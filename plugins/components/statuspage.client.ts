@@ -1,26 +1,9 @@
 import dayjs from 'dayjs'
 import Vue from 'vue'
-import { VueConstructor } from 'vue/types'
 
 import { StatusToast } from '~/components/StatusPage/index'
-import { ScheduledMaintainenceT, StatusToastPropsT } from '~/types/statuspageTypes'
-
-// add the component w/ the specified props
-export function spawn(
-  id: string,
-  propsData: StatusToastPropsT,
-  Component: VueConstructor<Vue>,
-  Vue: VueConstructor
-) {
-  const Instance = Vue.extend(Component)
-
-  if (document) {
-    return new Instance({
-      el: document.getElementById(id)?.appendChild(document.createElement('div')),
-      propsData
-    })
-  }
-}
+import { ScheduledMaintainenceT } from '~/types/statuspageTypes'
+import { spawn } from '~/utils/component'
 
 const containerClasses = [
   'z-1000',

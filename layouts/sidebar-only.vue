@@ -11,6 +11,14 @@
     </div>
     <!-- TODO remove this later and inject via zeal -->
     <portal-target class="z-1000" name="modal" @change="modalToggled"></portal-target>
+    <client-only>
+      <palette
+        v-if="showPalette && allowPalette"
+        @close="showPalette = false"
+        @toggle="showPalette = !showPalette"
+        class="z-1000"
+      ></palette>
+    </client-only>
   </div>
 </template>
 
@@ -20,6 +28,7 @@ import { LoggedOutSidebar, MobileNav } from '@/components/Layout'
 import { Sidebar } from '@/components/Layout/Sidebar'
 import AuthMixin from '@/mixins/authMixin'
 import PortalMixin from '@/mixins/portalMixin'
+import PaletteMixin from '~/mixins/paletteMixin'
 
 @Component({
   components: {
@@ -33,7 +42,7 @@ import PortalMixin from '@/mixins/portalMixin'
     }
   }
 })
-export default class SidebarOnlyLayout extends mixins(AuthMixin, PortalMixin) {
+export default class SidebarOnlyLayout extends mixins(AuthMixin, PortalMixin, PaletteMixin) {
   @Watch('$route.path')
   resetScroll() {
     const divThatScrolls = this.$refs['scrolling-div'] as HTMLElement

@@ -94,7 +94,8 @@ export default {
     '~/plugins/helpers/directives.client.ts',
     '~/plugins/helpers/localstorage.client.ts',
     '~/plugins/components/toasts.client.ts',
-    '~/plugins/components/tooltip.ts'
+    '~/plugins/components/tooltip.ts',
+    '~/plugins/components/palette.client.ts'
   ],
 
   sentry: {

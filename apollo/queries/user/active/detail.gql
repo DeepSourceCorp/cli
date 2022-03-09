@@ -10,6 +10,7 @@ query {
     lastLogin
     isActive
     isAsgardian
+    isBetaTester
     isStaff
     dashboardContext
     availableCredits
