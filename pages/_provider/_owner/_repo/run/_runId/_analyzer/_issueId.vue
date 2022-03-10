@@ -35,6 +35,9 @@
           :lastSeend="issue.lastSeen"
           :count="check.issuesRaisedCount"
           :showMeta="true"
+          :issue-priority="issuePriority"
+          :can-edit-priority="canEditPriority"
+          @priority-edited="editPriority"
         ></issue-details-header>
       </div>
     </div>
@@ -153,13 +156,14 @@ import { SubNav } from '@/components/History/index'
 import { IssueList } from '@/components/RepoIssues'
 
 // Import State & Types
-import { Check, Maybe, CheckEdge } from '~/types/types'
+import { Check, Maybe, CheckEdge, IssuePriority, IssuePriorityLevel } from '~/types/types'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { fromNow } from '~/utils/date'
+import { RepoPerms, TeamPerms } from '~/types/permTypes'
 
 const PAGE_SIZE = 25
 
@@ -194,6 +198,7 @@ export default class RunIssueDetails extends mixins(
   public sort: Maybe<string> = null
   public pageSize = PAGE_SIZE
   public loading = true
+  public issuePriority: IssuePriority | null = null
 
   created() {
     const { page, sort, q } = this.$route.query
@@ -256,6 +261,11 @@ export default class RunIssueDetails extends mixins(
         issueCode: issueId
       })
     ])
+    this.issuePriority = await this.fetchIssuePriority({
+      objectId: this.repository.id,
+      level: IssuePriorityLevel.Repository,
+      shortcode: issueId
+    })
   }
 
   get currentCheck(): Check {
@@ -305,6 +315,48 @@ export default class RunIssueDetails extends mixins(
   get routeToPrevious(): string {
     const { params } = this.$route
     return this.$generateRoute(['run', params.runId, params.analyzer])
+  }
+
+  /**
+   * Method to edit priority of the issue
+   *
+   * @param {string} priorityValue
+   * @returns {Promise<void>}
+   */
+  async editPriority(priorityValue: string): Promise<void> {
+    if (this.issuePriority && this.canEditPriority) {
+      try {
+        const { source } = this.issuePriority
+        const objectId =
+          source === IssuePriorityLevel.Owner ? this.repository.owner.id : this.repository.id
+        const level = source || IssuePriorityLevel.Repository
+        this.issuePriority = await this.updateIssuePriority({
+          objectId,
+          level,
+          input: {
+            issueShortcode: this.$route.params.issueId,
+            objectId,
+            level,
+            issuePriorityType: priorityValue
+          }
+        })
+        this.$toast.success('Priority updated successfully.')
+      } catch (error) {
+        this.$toast.danger(
+          `An error occurred while updating priority for the issue '${this.$route.params.issueId}'. Please try again.`
+        )
+      }
+    }
+  }
+
+  get canEditPriority(): boolean {
+    if (this.issuePriority) {
+      const { source } = this.issuePriority
+      return source === IssuePriorityLevel.Owner
+        ? this.$gateKeeper.team(TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY, this.teamPerms.permission)
+        : this.$gateKeeper.repo(RepoPerms.CHANGE_ISSUE_PRIORITY, this.repoPerms.permission)
+    }
+    return false
   }
 
   head(): Record<string, string> {
