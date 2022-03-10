@@ -29,6 +29,7 @@ query(
         shortcode
         description
         analyzer {
+          id
           name
           logo
           analyzerLogo
@@ -36,11 +37,13 @@ query(
         }
         issuePriority(level: $level, objectId: $objectId) {
           repositoryIssuePriority {
+            id
             slug
             weight
             verboseName
           }
           ownerIssuePriority {
+            id
             slug
             weight
             verboseName

@@ -3,6 +3,7 @@ query($shortcode: String!, $objectId: ID!, $level: IssuePriorityLevel!) {
     id
     issuePriority(level: $level, objectId: $objectId) {
       cascadingIssuePriority {
+        id
         slug
         verboseName
         weight

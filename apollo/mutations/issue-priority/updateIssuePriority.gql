@@ -7,16 +7,19 @@ mutation($input: UpdateIssuePriorityInput!, $objectId: ID!, $level: IssuePriorit
       shortcode
       description
       analyzer {
+        id
         name
         logo
       }
       issuePriority(level: $level, objectId: $objectId) {
         repositoryIssuePriority {
+          id
           slug
           weight
           verboseName
         }
         cascadingIssuePriority {
+          id
           slug
           verboseName
           weight
