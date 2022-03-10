@@ -62,7 +62,8 @@ export default function (context: Context, inject: Inject): void {
         const viewer = await getViewerInfo()
         if (viewer && Object.keys(viewer).length) {
           const { id, email, fullName, dateJoined } = viewer
-          ph.identify(id, { email, fullName, createdAt: dateJoined })
+          const parsedId = atob(id).replace('User:', '')
+          ph.identify(parsedId, { email, fullName, createdAt: dateJoined })
         }
       }
     })

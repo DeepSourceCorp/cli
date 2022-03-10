@@ -64,7 +64,8 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     if (!this.$config.onPrem) {
       // Identify user with PostHog
       const { id, email, fullName, dateJoined } = this.$store.state.user.active.viewer as User
-      this.$posthog.identify(id, { email, fullName, createdAt: dateJoined })
+      const parsedId = atob(id).replace('User:', '')
+      this.$posthog.identify(parsedId, { email, fullName, createdAt: dateJoined })
     }
 
     const toOnboard = this.toOnboard
