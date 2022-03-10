@@ -164,6 +164,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { fromNow } from '~/utils/date'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
+import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
 
 const PAGE_SIZE = 25
 
@@ -340,7 +341,7 @@ export default class RunIssueDetails extends mixins(
             issuePriorityType: priorityValue
           }
         })
-        this.$toast.success('Priority updated successfully.')
+        this.$toast.success(`Priority updated successfully in ${IssuePriorityLevelVerbose[level]}.`)
       } catch (error) {
         this.$toast.danger(
           `An error occurred while updating priority for the issue '${this.$route.params.issueId}'. Please try again.`

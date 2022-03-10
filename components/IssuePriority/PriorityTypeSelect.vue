@@ -1,5 +1,5 @@
 <template>
-  <z-menu width="x-small" :direction="direction" @menu-toggle="open = !open">
+  <z-menu :width="width" :direction="direction" @menu-toggle="open = !open">
     <template v-slot:trigger="{ toggle }">
       <slot name="trigger" :toggle="toggle">
         <button
@@ -44,7 +44,7 @@
     </template>
 
     <template slot="body">
-      <z-menu-section :title="menuTitle" :divider="false">
+      <z-menu-section :title="menuTitle" :divider="showFooter">
         <z-menu-item
           v-for="option in priorityOptions"
           :key="option.value"
@@ -68,13 +68,29 @@
           >
         </z-menu-item>
       </z-menu-section>
+      <z-menu-section v-if="showFooter" :divider="false">
+        <z-menu-item
+          :disabled="true"
+          class="py-2 items-stretch leading-snug"
+          style="cursor: default"
+        >
+          <z-icon icon="info" size="x-small" />
+          <span class="text-vanilla-400 text-xxs -my-px -ml-px">
+            Priority will be updated in {{ prioritySourceVerbose }}.</span
+          >
+        </z-menu-item>
+      </z-menu-section>
     </template>
   </z-menu>
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { ZIcon, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
-import { IssuePriorityTypes, IssuePriorityTypesVerbose } from '~/types/issuePriorityTypes'
+import {
+  IssuePriorityLevelVerbose,
+  IssuePriorityTypes,
+  IssuePriorityTypesVerbose
+} from '~/types/issuePriorityTypes'
 import { IssuePriorityLevel } from '~/types/types'
 
 /**
@@ -96,8 +112,14 @@ export default class PriorityTypeSelect extends Vue {
   @Prop({ default: '' })
   menuTitle: string
 
+  @Prop({ default: false })
+  showFooter: boolean
+
   @Prop({ default: 'small' })
   size: string
+
+  @Prop({ default: 'x-small' })
+  width: string
 
   @Prop({ default: 'right' })
   direction: string
@@ -243,19 +265,16 @@ export default class PriorityTypeSelect extends Vue {
     }
   }
 
-  get tooltipCopy() {
+  get prioritySourceVerbose(): string {
+    return IssuePriorityLevelVerbose[this.source]
+  }
+
+  get tooltipCopy(): string {
     if (!this.showTooltip) {
       return ''
     }
 
-    switch (this.source) {
-      case IssuePriorityLevel.Owner:
-        return `This issue is marked as ${this.priority} priority in team settings`
-      case IssuePriorityLevel.Repository:
-        return `This issue is marked as ${this.priority} priority in repository settings`
-      default:
-        return `This issue is marked as ${this.priority} priority in repository settings`
-    }
+    return `This issue is marked as ${this.priority} priority in ${this.prioritySourceVerbose}.`
   }
 }
 </script>

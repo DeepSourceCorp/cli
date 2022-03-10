@@ -28,11 +28,12 @@
         <template v-if="issuePriority">
           <priority-type-select
             v-if="canEditPriority"
+            width="small"
             :priority="issuePriority.cascadingIssuePriority.slug"
             :source="issuePriority.source"
             :verbose-title="true"
             :show-tooltip="true"
-            menu-title="Change priority"
+            :show-footer="true"
             @priority-changed="$emit('priority-edited', $event)"
           />
           <priority-type-badge

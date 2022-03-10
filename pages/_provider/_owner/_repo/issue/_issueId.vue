@@ -89,6 +89,7 @@ import { Context } from '@nuxt/types'
 import { AppFeatures, RepoPerms, TeamPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { IssuePriority, IssuePriorityLevel } from '~/types/types'
+import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
 
 @Component({
   components: {
@@ -179,7 +180,7 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
             issuePriorityType: priorityValue
           }
         })
-        this.$toast.success('Priority updated successfully.')
+        this.$toast.success(`Priority updated successfully in ${IssuePriorityLevelVerbose[level]}.`)
       } catch (error) {
         this.$toast.danger(
           `An error occurred while updating priority for the issue '${this.$route.params.issueId}'. Please try again.`

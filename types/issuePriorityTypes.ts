@@ -1,3 +1,5 @@
+import { IssuePriorityLevel } from './types'
+
 export enum IssuePriorityTypes {
   LOW = 'low',
   MEDIUM = 'medium',
@@ -12,4 +14,10 @@ export enum IssuePriorityTypesVerbose {
   HIGH = 'high priority',
   NOOP = 'no priority',
   SET_PRIORITY = 'Set priority'
+}
+
+export const IssuePriorityLevelVerbose: Record<IssuePriorityLevel, string> = {
+  [IssuePriorityLevel.Repository]: "repository's settings",
+  [IssuePriorityLevel.Owner]: "team's settings",
+  [IssuePriorityLevel.Enterprise]: 'Enterprise Control Panel'
 }
