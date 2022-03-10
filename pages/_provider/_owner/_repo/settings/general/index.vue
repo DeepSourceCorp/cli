@@ -339,7 +339,7 @@ export default class General extends mixins(
   }
 
   public async updateRepositorySettings(showSuccess = true): Promise<void> {
-    if (this.repository?.id && this.repository?.issueTypeSettings && !this.isFetchingData) {
+    if (this.repository?.id && !this.isFetchingData) {
       await this.updateRepoSettings({
         input: {
           id: this.repository.id,
