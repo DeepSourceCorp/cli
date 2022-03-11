@@ -2,23 +2,25 @@
   <div class="w-full space-y-2">
     <analyzer-search
       ref="analyzer-search-component"
-      :selectedAnalyzers="selectedAnalyzers"
-      :toggleSearch="showAnalyzerList"
+      :selected-analyzers="selectedAnalyzers"
+      :toggle-search="showAnalyzerList"
       :is-processing="isProcessing"
+      :close-on-add="true"
       @addAnalyzer="addAnalyzer"
+      @removeAnalyzer="removeAnalyzer"
       @closeSearch="showAnalyzerList = false"
     />
     <template v-if="activeAnalyzers.length">
       <analyzer
-        class="z-20"
         v-for="analyzer in activeAnalyzers"
         :key="analyzer.shortcode"
+        class="z-20"
         v-bind="analyzer"
-        :analyzerLogo="analyzer.analyzerLogo"
-        :availableTransformers="analyzer.transformers"
-        :analyzerMeta="analyzer.meta"
-        :selectedAnalyzer="getConfig(analyzer.shortcode)"
-        :selectedTransformers="userConfig.transformers"
+        :analyzer-logo="analyzer.analyzerLogo"
+        :available-transformers="analyzer.transformers"
+        :analyzer-meta="analyzer.meta"
+        :selected-analyzer="getConfig(analyzer.shortcode)"
+        :selected-transformers="userConfig.transformers"
         @onClose="removeAnalyzer(analyzer)"
         @analyzersUpdated="syncAnalyzer"
         @transformersUpdated="syncTransformers"
@@ -32,12 +34,12 @@
           written your code in.
         </p>
         <z-button
-          @click="showAnalyzerList = true"
           ref="add-analyzer-button"
-          buttonType="secondary"
+          button-type="secondary"
           icon="plus"
           size="small"
           :disabled="isProcessing"
+          @click="showAnalyzerList = true"
         >
           Add Analyzer
         </z-button>
@@ -163,7 +165,7 @@ export default class AnalyzerSelector extends Vue {
       }
     })
 
-    return issueCount > 0 ? false : true
+    return !(issueCount > 0)
   }
 
   syncAnalyzer(obj: AnalyzerInterface): void {
