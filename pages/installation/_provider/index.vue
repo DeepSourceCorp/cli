@@ -67,24 +67,28 @@ interface VCSResponse {
   }
 })
 export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
-  private pollingInterval: ReturnType<typeof setInterval>
-
-  /**
-   * Start the polling interval after the component is created
-   * @return {void}
-   */
-  created(): void {
-    this.pollingInterval = setInterval(this.pollInstallationStatus, POLLING_INTERVAL)
-  }
+  private pollingInterval: ReturnType<typeof setTimeout>
+  private vcsResponse: VCSResponse | null
 
   /**
    * Mount the websocket listener
-   * @return {void}
+   *
+   * @returns {void}
    */
   mounted(): void {
+    this.pollInstallationStatus()
     this.$socket.$on('vcs-installation-complete', (data: Record<string, string>) => {
       // TODO: fix/refactor this to work with asgard
     })
+  }
+
+  /**
+   * BeforeDestroy hook for the page, clears timeout safely.
+   *
+   * @returns {void}
+   */
+  beforeDestroy(): void {
+    clearTimeout(this.pollingInterval)
   }
 
   // Desperate times require desperate measures.  We determine the provider by the route.
@@ -96,8 +100,9 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
 
   /**
    * Trigger github installation mutation
+   *
    * @param {any} payload
-   * @return {Promise<GithubInstallationLandingPayload | null>}
+   * @returns {Promise<GithubInstallationLandingPayload | null>}
    */
   async sendGithubInstallationMutation(
     payload: any
@@ -114,8 +119,9 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
 
   /**
    * Trigger github enterprise installation mutation
+   *
    * @param {any} payload
-   * @return {Promise<GithubEnterpriseInstallationLandingPayload | null>}
+   * @returns {Promise<GithubEnterpriseInstallationLandingPayload | null>}
    */
   async sendGithubEnterpriseInstallationMutation(
     payload: any
@@ -132,8 +138,9 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
 
   /**
    * Trigger bitbucket installation mutation
+   *
    * @param {any} payload
-   * @return {Promise<BitbucketInstallationLandingPayload | null>}
+   * @returns {Promise<BitbucketInstallationLandingPayload | null>}
    */
   async sendBitbucketInstallationMutation(
     payload: any
@@ -150,9 +157,10 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
 
   /**
    * handle the next action after the installation is triggered
-   * @return {any}
+   *
+   * @returns {Promise<any>}
    */
-  async handleNextAction() {
+  async handleNextAction(): Promise<any> {
     let nextUrl = '/login'
     switch (this.vcsResponse?.nextAction) {
       case NextActionChoice.Login:
@@ -178,41 +186,55 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
     }
   }
 
-  private vcsResponse: VCSResponse | null
-
   /**
    * Triggers the installation mutation and then triggers the next action
-   * @return {Promise<void>}
+   *
+   * @returns {Promise<void>}
    */
   async pollInstallationStatus(): Promise<void> {
-    const provider = this.$route.params.provider
+    /**
+     * Polling function for checking next step in setup.
+     *
+     * @returns {Promise<void>}
+     */
+    const pollingFunction = async (): Promise<void> => {
+      const { provider } = this.$route.params
 
-    const payload = { input: { queryParams: this.$route.query } }
+      const payload = { input: { queryParams: this.$route.query } }
 
-    switch (provider) {
-      case this.$providerMetaMap.gh.shortcode:
-        this.vcsResponse = (await this.sendGithubInstallationMutation(payload)) as VCSResponse
-        break
-      case this.$providerMetaMap.ghe.shortcode:
-        this.vcsResponse = (await this.sendGithubEnterpriseInstallationMutation(
-          payload
-        )) as VCSResponse
-        break
-      case this.$providerMetaMap.bb.shortcode:
-        this.vcsResponse = (await this.sendBitbucketInstallationMutation(payload)) as VCSResponse
-        break
-      default:
-        throw new Error(`Something went wrong while setting up your account.`)
-    }
+      switch (provider) {
+        case this.$providerMetaMap.gh.shortcode:
+          this.vcsResponse = (await this.sendGithubInstallationMutation(payload)) as VCSResponse
+          break
+        case this.$providerMetaMap.ghe.shortcode:
+          this.vcsResponse = (await this.sendGithubEnterpriseInstallationMutation(
+            payload
+          )) as VCSResponse
+          break
+        case this.$providerMetaMap.bb.shortcode:
+          this.vcsResponse = (await this.sendBitbucketInstallationMutation(payload)) as VCSResponse
+          break
+        default:
+          throw new Error(`Something went wrong while setting up your account.`)
+      }
 
-    // Refetch active user post installation
-    await this.refetchUser()
+      if (!this.vcsResponse?.nextAction) {
+        await new Promise(
+          (resolve) => (this.pollingInterval = setTimeout(resolve, POLLING_INTERVAL))
+        )
+        await pollingFunction()
+        return
+      }
 
-    if (!this.vcsResponse?.nextAction) {
       return
     }
 
-    clearInterval(this.pollingInterval)
+    await pollingFunction()
+
+    // Refetch active user post installation.
+    await this.refetchUser()
+
+    clearTimeout(this.pollingInterval)
 
     this.handleNextAction()
   }
