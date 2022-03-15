@@ -19,12 +19,10 @@
       <!-- Left Section -->
       <slot name="left-section">
         <div
-          class="flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly"
+          class="space-y-1 text-sm border-ink-300 text-vanilla-400"
           :class="[{ 'w-full md:w-4/5': showInfo }, customPadding]"
         >
-          <div
-            class="flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200"
-          >
+          <div class="flex items-center space-x-2 text-base font-semibold text-vanilla-200">
             <slot name="title">{{ title }} </slot>
           </div>
           <slot name="description">{{ description }}</slot>
@@ -63,7 +61,7 @@ export default class BaseCard extends Vue {
   @Prop({ default: false })
   removeDefaultStyle: boolean
 
-  @Prop({ default: 'px-4 py-3' })
+  @Prop({ default: 'p-3' })
   customPadding: string
 }
 </script>

@@ -26,16 +26,16 @@
     </template>
 
     <template slot="description">
-      <div class="flex gap-x-4 text-xs">
+      <div class="flex text-xs gap-x-4">
         <span class="flex items-center gap-x-1">
           <img
             :src="rule.creator.avatar"
             alt="Creator Avatar"
-            class="w-4 h-4 overflow-hidden inline-block rounded-full"
+            class="inline-block w-4 h-4 overflow-hidden rounded-full"
           />
           <span class="text-vanilla-400">{{ rule.creator.email }}</span>
         </span>
-        <span class="flex items-center gap-x-2 leading-none">
+        <span class="flex items-center leading-none gap-x-2">
           <z-icon icon="clock" color="vanilla-400" size="small"></z-icon>
           <span class="text-vanilla-400">Added {{ ruleCreatedTime }}</span>
         </span>
@@ -43,7 +43,7 @@
     </template>
 
     <template v-if="allowDelete" slot="info">
-      <div class="flex justify-end mt-1 h-full">
+      <div class="flex justify-end h-full mt-1">
         <z-button
           v-tooltip="'Delete this rule'"
           size="small"

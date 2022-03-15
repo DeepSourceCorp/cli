@@ -1,5 +1,5 @@
 <template>
-  <base-card :remove-default-style="true" custom-padding="py-3">
+  <base-card :remove-default-style="true">
     <template slot="title">
       <p class="text-sm font-semibold text-vanilla-300">
         <span v-html="escapeHtml(title)" />
@@ -33,7 +33,7 @@
     </template>
 
     <template v-if="canChangePriority" slot="info">
-      <div class="flex justify-end mt-1 h-full">
+      <div class="flex justify-end h-full mt-1">
         <z-button
           v-tooltip="`Remove priority assignment`"
           size="small"

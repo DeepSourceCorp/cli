@@ -1,49 +1,42 @@
 <template>
   <base-card :to="issueLink" :removeDefaultStyle="removeDefaultStyle">
-    <template slot="header"> <slot name="header"></slot> </template>
-    <template slot="left-section">
-      <div
-        class="flex flex-col text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 px-4 py-3"
+    <template slot="title">
+      <h3
+        class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
       >
-        <div class="flex items-center gap-x-2 text-base font-semibold sm:text-lg text-vanilla-200">
-          <div class="flex flex-wrap items-baseline text-lg font-normal text-vanilla-400">
-            <span
-              v-html="escapeHtml(title)"
-              :to="issueLink"
-              class="pr-2 font-semibold text-vanilla-100 line-clamp-1"
-            >
-            </span>
-            <!-- Issue ID -->
-            <span class="flex-shrink-0 block text-sm md:flex">{{ shortcode }}</span>
-          </div>
-        </div>
-        <div class="flex flex-col gap-y-1">
-          <div class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
-            <!-- Issue type -->
-            <issue-type :issueType="issueType"></issue-type>
-            <!-- First seen and last seen -->
-            <div class="flex items-center gap-x-2">
-              <z-icon icon="clock" size="x-small" color="vanilla-400" />
-              <span class="text-sm text-vanilla-400">
-                <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">
-                  {{ lastSeenDisplay }}
-                </span>
-                &mdash;
-                <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">
-                  {{ firstSeenDisplay }}
-                </span>
+        {{ escapeHtml(title) }}
+      </h3>
+      <span class="inline text-sm font-normal text-vanilla-400 md:flex md:flex-shrink-0">{{
+        shortcode
+      }}</span>
+    </template>
+    <template slot="description">
+      <div class="space-y-1.5">
+        <div class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
+          <!-- Issue type -->
+          <issue-type :issueType="issueType"></issue-type>
+          <!-- First seen and last seen -->
+          <div class="flex items-center gap-x-2">
+            <z-icon icon="clock" size="x-small" color="vanilla-400" />
+            <span class="text-sm text-vanilla-400">
+              <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">
+                {{ lastSeenDisplay }}
               </span>
-            </div>
-            <!-- Occurences in files -->
+              &mdash;
+              <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">
+                {{ firstSeenDisplay }}
+              </span>
+            </span>
           </div>
-          <div
-            class="flex items-baseline w-full gap-x-1 text-sm leading-6 text-vanilla-400 sm:w-auto"
+          <!-- Occurences in files -->
+        </div>
+        <div
+          class="flex items-baseline w-full text-sm leading-6 gap-x-1 text-vanilla-400 sm:w-auto"
+        >
+          <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0" />
+          <span class="max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis"
+            >Found in {{ seenIn }}</span
           >
-            <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0" />
-            <span class="max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis"
-              >Found in {{ seenIn }}</span
-            >
-          </div>
         </div>
       </div>
     </template>
@@ -61,7 +54,7 @@
         >
           <!-- Count -->
           <div
-            class="heading3 text-vanilla-100"
+            class="text-1.5xl font-bold leading-10 text-vanilla-100"
             v-tooltip="occurrenceCount > 1000 ? `${formatIntl(occurrenceCount)} occurrences` : ''"
           >
             {{ shortenLargeNumber(occurrenceCount) }}

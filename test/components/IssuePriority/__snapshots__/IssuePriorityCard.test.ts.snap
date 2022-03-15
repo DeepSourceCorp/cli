@@ -4,8 +4,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
@@ -34,8 +34,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
@@ -64,8 +64,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
@@ -94,8 +94,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
@@ -124,8 +124,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
@@ -147,7 +147,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
     </div>
   </div>
   <div class=\\"hidden w-full md:block md:w-1/5\\">
-    <div class=\\"flex justify-end mt-1 h-full\\">
+    <div class=\\"flex justify-end h-full mt-1\\">
       <zbutton-stub color=\\"cherry\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"minus-circle\\" data-testid=\\"unset-issue-priority\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
     </div>
   </div>
@@ -159,8 +159,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
@@ -182,7 +182,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
     </div>
   </div>
   <div class=\\"hidden w-full md:block md:w-1/5\\">
-    <div class=\\"flex justify-end mt-1 h-full\\">
+    <div class=\\"flex justify-end h-full mt-1\\">
       <zbutton-stub color=\\"cherry\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"minus-circle\\" data-testid=\\"unset-issue-priority\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
     </div>
   </div>
@@ -194,8 +194,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
@@ -217,7 +217,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
     </div>
   </div>
   <div class=\\"hidden w-full md:block md:w-1/5\\">
-    <div class=\\"flex justify-end mt-1 h-full\\">
+    <div class=\\"flex justify-end h-full mt-1\\">
       <zbutton-stub color=\\"cherry\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"minus-circle\\" data-testid=\\"unset-issue-priority\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
     </div>
   </div>
@@ -229,8 +229,8 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
       </div>
@@ -252,7 +252,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
     </div>
   </div>
   <div class=\\"hidden w-full md:block md:w-1/5\\">
-    <div class=\\"flex justify-end mt-1 h-full\\">
+    <div class=\\"flex justify-end h-full mt-1\\">
       <zbutton-stub color=\\"cherry\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"minus-circle\\" data-testid=\\"unset-issue-priority\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
     </div>
   </div>

@@ -4,8 +4,8 @@ exports[`renders TokenCard with all props 1`] = `
 "<div to=\\"\\" class=\\"block group border rounded-lg border-ink-200\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 px-4 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\"><span class=\\"text-base\\">mock-description</span></div>
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base\\">mock-description</span></div>
       <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"alert-triangle\\" size=\\"x-small\\" position=\\"\\" color=\\"honey\\"></zicon-stub> <span class=\\"text-honey\\">
               Token expires in -5 days
             </span></span> <span class=\\"flex items-center space-x-2 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
@@ -23,8 +23,8 @@ exports[`renders TokenCard with all props 2`] = `
 "<div to=\\"\\" class=\\"block group border rounded-lg border-ink-200\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 px-4 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\"><span class=\\"text-base\\">mock-description</span></div>
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base\\">mock-description</span></div>
       <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"alert-triangle\\" size=\\"x-small\\" position=\\"\\" color=\\"honey\\"></zicon-stub> <span class=\\"text-honey\\">
               Token expires in -5 days
             </span></span> <span class=\\"flex items-center space-x-2 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
@@ -42,8 +42,8 @@ exports[`renders TokenCard with all props 3`] = `
 "<div to=\\"\\" class=\\"block group border rounded-lg border-ink-200\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"flex flex-col space-y-2 text-sm border-ink-300 text-vanilla-400 justify-evenly w-full md:w-4/5 px-4 py-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold sm:text-lg text-vanilla-200\\"><span class=\\"text-base\\">mock-description</span></div>
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base\\">mock-description</span></div>
       <p class=\\"flex items-center space-x-4 text-sm\\"><span class=\\"flex items-center space-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"cherry\\"></zicon-stub> <span class=\\"text-cherry\\">Token expired on Feb 7, 2055</span></span> <span class=\\"flex items-center space-x-2 has-tooltip\\" data-original-title=\\"null\\"><zicon-stub icon=\\"trending-up\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Last used on Feb 7, 2054</span></span></p>
     </div>
     <div class=\\"hidden w-full md:block md:w-1/5 sm:border-l border-ink-300 group-hover:border-ink-200\\">

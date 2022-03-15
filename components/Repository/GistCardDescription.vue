@@ -13,7 +13,7 @@
       </div>
       <!-- Created -->
       <div class="items-center hidden space-x-2 md:flex">
-        <z-icon icon="clock" size="small" color="vanilla-400"></z-icon>
+        <z-icon icon="timer-reset" size="small" color="vanilla-400"></z-icon>
         <span class="text-sm text-vanilla-400"
           >{{ finishedInLabel }} <span v-if="showFinishedInTime"> {{ finishedString }}</span>
         </span>
