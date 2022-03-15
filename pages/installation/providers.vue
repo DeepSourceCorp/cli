@@ -1,16 +1,16 @@
 <template>
   <hero-card>
-    <h1 class="text-vanilla-100 font-bold text-2xl leading-snug">
+    <h1 class="text-2xl font-bold leading-snug text-vanilla-100">
       Create a new DeepSource workspace
     </h1>
-    <p class="text-vanilla-400 text-base mt-2">
+    <p class="mt-2 text-base text-vanilla-400">
       You can connect an existing personal or organization account.
     </p>
     <div class="flex flex-col items-center mt-6 space-y-4">
       <button
         v-for="opt in loginOptions"
         :key="opt.provider"
-        class="p-2 text-vanilla-100 w-full space-x-2 flex items-center font-medium text-base rounded-sm justify-center hover:bg-opacity-90"
+        class="flex items-center justify-center w-full p-2 space-x-2 text-base font-medium rounded-sm text-vanilla-100 hover:bg-opacity-90"
         :class="opt.bg"
         @click="triggerAccountClickAction(opt)"
       >
@@ -18,7 +18,7 @@
         <span>{{ opt.label }}</span>
       </button>
     </div>
-    <p v-if="!$config.onPrem && viewer.availableCredits" class="text-vanilla-100 text-base mt-6">
+    <p v-if="!$config.onPrem && viewer.availableCredits" class="mt-6 text-base text-vanilla-100">
       You have
       <span
         class="inline"
@@ -29,11 +29,11 @@
       >
       in available credits.
     </p>
-    <p class="text-vanilla-400 mt-4 text-sm">
+    <p class="mt-4 text-sm text-vanilla-400">
       Need help? Write to us at
       <a
         :href="`mailto:${$config.supportEmail}`"
-        class="text-juniper hover:underline cursor-pointer"
+        class="cursor-pointer text-juniper hover:underline"
         >{{ $config.supportEmail }}</a
       >.
     </p>
@@ -80,7 +80,7 @@ export default class InstallationProvider extends mixins(
   }
 
   /**
-   * Trigger account click action when adding a new repo
+   * Trigger account click action when adding a new org
    *
    * @returns void
    */
@@ -89,7 +89,8 @@ export default class InstallationProvider extends mixins(
       const nextUrl = ['', 'accounts', 'gitlab', 'login'].join('/')
       const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
       this.$nuxt.$cookies.set('bifrost-post-auth-redirect', nextUrl, {
-        expires: new Date(expiry)
+        expires: new Date(expiry),
+        path: '/'
       })
     }
 
