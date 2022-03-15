@@ -7,20 +7,16 @@
       You can connect an existing personal or organization account.
     </p>
     <div class="flex flex-col items-center mt-6 space-y-4">
-      <a
+      <button
         v-for="opt in loginOptions"
         :key="opt.provider"
-        :href="loginUrls[opt.provider]"
-        class="w-full flex items-center left-section__btn"
+        class="p-2 text-vanilla-100 w-full space-x-2 flex items-center font-medium text-base rounded-sm justify-center hover:bg-opacity-90"
+        :class="opt.bg"
+        @click="triggerAccountClickAction(opt)"
       >
-        <button
-          class="p-2 text-vanilla-100 w-full space-x-2 flex items-center font-medium text-base rounded-sm justify-center hover:bg-opacity-90"
-          :class="opt.bg"
-        >
-          <z-icon :icon="opt.icon" size="base" />
-          <span>{{ opt.label }}</span>
-        </button>
-      </a>
+        <z-icon :icon="opt.icon" size="base" />
+        <span>{{ opt.label }}</span>
+      </button>
     </div>
     <p v-if="!$config.onPrem && viewer.availableCredits" class="text-vanilla-100 text-base mt-6">
       You have
@@ -49,7 +45,7 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
-import AuthMixin from '~/mixins/authMixin'
+import AuthMixin, { LoginOption } from '~/mixins/authMixin'
 import MetaMixin from '~/mixins/metaMixin'
 
 @Component({
@@ -81,6 +77,23 @@ export default class InstallationProvider extends mixins(
       this.fetchActiveUserGitlabAccounts(),
       this.fetchActiveUserGSRProjects()
     ])
+  }
+
+  /**
+   * Trigger account click action when adding a new repo
+   *
+   * @returns void
+   */
+  triggerAccountClickAction({ provider }: LoginOption) {
+    if (provider === this.$providerMetaMap['gl'].auth) {
+      const nextUrl = ['', 'accounts', 'gitlab', 'login'].join('/')
+      const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
+      this.$nuxt.$cookies.set('bifrost-post-auth-redirect', nextUrl, {
+        expires: new Date(expiry)
+      })
+    }
+
+    window.location.href = this.loginUrls[provider]
   }
 
   get loginUrls(): Record<string, string> {
