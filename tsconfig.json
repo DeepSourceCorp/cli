@@ -31,7 +31,8 @@
       "@nuxtjs/sentry",
       "highlight.js/types",
       "nuxt-stripe-module",
-      "./node_modules/user-agent-data-types"
+      "./node_modules/user-agent-data-types",
+      "@deepsource/nuxt-websocket"
     ],
     "typeRoots": ["./node_modules/@types", "./types"]
   },

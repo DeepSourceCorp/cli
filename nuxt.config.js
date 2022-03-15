@@ -56,7 +56,9 @@ export default {
     apolloClientUri: process.env.APOLLO_CLIENT_URI,
     csrfServerUri: process.env.CSRF_SERVER_URI,
     csrfClientUri: process.env.CSRF_CLIENT_URI,
-    webSocketUri: process.env.WEB_SOCKET_URI,
+    websocket: {
+      url: process.env.WEB_SOCKET_URI || 'wss://events.deepsource.io'
+    },
     onPrem: toBool(process.env.ON_PREM),
     gitlabEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GITLAB_ENABLED) : true,
     githubEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GITHUB_ENABLED) : true,
@@ -88,7 +90,6 @@ export default {
     '~/plugins/helpers/highlight.ts',
     '~/plugins/helpers/filters.ts',
     '~/plugins/helpers/gateKeeper.ts',
-    '~/plugins/helpers/websocket.client.ts',
     '~/plugins/helpers/clipboard.client.ts',
     '~/plugins/helpers/outsideClick.client.ts',
     '~/plugins/helpers/directives.client.ts',
@@ -153,6 +154,7 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+    '@deepsource/nuxt-websocket',
     '@nuxtjs/google-fonts',
     ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
   ],

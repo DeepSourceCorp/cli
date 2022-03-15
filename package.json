@@ -38,6 +38,7 @@
     "vuedraggable": "^2.24.3"
   },
   "devDependencies": {
+    "@deepsource/nuxt-websocket": "^1.0.0",
     "@graphql-codegen/cli": "^1.19.0",
     "@graphql-codegen/fragment-matcher": "^2.0.0",
     "@graphql-codegen/typescript": "^1.17.11",
