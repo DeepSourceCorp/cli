@@ -176,6 +176,7 @@ export default class RepoDetailMixin extends Vue {
     name: string
     limit: number
     currentPageNumber: number
+    refetch?: boolean
   }) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_MANAGE_ACCESS)

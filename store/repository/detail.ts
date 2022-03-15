@@ -326,6 +326,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       name: string
       limit: number
       currentPageNumber: number
+      refetch?: boolean
     }
   ) => Promise<void>
   [RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_SSH]: (
@@ -711,13 +712,17 @@ export const actions: RepositoryDetailModuleActions = {
   },
   async [RepositoryDetailActions.FETCH_REPOSITORY_SETTINGS_IGNORE_RULES]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositorySettingsIgnoreRulesGQLQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name,
-      limit: args.limit,
-      after: this.$getGQLAfter(args.currentPageNumber, args.limit)
-    })
+    await this.$fetchGraphqlData(
+      RepositorySettingsIgnoreRulesGQLQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name,
+        limit: args.limit,
+        after: this.$getGQLAfter(args.currentPageNumber, args.limit)
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         // TODO: Toast("Successfully fetched repository settings detail -- Ignore rules")
         commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)

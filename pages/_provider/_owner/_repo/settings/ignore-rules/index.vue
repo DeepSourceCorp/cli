@@ -2,40 +2,6 @@
   <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
     <h2 class="mb-4 text-lg font-medium">Ignored rules</h2>
-    <!-- Search and filter -->
-    <!-- <div class="flex space-x-2">
-      TODO: API pending
-      <div class="flex-grow lg:min-w-80">
-        <z-input
-          v-model="searchRule"
-          icon="search"
-          backgroundColor="ink-300"
-          :showBorder="false"
-          placeholder="Search for issue title, file or issue code"
-          class="px-2 py-1.5"
-        >
-          <template slot="left">
-            <z-icon icon="search" size="small"></z-icon>
-          </template>
-        </z-input>
-      </div>
-      <z-menu direction="left" width="40" class="text-vanilla-100">
-        <button
-          slot="trigger"
-          class="inline-flex items-center px-3 pt-2 pb-1.5 space-x-2 text-sm leading-none rounded-sm shadow-sm outline-none lg:px-4 bg-ink-300 hover:bg-ink-200 text-vanilla-100 focus:outline-none"
-        >
-          <div class="flex items-center space-x-2">
-            <z-icon icon="amount-down" size="small"></z-icon>
-            <span class="hidden xl:inline-block">Filter</span>
-          </div>
-        </button>
-        <template slot="body" class="text-vanilla-200">
-          <z-menu-item v-for="filter in filters" v-bind:key="filter.name" :icon="filter.icon">
-            {{ filter.label }}
-          </z-menu-item>
-        </template>
-      </z-menu>
-    </div> -->
     <!-- List of Ignored rules -->
     <div v-if="loadingRules" class="space-y-2">
       <div v-for="idx in 3" :key="idx" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
@@ -48,28 +14,41 @@
         v-for="(rule, idx) in repository.silenceRules.edges"
         :key="rule.node.id"
         :rule="rule.node"
-        :class="idx === 0 ? 'pb-4' : 'py-4'"
+        :vertical-padding="idx === 0 ? 'pb-4' : 'py-4'"
+        @deleteRuleTriggered="openDeleteRuleModal"
       />
     </div>
     <empty-state
       v-else
       title="No ignored rules"
-      class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
+      class="py-20 border-2 border-dashed rounded-lg border-ink-200"
     />
+    <ignored-rule-delete-modal
+      :isOpen="isDeleteModalOpen"
+      :silenceRuleId="deleteRuleId"
+      @close="closeDeleteModal"
+      @delete="deleteRule"
+    ></ignored-rule-delete-modal>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 import { IgnoredRule } from '@/components/Repository/index'
+import { IgnoredRuleDeleteModal } from '@/components/Settings/index'
 import { ZDivider, ZInput, ZMenu, ZMenuItem, ZIcon } from '@deepsourcelabs/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 const repoStore = namespace('repository/detail')
 
+/**
+ * Page that shows list of rules that are ignored
+ * for a specific repository.
+ */
 @Component({
   components: {
     IgnoredRule,
+    IgnoredRuleDeleteModal,
     ZDivider,
     ZInput,
     ZMenu,
@@ -78,7 +57,7 @@ const repoStore = namespace('repository/detail')
   },
   layout: 'repository'
 })
-export default class SettingsAutofix extends mixins(RepoDetailMixin) {
+export default class IgnoreRules extends mixins(RepoDetailMixin) {
   public loadingRules = false
   public searchRule = ''
   filters: Array<Record<string, string | boolean>> = [
@@ -87,15 +66,68 @@ export default class SettingsAutofix extends mixins(RepoDetailMixin) {
     { label: 'First Seen', icon: 'first-seen', name: 'first-seen' },
     { label: 'Last Seen', icon: 'last-seen', name: 'last-seen' }
   ]
+  public deleteRuleId: string = ''
+  public isDeleteModalOpen = false
 
-  async fetch(): Promise<void> {
+  /**
+   * Method to fetch ignored rules
+   *
+   * @returns {Promise<void>}
+   * @param {boolean} refetch
+   */
+  async refetchIgnoreRules(refetch = false): Promise<void> {
     this.loadingRules = true
     await this.fetchRepositorySettingsIgnoreRules({
       ...this.baseRouteParams,
       limit: 30,
-      currentPageNumber: 1
+      currentPageNumber: 1,
+      refetch
     })
     this.loadingRules = false
+  }
+
+  /**
+   * fetch hook for vue component
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    this.refetchIgnoreRules()
+  }
+
+  /**
+   * Method to open the delete modal
+   * and set the deleteRuleId
+   *
+   * @returns {void}
+   * @param {string} ruleId
+   */
+  openDeleteRuleModal(ruleId: string): void {
+    this.deleteRuleId = ruleId
+    this.isDeleteModalOpen = true
+  }
+
+  /**
+   * Method to close the delete modal
+   * and reset the deleteRuleId
+   *
+   * @returns {void}
+   */
+  closeDeleteModal(): void {
+    this.isDeleteModalOpen = false
+    this.deleteRuleId = ''
+  }
+
+  /**
+   * Method to delete a rule
+   *
+   * @returns {Promise<void>}
+   */
+  async deleteRule(): Promise<void> {
+    await this.deleteIgnoredRule({
+      silenceRuleId: this.deleteRuleId
+    })
+    await this.refetchIgnoreRules(true)
   }
 }
 </script>
