@@ -6,21 +6,22 @@
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
     <section class="p-4 border-b border-ink-200">
-      <nuxt-link to="/discover">
+      <nuxt-link :to="homeUrl">
         <img class="h-5 mt-0.5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
       </nuxt-link>
     </section>
     <section
       class="flex flex-col justify-between flex-grow h-full p-3 space-y-3 overflow-y-scroll hide-scroll border-ink-200"
     >
-      <div class="space-y-3">
-        <sidebar-item
+      <div class="space-y-2">
+        <nuxt-link
           v-if="loggedIn"
           icon="add-watchlist"
           :active="$route.name === 'discover-watchlist'"
-          class="border border-ink-200"
           to="/discover/watchlist"
+          class="flex items-center w-full p-2 gap-x-2 text-sm leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
         >
+          <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
           <span class="flex justify-between w-full">
             <span>Watchlist</span>
             <z-tag
@@ -32,8 +33,22 @@
               {{ watchedRepositoriesCount }}
             </z-tag>
           </span>
+        </nuxt-link>
+
+        <sidebar-item
+          v-tooltip="{
+            content: isCollapsed ? activeDashboardHome : '',
+            placement: 'right'
+          }"
+          :is-collapsed="isCollapsed"
+          icon="home"
+          :to="homeUrl"
+          class="ml-px"
+        >
+          Home
         </sidebar-item>
-        <div>
+
+        <div class="ml-2">
           <span
             class="ml-0.5 text-xs leading-none font-medium tracking-wider uppercase text-vanilla-400"
           >
@@ -44,7 +59,7 @@
               <nuxt-link
                 v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
                 :key="analyzer.id"
-                class="inline-flex items-center justify-center px-2 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
+                class="inline-flex items-center justify-center pr-2 pl-1 py-1 mb-0.5 mr-0.5 space-x-1 text-sm rounded-full cursor-pointer"
                 :class="[
                   $route.params.lang === analyzer.shortcode
                     ? 'bg-robin'
@@ -278,6 +293,10 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
      * Return the current year.
      */
     return new Date().getFullYear()
+  }
+
+  get activeDashboardHome(): string {
+    return this.activeDashboardContext.type === 'team' ? 'Team home' : 'Home'
   }
 
   @Watch('isOpen')
