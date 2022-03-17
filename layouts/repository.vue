@@ -33,7 +33,7 @@
             repository.errorCode !== 3003 &&
             !$fetchState.pending
           "
-          class="px-4"
+          class="px-4 pt-4"
         >
           <z-alert v-if="repository.errorCode === 3007" type="danger" :dismissible="true">
             <div class="mr-2 space-y-4 md:space-y-0 md:flex md:items-center md:justify-between">
