@@ -66,9 +66,9 @@ function prepareNorrisPlaceholder() {
     el.classList.add('push-up')
   }, 2500)
 
-  el.querySelector('#norris')?.addEventListener('click', () => {
-    alert('Something is hatching')
-  })
+  //   el.querySelector('#norris')?.addEventListener('click', () => {
+  //     alert('Something is hatching')
+  //   })
 
   el.querySelector('#close-btn')?.addEventListener('click', () => {
     localStorage.setItem('show-norris-easter-egg', String(today))
