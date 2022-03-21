@@ -3,9 +3,8 @@
     <template slot="title">
       <h3
         class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
-      >
-        {{ escapeHtml(title) }}
-      </h3>
+        v-html="escapeHtml(title)"
+      />
       <span class="inline text-sm font-normal text-vanilla-400 md:flex md:flex-shrink-0">{{
         shortcode
       }}</span>
