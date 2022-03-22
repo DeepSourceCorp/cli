@@ -17,12 +17,14 @@
       "CheckIssue",
       "ConfigTemplate",
       "EnterpriseGroup",
+      "EnterpriseInstallationSetup",
       "EnterpriseUser",
       "FeatureDefinition",
       "GroupTeamMembership",
       "GroupUserMembership",
       "Issue",
       "IssuePriority",
+      "IssuePriorityType",
       "Owner",
       "OwnerSetting",
       "Repository",
@@ -44,10 +46,6 @@
       "Webhook",
       "WebhookEventDelivery",
       "WebhookEventTypes"
-    ],
-    "Node": [
-      "IssuePriorityType",
-      "SocialNode"
     ]
   }
 };

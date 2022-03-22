@@ -282,6 +282,7 @@ type AutoOnboardEvent implements MaskPrimaryKeyNode {
 type AutoOnboardEventConnection {
   pageInfo: PageInfo!
   edges: [AutoOnboardEventEdge]!
+  totalCount: Int
 }
 
 type AutoOnboardEventEdge {
@@ -925,7 +926,7 @@ type EnterpriseInstallationRoot {
   isScimEnabled: Boolean
 }
 
-type EnterpriseInstallationSetup {
+type EnterpriseInstallationSetup implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
@@ -952,7 +953,6 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
-  socialAuth(offset: Int, before: String, after: String, first: Int, last: Int, uid: String, uid_In: [String], provider: String, provider_In: [String]): SocialNodeConnection!
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection!
@@ -1328,6 +1328,7 @@ type IssuePriority implements MaskPrimaryKeyNode {
 type IssuePriorityConnection {
   pageInfo: PageInfo!
   edges: [IssuePriorityEdge]!
+  totalCount: Int
 }
 
 type IssuePriorityEdge {
@@ -1349,7 +1350,7 @@ type IssuePrioritySetting {
   isIgnoredToDisplay: Boolean
 }
 
-type IssuePriorityType implements Node {
+type IssuePriorityType implements MaskPrimaryKeyNode {
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
@@ -1529,10 +1530,6 @@ enum NextActionChoice {
   LOGIN
 }
 
-interface Node {
-  id: ID!
-}
-
 type Owner implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -1596,6 +1593,7 @@ type Owner implements MaskPrimaryKeyNode {
 type OwnerConnection {
   pageInfo: PageInfo!
   edges: [OwnerEdge]!
+  totalCount: Int
 }
 
 type OwnerEdge {
@@ -2123,29 +2121,8 @@ type SocialAuthURL {
 
 scalar SocialCamelJSON
 
-type SocialNode implements Node {
-  id: ID!
-  user: EnterpriseUser!
-  provider: String!
-  uid: String!
-  extraData: SocialCamelJSON
-  created: DateTime!
-  modified: DateTime!
-}
-
-type SocialNodeConnection {
-  pageInfo: PageInfo!
-  edges: [SocialNodeEdge]!
-}
-
-type SocialNodeEdge {
-  node: SocialNode
-  cursor: String!
-}
-
 type SocialType {
   id: ID!
-  user: EnterpriseUser!
   provider: String!
   uid: String!
   extraData: SocialCamelJSON
@@ -2912,7 +2889,6 @@ type User implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
-  socialAuth(offset: Int, before: String, after: String, first: Int, last: Int, uid: String, uid_In: [String], provider: String, provider_In: [String]): SocialNodeConnection!
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection!
@@ -2955,6 +2931,7 @@ type UserPreference implements MaskPrimaryKeyNode {
 type UserPreferenceConnection {
   pageInfo: PageInfo!
   edges: [UserPreferenceEdge]!
+  totalCount: Int
 }
 
 type UserPreferenceEdge {

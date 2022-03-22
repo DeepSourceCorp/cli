@@ -2,11 +2,6 @@ mutation SocialAuth($code: String!, $provider: String!) {
   socialAuth(provider: $provider, code: $code) {
     token
     tokenExpiresIn
-    social{
-      user{
-        firstName
-      }
-    }
     refreshToken
     refreshExpiresIn
   }

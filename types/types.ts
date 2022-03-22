@@ -430,6 +430,7 @@ export type AutoOnboardEventConnection = {
   __typename?: 'AutoOnboardEventConnection';
   pageInfo: PageInfo;
   edges: Array<Maybe<AutoOnboardEventEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
 };
 
 export type AutoOnboardEventEdge = {
@@ -1334,7 +1335,7 @@ export type EnterpriseInstallationRootPersonalAccountsArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
-export type EnterpriseInstallationSetup = {
+export type EnterpriseInstallationSetup = MaskPrimaryKeyNode & {
   __typename?: 'EnterpriseInstallationSetup';
   id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
@@ -1363,7 +1364,6 @@ export type EnterpriseUser = MaskPrimaryKeyNode & {
   bookmarkedIssues: RepositoryIssueConnection;
   preference?: Maybe<UserPreference>;
   IsBetaTester: Scalars['Boolean'];
-  socialAuth: SocialNodeConnection;
   auditlogSet: AuditLogConnection;
   primaryOwnerships: OwnerConnection;
   teams: TeamConnection;
@@ -1410,19 +1410,6 @@ export type EnterpriseUserBookmarkedIssuesArgs = {
   q?: Maybe<Scalars['String']>;
   severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   autofixAvailable?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type EnterpriseUserSocialAuthArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  uid?: Maybe<Scalars['String']>;
-  uid_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  provider?: Maybe<Scalars['String']>;
-  provider_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -2024,6 +2011,7 @@ export type IssuePriorityConnection = {
   __typename?: 'IssuePriorityConnection';
   pageInfo: PageInfo;
   edges: Array<Maybe<IssuePriorityEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
 };
 
 export type IssuePriorityEdge = {
@@ -2047,7 +2035,7 @@ export type IssuePrioritySetting = {
   isIgnoredToDisplay?: Maybe<Scalars['Boolean']>;
 };
 
-export type IssuePriorityType = Node & {
+export type IssuePriorityType = MaskPrimaryKeyNode & {
   __typename?: 'IssuePriorityType';
   createdAt: Scalars['DateTime'];
   modifiedAt: Scalars['DateTime'];
@@ -2754,10 +2742,6 @@ export enum NextActionChoice {
   Login = 'LOGIN'
 }
 
-export type Node = {
-  id: Scalars['ID'];
-};
-
 export type Owner = MaskPrimaryKeyNode & {
   __typename?: 'Owner';
   id: Scalars['ID'];
@@ -2950,6 +2934,7 @@ export type OwnerConnection = {
   __typename?: 'OwnerConnection';
   pageInfo: PageInfo;
   edges: Array<Maybe<OwnerEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
 };
 
 export type OwnerEdge = {
@@ -4056,33 +4041,9 @@ export type SocialAuthUrl = {
 };
 
 
-export type SocialNode = Node & {
-  __typename?: 'SocialNode';
-  id: Scalars['ID'];
-  user: EnterpriseUser;
-  provider: Scalars['String'];
-  uid: Scalars['String'];
-  extraData?: Maybe<Scalars['SocialCamelJSON']>;
-  created: Scalars['DateTime'];
-  modified: Scalars['DateTime'];
-};
-
-export type SocialNodeConnection = {
-  __typename?: 'SocialNodeConnection';
-  pageInfo: PageInfo;
-  edges: Array<Maybe<SocialNodeEdge>>;
-};
-
-export type SocialNodeEdge = {
-  __typename?: 'SocialNodeEdge';
-  node?: Maybe<SocialNode>;
-  cursor: Scalars['String'];
-};
-
 export type SocialType = {
   __typename?: 'SocialType';
   id: Scalars['ID'];
-  user: EnterpriseUser;
   provider: Scalars['String'];
   uid: Scalars['String'];
   extraData?: Maybe<Scalars['SocialCamelJSON']>;
@@ -5013,7 +4974,6 @@ export type User = MaskPrimaryKeyNode & {
   bookmarkedIssues: RepositoryIssueConnection;
   preference?: Maybe<UserPreference>;
   IsBetaTester: Scalars['Boolean'];
-  socialAuth: SocialNodeConnection;
   auditlogSet: AuditLogConnection;
   primaryOwnerships: OwnerConnection;
   teams: TeamConnection;
@@ -5068,19 +5028,6 @@ export type UserBookmarkedIssuesArgs = {
   q?: Maybe<Scalars['String']>;
   severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   autofixAvailable?: Maybe<Scalars['Boolean']>;
-};
-
-
-export type UserSocialAuthArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  uid?: Maybe<Scalars['String']>;
-  uid_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  provider?: Maybe<Scalars['String']>;
-  provider_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -5301,6 +5248,7 @@ export type UserPreferenceConnection = {
   __typename?: 'UserPreferenceConnection';
   pageInfo: PageInfo;
   edges: Array<Maybe<UserPreferenceEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
 };
 
 export type UserPreferenceEdge = {
@@ -5553,13 +5501,6 @@ export type SocialAuthMutation = (
   & { socialAuth?: Maybe<(
     { __typename?: 'SocialAuthJWT' }
     & Pick<SocialAuthJwt, 'token' | 'tokenExpiresIn' | 'refreshToken' | 'refreshExpiresIn'>
-    & { social?: Maybe<(
-      { __typename?: 'SocialType' }
-      & { user: (
-        { __typename?: 'EnterpriseUser' }
-        & Pick<EnterpriseUser, 'firstName'>
-      ) }
-    )> }
   )> }
 );
 
@@ -5946,16 +5887,16 @@ export type Unnamed_32_Mutation = (
       & Pick<Issue, 'id' | 'issueType' | 'title' | 'shortcode' | 'description'>
       & { analyzer: (
         { __typename?: 'Analyzer' }
-        & Pick<Analyzer, 'name' | 'logo'>
+        & Pick<Analyzer, 'id' | 'name' | 'logo'>
       ), issuePriority?: Maybe<(
         { __typename?: 'IssuePriority' }
         & Pick<IssuePriority, 'source'>
         & { repositoryIssuePriority?: Maybe<(
           { __typename?: 'IssuePriorityType' }
-          & Pick<IssuePriorityType, 'slug' | 'weight' | 'verboseName'>
+          & Pick<IssuePriorityType, 'id' | 'slug' | 'weight' | 'verboseName'>
         )>, cascadingIssuePriority?: Maybe<(
           { __typename?: 'IssuePriorityType' }
-          & Pick<IssuePriorityType, 'slug' | 'verboseName' | 'weight'>
+          & Pick<IssuePriorityType, 'id' | 'slug' | 'verboseName' | 'weight'>
         )> }
       )> }
     )> }
@@ -7527,15 +7468,15 @@ export type Unnamed_106_Query = (
         & Pick<Issue, 'id' | 'issueType' | 'title' | 'shortcode' | 'description'>
         & { analyzer: (
           { __typename?: 'Analyzer' }
-          & Pick<Analyzer, 'name' | 'logo' | 'analyzerLogo' | 'shortcode'>
+          & Pick<Analyzer, 'id' | 'name' | 'logo' | 'analyzerLogo' | 'shortcode'>
         ), issuePriority?: Maybe<(
           { __typename?: 'IssuePriority' }
           & { repositoryIssuePriority?: Maybe<(
             { __typename?: 'IssuePriorityType' }
-            & Pick<IssuePriorityType, 'slug' | 'weight' | 'verboseName'>
+            & Pick<IssuePriorityType, 'id' | 'slug' | 'weight' | 'verboseName'>
           )>, ownerIssuePriority?: Maybe<(
             { __typename?: 'IssuePriorityType' }
-            & Pick<IssuePriorityType, 'slug' | 'weight' | 'verboseName'>
+            & Pick<IssuePriorityType, 'id' | 'slug' | 'weight' | 'verboseName'>
           )> }
         )> }
       )> }
@@ -7575,7 +7516,7 @@ export type Unnamed_107_Query = (
       & Pick<IssuePriority, 'source'>
       & { cascadingIssuePriority?: Maybe<(
         { __typename?: 'IssuePriorityType' }
-        & Pick<IssuePriorityType, 'slug' | 'verboseName' | 'weight'>
+        & Pick<IssuePriorityType, 'id' | 'slug' | 'verboseName' | 'weight'>
       )> }
     )> }
   )> }
@@ -8257,7 +8198,7 @@ export type Unnamed_123_QueryVariables = Exact<{
 
 export type Unnamed_123_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
@@ -8286,7 +8227,7 @@ export type Unnamed_124_QueryVariables = Exact<{
 
 export type Unnamed_124_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'config' | 'blobUrlRoot' | 'vcsProvider' | 'hasViewerEditAccess'>
     & { issue?: Maybe<(
@@ -8315,7 +8256,7 @@ export type Unnamed_125_QueryVariables = Exact<{
 
 export type Unnamed_125_Query = (
   { __typename?: 'Query' }
-  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | (
+  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | (
     { __typename?: 'RepositoryIssue' }
     & Pick<RepositoryIssue, 'shortcode'>
     & { checkIssues: (
@@ -8434,7 +8375,7 @@ export type Unnamed_128_QueryVariables = Exact<{
 
 export type Unnamed_128_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
@@ -9282,7 +9223,7 @@ export type Unnamed_156_QueryVariables = Exact<{
 
 export type Unnamed_156_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
@@ -9488,7 +9429,7 @@ export type Unnamed_164_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'connectedVcsProviders' | 'fullName' | 'firstName' | 'lastName' | 'email' | 'avatar' | 'lastLogin' | 'isActive' | 'isAsgardian' | 'isStaff' | 'dashboardContext' | 'availableCredits' | 'missiveUserHash' | 'dateJoined'>
+    & Pick<User, 'id' | 'connectedVcsProviders' | 'fullName' | 'firstName' | 'lastName' | 'email' | 'avatar' | 'lastLogin' | 'isActive' | 'isAsgardian' | 'isBetaTester' | 'isStaff' | 'dashboardContext' | 'availableCredits' | 'missiveUserHash' | 'dateJoined'>
     & { primaryOwner?: Maybe<(
       { __typename?: 'Owner' }
       & Pick<Owner, 'id' | 'login' | 'vcsProvider' | 'billingEmail'>
