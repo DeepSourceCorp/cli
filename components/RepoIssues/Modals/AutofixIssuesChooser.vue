@@ -3,7 +3,7 @@
     <z-modal
       v-if="isOpen"
       @onClose="$emit('close')"
-      title="Choose files you want to run Autofix on"
+      title="Choose issues you want to run Autofix on"
     >
       <div class="flex space-x-2 py-4 text-vanilla-400">
         <div
@@ -15,7 +15,7 @@
               spacing="tight"
               backgroundColor="ink-400"
               :showBorder="false"
-              placeholder="Search for files"
+              placeholder="Search for issues"
               class="py-1.5 leading-6 px-2"
             >
               <template slot="left"
@@ -93,7 +93,7 @@
           >
             <template v-if="selectedIssues.length">
               Run Autofix on {{ selectedIssues.length || 0 }}
-              {{ selectedIssues.length > 1 ? 'files' : 'file' }}
+              {{ selectedIssues.length > 1 ? 'issues' : 'issue' }}
             </template>
             <template v-else> Select at least one issue </template>
           </z-button>
@@ -140,7 +140,6 @@ export default class AutofixIssuesChooser extends mixins(RunDetailMixin) {
   public selectedValue = ''
   public selectedIssues: Record<string, string>[] = []
   public selectAll = false
-  public maxFilesAutofixRun = 50
 
   get searchedIssues(): Record<string, string>[] {
     const allIssues = this.autofixableIssues || []
