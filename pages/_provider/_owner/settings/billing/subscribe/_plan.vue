@@ -7,7 +7,7 @@
             >Billing</nuxt-link
           ></z-breadcrumb-item
         >
-        <z-breadcrumb-item class="cursor-pointer">Your Subscription</z-breadcrumb-item>
+        <z-breadcrumb-item class="cursor-pointer">Your subscription</z-breadcrumb-item>
       </z-breadcrumb>
     </div>
     <section class="grid grid-cols-2 gap-12">
@@ -158,7 +158,7 @@
             <p v-if="coupon.description" class="text-xs font-bold text-vanilla-100">
               {{ coupon.description }}
             </p>
-            <p v-if="couponError" class="text-xs text-cherry">This Coupon is Invalid</p>
+            <p v-if="couponError" class="text-xs text-cherry">This coupon is invalid.</p>
           </div>
         </div>
       </div>
