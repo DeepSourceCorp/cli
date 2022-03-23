@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ RunAutofixBar ]] renders \`RunAutofixBar\` with all prop options: {"id":"Q2hlY2s6enFkbmpv","autofixableIssues":[{"shortcode":"BAN-B101","title":"Assert statement used outside of tests","category":"security","occurrenceCount":1}],"filesAffectedByAutofix":1,"canCreateAutofix":false} 1`] = `
+"<div class=\\"flex items-center justify-between px-4 py-2 mb-4 text-sm bg-ink-300\\"><span>1 issue can
+    be Autofixed in
+    1
+    file</span>
+  <div data-original-title=\\"null\\" class=\\" has-tooltip\\">
+    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Autofix\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"autofix\\" spacing=\\"px-10\\"></zbutton-stub>
+  </div>
+  <autofixissueschooser-stub checkid=\\"Q2hlY2s6enFkbmpv\\" autofixableissues=\\"[object Object]\\"></autofixissueschooser-stub>
+</div>"
+`;
+
+exports[`[[ RunAutofixBar ]] renders \`RunAutofixBar\` with all prop options: {"id":"Q2hlY2s6enFkbmpv","autofixableIssues":[{"shortcode":"BAN-B101","title":"Assert statement used outside of tests","category":"security","occurrenceCount":1}],"filesAffectedByAutofix":1,"canCreateAutofix":true} 1`] = `
+"<div class=\\"flex items-center justify-between px-4 py-2 mb-4 text-sm bg-ink-300\\"><span>1 issue can
+    be Autofixed in
+    1
+    file</span>
+  <div>
+    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Autofix\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"autofix\\" spacing=\\"px-10\\"></zbutton-stub>
+  </div>
+  <autofixissueschooser-stub checkid=\\"Q2hlY2s6enFkbmpv\\" autofixableissues=\\"[object Object]\\"></autofixissueschooser-stub>
+</div>"
+`;

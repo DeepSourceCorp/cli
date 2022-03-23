@@ -6,15 +6,20 @@
       {{ filesAffectedByAutofix }}
       {{ filesAffectedByAutofix > 1 ? 'files' : 'file' }}</span
     >
-    <z-button
-      :disabled="!canCreateAutofix"
-      button-type="primary"
-      size="small"
-      spacing="px-10"
-      icon="autofix"
-      label="Autofix"
-      @click="isAutofixOpen = true"
-    />
+
+    <!-- Wrap the Autofix button in a div element since some browsers don't emit events for disabled elements -->
+    <div v-tooltip="canCreateAutofix ? '' : `You don't have sufficient permission to run Autofix`">
+      <z-button
+        :disabled="!canCreateAutofix"
+        button-type="primary"
+        size="small"
+        spacing="px-10"
+        icon="autofix"
+        label="Autofix"
+        @click="isAutofixOpen = true"
+      />
+    </div>
+
     <autofix-issues-chooser
       :is-open="isAutofixOpen"
       :autofixable-issues="autofixableIssues"
@@ -47,12 +52,6 @@ export interface RunError {
 export default class RunAutofixBar extends Vue {
   @Prop({ default: '' })
   id: string
-
-  @Prop({ default: 0 })
-  issuesRaisedCount: number
-
-  @Prop({ default: 0 })
-  issuesResolvedCount: number
 
   @Prop({ default: '' })
   autofixableIssues: AutofixableIssueDetail

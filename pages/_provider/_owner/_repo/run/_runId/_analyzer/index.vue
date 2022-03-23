@@ -17,6 +17,7 @@
           !run.isForCrossRepoPr
         "
         v-bind="check"
+        :can-create-autofix="canCreateAutofix"
       />
       <z-tabs>
         <z-tab-list class="px-4 py-0 pt-2 border-b border-ink-200">
