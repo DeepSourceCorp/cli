@@ -84,7 +84,7 @@
                       icon="save"
                       class="modal-primary-action"
                       size="small"
-                      @click="saveConifg"
+                      @click="saveConifg(close)"
                       >Yes, update this endpoint</z-button
                     >
                   </div>
@@ -159,8 +159,8 @@
             </template>
           </password-input>
           <div class="py-4">
-            <h4 class="text-sm text-vanilla-100 mb-2">Selected events</h4>
-            <div class="border border-ink-200 rounded-md">
+            <h4 class="mb-2 text-sm text-vanilla-100">Selected events</h4>
+            <div class="border rounded-md border-ink-200">
               <template v-if="readOnly">
                 <span
                   v-for="(event, position) in subscribedEvents"
@@ -176,7 +176,7 @@
               </template>
               <template v-else>
                 <label
-                  v-for="(event, position) in subscribedEvents"
+                  v-for="(event, position) in allEventsList"
                   :key="event.shortcode"
                   class="block p-3 cursor-pointer border-ink-200"
                   :class="{
@@ -194,7 +194,7 @@
                     </z-checkbox>
                     <code class="text-sm">{{ event.shortcode }}</code>
                   </div>
-                  <p class="text-xs text-vanilla-400 ml-6">{{ event.shortDescription }}</p>
+                  <p class="ml-6 text-xs text-vanilla-400">{{ event.shortDescription }}</p>
                 </label>
               </template>
             </div>
@@ -267,6 +267,8 @@ import WebhookMixin from '~/mixins/webhookMixin'
 import { WebhookEventTypes, Webhook } from '~/types/types'
 import { formatDate } from '~/utils/date'
 import { TeamPerms } from '~/types/permTypes'
+import { resolveNodes } from '~/utils/array'
+import Shifty from '@deepsource/shifty'
 
 @Component({
   components: {
@@ -298,28 +300,61 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
   public savingConfig = false
   public selectedEvents: string[] = []
   public localEndpoint: Webhook = { url: '' } as Webhook
+  public engine: Shifty
   isSecretHidden = true
 
+  /**
+   * Nuxt fetch hook
+   *
+   * @return {Promise<void>}
+   */
   async fetch(): Promise<void> {
     const { webhookId } = this.$route.params
-    await this.fetchSingleEndpoint({ webhookId })
-    await this.fetchEndpointDeliveries({
-      webhookId,
-      currentPage: 1,
-      limit: 8
-    })
+
+    await Promise.all([
+      this.fetchSingleEndpoint({ webhookId }),
+      this.fetchWebhookEventTypesList(),
+      this.fetchEndpointDeliveries({
+        webhookId,
+        currentPage: 1,
+        limit: 8
+      })
+    ])
+
     this.localEndpoint = JSON.parse(JSON.stringify(this.endpoint))
     this.selectedEvents = this.subscribedEvents.map((event) => event.shortcode)
   }
 
+  /**
+   * Reset form and discard edits
+   *
+   * @param {any} refetch=true
+   *
+   * @return {Promise<void>}
+   */
   async reset(refetch = true): Promise<void> {
     const { webhookId } = this.$route.params
     await this.fetchSingleEndpoint({ webhookId, refetch: refetch })
     this.localEndpoint = JSON.parse(JSON.stringify(this.endpoint))
     this.selectedEvents = this.subscribedEvents.map((event) => event.shortcode)
     this.readOnly = true
+    this.showSaveModal = false
   }
 
+  /**
+   * Hide modal before destroy
+   *
+   * @return {void}
+   */
+  beforeDestroy(): void {
+    this.showSaveModal = false
+  }
+
+  /**
+   * Disable webhook endpoint
+   *
+   * @return {Promise<void>}
+   */
   async disable(): Promise<void> {
     const { webhookId } = this.$route.params
     try {
@@ -334,7 +369,12 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
     }
   }
 
-  async saveConifg(): Promise<void> {
+  /**
+   * Validate and save webhook endpoint
+   *
+   * @return {Promise<void>}
+   */
+  async saveConifg(close?: () => {}): Promise<void> {
     try {
       this.validateWebhookForm(
         this.localEndpoint.url,
@@ -358,6 +398,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
         eventsSubscribed: this.selectedEvents
       })
       await this.reset()
+      if (close) close()
       this.$toast.success('Successfully updated the endpoint details.')
     } catch (e) {
       this.logSentryErrorForUser(e as Error, 'Update webhook', { webhookId: webhookId })
@@ -376,19 +417,21 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
   }
 
   get subscribedEvents(): WebhookEventTypes[] {
-    if (this.localEndpoint?.eventsSubscribed?.edges.length) {
-      return this.localEndpoint.eventsSubscribed.edges.map((edge) => {
-        if (edge) {
-          return edge.node as WebhookEventTypes
-        }
-        return null
-      }) as WebhookEventTypes[]
-    }
-    return []
+    return resolveNodes(this.localEndpoint.eventsSubscribed) as WebhookEventTypes[]
   }
 
-  async generateSecret(): Promise<void> {
-    this.localEndpoint.secret = await this.generateWebhookSecret()
+  get allEventsList(): WebhookEventTypes[] {
+    return this.webhookEventTypes
+  }
+
+  /**
+   * Generate secret using Shifty
+   *
+   * @return {void}
+   */
+  generateSecret(): void {
+    if (!this.engine) this.engine = new Shifty(false, 32)
+    this.localEndpoint.secret = this.engine.generate()
     if (this.isSecretHidden) {
       this.isSecretHidden = false
       setTimeout(() => {
@@ -397,6 +440,11 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
     }
   }
 
+  /**
+   * Toggle secret visibility
+   *
+   * @return {void}
+   */
   toggleSecretVisibility(): void {
     this.isSecretHidden = !this.isSecretHidden
   }

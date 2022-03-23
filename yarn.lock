@@ -1161,6 +1161,11 @@
   resolved "https://registry.yarnpkg.com/@deepsource/nuxt-websocket/-/nuxt-websocket-1.0.0.tgz#4fcffc7711dc0aab319be8711df8415a4b08ed3b"
   integrity sha512-zph3DqmBTGY090YpJpdfVb+EdkiQzXz+buZGkhyRYA8EDQJthTNxBSeFKD5WmRAf3g8UoF3f+9KVbwfDbxYMzA==
 
+"@deepsource/shifty@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@deepsource/shifty/-/shifty-1.0.0.tgz#ecacb5337fd0ad9022af1df602bcede23664b485"
+  integrity sha512-n+xr3puUHlsh5S7eYKtnJ+ASQqzfJ/SpUPi/ADZjiGqpZZu+Q1bSqiVfpUr670ceGL64AUEpAIeVe/N9eHLQ4w==
+
 "@deepsourcelabs/zeal@^0.11.2":
   version "0.11.2"
   resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.11.2/348fd3da8456fa3214caeefeae7d1f81de9a93fc58a407477fa0cf0c3149a4f4#9a00d478156840c86941ab16a0becbe615e0e0cf"

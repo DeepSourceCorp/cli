@@ -584,15 +584,6 @@ declare module '*/disable.gql' {
 }
     
 
-declare module '*/secret.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  export const webhookSecret: DocumentNode;
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/test.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

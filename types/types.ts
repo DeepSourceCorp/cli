@@ -6377,19 +6377,6 @@ export type DisablewebhookMutation = (
   )> }
 );
 
-export type WebhookSecretMutationVariables = Exact<{
-  input: WebhookSecretInput;
-}>;
-
-
-export type WebhookSecretMutation = (
-  { __typename?: 'Mutation' }
-  & { webhookSecret?: Maybe<(
-    { __typename?: 'WebhookSecretPayload' }
-    & Pick<WebhookSecretPayload, 'secret'>
-  )> }
-);
-
 export type TestWebhookMutationVariables = Exact<{
   webhookId: Scalars['ID'];
 }>;

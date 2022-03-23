@@ -48,7 +48,7 @@ export default class AuthMixin extends Vue {
    * @returns {void}
    */
   mounted(): void {
-    const { next } = this.$route.query
+    const { next } = this.$route?.query ?? {}
     if (next) {
       const expiry = new Date().getTime() + 5 * 60 * 1000 // 5 min life
       this.$nuxt.$cookies.set('bifrost-post-auth-redirect', next, {

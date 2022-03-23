@@ -7,7 +7,7 @@ exports[`[[ CreateWebhookModal ]] renders CreateWebhookModal with the store 1`] 
     <toggle-input inputwidth=\\"xx-small\\" label=\\"Enable API signing\\" inputid=\\"enable-api-signing\\" remove-y-padding=\\"true\\"><template></template></toggle-input> <label for=\\"secret\\" class=\\"block text-sm font-medium text-vanilla-400\\"><span class=\\"mb-2 sr-only\\">Secret</span>
       <div class=\\"relative\\">
         <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"password\\" placeholder=\\"A randomly generated secret with at least 16 characters\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\" required=\\"true\\" id=\\"Title\\"></zinput-stub>
-        <div class=\\"absolute top-1 right-1 flex gap-x-1 bg-ink-400\\">
+        <div class=\\"absolute flex top-1 right-1 gap-x-1 bg-ink-400\\">
           <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"eye\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
           <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"refresh-cw\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
           <copybutton-stub icon-only=\\"true\\" disabled=\\"true\\" value=\\"\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></copybutton-stub>
@@ -16,22 +16,19 @@ exports[`[[ CreateWebhookModal ]] renders CreateWebhookModal with the store 1`] 
   </fieldset>
   <section class=\\"p-4 pt-0 space-y-2\\">
     <h4 class=\\"text-sm font-medium text-vanilla-400\\">Select events</h4>
-    <div class=\\"max-h-52 overflow-y-scroll space-y-2\\"><label class=\\"block p-3 border rounded-md cursor-pointer border-ink-200\\">
+    <div class=\\"space-y-2 overflow-y-scroll max-h-52\\"><label class=\\"block p-3 border rounded-md cursor-pointer border-ink-200\\">
         <div class=\\"flex items-center mb-1\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox\\"><input type=\\"checkbox\\" name=\\"analysis_run.started\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"analysis_run.started\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-4 w-4 absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
             <!----></label> <code class=\\"text-sm\\">analysis_run.started</code></div>
-        <p class=\\"text-xs text-vanilla-400 ml-6\\">This event is triggered when an analysis run is started.</p>
+        <p class=\\"ml-6 text-xs text-vanilla-400\\">This event is triggered when an analysis run is started.</p>
       </label><label class=\\"block p-3 border rounded-md cursor-pointer border-ink-200\\">
         <div class=\\"flex items-center mb-1\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox\\"><input type=\\"checkbox\\" name=\\"analysis_run.updated\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"analysis_run.updated\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-4 w-4 absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
             <!----></label> <code class=\\"text-sm\\">analysis_run.updated</code></div>
-        <p class=\\"text-xs text-vanilla-400 ml-6\\">This event is triggered when an analysis run is updated.</p>
+        <p class=\\"ml-6 text-xs text-vanilla-400\\">This event is triggered when an analysis run is updated.</p>
       </label><label class=\\"block p-3 border rounded-md cursor-pointer border-ink-200\\">
         <div class=\\"flex items-center mb-1\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox\\"><input type=\\"checkbox\\" name=\\"repository_issue.introduced\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"repository_issue.introduced\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-4 w-4 absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
             <!----></label> <code class=\\"text-sm\\">repository_issue.introduced</code></div>
-        <p class=\\"text-xs text-vanilla-400 ml-6\\">This event is trigerred when an issue is introduced on the default branch.</p>
+        <p class=\\"ml-6 text-xs text-vanilla-400\\">This event is trigerred when an issue is introduced on the default branch.</p>
       </label></div>
-    <alert-box>
-      Webhooks are still in beta, we're going to enable more events in the weeks to come.
-    </alert-box>
   </section>
 </zmodal-stub>"
 `;

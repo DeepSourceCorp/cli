@@ -19,12 +19,6 @@ const mocks = {
   async $fetchGraphqlData() {}
 }
 
-interface CreateWebhookModalT extends Vue {
-  secret: string
-  generateWebhookSecret: jest.MockedFunction<() => Promise<string>>
-  generateSecret: () => Promise<void>
-}
-
 describe('[[ CreateWebhookModal ]]', () => {
   let localVue: VueConstructor<Vue>, store: Store<any>
   beforeEach(() => {
@@ -79,23 +73,5 @@ describe('[[ CreateWebhookModal ]]', () => {
     )
 
     expect(html()).toMatchSnapshot()
-  })
-
-  test('Generate secret button', async () => {
-    const wrapper = shallowMount(CreateWebhookModal, {
-      store,
-      localVue
-    })
-    const vm: CreateWebhookModalT = wrapper.vm as unknown as CreateWebhookModalT
-    const payload = '5a79e73c99734f8c87c0ff501eafa53b'
-
-    vm.generateWebhookSecret = jest.fn(() => {
-      return new Promise((resolve) => resolve(payload))
-    })
-
-    await vm.generateSecret()
-
-    expect(vm.generateWebhookSecret.mock.calls.length).toBe(1)
-    expect(vm.secret).toBe(payload)
   })
 })

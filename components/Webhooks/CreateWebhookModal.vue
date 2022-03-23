@@ -34,7 +34,7 @@
             :disabled="!enableApiSigning"
             placeholder="A randomly generated secret with at least 16 characters"
           />
-          <div class="absolute top-1 right-1 flex gap-x-1 bg-ink-400">
+          <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
             <z-button
               v-tooltip="isSecretHidden ? 'Reveal secret' : 'Hide secret'"
               button-type="secondary"
@@ -63,7 +63,7 @@
     <section class="p-4 pt-0 space-y-2">
       <h4 class="text-sm font-medium text-vanilla-400">Select events</h4>
       <!-- h-52 is the height of 3 cards (we had 3 cards at the time) -->
-      <div class="max-h-52 overflow-y-scroll space-y-2">
+      <div class="space-y-2 overflow-y-scroll max-h-52">
         <label
           v-for="event in webhookEventTypes"
           :key="event.shortcode"
@@ -84,12 +84,9 @@
             </z-checkbox>
             <code class="text-sm">{{ event.shortcode }}</code>
           </div>
-          <p class="text-xs text-vanilla-400 ml-6">{{ event.shortDescription }}</p>
+          <p class="ml-6 text-xs text-vanilla-400">{{ event.shortDescription }}</p>
         </label>
       </div>
-      <alert-box>
-        Webhooks are still in beta, we're going to enable more events in the weeks to come.
-      </alert-box>
     </section>
     <template v-slot:footer="{ close }">
       <div class="p-4 space-x-4 text-right text-vanilla-100 border-ink-200">
@@ -115,6 +112,7 @@ import { ZModal, ZInput, ZCheckbox, ZToggle, ZButton } from '@deepsourcelabs/zea
 import WebhookMixin from '~/mixins/webhookMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import Shifty from '@deepsource/shifty'
 
 @Component({
   components: {
@@ -136,11 +134,33 @@ export default class CreateWebhookModal extends mixins(
   public enableApiSigning = true
   public isSecretHidden = true
   public selectedEvents: string[] = []
+  engine: Shifty
 
+  /**
+   * Nuxt Fetch hook
+   *
+   * @return {any}
+   */
   async fetch() {
     await this.fetchWebhookEventTypesList()
   }
 
+  /**
+   * Mounted hook to generate secret
+   *
+   * @return {any}
+   */
+  mounted() {
+    this.generateSecret()
+  }
+
+  /**
+   * Validate config, save it, and refetch
+   *
+   * @param close close modal method
+   *
+   * @return {Promise<void>}
+   */
   async saveConfig(close: () => void): Promise<void> {
     try {
       this.validateWebhookForm(this.url, this.enableApiSigning, this.secret, this.selectedEvents)
@@ -185,8 +205,15 @@ export default class CreateWebhookModal extends mixins(
     }
   }
 
-  async generateSecret(): Promise<void> {
-    this.secret = await this.generateWebhookSecret()
+  /**
+   * Generate secret using shifty
+   *
+   * @return {void}
+   */
+  generateSecret(): void {
+    if (!this.engine) this.engine = new Shifty(false, 32)
+
+    this.secret = this.engine.generate()
     if (this.isSecretHidden) {
       this.isSecretHidden = false
       setTimeout(() => {
@@ -195,15 +222,29 @@ export default class CreateWebhookModal extends mixins(
     }
   }
 
+  /**
+   * Toggle secret visibility
+   *
+   * @return {void}
+   */
   toggleSecretVisibility(): void {
     this.isSecretHidden = !this.isSecretHidden
   }
 
+  /**
+   * Hide secret and emit
+   * @return {void}
+   */
   onModalClose(): void {
     if (!this.isSecretHidden) this.isSecretHidden = true
     this.$emit('close')
   }
 
+  /**
+   * Close modal on route change
+   *
+   * @return {void}
+   */
   @Watch('$route.path')
   closeModal(): void {
     this.$emit('close')

@@ -1,4 +1,4 @@
-import { mockOwnerDetail } from './__mocks__/detail.mock'
+import { mockOwnerDetail } from './__mocks__/owner-detail.mock'
 import {
   state,
   mutations,

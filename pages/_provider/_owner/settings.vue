@@ -138,7 +138,6 @@ export default class TeamSettings extends mixins(
         name: 'webhooks',
         label: 'Webhooks',
         icon: 'corner-up-right',
-        isBeta: true,
         routeName: 'provider-owner-settings-webhooks',
         validator: this.webhooksAvailable
       },
