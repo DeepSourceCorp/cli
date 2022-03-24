@@ -12,12 +12,15 @@
 
 (Add screenshots or screen recordings of the changes)
 
-## ToDo (Optional)
+## Checklist before merge
 
-(Add to-do for reviewers and you to track, keep the PR in draft until all to-dos are cleared)
-
-- [ ] Tests
-- [ ] VQA
+- [ ] Regenerated types
+- [ ] Added tests for components and stores
+- [ ] Test components for side effects (In case a common or base component was refactored)
+- [ ] Have necessary error handling for store actions
+- [ ] Ensure design VQA is done
+- [ ] Add previews for desktop and mobile view (video if required)
+- [ ] Test the relevant flow entirely (For example, you update the webhook modal, check the entire webhook flow)
 
 ## Note to reviewers (Optional)
 
