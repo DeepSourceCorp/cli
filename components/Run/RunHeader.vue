@@ -54,7 +54,6 @@ import { SubNav } from '@/components/History'
 import LinkToPrev from '@/components/LinkToPrev.vue'
 import { GistCardDescription, GistCardTitle } from '@/components/Repository'
 import { Check, RunStatus } from '~/types/types'
-import { AppFeatures } from '~/types/permTypes'
 
 /**
  * Nav header component for run details page. Lists:
@@ -136,23 +135,18 @@ export default class RunHeader extends Vue {
 
   get statusText(): string {
     const types: Record<string, string> = {
-      [RunStatus.Pass]: 'Passed in',
-      [RunStatus.Fail]: 'Failed after',
+      [RunStatus.Pass]: this.finishedIn ? 'Passed in' : 'Passed',
+      [RunStatus.Fail]: this.finishedIn ? 'Failed after' : 'Failed',
       [RunStatus.Pend]: 'Analysis in progress',
-      [RunStatus.Timo]: 'Timed out after',
-      [RunStatus.Cncl]: 'Cancelled after',
-      [RunStatus.Read]: 'Completed in'
+      [RunStatus.Timo]: this.finishedIn ? 'Timed out after' : 'Timed out',
+      [RunStatus.Cncl]: this.finishedIn ? 'Cancelled after' : 'Cancelled',
+      [RunStatus.Read]: this.finishedIn ? 'Completed in' : 'Completed'
     }
     return types[this.status || 'PASS']
   }
 
   get isPending(): boolean {
     return this.status === RunStatus.Pend
-  }
-
-  get transformsAllowed(): boolean {
-    const { provider } = this.$route.params
-    return this.$gateKeeper.provider(AppFeatures.TRANSFORMS, provider)
   }
 
   get transformersAllowed(): boolean {

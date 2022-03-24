@@ -17,12 +17,12 @@
         <!-- Found -->
         <div class="flex items-center space-x-2">
           <z-icon
-            :icon="statusIcon"
+            :icon="showStatusText ? 'timer-reset' : 'clock'"
             size="small"
-            :color="statusIconColor"
+            color="vanilla-400"
             :class="{ 'motion-safe:animate-spin': isPending }"
           />
-          <div v-if="statusText && finishedInDisplay" class="text-sm text-vanilla-400">
+          <div v-if="showStatusText" class="text-sm text-vanilla-400">
             <span v-if="isPending"> {{ statusText }} (Time elapsed: {{ finishedInDisplay }}) </span>
             <span v-else> {{ statusText }} {{ finishedInDisplay }} </span>
           </div>
@@ -117,30 +117,6 @@ export default class AnalyzerHeader extends Vue {
     return ''
   }
 
-  get statusIcon(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'check',
-      [RunStatus.Fail]: 'x',
-      [RunStatus.Pend]: 'spin-loader',
-      [RunStatus.Timo]: 'clock',
-      [RunStatus.Cncl]: 'alert-circle',
-      [RunStatus.Read]: 'check-circle'
-    }
-    return types[this.status || 'PASS']
-  }
-
-  get statusIconColor(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'juniper',
-      [RunStatus.Fail]: 'cherry',
-      [RunStatus.Pend]: 'vanilla-100',
-      [RunStatus.Timo]: 'honey',
-      [RunStatus.Cncl]: 'honey',
-      [RunStatus.Read]: 'vanilla-400'
-    }
-    return types[this.status || 'PASS']
-  }
-
   get statusText(): string {
     const types: Record<string, string> = {
       [RunStatus.Pass]: 'Passed in',
@@ -167,6 +143,10 @@ export default class AnalyzerHeader extends Vue {
 
   get isPending(): boolean {
     return this.status === RunStatus.Pend
+  }
+
+  get showStatusText(): boolean {
+    return Boolean(this.statusText && this.finishedInDisplay)
   }
 }
 </script>

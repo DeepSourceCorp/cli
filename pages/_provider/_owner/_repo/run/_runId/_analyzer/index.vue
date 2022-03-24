@@ -111,8 +111,8 @@
       </div>
 
       <div class="p-4 space-y-2">
-        <div class="w-full rounded-md h-28 bg-ink-300 animate-pulse"></div>
-        <div class="w-full rounded-md h-28 bg-ink-300 animate-pulse"></div>
+        <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
+        <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
       </div>
     </template>
   </main>

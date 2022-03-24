@@ -2,9 +2,9 @@
   <section class="flex flex-col space-y-4">
     <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" />
     <run-loading v-if="status === 'PEND'" />
-    <run-pass v-else-if="status === 'PASS' && issueCount === 0"></run-pass>
-    <run-cancelled v-else-if="status === 'CNCL' && issueCount === 0"></run-cancelled>
-    <run-timeout v-else-if="status === 'TIMO' && issueCount === 0"></run-timeout>
+    <run-pass v-else-if="status === 'PASS' && issueCount === 0" />
+    <run-cancelled v-else-if="status === 'CNCL' && issueCount === 0" />
+    <run-timeout v-else-if="status === 'TIMO' && issueCount === 0" />
     <template v-else>
       <div id="issue-filters" class="flex items-center space-x-3">
         <slot name="controls"></slot>
@@ -21,6 +21,7 @@
           "
           :hide-progress="true"
           :center-content="true"
+          :show-seen-info="false"
           link="/history/runs/details/issue"
         />
       </template>
@@ -36,10 +37,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
 import IssueListItem from '@/components/IssueListItem.vue'
-import { RunStatus, Issue } from '@/types/types'
+import { Issue, RunStatus } from '@/types/types'
+
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import { resolveNodes } from '~/utils/array'
 

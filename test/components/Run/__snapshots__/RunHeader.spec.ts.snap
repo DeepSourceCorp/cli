@@ -1,0 +1,139 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"deepsource-fix-a6311593","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"CNCL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
+"<div>
+  <subnav-stub active=\\"runs\\"></subnav-stub>
+  <div class=\\"flex flex-col w-full px-4 py-6 space-y-2\\">
+    <linktoprev-stub link=\\"/gh/deepsourcelabs/demo-python/history/runs\\" title=\\"All analysis runs\\"></linktoprev-stub>
+    <div class=\\"w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly\\">
+      <gistcardtitle-stub icon=\\"alert-circle\\" iconcolor=\\"honey\\" title=\\"deepsource-fix-a6311593\\" id=\\"86215f5\\" link=\\"\\" vcscommiturl=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" vcsprurl=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" vcsprnumber=\\"#77\\"></gistcardtitle-stub>
+      <gistcarddescription-stub createdat=\\"2020-07-07T16:58:15.109526+00:00\\" finishedin=\\"88\\" comparehash=\\"b3907ba..86215f5\\" actiontext=\\"Analyzed\\" finishedinlabel=\\"Cancelled after\\" showfinishedintime=\\"true\\"></gistcarddescription-stub>
+    </div>
+  </div>
+  <div class=\\"w-full border-b border-ink-200\\">
+    <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
+          Python
+          <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
+            23
+          </ztag-stub>
+        </ztab-stub>
+      </a></div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"deepsource-fix-a6311593","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
+"<div>
+  <subnav-stub active=\\"runs\\"></subnav-stub>
+  <div class=\\"flex flex-col w-full px-4 py-6 space-y-2\\">
+    <linktoprev-stub link=\\"/gh/deepsourcelabs/demo-python/history/runs\\" title=\\"All analysis runs\\"></linktoprev-stub>
+    <div class=\\"w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly\\">
+      <gistcardtitle-stub icon=\\"x\\" iconcolor=\\"cherry\\" title=\\"deepsource-fix-a6311593\\" id=\\"86215f5\\" link=\\"\\" vcscommiturl=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" vcsprurl=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" vcsprnumber=\\"#77\\"></gistcardtitle-stub>
+      <gistcarddescription-stub createdat=\\"2020-07-07T16:58:15.109526+00:00\\" finishedin=\\"88\\" comparehash=\\"b3907ba..86215f5\\" actiontext=\\"Analyzed\\" finishedinlabel=\\"Failed after\\" showfinishedintime=\\"true\\"></gistcarddescription-stub>
+    </div>
+  </div>
+  <div class=\\"w-full border-b border-ink-200\\">
+    <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
+          Python
+          <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
+            23
+          </ztag-stub>
+        </ztab-stub>
+      </a></div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"deepsource-fix-a6311593","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"PASS","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
+"<div>
+  <subnav-stub active=\\"runs\\"></subnav-stub>
+  <div class=\\"flex flex-col w-full px-4 py-6 space-y-2\\">
+    <linktoprev-stub link=\\"/gh/deepsourcelabs/demo-python/history/runs\\" title=\\"All analysis runs\\"></linktoprev-stub>
+    <div class=\\"w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly\\">
+      <gistcardtitle-stub icon=\\"check\\" iconcolor=\\"juniper\\" title=\\"deepsource-fix-a6311593\\" id=\\"86215f5\\" link=\\"\\" vcscommiturl=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" vcsprurl=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" vcsprnumber=\\"#77\\"></gistcardtitle-stub>
+      <gistcarddescription-stub createdat=\\"2020-07-07T16:58:15.109526+00:00\\" finishedin=\\"88\\" comparehash=\\"b3907ba..86215f5\\" actiontext=\\"Analyzed\\" finishedinlabel=\\"Passed in\\" showfinishedintime=\\"true\\"></gistcarddescription-stub>
+    </div>
+  </div>
+  <div class=\\"w-full border-b border-ink-200\\">
+    <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
+          Python
+          <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
+            23
+          </ztag-stub>
+        </ztab-stub>
+      </a></div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"deepsource-fix-a6311593","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"PEND","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
+"<div>
+  <subnav-stub active=\\"runs\\"></subnav-stub>
+  <div class=\\"flex flex-col w-full px-4 py-6 space-y-2\\">
+    <linktoprev-stub link=\\"/gh/deepsourcelabs/demo-python/history/runs\\" title=\\"All analysis runs\\"></linktoprev-stub>
+    <div class=\\"w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly\\">
+      <gistcardtitle-stub icon=\\"spin-loader\\" iconcolor=\\"vanilla-100\\" title=\\"deepsource-fix-a6311593\\" id=\\"86215f5\\" link=\\"\\" vcscommiturl=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" vcsprurl=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" vcsprnumber=\\"#77\\" spinicon=\\"true\\"></gistcardtitle-stub>
+      <gistcarddescription-stub createdat=\\"2020-07-07T16:58:15.109526+00:00\\" finishedin=\\"88\\" comparehash=\\"b3907ba..86215f5\\" actiontext=\\"Started\\" finishedinlabel=\\"Analysis in progress\\"></gistcarddescription-stub>
+    </div>
+  </div>
+  <div class=\\"w-full border-b border-ink-200\\">
+    <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
+          Python
+          <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
+            23
+          </ztag-stub>
+        </ztab-stub>
+      </a></div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"deepsource-fix-a6311593","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"READ","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
+"<div>
+  <subnav-stub active=\\"runs\\"></subnav-stub>
+  <div class=\\"flex flex-col w-full px-4 py-6 space-y-2\\">
+    <linktoprev-stub link=\\"/gh/deepsourcelabs/demo-python/history/runs\\" title=\\"All analysis runs\\"></linktoprev-stub>
+    <div class=\\"w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly\\">
+      <gistcardtitle-stub icon=\\"check-circle\\" iconcolor=\\"vanilla-400\\" title=\\"deepsource-fix-a6311593\\" id=\\"86215f5\\" link=\\"\\" vcscommiturl=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" vcsprurl=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" vcsprnumber=\\"#77\\"></gistcardtitle-stub>
+      <gistcarddescription-stub createdat=\\"2020-07-07T16:58:15.109526+00:00\\" finishedin=\\"88\\" comparehash=\\"b3907ba..86215f5\\" actiontext=\\"Analyzed\\" finishedinlabel=\\"Completed in\\" showfinishedintime=\\"true\\"></gistcarddescription-stub>
+    </div>
+  </div>
+  <div class=\\"w-full border-b border-ink-200\\">
+    <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
+          Python
+          <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
+            23
+          </ztag-stub>
+        </ztab-stub>
+      </a></div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"deepsource-fix-a6311593","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"TIMO","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
+"<div>
+  <subnav-stub active=\\"runs\\"></subnav-stub>
+  <div class=\\"flex flex-col w-full px-4 py-6 space-y-2\\">
+    <linktoprev-stub link=\\"/gh/deepsourcelabs/demo-python/history/runs\\" title=\\"All analysis runs\\"></linktoprev-stub>
+    <div class=\\"w-full sm:w-4/5 py-2.5 flex flex-col space-y-2 justify-evenly\\">
+      <gistcardtitle-stub icon=\\"clock\\" iconcolor=\\"honey\\" title=\\"deepsource-fix-a6311593\\" id=\\"86215f5\\" link=\\"\\" vcscommiturl=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" vcsprurl=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" vcsprnumber=\\"#77\\"></gistcardtitle-stub>
+      <gistcarddescription-stub createdat=\\"2020-07-07T16:58:15.109526+00:00\\" finishedin=\\"88\\" comparehash=\\"b3907ba..86215f5\\" actiontext=\\"Analyzed\\" finishedinlabel=\\"Timed out after\\" showfinishedintime=\\"true\\"></gistcarddescription-stub>
+    </div>
+  </div>
+  <div class=\\"w-full border-b border-ink-200\\">
+    <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
+          Python
+          <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
+            23
+          </ztag-stub>
+        </ztab-stub>
+      </a></div>
+  </div>
+</div>"
+`;

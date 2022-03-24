@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: {"title":"Python","icon":"python","finishedInDisplay":"41 seconds","status":"CNCL"} 1`] = `
+"<div class=\\"flex flex-1 w-full rounded-sm min-h-24\\">
+  <div class=\\"flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly\\">
+    <div class=\\"flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400\\">
+      <zicon-stub icon=\\"python\\" size=\\"small\\" position=\\"\\" color=\\"transparent\\"></zicon-stub> <span class=\\"text-base font-bold text-vanilla-100\\">Python</span>
+    </div>
+    <div class=\\"space-x-6 sm:flex\\">
+      <div class=\\"flex items-center space-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"\\"></zicon-stub>
+        <div class=\\"text-sm text-vanilla-400\\"><span> Cancelled after 41 seconds </span></div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <div class=\\"relative w-2/5 p-4 md:w-1/5\\">
+    <div class=\\"flex items-center justify-around\\">
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">introduced</div>
+      </div>
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">resolved</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: {"title":"Python","icon":"python","finishedInDisplay":"41 seconds","status":"FAIL"} 1`] = `
+"<div class=\\"flex flex-1 w-full rounded-sm min-h-24\\">
+  <div class=\\"flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly\\">
+    <div class=\\"flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400\\">
+      <zicon-stub icon=\\"python\\" size=\\"small\\" position=\\"\\" color=\\"transparent\\"></zicon-stub> <span class=\\"text-base font-bold text-vanilla-100\\">Python</span>
+    </div>
+    <div class=\\"space-x-6 sm:flex\\">
+      <div class=\\"flex items-center space-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"\\"></zicon-stub>
+        <div class=\\"text-sm text-vanilla-400\\"><span> Failed after 41 seconds </span></div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <div class=\\"relative w-2/5 p-4 md:w-1/5\\">
+    <div class=\\"flex items-center justify-around\\">
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">introduced</div>
+      </div>
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">resolved</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: {"title":"Python","icon":"python","finishedInDisplay":"41 seconds","status":"PASS"} 1`] = `
+"<div class=\\"flex flex-1 w-full rounded-sm min-h-24\\">
+  <div class=\\"flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly\\">
+    <div class=\\"flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400\\">
+      <zicon-stub icon=\\"python\\" size=\\"small\\" position=\\"\\" color=\\"transparent\\"></zicon-stub> <span class=\\"text-base font-bold text-vanilla-100\\">Python</span>
+    </div>
+    <div class=\\"space-x-6 sm:flex\\">
+      <div class=\\"flex items-center space-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"\\"></zicon-stub>
+        <div class=\\"text-sm text-vanilla-400\\"><span> Passed in 41 seconds </span></div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <div class=\\"relative w-2/5 p-4 md:w-1/5\\">
+    <div class=\\"flex items-center justify-around\\">
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">introduced</div>
+      </div>
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">resolved</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: {"title":"Python","icon":"python","finishedInDisplay":"41 seconds","status":"PEND"} 1`] = `
+"<div class=\\"flex flex-1 w-full rounded-sm min-h-24\\">
+  <div class=\\"flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly\\">
+    <div class=\\"flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400\\">
+      <zicon-stub icon=\\"python\\" size=\\"small\\" position=\\"\\" color=\\"transparent\\"></zicon-stub> <span class=\\"text-base font-bold text-vanilla-100\\">Python</span>
+    </div>
+    <div class=\\"space-x-6 sm:flex\\">
+      <div class=\\"flex items-center space-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"motion-safe:animate-spin\\"></zicon-stub>
+        <div class=\\"text-sm text-vanilla-400\\"><span> Analysis in progress (Time elapsed: 41 seconds) </span></div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <!---->
+</div>"
+`;
+
+exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: {"title":"Python","icon":"python","finishedInDisplay":"41 seconds","status":"READ"} 1`] = `
+"<div class=\\"flex flex-1 w-full rounded-sm min-h-24\\">
+  <div class=\\"flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly\\">
+    <div class=\\"flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400\\">
+      <zicon-stub icon=\\"python\\" size=\\"small\\" position=\\"\\" color=\\"transparent\\"></zicon-stub> <span class=\\"text-base font-bold text-vanilla-100\\">Python</span>
+    </div>
+    <div class=\\"space-x-6 sm:flex\\">
+      <div class=\\"flex items-center space-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"\\"></zicon-stub>
+        <div class=\\"text-sm text-vanilla-400\\"><span> Completed in 41 seconds </span></div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <div class=\\"relative w-2/5 p-4 md:w-1/5\\">
+    <div class=\\"flex items-center justify-around\\">
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">introduced</div>
+      </div>
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">resolved</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: {"title":"Python","icon":"python","finishedInDisplay":"41 seconds","status":"TIMO"} 1`] = `
+"<div class=\\"flex flex-1 w-full rounded-sm min-h-24\\">
+  <div class=\\"flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly\\">
+    <div class=\\"flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400\\">
+      <zicon-stub icon=\\"python\\" size=\\"small\\" position=\\"\\" color=\\"transparent\\"></zicon-stub> <span class=\\"text-base font-bold text-vanilla-100\\">Python</span>
+    </div>
+    <div class=\\"space-x-6 sm:flex\\">
+      <div class=\\"flex items-center space-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"\\"></zicon-stub>
+        <div class=\\"text-sm text-vanilla-400\\"><span> Timed out after 41 seconds </span></div>
+      </div>
+      <!---->
+    </div>
+  </div>
+  <div class=\\"relative w-2/5 p-4 md:w-1/5\\">
+    <div class=\\"flex items-center justify-around\\">
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">introduced</div>
+      </div>
+      <div class=\\"flex flex-col items-center space-y-1\\">
+        <div class=\\"text-2xl font-medium text-vanilla-400 has-tooltip\\" data-original-title=\\"null\\">
+          0
+        </div>
+        <div class=\\"text-xs text-vanilla-400\\">resolved</div>
+      </div>
+    </div>
+  </div>
+</div>"
+`;

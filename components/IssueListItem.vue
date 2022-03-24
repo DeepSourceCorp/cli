@@ -1,5 +1,5 @@
 <template>
-  <base-card :to="issueLink" :removeDefaultStyle="removeDefaultStyle">
+  <base-card :to="issueLink" :remove-default-style="removeDefaultStyle">
     <template slot="title">
       <h3
         class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
@@ -10,10 +10,10 @@
       }}</span>
     </template>
     <template slot="description">
-      <div class="space-y-1.5">
+      <div v-if="showSeenInfo" class="space-y-1.5">
         <div class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
           <!-- Issue type -->
-          <issue-type :issueType="issueType"></issue-type>
+          <issue-type :issue-type="issueType" />
           <!-- First seen and last seen -->
           <div class="flex items-center gap-x-2">
             <z-icon icon="clock" size="x-small" color="vanilla-400" />
@@ -38,6 +38,19 @@
           >
         </div>
       </div>
+
+      <!-- Place content on the same line if not showing first and last seen information -->
+      <div v-else class="flex gap-x-4">
+        <issue-type :issue-type="issueType" />
+
+        <div :key="issueType" class="flex items-center space-x-1.5">
+          <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0" />
+          <span
+            class="max-w-2xl overflow-hidden text-sm whitespace-pre text-vanilla-400 overflow-ellipsis"
+            >Found in {{ seenIn }}</span
+          >
+        </div>
+      </div>
     </template>
     <template slot="info">
       <div
@@ -49,12 +62,12 @@
         <!-- Occurence count and Trend  -->
         <div
           class="flex-col items-center justify-center flex-grow hidden text-xs leading-none lg:gap-y-2 sm:flex"
-          :class="{ 'py-4': !showTrend, 'py-2': showTrend }"
+          :class="showTrend ? 'py-2' : 'py-4'"
         >
           <!-- Count -->
           <div
-            class="text-1.5xl font-bold leading-10 text-vanilla-100"
             v-tooltip="occurrenceCount > 1000 ? `${formatIntl(occurrenceCount)} occurrences` : ''"
+            class="text-1.5xl font-bold leading-10 text-vanilla-100"
           >
             {{ shortenLargeNumber(occurrenceCount) }}
           </div>
@@ -62,10 +75,7 @@
           <div
             v-if="showTrend"
             class="hidden px-1 text-center sm:block"
-            :class="{
-              'text-cherry': !isTrendPositive,
-              'text-juniper': isTrendPositive
-            }"
+            :class="isTrendPositive ? 'text-juniper' : 'text-cherry'"
           >
             <span
               ><span v-html="isTrendPositive ? '&#9660;' : '&#9650;'"></span>
@@ -77,15 +87,16 @@
         <!-- Autofix -->
         <button
           v-if="autofixAvailable && showAutofixButton"
-          @click.stop.prevent="handleClick()"
           :disabled="disableAutofixButton"
+          data-testid="autofix-issue"
           class="flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-300 group-hover:border-ink-200"
           :class="{
             'cursor-pointer hover:bg-ink-200': !disableAutofixButton
           }"
+          @click.stop.prevent="handleClick()"
         >
-          <z-icon icon="autofix" size="small" color="juniper" class="hidden sm:block"></z-icon>
-          <z-icon icon="autofix" size="x-small" color="juniper" class="block sm:hidden"></z-icon>
+          <z-icon icon="autofix" size="small" color="juniper" class="hidden sm:block" />
+          <z-icon icon="autofix" size="x-small" color="juniper" class="block sm:hidden" />
           <span class="ml-1 text-sm font-medium text-juniper sm:ml-0">Autofix</span>
         </button>
       </div>
@@ -94,13 +105,14 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import dayjs from 'dayjs'
 import { ZIcon } from '@deepsourcelabs/zeal'
+import dayjs from 'dayjs'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
+import { BaseCard } from '@/components/History'
 import IssueType from '@/components/Repository/IssueType.vue'
 import { formatDate } from '~/utils/date'
-import { BaseCard } from '@/components/History'
-import { formatIntl, shortenLargeNumber, escapeHtml } from '~/utils/string'
+import { escapeHtml, formatIntl, shortenLargeNumber } from '~/utils/string'
 
 const PERCENTAGE = 100
 
@@ -166,6 +178,9 @@ export default class IssueListItem extends Vue {
 
   @Prop({ default: false })
   disableAutofixButton!: boolean
+
+  @Prop({ default: true })
+  showSeenInfo!: boolean
 
   public handleClick(): void {
     this.$emit('autofix', {
