@@ -1,4 +1,4 @@
-query($login: String!, $provider: VCSProviderChoices!, $limit: Int, $after: String) {
+query teamInvites($login: String!, $provider: VCSProviderChoices!, $limit: Int, $after: String) {
   team(login: $login, provider: $provider) {
     id
     invites(first: $limit, after: $after) {

@@ -1,4 +1,4 @@
-query($login: String!, $provider: VCSProviderChoices!) {
+query accountSetupStatus($login: String!, $provider: VCSProviderChoices!) {
   owner(login: $login, provider: $provider) {
     id
     accountSetupStatus

@@ -1,4 +1,4 @@
-query($shortcode: String!) {
+query transformerExistsCheck($shortcode: String!) {
   transformer(shortcode: $shortcode) {
     name
     analyzer {

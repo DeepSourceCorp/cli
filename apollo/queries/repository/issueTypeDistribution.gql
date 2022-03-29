@@ -1,4 +1,4 @@
-query(
+query issueTypeDistribution(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

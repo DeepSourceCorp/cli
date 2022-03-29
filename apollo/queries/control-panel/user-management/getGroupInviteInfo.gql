@@ -1,4 +1,4 @@
-query($invitationCode: String!) {
+query getGroupInviteInfo($invitationCode: String!) {
   getGroupInviteInfo(invitationCode: $invitationCode) {
     name
   }

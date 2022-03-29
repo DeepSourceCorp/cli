@@ -19,7 +19,7 @@
             class="w-full"
           >
             <z-menu-item>
-              <div class="flex space-x-2 leading-none items-center">
+              <div class="flex items-center space-x-2 leading-none">
                 <z-icon
                   :icon="repo.isPrivate ? 'lock' : 'globe'"
                   size="small"
@@ -33,7 +33,7 @@
       </template>
     </z-menu>
     <template v-else>
-      <div class="flex items-center py-1 px-2 space-x-2 text-sm text-vanilla-400">
+      <div class="flex items-center px-2 py-1 space-x-2 text-sm text-vanilla-400">
         <z-icon icon="plus-circle" />
         <span>Commit pending</span>
       </div>
@@ -76,21 +76,13 @@ export default class SidebarPendingAdhocRepos extends mixins(ActiveUserMixin, Re
   isCollapsed: boolean
 
   /**
-   * Fetch hook for the component.
-   *
-   * @returns {Promise<void>}
-   */
-  async fetch(): Promise<void> {
-    await this.fetchActiveUser()
-    await this.fetchRepos()
-  }
-
-  /**
    * Mounted hook for the component. Binds listener for `repo-onboarding-completed` socket event.
    *
    * @returns {void}
    */
-  mounted(): void {
+  async mounted(): Promise<void> {
+    await Promise.all([this.fetchActiveUser(), this.fetchRepos()])
+
     this.$socket.$on('repo-onboarding-completed', () => {
       this.fetchRepos(true)
     })

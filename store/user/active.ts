@@ -1,4 +1,3 @@
-import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { GetterTree, ActionTree, MutationTree, Store, ActionContext } from 'vuex'
 
 import UpdateDefaultContextMutation from '~/apollo/mutations/user/updateDefaultContext.gql'
@@ -14,8 +13,6 @@ import { User } from '~/types/types'
 import { RootState } from '~/store'
 
 export interface ActiveUserState {
-  loading: boolean
-  error: Record<string, unknown>
   viewer: User
 }
 
@@ -23,8 +20,6 @@ export type ActiveUserActionContext = ActionContext<ActiveUserState, RootState>
 
 export const state = (): ActiveUserState => ({
   ...(<ActiveUserState>{
-    loading: false,
-    error: {},
     viewer: {}
   })
 })
@@ -75,24 +70,14 @@ export const getters: GetterTree<ActiveUserState, RootState> = {
 // Mutations ------------------------------------------
 
 export enum ActiveUserMutations {
-  SET_LOADING = 'setActiveUserLoading',
-  SET_ERROR = 'setActiveUserError',
   SET_VIEWER = 'setViewer'
 }
 
 interface ActiveUserModuleMutations extends MutationTree<ActiveUserState> {
-  [ActiveUserMutations.SET_LOADING]: (state: ActiveUserState, value: boolean) => void
-  [ActiveUserMutations.SET_ERROR]: (state: ActiveUserState, error: GraphqlError) => void
   [ActiveUserMutations.SET_VIEWER]: (state: ActiveUserState, viewer: User) => void
 }
 
 export const mutations: ActiveUserModuleMutations = {
-  [ActiveUserMutations.SET_LOADING]: (state, value) => {
-    state.loading = value
-  },
-  [ActiveUserMutations.SET_ERROR]: (state, error) => {
-    state.error = Object.assign({}, state.error, error)
-  },
   [ActiveUserMutations.SET_VIEWER]: (state, viewer) => {
     state.viewer = Object.assign({}, state.viewer, viewer)
   }
@@ -155,76 +140,47 @@ interface ActiveUserModuleActions extends ActionTree<ActiveUserState, RootState>
 
 export const actions: ActiveUserModuleActions = {
   async [ActiveUserActions.FETCH_VIEWER_INFO]({ commit }, args) {
-    commit(ActiveUserMutations.SET_LOADING, true)
     const refetch = args ? args.refetch : false
-    await this.$fetchGraphqlData(ActiveUserDetailGQLQuery, {}, refetch)
-      .then((response: GraphqlQueryResponse) => {
-        commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
-        commit(ActiveUserMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(ActiveUserMutations.SET_ERROR, e)
-        commit(ActiveUserMutations.SET_LOADING, false)
-      })
-  },
-  async [ActiveUserActions.UPDATE_DEFAULT_CONTEXT]({ commit }, args) {
     try {
-      commit(ActiveUserMutations.SET_LOADING, true)
+      const response = await this.$fetchGraphqlData(ActiveUserDetailGQLQuery, {}, refetch)
+      commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
+    } catch (e) {}
+  },
+  async [ActiveUserActions.UPDATE_DEFAULT_CONTEXT](_, args) {
+    try {
       const response = await this.$applyGraphqlMutation(UpdateDefaultContextMutation, {
         contextOwnerId: args.contextOwnerId
       })
-      commit(ActiveUserMutations.SET_LOADING, false)
       return response
-    } catch (e) {
-      const error = e as GraphqlError
-      commit(ActiveUserMutations.SET_ERROR, error)
-      commit(ActiveUserMutations.SET_LOADING, false)
-    }
+    } catch (e) {}
   },
   async [ActiveUserActions.FETCH_STARRED_REPOS]({ commit }, args) {
     try {
-      commit(ActiveUserMutations.SET_LOADING, true)
       const response = await this.$fetchGraphqlData(ActiveUserStarredRepos, {}, args?.refetch)
       commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
-      commit(ActiveUserMutations.SET_LOADING, false)
-    } catch (e) {
-      commit(ActiveUserMutations.SET_ERROR, e)
-      commit(ActiveUserMutations.SET_LOADING, false)
-    }
+    } catch (e) {}
   },
   async [ActiveUserActions.FETCH_GITLAB_ACCOUNTS]({ commit }) {
     try {
-      commit(ActiveUserMutations.SET_LOADING, true)
       const response = await this.$fetchGraphqlData(ActiveUserGitlabAccounts, {}, true)
       commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
-      commit(ActiveUserMutations.SET_LOADING, false)
-    } catch (e) {
-      commit(ActiveUserMutations.SET_ERROR, e)
-      commit(ActiveUserMutations.SET_LOADING, false)
-    }
+    } catch (e) {}
   },
   async [ActiveUserActions.FETCH_GSR_PROJECTS]({ commit }) {
     const response = await this.$fetchGraphqlData(ActiveUserGSRProjects, {}, true)
     commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
   },
-  async [ActiveUserActions.UPDATE_STARRED_REPO]({ commit, dispatch }, { repoId, action }) {
+  async [ActiveUserActions.UPDATE_STARRED_REPO]({ dispatch }, { repoId, action }) {
     try {
       const res = await this.$applyGraphqlMutation(UpdateStarredRepos, { repoId, action })
       await dispatch(ActiveUserActions.FETCH_STARRED_REPOS, { refetch: true })
       return res.data.updateStarredRepository
-    } catch (e) {
-      commit(ActiveUserMutations.SET_ERROR, e)
-    }
+    } catch (e) {}
   },
   async [ActiveUserActions.FETCH_RECOMMENDED_ISSUES]({ commit }) {
     try {
-      commit(ActiveUserMutations.SET_LOADING, true)
       const response = await this.$fetchGraphqlData(ActiveUserRecommendedIssues, {})
       commit(ActiveUserMutations.SET_VIEWER, response.data.viewer)
-      commit(ActiveUserMutations.SET_LOADING, false)
-    } catch (e) {
-      commit(ActiveUserMutations.SET_ERROR, e)
-      commit(ActiveUserMutations.SET_LOADING, false)
-    }
+    } catch (e) {}
   }
 }

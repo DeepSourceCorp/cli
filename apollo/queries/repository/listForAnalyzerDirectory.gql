@@ -1,4 +1,4 @@
-query($q: String) {
+query repositoriesListForDirectory($q: String) {
   viewer {
     id
     repositories(name_Icontains: $q) {

@@ -1,4 +1,4 @@
-query($login: String!, $provider: VCSProviderChoices!) {
+query billingStatusCheck($login: String!, $provider: VCSProviderChoices!) {
   owner(login: $login, provider: $provider) {
     billingInfo {
       status

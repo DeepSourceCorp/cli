@@ -1,4 +1,4 @@
-query($nodeId: ID!, $limit: Int, $after: String, $q: String, $sort: String) {
+query issueChildren($nodeId: ID!, $limit: Int, $after: String, $q: String, $sort: String) {
   node(id: $nodeId) {
     ... on RepositoryIssue {
       shortcode

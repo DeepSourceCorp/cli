@@ -1,4 +1,4 @@
-query($groupId: ID!, $q: String) {
+query enterpriseAddTeam($groupId: ID!, $q: String) {
   enterprise {
     group(id: $groupId) {
       id

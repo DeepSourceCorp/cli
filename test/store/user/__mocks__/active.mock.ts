@@ -28,7 +28,5 @@ export const mockActiveUserDetail = (): User => ACTIVE_USER_DETAIL
  * Mock factory
  */
 export const mockActiveUserState = (): ActiveUserState => ({
-  loading: false as boolean,
-  error: {},
   viewer: mockActiveUserDetail()
 })

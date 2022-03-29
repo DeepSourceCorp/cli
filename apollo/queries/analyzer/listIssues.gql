@@ -1,4 +1,4 @@
-query(
+query listIssues(
   $shortcode: String!
   $first: Int
   $offset: Int

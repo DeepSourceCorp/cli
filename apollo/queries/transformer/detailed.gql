@@ -1,4 +1,4 @@
-query($shortcode: String!) {
+query detailedTransformer($shortcode: String!) {
   transformer(shortcode: $shortcode) {
     id
     name

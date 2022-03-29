@@ -1,4 +1,4 @@
-query {
+query recommendedIssues {
   viewer {
     id
     recommendedIssues(first: 5) {

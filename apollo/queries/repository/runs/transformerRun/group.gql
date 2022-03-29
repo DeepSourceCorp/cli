@@ -1,4 +1,4 @@
-query(
+query groupedTransformerRuns(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

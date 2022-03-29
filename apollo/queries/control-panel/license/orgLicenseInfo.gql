@@ -1,4 +1,4 @@
-query($lastDays: Int!, $trendType: TrendType!) {
+query orgLicense($lastDays: Int!, $trendType: TrendType!) {
   enterprise {
     license {
       seatsTotal

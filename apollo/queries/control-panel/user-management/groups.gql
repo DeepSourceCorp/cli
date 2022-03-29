@@ -1,4 +1,4 @@
-query($q: String, $first: Int, $offset: Int) {
+query enterpriseGroups($q: String, $first: Int, $offset: Int) {
   enterprise {
     isScimEnabled
     groups(q: $q, first: $first, offset: $offset) {

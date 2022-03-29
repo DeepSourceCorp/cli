@@ -1,4 +1,4 @@
-mutation {
+mutation refreshToken {
   refreshToken {
     token
   }

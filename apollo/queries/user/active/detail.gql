@@ -1,4 +1,4 @@
-query {
+query viewer {
   viewer {
     id
     connectedVcsProviders

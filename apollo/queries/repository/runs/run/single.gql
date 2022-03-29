@@ -1,4 +1,9 @@
-query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+query singleRepoRun(
+  $runId: String!
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id
     run(runId: $runId) {

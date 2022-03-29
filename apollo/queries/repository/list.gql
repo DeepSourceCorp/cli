@@ -1,4 +1,4 @@
-query(
+query repositoriesList(
   $login: String!
   $provider: VCSProviderChoices!
   $isActivated: Boolean

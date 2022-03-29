@@ -1,4 +1,9 @@
-query($provider: VCSProviderChoices!, $owner: String!, $name: String!, $status: String!) {
+query analysisRuns(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $status: String!
+) {
   repository(provider: $provider, name: $name, owner: $owner) {
     id
     runs(status: $status) {

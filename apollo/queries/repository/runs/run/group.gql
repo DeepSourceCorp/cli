@@ -1,4 +1,4 @@
-query(
+query groupedRuns(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

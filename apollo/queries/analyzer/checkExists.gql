@@ -1,4 +1,4 @@
-query($shortcode: String!) {
+query analyzer($shortcode: String!) {
   analyzer(shortcode: $shortcode) {
     id
     name

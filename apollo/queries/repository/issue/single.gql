@@ -1,4 +1,4 @@
-query($shortcode: String!) {
+query singleRepoIssue($shortcode: String!) {
   issue(shortcode: $shortcode) {
     shortcode
     title

@@ -7,7 +7,6 @@ import {
   GraphqlQueryOptions,
   GraphqlQueryResponse
 } from '~/types/apolloTypes'
-import { Context } from '@nuxt/types'
 
 import refreshTokenMutation from '@/apollo/mutations/auth/refreshToken.gql'
 
@@ -79,80 +78,6 @@ declare module 'vue/types/vue' {
   }
 }
 
-export const getCsrfPath = (config: Context['$config']): string => {
-  if (process.env.NODE_ENV === 'development') {
-    return 'http://localhost:8000/api/set-csrf-cookie/'
-  }
-  if (process.server) {
-    return config.csrfServerUri as string
-  }
-  if (process.client) {
-    return config.csrfClientUri as string
-  }
-  throw new Error('Both process.server and process.client are false')
-}
-
-const parseCookieString = (str: string): string => {
-  if (!str) {
-    return ''
-  }
-  const value = str.split(';')[0].split('=')[1]
-  if (!value) {
-    return ''
-  }
-  return value
-}
-
-const getCSRFHeaders = async ({
-  $cookies,
-  $config
-}: NuxtAppOptions): Promise<Record<string, Record<string, string>>> => {
-  let csrfToken = $cookies.get('csrftoken')
-
-  if (!csrfToken) {
-    const response = await fetch(getCsrfPath($config), {
-      credentials: 'include'
-    })
-
-    if (process.client) {
-      csrfToken = $cookies.get('csrftoken')
-    } else {
-      const cookieString = response.headers.get('set-cookie') as string
-      csrfToken = parseCookieString(cookieString)
-    }
-  }
-
-  return {
-    headers: {
-      'X-CSRFToken': csrfToken as string,
-      Cookie: `csrftoken=${csrfToken as string}`
-    }
-  }
-}
-
-const getContext = async (app: NuxtAppOptions): Promise<Record<string, Record<string, string>>> => {
-  const { $cookies, store } = app
-
-  // the CSRF headers are always required
-  const context = await getCSRFHeaders(app)
-
-  // The JWT is managed in Vuex
-  const token = store?.getters[`account/auth/${AuthGetterTypes.TOKEN}`] as string
-  const refreshToken = $cookies.get('JWT-refresh-token') as string
-
-  if (!process.client && refreshToken) {
-    // On client the refresh token is passed with every request
-    // On server we transparently pass the cookie
-    context.headers.Cookie += `; JWT-refresh-token=${refreshToken}`
-  }
-
-  if (token) {
-    context.headers.Authorization = `JWT ${token}`
-  }
-
-  return context
-}
-
 const refreshIfTokenExpired = async (
   app: NuxtAppOptions
 ): Promise<GraphqlMutationResponse | void> => {
@@ -162,9 +87,7 @@ const refreshIfTokenExpired = async (
     const expiry = app.store.getters[`account/auth/${AuthGetterTypes.EXPIRY}`]
     if (isLoggedIn && now > expiry) {
       const client = app.apolloProvider?.defaultClient
-
-      const context = await getContext(app)
-      const params = { mutation: refreshTokenMutation, variables: {}, context }
+      const params = { mutation: refreshTokenMutation, variables: {} }
       if (client) {
         // don't call the action directly unless you have a thing for infinite loops
         try {
@@ -200,9 +123,7 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
         await refreshIfTokenExpired(app)
       }
 
-      const context = await getContext(app)
-
-      const params = { query, variables, context } as GraphqlQueryOptions
+      const params = { query, variables } as GraphqlQueryOptions
       if (refetch) {
         params.fetchPolicy = 'network-only'
       }
@@ -233,11 +154,9 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
         await refreshIfTokenExpired(app)
       }
 
-      const context = await getContext(app)
       return app.apolloProvider.defaultClient.mutate({
         mutation,
         variables,
-        context,
         refetchQueries,
         awaitRefetchQueries: true
       })

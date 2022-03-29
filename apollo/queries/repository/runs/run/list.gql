@@ -1,4 +1,4 @@
-query(
+query repositoryRunsList(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

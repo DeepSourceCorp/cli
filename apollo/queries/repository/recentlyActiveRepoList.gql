@@ -1,4 +1,4 @@
-query(
+query recentlyActiveRepoList(
   $login: String!
   $provider: VCSProviderChoices!
   $limit: Int

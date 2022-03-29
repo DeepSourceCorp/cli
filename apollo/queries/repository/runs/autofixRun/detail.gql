@@ -1,4 +1,4 @@
-query($runId: String!) {
+query autofixRun($runId: String!) {
   autofixRun(runId: $runId) {
     id
     errorsRendered
