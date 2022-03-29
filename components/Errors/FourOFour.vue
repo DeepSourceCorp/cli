@@ -84,7 +84,10 @@
           >
             This dimension doesn't exist... yet!
           </span>
-          <a href="/" class="home-button">Go home</a>
+          <div class="flex gap-x-5">
+            <a href="/" class="norris-button btn-primary">Go home</a>
+            <nuxt-link :to="loginUrl" class="norris-button btn-secondary">Login</nuxt-link>
+          </div>
         </div>
         <span class="mx-auto text-vanilla-100 lg:text-ink-400">
           © {{ new Date().getFullYear() }}, DeepSource Corp.
@@ -104,21 +107,19 @@ import { ZButton } from '@deepsourcelabs/zeal'
 @Component({
   components: { ZButton }
 })
-export default class FourOFour extends Vue {}
+export default class FourOFour extends Vue {
+  get loginUrl(): string {
+    return this.$route.name?.startsWith('provider-owner')
+      ? `/login?next=${this.$route.fullPath}`
+      : '/login'
+  }
+}
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @font-face {
   font-family: 'Retro Game';
   src: local('Retro Game'), url(~/assets/fonts/retro-gaming.ttf) format('truetype');
-}
-
-.rocket {
-  animation: floating 5s steps(4, end) infinite;
-}
-
-.nebula {
-  animation: filter-animation 12s ease-in-out infinite;
 }
 
 .four-o-four {
@@ -129,21 +130,18 @@ export default class FourOFour extends Vue {}
 
   cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=),
     auto;
+
+  .rocket {
+    animation: floating 5s steps(4, end) infinite;
+  }
+
+  .nebula {
+    animation: filter-animation 12s ease-in-out infinite;
+  }
 }
 
-.home-button::after {
-  @apply absolute;
-
-  top: -4px;
-  right: -4px;
-  bottom: -4px;
-  left: -4px;
-  content: '';
-  box-shadow: inset -5px -5px #2eb78b;
-}
-
-.home-button {
-  @apply bg-juniper text-ink-400 px-4 py-1.5 text-xl mt-8 border-solid border-4 relative inline-block text-center select-none;
+.norris-button {
+  @apply px-3 py-1 text-lg mt-8 border-solid border-4 relative inline-block text-center select-none;
 
   border-image-slice: 2;
   border-image-width: 2;
@@ -154,15 +152,50 @@ export default class FourOFour extends Vue {}
   cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC)
       14 0,
     pointer;
-}
 
-.home-button:focus {
-  box-shadow: 0 0 0 6px rgba(#2eb78b, 0.3);
-}
+  &::after {
+    @apply absolute;
 
-.home-button:active::after {
-  box-shadow: inset 5px 5px #2eb78b;
-  @apply border-juniper-600;
+    top: -4px;
+    right: -4px;
+    bottom: -4px;
+    left: -4px;
+    content: '';
+  }
+
+  &.btn-primary {
+    @apply bg-juniper text-ink-400;
+
+    &:focus {
+      box-shadow: 0 0 0 6px rgba(#2eb78b, 0.3);
+    }
+
+    &:active::after {
+      box-shadow: inset 5px 5px #2eb78b;
+      @apply border-juniper-600;
+    }
+
+    &::after {
+      box-shadow: inset -5px -5px #2eb78b;
+    }
+  }
+
+  &.btn-secondary {
+    @apply bg-ink-100 text-vanilla-100;
+
+    &:focus {
+      box-shadow: 0 0 0 6px rgba(#23262e, 0.3);
+    }
+
+    &:active::after {
+      box-shadow: inset 5px 5px #23262e;
+      @apply border-juniper-600;
+    }
+
+    &::after {
+      box-shadow: inset -5px -5px #23262e;
+    }
+  }
 }
 
 @keyframes floating {
