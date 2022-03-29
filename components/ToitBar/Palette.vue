@@ -340,7 +340,7 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
     this.$palette.registerGlobalCommands([
       {
         id: 'open-repo-list',
-        label: `Open Respository`,
+        label: `Open Repository`,
         icon: `corner-up-right`,
         commandType: 'list',
         shortkey: ['Opt', 'R'],
