@@ -1,4 +1,4 @@
-query enterpriseTeams($q: String, $first: Int, $offset: Int) {
+query($q: String, $first: Int, $offset: Int) {
   enterprise {
     teams(q: $q, first: $first, offset: $offset) {
       edges {

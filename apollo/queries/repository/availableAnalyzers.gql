@@ -1,4 +1,4 @@
-query availableAnalyzers($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+query($provider: VCSProviderChoices!, $owner: String!, $name: String!) {
   repository(provider: $provider, name: $name, owner: $owner) {
     id
     name

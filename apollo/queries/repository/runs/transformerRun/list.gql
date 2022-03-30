@@ -1,4 +1,4 @@
-query transformerRunsList(
+query(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

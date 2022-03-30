@@ -54,10 +54,7 @@ export const getters: GetterTree<AuthModuleState, RootState> = {
     }
   },
   [AuthGetterTypes.GET_LOGGED_IN]: (state): boolean => {
-    if (state.token) {
-      return state.loggedIn
-    }
-    return false
+    return state.loggedIn
   },
   [AuthGetterTypes.TOKEN]: (state): string => {
     return state.token

@@ -1,11 +1,4 @@
-query checkIssues(
-  $checkId: ID!
-  $limit: Int
-  $after: String
-  $shortcode: String
-  $q: String
-  $sort: String
-) {
+query($checkId: ID!, $limit: Int, $after: String, $shortcode: String, $q: String, $sort: String) {
   checkIssues(
     checkId: $checkId
     first: $limit

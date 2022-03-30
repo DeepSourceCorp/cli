@@ -1,4 +1,4 @@
-query enterpriseUserAndTeams($id: ID!, $q: String, $first: Int, $offset: Int) {
+query($id: ID!, $q: String, $first: Int, $offset: Int) {
   enterprise {
     user(id: $id) {
       id

@@ -1,4 +1,4 @@
-query watchedRepositories {
+query {
   viewer {
     id
     preference {

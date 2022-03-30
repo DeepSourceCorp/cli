@@ -1,4 +1,4 @@
-query discoverRepositories($preferredTechnologies: [ID], $q: String, $first: Int, $after: String) {
+query($preferredTechnologies: [ID], $q: String, $first: Int, $after: String) {
   discoverRepositories(
     preferredTechnologies: $preferredTechnologies
     q: $q

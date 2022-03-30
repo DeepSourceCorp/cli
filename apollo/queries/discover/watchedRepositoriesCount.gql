@@ -1,4 +1,4 @@
-query watchedRepositoriesCount {
+query {
   viewer {
     id
     preference {

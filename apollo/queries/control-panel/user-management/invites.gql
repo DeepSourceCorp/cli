@@ -1,4 +1,4 @@
-query enterprise {
+query {
   enterprise {
     groups {
       edges {

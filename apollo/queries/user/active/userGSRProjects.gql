@@ -1,4 +1,4 @@
-query gsrProjects {
+query {
   viewer {
     id
     gsrProjects {

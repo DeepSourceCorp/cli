@@ -79,8 +79,7 @@ export default {
     posthogApiKey: toBool(process.env.ON_PREM) ? '' : process.env.POSTHOG_API_KEY,
     posthogApiHost: toBool(process.env.ON_PREM) ? '' : process.env.POSTHOG_API_HOST,
     rudderWriteKey: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_WRITE_KEY,
-    rudderDataPlaneUrl: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_DATA_PLANE_URL,
-    enableTimings: toBool(process.env.ON_PREM) ? false : process.env.ENABLE_TIMINGS
+    rudderDataPlaneUrl: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_DATA_PLANE_URL
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -138,7 +137,7 @@ export default {
 
   ignore: toBool(process.env.ON_PREM)
     ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*']
-    : ['**/apollo/**/control-panel/*', '**/components/ControlPanel', '**/pages/control-panel'],
+    : [],
 
   loadingIndicator: {
     name: 'pulse',
@@ -163,7 +162,7 @@ export default {
 
   timings: {
     // default value
-    enabled: false
+    enabled: process.env.NODE_ENV === 'development'
   },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -271,22 +270,9 @@ export default {
   // https://github.com/nuxt-community/tailwindcss-module/issues/79#issuecomment-609693459
   build: {
     publicPath: process.env.NODE_ENV === 'prod' ? process.env.CDN_URL : '/_nuxt/',
-    cache: true,
     parallel: true,
+    cache: true,
     sourceMap: true,
-    extractCSS: process.env.NODE_ENV !== 'development',
-    optimization: {
-      splitChunks: {
-        cacheGroups: {
-          styles: {
-            name: 'styles',
-            test: /\.(css|vue)$/,
-            chunks: 'all',
-            enforce: true
-          }
-        }
-      }
-    },
     postcss: {
       preset: {
         features: {
@@ -325,8 +311,7 @@ export default {
     includeNodeModules: true,
     clientConfigs: {
       default: '@/apollo/config/client.ts'
-    },
-    errorHandler: '@/apollo/config/error.ts'
+    }
   },
 
   vue: {

@@ -21,10 +21,10 @@
         :value="currentAutofixCount"
         labelBgClass="bg-robin"
         label="Autofixed issues"
-        :loading="isLoading"
+        :loading="$fetchState.pending"
       />
     </div>
-    <div v-if="isLoading" class="p-4">
+    <div v-if="$fetchState.pending" class="p-4">
       <div style="height: 258px" class="rounded-md bg-ink-300 animate-pulse"></div>
     </div>
     <base-graph
@@ -57,7 +57,6 @@ const ownerDetailStore = namespace('owner/detail')
 })
 export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
   public lastDays = 30
-  public isLoading = true
 
   @ownerDetailStore.State
   autofixTrend: Trend
@@ -80,14 +79,12 @@ export default class OwnerAutofixGraph extends mixins(OwnerDetailMixin) {
   }
 
   /**
-   * Mounted hook
+   * Fetch hook for Vue component
    *
-   * @returns {void}
+   * @returns Promise<void>
    */
-  async mounted(): Promise<void> {
-    this.isLoading = true
+  async fetch(): Promise<void> {
     await this.fetchData()
-    this.isLoading = false
   }
 
   get formattedLabels(): string[] {

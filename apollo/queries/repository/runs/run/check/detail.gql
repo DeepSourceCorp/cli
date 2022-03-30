@@ -1,4 +1,4 @@
-query check($checkId: ID!) {
+query($checkId: ID!) {
   check(checkId: $checkId) {
     id
     status

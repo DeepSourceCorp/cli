@@ -1,4 +1,4 @@
-query repoCollaborators(
+query(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

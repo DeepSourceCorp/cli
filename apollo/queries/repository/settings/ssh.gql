@@ -1,4 +1,4 @@
-query repoSSH($id: ID!) {
+query($id: ID!) {
   repository: node(id: $id) {
     ... on Repository {
       id

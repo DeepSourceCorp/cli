@@ -1,4 +1,4 @@
-query socialUrls {
+query {
   oauth {
     socialUrls
   }

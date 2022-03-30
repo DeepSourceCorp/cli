@@ -1,4 +1,4 @@
-query repoDetail($repositoryId: ID!, $shortcode: String!) {
+query($repositoryId: ID!, $shortcode: String!) {
   repository: node(id: $repositoryId) {
     ... on Repository {
       id

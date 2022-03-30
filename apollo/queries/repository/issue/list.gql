@@ -1,4 +1,4 @@
-query repoList(
+query(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

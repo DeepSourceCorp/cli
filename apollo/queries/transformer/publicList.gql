@@ -1,4 +1,4 @@
-query publicTransformersList($q: String) {
+query($q: String) {
   transformers(q: $q) {
     edges {
       node {

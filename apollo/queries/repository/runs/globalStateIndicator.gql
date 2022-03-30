@@ -1,9 +1,4 @@
-query globalStateIndicator(
-  $provider: VCSProviderChoices!
-  $owner: String!
-  $name: String!
-  $status: String
-) {
+query($provider: VCSProviderChoices!, $owner: String!, $name: String!, $status: String) {
   repository(provider: $provider, owner: $owner, name: $name) {
     runs(status: $status) {
       totalCount

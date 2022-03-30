@@ -1,4 +1,4 @@
-query repoActivationDetails($repositoryId: ID!) {
+query($repositoryId: ID!) {
   repository: node(id: $repositoryId) {
     ... on Repository {
       id

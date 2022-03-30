@@ -23,7 +23,9 @@ export enum ContextGetterTypes {
 
 export const state = () => ({
   context: <Context>{},
-  changelog: <Changelog>{}
+  changelog: <Changelog>{},
+  loading: false,
+  error: <Record<string, any>>{}
 })
 
 export type ContextModuleState = ReturnType<typeof state>

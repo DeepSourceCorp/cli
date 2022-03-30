@@ -1,4 +1,4 @@
-query teamSettings($login: String!, $provider: VCSProviderChoices!) {
+query($login: String!, $provider: VCSProviderChoices!) {
   team(login: $login, provider: $provider) {
     id
     login

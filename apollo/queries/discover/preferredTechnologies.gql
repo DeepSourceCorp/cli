@@ -1,4 +1,4 @@
-query preferredTechnologies {
+query {
   viewer {
     id
     preferredTechnologies {

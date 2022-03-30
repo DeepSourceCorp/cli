@@ -1,4 +1,4 @@
-query changelog {
+query {
   changelog {
     logEntries {
       id

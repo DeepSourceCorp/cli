@@ -1,4 +1,4 @@
-query trendingRepositories {
+query {
   trendingRepositories {
     totalCount
     edges {

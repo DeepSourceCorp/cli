@@ -1,4 +1,4 @@
-query gitlabAccounts {
+query {
   viewer {
     id
     gitlabAccounts

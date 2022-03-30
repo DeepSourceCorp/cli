@@ -1,4 +1,4 @@
-query teamMembers(
+query(
   $login: String!
   $provider: VCSProviderChoices!
   $limit: Int

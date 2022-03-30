@@ -1,4 +1,4 @@
-query silenceRules(
+query(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

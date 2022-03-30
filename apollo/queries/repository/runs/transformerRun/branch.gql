@@ -1,9 +1,4 @@
-query transformerBranchRuns(
-  $provider: VCSProviderChoices!
-  $owner: String!
-  $name: String!
-  $branchName: String!
-) {
+query($provider: VCSProviderChoices!, $owner: String!, $name: String!, $branchName: String!) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id
     name
