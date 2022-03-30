@@ -26,8 +26,7 @@ export default (
       mode: 'cors'
     },
     fetch: (uri: RequestInfo, options: RequestInit): Promise<Response> => {
-      // if (process.server && ($config.enableTimings || process.env.NODE_ENV === 'development')) {
-      if (process.server) {
+      if (process.server && ($config.enableTimings || process.env.NODE_ENV === 'development')) {
         const opName =
           JSON.parse(options.body?.toString() ?? '{}')['operationName'] ??
           `apollo-query-${Math.random().toString(36).slice(2)}`
