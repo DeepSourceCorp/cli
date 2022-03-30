@@ -1,4 +1,4 @@
-query autofixedIssueTrend(
+query repositoryAutofixedIssueTrend(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!

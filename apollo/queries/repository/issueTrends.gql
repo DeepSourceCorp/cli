@@ -1,4 +1,9 @@
-query issueTrend($provider: VCSProviderChoices!, $owner: String!, $name: String!, $lastDays: Int!) {
+query repositoryIssueTrend(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $lastDays: Int!
+) {
   repository(provider: $provider, name: $name, owner: $owner) {
     id
     issueTrend(lastDays: $lastDays)

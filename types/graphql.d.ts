@@ -29,7 +29,7 @@ declare module '*/logout.gql' {
 declare module '*/refreshToken.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const refreshToken: DocumentNode;
 
   export default defaultDocument;
 }
@@ -821,7 +821,8 @@ declare module '*/updateStarredRepo.gql' {
 declare module '*/checkExists.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const analyzer: DocumentNode;
+export const transformerExistsCheck: DocumentNode;
 
   export default defaultDocument;
 }
@@ -830,7 +831,8 @@ declare module '*/checkExists.gql' {
 declare module '*/detailed.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const analyzerDetailed: DocumentNode;
+export const detailedTransformer: DocumentNode;
 
   export default defaultDocument;
 }
@@ -840,7 +842,12 @@ declare module '*/list.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const listWebhooks: DocumentNode;
+export const repoList: DocumentNode;
+export const repositoriesList: DocumentNode;
 export const AutofixRuns: DocumentNode;
+export const repositoryRunsList: DocumentNode;
+export const transformerRunsList: DocumentNode;
+export const teamMembers: DocumentNode;
 
   export default defaultDocument;
 }
@@ -849,7 +856,7 @@ export const AutofixRuns: DocumentNode;
 declare module '*/listIssues.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const listIssues: DocumentNode;
 
   export default defaultDocument;
 }
@@ -858,7 +865,8 @@ declare module '*/listIssues.gql' {
 declare module '*/publicList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const analyzerPublicList: DocumentNode;
+export const publicTransformersList: DocumentNode;
 
   export default defaultDocument;
 }
@@ -867,7 +875,7 @@ declare module '*/publicList.gql' {
 declare module '*/socialAuthUrls.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const socialUrls: DocumentNode;
 
   export default defaultDocument;
 }
@@ -876,7 +884,7 @@ declare module '*/socialAuthUrls.gql' {
 declare module '*/changelog.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const changelog: DocumentNode;
 
   export default defaultDocument;
 }
@@ -885,7 +893,7 @@ declare module '*/changelog.gql' {
 declare module '*/context.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const context: DocumentNode;
 
   export default defaultDocument;
 }
@@ -894,7 +902,7 @@ declare module '*/context.gql' {
 declare module '*/baseOrgInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const baseOrgInfo: DocumentNode;
 
   export default defaultDocument;
 }
@@ -903,7 +911,7 @@ declare module '*/baseOrgInfo.gql' {
 declare module '*/orgLicenseInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const orgLicense: DocumentNode;
 
   export default defaultDocument;
 }
@@ -921,7 +929,7 @@ declare module '*/superadminCheck.gql' {
 declare module '*/addTeam.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterpriseAddTeam: DocumentNode;
 
   export default defaultDocument;
 }
@@ -930,7 +938,7 @@ declare module '*/addTeam.gql' {
 declare module '*/getGroupInviteInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const getGroupInviteInfo: DocumentNode;
 
   export default defaultDocument;
 }
@@ -939,7 +947,7 @@ declare module '*/getGroupInviteInfo.gql' {
 declare module '*/groupAndTeams.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterpriseGroupAndTeams: DocumentNode;
 
   export default defaultDocument;
 }
@@ -948,7 +956,7 @@ declare module '*/groupAndTeams.gql' {
 declare module '*/groupAndUsers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterpriseGroupAndUsers: DocumentNode;
 
   export default defaultDocument;
 }
@@ -957,7 +965,7 @@ declare module '*/groupAndUsers.gql' {
 declare module '*/groups.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterpriseGroups: DocumentNode;
 
   export default defaultDocument;
 }
@@ -966,7 +974,8 @@ declare module '*/groups.gql' {
 declare module '*/invites.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterprise: DocumentNode;
+export const teamInvites: DocumentNode;
 
   export default defaultDocument;
 }
@@ -975,7 +984,7 @@ declare module '*/invites.gql' {
 declare module '*/listTeams.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterpriseTeams: DocumentNode;
 
   export default defaultDocument;
 }
@@ -984,7 +993,7 @@ declare module '*/listTeams.gql' {
 declare module '*/userAndGroups.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterpriseUserAndGroups: DocumentNode;
 
   export default defaultDocument;
 }
@@ -993,7 +1002,7 @@ declare module '*/userAndGroups.gql' {
 declare module '*/userAndTeams.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterpriseUserAndTeams: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1002,7 +1011,7 @@ declare module '*/userAndTeams.gql' {
 declare module '*/users.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const enterpriseUsers: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1011,7 +1020,7 @@ declare module '*/users.gql' {
 declare module '*/discoverRepositories.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const discoverRepositories: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1020,7 +1029,7 @@ declare module '*/discoverRepositories.gql' {
 declare module '*/editorsPickRepository.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const editorsPickRepository: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1029,7 +1038,7 @@ declare module '*/editorsPickRepository.gql' {
 declare module '*/preferredTechnologies.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const preferredTechnologies: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1038,7 +1047,7 @@ declare module '*/preferredTechnologies.gql' {
 declare module '*/trendingRepositories.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const trendingRepositories: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1047,7 +1056,7 @@ declare module '*/trendingRepositories.gql' {
 declare module '*/watchedRepositories.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const watchedRepositories: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1056,7 +1065,7 @@ declare module '*/watchedRepositories.gql' {
 declare module '*/watchedRepositoriesCount.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const watchedRepositoriesCount: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1065,7 +1074,7 @@ declare module '*/watchedRepositoriesCount.gql' {
 declare module '*/issuesWithPriority.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const getIssuesWithPriority: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1083,7 +1092,7 @@ declare module '*/issuesWithPriorityCount.gql' {
 declare module '*/singleIssueWithPriority.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const singleIssueWithPriority: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1092,7 +1101,7 @@ declare module '*/singleIssueWithPriority.gql' {
 declare module '*/getAnIssue.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const getAnIssue: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1101,7 +1110,7 @@ declare module '*/getAnIssue.gql' {
 declare module '*/accountSetupStatus.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const accountSetupStatus: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1155,7 +1164,8 @@ declare module '*/getTemplatesList.gql' {
 declare module '*/autofixTrends.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const ownerAutofixedIssueTrend: DocumentNode;
+export const repositoryAutofixedIssueTrend: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1164,7 +1174,7 @@ declare module '*/autofixTrends.gql' {
 declare module '*/billing.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const billingFat: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1173,7 +1183,7 @@ declare module '*/billing.gql' {
 declare module '*/details.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const ownerDetails: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1182,7 +1192,8 @@ declare module '*/details.gql' {
 declare module '*/issueTrends.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const ownerIssueTrend: DocumentNode;
+export const repositoryIssueTrend: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1191,7 +1202,7 @@ declare module '*/issueTrends.gql' {
 declare module '*/maxUsagePercentage.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const maxUsagePercentage: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1200,7 +1211,7 @@ declare module '*/maxUsagePercentage.gql' {
 declare module '*/IssueTypeSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const issueTypeSettings: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1218,7 +1229,7 @@ declare module '*/publicKey.gql' {
 declare module '*/statusCheck.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const billingStatusCheck: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1227,7 +1238,7 @@ declare module '*/statusCheck.gql' {
 declare module '*/usageDetails.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const usageDetails: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1238,6 +1249,10 @@ declare module '*/single.gql' {
   const defaultDocument: DocumentNode;
   export const webhookEventDelivery: DocumentNode;
 export const getSingleWebhook: DocumentNode;
+export const singleRepoIssue: DocumentNode;
+export const singleAutofixRun: DocumentNode;
+export const singleRepoRun: DocumentNode;
+export const singleTransformerRun: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1282,7 +1297,7 @@ declare module '*/accessTokenList.gql' {
 declare module '*/addableMembers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const repoAddableMembers: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1291,7 +1306,7 @@ declare module '*/addableMembers.gql' {
 declare module '*/alertingMetrics.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const alertingMetrics: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1300,7 +1315,7 @@ declare module '*/alertingMetrics.gql' {
 declare module '*/analysisRun.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const analysisRuns: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1318,7 +1333,7 @@ declare module '*/autofixStats.gql' {
 declare module '*/availableAnalyzers.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const availableAnalyzers: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1337,6 +1352,11 @@ declare module '*/detail.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const RepoDetails: DocumentNode;
+export const repoDetail: DocumentNode;
+export const autofixRun: DocumentNode;
+export const check: DocumentNode;
+export const transformerRunDetail: DocumentNode;
+export const viewer: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1345,7 +1365,7 @@ declare module '*/detail.gql' {
 declare module '*/detailForActivation.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const repoActivationDetails: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1363,7 +1383,7 @@ declare module '*/isCommitPossible.gql' {
 declare module '*/issueChildren.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const issueChildren: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1381,7 +1401,7 @@ declare module '*/silenceRules.gql' {
 declare module '*/issueRaisedInFiles.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const issueRaisedInFiles: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1390,7 +1410,7 @@ declare module '*/issueRaisedInFiles.gql' {
 declare module '*/issueTypeDistribution.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const issueTypeDistribution: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1408,7 +1428,7 @@ declare module '*/listAdHocPending.gql' {
 declare module '*/listForAnalyzerDirectory.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const repositoriesListForDirectory: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1417,7 +1437,7 @@ declare module '*/listForAnalyzerDirectory.gql' {
 declare module '*/metrics.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const metricsData: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1435,7 +1455,7 @@ declare module '*/perms.gql' {
 declare module '*/recentlyActiveRepoList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const recentlyActiveRepoList: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1444,7 +1464,7 @@ declare module '*/recentlyActiveRepoList.gql' {
 declare module '*/recentlyActiveRepoListWithAnalyzer.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const recentlyActiveRepoListWithAnalyzer: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1453,7 +1473,7 @@ declare module '*/recentlyActiveRepoListWithAnalyzer.gql' {
 declare module '*/globalStateIndicator.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const globalStateIndicator: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1462,7 +1482,8 @@ declare module '*/globalStateIndicator.gql' {
 declare module '*/branch.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const branchRuns: DocumentNode;
+export const transformerBranchRuns: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1471,7 +1492,7 @@ declare module '*/branch.gql' {
 declare module '*/autofixableIssues.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const autofixableIssues: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1480,7 +1501,7 @@ declare module '*/autofixableIssues.gql' {
 declare module '*/checkIssue.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const checkIssues: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1498,7 +1519,8 @@ declare module '*/concreteIssueList.gql' {
 declare module '*/group.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const groupedRuns: DocumentNode;
+export const groupedTransformerRuns: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1516,7 +1538,7 @@ declare module '*/auditLog.gql' {
 declare module '*/badges.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const badges: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1525,7 +1547,7 @@ declare module '*/badges.gql' {
 declare module '*/general.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const repoGeneralSettings: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1534,7 +1556,7 @@ declare module '*/general.gql' {
 declare module '*/ignoreRules.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const silenceRules: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1543,7 +1565,7 @@ declare module '*/ignoreRules.gql' {
 declare module '*/manageAccess.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const repoCollaborators: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1552,7 +1574,7 @@ declare module '*/manageAccess.gql' {
 declare module '*/reporting.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const reporting: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1561,7 +1583,7 @@ declare module '*/reporting.gql' {
 declare module '*/ssh.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const repoSSH: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1588,7 +1610,7 @@ declare module '*/widgets.gql' {
 declare module '*/inviteUrl.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const teamInviteURL: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1597,7 +1619,7 @@ declare module '*/inviteUrl.gql' {
 declare module '*/settings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const teamSettings: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1606,7 +1628,7 @@ declare module '*/settings.gql' {
 declare module '*/recommendedIssues.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const recommendedIssues: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1624,7 +1646,7 @@ declare module '*/starredRepos.gql' {
 declare module '*/userGSRProjects.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const gsrProjects: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1633,7 +1655,7 @@ declare module '*/userGSRProjects.gql' {
 declare module '*/userGitlabAccounts.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const gitlabAccounts: DocumentNode;
 
   export default defaultDocument;
 }

@@ -1,4 +1,4 @@
-query transformerRun(
+query singleTransformerRun(
   $runId: String!
   $provider: VCSProviderChoices!
   $owner: String!

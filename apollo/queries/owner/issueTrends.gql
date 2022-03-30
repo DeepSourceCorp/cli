@@ -1,4 +1,4 @@
-query issueTrend($login: String!, $provider: VCSProviderChoices!, $lastDays: Int!) {
+query ownerIssueTrend($login: String!, $provider: VCSProviderChoices!, $lastDays: Int!) {
   owner(login: $login, provider: $provider) {
     id
     issueTrend(lastDays: $lastDays)

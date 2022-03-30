@@ -1,4 +1,4 @@
-query transformerRun($runId: String!) {
+query transformerRunDetail($runId: String!) {
   transformerRun(runId: $runId) {
     branchName
     changedFilesCount
