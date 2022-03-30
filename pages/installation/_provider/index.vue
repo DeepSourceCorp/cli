@@ -1,5 +1,15 @@
 <template>
   <div class="container mx-auto">
+    <!-- Activity name for this tag: Deepsource__ThankYouPage_Pixel_PostConversionPixel_PageView -->
+    <client-only>
+      <img
+        v-if="!$config.onPrem"
+        :src="`https://pubads.g.doubleclick.net/activity;xsp=4892488;ord=${String(
+          Math.floor(Math.random() * 10000000000000000)
+        )}?`"
+        class="border-none h-px w-px"
+      />
+    </client-only>
     <div
       class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
     >
