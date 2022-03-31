@@ -8785,7 +8785,8 @@ export type Unnamed_141_Query = (
 export type ConcreteIssuesQueryVariables = Exact<{
   checkId: Scalars['ID'];
   q?: Maybe<Scalars['String']>;
-  limit?: Maybe<Scalars['Int']>;
+  first?: Maybe<Scalars['Int']>;
+  offset?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   sort?: Maybe<Scalars['String']>;
   issueType?: Maybe<Scalars['String']>;

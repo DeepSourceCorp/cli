@@ -1,14 +1,22 @@
 query concreteIssues(
   $checkId: ID!
   $q: String
-  $limit: Int
+  $first: Int
+  $offset: Int
   $after: String
   $sort: String
   $issueType: String
 ) {
   check(checkId: $checkId) {
     id
-    concreteIssues(q: $q, first: $limit, after: $after, sort: $sort, issueType: $issueType) {
+    concreteIssues(
+      q: $q
+      first: $first
+      offset: $offset
+      after: $after
+      sort: $sort
+      issueType: $issueType
+    ) {
       totalCount
       edges {
         node {

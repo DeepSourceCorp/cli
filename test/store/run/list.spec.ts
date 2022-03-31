@@ -9,7 +9,7 @@ import {
 } from '~/store/run/list'
 import { Maybe, Repository, RunConnection, RunEdge } from '~/types/types'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
-import { mockRunListState } from './__mocks__/list.mock'
+import { mockRunListState } from './__mocks__/runList.mock'
 
 let runListState: RunListModuleState
 let actionCxt: RunListActionContext

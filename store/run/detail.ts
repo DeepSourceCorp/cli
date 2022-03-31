@@ -249,14 +249,7 @@ export const actions: RunDetailModuleActions = {
     try {
       const response = await this.$fetchGraphqlData(
         RunConcreteIssueListGQLQuery,
-        {
-          checkId: args.checkId,
-          limit: args.limit,
-          after: this.$getGQLAfter(args.currentPageNumber, args.limit),
-          sort: args.sort,
-          issueType: args.issueType,
-          q: args.q
-        },
+        args,
         args.refetch
       )
       commit(RunDetailMutations.SET_CONCRETE_ISSUE_LIST, response.data.check?.concreteIssues)

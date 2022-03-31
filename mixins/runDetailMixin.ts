@@ -65,8 +65,8 @@ export default class RunDetailMixin extends Vue {
   @runDetailStore.Action(RunDetailActions.FETCH_CONCRETE_ISSUE_LIST)
   fetchConcreteIssueList: (args: {
     checkId: string
-    limit: number
-    currentPageNumber: number
+    offset?: number
+    first?: number
     q?: string
     sort?: string
     issueType?: string

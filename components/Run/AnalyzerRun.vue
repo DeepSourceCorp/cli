@@ -32,6 +32,7 @@
           </template>
         </empty-state>
       </template>
+      <slot name="footer"></slot>
     </template>
   </section>
 </template>

@@ -59,6 +59,20 @@
                   @updateSearch="updateSearch"
                 />
               </template>
+
+              <template #footer>
+                <div
+                  v-if="concreteIssueList.totalCount > perPageCount"
+                  class="flex justify-center my-6 text-sm"
+                >
+                  <z-pagination
+                    :page="currentPage"
+                    :total-pages="totalPageCount"
+                    :total-visible="5"
+                    @selected="updatePageNum"
+                  />
+                </div>
+              </template>
             </analyzer-run>
           </z-tab-pane>
           <z-tab-pane>
@@ -128,8 +142,17 @@ import { RunHeader, AnalyzerRun } from '@/components/Run'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
-import { ZIcon, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem } from '@deepsourcelabs/zeal'
+import {
+  ZIcon,
+  ZTabs,
+  ZTabList,
+  ZTabPane,
+  ZTabPanes,
+  ZTabItem,
+  ZPagination
+} from '@deepsourcelabs/zeal'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
+import PaginationMixin from '~/mixins/paginationMixin'
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -143,7 +166,8 @@ import RouteQueryMixin from '~/mixins/routeQueryMixin'
     ZTabList,
     ZTabPane,
     ZTabPanes,
-    ZTabItem
+    ZTabItem,
+    ZPagination
   },
   layout: 'repository'
 })
@@ -151,8 +175,11 @@ export default class AnalyzerDetails extends mixins(
   RepoDetailMixin,
   RoleAccessMixin,
   RunDetailMixin,
-  RouteQueryMixin
+  RouteQueryMixin,
+  PaginationMixin
 ) {
+  perPageCount = 10
+
   /**
    * Created hook to update query params from route query mixin
    *
@@ -278,13 +305,14 @@ export default class AnalyzerDetails extends mixins(
   async fetchIssues(refetch = false): Promise<void> {
     await this.fetchConcreteIssueList({
       checkId: this.check.id,
-      currentPageNumber: 1,
-      limit: 50,
+      first: this.perPageCount,
+      offset: this.queryOffset,
       sort: (this.queryParams.sort as string) || '',
       issueType: (this.queryParams.category as string) || '',
       q: (this.queryParams.q as string) || '',
       refetch
     })
+    this.totalCount = this.concreteIssueList.totalCount || 0
   }
 
   /**
