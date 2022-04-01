@@ -191,9 +191,7 @@ export default class RunCard extends Vue {
   }
 
   getRoute(candidate: string): string {
-    const analyzer = this.config?.analyzers[0] && this.config.analyzers[0]['name']
-    const route = analyzer ? ['run', candidate, analyzer] : ['run', candidate]
-    return this.$generateRoute(route)
+    return this.$generateRoute(['run', candidate])
   }
 
   get issueStats(): { label: string; value: string; isPositive: boolean | null }[] {

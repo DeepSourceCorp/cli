@@ -154,6 +154,9 @@ import {
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 
+import { RunDetailActions } from '~/store/run/detail'
+import { resolveNodes } from '~/utils/array'
+
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
  */
@@ -169,6 +172,26 @@ import PaginationMixin from '~/mixins/paginationMixin'
     ZTabItem,
     ZPagination
   },
+  middleware: [
+    async function ({ store, route, redirect }) {
+      const { provider, owner, repo, runId, analyzer } = route.params
+
+      await store.dispatch(`run/detail/${RunDetailActions.FETCH_RUN}`, {
+        provider,
+        owner,
+        name: repo,
+        runId
+      })
+      const checks = resolveNodes(store.state.run.detail.run.checks) as Check[]
+      const runAnalyzers = checks
+        .map((check) => (check.analyzer ? check.analyzer.shortcode : ''))
+        .filter(Boolean)
+
+      if (runAnalyzers.length && !runAnalyzers.includes(analyzer)) {
+        redirect(302, ['', provider, owner, repo, 'run', runId, runAnalyzers[0]].join('/'))
+      }
+    }
+  ],
   layout: 'repository'
 })
 export default class AnalyzerDetails extends mixins(
