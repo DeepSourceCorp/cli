@@ -50,7 +50,7 @@ test('renders MemberListItem with all prop options for team', () => {
   )
 })
 
-test('renders IssuePriorityCard with all prop options for repo', () => {
+test('renders MemberListItem with all prop options for repo', () => {
   const baseProps = {
     avatar: '/static/dashboard/images/empty-avatar.svg',
     dateJoined: '2019-02-01T07:55:15.466139+00:00',

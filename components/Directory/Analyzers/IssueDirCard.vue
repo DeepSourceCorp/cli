@@ -1,13 +1,15 @@
 <template>
-  <nuxt-link
+  <base-card
     :to="analyzerUrl ? `${analyzerUrl}/issues/${issue.shortcode}` : '#'"
-    class="rounded-md border border-ink-200 px-4 py-3 hover:bg-ink-300 hover:cursor-pointer"
+    :show-info="false"
   >
-    <div>
-      <h6 class="font-semibold text-lg">
+    <template #title>
+      <h6 class="overflow-hidden cursor-pointer text-vanilla-100 overflow-ellipsis space-x-2">
         <span>{{ issue.title }}</span
-        ><span class="text-vanilla-400 ml-2 font-normal text-sm">{{ issue.shortcode }}</span>
+        ><span class="text-sm font-normal text-vanilla-400">{{ issue.shortcode }}</span>
       </h6>
+    </template>
+    <template #description>
       <div class="text-sm text-vanilla-400 flex space-x-5 mt-1">
         <div class="flex space-x-1.5 items-center">
           <z-icon :icon="issue.issueType" size="x-small" color="vanilla-400" />
@@ -22,8 +24,8 @@
         class="prose text-vanilla-400 text-sm mt-2 max-w-full"
         v-html="issue.shortDescriptionRendered"
       />
-    </div>
-  </nuxt-link>
+    </template>
+  </base-card>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'

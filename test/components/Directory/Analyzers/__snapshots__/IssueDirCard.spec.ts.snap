@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders IssueDirCard with all prop options: IssueDirCard 1`] = `
+"<a class=\\"block group border rounded-lg border-ink-200 hover:bg-ink-300\\">
+  <!---->
+  <div class=\\"flex flex-wrap flex-1 w-full\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
+        <h6 class=\\"overflow-hidden cursor-pointer text-vanilla-100 overflow-ellipsis space-x-2\\"><span>Generic exception caught and silently ignored in a loop</span><span class=\\"text-sm font-normal text-vanilla-400\\">BAN-B112</span></h6>
+      </div>
+      <div class=\\"text-sm text-vanilla-400 flex space-x-5 mt-1\\">
+        <div class=\\"flex space-x-1.5 items-center\\">
+          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Security</span>
+        </div>
+        <!---->
+      </div>
+      <div class=\\"prose text-vanilla-400 text-sm mt-2 max-w-full\\">
+        <p>Catching generic exceptions and silently ignoring them in a loop is considered bad practice in general, but also presents a potential security issue. A larger than normal volume of errors from a service can indicate an attempt is being made to disrupt or interfere with it. Thus errors should, at the very least, be logged.</p>
+      </div>
+    </div>
+    <!---->
+  </div>
+</a>"
+`;
