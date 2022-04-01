@@ -1,0 +1,10 @@
+query getTeamInviteInfo($invitationCode: String!) {
+  getTeamInviteInfo(invitationCode: $invitationCode) {
+    teamLogin
+    teamName
+    teamLogo
+    vcsProvider
+    joined
+    role
+  }
+}

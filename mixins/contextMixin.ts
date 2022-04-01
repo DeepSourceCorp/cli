@@ -20,7 +20,7 @@ export default class ContextMixin extends Vue {
   contextInstallationUrl: (provider: string) => string
 
   @contextStore.Action(ContextActionTypes.FETCH_CONTEXT)
-  fetchContext: () => Promise<void>
+  fetchContext: (args?: { refetch: boolean }) => Promise<void>
 
   /**
    * Default fetch hook for pages/components using context mixin.

@@ -27,20 +27,7 @@
         </p>
         <button
           @click="confirm"
-          class="
-            bg-ink-200
-            hover:bg-ink-300
-            rounded-md
-            w-full
-            text-vanilla-100
-            px-3
-            py-2
-            flex
-            items-center
-            space-x-2
-            group
-            mt-2
-          "
+          class="bg-ink-200 hover:bg-ink-300 rounded-md w-full text-vanilla-100 px-3 py-2 flex items-center space-x-2 group mt-2"
         >
           <z-avatar
             v-if="viewer.avatar"
@@ -110,8 +97,9 @@ import ContextMixin from '~/mixins/contextMixin'
 import { AuthGetterTypes } from '~/store/account/auth'
 
 import confirmInvitationMutation from '@/apollo/mutations/invitation/confirmInvitation.gql'
-import getInvitationDetailsMutation from '@/apollo/mutations/invitation/getInvitationDetails.gql'
-import { ConfirmInvitationPayload } from '~/types/types'
+import getInvitationDetailsQuery from '@/apollo/queries/invitation/getTeamInviteInfo.gql'
+
+import { ConfirmInvitationPayload, TeamInviteInfo } from '~/types/types'
 
 export enum REQUEST_STATES {
   FETCHING = 'fetching',
@@ -126,12 +114,12 @@ export enum REQUEST_STATES {
     ZIcon
   },
   middleware: [
-    async function ({ store, route, redirect, error, $applyGraphqlMutation }) {
+    async function ({ store, route, redirect, error, $fetchGraphqlData }) {
       try {
-        const res = await $applyGraphqlMutation(getInvitationDetailsMutation, {
+        const res = await $fetchGraphqlData(getInvitationDetailsQuery, {
           invitationCode: route.params.code
         })
-        const details = res.data.confirmInvitation
+        const details = res.data.getTeamInviteInfo
         if (details.joined) {
           redirect(302, '/')
         }
@@ -145,7 +133,7 @@ export enum REQUEST_STATES {
   ]
 })
 export default class Invitation extends mixins(ContextMixin, ActiveUserMixin) {
-  private details: ConfirmInvitationPayload = {}
+  private details: ConfirmInvitationPayload | TeamInviteInfo = {}
   private dataState: REQUEST_STATES = REQUEST_STATES.COMPLETED
   private acceptInviteState: REQUEST_STATES = REQUEST_STATES.COMPLETED
   private error: string =
@@ -155,10 +143,10 @@ export default class Invitation extends mixins(ContextMixin, ActiveUserMixin) {
     try {
       this.dataState = REQUEST_STATES.FETCHING
       await this.fetchActiveUserIfLoggedIn()
-      const response = await this.$applyGraphqlMutation(getInvitationDetailsMutation, {
+      const response = await this.$applyGraphqlMutation(getInvitationDetailsQuery, {
         invitationCode: this.$route.params.code
       })
-      this.details = response.data.confirmInvitation
+      this.details = response.data.getTeamInviteInfo as TeamInviteInfo
       this.dataState = REQUEST_STATES.COMPLETED
     } catch (e) {
       this.dataState = REQUEST_STATES.ERRORED
@@ -173,14 +161,27 @@ export default class Invitation extends mixins(ContextMixin, ActiveUserMixin) {
       const responsePayload = await this.$applyGraphqlMutation(confirmInvitationMutation, {
         invitationCode: this.$route.params.code
       })
-      const response = responsePayload.data.confirmInvitation
+      const response = responsePayload.data.confirmInvitation as ConfirmInvitationPayload
 
       if (response.ok) {
         this.acceptInviteState = REQUEST_STATES.COMPLETED
-        this.$router.push('/')
+        if (this.details.vcsProvider && this.details.teamLogin) {
+          await Promise.all([
+            this.fetchActiveUser({ refetch: true }),
+            this.fetchContext({ refetch: true })
+          ])
+          this.$router.push(
+            `/${this.$providerMetaMap[this.details.vcsProvider].shortcode}/${
+              this.details.teamLogin
+            }`
+          )
+        } else {
+          this.$router.push('/')
+        }
       } else {
         this.acceptInviteState = REQUEST_STATES.ERRORED
-        this.error = response.message
+        this.error =
+          response.message || 'There was a problem while confirming your invite, please try again.'
       }
     } catch (e) {
       this.acceptInviteState = REQUEST_STATES.ERRORED

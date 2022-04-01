@@ -57,7 +57,10 @@ export const mutations: ContextModuleMutations = {
 interface ContextModuleActions extends ActionTree<ContextModuleState, RootState> {
   [ContextActionTypes.FETCH_CONTEXT]: (
     this: Store<RootState>,
-    injectee: ContextActionContext
+    injectee: ContextActionContext,
+    args?: {
+      refetch?: boolean
+    }
   ) => Promise<void>
   [ContextActionTypes.FETCH_CHANGELOG]: (
     this: Store<RootState>,
@@ -66,8 +69,12 @@ interface ContextModuleActions extends ActionTree<ContextModuleState, RootState>
 }
 
 export const actions: ContextModuleActions = {
-  async [ContextActionTypes.FETCH_CONTEXT]({ commit }) {
-    const response: GraphqlQueryResponse = await this.$fetchGraphqlData(contextQuery, {})
+  async [ContextActionTypes.FETCH_CONTEXT]({ commit }, args) {
+    const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+      contextQuery,
+      {},
+      args?.refetch
+    )
     commit(ContextMutationTypes.SET_CONTEXT, response.data.context)
   },
   async [ContextActionTypes.FETCH_CHANGELOG]({ commit }) {

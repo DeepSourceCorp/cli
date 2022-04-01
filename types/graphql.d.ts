@@ -269,15 +269,6 @@ declare module '*/confirmInvitation.gql' {
 }
     
 
-declare module '*/getInvitationDetails.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/unsetIssuePriority.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1054,6 +1045,15 @@ declare module '*/watchedRepositories.gql' {
     
 
 declare module '*/watchedRepositoriesCount.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/getTeamInviteInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   

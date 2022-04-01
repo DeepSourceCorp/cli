@@ -10,11 +10,12 @@
     <div v-if="showRoleOptions" class="flex items-center justify-end flex-grow">
       <div class="text-right">
         <div v-if="isPrimaryUser && !isRepo" class="text-juniper">Owner</div>
-        <z-menu v-else width="large">
+        <z-menu v-else width="large" direction="left">
           <template v-slot:trigger="{ toggle }">
             <button
               type="button"
-              class="flex items-center space-x-2 outline-none focus:outline-none"
+              data-testid="show-role-menu"
+              class="flex items-center space-x-2 outline-none focus:outline-none w-full justify-end"
               @click="toggle"
             >
               <span>{{ roles[role].title }}</span>
@@ -24,7 +25,7 @@
           <template slot="body">
             <z-menu-section class="text-left">
               <z-menu-item v-for="(opt, key) in roles" :key="key" class="text-sm">
-                <div @click="updateRole(key)">
+                <div :data-testid="`${key}-button`" @click="updateRole(key)">
                   <div class="flex items-center space-x-2">
                     <span :class="key === role ? 'font-semibold' : ''">{{ opt.title }}</span>
                     <z-icon
@@ -39,7 +40,11 @@
               </z-menu-item>
             </z-menu-section>
             <z-menu-section :divider="false">
-              <z-menu-item @click="removeMember" icon="alert-triangle" class="text-cherry"
+              <z-menu-item
+                icon="alert-triangle"
+                data-testid="remove-team-member"
+                class="text-cherry"
+                @click="removeMember"
                 >Remove from {{ isRepo ? 'repository' : 'team' }}</z-menu-item
               >
             </z-menu-section>
@@ -85,8 +90,7 @@ const REPO_PERMS = {
 }
 
 @Component({
-  components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar },
-  layout: 'dashboard'
+  components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar }
 })
 export default class MemberListItem extends Vue {
   @Prop()

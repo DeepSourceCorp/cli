@@ -634,6 +634,7 @@ input ConfirmInvitationInput {
 type ConfirmInvitationPayload {
   ok: Boolean
   teamName: String
+  teamLogin: String
   teamLogo: String
   vcsProvider: String
   role: TeamMemberRoleChoices
@@ -1654,6 +1655,7 @@ type Query {
   transactions(userId: Int!, offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection
   owner(login: String!, provider: VCSProviderChoices!): Owner
   team(login: String!, provider: VCSProviderChoices!): Team
+  getTeamInviteInfo(invitationCode: String!): TeamInviteInfo
   fileIssues(repoId: ID!, filepath: String!, offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection
   checkIssues(checkId: ID!, offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection
   check(checkId: ID!): Check!
@@ -2281,6 +2283,16 @@ type TeamConnection {
 type TeamEdge {
   node: Team
   cursor: String!
+}
+
+type TeamInviteInfo {
+  teamName: String
+  teamLogin: String
+  teamLogo: String
+  vcsProvider: String
+  role: TeamMemberRoleChoices
+  message: String
+  joined: Boolean
 }
 
 type TeamMember implements MaskPrimaryKeyNode {
