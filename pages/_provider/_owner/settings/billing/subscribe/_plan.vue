@@ -101,7 +101,7 @@
               <div class="flex-grow font-bold text-right">
                 -
                 <span>
-                  {{ formatUSD(coupon.currentCycleDiscount) }}
+                  {{ formatUSD(credits.currentCycleDiscount) }}
                 </span>
               </div>
             </div>
