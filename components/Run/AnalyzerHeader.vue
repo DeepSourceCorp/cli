@@ -2,7 +2,7 @@
   <!-- Header -->
   <div class="flex flex-1 w-full rounded-sm min-h-24">
     <!-- Left Section -->
-    <div class="flex flex-col w-3/5 py-2 space-y-1 md:w-4/5 justify-evenly">
+    <div class="flex flex-col gap-y-3 md:gap-y-2 w-3/5 py-4 md:w-4/5">
       <!-- heading -->
       <div
         class="flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400"
@@ -15,12 +15,13 @@
       <!-- Description -->
       <div class="space-x-6 sm:flex">
         <!-- Found -->
-        <div class="flex items-center space-x-2">
+        <div class="flex items-start space-x-2">
           <z-icon
             :icon="showStatusText ? 'timer-reset' : 'clock'"
             size="small"
             color="vanilla-400"
             :class="{ 'motion-safe:animate-spin': isPending }"
+            class="mt-0.5"
           />
           <div v-if="showStatusText" class="text-sm text-vanilla-400">
             <span v-if="isPending"> {{ statusText }} (Time elapsed: {{ finishedInDisplay }}) </span>
@@ -36,10 +37,10 @@
       </div>
     </div>
     <!-- Right Section -->
-    <div v-if="status !== 'PEND'" class="relative w-2/5 p-4 md:w-1/5">
-      <div class="flex items-center justify-around">
+    <div v-if="status !== 'PEND'" class="relative w-2/5 p-3 md:w-1/5">
+      <div class="flex items-center justify-around gap-x-4">
         <!-- introduced issues -->
-        <div class="flex flex-col items-center space-y-1">
+        <div class="flex flex-col items-center">
           <div
             v-tooltip="
               `${issuesRaisedCount > 1000 ? formatIntl(issuesRaisedCount) : ''} issues introduced`
@@ -52,7 +53,7 @@
           <div class="text-xs text-vanilla-400">introduced</div>
         </div>
         <!-- resolved issues -->
-        <div class="flex flex-col items-center space-y-1">
+        <div class="flex flex-col items-center">
           <div
             v-tooltip="
               `${issuesResolvedCount > 1000 ? formatIntl(issuesResolvedCount) : ''} issues resolved`

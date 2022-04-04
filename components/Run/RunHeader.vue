@@ -36,7 +36,7 @@
             border-active-color="vanilla-400"
             class="flex items-center"
           >
-            {{ check.analyzer.name }}
+            <span class="whitespace-nowrap">{{ check.analyzer.name }}</span>
             <z-tag text-size="xs" spacing="px-2 py-1" bg-color="ink-100" class="leading-none">
               {{ check.issuesRaisedCount }}
             </z-tag>

@@ -1,13 +1,15 @@
 <template>
   <base-card :to="issueLink" :remove-default-style="removeDefaultStyle">
     <template slot="title">
-      <h3
-        class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
-        v-html="escapeHtml(title)"
-      />
-      <span class="inline text-sm font-normal text-vanilla-400 md:flex md:flex-shrink-0">{{
-        shortcode
-      }}</span>
+      <div>
+        <h3
+          class="mr-1 md:mr-2 inline cursor-pointer text-vanilla-100"
+          v-html="escapeHtml(title)"
+        />
+        <span class="whitespace-nowrap text-sm font-normal text-vanilla-400">
+          {{ shortcode }}
+        </span>
+      </div>
     </template>
     <template slot="description">
       <div v-if="showSeenInfo" class="space-y-1.5">
@@ -40,7 +42,7 @@
       </div>
 
       <!-- Place content on the same line if not showing first and last seen information -->
-      <div v-else class="flex gap-x-4">
+      <div v-else class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
         <issue-type :issue-type="issueType" />
 
         <div :key="issueType" class="flex items-center space-x-1.5">

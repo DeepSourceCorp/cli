@@ -12,8 +12,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   </div>
   <div class=\\"w-full border-b border-ink-200\\">
     <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
-        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
-          Python
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\"><span class=\\"whitespace-nowrap\\">Python</span>
           <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
             23
           </ztag-stub>
@@ -35,8 +34,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   </div>
   <div class=\\"w-full border-b border-ink-200\\">
     <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
-        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
-          Python
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\"><span class=\\"whitespace-nowrap\\">Python</span>
           <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
             23
           </ztag-stub>
@@ -58,8 +56,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   </div>
   <div class=\\"w-full border-b border-ink-200\\">
     <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
-        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
-          Python
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\"><span class=\\"whitespace-nowrap\\">Python</span>
           <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
             23
           </ztag-stub>
@@ -81,8 +78,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   </div>
   <div class=\\"w-full border-b border-ink-200\\">
     <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
-        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
-          Python
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\"><span class=\\"whitespace-nowrap\\">Python</span>
           <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
             23
           </ztag-stub>
@@ -104,8 +100,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   </div>
   <div class=\\"w-full border-b border-ink-200\\">
     <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
-        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
-          Python
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\"><span class=\\"whitespace-nowrap\\">Python</span>
           <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
             23
           </ztag-stub>
@@ -127,8 +122,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   </div>
   <div class=\\"w-full border-b border-ink-200\\">
     <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap\\"><a>
-        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\">
-          Python
+        <ztab-stub isactive=\\"true\\" icon=\\"python\\" borderactivecolor=\\"vanilla-400\\" class=\\"flex items-center\\"><span class=\\"whitespace-nowrap\\">Python</span>
           <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none\\">
             23
           </ztag-stub>
