@@ -39,7 +39,7 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon/default.svg' }]
   },
-
+  telemetry: false,
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
     '@deepsourcelabs/zeal/dist/typography.css',
