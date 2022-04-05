@@ -67,6 +67,7 @@
                 >
                   <z-pagination
                     :page="currentPage"
+                    :key="currentPage"
                     :total-pages="totalPageCount"
                     :total-visible="5"
                     @selected="updatePageNum"
@@ -299,6 +300,7 @@ export default class AnalyzerDetails extends mixins(
    * @return {Promise<void>}
    */
   async refetchAfterRouteChange(): Promise<void> {
+    this.currentPage = 1
     await this.fetchIssues()
   }
 
