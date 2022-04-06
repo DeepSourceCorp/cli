@@ -162,7 +162,7 @@ export default {
 
   timings: {
     // default value
-    enabled: process.env.NODE_ENV === 'development'
+    enabled: false
   },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -173,6 +173,7 @@ export default {
     '@nuxt/content',
     'portal-vue/nuxt',
     '@nuxtjs/sentry',
+    'nuxt-prometheus-module',
     ...(process.env.ON_PREM ? [] : ['nuxt-stripe-module'])
   ],
 
