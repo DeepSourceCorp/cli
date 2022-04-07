@@ -17,6 +17,19 @@ builds:
       - arm64
     ldflags:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+  - id: "windows-deepsource"
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -tags=static_all
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - buildmode=exe
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+
 archives:
   -
     replacements:
