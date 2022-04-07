@@ -123,7 +123,6 @@ export default {
     const services = [
       '~/plugins/services/plausibleLoader.client.js',
       '~/plugins/services/rudder.client.ts',
-      '~/plugins/components/norris.client.ts',
       '~/plugins/components/statuspage.client.ts',
       '~/plugins/services/posthog.client.ts'
     ]
