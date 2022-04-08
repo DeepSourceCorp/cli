@@ -21,14 +21,32 @@ func TestResolveRemote(t *testing.T) {
 			wantErr: false,
 		},
 		{
+			name:    "valid github remote URL (short form)",
+			repoArg: "gh/deepsourcelabs/cli",
+			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "GITHUB"},
+			wantErr: false,
+		},
+		{
 			name:    "valid gitlab remote URL",
 			repoArg: "gitlab.com/deepsourcelabs/cli",
 			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "GITLAB"},
 			wantErr: false,
 		},
 		{
+			name:    "valid gitlab remote URL (short form)",
+			repoArg: "gl/deepsourcelabs/cli",
+			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "GITLAB"},
+			wantErr: false,
+		},
+		{
 			name:    "valid bitbucket remote URL",
 			repoArg: "bitbucket.com/deepsourcelabs/cli",
+			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "BITBUCKET"},
+			wantErr: false,
+		},
+		{
+			name:    "valid bitbucket remote URL (short form)",
+			repoArg: "bb/deepsourcelabs/cli",
 			want:    &RemoteData{Owner: "deepsourcelabs", RepoName: "cli", VCSProvider: "BITBUCKET"},
 			wantErr: false,
 		},
