@@ -206,7 +206,8 @@ export default {
       '/accounts/github/login/callback/bifrost',
       '/accounts/github-enterprise/login/callback/bifrost',
       '/accounts/bitbucket_oauth2/login/callback/bifrost',
-      '/accounts/gitlab/login/callback/bifrost'
+      '/accounts/gitlab/login/callback/bifrost',
+      '/health'
     ],
 
     routes: [
