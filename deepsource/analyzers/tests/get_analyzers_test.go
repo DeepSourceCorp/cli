@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"reflect"
 	"testing"
 
 	analyzers "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
@@ -71,7 +72,7 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 
-	if string(requestBodyData) == string(req) {
+	if reflect.DeepEqual(requestBodyData, req) {
 		w.Write([]byte(successResponseBodyData))
 	} else {
 		w.Write([]byte(errorResponseBodyData))

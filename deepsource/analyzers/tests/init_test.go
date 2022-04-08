@@ -30,7 +30,7 @@ func startMockAPIServer() {
 	go func() {
 		err := srv.ListenAndServe()
 		if err != nil {
-			log.Fatalln("Error starting HTTP mock server")
+			panic("Error starting HTTP mock server")
 		}
 	}()
 }
