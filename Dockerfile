@@ -53,6 +53,7 @@ COPY --from=builder /app/Makefile /app/Makefile
 COPY --from=builder /app/.git /app/.git
 
 RUN apk update && \
+    apk upgrade && \
     apk add --no-cache curl git make && \
     curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
