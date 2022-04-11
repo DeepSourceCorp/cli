@@ -31,7 +31,7 @@ func (c Client) GetToken() string {
 func TestAnalyzers(t *testing.T) {
 	t.Run("valid GraphQL request", func(t *testing.T) {
 		// create client
-		gql := graphql.NewClient("http://localhost:8081")
+		gql := graphql.NewClient("http://localhost:8081/analyzer")
 		c := Client{gql: gql, token: "secret"}
 
 		// perform request
@@ -44,26 +44,26 @@ func TestAnalyzers(t *testing.T) {
 	})
 }
 
-// a mock GraphQL server for testing
-func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
+// a mock GraphQL handler for testing
+func mockAnalyzer(w http.ResponseWriter, r *http.Request) {
 	req, _ := ioutil.ReadAll(r.Body)
 
 	// Read test graphql request body artifact file
-	requestBodyData, err := ioutil.ReadFile("./dummy/request_body.txt")
+	requestBodyData, err := ioutil.ReadFile("./testdata/analyzer/request_body.txt")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
 	// Read test graphql success response body artifact file
-	successResponseBodyData, err := ioutil.ReadFile("./dummy/success_response_body.json")
+	successResponseBodyData, err := ioutil.ReadFile("./testdata/analyzer/success_response_body.json")
 	if err != nil {
 		log.Println(err)
 		return
 	}
 
 	// Read test graphql error response body artifact file
-	errorResponseBodyData, err := ioutil.ReadFile("./dummy/error_response_body.json")
+	errorResponseBodyData, err := ioutil.ReadFile("./testdata/analyzer/error_response_body.json")
 	if err != nil {
 		log.Println(err)
 		return

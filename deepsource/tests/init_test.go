@@ -25,7 +25,7 @@ func startMockAPIServer() {
 		Addr: ":8081",
 	}
 
-	http.HandleFunc("/", graphQLAPIMock)
+	http.HandleFunc("/analyzer", mockAnalyzer)
 
 	go func() {
 		err := srv.ListenAndServe()
