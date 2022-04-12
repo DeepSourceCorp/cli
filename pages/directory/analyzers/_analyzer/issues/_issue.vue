@@ -63,6 +63,8 @@ const issueDetailStore = namespace('issue/detail')
   scrollToTop: true
 })
 export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
+  setCanonical = true
+
   @issueDetailStore.Action(IssueDetailActions.FETCH_ISSUE_DETAILS)
   fetchIssueDetails: (arg: { shortcode: string }) => Promise<Issue | undefined>
 

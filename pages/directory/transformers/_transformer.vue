@@ -96,6 +96,8 @@ const directoryStore = namespace('directory/directory')
   scrollToTop: true
 })
 export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
+  setCanonical = true
+
   @directoryStore.Getter(DirectoryGetters.DIRECTORY_TRANSFORMERS)
   transformerList: TransformerTool[]
 

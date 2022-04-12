@@ -115,6 +115,7 @@ export default class AnalyzersDirectory extends mixins(MetaMixin) {
   public searchTerm = ''
   public areAnalyzersLoading = false
   public areTransformersLoading = false
+  setCanonical = true
 
   created() {
     this.metaTitle = `Directory • DeepSource`

@@ -101,6 +101,7 @@ export default class Discover extends mixins(MetaMixin) {
   searchTerm = ''
   loading = false
   preferredTechnology: string[] = []
+  setCanonical = true
 
   metaTitle = 'Discover • Issues from popular open source projects'
   metaDescription =

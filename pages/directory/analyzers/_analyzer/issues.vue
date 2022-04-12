@@ -72,6 +72,8 @@ interface IssuesFilterT {
   scrollToTop: true
 })
 export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
+  setCanonical = true
+
   @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
   analyzerList: Analyzer[]
 

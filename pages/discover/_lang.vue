@@ -147,6 +147,7 @@ export default class Discover extends mixins(MetaMixin) {
   searchTerm = ''
   loading = false
   preferredTechnology: string[] = []
+  setCanonical = true
 
   @directoryStore.Getter(DirectoryGetters.DIRECTORY_ANALYZERS)
   analyzerList: Analyzer[]
@@ -206,8 +207,7 @@ export default class Discover extends mixins(MetaMixin) {
     await this.getRepos()
 
     this.metaTitle = `Discover ${this.analyzerName} • Issues from popular open source projects`
-    this.metaDescription =
-      'Discover and fix bug risks, anti-patterns, performance issues and security flaws.'
+    this.metaDescription = `Discover and fix bug risks, anti-patterns, performance issues and security flaws for projects using ${this.analyzerName}.`
   }
 }
 </script>

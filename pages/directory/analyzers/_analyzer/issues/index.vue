@@ -111,6 +111,7 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
 
   private onlyAutofix = false
   private searchTerm = ''
+  setCanonical = true
 
   /**
    * Watcher for analyzer shortcode that updates meta information on change.

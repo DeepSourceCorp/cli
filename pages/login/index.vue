@@ -1,35 +1,25 @@
 <template>
   <div
-    class="text-vanilla-100 flex flex-col items-center justify-center min-h-screen max-w-md mx-auto"
+    class="flex flex-col items-center justify-center max-w-md min-h-screen mx-auto text-vanilla-100"
   >
-    <div class="p-6 lg:text-left flex flex-col">
+    <div class="flex flex-col p-6 lg:text-left">
       <div class="mb-12">
         <img
           src="~/assets/images/logo-wordmark-white.svg"
           alt="DeepSource Logo"
-          class="h-6 w-auto"
+          class="w-auto h-6"
         />
       </div>
-      <h1 class="leading-tight text-3xl font-bold sm:text-left">Log in to DeepSource</h1>
+      <h1 class="text-3xl font-bold leading-tight sm:text-left">Log in to DeepSource</h1>
       <div class="flex flex-col items-center mt-8 space-y-4 left-section__btn-group">
         <a
           v-for="opt in loginOptions"
           :key="opt.provider"
           :href="opt.link ? opt.link : buildUrl(opt.provider)"
-          class="w-full flex items-center left-section__btn"
+          class="flex items-center w-full left-section__btn"
         >
           <button
-            class="
-              p-2
-              text-vanilla-100
-              w-full
-              space-x-2
-              flex
-              items-center
-              rounded-sm
-              justify-center
-              hover:bg-opacity-90
-            "
+            class="flex items-center justify-center w-full p-2 space-x-2 rounded-sm text-vanilla-100 hover:bg-opacity-90"
             :class="opt.bg"
           >
             <z-icon :icon="opt.icon" :color="opt.iconColor" />
@@ -40,21 +30,10 @@
           v-if="$config.enableSaml"
           href="/saml2/login"
           @click="samlClicked = true"
-          class="w-full flex items-center left-section__btn"
+          class="flex items-center w-full left-section__btn"
         >
           <button
-            class="
-              p-2
-              text-vanilla-100
-              w-full
-              space-x-2
-              flex
-              items-center
-              rounded-sm
-              justify-center
-              hover:bg-opacity-90
-              bg-robin
-            "
+            class="flex items-center justify-center w-full p-2 space-x-2 rounded-sm text-vanilla-100 hover:bg-opacity-90 bg-robin"
           >
             <z-icon
               :icon="samlClicked ? 'spin-loader' : 'shield'"
@@ -79,6 +58,7 @@ import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
 // Import State & Types
 import AuthMixin from '~/mixins/authMixin'
 import { AuthActionTypes } from '~/store/account/auth'
+import MetaMixin from '~/mixins/metaMixin'
 
 @Component({
   components: {
@@ -103,20 +83,11 @@ import { AuthActionTypes } from '~/store/account/auth'
         redirect(307, authUrls[provider])
       }
     }
-  ],
-  head() {
-    return {
-      title: 'Login — DeepSource',
-      link: [
-        {
-          rel: 'canonical',
-          href: `https://${this.$config.domain}/login`
-        }
-      ]
-    }
-  }
+  ]
 })
-export default class SignUp extends mixins(AuthMixin) {
+export default class SignUp extends mixins(AuthMixin, MetaMixin) {
   public samlClicked = false
+  metaTitle = 'Login - DeepSource'
+  setCanonical = true
 }
 </script>

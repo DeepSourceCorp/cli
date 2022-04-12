@@ -7,6 +7,7 @@ export default class MetaMixin extends Vue {
   metaImage = ''
   metaImageAlt = ''
   metaTwitterSiteAttribution = '@DeepSourceHQ'
+  setCanonical = false
 
   get pageImageAltText(): string {
     return this.metaImageAlt || this.metaTitle
@@ -56,12 +57,18 @@ export default class MetaMixin extends Vue {
     ]
   }
 
+  get canonicalLinks(): Array<{ rel: string; href: string }> {
+    return this.setCanonical ? [{ rel: 'canonical', href: this.pageUrl }] : []
+  }
+
   head() {
     //? This is a hack to make the variables reactive. Ref: https://vue-meta.nuxtjs.org/guide/caveats.html#reactive-variables-in-template-functions
     const metaTitle = this.metaTitle
     const metaDescription = this.metaDescription
     const openGraphMeta = this.generateOpenGraphMeta
     const twitterMeta = this.generateTwitterMeta
+    const canonical = this.canonicalLinks
+
     return {
       title: metaTitle,
       meta: [
@@ -72,7 +79,8 @@ export default class MetaMixin extends Vue {
         },
         ...openGraphMeta,
         ...twitterMeta
-      ]
+      ],
+      link: [...canonical]
     }
   }
 }
