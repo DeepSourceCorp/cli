@@ -57,7 +57,7 @@
         class="bg-ink-300 animate-pulse opacity-50 rounded-md p-8"
       ></div>
     </template>
-    <section v-else-if="issueList.length > 0" class="flex flex-col">
+    <section v-else-if="issueList.length > 0" class="flex flex-col mt-1">
       <issue-priority-card
         v-for="(issue, position) in issueList"
         :key="issue.shortcode"

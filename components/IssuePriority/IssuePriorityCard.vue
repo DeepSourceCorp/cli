@@ -1,5 +1,5 @@
 <template>
-  <base-card :remove-default-style="true">
+  <base-card :remove-default-style="true" custom-padding="pb-3 pr-3 pt-2">
     <template slot="title">
       <p class="text-sm font-semibold text-vanilla-300">
         <span v-html="escapeHtml(title)" />
