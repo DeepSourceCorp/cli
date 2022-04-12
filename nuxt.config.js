@@ -172,8 +172,7 @@ export default {
     '@nuxt/content',
     'portal-vue/nuxt',
     '@nuxtjs/sentry',
-    'nuxt-prometheus-module',
-    ...(process.env.ON_PREM ? [] : ['nuxt-stripe-module'])
+    ...(process.env.ON_PREM ? [] : ['nuxt-stripe-module', 'nuxt-prometheus-module'])
   ],
 
   serverMiddleware: [
