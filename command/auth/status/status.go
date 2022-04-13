@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pterm/pterm"
@@ -14,10 +15,16 @@ type AuthStatusOptions struct{}
 
 // NewCmdStatus handles the fetching of authentication status of CLI
 func NewCmdStatus() *cobra.Command {
+	doc := heredoc.Docf(`
+		View the authentication status.
+
+		To check the authentication status, use %[1]s
+	`, utils.Cyan("deepsource auth status"))
 
 	cmd := &cobra.Command{
 		Use:   "status",
 		Short: "View the authentication status",
+		Long:  doc,
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts := AuthStatusOptions{}

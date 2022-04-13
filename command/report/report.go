@@ -9,6 +9,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/getsentry/sentry-go"
 	"github.com/spf13/cobra"
@@ -25,9 +26,23 @@ type ReportOptions struct {
 func NewCmdReport() *cobra.Command {
 	opts := ReportOptions{}
 
+	doc := heredoc.Docf(`
+		Report artifacts to DeepSource.
+
+		Use %[1]s to specify the analyzer, for example:
+		%[2]s
+
+		Use %[3]s to specify the value of the artifact:
+		%[4]s
+
+		You can flag combinations as well:
+		%[5]s
+		`, utils.Yellow("--analyzer"), utils.Cyan("deepsource report --analyzer python"), utils.Yellow("--value"), utils.Cyan("deepsource report --key value"), utils.Cyan("deepsource report --analyzer go --value-file coverage.out"))
+
 	cmd := &cobra.Command{
 		Use:   "report",
 		Short: "Report artifacts to DeepSource",
+		Long:  doc,
 		Args:  utils.NoArgs,
 		Run: func(cmd *cobra.Command, args []string) {
 			returnCode := opts.Run()

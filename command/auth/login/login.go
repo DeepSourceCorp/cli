@@ -3,6 +3,7 @@ package login
 import (
 	"fmt"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
@@ -23,6 +24,19 @@ type LoginOptions struct {
 // NewCmdLogin handles the login functionality for the CLI
 func NewCmdLogin() *cobra.Command {
 
+	doc := heredoc.Docf(`
+		Log in to DeepSource using the CLI.
+
+		The default authentication mode is a browser-based login flow.
+		After completion, an authentication token will be stored internally.
+
+		Use %[1]s to pass in a token on standard input, for example:
+		%[2]s
+
+		Use %[3]s to authenticate with a specific DeepSource instance, for example:
+		%[4]s
+		`, utils.Yellow("--with-token"), utils.Cyan("deepsource auth login --with-token dsp_abcd"), utils.Yellow("--hostname"), utils.Cyan("deepsource auth login --hostname my_instance"))
+
 	opts := LoginOptions{
 		AuthTimedOut: false,
 		TokenExpired: true,
@@ -32,7 +46,8 @@ func NewCmdLogin() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "login",
-		Short: "Login to DeepSource using Command Line Interface",
+		Short: "Log in to DeepSource using Command Line Interface",
+		Long:  doc,
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run()

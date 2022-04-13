@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
@@ -32,9 +33,16 @@ func NewCmdRepoView() *cobra.Command {
 		SelectedRemote: &utils.RemoteData{},
 	}
 
+	doc := heredoc.Docf(`
+		Open the DeepSource dashboard of a repository.
+
+		Run %[1]s to open the DeepSource dashboard inside the browser.
+		`, utils.Cyan("deepsource repo view"))
+
 	cmd := &cobra.Command{
 		Use:   "view",
 		Short: "Open the DeepSource dashboard of a repository",
+		Long:  doc,
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run()

@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"os"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
@@ -39,9 +40,38 @@ func NewCmdIssuesList() *cobra.Command {
 		LimitArg: 30,
 	}
 
+	doc := heredoc.Docf(`
+		List issues reported by DeepSource.
+
+		To list issues for the current repository:
+		%[1]s
+
+		To list issues for a specific repository, use the %[2]s flag:
+		%[3]s
+
+		To list issues for a specific analyzer, use the %[4]s flag:
+		%[5]s
+
+		To limit the number of issues reported, use the %[6]s flag:
+		%[7]s
+
+		To export listed issues to a file, use the %[8]s flag:
+		%[9]s
+
+		To export listed issues to a JSON file, use the %[10]s flag:
+		%[11]s
+
+		To export listed issues to a CSV file, use the %[12]s flag:
+		%[13]s
+
+		To export listed issues to a SARIF file, use the %[14]s flag:
+		%[15]s
+		`, utils.Cyan("deepsource issues list"), utils.Yellow("--repo"), utils.Cyan("deepsource issues list --repo repo_name"), utils.Yellow("--analyzer"), utils.Cyan("deepsource issues list --analyzer python"), utils.Yellow("--limit"), utils.Cyan("deepsource issues list --limit 100"), utils.Yellow("--output-file"), utils.Cyan("deepsource issues list --output-file file_name"), utils.Yellow("--json"), utils.Cyan("deepsource issues list --json --output-file example.json"), utils.Yellow("--csv"), utils.Cyan("deepsource issues list --csv --output-file example.csv"), utils.Yellow("--sarif"), utils.Cyan("deepsource issues list --sarif --output-file example.sarif"))
+
 	cmd := &cobra.Command{
 		Use:   "list",
 		Short: "List issues reported by DeepSource",
+		Long:  doc,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			opts.FileArg = args
 			return opts.Run()

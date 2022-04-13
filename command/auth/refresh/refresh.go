@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
 	"github.com/deepsourcelabs/cli/deepsource"
 	"github.com/deepsourcelabs/cli/utils"
@@ -17,11 +18,21 @@ type RefreshOptions struct{}
 
 // NewCmdRefresh handles the refreshing of authentication credentials
 func NewCmdRefresh() *cobra.Command {
+
+	doc := heredoc.Docf(`
+		Refresh stored authentication credentials.
+
+		Authentication credentials expire after a certain amount of time.
+
+		To renew the authentication credentials, use %[1]s
+		`, utils.Yellow("deepsource auth refresh"))
+
 	opts := RefreshOptions{}
 
 	cmd := &cobra.Command{
 		Use:   "refresh",
 		Short: "Refresh stored authentication credentials",
+		Long:  doc,
 		Args:  utils.NoArgs,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return opts.Run()
