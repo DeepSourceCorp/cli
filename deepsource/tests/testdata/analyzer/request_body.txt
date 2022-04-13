@@ -1,0 +1,11 @@
+{
+    analyzers {
+        edges {
+            node {
+                name
+                shortcode
+                metaSchema
+            }
+        }
+    }
+}
