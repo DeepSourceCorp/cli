@@ -96,7 +96,7 @@ export default class IgnoreIssueFilePattern extends mixins(IssueDetailMixin, Act
       this.$emit('ignore', response.checkIssueIds)
     } catch (e) {
       this.$toast.danger('Something went wrong while ignoring this issue, please contact support')
-      this.logSentryErrorForUser(e, 'Ignore Issue', {
+      this.logErrorForUser(e, 'Ignore Issue', {
         method: 'Ignore Issue File Pattern',
         ...params
       })

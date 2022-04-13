@@ -364,7 +364,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
         this.$toast.success('You disabled this webhook.')
       }
     } catch (e) {
-      this.logSentryErrorForUser(e as Error, 'Disable webhook', { webhookId: webhookId })
+      this.logErrorForUser(e as Error, 'Disable webhook', { webhookId: webhookId })
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     }
   }
@@ -401,7 +401,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
       if (close) close()
       this.$toast.success('Successfully updated the endpoint details.')
     } catch (e) {
-      this.logSentryErrorForUser(e as Error, 'Update webhook', { webhookId: webhookId })
+      this.logErrorForUser(e as Error, 'Update webhook', { webhookId: webhookId })
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     } finally {
       this.savingConfig = false

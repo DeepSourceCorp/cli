@@ -251,7 +251,7 @@ export default class SelectReposToOnboard extends mixins(
         this.$toast.danger(
           'Something went wrong while onboarding these repositories, contact support'
         )
-        this.logSentryErrorForUser(e, 'Onboarding repositories using auto onboard', {
+        this.logErrorForUser(e, 'Onboarding repositories using auto onboard', {
           shortcode: this.selectedTemplate.shortcode,
           repoIds: this.selectedRepos.join(', ')
         })

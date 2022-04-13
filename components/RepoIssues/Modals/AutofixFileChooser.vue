@@ -258,7 +258,7 @@ export default class AutofixFileChooser extends mixins(
         this.$emit('runQuotaExhausted')
       } else {
         this.$toast.danger('There was a problem running Autofix.')
-        this.logSentryErrorForUser(e as Error, 'AutofixError', {
+        this.logErrorForUser(e as Error, 'AutofixError', {
           method: 'Create Autofix Run',
           inputFiles: this.selectedFiles,
           repoIssueId: this.issueId

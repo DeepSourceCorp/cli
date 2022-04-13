@@ -97,7 +97,7 @@ export default class IgnoreIssueOccurence extends mixins(IssueDetailMixin, Activ
       this.$emit('ignoreForever', response.checkIssueIds)
     } catch (e) {
       this.$toast.danger('Something went wrong while ignoring this issue, please contact support')
-      this.logSentryErrorForUser(e, 'Ignore Issue', {
+      this.logErrorForUser(e, 'Ignore Issue', {
         method: 'Ignore Issue Occurence for Single File',
         ...params
       })

@@ -21,6 +21,8 @@ function toBool(item) {
   }
 }
 
+import { version } from './package.json'
+
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
@@ -99,18 +101,6 @@ export default {
     '~/plugins/components/palette.client.ts'
   ],
 
-  sentry: {
-    lazy: true,
-    tracing: true,
-    publishRelease:
-      process.env.ON_PREM || process.env.DISABLE_SENTRY
-        ? false
-        : process.env.NODE_ENV !== 'development',
-    sourceMapStyle: 'hidden-source-map',
-    disabled: true
-    // disabled: process.env.ON_PREM ? true : process.env.DISABLE_SENTRY
-  },
-
   stripe: {
     publishableKey: process.env.STRIPE_KEY
   },
@@ -171,8 +161,23 @@ export default {
     'cookie-universal-nuxt',
     '@nuxt/content',
     'portal-vue/nuxt',
-    '@nuxtjs/sentry',
-    ...(process.env.ON_PREM ? [] : ['nuxt-stripe-module', 'nuxt-prometheus-module'])
+    ...(process.env.ON_PREM ? [] : ['nuxt-stripe-module', 'nuxt-prometheus-module']),
+    ...(process.env.BUGSNAG_TOKEN && !process.env.ON_PREM
+      ? [
+          [
+            'nuxt-bugsnag',
+            {
+              appVersion: version,
+              apiKey: process.env.BUGSNAG_TOKEN,
+              publishRelease: true,
+              releaseStage: process.env.NODE_ENV,
+              reporterOptions: {
+                autoAssignRelease: true
+              }
+            }
+          ]
+        ]
+      : [])
   ],
 
   serverMiddleware: [

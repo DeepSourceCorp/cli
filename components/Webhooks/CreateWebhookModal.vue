@@ -199,7 +199,7 @@ export default class CreateWebhookModal extends mixins(
       this.$toast.danger(
         'There was a problem saving this endpoint. If this issue persists, contact support.'
       )
-      this.logSentryErrorForUser(e as Error, 'webhook endpoint creation', args)
+      this.logErrorForUser(e as Error, 'webhook endpoint creation', args)
     } finally {
       this.savingWebhookEndpoint = false
     }

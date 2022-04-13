@@ -87,20 +87,26 @@ const permsMiddlware: Middleware = async ({
   route,
   error,
   $gateKeeper,
-  $sentry,
-  $config
+  $config,
+  $bugsnag
 }) => {
-  const logSentry = (message: string, repoPerms: RepoPerms[][], teamPerms: TeamPerms[][]) => {
+  /**
+   * Log error to bugsnag
+   *
+   * @param message
+   * @param repoPerms
+   * @param teamPerms
+   */
+  const logError = (message: string, repoPerms: RepoPerms[][], teamPerms: TeamPerms[][]) => {
     const viewer = store.state.user.active.viewer as User
-    if (!$config.sentry?.disabled && $sentry) {
-      $sentry.withScope(() => {
-        $sentry.setUser({ email: viewer.email })
-        $sentry.setContext('Permission Meta', {
-          path: route.fullPath,
-          repoPerms: repoPerms.map((perm) => perm.join(', ')),
-          teamPerms: teamPerms.map((perm) => perm.join(', '))
-        })
-        $sentry.captureMessage(message)
+    if (!$config.onPrem && $bugsnag) {
+      $bugsnag.leaveBreadcrumb(message, {
+        repoPerms,
+        teamPerms,
+        viewer: {
+          id: viewer.id,
+          email: viewer.email
+        }
       })
     }
   }
@@ -126,7 +132,7 @@ const permsMiddlware: Middleware = async ({
         }, true)
       } else {
         try {
-          logSentry('Could not fetch repository role for user', repoPerms, [])
+          logError('Could not fetch repository role for user', repoPerms, [])
           console.warn('PERM: Could not fetch repository role for user')
         } catch {}
       }
@@ -142,7 +148,7 @@ const permsMiddlware: Middleware = async ({
         }, true)
       } else {
         try {
-          logSentry('Could not fetch team role for user', repoPerms, [])
+          logError('Could not fetch team role for user', repoPerms, [])
           console.warn('PERM: Could not fetch team role for user')
         } catch {}
       }

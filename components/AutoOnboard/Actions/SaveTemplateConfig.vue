@@ -135,7 +135,7 @@ export default class SaveTemplateConfig extends mixins(
       this.$toast.danger(
         'There was a problem updating this config, please check your config for errors or contact support.'
       )
-      this.logSentryErrorForUser(e, 'Auto Onboard template update', this.baseConfig)
+      this.logErrorForUser(e, 'Auto Onboard template update', this.baseConfig)
     } finally {
       this.savingConfig = false
     }

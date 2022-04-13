@@ -91,7 +91,7 @@ export default class IgnoreIssueFalsePositive extends mixins(IssueDetailMixin, A
       }
     } catch (e) {
       this.$toast.danger('Something went wrong while reporting this false positive')
-      this.logSentryErrorForUser(e, 'Ignore Issue', {
+      this.logErrorForUser(e, 'Ignore Issue', {
         method: 'Report false positive',
         shortcode: this.shortcode,
         checkIssueId: this.checkIssueId,

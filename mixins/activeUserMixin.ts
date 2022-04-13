@@ -108,12 +108,21 @@ export default class ActiveUserMixin extends Vue {
     }
   }
 
-  public logSentryErrorForUser(e: Error, context: string, params: Record<string, unknown>): void {
-    if (!this.$config.sentry?.disabled) {
-      this.$sentry.withScope(() => {
-        this.$sentry.setUser({ email: this.viewer.email })
-        this.$sentry.setContext(context, params)
-        this.$sentry.captureException(e)
+  /**
+   * Log error to reporting service
+   *
+   * @param {Error} e
+   * @param {string} context
+   * @param {Record<string, unknown>} params
+   *
+   * @return {void}
+   */
+  public logErrorForUser(e: Error, context: string, params: Record<string, unknown>): void {
+    if (!this.$config.onPrem && this.$bugsnag) {
+      this.$bugsnag.notify(e, (event) => {
+        event.context = context
+        event.setUser(this.viewer.id, this.viewer.email, this.viewer.firstName)
+        event.addMetadata('errorParams', params)
       })
     }
   }

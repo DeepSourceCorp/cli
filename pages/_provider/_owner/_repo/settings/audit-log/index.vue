@@ -86,7 +86,7 @@ export default class SettingsAuditLog extends mixins(RepoDetailMixin, ActiveUser
     try {
       await this.fetchRepositorySettingsAuditLogs(this.baseRouteParams)
     } catch (e) {
-      this.logSentryErrorForUser(e as Error, 'Audit Log', this.baseRouteParams)
+      this.logErrorForUser(e as Error, 'Audit Log', this.baseRouteParams)
     }
   }
 }

@@ -9,7 +9,6 @@ query {
     appEnv
     emptyAvatarUrl
     debug
-    sentryDsn
     userGroupUrl
     onPrem
     deepsourceCloudProduction

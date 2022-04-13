@@ -95,7 +95,7 @@ export default class IgnoreIssueIntentional extends mixins(IssueDetailMixin, Act
       }
     } catch (e) {
       this.$toast.danger('Something went wrong while ignoring this issue')
-      this.logSentryErrorForUser(e, 'Ignore Issue', {
+      this.logErrorForUser(e, 'Ignore Issue', {
         method: 'Ignore issue intentional',
         shortcode: this.shortcode,
         checkIssueId: this.checkIssueId

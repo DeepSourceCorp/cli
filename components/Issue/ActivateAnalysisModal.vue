@@ -146,7 +146,7 @@ export default class ActivateAnalysisModal extends mixins(
         })
       }
     } catch (e) {
-      this.logSentryErrorForUser(e as Error, 'Generate config', args)
+      this.logErrorForUser(e as Error, 'Generate config', args)
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
       this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
     }

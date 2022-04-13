@@ -315,7 +315,7 @@ export default class StripeCheckoutBox extends mixins(
           'Something went wrong processing your card payment. Please check your card details or contact support.'
         )
       } finally {
-        this.logSentryErrorForUser(e as Error, 'Billing error', {})
+        this.logErrorForUser(e as Error, 'Billing error', {})
       }
     } finally {
       this.checkoutLoading = false

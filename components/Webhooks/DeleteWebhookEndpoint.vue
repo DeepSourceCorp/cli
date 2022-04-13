@@ -81,7 +81,7 @@ export default class DeleteWebhookEndpoint extends mixins(WebhookMixin, ActiveUs
         )
       }
     } catch (e) {
-      this.logSentryErrorForUser(e, 'Delete webhook', { webhookId: webhookId })
+      this.logErrorForUser(e, 'Delete webhook', { webhookId: webhookId })
       this.$toast.danger(e.message.replace('GraphQL error: ', ''))
     } finally {
       this.deletingEndpoint = false
