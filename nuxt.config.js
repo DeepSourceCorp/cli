@@ -140,7 +140,6 @@ export default {
   // Modules for dev and build (recommended) (https://go.nuxtjs.dev/config-modules)
   buildModules: [
     // https://go.nuxtjs.dev/typescript
-    'nuxt-timings',
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
@@ -148,11 +147,6 @@ export default {
     '@nuxtjs/google-fonts',
     ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
   ],
-
-  timings: {
-    // default value
-    enabled: false
-  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
@@ -278,6 +272,19 @@ export default {
     parallel: true,
     cache: true,
     sourceMap: true,
+    extractCSS: process.env.NODE_ENV !== 'development',
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          styles: {
+            name: 'styles',
+            test: /\.(css|vue)$/,
+            chunks: 'all',
+            enforce: true
+          }
+        }
+      }
+    },
     postcss: {
       preset: {
         features: {

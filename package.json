@@ -29,7 +29,6 @@
     "nuxt-prometheus-module": "^0.1.4",
     "nuxt-property-decorator": "^2.9.1",
     "nuxt-stripe-module": "^3.2.0",
-    "nuxt-timings": "^0.1.2",
     "pluralize": "^8.0.0",
     "portal-vue": "^2.1.7",
     "postcss": "7.0.36",
