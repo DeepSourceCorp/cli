@@ -39,7 +39,20 @@ export default {
       { hid: 'description', name: 'description', content: '' },
       { hid: 'og:type', property: 'og:type', content: 'website' }
     ],
-    link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon/default.svg' }]
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/favicon/default.svg',
+        media: '(prefers-color-scheme: light)'
+      },
+      {
+        rel: 'icon',
+        type: 'image/svg+xml',
+        href: '/favicon/default-dark.svg',
+        media: '(prefers-color-scheme: dark)'
+      }
+    ]
   },
   telemetry: false,
   // Global CSS (https://go.nuxtjs.dev/config-css)
