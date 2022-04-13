@@ -14,8 +14,6 @@ steps:
       - --cache=false
     secretEnv:
       - 'ZEAL_SECRET'
-      - 'DSN'
-      - 'SENTRY_TOKEN'
       - 'BUGSNAG_TOKEN'
       - 'STRIPE_PUBLISHABLE_KEY'
 
