@@ -1,6 +1,5 @@
 <template>
   <div class="container mx-auto">
-    <stack-overflow-pixel />
     <div
       class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
     >

@@ -1056,7 +1056,7 @@ declare module '*/watchedRepositoriesCount.gql' {
 declare module '*/getTeamInviteInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const getTeamInviteInfo: DocumentNode;
 
   export default defaultDocument;
 }

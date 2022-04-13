@@ -118,13 +118,8 @@ export default {
     publishableKey: process.env.STRIPE_KEY
   },
 
-  googleAnalytics: {
-    id: process.env.GOOGLE_ANALYTICS_ID
-  },
-
   extendPlugins(plugins) {
     const services = [
-      '~/plugins/services/plausibleLoader.client.js',
       '~/plugins/services/rudder.client.ts',
       '~/plugins/components/statuspage.client.ts',
       '~/plugins/services/posthog.client.ts'
@@ -158,7 +153,7 @@ export default {
     '@nuxtjs/tailwindcss',
     '@deepsource/nuxt-websocket',
     '@nuxtjs/google-fonts',
-    ...(process.env.ON_PREM ? [] : ['@nuxtjs/google-analytics'])
+    ...(process.env.ON_PREM ? [] : ['@nuxtjs/gtm'])
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -330,6 +325,11 @@ export default {
     families: {
       Inter: [100, 200, 300, 400, 500, 600, 700]
     }
+  },
+
+  gtm: {
+    id: 'GTM-K34VXB5',
+    pageTracking: true
   },
 
   apollo: {

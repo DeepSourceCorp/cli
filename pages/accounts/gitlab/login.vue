@@ -1,6 +1,5 @@
 <template>
   <hero-card>
-    <stack-overflow-pixel />
     <h1 class="text-2xl font-bold leading-snug text-center text-vanilla-100">
       Choose a GitLab account
     </h1>
