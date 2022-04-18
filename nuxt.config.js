@@ -22,6 +22,7 @@ function toBool(item) {
 }
 
 import { version } from './package.json'
+const IS_PRODUCTION = process.env.NODE_ENV === 'prod'
 
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -276,7 +277,7 @@ export default {
   // TODO: Remove this configuration
   // https://github.com/nuxt-community/tailwindcss-module/issues/79#issuecomment-609693459
   build: {
-    publicPath: process.env.NODE_ENV === 'prod' ? process.env.CDN_URL : '/_nuxt/',
+    publicPath: IS_PRODUCTION ? process.env.CDN_URL : '/_nuxt/',
     parallel: true,
     cache: true,
     sourceMap: true,
@@ -329,6 +330,7 @@ export default {
 
   gtm: {
     id: 'GTM-K34VXB5',
+    enabled: IS_PRODUCTION && !toBool(process.env.ON_PREM),
     pageTracking: true
   },
 
