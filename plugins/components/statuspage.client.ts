@@ -38,15 +38,19 @@ function allowUpdateForUser(id: string) {
 }
 
 export async function refetchStatus(): Promise<void> {
-  const statuspageSummary = await fetch(STATUS_API_URL, {
-    headers: {
-      Accept: 'application/json'
-    }
-  })
+  const scheduled_maintenances: ScheduledMaintainenceT[] = []
+  try {
+    const statuspageSummary = await fetch(STATUS_API_URL, {
+      headers: {
+        Accept: 'application/json'
+      }
+    })
 
-  const data = await statuspageSummary.json()
-
-  const scheduled_maintenances: ScheduledMaintainenceT[] = data.scheduled_maintenances
+    const data = await statuspageSummary.json()
+    scheduled_maintenances.push(data.scheduled_maintenances)
+  } catch (e) {
+    return
+  }
 
   if (scheduled_maintenances.length > 0) {
     scheduled_maintenances
