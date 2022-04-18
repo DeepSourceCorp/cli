@@ -429,7 +429,7 @@ export default class Sidebar extends mixins(
       this.collapsedSidebar = !this.collapsedSidebar
       setTimeout(() => {
         this.isCollapsed = !this.isCollapsed
-      }, 100)
+      }, 120)
     }
 
     this.$nuxt.$cookies.set('ui-state-sidebar-collapsed', newVal)

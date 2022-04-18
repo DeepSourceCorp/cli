@@ -3,8 +3,8 @@
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="flex items-center w-full space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none"
-        :class="isCollapsed ? 'hover:opacity-75' : 'p-1 hover:bg-ink-200'"
+        class="flex items-center w-full space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none p-1"
+        :class="isCollapsed ? 'hover:opacity-75 px-0' : 'hover:bg-ink-200'"
         @click="toggle"
       >
         <z-avatar
