@@ -15,7 +15,7 @@
       <div v-if="showSeenInfo" class="space-y-1.5">
         <div class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
           <!-- Issue type -->
-          <issue-type :issue-type="issueType" />
+          <issue-type :issue-type="issueType" spacing="gap-x-2" />
           <!-- First seen and last seen -->
           <div class="flex items-center gap-x-2">
             <z-icon icon="clock" size="x-small" color="vanilla-400" />
@@ -32,7 +32,7 @@
           <!-- Occurences in files -->
         </div>
         <div
-          class="flex items-baseline w-full text-sm leading-6 gap-x-1 text-vanilla-400 sm:w-auto"
+          class="flex items-baseline w-full text-sm leading-6 gap-x-2 text-vanilla-400 sm:w-auto"
         >
           <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0" />
           <span class="max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis"
@@ -43,9 +43,9 @@
 
       <!-- Place content on the same line if not showing first and last seen information -->
       <div v-else class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
-        <issue-type :issue-type="issueType" />
+        <issue-type :issue-type="issueType" spacing="gap-x-2" />
 
-        <div :key="issueType" class="flex items-center space-x-1.5">
+        <div :key="issueType" class="flex items-center gap-x-2">
           <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0" />
           <span
             class="max-w-2xl overflow-hidden text-sm whitespace-pre text-vanilla-400 overflow-ellipsis"

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center space-x-1.5" :key="issueType">
+  <div :key="issueType" class="flex items-center" :class="[spacing]">
     <z-icon :icon="issueType" size="x-small" color="vanilla-400"></z-icon>
     <span class="text-sm text-vanilla-400 tracking-wide">{{ label }}</span>
   </div>
@@ -17,6 +17,9 @@ import { toTitleCase } from '@/utils/string'
 export default class IssueType extends Vue {
   @Prop({ default: '' })
   issueType!: string
+
+  @Prop({ default: 'space-x-1.5' })
+  spacing!: string
 
   get label(): string {
     const titles: Record<string, string> = {
