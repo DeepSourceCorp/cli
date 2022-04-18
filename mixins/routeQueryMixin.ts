@@ -61,8 +61,14 @@ export default class RouteQueryMixin extends Vue {
     )
 
     this.$nextTick(async () => {
-      await this.$nuxt.$router.replace({ query: { ...this.queryParams } as Location['query'] })
-      this.refetchAfterRouteChange()
+      try {
+        await this.$nuxt.$router.replace({ query: { ...this.queryParams } as Location['query'] })
+        this.refetchAfterRouteChange()
+      } catch (e) {
+        if ((e as Error).name === 'NavigationDuplicated') {
+          return
+        }
+      }
     })
   }
 }
