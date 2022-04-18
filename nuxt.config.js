@@ -165,23 +165,20 @@ export default {
     '@nuxt/content',
     'portal-vue/nuxt',
     ...(process.env.ON_PREM ? [] : ['nuxt-stripe-module', 'nuxt-prometheus-module']),
-    ...(process.env.BUGSNAG_TOKEN && !process.env.ON_PREM
-      ? [
-          [
-            'nuxt-bugsnag',
-            {
-              appVersion: version,
-              apiKey: process.env.BUGSNAG_TOKEN,
-              publishRelease: true,
-              releaseStage: process.env.NODE_ENV,
-              reporterOptions: {
-                autoAssignRelease: true
-              }
-            }
-          ]
-        ]
-      : [])
+    ...(process.env.BUGSNAG_TOKEN && !process.env.ON_PREM ? ['nuxt-bugsnag'] : [])
   ],
+
+  bugsnag: {
+    config: {
+      appVersion: version
+    },
+    releaseStage: process.env.NODE_ENV,
+    apiKey: process.env.BUGSNAG_TOKEN,
+    publishRelease: true,
+    reporterOptions: {
+      autoAssignRelease: true
+    }
+  },
 
   serverMiddleware: [
     {
