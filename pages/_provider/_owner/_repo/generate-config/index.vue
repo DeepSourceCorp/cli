@@ -127,7 +127,7 @@ import { TransformerInterface } from '~/store/analyzer/list'
 import { DirectoryGetters } from '~/store/directory/directory'
 import { RepoConfigInterface, RepoConfigAnalyzerMeta } from '~/store/repository/detail'
 
-import { TeamPerms } from '~/types/permTypes'
+import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import { Analyzer, TransformerTool } from '~/types/types'
 import AnalyzerListMixin from '~/mixins/analyzerListMixin'
 
@@ -168,6 +168,13 @@ const directoryStore = namespace('directory/directory')
     PatternsSelector,
     InstallAutofixModal,
     NextStepsModal
+  },
+  middleware: ['perm'],
+  meta: {
+    auth: {
+      strict: true,
+      repoPerms: [RepoPerms.ACTIVATE_REPOSITORY]
+    }
   },
   layout: 'sidebar-only'
 })
