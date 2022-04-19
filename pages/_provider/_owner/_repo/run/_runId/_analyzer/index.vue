@@ -14,8 +14,8 @@
           allowAutofix &&
           Array.isArray(check.autofixableIssues) &&
           check.autofixableIssues.length &&
-          !run.isForDefaultBranch &&
-          !run.isForCrossRepoPr
+          !check.run.isForDefaultBranch &&
+          !check.run.isForCrossRepoPr
         "
         v-bind="check"
         :can-create-autofix="canCreateAutofix"
