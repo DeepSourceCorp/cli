@@ -2,7 +2,7 @@
   <!-- Header -->
   <div class="flex flex-1 w-full rounded-sm min-h-24">
     <!-- Left Section -->
-    <div class="flex flex-col gap-y-3 md:gap-y-2 w-3/5 py-4 md:w-4/5">
+    <div class="flex flex-col w-3/5 py-4 gap-y-3 md:gap-y-2 md:w-4/5">
       <!-- heading -->
       <div
         class="flex items-center space-x-2 text-xs font-normal lg:text-lg lg:leading-9 text-vanilla-400"
@@ -16,13 +16,7 @@
       <div class="space-x-6 sm:flex">
         <!-- Found -->
         <div class="flex items-start space-x-2">
-          <z-icon
-            :icon="showStatusText ? 'timer-reset' : 'clock'"
-            size="small"
-            color="vanilla-400"
-            :class="{ 'motion-safe:animate-spin': isPending }"
-            class="mt-0.5"
-          />
+          <z-icon :icon="statusIcon" size="small" :color="statusIconColor" class="mt-0.5" />
           <div v-if="showStatusText" class="text-sm text-vanilla-400">
             <span v-if="isPending"> {{ statusText }} (Time elapsed: {{ finishedInDisplay }}) </span>
             <span v-else> {{ statusText }} {{ finishedInDisplay }} </span>
@@ -116,6 +110,30 @@ export default class AnalyzerHeader extends Vue {
     }
 
     return ''
+  }
+
+  get statusIcon(): string {
+    const types: Record<string, string> = {
+      [RunStatus.Pass]: 'check',
+      [RunStatus.Fail]: 'x',
+      [RunStatus.Pend]: 'clock',
+      [RunStatus.Timo]: 'timer-reset',
+      [RunStatus.Cncl]: 'alert-circle',
+      [RunStatus.Read]: 'check-circle'
+    }
+    return types[this.status || 'PASS']
+  }
+
+  get statusIconColor(): string {
+    const types: Record<string, string> = {
+      [RunStatus.Pass]: 'juniper',
+      [RunStatus.Fail]: 'cherry',
+      [RunStatus.Pend]: 'vanilla-400',
+      [RunStatus.Timo]: 'honey',
+      [RunStatus.Cncl]: 'honey',
+      [RunStatus.Read]: 'vanilla-400'
+    }
+    return types[this.status || 'PASS']
   }
 
   get statusText(): string {
