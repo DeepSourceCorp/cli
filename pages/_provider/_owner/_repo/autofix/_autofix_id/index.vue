@@ -689,6 +689,7 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     this.triggeringAutofix = true
     const hunkIds = this.selectedHunkIds.map((id) => String(id))
     try {
+      // skipcq: JS-D009
       if (this.autofixRun.isGeneratedFromPr) {
         await this.commitFixToPullRequest(hunkIds)
       } else {
