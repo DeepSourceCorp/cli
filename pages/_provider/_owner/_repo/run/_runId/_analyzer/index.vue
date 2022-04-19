@@ -12,7 +12,7 @@
       <run-autofix-bar
         v-if="
           allowAutofix &&
-          Arrya.isArray(check.autofixableIssues) &&
+          Array.isArray(check.autofixableIssues) &&
           check.autofixableIssues.length &&
           !run.isForDefaultBranch &&
           !run.isForCrossRepoPr
