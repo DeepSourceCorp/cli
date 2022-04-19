@@ -12,7 +12,7 @@ exports[`[[ CreateTokenModal ]] Renders CreateTokenModal 1`] = `
     </label> <label for=\\"expiry\\" class=\\"block space-y-2 text-sm text-vanilla-200\\">
       <p class=\\"ml-px text-sm font-semibold text-vanilla-300\\">Expiration</p>
       <div class=\\"h-10\\">
-        <zselect-stub selected=\\"7\\" tabindex=\\"0\\" placeholder=\\"Select an Option\\" spacing=\\"\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" class=\\"rounded-md bg-ink-400\\">
+        <zselect-stub selected=\\"7\\" tabindex=\\"0\\" placeholder=\\"Select an Option\\" spacing=\\"px-2 py-3\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-md\\" backgroundclass=\\"bg-transparent\\" textsize=\\"text-xs\\" class=\\"rounded-md bg-ink-400\\">
           <zoption-stub label=\\"7 days\\" value=\\"7\\" textsize=\\"text-xs\\"></zoption-stub>
           <zoption-stub label=\\"15 days\\" value=\\"15\\" textsize=\\"text-xs\\"></zoption-stub>
           <zoption-stub label=\\"30 days\\" value=\\"30\\" textsize=\\"text-xs\\"></zoption-stub>
