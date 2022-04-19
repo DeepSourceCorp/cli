@@ -38,6 +38,14 @@ spec:
       branches:
         - ^main$
         - ^master$
+    - name: bifrost-master-tests
+      context: 'Bifrost-Run-Master-Tests'
+      always_run: true
+      optional: false
+      branches:
+        - ^main$
+        - ^master$
+      source: 'pullrequest-tests.yaml'
     - name: bifrost-production-builds
       context: 'Bifrost-Run-Production-Builds'
       optional: false
