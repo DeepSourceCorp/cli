@@ -78,7 +78,7 @@ export default class IgnoredRule extends mixins(RoleAccessMixin) {
   verticalPadding: string
 
   get allowDelete(): boolean {
-    return this.loggedIn
+    return this.loggedIn && this.repoPerms.canIgnoreIssues
   }
 
   get ruleCreatedTime(): string {
