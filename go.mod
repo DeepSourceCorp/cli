@@ -10,6 +10,7 @@ require (
 	github.com/deepsourcelabs/graphql v0.2.2
 	github.com/fatih/color v1.12.0
 	github.com/getsentry/sentry-go v0.6.0
+	github.com/go-playground/validator/v10 v10.10.1 // indirect
 	github.com/google/go-cmp v0.5.5 // indirect
 	github.com/kr/pretty v0.3.0 // indirect
 	github.com/matryer/is v1.4.0 // indirect
@@ -24,7 +25,6 @@ require (
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.7.0
 	github.com/xeipuuv/gojsonschema v1.2.0
-	golang.org/x/crypto v0.0.0-20211202192323-5770296d904e // indirect
 	golang.org/x/sys v0.0.0-20211205182925-97ca703d548d // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect

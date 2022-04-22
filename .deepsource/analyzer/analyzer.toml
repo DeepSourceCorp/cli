@@ -1,0 +1,18 @@
+name = "Todo comments checker"
+description = "Finds the TODO comments in codebase."
+# category = 123
+
+[analysis]
+  command = "/app/todo-checker"
+
+[build]
+  image = "golang:1.17.6-alpine3.15"
+  steps = """
+  apk add --no-cache openssh shadow git grep
+  cp -R . /app
+  git config --global url.git@github.com:.insteadOf https://github.com/
+  go env -w GOPRIVATE=github.com/siddhant-deepsource/*
+  cd /app
+  CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /app/todo-checker .
+  """
+
