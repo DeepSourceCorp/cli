@@ -23,6 +23,7 @@ function toBool(item) {
 
 import { version } from './package.json'
 const IS_PRODUCTION = process.env.NODE_ENV === 'prod'
+const IS_ON_PREM = toBool(process.env.ON_PREM)
 
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -75,27 +76,23 @@ export default {
     websocket: {
       url: process.env.WEB_SOCKET_URI || 'wss://events.deepsource.io'
     },
-    onPrem: toBool(process.env.ON_PREM),
-    gitlabEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GITLAB_ENABLED) : true,
-    githubEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GITHUB_ENABLED) : true,
-    bitbucketEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.BITBUCKET_ENABLED) : true,
-    githubServerEnabled: toBool(process.env.ON_PREM)
-      ? toBool(process.env.GHE_SERVER_ENABLED)
-      : false,
-    gsrEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.GSR_ENABLED) : false,
+    onPrem: IS_ON_PREM,
+    gitlabEnabled: IS_ON_PREM ? toBool(process.env.GITLAB_ENABLED) : true,
+    githubEnabled: IS_ON_PREM ? toBool(process.env.GITHUB_ENABLED) : true,
+    bitbucketEnabled: IS_ON_PREM ? toBool(process.env.BITBUCKET_ENABLED) : true,
+    githubServerEnabled: IS_ON_PREM ? toBool(process.env.GHE_SERVER_ENABLED) : false,
+    gsrEnabled: IS_ON_PREM ? toBool(process.env.GSR_ENABLED) : false,
     enableSaml: toBool(process.env.ENABLE_SAML),
-    emailEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.EMAIL_ENABLED) : true,
-    allowSocialAuth: toBool(process.env.ON_PREM) ? toBool(process.env.ALLOW_SOCIAL_AUTH) : true,
-    licenseExpiry: toBool(process.env.ON_PREM) ? new Date(process.env.LICENSE_EXPIRY) : null,
-    supportEmail: toBool(process.env.ON_PREM)
-      ? 'enterprise-support@deepsource.io'
-      : 'support@deepsource.io',
-    discoverEnabled: toBool(process.env.ON_PREM) ? toBool(process.env.IS_DISCOVER_ENABLED) : true,
+    emailEnabled: IS_ON_PREM ? toBool(process.env.EMAIL_ENABLED) : true,
+    allowSocialAuth: IS_ON_PREM ? toBool(process.env.ALLOW_SOCIAL_AUTH) : true,
+    licenseExpiry: IS_ON_PREM ? new Date(process.env.LICENSE_EXPIRY) : null,
+    supportEmail: IS_ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io',
+    discoverEnabled: IS_ON_PREM ? toBool(process.env.IS_DISCOVER_ENABLED) : true,
     domain: process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io',
-    posthogApiKey: toBool(process.env.ON_PREM) ? '' : process.env.POSTHOG_API_KEY,
-    posthogApiHost: toBool(process.env.ON_PREM) ? '' : process.env.POSTHOG_API_HOST,
-    rudderWriteKey: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_WRITE_KEY,
-    rudderDataPlaneUrl: toBool(process.env.ON_PREM) ? '' : process.env.RUDDER_DATA_PLANE_URL
+    posthogApiKey: IS_ON_PREM ? '' : process.env.POSTHOG_API_KEY,
+    posthogApiHost: IS_ON_PREM ? '' : process.env.POSTHOG_API_HOST,
+    rudderWriteKey: IS_ON_PREM ? '' : process.env.RUDDER_WRITE_KEY,
+    rudderDataPlaneUrl: IS_ON_PREM ? '' : process.env.RUDDER_DATA_PLANE_URL
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
@@ -126,16 +123,14 @@ export default {
       '~/plugins/services/posthog.client.ts'
     ]
 
-    if (!process.env.ON_PREM) {
+    if (!IS_ON_PREM) {
       plugins.push(...services)
     }
 
     return plugins
   },
 
-  ignore: toBool(process.env.ON_PREM)
-    ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*']
-    : [],
+  ignore: IS_ON_PREM ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*'] : [],
 
   loadingIndicator: {
     name: 'pulse',
@@ -154,7 +149,7 @@ export default {
     '@nuxtjs/tailwindcss',
     '@deepsource/nuxt-websocket',
     '@nuxtjs/google-fonts',
-    ...(process.env.ON_PREM ? [] : ['@nuxtjs/gtm'])
+    ...(IS_ON_PREM ? [] : ['@nuxtjs/gtm'])
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -164,8 +159,9 @@ export default {
     'cookie-universal-nuxt',
     '@nuxt/content',
     'portal-vue/nuxt',
-    ...(process.env.ON_PREM ? [] : ['nuxt-stripe-module', 'nuxt-prometheus-module']),
-    ...(process.env.BUGSNAG_TOKEN && !process.env.ON_PREM ? ['nuxt-bugsnag'] : [])
+    ...(IS_ON_PREM ? [] : ['nuxt-stripe-module']),
+    ...(IS_PRODUCTION && !IS_ON_PREM ? ['nuxt-prometheus-module'] : []),
+    ...(process.env.BUGSNAG_TOKEN && !IS_ON_PREM ? ['nuxt-bugsnag'] : [])
   ],
 
   bugsnag: {
@@ -319,7 +315,7 @@ export default {
   },
 
   googleFonts: {
-    download: process.env.NODE_ENV !== 'development' && process.env.ON_PREM,
+    download: process.env.NODE_ENV !== 'development',
     families: {
       Inter: [100, 200, 300, 400, 500, 600, 700]
     }
@@ -327,7 +323,7 @@ export default {
 
   gtm: {
     id: 'GTM-K34VXB5',
-    enabled: IS_PRODUCTION && !toBool(process.env.ON_PREM),
+    enabled: IS_PRODUCTION && !IS_ON_PREM,
     pageTracking: true
   },
 
