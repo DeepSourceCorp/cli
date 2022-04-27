@@ -1,7 +1,7 @@
 <template>
-  <div class="hidden sm:flex items-center space-x-1 text-sm">
+  <div class="items-center hidden space-x-1 text-sm sm:flex">
     <slot>
-      <z-icon :icon="icon" size="small" :color="color"></z-icon>
+      <z-icon :icon="icon" size="x-small" :color="color"></z-icon>
       <span class="text-sm" :class="[`text-${color}`]">{{ title }}</span>
     </slot>
   </div>

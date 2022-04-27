@@ -132,12 +132,14 @@ export const actions: AutofixRunListModuleActions = {
           owner: args.owner,
           name: args.name,
           prStatusIn: [
-            AutofixRunPullRequestStatus.Pnc.toLowerCase(),
-            AutofixRunPullRequestStatus.Prf.toLowerCase(),
-            AutofixRunPullRequestStatus.Pro.toLowerCase(),
-            AutofixRunPullRequestStatus.Prp.toLowerCase()
+            AutofixRunPullRequestStatus.Pnc.toLowerCase(), // Not created
+            AutofixRunPullRequestStatus.Pro.toLowerCase(), // Pull request open
+            AutofixRunPullRequestStatus.Prp.toLowerCase() // In Progress
           ],
-          statusIn: [AutofixRunStatus.Pend.toLowerCase(), AutofixRunStatus.Pass.toLowerCase()],
+          statusIn: [
+            AutofixRunStatus.Pass.toLowerCase(), // PASSED
+            AutofixRunStatus.Pend.toLowerCase() // PENDING
+          ],
           after: this.$getGQLAfter(args.currentPageNumber, args.limit),
           limit: args.limit || 10
         },
