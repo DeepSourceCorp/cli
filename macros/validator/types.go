@@ -10,17 +10,18 @@ type Analysis struct {
 }
 
 type Build struct {
-	Image string `toml:"image" json:"image" analyzertoml:"required"`
-	Steps string `toml:"steps" json:"steps" analyzertoml:"required"`
+	Image string `toml:"image" json:"image" validate:"required"`
+	Steps string `toml:"steps" json:"steps" validate:"required"`
 }
 
+// analyzer.toml type
 type AnalyzerMetadata struct {
 	// Analyzer specific data
-	Name             string `toml:"name" json:"name" validate:"required"`
+	Name             string `toml:"name" json:"name" validate:"required,ascii"`
 	Description      string `toml:"description" json:"description" validate:"required"`
-	DocumentationURL string `toml:"documentation_url" json:"documentation_url"`
+	DocumentationURL string `toml:"documentation_url" json:"documentation_url,omitempty" validate:"omitempty,url"`
 	Category         string `toml:"category" json:"category" validate:"required"`
-	Logo             string `json:"logo"` // should be an svg
+	Logo             string `json:"logo,omitempty"` // should be an svg
 
 	// Analyzer, Autofix and Transformer spec
 	Analysis Analysis `toml:"analysis" json:"analysis" validate:"required"`
@@ -31,9 +32,18 @@ type AnalyzerMetadata struct {
 
 	// TODO: Decide if this is needed?
 	// Environment variables that should be set for the Macro
-	Environment map[string]string `toml:"environment" json:"environment"`
+	Environment map[string]string `toml:"environment" json:"environment,omitempty"`
 
 	// TODO: Decide if this is needed?
 	// Meta schema for further Macro configuration
-	Meta interface{} `toml:"meta" json:"meta"`
+	Meta interface{} `toml:"meta" json:"meta,omitempty"`
+}
+
+// Analyzer issue description
+type AnalyzerIssue struct {
+	// TODO: Decide if shortcode field is required or not?
+	Shortcode   string `toml:"shortcode" validate:"required"`
+	Title       string `toml:"title" json:"title" validate:"required"`
+	Description string `toml:"description" json:"description" validate:"required"`
+	Category    string `toml:"category" json:"category" validate:"required"`
 }
