@@ -1,6 +1,6 @@
 name = "Todo comments checker"
 description = "Finds the TODO comments in codebase."
-# category = 123
+category = "doc"
 
 [analysis]
   command = "/app/todo-checker"

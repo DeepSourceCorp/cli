@@ -64,9 +64,15 @@ func ValidateAnalyzerTOML() (err error) {
 	viper.Unmarshal(&config)
 
 	// Validate analyzer.toml fields based on type and sanity checks
+	v := validate.New()
+	if err := v.Struct(&config); err != nil {
+		log.Fatalf("Missing required attributes %v\n", err)
+	}
+
 	return nil
 }
 
+// Validates issue description TOML files
 func ValidateIssueDescriptions() (err error) {
 	issuesList, err := ioutil.ReadDir(issuesDirPath)
 	if err != nil {

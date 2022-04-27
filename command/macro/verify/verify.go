@@ -1,7 +1,8 @@
 package macro
 
 import (
-	mvalidator "github.com/deepsourcelabs/cli/internal/macros/validator"
+	mbuilder "github.com/deepsourcelabs/cli/macros/build"
+	mvalidator "github.com/deepsourcelabs/cli/macros/validator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -44,6 +45,15 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 
 	// Read and verify all issues
 	if err = mvalidator.ValidateIssueDescriptions(); err != nil {
+		return err
+	}
+
+	// TODO: Inject the name from analyzer.toml here (needs some refactoring)
+	macroBuilder := mbuilder.DockerBuildParams{
+		ImageName: "dummy",
+	}
+
+	if err = macroBuilder.BuildMacroDockerImage(); err != nil {
 		return err
 	}
 
