@@ -160,14 +160,9 @@ export default {
     '@nuxt/content',
     'portal-vue/nuxt',
     ...(IS_ON_PREM ? [] : ['nuxt-stripe-module']),
-    ...(IS_PRODUCTION && !IS_ON_PREM ? ['nuxt-prometheus-module'] : []),
+    ...(process.env.NODE_ENV !== 'development' && !IS_ON_PREM ? ['nuxt-prometheus-module'] : []),
     ...(process.env.BUGSNAG_TOKEN && !IS_ON_PREM ? ['nuxt-bugsnag'] : [])
   ],
-
-  'nuxt-prometheus-module': {
-    host: process.env.NODE_ENV === 'development' ? '127.0.0.1' : '0.0.0.0',
-    port: 9100
-  },
 
   bugsnag: {
     config: {
@@ -179,6 +174,11 @@ export default {
     reporterOptions: {
       autoAssignRelease: true
     }
+  },
+
+  'nuxt-prometheus-module': {
+    host: process.env.NODE_ENV === 'development' ? '127.0.0.1' : '0.0.0.0',
+    port: 9100
   },
 
   serverMiddleware: [
