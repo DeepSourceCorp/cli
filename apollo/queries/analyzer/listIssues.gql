@@ -1,4 +1,4 @@
-query(
+query (
   $shortcode: String!
   $first: Int
   $offset: Int
@@ -9,6 +9,7 @@ query(
   analyzer(shortcode: $shortcode) {
     id
     name
+    shortcode
     owner
     analyzerLogo
     issueTypeDistribution(autofixAvailable: $autofixAvailable, q: $q, issueType: $issueType)
