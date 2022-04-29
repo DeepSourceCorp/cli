@@ -269,8 +269,6 @@ export const mockChangelog = (): Changelog => CHANGELOG_MOCK
  * @returns {ContextModuleState}
  */
 export const mockContextStore = (): ContextModuleState => ({
-  loading: false,
-  error: {},
   context: mockContext(),
   changelog: mockChangelog()
 })

@@ -2,10 +2,12 @@ import {
   state,
   mutations,
   actions,
+  getters,
   ActiveUserActionContext,
   ActiveUserState,
   ActiveUserActions,
-  ActiveUserMutations
+  ActiveUserMutations,
+  ActiveUserGetterTypes
 } from '~/store/user/active'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { mockActiveUserState } from './__mocks__/active.mock'
@@ -40,8 +42,6 @@ describe('[Store] User/Active', () => {
   describe('[[State]]', () => {
     test('has the right initial data', () => {
       const initState = state()
-      expect(initState.loading).toEqual(false)
-      expect(initState.error).toEqual({})
       expect(initState.viewer).toEqual({})
     })
   })
@@ -81,45 +81,25 @@ describe('[Store] User/Active', () => {
         })
 
         test('successfully commits mutations', async () => {
-          expect(commit).toHaveBeenCalledTimes(3)
-        })
-
-        test(`successfully commits mutation ${ActiveUserMutations.SET_LOADING}`, async () => {
-          const {
-            mock: {
-              calls: [firstCall, , thirdCall]
-            }
-          } = commit
-
-          // Assert if `ActiveUserMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(ActiveUserMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `ActiveUserMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(ActiveUserMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
+          expect(commit).toHaveBeenCalledTimes(1)
         })
 
         test(`successfully commits mutation ${ActiveUserMutations.SET_VIEWER}`, async () => {
           const {
             mock: {
-              calls: [, secondCall]
+              calls: [mutationCall]
             }
           } = commit
           const apiResponse = await localThis.$fetchGraphqlData()
 
           // Assert if `ActiveUserMutations.SET_VIEWER` is being commited or not.
-          expect(secondCall[0]).toEqual(ActiveUserMutations.SET_VIEWER)
+          expect(mutationCall[0]).toEqual(ActiveUserMutations.SET_VIEWER)
 
           // Assert if the response from api is same as the one passed to the mutation.
-          expect(secondCall[1]).toEqual(apiResponse.data.viewer)
+          expect(mutationCall[1]).toEqual(apiResponse.data.viewer)
         })
       })
-      describe(`Failure`, () => {
+      describe(`Success with refetch`, () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: {
@@ -129,54 +109,209 @@ describe('[Store] User/Active', () => {
                 value: 'GITHUB'
               }
             },
-            $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                resolve({ data: { viewer: <User>{} } })
+              )
             }
           }
 
           // Setting the global spy on `localThis.$fetchGraphqlData`
           spy = jest.spyOn(localThis, '$fetchGraphqlData')
 
-          await actions[ActiveUserActions.FETCH_VIEWER_INFO].call(localThis, actionCxt, {})
+          await actions[ActiveUserActions.FETCH_VIEWER_INFO].call(localThis, actionCxt, {
+            refetch: true
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
         })
 
         test('successfully commits mutations', async () => {
-          expect(commit).toHaveBeenCalledTimes(3)
+          expect(commit).toHaveBeenCalledTimes(1)
         })
 
-        test(`successfully commits mutation ${ActiveUserMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${ActiveUserMutations.SET_VIEWER}`, async () => {
           const {
             mock: {
-              calls: [firstCall, , thirdCall]
+              calls: [mutationCall]
             }
           } = commit
+          const apiResponse = await localThis.$fetchGraphqlData()
 
-          // Assert if `ActiveUserMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(ActiveUserMutations.SET_LOADING)
+          // Assert if `ActiveUserMutations.SET_VIEWER` is being commited or not.
+          expect(mutationCall[0]).toEqual(ActiveUserMutations.SET_VIEWER)
 
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
+          // Assert if the response from api is same as the one passed to the mutation.
+          expect(mutationCall[1]).toEqual(apiResponse.data.viewer)
+        })
+      })
+      describe(`Failure`, () => {
+        let loggerFn: jest.SpyInstance
 
-          // Assert if `ActiveUserMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(ActiveUserMutations.SET_LOADING)
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $logErrorAndToast(): boolean {
+              return true
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>(
+                (_, error) =>
+                  error(
+                    `To go wrong in one's own way is better than to go right in someone else's.`
+                  )
+                // Fyodor Dostoevsky, Crime and Punishment
+              )
+            }
+          }
 
-          // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+          loggerFn = jest.spyOn(localThis, '$logErrorAndToast')
+
+          await actions[ActiveUserActions.FETCH_VIEWER_INFO].call(localThis, actionCxt, {})
         })
 
-        test(`successfully commits mutation ${ActiveUserMutations.SET_ERROR}`, async () => {
-          const {
-            mock: {
-              calls: [, secondCall]
+        test('successfully calls the api and bugsnag', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+          expect(loggerFn).toHaveBeenCalledTimes(1)
+        })
+
+        test('commits no mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(0)
+        })
+      })
+    })
+    describe(`Action "${ActiveUserActions.UPDATE_DEFAULT_CONTEXT}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            async $applyGraphqlMutation(): Promise<boolean> {
+              return new Promise<boolean>((resolve) => resolve(true))
             }
-          } = commit
+          }
 
-          // Assert if `ActiveUserMutations.SET_ERROR` is being commited or not.
-          expect(secondCall[0]).toEqual(ActiveUserMutations.SET_ERROR)
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
 
-          // Assert if the payload passed to the mutation was empty.
-          expect(secondCall[1]).toEqual(Error('ERR1'))
+          await actions[ActiveUserActions.UPDATE_DEFAULT_CONTEXT].call(localThis, actionCxt, {
+            contextOwnerId: 32423
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+      })
+      describe(`Failure`, () => {
+        let loggerFn: jest.SpyInstance
+
+        beforeEach(async () => {
+          localThis = {
+            $logErrorAndToast(): boolean {
+              return true
+            },
+            async $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>(
+                (_, error) =>
+                  error(
+                    `To go wrong in one's own way is better than to go right in someone else's.`
+                  )
+                // Fyodor Dostoevsky, Crime and Punishment
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$applyGraphqlMutation`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+          loggerFn = jest.spyOn(localThis, '$logErrorAndToast')
+
+          await actions[ActiveUserActions.UPDATE_DEFAULT_CONTEXT].call(localThis, actionCxt, {
+            contextOwnerId: 32423
+          })
+        })
+
+        test('successfully calls the api and bugsnag', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+          expect(loggerFn).toHaveBeenCalledTimes(1)
+        })
+
+        test('commits no mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(0)
+        })
+      })
+    })
+    describe(`Action "${ActiveUserActions.UPDATE_STARRED_REPO}"`, () => {
+      beforeEach(async () => {
+        localThis = {
+          async $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
+            return new Promise<GraphqlQueryResponse>((resolve) =>
+              resolve({
+                data: {
+                  // @ts-ignore
+                  updateStarredRepository: true
+                }
+              })
+            )
+          }
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+        await actions[ActiveUserActions.UPDATE_STARRED_REPO].call(localThis, actionCxt, {
+          repoId: '32423',
+          action: 'ADD'
+        })
+      })
+
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+    })
+    describe(`Actions "${[
+      ActiveUserActions.FETCH_STARRED_REPOS,
+      ActiveUserActions.FETCH_GITLAB_ACCOUNTS,
+      ActiveUserActions.FETCH_GSR_PROJECTS,
+      ActiveUserActions.FETCH_RECOMMENDED_ISSUES
+    ].join(', ')}"`, () => {
+      beforeEach(() => {
+        if (spy) spy.mockReset()
+
+        localThis = {
+          async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            return new Promise<GraphqlQueryResponse>((resolve) =>
+              resolve({ data: { viewer: <User>{} } })
+            )
+          }
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$fetchGraphqlData')
+      })
+
+      const actionsToTest = [
+        ActiveUserActions.FETCH_STARRED_REPOS,
+        ActiveUserActions.FETCH_GITLAB_ACCOUNTS,
+        ActiveUserActions.FETCH_GSR_PROJECTS,
+        ActiveUserActions.FETCH_RECOMMENDED_ISSUES
+      ]
+
+      actionsToTest.forEach((actionName) => {
+        test(`successfully runs ${actionName}`, async () => {
+          // @ts-ignore
+          await actions[actionName].call(localThis, actionCxt, {})
+
+          expect(spy).toHaveBeenCalledTimes(1)
+          expect(commit).toHaveBeenCalledTimes(1)
         })
       })
     })
@@ -188,27 +323,6 @@ describe('[Store] User/Active', () => {
     +++++++++++++++++++++++++++++++++++++++++++++++++
   */
   describe('[[Mutations]]', () => {
-    describe(`Mutation "${ActiveUserMutations.SET_LOADING}"`, () => {
-      test('successfully updates loading field in state', () => {
-        mutations[ActiveUserMutations.SET_LOADING](activeUserState, true)
-        expect(activeUserState.loading).toEqual(true)
-      })
-    })
-
-    describe(`Mutation "${ActiveUserMutations.SET_ERROR}"`, () => {
-      test('successfully updates loading field in state', () => {
-        const dummyError = {
-          graphQLErrors: {
-            message: 'Dummy error',
-            locations: [],
-            path: []
-          }
-        }
-        mutations[ActiveUserMutations.SET_ERROR](activeUserState, dummyError)
-        expect(activeUserState.error).toEqual(dummyError)
-      })
-    })
-
     describe(`Mutation "${ActiveUserMutations.SET_VIEWER}"`, () => {
       beforeEach(() => {
         activeUserState.viewer = {} as User
@@ -231,6 +345,110 @@ describe('[Store] User/Active', () => {
         }
         mutations[ActiveUserMutations.SET_VIEWER](activeUserState, newActiveUser)
         expect(activeUserState.viewer.firstName).toEqual(newActiveUser.firstName)
+      })
+    })
+  })
+
+  /*
+    +++++++++++++++++++++++++++++++++++++++++++++++++
+    ++++++++++++++++++++ GETTERS ++++++++++++++++++++
+    +++++++++++++++++++++++++++++++++++++++++++++++++
+  */
+  describe('[[Getters]]', () => {
+    describe(`Getters "${ActiveUserGetterTypes.GET_HOME_URL}"`, () => {
+      beforeEach(() => {
+        activeUserState.viewer = {} as User
+      })
+      test('Gets the default context url', () => {
+        const newActiveUser: User = {
+          firstName: 'John',
+          email: 'john.doe@example.com',
+          dashboardContext: [
+            {
+              vcs_provider: 'gh',
+              login: 'hki'
+            },
+            {
+              vcs_provider: 'gh',
+              login: 'deepsourcelabs',
+              is_default: true
+            }
+          ]
+        } as User
+
+        mutations[ActiveUserMutations.SET_VIEWER](activeUserState, newActiveUser)
+
+        const url = getters[ActiveUserGetterTypes.GET_HOME_URL](activeUserState, {}, {}, {})
+        expect(url).toEqual('/gh/deepsourcelabs')
+      })
+
+      test('Gets the url from priamry ownership', () => {
+        // @ts-ignore
+        const newActiveUser: User = {
+          firstName: 'John',
+          email: 'john.doe@example.com',
+          primaryOwner: {
+            vcsProvider: 'gh-primary',
+            login: 'deepsource-primary'
+          }
+        } as User
+
+        mutations[ActiveUserMutations.SET_VIEWER](activeUserState, newActiveUser)
+        const url = getters[ActiveUserGetterTypes.GET_HOME_URL](activeUserState, {}, {}, {})
+        expect(url).toEqual('/gh-primary/deepsource-primary')
+      })
+
+      test('Gets the context url if no default is preset', () => {
+        const newActiveUser: User = {
+          firstName: 'John',
+          email: 'john.doe@example.com',
+          dashboardContext: [
+            {
+              vcs_provider: 'gh-hki',
+              login: 'hki'
+            },
+            {
+              vcs_provider: 'gh',
+              login: 'deepsourcelabs'
+            }
+          ]
+        } as User
+
+        mutations[ActiveUserMutations.SET_VIEWER](activeUserState, newActiveUser)
+
+        const url = getters[ActiveUserGetterTypes.GET_HOME_URL](activeUserState, {}, {}, {})
+        expect(url).toEqual('/gh-hki/hki')
+      })
+
+      test('Gets the installation url if all fails', () => {
+        const url = getters[ActiveUserGetterTypes.GET_HOME_URL](activeUserState, {}, {}, {})
+        expect(url).toEqual('/installation/providers')
+      })
+    })
+    describe(`Getters "${ActiveUserGetterTypes.GET_VIEWER}"`, () => {
+      test('Gets the default context url', () => {
+        activeUserState.viewer = {} as User
+
+        const newActiveUser: User = {
+          firstName: 'John',
+          email: 'john.doe@example.com',
+          dashboardContext: [
+            {
+              vcs_provider: 'gh',
+              login: 'hki'
+            },
+            {
+              vcs_provider: 'gh',
+              login: 'deepsourcelabs',
+              is_default: true
+            }
+          ]
+        } as User
+
+        mutations[ActiveUserMutations.SET_VIEWER](activeUserState, newActiveUser)
+
+        const viewer = getters[ActiveUserGetterTypes.GET_VIEWER](activeUserState, {}, {}, {})
+        expect(viewer).toMatchObject(newActiveUser)
       })
     })
   })

@@ -107,6 +107,7 @@ export default {
     '~/plugins/helpers/outsideClick.client.ts',
     '~/plugins/helpers/directives.client.ts',
     '~/plugins/helpers/localstorage.client.ts',
+    '~/plugins/helpers/error.ts',
     '~/plugins/components/toasts.client.ts',
     '~/plugins/components/tooltip.ts',
     '~/plugins/components/palette.client.ts'

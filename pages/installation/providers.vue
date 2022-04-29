@@ -74,9 +74,45 @@ export default class InstallationProvider extends mixins(
     await Promise.all([
       this.fetchContext(),
       this.fetchAuthUrls(),
-      this.fetchActiveUserGitlabAccounts(),
-      this.fetchActiveUserGSRProjects()
+      this.fetchGitlabAccounts(),
+      this.fetchGSRProjects()
     ])
+  }
+
+  /**
+   * Fetch Gitlab accouts for a user
+   *
+   * @return {Promise<void>}
+   */
+  async fetchGitlabAccounts() {
+    try {
+      await this.fetchActiveUserGitlabAccounts()
+    } catch (e) {
+      this.$logErrorAndToast(
+        e as Error,
+        'Unable to fetch GitLab accounts, please contact support',
+        this.viewer
+      )
+    }
+  }
+
+  /**
+   * Fetch GSR Projects
+   *
+   * @return {Promise<void>}
+   */
+  async fetchGSRProjects(): Promise<void> {
+    if (!this.$config.gsrEnabled) return
+
+    try {
+      await this.fetchActiveUserGSRProjects()
+    } catch (e) {
+      this.$logErrorAndToast(
+        e as Error,
+        'Unable to fetch Google Cloud projects, please contact support',
+        this.viewer
+      )
+    }
   }
 
   /**

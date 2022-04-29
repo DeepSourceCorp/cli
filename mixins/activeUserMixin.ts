@@ -52,9 +52,6 @@ export default class ActiveUserMixin extends Vue {
   @activeUserStore.State
   viewer: User
 
-  @activeUserStore.State('loading')
-  viewerLoading: boolean
-
   @activeUserStore.Getter(ActiveUserGetterTypes.GET_HOME_URL)
   userHomeUrl: string
 
@@ -118,13 +115,7 @@ export default class ActiveUserMixin extends Vue {
    * @return {void}
    */
   public logErrorForUser(e: Error, context: string, params: Record<string, unknown>): void {
-    if (!this.$config.onPrem && this.$bugsnag) {
-      this.$bugsnag.notify(e, (event) => {
-        event.context = context
-        event.setUser(this.viewer.id, this.viewer.email, this.viewer.firstName)
-        event.addMetadata('errorParams', params)
-      })
-    }
+    this.$logErrorAndToast(e, undefined, this.viewer, { context, params })
   }
 
   async refetchUser(): Promise<void> {

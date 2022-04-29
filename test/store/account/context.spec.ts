@@ -45,8 +45,6 @@ describe('[Store] Account/Context', () => {
       const initState = state()
       expect(initState.context).toEqual(<Context>{})
       expect(initState.changelog).toEqual(<Changelog>{})
-      expect(initState.loading).toEqual(false)
-      expect(initState.error).toEqual(<Record<string, any>>{})
     })
   })
 

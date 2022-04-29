@@ -77,8 +77,16 @@ import GitlabMutation from '@/apollo/mutations/installation/gitlabInstallationLa
 })
 export default class InstallationProvider extends mixins(ContextMixin, ActiveUserMixin) {
   async fetch(): Promise<void> {
-    await this.fetchActiveUser()
-    await this.fetchActiveUserGitlabAccounts()
+    try {
+      await this.fetchActiveUser()
+      await this.fetchActiveUserGitlabAccounts()
+    } catch (e) {
+      this.$logErrorAndToast(
+        e as Error,
+        'Unable to fetch GitLab accounts, please contact support',
+        this.viewer
+      )
+    }
   }
 
   loading = false
