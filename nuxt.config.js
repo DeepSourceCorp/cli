@@ -165,6 +165,15 @@ export default {
     ...(process.env.BUGSNAG_TOKEN && !IS_ON_PREM ? ['nuxt-bugsnag'] : [])
   ],
 
+  'nuxt-prometheus-module': {
+    host: process.env.NODE_ENV === 'development' ? '127.0.0.1' : '0.0.0.0',
+    port: 9100,
+    metrics: {
+      collectDefault: true,
+      requestDuration: false
+    }
+  },
+
   bugsnag: {
     config: {
       appVersion: version
@@ -175,11 +184,6 @@ export default {
     reporterOptions: {
       autoAssignRelease: true
     }
-  },
-
-  'nuxt-prometheus-module': {
-    host: process.env.NODE_ENV === 'development' ? '127.0.0.1' : '0.0.0.0',
-    port: 9100
   },
 
   serverMiddleware: [
