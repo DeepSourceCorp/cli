@@ -17,7 +17,6 @@ var (
 	issuesDirPath    string
 )
 
-// Options holds the metadata.
 type MacroVerifyOpts struct{}
 
 // NewCmdMacroVerify implements the verification workflow for Macros.
