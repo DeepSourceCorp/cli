@@ -1,5 +1,5 @@
 <template>
-  <div class="flex w-11/12 bg-ink-300 h-80 rounded-md">
+  <div class="flex w-11/12 rounded-md bg-ink-300 h-80">
     <section class="w-2/5 p-4 space-y-4 border-r border-ink-200">
       <!-- Avatar and header -->
       <div class="flex items-center space-x-2">
@@ -7,6 +7,7 @@
         <z-avatar
           v-if="viewer.avatar && viewer.firstName"
           :image="viewer.avatar"
+          :fallback-image="context.emptyAvatarUrl"
           :user-name="viewer.firstName"
           size="sm"
         >
@@ -21,11 +22,11 @@
         </div>
       </div>
       <!-- Blank space -->
-      <div class="w-full p-10 bg-ink-200 rounded-md"></div>
+      <div class="w-full p-10 rounded-md bg-ink-200"></div>
       <!-- Start analysing menu -->
       <div class="space-y-2">
-        <div class="flex space-x-1 items-center">
-          <z-icon icon="activity" size="x-small" class="mr-1 flex-shrink-0"></z-icon>
+        <div class="flex items-center space-x-1">
+          <z-icon icon="activity" size="x-small" class="flex-shrink-0 mr-1"></z-icon>
           <div class="flex-1 text-xs">Actively analyzing</div>
           <div class="p-1 rounded-md bg-ink-200">
             <z-icon icon="plus" iconColor="ink-400" size="x-small"></z-icon>
@@ -34,7 +35,7 @@
         <!-- Placeholders - Subtree - Repo list -->
         <div
           v-if="selectedRepo"
-          class="flex items-center space-x-2 text-vanilla-300 px-2 h-6 rounded-md text-sm"
+          class="flex items-center h-6 px-2 space-x-2 text-sm rounded-md text-vanilla-300"
         >
           <z-icon icon="refresh-ccw" size="x-small" color="juniper"></z-icon>
           <span>{{ selectedRepo }}</span>
@@ -53,9 +54,9 @@
         ><span v-else class="px-16 ml-2 bg-ink-100"></span>
       </div>
       <!-- placeholder -->
-      <div class="w-full h-5 bg-ink-200 rounded-md"></div>
+      <div class="w-full h-5 rounded-md bg-ink-200"></div>
       <!-- Tab Component -->
-      <div class="flex text-center text-sm gap-x-5 border-b border-ink-200">
+      <div class="flex text-sm text-center border-b gap-x-5 border-ink-200">
         <div
           v-for="tab in tabs"
           :key="tab.name"
@@ -72,21 +73,12 @@
         <div
           v-for="(analyzer, index) in selectedAnalyzers"
           :key="analyzer.name"
-          class="flex flex-wrap flex-row-reverse space-y-2 bg-ink-400"
+          class="flex flex-row-reverse flex-wrap space-y-2 bg-ink-400"
         >
           <!-- Recently added analyzer in expanded state -->
           <div
             v-if="index == selectedAnalyzers.length - 1"
-            class="
-              inline-flex
-              items-center
-              px-2
-              py-1
-              space-x-1
-              border-2 border-solid
-              bg-ink-200
-              border-ink-400
-            "
+            class="inline-flex items-center px-2 py-1 space-x-1 border-2 border-solid bg-ink-200 border-ink-400"
           >
             <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
             <span class="text-sm font-bold text-vanilla-200">{{ analyzer.label }}</span>
@@ -103,8 +95,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { ZAvatar, ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import ContextMixin from '~/mixins/contextMixin'
 
 @Component({
   components: {
@@ -113,7 +106,7 @@ import { ZAvatar, ZIcon, ZButton } from '@deepsourcelabs/zeal'
     ZButton
   }
 })
-export default class AnalyzerPreview extends Vue {
+export default class AnalyzerPreview extends mixins(ContextMixin) {
   @Prop({ default: {} })
   viewer!: Record<string, string>
   @Prop({ default: [] })

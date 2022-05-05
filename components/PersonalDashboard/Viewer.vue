@@ -2,7 +2,12 @@
   <stat-section :bodyIsGrid="false" :bodySpacing="0">
     <div class="p-4 space-y-4 border-b border-ink-200">
       <div class="flex space-x-4">
-        <z-avatar :image="viewer.avatar" :user-name="viewer.fullName" size="lg"></z-avatar>
+        <z-avatar
+          :image="viewer.avatar"
+          :fallback-image="context.emptyAvatarUrl"
+          :user-name="viewer.fullName"
+          size="lg"
+        ></z-avatar>
         <div>
           <h3 class="text-base font-medium text-vanilla-100">{{ viewer.fullName }}</h3>
           <p class="text-xs text-vanilla-400">{{ viewer.email }}</p>

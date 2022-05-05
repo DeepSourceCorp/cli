@@ -3,7 +3,7 @@
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="flex items-center max-w-3xs py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 focus:outline-none"
+        class="flex items-center py-1 space-x-2 text-sm rounded-sm outline-none max-w-3xs hover:bg-ink-300 focus:outline-none"
         :class="{
           'pr-2 pl-1': !isCollapsed,
           'px-1': isCollapsed
@@ -13,6 +13,7 @@
       >
         <z-avatar
           :image="viewer.avatar"
+          :fallback-image="context.emptyAvatarUrl"
           :userName="viewer.fullName || viewer.email"
           size="sm"
           class="flex-shrink-0 leading-none rounded-full"
@@ -23,7 +24,7 @@
             content: showTooltip ? `${viewer.fullName || viewer.email}` : '',
             delay: { show: 200, hide: 100 }
           }"
-          class="leading-none overflow-ellipsis overflow-hidden whitespace-nowrap"
+          class="overflow-hidden leading-none overflow-ellipsis whitespace-nowrap"
         >
           {{ viewer.fullName || viewer.email }}
         </span>
@@ -49,6 +50,7 @@ import { ZAvatar, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
 // mixins
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'
+import ContextMixin from '~/mixins/contextMixin'
 
 @Component({
   components: {
@@ -58,7 +60,7 @@ import AuthMixin from '~/mixins/authMixin'
     ZMenuSection
   }
 })
-export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {
+export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin, ContextMixin) {
   @Prop()
   isCollapsed: boolean
 
@@ -71,8 +73,9 @@ export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {
    */
   mounted(): void {
     const username = this.$refs.username as Element
-
-    this.showTooltip = username.scrollWidth >= username.clientWidth
+    if (username) {
+      this.showTooltip = username.scrollWidth >= username.clientWidth
+    }
   }
 
   public async signOut(): Promise<void> {

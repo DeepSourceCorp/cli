@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="sticky top-10 lg:top-0 z-10">
-      <div class="py-4 px-4 flex items-center bg-ink-300">
+    <div class="sticky z-10 top-10 lg:top-0">
+      <div class="flex items-center px-4 py-4 bg-ink-300">
         <!-- ! Need a custom icon to use -->
         <!-- <z-icon icon="support" size="medium" color="vanilla-100" class="mr-2" /> -->
-        <h1 class="text-xl font-semibold leading-none my-px">Contact support</h1>
+        <h1 class="my-px text-xl font-semibold leading-none">Contact support</h1>
       </div>
       <hr class="border-ink-200" />
     </div>
     <div class="p-4 pt-0 max-w-7xl">
       <form
-        class="grid gap-y-5 mt-4"
+        class="grid mt-4 gap-y-5"
         novalidate
         @submit.prevent="createSupportTicket"
         @reset.prevent="resetFormData"
@@ -21,7 +21,7 @@
             <div>
               <div
                 v-if="!ticketAuthorId"
-                class="py-5 my-px bg-ink-300 animate-pulse rounded-sm"
+                class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"
               ></div>
               <z-select
                 v-else
@@ -70,7 +70,7 @@
           <label for="author-email" class="text-xs">From</label>
           <div class="grid space-x-6 lg:grid-cols-support items-start mt-1.5">
             <div>
-              <div v-if="!authorEmail" class="py-5 my-px bg-ink-300 animate-pulse rounded-sm"></div>
+              <div v-if="!authorEmail" class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"></div>
               <z-select
                 v-else
                 id="author-email"
@@ -175,12 +175,12 @@
                 <div
                   v-for="(uploadedFile, index) in uploadedFiles"
                   :key="index"
-                  class="bg-ink-300 py-2 px-4 mt-2 flex justify-between items-center rounded-sm text-vanilla-400"
+                  class="flex items-center justify-between px-4 py-2 mt-2 rounded-sm bg-ink-300 text-vanilla-400"
                 >
                   <span>{{ uploadedFile.filename }}</span>
                   <button
                     type="button"
-                    class="p-1 hover:bg-cherry-600 hover:bg-opacity-20 rounded-sm disabled:opacity-50"
+                    class="p-1 rounded-sm hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
                     :class="
                       isFileProcessing || isFormSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'
                     "
@@ -199,7 +199,7 @@
             />
           </div>
         </div>
-        <div class="grid space-x-6 lg:grid-cols-support items-start my-1">
+        <div class="grid items-start my-1 space-x-6 lg:grid-cols-support">
           <z-button
             type="submit"
             icon="mail"

@@ -36,10 +36,11 @@
         </div>
         <!-- Avatar -->
         <div class="hidden sm:flex items-center space-x-1.5 text-sm">
-          <img
-            :src="createdBy.avatar"
-            alt="Creator Avatar"
-            class="w-4 h-4 overflow-hidden inline-block rounded-full"
+          <z-avatar
+            size="xs"
+            :image="createdBy.avatar"
+            :fallback-image="context.emptyAvatarUrl"
+            :user-name="createdBy.fullName || createdBy.email"
           />
           <span class="text-sm text-vanilla-400"
             >Created by {{ createdBy.fullName || createdBy.email }}</span
@@ -66,7 +67,7 @@
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { BaseCard } from '@/components/History'
-import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZAvatar } from '@deepsourcelabs/zeal'
 import { fromNow } from '@/utils/date'
 import { AutofixRun, AutofixRunStatus, Maybe, Scalars } from '~/types/types'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
@@ -76,7 +77,8 @@ import { RepoPerms } from '~/types/permTypes'
   components: {
     BaseCard,
     ZIcon,
-    ZButton
+    ZButton,
+    ZAvatar
   }
 })
 export default class AutofixListItem extends mixins(RoleAccessMixin) {

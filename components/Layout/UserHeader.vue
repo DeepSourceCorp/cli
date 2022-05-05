@@ -8,6 +8,7 @@
             <z-avatar
               v-if="viewer.avatar"
               :image="viewer.avatar"
+              :fallback-image="context.emptyAvatarUrl"
               :user-name="viewer.login"
               stroke="bg-ink-100 p-1.5"
               class="flex-shrink-0"

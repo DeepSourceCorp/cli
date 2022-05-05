@@ -18,6 +18,7 @@
         <z-avatar
           v-if="account.avatar_url"
           :image="account.avatar_url"
+          :fallback-image="context.emptyAvatarUrl"
           :userName="account.login"
           class="flex-shrink-0"
         ></z-avatar>

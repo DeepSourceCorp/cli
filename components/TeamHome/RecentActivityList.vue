@@ -5,7 +5,8 @@
         <template slot="avatar">
           <z-avatar
             v-if="activity.avatar"
-            :userName="activity.avatar.fullName || activity.avatar.email"
+            :fallback-image="context.emptyAvatarUrl"
+            :user-name="activity.avatar.fullName || activity.avatar.email"
             :image="activity.actor.avatar"
             size="sm"
           ></z-avatar>
@@ -26,12 +27,13 @@ import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import { ZButton, ZIcon, ZAvatar } from '@deepsourcelabs/zeal'
 
 import { fromNow } from '@/utils/date'
+import ContextMixin from '~/mixins/contextMixin'
 
 @Component({
   components: { ZButton, ZIcon, ZAvatar },
   methods: { fromNow }
 })
-export default class RecentlyActiveRepoList extends mixins(TeamDetailMixin) {
+export default class RecentlyActiveRepoList extends mixins(TeamDetailMixin, ContextMixin) {
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
     // await this.fetchRecentActivity({

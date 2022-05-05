@@ -3,7 +3,7 @@
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":false,"clickable":false,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -21,7 +21,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":false,"clickable":false,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -39,7 +39,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":false,"clickable":true,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -57,7 +57,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":false,"clickable":true,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -75,7 +75,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":true,"clickable":false,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -93,7 +93,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":true,"clickable":false,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -111,7 +111,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":true,"clickable":true,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -129,7 +129,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":true,"clickable":true,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -147,7 +147,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"READ","showRoleOptions":false,"clickable":false,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -165,7 +165,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"READ","showRoleOptions":false,"clickable":false,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -183,7 +183,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"READ","showRoleOptions":false,"clickable":true,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -201,7 +201,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"READ","showRoleOptions":false,"clickable":true,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -219,7 +219,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"READ","showRoleOptions":true,"clickable":false,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -237,7 +237,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"READ","showRoleOptions":true,"clickable":false,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -255,7 +255,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"READ","showRoleOptions":true,"clickable":true,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -273,7 +273,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"READ","showRoleOptions":true,"clickable":true,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -291,7 +291,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"WRITE","showRoleOptions":false,"clickable":false,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -309,7 +309,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"WRITE","showRoleOptions":false,"clickable":false,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -327,7 +327,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"WRITE","showRoleOptions":false,"clickable":true,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -345,7 +345,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"WRITE","showRoleOptions":false,"clickable":true,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -363,7 +363,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"WRITE","showRoleOptions":true,"clickable":false,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -381,7 +381,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"WRITE","showRoleOptions":true,"clickable":false,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -399,7 +399,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"WRITE","showRoleOptions":true,"clickable":true,"isPrimaryUser":false,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -417,7 +417,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for repo: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"WRITE","showRoleOptions":true,"clickable":true,"isPrimaryUser":true,"isRepo":true} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -435,7 +435,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":false,"clickable":false,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -453,7 +453,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":false,"clickable":false,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -471,7 +471,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":false,"clickable":true,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -489,7 +489,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":false,"clickable":true,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -507,7 +507,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":true,"clickable":false,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -525,7 +525,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":true,"clickable":false,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -543,7 +543,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":true,"clickable":true,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -561,7 +561,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"ADMIN","showRoleOptions":true,"clickable":true,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -579,7 +579,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"CONTRIBUTOR","showRoleOptions":false,"clickable":false,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -597,7 +597,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"CONTRIBUTOR","showRoleOptions":false,"clickable":false,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -615,7 +615,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"CONTRIBUTOR","showRoleOptions":false,"clickable":true,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -633,7 +633,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"CONTRIBUTOR","showRoleOptions":false,"clickable":true,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -651,7 +651,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"CONTRIBUTOR","showRoleOptions":true,"clickable":false,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -669,7 +669,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"CONTRIBUTOR","showRoleOptions":true,"clickable":false,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -687,7 +687,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"CONTRIBUTOR","showRoleOptions":true,"clickable":true,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -705,7 +705,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"CONTRIBUTOR","showRoleOptions":true,"clickable":true,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -723,7 +723,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"MEMBER","showRoleOptions":false,"clickable":false,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -741,7 +741,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"MEMBER","showRoleOptions":false,"clickable":false,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -759,7 +759,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"MEMBER","showRoleOptions":false,"clickable":true,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -777,7 +777,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"MEMBER","showRoleOptions":false,"clickable":true,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -795,7 +795,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"MEMBER","showRoleOptions":true,"clickable":false,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -813,7 +813,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"MEMBER","showRoleOptions":true,"clickable":false,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -831,7 +831,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"MEMBER","showRoleOptions":true,"clickable":true,"isPrimaryUser":false,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>
@@ -849,7 +849,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 exports[`renders MemberListItem with all prop options for team: {"avatar":"/static/dashboard/images/empty-avatar.svg","dateJoined":"2019-02-01T07:55:15.466139+00:00","email":"root@deepsource.io","fullName":"Duck Norris","id":"VXNlcjpseGJhbWI=","role":"MEMBER","showRoleOptions":true,"clickable":true,"isPrimaryUser":true,"isRepo":false} 1`] = `
 "<li class=\\"flex items-center py-2 space-x-3 text-sm\\">
   <div>
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
   </div>
   <div class=\\"items-center w-1/2 space-y-1 leading-none text-vanilla-100\\">
     <div>Duck Norris</div>

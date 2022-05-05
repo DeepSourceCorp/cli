@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { createLocalVue, mount } from '@vue/test-utils'
+import { createLocalVue, mount, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import UserMenu from '~/components/Layout/Sidebar/UserMenu.vue'
 import VTooltip from 'v-tooltip'
@@ -22,6 +22,14 @@ describe('[[ UserMenu ]]', () => {
 
     const store = new Vuex.Store({
       modules: {
+        'account/context': {
+          namespaced: true,
+          state: {
+            context: {
+              emptyAvatarUrl: ''
+            }
+          }
+        },
         'user/active': {
           namespaced: true,
           state: {
@@ -47,7 +55,7 @@ describe('[[ UserMenu ]]', () => {
     const collapsedOptions = generateBooleanProps('isCollapsed')
 
     cartesian(collapsedOptions).forEach((props) => {
-      const wrapper = mount(UserMenu, {
+      const wrapper = shallowMount(UserMenu, {
         store,
         mocks,
         propsData: props,

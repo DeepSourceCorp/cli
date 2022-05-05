@@ -13,6 +13,7 @@
             <z-avatar
               v-if="log.actor"
               :image="log.actor.avatar"
+              :fallback-image="context.emptyAvatarUrl"
               :user-name="getName(log)"
               size="sm"
               class="flex-shrink-0"
@@ -28,7 +29,7 @@
     <empty-state
       v-else
       title="No Audit logs"
-      class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
+      class="py-20 border-2 border-dashed rounded-lg border-ink-200"
     ></empty-state>
   </div>
 </template>
@@ -41,6 +42,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { AuditLog } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
+import ContextMixin from '~/mixins/contextMixin'
 
 @Component({
   components: {
@@ -58,7 +60,11 @@ import { resolveNodes } from '~/utils/array'
     }
   }
 })
-export default class SettingsAuditLog extends mixins(RepoDetailMixin, ActiveUserMixin) {
+export default class SettingsAuditLog extends mixins(
+  RepoDetailMixin,
+  ActiveUserMixin,
+  ContextMixin
+) {
   public searchRule = ''
   public fetchingLogs = false
 

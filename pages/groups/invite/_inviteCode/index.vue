@@ -1,92 +1,80 @@
 <template>
   <hero-card width="md" :showBackground="true" :showGlow="false" customClass="md:mb-24">
     <template v-if="dataState !== 'errored' && acceptInviteState !== 'errored'">
-      <h1 class="text-vanilla-100 font-bold text-base text-center leading-snug">
+      <h1 class="text-base font-bold leading-snug text-center text-vanilla-100">
         Join {{ details.name }} on DeepSource
       </h1>
-      <div class="bg-ink-100 bg-opacity-30 rounded-md p-2 w-full mt-4 flex items-center space-x-2">
+      <div class="flex items-center w-full p-2 mt-4 space-x-2 rounded-md bg-ink-100 bg-opacity-30">
         <z-avatar :user-name="details.name" :loading="dataState === 'fetching'" />
         <div>
-          <h4 class="text-vanilla-100 font-semibold">{{ details.name }}</h4>
+          <h4 class="font-semibold text-vanilla-100">{{ details.name }}</h4>
         </div>
       </div>
-      <p class="text-vanilla-400 text-sm text-center mt-12">
+      <p class="mt-12 text-sm text-center text-vanilla-400">
         Connect with your organization's group.
       </p>
       <button
         @click="confirm"
-        class="
-          bg-ink-200
-          hover:bg-ink-300
-          rounded-md
-          w-full
-          text-vanilla-100
-          px-3
-          py-2
-          flex
-          items-center
-          space-x-2
-          group
-          mt-2
-        "
+        class="flex items-center w-full px-3 py-2 mt-2 space-x-2 rounded-md bg-ink-200 hover:bg-ink-300 text-vanilla-100 group"
       >
         <z-avatar
           v-if="viewer.avatar"
           :image="viewer.avatar"
+          :fallback-image="context.emptyAvatarUrl"
           :user-name="viewer.fullName || viewer.email"
           :loading="dataState === 'fetching'"
           class="flex-shrink-0"
         />
-        <div class="flex-1 text-left overflow-hidden overflow-ellipsis whitespace-nowrap block">
+        <div class="flex-1 block overflow-hidden text-left overflow-ellipsis whitespace-nowrap">
           Continue as {{ viewer.firstName || viewer.email }}
         </div>
         <z-icon
           icon="chevron-right"
           size="medium"
-          class="transform duration-100 ease-linear group-hover:translate-x-1 flex-shrink-0"
+          class="flex-shrink-0 duration-100 ease-linear transform group-hover:translate-x-1"
         />
       </button>
-      <p class="text-vanilla-400 mt-4 text-sm text-center">
+      <p class="mt-4 text-sm text-center text-vanilla-400">
         Need help? Write to us at
         <a
           :href="`mailto:${$config.supportEmail}`"
-          class="text-juniper hover:underline cursor-pointer"
+          class="cursor-pointer text-juniper hover:underline"
           >{{ $config.supportEmail }}</a
         >
       </p>
     </template>
     <template v-else>
       <template v-if="acceptInviteState === 'errored'">
-        <h1 class="text-vanilla-100 font-bold text-lg text-center leading-snug">
+        <h1 class="text-lg font-bold leading-snug text-center text-vanilla-100">
           Couldn't join group
         </h1>
-        <p class="text-vanilla-400 text-sm text-center mt-4">{{ error }}</p>
-        <p class="text-sm text-center mt-8">
-          <nuxt-link to="/me" class="text-juniper text-sm hover:underline">
+        <p class="mt-4 text-sm text-center text-vanilla-400">{{ error }}</p>
+        <p class="mt-8 text-sm text-center">
+          <nuxt-link to="/me" class="text-sm text-juniper hover:underline">
             <z-button label="Dashboard ->" size="small" @click="$router.push('/me')"
           /></nuxt-link>
         </p>
-        <p class="text-vanilla-400 mt-4 text-sm">
+        <p class="mt-4 text-sm text-vanilla-400">
           Need help? Write to us at
           <a
             :href="`mailto:${$config.supportEmail}`"
-            class="text-juniper hover:underline cursor-pointer"
+            class="cursor-pointer text-juniper hover:underline"
             >{{ $config.supportEmail }}</a
           >
         </p>
       </template>
       <template v-else-if="dataState === 'errored'">
-        <h1 class="text-vanilla-100 font-bold text-lg text-center leading-snug">
+        <h1 class="text-lg font-bold leading-snug text-center text-vanilla-100">
           Invalid invite code
         </h1>
-        <p class="text-vanilla-400 text-sm text-center mt-4">
+        <p class="mt-4 text-sm text-center text-vanilla-400">
           The invitation code is invalid, please contact an admin of the organization for a new one.
         </p>
-        <p class="text-vanilla-400 mt-4 text-sm">
+        <p class="mt-4 text-sm text-vanilla-400">
           Need help? Write to us at
           <a
             :href="`mailto:${$config.supportEmail}`"
-            class="text-juniper hover:underline cursor-pointer"
+            class="cursor-pointer text-juniper hover:underline"
             >{{ $config.supportEmail }}</a
           >.
         </p>

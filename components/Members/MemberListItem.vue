@@ -1,7 +1,11 @@
 <template>
   <li class="flex items-center py-2 space-x-3 text-sm" @click="$emit('click')">
     <div>
-      <z-avatar :image="avatar" :userName="fullName"></z-avatar>
+      <z-avatar
+        :image="avatar"
+        :fallback-image="context.emptyAvatarUrl"
+        :userName="fullName"
+      ></z-avatar>
     </div>
     <div class="items-center w-1/2 space-y-1 leading-none text-vanilla-100">
       <div>{{ fullName || email }}</div>
@@ -15,7 +19,7 @@
             <button
               type="button"
               data-testid="show-role-menu"
-              class="flex items-center space-x-2 outline-none focus:outline-none w-full justify-end"
+              class="flex items-center justify-end w-full space-x-2 outline-none focus:outline-none"
               @click="toggle"
             >
               <span>{{ roles[role].title }}</span>
@@ -62,12 +66,13 @@
   </li>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar } from '@deepsourcelabs/zeal'
 import { formatDate } from '@/utils/date'
 import TEAM_PERMS from '~/utils/teamPerms'
 
 import { User } from '~/types/types'
+import ContextMixin from '~/mixins/contextMixin'
 
 const REPO_PERMS = {
   ADMIN: {
@@ -92,7 +97,7 @@ const REPO_PERMS = {
 @Component({
   components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar }
 })
-export default class MemberListItem extends Vue {
+export default class MemberListItem extends mixins(ContextMixin) {
   @Prop()
   role!: string
 

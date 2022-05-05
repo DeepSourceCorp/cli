@@ -1,3 +1,5 @@
+import Vuex from 'vuex'
+import { createLocalVue } from '@vue/test-utils'
 import { render, fireEvent } from '@testing-library/vue'
 import { MemberListItem } from '~/components/Members'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
@@ -19,6 +21,22 @@ const optionalProps = {
   role: 'ADMIN',
   showRoleOptions: true
 }
+
+const localVue = createLocalVue()
+localVue.use(Vuex)
+
+const store = new Vuex.Store({
+  modules: {
+    'account/context': {
+      namespaced: true,
+      state: {
+        context: {
+          emptyAvatarUrl: ''
+        }
+      }
+    }
+  }
+})
 
 test('renders MemberListItem with all prop options for team', () => {
   const teamRoleOptions = generateStringProps('role', ['ADMIN', 'MEMBER', 'CONTRIBUTOR'], false)
@@ -42,7 +60,8 @@ test('renders MemberListItem with all prop options for team', () => {
           ZMenuItem: true,
           ZMenuSection: true,
           ZAvatar: true
-        }
+        },
+        store
       })
 
       expect(html()).toMatchSnapshot(JSON.stringify(props))
@@ -80,7 +99,8 @@ test('renders MemberListItem with all prop options for repo', () => {
           ZMenuItem: true,
           ZMenuSection: true,
           ZAvatar: true
-        }
+        },
+        store
       })
 
       expect(html()).toMatchSnapshot(JSON.stringify(props))
@@ -96,7 +116,8 @@ test('Emits "updateRole" event', async () => {
       ZIcon: true,
       ZAvatar: true
     },
-    components: { ZMenu, ZMenuItem, ZMenuSection }
+    components: { ZMenu, ZMenuItem, ZMenuSection },
+    store
   })
 
   const button = getByTestId('show-role-menu')
@@ -116,7 +137,8 @@ test('Emits "removeMember" event', async () => {
       ZIcon: true,
       ZAvatar: true
     },
-    components: { ZMenu, ZMenuItem, ZMenuSection }
+    components: { ZMenu, ZMenuItem, ZMenuSection },
+    store
   })
 
   const button = getByTestId('show-role-menu')
