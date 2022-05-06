@@ -19,7 +19,7 @@ func (s *SpinnerUtils) StartSpinnerWithLabel(label string) {
 
 	sp := spinner.New(spinner.CharSets[11], 120*time.Millisecond, spinner.WithWriter(os.Stderr)) // Build our new spinner
 	if label != "" {
-		sp.Suffix = " "+ label + " "
+		sp.Suffix = " " + label + " "
 	}
 	sp.Start() // Start the spinner
 	s.Spinner = sp
