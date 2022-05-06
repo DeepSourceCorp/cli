@@ -27,8 +27,39 @@ func TestValidateAnalyzerToml(t *testing.T) {
 
 	for _, tc := range tests {
 		_, err := ValidateAnalyzerTOML(tc.tomlPath)
-		if err != nil {
-			t.Error("Analyzer verification failed. Error:", err)
+		if err != nil && tc.validTOML {
+			t.Errorf("Expected valid TOML for %s. Got: %v", tc.tomlPath, err)
+		}
+		if err == nil && !tc.validTOML {
+			t.Errorf("Expected invalid TOML for %s. Got: %v", tc.tomlPath, err)
+		}
+	}
+}
+
+func TestValidateIssueDescriptions(t *testing.T) {
+	type test struct {
+		issuesDirPath string
+		validIssues   bool
+	}
+
+	tests := []test{
+		{
+			issuesDirPath: "./dummy/issues1/",
+			validIssues:   false,
+		},
+		{
+			issuesDirPath: "./dummy/issues2/",
+			validIssues:   false,
+		},
+	}
+
+	for _, tc := range tests {
+		err := ValidateIssueDescriptions(tc.issuesDirPath)
+		if err != nil && tc.validIssues {
+			t.Errorf("Expected valid TOML for %s. Got: %v", tc.issuesDirPath, err)
+		}
+		if err == nil && !tc.validIssues {
+			t.Errorf("Expected invalid TOML for %s. Got: %v", tc.issuesDirPath, err)
 		}
 	}
 }

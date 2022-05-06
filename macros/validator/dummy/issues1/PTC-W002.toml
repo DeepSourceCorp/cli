@@ -1,0 +1,5 @@
+shortcode = "PTC-W001"
+category = "security"
+description = """
+Potential hardcoded credential. Sensitive information like password shouldn't be hardcoded. Use an environment variable instead.
+"""

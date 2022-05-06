@@ -44,7 +44,7 @@ func NewCmdMacroVerify() *cobra.Command {
 	return cmd
 }
 
-// Run the command
+// Runs the command
 func (opts *MacroVerifyOpts) Run() (err error) {
 	// Check for path of `analyzer.toml` file and `issues` directory containing issue descriptions
 	if err = mvalidator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {

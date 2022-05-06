@@ -5,10 +5,9 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"path/filepath"
-	"reflect"
+	"strings"
 
 	validate "github.com/go-playground/validator/v10"
 	"github.com/spf13/viper"
@@ -50,41 +49,31 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (analyzerConfig AnalyzerMetad
 
 	// Validate analyzer.toml fields based on type and sanity checks
 	v := validate.New()
-	missingRequiredFields := []string{}
 	if err := v.Struct(&config); err != nil {
+		missingRequiredFields := formatValidationErrors(err, config)
+		missingFields := strings.Join(missingRequiredFields, ", ")
 		// Improve error message returned by `go-playground/validator`
-		errs := err.(validate.ValidationErrors)
-		for _, err := range errs {
-			if err.Tag() == "required" {
-				c := reflect.ValueOf(config)
-				for i := 0; i < c.Type().NumField(); i++ {
-					if err.Field() == c.Type().Field(i).Name {
-						missingRequiredFields = append(missingRequiredFields, c.Type().Field(i).Tag.Get("toml"))
-					}
-				}
-			}
-		}
-		return config, fmt.Errorf("missing required attributes %v\n", missingRequiredFields)
+		return config, fmt.Errorf("missing the following required fields from analyzer.toml: %v\n", missingFields)
 	}
 	return config, nil
 }
 
 // Validates issue description TOML files
 func ValidateIssueDescriptions(issuesDirectoryPath string) (err error) {
+	validationFailed := false
 	issuesList, err := ioutil.ReadDir(issuesDirectoryPath)
 	if err != nil {
 		return err
 	}
 
-	config := AnalyzerIssue{}
 	for _, issuePath := range issuesList {
+		config := AnalyzerIssue{}
+
 		// Read the contents of issue toml file
 		issueTOMLContent, err := ioutil.ReadFile(filepath.Join(issuesDirectoryPath, issuePath.Name()))
 		if err != nil {
-			fmt.Println(err)
-			return errors.New("Error occured while reading file:%s. Exiting...")
+			return fmt.Errorf("failed to read file: %s", filepath.Join(issuesDirectoryPath, issuePath.Name()))
 		}
-
 		viper.SetConfigType("toml")
 		if err = viper.ReadConfig(bytes.NewBuffer(issueTOMLContent)); err != nil {
 			return err
@@ -92,11 +81,18 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (err error) {
 		// Unmarshaling the configdata into AnalyzerMetadata struct
 		viper.Unmarshal(&config)
 
+		// Validate the data
 		v := validate.New()
 		if err := v.Struct(&config); err != nil {
-			log.Fatalf("Missing required attributes %v\n", err)
+			validationFailed = true
+			missingRequiredFields := formatValidationErrors(err, config)
+			missingFields := strings.Join(missingRequiredFields, ", ")
+			fmt.Printf("Missing the following required fields from issue %s: %v\n", issuePath.Name(), missingFields)
 		}
-		config = AnalyzerIssue{}
+	}
+
+	if validationFailed {
+		return fmt.Errorf("found the above validation errors in issue descriptions")
 	}
 	return nil
 }
