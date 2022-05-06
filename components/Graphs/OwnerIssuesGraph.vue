@@ -28,7 +28,7 @@
         :isPercent="true"
         :value="currentActiveIssues"
         label="Active issues"
-        :loading="$fetchState.pending"
+        :loading="isLoading"
       />
       <graph-legend
         :allowHover="false"
@@ -40,10 +40,10 @@
         :value="currentResolvedIssues"
         label="Resolved issues"
         labelBgClass="bg-robin"
-        :loading="$fetchState.pending"
+        :loading="isLoading"
       />
     </div>
-    <div v-if="$fetchState.pending" class="p-4">
+    <div v-if="isLoading" class="p-4">
       <div style="height: 258px" class="rounded-md bg-ink-300 animate-pulse"></div>
     </div>
     <base-graph
@@ -79,6 +79,7 @@ const ownerDetailStore = namespace('owner/detail')
 })
 export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
   public lastDays = 30
+  public isLoading = false
 
   @Prop({ default: false })
   fullWidth: boolean
@@ -136,8 +137,15 @@ export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
     })
   }
 
-  async fetch(): Promise<void> {
+  /**
+   * Mounted hook
+   *
+   * @return {Promise<void>}
+   */
+  async mounted(): Promise<void> {
+    this.isLoading = true
     await this.fetchData()
+    this.isLoading = false
   }
 
   get formattedLabels(): string[] {
@@ -152,10 +160,6 @@ export default class OwnerIssuesGraph extends mixins(OwnerDetailMixin) {
       })
     }
     return []
-  }
-
-  mounted(): void {
-    this.$fetch()
   }
 
   get dataSets(): { name: string; values: number[] }[] {
