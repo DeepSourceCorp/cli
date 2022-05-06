@@ -1,10 +1,10 @@
 <template>
-  <div class="border border-ink-200 rounded-md col-span-1 xl:col-span-2">
+  <div class="col-span-1 border rounded-md border-ink-200 xl:col-span-2">
     <div v-if="completion > 0" class="p-2">Account setup is {{ completion }}% complete</div>
     <div v-else class="p-2">Setup your account</div>
     <div class="w-full h-1 bg-ink-200">
       <div
-        class="h-1 bg-juniper transform transition-all duration-100 ease-in-out"
+        class="h-1 transition-all duration-100 ease-in-out transform bg-juniper"
         :style="{
           width: `${completion}%`
         }"
@@ -13,7 +13,7 @@
     <div class="p-4 space-y-6">
       <div v-for="(step, index) in steps" :key="index" class="flex items-start space-x-2">
         <div
-          class="h-4 w-4 rounded-full flex-shrink-0 grid place-content-center"
+          class="grid flex-shrink-0 w-4 h-4 rounded-full place-content-center"
           :class="getStatus(step) ? 'bg-juniper stroke-4' : 'border-2 border-ink-50'"
           :style="{
             'stroke-width': 4
@@ -78,7 +78,7 @@
       >
         <div class="p-4 space-y-4 border-b border-ink-200">
           <div class="text-5xl text-center">📫</div>
-          <p class="text-xs text-vanilla-400 max-w-sm mx-auto text-center">
+          <p class="max-w-sm mx-auto text-xs text-center text-vanilla-400">
             We've sent an email to your team members, they can create an account using the URL in
             that email and join your team
           </p>
@@ -180,7 +180,10 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
 
   get steps(): Array<SetupStep> {
     return (this.owner.accountSetupStatus as Array<SetupStep>).map((step) => {
-      return Object.assign(step, this.setupOptions[step.shortcode]) as SetupStep
+      return Object.assign(
+        JSON.parse(JSON.stringify(step)),
+        this.setupOptions[step.shortcode]
+      ) as SetupStep
     })
   }
 

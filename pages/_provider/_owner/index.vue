@@ -57,9 +57,10 @@ interface SetupStep {
 })
 export default class TeamHome extends mixins(OwnerDetailMixin, ActiveUserMixin) {
   async fetch(): Promise<void> {
+    const { owner, provider } = this.$route.params
     await this.fetchAccountSetupStatus({
-      login: this.$route.params.owner,
-      provider: this.$route.params.provider
+      login: owner,
+      provider
     })
   }
 
@@ -67,6 +68,16 @@ export default class TeamHome extends mixins(OwnerDetailMixin, ActiveUserMixin) 
     return {
       title: `DeepSource`
     }
+  }
+
+  /**
+   * Mounted hook
+   *
+   * @return {void}
+   */
+  mounted(): void {
+    const { owner, provider } = this.$route.params
+    this.setActiveContextCookie(provider, owner)
   }
 
   get allowAccountSetupCard(): boolean {

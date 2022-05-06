@@ -24,6 +24,8 @@ export interface TeamPermissions {
   hasAllRepoAccess: boolean
 }
 
+const ACTIVE_CONTEXT_COOKIE_NAME = 'current-active-organization'
+const COOKIE_SEPERATOR = '::'
 export interface DashboardContext {
   id: number
   login: string
@@ -103,6 +105,18 @@ export default class ActiveUserMixin extends Vue {
     if (now < expiry) {
       await this.fetchActiveUser()
     }
+  }
+
+  /**
+   * Set the active context in a cookie to be reused on next reload
+   *
+   * @param {string} provider
+   * @param {string} owner
+   * @return {void}
+   */
+  setActiveContextCookie(provider: string, owner: string): void {
+    this.$cookies.remove(ACTIVE_CONTEXT_COOKIE_NAME)
+    this.$cookies.set(ACTIVE_CONTEXT_COOKIE_NAME, [provider, owner].join(COOKIE_SEPERATOR))
   }
 
   /**
@@ -194,7 +208,18 @@ export default class ActiveUserMixin extends Vue {
 
   get activeDashboardContext(): DashboardContext | Record<string, string> {
     // fetch provider and owner
-    const { provider, owner } = this.$route.params
+    let { provider, owner } = this.$route.params
+
+    if (!provider && !owner && this.$cookies.get(ACTIVE_CONTEXT_COOKIE_NAME)) {
+      const contextInCookie: Array<string> = this.$cookies
+        .get(ACTIVE_CONTEXT_COOKIE_NAME)
+        .split(COOKIE_SEPERATOR)
+
+      if (Object.keys(this.$providerMetaMap).includes(contextInCookie[0])) {
+        provider = contextInCookie[0]
+        owner = contextInCookie[1]
+      }
+    }
 
     // check if the context is present in the list of allowed contexts for the usert
     if (!this.isContextAllowed(provider, owner)) {

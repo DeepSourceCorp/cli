@@ -8,6 +8,11 @@ const mocks = {
   $route: {
     params: {}
   },
+  $cookies: {
+    get: (key: string) => {
+      return key
+    }
+  },
   $localStore: {
     get: () => {}
   },
