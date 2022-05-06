@@ -19,9 +19,6 @@ var (
 
 type MacroVerifyOpts struct{}
 
-// NewCmdMacroVerify implements the verification workflow for Macros.
-// Involves running type-checks and sanity checks on `analyzer.toml` and issue descriptions.
-// Builds docker image of the macro taking into account the `build.steps` configured by the author.
 func NewCmdMacroVerify() *cobra.Command {
 	// Configuring the default values for analyzer.toml and issues directory
 	cwd, _ := os.Getwd()
@@ -34,7 +31,7 @@ func NewCmdMacroVerify() *cobra.Command {
 		Use:   "verify",
 		Short: "Verify DeepSource Analyzers configuration",
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
+		RunE: func(_ *cobra.Command, _ []string) error {
 			if err := opts.Run(); err != nil {
 				return fmt.Errorf("Analyzer verification failed.Error: %s", err)
 			}
@@ -46,20 +43,32 @@ func NewCmdMacroVerify() *cobra.Command {
 
 // Runs the command
 func (opts *MacroVerifyOpts) Run() (err error) {
+	spin := utils.SpinnerUtils{}
+	spin.StartSpinnerWithLabel("Validating analyzer.toml...")
 	// Check for path of `analyzer.toml` file and `issues` directory containing issue descriptions
 	if err = mvalidator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
+		spin.StopSpinner()
 		return err
 	}
+	spin.StopSpinner()
 
+	spin = utils.SpinnerUtils{}
+	spin.StartSpinnerWithLabel("Validating analyzer.toml...")
 	// Read and verify analyzer toml
 	if _, err := mvalidator.ValidateAnalyzerTOML(analyzerTOMLPath); err != nil {
+		spin.StopSpinner()
 		return err
 	}
+	spin.StopSpinner()
 
+	spin = utils.SpinnerUtils{}
+	spin.StartSpinnerWithLabel("Validating analyzer.toml...")
 	// Read and verify all issues
 	if err = mvalidator.ValidateIssueDescriptions(issuesDirPath); err != nil {
+		spin.StopSpinner()
 		return err
 	}
+	spin.StopSpinner()
 
 	// TODO: Inject the name from analyzer.toml here (needs some refactoring)
 	macroBuilder := mbuilder.DockerBuildParams{
