@@ -33,7 +33,7 @@ func NewCmdMacroVerify() *cobra.Command {
 		Args:  utils.NoArgs,
 		RunE: func(_ *cobra.Command, _ []string) error {
 			if err := opts.Run(); err != nil {
-				return fmt.Errorf("Analyzer verification failed.Error: %s", err)
+				return fmt.Errorf("Analyzer verification failed. Error: %s", err)
 			}
 			return nil
 		},
@@ -44,7 +44,7 @@ func NewCmdMacroVerify() *cobra.Command {
 // Runs the command
 func (opts *MacroVerifyOpts) Run() (err error) {
 	spin := utils.SpinnerUtils{}
-	spin.StartSpinnerWithLabel("Validating analyzer.toml...")
+	spin.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...")
 	// Check for path of `analyzer.toml` file and `issues` directory containing issue descriptions
 	if err = mvalidator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
 		spin.StopSpinner()
@@ -52,7 +52,6 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	}
 	spin.StopSpinner()
 
-	spin = utils.SpinnerUtils{}
 	spin.StartSpinnerWithLabel("Validating analyzer.toml...")
 	// Read and verify analyzer toml
 	if _, err := mvalidator.ValidateAnalyzerTOML(analyzerTOMLPath); err != nil {
@@ -61,8 +60,7 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	}
 	spin.StopSpinner()
 
-	spin = utils.SpinnerUtils{}
-	spin.StartSpinnerWithLabel("Validating analyzer.toml...")
+	spin.StartSpinnerWithLabel("Validating issue descriptions...")
 	// Read and verify all issues
 	if err = mvalidator.ValidateIssueDescriptions(issuesDirPath); err != nil {
 		spin.StopSpinner()
