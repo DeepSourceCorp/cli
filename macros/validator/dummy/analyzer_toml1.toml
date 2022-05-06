@@ -1,7 +1,7 @@
 name = "Todo comments checker"
-# path = "@deepsource/demo-python"
+path = "@deepsource/demo-python"
 description = "Finds the TODO comments in codebase."
-# category = "doc"
+category = "doc"
 tags = ["documentation","todo"]
 environment_variables = {CODE_PATH = "/code"}
 
