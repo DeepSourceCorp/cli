@@ -28,6 +28,30 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 			return errors.New("the issue descriptions directory doesn't exist")
 		}
 	}
+
+	// Check if there are any toml files in the `issues/` directory
+	files, err := ioutil.ReadDir(issuesDirectoryPath)
+	if err != nil {
+		return fmt.Errorf("failed to read the files present in the issues directory at %s", issuesDirectoryPath)
+	}
+
+	// Check if its an empty directory
+	if len(files) < 1 {
+		return fmt.Errorf("found 0 issues configured in the issues directory at %s", issuesDirectoryPath)
+	}
+
+	tomlPresent := false
+	// Check if there are TOML files configured in the issues/ directory
+	for _, file := range files {
+		if strings.Contains(file.Name(), ".toml") {
+			tomlPresent = true
+			break
+		}
+	}
+	if !tomlPresent {
+		return fmt.Errorf("found no toml files in the issues directory at %s", issuesDirectoryPath)
+	}
+
 	return
 }
 
