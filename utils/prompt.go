@@ -107,5 +107,8 @@ func GetSuccessMessage(msg string) string {
 }
 
 func GetFailureMessage(msg, errorMsg string) string {
-	return ansi.Color("✗"+" "+msg+". "+"Error: "+errorMsg+"\n", "red")
+	if errorMsg != "" {
+		return ansi.Color("✗"+" "+msg+". "+"Error: "+errorMsg+"\n", "red")
+	}
+	return ansi.Color("✗"+" "+msg+"\n", "red")
 }
