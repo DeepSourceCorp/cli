@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"io"
 	"log"
 	"os"
@@ -81,9 +82,13 @@ func (d *DockerClient) executeImageBuild() error {
 		return err
 	}
 
+	if d.ImageTag == "" {
+		d.ImageTag = generateRandomTag(7)
+	}
+
 	opts := types.ImageBuildOptions{
-		Dockerfile: "Dockerfile",
-		Tags:       []string{d.ImageName},
+		Dockerfile: d.DockerfilePath,
+		Tags:       []string{fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag)},
 		Remove:     true,
 	}
 	res, err := d.Client.ImageBuild(ctx, tar, opts)

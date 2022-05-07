@@ -88,31 +88,35 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	// Build verification
 
 	// Specifying the name of the image to be built
-	var dockerFileName string
+	var dockerFilePath, dockerFileName string
+	dockerFilePath = analyzerTOMLData.Build.Dockerfile
 	if analyzerTOMLData.Shortcode != "" {
 		dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
 	}
 
+	spin.StartSpinnerWithLabel(fmt.Sprintf("Building Analyzer image with the name \"%s\"", dockerFileName), "Successfully built the Analyzer image")
 	// Specifying the source to build
 	// Check for the presence of `build.Dockerfile` or if not a `Dockerfile` in the current working directory
 	if _, err := os.Stat(analyzerTOMLData.Build.Dockerfile); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found. Checking for existence of Dockerfile.", analyzerTOMLData.Build.Dockerfile))
+			spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found\n", analyzerTOMLData.Build.Dockerfile))
+			return err
 		}
 	}
 
 	// Checking for the existence of "Dockerfile" since `build.Dockerfile` couldn't be found
 	if _, err := os.Stat("Dockerfile"); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("Dockerfile not found"))
+			spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("Dockerfile not found\n"))
+			return err
 		}
 	}
 
 	analyzerBuilder := bd.DockerClient{
-		ImageName: dockerFileName,
+		ImageName:      dockerFileName,
+		DockerfilePath: dockerFilePath,
 	}
 
-	spin.StartSpinnerWithLabel(fmt.Sprintf("Building Analyzer image with the name \"%s\"", dockerFileName), "Successfully built the Analyzer image")
 	buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
 	if buildErr != nil {
 		spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf(buildErr.Error()))
