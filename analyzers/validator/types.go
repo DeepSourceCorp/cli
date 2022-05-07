@@ -29,7 +29,7 @@ type Test struct {
 type AnalyzerMetadata struct {
 	// Analyzer specific data
 	Name                 string            `toml:"name" json:"name" validate:"required"`
-	Path                 string            `toml:"path" json:"path" validate:"required"` // New
+	Shortcode            string            `toml:"shortcode" json:"shortcode" validate:"required"` // New
 	Description          string            `toml:"description" json:"description" validate:"required"`
 	Category             string            `toml:"category" json:"category" validate:"required"`
 	Tags                 []string          `toml:"tags" json:"tags,omitempty" validate:"omitempty"`

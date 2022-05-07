@@ -11,5 +11,6 @@ dist
 coverage.out
 cover.out
 
-# .deepsource directory
+# required for local testing
 .deepsource
+Dockerfile
