@@ -106,6 +106,6 @@ func GetSuccessMessage(msg string) string {
 	return greenTickMark + " " + msg + "\n"
 }
 
-func GetFailureMessage(msg string) string {
-	return ansi.Color("✗"+" "+msg+"\n", "red")
+func GetFailureMessage(msg, errorMsg string) string {
+	return ansi.Color("✗"+" "+msg+". "+"Error: "+errorMsg+"\n", "red")
 }

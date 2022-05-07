@@ -41,11 +41,11 @@ func (s *SpinnerUtils) StopSpinner() {
 }
 
 // Stops the spinner and displays an error message with a cross emoji
-func (s *SpinnerUtils) StopSpinnerWithError(errorMessage string) {
+func (s *SpinnerUtils) StopSpinnerWithError(msg string, errorMessage error) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	s.Spinner.FinalMSG = GetFailureMessage(errorMessage)
+	s.Spinner.FinalMSG = GetFailureMessage(msg, errorMessage.Error())
 	if s.Spinner == nil {
 		return
 	}
