@@ -10,5 +10,5 @@ func generateRandomTag(length int) string {
 	if _, err := rand.Read(b); err != nil {
 		panic(err)
 	}
-	return fmt.Sprintf("%s", b)
+	return fmt.Sprintf("%x", b)
 }

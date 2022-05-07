@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"strings"
 	"sync"
@@ -76,7 +75,6 @@ func (d *DockerClient) executeImageBuild() error {
 	tarOptions := &archive.TarOptions{
 		ExcludePatterns: []string{".git/**"},
 	}
-
 	tar, err := archive.TarWithOptions(cwd, tarOptions)
 	if err != nil {
 		return err
@@ -85,7 +83,6 @@ func (d *DockerClient) executeImageBuild() error {
 	if d.ImageTag == "" {
 		d.ImageTag = generateRandomTag(7)
 	}
-
 	opts := types.ImageBuildOptions{
 		Dockerfile: d.DockerfilePath,
 		Tags:       []string{fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag)},
@@ -96,12 +93,7 @@ func (d *DockerClient) executeImageBuild() error {
 		return err
 	}
 	defer res.Body.Close()
-
-	err = checkResponse(res.Body)
-	if err != nil {
-		return err
-	}
-	return nil
+	return checkResponse(res.Body)
 }
 
 func checkResponse(rd io.Reader) error {
@@ -115,13 +107,11 @@ func checkResponse(rd io.Reader) error {
 		d := &DockerBuildResponse{}
 		err := json.Unmarshal(lastLine, d)
 		if err != nil {
-			log.Println(err)
+			return err
 		}
-
 		if d.Stream == "" || d.Stream == "\n" || strings.TrimSuffix(d.Stream, "\n") == currentStream {
 			continue
 		}
-
 		currentStream = strings.TrimSuffix(d.Stream, "\n")
 		count++
 	}
@@ -131,10 +121,5 @@ func checkResponse(rd io.Reader) error {
 	if errLine.Error != "" {
 		return errors.New(errLine.Error)
 	}
-
-	if err := scanner.Err(); err != nil {
-		return err
-	}
-
-	return nil
+	return scanner.Err()
 }
