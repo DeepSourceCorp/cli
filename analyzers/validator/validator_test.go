@@ -58,7 +58,7 @@ func TestValidateIssueDescriptions(t *testing.T) {
 		if len(validationErrors) > 0 && tc.validIssues {
 			t.Errorf("Expected valid TOML for %s. Got: %v", tc.issuesDirPath, err)
 		}
-		if len(validationErrors) ==0 && !tc.validIssues {
+		if len(validationErrors) == 0 && !tc.validIssues {
 			t.Errorf("Expected invalid TOML for %s. Got: %v", tc.issuesDirPath, err)
 		}
 	}
