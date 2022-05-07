@@ -57,7 +57,7 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	// Read and verify analyzer toml
 	spin.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
 	if _, err := mvalidator.ValidateAnalyzerTOML(analyzerTOMLPath); err != nil {
-		spin.StopSpinnerWithError("Failed to verify analyzer.toml (./deepsource/analyzer/analyzer.toml)", err)
+		spin.StopSpinnerWithError("Failed to verify analyzer.toml", err)
 	}
 	spin.StopSpinner()
 
@@ -68,14 +68,14 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	}
 
 	if len(validationErrors) > 0 {
-		spin.StopSpinnerWithError("Failed to validate the following issue descriptions", err)
+		spin.StopSpinnerWithError("Failed to validate the following issue descriptions\n", err)
 		for _, validationError := range validationErrors {
 			file := validationError.File
 			fmt.Printf("  * %s\n", file)
 			for _, err := range validationError.Errors {
 				msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
 				failureMsg := utils.GetFailureMessage(msg, "")
-				fmt.Printf("    * %s", failureMsg)
+				fmt.Printf("    * %s\n", failureMsg)
 			}
 		}
 	}
