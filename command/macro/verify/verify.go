@@ -1,11 +1,10 @@
 package macro
 
 import (
-	"fmt"
+	"errors"
 	"os"
 	"path/filepath"
 
-	mbuilder "github.com/deepsourcelabs/cli/macros/build"
 	mvalidator "github.com/deepsourcelabs/cli/macros/validator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
@@ -33,7 +32,7 @@ func NewCmdMacroVerify() *cobra.Command {
 		Args:  utils.NoArgs,
 		RunE: func(_ *cobra.Command, _ []string) error {
 			if err := opts.Run(); err != nil {
-				return fmt.Errorf("Analyzer verification failed. Error: %s", err)
+				return errors.New("Analyzer verification failed. Exiting...")
 			}
 			return nil
 		},
@@ -44,38 +43,38 @@ func NewCmdMacroVerify() *cobra.Command {
 // Runs the command
 func (opts *MacroVerifyOpts) Run() (err error) {
 	spin := utils.SpinnerUtils{}
-	spin.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...")
+	spin.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions.")
+
 	// Check for path of `analyzer.toml` file and `issues` directory containing issue descriptions
 	if err = mvalidator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
-		spin.StopSpinner()
-		return err
+		spin.StopSpinnerWithError("Failed to locate analyzer configs")
+		return
 	}
 	spin.StopSpinner()
 
-	spin.StartSpinnerWithLabel("Validating analyzer.toml...")
+	spin.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
 	// Read and verify analyzer toml
 	if _, err := mvalidator.ValidateAnalyzerTOML(analyzerTOMLPath); err != nil {
-		spin.StopSpinner()
-		return err
+		spin.StopSpinnerWithError("Failed to verify analyzer.toml (./deepsource/analyzer/analyzer.toml)")
 	}
 	spin.StopSpinner()
 
-	spin.StartSpinnerWithLabel("Validating issue descriptions...")
+	spin.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
 	// Read and verify all issues
 	if err = mvalidator.ValidateIssueDescriptions(issuesDirPath); err != nil {
-		spin.StopSpinner()
+		spin.StopSpinnerWithError("Failed to validate issue desriptions")
 		return err
 	}
 	spin.StopSpinner()
 
-	// TODO: Inject the name from analyzer.toml here (needs some refactoring)
-	macroBuilder := mbuilder.DockerBuildParams{
-		ImageName: "dummy",
-	}
+	// // TODO: Inject the name from analyzer.toml here (needs some refactoring)
+	// macroBuilder := mbuilder.DockerBuildParams{
+	//     ImageName: "dummy",
+	// }
 
-	if err = macroBuilder.BuildMacroDockerImage(); err != nil {
-		return err
-	}
+	// if err = macroBuilder.BuildMacroDockerImage(); err != nil {
+	//     return err
+	// }
 
 	// Start build process
 	return nil
