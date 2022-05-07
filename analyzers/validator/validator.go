@@ -95,9 +95,8 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (analyzerConfig AnalyzerMetad
 
 // Validates issue description TOML files
 func ValidateIssueDescriptions(issuesDirectoryPath string) ([]ValidationError, error) {
-	idx := 0
 	validationFailed := false
-	issuesValidationErrors := make([]ValidationError, 1)
+	issuesValidationErrors := []ValidationError{}
 
 	// TODO: List only TOML files here
 	issuesList, err := ioutil.ReadDir(issuesDirectoryPath)
@@ -127,18 +126,20 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) ([]ValidationError, e
 		if err := v.Struct(&config); err != nil {
 			validationFailed = true
 			missingRequiredFields := getMissingRequiredFields(err, config)
-
-			issuesValidationErrors[idx].File = issuePath.Name()
+			issueValidationError := ValidationError{
+				File: issuePath.Name(),
+			}
 
 			// TODO: Tweak this to accomodate other error types.
 			for _, missingField := range missingRequiredFields {
-				issuesValidationErrors[idx].Errors = append(issuesValidationErrors[idx].Errors, Error{
+				issueValidationError.Errors = append(issueValidationError.Errors, Error{
 					Type:    "ERROR",
 					Field:   missingField,
 					Message: "Missing required field",
 				},
 				)
 			}
+			issuesValidationErrors = append(issuesValidationErrors, issueValidationError)
 		}
 	}
 
