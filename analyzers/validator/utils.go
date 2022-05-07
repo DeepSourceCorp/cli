@@ -7,7 +7,7 @@ import (
 )
 
 // Returns the list of required fields from the error message returned by the `go-playground/validator` library
-func formatValidationErrors(err error, config interface{}) []string {
+func getMissingRequiredFields(err error, config interface{}) []string {
 	missingRequiredFields := []string{}
 	errs := err.(validate.ValidationErrors)
 	for _, err := range errs {

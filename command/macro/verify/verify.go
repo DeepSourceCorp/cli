@@ -1,11 +1,12 @@
-package macro
+package verify
 
 import (
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 
-	mvalidator "github.com/deepsourcelabs/cli/macros/validator"
+	mvalidator "github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -42,28 +43,41 @@ func NewCmdMacroVerify() *cobra.Command {
 
 // Runs the command
 func (opts *MacroVerifyOpts) Run() (err error) {
+	var validationErrors []mvalidator.ValidationError
 	spin := utils.SpinnerUtils{}
-	spin.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions.")
 
 	// Check for path of `analyzer.toml` file and `issues` directory containing issue descriptions
+	spin.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions.")
 	if err = mvalidator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
 		spin.StopSpinnerWithError("Failed to locate analyzer configurations", err)
 		return
 	}
 	spin.StopSpinner()
 
-	spin.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
 	// Read and verify analyzer toml
+	spin.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
 	if _, err := mvalidator.ValidateAnalyzerTOML(analyzerTOMLPath); err != nil {
 		spin.StopSpinnerWithError("Failed to verify analyzer.toml (./deepsource/analyzer/analyzer.toml)", err)
 	}
 	spin.StopSpinner()
 
-	spin.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
 	// Read and verify all issues
-	if err = mvalidator.ValidateIssueDescriptions(issuesDirPath); err != nil {
-		spin.StopSpinnerWithError("Failed to validate issue desriptions", err)
-		return err
+	spin.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
+	if validationErrors, err = mvalidator.ValidateIssueDescriptions(issuesDirPath); err != nil {
+		spin.StopSpinnerWithError("Failed to validate the following issue desriptions", err)
+	}
+
+	if len(validationErrors) > 0 {
+		spin.StopSpinnerWithError("Failed to validate the following issue descriptions", err)
+		for _, validationError := range validationErrors {
+			file := validationError.File
+			fmt.Printf("  * %s\n", file)
+			for _, err := range validationError.Errors {
+				msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
+				failureMsg := utils.GetFailureMessage(msg, "")
+				fmt.Printf("    * %s", failureMsg)
+			}
+		}
 	}
 	spin.StopSpinner()
 

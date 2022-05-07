@@ -13,6 +13,17 @@ import (
 	"github.com/spf13/viper"
 )
 
+type Error struct {
+	Type    string
+	Field   string
+	Message string
+}
+
+type ValidationError struct {
+	File   string
+	Errors []Error
+}
+
 // Checks if the analyzer.toml file and the issue directory is present
 func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err error) {
 	// Check if `analyzer.toml` is present in `.deepsource/analyzer` folder
@@ -74,7 +85,7 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (analyzerConfig AnalyzerMetad
 	// Validate analyzer.toml fields based on type and sanity checks
 	v := validate.New()
 	if err := v.Struct(&config); err != nil {
-		missingRequiredFields := formatValidationErrors(err, config)
+		missingRequiredFields := getMissingRequiredFields(err, config)
 		missingFields := strings.Join(missingRequiredFields, ", ")
 		// Improve error message returned by `go-playground/validator`
 		return config, fmt.Errorf("missing the following required fields from analyzer.toml: %v\n", missingFields)
@@ -83,40 +94,56 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (analyzerConfig AnalyzerMetad
 }
 
 // Validates issue description TOML files
-func ValidateIssueDescriptions(issuesDirectoryPath string) (err error) {
+func ValidateIssueDescriptions(issuesDirectoryPath string) ([]ValidationError, error) {
+	idx := 0
 	validationFailed := false
+	issuesValidationErrors := make([]ValidationError, 1)
+
+	// TODO: List only TOML files here
 	issuesList, err := ioutil.ReadDir(issuesDirectoryPath)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	for _, issuePath := range issuesList {
+
 		config := AnalyzerIssue{}
 
 		// Read the contents of issue toml file
 		issueTOMLContent, err := ioutil.ReadFile(filepath.Join(issuesDirectoryPath, issuePath.Name()))
 		if err != nil {
-			return fmt.Errorf("failed to read file: %s", filepath.Join(issuesDirectoryPath, issuePath.Name()))
+			return nil, fmt.Errorf("failed to read file: %s", filepath.Join(issuesDirectoryPath, issuePath.Name()))
 		}
 		viper.SetConfigType("toml")
 		if err = viper.ReadConfig(bytes.NewBuffer(issueTOMLContent)); err != nil {
-			return err
+			return nil, err
 		}
 		// Unmarshaling the configdata into AnalyzerMetadata struct
 		viper.Unmarshal(&config)
 
 		// Validate the data
 		v := validate.New()
+
 		if err := v.Struct(&config); err != nil {
 			validationFailed = true
-			missingRequiredFields := formatValidationErrors(err, config)
-			missingFields := strings.Join(missingRequiredFields, ", ")
-			fmt.Printf("Missing the following required fields from issue %s: %v\n", issuePath.Name(), missingFields)
+			missingRequiredFields := getMissingRequiredFields(err, config)
+
+			issuesValidationErrors[idx].File = issuePath.Name()
+
+			// TODO: Tweak this to accomodate other error types.
+			for _, missingField := range missingRequiredFields {
+				issuesValidationErrors[idx].Errors = append(issuesValidationErrors[idx].Errors, Error{
+					Type:    "ERROR",
+					Field:   missingField,
+					Message: "Missing required field",
+				},
+				)
+			}
 		}
 	}
 
 	if validationFailed {
-		return fmt.Errorf("found the above validation errors in issue descriptions")
+		return issuesValidationErrors, nil
 	}
-	return nil
+	return nil, nil
 }
