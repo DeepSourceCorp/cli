@@ -54,11 +54,11 @@ func TestValidateIssueDescriptions(t *testing.T) {
 	}
 
 	for _, tc := range tests {
-		err := ValidateIssueDescriptions(tc.issuesDirPath)
-		if err != nil && tc.validIssues {
+		validationErrors, err := ValidateIssueDescriptions(tc.issuesDirPath)
+		if len(validationErrors) > 0 && tc.validIssues {
 			t.Errorf("Expected valid TOML for %s. Got: %v", tc.issuesDirPath, err)
 		}
-		if err == nil && !tc.validIssues {
+		if len(validationErrors) ==0 && !tc.validIssues {
 			t.Errorf("Expected invalid TOML for %s. Got: %v", tc.issuesDirPath, err)
 		}
 	}
