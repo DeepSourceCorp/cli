@@ -62,7 +62,7 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	spin.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
 	// Read and verify all issues
 	if err = mvalidator.ValidateIssueDescriptions(issuesDirPath); err != nil {
-		spin.StopSpinnerWithError("Failed to validate issue desriptions",err)
+		spin.StopSpinnerWithError("Failed to validate issue desriptions", err)
 		return err
 	}
 	spin.StopSpinner()
