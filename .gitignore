@@ -11,6 +11,3 @@ dist
 coverage.out
 cover.out
 
-# required for local testing
-.deepsource
-Dockerfile
