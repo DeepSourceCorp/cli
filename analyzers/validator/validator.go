@@ -115,8 +115,10 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, 
 	}
 
 	for _, issuePath := range issuesList {
-
 		config := AnalyzerIssue{}
+
+		// Set the issue shortcode as the filename
+		config.Shortcode = strings.TrimSuffix(issuePath.Name(), ".toml")
 
 		// Read the contents of issue toml file
 		issueTOMLContent, err := ioutil.ReadFile(filepath.Join(issuesDirectoryPath, issuePath.Name()))
@@ -128,6 +130,7 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, 
 		if err = toml.Unmarshal(issueTOMLContent, &config); err != nil {
 			return nil, err
 		}
+
 		// Validate the data
 		v := validate.New()
 

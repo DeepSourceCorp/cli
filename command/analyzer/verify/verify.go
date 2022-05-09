@@ -79,8 +79,7 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	if len(*validationErrors) > 0 {
 		spin.StopSpinnerWithError("Failed to validate the following issue descriptions\n", err)
 		for _, validationError := range *validationErrors {
-			file := validationError.File
-			fmt.Printf("  * %s\n", file)
+			fmt.Printf("  * %s\n", validationError.File)
 			for _, err := range validationError.Errors {
 				msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
 				failureMsg := utils.GetFailureMessage(msg, "")
