@@ -12,4 +12,3 @@ func generateImageVersion(length int) string {
 	}
 	return fmt.Sprintf("%x", b)
 }
-
