@@ -53,10 +53,16 @@ func NewCmdAnalyzerVerify() *cobra.Command {
 func (opts *MacroVerifyOpts) Run() (err error) {
 	var validationErrors *[]validator.ValidationError
 	spin := utils.SpinnerUtils{}
+	configurationValid := true
+
+	/////////////////////////////////
+	// Configuration verification///
+	///////////////////////////////
 
 	// Check for path of `analyzer.toml` file and `issues` directory containing issue descriptions
 	spin.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions.")
 	if err = validator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
+		configurationValid = false
 		spin.StopSpinnerWithError("Failed to locate analyzer configurations", err)
 		return
 	}
@@ -66,6 +72,7 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	spin.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
 	analyzerTOMLData, analyzerTOMLValidationErrors, err := validator.ValidateAnalyzerTOML(analyzerTOMLPath)
 	if analyzerTOMLValidationErrors != nil {
+		configurationValid = false
 		spin.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
 		for _, err := range analyzerTOMLValidationErrors.Errors {
 			msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
@@ -78,11 +85,13 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	// Read and verify all issues
 	spin.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
 	if validationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
+		configurationValid = false
 		spin.StopSpinnerWithError("Failed to validate the following issue desriptions", err)
 	}
 
 	// Check if there are any validation errors in issue descriptions
 	if len(*validationErrors) > 0 {
+		configurationValid = false
 		spin.StopSpinnerWithError("Failed to validate the following issue descriptions\n", err)
 		for _, validationError := range *validationErrors {
 			fmt.Printf("  * %s\n", validationError.File)
@@ -95,11 +104,19 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	}
 	spin.StopSpinner()
 
-	// Build verification
+	if !configurationValid {
+		return
+	}
+
+	/////////////////////////
+	// Build verification///
+	///////////////////////
 
 	// Specifying the name of the image to be built
 	var dockerFilePath, dockerFileName string
-	dockerFilePath = analyzerTOMLData.Build.Dockerfile
+	if analyzerTOMLData.Build.Dockerfile != "" {
+		dockerFilePath = analyzerTOMLData.Build.Dockerfile
+	}
 	if analyzerTOMLData.Shortcode != "" {
 		dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
 	}

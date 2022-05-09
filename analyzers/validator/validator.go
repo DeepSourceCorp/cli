@@ -28,26 +28,26 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 	// Check if `analyzer.toml` is present in `.deepsource/analyzer` folder
 	if _, err := os.Stat(analyzerTOMLPath); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			return errors.New("the analyzer.toml file doesn't exist")
+			return errors.New("the analyzer.toml file doesn't exist\n")
 		}
 	}
 
 	// Check if `issues/` directory is present in `.deepsource/analyzer` folder and is not empty.
 	if _, err := os.Stat(issuesDirectoryPath); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			return errors.New("the issue descriptions directory doesn't exist")
+			return errors.New("the issue descriptions directory doesn't exist\n")
 		}
 	}
 
 	// Check if there are any toml files in the `issues/` directory
 	files, err := ioutil.ReadDir(issuesDirectoryPath)
 	if err != nil {
-		return fmt.Errorf("failed to read the files present in the issues directory at %s", issuesDirectoryPath)
+		return fmt.Errorf("failed to read the files present in the issues directory at %s\n", issuesDirectoryPath)
 	}
 
 	// Check if its an empty directory
 	if len(files) < 1 {
-		return fmt.Errorf("found 0 issues configured in the issues directory at %s", issuesDirectoryPath)
+		return fmt.Errorf("found 0 issues configured in the issues directory at %s\n", issuesDirectoryPath)
 	}
 
 	tomlPresent := false
@@ -59,7 +59,7 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 		}
 	}
 	if !tomlPresent {
-		return fmt.Errorf("found no toml files in the issues directory at %s", issuesDirectoryPath)
+		return fmt.Errorf("found no toml files in the issues directory at %s\n", issuesDirectoryPath)
 	}
 
 	return
