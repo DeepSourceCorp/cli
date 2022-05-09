@@ -1,11 +1,11 @@
-package build
+package verify
 
 import (
 	"crypto/rand"
 	"fmt"
 )
 
-func generateRandomTag(length int) string {
+func generateImageVersion(length int) string {
 	b := make([]byte, length)
 	if _, err := rand.Read(b); err != nil {
 		panic(err)

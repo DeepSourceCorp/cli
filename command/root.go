@@ -1,10 +1,10 @@
 package command
 
 import (
+	"github.com/deepsourcelabs/cli/command/analyzer"
 	"github.com/deepsourcelabs/cli/command/auth"
 	"github.com/deepsourcelabs/cli/command/config"
 	"github.com/deepsourcelabs/cli/command/issues"
-	"github.com/deepsourcelabs/cli/command/macro"
 	"github.com/deepsourcelabs/cli/command/repo"
 	"github.com/deepsourcelabs/cli/command/report"
 	"github.com/deepsourcelabs/cli/command/version"
@@ -30,7 +30,7 @@ Login into DeepSource using the command : deepsource auth login`,
 	cmd.AddCommand(repo.NewCmdRepo())
 	cmd.AddCommand(issues.NewCmdIssues())
 	cmd.AddCommand(report.NewCmdReport())
-	cmd.AddCommand(macro.NewCmdMacro())
+	cmd.AddCommand(analyzer.NewCmdAnalyzer())
 
 	return cmd
 }
