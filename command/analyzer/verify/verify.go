@@ -114,7 +114,11 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	///////////////////////
 
 	// Specifying the name of the image to be built
+	// Set the default Dockerfile path as "Dockerfile"
 	var dockerFilePath, dockerFileName string
+	dockerFilePath = "Dockerfile"
+
+	// Read config for the value if specified
 	if analyzerTOMLData.Build.Dockerfile != "" {
 		dockerFilePath = analyzerTOMLData.Build.Dockerfile
 	}
@@ -125,17 +129,9 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	spin.StartSpinnerWithLabel(fmt.Sprintf("Building Analyzer image with the name \"%s\"", dockerFileName), "Successfully built the Analyzer image")
 	// Specifying the source to build
 	// Check for the presence of `build.Dockerfile` or if not a `Dockerfile` in the current working directory
-	if _, err := os.Stat(analyzerTOMLData.Build.Dockerfile); err != nil {
+	if _, err := os.Stat(dockerFilePath); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found\n", analyzerTOMLData.Build.Dockerfile))
-			return err
-		}
-	}
-
-	// Checking for the existence of "Dockerfile" since `build.Dockerfile` couldn't be found
-	if _, err := os.Stat("Dockerfile"); err != nil {
-		if errors.Is(err, os.ErrNotExist) {
-			spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("Dockerfile not found\n"))
+			spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found\n", dockerFilePath))
 			return err
 		}
 	}

@@ -41,7 +41,7 @@ type AnalyzerMetadata struct {
 	// Autofix Autofix `toml:"autofix" json:"autofix" validate:"omitempty"`
 
 	// Build steps needed to build the analyzer
-	Build Build `toml:"build" json:"build" validate:"required"`
+	Build Build `toml:"build" json:"build" validate:"omitempty"`
 
 	// Test command for running the testing workflow
 	Test Test `toml:"test" json:"test" validate:"omitempty"`
