@@ -1,4 +1,4 @@
-package build
+package docker
 
 import (
 	"bufio"
@@ -80,9 +80,6 @@ func (d *DockerClient) executeImageBuild() error {
 		return err
 	}
 
-	if d.ImageTag == "" {
-		d.ImageTag = generateRandomTag(7)
-	}
 	opts := types.ImageBuildOptions{
 		Dockerfile: d.DockerfilePath,
 		Tags:       []string{fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag)},

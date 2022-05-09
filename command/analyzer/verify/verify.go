@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	bd "github.com/deepsourcelabs/cli/analyzers/build"
-	vl "github.com/deepsourcelabs/cli/analyzers/validator"
+	dbuild "github.com/deepsourcelabs/cli/analyzers/build/docker"
+	validator "github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -21,7 +21,7 @@ var (
 
 type MacroVerifyOpts struct{}
 
-func NewCmdMacroVerify() *cobra.Command {
+func NewCmdAnalyzerVerify() *cobra.Command {
 	// Configuring the default values for analyzer.toml and issues directory
 	cwd, _ := os.Getwd()
 	configFolder = filepath.Join(cwd, ".deepsource/analyzer")
@@ -45,12 +45,12 @@ func NewCmdMacroVerify() *cobra.Command {
 
 // Runs the command
 func (opts *MacroVerifyOpts) Run() (err error) {
-	var validationErrors []vl.ValidationError
+	var validationErrors *[]validator.ValidationError
 	spin := utils.SpinnerUtils{}
 
 	// Check for path of `analyzer.toml` file and `issues` directory containing issue descriptions
 	spin.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions.")
-	if err = vl.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
+	if err = validator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
 		spin.StopSpinnerWithError("Failed to locate analyzer configurations", err)
 		return
 	}
@@ -58,22 +58,27 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 
 	// Read and verify analyzer toml
 	spin.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
-	analyzerTOMLData, err := vl.ValidateAnalyzerTOML(analyzerTOMLPath)
-	if err != nil {
-		spin.StopSpinnerWithError("Failed to verify analyzer.toml", err)
+	analyzerTOMLData, analyzerTOMLValidationErrors, err := validator.ValidateAnalyzerTOML(analyzerTOMLPath)
+	if analyzerTOMLValidationErrors != nil {
+		spin.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
+		for _, err := range analyzerTOMLValidationErrors.Errors {
+			msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
+			failureMsg := utils.GetFailureMessage(msg, "")
+			fmt.Printf("  * %s\n", failureMsg)
+		}
 	}
 	spin.StopSpinner()
 
 	// Read and verify all issues
 	spin.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
-	if validationErrors, err = vl.ValidateIssueDescriptions(issuesDirPath); err != nil {
+	if validationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
 		spin.StopSpinnerWithError("Failed to validate the following issue desriptions", err)
 	}
 
 	// Check if there are any validation errors in issue descriptions
-	if len(validationErrors) > 0 {
+	if len(*validationErrors) > 0 {
 		spin.StopSpinnerWithError("Failed to validate the following issue descriptions\n", err)
-		for _, validationError := range validationErrors {
+		for _, validationError := range *validationErrors {
 			file := validationError.File
 			fmt.Printf("  * %s\n", file)
 			for _, err := range validationError.Errors {
@@ -112,9 +117,10 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 		}
 	}
 
-	analyzerBuilder := bd.DockerClient{
+	analyzerBuilder := dbuild.DockerClient{
 		ImageName:      dockerFileName,
 		DockerfilePath: dockerFilePath,
+		ImageTag:       generateImageVersion(7),
 	}
 
 	buildErr := analyzerBuilder.BuildAnalyzerDockerImage()

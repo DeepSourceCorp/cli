@@ -1,7 +1,6 @@
 package validator
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -10,7 +9,7 @@ import (
 	"strings"
 
 	validate "github.com/go-playground/validator/v10"
-	"github.com/spf13/viper"
+	"github.com/pelletier/go-toml/v2"
 )
 
 type Error struct {
@@ -54,7 +53,7 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 	tomlPresent := false
 	// Check if there are TOML files configured in the issues/ directory
 	for _, file := range files {
-		if strings.Contains(file.Name(), ".toml") {
+		if strings.HasSuffix(file.Name(), ".toml") {
 			tomlPresent = true
 			break
 		}
@@ -67,36 +66,47 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 }
 
 // Validates analyzer.toml file
-func ValidateAnalyzerTOML(analyzerTOMLPath string) (analyzerConfig AnalyzerMetadata, err error) {
+func ValidateAnalyzerTOML(analyzerTOMLPath string) (*AnalyzerMetadata, *ValidationError, error) {
 	config := AnalyzerMetadata{}
+	analyzerTOMLValidationErrors := ValidationError{}
+
 	// Read the contents of analyzer.toml file
 	analyzerTOMLContent, err := ioutil.ReadFile(analyzerTOMLPath)
 	if err != nil {
-		return config, errors.New("failed to read analyzer.toml file")
+		return &config, nil, errors.New("failed to read analyzer.toml file")
 	}
 
-	viper.SetConfigType("toml")
-	if err = viper.ReadConfig(bytes.NewBuffer(analyzerTOMLContent)); err != nil {
-		return config, err
+	// Unmarshal TOML into config
+	if err = toml.Unmarshal(analyzerTOMLContent, &config); err != nil {
+		return &config, nil, err
 	}
-	// Unmarshaling the configdata into AnalyzerMetadata struct
-	viper.Unmarshal(&config)
 
 	// Validate analyzer.toml fields based on type and sanity checks
 	v := validate.New()
 	if err := v.Struct(&config); err != nil {
 		missingRequiredFields := getMissingRequiredFields(err, config)
-		missingFields := strings.Join(missingRequiredFields, ", ")
-		// Improve error message returned by `go-playground/validator`
-		return config, fmt.Errorf("missing the following required fields from analyzer.toml: %v\n", missingFields)
+		analyzerTOMLValidationErrors = ValidationError{
+			File: analyzerTOMLPath,
+		}
+
+		// TODO: Tweak this to accomodate other error types.
+		for _, missingField := range missingRequiredFields {
+			analyzerTOMLValidationErrors.Errors = append(analyzerTOMLValidationErrors.Errors, Error{
+				Type:    "ERROR",
+				Field:   missingField,
+				Message: "Missing required field",
+			},
+			)
+		}
+		return &config, &analyzerTOMLValidationErrors, nil
 	}
-	return config, nil
+	return &config, nil, nil
 }
 
 // Validates issue description TOML files
-func ValidateIssueDescriptions(issuesDirectoryPath string) ([]ValidationError, error) {
+func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, error) {
 	validationFailed := false
-	issuesValidationErrors := []ValidationError{}
+	issueValidationErrors := []ValidationError{}
 
 	// TODO: List only TOML files here
 	issuesList, err := ioutil.ReadDir(issuesDirectoryPath)
@@ -113,13 +123,11 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) ([]ValidationError, e
 		if err != nil {
 			return nil, fmt.Errorf("failed to read file: %s", filepath.Join(issuesDirectoryPath, issuePath.Name()))
 		}
-		viper.SetConfigType("toml")
-		if err = viper.ReadConfig(bytes.NewBuffer(issueTOMLContent)); err != nil {
+
+		// Unmarshal TOML into config
+		if err = toml.Unmarshal(issueTOMLContent, &config); err != nil {
 			return nil, err
 		}
-		// Unmarshaling the configdata into AnalyzerMetadata struct
-		viper.Unmarshal(&config)
-
 		// Validate the data
 		v := validate.New()
 
@@ -139,12 +147,12 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) ([]ValidationError, e
 				},
 				)
 			}
-			issuesValidationErrors = append(issuesValidationErrors, issueValidationError)
+			issueValidationErrors = append(issueValidationErrors, issueValidationError)
 		}
 	}
 
 	if validationFailed {
-		return issuesValidationErrors, nil
+		return &issueValidationErrors, nil
 	}
 	return nil, nil
 }
