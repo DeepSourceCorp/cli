@@ -84,6 +84,7 @@ func (d *DockerClient) executeImageBuild() error {
 		Dockerfile: d.DockerfilePath,
 		Tags:       []string{fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag)},
 		Remove:     true,
+		Platform:   "linux",
 	}
 	res, err := d.Client.ImageBuild(ctx, tar, opts)
 	if err != nil {
