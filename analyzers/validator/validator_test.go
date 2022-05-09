@@ -12,26 +12,26 @@ func TestValidateAnalyzerToml(t *testing.T) {
 
 	tests := []test{
 		{
-			tomlPath:  "./dummy/analyzer_toml1.toml",
+			tomlPath:  "./testdata/analyzer1/.deepsource/analyzer/analyzer.toml",
 			validTOML: true,
 		},
 		{
-			tomlPath:  "./dummy/analyzer_toml2.toml",
+			tomlPath:  "./testdata/analyzer2/.deepsource/analyzer/analyzer.toml",
 			validTOML: false,
 		},
 		{
-			tomlPath:  "./dummy/analyzer_toml3.toml",
+			tomlPath:  "./testdata/analyzer3/.deepsource/analyzer/analyzer.toml",
 			validTOML: false,
 		},
 	}
 
 	for _, tc := range tests {
-		_, err := ValidateAnalyzerTOML(tc.tomlPath)
-		if err != nil && tc.validTOML {
-			t.Errorf("Expected valid TOML for %s. Got: %v", tc.tomlPath, err)
+		_, validationErr, _ := ValidateAnalyzerTOML(tc.tomlPath)
+		if validationErr != nil && tc.validTOML {
+			t.Errorf("Expected valid TOML for %s. Got: %v", tc.tomlPath, validationErr)
 		}
-		if err == nil && !tc.validTOML {
-			t.Errorf("Expected invalid TOML for %s. Got: %v", tc.tomlPath, err)
+		if validationErr == nil && !tc.validTOML {
+			t.Errorf("Expected invalid TOML for %s. Got: %v", tc.tomlPath, validationErr)
 		}
 	}
 }
@@ -44,21 +44,21 @@ func TestValidateIssueDescriptions(t *testing.T) {
 
 	tests := []test{
 		{
-			issuesDirPath: "./dummy/issues1/",
+			issuesDirPath: "./testdata/analyzer1/.deepsource/analyzer/issues/",
 			validIssues:   false,
 		},
 		{
-			issuesDirPath: "./dummy/issues2/",
+			issuesDirPath: "./testdata/analyzer2/.deepsource/analyzer/issues/",
 			validIssues:   false,
 		},
 	}
 
 	for _, tc := range tests {
 		validationErrors, err := ValidateIssueDescriptions(tc.issuesDirPath)
-		if len(validationErrors) > 0 && tc.validIssues {
+		if validationErrors != nil && tc.validIssues {
 			t.Errorf("Expected valid TOML for %s. Got: %v", tc.issuesDirPath, err)
 		}
-		if len(validationErrors) == 0 && !tc.validIssues {
+		if validationErrors == nil && !tc.validIssues {
 			t.Errorf("Expected invalid TOML for %s. Got: %v", tc.issuesDirPath, err)
 		}
 	}
