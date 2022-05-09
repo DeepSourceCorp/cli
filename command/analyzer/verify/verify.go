@@ -14,7 +14,7 @@ import (
 )
 
 var (
-	configFolder     string
+	configFolder     string = ".deepsource/analyzer"
 	analyzerTOMLPath string
 	issuesDirPath    string
 )
@@ -22,11 +22,17 @@ var (
 type MacroVerifyOpts struct{}
 
 func NewCmdAnalyzerVerify() *cobra.Command {
-	// Configuring the default values for analyzer.toml and issues directory
 	cwd, _ := os.Getwd()
-	configFolder = filepath.Join(cwd, ".deepsource/analyzer")
-	analyzerTOMLPath = filepath.Join(configFolder, "analyzer.toml")
-	issuesDirPath = filepath.Join(configFolder, "issues/")
+
+	// Extracting the path of the project root
+	projectRoot, err := utils.ExtractProjectRootPath()
+	if err != nil {
+		projectRoot = cwd
+	}
+
+	// Configuring the paths of analyzer.toml and issues directory
+	analyzerTOMLPath = filepath.Join(projectRoot, configFolder, "analyzer.toml")
+	issuesDirPath = filepath.Join(projectRoot, configFolder, "issues/")
 
 	opts := MacroVerifyOpts{}
 	cmd := &cobra.Command{
