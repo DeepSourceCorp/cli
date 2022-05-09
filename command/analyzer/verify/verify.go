@@ -90,7 +90,7 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	}
 
 	// Check if there are any validation errors in issue descriptions
-	if len(*validationErrors) > 0 {
+	if validationErrors != nil {
 		configurationValid = false
 		spin.StopSpinnerWithError("Failed to validate the following issue descriptions\n", err)
 		for _, validationError := range *validationErrors {
@@ -104,6 +104,7 @@ func (opts *MacroVerifyOpts) Run() (err error) {
 	}
 	spin.StopSpinner()
 
+	// Do not move to building the image if the configuration verification fails
 	if !configurationValid {
 		return
 	}
