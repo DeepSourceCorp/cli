@@ -49,8 +49,7 @@ type AnalyzerMetadata struct {
 
 // Analyzer issue description
 type AnalyzerIssue struct {
-	// TODO: Decide if shortcode field is required or not?
-	Shortcode   string `toml:"shortcode" validate:"required"`
+	Shortcode   string `validate:"omitempty"`
 	Title       string `toml:"title" json:"title" validate:"required"`
 	Description string `toml:"description" json:"description" validate:"required"`
 	Category    string `toml:"category" json:"category" validate:"required"`
