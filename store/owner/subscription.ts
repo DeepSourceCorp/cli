@@ -19,6 +19,7 @@ export const mutations: MutationTree<SubscriptionStore> = {
   },
 
   [SubscriptionMutationTypes.RESET]: (state: SubscriptionStore) => {
+    // skipcq: JS-0387
     state = {
       selectedPlan: '',
       billingCycle: 'yearly',

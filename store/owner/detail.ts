@@ -603,7 +603,7 @@ export const actions: OwnerDetailModuleActions = {
     commit(OwnerDetailMutations.SET_ISSUE_TYPE_SETTING, args)
   },
 
-  async [OwnerDetailActions.APPLY_CREDITS]({ commit, state, getters }, { amount }) {
+  async [OwnerDetailActions.APPLY_CREDITS]({ commit, state }, { amount }) {
     try {
       commit(OwnerDetailMutations.SET_LOADING, true)
       await this.$applyGraphqlMutation(ApplyCredits, {

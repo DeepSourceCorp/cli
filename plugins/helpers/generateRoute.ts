@@ -19,6 +19,7 @@ declare module '@nuxt/types' {
 }
 
 declare module 'vuex/types/index' {
+  // skipcq: JS-0387
   interface Store<S> {
     $generateRoute: (path: Array<string>, includeRepoInPath?: boolean) => string
   }

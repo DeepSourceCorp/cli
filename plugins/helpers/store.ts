@@ -12,6 +12,7 @@ import { Context } from '@nuxt/types'
 import refreshTokenMutation from '@/apollo/mutations/auth/refreshToken.gql'
 
 declare module 'vuex/types/index' {
+  // skipcq: JS-0387
   interface Store<S> {
     $fetchGraphqlData(
       query: DocumentNode,

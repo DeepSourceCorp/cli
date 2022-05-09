@@ -36,6 +36,7 @@ declare module '@nuxt/types' {
 }
 
 declare module 'vuex/types/index' {
+  // skipcq: JS-0387
   interface Store<S> {
     $gateKeeper: GateKeeperInterface
   }

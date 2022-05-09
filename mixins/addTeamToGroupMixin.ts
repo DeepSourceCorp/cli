@@ -33,6 +33,7 @@ export default class AddTeamToGroupMixin extends Vue {
    * @param  {{ refetchAddTeams?: boolean }} refetchParams
    * @returns Promise<void>
    */
+  // skipcq: JS-0387
   async refetchData(refetchParams?: { refetchAddTeams?: boolean }): Promise<void> {
     // Do nothing.
   }

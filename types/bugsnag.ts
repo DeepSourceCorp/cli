@@ -7,6 +7,7 @@ declare module 'vue/types/vue' {
 }
 
 declare module 'vuex/types/index' {
+  // skipcq: JS-0387
   interface Store<S> {
     $bugsnag: Client
   }
