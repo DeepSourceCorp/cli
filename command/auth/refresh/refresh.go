@@ -39,7 +39,7 @@ func NewCmdRefresh() *cobra.Command {
 	return cmd
 }
 
-func (opts *RefreshOptions) Run() error {
+func (*RefreshOptions) Run() error {
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {

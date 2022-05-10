@@ -5,6 +5,7 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
+	"github.com/mgutz/ansi"
 )
 
 // ==========
@@ -98,4 +99,16 @@ func checkInterrupt(err error) error {
 		return errors.New("Interrupt received. Exiting...")
 	}
 	return err
+}
+
+func GetSuccessMessage(msg string) string {
+	greenTickMark := ansi.Color("✔", "green")
+	return greenTickMark + " " + msg + "\n"
+}
+
+func GetFailureMessage(msg, errorMsg string) string {
+	if errorMsg != "" {
+		return ansi.Color("✗"+" "+msg+". "+"Error: "+errorMsg, "red")
+	}
+	return ansi.Color("✗"+" "+msg, "red")
 }
