@@ -2,6 +2,7 @@ package initialize
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -93,8 +94,10 @@ func (a *AnalyzerInitOpts) Run() (err error) {
 
 	// Create the required directories mentioned above
 	for _, dir := range directoriesToCreate {
-		if err = os.Mkdir(filepath.Join(a.ProjectRootPath, dir), 0o755); err != nil {
-			return err
+		if _, err := os.Stat(filepath.Join(a.ProjectRootPath, dir)); errors.Is(err, os.ErrNotExist) {
+			if err = os.Mkdir(filepath.Join(a.ProjectRootPath, dir), 0o755); err != nil {
+				return err
+			}
 		}
 	}
 
