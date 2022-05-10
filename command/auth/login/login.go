@@ -23,7 +23,6 @@ type LoginOptions struct {
 
 // NewCmdLogin handles the login functionality for the CLI
 func NewCmdLogin() *cobra.Command {
-
 	doc := heredoc.Docf(`
 		Log in to DeepSource using the CLI.
 
@@ -64,7 +63,6 @@ func NewCmdLogin() *cobra.Command {
 
 // Run executes the auth command and starts the login flow if not already authenticated
 func (opts *LoginOptions) Run() (err error) {
-
 	// Fetch config
 	cfg, _ := config.GetConfig()
 	opts.User = cfg.User
@@ -129,7 +127,7 @@ func (opts *LoginOptions) handleInteractiveLogin() error {
 	}
 	// Prompt the user for hostname only in the case of on-premise
 	if loginType == "DeepSource Enterprise" {
-		opts.HostName, err = utils.GetSingleLineInput(hostPromptMessage, hostPromptHelpText)
+		opts.HostName, err = utils.GetSingleLineInput(hostPromptMessage, hostPromptHelpText, "")
 		if err != nil {
 			return err
 		}

@@ -21,7 +21,6 @@ func ConfirmFromUser(msg, helpText string) (bool, error) {
 		Default:  true,
 		Help:     helpText,
 	}
-
 	err := survey.AskOne(confirmPrompt, &response)
 	if err != nil {
 		return true, checkInterrupt(err)
@@ -52,12 +51,12 @@ func SelectFromOptions(msg, helpText string, opts []string) (string, error) {
 
 // Used for Single Line Text Input
 // Being used for getting "Import root" of user for configuring meta of Go analyzer
-func GetSingleLineInput(msg, helpText string) (string, error) {
+func GetSingleLineInput(msg, helpText, defaultValue string) (string, error) {
 	response := ""
 	prompt := &survey.Input{
 		Renderer: survey.Renderer{},
 		Message:  msg,
-		Default:  "",
+		Default:  defaultValue,
 		Help:     helpText,
 	}
 
