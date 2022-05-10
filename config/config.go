@@ -9,8 +9,10 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
-var configDirFn = os.UserHomeDir
-var readFileFn = os.ReadFile
+var (
+	configDirFn = os.UserHomeDir
+	readFileFn  = os.ReadFile
+)
 
 const (
 	ConfigDirName   = "/.deepsource/"
@@ -38,7 +40,7 @@ func (cfg *CLIConfig) SetTokenExpiry(str string) {
 }
 
 // Checks if the token has expired or not
-func (cfg CLIConfig) IsExpired() bool {
+func (cfg *CLIConfig) IsExpired() bool {
 	if cfg.TokenExpiresIn.IsZero() {
 		return true
 	}
@@ -55,7 +57,7 @@ func (CLIConfig) configDir() (string, error) {
 }
 
 // configPath returns the file path to the config file.
-func (cfg CLIConfig) configPath() (string, error) {
+func (cfg *CLIConfig) configPath() (string, error) {
 	home, err := cfg.configDir()
 	if err != nil {
 		return "", err
@@ -63,7 +65,7 @@ func (cfg CLIConfig) configPath() (string, error) {
 	return filepath.Join(home, ConfigFileName), nil
 }
 
-//ReadFile reads the CLI config file.
+// ReadFile reads the CLI config file.
 func (cfg *CLIConfig) ReadConfigFile() error {
 	path, err := cfg.configPath()
 	if err != nil {
@@ -89,7 +91,6 @@ func (cfg *CLIConfig) ReadConfigFile() error {
 }
 
 func GetConfig() (*CLIConfig, error) {
-
 	if Cfg.Token != "" {
 		return &Cfg, nil
 	}
@@ -103,7 +104,6 @@ func GetConfig() (*CLIConfig, error) {
 
 // WriteFile writes the CLI config to file.
 func (cfg *CLIConfig) WriteFile() error {
-
 	data, err := toml.Marshal(cfg)
 	if err != nil {
 		return err
@@ -145,7 +145,6 @@ func (cfg *CLIConfig) Delete() error {
 }
 
 func (cfg *CLIConfig) VerifyAuthentication() error {
-
 	// Checking if the user has authenticated / logged in or not
 	if cfg.Token == "" {
 		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")

@@ -26,7 +26,7 @@ func NewCmdLogout() *cobra.Command {
 	return cmd
 }
 
-func (opts *LogoutOptions) Run() error {
+func (*LogoutOptions) Run() error {
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {

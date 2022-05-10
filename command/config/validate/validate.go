@@ -25,7 +25,6 @@ type Options struct{}
 // NewCmdValidate handles the validation of the DeepSource config (.deepsource.toml)
 // Internally it uses the package `configvalidator` to validate the config
 func NewCmdValidate() *cobra.Command {
-
 	o := Options{}
 	cmd := &cobra.Command{
 		Use:   "validate",
@@ -39,7 +38,7 @@ func NewCmdValidate() *cobra.Command {
 }
 
 // Run executes the command.
-func (o *Options) Run() error {
+func (*Options) Run() error {
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {
