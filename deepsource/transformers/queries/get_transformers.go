@@ -40,7 +40,7 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]transformers.Transformer, error) {
+func (TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]transformers.Transformer, error) {
 
 	req := graphql.NewRequest(listTransformersQuery)
 
