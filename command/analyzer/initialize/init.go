@@ -54,10 +54,10 @@ func NewCmdAnalyzerInit() *cobra.Command {
 func (a *AnalyzerInitOpts) Run() (err error) {
 	var msg, helpText string
 	pterm.Info.Printf("Initializing analyzer %s...\n", a.AnalyzerShortcodeArg)
-	a.AnalyzerTOMLData.Shortcode = a.AnalyzerShortcodeArg
+	a.AnalyzerTOMLData.Shortcode = strings.ToLower(a.AnalyzerShortcodeArg)
 	// Fetch the default analyzer name from the shortcode
 	// Eg: @deepsource/armory -> Armory
-	defaultAnalyzerName := strings.Title(strings.ToLower(strings.SplitAfter(a.AnalyzerShortcodeArg, "/")[1]))
+	defaultAnalyzerName := strings.Title(strings.SplitAfter(a.AnalyzerTOMLData.Shortcode, "/")[1])
 
 	// Collect name of the Analyzer
 	msg = "Please enter the name of the Analyzer?"
