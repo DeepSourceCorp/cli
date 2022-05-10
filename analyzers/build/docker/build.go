@@ -9,7 +9,6 @@ import (
 	"io"
 	"os"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/docker/docker/api/types"
@@ -44,11 +43,6 @@ type DockerBuildError struct {
 func (d *DockerBuildError) Error() string {
 	return d.Message
 }
-
-var (
-	m  sync.Mutex
-	wg sync.WaitGroup
-)
 
 func (d *DockerClient) BuildAnalyzerDockerImage() *DockerBuildError {
 	var err error
