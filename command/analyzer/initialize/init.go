@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	validator "github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/utils"
@@ -54,11 +55,14 @@ func (a *AnalyzerInitOpts) Run() (err error) {
 	var msg, helpText string
 	pterm.Info.Printf("Initializing analyzer %s...\n", a.AnalyzerShortcodeArg)
 	a.AnalyzerTOMLData.Shortcode = a.AnalyzerShortcodeArg
+	// Fetch the default analyzer name from the shortcode
+	// Eg: @deepsource/armory -> Armory
+	defaultAnalyzerName := strings.Title(strings.ToLower(strings.SplitAfter(a.AnalyzerShortcodeArg, "/")[1]))
 
 	// Collect name of the Analyzer
 	msg = "Please enter the name of the Analyzer?"
 	helpText = "The name of the Analyzer."
-	a.AnalyzerTOMLData.Name, err = utils.GetSingleLineInput(msg, helpText)
+	a.AnalyzerTOMLData.Name, err = utils.GetSingleLineInput(msg, helpText, defaultAnalyzerName)
 	if err != nil {
 		return err
 	}
@@ -66,7 +70,7 @@ func (a *AnalyzerInitOpts) Run() (err error) {
 	// Collect description of the Analyzer
 	msg = "Description of the Analyzer?"
 	helpText = "What does the Analyzer do?"
-	a.AnalyzerTOMLData.Description, err = utils.GetSingleLineInput(msg, helpText)
+	a.AnalyzerTOMLData.Description, err = utils.GetSingleLineInput(msg, helpText, "")
 	if err != nil {
 		return err
 	}
@@ -113,6 +117,7 @@ func (a *AnalyzerInitOpts) Run() (err error) {
 	if err != nil {
 		return err
 	}
+	pterm.Success.Printf("Analyzer %s set up successfully!\n", a.AnalyzerTOMLData.Shortcode)
 
 	return nil
 }
