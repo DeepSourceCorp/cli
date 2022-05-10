@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	dbuild "github.com/deepsourcelabs/cli/analyzers/build/docker"
-	validator "github.com/deepsourcelabs/cli/analyzers/validator"
+	build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
+	"github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -19,7 +19,7 @@ var (
 	issuesDirPath    string
 )
 
-type MacroVerifyOpts struct{}
+type AnalyzerVerifyOpts struct{}
 
 func NewCmdAnalyzerVerify() *cobra.Command {
 	cwd, _ := os.Getwd()
@@ -34,7 +34,7 @@ func NewCmdAnalyzerVerify() *cobra.Command {
 	analyzerTOMLPath = filepath.Join(projectRoot, configFolder, "analyzer.toml")
 	issuesDirPath = filepath.Join(projectRoot, configFolder, "issues/")
 
-	opts := MacroVerifyOpts{}
+	opts := AnalyzerVerifyOpts{}
 	cmd := &cobra.Command{
 		Use:   "verify",
 		Short: "Verify DeepSource Analyzers configuration",
@@ -50,7 +50,7 @@ func NewCmdAnalyzerVerify() *cobra.Command {
 }
 
 // Runs the command
-func (*MacroVerifyOpts) Run() (err error) {
+func (*AnalyzerVerifyOpts) Run() (err error) {
 	var validationErrors *[]validator.ValidationError
 	spin := utils.SpinnerUtils{}
 	configurationValid := true
@@ -136,7 +136,7 @@ func (*MacroVerifyOpts) Run() (err error) {
 		}
 	}
 
-	analyzerBuilder := dbuild.DockerClient{
+	analyzerBuilder := build.DockerClient{
 		ImageName:      dockerFileName,
 		DockerfilePath: dockerFilePath,
 		ImageTag:       generateImageVersion(7),
