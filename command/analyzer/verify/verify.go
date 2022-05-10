@@ -50,7 +50,7 @@ func NewCmdAnalyzerVerify() *cobra.Command {
 }
 
 // Runs the command
-func (opts *MacroVerifyOpts) Run() (err error) {
+func (*MacroVerifyOpts) Run() (err error) {
 	var validationErrors *[]validator.ValidationError
 	spin := utils.SpinnerUtils{}
 	configurationValid := true

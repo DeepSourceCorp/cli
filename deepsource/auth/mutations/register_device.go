@@ -29,7 +29,7 @@ type IGQLClient interface {
 	GQL() *graphql.Client
 }
 
-func (r RegisterDeviceRequest) Do(ctx context.Context, client IGQLClient) (*auth.Device, error) {
+func (RegisterDeviceRequest) Do(ctx context.Context, client IGQLClient) (*auth.Device, error) {
 	req := graphql.NewRequest(registerDeviceMutation)
 	req.Header.Set("Cache-Control", "no-cache")
 

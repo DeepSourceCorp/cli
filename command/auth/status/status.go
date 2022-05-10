@@ -34,7 +34,7 @@ func NewCmdStatus() *cobra.Command {
 	return cmd
 }
 
-func (opts *AuthStatusOptions) Run() error {
+func (*AuthStatusOptions) Run() error {
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {
