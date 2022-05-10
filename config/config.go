@@ -37,7 +37,7 @@ func (cfg *CLIConfig) SetTokenExpiry(str string) {
 }
 
 // Checks if the token has expired or not
-func (cfg CLIConfig) IsExpired() bool {
+func (cfg *CLIConfig) IsExpired() bool {
 	if cfg.TokenExpiresIn.IsZero() {
 		return true
 	}
@@ -54,7 +54,7 @@ func (CLIConfig) configDir() (string, error) {
 }
 
 // configPath returns the file path to the config file.
-func (cfg CLIConfig) configPath() (string, error) {
+func (cfg *CLIConfig) configPath() (string, error) {
 	home, err := cfg.configDir()
 	if err != nil {
 		return "", err

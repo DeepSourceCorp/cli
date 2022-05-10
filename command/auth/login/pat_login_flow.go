@@ -7,7 +7,7 @@ import (
 )
 
 // Starts the login flow for the CLI (using PAT)
-func (opts *LoginOptions) startPATLoginFlow(cfg *config.CLIConfig, token string) error {
+func (*LoginOptions) startPATLoginFlow(cfg *config.CLIConfig, token string) error {
 	// set personal access token (PAT)
 	cfg.Token = token
 
