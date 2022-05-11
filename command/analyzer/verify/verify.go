@@ -16,14 +16,15 @@ import (
 var (
 	analyzerTOMLPath string
 	issuesDirPath    string
+	projectRoot      string
+	configFolder     string = ".deepsource/analyzer"
 )
 
 type AnalyzerVerifyOpts struct{}
 
 func NewCmdAnalyzerVerify() *cobra.Command {
-	_, analyzerTOMLPath, issuesDirPath = utils.InitAnalyzerConfigurationPaths()
-
 	// Configuring the paths of analyzer.toml and issues directory
+	projectRoot, analyzerTOMLPath, issuesDirPath = utils.InitAnalyzerConfigurationPaths()
 	analyzerTOMLPath = filepath.Join(projectRoot, configFolder, "analyzer.toml")
 	issuesDirPath = filepath.Join(projectRoot, configFolder, "issues/")
 
