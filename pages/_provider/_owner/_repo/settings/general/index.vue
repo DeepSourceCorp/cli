@@ -75,7 +75,12 @@
             </label>
 
             <div class="h-8 mt-2">
-              <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
+              <z-select
+                v-if="selectedScope"
+                v-model="selectedScope"
+                spacing="py-1 px-2"
+                class="text-sm"
+              >
                 <z-option label="Granular (recommended)" value="granular"></z-option>
                 <z-option label="Broad" value="broad"></z-option>
               </z-select>
@@ -104,7 +109,12 @@
           class="hidden lg:grid"
         >
           <div class="h-8">
-            <z-select v-if="selectedScope" v-model="selectedScope" spacing="py-1" class="text-sm">
+            <z-select
+              v-if="selectedScope"
+              v-model="selectedScope"
+              spacing="py-1 px-2"
+              class="text-sm"
+            >
               <z-option label="Granular (recommended)" value="granular"></z-option>
               <z-option label="Broad" value="broad"></z-option>
             </z-select>
