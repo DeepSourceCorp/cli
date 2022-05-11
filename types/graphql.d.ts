@@ -260,6 +260,42 @@ declare module '*/gsrInstallationLanding.gql' {
 }
     
 
+declare module '*/getIntegrationInstallationUrl.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const getIntegrationInstallationUrl: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/installIntegration.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const installIntegration: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/uninstallIntegration.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const uninstallIntegration: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/updateIntegrationSettings.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updateIntegrationSettings: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/confirmInvitation.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1053,6 +1089,42 @@ declare module '*/watchedRepositoriesCount.gql' {
 }
     
 
+declare module '*/integrationDetail.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const integrationDetail: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/integrationLogoUrl.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const integrationLogoUrl: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/integrationsWithDetails.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const integrationsWithDetails: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/listIntegrations.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const listIntegrations: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/getTeamInviteInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1174,6 +1246,15 @@ declare module '*/details.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/id.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ownerId: DocumentNode;
 
   export default defaultDocument;
 }

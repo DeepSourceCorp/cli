@@ -1,0 +1,5 @@
+mutation uninstallIntegration($input: UninstallIntegrationInput!) {
+  uninstallIntegration(input: $input) {
+    ok
+  }
+}

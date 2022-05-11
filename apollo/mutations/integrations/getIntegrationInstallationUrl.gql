@@ -1,0 +1,5 @@
+mutation getIntegrationInstallationUrl($input: GetIntegrationInstallationURLInput!) {
+  getIntegrationInstallationUrl(input: $input) {
+    url
+  }
+}

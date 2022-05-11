@@ -1,6 +1,6 @@
 <template>
   <div class="pb-8">
-    <breadcrumb-container current-item="All" />
+    <breadcrumb-container :links="[{ label: 'Discover', route: '/discover' }, { label: 'All' }]" />
 
     <hero-header
       title="Discover"

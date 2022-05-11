@@ -39,12 +39,14 @@
   </div>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
-import { Context } from '@nuxt/types'
 import { ZTab, ZTag } from '@deepsourcelabs/zeal'
-import TeamDetailMixin from '~/mixins/teamDetailMixin'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import { Context } from '@nuxt/types'
+import { Component, mixins } from 'nuxt-property-decorator'
+
 import ActiveUserMixin from '~/mixins/activeUserMixin'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import TeamDetailMixin from '~/mixins/teamDetailMixin'
+
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 import { TeamMemberRoleChoices } from '~/types/types'
 
@@ -148,6 +150,14 @@ export default class TeamSettings extends mixins(
         isBeta: true,
         routeName: 'provider-owner-settings-issue-priority',
         validator: this.issuePriorityAvailable
+      },
+      {
+        name: 'integrations',
+        icon: 'list',
+        label: 'Integrations',
+        isBeta: true,
+        routeName: 'provider-owner-settings-integrations',
+        validator: this.canViewIntegrations
       }
     ]
   }
@@ -220,6 +230,18 @@ export default class TeamSettings extends mixins(
 
   get canGenerateSSHKeyPair(): boolean {
     return this.$gateKeeper.team(TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR, this.teamPerms.permission)
+  }
+
+  get canViewIntegrations(): boolean {
+    // Disable on prem
+    if (this.$config.onPrem) {
+      return false
+    }
+
+    return (
+      this.activeDashboardContext.type === 'team' &&
+      this.$gateKeeper.team(TeamPerms.MANAGE_INTEGRATIONS, this.teamPerms.permission)
+    )
   }
 
   head(): Record<string, string> {

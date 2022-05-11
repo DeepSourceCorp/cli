@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ BreadcrumbContainer ]] renders \`BreadcrumbContainer\` 1`] = `
+"<div class=\\"p-4 border-b border-ink-200\\">
+  <zbreadcrumb-stub separator=\\"/\\" class=\\"mb-px text-sm text-vanilla-100\\">
+    <zbreadcrumbitem-stub class=\\"cursor-pointer text-vanilla-400\\"><a>Discover</a></zbreadcrumbitem-stub>
+    <zbreadcrumbitem-stub class=\\"\\">All</zbreadcrumbitem-stub>
+  </zbreadcrumb-stub>
+</div>"
+`;

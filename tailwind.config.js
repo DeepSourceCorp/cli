@@ -66,6 +66,32 @@ module.exports = {
       maxWidth: {
         prose: '65ch',
         '3xs': '12rem'
+      },
+      animation: {
+        'glow-bg': 'glow 4s ease-out 1ms infinite'
+      },
+      keyframes: {
+        glow: {
+          '0%': {
+            filter: 'drop-shadow(0 0 150px rgba(69, 104, 220, 0.15))'
+          },
+
+          '40%': {
+            filter: 'drop-shadow(0 0 250px rgba(69, 104, 220, 0.15))'
+          },
+
+          '50%': {
+            filter: 'drop-shadow(0 0 275px rgba(69, 104, 220, 0.15))'
+          },
+
+          '80%': {
+            filter: 'drop-shadow(0 0 200px rgba(69, 104, 220, 0.15))'
+          },
+
+          '100%': {
+            filter: 'drop-shadow(0 0 150px rgba(69, 104, 220, 0.15))'
+          }
+        }
       }
     }
   }

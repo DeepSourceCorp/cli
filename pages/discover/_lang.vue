@@ -1,6 +1,8 @@
 <template>
   <div class="pb-8">
-    <breadcrumb-container :current-item="analyzerName" />
+    <breadcrumb-container
+      :links="[{ label: 'Discover', route: '/discover' }, { label: analyzerName }]"
+    />
 
     <hero-header
       :title="analyzerName ? `Discover ${analyzerName} projects` : 'Discover'"

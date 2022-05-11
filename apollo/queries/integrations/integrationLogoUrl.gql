@@ -1,0 +1,15 @@
+query integrationLogoUrl(
+  $shortcode: String!
+  $level: IntegrationSettingsLevel
+  $ownerId: ID
+  $repositoryId: ID
+) {
+  integration(
+    shortcode: $shortcode
+    level: $level
+    ownerId: $ownerId
+    repositoryId: $repositoryId
+  ) {
+    logo
+  }
+}

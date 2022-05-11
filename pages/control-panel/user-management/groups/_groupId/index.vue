@@ -147,7 +147,7 @@ export default class UserManagementUserDetails extends mixins(
     if (this.group && Object.keys(this.group).length < 1) {
       this.$nuxt.error({ statusCode: 404, message: `This page is not real` })
     }
-    this.totalCount = this.group.members.totalCount || 0
+    this.totalCount = this.group.members?.totalCount || 0
     this.refetch = false
   }
 

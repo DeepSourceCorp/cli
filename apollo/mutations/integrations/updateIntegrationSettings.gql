@@ -1,0 +1,5 @@
+mutation updateIntegrationSettings($input: UpdateIntegrationSettingsInput!) {
+  updateIntegrationSettings(input: $input) {
+    ok
+  }
+}

@@ -1,0 +1,5 @@
+query ownerId($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+  }
+}

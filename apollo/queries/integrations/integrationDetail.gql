@@ -1,0 +1,28 @@
+query integrationDetail(
+  $shortcode: String!
+  $level: IntegrationSettingsLevel
+  $ownerId: ID
+  $repositoryId: ID
+) {
+  integration(
+    shortcode: $shortcode
+    level: $level
+    ownerId: $ownerId
+    repositoryId: $repositoryId
+  ) {
+    shortcode
+    logo
+    status
+    installed
+    installedOn
+    enabledBy {
+      id
+      email
+      avatar
+      fullName
+    }
+    enabledOn
+    settings
+    options
+  }
+}

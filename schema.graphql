@@ -141,7 +141,7 @@ type Analyzer implements MaskPrimaryKeyNode {
   reviews(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerReviewConnection!
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
-  userSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection!
+  userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
   transformertoolSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, language: [String]): TransformerToolConnection!
   transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection!
@@ -241,7 +241,7 @@ type AuditLog implements MaskPrimaryKeyNode {
   alive: Boolean
   eventName: String!
   description: String!
-  actor: EnterpriseUser
+  actor: User
   ipAddress: String
   location: String
   reason: String
@@ -274,7 +274,7 @@ type AutoOnboardEvent implements MaskPrimaryKeyNode {
   owner: Owner!
   repository: Repository!
   template: ConfigTemplate!
-  createdBy: EnterpriseUser
+  createdBy: User
   status: AutoOnboardEventStatus!
   vcsPrUrl: String
 }
@@ -564,6 +564,17 @@ enum CheckStatus {
   CNCL
   READ
   NEUT
+}
+
+input ClearIntegrationRepositorySettingsInput {
+  shortcode: String!
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type ClearIntegrationRepositorySettingsPayload {
+  ok: Boolean
+  clientMutationId: String
 }
 
 input CommitAdhocConfigInput {
@@ -891,7 +902,7 @@ type EnterpriseGroup implements MaskPrimaryKeyNode {
   scimExternalId: String
   scimDisplayName: String
   name: String
-  members(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection!
+  members(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection!
   invitationCode: String
   groupusermembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupUserMembershipConnection!
@@ -939,11 +950,14 @@ type EnterpriseInstallationSetup implements MaskPrimaryKeyNode {
 type EnterpriseUser implements MaskPrimaryKeyNode {
   id: ID!
   lastLogin: DateTime
+  isSuperuser: Boolean!
   firstName: String!
   lastName: String!
   isStaff: Boolean!
   isActive: Boolean!
   dateJoined: DateTime!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
   scimId: String
   scimExternalId: String
   scimUsername: String
@@ -954,6 +968,7 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
+  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection!
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection!
@@ -966,10 +981,6 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   silenceRulesCreated(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection!
-  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection!
-  isSuperuser: Boolean!
-  createdAt: DateTime!
-  modifiedAt: DateTime!
   fullName: String
   team(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
   scimEnabled: Boolean
@@ -1068,6 +1079,16 @@ type GetBillingInfoPayload {
   clientMutationId: String
 }
 
+input GetIntegrationInstallationURLInput {
+  shortcode: String!
+  clientMutationId: String
+}
+
+type GetIntegrationInstallationURLPayload {
+  url: String
+  clientMutationId: String
+}
+
 input GetUpgradeCodeQualitySubscriptionPlanInfoInput {
   id: ID
   ownerId: Int
@@ -1153,7 +1174,7 @@ type GroupUserMembership implements MaskPrimaryKeyNode {
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  user: EnterpriseUser!
+  user: User!
   group: EnterpriseGroup!
 }
 
@@ -1223,6 +1244,55 @@ type IgnoreIssueForTestPatternsInRepositoryPayload {
   ok: Boolean
   checkIssueIds: [String]
   clientMutationId: String
+}
+
+input InstallIntegrationInput {
+  step: IntegrationInstallationStep!
+  shortcode: String!
+  ownerId: ID!
+  code: String!
+  state: String!
+  settings: GenericScalar
+  clientMutationId: String
+}
+
+type InstallIntegrationPayload {
+  nextStep: IntegrationInstallationStep
+  options: GenericScalar
+  installingOn: String
+  clientMutationId: String
+}
+
+enum IntegrationInstallationStep {
+  INSTALL
+  CONFIG_REQD
+  COMPLETE
+  EXPIRED
+}
+
+type IntegrationProvider {
+  shortcode: String
+  name: String
+  logo: String
+  installed: Boolean
+  installedOn: String
+  status: IntegrationProviderStatus
+  enabledBy: User
+  enabledOn: DateTime
+  settings: GenericScalar
+  options: GenericScalar
+}
+
+enum IntegrationProviderStatus {
+  ACTIVE
+  PAUSED
+  ERROR
+  CONFIG_REQUIRED
+}
+
+enum IntegrationSettingsLevel {
+  REPOSITORY
+  OWNER
 }
 
 enum InviteActions {
@@ -1469,6 +1539,7 @@ type Mutation {
   inviteTeamMembers(input: InviteTeamMembersInput!): InviteTeamMembersPayload
   removeTeamMember(input: RemoveTeamMemberInput!): RemoveTeamMemberPayload
   updateTeamMemberRole(input: UpdateTeamMemberRoleInput!): UpdateTeamMemberRolePayload
+  transferTeamOwnership(input: TransferTeamOwnershipInput!): TransferTeamOwnershipPayload
   syncRepositoriesForOwner(input: SyncRepositoriesForOwnerInput!): SyncRepositoriesForOwnerPayload
   createAutofixRun(input: CreateAutofixRunInput!): CreateAutofixRunPayload
   createdPullRequest(input: CreatePullRequestInput!): CreatePullRequestPayload
@@ -1491,6 +1562,8 @@ type Mutation {
   updateBookmarkedIssue(input: UpdateBookmarkedIssueInput!): UpdateBookmarkedIssuePayload
   triggerAdhocRun(input: TriggerAdHocRunInput!): TriggerAdHocRunPayload
   activateGsrRepository(input: ActivateGSRRepositoryInput!): ActivateGSRRepositoryPayload
+  installIntegration(input: InstallIntegrationInput!): InstallIntegrationPayload
+  getIntegrationInstallationUrl(input: GetIntegrationInstallationURLInput!): GetIntegrationInstallationURLPayload
   installation(input: GithubInstallationLandingInput!): GithubInstallationLandingPayload
   gheInstallationLanding(input: GithubEnterpriseInstallationLandingInput!): GithubEnterpriseInstallationLandingPayload
   bitbucketInstallationLanding(input: BitbucketInstallationLandingInput!): BitbucketInstallationLandingPayload
@@ -1522,6 +1595,9 @@ type Mutation {
   verifyGsrSetup(input: VerifyGSRSetupInput!): VerifyGSRSetupPayload
   updateIssuePriority(input: UpdateIssuePriorityInput!): UpdateIssuePriorityPayload
   unsetIssuePriority(input: UnsetIssuePriorityInput!): UnsetIssuePriorityPayload
+  clearIntegrationRepositorySettings(input: ClearIntegrationRepositorySettingsInput!): ClearIntegrationRepositorySettingsPayload
+  updateIntegrationSettings(input: UpdateIntegrationSettingsInput!): UpdateIntegrationSettingsPayload
+  uninstallIntegration(input: UninstallIntegrationInput!): UninstallIntegrationPayload
 }
 
 enum NextActionChoice {
@@ -1544,14 +1620,14 @@ type Owner implements MaskPrimaryKeyNode {
   billingEmail: String
   billingAddress: String
   customerId: String
-  primaryUser: EnterpriseUser
+  primaryUser: User
   features: GenericScalar
   gsrSetupPending: Boolean!
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   team: Team
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
-  userSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection!
+  userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   configTemplates(offset: Int, before: String, after: String, first: Int, last: Int, shortcode: String, title_Icontains: String): ConfigTemplateConnection
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   ownerSetting: OwnerSetting
@@ -1652,6 +1728,8 @@ type Query {
   issuePriorityType(offset: Int, before: String, after: String, first: Int, last: Int, weight: Int, verboseName: String, slug: String): IssuePriorityTypeConnection
   issue(shortcode: String!): Issue
   issuesWithPriority(isIssuePrioritySet: Boolean = false, objectId: ID!, level: IssuePriorityLevel!, analyzerShortcode: String, offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection
+  integrations(level: IntegrationSettingsLevel, ownerId: ID, repositoryId: ID, onlyInstalled: Boolean): [IntegrationProvider]
+  integration(shortcode: String!, level: IntegrationSettingsLevel, ownerId: ID, repositoryId: ID): IntegrationProvider
   transactions(userId: Int!, offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection
   owner(login: String!, provider: VCSProviderChoices!): Owner
   team(login: String!, provider: VCSProviderChoices!): Team
@@ -1869,7 +1947,7 @@ type RepositoryCollaborator implements MaskPrimaryKeyNode {
   alive: Boolean
   id: ID!
   repository: Repository!
-  user: EnterpriseUser!
+  user: User!
   permission: RepositoryCollaboratorPermission!
 }
 
@@ -1913,7 +1991,7 @@ type RepositoryIssue implements MaskPrimaryKeyNode {
   lastSeen: DateTime
   weight: Int!
   checkSet(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
-  userSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection!
+  userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   issueType: String
   title: String
   shortcode: String
@@ -2088,7 +2166,7 @@ type SilenceRule implements MaskPrimaryKeyNode {
   filePath: String
   repository: Repository!
   issue: Issue!
-  creator: EnterpriseUser
+  creator: User
   objectId: Int!
   metadata: GenericScalar
 }
@@ -2230,11 +2308,11 @@ type Team implements MaskPrimaryKeyNode {
   billingEmail: String
   billingAddress: String
   customerId: String
-  primaryUser: EnterpriseUser
+  primaryUser: User
   gsrSetupPending: Boolean!
   ownerPtr: Owner!
   name: String!
-  members(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection!
+  members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
   syncPermissionsWithVcs: Boolean!
   teammemberSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
@@ -2302,7 +2380,7 @@ type TeamMember implements MaskPrimaryKeyNode {
   alive: Boolean
   role: TeamMemberRoleChoices
   team: Team!
-  user: EnterpriseUser!
+  user: User!
   isPrimaryUser: Boolean
 }
 
@@ -2390,7 +2468,7 @@ type Transaction implements MaskPrimaryKeyNode {
   alive: Boolean
   transactionType: TransactionTransactionType!
   amount: Int!
-  user: EnterpriseUser!
+  user: User!
   reason: TransactionReason!
   objectId: Int
   through: String
@@ -2416,6 +2494,17 @@ enum TransactionReason {
 enum TransactionTransactionType {
   CRD
   DBT
+}
+
+input TransferTeamOwnershipInput {
+  teamId: ID!
+  newPrimaryUserId: ID!
+  clientMutationId: String
+}
+
+type TransferTeamOwnershipPayload {
+  ok: Boolean
+  clientMutationId: String
 }
 
 type TransformerReview implements MaskPrimaryKeyNode {
@@ -2582,6 +2671,17 @@ type TriggerVerifyGSRSSHPayload {
 
 scalar UUID
 
+input UninstallIntegrationInput {
+  shortcode: String!
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type UninstallIntegrationPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input UnsetIssuePriorityInput {
   issueShortcode: String!
   level: IssuePriorityLevel!
@@ -2723,6 +2823,20 @@ input UpdateGroupTeamRoleInput {
 }
 
 type UpdateGroupTeamRolePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateIntegrationSettingsInput {
+  shortcode: String!
+  level: IntegrationSettingsLevel!
+  ownerId: ID
+  repositoryId: ID
+  settings: GenericScalar!
+  clientMutationId: String
+}
+
+type UpdateIntegrationSettingsPayload {
   ok: Boolean
   clientMutationId: String
 }
@@ -2901,6 +3015,7 @@ type User implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
+  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection!
@@ -2913,7 +3028,6 @@ type User implements MaskPrimaryKeyNode {
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   silenceRulesCreated(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection!
-  accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection
   fullName: String
   availableCredits: Float
   referralUrl: String
@@ -2930,6 +3044,17 @@ type User implements MaskPrimaryKeyNode {
   connectedVcsProviders: [VCSProviderChoices]
 }
 
+type UserConnection {
+  pageInfo: PageInfo!
+  edges: [UserEdge]!
+  totalCount: Int
+}
+
+type UserEdge {
+  node: User
+  cursor: String!
+}
+
 type UserPreference implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -2937,7 +3062,7 @@ type UserPreference implements MaskPrimaryKeyNode {
   alive: Boolean
   starredRepositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
   watchedRepositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
-  user: EnterpriseUser
+  user: User
 }
 
 type UserPreferenceConnection {

@@ -32,7 +32,7 @@ declare module 'vuex/types/index' {
   }
 }
 
-export default ({ $config, $bugsnag, $toast }: Context, inject: Inject): void => {
+export default ({ $config, $bugsnag, app }: Context, inject: Inject): void => {
   /**
    * Log error to reporting service and show a toast to the user
    *
@@ -45,16 +45,24 @@ export default ({ $config, $bugsnag, $toast }: Context, inject: Inject): void =>
    */
   const logErrorAndToast: logErrorAndToast = function (error, toastMessage, viewer, metadata) {
     const { context, params } = metadata ?? { context: null, params: null }
+    const bugsnag = process.client ? app.$bugsnag : $bugsnag
 
-    if (!$config.onPrem && $bugsnag) {
-      $bugsnag.notify(error, (event) => {
-        event.context = context ?? toastMessage
-        if (viewer) event.setUser(viewer.id, viewer.email, viewer.firstName)
-        if (params) event.addMetadata('errorParams', params)
-      })
+    if (!$config.onPrem && bugsnag) {
+      bugsnag.notify(
+        error,
+        (event: {
+          context: string | undefined
+          setUser: (id: string, email: string, firstName: string) => void
+          addMetadata: (key: string, values: Record<string, unknown>) => void
+        }) => {
+          event.context = context ?? toastMessage
+          if (viewer) event.setUser(viewer.id, viewer.email, viewer.firstName)
+          if (params) event.addMetadata('errorParams', params)
+        }
+      )
     }
-    if (!process.server && toastMessage) {
-      $toast.danger(toastMessage)
+    if (process.client && toastMessage) {
+      app.$toast.danger(toastMessage)
     }
   }
 

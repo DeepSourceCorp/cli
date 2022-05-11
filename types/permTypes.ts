@@ -15,7 +15,8 @@ export enum TeamPerms {
   AUTO_ONBOARD_VIEW_TEMPLATE = 'autoOnboardViewTemplate',
   AUTO_ONBOARD_REPOSITORIES = 'autoOnboardRepositories',
   MANAGE_WEBHOOKS = 'manageWebhooks',
-  MANAGE_OWNER_ISSUE_PRIORITY = 'manageIssuePriority'
+  MANAGE_OWNER_ISSUE_PRIORITY = 'manageIssuePriority',
+  MANAGE_INTEGRATIONS = 'manageIntegrations'
 }
 
 export enum RepoPerms {
@@ -42,7 +43,8 @@ export enum RepoPerms {
   ACTIVATE_REPOSITORY = 'activateRepository',
   CHANGE_ISSUE_PRIORITY = 'changeIssuePriority',
   CHANGE_PRIORITY_SETTINGS_TO_REPORT = 'changePrioritySettingsToReport',
-  CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON = 'changePrioritySettingsToBlockPrsOn'
+  CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON = 'changePrioritySettingsToBlockPrsOn',
+  CHANGE_INTEGRATION_SETTINGS = 'changeIntegrationSettings'
 }
 
 export enum AppFeatures {

@@ -24,6 +24,7 @@ import {
 import { GraphqlError } from '~/types/apollo-graphql-types'
 
 import OwnerDetailQuery from '~/apollo/queries/owner/details.gql'
+import OwnerIDQuery from '~/apollo/queries/owner/id.gql'
 import AccountSetupStatus from '~/apollo/queries/owner/accountSetupStatus.gql'
 import AppConfig from '~/apollo/queries/owner/appConfig.gql'
 import IssueTrendsGQLQuery from '~/apollo/queries/owner/issueTrends.gql'
@@ -167,6 +168,7 @@ export const mutations: MutationTree<OwnerDetailModuleState> = {
 
 // Actions ------------------------------------------
 export enum OwnerDetailActions {
+  FETCH_OWNER_ID = 'fetchOwnerId',
   FETCH_OWNER_DETAILS = 'fetchOwnerDetails',
   FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings',
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
@@ -205,6 +207,12 @@ export enum OwnerDetailActions {
 }
 
 interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
+  [OwnerDetailActions.FETCH_OWNER_ID]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
+
   [OwnerDetailActions.FETCH_OWNER_DETAILS]: (
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
@@ -406,6 +414,22 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
 }
 
 export const actions: OwnerDetailModuleActions = {
+  async [OwnerDetailActions.FETCH_OWNER_ID]({ commit }, args) {
+    try {
+      const response = await this.$fetchGraphqlData(
+        OwnerIDQuery,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+    } catch (e) {
+      this.$logErrorAndToast(e as Error)
+    }
+  },
+
   async [OwnerDetailActions.FETCH_OWNER_DETAILS]({ commit }, args) {
     try {
       commit(OwnerDetailMutations.SET_LOADING, true)

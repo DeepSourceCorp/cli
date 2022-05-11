@@ -1,0 +1,7 @@
+mutation installIntegration($input: InstallIntegrationInput!) {
+  installIntegration(input: $input) {
+    nextStep
+    options
+    installingOn
+  }
+}

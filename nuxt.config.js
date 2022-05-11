@@ -131,7 +131,13 @@ export default {
     return plugins
   },
 
-  ignore: IS_ON_PREM ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*'] : [],
+  ignore: IS_ON_PREM
+    ? [
+        '**/_provider/_owner/settings/billing/*',
+        '**/components/Billing/*',
+        '**/_provider/_owner/settings/integrations/*'
+      ]
+    : ['**/_provider/_owner/settings/integrations/jira'],
 
   loadingIndicator: {
     name: 'pulse',

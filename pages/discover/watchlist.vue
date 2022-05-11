@@ -1,6 +1,8 @@
 <template>
   <div class="pb-8">
-    <breadcrumb-container current-item="Watchlist" />
+    <breadcrumb-container
+      :links="[{ label: 'Discover', route: '/discover' }, { label: 'Watchlist' }]"
+    />
 
     <hero-header
       title="Watchlist"

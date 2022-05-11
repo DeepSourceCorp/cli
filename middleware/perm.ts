@@ -1,5 +1,4 @@
-import { Middleware } from '@nuxt/types'
-import { Store } from 'vuex'
+import { Middleware, Context } from '@nuxt/types'
 import { Route } from 'vue-router'
 import { ActiveUserActions } from '~/store/user/active'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
@@ -9,10 +8,24 @@ import { DashboardContext } from '~/mixins/activeUserMixin'
 
 const passList = ['github', 'bitbucket', 'gitlab']
 
-function getPermsToCheck(route: Route): {
+interface IPerms {
   repoPerms: Array<RepoPerms[]>
   teamPerms: Array<TeamPerms[]>
-} {
+}
+interface IProviderOwner {
+  provider: string
+  owner: string
+}
+
+export type RouteMetaDataHook = (context: Context) => IProviderOwner
+
+/**
+ * Get repository and team permissions from route meta properties
+ *
+ * @param route {Route}
+ * @returns {IPerms}
+ */
+function getPermsToCheck(route: Route): IPerms {
   // each route will have it's own team perms and repo perms
   const repoPermsArray: Array<RepoPerms[]> = []
   const teamPermsArray: Array<TeamPerms[]> = []
@@ -33,14 +46,64 @@ function getPermsToCheck(route: Route): {
   }
 }
 
-async function getRepoRole(
-  route: Route,
-  store: Store<any>
-): Promise<RepositoryCollaboratorPermission | void> {
+/**
+ * Get hook functions to evaluate from route meta properties
+ *
+ * @param route {Route}
+ * @returns {RouteMetaDataHook[]}
+ */
+function getHooksToEvaluate(route: Route): RouteMetaDataHook[] {
+  const hooks: Array<RouteMetaDataHook> = []
+
+  route.meta?.forEach((meta: { auth?: { metaDataHook: RouteMetaDataHook } }) => {
+    if (typeof meta.auth?.metaDataHook === 'function') {
+      hooks.push(meta.auth.metaDataHook)
+    }
+  })
+
+  return hooks
+}
+
+/**
+ * Get provider and owner information from route params or after evaluating the hook functions
+ *
+ * @param context {Context}
+ * @returns {IProviderOwner}
+ */
+function getProviderAndOwner(context: Context): IProviderOwner {
+  const { route } = context
+  let provider = route.params.provider
+  let owner = ''
+
+  owner = route.name?.startsWith('onboard-provider-login') ? route.params.login : route.params.owner
+
+  const hooks = getHooksToEvaluate(route)
+
+  hooks.forEach((hookFn) => {
+    const result = hookFn(context)
+
+    // Ensure owner and provider is never set to undefined
+    owner = result.owner || owner
+    provider = result.provider || provider
+  })
+
+  return { provider, owner }
+}
+
+/**
+ * Fetch the repository role for a user
+ *
+ * @param context {Context}
+ * @returns {Promise<RepositoryCollaboratorPermission | void>}
+ */
+async function getRepoRole(context: Context): Promise<RepositoryCollaboratorPermission | void> {
+  const { route, store } = context
+
   if (!route.name?.startsWith('provider-owner-repo')) {
     return
   }
-  const { provider, owner, repo } = route.params
+  const { repo } = route.params
+  const { provider, owner } = getProviderAndOwner(context)
 
   if (provider && owner && repo) {
     if (!store.state.repository.detail.repositoryuserPermissionMeta) {
@@ -56,17 +119,16 @@ async function getRepoRole(
     }
   }
 }
-async function getTeamRole(route: Route, store: Store<any>): Promise<TeamMemberRoleChoices | void> {
-  let provider = ''
-  let owner = ''
 
-  if (route.name?.startsWith('onboard-provider-login')) {
-    provider = route.params.provider
-    owner = route.params.login
-  } else {
-    provider = route.params.provider
-    owner = route.params.owner
-  }
+/**
+ * Fetch the team role for a user
+ *
+ * @param context {Context}
+ * @returns {Promise<TeamMemberRoleChoices | void>}
+ */
+async function getTeamRole(context: Context): Promise<TeamMemberRoleChoices | void> {
+  const { provider, owner } = getProviderAndOwner(context)
+  const { store } = context
 
   await store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
   const viewer = store.state.user.active.viewer as User
@@ -82,14 +144,15 @@ async function getTeamRole(route: Route, store: Store<any>): Promise<TeamMemberR
   }
 }
 
-const permsMiddlware: Middleware = async ({
-  store,
-  route,
-  error,
-  $gateKeeper,
-  $config,
-  $bugsnag
-}) => {
+/**
+ * The perms middleware
+ *
+ * @param context {Context}
+ * @returns {Middleware}
+ */
+const permsMiddlware: Middleware = async (context) => {
+  const { store, route, error, $gateKeeper, $config, $bugsnag } = context
+
   /**
    * Log error to bugsnag
    *
@@ -120,7 +183,7 @@ const permsMiddlware: Middleware = async ({
     let allowRepo = false
 
     if (repoPerms.length) {
-      const role = await getRepoRole(route, store)
+      const role = await getRepoRole(context)
       if (role) {
         // I know, reduce is not great, but hear me out.
         // We loop over the array of perms, and check if a page perm is not valid.
@@ -140,7 +203,7 @@ const permsMiddlware: Middleware = async ({
 
     let allowTeam = false
     if (teamPerms.length) {
-      const role = await getTeamRole(route, store)
+      const role = await getTeamRole(context)
       if (role) {
         // Just like repo perms, team perms is handled
         allowTeam = teamPerms.reduce((shouldAllow: boolean, currentPermMap: TeamPerms[]) => {

@@ -1,0 +1,18 @@
+query listIntegrations(
+  $level: IntegrationSettingsLevel
+  $ownerId: ID
+  $repositoryId: ID
+  $onlyInstalled: Boolean
+) {
+  integrations(
+    level: $level
+    ownerId: $ownerId
+    repositoryId: $repositoryId
+    onlyInstalled: $onlyInstalled
+  ) {
+    shortcode
+    name
+    logo
+    installed
+  }
+}
