@@ -17,7 +17,10 @@ func makeQuery(url string, body []byte, bodyMimeType string) ([]byte, error) {
 		Timeout: time.Second * 60,
 	}
 
-	req, _ := http.NewRequest("POST", url, bytes.NewBuffer(body))
+	req, err := http.NewRequest("POST", url, bytes.NewBuffer(body))
+	if err != nil {
+		return nil, err
+	}
 	req.Header.Set("Content-Type", bodyMimeType)
 	res, err := httpClient.Do(req)
 	if err != nil {
