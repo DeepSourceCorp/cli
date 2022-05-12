@@ -138,12 +138,10 @@
 
         <div class="h-8 bg-cherry hover:bg-opacity-80">
           <z-button
-            :is-loading="uninstallingIntegration"
             icon="x"
             button-type="ghost"
             color="ink-300"
             label="Uninstall Slack"
-            loading-label="Uninstalling Slack"
             size="small"
             class="w-full bg-cherry md:place-self-end hover:bg-opacity-0 md:w-40"
             @click="showConfirm = true"
@@ -172,7 +170,7 @@
               size="small"
               class="modal-primary-action"
               @click="uninstallIntegrationHandler"
-              >Yes</z-button
+              >Yes, uninstall Slack</z-button
             >
           </div>
         </template>
