@@ -64,7 +64,8 @@ export async function refetchStatus(): Promise<void> {
           shortlink: shortLink,
           components
         } = item
-        const componentAffected = components.map((component) => component.name).join(', ')
+
+        const componentAffected = components?.map((component) => component.name).join(', ') ?? []
 
         if (item.status === 'scheduled') {
           spawn(

@@ -48,7 +48,7 @@ export interface ScheduledMaintainenceT {
   started_at: string
   page_id: string
   incident_updates: IncidentUpdate[]
-  components: Component[]
+  components?: Component[]
   scheduled_for: string
   scheduled_until: string
 }
