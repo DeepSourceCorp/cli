@@ -4,7 +4,7 @@ build:
 build_local:
 	cd cmd/deepsource && go build -tags static_all -o /tmp/deepsource .
 
-test:
+run_test:
 	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueWorkflow -count=1
 	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueFileWorkflow -count=1
 	echo "\n====TESTING DEEPSOURCE PACKAGE====\n"
@@ -13,6 +13,7 @@ test:
 	go test -v ./configvalidator/... -count=1
 	echo "\n====CALCULATING TEST COVERAGE FOR ENTIRE PACKAGE====\n"
 	go test -v -coverpkg=./... -coverprofile=coverage.out -count=1 ./...
+	sed -i 's|github.com/deepsourcelabs/cli|/home/runner/work/cli/cli|g' coverage.out
 
 test_setup:
 	mkdir -p ${CODE_PATH}
