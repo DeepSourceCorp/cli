@@ -5,8 +5,6 @@ import (
 	"strings"
 )
 
-var configFolder string = ".deepsource/analyzer"
-
 // Extracts the path of the config sent as a parameter in the user repo
 // Checks in the current working directory as well as the root directory
 // of the project
