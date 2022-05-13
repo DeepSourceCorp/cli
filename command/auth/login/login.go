@@ -127,7 +127,7 @@ func (opts *LoginOptions) handleInteractiveLogin() error {
 	}
 	// Prompt the user for hostname only in the case of on-premise
 	if loginType == "DeepSource Enterprise" {
-		opts.HostName, err = utils.GetSingleLineInput(hostPromptMessage, hostPromptHelpText)
+		opts.HostName, err = utils.GetSingleLineInput(hostPromptMessage, hostPromptHelpText, "")
 		if err != nil {
 			return err
 		}
