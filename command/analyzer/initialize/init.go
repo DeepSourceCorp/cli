@@ -8,14 +8,13 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/deepsourcelabs/cli/analyzers/config"
 	validator "github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pelletier/go-toml"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
-
-var SDKLanguageOpts = []string{"Python", "Go", "JavaScript"}
 
 type SDKResponse struct {
 	SDKRequired bool
@@ -43,7 +42,9 @@ func NewCmdAnalyzerInit() *cobra.Command {
 		ConfirmationPrompt:    utils.ConfirmFromUser,
 		SingleOptionPrompt:    utils.SelectFromOptions,
 	}
-	opts.ProjectRootPath, opts.AnalyzerTOMLPath, opts.IssuesDirectoryPath = utils.InitAnalyzerConfigurationPaths()
+
+	// Fetch the project root path and analyzer.toml path
+	opts.ProjectRootPath, opts.AnalyzerTOMLPath, opts.IssuesDirectoryPath = config.InitAnalyzerConfigurationPaths()
 
 	cmd := &cobra.Command{
 		Use:   "init",
@@ -63,7 +64,7 @@ func NewCmdAnalyzerInit() *cobra.Command {
 			if err != nil {
 				return fmt.Errorf("Analyzer initialization failed. Error: %s", err)
 			}
-			if err = opts.writeConfig(analysisConfigBytes); err != nil {
+			if err = opts.writeAnalyzerTOMLConfig(analysisConfigBytes); err != nil {
 				return fmt.Errorf("Analyzer initialization failed. Error: %s", err)
 			}
 			pterm.Success.Printf("Analyzer %s set up successfully!\n", opts.AnalyzerTOMLData.Shortcode)
@@ -73,11 +74,15 @@ func NewCmdAnalyzerInit() *cobra.Command {
 	return cmd
 }
 
+// Initialize the Analyzer
 func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	var err error
 	var msg, helpText string
+	supportedSDKS := getSupportedSDKs()
+
 	pterm.Info.Printf("Initializing analyzer %s...\n", a.AnalyzerShortcodeArg)
 	a.AnalyzerTOMLData.Shortcode = strings.ToLower(a.AnalyzerShortcodeArg)
+
 	// Fetch the default analyzer name from the shortcode
 	// Eg: @deepsource/armory -> Armory
 	defaultAnalyzerName := strings.Title(strings.SplitAfter(a.AnalyzerTOMLData.Shortcode, "/")[1])
@@ -85,33 +90,32 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	// Collect name of the Analyzer
 	msg = "Please enter the name of the Analyzer?"
 	helpText = "The name of the Analyzer."
-	a.AnalyzerTOMLData.Name, err = a.SingleLineInputPrompt(msg, helpText, defaultAnalyzerName)
-	if err != nil {
+	if a.AnalyzerTOMLData.Name, err = a.SingleLineInputPrompt(msg, helpText, defaultAnalyzerName); err != nil {
 		return nil, err
 	}
 
 	// Collect description of the Analyzer
 	msg = "Description of the Analyzer?"
 	helpText = "What does the Analyzer do?"
-	a.AnalyzerTOMLData.Description, err = a.DescriptionPrompt(msg, helpText, "")
-	if err != nil {
+	if a.AnalyzerTOMLData.Description, err = a.DescriptionPrompt(msg, helpText, ""); err != nil {
 		return nil, err
 	}
 
-	// Check if DeepSource SDK is needed or not?
-	msg = "Would you like to use DeepSource Analyzer SDK to build your Analyzer?"
-	helpText = "DeepSource SDKs help you to easily create an Analyzer"
-	a.SDKInput.SDKRequired, err = a.ConfirmationPrompt(msg, helpText)
-	if err != nil {
-		return nil, err
-	}
+	if len(supportedSDKS) > 0 {
 
-	if a.SDKInput.SDKRequired {
-		msg = "Which language do you want the SDK for:"
-		helpText = "Choose the language for which the SDK will be generated"
-		a.SDKInput.SDKLanguage, err = a.SingleOptionPrompt(msg, helpText, SDKLanguageOpts)
-		if err != nil {
+		// Check if DeepSource SDK is needed or not?
+		msg = "Would you like to use DeepSource Analyzer SDK to build your Analyzer?"
+		helpText = "DeepSource SDKs help you to easily create an Analyzer"
+		if a.SDKInput.SDKRequired, err = a.ConfirmationPrompt(msg, helpText); err != nil {
 			return nil, err
+		}
+
+		if a.SDKInput.SDKRequired {
+			msg = "Which language do you want the SDK for:"
+			helpText = "Choose the language for which the SDK will be generated"
+			if a.SDKInput.SDKLanguage, err = a.SingleOptionPrompt(msg, helpText, supportedSDKS); err != nil {
+				return nil, err
+			}
 		}
 	}
 
@@ -125,23 +129,29 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	return &buf, nil
 }
 
-func (a *AnalyzerInitOpts) writeConfig(buf *bytes.Buffer) (err error) {
-	// Input complete. Start with generating analyzer.toml and issue descriptions.
+// Writes the Analyzer TOML data to the file
+func (a *AnalyzerInitOpts) writeAnalyzerTOMLConfig(buf *bytes.Buffer) (err error) {
 	// Create the .deepsource/analyzer directory and issues/ directory
 	directoriesToCreate := []string{".deepsource", ".deepsource/analyzer", ".deepsource/analyzer/issues/"}
 
 	// Create the required directories mentioned above
 	for _, dir := range directoriesToCreate {
 		if _, err := os.Stat(filepath.Join(a.ProjectRootPath, dir)); errors.Is(err, os.ErrNotExist) {
-			if err = os.Mkdir(filepath.Join(a.ProjectRootPath, dir), 0750); err != nil {
+			if err = os.Mkdir(filepath.Join(a.ProjectRootPath, dir), 0o750); err != nil {
 				return err
 			}
 		}
 	}
 
 	// Write the input data to analyzer.toml
-	if err = os.WriteFile(a.AnalyzerTOMLPath, buf.Bytes(), 0644); err != nil {
+	if err = os.WriteFile(a.AnalyzerTOMLPath, buf.Bytes(), 0o644); err != nil {
 		return err
 	}
 	return
+}
+
+// Returns the list of supported SDKs
+// TODO: Send the list of supported SDKs from here once we start supporting any
+func getSupportedSDKs() []string {
+	return []string{""}
 }
