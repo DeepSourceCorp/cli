@@ -76,6 +76,37 @@ tags = []
   command = ""
 `,
 		},
+		{
+			AnalyzerShortcode:   "@deepsource/demo-go",
+			AnalyzerName:        "Go Analyzer",
+			AnalyzerDescription: "This is a golang analyzer",
+			SDKRequired:         true,
+			SDKLanguage:         "Go",
+			ExpectedConfig: `name = "Go Analyzer"
+shortcode = "@deepsource/demo-go"
+description = "This is a golang analyzer"
+category = ""
+tags = []
+
+[urls]
+  source = ""
+  documentation = ""
+  bug_tracker = ""
+
+[environment_variables]
+
+[analysis]
+  command = ""
+
+[build]
+  builder = ""
+  dockerfile = ""
+  script = ""
+
+[test]
+  command = ""
+`,
+		},
 	}
 
 	for _, tc := range testCases {
@@ -84,6 +115,7 @@ tags = []
 		descriptionInputResponse = tc.AnalyzerDescription
 		confirmationResponse = tc.SDKRequired
 		singleOptionPromptResponse = tc.SDKLanguage
+
 		buf, err := opts.initAnalyzer()
 		if err != nil {
 			t.Error(err)

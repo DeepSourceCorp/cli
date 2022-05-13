@@ -36,6 +36,7 @@ type AnalyzerInitOpts struct {
 }
 
 func NewCmdAnalyzerInit() *cobra.Command {
+	cwd, _ := os.Getwd()
 	opts := AnalyzerInitOpts{
 		SingleLineInputPrompt: utils.GetSingleLineInput,
 		DescriptionPrompt:     utils.GetSingleLineInput,
@@ -43,11 +44,18 @@ func NewCmdAnalyzerInit() *cobra.Command {
 		SingleOptionPrompt:    utils.SelectFromOptions,
 	}
 	opts.ProjectRootPath, opts.AnalyzerTOMLPath, opts.IssuesDirectoryPath = utils.InitAnalyzerConfigurationPaths()
+
 	cmd := &cobra.Command{
 		Use:   "init",
 		Short: "Initialize DeepSource Analyzer",
 		Args:  utils.ExactArgs(1),
 		RunE: func(_ *cobra.Command, args []string) error {
+			// Check if the analyzer.toml already exists. If yes, display that the analyzer already initialized at `.deepsource/analyzer/analyzer.toml`
+			if _, err := os.Stat(opts.AnalyzerTOMLPath); err == nil {
+				pterm.Info.Printf("Analyzer already initialized at %s. Exiting...\n", strings.TrimPrefix(opts.AnalyzerTOMLPath, cwd+"/"))
+				return nil
+			}
+
 			if len(args) > 0 {
 				opts.AnalyzerShortcodeArg = args[0]
 			}
