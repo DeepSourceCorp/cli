@@ -44,7 +44,7 @@
     <z-tabs class="mt-5">
       <z-tab-list class="px-4 pb-0 border-b border-ink-200">
         <z-tab-item class="flex items-center space-x-1" border-active-color="vanilla-400">
-          <span>Occurences</span>
+          <span>Occurrences</span>
           <z-tag
             v-if="checkIssues.totalCount"
             text-size="xs"

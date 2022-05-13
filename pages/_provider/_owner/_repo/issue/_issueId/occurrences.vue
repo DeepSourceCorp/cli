@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col p-4 gap-y-4">
-    <issue-occurence-section @filtersUpdated="addFilters"></issue-occurence-section>
+    <issue-occurrence-section @filtersUpdated="addFilters"></issue-occurrence-section>
     <div class="grid grid-cols-12">
       <!-- Issue list -->
       <div class="flex flex-col col-span-full lg:col-span-8 gap-y-4">
@@ -52,7 +52,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ZPagination } from '@deepsourcelabs/zeal'
-import { IssueDescription, IssueOccurenceSection } from '@/components/RepoIssues/index'
+import { IssueDescription, IssueOccurrenceSection } from '@/components/RepoIssues/index'
 
 import IssueDetailMixin from '@/mixins/issueDetailMixin'
 import RepoDetailMixin from '@/mixins/repoDetailMixin'
@@ -68,7 +68,7 @@ const VISIBLE_PAGES = 3
 
 @Component({
   components: {
-    IssueOccurenceSection,
+    IssueOccurrenceSection,
     IssueDescription,
     ZPagination
   },
@@ -98,11 +98,11 @@ export default class IssuesDetails extends mixins(
 
   mounted() {
     this.loadIgnoredIssues()
-    this.$root.$on('update-ignored-issues-occurences', this.loadIgnoredIssues)
+    this.$root.$on('update-ignored-issues-occurrences', this.loadIgnoredIssues)
   }
 
   beforeDestroy() {
-    this.$root.$off('update-ignored-issues-occurences', this.loadIgnoredIssues)
+    this.$root.$off('update-ignored-issues-occurrences', this.loadIgnoredIssues)
   }
 
   public async fetchChildren(): Promise<void> {

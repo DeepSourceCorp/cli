@@ -29,7 +29,7 @@
               </span>
             </span>
           </div>
-          <!-- Occurences in files -->
+          <!-- Occurrences in files -->
         </div>
         <div
           class="flex items-baseline w-full text-sm leading-6 gap-x-2 text-vanilla-400 sm:w-auto"

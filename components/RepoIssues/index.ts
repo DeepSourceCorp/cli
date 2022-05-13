@@ -2,7 +2,7 @@ import IssueActions from './IssueActions.vue'
 import IssueDescription from './IssueDescription.vue'
 import IssueDetailsHeader from './IssueDetailsHeader.vue'
 import IssueEditor from './IssueEditor.vue'
-import IssueOccurenceSection from './IssueOccurenceSection.vue'
+import IssueOccurrenceSection from './IssueOccurrenceSection.vue'
 import IssueList from './IssueList.vue'
 import IgnoreIssueFilePattern from './Modals/IgnoreIssueFilePattern.vue'
 import IgnoreIssueAllFiles from './Modals/IgnoreIssueAllFiles.vue'
@@ -19,7 +19,7 @@ export {
   IssueDescription,
   IssueDetailsHeader,
   IssueEditor,
-  IssueOccurenceSection,
+  IssueOccurrenceSection,
   IgnoreIssueFilePattern,
   IgnoreIssueAllFiles,
   IgnoreIssueTestFiles,

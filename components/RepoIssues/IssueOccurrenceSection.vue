@@ -32,7 +32,7 @@
         size="small"
         class="text-sm"
         backgroundColor="ink-300"
-        placeholder="Search occurences in a file path"
+        placeholder="Search occurrences in a file path"
         :showBorder="false"
         @debounceInput="searchIssueChildren"
       >
@@ -67,7 +67,7 @@ const issueStore = namespace('issue/detail')
     IssueEditor
   }
 })
-export default class IssueOccurenceSection extends Vue {
+export default class IssueOccurrenceSection extends Vue {
   @issueStore.State
   issue!: RepositoryIssue
 

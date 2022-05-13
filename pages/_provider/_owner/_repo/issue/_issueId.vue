@@ -45,7 +45,7 @@
             border-active-color="vanilla-400"
             class="flex items-center"
           >
-            <span>Occurences</span>
+            <span>Occurrences</span>
             <z-tag
               v-if="issue.occurrenceCount"
               text-size="xs"
@@ -154,7 +154,7 @@ export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin,
     issuesIgnored = issuesIgnored.concat(issueIds)
 
     this.$localStore.set('repo-issue-occurences', this.localKey, [...new Set(issuesIgnored)])
-    this.$root.$emit('update-ignored-issues-occurences')
+    this.$root.$emit('update-ignored-issues-occurrences')
   }
 
   /**
