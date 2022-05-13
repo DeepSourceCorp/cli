@@ -13,7 +13,8 @@ test:
 	go test -v ./configvalidator/... -count=1
 	echo "\n====CALCULATING TEST COVERAGE FOR ENTIRE PACKAGE====\n"
 	go test -v -coverpkg=./... -coverprofile=coverage.out -count=1 ./...
-	sed -i 's|github.com/deepsourcelabs/cli|/home/runner/work/cli/cli|g' coverage.out
+	sed -i 's|github.com/deepsourcelabs/cli|/home/runner/cli|g' coverage.out
+	cat coverage.out
 
 test_setup:
 	mkdir -p ${CODE_PATH}
