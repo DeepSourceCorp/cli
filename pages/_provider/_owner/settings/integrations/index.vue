@@ -1,9 +1,9 @@
 <template>
-  <div class="max-w-3xl p-4 space-y-4">
+  <div class="max-w-4xl p-4 space-y-4">
     <h2 class="text-lg font-medium">Integrations</h2>
 
     <div v-if="$fetchState.pending" class="grid grid-cols-1 gap-4 md:grid-cols-3">
-      <div class="bg-opacity-50 rounded-md h-36 animate-pulse bg-ink-200"></div>
+      <div class="h-32 bg-opacity-50 rounded-md animate-pulse bg-ink-200"></div>
     </div>
 
     <div v-else class="grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -28,8 +28,8 @@
         <div class="mt-auto">
           <z-tag
             :bg-color="integration.installed ? 'juniper' : 'ink-200'"
-            :icon-color="integration.installed ? 'ink-50' : 'vanilla-400'"
-            :icon-left="integration.installed ? 'check' : 'circle-dashed'"
+            :icon-color="integration.installed ? 'ink-50' : ''"
+            :icon-left="integration.installed ? 'check' : ''"
             size="x-small"
             spacing="py-1 px-2"
             text-size="xxs"
@@ -37,7 +37,7 @@
               class="font-semibold"
               :class="[integration.installed ? 'text-ink-50' : 'text-vanilla-400']"
             >
-              {{ integration.installed ? 'ENABLED' : 'NOT ENABLED' }}
+              {{ integration.installed ? 'INSTALLED' : 'NOT INSTALLED' }}
             </span></z-tag
           >
         </div>

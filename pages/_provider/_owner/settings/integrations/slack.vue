@@ -88,16 +88,17 @@
           <z-select
             v-else
             v-model="channel"
+            :disabled="!hasChannelList"
+            :placeholder="hasChannelList ? 'Select a channel' : 'No channels found'"
             :truncate="true"
             spacing="pl-2.5 pr-2 py-2"
             class="w-48 text-sm"
           >
-            <z-option
-              v-for="option in integration.options.channel"
-              :key="option"
-              :label="`# ${option}`"
-              :value="option"
-            />
+            <z-option v-for="option in integration.options.channel" :key="option" :value="option">
+              <div class="inline-flex flex-row gap-x-1">
+                <span> # </span><span> {{ option }} </span>
+              </div>
+            </z-option>
           </z-select>
         </div>
       </div>
@@ -302,6 +303,10 @@ export default class SlackIntegration extends mixins(
 
   get avatar(): string | null | undefined {
     return this.integration?.enabledBy?.avatar
+  }
+
+  get hasChannelList(): boolean {
+    return Boolean(this.integration.options.channel.length)
   }
 
   get userName(): string | undefined {

@@ -2,8 +2,12 @@
   <div class="flex justify-center pt-26 animate-glow-bg">
     <div class="pt-6 pb-4 border rounded-md bg-ink-400 border-ink-200">
       <div class="flex items-center justify-center gap-x-2">
-        <div class="p-1.5 pl-3 bg-ink-300">
-          <img src="~/assets/images/logomark.svg" alt="DeepSource" class="flex-shrink-0 w-8 h-8" />
+        <div class="p-1.5 pr-1 bg-ink-300">
+          <img
+            src="~/assets/images/deepsource-logo-centered.svg"
+            alt="DeepSource"
+            class="flex-shrink-0 w-8 h-8"
+          />
         </div>
 
         <z-icon icon="arrow-left-right" />
@@ -30,7 +34,11 @@
       <div class="flex flex-col px-6 gap-y-4 md:flex-row md:justify-between md:gap-y-0">
         <label class="text-sm place-self-center text-vanilla-100"> Notification channel </label>
 
-        <div class="h-8 md:w-48">
+        <div class="w-full h-8 md:w-48">
+          <div
+            v-if="$fetchState.pending"
+            class="w-48 h-8 rounded-md bg-ink-300 animate-pulse"
+          ></div>
           <z-select
             v-model="channel"
             :truncate="true"
