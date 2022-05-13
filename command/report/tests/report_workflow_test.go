@@ -51,7 +51,7 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 
-	if string(requestBodyData) == string(req) {
+	if bytes.Equal(requestBodyData, req) {
 		w.Write([]byte(successResponseBodyData))
 	} else {
 		w.Write([]byte(errorResponseBodyData))
