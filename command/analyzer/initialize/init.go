@@ -85,7 +85,7 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 
 	// Fetch the default analyzer name from the shortcode
 	// Eg: @deepsource/armory -> Armory
-    defaultAnalyzerName := strings.Title(strings.SplitAfter(a.AnalyzerTOMLData.Shortcode, "/")[1]) // skipcq: SCC-SA1019
+	defaultAnalyzerName := strings.Title(strings.SplitAfter(a.AnalyzerTOMLData.Shortcode, "/")[1]) // skipcq: SCC-SA1019
 
 	// Collect name of the Analyzer
 	msg = "Please enter the name of the Analyzer?"

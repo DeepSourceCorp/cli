@@ -166,7 +166,7 @@ func convertSARIF(issueData []issues.Issue) *sarif.Report {
 	// Adding the tools data to the SARIF report corresponding to the number of analyzers activated
 	for _, issue := range issueData {
 		if !shortcodes[issue.Analyzer.Shortcode].exists {
-            driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer" // skipcq: SCC-SA1019
+			driverName := "DeepSource " + strings.Title(issue.Analyzer.Shortcode) + " Analyzer" // skipcq: SCC-SA1019
 			informationURI := "https://deepsource.io/directory/analyzers/" + string(issue.Analyzer.Shortcode)
 
 			tool := sarif.Tool{
