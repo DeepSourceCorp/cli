@@ -73,7 +73,7 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 					return err
 				}
 			default:
-				metaFields[i].UserInput, err = utils.GetSingleLineInput(metaFields[i].Title, metaFields[i].Description)
+				metaFields[i].UserInput, err = utils.GetSingleLineInput(metaFields[i].Title, metaFields[i].Description, "")
 				if err != nil {
 					return err
 				}
@@ -132,7 +132,7 @@ func populateMetadata(optionalFields []string, jsonParsed *gabs.Container) []Ana
 func (o *Options) extractRequiredAnalyzerMetaFields() error {
 	var optionalFields []string
 	var requiredMetaData []AnalyzerMetadata
-	var analyzerFieldsData = make(map[string][]AnalyzerMetadata)
+	analyzerFieldsData := make(map[string][]AnalyzerMetadata)
 
 	// Extract `optional_required` fields of analyzer meta of selected analyzers
 	for _, activatedAnalyzer := range o.ActivatedAnalyzers {
