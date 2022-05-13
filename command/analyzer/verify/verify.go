@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 
 	build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
 	"github.com/deepsourcelabs/cli/analyzers/config"
@@ -110,16 +109,7 @@ func (*AnalyzerVerifyOpts) Run() (err error) {
 
 	// Specifying the name of the image to be built
 	// Set the default Dockerfile path as "Dockerfile"
-	var dockerFilePath, dockerFileName string
-	dockerFilePath = "Dockerfile"
-
-	// Read config for the value if specified
-	if analyzerTOMLData.Build.Dockerfile != "" {
-		dockerFilePath = analyzerTOMLData.Build.Dockerfile
-	}
-	if analyzerTOMLData.Shortcode != "" {
-		dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
-	}
+	dockerFilePath, dockerFileName := build.GetDockerImageDetails(analyzerTOMLData)
 
 	spin.StartSpinnerWithLabel(fmt.Sprintf("Building Analyzer image with the name \"%s\"", dockerFileName), "Successfully built the Analyzer image")
 	// Specifying the source to build
@@ -130,11 +120,10 @@ func (*AnalyzerVerifyOpts) Run() (err error) {
 			return err
 		}
 	}
-
 	analyzerBuilder := build.DockerClient{
 		ImageName:      dockerFileName,
 		DockerfilePath: dockerFilePath,
-		ImageTag:       generateImageVersion(7),
+		ImageTag:       build.GenerateImageVersion(7),
 	}
 
 	buildErr := analyzerBuilder.BuildAnalyzerDockerImage()

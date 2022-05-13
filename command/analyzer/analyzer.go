@@ -4,6 +4,7 @@ import (
 	"github.com/spf13/cobra"
 
 	initialize "github.com/deepsourcelabs/cli/command/analyzer/initialize"
+	"github.com/deepsourcelabs/cli/command/analyzer/run"
 	verify "github.com/deepsourcelabs/cli/command/analyzer/verify"
 )
 
@@ -18,5 +19,6 @@ func NewCmdAnalyzer() *cobra.Command {
 	}
 	cmd.AddCommand(verify.NewCmdAnalyzerVerify())
 	cmd.AddCommand(initialize.NewCmdAnalyzerInit())
+	cmd.AddCommand(run.NewCmdAnalyzerRun())
 	return cmd
 }

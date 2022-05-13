@@ -3,6 +3,7 @@ package docker
 import (
 	"bufio"
 	"context"
+	"crypto/rand"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,6 +12,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/deepsourcelabs/cli/analyzers/config"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/archive"
@@ -114,4 +116,27 @@ func checkResponse(rd io.Reader) error {
 		return errors.New(errLine.Error)
 	}
 	return scanner.Err()
+}
+
+// Returns the docker image details to build
+func GetDockerImageDetails(analyzerTOMLData *config.AnalyzerMetadata) (string, string) {
+	var dockerFilePath, dockerFileName string
+	dockerFilePath = "Dockerfile"
+
+	// Read config for the value if specified
+	if analyzerTOMLData.Build.Dockerfile != "" {
+		dockerFilePath = analyzerTOMLData.Build.Dockerfile
+	}
+	if analyzerTOMLData.Shortcode != "" {
+		dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
+	}
+	return dockerFilePath, dockerFileName
+}
+
+func GenerateImageVersion(length int) string {
+	b := make([]byte, length)
+	if _, err := rand.Read(b); err != nil {
+		panic(err)
+	}
+	return fmt.Sprintf("%x", b)
 }
