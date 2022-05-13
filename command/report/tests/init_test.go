@@ -30,7 +30,7 @@ func startMockAPIServer() {
 	go func() {
 		err := srv.ListenAndServe()
 		if err != nil {
-			log.Fatalln("Error starting HTTP mock server")
+			log.Fatalln("Error starting HTTP mock server") // skipcq: RVV-A0003
 		}
 	}()
 }

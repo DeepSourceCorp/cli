@@ -8,29 +8,24 @@ import (
 	"strings"
 
 	build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
+	"github.com/deepsourcelabs/cli/analyzers/config"
 	"github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
 
 var (
-	configFolder     string = ".deepsource/analyzer"
 	analyzerTOMLPath string
 	issuesDirPath    string
+	projectRoot      string
+	configFolder     string = ".deepsource/analyzer"
 )
 
 type AnalyzerVerifyOpts struct{}
 
 func NewCmdAnalyzerVerify() *cobra.Command {
-	cwd, _ := os.Getwd()
-
-	// Extracting the path of the project root
-	projectRoot, err := utils.ExtractProjectRootPath()
-	if err != nil {
-		projectRoot = cwd
-	}
-
 	// Configuring the paths of analyzer.toml and issues directory
+	projectRoot, analyzerTOMLPath, issuesDirPath = config.InitAnalyzerConfigurationPaths()
 	analyzerTOMLPath = filepath.Join(projectRoot, configFolder, "analyzer.toml")
 	issuesDirPath = filepath.Join(projectRoot, configFolder, "issues/")
 
