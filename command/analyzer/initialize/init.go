@@ -133,7 +133,7 @@ func (a *AnalyzerInitOpts) writeConfig(buf *bytes.Buffer) (err error) {
 	// Create the required directories mentioned above
 	for _, dir := range directoriesToCreate {
 		if _, err := os.Stat(filepath.Join(a.ProjectRootPath, dir)); errors.Is(err, os.ErrNotExist) {
-			if err = os.Mkdir(filepath.Join(a.ProjectRootPath, dir), 0755); err != nil {
+			if err = os.Mkdir(filepath.Join(a.ProjectRootPath, dir), 0750); err != nil {
 				return err
 			}
 		}
