@@ -37,6 +37,7 @@ type Test struct {
 
 func TestInitAnalyzer(t *testing.T) {
 	// Creating an instance of AnalyzerInitOpts
+
 	opts := AnalyzerInitOpts{
 		SingleLineInputPrompt: mockGetSingleLineInput,
 		DescriptionPrompt:     mockDescriptionPrompt,
