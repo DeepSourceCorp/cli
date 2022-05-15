@@ -57,4 +57,3 @@ func (s *SpinnerUtils) StopSpinnerWithError(msg string, errorMessage error) {
 	s.Spinner.Stop()
 	s.Spinner = nil
 }
-
