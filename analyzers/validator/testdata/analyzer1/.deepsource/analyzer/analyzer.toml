@@ -1,5 +1,5 @@
 name = "todo comments checker"
-shortcode = "@deepsource/demo-python"
+shortcode = "deepsource/demo-python"
 description = "finds the todo comments in codebase."
 category = "doc"
 tags = ["documentation","todo"]

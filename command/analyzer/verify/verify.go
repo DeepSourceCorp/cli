@@ -3,13 +3,10 @@ package verify
 import (
 	"errors"
 	"fmt"
-	"os"
 	"path/filepath"
 
-	build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
 	"github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/utils"
-	"github.com/mgutz/ansi"
 	"github.com/spf13/cobra"
 )
 
@@ -33,7 +30,9 @@ func NewCmdAnalyzerVerify() *cobra.Command {
 	analyzerTOMLPath = filepath.Join(projectRoot, configFolder, "analyzer.toml")
 	issuesDirPath = filepath.Join(projectRoot, configFolder, "issues/")
 
-	opts := AnalyzerVerifyOpts{}
+	opts := AnalyzerVerifyOpts{
+		VerboseMode: false,
+	}
 	cmd := &cobra.Command{
 		Use:   "verify",
 		Short: "Verify DeepSource Analyzers configuration",
@@ -72,7 +71,7 @@ func (a *AnalyzerVerifyOpts) Run() (err error) {
 
 	// Read and verify analyzer toml
 	spin.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
-	analyzerTOMLData, analyzerTOMLValidationErrors, err := validator.ValidateAnalyzerTOML(analyzerTOMLPath)
+	_, analyzerTOMLValidationErrors, err := validator.ValidateAnalyzerTOML(analyzerTOMLPath)
 	if analyzerTOMLValidationErrors != nil {
 		configurationValid = false
 		spin.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
@@ -117,40 +116,49 @@ func (a *AnalyzerVerifyOpts) Run() (err error) {
 
 	// Specifying the name of the image to be built
 	// Set the default Dockerfile path as "Dockerfile"
-	dockerFilePath, dockerFileName := build.GetDockerImageDetails(analyzerTOMLData)
+	// dockerFilePath, dockerFileName := build.GetDockerImageDetails(analyzerTOMLData)
+	// var dockerFilePath, dockerFileName string
+	// dockerFilePath = "Dockerfile"
 
-	// Specifying the source to build
-	// Check for the presence of `build.Dockerfile` or if not a `Dockerfile` in the current working directory
-	if _, err := os.Stat(dockerFilePath); err != nil {
-		if errors.Is(err, os.ErrNotExist) {
-			spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found\n", dockerFilePath))
-			return err
-		}
-	}
+	// // Read config for the value if specified
+	// if analyzerTOMLData.Build.Dockerfile != "" {
+	//     dockerFilePath = analyzerTOMLData.Build.Dockerfile
+	// }
+	// if analyzerTOMLData.Shortcode != "" {
+	//     dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
+	// }
 
-	switch a.VerboseMode {
-	case true:
-		arrowIcon := ansi.Color("> [verbose]", "yellow")
-		fmt.Printf("%s Building Analyzer image with the name \"%s\"\n", arrowIcon, dockerFileName)
-	case false:
-		spin.StartSpinnerWithLabel(fmt.Sprintf("Building Analyzer image with the name \"%s\"", dockerFileName), "Successfully built the Analyzer image")
-	}
+	// switch a.VerboseMode {
+	// case true:
+	//     arrowIcon := ansi.Color("> [verbose]", "yellow")
+	//     fmt.Printf("%s Building Analyzer image with the name \"%s\"\n", arrowIcon, dockerFileName)
+	// case false:
+	//     spin.StartSpinnerWithLabel(fmt.Sprintf("Building Analyzer image with the name \"%s\"", dockerFileName), "Successfully built the Analyzer image")
+	// }
 
-	analyzerBuilder := build.DockerClient{
-		ImageName:      dockerFileName,
-		DockerfilePath: dockerFilePath,
-		ImageTag:       generateImageVersion(7),
-		Logs:           a.VerboseMode,
-	}
+	// // Specifying the source to build
+	// // Check for the presence of `build.Dockerfile` or if not a `Dockerfile` in the current working directory
+	// if _, err := os.Stat(dockerFilePath); err != nil {
+	//     if errors.Is(err, os.ErrNotExist) {
+	//         spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found\n", dockerFilePath))
+	//         return err
+	//     }
+	// }
 
-	buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
-	if buildErr != nil {
-		spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf(buildErr.Error()))
-	}
+	// analyzerBuilder := build.DockerClient{
+	//     ImageName:      dockerFileName,
+	//     DockerfilePath: dockerFilePath,
+	//     ImageTag:       generateImageVersion(7),
+	//     Logs:           a.VerboseMode,
+	// }
+	// buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
+	// if buildErr != nil {
+	//     spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf(buildErr.Error()))
+	// }
 
-	if !a.VerboseMode {
-		spin.StopSpinner()
-	}
+	// if !a.VerboseMode {
+	//     spin.StopSpinner()
+	// }
 
 	return nil
 }

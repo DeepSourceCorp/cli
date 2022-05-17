@@ -4,6 +4,7 @@ go 1.16
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.4
+	github.com/BurntSushi/toml v1.1.0 // indirect
 	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/MakeNowJust/heredoc v1.0.0
 	github.com/ProtonMail/go-crypto v0.0.0-20220407094043-a94812496cf5 // indirect
