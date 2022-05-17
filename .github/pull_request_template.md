@@ -8,6 +8,11 @@
 - If you want to describe more on the changes, add that after the list
 - Make sure these points are concise and comprehensive
 
+## Link to VQA Card
+
+<!-- Create a card for the VQA of this task under the design team usig the linked template and assign it.
+Click here to create the VQA card: https://linear.app/deepsource/team/DES/new?template=fdf25c17-ed41-4286-b26d-f80d2072dfda -->
+
 ## Preview
 
 (Add screenshots or screen recordings of the changes)
