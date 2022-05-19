@@ -13,10 +13,16 @@ import (
 )
 
 var (
+	projectRoot         string
 	analyzerTOMLPath    string
 	issuesDirectoryPath string
 	configFolder        string = ".deepsource/analyzer"
 )
+
+func InitAnalyzerConfigurationPaths() (string, string, string) {
+	resolveAnalyzerConfigurationPaths()
+	return projectRoot, analyzerTOMLPath, issuesDirectoryPath
+}
 
 // Read the types and read the config
 func resolveAnalyzerConfigurationPaths() {
@@ -33,6 +39,8 @@ func resolveAnalyzerConfigurationPaths() {
 	issuesDirectoryPath = filepath.Join(projectRoot, configFolder, "issues/")
 }
 
+// Verify the paths of analyzer configurations like analyzer.toml and
+// issue descriptions
 func VerifyAnalyzerConfigs() error {
 	resolveAnalyzerConfigurationPaths()
 
@@ -75,6 +83,7 @@ func VerifyAnalyzerConfigs() error {
 	return nil
 }
 
+// Get the analyzer.toml data
 func GetAnalyzerTOML() (*AnalyzerMetadata, error) {
 	resolveAnalyzerConfigurationPaths()
 	config := AnalyzerMetadata{}
@@ -92,6 +101,7 @@ func GetAnalyzerTOML() (*AnalyzerMetadata, error) {
 	return &config, nil
 }
 
+// Get the list of issue descriptions
 func GetIssueDescriptions() (*[]AnalyzerIssue, error) {
 	resolveAnalyzerConfigurationPaths()
 	issueDescriptions := []AnalyzerIssue{}

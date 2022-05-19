@@ -8,12 +8,13 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/analyzers/config"
-	validator "github.com/deepsourcelabs/cli/analyzers/validator"
-	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pelletier/go-toml"
 	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
+
+	"github.com/deepsourcelabs/cli/analyzers/config"
+	validator "github.com/deepsourcelabs/cli/analyzers/validator"
+	"github.com/deepsourcelabs/cli/utils"
 )
 
 type SDKResponse struct {
@@ -22,15 +23,16 @@ type SDKResponse struct {
 }
 
 type AnalyzerInitOpts struct {
-	SDKInput              SDKResponse
-	ProjectRootPath       string
-	AnalyzerTOMLPath      string
-	AnalyzerTOMLData      validator.AnalyzerMetadata
-	IssuesDirectoryPath   string
-	AnalyzerShortcodeArg  string
+	SDKInput             SDKResponse
+	ProjectRootPath      string
+	AnalyzerTOMLPath     string
+	AnalyzerTOMLData     validator.AnalyzerMetadata
+	IssuesDirectoryPath  string
+	AnalyzerShortcodeArg string
+
+	ConfirmationPrompt    func(string, string) (bool, error)
 	SingleLineInputPrompt func(string, string, string) (string, error)
 	DescriptionPrompt     func(string, string, string) (string, error)
-	ConfirmationPrompt    func(string, string) (bool, error)
 	SingleOptionPrompt    func(string, string, []string) (string, error)
 }
 
@@ -102,7 +104,6 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	}
 
 	if len(supportedSDKS) > 0 {
-
 		// Check if DeepSource SDK is needed or not?
 		msg = "Would you like to use DeepSource Analyzer SDK to build your Analyzer?"
 		helpText = "DeepSource SDKs help you to easily create an Analyzer"

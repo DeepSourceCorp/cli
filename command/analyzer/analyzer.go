@@ -17,8 +17,8 @@ func NewCmdAnalyzer() *cobra.Command {
 		Use:   "analyzer",
 		Short: "Operations related to DeepSource Analyzers",
 	}
+	cmd.AddCommand(run.NewCmdAnalyzerRun())
 	cmd.AddCommand(verify.NewCmdAnalyzerVerify())
 	cmd.AddCommand(initialize.NewCmdAnalyzerInit())
-	cmd.AddCommand(run.NewCmdAnalyzerRun())
 	return cmd
 }

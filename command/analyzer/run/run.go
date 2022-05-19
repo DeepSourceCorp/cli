@@ -3,6 +3,7 @@ package run
 import (
 	"fmt"
 	"os"
+	"strings"
 
 	docker_build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
 	"github.com/deepsourcelabs/cli/analyzers/config"
@@ -54,10 +55,16 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 
 	// Build the latest Analyzer image
 	dockerFilePath, dockerFileName := docker_build.GetDockerImageDetails(analyzerTOMLData)
+	analyzerName := strings.Split(dockerFileName, "/")[1]
 	d := docker_build.DockerClient{
+		ContainerName:  analyzerName + "-" + docker_build.GenerateImageVersion(7),
 		ImageName:      dockerFileName,
 		DockerfilePath: dockerFilePath,
 		ImageTag:       docker_build.GenerateImageVersion(7),
+		AnalysisOpts: docker_build.AnalysisParams{
+			AnalysisCommand:   analyzerTOMLData.Analysis.Command,
+			ContainerCodePath: "/code",
+		},
 	}
 
 	fmt.Println("Building Analyzer image...")
@@ -65,15 +72,15 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		return err
 	}
 
-	// Resolve the code to analyze
-	// The user passes it as an argument to the command `deepsource analyzer run <directory/repository URL>`
-	// Parse the argument and check if its a URL, if not then resolve the local directory path
+	/* Resolve the code to analyze
+	 * The user passes it as an argument to the command `deepsource analyzer run <directory/repository URL>`
+	 * Parse the argument and check if its a URL, if not then resolve the local directory path */
 	if isValidUrl(a.SourcePath) {
 		a.RemoteSource = true
 
-		// Clone the repository to /tmp directory
-		// TODO: Check here if /tmp directory actually exists. Also, take care of Windows please?
-		// Create a temp directory to clone the source code into
+		/* Clone the repository to a temporary directory
+		 * TODO: Check here if /tmp directory actually exists. Also, take care of Windows please?
+		 * Create a temp directory to clone the source code into */
 		a.CloneDir, err = os.MkdirTemp("", "code")
 		if err != nil {
 			return err
@@ -90,14 +97,15 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		}
 	}
 
-	// Start listing the files for analysis
-	// a.AnalysisFiles, err = getFilesToAnalyze(a.SourcePath)
-	// if err != nil {
-	//     return err
-	// }
-	// analysisConfig := AnalysisConfig{
-	//     Files: a.AnalysisFiles,
-	// }
+    /* Start listing the files for analysis
+     * a.AnalysisFiles, err = getFilesToAnalyze(a.SourcePath)
+     * if err != nil {
+     *     return err
+     * }
+     * analysisConfig := AnalysisConfig{
+     *     Files: a.AnalysisFiles,
+     * } */
+	d.AnalysisOpts.HostCodePath = a.CloneDir
 
 	// Create a container and start it using the above docker DockerClient
 	d.StartDockerContainer()

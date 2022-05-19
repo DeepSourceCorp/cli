@@ -1,0 +1,23 @@
+name = "Armory"
+shortcode = "@deepsource/armory"
+description = "Hello world"
+category = ""
+tags = []
+
+[urls]
+  source = ""
+  documentation = ""
+  bug_tracker = ""
+
+[environment_variables]
+
+[analysis]
+  command = "make build_test"
+
+[build]
+  builder = ""
+  dockerfile = ""
+  script = ""
+
+[test]
+  command = ""
