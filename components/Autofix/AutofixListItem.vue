@@ -9,19 +9,19 @@
         :color="statusColor"
       ></z-icon>
       <h3
-        class="text-vanilla-100 cursor-pointer whitespace-nowrap overflow-ellipsis overflow-hidden"
+        class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
       >
         {{ pullRequestTitle.trim() || (issue && issue.title) }}
       </h3>
 
-      <span class="text-sm text-vanilla-400 font-normal inline md:flex flex-shrink-0" v-if="issue">
+      <span class="flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex" v-if="issue">
         {{ issue.shortcode }}
       </span>
     </template>
     <template slot="description">
-      <div class="items-center space-y-1 md:space-y-0 md:flex md:space-x-4 mt-2 ml-6">
+      <div class="items-center mt-2 ml-6 space-y-1 md:space-y-0 md:flex md:space-x-4">
         <!-- Issue type -->
-        <div class="space-x-5 flex">
+        <div class="flex space-x-5">
           <issue-type v-if="issue" :issueType="issue.issueType"></issue-type>
           <!-- Analyzer -->
           <div class="flex items-center space-x-1.5 text-sm">
@@ -49,7 +49,7 @@
       </div>
     </template>
     <template slot="info">
-      <div class="flex justify-around items-center space-x-2 h-full">
+      <div class="flex items-center justify-around h-full space-x-2">
         <div class="flex flex-col items-center">
           <div
             class="text-2xl font-medium"
@@ -72,6 +72,7 @@ import { fromNow } from '@/utils/date'
 import { AutofixRun, AutofixRunStatus, Maybe, Scalars } from '~/types/types'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { RepoPerms } from '~/types/permTypes'
+import ContextMixin from '~/mixins/contextMixin'
 
 @Component({
   components: {
@@ -81,7 +82,7 @@ import { RepoPerms } from '~/types/permTypes'
     ZAvatar
   }
 })
-export default class AutofixListItem extends mixins(RoleAccessMixin) {
+export default class AutofixListItem extends mixins(RoleAccessMixin, ContextMixin) {
   @Prop()
   autofixRun!: AutofixRun
 

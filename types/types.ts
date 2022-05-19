@@ -7679,6 +7679,22 @@ export type IntegrationDetailQuery = (
   )> }
 );
 
+export type IntegrationInstallationStatusQueryVariables = Exact<{
+  shortcode: Scalars['String'];
+  level?: Maybe<IntegrationSettingsLevel>;
+  ownerId?: Maybe<Scalars['ID']>;
+  repositoryId?: Maybe<Scalars['ID']>;
+}>;
+
+
+export type IntegrationInstallationStatusQuery = (
+  { __typename?: 'Query' }
+  & { integration?: Maybe<(
+    { __typename?: 'IntegrationProvider' }
+    & Pick<IntegrationProvider, 'installed'>
+  )> }
+);
+
 export type IntegrationLogoUrlQueryVariables = Exact<{
   shortcode: Scalars['String'];
   level?: Maybe<IntegrationSettingsLevel>;
@@ -7693,22 +7709,6 @@ export type IntegrationLogoUrlQuery = (
     { __typename?: 'IntegrationProvider' }
     & Pick<IntegrationProvider, 'logo'>
   )> }
-);
-
-export type IntegrationsWithDetailsQueryVariables = Exact<{
-  level?: Maybe<IntegrationSettingsLevel>;
-  ownerId?: Maybe<Scalars['ID']>;
-  repositoryId?: Maybe<Scalars['ID']>;
-  onlyInstalled?: Maybe<Scalars['Boolean']>;
-}>;
-
-
-export type IntegrationsWithDetailsQuery = (
-  { __typename?: 'Query' }
-  & { integrations?: Maybe<Array<Maybe<(
-    { __typename?: 'IntegrationProvider' }
-    & Pick<IntegrationProvider, 'shortcode' | 'name' | 'logo' | 'installedOn' | 'settings' | 'options'>
-  )>>> }
 );
 
 export type ListIntegrationsQueryVariables = Exact<{
@@ -8513,6 +8513,21 @@ export type Unnamed_122_Query = (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+);
+
+export type RepositoryIdQueryVariables = Exact<{
+  provider: VcsProviderChoices;
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type RepositoryIdQuery = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id'>
+  )> }
 );
 
 export type IsCommitPossibleQueryVariables = Exact<{

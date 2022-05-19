@@ -21,15 +21,6 @@ export default class IntegrationsListMixin extends Vue {
     refetch?: boolean
   }) => Promise<void>
 
-  @integrationsListStore.Action(IntegrationsListActions.FETCH_INTEGRATIONS_WITH_DETAILS)
-  fetchIntegrationsWithDetails: (args: {
-    level?: IntegrationSettingsLevel
-    ownerId?: string
-    repositoryId?: string
-    onlyInstalled?: boolean
-    refetch?: boolean
-  }) => Promise<void>
-
   /**
    * Method to fetch description corresponding to the given integration
    *

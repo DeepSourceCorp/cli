@@ -2,7 +2,7 @@
   <div class="flex justify-center pt-26 animate-glow-bg">
     <div class="pt-6 pb-4 border rounded-md bg-ink-400 border-ink-200">
       <div class="flex items-center justify-center gap-x-2">
-        <div class="p-1.5 pr-1 bg-ink-300">
+        <div class="p-1.5 pr-1 rounded-sm bg-ink-300">
           <img
             src="~/assets/images/deepsource-logo-centered.svg"
             alt="DeepSource"
@@ -12,7 +12,7 @@
 
         <z-icon icon="arrow-left-right" />
 
-        <div class="p-1.5 bg-ink-300">
+        <div class="p-1 rounded-sm bg-ink-300">
           <img :src="integration.logo" alt="Slack logo" class="flex-shrink-0 w-8 h-8" />
         </div>
       </div>

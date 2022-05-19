@@ -53,7 +53,7 @@ interface TabLink {
   layout: 'repository',
   middleware: [
     'perm',
-    async function ({ store, route, redirect, error }) {
+    async function ({ route, redirect }) {
       const { provider, owner, repo } = route.params
       if (route.name === 'provider-owner-repo-settings') {
         redirect(`/${provider}/${owner}/${repo}/settings/general`)
@@ -76,7 +76,8 @@ interface TabLink {
         RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS,
         RepoPerms.VIEW_AUDIT_LOGS,
         RepoPerms.VIEW_BADGES,
-        RepoPerms.CHANGE_ISSUE_PRIORITY
+        RepoPerms.CHANGE_ISSUE_PRIORITY,
+        RepoPerms.CHANGE_INTEGRATION_SETTINGS
       ]
     }
   }
@@ -138,6 +139,13 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
       icon: 'users',
       link: ['settings', 'repo-members'],
       perms: [RepoPerms.UPDATE_ROLE_OF_EXISTING_MEMBERS],
+      forTeams: true
+    },
+    {
+      label: 'Integrations',
+      icon: 'list',
+      link: ['settings', 'integrations'],
+      perms: [RepoPerms.CHANGE_INTEGRATION_SETTINGS],
       forTeams: true
     }
   ]

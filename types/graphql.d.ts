@@ -1106,19 +1106,19 @@ declare module '*/integrationDetail.gql' {
 }
     
 
-declare module '*/integrationLogoUrl.gql' {
+declare module '*/integrationInstallationStatus.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const integrationLogoUrl: DocumentNode;
+  export const integrationInstallationStatus: DocumentNode;
 
   export default defaultDocument;
 }
     
 
-declare module '*/integrationsWithDetails.gql' {
+declare module '*/integrationLogoUrl.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const integrationsWithDetails: DocumentNode;
+  export const integrationLogoUrl: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1263,6 +1263,7 @@ declare module '*/id.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ownerId: DocumentNode;
+export const repositoryId: DocumentNode;
 
   export default defaultDocument;
 }

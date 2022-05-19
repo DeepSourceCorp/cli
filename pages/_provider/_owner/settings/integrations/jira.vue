@@ -159,14 +159,7 @@ import { TeamPerms } from '~/types/permTypes'
     ZSelect,
     ZTextarea
   },
-  middleware: [
-    async ({ error }) => {
-      error({ statusCode: 404 })
-    }
-    // 'disableOnPrem'
-    // 'teamOnly',
-    // 'perms'
-  ],
+  middleware: ['perm', 'teamOnly'],
   meta: {
     auth: {
       strict: true,

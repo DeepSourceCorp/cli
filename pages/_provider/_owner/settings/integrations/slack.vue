@@ -16,7 +16,7 @@
     <div v-else class="p-4 pb-32 md:max-w-2xl">
       <div class="flex justify-between" :class="{ 'mb-4': !integration.installed }">
         <div class="inline-flex items-center gap-x-2">
-          <div class="p-1 bg-ink-300">
+          <div class="p-1 rounded-sm bg-ink-300">
             <img :src="integration.logo" alt="Slack" class="flex-shrink-0 w-5 h-5" />
           </div>
           <h2 class="text-base font-medium text-vanilla-100">Slack</h2>
@@ -355,12 +355,16 @@ export default class SlackIntegration extends mixins(
     }
 
     // Dispatch the Vuex action that invokes the GQL mutation aimed at updating integration settings
-    await this.updateIntegrationSettings({
+    const { ok } = await this.updateIntegrationSettings({
       shortcode: 'slack',
       level: IntegrationSettingsLevel.Owner,
       ownerId: this.owner.id,
       settings: { channel: newChannel }
     })
+
+    if (ok) {
+      this.$toast.success(`Successfully updated the channel to ${newChannel}.`)
+    }
   }
 
   /**

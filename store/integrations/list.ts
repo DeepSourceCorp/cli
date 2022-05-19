@@ -1,15 +1,13 @@
 import { ActionContext, ActionTree, MutationTree, Store } from 'vuex'
 
 import ListIntegrationsGQLQuery from '~/apollo/queries/integrations/listIntegrations.gql'
-import IntegrationsWithDetailsGQLQuery from '~/apollo/queries/integrations/integrationsWithDetails.gql'
 
 import { RootState } from '~/store'
 import { IntegrationProvider, IntegrationSettingsLevel } from '~/types/types'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 export enum IntegrationsListActions {
-  FETCH_INTEGRATIONS = 'fetchIntegrations',
-  FETCH_INTEGRATIONS_WITH_DETAILS = 'fetchIntegrationsWithDetails'
+  FETCH_INTEGRATIONS = 'fetchIntegrations'
 }
 
 export enum IntegrationsListMutations {
@@ -59,18 +57,6 @@ interface IssuePriorityListModuleActions
       refetch?: boolean
     }
   ) => Promise<void>
-
-  [IntegrationsListActions.FETCH_INTEGRATIONS_WITH_DETAILS]: (
-    this: Store<RootState>,
-    injectee: IntegrationsListActionContext,
-    args: {
-      level?: IntegrationSettingsLevel
-      ownerId?: string
-      repositoryId?: string
-      onlyInstalled?: boolean
-      refetch?: boolean
-    }
-  ) => Promise<void>
 }
 
 export const actions: IssuePriorityListModuleActions = {
@@ -79,21 +65,6 @@ export const actions: IssuePriorityListModuleActions = {
     try {
       const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
         ListIntegrationsGQLQuery,
-        args,
-        args.refetch
-      )
-      commit(IntegrationsListMutations.SET_INTEGRATIONS, response?.data?.integrations)
-    } catch (e) {
-      this.$logErrorAndToast(e as Error, 'There was an error fetching integrations.')
-    }
-  },
-
-  // Used to fetch the list of integrations (repository level) with their details
-  // for smaller screens (rendered as accordion items)
-  async [IntegrationsListActions.FETCH_INTEGRATIONS_WITH_DETAILS]({ commit }, args) {
-    try {
-      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
-        IntegrationsWithDetailsGQLQuery,
         args,
         args.refetch
       )

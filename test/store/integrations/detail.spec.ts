@@ -221,6 +221,71 @@ describe('[Store] Integrations/Detail', () => {
       )
     })
 
+    test(`Action "${IntegrationsDetailActions.FETCH_INTEGRATION_INSTALLATION_STATUS}"`, async () => {
+      const { installed } = integrationDetails
+      const queryResponse = { installed }
+
+      const localThis = {
+        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+          return new Promise<GraphqlQueryResponse>((resolve) =>
+            setTimeout(() => resolve({ data: { integration: queryResponse } }), 10)
+          )
+        }
+      }
+
+      // Set spy on `localThis.$fetchGraphqlData`
+      const spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+      // Dispatch the Vuex action
+      await actions[IntegrationsDetailActions.FETCH_INTEGRATION_INSTALLATION_STATUS].call(
+        localThis as any,
+        actionCxt,
+        {
+          shortcode: 'slack',
+          level: IntegrationSettingsLevel.Owner,
+          repositoryId: 'T3duZXI6cXpscnh6'
+        }
+      )
+
+      // Assertions
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(actionCxt.commit).toHaveBeenCalledWith(
+        IntegrationsDetailMutations.SET_INTEGRATION_DETAILS,
+        queryResponse
+      )
+    })
+
+    test(`Action "${IntegrationsDetailActions.FETCH_INTEGRATION_INSTALLATION_STATUS}" error handler`, async () => {
+      const localThis = {
+        async $fetchGraphqlData(): Promise<void> {
+          return new Promise<void>((_, reject) => setTimeout(() => reject(), 10))
+        },
+        $logErrorAndToast: jest.fn()
+      }
+
+      // Set spy on `localThis.$fetchGraphqlData`
+      const spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+      // Dispatch the Vuex action
+      await actions[IntegrationsDetailActions.FETCH_INTEGRATION_INSTALLATION_STATUS].call(
+        localThis as any,
+        actionCxt,
+        {
+          shortcode: 'slack',
+          level: IntegrationSettingsLevel.Owner,
+          repositoryId: 'T3duZXI6cXpscnh6'
+        }
+      )
+
+      // Assertions
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(actionCxt.commit).not.toHaveBeenCalled()
+      expect(localThis.$logErrorAndToast).toHaveBeenCalledWith(
+        undefined,
+        'There was an error fetching integration installation status.'
+      )
+    })
+
     test(`Action "${IntegrationsDetailActions.GET_INTEGRATION_INSTALLATION_URL}"`, async () => {
       const installationUrl =
         'https://slack.com/oauth/v2/authorize?client_id=3008460848721.2989151408982&scope=channels%3Aread%2Cchat%3Awrite%2Cgroups%3Aread&state=_CKrdQlcaZfYca9U8Dg5wH5gz0-bdoBDrHt9IGIuuVk'

@@ -1,6 +1,7 @@
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 import { RootState } from '~/store'
 
+import RepositoryIDGQLQuery from '~/apollo/queries/repository/id.gql'
 import RepositoryDetailGQLQuery from '~/apollo/queries/repository/detail.gql'
 import RepositoryBaseDetailGQLQuery from '~/apollo/queries/repository/base.gql'
 import RepositoryIsCommitPossible from '~/apollo/queries/repository/isCommitPossible.gql'
@@ -95,6 +96,7 @@ export interface RepoConfigInterface {
 }
 
 export enum RepositoryDetailActions {
+  FETCH_REPOSITORY_ID = 'fetchRepositoryID',
   FETCH_REPOSITORY_DETAIL = 'fetchRepositoryDetail',
   FETCH_REPOSITORY_BASE_DETAILS = 'fetchBasicRepoDetails',
   FETCH_REPOSITORY_AUTOFIX_STATS = 'fetchRepoAutofixStats',
@@ -262,6 +264,16 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       analyzer: string
       q: string
       autofixAvailable: boolean | null
+      refetch?: boolean
+    }
+  ) => Promise<void>
+  [RepositoryDetailActions.FETCH_REPOSITORY_ID]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
       refetch?: boolean
     }
   ) => Promise<void>
@@ -640,6 +652,26 @@ export const actions: RepositoryDetailModuleActions = {
         commit(RepositoryDetailMutations.SET_LOADING, false)
         // TODO: Toast("Failure in fetching widgets", e)
       })
+  },
+  async [RepositoryDetailActions.FETCH_REPOSITORY_ID](
+    { commit },
+    { provider, owner, name, refetch }
+  ) {
+    try {
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        RepositoryIDGQLQuery,
+        {
+          provider: this.$providerMetaMap[provider].value,
+          owner,
+          name
+        },
+        refetch
+      )
+
+      commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'There was an error while fetching the repository id.')
+    }
   },
   async [RepositoryDetailActions.FETCH_REPOSITORY_DETAIL](
     { commit },

@@ -4,6 +4,7 @@ import GetIntegrationInstallationUrlGQLMutation from '~/apollo/mutations/integra
 import InstallIntegrationGQLMutation from '~/apollo/mutations/integrations/installIntegration.gql'
 import IntegrationDetailGQLQuery from '~/apollo/queries/integrations/integrationDetail.gql'
 import IntegrationLogoUrlGQLQuery from '~/apollo/queries/integrations/integrationLogoUrl.gql'
+import IntegrationInstallationStatusGQLQuery from '~/apollo/queries/integrations/integrationInstallationStatus.gql'
 
 import UpdateIntegrationSettingsGQLMutation from '~/apollo/mutations/integrations/updateIntegrationSettings.gql'
 import UninstallIntegrationGQLMutation from '~/apollo/mutations/integrations/uninstallIntegration.gql'
@@ -26,6 +27,7 @@ import {
 export enum IntegrationsDetailActions {
   FETCH_INTEGRATION_DETAILS = 'fetchIntegrationDetails',
   FETCH_INTEGRATION_LOGO_URL = 'fetchIntegrationLogoUrl',
+  FETCH_INTEGRATION_INSTALLATION_STATUS = 'fetchIntegrationInstallationStatus',
   GET_INTEGRATION_INSTALLATION_URL = 'getIntegrationInstallationUrl',
   INSTALL_INTEGRATION = 'installIntegration',
   UPDATE_INTEGRATION_SETTINGS = 'updateIntegrationSettings',
@@ -114,6 +116,18 @@ interface IntegrationsDetailModuleActions
     }
   ) => Promise<void>
 
+  [IntegrationsDetailActions.FETCH_INTEGRATION_INSTALLATION_STATUS]: (
+    this: Store<RootState>,
+    injectee: IntegrationsDetailActionContext,
+    args: {
+      shortcode: string
+      level?: IntegrationSettingsLevel
+      ownerId?: string
+      repositoryId?: string
+      refetch?: boolean
+    }
+  ) => Promise<void>
+
   [IntegrationsDetailActions.GET_INTEGRATION_INSTALLATION_URL]: (
     this: Store<RootState>,
     injectee: IntegrationsDetailActionContext,
@@ -167,6 +181,22 @@ export const actions: IntegrationsDetailModuleActions = {
     }
   },
 
+  async [IntegrationsDetailActions.FETCH_INTEGRATION_INSTALLATION_STATUS]({ commit }, args) {
+    try {
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        IntegrationInstallationStatusGQLQuery,
+        args,
+        args.refetch
+      )
+      commit(IntegrationsDetailMutations.SET_INTEGRATION_DETAILS, response?.data?.integration)
+    } catch (e) {
+      this.$logErrorAndToast(
+        e as Error,
+        'There was an error fetching integration installation status.'
+      )
+    }
+  },
+
   async [IntegrationsDetailActions.GET_INTEGRATION_INSTALLATION_URL](_, args) {
     try {
       const response = await this.$applyGraphqlMutation(GetIntegrationInstallationUrlGQLMutation, {
@@ -202,11 +232,12 @@ export const actions: IntegrationsDetailModuleActions = {
       })
 
       // Refetch integration details
-      const { shortcode, level, ownerId } = args
+      const { shortcode, level, ownerId, repositoryId } = args
       await dispatch(IntegrationsDetailActions.FETCH_INTEGRATION_DETAILS, {
         shortcode,
         level,
         ownerId,
+        repositoryId,
         refetch: true
       })
 

@@ -198,6 +198,90 @@ describe('[Store] Repository/Detail', () => {
       })
     })
 
+    describe(`Action "${RepositoryDetailActions.FETCH_REPOSITORY_ID}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $getGQLAfter: jest.fn(),
+            async $fetchGraphqlData(): Promise<unknown> {
+              const repositoryId = mockRepositoryDetailState().repository.id
+              return new Promise<unknown>((resolve) =>
+                resolve({ data: { repository: { id: repositoryId } } })
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[RepositoryDetailActions.FETCH_REPOSITORY_ID].call(localThis, actionCxt, {
+            provider: 'gh',
+            owner: 'deepsourcelabs',
+            name: 'asgard'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(1)
+        })
+
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_REPOSITORY}`, async () => {
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.SET_REPOSITORY` is being commited or not
+          expect(commit).toHaveBeenCalledWith(
+            RepositoryDetailMutations.SET_REPOSITORY,
+            apiResponse.data.repository
+          )
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $getGQLAfter: jest.fn(),
+            $logErrorAndToast: jest.fn(),
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[RepositoryDetailActions.FETCH_REPOSITORY_ID].call(localThis, actionCxt, {
+            provider: 'gh',
+            owner: 'deepsourcelabs',
+            name: 'asgard'
+          })
+        })
+
+        test(`successfully invokes $logErrorAndToast plugin`, () => {
+          expect(localThis.$logErrorAndToast).toHaveBeenCalledWith(
+            Error('ERR1'),
+            'There was an error while fetching the repository id.'
+          )
+        })
+      })
+    })
+
     describe(`Action "${RepositoryDetailActions.FETCH_REPOSITORY_DETAIL}"`, () => {
       describe(`Success`, () => {
         beforeEach(async () => {
