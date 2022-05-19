@@ -798,8 +798,13 @@ export const actions: RepositoryDetailModuleActions = {
       )
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
       commit(RepositoryDetailMutations.SET_LOADING, false)
-    } catch (error) {
-      commit(RepositoryDetailMutations.SET_ERROR, error)
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'Unable to fetch reporting configuration', undefined, {
+        context: 'repo reporting query failed',
+        params: args
+      })
+
+      commit(RepositoryDetailMutations.SET_ERROR, e)
       commit(RepositoryDetailMutations.SET_LOADING, false)
     }
   },

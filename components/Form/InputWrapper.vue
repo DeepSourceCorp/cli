@@ -10,7 +10,7 @@
       >
         <slot name="label"> {{ label }} </slot>
       </label>
-      <div class="text-xs text-vanilla-400 leading-5">
+      <div class="text-xs leading-5 text-vanilla-400">
         <slot name="description">
           <p v-html="description"></p>
         </slot>
@@ -20,7 +20,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component({})
 export default class InputWrapper extends Vue {
@@ -44,11 +44,11 @@ export default class InputWrapper extends Vue {
   cascadeInput: boolean
 
   get gridClass(): string {
-    if (this.inputWidth === 'xx-small') return 'grid-cols-fr-8'
-    if (this.inputWidth === 'x-small') return 'grid-cols-fr-12'
-    if (this.inputWidth === 'small') return 'grid-cols-fr-16'
-    if (this.inputWidth === 'base') return 'grid-cols-fr-20'
-    if (this.inputWidth === 'wide') return 'grid-cols-fr-24'
+    if (this.inputWidth === 'xx-small') return 'grid-cols-1 md:grid-cols-fr-8'
+    if (this.inputWidth === 'x-small') return 'grid-cols-1 md:grid-cols-fr-12'
+    if (this.inputWidth === 'small') return 'grid-cols-1 md:grid-cols-fr-16'
+    if (this.inputWidth === 'base') return 'grid-cols-1 md:grid-cols-fr-20'
+    if (this.inputWidth === 'wide') return 'grid-cols-1 md:grid-cols-fr-24'
 
     return 'grid-cols-fr-16'
   }

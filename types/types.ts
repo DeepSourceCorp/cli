@@ -3596,6 +3596,7 @@ export type Repository = MaskPrimaryKeyNode & {
   isWatched?: Maybe<Scalars['Boolean']>;
   hasAdhocRuns?: Maybe<Scalars['Boolean']>;
   hasHacktoberfestEnabled?: Maybe<Scalars['Boolean']>;
+  gitlabIntegrationUseStatus?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -5034,6 +5035,7 @@ export type UpdateRepositorySettingsInput = {
   keepExistingIssues?: Maybe<Scalars['Boolean']>;
   issueTypeSettings?: Maybe<Array<Maybe<IssueTypeSettingInput>>>;
   issuePrioritySettings?: Maybe<Array<Maybe<RepositoryIssuePrioritySettingsInput>>>;
+  gitlabIntegrationUseStatus?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -9532,7 +9534,7 @@ export type Unnamed_154_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'name' | 'dsn' | 'hasTestCoverage'>
+    & Pick<Repository, 'id' | 'name' | 'dsn' | 'hasTestCoverage' | 'gitlabIntegrationUseStatus'>
     & { issueTypeSettings?: Maybe<Array<Maybe<(
       { __typename?: 'IssueTypeSetting' }
       & Pick<IssueTypeSetting, 'name' | 'slug' | 'description' | 'isIgnoredInCheckStatus' | 'isIgnoredToDisplay'>

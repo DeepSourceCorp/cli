@@ -1,0 +1,1457 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":false,"inputWidth":"base"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":false,"inputWidth":"small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":false,"inputWidth":"wide"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":false,"inputWidth":"x-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":false,"inputWidth":"xx-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":false,"inputWidth":null} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":false} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":true,"inputWidth":"base"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":true,"inputWidth":"small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":true,"inputWidth":"wide"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":true,"inputWidth":"x-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":true,"inputWidth":"xx-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":true,"inputWidth":null} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"","disabled":true} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\" customgridclass=\\"\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":false,"inputWidth":"base"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":false,"inputWidth":"small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":false,"inputWidth":"wide"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":false,"inputWidth":"x-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":false,"inputWidth":"xx-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":false,"inputWidth":null} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":false} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":true,"inputWidth":"base"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":true,"inputWidth":"small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":true,"inputWidth":"wide"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":true,"inputWidth":"x-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":true,"inputWidth":"xx-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":true,"inputWidth":null} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":"grid-cols-1 md:grid-cols-4","disabled":true} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\" customgridclass=\\"grid-cols-1 md:grid-cols-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":false,"inputWidth":"base"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":false,"inputWidth":"small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":false,"inputWidth":"wide"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":false,"inputWidth":"x-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":false,"inputWidth":"xx-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":false,"inputWidth":null} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":false} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":true,"inputWidth":"base"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":true,"inputWidth":"small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":true,"inputWidth":"wide"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":true,"inputWidth":"x-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":true,"inputWidth":"xx-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":true,"inputWidth":null} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"customGridClass":null,"disabled":true} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":false,"inputWidth":"base"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":false,"inputWidth":"small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":false,"inputWidth":"wide"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":false,"inputWidth":"x-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":false,"inputWidth":"xx-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":false,"inputWidth":null} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":false} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-pointer\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-pointer hover:border-juniper\\"><!----></span><input type=\\"radio\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 cursor-pointer\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":true,"inputWidth":"base"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":true,"inputWidth":"small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":true,"inputWidth":"wide"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":true,"inputWidth":"x-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":true,"inputWidth":"xx-small"} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":true,"inputWidth":null} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RadioGroupInput ]] renders \`RadioGroupInput\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","options":[{"value":"Value 1","label":"Label 1"},{"value":"Value 2","label":"Label 2"}],"disabled":true} 1`] = `
+"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+  <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
+    <div class=\\"text-xs leading-5 text-vanilla-400\\">
+      <p>Test description</p>
+    </div>
+  </div>
+  <div>
+    <div role=\\"radiogroup\\" class=\\"z-radio-group space-y-5\\" id=\\"test-input-id\\">
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 1\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 1 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <div class=\\"space-y-1 text-sm\\">
+        <div class=\\"inline-flex gap-x-2\\"><label class=\\"z-radio text-vanilla-100 flex items-center cursor-not-allowed\\"><span class=\\"z-radio--inner rounded-full w-4 h-4 relative cursor-pointer inline-block box-border border-solid border-2 border-slate bg-transparent cursor-not-allowed hover:border-slate\\"><!----></span><input type=\\"radio\\" disabled=\\"disabled\\" class=\\"opacity-0 absolute h-0 w-0\\" value=\\"Value 2\\"><span class=\\"label ml-2 text-slate cursor-not-allowed\\"> Label 2 </span></label>
+          <!---->
+        </div>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;

@@ -1,7 +1,20 @@
 <template>
   <div class="flex flex-col max-w-2xl p-4 gap-y-2">
     <!-- title -->
-    <h2 class="text-lg font-medium mb-4">Reporting</h2>
+    <h2 class="text-lg font-medium" :class="{ 'mb-4': !providerIsGitLab }">Reporting</h2>
+
+    <!-- GitLab reporting mode -->
+    <form-group v-if="providerIsGitLab">
+      <radio-group-input
+        v-model="reportingMode"
+        :read-only="$fetchState.pending || updatingIntegrationModeSettings"
+        :options="reportingModeOptions"
+        label="Integration mode"
+        input-id="team-settings-access-base-perms"
+        input-width="wide"
+        @change="updateRepositorySettings(InputTypes.INTEGRATION_MODE)"
+      />
+    </form-group>
 
     <!-- Reporting Configuration -->
 
@@ -12,7 +25,7 @@
           Control which category of issues are reported, and when analysis run is marked as failed.
         </p>
       </div>
-      <z-table class="text-vanilla-100 rounded-md">
+      <z-table v-if="repoSettings.length" class="rounded-md text-vanilla-100">
         <template v-slot:head>
           <z-table-row>
             <z-table-cell
@@ -29,7 +42,7 @@
             <div
               v-for="index in 8"
               :key="index"
-              class="bg-ink-300 animate-pulse opacity-50 p-5 border-b border-ink-200"
+              class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
             ></div>
           </template>
           <template v-else>
@@ -52,7 +65,7 @@
                   spacing="4"
                   font-size="base"
                   class="h-full"
-                  @change="updateRepositorySettings"
+                  @change="updateRepositorySettings(InputTypes.ISSUE_TYPE)"
                 />
               </z-table-cell>
               <z-table-cell
@@ -66,14 +79,14 @@
                   spacing="4"
                   font-size="base"
                   class="h-full m-0"
-                  @change="updateRepositorySettings"
+                  @change="updateRepositorySettings(InputTypes.ISSUE_TYPE)"
                 />
               </z-table-cell>
             </z-table-row>
           </template>
         </template>
       </z-table>
-      <z-table class="text-vanilla-100 mt-4">
+      <z-table v-if="issuePrioritySettings.length" class="mt-4 text-vanilla-100">
         <template v-slot:head>
           <z-table-row>
             <z-table-cell
@@ -90,7 +103,7 @@
             <div
               v-for="index in 3"
               :key="index"
-              class="bg-ink-300 animate-pulse opacity-50 p-5 border-b border-ink-200"
+              class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
             ></div>
           </template>
           <template v-else>
@@ -113,7 +126,7 @@
                   spacing="4"
                   font-size="base"
                   class="h-full"
-                  @change="updateRepositorySettings"
+                  @change="updateRepositorySettings(InputTypes.ISSUE_PRIORITY)"
                 />
               </z-table-cell>
               <z-table-cell
@@ -127,7 +140,7 @@
                   spacing="4"
                   font-size="base"
                   class="h-full m-0"
-                  @change="updateRepositorySettings"
+                  @change="updateRepositorySettings(InputTypes.ISSUE_PRIORITY)"
                 />
               </z-table-cell>
             </z-table-row>
@@ -150,10 +163,10 @@
           </label>
           <div
             v-if="hideContents"
-            class="absolute top-8 flex items-center justify-between p-2 w-full h-10 border backdrop-blur bg-ink-400 bg-opacity-10 no-filter:bg-opacity-100 border-ink-200"
+            class="absolute flex items-center justify-between w-full h-10 p-2 border top-8 backdrop-blur bg-ink-400 bg-opacity-10 no-filter:bg-opacity-100 border-ink-200"
           >
             <button
-              class="flex items-center gap-x-2 text-sm leading-none cursor-pointer mx-auto"
+              class="flex items-center mx-auto text-sm leading-none cursor-pointer gap-x-2"
               @click="showContents()"
             >
               <z-icon size="small" icon="eye" color="vanilla-100"></z-icon>
@@ -163,7 +176,7 @@
           </div>
         </div>
       </div>
-      <p class="text-xs text-vanilla-400 leading-5">
+      <p class="text-xs leading-5 text-vanilla-400">
         This DSN should be used to send any external information about this repository to DeepSource
         from external sources, such as DeepSource CLI.
         <span class="font-medium text-vanilla-100">Please keep this confidential.</span>
@@ -175,7 +188,7 @@
     <div class="flex flex-col gap-y-4">
       <div class="text-sm text-vanilla-100">Test Coverage</div>
       <!-- Notice -->
-      <p class="text-xs text-vanilla-400 leading-5">
+      <p class="text-xs leading-5 text-vanilla-400">
         For tracking test coverage, external data has to be sent to DeepSource. Read
         <a
           href="https://deepsource.io/docs/analyzer/test-coverage"
@@ -209,14 +222,29 @@ import {
   ZTable,
   ZTableCell,
   ZTableRow,
-  ZCheckbox
+  ZCheckbox,
+  ZRadioGroup,
+  ZRadio
 } from '@deepsourcelabs/zeal'
-import { IssuePrioritySetting, IssueTypeSetting, Maybe, Repository } from '~/types/types'
+import {
+  IssuePrioritySetting,
+  IssueTypeSetting,
+  Maybe,
+  Repository,
+  UpdateRepositorySettingsInput
+} from '~/types/types'
 import { InfoBanner } from '@/components/Settings/index'
 import { RepoPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import { IssueType } from '~/components/Repository'
 
 const repoStore = namespace('repository/detail')
+
+enum InputTypes {
+  ISSUE_TYPE = 'issueType',
+  ISSUE_PRIORITY = 'issuePriority',
+  INTEGRATION_MODE = 'integrationMode'
+}
 
 @Component({
   components: {
@@ -229,7 +257,9 @@ const repoStore = namespace('repository/detail')
     ZTableCell,
     ZTableRow,
     ZCheckbox,
-    InfoBanner
+    InfoBanner,
+    ZRadioGroup,
+    ZRadio
   },
   layout: 'repository',
   middleware: ['perm'],
@@ -252,9 +282,14 @@ export default class Reporting extends mixins(RepoDetailMixin) {
 
   public hideContents = true
   public isFetchingData = false
+  public updatingIntegrationModeSettings = false
 
   public repoSettings: Array<IssueTypeSetting> = []
   public issuePrioritySettings: Array<IssuePrioritySetting> = []
+
+  InputTypes = InputTypes
+
+  reportingMode = ''
 
   public headerData = [
     { title: 'Issue category', align: 'text-left' },
@@ -268,6 +303,22 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     { title: 'Mark runs as failed?', align: 'text-center' }
   ]
 
+  reportingModeOptions = [
+    {
+      value: 'commit',
+      label: 'Pipelines/Commit Status API',
+      description:
+        'We use the GitLab Commit Status API to create a pipeline. This can be used to block merges based on the results from DeepSource.'
+    },
+    {
+      value: 'comments',
+      label: 'Comments',
+      description:
+        'We post a comment on the respective merge request with the analysis results. This is deprecated and will be removed by us soon.',
+      badgeText: 'Deprecated'
+    }
+  ]
+
   async fetch(): Promise<void> {
     this.isFetchingData = true
     await this.fetchRepositorySettingsReporting({
@@ -277,6 +328,21 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     })
     this.refinedIssueTypeSettings()
     this.isFetchingData = false
+
+    if (this.providerIsGitLab) {
+      this.reportingMode = this.repository.gitlabIntegrationUseStatus ? 'commit' : 'comments'
+    }
+  }
+
+  get gitlabIntegrationUseStatus(): boolean | undefined {
+    if (!this.providerIsGitLab) {
+      return undefined
+    }
+    return this.reportingMode === 'commit'
+  }
+
+  get providerIsGitLab(): boolean {
+    return this.$route.params.provider === 'gl'
   }
 
   /**
@@ -320,7 +386,7 @@ export default class Reporting extends mixins(RepoDetailMixin) {
    *
    * @returns {Promise<void>}
    */
-  public async updateRepositorySettings(): Promise<void> {
+  public async updateRepositorySettings(inputType: InputTypes): Promise<void> {
     if (
       this.repository?.id &&
       this.repository?.issueTypeSettings &&
@@ -328,16 +394,23 @@ export default class Reporting extends mixins(RepoDetailMixin) {
       !this.isFetchingData
     ) {
       try {
+        const input = { id: this.repository.id } as UpdateRepositorySettingsInput
+
+        if (inputType === InputTypes.ISSUE_TYPE) {
+          input.issueTypeSettings = this.repoSettings.length
+            ? this.repoSettings
+            : this.repository.issueTypeSettings
+        } else if (inputType === InputTypes.ISSUE_PRIORITY) {
+          input.issuePrioritySettings = this.issuePrioritySettings.length
+            ? this.issuePrioritySettings
+            : this.repository.issuePrioritySettings
+        } else if (inputType === InputTypes.INTEGRATION_MODE) {
+          this.updatingIntegrationModeSettings = true
+          input.gitlabIntegrationUseStatus = this.gitlabIntegrationUseStatus
+        }
+
         await this.updateRepoSettings({
-          input: {
-            id: this.repository.id,
-            issueTypeSettings: this.repoSettings.length
-              ? this.repoSettings
-              : this.repository.issueTypeSettings,
-            issuePrioritySettings: this.issuePrioritySettings.length
-              ? this.issuePrioritySettings
-              : this.repository.issuePrioritySettings
-          }
+          input
         })
         await this.fetchRepositorySettingsReporting({
           provider: this.$route.params.provider,
@@ -348,6 +421,10 @@ export default class Reporting extends mixins(RepoDetailMixin) {
         this.$toast.success('Repository settings updated successfully.')
       } catch (error) {
         this.$toast.danger('Error updating repository. Please try again.')
+      } finally {
+        if (inputType === InputTypes.INTEGRATION_MODE) {
+          this.updatingIntegrationModeSettings = false
+        }
       }
     }
   }

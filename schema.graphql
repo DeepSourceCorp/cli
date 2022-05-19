@@ -1939,6 +1939,7 @@ type Repository implements MaskPrimaryKeyNode {
   isWatched: Boolean
   hasAdhocRuns: Boolean
   hasHacktoberfestEnabled: Boolean
+  gitlabIntegrationUseStatus: Boolean
 }
 
 type RepositoryCollaborator implements MaskPrimaryKeyNode {
@@ -2903,6 +2904,7 @@ input UpdateRepositorySettingsInput {
   keepExistingIssues: Boolean = true
   issueTypeSettings: [IssueTypeSettingInput]
   issuePrioritySettings: [RepositoryIssuePrioritySettingsInput]
+  gitlabIntegrationUseStatus: Boolean
   id: ID!
   clientMutationId: String
 }
