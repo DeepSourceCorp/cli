@@ -131,7 +131,7 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   async refetchData(refetch = false) {
     const { owner, provider } = this.$route.params
     await this.fetchTeamMembers(refetch)
-    await this.fetchOwnerDetails({ login: owner, provider })
+    await this.fetchOwnerDetails({ login: owner, provider, refetch })
     await this.fetchBillingDetails({ login: owner, provider, refetch })
   }
 
