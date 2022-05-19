@@ -22,20 +22,22 @@
         <div class="flex-grow h-8 rounded-md bg-ink-300"></div>
       </div>
     </div>
-    <template v-else-if="team.members && team.members.edges && team.members.edges.length">
+    <template v-else-if="teamMembersList && teamMembersList.length">
       <transition-group
         move-class="duration-200 transform"
         tag="ul"
         class="divide-y divide-ink-300"
       >
         <member-list-item
-          v-for="member in team.members.edges"
-          :key="member.node.id"
-          :role="member.node.role"
-          :isPrimaryUser="member.node.isPrimaryUser"
-          v-bind="member.node.user"
+          v-for="member in teamMembersList"
+          :key="member.id"
+          :role="member.role"
+          :is-primary-user="member.isPrimaryUser"
+          :allow-transfer="allowTransfer"
+          v-bind="member.user"
           @updateRole="triggerUpdateRole"
           @removeMember="triggerRemoveMember"
+          @transferOwnership="triggerTransferOwnership"
         />
       </transition-group>
       <z-pagination
@@ -62,6 +64,16 @@
         v-bind="userToUpdate"
         :showModal="showRemoveMemberModal"
       ></remove-member-modal>
+      <transfer-ownership-modal
+        v-if="showTransferOwnershipModal"
+        v-bind="userToUpdate"
+        :show-modal="showTransferOwnershipModal"
+        :members="teamMembersList"
+        :transfer-success="transferOwnershipSuccessful"
+        :transfer-loading="transferInProgress"
+        @close="closeTransferOwnershipModal"
+        @primaryAction="transferTeamOwnership"
+      />
     </portal>
   </div>
 </template>
@@ -69,11 +81,17 @@
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
-import { MemberListItem, UpdateRoleModal, RemoveMemberModal } from '@/components/Members'
+import {
+  MemberListItem,
+  UpdateRoleModal,
+  RemoveMemberModal,
+  TransferOwnershipModal
+} from '@/components/Members'
 import { ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
 
-import { User } from '~/types/types'
+import { User, TeamMember } from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'
+import { resolveNodes } from '~/utils/array'
 
 @Component({
   components: {
@@ -82,7 +100,8 @@ import { TeamPerms } from '~/types/permTypes'
     MemberListItem,
     ZPagination,
     UpdateRoleModal,
-    RemoveMemberModal
+    RemoveMemberModal,
+    TransferOwnershipModal
   },
   middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
@@ -100,6 +119,9 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   public listLoading = false
   public showUpdateRoleModal = false
   public showRemoveMemberModal = false
+  public showTransferOwnershipModal = false
+  public transferOwnershipSuccessful = false
+  public transferInProgress = false
   public userToUpdate: Record<string, string> = {}
 
   async fetch(): Promise<void> {
@@ -115,6 +137,14 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
 
   async searchActiveUsers(): Promise<void> {
     await this.fetchTeamMembers()
+  }
+
+  get teamMembersList(): TeamMember[] {
+    return resolveNodes(this.team.members) as TeamMember[]
+  }
+
+  get allowTransfer(): boolean {
+    return this.team.numMembersTotal ? this.team.numMembersTotal > 1 : false
   }
 
   @Watch('currentPage')
@@ -142,6 +172,11 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
     this.showRemoveMemberModal = true
   }
 
+  triggerTransferOwnership(user: Record<string, string>): void {
+    this.userToUpdate = user
+    this.showTransferOwnershipModal = true
+  }
+
   async updateRole(email: string, newRole: string): Promise<void> {
     await this.updateMemberRole({
       ownerId: this.team.id,
@@ -162,12 +197,29 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
     this.closeRemoveMemberModal()
   }
 
+  async transferTeamOwnership(newOwnerId: User['id']): Promise<void> {
+    this.transferInProgress = true
+    const success = await this.transferOwnership({
+      teamId: this.team.id,
+      userId: newOwnerId
+    })
+
+    this.transferInProgress = false
+
+    this.transferOwnershipSuccessful = success
+    if (success) await this.refetchData(true)
+  }
+
   closeUpdateRoleModal(): void {
     this.showUpdateRoleModal = false
   }
 
   closeRemoveMemberModal(): void {
     this.showRemoveMemberModal = false
+  }
+
+  closeTransferOwnershipModal(): void {
+    this.showTransferOwnershipModal = false
   }
 
   get totalPages(): number {

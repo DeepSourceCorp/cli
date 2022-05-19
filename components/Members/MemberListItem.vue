@@ -1,20 +1,42 @@
 <template>
-  <li class="flex items-center py-2 space-x-3 text-sm" @click="$emit('click')">
-    <div>
-      <z-avatar
-        :image="avatar"
-        :fallback-image="context.emptyAvatarUrl"
-        :userName="fullName"
-      ></z-avatar>
+  <li
+    class="flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm"
+    @click="$emit('click')"
+  >
+    <div class="h-full flex flex-row align-bottom space-x-2.5 md:col-span-2">
+      <div>
+        <z-avatar :image="avatar" :user-name="fullName" :fallback-image="context.emptyAvatarUrl" />
+      </div>
+      <div
+        class="flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100"
+      >
+        <div class="font-medium">{{ fullName || email }}</div>
+
+        <div v-if="fullName" class="inline-flex items-end">
+          <span class="text-xs leading-none sm:text-sm text-vanilla-400">{{ email }}</span>
+        </div>
+
+        <div class="inline-flex items-center md:hidden w-max">
+          <z-icon icon="calendar" size="x-small" class="mr-1" />
+          <span class="text-xs leading-none sm:text-sm text-vanilla-400">Joined {{ joining }}</span>
+        </div>
+      </div>
     </div>
-    <div class="items-center w-1/2 space-y-1 leading-none text-vanilla-100">
-      <div>{{ fullName || email }}</div>
-      <div class="text-xs text-vanilla-400" v-if="fullName">{{ email }}</div>
+    <div class="flex flex-row h-full align-bottom md:col-span-2">
+      <div class="items-center hidden md:inline-flex">
+        <z-icon icon="calendar" size="x-small" class="mr-1" />
+        <span class="text-xs leading-none sm:text-sm text-vanilla-400">Joined {{ joining }}</span>
+      </div>
     </div>
     <div v-if="showRoleOptions" class="flex items-center justify-end flex-grow">
       <div class="text-right">
-        <div v-if="isPrimaryUser && !isRepo" class="text-juniper">Owner</div>
-        <z-menu v-else width="large" direction="left">
+        <div
+          v-if="isPrimaryUser && !isRepo && !showOwnerMenu"
+          class="text-vanilla-100 text-xs font-semibold tracking-wider uppercase"
+        >
+          Owner
+        </div>
+        <z-menu v-else :width="isPrimaryUser && !isRepo ? 'small' : 'large'" direction="left">
           <template v-slot:trigger="{ toggle }">
             <button
               type="button"
@@ -22,11 +44,25 @@
               class="flex items-center justify-end w-full space-x-2 outline-none focus:outline-none"
               @click="toggle"
             >
-              <span>{{ roles[role].title }}</span>
+              <span class="text-xs font-semibold tracking-wider uppercase">
+                {{ isPrimaryUser && !isRepo && showOwnerMenu ? 'Owner' : roles[role].title }}
+              </span>
               <z-icon size="small" icon="chevron-down"></z-icon>
             </button>
           </template>
-          <template slot="body">
+          <template v-if="isPrimaryUser && !isRepo && showOwnerMenu" slot="body">
+            <z-menu-item
+              class="text-sm"
+              @click="transferOwnership"
+              data-testid="transfer-ownership"
+            >
+              <div class="inline-flex items-center w-full">
+                <z-icon icon="users" size="small" class="mr-1" />
+                Transfer ownership
+              </div>
+            </z-menu-item>
+          </template>
+          <template v-else slot="body">
             <z-menu-section class="text-left">
               <z-menu-item v-for="(opt, key) in roles" :key="key" class="text-sm">
                 <div :data-testid="`${key}-button`" @click="updateRole(key)">
@@ -54,13 +90,14 @@
             </z-menu-section>
           </template>
         </z-menu>
-        <div class="text-xs text-vanilla-400">since {{ joining }}</div>
       </div>
     </div>
     <div v-else class="flex items-center justify-end flex-grow">
       <div class="text-right">
         <div class="text-vanilla-200">{{ isPrimaryUser ? 'Owner' : roles[role].title }}</div>
-        <div class="text-xs text-vanilla-400">since {{ joining }}</div>
+        <div class="inline-flex text-xs text-vanilla-400">
+          <z-icon icon="calendar" />since {{ joining }}
+        </div>
       </div>
     </div>
   </li>
@@ -73,6 +110,7 @@ import TEAM_PERMS from '~/utils/teamPerms'
 
 import { User } from '~/types/types'
 import ContextMixin from '~/mixins/contextMixin'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
 const REPO_PERMS = {
   ADMIN: {
@@ -97,7 +135,7 @@ const REPO_PERMS = {
 @Component({
   components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar }
 })
-export default class MemberListItem extends mixins(ContextMixin) {
+export default class MemberListItem extends mixins(ContextMixin, OwnerDetailMixin) {
   @Prop()
   role!: string
 
@@ -128,6 +166,9 @@ export default class MemberListItem extends mixins(ContextMixin) {
   @Prop({ default: true })
   clickable!: boolean
 
+  @Prop({ default: false })
+  allowTransfer!: boolean
+
   // private roles = {}
 
   get joining(): string {
@@ -139,6 +180,10 @@ export default class MemberListItem extends mixins(ContextMixin) {
       return REPO_PERMS
     }
     return TEAM_PERMS
+  }
+
+  get showOwnerMenu() {
+    return this.allowTransfer && this.owner.isViewerPrimaryUser
   }
 
   updateRole(newRole: string): void {
@@ -153,6 +198,14 @@ export default class MemberListItem extends mixins(ContextMixin) {
 
   removeMember(): void {
     this.$emit('removeMember', {
+      id: this.id,
+      email: this.email,
+      fullName: this.fullName
+    })
+  }
+
+  transferOwnership(): void {
+    this.$emit('transferOwnership', {
       id: this.id,
       email: this.email,
       fullName: this.fullName

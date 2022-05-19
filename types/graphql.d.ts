@@ -780,6 +780,14 @@ declare module '*/removeMember.gql' {
 
   export default defaultDocument;
 }
+
+declare module '*/transferOwnership.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
     
 
 declare module '*/resetTeamInviteLink.gql' {

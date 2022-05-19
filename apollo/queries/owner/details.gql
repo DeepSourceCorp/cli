@@ -12,6 +12,7 @@ query($login: String!, $provider: VCSProviderChoices!) {
     isAutoonboardAllowed
     hasPremiumPlan
     canOnboard
+    isViewerPrimaryUser
     team {
       id
     }

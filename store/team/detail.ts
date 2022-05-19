@@ -6,11 +6,13 @@ import {
 } from '~/types/apollo-graphql-types'
 import { ActionTree, MutationTree, Store, ActionContext } from 'vuex'
 import { RootState } from '~/store'
+import { resolveNodes } from '~/utils/array'
 
 // Apollo Types
 import {
   Team,
   TeamBasePermissionSetDefaultRepositoryPermission,
+  TeamMember,
   TeamMemberRoleChoices,
   UpdateTeamBasePermissionsPayload
 } from '~/types/types'
@@ -26,6 +28,7 @@ import TeamInviteUrlQuery from '~/apollo/queries/team/inviteUrl.gql'
 import inviteMembers from '~/apollo/mutations/team/inviteMembers.gql'
 import inviteSingle from '~/apollo/mutations/team/inviteSingle.gql'
 import removeMember from '~/apollo/mutations/team/removeMember.gql'
+import transferOwnership from '~/apollo/mutations/team/transferOwnership.gql'
 import resetTeamInviteLink from '~/apollo/mutations/team/resetTeamInviteLink.gql'
 import updateRole from '~/apollo/mutations/team/updateRole.gql'
 
@@ -79,6 +82,7 @@ export const mutations: TeamActionsModuleMutations = {
 export enum TeamActions {
   FETCH_TEAM_INFO = 'fetchTeamInfo',
   FETCH_TEAM_SETTINGS = 'fetchTeamSettings',
+  QUERY_TEAM_MEMBERS = 'queryTeamMembers',
 
   // Invitation
   FETCH_INVITED_USERS = 'fetchInvitedUsers',
@@ -89,6 +93,7 @@ export enum TeamActions {
   // Modify Member
   REMOVE_MEMBER = 'removeMember',
   UPDATE_MEMBER_ROLE = 'updateMemberRole',
+  TRANSFER_OWNERSHIP = 'transferOwnership',
 
   // Invite Links
   FETCH_INVITE_LINK = 'fetchInviteLink',
@@ -126,6 +131,19 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
       refetch?: boolean
     }
   ) => Promise<void>
+  [TeamActions.QUERY_TEAM_MEMBERS]: (
+    this: Store<RootState>,
+    injectee: TeamActionContext,
+    args: {
+      login: string
+      provider: string
+      limit: number
+      currentPage: number
+      query: string
+      refetch?: boolean
+    },
+    refetch?: boolean
+  ) => Promise<Array<TeamMember> | undefined>
   [TeamActions.FETCH_INVITED_USERS]: (
     this: Store<RootState>,
     injectee: TeamActionContext,
@@ -145,6 +163,14 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
       role: string
     }
   ) => Promise<void>
+  [TeamActions.TRANSFER_OWNERSHIP]: (
+    this: Store<RootState>,
+    injectee: TeamActionContext,
+    args: {
+      teamId: string
+      userId: string
+    }
+  ) => Promise<boolean>
   [TeamActions.REMOVE_MEMBER]: (
     this: Store<RootState>,
     injectee: TeamActionContext,
@@ -296,6 +322,28 @@ export const actions: TeamModuleActions = {
     }
   },
 
+  async [TeamActions.QUERY_TEAM_MEMBERS](
+    {},
+    { login, provider, limit, currentPage, query, refetch }
+  ) {
+    try {
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        TeamMembersListQuery,
+        {
+          provider: this.$providerMetaMap[provider].value,
+          after: this.$getGQLAfter(currentPage, limit),
+          limit,
+          login,
+          query
+        },
+        refetch
+      )
+      return resolveNodes(response.data.team?.members) as TeamMember[]
+    } catch (e) {
+      this.$logErrorAndToast((e as Error, e.message.replace('GraphQL error: ', '')))
+    }
+  },
+
   async [TeamActions.FETCH_INVITED_USERS]({ commit }, { login, provider, limit, currentPage }) {
     try {
       commit(TeamMutations.SET_LOADING, true)
@@ -344,6 +392,19 @@ export const actions: TeamModuleActions = {
       commit(TeamMutations.SET_ERROR, e)
     } finally {
       commit(TeamMutations.SET_LOADING, false)
+    }
+  },
+
+  async [TeamActions.TRANSFER_OWNERSHIP]({}, args) {
+    try {
+      const response = (await this.$applyGraphqlMutation(transferOwnership, {
+        teamId: args.teamId,
+        userId: args.userId
+      })) as GraphqlMutationResponse
+      return response.data.transferTeamOwnership?.ok || false
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, e.message.replace('GraphQL error: ', ''))
+      return false
     }
   },
 

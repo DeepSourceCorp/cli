@@ -3457,6 +3457,12 @@ export type RemoveTeamMemberPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type TransferTeamOwnershipPayload = {
+  __typename?: 'TransferTeamOwnershipPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+}
+
 export type RemoveUserFromGroupInput = {
   groupId: Scalars['ID'];
   userId: Scalars['ID'];
@@ -4581,12 +4587,6 @@ export enum TransactionTransactionType {
 export type TransferTeamOwnershipInput = {
   teamId: Scalars['ID'];
   newPrimaryUserId: Scalars['ID'];
-  clientMutationId?: Maybe<Scalars['String']>;
-};
-
-export type TransferTeamOwnershipPayload = {
-  __typename?: 'TransferTeamOwnershipPayload';
-  ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 

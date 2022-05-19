@@ -34,6 +34,14 @@ const store = new Vuex.Store({
           emptyAvatarUrl: ''
         }
       }
+    },
+    'owner/detail': {
+      namespaced: true,
+      state: {
+        owner: {
+          isViewerPrimaryUser: true
+        }
+      }
     }
   }
 })
@@ -149,4 +157,34 @@ test('Emits "removeMember" event', async () => {
 
   expect(emitted()).toHaveProperty('removeMember')
   expect(emitted()['removeMember'][0][0].id).toBe(baseProps.id)
+})
+
+test('Emits "transferOwnership" event', async () => {
+  const testProps = {
+    clickable: true,
+    isPrimaryUser: true,
+    allowTransfer: true,
+    isRepo: false,
+    role: 'ADMIN',
+    showRoleOptions: true
+  }
+
+  const { getByTestId, emitted } = render(MemberListItem, {
+    props: { ...baseProps, ...testProps },
+    stubs: {
+      ZIcon: true,
+      ZAvatar: true
+    },
+    components: { ZMenu, ZMenuItem, ZMenuSection },
+    store
+  })
+
+  const button = getByTestId('show-role-menu')
+  await fireEvent(button, new Event('click'))
+
+  const roleButton = getByTestId('transfer-ownership')
+  await fireEvent(roleButton, new Event('click'))
+
+  expect(emitted()).toHaveProperty('transferOwnership')
+  expect(emitted()['transferOwnership'][0][0].id).toBe(baseProps.id)
 })

@@ -46,6 +46,9 @@ export default class TeamDetailMixin extends Vue {
   @teamStore.Action(TeamActions.REMOVE_MEMBER)
   removeMemberFromTeam: (args: { ownerId: string; email: string }) => Promise<void>
 
+  @teamStore.Action(TeamActions.TRANSFER_OWNERSHIP)
+  transferOwnership: (args: { teamId: string; userId: string }) => Promise<boolean>
+
   @teamStore.Action(TeamActions.INVITE_MEMBERS)
   inviteAll: (args: {
     ownerId: string
