@@ -44,7 +44,7 @@
           v-for="integration in integrations"
           :key="integration.shortcode"
           :to="$generateRoute(['settings', 'integrations', integration.shortcode])"
-          class="flex flex-col p-4 text-left bg-ink-300 hover:bg-ink-200"
+          class="flex flex-col p-4 text-left bg-ink-300 hover:bg-ink-200 rounded-md"
         >
           <div class="space-y-2">
             <div class="flex gap-x-3">

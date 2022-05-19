@@ -38,7 +38,7 @@
         v-if="hasIntegrationEnabled"
         class="flex items-center text-xs grid-x-1 text-vanilla-400 mb-7"
       >
-        <span>Enabled by</span>
+        <span>Installed by</span>
         <z-avatar
           image="https://dev-asgard-static.s3.us-east-1.amazonaws.com/dashboard/images/empty-avatar.svg"
           user-name="Sanket Saurav"

@@ -1,5 +1,11 @@
 <template>
   <div>
+    <breadcrumb-container
+      :links="[
+        { label: 'Integrations', route: $generateRoute(['settings', 'integrations']) },
+        { label: 'Slack' }
+      ]"
+    />
     <div class="p-4 pb-32 md:max-w-2xl">
       <div class="flex justify-between">
         <div class="inline-flex items-center space-x-2">

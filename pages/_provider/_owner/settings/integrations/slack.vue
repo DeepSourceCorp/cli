@@ -46,7 +46,7 @@
         v-if="integration.installed"
         class="flex items-center text-xs gap-x-1 text-vanilla-400 mb-7"
       >
-        <span>Enabled by</span>
+        <span>Installed by</span>
         <z-avatar
           :image="avatar"
           :user-name="userName"
@@ -67,9 +67,9 @@
         <div class="space-y-2">
           <h2 class="text-sm font-medium text-vanilla-100">How does it work?</h2>
           <p class="text-xs leading-relaxed text-vanilla-400">
-            Configure personal and event-specific Slack notifications for your DeepSource issues.
-            This integration also enables anyone in your team to configure team and event-specific
-            notifications to their own Slack channels and receive personal Slack notifications.
+            Receive event updates, like analysis and Autofix results, in real-time to your Slack
+            workspace. Repository administrators can configure a different notification channel in
+            their respective repository’s settings.
           </p>
         </div>
       </z-alert>
