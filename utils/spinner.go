@@ -23,7 +23,6 @@ func (s *SpinnerUtils) StartSpinnerWithLabel(label, finalMessage string) {
 	if label != "" {
 		sp.Suffix = " " + label + " "
 	}
-
 	sp.Start() // Start the spinner
 	s.Spinner = sp
 }
