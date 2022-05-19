@@ -91,7 +91,7 @@ func (d *DockerClient) executeImageBuild() error {
 }
 
 func checkResponse(rd io.Reader) error {
-	
+
 	var lastLine []byte
 	count := 0
 	var currentStream string
