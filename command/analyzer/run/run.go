@@ -13,24 +13,23 @@ import (
 )
 
 type AnalyzerRunOpts struct {
-	SourcePath    string
-	RemoteSource  bool
-	CloneDir      string
-	AnalysisFiles []string
+	SourcePath         string   // The path of the directory of source code to be analyzed
+	RemoteSource       bool     // True if the source to be analyzed is a remote VCS repository
+	TempCloneDirectory string   // The temporary directory where the source of the remote VCS will be cloned to
+	AnalysisFiles      []string // The list of analysis files
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
-	// Setting the current working directory as the default
-	// path of the source to be analyzed
+	// Setting the current working directory as the default path of the source to be analyzed
 	cwd, _ := os.Getwd()
 	opts := AnalyzerRunOpts{
-		SourcePath:   cwd,
-		RemoteSource: false,
-		CloneDir:     "",
+		SourcePath:         cwd,
+		RemoteSource:       false,
+		TempCloneDirectory: "",
 	}
 
 	cmd := &cobra.Command{
-		Use:   "run",
+		Use:   "dry-run",
 		Short: "Run DeepSource Analyzer locally",
 		Args:  utils.ExactArgs(1),
 		RunE: func(_ *cobra.Command, args []string) error {
@@ -46,6 +45,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	return cmd
 }
 
+// Run the Analyzer locally on a certain directory or repository
 func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	// Get the Analyzer.toml contents
 	analyzerTOMLData, err := config.GetAnalyzerTOML()
@@ -56,6 +56,7 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	// Build the latest Analyzer image
 	dockerFilePath, dockerFileName := docker_build.GetDockerImageDetails(analyzerTOMLData)
 	analyzerName := strings.Split(dockerFileName, "/")[1]
+
 	d := docker_build.DockerClient{
 		ContainerName:  analyzerName + "-" + docker_build.GenerateImageVersion(7),
 		ImageName:      dockerFileName,
@@ -81,20 +82,23 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		/* Clone the repository to a temporary directory
 		 * TODO: Check here if /tmp directory actually exists. Also, take care of Windows please?
 		 * Create a temp directory to clone the source code into */
-		a.CloneDir, err = os.MkdirTemp("", "code")
+		a.TempCloneDirectory, err = os.MkdirTemp("", "code")
 		if err != nil {
 			return err
 		}
-		defer os.RemoveAll(a.CloneDir)
+		defer os.RemoveAll(a.TempCloneDirectory)
 
-		fmt.Printf("Cloning %s to %s\n", a.SourcePath, a.CloneDir)
-		if _, err := git.PlainClone(a.CloneDir, false, &git.CloneOptions{
+		fmt.Printf("Cloning %s to %s\n", a.SourcePath, a.TempCloneDirectory)
+		if _, err := git.PlainClone(a.TempCloneDirectory, false, &git.CloneOptions{
 			URL:      a.SourcePath,
 			Depth:    1,
 			Progress: os.Stdout,
 		}); err != nil {
 			return err
 		}
+		d.AnalysisOpts.HostCodePath = a.TempCloneDirectory
+	} else {
+		d.AnalysisOpts.HostCodePath = a.SourcePath
 	}
 
 	/* Start listing the files for analysis
@@ -105,7 +109,6 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	 * analysisConfig := AnalysisConfig{
 	 *     Files: a.AnalysisFiles,
 	 * } */
-	d.AnalysisOpts.HostCodePath = a.CloneDir
 
 	// Create a container and start it using the above docker DockerClient
 	d.StartDockerContainer()
