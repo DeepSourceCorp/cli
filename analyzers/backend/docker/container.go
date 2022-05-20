@@ -18,8 +18,10 @@ import (
 )
 
 /* Creates a Docker container with the volume mount in which the source code to be analyzed and the CMD instruction being the
- * analysis command configured by the user. Having started the container, streams the logs to STDOUT. On completion of the streaming,
- * copies the `analysis_results.json` result file generated in the container to the host directory */
+ * analysis command configured by the user.
+ * Having started the container, streams the logs to STDOUT. On completion of the streaming,
+ * copies the `analysis_results.json` result file generated in the container to the host directory
+ */
 func (d *DockerClient) StartDockerContainer() {
 	// Prepare the container config
 	config := container.Config{
@@ -51,8 +53,6 @@ func (d *DockerClient) StartDockerContainer() {
 		log.Println(err)
 	}
 
-	fmt.Println(containerCreateResp.ID)
-
 	/* Show container logs
 	 * TODO: Check if the logs are needed only in --verbose/--debug mode? */
 	reader, err := d.Client.ContainerLogs(ctx, containerCreateResp.ID, types.ContainerLogsOptions{ShowStdout: true, ShowStderr: true, Follow: true, Timestamps: false})
@@ -76,7 +76,7 @@ func (d *DockerClient) StartDockerContainer() {
 
 	tr := tar.NewReader(contentReader)
 	for {
-		_, err := tr.Next()
+		result, err := tr.Next()
 		if err == io.EOF {
 			break // End of archive
 		}
@@ -92,6 +92,6 @@ func (d *DockerClient) StartDockerContainer() {
 		}
 
 		// Write the contents to the host results file
-		ioutil.WriteFile("analysis_results.json", buf, 0o644)
+		ioutil.WriteFile(result.Name, buf, 0o644)
 	}
 }

@@ -76,15 +76,15 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		},
 	}
 
-	// Resolve the path of source code to be analyzed based on the user input
-	d.AnalysisOpts.HostCodePath, err = a.resolveAnalysisSourcePath()
-	if err != nil {
-		return err
-	}
-
 	// Building the Analyzer image
 	fmt.Println("Building Analyzer image...")
 	if err := d.BuildAnalyzerDockerImage(); err != nil {
+		return err
+	}
+
+	// Resolve the path of source code to be analyzed based on the user input
+	d.AnalysisOpts.HostCodePath, err = a.resolveAnalysisSourcePath()
+	if err != nil {
 		return err
 	}
 
@@ -111,7 +111,6 @@ func (a *AnalyzerRunOpts) resolveAnalysisSourcePath() (string, error) {
 		if err != nil {
 			return "", err
 		}
-		defer os.RemoveAll(a.TempCloneDirectory)
 
 		fmt.Printf("Cloning %s to %s\n", a.SourcePath, a.TempCloneDirectory)
 		if _, err := git.PlainClone(a.TempCloneDirectory, false, &git.CloneOptions{
