@@ -97,14 +97,14 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		}
 	}
 
-    /* Start listing the files for analysis
-     * a.AnalysisFiles, err = getFilesToAnalyze(a.SourcePath)
-     * if err != nil {
-     *     return err
-     * }
-     * analysisConfig := AnalysisConfig{
-     *     Files: a.AnalysisFiles,
-     * } */
+	/* Start listing the files for analysis
+	 * a.AnalysisFiles, err = getFilesToAnalyze(a.SourcePath)
+	 * if err != nil {
+	 *     return err
+	 * }
+	 * analysisConfig := AnalysisConfig{
+	 *     Files: a.AnalysisFiles,
+	 * } */
 	d.AnalysisOpts.HostCodePath = a.CloneDir
 
 	// Create a container and start it using the above docker DockerClient
