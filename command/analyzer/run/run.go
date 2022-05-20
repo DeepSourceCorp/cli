@@ -12,6 +12,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const (
+	containerCodePath    string = "/code"
+	containerToolBoxPath string = "/toolbox"
+)
+
+// The params required while running the Analysis locally
 type AnalyzerRunOpts struct {
 	SourcePath         string   // The path of the directory of source code to be analyzed
 	RemoteSource       bool     // True if the source to be analyzed is a remote VCS repository
@@ -22,16 +28,17 @@ type AnalyzerRunOpts struct {
 func NewCmdAnalyzerRun() *cobra.Command {
 	// Setting the current working directory as the default path of the source to be analyzed
 	cwd, _ := os.Getwd()
+
+	// Initializing the run params and setting defaults
 	opts := AnalyzerRunOpts{
-		SourcePath:         cwd,
-		RemoteSource:       false,
-		TempCloneDirectory: "",
+		SourcePath:   cwd,
+		RemoteSource: false,
 	}
 
 	cmd := &cobra.Command{
 		Use:   "dry-run",
 		Short: "Run DeepSource Analyzer locally",
-		Args:  utils.ExactArgs(1),
+		Args:  utils.MaxNArgs(1),
 		RunE: func(_ *cobra.Command, args []string) error {
 			if len(args) > 0 {
 				opts.SourcePath = args[0]
@@ -57,6 +64,7 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	dockerFilePath, dockerFileName := docker_build.GetDockerImageDetails(analyzerTOMLData)
 	analyzerName := strings.Split(dockerFileName, "/")[1]
 
+	// Create a Docker client
 	d := docker_build.DockerClient{
 		ContainerName:  analyzerName + "-" + docker_build.GenerateImageVersion(7),
 		ImageName:      dockerFileName,
@@ -64,27 +72,44 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		ImageTag:       docker_build.GenerateImageVersion(7),
 		AnalysisOpts: docker_build.AnalysisParams{
 			AnalysisCommand:   analyzerTOMLData.Analysis.Command,
-			ContainerCodePath: "/code",
+			ContainerCodePath: containerCodePath,
 		},
 	}
 
+	// Resolve the path of source code to be analyzed based on the user input
+	d.AnalysisOpts.HostCodePath, err = a.resolveAnalysisSourcePath()
+	if err != nil {
+		return err
+	}
+
+	// Building the Analyzer image
 	fmt.Println("Building Analyzer image...")
 	if err := d.BuildAnalyzerDockerImage(); err != nil {
 		return err
 	}
 
-	/* Resolve the code to analyze
-	 * The user passes it as an argument to the command `deepsource analyzer run <directory/repository URL>`
-	 * Parse the argument and check if its a URL, if not then resolve the local directory path */
+	// TODO here: Prepare the analysis_config.json here
+
+	// Create a container and start it using the above docker DockerClient
+	d.StartDockerContainer()
+	return nil
+}
+
+/* Resolves the code to be analyzed by the Analyzer.
+ * The user passes it as an argument to the command `deepsource analyzer run <directory/repository URL>`
+ * Parse the argument and check if its a URL, if not then resolve the local directory path */
+func (a *AnalyzerRunOpts) resolveAnalysisSourcePath() (string, error) {
+	var err error
+
+	// Check if the source path is a valid VCS URL
 	if isValidUrl(a.SourcePath) {
 		a.RemoteSource = true
 
-		/* Clone the repository to a temporary directory
-		 * TODO: Check here if /tmp directory actually exists. Also, take care of Windows please?
-		 * Create a temp directory to clone the source code into */
+		// Clone the repository to a temporary directory
+		// TODO: Check here if /tmp directory actually exists. Also, take care of Windows please?
 		a.TempCloneDirectory, err = os.MkdirTemp("", "code")
 		if err != nil {
-			return err
+			return "", err
 		}
 		defer os.RemoveAll(a.TempCloneDirectory)
 
@@ -94,24 +119,9 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 			Depth:    1,
 			Progress: os.Stdout,
 		}); err != nil {
-			return err
+			return "", err
 		}
-		d.AnalysisOpts.HostCodePath = a.TempCloneDirectory
-	} else {
-		d.AnalysisOpts.HostCodePath = a.SourcePath
+		return a.TempCloneDirectory, nil
 	}
-
-	/* Start listing the files for analysis
-	 * a.AnalysisFiles, err = getFilesToAnalyze(a.SourcePath)
-	 * if err != nil {
-	 *     return err
-	 * }
-	 * analysisConfig := AnalysisConfig{
-	 *     Files: a.AnalysisFiles,
-	 * } */
-
-	// Create a container and start it using the above docker DockerClient
-	d.StartDockerContainer()
-
-	return nil
+	return a.SourcePath, nil
 }
