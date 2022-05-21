@@ -7,37 +7,38 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
-type RequestJWTParams struct {
+type RequestPATParams struct {
 	DeviceCode string `json:"deviceCode"`
 }
-type RequestJWTRequest struct {
-	Params RequestJWTParams
+type RequestPATRequest struct {
+	Params RequestPATParams
 }
 
 // GraphQL mutation to request JWT
-const requestJWTMutation = `
-mutation request($input:RequestJWTInput!) {
-	requestJwt(input:$input) {
-		payload
+const requestPATMutation = `
+mutation request($input:RequestPATInput!) {
+	requestPat(input:$input) {
 		token
-		refreshToken
-		refreshExpiresIn
+		expiry
+		user {
+			email
+		}
 	}
 }`
 
-type RequestJWTResponse struct {
-	auth.JWT `json:"requestJwt"`
+type RequestPATResponse struct {
+	auth.PAT `json:"requestPat"`
 }
 
-func (r RequestJWTRequest) Do(ctx context.Context, client IGQLClient) (*auth.JWT, error) {
-	req := graphql.NewRequest(requestJWTMutation)
+func (r RequestPATRequest) Do(ctx context.Context, client IGQLClient) (*auth.PAT, error) {
+	req := graphql.NewRequest(requestPATMutation)
 	req.Header.Set("Cache-Control", "no-cache")
 	req.Var("input", r.Params)
 
-	var res RequestJWTResponse
+	var res RequestPATResponse
 	if err := client.GQL().Run(ctx, req, &res); err != nil {
 		return nil, err
 	}
 
-	return &res.JWT, nil
+	return &res.PAT, nil
 }

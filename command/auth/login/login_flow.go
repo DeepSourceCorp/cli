@@ -33,9 +33,9 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 		return err
 	}
 
-	// Fetch the JWT using the device registration resonse
-	var jwtData *auth.JWT
-	jwtData, opts.AuthTimedOut, err = fetchJWT(ctx, deviceRegistrationResponse)
+	// Fetch the PAT using the device registration resonse
+	var patData *auth.PAT
+	patData, opts.AuthTimedOut, err = fetchPAT(ctx, deviceRegistrationResponse)
 	if err != nil {
 		return err
 	}
@@ -47,11 +47,9 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 
 	// Storing the useful data for future reference and usage
 	// in a global config object (Cfg)
-	cfg.User = jwtData.Payload.Email
-	cfg.Token = jwtData.Token
-	cfg.RefreshToken = jwtData.Refreshtoken
-	cfg.RefreshTokenExpiresIn = time.Unix(jwtData.RefreshExpiresIn, 0)
-	cfg.SetTokenExpiry(jwtData.Payload.Exp)
+	cfg.User = patData.User.Email
+	cfg.Token = patData.Token
+	cfg.SetTokenExpiry(patData.Expiry)
 
 	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
 	err = cfg.WriteFile()
@@ -79,8 +77,8 @@ func registerDevice(ctx context.Context) (*auth.Device, error) {
 	return res, nil
 }
 
-func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.JWT, bool, error) {
-	var jwtData *auth.JWT
+func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.PAT, bool, error) {
+	var patData *auth.PAT
 	var err error
 	authTimedOut := true
 
@@ -97,10 +95,10 @@ func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.J
 	ticker := time.NewTicker(time.Duration(deviceRegistrationData.Interval) * time.Second)
 	pollStartTime := time.Now()
 
-	// Polling for fetching JWT
+	// Polling for fetching PAT
 	func() {
 		for range ticker.C {
-			jwtData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
+			patData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
 			if err == nil {
 				authTimedOut = false
 				return
@@ -113,5 +111,5 @@ func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.J
 		}
 	}()
 
-	return jwtData, authTimedOut, nil
+	return patData, authTimedOut, nil
 }

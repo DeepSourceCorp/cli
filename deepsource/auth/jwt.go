@@ -11,3 +11,13 @@ type JWT struct {
 	TokenExpiresIn   int64  `json:"tokenExpiresIn"`   // Token expiry timestamp
 	RefreshExpiresIn int64  `json:"refreshExpiresIn"` // Refresh token expiry timestamp
 }
+
+type PAT struct {
+	Token  string `json:"token"`
+	Expiry string `json:"expiry"`
+	User   struct {
+		FirstName string `json:"firstName"`
+		LastName  string `json:"lastName"`
+		Email     string `json:"email"`
+	} `json:"user"`
+}

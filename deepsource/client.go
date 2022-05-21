@@ -56,7 +56,7 @@ func getAPIClientURL(hostName string) string {
 
 	// Check if the domain is different from the default domain (In case of Enterprise users)
 	if hostName != defaultHostName {
-		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", hostName)
+		apiClientURL = fmt.Sprintf("http://%s/graphql/", hostName)
 	}
 	return apiClientURL
 }
@@ -74,9 +74,9 @@ func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 
 // Logs in the client using the deviceCode and the user Code and returns the JWT, RefreshToken and other
 // data which is required for authentication
-func (c Client) Login(ctx context.Context, deviceCode string) (*auth.JWT, error) {
-	req := authmut.RequestJWTRequest{
-		Params: authmut.RequestJWTParams{
+func (c Client) Login(ctx context.Context, deviceCode string) (*auth.PAT, error) {
+	req := authmut.RequestPATRequest{
+		Params: authmut.RequestPATParams{
 			DeviceCode: deviceCode,
 		},
 	}
@@ -89,10 +89,10 @@ func (c Client) Login(ctx context.Context, deviceCode string) (*auth.JWT, error)
 }
 
 // Refreshes the authentication credentials. Takes the refreshToken as a parameter.
-func (c Client) RefreshAuthCreds(ctx context.Context, refreshToken string) (*auth.JWT, error) {
+func (c Client) RefreshAuthCreds(ctx context.Context, token string) (*auth.PAT, error) {
 	req := authmut.RefreshTokenRequest{
 		Params: authmut.RefreshTokenParams{
-			RefreshToken: refreshToken,
+			Token: token,
 		},
 	}
 	res, err := req.Do(ctx, c)
