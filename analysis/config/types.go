@@ -7,25 +7,25 @@ import "github.com/deepsourcelabs/cli/analysis/lsp"
 /////////////////////////////////////////////////////
 
 type DSConfig struct {
-	Version         int           `mapstructure:"version,omitempty" json:"version"`
-	ExcludePatterns []string      `mapstructure:"exclude_patterns,omitempty" json:"exclude_patterns,omitempty"`
-	TestPatterns    []string      `mapstructure:"test_patterns,omitempty" json:"test_patterns,omitempty"`
-	Analyzers       []Analyzer    `mapstructure:"analyzers,omitempty" json:"analyzers,omitempty"`
-	Transformers    []Transformer `mapstructure:"transformers,omitempty" json:"transformers,omitempty"`
+	Version         int           `mapstructure:"version,omitempty" json:"version" toml:"version"`
+	ExcludePatterns []string      `mapstructure:"exclude_patterns,omitempty" json:"exclude_patterns,omitempty" toml:"exclude_patterns"`
+	TestPatterns    []string      `mapstructure:"test_patterns,omitempty" json:"test_patterns,omitempty" toml:"test_patterns"`
+	Analyzers       []Analyzer    `mapstructure:"analyzers,omitempty" json:"analyzers,omitempty" toml:"analyzers"`
+	Transformers    []Transformer `mapstructure:"transformers,omitempty" json:"transformers,omitempty" toml:"transformers"`
 }
 
 type Analyzer struct {
-	Name                string      `mapstructure:"name,omitempty" json:"name,omitempty"`
-	RuntimeVersion      string      `mapstructure:"runtime_version,omitempty" json:"runtime_version,omitempty"`
-	Enabled             bool        `mapstructure:"enabled,omitempty" json:"enabled"`
+	Name                string      `mapstructure:"name,omitempty" json:"name,omitempty" toml:"name"`
+	RuntimeVersion      string      `mapstructure:"runtime_version,omitempty" json:"runtime_version,omitempty" toml:"runtime_version,omitempty"`
+	Enabled             bool        `mapstructure:"enabled,omitempty" json:"enabled" toml:"enabled"`
 	DependencyFilePaths []string    `mapstructure:"dependency_file_paths,omitempty" json:"dependency_file_paths,omitempty"`
-	Meta                interface{} `mapstructure:"meta,omitempty" json:"meta,omitempty"`
+	Meta                interface{} `mapstructure:"meta,omitempty" json:"meta,omitempty" toml:"meta"`
 	Thresholds          interface{} `mapstructure:"thresholds,omitempty" json:"thresholds,omitempty"`
 }
 
 type Transformer struct {
-	Name    string `mapstructure:"name,omitempty" json:"name,omitempty"`
-	Enabled bool   `mapstructure:"enabled,omitempty" json:"enabled,omitempty"`
+	Name    string `mapstructure:"name,omitempty" json:"name,omitempty" toml:"name"`
+	Enabled bool   `mapstructure:"enabled,omitempty" json:"enabled,omitempty" toml:"enabled"`
 }
 
 ////////////////////////////

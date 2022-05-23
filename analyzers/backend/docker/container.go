@@ -24,6 +24,7 @@ import (
  */
 func (d *DockerClient) StartDockerContainer() {
 	// Prepare the container config
+	// TODO: Set CODE_PATH and TOOLBOX_PATH as passed by the user
 	config := container.Config{
 		Image: fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag),
 		Cmd:   strings.Split(d.AnalysisOpts.AnalysisCommand, " "),

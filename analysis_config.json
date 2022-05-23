@@ -1,0 +1,22 @@
+{
+  "files": [
+    { "uri": "/Users/phoenix/codes/.deepsource/analyzer/analyzer.toml" },
+    { "uri": "/Users/phoenix/codes/.deepsource/analyzer/issues/I001.toml" },
+    { "uri": "/Users/phoenix/codes/.deepsource/analyzer/logo.svg" },
+    { "uri": "/Users/phoenix/codes/.deepsource.toml" },
+    { "uri": "/Users/phoenix/codes/2do-checker" },
+    { "uri": "/Users/phoenix/codes/Dockerfile" },
+    { "uri": "/Users/phoenix/codes/analysis_results.json" },
+    { "uri": "/Users/phoenix/codes/go.mod" },
+    { "uri": "/Users/phoenix/codes/go.sum" }
+  ],
+  "test_files": null,
+  "excluded_files": [
+    { "uri": "/Users/phoenix/Code/deepsource/2do-checker/main.go" },
+    { "uri": "/Users/phoenix/Code/deepsource/2do-checker/types.go" },
+    { "uri": "/Users/phoenix/Code/deepsource/2do-checker/utils.go" }
+  ],
+  "exclude_patterns": ["*.go"],
+  "test_patterns": null,
+  "analyzer_meta": null
+}

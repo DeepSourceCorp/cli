@@ -2,10 +2,12 @@ package run
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"path"
 	"strings"
 
+	analysis "github.com/deepsourcelabs/cli/analysis/config"
 	docker_build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
 	"github.com/deepsourcelabs/cli/analyzers/config"
 	"github.com/deepsourcelabs/cli/utils"
@@ -64,24 +66,24 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		return err
 	}
 
-	// Build the latest Analyzer image
+	// Extracting the docker file and path details
 	dockerFilePath, dockerFileName := docker_build.GetDockerImageDetails(analyzerTOMLData)
 	analyzerName := strings.Split(dockerFileName, "/")[1]
 
 	// Create a Docker client
 	d := docker_build.DockerClient{
-		ContainerName:  analyzerName + "-" + docker_build.GenerateImageVersion(7),
 		ImageName:      dockerFileName,
-		DockerfilePath: dockerFilePath,
 		ImageTag:       docker_build.GenerateImageVersion(7),
+		ContainerName:  analyzerName + "-" + docker_build.GenerateImageVersion(7),
+		DockerfilePath: dockerFilePath,
 		AnalysisOpts: docker_build.AnalysisParams{
 			AnalysisCommand:   analyzerTOMLData.Analysis.Command,
-			ContainerCodePath: containerCodePath,
+			ContainerCodePath: containerCodePath,    // /code
+			ToolboxPath:       containerToolBoxPath, // /toolbox
 		},
 	}
 
 	// Building the Analyzer image
-	// TODO: Add spiral here
 	fmt.Println("Building Analyzer image...")
 	if err := d.BuildAnalyzerDockerImage(); err != nil {
 		return err
@@ -93,10 +95,22 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		return err
 	}
 
-	// TODO here: Prepare the analysis_config.json here and write into the container at `TOOLBOX_PATH/analysis_config.json`
+	// TODO here: Prepare the analysis_config.json here and mount into the container at `TOOLBOX_PATH/analysis_config.json`
+	// The analysis_config.json will have path prepended with the CODE_PATH of the container and not local CODE_PATH
+	analysisRun := analysis.AnalysisRun{
+		AnalyzerName:      analyzerTOMLData.Name,
+		LocalCodePath:     d.AnalysisOpts.HostCodePath,
+		ContainerCodePath: containerCodePath,
+	}
 
-	// Create a container and start it using the above docker DockerClient
-	d.StartDockerContainer()
+	analysisConfig, err := analysisRun.ConfigureAnalysis()
+	if err != nil {
+		log.Println(err)
+	}
+	fmt.Println(analysisConfig)
+
+	// Write the analysis_config data into a temp /toolbox directory mount it as well
+	// d.StartDockerContainer()
 	return nil
 }
 

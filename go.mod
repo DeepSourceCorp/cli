@@ -7,7 +7,6 @@ require (
 	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/MakeNowJust/heredoc v1.0.0
 	github.com/ProtonMail/go-crypto v0.0.0-20220407094043-a94812496cf5 // indirect
-	github.com/bmatcuk/doublestar/v4 v4.0.2
 	github.com/briandowns/spinner v1.18.1
 	github.com/cli/browser v1.1.0
 	github.com/containerd/containerd v1.6.3 // indirect
@@ -20,6 +19,7 @@ require (
 	github.com/getsentry/sentry-go v0.6.0
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/go-playground/validator/v10 v10.10.1
+	github.com/gobwas/glob v0.2.3
 	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/kevinburke/ssh_config v1.2.0 // indirect
 	github.com/magiconair/properties v1.8.6 // indirect

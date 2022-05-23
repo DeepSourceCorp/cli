@@ -6,10 +6,6 @@ package lsp
 
 type DocumentURI string
 
-type TextDocumentIdentifier struct {
-	URI DocumentURI `json:"uri"`
-}
-
 type TextDocumentItem struct {
 	URI        DocumentURI `json:"uri"`
 	LanguageID string      `json:"languageID,omitempty"`
