@@ -20,7 +20,6 @@ type AnalysisRun struct {
 	AnalyzerConfig *AnalysisConfig
 }
 
-
 func (r *AnalysisRun) ConfigureAnalysis() (*AnalysisConfig, error) {
 	var err error
 	r.AnalyzerConfig = &AnalysisConfig{}

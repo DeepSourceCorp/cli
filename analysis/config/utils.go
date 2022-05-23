@@ -77,5 +77,3 @@ func (r *AnalysisRun) filterAnalysisFiles() {
 	}
 	r.AnalysisFiles = filteredFiles
 }
-
-
