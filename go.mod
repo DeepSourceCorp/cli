@@ -7,6 +7,7 @@ require (
 	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/MakeNowJust/heredoc v1.0.0
 	github.com/ProtonMail/go-crypto v0.0.0-20220407094043-a94812496cf5 // indirect
+	github.com/bmatcuk/doublestar/v4 v4.0.2
 	github.com/briandowns/spinner v1.18.1
 	github.com/cli/browser v1.1.0
 	github.com/containerd/containerd v1.6.3 // indirect
@@ -26,7 +27,7 @@ require (
 	github.com/mgutz/ansi v0.0.0-20200706080929-d51e80ef957d
 	github.com/moby/sys/mount v0.3.2 // indirect
 	github.com/moby/term v0.0.0-20210619224110-3f7ff695adc6 // indirect
-	github.com/opencontainers/image-spec v1.0.3-0.20211202183452-c5a74bcca799 // indirect
+	github.com/opencontainers/image-spec v1.0.3-0.20211202183452-c5a74bcca799
 	github.com/owenrumney/go-sarif/v2 v2.1.0
 	github.com/pelletier/go-toml v1.9.4
 	github.com/pelletier/go-toml/v2 v2.0.0

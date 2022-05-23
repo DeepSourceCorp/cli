@@ -3,6 +3,7 @@ package run
 import (
 	"fmt"
 	"os"
+	"path"
 	"strings"
 
 	docker_build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
@@ -12,17 +13,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const (
-	containerCodePath    string = "/code"
-	containerToolBoxPath string = "/toolbox"
+// Reading the values of CODE_PATH and TOOLBOX_PATH from the user's environment
+var (
+	containerCodePath    string = os.Getenv("CODE_PATH")
+	containerToolBoxPath string = os.Getenv("TOOLBOX_PATH")
+	analysisResultPath   string = path.Join(containerToolBoxPath, "analysis_results.json")
 )
 
 // The params required while running the Analysis locally
 type AnalyzerRunOpts struct {
-	SourcePath         string   // The path of the directory of source code to be analyzed
-	RemoteSource       bool     // True if the source to be analyzed is a remote VCS repository
-	TempCloneDirectory string   // The temporary directory where the source of the remote VCS will be cloned to
-	AnalysisFiles      []string // The list of analysis files
+	SourcePath         string          // The path of the directory of source code to be analyzed
+	RemoteSource       bool            // True if the source to be analyzed is a remote VCS repository
+	TempCloneDirectory string          // The temporary directory where the source of the remote VCS will be cloned to
+	AnalysisFiles      []string        // The list of analysis files
+	AnalysisConfig     *AnalysisConfig // The analysis_config.json file containing the meta for analysis
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -37,7 +41,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "dry-run",
-		Short: "Run DeepSource Analyzer locally",
+		Short: "Dry run the DeepSource Analyzer locally",
 		Args:  utils.MaxNArgs(1),
 		RunE: func(_ *cobra.Command, args []string) error {
 			if len(args) > 0 {
@@ -77,6 +81,7 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	}
 
 	// Building the Analyzer image
+	// TODO: Add spiral here
 	fmt.Println("Building Analyzer image...")
 	if err := d.BuildAnalyzerDockerImage(); err != nil {
 		return err
@@ -88,7 +93,7 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		return err
 	}
 
-	// TODO here: Prepare the analysis_config.json here
+	// TODO here: Prepare the analysis_config.json here and write into the container at `TOOLBOX_PATH/analysis_config.json`
 
 	// Create a container and start it using the above docker DockerClient
 	d.StartDockerContainer()
