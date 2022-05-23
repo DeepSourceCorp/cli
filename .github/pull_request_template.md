@@ -26,6 +26,7 @@ Click here to create the VQA card: https://linear.app/deepsource/team/DES/new?te
 - [ ] Ensure design VQA is done
 - [ ] Add previews for desktop and mobile view (video if required)
 - [ ] Test the relevant flow entirely (For example, you update the webhook modal, check the entire webhook flow)
+- [ ] Elements that are repeated often are made into components
 
 ## Note to reviewers (Optional)
 
