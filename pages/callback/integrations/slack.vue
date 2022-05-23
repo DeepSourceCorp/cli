@@ -81,6 +81,7 @@
       <div class="grid px-6 pb-px">
         <z-button
           :is-loading="installingIntegration"
+          :disabled="!channel"
           label="Install integration"
           loading-label="Installing integration"
           icon="play-circle"
