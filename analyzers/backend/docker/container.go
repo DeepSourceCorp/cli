@@ -104,5 +104,5 @@ func (d *DockerClient) StartDockerContainer() error {
 		// TODO: Check if writing the file inside loop wont cause any issues
 		os.WriteFile(result.Name, buf, 0o644)
 	}
-    return nil
+	return nil
 }
