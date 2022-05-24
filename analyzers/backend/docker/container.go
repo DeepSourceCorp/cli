@@ -28,12 +28,10 @@ func (d *DockerClient) StartDockerContainer() {
 	 * ImageName
 	 * CMD instruction
 	 * Environment variables */
-	fmt.Println(d.AnalysisOpts.ContainerToolBoxPath)
 	config := container.Config{
 		Image: fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag),
-		// Cmd:   []string{"ls", d.AnalysisOpts.ContainerToolBoxPath},
-		Cmd: strings.Split(d.AnalysisOpts.AnalysisCommand, " "),
-		Env: []string{"TOOLBOX_PATH:" + d.AnalysisOpts.ContainerToolBoxPath, "CODE_PATH:" + d.AnalysisOpts.ContainerCodePath},
+		Cmd:   strings.Split(d.AnalysisOpts.AnalysisCommand, " "),
+		Env:   []string{"TOOLBOX_PATH:" + d.AnalysisOpts.ContainerToolBoxPath, "CODE_PATH:" + d.AnalysisOpts.ContainerCodePath},
 	}
 
 	// Host config containing the mounted volumes
@@ -87,22 +85,23 @@ func (d *DockerClient) StartDockerContainer() {
 
 	tr := tar.NewReader(contentReader)
 	for {
+		// Read the TAR archive returned by docker
 		result, err := tr.Next()
-		if err == io.EOF {
-			break // End of archive
-		}
 		if err != nil {
-			log.Fatal(err)
+			if err != io.EOF {
+				log.Println(err)
+			}
+			break
 		}
 
-		// Read the contents of the TAR archive
+		// Read the contents of the TAR archive into a byte buffer
 		buf, err := ioutil.ReadAll(tr)
 		if err != nil {
 			log.Println(err)
 			break
 		}
 
-		// Write the contents to the host results file
+		// TODO: Check if writing the file inside loop wont cause any issues
 		os.WriteFile(result.Name, buf, 0o644)
 	}
 }

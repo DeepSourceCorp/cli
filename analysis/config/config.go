@@ -96,3 +96,7 @@ func (r *AnalysisRun) ConfigureAnalysis() (*AnalysisConfig, error) {
 	// Format the analysis config data into LSP format of analysis_config.json
 	return r.formatAnalysisConfigToLSP(), nil
 }
+
+func (r *AnalysisRun) FormatLSPResultToDefault(analysisResult *AnalysisResult) *DefaultAnalysisResult {
+	return r.formatLSPResultsToDefault(analysisResult)
+}

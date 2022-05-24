@@ -2,7 +2,7 @@ package config
 
 import "github.com/deepsourcelabs/cli/analysis/lsp"
 
-//////////////////////////////////////////////////////
+///////////////////////////////////////////////////////
 // DSConfig is the struct for .deepsource.toml file //
 /////////////////////////////////////////////////////
 
@@ -28,9 +28,9 @@ type Transformer struct {
 	Enabled bool   `mapstructure:"enabled,omitempty" json:"enabled,omitempty" toml:"enabled"`
 }
 
-////////////////////////////
-// Analysis Config Types  //
-////////////////////////////
+///////////////////////////////////////
+// LSP based Analysis Config Types  //
+/////////////////////////////////////
 
 type AnalysisConfig struct {
 	Files           []lsp.TextDocumentItem `json:"files"`
@@ -41,9 +41,9 @@ type AnalysisConfig struct {
 	AnalyzerMeta    interface{}            `json:"analyzer_meta"`
 }
 
-////////////////////////////
-// Analysis Result Types  //
-////////////////////////////
+//////////////////////////////////////
+// LSP based Analysis Result Types  //
+/////////////////////////////////////
 
 type Namespace struct {
 	Key   string  `json:"key"`
@@ -56,9 +56,48 @@ type Metric struct {
 }
 
 type AnalysisResult struct {
-	Issues    []lsp.Diagnostic `json:"issues"`
-	Metrics   []Metric         `json:"metrics,omitempty"`
-	IsPassed  bool             `json:"is_passed"`
-	Errors    []lsp.Diagnostic `json:"errors"`
-	ExtraData interface{}      `json:"extra_data"`
+	Issues   []lsp.Diagnostic `json:"issues"`
+	Metrics  []Metric         `json:"metrics,omitempty"`
+	IsPassed bool             `json:"is_passed"`
+	Errors   []Error          `json:"errors"`
+	// Errors    []lsp.Diagnostic `json:"errors"`
+	ExtraData interface{} `json:"extra_data"`
+}
+
+////////////////////////////////////
+// Default Analysis Result Types  //
+///////////////////////////////////
+
+type Error struct {
+	HMessage string `json:"hmessage"`
+	Level    int    `json:"level"`
+}
+
+type Coordinate struct {
+	Line   int `json:"line"`
+	Column int `json:"column"`
+}
+
+type Position struct {
+	Begin Coordinate `json:"begin"`
+	End   Coordinate `json:"end"`
+}
+
+type Location struct {
+	Path     string   `json:"path"`
+	Position Position `json:"position"`
+}
+
+type Issue struct {
+	Code     string   `json:"issue_code"`
+	Title    string   `json:"issue_text"`
+	Location Location `json:"location"`
+}
+
+type DefaultAnalysisResult struct {
+	Issues    []Issue     `json:"issues"`
+	Metrics   []Metric    `json:"metrics,omitempty"`
+	IsPassed  bool        `json:"is_passed"`
+	Errors    []Error     `json:"errors"`
+	ExtraData interface{} `json:"extra_data"`
 }

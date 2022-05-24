@@ -8,12 +8,13 @@ import (
 	"path"
 	"strings"
 
-	analysis "github.com/deepsourcelabs/cli/analysis/config"
-	docker_build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
 	"github.com/deepsourcelabs/cli/analyzers/config"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/go-git/go-git/v5"
 	"github.com/spf13/cobra"
+
+	analysis_config "github.com/deepsourcelabs/cli/analysis/config"
+	docker_build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
 )
 
 // Variables to hold the value of CODE_PATH and TOOLBOX_PATH to be injected
@@ -62,6 +63,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 }
 
 // Run the Analyzer locally on a certain directory or repository
+// TODO: Refactor this function into smaller components
 func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	// Get the Analyzer.toml contents
 	analyzerTOMLData, err := config.GetAnalyzerTOML()
@@ -109,7 +111,7 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 
 	/* Prepare the analysis_config.json here and mount into the container at `TOOLBOX_PATH/analysis_config.json`
 	 * The analysis_config.json will have path prepended with the CODE_PATH of the container and not local CODE_PATH */
-	analysisRun := analysis.AnalysisRun{
+	analysisRun := analysis_config.AnalysisRun{
 		AnalyzerName:      analyzerTOMLData.Name,
 		LocalCodePath:     d.AnalysisOpts.HostCodePath,
 		ContainerCodePath: containerCodePath,
@@ -132,6 +134,26 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 
 	// Write the analysis_config data into a temp /toolbox directory mount it as well
 	d.StartDockerContainer()
+
+	// Reads the LSP based analysis result written in the `analysis_results.json` file present in
+	// the directory of the Analyzer
+	analysisResultsData, err := os.ReadFile("analysis_results.json")
+	if err != nil {
+		return err
+	}
+
+	// Unmarshal the analysis result data present in the LSP format
+	analysisResultContent := analysis_config.AnalysisResult{}
+	if err = json.Unmarshal(analysisResultsData, &analysisResultContent); err != nil {
+		return err
+	}
+
+	// Format the LSP based results to the default format supported by DeepSource
+	analysisResult := analysisRun.FormatLSPResultToDefault(&analysisResultContent)
+
+	res, _ := json.Marshal(analysisResult)
+	os.WriteFile("analysis_results_default.json", res, 0o644)
+
 	return nil
 }
 
@@ -166,7 +188,7 @@ func (a *AnalyzerRunOpts) resolveAnalysisSourcePath() (string, error) {
 }
 
 // Writes the analysis_config.json into a temporary directory which shall be mounted as TOOLBOX directory in the container
-func (a *AnalyzerRunOpts) writeAnalysisConfig(analysisConfig *analysis.AnalysisConfig) (err error) {
+func (a *AnalyzerRunOpts) writeAnalysisConfig(analysisConfig *analysis_config.AnalysisConfig) (err error) {
 	// Create a temporary directory
 	if a.TempToolBoxDirectory, err = os.MkdirTemp("/tmp", "toolbox"); err != nil {
 		return err
