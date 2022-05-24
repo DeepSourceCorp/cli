@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ EventAlertsSection ]] renders the various events that the Slack integration supports 1`] = `
+"<div class=\\"grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-y-0\\">
+  <div class=\\"space-y-1.5 max-w-2xs\\">
+    <h2 class=\\"text-sm text-vanilla-300\\">Event alerts</h2>
+    <p class=\\"text-xs text-vanilla-400\\">
+      Events for which you receive notification in your Slack channel.
+    </p>
+  </div>
+  <ul class=\\"space-y-6\\">
+    <li class=\\"flex gap-x-2\\"><span class=\\"inline-flex items-center\\"><zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub></span> <span class=\\"text-sm\\">New issues introduced in default branch</span></li>
+    <li class=\\"flex gap-x-2\\"><span class=\\"inline-flex items-center\\"><zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub></span> <span class=\\"text-sm\\">Issues resolved in default branch</span></li>
+    <li class=\\"flex gap-x-2\\"><span class=\\"inline-flex items-center\\"><zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub></span> <span class=\\"text-sm\\">Autofix successful</span></li>
+    <li class=\\"flex gap-x-2\\"><span class=\\"inline-flex items-center\\"><zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\"></zicon-stub></span> <span class=\\"text-sm\\">Repository activation status changed</span></li>
+  </ul>
+</div>"
+`;

@@ -12,9 +12,7 @@
 
         <z-icon icon="arrow-left-right" />
 
-        <div class="p-1 rounded-sm bg-ink-300">
-          <img :src="integration.logo" alt="Slack logo" class="flex-shrink-0 w-8 h-8" />
-        </div>
+        <logo-container :logo="integration.logo" dimensions="w-8 h-8" />
       </div>
 
       <div class="flex justify-center mt-6 mb-7">
@@ -31,50 +29,16 @@
         </notice>
       </div>
 
-      <div class="flex flex-col px-6 gap-y-4 md:flex-row md:justify-between md:gap-y-0">
-        <label class="text-sm place-self-center text-vanilla-100"> Notification channel </label>
-
-        <div class="w-full h-8 md:w-48">
-          <div
-            v-if="$fetchState.pending"
-            class="w-48 h-8 rounded-md bg-ink-300 animate-pulse"
-          ></div>
-          <z-select
-            v-model="channel"
-            :truncate="true"
-            spacing="pl-2.5 pr-2 py-2"
-            class="text-sm md:w-48"
-          >
-            <z-option
-              v-for="option in channelOptions"
-              :key="option"
-              :label="`# ${option}`"
-              :value="option"
-              class="px-4"
-            />
-          </z-select>
-        </div>
-      </div>
+      <notification-channel-section
+        v-model="channel"
+        :available-channels="availableChannels"
+        :update-on-change="false"
+        class="px-6"
+      />
 
       <z-divider margin="my-7" />
 
-      <div class="flex flex-col px-6 gap-x-0 gap-y-4 md:flex-row md:gap-y-0 md:gap-x-4">
-        <div class="space-y-1.5 max-w-2xs">
-          <h2 class="text-sm text-vanilla-300">Event alerts</h2>
-          <p class="text-xs text-vanilla-400 md:w-52">
-            Events for which you receive notification in your Slack channel.
-          </p>
-        </div>
-
-        <ul class="space-y-6">
-          <li v-for="event in events" :key="event" class="flex gap-x-2">
-            <span class="inline-flex items-center">
-              <z-icon icon="check" color="juniper" />
-            </span>
-            <span class="text-sm">{{ event }}</span>
-          </li>
-        </ul>
-      </div>
+      <event-alerts-section class="px-6" />
 
       <z-divider margin="my-7" />
 
@@ -102,7 +66,6 @@ import integrationsDetailMixin from '~/mixins/integrationsDetailMixin'
 import { IntegrationsDetailActions } from '~/store/integrations/detail'
 import { TeamPerms } from '~/types/permTypes'
 import { IntegrationInstallationStep, IntegrationSettingsLevel } from '~/types/types'
-import { Route } from 'vue-router'
 import { Context } from '@nuxt/types'
 
 /**
@@ -187,25 +150,20 @@ export default class SlackIntermediaryInstallation extends mixins(integrationsDe
 
   channel = ''
 
-  channelOptions = []
-  events = [
-    'New issues introduced in default branch',
-    'Issues resolved in default branch',
-    'Autofix successful',
-    'Repository activation status changed'
-  ]
+  availableChannels = []
 
   /**
    * Fetch hook
    *
-   * @returns {Promise<void>}
+   * @returns {void}
    */
-  async fetch(): Promise<void> {
+  fetch(): void {
     const { nextStep, options } = this.installIntegrationPayload
 
-    // Populate the ZSelect component options with channel list after `INSTALL` step
+    // Populate the `ZSelect` component options with channel list after `INSTALL` step
+    // Supplied as via `availableChannels` prop to `NotificationChannelSection` component
     if (nextStep === IntegrationInstallationStep.ConfigReqd) {
-      this.channelOptions = options.channel
+      this.availableChannels = options.channel
     }
   }
 

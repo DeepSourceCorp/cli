@@ -23,26 +23,18 @@ describe('[[ InputWrapper ]]', () => {
       'wide'
     ])
 
-    const customGridClassOptions = generateStringProps('customGridClass', [
-      '',
-      'grid-cols-1 md:grid-cols-4'
-    ])
+    cartesian(removeYPaddingOptions, cascadeInputOptions, inputWidthOptions).forEach(
+      (propCombination) => {
+        const props = {
+          ...baseProps,
+          ...propCombination
+        }
+        const { html } = render(InputWrapper, {
+          props
+        })
 
-    cartesian(
-      removeYPaddingOptions,
-      cascadeInputOptions,
-      inputWidthOptions,
-      customGridClassOptions
-    ).forEach((propCombination) => {
-      const props = {
-        ...baseProps,
-        ...propCombination
+        expect(html()).toMatchSnapshot(JSON.stringify(props))
       }
-      const { html } = render(InputWrapper, {
-        props
-      })
-
-      expect(html()).toMatchSnapshot(JSON.stringify(props))
-    })
+    )
   })
 })

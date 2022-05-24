@@ -15,12 +15,7 @@
 
     <div v-else class="p-4 pb-32 md:max-w-2xl">
       <div class="flex justify-between" :class="{ 'mb-4': !integration.installed }">
-        <div class="inline-flex items-center gap-x-2">
-          <div class="p-1 rounded-sm bg-ink-300">
-            <img :src="integration.logo" alt="Slack" class="flex-shrink-0 w-5 h-5" />
-          </div>
-          <h2 class="text-base font-medium text-vanilla-100">Slack</h2>
-        </div>
+        <integration-title :logo="integration.logo" name="Slack" />
 
         <notice v-if="integration.installed" class="h-8">
           <p class="text-xs">
@@ -74,54 +69,15 @@
         </div>
       </z-alert>
 
-      <div
+      <notification-channel-section
         v-if="integration.installed"
-        class="flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0"
-      >
-        <label class="text-sm md:place-self-center text-vanilla-100"> Notification channel </label>
-
-        <div class="w-full h-8 md:w-48">
-          <div
-            v-if="$fetchState.pending"
-            class="w-48 h-8 rounded-md bg-ink-300 animate-pulse"
-          ></div>
-          <z-select
-            v-else
-            v-model="channel"
-            :disabled="!hasChannelList"
-            :placeholder="hasChannelList ? 'Select a channel' : 'No channels found'"
-            :truncate="true"
-            spacing="pl-2.5 pr-2 py-2"
-            class="w-48 text-sm"
-          >
-            <z-option v-for="option in integration.options.channel" :key="option" :value="option">
-              <div class="inline-flex flex-row gap-x-1">
-                <span> # </span><span> {{ option }} </span>
-              </div>
-            </z-option>
-          </z-select>
-        </div>
-      </div>
+        v-model="channel"
+        :pending="$fetchState.pending"
+      />
 
       <z-divider margin="my-4" />
 
-      <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-y-0">
-        <div class="space-y-1.5 max-w-2xs">
-          <h2 class="text-sm text-vanilla-300">Event alerts</h2>
-          <p class="text-xs text-vanilla-400">
-            Events for which you receive notification in your Slack channel.
-          </p>
-        </div>
-
-        <ul class="space-y-6">
-          <li v-for="(event, key) in slackEvents" :key="key" class="flex gap-x-2">
-            <span class="inline-flex items-center">
-              <z-icon icon="check" color="juniper" />
-            </span>
-            <span class="text-sm">{{ event }}</span>
-          </li>
-        </ul>
-      </div>
+      <event-alerts-section />
 
       <z-divider v-if="integration.installed" margin="my-4" />
 
@@ -184,9 +140,9 @@
 import {
   ZAlert,
   ZAvatar,
-  ZButton,
   ZBreadcrumb,
   ZBreadcrumbItem,
+  ZButton,
   ZConfirm,
   ZDivider,
   ZIcon,
@@ -200,7 +156,7 @@ import integrationsListMixin from '~/mixins/integrationsListMixin'
 import ownerDetailMixin from '~/mixins/ownerDetailMixin'
 
 import { TeamPerms } from '~/types/permTypes'
-import { IntegrationSettingsLevel } from '~/types/types'
+import { IntegrationSettingsLevel, UpdateIntegrationSettingsInput } from '~/types/types'
 import { formatDate } from '~/utils/date'
 
 /**
@@ -243,6 +199,8 @@ export default class SlackIntegration extends mixins(
 
   channel = ''
 
+  IntegrationSettingsLevel = IntegrationSettingsLevel
+
   /**
    * The fetch hook
    *
@@ -255,7 +213,7 @@ export default class SlackIntegration extends mixins(
     if (!this.owner.id) {
       // Fetch owner ID if not available
       const { provider, owner: login } = this.$route.params
-      await this.fetchOwnerDetails({ login, provider })
+      await this.fetchOwnerID({ login, provider })
     }
 
     // Fetch details specific to Slack
@@ -305,12 +263,40 @@ export default class SlackIntegration extends mixins(
     return this.integration?.enabledBy?.avatar
   }
 
-  get hasChannelList(): boolean {
-    return Boolean(this.integration.options.channel.length)
-  }
-
   get userName(): string | undefined {
     return this.integration?.enabledBy?.fullName || this.integration?.enabledBy?.email
+  }
+
+  /**
+   * Update Slack channel preference based on the selected option
+   *
+   * @param {string} newChannel - newly selected channel
+   * @param {string} oldChannel - old selection
+   *
+   * @returns {Promise<void>}
+   */
+  @Watch('channel')
+  async updateChannelPreference(newChannel: string, oldChannel: string): Promise<void> {
+    // Prevent immediate invocation
+    if (oldChannel === '') {
+      return
+    }
+
+    // Conditionally populate the GQL mutation arguments
+    const args = {
+      shortcode: 'slack',
+      level: IntegrationSettingsLevel.Owner,
+      ownerId: this.owner.id,
+      settings: { channel: newChannel }
+    } as UpdateIntegrationSettingsInput
+
+    // Dispatch the Vuex action that invokes the GQL mutation aimed at updating integration settings
+    const { ok } = await this.updateIntegrationSettings(args)
+
+    // Show success toast on successfully updating the channel preference
+    if (ok) {
+      this.$toast.success(`Successfully updated the channel to ${newChannel}.`)
+    }
   }
 
   /**
@@ -337,33 +323,6 @@ export default class SlackIntegration extends mixins(
     } else {
       // The redirect didn't happen, reset the CTA state
       this.installingIntegration = false
-    }
-  }
-
-  /**
-   * Update Slack channel preference based on the selected option
-   *
-   * @param {string} newChannel - newly selected channel
-   * @param {string} oldChannel - old selection
-   *
-   * @returns {Promise<void>}
-   */
-  @Watch('channel')
-  async updateChannelPreference(newChannel: string, oldChannel: string): Promise<void> {
-    if (oldChannel === '') {
-      return
-    }
-
-    // Dispatch the Vuex action that invokes the GQL mutation aimed at updating integration settings
-    const { ok } = await this.updateIntegrationSettings({
-      shortcode: 'slack',
-      level: IntegrationSettingsLevel.Owner,
-      ownerId: this.owner.id,
-      settings: { channel: newChannel }
-    })
-
-    if (ok) {
-      this.$toast.success(`Successfully updated the channel to ${newChannel}.`)
     }
   }
 

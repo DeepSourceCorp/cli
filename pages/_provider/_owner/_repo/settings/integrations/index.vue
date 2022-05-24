@@ -21,16 +21,14 @@
       subtitle="You can install them from organization settings"
       class="border border-dashed rounded-lg border-ink-200"
     >
-      <z-button
-        :to="$generateRoute(['settings', 'integrations'], false)"
-        slot="action"
-        size="small"
-      >
-        <div class="inline-flex gap-x-2">
-          <span>Go to organization settings</span>
-          <z-icon color="current-color" icon="arrow-right" class="place-self-center" />
-        </div>
-      </z-button>
+      <nuxt-link :to="$generateRoute(['settings', 'integrations'], false)" slot="action">
+        <z-button size="small">
+          <div class="inline-flex gap-x-2">
+            <span>Go to organization settings</span>
+            <z-icon color="current-color" icon="arrow-right" class="place-self-center" />
+          </div>
+        </z-button>
+      </nuxt-link>
     </empty-state>
 
     <template v-else>
@@ -40,24 +38,9 @@
       </div>
 
       <div v-else class="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <nuxt-link
-          v-for="integration in integrations"
-          :key="integration.shortcode"
-          :to="$generateRoute(['settings', 'integrations', integration.shortcode])"
-          class="flex flex-col p-4 text-left bg-ink-300 hover:bg-ink-200 rounded-md"
-        >
-          <div class="space-y-2">
-            <div class="flex gap-x-3">
-              <img :src="integration.logo" alt="logo" class="flex-shrink-0 w-5 h-5 mt-0.5" />
-              <h2 class="text-base font-medium text-vanilla-100">
-                {{ integration.name }}
-              </h2>
-            </div>
-            <p class="mr-3 text-xs leading-6 text-vanilla-400 integration-description">
-              {{ getIntegrationDescription(integration.shortcode) }}
-            </p>
-          </div>
-        </nuxt-link>
+        <div v-for="integration in integrations" :key="integration.shortcode">
+          <integration-card v-bind="integration" />
+        </div>
       </div>
     </template>
   </div>

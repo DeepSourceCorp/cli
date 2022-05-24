@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ IntegrationCard ]] renders the integration logo along with the name: {"shortcode":"slack","name":"Slack","logo":"https://static.deepsource.io/integration_logos/slack.svg","installed":true,"showInstallationStatus":false} 1`] = `
+"<div><a class=\\"flex flex-col p-4 text-left rounded-md bg-ink-300 hover:bg-ink-200\\">
+    <div class=\\"space-y-2\\">
+      <div class=\\"flex gap-x-3\\"><img src=\\"https://static.deepsource.io/integration_logos/slack.svg\\" alt=\\"logo\\" class=\\"flex-shrink-0 w-5 h-5 mt-0.5\\">
+        <h2 class=\\"text-base font-medium text-vanilla-100\\">
+          Slack
+        </h2>
+      </div>
+      <p class=\\"mr-3 text-xs leading-6 text-vanilla-400 integration-description\\">
+        Send event alerts to your channels
+      </p>
+    </div>
+    <!---->
+  </a></div>"
+`;
+
+exports[`[[ IntegrationCard ]] renders the integration logo along with the name: {"shortcode":"slack","name":"Slack","logo":"https://static.deepsource.io/integration_logos/slack.svg","installed":true,"showInstallationStatus":null} 1`] = `
+"<div><a class=\\"flex flex-col p-4 text-left rounded-md bg-ink-300 hover:bg-ink-200\\">
+    <div class=\\"space-y-2\\">
+      <div class=\\"flex gap-x-3\\"><img src=\\"https://static.deepsource.io/integration_logos/slack.svg\\" alt=\\"logo\\" class=\\"flex-shrink-0 w-5 h-5 mt-0.5\\">
+        <h2 class=\\"text-base font-medium text-vanilla-100\\">
+          Slack
+        </h2>
+      </div>
+      <p class=\\"mr-3 text-xs leading-6 text-vanilla-400 integration-description\\">
+        Send event alerts to your channels
+      </p>
+    </div>
+    <!---->
+  </a></div>"
+`;
+
+exports[`[[ IntegrationCard ]] renders the integration logo along with the name: {"shortcode":"slack","name":"Slack","logo":"https://static.deepsource.io/integration_logos/slack.svg","installed":true,"showInstallationStatus":true} 1`] = `
+"<div><a class=\\"flex flex-col p-4 text-left rounded-md bg-ink-300 hover:bg-ink-200\\">
+    <div class=\\"space-y-2 mb-4\\">
+      <div class=\\"flex gap-x-3\\"><img src=\\"https://static.deepsource.io/integration_logos/slack.svg\\" alt=\\"logo\\" class=\\"flex-shrink-0 w-5 h-5 mt-0.5\\">
+        <h2 class=\\"text-base font-medium text-vanilla-100\\">
+          Slack
+        </h2>
+      </div>
+      <p class=\\"mr-3 text-xs leading-6 text-vanilla-400 integration-description\\">
+        Send event alerts to your channels
+      </p>
+    </div>
+    <div class=\\"mt-auto\\">
+      <ztag-stub state=\\"default\\" iconleft=\\"check\\" size=\\"x-small\\" bgcolor=\\"juniper\\" textsize=\\"xxs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"ink-50\\"><span class=\\"font-semibold text-ink-50\\">
+          INSTALLED
+        </span></ztag-stub>
+    </div>
+  </a></div>"
+`;
+
+exports[`[[ IntegrationCard ]] renders the integration logo along with the name: {"shortcode":"slack","name":"Slack","logo":"https://static.deepsource.io/integration_logos/slack.svg","installed":true} 1`] = `
+"<div><a class=\\"flex flex-col p-4 text-left rounded-md bg-ink-300 hover:bg-ink-200\\">
+    <div class=\\"space-y-2\\">
+      <div class=\\"flex gap-x-3\\"><img src=\\"https://static.deepsource.io/integration_logos/slack.svg\\" alt=\\"logo\\" class=\\"flex-shrink-0 w-5 h-5 mt-0.5\\">
+        <h2 class=\\"text-base font-medium text-vanilla-100\\">
+          Slack
+        </h2>
+      </div>
+      <p class=\\"mr-3 text-xs leading-6 text-vanilla-400 integration-description\\">
+        Send event alerts to your channels
+      </p>
+    </div>
+    <!---->
+  </a></div>"
+`;

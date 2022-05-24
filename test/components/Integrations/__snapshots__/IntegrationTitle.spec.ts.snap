@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ IntegrationTitle ]] renders the integration logo along with the name: {"logo":"https://static.deepsource.io/integration_logos/slack.svg","name":"Slack","pending":false} 1`] = `
+"<div class=\\"inline-flex items-center gap-x-2\\">
+  <logocontainer-stub logo=\\"https://static.deepsource.io/integration_logos/slack.svg\\"></logocontainer-stub>
+  <h2 class=\\"text-base font-medium text-vanilla-100\\">Slack</h2>
+</div>"
+`;
+
+exports[`[[ IntegrationTitle ]] renders the integration logo along with the name: {"logo":"https://static.deepsource.io/integration_logos/slack.svg","name":"Slack","pending":null} 1`] = `
+"<div class=\\"inline-flex items-center gap-x-2\\">
+  <logocontainer-stub logo=\\"https://static.deepsource.io/integration_logos/slack.svg\\"></logocontainer-stub>
+  <h2 class=\\"text-base font-medium text-vanilla-100\\">Slack</h2>
+</div>"
+`;
+
+exports[`[[ IntegrationTitle ]] renders the integration logo along with the name: {"logo":"https://static.deepsource.io/integration_logos/slack.svg","name":"Slack","pending":true} 1`] = `
+"<div class=\\"inline-flex items-center gap-x-2\\">
+  <div class=\\"w-6 h-6 bg-opacity-50 rounded-md animate-pulse bg-ink-200\\"></div>
+  <h2 class=\\"text-base font-medium text-vanilla-100\\">Slack</h2>
+</div>"
+`;
+
+exports[`[[ IntegrationTitle ]] renders the integration logo along with the name: {"logo":"https://static.deepsource.io/integration_logos/slack.svg","name":"Slack"} 1`] = `
+"<div class=\\"inline-flex items-center gap-x-2\\">
+  <logocontainer-stub logo=\\"https://static.deepsource.io/integration_logos/slack.svg\\"></logocontainer-stub>
+  <h2 class=\\"text-base font-medium text-vanilla-100\\">Slack</h2>
+</div>"
+`;

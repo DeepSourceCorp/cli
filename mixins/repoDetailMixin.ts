@@ -52,6 +52,14 @@ export default class RepoDetailMixin extends Vue {
   public lastDays = 30
 
   // Query
+  @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_ID)
+  fetchRepoID: (args: {
+    provider: string
+    owner: string
+    name: string
+    refetch?: boolean
+  }) => Promise<void>
+
   @repoStore.Action(RepositoryDetailActions.FETCH_REPOSITORY_DETAIL)
   fetchRepoDetails: (args: {
     provider: string

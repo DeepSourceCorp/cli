@@ -8,17 +8,7 @@
     />
     <div class="p-4 pb-32 md:max-w-2xl">
       <div class="flex justify-between">
-        <div class="inline-flex items-center space-x-2">
-          <!-- Loading state for integration logo -->
-          <div v-if="$fetchState.pending">
-            <div class="w-6 h-6 bg-opacity-50 rounded-md animate-pulse bg-ink-200"></div>
-          </div>
-
-          <div v-else class="p-1 rounded-sm bg-ink-300">
-            <img :src="integration.logo" alt="Slack logo" class="flex-shrink-0 w-5 h-5" />
-          </div>
-          <h2 class="text-base font-medium text-vanilla-100">Slack</h2>
-        </div>
+        <integration-title :logo="integration.logo" :pending="$fetchState.pending" name="Slack" />
 
         <!-- Loading state for installed on info block -->
         <div v-if="$fetchState.pending">
@@ -32,52 +22,11 @@
         </notice>
       </div>
 
-      <div class="flex flex-col mt-6 md:justify-between md:flex-row gap-y-4 md:gap-y-0">
-        <label class="text-sm md:place-self-center text-vanilla-100"> Notification channel </label>
+      <notification-channel-section v-model="channel" :pending="$fetchState.pending" class="mt-4" />
 
-        <!-- Loading state for select widget -->
-        <div class="w-full h-8 md:w-48">
-          <div
-            v-if="$fetchState.pending"
-            class="h-8 bg-opacity-50 rounded-md animate-pulse bg-ink-200"
-          ></div>
-          <z-select
-            v-else
-            v-model="channel"
-            :truncate="true"
-            spacing="pl-2.5 pr-2 py-2"
-            class="text-sm"
-          >
-            <z-option
-              v-for="option in channelList"
-              :key="option"
-              :label="option"
-              :value="option"
-              class="pl-4"
-            />
-          </z-select>
-        </div>
-      </div>
+      <z-divider margin="my-4" />
 
-      <z-divider margin="my-6" />
-
-      <div class="grid grid-cols-1 gap-y-4 md:grid-cols-2 md:gap-y-0">
-        <div class="space-y-2 max-w-2xs">
-          <h2 class="text-sm text-vanilla-300">Event alerts</h2>
-          <p class="text-xs text-vanilla-400">
-            Events for which you receive notification in your Slack channel.
-          </p>
-        </div>
-
-        <ul class="space-y-6">
-          <li v-for="(event, key) in slackEvents" :key="key" class="flex space-x-2">
-            <span class="inline-flex items-center">
-              <z-icon icon="check" color="juniper" />
-            </span>
-            <span class="text-sm">{{ event }}</span>
-          </li>
-        </ul>
-      </div>
+      <event-alerts-section />
     </div>
   </div>
 </template>
@@ -88,10 +37,11 @@ import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+
 import { IntegrationsDetailActions } from '~/store/integrations/detail'
 import { RepositoryDetailActions } from '~/store/repository/detail'
 import { RepoPerms } from '~/types/permTypes'
-import { IntegrationSettingsLevel } from '~/types/types'
+import { IntegrationSettingsLevel, UpdateIntegrationSettingsInput } from '~/types/types'
 
 /**
  * Repository level integrations page for Slack
@@ -155,6 +105,8 @@ export default class RepoLevelSlackIntegrationPage extends mixins(
 ) {
   channel = ''
 
+  IntegrationSettingsLevel = IntegrationSettingsLevel
+
   /**
    * Fetch hook
    *
@@ -162,6 +114,12 @@ export default class RepoLevelSlackIntegrationPage extends mixins(
    */
 
   async fetch() {
+    if (!this.repository.id) {
+      // Fetch repository ID if not available
+      const { provider, owner, repo } = this.$route.params
+      await this.fetchRepoID({ provider, owner, name: repo })
+    }
+
     await this.fetchIntegrationDetails({
       shortcode: 'slack',
       level: IntegrationSettingsLevel.Repository,
@@ -169,10 +127,6 @@ export default class RepoLevelSlackIntegrationPage extends mixins(
     })
 
     this.channel = this.integration.settings.channel
-  }
-
-  get channelList(): string[] {
-    return this.integration.options?.channel || []
   }
 
   /**
@@ -190,14 +144,18 @@ export default class RepoLevelSlackIntegrationPage extends mixins(
       return
     }
 
-    // Dispatch the Vuex action that invokes the GQL mutation aimed at updating integration settings
-    const { ok } = await this.updateIntegrationSettings({
+    // Conditionally populate the GQL mutation arguments
+    const args = {
       shortcode: 'slack',
       level: IntegrationSettingsLevel.Repository,
       repositoryId: this.repository.id,
       settings: { channel: newChannel }
-    })
+    } as UpdateIntegrationSettingsInput
 
+    // Dispatch the Vuex action that invokes the GQL mutation aimed at updating integration settings
+    const { ok } = await this.updateIntegrationSettings(args)
+
+    // Show success toast on successfully updating the channel preference
     if (ok) {
       this.$toast.success(`Successfully updated the channel to ${newChannel}.`)
     }

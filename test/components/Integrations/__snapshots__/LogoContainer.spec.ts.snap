@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ LogoContainer ]] renders the integration logo in a container 1`] = `"<div class=\\"p-1 rounded-sm bg-ink-300\\"><img src=\\"https://static.deepsource.io/integration_logos/slack.svg\\" alt=\\"Integration logo\\" class=\\"flex-shrink-0 w-5 h-5\\"></div>"`;
