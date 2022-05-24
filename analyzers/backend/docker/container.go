@@ -28,10 +28,15 @@ func (d *DockerClient) StartDockerContainer() {
 	config := container.Config{
 		Image: fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag),
 		Cmd:   strings.Split(d.AnalysisOpts.AnalysisCommand, " "),
+		Env:   []string{"TOOLBOX_PATH:/toolbox", "CODE_PATH:/code"},
 	}
 
+	fmt.Printf("%s:%s", d.AnalysisOpts.HostToolboxPath, d.AnalysisOpts.ContainerToolboxPath)
 	hostConfig := container.HostConfig{
-		Binds: []string{fmt.Sprintf("%s:%s", d.AnalysisOpts.HostCodePath, d.AnalysisOpts.ContainerCodePath)},
+		Binds: []string{
+			fmt.Sprintf("%s:%s", d.AnalysisOpts.HostCodePath, d.AnalysisOpts.ContainerCodePath),
+			fmt.Sprintf("%s:%s", d.AnalysisOpts.HostToolboxPath, d.AnalysisOpts.ContainerToolboxPath),
+		},
 	}
 
 	networkConfig := network.NetworkingConfig{}

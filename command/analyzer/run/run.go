@@ -79,17 +79,17 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		ContainerName:  analyzerName + "-" + docker_build.GenerateImageVersion(7),
 		DockerfilePath: dockerFilePath,
 		AnalysisOpts: docker_build.AnalysisParams{
-			AnalysisCommand:   analyzerTOMLData.Analysis.Command,
-			ContainerCodePath: containerCodePath,    // /code
-			ToolboxPath:       containerToolBoxPath, // /toolbox
+			AnalysisCommand:      analyzerTOMLData.Analysis.Command,
+			ContainerCodePath:    containerCodePath,    // /code
+			ContainerToolboxPath: containerToolBoxPath, // /toolbox
 		},
 	}
 
 	// Building the Analyzer image
 	fmt.Println("Building Analyzer image...")
-	// if err := d.BuildAnalyzerDockerImage(); err != nil {
-	//     return err
-	// }
+	if err := d.BuildAnalyzerDockerImage(); err != nil {
+		return err
+	}
 
 	// Resolve the path of source code to be analyzed based on the user input
 	d.AnalysisOpts.HostCodePath, err = a.resolveAnalysisSourcePath()
@@ -118,6 +118,7 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	if err = a.writeAnalysisConfig(analysisConfig); err != nil {
 		return err
 	}
+	d.AnalysisOpts.HostToolboxPath = a.TempToolboxDirectory
 
 	// Write the analysis_config data into a temp /toolbox directory mount it as well
 	d.StartDockerContainer()
@@ -168,6 +169,6 @@ func (a *AnalyzerRunOpts) writeAnalysisConfig(analysisConfig *analysis.AnalysisC
 	}
 
 	// Create a temporary directory
-	fmt.Printf("Writing analysis_config to %s", a.TempToolboxDirectory)
+	fmt.Printf("Writing analysis_config to %s\n", a.TempToolboxDirectory)
 	return os.WriteFile(path.Join(a.TempToolboxDirectory, "analysis_config.json"), analysisConfigJSON, 0o644)
 }
