@@ -23,7 +23,7 @@ import (
  * Having started the container, streams the logs to STDOUT. On completion of the streaming,
  * copies the `analysis_results.json` result file generated in the container to the host directory
  */
-func (d *DockerClient) StartDockerContainer() {
+func (d *DockerClient) StartDockerContainer() error {
 	/* Prepares the container config with the following config:
 	 * ImageName
 	 * CMD instruction
@@ -68,18 +68,18 @@ func (d *DockerClient) StartDockerContainer() {
 	reader, err := d.Client.ContainerLogs(ctx, containerCreateResp.ID, types.ContainerLogsOptions{ShowStdout: true, ShowStderr: true, Follow: true, Timestamps: false})
 	if err != nil {
 		log.Println(err)
-		return
+		return err
 	}
 	_, err = io.Copy(os.Stdout, reader)
 	if err != nil && err != io.EOF {
-		return
+		return err
 	}
 
 	// If no error is found from the above step, copy the analysis results file to the host
 	contentReader, _, err := d.Client.CopyFromContainer(ctx, containerCreateResp.ID, path.Join(d.AnalysisOpts.ContainerToolBoxPath, "analysis_results.json"))
 	if err != nil {
 		fmt.Println(err)
-		return
+		return err
 	}
 	defer contentReader.Close()
 
@@ -104,4 +104,5 @@ func (d *DockerClient) StartDockerContainer() {
 		// TODO: Check if writing the file inside loop wont cause any issues
 		os.WriteFile(result.Name, buf, 0o644)
 	}
+    return nil
 }

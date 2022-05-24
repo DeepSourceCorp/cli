@@ -133,7 +133,9 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	d.AnalysisOpts.HostToolBoxPath = a.TempToolBoxDirectory
 
 	// Write the analysis_config data into a temp /toolbox directory mount it as well
-	d.StartDockerContainer()
+	if err = d.StartDockerContainer(); err != nil {
+		return err
+	}
 
 	// Reads the LSP based analysis result written in the `analysis_results.json` file present in
 	// the directory of the Analyzer
