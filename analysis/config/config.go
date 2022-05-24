@@ -1,7 +1,6 @@
 package config
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -18,42 +17,6 @@ type AnalysisRun struct {
 	AnalysisFiles     []string
 	ExcludedFiles     []string
 	TestFiles         []string
-}
-
-/* Configures the analysis_config.json file which is used by analyzer to run analysis since it contains
- * metadata about the files to be analyzed, the test files in the project, the excluded files and analyzer meta */
-func (r *AnalysisRun) ConfigureAnalysis() (*AnalysisConfig, error) {
-	var err error
-	analyzerConfig := &AnalysisConfig{}
-
-	// Parse DeepSource config (.deepsource.toml) in order to get the
-	// configured `exclude_patterns` and `test_patterns`
-	if err = r.parseDeepSourceConfig(); err != nil {
-		return analyzerConfig, err
-	}
-
-	// Get the list of all the files present in the CODE_PATH and are to be analyzed
-	if r.AnalysisFiles, err = readAllFiles(r.LocalCodePath); err != nil {
-		return analyzerConfig, err
-	}
-
-	// Gets the list of files to be excluded from analysis and the test files present
-	// Doesn't return error, just logs it even if the error comes up since it doens't affect the analysis run
-	if err = r.checkExcludedAndTestFiles(); err != nil {
-		return analyzerConfig, nil
-	}
-
-	// Filter out the files to be analyzed by removing the r.ExcludedFiles from them and assign them to r.AnalysisFiles
-	r.filterAnalysisFiles()
-
-	// Modify the paths of file to use the container based CODE_PATH
-	r.modifyFilePaths()
-
-	// Format the analysis config data into LSP format of analysis_config.json
-	analysisConfig := r.formatAnalysisConfigToLSP()
-	b, _ := json.Marshal(analysisConfig)
-	os.WriteFile("analysis_config.json", b, 0o644)
-	return analysisConfig, nil
 }
 
 /* Checks for excluded and test files based on the `exclude_patterns` and `test_patterns`
@@ -102,4 +65,34 @@ func (r *AnalysisRun) parseDeepSourceConfig() (err error) {
 		return nil
 	}
 	return err
+}
+
+/* Configures the analysis_config.json file which is used by analyzer to run analysis since it contains
+ * metadata about the files to be analyzed, the test files in the project, the excluded files and analyzer meta */
+func (r *AnalysisRun) ConfigureAnalysis() (*AnalysisConfig, error) {
+	var err error
+	analyzerConfig := &AnalysisConfig{}
+
+	// Parse DeepSource config (.deepsource.toml) in order to get the
+	// configured `exclude_patterns` and `test_patterns`
+	if err = r.parseDeepSourceConfig(); err != nil {
+		return analyzerConfig, err
+	}
+
+	// Get the list of all the files present in the CODE_PATH and are to be analyzed
+	if r.AnalysisFiles, err = readAllFiles(r.LocalCodePath); err != nil {
+		return analyzerConfig, err
+	}
+
+	// Gets the list of files to be excluded from analysis and the test files present
+	// Doesn't return error, just logs it even if the error comes up since it doens't affect the analysis run
+	if err = r.checkExcludedAndTestFiles(); err != nil {
+		return analyzerConfig, nil
+	}
+
+	// Filter out the files to be analyzed by removing the r.ExcludedFiles from them and assign them to r.AnalysisFiles
+	r.filterAnalysisFiles()
+
+	// Format the analysis config data into LSP format of analysis_config.json
+	return r.formatAnalysisConfigToLSP(), nil
 }

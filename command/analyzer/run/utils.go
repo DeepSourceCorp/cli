@@ -4,8 +4,12 @@ import (
 	"log"
 	"net/url"
 	"os"
+	"path"
 	"path/filepath"
 	"strings"
+
+	analysis "github.com/deepsourcelabs/cli/analysis/config"
+	"github.com/deepsourcelabs/cli/analysis/lsp"
 )
 
 // isValidUrl tests a string to determine if it is a well-structured url or not.
@@ -45,4 +49,24 @@ func getFilesToAnalyze(codePath string) ([]string, error) {
 		return allFiles, err
 	}
 	return allFiles, nil
+}
+
+// Modify the filepaths to use the container CODE_PATH and not the local CODE_PATH
+// since the file will be mounted on the container and there, the container's path would
+// only be resolvable
+func modifyAnalysisConfigFilepaths(analysisConfig *analysis.AnalysisConfig, localCodePath, containerCodePath string) {
+	for idx, file := range analysisConfig.Files {
+		filePath := strings.TrimPrefix(string(file.URI), localCodePath)
+		analysisConfig.Files[idx].URI = lsp.DocumentURI(path.Join(containerCodePath, filePath))
+	}
+
+	for idx, file := range analysisConfig.TestFiles {
+		filePath := strings.TrimPrefix(string(file.URI), localCodePath)
+		analysisConfig.TestFiles[idx].URI = lsp.DocumentURI(path.Join(containerCodePath, filePath))
+	}
+
+	for idx, file := range analysisConfig.ExcludedFiles {
+		filePath := strings.TrimPrefix(string(file.URI), localCodePath)
+		analysisConfig.ExcludedFiles[idx].URI = lsp.DocumentURI(path.Join(containerCodePath, filePath))
+	}
 }

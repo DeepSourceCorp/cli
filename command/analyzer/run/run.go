@@ -1,6 +1,7 @@
 package run
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
@@ -24,11 +25,12 @@ var (
 
 // The params required while running the Analysis locally
 type AnalyzerRunOpts struct {
-	SourcePath         string          // The path of the directory of source code to be analyzed
-	RemoteSource       bool            // True if the source to be analyzed is a remote VCS repository
-	TempCloneDirectory string          // The temporary directory where the source of the remote VCS will be cloned to
-	AnalysisFiles      []string        // The list of analysis files
-	AnalysisConfig     *AnalysisConfig // The analysis_config.json file containing the meta for analysis
+	RemoteSource         bool            // True if the source to be analyzed is a remote VCS repository
+	SourcePath           string          // The path of the directory of source code to be analyzed
+	TempCloneDirectory   string          // The temporary directory where the source of the remote VCS will be cloned to
+	TempToolboxDirectory string          // The temporary directory where the analysis_config is present
+	AnalysisFiles        []string        // The list of analysis files
+	AnalysisConfig       *AnalysisConfig // The analysis_config.json file containing the meta for analysis
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -85,9 +87,9 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 
 	// Building the Analyzer image
 	fmt.Println("Building Analyzer image...")
-	if err := d.BuildAnalyzerDockerImage(); err != nil {
-		return err
-	}
+	// if err := d.BuildAnalyzerDockerImage(); err != nil {
+	//     return err
+	// }
 
 	// Resolve the path of source code to be analyzed based on the user input
 	d.AnalysisOpts.HostCodePath, err = a.resolveAnalysisSourcePath()
@@ -107,10 +109,18 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	if err != nil {
 		log.Println(err)
 	}
-	fmt.Println(analysisConfig)
+
+	// Modify the paths of analysis_config.json file to use the container based CODE_PATH instead
+	// of the local CODE_PATH
+	modifyAnalysisConfigFilepaths(analysisConfig, d.AnalysisOpts.HostCodePath, d.AnalysisOpts.ContainerCodePath)
+
+	// Write the analysis_config.json to TOOLBOX_PATH
+	if err = a.writeAnalysisConfig(analysisConfig); err != nil {
+		return err
+	}
 
 	// Write the analysis_config data into a temp /toolbox directory mount it as well
-	// d.StartDockerContainer()
+	d.StartDockerContainer()
 	return nil
 }
 
@@ -142,4 +152,22 @@ func (a *AnalyzerRunOpts) resolveAnalysisSourcePath() (string, error) {
 		return a.TempCloneDirectory, nil
 	}
 	return a.SourcePath, nil
+}
+
+// Writes the analysis_config.json into a temporary directory which shall be mounted as TOOLBOX directory in the container
+func (a *AnalyzerRunOpts) writeAnalysisConfig(analysisConfig *analysis.AnalysisConfig) (err error) {
+	// Create a temporary directory
+	if a.TempToolboxDirectory, err = os.MkdirTemp("", "toolbox"); err != nil {
+		return err
+	}
+
+	// Marshal the analysis_config data into JSON
+	analysisConfigJSON, err := json.Marshal(analysisConfig)
+	if err != nil {
+		return err
+	}
+
+	// Create a temporary directory
+	fmt.Printf("Writing analysis_config to %s", a.TempToolboxDirectory)
+	return os.WriteFile(path.Join(a.TempToolboxDirectory, "analysis_config.json"), analysisConfigJSON, 0o644)
 }

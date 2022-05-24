@@ -77,13 +77,3 @@ func (r *AnalysisRun) filterAnalysisFiles() {
 	}
 	r.AnalysisFiles = filteredFiles
 }
-
-// Modify the filepaths to use the container CODE_PATH and not the local CODE_PATH
-// since the file will be mounted on the container and there, the container's path would
-// only be resolvable
-func (r *AnalysisRun) modifyFilePaths() {
-	for idx, file := range r.AnalysisFiles {
-		filePath := strings.TrimPrefix(file, r.LocalCodePath)
-		r.AnalysisFiles[idx] = path.Join(r.ContainerCodePath, filePath)
-	}
-}
