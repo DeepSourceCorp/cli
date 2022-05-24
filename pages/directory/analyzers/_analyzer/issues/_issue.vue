@@ -26,7 +26,7 @@
         <div v-else class="w-16 h-6 bg-ink-300 animate-pulse"></div>
         <div v-if="isLoaded && issue.autofixAvailable" class="flex space-x-1.5 items-center">
           <z-icon icon="autofix" size="x-small" color="vanilla-400" />
-          <span>Has Autofix</span>
+          <span>Autofix</span>
         </div>
         <div v-else-if="!isLoaded" class="w-16 h-6 bg-ink-300 animate-pulse"></div>
       </div>

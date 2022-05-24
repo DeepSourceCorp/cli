@@ -4,24 +4,24 @@
     :show-info="false"
   >
     <template #title>
-      <h6 class="overflow-hidden cursor-pointer text-vanilla-100 overflow-ellipsis space-x-2">
+      <h6 class="space-x-2 overflow-hidden cursor-pointer text-vanilla-100 overflow-ellipsis">
         <span>{{ issue.title }}</span
         ><span class="text-sm font-normal text-vanilla-400">{{ issue.shortcode }}</span>
       </h6>
     </template>
     <template #description>
-      <div class="text-sm text-vanilla-400 flex space-x-5 mt-1">
+      <div class="flex mt-1 space-x-5 text-sm text-vanilla-400">
         <div class="flex space-x-1.5 items-center">
           <z-icon :icon="issue.issueType" size="x-small" color="vanilla-400" />
           <span>{{ issueTypeTitle }}</span>
         </div>
         <div v-if="issue.autofixAvailable" class="flex space-x-1.5 items-center">
           <z-icon icon="autofix" size="x-small" color="vanilla-400" />
-          <span>Has Autofix</span>
+          <span>Autofix</span>
         </div>
       </div>
       <div
-        class="prose text-vanilla-400 text-sm mt-2 max-w-full"
+        class="max-w-full mt-2 text-sm prose text-vanilla-400"
         v-html="issue.shortDescriptionRendered"
       />
     </template>
