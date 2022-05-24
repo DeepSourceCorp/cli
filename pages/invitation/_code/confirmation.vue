@@ -117,10 +117,15 @@ export enum REQUEST_STATES {
   middleware: [
     async function ({ store, route, redirect, error, $fetchGraphqlData }) {
       try {
-        const res = await $fetchGraphqlData(getInvitationDetailsQuery, {
-          invitationCode: route.params.code
-        })
+        const res = await $fetchGraphqlData(
+          getInvitationDetailsQuery,
+          {
+            invitationCode: route.params.code
+          },
+          true
+        )
         const details = res.data.getTeamInviteInfo
+
         if (details.joined) {
           redirect(302, '/')
         }
