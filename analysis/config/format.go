@@ -36,7 +36,7 @@ func (r *AnalysisRun) formatAnalysisConfigToLSP() *AnalysisConfig {
 }
 
 /* Converts the LSP based analysis_results.json into the default format supported by DeepSource */
-func (r *AnalysisRun) formatLSPResultsToDefault(analysisResult *AnalysisResult) *DefaultAnalysisResult {
+func (*AnalysisRun) formatLSPResultsToDefault(analysisResult *AnalysisResult) *DefaultAnalysisResult {
 	defaultAnalysisResult := DefaultAnalysisResult{
 		Metrics:   analysisResult.Metrics,
 		IsPassed:  analysisResult.IsPassed,
