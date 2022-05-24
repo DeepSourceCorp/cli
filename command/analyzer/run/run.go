@@ -107,8 +107,8 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		return err
 	}
 
-    /* Prepare the analysis_config.json here and mount into the container at `TOOLBOX_PATH/analysis_config.json`
-     * The analysis_config.json will have path prepended with the CODE_PATH of the container and not local CODE_PATH */
+	/* Prepare the analysis_config.json here and mount into the container at `TOOLBOX_PATH/analysis_config.json`
+	 * The analysis_config.json will have path prepended with the CODE_PATH of the container and not local CODE_PATH */
 	analysisRun := analysis.AnalysisRun{
 		AnalyzerName:      analyzerTOMLData.Name,
 		LocalCodePath:     d.AnalysisOpts.HostCodePath,
