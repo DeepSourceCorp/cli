@@ -12,9 +12,14 @@
           Transfer ownership of
           {{ activeDashboardContext.team_name }}
         </div>
-        <z-alert type="danger">
+        <z-alert type="warning">
           <p class="inline-flex items-start">
-            <z-icon icon="alert-circle" color="cherry-400" size="large" class="mr-3 stroke-2" />
+            <z-icon
+              icon="alert-circle"
+              color="honey-400"
+              size="large"
+              class="mr-3 stroke-2 -mt-1 pt-px"
+            />
             Please make sure you’ve thought this through! Transferring ownership is immediate and
             you cannot undo this.
           </p>
@@ -22,7 +27,29 @@
         <div class="w-full space-y-2">
           <label class="space-y-2">
             <span class="text-sm text-vanilla-100">New owner of this team</span>
-            <div class="relative">
+            <div
+              v-if="newOwner"
+              class="h-10 flex flex-row space-x-2 justify-between px-3 bg-ink-200 border border-ink-100 rounded-md shadow-inner"
+            >
+              <div class="flex flex-row space-x-2">
+                <div class="h-7 my-auto">
+                  <z-avatar
+                    type="div"
+                    :image="newOwner.user.avatar"
+                    :user-name="newOwner.user.fullName || newOwner.user.email"
+                    :fallback-image="context.emptyAvatarUrl"
+                    size="sm"
+                  />
+                </div>
+                <div class="font-medium leading-none text-vanilla-100 text-xs sm:text-sm my-auto">
+                  {{ newOwner.user.email }}
+                </div>
+              </div>
+              <div as="button" @click="clearNewOwner" class="cursor-pointer my-auto">
+                <z-icon icon="x" />
+              </div>
+            </div>
+            <div v-else class="relative">
               <z-input
                 v-model="searchCandidate"
                 v-focus
@@ -30,11 +57,12 @@
                 icon="search"
                 placeholder="Search for team member"
                 background-color="ink-300"
+                :debounceDelay="150"
+                ref="input"
                 @debounceInput="fetchTransferCandidates"
                 @focus="revealResults"
-                @keyup="handleKeyUp"
+                @keyup="(event) => handleKeyUp(event)"
                 @blur="handleBlur"
-                :class="[newOwnerId === '' ? 'text-vanilla-400' : 'text-vanilla-100']"
               >
                 <template slot="left">
                   <z-icon icon="search" size="small" class="ml-1.5" />
@@ -42,17 +70,24 @@
               </z-input>
               <div
                 v-if="showSearchResults"
-                class="absolute mt-1 w-full shadow-double-dark max-h-80 overflow-y-auto border border-ink-100 rounded-sm"
+                class="absolute mt-1 w-full shadow-double-dark max-h-44 sm:max-h-80 overflow-y-auto border border-ink-100 rounded-md"
+                tabindex="-1"
               >
                 <div
-                  v-if="searchResults.length && searchCandidate"
+                  v-if="searchResults.length"
                   class="w-full flex flex-col divide-y divide-ink-100"
+                  tabindex="-1"
                 >
                   <div
-                    v-for="member in searchResults"
+                    v-for="(member, index) in searchResults"
                     :key="member.id"
+                    tabindex="-1"
+                    :ref="`searchResult${index}`"
                     @click="() => setNewOwner(member)"
-                    class="p-3 w-full leading-none cursor-pointer bg-ink-300 hover:bg-ink-200 space-y-1.5"
+                    @focus="() => setItemInFocus(index)"
+                    @blur="clearItemInFocus"
+                    @keydown="(event) => handleSearchResultKeyDown(event, member)"
+                    class="p-3 w-full leading-none cursor-pointer bg-ink-300 hover:bg-ink-200 space-y-1.5 focus:bg-ink-200 focus:outline-none"
                   >
                     <div class="text-sm font-medium">
                       {{ member.user.fullName || member.user.email }}
@@ -62,13 +97,12 @@
                     </div>
                   </div>
                 </div>
-                <lazy-empty-state
+                <div
                   v-else
-                  image-width="w-20"
-                  class="font-medium text-vanilla-400 bg-ink-300"
+                  class="font-medium text-vanilla-400 bg-ink-300 px-3 py-6 w-full text-center"
                 >
-                  <template #title> <span class="text-base">No results found</span></template>
-                </lazy-empty-state>
+                  <span class="text-base">No results found</span>
+                </div>
               </div>
             </div>
           </label>
@@ -86,8 +120,10 @@
               type="email"
               @blur="(ev) => validateEmail(ev.target)"
             />
-            <p v-if="emailEmpty" class="text-xs text-cherry">This field is required.</p>
-            <p v-else-if="!validEmail" class="text-xs text-cherry">Please enter a valid email.</p>
+            <div class="h-4">
+              <p v-if="emailEmpty" class="text-xs text-cherry">This field is required.</p>
+              <p v-else-if="!validEmail" class="text-xs text-cherry">Please enter a valid email.</p>
+            </div>
           </label>
         </div>
       </div>
@@ -134,9 +170,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, mixins, Watch, namespace } from 'nuxt-property-decorator'
+import { Component, Prop, mixins, namespace } from 'nuxt-property-decorator'
 import {
   ZAlert,
+  ZAvatar,
   ZIcon,
   ZConfirm,
   ZSelect,
@@ -148,6 +185,7 @@ import {
 import { TeamMember } from '~/types/types'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
+import ContextMixin from '~/mixins/contextMixin'
 import { TeamActions } from '~/store/team/detail'
 
 const teamStore = namespace('team/detail')
@@ -155,6 +193,7 @@ const teamStore = namespace('team/detail')
 @Component({
   components: {
     ZAlert,
+    ZAvatar,
     ZIcon,
     ZConfirm,
     ZSelect,
@@ -165,16 +204,21 @@ const teamStore = namespace('team/detail')
   },
   layout: 'dashboard'
 })
-export default class TransferOwnershipModal extends mixins(TeamDetailMixin, ActiveUserMixin) {
+export default class TransferOwnershipModal extends mixins(
+  TeamDetailMixin,
+  ActiveUserMixin,
+  ContextMixin
+) {
   private validEmail = true
   private emailEmpty = false
   private searchCandidate = ''
   public transferInProgress = false
   public showSearchResults = false
-  public newOwnerId = ''
+  public newOwner = null as TeamMember | null
   public oldOwnerTypedEmail = ''
   public listLoading = false
   public searchResults = [] as Array<TeamMember> | undefined
+  public itemInFocus = -1
 
   @teamStore.Action(TeamActions.QUERY_TEAM_MEMBERS)
   queryTeamMembers: (
@@ -222,40 +266,82 @@ export default class TransferOwnershipModal extends mixins(TeamDetailMixin, Acti
     this.listLoading = false
   }
 
-  @Watch('searchCandidate')
-  update(): void {
-    if (!this.searchCandidate) {
-      this.newOwnerId = ''
-    }
+  mounted() {
+    this.fetchTransferCandidates()
   }
 
   setNewOwner(member: TeamMember) {
-    this.newOwnerId = member.user.id
-    this.searchCandidate = member.user.fullName || member.user.email
+    this.newOwner = member
     this.hideResults()
+    this.searchCandidate = ''
+  }
+
+  clearNewOwner() {
+    this.newOwner = null
+    this.clearItemInFocus()
+    this.fetchTransferCandidates()
   }
 
   close(): void {
     this.$emit('close')
   }
 
-  revealResults(): void {
-    if (this.searchCandidate) this.showSearchResults = true
-  }
-
-  handleKeyUp(): void {
-    this.revealResults()
-    this.newOwnerId = ''
-  }
-
   hideResults(): void {
     this.showSearchResults = false
   }
 
+  revealResults(): void {
+    this.showSearchResults = true
+  }
+
+  handleKeyUp(event: KeyboardEvent): void {
+    this.revealResults()
+    if (event.key === 'ArrowDown') this.focusNext()
+  }
+
+  handleSearchResultKeyDown(event: KeyboardEvent, member: TeamMember): void {
+    if (event.key === 'Enter') {
+      this.setNewOwner(member)
+      this.clearItemInFocus()
+    } else if (event.key === 'ArrowDown') this.focusNext()
+    else if (event.key === 'ArrowUp') this.focusPrevious()
+  }
+
+  // Sets the index of the currently focused item
+  setItemInFocus(index: number): void {
+    this.itemInFocus = index
+  }
+
+  // Resets the focused item index
+  clearItemInFocus(): void {
+    this.itemInFocus = -1
+  }
+
+  // Moves focus the next item in the results list
+  focusNext(): void {
+    if (this.searchResults && this.itemInFocus < this.searchResults.length - 1) {
+      const nextItem = this.$refs[`searchResult${this.itemInFocus + 1}`] as Array<HTMLElement>
+      if (nextItem[0]) nextItem[0].focus()
+    }
+  }
+
+  // Moves focus the previous item in the results list
+  focusPrevious(): void {
+    if (this.searchResults && this.itemInFocus > 0) {
+      const prevItem = this.$refs[`searchResult${this.itemInFocus - 1}`] as Array<HTMLElement>
+      if (prevItem[0]) prevItem[0].focus()
+    } else if (this.itemInFocus === 0) {
+      const input = this.$refs.input as HTMLElement
+      if (input) input.focus()
+    }
+  }
+
   // The timeout allows a search result item to be clicked before the results are hidden
+  // The if condition ensures that the results window is not hidden in case a result item is focused via keyboard navigation,
+  // allowing subsquent keydown events to continue to navigate the results list
   handleBlur() {
     setTimeout(() => {
-      this.hideResults()
+      if (this.itemInFocus === -1) this.hideResults()
     }, 150)
   }
 
@@ -269,7 +355,7 @@ export default class TransferOwnershipModal extends mixins(TeamDetailMixin, Acti
   }
 
   triggerTransferOwnership(): void {
-    if (this.newOwnerId === '') {
+    if (!this.newOwner) {
       this.$toast.danger('Please choose a new owner for this team.')
       return
     }
@@ -283,7 +369,7 @@ export default class TransferOwnershipModal extends mixins(TeamDetailMixin, Acti
       this.$toast.danger('Please ensure that your email address is entered correctly.')
       return
     }
-    this.$emit('primaryAction', this.newOwnerId)
+    this.$emit('primaryAction', this.newOwner.user.id)
   }
 }
 </script>

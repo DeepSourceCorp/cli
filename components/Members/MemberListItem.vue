@@ -169,8 +169,6 @@ export default class MemberListItem extends mixins(ContextMixin, OwnerDetailMixi
   @Prop({ default: false })
   allowTransfer!: boolean
 
-  // private roles = {}
-
   get joining(): string {
     return formatDate(this.dateJoined)
   }

@@ -15,11 +15,16 @@
         </template>
       </z-input>
     </div>
-    <div v-if="listLoading" class="flex flex-col space-y-2">
-      <div v-for="loader in this.limit" :key="loader" class="flex w-full space-x-2 animate-pulse">
-        <div class="w-8 h-8 rounded-md bg-ink-300"></div>
-        <div class="w-2/3 h-8 rounded-md bg-ink-300"></div>
-        <div class="flex-grow h-8 rounded-md bg-ink-300"></div>
+    <div v-if="listLoading" class="flex flex-col space-y-2.5">
+      <div
+        v-for="loader in this.limit"
+        :key="loader"
+        class="flex w-full space-x-4 animate-pulse py-1"
+      >
+        <div class="w-9 h-9 rounded-full bg-ink-300"></div>
+        <div class="w-1/3 h-10 rounded-md bg-ink-300"></div>
+        <div class="w-1/3 h-10 rounded-md bg-ink-300"></div>
+        <div class="flex-grow h-10 rounded-md bg-ink-300"></div>
       </div>
     </div>
     <template v-else-if="teamMembersList && teamMembersList.length">
