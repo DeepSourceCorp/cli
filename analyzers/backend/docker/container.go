@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path"
 	"strings"
 	"time"
 
@@ -23,19 +24,24 @@ import (
  * copies the `analysis_results.json` result file generated in the container to the host directory
  */
 func (d *DockerClient) StartDockerContainer() {
-	// Prepare the container config
-	// TODO: Set CODE_PATH and TOOLBOX_PATH as passed by the user
+	/* Prepares the container config with the following config:
+	 * ImageName
+	 * CMD instruction
+	 * Environment variables */
+	fmt.Println(d.AnalysisOpts.ContainerToolBoxPath)
 	config := container.Config{
 		Image: fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag),
-		Cmd:   strings.Split(d.AnalysisOpts.AnalysisCommand, " "),
-		Env:   []string{"TOOLBOX_PATH:/toolbox", "CODE_PATH:/code"},
+		// Cmd:   []string{"ls", d.AnalysisOpts.ContainerToolBoxPath},
+		Cmd: strings.Split(d.AnalysisOpts.AnalysisCommand, " "),
+		Env: []string{"TOOLBOX_PATH:" + d.AnalysisOpts.ContainerToolBoxPath, "CODE_PATH:" + d.AnalysisOpts.ContainerCodePath},
 	}
 
-	fmt.Printf("%s:%s", d.AnalysisOpts.HostToolboxPath, d.AnalysisOpts.ContainerToolboxPath)
+	// Host config containing the mounted volumes
+	// The host machine's temporary code path and toolbox path is mounted in the container
 	hostConfig := container.HostConfig{
 		Binds: []string{
 			fmt.Sprintf("%s:%s", d.AnalysisOpts.HostCodePath, d.AnalysisOpts.ContainerCodePath),
-			fmt.Sprintf("%s:%s", d.AnalysisOpts.HostToolboxPath, d.AnalysisOpts.ContainerToolboxPath),
+			fmt.Sprintf("%s:%s", d.AnalysisOpts.HostToolBoxPath, d.AnalysisOpts.ContainerToolBoxPath),
 		},
 	}
 
@@ -66,14 +72,13 @@ func (d *DockerClient) StartDockerContainer() {
 		log.Println(err)
 		return
 	}
-
 	_, err = io.Copy(os.Stdout, reader)
 	if err != nil && err != io.EOF {
 		return
 	}
 
 	// If no error is found from the above step, copy the analysis results file to the host
-	contentReader, _, err := d.Client.CopyFromContainer(ctx, containerCreateResp.ID, "/toolbox/analysis_results.json")
+	contentReader, _, err := d.Client.CopyFromContainer(ctx, containerCreateResp.ID, path.Join(d.AnalysisOpts.ContainerToolBoxPath, "analysis_results.json"))
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -98,6 +103,6 @@ func (d *DockerClient) StartDockerContainer() {
 		}
 
 		// Write the contents to the host results file
-		ioutil.WriteFile(result.Name, buf, 0o644)
+		os.WriteFile(result.Name, buf, 0o644)
 	}
 }

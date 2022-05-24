@@ -34,10 +34,10 @@ type DockerBuildResponse struct {
 type AnalysisParams struct {
 	ToolboxPath          string
 	HostCodePath         string
-	HostToolboxPath      string
+	HostToolBoxPath      string
 	AnalysisCommand      string
 	ContainerCodePath    string
-	ContainerToolboxPath string
+	ContainerToolBoxPath string
 }
 
 type DockerClient struct {

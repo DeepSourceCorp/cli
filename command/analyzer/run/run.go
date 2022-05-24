@@ -16,21 +16,22 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// Reading the values of CODE_PATH and TOOLBOX_PATH from the user's environment
+// Variables to hold the value of CODE_PATH and TOOLBOX_PATH to be injected
+// into the analysis container
 var (
-	containerCodePath    string = os.Getenv("CODE_PATH")
-	containerToolBoxPath string = os.Getenv("TOOLBOX_PATH")
-	analysisResultPath   string = path.Join(containerToolBoxPath, "analysis_results.json")
+	containerCodePath    string = "/code"
+	containerToolBoxPath string = "/toolbox"
+	analysisResultPath   string
 )
 
 // The params required while running the Analysis locally
 type AnalyzerRunOpts struct {
 	RemoteSource         bool            // True if the source to be analyzed is a remote VCS repository
 	SourcePath           string          // The path of the directory of source code to be analyzed
-	TempCloneDirectory   string          // The temporary directory where the source of the remote VCS will be cloned to
-	TempToolboxDirectory string          // The temporary directory where the analysis_config is present
 	AnalysisFiles        []string        // The list of analysis files
 	AnalysisConfig       *AnalysisConfig // The analysis_config.json file containing the meta for analysis
+	TempCloneDirectory   string          // The temporary directory where the source of the remote VCS will be cloned to
+	TempToolBoxDirectory string          // The temporary directory where the analysis_config is present
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -72,6 +73,15 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	dockerFilePath, dockerFileName := docker_build.GetDockerImageDetails(analyzerTOMLData)
 	analyzerName := strings.Split(dockerFileName, "/")[1]
 
+	/* Check if the user supplied CODE_PATH and TOOLBOX_PATH, if not
+	 * use the default values of CODE_PATH and TOOLBOX_PATH */
+	if _, envVarPresent := os.LookupEnv("CODE_PATH"); envVarPresent {
+		containerCodePath = os.Getenv("CODE_PATH")
+	}
+	if _, envVarPresent := os.LookupEnv("TOOLBOX_PATH"); envVarPresent {
+		containerToolBoxPath = os.Getenv("CODE_PATH")
+	}
+
 	// Create a Docker client
 	d := docker_build.DockerClient{
 		ImageName:      dockerFileName,
@@ -81,7 +91,7 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		AnalysisOpts: docker_build.AnalysisParams{
 			AnalysisCommand:      analyzerTOMLData.Analysis.Command,
 			ContainerCodePath:    containerCodePath,    // /code
-			ContainerToolboxPath: containerToolBoxPath, // /toolbox
+			ContainerToolBoxPath: containerToolBoxPath, // /toolbox
 		},
 	}
 
@@ -97,8 +107,8 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 		return err
 	}
 
-	// TODO here: Prepare the analysis_config.json here and mount into the container at `TOOLBOX_PATH/analysis_config.json`
-	// The analysis_config.json will have path prepended with the CODE_PATH of the container and not local CODE_PATH
+    /* Prepare the analysis_config.json here and mount into the container at `TOOLBOX_PATH/analysis_config.json`
+     * The analysis_config.json will have path prepended with the CODE_PATH of the container and not local CODE_PATH */
 	analysisRun := analysis.AnalysisRun{
 		AnalyzerName:      analyzerTOMLData.Name,
 		LocalCodePath:     d.AnalysisOpts.HostCodePath,
@@ -118,7 +128,7 @@ func (a *AnalyzerRunOpts) AnalyzerRun() error {
 	if err = a.writeAnalysisConfig(analysisConfig); err != nil {
 		return err
 	}
-	d.AnalysisOpts.HostToolboxPath = a.TempToolboxDirectory
+	d.AnalysisOpts.HostToolBoxPath = a.TempToolBoxDirectory
 
 	// Write the analysis_config data into a temp /toolbox directory mount it as well
 	d.StartDockerContainer()
@@ -158,7 +168,7 @@ func (a *AnalyzerRunOpts) resolveAnalysisSourcePath() (string, error) {
 // Writes the analysis_config.json into a temporary directory which shall be mounted as TOOLBOX directory in the container
 func (a *AnalyzerRunOpts) writeAnalysisConfig(analysisConfig *analysis.AnalysisConfig) (err error) {
 	// Create a temporary directory
-	if a.TempToolboxDirectory, err = os.MkdirTemp("", "toolbox"); err != nil {
+	if a.TempToolBoxDirectory, err = os.MkdirTemp("/tmp", "toolbox"); err != nil {
 		return err
 	}
 
@@ -169,6 +179,6 @@ func (a *AnalyzerRunOpts) writeAnalysisConfig(analysisConfig *analysis.AnalysisC
 	}
 
 	// Create a temporary directory
-	fmt.Printf("Writing analysis_config to %s\n", a.TempToolboxDirectory)
-	return os.WriteFile(path.Join(a.TempToolboxDirectory, "analysis_config.json"), analysisConfigJSON, 0o644)
+	fmt.Printf("Writing analysis_config to %s\n", a.TempToolBoxDirectory)
+	return os.WriteFile(path.Join(a.TempToolBoxDirectory, "analysis_config.json"), analysisConfigJSON, 0o644)
 }
