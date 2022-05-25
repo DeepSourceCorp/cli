@@ -1,11 +1,9 @@
 package run
 
 import (
-	"log"
 	"net/url"
 	"os"
 	"path"
-	"path/filepath"
 	"strings"
 
 	analysis "github.com/deepsourcelabs/cli/analysis/config"
@@ -25,30 +23,6 @@ func isValidUrl(toTest string) bool {
 	}
 
 	return true
-}
-
-// Returns the files to be analyzed
-func getFilesToAnalyze(codePath string) ([]string, error) {
-	fileCount := 0
-	allFiles := make([]string, 0)
-	err := filepath.Walk(codePath,
-		func(path string, _ os.FileInfo, err error) error {
-			if err != nil {
-				log.Println(err)
-				return err
-			}
-			fileCount++
-
-			if !strings.HasPrefix(path, filepath.Join(codePath, ".git")) &&
-				fileCount != 1 {
-				allFiles = append(allFiles, path)
-			}
-			return nil
-		})
-	if err != nil {
-		return allFiles, err
-	}
-	return allFiles, nil
 }
 
 // Modify the filepaths to use the container CODE_PATH and not the local CODE_PATH

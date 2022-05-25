@@ -15,7 +15,6 @@ import (
 var (
 	analyzerTOMLPath string
 	issuesDirPath    string
-	projectRoot      string
 	configFolder     string = ".deepsource/analyzer"
 )
 

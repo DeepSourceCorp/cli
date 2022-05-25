@@ -2,7 +2,10 @@ package run
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
+	"path"
+	"strings"
 
 	analysis_config "github.com/deepsourcelabs/cli/analysis/config"
 )
@@ -17,8 +20,17 @@ func (*AnalyzerRunOpts) processAnalysisResult() (err error) {
 
 	// Unmarshal the analysis result data present in the LSP format
 	analysisResultContent := analysis_config.AnalysisResult{}
-	if err = json.Unmarshal(analysisResultsData, &analysisResultContent); err != nil {
-		return err
+	return json.Unmarshal(analysisResultsData, &analysisResultContent)
+}
+
+// Writes the analysis results into a file with the name `fileName`
+func (a *AnalyzerRunOpts) writeAnalysisResults(buf []byte, fileName string) (err error) {
+	// Ref: https://deepsource.io/directory/analyzers/go/issues/GSC-G305
+	if !strings.Contains(string(buf), "..") {
+		fmt.Println("Writing analysis result to", path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, fileName))
+		if err = os.WriteFile(path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, fileName), buf, 0o644); err != nil {
+			return err
+		}
 	}
 	return nil
 }

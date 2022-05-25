@@ -31,19 +31,10 @@ type DockerBuildResponse struct {
 	Stream string `json:"stream"`
 }
 
-type AnalysisParams struct {
-	AnalyzerName         string
-	HostCodePath         string
-	HostToolBoxPath      string
-	AnalysisCommand      string
-	ContainerCodePath    string
-	ContainerToolBoxPath string
-	AnalysisResultsPath  string
-}
-
 type DockerClient struct {
 	Client         *client.Client
 	ContainerName  string
+	ContainerID    string
 	ImageName      string
 	ImageTag       string
 	DockerfilePath string

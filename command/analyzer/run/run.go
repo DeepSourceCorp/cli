@@ -19,7 +19,6 @@ var (
 	analysisResultsName  string = "analysis_results"
 	analysisConfigExt    string = ".json"
 	analysisResultsExt   string = ".json"
-	// analysisResultPath   string
 )
 
 // The params required while running the Analysis locally
@@ -31,7 +30,6 @@ type AnalyzerRunOpts struct {
 	AnalysisConfig       *AnalysisConfig // The analysis_config.json file containing the meta for analysis
 	TempCloneDirectory   string          // The temporary directory where the source of the remote VCS will be cloned to
 	TempToolBoxDirectory string          // The temporary directory where the analysis_config is present
-	// AnalysisResultsPath  string
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -75,20 +73,24 @@ func (a *AnalyzerRunOpts) AnalyzerRun() (err error) {
 		return err
 	}
 
-	// Prepare the source code to be analyzed and generate the analysis_config.json file
+	/* Prepare the source code to be analyzed and generate the analysis_config.json file
+	 * Also, write the analysis_config data into a temp /toolbox directory to be mounted into the container */
 	if err = a.prepareSourceForAnalysis(); err != nil {
 		return err
 	}
 
-	// Write the analysis_config data into a temp /toolbox directory mount it as well
+	// Starts the Docker container which analyzes the code and stores the analysis results
+	// in a variable
 	if err = a.Client.StartDockerContainer(); err != nil {
 		return err
 	}
 
-	// Process the analysis_results.json file generated after analysis
-	if err = a.processAnalysisResult(); err != nil {
+	// Fetch the analysis results
+	analysisResultBuf, analysisResultFileName, err := a.Client.FetchAnalysisResults()
+	if err != nil {
 		return err
 	}
 
-	return nil
+	// Write the analysis results to the file
+	return a.writeAnalysisResults(analysisResultBuf, analysisResultFileName)
 }

@@ -33,10 +33,11 @@ func (a *AnalyzerRunOpts) createDockerClient() error {
 		ContainerName:  analyzerName + "-" + docker.GenerateImageVersion(7),
 		DockerfilePath: dockerFilePath,
 		AnalysisOpts: docker.AnalysisParams{
-			AnalyzerName:         analyzerTOMLData.Name,
-			AnalysisCommand:      analyzerTOMLData.Analysis.Command,
-			ContainerCodePath:    containerCodePath,
-			ContainerToolBoxPath: containerToolBoxPath,
+			AnalyzerName:            analyzerTOMLData.Name,
+			AnalysisCommand:         analyzerTOMLData.Analysis.Command,
+			ContainerCodePath:       containerCodePath,
+			ContainerToolBoxPath:    containerToolBoxPath,
+			AnalysisResultsFilename: analysisResultsName + analysisResultsExt,
 		},
 	}
 	return nil
