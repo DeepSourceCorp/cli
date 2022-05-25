@@ -73,9 +73,15 @@ func (a *AnalyzerRunOpts) AnalyzerRun() (err error) {
 		return err
 	}
 
-	/* Prepare the source code to be analyzed and generate the analysis_config.json file
+	// Resolve the path of source code to be analyzed based on the user input
+	a.Client.AnalysisOpts.HostCodePath, err = a.resolveAnalysisCodePath()
+	if err != nil {
+		return err
+	}
+
+	/* Generate the analysis_config.json file
 	 * Also, write the analysis_config data into a temp /toolbox directory to be mounted into the container */
-	if err = a.prepareSourceForAnalysis(); err != nil {
+	if err = a.prepareAnalysisConfig(); err != nil {
 		return err
 	}
 

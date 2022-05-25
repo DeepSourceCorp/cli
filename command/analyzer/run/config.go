@@ -11,6 +11,10 @@ import (
 
 // Writes the analysis_config.json into a temporary directory which shall be mounted as TOOLBOX directory in the container
 func (a *AnalyzerRunOpts) writeAnalysisConfig(analysisConfig *analysis_config.AnalysisConfig) (err error) {
+	// Modify the paths of analysis_config.json file to use the container based CODE_PATH instead
+	// of the local CODE_PATH
+	modifyAnalysisConfigFilepaths(analysisConfig, a.Client.AnalysisOpts.HostCodePath, a.Client.AnalysisOpts.ContainerCodePath)
+
 	// Create a temporary directory
 	if a.TempToolBoxDirectory, err = createTemporaryDirectory("toolbox"); err != nil {
 		return err
