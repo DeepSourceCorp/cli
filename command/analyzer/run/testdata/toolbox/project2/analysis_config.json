@@ -1,1 +1,13 @@
-{"files":[{"uri":"/code/testdata/project2/.deepsource.toml"},{"uri":"/code/testdata/project2/.rubocop.yml"},{"uri":"/code/testdata/project2/README.md"},{"uri":"/code/testdata/project2/code.rb"}],"test_files":null,"excluded_files":null,"exclude_patterns":null,"test_patterns":null,"analyzer_meta":null}
+{
+  "files": [
+    { "uri": "/code/.deepsource.toml" },
+    { "uri": "/code/.rubocop.yml" },
+    { "uri": "/code/README.md" },
+    { "uri": "/code/code.rb" }
+  ],
+  "test_files": null,
+  "excluded_files": null,
+  "exclude_patterns": null,
+  "test_patterns": null,
+  "analyzer_meta": null
+}
