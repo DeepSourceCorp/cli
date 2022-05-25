@@ -80,11 +80,6 @@ func (a *AnalyzerRunOpts) AnalyzerRun() (err error) {
 		return err
 	}
 
-	/* Write the analysis_results.json file locally to the temporary
-	 * toolbox directory created */
-	a.Client.AnalysisOpts.HostToolBoxPath = a.TempToolBoxDirectory
-	a.Client.AnalysisOpts.AnalysisResultsPath = a.TempToolBoxDirectory
-
 	// Write the analysis_config data into a temp /toolbox directory mount it as well
 	if err = a.Client.StartDockerContainer(); err != nil {
 		return err
