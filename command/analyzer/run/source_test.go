@@ -88,12 +88,12 @@ func TestResolveAnalysisCodePath(t *testing.T) {
 	testCases := []TestCase{
 		{
 			Path:         "/Users/phoenix/codes/",
-			Response:     "/Users/phoenix/codes/",
+			Response:     "/Users/phoenix/codes",
 			RemoteSource: false,
 		},
 		{
 			Path:         "/tmp/helloworld/",
-			Response:     "/tmp/helloworld/",
+			Response:     "/tmp/helloworld",
 			RemoteSource: false,
 		},
 		{

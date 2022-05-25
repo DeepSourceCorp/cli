@@ -14,6 +14,7 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/api/types/network"
+	"github.com/docker/docker/pkg/archive"
 	v1 "github.com/opencontainers/image-spec/specs-go/v1"
 )
 
@@ -26,6 +27,7 @@ type AnalysisParams struct {
 	ContainerToolBoxPath    string
 	AnalysisResultsPath     string
 	AnalysisResultsFilename string
+	AnalysisConfigPath      string
 }
 
 /* Creates a Docker container with the volume mount in which the source code to be analyzed and the CMD instruction being the
@@ -40,10 +42,14 @@ func (d *DockerClient) StartDockerContainer() error {
 		 * - CMD instruction
 		 * - Environment variables
 	     * ========================================================== */
+
 	config := container.Config{
 		Image: fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag),
 		Cmd:   strings.Split(d.AnalysisOpts.AnalysisCommand, " "),
-		Env:   []string{"TOOLBOX_PATH:" + d.AnalysisOpts.ContainerToolBoxPath, "CODE_PATH:" + d.AnalysisOpts.ContainerCodePath},
+		Env: []string{
+			"TOOLBOX_PATH=" + d.AnalysisOpts.ContainerToolBoxPath,
+			"CODE_PATH=" + d.AnalysisOpts.ContainerCodePath,
+		},
 	}
 
 	/* Host config containing the mounted volumes
@@ -51,7 +57,6 @@ func (d *DockerClient) StartDockerContainer() error {
 	hostConfig := container.HostConfig{
 		Binds: []string{
 			fmt.Sprintf("%s:%s", d.AnalysisOpts.HostCodePath, d.AnalysisOpts.ContainerCodePath),
-			fmt.Sprintf("%s:%s", d.AnalysisOpts.HostToolBoxPath, d.AnalysisOpts.ContainerToolBoxPath),
 		},
 	}
 
@@ -62,9 +67,9 @@ func (d *DockerClient) StartDockerContainer() error {
 		OS:           "linux",
 	}
 
-	/* ===================================================================
-	 * Create container with the above configs and store the container ID
-	 * =================================================================== */
+	/* ===============================================================================
+	 * Create container with the above configs and copy the analysis_config.json to it
+	 * =============================================================================== */
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*120)
 	defer cancel()
 	containerCreateResp, err := d.Client.ContainerCreate(ctx, &config, &hostConfig, &networkConfig, &platform, d.ContainerName)
@@ -72,6 +77,16 @@ func (d *DockerClient) StartDockerContainer() error {
 		return err
 	}
 	d.ContainerID = containerCreateResp.ID
+
+	tr, err := archive.Tar(d.AnalysisOpts.AnalysisConfigPath, archive.Uncompressed)
+	if err != nil {
+		return err
+	}
+
+	opts := types.CopyToContainerOptions{}
+	if err = d.Client.CopyToContainer(ctx, d.ContainerID, path.Join(d.AnalysisOpts.ContainerToolBoxPath), tr, opts); err != nil {
+		return err
+	}
 
 	/* =========================================
 	 * Start the container
@@ -99,6 +114,7 @@ func (d *DockerClient) StartDockerContainer() error {
 	return nil
 }
 
+/* Fetch analysis results generated after analysis from the container */
 func (d *DockerClient) FetchAnalysisResults() ([]byte, string, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second*120)
 	defer cancel()

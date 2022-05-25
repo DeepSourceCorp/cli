@@ -36,6 +36,7 @@ func (a *AnalyzerRunOpts) writeAnalysisConfig() (err error) {
 	if err != nil {
 		return err
 	}
+	a.Client.AnalysisOpts.AnalysisConfigPath = path.Join(a.TempToolBoxDirectory, analysisConfigName+analysisConfigExt)
 
 	// Create a temporary directory
 	fmt.Printf("Writing analysis_config to %s\n", a.TempToolBoxDirectory)

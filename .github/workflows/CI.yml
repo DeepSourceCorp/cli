@@ -27,17 +27,30 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Build the binary
-        run: make build
+        run: |
+          pwd
+          make build
+
+      - name: Try the run analyzer command
+        run: |
+          cp -a command/analyzer/run/test/todo-checker/. /home/runner/app
+          cd /home/runner/app && /tmp/deepsource analyzer dry-run /home/runner/work/cli/cli --output-file /home/runner/app
+        env:
+          TOOLBOX_PATH: /toolbox
+          CODE_PATH: /code
+          APP_PATH: /home/runner/app
 
       - name: Setup tests
         run: make test_setup
         env:
           CODE_PATH: /home/runner/code
+          APP_PATH: /home/runner/app
 
       - name: Run tests
         run: make test
         env:
           CODE_PATH: /home/runner/code
+          APP_PATH: /home/runner/app
 
       - name: Report test coverage to DeepSource
         uses: deepsourcelabs/test-coverage-action@master

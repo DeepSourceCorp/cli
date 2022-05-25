@@ -7,16 +7,15 @@ import (
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 
-	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
-
 	analysis_config "github.com/deepsourcelabs/cli/analysis/config"
+	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
 )
 
 // Variables to hold the value of CODE_PATH and TOOLBOX_PATH to be injected
 // into the analysis container
 var (
-	containerCodePath    string = "/code"
-	containerToolBoxPath string = "/toolbox"
+	containerCodePath    string
+	containerToolBoxPath string
 	analysisConfigName   string = "analysis_config"
 	analysisResultsName  string = "analysis_results"
 	analysisConfigExt    string = ".json"
@@ -59,6 +58,9 @@ func NewCmdAnalyzerRun() *cobra.Command {
 			return nil
 		},
 	}
+
+	// --output-file/ -o flag
+	cmd.Flags().StringVarP(&opts.TempToolBoxDirectory, "output-file", "o", "", "The path of analysis results")
 	return cmd
 }
 
@@ -76,7 +78,8 @@ func (a *AnalyzerRunOpts) AnalyzerRun() (err error) {
 		return buildError
 	}
 
-	// Create temporary toolbox directory to store analysis config and later analyis results
+	/* Create temporary toolbox directory to store analysis config and later analyis results
+	 * If already passed through --output-file flag, use that one */
 	if err = a.createTemporaryToolBoxDir(); err != nil {
 		return err
 	}
@@ -98,8 +101,8 @@ func (a *AnalyzerRunOpts) AnalyzerRun() (err error) {
 		return err
 	}
 
-	// Starts the Docker container which analyzes the code and stores the analysis results
-	// in a variable
+	/* Starts the Docker container which analyzes the code and stores the analysis results
+	 * in a variable */
 	if err = a.Client.StartDockerContainer(); err != nil {
 		return err
 	}

@@ -3,6 +3,7 @@ package run
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 
 	"github.com/go-git/go-git/v5"
 )
@@ -18,6 +19,8 @@ func (a *AnalyzerRunOpts) resolveAnalysisCodePath() (string, error) {
 			return "", err
 		}
 		a.SourcePath = tempCloneDir
+	} else {
+		a.SourcePath, _ = filepath.Abs(a.SourcePath)
 	}
 	return a.SourcePath, nil
 }

@@ -1,0 +1,24 @@
+version = "1"
+name = "Todo comments checker"
+shortcode = "@siddhant-deepsource/todo-comments-checker"
+description = "Finds the TODO comments in codebase."
+category = "language"
+tags = []
+
+[urls]
+  source = ""
+  documentation = ""
+  bug_tracker = ""
+
+[environment_variables]
+
+[analysis]
+  command = "/app/todo-checker"
+
+[build]
+  builder = ""
+  dockerfile = ""
+  script = ""
+
+[test]
+  command = ""
