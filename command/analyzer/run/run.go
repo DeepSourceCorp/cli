@@ -25,12 +25,12 @@ var (
 
 // The params required while running the Analysis locally
 type AnalyzerRunOpts struct {
-	Client               *docker.DockerClient
-	RemoteSource         bool     // True if the source to be analyzed is a remote VCS repository
-	SourcePath           string   // The path of the directory of source code to be analyzed
-	AnalysisFiles        []string // The list of analysis files
-	TempCloneDirectory   string   // The temporary directory where the source of the remote VCS will be cloned to
-	TempToolBoxDirectory string   // The temporary directory where the analysis_config is present
+	Client               *docker.DockerClient // The client to be used for all docker related ops
+	RemoteSource         bool                 // True if the source to be analyzed is a remote VCS repository
+	SourcePath           string               // The path of the directory of source code to be analyzed
+	AnalysisFiles        []string             // The list of analysis files
+	TempCloneDirectory   string               // The temporary directory where the source of the remote VCS will be cloned to
+	TempToolBoxDirectory string               // The temporary directory where the analysis_config is present
 
 	AnalysisConfig *analysis_config.AnalysisConfig // The analysis_config.json file containing the meta for analysis
 }
