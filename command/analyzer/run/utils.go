@@ -70,3 +70,19 @@ func modifyAnalysisConfigFilepaths(analysisConfig *analysis.AnalysisConfig, loca
 		analysisConfig.ExcludedFiles[idx].URI = lsp.DocumentURI(path.Join(containerCodePath, filePath))
 	}
 }
+
+// Creates a temporary directory with the name supplied as the parameter
+func createTemporaryDirectory(directoryName string) (string, error) {
+	return os.MkdirTemp("", directoryName)
+}
+
+func fetchEnvironmentVariables() {
+	/* Check if the user supplied CODE_PATH and TOOLBOX_PATH, if not
+	 * use the default values of CODE_PATH and TOOLBOX_PATH */
+	if _, envVarPresent := os.LookupEnv("CODE_PATH"); envVarPresent {
+		containerCodePath = os.Getenv("CODE_PATH")
+	}
+	if _, envVarPresent := os.LookupEnv("TOOLBOX_PATH"); envVarPresent {
+		containerToolBoxPath = os.Getenv("CODE_PATH")
+	}
+}

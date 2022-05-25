@@ -78,7 +78,7 @@ func (d *DockerClient) StartDockerContainer() error {
 	// If no error is found from the above step, copy the analysis results file to the host
 	contentReader, _, err := d.Client.CopyFromContainer(ctx, containerCreateResp.ID, path.Join(d.AnalysisOpts.ContainerToolBoxPath, "analysis_results.json"))
 	if err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return err
 	}
 	defer contentReader.Close()
@@ -101,8 +101,8 @@ func (d *DockerClient) StartDockerContainer() error {
 			break
 		}
 
-		// TODO: Check if writing the file inside loop wont cause any issues
-		os.WriteFile(result.Name, buf, 0o644)
+		fmt.Println("Writing the analysis results to", path.Join(d.AnalysisOpts.AnalysisResultsPath, result.Name))
+		os.WriteFile(path.Join(d.AnalysisOpts.AnalysisResultsPath, result.Name), buf, 0o644)
 	}
 	return nil
 }
