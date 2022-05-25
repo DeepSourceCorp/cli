@@ -24,18 +24,18 @@ func TestPrepareAnalysisConfig(t *testing.T) {
 			AnalyzerName: "acme",
 		},
 		{
-			CodePath:     "./testdata/project2/",
-			ToolBoxPath:  "./testdata/toolbox/project2/",
+			CodePath:     "testdata/project2/",
+			ToolBoxPath:  "testdata/toolbox/project2/",
 			AnalyzerName: "vim",
 		},
 		{
-			CodePath:     "./testdata/project3/",
-			ToolBoxPath:  "./testdata/toolbox/project3/",
+			CodePath:     "testdata/project3/",
+			ToolBoxPath:  "testdata/toolbox/project3/",
 			AnalyzerName: "emacs",
 		},
 		{
-			CodePath:     "./testdata/project4/",
-			ToolBoxPath:  "./testdata/toolbox/project4/",
+			CodePath:     "testdata/project4/",
+			ToolBoxPath:  "testdata/toolbox/project4/",
 			AnalyzerName: "nano",
 		},
 	}
