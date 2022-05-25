@@ -50,6 +50,7 @@ func createTemporaryDirectory(directoryName string) (string, error) {
 	return os.MkdirTemp("", directoryName)
 }
 
+// Fetches environment variables like CODE_PATH and TOOLBOX_PATH set by the user
 func fetchEnvironmentVariables() {
 	/* Check if the user supplied CODE_PATH and TOOLBOX_PATH, if not
 	 * use the default values of CODE_PATH and TOOLBOX_PATH */
@@ -59,4 +60,16 @@ func fetchEnvironmentVariables() {
 	if _, envVarPresent := os.LookupEnv("TOOLBOX_PATH"); envVarPresent {
 		containerToolBoxPath = os.Getenv("CODE_PATH")
 	}
+}
+
+func (a *AnalyzerRunOpts) createTemporaryToolBoxDir() (err error) {
+	// Create a temporary directory
+	if a.TempToolBoxDirectory, err = createTemporaryDirectory("toolbox"); err != nil {
+		return err
+	}
+	/* Assign the path of temporary local toolbox directory to the HostToolBoxPath(which shall be mounted into the container)
+	 * and also use it to write the analysis_results.json file locally to the temporary */
+	a.Client.AnalysisOpts.HostToolBoxPath = a.TempToolBoxDirectory
+	a.Client.AnalysisOpts.AnalysisResultsPath = a.TempToolBoxDirectory
+	return nil
 }

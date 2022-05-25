@@ -8,6 +8,8 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
+
+	analysis_config "github.com/deepsourcelabs/cli/analysis/config"
 )
 
 // Variables to hold the value of CODE_PATH and TOOLBOX_PATH to be injected
@@ -24,12 +26,13 @@ var (
 // The params required while running the Analysis locally
 type AnalyzerRunOpts struct {
 	Client               *docker.DockerClient
-	RemoteSource         bool            // True if the source to be analyzed is a remote VCS repository
-	SourcePath           string          // The path of the directory of source code to be analyzed
-	AnalysisFiles        []string        // The list of analysis files
-	AnalysisConfig       *AnalysisConfig // The analysis_config.json file containing the meta for analysis
-	TempCloneDirectory   string          // The temporary directory where the source of the remote VCS will be cloned to
-	TempToolBoxDirectory string          // The temporary directory where the analysis_config is present
+	RemoteSource         bool     // True if the source to be analyzed is a remote VCS repository
+	SourcePath           string   // The path of the directory of source code to be analyzed
+	AnalysisFiles        []string // The list of analysis files
+	TempCloneDirectory   string   // The temporary directory where the source of the remote VCS will be cloned to
+	TempToolBoxDirectory string   // The temporary directory where the analysis_config is present
+
+	AnalysisConfig *analysis_config.AnalysisConfig // The analysis_config.json file containing the meta for analysis
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -69,7 +72,12 @@ func (a *AnalyzerRunOpts) AnalyzerRun() (err error) {
 
 	// Building the Analyzer image
 	fmt.Println("Building Analyzer image...")
-	if err := a.Client.BuildAnalyzerDockerImage(); err != nil {
+	if buildError := a.Client.BuildAnalyzerDockerImage(); buildError != nil {
+		return buildError
+	}
+
+	// Create temporary toolbox directory to store analysis config and later analyis results
+	if err = a.createTemporaryToolBoxDir(); err != nil {
 		return err
 	}
 
@@ -82,6 +90,11 @@ func (a *AnalyzerRunOpts) AnalyzerRun() (err error) {
 	/* Generate the analysis_config.json file
 	 * Also, write the analysis_config data into a temp /toolbox directory to be mounted into the container */
 	if err = a.prepareAnalysisConfig(); err != nil {
+		return err
+	}
+
+	// Write the analysis_config.json to local toolbox directory
+	if err = a.writeAnalysisConfig(); err != nil {
 		return err
 	}
 

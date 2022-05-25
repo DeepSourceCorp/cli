@@ -1,10 +1,82 @@
 package run
 
 import (
+	"bytes"
+	"encoding/json"
 	"os"
 	"strings"
 	"testing"
+
+	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
 )
+
+func TestPrepareAnalysisConfig(t *testing.T) {
+	type TestCase struct {
+		CodePath     string
+		ToolBoxPath  string
+		AnalyzerName string
+	}
+
+	testCases := []TestCase{
+		{
+			CodePath:     "testdata/project1/",
+			ToolBoxPath:  "testdata/toolbox/project1/",
+			AnalyzerName: "acme",
+		},
+		{
+			CodePath:     "./testdata/project2/",
+			ToolBoxPath:  "./testdata/toolbox/project2/",
+			AnalyzerName: "vim",
+		},
+		{
+			CodePath:     "./testdata/project3/",
+			ToolBoxPath:  "./testdata/toolbox/project3/",
+			AnalyzerName: "emacs",
+		},
+		{
+			CodePath:     "./testdata/project4/",
+			ToolBoxPath:  "./testdata/toolbox/project4/",
+			AnalyzerName: "nano",
+		},
+	}
+	containerCodePath := "/code"
+
+	for _, tc := range testCases {
+		dc := docker.DockerClient{
+			AnalysisOpts: docker.AnalysisParams{
+				AnalyzerName:      tc.AnalyzerName,
+				HostCodePath:      tc.CodePath,
+				ContainerCodePath: containerCodePath,
+			},
+		}
+
+		opts := AnalyzerRunOpts{
+			Client:               &dc,
+			TempToolBoxDirectory: tc.ToolBoxPath,
+		}
+
+		err := opts.prepareAnalysisConfig()
+		if err != nil {
+			t.Errorf("Failed to verify analysis config generation. Error:%s", err)
+		}
+		modifyAnalysisConfigFilepaths(opts.AnalysisConfig, opts.Client.AnalysisOpts.HostCodePath, opts.Client.AnalysisOpts.ContainerCodePath)
+
+		receivedAnalysisConfig, err := json.Marshal(opts.AnalysisConfig)
+		if err != nil {
+			t.Errorf("Failed to marshal the received config to JSON. Error:%s", err)
+		}
+
+		expectedAnalysisConfig, err := os.ReadFile(tc.ToolBoxPath + "analysis_config.json")
+		if err != nil {
+			t.Errorf("Failed to read the expected analysis config. Error:%s", err)
+		}
+
+		if !bytes.Equal(receivedAnalysisConfig, expectedAnalysisConfig) {
+			t.Errorf("Received invalid analysis config. Expected %s\nGot %s\n", string(expectedAnalysisConfig), string(receivedAnalysisConfig))
+		}
+
+	}
+}
 
 func TestResolveAnalysisCodePath(t *testing.T) {
 	type TestCase struct {
