@@ -1,9 +1,10 @@
 package main
 
 import (
-	"golang.org/x/crypto/ssh"
 	"log"
 	"net"
+
+	"golang.org/x/crypto/ssh"
 )
 
 func connect() {
