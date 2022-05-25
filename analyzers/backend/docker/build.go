@@ -38,7 +38,7 @@ type AnalysisParams struct {
 	AnalysisCommand      string
 	ContainerCodePath    string
 	ContainerToolBoxPath string
-    AnalysisResultsPath string
+	AnalysisResultsPath  string
 }
 
 type DockerClient struct {

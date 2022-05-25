@@ -37,7 +37,6 @@ func (a *AnalyzerRunOpts) createDockerClient() error {
 			AnalysisCommand:      analyzerTOMLData.Analysis.Command,
 			ContainerCodePath:    containerCodePath,
 			ContainerToolBoxPath: containerToolBoxPath,
-
 		},
 	}
 	return nil
