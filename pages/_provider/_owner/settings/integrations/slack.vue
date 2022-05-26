@@ -93,17 +93,14 @@
           </p>
         </div>
 
-        <div class="h-8 bg-cherry hover:bg-opacity-80">
-          <z-button
-            icon="x"
-            button-type="ghost"
-            color="ink-300"
-            label="Uninstall Slack"
-            size="small"
-            class="w-full bg-cherry md:place-self-end hover:bg-opacity-0 md:w-40"
-            @click="showConfirm = true"
-          />
-        </div>
+        <z-button
+          icon="x"
+          button-type="danger"
+          color="ink-300"
+          label="Uninstall Slack"
+          size="small"
+          @click="showConfirm = true"
+        />
       </div>
     </div>
 
