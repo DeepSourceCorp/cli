@@ -30,6 +30,8 @@ type AnalysisParams struct {
 	AnalysisConfigPath      string
 }
 
+const containerRunTimeout = 10 * time.Minute
+
 /* Creates a Docker container with the volume mount in which the source code to be analyzed and the CMD instruction being the
  * analysis command configured by the user.
  * Having started the container, streams the logs to STDOUT. On completion of the streaming,
@@ -70,7 +72,7 @@ func (d *DockerClient) StartDockerContainer() error {
 	/* ===============================================================================
 	 * Create container with the above configs and copy the analysis_config.json to it
 	 * =============================================================================== */
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*timeout)
+	ctx, cancel := context.WithTimeout(context.Background(), containerRunTimeout)
 	defer cancel()
 	containerCreateResp, err := d.Client.ContainerCreate(ctx, &config, &hostConfig, &networkConfig, &platform, d.ContainerName)
 	if err != nil {
