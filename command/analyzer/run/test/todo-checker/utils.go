@@ -2,12 +2,8 @@ package main
 
 import (
 	"encoding/json"
-	"log"
 	"os"
 	"path"
-	"strings"
-
-	"github.com/karrick/godirwalk"
 )
 
 func createIssue(filePath string, lineNumber, _ int) {
@@ -74,38 +70,11 @@ func prepareResult() AnalysisResult {
 	return result
 }
 
-func writeMacroResult(result AnalysisResult) error {
+func writeMacroResult(result *AnalysisResult) error {
 	resultJSON, err := json.Marshal(result)
 	if err != nil {
 		return err
 	}
 
 	return os.WriteFile(path.Join(toolboxPath, "analysis_results.json"), resultJSON, 0o777)
-}
-
-// getAllFiles walks through the code directory and logs all the files
-func getAllFiles() ([]string, error) {
-	fileCount := 0
-
-	allFiles := make([]string, 0)
-	if err := godirwalk.Walk(codePath, &godirwalk.Options{
-		Callback: func(osPathname string, de *godirwalk.Dirent) error {
-			// Following string operation is not most performant way
-			// of doing this, but common enough to warrant a simple
-			// example here:
-			if strings.Contains(osPathname, ".git") {
-				return godirwalk.SkipThis
-			}
-			if !de.IsDir() {
-				allFiles = append(allFiles, osPathname)
-				fileCount++
-			}
-			return nil
-		},
-		Unsorted: true, // (optional) set true for faster yet non-deterministic enumeration (see godoc)
-	}); err != nil {
-		return nil, err
-	}
-	log.Println("Total files: ", fileCount)
-	return allFiles, nil
 }

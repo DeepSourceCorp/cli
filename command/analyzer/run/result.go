@@ -25,13 +25,13 @@ func (a *AnalyzerDryRun) writeAnalysisResults(buf []byte, fileName string) (err 
 				if err != nil {
 					return err
 				}
-				if err = os.Chmod(analysisResultsPath, 0o777); err != nil {
+				if err = os.Chmod(analysisResultsPath, 0o600); err != nil {
 					return err
 				}
 			}
 		}
 
-		if err = os.WriteFile(path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, fileName), buf, 0o644); err != nil {
+		if err = os.WriteFile(path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, fileName), buf, 0o600); err != nil {
 			return err
 		}
 	}

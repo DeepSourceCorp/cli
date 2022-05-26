@@ -13,7 +13,6 @@ import (
 var (
 	issues       []Diagnostic
 	analysisConf *AnalysisConfig
-	codePath     string = os.Getenv("CODE_PATH")
 	toolboxPath  string = os.Getenv("TOOLBOX_PATH")
 )
 
@@ -53,7 +52,7 @@ func main() {
 	}
 	macroAnalysisResult := prepareResult()
 
-	if writeError := writeMacroResult(macroAnalysisResult); writeError != nil {
+	if writeError := writeMacroResult(&macroAnalysisResult); writeError != nil {
 		log.Fatalln("Error occured while writing results:", writeError)
 	}
 }
