@@ -31,15 +31,6 @@ jobs:
           pwd
           make build
 
-      - name: Try the run analyzer command
-        run: |
-          cp -a command/analyzer/run/test/todo-checker/. /home/runner/app
-          cd /home/runner/app && /tmp/deepsource analyzer dry-run /home/runner/work/cli/cli --output-file /home/runner/app
-        env:
-          TOOLBOX_PATH: /toolbox
-          CODE_PATH: /code
-          APP_PATH: /home/runner/app
-
       - name: Setup tests
         run: make test_setup
         env:
