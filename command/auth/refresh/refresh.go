@@ -18,7 +18,6 @@ type RefreshOptions struct{}
 
 // NewCmdRefresh handles the refreshing of authentication credentials
 func NewCmdRefresh() *cobra.Command {
-
 	doc := heredoc.Docf(`
 		Refresh stored authentication credentials.
 

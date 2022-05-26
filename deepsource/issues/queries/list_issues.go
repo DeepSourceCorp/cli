@@ -64,7 +64,6 @@ type IssuesListResponse struct {
 }
 
 func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.Issue, error) {
-
 	req := graphql.NewRequest(fetchAllIssuesQuery)
 	req.Var("name", i.Params.RepoName)
 	req.Var("owner", i.Params.Owner)

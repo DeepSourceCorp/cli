@@ -90,5 +90,4 @@ func (c *ConfigValidator) validateGenericConfig() {
 	c.validateVersion()
 	c.validateExcludePatterns()
 	c.validateTestPatterns()
-
 }

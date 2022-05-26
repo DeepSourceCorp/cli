@@ -63,7 +63,6 @@ func TestListJSON(t *testing.T) {
 }
 
 func TestListSARIF(t *testing.T) {
-
 	t.Run("must work with single language repositories", func(t *testing.T) {
 		// export issues to SARIF
 		issues_data := ReadIssues("./testdata/dummy/issues.json")
@@ -112,7 +111,6 @@ func TestListSARIF(t *testing.T) {
 }
 
 func TestFilterIssuesByPath(t *testing.T) {
-
 	t.Run("must work with files", func(t *testing.T) {
 		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
 		issues_docker := ReadIssues("./testdata/dummy/issues_docker.json")
@@ -137,7 +135,6 @@ func TestFilterIssuesByPath(t *testing.T) {
 }
 
 func TestFilterIssuesByAnalyzer(t *testing.T) {
-
 	t.Run("must work with a single analyzer", func(t *testing.T) {
 		issues_data := ReadIssues("./testdata/dummy/issues_data_multi.json")
 		issues_docker := ReadIssues("./testdata/dummy/issues_docker.json")
