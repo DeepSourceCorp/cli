@@ -23,7 +23,7 @@ var (
 )
 
 // The params required while running the Analysis locally
-type AnalyzerRunOpts struct {
+type AnalyzerDryRun struct {
 	Client               *docker.DockerClient // The client to be used for all docker related ops
 	RemoteSource         bool                 // True if the source to be analyzed is a remote VCS repository
 	SourcePath           string               // The path of the directory of source code to be analyzed
@@ -39,7 +39,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	cwd, _ := os.Getwd()
 
 	// Initializing the run params and setting defaults
-	opts := AnalyzerRunOpts{
+	opts := AnalyzerDryRun{
 		SourcePath:   cwd,
 		RemoteSource: false,
 	}
@@ -65,7 +65,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 }
 
 // Run the Analyzer locally on a certain directory or repository
-func (a *AnalyzerRunOpts) AnalyzerRun() (err error) {
+func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	// runtime.Breakpoint()
 	err = a.createDockerClient()
 	if err != nil {

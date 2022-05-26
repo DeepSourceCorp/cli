@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"path"
 	"path/filepath"
@@ -24,10 +25,10 @@ func readAllFiles(codePath string) ([]string, error) {
 			fileCount++
 
 			/* Check the following before appending to the list of files:
-			 * - Should not be a directory
-			 * - The walked file should not be present in .git folder
-			 * TODO: Check why fileCount != 1 condition is used here */
-			if !fileInfo.IsDir() && !strings.HasPrefix(path, filepath.Join(codePath, ".git")) && fileCount != 1 {
+			 * Should not be a directory
+			 * The walked file should not be present in .git folder */
+			if !fileInfo.IsDir() && !strings.HasPrefix(path, filepath.Join(codePath, ".git")) {
+				fmt.Println(path)
 				allFiles = append(allFiles, path)
 			}
 			return nil

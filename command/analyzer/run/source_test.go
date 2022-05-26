@@ -50,7 +50,7 @@ func TestPrepareAnalysisConfig(t *testing.T) {
 			},
 		}
 
-		opts := AnalyzerRunOpts{
+		opts := AnalyzerDryRun{
 			Client:               &dc,
 			TempToolBoxDirectory: tc.ToolBoxPath,
 		}
@@ -114,7 +114,7 @@ func TestResolveAnalysisCodePath(t *testing.T) {
 	}
 
 	for _, tc := range testCases {
-		opts := AnalyzerRunOpts{
+		opts := AnalyzerDryRun{
 			SourcePath: tc.Path,
 		}
 		resolvedPath, err := opts.resolveAnalysisCodePath()

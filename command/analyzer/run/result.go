@@ -9,7 +9,7 @@ import (
 )
 
 // Writes the analysis results into a file with the name specified in the `fileName` parameter
-func (a *AnalyzerRunOpts) writeAnalysisResults(buf []byte, fileName string) (err error) {
+func (a *AnalyzerDryRun) writeAnalysisResults(buf []byte, fileName string) (err error) {
 	analysisResultsPath := path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, fileName)
 
 	// Ref: https://deepsource.io/directory/analyzers/go/issues/GSC-G305
@@ -31,7 +31,7 @@ func (a *AnalyzerRunOpts) writeAnalysisResults(buf []byte, fileName string) (err
 			}
 		}
 
-		if err = os.WriteFile(path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, fileName), buf, 0644); err != nil {
+		if err = os.WriteFile(path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, fileName), buf, 0o644); err != nil {
 			return err
 		}
 	}

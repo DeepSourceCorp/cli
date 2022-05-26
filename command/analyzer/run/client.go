@@ -9,7 +9,7 @@ import (
 
 // Reads the analyzer.toml data and environment variables and creates a docker client
 // to be used in the docker related ops by the run command
-func (a *AnalyzerRunOpts) createDockerClient() error {
+func (a *AnalyzerDryRun) createDockerClient() error {
 	// Get the Analyzer.toml contents
 	analyzerTOMLData, err := config.GetAnalyzerTOML()
 	if err != nil {

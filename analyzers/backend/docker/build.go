@@ -67,7 +67,7 @@ func (d *DockerClient) BuildAnalyzerDockerImage() *DockerBuildError {
 }
 
 func (d *DockerClient) executeImageBuild() error {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*120)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*10)
 	defer cancel()
 	cwd, _ := os.Getwd()
 
@@ -130,6 +130,8 @@ func GetDockerImageDetails(analyzerTOMLData *config.AnalyzerMetadata) (string, s
 	if analyzerTOMLData.Build.Dockerfile != "" {
 		dockerFilePath = analyzerTOMLData.Build.Dockerfile
 	}
+
+	// Removing the @ from the shortcode since docker build doesn't accept it as a valid image name
 	if analyzerTOMLData.Shortcode != "" {
 		dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
 	}

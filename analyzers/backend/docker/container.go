@@ -70,7 +70,7 @@ func (d *DockerClient) StartDockerContainer() error {
 	/* ===============================================================================
 	 * Create container with the above configs and copy the analysis_config.json to it
 	 * =============================================================================== */
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*120)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*10)
 	defer cancel()
 	containerCreateResp, err := d.Client.ContainerCreate(ctx, &config, &hostConfig, &networkConfig, &platform, d.ContainerName)
 	if err != nil {

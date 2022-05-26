@@ -23,5 +23,6 @@ RUN adduser -D -u 1000 runner runner && \
     chown -R runner:runner /toolbox /.cache /code /home/runner
 
 WORKDIR /app
+RUN sleep 150
 
 USER runner

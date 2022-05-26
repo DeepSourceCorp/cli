@@ -69,7 +69,7 @@ func fetchEnvironmentVariables() {
 	}
 }
 
-func (a *AnalyzerRunOpts) createTemporaryToolBoxDir() (err error) {
+func (a *AnalyzerDryRun) createTemporaryToolBoxDir() (err error) {
 	if a.TempToolBoxDirectory == "" {
 		// Create a temporary directory
 		if a.TempToolBoxDirectory, err = createTemporaryDirectory("toolbox"); err != nil {

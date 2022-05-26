@@ -10,7 +10,7 @@ import (
 )
 
 // Prepares the analysis config and writes it to TOOLBOX_PATH
-func (a *AnalyzerRunOpts) prepareAnalysisConfig() (err error) {
+func (a *AnalyzerDryRun) prepareAnalysisConfig() (err error) {
 	/* Prepare the analysis_config.json here and mount into the container at `TOOLBOX_PATH/analysis_config.json`
 	 * The analysis_config.json will have path prepended with the CODE_PATH of the container and not local CODE_PATH */
 	analysisRun := analysis_config.AnalysisRun{
@@ -26,7 +26,7 @@ func (a *AnalyzerRunOpts) prepareAnalysisConfig() (err error) {
 }
 
 // Writes the analysis_config.json into a temporary directory which shall be mounted as TOOLBOX directory in the container
-func (a *AnalyzerRunOpts) writeAnalysisConfig() (err error) {
+func (a *AnalyzerDryRun) writeAnalysisConfig() (err error) {
 	// Modify the paths of analysis_config.json file to use the container based CODE_PATH instead
 	// of the local CODE_PATH
 	modifyAnalysisConfigFilepaths(a.AnalysisConfig, a.Client.AnalysisOpts.HostCodePath, a.Client.AnalysisOpts.ContainerCodePath)
