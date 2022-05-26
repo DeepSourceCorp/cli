@@ -18,6 +18,9 @@ import (
 	"github.com/docker/docker/pkg/archive"
 )
 
+// Timeout for build and container operations (10 minutes)
+const timeout = 10
+
 type ErrorLine struct {
 	Error       string      `json:"error"`
 	ErrorDetail ErrorDetail `json:"errorDetail"`
@@ -67,7 +70,7 @@ func (d *DockerClient) BuildAnalyzerDockerImage() *DockerBuildError {
 }
 
 func (d *DockerClient) executeImageBuild() error {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*10)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Minute*timeout)
 	defer cancel()
 	cwd, _ := os.Getwd()
 
