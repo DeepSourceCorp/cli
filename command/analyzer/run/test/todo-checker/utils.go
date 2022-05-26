@@ -10,7 +10,7 @@ import (
 	"github.com/karrick/godirwalk"
 )
 
-func createIssue(filePath string, lineNumber, column int) {
+func createIssue(filePath string, lineNumber, _ int) {
 	vcsPath := path.Base(filePath)
 	actualLineNumber := lineNumber + 1
 
