@@ -5,10 +5,8 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 
 	build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
-	"github.com/deepsourcelabs/cli/analyzers/config"
 	"github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
@@ -17,7 +15,6 @@ import (
 var (
 	analyzerTOMLPath string
 	issuesDirPath    string
-	projectRoot      string
 	configFolder     string = ".deepsource/analyzer"
 )
 
@@ -25,7 +22,11 @@ type AnalyzerVerifyOpts struct{}
 
 func NewCmdAnalyzerVerify() *cobra.Command {
 	// Configuring the paths of analyzer.toml and issues directory
-	projectRoot, analyzerTOMLPath, issuesDirPath = config.InitAnalyzerConfigurationPaths()
+	projectRoot, err := utils.ExtractProjectRootPath()
+	if err != nil {
+		fmt.Printf("Couldn't find the root directory of the project. Error:%s", err)
+	}
+
 	analyzerTOMLPath = filepath.Join(projectRoot, configFolder, "analyzer.toml")
 	issuesDirPath = filepath.Join(projectRoot, configFolder, "issues/")
 
@@ -110,16 +111,7 @@ func (*AnalyzerVerifyOpts) Run() (err error) {
 
 	// Specifying the name of the image to be built
 	// Set the default Dockerfile path as "Dockerfile"
-	var dockerFilePath, dockerFileName string
-	dockerFilePath = "Dockerfile"
-
-	// Read config for the value if specified
-	if analyzerTOMLData.Build.Dockerfile != "" {
-		dockerFilePath = analyzerTOMLData.Build.Dockerfile
-	}
-	if analyzerTOMLData.Shortcode != "" {
-		dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
-	}
+	dockerFilePath, dockerFileName := build.GetDockerImageDetails(analyzerTOMLData)
 
 	spin.StartSpinnerWithLabel(fmt.Sprintf("Building Analyzer image with the name \"%s\"", dockerFileName), "Successfully built the Analyzer image")
 	// Specifying the source to build
@@ -130,11 +122,10 @@ func (*AnalyzerVerifyOpts) Run() (err error) {
 			return err
 		}
 	}
-
 	analyzerBuilder := build.DockerClient{
 		ImageName:      dockerFileName,
 		DockerfilePath: dockerFilePath,
-		ImageTag:       generateImageVersion(7),
+		ImageTag:       build.GenerateImageVersion(7),
 	}
 
 	buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
