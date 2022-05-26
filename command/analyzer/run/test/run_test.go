@@ -12,6 +12,9 @@ import (
 
 // Execute the command from there
 func TestAnalyzerRun(t *testing.T) {
+	/* =============================================================================
+	// Copying the todo-checker directory to $APP_PATH for the integration tests
+	/* ============================================================================= */
 	cwd, _ := os.Getwd()
 
 	analyzerPath := path.Join(cwd, "todo-checker")
@@ -20,7 +23,7 @@ func TestAnalyzerRun(t *testing.T) {
 		appPath = "/app/"
 	}
 
-	// Copy the analyzer files to APP_PATH
+	// Copy all the files to APP_PATH
 	cmd := exec.Command("cp", "-a", analyzerPath+"/.", ".")
 	cmd.Dir = appPath
 
@@ -28,6 +31,7 @@ func TestAnalyzerRun(t *testing.T) {
 	cmd.Stdout = &stdout
 	cmd.Stderr = &stderr
 
+	// Run the command
 	err := cmd.Run()
 	outStr, outErr := stdout.String(), stderr.String()
 	if err != nil {
@@ -35,7 +39,10 @@ func TestAnalyzerRun(t *testing.T) {
 	}
 	t.Log(outStr)
 
-	// Run the analyzer dry-run command on the testdata/todo-checker directory
+	/* =============================================================================
+	 * Run the analyzer dry-run command on the testdata/todo-checker directory
+	 * ============================================================================= */
+
 	analysisCmd := exec.Command("/tmp/deepsource", "analyzer", "dry-run", analyzerPath, "--output-file", appPath)
 	analysisCmd.Dir = appPath
 
@@ -47,7 +54,10 @@ func TestAnalyzerRun(t *testing.T) {
 	}
 	t.Log(outStr1)
 
+	/* =============================================================================
 	// Compare the results
+	/* ============================================================================= */
+
 	receivedAnalysisResults, err := os.ReadFile(path.Join(appPath, "analysis_results.json"))
 	if err != nil {
 		t.Errorf("Failed to read the received analysis result. Error:%s", err)

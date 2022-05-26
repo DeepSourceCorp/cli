@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"os"
 	"path"
 	"path/filepath"
@@ -28,7 +27,6 @@ func readAllFiles(codePath string) ([]string, error) {
 			 * Should not be a directory
 			 * The walked file should not be present in .git folder */
 			if !fileInfo.IsDir() && !strings.HasPrefix(path, filepath.Join(codePath, ".git")) {
-				fmt.Println(path)
 				allFiles = append(allFiles, path)
 			}
 			return nil
