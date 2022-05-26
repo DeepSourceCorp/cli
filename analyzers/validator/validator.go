@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/deepsourcelabs/cli/analyzers/config"
 	validate "github.com/go-playground/validator/v10"
 	"github.com/pelletier/go-toml/v2"
 )
@@ -23,7 +24,8 @@ type ValidationError struct {
 	Errors []Error
 }
 
-// Checks if the analyzer.toml file and the issue directory is present
+// Receives the path of the `analyzer.toml` and issue descriptions and
+// checks if they are actually present
 func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err error) {
 	// Check if `analyzer.toml` is present in `.deepsource/analyzer` folder
 	if _, err := os.Stat(analyzerTOMLPath); err != nil {
@@ -66,8 +68,8 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 }
 
 // Validates analyzer.toml file
-func ValidateAnalyzerTOML(analyzerTOMLPath string) (*AnalyzerMetadata, *ValidationError, error) {
-	config := AnalyzerMetadata{}
+func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *ValidationError, error) {
+	config := config.AnalyzerMetadata{}
 	analyzerTOMLValidationErrors := ValidationError{}
 
 	// Read the contents of analyzer.toml file

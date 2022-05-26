@@ -15,7 +15,7 @@ test:
 	go test -v -coverprofile=coverage.out -count=1 ./...
 
 test_setup:
-	mkdir -p ${CODE_PATH}
+	mkdir -p ${CODE_PATH} ${APP_PATH}
 	cd ${CODE_PATH} && ls -A1 | xargs rm -rf
 	git clone https://github.com/deepsourcelabs/cli ${CODE_PATH}
 	chmod +x /tmp/deepsource

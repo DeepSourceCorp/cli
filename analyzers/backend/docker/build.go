@@ -3,6 +3,7 @@ package docker
 import (
 	"bufio"
 	"context"
+	"crypto/rand"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -11,10 +12,14 @@ import (
 	"strings"
 	"time"
 
+	"github.com/deepsourcelabs/cli/analyzers/config"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/archive"
 )
+
+// Timeout for build and container operations (10 minutes)
+const buildTimeout = 10 * time.Minute
 
 type ErrorLine struct {
 	Error       string      `json:"error"`
@@ -31,9 +36,12 @@ type DockerBuildResponse struct {
 
 type DockerClient struct {
 	Client         *client.Client
+	ContainerName  string
+	ContainerID    string
 	ImageName      string
 	ImageTag       string
 	DockerfilePath string
+	AnalysisOpts   AnalysisParams
 }
 
 type DockerBuildError struct {
@@ -62,7 +70,7 @@ func (d *DockerClient) BuildAnalyzerDockerImage() *DockerBuildError {
 }
 
 func (d *DockerClient) executeImageBuild() error {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*120)
+	ctx, cancel := context.WithTimeout(context.Background(), buildTimeout)
 	defer cancel()
 	cwd, _ := os.Getwd()
 
@@ -114,4 +122,29 @@ func checkResponse(rd io.Reader) error {
 		return errors.New(errLine.Error)
 	}
 	return scanner.Err()
+}
+
+// Returns the docker image details to build
+func GetDockerImageDetails(analyzerTOMLData *config.AnalyzerMetadata) (string, string) {
+	var dockerFilePath, dockerFileName string
+	dockerFilePath = "Dockerfile"
+
+	// Read config for the value if specified
+	if analyzerTOMLData.Build.Dockerfile != "" {
+		dockerFilePath = analyzerTOMLData.Build.Dockerfile
+	}
+
+	// Removing the @ from the shortcode since docker build doesn't accept it as a valid image name
+	if analyzerTOMLData.Shortcode != "" {
+		dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
+	}
+	return dockerFilePath, dockerFileName
+}
+
+func GenerateImageVersion(length int) string {
+	b := make([]byte, length)
+	if _, err := rand.Read(b); err != nil {
+		panic(err)
+	}
+	return fmt.Sprintf("%x", b)
 }
