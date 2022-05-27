@@ -15,7 +15,7 @@ type JWT struct {
 }
 
 type PAT struct {
-	Token  string `json:"token"`
+	Token  string    `json:"token"`
 	Expiry time.Time `json:"expiry"`
 	User   struct {
 		FirstName string `json:"firstName"`
