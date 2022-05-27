@@ -74,10 +74,11 @@ func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 
 // Logs in the client using the deviceCode and the user Code and returns the JWT, RefreshToken and other
 // data which is required for authentication
-func (c Client) Login(ctx context.Context, deviceCode string) (*auth.PAT, error) {
+func (c Client) Login(ctx context.Context, deviceCode, description string) (*auth.PAT, error) {
 	req := authmut.RequestPATRequest{
 		Params: authmut.RequestPATParams{
-			DeviceCode: deviceCode,
+			DeviceCode:  deviceCode,
+			Description: description,
 		},
 	}
 

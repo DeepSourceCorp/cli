@@ -3,6 +3,7 @@ package login
 import (
 	"context"
 	"fmt"
+	"os/user"
 	"time"
 
 	"github.com/cli/browser"
@@ -82,6 +83,9 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.P
 	var err error
 	authTimedOut := true
 
+	userName, _ := user.Current()
+	userDescription := fmt.Sprintf("CLI PAT for %s", userName.Username)
+
 	// Fetching DeepSource client in order to interact with SDK
 	deepsource, err := deepsource.New(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
@@ -98,7 +102,7 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.P
 	// Polling for fetching PAT
 	func() {
 		for range ticker.C {
-			tokenData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
+			tokenData, err = deepsource.Login(ctx, deviceRegistrationData.Code, userDescription)
 			if err == nil {
 				authTimedOut = false
 				return
