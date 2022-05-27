@@ -27,9 +27,7 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Build the binary
-        run: |
-          pwd
-          make build
+        run: make build
 
       - name: Setup tests
         run: make test_setup
