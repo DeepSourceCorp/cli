@@ -10,29 +10,45 @@ import (
 )
 
 // Query to fetch issues for a certain file specified by the user
-const fetchFileIssuesQuery = `
-query($name:String!, $owner:String!, $provider:VCSProvider!, $path:String!, $limit:Int!){
-    repository(name:$name, login:$owner, vcsProvider:$provider){
-        file(path:$path){
-            issues(first:$limit){
-                edges{
-                    node{
-                        path
-                        beginLine
-                        endLine
-                        concreteIssue{
-                            analyzer {
-                                shortcode
-                            }
-                            title
-                            shortcode
-                        }
-                    }
+const fetchFileIssuesQuery = `query GetIssuesForPath(
+  $name: String!
+  $owner: String!
+  $provider: VCSProvider!
+  $limit: Int!
+  $filepath: String!
+) {
+  repository(name: $name, login: $owner, vcsProvider: $provider) {
+    issues(first: $limit, path:$filepath) {
+      edges {
+        node {
+          issue {
+            shortcode
+          }
+          occurrences {
+            edges {
+              node {
+                path
+                beginLine
+                endLine
+                issue {
+                  title
+                  shortcode
+                  category
+                  isRecommended
+                  analyzer {
+                    name
+                    shortcode
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
-}`
+  }
+}
+`
 
 type FileIssuesListParams struct {
 	Owner    string
@@ -50,24 +66,31 @@ type FileIssuesListRequest struct {
 // Response struct
 type FileIssuesResponse struct {
 	Repository struct {
-		File struct {
-			Issues struct {
-				Edges []struct {
-					Node struct {
-						Path          string `json:"path"`
-						Beginline     int    `json:"beginLine"`
-						Endline       int    `json:"endLine"`
-						Concreteissue struct {
-							Analyzer struct {
-								Shortcode string `json:"shortcode"`
-							} `json:"analyzer"`
-							Title     string `json:"title"`
-							Shortcode string `json:"shortcode"`
-						} `json:"concreteIssue"`
-					} `json:"node"`
-				} `json:"edges"`
-			} `json:"issues"`
-		} `json:"file"`
+		Issues struct {
+			Edges []struct {
+				Node struct {
+					Occurrences struct {
+						Edges []struct {
+							Node struct {
+								Path      string `json:"path"`
+								BeginLine int    `json:"beginLine"`
+								EndLine   int    `json:"endLine"`
+								Issue     struct {
+									Title         string `json:"title"`
+									Shortcode     string `json:"shortcode"`
+									Category      string `json:"category"`
+									IsRecommended bool   `json:"isRecommended"`
+									Analyzer      struct {
+										Name      string `json:"name"`
+										Shortcode string `json:"shortcode"`
+									} `json:"analyzer"`
+								} `json:"issue"`
+							} `json:"node"`
+						} `json:"edges"`
+					} `json:"occurrences"`
+				} `json:"node"`
+			} `json:"edges"`
+		} `json:"issues"`
 	} `json:"repository"`
 }
 
@@ -77,7 +100,6 @@ type IGQLClient interface {
 	GetToken() string
 }
 
-// Function to execute the query
 func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.Issue, error) {
 	req := graphql.NewRequest(fetchFileIssuesQuery)
 	req.Header.Set("Cache-Control", "no-cache")
@@ -102,19 +124,33 @@ func (f FileIssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]iss
 	}
 
 	// Formatting the query response w.r.t the output format of the SDK as specified in `issues_list.go`
-	issuesData := make([]issues.Issue, len(respData.Repository.File.Issues.Edges))
-	for index, edge := range respData.Repository.File.Issues.Edges {
-		// Copying issue title and issue code
-		issuesData[index].IssueText = edge.Node.Concreteissue.Title
-		issuesData[index].IssueCode = edge.Node.Concreteissue.Shortcode
+	issuesData := []issues.Issue{}
+	issueData := issues.Issue{}
+	for _, edge := range respData.Repository.Issues.Edges {
+		if len(edge.Node.Occurrences.Edges) == 0 {
+			continue
+		}
 
-		// Copying position info
-		issuesData[index].Location.Path = edge.Node.Path
-		issuesData[index].Location.Position.BeginLine = edge.Node.Beginline
-		issuesData[index].Location.Position.EndLine = edge.Node.Endline
-
-		// Copying the analyzer shortcode which raised the issue
-		issuesData[index].Analyzer.Shortcode = edge.Node.Concreteissue.Analyzer.Shortcode
+		for _, occurenceEdge := range edge.Node.Occurrences.Edges {
+			// Check if the path matches the one entered as a flag in the command
+			if occurenceEdge.Node.Path == f.Params.FilePath {
+				issueData = issues.Issue{
+					IssueText: occurenceEdge.Node.Issue.Title,
+					IssueCode: occurenceEdge.Node.Issue.Shortcode,
+					Location: issues.Location{
+						Path: occurenceEdge.Node.Path,
+						Position: issues.Position{
+							BeginLine: occurenceEdge.Node.BeginLine,
+							EndLine:   occurenceEdge.Node.EndLine,
+						},
+					},
+					Analyzer: issues.AnalyzerMeta{
+						Shortcode: occurenceEdge.Node.Issue.Analyzer.Shortcode,
+					},
+				}
+			}
+			issuesData = append(issuesData, issueData)
+		}
 	}
 
 	return issuesData, nil

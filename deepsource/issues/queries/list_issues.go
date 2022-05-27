@@ -9,17 +9,6 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
-/* path
- * beginLine
- * endLine
- * concreteIssue{
- *     analyzer {
- *         shortcode
- *     }
- *     title
- *     shortcode
- * } */
-
 const fetchAllIssuesQuery = `query GetAllIssues(
   $name: String!
   $owner: String!
@@ -116,22 +105,29 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 	}
 
 	issuesData := []issues.Issue{}
+    issueData :=issues.Issue{}
 	for _, edge := range respData.Repository.Issues.Edges {
 		if len(edge.Node.Occurrences.Edges) == 0 {
 			continue
 		}
-		issueData := issues.Issue{}
+
 		for _, occurenceEdge := range edge.Node.Occurrences.Edges {
-			issueData.IssueText = occurenceEdge.Node.Issue.Title
-			issueData.IssueCode = occurenceEdge.Node.Issue.Shortcode
-
-			issueData.Location.Path = occurenceEdge.Node.Path
-			issueData.Location.Position.BeginLine = occurenceEdge.Node.BeginLine
-			issueData.Location.Position.EndLine = occurenceEdge.Node.EndLine
-
-			issueData.Analyzer.Shortcode = occurenceEdge.Node.Issue.Analyzer.Shortcode
+			issueData = issues.Issue{
+				IssueText: occurenceEdge.Node.Issue.Title,
+				IssueCode: occurenceEdge.Node.Issue.Shortcode,
+				Location: issues.Location{
+					Path: occurenceEdge.Node.Path,
+					Position: issues.Position{
+						BeginLine: occurenceEdge.Node.BeginLine,
+						EndLine:   occurenceEdge.Node.EndLine,
+					},
+				},
+				Analyzer: issues.AnalyzerMeta{
+					Shortcode: occurenceEdge.Node.Issue.Analyzer.Shortcode,
+				},
+			}
+			issuesData = append(issuesData, issueData)
 		}
-		issuesData = append(issuesData, issueData)
 	}
 
 	return issuesData, nil
