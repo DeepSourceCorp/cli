@@ -82,11 +82,26 @@ func registerDevice(ctx context.Context) (*auth.Device, error) {
 func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.PAT, bool, error) {
 	var tokenData *auth.PAT
 	var err error
+	defaultUserName := "user"
+	defaultHostName := "host"
+	userName := ""
 	authTimedOut := true
 
-	userName, _ := user.Current()
-	hostName, _ := os.Hostname()
-	userDescription := fmt.Sprintf("CLI PAT for %s@%s", userName.Username, hostName)
+	/* ======================================================================= */
+	// The username and hostname to add in the description for the PAT request
+	/* ======================================================================= */
+	userData, err := user.Current()
+	if err != nil {
+		userName = defaultUserName
+	} else {
+		userName = userData.Username
+	}
+
+	hostName, err := os.Hostname()
+	if err != nil {
+		hostName = defaultHostName
+	}
+	userDescription := fmt.Sprintf("CLI PAT for %s@%s", userName, hostName)
 
 	// Fetching DeepSource client in order to interact with SDK
 	deepsource, err := deepsource.New(deepsource.ClientOpts{
