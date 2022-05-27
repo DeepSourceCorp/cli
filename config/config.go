@@ -17,7 +17,7 @@ var (
 const (
 	ConfigDirName   = "/.deepsource/"
 	ConfigFileName  = "/config.toml"
-	DefaultHostName = "deepsource.icu"
+	DefaultHostName = "deepsource.io"
 )
 
 type CLIConfig struct {
