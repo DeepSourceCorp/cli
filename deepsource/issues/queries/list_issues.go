@@ -105,7 +105,7 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 	}
 
 	issuesData := []issues.Issue{}
-    issueData :=issues.Issue{}
+	issueData := issues.Issue{}
 	for _, edge := range respData.Repository.Issues.Edges {
 		if len(edge.Node.Occurrences.Edges) == 0 {
 			continue
