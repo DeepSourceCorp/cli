@@ -12,7 +12,7 @@ test:
 	echo "\n====TESTING CONFIG VALIDATOR PACKAGE====\n"
 	go test -v ./configvalidator/... -count=1
 	echo "\n====CALCULATING TEST COVERAGE FOR ENTIRE PACKAGE====\n"
-	go test -v -coverpkg=./... -coverprofile=coverage.out -count=1 ./...
+	go test -v -coverprofile=coverage.out -count=1 ./...
 
 test_setup:
 	mkdir -p ${CODE_PATH}

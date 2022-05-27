@@ -21,19 +21,19 @@ const (
 )
 
 type CLIConfig struct {
-	Host                  string    `toml:"host"`
-	User                  string    `toml:"user"`
-	Token                 string    `toml:"token"`
-	RefreshToken          string    `toml:"refresh_token,omitempty"`
-	TokenExpiresIn        time.Time `toml:"token_expires_in,omitempty"`
-	RefreshTokenExpiresIn time.Time `toml:"refresh_token_expires_in,omitempty"`
+	Host           string    `toml:"host"`
+	User           string    `toml:"user"`
+	Token          string    `toml:"token"`
+	TokenExpiresIn time.Time `toml:"token_expires_in,omitempty"`
 }
 
 var Cfg CLIConfig
 
 // Sets the token expiry in the desired format
-func (cfg *CLIConfig) SetTokenExpiry(str time.Time) {
-	cfg.TokenExpiresIn = str
+// Sets the token expiry in the desired format
+func (cfg *CLIConfig) SetTokenExpiry(str string) {
+	t, _ := time.Parse(time.RFC3339, str)
+	cfg.TokenExpiresIn = t.UTC()
 }
 
 // Checks if the token has expired or not
