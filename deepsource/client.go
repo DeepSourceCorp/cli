@@ -56,7 +56,7 @@ func getAPIClientURL(hostName string) string {
 
 	// Check if the domain is different from the default domain (In case of Enterprise users)
 	if hostName != defaultHostName {
-		apiClientURL = fmt.Sprintf("http://%s/graphql/", hostName)
+		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", hostName)
 	}
 	return apiClientURL
 }
