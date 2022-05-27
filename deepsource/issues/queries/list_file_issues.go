@@ -12,7 +12,7 @@ import (
 // Query to fetch issues for a certain file specified by the user
 const fetchFileIssuesQuery = `
 query($name:String!, $owner:String!, $provider:VCSProvider!, $path:String!, $limit:Int!){
-    repository(name:$name, owner:$owner, provider:$provider){
+    repository(name:$name, login:$owner, vcsProvider:$provider){
         file(path:$path){
             issues(first:$limit){
                 edges{

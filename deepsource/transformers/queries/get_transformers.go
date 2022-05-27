@@ -41,7 +41,6 @@ type IGQLClient interface {
 }
 
 func (t TransformersRequest) Do(ctx context.Context, client IGQLClient) ([]transformers.Transformer, error) {
-
 	req := graphql.NewRequest(listTransformersQuery)
 
 	// set header fields

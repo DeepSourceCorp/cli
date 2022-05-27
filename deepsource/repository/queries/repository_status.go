@@ -10,7 +10,7 @@ import (
 
 // Query to fetch the status of the repo data sent as param
 const repoStatusQuery = `query RepoStatus($name: String!,$owner: String!, $provider: VCSProvider!){
-        repository(name:$name, owner:$owner, provider:$provider){
+        repository(name:$name, login:$owner, vcsProvider:$provider){
             isActivated
         }
     }`
@@ -38,7 +38,6 @@ type IGQLClient interface {
 }
 
 func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repository.Meta, error) {
-
 	req := graphql.NewRequest(repoStatusQuery)
 	req.Var("name", r.Params.RepoName)
 	req.Var("owner", r.Params.Owner)
