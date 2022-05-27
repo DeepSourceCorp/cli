@@ -45,7 +45,7 @@ func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*reposito
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
-	// Adding jwt as header for auth
+	// Adding PAT as header for auth
 	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
 	req.Header.Add("Authorization", tokenHeader)
 

@@ -35,7 +35,7 @@ func (c Client) GQL() *graphql.Client {
 	return c.gql
 }
 
-// Returns the jWT which is required for authentication and thus, interacting with the APIs
+// Returns the PAT which is required for authentication and thus, interacting with the APIs
 func (c Client) GetToken() string {
 	return c.token
 }
@@ -62,7 +62,7 @@ func getAPIClientURL(hostName string) string {
 }
 
 // Registers the device and allots it a device code which is further used for fetching
-// the JWT and other authentication data
+// the PAT and other authentication data
 func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 	req := authmut.RegisterDeviceRequest{}
 	res, err := req.Do(ctx, c)
@@ -72,8 +72,7 @@ func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 	return res, nil
 }
 
-// Logs in the client using the deviceCode and the user Code and returns the JWT, RefreshToken and other
-// data which is required for authentication
+// Logs in the client using the deviceCode and the user Code and returns the PAT and data which is required for authentication
 func (c Client) Login(ctx context.Context, deviceCode, description string) (*auth.PAT, error) {
 	req := authmut.RequestPATRequest{
 		Params: authmut.RequestPATParams{
