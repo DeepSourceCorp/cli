@@ -32,11 +32,8 @@ type CLIConfig struct {
 var Cfg CLIConfig
 
 // Sets the token expiry in the desired format
-func (cfg *CLIConfig) SetTokenExpiry(str string) {
-	layout := "2006-01-02T15:04:05.999999999"
-	t, _ := time.Parse(layout, str)
-	timeStamp := t.Unix()
-	cfg.TokenExpiresIn = time.Unix(timeStamp, 0)
+func (cfg *CLIConfig) SetTokenExpiry(str time.Time) {
+	cfg.TokenExpiresIn = str
 }
 
 // Checks if the token has expired or not

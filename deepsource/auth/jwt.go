@@ -1,5 +1,7 @@
 package auth
 
+import "time"
+
 type JWT struct {
 	Payload struct {
 		Email   string `json:"email"`   // Email of the user
@@ -14,7 +16,7 @@ type JWT struct {
 
 type PAT struct {
 	Token  string `json:"token"`
-	Expiry string `json:"expiry"`
+	Expiry time.Time `json:"expiry"`
 	User   struct {
 		FirstName string `json:"firstName"`
 		LastName  string `json:"lastName"`

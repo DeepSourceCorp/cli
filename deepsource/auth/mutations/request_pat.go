@@ -29,7 +29,7 @@ mutation request($input:RequestPATWithDeviceCodeInput!) {
 }`
 
 type RequestPATResponse struct {
-	auth.PAT `json:"requestPat"`
+	auth.PAT `json:"requestPatWithDeviceCode"`
 }
 
 func (r RequestPATRequest) Do(ctx context.Context, client IGQLClient) (*auth.PAT, error) {

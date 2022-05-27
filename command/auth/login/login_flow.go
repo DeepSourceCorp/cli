@@ -34,8 +34,8 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 	}
 
 	// Fetch the PAT using the device registration resonse
-	var patData *auth.PAT
-	patData, opts.AuthTimedOut, err = fetchPAT(ctx, deviceRegistrationResponse)
+	var tokenData *auth.PAT
+	tokenData, opts.AuthTimedOut, err = fetchPAT(ctx, deviceRegistrationResponse)
 	if err != nil {
 		return err
 	}
@@ -47,9 +47,9 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 
 	// Storing the useful data for future reference and usage
 	// in a global config object (Cfg)
-	cfg.User = patData.User.Email
-	cfg.Token = patData.Token
-	cfg.SetTokenExpiry(patData.Expiry)
+	cfg.User = tokenData.User.Email
+	cfg.Token = tokenData.Token
+	cfg.SetTokenExpiry(tokenData.Expiry)
 
 	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
 	err = cfg.WriteFile()
@@ -78,7 +78,7 @@ func registerDevice(ctx context.Context) (*auth.Device, error) {
 }
 
 func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.PAT, bool, error) {
-	var patData *auth.PAT
+	var tokenData *auth.PAT
 	var err error
 	authTimedOut := true
 
@@ -98,7 +98,7 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.P
 	// Polling for fetching PAT
 	func() {
 		for range ticker.C {
-			patData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
+			tokenData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
 			if err == nil {
 				authTimedOut = false
 				return
@@ -111,5 +111,5 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.P
 		}
 	}()
 
-	return patData, authTimedOut, nil
+	return tokenData, authTimedOut, nil
 }
