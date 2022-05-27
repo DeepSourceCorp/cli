@@ -8,12 +8,10 @@ import (
 )
 
 var cfg = CLIConfig{
-	Host:                  "deepsource.io",
-	User:                  "test",
-	Token:                 "test_token",
-	RefreshToken:          "test_refresh_token",
-	TokenExpiresIn:        time.Time{},
-	RefreshTokenExpiresIn: time.Time{},
+	Host:           "deepsource.io",
+	User:           "test",
+	Token:          "test_token",
+	TokenExpiresIn: time.Time{},
 }
 
 func TestSetTokenExpiry(t *testing.T) {
@@ -26,9 +24,9 @@ func TestSetTokenExpiry(t *testing.T) {
 	})
 
 	t.Run("must work with valid timestamp", func(t *testing.T) {
-		str := "2021-01-01T00:00:00.999999999"
+		str := "9999-12-31T23:59:59.999999+00:00"
 		cfg.SetTokenExpiry(str)
-		want := "2021-01-01 00:00:00 +0000 UTC"
+		want := "9999-12-31 23:59:59.999999 +0000 UTC"
 
 		assert.Equal(t, cfg.TokenExpiresIn.UTC().String(), want)
 	})

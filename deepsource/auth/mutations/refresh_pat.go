@@ -2,6 +2,7 @@ package auth
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	"github.com/deepsourcelabs/graphql"
@@ -9,17 +10,18 @@ import (
 
 // GraphQL query to refresh token
 const refreshTokenQuery = `
-mutation RefreshToken($token: String!) {
-    refreshToken(refreshToken: $token) {
-        payload
+mutation RefreshPAT {
+    refreshPat {
         token
-        refreshExpiresIn
-        refreshToken
+		expiry
+		user {
+			email
+		}
     }
 }`
 
 type RefreshTokenParams struct {
-	RefreshToken string `json:"refreshToken"`
+	Token string `json:"token"`
 }
 
 type RefreshTokenRequest struct {
@@ -27,16 +29,15 @@ type RefreshTokenRequest struct {
 }
 
 type RefreshTokenResponse struct {
-	auth.JWT `json:"refreshToken"`
+	auth.PAT `json:"refreshPat"`
 }
 
-func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.JWT, error) {
-
+func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.PAT, error) {
 	req := graphql.NewRequest(refreshTokenQuery)
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
-	req.Var("token", r.Params.RefreshToken)
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", r.Params.Token))
 
 	// run it and capture the response
 	var respData RefreshTokenResponse
@@ -44,5 +45,5 @@ func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.J
 		return nil, err
 	}
 
-	return &respData.JWT, nil
+	return &respData.PAT, nil
 }

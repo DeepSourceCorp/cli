@@ -9,26 +9,39 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
-const fetchAllIssuesQuery = `
-query GetAllIssues($name:String!, $owner:String!, $provider:VCSProvider!, $limit:Int!){
-    repository(name:$name, owner:$owner, provider:$provider){
-        issues(first:$limit){
-            edges{
-                node{
-                    path
-                    beginLine
-                    endLine
-                    concreteIssue{
-                        analyzer {
-                            shortcode
-                        }
-                        title
-                        shortcode
-                    }
+const fetchAllIssuesQuery = `query GetAllIssues(
+  $name: String!
+  $owner: String!
+  $provider: VCSProvider!
+  $limit: Int!
+) {
+  repository(name: $name, login: $owner, vcsProvider: $provider, ) {
+    issues(first: $limit) {
+      edges {
+        node {
+          occurrences {
+            edges {
+              node {
+                path
+                beginLine
+                endLine
+                issue {
+                  title
+                  shortcode
+                  category
+                  isRecommended
+                  analyzer {
+                    name
+                    shortcode
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
 }`
 
 type IssuesListParams struct {
@@ -47,16 +60,25 @@ type IssuesListResponse struct {
 		Issues struct {
 			Edges []struct {
 				Node struct {
-					Path          string `json:"path"`
-					Beginline     int    `json:"beginLine"`
-					Endline       int    `json:"endLine"`
-					Concreteissue struct {
-						Analyzer struct {
-							Shortcode string `json:"shortcode"`
-						} `json:"analyzer"`
-						Title     string `json:"title"`
-						Shortcode string `json:"shortcode"`
-					} `json:"concreteIssue"`
+					Occurrences struct {
+						Edges []struct {
+							Node struct {
+								Path      string `json:"path"`
+								BeginLine int    `json:"beginLine"`
+								EndLine   int    `json:"endLine"`
+								Issue     struct {
+									Title         string `json:"title"`
+									Shortcode     string `json:"shortcode"`
+									Category      string `json:"category"`
+									IsRecommended bool   `json:"isRecommended"`
+									Analyzer      struct {
+										Name      string `json:"name"`
+										Shortcode string `json:"shortcode"`
+									} `json:"analyzer"`
+								} `json:"issue"`
+							} `json:"node"`
+						} `json:"edges"`
+					} `json:"occurrences"`
 				} `json:"node"`
 			} `json:"edges"`
 		} `json:"issues"`
@@ -64,7 +86,6 @@ type IssuesListResponse struct {
 }
 
 func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.Issue, error) {
-
 	req := graphql.NewRequest(fetchAllIssuesQuery)
 	req.Var("name", i.Params.RepoName)
 	req.Var("owner", i.Params.Owner)
@@ -73,7 +94,7 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 
 	// set header fields
 	req.Header.Set("Cache-Control", "no-cache")
-	// Adding jwt as header for auth
+	// Adding PAT as a header for authentication
 	tokenHeader := fmt.Sprintf("Bearer %s", client.GetToken())
 	req.Header.Add("Authorization", tokenHeader)
 
@@ -83,17 +104,30 @@ func (i IssuesListRequest) Do(ctx context.Context, client IGQLClient) ([]issues.
 		return nil, err
 	}
 
-	issuesData := make([]issues.Issue, len(respData.Repository.Issues.Edges))
-	for index, edge := range respData.Repository.Issues.Edges {
+	issuesData := []issues.Issue{}
+	issueData := issues.Issue{}
+	for _, edge := range respData.Repository.Issues.Edges {
+		if len(edge.Node.Occurrences.Edges) == 0 {
+			continue
+		}
 
-		issuesData[index].IssueText = edge.Node.Concreteissue.Title
-		issuesData[index].IssueCode = edge.Node.Concreteissue.Shortcode
-
-		issuesData[index].Location.Path = edge.Node.Path
-		issuesData[index].Location.Position.BeginLine = edge.Node.Beginline
-		issuesData[index].Location.Position.EndLine = edge.Node.Endline
-
-		issuesData[index].Analyzer.Shortcode = edge.Node.Concreteissue.Analyzer.Shortcode
+		for _, occurenceEdge := range edge.Node.Occurrences.Edges {
+			issueData = issues.Issue{
+				IssueText: occurenceEdge.Node.Issue.Title,
+				IssueCode: occurenceEdge.Node.Issue.Shortcode,
+				Location: issues.Location{
+					Path: occurenceEdge.Node.Path,
+					Position: issues.Position{
+						BeginLine: occurenceEdge.Node.BeginLine,
+						EndLine:   occurenceEdge.Node.EndLine,
+					},
+				},
+				Analyzer: issues.AnalyzerMeta{
+					Shortcode: occurenceEdge.Node.Issue.Analyzer.Shortcode,
+				},
+			}
+			issuesData = append(issuesData, issueData)
+		}
 	}
 
 	return issuesData, nil

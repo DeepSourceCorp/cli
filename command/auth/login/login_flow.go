@@ -3,6 +3,8 @@ package login
 import (
 	"context"
 	"fmt"
+	"os"
+	"os/user"
 	"time"
 
 	"github.com/cli/browser"
@@ -33,9 +35,9 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 		return err
 	}
 
-	// Fetch the JWT using the device registration resonse
-	var jwtData *auth.JWT
-	jwtData, opts.AuthTimedOut, err = fetchJWT(ctx, deviceRegistrationResponse)
+	// Fetch the PAT using the device registration resonse
+	var tokenData *auth.PAT
+	tokenData, opts.AuthTimedOut, err = fetchPAT(ctx, deviceRegistrationResponse)
 	if err != nil {
 		return err
 	}
@@ -47,11 +49,9 @@ func (opts *LoginOptions) startLoginFlow(cfg *config.CLIConfig) error {
 
 	// Storing the useful data for future reference and usage
 	// in a global config object (Cfg)
-	cfg.User = jwtData.Payload.Email
-	cfg.Token = jwtData.Token
-	cfg.RefreshToken = jwtData.Refreshtoken
-	cfg.RefreshTokenExpiresIn = time.Unix(jwtData.RefreshExpiresIn, 0)
-	cfg.SetTokenExpiry(jwtData.Payload.Exp)
+	cfg.User = tokenData.User.Email
+	cfg.Token = tokenData.Token
+	cfg.SetTokenExpiry(tokenData.Expiry)
 
 	// Having stored the data in the global Cfg object, write it into the config file present in the local filesystem
 	err = cfg.WriteFile()
@@ -79,10 +79,29 @@ func registerDevice(ctx context.Context) (*auth.Device, error) {
 	return res, nil
 }
 
-func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.JWT, bool, error) {
-	var jwtData *auth.JWT
+func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.PAT, bool, error) {
+	var tokenData *auth.PAT
 	var err error
+	defaultUserName := "user"
+	defaultHostName := "host"
+	userName := ""
 	authTimedOut := true
+
+	/* ======================================================================= */
+	// The username and hostname to add in the description for the PAT request
+	/* ======================================================================= */
+	userData, err := user.Current()
+	if err != nil {
+		userName = defaultUserName
+	} else {
+		userName = userData.Username
+	}
+
+	hostName, err := os.Hostname()
+	if err != nil {
+		hostName = defaultHostName
+	}
+	userDescription := fmt.Sprintf("CLI PAT for %s@%s", userName, hostName)
 
 	// Fetching DeepSource client in order to interact with SDK
 	deepsource, err := deepsource.New(deepsource.ClientOpts{
@@ -97,10 +116,10 @@ func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.J
 	ticker := time.NewTicker(time.Duration(deviceRegistrationData.Interval) * time.Second)
 	pollStartTime := time.Now()
 
-	// Polling for fetching JWT
+	// Polling for fetching PAT
 	func() {
 		for range ticker.C {
-			jwtData, err = deepsource.Login(ctx, deviceRegistrationData.Code)
+			tokenData, err = deepsource.Login(ctx, deviceRegistrationData.Code, userDescription)
 			if err == nil {
 				authTimedOut = false
 				return
@@ -113,5 +132,5 @@ func fetchJWT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.J
 		}
 	}()
 
-	return jwtData, authTimedOut, nil
+	return tokenData, authTimedOut, nil
 }

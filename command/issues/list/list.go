@@ -235,7 +235,7 @@ func (opts *IssuesListOptions) exportJSON(filename string) (err error) {
 		return nil
 	}
 
-	if err = ioutil.WriteFile(filename, data, 0644); err != nil {
+	if err = ioutil.WriteFile(filename, data, 0o644); err != nil {
 		return err
 	}
 

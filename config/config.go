@@ -9,8 +9,10 @@ import (
 	"github.com/pelletier/go-toml"
 )
 
-var configDirFn = os.UserHomeDir
-var readFileFn = os.ReadFile
+var (
+	configDirFn = os.UserHomeDir
+	readFileFn  = os.ReadFile
+)
 
 const (
 	ConfigDirName   = "/.deepsource/"
@@ -19,22 +21,19 @@ const (
 )
 
 type CLIConfig struct {
-	Host                  string    `toml:"host"`
-	User                  string    `toml:"user"`
-	Token                 string    `toml:"token"`
-	RefreshToken          string    `toml:"refresh_token,omitempty"`
-	TokenExpiresIn        time.Time `toml:"token_expires_in,omitempty"`
-	RefreshTokenExpiresIn time.Time `toml:"refresh_token_expires_in,omitempty"`
+	Host           string    `toml:"host"`
+	User           string    `toml:"user"`
+	Token          string    `toml:"token"`
+	TokenExpiresIn time.Time `toml:"token_expires_in,omitempty"`
 }
 
 var Cfg CLIConfig
 
 // Sets the token expiry in the desired format
+// Sets the token expiry in the desired format
 func (cfg *CLIConfig) SetTokenExpiry(str string) {
-	layout := "2006-01-02T15:04:05.999999999"
-	t, _ := time.Parse(layout, str)
-	timeStamp := t.Unix()
-	cfg.TokenExpiresIn = time.Unix(timeStamp, 0)
+	t, _ := time.Parse(time.RFC3339, str)
+	cfg.TokenExpiresIn = t.UTC()
 }
 
 // Checks if the token has expired or not
@@ -63,7 +62,7 @@ func (cfg CLIConfig) configPath() (string, error) {
 	return filepath.Join(home, ConfigFileName), nil
 }
 
-//ReadFile reads the CLI config file.
+// ReadFile reads the CLI config file.
 func (cfg *CLIConfig) ReadConfigFile() error {
 	path, err := cfg.configPath()
 	if err != nil {
@@ -89,7 +88,6 @@ func (cfg *CLIConfig) ReadConfigFile() error {
 }
 
 func GetConfig() (*CLIConfig, error) {
-
 	if Cfg.Token != "" {
 		return &Cfg, nil
 	}
@@ -103,7 +101,6 @@ func GetConfig() (*CLIConfig, error) {
 
 // WriteFile writes the CLI config to file.
 func (cfg *CLIConfig) WriteFile() error {
-
 	data, err := toml.Marshal(cfg)
 	if err != nil {
 		return err
@@ -145,7 +142,6 @@ func (cfg *CLIConfig) Delete() error {
 }
 
 func (cfg *CLIConfig) VerifyAuthentication() error {
-
 	// Checking if the user has authenticated / logged in or not
 	if cfg.Token == "" {
 		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")

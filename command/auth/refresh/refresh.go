@@ -4,7 +4,6 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"time"
 
 	"github.com/MakeNowJust/heredoc"
 	"github.com/deepsourcelabs/cli/config"
@@ -18,7 +17,6 @@ type RefreshOptions struct{}
 
 // NewCmdRefresh handles the refreshing of authentication credentials
 func NewCmdRefresh() *cobra.Command {
-
 	doc := heredoc.Docf(`
 		Refresh stored authentication credentials.
 
@@ -52,14 +50,6 @@ func (opts *RefreshOptions) Run() error {
 		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
 	}
 
-	// Check if token as well as refresh token are present since they
-	// are required for refreshing auth
-	if cfg.Token == "" || cfg.RefreshToken == "" {
-		// In case, there is no token as well as refresh token, ask the user to login instead
-		// TODO: Add ability to automatically run `login` command here
-		return fmt.Errorf("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
-	}
-
 	// Fetching DS Client
 	deepsource, err := deepsource.New(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
@@ -70,17 +60,15 @@ func (opts *RefreshOptions) Run() error {
 	}
 	ctx := context.Background()
 	// Use the SDK to fetch the new auth data
-	refreshedConfigData, err := deepsource.RefreshAuthCreds(ctx, cfg.RefreshToken)
+	refreshedConfigData, err := deepsource.RefreshAuthCreds(ctx, cfg.Token)
 	if err != nil {
 		return err
 	}
 
 	// Convert incoming config into the local CLI config format
-	cfg.User = refreshedConfigData.Payload.Email
+	cfg.User = refreshedConfigData.User.Email
 	cfg.Token = refreshedConfigData.Token
-	cfg.RefreshToken = refreshedConfigData.Refreshtoken
-	cfg.RefreshTokenExpiresIn = time.Unix(refreshedConfigData.RefreshExpiresIn, 0)
-	cfg.SetTokenExpiry(refreshedConfigData.Payload.Exp)
+	cfg.SetTokenExpiry(refreshedConfigData.Expiry)
 
 	// Having formatted the data, write it to the config file
 	err = cfg.WriteFile()
