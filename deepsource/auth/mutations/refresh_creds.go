@@ -16,8 +16,6 @@ mutation RefreshPAT {
 		expiry
 		user {
 			email
-			firstName
-			lastName
 		}
     }
 }`

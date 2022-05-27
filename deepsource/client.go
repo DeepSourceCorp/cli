@@ -18,7 +18,7 @@ import (
 	"github.com/deepsourcelabs/graphql"
 )
 
-var defaultHostName = "deepsource.io"
+var defaultHostName = "deepsource.icu"
 
 type ClientOpts struct {
 	Token    string
