@@ -7,7 +7,6 @@ import (
 )
 
 func TestBuildInfo_String(t *testing.T) {
-
 	date, _ := time.Parse("2006-01-02", "2021-01-21")
 
 	type fields struct {
@@ -78,7 +77,6 @@ func TestSetBuildInfo(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			SetBuildInfo(tt.args.version, tt.args.dateStr, tt.args.gitTreeState, tt.args.gitCommit)
-
 		})
 		if !reflect.DeepEqual(buildInfo, want) {
 			t.Errorf("buildInfo = %v, want %v", buildInfo, want)

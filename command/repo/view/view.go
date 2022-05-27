@@ -27,7 +27,6 @@ type RepoViewOptions struct {
 }
 
 func NewCmdRepoView() *cobra.Command {
-
 	opts := RepoViewOptions{
 		RepoArg:        "",
 		SelectedRemote: &utils.RemoteData{},
