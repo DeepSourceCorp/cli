@@ -132,7 +132,7 @@ func populateMetadata(optionalFields []string, jsonParsed *gabs.Container) []Ana
 func (o *Options) extractRequiredAnalyzerMetaFields() error {
 	var optionalFields []string
 	var requiredMetaData []AnalyzerMetadata
-	var analyzerFieldsData = make(map[string][]AnalyzerMetadata)
+	analyzerFieldsData := make(map[string][]AnalyzerMetadata)
 
 	// Extract `optional_required` fields of analyzer meta of selected analyzers
 	for _, activatedAnalyzer := range o.ActivatedAnalyzers {

@@ -72,7 +72,6 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 
 // Utility to parse the --repo flag
 func RepoArgumentResolver(arg string) ([]string, error) {
-
 	// github.com/deepsourcelabs/cli or gh/deepsourcelabs/cli
 
 	argComponents := strings.Split(arg, "/")

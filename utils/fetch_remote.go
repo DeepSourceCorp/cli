@@ -31,7 +31,7 @@ func getRemoteMap(remoteList []string) (map[string][]string, error) {
 			continue
 		}
 
-		var RepoNameRegexp = regexp.MustCompile(`.+/([^/]+)(\.git)?$`)
+		RepoNameRegexp := regexp.MustCompile(`.+/([^/]+)(\.git)?$`)
 
 		// Parsing out repository name from the remote URL using the above regex
 		matched := RepoNameRegexp.FindStringSubmatch(remoteURL)
