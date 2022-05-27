@@ -3,6 +3,7 @@ package login
 import (
 	"context"
 	"fmt"
+	"os"
 	"os/user"
 	"time"
 
@@ -84,7 +85,8 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.P
 	authTimedOut := true
 
 	userName, _ := user.Current()
-	userDescription := fmt.Sprintf("CLI PAT for %s", userName.Username)
+	hostName, _ := os.Hostname()
+	userDescription := fmt.Sprintf("CLI PAT for %s@%s", userName.Username, hostName)
 
 	// Fetching DeepSource client in order to interact with SDK
 	deepsource, err := deepsource.New(deepsource.ClientOpts{
