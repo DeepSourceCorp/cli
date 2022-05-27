@@ -2,7 +2,6 @@ package auth
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/auth"
 	"github.com/deepsourcelabs/graphql"
@@ -19,7 +18,7 @@ type RequestPATRequest struct {
 
 // GraphQL mutation to request JWT
 const requestPATMutation = `
-mutation request($input:RequestPATInput!) {
+mutation request($input:RequestPATWithDeviceCodeInput!) {
 	requestPatWithDeviceCode(input:$input) {
 		token
 		expiry
@@ -34,7 +33,6 @@ type RequestPATResponse struct {
 }
 
 func (r RequestPATRequest) Do(ctx context.Context, client IGQLClient) (*auth.PAT, error) {
-	fmt.Println("Here")
 	req := graphql.NewRequest(requestPATMutation)
 	req.Header.Set("Cache-Control", "no-cache")
 	req.Var("input", r.Params)
@@ -43,7 +41,6 @@ func (r RequestPATRequest) Do(ctx context.Context, client IGQLClient) (*auth.PAT
 	if err := client.GQL().Run(ctx, req, &res); err != nil {
 		return nil, err
 	}
-	fmt.Println(res)
 
 	return &res.PAT, nil
 }
