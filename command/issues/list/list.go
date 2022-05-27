@@ -165,7 +165,6 @@ func (opts *IssuesListOptions) getIssuesData(ctx context.Context) (err error) {
 		return err
 	}
 
-
 	var filteredIssues []issues.Issue
 
 	// Fetch issues for a certain FileArg (filepath) passed by the user
