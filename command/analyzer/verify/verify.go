@@ -138,8 +138,5 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	 * Verify the local docker image build of the Analyzer
 	 * /////////////////////////////////////////////////// */
 
-	if err = a.verifyAnalyzerDockerBuild(); err != nil {
-		return err
-	}
-	return nil
+	return a.verifyAnalyzerDockerBuild()
 }
