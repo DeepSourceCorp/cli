@@ -80,7 +80,6 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *V
 
 	// Unmarshal TOML into config
 	if err = toml.Unmarshal(analyzerTOMLContent, &config); err != nil {
-		fmt.Println("Found an error", err)
 		return &config, nil, err
 	}
 
