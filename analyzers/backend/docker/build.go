@@ -1,11 +1,8 @@
 package docker
 
 import (
-	"bufio"
 	"context"
 	"crypto/rand"
-	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -21,19 +18,6 @@ import (
 // Timeout for build and container operations (10 minutes)
 const buildTimeout = 10 * time.Minute
 
-type ErrorLine struct {
-	Error       string      `json:"error"`
-	ErrorDetail ErrorDetail `json:"errorDetail"`
-}
-
-type ErrorDetail struct {
-	Message string `json:"message"`
-}
-
-type DockerBuildResponse struct {
-	Stream string `json:"stream"`
-}
-
 type DockerClient struct {
 	Client         *client.Client
 	ContainerName  string
@@ -42,6 +26,7 @@ type DockerClient struct {
 	ImageTag       string
 	DockerfilePath string
 	AnalysisOpts   AnalysisParams
+	ShowLogs       bool
 }
 
 type DockerBuildError struct {
@@ -52,26 +37,28 @@ func (d *DockerBuildError) Error() string {
 	return d.Message
 }
 
-func (d *DockerClient) BuildAnalyzerDockerImage() *DockerBuildError {
+// Docker build API function
+func (d *DockerClient) BuildAnalyzerDockerImage() (context.CancelFunc, io.ReadCloser, *DockerBuildError) {
 	var err error
 	d.Client, err = client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
-		return &DockerBuildError{
+		return nil, nil, &DockerBuildError{
 			Message: err.Error(),
 		}
 	}
 
-	if err = d.executeImageBuild(); err != nil {
-		return &DockerBuildError{
+	cancelFunc, responseReader, err := d.executeImageBuild()
+	if err != nil {
+		return cancelFunc, nil, &DockerBuildError{
 			Message: err.Error(),
 		}
 	}
-	return nil
+	return cancelFunc, responseReader, nil
 }
 
-func (d *DockerClient) executeImageBuild() error {
-	ctx, cancel := context.WithTimeout(context.Background(), buildTimeout)
-	defer cancel()
+// Executes the docker image build
+func (d *DockerClient) executeImageBuild() (context.CancelFunc, io.ReadCloser, error) {
+	ctx, ctxCancelFunc := context.WithTimeout(context.Background(), buildTimeout)
 	cwd, _ := os.Getwd()
 
 	tarOptions := &archive.TarOptions{
@@ -79,7 +66,7 @@ func (d *DockerClient) executeImageBuild() error {
 	}
 	tar, err := archive.TarWithOptions(cwd, tarOptions)
 	if err != nil {
-		return err
+		return ctxCancelFunc, nil, err
 	}
 
 	opts := types.ImageBuildOptions{
@@ -90,38 +77,10 @@ func (d *DockerClient) executeImageBuild() error {
 	}
 	res, err := d.Client.ImageBuild(ctx, tar, opts)
 	if err != nil {
-		return err
+		ctxCancelFunc()
+		return ctxCancelFunc, nil, err
 	}
-	defer res.Body.Close()
-	return checkResponse(res.Body)
-}
-
-func checkResponse(rd io.Reader) error {
-	var lastLine []byte
-	count := 0
-	var currentStream string
-
-	scanner := bufio.NewScanner(rd)
-	for scanner.Scan() {
-		lastLine = scanner.Bytes()
-		d := &DockerBuildResponse{}
-		err := json.Unmarshal(lastLine, d)
-		if err != nil {
-			return err
-		}
-		if d.Stream == "" || d.Stream == "\n" || strings.TrimSuffix(d.Stream, "\n") == currentStream {
-			continue
-		}
-		currentStream = strings.TrimSuffix(d.Stream, "\n")
-		count++
-	}
-
-	errLine := &ErrorLine{}
-	json.Unmarshal([]byte(lastLine), errLine)
-	if errLine.Error != "" {
-		return errors.New(errLine.Error)
-	}
-	return scanner.Err()
+	return ctxCancelFunc, res.Body, nil
 }
 
 // Returns the docker image details to build
