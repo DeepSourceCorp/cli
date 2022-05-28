@@ -75,7 +75,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	// Building the Analyzer image
 	fmt.Println("Building Analyzer image...")
 	ctxCancelFunc, buildRespReader, buildError := a.Client.BuildAnalyzerDockerImage()
-    defer ctxCancelFunc()
+	defer ctxCancelFunc()
 	if buildError != nil {
 		return buildError
 	}
