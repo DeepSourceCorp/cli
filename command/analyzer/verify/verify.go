@@ -79,7 +79,6 @@ func (a *AnalyzerVerifyOpts) Run() (err error) {
 	if len(analyzerTOMLValidationErrors.Errors) > 0 {
 		configurationValid = false
 		spin.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
-		fmt.Println(analyzerTOMLValidationErrors.Errors)
 		for _, err := range analyzerTOMLValidationErrors.Errors {
 			msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
 			failureMsg := utils.GetFailureMessage(msg, "")
