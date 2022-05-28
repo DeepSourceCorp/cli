@@ -64,7 +64,6 @@ func (d *DockerClient) executeImageBuild() (context.CancelFunc, io.ReadCloser, e
 	ctx, ctxCancelFunc := context.WithTimeout(context.Background(), buildTimeout)
 	cwd, _ := os.Getwd()
 
-
 	tarOptions := &archive.TarOptions{
 		ExcludePatterns: []string{".git/**"},
 	}

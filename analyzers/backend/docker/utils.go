@@ -52,5 +52,3 @@ func CheckBuildResponse(rd io.Reader, showAllLogs bool) error {
 	}
 	return scanner.Err()
 }
-
-
