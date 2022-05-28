@@ -19,5 +19,4 @@ type Issue struct {
 	IssueCode string       `json:"issue_code"`  // DeepSource code for the issue reported
 	Location  Location     `json:"location"`    // The location data for the issue reported
 	Analyzer  AnalyzerMeta // The Analyzer which raised the issue
-
 }

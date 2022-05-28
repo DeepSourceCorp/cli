@@ -22,11 +22,15 @@ type DeepSourceTransformersData struct {
 	TransformerMap        map[string]string // Map for {transformer name:shortcode}
 }
 
-var AnalyzersData DeepSourceAnalyzersData
-var TransformersData DeepSourceTransformersData
+var (
+	AnalyzersData    DeepSourceAnalyzersData
+	TransformersData DeepSourceTransformersData
+)
 
-var analyzersAPIResponse []analyzers.Analyzer
-var transformersAPIResponse []transformers.Transformer
+var (
+	analyzersAPIResponse    []analyzers.Analyzer
+	transformersAPIResponse []transformers.Transformer
+)
 
 // Get the list of all the supported analyzers and transformers with
 // their corresponding data like shortcode, metaschema etc.

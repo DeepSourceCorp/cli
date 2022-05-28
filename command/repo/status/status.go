@@ -20,7 +20,6 @@ type RepoStatusOptions struct {
 
 // NewCmdRepoStatus handles querying the activation status of the repo supplied as an arg
 func NewCmdRepoStatus() *cobra.Command {
-
 	opts := RepoStatusOptions{
 		RepoArg:      "",
 		TokenExpired: config.Cfg.IsExpired(),
