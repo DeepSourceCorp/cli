@@ -8,11 +8,8 @@ import (
 	"path/filepath"
 	"strings"
 
-<<<<<<< HEAD
-	"github.com/deepsourcelabs/cli/analyzers/config"
-=======
 	"github.com/BurntSushi/toml"
->>>>>>> 646a6f7 (debug: testing various toml libs to check which would suit)
+	"github.com/deepsourcelabs/cli/analyzers/config"
 	validate "github.com/go-playground/validator/v10"
 )
 
