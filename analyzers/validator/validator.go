@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/BurntSushi/toml"
 	"github.com/deepsourcelabs/cli/analyzers/config"
 	validate "github.com/go-playground/validator/v10"
+	"github.com/pelletier/go-toml/v2"
 )
 
 type Error struct {
@@ -78,54 +78,33 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *V
 		return &config, nil, errors.New("failed to read analyzer.toml file")
 	}
 
-	// Using burntsushi/toml
-	if _, err = toml.Decode(string(analyzerTOMLContent), &config); err != nil {
-		fmt.Println(err)
+	reader := strings.NewReader(string(analyzerTOMLContent))
+	decoder := toml.NewDecoder(reader)
+	decoder.DisallowUnknownFields()
 
-		var derr toml.ParseError
+	err = decoder.Decode(&config)
+	if err != nil {
+		fmt.Println(err.Error())
+
+		var derr *toml.DecodeError
 		if errors.As(err, &derr) {
-			fmt.Println(derr.ErrorWithUsage())
-		} else {
-			fmt.Println(derr)
+			fmt.Println("Here")
+			fmt.Println(derr.String())
+			row, col := derr.Position()
+			fmt.Println("error occurred at row", row, "column", col)
 		}
+		var errorDetails *toml.StrictMissingError
+		if errors.As(err, &errorDetails) {
+			fmt.Println(errorDetails.String())
+		}
+
 	}
 
-	//
-	// go-toml stuff //
-	//
-
-	// reader := strings.NewReader(string(analyzerTOMLContent))
-	// decoder := toml.NewDecoder(reader)
-	// decoder.DisallowUnknownFields()
-
-	// err = decoder.Decode(&config)
-	// if err != nil {
-	//     fmt.Println(err.Error())
-
-	//     var derr *toml.DecodeError
-	//     if errors.As(err, &derr) {
-	//         fmt.Println("Here")
-	//         fmt.Println(derr.String())
-	//         row, col := derr.Position()
-	//         fmt.Println("error occurred at row", row, "column", col)
-	//     }
-	//     var errorDetails *toml.StrictMissingError
-	//     if errors.As(err, &errorDetails) {
-	//         fmt.Println(errorDetails.String())
-	//     }
-
-	// }
-
-	// // Unmarshal TOML into config
-	// if err = toml.Unmarshal(analyzerTOMLContent, &config); err != nil {
-	//     fmt.Println("Found an error", err)
-	//     return &config, nil, err
-	// }
-
-	// Validate types of analyzer.toml fields
-	// if err = validateAnalyzerTOMLTypes(&config); err != nil {
-	//     fmt.Println(err)
-	// }
+	// Unmarshal TOML into config
+	if err = toml.Unmarshal(analyzerTOMLContent, &config); err != nil {
+		fmt.Println("Found an error", err)
+		return &config, nil, err
+	}
 
 	// Validate analyzer.toml fields based on type and sanity checks
 	v := validate.New()

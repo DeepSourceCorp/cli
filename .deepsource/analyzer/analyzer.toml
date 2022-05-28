@@ -1,7 +1,7 @@
 name = "Armory"
 shortcode = "@deepsource/armory"
-description = "hello world"
-category = 12
+description = "helloworld"
+category = "doc"
 tags = []
 
 [urls]
