@@ -78,27 +78,6 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *V
 		return &config, nil, errors.New("failed to read analyzer.toml file")
 	}
 
-	reader := strings.NewReader(string(analyzerTOMLContent))
-	decoder := toml.NewDecoder(reader)
-	decoder.DisallowUnknownFields()
-
-	err = decoder.Decode(&config)
-	if err != nil {
-		fmt.Println(err.Error())
-
-		var derr *toml.DecodeError
-		if errors.As(err, &derr) {
-			fmt.Println("Here")
-			fmt.Println(derr.String())
-			row, col := derr.Position()
-			fmt.Println("error occurred at row", row, "column", col)
-		}
-		var errorDetails *toml.StrictMissingError
-		if errors.As(err, &errorDetails) {
-			fmt.Println(errorDetails.String())
-		}
-
-	}
 
 	// Unmarshal TOML into config
 	if err = toml.Unmarshal(analyzerTOMLContent, &config); err != nil {
