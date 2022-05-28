@@ -75,12 +75,18 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	// Building the Analyzer image
 	fmt.Println("Building Analyzer image...")
 	ctxCancelFunc, buildRespReader, buildError := a.Client.BuildAnalyzerDockerImage()
+
+	// Cancel the build context and close the reader before exiting this function
+	if buildRespReader != nil {
+		defer buildRespReader.Close()
+	}
 	defer ctxCancelFunc()
 	if buildError != nil {
 		return buildError
 	}
 
 	// Check the docker build response
+	// TODO: Tweak the behaviour here when the spinners are added to the run command
 	if err = docker.CheckBuildResponse(buildRespReader, false); err != nil {
 		return err
 	}
