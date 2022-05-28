@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
-	"strings"
 
 	build "github.com/deepsourcelabs/cli/analyzers/backend/docker"
 	"github.com/deepsourcelabs/cli/analyzers/validator"
@@ -118,19 +117,11 @@ func (a *AnalyzerVerifyOpts) Run() (err error) {
 	// Build verification //
 	///////////////////////
 
-	/* Specifying the name of the image to be built
-	 * Set the default Dockerfile path as "Dockerfile" */
+	// Fetch the details of the dockerfile to build and also the name of the docker image
 	dockerFilePath, dockerFileName := build.GetDockerImageDetails(analyzerTOMLData)
-	dockerFilePath = "Dockerfile"
 
-	// Read config for the value if specified
-	if analyzerTOMLData.Build.Dockerfile != "" {
-		dockerFilePath = analyzerTOMLData.Build.Dockerfile
-	}
-	if analyzerTOMLData.Shortcode != "" {
-		dockerFileName = strings.TrimPrefix(analyzerTOMLData.Shortcode, "@")
-	}
-
+	/* In case of verbose mode (when the user supplies a `--verbose` flag), do not use spinner since it doesn't allow showing multiline
+	 * output at the same time as rendering a spinner. Can be done but would require some string concatenation magic. Can be picked up later. */
 	switch a.VerboseMode {
 	case true:
 		arrowIcon := ansi.Color("> [verbose]", "yellow")
@@ -148,6 +139,8 @@ func (a *AnalyzerVerifyOpts) Run() (err error) {
 		}
 	}
 
+	/* Initialize the builder with the above fetched details
+	 * Use the `GenerateImageVersion` utility to generate a random string of length 7 to tag the image */
 	analyzerBuilder := build.DockerClient{
 		ImageName:      dockerFileName,
 		DockerfilePath: dockerFilePath,
@@ -155,7 +148,7 @@ func (a *AnalyzerVerifyOpts) Run() (err error) {
 		Logs:           a.VerboseMode,
 	}
 
-	// Build the docker image
+	// Build the docker image :rocket:
 	buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
 	if buildErr != nil {
 		if a.VerboseMode {
@@ -165,6 +158,7 @@ func (a *AnalyzerVerifyOpts) Run() (err error) {
 		spin.StopSpinnerWithError("Failed to build the image", fmt.Errorf(buildErr.Error()))
 	}
 
+	// In case of verbose mode, no need to stop the spinner
 	if a.VerboseMode {
 		fmt.Print(utils.GetSuccessMessage("Successfully built the Analyzer image"))
 		return nil
