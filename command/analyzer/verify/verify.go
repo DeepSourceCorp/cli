@@ -156,7 +156,7 @@ func (a *AnalyzerVerifyOpts) Run() (err error) {
 		Logs:           a.VerboseMode,
 	}
 
-	// Build th image
+	// Build the docker image
 	buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
 	if buildErr != nil {
 		if a.VerboseMode {
