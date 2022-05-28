@@ -39,18 +39,14 @@ func (d *DockerBuildError) Error() string {
 
 // Docker build API function
 func (d *DockerClient) BuildAnalyzerDockerImage() (context.CancelFunc, io.ReadCloser, *DockerBuildError) {
-	var err error
-	var cancelFunc context.CancelFunc
-	var responseReader io.ReadCloser
-
-	d.Client, err = client.NewClientWithOpts(client.FromEnv)
+	d.Client, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		return nil, nil, &DockerBuildError{
 			Message: err.Error(),
 		}
 	}
 
-	cancelFunc, responseReader, err = d.executeImageBuild()
+	cancelFunc, responseReader, err := d.executeImageBuild()
 	if err != nil {
 		return cancelFunc, nil, &DockerBuildError{
 			Message: err.Error(),
