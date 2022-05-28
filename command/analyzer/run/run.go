@@ -74,8 +74,15 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 
 	// Building the Analyzer image
 	fmt.Println("Building Analyzer image...")
-	if buildError := a.Client.BuildAnalyzerDockerImage(); buildError != nil {
+	ctxCancelFunc, buildRespReader, buildError := a.Client.BuildAnalyzerDockerImage()
+    defer ctxCancelFunc()
+	if buildError != nil {
 		return buildError
+	}
+
+	// Check the docker build response
+	if err = docker.CheckBuildResponse(buildRespReader, false); err != nil {
+		return err
 	}
 
 	/* Create temporary toolbox directory to store analysis config and later analyis results
