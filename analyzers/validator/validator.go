@@ -102,6 +102,7 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *V
 		}
 		return &config, &analyzerTOMLValidationErrors, nil
 	}
+
 	return &config, nil, nil
 }
 
@@ -135,7 +136,6 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, 
 
 		// Validate the data
 		v := validate.New()
-
 		if err := v.Struct(&config); err != nil {
 			validationFailed = true
 			missingRequiredFields := getMissingRequiredFields(err, config)
