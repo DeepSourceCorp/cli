@@ -1,5 +1,5 @@
 name = "Todo comments checker"
-# path = "@deepsource/demo-python"
+# shortcode = "@deepsource/demo-python" # test invalid config
 description = "Finds the TODO comments in codebase."
 # category = "doc"
 tags = ["documentation","todo"]
