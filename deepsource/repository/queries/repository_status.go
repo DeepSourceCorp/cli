@@ -38,7 +38,6 @@ type IGQLClient interface {
 }
 
 func (r RepoStatusRequest) Do(ctx context.Context, client IGQLClient) (*repository.Meta, error) {
-
 	req := graphql.NewRequest(repoStatusQuery)
 	req.Var("name", r.Params.RepoName)
 	req.Var("owner", r.Params.Owner)

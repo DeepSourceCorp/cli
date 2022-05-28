@@ -10,7 +10,6 @@ import (
 
 // Responsible for collecting user input for generating DeepSource config
 func (o *Options) collectUserInput() error {
-
 	deepsource, err := deepsource.New(deepsource.ClientOpts{
 		Token:    config.Cfg.Token,
 		HostName: config.Cfg.Host,

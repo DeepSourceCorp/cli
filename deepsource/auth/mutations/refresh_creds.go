@@ -31,7 +31,6 @@ type RefreshTokenResponse struct {
 }
 
 func (r RefreshTokenRequest) Do(ctx context.Context, client IGQLClient) (*auth.JWT, error) {
-
 	req := graphql.NewRequest(refreshTokenQuery)
 
 	// set header fields
