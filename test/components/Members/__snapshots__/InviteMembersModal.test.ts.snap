@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ InviteMembersModal ]] renders invite members modal with the trigger button 1`] = `
+"<div>
+  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"user-plus\\"> Invite new member </zbutton-stub>
+  <portal-stub to=\\"modal\\">
+    <zmodal-stub title=\\"Invite new members\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactionlabel=\\"\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+      <div class=\\"p-4 space-y-4 text-sm font-normal\\">
+        <div class=\\"space-y-2\\">
+          <div>
+            <h3 class=\\"text-base font-medium text-vanilla-100\\">Invite via email</h3>
+            <p class=\\"text-sm text-vanilla-400\\">
+              Teammates will create an account via the sent email
+            </p>
+          </div>
+          <div class=\\"flex justify-between\\">
+            <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"link\\" type=\\"button\\" size=\\"small\\" to=\\"\\" spacing=\\"px-0\\">+ Add more emails</zbutton-stub>
+            <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" spacing=\\"px-2\\">
+              <div class=\\"flex items-center space-x-2\\">
+                <zicon-stub icon=\\"send\\" size=\\"small\\" position=\\"\\" color=\\"ink-400\\"></zicon-stub> <span>Send invite</span>
+              </div>
+            </zbutton-stub>
+          </div>
+        </div>
+        <zdivider-stub direction=\\"horizontal\\" color=\\"ink-200\\"></zdivider-stub>
+        <div class=\\"space-y-2\\">
+          <div class=\\"flex items-start justify-between\\">
+            <div>
+              <h3 class=\\"text-base font-medium text-vanilla-100\\">Invite via link</h3>
+              <p class=\\"text-sm text-vanilla-400\\">
+                Teammates will create an account via the link
+              </p>
+            </div>
+            <div>
+              <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"refresh-cw\\">
+                Reset Link
+              </zbutton-stub>
+            </div>
+          </div>
+          <zinput-stub name=\\"\\" value=\\"https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/\\" label=\\"\\" type=\\"text\\" placeholder=\\"Enter a value\\" disabled=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\"><template></template></zinput-stub>
+        </div>
+      </div>
+    </zmodal-stub>
+  </portal-stub>
+</div>"
+`;

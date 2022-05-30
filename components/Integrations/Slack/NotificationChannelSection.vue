@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { ZOption, ZSelect } from '@deepsourcelabs/zeal'
-import { Component, mixins, ModelSync, Prop, Watch } from 'nuxt-property-decorator'
+import { Component, mixins, ModelSync, Prop } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
@@ -51,7 +51,7 @@ export default class NotificationChannelSection extends mixins(
   @ModelSync('channel', 'change', { type: String })
   readonly modelValue: string
 
-  @Prop({ required: true })
+  @Prop({ default: false })
   pending: boolean
 
   @Prop({ required: false })

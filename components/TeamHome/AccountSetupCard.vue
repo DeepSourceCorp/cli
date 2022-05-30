@@ -33,9 +33,25 @@
           </h5>
           <template v-if="!getStatus(step)">
             <p v-if="step.description" class="text-sm text-vanilla-400">{{ step.description }}</p>
-            <z-button @click="step.action" size="small" buttonType="secondary" :icon="step.icon">{{
-              step.actionLabel
-            }}</z-button>
+            <invite-members-modal
+              v-if="step.shortcode === 'invite-team'"
+              @inviteSuccess="inviteSuccess"
+            >
+              <template v-slot:trigger="{ open }">
+                <z-button :icon="step.icon" button-type="secondary" size="small" @click="open">{{
+                  step.actionLabel
+                }}</z-button>
+              </template>
+            </invite-members-modal>
+
+            <z-button
+              v-else
+              @click="step.action"
+              size="small"
+              buttonType="secondary"
+              :icon="step.icon"
+              >{{ step.actionLabel }}</z-button
+            >
           </template>
         </div>
       </div>
@@ -59,17 +75,6 @@
       "
     />
     <portal to="modal">
-      <invite-members-modal
-        v-if="showInviteMembersModal"
-        :showModal="showInviteMembersModal"
-        @close="
-          () => {
-            showInviteMembersModal = false
-            refetch()
-          }
-        "
-        @inviteSuccess="inviteSuccess"
-      ></invite-members-modal>
       <z-modal
         v-if="showInviteSuccessModal"
         @onClose="showInviteSuccessModal = false"

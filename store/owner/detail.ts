@@ -40,6 +40,7 @@ import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/up
 
 // Billing
 import BillingDetails from '~/apollo/queries/owner/billing.gql'
+import SeatsInfo from '~/apollo/queries/owner/seatsInfo.gql'
 import BillingStatus from '~/apollo/queries/owner/billing.gql'
 import ApplyCredits from '~/apollo/mutations/owner/applyCreditsToOwner.gql'
 import UpdateBillingInfo from '~/apollo/mutations/owner/updateBillingInfo.gql'
@@ -185,6 +186,7 @@ export enum OwnerDetailActions {
   SYNC_REPOS_FOR_OWNER = 'syncReposForOwner',
 
   FETCH_BILLING_DETAILS = 'fetchBillingDetails',
+  FETCH_SEATS_INFO = 'fetchSeatsInfo',
   FETCH_BILLING_STATUS = 'fetchBillingStatus',
   APPLY_CREDITS = 'applyCredits',
   UPDATE_BILLING_INFO = 'updateBillingInfo',
@@ -250,6 +252,12 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
   ) => Promise<void>
 
   [OwnerDetailActions.FETCH_BILLING_DETAILS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_SEATS_INFO]: (
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
     args: { login: string; provider: string; refetch?: boolean }
@@ -556,6 +564,26 @@ export const actions: OwnerDetailModuleActions = {
       commit(OwnerDetailMutations.SET_LOADING, false)
     }
   },
+
+  async [OwnerDetailActions.FETCH_SEATS_INFO]({ commit }, args) {
+    try {
+      const response = await this.$fetchGraphqlData(
+        SeatsInfo,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+    } catch (e) {
+      this.$logErrorAndToast(
+        e as Error,
+        'Something went wrong while fetching seats used information'
+      )
+    }
+  },
+
   async [OwnerDetailActions.FETCH_BILLING_STATUS]({ commit }, args) {
     try {
       commit(OwnerDetailMutations.SET_LOADING, true)

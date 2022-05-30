@@ -81,7 +81,7 @@ export default class TeamDetailMixin extends Vue {
   }) => Promise<void>
 
   @teamStore.Action(TeamActions.FETCH_INVITE_LINK)
-  fetchInviteUrl: (args: { login: string; provider: string }) => Promise<void>
+  fetchInviteUrl: (args: { login: string; provider: string; refetch?: boolean }) => Promise<void>
 
   @teamStore.Action(TeamActions.RESET_INVITE_LINK)
   resetInviteUrl: (args: { ownerId: string }) => Promise<void>

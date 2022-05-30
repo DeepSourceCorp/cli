@@ -28,7 +28,6 @@
       "@types/express",
       "@types/jest",
       "cookie-universal-nuxt/types",
-      "@nuxtjs/sentry",
       "highlight.js/types",
       "nuxt-stripe-module",
       "./node_modules/user-agent-data-types",

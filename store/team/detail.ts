@@ -199,6 +199,7 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
     args: {
       login: string
       provider: string
+      refetch?: boolean
     }
   ) => Promise<void>
   [TeamActions.RESET_INVITE_LINK]: (
@@ -424,13 +425,17 @@ export const actions: TeamModuleActions = {
     dispatch(TeamActions.FETCH_INVITED_USERS, refetchParams)
   },
 
-  async [TeamActions.FETCH_INVITE_LINK]({ commit }, { login, provider }) {
+  async [TeamActions.FETCH_INVITE_LINK]({ commit }, { login, provider, refetch }) {
     try {
       commit(TeamMutations.SET_LOADING, true)
-      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(TeamInviteUrlQuery, {
-        provider: this.$providerMetaMap[provider].value,
-        login
-      })
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        TeamInviteUrlQuery,
+        {
+          provider: this.$providerMetaMap[provider].value,
+          login
+        },
+        refetch
+      )
       commit(TeamMutations.SET_TEAM, response.data.owner?.team)
       commit(TeamMutations.SET_LOADING, false)
     } catch (e) {

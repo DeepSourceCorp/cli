@@ -23,8 +23,6 @@ interface INotificationChannelSection {
 }
 
 describe('[[ NotificationChannelSection ]]', () => {
-  const { Owner, Repository } = IntegrationSettingsLevel
-
   // Mocks
   const mocks = {
     $route: {

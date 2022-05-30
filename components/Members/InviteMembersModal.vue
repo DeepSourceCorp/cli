@@ -1,100 +1,124 @@
 <template>
-  <z-modal v-if="showModal" title="Invite new members" @onClose="close" :primaryActionLabel="''">
-    <div class="p-4 space-y-4 text-sm font-normal">
-      <div class="space-y-2" v-if="$config.emailEnabled">
-        <div>
-          <h3 class="text-base font-medium text-vanilla-100">Invite via email</h3>
-          <p class="text-sm text-vanilla-400">
-            Teammates will create an account via the sent email
-          </p>
-        </div>
-        <div
-          v-for="member in membersToInvite"
-          :key="member.index"
-          class="grid gap-2 grid-cols-fr-10"
-        >
-          <z-input
-            v-model="member.email"
-            size="small"
-            type="email"
-            :id="member.index"
-            :showBorder="true"
-            :isInvalid="!member.isValid"
-            @debounceInput="areEmailsInvalid"
-            placeholder="name@email.com"
-          >
-          </z-input>
-          <div class="h-8">
-            <z-select
-              v-model="member.role"
-              :read-only="!member.modifyAllowed"
-              v-tooltip="
-                member.modifyAllowed ? '' : 'This is disabled because the seats are exhausted'
-              "
-              class="bg-ink-400"
-            >
-              <z-option v-for="opt in roles" :key="opt.value" :label="opt.label" :value="opt.value">
-              </z-option>
-            </z-select>
-          </div>
-        </div>
-        <div class="flex justify-between">
-          <z-button buttonType="link" spacing="px-0" size="small" @click="addMore"
-            >+ Add more emails</z-button
-          >
-          <z-button
-            @click="sendInvite"
-            buttonType="primary"
-            size="small"
-            spacing="px-2"
-            :disabled="disableSend"
-          >
-            <div class="flex items-center space-x-2">
-              <z-icon icon="send" size="small" color="ink-400"></z-icon>
-              <span>Send invite</span>
+  <div>
+    <slot :open="open" name="trigger">
+      <z-button size="small" icon="user-plus" @click="open"> Invite new member </z-button>
+    </slot>
+
+    <portal to="modal">
+      <z-modal
+        v-if="showModal"
+        :primary-action-label="''"
+        title="Invite new members"
+        @onClose="close"
+      >
+        <div class="p-4 space-y-4 text-sm font-normal">
+          <div v-if="$config.emailEnabled" class="space-y-2">
+            <div>
+              <h3 class="text-base font-medium text-vanilla-100">Invite via email</h3>
+              <p class="text-sm text-vanilla-400">
+                Teammates will create an account via the sent email
+              </p>
             </div>
-          </z-button>
-        </div>
-      </div>
-      <z-divider v-if="$config.emailEnabled"></z-divider>
-      <div class="space-y-2">
-        <div class="flex items-start justify-between">
-          <div>
-            <h3 class="text-base font-medium text-vanilla-100">Invite via link</h3>
-            <p class="text-sm text-vanilla-400">Teammates will create an account via the link</p>
+
+            <div v-if="$fetchState.pending" class="rounded-md h-28 animate-pulse bg-ink-200"></div>
+
+            <template v-else>
+              <div
+                v-for="member in membersToInvite"
+                :key="member.index"
+                class="grid gap-2 grid-cols-fr-10"
+              >
+                <z-input
+                  :id="member.index"
+                  v-model="member.email"
+                  :is-invalid="!member.isValid"
+                  :show-border="true"
+                  placeholder="name@email.com"
+                  size="small"
+                  type="email"
+                  @debounceInput="areEmailsInvalid"
+                />
+                <div class="h-8">
+                  <z-select
+                    v-model="member.role"
+                    :read-only="!member.modifyAllowed"
+                    v-tooltip="
+                      member.modifyAllowed ? '' : 'This is disabled because the seats are exhausted'
+                    "
+                    class="bg-ink-400"
+                  >
+                    <z-option
+                      v-for="opt in roles"
+                      :key="opt.value"
+                      :label="opt.label"
+                      :value="opt.value"
+                    />
+                  </z-select>
+                </div>
+              </div>
+            </template>
+            <div class="flex justify-between">
+              <z-button button-type="link" spacing="px-0" size="small" @click="addMore"
+                >+ Add more emails</z-button
+              >
+              <z-button
+                :disabled="disableSend"
+                button-type="primary"
+                size="small"
+                spacing="px-2"
+                @click="sendInvite"
+              >
+                <div class="flex items-center space-x-2">
+                  <z-icon icon="send" size="small" color="ink-400" />
+                  <span>Send invite</span>
+                </div>
+              </z-button>
+            </div>
           </div>
-          <div>
-            <z-button
-              icon="refresh-cw"
-              size="small"
-              buttonType="secondary"
-              @click="resetInviteLink"
-            >
-              Reset Link
-            </z-button>
+          <z-divider v-if="$config.emailEnabled" />
+          <div class="space-y-2">
+            <div class="flex items-start justify-between">
+              <div>
+                <h3 class="text-base font-medium text-vanilla-100">Invite via link</h3>
+                <p class="text-sm text-vanilla-400">
+                  Teammates will create an account via the link
+                </p>
+              </div>
+              <div>
+                <z-button
+                  button-type="secondary"
+                  icon="refresh-cw"
+                  size="small"
+                  @click="resetInviteLink"
+                >
+                  Reset Link
+                </z-button>
+              </div>
+            </div>
+            <z-input :disabled="true" :show-border="true" :value="team.invitationUrl">
+              <template slot="right">
+                <copy-button
+                  :disabled="!team.invitationUrl"
+                  :value="team.invitationUrl"
+                  label="Copy link"
+                  class="w-36"
+                />
+              </template>
+            </z-input>
           </div>
         </div>
-        <z-input :disabled="true" :value="team.invitationUrl" :showBorder="true">
-          <template slot="right">
-            <copy-button
-              :value="team.invitationUrl"
-              label="Copy link"
-              :disabled="!team.invitationUrl"
-              class="w-36"
-            />
-          </template>
-        </z-input>
-      </div>
-    </div>
-  </z-modal>
+      </z-modal>
+    </portal>
+  </div>
 </template>
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import TeamDetailMixin from '@/mixins/teamDetailMixin'
+import { ZButton, ZDivider, ZIcon, ZInput, ZModal, ZOption, ZSelect } from '@deepsourcelabs/zeal'
+import { Component, mixins } from 'nuxt-property-decorator'
+
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
-import { ZIcon, ZModal, ZInput, ZButton, ZDivider, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import TeamDetailMixin from '@/mixins/teamDetailMixin'
+import { Invitee } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
-import { TeamMember } from '~/types/types'
 
 interface member {
   index: number
@@ -143,6 +167,9 @@ const ROLES = [
   }
 ]
 
+/**
+ * Invite members modal
+ */
 @Component({
   components: {
     ZIcon,
@@ -156,25 +183,44 @@ const ROLES = [
   layout: 'dashboard'
 })
 export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBillingMixin) {
-  @Prop({ default: false })
-  showModal: boolean
-
+  showModal = false
   membersToInvite: member[] = []
   roles = ROLES
 
+  /**
+   * The fetch hook
+   * Update member invite list after fetching the invite URL and owner seats information
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
-    await this.fetchInviteUrl({ login: owner, provider })
+    const args = { login: owner, provider }
+
+    // Set the invite members list before queries to ensure
+    // consistency between states
+    this.membersToInvite = this.initialMembersToInvites
+    await Promise.all([this.fetchInviteUrl(args), this.fetchSeatsInfo(args)])
     this.membersToInvite = this.initialMembersToInvites
   }
 
+  /**
+   * Method to reset invite link for a team
+   *
+   * @returns {Promise<void>}
+   */
   async resetInviteLink(): Promise<void> {
     await this.resetInviteUrl({
       ownerId: this.team.id
     })
-    this.$toast.success('Invitiation link successfully reset')
+    this.$toast.success('Invitation link successfully reset')
   }
 
+  /**
+   * Method that returns a boolean value corresponding to the email validation status
+   *
+   * @returns {boolean}
+   */
   areEmailsInvalid(): boolean {
     this.membersToInvite = this.membersToInvite.map((member) => {
       if (member.email) {
@@ -192,12 +238,23 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
     return this.membersToInvite.map((member) => member.isValid).some((el) => el === false)
   }
 
+  /**
+   * Method to validate an Email
+   *
+   * @param {email} string
+   * @returns {boolean}
+   */
   validEmail(email: string): boolean {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return re.test(email)
   }
 
+  /**
+   * Method to send invitation for all members on the list
+   *
+   * @returns {Promise<void>}
+   */
   async sendInvite(): Promise<void> {
     if (this.areEmailsInvalid()) {
       this.$toast.danger('Please enter a valid email')
@@ -237,6 +294,11 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
     }
   }
 
+  /**
+   * Method to add a new member entry
+   *
+   * @returns {void}
+   */
   addMore(): void {
     let modifyAllowed = this.seatsLeftCount - this.membersToInvite.length > 0 ? true : false
     this.membersToInvite.push({
@@ -246,6 +308,25 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
       modifyAllowed,
       role: 'CONTRIBUTOR'
     })
+  }
+
+  /**
+   * Method to open the modal
+   *
+   * @returns{void}
+   */
+  open(): void {
+    this.showModal = true
+  }
+
+  /**
+   * Method to update the member invite list and close the modal
+   *
+   * @returns{void}
+   */
+  close(): void {
+    this.membersToInvite = this.initialMembersToInvites
+    this.showModal = false
   }
 
   get disableSend(): boolean {
@@ -258,21 +339,10 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
 
   get pendingInvites(): number {
     let count = 0
-    this.team.invites?.edges.forEach((invitee) => {
+    const invitees = resolveNodes(this.team.invites) as Invitee[]
+    invitees.forEach((invitee) => {
       // no limit on CONTRIBUTORS, so we only count ADMINs & MEMBERs
-      if (invitee?.node?.role !== 'CONTRIBUTOR') {
-        count += 1
-      }
-    })
-    return count
-  }
-
-  get seatsUsed(): number {
-    let count = 0
-    const members = resolveNodes(this.team.members) as TeamMember[]
-    members.forEach((member) => {
-      // no limit on CONTRIBUTORS, so we only count ADMINs & MEMBERs
-      if (member.role !== 'CONTRIBUTOR') {
+      if (invitee?.role !== 'CONTRIBUTOR') {
         count += 1
       }
     })
@@ -280,9 +350,9 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
   }
 
   get seatsLeftCount(): number {
-    const { seatsTotal } = this.ownerBillingInfo
-    if (seatsTotal) {
-      return seatsTotal - this.seatsUsed - this.pendingInvites
+    const { seatsTotal, seatsUsed } = this.ownerBillingInfo
+    if (seatsTotal && seatsUsed) {
+      return seatsTotal - seatsUsed - this.pendingInvites
     }
     return 0
   }
@@ -300,11 +370,6 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
         return member
       }
     })
-  }
-
-  close(): void {
-    this.membersToInvite = this.initialMembersToInvites
-    this.$emit('close')
   }
 }
 </script>

@@ -19,9 +19,9 @@
       <div
         v-for="loader in this.limit"
         :key="loader"
-        class="flex w-full space-x-4 animate-pulse py-1"
+        class="flex w-full py-1 space-x-4 animate-pulse"
       >
-        <div class="w-9 h-9 rounded-full bg-ink-300"></div>
+        <div class="rounded-full w-9 h-9 bg-ink-300"></div>
         <div class="w-1/3 h-10 rounded-md bg-ink-300"></div>
         <div class="w-1/3 h-10 rounded-md bg-ink-300"></div>
         <div class="flex-grow h-10 rounded-md bg-ink-300"></div>
@@ -135,9 +135,9 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
 
   async refetchData(refetch = false) {
     const { owner, provider } = this.$route.params
-    await this.fetchTeamMembers(refetch)
-    await this.fetchOwnerDetails({ login: owner, provider, refetch })
-    await this.fetchBillingDetails({ login: owner, provider, refetch })
+    const args = { login: owner, provider, refetch }
+
+    await Promise.all([this.fetchTeamMembers(refetch), this.fetchOwnerDetails(args)])
   }
 
   async searchActiveUsers(): Promise<void> {

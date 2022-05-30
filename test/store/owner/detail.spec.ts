@@ -10,7 +10,7 @@ import {
   OwnerDetailActions,
   OwnerDetailMutations
 } from '~/store/owner/detail'
-import { IssueTypeSetting, Owner } from '~/types/types'
+import { IssueTypeSetting, Owner, SubscriptionStatusChoice } from '~/types/types'
 import { GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 let actionCxt: OwnerDetailModuleActionContext
@@ -298,7 +298,7 @@ describe('[Store] Owner/Details', () => {
           // Assert if `OwnerDetailMutations.SET_ERROR` is being committed or not.
           expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
 
-          // Assert if the payload passed to the mutation was empty.
+          // Assert if the right data is passed to the mutation
           expect(secondCall[1]).toEqual(Error('ERR1'))
         })
       })
@@ -436,7 +436,976 @@ describe('[Store] Owner/Details', () => {
           // Assert if `OwnerDetailMutations.SET_ERROR` is being commited or not.
           expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
 
-          // Assert if the payload passed to the mutation was empty.
+          // Assert if the right data is passed to the mutation
+          expect(secondCall[1]).toEqual(Error('ERR1'))
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.FETCH_ISSUE_TRENDS}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_ISSUE_TRENDS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh',
+            lastDays: 30
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(4)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER_ISSUES_TREND}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.FETCH_ISSUE_TRENDS` is being commited or not.
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_OWNER_ISSUES_TREND)
+
+          // Assert if the response from api is same as the one passed to the mutation.
+          expect(secondCall[1]).toEqual(apiResponse.data.owner)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_ISSUE_TRENDS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh',
+            lastDays: 30
+          })
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_ERROR` is being commited or not.
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+
+          // Assert if the right data is passed to the mutation
+          expect(secondCall[1]).toEqual(Error('ERR1'))
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.FETCH_AUTOFIX_TRENDS}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_AUTOFIX_TRENDS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh',
+            lastDays: 30
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER_AUTOFIX_TREND}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.SET_OWNER_AUTOFIX_TREND` is being commited or not
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_OWNER_AUTOFIX_TREND)
+
+          // Assert if the response from api is same as the one passed to the mutation
+          expect(secondCall[1]).toEqual(apiResponse.data.owner)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_AUTOFIX_TRENDS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh',
+            lastDays: 30
+          })
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall, , thirdCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation
+          expect(firstCall[1]).toEqual(true)
+
+          expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          expect(thirdCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_ERROR` is being commited or not
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+
+          // Assert if the payload passed to the mutation was empty
+          expect(secondCall[1]).toEqual(Error('ERR1'))
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall, , thirdCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(thirdCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
+
+          // Assert if the response from api is same as the one passed to the mutation
+          expect(secondCall[1]).toEqual(apiResponse.data.owner)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_ERROR` is being commited or not
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+
+          // Assert if the payload passed to the mutation was empty
+          expect(secondCall[1]).toEqual(Error('ERR1'))
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first and last commit calls made
+          const {
+            mock: {
+              calls: [firstCall, , thirdCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(thirdCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
+
+          // Assert if the response from api is same as the one passed to the mutation
+          expect(secondCall[1]).toEqual(apiResponse.data.owner)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_ACCOUNT_SETUP_STATUS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_ERROR` is being commited or not.
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+
+          // Assert if the payload passed to the mutation was empty
+          expect(secondCall[1]).toEqual(Error('ERR1'))
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.FETCH_APP_CONFIG}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_APP_CONFIG].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(1)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
+
+          // Assert if the response from api is same as the one passed to the mutation
+          expect(firstCall[1]).toEqual(apiResponse.data.owner)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            },
+            $toast: {
+              danger: jest.fn()
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_APP_CONFIG].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('no mutations are committed', async () => {
+          expect(commit).not.toHaveBeenCalled()
+        })
+
+        test('error handler', async () => {
+          expect(localThis.$toast.danger).toBeCalledWith(
+            'There was an error fetching configuration from VCS provider.'
+          )
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.FETCH_BILLING_DETAILS}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_BILLING_DETAILS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first and third commit calls made
+          const {
+            mock: {
+              calls: [firstCall, , thirdCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(thirdCall[1]).toEqual(false)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
+
+          // Assert if the response from api is same as the one passed to the mutation
+          expect(secondCall[1]).toEqual(apiResponse.data.owner)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_BILLING_DETAILS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_ERROR` is being commited or not.
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+
+          // Assert if the right data is passed to the mutation
+          expect(secondCall[1]).toEqual(Error('ERR1'))
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.FETCH_SEATS_INFO}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_SEATS_INFO].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(1)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
+
+          // Assert if the response from api is same as the one passed to the mutation
+          expect(firstCall[1]).toEqual(apiResponse.data.owner)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            },
+            $logErrorAndToast: jest.fn()
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_SEATS_INFO].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('no mutations are committed', async () => {
+          expect(commit).not.toHaveBeenCalled()
+        })
+
+        test('error handler', async () => {
+          expect(localThis.$logErrorAndToast).toBeCalledWith(
+            Error('ERR1'),
+            'Something went wrong while fetching seats used information'
+          )
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.FETCH_BILLING_STATUS}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(
+                  () =>
+                    resolve({
+                      data: {
+                        owner: {
+                          ...mockOwnerDetail().owner,
+                          billingInfo: { status: SubscriptionStatusChoice.Active }
+                        }
+                      }
+                    }),
+                  10
+                )
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_BILLING_STATUS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(2)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first and second commit calls made
+          const {
+            mock: {
+              calls: [firstCall, secondCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(secondCall[1]).toEqual(false)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_BILLING_STATUS].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully commits mutations', async () => {
+          expect(commit).toHaveBeenCalledTimes(3)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+          // Storing the first commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+
+          // Assert if right data is passed to the mutation.
+          expect(firstCall[1]).toEqual(true)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [, secondCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_ERROR` is being commited or not.
+          expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+
+          // Assert if the right data is passed to the mutation
           expect(secondCall[1]).toEqual(Error('ERR1'))
         })
       })
@@ -569,7 +1538,7 @@ describe('[Store] Owner/Details', () => {
           // Assert if `OwnerDetailMutations.SET_ERROR` is being commited or not.
           expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
 
-          // Assert if the payload passed to the mutation was empty.
+          // Assert if the right data is passed to the mutation
           expect(secondCall[1]).toEqual(Error('OwnerDetailMutations.ERR1'))
         })
       })

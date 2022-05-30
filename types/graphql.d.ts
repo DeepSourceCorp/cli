@@ -780,14 +780,6 @@ declare module '*/removeMember.gql' {
 
   export default defaultDocument;
 }
-
-declare module '*/transferOwnership.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
     
 
 declare module '*/resetTeamInviteLink.gql' {
@@ -803,6 +795,15 @@ declare module '*/syncVcsPermissions.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/transferOwnership.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const transferTeamOwnership: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1287,6 +1288,15 @@ declare module '*/maxUsagePercentage.gql' {
 }
     
 
+declare module '*/seatsInfo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ownerSeatsInfo: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/IssueTypeSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1642,7 +1652,7 @@ declare module '*/manageAccess.gql' {
 declare module '*/reporting.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const RepositoryReportingSettings: DocumentNode;
 
   export default defaultDocument;
 }

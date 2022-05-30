@@ -29,6 +29,9 @@ export default class OwnerBillingMixin extends mixins(OwnerDetailMixin, ContextM
     refetch?: boolean
   }) => Promise<void>
 
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_SEATS_INFO)
+  fetchSeatsInfo: (args: { login: string; provider: string; refetch?: boolean }) => Promise<void>
+
   @ownerDetailStore.Action(OwnerDetailActions.FETCH_BILLING_STATUS)
   fetchBillingStatus: (args: {
     login: string

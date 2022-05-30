@@ -1,7 +1,7 @@
 <template>
   <div>
     <div id="tabs" class="flex xl:col-span-2 pt-2.5 pb-0 border-b border-ink-200">
-      <div class="flex self-end px-2 md:px-4 space-x-5 overflow-auto flex-nowrap">
+      <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
         <nuxt-link :to="getRoute('active')">
           <z-tab :isActive="$route.path === getRoute('active')" border-active-color="vanilla-400">
             My team
@@ -12,17 +12,7 @@
             <div v-if="pendingInvitesCount" class="flex items-center space-x-2">
               <span>Pending invites</span>
               <span
-                class="
-                  bg-cherry
-                  w-auto
-                  px-1.5
-                  h-4
-                  flex
-                  items-center
-                  justify-center
-                  rounded-full
-                  text-vanilla-100 text-xs
-                "
+                class="bg-cherry w-auto px-1.5 h-4 flex items-center justify-center rounded-full text-vanilla-100 text-xs"
                 >{{ pendingInvitesCount > 9 ? '9+' : pendingInvitesCount }}</span
               >
             </div>
@@ -31,20 +21,12 @@
         </nuxt-link>
       </div>
     </div>
-    <div class="p-4 space-y-8 max-w-3xl">
+    <div class="max-w-3xl p-4 space-y-8">
       <div class="space-y-4">
         <div v-if="pageHeading" class="flex justify-between">
           <h2 class="text-lg font-medium">{{ pageHeading }}</h2>
-          <z-button size="small" buttonType="primary" icon="user-plus" @click="toggleModal(true)">
-            Invite new member
-          </z-button>
+          <invite-members-modal @inviteSuccess="inviteSuccess" />
           <portal to="modal">
-            <invite-members-modal
-              v-if="showInviteModal"
-              :showModal="showInviteModal"
-              @close="toggleModal(false)"
-              @inviteSuccess="inviteSuccess"
-            ></invite-members-modal>
             <z-modal
               v-if="showSuccessModal"
               @onClose="showSuccessModal = false"
@@ -53,7 +35,7 @@
             >
               <div class="p-4 space-y-4 border-b border-ink-200">
                 <div class="text-5xl text-center">📫</div>
-                <p class="text-xs text-vanilla-400 max-w-sm mx-auto text-center">
+                <p class="max-w-sm mx-auto text-xs text-center text-vanilla-400">
                   We've sent an email to your team members, they can create an account using the URL
                   in that email and join your team
                 </p>
@@ -67,10 +49,12 @@
   </div>
 </template>
 <script lang="ts">
+import { ZButton, ZIcon, ZModal, ZTab } from '@deepsourcelabs/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
-import TeamDetailMixin from '@/mixins/teamDetailMixin'
-import { ZTab, ZButton, ZIcon, ZModal } from '@deepsourcelabs/zeal'
+
 import { InviteMembersModal } from '@/components/Members'
+import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
+import TeamDetailMixin from '@/mixins/teamDetailMixin'
 
 @Component({
   components: {
@@ -83,12 +67,19 @@ import { InviteMembersModal } from '@/components/Members'
   middleware: ['validateProvider'],
   layout: 'dashboard'
 })
-export default class Members extends mixins(TeamDetailMixin) {
+export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   private showInviteModal = false
   private showSuccessModal = false
 
   async fetch(): Promise<void> {
-    await this.fetchInvitedMembers()
+    const { owner, provider } = this.$route.params
+    const args = { login: owner, provider }
+
+    await Promise.all([
+      this.fetchInvitedMembers(),
+      this.fetchSeatsInfo(args),
+      this.fetchInviteUrl(args)
+    ])
   }
 
   async fetchInvitedMembers(): Promise<void> {
@@ -101,13 +92,19 @@ export default class Members extends mixins(TeamDetailMixin) {
     })
   }
 
-  toggleModal(value: boolean): void {
-    this.showInviteModal = value
-  }
+  /**
+   * Handler method for the `inviteSuccess` event emitted
+   * by `InviteMembersModal`
+   *
+   * @returns {Promise<void>}
+   */
+  async inviteSuccess(): Promise<void> {
+    await this.fetchInvitedMembers()
 
-  inviteSuccess(): void {
-    this.toggleModal(false)
-    this.fetchInvitedMembers()
+    const { owner: login, provider } = this.$route.params
+    const args = { login, provider, refetch: true }
+    this.fetchSeatsInfo(args)
+
     this.showSuccessModal = true
   }
 
