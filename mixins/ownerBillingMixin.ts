@@ -123,7 +123,17 @@ export default class OwnerBillingMixin extends mixins(OwnerDetailMixin, ContextM
   get currentPlan(): Record<string, string | number> {
     if (Object.keys(this.ownerBillingInfo).length) {
       const { planSlug } = this.ownerBillingInfo
-      if (planSlug) return this.context.plans[planSlug]
+      if (planSlug) {
+        const planInfo = this.context.plans[planSlug]
+
+        // Show `Enterprise` as plan for cloud customers on manual billing
+        // plan-premium-monthly/plan-premium-annual
+        if (this.isBilledManually && planSlug.includes('premium')) {
+          return { ...planInfo, name: 'Enterprise' }
+        }
+
+        return planInfo
+      }
     }
     return {}
   }
