@@ -29,9 +29,9 @@ type AnalyzerVerifyOpts struct {
 	Spinner          *utils.SpinnerUtils
 }
 
-/* ////////////////////////////////////
+/* ======================================
  * $ deepsource analyzer verify
- * /////////////////////////////////// */
+ * ====================================== */
 
 func NewCmdAnalyzerVerify() *cobra.Command {
 	// Configuring the paths of analyzer.toml and issues directory
@@ -54,7 +54,7 @@ func NewCmdAnalyzerVerify() *cobra.Command {
 		Args:  utils.NoArgs,
 		RunE: func(_ *cobra.Command, _ []string) error {
 			if err := opts.verifyAnalyzer(); err != nil {
-				return errors.New("Analyzer verification failed. Exiting...")
+				return errors.New("Analyzer verification failed. Exiting.")
 			}
 			return nil
 		},
@@ -65,19 +65,19 @@ func NewCmdAnalyzerVerify() *cobra.Command {
 	return cmd
 }
 
-/* ////////////////////////////////////
+/* ====================================
  * Analyzer configuration verification
- * /////////////////////////////////// */
+ * ==================================== */
 
 func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	var validationErrors *[]validator.ValidationError
 	var analyzerTOMLValidationErrors *validator.ValidationError
 	configurationValid := true
 
-	/* //////////////////////////////////////////////////////////////////////////////////
+	/* ==================================================================================
 	 * Checks for the presence of .deepsource/analyzer directory,
 	 * the analyzer.toml file and issues present in .deepsource/analyzer/issues directory
-	 * /////////////////////////////////////////////////////////////////////////////////// */
+	 * ================================================================================== */
 
 	a.Spinner.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions.")
 	if err = validator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
@@ -87,12 +87,14 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	}
 	a.Spinner.StopSpinner()
 
-	/* ///////////////////////////////
+	/* ==============================
 	 * Read and verify analyzer.toml
-	 * ////////////////////////////// */
+	 * ============================== */
 
 	a.Spinner.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
 	a.AnalyzerTOMLData, analyzerTOMLValidationErrors, err = validator.ValidateAnalyzerTOML(analyzerTOMLPath)
+
+	// Check for any validation errors
 	if len(analyzerTOMLValidationErrors.Errors) > 0 {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
@@ -104,9 +106,9 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	}
 	a.Spinner.StopSpinner()
 
-	/* //////////////////////////////////////
-	 * Reads and verifies issue descriptions
-	 * ///////////////////////////////////// */
+	/* ======================================
+	 * Read and verify issue descriptions
+	 * ====================================== */
 
 	a.Spinner.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
 	if validationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
@@ -134,9 +136,9 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 		return
 	}
 
-	/* ////////////////////////////////////////////////////
+	/* ====================================================
 	 * Verify the local docker image build of the Analyzer
-	 * /////////////////////////////////////////////////// */
+	 * ==================================================== */
 
 	return a.verifyAnalyzerDockerBuild()
 }

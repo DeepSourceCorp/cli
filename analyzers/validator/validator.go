@@ -24,7 +24,7 @@ type ValidationError struct {
 	Errors []Error
 }
 
-// Receives the path of the `analyzer.toml` and issue descriptions and
+// CheckForAnalyzerConfig receives the path of the `analyzer.toml` and issue descriptions and
 // checks if they are actually present
 func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err error) {
 	// Check if `analyzer.toml` is present in `.deepsource/analyzer` folder
@@ -67,7 +67,7 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 	return
 }
 
-// Validates analyzer.toml file
+// ValidateAnalyzerTOML validates analyzer.toml file of the Analyzer
 func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *ValidationError, error) {
 	config := config.AnalyzerMetadata{}
 	analyzerTOMLValidationErrors := ValidationError{}
@@ -106,7 +106,7 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *V
 	return &config, nil, nil
 }
 
-// Validates issue description TOML files
+// ValidateIssueDescriptions validates issue description TOML files
 func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, error) {
 	validationFailed := false
 	issueValidationErrors := []ValidationError{}
