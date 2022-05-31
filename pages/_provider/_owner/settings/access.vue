@@ -14,11 +14,12 @@
             :is-loading="isSyncing"
             :disabled="isSyncing"
             icon="refresh-cw"
-            label="Manually sync access settings"
+            label="Sync manually"
             loading-label="Sync in progress..."
             button-type="secondary"
+            icon-size="x-small"
             size="small"
-            class="mt-2"
+            class="mt-2 border border-ink-200"
             @click="triggerUpdateSettings"
           />
         </template>
