@@ -59,37 +59,37 @@ export default class ControlPanelBaseMixin extends Vue {
           icon: 'file-landscape',
           title: ['License', 'License overview'],
           to: '/control-panel/license'
-        },
-        { icon: 'add-ons', title: ['License', 'Add-ons'], to: '/control-panel/license/add-ons' }
+        }
+        // { icon: 'add-ons', title: ['License', 'Add-ons'], to: '/control-panel/license/add-ons' }
       ]
     },
-    {
-      icon: 'university',
-      title: ['Enterprise overview'],
-      description: 'Get a bird-eye view of this DeepSource enterprise installation.',
-      to: '/control-panel/overview'
-    },
-    {
-      icon: 'document-layout-left',
-      title: ['Reports & Insights'],
-      description:
-        'Get in-depth reports and insights of how DeepSource is being used across your installation.',
-      to: '/control-panel/reports'
-    },
-    {
-      icon: 'cloud-data-connection',
-      title: ['Policies'],
-      description:
-        'Set and monitor global policies governing how DeepSource is used across your organization.',
-      to: '/control-panel/policies'
-    },
-    {
-      icon: 'amount-up',
-      title: ['Audit log'],
-      description:
-        'Monitor audit logs of all events across teams in your Deepsource enterprise installation.',
-      to: '/control-panel/logs'
-    },
+    // {
+    //   icon: 'university',
+    //   title: ['Enterprise overview'],
+    //   description: 'Get a bird-eye view of this DeepSource enterprise installation.',
+    //   to: '/control-panel/overview'
+    // },
+    // {
+    //   icon: 'document-layout-left',
+    //   title: ['Reports & Insights'],
+    //   description:
+    //     'Get in-depth reports and insights of how DeepSource is being used across your installation.',
+    //   to: '/control-panel/reports'
+    // },
+    // {
+    //   icon: 'cloud-data-connection',
+    //   title: ['Policies'],
+    //   description:
+    //     'Set and monitor global policies governing how DeepSource is used across your organization.',
+    //   to: '/control-panel/policies'
+    // },
+    // {
+    //   icon: 'amount-up',
+    //   title: ['Audit log'],
+    //   description:
+    //     'Monitor audit logs of all events across teams in your Deepsource enterprise installation.',
+    //   to: '/control-panel/logs'
+    // },
     {
       icon: 'hard-hat',
       title: ['Installation Management Console'],

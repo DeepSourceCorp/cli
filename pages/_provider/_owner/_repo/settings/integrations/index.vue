@@ -2,17 +2,6 @@
   <div class="p-4 space-y-4 md:max-w-2xl">
     <div class="inline-flex gap-x-2">
       <h2 class="text-lg font-medium">Integrations</h2>
-
-      <div class="inline-flex items-center">
-        <z-tag
-          bg-color="ink-200"
-          text-size="xxs"
-          spacing="px-2 py-1"
-          class="font-semibold leading-none tracking-wider text-current uppercase text-vanilla-100"
-        >
-          Beta
-        </z-tag>
-      </div>
     </div>
 
     <empty-state

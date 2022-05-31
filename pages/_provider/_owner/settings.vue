@@ -147,7 +147,6 @@ export default class TeamSettings extends mixins(
         name: 'issue-priority',
         icon: 'flag',
         label: 'Issue priority',
-        isBeta: true,
         routeName: 'provider-owner-settings-issue-priority',
         validator: this.issuePriorityAvailable
       },
@@ -155,7 +154,6 @@ export default class TeamSettings extends mixins(
         name: 'integrations',
         icon: 'list',
         label: 'Integrations',
-        isBeta: true,
         routeName: 'provider-owner-settings-integrations',
         validator: this.canViewIntegrations
       }
@@ -180,6 +178,11 @@ export default class TeamSettings extends mixins(
     return false
   }
 
+  /**
+   * Fetch hook
+   *
+   * @return {Promise<void>}
+   */
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
     const params = {
@@ -193,9 +196,9 @@ export default class TeamSettings extends mixins(
   /**
    * Mounted hook
    *
-   * @return {any}
+   * @return {void}
    */
-  mounted() {
+  mounted(): void {
     this.$nextTick(() => {
       this.setCommands()
     })
@@ -244,6 +247,9 @@ export default class TeamSettings extends mixins(
     )
   }
 
+  /**
+   * Set meta info for the settings page.
+   */
   head(): Record<string, string> {
     const { owner } = this.$route.params
     return {

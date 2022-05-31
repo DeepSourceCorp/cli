@@ -15,7 +15,7 @@
         <span v-if="!isCollapsed" class="text-sm capitalize">Enterprise control panel</span>
       </nuxt-link>
     </section>
-    <section class="p-2.5 space-y-2.5" :class="isCollapsed ? '' : 'overflow-y-scroll'">
+    <section class="p-2.5 space-y-2.5" :class="isCollapsed ? '' : 'overflow-y-auto'">
       <sidebar-item
         v-for="cpItem in mainControlPanelMenus"
         :key="getPageTitle(cpItem.title)"
