@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/deepsourcelabs/cli/analyzers/config"
+	t "github.com/deepsourcelabs/cli/types"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/archive"
@@ -84,7 +84,7 @@ func (d *DockerClient) executeImageBuild() (context.CancelFunc, io.ReadCloser, e
 }
 
 // Returns the docker image details to build
-func GetDockerImageDetails(analyzerTOMLData *config.AnalyzerMetadata) (string, string) {
+func GetDockerImageDetails(analyzerTOMLData *t.AnalyzerTOML) (string, string) {
 	var dockerFilePath, dockerFileName string
 	dockerFilePath = "Dockerfile"
 

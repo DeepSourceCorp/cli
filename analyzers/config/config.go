@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/pelletier/go-toml/v2"
 )
@@ -84,9 +85,9 @@ func VerifyAnalyzerConfigs() error {
 }
 
 // Get the analyzer.toml data
-func GetAnalyzerTOML() (*AnalyzerMetadata, error) {
+func GetAnalyzerTOML() (*types.AnalyzerTOML, error) {
 	resolveAnalyzerConfigurationPaths()
-	config := AnalyzerMetadata{}
+	config := types.AnalyzerTOML{}
 
 	// Read the contents of analyzer.toml file
 	analyzerTOMLContent, err := ioutil.ReadFile(analyzerTOMLPath)
@@ -102,16 +103,16 @@ func GetAnalyzerTOML() (*AnalyzerMetadata, error) {
 }
 
 // Get the list of issue descriptions
-func GetIssueDescriptions() (*[]AnalyzerIssue, error) {
+func GetIssueDescriptions() (*[]types.AnalyzerIssue, error) {
 	resolveAnalyzerConfigurationPaths()
-	issueDescriptions := []AnalyzerIssue{}
+	issueDescriptions := []types.AnalyzerIssue{}
 
 	issuesList, err := ioutil.ReadDir(issuesDirectoryPath)
 	if err != nil {
 		return nil, err
 	}
 	for _, issuePath := range issuesList {
-		issue := AnalyzerIssue{}
+		issue := types.AnalyzerIssue{}
 		// Set the issue shortcode as the filename
 		issue.Shortcode = strings.TrimSuffix(issuePath.Name(), ".toml")
 
