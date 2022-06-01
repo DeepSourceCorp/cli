@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/deepsourcelabs/cli/analyzers/config"
 	"github.com/deepsourcelabs/cli/analyzers/validator"
+	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 )
@@ -24,7 +24,7 @@ type AnalyzerBuild struct {
 }
 
 type AnalyzerVerifyOpts struct {
-	AnalyzerTOMLData *config.AnalyzerMetadata
+	AnalyzerTOMLData *types.AnalyzerTOML
 	Build            AnalyzerBuild
 	Spinner          *utils.SpinnerUtils
 }
@@ -95,7 +95,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	a.AnalyzerTOMLData, analyzerTOMLValidationErrors, err = validator.ValidateAnalyzerTOML(analyzerTOMLPath)
 
 	// Check for any validation errors
-	if len(analyzerTOMLValidationErrors.Errors) > 0 {
+	if analyzerTOMLValidationErrors != nil && len(analyzerTOMLValidationErrors.Errors) > 0 {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
 		for _, err := range analyzerTOMLValidationErrors.Errors {

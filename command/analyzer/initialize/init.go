@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/cobra"
 
 	"github.com/deepsourcelabs/cli/analyzers/config"
-	validator "github.com/deepsourcelabs/cli/analyzers/validator"
+	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
 )
 
@@ -26,7 +26,7 @@ type AnalyzerInitOpts struct {
 	SDKInput             SDKResponse
 	ProjectRootPath      string
 	AnalyzerTOMLPath     string
-	AnalyzerTOMLData     validator.AnalyzerMetadata
+	AnalyzerTOMLData     types.AnalyzerTOML
 	IssuesDirectoryPath  string
 	AnalyzerShortcodeArg string
 

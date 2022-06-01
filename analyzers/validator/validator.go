@@ -1,6 +1,7 @@
 package validator
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -8,7 +9,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/analyzers/config"
+	"github.com/deepsourcelabs/cli/types"
 	validate "github.com/go-playground/validator/v10"
 	"github.com/pelletier/go-toml/v2"
 )
@@ -68,8 +69,8 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 }
 
 // ValidateAnalyzerTOML validates analyzer.toml file of the Analyzer
-func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *ValidationError, error) {
-	config := config.AnalyzerMetadata{}
+func ValidateAnalyzerTOML(analyzerTOMLPath string) (*types.AnalyzerTOML, *ValidationError, error) {
+	config := types.AnalyzerTOML{}
 	analyzerTOMLValidationErrors := ValidationError{}
 
 	// Read the contents of analyzer.toml file
@@ -78,8 +79,20 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *V
 		return &config, nil, errors.New("failed to read analyzer.toml file")
 	}
 
+	d := toml.NewDecoder(bytes.NewBuffer(analyzerTOMLContent))
+	d.DisallowUnknownFields()
+
 	// Unmarshal TOML into config
-	if err = toml.Unmarshal(analyzerTOMLContent, &config); err != nil {
+	if err = d.Decode(&config); err != nil {
+		fmt.Println(config)
+		fmt.Println(err.Error())
+
+		var derr *toml.DecodeError
+		if errors.As(err, &derr) {
+			fmt.Println(derr.String())
+			row, col := derr.Position()
+			fmt.Println("error occurred at row", row, "column", col)
+		}
 		return &config, nil, err
 	}
 
@@ -118,7 +131,7 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, 
 	}
 
 	for _, issuePath := range issuesList {
-		config := AnalyzerIssue{}
+		config := types.AnalyzerIssue{}
 
 		// Set the issue shortcode as the filename
 		config.Shortcode = strings.TrimSuffix(issuePath.Name(), ".toml")
