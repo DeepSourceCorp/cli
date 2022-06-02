@@ -102,7 +102,7 @@ func checkInterrupt(err error) error {
 
 func GetSuccessMessage(msg string) string {
 	greenTickMark := ansi.Color("✔", "green")
-	return greenTickMark + " " + msg + "\n"
+	return greenTickMark + " " + msg
 }
 
 func GetFailureMessage(msg, errorMsg string) string {
@@ -110,4 +110,8 @@ func GetFailureMessage(msg, errorMsg string) string {
 		return ansi.Color("✗"+" "+msg+". "+"Error: "+errorMsg, "red")
 	}
 	return ansi.Color("✗"+" "+msg, "red")
+}
+
+func GetBulletMessage(msg, color string) string {
+	return ansi.Color("•"+" "+msg, "red")
 }

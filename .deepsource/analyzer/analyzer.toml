@@ -1,13 +1,11 @@
 name = "Armory"
 shortcode = "@deepsource/armory"
 description = "dafsdf"
-category = "doc"
 tags = "hi"
 
-[urls]
-  source = ""
-  documentation = ""
-  bug_tracker = ""
+repository = ""
+documentation = ""
+bug_tracker = ""
 
 [environment_variables]
 
@@ -15,7 +13,7 @@ tags = "hi"
   command = ""
 
 [build]
-  builder = ""
+  engine = ""
   dockerfile = ""
   script = ""
 
