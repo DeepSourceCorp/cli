@@ -70,8 +70,8 @@ func NewCmdAnalyzerVerify() *cobra.Command {
  * ==================================== */
 
 func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
-	var validationErrors *[]validator.ValidationError
-	var analyzerTOMLValidationErrors *validator.ValidationError
+	var validationErrors *[]validator.ValidationFailure
+	var analyzerTOMLValidationErrors *validator.ValidationFailure
 	configurationValid := true
 
 	/* ==================================================================================
@@ -93,22 +93,31 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 
 	a.Spinner.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
 	a.AnalyzerTOMLData, analyzerTOMLValidationErrors, err = validator.ValidateAnalyzerTOML(analyzerTOMLPath)
+	// TODO: Handle err here
+	if err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)
+		fmt.Println()
+		return err
+	}
 
 	// Check for any validation errors
 	if analyzerTOMLValidationErrors != nil && len(analyzerTOMLValidationErrors.Errors) > 0 {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
 		for _, err := range analyzerTOMLValidationErrors.Errors {
-			msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
-			failureMsg := utils.GetFailureMessage(msg, "")
-			fmt.Printf("  * %s\n", failureMsg)
+			msg := err.Message
+			if err.Field != "" {
+				msg = fmt.Sprintf("%s : %s", err.Message, err.Field)
+			}
+			failureMsg := utils.GetBulletMessage(msg, "red")
+			fmt.Printf("  %s\n", failureMsg)
 		}
 	}
 	a.Spinner.StopSpinner()
 
-	/* ======================================
+	/* ====================================
 	 * Read and verify issue descriptions
-	 * ====================================== */
+	 * ==================================== */
 
 	a.Spinner.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
 	if validationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
@@ -121,11 +130,11 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to validate the following issue descriptions\n", err)
 		for _, validationError := range *validationErrors {
-			fmt.Printf("  * %s\n", validationError.File)
+			fmt.Printf("  > %s\n", validationError.File)
 			for _, err := range validationError.Errors {
 				msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
-				failureMsg := utils.GetFailureMessage(msg, "")
-				fmt.Printf("    * %s\n", failureMsg)
+				failureMsg := utils.GetBulletMessage(msg, "red")
+				fmt.Printf("    %s\n", failureMsg)
 			}
 		}
 	}
