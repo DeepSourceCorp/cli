@@ -10,9 +10,14 @@
           ></z-breadcrumb-item
         >
         <z-breadcrumb-item isCurrent
-          ><nuxt-link :to="shortcode ? `/directory/analyzers/${shortcode}` : '#'">{{
-            infoObj.name
-          }}</nuxt-link></z-breadcrumb-item
+          ><nuxt-link
+            :to="
+              shortcode
+                ? `/directory/${isAnalyzer ? 'analyzers' : 'transformers'}/${shortcode}`
+                : '#'
+            "
+            >{{ infoObj.name }}</nuxt-link
+          ></z-breadcrumb-item
         >
       </z-breadcrumb>
     </div>

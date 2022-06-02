@@ -155,7 +155,7 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   }
 
   get transformerUrl(): string {
-    return `/directory/analyzers/${this.transformer.shortcode || this.$route.params.transformer}`
+    return `/directory/transformers/${this.transformer.shortcode || this.$route.params.transformer}`
   }
 }
 </script>
