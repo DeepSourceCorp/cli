@@ -207,25 +207,7 @@ export default {
   sitemap: {
     path: '/sitemap-bifrost.xml',
     gzip: true,
-    exclude: [
-      '/',
-      '/autofix-installation',
-      '/dashboard',
-      '/installation',
-      '/invitation',
-      '/me',
-      '/cli/auth',
-      '/discover/watchlist',
-      '/installation/providers',
-      '/onboard/bitbucket',
-      '/accounts/gitlab/login',
-      '/accounts/github/login/callback/bifrost',
-      '/accounts/github-enterprise/login/callback/bifrost',
-      '/accounts/bitbucket_oauth2/login/callback/bifrost',
-      '/accounts/gitlab/login/callback/bifrost',
-      '/health'
-    ],
-
+    exclude: ['**/*', '/'],
     routes: [
       {
         url: '/discover',
@@ -235,6 +217,16 @@ export default {
       {
         url: '/directory',
         changefreq: 'daily',
+        priority: 1
+      },
+      {
+        url: '/login',
+        changefreq: 'weekly',
+        priority: 1
+      },
+      {
+        url: '/signup',
+        changefreq: 'weekly',
         priority: 1
       }
     ]

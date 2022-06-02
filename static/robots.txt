@@ -3,3 +3,5 @@ Disallow:
 Crawl-delay: 5
 Disallow: /services
 Disallow: /lp/*
+Disallow: /callback/*
+Disallow: /control-panel/*
