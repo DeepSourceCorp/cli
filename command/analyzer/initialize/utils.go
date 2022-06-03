@@ -25,4 +25,3 @@ func fetchRemoteURL() (string, error) {
 func getSupportedSDKs() []string {
 	return []string{""}
 }
-
