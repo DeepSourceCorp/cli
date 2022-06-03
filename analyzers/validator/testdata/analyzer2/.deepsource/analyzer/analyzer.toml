@@ -4,7 +4,7 @@ description = "Finds the TODO comments in codebase."
 # category = "doc"
 tags = ["documentation","todo"]
 
-[environment_variable]
+[environment_variables]
  CODE_PATH = "/code"
 
 [urls]

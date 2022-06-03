@@ -3,7 +3,7 @@ shortcode = "deepsource/demo-python"
 description = "Finds the TODO comments in codebase."
 tags = ["documentation","todo"]
 
-[environment_variable]
+[environment_variables]
  CODE_PATH = "/code"
 
 repository = "https://github.com/deepsourcelabs/2do-checker"
