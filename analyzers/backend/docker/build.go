@@ -37,7 +37,7 @@ func (d *DockerBuildError) Error() string {
 	return d.Message
 }
 
-// Docker build API function
+// BuildAnalyzerDockerImage is the docker image build API used by various CLI commands
 func (d *DockerClient) BuildAnalyzerDockerImage() (context.CancelFunc, io.ReadCloser, *DockerBuildError) {
 	var err error
 	d.Client, err = client.NewClientWithOpts(client.FromEnv)
