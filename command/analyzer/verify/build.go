@@ -34,9 +34,9 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 		}
 	}
 
-	/* ///////////////////////////////////
+	/* ===================================
 	 * Analyzer docker build verification
-	 * /////////////////////////////////// */
+	 * =================================== */
 
 	/* Initialize the builder with the above fetched details
 	 * Use the `GenerateImageVersion` utility to generate a random string of length 7 to tag the image */

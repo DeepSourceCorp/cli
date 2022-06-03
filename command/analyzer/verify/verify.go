@@ -70,8 +70,8 @@ func NewCmdAnalyzerVerify() *cobra.Command {
  * ==================================== */
 
 func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
-	var validationErrors *[]validator.ValidationFailure
 	var analyzerTOMLValidationErrors *validator.ValidationFailure
+	var issuesValidationErrors *[]validator.ValidationFailure
 	configurationValid := true
 
 	/* ==================================================================================
@@ -79,7 +79,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	 * the analyzer.toml file and issues present in .deepsource/analyzer/issues directory
 	 * ================================================================================== */
 
-	a.Spinner.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions.")
+	a.Spinner.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions")
 	if err = validator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to locate analyzer configurations", err)
@@ -95,22 +95,18 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	a.AnalyzerTOMLData, analyzerTOMLValidationErrors, err = validator.ValidateAnalyzerTOML(analyzerTOMLPath)
 	// TODO: Handle err here
 	if err != nil {
+		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)
+		// TODO: Fix this duct-taping.
 		fmt.Println()
-		return err
 	}
 
-	// Check for any validation errors
+	// Check for validation errors in analyzer.toml and display them (if any)
 	if analyzerTOMLValidationErrors != nil && len(analyzerTOMLValidationErrors.Errors) > 0 {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
 		for _, err := range analyzerTOMLValidationErrors.Errors {
-			msg := err.Message
-			if err.Field != "" {
-				msg = fmt.Sprintf("%s : %s", err.Message, err.Field)
-			}
-			failureMsg := utils.GetBulletMessage(msg, "red")
-			fmt.Printf("  %s\n", failureMsg)
+			fmt.Printf("  %s\n", utils.GetBulletMessage(err.Message, "red"))
 		}
 	}
 	a.Spinner.StopSpinner()
@@ -120,20 +116,21 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	 * ==================================== */
 
 	a.Spinner.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
-	if validationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
+	if issuesValidationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
 		configurationValid = false
-		a.Spinner.StopSpinnerWithError("Failed to validate the following issue desriptions", err)
+		a.Spinner.StopSpinnerWithError("Failed to validate the issues", err)
+		// TODO: Fix this duct-taping.
+		fmt.Println()
 	}
 
-	// Check if there are any validation errors in issue descriptions
-	if validationErrors != nil {
+	// Check for validation errors in analyzer issues and display them (if any)
+	if issuesValidationErrors != nil && len(*issuesValidationErrors) > 0 {
 		configurationValid = false
-		a.Spinner.StopSpinnerWithError("Failed to validate the following issue descriptions\n", err)
-		for _, validationError := range *validationErrors {
+		a.Spinner.StopSpinnerWithError("Failed to validate the following issues\n", err)
+		for _, validationError := range *issuesValidationErrors {
 			fmt.Printf("  > %s\n", validationError.File)
 			for _, err := range validationError.Errors {
-				msg := fmt.Sprintf("%s : %s", err.Message, err.Field)
-				failureMsg := utils.GetBulletMessage(msg, "red")
+				failureMsg := utils.GetBulletMessage(err.Message, "red")
 				fmt.Printf("    %s\n", failureMsg)
 			}
 		}
@@ -142,7 +139,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 
 	// Do not proceed to building the image if the configuration verification fails
 	if !configurationValid {
-		return
+		return fmt.Errorf("verification failed")
 	}
 
 	/* ====================================================

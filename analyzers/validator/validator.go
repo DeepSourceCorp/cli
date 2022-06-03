@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/deepsourcelabs/cli/types"
-	validate "github.com/go-playground/validator/v10"
 	"github.com/pelletier/go-toml/v2"
 )
 
@@ -80,10 +79,11 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 	return
 }
 
-// ValidateAnalyzerTOML validates analyzer.toml file of the Analyzer
+// ValidateAnalyzerTOML receives the path of analyzer.toml and reads as well as validates it for
+// the type checks, required fields etc. Returns the analyzer.toml content and the validation failures
+// if any in the form of ValidationFailure struct.
 func ValidateAnalyzerTOML(analyzerTOMLPath string) (*types.AnalyzerTOML, *ValidationFailure, error) {
 	config := types.AnalyzerTOML{}
-	analyzerTOMLValidationErrors := ValidationFailure{}
 
 	// Read the contents of analyzer.toml file
 	analyzerTOMLContent, err := ioutil.ReadFile(analyzerTOMLPath)
@@ -99,39 +99,25 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*types.AnalyzerTOML, *Valida
 		// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#DecodeError
 		var decodeErr *toml.DecodeError
 		if errors.As(err, &decodeErr) {
-			decodeErrorResp, err := handleTOMLDecodeErrors(decodeErr)
+			decodeErrorResp := handleTOMLDecodeErrors(decodeErr, analyzerTOMLPath)
 			if decodeErrorResp != nil {
 				return nil, decodeErrorResp, err
 			}
 		}
+	}
+
+	// Validate the analyzer.toml fields for default/custom type checks, required fields
+	analyzerTOMLValidationErrors, err := validateAnalyzerTOMLFields(&config, analyzerTOMLPath)
+	if err != nil {
 		return nil, nil, err
 	}
-
-	// Validate analyzer.toml fields based on type and sanity checks
-	v := validate.New()
-	if err := v.Struct(&config); err != nil {
-		missingRequiredFields := getMissingRequiredFields(err, config)
-		analyzerTOMLValidationErrors = ValidationFailure{
-			File: analyzerTOMLPath,
-		}
-
-		// TODO: Tweak this to accomodate other error types.
-		for _, missingField := range missingRequiredFields {
-			analyzerTOMLValidationErrors.Errors = append(analyzerTOMLValidationErrors.Errors, ErrorMeta{
-				Level:   Error,
-				Field:   missingField,
-				Message: "Missing required field",
-			},
-			)
-		}
-		return &config, &analyzerTOMLValidationErrors, nil
-	}
-	return &config, nil, nil
+	return &config, &analyzerTOMLValidationErrors, nil
 }
 
-// ValidateIssueDescriptions validates issue description TOML files
+// ValidateIssueDescriptions receives the path of issues directory for reading and validating them
+// for type checks and required fields. Returns an array of ValidationFailure struct containing
+// validation errors for each issue TOML file.
 func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationFailure, error) {
-	validationFailed := false
 	issueValidationErrors := []ValidationFailure{}
 
 	// TODO: List only TOML files here
@@ -140,10 +126,11 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationFailure
 		return nil, err
 	}
 
+	// Iterate over the issues one by one, read and decode them, validate the fields and return the
+	// validation result.
 	for _, issuePath := range issuesList {
-		config := types.AnalyzerIssue{}
-
 		// Set the issue shortcode as the filename
+		config := types.AnalyzerIssue{}
 		config.Shortcode = strings.TrimSuffix(issuePath.Name(), ".toml")
 
 		// Read the contents of issue toml file
@@ -152,35 +139,28 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationFailure
 			return nil, fmt.Errorf("failed to read file: %s", filepath.Join(issuesDirectoryPath, issuePath.Name()))
 		}
 
-		// Unmarshal TOML into config
-		if err = toml.Unmarshal(issueTOMLContent, &config); err != nil {
-			return nil, err
+		// Decode the TOML content into the AnalyzerIssue struct object
+		d := toml.NewDecoder(bytes.NewBuffer(issueTOMLContent))
+		d.DisallowUnknownFields()
+		if err = d.Decode(&config); err != nil {
+			// Get the DecodeError exported by go-toml
+			// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#DecodeError
+			var decodeErr *toml.DecodeError
+			if errors.As(err, &decodeErr) {
+				decodeErrorResp := handleTOMLDecodeErrors(decodeErr, issuePath.Name())
+				if decodeErrorResp != nil {
+					// Append the error to the array created for reporting issue validation errors and return it
+					issueValidationErrors = append(issueValidationErrors, *decodeErrorResp)
+					continue
+				}
+			}
 		}
 
-		// Validate the data
-		v := validate.New()
-		if err := v.Struct(&config); err != nil {
-			validationFailed = true
-			missingRequiredFields := getMissingRequiredFields(err, config)
-			issueValidationError := ValidationFailure{
-				File: issuePath.Name(),
-			}
-
-			// TODO: Tweak this to accomodate other error types.
-			for _, missingField := range missingRequiredFields {
-				issueValidationError.Errors = append(issueValidationError.Errors, ErrorMeta{
-					Level:   Error,
-					Field:   missingField,
-					Message: "Missing required field",
-				},
-				)
-			}
-			issueValidationErrors = append(issueValidationErrors, issueValidationError)
+		// Validate the analyzer.toml fields for default/custom type checks, required fields
+		issueValidationError := validateIssueTOML(&config, issuePath.Name())
+		if issueValidationError != nil {
+			issueValidationErrors = append(issueValidationErrors, *issueValidationError)
 		}
 	}
-
-	if validationFailed {
-		return &issueValidationErrors, nil
-	}
-	return nil, nil
+	return &issueValidationErrors, nil
 }
