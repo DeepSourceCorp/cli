@@ -55,7 +55,7 @@
       <div class="grid place-content-center h-full" v-else-if="searchCandidate">
         <div class="text-center">
           <h4 class="text-vanilla-400 text-base mb-5">
-            Found no repositories matching name "{{ searchCandidate }}"
+            Found no templates matching name "{{ searchCandidate }}"
           </h4>
         </div>
       </div>
