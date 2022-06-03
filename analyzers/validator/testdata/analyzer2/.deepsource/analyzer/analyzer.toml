@@ -3,7 +3,9 @@ name = "Todo comments checker"
 description = "Finds the TODO comments in codebase."
 # category = "doc"
 tags = ["documentation","todo"]
-environment_variables = {CODE_PATH = "/code"}
+
+[environment_variable]
+ CODE_PATH = "/code"
 
 [urls]
  source = "https://github.com/deepsourcelabs/2do-checker"

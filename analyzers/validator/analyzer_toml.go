@@ -10,7 +10,7 @@ import (
 
 var supportedEngines []string = []string{"docker"}
 
-func validateAnalyzerTOMLFields(config *types.AnalyzerTOML, filePath string) (ValidationFailure, error) {
+func validateAnalyzerTOMLFields(config *types.AnalyzerTOML, filePath string) (*ValidationFailure, error) {
 	var supportedEnginesString string
 	analyzerTOMLValidationErrors := ValidationFailure{}
 
@@ -64,7 +64,10 @@ func validateAnalyzerTOMLFields(config *types.AnalyzerTOML, filePath string) (Va
 			}
 		}
 	}
-	return analyzerTOMLValidationErrors, nil
+	if len(analyzerTOMLValidationErrors.Errors) > 0 {
+		return &analyzerTOMLValidationErrors, nil
+	}
+	return nil, nil
 }
 
 // Validates if the shortcode begins with `@`

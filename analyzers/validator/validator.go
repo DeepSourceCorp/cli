@@ -111,7 +111,7 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*types.AnalyzerTOML, *Valida
 	if err != nil {
 		return nil, nil, err
 	}
-	return &config, &analyzerTOMLValidationErrors, nil
+	return &config, analyzerTOMLValidationErrors, nil
 }
 
 // ValidateIssueDescriptions receives the path of issues directory for reading and validating them
