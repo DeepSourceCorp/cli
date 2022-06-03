@@ -55,13 +55,10 @@ func TestInitAnalyzer(t *testing.T) {
 			ExpectedConfig: `name = "Python Analyzer"
 shortcode = "@deepsource/demo-python"
 description = "This is a python analyzer"
-category = ""
 tags = []
-
-[urls]
-  source = ""
-  documentation = ""
-  bug_tracker = ""
+repository = ""
+documentation = ""
+bug_tracker = ""
 
 [environment_variables]
 
@@ -69,7 +66,7 @@ tags = []
   command = ""
 
 [build]
-  builder = ""
+  engine = ""
   dockerfile = ""
   script = ""
 
@@ -86,13 +83,10 @@ tags = []
 			ExpectedConfig: `name = "Go Analyzer"
 shortcode = "@deepsource/demo-go"
 description = "This is a golang analyzer"
-category = ""
 tags = []
-
-[urls]
-  source = ""
-  documentation = ""
-  bug_tracker = ""
+repository = ""
+documentation = ""
+bug_tracker = ""
 
 [environment_variables]
 
@@ -100,7 +94,7 @@ tags = []
   command = ""
 
 [build]
-  builder = ""
+  engine = ""
   dockerfile = ""
   script = ""
 
