@@ -18,7 +18,7 @@ type Analysis struct {
 // }
 
 type Build struct {
-	Engine     string `toml:"engine" json:"engine" validate:"omitempty,engines"`
+	Engine     string `toml:"engine" json:"engine" validate:"omitempty,engine"`
 	Dockerfile string `toml:"dockerfile" json:"dockerfile,omitempty" validate:"omitempty"`
 	Script     string `toml:"script,multiline" json:"script" validate:"omitempty"`
 }
@@ -55,10 +55,10 @@ type AnalyzerTOML struct {
  * Analyzer Issue TOML Types
  * ========================= */
 
-// Analyzer issue description
+// Analyzer issue type
 type AnalyzerIssue struct {
-	Shortcode   string `validate:"omitempty,alphanum"`
-	Title       string `toml:"title" json:"title" validate:"required,alpha"`
+	Shortcode   string `validate:"omitempty"`
+	Title       string `toml:"title" json:"title" validate:"required"`
 	Description string `toml:"description" json:"description" validate:"required"`
-	Category    string `toml:"category" json:"category" validate:"required"`
+	Category    string `toml:"category" json:"category" validate:"required,category"`
 }
