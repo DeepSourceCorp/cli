@@ -26,9 +26,9 @@ type AnalyzerInitOpts struct {
 	SDKInput             SDKResponse
 	ProjectRootPath      string
 	AnalyzerTOMLPath     string
-	AnalyzerTOMLData     types.AnalyzerTOML
 	IssuesDirectoryPath  string
 	AnalyzerShortcodeArg string
+	AnalyzerTOMLData     types.AnalyzerTOML
 
 	ConfirmationPrompt    func(string, string) (bool, error)
 	SingleLineInputPrompt func(string, string, string) (string, error)
@@ -103,6 +103,42 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 		return nil, err
 	}
 
+	// Tags for the analyzer
+	msg = "Tags for the analyzer"
+	helpText = "Some keywords related to the analyzer"
+	analyzerTags, err := a.DescriptionPrompt(msg, helpText, "")
+	if err != nil {
+		return nil, err
+	}
+	// Parse tags from the user input
+	a.AnalyzerTOMLData.Tags = processAnalyzerTags(analyzerTags)
+
+	// Collect the repository of the Analyzer
+	defaultRemoteURL, err := fetchRemoteURL()
+	if err != nil || strings.HasPrefix(defaultRemoteURL, "git@") {
+		defaultRemoteURL = ""
+	}
+	msg = "The git repository URL of the Analyzer?"
+	helpText = "The remote repository URL of the Analyzer."
+	if a.AnalyzerTOMLData.Repository, err = a.SingleLineInputPrompt(msg, helpText, strings.TrimRight(defaultRemoteURL, "\n")); err != nil {
+		return nil, err
+	}
+
+	// Collect the analysis command of the Analyzer
+	msg = "The analysis command for the Analyzer"
+	helpText = "The command used to execute the Analyzer"
+	if a.AnalyzerTOMLData.Analysis.Command, err = a.SingleLineInputPrompt(msg, helpText, ""); err != nil {
+		return nil, err
+	}
+
+	// Collect the test command of the Analyzer
+	msg = "The test command for the Analyzer"
+	helpText = "The command used to run tests on the Analyzer"
+	if a.AnalyzerTOMLData.Test.Command, err = a.SingleLineInputPrompt(msg, helpText, ""); err != nil {
+		return nil, err
+	}
+
+	// Get SDKs input
 	if len(supportedSDKS) > 0 {
 		// Check if DeepSource SDK is needed or not?
 		msg = "Would you like to use DeepSource Analyzer SDK to build your Analyzer?"
@@ -149,10 +185,4 @@ func (a *AnalyzerInitOpts) writeAnalyzerTOMLConfig(buf *bytes.Buffer) (err error
 		return err
 	}
 	return
-}
-
-// Returns the list of supported SDKs
-// TODO: Send the list of supported SDKs from here once we start supporting any
-func getSupportedSDKs() []string {
-	return []string{""}
 }
