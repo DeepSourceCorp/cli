@@ -113,5 +113,5 @@ func GetFailureMessage(msg, errorMsg string) string {
 }
 
 func GetBulletMessage(msg, color string) string {
-	return ansi.Color("•"+" "+msg, "red")
+	return ansi.Color("•"+" "+msg, color)
 }
