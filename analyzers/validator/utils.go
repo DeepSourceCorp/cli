@@ -1,7 +1,9 @@
 package validator
 
 import (
+	"errors"
 	"fmt"
+	"path"
 	"reflect"
 	"strings"
 
@@ -27,15 +29,38 @@ func getMissingRequiredFields(err error, config interface{}) []string {
 }
 
 // Handle decoding errors reported by go-toml
-func handleTOMLDecodeErrors(decodeErr *toml.DecodeError, filePath string) *ValidationFailure {
+func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 	var usefulResponse, expectedType, receivedType, fieldName, decodeErrorMessage string
-	errorMessage := decodeErr.Error()
+
+	// Get the DecodeError exported by go-toml
+	// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#DecodeError
+	var decodeErr *toml.DecodeError
+	if !errors.As(err, &decodeErr) {
+		decodeErrorMessage = err.Error()
+
+		// Handle strict mode error when some alien fields are added in the user configured TOML
+		if strings.HasPrefix(err.Error(), "strict mode") {
+			decodeErrorMessage = fmt.Sprintf("failed to parse %s. Invalid fields detected.", path.Base(filePath))
+		}
+		validationError := ValidationFailure{
+			File: filePath,
+			Errors: []ErrorMeta{
+				{
+					Level:   DecodeErr,
+					Field:   "",
+					Message: decodeErrorMessage,
+				},
+			},
+		}
+		return &validationError
+	}
 
 	/* =================================================
 	 * Extract the data about the decoding failure and return
 	 * a validation failure response
 	 * ================================================= */
 
+	errorMessage := decodeErr.Error()
 	// Error case 1: `toml: cannot decode TOML integer into struct field types.AnalyzerTOML.Name of type string"`
 	if strings.HasPrefix(errorMessage, "toml: cannot decode TOML") {
 

@@ -94,16 +94,12 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*types.AnalyzerTOML, *Valida
 	// Decode the TOML into the struct
 	d := toml.NewDecoder(bytes.NewBuffer(analyzerTOMLContent))
 	d.DisallowUnknownFields()
-	if err = d.Decode(&config); err != nil {
-		// Get the DecodeError exported by go-toml
-		// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#DecodeError
-		var decodeErr *toml.DecodeError
-		if errors.As(err, &decodeErr) {
-			decodeErrorResp := handleTOMLDecodeErrors(decodeErr, analyzerTOMLPath)
-			if decodeErrorResp != nil {
-				return nil, decodeErrorResp, err
-			}
+	if err := d.Decode(&config); err != nil {
+		decodeErrorResp := handleTOMLDecodeErrors(err, analyzerTOMLPath)
+		if decodeErrorResp != nil {
+			return nil, decodeErrorResp, nil
 		}
+		return nil, nil, err
 	}
 
 	// Validate the analyzer.toml fields for default/custom type checks, required fields
@@ -143,16 +139,11 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationFailure
 		d := toml.NewDecoder(bytes.NewBuffer(issueTOMLContent))
 		d.DisallowUnknownFields()
 		if err = d.Decode(&config); err != nil {
-			// Get the DecodeError exported by go-toml
-			// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#DecodeError
-			var decodeErr *toml.DecodeError
-			if errors.As(err, &decodeErr) {
-				decodeErrorResp := handleTOMLDecodeErrors(decodeErr, issuePath.Name())
-				if decodeErrorResp != nil {
-					// Append the error to the array created for reporting issue validation errors and return it
-					issueValidationErrors = append(issueValidationErrors, *decodeErrorResp)
-					continue
-				}
+			decodeErrorResp := handleTOMLDecodeErrors(err, issuePath.Name())
+			if decodeErrorResp != nil {
+				// Append the error to the array created for reporting issue validation errors and return it
+				issueValidationErrors = append(issueValidationErrors, *decodeErrorResp)
+				continue
 			}
 		}
 
