@@ -22,11 +22,14 @@ type Options struct {
 	ExcludePatterns       []string
 	TestPatterns          []string
 	GeneratedConfig       string
+	Prompt                utils.UserInputPrompt
 }
 
 // NewCmdConfigGenerate handles the generation of DeepSource config based on user inputs
 func NewCmdConfigGenerate() *cobra.Command {
-	o := Options{}
+	o := Options{
+		Prompt: utils.UserInputPrompt{},
+	}
 
 	home, _ := os.UserHomeDir()
 	doc := heredoc.Docf(`

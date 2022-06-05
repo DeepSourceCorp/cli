@@ -10,7 +10,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
-type LogoutOptions struct{}
+type LogoutOptions struct {
+	Prompt utils.UserInputPrompt
+}
 
 // NewCmdLogout handles the logout functionality for the CLI
 func NewCmdLogout() *cobra.Command {
@@ -18,15 +20,17 @@ func NewCmdLogout() *cobra.Command {
 		Use:   "logout",
 		Short: "Logout of your active DeepSource account",
 		Args:  utils.NoArgs,
-		RunE: func(cmd *cobra.Command, args []string) error {
-			opts := LogoutOptions{}
+		RunE: func(cmd *cobra.Command, _ []string) error {
+			opts := LogoutOptions{
+				Prompt: utils.UserInputPrompt{},
+			}
 			return opts.Run()
 		},
 	}
 	return cmd
 }
 
-func (*LogoutOptions) Run() error {
+func (opts *LogoutOptions) Run() error {
 	// Fetch config
 	cfg, err := config.GetConfig()
 	if err != nil {
@@ -39,7 +43,7 @@ func (*LogoutOptions) Run() error {
 
 	// Confirm from the user if they want to logout
 	logoutConfirmationMsg := "Are you sure you want to log out of DeepSource account?"
-	response, err := utils.ConfirmFromUser(logoutConfirmationMsg, "")
+	response, err := opts.Prompt.ConfirmFromUser(logoutConfirmationMsg, "")
 	if err != nil {
 		return err
 	}
