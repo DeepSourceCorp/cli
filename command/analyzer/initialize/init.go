@@ -22,6 +22,12 @@ type SDKResponse struct {
 	SDKLanguage string
 }
 
+type InputPrompt interface {
+	ConfirmFromUser(string, string) (bool, error)
+	GetSingleLineInput(string, string, string) (string, error)
+	SelectFromOptions(string, string, []string) (string, error)
+}
+
 type AnalyzerInitOpts struct {
 	SDKInput             SDKResponse
 	ProjectRootPath      string
@@ -29,20 +35,19 @@ type AnalyzerInitOpts struct {
 	IssuesDirectoryPath  string
 	AnalyzerShortcodeArg string
 	AnalyzerTOMLData     types.AnalyzerTOML
-
-	ConfirmationPrompt    func(string, string) (bool, error)
-	SingleLineInputPrompt func(string, string, string) (string, error)
-	DescriptionPrompt     func(string, string, string) (string, error)
-	SingleOptionPrompt    func(string, string, []string) (string, error)
+	PromptUtils          InputPrompt
 }
 
+/* =============================================================
+ * $ deepsource analyzer init
+ *
+ * Helps in initializing the config for a new DeepSource Analyzer
+ * ============================================================== */
 func NewCmdAnalyzerInit() *cobra.Command {
 	cwd, _ := os.Getwd()
+
 	opts := AnalyzerInitOpts{
-		SingleLineInputPrompt: utils.GetSingleLineInput,
-		DescriptionPrompt:     utils.GetSingleLineInput,
-		ConfirmationPrompt:    utils.ConfirmFromUser,
-		SingleOptionPrompt:    utils.SelectFromOptions,
+		PromptUtils: utils.UserInputPrompt{},
 	}
 
 	// Fetch the project root path and analyzer.toml path
@@ -69,18 +74,18 @@ func NewCmdAnalyzerInit() *cobra.Command {
 			if err = opts.writeAnalyzerTOMLConfig(analysisConfigBytes); err != nil {
 				return fmt.Errorf("Analyzer initialization failed. Error: %s", err)
 			}
-			pterm.Success.Printf("Analyzer %s set up successfully!\n", opts.AnalyzerTOMLData.Shortcode)
+			pterm.Success.Printf("Analyzer %s initialized successfully!\n", opts.AnalyzerTOMLData.Shortcode)
 			return nil
 		},
 	}
 	return cmd
 }
 
-// Initialize the Analyzer
+// initAnalyzer helps the Analyzer authors initialize a new Analyzer
+// in an interactive way with the help of suitable prompts
 func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	var err error
 	var msg, helpText string
-	supportedSDKS := getSupportedSDKs()
 
 	pterm.Info.Printf("Initializing analyzer %s...\n", a.AnalyzerShortcodeArg)
 	a.AnalyzerTOMLData.Shortcode = strings.ToLower(a.AnalyzerShortcodeArg)
@@ -90,23 +95,23 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	defaultAnalyzerName := strings.Title(strings.SplitAfter(a.AnalyzerTOMLData.Shortcode, "/")[1]) // skipcq: SCC-SA1019
 
 	// Collect name of the Analyzer
-	msg = "Please enter the name of the Analyzer?"
-	helpText = "The name of the Analyzer."
-	if a.AnalyzerTOMLData.Name, err = a.SingleLineInputPrompt(msg, helpText, defaultAnalyzerName); err != nil {
+	msg = "Display name of the Analyzer"
+	helpText = "The name of the Analyzer which shall be displayed on the dashboard."
+	if a.AnalyzerTOMLData.Name, err = a.PromptUtils.GetSingleLineInput(msg, helpText, defaultAnalyzerName); err != nil {
 		return nil, err
 	}
 
 	// Collect description of the Analyzer
-	msg = "Description of the Analyzer?"
-	helpText = "What does the Analyzer do?"
-	if a.AnalyzerTOMLData.Description, err = a.DescriptionPrompt(msg, helpText, ""); err != nil {
+	msg = "Description of the Analyzer"
+	helpText = "A brief description about the utilities and traits of the Analyzer."
+	if a.AnalyzerTOMLData.Description, err = a.PromptUtils.GetSingleLineInput(msg, helpText, ""); err != nil {
 		return nil, err
 	}
 
 	// Tags for the analyzer
-	msg = "Tags for the analyzer"
-	helpText = "Some keywords related to the analyzer"
-	analyzerTags, err := a.DescriptionPrompt(msg, helpText, "")
+	msg = "Tags for the Analyzer (comma or space separated)"
+	helpText = "Some keywords related to the Analyzer. Use commas/spaces to separate the keywords."
+	analyzerTags, err := a.PromptUtils.GetSingleLineInput(msg, helpText, "")
 	if err != nil {
 		return nil, err
 	}
@@ -115,42 +120,43 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 
 	// Collect the repository of the Analyzer
 	defaultRemoteURL, err := fetchRemoteURL()
-	if err != nil || strings.HasPrefix(defaultRemoteURL, "git@") {
+	if err != nil {
 		defaultRemoteURL = ""
 	}
-	msg = "The git repository URL of the Analyzer?"
+	msg = "Git repository URL of the Analyzer?"
 	helpText = "The remote repository URL of the Analyzer."
-	if a.AnalyzerTOMLData.Repository, err = a.SingleLineInputPrompt(msg, helpText, strings.TrimRight(defaultRemoteURL, "\n")); err != nil {
+	if a.AnalyzerTOMLData.Repository, err = a.PromptUtils.GetSingleLineInput(msg, helpText, strings.TrimRight(defaultRemoteURL, "\n")); err != nil {
 		return nil, err
 	}
 
 	// Collect the analysis command of the Analyzer
-	msg = "The analysis command for the Analyzer"
+	msg = "Analysis command for the Analyzer"
 	helpText = "The command used to execute the Analyzer"
-	if a.AnalyzerTOMLData.Analysis.Command, err = a.SingleLineInputPrompt(msg, helpText, ""); err != nil {
+	if a.AnalyzerTOMLData.Analysis.Command, err = a.PromptUtils.GetSingleLineInput(msg, helpText, ""); err != nil {
 		return nil, err
 	}
 
 	// Collect the test command of the Analyzer
-	msg = "The test command for the Analyzer"
+	msg = "Test command for the Analyzer"
 	helpText = "The command used to run tests on the Analyzer"
-	if a.AnalyzerTOMLData.Test.Command, err = a.SingleLineInputPrompt(msg, helpText, ""); err != nil {
+	if a.AnalyzerTOMLData.Test.Command, err = a.PromptUtils.GetSingleLineInput(msg, helpText, ""); err != nil {
 		return nil, err
 	}
 
 	// Get SDKs input
+	supportedSDKS := getSupportedSDKs()
 	if len(supportedSDKS) > 0 {
 		// Check if DeepSource SDK is needed or not?
 		msg = "Would you like to use DeepSource Analyzer SDK to build your Analyzer?"
 		helpText = "DeepSource SDKs help you to easily create an Analyzer"
-		if a.SDKInput.SDKRequired, err = a.ConfirmationPrompt(msg, helpText); err != nil {
+		if a.SDKInput.SDKRequired, err = a.PromptUtils.ConfirmFromUser(msg, helpText); err != nil {
 			return nil, err
 		}
 
 		if a.SDKInput.SDKRequired {
 			msg = "Which language do you want the SDK for:"
 			helpText = "Choose the language for which the SDK will be generated"
-			if a.SDKInput.SDKLanguage, err = a.SingleOptionPrompt(msg, helpText, supportedSDKS); err != nil {
+			if a.SDKInput.SDKLanguage, err = a.PromptUtils.SelectFromOptions(msg, helpText, supportedSDKS); err != nil {
 				return nil, err
 			}
 		}
