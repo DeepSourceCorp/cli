@@ -19,7 +19,7 @@ type MockInputPrompt struct {
 	ExpectedConfig      string
 }
 
-func (m MockInputPrompt) GetSingleLineInput(msg, helpText, defaultValue string) (string, error) {
+func (m MockInputPrompt) GetSingleLineInput(msg, _, _ string) (string, error) {
 	if strings.Contains(msg, "Display name") {
 		return m.AnalyzerName, nil
 	}
@@ -41,11 +41,11 @@ func (m MockInputPrompt) GetSingleLineInput(msg, helpText, defaultValue string) 
 	return "", nil
 }
 
-func (m MockInputPrompt) ConfirmFromUser(msg, helpText string) (bool, error) {
+func (m MockInputPrompt) ConfirmFromUser(_, _ string) (bool, error) {
 	return m.SDKRequired, nil
 }
 
-func (m MockInputPrompt) SelectFromOptions(msg, helpText string, opts []string) (string, error) {
+func (m MockInputPrompt) SelectFromOptions(_, _ string, _ []string) (string, error) {
 	return m.SDKLanguage, nil
 }
 
