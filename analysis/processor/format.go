@@ -3,14 +3,14 @@ package processor
 import "github.com/deepsourcelabs/cli/types"
 
 /* Converts the LSP based analysis results into the default format supported by DeepSource */
-func (*ProcessAnalysisResults) formatLSPResultsToDefault(analysisResult types.AnalysisResult) types.DefaultAnalysisResult {
+func (p *ProcessAnalysisResults) formatLSPResultsToDefault() {
 	defaultAnalysisResult := types.DefaultAnalysisResult{
-		Metrics:   analysisResult.Metrics,
-		IsPassed:  analysisResult.IsPassed,
-		Errors:    analysisResult.Errors,
-		ExtraData: analysisResult.ExtraData,
+		Metrics:   p.AnalysisResult.Metrics,
+		IsPassed:  p.AnalysisResult.IsPassed,
+		Errors:    p.AnalysisResult.Errors,
+		ExtraData: p.AnalysisResult.ExtraData,
 	}
-	for _, issue := range analysisResult.Issues {
+	for _, issue := range p.AnalysisResult.Issues {
 		analysisIssue := types.Issue{
 			Code:  issue.Code,
 			Title: issue.Message,
@@ -30,5 +30,5 @@ func (*ProcessAnalysisResults) formatLSPResultsToDefault(analysisResult types.An
 		}
 		defaultAnalysisResult.Issues = append(defaultAnalysisResult.Issues, analysisIssue)
 	}
-	return defaultAnalysisResult
+	p.DefaultAnalysisResult = defaultAnalysisResult
 }
