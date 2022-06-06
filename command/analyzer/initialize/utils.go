@@ -27,7 +27,6 @@ func delete_empty(s []string) []string {
 
 func fetchRemoteURL() (string, error) {
 	var remoteRepoURL string
-	fmt.Println("here")
 
 	// TODO: Add support for fetching URLs for other remotes here as well
 	remoteURL, err := exec.Command("git", "config", "--get", "remote.origin.url").Output()

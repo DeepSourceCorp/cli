@@ -51,11 +51,17 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	ctxCancelFunc, buildRespReader, buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
 
 	// Cancel the build context and close the reader before exiting this function
-	defer buildRespReader.Close()
-	defer ctxCancelFunc()
+	if buildRespReader != nil {
+		defer buildRespReader.Close()
+	}
+	if ctxCancelFunc != nil {
+		defer ctxCancelFunc()
+	}
 
 	if buildErr != nil {
 		a.handleBuildError(buildErr)
+		// TODO: Handle this duct taping
+		fmt.Println()
 		return buildErr
 	}
 
@@ -77,7 +83,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 // Utility to handle the output in case of build errors for different modes
 func (a *AnalyzerVerifyOpts) handleBuildError(buildError error) {
 	if a.Build.VerboseMode {
-		fmt.Println(utils.GetFailureMessage("Failed to build the image", buildError.Error()))
+		fmt.Printf("%s\n", utils.GetFailureMessage("Failed to build the image", buildError.Error()))
 		return
 	}
 	a.Spinner.StopSpinnerWithError("Failed to build the image", fmt.Errorf(buildError.Error()))
