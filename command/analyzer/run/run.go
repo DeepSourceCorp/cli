@@ -66,7 +66,6 @@ func NewCmdAnalyzerRun() *cobra.Command {
 
 // Run the Analyzer locally on a certain directory or repository
 func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
-	// runtime.Breakpoint()
 	err = a.createDockerClient()
 	if err != nil {
 		return err
@@ -98,8 +97,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	// Resolve the path of source code to be analyzed based on the user input
-	a.Client.AnalysisOpts.HostCodePath, err = a.resolveAnalysisCodePath()
-	if err != nil {
+	if a.Client.AnalysisOpts.HostCodePath, err = a.resolveAnalysisCodePath(); err != nil {
 		return err
 	}
 
@@ -127,5 +125,13 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	// Write the analysis results to the file
-	return a.writeAnalysisResults(analysisResultBuf, analysisResultFileName)
+	if err = a.writeAnalysisResults(analysisResultBuf, analysisResultFileName); err != nil {
+		return err
+	}
+
+	// Process the analysis results once the results are received.
+	if err = a.processAnalysisReport(); err != nil {
+		return err
+	}
+	return nil
 }

@@ -96,9 +96,3 @@ func (r *AnalysisRun) ConfigureAnalysis() (*AnalysisConfig, error) {
 	// Format the analysis config data into LSP format of analysis_config.json
 	return r.formatAnalysisConfigToLSP(), nil
 }
-
-/* Formats the LSP based result to the default DeepSource format
- * Not used as of now but keeping it here for future */
-func (r *AnalysisRun) FormatLSPResultToDefault(analysisResult *AnalysisResult) *DefaultAnalysisResult {
-	return r.formatLSPResultsToDefault(analysisResult)
-}
