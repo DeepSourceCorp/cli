@@ -61,7 +61,7 @@
       </div>
       <div class="grid place-content-center h-full" v-else-if="!$fetchState.pending">
         <div class="text-center">
-          <h4 class="text-vanilla-300 text-base">No AutoOnbard templates found.</h4>
+          <h4 class="text-vanilla-300 text-base">No Auto Onboard templates found.</h4>
           <p class="text-vanilla-400 text-sm mb-5">
             You can create new templates in the Auto Onboard settings.
           </p>
