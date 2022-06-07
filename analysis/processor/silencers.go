@@ -83,7 +83,7 @@ func generateRegExp(fileExt string) regexp.Regexp {
 	return regex
 }
 
-func generateSilencersRegexMap() error {
+func generateSilencersRegexMap() {
 	langMeta := make(map[string]LanguageMeta)
 	silencerRegexMap := make(map[string]regexp.Regexp)
 
@@ -99,5 +99,4 @@ func generateSilencersRegexMap() error {
 		silencerRegexMap[ext] = generateRegExp(ext)
 	}
 	regexMap = silencerRegexMap
-	return nil
 }

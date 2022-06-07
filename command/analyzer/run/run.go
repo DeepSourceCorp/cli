@@ -130,7 +130,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	// Process the analysis results once the results are received.
-	if err = a.processAnalysisReport(); err != nil {
+	if err = a.processAnalysisReport(analysisResultBuf); err != nil {
 		return err
 	}
 	return nil
