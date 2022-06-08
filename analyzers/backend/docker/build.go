@@ -84,7 +84,7 @@ func (d *DockerClient) executeImageBuild() (context.CancelFunc, io.ReadCloser, e
 }
 
 // Returns the docker image details to build
-func GetDockerImageDetails(analyzerTOMLData *t.AnalyzerTOML) (string, string) {
+func GetDockerImageDetails(analyzerTOMLData *cliTypes.AnalyzerTOML) (string, string) {
 	var dockerFilePath, dockerFileName string
 	dockerFilePath = "Dockerfile"
 
