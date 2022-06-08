@@ -54,7 +54,8 @@ func ResolveRemote(repoArg string) (*RemoteData, error) {
 		promptOpts = append(promptOpts, value[3])
 	}
 
-	selectedRemote, err := SelectFromOptions("Please select the repository:", "", promptOpts)
+	prompt := UserInputPrompt{}
+	selectedRemote, err := prompt.SelectFromOptions("Please select the repository:", "", promptOpts)
 	if err != nil {
 		return nil, err
 	}

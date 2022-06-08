@@ -26,7 +26,7 @@ func (o *Options) collectAnalyzerInput() (err error) {
 	analyzerPromptMsg := "Which languages/tools does your project use?"
 	analyzerPromptHelpText := "Analyzers will find issues in your code. Add an analyzer by selecting a language you've written your code in."
 
-	o.ActivatedAnalyzers, err = utils.SelectFromMultipleOptions(analyzerPromptMsg, analyzerPromptHelpText, utils.AnalyzersData.AnalyzerNames)
+	o.ActivatedAnalyzers, err = o.Prompt.SelectFromMultipleOptions(analyzerPromptMsg, analyzerPromptHelpText, utils.AnalyzersData.AnalyzerNames)
 	if err != nil {
 		return err
 	}
@@ -60,7 +60,7 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 			switch metaFields[i].Type {
 			case "boolean":
 				metaFields[i].UserInput = "true"
-				res, err := utils.ConfirmFromUser(metaFields[i].Title, metaFields[i].Description)
+				res, err := o.Prompt.ConfirmFromUser(metaFields[i].Title, metaFields[i].Description)
 				if err != nil {
 					return err
 				}
@@ -68,12 +68,12 @@ func (o *Options) inputAnalyzerMeta(requiredFieldsData map[string][]AnalyzerMeta
 					metaFields[i].UserInput = "false"
 				}
 			case "enum":
-				metaFields[i].UserInput, err = utils.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
+				metaFields[i].UserInput, err = o.Prompt.SelectFromOptions(metaFields[i].Title, metaFields[i].Description, metaFields[i].Options)
 				if err != nil {
 					return err
 				}
 			default:
-				metaFields[i].UserInput, err = utils.GetSingleLineInput(metaFields[i].Title, metaFields[i].Description, "")
+				metaFields[i].UserInput, err = o.Prompt.GetSingleLineInput(metaFields[i].Title, metaFields[i].Description, "")
 				if err != nil {
 					return err
 				}

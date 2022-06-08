@@ -1,6 +1,7 @@
 package validator
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -8,48 +9,59 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/deepsourcelabs/cli/analyzers/config"
-	validate "github.com/go-playground/validator/v10"
+	"github.com/deepsourcelabs/cli/types"
 	"github.com/pelletier/go-toml/v2"
 )
 
-type Error struct {
-	Type    string
+/* ==================================================
+ * Types used to report validation failure error data
+ * ================================================== */
+type ErrLevel int
+
+const (
+	DecodeErr ErrLevel = iota
+	Error
+	Warning
+	Information
+)
+
+type ErrorMeta struct {
+	Level   ErrLevel
 	Field   string
 	Message string
 }
 
-type ValidationError struct {
+type ValidationFailure struct {
 	File   string
-	Errors []Error
+	Errors []ErrorMeta
 }
 
-// Receives the path of the `analyzer.toml` and issue descriptions and
+// CheckForAnalyzerConfig receives the path of the `analyzer.toml` and issue descriptions and
 // checks if they are actually present
 func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err error) {
 	// Check if `analyzer.toml` is present in `.deepsource/analyzer` folder
 	if _, err := os.Stat(analyzerTOMLPath); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			return errors.New("the analyzer.toml file doesn't exist\n")
+			return errors.New("the analyzer.toml file doesn't exist")
 		}
 	}
 
 	// Check if `issues/` directory is present in `.deepsource/analyzer` folder and is not empty.
 	if _, err := os.Stat(issuesDirectoryPath); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			return errors.New("the issue descriptions directory doesn't exist\n")
+			return errors.New("the issue descriptions directory doesn't exist")
 		}
 	}
 
 	// Check if there are any toml files in the `issues/` directory
 	files, err := ioutil.ReadDir(issuesDirectoryPath)
 	if err != nil {
-		return fmt.Errorf("failed to read the files present in the issues directory at %s\n", issuesDirectoryPath)
+		return fmt.Errorf("failed to read the files present in the issues directory at %s", issuesDirectoryPath)
 	}
 
 	// Check if its an empty directory
 	if len(files) < 1 {
-		return fmt.Errorf("found 0 issues configured in the issues directory at %s\n", issuesDirectoryPath)
+		return fmt.Errorf("found 0 issues configured in the issues directory at %s", issuesDirectoryPath)
 	}
 
 	tomlPresent := false
@@ -61,55 +73,48 @@ func CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirectoryPath string) (err e
 		}
 	}
 	if !tomlPresent {
-		return fmt.Errorf("found no toml files in the issues directory at %s\n", issuesDirectoryPath)
+		return fmt.Errorf("found no toml files in the issues directory at %s", issuesDirectoryPath)
 	}
 
 	return
 }
 
-// Validates analyzer.toml file
-func ValidateAnalyzerTOML(analyzerTOMLPath string) (*config.AnalyzerMetadata, *ValidationError, error) {
-	config := config.AnalyzerMetadata{}
-	analyzerTOMLValidationErrors := ValidationError{}
+// ValidateAnalyzerTOML receives the path of analyzer.toml and reads as well as validates it for
+// the type checks, required fields etc. Returns the analyzer.toml content and the validation failures
+// if any in the form of ValidationFailure struct.
+func ValidateAnalyzerTOML(analyzerTOMLPath string) (*types.AnalyzerTOML, *ValidationFailure, error) {
+	config := types.AnalyzerTOML{}
 
 	// Read the contents of analyzer.toml file
 	analyzerTOMLContent, err := ioutil.ReadFile(analyzerTOMLPath)
 	if err != nil {
-		return &config, nil, errors.New("failed to read analyzer.toml file")
+		return nil, nil, errors.New("failed to read analyzer.toml file")
 	}
 
-	// Unmarshal TOML into config
-	if err = toml.Unmarshal(analyzerTOMLContent, &config); err != nil {
-		return &config, nil, err
-	}
-
-	// Validate analyzer.toml fields based on type and sanity checks
-	v := validate.New()
-	if err := v.Struct(&config); err != nil {
-		missingRequiredFields := getMissingRequiredFields(err, config)
-		analyzerTOMLValidationErrors = ValidationError{
-			File: analyzerTOMLPath,
+	// Decode the TOML into the struct
+	d := toml.NewDecoder(bytes.NewBuffer(analyzerTOMLContent))
+	d.DisallowUnknownFields()
+	if err := d.Decode(&config); err != nil {
+		decodeErrorResp := handleTOMLDecodeErrors(err, analyzerTOMLPath)
+		if decodeErrorResp != nil {
+			return nil, decodeErrorResp, nil
 		}
-
-		// TODO: Tweak this to accomodate other error types.
-		for _, missingField := range missingRequiredFields {
-			analyzerTOMLValidationErrors.Errors = append(analyzerTOMLValidationErrors.Errors, Error{
-				Type:    "ERROR",
-				Field:   missingField,
-				Message: "Missing required field",
-			},
-			)
-		}
-		return &config, &analyzerTOMLValidationErrors, nil
+		return nil, nil, err
 	}
 
-	return &config, nil, nil
+	// Validate the analyzer.toml fields for default/custom type checks, required fields
+	analyzerTOMLValidationErrors, err := validateAnalyzerTOMLFields(&config, analyzerTOMLPath)
+	if err != nil {
+		return nil, nil, err
+	}
+	return &config, analyzerTOMLValidationErrors, nil
 }
 
-// Validates issue description TOML files
-func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, error) {
-	validationFailed := false
-	issueValidationErrors := []ValidationError{}
+// ValidateIssueDescriptions receives the path of issues directory for reading and validating them
+// for type checks and required fields. Returns an array of ValidationFailure struct containing
+// validation errors for each issue TOML file.
+func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationFailure, error) {
+	issueValidationErrors := []ValidationFailure{}
 
 	// TODO: List only TOML files here
 	issuesList, err := ioutil.ReadDir(issuesDirectoryPath)
@@ -117,10 +122,11 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, 
 		return nil, err
 	}
 
+	// Iterate over the issues one by one, read and decode them, validate the fields and return the
+	// validation result.
 	for _, issuePath := range issuesList {
-		config := AnalyzerIssue{}
-
 		// Set the issue shortcode as the filename
+		config := types.AnalyzerIssue{}
 		config.Shortcode = strings.TrimSuffix(issuePath.Name(), ".toml")
 
 		// Read the contents of issue toml file
@@ -129,35 +135,23 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationError, 
 			return nil, fmt.Errorf("failed to read file: %s", filepath.Join(issuesDirectoryPath, issuePath.Name()))
 		}
 
-		// Unmarshal TOML into config
-		if err = toml.Unmarshal(issueTOMLContent, &config); err != nil {
-			return nil, err
+		// Decode the TOML content into the AnalyzerIssue struct object
+		d := toml.NewDecoder(bytes.NewBuffer(issueTOMLContent))
+		d.DisallowUnknownFields()
+		if err = d.Decode(&config); err != nil {
+			decodeErrorResp := handleTOMLDecodeErrors(err, issuePath.Name())
+			if decodeErrorResp != nil {
+				// Append the error to the array created for reporting issue validation errors and return it
+				issueValidationErrors = append(issueValidationErrors, *decodeErrorResp)
+				continue
+			}
 		}
 
-		// Validate the data
-		v := validate.New()
-		if err := v.Struct(&config); err != nil {
-			validationFailed = true
-			missingRequiredFields := getMissingRequiredFields(err, config)
-			issueValidationError := ValidationError{
-				File: issuePath.Name(),
-			}
-
-			// TODO: Tweak this to accomodate other error types.
-			for _, missingField := range missingRequiredFields {
-				issueValidationError.Errors = append(issueValidationError.Errors, Error{
-					Type:    "ERROR",
-					Field:   missingField,
-					Message: "Missing required field",
-				},
-				)
-			}
-			issueValidationErrors = append(issueValidationErrors, issueValidationError)
+		// Validate the analyzer.toml fields for default/custom type checks, required fields
+		issueValidationError := validateIssueTOML(&config, issuePath.Name())
+		if issueValidationError != nil {
+			issueValidationErrors = append(issueValidationErrors, *issueValidationError)
 		}
 	}
-
-	if validationFailed {
-		return &issueValidationErrors, nil
-	}
-	return nil, nil
+	return &issueValidationErrors, nil
 }
