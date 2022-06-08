@@ -47,7 +47,7 @@ export async function refetchStatus(): Promise<void> {
     })
 
     const data = await statuspageSummary.json()
-    scheduled_maintenances.push(data.scheduled_maintenances)
+    scheduled_maintenances.push(...data.scheduled_maintenances)
   } catch (e) {
     return
   }
