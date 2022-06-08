@@ -2,18 +2,21 @@ package utils
 
 import (
 	"errors"
+	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/mgutz/ansi"
 )
 
+type UserInputPrompt struct{}
+
 // ==========
 // Useful APIs of survey library
 // ==========
 
 // Used for (Yes/No) questions
-func ConfirmFromUser(msg, helpText string) (bool, error) {
+func (UserInputPrompt) ConfirmFromUser(msg, helpText string) (bool, error) {
 	response := false
 	confirmPrompt := &survey.Confirm{
 		Renderer: survey.Renderer{},
@@ -33,7 +36,7 @@ func ConfirmFromUser(msg, helpText string) (bool, error) {
 // > * 1
 //   * 2
 //   * 3
-func SelectFromOptions(msg, helpText string, opts []string) (string, error) {
+func (UserInputPrompt) SelectFromOptions(msg, helpText string, opts []string) (string, error) {
 	var result string
 	prompt := &survey.Select{
 		Renderer: survey.Renderer{},
@@ -46,12 +49,12 @@ func SelectFromOptions(msg, helpText string, opts []string) (string, error) {
 	if err != nil {
 		return "", checkInterrupt(err)
 	}
-	return result, nil
+	return strings.TrimSpace(result), nil
 }
 
 // Used for Single Line Text Input
 // Being used for getting "Import root" of user for configuring meta of Go analyzer
-func GetSingleLineInput(msg, helpText, defaultValue string) (string, error) {
+func (UserInputPrompt) GetSingleLineInput(msg, helpText, defaultValue string) (string, error) {
 	response := ""
 	prompt := &survey.Input{
 		Renderer: survey.Renderer{},
@@ -64,7 +67,7 @@ func GetSingleLineInput(msg, helpText, defaultValue string) (string, error) {
 	if err != nil {
 		return "", checkInterrupt(err)
 	}
-	return response, nil
+	return strings.TrimSpace(response), nil
 }
 
 // Used for multiple inputs from the displayed options
@@ -75,7 +78,7 @@ func GetSingleLineInput(msg, helpText, defaultValue string) (string, error) {
 //   [ ]  Test Coverage
 //   [ ]  Python
 //   [ ]  Go
-func SelectFromMultipleOptions(msg, helpText string, options []string) ([]string, error) {
+func (UserInputPrompt) SelectFromMultipleOptions(msg, helpText string, options []string) ([]string, error) {
 	response := make([]string, 0)
 	// Extracting languages and tools being used in the project for Analyzers
 	analyzerPrompt := &survey.MultiSelect{
