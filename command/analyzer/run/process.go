@@ -13,8 +13,8 @@ func (a *AnalyzerDryRun) processAnalysisReport(reportBytes []byte) error {
 	report := types.AnalysisReport{}
 	// Convert the analysis result from the LSP based format to the default DeepSource format
 	processor := processor.ProcessAnalysisResults{
-		CodePath: a.SourcePath,
-        Processors: []string{"skip_cq", "source_code_load"},
+		CodePath:   a.SourcePath,
+		Processors: []string{"skip_cq", "source_code_load"},
 	}
 
 	if err := json.Unmarshal(reportBytes, &report); err != nil {
