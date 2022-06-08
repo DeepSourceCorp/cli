@@ -225,9 +225,3 @@ func (a *AnalyzerInitOpts) writeAnalyzerTOMLConfig(buf *bytes.Buffer) (err error
 	}
 	return
 }
-
-// validateNamespace performs basic validation for namespace and checks if it begins
-// with `@`
-func validateNamespace(namespace string) bool {
-	return strings.HasPrefix(namespace, "@")
-}
