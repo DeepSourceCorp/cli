@@ -29,6 +29,11 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	 * Check for the presence of `build.Dockerfile` or if not a `Dockerfile` in the current working directory */
 	if _, err := os.Stat(a.Build.DockerFilePath); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
+			if a.Build.VerboseMode {
+				msg := utils.GetFailureMessage("Failed to build the image", fmt.Sprintf("%s not found", a.Build.DockerFilePath))
+				fmt.Println(msg)
+				return fmt.Errorf(msg)
+			}
 			a.Spinner.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found", a.Build.DockerFilePath))
 			return err
 		}
@@ -71,7 +76,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 
 	// In case of verbose mode, no need to stop the spinner
 	if a.Build.VerboseMode {
-		fmt.Print(utils.GetSuccessMessage("Successfully built the Analyzer image"))
+		fmt.Print(utils.GetSuccessMessage("Successfully built the Analyzer image\n"))
 		return nil
 	}
 	a.Spinner.StopSpinner()
