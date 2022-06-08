@@ -19,7 +19,7 @@ import (
 type ErrLevel int
 
 const (
-	DecodeErr   ErrLevel = iota
+	DecodeErr ErrLevel = iota
 	Error
 	Warning
 	Information
