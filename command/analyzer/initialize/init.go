@@ -29,6 +29,7 @@ type InputPrompt interface {
 }
 
 type AnalyzerInitOpts struct {
+	Namespace            string
 	SDKInput             SDKResponse
 	ProjectRootPath      string
 	AnalyzerTOMLPath     string
@@ -47,7 +48,8 @@ func NewCmdAnalyzerInit() *cobra.Command {
 	cwd, _ := os.Getwd()
 
 	opts := AnalyzerInitOpts{
-		PromptUtils: utils.UserInputPrompt{},
+		PromptUtils:          utils.UserInputPrompt{},
+		AnalyzerShortcodeArg: "",
 	}
 
 	// Fetch the project root path and analyzer.toml path
@@ -56,17 +58,23 @@ func NewCmdAnalyzerInit() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "init",
 		Short: "Initialize DeepSource Analyzer",
-		Args:  utils.ExactArgs(1),
+		Args:  utils.MaxNArgs(1),
 		RunE: func(_ *cobra.Command, args []string) error {
-			// Check if the analyzer.toml already exists. If yes, display that the analyzer already initialized at `.deepsource/analyzer/analyzer.toml`
+			// Check if the analyzer.toml already exists.
+			// If yes, display that the analyzer already initialized at `.deepsource/analyzer/analyzer.toml`
 			if _, err := os.Stat(opts.AnalyzerTOMLPath); err == nil {
 				pterm.Info.Printf("Analyzer already initialized at %s. Exiting...\n", strings.TrimPrefix(opts.AnalyzerTOMLPath, cwd+"/"))
 				return nil
 			}
 
+			// Check for the shortcode argument (if any)
 			if len(args) > 0 {
 				opts.AnalyzerShortcodeArg = args[0]
+				if !strings.HasPrefix(opts.AnalyzerShortcodeArg, "@") {
+					opts.AnalyzerShortcodeArg = strings.ToLower("@" + opts.AnalyzerShortcodeArg)
+				}
 			}
+
 			analysisConfigBytes, err := opts.initAnalyzer()
 			if err != nil {
 				return fmt.Errorf("Analyzer initialization failed. Error: %s", err)
@@ -87,6 +95,32 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	var err error
 	var msg, helpText string
 
+	if a.AnalyzerShortcodeArg == "" {
+		// Input namespace which the Analyzer will belong to.
+		// TODO(SNT): Change this to use a public API to show a list of namespaces the user has access to.
+		msg = "Namespace"
+		helpText = "The namespace to which the Analyzer will be associated."
+		if a.Namespace, err = a.PromptUtils.GetSingleLineInput(msg, helpText, ""); err != nil {
+			return nil, err
+		}
+		// Check for empty namespace and return error
+		if a.Namespace == "" {
+			return nil, fmt.Errorf("namespace cannot be empty")
+		}
+
+		// Input shortcode of the Analyzer
+		msg = "Analyzer shortcode"
+		helpText = "Shortcode of the Analyzer. This is to be used to access the Analyzer."
+		if a.AnalyzerTOMLData.Shortcode, err = a.PromptUtils.GetSingleLineInput(msg, helpText, ""); err != nil {
+			return nil, err
+		}
+		// Check for empty shortcode and return error
+		if a.AnalyzerTOMLData.Shortcode == "" {
+			return nil, fmt.Errorf("Analyzer shortcode cannot be empty")
+		}
+		a.AnalyzerShortcodeArg = strings.ToLower("@" + a.Namespace + "/" + a.AnalyzerTOMLData.Shortcode)
+	}
+
 	pterm.Info.Printf("Initializing analyzer %s...\n", a.AnalyzerShortcodeArg)
 	a.AnalyzerTOMLData.Shortcode = strings.ToLower(a.AnalyzerShortcodeArg)
 
@@ -96,14 +130,14 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 
 	// Collect name of the Analyzer
 	msg = "Display name of the Analyzer"
-	helpText = "The name of the Analyzer which shall be displayed on the dashboard."
+	helpText = "The name of the Analyzer which will be displayed on the dashboard."
 	if a.AnalyzerTOMLData.Name, err = a.PromptUtils.GetSingleLineInput(msg, helpText, defaultAnalyzerName); err != nil {
 		return nil, err
 	}
 
 	// Collect description of the Analyzer
 	msg = "Description of the Analyzer"
-	helpText = "A brief description about the utilities and traits of the Analyzer."
+	helpText = "Explain what the Analyzer does and the kinds of issues it detects."
 	if a.AnalyzerTOMLData.Description, err = a.PromptUtils.GetSingleLineInput(msg, helpText, ""); err != nil {
 		return nil, err
 	}
@@ -168,7 +202,6 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	if err = toml.NewEncoder(&buf).Order(toml.OrderPreserve).Encode(a.AnalyzerTOMLData); err != nil {
 		return nil, err
 	}
-
 	return &buf, nil
 }
 
@@ -191,4 +224,10 @@ func (a *AnalyzerInitOpts) writeAnalyzerTOMLConfig(buf *bytes.Buffer) (err error
 		return err
 	}
 	return
+}
+
+// validateNamespace performs basic validation for namespace and checks if it begins
+// with `@`
+func validateNamespace(namespace string) bool {
+	return strings.HasPrefix(namespace, "@")
 }
