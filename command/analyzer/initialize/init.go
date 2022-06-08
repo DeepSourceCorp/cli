@@ -101,7 +101,7 @@ func (a *AnalyzerInitOpts) initAnalyzer() (*bytes.Buffer, error) {
 	}
 
 	a.AnalyzerTOMLData.Shortcode = strings.ToLower(a.AnalyzerShortcodeArg)
-	pterm.Info.Printf("Initializing analyzer %s...\n", a.AnalyzerShortcodeArg)
+	pterm.Info.Printf("Initializing analyzer %s...\n", a.AnalyzerTOMLData.Shortcode)
 
 	// Collect Analyzer name and description
 	if err := a.fetchAnalyzerDisplayNameAndDescription(); err != nil {
@@ -182,7 +182,7 @@ func (a *AnalyzerInitOpts) fetchNamespaceAndAnalyzerName() (err error) {
 func (a *AnalyzerInitOpts) fetchAnalyzerDisplayNameAndDescription() (err error) {
 	// Fetch the default analyzer name from the shortcode
 	// Eg: @deepsource/armory -> Armory
-	defaultAnalyzerName := strings.Title(strings.SplitAfter(a.AnalyzerTOMLData.Shortcode, "/")[1]) // skipcq: SCC-SA1019
+	defaultAnalyzerName := strings.Title(strings.Split(a.AnalyzerTOMLData.Shortcode, "/")[1]) // skipcq: SCC-SA1019
 
 	// Collect name of the Analyzer
 	msg := "Display name of the Analyzer"
