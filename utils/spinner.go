@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"os"
 	"sync"
 	"time"
@@ -19,7 +20,11 @@ func (s *SpinnerUtils) StartSpinnerWithLabel(label, finalMessage string) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
 
-	sp := spinner.New(spinner.CharSets[11], 120*time.Millisecond, spinner.WithWriter(os.Stdout), spinner.WithWriter(os.Stderr), spinner.WithFinalMSG(GetSuccessMessage(finalMessage))) // Build our new spinner
+	sp := spinner.New(spinner.CharSets[11],
+		120*time.Millisecond,
+		spinner.WithWriter(os.Stdout),
+		spinner.WithWriter(os.Stderr),
+		spinner.WithFinalMSG(fmt.Sprintf("%s\n", GetSuccessMessage(finalMessage)))) // Build our new spinner
 	if label != "" {
 		sp.Suffix = " " + label + " "
 	}
@@ -45,9 +50,9 @@ func (s *SpinnerUtils) StopSpinnerWithError(msg string, errorMessage error) {
 	defer s.mu.Unlock()
 
 	if errorMessage != nil {
-		s.Spinner.FinalMSG = GetFailureMessage(msg, errorMessage.Error())
+		s.Spinner.FinalMSG = GetFailureMessage(msg, errorMessage.Error()) + "\n"
 	} else {
-		s.Spinner.FinalMSG = GetFailureMessage(msg, "")
+		s.Spinner.FinalMSG = GetFailureMessage(msg, "") + "\n"
 	}
 
 	if s.Spinner == nil {

@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/deepsourcelabs/cli/analyzers/config"
+	cliTypes "github.com/deepsourcelabs/cli/types"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/archive"
@@ -37,7 +37,7 @@ func (d *DockerBuildError) Error() string {
 	return d.Message
 }
 
-// Docker build API function
+// BuildAnalyzerDockerImage is the docker image build API used by various CLI commands
 func (d *DockerClient) BuildAnalyzerDockerImage() (context.CancelFunc, io.ReadCloser, *DockerBuildError) {
 	var err error
 	d.Client, err = client.NewClientWithOpts(client.FromEnv)
@@ -84,7 +84,7 @@ func (d *DockerClient) executeImageBuild() (context.CancelFunc, io.ReadCloser, e
 }
 
 // Returns the docker image details to build
-func GetDockerImageDetails(analyzerTOMLData *config.AnalyzerMetadata) (string, string) {
+func GetDockerImageDetails(analyzerTOMLData *cliTypes.AnalyzerTOML) (string, string) {
 	var dockerFilePath, dockerFileName string
 	dockerFilePath = "Dockerfile"
 

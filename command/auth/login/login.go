@@ -19,6 +19,7 @@ type LoginOptions struct {
 	HostName     string
 	Interactive  bool
 	PAT          string
+	Prompt       utils.UserInputPrompt
 }
 
 // NewCmdLogin handles the login functionality for the CLI
@@ -41,6 +42,7 @@ func NewCmdLogin() *cobra.Command {
 		TokenExpired: true,
 		User:         "",
 		HostName:     "",
+		Prompt:       utils.UserInputPrompt{},
 	}
 
 	cmd := &cobra.Command{
@@ -92,7 +94,7 @@ func (opts *LoginOptions) Run() (err error) {
 	if !opts.TokenExpired {
 		// The user is already logged in, confirm re-authentication.
 		msg := fmt.Sprintf("You're already logged into DeepSource as %s. Do you want to re-authenticate?", opts.User)
-		response, err := utils.ConfirmFromUser(msg, "")
+		response, err := opts.Prompt.ConfirmFromUser(msg, "")
 		if err != nil {
 			return fmt.Errorf("Error in fetching response. Please try again.")
 		}
@@ -121,13 +123,13 @@ func (opts *LoginOptions) handleInteractiveLogin() error {
 	hostPromptHelpText := "The hostname of the DeepSource instance to authenticate with"
 
 	// Display prompt to user
-	loginType, err := utils.SelectFromOptions(loginPromptMessage, loginPromptHelpText, accountTypes)
+	loginType, err := opts.Prompt.SelectFromOptions(loginPromptMessage, loginPromptHelpText, accountTypes)
 	if err != nil {
 		return err
 	}
 	// Prompt the user for hostname only in the case of on-premise
 	if loginType == "DeepSource Enterprise" {
-		opts.HostName, err = utils.GetSingleLineInput(hostPromptMessage, hostPromptHelpText, "")
+		opts.HostName, err = opts.Prompt.GetSingleLineInput(hostPromptMessage, hostPromptHelpText, "")
 		if err != nil {
 			return err
 		}

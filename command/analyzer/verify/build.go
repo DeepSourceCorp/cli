@@ -29,14 +29,19 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	 * Check for the presence of `build.Dockerfile` or if not a `Dockerfile` in the current working directory */
 	if _, err := os.Stat(a.Build.DockerFilePath); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			a.Spinner.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found\n", a.Build.DockerFilePath))
+			if a.Build.VerboseMode {
+				msg := utils.GetFailureMessage("Failed to build the image", fmt.Sprintf("%s not found", a.Build.DockerFilePath))
+				fmt.Println(msg)
+				return fmt.Errorf(msg)
+			}
+			a.Spinner.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found", a.Build.DockerFilePath))
 			return err
 		}
 	}
 
-	/* ///////////////////////////////////
+	/* ===================================
 	 * Analyzer docker build verification
-	 * /////////////////////////////////// */
+	 * =================================== */
 
 	/* Initialize the builder with the above fetched details
 	 * Use the `GenerateImageVersion` utility to generate a random string of length 7 to tag the image */
@@ -51,8 +56,12 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	ctxCancelFunc, buildRespReader, buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
 
 	// Cancel the build context and close the reader before exiting this function
-	defer buildRespReader.Close()
-	defer ctxCancelFunc()
+	if buildRespReader != nil {
+		defer buildRespReader.Close()
+	}
+	if ctxCancelFunc != nil {
+		defer ctxCancelFunc()
+	}
 
 	if buildErr != nil {
 		a.handleBuildError(buildErr)
@@ -67,7 +76,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 
 	// In case of verbose mode, no need to stop the spinner
 	if a.Build.VerboseMode {
-		fmt.Print(utils.GetSuccessMessage("Successfully built the Analyzer image"))
+		fmt.Print(utils.GetSuccessMessage("Successfully built the Analyzer image\n"))
 		return nil
 	}
 	a.Spinner.StopSpinner()
@@ -77,7 +86,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 // Utility to handle the output in case of build errors for different modes
 func (a *AnalyzerVerifyOpts) handleBuildError(buildError error) {
 	if a.Build.VerboseMode {
-		fmt.Println(utils.GetFailureMessage("Failed to build the image", buildError.Error()))
+		fmt.Printf("%s\n", utils.GetFailureMessage("Failed to build the image", buildError.Error()))
 		return
 	}
 	a.Spinner.StopSpinnerWithError("Failed to build the image", fmt.Errorf(buildError.Error()))
