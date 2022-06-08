@@ -50,9 +50,9 @@ func (s *SpinnerUtils) StopSpinnerWithError(msg string, errorMessage error) {
 	defer s.mu.Unlock()
 
 	if errorMessage != nil {
-		s.Spinner.FinalMSG = GetFailureMessage(msg, errorMessage.Error())
+		s.Spinner.FinalMSG = GetFailureMessage(msg, errorMessage.Error()) + "\n"
 	} else {
-		s.Spinner.FinalMSG = GetFailureMessage(msg, "")
+		s.Spinner.FinalMSG = GetFailureMessage(msg, "") + "\n"
 	}
 
 	if s.Spinner == nil {

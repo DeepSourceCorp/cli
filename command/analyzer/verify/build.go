@@ -29,7 +29,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	 * Check for the presence of `build.Dockerfile` or if not a `Dockerfile` in the current working directory */
 	if _, err := os.Stat(a.Build.DockerFilePath); err != nil {
 		if errors.Is(err, os.ErrNotExist) {
-			a.Spinner.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found\n", a.Build.DockerFilePath))
+			a.Spinner.StopSpinnerWithError("Failed to build the image", fmt.Errorf("%s not found", a.Build.DockerFilePath))
 			return err
 		}
 	}
@@ -60,8 +60,6 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 
 	if buildErr != nil {
 		a.handleBuildError(buildErr)
-		// TODO: Handle this duct taping
-		fmt.Println()
 		return buildErr
 	}
 

@@ -8,6 +8,7 @@ import (
 	"github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 )
 
@@ -56,6 +57,7 @@ func NewCmdAnalyzerVerify() *cobra.Command {
 			if err := opts.verifyAnalyzer(); err != nil {
 				return errors.New("Analyzer verification failed. Exiting.")
 			}
+			pterm.Success.Println("Analyzer verification successful!")
 			return nil
 		},
 	}
@@ -97,14 +99,12 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	if err != nil {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)
-		// TODO: Fix this duct-taping.
-		fmt.Println()
 	}
 
 	// Check for validation errors in analyzer.toml and display them (if any)
 	if analyzerTOMLValidationErrors != nil && len(analyzerTOMLValidationErrors.Errors) > 0 {
 		configurationValid = false
-		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml\n", err)
+		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)
 		for _, err := range analyzerTOMLValidationErrors.Errors {
 			fmt.Printf("  %s\n", utils.GetBulletMessage(err.Message, "red"))
 		}
@@ -119,14 +119,12 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	if issuesValidationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to validate the issues", err)
-		// TODO: Fix this duct-taping.
-		fmt.Println()
 	}
 
 	// Check for validation errors in analyzer issues and display them (if any)
 	if issuesValidationErrors != nil && len(*issuesValidationErrors) > 0 {
 		configurationValid = false
-		a.Spinner.StopSpinnerWithError("Failed to validate the following issues\n", err)
+		a.Spinner.StopSpinnerWithError("Failed to validate the following issues", err)
 		for _, validationError := range *issuesValidationErrors {
 			fmt.Printf("  > %s\n", validationError.File)
 			for _, err := range validationError.Errors {
