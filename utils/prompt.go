@@ -2,6 +2,7 @@ package utils
 
 import (
 	"errors"
+	"strings"
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
@@ -48,7 +49,7 @@ func (UserInputPrompt) SelectFromOptions(msg, helpText string, opts []string) (s
 	if err != nil {
 		return "", checkInterrupt(err)
 	}
-	return result, nil
+	return strings.TrimSpace(result), nil
 }
 
 // Used for Single Line Text Input
@@ -66,7 +67,7 @@ func (UserInputPrompt) GetSingleLineInput(msg, helpText, defaultValue string) (s
 	if err != nil {
 		return "", checkInterrupt(err)
 	}
-	return response, nil
+	return strings.TrimSpace(response), nil
 }
 
 // Used for multiple inputs from the displayed options

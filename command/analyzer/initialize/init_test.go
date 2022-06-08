@@ -75,7 +75,7 @@ bug_tracker = ""
   command = "./analysis.sh"
 
 [build]
-  engine = ""
+  engine = "docker"
   dockerfile = ""
   script = ""
 
@@ -107,7 +107,7 @@ bug_tracker = ""
   command = ""
 
 [build]
-  engine = ""
+  engine = "docker"
   dockerfile = ""
   script = ""
 

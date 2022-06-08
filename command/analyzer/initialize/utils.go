@@ -1,8 +1,12 @@
 package initialize
 
 import (
+	"bytes"
+	"errors"
 	"fmt"
+	"os"
 	"os/exec"
+	"path/filepath"
 	"regexp"
 	"strings"
 )
@@ -69,4 +73,32 @@ func fetchRemoteURL() (string, error) {
 // Returns the list of supported SDKs
 func getSupportedSDKs() []string {
 	return supportedAnalyzerSDKs
+}
+
+// Sanitize the input of namespace and Analyzer shortcode for any spaces
+// or special characters and replace them with hyphen
+func sanitizeInput(input string) string {
+	re := regexp.MustCompile("[^a-zA-Z0-9_]+")
+	return re.ReplaceAllString(input, "-")
+}
+
+// Writes the Analyzer TOML data to the file
+func (a *AnalyzerInitOpts) writeAnalyzerTOMLConfig(buf *bytes.Buffer) (err error) {
+	// Create the .deepsource/analyzer directory and issues/ directory
+	directoriesToCreate := []string{".deepsource", ".deepsource/analyzer", ".deepsource/analyzer/issues/"}
+
+	// Create the required directories mentioned above
+	for _, dir := range directoriesToCreate {
+		if _, err := os.Stat(filepath.Join(a.ProjectRootPath, dir)); errors.Is(err, os.ErrNotExist) {
+			if err = os.Mkdir(filepath.Join(a.ProjectRootPath, dir), 0o750); err != nil {
+				return err
+			}
+		}
+	}
+
+	// Write the input data to analyzer.toml
+	if err = os.WriteFile(a.AnalyzerTOMLPath, buf.Bytes(), 0o750); err != nil {
+		return err
+	}
+	return
 }
