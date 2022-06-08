@@ -19,10 +19,10 @@ import (
 type ErrLevel int
 
 const (
-	DecodeErr   ErrLevel = 0
-	Error       ErrLevel = 1
-	Warning     ErrLevel = 2
-	Information ErrLevel = 3
+	DecodeErr   ErrLevel = iota
+	Error
+	Warning
+	Information
 )
 
 type ErrorMeta struct {

@@ -79,7 +79,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	 * the analyzer.toml file and issues present in .deepsource/analyzer/issues directory
 	 * ================================================================================== */
 
-	a.Spinner.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Yay!!Found analyzer.toml and issue descriptions")
+	a.Spinner.StartSpinnerWithLabel("Checking for presence of analyzer.toml and issue descriptions...", "Found analyzer.toml and issue descriptions")
 	if err = validator.CheckForAnalyzerConfig(analyzerTOMLPath, issuesDirPath); err != nil {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to locate analyzer configurations", err)

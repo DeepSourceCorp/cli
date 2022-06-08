@@ -41,7 +41,7 @@ func validateIssueTOML(config *types.AnalyzerIssue, issuePath string) *Validatio
 			)
 		}
 
-		// Check if the shortcode begins with @ and the right build engine is configured
+		// Check if the category is supported
 		errs := err.(validate.ValidationErrors)
 		for _, err := range errs {
 			if err.Tag() == "category" {

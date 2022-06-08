@@ -59,7 +59,7 @@ func validateAnalyzerTOMLFields(config *types.AnalyzerTOML, filePath string) (*V
 				analyzerTOMLValidationErrors.Errors = append(analyzerTOMLValidationErrors.Errors, ErrorMeta{
 					Level:   Error,
 					Field:   "engine",
-					Message: fmt.Sprintf("Invalid build engine \"%s\". The following build engines are supported as of now: [%s]", config.Build.Engine, supportedEnginesString),
+					Message: fmt.Sprintf("Invalid build engine \"%s\". The following build engines are supported: [%s]", config.Build.Engine, supportedEnginesString),
 				})
 			}
 		}
