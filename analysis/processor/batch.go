@@ -26,7 +26,7 @@ var (
  * IO intensive, and the rest is CPU intensive. */
 func (p *ProcessAnalysisResults) processIssuesBatch(filesWIssueRange []IssueRange) {
 	// Process files in batches of `batchSize` to avoid `too many files open` error
-	for processedFiles := range filesWIssueRange {
+	for processedFiles := 0; processedFiles < len(filesWIssueRange); {
 		filesToProcess := 0
 
 		/* The default batch size is 30. If the number of files is less than this batchsize assign their count
@@ -43,10 +43,8 @@ func (p *ProcessAnalysisResults) processIssuesBatch(filesWIssueRange []IssueRang
 
 		// Iterate over the cached files data and process the issues present in them.
 		for j, cachedFile := range cachedFiles {
-			for issueIndex := range p.AnalysisResult.Issues {
-				// Pick an issue.
-				issue := p.AnalysisResult.Issues[issueIndex]
-
+			for issueIndex < len(p.AnalysisResult.Issues) {
+				issue := p.AnalysisResult.Issues[issueIndex] // initialize the loop
 				// Check if the file is a generated one, this happens if enormous amount of issues are
 				// reported in a single file on a single line.
 				if p.isGeneratedFile(processedFiles+j, &cachedFile, filesWIssueRange) {
@@ -58,9 +56,8 @@ func (p *ProcessAnalysisResults) processIssuesBatch(filesWIssueRange []IssueRang
 				if cachedFile.Filename != issue.Location.Path {
 					break
 				}
-				processedIssue := issue
-				p.runProcessors(cachedFile, &processedIssue)
-				issueIndex++ // loop increments
+				p.runProcessors(cachedFile, &issue)
+				issueIndex++
 			}
 		}
 		fmt.Println("Batch processing done")
@@ -70,25 +67,25 @@ func (p *ProcessAnalysisResults) processIssuesBatch(filesWIssueRange []IssueRang
 }
 
 // runProcessors runs the supported processors on the issue passed as a parameter
-func (p *ProcessAnalysisResults) runProcessors(cachedFile fileContentNode, processedIssue *types.Issue) {
+func (p *ProcessAnalysisResults) runProcessors(cachedFile fileContentNode, issueToProcess *types.Issue) {
 	var err error
 	skipIssue := false
 	// Loop through processors
 	for _, processor := range p.Processors {
 		switch processor {
 		case "source_code_load":
-			procLoadSourceCode(cachedFile.FileContent, processedIssue, sourceCodeOffset)
+			procLoadSourceCode(cachedFile.FileContent, issueToProcess, sourceCodeOffset)
 		case "skip_cq":
-			skipIssue, err = procSkipCQ(cachedFile.FileContent, processedIssue)
+			skipIssue, err = procSkipCQ(cachedFile.FileContent, issueToProcess)
 			if err != nil {
-				fmt.Println("Publish: Error in processor skip_cq for issue: ", *processedIssue, err)
+				fmt.Println("Publish: Error in processor skip_cq for issue: ", *issueToProcess, err)
 			}
 		default:
 			fmt.Println("Publish: Unkown processor received")
 		}
 	}
 	if !skipIssue {
-		p.ProcessedIssues = append(p.ProcessedIssues, *processedIssue)
+		p.ProcessedIssues = append(p.ProcessedIssues, *issueToProcess)
 	}
 }
 

@@ -63,7 +63,6 @@ func (p *ProcessAnalysisResults) processIssues() error {
 
 	// Get the issues to file range.
 	filesIndex := createIssueFileRange(p.AnalysisResult)
-	fmt.Println(filesIndex)
 
 	// Generate the silencers regexMap.
 	generateSilencersRegexMap()
