@@ -26,7 +26,7 @@
               size="sm"
               class="flex-shrink-0 leading-none rounded-full"
             />
-            <span class="text-xs font-normal text-vanilla-200">
+            <span class="text-sm font-normal text-vanilla-200">
               {{ activeDashboardContext.team_name || activeDashboardContext.login }}
             </span>
           </span>
