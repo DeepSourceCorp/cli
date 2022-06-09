@@ -26,7 +26,7 @@
         </span>
         <z-tag
           v-tooltip="`${issueType.count} occurrences for this category`"
-          class="leading-none group-hover:bg-ink-200 tabular-nums"
+          class="leading-none group-hover:bg-ink-200"
           text-size="xs"
           spacing="py-1 px-2"
           :bg-color="issueType.shortcode === modelValue ? 'ink-200' : 'ink-300'"

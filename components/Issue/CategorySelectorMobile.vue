@@ -6,13 +6,11 @@
         @click="isModalOpen = true"
         class="flex items-center min-w-48"
       >
-        <div class="inline-flex leading-tight items-center w-full gap-x-2">
+        <div class="inline-flex items-center w-full leading-tight gap-x-2">
           <z-icon :icon="activeIssueCategory.icon" size="small" color="ink-400" />
           <span class="text-sm leading-none">{{ activeIssueCategory.name }}</span>
           <div class="flex-grow"></div>
-          <div
-            class="text-sm rounded-full place-self-end px-2 py-1 leading-none tabular-nums bg-juniper-400"
-          >
+          <div class="px-2 py-1 text-sm leading-none rounded-full place-self-end bg-juniper-400">
             {{ shortenLargeNumber(activeIssueCategory.count) }}
           </div>
         </div>
@@ -43,7 +41,7 @@
                 }}</span>
                 <div class="flex-grow"></div>
                 <div
-                  class="px-2 py-1 text-xs leading-none rounded-full place-self-end tabular-nums"
+                  class="px-2 py-1 text-xs leading-none rounded-full place-self-end"
                   :class="modelValue === issueType.shortcode ? 'bg-juniper-400' : 'bg-ink-100'"
                 >
                   {{ shortenLargeNumber(issueType.count) }}
