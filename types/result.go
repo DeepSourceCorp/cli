@@ -6,7 +6,7 @@ import "github.com/deepsourcelabs/cli/analysis/lsp"
 // LSP based Analysis Report Types  //
 /////////////////////////////////////
 
-type AnalysisReport struct {
+type AnalyzerReport struct {
 	Issues   []lsp.Diagnostic `json:"issues"`
 	Metrics  []Metric         `json:"metrics,omitempty"`
 	IsPassed bool             `json:"is_passed"`

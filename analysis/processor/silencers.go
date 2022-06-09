@@ -40,10 +40,12 @@ func prepareSilencersMeta() []LanguageMeta {
 	return issuesMeta
 }
 
+// generateRegExp generates the regex expression used for matching the skipcq comment
 func generateRegExp(fileExt string) regexp.Regexp {
-	skipCQTags := []string{"skipcq"} // analyzer specific issues silencer tags, with `skipcq` tag
+	// Analyzer specific issues silencer tags, with `skipcq` tag
+	skipCQTags := []string{"skipcq"}
 
-	// different analyzers may have different ending token for issue silencing. eg. Pylint has `=` while
+	// Different analyzers may have different ending token for issue silencing. eg. Pylint has `=` while
 	// most others have `:`
 	separators := map[string]int{
 		":": 1, // default, for skipcq
@@ -54,7 +56,6 @@ func generateRegExp(fileExt string) regexp.Regexp {
 	}
 
 	separatorsList := []string{}
-
 	for k := range separators {
 		separatorsList = append(separatorsList, k)
 	}
@@ -79,17 +80,20 @@ func generateRegExp(fileExt string) regexp.Regexp {
 			// zero or one occurrences of `: issuecode1, issuecode2` and so on
 			`)?`,
 	)
-
 	return regex
 }
 
+// generateSilencersRegexMap generates the silencers regex expression used for skipcq processing
 func generateSilencersRegexMap() {
 	langMeta := make(map[string]LanguageMeta)
 	silencerRegexMap := make(map[string]regexp.Regexp)
 
-	// Fetch the silencers meta from the analyzer's .deepsource/silencers.json file
+	// Fetch the silencers meta for the Analyzer
+	// Keeping it as the default silencer for now
 	silencersData := prepareSilencersMeta()
 
+	// Mapping the silencers data to the file extension
+	// in the above declared map `langMeta`
 	for _, silencerData := range silencersData {
 		langMeta[silencerData.Extension] = silencerData
 	}

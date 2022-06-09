@@ -16,22 +16,24 @@ import (
 var (
 	containerCodePath    string
 	containerToolBoxPath string
-	analysisConfigName   string = "analysis_config"
-	analysisResultsName  string = "analysis_results"
-	analysisConfigExt    string = ".json"
-	analysisResultsExt   string = ".json"
+	analysisConfigName   string   = "analysis_config"
+	analysisResultsName  string   = "analysis_results"
+	analysisConfigExt    string   = ".json"
+	analysisResultsExt   string   = ".json"
+	supportedProcessors  []string = []string{"skip_cq", "source_code_load"}
 )
 
 // The params required while running the Analysis locally
 type AnalyzerDryRun struct {
-	Client               *docker.DockerClient // The client to be used for all docker related ops
-	RemoteSource         bool                 // True if the source to be analyzed is a remote VCS repository
-	SourcePath           string               // The path of the directory of source code to be analyzed
-	AnalysisFiles        []string             // The list of analysis files
-	TempCloneDirectory   string               // The temporary directory where the source of the remote VCS will be cloned to
-	TempToolBoxDirectory string               // The temporary directory where the analysis_config is present
+	Client               *docker.DockerClient // The client to be used for all docker related ops.
+	RemoteSource         bool                 // True if the source to be analyzed is a remote VCS repository.
+	SourcePath           string               // The path of the directory of source code to be analyzed.
+	AnalysisFiles        []string             // The list of analysis files.
+	TempCloneDirectory   string               // The temporary directory where the source of the remote VCS will be cloned to.
+	TempToolBoxDirectory string               // The temporary directory where the analysis_config is present.
+	Processors           []string             // The post-processors to be invoked after analysis results are received.
 
-	AnalysisConfig *analysis_config.AnalysisConfig // The analysis_config.json file containing the meta for analysis
+	AnalysisConfig *analysis_config.AnalysisConfig // The analysis_config.json file containing the meta for analysis.
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -42,6 +44,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	opts := AnalyzerDryRun{
 		SourcePath:   cwd,
 		RemoteSource: false,
+		Processors:   supportedProcessors,
 	}
 
 	cmd := &cobra.Command{
@@ -130,7 +133,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	// Process the analysis results once the results are received.
-	if err = a.processAnalysisReport(analysisResultBuf); err != nil {
+	if err = a.processAnalyzerReport(analysisResultBuf); err != nil {
 		return err
 	}
 	return nil

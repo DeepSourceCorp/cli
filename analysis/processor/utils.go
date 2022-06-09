@@ -1,15 +1,13 @@
 package processor
 
 import (
-	"io/ioutil"
-	"log"
-	"path"
 	"sort"
-	"strings"
 
 	"github.com/deepsourcelabs/cli/types"
 )
 
+// sortIssuesByFile sorts the issues in an alphabetical order according to the filenames
+// where they got reported.
 func (p *ProcessAnalysisResults) sortIssuesByFile() {
 	sort.Slice(p.AnalysisResult.Issues, func(i, j int) bool {
 		return p.AnalysisResult.Issues[i].Location.Path < p.AnalysisResult.Issues[j].Location.Path
@@ -26,7 +24,12 @@ type IssueRange struct {
 
 /* GenerateIssueRangeSlice generates an array containing the issue ranges with respect to files
  * that helps us to go through them and map them to the files where they got reported instead
- * of opening the file for each of them */
+ * of opening the file for each of them. The generated index looks like this:
+ *
+ * [{analyzer.go 0 0} {autofix_patch.go 1 1} {difftool.go 2 2} {patch.patch 3 5} {proc_skip_cq_test.go 6 6}]
+ *
+ * Here, the first field if filename and the second and third fields are the index range in which the issues reported
+ * in these files lie in the sorted AnalyzerReport slice. */
 func createIssueFileRange(report types.AnalysisResult) []IssueRange {
 	fileCount := 0 // for 1 file, 0 based indexing
 	issuesRange := []IssueRange{}
@@ -71,7 +74,7 @@ func createIssueFileRange(report types.AnalysisResult) []IssueRange {
 	return issuesRange
 }
 
-/* Converts the LSP based analysis results into the default format supported by DeepSource */
+// formatLSPResultsToDefault converts the LSP based analysis results into the default format supported by DeepSource.
 func (p *ProcessAnalysisResults) formatLSPResultsToDefault() {
 	p.AnalysisResult.IsPassed = p.Report.IsPassed
 	p.AnalysisResult.Metrics = append(p.Report.Metrics, p.AnalysisResult.Metrics...)
@@ -97,23 +100,5 @@ func (p *ProcessAnalysisResults) formatLSPResultsToDefault() {
 			},
 		}
 		p.AnalysisResult.Issues = append(p.AnalysisResult.Issues, analysisIssue)
-	}
-}
-
-func addFileToCache(cachedFilesChannel chan fileContentNode, filename, codePath string) {
-	fileContentSlice := []string{}
-
-	fileContentBytes, err := ioutil.ReadFile(path.Join(codePath, filename))
-	if err != nil {
-		log.Println("Could not process for file: ", filename, ". Err: ", err)
-	} else if string(fileContentBytes) != "" {
-		fileContentSlice = strings.Split(string(fileContentBytes), "\n")
-	} else {
-		fileContentSlice = []string{}
-	}
-
-	cachedFilesChannel <- fileContentNode{
-		Filename:    filename,
-		FileContent: fileContentSlice,
 	}
 }
