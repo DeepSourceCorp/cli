@@ -106,7 +106,7 @@
         />
       </div>
     </div>
-    <div class="max-w-4xl p-4">
+    <div v-if="starIssues.length" class="max-w-4xl p-4">
       <div class="flex items-center gap-x-2">
         <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
           Issues
@@ -132,20 +132,7 @@
           class="block mb-3"
         />
       </div>
-      <div v-else-if="!fullyLoaded" class="mt-4">
-        <issue-dir-card-skeleton v-for="id in 5" :key="id" class="mb-3" />
-      </div>
-      <lazy-empty-state v-else title="No featured issues found!" image-width="w-28" />
     </div>
-    <!-- <div class="max-w-4xl p-4">
-      <div class="flex items-center space-x-3">
-        <h3 class="flex-shrink-0 text-sm tracking-wider uppercase text-vanilla-400">
-          What developers are saying
-        </h3>
-        <hr class="flex-grow border-ink-200" />
-      </div>
-      <div class="mt-4"></div>
-    </div> -->
   </div>
 </template>
 
