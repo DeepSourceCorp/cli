@@ -162,6 +162,9 @@
                 </div>
               </template>
             </empty-state>
+            <div class="space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+              <z-button button-type="primary" @click="close">I understand</z-button>
+            </div>
           </slot>
         </div>
       </template>
