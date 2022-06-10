@@ -95,9 +95,9 @@ func checkSkipCQ(fileExt string, skipCQre regexp.Regexp, line, issueCode string)
 	return ignoreIssue
 }
 
-// Check if a given line of code is eligible to be checked for skip CQ
-// Bare minimum eligibility is that the line should either be empty or
-// contain a comment only line
+/* Check if a given line of code is eligible to be checked for skip CQ.
+ * Bare minimum eligibility is that the line should either be empty or
+ * contain a comment only line. */
 func analyzeLineForSkipCQ(line, fileExt string) bool {
 	var commentIdentifier string
 	for _, langMeta := range languagesMeta {
