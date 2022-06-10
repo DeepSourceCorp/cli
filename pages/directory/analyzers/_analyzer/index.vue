@@ -41,12 +41,11 @@
             <p v-if="isPartiallyLoaded" class="text-1.5xl">{{ analyzer.issuesCount }}</p>
             <div v-else class="h-8 w-17 bg-ink-300 animate-pulse"></div>
           </div>
-          <div>
+          <div v-if="isPartiallyLoaded && analyzer.autofixableIssuesCount">
             <p class="text-vanilla-400 lg:mt-7">Autofix</p>
-            <p v-if="isPartiallyLoaded" class="text-1.5xl">
+            <p class="text-1.5xl">
               {{ analyzer.autofixableIssuesCount }}
             </p>
-            <div v-else class="h-8 w-17 bg-ink-300 animate-pulse"></div>
           </div>
         </div>
         <div class="col-span-2">
