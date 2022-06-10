@@ -23,16 +23,18 @@ type ProcessAnalysisResults struct {
 
 /* Accepts the result as a byte array and processes the results in the form of a
  * AnalyzerReport struct instance. */
-func (p *ProcessAnalysisResults) ProcessAnalysisResult() error {
+func (p *ProcessAnalysisResults) ProcessAnalysisResult() {
 	// Covert the Analyzer report from LSP based format to the default results format.
 	p.formatLSPResultsToDefault()
 	fmt.Println("Total issues reported by the Analyzer: ", len(p.AnalysisResult.Issues))
 
-	// Once the result has been converted to the DeepSource format, start processing the issues.
-	if len(p.AnalysisResult.Issues) > 0 {
-		return p.processIssues()
+	// Check if there are issues reported actually.
+	if len(p.AnalysisResult.Issues) <= 0 {
+		return
 	}
-	return nil
+
+	// Once the result has been converted to the DeepSource format, start processing the issues.
+	p.processIssues()
 }
 
 /* processIssues sorts the issues in an alphabetical order of filenames just to ensure that all issues getting
@@ -42,7 +44,7 @@ func (p *ProcessAnalysisResults) ProcessAnalysisResult() error {
  *            been ignored by the user through suitable `skipcq` comments.
  * - source_code_load :  Processes the issues for the source code snippets, highlights the snippets
  *                       and adds them to the Analysis result. */
-func (p *ProcessAnalysisResults) processIssues() error {
+func (p *ProcessAnalysisResults) processIssues() {
 	// All the files that appear in the issues are now processed by the processors listed in analyzer conf
 	// We must cache the files in order to not do file IO for every processor.
 	p.sortIssuesByFile()
@@ -59,6 +61,4 @@ func (p *ProcessAnalysisResults) processIssues() error {
 
 	// Sort again for consistency (mostly for test to pass).
 	p.sortIssuesByFile()
-
-	return nil
 }

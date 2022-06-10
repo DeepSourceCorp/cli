@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 
@@ -34,6 +35,7 @@ type AnalyzerDryRun struct {
 	Processors           []string             // The post-processors to be invoked after analysis results are received.
 
 	AnalysisConfig *analysis_config.AnalysisConfig // The analysis_config.json file containing the meta for analysis.
+	AnalysisResult types.AnalysisResult
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -132,6 +134,11 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 
-	// Process the analysis results once the results are received.
-    return a.processAnalyzerReport(analysisResultBuf)
+	// Process the analyzer report once it is received.
+	if a.AnalysisResult, err = a.processAnalyzerReport(analysisResultBuf); err != nil {
+		return err
+	}
+	fmt.Println("Issues after processing:", len(a.AnalysisResult.Issues))
+
+	return nil
 }
