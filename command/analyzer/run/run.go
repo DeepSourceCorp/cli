@@ -26,14 +26,15 @@ var (
 
 // The params required while running the Analysis locally
 type AnalyzerDryRun struct {
-	Client               *docker.DockerClient // The client to be used for all docker related ops.
-	RemoteSource         bool                 // True if the source to be analyzed is a remote VCS repository.
-	SourcePath           string               // The path of the directory of source code to be analyzed.
-	AnalysisFiles        []string             // The list of analysis files.
-	TempCloneDirectory   string               // The temporary directory where the source of the remote VCS will be cloned to.
-	TempToolBoxDirectory string               // The temporary directory where the analysis_config is present.
-	Processors           []string             // The post-processors to be invoked after analysis results are received.
+	Client       *docker.DockerClient // The client to be used for all docker related ops.
+	RemoteSource bool                 // True if the source to be analyzed is a remote VCS repository.
+	SourcePath   string               // The path of the directory of source code to be analyzed.
 
+	TempCloneDirectory   string // The temporary directory where the source of the remote VCS will be cloned to.
+	TempToolBoxDirectory string // The temporary directory where the analysis_config is present.
+
+	AnalysisFiles  []string                        // The list of analysis files.
+	Processors     []string                        // The post-processors to be invoked after analysis results are received.
 	AnalysisConfig *analysis_config.AnalysisConfig // The analysis_config.json file containing the meta for analysis.
 	AnalysisResult types.AnalysisResult
 }
@@ -139,6 +140,5 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 	fmt.Println("Issues after processing:", len(a.AnalysisResult.Issues))
-
 	return nil
 }
