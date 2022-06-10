@@ -32,17 +32,15 @@
           </span>
         </div>
         <div class="flex justify-end">
-          <a
-            :href="`mailto:${$config.supportEmail}`"
-            class="flex items-center h-8 space-x-2 text-sm rounded-sm cursor-pointer hover:text-juniper"
-          >
-            <z-icon icon="support" size="small" color="text-current" class="min-w-4 min-h-4" />
-            <span
-              class="items-center w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis"
-            >
-              Get help
-            </span>
-          </a>
+          <z-button
+            icon="support"
+            label="Get help"
+            button-type="secondary"
+            icon-size="small"
+            size="small"
+            class="border border-ink-200"
+            :to="`mailto:${$config.supportEmail}`"
+          />
         </div>
       </section>
     </nav>
