@@ -1,10 +1,7 @@
 package processor
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
-	"path"
 
 	"github.com/deepsourcelabs/cli/types"
 )
@@ -33,19 +30,8 @@ func (p *ProcessAnalysisResults) ProcessAnalysisResult() error {
 
 	// Once the result has been converted to the DeepSource format, start processing the issues.
 	if len(p.AnalysisResult.Issues) > 0 {
-		err := p.processIssues()
-		if err != nil {
-			return err
-		}
+		return p.processIssues()
 	}
-
-	// REMOVE THIS-----------------------------------------------------------
-	fmt.Println("Issues after processing: ", len(p.AnalysisResult.Issues))
-	b, _ := json.Marshal(p.AnalysisResult.Issues)
-	if err := os.WriteFile(path.Join("/Users/phoenix/Code/deepsource/result.json"), b, 0o600); err != nil {
-		return err
-	}
-	// -----------------------------------------------------------------------
 	return nil
 }
 
