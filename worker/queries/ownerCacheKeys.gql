@@ -1,0 +1,10 @@
+query OwnerCacheKeys($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    cacheKeys {
+      repositories
+      settings
+      team
+    }
+  }
+}

@@ -192,7 +192,8 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
         .map((opt) => {
           return {
             id: `open-${opt.link.join('-')}-settings`,
-            label: `<span class="text-vanilla-400">Repo Settings</span> / ${opt.label}`,
+            label: opt.label,
+            labelHTML: `<span class="text-vanilla-400">Settings</span> / ${opt.label}`,
             icon: opt.icon,
             scope: 'repo',
             condition: (route) => {

@@ -273,7 +273,8 @@ export default class TeamSettings extends mixins(
         .map((opt) => {
           return {
             id: `open-${opt.routeName}-settings`,
-            label: `<span class="text-vanilla-400">Settings</span> / ${opt.label}`,
+            label: opt.label,
+            labelHTML: `<span class="text-vanilla-400">Settings</span> / ${opt.label}`,
             hint: `${owner}`,
             icon: opt.icon,
             scope: 'owner',

@@ -108,6 +108,8 @@ export default {
     '~/plugins/helpers/directives.client.ts',
     '~/plugins/helpers/localstorage.client.ts',
     '~/plugins/helpers/error.ts',
+    '~/plugins/helpers/storage.client.ts',
+    '~/plugins/helpers/worker.client.ts',
     '~/plugins/components/toasts.client.ts',
     '~/plugins/components/tooltip.ts',
     '~/plugins/components/palette.client.ts'
@@ -306,6 +308,7 @@ export default {
       if (process.env.NODE_ENV === 'development') {
         config.devtool = 'source-map'
       }
+
       config.module.rules.push({
         test: /\.(ogg|mp3|wav|mpe?g)$/i,
         loader: 'file-loader'

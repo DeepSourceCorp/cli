@@ -44,7 +44,7 @@ class ProviderMeta {
 /**
  * ! In case of updates to `auth` value, update corresponding data in `nuxt.config.js` as well.
  */
-export const providerMetaMap = {
+export const providerMetaMap: Record<string, ProviderMeta> = {
   gh: new ProviderMeta('GitHub', 'gh', VcsProviderChoices.Github, 'github'),
   ghe: new ProviderMeta(
     'GitHub Enterprise',

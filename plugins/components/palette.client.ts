@@ -1,7 +1,10 @@
-import Fuse from 'fuse.js'
-
 import { CommandAction, InternalCommandAction, PaletteInterface } from '~/types/palette'
 import { Inject, Context } from '@nuxt/types/app'
+import { DBStores, getDB } from '../helpers/storage.client'
+import { Route } from 'vue-router'
+import { providerMetaMap } from '../helpers/provider'
+import { Repository } from '~/types/types'
+import { matchSorter } from 'match-sorter'
 
 declare module 'vuex/types/index' {
   // skipcq: JS-0356
@@ -70,24 +73,80 @@ export class CommandManager {
   }
 
   /**
+   * Get a list of repositories with custom actions
+   *
+   * @param {Route} {params} - current route params
+   *
+   * @return {Promise<CommandAction[]>}
+   */
+  async getRepositories({ params }: Route): Promise<CommandAction[]> {
+    const { value } = providerMetaMap[params.provider]
+    const db = getDB(`${value}/${params.owner}`)
+    const repoStore = db[DBStores.REPOSITORIES]
+    const repoActionList: CommandAction[] = []
+
+    const { provider, owner } = params
+
+    const repoPages = [
+      { label: 'Overview', icon: 'tachometer-fast', route: '' },
+      { label: 'Issues', icon: 'flag', route: 'issues' },
+      { label: 'Autofix', icon: 'autofix', route: 'autofix' },
+      { label: 'Metrics', icon: 'bar-chart', route: 'metrics' },
+      { label: 'Analysis history', icon: 'history', route: 'history/runs' },
+      { label: 'Transform history', icon: 'history', route: 'history/transforms' },
+      { label: 'Settings', icon: 'settings', route: 'settings/general' }
+    ]
+
+    await repoStore.iterate((repo: Repository) => {
+      if (repo.isActivated) {
+        repoActionList.push({
+          id: `open-${repo.id}`,
+          label: `${repo.ownerLogin}/${repo.name}`, // skipcq: JS-0378
+          placeholder: `Select repository page to open`,
+          hint: `Press <kbd class="cmd-kbd">Enter</kbd> to jump, <kbd class="cmd-kbd">Tab</kbd> to browse`,
+          icon: repo.isPrivate ? 'lock' : 'globe',
+          keywords: [repo.name],
+          action: (router) => {
+            router.push(['', provider, owner, repo.name].join('/'))
+          },
+          children: () => {
+            return repoPages.map((page) => {
+              return {
+                id: `open-${repo.id}-${page.label}`,
+                label: page.label,
+                icon: page.icon,
+                action: (router) => {
+                  router.push(['', provider, owner, repo.name, page.route].join('/'))
+                }
+              }
+            })
+          }
+        })
+      }
+    })
+
+    return repoActionList
+  }
+
+  /**
    * Search for commands across local and global scope
    * @param {string} searchCandidate
    * @param {Context['route']} route
    *
    * @return {CommandAction[]}
    */
-  queryCommands(searchCandidate: string, route: Context['route']): CommandAction[] {
-    const engine = new Fuse([...this.commands, ...this.globalCommands], {
-      keys: [
-        { name: 'shortkey', weight: 0.7 },
-        { name: 'label', weight: 0.5 },
-        { name: 'keywords', weight: 0.3 }
-      ]
-    })
+  async queryCommands(searchCandidate: string, route: Context['route']): Promise<CommandAction[]> {
+    const repos = await this.getRepositories(route)
 
-    return engine
-      .search(searchCandidate)
-      .map((result: { item: CommandAction }) => result.item)
+    const results = matchSorter(
+      [...repos, ...this.commands, ...this.globalCommands],
+      searchCandidate,
+      {
+        keys: ['shortkey', 'label', 'keywords']
+      }
+    )
+
+    return results
       .filter((cmd: CommandAction) => this._validateConditionAndScope(cmd, route))
       .sort((firstCommand, secondCommand) => {
         return this._sortCompareFn(secondCommand, route) - this._sortCompareFn(firstCommand, route)
@@ -99,7 +158,7 @@ export class CommandManager {
    *
    * @param {CommandAction} command
    * @param {Context['route']} route
-   *
+   
    * @return {boolean}
    */
   _validateConditionAndScope(command: CommandAction, route: Context['route']): boolean {

@@ -47,6 +47,9 @@ export default class PaletteMixin extends mixins(AuthMixin, ActiveUserMixin) {
       e.preventDefault()
       e.stopPropagation()
     }
+    if (e.code === 'Escape') {
+      this.showPalette = false
+    }
   }
 
   /**
