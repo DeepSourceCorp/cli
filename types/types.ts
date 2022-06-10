@@ -1190,7 +1190,7 @@ export type EnterpriseGroup = MaskPrimaryKeyNode & {
   scimDisplayName?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
   members?: Maybe<EnterpriseUserConnection>;
-  teams: TeamConnection;
+  teams: EnterpriseTeamConnection;
   invitationCode?: Maybe<Scalars['String']>;
   groupusermembershipSet: GroupUserMembershipConnection;
   groupteammembershipSet: GroupTeamMembershipConnection;
@@ -1292,7 +1292,8 @@ export type EnterpriseInstallationRoot = {
   groups?: Maybe<EnterpriseGroupConnection>;
   user?: Maybe<EnterpriseUser>;
   users?: Maybe<EnterpriseUserConnection>;
-  teams?: Maybe<TeamConnection>;
+  team?: Maybe<EnterpriseTeam>;
+  teams?: Maybe<EnterpriseTeamConnection>;
   personalAccounts?: Maybe<OwnerConnection>;
   managementConsoleUrl?: Maybe<Scalars['String']>;
   isScimEnabled?: Maybe<Scalars['Boolean']>;
@@ -1329,6 +1330,11 @@ export type EnterpriseInstallationRootUsersArgs = {
 };
 
 
+export type EnterpriseInstallationRootTeamArgs = {
+  id: Scalars['ID'];
+};
+
+
 export type EnterpriseInstallationRootTeamsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -1357,6 +1363,160 @@ export type EnterpriseInstallationSetup = MaskPrimaryKeyNode & {
   logo?: Maybe<Scalars['String']>;
 };
 
+export type EnterpriseTeam = MaskPrimaryKeyNode & {
+  __typename?: 'EnterpriseTeam';
+  ownerPtr: Owner;
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  modifiedAt: Scalars['DateTime'];
+  alive?: Maybe<Scalars['Boolean']>;
+  login: Scalars['String'];
+  avatar?: Maybe<Scalars['String']>;
+  vcsProvider: OwnerVcsProvider;
+  vcsAccountUid: Scalars['String'];
+  plan?: Maybe<OwnerPlan>;
+  billingEmail?: Maybe<Scalars['String']>;
+  billingAddress?: Maybe<Scalars['String']>;
+  customerId?: Maybe<Scalars['String']>;
+  primaryUser?: Maybe<User>;
+  gsrSetupPending: Scalars['Boolean'];
+  name: Scalars['String'];
+  members: UserConnection;
+  invitationCode?: Maybe<Scalars['String']>;
+  syncPermissionsWithVcs: Scalars['Boolean'];
+  teammemberSet: TeamMemberConnection;
+  teammemberinvitationSet: TeamMemberInvitationConnection;
+  groupSet: EnterpriseGroupConnection;
+  groupteammembershipSet: GroupTeamMembershipConnection;
+  basePermissionSet?: Maybe<TeamBasePermissionSet>;
+  billingDetails?: Maybe<Scalars['GenericScalar']>;
+  numMembersTotal?: Maybe<Scalars['Int']>;
+  isViewerPrimaryUser?: Maybe<Scalars['Boolean']>;
+  teamMembers?: Maybe<TeamMemberConnection>;
+  invites?: Maybe<TeamMemberInvitationConnection>;
+  invitationUrl?: Maybe<Scalars['String']>;
+  logs?: Maybe<AuditLogConnection>;
+  auditLogMeta?: Maybe<AuditLogMeta>;
+  accountSetupStatus?: Maybe<Scalars['GenericScalar']>;
+  roleInGroup?: Maybe<TeamMemberRoleChoices>;
+  isDirectMember?: Maybe<Scalars['Boolean']>;
+  allLogs?: Maybe<AuditLogConnection>;
+};
+
+
+export type EnterpriseTeamMembersArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type EnterpriseTeamTeammemberSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+  role?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type EnterpriseTeamTeammemberinvitationSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+
+export type EnterpriseTeamGroupSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+};
+
+
+export type EnterpriseTeamGroupteammembershipSetArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+};
+
+
+export type EnterpriseTeamTeamMembersArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+  role?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type EnterpriseTeamInvitesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+
+export type EnterpriseTeamLogsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  actor_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  created?: Maybe<Scalars['String']>;
+  createdBefore?: Maybe<Scalars['String']>;
+  createdAfter?: Maybe<Scalars['String']>;
+  ipAddress_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  eventName_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type EnterpriseTeamAllLogsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  actor_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  created?: Maybe<Scalars['String']>;
+  createdBefore?: Maybe<Scalars['String']>;
+  createdAfter?: Maybe<Scalars['String']>;
+  ipAddress_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+  eventName_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+export type EnterpriseTeamConnection = {
+  __typename?: 'EnterpriseTeamConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<EnterpriseTeamEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type EnterpriseTeamEdge = {
+  __typename?: 'EnterpriseTeamEdge';
+  node?: Maybe<EnterpriseTeam>;
+  cursor: Scalars['String'];
+};
+
 export type EnterpriseUser = MaskPrimaryKeyNode & {
   __typename?: 'EnterpriseUser';
   id: Scalars['ID'];
@@ -1382,7 +1542,7 @@ export type EnterpriseUser = MaskPrimaryKeyNode & {
   accessTokens: AccessTokenConnection;
   auditlogSet: AuditLogConnection;
   primaryOwnerships: OwnerConnection;
-  teams: TeamConnection;
+  teams: EnterpriseTeamConnection;
   teamMemberships: TeamMemberConnection;
   repositorySet: RepositoryConnection;
   transactions: TransactionConnection;
@@ -1771,7 +1931,7 @@ export type GroupTeamMembership = MaskPrimaryKeyNode & {
   modifiedAt: Scalars['DateTime'];
   alive?: Maybe<Scalars['Boolean']>;
   role?: Maybe<TeamMemberRoleChoices>;
-  team: Team;
+  team: EnterpriseTeam;
   group: EnterpriseGroup;
 };
 
@@ -2867,11 +3027,11 @@ export type Owner = MaskPrimaryKeyNode & {
   billingAddress?: Maybe<Scalars['String']>;
   customerId?: Maybe<Scalars['String']>;
   primaryUser?: Maybe<User>;
-  features?: Maybe<Scalars['GenericScalar']>;
   gsrSetupPending: Scalars['Boolean'];
+  features?: Maybe<Scalars['GenericScalar']>;
   analyzers: AnalyzerConnection;
   issuePriorities: IssuePriorityConnection;
-  team?: Maybe<Team>;
+  team?: Maybe<EnterpriseTeam>;
   repositories?: Maybe<RepositoryConnection>;
   userSet: UserConnection;
   configTemplates?: Maybe<ConfigTemplateConnection>;
@@ -2881,6 +3041,7 @@ export type Owner = MaskPrimaryKeyNode & {
   isAutofixEnabled?: Maybe<Scalars['Boolean']>;
   autofixInstallationUrl?: Maybe<Scalars['String']>;
   isTeam?: Maybe<Scalars['Boolean']>;
+  cacheKeys?: Maybe<OwnerCacheKeys>;
   cards?: Maybe<Scalars['GenericScalar']>;
   stripeInvoices?: Maybe<Scalars['GenericScalar']>;
   numMembersTotal?: Maybe<Scalars['Int']>;
@@ -3037,6 +3198,13 @@ export type OwnerAccessTokensArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+};
+
+export type OwnerCacheKeys = {
+  __typename?: 'OwnerCacheKeys';
+  repositories: Scalars['String'];
+  team: Scalars['String'];
+  settings: Scalars['String'];
 };
 
 export type OwnerConnection = {
@@ -4277,6 +4445,7 @@ export type SyncVcsPermissionsPayload = {
 
 export type Team = MaskPrimaryKeyNode & {
   __typename?: 'Team';
+  ownerPtr: Owner;
   id: Scalars['ID'];
   createdAt: Scalars['DateTime'];
   modifiedAt: Scalars['DateTime'];
@@ -4291,7 +4460,6 @@ export type Team = MaskPrimaryKeyNode & {
   customerId?: Maybe<Scalars['String']>;
   primaryUser?: Maybe<User>;
   gsrSetupPending: Scalars['Boolean'];
-  ownerPtr: Owner;
   name: Scalars['String'];
   members: UserConnection;
   invitationCode?: Maybe<Scalars['String']>;
@@ -4406,7 +4574,7 @@ export type TeamBasePermissionSet = MaskPrimaryKeyNode & {
   createdAt: Scalars['DateTime'];
   modifiedAt: Scalars['DateTime'];
   alive?: Maybe<Scalars['Boolean']>;
-  team: Team;
+  team: EnterpriseTeam;
   defaultRepositoryPermission?: Maybe<TeamBasePermissionSetDefaultRepositoryPermission>;
   canMembersIgnoreIssues: Scalars['Boolean'];
   canMembersModifyMetricThresholds: Scalars['Boolean'];
@@ -4451,7 +4619,7 @@ export type TeamMember = MaskPrimaryKeyNode & {
   modifiedAt: Scalars['DateTime'];
   alive?: Maybe<Scalars['Boolean']>;
   role?: Maybe<TeamMemberRoleChoices>;
-  team: Team;
+  team: EnterpriseTeam;
   user: User;
   isPrimaryUser?: Maybe<Scalars['Boolean']>;
 };
@@ -4476,7 +4644,7 @@ export type TeamMemberInvitation = MaskPrimaryKeyNode & {
   modifiedAt: Scalars['DateTime'];
   alive?: Maybe<Scalars['Boolean']>;
   role?: Maybe<TeamMemberRoleChoices>;
-  team: Team;
+  team: EnterpriseTeam;
   invitationCode: Scalars['String'];
   email: Scalars['String'];
   status: TeamMemberInvitationStatus;
@@ -5160,7 +5328,7 @@ export type User = MaskPrimaryKeyNode & {
   accessTokens?: Maybe<AccessTokenConnection>;
   auditlogSet: AuditLogConnection;
   primaryOwnerships: OwnerConnection;
-  teams: TeamConnection;
+  teams: EnterpriseTeamConnection;
   teamMemberships: TeamMemberConnection;
   repositorySet: RepositoryConnection;
   transactions: TransactionConnection;
@@ -7284,8 +7452,8 @@ export type Unnamed_91_Query = (
             { __typename?: 'GroupTeamMembership' }
             & Pick<GroupTeamMembership, 'id' | 'role' | 'createdAt' | 'modifiedAt'>
             & { team: (
-              { __typename?: 'Team' }
-              & Pick<Team, 'id' | 'name' | 'avatar' | 'login' | 'vcsProvider'>
+              { __typename?: 'EnterpriseTeam' }
+              & Pick<EnterpriseTeam, 'id' | 'name' | 'avatar' | 'login' | 'vcsProvider'>
               & { members: (
                 { __typename?: 'UserConnection' }
                 & Pick<UserConnection, 'totalCount'>
@@ -7362,8 +7530,8 @@ export type Unnamed_93_Query = (
             { __typename?: 'EnterpriseUserConnection' }
             & Pick<EnterpriseUserConnection, 'totalCount'>
           )>, teams: (
-            { __typename?: 'TeamConnection' }
-            & Pick<TeamConnection, 'totalCount'>
+            { __typename?: 'EnterpriseTeamConnection' }
+            & Pick<EnterpriseTeamConnection, 'totalCount'>
           ) }
         )> }
       )>> }
@@ -7403,12 +7571,12 @@ export type Unnamed_95_Query = (
   & { enterprise?: Maybe<(
     { __typename?: 'EnterpriseInstallationRoot' }
     & { teams?: Maybe<(
-      { __typename?: 'TeamConnection' }
+      { __typename?: 'EnterpriseTeamConnection' }
       & { edges: Array<Maybe<(
-        { __typename?: 'TeamEdge' }
+        { __typename?: 'EnterpriseTeamEdge' }
         & { node?: Maybe<(
-          { __typename?: 'Team' }
-          & Pick<Team, 'id' | 'name' | 'login'>
+          { __typename?: 'EnterpriseTeam' }
+          & Pick<EnterpriseTeam, 'id' | 'name' | 'login'>
         )> }
       )>> }
     )> }
@@ -7445,8 +7613,8 @@ export type Unnamed_96_Query = (
               { __typename?: 'EnterpriseUserConnection' }
               & Pick<EnterpriseUserConnection, 'totalCount'>
             )>, teams: (
-              { __typename?: 'TeamConnection' }
-              & Pick<TeamConnection, 'totalCount'>
+              { __typename?: 'EnterpriseTeamConnection' }
+              & Pick<EnterpriseTeamConnection, 'totalCount'>
             ) }
           )> }
         )>> }
@@ -7474,13 +7642,13 @@ export type Unnamed_97_Query = (
         { __typename?: 'EnterpriseGroupConnection' }
         & Pick<EnterpriseGroupConnection, 'totalCount'>
       ), teams: (
-        { __typename?: 'TeamConnection' }
-        & Pick<TeamConnection, 'totalCount'>
+        { __typename?: 'EnterpriseTeamConnection' }
+        & Pick<EnterpriseTeamConnection, 'totalCount'>
         & { edges: Array<Maybe<(
-          { __typename?: 'TeamEdge' }
+          { __typename?: 'EnterpriseTeamEdge' }
           & { node?: Maybe<(
-            { __typename?: 'Team' }
-            & Pick<Team, 'id' | 'name' | 'login' | 'avatar' | 'vcsProvider' | 'isDirectMember'>
+            { __typename?: 'EnterpriseTeam' }
+            & Pick<EnterpriseTeam, 'id' | 'name' | 'login' | 'avatar' | 'vcsProvider' | 'isDirectMember'>
             & { members: (
               { __typename?: 'UserConnection' }
               & Pick<UserConnection, 'totalCount'>
@@ -7512,12 +7680,12 @@ export type Unnamed_98_Query = (
           { __typename?: 'EnterpriseUser' }
           & Pick<EnterpriseUser, 'id' | 'avatar' | 'fullName' | 'email' | 'isActive' | 'isSuperuser' | 'scimEnabled'>
           & { teams: (
-            { __typename?: 'TeamConnection' }
+            { __typename?: 'EnterpriseTeamConnection' }
             & { edges: Array<Maybe<(
-              { __typename?: 'TeamEdge' }
+              { __typename?: 'EnterpriseTeamEdge' }
               & { node?: Maybe<(
-                { __typename?: 'Team' }
-                & Pick<Team, 'name'>
+                { __typename?: 'EnterpriseTeam' }
+                & Pick<EnterpriseTeam, 'name'>
               )> }
             )>> }
           ), groupsCount: (
@@ -8045,8 +8213,8 @@ export type Unnamed_111_Query = (
     { __typename?: 'Owner' }
     & Pick<Owner, 'id' | 'isTeam' | 'avatar' | 'vcsInstallationId' | 'hasSubscribedToPlan' | 'isGsrSshRegistered' | 'gsrSetupPending' | 'autofixInstallationUrl' | 'isAutofixEnabled' | 'isAutoonboardAllowed' | 'hasPremiumPlan' | 'canOnboard' | 'isViewerPrimaryUser'>
     & { team?: Maybe<(
-      { __typename?: 'Team' }
-      & Pick<Team, 'id'>
+      { __typename?: 'EnterpriseTeam' }
+      & Pick<EnterpriseTeam, 'id'>
     )>, primaryUser?: Maybe<(
       { __typename?: 'User' }
       & Pick<User, 'id' | 'email' | 'fullName'>
@@ -8543,7 +8711,7 @@ export type Unnamed_122_QueryVariables = Exact<{
 
 export type Unnamed_122_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
@@ -8587,7 +8755,7 @@ export type Unnamed_123_QueryVariables = Exact<{
 
 export type Unnamed_123_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'config' | 'blobUrlRoot' | 'vcsProvider' | 'hasViewerEditAccess'>
     & { issue?: Maybe<(
@@ -8616,7 +8784,7 @@ export type Unnamed_124_QueryVariables = Exact<{
 
 export type Unnamed_124_Query = (
   { __typename?: 'Query' }
-  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | (
+  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | (
     { __typename?: 'RepositoryIssue' }
     & Pick<RepositoryIssue, 'shortcode'>
     & { checkIssues: (
@@ -8735,7 +8903,7 @@ export type Unnamed_127_QueryVariables = Exact<{
 
 export type Unnamed_127_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
@@ -9584,7 +9752,7 @@ export type Unnamed_154_QueryVariables = Exact<{
 
 export type Unnamed_154_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
@@ -9639,8 +9807,8 @@ export type Unnamed_155_Query = (
     { __typename?: 'Owner' }
     & Pick<Owner, 'id'>
     & { team?: Maybe<(
-      { __typename?: 'Team' }
-      & Pick<Team, 'id' | 'invitationUrl'>
+      { __typename?: 'EnterpriseTeam' }
+      & Pick<EnterpriseTeam, 'id' | 'invitationUrl'>
     )> }
   )> }
 );
@@ -9719,8 +9887,8 @@ export type Unnamed_158_Query = (
       { __typename?: 'TeamBasePermissionSet' }
       & Pick<TeamBasePermissionSet, 'id' | 'defaultRepositoryPermission' | 'canMembersIgnoreIssues' | 'canContributorsIgnoreIssues' | 'canMembersModifyMetricThresholds' | 'canContributorsModifyMetricThresholds'>
       & { team: (
-        { __typename?: 'Team' }
-        & Pick<Team, 'id'>
+        { __typename?: 'EnterpriseTeam' }
+        & Pick<EnterpriseTeam, 'id'>
       ) }
     )> }
   )> }

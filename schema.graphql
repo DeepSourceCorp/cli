@@ -903,7 +903,7 @@ type EnterpriseGroup implements MaskPrimaryKeyNode {
   scimDisplayName: String
   name: String
   members(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection
-  teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection!
+  teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection!
   invitationCode: String
   groupusermembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupUserMembershipConnection!
   groupteammembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupTeamMembershipConnection!
@@ -932,7 +932,8 @@ type EnterpriseInstallationRoot {
   groups(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseGroupConnection
   user(id: ID!): EnterpriseUser
   users(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection
-  teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
+  team(id: ID!): EnterpriseTeam
+  teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection
   personalAccounts(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection
   managementConsoleUrl: String
   isScimEnabled: Boolean
@@ -945,6 +946,56 @@ type EnterpriseInstallationSetup implements MaskPrimaryKeyNode {
   alive: Boolean
   name: String!
   logo: String
+}
+
+type EnterpriseTeam implements MaskPrimaryKeyNode {
+  ownerPtr: Owner!
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  login: String!
+  avatar: String
+  vcsProvider: OwnerVcsProvider!
+  vcsAccountUid: String!
+  plan: OwnerPlan
+  billingEmail: String
+  billingAddress: String
+  customerId: String
+  primaryUser: User
+  gsrSetupPending: Boolean!
+  name: String!
+  members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
+  invitationCode: String
+  syncPermissionsWithVcs: Boolean!
+  teammemberSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
+  teammemberinvitationSet(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection!
+  groupSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseGroupConnection!
+  groupteammembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupTeamMembershipConnection!
+  basePermissionSet: TeamBasePermissionSet
+  billingDetails: GenericScalar
+  numMembersTotal: Int
+  isViewerPrimaryUser: Boolean
+  teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection
+  invites(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
+  invitationUrl: String
+  logs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
+  auditLogMeta: AuditLogMeta
+  accountSetupStatus: GenericScalar
+  roleInGroup: TeamMemberRoleChoices
+  isDirectMember: Boolean
+  allLogs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
+}
+
+type EnterpriseTeamConnection {
+  pageInfo: PageInfo!
+  edges: [EnterpriseTeamEdge]!
+  totalCount: Int
+}
+
+type EnterpriseTeamEdge {
+  node: EnterpriseTeam
+  cursor: String!
 }
 
 type EnterpriseUser implements MaskPrimaryKeyNode {
@@ -971,7 +1022,7 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection!
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
-  teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection!
+  teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection!
   teamMemberships(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
   repositorySet(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
   transactions(offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!
@@ -1154,7 +1205,7 @@ type GroupTeamMembership implements MaskPrimaryKeyNode {
   modifiedAt: DateTime!
   alive: Boolean
   role: TeamMemberRoleChoices
-  team: Team!
+  team: EnterpriseTeam!
   group: EnterpriseGroup!
 }
 
@@ -1621,11 +1672,11 @@ type Owner implements MaskPrimaryKeyNode {
   billingAddress: String
   customerId: String
   primaryUser: User
-  features: GenericScalar
   gsrSetupPending: Boolean!
+  features: GenericScalar
   analyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
-  team: Team
+  team: EnterpriseTeam
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   configTemplates(offset: Int, before: String, after: String, first: Int, last: Int, shortcode: String, title_Icontains: String): ConfigTemplateConnection
@@ -1635,6 +1686,7 @@ type Owner implements MaskPrimaryKeyNode {
   isAutofixEnabled: Boolean
   autofixInstallationUrl: String
   isTeam: Boolean
+  cacheKeys: OwnerCacheKeys
   cards: GenericScalar
   stripeInvoices: GenericScalar
   numMembersTotal: Int
@@ -1665,6 +1717,12 @@ type Owner implements MaskPrimaryKeyNode {
   maxUsagePercentage: Float
   featureUsage: GenericScalar
   isGsrSshRegistered: Boolean
+}
+
+type OwnerCacheKeys {
+  repositories: String!
+  team: String!
+  settings: String!
 }
 
 type OwnerConnection {
@@ -2297,6 +2355,7 @@ type SyncVcsPermissionsPayload {
 }
 
 type Team implements MaskPrimaryKeyNode {
+  ownerPtr: Owner!
   id: ID!
   createdAt: DateTime!
   modifiedAt: DateTime!
@@ -2311,7 +2370,6 @@ type Team implements MaskPrimaryKeyNode {
   customerId: String
   primaryUser: User
   gsrSetupPending: Boolean!
-  ownerPtr: Owner!
   name: String!
   members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
@@ -2339,7 +2397,7 @@ type TeamBasePermissionSet implements MaskPrimaryKeyNode {
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  team: Team!
+  team: EnterpriseTeam!
   defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
   canMembersIgnoreIssues: Boolean!
   canMembersModifyMetricThresholds: Boolean!
@@ -2380,7 +2438,7 @@ type TeamMember implements MaskPrimaryKeyNode {
   modifiedAt: DateTime!
   alive: Boolean
   role: TeamMemberRoleChoices
-  team: Team!
+  team: EnterpriseTeam!
   user: User!
   isPrimaryUser: Boolean
 }
@@ -2402,7 +2460,7 @@ type TeamMemberInvitation implements MaskPrimaryKeyNode {
   modifiedAt: DateTime!
   alive: Boolean
   role: TeamMemberRoleChoices
-  team: Team!
+  team: EnterpriseTeam!
   invitationCode: String!
   email: String!
   status: TeamMemberInvitationStatus!
@@ -3020,7 +3078,7 @@ type User implements MaskPrimaryKeyNode {
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection
   auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
-  teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection!
+  teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection!
   teamMemberships(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
   repositorySet(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
   transactions(offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!

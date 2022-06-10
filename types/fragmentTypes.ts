@@ -18,6 +18,7 @@
       "ConfigTemplate",
       "EnterpriseGroup",
       "EnterpriseInstallationSetup",
+      "EnterpriseTeam",
       "EnterpriseUser",
       "FeatureDefinition",
       "GroupTeamMembership",
