@@ -14,22 +14,22 @@ func (p *ProcessAnalysisResults) sortIssuesByFile() {
 	})
 }
 
-/* Prepare a map with unique filenames as key and the issue range for each file as value
- * This is done to ensure fewer loops when processing issues. */
+// Prepare a map with unique filenames as key and the issue range for each file as value
+// This is done to ensure fewer loops when processing issues.
 type IssueRange struct {
 	Filename   string // The file which has the issues
 	BeginIndex int    // Array index in report.Issues where the particular issue starts
 	EndIndex   int    // Array index in report.Issues where the particular issue ends
 }
 
-/* GenerateIssueRangeSlice generates an array containing the issue ranges with respect to files
- * that helps us to go through them and map them to the files where they got reported instead
- * of opening the file for each of them. The generated index looks like this:
- *
- * [{analyzer.go 0 0} {autofix_patch.go 1 1} {difftool.go 2 2} {patch.patch 3 5} {proc_skip_cq_test.go 6 6}]
- *
- * Here, the first field if filename and the second and third fields are the index range in which the issues reported
- * in these files lie in the sorted AnalyzerReport slice. */
+// GenerateIssueRangeSlice generates an array containing the issue ranges with respect to files
+// that helps us to go through them and map them to the files where they got reported instead
+// of opening the file for each of them. The generated index looks like this:
+
+// [{analyzer.go 0 0} {autofix_patch.go 1 1} {difftool.go 2 2} {patch.patch 3 5} {proc_skip_cq_test.go 6 6}]
+
+// Here, the first field if filename and the second and third fields are the index range in which the issues reported
+// in these files lie in the sorted AnalyzerReport slice.
 func createIssueFileRange(report types.AnalysisResult) []IssueRange {
 	fileCount := 0 // for 1 file, 0 based indexing
 	issuesRange := []IssueRange{}

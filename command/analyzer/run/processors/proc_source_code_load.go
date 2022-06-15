@@ -1,4 +1,4 @@
-package processor
+package processors
 
 import (
 	"bytes"
@@ -11,6 +11,10 @@ import (
 	"github.com/alecthomas/chroma/styles"
 	"github.com/deepsourcelabs/cli/types"
 )
+
+const sourceCodeOffset int = 3
+
+type ProcSourceCodeLoad struct{}
 
 type formattedFile struct {
 	fileContent        []string
@@ -164,9 +168,9 @@ func getFinalFormattedSlice(fileContentSlice []string, issue *types.Issue) forma
 	return formattedContent
 }
 
-// procLoadSourceCode processes the source code to be highlighted using chroma and writes that into the
+// Process processes the source code to be highlighted using chroma and writes that into the
 // analysis result post highlighting.
-func procLoadSourceCode(fileContentSlice []string, issue *types.Issue, offset int) {
+func (p ProcSourceCodeLoad) Process(fileContentSlice []string, issue *types.Issue, _ *[]types.Issue) error {
 	lineStart := issue.Location.Position.Begin.Line
 	lineEnd := issue.Location.Position.End.Line
 
@@ -174,17 +178,17 @@ func procLoadSourceCode(fileContentSlice []string, issue *types.Issue, offset in
 	numLines := len(fileContentSlice)
 
 	// Calculate the line number from where the highlighting should start
-	if lineStart-offset < 1 {
+	if lineStart-sourceCodeOffset < 1 {
 		lineStartWithOffset = 1
 	} else {
-		lineStartWithOffset = lineStart - offset
+		lineStartWithOffset = lineStart - sourceCodeOffset
 	}
 
 	// Calculate the line number from where the highlighting should end
-	if lineEnd+offset > numLines {
+	if lineEnd+sourceCodeOffset > numLines {
 		lineEndWithOffset = numLines
 	} else {
-		lineEndWithOffset = lineEnd + offset
+		lineEndWithOffset = lineEnd + sourceCodeOffset
 	}
 
 	formattedFileContent := getFinalFormattedSlice(fileContentSlice, issue)
@@ -212,4 +216,5 @@ func procLoadSourceCode(fileContentSlice []string, issue *types.Issue, offset in
 	}
 	finalFormattedSlice = append(finalFormattedSlice, "</pre></div>")
 	issue.ProcessedData.SourceCode.Rendered = strings.Join(finalFormattedSlice, "")
+	return nil
 }

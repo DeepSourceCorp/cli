@@ -1,4 +1,4 @@
-package processor
+package processors
 
 import (
 	"regexp"
@@ -84,7 +84,7 @@ func generateRegExp(fileExt string) regexp.Regexp {
 }
 
 // generateSilencersRegexMap generates the silencers regex expression used for skipcq processing
-func generateSilencersRegexMap() {
+func GenerateSilencersRegexMap() {
 	langMeta := make(map[string]LanguageMeta)
 	silencerRegexMap := make(map[string]regexp.Regexp)
 

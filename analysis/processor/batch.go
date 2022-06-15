@@ -17,21 +17,21 @@ var (
 	maxIssueDensity int = 100
 )
 
-/* While this loop looks like it would have a complexity of len(filesWIssueRange) * len(cachedFiles) * issues * len(processorList)
- * it only has a complexity of O(len(report.Issues)).
- * When there are a lot of files to be processed, opening all of them one by one takes time, while the CPU waits idly.
- * Opening all files and loading them into memory is expensive in terms of space, since there could be a lot of files.
- * Hence, opening files concurrently in batches (of, say, 30 files) and then processing all issues in those 30 files one by one
- * appears to be the best option. We cannot process each file's issues concurrently, because only the file loading operation is
- * IO intensive, and the rest is CPU intensive. */
+// While this loop looks like it would have a complexity of len(filesWIssueRange) * len(cachedFiles) * issues * len(processorList)
+// it only has a complexity of O(len(report.Issues)).
+// When there are a lot of files to be processed, opening all of them one by one takes time, while the CPU waits idly.
+// Opening all files and loading them into memory is expensive in terms of space, since there could be a lot of files.
+// Hence, opening files concurrently in batches (of, say, 30 files) and then processing all issues in those 30 files one by one
+// appears to be the best option. We cannot process each file's issues concurrently, because only the file loading operation is
+// IO intensive, and the rest is CPU intensive.
 func (p *ProcessAnalysisResults) processIssuesBatch(filesWIssueRange []IssueRange) {
 	// Process files in batches of `batchSize` to avoid `too many files open` error
 	for processedFiles := 0; processedFiles < len(filesWIssueRange); {
 		filesToProcess := 0
 
-		/* The default batch size is 30. If the number of files is less than this batchsize assign their count
-		 * as the number of files to process, else assign the batchsize as the number of files to be processed in
-		 * this iteration. */
+		// The default batch size is 30. If the number of files is less than this batchsize assign their count
+		// as the number of files to process, else assign the batchsize as the number of files to be processed in
+		// this iteration.
 		if len(filesWIssueRange)-processedFiles < batchSize {
 			filesToProcess = len(filesWIssueRange) - processedFiles
 		} else {
@@ -56,7 +56,7 @@ func (p *ProcessAnalysisResults) processIssuesBatch(filesWIssueRange []IssueRang
 				if cachedFile.Filename != issue.Location.Path {
 					break
 				}
-				p.runProcessors(cachedFile, &issue)
+				p.runProcessors(cachedFile, &issue, &p.ProcessedIssues)
 				issueIndex++
 			}
 		}
@@ -67,31 +67,19 @@ func (p *ProcessAnalysisResults) processIssuesBatch(filesWIssueRange []IssueRang
 }
 
 // runProcessors runs the supported processors on the issue passed as a parameter
-func (p *ProcessAnalysisResults) runProcessors(cachedFile fileContentNode, issueToProcess *types.Issue) {
-	var err error
-	skipIssue := false
+func (p *ProcessAnalysisResults) runProcessors(cachedFile fileContentNode, issueToProcess *types.Issue, processedIssues *[]types.Issue) {
 	// Loop through processors
 	for _, processor := range p.Processors {
-		switch processor {
-		case "source_code_load":
-			procLoadSourceCode(cachedFile.FileContent, issueToProcess, sourceCodeOffset)
-		case "skip_cq":
-			skipIssue, err = procSkipCQ(cachedFile.FileContent, issueToProcess)
-			if err != nil {
-				fmt.Println("Publish: Error in processor skip_cq for issue: ", *issueToProcess, err)
-			}
-		default:
-			fmt.Println("Publish: Unkown processor received")
+		err := processor.Process(cachedFile.FileContent, issueToProcess, processedIssues)
+		if err != nil {
+			fmt.Errorf("Failed to execute the processor %s with the following error: %s", "test", err)
 		}
-	}
-	if !skipIssue {
-		p.ProcessedIssues = append(p.ProcessedIssues, *issueToProcess)
 	}
 }
 
-/* If the number of issues in this file is more than a certain number of issues
- * averaged per line, this may be a generated file. Skip processing of further issues
- * in this file */
+// If the number of issues in this file is more than a certain number of issues
+// averaged per line, this may be a generated file. Skip processing of further issues
+// in this file
 func (p *ProcessAnalysisResults) isGeneratedFile(fileIndex int, cachedFile *fileContentNode, filesWIssueRange []IssueRange) bool {
 	linesInThisFile := len(cachedFile.FileContent) | 1 // bitwise op to ensure no divisionbyzero errs
 	issuesInThisFile := filesWIssueRange[fileIndex].EndIndex - filesWIssueRange[fileIndex].BeginIndex
@@ -135,8 +123,8 @@ func (p *ProcessAnalysisResults) cacheFilesToBeProcessed(totalFiles, processedFi
 	return cachedFiles
 }
 
-/* addFileToCache reads the file and formats its content into a fileContentNode struct instance
- * and passes that to the cachedFilesChannel channel since this function is run on a goroutine. */
+// addFileToCache reads the file and formats its content into a fileContentNode struct instance
+// and passes that to the cachedFilesChannel channel since this function is run on a goroutine.
 func addFileToCache(cachedFilesChannel chan fileContentNode, filename, codePath string) {
 	fileContentSlice := []string{}
 

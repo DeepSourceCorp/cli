@@ -1,4 +1,4 @@
-package processor
+package processors
 
 import (
 	"fmt"
@@ -7,6 +7,8 @@ import (
 
 	"github.com/deepsourcelabs/cli/types"
 )
+
+type ProcSkipCQ struct{}
 
 func isSimilarIssue(fileExt, skipCQTag, probableIssueCode, issueCode string) bool {
 	// if it is // skipcq: SCC-S1002 or similar plain skipcq tag, return
@@ -117,13 +119,13 @@ func analyzeLineForSkipCQ(line, fileExt string) bool {
 	return err == nil && match
 }
 
-func procSkipCQ(fileContentSlice []string, issue *types.Issue) (bool, error) {
+func (p ProcSkipCQ) Process(fileContentSlice []string, issue *types.Issue, processedIssues *[]types.Issue) error {
 	filePath := issue.Location.Path
 	lineStart := issue.Location.Position.Begin.Line
 	issueCode := issue.IssueCode
 
 	if lineStart < 1 || lineStart > len(fileContentSlice) {
-		return false, fmt.Errorf("issue position is weird for file of %d lines", len(fileContentSlice))
+		return fmt.Errorf("issue position is weird for file of %d lines", len(fileContentSlice))
 	}
 
 	shouldSkipCQ := false
@@ -155,5 +157,8 @@ func procSkipCQ(fileContentSlice []string, issue *types.Issue) (bool, error) {
 		shouldSkipCQ = checkSkipCQ(fileExt, skipCQregex, fileContentSlice[index], issueCode)
 	}
 
-	return shouldSkipCQ, nil
+	if !shouldSkipCQ {
+		*processedIssues = append(*processedIssues, *issue)
+	}
+	return nil
 }

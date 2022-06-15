@@ -8,7 +8,7 @@ import (
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 
-	analysis_config "github.com/deepsourcelabs/cli/analysis/config"
+	"github.com/deepsourcelabs/cli/analysis/config"
 	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
 )
 
@@ -17,26 +17,23 @@ import (
 var (
 	containerCodePath    string
 	containerToolBoxPath string
-	analysisConfigName   string   = "analysis_config"
-	analysisResultsName  string   = "analysis_results"
-	analysisConfigExt    string   = ".json"
-	analysisResultsExt   string   = ".json"
-	supportedProcessors  []string = []string{"skip_cq", "source_code_load"}
+	analysisConfigName   string = "analysis_config"
+	analysisResultsName  string = "analysis_results"
+	analysisConfigExt    string = ".json"
+	analysisResultsExt   string = ".json"
+	// supportedProcessors  []string = []string{"skip_cq", "source_code_load"}
 )
 
 // The params required while running the Analysis locally
 type AnalyzerDryRun struct {
-	Client       *docker.DockerClient // The client to be used for all docker related ops.
-	RemoteSource bool                 // True if the source to be analyzed is a remote VCS repository.
-	SourcePath   string               // The path of the directory of source code to be analyzed.
-
-	TempCloneDirectory   string // The temporary directory where the source of the remote VCS will be cloned to.
-	TempToolBoxDirectory string // The temporary directory where the analysis_config is present.
-
-	AnalysisFiles  []string                        // The list of analysis files.
-	Processors     []string                        // The post-processors to be invoked after analysis results are received.
-	AnalysisConfig *analysis_config.AnalysisConfig // The analysis_config.json file containing the meta for analysis.
-	AnalysisResult types.AnalysisResult
+	Client               *docker.DockerClient   // The client to be used for all docker related ops.
+	RemoteSource         bool                   // True if the source to be analyzed is a remote VCS repository.
+	SourcePath           string                 // The path of the directory of source code to be analyzed.
+	TempCloneDirectory   string                 // The temporary directory where the source of the remote VCS will be cloned to.
+	TempToolBoxDirectory string                 // The temporary directory where the analysis_config is present.
+	AnalysisFiles        []string               // The list of analysis files.
+	AnalysisConfig       *config.AnalysisConfig // The analysis_config.json file containing the meta for analysis.
+	AnalysisResult       types.AnalysisResult
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -47,7 +44,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	opts := AnalyzerDryRun{
 		SourcePath:   cwd,
 		RemoteSource: false,
-		Processors:   supportedProcessors,
+		// Processors:   supportedProcessors,
 	}
 
 	cmd := &cobra.Command{
@@ -96,8 +93,8 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 
-	/* Create temporary toolbox directory to store analysis config and later analyis results
-	 * If already passed through --output-file flag, use that one */
+	// Create temporary toolbox directory to store analysis config and later analyis results
+	// If already passed through --output-file flag, use that one
 	if err = a.createTemporaryToolBoxDir(); err != nil {
 		return err
 	}
@@ -107,8 +104,8 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 
-	/* Generate the analysis_config.json file
-	 * Also, write the analysis_config data into a temp /toolbox directory to be mounted into the container */
+	// Generate the analysis_config.json file
+	// Also, write the analysis_config data into a temp /toolbox directory to be mounted into the container
 	if err = a.prepareAnalysisConfig(); err != nil {
 		return err
 	}
@@ -118,8 +115,8 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 
-	/* Starts the Docker container which analyzes the code and stores the analysis results
-	 * in a variable */
+	// Starts the Docker container which analyzes the code and stores the analysis results
+	// in a variable
 	if err = a.Client.StartDockerContainer(); err != nil {
 		return err
 	}
