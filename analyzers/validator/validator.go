@@ -116,7 +116,6 @@ func ValidateAnalyzerTOML(analyzerTOMLPath string) (*types.AnalyzerTOML, *Valida
 func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationFailure, error) {
 	issueValidationErrors := []ValidationFailure{}
 
-	// skipcq: I001
 	// TODO: List only TOML files here
 	issuesList, err := ioutil.ReadDir(issuesDirectoryPath)
 	if err != nil {
