@@ -168,6 +168,11 @@ func getFinalFormattedSlice(fileContentSlice []string, issue *types.Issue) forma
 	return formattedContent
 }
 
+// Returns the name of the processor
+func (p ProcSourceCodeLoad) Name() string {
+	return "source_code_load"
+}
+
 // Process processes the source code to be highlighted using chroma and writes that into the
 // analysis result post highlighting.
 func (p ProcSourceCodeLoad) Process(fileContentSlice []string, issue *types.Issue, _ *[]types.Issue) error {

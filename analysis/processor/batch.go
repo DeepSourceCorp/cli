@@ -56,25 +56,30 @@ func (p *ProcessAnalysisResults) processIssuesBatch(filesWIssueRange []IssueRang
 				if cachedFile.Filename != issue.Location.Path {
 					break
 				}
-				p.runProcessors(cachedFile, &issue, &p.ProcessedIssues)
+
+				if err := p.runProcessors(cachedFile, &issue, &p.ProcessedIssues); err != nil {
+					fmt.Println(err.Error())
+				}
 				issueIndex++
 			}
 		}
 		fmt.Println("Batch processing done")
+
 		// Increase total number of files processed
 		processedFiles += filesToProcess
 	}
 }
 
 // runProcessors runs the supported processors on the issue passed as a parameter
-func (p *ProcessAnalysisResults) runProcessors(cachedFile fileContentNode, issueToProcess *types.Issue, processedIssues *[]types.Issue) {
-	// Loop through processors
+func (p *ProcessAnalysisResults) runProcessors(cachedFile fileContentNode, issueToProcess *types.Issue, processedIssues *[]types.Issue) (err error) {
+	// Loop through processors and execute them on the issue passed as a parameter
 	for _, processor := range p.Processors {
-		err := processor.Process(cachedFile.FileContent, issueToProcess, processedIssues)
+		err = processor.Process(cachedFile.FileContent, issueToProcess, processedIssues)
 		if err != nil {
-			fmt.Errorf("Failed to execute the processor %s with the following error: %s", "test", err)
+			return fmt.Errorf("failed to execute the processor %s with the following error: %s", processor.Name(), err)
 		}
 	}
+	return
 }
 
 // If the number of issues in this file is more than a certain number of issues

@@ -13,6 +13,7 @@ type fileContentNode struct {
 
 // Processor interface to receive analysis post-processors.
 type IProcessor interface {
+	Name() string
 	Process([]string, *types.Issue, *[]types.Issue) error
 }
 
@@ -30,12 +31,12 @@ type ProcessAnalysisResults struct {
 func (p *ProcessAnalysisResults) ProcessAnalysisResult() {
 	// Covert the Analyzer report from LSP based format to the default results format.
 	p.formatLSPResultsToDefault()
-	fmt.Println("Total issues reported by the Analyzer: ", len(p.AnalysisResult.Issues))
 
 	// Check if there are issues reported actually.
 	if len(p.AnalysisResult.Issues) <= 0 {
 		return
 	}
+	fmt.Println("Total issues reported by the Analyzer: ", len(p.AnalysisResult.Issues))
 
 	// Once the result has been converted to the DeepSource format, start processing the issues.
 	p.processIssues()

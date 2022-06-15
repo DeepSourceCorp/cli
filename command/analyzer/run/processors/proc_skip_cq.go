@@ -119,6 +119,13 @@ func analyzeLineForSkipCQ(line, fileExt string) bool {
 	return err == nil && match
 }
 
+// Returns the name of the processor
+func (p ProcSkipCQ) Name() string {
+	return "skip_cq"
+}
+
+// Process checks if the issue passed as an argument should be skipped or not
+// If it should be skipped, it is not appended to the processedIssues slice while if it is not skipped, it is appended.
 func (p ProcSkipCQ) Process(fileContentSlice []string, issue *types.Issue, processedIssues *[]types.Issue) error {
 	filePath := issue.Location.Path
 	lineStart := issue.Location.Position.Begin.Line
