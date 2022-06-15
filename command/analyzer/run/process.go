@@ -15,14 +15,14 @@ func (a *AnalyzerDryRun) processAnalyzerReport(reportBytes []byte) (types.Analys
 	skipCQProcessor := processors.ProcSkipCQ{}
 	sourceCodeHighlightingProcessor := processors.ProcSourceCodeLoad{}
 
-	var processor1, processor2 processor.IProcessor
-	processor1 = skipCQProcessor
-	processor2 = sourceCodeHighlightingProcessor
+	// Initializing the processors using the IProcessor interface provided by the `processor` package
+	var skip_cq, source_code_load processor.IProcessor
+	skip_cq = skipCQProcessor
+	source_code_load = sourceCodeHighlightingProcessor
 
-	// Convert the analysis result from the LSP based format to the default DeepSource format
 	processor := processor.ProcessAnalysisResults{
 		CodePath:   a.SourcePath,
-		Processors: []processor.IProcessor{processor1, processor2},
+		Processors: []processor.IProcessor{skip_cq, source_code_load},
 	}
 
 	// Generate the silencers regexMap.
