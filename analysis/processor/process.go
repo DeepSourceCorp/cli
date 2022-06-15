@@ -12,7 +12,7 @@ type IProcessor interface {
 	Process([]string, *types.Issue, *[]types.Issue) error
 }
 
-// Processors struct contains the processor data needed to process the analysis results.
+// ReportProcessor struct contains the processor data needed to process the analysis results.
 type ReportProcessor struct {
 	CodePath   string               // The source code path where the issues got raised.
 	Processors []IProcessor         // The list of supported post-analysis processors.
