@@ -1,4 +1,4 @@
-package run
+package dry_run
 
 import (
 	"fmt"
@@ -21,7 +21,6 @@ var (
 	analysisResultsName  string = "analysis_results"
 	analysisConfigExt    string = ".json"
 	analysisResultsExt   string = ".json"
-	// supportedProcessors  []string = []string{"skip_cq", "source_code_load"}
 )
 
 // The params required while running the Analysis locally
@@ -33,7 +32,7 @@ type AnalyzerDryRun struct {
 	TempToolBoxDirectory string                 // The temporary directory where the analysis_config is present.
 	AnalysisFiles        []string               // The list of analysis files.
 	AnalysisConfig       *config.AnalysisConfig // The analysis_config.json file containing the meta for analysis.
-	AnalysisResult       types.AnalysisResult
+	AnalysisResult       types.AnalysisResult   // The analysis result received after post processing Analyzer report.
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -44,7 +43,6 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	opts := AnalyzerDryRun{
 		SourcePath:   cwd,
 		RemoteSource: false,
-		// Processors:   supportedProcessors,
 	}
 
 	cmd := &cobra.Command{

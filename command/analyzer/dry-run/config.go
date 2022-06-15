@@ -1,4 +1,4 @@
-package run
+package dry_run
 
 import (
 	"encoding/json"
