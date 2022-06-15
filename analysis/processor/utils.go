@@ -8,7 +8,7 @@ import (
 
 // sortIssuesByFile sorts the issues in an alphabetical order according to the filenames
 // where they got reported.
-func (p *ConfigureProcessors) sortIssuesByFile(result *types.AnalysisResult) {
+func (p *ReportProcessor) sortIssuesByFile(result *types.AnalysisResult) {
 	sort.Slice(result.Issues, func(i, j int) bool {
 		return result.Issues[i].Location.Path < result.Issues[j].Location.Path
 	})
@@ -75,7 +75,7 @@ func createIssueFileRange(report types.AnalysisResult) []IssueRange {
 }
 
 // formatLSPResultsToDefault converts the LSP based analysis results into the default format supported by DeepSource.
-func (p *ConfigureProcessors) formatLSPResultsToDefault() types.AnalysisResult {
+func (p *ReportProcessor) formatLSPResultsToDefault() types.AnalysisResult {
 	analysisResult := types.AnalysisResult{}
 	analysisResult.IsPassed = p.Report.IsPassed
 	analysisResult.Metrics = append(p.Report.Metrics, analysisResult.Metrics...)

@@ -169,7 +169,7 @@ func getFinalFormattedSlice(fileContentSlice []string, issue *types.Issue) forma
 }
 
 // Returns the name of the processor
-func (p ProcSourceCodeLoad) Name() string {
+func (p ProcSourceCodeLoad) String() string {
 	return "source_code_load"
 }
 

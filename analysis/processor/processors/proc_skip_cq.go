@@ -119,7 +119,7 @@ func analyzeLineForSkipCQ(line, fileExt string) bool {
 }
 
 // Returns the name of the processor
-func (p ProcSkipCQ) Name() string {
+func (p ProcSkipCQ) String() string {
 	return "skip_cq"
 }
 

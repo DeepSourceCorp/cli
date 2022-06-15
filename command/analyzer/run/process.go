@@ -20,7 +20,7 @@ func (a *AnalyzerDryRun) processAnalyzerReport(reportBytes []byte) (types.Analys
 	skip_cq = skipCQProcessor
 	source_code_load = sourceCodeHighlightingProcessor
 
-	processor := processor.ConfigureProcessors{
+	processor := processor.ReportProcessor{
 		CodePath:   a.SourcePath,
 		Processors: []processor.IProcessor{skip_cq, source_code_load},
 	}
@@ -34,6 +34,6 @@ func (a *AnalyzerDryRun) processAnalyzerReport(reportBytes []byte) (types.Analys
 	}
 
 	processor.Report = report
-	analysisResult := processor.ProcessAnalyzerReport()
+	analysisResult := processor.Process()
 	return analysisResult, nil
 }

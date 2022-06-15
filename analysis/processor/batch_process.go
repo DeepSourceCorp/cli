@@ -29,7 +29,7 @@ type fileContentNode struct {
 // Hence, opening files concurrently in batches (of, say, 30 files) and then processing all issues in those 30 files one by one
 // appears to be the best option. We cannot process each file's issues concurrently, because only the file loading operation is
 // IO intensive, and the rest is CPU intensive.
-func (p *ConfigureProcessors) processIssuesBatch(filesWIssueRange []IssueRange, result *types.AnalysisResult, processedIssues *[]types.Issue) {
+func (p *ReportProcessor) processIssuesBatch(filesWIssueRange []IssueRange, result *types.AnalysisResult, processedIssues *[]types.Issue) {
 	// Process files in batches of `batchSize` to avoid `too many files open` error
 	for processedFiles := 0; processedFiles < len(filesWIssueRange); {
 		filesToProcess := 0
@@ -75,12 +75,12 @@ func (p *ConfigureProcessors) processIssuesBatch(filesWIssueRange []IssueRange, 
 }
 
 // runProcessors runs the supported processors on the issue passed as a parameter
-func (p *ConfigureProcessors) runProcessors(cachedFile fileContentNode, issueToProcess *types.Issue, processedIssues *[]types.Issue) (err error) {
+func (p *ReportProcessor) runProcessors(cachedFile fileContentNode, issueToProcess *types.Issue, processedIssues *[]types.Issue) (err error) {
 	// Loop through processors and execute them on the issue passed as a parameter
 	for _, processor := range p.Processors {
 		err = processor.Process(cachedFile.FileContent, issueToProcess, processedIssues)
 		if err != nil {
-			return fmt.Errorf("failed to execute the processor %s with the following error: %s", processor.Name(), err)
+			return fmt.Errorf("failed to execute the processor %s with the following error: %s", processor, err)
 		}
 	}
 	return
@@ -89,7 +89,7 @@ func (p *ConfigureProcessors) runProcessors(cachedFile fileContentNode, issueToP
 // If the number of issues in this file is more than a certain number of issues
 // averaged per line, this may be a generated file. Skip processing of further issues
 // in this file
-func (p *ConfigureProcessors) isGeneratedFile(fileIndex int, cachedFile *fileContentNode, filesWIssueRange []IssueRange, result *types.AnalysisResult) bool {
+func (p *ReportProcessor) isGeneratedFile(fileIndex int, cachedFile *fileContentNode, filesWIssueRange []IssueRange, result *types.AnalysisResult) bool {
 	linesInThisFile := len(cachedFile.FileContent) | 1 // bitwise op to ensure no divisionbyzero errs
 	issuesInThisFile := filesWIssueRange[fileIndex].EndIndex - filesWIssueRange[fileIndex].BeginIndex
 	if (issuesInThisFile / linesInThisFile) > maxIssueDensity {
@@ -113,7 +113,7 @@ func (p *ConfigureProcessors) isGeneratedFile(fileIndex int, cachedFile *fileCon
 }
 
 // cacheBatchOfFiles receives the count of files to be cached and caches them in a batch by spawning goroutines.
-func (p *ConfigureProcessors) cacheFilesToBeProcessed(totalFiles, processedFiles int, filesWIssueRange []IssueRange) []fileContentNode {
+func (p *ReportProcessor) cacheFilesToBeProcessed(totalFiles, processedFiles int, filesWIssueRange []IssueRange) []fileContentNode {
 	fileContentChannel := make(chan fileContentNode, totalFiles)
 	for j := 0; j < totalFiles; j++ {
 		filename := filesWIssueRange[processedFiles+j].Filename
