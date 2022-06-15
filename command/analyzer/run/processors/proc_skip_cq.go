@@ -75,7 +75,6 @@ func checkSkipCQ(fileExt string, skipCQre regexp.Regexp, line, issueCode string)
 						for _, probableIssueCode := range strings.Split(match[i], ",") {
 							// if an issue is to be ignored in this line of code is same as
 							// the issue that is raised, we have to ignore the issue
-							print(probableIssueCode)
 
 							if isSimilarIssue(fileExt, skipCQTag, probableIssueCode, issueCode) {
 								ignoreIssue = true
