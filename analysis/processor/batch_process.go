@@ -68,7 +68,6 @@ func (p *ConfigureProcessors) processIssuesBatch(filesWIssueRange []IssueRange, 
 				issueIndex++
 			}
 		}
-		fmt.Println("Batch processing done")
 
 		// Increase total number of files processed
 		processedFiles += filesToProcess
