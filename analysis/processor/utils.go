@@ -8,9 +8,9 @@ import (
 
 // sortIssuesByFile sorts the issues in an alphabetical order according to the filenames
 // where they got reported.
-func (p *ProcessAnalysisResults) sortIssuesByFile() {
-	sort.Slice(p.AnalysisResult.Issues, func(i, j int) bool {
-		return p.AnalysisResult.Issues[i].Location.Path < p.AnalysisResult.Issues[j].Location.Path
+func (p *ConfigureProcessors) sortIssuesByFile(result *types.AnalysisResult) {
+	sort.Slice(result.Issues, func(i, j int) bool {
+		return result.Issues[i].Location.Path < result.Issues[j].Location.Path
 	})
 }
 
@@ -75,10 +75,11 @@ func createIssueFileRange(report types.AnalysisResult) []IssueRange {
 }
 
 // formatLSPResultsToDefault converts the LSP based analysis results into the default format supported by DeepSource.
-func (p *ProcessAnalysisResults) formatLSPResultsToDefault() {
-	p.AnalysisResult.IsPassed = p.Report.IsPassed
-	p.AnalysisResult.Metrics = append(p.Report.Metrics, p.AnalysisResult.Metrics...)
-	p.AnalysisResult.Errors = append(p.Report.Errors, p.AnalysisResult.Errors...)
+func (p *ConfigureProcessors) formatLSPResultsToDefault() types.AnalysisResult {
+	analysisResult := types.AnalysisResult{}
+	analysisResult.IsPassed = p.Report.IsPassed
+	analysisResult.Metrics = append(p.Report.Metrics, analysisResult.Metrics...)
+	analysisResult.Errors = append(p.Report.Errors, analysisResult.Errors...)
 
 	// Appending the issues to the default format of Analysis report
 	for _, issue := range p.Report.Issues {
@@ -99,6 +100,7 @@ func (p *ProcessAnalysisResults) formatLSPResultsToDefault() {
 				},
 			},
 		}
-		p.AnalysisResult.Issues = append(p.AnalysisResult.Issues, analysisIssue)
+		analysisResult.Issues = append(analysisResult.Issues, analysisIssue)
 	}
+	return analysisResult
 }

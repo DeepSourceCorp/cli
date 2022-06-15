@@ -5,7 +5,7 @@ import (
 	"fmt"
 
 	"github.com/deepsourcelabs/cli/analysis/processor"
-	"github.com/deepsourcelabs/cli/command/analyzer/run/processors"
+	"github.com/deepsourcelabs/cli/analysis/processor/processors"
 	"github.com/deepsourcelabs/cli/types"
 )
 
@@ -20,7 +20,7 @@ func (a *AnalyzerDryRun) processAnalyzerReport(reportBytes []byte) (types.Analys
 	skip_cq = skipCQProcessor
 	source_code_load = sourceCodeHighlightingProcessor
 
-	processor := processor.ProcessAnalysisResults{
+	processor := processor.ConfigureProcessors{
 		CodePath:   a.SourcePath,
 		Processors: []processor.IProcessor{skip_cq, source_code_load},
 	}
@@ -34,6 +34,6 @@ func (a *AnalyzerDryRun) processAnalyzerReport(reportBytes []byte) (types.Analys
 	}
 
 	processor.Report = report
-	processor.ProcessAnalysisResult()
-	return processor.AnalysisResult, nil
+	analysisResult := processor.ProcessAnalyzerReport()
+	return analysisResult, nil
 }
