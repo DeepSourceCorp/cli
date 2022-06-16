@@ -4,10 +4,11 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/spf13/cobra"
 
-	analysis_config "github.com/deepsourcelabs/cli/analysis/config"
+	"github.com/deepsourcelabs/cli/analysis/config"
 	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
 )
 
@@ -20,18 +21,19 @@ var (
 	analysisResultsName  string = "analysis_results"
 	analysisConfigExt    string = ".json"
 	analysisResultsExt   string = ".json"
+	// supportedProcessors  []string = []string{"skip_cq", "source_code_load"}
 )
 
 // The params required while running the Analysis locally
 type AnalyzerDryRun struct {
-	Client               *docker.DockerClient // The client to be used for all docker related ops
-	RemoteSource         bool                 // True if the source to be analyzed is a remote VCS repository
-	SourcePath           string               // The path of the directory of source code to be analyzed
-	AnalysisFiles        []string             // The list of analysis files
-	TempCloneDirectory   string               // The temporary directory where the source of the remote VCS will be cloned to
-	TempToolBoxDirectory string               // The temporary directory where the analysis_config is present
-
-	AnalysisConfig *analysis_config.AnalysisConfig // The analysis_config.json file containing the meta for analysis
+	Client               *docker.DockerClient   // The client to be used for all docker related ops.
+	RemoteSource         bool                   // True if the source to be analyzed is a remote VCS repository.
+	SourcePath           string                 // The path of the directory of source code to be analyzed.
+	TempCloneDirectory   string                 // The temporary directory where the source of the remote VCS will be cloned to.
+	TempToolBoxDirectory string                 // The temporary directory where the analysis_config is present.
+	AnalysisFiles        []string               // The list of analysis files.
+	AnalysisConfig       *config.AnalysisConfig // The analysis_config.json file containing the meta for analysis.
+	AnalysisResult       types.AnalysisResult
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -42,6 +44,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	opts := AnalyzerDryRun{
 		SourcePath:   cwd,
 		RemoteSource: false,
+		// Processors:   supportedProcessors,
 	}
 
 	cmd := &cobra.Command{
@@ -66,7 +69,6 @@ func NewCmdAnalyzerRun() *cobra.Command {
 
 // Run the Analyzer locally on a certain directory or repository
 func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
-	// runtime.Breakpoint()
 	err = a.createDockerClient()
 	if err != nil {
 		return err
@@ -91,20 +93,19 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 
-	/* Create temporary toolbox directory to store analysis config and later analyis results
-	 * If already passed through --output-file flag, use that one */
+	// Create temporary toolbox directory to store analysis config and later analyis results
+	// If already passed through --output-file flag, use that one
 	if err = a.createTemporaryToolBoxDir(); err != nil {
 		return err
 	}
 
 	// Resolve the path of source code to be analyzed based on the user input
-	a.Client.AnalysisOpts.HostCodePath, err = a.resolveAnalysisCodePath()
-	if err != nil {
+	if a.Client.AnalysisOpts.HostCodePath, err = a.resolveAnalysisCodePath(); err != nil {
 		return err
 	}
 
-	/* Generate the analysis_config.json file
-	 * Also, write the analysis_config data into a temp /toolbox directory to be mounted into the container */
+	// Generate the analysis_config.json file
+	// Also, write the analysis_config data into a temp /toolbox directory to be mounted into the container
 	if err = a.prepareAnalysisConfig(); err != nil {
 		return err
 	}
@@ -114,8 +115,8 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 
-	/* Starts the Docker container which analyzes the code and stores the analysis results
-	 * in a variable */
+	// Starts the Docker container which analyzes the code and stores the analysis results
+	// in a variable
 	if err = a.Client.StartDockerContainer(); err != nil {
 		return err
 	}
@@ -127,5 +128,14 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	// Write the analysis results to the file
-	return a.writeAnalysisResults(analysisResultBuf, analysisResultFileName)
+	if err = a.writeAnalysisResults(analysisResultBuf, analysisResultFileName); err != nil {
+		return err
+	}
+
+	// Process the analyzer report once it is received.
+	if a.AnalysisResult, err = a.processAnalyzerReport(analysisResultBuf); err != nil {
+		return err
+	}
+	fmt.Println("Issues after processing:", len(a.AnalysisResult.Issues))
+	return nil
 }
