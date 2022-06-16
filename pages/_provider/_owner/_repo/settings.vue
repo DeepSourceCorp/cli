@@ -44,6 +44,7 @@ interface TabLink {
   perms?: RepoPerms[]
   forTeams?: boolean
   gateFeature?: AppFeatures[]
+  disableOnPrem?: boolean
 }
 
 @Component({
@@ -146,7 +147,8 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
       icon: 'list',
       link: ['settings', 'integrations'],
       perms: [RepoPerms.CHANGE_INTEGRATION_SETTINGS],
-      forTeams: true
+      forTeams: true,
+      disableOnPrem: true
     }
   ]
 
@@ -210,6 +212,7 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
 
   /**
    * Validate if Navlinks should be shown or not
+   * TODO: Make it a computed property
    *
    * @param {TabLink} item
    *
@@ -221,6 +224,10 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     }
 
     if (item.forTeams && !this.isTeamAccount) {
+      return false
+    }
+
+    if (this.$config.onPrem && item.disableOnPrem) {
       return false
     }
 
