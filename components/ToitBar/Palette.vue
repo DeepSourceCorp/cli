@@ -1,380 +1,118 @@
 <template>
-  <div class="fixed inset-0 flex items-start justify-center pt-32">
-    <div
-      ref="command-k-wrapper"
-      class="w-full mx-auto overflow-hidden border rounded-lg outline-none sm:w-120 min-h-10 border-ink-100 shadow-double-dark bg-ink-300"
+  <div class="fixed inset-0 flex items-start pt-40 bg-black bg-opacity-10">
+    <transition
+      enter-active-class="transition-all duration-100 ease-in-out"
+      leave-active-class="transition-all duration-100 ease-in-out"
+      enter-class="translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0"
+      leave-to-class="translate-y-full sm:translate-y-0 sm:scale-105 sm:opacity-0"
     >
-      <div class="p-4 pb-0 border-ink-100" :class="{ 'border-b': commands.length }">
-        <div class="space-x-2">
-          <span
-            v-for="crumb in breadcrumbs"
-            :key="crumb"
-            class="px-2 py-1 text-xs leading-none rounded-md bg-ink-200 text-vanilla-300"
-          >
-            {{ crumb }}
-          </span>
-        </div>
-        <input
-          v-focus
-          ref="palette-search"
-          type="text"
-          autoComplete="off"
-          role="combobox"
-          spellCheck="false"
-          class="w-full h-12 bg-transparent focus:outline-none placeholder-slate"
-          :value="searchCandidate"
-          :placeholder="inputPlaceholder"
-          @input="setSearchValue"
-        />
-      </div>
-      <div class="overflow-y-scroll max-h-92 hide-scroll">
-        <div v-for="(command, index) in commands" :key="command.id">
-          <div
-            v-if="command.commandType === 'divider'"
-            :key="command.id"
-            data-command-type="divider"
-            class="ml-0.5 first:mt-2 mt-4 px-3.5 py-2 font-semibold tracking-wider uppercase text-xxs text-vanilla-400"
-          >
-            {{ command.label }}
+      <div
+        class="w-full m-2 border shadow-double-dark rounded-xl sm:mb-12 border-ink-50 bg-ink-400 transform-gpu sm:w-auto md:mx-auto"
+      >
+        <div class="w-full rounded-lg outline-none sm:w-120 min-h-10">
+          <div class="p-4 pb-0 border-b border-ink-100">
+            <div class="space-x-2">
+              <span
+                v-if="$route.params.owner"
+                class="px-2 py-1 text-xs leading-none rounded-md bg-ink-200 text-vanilla-300"
+              >
+                {{
+                  activeDashboardContext.team_name ||
+                  activeDashboardContext.login ||
+                  $route.params.owner
+                }}
+              </span>
+              <span
+                v-if="parentStepLabel"
+                class="px-2 py-1 text-xs leading-none rounded-md bg-ink-200 text-vanilla-300"
+              >
+                {{ parentStepLabel }}
+              </span>
+            </div>
+            <input
+              type="text"
+              v-focus
+              v-model="searchCandidate"
+              ref="quick-bar-search"
+              placeholder="Search or type a command"
+              class="w-full h-12 bg-transparent focus:outline-none placeholder-slate"
+            />
           </div>
-          <command-row
-            v-else
-            v-bind="command"
-            :data-label="command.label"
-            :id="buildId(index)"
-            :ref="buildId(index)"
-            :active="index === activeIndex"
-          />
+          <div class="space-y-4 overflow-y-scroll p- hide-scroll max-h-92">
+            <commands-wrapper v-if="searchResults.length">
+              <command-row
+                v-for="command in searchResults"
+                :key="command.id"
+                v-bind="command"
+                :ref="buildId(command)"
+                :active="currentCommand && currentCommand.id === command.id"
+              />
+            </commands-wrapper>
+            <commands-wrapper v-else-if="stepTwoCommands.length">
+              <command-row
+                v-for="command in stepTwoCommands"
+                :key="command.id"
+                v-bind="command"
+                :ref="buildId(command)"
+                :active="currentCommand && currentCommand.id === command.id"
+              />
+            </commands-wrapper>
+            <template v-else>
+              <commands-wrapper v-if="suggestedCommands.length">
+                <command-row
+                  v-for="command in suggestedCommands"
+                  :key="command.id"
+                  v-bind="command"
+                  :ref="buildId(command)"
+                  :active="currentCommand && currentCommand.id === command.id"
+                />
+              </commands-wrapper>
+              <commands-wrapper title="all commands" v-if="globalCommands.length">
+                <command-row
+                  v-for="command in globalCommands"
+                  :key="command.id"
+                  v-bind="command"
+                  :ref="buildId(command)"
+                  :active="currentCommand && currentCommand.id === command.id"
+                />
+              </commands-wrapper>
+            </template>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Ref, Watch, mixins } from 'nuxt-property-decorator'
-import RepoListMixin from '~/mixins/repoListMixin'
-import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
-
+import { Vue, Component, mixins } from 'nuxt-property-decorator'
+import { ZIcon } from '@deepsourcelabs/zeal'
 import { CommandAction } from '~/types/palette'
-import { Maybe } from '~/types/types'
-import { createKeybindingsHandler } from 'tinykeys'
-import { matchSorter } from 'match-sorter'
+import { Maybe, Repository } from '~/types/types'
+import RepoListMixin from '~/mixins/repoListMixin'
+import Fuse from 'fuse.js'
+import { resolveNodes } from '~/utils/array'
+import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 
 /**
  * Command palette component
  */
-@Component
+@Component({
+  components: {
+    ZIcon
+  }
+})
 export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
-  searchCandidate = ''
-  parentCommands: CommandAction[] = []
-  childCommands: CommandAction[] = []
-  activeIndex = 0
-  wrapperOffset = 0
-  handler: EventListener
-  searchResults: CommandAction[] = []
+  public cursor = 0
+  public searchCandidate = ''
+  public parentStepLabel = ''
+  public stepTwoCommands: CommandAction[] = []
+  public currentCommand: Maybe<CommandAction> = null
+  public suggestedCommands: CommandAction[] = []
+  public searchResults: CommandAction[] = []
+  public globalCommands: CommandAction[] = []
 
-  @Ref('command-k-wrapper')
-  wrapper: HTMLElement
-
-  @Ref('palette-search')
-  searchBox: HTMLInputElement
-
-  /**
-   * Created hook for Vue
-   *
-   * @return {void}
-   */
-  created() {
-    // register global commands to the command manager
-    this.registerGlobalCommands()
-
-    // Trigger sync repo list query to the web worker
-    this.$sendWorkerTask('syncRepoList', {
-      login: this.activeOwner,
-      provider: this.$providerMetaMap[this.activeProvider].value
-    })
-  }
-
-  /**
-   * Mounted hook
-   *
-   * @return {void}
-   */
-  mounted() {
-    // The wrapper offset is used to maintain focus for elements not in visibility
-    this.wrapperOffset = this.wrapper.offsetHeight + this.wrapper.offsetTop
-
-    // Don't let the background scroll
-    document.body.classList.add('overflow-hidden')
-
-    // set the keyboard handler events
-    this.setKeyboardEventHandler()
-  }
-
-  /**
-   * Describe your function
-   * @return {any}
-   */
-  @Watch('$route')
-  setKeyboardEventHandler() {
-    // Remove any existing event listener
-    this.wrapper.removeEventListener('keydown', this.handler)
-
-    const bindings = {
-      Escape: this.wrapEvent(() => this.$emit('close')),
-      ArrowUp: this.wrapEvent(this._handleArrowUp),
-      ArrowDown: this.wrapEvent(this._handleArrowDown),
-      Enter: this.wrapEvent(this._handleEnter),
-      Backspace: this._handleBackspace,
-      Tab: this.wrapEvent(this._handleTab),
-      ...this.fetchKeyBindingsFromCommands(),
-      'j o i n d e e p s o u r c e': this.wrapEvent(() => {
-        window.open('https://deepsource.io/jobs/', '_blank')
-      }),
-      'w h o i s d u c k n o r r i s': this.wrapEvent(() =>
-        window.open('https://www.youtube.com/watch?v=PSHM9Z7HIRQ', '_blank')
-      )
-    }
-
-    // create and add the event listener
-    this.handler = createKeybindingsHandler(bindings)
-    this.wrapper.addEventListener('keydown', this.handler)
-  }
-
-  /**
-   * Fetch key bindings from commands
-   *
-   * @return {Record<string, (event: KeyboardEvent) => void>}
-   */
-  fetchKeyBindingsFromCommands(): Record<string, (event: KeyboardEvent) => void> {
-    // fetch key bindings from commands
-    const bindings: Record<string, (event: KeyboardEvent) => void> = {}
-    const commands = [
-      ...this.$palette.fetchCurrentCommands(this.$route),
-      ...this.$palette.fetchGlobalCommands(this.$route)
-    ]
-
-    commands.forEach((cmd) => {
-      if (cmd.shortkey) {
-        bindings[cmd.shortkey] = this.wrapEvent(async () => await this.executeCommand(cmd))
-      }
-    })
-
-    return bindings
-  }
-
-  /**
-   * Destroy event listener and remove overflow class from the body
-   *
-   * @return {any}
-   */
-  beforeDestroy() {
-    this.wrapper.removeEventListener('keydown', this.handler)
-    document.body.classList.remove('overflow-hidden')
-  }
-
-  /**
-   * Returns a function wrapped in keyboard event handlers to be
-   * execute for cmd-k events
-   *
-   * @param {(event:KeyboardEvent) => void} method
-   *
-   * @return {(event: KeyboardEvent) => void}
-   */
-  wrapEvent(method: (event: KeyboardEvent) => void): (event: KeyboardEvent) => void {
-    return (event: KeyboardEvent) => {
-      event.stopImmediatePropagation()
-      event.preventDefault()
-      method(event)
-      this.searchBox.focus()
-    }
-  }
-
-  /**
-   * Handler for enter key, executes the currently selected command
-   *
-   * @return {Promise<void>}
-   */
-  private _handleEnter(): Promise<void> {
-    return this.executeCommand(this.currentCommand)
-  }
-
-  /**
-   * Handle backspace key, backspace lets you move to the previous list
-   *
-   * @param {KeyboardEvent} event
-   * @return {Promise<void>}
-   */
-  private async _handleBackspace(event: KeyboardEvent): Promise<void> {
-    if (this.searchCandidate === '' && this.parentCommands.length) {
-      event.stopImmediatePropagation()
-      this.parentCommands = this.parentCommands.slice(0, this.parentCommands.length - 1)
-
-      if (this.parentCommands.length) {
-        if (this.currentParentCommand && this.currentParentCommand.children) {
-          this.childCommands = await this.currentParentCommand.children(this.$router)
-          this.searchCandidate = ''
-          this.activeIndex = 0
-        }
-      }
-    }
-  }
-
-  /**
-   * If the current action has children, set the action to parent action
-   * and render new commands
-   *
-   * @return {Promise<void>}
-   */
-  private async _handleTab(): Promise<void> {
-    if (this.currentCommand.children) {
-      this._setParentCommand(this.currentCommand)
-    }
-  }
-
-  /**
-   * Trigger the action depending on available options
-   *
-   * @param {CommandAction} command
-   * @return {Promise<void>}
-   */
-  private async executeCommand(command: CommandAction): Promise<void> {
-    if (command.action) {
-      command.action(this.$router)
-      this.$emit('close')
-    } else if (command.children) {
-      this._setParentCommand(command)
-    }
-  }
-
-  /**
-   * Set the parent command
-   *
-   * @param {CommandAction} command
-   * @return {Promise<void>}
-   */
-  private async _setParentCommand(command: CommandAction): Promise<void> {
-    if (command.children) {
-      this.childCommands = await command.children(this.$router)
-      //! Reassign triggers reactivity reliably
-      this.parentCommands = [...this.parentCommands, command]
-      this.searchCandidate = ''
-      this.activeIndex = 0
-    }
-  }
-
-  /**
-   * Handler for arrow down
-   * Ensures that the `activeIndex` does not go out of bounds
-   *
-   * @param {KeyboardEvent} event
-   * @return {void}
-   */
-  private _handleArrowDown(event: KeyboardEvent): void {
-    if (this.activeIndex < this.commands.length - 1) {
-      this.activeIndex = this.activeIndex + 1
-    }
-
-    // skip the command in case it's a non-navigable type
-    if (this.currentCommand.commandType === 'divider') {
-      this.activeIndex = this.activeIndex + 1
-    }
-
-    this._setFocus(event)
-  }
-
-  /**
-   * Handler for arrow up
-   * Ensures that the `activeIndex` does not go out of bounds
-   *
-   * @param {KeyboardEvent} event
-   * @return {void}
-   */
-  private _handleArrowUp(event: KeyboardEvent): void {
-    if (this.activeIndex > 0) {
-      this.activeIndex = this.activeIndex - 1
-    }
-
-    // skip the command in case it's a non-navigable type
-    if (this.currentCommand.commandType === 'divider') {
-      this.activeIndex = this.activeIndex - 1
-    }
-
-    this._setFocus(event)
-  }
-
-  /**
-   * Depeding on the location of the element, set focus to the element
-   *
-   * @param {KeyboardEvent} event
-   *
-   *  @return {void}
-   */
-  private _setFocus(event: KeyboardEvent): void {
-    const refs = this.$refs[this.buildId(this.activeIndex)]
-
-    if (!(Array.isArray(refs) && refs.length)) return
-
-    const element = (refs[0] as Vue).$el as HTMLElement
-
-    if (event.key === 'ArrowDown' && element.offsetTop > this.wrapperOffset - 60) {
-      element.focus()
-    } else {
-      element.focus()
-    }
-  }
-
-  get currentParentCommand(): Maybe<CommandAction> {
-    return this.parentCommands.at(-1) ?? null
-  }
-
-  get currentCommand(): CommandAction {
-    return this.commands[this.activeIndex]
-  }
-
-  get inputPlaceholder(): string {
-    return this.currentParentCommand?.placeholder ?? 'Search or type a command'
-  }
-
-  get commands(): CommandAction[] {
-    if (this.currentParentCommand && this.childCommands) {
-      if (this.searchCandidate) {
-        const results = matchSorter(this.childCommands, this.searchCandidate, {
-          keys: ['shortkey', 'label', 'keywords']
-        })
-
-        return results
-      }
-
-      return this.childCommands
-    }
-
-    if (this.searchCandidate && this.searchResults) {
-      return this.searchResults
-    }
-
-    return [
-      ...this.$palette.fetchCurrentCommands(this.$route),
-      {
-        label: 'All Commands',
-        id: 'divider-all-commands',
-        icon: 'divider',
-        commandType: 'divider'
-      },
-      ...this.$palette.fetchGlobalCommands(this.$route)
-    ]
-  }
-
-  /**
-   * Event handler for search input event
-   *
-   * @param {InputEvent} e
-   * @return {Promise<void>}
-   */
-  async setSearchValue(e: InputEvent): Promise<void> {
-    const target = e.target ? (e.target as HTMLInputElement) : null
-    this.searchCandidate = target?.value ?? ''
-    this.searchResults = await this.$palette.query(this.searchCandidate, this.$route)
+  get hasOptions(): boolean {
+    return true
   }
 
   /**
@@ -383,25 +121,213 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
    * @param {CommandAction} action
    * @return {string}
    */
-  buildId(index: Number): string {
-    return `search-option-${index}`
+  buildId(action: CommandAction): string {
+    return `search-option-${action.id}`
   }
 
-  get breadcrumbs(): string[] {
-    if (this.parentCommands.length) {
-      return this.parentCommands.map((command) => command.label)
+  /**
+   * Set command as active and focus on it
+   *
+   * @param {number} cursor
+   *
+   * @return {void}
+   */
+  setActive(cursor: number): void {
+    const commands = this.currentCommandList
+    if (cursor in commands) {
+      this.cursor = cursor
+      this.currentCommand = commands[cursor]
+
+      const refs = this.$refs[this.buildId(this.currentCommand)]
+      if (Array.isArray(refs) && refs.length) {
+        const component = refs[0] as Vue
+        ;(component.$el as HTMLElement).focus()
+      }
+    }
+  }
+
+  /**
+   * reset pallete, search, step two commands and set focus to first element
+   *
+   * @return {void}
+   */
+  resetPalette(): void {
+    this.registerGlobalCommands()
+    this.suggestedCommands = this.$palette.fetchCurrentCommands(this.$route)
+    this.globalCommands = this.$palette.fetchGlobalCommands(this.$route)
+    this.searchResults = []
+    this.stepTwoCommands = []
+    this.parentStepLabel = ''
+    this.searchCandidate = ''
+    this.setFocus()
+    this.setActive(0)
+  }
+
+  get currentCommandList(): CommandAction[] {
+    if (this.stepTwoCommands.length) {
+      return this.stepTwoCommands
     }
 
-    const breadcrumbs = []
-
-    if (this.activeOwner) {
-      breadcrumbs.push(this.activeDashboardContext.team_name ?? this.activeDashboardContext.login)
+    if (this.searchCandidate) {
+      return this.searchResults
     }
 
-    const { repo } = this.$route.params
-    if (repo) breadcrumbs.push(repo)
+    return [...this.suggestedCommands, ...this.globalCommands]
+  }
 
-    return breadcrumbs
+  /**
+   * Keydown handler for searching and navigation
+   *
+   * @param {KeyboardEvent} e
+   *
+   * @return {void}
+   */
+  keydownHandler(e: KeyboardEvent): void {
+    if (['ArrowUp', 'ArrowDown', 'Enter'].includes(e.key)) {
+      e.preventDefault()
+      e.stopPropagation()
+
+      const totalItems = this.currentCommandList.length
+
+      if (e.key === 'ArrowUp' && this.cursor > 0) {
+        this.setActive(this.cursor - 1)
+      } else if (e.key === 'ArrowDown' && this.cursor <= totalItems) {
+        this.setActive(this.cursor + 1)
+      } else if (e.key === 'Enter') {
+        this._triggerAction(e)
+      }
+    } else if (e.altKey) {
+      this._handleAltKeyAction(e)
+    } else if (e.code === 'KeyK' && e.metaKey === true) {
+      this._toggle(e)
+    } else if (e.key === 'Escape') {
+      if (this.stepTwoCommands.length) {
+        this.resetPalette()
+      } else {
+        this._close(e)
+      }
+    } else {
+      this.searchResults = this.fetchSearchResults()
+      this.setActive(0)
+      this.setFocus()
+    }
+  }
+
+  /**
+   * Trigger a command action or second step
+   *
+   * @param {KeyboardEvent} e
+   *
+   * @return {any}
+   */
+  _triggerAction(e: KeyboardEvent) {
+    if (this.currentCommand?.commandType === 'list') {
+      this.stepTwoCommands = this.currentCommand.action() as CommandAction[]
+      this.parentStepLabel = this.currentCommand.label
+
+      this.searchCandidate = ``
+      this.searchResults = []
+      this.setActive(0)
+    } else {
+      this.currentCommand?.action()
+      this.resetPalette()
+      this.$emit('close')
+    }
+  }
+
+  /**
+   * Toggle the palette
+   *
+   * @param {KeyboardEvent} e
+   *
+   * @return {any}
+   */
+  _toggle(e: KeyboardEvent) {
+    this.resetPalette()
+    this.$emit('toggle')
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  /**
+   * close the palette
+   *
+   * @param {KeyboardEvent} e
+   *
+   * @return {any}
+   */
+  _close(e: KeyboardEvent) {
+    this.resetPalette()
+    this.$emit('close')
+    e.preventDefault()
+    e.stopPropagation()
+  }
+
+  /**
+   * Special handler for Alt key presses, these are shortkeys to trigger an action
+   *
+   * @param {KeyboardEvent} e
+   *
+   * @return {any}
+   */
+  _handleAltKeyAction(e: KeyboardEvent) {
+    const keys = [...this.suggestedCommands, ...this.globalCommands].filter((cmd) => {
+      return (
+        Array.isArray(cmd.shortkey) &&
+        cmd.shortkey[0].toLowerCase() === 'opt' &&
+        `Key${cmd.shortkey[1]}`.toLowerCase() === e.code.toLowerCase()
+      )
+    })
+
+    if (keys.length) {
+      this.currentCommand = keys[0]
+      this._triggerAction(e)
+      this.searchCandidate = ''
+    }
+  }
+
+  /**
+   * Mounted hook
+   *
+   * @return {any}
+   */
+  mounted() {
+    document.addEventListener('keydown', this.keydownHandler)
+    this.$nextTick(this.resetPalette)
+  }
+
+  /**
+   * Focus utility
+   *
+   * @return {any}
+   */
+  setFocus() {
+    ;(this.$refs['quick-bar-search'] as HTMLInputElement).focus()
+  }
+
+  /**
+   * Before destroy hook
+   *
+   * @return {void}
+   */
+  beforeDestroy(): void {
+    document.removeEventListener('keydown', this.keydownHandler)
+  }
+
+  /**
+   * Fetch search results for the command
+   *
+   * @return {CommandAction[]}
+   */
+  fetchSearchResults(): CommandAction[] {
+    if (this.stepTwoCommands.length) {
+      const engine = new Fuse(this.stepTwoCommands, {
+        keys: [{ name: 'label', weight: 1 }]
+      })
+      return engine.search(this.searchCandidate).map((result) => result.item)
+    }
+
+    return this.searchCandidate ? this.$palette.query(this.searchCandidate, this.$route) : []
   }
 
   /**
@@ -411,28 +337,36 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
    */
   registerGlobalCommands(): void {
     const { provider, owner } = this.$route.params
-
     this.$palette.registerGlobalCommands([
       {
-        id: 'global-open-repo-list',
+        id: 'open-repo-list',
         label: `Open Repository`,
-        placeholder: `Search or select a repository`,
         icon: `corner-up-right`,
-        shortkey: 'Alt+KeyR',
-        children: () => {
-          return this.$paletteManager.getRepositories(this.$route)
+        commandType: 'list',
+        shortkey: ['Opt', 'R'],
+        action: () => {
+          return (resolveNodes(this.repositoryList) as Repository[]).map((repo) => {
+            return {
+              id: `open-${repo.id}`,
+              label: repo.name,
+              icon: repo.isPrivate ? 'lock' : 'globe',
+              action: () => {
+                this.$router.push(['', provider, owner, repo.name].join('/'))
+              }
+            }
+          })
         }
       },
       {
-        id: 'global-switch-active-organization',
+        id: 'switch-active-organization',
         label: `Switch Organization`,
-        placeholder: `Search or select an organization`,
         icon: `repeat`,
-        shortkey: 'Alt+KeyO',
+        commandType: 'list',
+        shortkey: ['Opt', 'O'],
         condition: () => {
           return this.viewer.dashboardContext.length > 1
         },
-        children: () => {
+        action: () => {
           return this.viewer.dashboardContext.map((context: DashboardContext) => {
             return {
               id: `open-${context.id}`,
@@ -447,19 +381,19 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
         }
       },
       {
-        id: 'global-open-dashboard',
+        id: 'open-dashboard',
         label: `Team Home`,
         icon: `home`,
-        shortkey: 'Alt+KeyH',
+        shortkey: ['Opt', 'H'],
         condition: (route) => {
-          return this.activeDashboardContext.type === 'team' && route.name !== 'provider-owner'
+          return route.name !== 'provider-owner'
         },
         action: () => {
           this.$router.push(['', provider, owner].join('/'))
         }
       },
       {
-        id: 'global-open-org-settings',
+        id: 'open-org-settings',
         label: `Organization Settings`,
         icon: `settings`,
         condition: (route) => {
@@ -470,7 +404,7 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
         }
       },
       {
-        id: 'global-contact-support',
+        id: 'contact-support',
         label: `Get Help`,
         icon: `support`,
         action: () => {
@@ -478,7 +412,7 @@ export default class Palette extends mixins(RepoListMixin, ActiveUserMixin) {
         }
       },
       {
-        id: 'global-view-changelog',
+        id: 'view-changelog',
         label: `View Changelog`,
         icon: `hash`,
         action: () => {

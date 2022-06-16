@@ -1,7 +1,6 @@
 <template>
-  <li
+  <div
     tabindex="-1"
-    role="option"
     class="flex items-center w-full h-10 space-x-3 focus:outline-none"
     :class="active ? 'bg-ink-300 text-vanilla-100 pr-4' : 'text-vanilla-400 px-4 py-2'"
     @focus="$emit('focus')"
@@ -13,30 +12,28 @@
       size="xs"
       :image="image"
       :user-name="label"
-      :fallback-image="context.emptyAvatarUrl"
       class="flex-shrink-0"
       stroke="bg-ink-100 p-1"
     ></z-avatar>
-    <!-- skipcq JS-0693 -->
-    <span class="flex-grow text-sm font-medium" v-html="labelHTML || label"></span>
+    <span class="flex-grow text-sm font-medium" v-html="label"></span>
     <div v-if="shortkey" class="flex space-x-1">
       <span
-        v-for="(key, index) in shortkeyCombination"
-        :key="index"
+        v-for="key in shortkeyCombination"
+        :key="key"
         class="flex items-center justify-center w-5 h-5 text-xs rounded-sm bg-ink-200"
         :class="[active ? 'text-vanilla-100' : 'text-vanilla-400']"
       >
         {{ formatKey(key) }}
       </span>
     </div>
-    <div v-else-if="hint && active" class="text-xs text-vanilla-400" v-html="hint"></div>
-  </li>
+    <div v-else-if="hint" class="text-xs text-vanilla-400">
+      {{ hint }}
+    </div>
+  </div>
 </template>
 <script lang="ts">
-import { mixins, Component, Prop } from 'nuxt-property-decorator'
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZAvatar } from '@deepsourcelabs/zeal'
-import ContextMixin from '~/mixins/contextMixin'
-import { parseKeybinding } from 'tinykeys'
 
 /**
  * Command Row component for the palette
@@ -47,12 +44,9 @@ import { parseKeybinding } from 'tinykeys'
     ZAvatar
   }
 })
-export default class CommandRow extends mixins(ContextMixin) {
+export default class CommandRow extends Vue {
   @Prop()
   label: string
-
-  @Prop()
-  labelHTML: string
 
   @Prop()
   icon?: string
@@ -64,13 +58,14 @@ export default class CommandRow extends mixins(ContextMixin) {
   image?: string
 
   @Prop()
-  shortkey?: string
+  shortkey?: string[] | string
 
   @Prop()
   hint?: string
 
-  get shortkeyCombination(): [string[], string] | [] {
-    return this.shortkey ? parseKeybinding(this.shortkey)[0] : []
+  get shortkeyCombination(): string[] {
+    if (!this.shortkey) return []
+    return Array.isArray(this.shortkey) ? this.shortkey : [this.shortkey]
   }
 
   get isMacintosh() {
@@ -86,15 +81,7 @@ export default class CommandRow extends mixins(ContextMixin) {
    * @return {string}
    */
   formatKey(key: string): string {
-    if (Array.isArray(key)) {
-      return this.formatKey(key[0])
-    }
-
-    if (key.startsWith('Key')) {
-      return this.formatKey(key.replace('Key', ''))
-    }
-
-    if (key.toLowerCase() === 'alt') {
+    if (key.toLowerCase() === 'opt') {
       return this.isMacintosh ? '⌥' : 'Alt'
     }
     if (['meta', 'cmd', 'ctrl'].includes(key.toLowerCase())) {

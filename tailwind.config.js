@@ -44,8 +44,7 @@ module.exports = {
       translate: ['group-hover'],
       cursor: ['hover'],
       borderStyle: ['hover', 'focus'],
-      animation: ['motion-safe'],
-      margin: ['first']
+      animation: ['motion-safe']
     }
   },
   theme: {
