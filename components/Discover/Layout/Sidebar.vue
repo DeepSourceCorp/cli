@@ -134,12 +134,13 @@
         v-else
         class="w-full p-3 border-solid border-ink-200 bg-gradient-dark-dawn backdrop-blur-xl"
       >
-        <h3 class="text-lg font-semibold">Code quality made simple.</h3>
+        <h3 class="text-lg font-semibold">Run your first analysis.</h3>
         <p class="mt-2 text-sm text-vanilla-400">
-          Avoid the grunt work of fixing issues. Save developer time. Maintain code quality.
+          Find thousands of code security and quality issues in your codebase, before they end up in
+          production.
         </p>
         <nuxt-link to="/signup">
-          <z-button button-type="primary" class="w-full mt-4">Get started</z-button>
+          <z-button button-type="primary" class="w-full mt-4">Start now</z-button>
         </nuxt-link>
       </footer>
       <div
