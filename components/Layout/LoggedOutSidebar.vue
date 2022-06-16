@@ -71,11 +71,12 @@
         </div>
       </template>
       <template slot="footer">
-        <h3 class="text-lg font-semibold">Code quality made simple.</h3>
+        <h3 class="text-lg font-semibold">Run your first analysis.</h3>
         <p class="mt-2 text-sm text-vanilla-400">
-          Avoid the grunt work of fixing issues. Save developer time. Maintain code quality.
+          Find thousands of code security and quality issues in your codebase, before they end up in
+          production.
         </p>
-        <z-button to="/signup" buttonType="primary" class="w-full mt-4">Get started</z-button>
+        <z-button to="/signup" buttonType="primary" class="w-full mt-4">Start now</z-button>
       </template>
       <template slot="brand">
         <div class="flex justify-center space-x-3">
