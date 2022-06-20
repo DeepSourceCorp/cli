@@ -1,4 +1,4 @@
-package run
+package dryrun
 
 type AnalysisConfig struct {
 	Files           []string    `json:"files"`

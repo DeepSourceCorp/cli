@@ -1,8 +1,7 @@
-package run
+package dryrun
 
 import (
 	"errors"
-	"fmt"
 	"os"
 	"path"
 	"strings"
@@ -14,12 +13,9 @@ func (a *AnalyzerDryRun) writeAnalysisResults(buf []byte, fileName string) (err 
 
 	// Ref: https://deepsource.io/directory/analyzers/go/issues/GSC-G305
 	if !strings.Contains(string(buf), "..") {
-		fmt.Println("Writing analysis result to", path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, fileName))
-
 		// Check if the results file already exists
 		if _, err := os.Stat(analysisResultsPath); err != nil {
 			if errors.Is(err, os.ErrNotExist) {
-				fmt.Println("File doesn't exist already. Creating it.")
 				// Create the file and allocate permissions to it
 				_, err := os.Create(analysisResultsPath)
 				if err != nil {

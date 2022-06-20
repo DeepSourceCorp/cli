@@ -40,7 +40,7 @@ func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 
 		// Handle strict mode error when some alien fields are added in the user configured TOML
 		if strings.HasPrefix(err.Error(), "strict mode") {
-			decodeErrorMessage = fmt.Sprintf("failed to parse %s. Invalid fields detected.", path.Base(filePath))
+			decodeErrorMessage = fmt.Sprintf("Failed to parse %s. Invalid fields detected.", path.Base(filePath))
 		}
 		validationError := ValidationFailure{
 			File: filePath,

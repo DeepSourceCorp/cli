@@ -69,7 +69,10 @@ require (
 	gopkg.in/ini.v1 v1.66.4 // indirect
 )
 
-require github.com/alecthomas/chroma v0.10.0
+require (
+	github.com/alecthomas/chroma v0.10.0
+	github.com/morikuni/aec v1.0.0
+)
 
 require (
 	github.com/Microsoft/go-winio v0.5.2 // indirect
