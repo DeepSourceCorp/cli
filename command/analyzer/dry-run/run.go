@@ -91,7 +91,6 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	// Check the docker build response
-	// TODO: Tweak the behaviour here when the spinners are added to the run command
 	if err = docker.CheckBuildResponse(buildRespReader, false); err != nil {
 		a.Spinner.StopSpinnerWithError("Failed to build the Analyzer image", err)
 		return err
@@ -157,11 +156,12 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	a.Spinner.StopSpinner()
 
 	// Process the analyzer report once it is received.
-	a.Spinner.StartSpinnerWithLabel("Processing Analyzer report...", fmt.Sprintf("Successfully processed Analyzer report. Issues after processing: %d", len(a.AnalysisResult.Issues)))
+	a.Spinner.StartSpinnerWithLabel("Processing Analyzer report...", "Successfully processed Analyzer report")
 	if a.AnalysisResult, err = a.processAnalyzerReport(analysisResultBuf); err != nil {
 		a.Spinner.StopSpinnerWithError("Failed to process Analyzer report", err)
 		return err
 	}
 	a.Spinner.StopSpinner()
+	fmt.Println(aec.Apply(fmt.Sprintf("[✔] Issues after processing: %d", len(a.AnalysisResult.Issues)), aec.LightGreenF))
 	return nil
 }
