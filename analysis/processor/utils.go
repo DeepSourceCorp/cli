@@ -1,7 +1,9 @@
 package processor
 
 import (
+	"path"
 	"sort"
+	"strings"
 
 	"github.com/deepsourcelabs/cli/types"
 )
@@ -87,7 +89,7 @@ func (p *ReportProcessor) formatLSPResultsToDefault() types.AnalysisResult {
 			IssueCode: issue.Code,
 			IssueText: issue.Message,
 			Location: types.Location{
-				Path: issue.RelatedInformation[0].Location.URI,
+				Path: p.sanitizeFilePath(issue.RelatedInformation[0].Location.URI),
 				Position: types.Position{
 					Begin: types.Coordinate{
 						Line:   issue.Range.Start.Line,
@@ -103,4 +105,8 @@ func (p *ReportProcessor) formatLSPResultsToDefault() types.AnalysisResult {
 		analysisResult.Issues = append(analysisResult.Issues, analysisIssue)
 	}
 	return analysisResult
+}
+
+func (p *ReportProcessor) sanitizeFilePath(filePath string) string {
+	return path.Join(p.LocalSourcePath, strings.TrimPrefix(filePath, p.ContainerCodePath))
 }

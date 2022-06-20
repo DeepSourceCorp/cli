@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
-	"path"
 	"sort"
 	"strings"
 
@@ -117,7 +116,7 @@ func (p *ReportProcessor) cacheFilesToBeProcessed(totalFiles, processedFiles int
 	fileContentChannel := make(chan fileContentNode, totalFiles)
 	for j := 0; j < totalFiles; j++ {
 		filename := filesWIssueRange[processedFiles+j].Filename
-		go addFileToCache(fileContentChannel, filename, p.CodePath)
+		go addFileToCache(fileContentChannel, filename)
 	}
 
 	cachedFiles := []fileContentNode{}
@@ -134,10 +133,10 @@ func (p *ReportProcessor) cacheFilesToBeProcessed(totalFiles, processedFiles int
 
 // addFileToCache reads the file and formats its content into a fileContentNode struct instance
 // and passes that to the cachedFilesChannel channel since this function is run on a goroutine.
-func addFileToCache(cachedFilesChannel chan fileContentNode, filename, codePath string) {
+func addFileToCache(cachedFilesChannel chan fileContentNode, filename string) {
 	fileContentSlice := []string{}
 
-	fileContentBytes, err := ioutil.ReadFile(path.Join(codePath, filename))
+	fileContentBytes, err := ioutil.ReadFile(filename)
 	if err != nil {
 		fmt.Println("Could not process for file: ", filename, ". Err: ", err)
 	} else if string(fileContentBytes) != "" {

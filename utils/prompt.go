@@ -6,7 +6,7 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
-	"github.com/mgutz/ansi"
+	"github.com/morikuni/aec"
 )
 
 type UserInputPrompt struct{}
@@ -104,17 +104,21 @@ func checkInterrupt(err error) error {
 }
 
 func GetSuccessMessage(msg string) string {
-	greenTickMark := ansi.Color("✔", "green")
+	greenTickMark := aec.Apply("[✔]", aec.LightGreenF)
 	return greenTickMark + " " + msg
 }
 
 func GetFailureMessage(msg, errorMsg string) string {
 	if errorMsg != "" {
-		return ansi.Color("✗"+" "+msg+". "+"Error: "+errorMsg, "red")
+		return aec.Apply("[✗]"+" "+msg+". "+"Error: "+errorMsg, aec.LightRedF)
 	}
-	return ansi.Color("✗"+" "+msg, "red")
+	return aec.Apply("[✗]"+" "+msg, aec.LightRedF)
 }
 
 func GetBulletMessage(msg, color string) string {
-	return ansi.Color("•"+" "+msg, color)
+	switch color {
+	case "red":
+		return aec.Apply("•"+" "+msg, aec.LightRedF)
+	}
+	return ""
 }

@@ -24,9 +24,12 @@ func (s *SpinnerUtils) StartSpinnerWithLabel(label, finalMessage string) {
 		120*time.Millisecond,
 		spinner.WithWriter(os.Stdout),
 		spinner.WithWriter(os.Stderr),
-		spinner.WithFinalMSG(fmt.Sprintf("%s\n", GetSuccessMessage(finalMessage)))) // Build our new spinner
+	) // Build our new spinner
 	if label != "" {
 		sp.Suffix = " " + label + " "
+	}
+	if finalMessage != "" {
+		sp.FinalMSG = fmt.Sprintf("%s\n", GetSuccessMessage(finalMessage))
 	}
 	sp.Start() // Start the spinner
 	s.Spinner = sp
@@ -42,6 +45,17 @@ func (s *SpinnerUtils) StopSpinner() {
 	}
 	s.Spinner.Stop()
 	s.Spinner = nil
+}
+
+// Stops the spinner
+func (s *SpinnerUtils) SetSuffix(suffix string) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	if s.Spinner == nil {
+		return
+	}
+	s.Spinner.Suffix = " " + suffix + " "
 }
 
 // Stops the spinner and displays an error message with a cross emoji

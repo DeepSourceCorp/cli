@@ -1,4 +1,4 @@
-package run
+package dryrun
 
 import (
 	"net/url"

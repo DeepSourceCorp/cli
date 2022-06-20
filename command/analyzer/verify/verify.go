@@ -35,14 +35,6 @@ type AnalyzerVerifyOpts struct {
  * ====================================== */
 
 func NewCmdAnalyzerVerify() *cobra.Command {
-	// Configuring the paths of analyzer.toml and issues directory
-	projectRoot, err := utils.ExtractProjectRootPath()
-	if err != nil {
-		fmt.Printf("Couldn't find the root directory of the project. Error:%s", err)
-	}
-	analyzerTOMLPath = filepath.Join(projectRoot, configFolder, "analyzer.toml")
-	issuesDirPath = filepath.Join(projectRoot, configFolder, "issues/")
-
 	opts := AnalyzerVerifyOpts{
 		Spinner: &utils.SpinnerUtils{},
 		Build: AnalyzerBuild{
@@ -75,6 +67,14 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	var analyzerTOMLValidationErrors *validator.ValidationFailure
 	var issuesValidationErrors *[]validator.ValidationFailure
 	configurationValid := true
+
+	// Configuring the paths of analyzer.toml and issues directory
+	projectRoot, err := utils.ExtractProjectRootPath()
+	if err != nil {
+		fmt.Printf("Couldn't find the root directory of the project. Error: %s\n", err)
+	}
+	analyzerTOMLPath = filepath.Join(projectRoot, configFolder, "analyzer.toml")
+	issuesDirPath = filepath.Join(projectRoot, configFolder, "issues/")
 
 	/* ==================================================================================
 	 * Checks for the presence of .deepsource/analyzer directory,
