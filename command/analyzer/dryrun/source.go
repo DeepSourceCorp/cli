@@ -1,10 +1,9 @@
-package dry_run
+package dryrun
 
 import (
 	"bytes"
 	"fmt"
 	"path/filepath"
-	"time"
 
 	"github.com/go-git/go-git/v5"
 )
@@ -34,7 +33,6 @@ func (a *AnalyzerDryRun) cloneRemoteSource() (string, error) {
 	a.RemoteSource = true
 
 	a.Spinner.SetSuffix(fmt.Sprintf("Creating temporary directory to clone %s", a.SourcePath))
-	time.Sleep(5 * time.Second)
 	if a.TempCloneDirectory, err = createTemporaryDirectory("code"); err != nil {
 		return "", err
 	}
