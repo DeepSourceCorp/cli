@@ -18,7 +18,7 @@
 
     <!-- Reporting Configuration -->
 
-    <div class="flex-grow max-w-2xl">
+    <div class="max-w-2xl">
       <div class="mb-4">
         <h6 class="mb-1 text-sm text-vanilla-100">Reporting configuration</h6>
         <p class="text-xs leading-5 text-vanilla-400">

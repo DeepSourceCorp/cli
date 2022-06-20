@@ -65,7 +65,7 @@
       </toggle-input>
     </form-group>
 
-    <form-group label="Analysis settings" class="flex-grow max-w-2xl">
+    <form-group label="Analysis settings" class="max-w-2xl">
       <!-- needed custom markup for mobile view cause we're rearranging order of title, description & z-select -->
       <section>
         <div class="grid gap-4 py-4 lg:hidden">
@@ -182,7 +182,7 @@
       </button-input>
     </form-group>
 
-    <form-group v-if="!repository.isPrivate" label="Discover settings" class="flex-grow max-w-2xl">
+    <form-group v-if="!repository.isPrivate" label="Discover settings" class="max-w-2xl">
       <div>
         <button-input
           label="Add to discover"
