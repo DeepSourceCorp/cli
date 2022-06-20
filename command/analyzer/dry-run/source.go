@@ -21,7 +21,7 @@ func (a *AnalyzerDryRun) resolveAnalysisCodePath() (string, error) {
 		}
 		a.SourcePath = tempCloneDir
 	} else {
-        // Resolve the path if it is relative path
+		// Resolve the path if it is a relative path
 		a.SourcePath, _ = filepath.Abs(a.SourcePath)
 	}
 	return a.SourcePath, nil

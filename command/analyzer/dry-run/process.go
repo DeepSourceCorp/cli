@@ -2,7 +2,6 @@ package dry_run
 
 import (
 	"encoding/json"
-	"fmt"
 
 	"github.com/deepsourcelabs/cli/analysis/processor"
 	"github.com/deepsourcelabs/cli/analysis/processor/processors"
@@ -21,15 +20,15 @@ func (a *AnalyzerDryRun) processAnalyzerReport(reportBytes []byte) (types.Analys
 	source_code_load = sourceCodeHighlightingProcessor
 
 	processor := processor.ReportProcessor{
-		CodePath:   a.SourcePath,
-		Processors: []processor.IProcessor{skip_cq, source_code_load},
+		LocalSourcePath:   a.SourcePath,
+		ContainerCodePath: a.Client.AnalysisOpts.ContainerCodePath,
+		Processors:        []processor.IProcessor{skip_cq, source_code_load},
 	}
 
 	// Generate the silencers regexMap.
 	processors.GenerateSilencersRegexMap()
 
 	if err := json.Unmarshal(reportBytes, &report); err != nil {
-		fmt.Println(err)
 		return types.AnalysisResult{}, err
 	}
 

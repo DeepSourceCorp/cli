@@ -13,7 +13,6 @@ func (a *AnalyzerDryRun) writeAnalysisResults(buf []byte, fileName string) (err 
 
 	// Ref: https://deepsource.io/directory/analyzers/go/issues/GSC-G305
 	if !strings.Contains(string(buf), "..") {
-
 		// Check if the results file already exists
 		if _, err := os.Stat(analysisResultsPath); err != nil {
 			if errors.Is(err, os.ErrNotExist) {
