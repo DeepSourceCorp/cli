@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
+	"github.com/deepsourcelabs/cli/utils"
 )
 
 func TestPrepareAnalysisConfig(t *testing.T) {
@@ -116,6 +117,7 @@ func TestResolveAnalysisCodePath(t *testing.T) {
 	for _, tc := range testCases {
 		opts := AnalyzerDryRun{
 			SourcePath: tc.Path,
+			Spinner:    &utils.SpinnerUtils{},
 		}
 		resolvedPath, err := opts.resolveAnalysisCodePath()
 		if err != nil && err.Error() != "authentication required" {
