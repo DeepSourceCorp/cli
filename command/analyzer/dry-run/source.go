@@ -1,9 +1,10 @@
 package dry_run
 
 import (
+	"bytes"
 	"fmt"
-	"os"
 	"path/filepath"
+	"time"
 
 	"github.com/go-git/go-git/v5"
 )
@@ -28,17 +29,21 @@ func (a *AnalyzerDryRun) resolveAnalysisCodePath() (string, error) {
 // Clones the remote repository which is to be analyzed
 func (a *AnalyzerDryRun) cloneRemoteSource() (string, error) {
 	var err error
+	buf := bytes.NewBuffer(nil)
 	a.RemoteSource = true
+
+	a.Spinner.SetSuffix(fmt.Sprintf("Creating temporary directory to clone %s", a.SourcePath))
+	time.Sleep(5 * time.Second)
 	if a.TempCloneDirectory, err = createTemporaryDirectory("code"); err != nil {
 		return "", err
 	}
 
 	// Clone the repository to a temporary directory
-	fmt.Printf("Cloning %s to %s\n", a.SourcePath, a.TempCloneDirectory)
+	a.Spinner.SetSuffix(fmt.Sprintf("Cloning %s to %s", a.SourcePath, a.TempCloneDirectory))
 	if _, err := git.PlainClone(a.TempCloneDirectory, false, &git.CloneOptions{
 		URL:      a.SourcePath,
 		Depth:    1,
-		Progress: os.Stdout,
+		Progress: buf,
 	}); err != nil {
 		return "", err
 	}

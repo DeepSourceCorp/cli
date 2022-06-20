@@ -2,7 +2,6 @@ package dry_run
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"path"
 
@@ -39,6 +38,5 @@ func (a *AnalyzerDryRun) writeAnalysisConfig() (err error) {
 	a.Client.AnalysisOpts.AnalysisConfigPath = path.Join(a.TempToolBoxDirectory, analysisConfigName+analysisConfigExt)
 
 	// Create a temporary directory
-	fmt.Printf("Writing analysis_config to %s\n", a.TempToolBoxDirectory)
 	return os.WriteFile(path.Join(a.TempToolBoxDirectory, analysisConfigName+analysisConfigExt), analysisConfigJSON, 0o644)
 }

@@ -3,9 +3,11 @@ package dry_run
 import (
 	"fmt"
 	"os"
+	"path"
 
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
+	"github.com/morikuni/aec"
 	"github.com/spf13/cobra"
 
 	"github.com/deepsourcelabs/cli/analysis/config"
@@ -33,6 +35,7 @@ type AnalyzerDryRun struct {
 	AnalysisFiles        []string               // The list of analysis files.
 	AnalysisConfig       *config.AnalysisConfig // The analysis_config.json file containing the meta for analysis.
 	AnalysisResult       types.AnalysisResult   // The analysis result received after post processing Analyzer report.
+	Spinner              *utils.SpinnerUtils
 }
 
 func NewCmdAnalyzerRun() *cobra.Command {
@@ -41,6 +44,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 
 	// Initializing the run params and setting defaults
 	opts := AnalyzerDryRun{
+		Spinner:      &utils.SpinnerUtils{},
 		SourcePath:   cwd,
 		RemoteSource: false,
 	}
@@ -65,7 +69,7 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	return cmd
 }
 
-// Run the Analyzer locally on a certain directory or repository
+// AnalyzerRun runs the Analyzer locally on a certain directory or repository.
 func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	err = a.createDockerClient()
 	if err != nil {
@@ -73,7 +77,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	// Building the Analyzer image
-	fmt.Println("Building Analyzer image...")
+	a.Spinner.StartSpinnerWithLabel("Building Analyzer image...", "Built Analyzer image")
 	ctxCancelFunc, buildRespReader, buildError := a.Client.BuildAnalyzerDockerImage()
 
 	// Cancel the build context and close the reader before exiting this function
@@ -82,58 +86,82 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 	defer ctxCancelFunc()
 	if buildError != nil {
+		a.Spinner.StopSpinnerWithError("Failed to build the Analyzer image", err)
 		return buildError
 	}
 
 	// Check the docker build response
 	// TODO: Tweak the behaviour here when the spinners are added to the run command
 	if err = docker.CheckBuildResponse(buildRespReader, false); err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to build the Analyzer image", err)
 		return err
 	}
+	a.Spinner.StopSpinner()
 
 	// Create temporary toolbox directory to store analysis config and later analyis results
 	// If already passed through --output-file flag, use that one
+	a.Spinner.StartSpinnerWithLabel("Creating temporary toolbox directory...", "Temporary toolbox directory created")
 	if err = a.createTemporaryToolBoxDir(); err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to create temporary toolbox directory", err)
 		return err
 	}
+	a.Spinner.StopSpinner()
 
 	// Resolve the path of source code to be analyzed based on the user input
+	a.Spinner.StartSpinnerWithLabel("Resolving the path of source code to be analyzed...", "")
 	if a.Client.AnalysisOpts.HostCodePath, err = a.resolveAnalysisCodePath(); err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to resolve path of source code to be analyzed", err)
 		return err
 	}
+	a.Spinner.StopSpinner()
 
 	// Generate the analysis_config.json file
 	// Also, write the analysis_config data into a temp /toolbox directory to be mounted into the container
+	a.Spinner.StartSpinnerWithLabel("Generating analysis config...", fmt.Sprint("Analysis config (analysis_config.json) generated at ", path.Join(a.TempToolBoxDirectory, "analysis_config.json")))
 	if err = a.prepareAnalysisConfig(); err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to generate analysis_config.json", err)
 		return err
 	}
+	a.Spinner.StopSpinner()
 
 	// Write the analysis_config.json to local toolbox directory
 	if err = a.writeAnalysisConfig(); err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to write analysis_config.json", err)
 		return err
 	}
+	a.Spinner.StopSpinner()
 
 	// Starts the Docker container which analyzes the code and stores the analysis results
 	// in a variable
+
+	fmt.Println(aec.Apply("[+] Starting the Analysis container", aec.LightYellowF))
 	if err = a.Client.StartDockerContainer(); err != nil {
 		return err
 	}
 
 	// Fetch the analysis results
+	a.Spinner.StartSpinnerWithLabel("Fetching Analyzer report...", "Successfully fetched Analyzer report")
 	analysisResultBuf, analysisResultFileName, err := a.Client.FetchAnalysisResults()
 	if err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to fetch Analyzer report", err)
 		return err
 	}
+	a.Spinner.StopSpinner()
 
 	// Write the analysis results to the file
+	a.Spinner.StartSpinnerWithLabel("Writing Analyzer report...", fmt.Sprintf("Analyzer report written to %s", path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, analysisResultFileName)))
 	if err = a.writeAnalysisResults(analysisResultBuf, analysisResultFileName); err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to write Analyzer report", err)
 		return err
 	}
+	a.Spinner.StopSpinner()
 
 	// Process the analyzer report once it is received.
+	a.Spinner.StartSpinnerWithLabel("Processing Analyzer report...", fmt.Sprintf("Successfully processed Analyzer report. Issues after processing: %d", len(a.AnalysisResult.Issues)))
 	if a.AnalysisResult, err = a.processAnalyzerReport(analysisResultBuf); err != nil {
+		a.Spinner.StopSpinnerWithError("Failed to process Analyzer report", err)
 		return err
 	}
-	fmt.Println("Issues after processing:", len(a.AnalysisResult.Issues))
+	a.Spinner.StopSpinner()
 	return nil
 }

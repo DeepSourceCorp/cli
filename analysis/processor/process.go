@@ -1,8 +1,6 @@
 package processor
 
 import (
-	"fmt"
-
 	"github.com/deepsourcelabs/cli/types"
 )
 
@@ -36,7 +34,6 @@ func (p *ReportProcessor) Process() types.AnalysisResult {
 	if len(analysisResult.Issues) <= 0 {
 		return analysisResult
 	}
-	fmt.Println("Total issues reported by the Analyzer: ", len(analysisResult.Issues))
 
 	// All the files that appear in the issues are now processed by the processors listed in analyzer conf
 	// We must cache the files in order to not do file IO for every processor.
