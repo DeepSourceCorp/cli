@@ -562,5 +562,35 @@ describe('[Store] Integrations/Detail', () => {
       expect(spy).toHaveBeenCalledTimes(1)
       expect(actionCxt.commit).not.toHaveBeenCalled()
     })
+
+    test(`Action "${IntegrationsDetailActions.CREATE_ISSUE_ON_INTEGRATION}"`, async () => {
+      const localThis = {
+        async $applyGraphqlMutation(): Promise<unknown> {
+          return new Promise<unknown>((resolve) =>
+            setTimeout(
+              () => resolve({ data: { createIssueOnIntegration: { ok: true, issueCode: 123 } } }),
+              10
+            )
+          )
+        }
+      }
+
+      // Set spy on `localThis.$applyGraphqlMutation`
+      const spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+      // Vuex action that invokes the GQL mutation
+      const { ok, issueCode } = await actions[
+        IntegrationsDetailActions.CREATE_ISSUE_ON_INTEGRATION
+      ].call(localThis as any, actionCxt, {
+        integrationShortcode: 'jira',
+        repositoryIssueId: 'T3duZXI6cXpscnh6'
+      })
+
+      // Assertions
+      expect(spy).toHaveBeenCalledTimes(1)
+      expect(actionCxt.commit).not.toHaveBeenCalled()
+      expect(ok).toBe(true)
+      expect(issueCode).toBe(123)
+    })
   })
 })

@@ -14,7 +14,7 @@
     </z-button>
 
     <!-- Ignore issue actions -->
-    <z-menu v-if="canIgnoreIssues" direction="left" width="40" class="text-vanilla-100">
+    <z-menu v-if="canIgnoreIssues" direction="left" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
         <z-button
           type="button"
@@ -79,35 +79,55 @@
       @close="close"
     ></autofix-file-chooser>
     <!-- Create issue on VCS -->
-    <template v-if="issue.newVcsIssueUrl && $route.params.provider !== 'bb' && hasRepoReadAccess">
-      <z-button
-        :to="issue.newVcsIssueUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        buttonType="secondary"
-        :icon="$route.params.provider === 'gl' ? 'gitlab' : 'github'"
-        size="small"
-        class="hidden sm:flex"
-      >
-        Create issue on {{ $route.params.provider === 'gl' ? 'GitLab' : 'GitHub' }}
-      </z-button>
-      <z-button
-        :to="issue.newVcsIssueUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        buttonType="secondary"
-        icon="github"
-        size="small"
-        class="sm:hidden"
-      ></z-button>
+    <template v-if="hasRepoReadAccess">
+      <template v-if="createIssueOptions.length > 1">
+        <z-split-button-dropdown
+          :icon="currentOption.icon"
+          :is-loading="isActionLoading"
+          button-type="secondary"
+          size="small"
+          @click="wrapAction(currentOption)"
+        >
+          <template #button-label>
+            <span class="hidden sm:flex">{{ currentOption.label }}</span>
+          </template>
+          <template #menu-body>
+            <template v-for="opt in createIssueOptions">
+              <z-menu-item
+                v-if="currentOption.id !== opt.id"
+                :key="opt.id"
+                as="button"
+                @click="wrapAction(opt)"
+                :icon="opt.icon"
+                class="w-full"
+              >
+                {{ opt.label }}
+              </z-menu-item>
+            </template>
+          </template>
+        </z-split-button-dropdown>
+      </template>
+
+      <template v-else-if="currentOption">
+        <z-button
+          :icon="currentOption.icon"
+          target="_blank"
+          rel="noopener noreferrer"
+          button-type="secondary"
+          size="small"
+          @click="wrapAction(currentOption)"
+        >
+          <span class="hidden sm:flex">{{ currentOption.label }}</span>
+        </z-button>
+      </template>
     </template>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZMenu, ZMenuItem, ZModal } from '@deepsourcelabs/zeal'
-import { RepositoryIssue, Repository } from '~/types/types'
+import { ZIcon, ZButton, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsourcelabs/zeal'
+import { RepositoryIssue, Maybe } from '~/types/types'
 import { AutofixFileChooser } from '@/components/RepoIssues'
 import {
   IgnoreIssueTestFiles,
@@ -116,6 +136,16 @@ import {
 } from '@/components/RepoIssues/index'
 
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
+import { AppFeatures } from '~/types/permTypes'
+
+export interface CreateIssueActionItem {
+  id: string
+  icon: string
+  label: string
+  to?: string
+  action?: () => Promise<void>
+}
 
 @Component({
   components: {
@@ -123,14 +153,14 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
     ZButton,
     ZMenu,
     ZMenuItem,
-    ZModal,
+    ZSplitButtonDropdown,
     IgnoreIssueTestFiles,
     IgnoreIssueAllFiles,
     IgnoreIssueFilePattern,
     AutofixFileChooser
   }
 })
-export default class IssueActions extends mixins(RoleAccessMixin) {
+export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDetailMixin) {
   @Prop()
   issue!: RepositoryIssue
 
@@ -140,18 +170,19 @@ export default class IssueActions extends mixins(RoleAccessMixin) {
   @Prop({ default: true })
   isAutofixEnabled!: boolean
 
-  @Prop()
-  repository!: Repository
-
-  @Prop()
+  @Prop({ required: true })
   checkId: string
 
-  @Prop()
+  @Prop({ default: () => [] })
+  issueCreateIntegrations?: string[]
+
+  @Prop({ required: true })
   shortcode: string
 
   public isOpen = false
-
   public currentComponent = ''
+  public isActionLoading = false
+  public defaultActionId = ''
 
   public ignoreIssues: Array<Record<string, string | boolean>> = [
     { label: 'For a file pattern', name: 'file-pattern', isActive: false },
@@ -159,10 +190,136 @@ export default class IssueActions extends mixins(RoleAccessMixin) {
     { label: 'For all files', name: 'all-files', isActive: false }
   ]
 
+  /**
+   * Created hook
+   *
+   * @return {any}
+   */
+  created() {
+    this.defaultActionId = this.$cookies.get('ds-default-create-issue-action')
+  }
+
+  get createIssueOptions(): CreateIssueActionItem[] {
+    const options: CreateIssueActionItem[] = []
+    const { provider } = this.$route.params
+
+    const vcsAction = {
+      id: 'create-issue-on-vcs',
+      icon: provider === 'gl' ? 'gitlab' : 'github',
+      label: `Create issue on ${provider === 'gl' ? 'GitLab' : 'GitHub'}`,
+      to: this.issue.newVcsIssueUrl || ''
+    }
+
+    if (this.isJiraEnabled) {
+      options.push({
+        id: 'create-issue-on-jira',
+        icon: 'jira',
+        label: 'Create issue on Jira',
+        action: this.createJiraIssue
+      })
+    }
+
+    if (
+      this.$gateKeeper.provider(AppFeatures.CREATE_ISSUE_ON_VCS, provider) &&
+      this.issue.newVcsIssueUrl
+    ) {
+      options.push(vcsAction)
+    }
+
+    return options
+  }
+
+  /**
+   * Create JIRA issue, show success toast if done, otherwise log the error
+   *
+   * @return {Promise<void>}
+   */
+  async createJiraIssue(): Promise<void> {
+    this.isActionLoading = true
+    try {
+      const { ok, issueCode, issueUrl } = await this.createIssueOnIntegration({
+        integrationShortcode: 'jira',
+        repositoryIssueId: this.issue.id
+      })
+
+      if (ok && issueUrl) {
+        this.$toast.show({
+          type: 'success',
+          message: `Created issue ${issueCode} on Jira.`,
+          timeout: 10,
+          primary: {
+            label: 'Open issue',
+            action: () => {
+              window.open(issueUrl, '_blank')
+            }
+          }
+        })
+      } else {
+        // This error message will only be reported internally, and won't be visible to the user
+        throw Error('Got a non-ok response while creating Jira issue.')
+      }
+    } catch (e) {
+      this.$logErrorAndToast(
+        e as Error,
+        'There was a problem while creating the issue, please try again later.'
+      )
+    } finally {
+      this.isActionLoading = false
+    }
+  }
+
+  get isJiraEnabled(): boolean {
+    return (this.issueCreateIntegrations ?? []).includes('jira')
+  }
+
+  /**
+   * Wrapper to set the default option for vcs issue creation and executing it
+   *
+   * @param {CreateIssueActionItem} opt
+   * @return {Promise<void> | void}
+   */
+  wrapAction(opt: CreateIssueActionItem): Promise<void> | void {
+    this.$cookies.set('ds-default-create-issue-action', opt.id)
+    this.defaultActionId = opt.id
+    if (opt.to) {
+      window.open(opt.to, '_blank')
+    } else if (opt.action) {
+      return opt.action()
+    }
+  }
+
+  get currentOption(): Maybe<CreateIssueActionItem> {
+    const userPreferredAction =
+      this.defaultActionId ?? this.$cookies.get('ds-default-create-issue-action')
+
+    if (userPreferredAction) {
+      const filteredOptions = this.createIssueOptions.filter(
+        (opt) => opt.id === userPreferredAction
+      )
+      if (filteredOptions.length) {
+        return filteredOptions[0]
+      }
+    }
+
+    return this.createIssueOptions.length ? this.createIssueOptions[0] : null
+  }
+
+  /**
+   * close the modal
+   *
+   * @return {void}
+   */
   public close(): void {
     this.isOpen = false
   }
 
+  /**
+   * Open the given component modal
+   *
+   * @param {string} name - Name of the component
+   *
+   * @return {void}
+   */
   public openModal(name: string): void {
     this.currentComponent = name
     this.isOpen = true
@@ -172,6 +329,13 @@ export default class IssueActions extends mixins(RoleAccessMixin) {
     return this.repoPerms.canIgnoreIssues
   }
 
+  /**
+   * Post ignore issue, dispatch events to refetch data and close the modal
+   *
+   * @param {string[]} issueIds
+   *
+   * @return {void}
+   */
   public markAllOccurrenceDisabled(issueIds: string[]): void {
     this.$root.$emit('refetchCheck', this.checkId)
     this.$emit('ignoreIssues', issueIds)

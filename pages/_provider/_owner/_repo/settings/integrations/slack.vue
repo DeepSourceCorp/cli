@@ -7,19 +7,14 @@
       ]"
     />
     <div class="p-4 pb-32 md:max-w-2xl">
-      <div class="flex justify-between">
+      <div class="flex flex-col justify-between gap-4 mb-4 sm:flex-row">
         <integration-title :logo="integration.logo" :pending="$fetchState.pending" name="Slack" />
 
         <!-- Loading state for installed on info block -->
         <div v-if="$fetchState.pending">
           <div class="h-8 bg-opacity-50 rounded-md w-60 animate-pulse bg-ink-200"></div>
         </div>
-        <notice v-else class="h-8">
-          <p class="text-xs">
-            Installed on
-            <span class="font-medium text-vanilla-100">{{ integration.installedOn }}</span>
-          </p>
-        </notice>
+        <integration-installed-on v-else :installed-on="integration.installedOn" />
       </div>
 
       <notification-channel-section v-model="channel" :pending="$fetchState.pending" class="mt-4" />

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-4" :class="[gridClass, removeYPadding ? '' : 'py-4']">
+  <div class="grid gap-4 sm:gap-6" :class="[gridClass, removeYPadding ? '' : 'py-4']">
     <div :class="{ 'col-span-full md:col-auto': cascadeInput }">
       <label
         :for="inputId"

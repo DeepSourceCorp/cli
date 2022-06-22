@@ -755,6 +755,19 @@ type CreateGroupPayload {
   clientMutationId: String
 }
 
+input CreateIssueOnIntegrationInput {
+  integrationShortcode: String!
+  repositoryIssueId: ID!
+  clientMutationId: String
+}
+
+type CreateIssueOnIntegrationPayload {
+  ok: Boolean
+  issueCode: String
+  issueUrl: String
+  clientMutationId: String
+}
+
 input CreatePullRequestInput {
   patches: [Int]!
   autofixRunId: String!
@@ -1314,6 +1327,11 @@ type InstallIntegrationPayload {
   clientMutationId: String
 }
 
+enum IntegrationFeature {
+  FEATURE_NOTIFY
+  FEATURE_ISSUE
+}
+
 enum IntegrationInstallationStep {
   INSTALL
   CONFIG_REQD
@@ -1647,6 +1665,7 @@ type Mutation {
   updateIssuePriority(input: UpdateIssuePriorityInput!): UpdateIssuePriorityPayload
   unsetIssuePriority(input: UnsetIssuePriorityInput!): UnsetIssuePriorityPayload
   clearIntegrationRepositorySettings(input: ClearIntegrationRepositorySettingsInput!): ClearIntegrationRepositorySettingsPayload
+  createIssueOnIntegration(input: CreateIssueOnIntegrationInput!): CreateIssueOnIntegrationPayload
   updateIntegrationSettings(input: UpdateIntegrationSettingsInput!): UpdateIntegrationSettingsPayload
   uninstallIntegration(input: UninstallIntegrationInput!): UninstallIntegrationPayload
 }
@@ -1717,6 +1736,7 @@ type Owner implements MaskPrimaryKeyNode {
   maxUsagePercentage: Float
   featureUsage: GenericScalar
   isGsrSshRegistered: Boolean
+  installedIntegrations(feature: IntegrationFeature): [IntegrationProvider]
 }
 
 type OwnerCacheKeys {

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","cascadeInput":false,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-16 py-4\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -11,7 +11,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","cascadeInput":false,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-16\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -21,7 +21,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","cascadeInput":true,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-16 py-4\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -31,7 +31,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","cascadeInput":true,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-16\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -41,7 +41,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"base","cascadeInput":false,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-20 py-4\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -51,7 +51,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"base","cascadeInput":false,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-20\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -61,7 +61,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"base","cascadeInput":true,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-20 py-4\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -71,7 +71,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"base","cascadeInput":true,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-20\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-20\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -81,7 +81,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"small","cascadeInput":false,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-16 py-4\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -91,7 +91,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"small","cascadeInput":false,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-16\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -101,7 +101,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"small","cascadeInput":true,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-16 py-4\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -111,7 +111,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"small","cascadeInput":true,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-16\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-16\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -121,7 +121,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"wide","cascadeInput":false,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-24 py-4\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -131,7 +131,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"wide","cascadeInput":false,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-24\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -141,7 +141,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"wide","cascadeInput":true,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-24 py-4\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -151,7 +151,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"wide","cascadeInput":true,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-24\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-24\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -161,7 +161,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"x-small","cascadeInput":false,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-12 py-4\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -171,7 +171,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"x-small","cascadeInput":false,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-12\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -181,7 +181,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"x-small","cascadeInput":true,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-12 py-4\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -191,7 +191,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"x-small","cascadeInput":true,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-12\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-12\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -201,7 +201,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"xx-small","cascadeInput":false,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-8 py-4\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -211,7 +211,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"xx-small","cascadeInput":false,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-8\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -221,7 +221,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"xx-small","cascadeInput":true,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-8 py-4\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -231,7 +231,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":"xx-small","cascadeInput":true,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-1 md:grid-cols-fr-8\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-fr-8\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -241,7 +241,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":null,"cascadeInput":false,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-fr-16 py-4\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -251,7 +251,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":null,"cascadeInput":false,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-fr-16\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-fr-16\\">
   <div class=\\"\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -261,7 +261,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":null,"cascadeInput":true,"removeYPadding":false} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-fr-16 py-4\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-fr-16 py-4\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>
@@ -271,7 +271,7 @@ exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"la
 `;
 
 exports[`[[ InputWrapper ]] renders \`InputWrapper\` with all prop options: {"label":"Test label","description":"Test description","inputId":"test-input-id","inputWidth":null,"cascadeInput":true,"removeYPadding":true} 1`] = `
-"<div class=\\"grid gap-4 grid-cols-fr-16\\">
+"<div class=\\"grid gap-4 sm:gap-6 grid-cols-fr-16\\">
   <div class=\\"col-span-full md:col-auto\\"><label for=\\"test-input-id\\" class=\\"text-sm text-vanilla-100 mb-1 block\\"> Test label </label>
     <div class=\\"text-xs leading-5 text-vanilla-400\\">
       <p>Test description</p>

@@ -183,6 +183,11 @@ const FEATURES_PROVIDER_MAP = {
   [AppFeatures.SYNC_ACCESS_SETTINGS]: [
     VcsProviderChoices.Github,
     VcsProviderChoices.GithubEnterprise
+  ],
+  [AppFeatures.CREATE_ISSUE_ON_VCS]: [
+    VcsProviderChoices.Github,
+    VcsProviderChoices.GithubEnterprise,
+    VcsProviderChoices.Gitlab
   ]
 }
 

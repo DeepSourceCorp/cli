@@ -10,7 +10,12 @@ import {
   OwnerDetailActions,
   OwnerDetailMutations
 } from '~/store/owner/detail'
-import { IssueTypeSetting, Owner, SubscriptionStatusChoice } from '~/types/types'
+import {
+  IssueTypeSetting,
+  Owner,
+  SubscriptionStatusChoice,
+  UpdatePaymentActionChoice
+} from '~/types/types'
 import { GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 let actionCxt: OwnerDetailModuleActionContext
@@ -77,6 +82,22 @@ describe('[Store] Owner/Details', () => {
         expect(ownerState.owner.ownerSetting?.issueTypeSettings?.[0]?.isIgnoredToDisplay).toEqual(
           refinedSettings[0].isIgnoredToDisplay
         )
+      })
+    })
+
+    describe(`Getter "${OwnerDetailGetters.CAN_ONBOARD}"`, () => {
+      test('returns data as intended', () => {
+        const canOnboard = getters[OwnerDetailGetters.CAN_ONBOARD](ownerState)
+        expect(canOnboard).toBe(false)
+
+        const canOnboardAfterUpdatingState = getters[OwnerDetailGetters.CAN_ONBOARD]({
+          ...ownerState,
+          owner: {
+            ...OWNER_DETAILS,
+            canOnboard: true
+          }
+        })
+        expect(canOnboardAfterUpdatingState).toBe(true)
       })
     })
   })
@@ -1596,6 +1617,573 @@ describe('[Store] Owner/Details', () => {
           issueTypeSettingSlug: 'performance'
         })
       })
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.APPLY_CREDITS}"`, () => {
+    test('successfully commits mutation', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((resolve) =>
+            setTimeout(() => resolve({ data: {} }), 10)
+          )
+        }
+      }
+      await actions[OwnerDetailActions.APPLY_CREDITS].call(localThis, actionCxt, {
+        amount: 123
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+    })
+
+    test('successfully commits error', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+            setTimeout(() => reject(new Error('ERR1')), 10)
+          )
+        }
+      }
+      await actions[OwnerDetailActions.APPLY_CREDITS].call(localThis, actionCxt, {
+        amount: 123
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall, thirdCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+      expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.UPDATE_BILLING_INFO}"`, () => {
+    test('successfully commits mutation', async () => {
+      localThis = {
+        $providerMetaMap: {
+          gh: {
+            text: 'Github',
+            shortcode: 'gh',
+            value: 'GITHUB'
+          }
+        },
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((resolve) =>
+            setTimeout(() => resolve({ data: { updateBillingInfo: {} } }), 10)
+          )
+        }
+      }
+      await actions[OwnerDetailActions.UPDATE_BILLING_INFO].call(localThis, actionCxt, {
+        billingAddress: 'lol',
+        billingEmail: 'lol@lol.lol',
+        login: 'lol-org',
+        provider: 'gh'
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall, thirdCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
+      expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+    })
+
+    test('successfully commits error', async () => {
+      localThis = {
+        $providerMetaMap: {
+          gh: {
+            text: 'Github',
+            shortcode: 'gh',
+            value: 'GITHUB'
+          }
+        },
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+            setTimeout(() => reject(new Error('ERR1')), 10)
+          )
+        }
+      }
+
+      try {
+        await actions[OwnerDetailActions.UPDATE_BILLING_INFO].call(localThis, actionCxt, {
+          billingAddress: 'lol',
+          billingEmail: 'lol@lol.lol',
+          login: 'lol-org',
+          provider: 'gh'
+        })
+      } catch (e) {
+        // Storing the commit calls made
+        const {
+          mock: {
+            calls: [firstCall, secondCall, thirdCall]
+          }
+        } = commit
+
+        // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+        expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect((e as Error).message).toBe('ERR1')
+      }
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.GET_BILLING_INFO}"`, () => {
+    test('successfully commits mutation', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((resolve) =>
+            setTimeout(() => resolve({ data: { updateBillingInfo: {} } }), 10)
+          )
+        }
+      }
+      await actions[OwnerDetailActions.GET_BILLING_INFO].call(localThis, actionCxt, {
+        productSlug: 'premium',
+        planSlug: 'premium',
+        quantity: 1,
+        couponCode: '',
+        isTrial: false
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall, thirdCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_BILLING_INFO)
+      expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+    })
+
+    test('successfully commits error', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+            setTimeout(() => reject(new Error('ERR1')), 10)
+          )
+        }
+      }
+      await actions[OwnerDetailActions.GET_BILLING_INFO].call(localThis, actionCxt, {
+        productSlug: 'premium',
+        planSlug: 'premium',
+        quantity: 1,
+        couponCode: '',
+        isTrial: false
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall, thirdCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+      expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.CHECKOUT}"`, () => {
+    test('successfully commits mutation', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((resolve) =>
+            setTimeout(
+              () =>
+                resolve({
+                  data: {
+                    subscriptionCheckout: {
+                      nextAction: 'actopm',
+                      clientMutationId: 'id',
+                      clientSecret: 'secret'
+                    }
+                  }
+                }),
+              10
+            )
+          )
+        }
+      }
+      const returnData = await actions[OwnerDetailActions.CHECKOUT].call(localThis, actionCxt, {
+        coupon: '',
+        email: 'lol@lol.lol',
+        installationId: '123',
+        name: 'vaibhav',
+        planSlug: 'premium',
+        seats: 10,
+        token: '123'
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(returnData).toEqual({
+        nextAction: 'actopm',
+        clientMutationId: 'id',
+        clientSecret: 'secret'
+      })
+    })
+
+    test('successfully commits error', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+            setTimeout(() => reject(new Error('ERR1')), 10)
+          )
+        }
+      }
+
+      try {
+        await actions[OwnerDetailActions.CHECKOUT].call(localThis, actionCxt, {
+          coupon: '',
+          email: 'lol@lol.lol',
+          installationId: '123',
+          name: 'vaibhav',
+          planSlug: 'premium',
+          seats: 10,
+          token: '123'
+        })
+      } catch (e) {
+        // Storing the commit calls made
+        const {
+          mock: {
+            calls: [firstCall, secondCall, thirdCall]
+          }
+        } = commit
+
+        // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+        expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect((e as Error).message).toBe('ERR1')
+      }
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.UPDATE_SEATS}"`, () => {
+    test('successfully commits mutation', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((resolve) =>
+            setTimeout(
+              () =>
+                resolve({
+                  data: {
+                    updateCodeQualitySubscriptionSeats: {
+                      clientMutationId: '123',
+                      ok: true,
+                      totalSeats: 10
+                    }
+                  }
+                }),
+              10
+            )
+          )
+        }
+      }
+      const returnData = await actions[OwnerDetailActions.UPDATE_SEATS].call(localThis, actionCxt, {
+        seats: 10,
+        id: '123'
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(returnData).toEqual({
+        clientMutationId: '123',
+        ok: true,
+        totalSeats: 10
+      })
+    })
+
+    test('successfully commits error', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+            setTimeout(() => reject(new Error('ERR1')), 10)
+          )
+        }
+      }
+
+      try {
+        await actions[OwnerDetailActions.UPDATE_SEATS].call(localThis, actionCxt, {
+          seats: 10,
+          id: '123'
+        })
+      } catch (e) {
+        // Storing the commit calls made
+        const {
+          mock: {
+            calls: [firstCall, secondCall, thirdCall]
+          }
+        } = commit
+
+        // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+        expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect((e as Error).message).toBe('ERR1')
+      }
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.UPDATE_PAYMENT_SOURCE}"`, () => {
+    test('successfully commits mutation', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((resolve) =>
+            setTimeout(
+              () =>
+                resolve({
+                  data: {
+                    updateDefaultPaymentSource: {
+                      ok: true,
+                      clientMutationId: '123',
+                      card: { brand: 'visa', endingIn: '1234', expMonth: 14, expYear: 29 }
+                    }
+                  }
+                }),
+              10
+            )
+          )
+        }
+      }
+      const returnData = await actions[OwnerDetailActions.UPDATE_PAYMENT_SOURCE].call(
+        localThis,
+        actionCxt,
+        {
+          id: '123',
+          action: UpdatePaymentActionChoice.Update,
+          token: '456'
+        }
+      )
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(returnData).toEqual({
+        ok: true,
+        clientMutationId: '123',
+        card: { brand: 'visa', endingIn: '1234', expMonth: 14, expYear: 29 }
+      })
+    })
+
+    test('successfully commits error', async () => {
+      localThis = {
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+            setTimeout(() => reject(new Error('ERR1')), 10)
+          )
+        }
+      }
+
+      try {
+        await actions[OwnerDetailActions.UPDATE_PAYMENT_SOURCE].call(localThis, actionCxt, {
+          id: '123',
+          action: UpdatePaymentActionChoice.Update,
+          token: '456'
+        })
+      } catch (e) {
+        // Storing the commit calls made
+        const {
+          mock: {
+            calls: [firstCall, secondCall, thirdCall]
+          }
+        } = commit
+
+        // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+        expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect((e as Error).message).toBe('ERR1')
+      }
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.CHANGE_SUBSCRIPTION_PLAN}"`, () => {
+    test('successfully commits mutation', async () => {
+      localThis = {
+        $providerMetaMap: {
+          gh: {
+            text: 'Github',
+            shortcode: 'gh',
+            value: 'GITHUB'
+          }
+        },
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((resolve) =>
+            setTimeout(() => resolve({ data: {} }), 10)
+          )
+        }
+      }
+      await actions[OwnerDetailActions.CHANGE_SUBSCRIPTION_PLAN].call(localThis, actionCxt, {
+        id: '123',
+        planSlug: 'premium'
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+    })
+
+    test('successfully commits error', async () => {
+      localThis = {
+        $providerMetaMap: {
+          gh: {
+            text: 'Github',
+            shortcode: 'gh',
+            value: 'GITHUB'
+          }
+        },
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+            setTimeout(() => reject(new Error('ERR1')), 10)
+          )
+        }
+      }
+
+      try {
+        await actions[OwnerDetailActions.CHANGE_SUBSCRIPTION_PLAN].call(localThis, actionCxt, {
+          id: '123',
+          planSlug: 'premium'
+        })
+      } catch (e) {
+        // Storing the commit calls made
+        const {
+          mock: {
+            calls: [firstCall, secondCall, thirdCall]
+          }
+        } = commit
+
+        // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+        expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect((e as Error).message).toBe('ERR1')
+      }
+    })
+  })
+
+  describe(`Action "${OwnerDetailActions.CANCEL_SUBSCRIPTION_PLAN}"`, () => {
+    test('successfully commits mutation', async () => {
+      localThis = {
+        $providerMetaMap: {
+          gh: {
+            text: 'Github',
+            shortcode: 'gh',
+            value: 'GITHUB'
+          }
+        },
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((resolve) =>
+            setTimeout(() => resolve({ data: {} }), 10)
+          )
+        }
+      }
+      await actions[OwnerDetailActions.CANCEL_SUBSCRIPTION_PLAN].call(localThis, actionCxt, {
+        id: '123',
+        planSlug: 'premium'
+      })
+
+      // Storing the commit calls made
+      const {
+        mock: {
+          calls: [firstCall, secondCall]
+        }
+      } = commit
+
+      // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+      expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+      expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+    })
+
+    test('successfully commits error', async () => {
+      localThis = {
+        $providerMetaMap: {
+          gh: {
+            text: 'Github',
+            shortcode: 'gh',
+            value: 'GITHUB'
+          }
+        },
+        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+          return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+            setTimeout(() => reject(new Error('ERR1')), 10)
+          )
+        }
+      }
+
+      try {
+        await actions[OwnerDetailActions.CANCEL_SUBSCRIPTION_PLAN].call(localThis, actionCxt, {
+          id: '123',
+          planSlug: 'premium'
+        })
+      } catch (e) {
+        // Storing the commit calls made
+        const {
+          mock: {
+            calls: [firstCall, secondCall, thirdCall]
+          }
+        } = commit
+
+        // Assert if `OwnerDetailMutations.SET_LOADING` is being commited or not.
+        expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect(secondCall[0]).toEqual(OwnerDetailMutations.SET_ERROR)
+        expect(thirdCall[0]).toEqual(OwnerDetailMutations.SET_LOADING)
+        expect((e as Error).message).toBe('ERR1')
+      }
     })
   })
 

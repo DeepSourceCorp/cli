@@ -1029,6 +1029,20 @@ export type CreateGroupPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type CreateIssueOnIntegrationInput = {
+  integrationShortcode: Scalars['String'];
+  repositoryIssueId: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type CreateIssueOnIntegrationPayload = {
+  __typename?: 'CreateIssueOnIntegrationPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  issueCode?: Maybe<Scalars['String']>;
+  issueUrl?: Maybe<Scalars['String']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type CreatePullRequestInput = {
   patches: Array<Maybe<Scalars['Int']>>;
   autofixRunId: Scalars['String'];
@@ -2050,6 +2064,11 @@ export type InstallIntegrationPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export enum IntegrationFeature {
+  FeatureNotify = 'FEATURE_NOTIFY',
+  FeatureIssue = 'FEATURE_ISSUE'
+}
+
 export enum IntegrationInstallationStep {
   Install = 'INSTALL',
   ConfigReqd = 'CONFIG_REQD',
@@ -2465,6 +2484,7 @@ export type Mutation = {
   updateIssuePriority?: Maybe<UpdateIssuePriorityPayload>;
   unsetIssuePriority?: Maybe<UnsetIssuePriorityPayload>;
   clearIntegrationRepositorySettings?: Maybe<ClearIntegrationRepositorySettingsPayload>;
+  createIssueOnIntegration?: Maybe<CreateIssueOnIntegrationPayload>;
   updateIntegrationSettings?: Maybe<UpdateIntegrationSettingsPayload>;
   uninstallIntegration?: Maybe<UninstallIntegrationPayload>;
 };
@@ -2996,6 +3016,11 @@ export type MutationClearIntegrationRepositorySettingsArgs = {
 };
 
 
+export type MutationCreateIssueOnIntegrationArgs = {
+  input: CreateIssueOnIntegrationInput;
+};
+
+
 export type MutationUpdateIntegrationSettingsArgs = {
   input: UpdateIntegrationSettingsInput;
 };
@@ -3072,6 +3097,7 @@ export type Owner = MaskPrimaryKeyNode & {
   maxUsagePercentage?: Maybe<Scalars['Float']>;
   featureUsage?: Maybe<Scalars['GenericScalar']>;
   isGsrSshRegistered?: Maybe<Scalars['Boolean']>;
+  installedIntegrations?: Maybe<Array<Maybe<IntegrationProvider>>>;
 };
 
 
@@ -3198,6 +3224,11 @@ export type OwnerAccessTokensArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+};
+
+
+export type OwnerInstalledIntegrationsArgs = {
+  feature?: Maybe<IntegrationFeature>;
 };
 
 export type OwnerCacheKeys = {
@@ -6192,6 +6223,19 @@ export type Unnamed_28_Mutation = (
   )> }
 );
 
+export type CreateIssueOnIntegrationMutationVariables = Exact<{
+  input: CreateIssueOnIntegrationInput;
+}>;
+
+
+export type CreateIssueOnIntegrationMutation = (
+  { __typename?: 'Mutation' }
+  & { createIssueOnIntegration?: Maybe<(
+    { __typename?: 'CreateIssueOnIntegrationPayload' }
+    & Pick<CreateIssueOnIntegrationPayload, 'ok' | 'issueCode' | 'issueUrl'>
+  )> }
+);
+
 export type GetIntegrationInstallationUrlMutationVariables = Exact<{
   input: GetIntegrationInstallationUrlInput;
 }>;
@@ -8266,6 +8310,25 @@ export type Unnamed_113_Query = (
       { __typename?: 'BillingInfo' }
       & Pick<BillingInfo, 'planSlug'>
     )> }
+  )> }
+);
+
+export type OwneeInstalledIntegrationQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  feature?: Maybe<IntegrationFeature>;
+}>;
+
+
+export type OwneeInstalledIntegrationQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { installedIntegrations?: Maybe<Array<Maybe<(
+      { __typename?: 'IntegrationProvider' }
+      & Pick<IntegrationProvider, 'shortcode'>
+    )>>> }
   )> }
 );
 

@@ -8,10 +8,13 @@ import IntegrationInstallationStatusGQLQuery from '~/apollo/queries/integrations
 
 import UpdateIntegrationSettingsGQLMutation from '~/apollo/mutations/integrations/updateIntegrationSettings.gql'
 import UninstallIntegrationGQLMutation from '~/apollo/mutations/integrations/uninstallIntegration.gql'
+import CreateIssueGQLMutation from '~/apollo/mutations/integrations/createIssueOnIntergation.gql'
 
 import { RootState } from '~/store'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import {
+  CreateIssueOnIntegrationInput,
+  CreateIssueOnIntegrationPayload,
   GetIntegrationInstallationUrlInput,
   GetIntegrationInstallationUrlPayload,
   InstallIntegrationInput,
@@ -31,7 +34,8 @@ export enum IntegrationsDetailActions {
   GET_INTEGRATION_INSTALLATION_URL = 'getIntegrationInstallationUrl',
   INSTALL_INTEGRATION = 'installIntegration',
   UPDATE_INTEGRATION_SETTINGS = 'updateIntegrationSettings',
-  UNINSTALL_INTEGRATION = 'uninstallIntegration'
+  UNINSTALL_INTEGRATION = 'uninstallIntegration',
+  CREATE_ISSUE_ON_INTEGRATION = 'createIssueOnIntegration'
 }
 
 export enum IntegrationsDetailMutations {
@@ -138,7 +142,7 @@ interface IntegrationsDetailModuleActions
     this: Store<RootState>,
     injectee: IntegrationsDetailActionContext,
     args: InstallIntegrationInput
-  ) => Promise<void>
+  ) => Promise<InstallIntegrationPayload>
 
   [IntegrationsDetailActions.UPDATE_INTEGRATION_SETTINGS]: (
     this: Store<RootState>,
@@ -151,6 +155,11 @@ interface IntegrationsDetailModuleActions
     injectee: IntegrationsDetailActionContext,
     args: UninstallIntegrationInput
   ) => Promise<UninstallIntegrationPayload>
+  [IntegrationsDetailActions.CREATE_ISSUE_ON_INTEGRATION]: (
+    this: Store<RootState>,
+    injectee: IntegrationsDetailActionContext,
+    args: CreateIssueOnIntegrationInput
+  ) => Promise<CreateIssueOnIntegrationPayload>
 }
 
 export const actions: IntegrationsDetailModuleActions = {
@@ -220,6 +229,8 @@ export const actions: IntegrationsDetailModuleActions = {
         IntegrationsDetailMutations.SET_INSTALL_INTEGRATION_PAYLOAD,
         response?.data?.installIntegration
       )
+
+      return response.data.installIntegration
     } catch (e) {
       this.$logErrorAndToast(e as Error, 'There was an error installing the integration.')
     }
@@ -248,23 +259,26 @@ export const actions: IntegrationsDetailModuleActions = {
   },
 
   async [IntegrationsDetailActions.UNINSTALL_INTEGRATION]({ dispatch }, args) {
-    try {
-      const response = await this.$applyGraphqlMutation(UninstallIntegrationGQLMutation, {
-        input: args
-      })
+    const response = await this.$applyGraphqlMutation(UninstallIntegrationGQLMutation, {
+      input: args
+    })
+    // Refetch integration details
+    const { shortcode, ownerId } = args
+    await dispatch(IntegrationsDetailActions.FETCH_INTEGRATION_DETAILS, {
+      shortcode,
+      level: IntegrationSettingsLevel.Owner,
+      ownerId,
+      refetch: true
+    })
 
-      // Refetch integration details
-      const { shortcode, ownerId } = args
-      await dispatch(IntegrationsDetailActions.FETCH_INTEGRATION_DETAILS, {
-        shortcode,
-        level: IntegrationSettingsLevel.Owner,
-        ownerId,
-        refetch: true
-      })
+    return response?.data?.uninstallIntegration
+  },
 
-      return response?.data?.uninstallIntegration
-    } catch (e) {
-      throw e
-    }
+  async [IntegrationsDetailActions.CREATE_ISSUE_ON_INTEGRATION](_, args) {
+    const response = await this.$applyGraphqlMutation(CreateIssueGQLMutation, {
+      input: args
+    })
+
+    return response?.data?.createIssueOnIntegration
   }
 }

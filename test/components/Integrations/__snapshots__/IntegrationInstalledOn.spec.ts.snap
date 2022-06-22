@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ IntegrationInstalledOn ]] renders the integration installed on section: {"installedOn":"deepsourcelabs"} 1`] = `
+"<notice-stub class=\\"h-8\\">
+  <p class=\\"text-xs truncate\\">
+    Installed on <span class=\\"font-medium text-vanilla-100\\">deepsourcelabs</span></p>
+</notice-stub>"
+`;
+
+exports[`[[ IntegrationInstalledOn ]] renders the integration installed on section: {"installedOn":null} 1`] = `
+"<notice-stub class=\\"h-8\\">
+  <p class=\\"text-xs truncate\\">
+    Installed
+    <!---->
+    <!---->
+  </p>
+</notice-stub>"
+`;
+
+exports[`[[ IntegrationInstalledOn ]] renders the integration installed on section: {} 1`] = `
+"<notice-stub class=\\"h-8\\">
+  <p class=\\"text-xs truncate\\">
+    Installed
+    <!---->
+    <!---->
+  </p>
+</notice-stub>"
+`;

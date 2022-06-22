@@ -1,0 +1,1249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <div class=\\"flex justify-center\\">
+      <notice-stub class=\\"h-8 gap-x-3\\">
+        <p class=\\"text-xs\\">
+          Installing on
+          <span class=\\"font-medium text-vanilla-100\\">https://deepsource.io/example.png</span></p>
+      </notice-stub>
+    </div>
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
+"<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
+  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+    <div class=\\"flex items-center justify-center gap-x-2\\">
+      <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
+        <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"21\\" y1=\\"7\\" x2=\\"9\\" y2=\\"7\\" stroke=\\"currentColor\\"></line>
+        <polyline points=\\"7 21 3 17 7 13\\" stroke=\\"currentColor\\"></polyline>
+        <line x1=\\"15\\" y1=\\"17\\" x2=\\"3\\" y2=\\"17\\" stroke=\\"currentColor\\"></line>
+      </svg>
+      <logocontainer-stub logo=\\"https://deepsource.io/example.png\\" dimensions=\\"w-8 h-8\\"></logocontainer-stub>
+    </div>
+    <!---->
+    <div class=\\"px-6\\"></div>
+    <div class=\\"relative z-divider block h-px w-full my-6 mx-0 bg-ink-200\\">
+      <div class=\\"z-divider--content\\"></div>
+    </div>
+    <div class=\\"grid px-6 pb-px\\">
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Install integration\\" loadinglabel=\\"Installing integration\\" as=\\"button\\" justify=\\"center\\" isloading=\\"true\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"play-circle\\" class=\\"mb-2.5 place-self-end w-44\\"></zbutton-stub>
+    </div>
+  </div>
+</div>"
+`;

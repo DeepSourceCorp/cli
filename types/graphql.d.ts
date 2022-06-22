@@ -260,6 +260,15 @@ declare module '*/gsrInstallationLanding.gql' {
 }
     
 
+declare module '*/createIssueOnIntergation.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const CreateIssueOnIntegration: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/getIntegrationInstallationUrl.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1283,6 +1292,15 @@ declare module '*/maxUsagePercentage.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/ownerInstalledIntegration.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const OwneeInstalledIntegration: DocumentNode;
 
   export default defaultDocument;
 }

@@ -137,7 +137,7 @@ export default {
         '**/components/Billing/*',
         '**/settings/integrations/*'
       ]
-    : ['**/settings/integrations/jira.vue'],
+    : [],
 
   loadingIndicator: {
     name: 'pulse',

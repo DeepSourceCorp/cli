@@ -1,0 +1,7 @@
+mutation CreateIssueOnIntegration($input: CreateIssueOnIntegrationInput!) {
+  createIssueOnIntegration(input: $input) {
+    ok
+    issueCode
+    issueUrl
+  }
+}

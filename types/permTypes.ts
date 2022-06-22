@@ -52,5 +52,6 @@ export enum AppFeatures {
   TRANSFORMS = 'transforms',
   WEBHOOKS = 'webhooks',
   AUTO_ONBOARD = 'autoOnboard',
-  SYNC_ACCESS_SETTINGS = 'syncAccessSettings'
+  SYNC_ACCESS_SETTINGS = 'syncAccessSettings',
+  CREATE_ISSUE_ON_VCS = 'createIssueOnVCS'
 }

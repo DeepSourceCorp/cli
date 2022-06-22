@@ -1,7 +1,7 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
 import { OwnerDetailActions } from '~/store/owner/detail'
 
-import { Owner, IssueTypeSetting } from '~/types/types'
+import { Owner, IssueTypeSetting, IntegrationFeature } from '~/types/types'
 
 const ownerDetailStore = namespace('owner/detail')
 
@@ -82,6 +82,14 @@ export default class OwnerDetailMixin extends Vue {
   fetchMaxUsagePercentage: (args: {
     login: string
     provider: string
+    refetch?: boolean
+  }) => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.FETCH_INTEGRATIONS_FOR_FEATURE)
+  fetchIntegrationForFeature: (args: {
+    login: string
+    provider: string
+    feature: IntegrationFeature
     refetch?: boolean
   }) => Promise<void>
 }

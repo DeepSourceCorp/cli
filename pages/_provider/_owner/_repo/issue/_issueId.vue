@@ -10,10 +10,10 @@
       </z-breadcrumb>
       <issue-actions
         :issue="issue"
-        :repository="repository"
         :shortcode="$route.params.issueId"
-        :isAutofixEnabled="isAutofixEnabled"
-        :canCreateAutofix="canCreateAutofix"
+        :is-autofix-enabled="isAutofixEnabled"
+        :issue-create-integrations="issueCreateIntegrations"
+        :can-create-autofix="canCreateAutofix"
         @ignoreIssues="ignoreIssues"
       ></issue-actions>
     </div>
@@ -88,8 +88,9 @@ import RepoDetailMixin from '@/mixins/repoDetailMixin'
 import { Context } from '@nuxt/types'
 import { AppFeatures, RepoPerms, TeamPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { IssuePriority, IssuePriorityLevel } from '~/types/types'
+import { IntegrationFeature, IssuePriority, IssuePriorityLevel } from '~/types/types'
 import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
 @Component({
   components: {
@@ -117,11 +118,34 @@ import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
     }
   ]
 })
-export default class IssuePage extends mixins(IssueDetailMixin, RepoDetailMixin, RoleAccessMixin) {
+export default class IssuePage extends mixins(
+  OwnerDetailMixin,
+  IssueDetailMixin,
+  RepoDetailMixin,
+  RoleAccessMixin
+) {
   public issuePriority: IssuePriority | null = null
+  public isJiraEnabled = false
 
   async fetch(): Promise<void> {
     await this.fetchIssueData()
+
+    const { owner: login, provider } = this.$route.params
+    await this.fetchIntegrationForFeature({
+      login,
+      provider,
+      feature: IntegrationFeature.FeatureIssue
+    })
+  }
+
+  get issueCreateIntegrations(): string[] {
+    if (this.owner.installedIntegrations) {
+      return this.owner.installedIntegrations
+        .map((integration) => integration?.shortcode ?? '')
+        .filter(Boolean)
+    }
+
+    return []
   }
 
   refetchIssueData(): void {

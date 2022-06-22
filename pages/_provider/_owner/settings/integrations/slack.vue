@@ -14,15 +14,14 @@
     </div>
 
     <div v-else class="p-4 pb-32 md:max-w-2xl">
-      <div class="flex justify-between" :class="{ 'mb-4': !integration.installed }">
+      <div class="flex flex-col justify-between gap-4 mb-4 sm:flex-row">
         <integration-title :logo="integration.logo" name="Slack" />
 
-        <notice v-if="integration.installed" class="h-8">
-          <p class="text-xs">
-            Installed on
-            <span class="font-medium text-vanilla-100">{{ integration.installedOn }}</span>
-          </p>
-        </notice>
+        <integration-installed-on
+          v-if="integration.installed"
+          :installed-on="integration.installedOn"
+        />
+
         <z-button
           v-else
           :is-loading="installingIntegration"
@@ -37,20 +36,12 @@
 
       <z-divider v-if="integration.installed" margin="my-4" />
 
-      <div
+      <integration-installed-by
         v-if="integration.installed"
-        class="flex items-center text-xs gap-x-1 text-vanilla-400 mb-7"
-      >
-        <span>Installed by</span>
-        <z-avatar
-          :image="avatar"
-          :user-name="userName"
-          size="xs"
-          class="flex-shrink-0 leading-none rounded-full"
-        />
-        <span class="text-xs font-medium leading-none text-vanilla-100">{{ userName }}</span>
-        <span>on {{ formatDate(integration.enabledOn) }} </span>
-      </div>
+        :avatar="avatar"
+        :user-name="userName"
+        :enabled-on="integration.enabledOn"
+      />
 
       <z-alert
         v-if="showAlert"
@@ -85,7 +76,7 @@
         v-if="integration.installed"
         class="flex flex-col md:justify-between md:flex-row gap-y-4 md:gap-y-0"
       >
-        <div class="max-w-xs space-y-2">
+        <div class="max-w-sm space-y-2">
           <h2 class="text-sm text-vanilla-300">Uninstall integration</h2>
           <p class="text-xs text-vanilla-400">
             Uninstalling the Slack integration from your account would stop all alerts to your Slack
@@ -99,18 +90,18 @@
           color="ink-300"
           label="Uninstall Slack"
           size="small"
-          @click="showConfirm = true"
+          @click="showDeleteConfirmation = true"
         />
       </div>
     </div>
 
     <portal to="modal">
       <z-confirm
-        v-if="showConfirm"
+        v-if="showDeleteConfirmation"
         title="Are you sure you want to uninstall Slack?"
         subtitle="Uninstalling the Slack integration from your account would stop all alerts to your Slack
             workspace."
-        @onClose="showConfirm = false"
+        @onClose="showDeleteConfirmation = false"
       >
         <template v-slot:footer="{ close }">
           <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
@@ -148,13 +139,13 @@ import {
 } from '@deepsourcelabs/zeal'
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
-import integrationsDetailMixin from '~/mixins/integrationsDetailMixin'
-import integrationsListMixin from '~/mixins/integrationsListMixin'
-import ownerDetailMixin from '~/mixins/ownerDetailMixin'
+import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
 
 import { TeamPerms } from '~/types/permTypes'
 import { IntegrationSettingsLevel, UpdateIntegrationSettingsInput } from '~/types/types'
 import { formatDate } from '~/utils/date'
+
+const SHORTCODE = 'slack'
 
 /**
  * Owner-level integrations page specific to an app
@@ -184,19 +175,9 @@ import { formatDate } from '~/utils/date'
     formatDate
   }
 })
-export default class SlackIntegration extends mixins(
-  integrationsDetailMixin,
-  integrationsListMixin,
-  ownerDetailMixin
-) {
-  installingIntegration = false
+export default class SlackIntegration extends mixins(IntegrationsDetailMixin) {
   showAlert = false
-  showConfirm = false
-  uninstallingIntegration = false
-
   channel = ''
-
-  IntegrationSettingsLevel = IntegrationSettingsLevel
 
   /**
    * The fetch hook
@@ -204,23 +185,7 @@ export default class SlackIntegration extends mixins(
    *  @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    // Fetch owner Id from cookies if arriving after integration installation
-    const ownerId = this.$cookies.get('integration-slack-owner-id')
-
-    if (!this.owner.id) {
-      // Fetch owner ID if not available
-      const { provider, owner: login } = this.$route.params
-      await this.fetchOwnerID({ login, provider })
-    }
-
-    // Fetch details specific to Slack
-    await this.fetchIntegrationDetails({
-      shortcode: 'slack',
-      level: IntegrationSettingsLevel.Owner,
-      ownerId: this.owner.id || ownerId
-    })
-
-    this.$cookies.remove('integration-slack-owner-id')
+    await this.fetchIntegrationData(SHORTCODE)
 
     // Set the channel preference if available
     if (this.integration.installed) {
@@ -254,6 +219,8 @@ export default class SlackIntegration extends mixins(
       // Fall back to `true` if the `integration-slack` is absent
       this.showAlert = true
     }
+
+    this.fetchInstallationUrl(SHORTCODE)
   }
 
   get avatar(): string | null | undefined {
@@ -303,24 +270,7 @@ export default class SlackIntegration extends mixins(
    * @returns {Promise<void>}
    */
   async installIntegrationHandler(): Promise<void> {
-    this.installingIntegration = true
-
-    // Trigger the GQL mutation to fetch integration installation URL
-    const { url } = await this.getIntegrationInstallationUrl({ shortcode: 'slack' })
-
-    // Set provider and owner information in cookies
-    const { provider, owner } = this.$route.params
-    this.$cookies.set('integration-slack-provider', provider)
-    this.$cookies.set('integration-slack-owner', owner)
-    this.$cookies.set('integration-slack-owner-id', this.owner.id)
-
-    // Navigate to the app authorization page
-    if (url) {
-      window.location.href = url
-    } else {
-      // The redirect didn't happen, reset the CTA state
-      this.installingIntegration = false
-    }
+    await this.getInstallationUrlSetCookiesAndRedirect(SHORTCODE)
   }
 
   /**
@@ -329,30 +279,7 @@ export default class SlackIntegration extends mixins(
    * @returns {Promise<void>}
    */
   async uninstallIntegrationHandler(): Promise<void> {
-    this.uninstallingIntegration = true
-
-    // Trigger the GQL mutation to uninstall integration
-    try {
-      await this.unInstallIntegration({ shortcode: 'slack', ownerId: this.owner.id })
-    } catch (e) {
-      this.$logErrorAndToast(
-        e as Error,
-        'There was an error uninstalling the integration. Please contact support.'
-      )
-      this.uninstallingIntegration = false
-      this.showConfirm = false
-      return
-    }
-
-    // Refetch integrations list
-    await this.fetchIntegrations({
-      level: IntegrationSettingsLevel.Owner,
-      ownerId: this.owner.id,
-      refetch: true
-    })
-
-    this.uninstallingIntegration = false
-    this.showConfirm = false
+    this.uninstallIntegrationWrapper(SHORTCODE)
   }
 
   /**

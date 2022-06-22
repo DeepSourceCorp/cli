@@ -122,7 +122,11 @@ export const mutations: IssueDetailModuleMutations = {
     state.silenceRules = resolveNodes(rules) as SilenceRule[]
   },
   [IssueDetailMutations.SET_SINGLE_ISSUE]: (state, issue: Issue) => {
-    state.singleIssue = Object.assign({}, state.issue, issue)
+    if (state.singleIssue.id === issue.id) {
+      state.singleIssue = Object.assign({}, state.singleIssue, issue)
+    } else {
+      state.singleIssue = issue
+    }
   },
   [IssueDetailMutations.SET_ISSUE_DIR_DETAILS]: (state, issue: Issue) => {
     state.issueDirDetails = Object.assign({}, state.issueDirDetails, issue)

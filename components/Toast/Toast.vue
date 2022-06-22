@@ -14,7 +14,7 @@
     >
       <div :class="classToastAll" class="overflow-hidden rounded-lg shadow-xs z-100">
         <div
-          class="flex items-start p-2 leading-none"
+          class="flex items-center p-2 leading-none"
           :class="{
             'bg-cherry': type === 'danger'
           }"
@@ -65,6 +65,7 @@ import { ZIcon } from '@deepsourcelabs/zeal'
 
 interface PrimaryAction {
   label: string
+  icon: string
   action: Function
 }
 
@@ -82,9 +83,6 @@ export default class Toast extends Vue {
 
   @Prop({ default: true })
   progress!: boolean
-
-  @Prop()
-  icon!: string
 
   @Prop({ default: 2 })
   timeout!: number

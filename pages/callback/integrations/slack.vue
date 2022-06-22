@@ -1,61 +1,22 @@
 <template>
-  <div class="flex justify-center pt-26 animate-glow-bg">
-    <div class="pt-6 pb-4 border rounded-md bg-ink-400 border-ink-200">
-      <div class="flex items-center justify-center gap-x-2">
-        <div class="p-1.5 pr-1 rounded-sm bg-ink-300">
-          <img
-            src="~/assets/images/deepsource-logo-centered.svg"
-            alt="DeepSource"
-            class="flex-shrink-0 w-8 h-8"
-          />
-        </div>
+  <integration-callback-wrapper
+    integration-logo="integration.logo"
+    @triggerInstall="installIntegrationHandler"
+    :is-installing="installingIntegration"
+    :installing-on="installIntegrationPayload.installingOn"
+    :primary-disabled="!channel"
+  >
+    <notification-channel-section
+      v-model="channel"
+      :available-channels="availableChannels"
+      :update-on-change="false"
+      class="px-6"
+    />
 
-        <z-icon icon="arrow-left-right" />
+    <z-divider margin="my-7" />
 
-        <logo-container :logo="integration.logo" dimensions="w-8 h-8" />
-      </div>
-
-      <div class="flex justify-center mt-6 mb-7">
-        <notice class="h-8 gap-x-3">
-          <template #indicator>
-            <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-honey"></span>
-          </template>
-          <p class="text-xs">
-            Installing on
-            <span class="font-medium text-vanilla-100">{{
-              installIntegrationPayload.installingOn
-            }}</span>
-          </p>
-        </notice>
-      </div>
-
-      <notification-channel-section
-        v-model="channel"
-        :available-channels="availableChannels"
-        :update-on-change="false"
-        class="px-6"
-      />
-
-      <z-divider margin="my-7" />
-
-      <event-alerts-section class="px-6" />
-
-      <z-divider margin="my-7" />
-
-      <div class="grid px-6 pb-px">
-        <z-button
-          :is-loading="installingIntegration"
-          :disabled="!channel"
-          label="Install integration"
-          loading-label="Installing integration"
-          icon="play-circle"
-          size="small"
-          class="mb-2.5 place-self-end w-44"
-          @click="installIntegrationHandler"
-        />
-      </div>
-    </div>
-  </div>
+    <event-alerts-section class="px-6" />
+  </integration-callback-wrapper>
 </template>
 
 <script lang="ts">

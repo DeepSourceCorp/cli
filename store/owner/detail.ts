@@ -19,7 +19,8 @@ import {
   VerifyGsrSetupInput,
   VerifyGsrSetupPayload,
   VerifyGsrWebhooksInput,
-  VerifyGsrWebhooksPayload
+  VerifyGsrWebhooksPayload,
+  IntegrationFeature
 } from '~/types/types'
 import { GraphqlError } from '~/types/apollo-graphql-types'
 
@@ -62,6 +63,9 @@ import VerifyGsrPermissions from '~/apollo/mutations/owner/gsr/verifyGsrPermissi
 import VerifyGsrWebhooks from '~/apollo/mutations/owner/gsr/verifyGsrWebhooks.gql'
 import TriggerVerifyGsrSsh from '~/apollo/mutations/owner/gsr/triggerVerifyGsrSsh.gql'
 import VerifyGsrSetup from '~/apollo/mutations/owner/gsr/verifyGsrSetup.gql'
+
+// Integrations
+import OwnerInstalledIntegrations from '~/apollo/queries/owner/ownerInstalledIntegration.gql'
 
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 export interface Trend {
@@ -205,7 +209,9 @@ export enum OwnerDetailActions {
   VERIFY_GSR_PERMISSIONS = 'verifyGsrPermissions',
   VERIFY_GSR_WEBHOOKS = 'verifyGsrWebhooks',
   VERIFY_GSR_SSH = 'verifyGsrSsh',
-  VERIFY_GSR_SETUP = 'verifyGsrSetup'
+  VERIFY_GSR_SETUP = 'verifyGsrSetup',
+
+  FETCH_INTEGRATIONS_FOR_FEATURE = 'fetchIntegrationsForFeature'
 }
 
 interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, RootState> {
@@ -357,6 +363,15 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
     }
   ) => Promise<void>
 
+  [OwnerDetailActions.CANCEL_SUBSCRIPTION_PLAN]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      id: string
+      planSlug: string
+    }
+  ) => Promise<void>
+
   [OwnerDetailActions.GET_UPGRADE_PLAN_INFO]: (
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
@@ -419,6 +434,17 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
     injectee: OwnerDetailModuleActionContext,
     args: VerifyGsrSetupInput
   ) => Promise<VerifyGsrSetupPayload>
+
+  [OwnerDetailActions.FETCH_INTEGRATIONS_FOR_FEATURE]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: {
+      login: string
+      provider: string
+      feature: IntegrationFeature
+      refetch?: boolean
+    }
+  ) => Promise<void>
 }
 
 export const actions: OwnerDetailModuleActions = {
@@ -865,6 +891,25 @@ export const actions: OwnerDetailModuleActions = {
   async [OwnerDetailActions.VERIFY_GSR_SETUP](_, args) {
     const response = await this.$applyGraphqlMutation(VerifyGsrSetup, args, true)
     return response.data.verifyGsrSetup
+  },
+  async [OwnerDetailActions.FETCH_INTEGRATIONS_FOR_FEATURE]({ commit }, args) {
+    const { provider, login, feature, refetch } = args
+
+    try {
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+        OwnerInstalledIntegrations,
+        {
+          provider: this.$providerMetaMap[provider].value,
+          login,
+          feature
+        },
+        refetch
+      )
+
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'There was an error fetching integrations.')
+    }
   }
 }
 

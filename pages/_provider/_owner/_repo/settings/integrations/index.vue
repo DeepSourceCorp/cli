@@ -22,11 +22,15 @@
 
     <template v-else>
       <!-- Loading state -->
-      <div v-if="$fetchState.pending" class="grid grid-cols-1 gap-4 md:grid-cols-3">
-        <div class="bg-opacity-50 rounded-md h-22 md:h-26 animate-pulse bg-ink-200"></div>
+      <div v-if="$fetchState.pending" class="grid grid-cols-1 gap-4 md:grid-cols-2 3xl:grid-cols-3">
+        <div
+          v-for="ii in 2"
+          :key="ii"
+          class="h-20 bg-opacity-50 rounded-md animate-pulse bg-ink-200"
+        />
       </div>
 
-      <div v-else class="grid grid-cols-1 gap-4 md:grid-cols-3">
+      <div v-else class="grid grid-cols-1 gap-4 md:grid-cols-2 3xl:grid-cols-3">
         <div v-for="integration in integrations" :key="integration.shortcode">
           <integration-card v-bind="integration" />
         </div>

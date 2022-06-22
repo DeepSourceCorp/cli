@@ -10,7 +10,6 @@
           :checkId="currentCheck ? currentCheck.id : ''"
           :shortcode="$route.params.issueId"
           @ignoreIssues="ignoreIssues"
-          :repository="repository"
         ></issue-actions>
       </div>
 

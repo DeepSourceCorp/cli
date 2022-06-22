@@ -1,0 +1,12 @@
+query OwnerInstalledIntegration(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $feature: IntegrationFeature
+) {
+  owner(login: $login, provider: $provider) {
+    id
+    installedIntegrations(feature: $feature) {
+      shortcode
+    }
+  }
+}

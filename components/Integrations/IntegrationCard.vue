@@ -1,47 +1,52 @@
 <template>
-  <div>
-    <nuxt-link
-      :to="$generateRoute(['settings', 'integrations', shortcode])"
-      class="flex flex-col p-4 text-left rounded-md bg-ink-300 hover:bg-ink-200"
-    >
-      <div class="space-y-2" :class="{ 'mb-4': showInstallationStatus }">
-        <div class="flex gap-x-3">
-          <img :src="logo" alt="logo" class="flex-shrink-0 w-5 h-5 mt-0.5" />
-          <h2 class="text-base font-medium text-vanilla-100">
-            {{ name }}
-          </h2>
-        </div>
-        <p class="mr-3 text-xs leading-6 text-vanilla-400 integration-description">
-          {{ getIntegrationDescription(shortcode) }}
-        </p>
+  <nuxt-link
+    :to="$generateRoute(['settings', 'integrations', shortcode])"
+    class="flex flex-col p-4 text-left rounded-md bg-ink-300 hover:bg-ink-200 group"
+  >
+    <div class="space-y-2" :class="{ 'mb-3': showInstallationStatus }">
+      <div class="flex gap-x-3">
+        <img :src="logo" alt="logo" class="flex-shrink-0 w-5 h-5 mt-0.5" />
+        <h2 class="text-base font-medium text-vanilla-100">
+          {{ name }}
+        </h2>
       </div>
+      <p class="mr-3 text-xs leading-6 text-vanilla-400 integration-description">
+        {{ getIntegrationDescription(shortcode) }}
+      </p>
+    </div>
 
-      <div v-if="showInstallationStatus" class="mt-auto">
-        <z-tag
-          :bg-color="installed ? 'juniper' : 'ink-200'"
-          :icon-color="installed ? 'ink-50' : ''"
-          :icon-left="installed ? 'check' : ''"
-          size="x-small"
-          spacing="py-1 px-2"
-          text-size="xxs"
-          ><span class="font-semibold" :class="[installed ? 'text-ink-50' : 'text-vanilla-400']">
+    <div v-if="showInstallationStatus" class="mt-auto">
+      <z-tag
+        :bg-color="installed ? 'juniper' : 'ink-200 group-hover:bg-ink-100'"
+        spacing="py-1 px-2"
+        size="x-small"
+        text-size="xxs"
+      >
+        <div class="flex items-center space-x-1.5">
+          <z-icon v-if="installed" icon="check" color="ink-50" size="x-small" class="stroke-3" />
+          <z-icon v-else icon="circle-dashed" color="vanilla-400" size="x-small" />
+          <span
+            class="font-semibold leading-none tracking-wide"
+            :class="[installed ? 'text-ink-50' : 'text-vanilla-400']"
+          >
             {{ installed ? 'INSTALLED' : 'NOT INSTALLED' }}
-          </span></z-tag
-        >
-      </div>
-    </nuxt-link>
-  </div>
+          </span>
+        </div>
+      </z-tag>
+    </div>
+  </nuxt-link>
 </template>
 
 <script lang="ts">
-import { ZTag } from '@deepsourcelabs/zeal'
+import { ZTag, ZIcon } from '@deepsourcelabs/zeal'
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
 import IntegrationsListMixin from '~/mixins/integrationsListMixin'
 
 @Component({
   components: {
-    ZTag
+    ZTag,
+    ZIcon
   }
 })
 

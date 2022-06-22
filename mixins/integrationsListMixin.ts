@@ -30,7 +30,7 @@ export default class IntegrationsListMixin extends Vue {
   getIntegrationDescription(shortcode: string): string {
     const descriptionMap = {
       slack: 'Send event alerts to your channels',
-      jira: 'Create issues from DeepSource to Jira'
+      jira: 'Create issues from DeepSource to Jira Cloud'
     } as Record<string, string>
 
     return descriptionMap[shortcode]

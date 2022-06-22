@@ -4,6 +4,7 @@
     :description="description"
     :inputId="inputId"
     :inputWidth="inputWidth"
+    :remove-y-padding="removeYPadding"
     :cascadeInput="true"
   >
     <template slot="label">
@@ -78,6 +79,9 @@ export default class ButtonInput extends Vue {
 
   @Prop({ default: false })
   fullWidth: boolean
+
+  @Prop({ default: false })
+  removeYPadding: boolean
 
   triggerClick(event: Event) {
     this.$emit('click', event)
