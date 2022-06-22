@@ -1,6 +1,7 @@
 package dryrun
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path"
@@ -163,5 +164,14 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 	a.Spinner.StopSpinner()
 	fmt.Println(aec.Apply(fmt.Sprintf("[✔] Issues after processing: %d", len(a.AnalysisResult.Issues)), aec.LightGreenF))
+
+	b, _ := json.Marshal(a.AnalysisResult)
+	if err = os.WriteFile("analysis_result.json", b, 0o750); err != nil {
+		return err
+	}
+
+	// Showcase the results on the browser
+	a.renderResultsOnBrowser()
+
 	return nil
 }

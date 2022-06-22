@@ -148,8 +148,8 @@ func getFinalFormattedSlice(fileContentSlice []string, issue *types.Issue) forma
 
 	// We need to move the trailing span to the previous line in order for our replacement logic to work.
 	for i := range chromaHighlightedSlice {
-		if i != 0 && !strings.HasPrefix(chromaHighlightedSlice[i], "<span class=\"hl\">") {
-			lineStartIndex := strings.Index(chromaHighlightedSlice[i], "<span class=\"hl\">")
+		if i != 0 && !strings.HasPrefix(chromaHighlightedSlice[i], "<span class=\"line hl\">") {
+			lineStartIndex := strings.Index(chromaHighlightedSlice[i], "<span class=\"line hl\">")
 
 			if lineStartIndex != -1 {
 				chromaHighlightedSlice[i-1] += chromaHighlightedSlice[i][:lineStartIndex]
@@ -175,7 +175,7 @@ func (p ProcSourceCodeLoad) String() string {
 
 // Process processes the source code to be highlighted using chroma and writes that into the
 // analysis result post highlighting.
-func (p ProcSourceCodeLoad) Process(fileContentSlice []string, issue *types.Issue, _ *[]types.Issue) error {
+func (p ProcSourceCodeLoad) Process(fileContentSlice []string, issue *types.Issue, processedIssues *[]types.Issue) error {
 	lineStart := issue.Location.Position.Begin.Line
 	lineEnd := issue.Location.Position.End.Line
 
