@@ -44,7 +44,8 @@ export enum RepoPerms {
   CHANGE_ISSUE_PRIORITY = 'changeIssuePriority',
   CHANGE_PRIORITY_SETTINGS_TO_REPORT = 'changePrioritySettingsToReport',
   CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON = 'changePrioritySettingsToBlockPrsOn',
-  CHANGE_INTEGRATION_SETTINGS = 'changeIntegrationSettings'
+  CHANGE_INTEGRATION_SETTINGS = 'changeIntegrationSettings',
+  CREATE_ISSUE_ON_INTEGRATION = 'createIssueOnIntegration'
 }
 
 export enum AppFeatures {

@@ -156,7 +156,12 @@ const REPO_PERMS_MAP = {
     RepositoryCollaboratorPermission.Write
   ],
   [RepoPerms.CHANGE_ISSUE_PRIORITY]: [RepositoryCollaboratorPermission.Admin],
-  [RepoPerms.CHANGE_INTEGRATION_SETTINGS]: [RepositoryCollaboratorPermission.Admin]
+  [RepoPerms.CHANGE_INTEGRATION_SETTINGS]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.CREATE_ISSUE_ON_INTEGRATION]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write,
+    RepositoryCollaboratorPermission.Read
+  ]
 }
 
 const FEATURES_PROVIDER_MAP = {

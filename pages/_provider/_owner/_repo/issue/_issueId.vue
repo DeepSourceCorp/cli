@@ -131,11 +131,13 @@ export default class IssuePage extends mixins(
     await this.fetchIssueData()
 
     const { owner: login, provider } = this.$route.params
-    await this.fetchIntegrationForFeature({
-      login,
-      provider,
-      feature: IntegrationFeature.FeatureIssue
-    })
+    if (this.$gateKeeper.repo(RepoPerms.CREATE_ISSUE_ON_INTEGRATION, this.repoPerms.permission)) {
+      await this.fetchIntegrationForFeature({
+        login,
+        provider,
+        feature: IntegrationFeature.FeatureIssue
+      })
+    }
   }
 
   get issueCreateIntegrations(): string[] {
