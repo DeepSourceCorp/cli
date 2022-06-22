@@ -1,21 +1,20 @@
 <template>
   <integration-callback-wrapper
-    integration-logo="integration.logo"
-    @triggerInstall="installIntegrationHandler"
+    :integration-logo="integration.logo"
     :is-installing="installingIntegration"
     :installing-on="installIntegrationPayload.installingOn"
     :primary-disabled="!channel"
+    @triggerInstall="installIntegrationHandler"
   >
     <notification-channel-section
       v-model="channel"
       :available-channels="availableChannels"
       :update-on-change="false"
-      class="px-6"
     />
 
     <z-divider margin="my-7" />
 
-    <event-alerts-section class="px-6" />
+    <event-alerts-section />
   </integration-callback-wrapper>
 </template>
 

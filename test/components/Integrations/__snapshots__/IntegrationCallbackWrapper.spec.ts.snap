@@ -2,7 +2,7 @@
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -32,7 +32,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -56,7 +56,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -80,7 +80,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -110,7 +110,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -134,7 +134,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -158,7 +158,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -188,7 +188,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -212,7 +212,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -236,7 +236,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -266,7 +266,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -290,7 +290,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"isInstalling":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -314,7 +314,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -344,7 +344,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -368,7 +368,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -392,7 +392,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -422,7 +422,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -446,7 +446,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -470,7 +470,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -500,7 +500,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -524,7 +524,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -548,7 +548,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -578,7 +578,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -602,7 +602,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":false,"isInstalling":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -626,7 +626,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -656,7 +656,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -680,7 +680,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -704,7 +704,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -734,7 +734,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -758,7 +758,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -782,7 +782,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -812,7 +812,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -836,7 +836,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -860,7 +860,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -890,7 +890,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -914,7 +914,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":null,"isInstalling":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -938,7 +938,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -968,7 +968,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -992,7 +992,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1016,7 +1016,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":false,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1046,7 +1046,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":false,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1070,7 +1070,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":false,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1094,7 +1094,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":null,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1124,7 +1124,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":null,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1148,7 +1148,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1172,7 +1172,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":true,"installingOn":"https://deepsource.io/example.png","integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1202,7 +1202,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":true,"installingOn":null,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>
@@ -1226,7 +1226,7 @@ exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapp
 
 exports[`[[ IntegrationCallbackWrapper ]] renders the integration callback wrapper: {"primaryDisabled":true,"isInstalling":true,"integrationLogo":"https://deepsource.io/example.png"} 1`] = `
 "<div class=\\"flex justify-center pt-26 animate-glow-bg\\">
-  <div class=\\"max-w-xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
+  <div class=\\"max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200\\">
     <div class=\\"flex items-center justify-center gap-x-2\\">
       <div class=\\"p-1.5 pr-1 rounded-sm bg-ink-300\\"><img src=\\"~/assets/images/deepsource-logo-centered.svg\\" alt=\\"DeepSource\\" class=\\"flex-shrink-0 w-8 h-8\\"></div> <svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--arrow-left-right text-vanilla-400\\">
         <polyline points=\\"17 11 21 7 17 3\\" stroke=\\"currentColor\\"></polyline>

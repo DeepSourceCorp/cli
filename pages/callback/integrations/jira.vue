@@ -1,9 +1,9 @@
 <template>
   <integration-callback-wrapper
-    integration-logo="integration.logo"
-    @triggerInstall="validateAndTriggerInstallation"
+    :integration-logo="integration.logo"
     :is-installing="isIntegrationInstalling"
     :primary-disabled="!isConfigValid"
+    @triggerInstall="validateAndTriggerInstallation"
   >
     <template #notice>
       <notice class="h-8 gap-x-3">
@@ -19,7 +19,7 @@
       v-model="selectedCloudId"
       label="Atlassian site"
       input-id="jira-default-cloud-id"
-      input-width="x-small"
+      input-width="small"
       placeholder="Select a site"
       description="Issues would be created under projects in this Atlassian site unless specified in repository settings."
       :options="cloudIdOptions"
@@ -30,7 +30,7 @@
       label="Default project"
       input-id="jira-default-project"
       :disabled="!selectedCloudId"
-      input-width="x-small"
+      input-width="small"
       description="Issues would be created under the default project unless specified in repo settings."
       :options="projectOptions"
     />
@@ -40,7 +40,7 @@
       label="Default issue type"
       input-id="jira-default-issue-type"
       :disabled="!selectedCloudId"
-      input-width="x-small"
+      input-width="small"
       description="Issues would be created with the default issue type unless specified in repo settings."
       :options="issueTypeOptions"
     />
