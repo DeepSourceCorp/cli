@@ -62,3 +62,15 @@ type AnalyzerIssue struct {
 	Description string `toml:"description" json:"description" validate:"required"`
 	Category    string `toml:"category" json:"category" validate:"required,category"`
 }
+
+// Issue category maps
+var CategoryMaps = map[string]string{
+	"Bug risk":      "bug-risk",
+	"Anti-pattern":  "antipattern",
+	"Performance":   "performance",
+	"Style":         "style",
+	"Security":      "security",
+	"Coverage":      "coverage",
+	"Type check":    "typecheck",
+	"Documentation": "doc",
+}

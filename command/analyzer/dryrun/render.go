@@ -1,12 +1,14 @@
 package dryrun
 
 import (
+	"embed"
 	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"os"
 	"path"
+	"strings"
 
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/go-git/go-git/v5"
@@ -20,143 +22,164 @@ import (
  * /issues?category=all
  * /issues?category=performance  */
 
+//go:embed views/*.html
+var tmplFS embed.FS
+
 type VCSInfo struct {
 	Branch    string
 	CommitSHA string
 }
 
-type ResultToRender struct {
-	AnalyzerName      string
-	Issues            []types.Issue
-	IssueOccurenceMap map[types.Issue]int
-	VCSInfo           VCSInfo
-	Data              ResultData
+type OccurenceData struct {
+	IssueMeta  types.AnalyzerIssue
+	Occurences []types.Issue
 }
 
 type ResultData struct {
-	Title              string
-	SourcePath         string
-	AnalyzerTOMLData   types.AnalyzerTOML
-	AnalysisResult     types.AnalysisResult
-	Issues             []types.Issue
-	RenderedSourceCode []template.HTML
+	UniqueIssuesCount     int
+	TotalOccurences       int
+	SourcePath            string
+	IssuesOccurenceMap    map[string]OccurenceData
+	IssueCategoryCountMap map[string]int
+	AnalysisResult        types.AnalysisResult
+	RenderedSourceCode    []template.HTML
+}
+
+type DataRenderOpts struct {
+	Template             *template.Template
+	PageTitle            string
+	AnalyzerShortcode    string
+	VCSInfo              VCSInfo
+	AnalysisResultData   ResultData
+	AnalyzerTOMLData     types.AnalyzerTOML
+	SelectedIssueCode    string
+	SelectedCategory     string
+	IssueCategoryNameMap map[string]string
 }
 
 // renderResultsOnBrowser renders the results on the browser through a local server.
 func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
-	const tpl = `<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>{{.Title}}</title>
-        <link href="static/style.css" type="text/css" rel="stylesheet"/>
-	</head>
-	<body>
-    {{ $scd := .RenderedSourceCode }}
-    {{ range $index, $issue := .Issues }}
-            <div>{{ $issue.IssueCode }} {{ $issue.IssueText }} {{ $issue.Location.Path }}<br>
-            {{index $scd $index}}
-            </div>
-        {{end}}
-	</body>
-</html>`
+	// Collect the data that needs to be rendered.
+	d := DataRenderOpts{
+		PageTitle: "Analyzer Dry Run",
+		// TODO: Use shortcode here.
+		AnalyzerShortcode: a.Client.AnalysisOpts.AnalyzerName,
+		AnalysisResultData: ResultData{
+			AnalysisResult: a.AnalysisResult,
+		},
+		SelectedCategory:     "all",
+		IssueCategoryNameMap: types.CategoryMaps,
+	}
 
-	// Declare routes.
-	a.declareRoutes()
-
-	// Collect the result to be rendered.
-	if err = a.collectResultToBeRendered(); err != nil {
+	if err = d.collectResultToBeRendered(); err != nil {
 		return err
 	}
 
-	t, err := template.New("issues").Parse(tpl)
+	// Parse the HTML templates.
+	d.Template = template.Must(template.ParseFS(tmplFS, "views/*.html"))
 	if err != nil {
-		fmt.Println(err)
+		return err
 	}
 
-	data := ResultData{
-		Title:          "Analyzer Dry Run",
-		AnalysisResult: a.AnalysisResult,
-		Issues:         a.AnalysisResult.Issues,
-	}
+	// Define the routes and start the server.
 
-	for _, issue := range a.AnalysisResult.Issues {
-		data.RenderedSourceCode = append(data.RenderedSourceCode, template.HTML(issue.ProcessedData.SourceCode.Rendered))
-	}
-
-	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		err = t.Execute(w, data)
-		if err != nil {
-			fmt.Println(err)
-		}
-	})
+	http.Handle("/", d.declareRoutes())
 	log.Fatalln(http.ListenAndServe(":8080", nil))
 	return nil
 }
 
 // collectResultToBeRendered formats all the result received after post-processing and then adds the
 // extra data required for rendering on the browser
-func (a *AnalyzerDryRun) collectResultToBeRendered() (err error) {
+func (d *DataRenderOpts) collectResultToBeRendered() (err error) {
 	cwd, _ := os.Getwd()
-	analyzerIssue := types.AnalyzerIssue{}
 
-	// Iterate over the reported issues and create the data to be shown on the browser.
-	for i := 0; i < len(a.AnalysisResult.Issues); i++ {
-		issueCode := a.AnalysisResult.Issues[i].IssueCode
-
-		// Read the toml file of the issue in .deepsource/analyzer/issues directory
-		issueFilePath := path.Join(cwd, ".deepsource/analyzer/issues", fmt.Sprintf("%s.toml", issueCode))
-
-		// Read the issue and populate the data of issue category and description
-		issueData, err := os.ReadFile(issueFilePath)
-		if err != nil {
-			return err
-		}
-
-		// Unmarshal the data from the issue TOMLs into the struct
-		err = toml.Unmarshal(issueData, analyzerIssue)
-		if err != nil {
-			return err
-		}
-		a.AnalysisResult.Issues[i].IssueTitle = analyzerIssue.Title
-		a.AnalysisResult.Issues[i].IssueCategory = analyzerIssue.Category
-		a.AnalysisResult.Issues[i].IssueDescription = analyzerIssue.Description
+	// Inject the VCS information.
+	if d.VCSInfo.Branch, d.VCSInfo.CommitSHA, err = fetchVCSDetails(cwd); err != nil {
+		log.Print(err)
+		return err
 	}
 
 	// Create a map of occurences of the issues.
-	issueOccurenceMap := make(map[types.Issue]int)
-	for _, issue := range a.AnalysisResult.Issues {
-		if _, ok := issueOccurenceMap[issue]; !ok {
-			issueOccurenceMap[issue] = 1
+	issueOccurenceMap := make(map[string]OccurenceData)
+	for _, issue := range d.AnalysisResultData.AnalysisResult.Issues {
+		currentOccurence := OccurenceData{}
+
+		if _, ok := issueOccurenceMap[issue.IssueCode]; !ok {
+			// Fetch issue meta for the issue code raised.
+			issueMeta, err := getIssueMeta(cwd, issue.IssueCode)
+			if err != nil {
+				return err
+			}
+			currentOccurence = OccurenceData{
+				IssueMeta: issueMeta,
+			}
+			currentOccurence.Occurences = append(currentOccurence.Occurences, issue)
+			issueOccurenceMap[issue.IssueCode] = currentOccurence
 			continue
 		}
-		issueOccurenceMap[issue] = issueOccurenceMap[issue] + 1
-	}
 
-	// Create a map of issue category to issue count
-	// Iterate over the map and then keep adding the issue counts
+		// Get past occurences and append to it since maps don't allow direct append to a slice value.
+		pastOccurences := issueOccurenceMap[issue.IssueCode]
+		currentOccurence.IssueMeta = pastOccurences.IssueMeta
+		currentOccurence.Occurences = append(pastOccurences.Occurences, issue)
+		issueOccurenceMap[issue.IssueCode] = currentOccurence
+	}
+	d.AnalysisResultData.IssuesOccurenceMap = issueOccurenceMap
+
+	// Create a map of issue category to issue count.
+	// Iterate over the map and then keep adding the issue counts.
 	issueCategoryMap := make(map[string]int)
-	for key, value := range issueOccurenceMap {
-		if _, ok := issueCategoryMap[key.IssueCategory]; !ok {
-			issueCategoryMap[key.IssueCategory] = value
+	for _, value := range issueOccurenceMap {
+		if _, ok := issueCategoryMap[value.IssueMeta.Category]; !ok {
+			issueCategoryMap[value.IssueMeta.Category] = len(value.Occurences)
 			continue
 		}
-		issueCategoryMap[key.IssueCategory] = issueCategoryMap[key.IssueCategory] + value
+		issueCategoryMap[value.IssueMeta.Category] = issueCategoryMap[value.IssueMeta.Category] + len(value.Occurences)
 	}
 
-	// Get the VCS details like branch name and commit SHA.
-	a.fetchVCSDetails()
+	// Add remaining categories to the map.
+	for key, value := range types.CategoryMaps {
+		if _, ok := issueCategoryMap[value]; !ok {
+			issueCategoryMap[key] = 0
+			continue
+		}
+		issueCategoryMap[key] = issueCategoryMap[value]
+		delete(issueCategoryMap, value)
+	}
+	d.AnalysisResultData.IssueCategoryCountMap = issueCategoryMap
+
+	// Find out total occurences.
+	for _, v := range issueOccurenceMap {
+		d.AnalysisResultData.TotalOccurences = d.AnalysisResultData.TotalOccurences + len(v.Occurences)
+	}
+	d.AnalysisResultData.UniqueIssuesCount = len(d.AnalysisResultData.IssuesOccurenceMap)
 	return nil
 }
 
-// fetchVCSDetails fetches the VCS details to be shown on the dashboard.
-func (a *AnalyzerDryRun) fetchVCSDetails() (string, string, error) {
-	// Fetch the branch name
-	dir, err := os.Getwd()
+// getIssueMeta receives the issuecode that is raised and it reads the TOML of that issue and returns
+// its details configured in the TOML like title, description and category.
+func getIssueMeta(cwd, issueCode string) (types.AnalyzerIssue, error) {
+	analyzerIssue := types.AnalyzerIssue{}
+	// Read the toml file of the issue in .deepsource/analyzer/issues directory
+	// TODO: Improve here.
+	issueFilePath := path.Join(cwd, ".deepsource/analyzer/issues", fmt.Sprintf("%s.toml", issueCode))
+
+	// Read the issue and populate the data of issue category and description
+	issueData, err := os.ReadFile(issueFilePath)
 	if err != nil {
-		return "", "", err
+		return analyzerIssue, err
 	}
 
+	// Unmarshal the data from the issue TOMLs into the struct
+	err = toml.Unmarshal(issueData, &analyzerIssue)
+	if err != nil {
+		return analyzerIssue, err
+	}
+	return analyzerIssue, nil
+}
+
+// fetchVCSDetails fetches the VCS details to be shown on the dashboard.
+func fetchVCSDetails(dir string) (string, string, error) {
 	repo, err := git.PlainOpen(dir)
 	if err != nil {
 		return "", "", err
@@ -172,8 +195,10 @@ func (a *AnalyzerDryRun) fetchVCSDetails() (string, string, error) {
 	if err != nil {
 		return "", "", err
 	}
+	branchData := branchName.String()
+	branch := branchData[strings.LastIndex(branchData, "/")+1:]
 
-	return branchName.String(), latestCommitHash, nil
+	return branch, latestCommitHash[:7], nil
 }
 
 // fetchHeadManually fetches the latest commit hash using the command `git rev-parse HEAD`

@@ -171,7 +171,9 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	// Showcase the results on the browser
-	a.renderResultsOnBrowser()
+	if err := a.renderResultsOnBrowser(); err != nil {
+		return err
+	}
 
 	return nil
 }
