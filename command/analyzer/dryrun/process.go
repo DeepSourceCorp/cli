@@ -27,7 +27,7 @@ func (a *AnalyzerDryRun) processAnalyzerReport(reportBytes []byte) (types.Analys
 	processor := processor.ReportProcessor{
 		LocalSourcePath:   a.SourcePath,
 		ContainerCodePath: a.Client.AnalysisOpts.ContainerCodePath,
-		Processors:        []processor.IProcessor{source_code_load,skip_cq},
+		Processors:        []processor.IProcessor{source_code_load, skip_cq},
 	}
 
 	// Generate the silencers regexMap.
