@@ -179,9 +179,5 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 
 	pterm.Success.Print("Analysis results live at http://localhost:8080...")
 	// Showcase the results on the browser
-	if err := a.renderResultsOnBrowser(); err != nil {
-		return err
-	}
-
-	return nil
+	return a.renderResultsOnBrowser()
 }

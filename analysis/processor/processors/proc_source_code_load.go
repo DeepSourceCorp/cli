@@ -175,7 +175,7 @@ func (p ProcSourceCodeLoad) String() string {
 
 // Process processes the source code to be highlighted using chroma and writes that into the
 // analysis result post highlighting.
-func (p ProcSourceCodeLoad) Process(fileContentSlice []string, issue *types.Issue, processedIssues *[]types.Issue) error {
+func (p ProcSourceCodeLoad) Process(fileContentSlice []string, issue *types.Issue, _ *[]types.Issue) error {
 	lineStart := issue.Location.Position.Begin.Line
 	lineEnd := issue.Location.Position.End.Line
 
