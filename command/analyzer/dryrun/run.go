@@ -8,7 +8,9 @@ import (
 
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
+	"github.com/fatih/color"
 	"github.com/morikuni/aec"
+	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 
 	"github.com/deepsourcelabs/cli/analysis/config"
@@ -26,7 +28,7 @@ var (
 	analysisResultsExt   string = ".json"
 )
 
-// The params required while running the Analysis locally
+// The params required while running the Analysis locally.
 type AnalyzerDryRun struct {
 	Client               *docker.DockerClient   // The client to be used for all docker related ops.
 	RemoteSource         bool                   // True if the source to be analyzed is a remote VCS repository.
@@ -170,6 +172,12 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 
+	// Print the user code and the permission to open browser at verificationURI
+	c := color.New(color.FgCyan, color.Bold)
+	c.Printf("Press enter to view the analysis results in the browser...")
+	fmt.Scanln()
+
+	pterm.Success.Print("Analysis results live at http://localhost:8080...")
 	// Showcase the results on the browser
 	if err := a.renderResultsOnBrowser(); err != nil {
 		return err

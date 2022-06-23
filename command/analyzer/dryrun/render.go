@@ -10,17 +10,12 @@ import (
 	"path"
 	"strings"
 
+	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/pelletier/go-toml/v2"
 )
-
-/* Routes:
- * /issues
- * /issue/TCV-001/occurences
- * /issues?category=all
- * /issues?category=performance  */
 
 //go:embed views/*.html
 var tmplFS embed.FS
@@ -70,7 +65,6 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 		SelectedCategory:     "all",
 		IssueCategoryNameMap: types.CategoryMaps,
 	}
-
 	if err = d.collectResultToBeRendered(); err != nil {
 		return err
 	}
@@ -82,8 +76,13 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 	}
 
 	// Define the routes and start the server.
-
 	http.Handle("/", d.declareRoutes())
+
+	// Having received the user code, open the browser at the localhost:8080 endpoint.
+	err = browser.OpenURL("http://localhost:8080")
+	if err != nil {
+		return err
+	}
 	log.Fatalln(http.ListenAndServe(":8080", nil))
 	return nil
 }

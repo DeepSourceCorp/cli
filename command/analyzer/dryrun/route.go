@@ -8,6 +8,13 @@ import (
 	"github.com/gorilla/mux"
 )
 
+/* Declared Routes:
+ * /
+ * /issues
+ * /issue/{issue_code}/occurences
+ * /issues?category=all
+ * /issues?category={issue_category}  */
+
 // declareRoutes declares routes for various incoming requests to the Analyzer dry run local server.
 func (d *DataRenderOpts) declareRoutes() *mux.Router {
 	r := mux.NewRouter()
