@@ -77,10 +77,10 @@
           {{ range $key, $value := .AnalysisResultData.IssuesOccurenceMap }}
             {{ if eq $selectedCategory $defaultIssueCategory }}
               <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $value.IssueMeta.Category }}&nbsp;
+              {{ $value.IssueMeta.Category }}&nbsp;<br>
             {{else }} {{ if eq $selectedCategory $value.IssueMeta.Category }}
               <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $value.IssueMeta.Category }}&nbsp;
+              {{ $value.IssueMeta.Category }}&nbsp;<br>
               {{ end}}
             {{end}}
           {{ end }}
@@ -92,7 +92,7 @@
         <p>
           <strong>Metrics</strong><br>
           {{ range $metric := .AnalysisResultData.AnalysisResult.Metrics }}
-            <strong>{{ $metric.MetricCode }}</strong>:&nbsp;{{ (index $metric.Namespaces 0).Value }}
+          <strong>{{ $metric.MetricCode }}</strong>:&nbsp;{{ (index $metric.Namespaces 0).Value }}<br>
           {{ end }}
         </p>
       </div>
