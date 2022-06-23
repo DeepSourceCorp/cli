@@ -83,8 +83,7 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 	if err != nil {
 		return err
 	}
-	log.Fatalln(http.ListenAndServe(":8080", nil))
-	return nil
+	return http.ListenAndServe(":8080", nil)
 }
 
 // collectResultToBeRendered formats all the result received after post-processing and then adds the
