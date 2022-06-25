@@ -112,7 +112,7 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins, Watch } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { Run, Maybe } from '~/types/types'
 import RepoHeaderInfo from './RepoHeaderInfo.vue'
 import RouteParamsMixin from '@/mixins/routeParamsMixin'
@@ -210,11 +210,13 @@ export default class RepoHeader extends mixins(
   ActiveUserMixin
 ) {
   async fetch(): Promise<void> {
+    // skipcq: TCV-001
     await Promise.all([
       this.fetchRepoPerms(this.baseRouteParams),
       this.fetchBasicRepoDetails(this.baseRouteParams)
     ])
 
+    // skipcq: TCV-001
     this.fetchRepoRunCount({
       ...this.baseRouteParams,
       status: 'pend'

@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
+"<div>
+  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200\\">
+    <div id=\\"header\\" class=\\"xl:col-span-2\\">
+      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+              bifrost
+            </a></div>
+          <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+            <ztag-stub state=\\"default\\" iconleft=\\"google-cloud\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-ink-200 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+          </a>
+          <!---->
+        </h2>
+      </div>
+    </div>
+    <!---->
+    <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
+      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+          <ztab-stub isactive=\\"true\\" icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+        </a></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Snap Logged Out 1`] = `
+"<div>
+  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200\\">
+    <div id=\\"header\\" class=\\"xl:col-span-2\\">
+      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+              bifrost
+            </a></div>
+          <!----> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-ink-200 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+          </a>
+          <!---->
+        </h2>
+      </div>
+    </div>
+    <!---->
+    <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
+      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+          <ztab-stub isactive=\\"true\\" icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+        </a>
+        <!----><a>
+          <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a>
+        <!---->
+      </div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo Header Snap 1`] = `
+"<div>
+  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200\\">
+    <div id=\\"header\\" class=\\"xl:col-span-2\\">
+      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+              bifrost
+            </a></div>
+          <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-ink-200 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+          </a>
+          <!---->
+        </h2>
+      </div>
+    </div>
+    <!---->
+    <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
+      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+          <ztab-stub isactive=\\"true\\" icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+        </a></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: RepoHeader without a matching activeLink Snap 1`] = `
+"<div>
+  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200\\">
+    <div id=\\"header\\" class=\\"xl:col-span-2\\">
+      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><a class=\\"inline transition-colors duration-75 cursor-pointer hover:text-vanilla-300\\">deepsourcelabs</a> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+              bifrost
+            </a></div>
+          <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+            <ztag-stub state=\\"default\\" iconleft=\\"google-cloud\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-ink-200 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+          </a>
+          <!---->
+        </h2>
+      </div>
+    </div>
+    <!---->
+    <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
+      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+          <ztab-stub icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+        </a></div>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`[[ RepoHeader ]] renders RepoHeader without perms: Repo Header withut perms 1`] = `
+"<div>
+  <div class=\\"grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200\\">
+    <div id=\\"header\\" class=\\"xl:col-span-2\\">
+      <div class=\\"px-4 pt-3 space-x-2 space-y-2 xl:space-y-0\\">
+        <h2 class=\\"flex flex-wrap items-center gap-3 text-lg font-medium leading-none xl:text-xl text-vanilla-400\\">
+          <div class=\\"space-x-0.5 md:space-x-1\\"><span class=\\"inline\\">deepsourcelabs</span> <span class=\\"inline\\">/</span> <a class=\\"inline font-bold text-vanilla-100\\">
+              bifrost
+            </a></div>
+          <zbutton-stub color=\\"hover:text-slate\\" iconcolor=\\"current\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"z-star\\" class=\\"p-1 opacity-40 hover:opacity-70 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub> <a target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+            <ztag-stub state=\\"default\\" iconleft=\\"github\\" size=\\"base\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"p-0.5\\" iconcolor=\\"current\\" class=\\"border-2 border-ink-200 has-tooltip\\" data-original-title=\\"null\\"></ztag-stub>
+          </a>
+          <!---->
+        </h2>
+      </div>
+    </div>
+    <!---->
+    <div id=\\"tabs\\" class=\\"flex xl:col-span-2\\">
+      <div class=\\"flex self-end px-4 space-x-5 overflow-auto flex-nowrap hide-scroll\\"><a>
+          <ztab-stub isactive=\\"true\\" icon=\\"tachometer-fast\\" borderactivecolor=\\"juniper\\">Overview</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"flag\\" borderactivecolor=\\"juniper\\">Issues</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a><a>
+          <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+        </a></div>
+    </div>
+  </div>
+</div>"
+`;
