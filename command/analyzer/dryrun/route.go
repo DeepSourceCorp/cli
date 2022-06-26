@@ -16,8 +16,9 @@ import (
  * /issues?category={issue_category}  */
 
 // declareRoutes declares routes for various incoming requests to the Analyzer dry run local server.
-func (d *DataRenderOpts) declareRoutes() *mux.Router {
+func (d *DataRenderOpts) declareRoutes(staticFilesHandler http.Handler) *mux.Router {
 	r := mux.NewRouter()
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", staticFilesHandler))
 	r.HandleFunc("/", d.IssuesHandler)
 	r.HandleFunc("/issues", d.IssuesHandler)
 	r.HandleFunc("/issues", d.IssuesHandler).Queries()

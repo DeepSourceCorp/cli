@@ -19,7 +19,7 @@ import (
 	"github.com/pelletier/go-toml/v2"
 )
 
-//go:embed views/*.html
+//go:embed views/*.html views/**/*.css
 var tmplFS embed.FS
 
 type RunSummary struct {
@@ -81,6 +81,9 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 		return err
 	}
 
+	staticFS := http.FS(tmplFS)
+	fs := http.FileServer(staticFS)
+
 	// Parse the HTML templates.
 	d.Template = template.Must(template.ParseFS(tmplFS, "views/*.html"))
 	if err != nil {
@@ -88,7 +91,7 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 	}
 
 	// Define the routes and start the server.
-	http.Handle("/", d.declareRoutes())
+	http.Handle("/", d.declareRoutes(fs))
 
 	// Having received the user code, open the browser at the localhost:8080 endpoint.
 	err = browser.OpenURL("http://localhost:8080")
@@ -281,10 +284,10 @@ func fetchAnalyzerVCSData(dir string) string {
 		return nil
 	})
 
-	if commitsSinceCurrentTag <= 1 {
+	if commitsSinceCurrentTag == 0 {
 		return fmt.Sprintf("This Analyzer is up to date with %s", currentTag)
 	}
-	return fmt.Sprintf("This Analyzer is %d commits ahead of %s", commitsSinceCurrentTag-1, currentTag)
+	return fmt.Sprintf("This Analyzer is %d commits ahead of %s", commitsSinceCurrentTag, currentTag)
 }
 
 // fetchVCSDetails fetches the VCS details to be shown on the dashboard.
