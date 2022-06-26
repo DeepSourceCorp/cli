@@ -3,121 +3,308 @@
   <head>
     <meta charset="UTF-8" />
     <title>{{ .PageTitle }}</title>
-    <link href="static/style.css" type="text/css" rel="stylesheet" />
-    <style>
-      body,
-      html {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-      }
-
-      .container {
-        width: 100%;
-        height: 100%;
-      }
-
-      .leftpane {
-        width: 25%;
-        height: 100%;
-        float: left;
-        border-collapse: collapse;
-      }
-
-      .run-summary {
-        width: 25%;
-        height: 100%;
-        bottom: 100px;
-        border-collapse: collapse;
-      }
-
-      .middlepane {
-        width: 50%;
-        height: 100%;
-        float: left;
-        border-collapse: collapse;
-      }
-
-      .rightpane {
-        width: 25%;
-        height: 100%;
-        position: relative;
-        float: right;
-        border-collapse: collapse;
-      }
-
-      .toppane {
-        width: 100%;
-        height: 100px;
-        border-collapse: collapse;
-      }
-    </style>
+    <link href="/static/views/assets/deepsource-cli.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <div class="container">
-      <div class="toppane">
-        {{ .AnalyzerShortcode }}<br>
-        {{ .AnalysisResultData.UniqueIssuesCount }} issues {{ .VCSInfo.Branch }} {{ .VCSInfo.CommitSHA }} {{ .VCSInfo.VersionDiff }}
+  {{ $defaultIssueCategory := "all"}}
+  {{ $selectedCategory := .SelectedCategory }}
+  <body class="min-h-screen bg-ink-400 text-vanilla-100">
+    <nav
+      class="sticky top-0 z-20 flex justify-between h-12 col-span-2 px-6 py-2 border-b bg-ink-400 border-ink-200"
+    >
+      <div class="flex items-center divide-x divide-ink-200">
+        <img
+          src="/static/views/assets/images/deepsource.svg"
+          class="mr-4 w-28"
+        />
+        <h3 class="px-4 text-sm">Analyzer Dry Run</h3>
       </div>
+      <div class="flex gap-1">
+        <a
+          href="https://deepsource.io/docs"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="hover:bg-ink-100 button"
+        >
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <use
+              href="/static/views/assets/images/feather-sprite.svg#book-open"
+            />
+          </svg>
+          Documentation
+        </a>
+        <a
+          href="https://deepsource.io/login"
+          target="_blank"
+          rel="noreferrer noopener"
+          class="hover:bg-ink-100 bg-ink-200 button"
+        >
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <use
+              href="/static/views/assets/images/feather-sprite.svg#sidebar"
+            />
+          </svg>
+          Open DeepSource
+        </a>
+      </div>
+    </nav>
+    <header
+      class="p-6 h-24 pt-5 bg-ink-400 border-b border-ink-200 grid grid-cols-1 gap-x-4 gap-y-2.5 col-span-2"
+    >
+      <!-- parent has class grid-cols-[48px_1fr] -->
+      <!-- <div
+        class="grid w-full h-full row-span-2 rounded-sm bg-ink-300 place-content-center"
+      >
+        <img src="https://www.ruby-lang.org/favicon.ico" />
+      </div> -->
+      <h1 class="text-lg font-medium leading-tight">
+        {{ .AnalyzerShortcode }}
+      </h1>
+      <div class="flex items-center gap-5">
+        <div class="info">
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <use href="/static/views/assets/images/feather-sprite.svg#flag" />
+          </svg>
+          <span>{{ .AnalysisResultData.UniqueIssuesCount }} issues</span>
+        </div>
+        <div class="info">
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <use
+              href="/static/views/assets/images/feather-sprite.svg#git-branch"
+            />
+          </svg>
+          <span>{{ .VCSInfo.Branch }}</span>
+        </div>
+        <div class="info">
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <use
+              href="/static/views/assets/images/feather-sprite.svg#git-commit"
+            />
+          </svg>
+          <span>{{ .VCSInfo.CommitSHA }}</span>
+        </div>
+        <div class="info">
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <use
+              href="/static/views/assets/images/feather-sprite.svg#corner-up-left"
+            />
+          </svg>
+          <span>{{ .VCSInfo.VersionDiff }}</span>
+        </div>
+      </div>
+    </header>
+    <main class="grid grid-cols-[16rem_1fr_20rem] divide-x divide-ink-200">
+      <aside class="space-y-1 flex flex-col justify-between h-[calc(100vh-9rem)]">
+        <div class="p-4 space-y-1">
+          <a href="?category={{ $defaultIssueCategory }}" class="sidebar {{ if eq $selectedCategory $defaultIssueCategory }} selected {{ end }}">
+            <svg
+              class="hidden"
+              width="14"
+              height="14"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="/static/views/assets/images/feather-sprite.svg#list" />
+            </svg>
+            <span class="label">All issues</span>
+            <span class="tag"> {{ .AnalysisResultData.TotalOccurences }} </span>
+          </a>
 
-        <!-- Category Section -->
-      <div class="leftpane">
-        <p>
-          <a href="/issues"><strong>All Issues</strong></a>&nbsp;&nbsp;{{ .AnalysisResultData.TotalOccurences }}<br>
           {{ $categoryMap := .IssueCategoryNameMap}}
           {{ range $key, $value := .AnalysisResultData.IssueCategoryCountMap }}
-          {{ $categoryName := (index $categoryMap $key) }}
-          <li><strong><a href="/issues?category={{$key}}">{{ $categoryName }}</a></strong>: {{ $value }}</li>
+            {{ $categoryShortCode := (index $categoryMap $key) }}
+              <a href="?category={{ $categoryShortCode }}" class="sidebar {{ if eq $selectedCategory $categoryShortCode }} selected {{ end }}">
+                <svg
+                  class="hidden"
+                  width="14"
+                  height="14"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="/static/views/assets/images/feather-sprite.svg#trending-up" />
+                </svg>
+                <span class="label">{{ $key }}</span>
+                <span class="tag"> {{ $value }} </span>
+              </a>
           {{ end }}
-        </p>
-
-        <!-- Run Summary Section -->
-      <div class="run-summary">
-        <p>Run Summary</p>
-        {{ .Summary.TimeSinceRun }}<br>
-        {{ .AnalysisResultData.SourcePath }}<br>
-        {{ .Summary.RunDuration}}
-      </div>
-      </div>
-
-
-        <!-- All Unique Issues Section -->
-      <div class="middlepane">
-        <p>
-        {{ range $index, $error := .AnalysisResultData.AnalysisResult.Errors }}
-          {{ if eq $error.Level 0}}
-            <strong>Error</strong>&nbsp;{{ $error.HMessage }}
-          {{ else }}{{ if eq $error.Level 1}}
-            <strong>Warning</strong>&nbsp;{{ $error.HMessage }}
-            {{ end }}{{ end }}
-        {{ end }}
-        </p>
-        <p>
-          {{ $defaultIssueCategory := "all"}}
-          {{ $selectedCategory := .SelectedCategory }}
-          {{ $categoryMap := .IssueCategoryNameMap}}
+        </div>
+        <div class="p-4 border-t border-ink-200">
+          <h5 class="mb-3 text-xs tracking-wider uppercase text-vanilla-400">
+            Run Summary
+          </h5>
+          <ul class="space-y-2 text-sm list-none text-vanilla-400">
+            <li class="flex items-center gap-2.5">
+              <svg 
+                class="flex-shrink-0"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <use href="/static/views/assets/images/feather-sprite.svg#clock"/>
+              </svg>
+              <span class="truncate">{{ .Summary.TimeSinceRun }}</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg 
+                class="flex-shrink-0"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <use href="/static/views/assets/images/feather-sprite.svg#folder"/>
+              </svg>
+              <span class="truncate">{{ .AnalysisResultData.SourcePath }}</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <svg 
+                class="flex-shrink-0"
+                width="16"
+                height="16"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <use href="/static/views/assets/images/feather-sprite.svg#stopwatch"/>
+              </svg>
+              <span class="truncate">{{ .Summary.RunDuration}}</span>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <section class="grid grid-cols-1 gap-4 p-4 auto-rows-min">
+        {{ if eq (len .AnalysisResultData.IssuesOccurenceMap) 0 }}
+          <div class="py-16 text-sm text-center border border-dashed rounded-md text-vanilla-400 border-ink-200">No issues to show</div>
+        {{ else }}
           {{ range $key, $value := .AnalysisResultData.IssuesOccurenceMap }}
-            {{ $categoryName := (index $categoryMap $value.IssueMeta.Category) }}
-            {{ if eq $selectedCategory $defaultIssueCategory }}
-              <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $categoryName }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
-            {{else }} {{ if eq $selectedCategory $value.IssueMeta.Category }}
-              <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $categoryName }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
-              {{ end}}
-            {{end}}
+            {{ if or (eq $selectedCategory $value.IssueMeta.Category) (eq $selectedCategory $defaultIssueCategory) }}
+            <a class="border divide-x divide-ink-200 rounded-lg group border-ink-200 hover:bg-ink-300 grid grid-cols-[1fr_10rem]" href="/issue/{{ $key }}/occurences">
+              <div class="p-2 pl-4 space-y-1">
+                <h4 class="font-medium">{{ $value.IssueMeta.Title }}</h4>
+                <div class="flex gap-5 text-sm text-vanilla-400">
+                  <div class="flex flex-wrap items-center gap-2">
+                    <svg
+                      class="flex-shrink-0"
+                      width="14"
+                      height="14"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <use href="/static/views/assets/images/feather-sprite.svg#tag" />
+                    </svg>
+                    <span>{{ $value.IssueMeta.Category }}</span>  
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg
+                      class="flex-shrink-0"
+                      width="14"
+                      height="14"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <use href="/static/views/assets/images/feather-sprite.svg#file-text" />
+                    </svg>
+                    <span class="max-w-xs truncate">{{ $value.FilesInfo }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="grid text-xl font-medium place-content-center">{{ len $value.Occurences }}</div>
+            </a>
+            {{ end }}
           {{ end }}
-        </p>
-      </div>
-        <!-- Metrics Section -->
-      <div class="rightpane">
-        <p>
-          <strong>Metrics</strong><br>
-          {{ range $name, $metric := .AnalysisResultData.MetricsMap }}
-          <strong>{{ $name }}</strong>:&nbsp;{{ $metric }}<br>
+        {{ end }}
+      </section>
+      <aside class="p-4">
+        <h5 class="mb-3 text-xs tracking-wider uppercase text-vanilla-400">
+          Metrics
+        </h5>
+        <div class="gap-2.5 grid grid-cols-1">
+          {{ if eq (len .AnalysisResultData.AnalysisResult.Metrics) 0 }}
+            <div class="py-8 text-sm text-center border border-dashed rounded-md text-vanilla-400 border-ink-200">No metrics to show</div>
+          {{ else }}
+            {{ range $metric := .AnalysisResultData.AnalysisResult.Metrics }}
+            <div class="p-4 space-y-4 border rounded-md border-ink-200">
+              <div class="text-sm">{{ $metric.MetricCode }}</div>
+              <div class="text-2xl font-medium leading-none">{{ (index $metric.Namespaces 0).Value }}</div>
+            </div>
+            {{ end }}
           {{ end }}
-        </p>
-      </div>
-    </div>
+        </div>
+      </aside>
+    </main>
   </body>
 </html>
