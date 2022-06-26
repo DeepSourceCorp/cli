@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"time"
 
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
@@ -26,6 +27,8 @@ var (
 	analysisResultsName  string = "analysis_results"
 	analysisConfigExt    string = ".json"
 	analysisResultsExt   string = ".json"
+	analysisStartTime    time.Time
+	analysisEndTime      time.Time
 )
 
 // The params required while running the Analysis locally.
@@ -137,6 +140,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	// in a variable
 
 	fmt.Println(aec.Apply("[+] Starting the Analysis container", aec.LightYellowF))
+	analysisStartTime = time.Now()
 	if err = a.Client.StartDockerContainer(); err != nil {
 		return err
 	}
@@ -149,6 +153,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 	a.Spinner.StopSpinner()
+	analysisEndTime = time.Now()
 
 	// Write the analysis results to the file
 	a.Spinner.StartSpinnerWithLabel("Writing Analyzer report...", fmt.Sprintf("Analyzer report written to %s", path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, analysisResultFileName)))

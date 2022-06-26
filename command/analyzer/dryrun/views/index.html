@@ -21,7 +21,13 @@
         width: 25%;
         height: 100%;
         float: left;
-        /* background-color: rosybrown; */
+        border-collapse: collapse;
+      }
+
+      .run-summary {
+        width: 25%;
+        height: 100%;
+        bottom: 100px;
         border-collapse: collapse;
       }
 
@@ -29,7 +35,6 @@
         width: 50%;
         height: 100%;
         float: left;
-        /* background-color: royalblue; */
         border-collapse: collapse;
       }
 
@@ -38,7 +43,6 @@
         height: 100%;
         position: relative;
         float: right;
-        /* background-color: yellow; */
         border-collapse: collapse;
       }
 
@@ -46,7 +50,6 @@
         width: 100%;
         height: 100px;
         border-collapse: collapse;
-        /* background-color: #4da6ff; */
       }
     </style>
   </head>
@@ -54,7 +57,7 @@
     <div class="container">
       <div class="toppane">
         {{ .AnalyzerShortcode }}<br>
-        {{ .AnalysisResultData.UniqueIssuesCount }} issues {{ .VCSInfo.Branch }} {{ .VCSInfo.CommitSHA }}
+        {{ .AnalysisResultData.UniqueIssuesCount }} issues {{ .VCSInfo.Branch }} {{ .VCSInfo.CommitSHA }} {{ .VCSInfo.VersionDiff }}
       </div>
 
         <!-- Category Section -->
@@ -67,6 +70,15 @@
           <li><strong><a href="/issues?category={{$categoryShortCode}}">{{ $key }}</a></strong>: {{ $value }}</li>
           {{ end }}
         </p>
+
+        <!-- Run Summary Section -->
+      <div class="run-summary">
+        <p>Run Summary</p>
+        {{ .Summary.CurrentTime }}<br>
+        {{ .Summary.TimeSinceRun }}<br>
+        {{ .AnalysisResultData.SourcePath }}<br>
+        {{ .Summary.RunDuration}}
+      </div>
       </div>
 
         <!-- All Unique Issues Section -->
@@ -77,10 +89,10 @@
           {{ range $key, $value := .AnalysisResultData.IssuesOccurenceMap }}
             {{ if eq $selectedCategory $defaultIssueCategory }}
               <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $value.IssueMeta.Category }}&nbsp;<br>
+              {{ $value.IssueMeta.Category }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
             {{else }} {{ if eq $selectedCategory $value.IssueMeta.Category }}
               <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $value.IssueMeta.Category }}&nbsp;<br>
+              {{ $value.IssueMeta.Category }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
               {{ end}}
             {{end}}
           {{ end }}
