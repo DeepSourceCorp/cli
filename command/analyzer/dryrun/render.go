@@ -117,19 +117,19 @@ func (d *DataRenderOpts) collectResultToBeRendered() (err error) {
 	d.VCSInfo.VersionDiff = fetchAnalyzerVCSData(cwd)
 
 	// Get occurence data.
-	d.getOccurencesData(cwd)
+	d.fetchIssueOccurencesData(cwd)
 
 	// Get the category data.
-	d.getCategoryData()
+	d.fetchIssueCategoryData()
 
 	// Fetch metrics data.
-	d.getMetricsData()
+	d.fetchIssueMetricsData()
 
 	return nil
 }
 
-// getOccurencesData collects all the occurence related data.
-func (d *DataRenderOpts) getOccurencesData(cwd string) (err error) {
+// fetchIssueOccurencesData collects all the occurence related data.
+func (d *DataRenderOpts) fetchIssueOccurencesData(cwd string) {
 	// Create a map of occurences of the issues.
 	issueOccurenceMap := make(map[string]OccurenceData)
 
@@ -195,11 +195,10 @@ func (d *DataRenderOpts) getOccurencesData(cwd string) (err error) {
 		d.AnalysisResultData.TotalOccurences = d.AnalysisResultData.TotalOccurences + len(v.Occurences)
 	}
 	d.AnalysisResultData.UniqueIssuesCount = len(d.AnalysisResultData.IssuesOccurenceMap)
-	return nil
 }
 
-// getCategoryData creates a map of issue category to issue occurences count of that category.
-func (d *DataRenderOpts) getCategoryData() {
+// fetchIssueCategoryData creates a map of issue category to issue occurences count of that category.
+func (d *DataRenderOpts) fetchIssueCategoryData() {
 	// Iterate over the map and then keep adding the issue counts.
 	issueCategoryMap := make(map[string]int)
 	for _, occurenceData := range d.AnalysisResultData.IssuesOccurenceMap {
@@ -222,8 +221,8 @@ func (d *DataRenderOpts) getCategoryData() {
 	d.AnalysisResultData.IssueCategoryCountMap = issueCategoryMap
 }
 
-// getMetricsData fetches the metrics data to be rendered.
-func (d *DataRenderOpts) getMetricsData() {
+// fetchIssueMetricsData fetches the metrics data to be rendered.
+func (d *DataRenderOpts) fetchIssueMetricsData() {
 	metricsMap := make(map[string]float64)
 	for _, metric := range d.AnalysisResultData.AnalysisResult.Metrics {
 		if _, ok := d.DefaultMetricsMap[metric.MetricCode]; !ok {
