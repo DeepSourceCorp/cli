@@ -143,7 +143,6 @@ func (d *DataRenderOpts) fetchIssueOccurencesData(cwd string) {
 		if _, ok := issueOccurenceMap[issue.IssueCode]; !ok {
 			// Fetch issue meta for the issue code raised.
 			issueMeta, err := getIssueMeta(cwd, issue.IssueCode)
-			// issueMeta.Category = d.IssueCategoryNameMap[issueMeta.Category]
 			if err != nil {
 				fmt.Println("Couldn't resolve issue meta for the issue:", issue.IssueCode)
 				continue
