@@ -65,7 +65,7 @@ type DataRenderOpts struct {
 func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 	// Initialize `DataRenderOpts` with some of the data needed to be rendered.
 	d := DataRenderOpts{
-		PageTitle:         "Analyzer Dry Run",
+		PageTitle:         fmt.Sprintf("Issues | %s", a.Client.AnalysisOpts.AnalyzerShortcode),
 		AnalyzerShortcode: a.Client.AnalysisOpts.AnalyzerShortcode,
 		AnalysisResultData: ResultData{
 			AnalysisResult: a.AnalysisResult,
