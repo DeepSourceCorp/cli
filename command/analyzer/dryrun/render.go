@@ -4,6 +4,7 @@ import (
 	"embed"
 	"fmt"
 	"html/template"
+	"io/fs"
 	"net/http"
 	"os"
 	"path"
@@ -19,54 +20,60 @@ import (
 	"github.com/pelletier/go-toml/v2"
 )
 
+/* TODO:
+ * - Fix the case of running analysis on VCS repo.
+ * - Fix the case of stripping cwd from the paths.
+ * - Handle the case when error is found.
+ * - Handle singularization / pluralization
+ *  */
+
 //go:embed views/*.html views/**/*.css
 var tmplFS embed.FS
 
 type RunSummary struct {
-	CurrentTime  string // <Month> <Date>, <Year> HH:MM am/pm
-	RunDuration  string // <x> minutes <y> seconds
-	TimeSinceRun string // <x> <seconds/minutes> ago
+	RunDuration  string // Time taken to complete analysis.
+	TimeSinceRun string // Time elapsed since the completion of the analysis run.
 }
 
 type VCSInfo struct {
-	Branch      string
-	CommitSHA   string
-	VersionDiff string
+	Branch      string // VCS branch of the Analyzer.
+	CommitSHA   string // The latest commit SHA of the Analyzer.
+	VersionDiff string // The string specifying the status of Analyzer w.r.t previous version.
 }
 
 type OccurenceData struct {
-	IssueMeta  types.AnalyzerIssue
-	Files      []string // Files where this issue has been reported.
-	FilesInfo  string
-	Occurences []types.Issue
+	IssueMeta  types.AnalyzerIssue // Contains the data stored in issue TOMLs for the respective issue.
+	Files      []string            // Files where this issue has been reported.
+	FilesInfo  string              // The string containing the data of which files the issue has been reported in.
+	Occurences []types.Issue       // The slice of occurences for a certain issue code.
 }
 
 type ResultData struct {
-	UniqueIssuesCount     int
-	TotalOccurences       int
-	SourcePath            string
-	IssuesOccurenceMap    map[string]OccurenceData
-	IssueCategoryCountMap map[string]int
-	AnalysisResult        types.AnalysisResult
-	RenderedSourceCode    []template.HTML
+	UniqueIssuesCount     int                      // The unique issues count.
+	TotalOccurences       int                      // Total issues reported by the Analyzer.
+	SourcePath            string                   // The path where the source code to be analyzer is stored.
+	IssuesOccurenceMap    map[string]OccurenceData // The map of issue code to its occurences data.
+	IssueCategoryCountMap map[string]int           // The map of issue category to the count of the issues of that category.
+	AnalysisResult        types.AnalysisResult     // The analysis result post running processors.
+	RenderedSourceCode    []template.HTML          // The slice containing the source code snippets for each occurence.
 }
 
 type DataRenderOpts struct {
-	Template             *template.Template
-	PageTitle            string
-	AnalyzerShortcode    string
-	VCSInfo              VCSInfo
-	Summary              RunSummary
-	AnalysisResultData   ResultData
-	AnalyzerTOMLData     types.AnalyzerTOML
-	SelectedIssueCode    string
-	SelectedCategory     string
-	IssueCategoryNameMap map[string]string
+	Template             *template.Template // The go template field so that it can be accessible in `route.go` as well.
+	PageTitle            string             // The title of the HTML page.
+	AnalyzerShortcode    string             // The shortcode of the Analyzer.
+	VCSInfo              VCSInfo            // The VCS information of the Analyzer.
+	Summary              RunSummary         // The run summary.
+	AnalysisResultData   ResultData         // The analysis result data.
+	SelectedIssueCode    string             // The field used to recognize which issue code the user has clicked on to check its occurences.
+	SelectedCategory     string             // The field used to recognize which category the user has clicked to filter the issues based on it.
+	IssueCategoryNameMap map[string]string  // The map used to route category names to their codes. Eg: `Documentation`->`doc`.
 }
 
-// renderResultsOnBrowser renders the results on the browser through a local server.
+// renderResultsOnBrowser renders the results on the browser through a local server,
+// go template and an awesome frontend.
 func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
-	// Collect the data that needs to be rendered.
+	// Initialize `DataRenderOpts` with some of the data needed to be rendered.
 	d := DataRenderOpts{
 		PageTitle:         "Analyzer Dry Run",
 		AnalyzerShortcode: a.Client.AnalysisOpts.AnalyzerShortcode,
@@ -77,12 +84,15 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 		SelectedCategory:     "all",
 		IssueCategoryNameMap: types.CategoryMaps,
 	}
+
+	// Collect all other data to be rendered.
 	if err = d.collectResultToBeRendered(); err != nil {
 		return err
 	}
 
-	staticFS := http.FS(tmplFS)
-	fs := http.FileServer(staticFS)
+	// In order to serve the static css files, this creates a handler to serve any static assets stored under
+	// `views/` at `/static/assets/*`.
+	fsys, err := fs.Sub(tmplFS, "views")
 
 	// Parse the HTML templates.
 	d.Template = template.Must(template.ParseFS(tmplFS, "views/*.html"))
@@ -90,15 +100,15 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 		return err
 	}
 
-	// Define the routes and start the server.
-	http.Handle("/", d.declareRoutes(fs))
+	// Define the routes using echo and start the server.
+	echoInstance := d.declareRoutes(http.FS((fsys)))
 
 	// Having received the user code, open the browser at the localhost:8080 endpoint.
 	err = browser.OpenURL("http://localhost:8080")
 	if err != nil {
 		return err
 	}
-	return http.ListenAndServe(":8080", nil)
+	return echoInstance.Start(":8080")
 }
 
 // collectResultToBeRendered formats all the result received after post-processing and then adds the
@@ -106,17 +116,25 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 func (d *DataRenderOpts) collectResultToBeRendered() (err error) {
 	cwd, _ := os.Getwd()
 
-	// Inject the VCS information.
+	// Fetch the run summary data.
+	d.Summary.RunDuration, d.Summary.TimeSinceRun = fetchRunSummary()
+
+	// Inject the Analyzer VCS information.
 	d.VCSInfo.Branch, d.VCSInfo.CommitSHA = fetchVCSDetails(cwd)
 
-	// Fetch the Analyzer tags data.
+	// Fetch the data as to status of Analyzer w.r.t the latest version/tag.
 	d.VCSInfo.VersionDiff = fetchAnalyzerVCSData(cwd)
 
-	// Fetch the run summary data.
-	d.Summary.RunDuration, d.Summary.TimeSinceRun, d.Summary.CurrentTime = fetchRunSummary()
+	d.getOccurencesData(cwd)
+	d.getCategoryData()
+	return nil
+}
 
+func (d *DataRenderOpts) getOccurencesData(cwd string) (err error) {
 	// Create a map of occurences of the issues.
 	issueOccurenceMap := make(map[string]OccurenceData)
+
+	// Iterate over the analysis result issues.
 	for _, issue := range d.AnalysisResultData.AnalysisResult.Issues {
 		currentOccurence := OccurenceData{}
 
@@ -124,6 +142,7 @@ func (d *DataRenderOpts) collectResultToBeRendered() (err error) {
 			// Fetch issue meta for the issue code raised.
 			issueMeta, err := getIssueMeta(cwd, issue.IssueCode)
 			if err != nil {
+				fmt.Println(err)
 				return err
 			}
 			currentOccurence = OccurenceData{
@@ -144,38 +163,50 @@ func (d *DataRenderOpts) collectResultToBeRendered() (err error) {
 	}
 
 	// Remove duplicates from the files array.
-	for k, v := range issueOccurenceMap {
+	for issueCode, occurenceData := range issueOccurenceMap {
 		filesMap := make(map[string]int, 0)
 		uniqueFiles := make([]string, 0)
-		for _, file := range v.Files {
+
+		// Setting the map value to 1 for the files in order to identify unique files.
+		for _, file := range occurenceData.Files {
 			filesMap[file] = 1
 		}
 
+		// Appending the unique files.
 		for file := range filesMap {
 			uniqueFiles = append(uniqueFiles, file)
 		}
-		occurence := issueOccurenceMap[k]
+		occurence := issueOccurenceMap[issueCode]
 		occurence.Files = append(occurence.Files, uniqueFiles...)
-		issueOccurenceMap[k] = occurence
+		issueOccurenceMap[issueCode] = occurence
 	}
 
 	// Create the files information string.
-	for k, v := range issueOccurenceMap {
-		v.FilesInfo = fmt.Sprintf("Found in %s and %d other file(s)", v.Files[0], len(v.Files)-1)
-		issueOccurenceMap[k] = v
+	for issueCode, occurenceData := range issueOccurenceMap {
+		// TODO: Strip the cwd from the path sent here.
+		occurenceData.FilesInfo = fmt.Sprintf("Found in %s and %d other file(s)", occurenceData.Files[0], len(occurenceData.Files)-1)
+		issueOccurenceMap[issueCode] = occurenceData
 	}
-
 	d.AnalysisResultData.IssuesOccurenceMap = issueOccurenceMap
 
+	// Find out total occurences.
+	for _, v := range issueOccurenceMap {
+		d.AnalysisResultData.TotalOccurences = d.AnalysisResultData.TotalOccurences + len(v.Occurences)
+	}
+	d.AnalysisResultData.UniqueIssuesCount = len(d.AnalysisResultData.IssuesOccurenceMap)
+	return nil
+}
+
+func (d *DataRenderOpts) getCategoryData() {
 	// Create a map of issue category to issue count.
 	// Iterate over the map and then keep adding the issue counts.
 	issueCategoryMap := make(map[string]int)
-	for _, value := range issueOccurenceMap {
-		if _, ok := issueCategoryMap[value.IssueMeta.Category]; !ok {
-			issueCategoryMap[value.IssueMeta.Category] = len(value.Occurences)
+	for _, occurenceData := range d.AnalysisResultData.IssuesOccurenceMap {
+		if _, ok := issueCategoryMap[occurenceData.IssueMeta.Category]; !ok {
+			issueCategoryMap[occurenceData.IssueMeta.Category] = len(occurenceData.Occurences)
 			continue
 		}
-		issueCategoryMap[value.IssueMeta.Category] = issueCategoryMap[value.IssueMeta.Category] + len(value.Occurences)
+		issueCategoryMap[occurenceData.IssueMeta.Category] = issueCategoryMap[occurenceData.IssueMeta.Category] + len(occurenceData.Occurences)
 	}
 
 	// Add remaining categories to the map.
@@ -188,13 +219,6 @@ func (d *DataRenderOpts) collectResultToBeRendered() (err error) {
 		delete(issueCategoryMap, value)
 	}
 	d.AnalysisResultData.IssueCategoryCountMap = issueCategoryMap
-
-	// Find out total occurences.
-	for _, v := range issueOccurenceMap {
-		d.AnalysisResultData.TotalOccurences = d.AnalysisResultData.TotalOccurences + len(v.Occurences)
-	}
-	d.AnalysisResultData.UniqueIssuesCount = len(d.AnalysisResultData.IssuesOccurenceMap)
-	return nil
 }
 
 // getIssueMeta receives the issuecode that is raised and it reads the TOML of that issue and returns
@@ -222,24 +246,33 @@ func getIssueMeta(cwd, issueCode string) (types.AnalyzerIssue, error) {
 // fetchAnalyzerVCSDetails fetches Analyzer VCS details like how many commits is the Analyzer
 // ahead of the latest git tag.
 func fetchAnalyzerVCSData(dir string) string {
-	// Git open the Analyzer directory.
+	// Open the Analyzer's git directory.
 	repo, err := git.PlainOpenWithOptions(dir, &git.PlainOpenOptions{
 		DetectDotGit: true,
 	})
 	if err != nil {
+		fmt.Println(err)
 		return ""
 	}
 
 	// Fetch the repo tags list.
-	tagrefs, _ := repo.Tags()
-	currentTagRef := ""
-	_ = tagrefs.ForEach(func(t *plumbing.Reference) error {
-		currentTagRef = t.Name().String()
+	tagReferences, _ := repo.Tags()
+	currentTagRef := []string{}
+	if err = tagReferences.ForEach(func(t *plumbing.Reference) error {
+		currentTagRef = append(currentTagRef, t.Name().String())
 		return nil
-	})
+	}); err != nil {
+		fmt.Println(err)
+		return ""
+	}
+
+	// currentTagRef slice is empty if there are not tags in the Analyzer git directory.
+	if len(currentTagRef) == 0 {
+		return ""
+	}
 
 	// Convert refs/tags/v0.2.1 -> v0.2.1
-	currentTagRef = strings.TrimPrefix(currentTagRef, "refs/tags/")
+	latestTag := strings.TrimPrefix(currentTagRef[len(currentTagRef)-1], "refs/tags/")
 
 	// Fetch the iterator to the tag objects latest git tag.
 	tagsIter, _ := repo.TagObjects()
@@ -249,18 +282,22 @@ func fetchAnalyzerVCSData(dir string) string {
 	var currentCommitSHA plumbing.Hash
 	var currentTagPushTime time.Time
 	if err = tagsIter.ForEach(func(t *object.Tag) (err error) {
-		if t.Name != currentTagRef {
+		if t.Name != latestTag {
 			return nil
 		}
 		currentTag = t.Name
 		commit, err := t.Commit()
 		if err != nil {
+			fmt.Println(err)
 			return err
 		}
+
+		// Finds the hash of the commit and the timestamp of when the commit was pushed.
 		currentCommitSHA = commit.Hash
 		currentTagPushTime = commit.Author.When
 		return nil
 	}); err != nil {
+		fmt.Println(err)
 		return ""
 	}
 
@@ -270,19 +307,23 @@ func fetchAnalyzerVCSData(dir string) string {
 		Since: &currentTagPushTime,
 	})
 	if err != nil {
+		fmt.Println(err)
 		return ""
 	}
 
 	// Just iterates over the commits and finds the count of how many commits have been
 	// made since the current git tag.
 	commitsSinceCurrentTag := 0
-	_ = commitIter.ForEach(func(c *object.Commit) error {
+	if err = commitIter.ForEach(func(c *object.Commit) error {
 		if c.Hash == currentCommitSHA {
 			return nil
 		}
 		commitsSinceCurrentTag++
 		return nil
-	})
+	}); err != nil {
+		fmt.Println(err)
+		return ""
+	}
 
 	if commitsSinceCurrentTag == 0 {
 		return fmt.Sprintf("This Analyzer is up to date with %s", currentTag)
@@ -314,19 +355,13 @@ func fetchVCSDetails(dir string) (string, string) {
 }
 
 // fetchRunSummary fetches the data for the run summary section.
-func fetchRunSummary() (string, string, string) {
-	// The layout to format the current timestamp to.
-	const (
-		layout = "January 2, 2006 3:04 PM"
-	)
-	currentDate := time.Now().Format(layout)
-
+func fetchRunSummary() (string, string) {
 	// Find the time elapsed since the analysis run.
 	timeSinceRun := fmt.Sprintf("%s ago", durafmt.Parse(time.Since(analysisEndTime)).LimitFirstN(1).String())
 
 	// Find the run duration i.e. the time between the analysis start and end time.
 	runDuration := durafmt.Parse(analysisEndTime.Sub(analysisStartTime)).LimitFirstN(1).String()
-	return runDuration, timeSinceRun, currentDate
+	return runDuration, timeSinceRun
 }
 
 // fetchHeadManually fetches the latest commit hash using the command `git rev-parse HEAD`

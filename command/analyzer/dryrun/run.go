@@ -182,7 +182,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	c.Printf("Press enter to view the analysis results in the browser...")
 	fmt.Scanln()
 
-	pterm.Success.Print("Analysis results live at http://localhost:8080...")
+	pterm.Success.Println("Analysis results live at http://localhost:8080...")
 	// Showcase the results on the browser
 	return a.renderResultsOnBrowser()
 }

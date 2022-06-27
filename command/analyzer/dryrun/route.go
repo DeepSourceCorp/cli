@@ -5,7 +5,7 @@ import (
 	"html/template"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/labstack/echo/v4"
 )
 
 /* Declared Routes:
@@ -16,19 +16,26 @@ import (
  * /issues?category={issue_category}  */
 
 // declareRoutes declares routes for various incoming requests to the Analyzer dry run local server.
-func (d *DataRenderOpts) declareRoutes(staticFilesHandler http.Handler) *mux.Router {
-	r := mux.NewRouter()
-	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", staticFilesHandler))
-	r.HandleFunc("/", d.IssuesHandler)
-	r.HandleFunc("/issues", d.IssuesHandler)
-	r.HandleFunc("/issues", d.IssuesHandler).Queries()
-	r.HandleFunc("/issue/{issue_code}/occurences", d.IssuesOccurencesHandler)
-	return r
+func (d *DataRenderOpts) declareRoutes(staticFS http.FileSystem) *echo.Echo {
+	e := echo.New()
+	e.HideBanner = true
+
+	// Issues page containing all the reported issues.
+	e.GET("/", d.IssuesHandler)
+	e.GET("/issues", d.IssuesHandler)
+
+	// Handle serving static assets.
+	assetHandler := http.FileServer(staticFS)
+	e.GET("/static/*", echo.WrapHandler(http.StripPrefix("/static/", assetHandler)))
+
+	// Handle showing issues for a certain category.
+	e.GET("/issue/:issue_code/occurences", d.IssuesOccurencesHandler)
+	return e
 }
 
-func (d *DataRenderOpts) IssuesHandler(w http.ResponseWriter, r *http.Request) {
+func (d *DataRenderOpts) IssuesHandler(c echo.Context) error {
 	// Check URL query parameters
-	qParams := r.URL.Query()
+	qParams := c.QueryParams()
 
 	if qParams.Has("category") {
 		d.SelectedCategory = qParams.Get("category")
@@ -36,23 +43,24 @@ func (d *DataRenderOpts) IssuesHandler(w http.ResponseWriter, r *http.Request) {
 		d.SelectedCategory = "all"
 	}
 
-	err := d.Template.ExecuteTemplate(w, "index.html", *d)
+	err := d.Template.ExecuteTemplate(c.Response().Writer, "index.html", *d)
 	if err != nil {
 		fmt.Println(err)
 	}
+	return c.String(http.StatusOK, "Issues page served.")
 }
 
-func (d *DataRenderOpts) IssuesOccurencesHandler(w http.ResponseWriter, r *http.Request) {
+func (d *DataRenderOpts) IssuesOccurencesHandler(c echo.Context) error {
 	// Fetch the issue code from URI.
-	issueVar := mux.Vars(r)
-	d.SelectedIssueCode = issueVar["issue_code"]
+	d.SelectedIssueCode = c.Param("issue_code")
 
 	issueOccurences := d.AnalysisResultData.IssuesOccurenceMap[d.SelectedIssueCode]
 	for _, occurence := range issueOccurences.Occurences {
 		d.AnalysisResultData.RenderedSourceCode = append(d.AnalysisResultData.RenderedSourceCode, template.HTML(occurence.ProcessedData.SourceCode.Rendered))
 	}
-	err := d.Template.ExecuteTemplate(w, "occurence.html", *d)
+	err := d.Template.ExecuteTemplate(c.Response().Writer, "occurence.html", *d)
 	if err != nil {
 		fmt.Println(err)
 	}
+	return c.String(http.StatusOK, "Occurence page served.")
 }
