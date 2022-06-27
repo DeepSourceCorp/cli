@@ -1,7 +1,6 @@
 package dryrun
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"path"
@@ -172,17 +171,13 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	a.Spinner.StopSpinner()
 	fmt.Println(aec.Apply(fmt.Sprintf("[✔] Issues after processing: %d", len(a.AnalysisResult.Issues)), aec.LightGreenF))
 
-	b, _ := json.Marshal(a.AnalysisResult)
-	if err = os.WriteFile("analysis_result.json", b, 0o750); err != nil {
-		return err
-	}
-
-	// Print the user code and the permission to open browser at verificationURI
+	// Prompt the user to press return in order to check results on browser.
 	c := color.New(color.FgCyan, color.Bold)
 	c.Printf("Press enter to view the analysis results in the browser...")
 	fmt.Scanln()
 
 	pterm.Success.Println("Analysis results live at http://localhost:8080...")
+
 	// Showcase the results on the browser
 	return a.renderResultsOnBrowser()
 }
