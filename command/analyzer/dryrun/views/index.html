@@ -66,8 +66,8 @@
           <a href="/issues"><strong>All Issues</strong></a>&nbsp;&nbsp;{{ .AnalysisResultData.TotalOccurences }}<br>
           {{ $categoryMap := .IssueCategoryNameMap}}
           {{ range $key, $value := .AnalysisResultData.IssueCategoryCountMap }}
-          {{ $categoryShortCode := (index $categoryMap $key) }}
-          <li><strong><a href="/issues?category={{$categoryShortCode}}">{{ $key }}</a></strong>: {{ $value }}</li>
+          {{ $categoryName := (index $categoryMap $key) }}
+          <li><strong><a href="/issues?category={{$key}}">{{ $categoryName }}</a></strong>: {{ $value }}</li>
           {{ end }}
         </p>
 
@@ -95,13 +95,15 @@
         <p>
           {{ $defaultIssueCategory := "all"}}
           {{ $selectedCategory := .SelectedCategory }}
+          {{ $categoryMap := .IssueCategoryNameMap}}
           {{ range $key, $value := .AnalysisResultData.IssuesOccurenceMap }}
+            {{ $categoryName := (index $categoryMap $value.IssueMeta.Category) }}
             {{ if eq $selectedCategory $defaultIssueCategory }}
               <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $value.IssueMeta.Category }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
+              {{ $categoryName }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
             {{else }} {{ if eq $selectedCategory $value.IssueMeta.Category }}
               <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $value.IssueMeta.Category }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
+              {{ $categoryName }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
               {{ end}}
             {{end}}
           {{ end }}

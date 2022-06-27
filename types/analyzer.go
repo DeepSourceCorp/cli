@@ -55,33 +55,10 @@ type AnalyzerTOML struct {
  * Analyzer Issue TOML Types
  * ========================= */
 
-// Analyzer issue type
+// Analyzer issue type.
 type AnalyzerIssue struct {
 	Shortcode   string `validate:"omitempty"`
 	Title       string `toml:"title" json:"title" validate:"required"`
 	Description string `toml:"description" json:"description" validate:"required"`
 	Category    string `toml:"category" json:"category" validate:"required,category"`
-}
-
-// Issue category maps
-var CategoryMaps = map[string]string{
-	"Bug risk":      "bug-risk",
-	"Anti-pattern":  "antipattern",
-	"Performance":   "performance",
-	"Style":         "style",
-	"Security":      "security",
-	"Coverage":      "coverage",
-	"Type check":    "typecheck",
-	"Documentation": "doc",
-}
-
-// Default supported metrics map
-var MetricMap = map[string]string{
-	"BCV": "Branch coverage",
-	"ADC": "API documentation coverage",
-	"TDC": "Test documentation coverage",
-	"IDP": "Indirect dependencies",
-	"TCV": "Test coverage",
-	"DDP": "Direct dependencies",
-	"DCV": "Application documentation coverage",
 }

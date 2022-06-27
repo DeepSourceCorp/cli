@@ -57,7 +57,7 @@ type DataRenderOpts struct {
 	SelectedIssueCode    string             // The field used to recognize which issue code the user has clicked on to check its occurences.
 	SelectedCategory     string             // The field used to recognize which category the user has clicked to filter the issues based on it.
 	IssueCategoryNameMap map[string]string  // The map used to route category names to their codes. Eg: `Documentation`->`doc`.
-	DefaultMetricsMap    map[string]string  // The map of metrics shortcodes with their names.
+	MetricNameMap        map[string]string  // The map of metrics shortcodes with their names.
 }
 
 // renderResultsOnBrowser renders the results on the browser through a local server,
@@ -72,8 +72,8 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 			SourcePath:     a.SourcePath,
 		},
 		SelectedCategory:     "all",
-		IssueCategoryNameMap: types.CategoryMaps,
-		DefaultMetricsMap:    types.MetricMap,
+		IssueCategoryNameMap: types.IssueCategoryMap,
+		MetricNameMap:        types.MetricMap,
 	}
 
 	// Collect all other data to be rendered.
@@ -143,6 +143,7 @@ func (d *DataRenderOpts) fetchIssueOccurencesData(cwd string) {
 		if _, ok := issueOccurenceMap[issue.IssueCode]; !ok {
 			// Fetch issue meta for the issue code raised.
 			issueMeta, err := getIssueMeta(cwd, issue.IssueCode)
+			// issueMeta.Category = d.IssueCategoryNameMap[issueMeta.Category]
 			if err != nil {
 				fmt.Println("Couldn't resolve issue meta for the issue:", issue.IssueCode)
 				continue
@@ -190,10 +191,12 @@ func (d *DataRenderOpts) fetchIssueOccurencesData(cwd string) {
 	}
 	d.AnalysisResultData.IssuesOccurenceMap = issueOccurenceMap
 
-	// Find out total occurences.
+	// Find out total number of occurences of all the issues.
 	for _, v := range issueOccurenceMap {
 		d.AnalysisResultData.TotalOccurences = d.AnalysisResultData.TotalOccurences + len(v.Occurences)
 	}
+
+	// Finds the unique issues count(the length of the occurences map since its mapped by issue codes which are unique).
 	d.AnalysisResultData.UniqueIssuesCount = len(d.AnalysisResultData.IssuesOccurenceMap)
 }
 
@@ -201,6 +204,8 @@ func (d *DataRenderOpts) fetchIssueOccurencesData(cwd string) {
 func (d *DataRenderOpts) fetchIssueCategoryData() {
 	// Iterate over the map and then keep adding the issue counts.
 	issueCategoryMap := make(map[string]int)
+
+	// Creating a map of issue categories present to their count.
 	for _, occurenceData := range d.AnalysisResultData.IssuesOccurenceMap {
 		if _, ok := issueCategoryMap[occurenceData.IssueMeta.Category]; !ok {
 			issueCategoryMap[occurenceData.IssueMeta.Category] = len(occurenceData.Occurences)
@@ -209,14 +214,13 @@ func (d *DataRenderOpts) fetchIssueCategoryData() {
 		issueCategoryMap[occurenceData.IssueMeta.Category] = issueCategoryMap[occurenceData.IssueMeta.Category] + len(occurenceData.Occurences)
 	}
 
-	// Add remaining categories to the map.
-	for key, value := range types.CategoryMaps {
-		if _, ok := issueCategoryMap[value]; !ok {
-			issueCategoryMap[key] = 0
+	// Add remaining categories to the map other than what are reported in the issues by the Analyzer since
+	// need to render all the categories.
+	for categoryShortcode := range d.IssueCategoryNameMap {
+		if _, ok := issueCategoryMap[categoryShortcode]; !ok {
+			issueCategoryMap[categoryShortcode] = 0
 			continue
 		}
-		issueCategoryMap[key] = issueCategoryMap[value]
-		delete(issueCategoryMap, value)
 	}
 	d.AnalysisResultData.IssueCategoryCountMap = issueCategoryMap
 }
@@ -225,10 +229,10 @@ func (d *DataRenderOpts) fetchIssueCategoryData() {
 func (d *DataRenderOpts) fetchIssueMetricsData() {
 	metricsMap := make(map[string]float64)
 	for _, metric := range d.AnalysisResultData.AnalysisResult.Metrics {
-		if _, ok := d.DefaultMetricsMap[metric.MetricCode]; !ok {
+		if _, ok := d.MetricNameMap[metric.MetricCode]; !ok {
 			continue
 		}
-		metricName := d.DefaultMetricsMap[metric.MetricCode]
+		metricName := d.MetricNameMap[metric.MetricCode]
 		metricsMap[metricName] = metric.Namespaces[0].Value
 	}
 	d.AnalysisResultData.MetricsMap = metricsMap
