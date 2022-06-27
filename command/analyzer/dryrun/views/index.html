@@ -80,8 +80,18 @@
       </div>
       </div>
 
+
         <!-- All Unique Issues Section -->
       <div class="middlepane">
+        <p>
+        {{ range $index, $error := .AnalysisResultData.AnalysisResult.Errors }}
+          {{ if eq $error.Level 0}}
+            <strong>Error</strong>&nbsp;{{ $error.HMessage }}
+          {{ else }}{{ if eq $error.Level 1}}
+            <strong>Warning</strong>&nbsp;{{ $error.HMessage }}
+            {{ end }}{{ end }}
+        {{ end }}
+        </p>
         <p>
           {{ $defaultIssueCategory := "all"}}
           {{ $selectedCategory := .SelectedCategory }}
@@ -102,8 +112,8 @@
       <div class="rightpane">
         <p>
           <strong>Metrics</strong><br>
-          {{ range $metric := .AnalysisResultData.AnalysisResult.Metrics }}
-          <strong>{{ $metric.MetricCode }}</strong>:&nbsp;{{ (index $metric.Namespaces 0).Value }}<br>
+          {{ range $name, $metric := .AnalysisResultData.MetricsMap }}
+          <strong>{{ $name }}</strong>:&nbsp;{{ $metric }}<br>
           {{ end }}
         </p>
       </div>

@@ -74,3 +74,14 @@ var CategoryMaps = map[string]string{
 	"Type check":    "typecheck",
 	"Documentation": "doc",
 }
+
+// Default supported metrics map
+var MetricMap = map[string]string{
+	"BCV": "Branch coverage",
+	"ADC": "API documentation coverage",
+	"TDC": "Test documentation coverage",
+	"IDP": "Indirect dependencies",
+	"TCV": "Test coverage",
+	"DDP": "Direct dependencies",
+	"DCV": "Application documentation coverage",
+}
