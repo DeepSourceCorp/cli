@@ -2,6 +2,7 @@ package dryrun
 
 import (
 	"fmt"
+	"net"
 	"net/url"
 	"os"
 	"path"
@@ -231,4 +232,24 @@ func fetchAnalyzerVCSData(dir string) string {
 		return fmt.Sprintf("This Analyzer is up to date with %s", currentTag)
 	}
 	return fmt.Sprintf("This Analyzer is %d commits ahead of %s", commitsSinceCurrentTag, currentTag)
+}
+
+// getServerPort returns the port used to render the server.
+func getServerPort() string {
+	serverPort := ":8080"
+
+	// Check if the default port(8080) is available.
+	listener, err := net.Listen("tcp", serverPort)
+	if err == nil {
+		// Close the listener if it starts to listen on the default port.
+		listener.Close()
+		return serverPort
+	}
+
+	// If the port is busy, get a new port.
+	listener, _ = net.Listen("tcp", ":0")
+	// Close the listener if it starts to listen on the default port.
+	serverPort = listener.Addr().String()
+	listener.Close()
+	return serverPort
 }

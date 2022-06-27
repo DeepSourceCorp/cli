@@ -46,6 +46,7 @@ func (d *DataRenderOpts) IssuesHandler(c echo.Context) error {
 	err := d.Template.ExecuteTemplate(c.Response().Writer, "index.html", *d)
 	if err != nil {
 		fmt.Println(err)
+		return c.String(http.StatusOK, "Occurence page served.")
 	}
 	return c.String(http.StatusOK, "Issues page served.")
 }
@@ -61,6 +62,7 @@ func (d *DataRenderOpts) IssuesOccurencesHandler(c echo.Context) error {
 	err := d.Template.ExecuteTemplate(c.Response().Writer, "occurence.html", *d)
 	if err != nil {
 		fmt.Println(err)
+		return c.String(http.StatusOK, "Occurence page served.")
 	}
 	return c.String(http.StatusOK, "Occurence page served.")
 }

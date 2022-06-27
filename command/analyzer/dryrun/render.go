@@ -1,14 +1,17 @@
 package dryrun
 
 import (
+	"context"
 	"embed"
 	"fmt"
 	"html/template"
 	"io/fs"
 	"net/http"
 	"os"
+	"os/signal"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/types"
@@ -93,13 +96,26 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 
 	// Define the routes using echo and start the server.
 	echoInstance := d.declareRoutes(http.FS((fsys)))
+	serverPort := getServerPort()
 
-	// Having received the user code, open the browser at the localhost:8080 endpoint.
-	err = browser.OpenURL("http://localhost:8080")
-	if err != nil {
-		return err
-	}
-	return echoInstance.Start(":8080")
+	// Spawn the server in a goroutine.
+	go func() {
+		if err := echoInstance.Start(serverPort); err != nil && err != http.ErrServerClosed {
+			echoInstance.Logger.Fatal("Shutting down the server")
+		}
+	}()
+
+	// Having received the user code, open the browser at the localhost.
+	browser.OpenURL(fmt.Sprintf("http://localhost:%s", strings.TrimPrefix(serverPort, "[::]:")))
+
+	// Wait for interrupt signal to gracefully shutdown the server with a timeout of 10 seconds.
+	// Use a buffered channel to avoid missing signals as recommended for signal.Notify
+	quit := make(chan os.Signal, 1)
+	signal.Notify(quit, os.Interrupt)
+	<-quit
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	return echoInstance.Shutdown(ctx)
 }
 
 // collectResultToBeRendered formats all the result received after post-processing and then adds the
