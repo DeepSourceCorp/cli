@@ -38,6 +38,7 @@ jobs:
         env:
           CODE_PATH: /home/runner/code
           APP_PATH: /home/runner/app
+          TOOLBOX_PATH: /home/runner/toolbox
 
       - name: Report test coverage to DeepSource
         uses: deepsourcelabs/test-coverage-action@master
