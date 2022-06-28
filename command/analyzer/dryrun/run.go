@@ -1,6 +1,7 @@
 package dryrun
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"path"
@@ -177,6 +178,11 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	fmt.Scanln()
 
 	pterm.Success.Println("Analysis results live at http://localhost:8080...")
+
+	// Don't run the server while running integration test.
+	if flag.Lookup("test.v") != nil {
+		return nil
+	}
 
 	// Showcase the results on the browser
 	return a.renderResultsOnBrowser()
