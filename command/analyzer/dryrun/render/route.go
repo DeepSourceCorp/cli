@@ -8,6 +8,11 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+type IRenderServer interface {
+	GetEchoContext() *echo.Echo
+	DeclareRoutes(http.FileSystem)
+}
+
 /* Declared Routes:
  * /
  * /issues
@@ -15,24 +20,28 @@ import (
  * /issues?category=all
  * /issues?category={issue_category}  */
 
-// declareRoutes declares routes for various incoming requests to the Analyzer dry run local server.
-func (r *ResultRenderOpts) declareRoutes(staticFS http.FileSystem) *echo.Echo {
+// getEchoContext returns a new Echo server instance.
+func (r *ResultRenderOpts) GetEchoContext() *echo.Echo {
 	e := echo.New()
 	e.HideBanner = true
-
-	// Issues page containing all the reported issues.
-	e.GET("/", r.IssuesHandler)
-	e.GET("/issues", r.IssuesHandler)
-
-	// Handle serving static assets.
-	assetHandler := http.FileServer(staticFS)
-	e.GET("/static/*", echo.WrapHandler(http.StripPrefix("/static/", assetHandler)))
-
-	// Handle showing issues for a certain category.
-	e.GET("/issue/:issue_code/occurences", r.IssuesOccurencesHandler)
 	return e
 }
 
+// declareRoutes declares routes for various incoming requests to the Analyzer dry run local server.
+func (r *ResultRenderOpts) DeclareRoutes(staticFS http.FileSystem) {
+	// Issues page containing all the reported issues.
+	r.EchoServer.GET("/", r.IssuesHandler)
+	r.EchoServer.GET("/issues", r.IssuesHandler)
+
+	// Handle serving static assets.
+	assetHandler := http.FileServer(staticFS)
+	r.EchoServer.GET("/static/*", echo.WrapHandler(http.StripPrefix("/static/", assetHandler)))
+
+	// Handle showing issues for a certain category.
+	r.EchoServer.GET("/issue/:issue_code/occurences", r.IssueOccurencesHandler)
+}
+
+// IssuesHandler handles serving the list of issues reported
 func (r *ResultRenderOpts) IssuesHandler(c echo.Context) error {
 	// Check URL query parameters
 	qParams := c.QueryParams()
@@ -51,7 +60,8 @@ func (r *ResultRenderOpts) IssuesHandler(c echo.Context) error {
 	return c.String(http.StatusOK, "Issues page served.")
 }
 
-func (r *ResultRenderOpts) IssuesOccurencesHandler(c echo.Context) error {
+// IssuesOccurencesHandler handles serving the issue occurences.
+func (r *ResultRenderOpts) IssueOccurencesHandler(c echo.Context) error {
 	// Fetch the issue code from URI.
 	r.SelectedIssueCode = c.Param("issue_code")
 

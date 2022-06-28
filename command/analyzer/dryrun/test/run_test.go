@@ -1,4 +1,4 @@
-package dryrun
+package dryruntest
 
 import (
 	"bytes"
@@ -7,8 +7,11 @@ import (
 	"path"
 	"testing"
 
+	"github.com/deepsourcelabs/cli/command/analyzer/dryrun"
 	"github.com/google/go-cmp/cmp"
 )
+
+// analysisCmd := exec.Command("/tmp/deepsource", "analyzer", "dry-run", analyzerPath, "--output-file", appPath)
 
 // Execute the command from there
 func TestAnalyzerRun(t *testing.T) {
@@ -44,16 +47,9 @@ func TestAnalyzerRun(t *testing.T) {
 	 * Run the analyzer dry-run command on the testdata/todo-checker directory
 	 * ============================================================================= */
 
-	analysisCmd := exec.Command("/tmp/deepsource", "analyzer", "dry-run", analyzerPath, "--output-file", appPath)
-	analysisCmd.Dir = appPath
+	a := dryrun.AnalyzerDryRun{}
+	a.AnalyzerRun()
 
-	var stdout1, stderr1 bytes.Buffer
-	analysisErr := analysisCmd.Run()
-	outStr1, outErr1 := stdout1.String(), stderr1.String()
-	if err != nil {
-		t.Errorf("Failed to run the analyzer. Error:%s\n%s", analysisErr, outErr1)
-	}
-	t.Log(outStr1)
 
 	/* =============================================================================
 	// Compare the results

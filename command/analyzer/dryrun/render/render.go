@@ -12,83 +12,37 @@ import (
 	"time"
 
 	"github.com/cli/browser"
-	"github.com/deepsourcelabs/cli/types"
 	"github.com/pterm/pterm"
 )
 
 //go:embed views/*.html views/**/*.css
 var tmplFS embed.FS
 
-type RunSummary struct {
-	RunDuration       string // Time taken to complete analysis.
-	TimeSinceRun      string // Time elapsed since the completion of the analysis run.
-	AnalysisStartTime time.Time
-	AnalysisEndTime   time.Time
-}
-
-type VCSInfo struct {
-	Branch      string // VCS branch of the Analyzer.
-	CommitSHA   string // The latest commit SHA of the Analyzer.
-	VersionDiff string // The string specifying the status of Analyzer w.r.t previous version.
-}
-
-type OccurenceData struct {
-	IssueMeta  types.AnalyzerIssue // Contains the data stored in issue TOMLs for the respective issue.
-	Files      []string            // Files where this issue has been reported.
-	FilesInfo  string              // The string containing the data of which files the issue has been reported in.
-	Occurences []types.Issue       // The slice of occurences for a certain issue code.
-}
-
-type ResultData struct {
-	UniqueIssuesCount     int                      // The unique issues count.
-	TotalOccurences       int                      // Total issues reported by the Analyzer.
-	SourcePath            string                   // The path where the source code to be analyzer is stored.
-	IssuesOccurenceMap    map[string]OccurenceData // The map of issue code to its occurences data.
-	IssueCategoryCountMap map[string]int           // The map of issue category to the count of the issues of that category.
-	AnalysisResult        types.AnalysisResult     // The analysis result post running processors.
-	MetricsMap            map[string]float64       // The map of metric names to their values.
-	RenderedSourceCode    []template.HTML          // The slice containing the source code snippets for each occurence.
-}
-
-type ResultRenderOpts struct {
-	Template             *template.Template // The go template field so that it can be accessible in `route.go` as well.
-	PageTitle            string             // The title of the HTML page.
-	AnalyzerShortcode    string             // The shortcode of the Analyzer.
-	VCSInfo              VCSInfo            // The VCS information of the Analyzer.
-	Summary              RunSummary         // The run summary.
-	AnalysisResultData   ResultData         // The analysis result data.
-	SelectedIssueCode    string             // The field used to recognize which issue code the user has clicked on to check its occurences.
-	SelectedCategory     string             // The field used to recognize which category the user has clicked to filter the issues based on it.
-	IssueCategoryNameMap map[string]string  // The map used to route category names to their codes. Eg: `Documentation`->`doc`.
-	MetricNameMap        map[string]string  // The map of metrics shortcodes with their names.
-}
-
 // renderResultsOnBrowser renders the results on the browser through a local server,
 // go template and an awesome frontend.
-func (r *ResultRenderOpts) RenderResultsOnBrowser() (err error) {
+func (r *ResultRenderOpts) RenderResultsOnBrowser(server IRenderServer) (err error) {
 	// Collect all other data to be rendered.
-	if err = r.collectResultToBeRendered(); err != nil {
-		return err
-	}
+	r.collectResultToBeRendered()
 
 	// In order to serve the static css files, this creates a handler to serve any static assets stored under
 	// `views/` at `/static/assets/*`.
 	fsys, err := fs.Sub(tmplFS, "views")
-
-	// Parse the HTML templates.
-	r.Template = template.Must(template.ParseFS(tmplFS, "views/*.html"))
 	if err != nil {
 		return err
 	}
 
+	// Parse the HTML templates.
+	r.Template = template.Must(template.ParseFS(tmplFS, "views/*.html"))
+
 	// Define the routes using echo and start the server.
-	echoInstance := r.declareRoutes(http.FS((fsys)))
+	r.EchoServer = server.GetEchoContext()
+	server.DeclareRoutes(http.FS((fsys)))
 	serverPort := getServerPort()
 
 	// Spawn the server in a goroutine.
 	go func() {
-		if err := echoInstance.Start(fmt.Sprintf(":%s", serverPort)); err != nil && err != http.ErrServerClosed {
-			echoInstance.Logger.Fatal("Shutting down the server")
+		if err := r.EchoServer.Start(fmt.Sprintf(":%s", serverPort)); err != nil && err != http.ErrServerClosed {
+			r.EchoServer.Logger.Fatal("Shutting down the server")
 		}
 	}()
 	pterm.Success.Printf("Analysis results live at http://localhost:%s..\n", serverPort)
@@ -103,12 +57,12 @@ func (r *ResultRenderOpts) RenderResultsOnBrowser() (err error) {
 	<-quit
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
-	return echoInstance.Shutdown(ctx)
+	return r.EchoServer.Shutdown(ctx)
 }
 
 // collectResultToBeRendered formats all the result received after post-processing and then adds the
 // extra data required for rendering on the browser
-func (r *ResultRenderOpts) collectResultToBeRendered() (err error) {
+func (r *ResultRenderOpts) collectResultToBeRendered() {
 	cwd, _ := os.Getwd()
 
 	// Fetch the run summary data.
@@ -128,6 +82,4 @@ func (r *ResultRenderOpts) collectResultToBeRendered() (err error) {
 
 	// Fetch metrics data.
 	r.fetchIssueMetricsData()
-
-	return nil
 }

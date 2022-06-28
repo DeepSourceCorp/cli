@@ -2,12 +2,16 @@ package main
 
 import (
 	"log"
+	"net/http"
 	"os"
 	"time"
+
+	_ "net/http/pprof"
 
 	"github.com/deepsourcelabs/cli/command"
 	v "github.com/deepsourcelabs/cli/version"
 	"github.com/getsentry/sentry-go"
+	"github.com/pkg/profile"
 	"github.com/pterm/pterm"
 )
 
@@ -25,6 +29,13 @@ var (
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
+	defer profile.Start(profile.MemProfile).Stop()
+
+	go func() {
+		http.ListenAndServe(":8080", nil)
+	}()
+
+	//...
 	// Init sentry
 	err := sentry.Init(sentry.ClientOptions{
 		Dsn: SentryDSN,
