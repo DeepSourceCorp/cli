@@ -1,7 +1,6 @@
 package dryrun
 
 import (
-	"flag"
 	"fmt"
 	"os"
 	"path"
@@ -11,7 +10,6 @@ import (
 	"github.com/deepsourcelabs/cli/utils"
 	"github.com/fatih/color"
 	"github.com/morikuni/aec"
-	"github.com/pterm/pterm"
 	"github.com/spf13/cobra"
 
 	"github.com/deepsourcelabs/cli/analysis/config"
@@ -172,18 +170,15 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	a.Spinner.StopSpinner()
 	fmt.Println(aec.Apply(fmt.Sprintf("[✔] Issues after processing: %d", len(a.AnalysisResult.Issues)), aec.LightGreenF))
 
+	// Showcase the results on the browser
+	if _, testingEnv := os.LookupEnv("DRY_RUN_TESTING"); testingEnv {
+		return nil
+	}
+
 	// Prompt the user to press return in order to check results on browser.
 	c := color.New(color.FgCyan, color.Bold)
 	c.Printf("Press enter to view the analysis results in the browser...")
 	fmt.Scanln()
 
-	pterm.Success.Println("Analysis results live at http://localhost:8080...")
-
-	// Don't run the server while running integration test.
-	if flag.Lookup("test.v") != nil {
-		return nil
-	}
-
-	// Showcase the results on the browser
 	return a.renderResultsOnBrowser()
 }

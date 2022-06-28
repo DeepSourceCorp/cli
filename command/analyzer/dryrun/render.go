@@ -16,6 +16,7 @@ import (
 	"github.com/cli/browser"
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/pelletier/go-toml/v2"
+	"github.com/pterm/pterm"
 )
 
 //go:embed views/*.html views/**/*.css
@@ -100,13 +101,14 @@ func (a *AnalyzerDryRun) renderResultsOnBrowser() (err error) {
 
 	// Spawn the server in a goroutine.
 	go func() {
-		if err := echoInstance.Start(serverPort); err != nil && err != http.ErrServerClosed {
+		if err := echoInstance.Start(fmt.Sprintf(":%s", serverPort)); err != nil && err != http.ErrServerClosed {
 			echoInstance.Logger.Fatal("Shutting down the server")
 		}
 	}()
+	pterm.Success.Printf("Analysis results live at http://localhost:%s..\n", serverPort)
 
 	// Having received the user code, open the browser at the localhost.
-	browser.OpenURL(fmt.Sprintf("http://localhost:%s", strings.TrimPrefix(serverPort, "[::]:")))
+	browser.OpenURL(fmt.Sprintf("http://localhost:%s", serverPort))
 
 	// Wait for interrupt signal to gracefully shutdown the server with a timeout of 10 seconds.
 	// Use a buffered channel to avoid missing signals as recommended for signal.Notify

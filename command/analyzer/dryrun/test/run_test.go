@@ -15,6 +15,7 @@ func TestAnalyzerRun(t *testing.T) {
 	/* =============================================================================
 	// Copying the todo-checker directory to $APP_PATH for the integration tests
 	/* ============================================================================= */
+	os.Setenv("DRY_RUN_TESTING", "1")
 	cwd, _ := os.Getwd()
 
 	analyzerPath := path.Join(cwd, "todo-checker")

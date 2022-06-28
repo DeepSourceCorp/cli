@@ -243,13 +243,13 @@ func getServerPort() string {
 	if err == nil {
 		// Close the listener if it starts to listen on the default port.
 		listener.Close()
-		return serverPort
+		return strings.TrimPrefix(serverPort, ":")
 	}
 
 	// If the port is busy, get a new port.
 	listener, _ = net.Listen("tcp", ":0")
 	// Close the listener if it starts to listen on the default port.
-	serverPort = listener.Addr().String()
+	serverPort = strings.TrimPrefix(listener.Addr().String(), "[::]:")
 	listener.Close()
 	return serverPort
 }
