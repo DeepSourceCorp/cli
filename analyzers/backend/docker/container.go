@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path"
+	"runtime"
 	"strings"
 	"time"
 
@@ -65,7 +66,7 @@ func (d *DockerClient) StartDockerContainer() error {
 	// Prepare the network config
 	networkConfig := network.NetworkingConfig{}
 	platform := v1.Platform{
-		Architecture: "amd64",
+		Architecture: runtime.GOARCH,
 		OS:           "linux",
 	}
 
