@@ -20,6 +20,7 @@ import (
 
 type AnalysisParams struct {
 	AnalyzerName            string
+	AnalyzerShortcode       string
 	HostCodePath            string
 	HostToolBoxPath         string
 	AnalysisCommand         string
@@ -44,7 +45,6 @@ func (d *DockerClient) StartDockerContainer() error {
 		 * - CMD instruction
 		 * - Environment variables
 	     * ========================================================== */
-
 	config := container.Config{
 		Image: fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag),
 		Cmd:   strings.Split(d.AnalysisOpts.AnalysisCommand, " "),

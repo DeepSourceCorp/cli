@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>{{ .PageTitle }}</title>
+    <link href="static/style.css" type="text/css" rel="stylesheet" />
+    <style>
+      body,
+      html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+
+      .container {
+        width: 100%;
+        height: 100%;
+      }
+
+      .leftpane {
+        width: 25%;
+        height: 100%;
+        float: left;
+        border-collapse: collapse;
+      }
+
+      .run-summary {
+        width: 25%;
+        height: 100%;
+        bottom: 100px;
+        border-collapse: collapse;
+      }
+
+      .middlepane {
+        width: 50%;
+        height: 100%;
+        float: left;
+        border-collapse: collapse;
+      }
+
+      .rightpane {
+        width: 25%;
+        height: 100%;
+        position: relative;
+        float: right;
+        border-collapse: collapse;
+      }
+
+      .toppane {
+        width: 100%;
+        height: 100px;
+        border-collapse: collapse;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="toppane">
+        {{ .AnalyzerShortcode }}<br>
+        {{ .AnalysisResultData.UniqueIssuesCount }} issues {{ .VCSInfo.Branch }} {{ .VCSInfo.CommitSHA }} {{ .VCSInfo.VersionDiff }}
+      </div>
+
+      <!-- Category Section -->
+      <div class="leftpane">
+        <p>
+          <a href="/issues"><strong>All Issues</strong></a>&nbsp;&nbsp;{{ .AnalysisResultData.TotalOccurences }}<br>
+          {{ $categoryMap := .IssueCategoryNameMap}}
+          {{ range $key, $value := .AnalysisResultData.IssueCategoryCountMap }}
+          {{ $categoryShortCode := (index $categoryMap $key) }}
+          <li><strong><a href="/issues?category={{$categoryShortCode}}">{{ $key }}</a></strong>: {{ $value }}</li>
+          {{ end }}
+        </p>
+
+      <!-- Run Summary Section -->
+      <div class="run-summary">
+        <p>Run Summary</p>
+        {{ .Summary.TimeSinceRun }}<br>
+        {{ .AnalysisResultData.SourcePath }}<br>
+        {{ .Summary.RunDuration}}
+      </div>
+
+      </div>
+
+        <!-- Occurences Section -->
+      <div class="middlepane">
+        <p>
+          <a href="/">All issues</a>&nbsp;/{{ .SelectedIssueCode }}<br><br>
+          {{ $issueData := (index .AnalysisResultData.IssuesOccurenceMap .SelectedIssueCode)}}
+          <strong>{{ $issueData.IssueMeta.Title}}</strong><br>
+          {{ $issueData.IssueMeta.Category }}<br>
+
+          {{ $src := .AnalysisResultData.RenderedSourceCode }}
+          {{ range $index, $occurence := $issueData.Occurences}}
+            {{ $occurence.IssueText }}<br>
+            {{ $occurence.Location.Path }}<br>
+            {{ index $src $index}}
+          {{ end }}
+        </p>
+      </div>
+
+        <!-- Description Section -->
+      <div class="rightpane">
+        <strong>Description</strong>
+        <p>
+          {{ $issueData := (index .AnalysisResultData.IssuesOccurenceMap .SelectedIssueCode)}}
+          {{ $issueData.IssueMeta.Description}}
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
