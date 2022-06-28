@@ -67,7 +67,7 @@ func (r *ResultRenderOpts) IssueOccurencesHandler(c echo.Context) error {
 
 	issueOccurences := r.AnalysisResultData.IssuesOccurenceMap[r.SelectedIssueCode]
 	for _, occurence := range issueOccurences.Occurences {
-		r.AnalysisResultData.RenderedSourceCode = append(r.AnalysisResultData.RenderedSourceCode, template.HTML(occurence.ProcessedData.SourceCode.Rendered)) //skipcq: GSC-G203
+		r.AnalysisResultData.RenderedSourceCode = append(r.AnalysisResultData.RenderedSourceCode, template.HTML(occurence.ProcessedData.SourceCode.Rendered)) // skipcq: GSC-G203
 	}
 	err := r.Template.ExecuteTemplate(c.Response().Writer, "occurence.html", *r)
 	if err != nil {
