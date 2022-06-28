@@ -42,6 +42,9 @@ func TestAnalyzerRun(t *testing.T) {
 		t.Errorf("Failed to copy the analyzer code to %s. Error:%s\n%s", appPath, err, outErr)
 	}
 
+	// Create the file to watch.
+	os.Create(fmt.Sprintf("%s/analysis_results.json", appPath))
+
 	// Watch for the output file for any changes. Once the file is written, kill the dry-run process.
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
@@ -93,7 +96,7 @@ func TestAnalyzerRun(t *testing.T) {
 
 	err = watcher.Add(fmt.Sprintf("%s/analysis_results.json", appPath))
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	/* =============================================================================

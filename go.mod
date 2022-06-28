@@ -26,7 +26,7 @@ require (
 require (
 	github.com/atomicgo/cursor v0.0.1 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/fsnotify/fsnotify v1.5.1 // indirect
+	github.com/fsnotify/fsnotify v1.5.1
 	github.com/go-git/go-git/v5 v5.4.2
 	github.com/go-playground/validator/v10 v10.10.1
 	github.com/gobwas/glob v0.2.3
@@ -102,7 +102,6 @@ require (
 	github.com/moby/sys/mountinfo v0.6.1 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/runc v1.1.1 // indirect
-	github.com/pkg/profile v1.6.0 // indirect
 	github.com/sirupsen/logrus v1.8.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.1 // indirect
