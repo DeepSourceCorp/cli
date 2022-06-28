@@ -80,7 +80,7 @@ func TestAnalyzerRun(t *testing.T) {
 						diff := cmp.Diff(receivedAnalysisResults, expectedAnalysisResults)
 						t.Errorf("Failed to verify analysis results. Expected: %s\n==========\nGot: %s\n=========\nDiff:%s", expectedAnalysisResults, receivedAnalysisResults, diff)
 					}
-                    done <- true
+					done <- true
 				}
 			case err, ok := <-watcher.Errors:
 				if !ok {
