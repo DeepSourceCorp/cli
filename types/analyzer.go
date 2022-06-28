@@ -34,6 +34,7 @@ type AnalyzerTOML struct {
 	// Analyzer specific data
 	Name             string   `toml:"name" json:"name" validate:"required"`
 	Shortcode        string   `toml:"shortcode" json:"shortcode" validate:"required,shortcode"`
+	AnalyzerVersion  string   `toml:",omitempty" json:",omitempty"`
 	Description      string   `toml:"description" json:"description" validate:"required"`
 	Tags             []string `toml:"tags" json:"tags,omitempty" validate:"omitempty"`
 	Repository       string   `toml:"repository" json:"repository" validate:"omitempty,url"`
@@ -59,9 +60,21 @@ type AnalyzerTOML struct {
 
 // Analyzer issue type.
 type AnalyzerIssue struct {
-	Shortcode       string `validate:"omitempty"`
-	Title           string `toml:"title" json:"title" validate:"required"`
-	Description     string `toml:"description" json:"description" validate:"required"`
-	HTMLDescription template.HTML
-	Category        string `toml:"category" json:"category" validate:"required,category"`
+	Shortcode       string        `json:"shortcode" validate:"omitempty"`
+	HTMLDescription template.HTML `json:",omitempty"`
+	Title           string        `toml:"title" json:"title" validate:"required"`
+	Description     string        `toml:"description" json:"description" validate:"required"`
+	Category        string        `toml:"category" json:"category" validate:"required,category"`
+}
+
+// Issue category enum used in
+var IssueCategoryEnumMap = map[string]string{
+	"bug-risk":    "BUG_RISK",
+	"antipattern": "ANTI_PATTERN",
+	"performance": "PERFORMANCEW",
+	"style":       "STYLE",
+	"security":    "SECURITY",
+	"coverage":    "COVERAGE",
+	"typecheck":   "TYPECHECK",
+	"doc":         "DOCUMENTATION",
 }

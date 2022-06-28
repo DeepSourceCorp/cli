@@ -30,7 +30,7 @@ type DockerPullResponse struct {
 
 /* Checks the docker build response and prints all the logs if `showAllLogs` is true
  * Used in `deepsource analyzer run` and `deepsource analyzer verify` commands */
-func CheckBuildResponse(rd io.Reader, showAllLogs bool) error { // skipcq: RVV-A0005
+func CheckResponse(rd io.Reader, showAllLogs bool) error { // skipcq: RVV-A0005
 	var lastLine []byte
 	count := 0
 	var currentStream string

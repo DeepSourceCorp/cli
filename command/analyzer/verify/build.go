@@ -59,7 +59,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 		return err
 	}
 
-	// Build the docker image :rocket:
+	// Build the docker image.
 	ctxCancelFunc, buildRespReader, buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
 
 	// Cancel the build context and close the reader before exiting this function
@@ -76,7 +76,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	}
 
 	// Read the docker build response
-	if err = build.CheckBuildResponse(buildRespReader, a.Build.VerboseMode); err != nil {
+	if err = build.CheckResponse(buildRespReader, a.Build.VerboseMode); err != nil {
 		a.handleBuildError(err)
 		return err
 	}
@@ -90,7 +90,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	return nil
 }
 
-// Utility to handle the output in case of build errors for different modes
+// Utility to handle the output in case of build errors for different modes.
 func (a *AnalyzerVerifyOpts) handleBuildError(buildError error) {
 	if a.Build.VerboseMode {
 		fmt.Printf("%s\n", utils.GetFailureMessage("Failed to build the image", buildError.Error()))

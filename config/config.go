@@ -17,7 +17,7 @@ var (
 const (
 	ConfigDirName   = "/.deepsource/"
 	ConfigFileName  = "/config.toml"
-	DefaultHostName = "deepsource.io"
+	DefaultHostName = "deepsource.icu"
 )
 
 type CLIConfig struct {
@@ -38,9 +38,6 @@ func (cfg *CLIConfig) SetTokenExpiry(str string) {
 
 // Checks if the token has expired or not
 func (cfg *CLIConfig) IsExpired() bool {
-	if cfg.TokenExpiresIn.IsZero() {
-		return true
-	}
 	return time.Now().After(cfg.TokenExpiresIn)
 }
 
@@ -87,6 +84,7 @@ func (cfg *CLIConfig) ReadConfigFile() error {
 	return nil
 }
 
+// GetConfig returns the CLI config after reading it.
 func GetConfig() (*CLIConfig, error) {
 	if Cfg.Token != "" {
 		return &Cfg, nil
@@ -147,10 +145,10 @@ func (cfg *CLIConfig) VerifyAuthentication() error {
 		return errors.New("You are not logged into DeepSource. Run \"deepsource auth login\" to authenticate.")
 	}
 
-	// // Check if the token has already expired
-	// if cfg.IsExpired() {
-	// 	return errors.New("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
-	// }
+	// Check if the token has already expired
+	if cfg.IsExpired() {
+		return errors.New("The authentication has expired. Run \"deepsource auth refresh\" to refresh the credentials.")
+	}
 
 	return nil
 }
