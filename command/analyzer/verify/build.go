@@ -47,6 +47,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	 * Use the `GenerateImageVersion` utility to generate a random string of length 7 to tag the image */
 	analyzerBuilder := build.DockerClient{
 		ImageName:      a.Build.DockerImageName,
+		ImagePlatform:  a.Build.DockerImagePlatform,
 		DockerfilePath: a.Build.DockerFilePath,
 		ImageTag:       build.GenerateImageVersion(7),
 		ShowLogs:       a.Build.VerboseMode,
