@@ -105,7 +105,7 @@ func TestAnalyzerRun(t *testing.T) {
 
 	analysisCmd = exec.Command("/tmp/deepsource", "analyzer", "dry-run", analyzerPath, "--output-file", appPath)
 	analysisCmd.Dir = appPath
-	analysisCmd.Env = []string{"TOOLBOX_PATH=/toolbox", "CODE_PATH=/code"}
+	analysisCmd.Env = []string{fmt.Sprintf("TOOLBOX_PATH=%s", os.Getenv("TOOLBOX_PATH")), fmt.Sprintf("CODE_PATH=%s", os.Getenv("CODE_PATH"))}
 
 	var stdout1, stderr1 bytes.Buffer
 	analysisErr := analysisCmd.Run()
