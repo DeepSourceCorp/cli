@@ -14,6 +14,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/analysis/config"
 	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
+	"github.com/deepsourcelabs/cli/command/analyzer/dryrun/render"
 )
 
 // Variables to hold the value of CODE_PATH and TOOLBOX_PATH to be injected
@@ -25,8 +26,6 @@ var (
 	analysisResultsName  string = "analysis_results"
 	analysisConfigExt    string = ".json"
 	analysisResultsExt   string = ".json"
-	analysisStartTime    time.Time
-	analysisEndTime      time.Time
 )
 
 // The params required while running the Analysis locally.
@@ -136,9 +135,8 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 
 	// Starts the Docker container which analyzes the code and stores the analysis results
 	// in a variable
-
 	fmt.Println(aec.Apply("[+] Starting the Analysis container", aec.LightYellowF))
-	analysisStartTime = time.Now()
+	analysisStartTime := time.Now()
 	if err = a.Client.StartDockerContainer(); err != nil {
 		return err
 	}
@@ -151,7 +149,7 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 	a.Spinner.StopSpinner()
-	analysisEndTime = time.Now()
+	analysisEndTime := time.Now()
 
 	// Write the analysis results to the file
 	a.Spinner.StartSpinnerWithLabel("Writing Analyzer report...", fmt.Sprintf("Analyzer report written to %s", path.Join(a.Client.AnalysisOpts.AnalysisResultsPath, analysisResultFileName)))
@@ -170,17 +168,28 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	a.Spinner.StopSpinner()
 	fmt.Println(aec.Apply(fmt.Sprintf("[✔] Issues after processing: %d", len(a.AnalysisResult.Issues)), aec.LightGreenF))
 
-	// Exit from here if in a testing environment.
-	// TODO(SNT): Change this and mock the server for testing.
-	if _, testingEnv := os.LookupEnv("DRY_RUN_TESTING"); testingEnv {
-		return nil
-	}
-
 	// Prompt the user to press return in order to check results on browser.
 	c := color.New(color.FgCyan, color.Bold)
 	c.Printf("Press enter to view the analysis results in the browser...")
 	fmt.Scanln()
 
 	// Showcase the results on the browser
-	return a.renderResultsOnBrowser()
+	// Initialize `ResultRenderOpts` with some of the initial data that needs to be rendered.
+	d := render.ResultRenderOpts{
+		PageTitle:         fmt.Sprintf("Issues | %s", a.Client.AnalysisOpts.AnalyzerShortcode),
+		AnalyzerShortcode: a.Client.AnalysisOpts.AnalyzerShortcode,
+		AnalysisResultData: render.ResultData{
+			AnalysisResult: a.AnalysisResult,
+			SourcePath:     a.SourcePath,
+		},
+		SelectedCategory:     "all",
+		IssueCategoryNameMap: types.IssueCategoryMap,
+		MetricNameMap:        types.MetricMap,
+		Summary: render.RunSummary{
+			AnalysisStartTime: analysisStartTime,
+			AnalysisEndTime:   analysisEndTime,
+		},
+	}
+
+	return d.RenderResultsOnBrowser()
 }

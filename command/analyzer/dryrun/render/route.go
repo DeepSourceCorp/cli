@@ -1,4 +1,4 @@
-package dryrun
+package render
 
 import (
 	"fmt"
@@ -16,34 +16,34 @@ import (
  * /issues?category={issue_category}  */
 
 // declareRoutes declares routes for various incoming requests to the Analyzer dry run local server.
-func (d *DataRenderOpts) declareRoutes(staticFS http.FileSystem) *echo.Echo {
+func (r *ResultRenderOpts) declareRoutes(staticFS http.FileSystem) *echo.Echo {
 	e := echo.New()
 	e.HideBanner = true
 
 	// Issues page containing all the reported issues.
-	e.GET("/", d.IssuesHandler)
-	e.GET("/issues", d.IssuesHandler)
+	e.GET("/", r.IssuesHandler)
+	e.GET("/issues", r.IssuesHandler)
 
 	// Handle serving static assets.
 	assetHandler := http.FileServer(staticFS)
 	e.GET("/static/*", echo.WrapHandler(http.StripPrefix("/static/", assetHandler)))
 
 	// Handle showing issues for a certain category.
-	e.GET("/issue/:issue_code/occurences", d.IssuesOccurencesHandler)
+	e.GET("/issue/:issue_code/occurences", r.IssuesOccurencesHandler)
 	return e
 }
 
-func (d *DataRenderOpts) IssuesHandler(c echo.Context) error {
+func (r *ResultRenderOpts) IssuesHandler(c echo.Context) error {
 	// Check URL query parameters
 	qParams := c.QueryParams()
 
 	if qParams.Has("category") {
-		d.SelectedCategory = qParams.Get("category")
+		r.SelectedCategory = qParams.Get("category")
 	} else {
-		d.SelectedCategory = "all"
+		r.SelectedCategory = "all"
 	}
 
-	err := d.Template.ExecuteTemplate(c.Response().Writer, "index.html", *d)
+	err := r.Template.ExecuteTemplate(c.Response().Writer, "index.html", *r)
 	if err != nil {
 		fmt.Println(err)
 		return c.String(http.StatusOK, "Occurence page served.")
@@ -51,15 +51,15 @@ func (d *DataRenderOpts) IssuesHandler(c echo.Context) error {
 	return c.String(http.StatusOK, "Issues page served.")
 }
 
-func (d *DataRenderOpts) IssuesOccurencesHandler(c echo.Context) error {
+func (r *ResultRenderOpts) IssuesOccurencesHandler(c echo.Context) error {
 	// Fetch the issue code from URI.
-	d.SelectedIssueCode = c.Param("issue_code")
+	r.SelectedIssueCode = c.Param("issue_code")
 
-	issueOccurences := d.AnalysisResultData.IssuesOccurenceMap[d.SelectedIssueCode]
+	issueOccurences := r.AnalysisResultData.IssuesOccurenceMap[r.SelectedIssueCode]
 	for _, occurence := range issueOccurences.Occurences {
-		d.AnalysisResultData.RenderedSourceCode = append(d.AnalysisResultData.RenderedSourceCode, template.HTML(occurence.ProcessedData.SourceCode.Rendered))
+		r.AnalysisResultData.RenderedSourceCode = append(r.AnalysisResultData.RenderedSourceCode, template.HTML(occurence.ProcessedData.SourceCode.Rendered))
 	}
-	err := d.Template.ExecuteTemplate(c.Response().Writer, "occurence.html", *d)
+	err := r.Template.ExecuteTemplate(c.Response().Writer, "occurence.html", *r)
 	if err != nil {
 		fmt.Println(err)
 		return c.String(http.StatusOK, "Occurence page served.")
