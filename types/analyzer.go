@@ -55,7 +55,7 @@ type AnalyzerTOML struct {
  * Analyzer Issue TOML Types
  * ========================= */
 
-// Analyzer issue type
+// Analyzer issue type.
 type AnalyzerIssue struct {
 	Shortcode   string `validate:"omitempty"`
 	Title       string `toml:"title" json:"title" validate:"required"`

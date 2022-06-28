@@ -34,6 +34,7 @@ func (a *AnalyzerDryRun) createDockerClient() error {
 		DockerfilePath: dockerFilePath,
 		AnalysisOpts: docker.AnalysisParams{
 			AnalyzerName:            analyzerTOMLData.Name,
+			AnalyzerShortcode:       analyzerTOMLData.Shortcode,
 			AnalysisCommand:         analyzerTOMLData.Analysis.Command,
 			ContainerCodePath:       containerCodePath,
 			ContainerToolBoxPath:    containerToolBoxPath,

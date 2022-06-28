@@ -148,8 +148,8 @@ func getFinalFormattedSlice(fileContentSlice []string, issue *types.Issue) forma
 
 	// We need to move the trailing span to the previous line in order for our replacement logic to work.
 	for i := range chromaHighlightedSlice {
-		if i != 0 && !strings.HasPrefix(chromaHighlightedSlice[i], "<span class=\"hl\">") {
-			lineStartIndex := strings.Index(chromaHighlightedSlice[i], "<span class=\"hl\">")
+		if i != 0 && !strings.HasPrefix(chromaHighlightedSlice[i], "<span class=\"line hl\">") {
+			lineStartIndex := strings.Index(chromaHighlightedSlice[i], "<span class=\"line hl\">")
 
 			if lineStartIndex != -1 {
 				chromaHighlightedSlice[i-1] += chromaHighlightedSlice[i][:lineStartIndex]

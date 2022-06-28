@@ -35,10 +35,13 @@ type ProcessedData struct {
 }
 
 type Issue struct {
-	IssueCode     string        `json:"issue_code"`
-	IssueText     string        `json:"issue_text"`
-	Location      Location      `json:"location"`
-	ProcessedData ProcessedData `json:"processed_data,omitempty"`
+	IssueCode        string `json:"issue_code"`
+	IssueText        string `json:"issue_text"`
+	IssueTitle       string
+	IssueCategory    string
+	IssueDescription string
+	Location         Location      `json:"location"`
+	ProcessedData    ProcessedData `json:"processed_data,omitempty"`
 }
 
 type Error struct {
