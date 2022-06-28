@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"os"
 	"path"
 	"runtime"
@@ -63,10 +64,17 @@ func (d *DockerClient) StartDockerContainer() error {
 		},
 	}
 
+	// Check if platform is empty or not
+	imageArch := d.ImagePlatform
+	if d.ImagePlatform == "" {
+		log.Println("received no image platform. using current OS architecture as image's architecture.")
+		imageArch = runtime.GOARCH
+	}
+
 	// Prepare the network config
 	networkConfig := network.NetworkingConfig{}
 	platform := v1.Platform{
-		Architecture: runtime.GOARCH,
+		Architecture: imageArch,
 		OS:           "linux",
 	}
 
