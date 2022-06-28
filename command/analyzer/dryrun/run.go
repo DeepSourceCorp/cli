@@ -170,7 +170,8 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	a.Spinner.StopSpinner()
 	fmt.Println(aec.Apply(fmt.Sprintf("[✔] Issues after processing: %d", len(a.AnalysisResult.Issues)), aec.LightGreenF))
 
-	// Showcase the results on the browser
+    // Exit from here if in a testing environment.
+    // TODO(SNT): Change this and mock the server for testing.
 	if _, testingEnv := os.LookupEnv("DRY_RUN_TESTING"); testingEnv {
 		return nil
 	}
@@ -180,5 +181,6 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	c.Printf("Press enter to view the analysis results in the browser...")
 	fmt.Scanln()
 
+	// Showcase the results on the browser
 	return a.renderResultsOnBrowser()
 }
