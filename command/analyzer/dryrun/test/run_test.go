@@ -48,7 +48,7 @@ func TestAnalyzerRun(t *testing.T) {
 	// Watch for the output file for any changes. Once the file is written, kill the dry-run process.
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		log.Fatal(err)
+		t.Error(err)
 	}
 	defer watcher.Close()
 
@@ -96,7 +96,7 @@ func TestAnalyzerRun(t *testing.T) {
 
 	err = watcher.Add(fmt.Sprintf("%s/analysis_results.json", appPath))
 	if err != nil {
-		log.Fatalln(err)
+		t.Error(err)
 	}
 
 	/* =============================================================================
