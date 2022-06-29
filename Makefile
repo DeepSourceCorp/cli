@@ -3,6 +3,8 @@ build:
 
 build_local:
 	cd cmd/deepsource && go build -tags static_all -o /tmp/deepsource .
+	
+	
 
 test:
 	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueWorkflow -count=1
