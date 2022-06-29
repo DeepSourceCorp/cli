@@ -1340,8 +1340,20 @@ video {
   top: 0px;
 }
 
+.top-12 {
+  top: 3rem;
+}
+
+.top-36 {
+  top: 9rem;
+}
+
 .z-20 {
   z-index: 20;
+}
+
+.z-50 {
+  z-index: 50;
 }
 
 .col-span-2 {
