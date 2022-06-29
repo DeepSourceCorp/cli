@@ -63,16 +63,18 @@ func (d *DockerClient) StartDockerContainer() error {
 		},
 	}
 
-	// Check if platform is empty or not
-	imageArch := d.ImagePlatform
-	if d.ImagePlatform == "" {
-		imageArch = runtime.GOARCH
-	}
-
 	// Prepare the network config
 	networkConfig := network.NetworkingConfig{}
+
+	// Configure the platform(mostly architecture) for the container. If specified by the user, use that else
+	// determine it using runtime.GOARCH.
+	containerArch := runtime.GOARCH
+	if d.ImagePlatform != "" {
+		containerArch = strings.SplitN(d.ImagePlatform, "/", 2)[1]
+	}
+
 	platform := v1.Platform{
-		Architecture: imageArch,
+		Architecture: containerArch,
 		OS:           "linux",
 	}
 
