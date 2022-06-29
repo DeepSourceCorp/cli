@@ -3,121 +3,78 @@
   <head>
     <meta charset="UTF-8" />
     <title>{{ .PageTitle }}</title>
-    <link href="static/style.css" type="text/css" rel="stylesheet" />
-    <style>
-      body,
-      html {
-        width: 100%;
-        height: 100%;
-        margin: 0;
-      }
-
-      .container {
-        width: 100%;
-        height: 100%;
-      }
-
-      .leftpane {
-        width: 25%;
-        height: 100%;
-        float: left;
-        border-collapse: collapse;
-      }
-
-      .run-summary {
-        width: 25%;
-        height: 100%;
-        bottom: 100px;
-        border-collapse: collapse;
-      }
-
-      .middlepane {
-        width: 50%;
-        height: 100%;
-        float: left;
-        border-collapse: collapse;
-      }
-
-      .rightpane {
-        width: 25%;
-        height: 100%;
-        position: relative;
-        float: right;
-        border-collapse: collapse;
-      }
-
-      .toppane {
-        width: 100%;
-        height: 100px;
-        border-collapse: collapse;
-      }
-    </style>
+    <link href="static/assets/deepsource-cli.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+        />
   </head>
-  <body>
-    <div class="container">
-      <div class="toppane">
-        {{ .AnalyzerShortcode }}<br>
-        {{ .AnalysisResultData.UniqueIssuesCount }} issues {{ .VCSInfo.Branch }} {{ .VCSInfo.CommitSHA }} {{ .VCSInfo.VersionDiff }}
-      </div>
+  {{ $defaultIssueCategory := "all"}}
+  {{ $selectedCategory := .SelectedCategory }}
 
-        <!-- Category Section -->
-      <div class="leftpane">
-        <p>
-          <a href="/issues"><strong>All Issues</strong></a>&nbsp;&nbsp;{{ .AnalysisResultData.TotalOccurences }}<br>
-          {{ $categoryMap := .IssueCategoryNameMap}}
-          {{ range $key, $value := .AnalysisResultData.IssueCategoryCountMap }}
-          {{ $categoryName := (index $categoryMap $key) }}
-          <li><strong><a href="/issues?category={{$key}}">{{ $categoryName }}</a></strong>: {{ $value }}</li>
-          {{ end }}
-        </p>
-
-        <!-- Run Summary Section -->
-      <div class="run-summary">
-        <p>Run Summary</p>
-        {{ .Summary.TimeSinceRun }}<br>
-        {{ .AnalysisResultData.SourcePath }}<br>
-        {{ .Summary.RunDuration}}
-      </div>
-      </div>
-
-
-        <!-- All Unique Issues Section -->
-      <div class="middlepane">
-        <p>
-        {{ range $index, $error := .AnalysisResultData.AnalysisResult.Errors }}
-          {{ if eq $error.Level 0}}
-            <strong>Error</strong>&nbsp;{{ $error.HMessage }}
-          {{ else }}{{ if eq $error.Level 1}}
-            <strong>Warning</strong>&nbsp;{{ $error.HMessage }}
-            {{ end }}{{ end }}
+  <body class="min-h-screen bg-ink-400 text-vanilla-100">
+    {{ template "navbarHTML" }}
+    {{ template "headerHTML" }}
+    <main class="grid grid-cols-[16rem_1fr_20rem] divide-x divide-ink-200">
+      <aside class="space-y-1 flex flex-col justify-between h-[calc(100vh-9rem)]">
+        {{ template "categoryHTML" }}
+      </aside>
+      <section class="grid grid-cols-1 gap-4 p-4 auto-rows-min">
+        {{ if eq (len .AnalysisResultData.IssuesOccurenceMap) 0 }}
+        <div class="text-center text-sm text-vanilla-400 py-16 rounded-md border border-dashed border-ink-200">No issues to show</div>
+        {{ else }}
+        {{ range $key, $value := .AnalysisResultData.IssuesOccurenceMap }}
+        {{ if or (eq $selectedCategory $value.IssueMeta.Category) (eq $selectedCategory $defaultIssueCategory) }}
+        <a class="border divide-x divide-ink-200 rounded-lg group border-ink-200 hover:bg-ink-300 grid grid-cols-[1fr_10rem]" href="/issue/{{ $key }}/occurences">
+          <div class="p-2 pl-4 space-y-1">
+            <h4 class="font-medium">{{ $value.IssueMeta.Title }}</h4>
+            <div class="flex gap-5 text-sm text-vanilla-400">
+              <div class="flex flex-wrap items-center gap-2">
+                <svg
+                    class="flex-shrink-0"
+                    width="14"
+                    height="1"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    >
+                    <use href="static/assets/images/feather-sprite.svg#tag" />
+                </svg>
+                  <span>{{ $value.IssueMeta.Category }}</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <svg
+                    class="flex-shrink-0"
+                    width="14"
+                    height="14"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    >
+                    <use href="static/assets/images/feather-sprite.svg#file-text" />
+                </svg>
+                  <span class="truncate max-w-xs">{{ $value.FilesInfo }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="grid place-content-center text-xl font-medium">{{ len $value.Occurences }}</div>
+        </a>
         {{ end }}
-        </p>
-        <p>
-          {{ $defaultIssueCategory := "all"}}
-          {{ $selectedCategory := .SelectedCategory }}
-          {{ $categoryMap := .IssueCategoryNameMap}}
-          {{ range $key, $value := .AnalysisResultData.IssuesOccurenceMap }}
-            {{ $categoryName := (index $categoryMap $value.IssueMeta.Category) }}
-            {{ if eq $selectedCategory $defaultIssueCategory }}
-              <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $categoryName }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
-            {{else }} {{ if eq $selectedCategory $value.IssueMeta.Category }}
-              <a href="/issue/{{ $key }}/occurences"><strong>{{ $value.IssueMeta.Title }}</strong></a>&nbsp;{{ $key }}&nbsp;{{ len  $value.Occurences }}<br>
-              {{ $categoryName }}&nbsp;&nbsp;{{ $value.FilesInfo }}<br>
-              {{ end}}
-            {{end}}
-          {{ end }}
-        </p>
-      </div>
-        <!-- Metrics Section -->
-      <div class="rightpane">
-        <p>
-          <strong>Metrics</strong><br>
-          {{ range $name, $metric := .AnalysisResultData.MetricsMap }}
-          <strong>{{ $name }}</strong>:&nbsp;{{ $metric }}<br>
-          {{ end }}
-        </p>
-      </div>
-    </div>
+        {{ end }}
+        {{ end }}
+      </section>
+
+      <aside class="p-4">
+        <h5 class="mb-3 text-xs tracking-wider uppercase text-vanilla-400">
+          Metrics
+        </h5>
+      </aside>
+    </main>
   </body>
 </html>

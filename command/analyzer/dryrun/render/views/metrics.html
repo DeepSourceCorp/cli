@@ -1,0 +1,14 @@
+{{ define "metricsHTML" }}
+<div class="gap-2.5 grid grid-cols-1">
+  {{ if eq (len .AnalysisResultData.AnalysisResult.Metrics) 0 }}
+  <div class="text-center text-sm text-vanilla-400 py-8 rounded-md border border-dashed border-ink-200">No metrics to show</div>
+  {{ else }}
+  {{ range $metric := .AnalysisResultData.AnalysisResult.Metrics }}
+  <div class="p-4 space-y-4 border rounded-md border-ink-200">
+    <div class="text-sm">{{ $metric.MetricCode }}</div>
+    <div class="text-2xl font-medium leading-none">{{ (index $metric.Namespaces 0).Value }}</div>
+  </div>
+  {{ end }}
+  {{ end }}
+</div>
+{{ end }}

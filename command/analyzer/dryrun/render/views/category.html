@@ -1,5 +1,8 @@
 {{ define "categoryHTML" }}
+{{ $defaultIssueCategory := "all"}}
+{{ $selectedCategory := .selectedcategory }}
 <div class="space-y-1 p-4">
+  {{ .defaultIssueCategory }}
   <a href="?category={{ $defaultIssueCategory }}" class="sidebar {{ if eq $selectedCategory $defaultIssueCategory }} selected {{ end }}">
     <svg
         class="hidden"
@@ -11,7 +14,7 @@
         stroke-linecap="round"
         stroke-linejoin="round"
         >
-        <use href="/static/views/assets/images/feather-sprite.svg#list" />
+        <use href="static/assets/images/feather-sprite.svg#list" />
     </svg>
       <span class="label">All issues</span>
       <span class="tag"> {{ .AnalysisResultData.TotalOccurences }} </span>
@@ -31,7 +34,7 @@
         stroke-linecap="round"
         stroke-linejoin="round"
         >
-        <use href="/static/views/assets/images/feather-sprite.svg#trending-up" />
+        <use href="static/assets/images/feather-sprite.svg#trending-up" />
     </svg>
       <span class="label">{{ $key }}</span>
       <span class="tag"> {{ $value }} </span>
