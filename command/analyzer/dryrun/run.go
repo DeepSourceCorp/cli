@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"runtime"
 	"time"
 
 	"github.com/fatih/color"
@@ -31,6 +32,7 @@ var (
 // The params required while running the Analysis locally.
 type AnalyzerDryRun struct {
 	Client               *docker.DockerClient   // The client to be used for all docker related ops.
+	DockerImagePlatform  string                 // The platform for which the Docker image is to be built.
 	RemoteSource         bool                   // True if the source to be analyzed is a remote VCS repository.
 	SourcePath           string                 // The path of the directory of source code to be analyzed.
 	TempCloneDirectory   string                 // The temporary directory where the source of the remote VCS will be cloned to.
@@ -70,6 +72,11 @@ func NewCmdAnalyzerRun() *cobra.Command {
 
 	// --output-file/ -o flag.
 	cmd.Flags().StringVarP(&opts.TempToolBoxDirectory, "output-file", "o", "", "The path of analysis results")
+
+	// --platform flag; used for explicitly setting up the build platform for the Docker image. Defaults to linux/<arch> if not provided.
+	defaultPlatform := fmt.Sprintf("linux/%s", runtime.GOARCH)
+	cmd.Flags().StringVar(&opts.DockerImagePlatform, "platform", defaultPlatform, "Explicitly set build platform for Docker image.")
+
 	return cmd
 }
 

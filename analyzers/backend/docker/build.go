@@ -24,6 +24,7 @@ type DockerClient struct {
 	ContainerID    string
 	ImageName      string
 	ImageTag       string
+	ImagePlatform  string
 	DockerfilePath string
 	AnalysisOpts   AnalysisParams
 	ShowLogs       bool
@@ -73,7 +74,7 @@ func (d *DockerClient) executeImageBuild() (context.CancelFunc, io.ReadCloser, e
 		Dockerfile: d.DockerfilePath,
 		Tags:       []string{fmt.Sprintf("%s:%s", d.ImageName, d.ImageTag)},
 		Remove:     true,
-		Platform:   "linux",
+		Platform:   d.ImagePlatform,
 	}
 	res, err := d.Client.ImageBuild(ctx, tar, opts)
 	if err != nil {
