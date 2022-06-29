@@ -15,7 +15,7 @@ import (
 	"github.com/pterm/pterm"
 )
 
-//go:embed views/*.html views/**/*.css
+//go:embed views
 var tmplFS embed.FS
 
 // renderResultsOnBrowser renders the results on the browser through a local server,
