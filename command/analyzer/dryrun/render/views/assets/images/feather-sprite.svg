@@ -1547,5 +1547,45 @@
       <line x1="12" x2="15" y1="14" y2="11"></line>
       <circle cx="12" cy="14" r="8"></circle>
     </symbol>
+    <symbol id="bug-risk" viewBox="0 0 24 24">
+      <line x1="10" x2="14" y1="2" y2="2"></line>
+      <line x1="12" x2="15" y1="14" y2="11"></line>
+      <circle cx="12" cy="14" r="8"></circle>
+    </symbol>
+    <symbol id="antipattern" viewBox="0 0 24 24">
+      <line x1="10" x2="14" y1="2" y2="2"></line>
+      <line x1="12" x2="15" y1="14" y2="11"></line>
+      <circle cx="12" cy="14" r="8"></circle>
+    </symbol>
+    <symbol id="performance" viewBox="0 0 24 24">
+      <line x1="10" x2="14" y1="2" y2="2"></line>
+      <line x1="12" x2="15" y1="14" y2="11"></line>
+      <circle cx="12" cy="14" r="8"></circle>
+    </symbol>
+    <symbol id="style" viewBox="0 0 24 24">
+      <line x1="10" x2="14" y1="2" y2="2"></line>
+      <line x1="12" x2="15" y1="14" y2="11"></line>
+      <circle cx="12" cy="14" r="8"></circle>
+    </symbol>
+    <symbol id="security" viewBox="0 0 24 24">
+      <line x1="10" x2="14" y1="2" y2="2"></line>
+      <line x1="12" x2="15" y1="14" y2="11"></line>
+      <circle cx="12" cy="14" r="8"></circle>
+    </symbol>
+    <symbol id="coverage" viewBox="0 0 24 24">
+      <line x1="10" x2="14" y1="2" y2="2"></line>
+      <line x1="12" x2="15" y1="14" y2="11"></line>
+      <circle cx="12" cy="14" r="8"></circle>
+    </symbol>
+    <symbol id="typecheck" viewBox="0 0 24 24">
+      <line x1="10" x2="14" y1="2" y2="2"></line>
+      <line x1="12" x2="15" y1="14" y2="11"></line>
+      <circle cx="12" cy="14" r="8"></circle>
+    </symbol>
+    <symbol id="doc" viewBox="0 0 24 24">
+      <line x1="10" x2="14" y1="2" y2="2"></line>
+      <line x1="12" x2="15" y1="14" y2="11"></line>
+      <circle cx="12" cy="14" r="8"></circle>
+    </symbol>
   </defs>
 </svg>

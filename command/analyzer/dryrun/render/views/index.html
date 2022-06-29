@@ -3,243 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <title>{{ .PageTitle }}</title>
-    <link href="/static/views/assets/deepsource-cli.css" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
+    {{ template "links" }}
   </head>
-  {{ $defaultIssueCategory := "all"}}
+  {{ $defaultIssueCategory := "all" }}
   {{ $selectedCategory := .SelectedCategory }}
   <body class="min-h-screen bg-ink-400 text-vanilla-100">
-    <nav
-      class="sticky top-0 z-20 flex justify-between h-12 col-span-2 px-6 py-2 border-b bg-ink-400 border-ink-200"
-    >
-      <div class="flex items-center divide-x divide-ink-200">
-        <img
-          src="/static/views/assets/images/deepsource.svg"
-          class="mr-4 w-28"
-        />
-        <h3 class="px-4 text-sm">Analyzer Dry Run</h3>
-      </div>
-      <div class="flex gap-1">
-        <a
-          href="https://deepsource.io/docs"
-          target="_blank"
-          rel="noreferrer noopener"
-          class="hover:bg-ink-100 button"
-        >
-          <svg
-            width="14"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <use
-              href="/static/views/assets/images/feather-sprite.svg#book-open"
-            />
-          </svg>
-          Documentation
-        </a>
-        <a
-          href="https://deepsource.io/login"
-          target="_blank"
-          rel="noreferrer noopener"
-          class="hover:bg-ink-100 bg-ink-200 button"
-        >
-          <svg
-            width="14"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <use
-              href="/static/views/assets/images/feather-sprite.svg#sidebar"
-            />
-          </svg>
-          Open DeepSource
-        </a>
-      </div>
-    </nav>
-    <header
-      class="p-6 h-24 pt-5 bg-ink-400 border-b border-ink-200 grid grid-cols-1 gap-x-4 gap-y-2.5 col-span-2"
-    >
-      <!-- parent has class grid-cols-[48px_1fr] -->
-      <!-- <div
-        class="grid w-full h-full row-span-2 rounded-sm bg-ink-300 place-content-center"
-      >
-        <img src="https://www.ruby-lang.org/favicon.ico" />
-      </div> -->
-      <h1 class="text-lg font-medium leading-tight">
-        {{ .AnalyzerShortcode }}
-      </h1>
-      <div class="flex items-center gap-5">
-        <div class="info">
-          <svg
-            width="14"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <use href="/static/views/assets/images/feather-sprite.svg#flag" />
-          </svg>
-          <span>{{ .AnalysisResultData.UniqueIssuesCount }} issues</span>
-        </div>
-        <div class="info">
-          <svg
-            width="14"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <use
-              href="/static/views/assets/images/feather-sprite.svg#git-branch"
-            />
-          </svg>
-          <span>{{ .VCSInfo.Branch }}</span>
-        </div>
-        <div class="info">
-          <svg
-            width="14"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <use
-              href="/static/views/assets/images/feather-sprite.svg#git-commit"
-            />
-          </svg>
-          <span>{{ .VCSInfo.CommitSHA }}</span>
-        </div>
-        <div class="info">
-          <svg
-            width="14"
-            height="14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <use
-              href="/static/views/assets/images/feather-sprite.svg#corner-up-left"
-            />
-          </svg>
-          <span>{{ .VCSInfo.VersionDiff }}</span>
-        </div>
-      </div>
-    </header>
+    {{ template "navbar" . }}
+    {{ template "header" . }}
     <main class="grid grid-cols-[16rem_1fr_20rem] divide-x divide-ink-200">
-      <aside class="space-y-1 flex flex-col justify-between h-[calc(100vh-9rem)]">
-        <div class="p-4 space-y-1">
-          <a href="?category={{ $defaultIssueCategory }}" class="sidebar {{ if eq $selectedCategory $defaultIssueCategory }} selected {{ end }}">
-            <svg
-              class="hidden"
-              width="14"
-              height="14"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <use href="/static/views/assets/images/feather-sprite.svg#list" />
-            </svg>
-            <span class="label">All issues</span>
-            <span class="tag"> {{ .AnalysisResultData.TotalOccurences }} </span>
-          </a>
-
-          {{ $categoryMap := .IssueCategoryNameMap}}
-          {{ range $key, $value := .AnalysisResultData.IssueCategoryCountMap }}
-            {{ $categoryShortCode := (index $categoryMap $key) }}
-              <a href="?category={{ $categoryShortCode }}" class="sidebar {{ if eq $selectedCategory $categoryShortCode }} selected {{ end }}">
-                <svg
-                  class="hidden"
-                  width="14"
-                  height="14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <use href="/static/views/assets/images/feather-sprite.svg#trending-up" />
-                </svg>
-                <span class="label">{{ $key }}</span>
-                <span class="tag"> {{ $value }} </span>
-              </a>
-          {{ end }}
-        </div>
-        <div class="p-4 border-t border-ink-200">
-          <h5 class="mb-3 text-xs tracking-wider uppercase text-vanilla-400">
-            Run Summary
-          </h5>
-          <ul class="space-y-2 text-sm list-none text-vanilla-400">
-            <li class="flex items-center gap-2.5">
-              <svg 
-                class="flex-shrink-0"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <use href="/static/views/assets/images/feather-sprite.svg#clock"/>
-              </svg>
-              <span class="truncate">{{ .Summary.TimeSinceRun }}</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <svg 
-                class="flex-shrink-0"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <use href="/static/views/assets/images/feather-sprite.svg#folder"/>
-              </svg>
-              <span class="truncate">{{ .AnalysisResultData.SourcePath }}</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <svg 
-                class="flex-shrink-0"
-                width="16"
-                height="16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <use href="/static/views/assets/images/feather-sprite.svg#stopwatch"/>
-              </svg>
-              <span class="truncate">{{ .Summary.RunDuration}}</span>
-            </li>
-          </ul>
-        </div>
-      </aside>
+      {{ template "sidebar" . }}
       <section class="grid grid-cols-1 gap-4 p-4 auto-rows-min">
         {{ if eq (len .AnalysisResultData.IssuesOccurenceMap) 0 }}
           <div class="py-16 text-sm text-center border border-dashed rounded-md text-vanilla-400 border-ink-200">No issues to show</div>
@@ -261,7 +33,7 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <use href="/static/views/assets/images/feather-sprite.svg#tag" />
+                      <use href="static/assets/images/feather-sprite.svg#tag" />
                     </svg>
                     <span>{{ $value.IssueMeta.Category }}</span>  
                   </div>
@@ -276,7 +48,7 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <use href="/static/views/assets/images/feather-sprite.svg#file-text" />
+                      <use href="static/assets/images/feather-sprite.svg#file-text" />
                     </svg>
                     <span class="max-w-xs truncate">{{ $value.FilesInfo }}</span>
                   </div>

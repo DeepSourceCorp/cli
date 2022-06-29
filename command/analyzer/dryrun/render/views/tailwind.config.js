@@ -1,3 +1,5 @@
+const typographyConfig = require('./typography.js')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["*.{html,js}"],
@@ -108,6 +110,45 @@ module.exports = {
         300: '#eeeeee',
         400: '#c0c1c3'
       }
+    },
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            ...typographyConfig.DEFAULT(theme)
+          }
+        },
+        muted: {
+          css: {
+            ...typographyConfig.MUTED(theme)
+          }
+        },
+        rte: {
+          css: {
+            ...typographyConfig.RTE(theme)
+          }
+        },
+        sm: {
+          css: {
+            ...typographyConfig.SMALL_SCREEN_CSS(theme)
+          }
+        },
+        lg: {
+          css: {
+            ...typographyConfig.LARGE_SCREEN_CSS(theme)
+          }
+        },
+        xl: {
+          css: {
+            ...typographyConfig.LARGE_SCREEN_CSS(theme)
+          }
+        },
+        '2xl': {
+          css: {
+            ...typographyConfig.LARGE_SCREEN_CSS(theme)
+          }
+        }
+      })
     }
   },
   plugins: [

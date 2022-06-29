@@ -1,0 +1,57 @@
+{{ define "navbar" }}
+<nav
+  class="sticky top-0 z-20 flex justify-between h-12 col-span-2 px-6 py-2 border-b bg-ink-400 border-ink-200"
+>
+  <div class="flex items-center divide-x divide-ink-200">
+    <img
+      src="/static/assets/images/deepsource.svg"
+      class="mr-4 w-28"
+    />
+    <h3 class="px-4 text-sm">Analyzer Dry Run</h3>
+  </div>
+  <div class="flex gap-1">
+    <a
+      href="https://deepsource.io/docs"
+      target="_blank"
+      rel="noreferrer noopener"
+      class="hover:bg-ink-100 button"
+    >
+      <svg
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <use
+          href="/static/assets/images/feather-sprite.svg#book-open"
+        />
+      </svg>
+      Documentation
+    </a>
+    <a
+      href="https://deepsource.io/login"
+      target="_blank"
+      rel="noreferrer noopener"
+      class="hover:bg-ink-100 bg-ink-200 button"
+    >
+      <svg
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <use
+          href="/static/assets/images/feather-sprite.svg#sidebar"
+        />
+      </svg>
+      Open DeepSource
+    </a>
+  </div>
+</nav>
+{{ end }}
