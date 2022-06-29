@@ -1,0 +1,41 @@
+{{ define "categoryHTML" }}
+<div class="space-y-1 p-4">
+  <a href="?category={{ $defaultIssueCategory }}" class="sidebar {{ if eq $selectedCategory $defaultIssueCategory }} selected {{ end }}">
+    <svg
+        class="hidden"
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        >
+        <use href="/static/views/assets/images/feather-sprite.svg#list" />
+    </svg>
+      <span class="label">All issues</span>
+      <span class="tag"> {{ .AnalysisResultData.TotalOccurences }} </span>
+  </a>
+
+  {{ $categoryMap := .IssueCategoryNameMap}}
+  {{ range $key, $value := .AnalysisResultData.IssueCategoryCountMap }}
+  {{ $categoryShortCode := (index $categoryMap $key) }}
+  <a href="?category={{ $categoryShortCode }}" class="sidebar {{ if eq $selectedCategory $categoryShortCode }} selected {{ end }}">
+    <svg
+        class="hidden"
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        >
+        <use href="/static/views/assets/images/feather-sprite.svg#trending-up" />
+    </svg>
+      <span class="label">{{ $key }}</span>
+      <span class="tag"> {{ $value }} </span>
+  </a>
+  {{ end }}
+</div>
+{{ end }}

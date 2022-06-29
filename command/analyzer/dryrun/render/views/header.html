@@ -1,0 +1,79 @@
+{{ define "headerHTML" }}
+<header
+    class="p-6 h-24 pt-5 bg-ink-400 border-b border-ink-200 grid grid-cols-1 gap-x-4 gap-y-2.5 col-span-2"
+    >
+    <!-- parent has class grid-cols-[48px_1fr] -->
+  <!-- <div
+    class="grid w-full h-full row-span-2 rounded-sm bg-ink-300 place-content-center"
+    >
+    <img src="https://www.ruby-lang.org/favicon.ico" />
+    </div> -->
+    <h1 class="text-lg font-medium leading-tight">
+      {{ .AnalyzerShortcode }}
+    </h1>
+    <div class="flex items-center gap-5">
+      <div class="info">
+        <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <use href="/static/views/assets/images/feather-sprite.svg#flag" />
+        </svg>
+          <span>{{ .AnalysisResultData.UniqueIssuesCount }} issues</span>
+      </div>
+      <div class="info">
+        <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <use
+                href="/static/views/assets/images/feather-sprite.svg#git-branch"
+                />
+        </svg>
+          <span>{{ .VCSInfo.Branch }}</span>
+      </div>
+      <div class="info">
+        <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <use
+                href="/static/views/assets/images/feather-sprite.svg#git-commit"
+                />
+        </svg>
+          <span>{{ .VCSInfo.CommitSHA }}</span>
+      </div>
+      <div class="info">
+        <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            >
+            <use
+                href="/static/views/assets/images/feather-sprite.svg#corner-up-left"
+                />
+        </svg>
+          <span>{{ .VCSInfo.VersionDiff }}</span>
+      </div>
+    </div>
+</header>
+{{ end }}
