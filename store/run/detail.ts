@@ -174,24 +174,24 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
 export const actions: RunDetailModuleActions = {
   async [RunDetailActions.FETCH_RUN]({ commit }, args) {
     commit(RunDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(
-      RepositoryRunGQLQuery,
-      {
-        provider: this.$providerMetaMap[args.provider].value,
-        owner: args.owner,
-        name: args.name,
-        runId: args.runId
-      },
-      args.refetch
-    )
-      .then((response: GraphqlQueryResponse) => {
-        commit(RunDetailMutations.SET_RUN, response.data.repository?.run)
-        commit(RunDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(RunDetailMutations.SET_ERROR, e)
-        commit(RunDetailMutations.SET_LOADING, false)
-      })
+    try {
+      const response = await this.$fetchGraphqlData(
+        RepositoryRunGQLQuery,
+        {
+          provider: this.$providerMetaMap[args.provider].value,
+          owner: args.owner,
+          name: args.name,
+          runId: args.runId
+        },
+        args.refetch
+      )
+      commit(RunDetailMutations.SET_RUN, response.data.repository?.run)
+      commit(RunDetailMutations.SET_LOADING, false)
+      return response.data.repository?.run
+    } catch (e) {
+      commit(RunDetailMutations.SET_ERROR, e)
+      commit(RunDetailMutations.SET_LOADING, false)
+    }
   },
   async [RunDetailActions.FETCH_CHECK]({ commit }, { checkId, refetch }) {
     commit(RunDetailMutations.SET_LOADING, true)
