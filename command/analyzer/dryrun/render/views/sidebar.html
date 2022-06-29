@@ -3,7 +3,7 @@
 {{ $selectedCategory := .SelectedCategory }}
 <aside class="space-y-1 flex flex-col justify-between h-[calc(100vh-9rem)] sticky top-36 z-50">
   <div class="p-4 space-y-1">
-    <a href="?category={{ $defaultIssueCategory }}" class="sidebar {{ if eq $selectedCategory $defaultIssueCategory }} selected {{ end }}">
+    <a href="/?category={{ $defaultIssueCategory }}" class="sidebar {{ if eq $selectedCategory $defaultIssueCategory }} selected {{ end }}">
       <svg
         width="14"
         height="14"
@@ -22,7 +22,7 @@
     {{ $categoryMap := .IssueCategoryNameMap}}
     {{ range $categoryShortcode, $value := .AnalysisResultData.IssueCategoryCountMap }}
       {{ $categoryName := (index $categoryMap $categoryShortcode) }}
-        <a href="?category={{ $categoryShortcode }}" class="sidebar {{ if eq $selectedCategory $categoryShortcode }} selected {{ end }}">
+        <a href="/?category={{ $categoryShortcode }}" class="sidebar {{ if eq $selectedCategory $categoryShortcode }} selected {{ end }}">
           <svg
             width="14"
             height="14"

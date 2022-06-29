@@ -29,7 +29,7 @@
 .highlight .hll,
 .highlight .hl {
   background-color: #21242c;
-  display: inherit;
+  display: block;
 }
 .highlight .hlr {
   background-color: #582c27;
