@@ -12,6 +12,7 @@
     {{ .AnalyzerShortcode }}
   </h1>
   <div class="flex items-center gap-5">
+    {{ if not (eq .AnalysisResultData.UniqueIssuesCount 0) }}
     <div class="info">
       <svg
         width="14"
@@ -24,8 +25,17 @@
       >
         <use href="/static/assets/images/feather-sprite.svg#flag" />
       </svg>
-      <span>{{ .AnalysisResultData.UniqueIssuesCount }} issues</span>
+      <span>
+        {{ .AnalysisResultData.UniqueIssuesCount }} 
+        {{ if eq .AnalysisResultData.UniqueIssuesCount 1 }}
+          issue
+        {{ else }}
+          issues
+        {{ end }}
+      </span>
     </div>
+    {{ end }}
+    {{ if not (eq .VCSInfo.Branch "") }}
     <div class="info">
       <svg
         width="14"
@@ -42,6 +52,9 @@
       </svg>
       <span>{{ .VCSInfo.Branch }}</span>
     </div>
+    {{ end }}
+    
+    {{ if not (eq .VCSInfo.CommitSHA "") }}
     <div class="info">
       <svg
         width="14"
@@ -58,6 +71,9 @@
       </svg>
       <span>{{ .VCSInfo.CommitSHA }}</span>
     </div>
+    {{ end }}
+    
+    {{ if not (eq .VCSInfo.VersionDiff "") }}
     <div class="info">
       <svg
         width="14"
@@ -74,6 +90,7 @@
       </svg>
       <span>{{ .VCSInfo.VersionDiff }}</span>
     </div>
+    {{ end }}
   </div>
 </header>
 {{ end }}

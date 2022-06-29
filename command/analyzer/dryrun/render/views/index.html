@@ -7,6 +7,7 @@
   </head>
   {{ $defaultIssueCategory := "all" }}
   {{ $selectedCategory := .SelectedCategory }}
+  {{ $categoryMap := .IssueCategoryNameMap }}
   <body class="min-h-screen bg-ink-400 text-vanilla-100">
     {{ template "navbar" . }}
     {{ template "header" . }}
@@ -22,7 +23,7 @@
               <div class="p-2 pl-4 space-y-1">
                 <h4 class="font-medium">{{ $value.IssueMeta.Title }}</h4>
                 <div class="flex gap-5 text-sm text-vanilla-400">
-                  <div class="flex flex-wrap items-center gap-2">
+                  <div class="info">
                     <svg
                       class="flex-shrink-0"
                       width="14"
@@ -33,11 +34,11 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <use href="static/assets/images/feather-sprite.svg#tag" />
+                      <use href="/static/assets/images/feather-sprite.svg#{{ $value.IssueMeta.Category }}" />
                     </svg>
-                    <span>{{ $value.IssueMeta.Category }}</span>  
+                    <span>{{ index $categoryMap $value.IssueMeta.Category }}</span>
                   </div>
-                  <div class="flex items-center gap-2">
+                  <div class="info">
                     <svg
                       class="flex-shrink-0"
                       width="14"
@@ -48,7 +49,7 @@
                       stroke-linecap="round"
                       stroke-linejoin="round"
                     >
-                      <use href="static/assets/images/feather-sprite.svg#file-text" />
+                      <use href="/static/assets/images/feather-sprite.svg#file-text" />
                     </svg>
                     <span class="max-w-xs truncate">{{ $value.FilesInfo }}</span>
                   </div>
