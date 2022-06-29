@@ -1,0 +1,12 @@
+query recentStats($level: ReportLevel!, $objectId: ID!, $key: String!) {
+  report(level: $level, objectId: $objectId, key: $key) {
+    key
+    recentStats {
+      statLabel
+      statValue
+      trendValue
+      trendDirection
+      trendPositive
+    }
+  }
+}

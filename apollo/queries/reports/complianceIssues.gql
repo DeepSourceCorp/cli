@@ -1,0 +1,13 @@
+query complianceIssues($level: ReportLevel!, $objectId: ID!, $reportKey: String!) {
+  complianceIssues(level: $level, reportKey: $reportKey, objectId: $objectId) {
+    issueId
+    title
+    occurrence {
+      high
+      medium
+      low
+      total
+    }
+    rank
+  }
+}

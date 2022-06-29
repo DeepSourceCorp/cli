@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders IssueSeverityTag with all prop options: {"severity":"CRITICAL"} 1`] = `
+"<div class=\\"flex items-center gap-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-3 h-3 z-icon--issue-critical text-cherry\\">
+    <rect fill=\\"currentColor\\" x=\\"2.4\\" y=\\"15.2\\" width=\\"4.8\\" height=\\"6.4\\" rx=\\"1.2\\"></rect>
+    <rect fill=\\"currentColor\\" x=\\"9.6\\" y=\\"8.8\\" width=\\"4.8\\" height=\\"12.8\\" rx=\\"1.2\\"></rect>
+    <rect fill=\\"currentColor\\" x=\\"16.8\\" y=\\"2.4\\" width=\\"4.8\\" height=\\"19.2\\" rx=\\"1.2\\"></rect>
+  </svg> <span class=\\"text-sm text-vanilla-400 tracking-wide capitalize\\">Critical</span></div>"
+`;
+
+exports[`renders IssueSeverityTag with all prop options: {"severity":"MAJOR"} 1`] = `
+"<div class=\\"flex items-center gap-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-3 h-3 z-icon--issue-major text-honey\\">
+    <rect fill=\\"currentColor\\" x=\\"2.4\\" y=\\"15.2\\" width=\\"4.8\\" height=\\"6.4\\" rx=\\"1.2\\"></rect>
+    <rect fill=\\"currentColor\\" x=\\"9.6\\" y=\\"8.8\\" width=\\"4.8\\" height=\\"12.8\\" rx=\\"1.2\\"></rect>
+    <rect fill=\\"currentColor\\" x=\\"16.8\\" y=\\"2.4\\" width=\\"4.8\\" height=\\"19.2\\" rx=\\"1.2\\" fill-opacity=\\"0.2\\"></rect>
+  </svg> <span class=\\"text-sm text-vanilla-400 tracking-wide capitalize\\">Major</span></div>"
+`;
+
+exports[`renders IssueSeverityTag with all prop options: {"severity":"MINOR"} 1`] = `
+"<div class=\\"flex items-center gap-x-1.5 has-tooltip\\" data-original-title=\\"null\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-3 h-3 z-icon--issue-minor text-\\">
+    <rect fill=\\"currentColor\\" x=\\"2.4\\" y=\\"15.2\\" width=\\"4.8\\" height=\\"6.4\\" rx=\\"1.2\\"></rect>
+    <rect fill=\\"currentColor\\" x=\\"9.6\\" y=\\"8.8\\" width=\\"4.8\\" height=\\"12.8\\" rx=\\"1.2\\" fill-opacity=\\"0.2\\"></rect>
+    <rect fill=\\"currentColor\\" x=\\"16.8\\" y=\\"2.4\\" width=\\"4.8\\" height=\\"19.2\\" rx=\\"1.2\\" fill-opacity=\\"0.2\\"></rect>
+  </svg> <span class=\\"text-sm text-vanilla-400 tracking-wide capitalize\\">Minor</span></div>"
+`;

@@ -50,6 +50,7 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
+        19: '4.75rem',
         84: '21rem',
         88: '22rem',
         92: '23rem',
@@ -58,7 +59,8 @@ module.exports = {
       gridTemplateColumns: {
         support: '5fr 7fr',
         discover: '8fr 4fr',
-        sidebar: '268px 1fr'
+        sidebar: '268px 1fr',
+        'repeat-6': 'repeat(auto-fill, minmax(6rem, 1fr))'
       },
       height: {
         'nav-sidebar': 'calc(100vh - 96px)'

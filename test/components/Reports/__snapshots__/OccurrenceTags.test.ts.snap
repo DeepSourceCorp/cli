@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders OccurrenceTags with all prop options: {"high":1,"medium":2,"low":3,"total":6} 1`] = `
+"<div class=\\"flex items-center gap-x-3\\">
+  <div class=\\"hidden sm:flex items-center gap-x-1 pr-3 border-r border-r-ink-200\\">
+    <ztag-stub state=\\"default\\" iconleft=\\"issue-minor\\" size=\\"x-small\\" bgcolor=\\"transparent\\" textsize=\\"xs\\" spacing=\\"py-0 px-2\\" iconcolor=\\"current\\" class=\\"border border-ink-200 gap-x-1 has-tooltip\\" data-original-title=\\"null\\">
+      3
+    </ztag-stub>
+    <ztag-stub state=\\"default\\" iconleft=\\"issue-major\\" size=\\"x-small\\" bgcolor=\\"transparent\\" textsize=\\"xs\\" spacing=\\"py-0 px-2\\" iconcolor=\\"honey\\" class=\\"border border-ink-200 gap-x-1 has-tooltip\\" data-original-title=\\"null\\">
+      2
+    </ztag-stub>
+    <ztag-stub state=\\"default\\" iconleft=\\"issue-critical\\" size=\\"x-small\\" bgcolor=\\"transparent\\" textsize=\\"xs\\" spacing=\\"py-0 px-2\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200 gap-x-1 has-tooltip\\" data-original-title=\\"null\\">
+      1
+    </ztag-stub>
+  </div> <span class=\\"text-vanilla-100 text-sm font-semibold text-right min-w-10\\">
+    6
+  </span>
+</div>"
+`;

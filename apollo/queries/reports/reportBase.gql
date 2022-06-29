@@ -1,0 +1,7 @@
+query reportBase($level: ReportLevel!, $objectId: ID!, $key: String!) {
+  report(level: $level, objectId: $objectId, key: $key) {
+    key
+    status
+    currentValue
+  }
+}

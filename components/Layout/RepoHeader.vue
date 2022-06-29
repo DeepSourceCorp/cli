@@ -133,6 +133,7 @@ interface TabLink {
   perms?: RepoPerms[]
   pattern?: RegExp
   gateFeature?: AppFeatures[]
+  forBeta?: boolean
 }
 
 const navItems: TabLink[] = [
@@ -167,6 +168,15 @@ const navItems: TabLink[] = [
     label: 'History',
     link: 'history/runs',
     pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/)
+  },
+  {
+    icon: 'pie-chart',
+    label: 'Reports',
+    link: 'reports/owasp-top-10',
+    loginRequired: true,
+    perms: [RepoPerms.VIEW_REPORTS],
+    pattern: new RegExp(/^provider-owner-repo-reports-*/),
+    forBeta: true
   },
   {
     icon: 'settings',
@@ -318,7 +328,9 @@ export default class RepoHeader extends mixins(
       ? this.$gateKeeper.repo(item.perms, this.repoPerms.permission)
       : true
 
-    return autofixAllowedForUser && autofixAllowedForProvider
+    const allowForbeta = item.forBeta ? Boolean(this.viewer.isBetaTester) : true
+
+    return autofixAllowedForUser && autofixAllowedForProvider && allowForbeta
   }
 }
 </script>

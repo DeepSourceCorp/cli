@@ -143,6 +143,27 @@ function getDateDiffInDays(
   return includeCurrentDay ? date1.diff(date2, 'days') + 1 : date1.diff(date2, 'days')
 }
 
+/**
+ * Get the date in ISO or given format of any X amount of time ago from a reference date
+ *
+ * @param {number|string} referenceDate - Date to compare to
+ * @param {DurationTypeT} differenceType - The type of time difference to use e.g. years, months, days, hours
+ * @param {number} difference - The amount of time difference to use
+ * @param {string} format - The format to return the date in
+ *
+ * @returns string
+ */
+function getDateFromXAgo(
+  referenceDate: number | string,
+  differenceType: DurationTypeT,
+  difference: number,
+  format?: string
+): string {
+  const pastdate = dayjs(referenceDate).subtract(dayjs.duration({ [differenceType]: difference }))
+
+  return format ? pastdate.format(format) : pastdate.format()
+}
+
 const { duration: createDuration } = dayjs
 
 export {
@@ -156,5 +177,6 @@ export {
   getNextYear,
   getDateDiffInDays,
   createDuration,
-  DurationTypeT
+  DurationTypeT,
+  getDateFromXAgo
 }

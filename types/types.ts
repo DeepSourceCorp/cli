@@ -864,6 +864,22 @@ export type CommitConfigToVcsPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type ComplianceIssue = {
+  __typename?: 'ComplianceIssue';
+  issueId?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  occurrence?: Maybe<ComplianceIssueOccurrence>;
+  rank?: Maybe<Scalars['String']>;
+};
+
+export type ComplianceIssueOccurrence = {
+  __typename?: 'ComplianceIssueOccurrence';
+  high?: Maybe<Scalars['Int']>;
+  medium?: Maybe<Scalars['Int']>;
+  low?: Maybe<Scalars['Int']>;
+  total?: Maybe<Scalars['Int']>;
+};
+
 export type ConfigTemplate = MaskPrimaryKeyNode & {
   __typename?: 'ConfigTemplate';
   id: Scalars['ID'];
@@ -2168,6 +2184,7 @@ export type Issue = MaskPrimaryKeyNode & {
   autofixTitle?: Maybe<Scalars['String']>;
   isRecommended: Scalars['Boolean'];
   weight: Scalars['Int'];
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
   starIssueInAnalyzers: AnalyzerConnection;
   issuePriorities: IssuePriorityConnection;
   checkIssues: CheckIssueConnection;
@@ -3321,6 +3338,9 @@ export type Query = {
   trendingRepositories?: Maybe<RepositoryConnection>;
   editorsPickRepository?: Maybe<Repository>;
   discoverRepositories?: Maybe<RepositoryConnection>;
+  report?: Maybe<Report>;
+  reports?: Maybe<Array<Maybe<Report>>>;
+  complianceIssues?: Maybe<Array<Maybe<ComplianceIssue>>>;
   context?: Maybe<Context>;
   node?: Maybe<MaskPrimaryKeyNode>;
 };
@@ -3586,8 +3606,37 @@ export type QueryDiscoverRepositoriesArgs = {
 };
 
 
+export type QueryReportArgs = {
+  level?: Maybe<ReportLevel>;
+  key?: Maybe<Scalars['String']>;
+  objectId?: Maybe<Scalars['ID']>;
+};
+
+
+export type QueryReportsArgs = {
+  level?: Maybe<ReportLevel>;
+  objectId?: Maybe<Scalars['ID']>;
+};
+
+
+export type QueryComplianceIssuesArgs = {
+  level?: Maybe<ReportLevel>;
+  reportKey?: Maybe<Scalars['String']>;
+  objectId?: Maybe<Scalars['ID']>;
+};
+
+
 export type QueryNodeArgs = {
   id: Scalars['ID'];
+};
+
+export type RecentStat = {
+  __typename?: 'RecentStat';
+  statLabel?: Maybe<Scalars['String']>;
+  statValue?: Maybe<Scalars['Int']>;
+  trendValue?: Maybe<Scalars['Int']>;
+  trendDirection?: Maybe<TrendDirection>;
+  trendPositive?: Maybe<Scalars['Boolean']>;
 };
 
 export type RefreshToken = {
@@ -3668,6 +3717,23 @@ export type RemoveUserFromGroupPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type Report = {
+  __typename?: 'Report';
+  key?: Maybe<Scalars['String']>;
+  type?: Maybe<ReportType>;
+  title?: Maybe<Scalars['String']>;
+  status?: Maybe<ReportStatus>;
+  currentValue?: Maybe<Scalars['Int']>;
+  historicalValues?: Maybe<Scalars['GenericScalar']>;
+  recentStats?: Maybe<Array<Maybe<RecentStat>>>;
+};
+
+
+export type ReportHistoricalValuesArgs = {
+  startDate?: Maybe<Scalars['Date']>;
+  endDate?: Maybe<Scalars['Date']>;
+};
+
 export type ReportIssueFalsePositiveInput = {
   checkIssueId: Scalars['ID'];
   comment?: Maybe<Scalars['String']>;
@@ -3679,6 +3745,23 @@ export type ReportIssueFalsePositivePayload = {
   ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
+
+export enum ReportLevel {
+  Repository = 'REPOSITORY',
+  Owner = 'OWNER',
+  Enterprise = 'ENTERPRISE'
+}
+
+export enum ReportStatus {
+  Passing = 'PASSING',
+  Failing = 'FAILING',
+  Noop = 'NOOP'
+}
+
+export enum ReportType {
+  Compliance = 'COMPLIANCE',
+  Insight = 'INSIGHT'
+}
 
 export type Repository = MaskPrimaryKeyNode & {
   __typename?: 'Repository';
@@ -4127,6 +4210,7 @@ export type RepositoryIssue = MaskPrimaryKeyNode & {
   silenceRules?: Maybe<Array<Maybe<SilenceRule>>>;
   newVcsIssueUrl?: Maybe<Scalars['String']>;
   lastActivity?: Maybe<Scalars['String']>;
+  tags?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -4943,6 +5027,11 @@ export type TransformerToolEdge = {
   node?: Maybe<TransformerTool>;
   cursor: Scalars['String'];
 };
+
+export enum TrendDirection {
+  Up = 'UP',
+  Down = 'DOWN'
+}
 
 export enum TrendType {
   Yearly = 'YEARLY',
@@ -8313,14 +8402,14 @@ export type Unnamed_113_Query = (
   )> }
 );
 
-export type OwneeInstalledIntegrationQueryVariables = Exact<{
+export type OwnerInstalledIntegrationQueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
   feature?: Maybe<IntegrationFeature>;
 }>;
 
 
-export type OwneeInstalledIntegrationQuery = (
+export type OwnerInstalledIntegrationQuery = (
   { __typename?: 'Query' }
   & { owner?: Maybe<(
     { __typename?: 'Owner' }
@@ -8578,6 +8667,76 @@ export type AccessTokenListQuery = (
         )> }
       )>> }
     )> }
+  )> }
+);
+
+export type ComplianceIssuesQueryVariables = Exact<{
+  level: ReportLevel;
+  objectId: Scalars['ID'];
+  reportKey: Scalars['String'];
+}>;
+
+
+export type ComplianceIssuesQuery = (
+  { __typename?: 'Query' }
+  & { complianceIssues?: Maybe<Array<Maybe<(
+    { __typename?: 'ComplianceIssue' }
+    & Pick<ComplianceIssue, 'issueId' | 'title' | 'rank'>
+    & { occurrence?: Maybe<(
+      { __typename?: 'ComplianceIssueOccurrence' }
+      & Pick<ComplianceIssueOccurrence, 'high' | 'medium' | 'low' | 'total'>
+    )> }
+  )>>> }
+);
+
+export type HistoricalValuesQueryVariables = Exact<{
+  level: ReportLevel;
+  objectId: Scalars['ID'];
+  key: Scalars['String'];
+  startDate: Scalars['Date'];
+  endDate: Scalars['Date'];
+}>;
+
+
+export type HistoricalValuesQuery = (
+  { __typename?: 'Query' }
+  & { report?: Maybe<(
+    { __typename?: 'Report' }
+    & Pick<Report, 'key' | 'historicalValues'>
+  )> }
+);
+
+export type RecentStatsQueryVariables = Exact<{
+  level: ReportLevel;
+  objectId: Scalars['ID'];
+  key: Scalars['String'];
+}>;
+
+
+export type RecentStatsQuery = (
+  { __typename?: 'Query' }
+  & { report?: Maybe<(
+    { __typename?: 'Report' }
+    & Pick<Report, 'key'>
+    & { recentStats?: Maybe<Array<Maybe<(
+      { __typename?: 'RecentStat' }
+      & Pick<RecentStat, 'statLabel' | 'statValue' | 'trendValue' | 'trendDirection' | 'trendPositive'>
+    )>>> }
+  )> }
+);
+
+export type ReportBaseQueryVariables = Exact<{
+  level: ReportLevel;
+  objectId: Scalars['ID'];
+  key: Scalars['String'];
+}>;
+
+
+export type ReportBaseQuery = (
+  { __typename?: 'Query' }
+  & { report?: Maybe<(
+    { __typename?: 'Report' }
+    & Pick<Report, 'key' | 'status' | 'currentValue'>
   )> }
 );
 
@@ -8894,7 +9053,7 @@ export type Unnamed_125_Query = (
         { __typename?: 'RepositoryIssueEdge' }
         & { node?: Maybe<(
           { __typename?: 'RepositoryIssue' }
-          & Pick<RepositoryIssue, 'id' | 'issueType' | 'title' | 'shortcode' | 'description' | 'occurrenceCount' | 'createdAt' | 'analyzerName' | 'analyzerLogo' | 'seenIn' | 'firstSeen' | 'lastSeen' | 'modifiedAt' | 'pastValue' | 'autofixAvailable' | 'raisedInFiles'>
+          & Pick<RepositoryIssue, 'id' | 'issueType' | 'title' | 'shortcode' | 'description' | 'occurrenceCount' | 'createdAt' | 'analyzerName' | 'analyzerLogo' | 'seenIn' | 'firstSeen' | 'lastSeen' | 'modifiedAt' | 'pastValue' | 'autofixAvailable' | 'raisedInFiles' | 'severity'>
         )> }
       )>> }
     )> }

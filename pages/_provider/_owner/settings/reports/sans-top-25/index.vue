@@ -1,0 +1,166 @@
+<template>
+  <div class="flex flex-col gap-y-4">
+    <chart-container>
+      <template #report-stats>
+        <chart-stat title="Status">
+          <div
+            v-if="reportsDataLoading"
+            class="h-5 mt-px w-full bg-ink-300 animate-pulse rounded-sm"
+          ></div>
+          <template v-else>
+            <span
+              class="h-2 rounded-full w-2"
+              :class="compliancePassed ? 'bg-juniper' : 'bg-cherry'"
+            />
+            <span
+              class="uppercase tracking-wider font-semibold text-sm"
+              :class="compliancePassed ? 'text-juniper' : 'text-cherry'"
+            >
+              {{ compliancePassed ? 'Passing' : 'Failing' }}
+            </span>
+          </template>
+        </chart-stat>
+
+        <chart-stat title="Active Issues" :value="currentVal">
+          <div
+            v-if="reportsDataLoading"
+            class="h-5 mt-px w-full bg-ink-300 animate-pulse rounded-sm"
+          ></div>
+        </chart-stat>
+      </template>
+
+      <template #report-control>
+        <date-range-picker
+          v-model="dateRangeFilter"
+          :date-range-options="dateRangeOptions"
+          @change="setChartData"
+        />
+      </template>
+
+      <div
+        v-if="historicalValuesLoading"
+        class="bg-ink-300 animate-pulse mx-6 mt-6 mb-5 h-64 rounded-lg"
+      ></div>
+
+      <z-chart
+        v-if="datasets.length && !historicalValuesLoading"
+        :data-sets="datasets"
+        :labels="labels"
+        :colors="['cherry-500']"
+        type="line"
+      />
+    </chart-container>
+
+    <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
+
+    <div class="rounded-lg border border-ink-200 overflow-x-auto">
+      <z-table class="text-vanilla-100 border-none">
+        <template #head>
+          <z-table-row class="text-vanilla-400 text-xs font-semibold uppercase tracking-wider">
+            <z-table-cell class="w-16 flex-none text-left"> Rank </z-table-cell>
+            <z-table-cell class="w-20 sm:w-28 flex-none text-left"> Id </z-table-cell>
+            <z-table-cell class="text-left"> Name </z-table-cell>
+            <z-table-cell class="text-right"> Occurrences </z-table-cell>
+          </z-table-row>
+        </template>
+        <template #body>
+          <template v-if="complianceIssuesLoading">
+            <div
+              v-for="index in 25"
+              :key="index"
+              class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+            ></div>
+          </template>
+          <template v-else>
+            <z-table-row
+              v-for="issue in complianceIssueList"
+              :key="issue.issueId"
+              class="text-vanilla-100 text-sm hover:bg-ink-300"
+            >
+              <z-table-cell class="w-16 text-vanilla-400 font-semibold flex-none text-left">
+                {{ issue.rank }}
+              </z-table-cell>
+              <z-table-cell
+                class="w-20 sm:w-28 flex-none text-vanilla-400 font-semibold text-left whitespace-nowrap"
+              >
+                {{ issue.issueId }}
+              </z-table-cell>
+              <z-table-cell class="whitespace-nowrap sm:whitespace-normal font-normal text-left">
+                <p class="sm:max-w-lg">{{ issue.title }}</p>
+              </z-table-cell>
+              <z-table-cell class="font-semibold text-right sm:flex-initial">
+                {{ issue.occurrence.total }}
+              </z-table-cell>
+            </z-table-row>
+          </template>
+        </template>
+      </z-table>
+    </div>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, mixins } from 'nuxt-property-decorator'
+import { ZChart, ZTable, ZTableCell, ZTableRow } from '@deepsourcelabs/zeal'
+
+import { ReportPageT } from '~/types/reportTypes'
+
+import ReportMixin from '~/mixins/reportMixin'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+
+import { ReportLevel, ReportStatus } from '~/types/types'
+
+/**
+ * Page for displaying the current and historical data of SANS-top-25 issues.
+ */
+@Component({
+  layout: 'dashboard',
+  components: { ZChart, ZTable, ZTableCell, ZTableRow }
+})
+export default class OwnerSans extends mixins(OwnerDetailMixin, ReportMixin) {
+  /**
+   * Fetch recent stats, compliance issues and trigger chart data fetching.
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    const { owner, provider } = this.$route.params
+    if (!this.owner.id) {
+      await this.fetchOwnerDetails({ login: owner, provider })
+    }
+
+    await Promise.all([
+      this.fetchReportBase(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25),
+      this.fetchRecentStats(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25),
+      this.fetchComplianceIssues(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25),
+      this.setChartData()
+    ])
+  }
+
+  /**
+   * fetch historical values and set the chart dataset
+   *
+   * @return {Promise<void>}
+   */
+  async setChartData(): Promise<void> {
+    await this.fetchHistoricalValues(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25)
+
+    if (Array.isArray(this.historicalValues.values.count)) {
+      this.datasets = [
+        {
+          name: 'Active Issues',
+          values: this.historicalValues.values.count
+        }
+      ]
+    }
+  }
+
+  get compliancePassed(): boolean {
+    return this.report?.status === ReportStatus.Passing
+  }
+
+  get currentVal(): number {
+    return this.report?.currentValue ?? 0
+  }
+}
+</script>

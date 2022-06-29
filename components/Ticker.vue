@@ -15,12 +15,15 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { shortenLargeNumber } from '@/utils/string'
 import { ZIcon } from '@deepsourcelabs/zeal'
 
+/**
+ * Ticker component for showing trends.
+ */
 @Component({
   components: {
     ZIcon
   }
 })
-export default class CodeQualityGraph extends Vue {
+export default class Ticker extends Vue {
   @Prop({ default: null })
   trendValue: number | string
 

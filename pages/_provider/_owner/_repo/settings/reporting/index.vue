@@ -26,7 +26,7 @@
         </p>
       </div>
       <z-table v-if="repoSettings.length" class="rounded-md text-vanilla-100">
-        <template v-slot:head>
+        <template #head>
           <z-table-row>
             <z-table-cell
               v-for="head in headerData"
@@ -37,7 +37,7 @@
             >
           </z-table-row>
         </template>
-        <template v-slot:body>
+        <template #body>
           <template v-if="$fetchState.pending">
             <div
               v-for="index in 8"
@@ -87,7 +87,7 @@
         </template>
       </z-table>
       <z-table v-if="issuePrioritySettings.length" class="mt-4 text-vanilla-100">
-        <template v-slot:head>
+        <template #head>
           <z-table-row>
             <z-table-cell
               v-for="head in priorityHeaderData"
@@ -98,7 +98,7 @@
             >
           </z-table-row>
         </template>
-        <template v-slot:body>
+        <template #body>
           <template v-if="$fetchState.pending">
             <div
               v-for="index in 3"
@@ -236,7 +236,6 @@ import {
 import { InfoBanner } from '@/components/Settings/index'
 import { RepoPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import { IssueType } from '~/components/Repository'
 
 const repoStore = namespace('repository/detail')
 

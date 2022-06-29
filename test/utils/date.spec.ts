@@ -8,7 +8,9 @@ import {
   getNextMonth,
   getNextYear,
   getDateDiffInDays,
-  createDuration
+  createDuration,
+  getDateFromXAgo,
+  DurationTypeT
 } from '~/utils/date'
 
 test('[[ getHumanizedTimeFromNow ]]', () => {
@@ -118,4 +120,15 @@ test('[[ createDuration ]]', () => {
   expect(createDuration(60, 'days').months()).toBe(2)
   expect(createDuration(90, 'days').months()).toBe(3)
   expect(createDuration(120, 'days').months()).toBe(4)
+})
+
+test('[[ getDateFromXAgo ]]', () => {
+  const today = new Date().toISOString()
+  const yesterday = getDateFromXAgo(today, DurationTypeT.days, 1)
+  const weekAgo = getDateFromXAgo(today, DurationTypeT.weeks, 1)
+  const yearAgo = getDateFromXAgo(today, DurationTypeT.years, 1)
+
+  expect(getDateDiffInDays(today, yesterday)).toBe(1)
+  expect(getDateDiffInDays(today, weekAgo)).toBe(7)
+  expect(getDateDiffInDays(today, yearAgo)).toBe(365)
 })

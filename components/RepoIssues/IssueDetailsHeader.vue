@@ -9,6 +9,7 @@
       <!-- Meta data -->
       <div class="flex flex-wrap items-center gap-x-4 gap-y-2 leading-none">
         <issue-type v-if="issueType" :issueType="issueType"></issue-type>
+        <issue-severity-tag v-if="severity && issueType === 'security'" :severity="severity" />
         <div v-if="analyzerName" class="flex items-center space-x-2">
           <z-icon :icon="analyzerShortcode"></z-icon>
           <span class="text-sm">{{ analyzerName }}</span>
@@ -44,6 +45,22 @@
             :show-tooltip="true"
           />
         </template>
+        <div v-if="tags.length" class="flex items-center justify-between gap-x-1">
+          <nuxt-link
+            v-for="tag in tags"
+            :key="tag"
+            :to="`${$generateRoute(['issues'])}?category=all&q=tag:${tag}`"
+            class="flex items-center gap-x-1 uppercase border border-ink-200 rounded-full px-1.5 py-1"
+          >
+            <span
+              class="h-2 w-2 rounded-full"
+              :style="{
+                background: generateColorFromTag(tag)
+              }"
+            ></span>
+            <span class="text-xxs text-vanilla-400 tracking-wide font-medium"> {{ tag }} </span>
+          </nuxt-link>
+        </div>
       </div>
     </div>
   </div>
@@ -54,10 +71,10 @@ import dayjs from 'dayjs'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import IssueType from '@/components/Repository/IssueType.vue'
 import { PriorityTypeBadge, PriorityTypeSelect } from '@/components/IssuePriority/index'
-
 import { formatDate } from '@/utils/date'
 import { escapeHtml } from '~/utils/string'
-import { IssuePriority } from '~/types/types'
+import { IssuePriority, IssueSeverity } from '~/types/types'
+import generateColorFromTag from '~/utils/ui'
 
 @Component({
   components: {
@@ -69,7 +86,8 @@ import { IssuePriority } from '~/types/types'
   layout: 'repository',
   methods: {
     escapeHtml,
-    formatDate
+    formatDate,
+    generateColorFromTag
   }
 })
 export default class IssueDetailsHeader extends Vue {
@@ -96,6 +114,12 @@ export default class IssueDetailsHeader extends Vue {
 
   @Prop()
   issuePriority: IssuePriority | null
+
+  @Prop()
+  tags: Array<string>
+
+  @Prop()
+  severity: IssueSeverity
 
   @Prop({ default: false })
   canEditPriority!: boolean

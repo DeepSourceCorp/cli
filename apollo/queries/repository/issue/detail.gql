@@ -35,6 +35,8 @@ query($repositoryId: ID!, $shortcode: String!) {
             avatar
           }
         }
+        tags
+        severity
       }
     }
   }

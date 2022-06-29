@@ -92,7 +92,8 @@ export interface LinkOptions {
         TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE,
         TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR,
         TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE,
-        TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY
+        TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY,
+        TeamPerms.VIEW_REPORTS
       ]
     }
   }
@@ -156,6 +157,13 @@ export default class TeamSettings extends mixins(
         label: 'Integrations',
         routeName: 'provider-owner-settings-integrations',
         validator: this.canViewIntegrations
+      },
+      {
+        name: 'reports',
+        icon: 'pie-chart',
+        label: 'Reports',
+        routeName: 'provider-owner-settings-reports',
+        validator: this.canViewReports
       }
     ]
   }
@@ -229,6 +237,13 @@ export default class TeamSettings extends mixins(
 
   get canViewAccessControl(): boolean {
     return this.$gateKeeper.team(TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD, this.teamPerms.permission)
+  }
+
+  get canViewReports(): boolean {
+    return (
+      this.$gateKeeper.team(TeamPerms.VIEW_REPORTS, this.teamPerms.permission) &&
+      Boolean(this.viewer.isBetaTester)
+    )
   }
 
   get canGenerateSSHKeyPair(): boolean {

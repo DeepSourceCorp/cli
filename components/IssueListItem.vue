@@ -16,6 +16,7 @@
         <div class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
           <!-- Issue type -->
           <issue-type :issue-type="issueType" spacing="gap-x-2" />
+
           <!-- First seen and last seen -->
           <div class="flex items-center gap-x-2">
             <z-icon icon="clock" size="x-small" color="vanilla-400" />
@@ -29,8 +30,16 @@
               </span>
             </span>
           </div>
-          <!-- Occurrences in files -->
+
+          <!-- Issue Severity -->
+          <issue-severity-tag
+            v-if="issueType === 'security'"
+            :severity="severity"
+            spacing="gap-x-2"
+          />
         </div>
+
+        <!-- Occurrences in files -->
         <div
           class="flex items-baseline w-full text-sm leading-6 gap-x-2 text-vanilla-400 sm:w-auto"
         >
@@ -44,6 +53,13 @@
       <!-- Place content on the same line if not showing first and last seen information -->
       <div v-else class="flex flex-col md:flex-row md:flex-wrap gap-x-4">
         <issue-type :issue-type="issueType" spacing="gap-x-2" />
+
+        <!-- Issue Severity -->
+        <issue-severity-tag
+          v-if="issueType === 'security'"
+          :severity="severity"
+          spacing="gap-x-2"
+        />
 
         <div :key="issueType" class="flex items-center gap-x-2">
           <z-icon icon="file-text" size="x-small" color="vanilla-400 flex-shrink-0" />
@@ -112,9 +128,10 @@ import dayjs from 'dayjs'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { BaseCard } from '@/components/History'
-import IssueType from '@/components/Repository/IssueType.vue'
+import { IssueType } from '@/components/Repository'
 import { formatDate } from '~/utils/date'
 import { escapeHtml, formatIntl, shortenLargeNumber } from '~/utils/string'
+import { IssueSeverity } from '~/types/types'
 
 const PERCENTAGE = 100
 
@@ -138,6 +155,9 @@ export default class IssueListItem extends Vue {
 
   @Prop({ default: '' })
   issueType!: string
+
+  @Prop()
+  severity: IssueSeverity
 
   @Prop({ default: '' })
   modifiedAt!: string

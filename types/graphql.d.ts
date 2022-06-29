@@ -1300,7 +1300,7 @@ declare module '*/maxUsagePercentage.gql' {
 declare module '*/ownerInstalledIntegration.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const OwneeInstalledIntegration: DocumentNode;
+  export const OwnerInstalledIntegration: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1392,6 +1392,42 @@ declare module '*/accessTokenList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const accessTokenList: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/complianceIssues.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const complianceIssues: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/historicalValues.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const historicalValues: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/recentStats.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const recentStats: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/reportBase.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const reportBase: DocumentNode;
 
   export default defaultDocument;
 }

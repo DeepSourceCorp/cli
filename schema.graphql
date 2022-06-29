@@ -612,6 +612,20 @@ type CommitConfigToVCSPayload {
   clientMutationId: String
 }
 
+type ComplianceIssue {
+  issueId: String
+  title: String
+  occurrence: ComplianceIssueOccurrence
+  rank: String
+}
+
+type ComplianceIssueOccurrence {
+  high: Int
+  medium: Int
+  low: Int
+  total: Int
+}
+
 type ConfigTemplate implements MaskPrimaryKeyNode {
   id: ID!
   createdAt: DateTime!
@@ -1426,6 +1440,7 @@ type Issue implements MaskPrimaryKeyNode {
   autofixTitle: String
   isRecommended: Boolean!
   weight: Int!
+  tags: [String]
   starIssueInAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
@@ -1823,8 +1838,19 @@ type Query {
   trendingRepositories(count: Int = 5, offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   editorsPickRepository: Repository
   discoverRepositories(preferredTechnologies: [ID] = [], q: String = "", offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
+  report(level: ReportLevel, key: String, objectId: ID): Report
+  reports(level: ReportLevel, objectId: ID): [Report]
+  complianceIssues(level: ReportLevel, reportKey: String, objectId: ID): [ComplianceIssue]
   context: Context
   node(id: ID!): MaskPrimaryKeyNode
+}
+
+type RecentStat {
+  statLabel: String
+  statValue: Int
+  trendValue: Int
+  trendDirection: TrendDirection
+  trendPositive: Boolean
 }
 
 type RefreshToken {
@@ -1898,6 +1924,16 @@ type RemoveUserFromGroupPayload {
   clientMutationId: String
 }
 
+type Report {
+  key: String
+  type: ReportType
+  title: String
+  status: ReportStatus
+  currentValue: Int
+  historicalValues(startDate: Date, endDate: Date): GenericScalar
+  recentStats: [RecentStat]
+}
+
 input ReportIssueFalsePositiveInput {
   checkIssueId: ID!
   comment: String
@@ -1907,6 +1943,23 @@ input ReportIssueFalsePositiveInput {
 type ReportIssueFalsePositivePayload {
   ok: Boolean
   clientMutationId: String
+}
+
+enum ReportLevel {
+  REPOSITORY
+  OWNER
+  ENTERPRISE
+}
+
+enum ReportStatus {
+  PASSING
+  FAILING
+  NOOP
+}
+
+enum ReportType {
+  COMPLIANCE
+  INSIGHT
 }
 
 type Repository implements MaskPrimaryKeyNode {
@@ -2088,6 +2141,7 @@ type RepositoryIssue implements MaskPrimaryKeyNode {
   silenceRules: [SilenceRule]
   newVcsIssueUrl: String
   lastActivity: String
+  tags: [String]
 }
 
 type RepositoryIssueConnection {
@@ -2710,6 +2764,11 @@ type TransformerToolConnection {
 type TransformerToolEdge {
   node: TransformerTool
   cursor: String!
+}
+
+enum TrendDirection {
+  UP
+  DOWN
 }
 
 enum TrendType {

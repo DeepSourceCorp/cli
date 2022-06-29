@@ -1,0 +1,12 @@
+query historicalValues(
+  $level: ReportLevel!
+  $objectId: ID!
+  $key: String!
+  $startDate: Date!
+  $endDate: Date!
+) {
+  report(level: $level, objectId: $objectId, key: $key) {
+    key
+    historicalValues(startDate: $startDate, endDate: $endDate)
+  }
+}

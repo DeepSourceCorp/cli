@@ -11,6 +11,7 @@ query($shortcode: String!) {
     }
     issueType
     shortcode
-    title
+    tags
+    severity
   }
 }
