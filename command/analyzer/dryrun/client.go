@@ -29,6 +29,7 @@ func (a *AnalyzerDryRun) createDockerClient() error {
 
 	a.Client = &docker.DockerClient{
 		ImageName:      dockerFileName,
+		ImagePlatform:  a.DockerImagePlatform,
 		ImageTag:       docker.GenerateImageVersion(7),
 		ContainerName:  analyzerName + "-" + docker.GenerateImageVersion(7),
 		DockerfilePath: dockerFilePath,
