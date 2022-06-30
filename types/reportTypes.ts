@@ -15,12 +15,12 @@ export enum ReportPageT {
 export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   [ReportPageT.OWASP_TOP_10]: {
     title: 'OWASP Top 10',
-    description: 'Compliance with OWASP Top 10 recommendations',
+    description: 'Overview of OWASP Top 10 security risks in your code.',
     hasIssueTable: true
   },
   [ReportPageT.SANS_TOP_25]: {
     title: 'SANS Top 25',
-    description: 'Compliance with SANS Top 25 recommendations',
+    description: 'Overview of CWE/SANS Top 25 most dangerous software errors in your code.',
     hasIssueTable: true
   }
 }

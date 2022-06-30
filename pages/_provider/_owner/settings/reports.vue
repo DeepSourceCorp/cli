@@ -32,7 +32,11 @@
       </template>
     </nav>
     <div class="flex flex-col p-4 gap-y-2">
-      <page-title :title="reportTitle" class="flex-col md:flex-row gap-y-4">
+      <page-title
+        :title="reportTitle"
+        class="flex-col md:flex-row gap-y-4"
+        description-width-class="max-w-xl"
+      >
         <template slot="description">
           <p class="text-vanilla-400 mt-2 text-sm">{{ reportDescription }}</p>
         </template>
