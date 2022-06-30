@@ -21,7 +21,7 @@ type IRenderServer interface {
  * /issues?category={issue_category}  */
 
 // getEchoContext returns a new Echo server instance.
-func (r *ResultRenderOpts) GetEchoContext() *echo.Echo {
+func (*ResultRenderOpts) GetEchoContext() *echo.Echo {
 	e := echo.New()
 	e.HideBanner = true
 	return e
