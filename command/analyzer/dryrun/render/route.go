@@ -55,9 +55,9 @@ func (r *ResultRenderOpts) IssuesHandler(c echo.Context) error {
 	err := r.Template.ExecuteTemplate(c.Response().Writer, "index.html", *r)
 	if err != nil {
 		fmt.Println(err)
-		return c.String(http.StatusOK, "Occurence page served.")
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
-	return c.String(http.StatusOK, "Issues page served.")
+	return c.NoContent(http.StatusOK)
 }
 
 // IssuesOccurencesHandler handles serving the issue occurences.
@@ -72,7 +72,7 @@ func (r *ResultRenderOpts) IssueOccurencesHandler(c echo.Context) error {
 	err := r.Template.ExecuteTemplate(c.Response().Writer, "occurence.html", *r)
 	if err != nil {
 		fmt.Println(err)
-		return c.String(http.StatusOK, "Occurence page served.")
+		return c.String(http.StatusInternalServerError, err.Error())
 	}
-	return c.String(http.StatusOK, "Occurence page served.")
+	return c.NoContent(http.StatusOK)
 }
