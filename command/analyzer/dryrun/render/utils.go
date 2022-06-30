@@ -3,7 +3,6 @@ package render
 import (
 	"bytes"
 	"fmt"
-	"html"
 	"html/template"
 	"net"
 	"os"
@@ -211,7 +210,8 @@ func getIssueMeta(cwd, issueCode string) (types.AnalyzerIssue, error) {
 	if err := goldmark.Convert([]byte(analyzerIssue.Description), &buf); err != nil {
 		return types.AnalyzerIssue{}, err
 	}
-	analyzerIssue.HTMLDescription = template.HTML(html.UnescapeString(buf.String()))
 
+	// Goldmark already provides a secure HTML. Ref: https://github.com/yuin/goldmark#security
+	analyzerIssue.HTMLDescription = template.HTML(buf.String()) // skipcq: GSC-G203
 	return analyzerIssue, nil
 }
