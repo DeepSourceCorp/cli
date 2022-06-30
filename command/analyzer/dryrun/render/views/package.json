@@ -1,0 +1,14 @@
+{
+  "name": "dry-run",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Shivam Mishra <shivam@deepsource.io>",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./assets/cli.css -o ./assets/deepsource-cli.css --watch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.2",
+    "tailwindcss": "^3.1.4"
+  }
+}

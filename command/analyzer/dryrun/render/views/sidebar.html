@@ -1,0 +1,95 @@
+{{ define "sidebar" }}
+{{ $defaultIssueCategory := "all" }}
+{{ $selectedCategory := .SelectedCategory }}
+<aside class="space-y-1 flex flex-col justify-between h-[calc(100vh-9rem)] sticky top-36 z-50">
+  <div class="p-4 space-y-1">
+    <a href="/?category={{ $defaultIssueCategory }}" class="sidebar {{ if eq $selectedCategory $defaultIssueCategory }} selected {{ end }}">
+      <svg
+        width="14"
+        height="14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <use href="/static/assets/images/feather-sprite.svg#list" />
+      </svg>
+      <span class="label">All issues</span>
+      <span class="tag"> {{ .AnalysisResultData.TotalOccurences }} </span>
+    </a>
+
+    {{ $categoryMap := .IssueCategoryNameMap}}
+    {{ range $categoryShortcode, $value := .AnalysisResultData.IssueCategoryCountMap }}
+      {{ $categoryName := (index $categoryMap $categoryShortcode) }}
+        <a href="/?category={{ $categoryShortcode }}" class="sidebar {{ if eq $selectedCategory $categoryShortcode }} selected {{ end }}">
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <use href="/static/assets/images/feather-sprite.svg#{{ $categoryShortcode }}" />
+          </svg>
+          <span class="label">{{ $categoryName }}</span>
+          <span class="tag"> {{ $value }} </span>
+        </a>
+    {{ end }}
+  </div>
+  <div class="p-4 border-t border-ink-200">
+    <h5 class="mb-3 text-xs tracking-wider uppercase text-vanilla-400">
+      Run Summary
+    </h5>
+    <ul class="space-y-2 text-sm list-none text-vanilla-400">
+      <li class="flex items-center gap-2.5">
+        <svg 
+          class="flex-shrink-0"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <use href="/static/assets/images/feather-sprite.svg#clock"/>
+        </svg>
+        <span class="truncate">{{ .Summary.TimeSinceRun }}</span>
+      </li>
+      <li class="flex items-center gap-2.5">
+        <svg 
+          class="flex-shrink-0"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <use href="/static/assets/images/feather-sprite.svg#folder"/>
+        </svg>
+        <span class="truncate">{{ .AnalysisResultData.SourcePath }}</span>
+      </li>
+      <li class="flex items-center gap-2.5">
+        <svg 
+          class="flex-shrink-0"
+          width="16"
+          height="16"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <use href="/static/assets/images/feather-sprite.svg#stopwatch"/>
+        </svg>
+        <span class="truncate">{{ .Summary.RunDuration}}</span>
+      </li>
+    </ul>
+  </div>
+</aside>
+{{ end }}

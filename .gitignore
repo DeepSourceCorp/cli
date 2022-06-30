@@ -10,3 +10,6 @@ dist
 # Test coverage reports
 coverage.out
 cover.out
+
+# node
+node_modules

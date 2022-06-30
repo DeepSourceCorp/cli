@@ -74,6 +74,7 @@ require (
 	github.com/hako/durafmt v0.0.0-20210608085754-5c1018a4e16b
 	github.com/labstack/echo/v4 v4.7.2
 	github.com/morikuni/aec v1.0.0
+	github.com/yuin/goldmark v1.4.12
 )
 
 require (

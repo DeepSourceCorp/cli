@@ -15,7 +15,10 @@ import (
 	"github.com/pterm/pterm"
 )
 
-//go:embed views/*.html views/**/*.css
+/* Embedding the required files in views folder
+   into the binary using go embed */
+
+//go:embed views/*.html views/assets
 var tmplFS embed.FS
 
 // renderResultsOnBrowser renders the results on the browser through a local server,
