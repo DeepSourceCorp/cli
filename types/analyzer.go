@@ -4,6 +4,8 @@
  * ============================================================= */
 package types
 
+import "html/template"
+
 /* ====================
  * Analyzer TOML Types
  * ==================== */
@@ -57,8 +59,9 @@ type AnalyzerTOML struct {
 
 // Analyzer issue type.
 type AnalyzerIssue struct {
-	Shortcode   string `validate:"omitempty"`
-	Title       string `toml:"title" json:"title" validate:"required"`
-	Description string `toml:"description" json:"description" validate:"required"`
-	Category    string `toml:"category" json:"category" validate:"required,category"`
+	Shortcode       string `validate:"omitempty"`
+	Title           string `toml:"title" json:"title" validate:"required"`
+	Description     string `toml:"description" json:"description" validate:"required"`
+	HTMLDescription template.HTML
+	Category        string `toml:"category" json:"category" validate:"required,category"`
 }

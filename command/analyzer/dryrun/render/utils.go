@@ -1,7 +1,9 @@
 package render
 
 import (
+	"bytes"
 	"fmt"
+	"html/template"
 	"net"
 	"os"
 	"path/filepath"
@@ -14,6 +16,7 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/hako/durafmt"
 	"github.com/pelletier/go-toml/v2"
+	"github.com/yuin/goldmark"
 )
 
 // fetchRunSummary fetches the data for the run summary section involving the time since latest run
@@ -153,9 +156,14 @@ func fetchAnalyzerVCSData(dir string) string {
 		return ""
 	}
 
-	if commitsSinceCurrentTag == 0 {
+	// Return the Analyzer diff info.
+	switch commitsSinceCurrentTag {
+	case 0:
 		return fmt.Sprintf("This Analyzer is up to date with %s", currentTag)
+	case 1:
+		return fmt.Sprintf("This Analyzer is %d commit ahead of %s", commitsSinceCurrentTag, currentTag)
 	}
+
 	return fmt.Sprintf("This Analyzer is %d commits ahead of %s", commitsSinceCurrentTag, currentTag)
 }
 
@@ -193,9 +201,17 @@ func getIssueMeta(cwd, issueCode string) (types.AnalyzerIssue, error) {
 	}
 
 	// Unmarshal the data from the issue TOMLs into the struct
-	err = toml.Unmarshal(issueData, &analyzerIssue)
-	if err != nil {
+	if err = toml.Unmarshal(issueData, &analyzerIssue); err != nil {
 		return analyzerIssue, err
 	}
+
+	// Parsing the markdown issue description and passing it as an HTML string.
+	var buf bytes.Buffer
+	if err := goldmark.Convert([]byte(analyzerIssue.Description), &buf); err != nil {
+		return types.AnalyzerIssue{}, err
+	}
+
+	// Goldmark already provides a secure HTML. Ref: https://github.com/yuin/goldmark#security
+	analyzerIssue.HTMLDescription = template.HTML(buf.String()) // skipcq: GSC-G203
 	return analyzerIssue, nil
 }

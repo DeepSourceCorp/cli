@@ -2,7 +2,7 @@ package render
 
 import (
 	"fmt"
-	"path/filepath"
+	"os"
 	"strings"
 )
 
@@ -16,7 +16,7 @@ func (r *ResultRenderOpts) fetchIssueOccurencesData(cwd string) {
 		currentOccurence := OccurenceData{}
 
 		// Fix path of the issues(remove cwd prefix from them).
-		issue.Location.Path = strings.TrimPrefix(issue.Location.Path, filepath.Join(r.AnalysisResultData.SourcePath, string(filepath.Separator)))
+		issue.Location.Path = strings.TrimPrefix(issue.Location.Path, r.AnalysisResultData.SourcePath+string(os.PathSeparator))
 
 		if _, ok := issueOccurenceMap[issue.IssueCode]; !ok {
 			// Fetch issue meta for the issue code raised.
@@ -52,20 +52,29 @@ func (r *ResultRenderOpts) fetchIssueOccurencesData(cwd string) {
 			filesMap[file] = 1
 		}
 
-		// Appending the unique files.
+		// Creating a slice of unique files.
 		for file := range filesMap {
 			uniqueFiles = append(uniqueFiles, file)
 		}
-		occurence := issueOccurenceMap[issueCode]
-		occurence.Files = append(occurence.Files, uniqueFiles...)
-		issueOccurenceMap[issueCode] = occurence
+
+		// Assign the unique files slice to the map.
+		issueOccurence := issueOccurenceMap[issueCode]
+		issueOccurence.Files = uniqueFiles
 	}
 
 	// Create the files information string.
 	for issueCode, occurenceData := range issueOccurenceMap {
-		occurenceData.FilesInfo = fmt.Sprintf("Found in %s and %d other file(s)", occurenceData.Files[0], len(occurenceData.Files)-1)
+		switch len(occurenceData.Files) - 1 {
+		case 0:
+			occurenceData.FilesInfo = fmt.Sprintf("Found in %s", occurenceData.Files[0])
+		case 1:
+			occurenceData.FilesInfo = fmt.Sprintf("Found in %s and %d other file", occurenceData.Files[0], len(occurenceData.Files)-1)
+		default:
+			occurenceData.FilesInfo = fmt.Sprintf("Found in %s and %d other files", occurenceData.Files[0], len(occurenceData.Files)-1)
+		}
 		issueOccurenceMap[issueCode] = occurenceData
 	}
+	// Assign the value of local IssueOccurenceMap to global struct field.
 	r.AnalysisResultData.IssuesOccurenceMap = issueOccurenceMap
 
 	// Find out total number of occurences of all the issues.
