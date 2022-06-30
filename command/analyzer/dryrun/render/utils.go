@@ -3,6 +3,7 @@ package render
 import (
 	"bytes"
 	"fmt"
+	"html"
 	"html/template"
 	"net"
 	"os"
@@ -210,7 +211,7 @@ func getIssueMeta(cwd, issueCode string) (types.AnalyzerIssue, error) {
 	if err := goldmark.Convert([]byte(analyzerIssue.Description), &buf); err != nil {
 		return types.AnalyzerIssue{}, err
 	}
-	analyzerIssue.HTMLDescription = template.HTML(buf.String())
+	analyzerIssue.HTMLDescription = template.HTML(html.UnescapeString(buf.String()))
 
 	return analyzerIssue, nil
 }
