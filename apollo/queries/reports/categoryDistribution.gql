@@ -1,0 +1,7 @@
+query categoryDistribution($level: ReportLevel!, $objectId: ID!) {
+  issueDistributionByCategory(level: $level, objectId: $objectId) {
+    slug
+    name
+    value
+  }
+}

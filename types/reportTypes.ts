@@ -1,5 +1,4 @@
 import { DurationTypeT } from '~/utils/date'
-import { TrendDirection } from './types'
 
 type ReportMetaProperties = {
   title: string
@@ -9,7 +8,8 @@ type ReportMetaProperties = {
 
 export enum ReportPageT {
   OWASP_TOP_10 = 'owasp-top-10',
-  SANS_TOP_25 = 'sans-top-25'
+  SANS_TOP_25 = 'sans-top-25',
+  DISTRIBUTION = 'issue-distribution'
 }
 
 export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
@@ -22,6 +22,11 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'SANS Top 25',
     description: 'Overview of CWE/SANS Top 25 most dangerous software errors in your code.',
     hasIssueTable: true
+  },
+  [ReportPageT.DISTRIBUTION]: {
+    title: 'Issue Distribution',
+    description: 'Overview of issues across categories and as detected by analyzers.',
+    hasIssueTable: false
   }
 }
 
@@ -39,15 +44,6 @@ export type ComplianceIssue = {
   rank?: number
 }
 
-export type IssueDistribution = {
-  icon?: string
-  label: string
-  value: number
-  trendValue?: number
-  trendDirection?: TrendDirection
-  trendPositive?: boolean
-}
-
 export type DateRangeOptionT = {
   count: number
   durationType: DurationTypeT
@@ -61,7 +57,12 @@ export interface Dataset {
 
 export interface HistoricalValues {
   labels: Array<string>
-  values: Record<string, Array<number>>
+  values: Record<string, Array<number> & Record<string, Array<number>>>
+}
+
+export enum IssueDistributionT {
+  CATEGORY = 'category',
+  ANALYZER = 'analyzer'
 }
 
 export interface ReportsTabLink {

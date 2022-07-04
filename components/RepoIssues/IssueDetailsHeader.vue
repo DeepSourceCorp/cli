@@ -74,7 +74,7 @@ import { PriorityTypeBadge, PriorityTypeSelect } from '@/components/IssuePriorit
 import { formatDate } from '@/utils/date'
 import { escapeHtml } from '~/utils/string'
 import { IssuePriority, IssueSeverity } from '~/types/types'
-import generateColorFromTag from '~/utils/ui'
+import { generateColorFromTag } from '~/utils/ui'
 
 @Component({
   components: {

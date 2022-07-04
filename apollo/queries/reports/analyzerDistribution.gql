@@ -1,0 +1,8 @@
+query analyzerDistribution($level: ReportLevel!, $objectId: ID!) {
+  issueDistributionByAnalyzer(level: $level, objectId: $objectId) {
+    slug
+    name
+    value
+    logoUrl
+  }
+}

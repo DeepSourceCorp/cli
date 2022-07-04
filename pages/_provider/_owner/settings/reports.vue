@@ -3,10 +3,40 @@
     <nav
       class="flex px-4 pt-2 overflow-x-auto border-b gap-x-8 top-19 hide-scroll border-ink-200 lg:sticky lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r lg:h-nav-sidebar"
     >
-      <p class="p-2 text-xs text-slate uppercase tracking-wide font-semibold hidden lg:block">
+      <p class="hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block">
         Security
       </p>
+      <!-- Compliance Items -->
       <template v-for="item in complianceItems">
+        <nuxt-link
+          :key="item.label"
+          :to="$generateRoute(item.link)"
+          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
+        >
+          <span
+            class="hidden p-2 rounded-md group-hover:text-vanilla-100 lg:block"
+            :class="
+              $route.name === `provider-owner-settings-reports-${item.pathName}`
+                ? 'bg-ink-300'
+                : 'text-vanilla-400'
+            "
+            >{{ item.label }}</span
+          >
+          <z-tab
+            :is-active="$route.name === `provider-owner-settings-reports-${item.pathName}`"
+            border-active-color="vanilla-400"
+            class="lg:hidden"
+          >
+            <span class="text-sm cursor-pointer">{{ item.label }}</span>
+          </z-tab>
+        </nuxt-link>
+      </template>
+
+      <!-- Insights items -->
+      <p class="hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block">
+        Insights
+      </p>
+      <template v-for="item in insightsItems">
         <nuxt-link
           :key="item.label"
           :to="$generateRoute(item.link)"
@@ -38,10 +68,10 @@
         description-width-class="max-w-xl"
       >
         <template slot="description">
-          <p class="text-vanilla-400 mt-2 text-sm">{{ reportDescription }}</p>
+          <p class="mt-2 text-sm text-vanilla-400">{{ reportDescription }}</p>
         </template>
       </page-title>
-      <nuxt-child class="-mt-4 sm:mt-0 mb-24" />
+      <nuxt-child class="mb-24 -mt-4 sm:mt-0" />
     </div>
   </section>
 </template>
@@ -98,9 +128,17 @@ export default class OwnerReports extends Vue {
     }
   ]
 
+  insightsItems: ReportsTabLink[] = [
+    {
+      label: 'Issue Distribution',
+      link: ['settings', 'reports', ReportPageT.DISTRIBUTION],
+      pathName: ReportPageT.DISTRIBUTION
+    }
+  ]
+
   get activeReportName(): ReportPageT {
     const currentRouteItem =
-      this.complianceItems.find(
+      [...this.complianceItems, ...this.insightsItems].find(
         (item) => this.$route.name === `provider-owner-settings-reports-${item.pathName}`
       ) ?? this.complianceItems[0]
 

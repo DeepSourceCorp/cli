@@ -557,6 +557,7 @@ enum CheckIssueSeverity {
 }
 
 enum CheckStatus {
+  WAIT
   PEND
   PASS
   FAIL
@@ -564,6 +565,7 @@ enum CheckStatus {
   CNCL
   READ
   NEUT
+  ATMO
 }
 
 input ClearIntegrationRepositorySettingsInput {
@@ -1460,6 +1462,13 @@ type IssueConnection {
   totalCount: Int
 }
 
+type IssueDistribution {
+  slug: String
+  name: String
+  value: Int
+  logoUrl: String
+}
+
 type IssueEdge {
   node: Issue
   cursor: String!
@@ -1607,6 +1616,7 @@ type Mutation {
   removeKeyPairForRepository(input: RemoveKeyPairForRepositoryInput!): RemoveKeyPairForRepositoryPayload
   generateKeyPairForOwner(input: GenerateKeyPairForOwnerInput!): GenerateKeyPairForOwnerPayload
   removeKeyPairForOwner(input: RemoveKeyPairForOwnerInput!): RemoveKeyPairForOwnerPayload
+  updateTimeoutSetting(input: UpdateTimeoutSettingInput!): UpdateTimeoutSettingPayload
   updateRepositoryWidgets(input: UpdateRepositoryWidgetsInput!): UpdateRepositoryWidgetsPayload
   deleteSilenceRule(input: DeleteSilenceRuleInput!): DeleteSilenceRulePayload
   updateDefaultDashboardContextForUser(input: UpdateDefaultDashboardContextForUserInput!): UpdateDefaultDashboardContextForUserPayload
@@ -1784,6 +1794,7 @@ type OwnerSetting implements MaskPrimaryKeyNode {
   alive: Boolean
   owner: Owner!
   publicKey: String
+  shouldTimeoutDataTrigger: Boolean
   issueTypeSettings: [IssueTypeSetting]
 }
 
@@ -1841,6 +1852,8 @@ type Query {
   report(level: ReportLevel, key: String, objectId: ID): Report
   reports(level: ReportLevel, objectId: ID): [Report]
   complianceIssues(level: ReportLevel, reportKey: String, objectId: ID): [ComplianceIssue]
+  issueDistributionByAnalyzer(level: ReportLevel, objectId: ID): [IssueDistribution]
+  issueDistributionByCategory(level: ReportLevel, objectId: ID): [IssueDistribution]
   context: Context
   node(id: ID!): MaskPrimaryKeyNode
 }
@@ -2632,6 +2645,7 @@ enum TransactionTransactionType {
 input TransferTeamOwnershipInput {
   teamId: ID!
   newPrimaryUserId: ID!
+  updateBillingEmail: Boolean = true
   clientMutationId: String
 }
 
@@ -3107,6 +3121,17 @@ input UpdateTechnologyPreferenceInput {
 }
 
 type UpdateTechnologyPreferencePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateTimeoutSettingInput {
+  shouldTimeoutDataTrigger: Boolean!
+  ownerId: ID!
+  clientMutationId: String
+}
+
+type UpdateTimeoutSettingPayload {
   ok: Boolean
   clientMutationId: String
 }

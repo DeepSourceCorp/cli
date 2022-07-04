@@ -885,6 +885,7 @@ declare module '*/list.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const listWebhooks: DocumentNode;
+export const repositoryIssueList: DocumentNode;
 export const AutofixRuns: DocumentNode;
 
   export default defaultDocument;
@@ -1392,6 +1393,24 @@ declare module '*/accessTokenList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const accessTokenList: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/analyzerDistribution.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const analyzerDistribution: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/categoryDistribution.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const categoryDistribution: DocumentNode;
 
   export default defaultDocument;
 }

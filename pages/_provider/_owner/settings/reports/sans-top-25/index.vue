@@ -5,15 +5,15 @@
         <chart-stat title="Status">
           <div
             v-if="reportsDataLoading"
-            class="h-5 mt-px w-full bg-ink-300 animate-pulse rounded-sm"
+            class="w-full h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
           ></div>
           <template v-else>
             <span
-              class="h-2 rounded-full w-2"
+              class="w-2 h-2 rounded-full"
               :class="compliancePassed ? 'bg-juniper' : 'bg-cherry'"
             />
             <span
-              class="uppercase tracking-wider font-semibold text-sm"
+              class="text-sm font-semibold tracking-wider uppercase"
               :class="compliancePassed ? 'text-juniper' : 'text-cherry'"
             >
               {{ compliancePassed ? 'Passing' : 'Failing' }}
@@ -24,7 +24,7 @@
         <chart-stat title="Active Issues" :value="currentVal">
           <div
             v-if="reportsDataLoading"
-            class="h-5 mt-px w-full bg-ink-300 animate-pulse rounded-sm"
+            class="w-full h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
           ></div>
         </chart-stat>
       </template>
@@ -39,26 +39,33 @@
 
       <div
         v-if="historicalValuesLoading"
-        class="bg-ink-300 animate-pulse mx-6 mt-6 mb-5 h-64 rounded-lg"
+        class="h-64 mx-6 mt-6 mb-5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-
-      <z-chart
-        v-if="datasets.length && !historicalValuesLoading"
-        :data-sets="datasets"
-        :labels="labels"
-        :colors="['cherry-500']"
-        type="line"
-      />
+      <template v-else>
+        <z-chart
+          v-if="shouldChartBeShown"
+          :data-sets="datasets"
+          :labels="labels"
+          :colors="['cherry-500']"
+          :axis-options="{
+            xIsSeries: true
+          }"
+          type="line"
+        />
+        <div v-else class="h-full p-5 pb-0">
+          <lazy-empty-chart :count="1" chart-type="line" />
+        </div>
+      </template>
     </chart-container>
 
     <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
 
-    <div class="rounded-lg border border-ink-200 overflow-x-auto">
-      <z-table class="text-vanilla-100 border-none">
+    <div class="overflow-x-auto border rounded-lg border-ink-200">
+      <z-table class="border-none text-vanilla-100">
         <template #head>
-          <z-table-row class="text-vanilla-400 text-xs font-semibold uppercase tracking-wider">
-            <z-table-cell class="w-16 flex-none text-left"> Rank </z-table-cell>
-            <z-table-cell class="w-20 sm:w-28 flex-none text-left"> Id </z-table-cell>
+          <z-table-row class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
+            <z-table-cell class="flex-none w-16 text-left"> Rank </z-table-cell>
+            <z-table-cell class="flex-none w-20 text-left sm:w-28"> Id </z-table-cell>
             <z-table-cell class="text-left"> Name </z-table-cell>
             <z-table-cell class="text-right"> Occurrences </z-table-cell>
           </z-table-row>
@@ -75,17 +82,17 @@
             <z-table-row
               v-for="issue in complianceIssueList"
               :key="issue.issueId"
-              class="text-vanilla-100 text-sm hover:bg-ink-300"
+              class="text-sm text-vanilla-100 hover:bg-ink-300"
             >
-              <z-table-cell class="w-16 text-vanilla-400 font-semibold flex-none text-left">
+              <z-table-cell class="flex-none w-16 font-semibold text-left text-vanilla-400">
                 {{ issue.rank }}
               </z-table-cell>
               <z-table-cell
-                class="w-20 sm:w-28 flex-none text-vanilla-400 font-semibold text-left whitespace-nowrap"
+                class="flex-none w-20 font-semibold text-left sm:w-28 text-vanilla-400 whitespace-nowrap"
               >
                 {{ issue.issueId }}
               </z-table-cell>
-              <z-table-cell class="whitespace-nowrap sm:whitespace-normal font-normal text-left">
+              <z-table-cell class="font-normal text-left whitespace-nowrap sm:whitespace-normal">
                 <p class="sm:max-w-lg">{{ issue.title }}</p>
               </z-table-cell>
               <z-table-cell class="font-semibold text-right sm:flex-initial">
@@ -135,6 +142,14 @@ export default class OwnerSans extends mixins(OwnerDetailMixin, ReportMixin) {
       this.fetchComplianceIssues(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25),
       this.setChartData()
     ])
+  }
+
+  get shouldChartBeShown(): boolean {
+    if (this.historicalValuesLoading) return false
+    if (this.labels.length < 2) return false
+    if (this.datasets.length === 0) return false
+
+    return true
   }
 
   /**

@@ -1,7 +1,7 @@
 <template>
-  <div class="rounded-lg border border-ink-200 py-4 min-h-96 grid grid-cols-1">
-    <div class="flex flex-col-reverse gap-y-4 px-5 md:flex-row">
-      <div class="grid grid-cols-repeat-6 gap-10 flex-grow">
+  <div class="grid grid-cols-1 py-4 border rounded-lg border-ink-200 min-h-96">
+    <div class="flex flex-col-reverse px-5 gap-y-4 md:flex-row">
+      <div class="grid flex-grow gap-10 grid-cols-repeat-8">
         <slot name="report-stats"></slot>
       </div>
       <div class="flex-shrink-0">

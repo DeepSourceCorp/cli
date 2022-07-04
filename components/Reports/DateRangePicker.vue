@@ -1,8 +1,13 @@
 <template>
   <div class="h-8 md:w-40">
-    <z-select v-model="modelValue" background-class="bg-ink-300" border-class="border-ink-300">
+    <z-select
+      v-model="modelValue"
+      :disabled="disabled"
+      background-class="bg-ink-300"
+      border-class="border-ink-300"
+    >
       <template #icon>
-        <z-icon color="vanilla-400" icon="duration-30" />
+        <z-icon :color="disabled ? 'slate' : 'vanilla-400'" icon="duration-30" />
       </template>
       <z-option
         v-for="(opt, key) in dateRangeOptions"
@@ -35,5 +40,8 @@ export default class DateRangePicker extends Vue {
 
   @Prop({ default: () => {} })
   dateRangeOptions: Record<string, DateRangeOptionT>
+
+  @Prop({ default: false, type: Boolean })
+  disabled: boolean
 }
 </script>

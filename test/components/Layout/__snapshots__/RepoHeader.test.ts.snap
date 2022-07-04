@@ -26,10 +26,10 @@ exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
           <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
-        </a><a>
-          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a>
         <!----><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a><a>
           <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
         </a></div>
     </div>
@@ -62,10 +62,10 @@ exports[`[[ RepoHeader ]] renders RepoHeader logged out: Default Repo Header Sna
         </a>
         <!----><a>
           <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
-        </a><a>
+        </a>
+        <!----><a>
           <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a>
-        <!---->
         <!---->
       </div>
     </div>
@@ -99,10 +99,10 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo H
           <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
-        </a><a>
-          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a>
         <!----><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a><a>
           <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
         </a></div>
     </div>
@@ -136,10 +136,10 @@ exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: Repo
           <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
-        </a><a>
-          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a>
         <!----><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a><a>
           <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
         </a></div>
     </div>
@@ -173,10 +173,10 @@ exports[`[[ RepoHeader ]] renders RepoHeader without perms: Repo Header withut p
           <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
-        </a><a>
-          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a>
         <!----><a>
+          <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
+        </a><a>
           <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
         </a></div>
     </div>

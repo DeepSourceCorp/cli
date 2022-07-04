@@ -1,6 +1,11 @@
 import dayjs from 'dayjs'
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Dataset, DateRangeOptionT, HistoricalValues } from '~/types/reportTypes'
+import {
+  Dataset,
+  DateRangeOptionT,
+  HistoricalValues,
+  IssueDistributionT
+} from '~/types/reportTypes'
 import { getDateFromXAgo, DurationTypeT, getDateDiffInDays, formatDate } from '~/utils/date'
 
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
@@ -8,8 +13,17 @@ import { reportBase } from '@/apollo/queries/reports/reportBase.gql'
 import { recentStats } from '@/apollo/queries/reports/recentStats.gql'
 import { historicalValues } from '@/apollo/queries/reports/historicalValues.gql'
 import { complianceIssues } from '@/apollo/queries/reports/complianceIssues.gql'
+import { analyzerDistribution } from '@/apollo/queries/reports/analyzerDistribution.gql'
+import { categoryDistribution } from '@/apollo/queries/reports/categoryDistribution.gql'
 
-import { ComplianceIssue, RecentStat, Report, ReportLevel, Repository } from '~/types/types'
+import {
+  ComplianceIssue,
+  RecentStat,
+  Report,
+  ReportLevel,
+  Repository,
+  IssueDistribution
+} from '~/types/types'
 
 /**
  * Mixin for reports queries and utilities
@@ -26,6 +40,7 @@ export default class ReportMixin extends Vue {
   public reportsDataLoading = false
   public historicalValuesLoading = false
   public recentStatsLoading = false
+  public distributionStatsLoading = false
   public complianceIssuesLoading = false
 
   public dateRangeOptions: Record<string, DateRangeOptionT> = {
@@ -208,6 +223,45 @@ export default class ReportMixin extends Vue {
         this.complianceIssuesLoading = false
       }
     }
+  }
+
+  /**
+   * Fetch and return compliance issues of a compliance report.
+   *
+   * @param {ReportLevel} level
+   * @param {string} objectId
+   * @param {string} distributionType
+   */
+  public async fetchDistributionStats(
+    level: ReportLevel,
+    objectId: string,
+    distributionType: IssueDistributionT
+  ) {
+    this.distributionStatsLoading = true
+
+    const distributionQuery =
+      distributionType === IssueDistributionT.ANALYZER ? analyzerDistribution : categoryDistribution
+
+    try {
+      const response = (await this.$fetchGraphqlData(distributionQuery, {
+        level,
+        objectId
+      })) as GraphqlQueryResponse
+
+      return (
+        distributionType === IssueDistributionT.ANALYZER
+          ? response.data.issueDistributionByAnalyzer
+          : response.data.issueDistributionByCategory
+      ) as Array<IssueDistribution>
+    } catch (error) {
+      this.$logErrorAndToast(
+        error as Error,
+        'Unable to fetch issue distribution, please contact support.'
+      )
+    } finally {
+      this.distributionStatsLoading = false
+    }
+    return []
   }
 
   /**

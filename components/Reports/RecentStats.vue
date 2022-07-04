@@ -1,12 +1,12 @@
 <template>
   <div
-    class="grid grid-cols-2 md:grid-cols-5 gap-y-4 rounded-lg border border-ink-200 py-4 md:pr-5"
+    class="grid grid-cols-2 py-4 border rounded-lg md:grid-cols-5 gap-y-4 border-ink-200 md:pr-5"
   >
     <div class="flex flex-col items-center gap-y-2">
-      <h3 class="uppercase font-semibold tracking-wider text-xs text-vanilla-400">Current</h3>
-      <div v-if="loading" class="h-8 w-6 mb-px bg-ink-300 animate-pulse rounded-sm"></div>
+      <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">Current</h3>
+      <div v-if="loading" class="w-6 h-8 mb-px rounded-sm bg-ink-300 animate-pulse"></div>
 
-      <p v-else class="text-xl text-vanilla-100 font-semibold">
+      <p v-else class="text-xl font-semibold text-vanilla-100">
         {{ shortenLargeNumber(currentVal) }}
       </p>
     </div>
@@ -14,18 +14,24 @@
       <div v-for="index in 4" :key="index" class="flex flex-col items-center gap-y-2">
         <div class="h-4 w-24 mb-0.5 bg-ink-300 animate-pulse rounded-sm"></div>
         <div class="flex flex-col items-center gap-y-0.5">
-          <div class="h-8 w-6 mb-px bg-ink-300 animate-pulse rounded-sm"></div>
-          <div class="h-5 w-11 bg-ink-300 animate-pulse rounded-sm"></div>
+          <div class="w-6 h-8 mb-px rounded-sm bg-ink-300 animate-pulse"></div>
+          <div class="h-5 rounded-sm w-11 bg-ink-300 animate-pulse"></div>
         </div>
       </div>
     </template>
     <template v-else>
       <div v-for="stat in stats" :key="stat.statLabel" class="flex flex-col items-center gap-y-2">
-        <h3 class="uppercase font-semibold tracking-wider text-xs text-vanilla-400">
+        <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
           {{ stat.statLabel }}
         </h3>
-        <div class="flex flex-col items-center gap-y-0.5">
-          <p class="text-xl text-vanilla-100 font-semibold">
+        <div class="flex flex-col justify-center items-center gap-y-0.5 h-full">
+          <span
+            v-if="stat.statValue === null"
+            class="text-base font-medium tracking-wider text-slate"
+          >
+            N/A
+          </span>
+          <p v-else class="text-xl font-semibold text-vanilla-100">
             {{ shortenLargeNumber(stat.statValue) }}
           </p>
           <ticker
@@ -74,6 +80,7 @@ export default class RecentStats extends Vue {
    *
    * @param trendValue number
    * @param statValue number
+   *
    * @returns string
    */
   smartTrendValue(trendValue: number, statValue: number): string {

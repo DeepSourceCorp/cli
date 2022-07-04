@@ -21,7 +21,7 @@ const knownTags: Record<string, string> = {
   typescript: '#3178c6'
 }
 
-const localPalette = [
+export const zealPalette = [
   '#52575c',
   '#414141',
   '#6753b5',
@@ -47,7 +47,7 @@ const localPalette = [
  * @param tagName string
  * @returns string
  */
-export default function generateColorFromTag(tagName: string): string {
+export function generateColorFromTag(tagName: string): string {
   if (knownTags[tagName]) return knownTags[tagName]
 
   const matchedTag = Object.keys(knownTagPatterns).find((pattern) =>
@@ -58,5 +58,55 @@ export default function generateColorFromTag(tagName: string): string {
     return knownTagPatterns[matchedTag]
   }
 
-  return localPalette[tagName.length % localPalette.length]
+  return zealPalette[tagName.length % zealPalette.length]
+}
+
+/**
+ * Generate shade of a give color
+ *
+ * @param {string} hexColor - color to generate shades for
+ * @param {number} magnitude - amount to change the color
+ *
+ * @return {string}
+ */
+export function newShade(hexColor: string, magnitude: number): string {
+  hexColor = hexColor.replace(`#`, ``)
+  if (hexColor.length === 6) {
+    const decimalColor = parseInt(hexColor, 16)
+    let red = (decimalColor >> 16) + magnitude
+    red > 255 && (red = 255)
+    red < 0 && (red = 0)
+
+    let green = (decimalColor & 0x0000ff) + magnitude
+    green > 255 && (green = 255)
+    green < 0 && (green = 0)
+
+    let blue = ((decimalColor >> 8) & 0x00ff) + magnitude
+    blue > 255 && (blue = 255)
+    blue < 0 && (blue = 0)
+
+    const color = `#${(green | (blue << 8) | (red << 16)).toString(16)}`
+
+    if (color.length < 7) {
+      return `${color}${new Array(7 - color.length).fill(0).join()}`
+    }
+    return color
+  } else {
+    return hexColor
+  }
+}
+
+/**
+ * Generate n shades of a given color
+ *
+ * @param {string} baseColor - base color to generate shades for
+ * @param {number} numberOfShades - number of shades to generate
+ *
+ * @return {string[]}
+ */
+export function getColorShades(baseColor: string, numberOfShades: number): string[] {
+  const stepFactor = Math.floor(140 / numberOfShades)
+  return Array.from(Array(numberOfShades).keys()).map((step) =>
+    newShade(baseColor, step * stepFactor)
+  )
 }

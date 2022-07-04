@@ -164,12 +164,6 @@ const navItems: TabLink[] = [
     pattern: new RegExp(/^provider-owner-repo-metrics$/)
   },
   {
-    icon: 'history',
-    label: 'History',
-    link: 'history/runs',
-    pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/)
-  },
-  {
     icon: 'pie-chart',
     label: 'Reports',
     link: 'reports/owasp-top-10',
@@ -177,6 +171,12 @@ const navItems: TabLink[] = [
     perms: [RepoPerms.VIEW_REPORTS],
     pattern: new RegExp(/^provider-owner-repo-reports-*/),
     forBeta: true
+  },
+  {
+    icon: 'history',
+    label: 'History',
+    link: 'history/runs',
+    pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/)
   },
   {
     icon: 'settings',
