@@ -80,7 +80,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { ZTab, ZButton, ZIcon, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsourcelabs/zeal'
 
-import { RepoPerms } from '~/types/permTypes'
+import { TeamPerms } from '~/types/permTypes'
 import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
 
 /**
@@ -109,7 +109,7 @@ import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
   meta: {
     auth: {
       strict: true,
-      repoPerms: [RepoPerms.VIEW_REPORTS]
+      teamPerms: [TeamPerms.VIEW_REPORTS]
     }
   }
 })
