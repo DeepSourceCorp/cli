@@ -183,7 +183,7 @@ describe('[[ Test toWrappableString ]]', () => {
       `Amet occaecat fugiat do id labore laborum ad.`
     )
     expect(toWrappableString(`Amet occaecat "fugiat" do id labore laborum ad.`)).toBe(
-      `Amet occaecat \"fugiat\" do id labore laborum ad.`
+      `Amet occaecat &quot;fugiat&quot; do id labore laborum ad.`
     )
   })
   it('Accepts valid input with custom length', () => {
@@ -192,7 +192,7 @@ describe('[[ Test toWrappableString ]]', () => {
     )
     expect(toWrappableString(`test/utils/string.spec.ts`, 100)).toBe(`test/utils/string.spec.ts`)
     expect(toWrappableString(`test/"utils"/string.spec.ts`, 5)).toBe(
-      `test<span>/\"utils\"</span><span>/string.spec.ts</span>`
+      `test<span>/&quot;utils&quot;</span><span>/string.spec.ts</span>`
     )
   })
   it('Accepts valid input with custom length and separator', () => {
@@ -203,7 +203,7 @@ describe('[[ Test toWrappableString ]]', () => {
       `test-utils-string.spec.ts`
     )
     expect(toWrappableString(`test-"utils"-string.spec.ts`, 5, '-')).toBe(
-      `test<span>/\"utils\"</span><span>/string.spec.ts</span>`
+      `test<span>/&quot;utils&quot;</span><span>/string.spec.ts</span>`
     )
   })
 })

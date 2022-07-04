@@ -37,14 +37,15 @@ function shortenLargeNumber(candidate: number | string): string {
   if (Number.isNaN(number)) return '0'
 
   // Using absolute since log wont work for negative numbers
-  let p = Math.floor(Math.log10(Math.abs(number)))
-  if (p <= 2) return String(number) // Return as is for a 3 digit number of less
-  let l = Math.floor(p / 3)
-  let shortened = Math.pow(10, p - l * 3) * +(number / Math.pow(10, p)).toFixed(1)
+  const numberOfDigits = Math.floor(Math.log10(Math.abs(number)))
+  if (numberOfDigits <= 2) return String(number) // Return as is for a 3 digit number of less
+  const unit = Math.floor(numberOfDigits / 3)
+  const shortened =
+    Math.pow(10, numberOfDigits - unit * 3) * +(number / Math.pow(10, numberOfDigits)).toFixed(1)
 
   // Correct for floating point error upto 2 decimal places
   // skipcq: JS-0377
-  return Math.round(shortened * 100) / 100 + ['', 'k', 'm', 'b', 't'][l]
+  return Math.round(shortened * 100) / 100 + ['', 'k', 'm', 'b', 't'][unit]
 }
 
 const usdFormatter = new Intl.NumberFormat('en-US', {
@@ -58,35 +59,6 @@ function formatUSD(amount: number): string {
 
 function makeSafeNumber(candidate: string | number, defaultReturnValue = 0): number {
   return isFinite(Number(candidate)) ? Number(candidate) : defaultReturnValue
-}
-
-function toWrappableString(
-  path: string,
-  ...options: [maxLength?: number, separater?: string]
-): string {
-  const [maxLength = 50, separator = '/'] = options
-  const pathTokens = path.split(separator)
-  if (pathTokens.length > 2 && path.length > maxLength) {
-    const filename = pathTokens.pop()
-    const rootFolder = pathTokens.shift()
-    if (filename && rootFolder) {
-      const reducer = (previousVal: string, currentVal: string): string =>
-        `${previousVal}<span>/${currentVal}</span>`
-      const folderPath = pathTokens.reduce(reducer, rootFolder)
-      return `${folderPath}<span>/${filename}</span>`
-    }
-  }
-  return path
-}
-
-/**
- * Utility to remove extra trailing slashes in URLs
- *
- * @param  {string} path
- * @returns string
- */
-function stripTrailingSlash(path: string): string {
-  return path.replace(/\/$/, '')
 }
 
 /**
@@ -106,6 +78,37 @@ function escapeHtml(unsafeCandidate: string): string {
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;')
     : ''
+}
+
+function toWrappableString(
+  path: string,
+  ...options: [maxLength?: number, separater?: string]
+): string {
+  const escapedPath = escapeHtml(path)
+
+  const [maxLength = 50, separator = '/'] = options
+  const pathTokens = escapedPath.split(separator)
+  if (pathTokens.length > 2 && escapedPath.length > maxLength) {
+    const filename = pathTokens.pop()
+    const rootFolder = pathTokens.shift()
+    if (filename && rootFolder) {
+      const reducer = (previousVal: string, currentVal: string): string =>
+        `${previousVal}<span>/${currentVal}</span>`
+      const folderPath = pathTokens.reduce(reducer, rootFolder)
+      return `${folderPath}<span>/${filename}</span>`
+    }
+  }
+  return escapedPath
+}
+
+/**
+ * Utility to remove extra trailing slashes in URLs
+ *
+ * @param  {string} path
+ * @returns string
+ */
+function stripTrailingSlash(path: string): string {
+  return path.replace(/\/$/, '')
 }
 
 export {
