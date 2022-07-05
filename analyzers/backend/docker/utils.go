@@ -22,6 +22,12 @@ type DockerBuildResponse struct {
 	Stream string `json:"stream"`
 }
 
+type DockerPullResponse struct {
+	Status   string `json:"status"`
+	Progress string `json:"progress"`
+	ID       string `json:"id"`
+}
+
 /* Checks the docker build response and prints all the logs if `showAllLogs` is true
  * Used in `deepsource analyzer run` and `deepsource analyzer verify` commands */
 func CheckBuildResponse(rd io.Reader, showAllLogs bool) error { // skipcq: RVV-A0005
@@ -43,6 +49,34 @@ func CheckBuildResponse(rd io.Reader, showAllLogs bool) error { // skipcq: RVV-A
 		currentStream = strings.TrimSuffix(d.Stream, "\n")
 		if showAllLogs {
 			fmt.Println(currentStream)
+		}
+		count++
+	}
+
+	errLine := &ErrorLine{}
+	json.Unmarshal([]byte(lastLine), errLine)
+	if errLine.Error != "" {
+		return errors.New(errLine.Error)
+	}
+	return scanner.Err()
+}
+
+/* Checks the docker pull response and prints all the logs if `showAllLogs` is true
+ * Used in `deepsource analyzer dry-run` command. */
+func CheckPullResponse(rd io.Reader, showAllLogs bool) error { // skipcq: RVV-A0005
+	var lastLine []byte
+	count := 0
+
+	scanner := bufio.NewScanner(rd)
+	for scanner.Scan() {
+		lastLine = scanner.Bytes()
+		d := &DockerPullResponse{}
+		err := json.Unmarshal(lastLine, d)
+		if err != nil {
+			return err
+		}
+		if showAllLogs {
+			fmt.Printf("%s %s\n", d.Status, d.Progress)
 		}
 		count++
 	}

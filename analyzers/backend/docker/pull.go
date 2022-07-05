@@ -11,11 +11,11 @@ import (
 func (d *DockerClient) PullImage(imageName string) (context.CancelFunc, io.ReadCloser, error) {
 	ctx, ctxCancelFunc := context.WithTimeout(context.Background(), buildTimeout)
 
-	readCloser, err := d.Client.ImagePull(ctx, imageName, types.ImagePullOptions{})
+	reader, err := d.Client.ImagePull(ctx, imageName, types.ImagePullOptions{})
 	if err != nil {
 		ctxCancelFunc()
 		return ctxCancelFunc, nil, err
 	}
 
-	return ctxCancelFunc, readCloser, nil
+	return ctxCancelFunc, reader, nil
 }

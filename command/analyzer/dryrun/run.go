@@ -100,17 +100,24 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		a.Spinner.StartSpinnerWithLabel(fmt.Sprintf("Pulling Analyzer image (%s)...", a.DockerImageName), fmt.Sprintf("Pulled Analyzer image (%s)", a.DockerImageName))
 
 		// Pull image from registry.
-		ctxCancelFunc, readCloser, err := a.Client.PullImage(a.DockerImageName)
+		ctxCancelFunc, pullRespReader, pullErr := a.Client.PullImage(a.DockerImageName)
 
 		// Cancel context and close the reader before exiting.
-		if readCloser != nil {
-			defer readCloser.Close()
+		if pullRespReader != nil {
+			defer pullRespReader.Close()
 		}
 		if ctxCancelFunc != nil {
 			defer ctxCancelFunc()
 		}
 
-		if err != nil {
+		if pullErr != nil {
+			a.Spinner.StopSpinnerWithError("Failed to pull the Analyzer image", pullErr)
+			return pullErr
+		}
+
+		// Check the docker pull response.
+		if err = docker.CheckPullResponse(pullRespReader, false); err != nil {
+			a.Spinner.StopSpinnerWithError("Failed to pull the Analyzer image", err)
 			return err
 		}
 
