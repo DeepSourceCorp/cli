@@ -23,7 +23,6 @@ enabled = true
   ]
   plugins = ["vue"]
   dialect = "typescript"
-  style_guide = "airbnb"
 
 [[transformers]]
 name = "prettier"
