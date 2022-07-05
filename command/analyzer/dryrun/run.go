@@ -32,6 +32,7 @@ var (
 // The params required while running the Analysis locally.
 type AnalyzerDryRun struct {
 	Client               *docker.DockerClient   // The client to be used for all docker related ops.
+	DockerImageName      string                 // The docker image supplied by the user that needs to be pulled and run.
 	DockerImagePlatform  string                 // The platform for which the Docker image is to be built.
 	RemoteSource         bool                   // True if the source to be analyzed is a remote VCS repository.
 	SourcePath           string                 // The path of the directory of source code to be analyzed.
@@ -73,6 +74,9 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	// --output-file/ -o flag.
 	cmd.Flags().StringVarP(&opts.TempToolBoxDirectory, "output-file", "o", "", "The path of analysis results")
 
+	// --image flag.
+	cmd.Flags().StringVar(&opts.DockerImageName, "image", "", "The Analyzer docker image to build and run")
+
 	// --platform flag; used for explicitly setting up the build platform for the Docker image. Defaults to linux/<arch> if not provided.
 	defaultPlatform := fmt.Sprintf("linux/%s", runtime.GOARCH)
 	cmd.Flags().StringVar(&opts.DockerImagePlatform, "platform", defaultPlatform, "Explicitly set build platform for Docker image.")
@@ -87,26 +91,68 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		return err
 	}
 
-	// Building the Analyzer image.
-	a.Spinner.StartSpinnerWithLabel("Building Analyzer image...", "Built Analyzer image")
-	ctxCancelFunc, buildRespReader, buildError := a.Client.BuildAnalyzerDockerImage()
-
-	// Cancel the build context and close the reader before exiting this function.
-	if buildRespReader != nil {
-		defer buildRespReader.Close()
-	}
-	defer ctxCancelFunc()
-	if buildError != nil {
-		a.Spinner.StopSpinnerWithError("Failed to build the Analyzer image", err)
-		return buildError
-	}
-
-	// Check the docker build response.
-	if err = docker.CheckBuildResponse(buildRespReader, false); err != nil {
-		a.Spinner.StopSpinnerWithError("Failed to build the Analyzer image", err)
+	err = a.Client.SetupClient()
+	if err != nil {
 		return err
 	}
-	a.Spinner.StopSpinner()
+
+	if a.DockerImageName != "" {
+		a.Spinner.StartSpinnerWithLabel(fmt.Sprintf("Pulling Analyzer image (%s)...", a.DockerImageName), fmt.Sprintf("Pulled Analyzer image (%s)", a.DockerImageName))
+
+		// Pull image from registry.
+		ctxCancelFunc, pullRespReader, pullErr := a.Client.PullImage(a.DockerImageName)
+
+		// Cancel context and close the reader before exiting.
+		if pullRespReader != nil {
+			defer pullRespReader.Close()
+		}
+		if ctxCancelFunc != nil {
+			defer ctxCancelFunc()
+		}
+
+		if pullErr != nil {
+			a.Spinner.StopSpinnerWithError("Failed to pull the Analyzer image", pullErr)
+			return pullErr
+		}
+
+		// Check the docker pull response.
+		if err = docker.CheckPullResponse(pullRespReader, false); err != nil {
+			a.Spinner.StopSpinnerWithError("Failed to pull the Analyzer image", err)
+			return err
+		}
+
+		// Setup image name and image tag. The image name and image tag are used while building the container.
+		a.Client.ImageName, a.Client.ImageTag = a.parseImageName()
+
+		// Notify the user that we use the latest tag.
+		// TODO: Setting the suffix doesn't work.
+		if a.Client.ImageTag == "latest" {
+			a.Spinner.SetSuffix("(no image tag found, using latest)")
+		}
+
+		a.Spinner.StopSpinner()
+	} else {
+		// Building the Analyzer image.
+		a.Spinner.StartSpinnerWithLabel("Building Analyzer image...", "Built Analyzer image")
+		ctxCancelFunc, buildRespReader, buildError := a.Client.BuildAnalyzerDockerImage()
+
+		// Cancel the build context and close the reader before exiting this function.
+		if buildRespReader != nil {
+			defer buildRespReader.Close()
+		}
+		defer ctxCancelFunc()
+		if buildError != nil {
+			a.Spinner.StopSpinnerWithError("Failed to build the Analyzer image", err)
+			return buildError
+		}
+
+		// Check the docker build response.
+		if err = docker.CheckBuildResponse(buildRespReader, false); err != nil {
+			a.Spinner.StopSpinnerWithError("Failed to build the Analyzer image", err)
+			return err
+		}
+		a.Spinner.StopSpinner()
+	}
 
 	// Create temporary toolbox directory to store analysis config and later analyis results.
 	// If already passed through --output-file flag, use that one.
