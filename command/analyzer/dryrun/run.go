@@ -32,7 +32,7 @@ var (
 // The params required while running the Analysis locally.
 type AnalyzerDryRun struct {
 	Client               *docker.DockerClient   // The client to be used for all docker related ops.
-	DockerImageName      string                 // The name of the Docker image published to a registry.
+	DockerImageName      string                 // The docker image supplied by the user that needs to be pulled and run.
 	DockerImagePlatform  string                 // The platform for which the Docker image is to be built.
 	RemoteSource         bool                   // True if the source to be analyzed is a remote VCS repository.
 	SourcePath           string                 // The path of the directory of source code to be analyzed.
@@ -74,8 +74,8 @@ func NewCmdAnalyzerRun() *cobra.Command {
 	// --output-file/ -o flag.
 	cmd.Flags().StringVarP(&opts.TempToolBoxDirectory, "output-file", "o", "", "The path of analysis results")
 
-	// --image-name flag.
-	cmd.Flags().StringVar(&opts.DockerImageName, "image-name", "", "The name of the Docker image")
+	// --image flag.
+	cmd.Flags().StringVar(&opts.DockerImageName, "image", "", "The Analyzer docker image to build and run")
 
 	// --platform flag; used for explicitly setting up the build platform for the Docker image. Defaults to linux/<arch> if not provided.
 	defaultPlatform := fmt.Sprintf("linux/%s", runtime.GOARCH)
@@ -97,10 +97,19 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 	}
 
 	if a.DockerImageName != "" {
-		a.Spinner.StartSpinnerWithLabel("Fetching Analyzer image...", "Fetched analyzer image")
+		a.Spinner.StartSpinnerWithLabel(fmt.Sprintf("Pulling Analyzer image (%s)...", a.DockerImageName), fmt.Sprintf("Pulled Analyzer image (%s)", a.DockerImageName))
 
 		// Pull image from registry.
-		err := a.Client.PullImage(a.DockerImageName)
+		ctxCancelFunc, readCloser, err := a.Client.PullImage(a.DockerImageName)
+
+		// Cancel context and close the reader before exiting.
+		if readCloser != nil {
+			defer readCloser.Close()
+		}
+		if ctxCancelFunc != nil {
+			defer ctxCancelFunc()
+		}
+
 		if err != nil {
 			return err
 		}

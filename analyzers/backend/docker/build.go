@@ -49,17 +49,6 @@ func (d *DockerClient) SetupClient() error {
 	return nil
 }
 
-// PullImage pulls an image from a registry.
-func (d *DockerClient) PullImage(imageName string) error {
-	ctx := context.Background()
-	_, err := d.Client.ImagePull(ctx, imageName, types.ImagePullOptions{})
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
 // BuildAnalyzerDockerImage is the docker image build API used by various CLI commands
 func (d *DockerClient) BuildAnalyzerDockerImage() (context.CancelFunc, io.ReadCloser, *DockerBuildError) {
 	var err error
