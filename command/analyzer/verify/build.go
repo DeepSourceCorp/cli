@@ -53,6 +53,12 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 		ShowLogs:       a.Build.VerboseMode,
 	}
 
+	// Setup client for the builder.
+	err = analyzerBuilder.SetupClient()
+	if err != nil {
+		return err
+	}
+
 	// Build the docker image :rocket:
 	ctxCancelFunc, buildRespReader, buildErr := analyzerBuilder.BuildAnalyzerDockerImage()
 
