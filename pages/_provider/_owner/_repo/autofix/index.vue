@@ -108,7 +108,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
-import { InfoIcon, AutofixCard, AutofixListItem } from '@/components/Autofix/index'
+import { AutofixCard, AutofixListItem } from '@/components/Autofix/index'
 import { AutofixRun, AutofixRunStatus } from '~/types/types'
 import { AutofixIssuesGraph } from '@/components/Graphs'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -123,7 +123,6 @@ import { resolveNodes } from '~/utils/array'
 @Component({
   components: {
     ZIcon,
-    InfoIcon,
     AutofixCard,
     AutofixListItem,
     AutofixIssuesGraph

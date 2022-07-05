@@ -312,13 +312,7 @@ import {
   ZBreadcrumbItem,
   ZDivider
 } from '@deepsourcelabs/zeal'
-import {
-  InfoIcon,
-  AutofixCard,
-  AutofixListItem,
-  AutofixCodeDiff,
-  Info
-} from '@/components/Autofix/index'
+import { AutofixCard, AutofixListItem, AutofixCodeDiff, Info } from '@/components/Autofix/index'
 
 import { RunDetailActions } from '~/store/run/detail'
 import { AutofixRunPullRequestStatus, CreatePullRequestInput } from '~/types/types'
@@ -350,7 +344,6 @@ const runStore = namespace('run/detail')
     ZBreadcrumb,
     ZBreadcrumbItem,
     ZDivider,
-    InfoIcon,
     Info,
     AutofixCard,
     AutofixListItem,
