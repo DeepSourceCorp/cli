@@ -38,15 +38,31 @@ func (d *DockerBuildError) Error() string {
 	return d.Message
 }
 
-// BuildAnalyzerDockerImage is the docker image build API used by various CLI commands
-func (d *DockerClient) BuildAnalyzerDockerImage() (context.CancelFunc, io.ReadCloser, *DockerBuildError) {
+// SetupClient initializes the Docker client with opts.
+func (d *DockerClient) SetupClient() error {
 	var err error
 	d.Client, err = client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
-		return nil, nil, &DockerBuildError{
-			Message: err.Error(),
-		}
+		return err
 	}
+
+	return nil
+}
+
+// PullImage pulls an image from a registry.
+func (d *DockerClient) PullImage(imageName string) error {
+	ctx := context.Background()
+	_, err := d.Client.ImagePull(ctx, imageName, types.ImagePullOptions{})
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+// BuildAnalyzerDockerImage is the docker image build API used by various CLI commands
+func (d *DockerClient) BuildAnalyzerDockerImage() (context.CancelFunc, io.ReadCloser, *DockerBuildError) {
+	var err error
 
 	cancelFunc, responseReader, err := d.executeImageBuild()
 	if err != nil {

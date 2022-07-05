@@ -83,3 +83,14 @@ func (a *AnalyzerDryRun) createTemporaryToolBoxDir() (err error) {
 	a.Client.AnalysisOpts.AnalysisResultsPath = a.TempToolBoxDirectory
 	return nil
 }
+
+// parseImageName returns the image name and the image tag from the complete image name.
+func (a *AnalyzerDryRun) parseImageName() (string, string) {
+	components := strings.Split(a.DockerImageName, ":")
+
+	if len(components) > 1 {
+		return components[0], components[1]
+	} else {
+		return components[0], "latest"
+	}
+}
