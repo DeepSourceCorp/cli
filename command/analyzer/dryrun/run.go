@@ -124,6 +124,12 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		// Setup image name and image tag. The image name and image tag are used while building the container.
 		a.Client.ImageName, a.Client.ImageTag = a.parseImageName()
 
+		// Notify the user that we use the latest tag.
+		// TODO: Setting the suffix doesn't work.
+		if a.Client.ImageTag == "latest" {
+			a.Spinner.SetSuffix("(no image tag found, using latest)")
+		}
+
 		a.Spinner.StopSpinner()
 	} else {
 		// Building the Analyzer image.

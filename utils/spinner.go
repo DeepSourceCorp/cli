@@ -25,6 +25,7 @@ func (s *SpinnerUtils) StartSpinnerWithLabel(label, finalMessage string) {
 		spinner.WithWriter(os.Stdout),
 		spinner.WithWriter(os.Stderr),
 	) // Build our new spinner
+
 	if label != "" {
 		sp.Suffix = " " + label + " "
 	}
@@ -47,7 +48,7 @@ func (s *SpinnerUtils) StopSpinner() {
 	s.Spinner = nil
 }
 
-// Stops the spinner
+// Sets a suffix to the spinner.
 func (s *SpinnerUtils) SetSuffix(suffix string) {
 	s.mu.Lock()
 	defer s.mu.Unlock()
