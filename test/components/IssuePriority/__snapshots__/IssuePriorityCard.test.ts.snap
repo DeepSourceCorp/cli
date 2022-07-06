@@ -21,7 +21,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </span>
         </div>
         <div class=\\"flex items-center space-x-1.5\\">
-          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400 tracking-wide\\">Security</span>
+          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
         </div>
       </div>
     </div>
@@ -51,7 +51,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </span>
         </div>
         <div class=\\"flex items-center space-x-1.5\\">
-          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400 tracking-wide\\">Security</span>
+          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </span>
         </div>
         <div class=\\"flex items-center space-x-1.5\\">
-          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400 tracking-wide\\">Security</span>
+          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
         </div>
       </div>
     </div>
@@ -111,7 +111,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </span>
         </div>
         <div class=\\"flex items-center space-x-1.5\\">
-          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400 tracking-wide\\">Security</span>
+          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
         </div>
       </div>
     </div>
@@ -142,7 +142,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </span>
       </div>
       <div class=\\"flex items-center space-x-1.5\\">
-        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400 tracking-wide\\">Security</span>
+        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
       </div>
     </div>
   </div>
@@ -177,7 +177,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </span>
       </div>
       <div class=\\"flex items-center space-x-1.5\\">
-        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400 tracking-wide\\">Security</span>
+        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
       </div>
     </div>
   </div>
@@ -212,7 +212,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </span>
       </div>
       <div class=\\"flex items-center space-x-1.5\\">
-        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400 tracking-wide\\">Security</span>
+        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
       </div>
     </div>
   </div>
@@ -247,7 +247,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
         </span>
       </div>
       <div class=\\"flex items-center space-x-1.5\\">
-        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400 tracking-wide\\">Security</span>
+        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
       </div>
     </div>
   </div>

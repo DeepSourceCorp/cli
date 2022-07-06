@@ -1,93 +1,82 @@
 <template>
   <base-card :to="getRoute(runId)">
-    <template slot="title">
-      <z-icon
-        v-tooltip="tooltipText"
-        :icon="icon"
-        size="small"
-        :color="iconColor"
-        class="flex-shrink-0"
-        :class="{ 'motion-safe:animate-spin': isPending }"
-      />
-      <h3
-        class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
-      >
-        {{ branchName }}
-      </h3>
-      <span class="inline text-sm font-normal text-vanilla-400 md:flex md:flex-shrink-0"
-        >@{{ commitOid.slice(0, 7) }}</span
-      >
-    </template>
-    <template slot="description">
-      <div class="ml-6 space-y-1.5">
-        <div class="space-y-1.5 md:space-y-0 md:flex md:flex-wrap md:items-center md:gap-x-4">
-          <div v-if="!isPending" class="flex items-center gap-x-1.5">
-            <z-icon icon="clock" size="x-small" color="vanilla-400" />
-            <span class="text-sm text-vanilla-400">Analyzed {{ createdString }}</span>
-          </div>
-          <div v-else class="flex items-center gap-x-1.5">
-            <z-icon icon="clock" size="x-small" color="vanilla-400" />
-            <span class="text-sm text-vanilla-400">{{ statusText }}</span>
-          </div>
-          <!-- Issue type -->
-          <div class="hidden gap-x-1.5 md:flex md:items-center">
-            <z-icon icon="git-commit" size="x-small" color="vanilla-400" />
-            <span class="text-sm text-vanilla-400">{{ gitCompareDisplay }}</span>
-          </div>
-          <!-- Created -->
-          <!-- introduced resolved -->
-          <div
-            v-if="!isPending && (issuesRaisedCount || issuesResolvedNum)"
-            class="flex items-center gap-x-1.5 md:hidden"
-          >
-            <z-icon icon="zap" size="x-small" color="vanilla-400" />
-            <span class="text-sm text-vanilla-400">
-              <!-- ! Prevents a space before `,`, the following 2 templates should be continuous -->
-              <template v-if="issuesRaisedCount">{{ issuesRaisedCount }} introduced</template
-              ><template v-if="issuesRaisedCount && issuesResolvedNum">,</template>
-              <template v-if="issuesResolvedNum">{{ issuesResolvedNum }} resolved</template>
-            </span>
+    <template #left-section>
+      <div class="flex w-full justify-between">
+        <div class="md:w-4/5 2xl:w-5/6 gap-2 p-3" :class="[isSecondary ? 'w-full' : 'w-2/3']">
+          <div class="flex flex-col flex-grow">
+            <section class="flex items-center gap-x-1 text-xs md:text-base">
+              <z-icon
+                v-tooltip="tagLabel"
+                class="self-center flex-shrink-0 inline mt-0.5"
+                :icon="icon"
+                :class="{ 'animate-spin': isPending }"
+                :color="iconColor"
+              />
+              <h3 class="inline font-medium cursor-pointer text-vanilla-100 line-clamp-1">
+                {{ branchName }}
+              </h3>
+              <span class="inline font-medium text-vanilla-400">{{
+                pullRequestNumberDisplay
+              }}</span>
+            </section>
+            <section
+              class="flex flex-wrap items-center flex-grow mt-1 leading-8 gap-x-4 gap-y-2 pl-px"
+            >
+              <meta-data-item v-if="!isPending" :label="`Analyzed ${createdString}`" icon="clock" />
+              <meta-data-item v-else :label="statusText" icon="clock" />
+              <meta-data-item
+                v-if="isSecondary && issueMetaDataLabel"
+                :label="issueMetaDataLabel"
+                icon="flag"
+                class="md:hidden"
+              />
+              <section v-if="!isSecondary && $slots.toggleTrigger" class="flex-shrink-0">
+                <slot name="toggleTrigger"></slot>
+              </section>
+            </section>
           </div>
         </div>
-        <div v-if="!isPending" class="hidden gap-x-1.5 md:flex md:items-center">
-          <z-icon icon="timer-reset" size="x-small" color="vanilla-400" />
-          <span v-if="statusText && finishedIn" class="text-sm text-vanilla-400">
-            {{ statusText }} {{ finishedString }}
-          </span>
-          <span v-else class="text-sm text-vanilla-400">{{ absentTimeStatusText }}</span>
-        </div>
-      </div>
-    </template>
-    <template slot="info">
-      <div
-        v-if="issueStats.length && !isPending"
-        class="flex items-center justify-around h-full gap-x-2"
-      >
-        <div v-for="stat in issueStats" :key="stat.label" class="flex flex-col items-center">
+        <!-- stats-->
+        <div
+          v-if="issueStats.length && !isPending"
+          class="md:w-1/5 2xl:w-1/6 border-l border-ink-200"
+          :class="{ 'hidden md:block': isSecondary }"
+        >
           <div
-            class="text-1.5xl font-medium"
-            :class="{
-              'text-cherry': !stat.isPositive,
-              'text-juniper': stat.isPositive,
-              'text-vanilla-400': Number(stat.value) === 0
-            }"
+            class="grid items-center justify-around flex-shrink-0 h-full grid-cols-1 md:grid-cols-2 md:gap-x-0 divide-y md:divide-y-0 divide-ink-200"
           >
-            {{ stat.value }}
+            <div
+              v-for="stat in issueStats"
+              :key="stat.label"
+              class="grid w-20 md:w-full h-full p-2 text-center place-content-center md:p-3"
+            >
+              <div
+                class="text-sm md:text-1.5xl font-semibold"
+                :class="{
+                  'text-cherry': !stat.isPositive,
+                  'text-juniper': stat.isPositive,
+                  'text-vanilla-400': Number(stat.value) === 0
+                }"
+              >
+                {{ stat.value }}
+              </div>
+              <div class="text-xxs md:text-xs text-vanilla-400">{{ stat.label }}</div>
+            </div>
           </div>
-          <div class="text-xs text-vanilla-400">{{ stat.label }}</div>
         </div>
       </div>
     </template>
   </base-card>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import { BaseCard } from '../'
-
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { fromNow, formatSeconds } from '@/utils/date'
 import { shortenLargeNumber } from '@/utils/string'
 import { Maybe, RunStatus, Scalars } from '~/types/types'
+import { state } from '~/store'
 
 @Component({
   components: {
@@ -95,7 +84,7 @@ import { Maybe, RunStatus, Scalars } from '~/types/types'
     ZIcon
   }
 })
-export default class RunCard extends Vue {
+export default class RunCard extends mixins(RepoDetailMixin) {
   @Prop({ default: 'PASS' })
   status: string
 
@@ -117,21 +106,50 @@ export default class RunCard extends Vue {
   @Prop({ default: '' })
   commitOid: string
 
+  @Prop({ default: '' })
+  vcsPrUrl: string
+
+  @Prop({ default: '' })
+  pullRequestNumberDisplay: string
+
   @Prop({ default: 0 })
   issuesRaisedCount: number
 
   @Prop({ default: 0 })
   issuesResolvedNum: number
 
+  @Prop({ default: 0 })
+  branchRunCount: number
+
+  @Prop({ default: false })
+  isSecondary: boolean
+
   @Prop({ required: true })
   config!: Maybe<Scalars['GenericScalar']>
+
+  @Prop({ default: false })
+  isForDefaultBranch: boolean
+
+  get provider() {
+    const { provider } = this.$route.params
+    return this.$providerMetaMap[provider].text
+  }
+
+  get vscLinkTooltip() {
+    const { provider } = this.$route.params
+    return this.isForDefaultBranch
+      ? `Open ${this.branchName} on ${this.provider}`
+      : provider === 'gl'
+      ? 'Open MR'
+      : 'Open PR'
+  }
 
   get icon(): string {
     const types: Record<string, string> = {
       [RunStatus.Pass]: 'check',
       [RunStatus.Fail]: 'x',
       [RunStatus.Pend]: 'spin-loader',
-      [RunStatus.Timo]: 'clock',
+      [RunStatus.Timo]: 'timer',
       [RunStatus.Cncl]: 'alert-circle',
       [RunStatus.Read]: 'check-circle'
     }
@@ -150,14 +168,14 @@ export default class RunCard extends Vue {
     return types[this.status || 'PASS']
   }
 
-  get tooltipText(): string {
+  get tagLabel(): string {
     const types: Record<string, string> = {
-      [RunStatus.Pass]: 'Run has passed',
-      [RunStatus.Fail]: 'Run failed',
-      [RunStatus.Pend]: 'Analysis in progress',
-      [RunStatus.Timo]: 'Analysis timed out',
-      [RunStatus.Cncl]: 'Analysis cancelled',
-      [RunStatus.Read]: 'Analysis ready'
+      [RunStatus.Pass]: 'Passed',
+      [RunStatus.Fail]: 'Failing',
+      [RunStatus.Pend]: 'Running',
+      [RunStatus.Timo]: 'Timed out',
+      [RunStatus.Cncl]: 'Cancelled',
+      [RunStatus.Read]: 'Ready'
     }
     return types[this.status || 'PASS']
   }
@@ -172,6 +190,18 @@ export default class RunCard extends Vue {
       [RunStatus.Read]: 'Completed in'
     }
     return types[this.status || 'PASS']
+  }
+
+  get statusIcon(): string {
+    const types: Record<string, string> = {
+      [RunStatus.Pass]: 'run-passed',
+      [RunStatus.Fail]: 'run-failed',
+      [RunStatus.Pend]: 'clock',
+      [RunStatus.Timo]: 'run-timed-out',
+      [RunStatus.Cncl]: 'run-failed',
+      [RunStatus.Read]: 'run-passed'
+    }
+    return types[this.status] || 'clock'
   }
 
   get absentTimeStatusText(): string {
@@ -214,6 +244,15 @@ export default class RunCard extends Vue {
     return stats
   }
 
+  get issueMetaDataLabel(): string {
+    let label = ''
+    if (this.issueStats[0].value !== '0')
+      label = label.concat(`${this.issueStats[0].value} issues introduced`)
+    if (this.issueStats[1].value !== '0')
+      label = label.concat(`${label.length > 0 && ', '}${this.issueStats[1].value} issues resolved`)
+    return label
+  }
+
   get commitHash(): string {
     return this.commitOid.slice(0, 7)
   }
@@ -225,6 +264,23 @@ export default class RunCard extends Vue {
 
   get finishedString(): string {
     return formatSeconds(this.finishedIn)
+  }
+
+  /**
+   * Handles the click event on the "Open PR" button
+   * This is done programatically instead of via an achor since the element is placed within a parent with a click handler,
+   * so the "@click.prevent" event modifier is needed to override the default click action
+   */
+  handlePrUrlClick() {
+    const url = this.isForDefaultBranch ? this.repository.vcsUrl : this.vcsPrUrl
+
+    const anchor = document.createElement('a')
+    Object.assign(anchor, {
+      target: '_blank',
+      href: url,
+      rel: 'noopener noreferrer'
+    }).click()
+    anchor.parentNode?.removeChild(anchor)
   }
 }
 </script>

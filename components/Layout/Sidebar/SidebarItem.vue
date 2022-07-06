@@ -36,10 +36,10 @@ import { ZIcon } from '@deepsourcelabs/zeal'
 })
 export default class SidebarItem extends Vue {
   @Prop()
-  icon!: string
+  icon?: string
 
   @Prop()
-  iconColor!: string
+  iconColor?: string
 
   @Prop({ default: false })
   active!: boolean

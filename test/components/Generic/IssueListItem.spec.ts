@@ -49,7 +49,6 @@ describe('[[ IssueListItem ]]', () => {
     const hideProgressOptions = generateBooleanProps('hideProgress', false)
     const showComparisonStatOptions = generateBooleanProps('showComparisonStat', false)
     const centerContentOptions = generateBooleanProps('centerContent', false)
-    const removeDefaultStyleOptions = generateBooleanProps('removeDefaultStyle', false)
     const showAutofixButtonOptions = generateBooleanProps('showAutofixButton', false)
     const disableAutofixButtonOptions = generateBooleanProps('disableAutofixButton', false)
     const showSeenInfoOptions = generateBooleanProps('showSeenInfo', false)
@@ -59,7 +58,6 @@ describe('[[ IssueListItem ]]', () => {
       hideProgressOptions,
       showComparisonStatOptions,
       centerContentOptions,
-      removeDefaultStyleOptions,
       showAutofixButtonOptions,
       disableAutofixButtonOptions,
       showSeenInfoOptions

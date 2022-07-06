@@ -2,8 +2,14 @@
   <z-badge type="success" :is-dot="sortApplied ? true : false" size="md">
     <z-menu v-if="!sortApplied" direction="right" width="small" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
-        <z-button icon="amount-down" size="small" button-type="secondary" @click="toggle">
-          <span class="hidden md:inline">Sort</span>
+        <z-button
+          icon="amount-down"
+          icon-color="vanilla-400"
+          size="small"
+          button-type="secondary"
+          @click="toggle"
+        >
+          <span class="hidden md:inline text-vanilla-100">Sort</span>
         </z-button>
       </template>
       <template slot="body" class="text-vanilla-200">

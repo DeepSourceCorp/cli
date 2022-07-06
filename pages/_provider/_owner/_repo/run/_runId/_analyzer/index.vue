@@ -1,124 +1,205 @@
 <template>
-  <main class="pb-12 md:pb-60">
+  <main>
     <template v-if="!$fetchState.pending">
-      <analyzer-header
-        v-if="check.analyzer && check.analyzer.name && check.analyzer.shortcode && check.status"
-        :title="check.analyzer.name"
-        :icon="check.analyzer.shortcode"
-        :alerting-metrics-count="alertingMetrics.length"
-        v-bind="check"
-        class="px-4"
-      />
-      <run-autofix-bar
-        v-if="
-          allowAutofix &&
-          Array.isArray(check.autofixableIssues) &&
-          check.autofixableIssues.length &&
-          !check.run.isForDefaultBranch &&
-          !check.run.isForCrossRepoPr
-        "
-        v-bind="check"
-        :can-create-autofix="canCreateAutofix"
-      />
-      <z-tabs>
-        <z-tab-list class="px-4 py-0 pt-2 border-b border-ink-200">
-          <z-tab-item
-            icon="flag"
-            class="flex items-center space-x-1"
-            border-active-color="vanilla-400"
-          >
-            <span>Issues</span>
-          </z-tab-item>
-          <z-tab-item
-            icon="bar-chart"
-            class="flex items-center space-x-1"
-            border-active-color="vanilla-400"
-          >
-            <span>Metrics</span>
-          </z-tab-item>
-        </z-tab-list>
-        <z-tab-panes class="p-4">
-          <z-tab-pane>
-            <analyzer-run :canCreateAutofix="canCreateAutofix" v-bind="check">
-              <template #controls>
-                <div class="flex w-auto space-x-2 md:w-3/5">
-                  <issue-sort
-                    v-model="queryParams.sort"
-                    :show-seen-options="false"
-                    @reset="removeFilter('sort')"
-                  />
-                  <issue-category-filter
-                    v-model="queryParams.category"
-                    @reset="removeFilter('category')"
-                  />
-                </div>
-                <issue-search
-                  v-focus
-                  :search-candidate="queryParams.q"
-                  placeholder="Search for issue title or shortcode"
-                  class="w-full md:w-1/3"
-                  @updateSearch="updateSearch"
-                />
-              </template>
+      <div>
+        <z-tabs>
+          <z-tab-list class="w-full lg:hidden flex-row p-3 -space-x-2 text-center">
+            <z-tab
+              :is-active="activeTabIndex === 0"
+              :action="() => updateActiveTabIndex(0)"
+              :remove-indicator-styles="true"
+              class="w-1/2 -mb-3"
+            >
+              <div
+                class="w-full p-3 rounded-l-md border border-ink-200"
+                :class="{ 'bg-ink-50 border-r-0': activeTabIndex === 0 }"
+              >
+                Issues
+              </div>
+            </z-tab>
+            <z-tab
+              :is-active="activeTabIndex === 1"
+              :action="() => updateActiveTabIndex(1)"
+              :remove-indicator-styles="true"
+              class="w-1/2 -mb-3"
+            >
+              <div
+                class="w-full p-3 rounded-r-md border border-ink-200"
+                :class="{ 'bg-ink-50 border-l-0': activeTabIndex === 1 }"
+              >
+                Metrics
+              </div>
+            </z-tab>
+          </z-tab-list>
+          <!-- issues -->
+          <div v-if="activeTabIndex === 0" class="grid grid-cols-1 lg:grid-cols-fr-22">
+            <div class="border-r border-ink-200 p-3">
+              <analyzer-run v-bind="check" :can-create-autofix="canCreateAutofix">
+                <template #controls>
+                  <div class="flex flex-col">
+                    <run-autofix-bar
+                      v-if="
+                        allowAutofix &&
+                        Array.isArray(check.autofixableIssues) &&
+                        check.autofixableIssues.length &&
+                        !check.run.isForDefaultBranch &&
+                        !check.run.isForCrossRepoPr
+                      "
+                      @autofixIssues="autofixSelectedIssues"
+                      v-bind="check"
+                      :autofixLoading="autofixLoading"
+                      :can-create-autofix="canCreateAutofix"
+                    />
+                    <div class="flex space-x-2 w-full">
+                      <div class="flex w-auto space-x-2">
+                        <issue-category-filter
+                          v-model="queryParams.category"
+                          @reset="removeFilter('category')"
+                        />
+                        <issue-sort
+                          v-model="queryParams.sort"
+                          :show-seen-options="false"
+                          @reset="removeFilter('sort')"
+                        />
+                      </div>
+                      <issue-search
+                        v-focus
+                        :search-candidate="queryParams.q"
+                        placeholder="Search for issue title or shortcode"
+                        class="w-full md:flex-grow"
+                        @updateSearch="updateSearch"
+                      />
+                    </div>
+                  </div>
+                </template>
 
-              <template #footer>
+                <template #footer>
+                  <div
+                    v-if="concreteIssueList.totalCount > perPageCount"
+                    class="flex justify-center my-6 text-sm"
+                  >
+                    <z-pagination
+                      :page="currentPage"
+                      :key="currentPage"
+                      :total-pages="totalPageCount"
+                      :total-visible="5"
+                      @selected="updatePageNum"
+                    />
+                  </div>
+                </template>
+              </analyzer-run>
+            </div>
+            <div
+              class="hidden lg:flex flex-col space-y-2 p-3 lg:sticky header-offset metrics-sidebar"
+            >
+              <run-loading v-if="check.status === 'PEND'" />
+              <run-cancelled v-else-if="check.status === 'CNCL'" />
+              <run-timeout v-else-if="check.status === 'TIMO'" />
+              <template v-else>
                 <div
-                  v-if="concreteIssueList.totalCount > perPageCount"
-                  class="flex justify-center my-6 text-sm"
+                  v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
+                  class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
                 >
-                  <z-pagination
-                    :page="currentPage"
-                    :key="currentPage"
-                    :total-pages="totalPageCount"
-                    :total-visible="5"
-                    @selected="updatePageNum"
+                  <div class="flex items-center gap-x-2">
+                    <p
+                      class="text-sm font-semibold tracking-wide uppercase text-vanilla-400 leading-none"
+                    >
+                      Metrics
+                    </p>
+                    <z-tag
+                      v-if="areMetricsAlerting"
+                      icon-left="alert-circle"
+                      icon-color="cherry"
+                      size="x-small"
+                      spacing="px-2 py-0"
+                      class="border border-ink-200"
+                    >
+                      <span
+                        class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry"
+                        >Alerting</span
+                      >
+                    </z-tag>
+                  </div>
+                  <run-metric-card
+                    v-for="stat in sortedMetricsCaptured"
+                    :key="stat.id"
+                    :metrics-captured="stat"
+                    class="border border-ink-200 bg-ink-300 rounded-md"
+                    @confirmMetricSuppression="confirmMetricSuppression"
                   />
                 </div>
+                <base-state
+                  v-else
+                  :show-border="true"
+                  class="text-vanilla-400"
+                  height-class="h-auto"
+                  spacing-class="p-6"
+                >
+                  <template #title>
+                    <h1 class="text-sm text-center text-vanilla-400">
+                      No metrics captured for this check
+                    </h1>
+                  </template>
+                </base-state>
               </template>
-            </analyzer-run>
-          </z-tab-pane>
-          <z-tab-pane>
+            </div>
+          </div>
+          <!-- metrics -->
+          <div v-else class="flex lg:hidden flex-col space-y-2 p-3 lg:sticky header-offset">
             <run-loading v-if="check.status === 'PEND'" />
             <run-cancelled v-else-if="check.status === 'CNCL'" />
             <run-timeout v-else-if="check.status === 'TIMO'" />
             <template v-else>
               <div
                 v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
-                class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 overflow-y-auto hide-scroll"
               >
-                <stat-card
-                  v-for="stat in check.metricsCaptured"
+                <run-metric-card
+                  v-for="stat in sortedMetricsCaptured"
                   :key="stat.id"
-                  :title="stat.name"
-                  :subtitle="stat.namespace.key"
-                  :value="stat.valueDisplay"
-                  :icon="check.analyzer.shortcode"
-                  :color="stat.isPassing === false ? 'cherry' : 'juniper'"
-                  :with-transition="stat.isPassing === false"
+                  :metrics-captured="stat"
+                  class="border border-ink-200 bg-ink-300 rounded-md"
+                  @confirmMetricSuppression="confirmMetricSuppression"
                 />
               </div>
               <empty-state
                 v-else
                 :show-border="true"
-                title="No metrics captured for this run"
+                title="No metrics captured for this check"
                 class="text-vanilla-200"
               />
             </template>
-          </z-tab-pane>
-        </z-tab-panes>
-      </z-tabs>
+          </div>
+        </z-tabs>
+      </div>
     </template>
-    <template v-else>
-      <!-- Header -->
-      <div class="flex flex-1 w-full p-4 space-x-2 rounded-sm">
-        <!-- Left Section -->
-        <div class="flex flex-col w-3/5 space-y-2 md:w-4/5 justify-evenly">
-          <div class="h-10 rounded-md bg-ink-300 animate-pulse"></div>
-          <div class="h-6 rounded-md bg-ink-300 animate-pulse"></div>
+    <div v-else>
+      <!-- Loading state -->
+      <div class="flex flex-col gap-y-3 w-full space-x-2 rounded-sm">
+        <!-- Controls -->
+        <div class="w-full flex space-x-4 p-4">
+          <div class="h-8 w-22 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="h-8 w-22 rounded-md bg-ink-300 animate-pulse"></div>
+          <div class="h-8 flex-grow rounded-md bg-ink-300 animate-pulse"></div>
         </div>
-        <!-- Right Section -->
-        <div class="relative w-2/5 md:w-1/5">
-          <div class="h-full rounded-md bg-ink-300 animate-pulse"></div>
+
+        <div class="w-full grid grid-cols-1 lg:grid-cols-fr-20">
+          <!-- Issues -->
+          <div class="flex flex-col gap-y-3 p-2">
+            <div
+              v-for="index in 10"
+              :key="index"
+              class="h-22 w-full bg-ink-300 animate-pulse"
+            ></div>
+          </div>
+          <!-- Metrics -->
+          <div class="flex flex-col gap-y-3 p-2">
+            <div
+              v-for="index in 5"
+              :key="index"
+              class="h-32 w-full rounded-md bg-ink-300 animate-pulse"
+            ></div>
+          </div>
         </div>
       </div>
       <div class="flex p-4 space-x-2">
@@ -130,12 +211,49 @@
         <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
         <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
       </div>
-    </template>
+
+      <portal to="modal">
+        <z-confirm
+          v-if="showConfirmDialog"
+          primaryActionType="danger"
+          title="Are you sure you want to suppress the metric?"
+          @onClose="showConfirmDialog = false"
+        >
+          <template v-slot:footer="{ close }">
+            <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+              <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
+                Cancel
+              </z-button>
+              <z-button
+                v-if="suppressingMetric"
+                button-type="warning"
+                size="small"
+                :disabled="true"
+                class="w-44 flex items-center"
+              >
+                <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2"></z-icon>
+                Suppressing metric
+              </z-button>
+              <z-button
+                v-else
+                icon="minus-circle"
+                class="modal-primary-action w-44"
+                button-type="warning"
+                size="small"
+                @click="suppressMetric(close)"
+              >
+                Suppress metric
+              </z-button>
+            </div>
+          </template>
+        </z-confirm>
+      </portal>
+    </div>
   </main>
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
 // Import State & Types
 import { Check, RepositoryMetricValue } from '~/types/types'
@@ -150,14 +268,19 @@ import {
   ZTabList,
   ZTabPane,
   ZTabPanes,
-  ZTabItem,
-  ZPagination
+  ZTab,
+  ZPagination,
+  ZConfirm,
+  ZButton,
+  ZTag
 } from '@deepsourcelabs/zeal'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 
 import { RunDetailActions } from '~/store/run/detail'
 import { resolveNodes } from '~/utils/array'
+
+const runStore = namespace('run/detail')
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -171,8 +294,11 @@ import { resolveNodes } from '~/utils/array'
     ZTabList,
     ZTabPane,
     ZTabPanes,
-    ZTabItem,
-    ZPagination
+    ZTab,
+    ZPagination,
+    ZConfirm,
+    ZButton,
+    ZTag
   },
   middleware: [
     async function ({ store, route, redirect }) {
@@ -204,6 +330,18 @@ export default class AnalyzerDetails extends mixins(
   PaginationMixin
 ) {
   perPageCount = 10
+  public activeTabIndex = 0
+  public autofixLoading = false
+  showConfirmDialog = false
+  suppressingMetric = false
+  metricToSuppress: RepositoryMetricValue = {} as RepositoryMetricValue
+
+  @runStore.Action(RunDetailActions.IGNORE_CHECK_METRIC)
+  ignoreMetric: (args: {
+    checkId: string
+    metricShortcode: string
+    key: string
+  }) => Promise<boolean>
 
   /**
    * Created hook to update query params from route query mixin
@@ -270,7 +408,27 @@ export default class AnalyzerDetails extends mixins(
 
   get alertingMetrics(): Array<RepositoryMetricValue> {
     const metrics = (this.check?.metricsCaptured || []) as RepositoryMetricValue[]
+    // ? isPassing can be null, which indicates that there is no threshold set. Hence, the explicit check!
     return metrics.filter((metric) => metric.isPassing === false)
+  }
+
+  /**
+   * Sets the index for the currently active tab
+   *
+   * @param {number} index index of the active tab
+   * @returns {void}
+   */
+  updateActiveTabIndex(index: number): void {
+    this.activeTabIndex = index
+  }
+
+  /**
+   * Ensures that the Issues tab is displayed when resizing from a tablet or smaller viewport back to a larger size
+   *
+   * @returns {void}
+   */
+  handleResize(): void {
+    if (process.client && window.innerWidth > 1024) this.updateActiveTabIndex(0)
   }
 
   /**
@@ -282,6 +440,8 @@ export default class AnalyzerDetails extends mixins(
     this.$root.$on('refetchCheck', this.refetchCheck)
     this.$socket.$on('repo-analysis-updated', this.refetchRunAndCheck)
     this.$socket.$on('autofixrun-fixes-ready', this.refetchRunAndCheck)
+    this.handleResize()
+    window.addEventListener('resize', this.handleResize)
   }
 
   /**
@@ -293,6 +453,7 @@ export default class AnalyzerDetails extends mixins(
     this.$root.$off('refetchCheck', this.refetchCheck)
     this.$socket.$off('repo-analysis-updated', this.refetchRunAndCheck)
     this.$socket.$off('autofixrun-fixes-ready', this.refetchRunAndCheck)
+    window.removeEventListener('resize', this.handleResize)
   }
 
   /**
@@ -360,5 +521,153 @@ export default class AnalyzerDetails extends mixins(
   get canCreateAutofix(): boolean {
     return this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)
   }
+
+  /**
+   * Priority:
+   * 1. Metrics with `isPassing` false
+   * 2. Metrics with `isPassing` true
+   * 3. Metrics without threshold
+   *
+   * For a sort function `(a,b) => Number`:
+   *
+   * The sort relies on relation between two metrics:
+   * - If a negative value is returned, item `a` is sorted before item `b`.
+   * - If a positive value is returned, item `a` is sorted after item `b`.
+   * - If a `0` is returned, the items stay as is.
+   *
+   * We want all the metrics without threshold to be last, so we always exit early
+   * if `threshold` is falsey by returning a value as per above logic.
+   *
+   * Otherwise, we compare the two values. Since, `Number(boolean)` is 0 for false and 1 for true.
+   *
+   * @see [MDN - Array.prototype.sort()#Description]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#description}
+   */
+  get sortedMetricsCaptured() {
+    return this.check.metricsCaptured
+      ? [...this.check.metricsCaptured].sort((a, b) => {
+          if (!a?.threshold) {
+            return 1
+          }
+          if (!b?.threshold) {
+            return -1
+          }
+
+          return Number(a.isPassing) - Number(b.isPassing)
+        })
+      : []
+  }
+
+  get areMetricsAlerting(): boolean {
+    return (
+      this.check.metricsCaptured?.some((metricValue) => metricValue?.isPassing === false) || false
+    )
+  }
+
+  /**
+   * Creates autofixes for selected issues and redirects user to the created autofix run.
+   *
+   * @param {Array<String>} selectedIssueShortcodeArray - List of issue shortcodes to be Autofixed
+   * @returns {Promise<void>}
+   */
+  public async autofixSelectedIssues(selectedIssueShortcodeArray: Array<string>): Promise<void> {
+    const { owner, provider, repo } = this.$route.params
+    this.autofixLoading = true
+    try {
+      const response = await this.createAutofixPullRequest({
+        input: {
+          issues: selectedIssueShortcodeArray,
+          checkId: this.check.id
+        }
+      })
+      this.autofixLoading = false
+      if (response.autofixRunId) {
+        this.$router.push(`/${provider}/${owner}/${repo}/autofix/${response.autofixRunId}`)
+      } else {
+        this.$toast.danger(
+          'An error occured while redirecting you to autofixes for selected issues.'
+        )
+      }
+    } catch (e) {
+      this.$toast.danger('An error occured while creating autofixes for selected issues.')
+    }
+  }
+
+  /**
+   * Gets the icon data for a given metric namespace.
+   *
+   * @param {{analyzer_logo: any, analyzer_shortcode:any}} metricNamespace - Metric namspace with logo and shortcode information.
+   *
+   * @returns {{analyzerLogo: string, shortcode: string, name: string}}
+   */
+  getIconData(metricNamespace: { analyzer_logo: any; analyzer_shortcode: any }): {
+    analyzerLogo: string
+    shortcode: string
+    name: string
+  } {
+    return {
+      analyzerLogo: metricNamespace.analyzer_logo,
+      shortcode: metricNamespace.analyzer_shortcode,
+      name: metricNamespace.analyzer_shortcode
+    }
+  }
+
+  confirmMetricSuppression(metricsCaptured: RepositoryMetricValue) {
+    if (metricsCaptured) {
+      this.metricToSuppress = metricsCaptured
+      this.showConfirmDialog = true
+    }
+  }
+
+  async suppressMetric(close: () => void) {
+    this.suppressingMetric = true
+    try {
+      if (this.metricToSuppress.shortcode) {
+        const response = await this.ignoreMetric({
+          checkId: this.check.id,
+          metricShortcode: this.metricToSuppress.shortcode as string,
+          key: this.metricToSuppress.namespace.key
+        })
+
+        if (response) {
+          await this.refetchRunAndCheck({ run_id: this.run.runId, check_id: this.check.id })
+          close?.()
+        }
+      } else {
+        this.$toast.danger('An error occured while suppressing the metric.')
+      }
+    } finally {
+      this.suppressingMetric = false
+    }
+  }
 }
 </script>
+<style scoped>
+/* height of RepoHeader + Breadcrumbs + RunHeader */
+.header-offset {
+  top: 323px;
+}
+
+.metrics-sidebar {
+  height: calc(100vh - 339px);
+}
+
+@media (min-width: 1024px) {
+  .header-offset {
+    top: 269px;
+  }
+
+  .metrics-sidebar {
+    height: calc(100vh - 269px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .header-offset {
+    top: 228px;
+  }
+
+  .metrics-sidebar {
+    height: calc(100vh - 228px);
+  }
+}
+</style>

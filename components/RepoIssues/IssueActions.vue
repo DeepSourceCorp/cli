@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-end flex-auto space-x-2">
+  <div class="flex items-center flex-auto justify-end space-x-2">
     <!-- Autofix -->
     <z-button
       v-if="isAutofixEnabled && issue.autofixAvailable && hasRepoReadAccess"

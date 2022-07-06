@@ -1,5 +1,9 @@
 import StatCard from './StatCard.vue'
 import TrendCard from './TrendCard.vue'
+import TrendStat from './Trend/TrendStat.vue'
+import TrendSection from './Trend/TrendSection.vue'
+import TrendTitle from './Trend/TrendTitle.vue'
+import EditThresholdModal from './Trend/EditThresholdModal.vue'
 
 import StatSection from './StatSection.vue'
 import AlertingMetricsSection from './AlertingMetricsSection.vue'
@@ -15,5 +19,9 @@ export {
   AlertingMetricsSection,
   MetricsGraph,
   GraphDataSelector,
-  GraphChart
+  GraphChart,
+  TrendSection,
+  TrendStat,
+  TrendTitle,
+  EditThresholdModal
 }

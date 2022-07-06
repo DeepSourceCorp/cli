@@ -2,8 +2,14 @@
   <z-badge :is-dot="filterApplied" type="success" size="md">
     <z-menu v-if="!filterApplied" direction="right" width="small" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
-        <z-button icon="filter" size="small" button-type="secondary" @click="toggle">
-          <span class="hidden md:inline">Filter</span>
+        <z-button
+          icon="filter"
+          icon-color="vanilla-400"
+          size="small"
+          button-type="secondary"
+          @click="toggle"
+        >
+          <span class="hidden md:inline text-vanilla-100">Filter</span>
         </z-button>
       </template>
       <template slot="body" class="text-vanilla-200">

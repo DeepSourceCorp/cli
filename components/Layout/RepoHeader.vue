@@ -161,7 +161,7 @@ const navItems: TabLink[] = [
     icon: 'bar-chart',
     label: 'Metrics',
     link: 'metrics',
-    pattern: new RegExp(/^provider-owner-repo-metrics$/)
+    pattern: new RegExp(/^provider-owner-repo-metrics-.*$/)
   },
   {
     icon: 'pie-chart',
@@ -219,11 +219,14 @@ export default class RepoHeader extends mixins(
   RoleAccessMixin,
   ActiveUserMixin
 ) {
+  navItems: TabLink[]
+
   async fetch(): Promise<void> {
     // skipcq: TCV-001
     await Promise.all([
       this.fetchRepoPerms(this.baseRouteParams),
-      this.fetchBasicRepoDetails(this.baseRouteParams)
+      this.fetchBasicRepoDetails(this.baseRouteParams),
+      this.fetchMetrics({ ...this.baseRouteParams })
     ])
 
     // skipcq: TCV-001
@@ -231,6 +234,13 @@ export default class RepoHeader extends mixins(
       ...this.baseRouteParams,
       status: 'pend'
     })
+
+    //? Pre-load first link of metric
+    const firstMetric = this.repository.metricsCaptured?.[0]
+    if (firstMetric) {
+      const metricRecord = this.navItems.findIndex((navItem) => navItem.label === 'Metrics')
+      this.navItems[metricRecord].link = `metrics/${firstMetric.shortcode}`
+    }
   }
 
   refetchOnSocketEvent(): void {

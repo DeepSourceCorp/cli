@@ -19,5 +19,11 @@ query RepositoryReportingSettings($provider: VCSProviderChoices!, $owner: String
       isIgnoredInCheckStatus
       isIgnoredToDisplay
     }
+    metricSettings {
+      name
+      shortcode
+      isIgnoredInCheckStatus
+      isIgnoredToDisplay
+    }
   }
 }

@@ -2,61 +2,16 @@
   <div
     class="flex flex-col space-y-2"
     :class="{
-      'is-group pl-2 transition-all duration-150': isExpanded & !loading
+      'is-group transition-all duration-150': isExpanded & !loading
     }"
   >
-    <!-- Section Title -->
-    <slot name="heading">
-      <div class="flex text-vanilla-400 text-sm space-x-2 group-heading">
-        <!-- Branch Name -->
-        <div class="flex items-center">
-          <div
-            class="
-              flex
-              items-center
-              space-x-2
-              py-2
-              px-3
-              leading-none
-              rounded-full
-              hover:bg-ink-200
-              text-vanilla-200 text-xs
-              cursor-pointer
-            "
-            :class="isExpanded ? 'bg-ink-200' : 'bg-ink-300'"
-            @click="toggleItems"
-          >
-            <span>{{ title }}</span>
-          </div>
-        </div>
-        <!-- Collapsible Component -->
-        <div
-          v-if="count - 1"
-          class="flex items-center space-x-2 cursor-pointer"
-          @click="toggleItems"
-        >
-          <div v-if="loading" class="flex items-center space-x-1 text-xs px-2">
-            <z-icon color="juniper" icon="spin-loader" size="x-small" class="animate-spin" />
-            <span>Loading</span>
-          </div>
-          <z-button v-else button-type="ghost" color="vanilla-400" size="x-small">
-            <div class="flex items-center space-x-1 text-vanilla-400">
-              <span> {{ isExpanded ? 'Collapse' : countText }} </span>
-              <z-icon :icon="isExpanded ? 'chevron-up' : 'chevron-down'" size="small" />
-            </div>
-          </z-button>
-        </div>
-      </div>
-    </slot>
-    <!-- Section Card -->
-    <template v-if="isExpanded && !loading">
+    <slot name="collapsed" :toggleItems="toggleItems" :isExpanded="isExpanded"></slot>
+    <template v-if="isExpanded && !loading" class="relative">
       <slot name="expanded"></slot>
-    </template>
-    <template v-else>
-      <slot name="collapsed"></slot>
     </template>
   </div>
 </template>
+
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZButton, ZLabel } from '@deepsourcelabs/zeal'
@@ -103,7 +58,7 @@ export default class BranchList extends Vue {
 }
 </script>
 <style lang="scss">
-$color: #4c515d;
+$color: #23262e;
 $ident: 14px;
 $left: -($ident);
 

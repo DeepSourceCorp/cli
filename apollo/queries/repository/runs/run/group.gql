@@ -1,4 +1,4 @@
-query(
+query repositoryGroupedRuns(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!
@@ -12,6 +12,7 @@ query(
       totalCount
       edges {
         node {
+          id
           config
           createdAt
           runId
@@ -21,6 +22,7 @@ query(
           commitOid
           finishedIn
           vcsCommitUrl
+          vcsPrUrl
           gitCompareDisplay
           pullRequestNumberDisplay
           issuesRaisedCount

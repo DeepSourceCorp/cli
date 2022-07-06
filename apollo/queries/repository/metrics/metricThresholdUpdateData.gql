@@ -1,0 +1,23 @@
+query metricThresholdUpdateData (
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $shortcode: String!
+  $metricType: MetricTypeChoices
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    metricsCaptured(shortcode: $shortcode, metricType: $metricType) {
+      id
+      shortcode
+      name
+      category
+      description
+      unit
+      namespaces {
+        key
+        threshold
+      }
+    }
+  }
+}

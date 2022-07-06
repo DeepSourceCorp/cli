@@ -1,4 +1,4 @@
-query($checkId: ID!) {
+query repositoryRunCheckDetails($checkId: ID!) {
   check(checkId: $checkId) {
     id
     status
@@ -16,6 +16,7 @@ query($checkId: ID!) {
     issuesRaisedCount
     issuesResolvedCount
     run {
+      id
       isForDefaultBranch
       isForCrossRepoPr
     }
@@ -28,10 +29,15 @@ query($checkId: ID!) {
     metricsCaptured {
       id
       name
+      shortcode
+      value
       valueDisplay
+      valueTrendDisplay
       isPassing
       extraData
       namespace
+      threshold
+      isSuppressed
     }
     concreteIssues {
       totalCount

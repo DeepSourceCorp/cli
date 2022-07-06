@@ -1,0 +1,16 @@
+query fetchRepositoryMetricsCaptured (
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $metricType: MetricTypeChoices
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    metricsCaptured(metricType: $metricType) {
+      id
+      shortcode
+      name
+      category
+    }
+  }
+}

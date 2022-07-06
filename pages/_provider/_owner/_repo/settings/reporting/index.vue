@@ -17,175 +17,296 @@
     </form-group>
 
     <!-- Reporting Configuration -->
-
-    <div class="max-w-2xl">
-      <div class="mb-4">
-        <h6 class="mb-1 text-sm text-vanilla-100">Reporting configuration</h6>
-        <p class="text-xs leading-5 text-vanilla-400">
-          Control which category of issues are reported, and when analysis run is marked as failed.
-        </p>
+    <div class="space-y-4">
+      <div class="flex-grow max-w-2xl">
+        <div class="mb-4">
+          <h6 class="mb-1 text-sm text-vanilla-100">Issue reporting</h6>
+          <p class="text-xs leading-5 text-vanilla-400">
+            Control which category of issues are reported, and when an analysis run is marked as
+            failed.
+          </p>
+        </div>
+        <z-table v-if="repoSettings && repoSettings.length" class="rounded-md text-vanilla-100">
+          <template v-slot:head>
+            <z-table-row>
+              <z-table-cell
+                v-for="head in headerData"
+                :key="head.title"
+                class="text-sm font-bold"
+                :class="head.align"
+                >{{ head.title }}</z-table-cell
+              >
+            </z-table-row>
+          </template>
+          <template v-slot:body>
+            <template v-if="$fetchState.pending">
+              <div
+                v-for="index in 8"
+                :key="index"
+                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+              ></div>
+            </template>
+            <template v-else>
+              <z-table-row
+                v-for="type in repoSettings"
+                :key="type.name"
+                class="text-vanilla-100 hover:bg-ink-300"
+              >
+                <z-table-cell
+                  text-align="left"
+                  class="text-sm font-normal overflow-hidden overflow-ellipsis"
+                  >{{ type.name }}</z-table-cell
+                >
+                <z-table-cell
+                  text-align="center"
+                  class="flex items-center justify-center text-sm font-normal"
+                >
+                  <z-checkbox
+                    :model-value="type.isIgnoredToDisplay"
+                    :true-value="false"
+                    :false-value="true"
+                    spacing="4"
+                    font-size="base"
+                    class="h-full"
+                    @change="
+                      (newValue) =>
+                        updateRepoSetting(InputTypes.ISSUE_TYPE, {
+                          settingType: 'issueTypeSettings',
+                          field: type.slug,
+                          value: { isIgnoredToDisplay: newValue }
+                        })
+                    "
+                  />
+                </z-table-cell>
+                <z-table-cell
+                  text-align="center"
+                  class="flex items-center justify-center text-sm font-normal"
+                >
+                  <z-checkbox
+                    :model-value="type.isIgnoredInCheckStatus"
+                    :true-value="false"
+                    :false-value="true"
+                    spacing="4"
+                    font-size="base"
+                    class="h-full m-0"
+                    @change="
+                      (newValue) =>
+                        updateRepoSetting(InputTypes.ISSUE_TYPE, {
+                          settingType: 'issueTypeSettings',
+                          field: type.slug,
+                          value: { isIgnoredInCheckStatus: newValue }
+                        })
+                    "
+                  />
+                </z-table-cell>
+              </z-table-row>
+            </template>
+          </template>
+        </z-table>
+        <z-table
+          v-if="issuePrioritySettings && issuePrioritySettings.length"
+          class="mt-4 text-vanilla-100"
+        >
+          <template v-slot:head>
+            <z-table-row>
+              <z-table-cell
+                v-for="head in priorityHeaderData"
+                :key="head.title"
+                class="text-sm font-bold"
+                :class="head.align"
+                >{{ head.title }}</z-table-cell
+              >
+            </z-table-row>
+          </template>
+          <template v-slot:body>
+            <template v-if="$fetchState.pending">
+              <div
+                v-for="index in 3"
+                :key="index"
+                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+              ></div>
+            </template>
+            <template v-else>
+              <z-table-row
+                v-for="priority in issuePrioritySettings"
+                :key="priority.slug"
+                class="text-vanilla-100 hover:bg-ink-300"
+              >
+                <z-table-cell text-align="left" class="text-sm font-normal">{{
+                  priority.verboseName
+                }}</z-table-cell>
+                <z-table-cell
+                  text-align="center"
+                  class="flex items-center justify-center text-sm font-normal"
+                >
+                  <z-checkbox
+                    :model-value="priority.isIgnoredToDisplay"
+                    :true-value="false"
+                    :false-value="true"
+                    spacing="4"
+                    font-size="base"
+                    class="h-full"
+                    @change="
+                      (newValue) =>
+                        updateRepoSetting(InputTypes.ISSUE_PRIORITY, {
+                          settingType: 'issuePrioritySettings',
+                          field: priority.slug,
+                          value: { isIgnoredToDisplay: newValue }
+                        })
+                    "
+                  />
+                </z-table-cell>
+                <z-table-cell
+                  text-align="center"
+                  class="flex items-center justify-center text-sm font-normal"
+                >
+                  <z-checkbox
+                    :model-value="priority.isIgnoredInCheckStatus"
+                    :true-value="false"
+                    :false-value="true"
+                    spacing="4"
+                    font-size="base"
+                    class="h-full m-0"
+                    @change="
+                      (newValue) =>
+                        updateRepoSetting(InputTypes.ISSUE_PRIORITY, {
+                          settingType: 'issuePrioritySettings',
+                          field: priority.slug,
+                          value: { isIgnoredInCheckStatus: newValue }
+                        })
+                    "
+                  />
+                </z-table-cell>
+              </z-table-row>
+            </template>
+          </template>
+        </z-table>
       </div>
-      <z-table v-if="repoSettings.length" class="rounded-md text-vanilla-100">
-        <template #head>
-          <z-table-row>
-            <z-table-cell
-              v-for="head in headerData"
-              :key="head.title"
-              class="text-sm font-bold"
-              :class="head.align"
-              >{{ head.title }}</z-table-cell
-            >
-          </z-table-row>
-        </template>
-        <template #body>
-          <template v-if="$fetchState.pending">
-            <div
-              v-for="index in 8"
-              :key="index"
-              class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
-            ></div>
-          </template>
-          <template v-else>
-            <z-table-row
-              v-for="type in repoSettings"
-              :key="type.name"
-              class="text-vanilla-100 hover:bg-ink-300"
-            >
-              <z-table-cell text-align="left" class="text-sm font-normal">{{
-                type.name
-              }}</z-table-cell>
-              <z-table-cell
-                text-align="center"
-                class="flex items-center justify-center text-sm font-normal"
-              >
-                <z-checkbox
-                  v-model="type.isIgnoredToDisplay"
-                  :true-value="false"
-                  :false-value="true"
-                  spacing="4"
-                  font-size="base"
-                  class="h-full"
-                  @change="updateRepositorySettings(InputTypes.ISSUE_TYPE)"
-                />
-              </z-table-cell>
-              <z-table-cell
-                text-align="center"
-                class="flex items-center justify-center text-sm font-normal"
-              >
-                <z-checkbox
-                  v-model="type.isIgnoredInCheckStatus"
-                  :true-value="false"
-                  :false-value="true"
-                  spacing="4"
-                  font-size="base"
-                  class="h-full m-0"
-                  @change="updateRepositorySettings(InputTypes.ISSUE_TYPE)"
-                />
-              </z-table-cell>
-            </z-table-row>
-          </template>
-        </template>
-      </z-table>
-      <z-table v-if="issuePrioritySettings.length" class="mt-4 text-vanilla-100">
-        <template #head>
-          <z-table-row>
-            <z-table-cell
-              v-for="head in priorityHeaderData"
-              :key="head.title"
-              class="text-sm font-bold"
-              :class="head.align"
-              >{{ head.title }}</z-table-cell
-            >
-          </z-table-row>
-        </template>
-        <template #body>
-          <template v-if="$fetchState.pending">
-            <div
-              v-for="index in 3"
-              :key="index"
-              class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
-            ></div>
-          </template>
-          <template v-else>
-            <z-table-row
-              v-for="priority in issuePrioritySettings"
-              :key="priority.slug"
-              class="text-vanilla-100 hover:bg-ink-300"
-            >
-              <z-table-cell text-align="left" class="text-sm font-normal">{{
-                priority.verboseName
-              }}</z-table-cell>
-              <z-table-cell
-                text-align="center"
-                class="flex items-center justify-center text-sm font-normal"
-              >
-                <z-checkbox
-                  v-model="priority.isIgnoredToDisplay"
-                  :true-value="false"
-                  :false-value="true"
-                  spacing="4"
-                  font-size="base"
-                  class="h-full"
-                  @change="updateRepositorySettings(InputTypes.ISSUE_PRIORITY)"
-                />
-              </z-table-cell>
-              <z-table-cell
-                text-align="center"
-                class="flex items-center justify-center text-sm font-normal"
-              >
-                <z-checkbox
-                  v-model="priority.isIgnoredInCheckStatus"
-                  :true-value="false"
-                  :false-value="true"
-                  spacing="4"
-                  font-size="base"
-                  class="h-full m-0"
-                  @change="updateRepositorySettings(InputTypes.ISSUE_PRIORITY)"
-                />
-              </z-table-cell>
-            </z-table-row>
-          </template>
-        </template>
-      </z-table>
-    </div>
 
-    <!-- DSN -->
-    <div class="grid gap-4 mt-6">
-      <div class="col-span-full md:col-auto">
-        <div class="relative">
-          <label for="repo-setting-dsn" class="text-sm text-vanilla-100">
-            Data Source Name (DSN)
-            <z-input :value="repository.dsn" id="repo-setting-dsn" :read-only="true" class="mt-2">
-              <template slot="right">
-                <copy-button :value="repository.dsn" :disabled="!repository.dsn" class="w-32" />
-              </template>
-            </z-input>
-          </label>
-          <div
-            v-if="hideContents"
-            class="absolute flex items-center justify-between w-full h-10 p-2 border top-8 backdrop-blur bg-ink-400 bg-opacity-10 no-filter:bg-opacity-100 border-ink-200"
-          >
-            <button
-              class="flex items-center mx-auto text-sm leading-none cursor-pointer gap-x-2"
-              @click="showContents()"
+      <div class="flex-grow max-w-2xl">
+        <div class="mb-4">
+          <h6 class="mb-1 text-sm text-vanilla-100">Metrics reporting</h6>
+          <p class="text-xs leading-5 text-vanilla-400">
+            Configure which metrics are reported and mark analysis runs as failing when thresholds
+            are not met.
+          </p>
+        </div>
+        <z-table v-if="metricSettings && metricSettings.length" class="rounded-md text-vanilla-100">
+          <template v-slot:head>
+            <z-table-row>
+              <z-table-cell
+                v-for="head in metricsHeaderData"
+                :key="head.title"
+                class="text-sm font-bold"
+                :class="head.align"
+                >{{ head.title }}</z-table-cell
+              >
+            </z-table-row>
+          </template>
+          <template v-slot:body>
+            <template v-if="$fetchState.pending">
+              <div
+                v-for="index in 5"
+                :key="index"
+                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+              ></div>
+            </template>
+            <template v-else>
+              <z-table-row
+                v-for="metricSetting in metricSettings"
+                :key="metricSetting.shortcode"
+                class="text-vanilla-100 hover:bg-ink-300"
+              >
+                <z-table-cell
+                  text-align="left"
+                  class="text-sm font-normal overflow-hidden overflow-ellipsis"
+                  >{{ metricSetting.name }}</z-table-cell
+                >
+                <z-table-cell
+                  text-align="center"
+                  class="flex items-center justify-center text-sm font-normal"
+                >
+                  <z-checkbox
+                    :model-value="metricSetting.isIgnoredToDisplay"
+                    :true-value="false"
+                    :false-value="true"
+                    spacing="4"
+                    font-size="base"
+                    class="h-full"
+                    @change="
+                      (newValue) =>
+                        updateRepoSetting(InputTypes.METRICS, {
+                          settingType: 'metricSettings',
+                          field: metricSetting.shortcode,
+                          value: { isIgnoredToDisplay: newValue }
+                        })
+                    "
+                  />
+                </z-table-cell>
+                <z-table-cell
+                  text-align="center"
+                  class="flex items-center justify-center text-sm font-normal"
+                >
+                  <z-checkbox
+                    :model-value="metricSetting.isIgnoredInCheckStatus"
+                    :true-value="false"
+                    :false-value="true"
+                    spacing="4"
+                    font-size="base"
+                    class="h-full m-0"
+                    @change="
+                      (newValue) =>
+                        updateRepoSetting(InputTypes.METRICS, {
+                          settingType: 'metricSettings',
+                          field: metricSetting.shortcode,
+                          value: { isIgnoredInCheckStatus: newValue }
+                        })
+                    "
+                  />
+                </z-table-cell>
+              </z-table-row>
+            </template>
+          </template>
+        </z-table>
+      </div>
+
+      <!-- DSN -->
+      <div class="grid gap-4">
+        <div class="col-span-full md:col-auto">
+          <div class="relative">
+            <label for="repo-setting-dsn" class="text-sm text-vanilla-100">
+              Data Source Name (DSN)
+              <z-input :value="repository.dsn" id="repo-setting-dsn" :read-only="true" class="mt-2">
+                <template slot="right">
+                  <copy-button :value="repository.dsn" :disabled="!repository.dsn" class="w-32" />
+                </template>
+              </z-input>
+            </label>
+            <div
+              v-if="hideContents"
+              class="absolute flex items-center justify-between w-full h-10 p-2 border top-8 backdrop-blur bg-ink-400 bg-opacity-10 no-filter:bg-opacity-100 border-ink-200"
             >
-              <z-icon size="small" icon="eye" color="vanilla-100"></z-icon>
-              <span>Reveal</span>
-            </button>
-            <copy-button :value="repository.dsn" :disabled="!repository.dsn" class="w-26" />
+              <button
+                class="flex items-center mx-auto text-sm leading-none cursor-pointer gap-x-2"
+                @click="showContents()"
+              >
+                <z-icon size="small" icon="eye" color="vanilla-100"></z-icon>
+                <span>Reveal</span>
+              </button>
+              <copy-button :value="repository.dsn" :disabled="!repository.dsn" class="w-26" />
+            </div>
           </div>
         </div>
+        <p class="text-xs leading-5 text-vanilla-400">
+          This DSN should be used to send any external information about this repository to
+          DeepSource from external sources, such as DeepSource CLI.
+          <span class="font-medium text-vanilla-100">Please keep this confidential.</span>
+        </p>
       </div>
-      <p class="text-xs leading-5 text-vanilla-400">
-        This DSN should be used to send any external information about this repository to DeepSource
-        from external sources, such as DeepSource CLI.
-        <span class="font-medium text-vanilla-100">Please keep this confidential.</span>
-      </p>
     </div>
-
     <z-divider margin="my-2" class="max-w-2xl" />
 
-    <div class="flex flex-col gap-y-4">
+    <div class="space-y-4">
       <div class="text-sm text-vanilla-100">Test Coverage</div>
       <!-- Notice -->
       <p class="text-xs leading-5 text-vanilla-400">
@@ -207,6 +328,127 @@
           Test coverage has not been set up for this repository yet.
         </p>
       </notice>
+      <div>
+        <div class="text-sm text-vanilla-100">
+          <span> New code coverage thresholds </span>
+        </div>
+        <p class="text-xs leading-5 text-vanilla-400">
+          Configure thresholds for new code coverage in pull requests.
+        </p>
+      </div>
+
+      <z-table
+        v-if="
+          repository.hasTestCoverage &&
+          ($fetchState.pending ||
+            (nlcvMetricData && nlcvMetricData.namespaces && nlcvMetricData.namespaces.length))
+        "
+      >
+        <template v-slot:head>
+          <z-table-row>
+            <z-table-cell
+              v-for="head in nlcvHeaderData"
+              :key="head.title"
+              class="text-sm font-bold"
+              :class="head.align"
+              >{{ head.title }}</z-table-cell
+            >
+          </z-table-row>
+        </template>
+        <template v-slot:body>
+          <template v-if="$fetchState.pending">
+            <div
+              v-for="index in 3"
+              :key="index"
+              class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+            ></div>
+          </template>
+          <template
+            v-else-if="
+              nlcvMetricData && nlcvMetricData.namespaces && nlcvMetricData.namespaces.length
+            "
+          >
+            <z-table-row
+              v-for="namespace in nlcvMetricData.namespaces"
+              :key="namespace.key"
+              class="text-vanilla-100 hover:bg-ink-300"
+            >
+              <z-table-cell text-align="left" class="text-sm font-normal">{{
+                namespace.key
+              }}</z-table-cell>
+              <z-table-cell text-align="right" class="text-sm font-normal">
+                <div v-if="namespace.threshold" class="flex justify-end items-center gap-x-4">
+                  <span
+                    >{{ namespace.threshold
+                    }}{{ nlcvMetricData.unit ? nlcvMetricData.unit : '' }}</span
+                  >
+                  <z-menu direction="left">
+                    <template v-slot:trigger="{ toggle }">
+                      <z-button
+                        button-type="ghost"
+                        icon="more-vertical"
+                        icon-color="vanilla-400"
+                        size="x-small"
+                        @click="toggle"
+                      />
+                    </template>
+                    <template slot="body">
+                      <z-menu-section :divider="false" class="text-left">
+                        <z-menu-item
+                          class="text-sm"
+                          icon="edit-2"
+                          @click="toggleEditThreshold(namespace)"
+                        >
+                          Update Threshold
+                        </z-menu-item>
+                        <z-menu-item
+                          class="text-sm text-cherry"
+                          icon="trash-2"
+                          @click="$emit('deleteThreshold')"
+                        >
+                          Delete Threshold
+                        </z-menu-item>
+                      </z-menu-section>
+                    </template>
+                  </z-menu>
+                </div>
+                <div v-else>
+                  <button
+                    class="inline-flex items-center font-medium whitespace-nowrap text-vanilla-400 hover:underline gap-x-1 text-xs float-right"
+                    @click="toggleEditThreshold(namespace)"
+                  >
+                    <z-icon icon="plus" size="x-small" color="current" />
+                    <span>Add threshold</span>
+                  </button>
+                </div>
+              </z-table-cell>
+            </z-table-row>
+          </template>
+        </template>
+      </z-table>
+      <template v-else>
+        <lazy-empty-state
+          v-if="repository.hasTestCoverage"
+          title="Not enough data"
+          subtitle="There is still some number crunching to do before we can show relevant metrics to you. Please check back later."
+          :show-border="true"
+        />
+        <lazy-empty-state
+          v-else
+          title="Test coverage has not been set up for this repository yet."
+          subtitle="Test coverage needs to be enabled for this repository in order to configure the new code coverage metric."
+          :show-border="true"
+        />
+      </template>
+      <portal to="modal">
+        <edit-threshold-modal
+          v-if="showEditThresholdModal"
+          v-bind="editThresholdProps"
+          @editThreshold="editThreshold"
+          @deleteThreshold="deleteThreshold"
+          @close="showEditThresholdModal = false"
+        />
+      </portal>
     </div>
   </div>
 </template>
@@ -224,24 +466,39 @@ import {
   ZTableRow,
   ZCheckbox,
   ZRadioGroup,
-  ZRadio
+  ZRadio,
+  ZMenu,
+  ZMenuSection,
+  ZMenuItem
 } from '@deepsourcelabs/zeal'
 import {
   IssuePrioritySetting,
   IssueTypeSetting,
-  Maybe,
+  Metric,
+  MetricNamespace,
+  MetricSetting,
+  MetricSettingsInput,
+  MetricTypeChoices,
   Repository,
   UpdateRepositorySettingsInput
 } from '~/types/types'
 import { InfoBanner } from '@/components/Settings/index'
 import { RepoPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import {
+  RepositoryDetailMutations,
+  RepoSettingOptions,
+  RepositoryDetailActions
+} from '~/store/repository/detail'
+import { MetricType, NLCV_SHORTCODE } from '~/types/metric'
+import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 const repoStore = namespace('repository/detail')
 
-enum InputTypes {
+export enum InputTypes {
   ISSUE_TYPE = 'issueType',
   ISSUE_PRIORITY = 'issuePriority',
+  METRICS = 'metricsReporting',
   INTEGRATION_MODE = 'integrationMode'
 }
 
@@ -258,7 +515,10 @@ enum InputTypes {
     ZCheckbox,
     InfoBanner,
     ZRadioGroup,
-    ZRadio
+    ZRadio,
+    ZMenu,
+    ZMenuSection,
+    ZMenuItem
   },
   layout: 'repository',
   middleware: ['perm'],
@@ -279,12 +539,34 @@ export default class Reporting extends mixins(RepoDetailMixin) {
   @repoStore.State
   repository!: Repository
 
+  @repoStore.Mutation(RepositoryDetailMutations.SET_REPO_SETTING_VALUE)
+  setRepoSettingField: (options: RepoSettingOptions) => void
+
+  @repoStore.Action(RepositoryDetailActions.FETCH_NLCV_METRIC)
+  fetchNlcvMetic: (args: {
+    provider: string
+    owner: string
+    name: string
+    shortcode: typeof NLCV_SHORTCODE
+    metricType: MetricTypeChoices.PullRequestOnly
+    lastDays: 1
+    refetch?: boolean
+  }) => Promise<Repository>
+
+  @repoStore.Action(RepositoryDetailActions.SET_METRIC_THRESHOLD)
+  setMetricThreshold: (args: {
+    metricShortcode: string
+    repositoryId: string
+    thresholdValue: number
+    key: string
+  }) => Promise<GraphqlMutationResponse>
+
   public hideContents = true
   public isFetchingData = false
   public updatingIntegrationModeSettings = false
-
-  public repoSettings: Array<IssueTypeSetting> = []
-  public issuePrioritySettings: Array<IssuePrioritySetting> = []
+  nlcvRepositoryData = {} as Repository
+  editThresholdProps = {}
+  showEditThresholdModal = false
 
   InputTypes = InputTypes
 
@@ -300,6 +582,17 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     { title: 'Priority', align: 'text-left' },
     { title: 'Issues reported?', align: 'text-center' },
     { title: 'Mark runs as failed?', align: 'text-center' }
+  ]
+
+  public metricsHeaderData = [
+    { title: 'Metric', align: 'text-left' },
+    { title: 'Metric reported?', align: 'text-center' },
+    { title: 'Threshold enforced?', align: 'text-center' }
+  ]
+
+  public nlcvHeaderData = [
+    { title: 'Analyzer', align: 'text-left' },
+    { title: 'Threshold', align: 'text-right' }
   ]
 
   reportingModeOptions = [
@@ -318,19 +611,65 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     }
   ]
 
+  /**
+   * Fetch function to fetch NLCV data.
+   *
+   * @param {boolean} [refetch=false] - Makes a `network-only` request when set to `true`
+   *
+   * @returns {Promise<Repository>}
+   */
+  async fetchNlcvData(refetch: boolean = false): Promise<Repository> {
+    const { provider, owner, repo } = this.$route.params
+    return this.fetchNlcvMetic({
+      provider,
+      owner,
+      name: repo,
+      shortcode: NLCV_SHORTCODE,
+      metricType: MetricTypeChoices.PullRequestOnly,
+      lastDays: 1,
+      refetch
+    })
+  }
+
+  /**
+   * Fetch hook for `reporting` page in repo settings.
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     this.isFetchingData = true
-    await this.fetchRepositorySettingsReporting({
-      provider: this.$route.params.provider,
-      owner: this.$route.params.owner,
-      name: this.$route.params.repo
-    })
-    this.refinedIssueTypeSettings()
-    this.isFetchingData = false
+    try {
+      const { provider, owner, repo } = this.$route.params
+      const repoSettingsPromise = this.fetchRepositorySettingsReporting({
+        provider: provider,
+        owner: owner,
+        name: repo
+      })
+      const nlcvDataPromise: Promise<Repository> = this.repository.hasTestCoverage
+        ? this.fetchNlcvData()
+        : new Promise((resolve) => resolve({} as Repository))
 
-    if (this.providerIsGitLab) {
-      this.reportingMode = this.repository.gitlabIntegrationUseStatus ? 'commit' : 'comments'
+      this.nlcvRepositoryData = (await Promise.all([repoSettingsPromise, nlcvDataPromise]))[1]
+    } catch (e) {
+      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
+    } finally {
+      this.isFetchingData = false
+
+      if (this.providerIsGitLab) {
+        this.reportingMode = this.repository.gitlabIntegrationUseStatus ? 'commit' : 'comments'
+      }
     }
+  }
+
+  get nlcvMetricData() {
+    const nonAggregateNamespaces = this.nlcvRepositoryData.metricsCaptured?.[0]?.namespaces?.filter(
+      (namespace) => namespace?.key !== MetricType.aggregate
+    )
+    if (this.nlcvRepositoryData.metricsCaptured?.[0]) {
+      this.nlcvRepositoryData.metricsCaptured[0].namespaces = nonAggregateNamespaces
+      return this.nlcvRepositoryData.metricsCaptured[0]
+    }
+    return {} as Metric
   }
 
   get gitlabIntegrationUseStatus(): boolean | undefined {
@@ -344,40 +683,20 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     return this.$route.params.provider === 'gl'
   }
 
-  /**
-   * Method to format the issue type settings to be displayed in the table
-   *
-   * @returns {void}
-   */
-  public refinedIssueTypeSettings(): void {
-    if (this.repository && this.repository.issueTypeSettings) {
-      let updatedRepoSettings: Array<IssueTypeSetting> = []
-      this.repository?.issueTypeSettings.forEach((setting: Maybe<IssueTypeSetting>) => {
-        const newObj: IssueTypeSetting = {}
-        newObj.slug = setting?.slug
-        newObj.name = setting?.name
-        newObj.isIgnoredToDisplay = setting?.isIgnoredToDisplay
-        newObj.isIgnoredInCheckStatus = setting?.isIgnoredInCheckStatus
-        updatedRepoSettings.push(newObj)
-      })
-      this.repoSettings = updatedRepoSettings
-    }
+  get repoSettings(): Array<IssueTypeSetting> {
+    return (this.repository?.issueTypeSettings?.filter(Boolean) as IssueTypeSetting[]) ?? []
+  }
 
-    if (this.repository && this.repository.issuePrioritySettings) {
-      let updatedPrioritySettings: Array<IssuePrioritySetting> = []
-      this.repository?.issuePrioritySettings.forEach((setting: Maybe<IssuePrioritySetting>) => {
-        const newObj: IssuePrioritySetting = {}
-        newObj.slug = setting?.slug
-        newObj.weight = setting?.weight
-        newObj.verboseName = setting?.verboseName
-        newObj.isIgnoredToDisplay = setting?.isIgnoredToDisplay
-        newObj.isIgnoredInCheckStatus = setting?.isIgnoredInCheckStatus
-        if (setting?.slug !== 'noop') {
-          updatedPrioritySettings.push(newObj)
-        }
-      })
-      this.issuePrioritySettings = updatedPrioritySettings
-    }
+  get issuePrioritySettings(): Array<IssuePrioritySetting> {
+    return (
+      (this.repository?.issuePrioritySettings?.filter(
+        (issuePrioritySetting) => issuePrioritySetting?.slug !== 'noop'
+      ) as IssuePrioritySetting[]) ?? []
+    )
+  }
+
+  get metricSettings(): Array<MetricSetting> {
+    return (this.repository?.metricSettings?.filter(Boolean) as MetricSetting[]) ?? []
   }
 
   /**
@@ -386,23 +705,43 @@ export default class Reporting extends mixins(RepoDetailMixin) {
    * @returns {Promise<void>}
    */
   public async updateRepositorySettings(inputType: InputTypes): Promise<void> {
-    if (
-      this.repository?.id &&
-      this.repository?.issueTypeSettings &&
-      this.repoSettings.length &&
-      !this.isFetchingData
-    ) {
+    if (this.repository?.id && !this.isFetchingData) {
       try {
         const input = { id: this.repository.id } as UpdateRepositorySettingsInput
 
-        if (inputType === InputTypes.ISSUE_TYPE) {
-          input.issueTypeSettings = this.repoSettings.length
-            ? this.repoSettings
-            : this.repository.issueTypeSettings
-        } else if (inputType === InputTypes.ISSUE_PRIORITY) {
-          input.issuePrioritySettings = this.issuePrioritySettings.length
-            ? this.issuePrioritySettings
-            : this.repository.issuePrioritySettings
+        if (inputType === InputTypes.ISSUE_TYPE && this.repository?.issueTypeSettings) {
+          input.issueTypeSettings = this.repository.issueTypeSettings.map((typeSetting) => {
+            if (typeSetting) {
+              const { slug, isIgnoredInCheckStatus, isIgnoredToDisplay, name } = typeSetting
+              return { slug, isIgnoredInCheckStatus, isIgnoredToDisplay, name }
+            }
+            return {}
+          })
+        } else if (
+          inputType === InputTypes.ISSUE_PRIORITY &&
+          this.repository.issuePrioritySettings
+        ) {
+          input.issuePrioritySettings = this.repository.issuePrioritySettings.map(
+            (prioritySetting) => {
+              if (prioritySetting) {
+                const { slug, isIgnoredInCheckStatus, verboseName, isIgnoredToDisplay, weight } =
+                  prioritySetting
+                return { slug, isIgnoredInCheckStatus, verboseName, isIgnoredToDisplay, weight }
+              }
+              return {}
+            }
+          )
+        } else if (inputType === InputTypes.METRICS && this.repository.metricSettings) {
+          input.metricSettings = this.repository.metricSettings.map((metricSetting) => {
+            if (metricSetting) {
+              const { shortcode, isIgnoredInCheckStatus, isIgnoredToDisplay } = metricSetting
+              return {
+                shortcode,
+                isIgnoredInCheckStatus,
+                isIgnoredToDisplay
+              }
+            }
+          }) as MetricSettingsInput[]
         } else if (inputType === InputTypes.INTEGRATION_MODE) {
           this.updatingIntegrationModeSettings = true
           input.gitlabIntegrationUseStatus = this.gitlabIntegrationUseStatus
@@ -411,16 +750,17 @@ export default class Reporting extends mixins(RepoDetailMixin) {
         await this.updateRepoSettings({
           input
         })
+
+        this.$toast.success('Repository settings updated successfully.')
+      } catch (error) {
+        this.$toast.danger('Error updating repository. Please try again.')
+      } finally {
         await this.fetchRepositorySettingsReporting({
           provider: this.$route.params.provider,
           owner: this.$route.params.owner,
           name: this.$route.params.repo,
           refetch: true
         })
-        this.$toast.success('Repository settings updated successfully.')
-      } catch (error) {
-        this.$toast.danger('Error updating repository. Please try again.')
-      } finally {
         if (inputType === InputTypes.INTEGRATION_MODE) {
           this.updatingIntegrationModeSettings = false
         }
@@ -428,8 +768,95 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     }
   }
 
+  /**
+   * Update settings for a repository.
+   *
+   * @param {InputTypes} inputType - Type of setting to update
+   * @param {RepoSettingOptions} options - Options for the repo setting to update
+   *
+   * @returns {void} void
+   */
+  public updateRepoSetting(inputType: InputTypes, options: RepoSettingOptions): void {
+    this.setRepoSettingField(options)
+    this.updateRepositorySettings(inputType)
+  }
+
+  /**
+   * Show contents within the DSN field.
+   *
+   * @returns {void} void
+   */
   public showContents(): void {
     this.hideContents = false
+  }
+
+  /**
+   * Toggle the edit threshold modal open with given parameters.
+   *
+   * @param {{key: MetricNamespace['key'], threshold: MetricNamespace['threshold']}} namespace - Object with a `key` and `threshold` of the metric namespace to edit
+   *
+   * @returns {void}
+   */
+  toggleEditThreshold(namespace: {
+    key: MetricNamespace['key']
+    threshold: MetricNamespace['threshold']
+  }): void {
+    if (this.nlcvMetricData?.name) {
+      this.editThresholdProps = {
+        thresholdValue: namespace.threshold,
+        analyzerKey: namespace.key,
+        metricShortcode: NLCV_SHORTCODE,
+        repositoryId: this.repository.id,
+        metricName: this.nlcvMetricData.name,
+        unit: this.nlcvMetricData.unit
+      }
+      this.showEditThresholdModal = true
+    }
+  }
+
+  /**
+   * Edit a threshold for a namespace in the {@link NLCV_SHORTCODE} metric.
+   *
+   * @param {number} newThresholdValue - Value to update the threshold to
+   * @param {string} analyzerKey - `key` of the namespace whose threshold is being updated
+   * @param {Function} close - Function to close the modal.
+   *
+   * @returns {Promise<void>}
+   */
+  async editThreshold(
+    newThresholdValue: number,
+    analyzerKey: string,
+    _close?: () => void
+  ): Promise<void> {
+    if (newThresholdValue || newThresholdValue === 0) {
+      try {
+        const response = (await this.setMetricThreshold({
+          metricShortcode: NLCV_SHORTCODE,
+          repositoryId: this.repository.id,
+          thresholdValue: newThresholdValue || 0,
+          key: analyzerKey
+        })) as GraphqlMutationResponse
+
+        if (response.data.updateRepoMetricThreshold?.ok) {
+          this.$toast.success('Successfully updated threshold.')
+        }
+      } catch (e) {
+        this.$logErrorAndToast(e as Error, 'An error occured while updating repository metrics.')
+      } finally {
+        this.nlcvRepositoryData = await this.fetchNlcvData(true)
+      }
+    }
+  }
+
+  /**
+   * Delete a threshold for a namespace in the {@link NLCV_SHORTCODE} metric.
+   *
+   * @param {MetricNamespace} namespace - MetricNamespace to delete threshold for.
+   *
+   * @returns {Promise<void>}
+   */
+  async deleteThreshold(namespace: MetricNamespace): Promise<void> {
+    await this.editThreshold(0, namespace.key as string)
   }
 }
 </script>

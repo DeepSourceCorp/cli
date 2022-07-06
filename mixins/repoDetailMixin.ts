@@ -3,7 +3,6 @@ import { RepositoryDetailActions } from '~/store/repository/detail'
 import {
   Repository,
   CommitConfigToVcsInput,
-  UpdateRepoMetricThresholdInput,
   ToggleRepositoryActivationInput,
   UpdateRepositorySettingsInput,
   UpdateOrCreateRepositoryCollaboratorInput,
@@ -118,15 +117,6 @@ export default class RepoDetailMixin extends Vue {
     refetch?: boolean
   }) => Promise<void>
 
-  @repoStore.Action(RepositoryDetailActions.FETCH_METRICS)
-  fetchMetrics: (args: {
-    provider: string
-    owner: string
-    name: string
-    lastDays: number
-    refetch?: boolean
-  }) => Promise<void>
-
   @repoStore.Action(RepositoryDetailActions.FETCH_ALERTING_METRICS)
   fetchAlertingMetrics: (args: {
     provider: string
@@ -204,12 +194,12 @@ export default class RepoDetailMixin extends Vue {
     name: string
   }) => Promise<void>
 
+  @repoStore.Action(RepositoryDetailActions.FETCH_METRICS)
+  fetchMetrics: (args: { provider: string; owner: string; name: string }) => Promise<void>
+
   // Mutations
   @repoStore.Action(RepositoryDetailActions.COMMIT_CONFIG_TO_VCS)
   commitConfigToVcs: (args: CommitConfigToVcsInput) => Promise<CommitConfigToVcsPayload>
-
-  @repoStore.Action(RepositoryDetailActions.SET_METRIC_THRESHOLD)
-  setRepoMetricsThreshold: (args: UpdateRepoMetricThresholdInput) => Promise<void>
 
   @repoStore.Action(RepositoryDetailActions.DELETE_IGNORED_RULE)
   deleteIgnoredRule: (args: { silenceRuleId: string }) => Promise<void>

@@ -153,6 +153,13 @@ export const SINGLE_ISSUE: Issue = {
         hasNextPage: false,
         hasPreviousPage: false
       }
+    },
+    metrics: {
+      edges: [],
+      pageInfo: {
+        hasNextPage: false,
+        hasPreviousPage: false
+      }
     }
   },
   autofixAvailable: false,
@@ -180,6 +187,13 @@ export const SINGLE_ISSUE: Issue = {
     }
   },
   issuePriorities: {
+    edges: [],
+    pageInfo: {
+      hasNextPage: false,
+      hasPreviousPage: false
+    }
+  },
+  linkedMetrics: {
     edges: [],
     pageInfo: {
       hasNextPage: false,

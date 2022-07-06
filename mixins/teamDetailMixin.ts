@@ -108,6 +108,8 @@ export default class TeamDetailMixin extends Vue {
     canContributorsIgnoreIssues: boolean
     canMembersModifyMetricThresholds: boolean
     canContributorsModifyMetricThresholds: boolean
+    canMembersIgnoreFailingMetrics: boolean
+    canContributorsIgnoreFailingMetrics: boolean
   }) => Promise<UpdateTeamBasePermissionsPayload>
 
   @teamStore.Action(TeamActions.SYNC_VCS_PERMISSIONS)

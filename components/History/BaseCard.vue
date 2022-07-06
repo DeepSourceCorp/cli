@@ -6,7 +6,7 @@
     class="block group"
     :class="{
       'border rounded-lg border-ink-200': !removeDefaultStyle,
-      'hover:bg-ink-300': to && !removeDefaultStyle
+      'bg-ink-400 hover:bg-ink-300': to && !removeDefaultStyle
     }"
   >
     <div

@@ -47,7 +47,11 @@
           :trend-positive="isTrendPositive(issueWidgets[widget])"
           :trend-value="issueWidgets[widget].trend_value"
           :remove-styles="true"
-          class="outline-ink-200 hover:bg-ink-300 min-h-22 sm:min-h-24"
+          class="outline-ink-200 hover:bg-ink-300 p-3"
+          :class="{
+            [issueWidgets[widget].value_display === '']:
+              'text-lg font-medium tracking-wider text-vanilla-400'
+          }"
         >
           <template slot="title">
             <h5 class="text-base font-medium text-vanilla-100">
@@ -61,7 +65,12 @@
                 : ''
             "
           >
-            {{ shortenLargeNumber(issueWidgets[widget].value_display) }}
+            <!-- value_display is returned as an empty string if not available, hence the exact check -->
+            {{
+              issueWidgets[widget].value_display === ''
+                ? 'N/A'
+                : shortenLargeNumber(issueWidgets[widget].value_display)
+            }}
           </span>
         </stat-card>
       </template>

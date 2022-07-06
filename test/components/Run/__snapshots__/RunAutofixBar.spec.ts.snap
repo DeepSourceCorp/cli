@@ -1,25 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ RunAutofixBar ]] renders \`RunAutofixBar\` with all prop options: {"id":"Q2hlY2s6enFkbmpv","autofixableIssues":[{"shortcode":"BAN-B101","title":"Assert statement used outside of tests","category":"security","occurrenceCount":1}],"filesAffectedByAutofix":1,"canCreateAutofix":false} 1`] = `
-"<div class=\\"flex items-center justify-between px-4 py-2 mb-4 text-sm bg-ink-300\\"><span>1 issue can
-    be Autofixed in
-    1
-    file</span>
-  <div data-original-title=\\"null\\" class=\\" has-tooltip\\">
-    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Autofix\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"autofix\\" spacing=\\"px-10\\"></zbutton-stub>
-  </div>
-  <autofixissueschooser-stub checkid=\\"Q2hlY2s6enFkbmpv\\" autofixableissues=\\"[object Object]\\"></autofixissueschooser-stub>
-</div>"
+"<zaccordion-stub allowmultiple=\\"true\\">
+  <zaccordionitem-stub title=\\"\\" icon=\\"down\\" spancustomheight=\\"true\\" custommaxheight=\\"max-h-item\\" class=\\"bg-ink-300 rounded-md border border-ink-200 mb-4\\">
+    <div>
+      <div class=\\"flex flex-col overflow-y-auto\\">
+        <div class=\\"divide-y divide-ink-200\\">
+          <div class=\\"flex flex-col w-full bg-ink-400\\">
+            <div class=\\"w-full flex gap-x-1 items-center leading-7 py-2 px-4\\">
+              <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"[object Object]\\" size=\\"small\\" spacing=\\"4\\" class=\\"align-top\\"></zcheckbox-stub>
+              <div class=\\"flex w-full space-x-2 text-sm\\"><span class=\\"flex-grow\\"><nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python/BAN-B101\\"><span class=\\"text-vanilla-300 mr-1.5\\">Assert statement used outside of tests</span></nuxt-link> <span class=\\"text-slate\\">BAN-B101</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>1</span></span></div>
+            </div>
+          </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+  </zaccordionitem-stub>
+</zaccordion-stub>"
 `;
 
 exports[`[[ RunAutofixBar ]] renders \`RunAutofixBar\` with all prop options: {"id":"Q2hlY2s6enFkbmpv","autofixableIssues":[{"shortcode":"BAN-B101","title":"Assert statement used outside of tests","category":"security","occurrenceCount":1}],"filesAffectedByAutofix":1,"canCreateAutofix":true} 1`] = `
-"<div class=\\"flex items-center justify-between px-4 py-2 mb-4 text-sm bg-ink-300\\"><span>1 issue can
-    be Autofixed in
-    1
-    file</span>
-  <div>
-    <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Autofix\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"autofix\\" spacing=\\"px-10\\"></zbutton-stub>
-  </div>
-  <autofixissueschooser-stub checkid=\\"Q2hlY2s6enFkbmpv\\" autofixableissues=\\"[object Object]\\"></autofixissueschooser-stub>
-</div>"
+"<zaccordion-stub allowmultiple=\\"true\\">
+  <zaccordionitem-stub title=\\"\\" icon=\\"down\\" spancustomheight=\\"true\\" custommaxheight=\\"max-h-item\\" class=\\"bg-ink-300 rounded-md border border-ink-200 mb-4\\">
+    <div>
+      <div class=\\"flex flex-col overflow-y-auto\\">
+        <div class=\\"divide-y divide-ink-200\\">
+          <div class=\\"flex flex-col w-full bg-ink-400\\">
+            <div class=\\"w-full flex gap-x-1 items-center leading-7 py-2 px-4\\">
+              <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"[object Object]\\" size=\\"small\\" spacing=\\"4\\" class=\\"align-top\\"></zcheckbox-stub>
+              <div class=\\"flex w-full space-x-2 text-sm\\"><span class=\\"flex-grow\\"><nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python/BAN-B101\\"><span class=\\"text-vanilla-300 mr-1.5\\">Assert statement used outside of tests</span></nuxt-link> <span class=\\"text-slate\\">BAN-B101</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>1</span></span></div>
+            </div>
+          </div>
+        </div>
+        <!---->
+      </div>
+    </div>
+  </zaccordionitem-stub>
+</zaccordion-stub>"
 `;

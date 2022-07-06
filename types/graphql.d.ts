@@ -656,6 +656,15 @@ declare module '*/commitConfigToVcs.gql' {
 }
     
 
+declare module '*/ignoreCheckMetric.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ignoreCheckMetric: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/deleteIgnoredRule.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -839,7 +848,7 @@ declare module '*/updateRole.gql' {
 declare module '*/updateTeamBasePermissions.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const updateTeamBasePermissions: DocumentNode;
 
   export default defaultDocument;
 }
@@ -887,6 +896,7 @@ declare module '*/list.gql' {
   export const listWebhooks: DocumentNode;
 export const repositoryIssueList: DocumentNode;
 export const AutofixRuns: DocumentNode;
+export const repositoryRunsList: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1357,6 +1367,7 @@ declare module '*/single.gql' {
   const defaultDocument: DocumentNode;
   export const webhookEventDelivery: DocumentNode;
 export const getSingleWebhook: DocumentNode;
+export const repositoryRunDetail: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1510,6 +1521,7 @@ declare module '*/detail.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const RepoDetails: DocumentNode;
+export const repositoryRunCheckDetails: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1587,10 +1599,28 @@ declare module '*/listForAnalyzerDirectory.gql' {
 }
     
 
+declare module '*/metric.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const fetchRepositoryMetricCaptured: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/metricThresholdUpdateData.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const metricThresholdUpdateData: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/metrics.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const fetchRepositoryMetricsCaptured: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1635,7 +1665,7 @@ declare module '*/globalStateIndicator.gql' {
 declare module '*/branch.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const repositoryBranchRuns: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1671,7 +1701,7 @@ declare module '*/concreteIssueList.gql' {
 declare module '*/group.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const repositoryGroupedRuns: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1770,7 +1800,7 @@ declare module '*/inviteUrl.gql' {
 declare module '*/settings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const fetchTeamPermissions: DocumentNode;
 
   export default defaultDocument;
 }

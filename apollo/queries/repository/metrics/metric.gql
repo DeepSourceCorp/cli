@@ -1,0 +1,31 @@
+query fetchRepositoryMetricCaptured (
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $shortcode: String!
+  $lastDays: Int!
+  $metricType: MetricTypeChoices
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    userPermissionMeta
+    metricsCaptured(shortcode: $shortcode, metricType: $metricType) {
+      id
+      shortcode
+      name
+      category
+      description
+      supportsAggregateThreshold
+      unit
+      namespacesTrends(lastDays: $lastDays) {
+        key
+        valueTrend
+        isPassing
+        valueDisplay
+        analyzerShortcode
+        analyzerLogo
+        threshold
+      }
+    }
+  }
+}

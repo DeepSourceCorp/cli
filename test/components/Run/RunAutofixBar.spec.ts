@@ -5,6 +5,25 @@ import VTooltip from 'v-tooltip'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 import RunAutofixBar from '../../../components/Run/RunAutofixBar.vue'
 
+const mocks = {
+  $generateRoute: jest
+    .fn()
+    .mockImplementation(
+      () => 'gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python/BAN-B101'
+    ),
+  $route: {
+    query: '',
+    params: {
+      provider: 'gh',
+      owner: 'deepsourcelabs',
+      repo: 'demo-python',
+      runId: '4c1d5e1b-1747-4777-9618-acae5c51ca5d',
+      analyzer: 'python',
+      shortcode: 'BAN-B101'
+    }
+  }
+}
+
 describe('[[ RunAutofixBar ]]', () => {
   test('renders `RunAutofixBar` with all prop options', () => {
     const baseProps = {
@@ -33,9 +52,13 @@ describe('[[ RunAutofixBar ]]', () => {
         {
           props,
           stubs: {
-            AutofixIssuesChooser: true,
-            ZButton: true
-          }
+            ZButton: true,
+            ZAccordion: true,
+            ZAccordionItem: true,
+            ZCheckbox: true,
+            ZIcon: true
+          },
+          mocks
         },
         (vue) => {
           vue.use(VTooltip)

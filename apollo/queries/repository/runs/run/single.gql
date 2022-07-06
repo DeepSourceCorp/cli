@@ -1,7 +1,13 @@
-query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: String!) {
+query repositoryRunDetail(
+  $runId: String!
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id
     run(runId: $runId) {
+      id
       createdAt
       blobUrlRoot
       runId
@@ -10,6 +16,7 @@ query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: S
           node {
             id
             issuesRaisedCount
+            status
             analyzer {
               name
               shortcode
@@ -27,6 +34,7 @@ query($runId: String!, $provider: VCSProviderChoices!, $owner: String!, $name: S
       gitCompareDisplay
       vcsPrUrl
       pullRequestNumberDisplay
+      isForDefaultBranch
     }
   }
 }

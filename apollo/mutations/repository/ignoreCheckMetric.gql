@@ -1,0 +1,5 @@
+mutation ignoreCheckMetric($checkId: ID!, $metricShortcode: String!, $key: String!) {
+  ignoreCheckMetric(input: { checkId: $checkId, metricShortcode: $metricShortcode, key: $key }) {
+    ok
+  }
+}

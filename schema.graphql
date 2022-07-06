@@ -139,6 +139,7 @@ type Analyzer implements MaskPrimaryKeyNode {
   supportedFilesRegex: String
   issues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String, issueType: String, autofixAvailable: Boolean): IssueConnection!
   reviews(offset: Int, before: String, after: String, first: Int, last: Int): AnalyzerReviewConnection!
+  metrics(offset: Int, before: String, after: String, first: Int, last: Int): MetricConnection!
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   repositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
   userSet(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
@@ -820,8 +821,6 @@ scalar Date
 
 scalar DateTime
 
-scalar Decimal
-
 input DeleteAccessTokenInput {
   tokenId: ID!
   clientMutationId: String
@@ -1285,6 +1284,18 @@ type IgnoreCheckIssuePayload {
   clientMutationId: String
 }
 
+input IgnoreCheckMetricInput {
+  checkId: ID!
+  metricShortcode: String!
+  key: String!
+  clientMutationId: String
+}
+
+type IgnoreCheckMetricPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input IgnoreIssueForFilePatternInRepositoryInput {
   repoIssueId: ID
   checkId: ID
@@ -1444,6 +1455,7 @@ type Issue implements MaskPrimaryKeyNode {
   weight: Int!
   tags: [String]
   starIssueInAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection!
+  linkedMetrics(offset: Int, before: String, after: String, first: Int, last: Int): MetricConnection!
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   checkIssues(offset: Int, before: String, after: String, first: Int, last: Int, q: String, shortcode: String, sort: String): CheckIssueConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
@@ -1581,6 +1593,65 @@ interface MaskPrimaryKeyNode {
   id: ID!
 }
 
+type Metric implements MaskPrimaryKeyNode {
+  shortcode: String!
+  name: String!
+  description: String!
+  unit: String
+  supportsAggregateThreshold: Boolean!
+  id: ID!
+  category: String
+  namespaces: [MetricNamespace]
+  namespacesTrends(lastDays: Int!): [MetricNamespaceTrend]
+}
+
+type MetricConnection {
+  pageInfo: PageInfo!
+  edges: [MetricEdge]!
+  totalCount: Int
+}
+
+type MetricEdge {
+  node: Metric
+  cursor: String!
+}
+
+type MetricNamespace {
+  key: String
+  threshold: Int
+  analyzerShortcode: String
+  analyzerLogo: String
+}
+
+type MetricNamespaceTrend {
+  isPassing: Boolean
+  valueDisplay: String
+  valueTrend: GenericScalar
+  key: String
+  threshold: Int
+  analyzerShortcode: String
+  analyzerLogo: String
+}
+
+type MetricSetting {
+  shortcode: String
+  name: String
+  isIgnoredInCheckStatus: Boolean
+  isIgnoredToDisplay: Boolean
+}
+
+input MetricSettingsInput {
+  shortcode: String!
+  isIgnoredInCheckStatus: Boolean!
+  isIgnoredToDisplay: Boolean!
+}
+
+enum MetricTypeChoices {
+  DEFAULT_BRANCH_ONLY
+  PULL_REQUEST_ONLY
+  ALL
+}
+
 type Mutation {
   updateEnterpriseInstallation(input: UpdateEnterpriseInstallationInput!): UpdateEnterpriseInstallationPayload
   createGroup(input: CreateGroupInput!): CreateGroupPayload
@@ -1639,6 +1710,7 @@ type Mutation {
   createdPullRequest(input: CreatePullRequestInput!): CreatePullRequestPayload
   commitConfigToVcs(input: CommitConfigToVCSInput!): CommitConfigToVCSPayload
   updateRepoMetricThreshold(input: UpdateRepoMetricThresholdInput!): UpdateRepoMetricThresholdPayload
+  ignoreCheckMetric(input: IgnoreCheckMetricInput!): IgnoreCheckMetricPayload
   createAutofixRunForPullRequest(input: CreateAutofixRunForPullRequestInput!): CreateAutofixRunForPullRequestPayload
   createAutofixRunForAnalyzer(input: CreateAutofixRunForAnalyzerInput!): CreateAutofixRunForAnalyzerPayload
   commitChangesToPr(input: CommitChangesToPRInput!): CommitChangesToPRPayload
@@ -2038,12 +2110,13 @@ type Repository implements MaskPrimaryKeyNode {
   activityModality: String
   issueTypeSettings: [IssueTypeSetting]
   issuePrioritySettings: [IssuePrioritySetting]
+  metricSettings: [MetricSetting]
   widgetsDisplay: GenericScalar
   allWidgets: GenericScalar
   widgetsAvailable: [String]
   isAutofixEnabled: Boolean
   availableAnalyzers(offset: Int, before: String, after: String, first: Int, last: Int, categoryIn: [String], q: String): AnalyzerConnection
-  metricsData(lastDays: Int!): GenericScalar
+  metricsCaptured(shortcode: String, metricType: MetricTypeChoices = DEFAULT_BRANCH_ONLY): [Metric]
   uniqueNamespaceKeys: [String]
   isCommitPossible: Boolean
   vcsHost: String
@@ -2187,15 +2260,19 @@ type RepositoryMetricValue implements MaskPrimaryKeyNode {
   createdAt: DateTime!
   modifiedAt: DateTime!
   alive: Boolean
-  value: Decimal!
+  value: Float
   extraData: JSONString!
   commitOid: String!
   checkInstance: Check!
   branchName: String
+  isSuppressed: Boolean
   name: String
+  shortcode: String
+  threshold: Int
   valueDisplay: String
   isPassing: Boolean
   namespace: GenericScalar
+  valueTrendDisplay: String
 }
 
 enum RepositoryPermissionChoices {
@@ -2488,8 +2565,10 @@ type TeamBasePermissionSet implements MaskPrimaryKeyNode {
   defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
   canMembersIgnoreIssues: Boolean!
   canMembersModifyMetricThresholds: Boolean!
+  canMembersIgnoreFailingMetrics: Boolean!
   canContributorsIgnoreIssues: Boolean!
   canContributorsModifyMetricThresholds: Boolean!
+  canContributorsIgnoreFailingMetrics: Boolean!
 }
 
 enum TeamBasePermissionSetDefaultRepositoryPermission {
@@ -3055,6 +3134,7 @@ input UpdateRepositorySettingsInput {
   keepExistingIssues: Boolean = true
   issueTypeSettings: [IssueTypeSettingInput]
   issuePrioritySettings: [RepositoryIssuePrioritySettingsInput]
+  metricSettings: [MetricSettingsInput]
   gitlabIntegrationUseStatus: Boolean
   id: ID!
   clientMutationId: String
@@ -3092,8 +3172,10 @@ input UpdateTeamBasePermissionsInput {
   defaultRepositoryPermission: RepositoryPermissionChoices
   canMembersIgnoreIssues: Boolean
   canMembersModifyMetricThresholds: Boolean
+  canMembersIgnoreFailingMetrics: Boolean
   canContributorsIgnoreIssues: Boolean
   canContributorsModifyMetricThresholds: Boolean
+  canContributorsIgnoreFailingMetrics: Boolean
   clientMutationId: String
 }
 

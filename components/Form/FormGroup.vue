@@ -21,7 +21,7 @@ import { ZDivider } from '@deepsourcelabs/zeal'
   components: { ZDivider }
 })
 export default class FormGroup extends Vue {
-  @Prop({ required: true })
+  @Prop({})
   label: boolean
 
   @Prop({ default: true })

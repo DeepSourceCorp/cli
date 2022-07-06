@@ -26,6 +26,7 @@
       "Issue",
       "IssuePriority",
       "IssuePriorityType",
+      "Metric",
       "Owner",
       "OwnerSetting",
       "Repository",

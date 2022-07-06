@@ -6,6 +6,7 @@ import RepositoryRunCheckIssuesGQLQuery from '~/apollo/queries/repository/runs/r
 import CreateAutofixRunForPullRequestMutation from '~/apollo/mutations/autofix/createAutofixRunForPullRequest.gql'
 import CommitFixToPullRequest from '~/apollo/mutations/autofix/commitFixToPullRequest.gql'
 import CreatePullRequest from '~/apollo/mutations/autofix/createPullRequest.gql'
+import IgnoreCheckMetricMutation from '~/apollo/mutations/repository/ignoreCheckMetric.gql'
 
 import {
   PageInfo,
@@ -19,7 +20,11 @@ import {
   CreatePullRequestInput
 } from '~/types/types'
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
-import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import {
+  GraphqlError,
+  GraphqlMutationResponse,
+  GraphqlQueryResponse
+} from '~/types/apollo-graphql-types'
 import { RootState } from '~/store'
 
 export enum RunDetailActions {
@@ -31,7 +36,8 @@ export enum RunDetailActions {
   FETCH_AUTOFIXABLE_ISSUES = 'fetchAutofixableIssues',
   CREATE_AUTOFIX_PR = 'createAutofixPR',
   COMMIT_TO_PR = 'commitFixToPR',
-  CREATE_PR = 'createPullRequest'
+  CREATE_PR = 'createPullRequest',
+  IGNORE_CHECK_METRIC = 'ignoreCheckMetric'
 }
 
 export enum RunDetailMutations {
@@ -169,6 +175,15 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
       input: CreatePullRequestInput
     }
   ) => Promise<void>
+  [RunDetailActions.IGNORE_CHECK_METRIC]: (
+    this: Store<RootState>,
+    injectee: RunDetailActionContext,
+    args: {
+      checkId: string
+      metricShortcode: string
+      key: string
+    }
+  ) => Promise<boolean>
 }
 
 export const actions: RunDetailModuleActions = {
@@ -288,5 +303,19 @@ export const actions: RunDetailModuleActions = {
     })
     commit(RunDetailMutations.SET_LOADING, false)
     return response
+  },
+  async [RunDetailActions.IGNORE_CHECK_METRIC](_context, { checkId, key, metricShortcode }) {
+    try {
+      const response = (await this.$applyGraphqlMutation(IgnoreCheckMetricMutation, {
+        checkId,
+        key,
+        metricShortcode
+      })) as GraphqlMutationResponse
+
+      return Boolean(response.data.ignoreCheckMetric?.ok)
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'An error ocurred while ignoring metric.')
+    }
+    return false
   }
 }

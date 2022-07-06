@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360},"type":"metric"} 1`] = `
+"<div class=\\"space-y-2.5\\">
+  <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+    Around the world
+  </p>
+  <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;
+
+exports[`renders TrendStat with all prop options: {"metric":{"name":"Around the world","value":360},"type":"threshold"} 1`] = `
+"<div class=\\"space-y-2.5\\">
+  <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+    Threshold
+  </p>
+  <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      360
+    </span>
+    <!---->
+  </div>
+</div>"
+`;

@@ -1253,8 +1253,7 @@ describe('[Store] Repository/Detail', () => {
           await actions[RepositoryDetailActions.FETCH_METRICS].call(localThis, actionCxt, {
             provider: 'gh',
             owner: 'deepsourcelabs',
-            name: 'marvin-python',
-            lastDays: 10
+            name: 'marvin-python'
           })
         })
 
@@ -1264,42 +1263,145 @@ describe('[Store] Repository/Detail', () => {
 
         test('successfully commits mutations', () => {
           // Loading and Metrics mutation
-          expect(commit).toHaveBeenCalledTimes(3)
-        })
-
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
-          const {
-            mock: {
-              calls: [firstCall, , thirdCall]
-            }
-          } = commit
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
+          expect(commit).toHaveBeenCalledTimes(1)
         })
 
         test(`successfully commits mutation ${RepositoryDetailMutations.SET_REPOSITORY}`, async () => {
           const {
             mock: {
-              calls: [, secondCall]
+              calls: [firstCall]
             }
           } = commit
           const apiResponse = await localThis.$fetchGraphqlData()
 
           // Assert if `RepositoryDetailMutations.SET_REPOSITORY` is being commited or not.
-          expect(secondCall[0]).toEqual(RepositoryDetailMutations.SET_REPOSITORY)
+          expect(firstCall[0]).toEqual(RepositoryDetailMutations.SET_REPOSITORY)
 
           // Assert if the response from api is same as the one passed to the mutation.
-          expect(secondCall[1]).toEqual(apiResponse.data.repository)
+          expect(firstCall[1]).toEqual(apiResponse.data.repository)
+        })
+      })
+
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $getGQLAfter: jest.fn(),
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((_resolve, reject) =>
+                reject(new Error('ERR1'))
+              )
+            },
+            async $logErrorAndToast(): Promise<void> {}
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$logErrorAndToast')
+        })
+
+        test(`successfully throws an error`, async () => {
+          try {
+            await actions[RepositoryDetailActions.FETCH_METRICS].call(localThis, actionCxt, {
+              provider: 'gh',
+              owner: 'deepsourcelabs',
+              name: 'demo-python'
+            })
+          } catch (e) {
+            expect(spy).toHaveBeenCalledTimes(1)
+          }
+        })
+      })
+    })
+
+    describe(`Action "${RepositoryDetailActions.FETCH_METRIC}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $getGQLAfter: jest.fn(),
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                resolve({
+                  data: { repository: mockRepositoryDetailStateForMetrics().repository }
+                })
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[RepositoryDetailActions.FETCH_METRIC].call(localThis, actionCxt, {
+            provider: 'gh',
+            owner: 'deepsourcelabs',
+            name: 'demo-python',
+            shortcode: 'TCV',
+            lastDays: 30
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test(`successfully returns mutation ${RepositoryDetailMutations.SET_REPOSITORY}`, async () => {
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if the response from api is same as the one passed to the mutation.
+          expect(apiResponse.data.repository).toEqual(
+            mockRepositoryDetailStateForMetrics().repository
+          )
+        })
+      })
+
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $getGQLAfter: jest.fn(),
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((_resolve, reject) =>
+                reject(new Error('ERR1'))
+              )
+            },
+            async $logErrorAndToast(): Promise<void> {}
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$logErrorAndToast')
+        })
+
+        test(`successfully throws an error`, async () => {
+          try {
+            await actions[RepositoryDetailActions.FETCH_METRIC].call(localThis, actionCxt, {
+              provider: 'gh',
+              owner: 'deepsourcelabs',
+              name: 'demo-python',
+              shortcode: 'TCV',
+              lastDays: 30
+            })
+          } catch (e) {
+            expect(spy).toHaveBeenCalledTimes(1)
+            expect(e).toEqual(new Error('ERR1'))
+          }
         })
       })
     })
@@ -1325,42 +1427,32 @@ describe('[Store] Repository/Detail', () => {
 
           // Setting the global spy on `localThis.$applyGraphqlMutation`
           spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+        })
 
+        test('successfully calls the api', async () => {
           await actions[RepositoryDetailActions.SET_METRIC_THRESHOLD].call(localThis, actionCxt, {
             metricShortcode: 'DCV',
             repositoryId: 'UmVwb3NpdG9yeTp6ZG95eWI',
             thresholdValue: 55,
             key: 'Python'
           })
-        })
 
-        test('successfully calls the api', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', () => {
-          expect(commit).toHaveBeenCalledTimes(2)
-        })
-
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
-          // Storing the first commit call made
-          const {
-            mock: {
-              calls: [firstCall, secondCall]
+        test(`successfully returns action ${RepositoryDetailActions.SET_METRIC_THRESHOLD} result`, async () => {
+          const apiResponse = await actions[RepositoryDetailActions.SET_METRIC_THRESHOLD].call(
+            localThis,
+            actionCxt,
+            {
+              metricShortcode: 'DCV',
+              repositoryId: 'UmVwb3NpdG9yeTp6ZG95eWI',
+              thresholdValue: 55,
+              key: 'Python'
             }
-          } = commit
+          )
 
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(secondCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(secondCall[1]).toEqual(false)
+          expect(apiResponse.data.updateRepoMetricThreshold?.ok).toBeTruthy()
         })
       })
 
@@ -1376,59 +1468,26 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             async $applyGraphqlMutation(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
             }
           }
 
           // Setting the global spy on `localThis.$applyGraphqlMutation`
           spy = jest.spyOn(localThis, '$applyGraphqlMutation')
-
-          await actions[RepositoryDetailActions.SET_METRIC_THRESHOLD].call(localThis, actionCxt, {
-            metricShortcode: 'DCV',
-            repositoryId: 'UmVwb3NpdG9yeTp6ZG95eWI',
-            thresholdValue: 55,
-            key: 'Python'
-          })
         })
 
-        test('successfully commits mutations', async () => {
-          expect(commit).toHaveBeenCalledTimes(3)
-        })
-
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
-          // Storing the first commit call made
-          const {
-            mock: {
-              calls: [firstCall, , thirdCall]
-            }
-          } = commit
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `RepositoryDetailMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(RepositoryDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
-        })
-
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, async () => {
-          // Storing the second commit call made
-          const {
-            mock: {
-              calls: [, secondCall]
-            }
-          } = commit
-
-          // Assert if `RepositoryDetailMutations.SET_ERROR` is being commited or not.
-          expect(secondCall[0]).toEqual(RepositoryDetailMutations.SET_ERROR)
-
-          // Assert if the payload passed to the mutation was empty.
-          expect(secondCall[1]).toEqual(Error('ERR1'))
+        test(`successfully throws an error`, async () => {
+          try {
+            await actions[RepositoryDetailActions.SET_METRIC_THRESHOLD].call(localThis, actionCxt, {
+              metricShortcode: 'DCV',
+              repositoryId: 'UmVwb3NpdG9yeTp6ZG95eWI',
+              thresholdValue: 55,
+              key: 'Python'
+            })
+          } catch (e) {
+            // Assert if the payload passed to the mutation was empty.
+            expect(e).toEqual(Error('ERR1'))
+          }
         })
       })
     })

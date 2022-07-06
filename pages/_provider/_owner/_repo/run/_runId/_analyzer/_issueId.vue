@@ -1,20 +1,8 @@
 <template>
   <div class="pb-6">
     <div class="relative px-4 pt-4">
-      <!-- Back to Issue list Page -->
-      <div class="flex items-center justify-between">
-        <link-to-prev :link="routeToPrevious" title="All issues"></link-to-prev>
-        <issue-actions
-          class="absolute top-4 right-4"
-          :issue="singleIssue"
-          :checkId="currentCheck ? currentCheck.id : ''"
-          :shortcode="$route.params.issueId"
-          @ignoreIssues="ignoreIssues"
-        ></issue-actions>
-      </div>
-
       <!-- Issue details -->
-      <div class="flex flex-col mt-2 space-y-3 xl:flex-row xl:space-y-0">
+      <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0">
         <div class="w-full space-y-2" v-if="$fetchState.pending">
           <!-- Left Section -->
           <div class="w-3/5 h-10 rounded-md md:w-4/5 bg-ink-300 animate-pulse"></div>
@@ -23,23 +11,33 @@
             <div class="w-1/3 h-6 rounded-md bg-ink-300 animate-pulse"></div>
           </div>
         </div>
-        <issue-details-header
-          v-else
-          :analyzerName="currentAnalyzer.name"
-          :analyzerShortcode="currentAnalyzer.shortcode"
-          :issueType="singleIssue.issueType"
-          :shortcode="singleIssue.shortcode"
-          :title="singleIssue.title"
-          :tags="singleIssue.tags"
-          :severity="singleIssue.severity"
-          :firstSeen="issue.firstSeen"
-          :lastSeen="issue.lastSeen"
-          :count="check.issuesRaisedCount"
-          :showMeta="true"
-          :issue-priority="issuePriority"
-          :can-edit-priority="canEditPriority"
-          @priority-edited="editPriority"
-        ></issue-details-header>
+        <!-- issue header and actions -->
+        <div v-else class="flex w-full justify-between">
+          <issue-details-header
+            :issueType="singleIssue.issueType"
+            :shortcode="singleIssue.shortcode"
+            :title="singleIssue.title"
+            :tags="singleIssue.tags"
+            :severity="singleIssue.severity"
+            :firstSeen="issue.firstSeen"
+            :lastSeen="issue.lastSeen"
+            :count="check.issuesRaisedCount"
+            :showMeta="true"
+            :issue-priority="issuePriority"
+            :can-edit-priority="canEditPriority"
+            @priority-edited="editPriority"
+          ></issue-details-header>
+          <div class="flex items-start justify-end gap-x-1.5">
+            <issue-actions
+              class="ml-4"
+              :issue="singleIssue"
+              :checkId="currentCheck ? currentCheck.id : ''"
+              :shortcode="$route.params.issueId"
+              @ignoreIssues="ignoreIssues"
+              :repository="repository"
+            ></issue-actions>
+          </div>
+        </div>
       </div>
     </div>
     <z-tabs class="mt-5">
@@ -47,12 +45,12 @@
         <z-tab-item class="flex items-center space-x-1" border-active-color="vanilla-400">
           <span>Occurrences</span>
           <z-tag
-            v-if="checkIssues.totalCount"
+            v-if="issueOccurances.totalCount"
             text-size="xs"
             spacing="px-2 py-1"
             bgColor="ink-100"
             class="leading-none"
-            >{{ checkIssues.totalCount }}</z-tag
+            >{{ issueOccurances.totalCount }}</z-tag
           >
         </z-tab-item>
         <z-tab-item border-active-color="vanilla-400">Ignore rules</z-tab-item>
@@ -71,20 +69,26 @@
               <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
             </div>
           </div>
-          <issue-list
-            v-else
-            v-bind="checkIssues"
-            :description="singleIssue.descriptionRendered"
-            :checkId="currentCheck ? currentCheck.id : ''"
-            :canIgnoreIssues="canIgnoreIssues"
-            :pageSize="pageSize"
-            :startPage="queryParams.page"
-            :searchValue="queryParams.q"
-            :blobUrlRoot="run.blobUrlRoot"
-            @search="(val) => (searchCandidate = val)"
-            @sort="(val) => (sort = val)"
-            @page="(val) => (currentPage = val)"
-          ></issue-list>
+          <div v-else class="grid grid-cols-3">
+            <issue-list
+              v-bind="issueOccurances"
+              class="col-span-3 lg:col-span-2"
+              :description="singleIssue.descriptionRendered"
+              :checkId="currentCheck ? currentCheck.id : ''"
+              :canIgnoreIssues="canIgnoreIssues"
+              :pageSize="pageSize"
+              :startPage="queryParams.page"
+              :searchValue="queryParams.q"
+              :blobUrlRoot="run.blobUrlRoot"
+              @search="(val) => (searchCandidate = val)"
+              @sort="(val) => (sort = val)"
+              @page="(val) => (currentPage = val)"
+            ></issue-list>
+            <issue-description
+              :description="singleIssue.descriptionRendered"
+              class="col-span-1"
+            ></issue-description>
+          </div>
         </z-tab-pane>
         <z-tab-pane v-if="!$fetchState.pending">
           <div v-if="Array.isArray(silenceRules) && silenceRules.length" class="space-y-4">
@@ -137,7 +141,10 @@
               </div>
             </template>
           </div>
-          <div v-else class="max-w-4xl p-12">
+          <div
+            v-else
+            class="max-w-4xl border-2 border-ink-200 border-dashed rounded-md p-4 md:p-12 text-center2"
+          >
             <empty-state title="No ignore rules found" />
           </div>
         </z-tab-pane>
@@ -149,15 +156,23 @@
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
 
-import { ZTag, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem } from '@deepsourcelabs/zeal'
+import { ZTag, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem, ZIcon } from '@deepsourcelabs/zeal'
 
 import LinkToPrev from '@/components/LinkToPrev.vue'
-import { IssueDetailsHeader, IssueActions } from '@/components/RepoIssues/index'
+import { IssueDetailsHeader, IssueActions, IssueDescription } from '@/components/RepoIssues/index'
 import { SubNav } from '@/components/History/index'
 import { IssueList } from '@/components/RepoIssues'
 
 // Import State & Types
-import { Check, Maybe, CheckEdge, IssuePriority, IssuePriorityLevel } from '~/types/types'
+import {
+  Check,
+  Maybe,
+  CheckEdge,
+  IssuePriority,
+  IssuePriorityLevel,
+  CheckIssueEdge,
+  CheckIssueConnection
+} from '~/types/types'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
@@ -166,6 +181,7 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { fromNow } from '~/utils/date'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
+import { filter } from 'vue/types/umd'
 
 const PAGE_SIZE = 25
 
@@ -177,11 +193,13 @@ const PAGE_SIZE = 25
     ZTabPane,
     ZTabPanes,
     ZTabItem,
+    ZIcon,
     LinkToPrev,
     IssueDetailsHeader,
     SubNav,
     IssueList,
-    IssueActions
+    IssueActions,
+    IssueDescription
   },
   layout: 'repository',
   methods: {
@@ -226,6 +244,29 @@ export default class RunIssueDetails extends mixins(
     })
   }
 
+  /**
+   * Watcher for the `issueId` route param. If updated, the issue detail and ignore rules are fetched
+   *
+   * @returns {Promise<void>}
+   */
+  @Watch('$route.params.issueId')
+  async update(): Promise<void> {
+    const { issueId } = this.$route.params
+
+    await Promise.all([
+      this.fetchSingleIssue({ shortcode: issueId }),
+      this.fetchSilenceRules({
+        ...this.baseRouteParams,
+        issueCode: issueId
+      })
+    ])
+  }
+
+  /**
+   * Whether issues can be ignore
+   *
+   * @returns {boolean}
+   */
   get canIgnoreIssues(): boolean {
     return this.repoPerms.canIgnoreIssues
   }
@@ -238,6 +279,12 @@ export default class RunIssueDetails extends mixins(
     return ''
   }
 
+  /**
+   * Handles the emit of the 'update-ignored-issues-checks' event with the list of ignored issues
+   * @param issueIds
+   *
+   * @returns {void}
+   */
   ignoreIssues(issueIds: string[]): void {
     let issuesIgnored = (this.$localStore.get('check-issues', this.localKey) as string[]) ?? []
     issuesIgnored = issuesIgnored.concat(issueIds)
@@ -255,7 +302,7 @@ export default class RunIssueDetails extends mixins(
     ])
 
     await this.fetchCheck({ checkId: this.currentCheck.id })
-    await this.fetchIssues()
+    await this.fetchIssuesInCheck()
     await Promise.all([
       this.fetchSingleIssue({ shortcode: issueId }),
       this.fetchSilenceRules({
@@ -270,6 +317,11 @@ export default class RunIssueDetails extends mixins(
     })
   }
 
+  /**
+   * Returns the current active check from the set of all checks on this run
+   *
+   * @returns {Check}
+   */
   get currentCheck(): Check {
     const filteredCheck = this.checks.filter((edge) => {
       return edge.analyzer?.shortcode == this.$route.params.analyzer
@@ -278,6 +330,11 @@ export default class RunIssueDetails extends mixins(
     return filteredCheck[0]
   }
 
+  /**
+   * Returns the name of the current active analyzer and its shortcode
+   *
+   * @returns {Record<string, string>}
+   */
   get currentAnalyzer(): { name: string; shortcode: string } {
     if (this.issue.analyzerName && this.issue.analyzerShortcode) {
       return {
@@ -293,6 +350,11 @@ export default class RunIssueDetails extends mixins(
     )
   }
 
+  /**
+   * Returns a list of checks on this run
+   *
+   * @returns {Array<Check}
+   */
   get checks(): Array<Check> {
     if (this.run?.checks?.edges) {
       return this.run.checks.edges.map((edge: Maybe<CheckEdge>) => {
@@ -302,11 +364,16 @@ export default class RunIssueDetails extends mixins(
     return []
   }
 
-  async fetchIssues(): Promise<void> {
+  /**
+   * Fetches all issues raised in the current check and updates the store
+   *
+   * @returns {Promise<void>}
+   */
+  async fetchIssuesInCheck(): Promise<void> {
     const { q, page, sort } = this.queryParams
     return this.fetchCheckIssues({
       checkId: this.check.id,
-      shortcode: this.$route.params.issueId,
+      shortcode: '',
       limit: this.pageSize,
       currentPageNumber: page as number,
       q: q as string,
@@ -314,6 +381,78 @@ export default class RunIssueDetails extends mixins(
     })
   }
 
+  /**
+   * Occurances of the current issue, filtered out from all issues raised in the check
+   *
+   * @returns {ChechIssueConnection}
+   */
+  get issueOccurances(): CheckIssueConnection {
+    const filteredIssueConnection = {} as CheckIssueConnection
+    if (!this.checkIssues.edges) return filteredIssueConnection
+    filteredIssueConnection.edges = this.checkIssues.edges.filter(
+      (issue: Maybe<CheckIssueEdge>) => {
+        return issue?.node?.shortcode === this.$route.params.issueId
+      }
+    )
+    filteredIssueConnection.totalCount = filteredIssueConnection.edges.length
+    return filteredIssueConnection
+  }
+
+  /**
+   * Gets the index of the current issue within the set of all issues raised in this check
+   *
+   * @returns {number}
+   */
+  get issueIndex(): number {
+    if (!this.checkIssues.edges || this.checkIssues.totalCount === 0) return 0
+    return this.checkIssues.edges.findIndex((issue: Maybe<CheckIssueEdge>) => {
+      return issue?.node?.shortcode === this.$route.params.issueId
+    })
+  }
+
+  /**
+   * Returns a link to the issue page for the next issue in the set if available
+   *
+   * @returns {string}
+   */
+  get linkToNextIssue(): string {
+    const { params } = this.$route
+    return this.issueIndex === 0 || this.checkIssues.totalCount === 1
+      ? ''
+      : this.$generateRoute([
+          'run',
+          params.runId,
+          params.analyzer,
+          this.checkIssues.edges[this.issueIndex + 1]?.node?.shortcode || ''
+        ])
+  }
+
+  /**
+   * Returns a link to the issue page for the previous issue in the set if available
+   *
+   * @returns {string}
+   */
+  get linkToPreviousIssue(): string {
+    const { params } = this.$route
+    if (this.checkIssues.totalCount) {
+      //$generateRoute(['run', $route.params.runId, $route.params.analyzer, issue.shortcode])
+      return this.checkIssues && this.issueIndex === this.checkIssues.totalCount - 1
+        ? ''
+        : this.$generateRoute([
+            'run',
+            params.runId,
+            params.analyzer,
+            this.checkIssues.edges[this.issueIndex - 1]?.node?.shortcode || ''
+          ])
+    }
+    return ''
+  }
+
+  /**
+   * Returns a link to back to the analyzer page
+   *
+   * @returns {string}
+   */
   get routeToPrevious(): string {
     const { params } = this.$route
     return this.$generateRoute(['run', params.runId, params.analyzer])
@@ -351,6 +490,11 @@ export default class RunIssueDetails extends mixins(
     }
   }
 
+  /**
+   * Whether to allow editing the issue priority
+   *
+   * @returns {boolean}
+   */
   get canEditPriority(): boolean {
     if (this.issuePriority) {
       const { source } = this.issuePriority

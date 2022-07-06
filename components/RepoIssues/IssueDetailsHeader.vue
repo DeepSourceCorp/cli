@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col flex-1 space-y-3">
+  <div class="flex flex-col flex-1 gap-y-3">
     <!-- Heading -->
-    <div class="flex flex-wrap items-baseline text-2xl font-normal text-vanilla-400">
-      <span class="pr-2 font-semibold text-vanilla-100" v-html="escapeHtml(title)"> </span>
+    <div class="flex flex-wrap items-baseline text-lg font-normal text-vanilla-400">
+      <span class="pr-2 font-medium text-vanilla-100" v-html="escapeHtml(title)"> </span>
       <span class="flex-shrink-0 block text-xl md:flex">{{ shortcode }}</span>
     </div>
     <div class="flex items-center w-full text-vanilla-400 sm:w-auto">
@@ -10,10 +10,6 @@
       <div class="flex flex-wrap items-center gap-x-4 gap-y-2 leading-none">
         <issue-type v-if="issueType" :issueType="issueType"></issue-type>
         <issue-severity-tag v-if="severity && issueType === 'security'" :severity="severity" />
-        <div v-if="analyzerName" class="flex items-center space-x-2">
-          <z-icon :icon="analyzerShortcode"></z-icon>
-          <span class="text-sm">{{ analyzerName }}</span>
-        </div>
         <div v-if="firstSeen && lastSeen" class="flex items-center space-x-2">
           <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
           <span class="text-sm text-vanilla-400">
@@ -91,12 +87,6 @@ import { generateColorFromTag } from '~/utils/ui'
   }
 })
 export default class IssueDetailsHeader extends Vue {
-  @Prop()
-  analyzerName: string
-
-  @Prop()
-  analyzerShortcode: string
-
   @Prop()
   firstSeen: string
 

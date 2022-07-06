@@ -1,13 +1,20 @@
 <template>
-  <section class="flex flex-col space-y-4">
+  <section class="flex flex-col gap-y-3">
     <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" />
     <run-loading v-if="status === 'PEND'" />
     <run-pass v-else-if="status === 'PASS' && issueCount === 0" />
     <run-cancelled v-else-if="status === 'CNCL' && issueCount === 0" />
     <run-timeout v-else-if="status === 'TIMO' && issueCount === 0" />
     <template v-else>
-      <div id="issue-filters" class="flex items-center space-x-3">
-        <slot name="controls"></slot>
+      <div id="issue-filters" class="md:sticky header-offset bg-ink-400">
+        <!-- fade overlay -->
+        <div
+          v-if="isScrolled"
+          class="absolute z-10 top-0 -mt-4 w-full bg-gradient-to-b from-ink-400 via-ink-400 to-transparent h-32"
+        ></div>
+        <div class="relative z-20">
+          <slot name="controls" />
+        </div>
       </div>
       <template v-if="issueCount">
         <issue-list-item
@@ -63,7 +70,7 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   @Prop({ default: () => [] })
   errorsRendered: RunError[]
 
-  public isAutofixOpen = false
+  public isScrolled = false
 
   get issueCount(): number {
     return this.concreteIssueList?.edges?.length || 0
@@ -72,5 +79,35 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   get concreteIssues(): Issue[] {
     return resolveNodes(this.concreteIssueList) as Issue[]
   }
+
+  handleScroll() {
+    this.isScrolled = Boolean(window.scrollY > 10)
+  }
+
+  mounted() {
+    document.addEventListener('scroll', this.handleScroll)
+  }
+
+  beforeDestroy() {
+    document.removeEventListener('scroll', this.handleScroll)
+  }
 }
 </script>
+<style scoped>
+/* height of RepoHeader + Breadcrumbs + RunHeader */
+.header-offset {
+  top: 339px;
+}
+
+@media (min-width: 1024px) {
+  .header-offset {
+    top: 281px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header-offset {
+    top: 240px;
+  }
+}
+</style>

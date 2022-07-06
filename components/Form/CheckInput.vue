@@ -5,24 +5,23 @@
     :inputId="inputId"
     :inputWidth="inputWidth"
   >
-    <div>
-      <z-radio-group v-model="modelValue" @change="$emit('change')" :id="inputId" class="space-y-5">
-        <div class="text-sm space-y-1" v-for="opt in options" :key="opt.value">
-          <z-checkbox
-            :value="opt.value"
-            :label="opt.label"
-            v-model="modelValue[opt.value]"
-            spacing="4"
-            size="small"
-          ></z-checkbox>
-          <p
-            v-if="opt.description"
-            class="text-xs text-vanilla-400 ml-6 leading-5"
-            v-html="opt.description"
-          ></p>
-        </div>
-      </z-radio-group>
-    </div>
+    <!-- TODO: Fix this magic component. -->
+    <houdini v-model="modelValue" @change="$emit('change')" :id="inputId" class="space-y-5">
+      <div class="text-sm space-y-1" v-for="opt in options" :key="opt.value">
+        <z-checkbox
+          :value="opt.value"
+          :label="opt.label"
+          v-model="modelValue[opt.value]"
+          spacing="4"
+          size="small"
+        ></z-checkbox>
+        <p
+          v-if="opt.description"
+          class="text-xs text-vanilla-400 ml-6 leading-5"
+          v-html="opt.description"
+        ></p>
+      </div>
+    </houdini>
   </input-wrapper>
 </template>
 <script lang="ts">

@@ -7,6 +7,8 @@
         :key="defaultBranchRun.branchName"
         :run="defaultBranchRun"
         :branchRunCount="defaultBranchRunCount"
+        :class="{ 'opacity-30': expandedBranch && expandedBranch !== defaultBranchRun.branchName }"
+        @expanded="updateExpandedBranch"
       >
       </run-branches>
       <template v-if="!fetching">
@@ -16,6 +18,11 @@
               v-if="run.node.branchName !== repository.defaultBranchName"
               :key="run.node.branchName"
               :run="run.node"
+              :class="{
+                'opacity-30 pointer-events-none':
+                  expandedBranch && expandedBranch !== run.node.branchName
+              }"
+              @expanded="updateExpandedBranch"
             >
             </run-branches>
           </template>
@@ -34,10 +41,6 @@
       </template>
       <template v-else>
         <div v-for="key in pageSize" :key="key" class="-mx-1 space-y-2 animate-pulse">
-          <div class="flex space-x-2">
-            <div class="w-24 h-6 rounded-md bg-ink-200"></div>
-            <div class="w-40 h-6 rounded-md bg-ink-200"></div>
-          </div>
           <div class="w-full h-20 rounded-md bg-ink-200"></div>
         </div>
       </template>
@@ -102,6 +105,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   public mainBranchFetching = true
   public currentPage = 1
   public pageSize = 30
+  public expandedBranch = ''
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
@@ -126,6 +130,10 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
     if (this.$route.query.page) {
       this.currentPage = Number(this.$route.query.page)
     }
+  }
+
+  updateExpandedBranch(branchName: string): void {
+    this.expandedBranch = branchName
   }
 
   async fetch(): Promise<void> {

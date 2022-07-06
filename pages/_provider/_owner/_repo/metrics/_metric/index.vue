@@ -1,0 +1,283 @@
+<template>
+  <div v-if="metric && metric.namespacesTrends.length">
+    <template v-if="isMissingAggregate">
+      <lazy-empty-trend
+        :namespaces-trend="mockAggregateData"
+        :metric-meta="trendMetricData"
+        :filter-value="lastDays"
+        @updateFilter="updateFilter"
+      />
+    </template>
+    <trend-section
+      v-for="namespacesTrend in metric.namespacesTrends"
+      :key="namespacesTrend.key"
+      :namespaces-trend="namespacesTrend"
+      :metric-meta="trendMetricData"
+      :filter-value="lastDays"
+      :clip="true"
+      :can-modify-threshold="canModifyThreshold"
+      @addThreshold="openUpdateThresholdModal"
+      @openUpdateThresholdModal="openUpdateThresholdModal"
+      @deleteThreshold="deleteThreshold"
+      @updateFilter="updateFilter"
+    />
+    <portal to="modal">
+      <edit-threshold-modal
+        v-if="showUpdateThresholdModal"
+        v-bind="editModalProps"
+        @editThreshold="editThreshold"
+        @close="showUpdateThresholdModal = false"
+        @refetch="refetch"
+      />
+    </portal>
+  </div>
+  <div v-else-if="$fetchState.pending">
+    <div v-for="i in 2" :key="i" class="p-4 space-y-4">
+      <div class="flex items-center gap-x-1.5">
+        <div class="h-8 w-23 bg-ink-300 animate-pulse"></div>
+        <div class="rounded-full h-6 w-36 bg-ink-300 animate-pulse"></div>
+      </div>
+      <div class="rounded-md border border-ink-200 p-4 space-y-4">
+        <div class="flex gap-x-23">
+          <div v-for="j in 2" :key="`s${j}`" class="h-14 w-32 animate-pulse bg-ink-300"></div>
+        </div>
+        <div class="h-72 bg-ink-300 animate-pulse"></div>
+      </div>
+    </div>
+  </div>
+  <div v-else class="p-4 min-h-98">
+    <lazy-empty-state
+      title="No data found"
+      subtitle="We don’t have enough data for this time frame. Please try a different date range."
+      :show-border="true"
+      class="h-full flex flex-col justify-center"
+    />
+  </div>
+</template>
+<script lang="ts">
+// Internals
+import { Component, namespace, Vue, Watch } from 'nuxt-property-decorator'
+
+// Store imports
+import { RepositoryDetailActions } from '~/store/repository/detail'
+import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
+import { MetricType } from '~/types/metric'
+import { Maybe, Metric, MetricNamespaceTrend, MetricTypeChoices, Repository } from '~/types/types'
+
+const repoStore = namespace('repository/detail')
+
+/**
+ * Metric detail page for a Repository metric.
+ */
+@Component({
+  layout: 'repository'
+})
+export default class MetricPage extends Vue {
+  @repoStore.Action(RepositoryDetailActions.FETCH_METRIC)
+  fetchMetricData: (args: {
+    provider: string
+    owner: string
+    name: string
+    shortcode: string
+    metricType: MetricTypeChoices.DefaultBranchOnly
+    lastDays?: number
+    refetch?: boolean
+  }) => Promise<Repository>
+
+  @repoStore.Action(RepositoryDetailActions.SET_METRIC_THRESHOLD)
+  setMetricThreshold: (args: {
+    metricShortcode: string
+    repositoryId: string
+    thresholdValue: number
+    key: string
+  }) => Promise<GraphqlMutationResponse>
+
+  lastDays = 30
+  showUpdateThresholdModal = false
+  repository = {} as Repository
+  editModalProps = {}
+  mockAggregateData = { key: '' } as MetricNamespaceTrend
+
+  /**
+   * Fetch a metric depending on page route.
+   *
+   * @param {boolean} [refetch] - Optional parameter that performs a `network-only` fetch of metric data.
+   *
+   * @returns {Promise<void>}
+   */
+  async fetchMetric(refetch?: boolean): Promise<void> {
+    const { provider, owner, repo, metric } = this.$route.params
+    try {
+      this.repository = await this.fetchMetricData({
+        provider,
+        owner,
+        name: repo,
+        shortcode: metric,
+        metricType: MetricTypeChoices.DefaultBranchOnly,
+        lastDays: this.lastDays,
+        refetch
+      })
+    } catch (e) {
+      this.$router.replace(`/${provider}/${owner}/${repo}/metrics`)
+    }
+  }
+
+  /**
+   * Fetch hook for the metric detail page.
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    await this.fetchMetric()
+  }
+
+  /**
+   * Refetch hook for the metric detail page.
+   *
+   * @returns {Promise<void>}
+   */
+  async refetch(): Promise<void> {
+    await this.fetchMetric(true)
+  }
+
+  get metric(): Maybe<Metric> | undefined {
+    const metric = this.repository?.metricsCaptured?.find(
+      (metric) => metric?.shortcode === this.$route.params.metric
+    )
+    return metric
+  }
+
+  get trendMetricData(): {
+    shortcode?: Metric['shortcode']
+    name?: Metric['name']
+    description?: Metric['description']
+    supportsAggregateThreshold?: Metric['supportsAggregateThreshold']
+    unit?: Metric['unit']
+  } {
+    if (this.metric) {
+      const { shortcode, name, description, supportsAggregateThreshold, unit } = this
+        .metric as Metric
+      return { shortcode, name, description, supportsAggregateThreshold, unit }
+    }
+    return {}
+  }
+
+  get isMissingAggregate(): boolean {
+    const isMissing = !this.metric?.namespacesTrends?.some(
+      (namespaceTrend) => namespaceTrend?.key === MetricType.aggregate
+    )
+    if (isMissing) {
+      this.mockAggregateData = {
+        key: MetricType.aggregate
+      }
+    }
+    return isMissing
+  }
+
+  get canModifyThreshold(): boolean {
+    return Boolean(this.repository.userPermissionMeta?.can_modify_metric_thresholds)
+  }
+
+  /**
+   * Opens the update threshold modal after setting the required paramters.
+   *
+   * @param {MetricNamespaceTrend} namespacesTrend - Object of the namespace whose threshold needs to be updated
+   *
+   * @returns {void}
+   */
+  openUpdateThresholdModal(namespacesTrend: MetricNamespaceTrend): void {
+    this.editModalProps = {
+      thresholdValue: namespacesTrend.threshold,
+      metricName: this.metric?.name,
+      analyzerKey: namespacesTrend.key,
+      metricShortcode: this.$route.params.metric,
+      repositoryId: this.repository.id,
+      unit: this.metric?.unit
+    }
+    this.showUpdateThresholdModal = true
+  }
+
+  /**
+   * Updates the threshold of a namespace.
+   *
+   * @param {number} newThresholdValue - Value to update the threshold to
+   * @param {string} analyzerKey - `key` of the namespace whose threshold is being updated
+   * @param {Function} close - Function to close the modal.
+   *
+   * @returns {Promise<void>}
+   */
+  async editThreshold(
+    newThresholdValue: number,
+    analyzerKey: string,
+    close?: () => void
+  ): Promise<void> {
+    if (newThresholdValue || newThresholdValue === 0) {
+      try {
+        const response = (await this.setMetricThreshold({
+          metricShortcode: this.$route.params.metric,
+          repositoryId: this.repository.id,
+          thresholdValue: newThresholdValue || 0,
+          key: analyzerKey
+        })) as GraphqlMutationResponse
+
+        if (response.data.updateRepoMetricThreshold?.ok) {
+          this.$toast.success('Successfully updated threshold.')
+          close?.()
+        }
+      } catch (e) {
+        this.$logErrorAndToast(e as Error, 'An error occured while updating repository metrics.')
+      } finally {
+        this.refetch()
+      }
+    }
+  }
+
+  /**
+   * Updates the threshold of a namespace to `0`, effectively deleting it.
+   *
+   * @param {MetricNamespace} namespace - Object of the namespace whose threshold needs to be updated
+   *
+   * @returns {Promise<void>}
+   */
+  async deleteThreshold(namespacesTrend: MetricNamespaceTrend): Promise<void> {
+    await this.editThreshold(0, namespacesTrend.key as string)
+  }
+
+  /**
+   * Refetch the metric when `$route.params.metric` changes.
+   *
+   * @returns {Promise<void>}
+   */
+  async updateFilter(newValue: number): Promise<void> {
+    const { provider, owner, repo } = this.$route.params
+
+    this.lastDays = newValue
+    this.$localStore.set(`${provider}-${owner}-${repo}`, 'metrics-last-days-filter', newValue)
+    await this.refetch()
+  }
+
+  /**
+   * Watcher for {@link this.$route.params.metric} that refetches metric data on change of metric shortcode.
+   *
+   * @returns {void}
+   */
+  @Watch('$route.params.metric')
+  fetchNewMetric(): void {
+    this.$fetch()
+  }
+
+  /**
+   * Head hook that sets meta information for a page.
+   *
+   * @returns {Record<string,string>}
+   */
+  head(): Record<string, string> {
+    const { repo, owner } = this.$route.params
+    return {
+      title: `${this.metric?.name ? `${this.metric.name} ` : ''}Metric • ${owner}/${repo}`,
+      description:
+        'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
+    }
+  }
+}
+</script>

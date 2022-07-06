@@ -237,6 +237,8 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
       canContributorsIgnoreIssues: boolean
       canMembersModifyMetricThresholds: boolean
       canContributorsModifyMetricThresholds: boolean
+      canMembersIgnoreFailingMetrics: boolean
+      canContributorsIgnoreFailingMetrics: boolean
     }
   ) => Promise<UpdateTeamBasePermissionsPayload>
   [TeamActions.SYNC_VCS_PERMISSIONS]: (
@@ -341,7 +343,7 @@ export const actions: TeamModuleActions = {
       )
       return resolveNodes(response.data.team?.members) as TeamMember[]
     } catch (e) {
-      this.$logErrorAndToast((e as Error, e.message.replace('GraphQL error: ', '')))
+      this.$logErrorAndToast(e as Error, (e as Error).message.replace('GraphQL error: ', ''))
     }
   },
 
@@ -404,7 +406,7 @@ export const actions: TeamModuleActions = {
       })) as GraphqlMutationResponse
       return response.data.transferTeamOwnership?.ok || false
     } catch (e) {
-      this.$logErrorAndToast(e as Error, e.message.replace('GraphQL error: ', ''))
+      this.$logErrorAndToast(e as Error, (e as Error).message.replace('GraphQL error: ', ''))
       return false
     }
   },
@@ -503,7 +505,9 @@ export const actions: TeamModuleActions = {
       canMembersIgnoreIssues,
       canContributorsIgnoreIssues,
       canMembersModifyMetricThresholds,
-      canContributorsModifyMetricThresholds
+      canContributorsModifyMetricThresholds,
+      canMembersIgnoreFailingMetrics,
+      canContributorsIgnoreFailingMetrics
     }
   ) {
     try {
@@ -514,7 +518,9 @@ export const actions: TeamModuleActions = {
         canMembersIgnoreIssues,
         canContributorsIgnoreIssues,
         canMembersModifyMetricThresholds,
-        canContributorsModifyMetricThresholds
+        canContributorsModifyMetricThresholds,
+        canMembersIgnoreFailingMetrics,
+        canContributorsIgnoreFailingMetrics
       })
       commit(TeamMutations.SET_LOADING, false)
       return response.data?.updateTeamBasePermissions || {}

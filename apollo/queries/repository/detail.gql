@@ -9,6 +9,7 @@ query RepoDetails($provider: VCSProviderChoices!, $owner: String!, $name: String
     errorCode
     renderedErrorMessage
     userPermissionMeta
+    hasTestCoverage
     latestAnalysisRun {
       id
       runId

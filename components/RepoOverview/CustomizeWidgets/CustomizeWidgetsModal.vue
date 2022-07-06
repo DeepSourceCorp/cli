@@ -115,7 +115,7 @@ export default class CustomizeWidgetsModal extends mixins(RepoDetailMixin) {
   WIDGET_ICON_MAP = {
     'ddp-widget': 'direct-dependency',
     'idp-widget': 'indirect-dependency',
-    'tcv-widget': 'test-coverage-2',
+    'lcv-widget': 'test-coverage-2',
     'bcv-widget': 'branch-coverage',
     'dcv-widget': 'application-documentation-coverage',
     'bug-risk-widget': 'bug-risk',

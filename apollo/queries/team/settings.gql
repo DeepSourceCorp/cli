@@ -1,4 +1,4 @@
-query($login: String!, $provider: VCSProviderChoices!) {
+query fetchTeamPermissions ($login: String!, $provider: VCSProviderChoices!) {
   team(login: $login, provider: $provider) {
     id
     login
@@ -13,6 +13,8 @@ query($login: String!, $provider: VCSProviderChoices!) {
       canContributorsIgnoreIssues
       canMembersModifyMetricThresholds
       canContributorsModifyMetricThresholds
+      canMembersIgnoreFailingMetrics
+      canContributorsIgnoreFailingMetrics
     }
   }
 }

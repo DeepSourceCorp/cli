@@ -25,17 +25,18 @@
     <template v-else>
       <stat-card
         v-for="(m, index) in alertingMetrics"
-        color="cherry"
         trendIcon="threshold"
         :key="index"
         :to="metricsPageLink"
         :title="m.name"
         :subtitle="m.namespace.key"
-        :value="m.value"
-        :icon="m.namespace.shortcode"
+        :value="m.value_display"
+        :icon="getIconData(m.namespace)"
         :trendHint="`Threshold for this metric is set to ${m.thresholdDisplay}`"
         :trendValue="m.thresholdDisplay"
         :showBorders="false"
+        :isPassing="m.isPassing"
+        :threshold="m.threshold"
       >
       </stat-card>
     </template>
@@ -54,7 +55,14 @@ interface AlertingMetrics {
   shortcode: string
   name: string
   value: number | string
-  threshold: 15
+  category: string
+  value_display: string
+  threshold: number
+  namespace: {
+    key: string
+    analyzer_shortcode: string | null
+    analyzer_logo: string | null
+  }
   thresholdDisplay?: string
 }
 
@@ -117,6 +125,18 @@ export default class AlertingMetricsSection extends mixins(RepoDetailMixin) {
     return []
   }
 
+  get loaderCount(): number {
+    const { provider, owner, repo } = this.$route.params
+    let localCountFromStore
+    if (process.client) {
+      localCountFromStore = this.$localStore.get(
+        `${provider}-${owner}-${repo}`,
+        'alerting-metrics-loader-count'
+      ) as number
+    }
+    return localCountFromStore ?? 4
+  }
+
   setLoaderCount(): void {
     const { provider, owner, repo } = this.$route.params
 
@@ -129,16 +149,23 @@ export default class AlertingMetricsSection extends mixins(RepoDetailMixin) {
     }
   }
 
-  get loaderCount(): number {
-    const { provider, owner, repo } = this.$route.params
-    let localCountFromStore
-    if (process.client) {
-      localCountFromStore = this.$localStore.get(
-        `${provider}-${owner}-${repo}`,
-        'alerting-metrics-loader-count'
-      ) as number
+  /**
+   * Gets the icon data for a given metric namespace.
+   *
+   * @param {{analyzer_logo: any, analyzer_shortcode:any}} metricNamespace - Metric namspace with logo and shortcode information.
+   *
+   * @returns {{analyzerLogo: string, shortcode: string, name: string}}
+   */
+  getIconData(metricNamespace: { analyzer_logo: any; analyzer_shortcode: any }): {
+    analyzerLogo: string
+    shortcode: string
+    name: string
+  } {
+    return {
+      analyzerLogo: metricNamespace.analyzer_logo,
+      shortcode: metricNamespace.analyzer_shortcode,
+      name: metricNamespace.analyzer_shortcode
     }
-    return localCountFromStore ?? 4
   }
 }
 </script>

@@ -110,12 +110,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZCode, ZMenu, ZMenuItem, ZMenuSection, ZModal } from '@deepsourcelabs/zeal'
-import {
-  IgnoreIssueIntentional,
-  IgnoreIssueFalsePositive,
-  IgnoreIssueOccurrence
-} from '@/components/RepoIssues'
+import { ZIcon, ZButton, ZCode, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
 import { fromNow } from '~/utils/date'
 import { toWrappableString } from '~/utils/string'
 
@@ -126,11 +121,7 @@ import { toWrappableString } from '~/utils/string'
     ZCode,
     ZMenu,
     ZMenuItem,
-    ZMenuSection,
-    ZModal,
-    IgnoreIssueIntentional,
-    IgnoreIssueFalsePositive,
-    IgnoreIssueOccurrence
+    ZMenuSection
   }
 })
 export default class IssueEditor extends Vue {

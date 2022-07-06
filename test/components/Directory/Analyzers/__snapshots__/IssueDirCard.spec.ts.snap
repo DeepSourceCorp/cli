@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders IssueDirCard with all prop options: IssueDirCard 1`] = `
-"<a class=\\"block group border rounded-lg border-ink-200 hover:bg-ink-300\\">
+"<a class=\\"block group border rounded-lg border-ink-200 bg-ink-400 hover:bg-ink-300\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">

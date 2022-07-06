@@ -1,5 +1,5 @@
 <template>
-  <base-state title="No issues found in this run">
+  <base-state title="No issues found in this check">
     <template slot="hero">
       <div class="text-3xl text-center mb-4">🎉</div>
     </template>

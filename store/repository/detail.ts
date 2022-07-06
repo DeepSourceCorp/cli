@@ -13,7 +13,9 @@ import RepositoryAutofixTrendsQuery from '~/apollo/queries/repository/autofixTre
 import RepositoryAutofixStatsQuery from '~/apollo/queries/repository/autofixStats.gql'
 import RepositoryIssueTypeDistributionQuery from '~/apollo/queries/repository/issueTypeDistribution.gql'
 import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
-import RepositoryMetricsGQLQuery from '~/apollo/queries/repository/metrics.gql'
+import RepositoryMetricsGQLQuery from '~/apollo/queries/repository/metrics/metrics.gql'
+import RepositoryMetricGQLQuery from '~/apollo/queries/repository/metrics/metric.gql'
+import RepositoryMetricUpdateThresoldGQLQuery from '~/apollo/queries/repository/metrics/metricThresholdUpdateData.gql'
 import RepositoryAlertingMetricsGQLQuery from '~/apollo/queries/repository/alertingMetrics.gql'
 import RepositorySettingsGeneralGQLQuery from '~/apollo/queries/repository/settings/general.gql'
 import RepositorySettingsSshGQLQuery from '~/apollo/queries/repository/settings/ssh.gql'
@@ -48,7 +50,9 @@ import {
   CommitConfigToVcsPayload,
   UpdateRepositoryWidgetsInput,
   UpdateRepositoryWidgetsPayload,
-  ActivateGsrRepositoryInput
+  ActivateGsrRepositoryInput,
+  UpdateRepositorySettingsPayload,
+  MetricTypeChoices
 } from '~/types/types'
 import { TransformerInterface } from '~/store/analyzer/list'
 import {
@@ -56,6 +60,13 @@ import {
   GraphqlMutationResponse,
   GraphqlQueryResponse
 } from '~/types/apollo-graphql-types'
+import { NLCV_SHORTCODE } from '~/types/metric'
+
+export type RepoSettingOptions = {
+  settingType: keyof Repository
+  field: string
+  value: Record<string, boolean>
+}
 
 export interface MetricsNamespace {
   key: string
@@ -105,6 +116,8 @@ export enum RepositoryDetailActions {
   FETCH_REPOSITORY_PERMS = 'fetchRepositoryPerms',
   FETCH_WIDGETS = 'fetchWidgets',
   FETCH_METRICS = 'fetchMetrics',
+  FETCH_METRIC = 'fetchMetric',
+  FETCH_NLCV_METRIC = 'fetchNlcvMetric',
   FETCH_ALERTING_METRICS = 'fetchAlertingMetrics',
   FETCH_CURRENT_RUN_COUNT = 'fetchCurrentRunCount',
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
@@ -137,7 +150,8 @@ export enum RepositoryDetailActions {
 export enum RepositoryDetailMutations {
   SET_ERROR = 'setRepositoryDetailError',
   SET_LOADING = 'setRepositoryDetailLoading',
-  SET_REPOSITORY = 'setRepositoryDetail'
+  SET_REPOSITORY = 'setRepositoryDetail',
+  SET_REPO_SETTING_VALUE = 'setRepoSetting'
 }
 
 export interface RepoDetailState {
@@ -187,6 +201,21 @@ export const mutations: RepositoryDetailModuleMutations = {
   },
   [RepositoryDetailMutations.SET_REPOSITORY]: (state, repository) => {
     state.repository = Object.assign({}, state.repository, repository)
+  },
+  [RepositoryDetailMutations.SET_REPO_SETTING_VALUE]: (state, options: RepoSettingOptions) => {
+    const { settingType, field, value } = options
+
+    const repoSettings = state.repository[settingType].map(
+      (repoSetting: { slug?: string; shortcode?: string }) => {
+        if (repoSetting?.slug === field || repoSetting?.shortcode === field) {
+          return { ...repoSetting, ...value }
+        }
+        return repoSetting
+      }
+    )
+
+    const updatedSettings = { [settingType]: repoSettings }
+    state.repository = Object.assign({}, state.repository, updatedSettings)
   }
 }
 
@@ -208,10 +237,36 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       provider: string
       owner: string
       name: string
-      lastDays: number
+      metricType?: MetricTypeChoices
       refetch?: boolean
     }
   ) => Promise<void>
+  [RepositoryDetailActions.FETCH_METRIC]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
+      shortcode: string
+      metricType?: MetricTypeChoices
+      lastDays?: number
+      refetch?: boolean
+    }
+  ) => Promise<Repository>
+  [RepositoryDetailActions.FETCH_NLCV_METRIC]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
+      shortcode: typeof NLCV_SHORTCODE
+      metricType?: MetricTypeChoices
+      lastDays?: number
+      refetch?: boolean
+    }
+  ) => Promise<Repository>
   [RepositoryDetailActions.FETCH_ALERTING_METRICS]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -365,7 +420,7 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
     args: UpdateRepoMetricThresholdInput
-  ) => Promise<void>
+  ) => Promise<GraphqlMutationResponse>
   [RepositoryDetailActions.DELETE_IGNORED_RULE]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -511,29 +566,93 @@ export const actions: RepositoryDetailModuleActions = {
         commit(RepositoryDetailMutations.SET_LOADING, false)
       })
   },
-  async [RepositoryDetailActions.FETCH_METRICS]({ commit }, args) {
-    commit(RepositoryDetailMutations.SET_LOADING, true)
-    // use metrics query later
-    await this.$fetchGraphqlData(
-      RepositoryMetricsGQLQuery,
-      {
-        provider: this.$providerMetaMap[args.provider].value,
-        owner: args.owner,
-        name: args.name,
-        lastDays: args.lastDays ?? 30
-      },
-      args.refetch
-    )
-      .then((response: GraphqlQueryResponse) => {
-        // TODO: Toast("Successfully fetched widgets")
-        commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(RepositoryDetailMutations.SET_ERROR, e)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-        // TODO: Toast("Failure in fetching widgets", e)
-      })
+  async [RepositoryDetailActions.FETCH_METRICS](
+    { commit },
+    { owner, name, provider, metricType = MetricTypeChoices.DefaultBranchOnly, refetch }
+  ) {
+    try {
+      const response = (await this.$fetchGraphqlData(
+        RepositoryMetricsGQLQuery,
+        {
+          provider: this.$providerMetaMap[provider].value,
+          owner,
+          name,
+          metricType
+        },
+        refetch
+      )) as GraphqlQueryResponse
+
+      commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
+    } catch (e: unknown) {
+      this.$logErrorAndToast(e as Error, 'An error occured while fetching repository metrics.')
+    }
+  },
+  async [RepositoryDetailActions.FETCH_METRIC](
+    { state },
+    {
+      owner,
+      name,
+      provider,
+      shortcode,
+      lastDays = 30,
+      metricType = MetricTypeChoices.DefaultBranchOnly,
+      refetch
+    }
+  ) {
+    try {
+      const response = (await this.$fetchGraphqlData(
+        RepositoryMetricGQLQuery,
+        {
+          provider: this.$providerMetaMap[provider].value,
+          owner,
+          name,
+          shortcode,
+          metricType,
+          lastDays
+        },
+        refetch
+      )) as GraphqlQueryResponse
+
+      return response.data.repository ?? state.repository
+    } catch (e: unknown) {
+      this.$logErrorAndToast(e as Error, 'An error occured while fetching the metric.')
+      throw e
+    }
+  },
+  async [RepositoryDetailActions.FETCH_NLCV_METRIC](
+    { state },
+    {
+      owner,
+      name,
+      provider,
+      shortcode,
+      lastDays,
+      metricType = MetricTypeChoices.DefaultBranchOnly,
+      refetch
+    }
+  ) {
+    try {
+      const response = (await this.$fetchGraphqlData(
+        RepositoryMetricUpdateThresoldGQLQuery,
+        {
+          provider: this.$providerMetaMap[provider].value,
+          owner,
+          name,
+          shortcode,
+          metricType,
+          lastDays
+        },
+        refetch
+      )) as GraphqlQueryResponse
+
+      return response.data.repository ?? state.repository
+    } catch (e: unknown) {
+      this.$logErrorAndToast(
+        e as Error,
+        'An error occured while fetching new line code coverage information.'
+      )
+    }
+    return state.repository
   },
   async [RepositoryDetailActions.FETCH_ALERTING_METRICS]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
@@ -865,26 +984,19 @@ export const actions: RepositoryDetailModuleActions = {
           this.$toast.success(`Successfully activated ${state.repository.name as string}.`)
       }
     } catch (e) {
-      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
+      this.$logErrorAndToast(e as Error, (e as Error).message.replace('GraphQL error: ', ''))
       commit(RepositoryDetailMutations.SET_ERROR, e)
     }
   },
-  async [RepositoryDetailActions.SET_METRIC_THRESHOLD]({ commit }, args) {
-    commit(RepositoryDetailMutations.SET_LOADING, true)
-    try {
-      await this.$applyGraphqlMutation(UpdateRepoMetricThreshold, {
-        input: {
-          metricShortcode: args.metricShortcode,
-          repositoryId: args.repositoryId,
-          thresholdValue: args.thresholdValue,
-          key: args.key
-        }
-      })
-      commit(RepositoryDetailMutations.SET_LOADING, false)
-    } catch (e) {
-      commit(RepositoryDetailMutations.SET_ERROR, e)
-      commit(RepositoryDetailMutations.SET_LOADING, false)
-    }
+  async [RepositoryDetailActions.SET_METRIC_THRESHOLD](_ctx, args) {
+    return await this.$applyGraphqlMutation(UpdateRepoMetricThreshold, {
+      input: {
+        metricShortcode: args.metricShortcode,
+        repositoryId: args.repositoryId,
+        thresholdValue: args.thresholdValue,
+        key: args.key
+      }
+    })
   },
   async [RepositoryDetailActions.DELETE_IGNORED_RULE]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
@@ -931,19 +1043,16 @@ export const actions: RepositoryDetailModuleActions = {
     }
   },
   async [RepositoryDetailActions.UPDATE_REPO_SETTINGS]({ commit }, args) {
-    commit(RepositoryDetailMutations.SET_LOADING, true)
     try {
       const response = await this.$applyGraphqlMutation(UpdateRepositorySettings, {
         input: args.input
       })
       commit(
         RepositoryDetailMutations.SET_REPOSITORY,
-        response.data.generateKeyPairForRepository.repository
+        (response.data as UpdateRepositorySettingsPayload).repository
       )
-      commit(RepositoryDetailMutations.SET_LOADING, false)
     } catch (e) {
-      commit(RepositoryDetailMutations.SET_ERROR, e)
-      commit(RepositoryDetailMutations.SET_LOADING, false)
+      throw e
     }
   },
   async [RepositoryDetailActions.UPDATE_MEMBER_PERMISSION]({ commit }, args) {

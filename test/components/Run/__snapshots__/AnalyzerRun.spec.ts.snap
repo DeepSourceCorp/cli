@@ -1,9 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"CNCL"} 1`] = `
-"<section class=\\"flex flex-col space-y-4\\">
+"<section class=\\"flex flex-col gap-y-3\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"flex items-center space-x-3\\"></div>
+  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+    <!---->
+    <div class=\\"relative z-20\\"></div>
+  </div>
   <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
@@ -12,9 +15,12 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"FAIL"} 1`] = `
-"<section class=\\"flex flex-col space-y-4\\">
+"<section class=\\"flex flex-col gap-y-3\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"flex items-center space-x-3\\"></div>
+  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+    <!---->
+    <div class=\\"relative z-20\\"></div>
+  </div>
   <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
@@ -23,9 +29,12 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"PASS"} 1`] = `
-"<section class=\\"flex flex-col space-y-4\\">
+"<section class=\\"flex flex-col gap-y-3\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"flex items-center space-x-3\\"></div>
+  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+    <!---->
+    <div class=\\"relative z-20\\"></div>
+  </div>
   <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
@@ -34,16 +43,19 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"PEND"} 1`] = `
-"<section class=\\"flex flex-col space-y-4\\">
+"<section class=\\"flex flex-col gap-y-3\\">
   <!---->
   <runloading-stub></runloading-stub>
 </section>"
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"READ"} 1`] = `
-"<section class=\\"flex flex-col space-y-4\\">
+"<section class=\\"flex flex-col gap-y-3\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"flex items-center space-x-3\\"></div>
+  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+    <!---->
+    <div class=\\"relative z-20\\"></div>
+  </div>
   <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
@@ -52,9 +64,12 @@ There can be cases where the value being raised is dynamically set. One common e
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"TIMO"} 1`] = `
-"<section class=\\"flex flex-col space-y-4\\">
+"<section class=\\"flex flex-col gap-y-3\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"flex items-center space-x-3\\"></div>
+  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+    <!---->
+    <div class=\\"relative z-20\\"></div>
+  </div>
   <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>

@@ -335,11 +335,12 @@ export const mockRepositoryDetailForSettingsManageAccess = (): Repository =>
 /**
  * Mock factory
  */
-export const mockRepositoryDetailStateForSettingsManageAccess = (): RepositoryDetailModuleState => ({
-  loading: false as boolean,
-  error: {},
-  repository: mockRepositoryDetailForSettingsManageAccess()
-})
+export const mockRepositoryDetailStateForSettingsManageAccess =
+  (): RepositoryDetailModuleState => ({
+    loading: false as boolean,
+    error: {},
+    repository: mockRepositoryDetailForSettingsManageAccess()
+  })
 
 /*
   ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -456,68 +457,235 @@ export const mockRepositoryDetailStateForSettingsSsh = (): RepositoryDetailModul
 */
 
 export const REPOSITORY_DETAIL_FOR_METRICS: Repository = <Repository>{
-  id: 'UmVwb3NpdG9yeTp6ZG95eWI=',
-  uniqueNamespaceKeys: ['Go', 'Python'],
-  metricsData: [
+  id: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
+  metricsCaptured: [
     {
-      name: 'Application Documenatation Coverage',
-      shortcode: 'DCV',
-      display: '57.5%',
-      last_value: 57.5,
-      second_last_value: 57.5,
-      description: 'Application Documenatation Coverage',
-      threshold: null,
-      is_passing: null,
+      id: 'TWV0cmljOmduenhxYg==',
+      shortcode: 'TCV',
+      name: 'Test Coverage',
+      category: 'Coverage',
+      description: 'Test Coverage',
+      supportsAggregateThreshold: true,
       namespaces: [
         {
-          key: 'Go',
-          shortcode: 'go',
+          key: 'aggregate',
           threshold: null,
-          is_passing: null,
-          display: '34%',
-          trend: [34, 34],
-          modified_at: '2020-04-10T13:00:54.585Z'
+          analyzerLogo: null,
+          analyzerShortcode: null
         },
         {
-          key: 'Python',
-          shortcode: 'python',
-          threshold: null,
-          is_passing: null,
-          display: '81%',
-          trend: [81, 81, 81, 81, 81, 80, 80, 80, 80, 80, 80, 80, 80, 80, 81, 81, 81, 81, 81],
-          modified_at: '2020-05-11T05:50:55.528Z'
+          key: 'javascript',
+          threshold: 54,
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/javascript.svg',
+          analyzerShortcode: 'javascript'
+        },
+        {
+          key: 'python',
+          threshold: 80,
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          analyzerShortcode: 'python'
+        }
+      ],
+      namespacesTrends: [
+        {
+          key: 'javascript',
+          valueTrend: {
+            labels: [
+              '2022-05-30',
+              '2022-05-31',
+              '2022-06-01',
+              '2022-06-02',
+              '2022-06-03',
+              '2022-06-04',
+              '2022-06-05',
+              '2022-06-06',
+              '2022-06-07'
+            ],
+            values: [84, 51, 68, 78, 55, 82, 90, 85, 68]
+          },
+          isPassing: true,
+          valueDisplay: '68%',
+          analyzerShortcode: 'javascript',
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/javascript.svg',
+          threshold: 54
+        },
+        {
+          key: 'python',
+          valueTrend: {
+            labels: [
+              '2022-05-30',
+              '2022-05-31',
+              '2022-06-01',
+              '2022-06-02',
+              '2022-06-03',
+              '2022-06-04',
+              '2022-06-05',
+              '2022-06-06',
+              '2022-06-07',
+              '2022-06-08',
+              '2022-06-09',
+              '2022-06-10',
+              '2022-06-11',
+              '2022-06-12',
+              '2022-06-13',
+              '2022-06-14',
+              '2022-06-15'
+            ],
+            values: [50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50, 50]
+          },
+          isPassing: false,
+          valueDisplay: '50%',
+          analyzerShortcode: 'python',
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          threshold: 80
         }
       ]
     },
     {
-      name: 'Direct External Dependencies',
-      shortcode: 'DDP',
-      display: '23',
-      last_value: 23,
-      second_last_value: 23,
-      description: 'Direct dependencies',
-      threshold: null,
-      is_passing: null,
+      id: 'TWV0cmljOmtkemdveg==',
+      shortcode: 'ADC',
+      name: 'API Documenatation Coverage',
+      category: 'Documentation',
+      description: 'API Documenatation Coverage',
+      supportsAggregateThreshold: false,
       namespaces: [
         {
-          key: 'Go',
-          shortcode: 'go',
+          key: 'aggregate',
           threshold: null,
-          is_passing: null,
-          display: '5',
-          trend: [5, 5],
-          modified_at: '2020-04-10T13:00:54.523Z'
+          analyzerLogo: null,
+          analyzerShortcode: null
         },
         {
-          key: 'Python',
-          shortcode: 'python',
+          key: 'python',
           threshold: null,
-          is_passing: null,
-          display: '18',
-          trend: [18, 15, 15, 17, 17, 17, 17, 17, 17, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18],
-          modified_at: '2020-05-11T05:50:55.512Z'
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          analyzerShortcode: 'python'
+        }
+      ],
+      namespacesTrends: []
+    },
+    {
+      id: 'TWV0cmljOnhkem1heg==',
+      shortcode: 'IDP',
+      name: 'Indirect Dependencies',
+      category: 'Dependencies',
+      description: 'Indirect dependencies',
+      supportsAggregateThreshold: false,
+      namespaces: [
+        {
+          key: 'aggregate',
+          threshold: null,
+          analyzerLogo: null,
+          analyzerShortcode: null
+        },
+        {
+          key: 'python',
+          threshold: null,
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          analyzerShortcode: 'python'
+        }
+      ],
+      namespacesTrends: [
+        {
+          key: 'python',
+          valueTrend: {
+            labels: [
+              '2022-05-30',
+              '2022-05-31',
+              '2022-06-01',
+              '2022-06-02',
+              '2022-06-03',
+              '2022-06-04',
+              '2022-06-05',
+              '2022-06-06',
+              '2022-06-07',
+              '2022-06-08',
+              '2022-06-09',
+              '2022-06-10',
+              '2022-06-11',
+              '2022-06-12',
+              '2022-06-13',
+              '2022-06-14',
+              '2022-06-15'
+            ],
+            values: [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7]
+          },
+          isPassing: null,
+          valueDisplay: '7',
+          analyzerShortcode: 'python',
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          threshold: null
         }
       ]
+    },
+    {
+      id: 'TWV0cmljOnZsenJ2eg==',
+      shortcode: 'TDC',
+      name: 'Test Documentation Coverage',
+      category: 'Documentation',
+      description: 'Test Documenatation Coverage',
+      supportsAggregateThreshold: false,
+      namespaces: [
+        {
+          key: 'Python',
+          threshold: null,
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          analyzerShortcode: 'python'
+        },
+        {
+          key: 'aggregate',
+          threshold: null,
+          analyzerLogo: null,
+          analyzerShortcode: null
+        },
+        {
+          key: 'python',
+          threshold: null,
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          analyzerShortcode: 'python'
+        }
+      ],
+      namespacesTrends: []
+    },
+    {
+      id: 'TWV0cmljOmxrYmV2eg==',
+      shortcode: 'DCV',
+      name: 'Application Documenatation Coverage',
+      category: 'Documentation',
+      description: 'Application Documenatation Coverage',
+      supportsAggregateThreshold: false,
+      namespaces: [
+        {
+          key: 'Python',
+          threshold: null,
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          analyzerShortcode: 'python'
+        },
+        {
+          key: 'aggregate',
+          threshold: null,
+          analyzerLogo: null,
+          analyzerShortcode: null
+        },
+        {
+          key: 'python',
+          threshold: null,
+          analyzerLogo:
+            'https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg',
+          analyzerShortcode: 'python'
+        }
+      ],
+      namespacesTrends: []
     }
   ]
 }

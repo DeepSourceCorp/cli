@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col space-y-4">
-    <div class="flex flex-row-reverse w-full gap-2 xl:w-4/6 xl:flex-row">
+    <div class="flex flex-row-reverse w-full gap-2 xl:flex-row">
       <!-- Sort menu -->
       <z-menu direction="right" width="x-small" class="text-vanilla-100">
         <template v-slot:trigger="{ toggle }">
@@ -29,41 +29,41 @@
       <!-- Search -->
       <div class="flex-grow h-full xl:min-w-80">
         <z-input
-          icon="search"
-          backgroundColor="ink-300"
+          background-color="ink-300"
           size="small"
           placeholder="Search for issue title, file or issue code"
           v-model="searchValue"
-          :showBorder="false"
+          :show-border="false"
           @debounceInput="debounceSearch"
-        ></z-input>
+        >
+          <template slot="left">
+            <z-icon class="flex-shrink-0 p-px" icon="search" size="small"></z-icon>
+          </template>
+        </z-input>
       </div>
     </div>
-    <div class="grid grid-cols-12">
-      <!-- Issue list -->
-      <div class="flex flex-col col-span-full lg:col-span-8 gap-y-4">
-        <issue-editor
-          v-for="edge in edges"
-          v-bind="edge.node"
-          :key="edge.node.id"
-          :checkId="checkId"
-          :checkIssueIds="issuesIgnored"
-          :shortcode="$route.params.issueId"
-          :canIgnoreIssues="canIgnoreIssues"
-          :blobUrlRoot="blobUrlRoot"
-          @ignoreIssues="ignoreIssues"
-        ></issue-editor>
-        <z-pagination
-          class="flex justify-center"
-          v-if="pageCount > 1"
-          :totalPages="pageCount"
-          :totalVisible="5"
-          :page="startPage"
-          @selected="updatePage"
-        ></z-pagination>
-      </div>
-      <!-- Description -->
-      <issue-description :description="description" class="col-span-4"></issue-description>
+
+    <!-- Issue list -->
+    <div class="flex flex-col gap-y-4">
+      <issue-editor
+        v-for="edge in edges"
+        v-bind="edge.node"
+        :key="edge.node.id"
+        :checkId="checkId"
+        :checkIssueIds="issuesIgnored"
+        :shortcode="$route.params.issueId"
+        :canIgnoreIssues="canIgnoreIssues"
+        :blobUrlRoot="blobUrlRoot"
+        @ignoreIssues="ignoreIssues"
+      ></issue-editor>
+      <z-pagination
+        class="flex justify-center"
+        v-if="pageCount > 1"
+        :totalPages="pageCount"
+        :totalVisible="5"
+        :page="startPage"
+        @selected="updatePage"
+      ></z-pagination>
     </div>
   </div>
 </template>

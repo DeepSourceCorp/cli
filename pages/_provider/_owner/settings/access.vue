@@ -27,28 +27,37 @@
     </form-group>
     <form-group label="Access permissions">
       <radio-group-input
+        v-model="basePerm"
         label="Member Base Permissions"
         input-id="team-settings-access-base-perms"
         input-width="wide"
         :options="basePermOptions"
         @change="updateBasePerms"
-        v-model="basePerm"
       ></radio-group-input>
       <check-input
+        v-model="issuePerms"
         label="Issue Permissions"
         input-id="team-settings-access-issue-perms"
         input-width="wide"
         :options="issuePermOptions"
         @change="updateBasePerms"
-        v-model="issuePerms"
       ></check-input>
       <check-input
+        v-model="metricPerms"
         label="Metric Thresholds Permission"
         input-id="team-settings-access-metric-perms"
         input-width="wide"
         :options="metricPermOptions"
         @change="updateBasePerms"
-        v-model="metricPerms"
+      ></check-input>
+      <check-input
+        v-model="metricSuppressionPerms"
+        label="Suppress Metric Permission"
+        input-id="team-settings-access-metric-suppress"
+        input-width="wide"
+        :options="metricSuppressOptions"
+        @change="updateBasePerms"
+        @value="(e) => $toast.success(e)"
       ></check-input>
     </form-group>
     <portal to="modal">
@@ -113,6 +122,10 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
   private metricPerms: Record<string, boolean | undefined> = {
     canMembersModifyMetricThresholds: false,
     canContributorsModifyMetricThresholds: false
+  }
+  private metricSuppressionPerms: Record<string, boolean | undefined> = {
+    canMembersIgnoreFailingMetrics: false,
+    canContributorsIgnoreFailingMetrics: false
   }
   private basePerm: TeamBasePermissionSetDefaultRepositoryPermission =
     TeamBasePermissionSetDefaultRepositoryPermission.Write
@@ -224,6 +237,16 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
       canContributorsModifyMetricThresholds:
         this.team.basePermissionSet?.canContributorsModifyMetricThresholds
     }
+    this.metricSuppressionPerms = {
+      canMembersIgnoreFailingMetrics: this.team.basePermissionSet?.canMembersIgnoreFailingMetrics,
+      canContributorsIgnoreFailingMetrics:
+        this.team.basePermissionSet?.canContributorsIgnoreFailingMetrics
+    }
+    // this.metricSuppressionPerms = {
+    //   canMembersIgnoreFailingMetrics: this.team.basePermissionSet?.canMembersIgnoreFailingMetrics,
+    //   canContributorsIgnoreFailingMetrics:
+    //     this.team.basePermissionSet?.canContributorsIgnoreFailingMetrics
+    // }
     this.isFetching = false
   }
 
@@ -258,7 +281,11 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
           canMembersModifyMetricThresholds:
             this.metricPerms.canMembersModifyMetricThresholds || false,
           canContributorsModifyMetricThresholds:
-            this.metricPerms.canContributorsModifyMetricThresholds || false
+            this.metricPerms.canContributorsModifyMetricThresholds || false,
+          canMembersIgnoreFailingMetrics:
+            this.metricSuppressionPerms.canMembersIgnoreFailingMetrics || false,
+          canContributorsIgnoreFailingMetrics:
+            this.metricSuppressionPerms.canContributorsIgnoreFailingMetrics || false
         })
 
         if (res.ok) {
@@ -304,6 +331,17 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     {
       value: 'canContributorsModifyMetricThresholds',
       label: 'Allow contributors to modify metric thresholds'
+    }
+  ]
+
+  private metricSuppressOptions = [
+    {
+      value: 'canMembersIgnoreFailingMetrics',
+      label: 'Allow members to suppress a failed metric'
+    },
+    {
+      value: 'canContributorsIgnoreFailingMetrics',
+      label: 'Allow contributors to suppress a failed metric˝'
     }
   ]
 }
