@@ -2,17 +2,17 @@
   <base-card
     :to="issueLink"
     :remove-default-style="true"
-    class="bg-ink-400 hover:bg-ink-300 border border-ink-200 rounded-lg"
+    class="border rounded-lg bg-ink-400 hover:bg-ink-300 border-ink-200"
   >
     <template #left-section>
-      <div class="flex w-full justify-between">
-        <div class="flex flex-col gap-y-2.5 w-3/4 xs:w-4/5 p-4">
+      <div class="flex justify-between w-full">
+        <div class="flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5">
           <div>
             <h3
-              class="mr-1 inline cursor-pointer text-vanilla-100 font-medium text-sm md:text-base leading-snug"
+              class="inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base"
               v-html="escapeHtml(title)"
             />
-            <span class="whitespace-nowrap text-sm font-normal text-vanilla-400">
+            <span class="text-sm font-normal whitespace-nowrap text-vanilla-400">
               {{ shortcode }}
             </span>
           </div>
@@ -26,21 +26,18 @@
                   text-size="text-xs sm:text-sm"
                 />
                 <!-- First seen and last seen -->
-                <div class="flex items-center gap-x-2">
-                  <z-icon icon="clock" size="x-small" color="vanilla-400" />
-                  <span class="text-xs md:text-sm text-vanilla-400">
-                    <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">
-                      {{ lastSeenDisplay }}
-                    </span>
-                    &mdash;
-                    <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">
-                      {{ firstSeenDisplay }}
-                    </span>
+                <meta-data-item icon="clock">
+                  <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">
+                    {{ lastSeenDisplay }}
                   </span>
-                </div>
+                  &mdash;
+                  <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">
+                    {{ firstSeenDisplay }}
+                  </span>
+                </meta-data-item>
                 <!-- Occurrences in files -->
                 <div
-                  class="flex items-baseline w-full text-xs md:text-sm leading-6 gap-x-2 text-vanilla-400 sm:w-auto"
+                  class="flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto"
                 >
                   <z-icon
                     icon="file-text"
@@ -63,20 +60,16 @@
                 text-size="text-xs md:text-sm"
               />
 
-              <div :key="issueType" class="flex items-center gap-x-2">
-                <z-icon icon="file-text" size="x-small" color="vanilla-400" class="flex-shrink-0" />
-                <span
-                  class="max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis text-xs md:text-sm text-vanilla-400"
-                  >Found in {{ seenIn }}</span
-                >
-              </div>
+              <meta-data-item icon="file-text" :key="issueType">
+                Found in {{ seenIn }}</meta-data-item
+              >
             </div>
           </div>
         </div>
 
         <!-- right section -->
         <div
-          class="flex flex-col h-full w-1/4 xs:w-1/5 border-l border-ink-200 group-hover:border-ink-100"
+          class="flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100"
           :class="{
             'justify-center items-center': centerContent
           }"
@@ -101,7 +94,7 @@
               :trend-value="`${trendValue}%`"
               :show-bg="false"
               trend-hint="since last week"
-              class="text-xxs md:text-xs bg-opacity-0"
+              class="bg-opacity-0 text-xxs md:text-xs"
               :class="isTrendPositive ? 'text-juniper' : 'text-cherry'"
             />
           </div>

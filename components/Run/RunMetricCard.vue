@@ -85,11 +85,11 @@ export default class RunMetricCard extends Vue {
   metricsCaptured: RepositoryMetricValue
 
   get trendDisplay(): string {
-    return this.metricsCaptured.valueTrendDisplay?.split(' ').at(-1) ?? ''
+    return this.metricsCaptured.valueTrendDisplay?.split(' ')?.[1] ?? ''
   }
 
   get trendDirection(): string {
-    return this.metricsCaptured.valueTrendDisplay?.split(' ').at(0)?.toLowerCase() || ''
+    return this.metricsCaptured.valueTrendDisplay?.split(' ')?.[0]?.toLowerCase() || ''
   }
 
   get trendPositive(): boolean {

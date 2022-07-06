@@ -548,6 +548,15 @@ declare module '*/removeKeyPair.gql' {
 }
     
 
+declare module '*/toggleDataTriggerTimeout.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updateOwnerSettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

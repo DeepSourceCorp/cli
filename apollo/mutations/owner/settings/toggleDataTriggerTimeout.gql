@@ -1,0 +1,7 @@
+mutation ($ownerId: ID!, $shouldTimeoutDataTrigger: Boolean!) {
+  updateTimeoutSetting(
+    input: { ownerId: $ownerId, shouldTimeoutDataTrigger: $shouldTimeoutDataTrigger }
+  ) {
+    ok
+  }
+}

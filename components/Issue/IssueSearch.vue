@@ -1,7 +1,11 @@
 <template>
   <div
     class="flex-grow transition-all ease-in-out"
-    :class="searchFocused || modelValue ? 'md:w-84 duration-150' : 'md:w-44 duration-200'"
+    :class="
+      expandOnFocus && (searchFocused || modelValue)
+        ? 'md:w-84 duration-150'
+        : 'md:w-44 duration-200'
+    "
   >
     <z-input
       :value="modelValue"
@@ -46,6 +50,9 @@ export default class IssueSearch extends Vue {
 
   @Prop({ default: 'Search for issue or file' })
   placeholder: string
+
+  @Prop({ default: true })
+  expandOnFocus: boolean
 
   private searchFocused = false
 }

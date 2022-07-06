@@ -22,7 +22,7 @@ import {
   VerifyGsrWebhooksPayload,
   IntegrationFeature
 } from '~/types/types'
-import { GraphqlError } from '~/types/apollo-graphql-types'
+import { GraphqlError, GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 import OwnerDetailQuery from '~/apollo/queries/owner/details.gql'
 import OwnerIDQuery from '~/apollo/queries/owner/id.gql'
@@ -35,9 +35,11 @@ import SyncRepositories from '~/apollo/mutations/owner/syncRepositories.gql'
 // Settings
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
 import OwnerSSHPublicKeyQuery from '~/apollo/queries/owner/settings/publicKey.gql'
+import UpdateOwnerSettingsGQLQuery from '~/apollo/queries/owner/settings/updateOwnerSettings.gql'
 import GenerateOwnerSSHPublicKey from '~/apollo/mutations/owner/settings/generateKeyPair.gql'
 import RemoveOwnerSSHPublicKey from '~/apollo/mutations/owner/settings/removeKeyPair.gql'
 import UpdateOwnerSettingsGQLMutation from '~/apollo/mutations/owner/settings/updateOwnerSettings.gql'
+import UpdateOwnerDataTriggerTimeoutsGQLMutation from '~/apollo/mutations/owner/settings/toggleDataTriggerTimeout.gql'
 
 // Billing
 import BillingDetails from '~/apollo/queries/owner/billing.gql'
@@ -130,7 +132,8 @@ export enum OwnerDetailMutations {
   SET_OWNER_ISSUES_TREND = 'setOwnerIssuesTrend',
   SET_OWNER_RESOLVED_ISSUES_TREND = 'setOwnerResolvedIssuesTrend',
   SET_BILLING_INFO = 'setBillingInfo',
-  SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting'
+  SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting',
+  UPDATE_DATA_TIMEOUT_TRIGGER = 'updateDataTimeoutTrigger'
 }
 
 export const mutations: MutationTree<OwnerDetailModuleState> = {
@@ -168,6 +171,11 @@ export const mutations: MutationTree<OwnerDetailModuleState> = {
         issueSettings.push(args)
       }
     }
+  },
+  [OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER]: (state, newDataTimeoutTriggerValue) => {
+    state.owner = Object.assign({}, state.owner, {
+      ownerSetting: { shouldTimeoutDataTrigger: newDataTimeoutTriggerValue }
+    } as Owner)
   }
 }
 
@@ -176,6 +184,7 @@ export enum OwnerDetailActions {
   FETCH_OWNER_ID = 'fetchOwnerId',
   FETCH_OWNER_DETAILS = 'fetchOwnerDetails',
   FETCH_ISSUE_TYPE_SETTINGS = 'fetchIssueTypeSettings',
+  FETCH_OWNER_PREFERENCES = 'fetchOwnerPreferences',
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
   FETCH_ACCOUNT_SETUP_STATUS = 'fetchAccountSetupStatus',
@@ -188,6 +197,7 @@ export enum OwnerDetailActions {
   SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting',
   SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings',
   SYNC_REPOS_FOR_OWNER = 'syncReposForOwner',
+  SET_DATA_TIMEOUT_TRIGGER = 'setDataTimeoutTrigger',
 
   FETCH_BILLING_DETAILS = 'fetchBillingDetails',
   FETCH_SEATS_INFO = 'fetchSeatsInfo',
@@ -225,6 +235,12 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext,
     args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
+
+  [OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string }
   ) => Promise<void>
 
   [OwnerDetailActions.FETCH_ISSUE_TYPE_SETTINGS]: (
@@ -445,6 +461,17 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
       refetch?: boolean
     }
   ) => Promise<void>
+  [OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { ownerId: string; shouldTimeoutDataTrigger: boolean }
+  ) => Promise<boolean | undefined>
+
+  [OwnerDetailActions.FETCH_OWNER_PREFERENCES]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: { login: string; provider: string; refetch?: boolean }
+  ) => Promise<void>
 }
 
 export const actions: OwnerDetailModuleActions = {
@@ -497,6 +524,21 @@ export const actions: OwnerDetailModuleActions = {
       const err = e as GraphqlError
       commit(OwnerDetailMutations.SET_ERROR, err)
       commit(OwnerDetailMutations.SET_LOADING, false)
+    }
+  },
+  async [OwnerDetailActions.FETCH_OWNER_PREFERENCES]({ commit }, args) {
+    try {
+      const response = await this.$fetchGraphqlData(
+        UpdateOwnerSettingsGQLQuery,
+        {
+          login: args.login,
+          provider: this.$providerMetaMap[args.provider].value
+        },
+        args.refetch
+      )
+      commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, `An error occured while fetching owner preferences.`)
     }
   },
 
@@ -909,6 +951,25 @@ export const actions: OwnerDetailModuleActions = {
       commit(OwnerDetailMutations.SET_OWNER, response.data.owner)
     } catch (e) {
       this.$logErrorAndToast(e as Error, 'There was an error fetching integrations.')
+    }
+  },
+  async [OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER]({ commit }, args) {
+    try {
+      const response = (await this.$applyGraphqlMutation(
+        UpdateOwnerDataTriggerTimeoutsGQLMutation,
+        {
+          ownerId: args.ownerId,
+          shouldTimeoutDataTrigger: args.shouldTimeoutDataTrigger
+        }
+      )) as GraphqlMutationResponse
+
+      if (response.data.updateTimeoutSetting?.ok) {
+        this.$toast.success('Successfully updated owner preferences.')
+        commit(OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER, args.shouldTimeoutDataTrigger)
+        return response.data.updateTimeoutSetting.ok
+      }
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, `An error occured while updating owner preferences.`)
     }
   }
 }

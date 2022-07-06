@@ -71,7 +71,8 @@ const TEAM_PERMS_MAP = {
   [TeamPerms.MANAGE_WEBHOOKS]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.MANAGE_INTEGRATIONS]: [TeamMemberRoleChoices.Admin],
-  [TeamPerms.VIEW_REPORTS]: [TeamMemberRoleChoices.Admin, TeamMemberRoleChoices.Member]
+  [TeamPerms.VIEW_REPORTS]: [TeamMemberRoleChoices.Admin, TeamMemberRoleChoices.Member],
+  [TeamPerms.MANAGE_PREFERNCES]: [TeamMemberRoleChoices.Admin]
 }
 
 const REPO_PERMS_MAP = {

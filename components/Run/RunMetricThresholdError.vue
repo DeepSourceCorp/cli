@@ -1,5 +1,5 @@
 <template>
-  <base-state title="The run was cancelled">
+  <base-state title="Metrics are failing" subtitle="Check is passing but some metrics are failing.">
     <template slot="hero">
       <img
         class="mx-auto mb-4"

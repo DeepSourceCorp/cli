@@ -117,6 +117,13 @@ export default class TeamSettings extends mixins(
         validator: this.showBilling
       },
       {
+        name: 'preferences',
+        label: 'Preferences',
+        icon: 'box',
+        routeName: 'provider-owner-settings-preferences',
+        validator: this.canViewPreferences
+      },
+      {
         name: 'access',
         label: 'Access control',
         icon: 'lock',
@@ -260,6 +267,10 @@ export default class TeamSettings extends mixins(
       this.activeDashboardContext.type === 'team' &&
       this.$gateKeeper.team(TeamPerms.MANAGE_INTEGRATIONS, this.teamPerms.permission)
     )
+  }
+
+  get canViewPreferences(): boolean {
+    return this.$gateKeeper.team(TeamPerms.MANAGE_PREFERNCES, this.teamPerms.permission)
   }
 
   /**

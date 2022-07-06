@@ -2185,6 +2185,190 @@ describe('[Store] Owner/Details', () => {
         expect((e as Error).message).toBe('ERR1')
       }
     })
+
+    describe(`Action "${OwnerDetailActions.FETCH_OWNER_PREFERENCES}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+              return new Promise<GraphqlQueryResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_OWNER_PREFERENCES].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_OWNER}`, async () => {
+          expect(commit).toHaveBeenCalledTimes(1)
+
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.SET_OWNER)
+
+          // Assert if the response from api is same as the one passed to the mutation
+          expect(firstCall[1]).toEqual(apiResponse.data.owner)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $fetchGraphqlData(): Promise<Error> {
+              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            },
+            $logErrorAndToast: jest.fn()
+          }
+
+          // Setting the global spy on `localThis.$fetchGraphqlData`
+          spy = jest.spyOn(localThis, '$fetchGraphqlData')
+
+          await actions[OwnerDetailActions.FETCH_OWNER_PREFERENCES].call(localThis, actionCxt, {
+            login: 'deepsourcelabs',
+            provider: 'gh'
+          })
+        })
+
+        test(`successfully invokes $logErrorAndToast plugin`, () => {
+          expect(localThis.$logErrorAndToast).toHaveBeenCalledWith(
+            Error('ERR1'),
+            'An error occured while fetching owner preferences.'
+          )
+        })
+      })
+    })
+
+    describe(`Action "${OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER}"`, () => {
+      const dataTriggerVal = true
+
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+              return new Promise<GraphqlMutationResponse>((resolve) =>
+                setTimeout(() => resolve({ data: { updateTimeoutSetting: { ok: true } } }), 10)
+              )
+            },
+            $toast: { success: jest.fn() }
+          }
+
+          // Setting the global spy on `localThis.$applyGraphqlMutation`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+          await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(localThis, actionCxt, {
+            ownerId: '123',
+            shouldTimeoutDataTrigger: dataTriggerVal
+          })
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test(`successfully commits mutation ${OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER}`, async () => {
+          expect(commit).toHaveBeenCalledTimes(1)
+
+          // Storing the second commit call made
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+
+          // Assert if `OwnerDetailMutations.SET_OWNER` is being commited or not
+          expect(firstCall[0]).toEqual(OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER)
+
+          // Assert if the response from api is same as the one passed to the mutation
+          expect(firstCall[1]).toEqual(dataTriggerVal)
+        })
+
+        test(`successfully returns 'true' if action ${OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER} is successful`, async () => {
+          const apiResponse = await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(
+            localThis,
+            actionCxt,
+            {
+              ownerId: '123',
+              shouldTimeoutDataTrigger: true
+            }
+          )
+
+          expect(apiResponse).toBe(true)
+        })
+      })
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+              return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
+                setTimeout(() => reject(new Error('ERR1')), 10)
+              )
+            },
+            $logErrorAndToast: jest.fn()
+          }
+
+          // Setting the global spy on `localThis.$applyGraphqlMutation`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+          await actions[OwnerDetailActions.SET_DATA_TIMEOUT_TRIGGER].call(localThis, actionCxt, {
+            ownerId: '123',
+            shouldTimeoutDataTrigger: true
+          })
+        })
+
+        test(`successfully invokes $logErrorAndToast plugin`, () => {
+          expect(localThis.$logErrorAndToast).toHaveBeenCalledWith(
+            Error('ERR1'),
+            'An error occured while updating owner preferences.'
+          )
+        })
+      })
+    })
   })
 
   /*
@@ -2255,6 +2439,19 @@ describe('[Store] Owner/Details', () => {
         expect(ownerState.owner.ownerSetting?.issueTypeSettings?.[length - 1]).toEqual(
           newIssueTypeSetting
         )
+      })
+    })
+
+    describe(`Mutation "${OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER}"`, () => {
+      test('successfully appends shouldTimeoutDataTrigger', () => {
+        const newshouldTimeoutDataTrigger: boolean = false
+
+        mutations[OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER](
+          ownerState,
+          newshouldTimeoutDataTrigger
+        )
+
+        expect(ownerState.owner.ownerSetting?.shouldTimeoutDataTrigger).toEqual(false)
       })
     })
   })

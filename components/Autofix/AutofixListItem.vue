@@ -19,19 +19,19 @@
       </span>
     </template>
     <template slot="description">
-      <div class="items-center mt-2 ml-6 space-y-1 md:space-y-0 md:flex md:space-x-4">
+      <div class="items-center mt-2 ml-6 gap-x-4 gap-y-1 md:flex-wrap md:flex">
         <!-- Issue type -->
         <div class="flex space-x-5">
           <issue-type v-if="issue" :issueType="issue.issueType"></issue-type>
           <!-- Analyzer -->
           <div class="flex items-center space-x-1.5 text-sm">
-            <analyzer-logo v-bind="analyzer" size="small" />
+            <analyzer-logo v-bind="analyzer" size="small" class="flex-shrink-0" />
             <span class="text-sm text-vanilla-400">{{ analyzer.name }}</span>
           </div>
         </div>
         <!-- Created -->
         <div class="flex items-center space-x-1.5 text-sm">
-          <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
+          <z-icon icon="clock" size="x-small" color="vanilla-400" class="flex-shrink-0"></z-icon>
           <span class="text-sm text-vanilla-400">Created {{ formatDuration }}</span>
         </div>
         <!-- Avatar -->

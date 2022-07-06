@@ -17,7 +17,8 @@ export enum TeamPerms {
   MANAGE_WEBHOOKS = 'manageWebhooks',
   MANAGE_OWNER_ISSUE_PRIORITY = 'manageIssuePriority',
   MANAGE_INTEGRATIONS = 'manageIntegrations',
-  VIEW_REPORTS = 'viewReports'
+  VIEW_REPORTS = 'viewReports',
+  MANAGE_PREFERNCES = 'managePreferences'
 }
 
 export enum RepoPerms {

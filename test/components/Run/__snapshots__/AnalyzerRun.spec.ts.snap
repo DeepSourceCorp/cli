@@ -45,7 +45,7 @@ There can be cases where the value being raised is dynamically set. One common e
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"PEND"} 1`] = `
 "<section class=\\"flex flex-col gap-y-3\\">
   <!---->
-  <runloading-stub></runloading-stub>
+  <lazyrunloading-stub></lazyrunloading-stub>
 </section>"
 `;
 

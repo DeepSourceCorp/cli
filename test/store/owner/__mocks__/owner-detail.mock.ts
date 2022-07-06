@@ -93,7 +93,8 @@ export const OWNER_DETAIL_ISSUE_TYPE_SETTINGS: Owner = <Owner>{
         isIgnoredToDisplay: true,
         description: null
       }
-    ]
+    ],
+    shouldTimeoutDataTrigger: false
   }
 }
 

@@ -3,7 +3,7 @@
     <div
       class="bg-ink-400 w-full flex flex-row justify-between space-x-4 p-2 border-b border-ink-200 z-20 md:sticky repo-header-offset"
     >
-      <div class="p-0.5 mt-px">
+      <div class="p-0.5 px-2 mt-px">
         <z-breadcrumb separator="/" class="text-sm text-vanilla-100" :key="$route.name">
           <z-breadcrumb-item class="text-vanilla-400"
             ><nuxt-link :to="linkToAllRuns">All runs</nuxt-link></z-breadcrumb-item

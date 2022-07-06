@@ -64,6 +64,7 @@
                       </div>
                       <issue-search
                         v-focus
+                        :expand-on-focus="false"
                         :search-candidate="queryParams.q"
                         placeholder="Search for issue title or shortcode"
                         class="w-full md:flex-grow"
@@ -146,9 +147,11 @@
           </div>
           <!-- metrics -->
           <div v-else class="flex lg:hidden flex-col space-y-2 p-3 lg:sticky header-offset">
-            <run-loading v-if="check.status === 'PEND'" />
-            <run-cancelled v-else-if="check.status === 'CNCL'" />
-            <run-timeout v-else-if="check.status === 'TIMO'" />
+            <lazy-run-loading v-if="check.status === CheckStatus.Pend" />
+            <lazy-run-cancelled v-else-if="check.status === CheckStatus.Cncl" />
+            <lazy-run-timeout v-else-if="check.status === CheckStatus.Timo" />
+            <lazy-run-waiting v-else-if="check.status === CheckStatus.Wait" />
+            <lazy-run-nuked v-else-if="check.status === CheckStatus.Atmo" />
             <template v-else>
               <div
                 v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
@@ -256,7 +259,7 @@
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
 // Import State & Types
-import { Check, RepositoryMetricValue } from '~/types/types'
+import { Check, CheckStatus, RepositoryMetricValue } from '~/types/types'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import { RunHeader, AnalyzerRun } from '@/components/Run'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
@@ -332,6 +335,7 @@ export default class AnalyzerDetails extends mixins(
   perPageCount = 10
   public activeTabIndex = 0
   public autofixLoading = false
+  readonly CheckStatus = CheckStatus
   showConfirmDialog = false
   suppressingMetric = false
   metricToSuppress: RepositoryMetricValue = {} as RepositoryMetricValue

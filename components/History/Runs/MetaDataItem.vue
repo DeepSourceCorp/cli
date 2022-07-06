@@ -1,9 +1,9 @@
 <template>
-  <div class="flex items-center gap-x-1.5">
-    <z-icon :icon="icon" :size="size" :color="iconColor" class="flex-shrink-0" />
-    <p :class="[textColor, textSize]">
+  <div class="space-x-1">
+    <z-icon :icon="icon" :size="size" :color="iconColor" class="flex-shrink-0 inline" />
+    <span :class="[textColor, textSize, 'inline']">
       <slot>{{ label }}</slot>
-    </p>
+    </span>
   </div>
 </template>
 <script lang="ts">
@@ -31,7 +31,7 @@ export default class MetaDataItem extends Vue {
   @Prop({ default: 'text-vanilla-400' })
   textColor: string
 
-  @Prop({ default: 'text-xxs md:text-sm' })
+  @Prop({ default: 'text-xs md:text-sm' })
   textSize: string
 }
 </script>

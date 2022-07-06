@@ -116,7 +116,7 @@ describe('[[ AnalyzerRun ]]', () => {
           props,
           store,
           stubs: {
-            RunLoading: true,
+            LazyRunLoading: true,
             IssueListItem: true
           }
         },

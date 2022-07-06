@@ -1,10 +1,13 @@
 <template>
   <section class="flex flex-col gap-y-3">
     <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" />
-    <run-loading v-if="status === 'PEND'" />
-    <run-pass v-else-if="status === 'PASS' && issueCount === 0" />
-    <run-cancelled v-else-if="status === 'CNCL' && issueCount === 0" />
-    <run-timeout v-else-if="status === 'TIMO' && issueCount === 0" />
+    <lazy-run-loading v-if="status === CheckStatus.Pend" />
+    <lazy-run-pass v-else-if="status === CheckStatus.Pass && issueCount === 0" />
+    <lazy-run-cancelled v-else-if="status === CheckStatus.Cncl && issueCount === 0" />
+    <lazy-run-timeout v-else-if="status === CheckStatus.Timo && issueCount === 0" />
+    <lazy-run-waiting v-else-if="status === CheckStatus.Wait && issueCount === 0" />
+    <lazy-run-nuked v-else-if="status === CheckStatus.Atmo && issueCount === 0" />
+    <lazy-run-metric-threshold-error v-else-if="status === CheckStatus.Fail && issueCount === 0" />
     <template v-else>
       <div id="issue-filters" class="md:sticky header-offset bg-ink-400">
         <!-- fade overlay -->
@@ -48,7 +51,7 @@
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
 import IssueListItem from '@/components/IssueListItem.vue'
-import { Issue, RunStatus } from '@/types/types'
+import { Issue, CheckStatus } from '@/types/types'
 
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import { resolveNodes } from '~/utils/array'
@@ -65,12 +68,14 @@ export interface RunError {
 })
 export default class AnalyzerRun extends mixins(RunDetailMixin) {
   @Prop({ required: true })
-  status: RunStatus
+  status: CheckStatus
 
   @Prop({ default: () => [] })
   errorsRendered: RunError[]
 
   public isScrolled = false
+  public isAutofixOpen = false
+  readonly CheckStatus = CheckStatus
 
   get issueCount(): number {
     return this.concreteIssueList?.edges?.length || 0
