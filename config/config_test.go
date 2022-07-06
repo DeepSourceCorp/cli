@@ -56,6 +56,7 @@ func TestGetConfig(t *testing.T) {
 
 func TestVerifyAuthentication(t *testing.T) {
 	t.Run("must return nil when token is provided", func(t *testing.T) {
+		cfg.TokenExpiresIn = time.Date(2023, time.Month(2), 13, 1, 10, 30, 0, time.UTC)
 		err := cfg.VerifyAuthentication()
 		assert.Nil(t, err)
 	})

@@ -119,6 +119,8 @@ func GetBulletMessage(msg, color string) string {
 	switch color {
 	case "red":
 		return aec.Apply("•"+" "+msg, aec.LightRedF)
+	case "yellow":
+		return aec.Apply("•"+" "+msg, aec.LightYellowF)
 	}
 	return ""
 }

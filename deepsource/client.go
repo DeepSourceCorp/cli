@@ -6,19 +6,22 @@ import (
 	"fmt"
 
 	"github.com/deepsourcelabs/cli/deepsource/analyzers"
-	analyzerQuery "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
 	"github.com/deepsourcelabs/cli/deepsource/auth"
-	authmut "github.com/deepsourcelabs/cli/deepsource/auth/mutations"
 	"github.com/deepsourcelabs/cli/deepsource/issues"
-	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
 	"github.com/deepsourcelabs/cli/deepsource/repository"
-	repoQuery "github.com/deepsourcelabs/cli/deepsource/repository/queries"
 	"github.com/deepsourcelabs/cli/deepsource/transformers"
-	transformerQuery "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
+	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/graphql"
+
+	analyzerMutation "github.com/deepsourcelabs/cli/deepsource/analyzers/mutations"
+	analyzerQuery "github.com/deepsourcelabs/cli/deepsource/analyzers/queries"
+	authMutation "github.com/deepsourcelabs/cli/deepsource/auth/mutations"
+	issuesQuery "github.com/deepsourcelabs/cli/deepsource/issues/queries"
+	repoQuery "github.com/deepsourcelabs/cli/deepsource/repository/queries"
+	transformerQuery "github.com/deepsourcelabs/cli/deepsource/transformers/queries"
 )
 
-var defaultHostName = "deepsource.io"
+var defaultHostName = "deepsource.icu"
 
 type ClientOpts struct {
 	Token    string
@@ -56,7 +59,7 @@ func getAPIClientURL(hostName string) string {
 
 	// Check if the domain is different from the default domain (In case of Enterprise users)
 	if hostName != defaultHostName {
-		apiClientURL = fmt.Sprintf("https://%s/api/graphql/", hostName)
+		apiClientURL = fmt.Sprintf("http://%s/graphql/", hostName)
 	}
 	return apiClientURL
 }
@@ -64,7 +67,7 @@ func getAPIClientURL(hostName string) string {
 // Registers the device and allots it a device code which is further used for fetching
 // the PAT and other authentication data
 func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
-	req := authmut.RegisterDeviceRequest{}
+	req := authMutation.RegisterDeviceRequest{}
 	res, err := req.Do(ctx, c)
 	if err != nil {
 		return nil, err
@@ -74,8 +77,8 @@ func (c Client) RegisterDevice(ctx context.Context) (*auth.Device, error) {
 
 // Logs in the client using the deviceCode and the user Code and returns the PAT and data which is required for authentication
 func (c Client) Login(ctx context.Context, deviceCode, description string) (*auth.PAT, error) {
-	req := authmut.RequestPATRequest{
-		Params: authmut.RequestPATParams{
+	req := authMutation.RequestPATRequest{
+		Params: authMutation.RequestPATParams{
 			DeviceCode:  deviceCode,
 			Description: description,
 		},
@@ -90,8 +93,8 @@ func (c Client) Login(ctx context.Context, deviceCode, description string) (*aut
 
 // Refreshes the authentication credentials. Takes the refreshToken as a parameter.
 func (c Client) RefreshAuthCreds(ctx context.Context, token string) (*auth.PAT, error) {
-	req := authmut.RefreshTokenRequest{
-		Params: authmut.RefreshTokenParams{
+	req := authMutation.RefreshTokenRequest{
+		Params: authMutation.RefreshTokenParams{
 			Token: token,
 		},
 	}
@@ -184,6 +187,45 @@ func (c Client) GetIssuesForFile(ctx context.Context, owner, repoName, provider,
 	res, err := req.Do(ctx, c)
 	if err != nil {
 		return nil, err
+	}
+	return res, nil
+}
+
+// SyncAnalyzer syncs the local custom Analyzer with DeepSource.
+func (c Client) SyncAnalyzer(ctx context.Context, analyzerTOMLData *types.AnalyzerTOML, issuesData *[]types.AnalyzerIssue) (*analyzers.SyncResponse, error) {
+	req := analyzerMutation.SyncAnalyzerRequest{
+		Input: analyzerMutation.SyncAnalyzerInput{
+			Analyzer: analyzerMutation.AnalyzerInput{
+				Name:             analyzerTOMLData.Name,
+				Version:          analyzerTOMLData.AnalyzerVersion,
+				Shortcode:        analyzerTOMLData.Shortcode,
+				Description:      analyzerTOMLData.Description,
+				Tags:             analyzerTOMLData.Tags,
+				RepositoryUrl:    analyzerTOMLData.Repository,
+				DocumentationUrl: analyzerTOMLData.DocumentationURL,
+				BugTrackerUrl:    analyzerTOMLData.BugTrackerURL,
+				AnalysisCommand:  analyzerTOMLData.Analysis.Command,
+				// TODO(SNT): Activate this when Autofix is supported for custom Analyzers.
+				// AutofixCommand:   analyzerTOMLData.AutofixCommand,
+			},
+		},
+	}
+
+	// Making a duplicate instance of the issuesData slice since the category needs to be modified to
+	// match the enum values expected by the syncAnalyzer mutation.
+	issuesList := *issuesData
+
+	// Assigning the enum value of issue category.
+	for i := 0; i < len(issuesList); i++ {
+		issuesList[i].Category = types.IssueCategoryEnumMap[issuesList[i].Category]
+	}
+
+	// Appending issues to the parameters.
+	req.Input.Issues = append(req.Input.Issues, issuesList...)
+
+	res, err := req.Do(ctx, c)
+	if err != nil {
+		return &analyzers.SyncResponse{}, err
 	}
 	return res, nil
 }
