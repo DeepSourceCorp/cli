@@ -129,7 +129,6 @@ func (a *AnalyzerDryRun) AnalyzerRun() (err error) {
 		if a.Client.ImageTag == "latest" {
 			a.Spinner.SetSuffix("(no image tag found, using latest)")
 		}
-
 		a.Spinner.StopSpinner()
 	} else {
 		// Building the Analyzer image.

@@ -5,6 +5,7 @@ import (
 
 	dryrun "github.com/deepsourcelabs/cli/command/analyzer/dryrun"
 	initialize "github.com/deepsourcelabs/cli/command/analyzer/initialize"
+	push "github.com/deepsourcelabs/cli/command/analyzer/push"
 	verify "github.com/deepsourcelabs/cli/command/analyzer/verify"
 )
 
@@ -20,5 +21,6 @@ func NewCmdAnalyzer() *cobra.Command {
 	cmd.AddCommand(dryrun.NewCmdAnalyzerRun())
 	cmd.AddCommand(verify.NewCmdAnalyzerVerify())
 	cmd.AddCommand(initialize.NewCmdAnalyzerInit())
+	cmd.AddCommand(push.NewCmdAnalyzerPush())
 	return cmd
 }
