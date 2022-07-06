@@ -76,7 +76,7 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzerDockerBuild() (err error) {
 	}
 
 	// Read the docker build response
-	if err = build.CheckResponse(buildRespReader, a.Build.VerboseMode); err != nil {
+	if err = build.CheckBuildResponse(buildRespReader, a.Build.VerboseMode); err != nil {
 		a.handleBuildError(err)
 		return err
 	}

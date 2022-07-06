@@ -171,7 +171,7 @@ func (a *AnalyzerPushOpts) buildAnalyzerImage(analyzerVersion string, analyzerTO
 
 	// Read the docker build response.
 	// Passing `verboseMode` as false since its not required as of now in the `push` command.
-	return docker.CheckResponse(buildRespReader, false)
+	return docker.CheckBuildResponse(buildRespReader, false)
 }
 
 // pushAnalyzerImage pushes the Analyzer image to the registry.
@@ -189,5 +189,5 @@ func (a *AnalyzerPushOpts) pushAnalyzerImage(user, token string) error {
 
 	// Read the docker push response.
 	// Passing `verboseMode` as false since its not required as of now in the `push` command.
-	return docker.CheckResponse(pushResponseReader, false)
+	return docker.CheckBuildResponse(pushResponseReader, false)
 }
