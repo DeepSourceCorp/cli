@@ -127,10 +127,10 @@ func TestPushAnalyzer(t *testing.T) {
 
 	/* Stop the registry. */
 	if err := runCmd("docker", appPath, "container", "stop", "registry"); err != nil {
-		t.Error(err)
+		t.Log(err)
 	}
 	if err := runCmd("docker", appPath, "container", "rm", "-v", "registry"); err != nil {
-		t.Error(err)
+		t.Log(err)
 	}
 }
 

@@ -155,6 +155,11 @@ func (a *AnalyzerPushOpts) buildAnalyzerImage(analyzerVersion string, analyzerTO
 		ImagePlatform:  analyzerImagePlatform,
 	}
 
+	err := a.DockerClient.SetupClient()
+	if err != nil {
+		return err
+	}
+
 	// Build the Analyzer docker image.
 	ctxCancelFunc, buildRespReader, buildErr := a.DockerClient.BuildAnalyzerDockerImage()
 
