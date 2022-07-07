@@ -14,7 +14,7 @@
           <z-menu v-if="canIgnoreIssues">
             <template v-slot:trigger="{ isOpen, toggle }">
               <z-button
-                v-tooltip="'Ignore this occurance'"
+                v-tooltip="'Ignore this occurrence'"
                 type="button"
                 buttonType="ghost"
                 icon="slash"

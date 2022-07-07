@@ -45,12 +45,12 @@
         <z-tab-item class="flex items-center space-x-1" border-active-color="vanilla-400">
           <span>Occurrences</span>
           <z-tag
-            v-if="issueOccurances.totalCount"
+            v-if="issueOccurrences.totalCount"
             text-size="xs"
             spacing="px-2 py-1"
             bgColor="ink-100"
             class="leading-none"
-            >{{ issueOccurances.totalCount }}</z-tag
+            >{{ issueOccurrences.totalCount }}</z-tag
           >
         </z-tab-item>
         <z-tab-item border-active-color="vanilla-400">Ignore rules</z-tab-item>
@@ -71,7 +71,7 @@
           </div>
           <div v-else class="grid grid-cols-3">
             <issue-list
-              v-bind="issueOccurances"
+              v-bind="issueOccurrences"
               class="col-span-3 lg:col-span-2"
               :description="singleIssue.descriptionRendered"
               :checkId="currentCheck ? currentCheck.id : ''"
@@ -386,7 +386,7 @@ export default class RunIssueDetails extends mixins(
    *
    * @returns {ChechIssueConnection}
    */
-  get issueOccurances(): CheckIssueConnection {
+  get issueOccurrences(): CheckIssueConnection {
     const filteredIssueConnection = {} as CheckIssueConnection
     if (!this.checkIssues.edges) return filteredIssueConnection
     filteredIssueConnection.edges = this.checkIssues.edges.filter(
