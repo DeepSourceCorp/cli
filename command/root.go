@@ -27,13 +27,13 @@ Login into DeepSource using the command : deepsource auth login`,
 		SilenceUsage:  true,
 	}
 
+	// GetCmd fetches the Cobra command from a shared library.
 	analyzerCmd := GetCmd("deepsource.so", "NewCmdAnalyzer")
 
 	// Child Commands
 	commands = append(commands, version.NewCmdVersion(), config.NewCmdConfig(), auth.NewCmdAuth(), repo.NewCmdRepo(), issues.NewCmdIssues(), report.NewCmdReport())
 
 	if analyzerCmd != nil {
-		log.Println("couldn't find analyzer cmd")
 		commands = append(commands, analyzerCmd)
 	}
 
@@ -42,6 +42,8 @@ Login into DeepSource using the command : deepsource auth login`,
 	return cmd
 }
 
+// TODO: GetCmd requires the shared library to be built using go build -buildmode=plugin
+// The shared library MUST have a main function.
 func GetCmd(pluginPath, cmdName string) *cobra.Command {
 	p, err := plugin.Open(pluginPath)
 	if err != nil {
