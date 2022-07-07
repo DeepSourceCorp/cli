@@ -3,6 +3,7 @@ vendor
 
 # Executable
 cmd/deepsource/deepsource
+cmd/deepsource_tcv/deepsource
 
 # Goreleaser artifacts
 dist
