@@ -1,6 +1,38 @@
 project_name: deepsource
 builds:
-  -
+  - id: "tcv-deepsource"
+    main: ./cmd/deepsource_tcv/main.go
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -tags=static_all
+    goos:
+      - freebsd
+      - openbsd
+      - netbsd
+      - linux
+      - darwin
+    goarch:
+      - 386
+      - amd64
+      - arm64
+    ldflags:
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+  - id: "windows-tcv-deepsource"
+    main: ./cmd/deepsource_tcv/main.go
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -tags=static_all
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - buildmode=exe
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+  - id: "deepsource"
+    main: ./cmd/deepsource/main.go
     env:
       - CGO_ENABLED=0
     flags:
@@ -18,6 +50,7 @@ builds:
     ldflags:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
   - id: "windows-deepsource"
+    main: ./cmd/deepsource/main.go
     env:
       - CGO_ENABLED=0
     flags:
