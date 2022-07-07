@@ -249,7 +249,7 @@ export default class TeamSettings extends mixins(
   get canViewReports(): boolean {
     return (
       this.$gateKeeper.team(TeamPerms.VIEW_REPORTS, this.teamPerms.permission) &&
-      Boolean(this.viewer.isBetaTester)
+      (Boolean(this.viewer.isBetaTester) || this.$config.onPrem)
     )
   }
 

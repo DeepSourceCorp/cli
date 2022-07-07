@@ -338,7 +338,8 @@ export default class RepoHeader extends mixins(
       ? this.$gateKeeper.repo(item.perms, this.repoPerms.permission)
       : true
 
-    const allowForbeta = item.forBeta ? Boolean(this.viewer.isBetaTester) : true
+    const allowForbeta =
+      this.$config.onPrem || (item.forBeta ? Boolean(this.viewer.isBetaTester) : true)
 
     return autofixAllowedForUser && autofixAllowedForProvider && allowForbeta
   }

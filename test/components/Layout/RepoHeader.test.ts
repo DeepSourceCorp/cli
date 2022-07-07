@@ -13,7 +13,8 @@ import VTooltip from 'v-tooltip'
 const mocks = mocksGenerator({
   fetchRepoPerms: jest.fn(),
   fetchBasicRepoDetails: jest.fn(),
-  fetchRepoRunCount: jest.fn()
+  fetchRepoRunCount: jest.fn(),
+  $config: { onPrem: true }
 })
 
 interface RepoHeaderInterface extends Vue {
@@ -158,7 +159,8 @@ describe('[[ RepoHeader ]]', () => {
               owner: 'deepsourcelabs',
               repo: 'bifrost'
             }
-          }
+          },
+          $config: { onPrem: false }
         }),
         store: new Vuex.Store({
           modules: storeModulesGenerator({
