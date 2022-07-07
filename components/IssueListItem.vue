@@ -29,6 +29,8 @@
                 {{ firstSeenDisplay }}
               </span>
             </meta-data-item>
+          </div>
+          <div class="flex items-center flex-wrap gap-y-1.5 gap-x-4">
             <!-- Occurrences in files -->
             <meta-data-item icon="file-text"> Found in {{ seenIn }} </meta-data-item>
           </div>

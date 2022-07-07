@@ -64,7 +64,6 @@
         <run-header
           v-else-if="showRunHeader"
           v-bind="run"
-          :route-to-previous="linkToAllRuns"
           :checks="checks"
           :current-analyzer="$route.params.analyzer"
           class="z-30 border-b bg-ink-400 border-ink-200 md:sticky top-bar-offset"

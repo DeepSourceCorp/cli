@@ -341,7 +341,7 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     },
     {
       value: 'canContributorsIgnoreFailingMetrics',
-      label: 'Allow contributors to suppress a failed metric˝'
+      label: 'Allow contributors to suppress a failed metric'
     }
   ]
 }

@@ -20,6 +20,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -54,6 +56,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`]
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -94,6 +98,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -128,6 +134,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`]
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -168,6 +176,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -200,6 +210,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`]
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -238,6 +250,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -270,6 +284,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`]
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -308,6 +324,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -342,6 +360,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -382,6 +402,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -416,6 +438,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -456,6 +480,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -488,6 +514,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -526,6 +554,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -558,6 +588,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -596,6 +628,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -630,6 +664,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -670,6 +706,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -704,6 +742,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -744,6 +784,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -776,6 +818,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -814,6 +858,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -846,6 +892,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -884,6 +932,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -918,6 +968,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -958,6 +1010,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -992,6 +1046,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1032,6 +1088,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1064,6 +1122,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1102,6 +1162,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1134,6 +1196,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 32`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1172,6 +1236,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 33`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1206,6 +1272,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 34`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1246,6 +1314,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 35`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1280,6 +1350,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 36`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1320,6 +1392,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 37`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1352,6 +1426,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 38`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1390,6 +1466,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 39`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1422,6 +1500,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 40`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1460,6 +1540,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 41`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1494,6 +1576,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 42`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1534,6 +1618,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 43`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1568,6 +1654,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 44`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1608,6 +1696,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 45`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1640,6 +1730,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 46`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1678,6 +1770,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 47`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1710,6 +1804,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 48`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1748,6 +1844,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 49`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1782,6 +1880,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 50`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1822,6 +1922,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 51`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1856,6 +1958,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 52`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1896,6 +2000,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 53`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1928,6 +2034,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 54`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1966,6 +2074,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 55`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -1998,6 +2108,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 56`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2036,6 +2148,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 57`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2070,6 +2184,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 58`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2110,6 +2226,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 59`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2144,6 +2262,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 60`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2184,6 +2304,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 61`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2216,6 +2338,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 62`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2254,6 +2378,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 63`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2286,6 +2412,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 64`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2324,6 +2452,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 65`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2356,6 +2486,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 66`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2394,6 +2526,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 67`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2426,6 +2560,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 68`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2464,6 +2600,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 69`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2496,6 +2634,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 70`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2534,6 +2674,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 71`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2566,6 +2708,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 72`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2604,6 +2748,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 73`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2636,6 +2782,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 74`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2674,6 +2822,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 75`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2706,6 +2856,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 76`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2744,6 +2896,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 77`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2776,6 +2930,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 78`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2814,6 +2970,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 79`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2846,6 +3004,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 80`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2884,6 +3044,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 81`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2916,6 +3078,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 82`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2954,6 +3118,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 83`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -2986,6 +3152,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 84`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3024,6 +3192,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 85`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3056,6 +3226,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 86`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3094,6 +3266,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 87`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3126,6 +3300,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 88`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3164,6 +3340,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 89`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3196,6 +3374,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 90`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3234,6 +3414,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 91`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3266,6 +3448,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 92`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3304,6 +3488,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 93`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3336,6 +3522,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 94`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3374,6 +3562,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 95`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3406,6 +3596,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 96`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3444,6 +3636,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 97`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3476,6 +3670,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 98`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3514,6 +3710,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 99`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3546,6 +3744,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 100
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3584,6 +3784,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 101
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3616,6 +3818,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 102
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3654,6 +3858,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 103
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3686,6 +3892,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 104
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3724,6 +3932,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 105
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3756,6 +3966,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 106
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3794,6 +4006,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 107
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3826,6 +4040,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 108
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3864,6 +4080,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 109
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3896,6 +4114,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 110
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3934,6 +4154,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 111
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -3966,6 +4188,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 112
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4004,6 +4228,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 113
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4036,6 +4262,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 114
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4074,6 +4302,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 115
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4106,6 +4336,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 116
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4144,6 +4376,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 117
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4176,6 +4410,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 118
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4214,6 +4450,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 119
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4246,6 +4484,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 120
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4284,6 +4524,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 121
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4316,6 +4558,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 122
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4354,6 +4598,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 123
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4386,6 +4632,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 124
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4424,6 +4672,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 125
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4456,6 +4706,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 126
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4494,6 +4746,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 127
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></meta-data-item>
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
@@ -4526,6 +4780,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 128
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
+        </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>

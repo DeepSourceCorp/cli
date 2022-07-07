@@ -328,7 +328,7 @@
           Test coverage has not been set up for this repository yet.
         </p>
       </notice>
-      <div>
+      <!-- <div>
         <div class="text-sm text-vanilla-100">
           <span> New code coverage thresholds </span>
         </div>
@@ -448,7 +448,7 @@
           @deleteThreshold="deleteThreshold"
           @close="showEditThresholdModal = false"
         />
-      </portal>
+      </portal> -->
     </div>
   </div>
 </template>

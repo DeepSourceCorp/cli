@@ -128,7 +128,7 @@ export default class MetricPage extends Vue {
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    await this.fetchMetric()
+    await this.fetchMetric(true)
   }
 
   /**

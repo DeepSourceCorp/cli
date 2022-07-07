@@ -1,6 +1,6 @@
 <template>
-  <div class="grid grid-cols-3">
-    <div class="col-span-3 sm:col-span-2 flex flex-col gap-y-1.5 p-3">
+  <div class="grid sm:grid-cols-fr-16 lg:grid-cols-fr-22">
+    <div class="flex flex-col gap-y-1.5 p-3">
       <div class="flex items-start gap-x-3">
         <z-icon :icon="currentCheck.analyzer.shortcode" size="large" />
         <div class="text-lg font-bold text-vanilla-100">
@@ -101,8 +101,8 @@
         />
       </div>
     </div>
-    <div v-if="currentCheck.status !== 'PEND'" class="hidden col-span-3 p-3 sm:col-span-1 sm:flex">
-      <div class="flex items-center w-full sm:justify-end gap-x-6">
+    <div v-if="currentCheck.status !== 'PEND'" class="hidden p-3 sm:flex">
+      <div class="flex items-center justify-center w-full gap-x-6">
         <!-- introduced issues -->
         <div class="flex flex-col items-center">
           <div

@@ -6,7 +6,7 @@
       <mobile-nav
         class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-ink-200"
       />
-      <repo-header :key="repository.id" class="z-50 w-full md:sticky top-10 lg:top-0" />
+      <repo-header :key="repository.id" class="z-40 w-full md:sticky top-10 lg:top-0" />
       <!--
         if the repository is activated:
           - if there hasn't been at least one analysis: show the waiting state with an

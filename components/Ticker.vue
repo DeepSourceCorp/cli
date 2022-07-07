@@ -2,7 +2,10 @@
   <span
     v-if="trendValue"
     class="flex items-center p-1 space-x-1 text-xs font-normal leading-none text-center rounded-md cursor"
-    :class="[customBgClass || bgClass, showBg ? 'bg-opacity-10' : 'bg-opacity-0']"
+    :class="[
+      customBgClass || bgClass,
+      customBgClass ? '' : showBg ? 'bg-opacity-10' : 'bg-opacity-0'
+    ]"
   >
     <z-icon v-if="icon" :icon="icon" :color="iconColor" size="small"></z-icon>
     <span class="leading-none">
@@ -46,7 +49,7 @@ export default class Ticker extends Vue {
   showBg: boolean
 
   @Prop({ default: null })
-  customBgClass: string
+  customBgClass: string | null
 
   get trendSign(): string {
     if (this.icon) {

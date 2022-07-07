@@ -97,56 +97,76 @@
               </div>
             </template>
           </analyzer-run>
-          <div
-            v-if="['FAIL', 'PASS'].includes(check.status)"
-            class="flex-col hidden p-3 space-y-2 lg:flex metrics-sidebar"
-          >
-            <div
-              v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
-              class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
-            >
-              <div class="flex items-center gap-x-2">
-                <p
-                  class="text-sm font-semibold leading-none tracking-wide uppercase text-vanilla-400"
-                >
-                  Metrics
-                </p>
-                <z-tag
-                  v-if="areMetricsAlerting"
-                  icon-left="alert-circle"
-                  icon-color="cherry"
-                  size="x-small"
-                  spacing="px-2 py-0"
-                  class="border border-ink-200"
-                >
-                  <span
-                    class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry"
-                    >Alerting</span
+          <section v-if="['FAIL', 'PASS'].includes(check.status)">
+            <div class="sticky flex-col hidden p-4 space-y-2 lg:flex metrics-header-offset">
+              <div
+                v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
+                class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
+              >
+                <div class="flex items-center gap-x-2">
+                  <p
+                    class="text-sm font-semibold leading-none tracking-wide uppercase text-vanilla-400"
                   >
-                </z-tag>
+                    Metrics
+                  </p>
+                  <z-tag
+                    v-if="areMetricsAlerting"
+                    icon-left="alert-circle"
+                    icon-color="cherry"
+                    size="x-small"
+                    spacing="px-2 py-0"
+                    class="border border-ink-200"
+                  >
+                    <span
+                      class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry"
+                      >Alerting</span
+                    >
+                  </z-tag>
+                </div>
+                <run-metric-card
+                  v-for="stat in metricsSortedAlpabetically"
+                  :key="stat.id"
+                  :metrics-captured="stat"
+                  class="border rounded-md border-ink-200 bg-ink-300"
+                  @confirmMetricSuppression="confirmMetricSuppression"
+                >
+                  <template #header>
+                    <span
+                      v-if="isMetricAggregate(stat)"
+                      class="tracking-wide uppercase text-xxs text-aqua-100"
+                    >
+                      Aggregate
+                    </span>
+                    <div v-else-if="showMetricCardHeader" class="flex items-center gap-x-2">
+                      <lazy-analyzer-logo
+                        :name="stat.namespace.key"
+                        :shortcode="stat.namespace.analyzer_shortcode"
+                        :analyzer-logo="stat.namespace.analyzer_logo"
+                        size="base"
+                      />
+                      <span
+                        class="text-xs font-semibold tracking-wide uppercase text-vanilla-400"
+                        >{{ stat.namespace.key }}</span
+                      >
+                    </div>
+                  </template>
+                </run-metric-card>
               </div>
-              <run-metric-card
-                v-for="stat in sortedMetricsCaptured"
-                :key="stat.id"
-                :metrics-captured="stat"
-                class="border rounded-md border-ink-200 bg-ink-300"
-                @confirmMetricSuppression="confirmMetricSuppression"
-              />
+              <base-state
+                v-else
+                :show-border="true"
+                class="text-vanilla-400"
+                height-class="h-auto"
+                spacing-class="p-6"
+              >
+                <template #title>
+                  <h1 class="text-sm text-center text-vanilla-400">
+                    No metrics captured for this check
+                  </h1>
+                </template>
+              </base-state>
             </div>
-            <base-state
-              v-else
-              :show-border="true"
-              class="text-vanilla-400"
-              height-class="h-auto"
-              spacing-class="p-6"
-            >
-              <template #title>
-                <h1 class="text-sm text-center text-vanilla-400">
-                  No metrics captured for this check
-                </h1>
-              </template>
-            </base-state>
-          </div>
+          </section>
         </div>
         <!-- metrics -->
         <div v-else class="flex flex-col p-3 space-y-2 lg:hidden">
@@ -161,12 +181,32 @@
               class="grid grid-cols-1 gap-4 overflow-y-auto sm:grid-cols-2 md:grid-cols-1 hide-scroll"
             >
               <run-metric-card
-                v-for="stat in sortedMetricsCaptured"
+                v-for="stat in metricsSortedAlpabetically"
                 :key="stat.id"
                 :metrics-captured="stat"
                 class="border rounded-md border-ink-200 bg-ink-300"
                 @confirmMetricSuppression="confirmMetricSuppression"
-              />
+              >
+                <template #header>
+                  <span
+                    v-if="isMetricAggregate(stat)"
+                    class="tracking-wide uppercase text-xxs text-aqua-100"
+                  >
+                    Aggregate
+                  </span>
+                  <div v-else-if="showMetricCardHeader" class="flex items-center gap-x-2">
+                    <lazy-analyzer-logo
+                      :name="stat.namespace.key"
+                      :shortcode="stat.namespace.analyzer_shortcode"
+                      :analyzer-logo="stat.namespace.analyzer_logo"
+                      size="base"
+                    />
+                    <span class="text-xs font-semibold tracking-wide uppercase text-vanilla-400">{{
+                      stat.namespace.key
+                    }}</span>
+                  </div>
+                </template>
+              </run-metric-card>
             </div>
             <empty-state
               v-else
@@ -216,44 +256,51 @@
         <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
         <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
       </div>
-
-      <portal to="modal">
-        <z-confirm
-          v-if="showConfirmDialog"
-          primaryActionType="danger"
-          title="Are you sure you want to suppress the metric?"
-          @onClose="showConfirmDialog = false"
-        >
-          <template v-slot:footer="{ close }">
-            <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
-              <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
-                Cancel
-              </z-button>
-              <z-button
-                v-if="suppressingMetric"
-                button-type="warning"
-                size="small"
-                :disabled="true"
-                class="flex items-center w-44"
-              >
-                <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin"></z-icon>
-                Suppressing metric
-              </z-button>
-              <z-button
-                v-else
-                icon="minus-circle"
-                class="modal-primary-action w-44"
-                button-type="warning"
-                size="small"
-                @click="suppressMetric(close)"
-              >
-                Suppress metric
-              </z-button>
-            </div>
-          </template>
-        </z-confirm>
-      </portal>
     </div>
+    <portal to="modal">
+      <z-confirm
+        v-if="showConfirmDialog"
+        primary-action-type="danger"
+        @onClose="showConfirmDialog = false"
+      >
+        <template #default>
+          <div class="mb-2 text-base font-medium leading-relaxed text-vanilla-100">
+            Are you sure you want to suppress the metric?
+          </div>
+          <div class="text-sm leading-relaxed text-vanilla-400">
+            Suppressing the threshold failure may affect the status of the current analysis.
+            <span class="font-bold"> This action cannot be reversed. </span>
+          </div>
+        </template>
+        <template v-slot:footer="{ close }">
+          <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
+            <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
+              Cancel
+            </z-button>
+            <z-button
+              v-if="suppressingMetric"
+              button-type="warning"
+              size="small"
+              :disabled="true"
+              class="flex items-center w-44"
+            >
+              <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin"></z-icon>
+              Suppressing metric
+            </z-button>
+            <z-button
+              v-else
+              icon="minus-circle"
+              class="modal-primary-action w-44"
+              button-type="warning"
+              size="small"
+              @click="suppressMetric(close)"
+            >
+              Suppress metric
+            </z-button>
+          </div>
+        </template>
+      </z-confirm>
+    </portal>
   </main>
 </template>
 
@@ -275,15 +322,16 @@ import {
   ZTabPanes,
   ZTab,
   ZPagination,
-  ZConfirm,
   ZButton,
-  ZTag
+  ZTag,
+  ZConfirm
 } from '@deepsourcelabs/zeal'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 
 import { RunDetailActions } from '~/store/run/detail'
 import { resolveNodes } from '~/utils/array'
+import { MetricType } from '~/types/metric'
 
 const runStore = namespace('run/detail')
 
@@ -301,9 +349,9 @@ const runStore = namespace('run/detail')
     ZTabPanes,
     ZTab,
     ZPagination,
-    ZConfirm,
     ZButton,
-    ZTag
+    ZTag,
+    ZConfirm
   },
   middleware: [
     async function ({ store, route, redirect }) {
@@ -338,6 +386,7 @@ export default class AnalyzerDetails extends mixins(
   public activeTabIndex = 0
   public autofixLoading = false
   readonly CheckStatus = CheckStatus
+  readonly METRICS_WITH_SECTIONS = ['test-coverage']
   showConfirmDialog = false
   suppressingMetric = false
   metricToSuppress: RepositoryMetricValue = {} as RepositoryMetricValue
@@ -352,10 +401,18 @@ export default class AnalyzerDetails extends mixins(
   /**
    * Created hook to update query params from route query mixin
    *
-   * @return {any}
+   * @return {void}
    */
-  created() {
+  created(): void {
     this.queryParams = Object.assign(this.queryParams, this.$route.query)
+  }
+
+  get showMetricCardHeader() {
+    return this.METRICS_WITH_SECTIONS.includes(this.check.analyzer?.shortcode || '')
+  }
+
+  isMetricAggregate(metric: RepositoryMetricValue): boolean {
+    return metric.namespace.key === MetricType.aggregate
   }
 
   /**
@@ -528,44 +585,19 @@ export default class AnalyzerDetails extends mixins(
     return this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)
   }
 
-  /**
-   * Priority:
-   * 1. Metrics with `isPassing` false
-   * 2. Metrics with `isPassing` true
-   * 3. Metrics without threshold
-   *
-   * For a sort function `(a,b) => Number`:
-   *
-   * The sort relies on relation between two metrics:
-   * - If a negative value is returned, item `a` is sorted before item `b`.
-   * - If a positive value is returned, item `a` is sorted after item `b`.
-   * - If a `0` is returned, the items stay as is.
-   *
-   * We want all the metrics without threshold to be last, so we always exit early
-   * if `threshold` is falsey by returning a value as per above logic.
-   *
-   * Otherwise, we compare the two values. Since, `Number(boolean)` is 0 for false and 1 for true.
-   *
-   * @see [MDN - Array.prototype.sort()#Description]{@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort#description}
-   */
-  get sortedMetricsCaptured() {
+  get metricsSortedAlpabetically() {
     return this.check.metricsCaptured
-      ? [...this.check.metricsCaptured].sort((a, b) => {
-          if (!a?.threshold) {
-            return 1
-          }
-          if (!b?.threshold) {
-            return -1
-          }
-
-          return Number(a.isPassing) - Number(b.isPassing)
-        })
+      ? [...this.check.metricsCaptured].sort(
+          (a, b) => a?.namespace?.key?.localeCompare(b?.namespace?.key || '') || 0
+        )
       : []
   }
 
   get areMetricsAlerting(): boolean {
     return (
-      this.check.metricsCaptured?.some((metricValue) => metricValue?.isPassing === false) || false
+      this.check.metricsCaptured?.some(
+        (metricValue) => metricValue?.isPassing === false && metricValue?.isSuppressed !== true
+      ) || false
     )
   }
 
@@ -647,3 +679,40 @@ export default class AnalyzerDetails extends mixins(
   }
 }
 </script>
+<style scoped>
+/* all for mobiles */
+.analyzer-page {
+  --mobile-navbar-height: 40px;
+  --repo-header-height: 184px;
+  --breadcrumb-height: 52px;
+
+  --top-bar-offset: calc(
+    var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
+  );
+
+  --run-check-title-height: 90px;
+}
+
+.metrics-header-offset {
+  top: calc(var(--top-bar-offset) + var(--run-check-title-height) + 1px);
+}
+
+/* all for tablets */
+@media (min-width: 1023px) {
+  .analyzer-page {
+    --mobile-navbar-height: 0px;
+    --repo-header-height: 167.5px;
+    /* Same as mobile */
+    /* --breadcrumb-height: 52px; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .analyzer-page {
+    --mobile-navbar-height: 0px;
+    --repo-header-height: 96px;
+    /* Same as mobile and tablet */
+    /* --breadcrumb-height: 52px; */
+  }
+}
+</style>
