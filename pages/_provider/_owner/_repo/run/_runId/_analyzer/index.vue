@@ -91,7 +91,7 @@
               </analyzer-run>
             </div>
             <div
-              class="hidden lg:flex flex-col space-y-2 p-3 lg:sticky header-offset metrics-sidebar"
+              class="hidden lg:flex flex-col space-y-2 p-4 lg:sticky header-offset metrics-sidebar"
             >
               <run-loading v-if="check.status === 'PEND'" />
               <run-cancelled v-else-if="check.status === 'CNCL'" />
@@ -657,21 +657,21 @@ export default class AnalyzerDetails extends mixins(
 
 @media (min-width: 1024px) {
   .header-offset {
-    top: 269px;
+    top: 271px;
   }
 
   .metrics-sidebar {
-    height: calc(100vh - 269px);
+    height: calc(100vh - 271px);
   }
 }
 
 @media (min-width: 1280px) {
   .header-offset {
-    top: 228px;
+    top: 230px;
   }
 
   .metrics-sidebar {
-    height: calc(100vh - 228px);
+    height: calc(100vh - 230px);
   }
 }
 </style>

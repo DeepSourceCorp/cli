@@ -106,13 +106,13 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
 
 @media (min-width: 1024px) {
   .header-offset {
-    top: 281px;
+    top: 282px;
   }
 }
 
 @media (min-width: 1280px) {
   .header-offset {
-    top: 240px;
+    top: 242px;
   }
 }
 </style>

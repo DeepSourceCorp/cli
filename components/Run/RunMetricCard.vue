@@ -24,7 +24,7 @@
     </div>
     <div class="flex items-center justify-between w-full">
       <div class="flex items-center gap-x-2">
-        <span class="text-2xl leading-snug text-vanilla-100">
+        <span class="text-lg font-bold leading-snug text-vanilla-100">
           {{ metricsCaptured.valueDisplay }}</span
         >
         <ticker

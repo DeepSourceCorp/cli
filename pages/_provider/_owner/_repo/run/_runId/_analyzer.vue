@@ -227,11 +227,11 @@ export default class AnalyzerDetails extends mixins(
   }
 
   .top-bar-offset {
-    top: 182px;
+    top: 179px;
   }
 
   .repo-header-offset {
-    top: 139px;
+    top: 136.05px;
   }
 }
 
