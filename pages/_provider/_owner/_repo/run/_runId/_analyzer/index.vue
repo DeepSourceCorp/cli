@@ -1,206 +1,208 @@
 <template>
-  <main>
-    <template v-if="!$fetchState.pending">
-      <div>
-        <z-tabs>
-          <z-tab-list class="w-full lg:hidden flex-row p-3 -space-x-2 text-center">
-            <z-tab
-              :is-active="activeTabIndex === 0"
-              :action="() => updateActiveTabIndex(0)"
-              :remove-indicator-styles="true"
-              class="w-1/2 -mb-3"
-            >
-              <div
-                class="w-full p-3 rounded-l-md border border-ink-200"
-                :class="{ 'bg-ink-50 border-r-0': activeTabIndex === 0 }"
-              >
-                Issues
-              </div>
-            </z-tab>
-            <z-tab
-              :is-active="activeTabIndex === 1"
-              :action="() => updateActiveTabIndex(1)"
-              :remove-indicator-styles="true"
-              class="w-1/2 -mb-3"
-            >
-              <div
-                class="w-full p-3 rounded-r-md border border-ink-200"
-                :class="{ 'bg-ink-50 border-l-0': activeTabIndex === 1 }"
-              >
-                Metrics
-              </div>
-            </z-tab>
-          </z-tab-list>
-          <!-- issues -->
-          <div v-if="activeTabIndex === 0" class="grid grid-cols-1 lg:grid-cols-fr-22">
-            <div class="border-r border-ink-200 p-3">
-              <analyzer-run v-bind="check" :can-create-autofix="canCreateAutofix">
-                <template #controls>
-                  <div class="flex flex-col">
-                    <run-autofix-bar
-                      v-if="
-                        allowAutofix &&
-                        Array.isArray(check.autofixableIssues) &&
-                        check.autofixableIssues.length &&
-                        !check.run.isForDefaultBranch &&
-                        !check.run.isForCrossRepoPr
-                      "
-                      @autofixIssues="autofixSelectedIssues"
-                      v-bind="check"
-                      :autofixLoading="autofixLoading"
-                      :can-create-autofix="canCreateAutofix"
-                    />
-                    <div class="flex space-x-2 w-full">
-                      <div class="flex w-auto space-x-2">
-                        <issue-category-filter
-                          v-model="queryParams.category"
-                          @reset="removeFilter('category')"
-                        />
-                        <issue-sort
-                          v-model="queryParams.sort"
-                          :show-seen-options="false"
-                          @reset="removeFilter('sort')"
-                        />
-                      </div>
-                      <issue-search
-                        v-focus
-                        :expand-on-focus="false"
-                        :search-candidate="queryParams.q"
-                        placeholder="Search for issue title or shortcode"
-                        class="w-full md:flex-grow"
-                        @updateSearch="updateSearch"
-                      />
-                    </div>
-                  </div>
-                </template>
-
-                <template #footer>
-                  <div
-                    v-if="concreteIssueList.totalCount > perPageCount"
-                    class="flex justify-center my-6 text-sm"
-                  >
-                    <z-pagination
-                      :page="currentPage"
-                      :key="currentPage"
-                      :total-pages="totalPageCount"
-                      :total-visible="5"
-                      @selected="updatePageNum"
-                    />
-                  </div>
-                </template>
-              </analyzer-run>
-            </div>
+  <main class="check-body-offset md:sticky">
+    <div v-if="!$fetchState.pending">
+      <z-tabs>
+        <z-tab-list class="flex-row w-full p-3 -space-x-2 text-center lg:hidden">
+          <z-tab
+            :is-active="activeTabIndex === 0"
+            :action="() => updateActiveTabIndex(0)"
+            :remove-indicator-styles="true"
+            class="w-1/2 -mb-3"
+          >
             <div
-              class="hidden lg:flex flex-col space-y-2 p-4 lg:sticky header-offset metrics-sidebar"
+              class="w-full p-3 border rounded-l-md border-ink-200"
+              :class="{ 'bg-ink-50 border-r-0': activeTabIndex === 0 }"
             >
-              <run-loading v-if="check.status === 'PEND'" />
-              <run-cancelled v-else-if="check.status === 'CNCL'" />
-              <run-timeout v-else-if="check.status === 'TIMO'" />
-              <template v-else>
-                <div
-                  v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
-                  class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
-                >
-                  <div class="flex items-center gap-x-2">
-                    <p
-                      class="text-sm font-semibold tracking-wide uppercase text-vanilla-400 leading-none"
-                    >
-                      Metrics
-                    </p>
-                    <z-tag
-                      v-if="areMetricsAlerting"
-                      icon-left="alert-circle"
-                      icon-color="cherry"
-                      size="x-small"
-                      spacing="px-2 py-0"
-                      class="border border-ink-200"
-                    >
-                      <span
-                        class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry"
-                        >Alerting</span
-                      >
-                    </z-tag>
+              Issues
+            </div>
+          </z-tab>
+          <z-tab
+            :is-active="activeTabIndex === 1"
+            :action="() => updateActiveTabIndex(1)"
+            :remove-indicator-styles="true"
+            class="w-1/2 -mb-3"
+          >
+            <div
+              class="w-full p-3 border rounded-r-md border-ink-200"
+              :class="{ 'bg-ink-50 border-l-0': activeTabIndex === 1 }"
+            >
+              Metrics
+            </div>
+          </z-tab>
+        </z-tab-list>
+        <!-- issues -->
+        <div
+          v-if="activeTabIndex === 0"
+          class="grid grid-cols-1"
+          :class="{
+            'lg:grid-cols-fr-22 divide-x divide-ink-200': ['FAIL', 'PASS'].includes(check.status)
+          }"
+        >
+          <analyzer-run
+            v-bind="check"
+            :filters="queryParams"
+            :can-create-autofix="canCreateAutofix"
+          >
+            <template #controls>
+              <div class="flex flex-col">
+                <run-autofix-bar
+                  v-if="
+                    allowAutofix &&
+                    Array.isArray(check.autofixableIssues) &&
+                    check.autofixableIssues.length &&
+                    !check.run.isForDefaultBranch &&
+                    !check.run.isForCrossRepoPr
+                  "
+                  @autofixIssues="autofixSelectedIssues"
+                  v-bind="check"
+                  :autofixLoading="autofixLoading"
+                  :can-create-autofix="canCreateAutofix"
+                />
+                <div class="flex w-full space-x-2">
+                  <div class="flex w-auto space-x-2">
+                    <issue-category-filter
+                      v-model="queryParams.category"
+                      @reset="removeFilter('category')"
+                    />
+                    <issue-sort
+                      v-model="queryParams.sort"
+                      :show-seen-options="false"
+                      @reset="removeFilter('sort')"
+                    />
                   </div>
-                  <run-metric-card
-                    v-for="stat in sortedMetricsCaptured"
-                    :key="stat.id"
-                    :metrics-captured="stat"
-                    class="border border-ink-200 bg-ink-300 rounded-md"
-                    @confirmMetricSuppression="confirmMetricSuppression"
+                  <issue-search
+                    v-focus
+                    :expand-on-focus="false"
+                    :search-candidate="queryParams.q"
+                    placeholder="Search for issue title or shortcode"
+                    class="w-full md:flex-grow"
+                    @updateSearch="updateSearch"
                   />
                 </div>
-                <base-state
-                  v-else
-                  :show-border="true"
-                  class="text-vanilla-400"
-                  height-class="h-auto"
-                  spacing-class="p-6"
-                >
-                  <template #title>
-                    <h1 class="text-sm text-center text-vanilla-400">
-                      No metrics captured for this check
-                    </h1>
-                  </template>
-                </base-state>
-              </template>
-            </div>
-          </div>
-          <!-- metrics -->
-          <div v-else class="flex lg:hidden flex-col space-y-2 p-3 lg:sticky header-offset">
-            <lazy-run-loading v-if="check.status === CheckStatus.Pend" />
-            <lazy-run-cancelled v-else-if="check.status === CheckStatus.Cncl" />
-            <lazy-run-timeout v-else-if="check.status === CheckStatus.Timo" />
-            <lazy-run-waiting v-else-if="check.status === CheckStatus.Wait" />
-            <lazy-run-nuked v-else-if="check.status === CheckStatus.Atmo" />
-            <template v-else>
+              </div>
+            </template>
+
+            <template #footer>
               <div
-                v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
-                class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-4 overflow-y-auto hide-scroll"
+                v-if="concreteIssueList.totalCount > perPageCount"
+                class="flex justify-center my-6 text-sm"
               >
-                <run-metric-card
-                  v-for="stat in sortedMetricsCaptured"
-                  :key="stat.id"
-                  :metrics-captured="stat"
-                  class="border border-ink-200 bg-ink-300 rounded-md"
-                  @confirmMetricSuppression="confirmMetricSuppression"
+                <z-pagination
+                  :page="currentPage"
+                  :key="currentPage"
+                  :total-pages="totalPageCount"
+                  :total-visible="5"
+                  @selected="updatePageNum"
                 />
               </div>
-              <empty-state
-                v-else
-                :show-border="true"
-                title="No metrics captured for this check"
-                class="text-vanilla-200"
-              />
             </template>
+          </analyzer-run>
+          <div
+            v-if="['FAIL', 'PASS'].includes(check.status)"
+            class="flex-col hidden p-3 space-y-2 lg:flex metrics-sidebar"
+          >
+            <div
+              v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
+              class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
+            >
+              <div class="flex items-center gap-x-2">
+                <p
+                  class="text-sm font-semibold leading-none tracking-wide uppercase text-vanilla-400"
+                >
+                  Metrics
+                </p>
+                <z-tag
+                  v-if="areMetricsAlerting"
+                  icon-left="alert-circle"
+                  icon-color="cherry"
+                  size="x-small"
+                  spacing="px-2 py-0"
+                  class="border border-ink-200"
+                >
+                  <span
+                    class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry"
+                    >Alerting</span
+                  >
+                </z-tag>
+              </div>
+              <run-metric-card
+                v-for="stat in sortedMetricsCaptured"
+                :key="stat.id"
+                :metrics-captured="stat"
+                class="border rounded-md border-ink-200 bg-ink-300"
+                @confirmMetricSuppression="confirmMetricSuppression"
+              />
+            </div>
+            <base-state
+              v-else
+              :show-border="true"
+              class="text-vanilla-400"
+              height-class="h-auto"
+              spacing-class="p-6"
+            >
+              <template #title>
+                <h1 class="text-sm text-center text-vanilla-400">
+                  No metrics captured for this check
+                </h1>
+              </template>
+            </base-state>
           </div>
-        </z-tabs>
-      </div>
-    </template>
+        </div>
+        <!-- metrics -->
+        <div v-else class="flex flex-col p-3 space-y-2 lg:hidden">
+          <lazy-run-loading v-if="check.status === CheckStatus.Pend" />
+          <lazy-run-cancelled v-else-if="check.status === CheckStatus.Cncl" />
+          <lazy-run-timeout v-else-if="check.status === CheckStatus.Timo" />
+          <lazy-run-waiting v-else-if="check.status === CheckStatus.Wait" />
+          <lazy-run-nuked v-else-if="check.status === CheckStatus.Atmo" />
+          <template v-else>
+            <div
+              v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
+              class="grid grid-cols-1 gap-4 overflow-y-auto sm:grid-cols-2 md:grid-cols-1 hide-scroll"
+            >
+              <run-metric-card
+                v-for="stat in sortedMetricsCaptured"
+                :key="stat.id"
+                :metrics-captured="stat"
+                class="border rounded-md border-ink-200 bg-ink-300"
+                @confirmMetricSuppression="confirmMetricSuppression"
+              />
+            </div>
+            <empty-state
+              v-else
+              :show-border="true"
+              title="No metrics captured for this check"
+              class="text-vanilla-200"
+            />
+          </template>
+        </div>
+      </z-tabs>
+    </div>
     <div v-else>
       <!-- Loading state -->
-      <div class="flex flex-col gap-y-3 w-full space-x-2 rounded-sm">
+      <div class="flex flex-col w-full space-x-2 rounded-sm gap-y-3">
         <!-- Controls -->
-        <div class="w-full flex space-x-4 p-4">
-          <div class="h-8 w-22 rounded-md bg-ink-300 animate-pulse"></div>
-          <div class="h-8 w-22 rounded-md bg-ink-300 animate-pulse"></div>
-          <div class="h-8 flex-grow rounded-md bg-ink-300 animate-pulse"></div>
+        <div class="flex w-full p-4 space-x-4">
+          <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
+          <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
+          <div class="flex-grow h-8 rounded-md bg-ink-300 animate-pulse"></div>
         </div>
 
-        <div class="w-full grid grid-cols-1 lg:grid-cols-fr-20">
+        <div class="grid w-full grid-cols-1 lg:grid-cols-fr-20">
           <!-- Issues -->
-          <div class="flex flex-col gap-y-3 p-2">
+          <div class="flex flex-col p-2 gap-y-3">
             <div
               v-for="index in 10"
               :key="index"
-              class="h-22 w-full bg-ink-300 animate-pulse"
+              class="w-full h-22 bg-ink-300 animate-pulse"
             ></div>
           </div>
           <!-- Metrics -->
-          <div class="flex flex-col gap-y-3 p-2">
+          <div class="flex flex-col p-2 gap-y-3">
             <div
               v-for="index in 5"
               :key="index"
-              class="h-32 w-full rounded-md bg-ink-300 animate-pulse"
+              class="w-full h-32 rounded-md bg-ink-300 animate-pulse"
             ></div>
           </div>
         </div>
@@ -223,7 +225,7 @@
           @onClose="showConfirmDialog = false"
         >
           <template v-slot:footer="{ close }">
-            <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+            <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
               <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close">
                 Cancel
               </z-button>
@@ -232,9 +234,9 @@
                 button-type="warning"
                 size="small"
                 :disabled="true"
-                class="w-44 flex items-center"
+                class="flex items-center w-44"
               >
-                <z-icon icon="spin-loader" color="ink" class="animate-spin mr-2"></z-icon>
+                <z-icon icon="spin-loader" color="ink" class="mr-2 animate-spin"></z-icon>
                 Suppressing metric
               </z-button>
               <z-button
@@ -645,33 +647,3 @@ export default class AnalyzerDetails extends mixins(
   }
 }
 </script>
-<style scoped>
-/* height of RepoHeader + Breadcrumbs + RunHeader */
-.header-offset {
-  top: 323px;
-}
-
-.metrics-sidebar {
-  height: calc(100vh - 339px);
-}
-
-@media (min-width: 1024px) {
-  .header-offset {
-    top: 271px;
-  }
-
-  .metrics-sidebar {
-    height: calc(100vh - 271px);
-  }
-}
-
-@media (min-width: 1280px) {
-  .header-offset {
-    top: 230px;
-  }
-
-  .metrics-sidebar {
-    height: calc(100vh - 230px);
-  }
-}
-</style>

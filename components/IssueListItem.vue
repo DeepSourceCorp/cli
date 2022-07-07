@@ -16,54 +16,21 @@
               {{ shortcode }}
             </span>
           </div>
-          <div class="flex">
-            <div v-if="showSeenInfo" class="space-y-1.5">
-              <div class="flex flex-wrap gap-x-4">
-                <!-- Issue type -->
-                <issue-type
-                  :issue-type="issueType"
-                  spacing="gap-x-2"
-                  text-size="text-xs sm:text-sm"
-                />
-                <!-- First seen and last seen -->
-                <meta-data-item icon="clock">
-                  <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">
-                    {{ lastSeenDisplay }}
-                  </span>
-                  &mdash;
-                  <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">
-                    {{ firstSeenDisplay }}
-                  </span>
-                </meta-data-item>
-                <!-- Occurrences in files -->
-                <div
-                  class="flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto"
-                >
-                  <z-icon
-                    icon="file-text"
-                    size="x-small"
-                    color="vanilla-400"
-                    class="flex-shrink-0"
-                  />
-                  <span class="max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis"
-                    >Found in {{ seenIn }}</span
-                  >
-                </div>
-              </div>
-            </div>
-
-            <!-- Place content on the same line if not showing first and last seen information -->
-            <div v-else class="flex flex-wrap gap-x-4">
-              <issue-type
-                :issue-type="issueType"
-                spacing="gap-x-2"
-                text-size="text-xs md:text-sm"
-              />
-
-              <meta-data-item icon="file-text" :key="issueType">
-                Found in {{ seenIn }}</meta-data-item
-              >
-            </div>
+          <div class="flex items-center flex-wrap gap-y-1.5 gap-x-4">
+            <!-- Issue type -->
+            <issue-type :issue-type="issueType" />
+            <!-- First seen and last seen -->
+            <meta-data-item v-if="showSeenInfo" icon="clock">
+              <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">
+                {{ lastSeenDisplay }}
+              </span>
+              &mdash;
+              <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">
+                {{ firstSeenDisplay }}
+              </span>
+            </meta-data-item>
+            <!-- Occurrences in files -->
+            <meta-data-item icon="file-text"> Found in {{ seenIn }} </meta-data-item>
           </div>
         </div>
 

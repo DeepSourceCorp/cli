@@ -20,9 +20,9 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
           Python
         </span>
         </div>
-        <div class=\\"flex items-center space-x-1.5\\">
-          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
-        </div>
+        <meta-data-item icon=\\"security\\">
+          Security
+        </meta-data-item>
       </div>
     </div>
     <div class=\\"hidden w-full md:block md:w-1/5\\"></div>
@@ -50,9 +50,9 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
           Python
         </span>
         </div>
-        <div class=\\"flex items-center space-x-1.5\\">
-          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
-        </div>
+        <meta-data-item icon=\\"security\\">
+          Security
+        </meta-data-item>
       </div>
     </div>
     <div class=\\"hidden w-full md:block md:w-1/5\\"></div>
@@ -80,9 +80,9 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
           Python
         </span>
         </div>
-        <div class=\\"flex items-center space-x-1.5\\">
-          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
-        </div>
+        <meta-data-item icon=\\"security\\">
+          Security
+        </meta-data-item>
       </div>
     </div>
     <div class=\\"hidden w-full md:block md:w-1/5\\"></div>
@@ -110,9 +110,9 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
           Python
         </span>
         </div>
-        <div class=\\"flex items-center space-x-1.5\\">
-          <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
-        </div>
+        <meta-data-item icon=\\"security\\">
+          Security
+        </meta-data-item>
       </div>
     </div>
     <div class=\\"hidden w-full md:block md:w-1/5\\"></div>
@@ -141,9 +141,9 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
           Python
         </span>
       </div>
-      <div class=\\"flex items-center space-x-1.5\\">
-        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
-      </div>
+      <meta-data-item icon=\\"security\\">
+        Security
+      </meta-data-item>
     </div>
   </div>
   <div class=\\"hidden w-full md:block md:w-1/5\\">
@@ -176,9 +176,9 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
           Python
         </span>
       </div>
-      <div class=\\"flex items-center space-x-1.5\\">
-        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
-      </div>
+      <meta-data-item icon=\\"security\\">
+        Security
+      </meta-data-item>
     </div>
   </div>
   <div class=\\"hidden w-full md:block md:w-1/5\\">
@@ -211,9 +211,9 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
           Python
         </span>
       </div>
-      <div class=\\"flex items-center space-x-1.5\\">
-        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
-      </div>
+      <meta-data-item icon=\\"security\\">
+        Security
+      </meta-data-item>
     </div>
   </div>
   <div class=\\"hidden w-full md:block md:w-1/5\\">
@@ -246,9 +246,9 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
           Python
         </span>
       </div>
-      <div class=\\"flex items-center space-x-1.5\\">
-        <zicon-stub icon=\\"security\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 tracking-wide text-sm\\">Security</span>
-      </div>
+      <meta-data-item icon=\\"security\\">
+        Security
+      </meta-data-item>
     </div>
   </div>
   <div class=\\"hidden w-full md:block md:w-1/5\\">

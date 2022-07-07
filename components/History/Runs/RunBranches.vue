@@ -17,7 +17,7 @@
               @click.prevent="toggleItems"
               class="inline-flex items-center px-2 py-1 md:py-1.5 border rounded-full gap-x-1.5 justify-evenly bg-ink-300 hover:bg-ink-200 border-ink-200"
             >
-              <span class="text-xxs md:text-xs font-normal leading-none text-vanilla-400">
+              <span class="font-normal leading-none text-xxs md:text-xs text-vanilla-400">
                 {{ countText }}
               </span>
               <z-icon
@@ -47,10 +47,10 @@
         ></div>
         <run-card
           v-for="branchRun in runsInBranch"
-          :key="branchRun.node.runId"
+          :key="branchRun.runId"
           :is-secondary="true"
           class="ml-4 is-group-item"
-          v-bind="branchRun.node"
+          v-bind="branchRun"
           action-text="Analyzed"
         ></run-card>
       </div>
@@ -66,6 +66,7 @@ import { Run } from '~/types/types'
 
 import { RunListActions } from '@/store/run/list'
 import { Maybe, RunConnection, RunEdge } from '~/types/types'
+import { resolveNodes } from '~/utils/array'
 
 const runListStore = namespace('run/list')
 
@@ -111,15 +112,14 @@ export default class RunBranches extends Vue {
   /**
    * Get all other runs in the branch by filtering out the current run from branchRunList
    *
-   * * @return {Array<Maybe<RunEdge>>}
+   * * @return {Array<Run>}
    */
-  get runsInBranch(): Array<Maybe<RunEdge>> {
+  get runsInBranch(): Array<Run> {
     if (this.run.branchName) {
-      return (
-        this.branchRunList[this.run.branchName]?.edges.filter((edge) => {
-          return edge?.node?.commitOid !== this.run.commitOid
-        }) || []
-      )
+      const runList = this.branchRunList[this.run.branchName] || []
+      const branchRuns = resolveNodes(runList) as Run[]
+
+      return branchRuns.filter((run) => run.runId !== this.run.runId)
     }
     return []
   }

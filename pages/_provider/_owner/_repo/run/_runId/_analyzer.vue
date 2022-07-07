@@ -1,41 +1,38 @@
 <template>
-  <main>
+  <main class="analyzer-page">
     <div
-      class="bg-ink-400 w-full flex flex-row justify-between space-x-4 p-2 border-b border-ink-200 z-20 md:sticky repo-header-offset"
+      class="z-20 flex flex-row justify-between w-full p-2 px-4 space-x-4 border-b bg-ink-400 border-ink-200 md:sticky offset-for-breadcrumbs"
     >
-      <div class="p-0.5 px-2 mt-px">
-        <z-breadcrumb separator="/" class="text-sm text-vanilla-100" :key="$route.name">
-          <z-breadcrumb-item class="text-vanilla-400"
-            ><nuxt-link :to="linkToAllRuns">All runs</nuxt-link></z-breadcrumb-item
-          >
+      <div class="py-1.5 my-px">
+        <z-breadcrumb :key="$route.name" separator="/" class="text-sm text-vanilla-100">
           <z-breadcrumb-item
-            :isCurrent="!$route.params.issueId"
-            :class="{ 'text-vanilla-400': $route.params.issueId }"
-            ><nuxt-link :to="$route.params.issueId ? linkToAnalyzerPage : '#'">{{
-              parentBreadCrumb
-            }}</nuxt-link></z-breadcrumb-item
+            v-for="link in breadCrumbLinks"
+            :key="link.label"
+            :class="{ 'cursor-pointer text-vanilla-400': link.route }"
           >
-          <z-breadcrumb-item v-if="$route.params.issueId" isCurrent>{{
-            $route.params.issueId
-          }}</z-breadcrumb-item>
+            <nuxt-link v-if="link.route" :to="link.route">{{ link.label }}</nuxt-link>
+            <template v-else>{{ link.label }}</template>
+          </z-breadcrumb-item>
         </z-breadcrumb>
       </div>
-      <z-menu class="md:hidden">
-        <template #trigger="{ toggle }">
-          <z-button button-type="secondary" size="x-small" @click="toggle">
-            <z-icon icon="analyzers" />
-          </z-button>
-        </template>
-        <template #body>
-          <z-menu-section :divider="false">
-            <analyzer-selector v-bind="run" :checks="checks" />
-          </z-menu-section>
-        </template>
-      </z-menu>
+      <div class="flex items-center h-full">
+        <z-menu class="md:hidden">
+          <template #trigger="{ toggle }">
+            <z-button button-type="secondary" size="small" @click="toggle">
+              <z-icon icon="analyzers" />
+            </z-button>
+          </template>
+          <template #body>
+            <z-menu-section :divider="false">
+              <analyzer-selector v-bind="run" :checks="checks" />
+            </z-menu-section>
+          </template>
+        </z-menu>
+      </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-14-fr gap-y-0">
       <div
-        class="h-full border-r border-ink-200 hidden md:flex flex-col justify-between sticky run-sidebar top-bar-offset"
+        class="sticky flex-col justify-between hidden h-full border-r border-ink-200 md:flex top-bar-offset run-body-height"
       >
         <analyzer-selector v-bind="run" :checks="checks" />
         <run-summary v-bind="run" />
@@ -70,7 +67,7 @@
           :route-to-previous="linkToAllRuns"
           :checks="checks"
           :current-analyzer="$route.params.analyzer"
-          class="bg-ink-400 border-b border-ink-200 md:sticky top-bar-offset z-30"
+          class="z-30 border-b bg-ink-400 border-ink-200 md:sticky top-bar-offset"
         />
         <nuxt-child />
       </div>
@@ -92,7 +89,8 @@ import {
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
-import { toTitleCase } from '@/utils/string'
+import { ILinks } from '~/components/Common/BreadcrumbContainer.vue'
+import { toTitleCase } from '~/utils/string'
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -128,44 +126,44 @@ export default class AnalyzerDetails extends mixins(
     await this.fetchCurrentRun()
   }
 
+  get breadCrumbLinks(): ILinks[] {
+    const { runId, analyzer, issueId } = this.$route.params
+
+    const links: ILinks[] = [
+      {
+        label: 'All runs',
+        route: this.$generateRoute(['history', 'runs'])
+      },
+      {
+        label: (this.run.isForDefaultBranch
+          ? this.run.branchName
+          : this.run.pullRequestNumberDisplay) as string,
+        route: this.$generateRoute(['run', runId])
+      }
+    ]
+
+    if (analyzer) {
+      links.push({
+        label: toTitleCase(this.$route.params.analyzer),
+        route: issueId ? this.$generateRoute(['run', runId, analyzer]) : undefined
+      })
+    }
+
+    if (issueId) {
+      links.push({
+        label: issueId
+      })
+    }
+
+    return links
+  }
+
   get currentAnalyzer(): string {
     return this.$route.params.analyzer
   }
 
   get showRunHeader() {
-    return !Boolean(this.$route.params.issueId)
-  }
-
-  /**
-   * Returns the breadcrumb label for the previous page
-   *
-   * @returns {string}
-   */
-  get parentBreadCrumb(): string {
-    return (
-      `${
-        this.run.isForDefaultBranch ? this.run.branchName : this.run.pullRequestNumberDisplay
-      } - ${toTitleCase(this.$route.params.analyzer)}` || ''
-    )
-  }
-
-  /**
-   * Returns a route to all runs for this branch
-   *
-   * @returns {string} A promise that resolves with no return on completion of fetch.
-   */
-  get linkToAllRuns(): string {
-    return this.$generateRoute(['history', 'runs'])
-  }
-
-  /**
-   * Returns a route back to the current active analyzer page
-   *
-   * @returns {string}
-   */
-  get linkToAnalyzerPage(): string {
-    const { runId, analyzer } = this.$route.params
-    return this.$generateRoute(['run', runId, analyzer])
+    return !this.$route.params.issueId
   }
 
   /**
@@ -208,44 +206,56 @@ export default class AnalyzerDetails extends mixins(
 }
 </script>
 <style scoped>
+/* all for mobiles */
+.analyzer-page {
+  --mobile-navbar-height: 40px;
+  --repo-header-height: 184px;
+  --breadcrumb-height: 52px;
+
+  --top-bar-offset: calc(
+    var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
+  );
+
+  --run-check-title-height: 90px;
+}
+
 /* height of RepoHeader + Breadcrumbs */
 .top-bar-offset {
-  top: 238px;
+  top: var(--top-bar-offset);
 }
 
-.run-sidebar {
-  height: calc(100vh - 238px);
+.run-body-height {
+  height: calc(100vh - var(--top-bar-offset));
 }
 
-.repo-header-offset {
-  top: 195px;
+.offset-for-breadcrumbs {
+  top: calc(var(--repo-header-height) + var(--mobile-navbar-height));
 }
 
-@media (min-width: 1024px) {
-  .run-sidebar {
-    height: calc(100vh - 182px);
-  }
+.check-body-offset {
+  top: calc(var(--top-bar-offset) + var(--run-check-title-height));
+}
 
-  .top-bar-offset {
-    top: 179px;
-  }
+.check-body-height {
+  min-height: calc(100vh - var(--top-bar-offset) - var(--run-check-title-height));
+}
 
-  .repo-header-offset {
-    top: 136.05px;
+/* all for tablets */
+@media (min-width: 1023px) {
+  .analyzer-page {
+    --mobile-navbar-height: 0px;
+    --repo-header-height: 167.5px;
+    /* Same as mobile */
+    /* --breadcrumb-height: 52px; */
   }
 }
 
 @media (min-width: 1280px) {
-  .run-sidebar {
-    height: calc(100vh - 139px);
-  }
-
-  .top-bar-offset {
-    top: 139px;
-  }
-
-  .repo-header-offset {
-    top: 96px;
+  .analyzer-page {
+    --mobile-navbar-height: 0px;
+    --repo-header-height: 96px;
+    /* Same as mobile and tablet */
+    /* --breadcrumb-height: 52px; */
   }
 }
 </style>

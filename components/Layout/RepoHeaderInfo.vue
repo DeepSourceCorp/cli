@@ -49,7 +49,7 @@
         </z-menu>
       </div>
     </div>
-    <div v-if="currentlyAnalysing > 0" class="flex items-center gap-2">
+    <div class="flex items-center gap-2" :class="{ invisible: currentlyAnalysing === 0 }">
       <z-pulse></z-pulse>
       <span
         >Currently analyzing {{ currentlyAnalysing }}

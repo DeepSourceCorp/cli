@@ -162,7 +162,10 @@ describe('[[ RunHeader ]]', () => {
       .mockImplementation(
         () => '/gh/deepsourcelabs/run/6a94e757-a26a-425d-af59-6826a8d02c92/python'
       ),
-
+    $socket: {
+      $on: jest.fn(),
+      $off: jest.fn()
+    },
     $route: {
       params: {
         provider: 'gh',

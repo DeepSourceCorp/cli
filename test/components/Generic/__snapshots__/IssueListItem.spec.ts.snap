@@ -11,22 +11,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -57,12 +51,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -93,22 +85,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -139,12 +125,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -175,22 +159,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -219,12 +197,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -253,22 +229,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -297,12 +267,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -331,22 +299,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`]
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -377,12 +339,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -413,22 +373,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -459,12 +413,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -495,22 +447,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -539,12 +485,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -573,22 +517,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -617,12 +555,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -651,22 +587,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -697,12 +627,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -733,22 +661,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -779,12 +701,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -815,22 +735,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -859,12 +773,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -893,22 +805,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -937,12 +843,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -971,22 +875,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1017,12 +915,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1053,22 +949,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1099,12 +989,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1135,22 +1023,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1179,12 +1061,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1213,22 +1093,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1257,12 +1131,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 32`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1291,22 +1163,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 33`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1337,12 +1203,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 34`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1373,22 +1237,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 35`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1419,12 +1277,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 36`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1455,22 +1311,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 37`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1499,12 +1349,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 38`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1533,22 +1381,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 39`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1577,12 +1419,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 40`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1611,22 +1451,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 41`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1657,12 +1491,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 42`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1693,22 +1525,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 43`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1739,12 +1565,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 44`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1775,22 +1599,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 45`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1819,12 +1637,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 46`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1853,22 +1669,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 47`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1897,12 +1707,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 48`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -1931,22 +1739,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 49`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -1977,12 +1779,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 50`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2013,22 +1813,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 51`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2059,12 +1853,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 52`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2095,22 +1887,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 53`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2139,12 +1925,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 54`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2173,22 +1957,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 55`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2217,12 +1995,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 56`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2251,22 +2027,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 57`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2297,12 +2067,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 58`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2333,22 +2101,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 59`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2379,12 +2141,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 60`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2415,22 +2175,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 61`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2459,12 +2213,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 62`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2493,22 +2245,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 63`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2537,12 +2283,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 64`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2571,22 +2315,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 65`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2615,12 +2353,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 66`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2649,22 +2385,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 67`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2693,12 +2423,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 68`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2727,22 +2455,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 69`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2771,12 +2493,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 70`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2805,22 +2525,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 71`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2849,12 +2563,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 72`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -2883,22 +2595,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 73`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2927,12 +2633,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 74`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -2961,22 +2665,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 75`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3005,12 +2703,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 76`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3039,22 +2735,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 77`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3083,12 +2773,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 78`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3117,22 +2805,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 79`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3161,12 +2843,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 80`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3195,22 +2875,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 81`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3239,12 +2913,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 82`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3273,22 +2945,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 83`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3317,12 +2983,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 84`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3351,22 +3015,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 85`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3395,12 +3053,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 86`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3429,22 +3085,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 87`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3473,12 +3123,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 88`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3507,22 +3155,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 89`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3551,12 +3193,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 90`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3585,22 +3225,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 91`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3629,12 +3263,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 92`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3663,22 +3295,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 93`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3707,12 +3333,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 94`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3741,22 +3365,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 95`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3785,12 +3403,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 96`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -3819,22 +3435,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 97`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3863,12 +3473,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 98`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3897,22 +3505,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 99`
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3941,12 +3543,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 100
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -3975,22 +3575,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 101
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4019,12 +3613,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 102
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4053,22 +3645,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 103
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4097,12 +3683,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 104
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4131,22 +3715,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 105
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4175,12 +3753,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 106
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4209,22 +3785,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 107
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4253,12 +3823,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 108
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4287,22 +3855,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 109
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4331,12 +3893,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 110
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4365,22 +3925,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 111
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4409,12 +3963,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 112
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4443,22 +3995,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 113
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4487,12 +4033,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 114
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4521,22 +4065,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 115
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4565,12 +4103,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 116
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4599,22 +4135,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 117
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4643,12 +4173,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 118
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4677,22 +4205,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 119
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4721,12 +4243,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 120
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
@@ -4755,22 +4275,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 121
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4799,12 +4313,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 122
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4833,22 +4345,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 123
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4877,12 +4383,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 124
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4911,22 +4415,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 125
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4955,12 +4453,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 126
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -4989,22 +4485,16 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 127
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"space-y-1.5\\">
-            <div class=\\"flex flex-wrap gap-x-4\\">
-              <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs sm:text-sm\\"></issuetype-stub>
-              <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years ago
-                </span>
-                —
-                <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
-                  2 years old
-                </span></meta-data-item>
-              <div class=\\"flex items-baseline w-full text-xs leading-6 md:text-sm gap-x-2 text-vanilla-400 sm:w-auto\\">
-                <zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"max-w-2xl overflow-hidden whitespace-pre overflow-ellipsis\\">Found in code.py</span>
-              </div>
-            </div>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <meta-data-item icon=\\"clock\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years ago
+            </span>
+            —
+            <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+              2 years old
+            </span></meta-data-item>
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
@@ -5033,12 +4523,10 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 128
             PYL-W0102
           </span>
         </div>
-        <div class=\\"flex\\">
-          <div class=\\"flex flex-wrap gap-x-4\\">
-            <issuetype-stub issuetype=\\"bug-risk\\" spacing=\\"gap-x-2\\" textsize=\\"text-xs md:text-sm\\"></issuetype-stub>
-            <meta-data-item icon=\\"file-text\\">
-              Found in code.py</meta-data-item>
-          </div>
+        <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
+          <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
+          <!---->
+          <meta-data-item icon=\\"file-text\\"> Found in code.py </meta-data-item>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">

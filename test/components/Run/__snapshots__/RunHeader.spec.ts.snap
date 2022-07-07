@@ -5,27 +5,27 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   <div class=\\"col-span-3 sm:col-span-2 flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
-      <div class=\\"text-vanilla-100 text-lg font-bold\\">
+      <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
-        <span class=\\"text-vanilla-400 font-medium\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
+        <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-vanilla-200 text-xxs font-semibold leading-7 uppercase tracking-wider\\">Passed</span>
+        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-        <div class=\\"text-vanilla-400 font-medium line-clamp-1 text-sm\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
+        <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
       <!---->
     </div>
-    <div class=\\"flex sm:hidden items-center\\">
+    <div class=\\"flex items-center sm:hidden\\">
       <meta-data-item label=\\"23 issues introduced\\" icon=\\"flag\\" text-size=\\"text-sm\\" class=\\"md:hidden\\"></meta-data-item>
     </div>
   </div>
-  <div class=\\"p-3 col-span-3 sm:col-span-1 hidden sm:flex\\">
-    <div class=\\"w-full flex items-center sm:justify-end gap-x-6\\">
+  <div class=\\"hidden col-span-3 p-3 sm:col-span-1 sm:flex\\">
+    <div class=\\"flex items-center w-full sm:justify-end gap-x-6\\">
       <div class=\\"flex flex-col items-center\\">
         <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
           23
@@ -48,27 +48,27 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   <div class=\\"col-span-3 sm:col-span-2 flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
-      <div class=\\"text-vanilla-100 text-lg font-bold\\">
+      <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
-        <span class=\\"text-vanilla-400 font-medium\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
+        <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-vanilla-200 text-xxs font-semibold leading-7 uppercase tracking-wider\\">Passed</span>
+        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-        <div class=\\"text-vanilla-400 font-medium line-clamp-1 text-sm\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
+        <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
       <!---->
     </div>
-    <div class=\\"flex sm:hidden items-center\\">
+    <div class=\\"flex items-center sm:hidden\\">
       <meta-data-item label=\\"23 issues introduced\\" icon=\\"flag\\" text-size=\\"text-sm\\" class=\\"md:hidden\\"></meta-data-item>
     </div>
   </div>
-  <div class=\\"p-3 col-span-3 sm:col-span-1 hidden sm:flex\\">
-    <div class=\\"w-full flex items-center sm:justify-end gap-x-6\\">
+  <div class=\\"hidden col-span-3 p-3 sm:col-span-1 sm:flex\\">
+    <div class=\\"flex items-center w-full sm:justify-end gap-x-6\\">
       <div class=\\"flex flex-col items-center\\">
         <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
           23
@@ -91,27 +91,27 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   <div class=\\"col-span-3 sm:col-span-2 flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
-      <div class=\\"text-vanilla-100 text-lg font-bold\\">
+      <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
-        <span class=\\"text-vanilla-400 font-medium\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
+        <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-vanilla-200 text-xxs font-semibold leading-7 uppercase tracking-wider\\">Passed</span>
+        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-        <div class=\\"text-vanilla-400 font-medium line-clamp-1 text-sm\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
+        <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
       <!---->
     </div>
-    <div class=\\"flex sm:hidden items-center\\">
+    <div class=\\"flex items-center sm:hidden\\">
       <meta-data-item label=\\"23 issues introduced\\" icon=\\"flag\\" text-size=\\"text-sm\\" class=\\"md:hidden\\"></meta-data-item>
     </div>
   </div>
-  <div class=\\"p-3 col-span-3 sm:col-span-1 hidden sm:flex\\">
-    <div class=\\"w-full flex items-center sm:justify-end gap-x-6\\">
+  <div class=\\"hidden col-span-3 p-3 sm:col-span-1 sm:flex\\">
+    <div class=\\"flex items-center w-full sm:justify-end gap-x-6\\">
       <div class=\\"flex flex-col items-center\\">
         <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
           23
@@ -134,27 +134,27 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   <div class=\\"col-span-3 sm:col-span-2 flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
-      <div class=\\"text-vanilla-100 text-lg font-bold\\">
+      <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
-        <span class=\\"text-vanilla-400 font-medium\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
+        <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0 motion-safe:animate-spin\\"></zicon-stub> <span class=\\"text-vanilla-200 text-xxs font-semibold leading-7 uppercase tracking-wider\\">Passed</span>
+        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-        <div class=\\"text-vanilla-400 font-medium line-clamp-1 text-sm\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
+        <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
       <!---->
     </div>
-    <div class=\\"flex sm:hidden items-center\\">
+    <div class=\\"flex items-center sm:hidden\\">
       <meta-data-item label=\\"23 issues introduced\\" icon=\\"flag\\" text-size=\\"text-sm\\" class=\\"md:hidden\\"></meta-data-item>
     </div>
   </div>
-  <div class=\\"p-3 col-span-3 sm:col-span-1 hidden sm:flex\\">
-    <div class=\\"w-full flex items-center sm:justify-end gap-x-6\\">
+  <div class=\\"hidden col-span-3 p-3 sm:col-span-1 sm:flex\\">
+    <div class=\\"flex items-center w-full sm:justify-end gap-x-6\\">
       <div class=\\"flex flex-col items-center\\">
         <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
           23
@@ -177,27 +177,27 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   <div class=\\"col-span-3 sm:col-span-2 flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
-      <div class=\\"text-vanilla-100 text-lg font-bold\\">
+      <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
-        <span class=\\"text-vanilla-400 font-medium\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
+        <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-vanilla-200 text-xxs font-semibold leading-7 uppercase tracking-wider\\">Passed</span>
+        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-        <div class=\\"text-vanilla-400 font-medium line-clamp-1 text-sm\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
+        <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
       <!---->
     </div>
-    <div class=\\"flex sm:hidden items-center\\">
+    <div class=\\"flex items-center sm:hidden\\">
       <meta-data-item label=\\"23 issues introduced\\" icon=\\"flag\\" text-size=\\"text-sm\\" class=\\"md:hidden\\"></meta-data-item>
     </div>
   </div>
-  <div class=\\"p-3 col-span-3 sm:col-span-1 hidden sm:flex\\">
-    <div class=\\"w-full flex items-center sm:justify-end gap-x-6\\">
+  <div class=\\"hidden col-span-3 p-3 sm:col-span-1 sm:flex\\">
+    <div class=\\"flex items-center w-full sm:justify-end gap-x-6\\">
       <div class=\\"flex flex-col items-center\\">
         <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
           23
@@ -220,27 +220,27 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
   <div class=\\"col-span-3 sm:col-span-2 flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
-      <div class=\\"text-vanilla-100 text-lg font-bold\\">
+      <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
-        <span class=\\"text-vanilla-400 font-medium\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
+        <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"text-vanilla-200 text-xxs font-semibold leading-7 uppercase tracking-wider\\">Passed</span>
+        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-        <div class=\\"text-vanilla-400 font-medium line-clamp-1 text-sm\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
+        <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
       <!---->
     </div>
-    <div class=\\"flex sm:hidden items-center\\">
+    <div class=\\"flex items-center sm:hidden\\">
       <meta-data-item label=\\"23 issues introduced\\" icon=\\"flag\\" text-size=\\"text-sm\\" class=\\"md:hidden\\"></meta-data-item>
     </div>
   </div>
-  <div class=\\"p-3 col-span-3 sm:col-span-1 hidden sm:flex\\">
-    <div class=\\"w-full flex items-center sm:justify-end gap-x-6\\">
+  <div class=\\"hidden col-span-3 p-3 sm:col-span-1 sm:flex\\">
+    <div class=\\"flex items-center w-full sm:justify-end gap-x-6\\">
       <div class=\\"flex flex-col items-center\\">
         <div class=\\"text-2xl font-semibold text-cherry has-tooltip\\" data-original-title=\\"null\\">
           23

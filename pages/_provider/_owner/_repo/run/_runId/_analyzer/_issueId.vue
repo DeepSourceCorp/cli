@@ -12,7 +12,7 @@
           </div>
         </div>
         <!-- issue header and actions -->
-        <div v-else class="flex w-full justify-between">
+        <div v-else class="flex justify-between w-full">
           <issue-details-header
             :issueType="singleIssue.issueType"
             :shortcode="singleIssue.shortcode"
@@ -143,7 +143,7 @@
           </div>
           <div
             v-else
-            class="max-w-4xl border-2 border-ink-200 border-dashed rounded-md p-4 md:p-12 text-center2"
+            class="max-w-4xl p-4 border-2 border-dashed rounded-md border-ink-200 md:p-12 text-center2"
           >
             <empty-state title="No ignore rules found" />
           </div>
@@ -373,7 +373,7 @@ export default class RunIssueDetails extends mixins(
     const { q, page, sort } = this.queryParams
     return this.fetchCheckIssues({
       checkId: this.check.id,
-      shortcode: '',
+      shortcode: this.$route.params.issueId,
       limit: this.pageSize,
       currentPageNumber: page as number,
       q: q as string,

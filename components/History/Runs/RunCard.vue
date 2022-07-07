@@ -1,10 +1,10 @@
 <template>
   <base-card :to="getRoute(runId)">
     <template #left-section>
-      <div class="flex w-full justify-between">
-        <div class="md:w-4/5 2xl:w-5/6 gap-2 p-3" :class="[isSecondary ? 'w-full' : 'w-2/3']">
+      <div class="flex justify-between w-full">
+        <div class="gap-2 p-3 md:w-4/5 2xl:w-5/6" :class="[isSecondary ? 'w-full' : 'w-2/3']">
           <div class="flex flex-col flex-grow">
-            <section class="flex items-center gap-x-1 text-xs md:text-base">
+            <section class="flex items-center text-xs gap-x-1 md:text-base">
               <z-icon
                 v-tooltip="tagLabel"
                 class="self-center flex-shrink-0 inline mt-0.5"
@@ -15,12 +15,15 @@
               <h3 class="inline font-medium cursor-pointer text-vanilla-100 line-clamp-1">
                 {{ branchName }}
               </h3>
-              <span class="inline font-medium text-vanilla-400">{{
-                pullRequestNumberDisplay
-              }}</span>
+              <span class="inline font-medium text-vanilla-400">
+                <template v-if="!isSecondary">
+                  {{ pullRequestNumberDisplay }}
+                </template>
+                <template v-else-if="commitOid"> @{{ commitOid.slice(0, 7) }} </template>
+              </span>
             </section>
             <section
-              class="flex flex-wrap items-center flex-grow mt-1 leading-8 gap-x-4 gap-y-2 pl-px"
+              class="flex flex-wrap items-center flex-grow pl-px mt-1 leading-8 gap-x-4 gap-y-2"
             >
               <meta-data-item v-if="!isPending" :label="`Analyzed ${createdString}`" icon="clock" />
               <meta-data-item v-else :label="statusText" icon="clock" />
@@ -39,16 +42,16 @@
         <!-- stats-->
         <div
           v-if="issueStats.length && !isPending"
-          class="md:w-1/5 2xl:w-1/6 border-l border-ink-200"
+          class="border-l md:w-1/5 2xl:w-1/6 border-ink-200"
           :class="{ 'hidden md:block': isSecondary }"
         >
           <div
-            class="grid items-center justify-around flex-shrink-0 h-full grid-cols-1 md:grid-cols-2 md:gap-x-0 divide-y md:divide-y-0 divide-ink-200"
+            class="grid items-center justify-around flex-shrink-0 h-full grid-cols-1 divide-y md:grid-cols-2 md:gap-x-0 md:divide-y-0 divide-ink-200"
           >
             <div
               v-for="stat in issueStats"
               :key="stat.label"
-              class="grid w-20 md:w-full h-full p-2 text-center place-content-center md:p-3"
+              class="grid w-20 h-full p-2 text-center md:w-full place-content-center md:p-3"
             >
               <div
                 class="text-sm md:text-1.5xl font-semibold"

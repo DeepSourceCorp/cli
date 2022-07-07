@@ -1,49 +1,57 @@
 <template>
-  <section class="flex flex-col gap-y-3">
-    <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" />
-    <lazy-run-loading v-if="status === CheckStatus.Pend" />
-    <lazy-run-pass v-else-if="status === CheckStatus.Pass && issueCount === 0" />
-    <lazy-run-cancelled v-else-if="status === CheckStatus.Cncl && issueCount === 0" />
-    <lazy-run-timeout v-else-if="status === CheckStatus.Timo && issueCount === 0" />
-    <lazy-run-waiting v-else-if="status === CheckStatus.Wait && issueCount === 0" />
-    <lazy-run-nuked v-else-if="status === CheckStatus.Atmo && issueCount === 0" />
-    <lazy-run-metric-threshold-error v-else-if="status === CheckStatus.Fail && issueCount === 0" />
-    <template v-else>
-      <div id="issue-filters" class="md:sticky header-offset bg-ink-400">
-        <!-- fade overlay -->
-        <div
-          v-if="isScrolled"
-          class="absolute z-10 top-0 -mt-4 w-full bg-gradient-to-b from-ink-400 via-ink-400 to-transparent h-32"
-        ></div>
-        <div class="relative z-20">
-          <slot name="controls" />
-        </div>
-      </div>
-      <template v-if="issueCount">
-        <issue-list-item
-          v-for="issue in concreteIssues"
-          :key="issue.id"
-          v-bind="issue"
-          :show-comparison-stat="false"
-          :show-autofix-button="false"
-          :issue-link="
-            $generateRoute(['run', $route.params.runId, $route.params.analyzer, issue.shortcode])
-          "
-          :hide-progress="true"
-          :center-content="true"
-          :show-seen-info="false"
-          link="/history/runs/details/issue"
-        />
-      </template>
+  <section class="flex flex-col min-height-for-offset">
+    <div
+      v-if="status === CheckStatus.Fail"
+      id="issue-filters"
+      class="p-3 pb-0 md:sticky check-filter-headers-offset bg-ink-400"
+    >
+      <slot name="controls" />
+    </div>
+    <div class="p-3">
+      <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" />
+      <lazy-run-loading v-if="status === CheckStatus.Pend" />
+      <lazy-run-pass v-else-if="status === CheckStatus.Pass && issueCount === 0" />
+      <lazy-run-cancelled v-else-if="status === CheckStatus.Cncl && issueCount === 0" />
+      <lazy-run-timeout v-else-if="status === CheckStatus.Timo && issueCount === 0" />
+      <lazy-run-waiting v-else-if="status === CheckStatus.Wait && issueCount === 0" />
+      <lazy-run-nuked v-else-if="status === CheckStatus.Atmo && issueCount === 0" />
+      <lazy-run-metric-threshold-error
+        v-else-if="status === CheckStatus.Fail && issueCount === 0 && !isFilterApplied"
+      />
       <template v-else>
-        <empty-state class="border-2 border-dashed rounded-md border-ink-200">
-          <template slot="title">
-            <p class="text-base text-vanilla-200">No issues found</p>
+        <div class="grid grid-cols-1 gap-y-3">
+          <template v-if="issueCount">
+            <issue-list-item
+              v-for="issue in concreteIssues"
+              :key="issue.id"
+              v-bind="issue"
+              :show-comparison-stat="false"
+              :show-autofix-button="false"
+              :issue-link="
+                $generateRoute([
+                  'run',
+                  $route.params.runId,
+                  $route.params.analyzer,
+                  issue.shortcode
+                ])
+              "
+              :hide-progress="true"
+              :center-content="true"
+              :show-seen-info="false"
+              link="/history/runs/details/issue"
+            />
           </template>
-        </empty-state>
+          <template v-else>
+            <empty-state class="border-2 border-dashed rounded-md border-ink-200">
+              <template slot="title">
+                <p class="text-base text-vanilla-200">No issues found</p>
+              </template>
+            </empty-state>
+          </template>
+          <slot name="footer"></slot>
+        </div>
       </template>
-      <slot name="footer"></slot>
-    </template>
+    </div>
   </section>
 </template>
 
@@ -61,6 +69,12 @@ export interface RunError {
   message: string
 }
 
+interface FilterParams {
+  category: string
+  sort: string
+  q: string
+}
+
 @Component({
   components: {
     IssueListItem
@@ -73,7 +87,17 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   @Prop({ default: () => [] })
   errorsRendered: RunError[]
 
-  public isScrolled = false
+  @Prop({
+    default: () => {
+      return {
+        category: '',
+        sort: '',
+        q: ''
+      }
+    }
+  })
+  filters: FilterParams
+
   public isAutofixOpen = false
   readonly CheckStatus = CheckStatus
 
@@ -85,34 +109,53 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
     return resolveNodes(this.concreteIssueList) as Issue[]
   }
 
-  handleScroll() {
-    this.isScrolled = Boolean(window.scrollY > 10)
-  }
+  get isFilterApplied(): boolean {
+    if (this.filters.q) return true
+    if (this.filters.sort) return true
+    if (this.filters.category) return true
 
-  mounted() {
-    document.addEventListener('scroll', this.handleScroll)
-  }
-
-  beforeDestroy() {
-    document.removeEventListener('scroll', this.handleScroll)
+    return false
   }
 }
 </script>
 <style scoped>
-/* height of RepoHeader + Breadcrumbs + RunHeader */
-.header-offset {
-  top: 339px;
+/* all for mobiles */
+.analyzer-page {
+  --mobile-navbar-height: 40px;
+  --repo-header-height: 184px;
+  --breadcrumb-height: 52px;
+
+  --top-bar-offset: calc(
+    var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
+  );
+
+  --run-check-title-height: 90px;
 }
 
-@media (min-width: 1024px) {
-  .header-offset {
-    top: 282px;
+.check-filter-headers-offset {
+  top: calc(var(--top-bar-offset) + var(--run-check-title-height) + 1px);
+}
+
+.min-height-for-offset {
+  min-height: calc(100vh - var(--top-bar-offset) - var(--run-check-title-height));
+}
+
+/* all for tablets */
+@media (min-width: 1023px) {
+  .analyzer-page {
+    --mobile-navbar-height: 0px;
+    --repo-header-height: 167.5px;
+    /* Same as mobile */
+    /* --breadcrumb-height: 52px; */
   }
 }
 
 @media (min-width: 1280px) {
-  .header-offset {
-    top: 242px;
+  .analyzer-page {
+    --mobile-navbar-height: 0px;
+    --repo-header-height: 96px;
+    /* Same as mobile and tablet */
+    /* --breadcrumb-height: 52px; */
   }
 }
 </style>

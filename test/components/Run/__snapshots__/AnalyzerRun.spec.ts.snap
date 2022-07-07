@@ -1,78 +1,86 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"CNCL"} 1`] = `
-"<section class=\\"flex flex-col gap-y-3\\">
+"<section class=\\"flex flex-col min-height-for-offset\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+  <div class=\\"p-3\\">
     <!---->
-    <div class=\\"relative z-20\\"></div>
-  </div>
-  <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
+    <div class=\\"grid grid-cols-1 gap-y-3\\">
+      <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
-  <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+      <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+    </div>
+  </div>
 </section>"
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"FAIL"} 1`] = `
-"<section class=\\"flex flex-col gap-y-3\\">
-  <!---->
-  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+"<section class=\\"flex flex-col min-height-for-offset\\">
+  <div id=\\"issue-filters\\" class=\\"p-3 pb-0 md:sticky check-filter-headers-offset bg-ink-400\\"></div>
+  <div class=\\"p-3\\">
     <!---->
-    <div class=\\"relative z-20\\"></div>
-  </div>
-  <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
+    <div class=\\"grid grid-cols-1 gap-y-3\\">
+      <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
-  <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+      <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+    </div>
+  </div>
 </section>"
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"PASS"} 1`] = `
-"<section class=\\"flex flex-col gap-y-3\\">
+"<section class=\\"flex flex-col min-height-for-offset\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+  <div class=\\"p-3\\">
     <!---->
-    <div class=\\"relative z-20\\"></div>
-  </div>
-  <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
+    <div class=\\"grid grid-cols-1 gap-y-3\\">
+      <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
-  <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+      <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+    </div>
+  </div>
 </section>"
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"PEND"} 1`] = `
-"<section class=\\"flex flex-col gap-y-3\\">
+"<section class=\\"flex flex-col min-height-for-offset\\">
   <!---->
-  <lazyrunloading-stub></lazyrunloading-stub>
+  <div class=\\"p-3\\">
+    <!---->
+    <lazyrunloading-stub></lazyrunloading-stub>
+  </div>
 </section>"
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"READ"} 1`] = `
-"<section class=\\"flex flex-col gap-y-3\\">
+"<section class=\\"flex flex-col min-height-for-offset\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+  <div class=\\"p-3\\">
     <!---->
-    <div class=\\"relative z-20\\"></div>
-  </div>
-  <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
+    <div class=\\"grid grid-cols-1 gap-y-3\\">
+      <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
-  <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+      <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+    </div>
+  </div>
 </section>"
 `;
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"TIMO"} 1`] = `
-"<section class=\\"flex flex-col gap-y-3\\">
+"<section class=\\"flex flex-col min-height-for-offset\\">
   <!---->
-  <div id=\\"issue-filters\\" class=\\"md:sticky header-offset bg-ink-400\\">
+  <div class=\\"p-3\\">
     <!---->
-    <div class=\\"relative z-20\\"></div>
-  </div>
-  <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
+    <div class=\\"grid grid-cols-1 gap-y-3\\">
+      <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
 There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
-  <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+      <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" hideprogress=\\"true\\" centercontent=\\"true\\" link=\\"/history/runs/details/issue\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+    </div>
+  </div>
 </section>"
 `;

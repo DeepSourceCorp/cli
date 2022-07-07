@@ -3,9 +3,9 @@
     <div class="col-span-3 sm:col-span-2 flex flex-col gap-y-1.5 p-3">
       <div class="flex items-start gap-x-3">
         <z-icon :icon="currentCheck.analyzer.shortcode" size="large" />
-        <div class="text-vanilla-100 text-lg font-bold">
+        <div class="text-lg font-bold text-vanilla-100">
           {{ currentCheck.analyzer.name }}
-          <span class="text-vanilla-400 font-medium"
+          <span class="font-medium text-vanilla-400"
             ><a v-if="vcsCommitUrl" :href="vcsCommitUrl" target="_blank" rel="noopener noreferrer"
               >@{{ commitOid.slice(0, 7) }}</a
             >
@@ -16,10 +16,10 @@
             :icon="getStatusIcon(currentCheck.status)"
             :color="getStatusIconColor(currentCheck.status)"
             class="flex-shrink-0"
-            :class="{ 'motion-safe:animate-spin': isPending }"
+            :class="{ 'motion-safe:animate-spin': isCheckPending }"
           />
           <span
-            class="text-vanilla-200 text-xxs font-semibold leading-7 uppercase tracking-wider"
+            class="font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs"
             >{{ tagLabel }}</span
           >
         </z-tag>
@@ -31,7 +31,7 @@
             size="x-small"
             class="flex-shrink-0"
           />
-          <div class="text-vanilla-400 font-medium line-clamp-1 text-sm">
+          <div class="text-sm font-medium text-vanilla-400 line-clamp-1">
             <a v-tooltip="vscLinkTooltip" :href="vcsPrUrl" target="_blank" rel="noopener noreferrer"
               >{{ branchName }}
             </a>
@@ -41,13 +41,13 @@
           <template #trigger="{ toggle, isOpen }">
             <button
               @click="toggle"
-              class="flex items-center gap-x-2 px-2 h-7 border border-ink-200 hover:bg-ink-200 rounded-full cursor-pointer"
+              class="flex items-center px-2 border rounded-full cursor-pointer gap-x-2 h-7 border-ink-200 hover:bg-ink-200"
             >
-              <div class="flex items-center gap-x-1 text-vanilla-400 text-xs">
+              <div class="flex items-center text-xs gap-x-1 text-vanilla-400">
                 <z-icon
                   icon="chevron-down"
                   size="small"
-                  class="transform duration-300 transition-all"
+                  class="transition-all duration-300 transform"
                   :class="(isOpen && 'rotate-180') || 'rotate-0'"
                 />
                 <span> {{ countText }} </span>
@@ -57,39 +57,33 @@
           <template #body>
             <z-menu-section
               :divider="false"
-              class="border border-ink-200 rounded-md divide-y divide-ink-200 max-h-96 overflow-y-auto hide-scroll"
+              class="overflow-y-auto border divide-y rounded-md border-ink-200 divide-ink-200 max-h-96 hide-scroll"
             >
               <z-menu-item
                 v-for="run in branchRuns"
-                :to="getRoute(run.node.runId)"
+                :to="getRoute(run.runId)"
                 as="nuxt-link"
                 class="bg-ink-300"
-                :key="run.node.runId"
+                :key="run.runId"
               >
-                <div class="py-1 flex flex-col gap-y-3">
+                <div class="flex flex-col py-1 gap-y-3">
                   <div class="flex gap-x-1.5 items-center">
                     <z-icon
-                      :icon="getStatusIcon(run.node.status)"
-                      :color="getStatusIconColor(run.node.status)"
+                      :icon="getStatusIcon(run.status)"
+                      :color="getStatusIconColor(run.status)"
+                      :class="{ 'motion-safe:animate-spin': run.status === 'PEND' }"
                       size="x-small"
                       class="mt-px"
                     />
-                    <div class="text-vanilla-100 text-sm font-medium">
-                      {{ run.node.branchName }}
-                      <span class="text-vanilla-400">@{{ run.node.commitOid.slice(0, 7) }}</span>
+                    <div class="text-sm font-medium text-vanilla-100">
+                      {{ run.branchName }}
+                      <span class="text-vanilla-400">@{{ run.commitOid.slice(0, 7) }}</span>
                     </div>
                   </div>
-                  <div class="flex gap-x-3">
-                    <div v-if="!isPending" class="flex items-center gap-x-1.5">
-                      <z-icon icon="clock" size="x-small" color="vanilla-400" />
-                      <span class="text-sm text-vanilla-400">{{
-                        getCreatedString(run.node.createdAt)
-                      }}</span>
-                    </div>
-                    <div class="flex gap-x-1.5 items-center">
-                      <z-icon icon="git-commit" size="x-small" color="vanilla-400" />
-                      <span class="text-sm text-vanilla-400">{{ run.node.gitCompareDisplay }}</span>
-                    </div>
+                  <div class="flex flex-wrap gap-x-3">
+                    <meta-data-item icon="flag">
+                      {{ getRunStatsMeta(run) }}
+                    </meta-data-item>
                   </div>
                 </div>
               </z-menu-item>
@@ -97,7 +91,7 @@
           </template>
         </z-menu>
       </div>
-      <div class="flex sm:hidden items-center">
+      <div class="flex items-center sm:hidden">
         <meta-data-item
           v-if="issueMetaDataLabel"
           :label="issueMetaDataLabel"
@@ -107,8 +101,8 @@
         />
       </div>
     </div>
-    <div v-if="currentCheck.status !== 'PEND'" class="p-3 col-span-3 sm:col-span-1 hidden sm:flex">
-      <div class="w-full flex items-center sm:justify-end gap-x-6">
+    <div v-if="currentCheck.status !== 'PEND'" class="hidden col-span-3 p-3 sm:col-span-1 sm:flex">
+      <div class="flex items-center w-full sm:justify-end gap-x-6">
         <!-- introduced issues -->
         <div class="flex flex-col items-center">
           <div
@@ -149,14 +143,15 @@
 </template>
 <script lang="ts">
 import { ZIcon, ZTag, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
-import { Component, namespace, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, namespace, Prop } from 'nuxt-property-decorator'
 
 import LinkToPrev from '@/components/LinkToPrev.vue'
-import { Check, Run, RunConnection, RunStatus, Scalars } from '~/types/types'
+import { Check, CheckStatus, Run, RunConnection, RunStatus, Scalars } from '~/types/types'
 import { formatIntl, shortenLargeNumber } from '~/utils/string'
 import { RunListActions } from '~/store/run/list'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { fromNow } from '~/utils/date'
+import { resolveNodes } from '~/utils/array'
 
 const runListStore = namespace('run/list')
 
@@ -242,7 +237,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
    */
   async fetch(): Promise<void> {
-    this.fetchRuns()
+    this.fetchRuns(false)
   }
 
   /**
@@ -313,6 +308,10 @@ export default class RunHeader extends RepoDetailMixin {
     return this.status === RunStatus.Pend
   }
 
+  get isCheckPending(): boolean {
+    return this.currentCheck?.status === CheckStatus.Pend
+  }
+
   get transformersAllowed(): boolean {
     return this.$route.params.provider !== 'gsr'
   }
@@ -357,13 +356,31 @@ export default class RunHeader extends RepoDetailMixin {
    * @param {boolean} refetch refetch the query
    * @returns {Promise<void>}
    */
-  async fetchRuns(refetch = false): Promise<void> {
+  async fetchRuns(refetch = true): Promise<void> {
     await this.fetchBranchRuns({
       ...this.baseRouteParams,
       branchName: this.branchName,
       limit: 30,
       refetch: refetch
     })
+  }
+
+  /**
+   * mounted hook for the function
+   *
+   * @return {void}
+   */
+  mounted(): void {
+    this.$socket.$on('repo-analysis-updated', this.fetchRuns)
+  }
+
+  /**
+   * Before destroy hook
+   *
+   * @return {void}
+   */
+  beforeDestroy(): void {
+    this.$socket.$off('repo-analysis-updated', this.fetchRuns)
   }
 
   /**
@@ -402,21 +419,59 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {Array<RunEdge>}
    */
   get branchRuns() {
-    return this.branchRunList[this.branchName].edges.filter((runEdge) => {
-      return runEdge?.node?.runId !== this.runId
-    })
+    const resolvedRuns = resolveNodes(this.branchRunList[this.branchName]) as Run[]
+
+    return resolvedRuns.filter((run) => run.runId !== this.runId)
   }
 
   get issueMetaDataLabel(): string {
-    let label = ''
-    if (!this.currentCheck) return label
-    if (this.currentCheck.issuesRaisedCount && this.currentCheck.issuesRaisedCount > 0)
-      label = label.concat(`${this.currentCheck.issuesRaisedCount} issues introduced`)
-    if (this.currentCheck.issuesResolvedCount && this.currentCheck.issuesResolvedCount > 0)
-      label = label.concat(
-        `${label.length > 0 && ', '}${this.currentCheck.issuesResolvedCount} issues resolved`
-      )
-    return label
+    return this.getCheckStatsMeta(this.currentCheck)
+  }
+
+  /**
+   * Generate the meta data string for issues resolved for a check
+   *
+   * @param {Check|undefined} check
+   * @return {string}
+   */
+  getCheckStatsMeta(check: Check | undefined): string {
+    let label = []
+
+    if (check) {
+      const { issuesRaisedCount: raised, issuesResolvedCount: resolved } = check
+
+      if (raised) {
+        label.push(`${shortenLargeNumber(raised)} issues introduced`)
+      }
+
+      if (resolved && resolved > 0) {
+        label.push(`${shortenLargeNumber(resolved)} issues resolved`)
+      }
+    }
+
+    return label.join(', ')
+  }
+
+  /**
+   * Generate the meta data string for issues resolved for a run
+   *
+   * @param {Run|undefined} run
+   * @return {string}
+   */
+  getRunStatsMeta(run: Run | undefined): string {
+    let label = []
+
+    if (run) {
+      const { issuesRaisedCount: raised, issuesResolvedNum: resolved } = run
+
+      label.push(`${shortenLargeNumber(raised ?? 0)} issues introduced`)
+
+      if (resolved && resolved > 0) {
+        label.push(`${shortenLargeNumber(resolved)} issues resolved`)
+      }
+    }
+
+    return label.join(', ')
   }
 
   get vscLinkTooltip() {

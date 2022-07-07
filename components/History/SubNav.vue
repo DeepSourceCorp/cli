@@ -1,5 +1,5 @@
 <template>
-  <div id="tabs" class="flex xl:col-span-2 pt-2.5 border-b border-ink-200">
+  <div id="tabs" class="flex pt-4 border-b xl:col-span-2 border-ink-200">
     <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
       <nuxt-link :to="getRoute('runs')">
         <z-tab border-active-color="vanilla-400" icon="trending-up" :isActive="active == 'runs'">
