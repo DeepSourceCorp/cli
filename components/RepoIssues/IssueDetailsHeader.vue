@@ -3,7 +3,7 @@
     <!-- Heading -->
     <div class="flex flex-wrap items-baseline text-lg font-normal text-vanilla-400">
       <span class="pr-2 font-medium text-vanilla-100" v-html="escapeHtml(title)"> </span>
-      <span class="flex-shrink-0 block text-xl md:flex">{{ shortcode }}</span>
+      <span class="flex-shrink-0 block md:flex">{{ shortcode }}</span>
     </div>
     <div class="flex items-center w-full text-vanilla-400 sm:w-auto">
       <!-- Meta data -->
