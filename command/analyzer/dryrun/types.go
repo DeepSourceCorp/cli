@@ -8,4 +8,3 @@ type AnalysisConfig struct {
 	TestPatterns    []string    `json:"test_patterns"`
 	AnalyzerMeta    interface{} `json:"analyzer_meta"`
 }
-
