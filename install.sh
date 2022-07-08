@@ -419,13 +419,16 @@ check_vars()
     ci_vars_count=0
     var_names=("$@")
     for var_name in "${var_names[@]}"; do
-        # TODO: should not increment if env var is empty
-        if [[ -n ${var_name} ]]; then
-          ((ci_vars_count =ci_vars_count+1))
-        else
-          echo "$var_name is unset."
+        if [ ! -z "${!var_name}" ]; then
+          log_info "$var_name has the value: ${!var_name}"
+          ((ci_vars_count=ci_vars_count+1))
         fi
     done
+
+    # only display logs if env vars are found.
+    if [[ "$ci_vars_count" -gt 0 ]]; then
+    log_info "Found ${ci_vars_count} env vars related to CI."
+    fi
 
     # if there is 1 or more env vars, use the deepsource_tcv version
     if [[ "$ci_vars_count" -gt 0 ]]; then
@@ -437,7 +440,7 @@ check_vars()
 }
 
 # check for these environment variables (CI)
-check_vars GITHUB_ACTIONS APPVEYOR
+check_vars APPVEYOR SYSTEM_TEAMFOUNDATIONCOLLECTIONURI AC_APPCIRCLE bamboo_planKey BITBUCKET_COMMIT BITRISE_IO BUDDY_WORKSPACE_ID BUILDKITE CI CIRCLECI CIRRUS_CI CODEBUILD_BUILD_ARN CF_BUILD_ID CI_NAME DRONE DSARI EAS_BUILD GITHUB_ACTIONS GITLAB_CI GO_PIPELINE_LABEL LAYERCI HUDSON_URL JENKINS_URL MAGNUM NETLIFY NEVERCODE RENDER SAILCI SEMAPHORE SCREWDRIVER SHIPPABLE TDDIUM STRIDER TEAMCITY_VERSION TRAVIS NOW_BUILDER APPCENTER_BUILD_ID
 
 TARBALL=${NAME}.${FORMAT}
 
