@@ -28,8 +28,7 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          workdir: ./cmd/deepsource
-          args: release --rm-dist --config ../../goreleaser.yaml
+          args: release --rm-dist --config goreleaser.yaml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOMEBREW_TOKEN: ${{ secrets.DS_BOT_PAT }}
