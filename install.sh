@@ -430,7 +430,7 @@ check_vars()
     log_info "Found ${ci_vars_count} env vars related to CI."
     fi
 
-    # if there is 1 or more env vars, use the deepsource_tcv version
+    # if there are 1 or more env vars, use the deepsource_tcv version
     if [[ "$ci_vars_count" -gt 0 ]]; then
       NAME=${PROJECT_NAME}_tcv_${VERSION}_${OS}_${ARCH}
       log_info "CI server detected. Pulling lightweight version of the CLI."
