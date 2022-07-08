@@ -90,16 +90,16 @@ changelog:
     exclude:
     - '^tests:'
 
-brews:
-  - tap:
-      owner: deepsourcelabs
-      name: homebrew-cli
-      branch: cli-release
-      token: "{{ .Env.HOMEBREW_TOKEN }}"
-    commit_author:
-      name: deepsourcebot
-      email: bot@deepsource.io
-    homepage: "https://github.com/deepsourcelabs/cli"
-    description: "Command line interface to DeepSource"
-    license: "BSD 2-Clause Simplified License"
-    skip_upload: auto
+# brews:
+#   - tap:
+#       owner: deepsourcelabs
+#       name: homebrew-cli
+#       branch: cli-release
+#       token: "{{ .Env.HOMEBREW_TOKEN }}"
+#     commit_author:
+#       name: deepsourcebot
+#       email: bot@deepsource.io
+#     homepage: "https://github.com/deepsourcelabs/cli"
+#     description: "Command line interface to DeepSource"
+#     license: "BSD 2-Clause Simplified License"
+#     skip_upload: auto
