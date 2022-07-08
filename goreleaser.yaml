@@ -69,12 +69,14 @@ archives:
   -
     id: "deepsource_tcv"
     builds: ['tcv-deepsource', 'windows-tcv-deepsource']
+    name_template: "{{.ProjectName}}_tcv_{{.Version}}_{{.Os}}_{{.Arch}}"
     replacements:
       386: i386
       amd64: x86_64
   -
     id: "deepsource"
     builds: ['deepsource', 'windows-deepsource']
+    name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}_{{.Arch}}"
     replacements:
       386: i386
       amd64: x86_64
