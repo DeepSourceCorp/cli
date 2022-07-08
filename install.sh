@@ -376,7 +376,7 @@ EOF
 
 
 PROJECT_NAME="deepsource"
-OWNER=burntcarrot
+OWNER=deepsourcelabs
 REPO="cli"
 BINARY=deepsource
 FORMAT=tar.gz
