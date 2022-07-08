@@ -67,6 +67,14 @@ builds:
 
 archives:
   -
+    id: "deepsource_tcv"
+    builds: ['tcv-deepsource', 'windows-tcv-deepsource']
+    replacements:
+      386: i386
+      amd64: x86_64
+  -
+    id: "deepsource"
+    builds: ['deepsource', 'windows-deepsource']
     replacements:
       386: i386
       amd64: x86_64
