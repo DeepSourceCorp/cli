@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/deepsourcelabs/cli/analyzers/diagnostics"
 	"github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
@@ -112,8 +113,16 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	if analyzerTOMLValidationErrors != nil && len(analyzerTOMLValidationErrors.Errors) > 0 {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)
-		for _, err := range analyzerTOMLValidationErrors.Errors {
-			fmt.Printf("  %s\n", utils.GetBulletMessage(err.Message, "red"))
+
+		// Get diagnostics.
+		reportedDiagnostics, err := diagnostics.GetDiagnostics(*analyzerTOMLValidationErrors)
+		if err != nil {
+			a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)
+		}
+
+		// Print diagnostics to the console.
+		for _, diagnostic := range reportedDiagnostics {
+			fmt.Printf("%s\n", diagnostic)
 		}
 	}
 	a.Spinner.StopSpinner()
