@@ -1,8 +1,7 @@
-// TODO: add comments
-
 package diagnostics
 
 import (
+	"fmt"
 	"os"
 	"strings"
 
@@ -10,14 +9,15 @@ import (
 	"github.com/fatih/color"
 )
 
+// Diagnostic represents a diagnostics reported by the DeepSource CLI validators.
 type Diagnostic struct {
 	Line    int
-	Column  int
 	Content string
 
 	ErrorMessage string
 }
 
+// GetDiagnostics returns diagnostics as strings.
 func GetDiagnostics(failure validator.ValidationFailure) ([]string, error) {
 	diagnostics := []string{}
 
@@ -26,26 +26,29 @@ func GetDiagnostics(failure validator.ValidationFailure) ([]string, error) {
 		return nil, err
 	}
 
+	// Get diagnostics using the file's content.
 	diags := getDiagnosticsFromFile(fileContent, failure.Errors)
 
+	// Pretty-print diagnostics.
 	for _, diag := range diags {
-		message := getMessage(diag)
+		message := constructDiagnostic(diag)
 		diagnostics = append(diagnostics, message)
 	}
 
 	return diagnostics, nil
 }
 
-func getMessage(diag Diagnostic) string {
-	errMsg := "\n"
-	errMsg += color.RedString("At line number %d:\n", diag.Line)
-	errMsg += color.BlueString(" >	%s \n", diag.Content)
-	errMsg += color.RedString("ERROR: %s", diag.ErrorMessage)
+// constructDiagnostic returns the diagnostic as a pretty-printed string.
+func constructDiagnostic(diag Diagnostic) string {
+	errMsg := ""
+	errMsg += color.RedString("%s\n", diag.ErrorMessage)
+	errMsg += diag.Content
 	errMsg += "\n"
 
 	return errMsg
 }
 
+// readFileContent reads the file and returns its content.
 func readFileContent(filename string) (string, error) {
 	content, err := os.ReadFile(filename)
 	if err != nil {
@@ -55,17 +58,27 @@ func readFileContent(filename string) (string, error) {
 	return string(content), nil
 }
 
+// getDiagnosticsFromFile uses the file content to return diagnostics with metadata like line number, content, etc.
 func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []Diagnostic {
-	lines := strings.Split(string(fileContent), "\n")
-
 	diagnostics := []Diagnostic{}
 
+	lines := strings.Split(string(fileContent), "\n")
+	if len(lines) < 3 {
+		return []Diagnostic{}
+	}
+
+	// Iterate over each error and check line-by-line.
 	for _, err := range errors {
 		for lineNum, line := range lines {
-			if strings.Contains(line, err.Field) {
+			// If the line contains the field name, and if it doesn't have a comment prefix, then we can proceed to diagnostic generation.
+			if strings.Contains(line, err.Field) && !strings.HasPrefix(line, "#") {
+				// Prepare code frame for the current line.
+				codeFrame := prepareCodeFrame(lineNum, lines)
+
+				// Generate a diagnostic.
 				diag := Diagnostic{
 					Line:         lineNum,
-					Content:      line,
+					Content:      codeFrame,
 					ErrorMessage: err.Message,
 				}
 
@@ -75,4 +88,29 @@ func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []
 	}
 
 	return diagnostics
+}
+
+// prepareCodeFrame prepares a code frame using the file content. The code frame is meant to be displayed on the console while reporting diagnostics.
+func prepareCodeFrame(lineNum int, lines []string) string {
+	frame := ""
+
+	if lineNum < 1 {
+		// Case 1: When the line is near the top of the file.
+		// Generate a frame with the current and next line only.
+		frame += color.RedString("> %d | %s\n", lineNum+1, lines[lineNum])
+		frame += fmt.Sprintf("  %d | %s\n", lineNum+2, lines[lineNum+1])
+
+	} else if lineNum >= (len(lines) - 1) {
+		// Case 2: When the line is near the bottom of the file.
+		// Generate a frame with the current line only.
+		frame += color.RedString("> %d | %s\n", lineNum, lines[lineNum-1])
+	} else {
+		// Case 3: When the line is in between the top and the bottom.
+		// Generate a frame with the the previous, current and the next line.
+		frame += fmt.Sprintf("  %d | %s\n", lineNum, lines[lineNum-1])
+		frame += color.RedString("> %d | %s\n", lineNum+1, lines[lineNum])
+		frame += fmt.Sprintf("  %d | %s\n", lineNum+2, lines[lineNum+1])
+	}
+
+	return frame
 }
