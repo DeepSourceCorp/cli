@@ -11,9 +11,8 @@ import (
 
 // Diagnostic represents a diagnostics reported by the DeepSource CLI validators.
 type Diagnostic struct {
-	Line    int
-	Content string
-
+	Line         int
+	Codeframe    string
 	ErrorMessage string
 }
 
@@ -42,7 +41,7 @@ func GetDiagnostics(failure validator.ValidationFailure) ([]string, error) {
 func constructDiagnostic(diag Diagnostic) string {
 	errMsg := ""
 	errMsg += color.RedString("%s\n", diag.ErrorMessage)
-	errMsg += diag.Content
+	errMsg += diag.Codeframe
 	errMsg += "\n"
 
 	return errMsg
@@ -78,7 +77,7 @@ func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []
 				// Generate a diagnostic.
 				diag := Diagnostic{
 					Line:         lineNum,
-					Content:      codeFrame,
+					Codeframe:    codeFrame,
 					ErrorMessage: err.Message,
 				}
 
@@ -91,10 +90,11 @@ func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []
 }
 
 // prepareCodeFrame prepares a code frame using the file content. The code frame is meant to be displayed on the console while reporting diagnostics.
+// NOTE: lineNum always starts from 0.
 func prepareCodeFrame(lineNum int, lines []string) string {
 	frame := ""
 
-	if lineNum < 1 {
+	if lineNum <= 1 {
 		// Case 1: When the line is near the top of the file.
 		// Generate a frame with the current and next line only.
 		frame += color.RedString("> %d | %s\n", lineNum+1, lines[lineNum])

@@ -1,0 +1,20 @@
+name = "2do-Checker"
+shortcode = "aadhav-deepsource/2do-checker"
+description = "Checks for TODO."
+tags = ["todo", "TODO", "checker"]
+repository = "https://github.com/siddhant-deepsource/2do-checker"
+documentation = ""
+bug_tracker = ""
+
+[environment_variables]
+
+[analysis]
+  command = "/app/todo-checker"
+
+[build]
+  engine = "docke"
+  dockerfile = ""
+  script = ""
+
+[test]
+  command = ""
