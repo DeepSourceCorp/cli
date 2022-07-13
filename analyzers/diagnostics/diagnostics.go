@@ -6,7 +6,7 @@ import (
 	"strings"
 
 	"github.com/deepsourcelabs/cli/analyzers/validator"
-	"github.com/fatih/color"
+	"github.com/morikuni/aec"
 )
 
 // Diagnostic represents a diagnostics reported by the DeepSource CLI validators.
@@ -26,10 +26,10 @@ func GetDiagnostics(failure validator.ValidationFailure) ([]string, error) {
 	}
 
 	// Get diagnostics using the file's content.
-	diags := getDiagnosticsFromFile(fileContent, failure.Errors)
+	fileDiagnostics := getDiagnosticsFromFile(fileContent, failure.Errors)
 
 	// Pretty-print diagnostics.
-	for _, diag := range diags {
+	for _, diag := range fileDiagnostics {
 		message := constructDiagnostic(diag)
 		diagnostics = append(diagnostics, message)
 	}
@@ -40,7 +40,7 @@ func GetDiagnostics(failure validator.ValidationFailure) ([]string, error) {
 // constructDiagnostic returns the diagnostic as a pretty-printed string.
 func constructDiagnostic(diag Diagnostic) string {
 	errMsg := ""
-	errMsg += color.RedString("%s\n", diag.ErrorMessage)
+	errMsg += aec.LightRedF.Apply(fmt.Sprintf("%s\n", diag.ErrorMessage))
 	errMsg += diag.Codeframe
 	errMsg += "\n"
 
@@ -62,9 +62,6 @@ func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []
 	diagnostics := []Diagnostic{}
 
 	lines := strings.Split(string(fileContent), "\n")
-	if len(lines) < 3 {
-		return []Diagnostic{}
-	}
 
 	// Iterate over each error and check line-by-line.
 	for _, err := range errors {
@@ -97,18 +94,18 @@ func prepareCodeFrame(lineNum int, lines []string) string {
 	if lineNum <= 1 {
 		// Case 1: When the line is near the top of the file.
 		// Generate a frame with the current and next line only.
-		frame += color.RedString("> %d | %s\n", lineNum+1, lines[lineNum])
+		frame += aec.LightRedF.Apply(fmt.Sprintf("> %d | %s\n", lineNum+1, lines[lineNum]))
 		frame += fmt.Sprintf("  %d | %s\n", lineNum+2, lines[lineNum+1])
 
 	} else if lineNum >= (len(lines) - 1) {
 		// Case 2: When the line is near the bottom of the file.
 		// Generate a frame with the current line only.
-		frame += color.RedString("> %d | %s\n", lineNum, lines[lineNum-1])
+		frame += aec.LightRedF.Apply(fmt.Sprintf("> %d | %s\n", lineNum, lines[lineNum-1]))
 	} else {
 		// Case 3: When the line is in between the top and the bottom.
 		// Generate a frame with the the previous, current and the next line.
 		frame += fmt.Sprintf("  %d | %s\n", lineNum, lines[lineNum-1])
-		frame += color.RedString("> %d | %s\n", lineNum+1, lines[lineNum])
+		frame += aec.LightRedF.Apply(fmt.Sprintf("> %d | %s\n", lineNum+1, lines[lineNum]))
 		frame += fmt.Sprintf("  %d | %s\n", lineNum+2, lines[lineNum+1])
 	}
 

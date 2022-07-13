@@ -2,6 +2,7 @@ package diagnostics
 
 import (
 	"os"
+	"regexp"
 	"strings"
 	"testing"
 
@@ -50,6 +51,9 @@ func TestPrepareCodeFrame(t *testing.T) {
 
 			// Prepare code frame.
 			got := prepareCodeFrame(tc.lineNum, lines)
+
+			// Strip ANSI escape codes.
+			got = stripANSI(got)
 			got = strings.TrimSpace(got)
 
 			fileContent, err := os.ReadFile(tc.wantFilename)
@@ -116,12 +120,17 @@ func TestGetDiagnostics(t *testing.T) {
 			wantFilename: "./testdata/test_getdiagnostics/no_errors/test_want.toml",
 		},
 		{
-			description: "invalid file (file with less lines)",
+			description: "file with less lines",
 			failure: validator.ValidationFailure{
-				File:   "./testdata/test_getdiagnostics/invalid_file/test.toml",
-				Errors: []validator.ErrorMeta{},
+				File: "./testdata/test_getdiagnostics/less_lines/test.toml",
+				Errors: []validator.ErrorMeta{
+					{
+						Field:   "shortcode",
+						Message: "Analyzer shortcode should begin with '@'",
+					},
+				},
 			},
-			wantFilename: "./testdata/test_getdiagnostics/invalid_file/test_want.toml",
+			wantFilename: "./testdata/test_getdiagnostics/less_lines/test_want.toml",
 		},
 	}
 
@@ -148,10 +157,20 @@ func TestGetDiagnostics(t *testing.T) {
 			want := string(fileContent)
 			want = strings.TrimSpace(want)
 
+			// Strip ANSI escape codes.
+			gotStr = stripANSI(gotStr)
+
 			diff := cmp.Diff(gotStr, want)
 			if len(diff) != 0 {
 				t.Errorf("test failed (%s)\ngot != want:\n%s\n", tc.description, diff)
 			}
 		})
 	}
+}
+
+// Strip ANSI codes for testing.
+func stripANSI(str string) string {
+	ansi := "[\u001B\u009B][[\\]()#;?]*(?:(?:(?:[a-zA-Z\\d]*(?:;[a-zA-Z\\d]*)*)?\u0007)|(?:(?:\\d{1,4}(?:;\\d{0,4})*)?[\\dA-PRZcf-ntqry=><~]))"
+	re := regexp.MustCompile(ansi)
+	return re.ReplaceAllString(str, "")
 }
