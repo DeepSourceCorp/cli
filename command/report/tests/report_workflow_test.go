@@ -25,7 +25,6 @@ const (
 
 func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	req, _ := ioutil.ReadAll(r.Body)
-	log.Println(string(req))
 
 	// Read test graphql request body artifact file
 	requestBodyData, err := ioutil.ReadFile("./dummy/report_graphql_request_body.json")
