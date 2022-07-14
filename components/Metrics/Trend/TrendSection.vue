@@ -142,20 +142,21 @@ export default class TrendSection extends Vue {
           values: this.namespacesTrend.valueTrend.values
         }
       ],
-      yMarkers: this.namespacesTrend.threshold
-        ? [
-            {
-              label: 'Threshold',
-              value: this.namespacesTrend.threshold,
-              options: { labelPos: 'right', stroke: 'vanilla-400', lineType: 'dashed' }
-            }
-          ]
-        : []
+      yMarkers:
+        this.namespacesTrend.threshold || this.namespacesTrend.threshold === 0
+          ? [
+              {
+                label: 'Threshold',
+                value: this.namespacesTrend.threshold,
+                options: { labelPos: 'right', stroke: 'vanilla-400', lineType: 'dashed' }
+              }
+            ]
+          : []
     }
   }
 
   get chartColors() {
-    return this.namespacesTrend.threshold
+    return this.namespacesTrend.threshold || this.namespacesTrend.threshold === 0
       ? this.namespacesTrend.isPassing
         ? ['juniper-500']
         : ['cherry-500']
@@ -183,7 +184,9 @@ export default class TrendSection extends Vue {
 
   get canViewThresholdModal(): boolean {
     return Boolean(
-      (this.thresholdTrendStat.value || this.canModifyThreshold) &&
+      (this.thresholdTrendStat.value ||
+        this.thresholdTrendStat.value === 0 ||
+        this.canModifyThreshold) &&
         (!this.isAggregate || this.metricMeta.supportsAggregateThreshold)
     )
   }

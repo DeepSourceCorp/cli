@@ -7,6 +7,8 @@ import { RootState } from '~/store'
 import AnalyzersGQLQuery from '~/apollo/queries/analyzer/list.gql'
 import CheckAnalyzerExistsQuery from '~/apollo/queries/analyzer/checkExists.gql'
 import CheckTransformerExistsQuery from '~/apollo/queries/transformer/checkExists.gql'
+import AnalyzerNamesQuery from '~/apollo/queries/analyzer/names.gql'
+import { resolveNodes } from '~/utils/array'
 
 export interface AnalyzerMetaProperitiesInterface {
   description: string
@@ -44,7 +46,8 @@ export enum AnalyzerListActions {
   FETCH_ANALYZER_INFO = 'fetchAnalyzerInfo',
   FETCH_ANALYZER_LIST = 'fetchAnalyzerList',
   CHECK_ANALYZER_EXISTS = 'checkAnalyzerExists',
-  CHECK_TRANSFORMER_EXISTS = 'checkTransformerExists'
+  CHECK_TRANSFORMER_EXISTS = 'checkTransformerExists',
+  FETCH_ANALYZER_NAMES = 'fetchAnalyzerNames'
 }
 
 export enum AnalyzerListGetters {
@@ -146,6 +149,14 @@ interface AnalyzerListModuleActions extends ActionTree<AnalyzerListModuleState, 
     injectee: AnalyzerListActionContext,
     args: { shortcode: string; analyzerShortcode: string }
   ) => Promise<boolean>
+
+  [AnalyzerListActions.FETCH_ANALYZER_NAMES]: (
+    this: Store<RootState>,
+    injectee: AnalyzerListActionContext,
+    args: {
+      categories?: string[]
+    }
+  ) => Promise<Analyzer[]>
 }
 
 export const actions: AnalyzerListModuleActions = {
@@ -193,5 +204,16 @@ export const actions: AnalyzerListModuleActions = {
     } catch (e) {}
     commit(AnalyzerListMutations.SET_LOADING, false)
     return false
+  },
+  async [AnalyzerListActions.FETCH_ANALYZER_NAMES](_context, { categories }) {
+    const analyzerNamesResponse = resolveNodes(
+      ((await this.$fetchGraphqlData(AnalyzerNamesQuery, { categories })) as GraphqlQueryResponse)
+        .data.analyzers
+    )
+
+    if (analyzerNamesResponse.length) {
+      return analyzerNamesResponse as Analyzer[]
+    }
+    return []
   }
 }

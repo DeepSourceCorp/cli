@@ -88,7 +88,7 @@ export default class MetricPage extends Vue {
   setMetricThreshold: (args: {
     metricShortcode: string
     repositoryId: string
-    thresholdValue: number
+    thresholdValue: number | null
     key: string
   }) => Promise<GraphqlMutationResponse>
 
@@ -207,16 +207,16 @@ export default class MetricPage extends Vue {
    * @returns {Promise<void>}
    */
   async editThreshold(
-    newThresholdValue: number,
+    newThresholdValue: number | null,
     analyzerKey: string,
     close?: () => void
   ): Promise<void> {
-    if (newThresholdValue || newThresholdValue === 0) {
+    if (newThresholdValue !== undefined) {
       try {
         const response = (await this.setMetricThreshold({
           metricShortcode: this.$route.params.metric,
           repositoryId: this.repository.id,
-          thresholdValue: newThresholdValue || 0,
+          thresholdValue: newThresholdValue,
           key: analyzerKey
         })) as GraphqlMutationResponse
 
@@ -229,18 +229,20 @@ export default class MetricPage extends Vue {
       } finally {
         this.refetch()
       }
+    } else {
+      this.$toast.danger('An error occured while updating repository metrics.')
     }
   }
 
   /**
-   * Updates the threshold of a namespace to `0`, effectively deleting it.
+   * Updates the threshold of a namespace to `null`, effectively deleting it.
    *
    * @param {MetricNamespace} namespace - Object of the namespace whose threshold needs to be updated
    *
    * @returns {Promise<void>}
    */
   async deleteThreshold(namespacesTrend: MetricNamespaceTrend): Promise<void> {
-    await this.editThreshold(0, namespacesTrend.key as string)
+    await this.editThreshold(null, namespacesTrend.key as string)
   }
 
   /**

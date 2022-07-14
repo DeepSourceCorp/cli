@@ -263,7 +263,6 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       name: string
       shortcode: typeof NLCV_SHORTCODE
       metricType?: MetricTypeChoices
-      lastDays?: number
       refetch?: boolean
     }
   ) => Promise<Repository>
@@ -621,15 +620,7 @@ export const actions: RepositoryDetailModuleActions = {
   },
   async [RepositoryDetailActions.FETCH_NLCV_METRIC](
     { state },
-    {
-      owner,
-      name,
-      provider,
-      shortcode,
-      lastDays,
-      metricType = MetricTypeChoices.DefaultBranchOnly,
-      refetch
-    }
+    { owner, name, provider, shortcode, metricType = MetricTypeChoices.DefaultBranchOnly, refetch }
   ) {
     try {
       const response = (await this.$fetchGraphqlData(
@@ -639,8 +630,7 @@ export const actions: RepositoryDetailModuleActions = {
           owner,
           name,
           shortcode,
-          metricType,
-          lastDays
+          metricType
         },
         refetch
       )) as GraphqlQueryResponse

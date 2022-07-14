@@ -10,7 +10,10 @@
             </h1>
           </div>
           <z-tag
-            v-if="namespacesTrend.threshold && namespacesTrend.isPassing !== null"
+            v-if="
+              (namespacesTrend.threshold || namespacesTrend.threshold === 0) &&
+              namespacesTrend.isPassing !== null
+            "
             :icon-left="namespacesTrend.isPassing ? 'metric-high' : 'metric-low'"
             :icon-color="namespacesTrend.isPassing ? 'juniper' : 'cherry'"
             size="x-small"

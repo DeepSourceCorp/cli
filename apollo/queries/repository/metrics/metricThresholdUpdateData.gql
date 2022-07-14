@@ -1,4 +1,4 @@
-query metricThresholdUpdateData (
+query metricThresholdUpdateData(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!
@@ -7,6 +7,7 @@ query metricThresholdUpdateData (
 ) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id
+    userPermissionMeta
     metricsCaptured(shortcode: $shortcode, metricType: $metricType) {
       id
       shortcode

@@ -7605,6 +7605,23 @@ export type Unnamed_81_Query = (
   )> }
 );
 
+export type FetchAnalyzerNamesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type FetchAnalyzerNamesQuery = (
+  { __typename?: 'Query' }
+  & { analyzers?: Maybe<(
+    { __typename?: 'AnalyzerConnection' }
+    & { edges: Array<Maybe<(
+      { __typename?: 'AnalyzerEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'Analyzer' }
+        & Pick<Analyzer, 'id' | 'name'>
+      )> }
+    )>> }
+  )> }
+);
+
 export type Unnamed_82_QueryVariables = Exact<{
   q?: Maybe<Scalars['String']>;
 }>;

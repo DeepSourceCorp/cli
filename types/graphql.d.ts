@@ -920,6 +920,15 @@ declare module '*/listIssues.gql' {
 }
     
 
+declare module '*/names.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const fetchAnalyzerNames: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/publicList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

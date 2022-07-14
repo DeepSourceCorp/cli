@@ -35,7 +35,7 @@
 <script lang="ts">
 import { ZTag, ZIcon } from '@deepsourcelabs/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { Check, RunStatus } from '~/types/types'
+import { Check, CheckStatus } from '~/types/types'
 
 /**
  * Sidebar component to navigate between different analyzers for a given run
@@ -66,17 +66,20 @@ export default class AnalyzerSelector extends Vue {
   /**
    * Get icon for a given check status.
    *
-   * @param {RunStatus} status Status code of the check
+   * @param {CheckStatus} status Status code of the check
    * @returns {string} icon to be used to represent the check status
    */
-  statusIcon(status: RunStatus): string {
-    const types: Record<RunStatus, string> = {
-      [RunStatus.Pass]: 'check',
-      [RunStatus.Fail]: 'x',
-      [RunStatus.Pend]: 'clock',
-      [RunStatus.Timo]: 'timer-reset',
-      [RunStatus.Cncl]: 'alert-circle',
-      [RunStatus.Read]: 'check-circle'
+  statusIcon(status: CheckStatus): string {
+    const types: Record<CheckStatus, string> = {
+      [CheckStatus.Pass]: 'check',
+      [CheckStatus.Fail]: 'x',
+      [CheckStatus.Pend]: 'clock',
+      [CheckStatus.Timo]: 'timer-reset',
+      [CheckStatus.Cncl]: 'alert-circle',
+      [CheckStatus.Read]: 'check-circle',
+      [CheckStatus.Neut]: 'check',
+      [CheckStatus.Atmo]: 'x',
+      [CheckStatus.Wait]: 'clock'
     }
     return types[status || 'PASS']
   }
@@ -84,17 +87,20 @@ export default class AnalyzerSelector extends Vue {
   /**
    * Get icon color for a given check status.
    *
-   * @param {RunStatus} status Status code of the check
+   * @param {CheckStatus} status Status code of the check
    * @returns {string} icon color to be used to represent the check status
    */
-  statusIconColor(status: RunStatus): string {
-    const types: Record<RunStatus, string> = {
-      [RunStatus.Pass]: 'juniper',
-      [RunStatus.Fail]: 'cherry',
-      [RunStatus.Pend]: 'vanilla-400',
-      [RunStatus.Timo]: 'honey',
-      [RunStatus.Cncl]: 'honey',
-      [RunStatus.Read]: 'vanilla-400'
+  statusIconColor(status: CheckStatus): string {
+    const types: Record<CheckStatus, string> = {
+      [CheckStatus.Pass]: 'juniper',
+      [CheckStatus.Fail]: 'cherry',
+      [CheckStatus.Pend]: 'vanilla-400',
+      [CheckStatus.Timo]: 'honey',
+      [CheckStatus.Cncl]: 'honey',
+      [CheckStatus.Read]: 'vanilla-400',
+      [CheckStatus.Neut]: 'vanilla-400',
+      [CheckStatus.Atmo]: 'cherry',
+      [CheckStatus.Wait]: 'honey'
     }
     return types[status || 'PASS']
   }

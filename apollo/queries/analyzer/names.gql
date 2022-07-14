@@ -1,0 +1,12 @@
+query ($categories: [String]) {
+  analyzers(categoryIn: $categories) {
+    edges {
+      node {
+        id
+        name
+        shortcode
+        category
+      }
+    }
+  }
+}

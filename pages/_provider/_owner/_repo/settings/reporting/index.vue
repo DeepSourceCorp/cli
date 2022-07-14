@@ -226,6 +226,7 @@
                   text-align="center"
                   class="flex items-center justify-center text-sm font-normal"
                 >
+                  <!-- ? @change also sets `isIgnoredInCheckStatus` to `true` if the metric is ignored for display -->
                   <z-checkbox
                     :model-value="metricSetting.isIgnoredToDisplay"
                     :true-value="false"
@@ -234,12 +235,18 @@
                     font-size="base"
                     class="h-full"
                     @change="
-                      (newValue) =>
+                      (newValue) => {
                         updateRepoSetting(InputTypes.METRICS, {
                           settingType: 'metricSettings',
                           field: metricSetting.shortcode,
-                          value: { isIgnoredToDisplay: newValue }
+                          value: {
+                            isIgnoredToDisplay: newValue,
+                            isIgnoredInCheckStatus: newValue
+                              ? true
+                              : metricSetting.isIgnoredInCheckStatus
+                          }
                         })
+                      }
                     "
                   />
                 </z-table-cell>
@@ -248,9 +255,16 @@
                   class="flex items-center justify-center text-sm font-normal"
                 >
                   <z-checkbox
+                    v-tooltip="{
+                      content: metricSetting.isIgnoredToDisplay
+                        ? 'A metric needs to be reported in order to enforce its threshold.'
+                        : '',
+                      delay: { show: 0, hide: 100 }
+                    }"
                     :model-value="metricSetting.isIgnoredInCheckStatus"
                     :true-value="false"
                     :false-value="true"
+                    :read-only="metricSetting.isIgnoredToDisplay"
                     spacing="4"
                     font-size="base"
                     class="h-full m-0"
@@ -328,20 +342,41 @@
           Test coverage has not been set up for this repository yet.
         </p>
       </notice>
-      <!-- <div>
-        <div class="text-sm text-vanilla-100">
-          <span> New code coverage thresholds </span>
+      <div class="flex justify-between gap-x-4">
+        <div>
+          <div class="text-sm text-vanilla-100">
+            <span> New code coverage thresholds </span>
+          </div>
+          <p class="text-xs leading-5 text-vanilla-400">
+            Configure thresholds for new code coverage in pull requests.
+          </p>
         </div>
-        <p class="text-xs leading-5 text-vanilla-400">
-          Configure thresholds for new code coverage in pull requests.
-        </p>
+        <z-button
+          v-if="repository.hasTestCoverage && canModifyThreshold"
+          v-tooltip="{
+            content:
+              !analyzersWithoutThreshold.length && !$fetchState.pending
+                ? 'Thresholds for all langugages have been set'
+                : '',
+            delay: { show: 0, hide: 100 }
+          }"
+          button-type="ghost"
+          size="small"
+          color="vanilla-400"
+          icon="plus"
+          label="Add new threshold"
+          loading-label="Fetching data"
+          :disabled="!analyzersWithoutThreshold.length"
+          :is-loading="$fetchState.pending"
+          class="border border-ink-100 border-dashed float-right"
+          @click="showAddThresholdModal = true"
+        />
       </div>
 
       <z-table
         v-if="
-          repository.hasTestCoverage &&
-          ($fetchState.pending ||
-            (nlcvMetricData && nlcvMetricData.namespaces && nlcvMetricData.namespaces.length))
+          $fetchState.pending ||
+          (repository.hasTestCoverage && metricNamespaces && metricNamespaces.length)
         "
       >
         <template v-slot:head>
@@ -363,13 +398,9 @@
               class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
             ></div>
           </template>
-          <template
-            v-else-if="
-              nlcvMetricData && nlcvMetricData.namespaces && nlcvMetricData.namespaces.length
-            "
-          >
+          <template v-else-if="metricNamespaces && metricNamespaces.length">
             <z-table-row
-              v-for="namespace in nlcvMetricData.namespaces"
+              v-for="namespace in metricNamespaces"
               :key="namespace.key"
               class="text-vanilla-100 hover:bg-ink-300"
             >
@@ -377,12 +408,15 @@
                 namespace.key
               }}</z-table-cell>
               <z-table-cell text-align="right" class="text-sm font-normal">
-                <div v-if="namespace.threshold" class="flex justify-end items-center gap-x-4">
+                <div
+                  v-if="namespace.threshold || namespace.threshold === 0"
+                  class="flex justify-end items-center gap-x-4"
+                >
                   <span
                     >{{ namespace.threshold
                     }}{{ nlcvMetricData.unit ? nlcvMetricData.unit : '' }}</span
                   >
-                  <z-menu direction="left">
+                  <z-menu v-if="canModifyThreshold" direction="left">
                     <template v-slot:trigger="{ toggle }">
                       <z-button
                         button-type="ghost"
@@ -404,22 +438,13 @@
                         <z-menu-item
                           class="text-sm text-cherry"
                           icon="trash-2"
-                          @click="$emit('deleteThreshold')"
+                          @click="deleteThreshold(namespace)"
                         >
                           Delete Threshold
                         </z-menu-item>
                       </z-menu-section>
                     </template>
                   </z-menu>
-                </div>
-                <div v-else>
-                  <button
-                    class="inline-flex items-center font-medium whitespace-nowrap text-vanilla-400 hover:underline gap-x-1 text-xs float-right"
-                    @click="toggleEditThreshold(namespace)"
-                  >
-                    <z-icon icon="plus" size="x-small" color="current" />
-                    <span>Add threshold</span>
-                  </button>
                 </div>
               </z-table-cell>
             </z-table-row>
@@ -429,10 +454,21 @@
       <template v-else>
         <lazy-empty-state
           v-if="repository.hasTestCoverage"
-          title="Not enough data"
-          subtitle="There is still some number crunching to do before we can show relevant metrics to you. Please check back later."
+          title="No thresholds found"
           :show-border="true"
-        />
+        >
+          <template #action>
+            <z-button
+              v-if="canModifyThreshold"
+              button-type="ghost"
+              color="vanilla-400"
+              icon="plus"
+              label="Add new threshold"
+              class="border border-ink-100 border-dashed"
+              @click="showAddThresholdModal = true"
+            />
+          </template>
+        </lazy-empty-state>
         <lazy-empty-state
           v-else
           title="Test coverage has not been set up for this repository yet."
@@ -441,14 +477,19 @@
         />
       </template>
       <portal to="modal">
+        <add-nlcv-threshold-modal
+          v-if="showAddThresholdModal"
+          :analyzers="analyzersWithoutThreshold"
+          @addThreshold="addThreshold"
+          @close="showAddThresholdModal = false"
+        />
         <edit-threshold-modal
           v-if="showEditThresholdModal"
           v-bind="editThresholdProps"
           @editThreshold="editThreshold"
-          @deleteThreshold="deleteThreshold"
           @close="showEditThresholdModal = false"
         />
-      </portal> -->
+      </portal>
     </div>
   </div>
 </template>
@@ -472,6 +513,7 @@ import {
   ZMenuItem
 } from '@deepsourcelabs/zeal'
 import {
+  Analyzer,
   IssuePrioritySetting,
   IssueTypeSetting,
   Metric,
@@ -492,8 +534,10 @@ import {
 } from '~/store/repository/detail'
 import { MetricType, NLCV_SHORTCODE } from '~/types/metric'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
+import { AnalyzerListActions } from '~/store/analyzer/list'
 
 const repoStore = namespace('repository/detail')
+const analyzerStore = namespace('analyzer/list')
 
 export enum InputTypes {
   ISSUE_TYPE = 'issueType',
@@ -549,7 +593,6 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     name: string
     shortcode: typeof NLCV_SHORTCODE
     metricType: MetricTypeChoices.PullRequestOnly
-    lastDays: 1
     refetch?: boolean
   }) => Promise<Repository>
 
@@ -557,15 +600,22 @@ export default class Reporting extends mixins(RepoDetailMixin) {
   setMetricThreshold: (args: {
     metricShortcode: string
     repositoryId: string
-    thresholdValue: number
+    thresholdValue: number | null
     key: string
   }) => Promise<GraphqlMutationResponse>
+
+  @analyzerStore.Action(AnalyzerListActions.FETCH_ANALYZER_NAMES)
+  fetchAnalyzerNames: (args: { categories?: string[] }) => Promise<Analyzer[]>
 
   public hideContents = true
   public isFetchingData = false
   public updatingIntegrationModeSettings = false
+
+  //? NLCV
+  analyzerNames = [] as Analyzer[]
   nlcvRepositoryData = {} as Repository
   editThresholdProps = {}
+  showAddThresholdModal = false
   showEditThresholdModal = false
 
   InputTypes = InputTypes
@@ -626,7 +676,6 @@ export default class Reporting extends mixins(RepoDetailMixin) {
       name: repo,
       shortcode: NLCV_SHORTCODE,
       metricType: MetricTypeChoices.PullRequestOnly,
-      lastDays: 1,
       refetch
     })
   }
@@ -640,16 +689,24 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     this.isFetchingData = true
     try {
       const { provider, owner, repo } = this.$route.params
-      const repoSettingsPromise = this.fetchRepositorySettingsReporting({
+      await this.fetchRepositorySettingsReporting({
         provider: provider,
         owner: owner,
         name: repo
       })
+
+      const analyzerNamesPromise = this.repository.hasTestCoverage
+        ? this.fetchAnalyzerNames({ categories: ['lang'] })
+        : new Promise<Analyzer[]>((resolve) => resolve([] as Analyzer[]))
+
       const nlcvDataPromise: Promise<Repository> = this.repository.hasTestCoverage
-        ? this.fetchNlcvData()
+        ? this.fetchNlcvData(true)
         : new Promise((resolve) => resolve({} as Repository))
 
-      this.nlcvRepositoryData = (await Promise.all([repoSettingsPromise, nlcvDataPromise]))[1]
+      const [nlcvData, analyzerNames] = await Promise.all([nlcvDataPromise, analyzerNamesPromise])
+
+      this.nlcvRepositoryData = nlcvData
+      this.analyzerNames = analyzerNames
     } catch (e) {
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     } finally {
@@ -697,6 +754,25 @@ export default class Reporting extends mixins(RepoDetailMixin) {
 
   get metricSettings(): Array<MetricSetting> {
     return (this.repository?.metricSettings?.filter(Boolean) as MetricSetting[]) ?? []
+  }
+
+  get analyzersWithoutThreshold() {
+    return this.analyzerNames.filter((analyzer) => {
+      return (
+        !this.nlcvMetricData.namespaces?.some((namespace) => namespace?.key === analyzer.name) ||
+        this.nlcvMetricData.namespaces?.some(
+          (namespace) => namespace?.key === analyzer.name && namespace.threshold === null
+        )
+      )
+    })
+  }
+
+  get metricNamespaces() {
+    return this.nlcvMetricData.namespaces?.filter((namespace) => namespace?.threshold !== null)
+  }
+
+  get canModifyThreshold(): boolean {
+    return Boolean(this.nlcvRepositoryData.userPermissionMeta?.can_modify_metric_thresholds)
   }
 
   /**
@@ -815,6 +891,41 @@ export default class Reporting extends mixins(RepoDetailMixin) {
   }
 
   /**
+   * Add a threshold for a namespace in the {@link NLCV_SHORTCODE} metric.
+   *
+   * @param {string} analyzerToAdd - `key` of the namespace whose threshold is being added
+   * @param {number} newThresholdValue - Value to update the threshold to
+   * @param {Function} close - Function to close the modal.
+   *
+   * @returns {Promise<void>}
+   */
+  async addThreshold(
+    analyzerToAdd: string,
+    newThresholdValue: number,
+    close?: () => void
+  ): Promise<void> {
+    if (newThresholdValue || newThresholdValue === 0) {
+      try {
+        const response = (await this.setMetricThreshold({
+          metricShortcode: NLCV_SHORTCODE,
+          repositoryId: this.repository.id,
+          thresholdValue: newThresholdValue || 0,
+          key: analyzerToAdd
+        })) as GraphqlMutationResponse
+
+        if (response.data.updateRepoMetricThreshold?.ok) {
+          this.$toast.success('Successfully created threshold.')
+          close?.()
+        }
+      } catch (e) {
+        this.$logErrorAndToast(e as Error, 'An error occured while updating repository metrics.')
+      } finally {
+        this.nlcvRepositoryData = await this.fetchNlcvData(true)
+      }
+    }
+  }
+
+  /**
    * Edit a threshold for a namespace in the {@link NLCV_SHORTCODE} metric.
    *
    * @param {number} newThresholdValue - Value to update the threshold to
@@ -824,27 +935,30 @@ export default class Reporting extends mixins(RepoDetailMixin) {
    * @returns {Promise<void>}
    */
   async editThreshold(
-    newThresholdValue: number,
+    newThresholdValue: number | null,
     analyzerKey: string,
-    _close?: () => void
+    close?: () => void
   ): Promise<void> {
-    if (newThresholdValue || newThresholdValue === 0) {
+    if (newThresholdValue !== undefined) {
       try {
         const response = (await this.setMetricThreshold({
           metricShortcode: NLCV_SHORTCODE,
           repositoryId: this.repository.id,
-          thresholdValue: newThresholdValue || 0,
+          thresholdValue: newThresholdValue,
           key: analyzerKey
         })) as GraphqlMutationResponse
 
         if (response.data.updateRepoMetricThreshold?.ok) {
           this.$toast.success('Successfully updated threshold.')
+          close?.()
         }
       } catch (e) {
         this.$logErrorAndToast(e as Error, 'An error occured while updating repository metrics.')
       } finally {
         this.nlcvRepositoryData = await this.fetchNlcvData(true)
       }
+    } else {
+      this.$toast.danger('An error occured while updating repository metrics.')
     }
   }
 
@@ -856,7 +970,7 @@ export default class Reporting extends mixins(RepoDetailMixin) {
    * @returns {Promise<void>}
    */
   async deleteThreshold(namespace: MetricNamespace): Promise<void> {
-    await this.editThreshold(0, namespace.key as string)
+    await this.editThreshold(null, namespace.key as string)
   }
 }
 </script>

@@ -3,7 +3,7 @@
     <p class="uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7">
       {{ isThreshold ? 'Threshold' : metric.name }}
     </p>
-    <div v-if="metric.value" class="flex items-center gap-x-2">
+    <div v-if="metric.value || metric.value === 0" class="flex items-center gap-x-2">
       <span class="text-base font-semibold leading-8">
         {{ thresholdDisplay }}
       </span>

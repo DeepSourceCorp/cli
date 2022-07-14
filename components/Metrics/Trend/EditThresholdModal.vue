@@ -16,7 +16,7 @@
             @input="setThresholdValue"
             @blur="(e) => validateThreshold(e.target.value)"
           />
-          <p v-if="thresholdInputError || thresholdValue === 0" class="text-xs text-cherry">
+          <p v-if="thresholdInputError || thresholdValue < 0" class="text-xs text-cherry">
             Please enter a valid threshold value
           </p>
         </div>
@@ -88,7 +88,7 @@ export default class EditThresholdModal extends Vue {
    */
   validateThreshold(value?: string): void {
     this.thresholdInputError = value
-      ? Number(value) < 1 || (this.isValueAPercentage ? Number(value) > 100 : false)
+      ? Number(value) < 0 || (this.isValueAPercentage ? Number(value) > 100 : false)
       : true
   }
 
@@ -113,6 +113,8 @@ export default class EditThresholdModal extends Vue {
   updateThreshold(close?: () => void): void {
     if (!this.thresholdInputError) {
       this.$emit('editThreshold', Number(this.newThresholdValue), this.analyzerKey, close)
+    } else {
+      this.$toast.danger('Please enter a valid threshold value.')
     }
   }
 
