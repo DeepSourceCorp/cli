@@ -30,7 +30,7 @@ func NewCmdVersion() *cobra.Command {
 	return cmd
 }
 
-func foo(){
+func foo() {
 	fmt.Println("bar")
 }
 
