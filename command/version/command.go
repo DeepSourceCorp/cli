@@ -34,6 +34,10 @@ func foo() {
 	fmt.Println("bar")
 }
 
+func foobar(){
+    fmt.Println("hello")
+}
+
 // Validate impletments the Validate method for the ICommand interface.
 func (Options) Validate() error {
 	return nil
@@ -43,6 +47,7 @@ func (Options) Validate() error {
 func (Options) Run() string {
 	buildInfo := getBuildInfo()
 	fmt.Println("Hello world")
+    fmt.Println("Hello sir")
 	if buildInfo == nil {
 		return ""
 	}
