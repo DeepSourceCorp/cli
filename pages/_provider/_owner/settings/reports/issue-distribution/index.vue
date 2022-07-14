@@ -54,7 +54,9 @@
           :axis-options="{
             xIsSeries: true
           }"
-          type="axis-mixed"
+          :y-axis-max="maxClip"
+          :y-axis-min="0"
+          type="bar"
         ></z-chart>
         <div v-else class="h-full p-5 pb-0">
           <lazy-empty-chart :count="5" chart-type="bar" :stacked="true" />
@@ -197,6 +199,34 @@ export default class IssueDistributionPage extends mixins(OwnerDetailMixin, Repo
 
   get currentVal(): number {
     return this.report?.currentValue ?? 0
+  }
+
+  get maxDigitHistoricValues(): number {
+    const currentActiveDistribution = (
+      this.activeFilter === IssueDistributionT.CATEGORY
+        ? this.historicalValues.values.category
+        : this.historicalValues.values.analyzer
+    ) as Record<string, number[]>
+
+    /**
+     * First, take out arrays from the map. Then run a reducer function over it.
+     * The reducer function maps over every child array and adds it elems with the
+     * next child array (add elems with the same index).
+     *
+     * The first time reduce runs, it returns sum of first and second array (index wise)
+     * In the next iteration, this sum is passed as curr value and is again summed up
+     * with the next array. Thus we get sum of all arrays, index wise.
+     */
+
+    const analyzerReducedValues = Object.values(currentActiveDistribution).reduce((curr, next) => {
+      const sisterArraysSum = []
+      for (let index = 0; index < curr.length; index++) {
+        sisterArraysSum.push(curr[index] + next[index])
+      }
+      return sisterArraysSum
+    })
+
+    return Math.max(...analyzerReducedValues)
   }
 }
 </script>

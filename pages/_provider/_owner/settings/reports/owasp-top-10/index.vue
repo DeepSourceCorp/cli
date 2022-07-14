@@ -55,6 +55,8 @@
           :axis-options="{
             xIsSeries: true
           }"
+          :y-axis-max="maxClip"
+          y-axis-min="0"
           type="line"
         />
         <div v-else class="h-full p-5 pb-0">

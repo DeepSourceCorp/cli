@@ -24,6 +24,7 @@ import {
   Repository,
   IssueDistribution
 } from '~/types/types'
+import { roundToSignificantNumber } from '~/utils/number'
 
 /**
  * Mixin for reports queries and utilities
@@ -68,6 +69,17 @@ export default class ReportMixin extends Vue {
 
   public dateRangeFilter =
     this.$cookies.get('reports-default-daterange-filter') ?? Object.keys(this.dateRangeOptions)[0]
+
+  get maxDigitHistoricValues(): number {
+    return Math.max(...this.historicalValues?.values?.count)
+  }
+
+  get maxClip() {
+    return roundToSignificantNumber(
+      this.maxDigitHistoricValues,
+      this.maxDigitHistoricValues.toString().length - 1
+    )
+  }
 
   /**
    * Check whether repo details exist and whether they are of the active repo.
