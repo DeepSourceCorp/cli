@@ -41,5 +41,5 @@ jobs:
         with:
           key: go
           coverage-file: ./coverage.out
-          dsn: ${{ secrets.DEEPSOURCE_DSN }}
+          dsn: ${{ secrets.ENTERPRISE_DSN }}
           fail-ci-on-error: true

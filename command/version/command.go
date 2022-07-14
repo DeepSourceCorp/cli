@@ -30,6 +30,10 @@ func NewCmdVersion() *cobra.Command {
 	return cmd
 }
 
+func foo() {
+	fmt.Println("bar")
+}
+
 // Validate impletments the Validate method for the ICommand interface.
 func (Options) Validate() error {
 	return nil
@@ -38,6 +42,7 @@ func (Options) Validate() error {
 // Run executest the command.
 func (Options) Run() string {
 	buildInfo := getBuildInfo()
+	fmt.Println("Hello world")
 	if buildInfo == nil {
 		return ""
 	}
