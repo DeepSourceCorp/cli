@@ -45,7 +45,7 @@ func NewCmdAnalyzerPush() *cobra.Command {
 			}
 
 			if err := a.pushAndSyncAnalyzer(); err != nil {
-				return fmt.Errorf("Failed to push the Analyzer changes to DeepSource.")
+				return fmt.Errorf("Failed to push and sync the Analyzer with DeepSource.")
 			}
 			pterm.Success.Println("Analyzer push successful.")
 			return nil
