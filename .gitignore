@@ -11,3 +11,5 @@ dist
 coverage.out
 cover.out
 
+# Completion files
+completions
