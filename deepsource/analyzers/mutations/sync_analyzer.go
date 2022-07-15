@@ -61,6 +61,5 @@ func (s SyncAnalyzerRequest) Do(ctx context.Context, client IGQLClient) (*analyz
 	if err := client.GQL().Run(ctx, req, &respData); err != nil {
 		return nil, err
 	}
-	fmt.Println(respData)
 	return &respData, nil
 }
