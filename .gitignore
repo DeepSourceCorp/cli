@@ -13,3 +13,7 @@ cover.out
 
 # node
 node_modules
+
+# Editor workspaces
+.idea/
+.vscode/
