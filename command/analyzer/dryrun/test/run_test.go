@@ -39,7 +39,7 @@ func TestAnalyzerRun(t *testing.T) {
 	err := cmd.Run()
 	_, outErr := stdout.String(), stderr.String()
 	if err != nil {
-		t.Errorf("Failed to copy the analyzer code to %s. Error:%s\n%s", appPath, err, outErr)
+		t.Fatalf("Failed to copy the analyzer code to %s. Error:%s\n%s", appPath, err, outErr)
 	}
 
 	// Create the file to watch.
