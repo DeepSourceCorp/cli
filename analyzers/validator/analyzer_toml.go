@@ -33,7 +33,7 @@ func validateAnalyzerTOMLFields(config *types.AnalyzerTOML, filePath string) (*V
 			analyzerTOMLValidationErrors.Errors = append(analyzerTOMLValidationErrors.Errors, ErrorMeta{
 				Level:   Error,
 				Field:   missingField,
-				Message: fmt.Sprintf("Missing required field : %s", missingField),
+				Message: fmt.Sprintf("Missing required field: %s", missingField),
 			},
 			)
 		}
