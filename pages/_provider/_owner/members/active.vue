@@ -202,11 +202,12 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
     this.closeRemoveMemberModal()
   }
 
-  async transferTeamOwnership(newOwnerId: User['id']): Promise<void> {
+  async transferTeamOwnership(newOwnerId: User['id'], updateBillingEmail: boolean): Promise<void> {
     this.transferInProgress = true
     const success = await this.transferOwnership({
       teamId: this.team.id,
-      userId: newOwnerId
+      newPrimaryUserId: newOwnerId,
+      updateBillingEmail
     })
 
     this.transferInProgress = false

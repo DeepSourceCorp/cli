@@ -70,7 +70,7 @@
               </z-input>
               <div
                 v-if="showSearchResults"
-                class="absolute mt-1 w-full shadow-double-dark max-h-44 sm:max-h-80 overflow-y-auto border border-ink-100 rounded-md"
+                class="absolute z-10 mt-1 w-full shadow-double-dark max-h-44 sm:max-h-80 overflow-y-auto border border-ink-100 rounded-md"
                 tabindex="-1"
               >
                 <div
@@ -125,6 +125,13 @@
               <p v-else-if="!validEmail" class="text-xs text-cherry">Please enter a valid email.</p>
             </div>
           </label>
+          <z-checkbox
+            v-model="updateBillingEmail"
+            :value="updateBillingEmail"
+            label="Update billing email"
+            spacing="4"
+            size="small"
+          />
         </div>
       </div>
       <template slot="footer">
@@ -183,7 +190,8 @@ import {
   ZOption,
   ZInput,
   ZDialogGeneric,
-  ZButton
+  ZButton,
+  ZCheckbox
 } from '@deepsourcelabs/zeal'
 import { TeamMember } from '~/types/types'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
@@ -203,7 +211,8 @@ const teamStore = namespace('team/detail')
     ZOption,
     ZInput,
     ZDialogGeneric,
-    ZButton
+    ZButton,
+    ZCheckbox
   },
   layout: 'dashboard'
 })
@@ -218,6 +227,7 @@ export default class TransferOwnershipModal extends mixins(
   public transferInProgress = false
   public showSearchResults = false
   public newOwner = null as TeamMember | null
+  public updateBillingEmail = false
   public oldOwnerTypedEmail = ''
   public listLoading = false
   public searchResults = [] as Array<TeamMember> | undefined
@@ -372,7 +382,7 @@ export default class TransferOwnershipModal extends mixins(
       this.$toast.danger('Please ensure that your email address is entered correctly.')
       return
     }
-    this.$emit('primaryAction', this.newOwner.user.id)
+    this.$emit('primaryAction', this.newOwner.user.id, this.updateBillingEmail)
   }
 }
 </script>

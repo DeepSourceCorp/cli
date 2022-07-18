@@ -14,6 +14,7 @@ import {
   TeamBasePermissionSetDefaultRepositoryPermission,
   TeamMember,
   TeamMemberRoleChoices,
+  TransferTeamOwnershipInput,
   UpdateTeamBasePermissionsPayload
 } from '~/types/types'
 
@@ -166,10 +167,7 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
   [TeamActions.TRANSFER_OWNERSHIP]: (
     this: Store<RootState>,
     injectee: TeamActionContext,
-    args: {
-      teamId: string
-      userId: string
-    }
+    args: TransferTeamOwnershipInput
   ) => Promise<boolean>
   [TeamActions.REMOVE_MEMBER]: (
     this: Store<RootState>,
@@ -398,11 +396,10 @@ export const actions: TeamModuleActions = {
     }
   },
 
-  async [TeamActions.TRANSFER_OWNERSHIP]({}, args) {
+  async [TeamActions.TRANSFER_OWNERSHIP](_, args) {
     try {
       const response = (await this.$applyGraphqlMutation(transferOwnership, {
-        teamId: args.teamId,
-        userId: args.userId
+        input: args
       })) as GraphqlMutationResponse
       return response.data.transferTeamOwnership?.ok || false
     } catch (e) {
