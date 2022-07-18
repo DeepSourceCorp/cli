@@ -67,7 +67,10 @@ func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []
 	for _, err := range errors {
 		for lineNum, line := range lines {
 			// If the line contains the field name, and if it doesn't have a comment prefix, then we can proceed to diagnostic generation.
-			if strings.Contains(line, err.Field) && !strings.HasPrefix(line, "#") {
+			// TODO(burntcarrot): Replace these conditions with regex.
+			if strings.HasPrefix(line, err.Field) ||
+				strings.HasPrefix(line, fmt.Sprintf("# %s", err.Field)) ||
+				strings.HasPrefix(line, fmt.Sprintf("#%s", err.Field)) {
 				// Prepare code frame for the current line.
 				codeFrame := prepareCodeFrame(lineNum, lines)
 
