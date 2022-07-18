@@ -10,6 +10,51 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
+func TestCheckField(t *testing.T) {
+	type test struct {
+		description string
+		line        string
+		field       string
+		want        bool
+	}
+
+	tests := []test{
+		{
+			description: "field with comment",
+			line:        `# shortcode = "@deepsourcelabs/2do-checker"`,
+			field:       "shortcode",
+			want:        true,
+		},
+		{
+			description: "field without comment",
+			line:        `shortcode = "@deepsourcelabs/2do-checker"`,
+			field:       "shortcode",
+			want:        true,
+		},
+		{
+			description: "field with comment (no match)",
+			line:        `# shortcode = "@deepsourcelabs/2do-checker"`,
+			field:       "description",
+			want:        false,
+		},
+		{
+			description: "field without comment (no match)",
+			line:        `shortcode = "@deepsourcelabs/2do-checker"`,
+			field:       "description",
+			want:        false,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.description, func(t *testing.T) {
+			got := checkField(tc.line, tc.field)
+			if got != tc.want {
+				t.Errorf("test failed (%s)\ngot != want: got = %v, want = %v\n", tc.description, got, tc.want)
+			}
+		})
+	}
+}
+
 func TestPrepareCodeFrame(t *testing.T) {
 	type test struct {
 		description   string
