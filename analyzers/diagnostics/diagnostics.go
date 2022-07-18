@@ -135,15 +135,11 @@ func checkField(line, field string) bool {
 	}
 	match = strings.TrimSpace(match)
 
-	if strings.HasPrefix(match, "#") && strings.Contains(match, field) {
+	if strings.HasPrefix(match, "#") || strings.Contains(match, field) {
 		// Return true if the current line is a comment, and contains the field.
 		// Useful for scenarios where the user tends to comment out fields.
 		return true
-	} else if strings.Contains(match, field) {
-		// If the current is not a comment, but if it contains the field, return true.
-		return true
-	} else {
-		// If nothing is fulfilled, return false.
-		return false
 	}
+
+	return false
 }
