@@ -126,12 +126,12 @@ func checkField(line, field string) bool {
 
 	// Get index for the "field" named group.
 	matches := exp.FindStringSubmatch(line)
-	idx := exp.SubexpIndex("field")
+	groupIndex := exp.SubexpIndex("field")
 
 	// Capture match.
 	match := ""
-	if len(matches) != 0 && idx != -1 {
-		match = matches[idx]
+	if len(matches) != 0 && groupIndex != -1 {
+		match = matches[groupIndex]
 	}
 	match = strings.TrimSpace(match)
 
@@ -139,7 +139,11 @@ func checkField(line, field string) bool {
 		// Return true if the current line is a comment, and contains the field.
 		// Useful for scenarios where the user tends to comment out fields.
 		return true
+	} else if strings.Contains(match, field) {
+		// If the current is not a comment, but if it contains the field, return true.
+		return true
+	} else {
+		// If nothing is fulfilled, return false.
+		return false
 	}
-
-	return false
 }
