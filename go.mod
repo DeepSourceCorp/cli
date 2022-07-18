@@ -13,7 +13,7 @@ require (
 	github.com/owenrumney/go-sarif/v2 v2.1.0
 	github.com/pelletier/go-toml v1.9.2
 	github.com/pterm/pterm v0.12.23
-	github.com/spf13/cobra v1.1.3
+	github.com/spf13/cobra v1.5.0
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.7.0
 	github.com/xeipuuv/gojsonschema v1.2.0
