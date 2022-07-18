@@ -128,22 +128,14 @@ func checkField(line, field string) bool {
 	matches := exp.FindStringSubmatch(line)
 	groupIndex := exp.SubexpIndex("field")
 
-	// Capture match.
+	// Capture match. We proceed only if the groupIndex isn't -1 (group not found), and if the number of matches aren't zero.
+	// Once done, we populate match with the match found using the regular expression.
 	match := ""
 	if len(matches) != 0 && groupIndex != -1 {
 		match = matches[groupIndex]
 	}
 	match = strings.TrimSpace(match)
 
-	if strings.HasPrefix(match, "#") || strings.Contains(match, field) {
-		// Return true if the current line is a comment, and contains the field.
-		// Useful for scenarios where the user tends to comment out fields.
-		return true
-	} else if strings.Contains(match, field) {
-		// If the current is not a comment, but if it contains the field, return true.
-		return true
-	} else {
-		// If nothing is fulfilled, return false.
-		return false
-	}
+	// Return true if the match contains the field.
+	return strings.Contains(match, field)
 }
