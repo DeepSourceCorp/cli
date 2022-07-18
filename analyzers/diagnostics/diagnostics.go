@@ -3,11 +3,15 @@ package diagnostics
 import (
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/morikuni/aec"
 )
+
+// fieldRegexp is a regular expression for checking the current line is a field or not.
+var fieldRegexp = `\s*(?P<field>.+)\s*=\s*`
 
 // Diagnostic represents a diagnostics reported by the DeepSource CLI validators.
 type Diagnostic struct {
@@ -66,8 +70,10 @@ func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []
 	// Iterate over each error and check line-by-line.
 	for _, err := range errors {
 		for lineNum, line := range lines {
-			// If the line contains the field name, and if it doesn't have a comment prefix, then we can proceed to diagnostic generation.
-			if strings.Contains(line, err.Field) && !strings.HasPrefix(line, "#") {
+			result := checkField(line, err.Field)
+			if result {
+				// If the line contains the field name, and if it doesn't have a comment prefix, then we can proceed to diagnostic generation.
+				// if strings.Contains(line, err.Field) && !strings.HasPrefix(line, "#") {
 				// Prepare code frame for the current line.
 				codeFrame := prepareCodeFrame(lineNum, lines)
 
@@ -110,4 +116,34 @@ func prepareCodeFrame(lineNum int, lines []string) string {
 	}
 
 	return frame
+}
+
+// checkField checks if the line contains the field.
+func checkField(line, field string) bool {
+	// We use fieldRegexp for checking if the current line is a field or not.
+	// If it's not a field, for example, comments for explanation, etc., then checkField should return false.
+	exp := regexp.MustCompile(fieldRegexp)
+
+	// Get index for the "field" named group.
+	matches := exp.FindStringSubmatch(line)
+	idx := exp.SubexpIndex("field")
+
+	// Capture match.
+	match := ""
+	if len(matches) != 0 && idx != -1 {
+		match = matches[idx]
+	}
+	match = strings.TrimSpace(match)
+
+	if strings.HasPrefix(match, "#") && strings.Contains(match, field) {
+		// Return true if the current line is a comment, and contains the field.
+		// Useful for scenarios where the user tends to comment out fields.
+		return true
+	} else if strings.Contains(match, field) {
+		// If the current is not a comment, but if it contains the field, return true.
+		return true
+	} else {
+		// If nothing is fulfilled, return false.
+		return false
+	}
 }
