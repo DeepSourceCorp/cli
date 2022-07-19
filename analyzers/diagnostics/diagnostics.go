@@ -3,6 +3,7 @@ package diagnostics
 import (
 	"fmt"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -15,6 +16,7 @@ var fieldRegexp = `\s*(?P<field>.+)\s*=\s*`
 
 // Diagnostic represents a diagnostics reported by the DeepSource CLI validators.
 type Diagnostic struct {
+	Filename     string
 	Line         int
 	Codeframe    string
 	ErrorMessage string
@@ -24,13 +26,8 @@ type Diagnostic struct {
 func GetDiagnostics(failure validator.ValidationFailure) ([]string, error) {
 	diagnostics := []string{}
 
-	fileContent, err := readFileContent(failure.File)
-	if err != nil {
-		return nil, err
-	}
-
 	// Get diagnostics using the file's content.
-	fileDiagnostics := getDiagnosticsFromFile(fileContent, failure.Errors)
+	fileDiagnostics := getDiagnosticsFromFile(failure.File, failure.Errors)
 
 	// Pretty-print diagnostics.
 	for _, diag := range fileDiagnostics {
@@ -44,6 +41,12 @@ func GetDiagnostics(failure validator.ValidationFailure) ([]string, error) {
 // constructDiagnostic returns the diagnostic as a pretty-printed string.
 func constructDiagnostic(diag Diagnostic) string {
 	errMsg := ""
+
+	// If the filename is blank, skip printing it.
+	if diag.Filename != "" {
+		errMsg += aec.LightRedF.Apply(fmt.Sprintf("%s\n", diag.Filename))
+	}
+
 	errMsg += aec.LightRedF.Apply(fmt.Sprintf("%s\n", diag.ErrorMessage))
 	errMsg += diag.Codeframe
 	errMsg += "\n"
@@ -62,7 +65,12 @@ func readFileContent(filename string) (string, error) {
 }
 
 // getDiagnosticsFromFile uses the file content to return diagnostics with metadata like line number, content, etc.
-func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []Diagnostic {
+func getDiagnosticsFromFile(filename string, errors []validator.ErrorMeta) []Diagnostic {
+	fileContent, err := readFileContent(filename)
+	if err != nil {
+		return []Diagnostic{}
+	}
+
 	diagnostics := []Diagnostic{}
 
 	lines := strings.Split(string(fileContent), "\n")
@@ -77,8 +85,15 @@ func getDiagnosticsFromFile(fileContent string, errors []validator.ErrorMeta) []
 				// Prepare code frame for the current line.
 				codeFrame := prepareCodeFrame(lineNum, lines)
 
+				// Do not display filename in the case of analyzer.toml
+				filename := filepath.Base(filename)
+				if filename == "analyzer.toml" {
+					filename = ""
+				}
+
 				// Generate a diagnostic.
 				diag := Diagnostic{
+					Filename:     filename,
 					Line:         lineNum,
 					Codeframe:    codeFrame,
 					ErrorMessage: err.Message,
