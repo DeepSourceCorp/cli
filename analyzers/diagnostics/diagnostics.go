@@ -118,7 +118,11 @@ func constructDiagnostic(diag Diagnostic) string {
 	codeframeLines := strings.Split(diag.Codeframe, "\n")
 	var codeframe string
 	for _, codeframeLine := range codeframeLines {
-		codeframe += prefix + codeframeLine + "\n"
+		// Ignore empty lines.
+		// This is added for safety. This doesn't have a significant effect on the users' console, but it reflects while testing, debugging whitespace additions can be frustrating.
+		if codeframeLine != "" {
+			codeframe += prefix + codeframeLine + "\n"
+		}
 	}
 
 	// Add the reconstructed codeframe to the final string representation.
