@@ -1,3 +1,4 @@
-Analyzer shortcode should begin with '@'
-> 2 | shortcode = "aadhav-deepsource/2do-checker"
-  3 |
+• test.toml
+  Analyzer shortcode should begin with '@'
+  > 2 | shortcode = "aadhav-deepsource/2do-checker"
+    3 |

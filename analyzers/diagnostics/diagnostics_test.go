@@ -10,6 +10,292 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
+func TestGroupDiagnostics(t *testing.T) {
+	type test struct {
+		description string
+		diagnostics []Diagnostic
+		want        []FileDiagnostic
+	}
+
+	tests := []test{
+		{
+			description: "must return no diagnostics",
+			diagnostics: []Diagnostic{},
+			want:        nil,
+		},
+		{
+			description: "must group a single diagnostic",
+			diagnostics: []Diagnostic{
+				{
+					Filename: "I001.toml",
+					Line:     10,
+				},
+			},
+			want: []FileDiagnostic{
+				{
+					Filename: "I001.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename: "I001.toml",
+							Line:     10,
+						},
+					},
+				},
+			},
+		},
+		{
+			description: "must group a single file",
+			diagnostics: []Diagnostic{
+				{
+					Filename: "I001.toml",
+					Line:     10,
+				},
+				{
+					Filename: "I001.toml",
+					Line:     11,
+				},
+			},
+			want: []FileDiagnostic{
+				{
+					Filename: "I001.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename: "I001.toml",
+							Line:     10,
+						},
+						{
+							Filename: "I001.toml",
+							Line:     11,
+						},
+					},
+				},
+			},
+		},
+		{
+			description: "must group multiple files",
+			diagnostics: []Diagnostic{
+				{
+					Filename: "I001.toml",
+					Line:     10,
+				},
+				{
+					Filename: "I001.toml",
+					Line:     11,
+				},
+				{
+					Filename: "I002.toml",
+					Line:     12,
+				},
+				{
+					Filename: "I002.toml",
+					Line:     13,
+				},
+				{
+					Filename: "I002.toml",
+					Line:     14,
+				},
+				{
+					Filename: "I002.toml",
+					Line:     15,
+				},
+			},
+			want: []FileDiagnostic{
+				{
+					Filename: "I001.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename: "I001.toml",
+							Line:     10,
+						},
+						{
+							Filename: "I001.toml",
+							Line:     11,
+						},
+					},
+				},
+				{
+					Filename: "I002.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename: "I002.toml",
+							Line:     12,
+						},
+						{
+							Filename: "I002.toml",
+							Line:     13,
+						},
+						{
+							Filename: "I002.toml",
+							Line:     14,
+						},
+						{
+							Filename: "I002.toml",
+							Line:     15,
+						},
+					},
+				},
+			},
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.description, func(t *testing.T) {
+			got := groupDiagnostics(tc.diagnostics)
+			diff := cmp.Diff(got, tc.want)
+			if len(diff) != 0 {
+				t.Errorf("test failed (%s)\ngot != want:\n%s\n", tc.description, diff)
+			}
+		})
+	}
+}
+
+func TestConstructDiagnostics(t *testing.T) {
+	type test struct {
+		description  string
+		diagnostics  []FileDiagnostic
+		wantFilename string
+	}
+
+	tests := []test{
+		{
+			description:  "must return no diagnostics",
+			diagnostics:  []FileDiagnostic{},
+			wantFilename: "./testdata/test_constructdiagnostics/no_diagnostics/test_want.toml",
+		},
+		{
+			description: "must group a single diagnostic (single file)",
+			diagnostics: []FileDiagnostic{
+				{
+					Filename: "I001.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename:     "I001.toml",
+							Line:         10,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Missing required field",
+						},
+					},
+				},
+			},
+			wantFilename: "./testdata/test_constructdiagnostics/single_diagnostic/single_file/test_want.toml",
+		},
+		{
+			description: "must group multiple diagnostics (single file)",
+			diagnostics: []FileDiagnostic{
+				{
+					Filename: "I001.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename:     "I001.toml",
+							Line:         10,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Missing required field",
+						},
+						{
+							Filename:     "I001.toml",
+							Line:         12,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Invalid issue category",
+						},
+					},
+				},
+			},
+			wantFilename: "./testdata/test_constructdiagnostics/multiple_diagnostics/single_file/test_want.toml",
+		},
+		{
+			description: "must group a single diagnostic (mutiple files)",
+			diagnostics: []FileDiagnostic{
+				{
+					Filename: "I001.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename:     "I001.toml",
+							Line:         10,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Missing required field",
+						},
+					},
+				},
+				{
+					Filename: "I002.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename:     "I002.toml",
+							Line:         10,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Invalid issue category",
+						},
+					},
+				},
+			},
+			wantFilename: "./testdata/test_constructdiagnostics/single_diagnostic/multiple_files/test_want.toml",
+		},
+		{
+			description: "must group multiple diagnostics (multiple files)",
+			diagnostics: []FileDiagnostic{
+				{
+					Filename: "I001.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename:     "I001.toml",
+							Line:         10,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Missing required field",
+						},
+						{
+							Filename:     "I001.toml",
+							Line:         12,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Invalid issue category",
+						},
+					},
+				},
+				{
+					Filename: "I002.toml",
+					Diagnostics: []Diagnostic{
+						{
+							Filename:     "I002.toml",
+							Line:         10,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Missing required field",
+						},
+						{
+							Filename:     "I002.toml",
+							Line:         12,
+							Codeframe:    "Example Codeframe",
+							ErrorMessage: "Invalid issue category",
+						},
+					},
+				},
+			},
+			wantFilename: "./testdata/test_constructdiagnostics/multiple_diagnostics/multiple_files/test_want.toml",
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.description, func(t *testing.T) {
+			got := constructDiagnostics(tc.diagnostics)
+			gotStr := strings.Join(got, "\n")
+			gotStr = strings.TrimSpace(gotStr)
+			gotStr = stripANSI(gotStr)
+
+			fileContent, err := os.ReadFile(tc.wantFilename)
+			if err != nil {
+				t.Errorf("error raised while running test (%s): %s\n", tc.description, err)
+			}
+
+			// Convert file content to string.
+			want := string(fileContent)
+			want = strings.TrimSpace(want)
+
+			diff := cmp.Diff(gotStr, want)
+			if len(diff) != 0 {
+				t.Errorf("test failed (%s)\ngot != want:\n%s\n", tc.description, diff)
+			}
+		})
+	}
+}
+
 func TestCheckField(t *testing.T) {
 	type test struct {
 		description string
