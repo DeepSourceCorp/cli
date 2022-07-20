@@ -129,17 +129,19 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationFailure
 		config := types.AnalyzerIssue{}
 		config.Shortcode = strings.TrimSuffix(issuePath.Name(), ".toml")
 
+		absFilepath := filepath.Join(issuesDirectoryPath, issuePath.Name())
+
 		// Read the contents of issue toml file
-		issueTOMLContent, err := ioutil.ReadFile(filepath.Join(issuesDirectoryPath, issuePath.Name()))
+		issueTOMLContent, err := ioutil.ReadFile(absFilepath)
 		if err != nil {
-			return nil, fmt.Errorf("failed to read file: %s", filepath.Join(issuesDirectoryPath, issuePath.Name()))
+			return nil, fmt.Errorf("failed to read file: %s", absFilepath)
 		}
 
 		// Decode the TOML content into the AnalyzerIssue struct object
 		d := toml.NewDecoder(bytes.NewBuffer(issueTOMLContent))
 		d.DisallowUnknownFields()
 		if err = d.Decode(&config); err != nil {
-			decodeErrorResp := handleTOMLDecodeErrors(err, issuePath.Name())
+			decodeErrorResp := handleTOMLDecodeErrors(err, absFilepath)
 			if decodeErrorResp != nil {
 				// Append the error to the array created for reporting issue validation errors and return it
 				issueValidationErrors = append(issueValidationErrors, *decodeErrorResp)
@@ -148,7 +150,7 @@ func ValidateIssueDescriptions(issuesDirectoryPath string) (*[]ValidationFailure
 		}
 
 		// Validate the analyzer.toml fields for default/custom type checks, required fields
-		issueValidationError := validateIssueTOML(&config, issuePath.Name())
+		issueValidationError := validateIssueTOML(&config, absFilepath)
 		if issueValidationError != nil {
 			issueValidationErrors = append(issueValidationErrors, *issueValidationError)
 		}
