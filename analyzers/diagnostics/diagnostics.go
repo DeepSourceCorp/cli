@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"sort"
 	"strings"
 
 	"github.com/deepsourcelabs/cli/analyzers/validator"
@@ -14,7 +15,13 @@ import (
 // fieldRegexp is a regular expression for checking the current line is a field or not.
 var fieldRegexp = `\s*(?P<field>.+)\s*=\s*`
 
-// Diagnostic represents a diagnostics reported by the DeepSource CLI validators.
+// FileDiagnostic represents the diagnostics present in a file.
+type FileDiagnostic struct {
+	Filename    string
+	Diagnostics []Diagnostic
+}
+
+// Diagnostic represents a diagnostic reported by the validators.
 type Diagnostic struct {
 	Filename     string
 	Line         int
@@ -24,34 +31,100 @@ type Diagnostic struct {
 
 // GetDiagnostics returns diagnostics as strings.
 func GetDiagnostics(failure validator.ValidationFailure) ([]string, error) {
-	diagnostics := []string{}
-
 	// Get diagnostics using the file's content.
 	fileDiagnostics := getDiagnosticsFromFile(failure.File, failure.Errors)
 
-	// Pretty-print diagnostics.
-	for _, diag := range fileDiagnostics {
-		message := constructDiagnostic(diag)
-		diagnostics = append(diagnostics, message)
-	}
+	// Group diagnostics based on the filename.
+	groupedDiagnostics := groupDiagnostics(fileDiagnostics)
+
+	// Retrieve string representation of diagnostics.
+	diagnostics := constructDiagnostics(groupedDiagnostics)
 
 	return diagnostics, nil
 }
 
-// constructDiagnostic returns the diagnostic as a pretty-printed string.
-func constructDiagnostic(diag Diagnostic) string {
-	errMsg := ""
+// groupDiagnostics groups diagnostics based on the filename.
+func groupDiagnostics(diagnostics []Diagnostic) []FileDiagnostic {
+	var groupedDiagnostics []FileDiagnostic
 
-	// If the filename is blank, skip printing it.
-	if diag.Filename != "" {
-		errMsg += aec.LightRedF.Apply(fmt.Sprintf("%s\n", diag.Filename))
+	// Using a map is a clean way to group items.
+	// The diagnostics are grouped using the map, with the key being the filename.
+	groupedDiagnosticsMap := make(map[string][]Diagnostic)
+	for _, diagnostic := range diagnostics {
+		groupedDiagnosticsMap[diagnostic.Filename] = append(groupedDiagnosticsMap[diagnostic.Filename], diagnostic)
 	}
 
-	errMsg += aec.LightRedF.Apply(fmt.Sprintf("%s\n", diag.ErrorMessage))
-	errMsg += diag.Codeframe
-	errMsg += "\n"
+	// Extract keys from the map.
+	var keys []string
+	for k := range groupedDiagnosticsMap {
+		keys = append(keys, k)
+	}
+	// Sort keys lexicographically (ascending order).
+	// This is done in order to ensure that the diagnostics get printed in ascending order, and not some random order.
+	sort.Strings(keys)
 
-	return errMsg
+	// Append diagnostics to the group.
+	for _, filename := range keys {
+		fileDiagnostic := FileDiagnostic{
+			Filename:    filename,
+			Diagnostics: groupedDiagnosticsMap[filename],
+		}
+
+		groupedDiagnostics = append(groupedDiagnostics, fileDiagnostic)
+	}
+
+	return groupedDiagnostics
+}
+
+// constructDiagnostics returns the string representations for multiple diagnostic groups.
+func constructDiagnostics(fileDiagnostics []FileDiagnostic) []string {
+	var diagnostics []string
+
+	for _, group := range fileDiagnostics {
+		groupMsg := constructGroup(group)
+		diagnostics = append(diagnostics, groupMsg)
+	}
+
+	return diagnostics
+}
+
+// constructGroup returns the string representation for a group containing multiple diagnostics.
+func constructGroup(fileDiagnostic FileDiagnostic) string {
+	// Construct the section containing the filename.
+	groupMsg := fmt.Sprintf("• %s\n", fileDiagnostic.Filename)
+
+	// Construct multiple diagnostics.
+	var diagnosticsMsg []string
+	for _, diagnostic := range fileDiagnostic.Diagnostics {
+		diagnosticMsg := constructDiagnostic(diagnostic)
+		diagnosticsMsg = append(diagnosticsMsg, diagnosticMsg)
+	}
+
+	// Add grouped diagnostics to the final string representation.
+	groupMsg += strings.Join(diagnosticsMsg, "\n")
+
+	return groupMsg
+}
+
+// constructDiagnostic returns the diagnostic as a pretty-printed string.
+func constructDiagnostic(diag Diagnostic) string {
+	// The prefix is set to 2 spaces.
+	prefix := "  "
+
+	// Add error message to the string representation.
+	errMsg := prefix + aec.LightRedF.Apply(diag.ErrorMessage)
+
+	// Re-construct the codeframe for adding the prefix (indentation).
+	codeframeLines := strings.Split(diag.Codeframe, "\n")
+	var codeframe string
+	for _, codeframeLine := range codeframeLines {
+		codeframe += prefix + codeframeLine + "\n"
+	}
+
+	// Add the reconstructed codeframe to the final string representation.
+	diagnosticMsg := fmt.Sprintf("%s\n%s", errMsg, codeframe)
+
+	return diagnosticMsg
 }
 
 // readFileContent reads the file and returns its content.
@@ -85,11 +158,8 @@ func getDiagnosticsFromFile(filename string, errors []validator.ErrorMeta) []Dia
 				// Prepare code frame for the current line.
 				codeFrame := prepareCodeFrame(lineNum, lines)
 
-				// Do not display filename in the case of analyzer.toml
+				// Get filename (base path) from absolute file path.
 				filename := filepath.Base(filename)
-				if filename == "analyzer.toml" {
-					filename = ""
-				}
 
 				// Generate a diagnostic.
 				diag := Diagnostic{
