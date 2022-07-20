@@ -135,13 +135,13 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 
 	if issuesValidationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
 		configurationValid = false
-		a.Spinner.StopSpinnerWithError("Failed to validate the issues", err)
+		a.Spinner.StopSpinnerWithError("Failed to validate issues", err)
 	}
 
 	// Check for validation errors in analyzer issues and display them (if any)
 	if issuesValidationErrors != nil && len(*issuesValidationErrors) > 0 {
 		configurationValid = false
-		a.Spinner.StopSpinnerWithError("Failed to validate the issues", err)
+		a.Spinner.StopSpinnerWithError("Failed to validate these issues:", err)
 		for _, validationError := range *issuesValidationErrors {
 			// Get diagnostics.
 			reportedDiagnostics, err := diagnostics.GetDiagnostics(validationError)
