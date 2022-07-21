@@ -10,7 +10,7 @@
           </div>
           <div v-else class="flex items-center space-x-2">
             <span class="hidden xl:inline-block">Sorted by - {{ selectedFilter }}</span>
-            <z-icon icon="x" size="small" @click="clearFilter()"></z-icon>
+            <z-icon icon="x" size="small" @click="clearSort()"></z-icon>
           </div>
         </z-button>
       </template>
@@ -40,6 +40,15 @@
           <div class="pl-1">
             <z-icon icon="search" size="small"></z-icon>
           </div>
+        </template>
+        <template slot="right">
+          <z-icon
+            v-show="searchIssue"
+            icon="x"
+            size="small"
+            class="cursor-pointer"
+            @click="clearSearch"
+          />
         </template>
       </z-input>
     </div>
@@ -89,21 +98,24 @@ export default class IssueOccurrenceSection extends Vue {
     return this.$route.query['sort'] ? true : false
   }
 
-  public clearFilter(): void {
-    this.$emit('filtersUpdated', {
-      sort: null
-    })
+  public clearSearch() {
+    this.searchIssue = ''
+    this.$emit('filter-removed', 'q')
+  }
+
+  public clearSort(): void {
+    this.$emit('filter-removed', 'sort')
   }
 
   public sortIssues(name: string): void {
     this.selectedFilter = name
-    this.$emit('filtersUpdated', {
+    this.$emit('filters-updated', {
       sort: name
     })
   }
 
   public searchIssueChildren(): void {
-    this.$emit('filtersUpdated', {
+    this.$emit('filters-updated', {
       q: this.searchIssue ? this.searchIssue : null
     })
   }

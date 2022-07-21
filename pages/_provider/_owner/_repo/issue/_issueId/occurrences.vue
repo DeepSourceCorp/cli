@@ -1,6 +1,9 @@
 <template>
   <div class="flex flex-col p-4 gap-y-4">
-    <issue-occurrence-section @filtersUpdated="addFilters"></issue-occurrence-section>
+    <issue-occurrence-section
+      @filters-updated="triggerFilterUpdate"
+      @filter-removed="removeFilter"
+    ></issue-occurrence-section>
     <div class="grid grid-cols-12">
       <!-- Issue list -->
       <div class="flex flex-col col-span-full lg:col-span-8 gap-y-4">
@@ -8,7 +11,11 @@
           v-if="checkIssues.totalCount === 0"
           class="flex items-center justify-center w-full h-full"
         >
-          No results
+          <lazy-empty-state
+            title="No results found"
+            :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+            :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+          />
         </div>
         <template v-if="$fetchState.pending">
           <div
@@ -134,6 +141,12 @@ export default class IssuesDetails extends mixins(
       repositoryId: this.repository.id,
       shortcode: issueId
     })
+  }
+
+  triggerFilterUpdate(params: Record<string, string | number | null>) {
+    // reset current page to 1 whenever any filter applied
+    params['page'] = 1
+    this.addFilters(params)
   }
 
   loadIgnoredIssues(): void {
