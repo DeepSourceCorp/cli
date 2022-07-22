@@ -101,10 +101,7 @@ func fetchPAT(ctx context.Context, deviceRegistrationData *auth.Device) (*auth.P
 	if err != nil {
 		hostName = defaultHostName
 	}
-	if len(hostName) > 256 {
-		hostName = hostName[:256]
-	}
-	userDescription := fmt.Sprintf("CLI : %s@%s", userName, hostName)
+	userDescription := fmt.Sprintf("CLI PAT for %s@%s", userName, hostName)
 
 	// Fetching DeepSource client in order to interact with SDK
 	deepsource, err := deepsource.New(deepsource.ClientOpts{
