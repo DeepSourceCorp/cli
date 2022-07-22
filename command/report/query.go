@@ -2,7 +2,7 @@ package report
 
 import (
 	"bytes"
-	"errors"
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strconv"
@@ -34,7 +34,12 @@ func makeQuery(url string, body []byte, bodyMimeType string) ([]byte, error) {
 	}
 
 	if res.StatusCode >= http.StatusInternalServerError || res.StatusCode != 200 {
-		return resBody, errors.New("Error making the query with HTTP status code: " + strconv.Itoa(res.StatusCode))
+		// Log the response body.
+		if resBody != nil {
+			fmt.Println(string(resBody))
+		}
+
+		return resBody, fmt.Errorf("Error making the query with HTTP status code: %s and message: %s", strconv.Itoa(res.StatusCode), string(resBody))
 	}
 
 	return resBody, nil
