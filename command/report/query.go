@@ -34,12 +34,10 @@ func makeQuery(url string, body []byte, bodyMimeType string) ([]byte, error) {
 	}
 
 	if res.StatusCode >= http.StatusInternalServerError || res.StatusCode != 200 {
-		// Log the response body.
 		if resBody != nil {
-			fmt.Println(string(resBody))
+			return resBody, fmt.Errorf("Server responded with %s: %s", strconv.Itoa(res.StatusCode), string(resBody))
 		}
-
-		return resBody, fmt.Errorf("Error making the query with HTTP status code: %s and message: %s", strconv.Itoa(res.StatusCode), string(resBody))
+		return resBody, fmt.Errorf("Server responded with %s", strconv.Itoa(res.StatusCode))
 	}
 
 	return resBody, nil
