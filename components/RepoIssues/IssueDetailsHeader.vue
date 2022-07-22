@@ -46,6 +46,7 @@
             v-for="tag in tags"
             :key="tag"
             :to="`${$generateRoute(['issues'])}?category=all&q=tag:${tag}`"
+            v-tooltip="`View all issues tagged ${deslugifyTag(tag).toUpperCase()}`"
             class="flex items-center gap-x-1 uppercase border border-ink-200 rounded-full px-1.5 py-1"
           >
             <span
@@ -54,7 +55,9 @@
                 background: generateColorFromTag(tag)
               }"
             ></span>
-            <span class="text-xxs text-vanilla-400 tracking-wide font-medium"> {{ tag }} </span>
+            <span class="text-xxs text-vanilla-400 tracking-wide font-medium">
+              {{ deslugifyTag(tag) }}
+            </span>
           </nuxt-link>
         </div>
       </div>
@@ -126,6 +129,20 @@ export default class IssueDetailsHeader extends Vue {
      * Return when the issue was first seen in a human-readable form.
      */
     return `${dayjs(this.firstSeen).fromNow(true)} old`
+  }
+
+  /**
+   * Remove hyphens from tag slugs except for cwe tags
+   *
+   * @param  {string} tag
+   * @returns {string}
+   */
+  deslugifyTag(tag: string): string {
+    const cweRegex = new RegExp('^(cwe-)[0-9]+$', 'i')
+
+    if (cweRegex.test(tag)) return String(tag)
+
+    return String(tag).replace(/-/g, ' ')
   }
 }
 </script>

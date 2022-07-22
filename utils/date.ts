@@ -7,7 +7,6 @@ import Calendar from 'dayjs/plugin/calendar'
 dayjs.extend(duration)
 dayjs.extend(relativeTime)
 dayjs.extend(LocalizedFormat)
-dayjs.extend(LocalizedFormat)
 dayjs.extend(Calendar)
 
 enum DurationTypeT {

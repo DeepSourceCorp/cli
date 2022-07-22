@@ -3,7 +3,6 @@ import { DistributionStats } from '~/components/Reports'
 import VTooltip from 'v-tooltip'
 import { IssueDistributionT } from '~/types/reportTypes'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
-import generate from '@babel/generator'
 import { mocksGenerator } from '~/test/mocks'
 
 const props = {

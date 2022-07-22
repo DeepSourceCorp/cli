@@ -1,8 +1,6 @@
 <template>
-  <div class="relative h-full border border-dashed rounded-md border-ink-200">
-    <div
-      class="absolute inset-0 z-10 grid mx-auto rounded-md pointer-events-none place-content-center"
-    >
+  <div class="relative h-full rounded-md pointer-events-none">
+    <div class="absolute inset-0 z-10 grid mx-auto rounded-md place-content-center">
       <p class="text-sm text-center text-vanilla-400">
         <slot name="subtitle">{{ subtitle }}</slot>
       </p>
@@ -13,8 +11,7 @@
       :colors="colors"
       :bar-options="{ stacked: this.chartType === 'bar' && this.stacked }"
       type="axis-mixed"
-      :class="chartType === 'bar' ? 'opacity-40' : 'opacity-80'"
-      class="mx-auto pointer-events-none no-filter:opacity-10 blur-chart"
+      class="mx-auto no-filter:opacity-10 blur-chart opacity-60"
     >
     </z-chart>
   </div>

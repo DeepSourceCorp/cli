@@ -1,5 +1,5 @@
 <template>
-  <div class="h-8 md:w-40">
+  <div class="h-8 md:w-40 z-20">
     <z-select
       v-model="modelValue"
       :disabled="disabled"

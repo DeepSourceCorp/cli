@@ -25,7 +25,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   },
   [ReportPageT.DISTRIBUTION]: {
     title: 'Issue Distribution',
-    description: 'Overview of issues across categories and as detected by analyzers.',
+    description: 'Overview of issues found across categories and Analyzers.',
     hasIssueTable: false
   }
 }

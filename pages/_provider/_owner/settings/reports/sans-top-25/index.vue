@@ -38,32 +38,32 @@
       </template>
 
       <div
-        v-if="historicalValuesLoading"
-        class="h-64 mx-6 mt-6 mb-5 rounded-lg bg-ink-300 animate-pulse"
+        v-show="historicalValuesLoading"
+        class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-      <template v-else>
+      <div v-show="!historicalValuesLoading">
         <z-chart
           v-if="shouldChartBeShown"
           :data-sets="datasets"
           :labels="labels"
-          :colors="['cherry-500']"
+          :colors="chartColors"
           :axis-options="{
             xIsSeries: true
           }"
           :y-axis-max="maxClip"
-          y-axis-min="0"
+          :y-axis-min="0"
           type="line"
         />
-        <div v-else class="h-full p-5 pb-0">
+        <div v-show="!shouldChartBeShown" class="h-full px-5">
           <lazy-empty-chart :count="1" chart-type="line" />
         </div>
-      </template>
+      </div>
     </chart-container>
 
     <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
 
     <div class="overflow-x-auto border rounded-lg border-ink-200">
-      <z-table class="border-none text-vanilla-100">
+      <z-table class="border-none text-vanilla-100 cursor">
         <template #head>
           <z-table-row class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
             <z-table-cell class="flex-none w-16 text-left"> Rank </z-table-cell>
@@ -74,12 +74,28 @@
         </template>
         <template #body>
           <template v-if="complianceIssuesLoading">
-            <div
+            <z-table-row
               v-for="index in 25"
               :key="index"
-              class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
-            ></div>
+              class="text-sm text-vanilla-100 hover:bg-ink-300 gap-x-4 mb-2 h-10 px-2"
+            >
+              <z-table-cell class="flex-none w-14 text-left">
+                <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"></div>
+              </z-table-cell>
+              <z-table-cell class="flex-none w-16 text-left sm:w-24">
+                <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"></div>
+              </z-table-cell>
+              <z-table-cell class="text-left">
+                <div
+                  class="h-full w-100 sm:max-w-sm opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"
+                ></div>
+              </z-table-cell>
+              <z-table-cell class="ml-20 xl:ml-22 text-right sm:flex-initial">
+                <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"></div>
+              </z-table-cell>
+            </z-table-row>
           </template>
+
           <template v-else>
             <z-table-row
               v-for="issue in complianceIssueList"
@@ -95,9 +111,9 @@
                 {{ issue.issueId }}
               </z-table-cell>
               <z-table-cell class="font-normal text-left whitespace-nowrap sm:whitespace-normal">
-                <p class="sm:max-w-lg">{{ issue.title }}</p>
+                <p class="leading-8">{{ issue.title }}</p>
               </z-table-cell>
-              <z-table-cell class="font-semibold text-right sm:flex-initial">
+              <z-table-cell class="ml-20 xl:ml-22 font-semibold text-right sm:flex-initial">
                 {{ issue.occurrence.total }}
               </z-table-cell>
             </z-table-row>
@@ -114,10 +130,10 @@ import { ZChart, ZTable, ZTableCell, ZTableRow } from '@deepsourcelabs/zeal'
 
 import { ReportPageT } from '~/types/reportTypes'
 
-import ReportMixin from '~/mixins/reportMixin'
+import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 
-import { ReportLevel, ReportStatus } from '~/types/types'
+import { ReportLevel } from '~/types/types'
 
 /**
  * Page for displaying the current and historical data of SANS-top-25 issues.
@@ -126,7 +142,7 @@ import { ReportLevel, ReportStatus } from '~/types/types'
   layout: 'dashboard',
   components: { ZChart, ZTable, ZTableCell, ZTableRow }
 })
-export default class OwnerSans extends mixins(OwnerDetailMixin, ReportMixin) {
+export default class OwnerSans extends mixins(OwnerDetailMixin, ComplianceReportMixin) {
   /**
    * Fetch recent stats, compliance issues and trigger chart data fetching.
    *
@@ -138,20 +154,19 @@ export default class OwnerSans extends mixins(OwnerDetailMixin, ReportMixin) {
       await this.fetchOwnerDetails({ login: owner, provider })
     }
 
+    /**
+     * ? Why was fetchReportBase pulled out of Promise.all ->
+     * We need to finish report base query first so we have report.status (passing/failing) available.
+     * Now setChartData will always be triggered AFTER we have report.status available.
+     * So now the chart will always initiate with report.status available and hence, with the correct color.
+     */
+    await this.fetchReportBase(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25)
+
     await Promise.all([
-      this.fetchReportBase(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25),
       this.fetchRecentStats(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25),
       this.fetchComplianceIssues(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25),
       this.setChartData()
     ])
-  }
-
-  get shouldChartBeShown(): boolean {
-    if (this.historicalValuesLoading) return false
-    if (this.labels.length < 2) return false
-    if (this.datasets.length === 0) return false
-
-    return true
   }
 
   /**
@@ -170,14 +185,6 @@ export default class OwnerSans extends mixins(OwnerDetailMixin, ReportMixin) {
         }
       ]
     }
-  }
-
-  get compliancePassed(): boolean {
-    return this.report?.status === ReportStatus.Passing
-  }
-
-  get currentVal(): number {
-    return this.report?.currentValue ?? 0
   }
 }
 </script>

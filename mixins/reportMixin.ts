@@ -130,7 +130,9 @@ export default class ReportMixin extends Vue {
       if (dateRange <= 90) {
         return historicalValues.labels.map((label: string) => formatDate(new Date(label), 'DD MMM'))
       } else {
-        return historicalValues.labels.map((label: string) => formatDate(new Date(label), 'MMM YY'))
+        return historicalValues.labels.map((label: string) =>
+          formatDate(new Date(label), 'MMM YYYY')
+        )
       }
     }
 
@@ -302,7 +304,15 @@ export default class ReportMixin extends Vue {
     )
 
     if (objectId && level && key) {
-      this.historicalValuesLoading = true
+      /**
+       * More often than not, we're hitting Apollo cache but historicalValuesLoading
+       * still changes everytime, causing flixker of empty-chart.
+       * We're adding a manual setTimeout to check if we're hitting cache or not
+       * and setting historicalValues accordingly.
+       */
+      const setTrueTimeout = setTimeout(() => {
+        this.historicalValuesLoading = true
+      }, 20)
       try {
         const response = (await this.$fetchGraphqlData(historicalValues, {
           level,
@@ -311,6 +321,7 @@ export default class ReportMixin extends Vue {
           startDate,
           endDate
         })) as GraphqlQueryResponse
+        clearTimeout(setTrueTimeout)
         this.historicalValues = (await response.data.report?.historicalValues) as HistoricalValues
 
         // Only setting labels in mixin cause they are common accross every page.

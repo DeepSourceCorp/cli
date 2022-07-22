@@ -41,10 +41,10 @@
       </template>
 
       <div
-        v-if="historicalValuesLoading"
-        class="h-64 mx-6 mt-6 mb-5 rounded-lg bg-ink-300 animate-pulse"
+        v-show="historicalValuesLoading"
+        class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-      <template v-else>
+      <div v-show="!historicalValuesLoading">
         <z-chart
           v-if="shouldChartBeShown"
           :data-sets="issueDistributionData"
@@ -59,10 +59,10 @@
           :y-axis-min="0"
           type="bar"
         ></z-chart>
-        <div v-else class="h-full p-5 pb-0">
+        <div v-show="!shouldChartBeShown" class="h-full px-5">
           <lazy-empty-chart :count="5" chart-type="bar" :stacked="true" />
         </div>
-      </template>
+      </div>
     </chart-container>
 
     <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
