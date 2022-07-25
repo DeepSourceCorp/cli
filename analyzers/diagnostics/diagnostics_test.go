@@ -306,6 +306,12 @@ func TestCheckField(t *testing.T) {
 
 	tests := []test{
 		{
+			description: "empty field",
+			line:        `# shortcode = "@deepsourcelabs/2do-checker"`,
+			field:       "",
+			want:        false,
+		},
+		{
 			description: "field with comment",
 			line:        `# shortcode = "@deepsourcelabs/2do-checker"`,
 			field:       "shortcode",
