@@ -19,6 +19,7 @@ func TestAnalyzerRun(t *testing.T) {
 	/* =============================================================================
 	// Copying the todo-checker directory to $APP_PATH for the integration tests
 	/* ============================================================================= */
+	log.Println("Testing dry-run command")
 	cwd, _ := os.Getwd()
 
 	analyzerPath := path.Join(cwd, "todo-checker")
@@ -27,7 +28,8 @@ func TestAnalyzerRun(t *testing.T) {
 		appPath = "/app/"
 	}
 
-	// Copy all the files to APP_PATH
+	// Copy all the files to APP_PATH.
+	log.Println("Copying the todo-checker example Analyzer directory to", appPath)
 	cmd := exec.Command("cp", "-a", analyzerPath+"/.", ".")
 	cmd.Dir = appPath
 
@@ -43,6 +45,7 @@ func TestAnalyzerRun(t *testing.T) {
 	}
 
 	// Create the file to watch.
+	log.Printf("Creating the file %s/analysis_results.json to watch for any analysis results", appPath)
 	os.Create(fmt.Sprintf("%s/analysis_results.json", appPath))
 
 	// Watch for the output file for any changes. Once the file is written, kill the dry-run process.
@@ -62,10 +65,10 @@ func TestAnalyzerRun(t *testing.T) {
 				}
 				t.Log("Event:", event)
 				if event.Op&fsnotify.Write == fsnotify.Write {
-					t.Log("Modified file:", event.Name)
+					t.Log("Received write event for the results file. Modified file:", event.Name)
 
 					// Kill the process once the file has been modified(the results have been received).
-					log.Println("KILLING THE PROCESS")
+					log.Println("dry-run tested. KILLING THE PROCESS.")
 					analysisCmd.Process.Kill()
 
 					/* =============================================================================
@@ -79,7 +82,7 @@ func TestAnalyzerRun(t *testing.T) {
 					if err != nil {
 						t.Errorf("Failed to read the expected analysis result. Error:%s", err)
 					}
-					if !bytes.Equal(receivedAnalysisResults, expectedAnalysisResults) {
+					if !cmp.Equal(receivedAnalysisResults, expectedAnalysisResults) {
 						diff := cmp.Diff(receivedAnalysisResults, expectedAnalysisResults)
 						t.Errorf("Failed to verify analysis results. Expected: %s\n==========\nGot: %s\n=========\nDiff:%s", expectedAnalysisResults, receivedAnalysisResults, diff)
 					}
@@ -105,7 +108,6 @@ func TestAnalyzerRun(t *testing.T) {
 
 	analysisCmd = exec.Command("/tmp/deepsource", "analyzer", "dry-run", analyzerPath, "--output-file", appPath)
 	analysisCmd.Dir = appPath
-	analysisCmd.Env = []string{"TOOLBOX_PATH=/toolbox", "CODE_PATH=/code"}
 
 	var stdout1, stderr1 bytes.Buffer
 	analysisErr := analysisCmd.Run()

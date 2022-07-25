@@ -1,58 +1,52 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
-	"os/exec"
+	"path"
 	"strings"
 )
 
 var (
-	issues       []Diagnostic
+	issues       []Issue
 	analysisConf *AnalysisConfig
 	toolboxPath  string = os.Getenv("TOOLBOX_PATH")
+	codePath     string = os.Getenv("CODE_PATH")
 )
 
 func main() {
 	var err error
 
-	cmd := exec.Command("ls", "-ltr")
-	cmd.Dir = toolboxPath
+	fmt.Println("CODE_PATH = ", os.Getenv("CODE_PATH"))
+	fmt.Println("TOOLBOX_PATH = ", os.Getenv("TOOLBOX_PATH"))
 
-	var stdout, stderr bytes.Buffer
-	cmd.Stdout = &stdout
-	cmd.Stderr = &stderr
-
-	err = cmd.Run()
-	outStr, _ := stdout.String(), stderr.String()
-	if err != nil {
-		fmt.Println(err)
-	}
-	fmt.Println(outStr)
-
-	log.Println("Parsing analysis_config.json...")
+	fmt.Println("Parsing analysis_config.json...")
 	if analysisConf, err = readAnalysisConfig(); err != nil {
 		log.Fatalln(err)
 	}
 
+	fmt.Println("Resolving files and running analysis...")
 	for _, path := range analysisConf.Files {
-		content, err := ioutil.ReadFile(string(path.URI))
+		content, err := ioutil.ReadFile(path)
 		if err != nil {
-			log.Fatal(err)
+			fmt.Printf("Failed to read file: %s. Error: %s", path, err)
+			continue
 		}
 		lines := strings.Split(string(content), "\n")
 		for lineNumber, line := range lines {
 			if strings.Contains(line, "TODO") {
-				createIssue(string(path.URI), lineNumber, 0)
+				createIssue(path, lineNumber, 0)
+				createDummyIssue(path, lineNumber, 0)
 			}
 		}
 	}
-	macroAnalysisResult := prepareResult()
+	fmt.Println("Preparing analysis result...")
+	analysisResult := prepareResult()
 
-	if writeError := writeMacroResult(&macroAnalysisResult); writeError != nil {
+	fmt.Println("Writing the result to", path.Join(toolboxPath, "analysis_results.json"))
+	if writeError := writeMacroResult(analysisResult); writeError != nil {
 		log.Fatalln("Error occured while writing results:", writeError)
 	}
 }

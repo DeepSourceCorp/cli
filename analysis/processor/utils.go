@@ -80,24 +80,24 @@ func createIssueFileRange(report types.AnalysisResult) []IssueRange {
 func (p *ReportProcessor) formatLSPResultsToDefault() types.AnalysisResult {
 	analysisResult := types.AnalysisResult{}
 	analysisResult.IsPassed = p.Report.IsPassed
-	analysisResult.Metrics = append(p.Report.Metrics, analysisResult.Metrics...)
-	analysisResult.Errors = append(p.Report.Errors, analysisResult.Errors...)
+	analysisResult.Metrics = append(analysisResult.Metrics, p.Report.Metrics...)
+	analysisResult.Errors = append(analysisResult.Errors, p.Report.Errors...)
 
 	// Appending the issues to the default format of Analysis report
 	for _, issue := range p.Report.Issues {
 		analysisIssue := types.Issue{
 			IssueCode: issue.Code,
-			IssueText: issue.Message,
+			IssueText: issue.Title,
 			Location: types.Location{
-				Path: p.sanitizeFilePath(issue.RelatedInformation[0].Location.URI),
+				Path: p.sanitizeFilePath(issue.Location.Path),
 				Position: types.Position{
 					Begin: types.Coordinate{
-						Line:   issue.Range.Start.Line,
-						Column: issue.Range.Start.Character,
+						Line:   issue.Location.Position.Begin.Line,
+						Column: issue.Location.Position.Begin.Column,
 					},
 					End: types.Coordinate{
-						Line:   issue.Range.End.Line,
-						Column: issue.Range.End.Character,
+						Line:   issue.Location.Position.End.Line,
+						Column: issue.Location.Position.End.Column,
 					},
 				},
 			},

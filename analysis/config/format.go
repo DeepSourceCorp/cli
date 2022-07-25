@@ -1,28 +1,14 @@
 package config
 
-import (
-	"github.com/deepsourcelabs/cli/analysis/lsp"
-)
-
 /* Formats the analysis config data in the form of the LSP format as defined in
  * the `analysis/types.go` */
 func (r *AnalysisRun) formatAnalysisConfigToLSP() *AnalysisConfig {
 	anaConfig := AnalysisConfig{
+		Files:           r.AnalysisFiles,
+		ExcludeFiles:    r.ExcludedFiles,
+		TestFiles:       r.TestFiles,
 		ExcludePatterns: r.DSConfig.ExcludePatterns,
 		TestPatterns:    r.DSConfig.TestPatterns,
-	}
-
-	// Store the files, test files and excluded files in the LSP based analysis config
-	for _, file := range r.AnalysisFiles {
-		anaConfig.Files = append(anaConfig.Files, lsp.TextDocumentItem{URI: lsp.DocumentURI(file)})
-	}
-
-	for _, testFile := range r.TestFiles {
-		anaConfig.TestFiles = append(anaConfig.TestFiles, lsp.TextDocumentItem{URI: lsp.DocumentURI(testFile)})
-	}
-
-	for _, excludedFile := range r.ExcludedFiles {
-		anaConfig.ExcludedFiles = append(anaConfig.ExcludedFiles, lsp.TextDocumentItem{URI: lsp.DocumentURI(excludedFile)})
 	}
 
 	// Read analyzer_meta from DeepSource config (.deepsource.toml) and

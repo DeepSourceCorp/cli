@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	analysis "github.com/deepsourcelabs/cli/analysis/config"
-	"github.com/deepsourcelabs/cli/analysis/lsp"
 )
 
 // isValidUrl tests a string to determine if it is a well-structured url or not.
@@ -30,43 +29,24 @@ func isValidUrl(toTest string) bool {
 // only be resolvable
 func modifyAnalysisConfigFilepaths(analysisConfig *analysis.AnalysisConfig, localCodePath, containerCodePath string) {
 	for idx, file := range analysisConfig.Files {
-		filePath := strings.TrimPrefix(string(file.URI), localCodePath)
-		analysisConfig.Files[idx].URI = lsp.DocumentURI(path.Join(containerCodePath, filePath))
+		filePath := strings.TrimPrefix(file, localCodePath)
+		analysisConfig.Files[idx] = path.Join(containerCodePath, filePath)
 	}
 
 	for idx, file := range analysisConfig.TestFiles {
-		filePath := strings.TrimPrefix(string(file.URI), localCodePath)
-		analysisConfig.TestFiles[idx].URI = lsp.DocumentURI(path.Join(containerCodePath, filePath))
+		filePath := strings.TrimPrefix(file, localCodePath)
+		analysisConfig.TestFiles[idx] = path.Join(containerCodePath, filePath)
 	}
 
-	for idx, file := range analysisConfig.ExcludedFiles {
-		filePath := strings.TrimPrefix(string(file.URI), localCodePath)
-		analysisConfig.ExcludedFiles[idx].URI = lsp.DocumentURI(path.Join(containerCodePath, filePath))
+	for idx, file := range analysisConfig.ExcludeFiles {
+		filePath := strings.TrimPrefix(file, localCodePath)
+		analysisConfig.ExcludeFiles[idx] = path.Join(containerCodePath, filePath)
 	}
 }
 
 // Creates a temporary directory with the name supplied as the parameter
 func createTemporaryDirectory(directoryName string) (string, error) {
 	return os.MkdirTemp("", directoryName)
-}
-
-/* Fetches environment variables like CODE_PATH and TOOLBOX_PATH set by the user
- * Check if the user supplied CODE_PATH and TOOLBOX_PATH, if not
- * use the default values of CODE_PATH and TOOLBOX_PATH  */
-func fetchEnvironmentVariables() {
-	// Set the value of container's code path
-	if _, envVarPresent := os.LookupEnv("CODE_PATH"); envVarPresent {
-		containerCodePath = os.Getenv("CODE_PATH")
-	} else {
-		containerCodePath = "/code"
-	}
-
-	// Set the value of container's toolbox path
-	if _, envVarPresent := os.LookupEnv("TOOLBOX_PATH"); envVarPresent {
-		containerToolBoxPath = os.Getenv("TOOLBOX_PATH")
-	} else {
-		containerToolBoxPath = "/toolbox"
-	}
 }
 
 func (a *AnalyzerDryRun) createTemporaryToolBoxDir() (err error) {

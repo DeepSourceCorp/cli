@@ -33,12 +33,12 @@ type Transformer struct {
 /////////////////////////////////////
 
 type AnalysisConfig struct {
-	Files           []lsp.TextDocumentItem `json:"files"`
-	TestFiles       []lsp.TextDocumentItem `json:"test_files"`
-	ExcludedFiles   []lsp.TextDocumentItem `json:"excluded_files"`
-	ExcludePatterns []string               `json:"exclude_patterns"`
-	TestPatterns    []string               `json:"test_patterns"`
-	AnalyzerMeta    interface{}            `json:"analyzer_meta"`
+	Files           []string    `json:"files"`
+	ExcludePatterns []string    `json:"exclude_patterns"`
+	ExcludeFiles    []string    `json:"exclude_files"`
+	TestFiles       []string    `json:"test_files"`
+	TestPatterns    []string    `json:"test_patterns"`
+	AnalyzerMeta    interface{} `json:"analyzer_meta"`
 }
 
 //////////////////////////////////////
