@@ -209,6 +209,11 @@ func prepareCodeFrame(lineNum int, lines []string) string {
 
 // checkField checks if the line contains the field.
 func checkField(line, field string) bool {
+	// Sometimes validation errors have a blank field name. In that case, checkField should return false.
+	if field == "" {
+		return false
+	}
+
 	// We use fieldRegexp for checking if the current line is a field or not.
 	// If it's not a field, for example, comments for explanation, etc., then checkField should return false.
 	exp := regexp.MustCompile(fieldRegexp)
