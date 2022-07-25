@@ -36,8 +36,9 @@ func getMissingRequiredFields(err error, config interface{}) []string {
 func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 	var usefulResponse, expectedType, receivedType, fieldName, decodeErrorMessage string
 
-	// We match for go-toml's StrictMissingError, as the decoder returns a StrictMissingError when there exists a mismatch between the destination and the extracted fields.
+	// We check for go-toml's StrictMissingError, as the decoder returns a StrictMissingError when there exists a mismatch between the destination and the extracted fields.
 	// go-toml doesn't return the field name associated with the error, however, StrictMissingError returns a human-readable codeframe, which can be used to extract the error-causing fields.
+	// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#example-Decoder.DisallowUnknownFields
 
 	var strictMissingError *toml.StrictMissingError
 	if errors.As(err, &strictMissingError) {
@@ -145,7 +146,7 @@ func parseCodeframe(codeframe string) []string {
 	// Compile a regular expression for matching fields.
 	exp := regexp.MustCompile(codeframeFieldRegexp)
 
-	// This is added a safety check. pelletier/go-toml/v2 doesn't return codeframes lesser than 2 lines.
+	// This is added as a safety check. pelletier/go-toml/v2 doesn't return codeframes lesser than 2 lines.
 	if len(lines) < 2 {
 		return []string{""}
 	}
