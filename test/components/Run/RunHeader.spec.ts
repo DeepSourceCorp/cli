@@ -266,11 +266,6 @@ describe('[[ RunHeader ]]', () => {
     expect(vm.getStatusIconColor(RunStatus.Fail)).toBe('cherry')
   })
 
-  test('`statusText` returns the text corresponding to `status`', () => {
-    const vm = getInstance()
-    expect(vm.getStatusText(RunStatus.Fail)).toBe('Failed after')
-  })
-
   test('`isPending` returns `true` if `status` is in pending state', () => {
     const vm = getInstance({ status: 'PEND' })
     expect(vm.isPending).toBe(true)

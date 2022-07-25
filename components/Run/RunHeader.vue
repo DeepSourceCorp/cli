@@ -13,8 +13,8 @@
         </div>
         <z-tag class="border border-ink-200 py-0.5 px-2 hidden md:inline-flex" spacing="">
           <z-icon
-            :icon="getStatusIcon(currentCheck.status)"
-            :color="getStatusIconColor(currentCheck.status)"
+            :icon="getCheckStatusIcon(currentCheck.status)"
+            :color="getCheckStatusIconColor(currentCheck.status)"
             class="flex-shrink-0"
             :class="{ 'motion-safe:animate-spin': isCheckPending }"
           />
@@ -247,7 +247,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {string} The icon name to be used to represent the given status
    */
   getStatusIcon(status: RunStatus): string {
-    const types: Record<string, string> = {
+    const types: Record<RunStatus, string> = {
       [RunStatus.Pass]: 'check',
       [RunStatus.Fail]: 'x',
       [RunStatus.Pend]: 'spin-loader',
@@ -265,31 +265,13 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {string} The icon color to be used to represent the given status
    */
   getStatusIconColor(status: RunStatus): string {
-    const types: Record<string, string> = {
+    const types: Record<RunStatus, string> = {
       [RunStatus.Pass]: 'juniper',
       [RunStatus.Fail]: 'cherry',
       [RunStatus.Pend]: 'vanilla-100',
       [RunStatus.Timo]: 'honey',
       [RunStatus.Cncl]: 'honey',
       [RunStatus.Read]: 'vanilla-400'
-    }
-    return types[status || 'PASS']
-  }
-
-  /**
-   * Get a status string to describe a given run's status.
-   *
-   * @param {string} status The run's status
-   * @returns {string} A string that can be used to display the given run status
-   */
-  getStatusText(status: RunStatus): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: this.finishedIn ? 'Passed in' : 'Passed',
-      [RunStatus.Fail]: this.finishedIn ? 'Failed after' : 'Failed',
-      [RunStatus.Pend]: 'Analysis in progress',
-      [RunStatus.Timo]: this.finishedIn ? 'Timed out after' : 'Timed out',
-      [RunStatus.Cncl]: this.finishedIn ? 'Cancelled after' : 'Cancelled',
-      [RunStatus.Read]: this.finishedIn ? 'Completed in' : 'Completed'
     }
     return types[status || 'PASS']
   }
@@ -329,15 +311,60 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {string} The text label to be used to represent the current run's status
    */
   get tagLabel(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'Passed',
-      [RunStatus.Fail]: 'Failing',
-      [RunStatus.Pend]: 'Running',
-      [RunStatus.Timo]: 'Timed out',
-      [RunStatus.Cncl]: 'Cancelled',
-      [RunStatus.Read]: 'Ready'
+    const types: Record<CheckStatus, string> = {
+      [CheckStatus.Pass]: 'Passed',
+      [CheckStatus.Fail]: 'Failing',
+      [CheckStatus.Pend]: 'Running',
+      [CheckStatus.Timo]: 'Timed out',
+      [CheckStatus.Cncl]: 'Cancelled',
+      [CheckStatus.Read]: 'Ready',
+      [CheckStatus.Wait]: 'Waiting',
+      [CheckStatus.Atmo]: 'Timed out',
+      [CheckStatus.Neut]: 'Passed'
     }
     return types[this.currentCheck?.status || 'PASS']
+  }
+
+  /**
+   * Get an icon to represent a given check status.
+   *
+   * @param {CheckStatus} status The check's status
+   * @returns {string} The icon name to be used to represent the given status
+   */
+  getCheckStatusIcon(status: CheckStatus): string {
+    const types: Record<CheckStatus, string> = {
+      [CheckStatus.Pass]: 'check',
+      [CheckStatus.Fail]: 'x',
+      [CheckStatus.Pend]: 'timer',
+      [CheckStatus.Timo]: 'timer-reset',
+      [CheckStatus.Cncl]: 'alert-circle',
+      [CheckStatus.Read]: 'check-circle',
+      [CheckStatus.Neut]: 'check',
+      [CheckStatus.Atmo]: 'x',
+      [CheckStatus.Wait]: 'alarm-clock'
+    }
+    return types[status || 'PASS']
+  }
+
+  /**
+   * Get a color to represent a given check status.
+   *
+   * @param {CheckStatus} status The check's status
+   * @returns {string} The icon color to be used to represent the given status
+   */
+  getCheckStatusIconColor(status: CheckStatus): string {
+    const types: Record<CheckStatus, string> = {
+      [CheckStatus.Pass]: 'juniper',
+      [CheckStatus.Fail]: 'cherry',
+      [CheckStatus.Pend]: 'vanilla-400',
+      [CheckStatus.Timo]: 'honey',
+      [CheckStatus.Cncl]: 'honey',
+      [CheckStatus.Read]: 'vanilla-400',
+      [CheckStatus.Neut]: 'vanilla-400',
+      [CheckStatus.Atmo]: 'cherry',
+      [CheckStatus.Wait]: 'honey'
+    }
+    return types[status || 'PASS']
   }
 
   /**
