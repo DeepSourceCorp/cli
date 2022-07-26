@@ -72,7 +72,7 @@ func TestPrepareAnalysisConfig(t *testing.T) {
 			t.Errorf("Failed to read the expected analysis config. Error:%s", err)
 		}
 
-		if cmp.Equal(receivedAnalysisConfig, expectedAnalysisConfig) {
+		if !cmp.Equal(receivedAnalysisConfig, expectedAnalysisConfig) {
 			t.Errorf("Received invalid analysis config. Expected %s\nGot %s\n", string(expectedAnalysisConfig), string(receivedAnalysisConfig))
 		}
 
