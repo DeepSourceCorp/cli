@@ -1,12 +1,7 @@
 <template>
   <z-menu placement="top" class="w-full">
     <template v-slot:trigger="{ toggle, isOpen }">
-      <sidebar-item
-        :is-collapsed="isCollapsed"
-        :active="isOpen"
-        icon="message-square"
-        @click="toggle"
-      >
+      <sidebar-item :is-collapsed="isCollapsed" :active="isOpen" icon="help-circle" @click="toggle">
         Help and support
       </sidebar-item>
     </template>
@@ -31,11 +26,11 @@
         >
         <z-menu-item
           as="a"
-          icon="discord"
-          href="https://deepsource.io/discord"
+          icon="message-square"
+          href="https://discuss.deepsource.io/"
           target="_blank"
           rel="noopener noreferrer"
-          >Join Discord community</z-menu-item
+          >Join DeepSource Discuss</z-menu-item
         >
       </z-menu-section>
     </template>
