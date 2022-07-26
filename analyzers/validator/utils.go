@@ -44,7 +44,7 @@ func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 		return &validationError
 	}
 
-	// Get the DecodeError exported by go-toml
+	// Check if the error is of the type "DecodeError" exported by go-toml.
 	// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#DecodeError
 	var decodeErr *toml.DecodeError
 	if !errors.As(err, &decodeErr) {
@@ -67,7 +67,7 @@ func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 	return &validationError
 }
 
-// handleDecodeErr extracts data about the decoding failure and returns a validation failure response.
+// handleDecodeErr extracts the required data from the decoding errors of the TOML of type other than DecodeError and StrictMissingError and returns a validation failure response.
 func handleDecodeErr(errorMessage, filePath string) ValidationFailure {
 	var usefulResponse, expectedType, receivedType, fieldName, decodeErrorMessage string
 
