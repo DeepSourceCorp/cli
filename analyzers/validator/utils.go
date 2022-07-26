@@ -123,7 +123,7 @@ func handleDecodeErr(errorMessage, filePath string) ValidationFailure {
 }
 
 // handleStrictMissingError handles StrictMissingError reported by go-toml, and returns a validation failure response.
-func handleStrictMissingError(err error, strictMissingError *toml.StrictMissingError, filePath string) ValidationFailure {
+func handleStrictMissingError(strictMissingError *toml.StrictMissingError, filePath string) ValidationFailure {
 	// Extract human-readable codeframe.
 	codeframe := strictMissingError.String()
 
