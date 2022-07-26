@@ -33,8 +33,6 @@ func getMissingRequiredFields(err error, config interface{}) []string {
 
 // Handle decoding errors reported by go-toml
 func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
-	var usefulResponse, expectedType, receivedType, fieldName, decodeErrorMessage string
-
 	// We check for go-toml's StrictMissingError, as the decoder returns a StrictMissingError when there exists a mismatch between the destination and the extracted fields.
 	// go-toml doesn't return the field name associated with the error, however, StrictMissingError returns a human-readable codeframe, which can be used to extract the error-causing fields.
 	// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#example-Decoder.DisallowUnknownFields
@@ -50,26 +48,29 @@ func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 	// Ref: https://pkg.go.dev/github.com/pelletier/go-toml/v2#DecodeError
 	var decodeErr *toml.DecodeError
 	if !errors.As(err, &decodeErr) {
-		decodeErrorMessage = err.Error()
 		validationError := ValidationFailure{
 			File: filePath,
 			Errors: []ErrorMeta{
 				{
 					Level:   DecodeErr,
 					Field:   "",
-					Message: decodeErrorMessage,
+					Message: err.Error(),
 				},
 			},
 		}
 		return &validationError
 	}
 
-	/* =================================================
-	 * Extract the data about the decoding failure and return
-	 * a validation failure response
-	 * ================================================= */
-
+	// Handle DecodeErr.
 	errorMessage := decodeErr.Error()
+	validationError := handleDecodeErr(errorMessage, filePath)
+	return &validationError
+}
+
+// handleDecodeErr extracts data about the decoding failure and returns a validation failure response.
+func handleDecodeErr(errorMessage, filePath string) ValidationFailure {
+	var usefulResponse, expectedType, receivedType, fieldName, decodeErrorMessage string
+
 	// Error case 1: `toml: cannot decode TOML integer into struct field types.AnalyzerTOML.Name of type string"`
 	if strings.HasPrefix(errorMessage, "toml: cannot decode TOML") {
 
@@ -108,10 +109,11 @@ func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 			},
 		},
 	}
-	return &validationError
+
+	return validationError
 }
 
-// handleStrictMissingError handles StrictMissingError reported by go-toml, and returns a ValidationFailure.
+// handleStrictMissingError handles StrictMissingError reported by go-toml, and returns a validation failure response.
 func handleStrictMissingError(err error, strictMissingError *toml.StrictMissingError, filePath string) ValidationFailure {
 	// Extract human-readable codeframe.
 	codeframe := strictMissingError.String()
