@@ -66,7 +66,7 @@ func prepareResult() AnalysisResult {
 	return result
 }
 
-func writeMacroResult(result AnalysisResult) error {
+func writeMacroResult(result AnalysisResult) error { // skipcq: CRT-P0003
 	resultJSON, err := json.Marshal(result)
 	if err != nil {
 		return err
