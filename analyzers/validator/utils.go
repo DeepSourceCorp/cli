@@ -48,7 +48,7 @@ func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 
 	var strictMissingError *toml.StrictMissingError
 	if errors.As(err, &strictMissingError) {
-		validationError := handleStrictMissingError(err, strictMissingError, filePath)
+		validationError := handleStrictMissingError(strictMissingError, filePath)
 
 		return &validationError
 	}
