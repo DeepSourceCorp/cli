@@ -8,7 +8,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 )
 
-func TestParseCodeframe(t *testing.T) {
+func TestParseTOMLErrorCodeFrame(t *testing.T) {
 	type test struct {
 		description   string
 		codeframePath string
@@ -26,6 +26,16 @@ func TestParseCodeframe(t *testing.T) {
 			codeframePath: "./testdata/codeframe/codeframe.txt",
 			want:          []string{"key2"},
 		},
+		{
+			description:   "codeframe with mixed formats",
+			codeframePath: "./testdata/codeframe/codeframe_mixed.txt",
+			want:          []string{""},
+		},
+		{
+			description:   "codeframe with spaces",
+			codeframePath: "./testdata/codeframe/codeframe_spaces.txt",
+			want:          []string{"key2"},
+		},
 	}
 
 	for _, tc := range tests {
@@ -38,7 +48,7 @@ func TestParseCodeframe(t *testing.T) {
 		codeframe := string(fileContent)
 		codeframe = strings.TrimSpace(codeframe)
 
-		got := parseCodeframe(codeframe)
+		got := parseTOMLErrorCodeFrame(codeframe)
 
 		diff := cmp.Diff(got, tc.want)
 		if len(diff) != 0 {

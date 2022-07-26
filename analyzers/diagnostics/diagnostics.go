@@ -155,8 +155,8 @@ func getDiagnosticsFromFile(filename string, errors []validator.ErrorMeta) []Dia
 	// Iterate over each error and check line-by-line.
 	for _, err := range errors {
 		for lineNum, line := range lines {
-			result := checkField(line, err.Field)
-			if result {
+			containsField := checkField(line, err.Field)
+			if containsField {
 				// If the line contains the field name, and if it doesn't have a comment prefix, then we can proceed to diagnostic generation.
 				// if strings.Contains(line, err.Field) && !strings.HasPrefix(line, "#") {
 				// Prepare code frame for the current line.
