@@ -75,9 +75,9 @@ func TestHandleTOMLDecodeErrors(t *testing.T) {
 		{
 			description: "test error",
 			err:         errors.New("test error"),
-			filePath:    "hello.go",
+			filePath:    "analyzer.toml",
 			want: &ValidationFailure{
-				File: "hello.go",
+				File: "analyzer.toml",
 				Errors: []ErrorMeta{
 					{
 						Message: "test error",
@@ -88,9 +88,9 @@ func TestHandleTOMLDecodeErrors(t *testing.T) {
 		{
 			description: "DecodeErr",
 			err:         &sampleDecodeErr,
-			filePath:    "hello.go",
+			filePath:    "analyzer.toml",
 			want: &ValidationFailure{
-				File: "hello.go",
+				File: "analyzer.toml",
 				Errors: []ErrorMeta{
 					{
 						Field:   "name",
@@ -127,9 +127,9 @@ func TestHandleStrictMissingError(t *testing.T) {
 					constructDecodeErr("strict mode: fields in the document are missing in the target struct", 1, 1, "./testdata/codeframe/codeframe.txt"),
 				},
 			},
-			filePath: "hello.go",
+			filePath: "analyzer.toml",
 			want: ValidationFailure{
-				File: "hello.go",
+				File: "analyzer.toml",
 				Errors: []ErrorMeta{
 					{
 						Field:   "key2",
@@ -162,9 +162,9 @@ func TestHandleDecodeError(t *testing.T) {
 		{
 			description: "cannot decode TOML",
 			errMessage:  "toml: cannot decode TOML integer into struct field types.AnalyzerTOML.Name of type string",
-			filePath:    "hello.go",
+			filePath:    "analyzer.toml",
 			want: ValidationFailure{
-				File: "hello.go",
+				File: "analyzer.toml",
 				Errors: []ErrorMeta{
 					{
 						Field:   "name",
@@ -176,9 +176,9 @@ func TestHandleDecodeError(t *testing.T) {
 		{
 			description: "cannot store in Go slice",
 			errMessage:  "toml: cannot store TOML string into a Go slice",
-			filePath:    "hello.go",
+			filePath:    "analyzer.toml",
 			want: ValidationFailure{
-				File: "hello.go",
+				File: "analyzer.toml",
 				Errors: []ErrorMeta{
 					{
 						Field:   "",
@@ -190,9 +190,9 @@ func TestHandleDecodeError(t *testing.T) {
 		{
 			description: "random decoding error",
 			errMessage:  "toml: random error",
-			filePath:    "hello.go",
+			filePath:    "analyzer.toml",
 			want: ValidationFailure{
-				File: "hello.go",
+				File: "analyzer.toml",
 				Errors: []ErrorMeta{
 					{
 						Field:   "",

@@ -150,22 +150,32 @@ func getDiagnosticsFromFile(filename string, errors []validator.ErrorMeta) []Dia
 
 	diagnostics := []Diagnostic{}
 
+	// Get filename (base path) from absolute file path.
+	filename = filepath.Base(filename)
+
 	lines := strings.Split(string(fileContent), "\n")
 
 	// Iterate over each error and check line-by-line.
 	for _, err := range errors {
 		for lineNum, line := range lines {
+			// If the field is empty, do NOT render the codeframe.
+			if err.Field == "" {
+				diag := Diagnostic{
+					Filename:     filename,
+					Line:         lineNum,
+					Codeframe:    "",
+					ErrorMessage: err.Message,
+				}
+
+				diagnostics = append(diagnostics, diag)
+				break
+			}
+
 			containsField := checkField(line, err.Field)
 			if containsField {
-				// If the line contains the field name, and if it doesn't have a comment prefix, then we can proceed to diagnostic generation.
-				// if strings.Contains(line, err.Field) && !strings.HasPrefix(line, "#") {
 				// Prepare code frame for the current line.
 				codeFrame := prepareCodeFrame(lineNum, lines)
 
-				// Get filename (base path) from absolute file path.
-				filename := filepath.Base(filename)
-
-				// Generate a diagnostic.
 				diag := Diagnostic{
 					Filename:     filename,
 					Line:         lineNum,
@@ -209,10 +219,6 @@ func prepareCodeFrame(lineNum int, lines []string) string {
 
 // checkField checks if the line contains the field.
 func checkField(line, field string) bool {
-	// Sometimes validation errors have a blank field name. In that case, checkField should return false.
-	if field == "" {
-		return false
-	}
 
 	// We use fieldRegexp for checking if the current line is a field or not.
 	// If it's not a field, for example, comments for explanation, etc., then checkField should return false.

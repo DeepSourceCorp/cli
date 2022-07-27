@@ -103,7 +103,6 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 
 	a.Spinner.StartSpinnerWithLabel("Validating analyzer.toml...", "Verified analyzer.toml")
 	a.AnalyzerTOMLData, analyzerTOMLValidationErrors, err = validator.ValidateAnalyzerTOML(analyzerTOMLPath)
-	// TODO: Handle err here
 	if err != nil {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)

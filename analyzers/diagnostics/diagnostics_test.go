@@ -309,7 +309,7 @@ func TestCheckField(t *testing.T) {
 			description: "empty field",
 			line:        `# shortcode = "@deepsourcelabs/2do-checker"`,
 			field:       "",
-			want:        false,
+			want:        true,
 		},
 		{
 			description: "field with comment",
