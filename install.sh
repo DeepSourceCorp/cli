@@ -412,13 +412,16 @@ adjust_arch
 
 log_info "found version: ${VERSION} for ${TAG}/${OS}/${ARCH}"
 
+# check for these environment variables (CI)
+# https://github.com/watson/ci-info/blob/master/vendors.json
+ci_vars="APPVEYOR SYSTEM_TEAMFOUNDATIONCOLLECTIONURI AC_APPCIRCLE bamboo_planKey BITBUCKET_COMMIT BITRISE_IO BUDDY_WORKSPACE_ID BUILDKITE CI CIRCLECI CIRRUS_CI CODEBUILD_BUILD_ARN CF_BUILD_ID CI_NAME DRONE DSARI EAS_BUILD GITHUB_ACTIONS GITLAB_CI GO_PIPELINE_LABEL LAYERCI HUDSON_URL JENKINS_URL MAGNUM NETLIFY NEVERCODE RENDER SAILCI SEMAPHORE SCREWDRIVER SHIPPABLE TDDIUM STRIDER TEAMCITY_VERSION TRAVIS NOW_BUILDER APPCENTER_BUILD_ID"
+
 # check_vars checks environment variables and determines the version of the CLI to be pulled.
 check_vars()
 {
     ci_vars_count=0
-    var_names=("$@")
-    for var_name in "${var_names[@]}"; do
-        if [ ! -z "${!var_name}" ]; then
+    for var_name in $ci_vars; do
+        if [ -n "${!var_name}" ]; then
           log_info "$var_name has the value: ${!var_name}"
           ((ci_vars_count=ci_vars_count+1))
         fi
@@ -438,9 +441,7 @@ check_vars()
     fi
 }
 
-# check for these environment variables (CI)
-# https://github.com/watson/ci-info/blob/master/vendors.json
-check_vars APPVEYOR SYSTEM_TEAMFOUNDATIONCOLLECTIONURI AC_APPCIRCLE bamboo_planKey BITBUCKET_COMMIT BITRISE_IO BUDDY_WORKSPACE_ID BUILDKITE CI CIRCLECI CIRRUS_CI CODEBUILD_BUILD_ARN CF_BUILD_ID CI_NAME DRONE DSARI EAS_BUILD GITHUB_ACTIONS GITLAB_CI GO_PIPELINE_LABEL LAYERCI HUDSON_URL JENKINS_URL MAGNUM NETLIFY NEVERCODE RENDER SAILCI SEMAPHORE SCREWDRIVER SHIPPABLE TDDIUM STRIDER TEAMCITY_VERSION TRAVIS NOW_BUILDER APPCENTER_BUILD_ID
+check_vars
 
 TARBALL=${NAME}.${FORMAT}
 
