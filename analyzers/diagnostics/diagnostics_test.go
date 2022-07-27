@@ -358,7 +358,7 @@ func TestPrepareCodeFrame(t *testing.T) {
 	tests := []test{
 		{
 			description:   "single line",
-			lineNum:       1,
+			lineNum:       0,
 			linesFilename: "./testdata/test_codeframe/single_line/test.toml",
 			wantFilename:  "./testdata/test_codeframe/single_line/test_want.toml",
 		},
@@ -384,7 +384,7 @@ func TestPrepareCodeFrame(t *testing.T) {
 				t.Errorf("error raised while running test (%s): %s\n", tc.description, err)
 			}
 			linesStr := string(fileContentLines)
-			lines := strings.Split(linesStr, "\n")
+			lines := strings.Split(strings.TrimRight(linesStr, " "), "\n")
 
 			// Prepare code frame.
 			got := prepareCodeFrame(tc.lineNum, lines)
