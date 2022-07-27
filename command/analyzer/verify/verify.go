@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/deepsourcelabs/cli/analyzers/diagnostics"
 	"github.com/deepsourcelabs/cli/analyzers/validator"
 	"github.com/deepsourcelabs/cli/types"
 	"github.com/deepsourcelabs/cli/utils"
@@ -112,8 +113,16 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	if analyzerTOMLValidationErrors != nil && len(analyzerTOMLValidationErrors.Errors) > 0 {
 		configurationValid = false
 		a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)
-		for _, err := range analyzerTOMLValidationErrors.Errors {
-			fmt.Printf("  %s\n", utils.GetBulletMessage(err.Message, "red"))
+
+		// Get diagnostics.
+		reportedDiagnostics, err := diagnostics.GetDiagnostics(*analyzerTOMLValidationErrors)
+		if err != nil {
+			a.Spinner.StopSpinnerWithError("Failed to verify analyzer.toml", err)
+		}
+
+		// Print diagnostics to the console.
+		for _, diagnostic := range reportedDiagnostics {
+			fmt.Printf("%s\n", diagnostic)
 		}
 	}
 	a.Spinner.StopSpinner()
@@ -123,20 +132,27 @@ func (a *AnalyzerVerifyOpts) verifyAnalyzer() (err error) {
 	 * ==================================== */
 
 	a.Spinner.StartSpinnerWithLabel("Validating issue descriptions...", "Verified issue descriptions")
+
 	if issuesValidationErrors, err = validator.ValidateIssueDescriptions(issuesDirPath); err != nil {
 		configurationValid = false
-		a.Spinner.StopSpinnerWithError("Failed to validate the issues", err)
+		a.Spinner.StopSpinnerWithError("Failed to validate issues", err)
 	}
 
 	// Check for validation errors in analyzer issues and display them (if any)
 	if issuesValidationErrors != nil && len(*issuesValidationErrors) > 0 {
 		configurationValid = false
-		a.Spinner.StopSpinnerWithError("Failed to validate the following issues", err)
+    
+		a.Spinner.StopSpinnerWithError("Failed to validate these issues:", err)
 		for _, validationError := range *issuesValidationErrors {
-			fmt.Printf("  > %s\n", validationError.File)
-			for _, err := range validationError.Errors {
-				failureMsg := utils.GetBulletMessage(err.Message, "red")
-				fmt.Printf("    %s\n", failureMsg)
+			// Get diagnostics.
+			reportedDiagnostics, err := diagnostics.GetDiagnostics(validationError)
+			if err != nil {
+				a.Spinner.StopSpinnerWithError("Failed to validate the following issues", err)
+			}
+
+			// Print diagnostics to the console.
+			for _, diagnostic := range reportedDiagnostics {
+				fmt.Printf("%s\n", diagnostic)
 			}
 		}
 	}

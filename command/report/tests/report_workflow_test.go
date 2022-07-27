@@ -25,7 +25,6 @@ const (
 
 func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	req, _ := ioutil.ReadAll(r.Body)
-	log.Println(string(req))
 
 	// Read test graphql request body artifact file
 	requestBodyData, err := ioutil.ReadFile("./dummy/report_graphql_request_body.json")
@@ -86,10 +85,6 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 	cmd.Stderr = &stderr
 
 	err = cmd.Run()
-
-	outStr, errStr := stdout.String(), stderr.String()
-	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
-
 	if err != nil {
 		t.Errorf("Error executing deepsource CLI command: %v", err)
 	}
@@ -116,13 +111,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 	cmd.Stderr = &stderr
 
 	err := cmd.Run()
-
-	outStr, errStr := stdout.String(), stderr.String()
-	log.Printf("== Run deepsource CLI command ==\n%s\n%s\n", outStr, errStr)
-
 	if err != nil {
-		log.Println(outStr)
-		log.Println(errStr)
 		t.Errorf("Error executing deepsource CLI command: %v", err)
 	}
 }
