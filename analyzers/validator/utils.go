@@ -21,7 +21,13 @@ strict mode: fields in the document are missing in the target struct
  | ~~~~ missing field
 4| key3 = "value3"
 */
-var codeframeFieldRegexp = `\d\s*[|]\s*(?P<field>\w+)\s*=\s*\S*`
+const codeframeFieldRegexp = `\d\s*[|]\s*(?P<field>\w+)\s*=\s*\S*`
+
+// cannotStoreTOMLRegexp is a regular expression used for matching error messages starting with "toml: cannot store TOML" produced by go-toml.
+const cannotStoreTOMLRegexp = `toml: cannot store TOML (?P<type>\w+) into a Go (?P<expected_type>\w+)`
+
+// cannotDecodeTOMLRegexp is a regular expression used for matching error messages starting with "toml: cannot decode TOML" produced by go-toml.
+const cannotDecodeTOMLRegexp = `toml: cannot decode TOML (?P<type>\w+) into struct field (?P<field>\S+) of type (?P<expected_type>\w+)`
 
 // Returns the list of required fields from the error message returned by the `go-playground/validator` library
 func getMissingRequiredFields(err error, config interface{}) []string {
@@ -78,30 +84,38 @@ func handleTOMLDecodeErrors(err error, filePath string) *ValidationFailure {
 
 // handleDecodeErr extracts the required data from the decoding errors of the TOML of type other than DecodeError and StrictMissingError and returns a validation failure response.
 func handleDecodeErr(errorMessage, filePath string) ValidationFailure {
-	var usefulResponse, expectedType, receivedType, fieldName, decodeErrorMessage string
+	var fieldName, decodeErrorMessage string
 
 	// Error case 1: `toml: cannot decode TOML integer into struct field types.AnalyzerTOML.Name of type string"`
 	if strings.HasPrefix(errorMessage, "toml: cannot decode TOML") {
 
-		usefulResponse = strings.TrimPrefix(errorMessage, "toml: cannot decode TOML ")
-		responseArray := strings.Split(usefulResponse, " ")
+		// Compile regular expression.
+		exp := regexp.MustCompile(cannotDecodeTOMLRegexp)
 
-		expectedType = responseArray[len(responseArray)-1]
-		receivedType = responseArray[0]
-		fieldData := responseArray[len(responseArray)-4]
-		index := strings.LastIndex(fieldData, ".")
-		fieldName = strings.ToLower(fieldData[index:])
+		// Extract named groups using the regular expression.
+		expectedType := getNamedGroupFromRegexp(exp, errorMessage, "expected_type")
+		receivedType := getNamedGroupFromRegexp(exp, errorMessage, "type")
+		field := getNamedGroupFromRegexp(exp, errorMessage, "field")
+
+		// Since we need to extract the field name from the error message, we need to perform some processing:
+		// 1. We split the field using "." (segmenting the fully qualified field name)
+		// 2. Extract the last section (the field name).
+		// 3. Convert the field name into its representation, i.e., lowercase.
+		fieldSections := strings.Split(field, ".")
+		fieldName = fieldSections[len(fieldSections)-1]
+		fieldName = strings.ToLower(fieldName)
+
 		// Framing the decoding failure error message
 		decodeErrorMessage = fmt.Sprintf("expected the field \"%s\" of type %s. Got %s.", fieldName, expectedType, receivedType)
 
 	} else if strings.HasPrefix(errorMessage, "toml: cannot store TOML") {
-
 		// Error case 2: `toml: cannot store TOML string into a Go slice`
-		usefulResponse = strings.TrimPrefix(errorMessage, "toml: cannot store TOML ")
-		responseArray := strings.Split(usefulResponse, " ")
+		exp := regexp.MustCompile(cannotStoreTOMLRegexp)
 
-		expectedType = responseArray[len(responseArray)-1]
-		receivedType = responseArray[0]
+		// Extract named groups using the regular expression.
+		expectedType := getNamedGroupFromRegexp(exp, errorMessage, "expected_type")
+		receivedType := getNamedGroupFromRegexp(exp, errorMessage, "type")
+
 		decodeErrorMessage = fmt.Sprintf("expected type for one of the fields : %s. Received: %s.", expectedType, receivedType)
 	} else {
 		decodeErrorMessage = errorMessage
@@ -170,17 +184,9 @@ func parseTOMLErrorCodeFrame(codeframe string) []string {
 
 		// Check if the current line contains the "missing field" message.
 		if strings.Contains(currLine, "missing field") {
-			// If yes, use the codeframeFieldRegexp regular expression for matching the previous line to retrieve the field name.
-			matches := exp.FindStringSubmatch(prevLine)
-
-			// Get index for the "field" named group.
-			groupIndex := exp.SubexpIndex("field")
-
-			// Capture match. We proceed only if the groupIndex isn't -1 (group not found), and if the number of matches aren't zero.
-			match := ""
-			if len(matches) != 0 && groupIndex != -1 {
-				match = matches[groupIndex]
-			}
+			// Get the "field" named group using the regular expression.
+			// The source string is prevLine (previous line), as it should contain the field name.
+			match := getNamedGroupFromRegexp(exp, prevLine, "field")
 
 			// Add the field name to fields.
 			field := strings.TrimSpace(match)
@@ -189,4 +195,21 @@ func parseTOMLErrorCodeFrame(codeframe string) []string {
 	}
 
 	return fields
+}
+
+// getNamedGroupFromRegexp extracts a named group using the regular expression.
+func getNamedGroupFromRegexp(exp *regexp.Regexp, source, namedGroup string) string {
+	// Retrieve matches from the source string.
+	matches := exp.FindStringSubmatch(source)
+
+	// Get index for the named group.
+	groupIndex := exp.SubexpIndex(namedGroup)
+
+	// Capture match. We proceed only if the groupIndex isn't -1 (group not found), and if the number of matches aren't zero.
+	match := ""
+	if len(matches) != 0 && groupIndex != -1 {
+		match = matches[groupIndex]
+	}
+
+	return match
 }
