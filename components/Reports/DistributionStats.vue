@@ -20,7 +20,7 @@
           :to="generateLink(stat)"
           :hint-as-tooltip="false"
           :remove-styles="true"
-          class="outline-ink-200 hover:bg-ink-300 gap-y-4 p-2"
+          class="outline-ink-200 hover:bg-ink-300 p-3 md:p-4"
         >
           <template slot="title">
             <h5 class="flex items-center text-base font-medium gap-x-2 text-vanilla-100">
