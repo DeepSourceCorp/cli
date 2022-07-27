@@ -1,4 +1,9 @@
 project_name: deepsource
+
+before:
+  hooks:
+    - ../../scripts/gen-completions.sh
+
 builds:
   -
     env:
@@ -57,4 +62,9 @@ brews:
     homepage: "https://github.com/deepsourcelabs/cli"
     description: "Command line interface to DeepSource"
     license: "BSD 2-Clause Simplified License"
+    install: |
+      bin.install "deepsource"
+      bash_completion.install "completions/deepsource.bash" => "deepsource"
+      zsh_completion.install "completions/deepsource.zsh" => "_deepsource"
+      fish_completion.install "completions/deepsource.fish"
     skip_upload: auto
