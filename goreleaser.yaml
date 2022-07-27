@@ -1,6 +1,7 @@
 project_name: deepsource
 builds:
-  -
+  - id: "tcv-deepsource"
+    main: ./cmd/deepsource_tcv/main.go
     env:
       - CGO_ENABLED=0
     flags:
@@ -8,7 +9,40 @@ builds:
     goos:
       - freebsd
       - openbsd
-      - netbsd
+        # TODO: figure out netbsd builds
+        # - netbsd
+      - linux
+      - darwin
+    goarch:
+      - 386
+      - amd64
+      - arm64
+    ldflags:
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+  - id: "windows-tcv-deepsource"
+    main: ./cmd/deepsource_tcv/main.go
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -tags=static_all
+    goos:
+      - windows
+    goarch:
+      - amd64
+    ldflags:
+      - buildmode=exe
+      - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
+  - id: "deepsource"
+    main: ./cmd/deepsource/main.go
+    env:
+      - CGO_ENABLED=0
+    flags:
+      - -tags=static_all
+    goos:
+      - freebsd
+      - openbsd
+         # TODO: figure out netbsd builds
+        # - netbsd
       - linux
       - darwin
     goarch:
@@ -18,6 +52,7 @@ builds:
     ldflags:
       - "-X 'main.version={{ .Version }}' -X 'main.SentryDSN={{ .Env.DEEPSOURCE_CLI_SENTRY_DSN }}'"
   - id: "windows-deepsource"
+    main: ./cmd/deepsource/main.go
     env:
       - CGO_ENABLED=0
     flags:
@@ -32,9 +67,29 @@ builds:
 
 archives:
   -
+    id: "deepsource_tcv"
+    builds: ['tcv-deepsource', 'windows-tcv-deepsource']
+    name_template: "{{.ProjectName}}_tcv_{{.Version}}_{{.Os}}_{{.Arch}}"
     replacements:
       386: i386
       amd64: x86_64
+  -
+    id: "deepsource"
+    builds: ['deepsource', 'windows-deepsource']
+    name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}_{{.Arch}}"
+    replacements:
+      386: i386
+      amd64: x86_64
+
+
+
+
+
+
+
+
+    @@ -45,16 +90,16 @@ changelog:
+
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -45,16 +100,17 @@ changelog:
     exclude:
     - '^tests:'
 
-brews:
-  - tap:
-      owner: deepsourcelabs
-      name: homebrew-cli
-      branch: cli-release
-      token: "{{ .Env.HOMEBREW_TOKEN }}"
-    commit_author:
-      name: deepsourcebot
-      email: bot@deepsource.io
-    homepage: "https://github.com/deepsourcelabs/cli"
-    description: "Command line interface to DeepSource"
-    license: "BSD 2-Clause Simplified License"
-    skip_upload: auto
+# TODO: fix homebrew tap (siddhant-deepsource)
+# brews:
+#   - tap:
+#       owner: deepsourcelabs
+#       name: homebrew-cli
+#       branch: cli-release
+#       token: "{{ .Env.HOMEBREW_TOKEN }}"
+#     commit_author:
+#       name: deepsourcebot
+#       email: bot@deepsource.io
+#     homepage: "https://github.com/deepsourcelabs/cli"
+#     description: "Command line interface to DeepSource"
+#     license: "BSD 2-Clause Simplified License"
+#     skip_upload: auto
