@@ -160,7 +160,7 @@ func TestConstructDiagnostics(t *testing.T) {
 		{
 			description:  "must return no diagnostics",
 			diagnostics:  []FileDiagnostic{},
-			wantFilename: "./testdata/test_constructdiagnostics/no_diagnostics/test_want.toml",
+			wantFilename: "./testdata/test_constructdiagnostics/no_diagnostics/test_want.txt",
 		},
 		{
 			description: "must group a single diagnostic (single file)",
@@ -177,7 +177,7 @@ func TestConstructDiagnostics(t *testing.T) {
 					},
 				},
 			},
-			wantFilename: "./testdata/test_constructdiagnostics/single_diagnostic/single_file/test_want.toml",
+			wantFilename: "./testdata/test_constructdiagnostics/single_diagnostic/single_file/test_want.txt",
 		},
 		{
 			description: "must group multiple diagnostics (single file)",
@@ -200,7 +200,7 @@ func TestConstructDiagnostics(t *testing.T) {
 					},
 				},
 			},
-			wantFilename: "./testdata/test_constructdiagnostics/multiple_diagnostics/single_file/test_want.toml",
+			wantFilename: "./testdata/test_constructdiagnostics/multiple_diagnostics/single_file/test_want.txt",
 		},
 		{
 			description: "must group a single diagnostic (mutiple files)",
@@ -228,7 +228,7 @@ func TestConstructDiagnostics(t *testing.T) {
 					},
 				},
 			},
-			wantFilename: "./testdata/test_constructdiagnostics/single_diagnostic/multiple_files/test_want.toml",
+			wantFilename: "./testdata/test_constructdiagnostics/single_diagnostic/multiple_files/test_want.txt",
 		},
 		{
 			description: "must group multiple diagnostics (multiple files)",
@@ -268,7 +268,7 @@ func TestConstructDiagnostics(t *testing.T) {
 					},
 				},
 			},
-			wantFilename: "./testdata/test_constructdiagnostics/multiple_diagnostics/multiple_files/test_want.toml",
+			wantFilename: "./testdata/test_constructdiagnostics/multiple_diagnostics/multiple_files/test_want.txt",
 		},
 	}
 
@@ -360,19 +360,19 @@ func TestPrepareCodeFrame(t *testing.T) {
 			description:   "single line",
 			lineNum:       0,
 			linesFilename: "./testdata/test_codeframe/single_line/test.toml",
-			wantFilename:  "./testdata/test_codeframe/single_line/test_want.toml",
+			wantFilename:  "./testdata/test_codeframe/single_line/test_want.txt",
 		},
 		{
 			description:   "multiple lines",
 			lineNum:       2,
 			linesFilename: "./testdata/test_codeframe/multiple_lines/test.toml",
-			wantFilename:  "./testdata/test_codeframe/multiple_lines/test_want.toml",
+			wantFilename:  "./testdata/test_codeframe/multiple_lines/test_want.txt",
 		},
 		{
 			description:   "multiple lines at bottom",
 			lineNum:       5,
 			linesFilename: "./testdata/test_codeframe/multiple_lines_bottom/test.toml",
-			wantFilename:  "./testdata/test_codeframe/multiple_lines_bottom/test_want.toml",
+			wantFilename:  "./testdata/test_codeframe/multiple_lines_bottom/test_want.txt",
 		},
 	}
 
@@ -429,7 +429,7 @@ func TestGetDiagnostics(t *testing.T) {
 					},
 				},
 			},
-			wantFilename: "./testdata/test_getdiagnostics/single_error/test_want.toml",
+			wantFilename: "./testdata/test_getdiagnostics/single_error/test_want.txt",
 		},
 		{
 			description: "multiple errors",
@@ -446,7 +446,7 @@ func TestGetDiagnostics(t *testing.T) {
 					},
 				},
 			},
-			wantFilename: "./testdata/test_getdiagnostics/multiple_errors/test_want.toml",
+			wantFilename: "./testdata/test_getdiagnostics/multiple_errors/test_want.txt",
 		},
 		{
 			description: "no errors",
@@ -454,7 +454,7 @@ func TestGetDiagnostics(t *testing.T) {
 				File:   "./testdata/test_getdiagnostics/no_errors/test.toml",
 				Errors: []validator.ErrorMeta{},
 			},
-			wantFilename: "./testdata/test_getdiagnostics/no_errors/test_want.toml",
+			wantFilename: "./testdata/test_getdiagnostics/no_errors/test_want.txt",
 		},
 		{
 			description: "file with less lines",
@@ -467,7 +467,7 @@ func TestGetDiagnostics(t *testing.T) {
 					},
 				},
 			},
-			wantFilename: "./testdata/test_getdiagnostics/less_lines/test_want.toml",
+			wantFilename: "./testdata/test_getdiagnostics/less_lines/test_want.txt",
 		},
 		{
 			description: "validator message with no field",
@@ -480,7 +480,7 @@ func TestGetDiagnostics(t *testing.T) {
 					},
 				},
 			},
-			wantFilename: "./testdata/test_getdiagnostics/no_field/test_want.toml",
+			wantFilename: "./testdata/test_getdiagnostics/no_field/test_want.txt",
 		},
 	}
 
