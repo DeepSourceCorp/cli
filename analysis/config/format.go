@@ -1,7 +1,6 @@
 package config
 
-/* Formats the analysis config data in the form of the LSP format as defined in
- * the `analysis/types.go` */
+// Formats the analysis config data in the default DeepSource format.
 func (r *AnalysisRun) formatAnalysisConfigToLSP() *AnalysisConfig {
 	anaConfig := AnalysisConfig{
 		Files:           r.AnalysisFiles,
