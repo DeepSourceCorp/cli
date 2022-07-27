@@ -469,6 +469,19 @@ func TestGetDiagnostics(t *testing.T) {
 			},
 			wantFilename: "./testdata/test_getdiagnostics/less_lines/test_want.toml",
 		},
+		{
+			description: "validator message with no field",
+			failure: validator.ValidationFailure{
+				File: "./testdata/test_getdiagnostics/less_lines/test.toml",
+				Errors: []validator.ErrorMeta{
+					{
+						Field:   "",
+						Message: "This message is of an empty field",
+					},
+				},
+			},
+			wantFilename: "./testdata/test_getdiagnostics/no_field/test_want.toml",
+		},
 	}
 
 	for _, tc := range tests {
