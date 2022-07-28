@@ -1,9 +1,14 @@
 <template>
-  <div class="space-y-2.5">
-    <p class="uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7">
-      {{ isThreshold ? 'Threshold' : metric.name }}
-    </p>
-    <div v-if="metric.value || metric.value === 0" class="flex items-center gap-x-2">
+  <div class="flex flex-col gap-y-2.5">
+    <div class="flex flex-grow items-end">
+      <p class="uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7">
+        {{ isThreshold ? 'Threshold' : metric.name }}
+      </p>
+    </div>
+    <div
+      v-if="metric.value || metric.value === 0"
+      class="flex items-center gap-x-2 h-6 flex-shrink-0"
+    >
       <span class="text-base font-semibold leading-8">
         {{ thresholdDisplay }}
       </span>

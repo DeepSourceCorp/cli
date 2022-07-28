@@ -2,8 +2,8 @@
 
 exports[`[[ Run Status Components ]] RunCancelled: RunCancelled 1`] = `
 "<section class=\\"grid border-2 border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\"><img src=\\"error.svg\\" alt=\\"Run cancelled\\" class=\\"mx-auto mb-4\\">
-  <h1 class=\\"text-base font-bold text-center text-vanilla-400\\">The run was cancelled</h1>
-  <div class=\\"max-w-xl mt-2 text-center text-slate\\"></div>
+  <h1 class=\\"text-base font-semibold text-center text-vanilla-100\\">The run was cancelled</h1>
+  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"></div>
 </section>"
 `;
 
@@ -12,8 +12,8 @@ exports[`[[ Run Status Components ]] RunLoading: RunLoading 1`] = `
   <div class=\\"grid place-content-center pb-8\\">
     <zicon-stub icon=\\"spin-loader\\" size=\\"large\\" position=\\"\\" color=\\"juniper\\" class=\\"animate-spin\\"></zicon-stub>
   </div>
-  <h1 class=\\"text-base font-bold text-center text-vanilla-400\\">Waiting for results</h1>
-  <div class=\\"max-w-xl mt-2 text-center text-slate\\">
+  <h1 class=\\"text-base font-semibold text-center text-vanilla-100\\">Waiting for results</h1>
+  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
     <p>We're currently analyzing the branch, it usually takes a few minutes to fetch the results</p>
   </div>
 </section>"
@@ -21,16 +21,16 @@ exports[`[[ Run Status Components ]] RunLoading: RunLoading 1`] = `
 
 exports[`[[ Run Status Components ]] RunNuked: RunNuked 1`] = `
 "<section class=\\"grid border-2 border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\"><img src=\\"empty.svg\\" alt=\\"Run failed\\" class=\\"mx-auto mb-4\\">
-  <h1 class=\\"text-base font-bold text-center text-vanilla-400\\">Test artifacts were not uploaded in time</h1>
-  <div class=\\"max-w-xl mt-2 text-center text-slate\\"></div>
+  <h1 class=\\"text-base font-semibold text-center text-vanilla-100\\">Test artifacts were not uploaded in time</h1>
+  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"></div>
 </section>"
 `;
 
 exports[`[[ Run Status Components ]] RunPass: RunPass 1`] = `
 "<section class=\\"grid border-2 border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\">
   <div class=\\"mb-4 text-3xl text-center\\">🎉</div>
-  <h1 class=\\"text-base font-bold text-center text-vanilla-400\\">No issues found in this check</h1>
-  <div class=\\"max-w-xl mt-2 text-center text-slate\\">
+  <h1 class=\\"text-base font-semibold text-center text-vanilla-100\\">No issues found in this check</h1>
+  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
     <p>Give yourself a cookie.</p>
   </div>
 </section>"
@@ -38,8 +38,8 @@ exports[`[[ Run Status Components ]] RunPass: RunPass 1`] = `
 
 exports[`[[ Run Status Components ]] RunTimeout: RunTimeout 1`] = `
 "<section class=\\"grid border-2 border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\"><img src=\\"timeout.svg\\" alt=\\"Repo timeout\\" class=\\"mx-auto mb-4\\">
-  <h1 class=\\"text-base font-bold text-center text-vanilla-400\\">The run couldn't finish in time</h1>
-  <div class=\\"max-w-xl mt-2 text-center text-slate\\"></div>
+  <h1 class=\\"text-base font-semibold text-center text-vanilla-100\\">The run couldn't finish in time</h1>
+  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"></div>
 </section>"
 `;
 
@@ -48,8 +48,8 @@ exports[`[[ Run Status Components ]] RunWaiting: RunWaiting 1`] = `
   <div class=\\"grid place-content-center pb-8\\">
     <zicon-stub icon=\\"spin-loader\\" size=\\"large\\" position=\\"\\" color=\\"juniper\\" class=\\"animate-spin\\"></zicon-stub>
   </div>
-  <h1 class=\\"text-base font-bold text-center text-vanilla-400\\">Waiting for results</h1>
-  <div class=\\"max-w-xl mt-2 text-center text-slate\\">
+  <h1 class=\\"text-base font-semibold text-center text-vanilla-100\\">Waiting for results</h1>
+  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
     <p>We're waiting for the test coverage artifact to be reported</p>
   </div>
 </section>"

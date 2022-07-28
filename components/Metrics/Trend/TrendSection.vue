@@ -3,7 +3,7 @@
     <trend-title v-bind="$props" @updateFilter="updateFilter" class="px-6" />
     <!-- The `grid` class is to prevent the chart lib's height/width computation from overflowing the parent -->
     <div class="grid grid-cols-1 max-w-full gap-y-1">
-      <div class="flex gap-x-23 px-6">
+      <div class="flex gap-x-9 sm:gap-x-23 px-6">
         <trend-stat :type="STAT_TYPE.metric" :metric="metricTrendStat" />
         <trend-stat
           v-if="canViewThresholdModal"
@@ -13,7 +13,16 @@
           :can-modify-threshold="canModifyThreshold"
         />
       </div>
+
+      <div v-show="dataLoading" class="min-h-72 mx-5 pt-4 pb-2">
+        <div
+          class="h-full rounded-lg animate-pulse"
+          :class="isAggregate ? 'bg-ink-200 bg-opacity-30' : 'bg-ink-300'"
+        ></div>
+      </div>
+
       <z-chart
+        v-show="!dataLoading"
         v-bind="graphData"
         :key="chartUpdateKey"
         :height="288"
@@ -92,6 +101,9 @@ export default class TrendSection extends Vue {
 
   @Prop({ default: false })
   canModifyThreshold: boolean
+
+  @Prop({ default: false })
+  dataLoading: boolean
 
   readonly STAT_TYPE = StatType
   readonly AGGREGATE_METRIC_KEY = MetricType.aggregate

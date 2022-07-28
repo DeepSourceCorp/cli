@@ -48,18 +48,23 @@ exports[`renders TrendSection with all prop options: {"filterValue":30,"metricMe
     </div>
   </div>
   <div class=\\"grid grid-cols-1 max-w-full gap-y-1\\">
-    <div class=\\"flex gap-x-23 px-6\\">
-      <div class=\\"space-y-2.5\\">
-        <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
-          Aggregate
-        </p>
-        <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+    <div class=\\"flex gap-x-9 sm:gap-x-23 px-6\\">
+      <div class=\\"flex flex-col gap-y-2.5\\">
+        <div class=\\"flex flex-grow items-end\\">
+          <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+            Aggregate
+          </p>
+        </div>
+        <div class=\\"flex items-center gap-x-2 h-6 flex-shrink-0\\"><span class=\\"text-base font-semibold leading-8\\">
       85%
     </span>
           <!---->
         </div>
       </div>
       <!---->
+    </div>
+    <div class=\\"min-h-72 mx-5 pt-4 pb-2\\" style=\\"display: none;\\">
+      <div class=\\"h-full rounded-lg animate-pulse bg-ink-200 bg-opacity-30\\"></div>
     </div>
     <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"90\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
@@ -96,27 +101,34 @@ exports[`renders TrendSection with all prop options: {"filterValue":30,"metricMe
     </div>
   </div>
   <div class=\\"grid grid-cols-1 max-w-full gap-y-1\\">
-    <div class=\\"flex gap-x-23 px-6\\">
-      <div class=\\"space-y-2.5\\">
-        <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
-          Daft Punk
-        </p>
-        <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+    <div class=\\"flex gap-x-9 sm:gap-x-23 px-6\\">
+      <div class=\\"flex flex-col gap-y-2.5\\">
+        <div class=\\"flex flex-grow items-end\\">
+          <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+            Daft Punk
+          </p>
+        </div>
+        <div class=\\"flex items-center gap-x-2 h-6 flex-shrink-0\\"><span class=\\"text-base font-semibold leading-8\\">
       85%
     </span>
           <!---->
         </div>
       </div>
-      <div class=\\"space-y-2.5\\">
-        <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
-          Threshold
-        </p>
-        <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      <div class=\\"flex flex-col gap-y-2.5\\">
+        <div class=\\"flex flex-grow items-end\\">
+          <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+            Threshold
+          </p>
+        </div>
+        <div class=\\"flex items-center gap-x-2 h-6 flex-shrink-0\\"><span class=\\"text-base font-semibold leading-8\\">
       50
     </span>
           <!---->
         </div>
       </div>
+    </div>
+    <div class=\\"min-h-72 mx-5 pt-4 pb-2\\" style=\\"display: none;\\">
+      <div class=\\"h-full rounded-lg animate-pulse bg-ink-300\\"></div>
     </div>
     <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"90\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
   </div>
@@ -171,18 +183,23 @@ exports[`renders TrendSection with all prop options: {"filterValue":30,"metricMe
     </div>
   </div>
   <div class=\\"grid grid-cols-1 max-w-full gap-y-1\\">
-    <div class=\\"flex gap-x-23 px-6\\">
-      <div class=\\"space-y-2.5\\">
-        <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
-          Aggregate
-        </p>
-        <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+    <div class=\\"flex gap-x-9 sm:gap-x-23 px-6\\">
+      <div class=\\"flex flex-col gap-y-2.5\\">
+        <div class=\\"flex flex-grow items-end\\">
+          <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+            Aggregate
+          </p>
+        </div>
+        <div class=\\"flex items-center gap-x-2 h-6 flex-shrink-0\\"><span class=\\"text-base font-semibold leading-8\\">
       85%
     </span>
           <!---->
         </div>
       </div>
       <!---->
+    </div>
+    <div class=\\"min-h-72 mx-5 pt-4 pb-2\\" style=\\"display: none;\\">
+      <div class=\\"h-full rounded-lg animate-pulse bg-ink-200 bg-opacity-30\\"></div>
     </div>
     <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72 aggregate-chart\\"></zchart-stub>
   </div>
@@ -219,27 +236,34 @@ exports[`renders TrendSection with all prop options: {"filterValue":30,"metricMe
     </div>
   </div>
   <div class=\\"grid grid-cols-1 max-w-full gap-y-1\\">
-    <div class=\\"flex gap-x-23 px-6\\">
-      <div class=\\"space-y-2.5\\">
-        <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
-          Daft Punk
-        </p>
-        <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+    <div class=\\"flex gap-x-9 sm:gap-x-23 px-6\\">
+      <div class=\\"flex flex-col gap-y-2.5\\">
+        <div class=\\"flex flex-grow items-end\\">
+          <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+            Daft Punk
+          </p>
+        </div>
+        <div class=\\"flex items-center gap-x-2 h-6 flex-shrink-0\\"><span class=\\"text-base font-semibold leading-8\\">
       85%
     </span>
           <!---->
         </div>
       </div>
-      <div class=\\"space-y-2.5\\">
-        <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
-          Threshold
-        </p>
-        <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-base font-semibold leading-8\\">
+      <div class=\\"flex flex-col gap-y-2.5\\">
+        <div class=\\"flex flex-grow items-end\\">
+          <p class=\\"uppercase text-xs text-vanilla-400 tracking-wider font-semibold leading-7\\">
+            Threshold
+          </p>
+        </div>
+        <div class=\\"flex items-center gap-x-2 h-6 flex-shrink-0\\"><span class=\\"text-base font-semibold leading-8\\">
       50%
     </span>
           <!---->
         </div>
       </div>
+    </div>
+    <div class=\\"min-h-72 mx-5 pt-4 pb-2\\" style=\\"display: none;\\">
+      <div class=\\"h-full rounded-lg animate-pulse bg-ink-300\\"></div>
     </div>
     <zchart-stub datasets=\\"[object Object]\\" labels=\\"May 30, 2022,Jun 1, 2022,Jun 2, 2022,Jun 3, 2022,May 28, 2022,May 31, 2022,May 29, 2022,Jun 4, 2022,Jun 5, 2022,Jun 7, 2022,Jun 6, 2022\\" yaxismax=\\"100\\" type=\\"line\\" height=\\"288\\" ymarkers=\\"[object Object]\\" colors=\\"juniper-500\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" tooltipoptions=\\"[object Object]\\" class=\\"min-h-72\\"></zchart-stub>
   </div>

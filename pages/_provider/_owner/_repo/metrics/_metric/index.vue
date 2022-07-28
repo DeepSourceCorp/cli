@@ -16,6 +16,7 @@
       :filter-value="lastDays"
       :clip="true"
       :can-modify-threshold="canModifyThreshold"
+      :data-loading="metricDataLoading"
       @addThreshold="openUpdateThresholdModal"
       @openUpdateThresholdModal="openUpdateThresholdModal"
       @deleteThreshold="deleteThreshold"
@@ -32,14 +33,12 @@
     </portal>
   </div>
   <div v-else-if="$fetchState.pending">
-    <div v-for="i in 2" :key="i" class="p-4 space-y-4">
-      <div class="flex items-center gap-x-1.5">
-        <div class="h-8 w-23 bg-ink-300 animate-pulse"></div>
-        <div class="rounded-full h-6 w-36 bg-ink-300 animate-pulse"></div>
-      </div>
-      <div class="rounded-md border border-ink-200 p-4 space-y-4">
+    <div class="bg-ink-300 h-23 animate-pulse"></div>
+    <div v-for="i in 2" :key="i" class="p-6 space-y-6 border-b border-ink-200">
+      <div class="h-8 w-32 bg-ink-300 animate-pulse"></div>
+      <div class="rounded-md space-y-4">
         <div class="flex gap-x-23">
-          <div v-for="j in 2" :key="`s${j}`" class="h-14 w-32 animate-pulse bg-ink-300"></div>
+          <div v-for="j in 2" :key="`s${j}`" class="h-13 w-32 animate-pulse bg-ink-300"></div>
         </div>
         <div class="h-72 bg-ink-300 animate-pulse"></div>
       </div>
@@ -97,6 +96,7 @@ export default class MetricPage extends Vue {
   repository = {} as Repository
   editModalProps = {}
   mockAggregateData = { key: '' } as MetricNamespaceTrend
+  metricDataLoading = false
 
   /**
    * Fetch a metric depending on page route.
@@ -107,6 +107,7 @@ export default class MetricPage extends Vue {
    */
   async fetchMetric(refetch?: boolean): Promise<void> {
     const { provider, owner, repo, metric } = this.$route.params
+    this.metricDataLoading = true
     try {
       this.repository = await this.fetchMetricData({
         provider,
@@ -119,6 +120,8 @@ export default class MetricPage extends Vue {
       })
     } catch (e) {
       this.$router.replace(`/${provider}/${owner}/${repo}/metrics`)
+    } finally {
+      this.metricDataLoading = false
     }
   }
 

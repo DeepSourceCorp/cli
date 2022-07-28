@@ -5,9 +5,9 @@
   >
     <slot name="hero"></slot>
     <slot name="title">
-      <h1 class="text-base font-bold text-center text-vanilla-400">{{ title }}</h1>
+      <h1 class="text-base font-semibold text-center text-vanilla-100">{{ title }}</h1>
     </slot>
-    <div class="max-w-xl mt-2 text-center text-slate">
+    <div class="max-w-xl mt-2 text-center text-vanilla-400 text-sm">
       <slot></slot>
     </div>
   </section>
