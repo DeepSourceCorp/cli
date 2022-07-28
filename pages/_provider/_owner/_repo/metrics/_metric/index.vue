@@ -47,7 +47,7 @@
   <div v-else class="p-4 min-h-98">
     <lazy-empty-state
       title="No data found"
-      subtitle="We don’t have enough data for this time frame. Please try a different date range."
+      subtitle="We don’t have enough data to show a trend."
       :show-border="true"
       class="h-full flex flex-col justify-center"
     />
