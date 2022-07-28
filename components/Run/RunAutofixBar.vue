@@ -4,7 +4,7 @@
       :is-open="isAccordionOpen"
       :span-custom-height="true"
       custom-max-height="max-h-item"
-      class="bg-ink-300 rounded-md border border-ink-200 mb-4"
+      class="bg-ink-300 rounded-md border border-ink-200"
     >
       <template #title>
         <div class="flex items-center justify-between px-4 py-2 text-sm bg-ink-300 rounded-md">
@@ -45,6 +45,7 @@
           >
             <z-button
               :disabled="!canCreateAutofix"
+              :is-loading="autofixLoading"
               button-type="primary"
               size="small"
               spacing="px-10"

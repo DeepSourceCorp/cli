@@ -1,18 +1,18 @@
 <template>
-  <div class="pb-6">
-    <div class="relative px-4 pt-4">
+  <main class="pb-6 issue-page">
+    <div class="z-20 p-4 md:sticky top-bar-offset bg-ink-400">
       <!-- Issue details -->
       <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0">
-        <div class="w-full space-y-2" v-if="$fetchState.pending">
+        <div class="w-full space-y-1" v-if="$fetchState.pending">
           <!-- Left Section -->
           <div class="w-3/5 h-10 rounded-md md:w-4/5 bg-ink-300 animate-pulse"></div>
           <div class="flex w-1/3 space-x-2">
-            <div class="w-1/3 h-6 rounded-md bg-ink-300 animate-pulse"></div>
-            <div class="w-1/3 h-6 rounded-md bg-ink-300 animate-pulse"></div>
+            <div class="w-1/3 h-4 rounded-md bg-ink-300 animate-pulse"></div>
+            <div class="w-1/3 h-4 rounded-md bg-ink-300 animate-pulse"></div>
           </div>
         </div>
         <!-- issue header and actions -->
-        <div v-else class="flex justify-between w-full">
+        <div v-else class="flex justify-between w-full relative z-20">
           <issue-details-header
             :issueType="singleIssue.issueType"
             :shortcode="singleIssue.shortcode"
@@ -40,20 +40,28 @@
         </div>
       </div>
     </div>
-    <z-tabs class="mt-5">
-      <z-tab-list class="px-4 pb-0 border-b border-ink-200">
-        <z-tab-item class="flex items-center space-x-1" border-active-color="vanilla-400">
-          <span>Occurrences</span>
-          <z-tag
-            v-if="issueOccurrences.totalCount"
-            text-size="xs"
-            spacing="px-2 py-1"
-            bgColor="ink-100"
-            class="leading-none"
-            >{{ issueOccurrences.totalCount }}</z-tag
-          >
+    <z-tabs>
+      <z-tab-list
+        class="px-4 pb-0 border-b border-ink-100 md:sticky offset-for-tabs z-10 bg-ink-400"
+      >
+        <z-tab-item border-active-color="vanilla-400">
+          <div class="h-5 flex items-center gap-x-1">
+            <span>Occurrences</span>
+            <z-tag
+              v-if="issueOccurrences.totalCount"
+              text-size="xs"
+              spacing="px-2 py-1"
+              bgColor="ink-100"
+              class="leading-none"
+              >{{ issueOccurrences.totalCount }}</z-tag
+            >
+          </div>
         </z-tab-item>
-        <z-tab-item border-active-color="vanilla-400">Ignore rules</z-tab-item>
+        <z-tab-item border-active-color="vanilla-400">
+          <div class="h-5 flex items-center">
+            <span>Ignore rules</span>
+          </div>
+        </z-tab-item>
       </z-tab-list>
       <z-tab-panes class="p-4">
         <z-tab-pane>
@@ -150,7 +158,7 @@
         </z-tab-pane>
       </z-tab-panes>
     </z-tabs>
-  </div>
+  </main>
 </template>
 
 <script lang="ts">
@@ -522,3 +530,52 @@ export default class RunIssueDetails extends mixins(
   }
 }
 </script>
+<style scoped>
+/* all for mobiles */
+.issue-page {
+  --mobile-navbar-height: 40px;
+  --repo-header-height: 184px;
+  --breadcrumb-height: 52px;
+
+  --top-bar-offset: calc(
+    var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
+  );
+
+  --issue-header-height: 90px;
+}
+
+/* height of RepoHeader + Breadcrumbs */
+.top-bar-offset {
+  top: var(--top-bar-offset);
+}
+
+.issue-body-height {
+  height: calc(100vh - var(--top-bar-offset));
+}
+
+.offset-for-tabs {
+  top: calc(
+    var(--repo-header-height) + var(--mobile-navbar-height) + var(--breadcrumb-height) +
+      var(--issue-header-height)
+  );
+}
+
+/* all for tablets */
+@media (min-width: 1023px) {
+  .issue-page {
+    --mobile-navbar-height: 0px;
+    --repo-header-height: 167.5px;
+    /* Same as mobile */
+    /* --breadcrumb-height: 52px; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .issue-page {
+    --mobile-navbar-height: 0px;
+    --repo-header-height: 96px;
+    /* Same as mobile and tablet */
+    /* --breadcrumb-height: 52px; */
+  }
+}
+</style>

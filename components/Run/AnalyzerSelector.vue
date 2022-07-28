@@ -15,11 +15,11 @@
               : 'text-vanilla-400'
           ]"
         >
-          <div class="flex items-start space-x-2">
+          <div class="flex items-center gap-x-2">
             <z-icon
               :icon="statusIcon(check.status)"
               :color="statusIconColor(check.status)"
-              class="mt-0.5"
+              class="flex-shrink-0"
             />
             <span>{{ check.analyzer.name }}</span>
           </div>

@@ -3,7 +3,7 @@
     <div
       v-if="status === CheckStatus.Fail"
       id="issue-filters"
-      class="p-3 pb-0 md:sticky check-filter-headers-offset bg-ink-400"
+      class="px-3 md:sticky check-filter-headers-offset bg-ink-400"
     >
       <slot name="controls" />
     </div>
@@ -129,11 +129,11 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
   );
 
-  --run-check-title-height: 90px;
+  --run-check-title-height: 92px;
 }
 
 .check-filter-headers-offset {
-  top: calc(var(--top-bar-offset) + var(--run-check-title-height) + 1px);
+  top: calc(var(--top-bar-offset) + var(--run-check-title-height));
 }
 
 .min-height-for-offset {

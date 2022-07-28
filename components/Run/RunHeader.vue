@@ -1,8 +1,8 @@
 <template>
-  <div class="grid sm:grid-cols-fr-16 lg:grid-cols-fr-22">
+  <div class="grid sm:grid-cols-fr-16 lg:grid-cols-fr-22 md:h-23">
     <div class="flex flex-col gap-y-1.5 p-3">
       <div class="flex items-start gap-x-3">
-        <z-icon :icon="currentCheck.analyzer.shortcode" size="large" />
+        <z-icon :icon="currentCheck.analyzer.shortcode" size="large" class="-ml-1" />
         <div class="text-lg font-bold text-vanilla-100">
           {{ currentCheck.analyzer.name }}
           <span class="font-medium text-vanilla-400"
@@ -12,16 +12,18 @@
           </span>
         </div>
         <z-tag class="border border-ink-200 py-0.5 px-2 hidden md:inline-flex" spacing="">
-          <z-icon
-            :icon="getCheckStatusIcon(currentCheck.status)"
-            :color="getCheckStatusIconColor(currentCheck.status)"
-            class="flex-shrink-0"
-            :class="{ 'motion-safe:animate-spin': isCheckPending }"
-          />
-          <span
-            class="font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs"
-            >{{ tagLabel }}</span
-          >
+          <div class="flex items-center gap-x-1">
+            <z-icon
+              :icon="getCheckStatusIcon(currentCheck.status)"
+              :color="getCheckStatusIconColor(currentCheck.status)"
+              class="flex-shrink-0"
+              :class="{ 'motion-safe:animate-spin': isCheckPending }"
+            />
+            <span
+              class="font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs"
+              >{{ tagLabel }}</span
+            >
+          </div>
         </z-tag>
       </div>
       <div class="flex space-x-3">
@@ -29,7 +31,7 @@
           <z-icon
             :icon="isForDefaultBranch ? 'git-branch' : 'git-pull-request'"
             size="x-small"
-            class="flex-shrink-0"
+            class="flex-shrink-0 ml-1.5"
           />
           <div class="text-sm font-medium text-vanilla-400 line-clamp-1">
             <a v-tooltip="vscLinkTooltip" :href="vcsPrUrl" target="_blank" rel="noopener noreferrer"
@@ -72,7 +74,6 @@
                       :icon="getStatusIcon(run.status)"
                       :color="getStatusIconColor(run.status)"
                       :class="{ 'motion-safe:animate-spin': run.status === 'PEND' }"
-                      size="x-small"
                       class="mt-px"
                     />
                     <div class="text-sm font-medium text-vanilla-100">

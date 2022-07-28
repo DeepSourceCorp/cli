@@ -5,8 +5,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -47,8 +47,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -83,8 +83,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -125,8 +125,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -161,8 +161,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -201,8 +201,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -235,8 +235,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -275,8 +275,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -309,8 +309,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`]
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -351,8 +351,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -387,8 +387,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -429,8 +429,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -465,8 +465,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -505,8 +505,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -539,8 +539,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -579,8 +579,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -613,8 +613,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -655,8 +655,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -691,8 +691,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -733,8 +733,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -769,8 +769,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -809,8 +809,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -843,8 +843,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -883,8 +883,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -917,8 +917,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -959,8 +959,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -995,8 +995,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1037,8 +1037,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1073,8 +1073,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1113,8 +1113,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1147,8 +1147,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1187,8 +1187,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 32`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1221,8 +1221,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 33`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1263,8 +1263,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 34`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1299,8 +1299,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 35`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1341,8 +1341,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 36`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1377,8 +1377,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 37`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1417,8 +1417,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 38`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1451,8 +1451,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 39`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1491,8 +1491,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 40`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1525,8 +1525,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 41`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1567,8 +1567,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 42`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1603,8 +1603,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 43`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1645,8 +1645,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 44`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1681,8 +1681,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 45`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1721,8 +1721,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 46`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1755,8 +1755,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 47`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1795,8 +1795,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 48`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1829,8 +1829,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 49`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1871,8 +1871,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 50`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1907,8 +1907,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 51`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1949,8 +1949,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 52`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -1985,8 +1985,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 53`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2025,8 +2025,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 54`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2059,8 +2059,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 55`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2099,8 +2099,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 56`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2133,8 +2133,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 57`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2175,8 +2175,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 58`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2211,8 +2211,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 59`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2253,8 +2253,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 60`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2289,8 +2289,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 61`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2329,8 +2329,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 62`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2363,8 +2363,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 63`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2403,8 +2403,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 64`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2437,8 +2437,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 65`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2477,8 +2477,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 66`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2511,8 +2511,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 67`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2551,8 +2551,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 68`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2585,8 +2585,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 69`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2625,8 +2625,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 70`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2659,8 +2659,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 71`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2699,8 +2699,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 72`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2733,8 +2733,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 73`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2773,8 +2773,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 74`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2807,8 +2807,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 75`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2847,8 +2847,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 76`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2881,8 +2881,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 77`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2921,8 +2921,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 78`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2955,8 +2955,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 79`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -2995,8 +2995,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 80`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3029,8 +3029,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 81`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3069,8 +3069,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 82`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3103,8 +3103,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 83`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3143,8 +3143,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 84`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3177,8 +3177,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 85`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3217,8 +3217,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 86`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3251,8 +3251,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 87`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3291,8 +3291,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 88`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3325,8 +3325,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 89`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3365,8 +3365,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 90`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3399,8 +3399,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 91`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3439,8 +3439,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 92`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3473,8 +3473,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 93`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3513,8 +3513,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 94`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3547,8 +3547,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 95`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3587,8 +3587,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 96`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3621,8 +3621,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 97`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3661,8 +3661,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 98`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3695,8 +3695,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 99`
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3735,8 +3735,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 100
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3769,8 +3769,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 101
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3809,8 +3809,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 102
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3843,8 +3843,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 103
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3883,8 +3883,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 104
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3917,8 +3917,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 105
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3957,8 +3957,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 106
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -3991,8 +3991,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 107
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4031,8 +4031,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 108
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4065,8 +4065,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 109
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4105,8 +4105,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 110
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4139,8 +4139,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 111
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4179,8 +4179,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 112
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4213,8 +4213,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 113
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4253,8 +4253,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 114
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4287,8 +4287,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 115
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4327,8 +4327,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 116
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4361,8 +4361,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 117
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4401,8 +4401,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 118
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4435,8 +4435,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 119
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4475,8 +4475,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 120
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4509,8 +4509,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 121
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4549,8 +4549,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 122
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4583,8 +4583,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 123
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4623,8 +4623,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 124
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4657,8 +4657,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 125
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4697,8 +4697,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 126
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4731,8 +4731,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 127
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>
@@ -4771,8 +4771,8 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 128
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"flex justify-between w-full\\">
-      <div class=\\"flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5\\">
-        <div>
+      <div class=\\"flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5\\">
+        <div class=\\"pb-1\\">
           <h3 class=\\"inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base\\">Dangerous default argument</h3> <span class=\\"text-sm font-normal whitespace-nowrap text-vanilla-400\\">
             PYL-W0102
           </span>

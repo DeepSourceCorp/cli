@@ -37,30 +37,23 @@
         <analyzer-selector v-bind="run" :checks="checks" />
         <run-summary v-bind="run" />
       </div>
-      <div class="">
-        <div v-if="$fetchState.pending || !run">
-          <!-- Header -->
-          <div class="flex flex-1 w-full p-4 space-x-2 rounded-sm">
-            <!-- Left Section -->
-            <div class="flex flex-col w-3/5 space-y-2 md:w-4/5 justify-evenly">
-              <div class="h-10 rounded-md bg-ink-300 animate-pulse"></div>
-              <div class="h-6 rounded-md bg-ink-300 animate-pulse"></div>
-            </div>
-            <!-- Right Section -->
-            <div class="relative w-2/5 md:w-1/5">
-              <div class="h-full rounded-md bg-ink-300 animate-pulse"></div>
-            </div>
+      <div>
+        <!-- Header Loading state -->
+        <div
+          v-if="$fetchState.pending || !run"
+          class="flex flex-1 w-full p-4 space-x-2 rounded-sm h-23 border-b border-ink-100"
+        >
+          <!-- Left Section -->
+          <div class="flex flex-col w-3/5 space-y-2 md:w-4/5 justify-evenly">
+            <div class="h-10 rounded-md bg-ink-300 animate-pulse"></div>
+            <div class="h-6 w-40 rounded-md bg-ink-300 animate-pulse"></div>
           </div>
-          <div class="flex p-4 space-x-2">
-            <div class="w-24 h-8 rounded-md bg-ink-300 animate-pulse"></div>
-            <div class="h-8 rounded-md w-28 bg-ink-300 animate-pulse"></div>
-          </div>
-
-          <div class="p-4 space-y-2">
-            <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
-            <div class="w-full rounded-md h-14 bg-ink-300 animate-pulse"></div>
+          <!-- Right Section -->
+          <div class="relative w-2/5 md:w-1/5">
+            <div class="h-full rounded-md bg-ink-300 animate-pulse"></div>
           </div>
         </div>
+
         <run-header
           v-else-if="showRunHeader"
           v-bind="run"
@@ -215,7 +208,7 @@ export default class AnalyzerDetails extends mixins(
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
   );
 
-  --run-check-title-height: 90px;
+  --run-check-title-height: 92px;
 }
 
 /* height of RepoHeader + Breadcrumbs */

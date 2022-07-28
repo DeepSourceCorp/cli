@@ -6,8 +6,8 @@
   >
     <template #left-section>
       <div class="flex justify-between w-full">
-        <div class="flex flex-col w-3/4 p-4 gap-y-1 xs:w-4/5">
-          <div>
+        <div class="flex flex-col w-3/4 p-4 gap-y-0 xs:w-4/5">
+          <div class="pb-1">
             <h3
               class="inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base"
               v-html="escapeHtml(title)"
@@ -59,12 +59,12 @@
               v-if="showTrend"
               :icon="isTrendPositive ? 'triangle-up' : 'triangle-down'"
               :trend-direction="isTrendPositive ? 'up' : 'down'"
-              :trend-positive="isTrendPositive"
+              :trend-positive="!isTrendPositive"
               :trend-value="`${trendValue}%`"
               :show-bg="false"
               trend-hint="since last week"
               class="bg-opacity-0 text-xxs md:text-xs"
-              :class="isTrendPositive ? 'text-juniper' : 'text-cherry'"
+              :class="isTrendPositive ? 'text-cherry' : 'text-juniper'"
             />
           </div>
           <!-- Autofix -->

@@ -44,7 +44,7 @@
     </div>
 
     <!-- Issue list -->
-    <div class="flex flex-col gap-y-4">
+    <div class="flex flex-col gap-y-3.5">
       <issue-editor
         v-for="edge in edges"
         v-bind="edge.node"

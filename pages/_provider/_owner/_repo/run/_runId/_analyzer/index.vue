@@ -44,21 +44,22 @@
             :can-create-autofix="canCreateAutofix"
           >
             <template #controls>
-              <div class="flex flex-col">
+              <div class="flex flex-col gap-y-4 pt-3 md:relative">
+                <!-- shadow effect -->
+                <div
+                  v-if="isScrolled"
+                  class="hidden md:block absolute w-full bg-gradient-to-b from-ink-400 via-ink-400 to-transparent"
+                  :class="[showAutofixBar ? 'h-56' : 'h-28']"
+                ></div>
                 <run-autofix-bar
-                  v-if="
-                    allowAutofix &&
-                    Array.isArray(check.autofixableIssues) &&
-                    check.autofixableIssues.length &&
-                    !check.run.isForDefaultBranch &&
-                    !check.run.isForCrossRepoPr
-                  "
+                  v-if="showAutofixBar"
                   @autofixIssues="autofixSelectedIssues"
                   v-bind="check"
                   :autofixLoading="autofixLoading"
                   :can-create-autofix="canCreateAutofix"
+                  class="md:z-10"
                 />
-                <div class="flex w-full space-x-2">
+                <div class="flex w-full space-x-2 md:z-10">
                   <div class="flex w-auto space-x-2">
                     <issue-category-filter
                       v-model="queryParams.category"
@@ -98,7 +99,7 @@
             </template>
           </analyzer-run>
           <section v-if="['FAIL', 'PASS'].includes(check.status)">
-            <div class="sticky flex-col hidden p-4 space-y-2 lg:flex metrics-header-offset">
+            <div class="sticky flex-col hidden p-3 space-y-2 lg:flex metrics-header-offset">
               <div
                 v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
                 class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
@@ -131,12 +132,12 @@
                   @confirmMetricSuppression="confirmMetricSuppression"
                 >
                   <template #header>
-                    <span
+                    <div
                       v-if="isMetricAggregate(stat)"
-                      class="tracking-wide uppercase text-xxs text-aqua-100"
+                      class="tracking-wide uppercase text-xxs text-aqua-100 font-semibold"
                     >
                       Aggregate
-                    </span>
+                    </div>
                     <div v-else-if="showMetricCardHeader" class="flex items-center gap-x-2">
                       <lazy-analyzer-logo
                         :name="stat.namespace.key"
@@ -160,7 +161,7 @@
                 spacing-class="p-6"
               >
                 <template #title>
-                  <h1 class="text-sm text-center text-vanilla-400">
+                  <h1 class="text-sm text-center text-vanilla-400 mt-1">
                     No metrics captured for this check
                   </h1>
                 </template>
@@ -188,12 +189,12 @@
                 @confirmMetricSuppression="confirmMetricSuppression"
               >
                 <template #header>
-                  <span
+                  <div
                     v-if="isMetricAggregate(stat)"
-                    class="tracking-wide uppercase text-xxs text-aqua-100"
+                    class="tracking-wide uppercase text-xxs text-aqua-100 font-semibold"
                   >
                     Aggregate
-                  </span>
+                  </div>
                   <div v-else-if="showMetricCardHeader" class="flex items-center gap-x-2">
                     <lazy-analyzer-logo
                       :name="stat.namespace.key"
@@ -220,33 +221,29 @@
     </div>
     <div v-else>
       <!-- Loading state -->
-      <div class="flex flex-col w-full space-x-2 rounded-sm gap-y-3">
-        <!-- Controls -->
-        <div class="flex w-full p-4 space-x-4">
-          <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
-          <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
-          <div class="flex-grow h-8 rounded-md bg-ink-300 animate-pulse"></div>
-        </div>
 
-        <div class="grid w-full grid-cols-1 lg:grid-cols-fr-20">
-          <!-- Issues -->
-          <div class="flex flex-col p-2 gap-y-3">
-            <div
-              v-for="index in 10"
-              :key="index"
-              class="w-full h-22 bg-ink-300 animate-pulse"
-            ></div>
+      <div class="grid w-full grid-cols-1 lg:grid-cols-fr-20">
+        <!-- Issues -->
+
+        <div class="flex flex-col p-2 gap-y-3">
+          <!-- Controls -->
+          <div class="flex w-full h-11 items-center space-x-4">
+            <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
+            <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
+            <div class="flex-grow h-8 rounded-md bg-ink-300 animate-pulse"></div>
           </div>
-          <!-- Metrics -->
-          <div class="flex flex-col p-2 gap-y-3">
-            <div
-              v-for="index in 5"
-              :key="index"
-              class="w-full h-32 rounded-md bg-ink-300 animate-pulse"
-            ></div>
-          </div>
+          <div v-for="index in 10" :key="index" class="w-full h-24 bg-ink-300 animate-pulse"></div>
+        </div>
+        <!-- Metrics -->
+        <div class="flex flex-col p-2 gap-y-3">
+          <div
+            v-for="index in 5"
+            :key="index"
+            class="w-full h-32 rounded-md bg-ink-300 animate-pulse"
+          ></div>
         </div>
       </div>
+
       <div class="flex p-4 space-x-2">
         <div class="w-24 h-8 rounded-md bg-ink-300 animate-pulse"></div>
         <div class="h-8 rounded-md w-28 bg-ink-300 animate-pulse"></div>
@@ -385,6 +382,7 @@ export default class AnalyzerDetails extends mixins(
   perPageCount = 10
   public activeTabIndex = 0
   public autofixLoading = false
+  public isScrolled = false
   readonly CheckStatus = CheckStatus
   readonly METRICS_WITH_SECTIONS = ['test-coverage']
   showConfirmDialog = false
@@ -407,8 +405,27 @@ export default class AnalyzerDetails extends mixins(
     this.queryParams = Object.assign(this.queryParams, this.$route.query)
   }
 
+  /**
+   * Scroll handler that sets isScrolled to true if the window's scroll position exceeds a certain threshold
+   *
+   * * @return {void}
+   */
+  handleScroll(): void {
+    this.isScrolled = process.client && window.scrollY > 20
+  }
+
   get showMetricCardHeader() {
     return this.METRICS_WITH_SECTIONS.includes(this.check.analyzer?.shortcode || '')
+  }
+
+  get showAutofixBar() {
+    return (
+      this.allowAutofix &&
+      Array.isArray(this.check.autofixableIssues) &&
+      this.check.autofixableIssues.length &&
+      !this.check.run.isForDefaultBranch &&
+      !this.check.run.isForCrossRepoPr
+    )
   }
 
   isMetricAggregate(metric: RepositoryMetricValue): boolean {
@@ -504,7 +521,9 @@ export default class AnalyzerDetails extends mixins(
     this.$socket.$on('repo-analysis-updated', this.refetchRunAndCheck)
     this.$socket.$on('autofixrun-fixes-ready', this.refetchRunAndCheck)
     this.handleResize()
+    this.handleScroll()
     window.addEventListener('resize', this.handleResize)
+    window.addEventListener('scroll', this.handleScroll)
   }
 
   /**
@@ -517,6 +536,7 @@ export default class AnalyzerDetails extends mixins(
     this.$socket.$off('repo-analysis-updated', this.refetchRunAndCheck)
     this.$socket.$off('autofixrun-fixes-ready', this.refetchRunAndCheck)
     window.removeEventListener('resize', this.handleResize)
+    window.removeEventListener('scroll', this.handleScroll)
   }
 
   /**
@@ -690,11 +710,11 @@ export default class AnalyzerDetails extends mixins(
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
   );
 
-  --run-check-title-height: 90px;
+  --run-check-title-height: 92px;
 }
 
 .metrics-header-offset {
-  top: calc(var(--top-bar-offset) + var(--run-check-title-height) + 1px);
+  top: calc(var(--top-bar-offset) + var(--run-check-title-height));
 }
 
 /* all for tablets */

@@ -1,17 +1,22 @@
 <template>
-  <span
+  <div
     v-if="trendValue"
-    class="flex items-center p-1 space-x-1 text-xs font-normal leading-none text-center rounded-md cursor"
+    class="flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor"
     :class="[
       customBgClass || bgClass,
       customBgClass ? '' : showBg ? 'bg-opacity-10' : 'bg-opacity-0'
     ]"
   >
-    <z-icon v-if="icon" :icon="icon" :color="iconColor" size="small"></z-icon>
-    <span class="leading-none">
-      <span v-html="trendSign"></span> {{ valueDisplay }} {{ trendHint }}
-    </span>
-  </span>
+    <z-icon v-if="icon" :icon="icon" :color="iconColor" size="small" class="flex-shrink-0"></z-icon>
+    <z-icon
+      v-else
+      :icon="trendDirection === 'up' ? 'triangle-up' : 'triangle-down'"
+      :color="iconColor"
+      size="x-small"
+      class="flex-shrink-0"
+    />
+    {{ valueDisplay }} {{ trendHint }}
+  </div>
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
@@ -50,21 +55,6 @@ export default class Ticker extends Vue {
 
   @Prop({ default: null })
   customBgClass: string | null
-
-  get trendSign(): string {
-    if (this.icon) {
-      return ''
-    }
-    if (this.trendDirection === 'up') {
-      return '&#9650;'
-    }
-
-    if (this.trendDirection === 'down') {
-      return '&#9660;'
-    }
-
-    return ''
-  }
 
   get valueDisplay(): string | number {
     if (typeof this.trendValue === 'number') {

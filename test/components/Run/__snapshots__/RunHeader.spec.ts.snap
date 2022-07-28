@@ -1,20 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"CNCL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22\\">
+"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22 md:h-23\\">
   <div class=\\"flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        <div class=\\"flex items-center gap-x-1\\">
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        </div>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
-        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
+        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 ml-1.5\\"></zicon-stub>
         <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
@@ -44,20 +46,22 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22\\">
+"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22 md:h-23\\">
   <div class=\\"flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        <div class=\\"flex items-center gap-x-1\\">
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        </div>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
-        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
+        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 ml-1.5\\"></zicon-stub>
         <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
@@ -87,20 +91,22 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"PASS","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22\\">
+"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22 md:h-23\\">
   <div class=\\"flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        <div class=\\"flex items-center gap-x-1\\">
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        </div>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
-        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
+        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 ml-1.5\\"></zicon-stub>
         <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
@@ -130,20 +136,22 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"PEND","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22\\">
+"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22 md:h-23\\">
   <div class=\\"flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        <div class=\\"flex items-center gap-x-1\\">
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        </div>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
-        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
+        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 ml-1.5\\"></zicon-stub>
         <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
@@ -173,20 +181,22 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"READ","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22\\">
+"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22 md:h-23\\">
   <div class=\\"flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        <div class=\\"flex items-center gap-x-1\\">
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        </div>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
-        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
+        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 ml-1.5\\"></zicon-stub>
         <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>
@@ -216,20 +226,22 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"TIMO","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22\\">
+"<div class=\\"grid sm:grid-cols-fr-16 lg:grid-cols-fr-22 md:h-23\\">
   <div class=\\"flex flex-col gap-y-1.5 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        <div class=\\"flex items-center gap-x-1\\">
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+        </div>
       </ztag-stub>
     </div>
     <div class=\\"flex space-x-3\\">
       <div class=\\"flex space-x-1.5 items-center\\">
-        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
+        <zicon-stub icon=\\"git-pull-request\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 ml-1.5\\"></zicon-stub>
         <div class=\\"text-sm font-medium text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">master
           </a></div>
       </div>

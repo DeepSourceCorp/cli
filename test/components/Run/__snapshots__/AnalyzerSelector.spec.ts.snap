@@ -5,48 +5,48 @@ exports[`[[ AnalyzerSelector ]] renders \`AnalyzerSelector\` with all check stat
   <p class=\\"p-2 text-xs font-semibold tracking-wide uppercase text-slate\\">Checks</p>
   <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
     <div class=\\"w-full flex justify-between rounded-md p-2 hover:bg-ink-200 text-sm text-vanilla-400\\">
-      <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"clock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"mt-0.5\\"></zicon-stub> <span>Python</span>
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"clock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
       </div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
   <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
     <div class=\\"w-full flex justify-between rounded-md p-2 hover:bg-ink-200 text-sm text-vanilla-400\\">
-      <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"mt-0.5\\"></zicon-stub> <span>Python</span>
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
       </div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
   <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
     <div class=\\"w-full flex justify-between rounded-md p-2 hover:bg-ink-200 text-sm text-vanilla-400\\">
-      <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"mt-0.5\\"></zicon-stub> <span>Python</span>
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
       </div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
   <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
     <div class=\\"w-full flex justify-between rounded-md p-2 hover:bg-ink-200 text-sm text-vanilla-400\\">
-      <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"mt-0.5\\"></zicon-stub> <span>Python</span>
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
       </div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
   <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
     <div class=\\"w-full flex justify-between rounded-md p-2 hover:bg-ink-200 text-sm text-vanilla-400\\">
-      <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"mt-0.5\\"></zicon-stub> <span>Python</span>
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
       </div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
   <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
     <div class=\\"w-full flex justify-between rounded-md p-2 hover:bg-ink-200 text-sm text-vanilla-400\\">
-      <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"check-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"mt-0.5\\"></zicon-stub> <span>Python</span>
+      <div class=\\"flex items-center gap-x-2\\">
+        <zicon-stub icon=\\"check-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
       </div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
