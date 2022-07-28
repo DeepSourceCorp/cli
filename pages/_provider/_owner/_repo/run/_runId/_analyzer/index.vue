@@ -48,8 +48,8 @@
                 <!-- shadow effect -->
                 <div
                   v-if="isScrolled"
-                  class="hidden md:block absolute w-full bg-gradient-to-b from-ink-400 via-ink-400 to-transparent"
-                  :class="[showAutofixBar ? 'h-56' : 'h-28']"
+                  class="hidden md:block absolute w-full bg-gradient-to-b from-ink-400 via-ink-400 to-transparent pointer-events-none"
+                  :class="[showAutofixBar ? 'h-48' : 'h-20']"
                 ></div>
                 <run-autofix-bar
                   v-if="showAutofixBar"
