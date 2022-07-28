@@ -1,0 +1,2 @@
+> 1 | name = ""
+  2 | shortcode = "@aadhav-deepsource/2do-checker"

@@ -1,0 +1,4 @@
+2| key1 = "value1"
+3| key2 = "value2"
+ | ~~~~ missing field
+4| key3 = "value3"
