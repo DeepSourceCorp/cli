@@ -73,7 +73,10 @@
                         updateRepoSetting(InputTypes.ISSUE_TYPE, {
                           settingType: 'issueTypeSettings',
                           field: type.slug,
-                          value: { isIgnoredToDisplay: newValue }
+                          value: {
+                            isIgnoredToDisplay: newValue,
+                            isIgnoredInCheckStatus: newValue ? true : type.isIgnoredInCheckStatus
+                          }
                         })
                     "
                   />
@@ -83,9 +86,16 @@
                   class="flex items-center justify-center text-sm font-normal"
                 >
                   <z-checkbox
+                    v-tooltip="{
+                      content: type.isIgnoredToDisplay
+                        ? 'An issue needs to be reported in order to mark a run as failed.'
+                        : '',
+                      delay: { show: 0, hide: 100 }
+                    }"
                     :model-value="type.isIgnoredInCheckStatus"
                     :true-value="false"
                     :false-value="true"
+                    :read-only="type.isIgnoredToDisplay"
                     spacing="4"
                     font-size="base"
                     class="h-full m-0"
@@ -132,9 +142,9 @@
                 :key="priority.slug"
                 class="text-vanilla-100 hover:bg-ink-300"
               >
-                <z-table-cell text-align="left" class="text-sm font-normal">{{
-                  priority.verboseName
-                }}</z-table-cell>
+                <z-table-cell text-align="left" class="text-sm font-normal">
+                  {{ priority.verboseName }}
+                </z-table-cell>
                 <z-table-cell
                   text-align="center"
                   class="flex items-center justify-center text-sm font-normal"
@@ -151,7 +161,12 @@
                         updateRepoSetting(InputTypes.ISSUE_PRIORITY, {
                           settingType: 'issuePrioritySettings',
                           field: priority.slug,
-                          value: { isIgnoredToDisplay: newValue }
+                          value: {
+                            isIgnoredToDisplay: newValue,
+                            isIgnoredInCheckStatus: newValue
+                              ? true
+                              : priority.isIgnoredInCheckStatus
+                          }
                         })
                     "
                   />
@@ -161,9 +176,16 @@
                   class="flex items-center justify-center text-sm font-normal"
                 >
                   <z-checkbox
+                    v-tooltip="{
+                      content: priority.isIgnoredToDisplay
+                        ? 'An issue needs to be reported in order to mark a run as failed.'
+                        : '',
+                      delay: { show: 0, hide: 100 }
+                    }"
                     :model-value="priority.isIgnoredInCheckStatus"
                     :true-value="false"
                     :false-value="true"
+                    :read-only="priority.isIgnoredToDisplay"
                     spacing="4"
                     font-size="base"
                     class="h-full m-0"
