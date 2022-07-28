@@ -28,7 +28,11 @@ exports[`renders TrendSection with all prop options: {"filterValue":30,"metricMe
 
         </p>
       </div>
-      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0\\">
+      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-ink-100 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--help-circle text-vanilla-100 mr-1.5\\">
+            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
+            <path d=\\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\\"></path>
+            <line x1=\\"12\\" y1=\\"17\\" x2=\\"12.01\\" y2=\\"17\\"></line>
+          </svg>How's this calculated?</a>
         <div class=\\"md:w-40\\">
           <div tabindex=\\"0\\" class=\\"relative w-full h-full leading-8 text-left outline-none custom-select\\">
             <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-md text-vanilla-300 cursor-pointer\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--duration-30 text-vanilla-400\\">
@@ -163,7 +167,11 @@ exports[`renders TrendSection with all prop options: {"filterValue":30,"metricMe
 
         </p>
       </div>
-      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0\\">
+      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-ink-100 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--help-circle text-vanilla-100 mr-1.5\\">
+            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
+            <path d=\\"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3\\"></path>
+            <line x1=\\"12\\" y1=\\"17\\" x2=\\"12.01\\" y2=\\"17\\"></line>
+          </svg>How's this calculated?</a>
         <div class=\\"md:w-40\\">
           <div tabindex=\\"0\\" class=\\"relative w-full h-full leading-8 text-left outline-none custom-select\\">
             <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-md text-vanilla-300 cursor-pointer\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--duration-30 text-vanilla-400\\">

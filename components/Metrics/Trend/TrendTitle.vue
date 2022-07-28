@@ -35,8 +35,7 @@
         v-if="isAggregate"
         class="flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0"
       >
-        <!-- TODO: Add after docs are created -->
-        <!-- <z-button
+        <z-button
           button-type="ghost"
           :to="METRICS_DOC"
           target="_blank"
@@ -46,7 +45,7 @@
           color="vanilla-100"
           class="border border-ink-100 border-dashed"
           >How's this calculated?</z-button
-        > -->
+        >
         <div class="md:w-40">
           <z-select
             v-model="currentFilterValue"
@@ -123,7 +122,8 @@ export default class TrendTitle extends Vue {
   public currentFilterValue: number = 30
   readonly STAT_TYPE = StatType
   readonly AGGREGATE_METRIC_KEY = MetricType.aggregate
-  readonly METRICS_DOC = 'https://deepsource.io/docs/dashboard/repo-overview#the-metrics-tab'
+  readonly METRICS_DOC =
+    'https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation'
 
   /**
    * Created hook for the component.
