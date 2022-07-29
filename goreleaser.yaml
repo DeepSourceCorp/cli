@@ -73,6 +73,7 @@ archives:
     replacements:
       386: i386
       amd64: x86_64
+      windows: windows
   -
     id: "deepsource"
     builds: ['deepsource', 'windows-deepsource']
@@ -80,6 +81,7 @@ archives:
     replacements:
       386: i386
       amd64: x86_64
+      windows: windows
 
 checksum:
   name_template: 'checksums.txt'
