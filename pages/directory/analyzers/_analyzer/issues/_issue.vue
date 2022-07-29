@@ -104,7 +104,7 @@ export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
   @Watch('isMetaReady')
   setMetaInfo(newIsMetaReady: boolean): void {
     if (newIsMetaReady) {
-      this.metaTitle = `${this.issue?.shortcode} • ${this.analyzer.name} Analyzer by DeepSource`
+      this.metaTitle = `${this.issue?.title} - DeepSource`
       this.metaDescription = `Issue ${this.issue?.shortcode}: ${this.issue?.title}`
     }
   }
