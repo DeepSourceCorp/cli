@@ -16,9 +16,6 @@ func (a *AnalyzerDryRun) createDockerClient() error {
 		return err
 	}
 
-	// Fetch environment variables set by the user
-	fetchEnvironmentVariables()
-
 	// Extracting the docker file and path details
 	dockerFilePath, dockerFileName := docker.GetDockerImageDetails(analyzerTOMLData)
 	analyzerName := strings.Split(dockerFileName, "/")[1]

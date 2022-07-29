@@ -1,7 +1,6 @@
 package dryrun
 
 import (
-	"bytes"
 	"encoding/json"
 	"os"
 	"strings"
@@ -9,6 +8,7 @@ import (
 
 	"github.com/deepsourcelabs/cli/analyzers/backend/docker"
 	"github.com/deepsourcelabs/cli/utils"
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestPrepareAnalysisConfig(t *testing.T) {
@@ -72,10 +72,10 @@ func TestPrepareAnalysisConfig(t *testing.T) {
 			t.Errorf("Failed to read the expected analysis config. Error:%s", err)
 		}
 
-		if !bytes.Equal(receivedAnalysisConfig, expectedAnalysisConfig) {
-			t.Errorf("Received invalid analysis config. Expected %s\nGot %s\n", string(expectedAnalysisConfig), string(receivedAnalysisConfig))
+		if !cmp.Equal(strings.TrimSuffix(string(receivedAnalysisConfig), "\n"), strings.TrimSuffix(string(expectedAnalysisConfig), "\n")) {
+			diff := cmp.Diff(receivedAnalysisConfig, expectedAnalysisConfig)
+			t.Errorf("Invalid analysis config generated.\nExpected: %s\nGot: %s\nDiff: %s\n\n", string(expectedAnalysisConfig), string(receivedAnalysisConfig), diff)
 		}
-
 	}
 }
 

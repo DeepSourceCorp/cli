@@ -20,9 +20,10 @@ import (
 
 // Variables to hold the value of CODE_PATH and TOOLBOX_PATH to be injected
 // into the analysis container.
+// Setting the constant value for them as `/code` and `/toolbox`.
 var (
-	containerCodePath    string
-	containerToolBoxPath string
+	containerCodePath    string = "/code"
+	containerToolBoxPath string = "/toolbox"
 	analysisConfigName   string = "analysis_config"
 	analysisResultsName  string = "analysis_results"
 	analysisConfigExt    string = ".json"

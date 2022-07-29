@@ -4,54 +4,50 @@ import (
 	"encoding/json"
 	"os"
 	"path"
+	"strings"
 )
 
-func createIssue(filePath string, lineNumber, _ int) {
-	vcsPath := path.Base(filePath)
+// createIssue creates the issue.
+func createIssue(filePath string, lineNumber, column int) {
+	vcsPath := strings.TrimPrefix(filePath, codePath)
 	actualLineNumber := lineNumber + 1
 
-	// issue := Diagnostic{
-	//     Code:  "I001",
-	//     Title: "Possible TODO comment found",
-	//     Location: Location{
-	//         Path: vcsPath,
-	//         Position: Position{
-	//             Begin: Coordinate{
-	//                 Line:   actualLineNumber,
-	//                 Column: column,
-	//             },
-	//             End: Coordinate{
-	//                 Line: actualLineNumber,
-	//             },
-	//         },
-	//     },
-	// }
-
-	issue := Diagnostic{
-		Code:    "I001",
-		Message: "Found a TODO comment",
-		Range: Range{
-			Start: Position{
-				Line: actualLineNumber,
-			},
-			End: Position{
-				Line: actualLineNumber,
+	issue := Issue{
+		Code:  "I001",
+		Title: "Possible TODO comment found",
+		Location: Location{
+			Path: vcsPath,
+			Position: Position{
+				Begin: Coordinate{
+					Line:   actualLineNumber,
+					Column: column,
+				},
+				End: Coordinate{
+					Line: actualLineNumber,
+				},
 			},
 		},
-		RelatedInformation: []DiagnosticRelatedInformation{
-			{
-				Location: Location{
-					URI: vcsPath,
-					Range: Range{
-						Start: Position{
-							Line: actualLineNumber,
-						},
-						End: Position{
-							Line: actualLineNumber,
-						},
-					},
+	}
+	issues = append(issues, issue)
+}
+
+func createDummyIssue(filePath string, lineNumber, column int) {
+	vcsPath := strings.TrimPrefix(filePath, codePath)
+	actualLineNumber := lineNumber + 1
+
+	issue := Issue{
+		Code:  "I002",
+		Title: "This is a demo issue",
+		Location: Location{
+			Path: vcsPath,
+			Position: Position{
+				Begin: Coordinate{
+					Line:   actualLineNumber,
+					Column: column,
 				},
-				Message: "Found a TODO comment",
+				End: Coordinate{
+					Line: actualLineNumber,
+				},
 			},
 		},
 	}
@@ -70,11 +66,20 @@ func prepareResult() AnalysisResult {
 	return result
 }
 
-func writeMacroResult(result *AnalysisResult) error {
+func writeMacroResult(result AnalysisResult) error { // skipcq: CRT-P0003
 	resultJSON, err := json.Marshal(result)
 	if err != nil {
 		return err
 	}
 
-	return os.WriteFile(path.Join(toolboxPath, "analysis_results.json"), resultJSON, 0o777)
+	f, err := os.Create(path.Join(toolboxPath, "analysis_results.json"))
+	if err != nil {
+		return err
+	}
+
+	defer f.Close()
+	if _, err2 := f.Write(resultJSON); err2 != nil {
+		return err
+	}
+	return nil
 }

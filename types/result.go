@@ -1,18 +1,21 @@
 package types
 
-import "github.com/deepsourcelabs/cli/analysis/lsp"
-
-///////////////////////////////////////
-// LSP based Analysis Report Types  //
-/////////////////////////////////////
+/////////////////////////////
+// Analyzer Report Types  //
+///////////////////////////
 
 type AnalyzerReport struct {
-	Issues   []lsp.Diagnostic `json:"issues"`
-	Metrics  []Metric         `json:"metrics,omitempty"`
-	IsPassed bool             `json:"is_passed"`
-	Errors   []Error          `json:"errors"`
-	// Errors    []lsp.Diagnostic `json:"errors"`
-	ExtraData interface{} `json:"extra_data"`
+	Issues    []ReportIssue `json:"issues"`
+	Metrics   []Metric      `json:"metrics,omitempty"`
+	IsPassed  bool          `json:"is_passed"`
+	Errors    []Error       `json:"errors"`
+	ExtraData interface{}   `json:"extra_data"`
+}
+
+type ReportIssue struct {
+	Code     string   `json:"issue_code"`
+	Title    string   `json:"issue_text"`
+	Location Location `json:"location"`
 }
 
 /////////////////////////////

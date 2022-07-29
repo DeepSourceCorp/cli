@@ -1,1 +1,1 @@
-{"files":[{"uri":"/code/.deepsource.toml"},{"uri":"/code/.rubocop.yml"},{"uri":"/code/README.md"},{"uri":"/code/code.rb"}],"test_files":null,"excluded_files":null,"exclude_patterns":null,"test_patterns":null,"analyzer_meta":null}
+{"files":["/code/.deepsource.toml","/code/.rubocop.yml","/code/README.md","/code/code.rb"],"exclude_patterns":null,"exclude_files":[],"test_files":[],"test_patterns":null,"analyzer_meta":null}

@@ -1,1 +1,1 @@
-{"files":[{"uri":"/code/.deepsource.toml"},{"uri":"/code/Cargo.lock"},{"uri":"/code/Cargo.toml"},{"uri":"/code/README.md"},{"uri":"/code/src/main.rs"}],"test_files":null,"excluded_files":null,"exclude_patterns":null,"test_patterns":null,"analyzer_meta":null}
+{"files":["/code/.deepsource.toml","/code/Cargo.lock","/code/Cargo.toml","/code/README.md","/code/src/main.rs"],"exclude_patterns":null,"exclude_files":[],"test_files":[],"test_patterns":null,"analyzer_meta":null}

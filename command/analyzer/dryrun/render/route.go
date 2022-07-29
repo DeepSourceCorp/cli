@@ -57,7 +57,7 @@ func (r *ResultRenderOpts) IssuesHandler(c echo.Context) error {
 		fmt.Println(err)
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
-	return c.NoContent(http.StatusOK)
+	return nil
 }
 
 // IssuesOccurencesHandler handles serving the issue occurences.
@@ -74,5 +74,5 @@ func (r *ResultRenderOpts) IssueOccurencesHandler(c echo.Context) error {
 		fmt.Println(err)
 		return c.String(http.StatusInternalServerError, err.Error())
 	}
-	return c.NoContent(http.StatusOK)
+	return nil
 }
