@@ -1,3 +1,5 @@
+import { CheckStatus, RunStatus } from '~/types/types'
+
 const knownTagPatterns: Record<string, string> = {
   '^cwe': '#005980',
   '^owasp': '#ea580c',
@@ -109,4 +111,135 @@ export function getColorShades(baseColor: string, numberOfShades: number): strin
   return Array.from(Array(numberOfShades).keys()).map((step) =>
     newShade(baseColor, step * stepFactor)
   )
+}
+
+/**
+ * Get icon for a given check status.
+ *
+ * @param {CheckStatus} status Status code of the check
+ * @returns {string} icon to be used to represent the check status
+ */
+export function checkStatusIcon(status: CheckStatus): string {
+  const types: Record<CheckStatus, string> = {
+    [CheckStatus.Pass]: 'check',
+    [CheckStatus.Fail]: 'x',
+    [CheckStatus.Pend]: 'spin-loader',
+    [CheckStatus.Timo]: 'timer-reset',
+    [CheckStatus.Cncl]: 'alert-circle',
+    [CheckStatus.Read]: 'circle-dot',
+    [CheckStatus.Neut]: 'circle-dot',
+    [CheckStatus.Atmo]: 'run-failed',
+    [CheckStatus.Wait]: 'alarm-clock'
+  }
+  return types[status] ?? types[CheckStatus.Pass]
+}
+
+/**
+ * Get icon color for a given check status.
+ *
+ * @param {CheckStatus} status Status code of the check
+ * @returns {string} icon color to be used to represent the check status
+ */
+export function checkStatusIconColor(status: CheckStatus): string {
+  const types: Record<CheckStatus, string> = {
+    [CheckStatus.Pass]: 'juniper',
+    [CheckStatus.Fail]: 'cherry',
+    [CheckStatus.Pend]: 'vanilla-400',
+    [CheckStatus.Timo]: 'honey',
+    [CheckStatus.Cncl]: 'honey',
+    [CheckStatus.Read]: 'vanilla-400',
+    [CheckStatus.Neut]: 'vanilla-400',
+    [CheckStatus.Atmo]: 'vanilla-400',
+    [CheckStatus.Wait]: 'vanilla-400'
+  }
+  return types[status] ?? types[CheckStatus.Pass]
+}
+
+/**
+ * Get tag label for a given check status.
+ *
+ * @param {CheckStatus} status Status code of the check
+ * @returns {string} label for the tag
+ */
+export function checkStatusTagLabel(status: CheckStatus): string {
+  const types: Record<CheckStatus, string> = {
+    [CheckStatus.Pass]: 'Passed',
+    [CheckStatus.Fail]: 'Failing',
+    [CheckStatus.Pend]: 'Running',
+    [CheckStatus.Timo]: 'Timed out',
+    [CheckStatus.Cncl]: 'Cancelled',
+    [CheckStatus.Read]: 'Ready',
+    [CheckStatus.Wait]: 'Waiting',
+    [CheckStatus.Atmo]: 'Timed out',
+    [CheckStatus.Neut]: 'Ready'
+  }
+  return types[status] ?? types[CheckStatus.Pass]
+}
+
+/**
+ * Get icon for a given run status.
+ *
+ * @param {RunStatus} status Status code of the run
+ * @returns {string} icon to be used to represent the run status
+ */
+export function runStatusIcon(status: RunStatus): string {
+  const types: Record<RunStatus, string> = {
+    [RunStatus.Pass]: 'check',
+    [RunStatus.Fail]: 'x',
+    [RunStatus.Pend]: 'spin-loader',
+    [RunStatus.Timo]: 'timer',
+    [RunStatus.Cncl]: 'alert-circle',
+    [RunStatus.Read]: 'circle-dot'
+  }
+  return types[status] ?? types[RunStatus.Pass]
+}
+
+/**
+ * Get icon color for a given run status.
+ *
+ * @param {RunStatus} status Status code of the run
+ * @returns {string} icon color to be used to represent the run status
+ */
+export function runStatusIconColor(status: RunStatus): string {
+  const types: Record<RunStatus, string> = {
+    [RunStatus.Pass]: 'juniper',
+    [RunStatus.Fail]: 'cherry',
+    [RunStatus.Pend]: 'vanilla-100',
+    [RunStatus.Timo]: 'honey',
+    [RunStatus.Cncl]: 'honey',
+    [RunStatus.Read]: 'vanilla-400'
+  }
+  return types[status] ?? types[RunStatus.Pass]
+}
+
+/**
+ * Get tag label for a given run status.
+ *
+ * @param {RunStatus} status Status code of the run
+ * @returns {string} label for the tag
+ */
+export function runStatusTagLabel(status: RunStatus, forSentence = false): string {
+  const types: Record<RunStatus, string> = {
+    [RunStatus.Pass]: 'Passed',
+    [RunStatus.Fail]: 'Failing',
+    [RunStatus.Pend]: 'Running',
+    [RunStatus.Timo]: 'Timed out',
+    [RunStatus.Cncl]: 'Cancelled',
+    [RunStatus.Read]: 'Ready'
+  }
+
+  const sentenceTypes: Record<RunStatus, string> = {
+    [RunStatus.Pass]: 'Passed in',
+    [RunStatus.Fail]: 'Failed after',
+    [RunStatus.Pend]: 'Analysis in progress',
+    [RunStatus.Timo]: 'Timed out after',
+    [RunStatus.Cncl]: 'Cancelled after',
+    [RunStatus.Read]: 'Completed in'
+  }
+
+  if (forSentence) {
+    return sentenceTypes[status] ?? sentenceTypes[RunStatus.Pass]
+  }
+
+  return types[status] ?? types[RunStatus.Pass]
 }

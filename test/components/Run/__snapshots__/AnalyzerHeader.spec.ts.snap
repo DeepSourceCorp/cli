@@ -107,7 +107,7 @@ exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: 
     </div>
     <div class=\\"space-x-6 sm:flex\\">
       <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"clock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"mt-0.5\\"></zicon-stub>
+        <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mt-0.5\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400\\"><span> Analysis in progress (Time elapsed: 41 seconds) </span></div>
       </div>
       <!---->
@@ -125,7 +125,7 @@ exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: 
     </div>
     <div class=\\"space-x-6 sm:flex\\">
       <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"check-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"mt-0.5\\"></zicon-stub>
+        <zicon-stub icon=\\"circle-dot\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"mt-0.5\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400\\"><span> Completed in 41 seconds </span></div>
       </div>
       <!---->
@@ -158,7 +158,7 @@ exports[`[[ AnalyzerHeader ]] renders \`AnalyzerHeader\` with all prop options: 
     </div>
     <div class=\\"space-x-6 sm:flex\\">
       <div class=\\"flex items-start space-x-2\\">
-        <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"mt-0.5\\"></zicon-stub>
+        <zicon-stub icon=\\"timer\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"mt-0.5\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400\\"><span> Timed out after 41 seconds </span></div>
       </div>
       <!---->

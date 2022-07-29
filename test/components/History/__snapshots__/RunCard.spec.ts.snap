@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders RunCard with all prop options: RunCard 1`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/run/4323412432\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <div class=\\"flex justify-between w-full\\">
+    <div class=\\"gap-2 p-3 md:w-4/5 2xl:w-5/6 w-full\\">
+      <div class=\\"flex flex-col flex-grow\\">
+        <section class=\\"flex items-center text-xs gap-x-1 md:text-base\\">
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"self-center flex-shrink-0 inline mt-0.5 mr-0.5 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+          <h3 class=\\"inline font-medium cursor-pointer text-vanilla-100 line-clamp-1\\">
+            base
+          </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
+        </section>
+        <section class=\\"flex flex-wrap items-center flex-grow pl-px mt-1 leading-8 gap-x-4 gap-y-2\\">
+          <meta-data-item label=\\"Analyzed NaN years ago\\" icon=\\"clock\\"></meta-data-item>
+          <meta-data-item label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></meta-data-item>
+          <!---->
+        </section>
+      </div>
+    </div>
+    <div class=\\"border-l md:w-1/5 2xl:w-1/6 border-ink-200 hidden md:block\\">
+      <div class=\\"grid items-center justify-around flex-shrink-0 h-full grid-cols-1 divide-y md:grid-cols-2 md:gap-x-0 md:divide-y-0 divide-ink-200\\">
+        <div class=\\"grid w-20 h-full p-2 text-center md:w-full place-content-center md:p-3\\">
+          <div class=\\"text-sm md:text-1.5xl font-semibold text-cherry\\">
+            12
+          </div>
+          <div class=\\"text-xxs md:text-xs text-vanilla-400\\">introduced</div>
+        </div>
+        <div class=\\"grid w-20 h-full p-2 text-center md:w-full place-content-center md:p-3\\">
+          <div class=\\"text-sm md:text-1.5xl font-semibold text-juniper\\">
+            13
+          </div>
+          <div class=\\"text-xxs md:text-xs text-vanilla-400\\">resolved</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</basecard-stub>"
+`;
+
+exports[`renders RunCard with pending: RunCard Pending 1`] = `
+"<basecard-stub showinfo=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/run/4323412432\\" title=\\"\\" description=\\"\\" custompadding=\\"p-3\\">
+  <div class=\\"flex justify-between w-full\\">
+    <div class=\\"gap-2 p-3 md:w-4/5 2xl:w-5/6 w-full\\">
+      <div class=\\"flex flex-col flex-grow\\">
+        <section class=\\"flex items-center text-xs gap-x-1 md:text-base\\">
+          <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"self-center flex-shrink-0 inline mt-0.5 mr-0.5 animate-spin has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
+          <h3 class=\\"inline font-medium cursor-pointer text-vanilla-100 line-clamp-1\\">
+            base
+          </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
+        </section>
+        <section class=\\"flex flex-wrap items-center flex-grow pl-px mt-1 leading-8 gap-x-4 gap-y-2\\">
+          <meta-data-item label=\\"Analysis in progress\\" icon=\\"clock\\"></meta-data-item>
+          <meta-data-item label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></meta-data-item>
+          <!---->
+        </section>
+      </div>
+    </div>
+    <!---->
+  </div>
+</basecard-stub>"
+`;

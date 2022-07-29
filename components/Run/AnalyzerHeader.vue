@@ -70,6 +70,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { RunStatus } from '~/types/types'
 import { formatIntl, shortenLargeNumber } from '~/utils/string'
+import { runStatusIcon, runStatusIconColor, runStatusTagLabel } from '~/utils/ui'
 
 @Component({
   components: {
@@ -88,7 +89,7 @@ export default class AnalyzerHeader extends Vue {
   icon!: string
 
   @Prop({ required: true })
-  status!: string
+  status!: RunStatus
 
   @Prop()
   finishedInDisplay: string
@@ -113,51 +114,19 @@ export default class AnalyzerHeader extends Vue {
   }
 
   get statusIcon(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'check',
-      [RunStatus.Fail]: 'x',
-      [RunStatus.Pend]: 'clock',
-      [RunStatus.Timo]: 'timer-reset',
-      [RunStatus.Cncl]: 'alert-circle',
-      [RunStatus.Read]: 'check-circle'
-    }
-    return types[this.status || 'PASS']
+    return runStatusIcon(this.status)
   }
 
   get statusIconColor(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'juniper',
-      [RunStatus.Fail]: 'cherry',
-      [RunStatus.Pend]: 'vanilla-400',
-      [RunStatus.Timo]: 'honey',
-      [RunStatus.Cncl]: 'honey',
-      [RunStatus.Read]: 'vanilla-400'
-    }
-    return types[this.status || 'PASS']
+    return runStatusIconColor(this.status)
   }
 
   get statusText(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'Passed in',
-      [RunStatus.Fail]: 'Failed after',
-      [RunStatus.Pend]: 'Analysis in progress',
-      [RunStatus.Timo]: 'Timed out after',
-      [RunStatus.Cncl]: 'Cancelled after',
-      [RunStatus.Read]: 'Completed in'
-    }
-    return types[this.status || 'PASS']
+    return runStatusTagLabel(this.status, true)
   }
 
   get statusDescription(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'Finished',
-      [RunStatus.Fail]: 'Finished',
-      [RunStatus.Pend]: 'Analysis in progress',
-      [RunStatus.Timo]: 'Timed out',
-      [RunStatus.Cncl]: 'Cancelled',
-      [RunStatus.Read]: 'Ready'
-    }
-    return types[this.status || 'PASS']
+    return runStatusTagLabel(this.status)
   }
 
   get isPending(): boolean {

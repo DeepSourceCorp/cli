@@ -17,7 +17,7 @@
               :icon="getCheckStatusIcon(currentCheck.status)"
               :color="getCheckStatusIconColor(currentCheck.status)"
               class="flex-shrink-0"
-              :class="{ 'motion-safe:animate-spin': isCheckPending }"
+              :class="{ 'animate-spin': isCheckPending }"
             />
             <span
               class="font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs"
@@ -152,7 +152,15 @@ import { formatIntl, shortenLargeNumber } from '~/utils/string'
 import { RunListActions } from '~/store/run/list'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { fromNow } from '~/utils/date'
+import {
+  checkStatusIcon,
+  checkStatusIconColor,
+  checkStatusTagLabel,
+  runStatusIcon,
+  runStatusIconColor
+} from '~/utils/ui'
 import { resolveNodes } from '~/utils/array'
+import { stat } from 'fs'
 
 const runListStore = namespace('run/list')
 
@@ -248,15 +256,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {string} The icon name to be used to represent the given status
    */
   getStatusIcon(status: RunStatus): string {
-    const types: Record<RunStatus, string> = {
-      [RunStatus.Pass]: 'check',
-      [RunStatus.Fail]: 'x',
-      [RunStatus.Pend]: 'spin-loader',
-      [RunStatus.Timo]: 'clock',
-      [RunStatus.Cncl]: 'alert-circle',
-      [RunStatus.Read]: 'check-circle'
-    }
-    return types[status || 'PASS']
+    return runStatusIcon(status)
   }
 
   /**
@@ -266,15 +266,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {string} The icon color to be used to represent the given status
    */
   getStatusIconColor(status: RunStatus): string {
-    const types: Record<RunStatus, string> = {
-      [RunStatus.Pass]: 'juniper',
-      [RunStatus.Fail]: 'cherry',
-      [RunStatus.Pend]: 'vanilla-100',
-      [RunStatus.Timo]: 'honey',
-      [RunStatus.Cncl]: 'honey',
-      [RunStatus.Read]: 'vanilla-400'
-    }
-    return types[status || 'PASS']
+    return runStatusIconColor(status)
   }
 
   /**
@@ -312,18 +304,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {string} The text label to be used to represent the current run's status
    */
   get tagLabel(): string {
-    const types: Record<CheckStatus, string> = {
-      [CheckStatus.Pass]: 'Passed',
-      [CheckStatus.Fail]: 'Failing',
-      [CheckStatus.Pend]: 'Running',
-      [CheckStatus.Timo]: 'Timed out',
-      [CheckStatus.Cncl]: 'Cancelled',
-      [CheckStatus.Read]: 'Ready',
-      [CheckStatus.Wait]: 'Waiting',
-      [CheckStatus.Atmo]: 'Timed out',
-      [CheckStatus.Neut]: 'Passed'
-    }
-    return types[this.currentCheck?.status || 'PASS']
+    return checkStatusTagLabel(this.currentCheck?.status ?? CheckStatus.Pend)
   }
 
   /**
@@ -333,18 +314,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {string} The icon name to be used to represent the given status
    */
   getCheckStatusIcon(status: CheckStatus): string {
-    const types: Record<CheckStatus, string> = {
-      [CheckStatus.Pass]: 'check',
-      [CheckStatus.Fail]: 'x',
-      [CheckStatus.Pend]: 'timer',
-      [CheckStatus.Timo]: 'timer-reset',
-      [CheckStatus.Cncl]: 'alert-circle',
-      [CheckStatus.Read]: 'check-circle',
-      [CheckStatus.Neut]: 'check',
-      [CheckStatus.Atmo]: 'x',
-      [CheckStatus.Wait]: 'alarm-clock'
-    }
-    return types[status || 'PASS']
+    return checkStatusIcon(status)
   }
 
   /**
@@ -354,18 +324,7 @@ export default class RunHeader extends RepoDetailMixin {
    * @returns {string} The icon color to be used to represent the given status
    */
   getCheckStatusIconColor(status: CheckStatus): string {
-    const types: Record<CheckStatus, string> = {
-      [CheckStatus.Pass]: 'juniper',
-      [CheckStatus.Fail]: 'cherry',
-      [CheckStatus.Pend]: 'vanilla-400',
-      [CheckStatus.Timo]: 'honey',
-      [CheckStatus.Cncl]: 'honey',
-      [CheckStatus.Read]: 'vanilla-400',
-      [CheckStatus.Neut]: 'vanilla-400',
-      [CheckStatus.Atmo]: 'cherry',
-      [CheckStatus.Wait]: 'honey'
-    }
-    return types[status || 'PASS']
+    return checkStatusIconColor(status)
   }
 
   /**

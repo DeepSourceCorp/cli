@@ -7,7 +7,7 @@
             <section class="flex items-center text-xs gap-x-1 md:text-base">
               <z-icon
                 v-tooltip="tagLabel"
-                class="self-center flex-shrink-0 inline mt-0.5"
+                class="self-center flex-shrink-0 inline mt-0.5 mr-0.5"
                 :icon="icon"
                 :class="{ 'animate-spin': isPending }"
                 :color="iconColor"
@@ -76,10 +76,10 @@ import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import { BaseCard } from '../'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import { fromNow, formatSeconds } from '@/utils/date'
+import { fromNow } from '@/utils/date'
 import { shortenLargeNumber } from '@/utils/string'
 import { Maybe, RunStatus, Scalars } from '~/types/types'
-import { state } from '~/store'
+import { runStatusIcon, runStatusIconColor, runStatusTagLabel } from '~/utils/ui'
 
 @Component({
   components: {
@@ -89,7 +89,7 @@ import { state } from '~/store'
 })
 export default class RunCard extends mixins(RepoDetailMixin) {
   @Prop({ default: 'PASS' })
-  status: string
+  status: RunStatus
 
   @Prop({ default: '' })
   branchName: string
@@ -133,90 +133,20 @@ export default class RunCard extends mixins(RepoDetailMixin) {
   @Prop({ default: false })
   isForDefaultBranch: boolean
 
-  get provider() {
-    const { provider } = this.$route.params
-    return this.$providerMetaMap[provider].text
-  }
-
-  get vscLinkTooltip() {
-    const { provider } = this.$route.params
-    return this.isForDefaultBranch
-      ? `Open ${this.branchName} on ${this.provider}`
-      : provider === 'gl'
-      ? 'Open MR'
-      : 'Open PR'
-  }
-
   get icon(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'check',
-      [RunStatus.Fail]: 'x',
-      [RunStatus.Pend]: 'spin-loader',
-      [RunStatus.Timo]: 'timer',
-      [RunStatus.Cncl]: 'alert-circle',
-      [RunStatus.Read]: 'check-circle'
-    }
-    return types[this.status || 'PASS']
+    return runStatusIcon(this.status)
   }
 
   get iconColor(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'juniper',
-      [RunStatus.Fail]: 'cherry',
-      [RunStatus.Pend]: 'vanilla-100',
-      [RunStatus.Timo]: 'honey',
-      [RunStatus.Cncl]: 'honey',
-      [RunStatus.Read]: 'vanilla-400'
-    }
-    return types[this.status || 'PASS']
+    return runStatusIconColor(this.status)
   }
 
   get tagLabel(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'Passed',
-      [RunStatus.Fail]: 'Failing',
-      [RunStatus.Pend]: 'Running',
-      [RunStatus.Timo]: 'Timed out',
-      [RunStatus.Cncl]: 'Cancelled',
-      [RunStatus.Read]: 'Ready'
-    }
-    return types[this.status || 'PASS']
+    return runStatusTagLabel(this.status)
   }
 
   get statusText(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'Passed in',
-      [RunStatus.Fail]: 'Failed after',
-      [RunStatus.Pend]: 'Analysis in progress',
-      [RunStatus.Timo]: 'Timed out after',
-      [RunStatus.Cncl]: 'Cancelled after',
-      [RunStatus.Read]: 'Completed in'
-    }
-    return types[this.status || 'PASS']
-  }
-
-  get statusIcon(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'run-passed',
-      [RunStatus.Fail]: 'run-failed',
-      [RunStatus.Pend]: 'clock',
-      [RunStatus.Timo]: 'run-timed-out',
-      [RunStatus.Cncl]: 'run-failed',
-      [RunStatus.Read]: 'run-passed'
-    }
-    return types[this.status] || 'clock'
-  }
-
-  get absentTimeStatusText(): string {
-    const types: Record<string, string> = {
-      [RunStatus.Pass]: 'Passed',
-      [RunStatus.Fail]: 'Failed',
-      [RunStatus.Pend]: 'Analysis in progress',
-      [RunStatus.Timo]: 'Timed out',
-      [RunStatus.Cncl]: 'Cancelled',
-      [RunStatus.Read]: 'Ready'
-    }
-    return types[this.status || 'PASS']
+    return runStatusTagLabel(this.status, true)
   }
 
   get isPending(): boolean {
@@ -256,34 +186,9 @@ export default class RunCard extends mixins(RepoDetailMixin) {
     return label
   }
 
-  get commitHash(): string {
-    return this.commitOid.slice(0, 7)
-  }
-
   get createdString(): string {
     // return '2mins'
     return fromNow(this.createdAt)
-  }
-
-  get finishedString(): string {
-    return formatSeconds(this.finishedIn)
-  }
-
-  /**
-   * Handles the click event on the "Open PR" button
-   * This is done programatically instead of via an achor since the element is placed within a parent with a click handler,
-   * so the "@click.prevent" event modifier is needed to override the default click action
-   */
-  handlePrUrlClick() {
-    const url = this.isForDefaultBranch ? this.repository.vcsUrl : this.vcsPrUrl
-
-    const anchor = document.createElement('a')
-    Object.assign(anchor, {
-      target: '_blank',
-      href: url,
-      rel: 'noopener noreferrer'
-    }).click()
-    anchor.parentNode?.removeChild(anchor)
   }
 }
 </script>

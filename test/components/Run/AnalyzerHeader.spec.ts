@@ -97,12 +97,12 @@ describe('[[ AnalyzerHeader ]]', () => {
 
   test('`statusDescription` returns a description based on the `status`', () => {
     const vm = getInstance()
-    expect(vm.statusDescription).toBe('Finished')
+    expect(vm.statusDescription).toBe('Failing')
   })
 
   test('`statusDescription` falls back to the description for `PASS` if `status` is falsy', () => {
     const vm = getInstance({ status: '' })
-    expect(vm.statusDescription).toBe('Finished')
+    expect(vm.statusDescription).toBe('Passed')
   })
 
   test('`isPending` returns `true` if `status` is in pending state', () => {

@@ -10,7 +10,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
-          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
@@ -55,7 +55,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
-          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
@@ -100,7 +100,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
-          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
@@ -145,7 +145,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
-          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
@@ -190,7 +190,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
-          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
@@ -235,7 +235,7 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
-          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Passed</span>
+          <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
