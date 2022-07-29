@@ -39,15 +39,13 @@
     </div>
     <div class="flex items-center p-4 space-x-1 text-sm font-medium text-vanilla-100" v-else>
       <z-label v-if="runErrors.error.length" class="inline-block select-none" state="error">
-        {{ runErrors.error.length }} {{ runErrors.error.length > 1 ? 'errors' : 'error' }}
+        {{ getErrorTypeLabel('error') }}
       </z-label>
       <z-label v-if="runErrors.warning.length" class="inline-block select-none" state="warning">
-        {{ runErrors.warning.length }}
-        {{ runErrors.warning.length > 1 ? 'warnings' : 'warning' }}
+        {{ getErrorTypeLabel('warning') }}
       </z-label>
       <z-label v-if="runErrors.info.length" class="inline-block select-none" state="info">
-        {{ runErrors.info.length }}
-        {{ runErrors.info.length > 1 ? 'messages' : 'message' }}
+        {{ getErrorTypeLabel('info') }}
       </z-label>
     </div>
   </div>
@@ -87,11 +85,12 @@ export default class RunErrorBox extends Vue {
 
   getErrorTypeLabel(key: string): string {
     const map: Record<string, string> = {
-      error: 'Errors',
-      warning: 'Warnings',
-      info: 'Messages'
+      error: `${this.runErrors.error.length} Error${this.runErrors.error.length > 1 ? 's' : ''}`,
+      warning: `${this.runErrors.warning.length} Warning${
+        this.runErrors.warning.length > 1 ? 's' : ''
+      }`,
+      info: `${this.runErrors.info.length} Message${this.runErrors.info.length > 1 ? 's' : ''}`
     }
-
     return map[key]
   }
 }

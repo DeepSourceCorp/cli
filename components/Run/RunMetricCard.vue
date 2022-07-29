@@ -30,6 +30,7 @@
           >
           <ticker
             v-if="metricsCaptured.valueTrendDisplay"
+            v-tooltip="tooltipText"
             :trend-value="trendDisplay"
             :trend-positive="trendPositive"
             :is-percent="trendIsPercent"
@@ -110,6 +111,10 @@ export default class RunMetricCard extends Vue {
 
   get canSuppressMetric(): boolean {
     return Boolean(this.repository?.userPermissionMeta?.can_ignore_failing_metrics)
+  }
+
+  get tooltipText(): string {
+    return `Compared to ${this.repository.defaultBranchName}`
   }
 }
 </script>

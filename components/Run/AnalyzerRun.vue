@@ -3,12 +3,12 @@
     <div
       v-if="status === CheckStatus.Fail"
       id="issue-filters"
-      class="px-3 md:sticky check-filter-headers-offset bg-ink-400"
+      class="px-3 md:sticky md:z-10 check-filter-headers-offset bg-ink-400"
     >
       <slot name="controls" />
     </div>
     <div class="p-3">
-      <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" />
+      <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" class="mb-3" />
       <lazy-run-loading v-if="status === CheckStatus.Pend" />
       <lazy-run-pass v-else-if="status === CheckStatus.Pass && issueCount === 0" />
       <lazy-run-cancelled v-else-if="status === CheckStatus.Cncl && issueCount === 0" />

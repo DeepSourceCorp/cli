@@ -17,7 +17,7 @@ There can be cases where the value being raised is dynamically set. One common e
 
 exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"status":"FAIL"} 1`] = `
 "<section class=\\"flex flex-col min-height-for-offset\\">
-  <div id=\\"issue-filters\\" class=\\"px-3 md:sticky check-filter-headers-offset bg-ink-400\\"></div>
+  <div id=\\"issue-filters\\" class=\\"px-3 md:sticky md:z-10 check-filter-headers-offset bg-ink-400\\"></div>
   <div class=\\"p-3\\">
     <!---->
     <div class=\\"grid grid-cols-1 gap-y-3\\">
