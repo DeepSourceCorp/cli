@@ -81,15 +81,6 @@ archives:
       386: i386
       amd64: x86_64
 
-
-
-
-
-
-
-
-    @@ -45,16 +90,16 @@ changelog:
-
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -100,17 +91,18 @@ changelog:
     exclude:
     - '^tests:'
 
-# TODO: fix homebrew tap (siddhant-deepsource)
-# brews:
-#   - tap:
-#       owner: deepsourcelabs
-#       name: homebrew-cli
-#       branch: cli-release
-#       token: "{{ .Env.HOMEBREW_TOKEN }}"
-#     commit_author:
-#       name: deepsourcebot
-#       email: bot@deepsource.io
-#     homepage: "https://github.com/deepsourcelabs/cli"
-#     description: "Command line interface to DeepSource"
-#     license: "BSD 2-Clause Simplified License"
-#     skip_upload: auto
+brews:
+  - ids:
+    - deepsource
+  - tap:
+      owner: deepsourcelabs
+      name: homebrew-cli
+      branch: cli-release
+      token: "{{ .Env.HOMEBREW_TOKEN }}"
+    commit_author:
+      name: deepsourcebot
+      email: bot@deepsource.io
+    homepage: "https://github.com/deepsourcelabs/cli"
+    description: "Command line interface to DeepSource"
+    license: "BSD 2-Clause Simplified License"
+    skip_upload: auto
