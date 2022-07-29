@@ -75,6 +75,7 @@ get_binaries() {
 	openbsd/amd64) BINARIES="deepsource" ;;
 	openbsd/arm64) BINARIES="deepsource" ;;
 	openbsd/armv6) BINARIES="deepsource" ;;
+	windows/amd64) BINARIES="deepsource" ;;
 	*)
 		log_crit "platform $PLATFORM is not supported.  Make sure this script is up-to-date and file request at https://github.com/${PREFIX}/issues/new"
 		exit 1
