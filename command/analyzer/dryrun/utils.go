@@ -45,11 +45,11 @@ func modifyAnalysisConfigFilepaths(analysisConfig *analysis.AnalysisConfig, loca
 }
 
 // Creates a temporary directory with the name supplied as the parameter
-func createTemporaryDirectory(directoryName string) (string, error) {
+func createTemporaryDirectory(directoryName string) (string, error) { // skipcq: TCV-001
 	return os.MkdirTemp("", directoryName)
 }
 
-func (a *AnalyzerDryRun) createTemporaryToolBoxDir() (err error) {
+func (a *AnalyzerDryRun) createTemporaryToolBoxDir() (err error) { // skipcq: TCV-001
 	if a.TempToolBoxDirectory == "" {
 		// Create a temporary directory
 		if a.TempToolBoxDirectory, err = createTemporaryDirectory("toolbox"); err != nil {
