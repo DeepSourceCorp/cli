@@ -57,14 +57,12 @@
             </div>
             <ticker
               v-if="showTrend"
-              :icon="isTrendPositive ? 'triangle-up' : 'triangle-down'"
-              :trend-direction="isTrendPositive ? 'up' : 'down'"
-              :trend-positive="!isTrendPositive"
-              :trend-value="`${trendValue}%`"
+              :trend-direction="trend.trendDirection === TrendDirection.Up ? 'up' : 'down'"
+              :trend-positive="trend.trendPositive"
+              :trend-value="trend.trendValue ? `${trend.trendValue}%` : ' '"
+              :trend-hint="trend.trendHint"
               :show-bg="false"
-              trend-hint="since last week"
-              class="bg-opacity-0 text-xxs md:text-xs"
-              :class="isTrendPositive ? 'text-cherry' : 'text-juniper'"
+              class="hidden sm:block bg-opacity-0 text-xxs md:text-xs"
             />
           </div>
           <!-- Autofix -->
@@ -97,9 +95,7 @@ import { BaseCard } from '@/components/History'
 import { IssueType } from '@/components/Repository'
 import { formatDate } from '~/utils/date'
 import { escapeHtml, formatIntl, shortenLargeNumber } from '~/utils/string'
-import { IssueSeverity } from '~/types/types'
-
-const PERCENTAGE = 100
+import { IssueSeverity, IssueTrend, TrendDirection } from '~/types/types'
 
 @Component({
   components: {
@@ -150,7 +146,7 @@ export default class IssueListItem extends Vue {
   centerContent!: boolean
 
   @Prop()
-  pastValue!: number
+  trend!: IssueTrend
 
   @Prop()
   raisedInFiles!: Array<string>
@@ -167,6 +163,8 @@ export default class IssueListItem extends Vue {
   @Prop({ default: true })
   showSeenInfo!: boolean
 
+  TrendDirection = TrendDirection
+
   public handleClick(): void {
     this.$emit('autofix', {
       shortcode: this.shortcode,
@@ -176,48 +174,7 @@ export default class IssueListItem extends Vue {
   }
 
   get showTrend(): boolean {
-    /*
-        Return if the trend should be shown.
-
-        If the past value is the same as current value of
-        number of occurrences, do not show the trend.
-
-        If the past value is zero, don't show
-      */
-    if (this.pastValue === 0) {
-      return false
-    }
-
-    if (this.trendValue === 100) {
-      return false
-    }
-
-    if (this.showComparisonStat && Number.isFinite(this.pastValue) && Number(this.pastValue)) {
-      return this.occurrenceCount !== this.pastValue
-    }
-
-    return false
-  }
-  get isTrendPositive(): boolean {
-    /*
-        Return true if the trend is positive, and false if it's negative.
-      */
-    return Number(this.occurrenceCount) < Number(this.pastValue)
-  }
-
-  get trendValue(): number {
-    /*
-        Return the trend percentage display.
-      */
-    let changePercentage = PERCENTAGE
-    // newly introduced issue, 100% increased
-    if (Number.isFinite(this.pastValue)) {
-      const maxValue = Math.max(Number(this.pastValue), Number(this.occurrenceCount))
-      const minValue = Math.min(Number(this.pastValue), Number(this.occurrenceCount))
-      const delta = maxValue - minValue
-      changePercentage = Math.round((delta / maxValue) * PERCENTAGE)
-    }
-    return changePercentage
+    return Boolean(this.trend && Object.keys(this.trend).length > 0)
   }
 
   get lastSeenDisplay(): string {

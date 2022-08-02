@@ -1554,6 +1554,13 @@ enum IssueSeverity {
   MINOR
 }
 
+type IssueTrend {
+  trendHint: String
+  trendValue: Int
+  trendDirection: TrendDirection
+  trendPositive: Boolean
+}
+
 type IssueTypeSetting {
   slug: String
   name: String
@@ -2107,7 +2114,6 @@ type Repository implements MaskPrimaryKeyNode {
   blobUrlRoot: String
   fullName: String
   renderedErrorMessage: String
-  activityModality: String
   issueTypeSettings: [IssueTypeSetting]
   issuePrioritySettings: [IssuePrioritySetting]
   metricSettings: [MetricSetting]
@@ -2216,12 +2222,12 @@ type RepositoryIssue implements MaskPrimaryKeyNode {
   description: String
   descriptionRendered: String
   occurrenceCount: Int
+  trend: IssueTrend
   firstSeen: DateTime
   analyzerName: String
   analyzerShortcode: String
   analyzerLogo: String
   seenIn: String
-  pastValue: Int
   autofixAvailable: Boolean
   raisedInFiles: [String]
   silenceRules: [SilenceRule]
@@ -2261,6 +2267,7 @@ type RepositoryMetricValue implements MaskPrimaryKeyNode {
   modifiedAt: DateTime!
   alive: Boolean
   value: Float
+  threshold: Int
   extraData: JSONString!
   commitOid: String!
   checkInstance: Check!
@@ -2268,7 +2275,6 @@ type RepositoryMetricValue implements MaskPrimaryKeyNode {
   isSuppressed: Boolean
   name: String
   shortcode: String
-  threshold: Int
   valueDisplay: String
   isPassing: Boolean
   namespace: GenericScalar

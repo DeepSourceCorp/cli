@@ -6,12 +6,10 @@ import VTooltip from 'v-tooltip'
 import { BaseCard } from '~/components/History'
 import IssueListItem from '~/components/IssueListItem.vue'
 import { cartesian, generateBooleanProps } from '~/test/utils'
+import { TrendDirection } from '~/types/types'
 
 interface IssueListItemInterface {
-  pastValue: number
   showTrend: boolean
-  isTrendPositive: boolean
-  trendValue: number
   lastSeenDisplay: string
   firstSeenDisplay: string
 }
@@ -41,7 +39,12 @@ describe('[[ IssueListItem ]]', () => {
       firstSeen: '2020-03-09T17:21:41.965533+00:00',
       lastSeen: '2020-07-06T10:14:07.821843+00:00',
       modifiedAt: '2020-03-09T17:21:41.965540+00:00',
-      pastValue: 3,
+      trend: {
+        trendHint: 'Since last week',
+        trendValue: 12,
+        trendDirection: TrendDirection.Down,
+        trendPositive: true
+      },
       raisedInFiles: ['code.py']
     }
 
@@ -72,7 +75,9 @@ describe('[[ IssueListItem ]]', () => {
           props,
           stubs: {
             IssueType: true,
-            ZIcon: true
+            ZIcon: true,
+            Ticker: true,
+            MetaDataItem: true
           }
         },
         (vue) => {
@@ -119,57 +124,23 @@ describe('[[ IssueListItem ]]', () => {
     })
   })
 
-  test('`showTrend` is set to `false` if `pastValue` is `0`', () => {
-    const vm = getInstance({ pastValue: 0 })
-    expect(vm.showTrend).toBe(false)
-  })
-
-  test('`showTrend` is set to `false` if `trendValue` is `100`', () => {
+  test('`showTrend` is set to `true` if `trend` is present', () => {
     const vm = getInstance({
-      trendValue: 100
-    })
-    expect(vm.showTrend).toBe(false)
-  })
-
-  test('`showTrend` is set to `true` if `occurrenceCount` and `pastValue` are different', () => {
-    const vm = getInstance({
-      occurrenceCount: 2,
-      pastValue: 1
+      trend: {
+        trendHint: 'Since last week',
+        trendValue: 12,
+        trendDirection: TrendDirection.Down,
+        trendPositive: true
+      }
     })
     expect(vm.showTrend).toBe(true)
   })
 
-  test('`showTrend` is set to `false` if no conditions are matched', () => {
+  test('`showTrend` is set to `false` if `trend` is empty', () => {
     const vm = getInstance({
-      occurrenceCount: 2,
-      pastValue: 1,
-      showComparisonStat: false
+      trend: {}
     })
     expect(vm.showTrend).toBe(false)
-  })
-
-  test('`isTrendPositive` is set to `true` if the `occurrenceCount` is less than `pastValue`', () => {
-    const vm = getInstance({
-      occurrenceCount: 1,
-      pastValue: 2
-    })
-    expect(vm.isTrendPositive).toBe(true)
-  })
-
-  test('`trendValue` returns the change in trend percentage', () => {
-    const vm = getInstance({
-      occurrenceCount: 1,
-      pastValue: 2
-    })
-    expect(vm.trendValue).toBe(50)
-  })
-
-  test('`trendValue` is set to `100` if `pastValue` is not a finite number', () => {
-    const vm = getInstance({
-      occurrenceCount: 1,
-      pastValue: Infinity
-    })
-    expect(vm.trendValue).toBe(100)
   })
 
   test('`lastSeenDisplay` returns when the issue was seen the last time in a human-readable form', () => {

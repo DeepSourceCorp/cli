@@ -13,7 +13,6 @@ query {
           seenIn
           occurrenceCount
           autofixAvailable
-          pastValue
           raisedInFiles
           repositoryInstance {
             id

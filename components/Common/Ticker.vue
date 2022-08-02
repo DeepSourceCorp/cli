@@ -1,19 +1,20 @@
 <template>
   <div
     v-if="trendValue"
-    class="flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor"
+    class="p-1 space-x-1 text-xs font-normal leading-none text-center rounded-md cursor"
     :class="[
       customBgClass || bgClass,
       customBgClass ? '' : showBg ? 'bg-opacity-10' : 'bg-opacity-0'
     ]"
   >
-    <z-icon v-if="icon" :icon="icon" :color="iconColor" size="small" class="flex-shrink-0"></z-icon>
+    <z-icon v-if="icon" :icon="icon" :color="iconColor" class="inline" :class="iconClass"></z-icon>
     <z-icon
       v-else
       :icon="trendDirection === 'up' ? 'triangle-up' : 'triangle-down'"
       :color="iconColor"
       size="x-small"
-      class="flex-shrink-0"
+      class="inline"
+      :class="iconClass"
     />
     {{ valueDisplay }} {{ trendHint }}
   </div>
@@ -29,7 +30,8 @@ import { ZIcon } from '@deepsourcelabs/zeal'
 @Component({
   components: {
     ZIcon
-  }
+  },
+  name: 'Ticker'
 })
 export default class Ticker extends Vue {
   @Prop({ default: null })
@@ -46,6 +48,9 @@ export default class Ticker extends Vue {
 
   @Prop({ default: null })
   icon: string
+
+  @Prop({ default: 'pb-0.5' })
+  iconClass: string
 
   @Prop({ default: null })
   trendHint: string
@@ -67,10 +72,6 @@ export default class Ticker extends Vue {
   }
 
   get bgClass(): string {
-    if (this.trendValue === 0 || this.trendPositive === null) {
-      return 'bg-vanilla-300 text-vanilla-100'
-    }
-
     if (this.trendPositive === true) {
       return 'bg-juniper text-juniper'
     }
@@ -83,10 +84,6 @@ export default class Ticker extends Vue {
   }
 
   get iconColor(): string {
-    if (this.trendValue === 0 || this.trendPositive === null) {
-      return 'vanilla-100'
-    }
-
     if (this.trendPositive === true) {
       return 'juniper'
     }

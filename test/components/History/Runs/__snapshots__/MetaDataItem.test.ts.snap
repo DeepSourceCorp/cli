@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders MetaDataItem with all prop options: {"icon":"antipattern","label":"Antipattern"} 1`] = `
+"<div class=\\"space-x-1\\">
+  <zicon-stub icon=\\"antipattern\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 inline\\"></zicon-stub> <span class=\\"text-vanilla-400 text-xs md:text-sm inline\\">Antipattern</span>
+</div>"
+`;

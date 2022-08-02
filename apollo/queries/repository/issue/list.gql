@@ -39,7 +39,12 @@ query repositoryIssueList(
           firstSeen
           lastSeen
           modifiedAt
-          pastValue
+          trend {
+            trendHint
+            trendValue
+            trendDirection
+            trendPositive
+          }
           autofixAvailable
           raisedInFiles
           severity

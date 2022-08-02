@@ -31,14 +31,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -77,14 +70,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -123,14 +109,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -169,14 +148,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -215,14 +187,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -261,14 +226,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -307,14 +265,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -353,14 +304,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -399,14 +343,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -445,14 +382,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -491,14 +421,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -537,14 +460,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -583,14 +499,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -629,14 +538,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -675,14 +577,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -721,14 +616,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -767,14 +655,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -813,14 +694,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -859,14 +733,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -905,14 +772,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -951,14 +811,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -997,14 +850,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1043,14 +889,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1089,14 +928,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1135,14 +967,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1181,14 +1006,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1227,14 +1045,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1273,14 +1084,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1319,14 +1123,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1365,14 +1162,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1411,14 +1201,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1457,14 +1240,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1503,14 +1279,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1549,14 +1318,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1595,14 +1357,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1641,14 +1396,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1687,14 +1435,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1733,14 +1474,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1779,14 +1513,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1825,14 +1552,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1871,14 +1591,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1917,14 +1630,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1963,14 +1669,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2009,14 +1708,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2055,14 +1747,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2101,14 +1786,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2147,14 +1825,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2193,14 +1864,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2239,14 +1903,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2285,14 +1942,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2331,14 +1981,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2377,14 +2020,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2423,14 +2059,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2469,14 +2098,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2515,14 +2137,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2561,14 +2176,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2607,14 +2215,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2653,14 +2254,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2699,14 +2293,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2745,14 +2332,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2791,14 +2371,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2837,14 +2410,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-cherry text-cherry bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-cherry\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2883,14 +2449,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2929,14 +2488,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <div class=\\"flex items-center p-1 gap-x-1 text-xs font-normal leading-none text-center rounded-md cursor hidden md:flex bg-juniper text-juniper bg-opacity-10\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"flex-shrink-0 z-icon w-4 h-4 z-icon--threshold text-juniper\\">
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 5H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.1\\" d=\\"M3 19H20\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\" stroke-dasharray=\\"2 2\\"></path>
-              <path class=\\"stroke-1\\" opacity=\\"0.5\\" d=\\"M3 13L20 13\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-              <path class=\\"stroke-1\\" d=\\"M2.5 10.4989C2.91343 9.73278 3.81707 7.5782 4.65854 7.03856C5.5 6.49891 7.43903 16.9994 9.21951 16.9994C11 16.9994 10.4506 13.9994 12 13.9994C13.5494 13.9994 14 13.9994 14.1951 13.5514C14.3902 13.1034 16.6829 6.65667 17.9268 7.03856C19.1707 7.42044 20 9.72031 20 9.72031\\" stroke=\\"currentColor\\" stroke-linecap=\\"round\\"></path>
-            </svg>
-            300
-          </div>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->

@@ -61,7 +61,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
-import Ticker from '@/components/Ticker.vue'
+import Ticker from '~/components/Common/Ticker.vue'
 import { Analyzer } from '~/types/types'
 
 @Component({

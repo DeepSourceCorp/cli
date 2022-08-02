@@ -31,7 +31,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { shortenLargeNumber } from '@/utils/string'
-import Ticker from '@/components/Ticker.vue'
+import Ticker from '~/components/Common/Ticker.vue'
 
 /**
  * Component to show current value and increment/decrement trend

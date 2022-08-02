@@ -9,7 +9,7 @@ import {
 } from '~/store/issue/list'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { mockIssueListState } from './__mocks__/list.mock'
-import { Repository, RepositoryIssueConnection } from '~/types/types'
+import { Repository, RepositoryIssueConnection, TrendDirection } from '~/types/types'
 
 let issueListState: IssueListModuleState
 let actionCxt: IssueListActionContext
@@ -68,9 +68,7 @@ describe('[Store] Issue/List', () => {
             },
             $getGQLAfter: jest.fn(),
             async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { repository: <Repository>{ issue: {} } } })
-              )
+              return Promise.resolve({ data: { repository: <Repository>{ issue: {} } } })
             }
           }
 
@@ -145,7 +143,7 @@ describe('[Store] Issue/List', () => {
             },
             $getGQLAfter: jest.fn(),
             async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -257,7 +255,6 @@ describe('[Store] Issue/List', () => {
                 seenIn: 'core/models/base.py, core/models/job.py and 2 other files',
                 firstSeen: '2020-02-29T07:06:11.659776+00:00',
                 lastSeen: '2020-07-09T08:55:25.934225+00:00',
-                pastValue: 8,
                 autofixAvailable: false
               }
             }

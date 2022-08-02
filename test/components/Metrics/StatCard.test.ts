@@ -42,7 +42,9 @@ test('renders StatCard with all prop options', () => {
       {
         props,
         stubs: {
-          NuxtLink: RouterLinkStub
+          NuxtLink: RouterLinkStub,
+          Ticker: true,
+          ZTag: true
         }
       },
       injectDirective

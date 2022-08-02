@@ -13,7 +13,8 @@ import { ZIcon } from '@deepsourcelabs/zeal'
 @Component({
   components: {
     ZIcon
-  }
+  },
+  name: 'MetaDataItem'
 })
 export default class MetaDataItem extends Vue {
   @Prop({ default: '' })
