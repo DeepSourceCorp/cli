@@ -1,7 +1,7 @@
 <template>
   <div class="p-4 space-y-6">
     <issue-overview-cards />
-    <alerting-metrics-section :routeToMetricsPage="true" />
+    <!-- <alerting-metrics-section :routeToMetricsPage="true" /> -->
     <code-quality-graph />
     <client-only>
       <recent-runs-section />
@@ -14,7 +14,6 @@ import { Component, mixins } from 'nuxt-property-decorator'
 
 // Components
 import { CodeQualityGraph } from '@/components/Graphs'
-import { AlertingMetricsSection } from '@/components/Metrics'
 import { TransformCard } from '@/components/History'
 import { AutofixListItem } from '@/components/Autofix'
 import { IssueOverviewCards, RecentRunsSection } from '@/components/RepoOverview'
@@ -39,7 +38,6 @@ export interface Widget {
  */
 @Component({
   components: {
-    AlertingMetricsSection,
     IssueOverviewCards,
     RecentRunsSection,
     CodeQualityGraph,
