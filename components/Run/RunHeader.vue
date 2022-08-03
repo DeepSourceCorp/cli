@@ -1,5 +1,5 @@
 <template>
-  <div class="grid sm:grid-cols-fr-16 lg:grid-cols-fr-22 md:h-23">
+  <div class="flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-23">
     <div class="flex flex-col gap-y-1.5 p-3">
       <div class="flex items-start gap-x-3">
         <z-icon :icon="currentCheck.analyzer.shortcode" size="large" class="-ml-1" />
