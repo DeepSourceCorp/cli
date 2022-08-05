@@ -41,7 +41,7 @@
         <!-- Header Loading state -->
         <div
           v-if="$fetchState.pending || !run"
-          class="flex flex-1 w-full p-4 space-x-2 rounded-sm h-23 border-b border-ink-100"
+          class="flex flex-1 w-full p-4 space-x-2 rounded-sm h-23 border-b border-ink-200"
         >
           <!-- Left Section -->
           <div class="flex flex-col w-3/5 space-y-2 md:w-4/5 justify-evenly">

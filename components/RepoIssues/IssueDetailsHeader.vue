@@ -10,6 +10,9 @@
       <div class="flex flex-wrap items-center gap-x-4 gap-y-2 leading-none">
         <issue-type v-if="issueType" :issueType="issueType"></issue-type>
         <issue-severity-tag v-if="severity && issueType === 'security'" :severity="severity" />
+        <meta-data-item v-if="count" icon="file-pulse"
+          >{{ count }} {{ count > 1 ? 'occurrences' : 'occurrence' }} in this check</meta-data-item
+        >
         <div v-if="firstSeen && lastSeen" class="flex items-center space-x-2">
           <z-icon icon="clock" size="x-small" color="vanilla-400"></z-icon>
           <span class="text-sm text-vanilla-400">
@@ -116,6 +119,9 @@ export default class IssueDetailsHeader extends Vue {
 
   @Prop({ default: false })
   canEditPriority!: boolean
+
+  @Prop({ default: 0 })
+  count: number
 
   get lastSeenDisplay(): string {
     /**

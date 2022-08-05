@@ -1232,10 +1232,10 @@
   resolved "https://registry.yarnpkg.com/@deepsource/shifty/-/shifty-1.0.0.tgz#ecacb5337fd0ad9022af1df602bcede23664b485"
   integrity sha512-n+xr3puUHlsh5S7eYKtnJ+ASQqzfJ/SpUPi/ADZjiGqpZZu+Q1bSqiVfpUr670ceGL64AUEpAIeVe/N9eHLQ4w==
 
-"@deepsourcelabs/zeal@^0.11.43":
-  version "0.11.43"
-  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.11.43/efff44c80e7ec3d22720025dd0b9f25f85deb60147f5a97ba5b4bb59cb6a35f4#d4f2a67065abf3d65d950e09c24d525f8e821647"
-  integrity sha512-1UmoYuq57RVX32zWtvEu2rkvx22JmFTITX9HbnhpC26ZWDWOc/RpwCVYjhYDM1gF1x2A7iNM9gHX0W1zbP1EkA==
+"@deepsourcelabs/zeal@^0.11.48":
+  version "0.11.48"
+  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.11.48/08ed52cb5a6fd1911c53364b6abf839a66eb0c70#08ed52cb5a6fd1911c53364b6abf839a66eb0c70"
+  integrity sha512-Tuc+LFy4nWtDSKYNH2f8c0ZqzcPz25D1H1TZPhLVEFBEeiPagH25GLmEdJZmTs9YJCPOF6D5TEQFqP85Ft9Ldw==
   dependencies:
     "@tailwindcss/line-clamp" "^0.2.2"
     "@tailwindcss/postcss7-compat" "^2.2.16"

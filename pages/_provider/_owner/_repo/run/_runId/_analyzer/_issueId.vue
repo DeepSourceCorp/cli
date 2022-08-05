@@ -1,11 +1,11 @@
 <template>
   <main class="pb-6 issue-page">
-    <div class="z-20 p-4 md:sticky top-bar-offset bg-ink-400">
+    <div class="z-20 p-4 md:sticky top-bar-offset bg-ink-400 border-b border-ink-200">
       <!-- Issue details -->
-      <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0">
-        <div class="w-full space-y-1" v-if="$fetchState.pending">
+      <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0 mb-px">
+        <div class="w-full space-y-2.5" v-if="$fetchState.pending">
           <!-- Left Section -->
-          <div class="w-3/5 h-10 rounded-md md:w-4/5 bg-ink-300 animate-pulse"></div>
+          <div class="w-3/5 h-8 rounded-md md:w-4/5 bg-ink-300 animate-pulse"></div>
           <div class="flex w-1/3 space-x-2">
             <div class="w-1/3 h-4 rounded-md bg-ink-300 animate-pulse"></div>
             <div class="w-1/3 h-4 rounded-md bg-ink-300 animate-pulse"></div>
@@ -21,8 +21,7 @@
             :severity="singleIssue.severity"
             :firstSeen="issue.firstSeen"
             :lastSeen="issue.lastSeen"
-            :count="check.issuesRaisedCount"
-            :showMeta="true"
+            :count="issueOccurrences.totalCount"
             :issue-priority="issuePriority"
             :can-edit-priority="canEditPriority"
             @priority-edited="editPriority"
@@ -40,124 +39,40 @@
         </div>
       </div>
     </div>
-    <z-tabs>
-      <z-tab-list
-        class="px-4 pb-0 border-b border-ink-100 md:sticky offset-for-tabs z-10 bg-ink-400"
-      >
-        <z-tab-item border-active-color="vanilla-400">
-          <div class="h-5 flex items-center gap-x-1">
-            <span>Occurrences</span>
-            <z-tag
-              v-if="issueOccurrences.totalCount"
-              text-size="xs"
-              spacing="px-2 py-1"
-              bgColor="ink-100"
-              class="leading-none"
-              >{{ issueOccurrences.totalCount }}</z-tag
-            >
-          </div>
-        </z-tab-item>
-        <z-tab-item border-active-color="vanilla-400">
-          <div class="h-5 flex items-center">
-            <span>Ignore rules</span>
-          </div>
-        </z-tab-item>
-      </z-tab-list>
-      <z-tab-panes class="p-4">
-        <z-tab-pane>
-          <div class="flex" v-if="$fetchState.pending">
-            <div class="w-full space-y-4 lg:w-4/6">
-              <div
-                v-for="ii in 3"
-                :key="ii"
-                class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
-              ></div>
-            </div>
-            <div class="hidden w-2/6 h-full px-4 lg:block">
-              <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
-            </div>
-          </div>
-          <div v-else class="grid grid-cols-3">
-            <issue-list
-              v-bind="issueOccurrences"
-              class="col-span-3 lg:col-span-2"
-              :description="singleIssue.descriptionRendered"
-              :checkId="currentCheck ? currentCheck.id : ''"
-              :canIgnoreIssues="canIgnoreIssues"
-              :pageSize="pageSize"
-              :startPage="queryParams.page"
-              :searchValue="queryParams.q"
-              :blobUrlRoot="run.blobUrlRoot"
-              @search="(val) => (searchCandidate = val)"
-              @sort="(val) => (sort = val)"
-              @page="(val) => (currentPage = val)"
-            ></issue-list>
-            <issue-description
-              :description="singleIssue.descriptionRendered"
-              class="col-span-1"
-            ></issue-description>
-          </div>
-        </z-tab-pane>
-        <z-tab-pane v-if="!$fetchState.pending">
-          <div v-if="Array.isArray(silenceRules) && silenceRules.length" class="space-y-4">
-            <template v-for="rule in silenceRules">
-              <div class="flex items-center" :key="rule.id">
-                <div class="flex flex-col flex-1 space-y-2 text-sm">
-                  <div class="flex w-full space-x-2">
-                    <div class="flex-1">
-                      <nuxt-link
-                        v-if="rule.issue"
-                        :to="`/directory/analyzers/${rule.issue.analyzer.shortcode}/issues/${rule.issue.shortcode}`"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <span class="font-bold text-juniper hover:underline">{{
-                          rule.issue.shortcode
-                        }}</span>
-                      </nuxt-link>
-                      <span>Ignored</span>
-                      <span v-if="rule.metadata.type === 'pattern'">
-                        for all files matching with pattern
-                      </span>
-                      <span v-else-if="rule.metadata.type === 'test-pattern'">
-                        for all test files in the repository
-                      </span>
-                      <span v-else-if="rule.metadata.type === 'forever'">
-                        <span v-if="rule.silenceLevel === 'FL'"> for file </span>
-                        <span v-else> for all files in this repository </span>
-                      </span>
-                      <span class="font-semibold text-vanilla-100">{{
-                        rule.metadata.glob_pattern || rule.filePath
-                      }}</span>
-                    </div>
-                  </div>
-                  <div v-if="rule.creator" class="flex space-x-4 text-xs">
-                    <span class="flex items-center space-x-1">
-                      <img
-                        :src="rule.creator.avatar"
-                        alt="Creator Avatar"
-                        class="inline-block w-4 h-4 overflow-hidden rounded-full"
-                      />
-                      <span class="text-vanilla-400">{{ rule.creator.email }}</span>
-                    </span>
-                    <span class="flex items-center space-x-2 leading-none">
-                      <z-icon icon="clock" color="vanilla-400" size="small"></z-icon>
-                      <span class="text-vanilla-400">Added {{ fromNow(rule.createdAt) }}</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </template>
-          </div>
+    <div class="p-4">
+      <div class="flex" v-if="$fetchState.pending">
+        <div class="w-full space-y-4 lg:w-4/6">
           <div
-            v-else
-            class="max-w-4xl p-4 border-2 border-dashed rounded-md border-ink-200 md:p-12 text-center2"
-          >
-            <empty-state title="No ignore rules found" />
-          </div>
-        </z-tab-pane>
-      </z-tab-panes>
-    </z-tabs>
+            v-for="ii in 3"
+            :key="ii"
+            class="w-full rounded-md h-36 bg-ink-300 animate-pulse"
+          ></div>
+        </div>
+        <div class="hidden w-2/6 h-full px-4 lg:block">
+          <div class="rounded-md h-44 bg-ink-300 animate-pulse"></div>
+        </div>
+      </div>
+      <div v-else class="grid grid-cols-3">
+        <issue-list
+          v-bind="issueOccurrences"
+          class="col-span-3 lg:col-span-2"
+          :description="singleIssue.descriptionRendered"
+          :checkId="currentCheck ? currentCheck.id : ''"
+          :canIgnoreIssues="canIgnoreIssues"
+          :pageSize="pageSize"
+          :startPage="queryParams.page"
+          :searchValue="queryParams.q"
+          :blobUrlRoot="run.blobUrlRoot"
+          @search="(val) => (searchCandidate = val)"
+          @sort="(val) => (sort = val)"
+          @page="(val) => (currentPage = val)"
+        ></issue-list>
+        <issue-description
+          :description="singleIssue.descriptionRendered"
+          class="col-span-1"
+        ></issue-description>
+      </div>
+    </div>
   </main>
 </template>
 
@@ -189,7 +104,6 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { fromNow } from '~/utils/date'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
-import { filter } from 'vue/types/umd'
 
 const PAGE_SIZE = 25
 
@@ -253,7 +167,7 @@ export default class RunIssueDetails extends mixins(
   }
 
   /**
-   * Watcher for the `issueId` route param. If updated, the issue detail and ignore rules are fetched
+   * Watcher for the `issueId` route param. If updated, the issue detail
    *
    * @returns {Promise<void>}
    */
@@ -261,17 +175,11 @@ export default class RunIssueDetails extends mixins(
   async update(): Promise<void> {
     const { issueId } = this.$route.params
 
-    await Promise.all([
-      this.fetchSingleIssue({ shortcode: issueId }),
-      this.fetchSilenceRules({
-        ...this.baseRouteParams,
-        issueCode: issueId
-      })
-    ])
+    await Promise.all([this.fetchSingleIssue({ shortcode: issueId })])
   }
 
   /**
-   * Whether issues can be ignore
+   * Whether issues can be ignored
    *
    * @returns {boolean}
    */
@@ -311,13 +219,7 @@ export default class RunIssueDetails extends mixins(
 
     await this.fetchCheck({ checkId: this.currentCheck.id })
     await this.fetchIssuesInCheck()
-    await Promise.all([
-      this.fetchSingleIssue({ shortcode: issueId }),
-      this.fetchSilenceRules({
-        ...this.baseRouteParams,
-        issueCode: issueId
-      })
-    ])
+    await Promise.all([this.fetchSingleIssue({ shortcode: issueId })])
     this.issuePriority = await this.fetchIssuePriority({
       objectId: this.repository.id,
       level: IssuePriorityLevel.Repository,

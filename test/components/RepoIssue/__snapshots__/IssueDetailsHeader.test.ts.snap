@@ -7,6 +7,7 @@ exports[`renders IssueDetailsHeader with all props: {"canEditPriority":true,"fir
     <div class=\\"flex flex-wrap items-center gap-x-4 gap-y-2 leading-none\\">
       <issuetype-stub issuetype=\\"style\\"></issuetype-stub>
       <!---->
+      <!---->
       <div class=\\"flex items-center space-x-2\\">
         <zicon-stub icon=\\"clock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-sm text-vanilla-400\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">2 years ago</span>
         —
