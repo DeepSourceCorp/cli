@@ -2,7 +2,7 @@
   <base-card :remove-default-style="true" custom-padding="pb-3 pr-3 pt-2">
     <template slot="title">
       <p class="text-sm font-semibold text-vanilla-300">
-        <span v-html="escapeHtml(title)" />
+        <span v-html="safeRenderBackticks(title)" />
         <span class="ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap"
           >{{ shortcode }}
         </span>
@@ -56,7 +56,7 @@ import PriorityTypeBadge from './PriorityTypeBadge.vue'
 import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
 import IssueType from '@/components/Repository/IssueType.vue'
 import { ZTag, ZIcon, ZButton } from '@deepsourcelabs/zeal'
-import { escapeHtml } from '~/utils/string'
+import { safeRenderBackticks } from '~/utils/string'
 import { Analyzer } from '~/types/types'
 
 /**
@@ -75,7 +75,7 @@ import { Analyzer } from '~/types/types'
     AnalyzerLogo
   },
   methods: {
-    escapeHtml
+    safeRenderBackticks
   }
 })
 export default class IssuePriorityCard extends Vue {

@@ -85,7 +85,11 @@
                           issue.shortcode
                         ])
                       "
-                      ><span class="text-vanilla-300 mr-1.5">{{ issue.title }}</span>
+                    >
+                      <span
+                        class="text-vanilla-300 mr-1.5"
+                        v-html="safeRenderBackticks(issue.title)"
+                      />
                     </nuxt-link>
                     <span class="text-slate">{{ issue.shortcode }}</span>
                   </span>
@@ -113,6 +117,7 @@
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZAccordion, ZAccordionItem, ZCheckbox, ZIcon } from '@deepsourcelabs/zeal'
+import { safeRenderBackticks } from '~/utils/string'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 
 export interface RunError {
@@ -130,6 +135,9 @@ export interface RunError {
     ZAccordionItem,
     ZCheckbox,
     ZIcon
+  },
+  methods: {
+    safeRenderBackticks
   }
 })
 export default class RunAutofixBar extends mixins(RunDetailMixin) {

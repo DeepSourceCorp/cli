@@ -6,7 +6,7 @@ exports[`renders IssueDirCard with all prop options: IssueDirCard 1`] = `
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
-        <h6 class=\\"space-x-2 overflow-hidden cursor-pointer text-vanilla-100 overflow-ellipsis\\"><span>Generic exception caught and silently ignored in a loop</span><span class=\\"text-sm font-normal text-vanilla-400\\">BAN-B112</span></h6>
+        <h6 class=\\"space-x-2 overflow-hidden cursor-pointer text-vanilla-100 overflow-ellipsis\\"><span>Generic exception caught and silently ignored in a loop</span> <span class=\\"text-sm font-normal text-vanilla-400\\">BAN-B112</span></h6>
       </div>
       <div class=\\"flex mt-1 space-x-5 text-sm text-vanilla-400\\">
         <div class=\\"flex space-x-1.5 items-center\\">

@@ -7,10 +7,10 @@
     @onClose="onModalClose"
     @primaryAction="$emit('issues-selected')"
   >
-    <section class="flex flex-col gap-y-3 p-4 pb-0">
+    <section class="flex flex-col p-4 pb-0 gap-y-3">
       <!-- Search & filter tab -->
       <div class="flex justify-between">
-        <div class="flex gap-x-2 mr-2">
+        <div class="flex mr-2 gap-x-2">
           <issue-priority-filter
             v-model="analyzerType"
             :level="level"
@@ -42,12 +42,12 @@
         </z-input>
       </div>
 
-      <div class="flex flex-col border border-ink-200 rounded-md h-96 2xl:h-102 overflow-y-auto">
+      <div class="flex flex-col overflow-y-auto border rounded-md border-ink-200 h-96 2xl:h-102">
         <template v-if="$fetchState.pending">
           <div
             v-for="index in 10"
             :key="index"
-            class="bg-ink-200 animate-pulse opacity-50 p-8 border-b border-ink-100"
+            class="p-8 border-b opacity-50 bg-ink-200 animate-pulse border-ink-100"
           ></div>
         </template>
 
@@ -62,25 +62,25 @@
           >
             <template slot="title">
               <p class="text-sm font-semibold text-vanilla-300">
-                <span v-html="escapeHtml(issue.title)" />
+                <span v-html="safeRenderBackticks(issue.title)" />
                 <span class="ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap"
                   >{{ issue.shortcode }}
                 </span>
               </p>
             </template>
             <template slot="description">
-              <div class="flex flex-wrap gap-x-4 text-xs">
+              <div class="flex flex-wrap text-xs gap-x-4">
                 <!-- Analyzer type -->
                 <div class="flex items-center gap-x-1.5">
                   <analyzer-logo v-bind="issue.analyzer" :hide-tooltip="true" size="small" />
-                  <span class="text-sm text-vanilla-400 tracking-wide capitalize">
+                  <span class="text-sm tracking-wide capitalize text-vanilla-400">
                     {{ issue.analyzer.name }}
                   </span>
                 </div>
                 <!-- Issue type -->
                 <div class="flex items-center gap-x-1.5">
                   <z-icon :icon="issue.issueType" size="x-small" color="vanilla-400" />
-                  <span class="text-vanilla-400 tracking-wide capitalize">
+                  <span class="tracking-wide capitalize text-vanilla-400">
                     {{ issue.issueType }}
                   </span>
                 </div>
@@ -126,7 +126,7 @@ import PriorityTypeSelect from './PriorityTypeSelect.vue'
 import IssuePrioritySort from './IssuePrioritySort.vue'
 import IssuePriorityFilter from './IssuePriorityFilter.vue'
 import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
-import { escapeHtml } from '~/utils/string'
+import { safeRenderBackticks } from '~/utils/string'
 
 import PaginationMixin from '~/mixins/paginationMixin'
 import IssuePriorityListMixin from '~/mixins/issuePriorityListMixin'
@@ -149,7 +149,7 @@ import { Issue, IssuePriorityLevel } from '~/types/types'
     IssuePriorityFilter
   },
   methods: {
-    escapeHtml
+    safeRenderBackticks
   }
 })
 export default class ChooseIssueModal extends mixins(IssuePriorityListMixin, PaginationMixin) {

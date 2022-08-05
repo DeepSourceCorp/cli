@@ -10,9 +10,8 @@
       ></z-icon>
       <h3
         class="overflow-hidden cursor-pointer text-vanilla-100 whitespace-nowrap overflow-ellipsis"
-      >
-        {{ pullRequestTitle.trim() || (issue && issue.title) }}
-      </h3>
+        v-html="safeRenderBackticks(pullRequestTitle.trim() || (issue && issue.title))"
+      />
 
       <span class="flex-shrink-0 inline text-sm font-normal text-vanilla-400 md:flex" v-if="issue">
         {{ issue.shortcode }}
@@ -69,9 +68,9 @@ import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { BaseCard } from '@/components/History'
 import { ZIcon, ZButton, ZAvatar } from '@deepsourcelabs/zeal'
 import { fromNow } from '@/utils/date'
+import { safeRenderBackticks } from '~/utils/string'
 import { AutofixRun, AutofixRunStatus, Maybe, Scalars } from '~/types/types'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import { RepoPerms } from '~/types/permTypes'
 import ContextMixin from '~/mixins/contextMixin'
 
 @Component({
@@ -80,6 +79,9 @@ import ContextMixin from '~/mixins/contextMixin'
     ZIcon,
     ZButton,
     ZAvatar
+  },
+  methods: {
+    safeRenderBackticks
   }
 })
 export default class AutofixListItem extends mixins(RoleAccessMixin, ContextMixin) {
@@ -183,45 +185,6 @@ export default class AutofixListItem extends mixins(RoleAccessMixin, ContextMixi
 
   get isPending(): boolean {
     return this.status === AutofixRunStatus.Pend
-  }
-
-  public populateSelectedIds(): void {
-    this.selectedFiles = []
-    this.selectedHunkIds = []
-    const changeset = { ...this.autofixRun.changeset }
-    if (changeset) {
-      for (const key in changeset) {
-        if (!this.selectedFiles.includes(key)) {
-          this.selectedFiles.push(key)
-          for (const index in changeset[key].patches) {
-            if (Object.prototype.hasOwnProperty.call(changeset[key].patches, index)) {
-              this.selectedHunkIds.push(changeset[key].patches[index].id)
-            }
-          }
-        }
-      }
-    }
-  }
-
-  public affectedFiles(): Array<string> {
-    const files: Array<string> = []
-    this.populateSelectedIds()
-    this.selectedHunkIds.forEach((id) => {
-      for (const filePath in this.autofixRun.changeset) {
-        if (this.autofixRun.changeset[filePath].patches.id == id) {
-          if (!files.includes(filePath)) {
-            files.push(filePath)
-          }
-        }
-      }
-    })
-    return files
-  }
-
-  get showCreatePullRequest(): boolean {
-    return (
-      this.loggedIn && this.$gateKeeper.repo(RepoPerms.CREATE_AUTOFIXES, this.repoPerms.permission)
-    )
   }
 }
 </script>

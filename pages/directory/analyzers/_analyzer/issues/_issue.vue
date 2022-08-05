@@ -11,8 +11,8 @@
     <div class="p-4 border-b border-ink-200">
       <div class="max-w-prose">
         <h1 v-if="isLoaded" class="text-2xl font-semibold">
-          <span>{{ issue.title }}</span
-          ><span class="ml-3 text-lg font-normal text-vanilla-400 whitespace-nowrap">{{
+          <span v-html="safeRenderBackticks(issue.title)" />
+          <span class="ml-3 text-lg font-normal text-vanilla-400 whitespace-nowrap">{{
             issue.shortcode
           }}</span>
         </h1>
@@ -54,15 +54,22 @@ import { ZBreadcrumb, ZBreadcrumbItem, ZIcon } from '@deepsourcelabs/zeal'
 import { IssueDetailActions } from '~/store/issue/detail'
 import { Analyzer, Issue } from '~/types/types'
 import MetaMixin from '~/mixins/metaMixin'
+import { safeRenderBackticks } from '~/utils/string'
 
 const issueDetailStore = namespace('issue/detail')
 
+/**
+ * Issue details page under analyzer directory
+ */
 @Component({
   components: { ZBreadcrumb, ZBreadcrumbItem, ZIcon },
   layout: 'sidebar-only',
+  methods: {
+    safeRenderBackticks
+  },
   scrollToTop: true
 })
-export default class AnalyzerDirectoryDetails extends mixins(MetaMixin) {
+export default class AnalyzerDirectoryIssueDetails extends mixins(MetaMixin) {
   setCanonical = true
 
   @issueDetailStore.Action(IssueDetailActions.FETCH_ISSUE_DETAILS)

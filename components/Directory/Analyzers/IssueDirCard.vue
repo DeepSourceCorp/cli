@@ -5,8 +5,8 @@
   >
     <template #title>
       <h6 class="space-x-2 overflow-hidden cursor-pointer text-vanilla-100 overflow-ellipsis">
-        <span>{{ issue.title }}</span
-        ><span class="text-sm font-normal text-vanilla-400">{{ issue.shortcode }}</span>
+        <span v-html="safeRenderBackticks(issue.title)" />
+        <span class="text-sm font-normal text-vanilla-400">{{ issue.shortcode }}</span>
       </h6>
     </template>
     <template #description>
@@ -31,10 +31,14 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
 import { Issue } from '~/types/types'
+import { safeRenderBackticks } from '~/utils/string'
 
 @Component({
   components: {
     ZIcon
+  },
+  methods: {
+    safeRenderBackticks
   },
   name: 'IssueDirCard'
 })

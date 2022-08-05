@@ -1,3 +1,12 @@
+// Regex to match text enclosed in single or triple backticks in matching pairs
+// https://regex101.com/r/5Nc30z/2
+const backTickPattern = new RegExp(/(?<=[^`]|^)(`(?:``)?)([^`]+)\1(?=[^`]|$)/g)
+
+const usdFormatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD'
+})
+
 function toTitleCase(candidate: string): string {
   if (!candidate) return ''
   return candidate
@@ -48,11 +57,6 @@ function shortenLargeNumber(candidate: number | string): string {
   return Math.round(shortened * 100) / 100 + ['', 'k', 'm', 'b', 't'][unit]
 }
 
-const usdFormatter = new Intl.NumberFormat('en-US', {
-  style: 'currency',
-  currency: 'USD'
-})
-
 function formatUSD(amount: number): string {
   return isFinite(amount) ? usdFormatter.format(amount) : ''
 }
@@ -102,6 +106,20 @@ function toWrappableString(
 }
 
 /**
+ * Utility to render backtick as <code>
+ *
+ * @param  {string} candidate - string to transform
+ * @returns string
+ */
+function safeRenderBackticks(unsafeCandidate: string) {
+  const safeCandidate = escapeHtml(unsafeCandidate)
+
+  return safeCandidate.replace(backTickPattern, (match) => {
+    return `<code class="bifrost-inline-code">${match.replace(/`/g, '')}</code>`
+  })
+}
+
+/**
  * Utility to remove extra trailing slashes in URLs
  *
  * @param  {string} path
@@ -120,5 +138,6 @@ export {
   makeSafeNumber,
   toWrappableString,
   stripTrailingSlash,
-  escapeHtml
+  escapeHtml,
+  safeRenderBackticks
 }

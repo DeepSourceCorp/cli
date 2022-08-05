@@ -96,3 +96,9 @@ input[type='number']::-webkit-inner-spin-button {
     @apply underline;
   }
 }
+
+code.bifrost-inline-code {
+  @apply bg-ink-200 rounded-md tracking-wider font-medium;
+  padding: clamp(2px, 0.25em, 4px);
+  font-size: 0.8em;
+}

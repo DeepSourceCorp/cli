@@ -1,4 +1,3 @@
-import { ModuleTree } from 'vuex/types/index'
 import { providerMetaMap } from '~/plugins/helpers/provider'
 import { VcsProviderChoices } from '~/types/types'
 
@@ -94,6 +93,14 @@ export const storeModulesGenerator = (overrides = {}) => {
         state: {
           viewer: {
             dashboardContext: [dashboardContextGenerator()]
+          }
+        }
+      },
+      'account/context': {
+        namespaced: true,
+        state: {
+          context: {
+            emptyAvatarUrl: ''
           }
         }
       },

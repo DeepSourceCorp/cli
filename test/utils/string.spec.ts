@@ -7,7 +7,8 @@ import {
   makeSafeNumber,
   toWrappableString,
   stripTrailingSlash,
-  escapeHtml
+  escapeHtml,
+  safeRenderBackticks
 } from '~/utils/string'
 
 describe('[[ Test toTitleCase ]]', () => {
@@ -167,6 +168,14 @@ describe('[[ Test stripTrailingSlash ]]', () => {
     expect(stripTrailingSlash('/hello/world/')).toBe('/hello/world')
     expect(stripTrailingSlash('/hello/world')).toBe('/hello/world')
   })
+})
+
+test('[[ Test safeRenderBackticks ]]', () => {
+  expect(
+    safeRenderBackticks('Hello world, this is ```if``` statement and `else` should ```he` ``` ```')
+  ).toEqual(
+    'Hello world, this is <code class="bifrost-inline-code">if</code> statement and <code class="bifrost-inline-code">else</code> should ```he` <code class="bifrost-inline-code"> </code>'
+  )
 })
 
 describe('[[ Test escapeHtml ]]', () => {

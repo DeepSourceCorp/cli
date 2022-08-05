@@ -9,11 +9,11 @@
       </z-breadcrumb>
     </div>
     <!-- heading -->
-    <div class="flex flex-col px-4 space-y-3">
+    <div class="flex flex-col px-4 space-y-2">
       <div
         class="items-center space-x-2 text-xs font-normal sm:flex lg:text-lg lg:leading-9 text-vanilla-400"
       >
-        <span class="text-lg font-bold text-vanilla-100">{{ title }}</span>
+        <span class="text-base font-medium text-vanilla-100" v-html="safeRenderBackticks(title)" />
         <span class="inline md:flex" v-if="autofixRun.issue">{{ autofixRun.issue.shortcode }}</span>
       </div>
       <div class="flex space-x-6">
@@ -262,34 +262,38 @@
         ></div>
       </div>
     </template>
-    <div v-else class="flex flex-col items-center justify-center px-4 space-y-3 text-center h-80">
-      <template v-if="autofixRun.status === AUTOFIX_STATUS.PENDING">
-        <z-icon class="animate-spin" icon="spin-loader" color="juniper" size="large"></z-icon>
-        <h3>Generating fixes&hellip;</h3>
-        <p class="text-sm">
-          Please give us a moment while we generate a patch with fixes for this issue.
-        </p>
-      </template>
-      <template v-if="autofixRun.status === AUTOFIX_STATUS.TIMEOUT">
-        <z-icon icon="alert-circle"></z-icon>
-        <h3>Autofix timed out</h3>
-        <p>
-          The generation of fixes took too long to complete, so we had to exit without any results.
-          Please try again.
-        </p>
-      </template>
-      <template v-if="autofixRun.status === AUTOFIX_STATUS.CANCEL">
-        <z-icon icon="slash"></z-icon>
-        <h3>Autofix cancelled</h3>
-        <p>
-          The generation of fixes was stopped before completion either due to an external trigger
-          <br />or the repository state not being available any longer. Please try again.
-        </p>
-      </template>
-      <template v-if="autofixRun.status === AUTOFIX_STATUS.FAIL">
-        <h3 class="">Autofix failed</h3>
-        <p class="">There were errors generating fixes for some files. Please try again.</p>
-      </template>
+    <div v-else class="p-4 mb-4">
+      <base-state v-if="autofixRun.status === AUTOFIX_STATUS.PENDING" title="Generating fixes">
+        <template #hero>
+          <z-icon
+            icon="spin-loader"
+            color="juniper"
+            size="large"
+            class="mx-auto mb-5 animate-spin"
+          />
+        </template>
+        Please give us a moment while we generate a patch with fixes for this issue.
+      </base-state>
+      <base-state
+        v-else-if="autofixRun.status === AUTOFIX_STATUS.TIMEOUT"
+        title="Autofix timed out"
+      >
+        <template #hero>
+          <z-icon icon="alert-circle" class="mx-auto mb-5" />
+        </template>
+        The generation of fixes took too long to complete, so we had to exit without any results.
+        Please try again.
+      </base-state>
+      <base-state v-else-if="autofixRun.status === AUTOFIX_STATUS.CANCEL" title="Autofix cancelled">
+        <template #hero>
+          <z-icon icon="slash" class="mx-auto mb-5" />
+        </template>
+        The generation of fixes was stopped before completion either due to an external trigger or
+        the repository state not being available any longer. Please try again.
+      </base-state>
+      <base-state v-else-if="autofixRun.status === AUTOFIX_STATUS.FAIL" title="Autofix failed">
+        There were errors generating fixes for some files. Please try again.
+      </base-state>
     </div>
     <install-autofix-modal v-if="showInstallModal" @close="showInstallModal = false" />
     <audio
@@ -324,11 +328,8 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 import { fromNow } from '~/utils/date'
 import { isChristmasSeason } from '~/utils/easter'
+import { safeRenderBackticks } from '~/utils/string'
 import AutofixRunMixin from '~/mixins/autofixRunMixin'
-
-interface DOMElement extends Element {
-  offsetHeight: number
-}
 
 // store
 const runStore = namespace('run/detail')
@@ -359,6 +360,7 @@ const runStore = namespace('run/detail')
   },
   layout: 'repository',
   methods: {
+    safeRenderBackticks,
     isChristmasSeason
   }
 })

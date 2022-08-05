@@ -10,7 +10,7 @@
           <div class="pb-1">
             <h3
               class="inline mr-1 text-sm font-medium leading-snug cursor-pointer text-vanilla-100 md:text-base"
-              v-html="escapeHtml(title)"
+              v-html="safeRenderBackticks(title)"
             />
             <span class="text-sm font-normal whitespace-nowrap text-vanilla-400">
               {{ shortcode }}
@@ -62,7 +62,7 @@
               :trend-value="trend.trendValue ? `${trend.trendValue}%` : ' '"
               :trend-hint="trend.trendHint"
               :show-bg="false"
-              class="hidden sm:block bg-opacity-0 text-xxs md:text-xs"
+              class="hidden bg-opacity-0 sm:block text-xxs md:text-xs"
             />
           </div>
           <!-- Autofix -->
@@ -94,7 +94,7 @@ import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { BaseCard } from '@/components/History'
 import { IssueType } from '@/components/Repository'
 import { formatDate } from '~/utils/date'
-import { escapeHtml, formatIntl, shortenLargeNumber } from '~/utils/string'
+import { formatIntl, safeRenderBackticks, shortenLargeNumber } from '~/utils/string'
 import { IssueSeverity, IssueTrend, TrendDirection } from '~/types/types'
 
 @Component({
@@ -103,7 +103,7 @@ import { IssueSeverity, IssueTrend, TrendDirection } from '~/types/types'
     IssueType,
     BaseCard
   },
-  methods: { formatDate, shortenLargeNumber, formatIntl, escapeHtml }
+  methods: { formatDate, shortenLargeNumber, formatIntl, safeRenderBackticks }
 })
 export default class IssueListItem extends Vue {
   @Prop({ default: '' })

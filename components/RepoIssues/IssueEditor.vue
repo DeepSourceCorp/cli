@@ -9,7 +9,10 @@
     <!-- heading -->
     <div class="p-3 space-y-1 bg-ink-300">
       <div class="flex justify-between">
-        <span class="flex-grow text-base font-medium text-vanilla-100">{{ text }}</span>
+        <span
+          class="flex-grow text-base font-medium text-vanilla-100"
+          v-html="safeRenderBackticks(text)"
+        />
         <div class="flex justify-end w-12">
           <z-menu v-if="canIgnoreIssues">
             <template v-slot:trigger="{ isOpen, toggle }">
@@ -112,6 +115,7 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZButton, ZCode, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
 import { fromNow } from '~/utils/date'
+import { safeRenderBackticks } from '~/utils/string'
 import { toWrappableString } from '~/utils/string'
 
 @Component({
@@ -122,6 +126,9 @@ import { toWrappableString } from '~/utils/string'
     ZMenu,
     ZMenuItem,
     ZMenuSection
+  },
+  methods: {
+    safeRenderBackticks
   }
 })
 export default class IssueEditor extends Vue {

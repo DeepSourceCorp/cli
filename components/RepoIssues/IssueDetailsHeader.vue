@@ -2,12 +2,12 @@
   <div class="flex flex-col flex-1 gap-y-2 pb-1">
     <!-- Heading -->
     <div class="flex flex-wrap items-baseline text-lg font-normal text-vanilla-400">
-      <span class="pr-2 font-bold text-vanilla-100" v-html="escapeHtml(title)"> </span>
+      <span class="pr-2 font-bold text-vanilla-100" v-html="safeRenderBackticks(title)"> </span>
       <span class="flex-shrink-0 block md:flex font-medium">{{ shortcode }}</span>
     </div>
     <div class="flex items-center w-full text-vanilla-400 sm:w-auto">
       <!-- Meta data -->
-      <div class="flex flex-wrap items-center gap-x-4 gap-y-2 leading-none">
+      <div class="flex flex-wrap items-center leading-none gap-x-4 gap-y-2">
         <issue-type v-if="issueType" :issueType="issueType"></issue-type>
         <issue-severity-tag v-if="severity && issueType === 'security'" :severity="severity" />
         <meta-data-item v-if="count" icon="file-pulse"
@@ -53,12 +53,12 @@
             class="flex items-center gap-x-1 uppercase border border-ink-200 rounded-full px-1.5 py-1"
           >
             <span
-              class="h-2 w-2 rounded-full"
+              class="w-2 h-2 rounded-full"
               :style="{
                 background: generateColorFromTag(tag)
               }"
             ></span>
-            <span class="text-xxs text-vanilla-400 tracking-wide font-medium">
+            <span class="font-medium tracking-wide text-xxs text-vanilla-400">
               {{ deslugifyTag(tag) }}
             </span>
           </nuxt-link>
@@ -74,7 +74,7 @@ import { ZIcon } from '@deepsourcelabs/zeal'
 import IssueType from '@/components/Repository/IssueType.vue'
 import { PriorityTypeBadge, PriorityTypeSelect } from '@/components/IssuePriority/index'
 import { formatDate } from '@/utils/date'
-import { escapeHtml } from '~/utils/string'
+import { safeRenderBackticks } from '~/utils/string'
 import { IssuePriority, IssueSeverity } from '~/types/types'
 import { generateColorFromTag } from '~/utils/ui'
 
@@ -87,7 +87,7 @@ import { generateColorFromTag } from '~/utils/ui'
   },
   layout: 'repository',
   methods: {
-    escapeHtml,
+    safeRenderBackticks,
     formatDate,
     generateColorFromTag
   }

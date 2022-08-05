@@ -30,7 +30,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -66,7 +66,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -108,7 +108,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -144,7 +144,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -186,7 +186,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -220,7 +220,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -260,7 +260,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -294,7 +294,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -334,7 +334,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`]
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -370,7 +370,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -412,7 +412,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -448,7 +448,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -490,7 +490,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -524,7 +524,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -564,7 +564,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -598,7 +598,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -638,7 +638,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -674,7 +674,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -716,7 +716,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -752,7 +752,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -794,7 +794,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -828,7 +828,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -868,7 +868,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -902,7 +902,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -942,7 +942,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -978,7 +978,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1020,7 +1020,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1056,7 +1056,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1098,7 +1098,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1132,7 +1132,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1172,7 +1172,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1206,7 +1206,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 32`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1246,7 +1246,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 33`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1282,7 +1282,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 34`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1324,7 +1324,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 35`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1360,7 +1360,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 36`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1402,7 +1402,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 37`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1436,7 +1436,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 38`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1476,7 +1476,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 39`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1510,7 +1510,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 40`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1550,7 +1550,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 41`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1586,7 +1586,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 42`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1628,7 +1628,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 43`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1664,7 +1664,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 44`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1706,7 +1706,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 45`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1740,7 +1740,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 46`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1780,7 +1780,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 47`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1814,7 +1814,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 48`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1854,7 +1854,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 49`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1890,7 +1890,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 50`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1932,7 +1932,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 51`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -1968,7 +1968,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 52`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -2010,7 +2010,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 53`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2044,7 +2044,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 54`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2084,7 +2084,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 55`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2118,7 +2118,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 56`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2158,7 +2158,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 57`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -2194,7 +2194,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 58`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -2236,7 +2236,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 59`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -2272,7 +2272,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 60`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -2314,7 +2314,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 61`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2348,7 +2348,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 62`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2388,7 +2388,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 63`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2422,7 +2422,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 64`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2462,7 +2462,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 65`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2496,7 +2496,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 66`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2536,7 +2536,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 67`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2570,7 +2570,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 68`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2610,7 +2610,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 69`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2644,7 +2644,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 70`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2684,7 +2684,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 71`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2718,7 +2718,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 72`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2758,7 +2758,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 73`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2792,7 +2792,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 74`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2832,7 +2832,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 75`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2866,7 +2866,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 76`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2906,7 +2906,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 77`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2940,7 +2940,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 78`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -2980,7 +2980,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 79`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3014,7 +3014,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 80`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3054,7 +3054,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 81`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3088,7 +3088,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 82`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3128,7 +3128,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 83`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3162,7 +3162,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 84`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3202,7 +3202,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 85`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3236,7 +3236,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 86`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3276,7 +3276,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 87`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3310,7 +3310,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 88`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3350,7 +3350,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 89`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3384,7 +3384,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 90`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3424,7 +3424,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 91`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3458,7 +3458,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 92`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3498,7 +3498,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 93`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3532,7 +3532,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 94`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3572,7 +3572,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 95`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3606,7 +3606,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 96`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3646,7 +3646,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 97`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3680,7 +3680,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 98`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3720,7 +3720,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 99`
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3754,7 +3754,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 100
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3794,7 +3794,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 101
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3828,7 +3828,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 102
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3868,7 +3868,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 103
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3902,7 +3902,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 104
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3942,7 +3942,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 105
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -3976,7 +3976,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 106
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4016,7 +4016,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 107
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4050,7 +4050,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 108
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4090,7 +4090,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 109
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4124,7 +4124,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 110
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4164,7 +4164,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 111
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4198,7 +4198,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 112
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4238,7 +4238,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 113
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4272,7 +4272,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 114
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4312,7 +4312,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 115
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4346,7 +4346,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 116
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4386,7 +4386,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 117
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4420,7 +4420,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 118
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4460,7 +4460,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 119
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4494,7 +4494,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 120
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4534,7 +4534,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 121
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4568,7 +4568,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 122
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4608,7 +4608,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 123
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4642,7 +4642,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 124
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4682,7 +4682,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 125
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4716,7 +4716,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 126
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4756,7 +4756,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 127
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -4790,7 +4790,7 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 128
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden sm:block bg-opacity-0 text-xxs md:text-xs\\"></ticker-stub>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" trend-hint=\\"Since last week\\" class=\\"hidden bg-opacity-0 sm:block text-xxs md:text-xs\\"></ticker-stub>
         </div>
         <!---->
       </div>
