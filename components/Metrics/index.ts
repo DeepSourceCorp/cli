@@ -4,6 +4,8 @@ import TrendStat from './Trend/TrendStat.vue'
 import TrendSection from './Trend/TrendSection.vue'
 import TrendTitle from './Trend/TrendTitle.vue'
 import EditThresholdModal from './Trend/EditThresholdModal.vue'
+import EmptyTrend from './Trend/EmptyTrend.vue'
+import AddNlcvThresholdModal from './Trend/AddNlcvThresholdModal.vue'
 
 import StatSection from './StatSection.vue'
 import AlertingMetricsSection from './AlertingMetricsSection.vue'
@@ -23,5 +25,7 @@ export {
   TrendSection,
   TrendStat,
   TrendTitle,
-  EditThresholdModal
+  EditThresholdModal,
+  EmptyTrend,
+  AddNlcvThresholdModal
 }

@@ -4,10 +4,11 @@ import { VTooltip } from 'v-tooltip'
 import { VueConstructor } from 'vue'
 import { MetricType } from '~/types/metric'
 import { cartesian, generateGenericProps } from '~/test/utils'
+import { shallowMount } from '@vue/test-utils'
 
 const injectDirective = (vue: VueConstructor) => vue.directive('tooltip', VTooltip)
 
-test('renders TrendSection with all prop options', () => {
+describe('[[TrendSection]]', () => {
   const baseProps = {
     filterValue: 30
   }
@@ -72,40 +73,61 @@ test('renders TrendSection with all prop options', () => {
     threshold: 50
   }
 
-  global.ResizeObserver = jest.fn().mockImplementation(() => ({
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn()
-  }))
+  test('renders TrendSection with all prop options', () => {
+    global.ResizeObserver = jest.fn().mockImplementation(() => ({
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn()
+    }))
 
-  const namespaceProp = generateGenericProps(
-    'namespacesTrend',
-    [aggregateNamespace, genericNamespace],
-    false
-  )
-
-  const metricProp = generateGenericProps(
-    'metricMeta',
-    [nonPercentageMetric, percentageMetric],
-    false
-  )
-
-  cartesian(namespaceProp, metricProp).forEach((propCombinations) => {
-    const props = { ...baseProps, ...propCombinations }
-
-    const { html } = render(
-      TrendSection,
-      {
-        props,
-        stubs: {
-          AnalyzerLogo: true,
-          ZChart: true
-        },
-        components: { TrendStat, TrendTitle }
-      },
-      injectDirective
+    const namespaceProp = generateGenericProps(
+      'namespacesTrend',
+      [aggregateNamespace, genericNamespace],
+      false
     )
 
-    expect(html()).toMatchSnapshot(JSON.stringify(props))
+    const metricProp = generateGenericProps(
+      'metricMeta',
+      [nonPercentageMetric, percentageMetric],
+      false
+    )
+
+    cartesian(namespaceProp, metricProp).forEach((propCombinations) => {
+      const props = { ...baseProps, ...propCombinations }
+
+      const { html } = render(
+        TrendSection,
+        {
+          props,
+          stubs: {
+            AnalyzerLogo: true,
+            ZChart: true
+          },
+          components: { TrendStat, TrendTitle }
+        },
+        injectDirective
+      )
+
+      expect(html()).toMatchSnapshot(JSON.stringify(props))
+    })
+  })
+
+  test('emits data correctly', async () => {
+    const wrapper = await shallowMount(TrendSection, {
+      propsData: { ...baseProps, namespacesTrend: genericNamespace, metricMeta: percentageMetric },
+      stubs: {
+        AnalyzerLogo: true,
+        ZChart: true
+      },
+      components: { TrendStat, TrendTitle }
+    })
+
+    //@ts-ignore
+    wrapper.vm.updateFilter(50)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.emitted().updateFilter?.length).toBeTruthy()
+    expect(wrapper.emitted().updateFilter?.[0]).toEqual([50])
   })
 })

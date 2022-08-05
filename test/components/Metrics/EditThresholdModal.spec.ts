@@ -170,4 +170,136 @@ describe('[[EditThresholdModal]]', () => {
     //@ts-ignore
     expect(vm.newThresholdValue).toBe(Number(valueToTest))
   })
+
+  test('resetErrorState', async () => {
+    const baseProps = {
+      thresholdValue: 20,
+      metricName: 'Zane Alexander',
+      analyzerKey: 'Your Convictions Are Your Own',
+      metricShortcode: 'ZALX',
+      repositoryId: '0987',
+      unit: '%'
+    }
+
+    const { vm } = await shallowMount(EditThresholdModal, {
+      propsData: { ...baseProps },
+      stubs: {
+        AnalyzerLogo: true
+      },
+      components: { ZInput, ZButton, ZModal }
+    })
+
+    //@ts-ignore
+    vm.thresholdInputError = true
+
+    //@ts-ignore
+    vm.resetErrorState()
+
+    //@ts-ignore
+    expect(vm.thresholdInputError).toBe(false)
+  })
+
+  test('fullReset', async () => {
+    const baseProps = {
+      thresholdValue: 20,
+      metricName: 'Zane Alexander',
+      analyzerKey: 'Your Convictions Are Your Own',
+      metricShortcode: 'ZALX',
+      repositoryId: '0987',
+      unit: '%'
+    }
+
+    const { vm } = await shallowMount(EditThresholdModal, {
+      propsData: { ...baseProps },
+      stubs: {
+        AnalyzerLogo: true
+      },
+      components: { ZInput, ZButton, ZModal }
+    })
+
+    //@ts-ignore
+    vm.newThresholdValue = 30
+    //@ts-ignore
+    vm.thresholdInputError = true
+
+    //@ts-ignore
+    vm.fullReset()
+
+    //@ts-ignore
+    expect(vm.newThresholdValue).toBe(undefined)
+    //@ts-ignore
+    expect(vm.thresholdInputError).toBe(false)
+  })
+
+  describe('updateThreshold', () => {
+    test('emits data correctly on no error', async () => {
+      const baseProps = {
+        thresholdValue: 20,
+        metricName: 'Zane Alexander',
+        analyzerKey: 'Your Convictions Are Your Own',
+        metricShortcode: 'ZALX',
+        repositoryId: '0987',
+        unit: '%'
+      }
+
+      const wrapper = await shallowMount(EditThresholdModal, {
+        propsData: { ...baseProps },
+        stubs: {
+          AnalyzerLogo: true
+        },
+        components: { ZInput, ZButton, ZModal }
+      })
+
+      //@ts-ignore
+      wrapper.vm.newThresholdValue = 30
+      //@ts-ignore
+      wrapper.vm.thresholdInputError = false
+      //@ts-ignore
+      wrapper.vm.updateThreshold()
+
+      await wrapper.vm.$nextTick()
+
+      expect(wrapper.emitted().editThreshold?.length).toBeTruthy()
+      expect(wrapper.emitted().editThreshold?.[0]).toEqual([
+        30,
+        'Your Convictions Are Your Own',
+        undefined
+      ])
+    })
+
+    test('invokes toast when it has error', async () => {
+      const baseProps = {
+        thresholdValue: 20,
+        metricName: 'Zane Alexander',
+        analyzerKey: 'Your Convictions Are Your Own',
+        metricShortcode: 'ZALX',
+        repositoryId: '0987',
+        unit: '%'
+      }
+
+      const localThis = {
+        $toast: {
+          danger: jest.fn()
+        }
+      }
+
+      const wrapper = await shallowMount(EditThresholdModal, {
+        propsData: { ...baseProps },
+        stubs: {
+          AnalyzerLogo: true
+        },
+        components: { ZInput, ZButton, ZModal },
+        mocks: { ...localThis }
+      })
+
+      //@ts-ignore
+      wrapper.vm.newThresholdValue = 30
+      //@ts-ignore
+      wrapper.vm.thresholdInputError = true
+      //@ts-ignore
+      wrapper.vm.updateThreshold()
+
+      expect(localThis.$toast.danger).toBeCalledTimes(1)
+    })
+  })
 })
