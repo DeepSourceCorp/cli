@@ -31,25 +31,33 @@
           >{{ name }}</span
         >
         <!-- Issue Labels for showing the issues that are related to a patch -->
-        <span v-if="isGeneratedFromPr">
-          <template v-if="change.issues && change.issues.length > 3">
-            <span
-              v-for="num in 3"
-              :key="num"
-              v-tooltip="change.issues[num - 1].title"
-              class="text-sm text-vanilla-100"
-              >{{ change.issues[num - 1] && change.issues[num - 1].shortcode.toUpperCase() }}</span
-            >
+        <span v-if="isGeneratedFromPr && change.issues">
+          <template v-if="change.issues.length > 3">
+            <template v-for="(num, idx) in 3">
+              <span
+                :key="num"
+                v-tooltip="change.issues[num - 1].title"
+                class="text-sm text-vanilla-100"
+              >
+                {{ change.issues[num - 1] && change.issues[num - 1].shortcode.toUpperCase() }}
+              </span>
+
+              <!-- Render comma expect after the last item -->
+              {{ idx + 1 !== 3 ? ',' : '' }}
+            </template>
+
+            <span>&amp; {{ change.issues.length - 3 }} more</span>
           </template>
+
           <template v-else>
-            <template v-for="issue in change.issues">
+            <template v-for="(issue, idx) in change.issues">
               <span v-tooltip="issue.title" :key="issue.shortcode" class="text-sm text-vanilla-100">
                 {{ issue.shortcode.toUpperCase() }}
               </span>
+
+              <!-- Render comma if the list has more than one element except after the last item -->
+              {{ change.issues.length > 1 && idx + 1 !== change.issues.length ? ',' : '' }}
             </template>
-          </template>
-          <template v-if="change.issues && change.issues.length > 3">
-            <span>+ {{ change.issues.length - 3 }} more</span>
           </template>
         </span>
       </div>
@@ -109,10 +117,14 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZCheckbox, ZCode } from '@deepsourcelabs/zeal'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
+
 import { Maybe, Scalars } from '~/types/types'
 
+/**
+ * View the diff for a given Autofix session
+ */
 @Component({
   components: {
     ZCheckbox,
@@ -120,9 +132,6 @@ import { Maybe, Scalars } from '~/types/types'
   }
 })
 export default class AutofixCodeDiff extends Vue {
-  @Prop()
-  code!: Array<Record<string, string>>
-
   @Prop()
   isGroup!: boolean
 
@@ -136,22 +145,41 @@ export default class AutofixCodeDiff extends Vue {
   isReadOnly!: boolean
 
   @Prop()
-  selectedHunkIds!: Array<string>
+  selectedHunkIds!: Array<number>
 
   @Prop()
   isGeneratedFromPr!: boolean
 
-  public isChecked = false
+  isChecked = false
 
-  public selectFile(file: string): void {
+  /**
+   * Emits an event by the name `selectFile` passing in the `file` name
+   *
+   * @param {string} file
+   * @returns {void}
+   */
+  selectFile(file: string): void {
     this.$emit('selectFile', file)
   }
 
-  public isHunkSelected(id: string): boolean {
+  /**
+   * Returns the status about whether a hunk id is in the list of selected ids
+   *
+   * @param {number} id
+   * @returns {void}
+   */
+  isHunkSelected(id: number): boolean {
     return this.selectedHunkIds.includes(id)
   }
 
-  public selectFileIfAllHunksSelected(file: string, id: string): void {
+  /**
+   * Emits an event by the name `selectFileIfAllHunksSelected` passing in the `file` name and `id`
+   *
+   * @param {string} file
+   * @param {number} id
+   * @returns {void}
+   */
+  selectFileIfAllHunksSelected(file: string, id: number): void {
     this.$emit('selectFileIfAllHunksSelected', file, id)
   }
 }

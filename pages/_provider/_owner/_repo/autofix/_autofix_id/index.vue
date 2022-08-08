@@ -378,8 +378,8 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
   }
 
   public selectedFiles: Array<string> = []
-  public selectedHunkIds: Array<string> = []
-  public selectedFileIdMapping: Record<string, Array<string>> = {}
+  public selectedHunkIds: Array<number> = []
+  public selectedFileIdMapping: Record<string, Array<number>> = {}
 
   @runStore.Action(RunDetailActions.CREATE_PR)
   createPR: (
@@ -471,9 +471,9 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
         if (Object.prototype.hasOwnProperty.call(changeset, key)) {
           this.selectedFiles.push(key)
           this.selectedFileIdMapping[key] = []
-          changeset[key].patches.forEach((patch: Record<string, string>) => {
-            this.selectedHunkIds.push(patch.id)
-            this.selectedFileIdMapping[key].push(patch.id)
+          changeset[key].patches.forEach((patch: Record<string, string | number>) => {
+            this.selectedHunkIds.push(patch.id as number)
+            this.selectedFileIdMapping[key].push(patch.id as number)
           })
         }
       }
@@ -528,11 +528,13 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
     this.selectedHunkIds.forEach((id) => {
       for (const filePath in this.autofixRun.changeset) {
         if (Object.prototype.hasOwnProperty.call(this.autofixRun.changeset, filePath)) {
-          this.autofixRun.changeset[filePath].patches.forEach((patch: Record<string, string>) => {
-            if (patch.id === id && !files.includes(filePath)) {
-              files.push(filePath)
+          this.autofixRun.changeset[filePath].patches.forEach(
+            (patch: Record<string, string | number>) => {
+              if ((patch.id as number) === id && !files.includes(filePath)) {
+                files.push(filePath)
+              }
             }
-          })
+          )
         }
       }
     })
@@ -615,13 +617,13 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
    */
   public selectHunksFromFile(file: string): void {
     this.selectedFiles.push(file)
-    this.autofixRun.changeset[file].patches.forEach((change: Record<string, string>) => {
-      if (!this.selectedHunkIds.includes(change.id)) {
-        this.selectedHunkIds.push(change.id) // Add hunk id to selectedHunkIds
+    this.autofixRun.changeset[file].patches.forEach((change: Record<string, string | number>) => {
+      if (!this.selectedHunkIds.includes(change.id as number)) {
+        this.selectedHunkIds.push(change.id as number) // Add hunk id to selectedHunkIds
         if (this.isFileMappingEmpty(file)) {
           this.selectedFileIdMapping[file] = []
         }
-        this.selectedFileIdMapping[file].push(change.id)
+        this.selectedFileIdMapping[file].push(change.id as number)
       }
     })
   }
@@ -646,9 +648,9 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
    * Selects file if all the hunkIds of this file are selected.
    *
    * @param {string} file - file which contains the hunkId
-   * @param {number} hunkId - id of an hunk
+   * @param {number} hunkId - id of a hunk
    */
-  public selectFileIfAllHunksSelected(file: string, hunkId: string): void {
+  public selectFileIfAllHunksSelected(file: string, hunkId: number): void {
     // If the selected hunk id's file is not present, add it to the map along with the Id
     if (this.isFileMappingEmpty(file)) {
       this.selectedFileIdMapping[file] = []
@@ -659,9 +661,9 @@ export default class Autofix extends mixins(RoleAccessMixin, RepoDetailMixin, Au
       // If the file already present and the selected hunk id is present, deselect and remove the id from the map and hunkId list
       if (this.selectedFileIdMapping[file].includes(hunkId)) {
         this.selectedFileIdMapping[file] = this.selectedFileIdMapping[file].filter(
-          (id: string) => id != hunkId
+          (id: number) => id != hunkId
         )
-        this.selectedHunkIds = this.selectedHunkIds.filter((id: string) => id != hunkId)
+        this.selectedHunkIds = this.selectedHunkIds.filter((id: number) => id != hunkId)
         if (this.selectedFileIdMapping[file].length === 0) {
           delete this.selectedFileIdMapping[file]
         }
