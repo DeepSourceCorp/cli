@@ -240,7 +240,7 @@ export default class OnboardLogin extends mixins(
    */
   async fetch(): Promise<void> {
     await Promise.all([
-      this.fetchActiveUser(),
+      this.fetchActiveUser({ refetch: true }),
       this.fetchOwnerDetails({
         login: this.activeOwner,
         provider: this.activeProvider,
