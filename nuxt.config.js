@@ -89,8 +89,6 @@ export default {
     supportEmail: IS_ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io',
     discoverEnabled: IS_ON_PREM ? toBool(process.env.IS_DISCOVER_ENABLED) : true,
     domain: process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io',
-    posthogApiKey: IS_ON_PREM ? '' : process.env.POSTHOG_API_KEY,
-    posthogApiHost: IS_ON_PREM ? '' : process.env.POSTHOG_API_HOST,
     rudderWriteKey: IS_ON_PREM ? '' : process.env.RUDDER_WRITE_KEY,
     rudderDataPlaneUrl: IS_ON_PREM ? '' : process.env.RUDDER_DATA_PLANE_URL
   },
@@ -120,8 +118,7 @@ export default {
   extendPlugins(plugins) {
     const services = [
       '~/plugins/services/rudder.client.ts',
-      '~/plugins/components/statuspage.client.ts',
-      '~/plugins/services/posthog.client.ts'
+      '~/plugins/components/statuspage.client.ts'
     ]
 
     if (!IS_ON_PREM) {
