@@ -79,7 +79,8 @@ const VISIBLE_PAGES = 3
     IssueDescription,
     ZPagination
   },
-  layout: 'repository'
+  layout: 'repository',
+  scrollToTop: true
 })
 export default class IssuesDetails extends mixins(
   IssueDetailMixin,
