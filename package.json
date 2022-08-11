@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@deepsource/shifty": "^1.0.0",
-    "@deepsourcelabs/zeal": "^0.11.48",
+    "@deepsourcelabs/zeal": "^0.11.49",
     "@nuxt/content": "^1.11.1",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
     "@nuxtjs/sitemap": "^2.4.0",

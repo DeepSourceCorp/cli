@@ -134,9 +134,37 @@
                   <template #header>
                     <div
                       v-if="isMetricAggregate(stat)"
-                      class="tracking-wide uppercase text-xxs text-aqua-100 font-semibold"
+                      class="w-full flex items-center justify-between"
                     >
-                      Aggregate
+                      <div class="flex items-center gap-x-1">
+                        <z-icon icon="aggregate" class="flex-shrink-0" />
+                        <span class="text-xs font-semibold tracking-wide uppercase text-vanilla-400"
+                          >Aggregate</span
+                        >
+                      </div>
+                      <div class="flex items-center gap-x-2">
+                        <lazy-analyzer-logo
+                          v-for="check in getAggregateContributingChecks(stat.shortcode).slice(
+                            0,
+                            3
+                          )"
+                          :key="check.analyzer_shortcode"
+                          :name="check.key"
+                          :shortcode="check.analyzer_shortcode"
+                          :analyzer-logo="check.logo"
+                        />
+                        <z-tag
+                          v-if="getAggregateContributingChecks(stat.shortcode).length > 3"
+                          bg-color="ink-100"
+                          text-size="xs"
+                          spacing="px-2 py-1"
+                          class="leading-none min-w-1"
+                        >
+                          <span>
+                            +{{ getAggregateContributingChecks(stat.shortcode).length - 3 }}
+                          </span>
+                        </z-tag>
+                      </div>
                     </div>
                     <div v-else-if="showMetricCardHeader" class="flex items-center gap-x-2">
                       <lazy-analyzer-logo
@@ -191,9 +219,34 @@
                 <template #header>
                   <div
                     v-if="isMetricAggregate(stat)"
-                    class="tracking-wide uppercase text-xxs text-aqua-100 font-semibold"
+                    class="w-full flex items-center justify-between"
                   >
-                    Aggregate
+                    <div class="flex items-center gap-x-1">
+                      <z-icon icon="aggregate" class="flex-shrink-0" />
+                      <span class="text-xs font-semibold tracking-wide uppercase text-vanilla-400"
+                        >Aggregate</span
+                      >
+                    </div>
+                    <div class="flex items-center gap-x-2">
+                      <lazy-analyzer-logo
+                        v-for="check in getAggregateContributingChecks(stat.shortcode).slice(0, 3)"
+                        :key="check.analyzer_shortcode"
+                        :name="check.key"
+                        :shortcode="check.analyzer_shortcode"
+                        :analyzer-logo="check.logo"
+                      />
+                      <z-tag
+                        v-if="getAggregateContributingChecks(stat.shortcode).length > 3"
+                        bg-color="ink-100"
+                        text-size="xs"
+                        spacing="px-2 py-1"
+                        class="leading-none min-w-1"
+                      >
+                        <span>
+                          +{{ getAggregateContributingChecks(stat.shortcode).length - 3 }}
+                        </span>
+                      </z-tag>
+                    </div>
                   </div>
                   <div v-else-if="showMetricCardHeader" class="flex items-center gap-x-2">
                     <lazy-analyzer-logo
@@ -610,6 +663,24 @@ export default class AnalyzerDetails extends mixins(
       ? [...this.check.metricsCaptured].sort(
           (a, b) => a?.namespace?.key?.localeCompare(b?.namespace?.key || '') || 0
         )
+      : []
+  }
+
+  /**
+   * Creates a list of analyzers that contributed to the given metric's aggregate calculation, with each analyzer's name, shortcode and logo
+   *
+   * @param {string} metricShortCode The metric shortcode ('LCV', 'NLCV' or 'BCV')
+   * @returns {Record<string, string, string>[]}
+   */
+  getAggregateContributingChecks(metricShortCode: string) {
+    return this.check.metricsCaptured
+      ? [...this.check.metricsCaptured]
+          .filter(
+            (metric) =>
+              metric?.namespace.key !== MetricType.aggregate &&
+              metric?.shortcode === metricShortCode
+          )
+          .map((metric) => metric?.namespace)
       : []
   }
 
