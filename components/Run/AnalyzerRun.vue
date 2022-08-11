@@ -15,7 +15,7 @@
       <lazy-run-timeout v-else-if="status === CheckStatus.Timo && issueCount === 0" />
       <lazy-run-waiting v-else-if="status === CheckStatus.Wait && issueCount === 0" />
       <lazy-run-nuked v-else-if="status === CheckStatus.Atmo && issueCount === 0" />
-      <lazy-run-metric-threshold-error
+      <lazy-run-pass
         v-else-if="status === CheckStatus.Fail && issueCount === 0 && !isFilterApplied"
       />
       <template v-else>
