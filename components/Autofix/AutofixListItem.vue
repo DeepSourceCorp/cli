@@ -38,7 +38,7 @@
           <z-avatar
             size="xs"
             :image="createdBy.avatar"
-            :fallback-image="context.emptyAvatarUrl"
+            :fallback-image="getDefaultAvatar(createdBy.email)"
             :user-name="createdBy.fullName || createdBy.email"
           />
           <span class="text-sm text-vanilla-400"
@@ -71,7 +71,7 @@ import { fromNow } from '@/utils/date'
 import { safeRenderBackticks } from '~/utils/string'
 import { AutofixRun, AutofixRunStatus, Maybe, Scalars } from '~/types/types'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
-import ContextMixin from '~/mixins/contextMixin'
+import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: {
@@ -81,10 +81,11 @@ import ContextMixin from '~/mixins/contextMixin'
     ZAvatar
   },
   methods: {
+    getDefaultAvatar,
     safeRenderBackticks
   }
 })
-export default class AutofixListItem extends mixins(RoleAccessMixin, ContextMixin) {
+export default class AutofixListItem extends mixins(RoleAccessMixin) {
   @Prop()
   autofixRun!: AutofixRun
 

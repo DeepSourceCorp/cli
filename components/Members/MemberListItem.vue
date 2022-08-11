@@ -5,7 +5,7 @@
   >
     <div class="h-full flex flex-row align-bottom space-x-2.5 md:col-span-2">
       <div>
-        <z-avatar :image="avatar" :user-name="fullName" :fallback-image="context.emptyAvatarUrl" />
+        <z-avatar :image="avatar" :user-name="fullName" :fallback-image="getDefaultAvatar(email)" />
       </div>
       <div
         class="flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100"
@@ -32,7 +32,7 @@
       <div class="text-right">
         <div
           v-if="isPrimaryUser && !isRepo && !showOwnerMenu"
-          class="text-vanilla-100 text-xs font-semibold tracking-wider uppercase"
+          class="text-xs font-semibold tracking-wider uppercase text-vanilla-100"
         >
           Owner
         </div>
@@ -109,8 +109,9 @@ import { formatDate } from '@/utils/date'
 import TEAM_PERMS from '~/utils/teamPerms'
 
 import { User } from '~/types/types'
-import ContextMixin from '~/mixins/contextMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+
+import { getDefaultAvatar } from '~/utils/ui'
 
 const REPO_PERMS = {
   ADMIN: {
@@ -133,9 +134,10 @@ const REPO_PERMS = {
 }
 
 @Component({
-  components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar }
+  components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar },
+  methods: { getDefaultAvatar }
 })
-export default class MemberListItem extends mixins(ContextMixin, OwnerDetailMixin) {
+export default class MemberListItem extends mixins(OwnerDetailMixin) {
   @Prop()
   role!: string
 

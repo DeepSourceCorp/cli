@@ -13,7 +13,7 @@
             <z-avatar
               v-if="log.actor"
               :image="log.actor.avatar"
-              :fallback-image="context.emptyAvatarUrl"
+              :fallback-image="getDefaultAvatar(log.actor.email)"
               :user-name="getName(log)"
               size="sm"
               class="flex-shrink-0"
@@ -42,7 +42,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { AuditLog } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
-import ContextMixin from '~/mixins/contextMixin'
+import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: {
@@ -53,6 +53,7 @@ import ContextMixin from '~/mixins/contextMixin'
   },
   layout: 'repository',
   middleware: ['perm'],
+  methods: { getDefaultAvatar },
   meta: {
     auth: {
       strict: true,
@@ -60,11 +61,7 @@ import ContextMixin from '~/mixins/contextMixin'
     }
   }
 })
-export default class SettingsAuditLog extends mixins(
-  RepoDetailMixin,
-  ActiveUserMixin,
-  ContextMixin
-) {
+export default class SettingsAuditLog extends mixins(RepoDetailMixin, ActiveUserMixin) {
   public searchRule = ''
   public fetchingLogs = false
 

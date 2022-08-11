@@ -4,7 +4,7 @@
       <div class="flex space-x-4">
         <z-avatar
           :image="viewer.avatar"
-          :fallback-image="context.emptyAvatarUrl"
+          :fallback-image="getDefaultAvatar(viewer.email)"
           :user-name="viewer.fullName"
           size="lg"
         ></z-avatar>
@@ -28,8 +28,9 @@
               v-tooltip="`${ctx.team_name || ctx.login} - ${ctx.vcs_provider_display}`"
               :key="ctx.login"
               :image="ctx.avatar_url"
+              :fallback-image="getDefaultAvatar(ctx.login, ctx.type === 'user')"
               :user-name="ctx.login"
-            ></z-avatar>
+            />
           </nuxt-link>
         </div>
       </div>
@@ -80,9 +81,8 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import { ZAvatar, ZCheckbox, ZButton } from '@deepsourcelabs/zeal'
 import { AddRepoModal } from '@/components/AddRepo'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
-
+import { getDefaultAvatar } from '~/utils/ui'
 import { StatSection } from '@/components/Metrics'
-import ContextMixin from '~/mixins/contextMixin'
 
 export interface Step {
   name: string
@@ -102,17 +102,28 @@ export interface Step {
     ZCheckbox,
     ZButton,
     AddRepoModal
-  }
+  },
+  methods: { getDefaultAvatar }
 })
-export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
+export default class ViewerCard extends mixins(ActiveUserMixin) {
   showAddRepoModal = false
-
   computingFlag = 0
 
+  /**
+   * Method to show the activate repo modal
+   *
+   * @returns {void}
+   */
   showActivateRepoModal(): void {
     this.showAddRepoModal = true
   }
 
+  /**
+   * Trigger action for a given step
+   *
+   * @param {Step} step
+   * @returns {void}
+   */
   triggerStep(step: Step): void {
     if (step.action) {
       step.action()
@@ -127,6 +138,14 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
     this.updateCheck(step.name, true)
   }
 
+  /**
+   * Update check
+   *
+   * @param {string} key
+   * @param {boolean} val
+   *
+   * @returns {void}
+   */
   updateCheck(key: string, val: boolean): void {
     this.computingFlag++
     this.$localStore.set(this.storeKey, key, val)
@@ -136,6 +155,11 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
     return `${this.viewer.id}-onboarding-steps`
   }
 
+  /**
+   * Action to copy referral url
+   *
+   * @returns {void}
+   */
   copyReferralUrl(): void {
     if (this.viewer.referralUrl) {
       this.$copyToClipboard(this.viewer.referralUrl)
@@ -166,15 +190,6 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
         actionLabel: 'Add new account',
         actionIcon: 'plus'
       },
-      // {
-      //   name: 'refer',
-      //   title: 'Refer other developers',
-      //   isComplete: this.$localStore.set(this.storeKey, refer) as boolean,
-      //   description: 'Get a month of PRO membership when you refer a developer.',
-      //   action: this.copyReferralUrl,
-      //   actionLabel: 'Refer a developer',
-      //   actionIcon: 'users'
-      // },
       {
         name: 'join-discord',
         title: 'Join User Group on Discord',
@@ -198,11 +213,8 @@ export default class ViewerCard extends mixins(ActiveUserMixin, ContextMixin) {
   }
 
   get completion(): number {
-    if (this.steps) {
-      const completed = this.steps.reduce((total, step) => (step.isComplete ? total + 1 : total), 0)
-      return (completed / this.steps.length) * 100
-    }
-    return 0
+    const completed = this.steps.reduce((total, step) => (step.isComplete ? total + 1 : total), 0)
+    return (completed / this.steps.length) * 100
   }
 }
 </script>

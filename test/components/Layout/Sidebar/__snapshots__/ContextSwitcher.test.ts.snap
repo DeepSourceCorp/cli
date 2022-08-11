@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ContextSwitcher ]] renders ContextSwitcher with all prop options: {"isCollapsed":false} 1`] = `
-"<zmenu-stub direction=\\"right\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" class=\\"w-full\\"><button type=\\"button\\" class=\\"flex items-center w-full space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none p-1 hover:bg-ink-200\\">
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span>deepsourcelabs</span>
+"<zmenu-stub direction=\\"right\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" class=\\"w-full\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none hover:bg-ink-200\\">
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span>deepsourcelabs</span>
   </button>
   <zmenusection-stub title=\\"Select dashboard view\\" divider=\\"true\\" class=\\"overflow-y-scroll hide-scroll\\">
     <zmenuitem-stub closeonclick=\\"true\\" as=\\"nuxt-link\\" to=\\"/gh/deepsourcelabs\\" class=\\"flex items-center w-full space-x-1\\">
-      <zavatar-stub type=\\"span\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"span\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
       <div class=\\"flex-col flex-1\\"><span class=\\"text-sm font-medium text-vanilla-200\\">deepsourcelabs</span>
         <p class=\\"mt-1 text-xs text-vanilla-400\\">
           GitHub
@@ -27,12 +27,12 @@ exports[`[[ ContextSwitcher ]] renders ContextSwitcher with all prop options: {"
 `;
 
 exports[`[[ ContextSwitcher ]] renders ContextSwitcher with all prop options: {"isCollapsed":true} 1`] = `
-"<zmenu-stub direction=\\"right\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" class=\\"w-full\\"><button type=\\"button\\" class=\\"flex items-center w-full space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none p-1 hover:opacity-75 px-0\\">
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span style=\\"display: none;\\">deepsourcelabs</span>
+"<zmenu-stub direction=\\"right\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" class=\\"w-full\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none hover:opacity-75 px-0\\">
+    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-1\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span style=\\"display: none;\\">deepsourcelabs</span>
   </button>
   <zmenusection-stub title=\\"Select dashboard view\\" divider=\\"true\\" class=\\"overflow-y-scroll hide-scroll\\">
     <zmenuitem-stub closeonclick=\\"true\\" as=\\"nuxt-link\\" to=\\"/gh/deepsourcelabs\\" class=\\"flex items-center w-full space-x-1\\">
-      <zavatar-stub type=\\"span\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"span\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
       <div class=\\"flex-col flex-1\\"><span class=\\"text-sm font-medium text-vanilla-200\\">deepsourcelabs</span>
         <p class=\\"mt-1 text-xs text-vanilla-400\\">
           GitHub

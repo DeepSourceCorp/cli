@@ -18,7 +18,7 @@
         <z-avatar
           v-if="account.avatar_url"
           :image="account.avatar_url"
-          :fallback-image="context.emptyAvatarUrl"
+          :fallback-image="getDefaultAvatar(account.login, !account.is_team)"
           :userName="account.login"
           class="flex-shrink-0"
         ></z-avatar>
@@ -59,7 +59,7 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZAvatar, ZIcon } from '@deepsourcelabs/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
-import ContextMixin from '~/mixins/contextMixin'
+import { getDefaultAvatar } from '~/utils/ui'
 
 import GitlabMutation from '@/apollo/mutations/installation/gitlabInstallationLanding.gql'
 
@@ -74,9 +74,10 @@ import GitlabMutation from '@/apollo/mutations/installation/gitlabInstallationLa
       strict: true,
       redirectToLogin: true
     }
-  }
+  },
+  methods: { getDefaultAvatar }
 })
-export default class InstallationProvider extends mixins(ContextMixin, ActiveUserMixin) {
+export default class InstallationProvider extends mixins(ActiveUserMixin) {
   async fetch(): Promise<void> {
     try {
       await this.fetchActiveUser()

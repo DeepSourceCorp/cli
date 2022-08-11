@@ -16,13 +16,12 @@
       <owner-issues-graph :full-width="!showAutofixGraph" />
       <owner-autofix-graph v-if="showAutofixGraph" />
     </div>
-    <!-- recent-activity-list class="grid grid-cols-1"> </recent-activity-list -->
   </div>
 </template>
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { RecentlyActiveRepoList, RecentActivityList, AccountSetupCard } from '@/components/TeamHome'
+import { RecentlyActiveRepoList, AccountSetupCard } from '@/components/TeamHome'
 
 import { OwnerIssuesGraph, OwnerAutofixGraph } from '@/components/Graphs'
 
@@ -42,7 +41,6 @@ interface SetupStep {
 @Component({
   components: {
     RecentlyActiveRepoList,
-    RecentActivityList,
     AccountSetupCard,
     OwnerIssuesGraph,
     OwnerAutofixGraph

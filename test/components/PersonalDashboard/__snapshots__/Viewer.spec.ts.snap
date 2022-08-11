@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ Viewer ]] renders Viewer 1`] = `
+"<section class=\\"flex flex-col justify-between border rounded-md border-ink-200\\">
+  <!---->
+  <div class=\\"flex-grow p-0\\">
+    <div class=\\"p-4 space-y-4 border-b border-ink-200\\">
+      <div class=\\"flex space-x-4\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\">
+          <!---->
+          <!----></a>
+        <div>
+          <h3 class=\\"text-base font-medium text-vanilla-100\\"></h3>
+          <p class=\\"text-xs text-vanilla-400\\"></p>
+        </div>
+      </div>
+      <div class=\\"space-y-2\\">
+        <h6 class=\\"text-xs font-medium tracking-wide uppercase text-vanilla-400\\">Your Teams</h6>
+        <div class=\\"space-x-2\\">
+          <nuxt-link to=\\"/gh/deepsourcelabs\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" alt=\\"deepsourcelabs\\" class=\\"rounded-full leading-none h-8 w-8 text-sm\\">
+              <!----></a></nuxt-link>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class=\\"p-2 px-4\\">Recommended actions</div>
+      <div class=\\"w-full h-px bg-ink-200\\">
+        <div class=\\"h-0.5 bg-juniper transform transition-all duration-100 ease-in-out\\" style=\\"width: 100%;\\"></div>
+      </div>
+      <div class=\\"p-4 space-y-6\\">
+        <div class=\\"flex items-start space-x-2\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox mt-2\\"><input type=\\"checkbox\\" name=\\"\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-5 w-5 font-medium absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
+            <!----></label>
+          <div class=\\"space-y-2\\">
+            <h5 class=\\"leading-none line-through text-vanilla-400\\">
+              Activate analysis on a repository
+            </h5>
+            <!---->
+          </div>
+        </div>
+        <div class=\\"flex items-start space-x-2\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox mt-2\\"><input type=\\"checkbox\\" name=\\"\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-5 w-5 font-medium absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
+            <!----></label>
+          <div class=\\"space-y-2\\">
+            <h5 class=\\"leading-none line-through text-vanilla-400\\">
+              Add a new account
+            </h5>
+            <!---->
+          </div>
+        </div>
+        <div class=\\"flex items-start space-x-2\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox mt-2\\"><input type=\\"checkbox\\" name=\\"\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-5 w-5 font-medium absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
+            <!----></label>
+          <div class=\\"space-y-2\\">
+            <h5 class=\\"leading-none line-through text-vanilla-400\\">
+              Join User Group on Discord
+            </h5>
+            <!---->
+          </div>
+        </div>
+        <div class=\\"flex items-start space-x-2\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox mt-2\\"><input type=\\"checkbox\\" name=\\"\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-5 w-5 font-medium absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
+            <!----></label>
+          <div class=\\"space-y-2\\">
+            <h5 class=\\"leading-none line-through text-vanilla-400\\">
+              Follow us on Twitter
+            </h5>
+            <!---->
+          </div>
+        </div>
+      </div>
+    </div>
+    <portal to=\\"modal\\">
+      <!---->
+    </portal>
+  </div>
+  <div></div>
+</section>"
+`;

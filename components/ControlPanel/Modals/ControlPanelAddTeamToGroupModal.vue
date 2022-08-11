@@ -30,6 +30,7 @@
               <z-avatar
                 :image="team.avatar"
                 :user-name="team.name || team.login"
+                :fallback-image="getDefaultAvatar(team.login, false)"
                 class="flex-shrink-0"
               />
               <div>
@@ -126,12 +127,14 @@ import {
 import AddTeamToGroupMixin from '~/mixins/addTeamToGroupMixin'
 import { formatDate, parseISODate } from '~/utils/date'
 import { resolveNodes } from '~/utils/array'
+import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: { ZAvatar, ZButton, ZModal, ZIcon, ZInput, ZMenu, ZMenuSection, ZMenuItem },
   name: 'ControlPanelAddTeamToGroupModal',
   methods: {
     parseISODate,
+    getDefaultAvatar,
     formatDate
   }
 })

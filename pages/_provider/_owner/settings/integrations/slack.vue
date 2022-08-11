@@ -40,6 +40,7 @@
         v-if="integration.installed"
         :avatar="avatar"
         :user-name="userName"
+        :email="integration.enabledBy.email"
         :enabled-on="integration.enabledOn"
       />
 

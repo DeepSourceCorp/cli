@@ -10,6 +10,7 @@
           <z-avatar
             :image="orgUser.avatar"
             :user-name="orgUser.fullName || orgUser.email"
+            :fallback-image="getDefaultAvatar(orgUser.email)"
             :loading="loading"
             size="lg"
             class="flex-shrink-0"
@@ -89,11 +90,13 @@ import { ZButton, ZAvatar, ZIcon, ZTag } from '@deepsourcelabs/zeal'
 
 import { EnterpriseUser } from '~/types/types'
 import { formatDate, parseISODate } from '~/utils/date'
+import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: { ZButton, ZAvatar, ZIcon, ZTag },
   name: 'ControlPanelUserHeader',
   methods: {
+    getDefaultAvatar,
     parseISODate,
     formatDate
   }

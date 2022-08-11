@@ -2,7 +2,12 @@
   <z-modal @onClose="$emit('close')" title="Confirm updates to your subscription">
     <div class="p-4 space-y-4">
       <div class="flex items-center space-x-2">
-        <z-avatar size="lg" :image="owner.avatar" :user-name="owner.login" />
+        <z-avatar
+          :image="owner.avatar"
+          :fallback-image="getDefaultAvatar(owner.login, false)"
+          :user-name="owner.login"
+          size="lg"
+        />
         <ul>
           <li class="text-base font-medium">
             {{ owner.login }}
@@ -130,6 +135,7 @@ import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import { GetUpgradeCodeQualitySubscriptionPlanInfoPayload } from '~/types/types'
 import { formatUSD } from '~/utils/string'
 import { formatDate, parseISODate } from '~/utils/date'
+import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: {
@@ -138,6 +144,7 @@ import { formatDate, parseISODate } from '~/utils/date'
     ZAvatar
   },
   methods: {
+    getDefaultAvatar,
     parseISODate,
     formatDate,
     formatUSD

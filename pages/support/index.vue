@@ -46,8 +46,9 @@
                       size="sm"
                       class="flex-shrink-0"
                       :image="context.avatar_url"
+                      :fallback-image="getDefaultAvatar(context.login, context.type === 'user')"
                       :user-name="context.login"
-                    ></z-avatar>
+                    />
                     <span v-show="!isCollapsed">
                       {{ context.team_name || context.login }}
                       {{
@@ -245,6 +246,7 @@ import {
 import { InfoBanner } from '@/components/Settings/index'
 import SubmitSupportTicketMutation from '~/apollo/mutations/support/submitSupportTicket.gql'
 import { AttachmentObj, getBase64Files } from '~/utils/files'
+import { getDefaultAvatar } from '~/utils/ui'
 
 type SupportValidationData = {
   ticketAuthor: string
@@ -273,6 +275,7 @@ type SupportValidationData = {
       redirectToLogin: true
     }
   },
+  methods: { getDefaultAvatar },
   layout: 'sidebar-only'
 })
 export default class Support extends mixins(ActiveUserMixin) {
@@ -452,11 +455,11 @@ export default class Support extends mixins(ActiveUserMixin) {
           formData.attachments = this.uploadedFiles.map(({ filename, base64Data }) => {
             return { filename, sizeInBytes: new Blob([base64Data]).size } as AttachmentObj
           })
-          this.logErrorForUser(reqErr, 'Support Page', formData)
+          this.logErrorForUser(reqErr as Error, 'Support Page', formData)
         }
       }
     } catch (err) {
-      this.$toast.danger(err.message)
+      this.$toast.danger((err as Error).message)
     } finally {
       this.isFormSubmitting = false
     }

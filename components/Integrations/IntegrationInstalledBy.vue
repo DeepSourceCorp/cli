@@ -4,6 +4,7 @@
     <z-avatar
       :image="avatar"
       :user-name="userName"
+      :fallback-image="getDefaultAvatar(email)"
       size="xs"
       class="flex-shrink-0 leading-none rounded-full"
     />
@@ -16,6 +17,7 @@
 import { ZAvatar } from '@deepsourcelabs/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { formatDate } from '~/utils/date'
+import { getDefaultAvatar } from '~/utils/ui'
 
 /**
  * Component that is responsible to render the integration logo and name on detailed view
@@ -23,10 +25,11 @@ import { formatDate } from '~/utils/date'
 @Component({
   components: { ZAvatar },
   methods: {
+    getDefaultAvatar,
     formatDate
   }
 })
-export default class IntegrationInstalledOn extends Vue {
+export default class IntegrationInstalledBy extends Vue {
   @Prop({ required: true })
   enabledOn: string
 
@@ -35,5 +38,8 @@ export default class IntegrationInstalledOn extends Vue {
 
   @Prop({ required: true })
   userName: string
+
+  @Prop({ required: true })
+  email: string
 }
 </script>

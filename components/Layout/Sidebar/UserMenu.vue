@@ -13,7 +13,7 @@
       >
         <z-avatar
           :image="viewer.avatar"
-          :fallback-image="context.emptyAvatarUrl"
+          :fallback-image="getDefaultAvatar(viewer.email)"
           :userName="viewer.fullName || viewer.email"
           size="sm"
           class="flex-shrink-0 leading-none rounded-full"
@@ -50,7 +50,8 @@ import { ZAvatar, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
 // mixins
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'
-import ContextMixin from '~/mixins/contextMixin'
+
+import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: {
@@ -58,9 +59,10 @@ import ContextMixin from '~/mixins/contextMixin'
     ZMenuItem,
     ZMenu,
     ZMenuSection
-  }
+  },
+  methods: { getDefaultAvatar }
 })
-export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin, ContextMixin) {
+export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {
   @Prop()
   isCollapsed: boolean
 

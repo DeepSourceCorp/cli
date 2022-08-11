@@ -4,7 +4,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -34,7 +34,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -64,7 +64,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -94,7 +94,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -124,7 +124,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -151,7 +151,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -178,7 +178,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -205,7 +205,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -232,7 +232,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -262,7 +262,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -292,7 +292,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -322,7 +322,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -352,7 +352,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -379,7 +379,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -406,7 +406,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -433,7 +433,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -460,7 +460,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -490,7 +490,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -520,7 +520,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -550,7 +550,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -580,7 +580,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -607,7 +607,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -634,7 +634,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -661,7 +661,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -688,7 +688,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -718,7 +718,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -748,7 +748,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -778,7 +778,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -808,7 +808,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -835,7 +835,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -852,7 +852,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <div class=\\"text-vanilla-100 text-xs font-semibold tracking-wider uppercase\\">
+      <div class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-100\\">
         Owner
       </div>
     </div>
@@ -864,7 +864,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -891,7 +891,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -908,7 +908,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <div class=\\"text-vanilla-100 text-xs font-semibold tracking-wider uppercase\\">
+      <div class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-100\\">
         Owner
       </div>
     </div>
@@ -920,7 +920,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -950,7 +950,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -980,7 +980,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1010,7 +1010,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1040,7 +1040,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1067,7 +1067,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1084,7 +1084,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <div class=\\"text-vanilla-100 text-xs font-semibold tracking-wider uppercase\\">
+      <div class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-100\\">
         Owner
       </div>
     </div>
@@ -1096,7 +1096,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1123,7 +1123,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1140,7 +1140,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <div class=\\"text-vanilla-100 text-xs font-semibold tracking-wider uppercase\\">
+      <div class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-100\\">
         Owner
       </div>
     </div>
@@ -1152,7 +1152,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1182,7 +1182,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1212,7 +1212,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1242,7 +1242,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1272,7 +1272,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1299,7 +1299,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1316,7 +1316,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <div class=\\"text-vanilla-100 text-xs font-semibold tracking-wider uppercase\\">
+      <div class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-100\\">
         Owner
       </div>
     </div>
@@ -1328,7 +1328,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1355,7 +1355,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
 "<li class=\\"flex items-center md:grid grid-cols-2 md:grid-cols-5 py-2 space-x-6 space-y-0.5 text-sm\\">
   <div class=\\"h-full flex flex-row align-bottom space-x-2.5 md:col-span-2\\">
     <div>
-      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+      <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"Duck Norris\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
     </div>
     <div class=\\"flex flex-col justify-center text-sm sm:text-base w-3/4 space-y-1.5 leading-none text-vanilla-100\\">
       <div class=\\"font-medium\\">Duck Norris</div>
@@ -1372,7 +1372,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <div class=\\"text-vanilla-100 text-xs font-semibold tracking-wider uppercase\\">
+      <div class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-100\\">
         Owner
       </div>
     </div>

@@ -14,7 +14,11 @@
         <div
           class="flex items-center w-full p-2 mt-4 space-x-2 rounded-md bg-ink-100 bg-opacity-30"
         >
-          <z-avatar :image="details.teamLogo" :userName="details.teamName"></z-avatar>
+          <z-avatar
+            :image="details.teamLogo"
+            :fallback-image="getDefaultAvatar(details.teamLogin, false)"
+            :user-name="details.teamName"
+          />
           <div>
             <h4 class="font-semibold text-vanilla-100">{{ details.teamName }}</h4>
             <p v-if="details.vcsProvider" class="text-xs text-vanilla-400">
@@ -32,10 +36,10 @@
           <z-avatar
             v-if="viewer.avatar"
             :image="viewer.avatar"
-            :fallback-image="context.emptyAvatarUrl"
-            :userName="viewer.fullName || viewer.email"
+            :fallback-image="getDefaultAvatar(viewer.email)"
+            :user-name="viewer.fullName || viewer.email"
             class="flex-shrink-0"
-          ></z-avatar>
+          />
           <div class="flex-1 block overflow-hidden text-left overflow-ellipsis whitespace-nowrap">
             Continue as {{ viewer.firstName || viewer.email }}
           </div>
@@ -101,6 +105,7 @@ import confirmInvitationMutation from '@/apollo/mutations/invitation/confirmInvi
 import getInvitationDetailsQuery from '@/apollo/queries/invitation/getTeamInviteInfo.gql'
 
 import { ConfirmInvitationPayload, TeamInviteInfo } from '~/types/types'
+import { getDefaultAvatar } from '~/utils/ui'
 
 export enum REQUEST_STATES {
   FETCHING = 'fetching',
@@ -136,13 +141,14 @@ export enum REQUEST_STATES {
         redirect(302, `/signup/?next=${route.path}`)
       }
     }
-  ]
+  ],
+  methods: { getDefaultAvatar }
 })
 export default class Invitation extends mixins(ContextMixin, ActiveUserMixin) {
-  private details: ConfirmInvitationPayload | TeamInviteInfo = {}
-  private dataState: REQUEST_STATES = REQUEST_STATES.COMPLETED
-  private acceptInviteState: REQUEST_STATES = REQUEST_STATES.COMPLETED
-  private error: string =
+  details: ConfirmInvitationPayload | TeamInviteInfo = {}
+  dataState: REQUEST_STATES = REQUEST_STATES.COMPLETED
+  acceptInviteState: REQUEST_STATES = REQUEST_STATES.COMPLETED
+  error: string =
     'Something went wrong confirming the invitation, please the check the link provided to you.'
 
   async fetch(): Promise<void> {

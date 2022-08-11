@@ -8,7 +8,7 @@
             <z-avatar
               v-if="viewer.avatar"
               :image="viewer.avatar"
-              :fallback-image="context.emptyAvatarUrl"
+              :fallback-image="getDefaultAvatar(viewer.email)"
               :user-name="viewer.login"
               stroke="bg-ink-100 p-1.5"
               class="flex-shrink-0"
@@ -30,8 +30,9 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZTag, ZAvatar, ZAvatarGroup } from '@deepsourcelabs/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
-import ContextMixin from '~/mixins/contextMixin'
 import AuthMixin from '~/mixins/authMixin'
+
+import { getDefaultAvatar } from '~/utils/ui'
 
 /**
  * Header for the user layout
@@ -42,7 +43,8 @@ import AuthMixin from '~/mixins/authMixin'
     ZTag,
     ZAvatar,
     ZAvatarGroup
-  }
+  },
+  methods: { getDefaultAvatar }
 })
-export default class UserHeader extends mixins(ActiveUserMixin, ContextMixin, AuthMixin) {}
+export default class UserHeader extends mixins(ActiveUserMixin, AuthMixin) {}
 </script>

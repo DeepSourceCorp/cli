@@ -12,6 +12,12 @@
               v-if="activeDashboardContext.avatar_url"
               :image="activeDashboardContext.avatar_url"
               :user-name="activeDashboardContext.login"
+              :fallback-image="
+                getDefaultAvatar(
+                  activeDashboardContext.login,
+                  activeDashboardContext.type === 'user'
+                )
+              "
               stroke="bg-ink-100 p-1.5"
               class="flex-shrink-0"
             ></z-avatar>
@@ -70,16 +76,7 @@
               <nuxt-link v-else-if="!$config.onPrem" :to="$generateRoute(['settings', 'billing'])">
                 <z-tag
                   icon-left="star"
-                  class="
-                    font-semibold
-                    leading-none
-                    tracking-wider
-                    text-center
-                    uppercase
-                    border border-ink-100
-                    text-vanilla-300
-                    hover:text-vanilla-100 hover:bg-ink-100
-                  "
+                  class="font-semibold leading-none tracking-wider text-center uppercase border border-ink-100 text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
                   spacing="py-1.5 px-3"
                   bgColor="ink-200"
                   v-tooltip="'See upgrade options'"
@@ -103,6 +100,7 @@ import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
 import AuthMixin from '~/mixins/authMixin'
 import { TeamPerms } from '~/types/permTypes'
+import { getDefaultAvatar } from '~/utils/ui'
 
 const FREE_PLAN_SLUG = 'free'
 
@@ -112,7 +110,8 @@ const FREE_PLAN_SLUG = 'free'
     ZTag,
     ZAvatar,
     ZAvatarGroup
-  }
+  },
+  methods: { getDefaultAvatar }
 })
 export default class DashboardHeader extends mixins(ActiveUserMixin, ContextMixin, AuthMixin) {
   get planName(): string {

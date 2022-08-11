@@ -7,7 +7,7 @@
         <z-avatar
           v-if="viewer.avatar && viewer.firstName"
           :image="viewer.avatar"
-          :fallback-image="context.emptyAvatarUrl"
+          :fallback-image="getDefaultAvatar(viewer.email)"
           :user-name="viewer.firstName"
           size="sm"
         >
@@ -95,22 +95,25 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, mixins } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { ZAvatar, ZIcon, ZButton } from '@deepsourcelabs/zeal'
-import ContextMixin from '~/mixins/contextMixin'
+import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({
   components: {
     ZAvatar,
     ZIcon,
     ZButton
-  }
+  },
+  methods: { getDefaultAvatar }
 })
-export default class AnalyzerPreview extends mixins(ContextMixin) {
+export default class AnalyzerPreview extends Vue {
   @Prop({ default: {} })
   viewer!: Record<string, string>
+
   @Prop({ default: [] })
   selectedAnalyzers!: Array<any>
+
   @Prop({ default: '' })
   selectedRepo!: string
 
@@ -120,7 +123,7 @@ export default class AnalyzerPreview extends mixins(ContextMixin) {
     this.handleName = this.$route.params.login
   }
 
-  private tabs: Array<Record<string, unknown>> = [
+  tabs: Array<Record<string, unknown>> = [
     {
       name: 'Overview',
       active: false

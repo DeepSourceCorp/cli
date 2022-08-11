@@ -49,6 +49,7 @@
             <z-avatar
               :image="team.avatar"
               :user-name="team.name || team.login"
+              :fallback-image="getDefaultAvatar(team.login, false)"
               class="flex-shrink-0"
             />
             <div>
@@ -122,12 +123,13 @@ import { EnterpriseUser, Team } from '~/types/types'
 import { parseISODate, formatDate } from '~/utils/date'
 import { resolveNodes } from '~/utils/array'
 import PaginationMixin from '~/mixins/paginationMixin'
+import { getDefaultAvatar } from '~/utils/ui'
 
 const userManagementStore = namespace('control-panel/users')
 
 @Component({
   components: { ZInput, ZButton, ZIcon, ZAvatar, ZBreadcrumb, ZBreadcrumbItem, ZTab, ZPagination },
-  methods: { parseISODate, formatDate },
+  methods: { parseISODate, formatDate, getDefaultAvatar },
   layout: 'control-panel'
 })
 export default class UserManagementUserDetails extends mixins(

@@ -49,6 +49,7 @@
             <z-avatar
               :image="team.team.avatar"
               :user-name="team.team.name || team.team.login"
+              :fallback-image="getDefaultAvatar(team.team.login, false)"
               class="flex-shrink-0"
             />
             <div>
@@ -173,6 +174,7 @@ import { EnterpriseGroup, GroupTeamMembership } from '~/types/types'
 import { parseISODate, formatDate } from '~/utils/date'
 import { resolveNodes } from '~/utils/array'
 import AddTeamToGroupMixin from '~/mixins/addTeamToGroupMixin'
+import { getDefaultAvatar } from '~/utils/ui'
 
 const groupManagementStore = namespace('control-panel/groups')
 
@@ -190,7 +192,7 @@ const groupManagementStore = namespace('control-panel/groups')
     ZMenuItem,
     ZPagination
   },
-  methods: { parseISODate, formatDate },
+  methods: { parseISODate, formatDate, getDefaultAvatar },
   layout: 'control-panel'
 })
 export default class UserManagementUserDetails extends mixins(

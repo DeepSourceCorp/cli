@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ Run Status Components ]] RunCancelled: RunCancelled 1`] = `
-"<section class=\\"grid border-2 border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\"><img src=\\"error.svg\\" alt=\\"Run cancelled\\" class=\\"mx-auto mb-4\\">
+"<section class=\\"grid border-2 border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\"><img src=\\"timeout.svg\\" alt=\\"Run cancelled\\" class=\\"mx-auto mb-4\\">
   <h1 class=\\"text-base font-semibold text-center text-vanilla-100\\">The run was cancelled</h1>
   <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"></div>
 </section>"
@@ -20,7 +20,7 @@ exports[`[[ Run Status Components ]] RunLoading: RunLoading 1`] = `
 `;
 
 exports[`[[ Run Status Components ]] RunNuked: RunNuked 1`] = `
-"<section class=\\"grid border-2 border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\"><img src=\\"empty.svg\\" alt=\\"Run failed\\" class=\\"mx-auto mb-4\\">
+"<section class=\\"grid border-2 border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\"><img src=\\"timeout.svg\\" alt=\\"Run failed\\" class=\\"mx-auto mb-4\\">
   <h1 class=\\"text-base font-semibold text-center text-vanilla-100\\">Test artifacts were not uploaded in time</h1>
   <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"></div>
 </section>"

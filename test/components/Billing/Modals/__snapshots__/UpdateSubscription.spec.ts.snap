@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ UpdateSubscriptionModal ]] renders UpdateSubscriptionModal 1`] = `
+"<div class=\\"fixed inset-0 flex items-end bg-opacity-60 bg-ink-400 z-dialog-backdrop sm:items-center z-modal-backdrop\\">
+  <transition-stub enterclass=\\"translate-y-full sm:translate-y-0 sm:scale-95 sm:opacity-0\\" leavetoclass=\\"translate-y-full sm:translate-y-0 sm:scale-105 sm:opacity-0\\" enteractiveclass=\\"transition-all duration-100 ease-in-out\\" leaveactiveclass=\\"transition-all duration-100 ease-in-out\\">
+    <!---->
+  </transition-stub>
+</div>"
+`;

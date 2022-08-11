@@ -1,5 +1,6 @@
 module.exports = {
   moduleNameMapper: {
+    '~/assets/images/(.*)$': '<rootDir>/test/fileMock.ts',
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
     '^vue$': 'vue/dist/vue.common.js'

@@ -20,7 +20,7 @@
         <z-avatar
           v-if="viewer.avatar"
           :image="viewer.avatar"
-          :fallback-image="context.emptyAvatarUrl"
+          :fallback-image="getDefaultAvatar(viewer.email)"
           :user-name="viewer.fullName || viewer.email"
           :loading="dataState === 'fetching'"
           class="flex-shrink-0"
@@ -93,6 +93,7 @@ import AcceptInviteMutation from '@/apollo/mutations/control-panel/user-manageme
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 import ContextMixin from '~/mixins/contextMixin'
+import { getDefaultAvatar } from '~/utils/ui'
 
 export enum REQUEST_STATES {
   FETCHING = 'fetching',
@@ -108,13 +109,14 @@ export enum REQUEST_STATES {
   },
   meta: {
     auth: { strict: true, redirectToLogin: true }
-  }
+  },
+  methods: { getDefaultAvatar }
 })
 export default class Invitation extends mixins(ActiveUserMixin, ContextMixin) {
-  private details: { name?: string } = {}
-  private dataState: REQUEST_STATES = REQUEST_STATES.FETCHING
-  private acceptInviteState: REQUEST_STATES = REQUEST_STATES.FETCHING
-  private error: string =
+  details: { name?: string } = {}
+  dataState: REQUEST_STATES = REQUEST_STATES.FETCHING
+  acceptInviteState: REQUEST_STATES = REQUEST_STATES.FETCHING
+  error: string =
     'Something went wrong confirming the invitation, please the check the link provided to you.'
   inviteCode = ''
 

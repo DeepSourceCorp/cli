@@ -3,15 +3,17 @@
     <template v-slot:trigger="{ toggle }">
       <button
         type="button"
-        class="flex items-center w-full space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none p-1"
+        class="flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none"
         :class="isCollapsed ? 'hover:opacity-75 px-0' : 'hover:bg-ink-200'"
         @click="toggle"
       >
         <z-avatar
-          v-if="activeDashboardContext.avatar_url"
           size="sm"
           :image="activeDashboardContext.avatar_url"
           :user-name="activeDashboardContext.login"
+          :fallback-image="
+            getDefaultAvatar(activeDashboardContext.login, activeDashboardContext.type === 'user')
+          "
           class="flex-shrink-0"
           stroke="bg-ink-100 p-1"
         ></z-avatar>
@@ -34,7 +36,12 @@
           class="flex items-center w-full space-x-1"
           @click.native="close"
         >
-          <z-avatar type="span" :image="context.avatar_url" :user-name="context.login"></z-avatar>
+          <z-avatar
+            :image="context.avatar_url"
+            :fallback-image="getDefaultAvatar(context.login, context.type === 'user')"
+            :user-name="context.login"
+            type="span"
+          />
           <div class="flex-col flex-1">
             <span class="text-sm font-medium text-vanilla-200">{{
               context.team_name || context.login
@@ -74,6 +81,11 @@ import { ZAvatar, ZIcon, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
 
+import { getDefaultAvatar } from '~/utils/ui'
+
+/**
+ * Context switcher component
+ */
 @Component({
   components: {
     ZAvatar,
@@ -81,16 +93,30 @@ import ContextMixin from '~/mixins/contextMixin'
     ZMenu,
     ZMenuItem,
     ZMenuSection
+  },
+  methods: {
+    getDefaultAvatar
   }
 })
 export default class ContextSwitcher extends mixins(ActiveUserMixin, ContextMixin) {
   @Prop()
   isCollapsed: boolean
 
+  /**
+   * Fetch hook for context switcher
+   *
+   * @returns {Promise<void>}
+   */
   async fetch(): Promise<void> {
     await this.fetchContext()
   }
 
+  /**
+   * Update the default context for the user
+   *
+   * @param {Record<string, string>} context - context to set the default
+   * @returns {Promise<void>}
+   */
   public async updateDefaultContext(context: Record<string, string>): Promise<void> {
     if (!context.is_default) {
       await this.updateDefaultContextAPI({

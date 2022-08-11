@@ -23,6 +23,12 @@
             <z-avatar
               :image="activeDashboardContext.avatar_url"
               :user-name="activeDashboardContext.login"
+              :fallback-image="
+                getDefaultAvatar(
+                  activeDashboardContext.login,
+                  activeDashboardContext.type === 'user'
+                )
+              "
               size="sm"
               class="flex-shrink-0 leading-none rounded-full"
             />
@@ -100,13 +106,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Watch, mixins } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { ZAvatar, ZIcon, ZButton, ZStepper, ZStep } from '@deepsourcelabs/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { Context } from '@nuxt/types'
-import { Maybe } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
+
+import { getDefaultAvatar } from '~/utils/ui'
 
 /**
  * Wrapper for onboarding pages,
@@ -129,6 +136,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
       }
     }
   ],
+  methods: { getDefaultAvatar },
   meta: {
     auth: {
       strict: true,

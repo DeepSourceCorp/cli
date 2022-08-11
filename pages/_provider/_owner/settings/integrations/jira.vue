@@ -54,6 +54,7 @@
         <integration-installed-by
           :avatar="integration.enabledBy.avatar"
           :user-name="integration.enabledBy.fullName"
+          :email="integration.enabledBy.email"
           :enabled-on="integration.enabledOn"
         />
 

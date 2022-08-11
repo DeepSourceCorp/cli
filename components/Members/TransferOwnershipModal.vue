@@ -18,7 +18,7 @@
               icon="alert-circle"
               color="honey-400"
               size="large"
-              class="mr-3 stroke-2 -mt-1 pt-px"
+              class="pt-px mr-3 -mt-1 stroke-2"
             />
             Please make sure you’ve thought this through! Transferring ownership is immediate and
             you cannot undo this.
@@ -29,23 +29,23 @@
             <span class="text-sm text-vanilla-100">New owner of this team</span>
             <div
               v-if="newOwner"
-              class="h-10 flex flex-row space-x-2 justify-between px-3 bg-ink-200 border border-ink-100 rounded-md shadow-inner"
+              class="flex flex-row justify-between h-10 px-3 space-x-2 border rounded-md shadow-inner bg-ink-200 border-ink-100"
             >
               <div class="flex flex-row space-x-2">
-                <div class="h-7 my-auto">
+                <div class="my-auto h-7">
                   <z-avatar
                     type="div"
                     :image="newOwner.user.avatar"
                     :user-name="newOwner.user.fullName || newOwner.user.email"
-                    :fallback-image="context.emptyAvatarUrl"
+                    :fallback-image="getDefaultAvatar(newOwner.user.email)"
                     size="sm"
                   />
                 </div>
-                <div class="font-medium leading-none text-vanilla-100 text-xs sm:text-sm my-auto">
+                <div class="my-auto text-xs font-medium leading-none text-vanilla-100 sm:text-sm">
                   {{ newOwner.user.email }}
                 </div>
               </div>
-              <div as="button" @click="clearNewOwner" class="cursor-pointer my-auto">
+              <div as="button" @click="clearNewOwner" class="my-auto cursor-pointer">
                 <z-icon icon="x" />
               </div>
             </div>
@@ -70,12 +70,12 @@
               </z-input>
               <div
                 v-if="showSearchResults"
-                class="absolute z-10 mt-1 w-full shadow-double-dark max-h-44 sm:max-h-80 overflow-y-auto border border-ink-100 rounded-md"
+                class="absolute z-10 w-full mt-1 overflow-y-auto border rounded-md shadow-double-dark max-h-44 sm:max-h-80 border-ink-100"
                 tabindex="-1"
               >
                 <div
                   v-if="searchResults.length"
-                  class="w-full flex flex-col divide-y divide-ink-100"
+                  class="flex flex-col w-full divide-y divide-ink-100"
                   tabindex="-1"
                 >
                   <div
@@ -99,7 +99,7 @@
                 </div>
                 <div
                   v-else
-                  class="font-medium text-vanilla-400 bg-ink-300 px-3 py-6 w-full text-center"
+                  class="w-full px-3 py-6 font-medium text-center text-vanilla-400 bg-ink-300"
                 >
                   <span class="text-base">No results found</span>
                 </div>
@@ -135,7 +135,7 @@
         </div>
       </div>
       <template slot="footer">
-        <div class="mt-6 space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+        <div class="flex items-center justify-end mt-6 space-x-4 text-right text-vanilla-100">
           <z-button buttonType="ghost" class="text-vanilla-100" size="small" @click="close"
             >Cancel</z-button
           >
@@ -169,7 +169,7 @@
                 </div>
               </template>
             </empty-state>
-            <div class="space-x-4 text-right text-vanilla-100 flex items-center justify-end">
+            <div class="flex items-center justify-end space-x-4 text-right text-vanilla-100">
               <z-button button-type="primary" @click="close">I understand</z-button>
             </div>
           </slot>
@@ -196,8 +196,8 @@ import {
 import { TeamMember } from '~/types/types'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
-import ContextMixin from '~/mixins/contextMixin'
 import { TeamActions } from '~/store/team/detail'
+import { getDefaultAvatar } from '~/utils/ui'
 
 const teamStore = namespace('team/detail')
 
@@ -214,13 +214,10 @@ const teamStore = namespace('team/detail')
     ZButton,
     ZCheckbox
   },
+  methods: { getDefaultAvatar },
   layout: 'dashboard'
 })
-export default class TransferOwnershipModal extends mixins(
-  TeamDetailMixin,
-  ActiveUserMixin,
-  ContextMixin
-) {
+export default class TransferOwnershipModal extends mixins(TeamDetailMixin, ActiveUserMixin) {
   private validEmail = true
   private emailEmpty = false
   private searchCandidate = ''

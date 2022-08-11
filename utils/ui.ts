@@ -7,6 +7,30 @@ const knownTagPatterns: Record<string, string> = {
   '^a[0-1][0-9]': '#ea580c'
 }
 
+const teamAvatars = [
+  require('~/assets/images/default-avatars/team/team-1.webp'),
+  require('~/assets/images/default-avatars/team/team-2.webp'),
+  require('~/assets/images/default-avatars/team/team-3.webp'),
+  require('~/assets/images/default-avatars/team/team-4.webp'),
+  require('~/assets/images/default-avatars/team/team-5.webp'),
+  require('~/assets/images/default-avatars/team/team-6.webp'),
+  require('~/assets/images/default-avatars/team/team-7.webp'),
+  require('~/assets/images/default-avatars/team/team-8.webp'),
+  require('~/assets/images/default-avatars/team/team-9.webp')
+]
+
+const personAvatars = [
+  require('~/assets/images/default-avatars/person/person-1.webp'),
+  require('~/assets/images/default-avatars/person/person-2.webp'),
+  require('~/assets/images/default-avatars/person/person-3.webp'),
+  require('~/assets/images/default-avatars/person/person-4.webp'),
+  require('~/assets/images/default-avatars/person/person-5.webp'),
+  require('~/assets/images/default-avatars/person/person-6.webp'),
+  require('~/assets/images/default-avatars/person/person-7.webp'),
+  require('~/assets/images/default-avatars/person/person-8.webp'),
+  require('~/assets/images/default-avatars/person/person-9.webp')
+]
+
 const knownTags: Record<string, string> = {
   django: '#092E20',
   eslint: '#4B32C3',
@@ -242,4 +266,18 @@ export function runStatusTagLabel(status: RunStatus, forSentence = false): strin
   }
 
   return types[status] ?? types[RunStatus.Pass]
+}
+
+/**
+ * Return default avatar from the ones available in assets
+ *
+ * @param {string} name - the key to select avatar from
+ * @param {boolean} [forIndividual=true]
+ * @returns {NodeRequire}
+ */
+export function getDefaultAvatar(name: string, forIndividual = true): NodeRequire {
+  const imagesSrcArray = forIndividual ? personAvatars : teamAvatars
+  if (typeof name === 'string') return imagesSrcArray[name.length % imagesSrcArray.length]
+
+  return imagesSrcArray[0]
 }

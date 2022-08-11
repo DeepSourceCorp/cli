@@ -3,6 +3,7 @@
     <okta-icon-wrapper :is-okta="orgUser.scimEnabled" class="flex-shrink-0">
       <z-avatar
         :image="orgUser.avatar"
+        :fallback-image="getDefaultAvatar(orgUser.email)"
         :user-name="orgUser.fullName"
         :loading="loading"
         class="flex-shrink-0"
@@ -21,7 +22,7 @@
             size="x-small"
             spacing="px-1.5 py-1"
             :icon-color="orgUser.isActive ? 'juniper' : 'honey'"
-            class="font-semibold leading-none tracking-wide text-vanilla-400 uppercase gap-x-1"
+            class="font-semibold leading-none tracking-wide uppercase text-vanilla-400 gap-x-1"
           >
             {{ orgUser.isActive ? 'Active' : 'Inactive' }}
           </z-tag>
@@ -33,7 +34,7 @@
             size="x-small"
             spacing="px-1.5 py-1"
             icon-color="robin"
-            class="font-semibold leading-none tracking-wide text-vanilla-400 uppercase gap-x-1"
+            class="font-semibold leading-none tracking-wide uppercase text-vanilla-400 gap-x-1"
           >
             Superuser
           </z-tag>
@@ -63,8 +64,13 @@
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZAvatar, ZTag } from '@deepsourcelabs/zeal'
 import { EnterpriseUser } from '~/types/types'
+import { getDefaultAvatar } from '~/utils/ui'
 
-@Component({ components: { ZIcon, ZAvatar, ZTag }, name: 'ControlPanelUserCardInfo' })
+@Component({
+  components: { ZIcon, ZAvatar, ZTag },
+  name: 'ControlPanelUserCardInfo',
+  methods: { getDefaultAvatar }
+})
 export default class ControlPanelUserCardInfo extends Vue {
   @Prop({ required: true })
   orgUser: EnterpriseUser
