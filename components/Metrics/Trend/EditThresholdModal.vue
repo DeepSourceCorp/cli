@@ -2,7 +2,10 @@
   <z-modal title="Update threshold" width="narrow" @onClose="$emit('close')">
     <template v-slot:default="{ close }">
       <div class="p-4 space-y-4">
-        <p class="text-sm text-vanilla-400">
+        <p v-if="isAggregate" class="text-sm text-vanilla-400">
+          Update <b class="text-vanilla-200">Aggregate</b> threshold
+        </p>
+        <p v-else class="text-sm text-vanilla-400">
           Update <b class="text-vanilla-200">{{ metricName }}</b> threshold for
           <b class="text-vanilla-200">{{ analyzerKey }}</b>
         </p>
@@ -41,6 +44,7 @@ import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 
 import { ZModal, ZInput, ZButton } from '@deepsourcelabs/zeal'
 import { Maybe, Metric, MetricNamespace, MetricNamespaceTrend, Repository } from '~/types/types'
+import { MetricType } from '~/types/metric'
 
 /**
  * Modal component that is used to edit the threshold of a Metric namespace.
@@ -76,6 +80,10 @@ export default class EditThresholdModal extends Vue {
    */
   get isValueAPercentage() {
     return Boolean(this.unit)
+  }
+
+  get isAggregate() {
+    return this.analyzerKey === MetricType.aggregate
   }
 
   /**

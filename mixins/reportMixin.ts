@@ -328,7 +328,6 @@ export default class ReportMixin extends Vue {
         // Datasets are not.
         this.labels = this.prepareLabels(this.historicalValues, startDate, endDate)
       } catch (e) {
-        console.log('ERROR', e)
         this.$logErrorAndToast(
           e as Error,
           'Unable to fetch historical data of report, please contact support.'

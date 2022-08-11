@@ -343,19 +343,21 @@
     <z-divider margin="my-2" class="max-w-2xl" />
 
     <div class="space-y-4">
-      <div class="text-sm text-vanilla-100">Test Coverage</div>
-      <!-- Notice -->
-      <p class="text-xs leading-5 text-vanilla-400">
-        For tracking test coverage, external data has to be sent to DeepSource. Read
-        <a
-          href="https://deepsource.io/docs/analyzer/test-coverage"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="text-juniper"
-          >documentation</a
-        >
-        on configuration.
-      </p>
+      <div>
+        <h6 class="text-sm text-vanilla-100 mb-1">Test Coverage</h6>
+        <!-- Notice -->
+        <p class="text-xs leading-5 text-vanilla-400">
+          For tracking test coverage, external data has to be sent to DeepSource. Read
+          <a
+            href="https://deepsource.io/docs/analyzer/test-coverage"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-juniper"
+            >documentation</a
+          >
+          on configuration.
+        </p>
+      </div>
       <notice class="items-baseline" :enabled="repository.hasTestCoverage">
         <p v-if="repository.hasTestCoverage" class="relative top-px">
           Test coverage tracking is enabled, and we're ready to receive coverage data.
@@ -366,9 +368,7 @@
       </notice>
       <div class="flex justify-between gap-x-4">
         <div>
-          <div class="text-sm text-vanilla-100">
-            <span> New code coverage thresholds </span>
-          </div>
+          <h6 class="text-sm text-vanilla-100 mb-1">New code coverage thresholds</h6>
           <p class="text-xs leading-5 text-vanilla-400">
             Configure thresholds for new code coverage in pull requests.
           </p>
@@ -395,47 +395,142 @@
         />
       </div>
 
-      <z-table
-        v-if="
-          $fetchState.pending ||
-          (repository.hasTestCoverage && metricNamespaces && metricNamespaces.length)
-        "
-      >
-        <template v-slot:head>
-          <z-table-row>
-            <z-table-cell
-              v-for="head in nlcvHeaderData"
-              :key="head.title"
-              class="text-sm font-bold"
-              :class="head.align"
-              >{{ head.title }}</z-table-cell
-            >
-          </z-table-row>
-        </template>
-        <template v-slot:body>
-          <template v-if="$fetchState.pending">
-            <div
-              v-for="index in 3"
-              :key="index"
-              class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
-            ></div>
+      <div v-if="$fetchState.pending || repository.hasTestCoverage" class="space-y-2">
+        <z-table>
+          <template v-slot:head>
+            <z-table-row>
+              <z-table-cell
+                v-for="head in nlcvHeaderData"
+                :key="head.title"
+                class="text-sm font-bold"
+                :class="head.align"
+                >{{ head.title }}</z-table-cell
+              >
+            </z-table-row>
           </template>
-          <template v-else-if="metricNamespaces && metricNamespaces.length">
-            <z-table-row
-              v-for="namespace in metricNamespaces"
-              :key="namespace.key"
-              class="text-vanilla-100 hover:bg-ink-300"
+          <template v-slot:body>
+            <template v-if="$fetchState.pending">
+              <div
+                v-for="index in 3"
+                :key="index"
+                class="h-11 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+              ></div>
+            </template>
+            <template
+              v-else-if="nonAggregateMetricNamespaces && nonAggregateMetricNamespaces.length"
             >
-              <z-table-cell text-align="left" class="text-sm font-normal">{{
-                namespace.key
-              }}</z-table-cell>
-              <z-table-cell text-align="right" class="text-sm font-normal">
+              <z-table-row
+                v-for="namespace in nonAggregateMetricNamespaces"
+                :key="namespace.key"
+                class="text-vanilla-100 hover:bg-ink-300"
+              >
+                <z-table-cell text-align="left" class="text-sm font-normal">{{
+                  namespace.key
+                }}</z-table-cell>
+                <z-table-cell text-align="right" class="text-sm font-normal">
+                  <div
+                    v-if="namespace.threshold || namespace.threshold === 0"
+                    class="flex justify-end items-center gap-x-4"
+                  >
+                    <span
+                      >{{ namespace.threshold
+                      }}{{ nlcvMetricData.unit ? nlcvMetricData.unit : '' }}</span
+                    >
+                    <z-menu v-if="canModifyThreshold" direction="left">
+                      <template v-slot:trigger="{ toggle }">
+                        <z-button
+                          button-type="ghost"
+                          icon="more-vertical"
+                          icon-color="vanilla-400"
+                          size="x-small"
+                          @click="toggle"
+                        />
+                      </template>
+                      <template slot="body">
+                        <z-menu-section :divider="false" class="text-left">
+                          <z-menu-item
+                            class="text-sm"
+                            icon="edit-2"
+                            @click="toggleEditThreshold(namespace)"
+                          >
+                            Update Threshold
+                          </z-menu-item>
+                          <z-menu-item
+                            class="text-sm text-cherry"
+                            icon="trash-2"
+                            @click="deleteThreshold(namespace)"
+                          >
+                            Delete Threshold
+                          </z-menu-item>
+                        </z-menu-section>
+                      </template>
+                    </z-menu>
+                  </div>
+                </z-table-cell>
+              </z-table-row>
+            </template>
+            <lazy-empty-state
+              v-else-if="repository.hasTestCoverage"
+              title="No active analyzer threshold"
+            >
+              <template #action>
+                <z-button
+                  v-if="canModifyThreshold"
+                  icon="plus"
+                  size="small"
+                  label="Add new threshold"
+                  @click="showAddThresholdModal = true"
+                />
+              </template>
+            </lazy-empty-state>
+          </template>
+        </z-table>
+        <z-table>
+          <template v-slot:body>
+            <template v-if="$fetchState.pending">
+              <div class="h-11 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"></div>
+            </template>
+            <z-table-row v-else class="text-vanilla-100 hover:bg-ink-300">
+              <z-table-cell text-align="left" class="text-sm font-normal capitalize space-x-1 h-11">
+                <span>{{ aggregateMetricNamespace.key }}</span>
+                <v-popover
+                  :delay="{ show: 300, hide: 1500 }"
+                  placement="top"
+                  trigger="hover click"
+                  offset="5"
+                  popover-class="w-44"
+                  popover-inner-class="p-2"
+                  class="inline"
+                >
+                  <z-icon
+                    icon="help-circle"
+                    size="x-small"
+                    color="current"
+                    class="inline text-vanilla-400 hover:text-vanilla-100"
+                  />
+                  <template slot="popover">
+                    <p class="text-xs text-vanilla-100">
+                      Aggregate is a weighted average of analyzers activated in the repo.
+                      <a
+                        href="https://deepsource.io/docs/dashboard/repo-overview#metric-aggregate-calculation"
+                        target="blank"
+                        rel="noopener noreferrer"
+                        class="text-juniper hover:underline whitespace-nowrap"
+                        >Learn more --></a
+                      >
+                    </p>
+                  </template>
+                </v-popover>
+              </z-table-cell>
+              <z-table-cell text-align="right" class="text-sm font-normal text-right">
                 <div
-                  v-if="namespace.threshold || namespace.threshold === 0"
+                  v-if="
+                    aggregateMetricNamespace.threshold || aggregateMetricNamespace.threshold === 0
+                  "
                   class="flex justify-end items-center gap-x-4"
                 >
                   <span
-                    >{{ namespace.threshold
+                    >{{ aggregateMetricNamespace.threshold
                     }}{{ nlcvMetricData.unit ? nlcvMetricData.unit : '' }}</span
                   >
                   <z-menu v-if="canModifyThreshold" direction="left">
@@ -453,14 +548,14 @@
                         <z-menu-item
                           class="text-sm"
                           icon="edit-2"
-                          @click="toggleEditThreshold(namespace)"
+                          @click="toggleEditThreshold(aggregateMetricNamespace)"
                         >
                           Update Threshold
                         </z-menu-item>
                         <z-menu-item
                           class="text-sm text-cherry"
                           icon="trash-2"
-                          @click="deleteThreshold(namespace)"
+                          @click="deleteThreshold(aggregateMetricNamespace)"
                         >
                           Delete Threshold
                         </z-menu-item>
@@ -468,36 +563,27 @@
                     </template>
                   </z-menu>
                 </div>
+                <z-button
+                  v-else
+                  button-type="ghost"
+                  size="x-small"
+                  color="vanilla-400"
+                  class="text-sm font-normal outline-none focus:outline-none"
+                  @click="toggleEditThreshold(aggregateMetricNamespace)"
+                >
+                  Add threshold
+                </z-button>
               </z-table-cell>
             </z-table-row>
           </template>
-        </template>
-      </z-table>
-      <template v-else>
-        <lazy-empty-state
-          v-if="repository.hasTestCoverage"
-          title="No thresholds found"
-          :show-border="true"
-        >
-          <template #action>
-            <z-button
-              v-if="canModifyThreshold"
-              button-type="ghost"
-              color="vanilla-400"
-              icon="plus"
-              label="Add new threshold"
-              class="border border-ink-100 border-dashed"
-              @click="showAddThresholdModal = true"
-            />
-          </template>
-        </lazy-empty-state>
-        <lazy-empty-state
-          v-else
-          title="Test coverage has not been set up for this repository yet."
-          subtitle="Test coverage needs to be enabled for this repository in order to configure the new code coverage metric."
-          :show-border="true"
-        />
-      </template>
+        </z-table>
+      </div>
+      <lazy-empty-state
+        v-else
+        title="Test coverage has not been set up for this repository yet."
+        subtitle="Test coverage needs to be enabled for this repository in order to configure the new code coverage metric."
+        :show-border="true"
+      />
       <portal to="modal">
         <add-nlcv-threshold-modal
           v-if="showAddThresholdModal"
@@ -557,6 +643,7 @@ import {
 import { MetricType, NLCV_SHORTCODE } from '~/types/metric'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 import { AnalyzerListActions } from '~/store/analyzer/list'
+import { VPopover } from 'v-tooltip'
 
 const repoStore = namespace('repository/detail')
 const analyzerStore = namespace('analyzer/list')
@@ -584,7 +671,8 @@ export enum InputTypes {
     ZRadio,
     ZMenu,
     ZMenuSection,
-    ZMenuItem
+    ZMenuItem,
+    VPopover
   },
   layout: 'repository',
   middleware: ['perm'],
@@ -741,11 +829,7 @@ export default class Reporting extends mixins(RepoDetailMixin) {
   }
 
   get nlcvMetricData() {
-    const nonAggregateNamespaces = this.nlcvRepositoryData.metricsCaptured?.[0]?.namespaces?.filter(
-      (namespace) => namespace?.key !== MetricType.aggregate
-    )
     if (this.nlcvRepositoryData.metricsCaptured?.[0]) {
-      this.nlcvRepositoryData.metricsCaptured[0].namespaces = nonAggregateNamespaces
       return this.nlcvRepositoryData.metricsCaptured[0]
     }
     return {} as Metric
@@ -789,8 +873,18 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     })
   }
 
-  get metricNamespaces() {
-    return this.nlcvMetricData.namespaces?.filter((namespace) => namespace?.threshold !== null)
+  get nonAggregateMetricNamespaces() {
+    return this.nlcvMetricData.namespaces?.filter(
+      (namespace) => namespace?.threshold !== null && namespace?.key !== MetricType.aggregate
+    )
+  }
+
+  get aggregateMetricNamespace() {
+    return (
+      this.nlcvRepositoryData.metricsCaptured?.[0]?.namespaces?.filter(
+        (namespace) => namespace?.key === MetricType.aggregate
+      )?.[0] ?? ({ key: MetricType.aggregate } as MetricNamespace)
+    )
   }
 
   get canModifyThreshold(): boolean {
