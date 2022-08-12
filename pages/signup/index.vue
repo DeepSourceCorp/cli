@@ -126,9 +126,14 @@ const TESTIMONIALS: Testimonial[] = [
   },
   middleware: [
     'redirectToHome',
-    ({ $config, redirect }) => {
+    ({ $config, redirect, route }) => {
       if ($config.onPrem) {
-        redirect(302, `/login`)
+        const { next } = route.query
+        if (next) {
+          redirect(302, { path: '/login', query: { next } })
+        } else {
+          redirect(302, `/login`)
+        }
       }
     }
   ],

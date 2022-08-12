@@ -120,7 +120,7 @@ export enum REQUEST_STATES {
     ZIcon
   },
   middleware: [
-    async function ({ store, route, redirect, error, $fetchGraphqlData }) {
+    async function ({ store, route, redirect, error, $config, $fetchGraphqlData }) {
       try {
         const res = await $fetchGraphqlData(
           getInvitationDetailsQuery,
@@ -138,7 +138,11 @@ export enum REQUEST_STATES {
         error({ statusCode: 404, message: 'This page is not real' })
       }
       if (!store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]) {
-        redirect(302, `/signup/?next=${route.path}`)
+        if ($config.onPrem) {
+          redirect(302, `/login/?next=${route.path}`)
+        } else {
+          redirect(302, `/signup/?next=${route.path}`)
+        }
       }
     }
   ],
