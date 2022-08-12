@@ -330,18 +330,18 @@ export default class RepoHeader extends mixins(
       return false
     }
 
-    const autofixAllowedForProvider = item.gateFeature
+    const allowedForProvider = item.gateFeature
       ? this.$gateKeeper.provider(item.gateFeature, provider)
       : true
 
-    const autofixAllowedForUser = item.perms
+    const allowedForRepo = item.perms
       ? this.$gateKeeper.repo(item.perms, this.repoPerms.permission)
       : true
 
     const allowForbeta =
       this.$config.onPrem || (item.forBeta ? Boolean(this.viewer.isBetaTester) : true)
 
-    return autofixAllowedForUser && autofixAllowedForProvider && allowForbeta
+    return allowedForRepo && allowedForProvider && allowForbeta
   }
 }
 </script>
