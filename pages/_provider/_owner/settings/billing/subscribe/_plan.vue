@@ -176,6 +176,7 @@ import { ZButton, ZIcon, ZDivider, ZInput } from '@deepsourcelabs/zeal'
 import SubscriptionMixin, { Plan } from '~/mixins/subscriptionMixin'
 import { formatUSD } from '~/utils/string'
 import { parseISODate, formatDate } from '~/utils/date'
+import { debounceAsync } from '~/utils/debounce'
 import { CouponInfo, CreditsInfo } from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'
 import ContextMixin from '~/mixins/contextMixin'
@@ -216,6 +217,7 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
   couponCode = ''
   couponError = false
   couponLoading = false
+  debouncedCalculate = debounceAsync(this.calculate)
 
   /**
    * Nuxt created hook, we just fetch he current plan from the route
@@ -260,7 +262,7 @@ export default class Subscribe extends mixins(SubscriptionMixin, OwnerBillingMix
     this.loading = true
     seats = Number(seats)
     this.setPlan({ seats: Math.min(Math.max(seats, this.minSeats), this.maxSeats) })
-    await this.calculate()
+    await this.debouncedCalculate()
     this.loading = false
   }
 
