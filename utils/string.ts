@@ -1,6 +1,9 @@
 // Regex to match text enclosed in single or triple backticks in matching pairs
 // https://regex101.com/r/5Nc30z/2
-const backTickPattern = new RegExp(/(?<=[^`]|^)(`(?:``)?)([^`]+)\1(?=[^`]|$)/g)
+// const backTickPattern = new RegExp(/(?<=[^`]|^)(`(?:``)?)([^`]+)\1(?=[^`]|$)/g)
+
+// https://regex101.com/r/0o6P5y/1
+const backTickPattern = new RegExp(/(`(?:``)?)([^`]+)\1/g)
 
 const usdFormatter = new Intl.NumberFormat('en-US', {
   style: 'currency',

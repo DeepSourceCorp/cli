@@ -174,7 +174,7 @@ test('[[ Test safeRenderBackticks ]]', () => {
   expect(
     safeRenderBackticks('Hello world, this is ```if``` statement and `else` should ```he` ``` ```')
   ).toEqual(
-    'Hello world, this is <code class="bifrost-inline-code">if</code> statement and <code class="bifrost-inline-code">else</code> should ```he` <code class="bifrost-inline-code"> </code>'
+    'Hello world, this is <code class="bifrost-inline-code">if</code> statement and <code class="bifrost-inline-code">else</code> should ``<code class="bifrost-inline-code">he</code> <code class="bifrost-inline-code"> </code>'
   )
 })
 
