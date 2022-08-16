@@ -48,33 +48,22 @@
                 :iconLeft="repoVCSIcon"
               ></z-tag>
             </a>
-            <template
-              v-if="
-                (!context.onPrem || context.onPrem === 'false') &&
-                activeDashboardContext.type === 'team'
-              "
-            >
-              <template v-if="hasPaidPlan">
-                <nuxt-link v-if="canVisitBillingPage" :to="$generateRoute(['settings', 'billing'])">
-                  <z-tag
-                    class="leading-none text-center border border-ink-100"
-                    spacing="py-1.5 px-3"
-                    bgColor="ink-200"
-                    v-tooltip="`This account is on the ${planName} plan`"
-                    >{{ planName }}</z-tag
-                  >
-                </nuxt-link>
+            <template v-if="!$config.onPrem && activeDashboardContext.type === 'team'">
+              <component
+                v-if="hasPaidPlan || canVisitBillingPage"
+                :is="canVisitBillingPage ? 'nuxt-link' : 'span'"
+                :to="canVisitBillingPage ? $generateRoute(['settings', 'billing']) : false"
+              >
                 <z-tag
-                  v-else
-                  class="leading-none text-center border border-ink-100 cursor"
+                  v-if="hasPaidPlan"
+                  v-tooltip="`This account is on the ${planName} plan`"
                   spacing="py-1.5 px-3"
                   bgColor="ink-200"
-                  v-tooltip="`This account is on the ${planName} plan`"
+                  class="leading-none text-center border border-ink-100"
                   >{{ planName }}</z-tag
                 >
-              </template>
-              <nuxt-link v-else-if="!$config.onPrem" :to="$generateRoute(['settings', 'billing'])">
                 <z-tag
+                  v-else-if="canVisitBillingPage"
                   icon-left="star"
                   class="font-semibold leading-none tracking-wider text-center uppercase border border-ink-100 text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
                   spacing="py-1.5 px-3"
@@ -83,7 +72,7 @@
                 >
                   <span>Upgrade</span></z-tag
                 >
-              </nuxt-link>
+              </component>
             </template>
           </span>
         </h2>
