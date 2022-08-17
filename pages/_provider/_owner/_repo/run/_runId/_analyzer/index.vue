@@ -72,7 +72,6 @@
                     />
                   </div>
                   <issue-search
-                    v-focus
                     :expand-on-focus="false"
                     :search-candidate="queryParams.q"
                     placeholder="Search for issue title or shortcode"
