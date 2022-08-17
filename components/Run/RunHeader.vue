@@ -102,7 +102,7 @@
         />
       </div>
     </div>
-    <div v-if="currentCheck.status !== 'PEND'" class="hidden p-3 sm:flex">
+    <div v-if="!isCheckInProgress" class="hidden p-3 sm:flex">
       <div class="flex items-center justify-center w-full gap-x-6">
         <!-- introduced issues -->
         <div class="flex flex-col items-center">
@@ -468,6 +468,17 @@ export default class RunHeader extends RepoDetailMixin {
       : provider === 'gl'
       ? 'Open MR'
       : 'Open PR'
+  }
+
+  /**
+   * Whether the current check is in progress or pending
+   *
+   * @returns {boolean}
+   */
+  get isCheckInProgress(): boolean {
+    return this.currentCheck?.status
+      ? [CheckStatus.Wait, CheckStatus.Pend].includes(this.currentCheck?.status)
+      : false
   }
 }
 </script>
