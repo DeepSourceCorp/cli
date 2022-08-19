@@ -74,7 +74,12 @@ export default class ReportMixin extends Vue {
     return Math.max(...this.historicalValues?.values?.count)
   }
 
-  get maxClip() {
+  get maxLineClip() {
+    const exaggeratedMax = this.maxDigitHistoricValues * 1.25
+    return roundToSignificantNumber(exaggeratedMax, exaggeratedMax.toString().length - 1)
+  }
+
+  get maxBarClip() {
     return roundToSignificantNumber(
       this.maxDigitHistoricValues,
       this.maxDigitHistoricValues.toString().length - 1

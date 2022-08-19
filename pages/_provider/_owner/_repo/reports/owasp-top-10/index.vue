@@ -50,7 +50,7 @@
           :axis-options="{
             xIsSeries: true
           }"
-          :y-axis-max="maxClip"
+          :y-axis-max="maxLineClip"
           :y-axis-min="0"
           type="line"
         />

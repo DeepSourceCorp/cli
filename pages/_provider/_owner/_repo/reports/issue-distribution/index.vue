@@ -55,7 +55,7 @@
           :axis-options="{
             xIsSeries: true
           }"
-          :y-axis-max="maxClip"
+          :y-axis-max="maxBarClip"
           :y-axis-min="0"
           type="bar"
         ></z-chart>
