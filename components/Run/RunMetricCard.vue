@@ -39,33 +39,35 @@
             :class="[trendPositive ? 'text-juniper' : 'text-cherry']"
           />
         </div>
-        <z-tag
-          v-if="metricsCaptured.threshold && !metricsCaptured.isSuppressed"
-          :icon-left="metricsCaptured.isPassing ? 'metric-high' : 'metric-low'"
-          :icon-color="metricsCaptured.isPassing ? 'juniper' : 'cherry'"
-          size="x-small"
-          spacing="px-2 py-0"
-          class="border border-ink-200"
-        >
-          <span
-            class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5"
-            :class="metricsCaptured.isPassing ? 'text-juniper' : 'text-cherry'"
-            >{{ metricsCaptured.isPassing ? 'Above threshold' : 'Below threshold' }}</span
+        <template v-if="metricThresholdRelation">
+          <z-tag
+            v-if="metricsCaptured.isSuppressed"
+            icon-left="minus-circle"
+            icon-color="vanilla-400"
+            size="x-small"
+            spacing="px-2 py-0"
+            class="border border-ink-200"
           >
-        </z-tag>
-        <z-tag
-          v-else-if="metricsCaptured.isSuppressed"
-          icon-left="minus-circle"
-          icon-color="vanilla-400"
-          size="x-small"
-          spacing="px-2 py-0"
-          class="border border-ink-200"
-        >
-          <span
-            class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400"
-            >{{ metricsCaptured.isPassing ? 'Above threshold' : 'Below threshold' }}</span
+            <span
+              class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400"
+              >{{ metricThresholdRelation }}</span
+            >
+          </z-tag>
+          <z-tag
+            v-else
+            :icon-left="metricThresholdRelationIcon"
+            :icon-color="metricsCaptured.isPassing ? 'juniper' : 'cherry'"
+            size="x-small"
+            spacing="px-2 py-0"
+            class="border border-ink-200"
           >
-        </z-tag>
+            <span
+              class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5"
+              :class="metricsCaptured.isPassing ? 'text-juniper' : 'text-cherry'"
+              >{{ metricThresholdRelation }}</span
+            >
+          </z-tag>
+        </template>
       </div>
     </div>
   </div>
@@ -78,6 +80,11 @@ import { ZIcon, ZTag, ZButton } from '@deepsourcelabs/zeal'
 import { Repository, RepositoryMetricValue } from '~/types/types'
 
 const repoStore = namespace('repository/detail')
+
+enum VALUE_STATE {
+  ABOVE = 'Above threshold',
+  BELOW = 'Below threshold'
+}
 
 @Component({
   components: {
@@ -107,6 +114,23 @@ export default class RunMetricCard extends Vue {
 
   get trendIsPercent(): boolean {
     return this.metricsCaptured.valueTrendDisplay?.includes('%') || false
+  }
+
+  get metricThresholdRelation(): string {
+    if (
+      this.metricsCaptured.value &&
+      this.metricsCaptured.threshold !== null &&
+      this.metricsCaptured.threshold !== undefined
+    ) {
+      return this.metricsCaptured.value > this.metricsCaptured.threshold
+        ? VALUE_STATE.ABOVE
+        : VALUE_STATE.BELOW
+    }
+    return ''
+  }
+
+  get metricThresholdRelationIcon(): string {
+    return this.metricThresholdRelation === VALUE_STATE.ABOVE ? 'metric-high' : 'metric-low'
   }
 
   get canSuppressMetric(): boolean {

@@ -3,5 +3,6 @@ import AnalyzerRun from './AnalyzerRun.vue'
 import RunHeader from './RunHeader.vue'
 import AnalyzerSelector from './AnalyzerSelector.vue'
 import RunSummary from './RunSummary.vue'
+import RunMetricCard from './RunMetricCard.vue'
 
-export { AnalyzerRun, AnalyzerHeader, RunHeader, AnalyzerSelector, RunSummary }
+export { AnalyzerRun, AnalyzerHeader, RunHeader, AnalyzerSelector, RunSummary, RunMetricCard }
