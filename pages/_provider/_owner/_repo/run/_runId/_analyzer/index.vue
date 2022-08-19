@@ -104,11 +104,7 @@
                 class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
               >
                 <div class="flex items-center gap-x-2">
-                  <p
-                    class="text-sm font-semibold leading-none tracking-wide uppercase text-vanilla-400"
-                  >
-                    Metrics
-                  </p>
+                  <p class="text-xs font-semibold tracking-wide uppercase text-slate">Metrics</p>
                   <z-tag
                     v-if="areMetricsAlerting"
                     icon-left="alert-circle"
