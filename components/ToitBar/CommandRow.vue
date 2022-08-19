@@ -1,6 +1,7 @@
 <template>
-  <div
+  <li
     tabindex="-1"
+    role="option"
     class="flex items-center w-full h-10 space-x-3 focus:outline-none"
     :class="active ? 'bg-ink-300 text-vanilla-100 pr-4' : 'text-vanilla-400 px-4 py-2'"
     @focus="$emit('focus')"
@@ -12,28 +13,30 @@
       size="xs"
       :image="image"
       :user-name="label"
+      :fallback-image="context.emptyAvatarUrl"
       class="flex-shrink-0"
       stroke="bg-ink-100 p-1"
     ></z-avatar>
-    <span class="flex-grow text-sm font-medium" v-html="label"></span>
+    <!-- skipcq JS-0693 -->
+    <span class="flex-grow text-sm font-medium" v-html="labelHTML || label"></span>
     <div v-if="shortkey" class="flex space-x-1">
       <span
-        v-for="key in shortkeyCombination"
-        :key="key"
-        class="flex items-center justify-center w-5 h-5 text-xs rounded-sm bg-ink-200"
+        v-for="(key, index) in shortkeyCombination"
+        :key="index"
+        class="flex items-center justify-center p-1 px-1.5 text-xs leading-none rounded-sm bg-ink-200"
         :class="[active ? 'text-vanilla-100' : 'text-vanilla-400']"
       >
         {{ formatKey(key) }}
       </span>
     </div>
-    <div v-else-if="hint" class="text-xs text-vanilla-400">
-      {{ hint }}
-    </div>
-  </div>
+    <div v-else-if="hint && active" class="text-xs text-vanilla-400" v-html="hint"></div>
+  </li>
 </template>
 <script lang="ts">
-import { Vue, Component, Prop } from 'nuxt-property-decorator'
+import { mixins, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZAvatar } from '@deepsourcelabs/zeal'
+import ContextMixin from '~/mixins/contextMixin'
+import { parseKeybinding } from 'tinykeys'
 
 /**
  * Command Row component for the palette
@@ -44,9 +47,12 @@ import { ZIcon, ZAvatar } from '@deepsourcelabs/zeal'
     ZAvatar
   }
 })
-export default class CommandRow extends Vue {
+export default class CommandRow extends mixins(ContextMixin) {
   @Prop()
   label: string
+
+  @Prop()
+  labelHTML: string
 
   @Prop()
   icon?: string
@@ -58,14 +64,13 @@ export default class CommandRow extends Vue {
   image?: string
 
   @Prop()
-  shortkey?: string[] | string
+  shortkey?: string
 
   @Prop()
   hint?: string
 
   get shortkeyCombination(): string[] {
-    if (!this.shortkey) return []
-    return Array.isArray(this.shortkey) ? this.shortkey : [this.shortkey]
+    return this.shortkey ? parseKeybinding(this.shortkey).flat(3) : []
   }
 
   get isMacintosh() {
@@ -81,7 +86,11 @@ export default class CommandRow extends Vue {
    * @return {string}
    */
   formatKey(key: string): string {
-    if (key.toLowerCase() === 'opt') {
+    if (key.startsWith('Key')) {
+      return this.formatKey(key.replace('Key', ''))
+    }
+
+    if (key.toLowerCase() === 'alt') {
       return this.isMacintosh ? '⌥' : 'Alt'
     }
     if (['meta', 'cmd', 'ctrl'].includes(key.toLowerCase())) {

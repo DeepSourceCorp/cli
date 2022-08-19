@@ -12,7 +12,7 @@ import { Context } from '@nuxt/types'
 import refreshTokenMutation from '@/apollo/mutations/auth/refreshToken.gql'
 
 declare module 'vuex/types/index' {
-  // skipcq: JS-0387
+  // skipcq: JS-0387, JS-0356
   interface Store<S> {
     $fetchGraphqlData(
       query: DocumentNode,
@@ -180,6 +180,27 @@ const refreshIfTokenExpired = async (
   }
 }
 
+/**
+ * Get the `after` value that can be used in a GQL query depending on the
+ * page number and the limit provided.
+ *
+ * The `after` attribute is a special base64 encoded value
+ * depending on the end cursor value of the query.
+ *
+ * @param {number} pageNumber
+ * @param {number} limit
+ * @return {string}
+ */
+export const getGQLAfter = (pageNumber: number, limit: number): string => {
+  if (!pageNumber) return '' // return empty for 0 or null
+  const endCursor = (pageNumber - 1) * limit - 1
+  if (isNaN(endCursor)) return ''
+  if (pageNumber !== 1) {
+    return btoa(`arrayconnection:${endCursor}`)
+  }
+  return ''
+}
+
 export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
   inject(
     'fetchGraphqlData',
@@ -245,20 +266,5 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
     }
   )
 
-  inject('getGQLAfter', (pageNumber: number, limit: number): string => {
-    /*
-      Get the `after` value that can be used in a GQL query depending on
-      the page number and the limit provided.
-
-      The `after` attribute is a special base64 encoded value depending on
-      the end cursor value of the query.
-    */
-    if (!pageNumber) return '' // return emoty for 0 or null
-    const endCursor = (pageNumber - 1) * limit - 1
-    if (isNaN(endCursor)) return ''
-    if (pageNumber !== 1) {
-      return btoa(`arrayconnection:${endCursor}`)
-    }
-    return ''
-  })
+  inject('getGQLAfter', getGQLAfter)
 }

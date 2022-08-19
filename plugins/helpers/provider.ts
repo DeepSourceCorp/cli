@@ -18,7 +18,7 @@ declare module '@nuxt/types' {
 }
 
 declare module 'vuex/types/index' {
-  // skipcq: JS-0387
+  // skipcq: JS-0387, JS-0356
   interface Store<S> {
     $providerMetaMap: Record<string, ProviderMeta>
   }
@@ -44,7 +44,7 @@ class ProviderMeta {
 /**
  * ! In case of updates to `auth` value, update corresponding data in `nuxt.config.js` as well.
  */
-export const providerMetaMap = {
+export const providerMetaMap: Record<string, ProviderMeta> = {
   gh: new ProviderMeta('GitHub', 'gh', VcsProviderChoices.Github, 'github'),
   ghe: new ProviderMeta(
     'GitHub Enterprise',

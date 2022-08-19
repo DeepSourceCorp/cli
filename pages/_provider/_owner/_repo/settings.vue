@@ -152,15 +152,6 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     }
   ]
 
-  /**
-   * Mounted hook
-   *
-   * @return {void}
-   */
-  mounted(): void {
-    this.setCommands()
-  }
-
   get isTeamAccount(): boolean {
     if (this.activeDashboardContext && this.activeDashboardContext.type) {
       return this.activeDashboardContext.type !== 'user'
@@ -180,33 +171,6 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
       description:
         'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
     }
-  }
-
-  /**
-   * Set commands for current context
-   *
-   *  @return {void}
-   */
-  setCommands(): void {
-    this.$palette.registerCommands(
-      this.navItems
-        .filter((opt) => this.isNavLinkVisible(opt))
-        .map((opt) => {
-          return {
-            id: `open-${opt.link.join('-')}-settings`,
-            label: `<span class="text-vanilla-400">Repo Settings</span> / ${opt.label}`,
-            icon: opt.icon,
-            scope: 'repo',
-            condition: (route) => {
-              return Boolean(this.$route.name?.startsWith('provider-owner-repo-settings'))
-            },
-            action: () => {
-              this.$router.push(this.$generateRoute(opt.link))
-            }
-          }
-        }),
-      'provider-owner-repo-settings'
-    )
   }
 
   /**

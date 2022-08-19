@@ -326,7 +326,6 @@ export default class RepositoryLayout extends mixins(
         {
           id: 'open-repo-issues',
           label: `Issues`,
-          shortkey: 'I',
           icon: `flag`,
           scope: 'repo',
           condition: (route) => {
@@ -340,7 +339,6 @@ export default class RepositoryLayout extends mixins(
         {
           id: 'open-repo-autofix',
           label: `Autofix`,
-          shortkey: 'A',
           icon: `autofix`,
           keywords: ['autofix', 'fix'],
           scope: 'repo',
@@ -354,7 +352,6 @@ export default class RepositoryLayout extends mixins(
         {
           id: 'open-repo-metrics',
           label: `Metrics`,
-          shortkey: 'M',
           icon: `bar-chart`,
           keywords: ['metrics', 'stats', 'numbers', 'charts'],
           scope: 'repo',
@@ -369,7 +366,6 @@ export default class RepositoryLayout extends mixins(
           id: 'open-repo-run-history',
           label: `Analysis history`,
           icon: `history`,
-          shortkey: ['H', 'A'],
           keywords: ['metrics', 'stats', 'numbers', 'charts'],
           scope: 'repo',
           condition: (route) => {
@@ -382,7 +378,6 @@ export default class RepositoryLayout extends mixins(
         {
           id: 'open-repo-transforms-history',
           label: `Transforms history`,
-          shortkey: ['H', 'T'],
           icon: `history`,
           keywords: ['metrics', 'stats', 'numbers', 'charts'],
           scope: 'repo',
@@ -399,7 +394,7 @@ export default class RepositoryLayout extends mixins(
           id: 'open-repo-settings',
           label: `Settings`,
           icon: `settings`,
-          shortkey: ['Opt', 'S'],
+          shortkey: 'Alt+KeyS',
           keywords: ['settings', 'badges', 'audit', 'members', 'configuration'],
           scope: 'repo',
           condition: (route) => {

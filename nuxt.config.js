@@ -24,6 +24,8 @@ function toBool(item) {
 import { version } from './package.json'
 const IS_PRODUCTION = process.env.NODE_ENV === 'prod'
 const IS_ON_PREM = toBool(process.env.ON_PREM)
+const APP_DOMAIN = process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io'
+const DEFAULT_PUBLIC_PATH = '/_nuxt/'
 
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
@@ -88,7 +90,7 @@ export default {
     licenseExpiry: IS_ON_PREM ? new Date(process.env.LICENSE_EXPIRY) : null,
     supportEmail: IS_ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io',
     discoverEnabled: IS_ON_PREM ? toBool(process.env.IS_DISCOVER_ENABLED) : true,
-    domain: process.env.DEEPSOURCE_DOMAIN ?? 'deepsource.io',
+    domain: APP_DOMAIN,
     rudderWriteKey: IS_ON_PREM ? '' : process.env.RUDDER_WRITE_KEY,
     rudderDataPlaneUrl: IS_ON_PREM ? '' : process.env.RUDDER_DATA_PLANE_URL
   },
@@ -106,6 +108,8 @@ export default {
     '~/plugins/helpers/directives.client.ts',
     '~/plugins/helpers/localstorage.client.ts',
     '~/plugins/helpers/error.ts',
+    '~/plugins/helpers/storage.client.ts',
+    '~/plugins/helpers/worker.client.ts',
     '~/plugins/components/toasts.client.ts',
     '~/plugins/components/tooltip.ts',
     '~/plugins/components/palette.client.ts'
@@ -275,7 +279,7 @@ export default {
   // TODO: Remove this configuration
   // https://github.com/nuxt-community/tailwindcss-module/issues/79#issuecomment-609693459
   build: {
-    publicPath: IS_PRODUCTION ? process.env.CDN_URL : '/_nuxt/',
+    publicPath: IS_PRODUCTION ? process.env.CDN_URL : DEFAULT_PUBLIC_PATH,
     parallel: true,
     cache: true,
     sourceMap: true,
@@ -303,6 +307,7 @@ export default {
       if (process.env.NODE_ENV === 'development') {
         config.devtool = 'source-map'
       }
+
       config.module.rules.push({
         test: /\.(ogg|mp3|wav|mpe?g)$/i,
         loader: 'file-loader'

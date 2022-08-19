@@ -10605,3 +10605,51 @@ export type Unnamed_159_Query = (
     & Pick<User, 'id' | 'gitlabAccounts'>
   )> }
 );
+
+export type OwnerCacheKeysQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type OwnerCacheKeysQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { cacheKeys?: Maybe<(
+      { __typename?: 'OwnerCacheKeys' }
+      & Pick<OwnerCacheKeys, 'repositories' | 'settings' | 'team'>
+    )> }
+  )> }
+);
+
+export type RepoListQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  after: Scalars['String'];
+  limit: Scalars['Int'];
+}>;
+
+
+export type RepoListQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { repositories?: Maybe<(
+      { __typename?: 'RepositoryConnection' }
+      & Pick<RepositoryConnection, 'totalCount'>
+      & { pageInfo: (
+        { __typename?: 'PageInfo' }
+        & Pick<PageInfo, 'hasNextPage'>
+      ), edges: Array<Maybe<(
+        { __typename?: 'RepositoryEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Repository' }
+          & Pick<Repository, 'id' | 'name' | 'vcsProvider' | 'ownerLogin' | 'isActivated' | 'isFork' | 'isPrivate' | 'isStarred'>
+        )> }
+      )>> }
+    )> }
+  )> }
+);

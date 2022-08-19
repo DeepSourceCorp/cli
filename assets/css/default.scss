@@ -85,6 +85,10 @@ input[type='number']::-webkit-inner-spin-button {
   /* screenHeight - yPadding - twoButtons*/
 }
 
+.cmd-kbd {
+  @apply px-0.5 py-px leading-none border rounded-sm text-xxs border-ink-100 bg-ink-400;
+}
+
 .error-state {
   @apply text-sm;
 

@@ -1,15 +1,20 @@
 import { Context } from '@nuxt/types/app'
+import VueRouter from 'vue-router'
 
 export interface BaseCommandAction {
   id: CommandId
   label: string
+  labelHTML?: string
   hint?: string
-  shortkey?: string[] | string
+  shortkey?: string
   keywords?: string[]
+  placeholder?: string
   scope?: 'repo' | 'owner'
-  commandType?: 'list' | 'action'
+  commandType?: 'action' | 'divider'
   condition?: (route: Context['route']) => boolean
-  action: () => void | Promise<void> | Promise<CommandAction[]> | CommandAction[]
+  action?: (router: VueRouter) => void | CommandAction[] | Promise<void | CommandAction[]>
+  parent?: CommandId
+  children?: (rotuer: VueRouter) => Promise<CommandAction[]> | CommandAction[]
 }
 
 interface CommandActionWithIcon extends BaseCommandAction {
@@ -35,7 +40,7 @@ export type CommandId = string
 export interface PaletteInterface {
   registerCommands(commands: CommandAction | CommandAction[], key: string): void
   registerGlobalCommands(commands: CommandAction | CommandAction[]): void
-  query(searchCandidate: string, route: Context['route']): CommandAction[]
+  query(searchCandidate: string, route: Context['route']): Promise<CommandAction[]>
   fetchCurrentCommands(route: Context['route']): CommandAction[]
   fetchGlobalCommands(route: Context['route']): CommandAction[]
 }

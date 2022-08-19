@@ -1859,3 +1859,21 @@ declare module '*/userGitlabAccounts.gql' {
   export default defaultDocument;
 }
     
+
+declare module '*/ownerCacheKeys.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const OwnerCacheKeys: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/repoList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const RepoList: DocumentNode;
+
+  export default defaultDocument;
+}
+    
