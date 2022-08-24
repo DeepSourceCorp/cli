@@ -16,6 +16,7 @@ query repositoryRunDetail(
           node {
             id
             issuesRaisedCount
+            issuesResolvedCount
             status
             analyzer {
               name

@@ -10005,7 +10005,7 @@ export type RepositoryRunDetailQuery = (
           { __typename?: 'CheckEdge' }
           & { node?: Maybe<(
             { __typename?: 'Check' }
-            & Pick<Check, 'id' | 'issuesRaisedCount' | 'status'>
+            & Pick<Check, 'id' | 'issuesRaisedCount' | 'issuesResolvedCount' | 'status'>
             & { analyzer?: Maybe<(
               { __typename?: 'Analyzer' }
               & Pick<Analyzer, 'name' | 'shortcode' | 'description' | 'analyzerLogo'>
