@@ -1,8 +1,8 @@
 <template>
   <base-card :to="getRoute(runId)">
     <template #left-section>
-      <div class="flex justify-between w-full">
-        <div class="gap-2 p-3 md:w-4/5 2xl:w-5/6" :class="[isSecondary ? 'w-full' : 'w-2/3']">
+      <div class="w-full grid grid-cols-fr-8 md:grid-cols-fr-16">
+        <div class="gap-2 p-3">
           <div class="flex flex-col flex-grow">
             <section class="flex items-center text-xs gap-x-1 md:text-base">
               <z-icon
@@ -42,7 +42,7 @@
         <!-- stats-->
         <div
           v-if="issueStats.length && !isPending"
-          class="border-l md:w-1/5 2xl:w-1/6 border-ink-200"
+          class="border-l border-ink-200"
           :class="{ 'hidden md:block': isSecondary }"
         >
           <div
@@ -51,7 +51,7 @@
             <div
               v-for="stat in issueStats"
               :key="stat.label"
-              class="grid w-20 h-full p-2 text-center md:w-full place-content-center md:p-3"
+              class="grid w-full h-full p-2 text-center md:w-full place-content-center md:p-3"
             >
               <div
                 class="text-sm md:text-1.5xl font-semibold"
