@@ -3,7 +3,7 @@
     <sub-nav v-if="transformsAllowed" active="runs"></sub-nav>
     <div class="grid grid-cols-1 p-4 gap-y-4">
       <run-branches
-        v-if="defaultBranchRun"
+        v-if="defaultBranchRun && !mainBranchFetching"
         :key="defaultBranchRun.branchName"
         :run="defaultBranchRun"
         :branchRunCount="defaultBranchRunCount"
