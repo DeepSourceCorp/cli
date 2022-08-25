@@ -24,7 +24,7 @@ export interface TeamPermissions {
   hasAllRepoAccess: boolean
 }
 
-const ACTIVE_CONTEXT_COOKIE_NAME = 'current-active-organization'
+export const ACTIVE_CONTEXT_COOKIE_NAME = 'current-active-organization'
 const COOKIE_SEPERATOR = '::'
 export interface DashboardContext {
   id: number

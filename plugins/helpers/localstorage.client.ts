@@ -4,6 +4,7 @@ declare interface LocalStorageInterface {
   get(store: string, key: string): unknown
   set(store: string, key: string, value: unknown): void
   reset(store: string): void
+  purge(): void
 }
 
 declare module 'vue/types/vue' {
@@ -49,6 +50,11 @@ export default (context: Context, inject: Inject): void => {
     },
     reset(store: string) {
       localStorage.setItem(store, '{}')
+    },
+    purge() {
+      const cookieConsentState = localStorage.getItem('cookieConsent')
+      localStorage.clear()
+      if (cookieConsentState) localStorage.setItem('cookieConsent', cookieConsentState)
     }
   }
 

@@ -1,4 +1,4 @@
-import { createInstance, INDEXEDDB } from 'localforage'
+import { createInstance, INDEXEDDB, clear } from 'localforage'
 import { Context, Inject } from '@nuxt/types/app'
 
 export enum DBStores {
@@ -8,19 +8,23 @@ export enum DBStores {
 }
 
 export type GetDB = (dbName: string) => Record<DBStores, LocalForage>
+export type ResetLocalDB = () => Promise<void>
 
 declare module 'vue/types/vue' {
   interface Vue {
     $getDB: GetDB
+    $resetLocalDB: ResetLocalDB
   }
 }
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
     $getDB: GetDB
+    $resetLocalDB: ResetLocalDB
   }
   interface Context {
     $getDB: GetDB
+    $resetLocalDB: ResetLocalDB
   }
 }
 
@@ -28,6 +32,7 @@ declare module 'vuex/types/index' {
   // skipcq: JS-0387, JS-0356
   interface Store<S> {
     $getDB: GetDB
+    $resetLocalDB: ResetLocalDB
   }
 }
 
@@ -58,6 +63,20 @@ export function getDB(name: string): Record<string, LocalForage> {
   return dbInstance
 }
 
+/**
+ * Reset local DB
+ *
+ * @return {Promise<void>}
+ */
+export async function resetLocalDB(): Promise<void> {
+  try {
+    await clear()
+  } catch {
+    console.error('Unable to clear local DB')
+  }
+}
+
 export default (_context: Context, inject: Inject): void => {
   inject('getDB', getDB)
+  inject('resetLocalDB', resetLocalDB)
 }

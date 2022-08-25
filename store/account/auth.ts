@@ -76,6 +76,7 @@ export const mutations: AuthModuleMutations = {
   },
   [AuthMutationTypes.SET_LOGGED_OUT]: (state) => {
     state.loggedIn = false
+    state.token = ''
   },
   [AuthMutationTypes.SET_LOGGED_IN]: (state, token: string) => {
     try {
@@ -153,8 +154,38 @@ export const actions: AuthModuleActions = {
 
   async [AuthActionTypes.LOG_OUT]({ commit }) {
     try {
-      await this.$applyGraphqlMutation(logoutMutation, {}, null, false)
       commit(AuthMutationTypes.SET_LOGGED_OUT)
+      await this.$applyGraphqlMutation(logoutMutation, {}, null, false)
+      // resets the indexedDB
+      await this.$resetLocalDB()
+      // reset the apollo cache
+      this.$clearGqlStore()
+
+      // purge localstorage except cookie consent
+      this.$localStore.purge()
+
+      // pruge all client accessible cookies
+      this.$cookies.removeAll()
+
+      if (process.client && window) {
+        // skipcq: JS-0372, JS-0295
+        // @ts-ignore
+        const databases = await indexedDB.databases()
+
+        Promise.all(
+          // skipcq: JS-0372, JS-0295
+          // @ts-ignore
+          databases.map((db) => {
+            // skipcq: JS-0372, JS-0295
+            // @ts-ignore
+            if (db.name) {
+              // skipcq: JS-0372, JS-0295
+              // @ts-ignore
+              return indexedDB.deleteDatabase(db.name)
+            }
+          })
+        )
+      }
     } catch (e) {
       throw new Error('Something went wrong while logging you out.')
     }

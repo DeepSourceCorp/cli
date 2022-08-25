@@ -27,6 +27,7 @@ declare module 'vuex/types/index' {
       refreshToken?: boolean
     ): any
     $getGQLAfter(pageNumber: number, limit: number): string
+    $clearGqlStore(): void
   }
 }
 
@@ -45,6 +46,7 @@ declare module '@nuxt/types' {
       refreshToken?: boolean
     ): any
     $getGQLAfter(pageNumber: number, limit: number): string
+    $clearGqlStore(): void
   }
   interface Context {
     $fetchGraphqlData(
@@ -60,6 +62,7 @@ declare module '@nuxt/types' {
       refreshToken?: boolean
     ): any
     $getGQLAfter(pageNumber: number, limit: number): string
+    $clearGqlStore(): void
   }
 }
 
@@ -77,6 +80,7 @@ declare module 'vue/types/vue' {
       refetchQueries?: any,
       refreshToken?: boolean
     ): any
+    $clearGqlStore(): void
   }
 }
 
@@ -265,6 +269,10 @@ export default ({ app }: { app: NuxtAppOptions }, inject: Inject): void => {
       })
     }
   )
+
+  inject('clearGqlStore', () => {
+    app.apolloProvider?.defaultClient.clearStore()
+  })
 
   inject('getGQLAfter', getGQLAfter)
 }

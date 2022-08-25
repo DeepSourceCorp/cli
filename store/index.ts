@@ -3,7 +3,7 @@ import { GetterTree, ActionTree, MutationTree, ActionContext } from 'vuex'
 export interface RootState {}
 
 export const state = (): RootState => ({
-  ...<RootState>({})
+  ...(<RootState>{})
 })
 
 export type RootStateActionContext = ActionContext<RootState, RootState>

@@ -82,7 +82,8 @@ export default class UserMenu extends mixins(ActiveUserMixin, AuthMixin) {
 
   public async signOut(): Promise<void> {
     await this.logOutUser({ onPrem: this.$config.onPrem })
-    this.$router.push('/login')
+    // router replace refreshes the browser and clears vuex cache
+    window.location.replace('/login')
   }
 }
 </script>
