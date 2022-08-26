@@ -785,6 +785,26 @@ type CreateIssueOnIntegrationPayload {
   clientMutationId: String
 }
 
+input CreatePublicReportInput {
+  level: ReportLevel!
+  ownerLogin: String
+  repositoryName: String
+  vcsProvider: VCSProviderChoices
+  label: String!
+  isRestricted: Boolean
+  password: String
+  shareHistoricalData: Boolean
+  reportKeys: [String]!
+  source: ReportSource
+  sourcedRepositories: [ID]
+  clientMutationId: String
+}
+
+type CreatePublicReportPayload {
+  report: PublicReport
+  clientMutationId: String
+}
+
 input CreatePullRequestInput {
   patches: [Int]!
   autofixRunId: String!
@@ -862,6 +882,16 @@ type DeleteGroupPayload {
 
 type DeleteJSONWebTokenCookie {
   deleted: Boolean!
+}
+
+input DeletePublicReportInput {
+  reportId: String!
+  clientMutationId: String
+}
+
+type DeletePublicReportPayload {
+  ok: Boolean
+  clientMutationId: String
 }
 
 type DeleteRefreshTokenCookie {
@@ -1555,8 +1585,8 @@ enum IssueSeverity {
 }
 
 type IssueTrend {
-  trendHint: String
   trendValue: Int
+  trendHint: String
   trendDirection: TrendDirection
   trendPositive: Boolean
 }
@@ -1772,6 +1802,10 @@ type Mutation {
   createIssueOnIntegration(input: CreateIssueOnIntegrationInput!): CreateIssueOnIntegrationPayload
   updateIntegrationSettings(input: UpdateIntegrationSettingsInput!): UpdateIntegrationSettingsPayload
   uninstallIntegration(input: UninstallIntegrationInput!): UninstallIntegrationPayload
+  createPublicReport(input: CreatePublicReportInput!): CreatePublicReportPayload
+  deletePublicReport(input: DeletePublicReportInput!): DeletePublicReportPayload
+  updatePublicReport(input: UpdatePublicReportInput!): UpdatePublicReportPayload
+  verifyPasswordForPublicReport(input: VerifyPasswordForPublicReportInput!): VerifyPasswordForPublicReportPayload
 }
 
 enum NextActionChoice {
@@ -1805,6 +1839,7 @@ type Owner implements MaskPrimaryKeyNode {
   configTemplates(offset: Int, before: String, after: String, first: Int, last: Int, shortcode: String, title_Icontains: String): ConfigTemplateConnection
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   ownerSetting: OwnerSetting
+  publicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection
   webhooks(offset: Int, before: String, after: String, first: Int, last: Int): WebhookConnection!
   isAutofixEnabled: Boolean
   autofixInstallationUrl: String
@@ -1892,6 +1927,39 @@ type PageInfo {
   endCursor: String
 }
 
+type PublicReport implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  reportId: UUID!
+  label: String!
+  isRestricted: Boolean!
+  shareHistoricalData: Boolean!
+  reportKeys: [String]
+  source: ReportSource
+  sourcedRepositories: [Repository]
+  owner: Owner
+  repository: Repository
+  views: Int!
+  level: ReportLevel
+  report(key: String!): Report
+  complianceIssues(key: String!): [ComplianceIssue]
+  issueDistributionByAnalyzer: [IssueDistribution]
+  issueDistributionByCategory: [IssueDistribution]
+}
+
+type PublicReportConnection {
+  pageInfo: PageInfo!
+  edges: [PublicReportEdge]!
+  totalCount: Int
+}
+
+type PublicReportEdge {
+  node: PublicReport
+  cursor: String!
+}
+
 type Query {
   changelog: Changelog
   isViewerSuperadmin: Boolean
@@ -1933,6 +2001,7 @@ type Query {
   complianceIssues(level: ReportLevel, reportKey: String, objectId: ID): [ComplianceIssue]
   issueDistributionByAnalyzer(level: ReportLevel, objectId: ID): [IssueDistribution]
   issueDistributionByCategory(level: ReportLevel, objectId: ID): [IssueDistribution]
+  publicReport(reportId: String, token: String): PublicReport
   context: Context
   node(id: ID!): MaskPrimaryKeyNode
 }
@@ -2043,6 +2112,11 @@ enum ReportLevel {
   ENTERPRISE
 }
 
+enum ReportSource {
+  SOURCE_ALL
+  SOURCE_SELECTED
+}
+
 enum ReportStatus {
   PASSING
   FAILING
@@ -2107,6 +2181,8 @@ type Repository implements MaskPrimaryKeyNode {
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   runs(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
   repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
+  sourcedInPublicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection!
+  publicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection
   silenceRules(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection
   ownerLogin: String
   canBeActivated: Boolean
@@ -2358,7 +2434,8 @@ type Run implements MaskPrimaryKeyNode {
   gitCompareDisplay: String
   pullRequestNumberDisplay: String
   issuesRaisedCount: Int
-  issuesResolvedNum: Int
+  issuesResolvedCount: Int
+  issuesResolvedNum: Int @deprecated(reason: "Removed in favor of `issues_resolved_count`")
   isForDefaultBranch: Boolean
   isForCrossRepoPr: Boolean
   branchRunCount: Int
@@ -3119,6 +3196,23 @@ enum UpdatePaymentActionChoice {
   REMOVE
 }
 
+input UpdatePublicReportInput {
+  reportId: String!
+  label: String
+  isRestricted: Boolean
+  password: String
+  shareHistoricalData: Boolean
+  reportKeys: [String]
+  source: ReportSource
+  sourcedRepositories: [ID]
+  clientMutationId: String
+}
+
+type UpdatePublicReportPayload {
+  publicReport: PublicReport
+  clientMutationId: String
+}
+
 input UpdateRepoMetricThresholdInput {
   metricShortcode: String!
   repositoryId: ID!
@@ -3378,6 +3472,17 @@ input VerifyGSRWebhooksInput {
 
 type VerifyGSRWebhooksPayload {
   ok: Boolean
+  clientMutationId: String
+}
+
+input VerifyPasswordForPublicReportInput {
+  reportId: String!
+  password: String!
+  clientMutationId: String
+}
+
+type VerifyPasswordForPublicReportPayload {
+  token: String
   clientMutationId: String
 }
 

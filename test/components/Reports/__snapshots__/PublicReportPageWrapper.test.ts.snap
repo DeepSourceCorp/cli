@@ -1,0 +1,421 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"issue-distribution"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\"></h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        DeepSource continuously scans deepsourcelabs’ source code to detect code health issues and
+        provides guidance to correct them. This report provides the current and historical snapshot of code health issues in
+        deepsourcelabs’ source code, limited to the repositories tracked on DeepSource. The code health
+        issue detected by DeepSource includes, but is not limited to, these categories: bug risks, anti-patterns, style
+        violations, performance issues, code coverage issues, and so on.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate code health issues in their code base
+        and make it more maintainable. The report can also be used by key internal and external stakeholders to understand
+        the code quality and maintainability of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"owasp-top-10"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\"></h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        The Open Web Application Security Project Foundation, or OWASP Foundation, is a non-profit
+        foundation dedicated to improving software security. The foundation is community-driven and
+        helps organizations build secure software through open-source tools, resources, and
+        research. The OWASP Top 10 is a recommendation framework maintained by the OWASP Foundation
+        since 2003. The list is a collection of security recommendations that helps organizations to
+        write more secure code. It is updated periodically to accommodate for the advancements and
+        developments in application security. More information on OWASP Top 10 can be found
+        <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
+      </p>
+      <p>
+        DeepSource continuously scans deepsourcelabs’ source code continuously to detect violations
+        of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
+        the current, as well as a historical snapshot of the presence of such vulnerabilities in
+        deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate violations of
+        OWASP Top 10 recommendations in their source code. The report can also be used by key
+        stakeholders within the organization and interested external stakeholders to understand the
+        source code security posture of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"sans-top-25"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\"></h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        The SANS Institute was founded in 1989 as a cooperative for information security thought
+        leadership. The CWE (Common Weakness Enumeration) / SANS Top 25 list is a well-known list
+        of the most common and severe errors in software that can lead to serious security
+        vulnerabilities. The list is used by organizations as a primer to ensure their source code
+        is secure.
+      </p>
+      <p>
+        DeepSource continuously scans deepsourcelabs’s source code continuously to detect violations
+        of SANS Top 25 recommendations and provides guidance to correct them. This report provides
+        the current, as well as a historical snapshot of the presence of such vulnerabilities in
+        deepsourcelabs’s source code, limited to the repositories, tracked on DeepSource.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate violations of
+        SANS Top 25 recommendations in their source code. The report can also be used by key
+        stakeholders within the organization and interested external stakeholders to understand the
+        source code security posture of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"issue-distribution"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution insight report for deepsourcelabs</h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        DeepSource continuously scans deepsourcelabs’ source code to detect code health issues and
+        provides guidance to correct them. This report provides the current and historical snapshot of code health issues in
+        deepsourcelabs’ source code, limited to the repositories tracked on DeepSource. The code health
+        issue detected by DeepSource includes, but is not limited to, these categories: bug risks, anti-patterns, style
+        violations, performance issues, code coverage issues, and so on.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate code health issues in their code base
+        and make it more maintainable. The report can also be used by key internal and external stakeholders to understand
+        the code quality and maintainability of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"owasp-top-10"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 compliance report for deepsourcelabs</h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        The Open Web Application Security Project Foundation, or OWASP Foundation, is a non-profit
+        foundation dedicated to improving software security. The foundation is community-driven and
+        helps organizations build secure software through open-source tools, resources, and
+        research. The OWASP Top 10 is a recommendation framework maintained by the OWASP Foundation
+        since 2003. The list is a collection of security recommendations that helps organizations to
+        write more secure code. It is updated periodically to accommodate for the advancements and
+        developments in application security. More information on OWASP Top 10 can be found
+        <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
+      </p>
+      <p>
+        DeepSource continuously scans deepsourcelabs’ source code continuously to detect violations
+        of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
+        the current, as well as a historical snapshot of the presence of such vulnerabilities in
+        deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate violations of
+        OWASP Top 10 recommendations in their source code. The report can also be used by key
+        stakeholders within the organization and interested external stakeholders to understand the
+        source code security posture of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"sans-top-25"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 compliance report for deepsourcelabs</h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        The SANS Institute was founded in 1989 as a cooperative for information security thought
+        leadership. The CWE (Common Weakness Enumeration) / SANS Top 25 list is a well-known list
+        of the most common and severe errors in software that can lead to serious security
+        vulnerabilities. The list is used by organizations as a primer to ensure their source code
+        is secure.
+      </p>
+      <p>
+        DeepSource continuously scans deepsourcelabs’s source code continuously to detect violations
+        of SANS Top 25 recommendations and provides guidance to correct them. This report provides
+        the current, as well as a historical snapshot of the presence of such vulnerabilities in
+        deepsourcelabs’s source code, limited to the repositories, tracked on DeepSource.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate violations of
+        SANS Top 25 recommendations in their source code. The report can also be used by key
+        stakeholders within the organization and interested external stakeholders to understand the
+        source code security posture of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"issue-distribution"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution insight report for deepsourcelabs/asgard</h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        DeepSource continuously scans deepsourcelabs’ source code to detect code health issues and
+        provides guidance to correct them. This report provides the current and historical snapshot of code health issues in
+        deepsourcelabs’ source code, limited to the repositories tracked on DeepSource. The code health
+        issue detected by DeepSource includes, but is not limited to, these categories: bug risks, anti-patterns, style
+        violations, performance issues, code coverage issues, and so on.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate code health issues in their code base
+        and make it more maintainable. The report can also be used by key internal and external stakeholders to understand
+        the code quality and maintainability of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"owasp-top-10"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 compliance report for deepsourcelabs/asgard</h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        The Open Web Application Security Project Foundation, or OWASP Foundation, is a non-profit
+        foundation dedicated to improving software security. The foundation is community-driven and
+        helps organizations build secure software through open-source tools, resources, and
+        research. The OWASP Top 10 is a recommendation framework maintained by the OWASP Foundation
+        since 2003. The list is a collection of security recommendations that helps organizations to
+        write more secure code. It is updated periodically to accommodate for the advancements and
+        developments in application security. More information on OWASP Top 10 can be found
+        <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
+      </p>
+      <p>
+        DeepSource continuously scans deepsourcelabs’ source code continuously to detect violations
+        of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
+        the current, as well as a historical snapshot of the presence of such vulnerabilities in
+        deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate violations of
+        OWASP Top 10 recommendations in their source code. The report can also be used by key
+        stakeholders within the organization and interested external stakeholders to understand the
+        source code security posture of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;
+
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"sans-top-25"} 1`] = `
+"<main>
+  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 compliance report for deepsourcelabs/asgard</h1>
+    <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
+      Created on Jul 25, 2022
+    </p>
+  </header>
+  <section class=\\"space-y-14 mt-8 leading-8\\">
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
+      <p>
+        The SANS Institute was founded in 1989 as a cooperative for information security thought
+        leadership. The CWE (Common Weakness Enumeration) / SANS Top 25 list is a well-known list
+        of the most common and severe errors in software that can lead to serious security
+        vulnerabilities. The list is used by organizations as a primer to ensure their source code
+        is secure.
+      </p>
+      <p>
+        DeepSource continuously scans deepsourcelabs’s source code continuously to detect violations
+        of SANS Top 25 recommendations and provides guidance to correct them. This report provides
+        the current, as well as a historical snapshot of the presence of such vulnerabilities in
+        deepsourcelabs’s source code, limited to the repositories, tracked on DeepSource.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
+      <p>
+        This report can be used by the deepsourcelabs team to identify and remediate violations of
+        SANS Top 25 recommendations in their source code. The report can also be used by key
+        stakeholders within the organization and interested external stakeholders to understand the
+        source code security posture of deepsourcelabs.
+      </p>
+    </div>
+    <div class=\\"space-y-4 text-vanilla-400\\">
+      <h1 class=\\"text-lg text-vanilla-100 font-semibold\\">Continuous Code Health</h1>
+      <p>
+        DeepSource integrates with deepsourcelabs’ software development
+        workflows to provide developers and key stakeholders a way to identify and fix code health
+        issues continuously and proactively. This report is dynamic. As
+        deepsourcelabs’ team improves its source code security posture, the
+        changes will be reflected in this report.
+      </p>
+    </div>
+  </section>
+</main>"
+`;

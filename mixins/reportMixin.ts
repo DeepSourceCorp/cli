@@ -24,6 +24,7 @@ import {
   Repository,
   IssueDistribution
 } from '~/types/types'
+
 import { roundToSignificantNumber } from '~/utils/number'
 
 /**
@@ -272,9 +273,9 @@ export default class ReportMixin extends Vue {
           ? response.data.issueDistributionByAnalyzer
           : response.data.issueDistributionByCategory
       ) as Array<IssueDistribution>
-    } catch (error) {
+    } catch (e) {
       this.$logErrorAndToast(
-        error as Error,
+        e as Error,
         'Unable to fetch issue distribution, please contact support.'
       )
     } finally {

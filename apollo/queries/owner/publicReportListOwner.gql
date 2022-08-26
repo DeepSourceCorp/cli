@@ -1,0 +1,32 @@
+query publicReportListOwner(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $first: Int
+  $after: String
+  $offset: Int
+  $sort: String
+  $q: String
+) {
+  owner(login: $login, provider: $provider) {
+    id
+    publicReports(first: $first, after: $after, offset: $offset, sort: $sort, q: $q) {
+      totalCount
+      edges {
+        node {
+          reportId
+          label
+          views
+          createdAt
+          isRestricted
+          shareHistoricalData
+          reportKeys
+          source
+          sourcedRepositories {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}

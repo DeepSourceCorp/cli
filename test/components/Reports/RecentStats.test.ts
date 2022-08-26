@@ -27,15 +27,15 @@ const props = {
     },
     {
       statLabel: '6 Months Ago',
-      statValue: 16,
-      trendValue: 15,
+      statValue: 0,
+      trendValue: 100,
       trendDirection: 'DOWN',
       trendPositive: true
     },
     {
       statLabel: '12 Months Ago',
-      statValue: 8,
-      trendValue: 7,
+      statValue: null,
+      trendValue: null,
       trendDirection: 'DOWN',
       trendPositive: true
     }

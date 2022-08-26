@@ -1070,6 +1070,27 @@ export type CreateIssueOnIntegrationPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type CreatePublicReportInput = {
+  level: ReportLevel;
+  ownerLogin?: Maybe<Scalars['String']>;
+  repositoryName?: Maybe<Scalars['String']>;
+  vcsProvider?: Maybe<VcsProviderChoices>;
+  label: Scalars['String'];
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  password?: Maybe<Scalars['String']>;
+  shareHistoricalData?: Maybe<Scalars['Boolean']>;
+  reportKeys: Array<Maybe<Scalars['String']>>;
+  source?: Maybe<ReportSource>;
+  sourcedRepositories?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type CreatePublicReportPayload = {
+  __typename?: 'CreatePublicReportPayload';
+  report?: Maybe<PublicReport>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type CreatePullRequestInput = {
   patches: Array<Maybe<Scalars['Int']>>;
   autofixRunId: Scalars['String'];
@@ -1153,6 +1174,17 @@ export type DeleteGroupPayload = {
 export type DeleteJsonWebTokenCookie = {
   __typename?: 'DeleteJSONWebTokenCookie';
   deleted: Scalars['Boolean'];
+};
+
+export type DeletePublicReportInput = {
+  reportId: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DeletePublicReportPayload = {
+  __typename?: 'DeletePublicReportPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type DeleteRefreshTokenCookie = {
@@ -2388,8 +2420,8 @@ export enum IssueSeverity {
 
 export type IssueTrend = {
   __typename?: 'IssueTrend';
-  trendHint?: Maybe<Scalars['String']>;
   trendValue?: Maybe<Scalars['Int']>;
+  trendHint?: Maybe<Scalars['String']>;
   trendDirection?: Maybe<TrendDirection>;
   trendPositive?: Maybe<Scalars['Boolean']>;
 };
@@ -2625,6 +2657,10 @@ export type Mutation = {
   createIssueOnIntegration?: Maybe<CreateIssueOnIntegrationPayload>;
   updateIntegrationSettings?: Maybe<UpdateIntegrationSettingsPayload>;
   uninstallIntegration?: Maybe<UninstallIntegrationPayload>;
+  createPublicReport?: Maybe<CreatePublicReportPayload>;
+  deletePublicReport?: Maybe<DeletePublicReportPayload>;
+  updatePublicReport?: Maybe<UpdatePublicReportPayload>;
+  verifyPasswordForPublicReport?: Maybe<VerifyPasswordForPublicReportPayload>;
 };
 
 
@@ -3178,6 +3214,26 @@ export type MutationUninstallIntegrationArgs = {
   input: UninstallIntegrationInput;
 };
 
+
+export type MutationCreatePublicReportArgs = {
+  input: CreatePublicReportInput;
+};
+
+
+export type MutationDeletePublicReportArgs = {
+  input: DeletePublicReportInput;
+};
+
+
+export type MutationUpdatePublicReportArgs = {
+  input: UpdatePublicReportInput;
+};
+
+
+export type MutationVerifyPasswordForPublicReportArgs = {
+  input: VerifyPasswordForPublicReportInput;
+};
+
 export enum NextActionChoice {
   GithubLogin = 'GITHUB_LOGIN',
   Dashboard = 'DASHBOARD',
@@ -3210,6 +3266,7 @@ export type Owner = MaskPrimaryKeyNode & {
   configTemplates?: Maybe<ConfigTemplateConnection>;
   onboardingEvents: AutoOnboardEventConnection;
   ownerSetting?: Maybe<OwnerSetting>;
+  publicReports?: Maybe<PublicReportConnection>;
   webhooks: WebhookConnection;
   isAutofixEnabled?: Maybe<Scalars['Boolean']>;
   autofixInstallationUrl?: Maybe<Scalars['String']>;
@@ -3310,6 +3367,17 @@ export type OwnerOnboardingEventsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   owner?: Maybe<Scalars['ID']>;
+};
+
+
+export type OwnerPublicReportsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
+  q?: Maybe<Scalars['String']>;
 };
 
 
@@ -3433,6 +3501,52 @@ export type PageInfo = {
   endCursor?: Maybe<Scalars['String']>;
 };
 
+export type PublicReport = MaskPrimaryKeyNode & {
+  __typename?: 'PublicReport';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  modifiedAt: Scalars['DateTime'];
+  alive?: Maybe<Scalars['Boolean']>;
+  reportId: Scalars['UUID'];
+  label: Scalars['String'];
+  isRestricted: Scalars['Boolean'];
+  shareHistoricalData: Scalars['Boolean'];
+  reportKeys?: Maybe<Array<Maybe<Scalars['String']>>>;
+  source?: Maybe<ReportSource>;
+  sourcedRepositories?: Maybe<Array<Maybe<Repository>>>;
+  owner?: Maybe<Owner>;
+  repository?: Maybe<Repository>;
+  views: Scalars['Int'];
+  level?: Maybe<ReportLevel>;
+  report?: Maybe<Report>;
+  complianceIssues?: Maybe<Array<Maybe<ComplianceIssue>>>;
+  issueDistributionByAnalyzer?: Maybe<Array<Maybe<IssueDistribution>>>;
+  issueDistributionByCategory?: Maybe<Array<Maybe<IssueDistribution>>>;
+};
+
+
+export type PublicReportReportArgs = {
+  key: Scalars['String'];
+};
+
+
+export type PublicReportComplianceIssuesArgs = {
+  key: Scalars['String'];
+};
+
+export type PublicReportConnection = {
+  __typename?: 'PublicReportConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<PublicReportEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type PublicReportEdge = {
+  __typename?: 'PublicReportEdge';
+  node?: Maybe<PublicReport>;
+  cursor: Scalars['String'];
+};
+
 export type Query = {
   __typename?: 'Query';
   changelog?: Maybe<Changelog>;
@@ -3475,6 +3589,7 @@ export type Query = {
   complianceIssues?: Maybe<Array<Maybe<ComplianceIssue>>>;
   issueDistributionByAnalyzer?: Maybe<Array<Maybe<IssueDistribution>>>;
   issueDistributionByCategory?: Maybe<Array<Maybe<IssueDistribution>>>;
+  publicReport?: Maybe<PublicReport>;
   context?: Maybe<Context>;
   node?: Maybe<MaskPrimaryKeyNode>;
 };
@@ -3772,6 +3887,12 @@ export type QueryIssueDistributionByCategoryArgs = {
 };
 
 
+export type QueryPublicReportArgs = {
+  reportId?: Maybe<Scalars['String']>;
+  token?: Maybe<Scalars['String']>;
+};
+
+
 export type QueryNodeArgs = {
   id: Scalars['ID'];
 };
@@ -3898,6 +4019,11 @@ export enum ReportLevel {
   Enterprise = 'ENTERPRISE'
 }
 
+export enum ReportSource {
+  SourceAll = 'SOURCE_ALL',
+  SourceSelected = 'SOURCE_SELECTED'
+}
+
 export enum ReportStatus {
   Passing = 'PASSING',
   Failing = 'FAILING',
@@ -3963,6 +4089,8 @@ export type Repository = MaskPrimaryKeyNode & {
   onboardingEvents: AutoOnboardEventConnection;
   runs?: Maybe<RunConnection>;
   repositorycollaboratorSet: RepositoryCollaboratorConnection;
+  sourcedInPublicReports: PublicReportConnection;
+  publicReports?: Maybe<PublicReportConnection>;
   silenceRules?: Maybe<SilenceRuleConnection>;
   ownerLogin?: Maybe<Scalars['String']>;
   canBeActivated?: Maybe<Scalars['Boolean']>;
@@ -4136,6 +4264,28 @@ export type RepositoryRepositorycollaboratorSetArgs = {
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   permission?: Maybe<Scalars['String']>;
+};
+
+
+export type RepositorySourcedInPublicReportsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
+  q?: Maybe<Scalars['String']>;
+};
+
+
+export type RepositoryPublicReportsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
+  q?: Maybe<Scalars['String']>;
 };
 
 
@@ -4521,6 +4671,8 @@ export type Run = MaskPrimaryKeyNode & {
   gitCompareDisplay?: Maybe<Scalars['String']>;
   pullRequestNumberDisplay?: Maybe<Scalars['String']>;
   issuesRaisedCount?: Maybe<Scalars['Int']>;
+  issuesResolvedCount?: Maybe<Scalars['Int']>;
+  /** @deprecated Removed in favor of `issues_resolved_count` */
   issuesResolvedNum?: Maybe<Scalars['Int']>;
   isForDefaultBranch?: Maybe<Scalars['Boolean']>;
   isForCrossRepoPr?: Maybe<Scalars['Boolean']>;
@@ -5455,6 +5607,24 @@ export enum UpdatePaymentActionChoice {
   Remove = 'REMOVE'
 }
 
+export type UpdatePublicReportInput = {
+  reportId: Scalars['String'];
+  label?: Maybe<Scalars['String']>;
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  password?: Maybe<Scalars['String']>;
+  shareHistoricalData?: Maybe<Scalars['Boolean']>;
+  reportKeys?: Maybe<Array<Maybe<Scalars['String']>>>;
+  source?: Maybe<ReportSource>;
+  sourcedRepositories?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdatePublicReportPayload = {
+  __typename?: 'UpdatePublicReportPayload';
+  publicReport?: Maybe<PublicReport>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type UpdateRepoMetricThresholdInput = {
   metricShortcode: Scalars['String'];
   repositoryId: Scalars['ID'];
@@ -5965,6 +6135,18 @@ export type VerifyGsrWebhooksInput = {
 export type VerifyGsrWebhooksPayload = {
   __typename?: 'VerifyGSRWebhooksPayload';
   ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type VerifyPasswordForPublicReportInput = {
+  reportId: Scalars['String'];
+  password: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type VerifyPasswordForPublicReportPayload = {
+  __typename?: 'VerifyPasswordForPublicReportPayload';
+  token?: Maybe<Scalars['String']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -7164,6 +7346,64 @@ export type Unnamed_56_Mutation = (
   & { deleteAllAccessTokens?: Maybe<(
     { __typename?: 'DeleteAllAccessTokensPayload' }
     & Pick<DeleteAllAccessTokensPayload, 'ok'>
+  )> }
+);
+
+export type CreatePublicReportMutationVariables = Exact<{
+  input: CreatePublicReportInput;
+}>;
+
+
+export type CreatePublicReportMutation = (
+  { __typename?: 'Mutation' }
+  & { createPublicReport?: Maybe<(
+    { __typename?: 'CreatePublicReportPayload' }
+    & { report?: Maybe<(
+      { __typename?: 'PublicReport' }
+      & Pick<PublicReport, 'id' | 'reportId' | 'label' | 'views' | 'createdAt' | 'isRestricted' | 'shareHistoricalData' | 'reportKeys'>
+    )> }
+  )> }
+);
+
+export type DeletePublicReportMutationVariables = Exact<{
+  input: DeletePublicReportInput;
+}>;
+
+
+export type DeletePublicReportMutation = (
+  { __typename?: 'Mutation' }
+  & { deletePublicReport?: Maybe<(
+    { __typename?: 'DeletePublicReportPayload' }
+    & Pick<DeletePublicReportPayload, 'ok'>
+  )> }
+);
+
+export type UpdatePublicReportMutationVariables = Exact<{
+  input: UpdatePublicReportInput;
+}>;
+
+
+export type UpdatePublicReportMutation = (
+  { __typename?: 'Mutation' }
+  & { updatePublicReport?: Maybe<(
+    { __typename?: 'UpdatePublicReportPayload' }
+    & { publicReport?: Maybe<(
+      { __typename?: 'PublicReport' }
+      & Pick<PublicReport, 'reportId' | 'label' | 'reportKeys' | 'isRestricted' | 'shareHistoricalData'>
+    )> }
+  )> }
+);
+
+export type VerifyPasswordForPublicReportMutationVariables = Exact<{
+  input: VerifyPasswordForPublicReportInput;
+}>;
+
+
+export type VerifyPasswordForPublicReportMutation = (
+  { __typename?: 'Mutation' }
+  & { verifyPasswordForPublicReport?: Maybe<(
+    { __typename?: 'VerifyPasswordForPublicReportPayload' }
+    & Pick<VerifyPasswordForPublicReportPayload, 'token'>
   )> }
 );
 
@@ -8639,6 +8879,40 @@ export type OwnerInstalledIntegrationQuery = (
   )> }
 );
 
+export type PublicReportListOwnerQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  offset?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
+  q?: Maybe<Scalars['String']>;
+}>;
+
+
+export type PublicReportListOwnerQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { publicReports?: Maybe<(
+      { __typename?: 'PublicReportConnection' }
+      & Pick<PublicReportConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'PublicReportEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'PublicReport' }
+          & Pick<PublicReport, 'reportId' | 'label' | 'views' | 'createdAt' | 'isRestricted' | 'shareHistoricalData' | 'reportKeys' | 'source'>
+          & { sourcedRepositories?: Maybe<Array<Maybe<(
+            { __typename?: 'Repository' }
+            & Pick<Repository, 'id' | 'name'>
+          )>>> }
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
 export type OwnerSeatsInfoQueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
@@ -8970,6 +9244,145 @@ export type HistoricalValuesQuery = (
   )> }
 );
 
+export type PublicReportAnalyzerDistributionQueryVariables = Exact<{
+  reportId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
+}>;
+
+
+export type PublicReportAnalyzerDistributionQuery = (
+  { __typename?: 'Query' }
+  & { publicReport?: Maybe<(
+    { __typename?: 'PublicReport' }
+    & { issueDistributionByAnalyzer?: Maybe<Array<Maybe<(
+      { __typename?: 'IssueDistribution' }
+      & Pick<IssueDistribution, 'slug' | 'name' | 'value' | 'logoUrl'>
+    )>>> }
+  )> }
+);
+
+export type PublicReportBaseQueryVariables = Exact<{
+  reportId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
+}>;
+
+
+export type PublicReportBaseQuery = (
+  { __typename?: 'Query' }
+  & { publicReport?: Maybe<(
+    { __typename?: 'PublicReport' }
+    & Pick<PublicReport, 'reportId' | 'label' | 'createdAt' | 'views' | 'isRestricted' | 'reportKeys' | 'source' | 'level' | 'shareHistoricalData'>
+    & { sourcedRepositories?: Maybe<Array<Maybe<(
+      { __typename?: 'Repository' }
+      & Pick<Repository, 'id' | 'name' | 'isPrivate'>
+    )>>>, owner?: Maybe<(
+      { __typename?: 'Owner' }
+      & Pick<Owner, 'id' | 'login' | 'avatar'>
+    )>, repository?: Maybe<(
+      { __typename?: 'Repository' }
+      & Pick<Repository, 'id' | 'name' | 'isPrivate'>
+    )> }
+  )> }
+);
+
+export type PublicReportBaseReportQueryVariables = Exact<{
+  reportId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
+  reportKey: Scalars['String'];
+}>;
+
+
+export type PublicReportBaseReportQuery = (
+  { __typename?: 'Query' }
+  & { publicReport?: Maybe<(
+    { __typename?: 'PublicReport' }
+    & { report?: Maybe<(
+      { __typename?: 'Report' }
+      & Pick<Report, 'key' | 'status' | 'currentValue' | 'type'>
+    )> }
+  )> }
+);
+
+export type PublicReportCategoryDistributionQueryVariables = Exact<{
+  reportId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
+}>;
+
+
+export type PublicReportCategoryDistributionQuery = (
+  { __typename?: 'Query' }
+  & { publicReport?: Maybe<(
+    { __typename?: 'PublicReport' }
+    & { issueDistributionByCategory?: Maybe<Array<Maybe<(
+      { __typename?: 'IssueDistribution' }
+      & Pick<IssueDistribution, 'slug' | 'name' | 'value' | 'logoUrl'>
+    )>>> }
+  )> }
+);
+
+export type PublicReportComplianceIssuesQueryVariables = Exact<{
+  reportId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
+  reportKey: Scalars['String'];
+}>;
+
+
+export type PublicReportComplianceIssuesQuery = (
+  { __typename?: 'Query' }
+  & { publicReport?: Maybe<(
+    { __typename?: 'PublicReport' }
+    & { complianceIssues?: Maybe<Array<Maybe<(
+      { __typename?: 'ComplianceIssue' }
+      & Pick<ComplianceIssue, 'issueId' | 'title' | 'rank'>
+      & { occurrence?: Maybe<(
+        { __typename?: 'ComplianceIssueOccurrence' }
+        & Pick<ComplianceIssueOccurrence, 'high' | 'medium' | 'low' | 'total'>
+      )> }
+    )>>> }
+  )> }
+);
+
+export type PublicReportHistoricValuesQueryVariables = Exact<{
+  reportId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
+  reportKey: Scalars['String'];
+  startDate: Scalars['Date'];
+  endDate: Scalars['Date'];
+}>;
+
+
+export type PublicReportHistoricValuesQuery = (
+  { __typename?: 'Query' }
+  & { publicReport?: Maybe<(
+    { __typename?: 'PublicReport' }
+    & { report?: Maybe<(
+      { __typename?: 'Report' }
+      & Pick<Report, 'key' | 'historicalValues'>
+    )> }
+  )> }
+);
+
+export type PublicReportRecentStatsQueryVariables = Exact<{
+  reportId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
+  reportKey: Scalars['String'];
+}>;
+
+
+export type PublicReportRecentStatsQuery = (
+  { __typename?: 'Query' }
+  & { publicReport?: Maybe<(
+    { __typename?: 'PublicReport' }
+    & { report?: Maybe<(
+      { __typename?: 'Report' }
+      & { recentStats?: Maybe<Array<Maybe<(
+        { __typename?: 'RecentStat' }
+        & Pick<RecentStat, 'statLabel' | 'statValue' | 'trendValue' | 'trendDirection' | 'trendPositive'>
+      )>>> }
+    )> }
+  )> }
+);
+
 export type RecentStatsQueryVariables = Exact<{
   level: ReportLevel;
   objectId: Scalars['ID'];
@@ -8986,6 +9399,36 @@ export type RecentStatsQuery = (
       { __typename?: 'RecentStat' }
       & Pick<RecentStat, 'statLabel' | 'statValue' | 'trendValue' | 'trendDirection' | 'trendPositive'>
     )>>> }
+  )> }
+);
+
+export type RepoListForReportsQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  isActivated?: Maybe<Scalars['Boolean']>;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  offset?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+}>;
+
+
+export type RepoListForReportsQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { repositories?: Maybe<(
+      { __typename?: 'RepositoryConnection' }
+      & Pick<RepositoryConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'RepositoryEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Repository' }
+          & Pick<Repository, 'id' | 'name' | 'ownerLogin'>
+        )> }
+      )>> }
+    )> }
   )> }
 );
 
@@ -9197,7 +9640,7 @@ export type Unnamed_124_QueryVariables = Exact<{
 
 export type Unnamed_124_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
@@ -9241,7 +9684,7 @@ export type Unnamed_125_QueryVariables = Exact<{
 
 export type Unnamed_125_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'config' | 'blobUrlRoot' | 'vcsProvider' | 'hasViewerEditAccess'>
     & { issue?: Maybe<(
@@ -9270,7 +9713,7 @@ export type Unnamed_126_QueryVariables = Exact<{
 
 export type Unnamed_126_Query = (
   { __typename?: 'Query' }
-  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | (
+  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | (
     { __typename?: 'RepositoryIssue' }
     & Pick<RepositoryIssue, 'shortcode'>
     & { checkIssues: (
@@ -9393,7 +9836,7 @@ export type Unnamed_128_QueryVariables = Exact<{
 
 export type Unnamed_128_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
@@ -9614,6 +10057,37 @@ export type RepositoryPermissionsQuery = (
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'userPermissionMeta'>
+  )> }
+);
+
+export type PublicReportListRepoQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+  provider: VcsProviderChoices;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  offset?: Maybe<Scalars['Int']>;
+  sort?: Maybe<Scalars['String']>;
+  q?: Maybe<Scalars['String']>;
+}>;
+
+
+export type PublicReportListRepoQuery = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id'>
+    & { publicReports?: Maybe<(
+      { __typename?: 'PublicReportConnection' }
+      & Pick<PublicReportConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'PublicReportEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'PublicReport' }
+          & Pick<PublicReport, 'reportId' | 'label' | 'views' | 'createdAt' | 'isRestricted' | 'shareHistoricalData' | 'reportKeys'>
+        )> }
+      )>> }
+    )> }
   )> }
 );
 
@@ -10300,7 +10774,7 @@ export type Unnamed_149_QueryVariables = Exact<{
 
 export type Unnamed_149_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }

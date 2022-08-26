@@ -1,0 +1,29 @@
+query publicReportBase($reportId: String!, $token: String) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    reportId
+    label
+    createdAt
+    views
+    isRestricted
+    reportKeys
+    source
+    level
+    sourcedRepositories {
+      id
+      name
+      isPrivate
+    }
+    shareHistoricalData
+    owner {
+      id
+      login
+      avatar
+    }
+    repository {
+      id
+      name
+      isPrivate
+    }
+  }
+}

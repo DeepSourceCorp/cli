@@ -1,0 +1,11 @@
+query publicReportCategoryDistribution($reportId: String!, $token: String) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    issueDistributionByCategory {
+      slug
+      name
+      value
+      logoUrl
+    }
+  }
+}

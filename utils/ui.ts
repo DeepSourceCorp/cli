@@ -281,3 +281,16 @@ export function getDefaultAvatar(name: string, forIndividual = true): NodeRequir
 
   return imagesSrcArray[0]
 }
+
+/**
+ * Verifies if a given `parentCandidate` contains a `target` element.
+ *
+ * @param {HTMLElement} parentCandidate - Parent to find `target` in.
+ * @param {HTMLElement} target - Element to find.
+ * @returns {boolean} `true` if `target` is found in `parentCandidate`, else returns `false`.
+ */
+export function containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
+  return Boolean(
+    parentCandidate && (target === parentCandidate || parentCandidate.contains(target))
+  )
+}

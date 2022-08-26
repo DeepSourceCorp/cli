@@ -1,0 +1,12 @@
+mutation updatePublicReport($input: UpdatePublicReportInput!) {
+  updatePublicReport(input: $input) {
+    publicReport {
+      id
+      reportId
+      label
+      reportKeys
+      isRestricted
+      shareHistoricalData
+    }
+  }
+}

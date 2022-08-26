@@ -1,0 +1,14 @@
+query publicReportRecentStats($reportId: String!, $token: String, $reportKey: String!) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    report(key: $reportKey) {
+      recentStats {
+        statLabel
+        statValue
+        trendValue
+        trendDirection
+        trendPositive
+      }
+    }
+  }
+}

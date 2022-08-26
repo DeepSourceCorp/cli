@@ -1,0 +1,11 @@
+query publicReportAnalyzerDistribution($reportId: String!, $token: String) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    issueDistributionByAnalyzer {
+      slug
+      name
+      value
+      logoUrl
+    }
+  }
+}

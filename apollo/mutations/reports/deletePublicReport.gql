@@ -1,0 +1,5 @@
+mutation deletePublicReport($input: DeletePublicReportInput!) {
+  deletePublicReport(input: $input) {
+    ok
+  }
+}

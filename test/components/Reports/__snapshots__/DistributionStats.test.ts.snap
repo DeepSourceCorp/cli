@@ -1,22 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders DistributionStats with all links options: {"linkCards":false} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"linkCards":false} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -24,23 +24,23 @@ exports[`renders DistributionStats with all links options: {"linkCards":false} 1
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"linkCards":null} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"linkCards":null} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -48,23 +48,23 @@ exports[`renders DistributionStats with all links options: {"linkCards":null} 1`
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"linkCards":true} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"linkCards":true} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=security\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=security\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=antipattern\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=antipattern\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=style\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=style\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=doc\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=doc\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=bug-risk\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=bug-risk\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -72,23 +72,23 @@ exports[`renders DistributionStats with all links options: {"linkCards":true} 1`
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":"analyzer","linkCards":false} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":"analyzer","linkCards":false} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -96,23 +96,23 @@ exports[`renders DistributionStats with all links options: {"statType":"analyzer
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":"analyzer","linkCards":null} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":"analyzer","linkCards":null} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -120,23 +120,23 @@ exports[`renders DistributionStats with all links options: {"statType":"analyzer
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":"analyzer","linkCards":true} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":"analyzer","linkCards":true} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=security\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=security\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=antipattern\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=antipattern\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=style\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=style\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=doc\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=doc\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=bug-risk\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=all&amp;analyzer=bug-risk\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -144,23 +144,23 @@ exports[`renders DistributionStats with all links options: {"statType":"analyzer
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":"analyzer"} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":"analyzer"} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -168,23 +168,23 @@ exports[`renders DistributionStats with all links options: {"statType":"analyzer
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":"category","linkCards":false} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":"category","linkCards":false} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -192,23 +192,23 @@ exports[`renders DistributionStats with all links options: {"statType":"category
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":"category","linkCards":null} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":"category","linkCards":null} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -216,23 +216,23 @@ exports[`renders DistributionStats with all links options: {"statType":"category
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":"category","linkCards":true} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":"category","linkCards":true} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=security\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=security\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=antipattern\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=antipattern\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=style\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=style\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=doc\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=doc\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=bug-risk\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=bug-risk\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -240,23 +240,23 @@ exports[`renders DistributionStats with all links options: {"statType":"category
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":"category"} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":"category"} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -264,23 +264,23 @@ exports[`renders DistributionStats with all links options: {"statType":"category
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":null,"linkCards":false} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":null,"linkCards":false} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -288,23 +288,23 @@ exports[`renders DistributionStats with all links options: {"statType":null,"lin
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":null,"linkCards":null} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":null,"linkCards":null} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -312,23 +312,23 @@ exports[`renders DistributionStats with all links options: {"statType":null,"lin
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":null,"linkCards":true} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":null,"linkCards":true} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=security\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=security\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=antipattern\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=antipattern\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=style\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=style\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=doc\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=doc\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=bug-risk\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" to=\\"/gh/deepsourcelabs/bifrost/issues?category=bug-risk\\" class=\\"outline-ink-200 p-3 md:p-4 hover:bg-ink-300\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -336,23 +336,23 @@ exports[`renders DistributionStats with all links options: {"statType":null,"lin
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {"statType":null} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {"statType":null} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -360,23 +360,23 @@ exports[`renders DistributionStats with all links options: {"statType":null} 1`]
 </section>"
 `;
 
-exports[`renders DistributionStats with all links options: {} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all links options: {} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>
@@ -384,23 +384,23 @@ exports[`renders DistributionStats with all links options: {} 1`] = `
 </section>"
 `;
 
-exports[`renders DistributionStats with all prop options: {"currentVal":1,"stats":[{"slug":"security","name":"Security","value":7},{"slug":"antipattern","name":"Anti-pattern","value":2},{"slug":"style","name":"Style","value":67},{"slug":"doc","name":"Documentation","value":76},{"slug":"bug-risk","name":"Bug Risk","value":4}]} 1`] = `
+exports[`[[ DistributionStats ]] renders DistributionStats with all prop options: {"currentVal":1,"stats":[{"slug":"security","name":"Security","value":7},{"slug":"antipattern","name":"Anti-pattern","value":2},{"slug":"style","name":"Style","value":67},{"slug":"doc","name":"Documentation","value":76},{"slug":"bug-risk","name":"Bug Risk","value":4}]} 1`] = `
 "<section class=\\"flex flex-col justify-between overflow-hidden border rounded-lg border-ink-200\\" currentval=\\"1\\">
   <!---->
   <div class=\\"flex-grow gap-0 grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-5 gap-px p-0\\">
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           7
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           2
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           67
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           76
         </span></statcard-stub>
-    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 hover:bg-ink-300 p-3 md:p-4\\"><template></template> <span>
+    <statcard-stub removestyles=\\"true\\" class=\\"outline-ink-200 p-3 md:p-4\\"><template></template> <span>
           4
         </span></statcard-stub>
   </div>

@@ -69,6 +69,7 @@ import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 
 import { ControlPanelRouteT } from '~/types/control-panel'
+import { containsElement } from '~/utils/ui'
 
 @Component({
   components: {
@@ -133,18 +134,12 @@ export default class Sidebar extends mixins(ControlPanelBaseMixin) {
     this.$nuxt.$cookies.set('ui-state-sidebar-collapsed', newVal)
   }
 
-  containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
-    return Boolean(
-      parentCandidate && (target === parentCandidate || parentCandidate.contains(target))
-    )
-  }
-
   closeMenu(event: Event): void {
     const target = event.target as HTMLElement
     const toggleButton = document.getElementById('mobile-menu-toggle')
     if (!toggleButton) {
       this.isOpen = false
-    } else if (!this.containsElement(toggleButton, target) && target.id !== 'mobile-menu-toggle') {
+    } else if (!containsElement(toggleButton, target) && target.id !== 'mobile-menu-toggle') {
       this.isOpen = false
     }
   }

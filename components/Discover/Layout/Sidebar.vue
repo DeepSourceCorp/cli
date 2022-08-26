@@ -197,6 +197,7 @@ import { isChristmasSeason } from '~/utils/easter'
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { DiscoverUserActions } from '~/store/discover/user'
 import { Analyzer } from '~/types/types'
+import { containsElement } from '~/utils/ui'
 
 const directoryStore = namespace('directory/directory')
 const discoverUserStore = namespace('discover/user')
@@ -240,12 +241,6 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
     await this.fetchAnalyzers()
   }
 
-  containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
-    return Boolean(
-      parentCandidate && (target === parentCandidate || parentCandidate.contains(target))
-    )
-  }
-
   openSidebar() {
     this.isCollapsed = false
     this.collapsedSidebar = false
@@ -284,7 +279,7 @@ export default class Sidebar extends mixins(ActiveUserMixin, AuthMixin) {
     const toggleButton = document.getElementById('mobile-menu-toggle')
     if (!toggleButton) {
       this.isOpen = false
-    } else if (!this.containsElement(toggleButton, target) && target.id !== 'mobile-menu-toggle') {
+    } else if (!containsElement(toggleButton, target) && target.id !== 'mobile-menu-toggle') {
       this.isOpen = false
     }
   }

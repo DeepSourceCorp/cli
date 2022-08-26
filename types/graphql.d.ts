@@ -656,6 +656,42 @@ declare module '*/deleteAll.gql' {
 }
     
 
+declare module '*/createPublicReport.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const createPublicReport: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/deletePublicReport.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const deletePublicReport: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/updatePublicReport.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updatePublicReport: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/verifyPasswordForPublicReport.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const verifyPasswordForPublicReport: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/commitConfigToVcs.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1335,6 +1371,15 @@ declare module '*/ownerInstalledIntegration.gql' {
 }
     
 
+declare module '*/publicReportListOwner.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportListOwner: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/seatsInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1463,10 +1508,82 @@ declare module '*/historicalValues.gql' {
 }
     
 
+declare module '*/publicReportAnalyzerDistribution.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportAnalyzerDistribution: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicReportBase.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportBase: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicReportBaseReport.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportBaseReport: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicReportCategoryDistribution.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportCategoryDistribution: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicReportComplianceIssues.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportComplianceIssues: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicReportHistoricalValues.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportHistoricValues: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicReportRecentStats.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportRecentStats: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/recentStats.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const recentStats: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/repoListForReports.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const repoListForReports: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1648,6 +1765,15 @@ declare module '*/perms.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const RepositoryPermissions: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicReportListRepo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportListRepo: DocumentNode;
 
   export default defaultDocument;
 }

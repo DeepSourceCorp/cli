@@ -286,6 +286,7 @@ import PlanDetailMixin from '~/mixins/planDetailMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { isChristmasSeason } from '~/utils/easter'
+import { containsElement } from '~/utils/ui'
 
 /**
  * Primary sidebar containing information and navigation for a user and the currently active owner.
@@ -436,19 +437,6 @@ export default class Sidebar extends mixins(
   }
 
   /**
-   * Verifies if a given `parentCandidate` contains a `target` element.
-   *
-   * @param {HTMLElement} parentCandidate - Parent to find `target` in.
-   * @param {HTMLElement} target - Element to find.
-   * @returns {boolean} `true` if `target` is found in `parentCandidate`, else returns `false`.
-   */
-  containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
-    return Boolean(
-      parentCandidate && (target === parentCandidate || parentCandidate.contains(target))
-    )
-  }
-
-  /**
    * Closes the sidebar menu on mobile view.
    *
    * @param {Event} event
@@ -459,7 +447,7 @@ export default class Sidebar extends mixins(
     const toggleButton = document.getElementById('mobile-menu-toggle')
     if (!toggleButton) {
       this.isOpen = false
-    } else if (!this.containsElement(toggleButton, target) && target.id !== 'mobile-menu-toggle') {
+    } else if (!containsElement(toggleButton, target) && target.id !== 'mobile-menu-toggle') {
       this.isOpen = false
     }
   }

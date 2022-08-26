@@ -5,7 +5,7 @@
         <chart-stat title="Status">
           <div
             v-if="reportsDataLoading"
-            class="w-full h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
+            class="w-24 h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
           ></div>
           <template v-else>
             <span
@@ -24,7 +24,7 @@
         <chart-stat title="Active Issues" :value="currentVal">
           <div
             v-if="reportsDataLoading"
-            class="w-full h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
+            class="w-24 h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
           ></div>
         </chart-stat>
       </template>
@@ -80,7 +80,9 @@
               class="text-sm text-vanilla-100 hover:bg-ink-300 gap-x-4 mb-2 h-10 px-2"
             >
               <z-table-cell class="flex-none w-14 text-left">
-                <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"></div>
+                <div
+                  class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 w-12 -mx-2"
+                ></div>
               </z-table-cell>
               <z-table-cell class="flex-none w-16 text-left sm:w-24">
                 <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"></div>

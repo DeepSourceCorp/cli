@@ -7,7 +7,12 @@
       border-class="border-ink-300"
     >
       <template #icon>
-        <z-icon :color="disabled ? 'slate' : 'vanilla-400'" icon="duration-30" />
+        <z-icon
+          class="hidden xs:block"
+          size="x-small"
+          :color="disabled ? 'slate' : 'vanilla-400'"
+          icon="calendar-clock"
+        />
       </template>
       <z-option
         v-for="(opt, key) in dateRangeOptions"

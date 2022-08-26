@@ -1,0 +1,16 @@
+query publicReportComplianceIssues($reportId: String!, $token: String, $reportKey: String!) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    complianceIssues(key: $reportKey) {
+      issueId
+      title
+      occurrence {
+        high
+        medium
+        low
+        total
+      }
+      rank
+    }
+  }
+}

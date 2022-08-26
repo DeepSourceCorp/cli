@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders OccurrenceTags with all prop options: {"selectedRepos":[]} 1`] = `
+"<div class=\\"p-4\\">
+  <div class=\\"min-h-96 space-y-3\\">
+    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a repository...\\" debouncedelay=\\"350\\" icon=\\"search\\" size=\\"small\\" backgroundcolor=\\"ink-200\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"><template></template></zinput-stub>
+    <!---->
+  </div>
+  <!---->
+</div>"
+`;

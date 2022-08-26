@@ -8,7 +8,8 @@ import {
   toWrappableString,
   stripTrailingSlash,
   escapeHtml,
-  safeRenderBackticks
+  safeRenderBackticks,
+  smartApostrophe
 } from '~/utils/string'
 
 describe('[[ Test toTitleCase ]]', () => {
@@ -214,5 +215,12 @@ describe('[[ Test toWrappableString ]]', () => {
     expect(toWrappableString(`test-"utils"-string.spec.ts`, 5, '-')).toBe(
       `test<span>/&quot;utils&quot;</span><span>/string.spec.ts</span>`
     )
+  })
+})
+
+describe('[[ Test smartApostrophe ]]', () => {
+  it('Returns string with correct apostrophe appended', () => {
+    expect(smartApostrophe('deepsource')).toBe('deepsource’s')
+    expect(smartApostrophe('secrets')).toBe('secrets’')
   })
 })

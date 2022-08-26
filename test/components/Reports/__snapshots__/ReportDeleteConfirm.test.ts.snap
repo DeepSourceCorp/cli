@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders ComplianceStats with all prop options: {"reportLabel":"Sample Report"} 1`] = `
+"<zconfirm-stub subtitle=\\"Once deleted, you won't be able to restore this report\\" closeafterprimaryaction=\\"true\\" primaryactionlabel=\\"Confirm\\" secondaryactionlabel=\\"Cancel\\" primaryactionicon=\\"check\\" primaryactiontype=\\"primary\\" showsecondaryaction=\\"true\\">
+  <div class=\\"mb-2 text-base leading-relaxed font-medium text-vanilla-100\\">
+    Are you sure you want to delete this report?
+  </div>
+  <div class=\\"text-sm leading-relaxed text-vanilla-400\\">
+    You are deleting
+    <span class=\\"font-medium text-vanilla-100\\">Sample Report</span>. Once deleted, you won’t be able to restore the report.
+  </div>
+</zconfirm-stub>"
+`;

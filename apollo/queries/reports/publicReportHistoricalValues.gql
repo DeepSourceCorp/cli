@@ -1,0 +1,15 @@
+query publicReportHistoricValues(
+  $reportId: String!
+  $token: String
+  $reportKey: String!
+  $startDate: Date!
+  $endDate: Date!
+) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    report(key: $reportKey) {
+      key
+      historicalValues(startDate: $startDate, endDate: $endDate)
+    }
+  }
+}

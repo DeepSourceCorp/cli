@@ -20,7 +20,8 @@
           :to="generateLink(stat)"
           :hint-as-tooltip="false"
           :remove-styles="true"
-          class="outline-ink-200 hover:bg-ink-300 p-3 md:p-4"
+          class="outline-ink-200 p-3 md:p-4"
+          :class="{ 'hover:bg-ink-300': linkCards }"
         >
           <template slot="title">
             <h5 class="flex items-center text-base font-medium gap-x-2 text-vanilla-100">
@@ -89,7 +90,9 @@ export default class DistributionStats extends Vue {
    * @return {string}
    */
   generateAnalyzerLink(stat: IssueDistribution): string {
-    return `${this.$generateRoute(['issues'])}?category=all&analyzer=${stat.slug}`
+    return stat.slug
+      ? `${this.$generateRoute(['issues'])}?category=all&analyzer=${stat.slug}`
+      : `${this.$generateRoute(['issues'])}?category=all`
   }
 
   /**
@@ -100,7 +103,9 @@ export default class DistributionStats extends Vue {
    * @return {string}
    */
   generateCategoryLink(stat: IssueDistribution): string {
-    return `${this.$generateRoute(['issues'])}?category=${stat.slug}`
+    return stat.slug
+      ? `${this.$generateRoute(['issues'])}?category=${stat.slug}`
+      : `${this.$generateRoute(['issues'])}`
   }
 
   /**

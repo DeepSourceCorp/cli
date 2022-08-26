@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders PublicReportSort with all prop options: {"selectedSortFilter":""} 1`] = `
+"<div class=\\"relative inline-block z-badge\\"><span class=\\"relative z-menu text-vanilla-100\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Sort\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"amount-down\\" class=\\"outline-none text-vanilla-100 focus:outline-none bg-ink-300 hover:bg-ink-200\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span>
+  <div class=\\"text-center transform z-badge-content bg-juniper top-0 inline-block text-xs px-2 text-vanilla-100 absolute translate-x-1/2 -translate-y-1/2\\" style=\\"display: none;\\"><span></span></div>
+</div>"
+`;
+
+exports[`renders PublicReportSort with all prop options: {"selectedSortFilter":"first-created"} 1`] = `
+"<div class=\\"relative inline-block z-badge\\">
+  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" class=\\"outline-none text-vanilla-100 focus:outline-none bg-ink-300 hover:bg-ink-200\\">
+    <div class=\\"flex items-center gap-x-2\\"><span class=\\"flex items-center gap-x-1\\"><zicon-stub icon=\\"first-seen\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sort by first created</span></span>
+      <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    </div>
+  </zbutton-stub>
+  <div class=\\"text-center transform z-badge-content bg-juniper w-2.5 h-2.5 top-px right-px text-vanilla-100 absolute translate-x-1/2 -translate-y-1/2 p-0 rounded-full\\"><span></span></div>
+</div>"
+`;
+
+exports[`renders PublicReportSort with all prop options: {"selectedSortFilter":"last-created"} 1`] = `
+"<div class=\\"relative inline-block z-badge\\">
+  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" class=\\"outline-none text-vanilla-100 focus:outline-none bg-ink-300 hover:bg-ink-200\\">
+    <div class=\\"flex items-center gap-x-2\\"><span class=\\"flex items-center gap-x-1\\"><zicon-stub icon=\\"last-seen\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sort by last created</span></span>
+      <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    </div>
+  </zbutton-stub>
+  <div class=\\"text-center transform z-badge-content bg-juniper w-2.5 h-2.5 top-px right-px text-vanilla-100 absolute translate-x-1/2 -translate-y-1/2 p-0 rounded-full\\"><span></span></div>
+</div>"
+`;

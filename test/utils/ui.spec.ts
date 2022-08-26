@@ -1,4 +1,4 @@
-import { generateColorFromTag, getColorShades, newShade } from '~/utils/ui'
+import { generateColorFromTag, getColorShades, newShade, containsElement } from '~/utils/ui'
 
 describe('[[ Test generateColorFromTag ]]', () => {
   it('Returns valid color for known tags', () => {
@@ -91,5 +91,32 @@ describe('[[ Test getColorShades ]]', () => {
 
   it('newShade handles wrong input', () => {
     expect(newShade('hello-world', 4)).toEqual('hello-world')
+  })
+})
+
+describe('[[ Test containsElement ]]', () => {
+  it('It checks if a HTML element contains another HTML element', () => {
+    const parent = document.createElement('div')
+    parent.innerHTML = `
+    <div id="first-child">
+      <p id="first-grand-child"></p>
+    </div>
+    <div id="second-child"></div>
+    `
+
+    document.body.append(parent)
+
+    const firstGrandChild = document.getElementById('first-grand-child') as HTMLElement
+    const firstChild = document.getElementById('first-child') as HTMLElement
+    const secondChild = document.getElementById('second-child') as HTMLElement
+
+    expect(containsElement(parent, firstChild)).toEqual(true)
+    expect(containsElement(parent, firstGrandChild)).toEqual(true)
+    expect(containsElement(parent, secondChild)).toEqual(true)
+    expect(containsElement(firstChild, firstGrandChild)).toEqual(true)
+
+    expect(containsElement(secondChild, firstGrandChild)).toEqual(false)
+    expect(containsElement(firstGrandChild, parent)).toEqual(false)
+    expect(containsElement(firstGrandChild, secondChild)).toEqual(false)
   })
 })

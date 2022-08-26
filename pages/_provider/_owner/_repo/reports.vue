@@ -1,87 +1,55 @@
 <template>
   <section class="grid grid-cols-1 lg:grid-cols-16-fr">
-    <nav
-      class="flex px-4 pt-2 overflow-x-auto border-b gap-x-8 top-24 hide-scroll border-ink-200 lg:sticky lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r lg:h-nav-sidebar"
-    >
-      <!-- Compliance Items -->
-      <p class="hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block">
-        Security
-      </p>
-      <template v-for="item in complianceItems">
-        <nuxt-link
-          :key="item.label"
-          :to="$generateRoute(item.link)"
-          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
-        >
-          <span
-            class="hidden p-2 rounded-md group-hover:text-vanilla-100 lg:block"
-            :class="
-              $route.name === `provider-owner-repo-reports-${item.pathName}`
-                ? 'bg-ink-300'
-                : 'text-vanilla-400'
-            "
-            >{{ item.label }}</span
-          >
-          <z-tab
-            :is-active="$route.name === `provider-owner-repo-reports-${item.pathName}`"
-            border-active-color="vanilla-400"
-            class="lg:hidden"
-          >
-            <span class="text-sm cursor-pointer">{{ item.label }}</span>
-          </z-tab>
-        </nuxt-link>
-      </template>
+    <reports-sidebar :level="ReportLevel.Repository" />
 
-      <!-- Insights items -->
-      <p class="hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block">
-        Insights
-      </p>
-      <template v-for="item in insightsItems">
-        <nuxt-link
-          :key="item.label"
-          :to="$generateRoute(item.link)"
-          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
-        >
-          <span
-            class="hidden p-2 rounded-md group-hover:text-vanilla-100 lg:block"
-            :class="
-              $route.name === `provider-owner-repo-reports-${item.pathName}`
-                ? 'bg-ink-300'
-                : 'text-vanilla-400'
-            "
-            >{{ item.label }}</span
-          >
-          <z-tab
-            :is-active="$route.name === `provider-owner-repo-reports-${item.pathName}`"
-            border-active-color="vanilla-400"
-            class="lg:hidden"
-          >
-            <span class="text-sm cursor-pointer">{{ item.label }}</span>
-          </z-tab>
-        </nuxt-link>
-      </template>
-    </nav>
     <div class="flex flex-col p-4 gap-y-2">
       <page-title
+        v-if="!viewingPublicReports"
         :title="reportTitle"
+        descriptionWidthClass="max-w-xl"
         class="flex-col md:flex-row gap-y-4"
-        description-width-class="max-w-xl"
       >
         <template slot="description">
           <p class="mt-2 text-sm text-vanilla-400">{{ reportDescription }}</p>
         </template>
+
+        <template slot="actions">
+          <z-button
+            icon="share"
+            label="Share"
+            size="small"
+            button-type="secondary"
+            @click="isMutateReportModalOpen = true"
+          />
+        </template>
       </page-title>
-      <nuxt-child class="mb-24 -mt-4 sm:mt-0" />
+      <nuxt-child class="mb-24" />
     </div>
+
+    <portal v-if="activeReportName !== ReportPageT.PUBLIC_REPORTS" to="modal">
+      <mutate-report-modal
+        v-if="isMutateReportModalOpen"
+        :level="ReportLevel.Repository"
+        :report-keys-old="[activeReportName]"
+        :save-loading="reportSaveLoading"
+        @close="isMutateReportModalOpen = false"
+        @create-report="createPublicReport"
+      />
+    </portal>
   </section>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { ZTab, ZButton, ZIcon, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsourcelabs/zeal'
+import { ZDivider } from '@deepsourcelabs/zeal'
 
 import { RepoPerms } from '~/types/permTypes'
 import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
+import { CreatePublicReportInput, ReportLevel } from '~/types/types'
+
+import { createPublicReport } from '@/apollo/mutations/reports/createPublicReport.gql'
+import { GraphqlMutationResponse } from '~/types/apolloTypes'
 
 /**
  * Parent page for reports UI.
@@ -93,7 +61,8 @@ import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
     ZIcon,
     ZMenu,
     ZMenuItem,
-    ZSplitButtonDropdown
+    ZSplitButtonDropdown,
+    ZDivider
   },
   layout: 'repository',
   middleware: [
@@ -114,34 +83,54 @@ import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
   }
 })
 export default class Reports extends Vue {
-  complianceItems: ReportsTabLink[] = [
-    {
-      label: 'OWASP Top 10',
-      link: ['reports', ReportPageT.OWASP_TOP_10],
-      pathName: ReportPageT.OWASP_TOP_10
-    },
-    {
-      label: 'SANS Top 25',
-      link: ['reports', ReportPageT.SANS_TOP_25],
-      pathName: ReportPageT.SANS_TOP_25
-    }
-  ]
+  isMutateReportModalOpen = false
+  reportSaveLoading = false
 
-  insightsItems: ReportsTabLink[] = [
-    {
-      label: 'Issue Distribution',
-      link: ['reports', ReportPageT.DISTRIBUTION],
-      pathName: ReportPageT.DISTRIBUTION
+  ReportLevel = ReportLevel
+  ReportPageT = ReportPageT
+
+  /**
+   * Create new public report
+   *
+   * @param newReportArgs CreatePublicReportInput
+   * @param callback () => void
+   *
+   * @return {Promise<void>}
+   */
+  async createPublicReport(
+    newReportArgs: CreatePublicReportInput,
+    close?: () => void
+  ): Promise<void> {
+    this.reportSaveLoading = true
+
+    try {
+      const response = (await this.$applyGraphqlMutation(createPublicReport, {
+        input: newReportArgs
+      })) as GraphqlMutationResponse
+
+      const newReport = response.data?.createPublicReport?.report
+
+      if (newReport?.reportId) {
+      }
+
+      if (newReport && newReport.reportId) {
+        close?.()
+        this.$toast.success('Report successfully created.')
+        window.open(`/report/${newReport.reportId}`)
+      }
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, "Can't create a report. Please contact support.")
+    } finally {
+      this.reportSaveLoading = false
     }
-  ]
+  }
 
   get activeReportName(): ReportPageT {
-    const currentRouteItem =
-      [...this.complianceItems, ...this.insightsItems].find(
-        (item) => this.$route.name === `provider-owner-repo-reports-${item.pathName}`
-      ) ?? this.complianceItems[0]
+    const currentRouteItem = Object.values(ReportPageT).find(
+      (reportKey) => this.$route.name === `provider-owner-repo-reports-${reportKey}`
+    )
 
-    return currentRouteItem.pathName
+    return currentRouteItem ?? ReportPageT.OWASP_TOP_10
   }
 
   get reportTitle(): string {
@@ -152,6 +141,10 @@ export default class Reports extends Vue {
   get reportDescription(): string {
     const metadata = ReportMeta[this.activeReportName]
     return metadata.description
+  }
+
+  get viewingPublicReports(): boolean {
+    return this.activeReportName === ReportPageT.PUBLIC_REPORTS
   }
 
   /**

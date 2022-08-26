@@ -1,0 +1,11 @@
+query publicReportBaseReport($reportId: String!, $token: String, $reportKey: String!) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    report(key: $reportKey) {
+      key
+      status
+      currentValue
+      type
+    }
+  }
+}

@@ -111,7 +111,7 @@ function toWrappableString(
 /**
  * Utility to render backtick as <code>
  *
- * @param  {string} candidate - string to transform
+ * @param  {string} unsafeCandidate - string to transform
  * @returns string
  */
 function safeRenderBackticks(unsafeCandidate: string) {
@@ -132,6 +132,19 @@ function stripTrailingSlash(path: string): string {
   return path.replace(/\/$/, '')
 }
 
+/**
+ * Utility to append apostrophe s depending on last
+ * character of the string
+ *
+ * @param {string} candidate
+ * @returns string
+ */
+function smartApostrophe(candidate: string): string {
+  const lastCharacter = candidate[candidate.length - 1]
+
+  return lastCharacter === 's' ? `${candidate}’` : `${candidate}’s`
+}
+
 export {
   toTitleCase,
   toSentenceCase,
@@ -142,5 +155,6 @@ export {
   toWrappableString,
   stripTrailingSlash,
   escapeHtml,
-  safeRenderBackticks
+  safeRenderBackticks,
+  smartApostrophe
 }

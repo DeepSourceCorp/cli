@@ -1,0 +1,28 @@
+query publicReportListRepo(
+  $name: String!
+  $owner: String!
+  $provider: VCSProviderChoices!
+  $first: Int
+  $after: String
+  $offset: Int
+  $sort: String
+  $q: String
+) {
+  repository(name: $name, owner: $owner, provider: $provider) {
+    id
+    publicReports(first: $first, after: $after, offset: $offset, sort: $sort, q: $q) {
+      totalCount
+      edges {
+        node {
+          reportId
+          label
+          views
+          createdAt
+          isRestricted
+          shareHistoricalData
+          reportKeys
+        }
+      }
+    }
+  }
+}

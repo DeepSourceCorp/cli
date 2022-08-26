@@ -1,0 +1,14 @@
+mutation createPublicReport($input: CreatePublicReportInput!) {
+  createPublicReport(input: $input) {
+    report {
+      id
+      reportId
+      label
+      views
+      createdAt
+      isRestricted
+      shareHistoricalData
+      reportKeys
+    }
+  }
+}

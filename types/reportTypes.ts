@@ -1,32 +1,169 @@
 import { DurationTypeT } from '~/utils/date'
+import { smartApostrophe } from '~/utils/string'
+import { PublicReport, ReportType } from './types'
 
 type ReportMetaProperties = {
   title: string
   description: string
   hasIssueTable: boolean
+  type?: ReportType
+  copyText: (companyName: string) => {
+    summary: string
+    intendedUse: string
+    codeHealth: string
+  }
 }
 
 export enum ReportPageT {
   OWASP_TOP_10 = 'owasp-top-10',
   SANS_TOP_25 = 'sans-top-25',
-  DISTRIBUTION = 'issue-distribution'
+  DISTRIBUTION = 'issue-distribution',
+  PUBLIC_REPORTS = 'public-reports'
 }
 
 export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   [ReportPageT.OWASP_TOP_10]: {
     title: 'OWASP Top 10',
     description: 'Overview of OWASP Top 10 security risks in your code.',
-    hasIssueTable: true
+    hasIssueTable: true,
+    type: ReportType.Compliance,
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+        <p>
+          The Open Web Application Security Project Foundation, or OWASP Foundation, is a non-profit
+          foundation dedicated to improving software security. The foundation is community-driven and
+          helps organizations build secure software through open-source tools, resources, and
+          research. The OWASP Top 10 is a recommendation framework maintained by the OWASP Foundation
+          since 2003. The list is a collection of security recommendations that helps organizations to
+          write more secure code. It is updated periodically to accommodate for the advancements and
+          developments in application security. More information on OWASP Top 10 can be found
+          <a
+            href="https://deepsource.io/guides/owasp-top-10/"
+            rel="nofollow noopener noreferrer"
+            target="_blank"
+            class="text-juniper-500 font-medium"
+            >here</a
+          >.
+        </p>
+        <p>
+          DeepSource continuously scans ${smartApostrophe(
+            companyName
+          )} source code continuously to detect violations
+          of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
+          the current, as well as a historical snapshot of the presence of such vulnerabilities in
+          ${smartApostrophe(
+            companyName
+          )} source code, limited to the repositories, tracked on DeepSource.
+        </p>`,
+        intendedUse: ` <h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+          This report can be used by the ${companyName} team to identify and remediate violations of
+          OWASP Top 10 recommendations in their source code. The report can also be used by key
+          stakeholders within the organization and interested external stakeholders to understand the
+          source code security posture of ${companyName}.
+        </p>`,
+        codeHealth: `<h1 class="text-lg text-vanilla-100 font-semibold">Continuous Code Health</h1>
+        <p>
+        DeepSource integrates with ${smartApostrophe(
+          companyName
+        )} software development workflows to provide developers
+        and key stakeholders a way to identify and fix code health issues continuously and proactively.
+        This report is dynamic. As ${companyName} team improves its source code security posture, the
+        changes will be reflected in this report.
+        </p>`
+      }
+    }
   },
   [ReportPageT.SANS_TOP_25]: {
     title: 'SANS Top 25',
     description: 'Overview of CWE/SANS Top 25 most dangerous software errors in your code.',
-    hasIssueTable: true
+    hasIssueTable: true,
+    type: ReportType.Compliance,
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+        <p>
+          The SANS Institute was founded in 1989 as a cooperative for information security thought
+          leadership. The CWE (Common Weakness Enumeration) / SANS Top 25 list is a well-known list
+          of the most common and severe errors in software that can lead to serious security
+          vulnerabilities. The list is used by organizations as a primer to ensure their source code
+          is secure.
+        </p>
+        <p>
+          DeepSource continuously scans ${companyName}’s source code continuously to detect violations
+          of SANS Top 25 recommendations and provides guidance to correct them. This report provides
+          the current, as well as a historical snapshot of the presence of such vulnerabilities in
+          ${companyName}’s source code, limited to the repositories, tracked on DeepSource.
+        </p>`,
+        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+          This report can be used by the ${companyName} team to identify and remediate violations of
+          SANS Top 25 recommendations in their source code. The report can also be used by key
+          stakeholders within the organization and interested external stakeholders to understand the
+          source code security posture of ${companyName}.
+        </p>`,
+        codeHealth: `<h1 class="text-lg text-vanilla-100 font-semibold">Continuous Code Health</h1>
+        <p>
+        DeepSource integrates with ${smartApostrophe(
+          companyName
+        )} software development workflows to provide developers
+        and key stakeholders a way to identify and fix code health issues continuously and proactively.
+        This report is dynamic. As ${companyName} team improves its source code security posture, the
+        changes will be reflected in this report.
+        </p>`
+      }
+    }
   },
   [ReportPageT.DISTRIBUTION]: {
     title: 'Issue Distribution',
     description: 'Overview of issues found across categories and Analyzers.',
-    hasIssueTable: false
+    hasIssueTable: false,
+    type: ReportType.Insight,
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+        <p>
+            DeepSource continuously scans ${smartApostrophe(
+              companyName
+            )} source code to detect code health issues and
+            provides guidance to correct them. This report provides the current and historical snapshot of code health issues in
+            ${smartApostrophe(
+              companyName
+            )} source code, limited to the repositories tracked on DeepSource. The code health
+            issue detected by DeepSource includes, but is not limited to, these categories: bug risks, anti-patterns, style
+            violations, performance issues, code coverage issues, and so on.
+        </p>
+        `,
+        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+            This report can be used by the ${companyName} team to identify and remediate code health issues in their code base
+            and make it more maintainable. The report can also be used by key internal and external stakeholders to understand
+            the code quality and maintainability of ${companyName}.
+        </p>`,
+        codeHealth: `<h1 class="text-lg text-vanilla-100 font-semibold">Continuous Code Health</h1>
+        <p>
+        DeepSource integrates with ${smartApostrophe(
+          companyName
+        )} software development workflows to provide developers
+        and key stakeholders a way to identify and fix code health issues continuously and proactively.
+        This report is dynamic. As ${companyName} team improves its source code security posture, the
+        changes will be reflected in this report.
+        </p>`
+      }
+    }
+  },
+  [ReportPageT.PUBLIC_REPORTS]: {
+    title: 'Public Reports',
+    description: '',
+    hasIssueTable: false,
+    copyText: () => {
+      return {
+        codeHealth: ``,
+        summary: ``,
+        intendedUse: ``
+      }
+    }
   }
 }
 
@@ -35,13 +172,6 @@ export type ComplianceIssueOccurences = {
   medium?: number
   low?: number
   totalValue: number
-}
-
-export type ComplianceIssue = {
-  issueID: string
-  title: string
-  occurences: ComplianceIssueOccurences
-  rank?: number
 }
 
 export type DateRangeOptionT = {
@@ -69,4 +199,23 @@ export interface ReportsTabLink {
   label: string
   link: string[]
   pathName: ReportPageT
+}
+
+export enum PublicReportErrors {
+  AUTH_REQUIRED = 'auth-required',
+  INVALID_PASSWORD = 'invalid-password',
+  INVALID_TOKEN = 'invalid-token',
+  DOES_NOT_EXIST = 'does-not-exist'
+}
+
+export type ReportSortT = 'first-created' | 'last-created'
+
+export type ReportToEditT = {
+  reportId: PublicReport['reportId']
+  isRestricted: PublicReport['isRestricted']
+  reportKeys?: PublicReport['reportKeys']
+  shareHistoricalData: PublicReport['shareHistoricalData']
+  label: PublicReport['label']
+  source?: PublicReport['source']
+  sourcedRepositories?: PublicReport['sourcedRepositories']
 }

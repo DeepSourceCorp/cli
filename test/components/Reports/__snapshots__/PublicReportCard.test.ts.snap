@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders PublicReportCard with all prop options: {"views":0,"isRestricted":false} 1`] = `
+"<nuxt-link to=\\"/report/eaa4db3d-1334-4573-971a-1ac4235d494d\\" class=\\"block group border rounded-lg border-ink-200 bg-ink-400 hover:bg-ink-300\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+  <!---->
+  <div class=\\"flex flex-wrap flex-1 w-full\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub> <span>Sample report</span></span></div>
+      <p class=\\"flex items-center gap-x-4 text-sm\\">
+        <metadataitem-stub icon=\\"eye\\">
+          0 views
+        </metadataitem-stub>
+        <metadataitem-stub icon=\\"clock\\">
+          Created on Aug 8, 2022
+        </metadataitem-stub>
+      </p>
+    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5 sm:border-l border-ink-300 group-hover:border-ink-200\\">
+      <div class=\\"flex items-center justify-around h-full\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400 opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"edit\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+        <zbutton-stub color=\\"\\" iconcolor=\\"cherry opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;
+
+exports[`renders PublicReportCard with all prop options: {"views":0,"isRestricted":true} 1`] = `
+"<nuxt-link to=\\"/report/eaa4db3d-1334-4573-971a-1ac4235d494d\\" class=\\"block group border rounded-lg border-ink-200 bg-ink-400 hover:bg-ink-300\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+  <!---->
+  <div class=\\"flex flex-wrap flex-1 w-full\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub> <span>Sample report</span></span></div>
+      <p class=\\"flex items-center gap-x-4 text-sm\\">
+        <metadataitem-stub icon=\\"eye\\">
+          0 views
+        </metadataitem-stub>
+        <metadataitem-stub icon=\\"clock\\">
+          Created on Aug 8, 2022
+        </metadataitem-stub>
+      </p>
+    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5 sm:border-l border-ink-300 group-hover:border-ink-200\\">
+      <div class=\\"flex items-center justify-around h-full\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400 opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"edit\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+        <zbutton-stub color=\\"\\" iconcolor=\\"cherry opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;
+
+exports[`renders PublicReportCard with all prop options: {"views":1,"isRestricted":false} 1`] = `
+"<nuxt-link to=\\"/report/eaa4db3d-1334-4573-971a-1ac4235d494d\\" class=\\"block group border rounded-lg border-ink-200 bg-ink-400 hover:bg-ink-300\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+  <!---->
+  <div class=\\"flex flex-wrap flex-1 w-full\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub> <span>Sample report</span></span></div>
+      <p class=\\"flex items-center gap-x-4 text-sm\\">
+        <metadataitem-stub icon=\\"eye\\">
+          1 view
+        </metadataitem-stub>
+        <metadataitem-stub icon=\\"clock\\">
+          Created on Aug 8, 2022
+        </metadataitem-stub>
+      </p>
+    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5 sm:border-l border-ink-300 group-hover:border-ink-200\\">
+      <div class=\\"flex items-center justify-around h-full\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400 opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"edit\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+        <zbutton-stub color=\\"\\" iconcolor=\\"cherry opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;
+
+exports[`renders PublicReportCard with all prop options: {"views":1,"isRestricted":true} 1`] = `
+"<nuxt-link to=\\"/report/eaa4db3d-1334-4573-971a-1ac4235d494d\\" class=\\"block group border rounded-lg border-ink-200 bg-ink-400 hover:bg-ink-300\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+  <!---->
+  <div class=\\"flex flex-wrap flex-1 w-full\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub> <span>Sample report</span></span></div>
+      <p class=\\"flex items-center gap-x-4 text-sm\\">
+        <metadataitem-stub icon=\\"eye\\">
+          1 view
+        </metadataitem-stub>
+        <metadataitem-stub icon=\\"clock\\">
+          Created on Aug 8, 2022
+        </metadataitem-stub>
+      </p>
+    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5 sm:border-l border-ink-300 group-hover:border-ink-200\\">
+      <div class=\\"flex items-center justify-around h-full\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400 opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"edit\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+        <zbutton-stub color=\\"\\" iconcolor=\\"cherry opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;
+
+exports[`renders PublicReportCard with all prop options: {"views":45,"isRestricted":false} 1`] = `
+"<nuxt-link to=\\"/report/eaa4db3d-1334-4573-971a-1ac4235d494d\\" class=\\"block group border rounded-lg border-ink-200 bg-ink-400 hover:bg-ink-300\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+  <!---->
+  <div class=\\"flex flex-wrap flex-1 w-full\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub> <span>Sample report</span></span></div>
+      <p class=\\"flex items-center gap-x-4 text-sm\\">
+        <metadataitem-stub icon=\\"eye\\">
+          45 views
+        </metadataitem-stub>
+        <metadataitem-stub icon=\\"clock\\">
+          Created on Aug 8, 2022
+        </metadataitem-stub>
+      </p>
+    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5 sm:border-l border-ink-300 group-hover:border-ink-200\\">
+      <div class=\\"flex items-center justify-around h-full\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400 opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"edit\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+        <zbutton-stub color=\\"\\" iconcolor=\\"cherry opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;
+
+exports[`renders PublicReportCard with all prop options: {"views":45,"isRestricted":true} 1`] = `
+"<nuxt-link to=\\"/report/eaa4db3d-1334-4573-971a-1ac4235d494d\\" class=\\"block group border rounded-lg border-ink-200 bg-ink-400 hover:bg-ink-300\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">
+  <!---->
+  <div class=\\"flex flex-wrap flex-1 w-full\\">
+    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub> <span>Sample report</span></span></div>
+      <p class=\\"flex items-center gap-x-4 text-sm\\">
+        <metadataitem-stub icon=\\"eye\\">
+          45 views
+        </metadataitem-stub>
+        <metadataitem-stub icon=\\"clock\\">
+          Created on Aug 8, 2022
+        </metadataitem-stub>
+      </p>
+    </div>
+    <div class=\\"hidden w-full md:block md:w-1/5 sm:border-l border-ink-300 group-hover:border-ink-200\\">
+      <div class=\\"flex items-center justify-around h-full\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400 opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"edit\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+        <zbutton-stub color=\\"\\" iconcolor=\\"cherry opacity-75\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"trash-2\\" data-original-title=\\"null\\" class=\\" has-tooltip\\"></zbutton-stub>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;

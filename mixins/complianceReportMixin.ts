@@ -8,11 +8,7 @@ import ReportMixin from './reportMixin'
 @Component({})
 export default class ComplianceReportMixin extends mixins(ReportMixin) {
   get shouldChartBeShown(): boolean {
-    if (this.historicalValuesLoading) return false
-    if (this.labels.length < 2) return false
-    if (this.datasets.length === 0) return false
-
-    return true
+    return !(this.historicalValuesLoading || this.labels.length < 2 || this.datasets.length === 0)
   }
 
   get compliancePassed(): boolean {

@@ -3,12 +3,16 @@
     class="grid grid-cols-2 py-4 border rounded-lg md:grid-cols-5 gap-y-4 border-ink-200 md:pr-5"
   >
     <div class="flex flex-col items-center gap-y-2">
-      <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">Current</h3>
-      <div v-if="loading" class="w-6 h-8 mb-px rounded-sm bg-ink-300 animate-pulse"></div>
-
-      <p v-else class="text-xl font-semibold text-vanilla-100">
-        {{ shortenLargeNumber(currentVal) }}
-      </p>
+      <template v-if="loading">
+        <div class="h-4 w-24 mb-0.5 bg-ink-300 animate-pulse rounded-sm"></div>
+        <div class="w-6 h-8 mb-px rounded-sm bg-ink-300 animate-pulse"></div>
+      </template>
+      <template v-else>
+        <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">Current</h3>
+        <p class="text-xl font-semibold text-vanilla-100">
+          {{ shortenLargeNumber(currentVal) }}
+        </p>
+      </template>
     </div>
     <template v-if="loading">
       <div v-for="index in 4" :key="index" class="flex flex-col items-center gap-y-2">
@@ -24,13 +28,13 @@
         <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
           {{ stat.statLabel }}
         </h3>
-        <div class="flex flex-col justify-center items-center gap-y-0.5 h-full">
-          <span
-            v-if="stat.statValue === null"
-            class="text-base font-medium tracking-wider text-slate"
-          >
+        <div
+          class="flex flex-col items-center gap-y-0.5 h-full"
+          :class="{ 'justify-center': stat.statValue }"
+        >
+          <p v-if="stat.statValue === null" class="text-base font-medium tracking-wider text-slate">
             N/A
-          </span>
+          </p>
           <p v-else class="text-xl font-semibold text-vanilla-100">
             {{ shortenLargeNumber(stat.statValue) }}
           </p>

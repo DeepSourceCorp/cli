@@ -58,6 +58,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon } from '@deepsourcelabs/zeal'
+import { containsElement } from '~/utils/ui'
 
 @Component({
   components: {
@@ -194,20 +195,6 @@ export default class SidebarMenu extends Vue {
   }
 
   /**
-   * Check if a element is a parent of the other
-   *
-   * @param {HTMLElement} parentCandidate
-   * @param {HTMLElement} target
-   *
-   * @return {boolean}
-   */
-  containsElement(parentCandidate: HTMLElement, target: HTMLElement): boolean {
-    return Boolean(
-      parentCandidate && (target === parentCandidate || parentCandidate.contains(target))
-    )
-  }
-
-  /**
    * Close the sidebar
    *
    * @param {Event} event
@@ -220,10 +207,7 @@ export default class SidebarMenu extends Vue {
       const toggleButton = document.getElementById('mobile-menu-toggle')
       if (!toggleButton) {
         this.toggleClose()
-      } else if (
-        !this.containsElement(toggleButton, target) &&
-        target.id !== 'mobile-menu-toggle'
-      ) {
+      } else if (!containsElement(toggleButton, target) && target.id !== 'mobile-menu-toggle') {
         this.toggleClose()
       }
     }

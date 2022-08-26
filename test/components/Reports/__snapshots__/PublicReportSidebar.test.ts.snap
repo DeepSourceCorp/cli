@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop options: {"ownerLogin":"deepsourcelabs","ownerLogo":"https://static.deepsource.io/dashboard/images/empty-avatar.svg","reports":["owasp-top-10","sans-top-25","issue-distribution"],"repositoryList":[{"id":"UmVwb3NpdG9yeTp6ZXBqZWI=","name":"demo-python","isPrivate":false},{"id":"UmVwb3NpdG9yeTp6dmpleXo=","name":"marvin-docker","isPrivate":true},{"id":"UmVwb3NpdG9yeTp6cXdwZ3o=","name":"bob-cli","isPrivate":true},{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}]} 1`] = `
+"<aside data-testid=\\"public-report-sidebar\\" class=\\"fixed top-0 z-50 flex-shrink-0 w-64 h-screen px-6 py-6 overflow-y-auto duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-ink-200 lg:border-none -left-full\\" data-outside-click-index=\\"3\\">
+  <div class=\\"space-y-4\\">
+    <div class=\\"w-15 p-2.5 bg-ink-200 rounded-sm\\"><img src=\\"https://static.deepsource.io/dashboard/images/empty-avatar.svg\\" alt=\\"deepsourcelabs logo\\" width=\\"42\\"></div>
+    <h1 class=\\"text-vanilla-200 text-1.5xl font-semibold break-words\\">
+      deepsourcelabs
+    </h1>
+  </div>
+  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">Reports</span> <a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      OWASP Top 10
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      SANS Top 25
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      Issue Distribution
+    </a></div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"flex flex-col text-sm font-semibold gap-y-3 text-slate\\"><a href=\\"#summary\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Summary
+    </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Intended use
+    </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — About DeepSource
+    </a></div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">
+        Repositories
+      </span>
+    <div class=\\"flex flex-wrap gap-2\\">
+      <ztag-stub state=\\"default\\" iconleft=\\"globe\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+            demo-python
+          </span></ztag-stub>
+      <ztag-stub state=\\"default\\" iconleft=\\"lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+            marvin-docker
+          </span></ztag-stub>
+      <ztag-stub state=\\"default\\" iconleft=\\"lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+            bob-cli
+          </span></ztag-stub>
+      <ztag-stub state=\\"default\\" iconleft=\\"lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+            asgard
+          </span></ztag-stub>
+    </div>
+  </div>
+</aside>"
+`;
+
+exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop options: {"ownerLogin":"deepsourcelabs","ownerLogo":"https://static.deepsource.io/dashboard/images/empty-avatar.svg","reports":["owasp-top-10","sans-top-25","issue-distribution"],"repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}]} 1`] = `
+"<aside data-testid=\\"public-report-sidebar\\" class=\\"fixed top-0 z-50 flex-shrink-0 w-64 h-screen px-6 py-6 overflow-y-auto duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-ink-200 lg:border-none -left-full\\" data-outside-click-index=\\"2\\">
+  <div class=\\"space-y-4\\">
+    <div class=\\"w-15 p-2.5 bg-ink-200 rounded-sm\\"><img src=\\"https://static.deepsource.io/dashboard/images/empty-avatar.svg\\" alt=\\"deepsourcelabs logo\\" width=\\"42\\"></div>
+    <h1 class=\\"text-vanilla-200 text-1.5xl font-semibold break-words\\">
+      deepsourcelabs
+    </h1>
+  </div>
+  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">Reports</span> <a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      OWASP Top 10
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      SANS Top 25
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      Issue Distribution
+    </a></div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"flex flex-col text-sm font-semibold gap-y-3 text-slate\\"><a href=\\"#summary\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Summary
+    </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Intended use
+    </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — About DeepSource
+    </a></div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">
+        Repository
+      </span>
+    <div class=\\"flex flex-wrap gap-2\\">
+      <ztag-stub state=\\"default\\" iconleft=\\"lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+            asgard
+          </span></ztag-stub>
+    </div>
+  </div>
+</aside>"
+`;
+
+exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop options: {"ownerLogin":"deepsourcelabs","ownerLogo":"https://static.deepsource.io/dashboard/images/empty-avatar.svg","reports":["owasp-top-10","sans-top-25","issue-distribution"],"repositoryList":null} 1`] = `
+"<aside data-testid=\\"public-report-sidebar\\" class=\\"fixed top-0 z-50 flex-shrink-0 w-64 h-screen px-6 py-6 overflow-y-auto duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-ink-200 lg:border-none -left-full\\" data-outside-click-index=\\"0\\">
+  <div class=\\"space-y-4\\">
+    <div class=\\"w-15 p-2.5 bg-ink-200 rounded-sm\\"><img src=\\"https://static.deepsource.io/dashboard/images/empty-avatar.svg\\" alt=\\"deepsourcelabs logo\\" width=\\"42\\"></div>
+    <h1 class=\\"text-vanilla-200 text-1.5xl font-semibold break-words\\">
+      deepsourcelabs
+    </h1>
+  </div>
+  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">Reports</span> <a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      OWASP Top 10
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      SANS Top 25
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      Issue Distribution
+    </a></div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"flex flex-col text-sm font-semibold gap-y-3 text-slate\\"><a href=\\"#summary\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Summary
+    </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Intended use
+    </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — About DeepSource
+    </a></div>
+  <!---->
+</aside>"
+`;
+
+exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop options: {"ownerLogin":"deepsourcelabs","ownerLogo":"https://static.deepsource.io/dashboard/images/empty-avatar.svg","reports":["owasp-top-10","sans-top-25","issue-distribution"]} 1`] = `
+"<aside data-testid=\\"public-report-sidebar\\" class=\\"fixed top-0 z-50 flex-shrink-0 w-64 h-screen px-6 py-6 overflow-y-auto duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-ink-200 lg:border-none -left-full\\" data-outside-click-index=\\"1\\">
+  <div class=\\"space-y-4\\">
+    <div class=\\"w-15 p-2.5 bg-ink-200 rounded-sm\\"><img src=\\"https://static.deepsource.io/dashboard/images/empty-avatar.svg\\" alt=\\"deepsourcelabs logo\\" width=\\"42\\"></div>
+    <h1 class=\\"text-vanilla-200 text-1.5xl font-semibold break-words\\">
+      deepsourcelabs
+    </h1>
+  </div>
+  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">Reports</span> <a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      OWASP Top 10
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      SANS Top 25
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+      Issue Distribution
+    </a></div>
+  <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
+  <div class=\\"flex flex-col text-sm font-semibold gap-y-3 text-slate\\"><a href=\\"#summary\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Summary
+    </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Intended use
+    </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — About DeepSource
+    </a></div>
+  <!---->
+</aside>"
+`;
