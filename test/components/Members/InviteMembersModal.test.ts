@@ -27,7 +27,7 @@ interface InviteMembersModalInterface {
   // Methods exposed by the component
   areEmailsInvalid: () => boolean
   addMore: () => void
-  open: () => void
+  openInviteModal: () => void
   close: () => void
   resetInviteLink: () => Promise<void>
   sendInvite: () => Promise<void>
@@ -218,21 +218,21 @@ describe('[[ InviteMembersModal ]]', () => {
     expect(instance.areEmailsInvalid()).toBe(false)
   })
 
-  test('`validEmail` returns `true` for a valid email', async () => {
+  test('`validEmail` returns `true` for a valid email', () => {
     const instance = getInstance()
 
     // Assertion
     expect(instance.validEmail('test@gmail.com')).toBe(true)
   })
 
-  test('`validEmail` returns `false` for an invalid email', async () => {
+  test('`validEmail` returns `false` for an invalid email', () => {
     const instance = getInstance()
 
     // Assertion
     expect(instance.validEmail('test')).toBe(false)
   })
 
-  test('`validEmail` returns `false` for an empty string', async () => {
+  test('`validEmail` returns `false` for an empty string', () => {
     const instance = getInstance()
 
     // Assertion
@@ -283,7 +283,7 @@ describe('[[ InviteMembersModal ]]', () => {
     expect(mocks.$toast.danger).toBeCalled()
   })
 
-  test('`addMore` method appends to the members invite list', async () => {
+  test('`addMore` method appends to the members invite list', () => {
     const instance = getInstance()
 
     // Simulate the assignment happening in the fetch hook
@@ -309,7 +309,7 @@ describe('[[ InviteMembersModal ]]', () => {
     const instance = getInstance()
 
     // Invoke the `open` method
-    instance.open()
+    instance.openInviteModal()
 
     // Assertion
     expect(instance.showModal).toBe(true)

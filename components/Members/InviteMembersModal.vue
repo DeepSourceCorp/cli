@@ -1,7 +1,9 @@
 <template>
   <div>
-    <slot :open="open" name="trigger">
-      <z-button size="small" icon="user-plus" @click="open"> Invite new member </z-button>
+    <slot :open="openInviteModal" name="trigger">
+      <z-button size="small" icon="user-plus" @click="openInviteModal">
+        Invite new member
+      </z-button>
     </slot>
 
     <portal to="modal">
@@ -108,6 +110,11 @@
           </div>
         </div>
       </z-modal>
+      <invite-members-success-modal
+        v-if="showSuccessModal"
+        @invite-more="openInviteModal"
+        @close="showSuccessModal = false"
+      />
     </portal>
   </div>
 </template>
@@ -185,6 +192,7 @@ const ROLES = [
 export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   showModal = false
   membersToInvite: member[] = []
+  showSuccessModal = false
   roles = ROLES
 
   /**
@@ -286,7 +294,7 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
         ...refetchArgs
       })
       this.membersToInvite = this.initialMembersToInvites
-
+      this.showSuccessModal = true
       this.$emit('inviteSuccess')
       this.close()
     } catch (e) {
@@ -315,7 +323,9 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
    *
    * @returns{void}
    */
-  open(): void {
+  openInviteModal(): void {
+    this.membersToInvite = this.initialMembersToInvites
+    this.showSuccessModal = false
     this.showModal = true
   }
 

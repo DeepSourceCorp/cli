@@ -2,7 +2,9 @@
 
 exports[`[[ InviteMembersModal ]] renders invite members modal with the trigger button 1`] = `
 "<div>
-  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"user-plus\\"> Invite new member </zbutton-stub>
+  <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"user-plus\\">
+    Invite new member
+  </zbutton-stub>
   <portal-stub to=\\"modal\\">
     <zmodal-stub title=\\"Invite new members\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactionlabel=\\"\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
       <div class=\\"p-4 space-y-4 text-sm font-normal\\">
@@ -41,6 +43,7 @@ exports[`[[ InviteMembersModal ]] renders invite members modal with the trigger 
         </div>
       </div>
     </zmodal-stub>
+    <!---->
   </portal-stub>
 </div>"
 `;

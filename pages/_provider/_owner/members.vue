@@ -26,22 +26,6 @@
         <div v-if="pageHeading" class="flex justify-between">
           <h2 class="text-lg font-medium">{{ pageHeading }}</h2>
           <invite-members-modal @inviteSuccess="inviteSuccess" />
-          <portal to="modal">
-            <z-modal
-              v-if="showSuccessModal"
-              @onClose="showSuccessModal = false"
-              @primaryAction="showSuccessModal = false"
-              title="Invitation Sent"
-            >
-              <div class="p-4 space-y-4 border-b border-ink-200">
-                <div class="text-5xl text-center">📫</div>
-                <p class="max-w-sm mx-auto text-xs text-center text-vanilla-400">
-                  We've sent an email to your team members, they can create an account using the URL
-                  in that email and join your team
-                </p>
-              </div>
-            </z-modal>
-          </portal>
         </div>
         <nuxt-child></nuxt-child>
       </div>
@@ -68,8 +52,7 @@ import TeamDetailMixin from '@/mixins/teamDetailMixin'
   layout: 'dashboard'
 })
 export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) {
-  private showInviteModal = false
-  private showSuccessModal = false
+  showInviteModal = false
 
   async fetch(): Promise<void> {
     const { owner, provider } = this.$route.params
@@ -104,8 +87,6 @@ export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) 
     const { owner: login, provider } = this.$route.params
     const args = { login, provider, refetch: true }
     this.fetchSeatsInfo(args)
-
-    this.showSuccessModal = true
   }
 
   get pendingInvitesCount(): number {

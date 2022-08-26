@@ -33,10 +33,7 @@
           </h5>
           <template v-if="!getStatus(step)">
             <p v-if="step.description" class="text-sm text-vanilla-400">{{ step.description }}</p>
-            <invite-members-modal
-              v-if="step.shortcode === 'invite-team'"
-              @inviteSuccess="inviteSuccess"
-            >
+            <invite-members-modal v-if="step.shortcode === 'invite-team'" @inviteSuccess="refetch">
               <template v-slot:trigger="{ open }">
                 <z-button :icon="step.icon" button-type="secondary" size="small" @click="open">{{
                   step.actionLabel
@@ -74,22 +71,6 @@
         }
       "
     />
-    <portal to="modal">
-      <z-modal
-        v-if="showInviteSuccessModal"
-        @onClose="showInviteSuccessModal = false"
-        @primaryAction="showInviteSuccessModal = false"
-        title="Invitation Sent"
-      >
-        <div class="p-4 space-y-4 border-b border-ink-200">
-          <div class="text-5xl text-center">📫</div>
-          <p class="max-w-sm mx-auto text-xs text-center text-vanilla-400">
-            We've sent an email to your team members, they can create an account using the URL in
-            that email and join your team
-          </p>
-        </div>
-      </z-modal>
-    </portal>
   </div>
 </template>
 
@@ -100,6 +81,7 @@ import { ZButton, ZIcon, ZModal } from '@deepsourcelabs/zeal'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import { AddRepoModal } from '@/components/AddRepo'
 import InstallAutofixModal from '@/components/Autofix/Modals/InstallAutofixModal.vue'
+import { InviteMembersModal } from '@/components/Members'
 
 interface SetupStep {
   completed: boolean
@@ -116,6 +98,7 @@ interface SetupStep {
     ZIcon,
     ZModal,
     AddRepoModal,
+    InviteMembersModal,
     InstallAutofixModal
   }
 })
@@ -140,8 +123,6 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
 
   showAddRepoModal = false
   showInstallAutofixModal = false
-  showInviteMembersModal = false
-  showInviteSuccessModal = false
 
   activateRepo() {
     this.showAddRepoModal = true
@@ -149,15 +130,6 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
 
   installAutofix() {
     this.showInstallAutofixModal = true
-  }
-
-  inviteMembers() {
-    this.showInviteMembersModal = true
-  }
-
-  inviteSuccess() {
-    this.refetch()
-    this.showInviteSuccessModal = true
   }
 
   setupOptions: Record<string, unknown> = {
@@ -172,7 +144,6 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
       icon: 'autofix'
     },
     'invite-team': {
-      action: this.inviteMembers,
       actionLabel: 'Invite team',
       icon: 'user-plus'
     },
@@ -190,10 +161,6 @@ export default class AccountSetupCard extends mixins(OwnerDetailMixin) {
         this.setupOptions[step.shortcode]
       ) as SetupStep
     })
-  }
-
-  get activeIndex(): number {
-    return this.steps.findIndex((step) => step.completed) + 1
   }
 
   getStatus(step: SetupStep): boolean {

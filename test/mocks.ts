@@ -190,6 +190,35 @@ export const storeModulesGenerator = (overrides = {}) => {
           loggedIn: true
         }
       },
+      'team/detail': {
+        namespaced: true,
+        state: {
+          team: {
+            id: 'VGVhbTpxemxyeHo=',
+            login: 'deepsourcelabs',
+            invitationUrl: 'https://deepsource.icu/invitation/5cnHJHRUdbbpts2ZeiBa-20oabC_W_/',
+            invites: {
+              totalCount: 1,
+              edges: [
+                {
+                  node: {
+                    email: 'test@test.com',
+                    createdAt: '2022-05-25T07:26:58.330500+00:00',
+                    role: 'CONTRIBUTOR'
+                  }
+                },
+                {
+                  node: {
+                    email: 'test2@test.com',
+                    createdAt: '2022-05-25T07:28:33.183971+00:00',
+                    role: 'ADMIN'
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
       'owner/detail': {
         namespaced: true,
         state: {
@@ -200,27 +229,27 @@ export const storeModulesGenerator = (overrides = {}) => {
             features: [],
             accountSetupStatus: [
               {
-                completed: true,
+                completed: false,
                 shortcode: 'activate-repository',
                 display_name: 'Activate a repository',
                 description:
                   'This will enable continuous analysis on your repository on every commit and pull-request'
               },
               {
-                completed: true,
+                completed: false,
                 shortcode: 'install-autofix',
                 display_name: 'Start using Autofix',
                 description:
                   'Fix hundreds of issues in your code in a couple of clicks, automatically.'
               },
               {
-                completed: true,
+                completed: false,
                 shortcode: 'invite-team',
                 display_name: 'Invite your team',
                 description: 'DeepSource is better with your teammates. Ask them to join the party!'
               },
               {
-                completed: true,
+                completed: false,
                 shortcode: 'configure-transformers',
                 display_name: 'Start using Transformers',
                 description: "Put your code-formatting on complete autopilot. It's magical!"
