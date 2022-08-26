@@ -44,11 +44,11 @@
             :can-create-autofix="canCreateAutofix"
           >
             <template #controls>
-              <div class="flex flex-col gap-y-4 pt-3 md:relative">
+              <div class="flex flex-col pt-3 gap-y-4 md:relative">
                 <!-- shadow effect -->
                 <div
                   v-if="isScrolled"
-                  class="hidden md:block absolute w-full bg-gradient-to-b from-ink-400 via-ink-400 to-transparent pointer-events-none"
+                  class="absolute hidden w-full pointer-events-none md:block bg-gradient-to-b from-ink-400 via-ink-400 to-transparent"
                   :class="[showAutofixBar ? 'h-48' : 'h-20']"
                 ></div>
                 <run-autofix-bar
@@ -129,7 +129,7 @@
                   <template #header>
                     <div
                       v-if="isMetricAggregate(stat)"
-                      class="w-full flex items-center justify-between"
+                      class="flex items-center justify-between w-full"
                     >
                       <div class="flex items-center gap-x-1">
                         <z-icon icon="aggregate" class="flex-shrink-0" />
@@ -184,7 +184,7 @@
                 spacing-class="p-6"
               >
                 <template #title>
-                  <h1 class="text-sm text-center text-vanilla-400 mt-1">
+                  <h1 class="mt-1 text-sm text-center text-vanilla-400">
                     No metrics captured for this check
                   </h1>
                 </template>
@@ -214,7 +214,7 @@
                 <template #header>
                   <div
                     v-if="isMetricAggregate(stat)"
-                    class="w-full flex items-center justify-between"
+                    class="flex items-center justify-between w-full"
                   >
                     <div class="flex items-center gap-x-1">
                       <z-icon icon="aggregate" class="flex-shrink-0" />
@@ -275,7 +275,7 @@
 
         <div class="flex flex-col p-2 gap-y-3">
           <!-- Controls -->
-          <div class="flex w-full h-11 items-center space-x-4">
+          <div class="flex items-center w-full space-x-4 h-11">
             <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
             <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
             <div class="flex-grow h-8 rounded-md bg-ink-300 animate-pulse"></div>
@@ -641,7 +641,7 @@ export default class AnalyzerDetails extends mixins(
    * @return {void}
    */
   updateSearch(val: string): void {
-    val ? this.addFilter('q', val) : this.removeFilter('q')
+    val ? this.addFilters({ q: val }) : this.removeFilter('q')
   }
 
   get allowAutofix(): boolean {

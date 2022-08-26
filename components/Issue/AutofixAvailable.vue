@@ -45,7 +45,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
   }
 })
 export default class AutofixAvailable extends mixins(RepoDetailMixin) {
-  @ModelSync('autofixAvailable', 'toggleAutofix', { type: String, default: false })
+  @ModelSync('autofixAvailable', 'toggleAutofix', { type: Boolean, default: false })
   readonly modelValue: boolean
 
   get autofixableIssuesCount(): number {

@@ -114,7 +114,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   public async updatePage(pageNumber: number): Promise<void> {
     this.currentPage = pageNumber
     if (pageNumber !== 1) {
-      this.addFilter('page', pageNumber)
+      this.addFilters({ page: pageNumber })
     }
     await this.fetchRuns(false)
   }

@@ -124,7 +124,7 @@ export default class IssuesDetails extends mixins(
   }
 
   public async updatePage(pageNumber: number): Promise<void> {
-    this.addFilter('page', pageNumber)
+    this.addFilters({ page: pageNumber })
     await this.fetchChildren()
   }
 
@@ -146,8 +146,10 @@ export default class IssuesDetails extends mixins(
 
   triggerFilterUpdate(params: Record<string, string | number | null>) {
     // reset current page to 1 whenever any filter applied
-    params['page'] = 1
-    this.addFilters(params)
+    this.addFilters({
+      ...params,
+      page: 1
+    })
   }
 
   loadIgnoredIssues(): void {

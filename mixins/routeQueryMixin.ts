@@ -1,74 +1,100 @@
-import { Component, Vue, Watch } from 'nuxt-property-decorator'
+import { Component, Vue } from 'nuxt-property-decorator'
 import { Location } from 'vue-router'
+
+export type RouteParamValueT = string | number | boolean | undefined | null
+export type RouteQueryParamsT = Record<string, RouteParamValueT>
+
+/**
+ * Unmarshall a string into a number or boolean based on certain heuristics
+ *
+ * @param {string} value
+ *
+ * @return {string | number | boolean}
+ */
+function unmarshall(value: string): string | number | boolean {
+  if (Number.isFinite(Number(value))) {
+    return Number(value)
+  }
+  if (value === 'false') return false
+  if (value === 'true') return true
+
+  return value
+}
 
 @Component
 export default class RouteQueryMixin extends Vue {
-  public queryParams: Record<string, unknown> = {}
+  public get queryParams(): RouteQueryParamsT {
+    const { query } = this.$route
+    const parsedQuery: RouteQueryParamsT = {}
 
-  // created(): void {
-  //   this.queryParams = Object.assign(this.queryParams, this.$route.query)
-  // }
-
-  addFilter(key: string, value: string | number | null): void {
-    if (value) {
-      this.queryParams[key] = value
-      this.replaceRoute()
+    // Why Object.keys ?
+    // Looping over objects with a for in loop will include
+    // properties that are inherited through the prototype chain.
+    for (const key of Object.keys(query)) {
+      parsedQuery[key] = unmarshall(String(query[key]))
     }
+
+    return parsedQuery
   }
 
-  addFilters(newParams: Record<string, string | number | null>): void {
-    this.queryParams = Object.assign(this.queryParams, newParams)
-    this.replaceRoute()
-  }
-
-  removeFilter(key: string): void {
-    delete this.queryParams[key]
-    this.replaceRoute()
-  }
-
-  removeFilters(keys: string[]): void {
-    keys.forEach((key) => {
-      delete this.queryParams[key]
-    })
-    this.replaceRoute()
-  }
-
-  emptyFilters(): void {
-    this.queryParams = {}
-    this.replaceRoute()
-  }
-
-  replaceFilters(newQueryParams: Record<string, string | number>): void {
-    this.queryParams = newQueryParams
-    this.replaceRoute()
-  }
-
-  // Callback for route replace
-  refetchAfterRouteChange(): void {
-    this.$fetch()
-  }
-
-  @Watch('queryParams', { deep: true, immediate: false })
-  replaceRoute(): void {
-    // don't run on server
+  public set queryParams(params: RouteQueryParamsT) {
     if (process.server) {
       return
     }
 
     // remove nullish values
-    Object.keys(this.queryParams).forEach(
-      (k) => this.queryParams[k] === null && delete this.queryParams[k]
+    Object.keys(params).forEach(
+      // cast this as an array of unknowns, becuase this is a well
+      // defined array and we cannot search a string in it
+      (k) => ([null, undefined, ''] as unknown[]).includes(params[k]) && delete params[k]
     )
 
-    this.$nextTick(async () => {
-      try {
-        await this.$nuxt.$router.replace({ query: { ...this.queryParams } as Location['query'] })
-        this.refetchAfterRouteChange()
-      } catch (e) {
-        if ((e as Error).name === 'NavigationDuplicated') {
-          return
-        }
-      }
-    })
+    this.setRouteQueryParams(params as Location['query'])
+  }
+
+  /**
+   * Replace the query and trigger a fetch after the route replace has finished
+   *
+   * @param {Location['query']} query
+   *
+   * @return {void}
+   */
+  private async setRouteQueryParams(query: Location['query']) {
+    await this.$router.replace({ query })
+    await this.refetchAfterRouteChange()
+  }
+
+  /**
+   * Callback for route replace
+   *
+   * @return {void}
+   */
+  async refetchAfterRouteChange(): Promise<void> {
+    await this.$fetch()
+  }
+
+  /**
+   * Add an object to the route query
+   *
+   * @param {Record<string, string|number|null>} newParams
+   *
+   * @return {void}
+   */
+  addFilters(newParams: Record<string, string | number | null>): void {
+    this.queryParams = Object.assign(this.queryParams, newParams)
+  }
+
+  /**
+   * Remove a filter and re-assign it to query params
+   *
+   * @param {string} key
+   *
+   * @return {void}
+   */
+  removeFilter(key: string): void {
+    delete this.queryParams[key]
+
+    //? Reassigning triggers the computed methods
+    this.queryParams = Object.assign({}, this.queryParams)
   }
 }

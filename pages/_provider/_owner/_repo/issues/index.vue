@@ -1,20 +1,28 @@
 <template>
-  <div class="grid grid-cols-1 lg:grid-cols-16-fr pb-16 lg:pb-0">
+  <div class="grid grid-cols-1 pb-16 lg:grid-cols-16-fr lg:pb-0">
     <!-- Analyzer Tab -->
     <div
       class="z-20 flex flex-col justify-between py-2 pl-2 pr-4 space-y-2 border-b lg:flex-row lg:space-y-0 lg:space-x-2 border-ink-200 lg:sticky lg:top-24 bg-ink-400 col-span-full analyzer-tab"
     >
       <issue-analyzer-selector
         @updateAnalyzer="updateAnalyzer"
-        :selectedAnalyzer="queryParams.analyzer"
+        :selectedAnalyzer="parsedParams.analyzer"
       />
       <div class="flex items-center justify-end w-auto space-x-2">
-        <issue-sort v-model="queryParams.sort" @reset="removeFilter('sort')" />
+        <issue-sort
+          :selectedSortFilter="parsedParams.sort"
+          @updateSortFilter="(value) => addFilters({ sort: value })"
+          @reset="removeFilter('sort')"
+        />
         <autofix-available
           v-if="allowAutofix && hasRepoReadAccess"
-          v-model="queryParams.autofixAvailable"
+          :autofix-available="parsedParams.autofixAvailable"
+          @toggleAutofix="(value) => addFilters({ autofixAvailable: value })"
         />
-        <issue-search v-model="queryParams.q" />
+        <issue-search
+          :search-candidate="parsedParams.q"
+          @updateSearch="(value) => addFilters({ q: value })"
+        />
       </div>
     </div>
     <!-- Main Content -->
@@ -22,7 +30,7 @@
     <activate-repo-cta
       v-if="repository.errorCode === 3003 && hasRepoReadAccess"
       :repository="repository"
-      class="col-span-full lg:hidden m-4 mb-0"
+      class="m-4 mb-0 col-span-full lg:hidden"
     />
     <!-- Group by Filter Section -->
     <div>
@@ -61,7 +69,7 @@
         v-if="issueList.totalCount === 0"
         title="No issues found"
         :subtitle="`That's a good thing, right?!`"
-        class="border border-2 border-dashed rounded-lg border-ink-200 py-15"
+        class="border-2 border-dashed rounded-lg border-ink-200 py-15"
       >
       </empty-state>
       <issue-list-item
@@ -117,19 +125,19 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import IssueListMixin from '~/mixins/issueListMixin'
 
 import { RepoPerms } from '~/types/permTypes'
-import RouteQueryMixin from '~/mixins/routeQueryMixin'
+import RouteQueryMixin, { RouteQueryParamsT } from '~/mixins/routeQueryMixin'
 import { resolveNodes } from '~/utils/array'
 
 const PAGE_SIZE = 25
 const VISIBLE_PAGES = 5
 
-export interface IssueListFilters {
+export interface IssueListFilters extends RouteQueryParamsT {
   page?: number
   category?: string
   analyzer?: string
   q?: string
   sort?: string
-  autofixAvailable?: string | boolean | null
+  autofixAvailable?: boolean
   all?: boolean
 }
 
@@ -173,8 +181,7 @@ export default class Issues extends mixins(
    * @returns {void}
    */
   updateCategory(newVal: string): void {
-    this.queryParams.category = newVal
-    this.queryParams.page = 1
+    this.addFilters({ category: newVal, page: 1 })
   }
 
   /**
@@ -184,8 +191,7 @@ export default class Issues extends mixins(
    * @returns {void}
    */
   updateAnalyzer(newVal: string): void {
-    this.queryParams.analyzer = newVal
-    this.queryParams.page = 1
+    this.addFilters({ analyzer: newVal, page: 1 })
   }
 
   get parsedParams(): IssueListFilters {
@@ -193,7 +199,7 @@ export default class Issues extends mixins(
     const { q, page, sort, analyzer, category, autofixAvailable } = this.queryParams
 
     if (q) parsed['q'] = q as string
-    if (page) parsed['page'] = Number(page as string)
+    if (page) parsed['page'] = page as number
     if (sort) parsed['sort'] = sort as string
     if (analyzer && analyzer !== 'all') {
       parsed['analyzer'] = analyzer as string
@@ -204,7 +210,7 @@ export default class Issues extends mixins(
       parsed['category'] = undefined
       parsed['all'] = category === 'all'
     }
-    if (autofixAvailable && (autofixAvailable === 'true' || autofixAvailable === true)) {
+    if (autofixAvailable) {
       parsed['autofixAvailable'] = true
     }
 
@@ -217,8 +223,31 @@ export default class Issues extends mixins(
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
+    await this.getIssuesData()
+  }
+
+  /**
+   * Callback for route replace
+   *
+   * @return {Promise<void>}
+   */
+  async refetchAfterRouteChange(): Promise<void> {
+    // don't use fetch, because it cannot be executed concurrently
+    await this.getIssuesData()
+  }
+
+  /**
+   * Methods to fetch all the data required for the page
+   * Also used as a callback for refetch after route replace
+   *
+   * @return {Promise<void>}
+   */
+  async getIssuesData(): Promise<void> {
     this.issuesLoading = true
-    await Promise.all([this.fetchRepoDetailsLocal(), this.fetchRepoPerms(this.baseRouteParams)])
+    await Promise.all([
+      this.fetchRepoDetails(this.baseRouteParams),
+      this.fetchRepoPerms(this.baseRouteParams)
+    ])
 
     // Ensure updates to query params happen before accessing
     await this.fetchIssuesForOwner()
@@ -229,40 +258,6 @@ export default class Issues extends mixins(
   }
 
   /**
-   * Initialize query params
-   *
-   * @returns {void}
-   */
-  initializeQueryParams(): void {
-    if (this.repository.errorCode && this.repository.errorCode !== 3003) {
-      this.queryParams = {}
-    } else {
-      this.queryParams as IssueListFilters
-      const { query } = this.$route
-
-      // load query params from URL
-      this.queryParams = {
-        page: query.page ? Number(query.page) : null,
-        category: query.category,
-        analyzer: query.analyzer || 'all',
-        q: query.q || null,
-        sort: query.sort || null,
-        autofixAvailable: query.autofixAvailable || null
-      }
-    }
-  }
-
-  /**
-   * Fetch repo details followed by initializing query params
-   *
-   * @returns {Promise<void>}
-   */
-  async fetchRepoDetailsLocal() {
-    await this.fetchRepoDetails(this.baseRouteParams)
-    this.initializeQueryParams()
-  }
-
-  /**
    * Fetch issue list and type distribution info
    *
    * @param {boolean} [refetch=false]
@@ -270,6 +265,7 @@ export default class Issues extends mixins(
    */
   async fetchIssuesForOwner(refetch = false): Promise<void> {
     const { q, page, sort, analyzer, autofixAvailable } = this.parsedParams
+
     await this.fetchIssueTypeDistribution({
       ...this.baseRouteParams,
       q,
@@ -280,7 +276,7 @@ export default class Issues extends mixins(
     })
 
     // only apply default category when no category is specified in query params
-    if (!this.$route.query.category && Array.isArray(this.repository.issueTypeDistribution)) {
+    if (!this.queryParams.category && Array.isArray(this.repository.issueTypeDistribution)) {
       const recommendedTypePos = this.repository.issueTypeDistribution?.findIndex(
         (issueType) => issueType.shortcode === 'recommended'
       )
@@ -293,7 +289,6 @@ export default class Issues extends mixins(
     }
 
     const { all, category } = this.parsedParams
-
     await this.fetchIssueList({
       ...this.baseRouteParams,
       currentPageNumber: page,
@@ -324,7 +319,6 @@ export default class Issues extends mixins(
    */
   async refetchRepoDetails(): Promise<void> {
     await this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
-    this.initializeQueryParams()
   }
 
   /**

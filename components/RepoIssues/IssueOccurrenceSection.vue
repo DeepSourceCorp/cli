@@ -3,14 +3,28 @@
     <!-- Sort menu -->
     <z-menu direction="right" width="x-small" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
-        <z-button type="button" size="small" class="text-sm" buttonType="secondary" @click="toggle">
-          <div v-if="!sortApplied" class="flex items-center space-x-2">
-            <z-icon icon="amount-down" size="small"></z-icon>
-            <span class="hidden xl:inline-block">Sort</span>
-          </div>
-          <div v-else class="flex items-center space-x-2">
+        <z-button
+          v-if="!sortApplied"
+          icon="amount-down"
+          type="button"
+          size="small"
+          class="text-sm"
+          button-type="secondary"
+          @click="toggle"
+        >
+          Sort
+        </z-button>
+        <z-button
+          v-else
+          type="button"
+          size="small"
+          class="text-sm"
+          button-type="secondary"
+          @click="clearSort"
+        >
+          <div class="flex items-center space-x-2">
             <span class="hidden xl:inline-block">Sorted by - {{ selectedFilter }}</span>
-            <z-icon icon="x" size="small" @click="clearSort()"></z-icon>
+            <z-icon icon="x" size="small"></z-icon>
           </div>
         </z-button>
       </template>
