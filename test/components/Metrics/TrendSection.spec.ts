@@ -101,7 +101,8 @@ describe('[[TrendSection]]', () => {
           props,
           stubs: {
             AnalyzerLogo: true,
-            ZChart: true
+            ZChart: true,
+            ZIcon: true
           },
           components: { TrendStat, TrendTitle }
         },
@@ -117,7 +118,8 @@ describe('[[TrendSection]]', () => {
       propsData: { ...baseProps, namespacesTrend: genericNamespace, metricMeta: percentageMetric },
       stubs: {
         AnalyzerLogo: true,
-        ZChart: true
+        ZChart: true,
+        ZIcon: true
       },
       components: { TrendStat, TrendTitle }
     })

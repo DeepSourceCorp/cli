@@ -7,7 +7,7 @@
         borderClass="border-ink-300"
       >
         <template #icon>
-          <z-icon color="vanilla-400" icon="duration-30" />
+          <z-icon color="vanilla-400" icon="calendar-clock" />
         </template>
         <z-option
           v-for="(opt, index) in dayOptions"

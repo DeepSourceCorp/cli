@@ -101,7 +101,8 @@ describe('[[EmptyTrend]]', () => {
           props,
           stubs: {
             AnalyzerLogo: true,
-            ZChart: true
+            ZChart: true,
+            ZIcon: true
           },
           components: { TrendTitle }
         },
@@ -150,7 +151,8 @@ describe('[[EmptyTrend]]', () => {
     const wrapper = await shallowMount(EmptyTrend, {
       propsData: { ...baseProps },
       stubs: {
-        AnalyzerLogo: true
+        AnalyzerLogo: true,
+        ZIcon: true
       },
       components: { TrendTitle }
     })
