@@ -9,7 +9,6 @@
       <template #icon>
         <z-icon
           class="hidden xs:block"
-          size="x-small"
           :color="disabled ? 'slate' : 'vanilla-400'"
           icon="calendar-clock"
         />

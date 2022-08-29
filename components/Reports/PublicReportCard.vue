@@ -2,7 +2,7 @@
   <base-card :to="`/report/${reportId}`" target="_blank" rel="noopener noreferrer">
     <template slot="title">
       <span class="text-base flex items-center gap-x-2 mb-2">
-        <z-icon :icon="isRestricted ? 'file-lock' : 'file-bar-chart'" color="vanilla-100" />
+        <z-icon color="vanilla-400" :icon="isRestricted ? 'file-lock' : 'file-bar-chart'" />
         <span>{{ label }}</span>
       </span>
     </template>
