@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen mx-auto w-full lg:max-w-6xl 2xl:max-w-7xl animate-gradient">
+  <div class="w-full min-h-screen mx-auto lg:max-w-6xl 2xl:max-w-7xl animate-gradient">
     <div
       v-if="publicReport && publicReport.owner"
       class="sticky top-0 left-0 z-30 w-full border-b lg:hidden border-ink-200 bg-ink-400"
@@ -23,7 +23,7 @@
       />
 
       <div
-        class="pb-10 px-4 md:px-6 text-sm md:text-base w-screen border-t border-ink-300 md:border-t-0"
+        class="w-screen px-4 pb-10 text-sm border-t md:px-6 md:text-base border-ink-300 md:border-t-0"
       >
         <nuxt-child
           :share-historical-data="publicReport.shareHistoricalData"
@@ -38,15 +38,15 @@
 
         <section
           id="about"
-          class="leading-8 text-vanilla-400 mt-14 space-y-4 pb-14 border-b border-ink-200 scroll-mt-8"
+          class="space-y-4 leading-8 border-b text-vanilla-400 mt-14 pb-14 border-ink-200 scroll-mt-8"
         >
-          <h2 class="font-semibold text-lg text-vanilla-100">About DeepSource</h2>
+          <h2 class="text-lg font-semibold text-vanilla-100">About DeepSource</h2>
           <p>
             <a
               href="https://deepsource.io"
               rel="nofollow noopener noreferrer"
               target="_blank"
-              class="text-juniper-500 font-medium"
+              class="font-medium text-juniper-500"
             >
               DeepSource
             </a>
@@ -60,22 +60,22 @@
 
         <footer class="flex justify-between mt-10">
           <img class="h-4" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource logo" />
-          <span class="text-vanilla-400 text-xs">© {{ currentYear }} DeepSource Corp.</span>
+          <span class="text-xs text-vanilla-400">© {{ currentYear }} DeepSource Corp.</span>
         </footer>
       </div>
     </div>
 
-    <div v-else-if="errorMessage" class="flex justify-center items-center h-screen">
+    <div v-else-if="errorMessage" class="flex items-center justify-center h-screen">
       <div class="w-80">
         <div class="bg-ink-300 px-4 py-2.5 flex items-center gap-x-2 mb-2 w-max">
           <z-icon icon="lock" />
-          <span class="font-medium text-xs">This report is password-protected</span>
+          <span class="text-xs font-medium">This report is password-protected</span>
         </div>
-        <form @submit="submitPassword" class="py-6 px-6 max-w-md rounded-md bg-ink-300">
-          <label for="public-report-pasword" class="font-medium text-sm block mb-2">
+        <form @submit="submitPassword" class="max-w-md px-6 py-6 rounded-md bg-ink-300">
+          <label for="public-report-pasword" class="block mb-2 text-sm font-medium">
             Enter password
           </label>
-          <div class="space-y-2 mb-2">
+          <div class="mb-2 space-y-2">
             <div class="relative">
               <z-input
                 v-focus
@@ -99,7 +99,7 @@
                 />
               </div>
             </div>
-            <p :class="passwordError ? 'visible' : 'invisible'" class="text-cherry text-xs">
+            <p :class="passwordError ? 'visible' : 'invisible'" class="text-xs text-cherry">
               {{ passwordErrorMessage }}
             </p>
           </div>
@@ -155,7 +155,45 @@ import { PublicReportErrors } from '~/types/reportTypes'
    * Rest of the errors are handled in fetchPublicReportBase & verifyPasswordForPublicReport
    * in PublicReportMixin
    */
-  middleware: ['publicReport']
+  middleware: [
+    async function ({ $fetchGraphqlData, params, redirect, route, error }: Context): Promise<void> {
+      const { reportId } = params
+      if (route.name === 'report-reportId') {
+        try {
+          const response = (await $fetchGraphqlData(
+            gql`
+              query ($reportId: String!) {
+                publicReport(reportId: $reportId) {
+                  reportKeys
+                }
+              }
+            `,
+            { reportId },
+            true,
+            false
+          )) as GraphqlQueryResponse
+
+          const reports = response.data.publicReport?.reportKeys
+
+          if (Array.isArray(reports) && reports.length) {
+            const firstReport = reports[0]
+            redirect(`/report/${reportId}/${firstReport}`)
+          }
+        } catch (e) {
+          const message = (e as Error).message.replace('GraphQL error: ', '')
+
+          // show 500 error if the server returns a non standard error
+          if (!(Object.values(PublicReportErrors) as string[]).includes(message)) {
+            error({ statusCode: 500 })
+          }
+
+          if (message === PublicReportErrors.DOES_NOT_EXIST) {
+            error({ statusCode: 404, message: 'This page is not real' })
+          }
+        }
+      }
+    }
+  ]
 })
 export default class PublicReportPageParent extends mixins(PublicReportMixin) {
   public publicReport: PublicReport = {} as PublicReport
