@@ -120,10 +120,7 @@ export default {
   },
 
   extendPlugins(plugins) {
-    const services = [
-      '~/plugins/services/rudder.client.ts',
-      '~/plugins/components/statuspage.client.ts'
-    ]
+    const services = ['~/plugins/services/rudder.client.ts']
 
     if (!IS_ON_PREM) {
       plugins.push(...services)
