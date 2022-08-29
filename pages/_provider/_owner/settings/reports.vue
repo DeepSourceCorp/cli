@@ -27,7 +27,7 @@
     </div>
 
     <portal v-if="activeReportName !== ReportPageT.PUBLIC_REPORTS" to="modal">
-      <mutate-owner-report-modal
+      <mutate-report-modal
         v-if="isMutateReportModalOpen"
         :level="ReportLevel.Owner"
         :report-keys-old="[activeReportName]"

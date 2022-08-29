@@ -90,7 +90,7 @@
     </div>
 
     <portal to="modal">
-      <mutate-owner-report-modal
+      <mutate-report-modal
         v-if="isMutateReportModalOpen"
         :edit-mode="editMode"
         :level="ReportLevel.Owner"
@@ -99,8 +99,6 @@
         :share-historical-data-old="reportToEdit.shareHistoricalData"
         :report-label-old="reportToEdit.label"
         :report-id-old="reportToEdit.reportId"
-        :report-source-old="reportToEdit.source"
-        :sourced-repositories-old="sourcedRepositoriesOld"
         :save-loading="reportSaveLoading"
         @close="triggerModalClose"
         @create-report="createPublicReport"
