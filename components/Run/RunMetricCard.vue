@@ -118,7 +118,8 @@ export default class RunMetricCard extends Vue {
 
   get metricThresholdRelation(): string {
     if (
-      this.metricsCaptured.value &&
+      this.metricsCaptured.value !== null &&
+      this.metricsCaptured.value !== undefined &&
       this.metricsCaptured.threshold !== null &&
       this.metricsCaptured.threshold !== undefined
     ) {
