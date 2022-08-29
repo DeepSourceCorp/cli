@@ -13,9 +13,10 @@ test('renders PublicReportCard with all prop options', () => {
   }
 
   const isRestricted = generateBooleanProps('isRestricted', false)
+  const hasEditAccessOptions = generateBooleanProps('hasEditAccess', false)
   const views = generateGenericProps('views', [0, 1, 45], false)
 
-  cartesian(isRestricted, views).forEach((propCombination) => {
+  cartesian(isRestricted, hasEditAccessOptions, views).forEach((propCombination) => {
     const { html } = render(
       PublicReportCard,
       {

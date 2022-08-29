@@ -5,7 +5,7 @@
         <p class="text-vanilla-400 mt-2 text-sm">{{ publicReportMeta.description }}</p>
       </template>
 
-      <template slot="actions">
+      <template v-if="hasEditAccess" slot="actions">
         <z-button
           v-show="showCtaAndControls"
           icon="share"
@@ -48,8 +48,9 @@
     <div v-else-if="reportsList.length" class="space-y-3">
       <public-report-card
         v-for="report in reportsList"
-        :key="report.reportId"
         v-bind="report"
+        :key="report.reportId"
+        :has-edit-access="hasEditAccess"
         @edit="triggerEdit"
         @delete="triggerDelete"
       />
@@ -65,10 +66,10 @@
     <lazy-empty-state
       v-else
       title="No public reports found"
-      subtitle="You haven't created any public report yet."
+      subtitle="No public reports for this repository have been created yet."
       class="border border-dashed rounded-lg border-ink-200 py-20"
     >
-      <template slot="action">
+      <template v-if="hasEditAccess" slot="action">
         <div class="flex justify-around">
           <z-button
             icon="share"
@@ -121,16 +122,32 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZInput, ZButton, ZPagination, ZConfirm } from '@deepsourcelabs/zeal'
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import { ReportLevel } from '~/types/types'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import { TeamPerms } from '~/types/permTypes'
 
 /**
  * Public Report page at team settings level
  */
 @Component({
   layout: 'dashboard',
-  components: { ZIcon, ZInput, ZButton, ZPagination, ZConfirm }
+  components: { ZIcon, ZInput, ZButton, ZPagination, ZConfirm },
+  middleware: ['perm'],
+  meta: {
+    auth: {
+      strict: true,
+      repoPerms: [TeamPerms.VIEW_PUBLIC_REPORTS]
+    }
+  }
 })
-export default class OwnerPublicReports extends mixins(PublicReportMixin) {
+export default class OwnerPublicReports extends mixins(PublicReportMixin, RoleAccessMixin) {
   ReportLevel = ReportLevel
+
+  /**
+   * Fetch hook for the public report pages
+   */
+  async fetch(): Promise<void> {
+    await this.fetchPublicReportList()
+  }
 
   get sourcedRepositoriesOld() {
     if (this.reportToEdit.sourcedRepositories?.length) {
@@ -138,6 +155,10 @@ export default class OwnerPublicReports extends mixins(PublicReportMixin) {
     }
 
     return []
+  }
+
+  get hasEditAccess(): boolean {
+    return this.$gateKeeper.team(TeamPerms.UPDATE_PUBLIC_REPORTS, this.teamPerms.permission)
   }
 }
 </script>

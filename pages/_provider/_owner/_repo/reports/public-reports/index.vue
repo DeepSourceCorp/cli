@@ -6,7 +6,7 @@
         <p class="text-vanilla-400 mt-2 text-sm">{{ publicReportMeta.description }}</p>
       </template>
 
-      <template slot="actions">
+      <template v-if="hasEditAccess" slot="actions">
         <z-button
           v-show="showCtaAndControls"
           icon="share"
@@ -49,8 +49,9 @@
     <div v-else-if="reportsList.length" class="space-y-3">
       <public-report-card
         v-for="report in reportsList"
-        :key="report.reportId"
         v-bind="report"
+        :key="report.reportId"
+        :has-edit-access="hasEditAccess"
         @edit="triggerEdit"
         @delete="triggerDelete"
       />
@@ -66,10 +67,10 @@
     <lazy-empty-state
       v-else
       title="No public reports found"
-      subtitle="You have not created any public report for this repository yet."
+      subtitle="No public reports for this repository have been created yet."
       class="border border-dashed rounded-lg border-ink-200 py-20"
     >
-      <template slot="action">
+      <template v-if="hasEditAccess" slot="action">
         <div class="flex justify-around">
           <z-button
             icon="file-pie-chart"
@@ -122,15 +123,35 @@ import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZInput, ZButton, ZPagination, ZConfirm } from '@deepsourcelabs/zeal'
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import { ReportLevel } from '~/types/types'
+import { RepoPerms } from '~/types/permTypes'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 /**
  * Public Report page at repository settings level
  */
 @Component({
   layout: 'repository',
-  components: { ZIcon, ZInput, ZButton, ZPagination, ZConfirm }
+  components: { ZIcon, ZInput, ZButton, ZPagination, ZConfirm },
+  middleware: ['perm'],
+  meta: {
+    auth: {
+      strict: true,
+      repoPerms: [RepoPerms.VIEW_PUBLIC_REPORTS]
+    }
+  }
 })
-export default class RepoPublicReports extends mixins(PublicReportMixin) {
+export default class RepoPublicReports extends mixins(PublicReportMixin, RoleAccessMixin) {
   ReportLevel = ReportLevel
+
+  /**
+   * Fetch hook for the public report pages
+   */
+  async fetch(): Promise<void> {
+    await Promise.all([this.fetchRepoPerms(this.baseRouteParams), this.fetchPublicReportList()])
+  }
+
+  get hasEditAccess(): boolean {
+    return this.$gateKeeper.repo(RepoPerms.UPDATE_PUBLIC_REPORTS, this.repoPerms.permission)
+  }
 }
 </script>

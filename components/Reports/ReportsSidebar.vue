@@ -58,45 +58,46 @@
       </template>
     </div>
 
-    <z-divider class="hidden lg:block" margin="my-0" />
-
-    <div class="flex-shrink-0 pl-0 pr-4 lg:px-2">
-      <!-- Public Reports -->
-      <nuxt-link
-        :key="publicReportsItem.label"
-        :to="$generateRoute(publicReportsItem.link)"
-        class="flex-shrink-0 text-sm rounded-md"
-      >
-        <span
-          class="hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2"
-          :class="
-            $route.name === `${rootPath}-${publicReportsItem.pathName}`
-              ? 'bg-ink-300'
-              : 'text-vanilla-400'
-          "
+    <template v-if="showPublicReports">
+      <z-divider class="hidden lg:block" margin="my-0" />
+      <div class="flex-shrink-0 pl-0 pr-4 lg:px-2">
+        <!-- Public Reports -->
+        <nuxt-link
+          :key="publicReportsItem.label"
+          :to="$generateRoute(publicReportsItem.link)"
+          class="flex-shrink-0 text-sm rounded-md"
         >
-          <z-icon
-            icon="file-pie-chart"
-            size="small"
-            :color="
+          <span
+            class="hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2"
+            :class="
               $route.name === `${rootPath}-${publicReportsItem.pathName}`
-                ? 'vanilla-100'
-                : 'vanilla-400'
+                ? 'bg-ink-300'
+                : 'text-vanilla-400'
             "
-            class="hover:text-vanilla-100"
-          />
-          {{ publicReportsItem.label }}
-        </span>
-        <z-tab
-          :is-active="$route.name === `${rootPath}-${publicReportsItem.pathName}`"
-          icon="file-pie-chart"
-          border-active-color="vanilla-400"
-          class="lg:hidden"
-        >
-          <span class="text-sm cursor-pointer">{{ publicReportsItem.label }}</span>
-        </z-tab>
-      </nuxt-link>
-    </div>
+          >
+            <z-icon
+              icon="file-pie-chart"
+              size="small"
+              :color="
+                $route.name === `${rootPath}-${publicReportsItem.pathName}`
+                  ? 'vanilla-100'
+                  : 'vanilla-400'
+              "
+              class="hover:text-vanilla-100"
+            />
+            {{ publicReportsItem.label }}
+          </span>
+          <z-tab
+            :is-active="$route.name === `${rootPath}-${publicReportsItem.pathName}`"
+            icon="file-pie-chart"
+            border-active-color="vanilla-400"
+            class="lg:hidden"
+          >
+            <span class="text-sm cursor-pointer">{{ publicReportsItem.label }}</span>
+          </z-tab>
+        </nuxt-link>
+      </div>
+    </template>
   </nav>
 </template>
 
@@ -114,6 +115,9 @@ import { ReportLevel } from '~/types/types'
 export default class ReportsSidebar extends Vue {
   @Prop({ required: true })
   level: ReportLevel
+
+  @Prop({ required: true })
+  showPublicReports: boolean
 
   get complianceItems(): ReportsTabLink[] {
     return [

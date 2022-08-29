@@ -1,5 +1,10 @@
 <template>
-  <base-card :to="`/report/${reportId}`" target="_blank" rel="noopener noreferrer">
+  <base-card
+    :to="`/report/${reportId}`"
+    target="_blank"
+    rel="noopener noreferrer"
+    :show-info="hasEditAccess"
+  >
     <template slot="title">
       <span class="text-base flex items-center gap-x-2 mb-2">
         <z-icon color="vanilla-400" :icon="isRestricted ? 'file-lock' : 'file-bar-chart'" />
@@ -16,7 +21,7 @@
         </meta-data-item>
       </p>
     </template>
-    <template slot="info">
+    <template v-if="hasEditAccess" slot="info">
       <div class="flex items-center justify-around h-full">
         <z-button
           v-tooltip="'Edit report'"
@@ -72,5 +77,8 @@ export default class PublicReportCard extends Vue {
 
   @Prop({ default: 0 })
   views: number
+
+  @Prop({ required: true })
+  hasEditAccess: boolean
 }
 </script>

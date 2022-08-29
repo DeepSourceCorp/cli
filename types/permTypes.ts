@@ -18,6 +18,8 @@ export enum TeamPerms {
   MANAGE_OWNER_ISSUE_PRIORITY = 'manageIssuePriority',
   MANAGE_INTEGRATIONS = 'manageIntegrations',
   VIEW_REPORTS = 'viewReports',
+  VIEW_PUBLIC_REPORTS = 'viewPublicReports',
+  UPDATE_PUBLIC_REPORTS = 'updatePublicReports',
   MANAGE_PREFERNCES = 'managePreferences'
 }
 
@@ -48,7 +50,9 @@ export enum RepoPerms {
   CHANGE_PRIORITY_SETTINGS_TO_BLOCK_PRS_ON = 'changePrioritySettingsToBlockPrsOn',
   CHANGE_INTEGRATION_SETTINGS = 'changeIntegrationSettings',
   CREATE_ISSUE_ON_INTEGRATION = 'createIssueOnIntegration',
-  VIEW_REPORTS = 'viewReports'
+  VIEW_REPORTS = 'viewReports',
+  VIEW_PUBLIC_REPORTS = 'viewPublicReports',
+  UPDATE_PUBLIC_REPORTS = 'updatePublicReports'
 }
 
 export enum AppFeatures {

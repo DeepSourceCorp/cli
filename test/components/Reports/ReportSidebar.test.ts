@@ -4,7 +4,7 @@ import { RouterLinkStub } from '@vue/test-utils'
 import { ReportsSidebar } from '~/components/Reports'
 import { mocksGenerator } from '~/test/mocks'
 
-import { cartesian, generateGenericProps } from '~/test/utils'
+import { cartesian, generateBooleanProps, generateGenericProps } from '~/test/utils'
 import { ReportLevel } from '~/types/types'
 
 test('renders PublicReportCard with all prop options', () => {
@@ -14,7 +14,9 @@ test('renders PublicReportCard with all prop options', () => {
     false
   )
 
-  cartesian(levelOptions).forEach((propCombination) => {
+  const showPublicReportsOptions = generateBooleanProps('showPublicReports', false)
+
+  cartesian(levelOptions, showPublicReportsOptions).forEach((propCombination) => {
     const { html } = render(ReportsSidebar, {
       props: {
         ...propCombination

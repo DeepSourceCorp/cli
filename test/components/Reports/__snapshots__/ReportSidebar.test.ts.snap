@@ -1,6 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders PublicReportCard with all prop options: {"level":"ENTERPRISE"} 1`] = `
+exports[`renders PublicReportCard with all prop options: {"showPublicReports":false,"level":"ENTERPRISE"} 1`] = `
+"<nav class=\\"flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky top-19 border-b lg:border-r border-ink-200 lg:h-nav-sidebar\\">
+  <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
+    <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      Security
+    </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP Top 10</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">SANS Top 25</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">SANS Top 25</span></ztab-stub></a>
+    <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      Insights
+    </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+  </div>
+  <!---->
+</nav>"
+`;
+
+exports[`renders PublicReportCard with all prop options: {"showPublicReports":false,"level":"OWNER"} 1`] = `
+"<nav class=\\"flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky top-19 border-b lg:border-r border-ink-200 lg:h-nav-sidebar\\">
+  <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
+    <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      Security
+    </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP Top 10</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">SANS Top 25</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">SANS Top 25</span></ztab-stub></a>
+    <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      Insights
+    </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+  </div>
+  <!---->
+</nav>"
+`;
+
+exports[`renders PublicReportCard with all prop options: {"showPublicReports":false,"level":"REPOSITORY"} 1`] = `
+"<nav class=\\"flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky top-19 border-b lg:border-r border-ink-200 lg:h-nav-sidebar\\">
+  <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
+    <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      Security
+    </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">OWASP Top 10</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">OWASP Top 10</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">SANS Top 25</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">SANS Top 25</span></ztab-stub></a>
+    <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
+      Insights
+    </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+      <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
+  </div>
+  <!---->
+</nav>"
+`;
+
+exports[`renders PublicReportCard with all prop options: {"showPublicReports":true,"level":"ENTERPRISE"} 1`] = `
 "<nav class=\\"flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky top-19 border-b lg:border-r border-ink-200 lg:h-nav-sidebar\\">
   <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
     <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
@@ -15,13 +66,13 @@ exports[`renders PublicReportCard with all prop options: {"level":"ENTERPRISE"} 
   </div>
   <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
   <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
-        Public Reports
-      </span>
+          Public Reports
+        </span>
       <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
 </nav>"
 `;
 
-exports[`renders PublicReportCard with all prop options: {"level":"OWNER"} 1`] = `
+exports[`renders PublicReportCard with all prop options: {"showPublicReports":true,"level":"OWNER"} 1`] = `
 "<nav class=\\"flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky top-19 border-b lg:border-r border-ink-200 lg:h-nav-sidebar\\">
   <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
     <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
@@ -36,13 +87,13 @@ exports[`renders PublicReportCard with all prop options: {"level":"OWNER"} 1`] =
   </div>
   <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
   <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
-        Public Reports
-      </span>
+          Public Reports
+        </span>
       <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
 </nav>"
 `;
 
-exports[`renders PublicReportCard with all prop options: {"level":"REPOSITORY"} 1`] = `
+exports[`renders PublicReportCard with all prop options: {"showPublicReports":true,"level":"REPOSITORY"} 1`] = `
 "<nav class=\\"flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky top-19 border-b lg:border-r border-ink-200 lg:h-nav-sidebar\\">
   <div class=\\"flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2\\">
     <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
@@ -57,8 +108,8 @@ exports[`renders PublicReportCard with all prop options: {"level":"REPOSITORY"} 
   </div>
   <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
   <div class=\\"flex-shrink-0 pl-0 pr-4 lg:px-2\\"><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2 text-vanilla-400\\"><zicon-stub icon=\\"file-pie-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hover:text-vanilla-100\\"></zicon-stub>
-        Public Reports
-      </span>
+          Public Reports
+        </span>
       <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
 </nav>"
 `;

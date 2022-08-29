@@ -1,6 +1,6 @@
 <template>
   <section class="grid grid-cols-1 lg:grid-cols-16-fr">
-    <reports-sidebar :level="ReportLevel.Owner" />
+    <reports-sidebar :level="ReportLevel.Owner" :show-public-reports="hasPublicReportViewAccess" />
 
     <div class="flex flex-col p-4 gap-y-2">
       <page-title
@@ -13,7 +13,7 @@
           <p class="mt-2 text-sm text-vanilla-400">{{ reportDescription }}</p>
         </template>
 
-        <template slot="actions">
+        <template v-if="hasPublicReportEditAccess" slot="actions">
           <z-button
             icon="share"
             label="Share"
@@ -40,16 +40,17 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator'
+import { Component, mixins } from 'nuxt-property-decorator'
 import { ZTab, ZButton, ZIcon, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsourcelabs/zeal'
 import { ZDivider } from '@deepsourcelabs/zeal'
 
 import { TeamPerms } from '~/types/permTypes'
-import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
+import { ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { CreatePublicReportInput, ReportLevel } from '~/types/types'
 
 import { createPublicReport } from '@/apollo/mutations/reports/createPublicReport.gql'
 import { GraphqlMutationResponse } from '~/types/apolloTypes'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
 
 /**
  * Parent page for reports UI.
@@ -82,7 +83,7 @@ import { GraphqlMutationResponse } from '~/types/apolloTypes'
     }
   }
 })
-export default class OwnerReports extends Vue {
+export default class OwnerReports extends mixins(RoleAccessMixin) {
   isMutateReportModalOpen = false
   reportSaveLoading = false
 
@@ -143,6 +144,14 @@ export default class OwnerReports extends Vue {
 
   get viewingPublicReports(): boolean {
     return this.activeReportName === ReportPageT.PUBLIC_REPORTS
+  }
+
+  get hasPublicReportEditAccess(): boolean {
+    return this.$gateKeeper.team(TeamPerms.UPDATE_PUBLIC_REPORTS, this.teamPerms.permission)
+  }
+
+  get hasPublicReportViewAccess(): boolean {
+    return this.$gateKeeper.team(TeamPerms.VIEW_PUBLIC_REPORTS, this.teamPerms.permission)
   }
 
   /**

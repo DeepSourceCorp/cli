@@ -84,13 +84,6 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
   public submitPasswordLoading = false
 
   /**
-   * Fetch hook for the public report pages
-   */
-  async fetch(): Promise<void> {
-    await this.fetchPublicReportList()
-  }
-
-  /**
    * Handler method to clear search query and refetch public report list
    *
    * @returns void
