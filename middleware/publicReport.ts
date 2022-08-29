@@ -42,6 +42,14 @@ const publicReportMiddleware: Middleware = async ({
     if (message === PublicReportErrors.DOES_NOT_EXIST) {
       error({ statusCode: 404, message: 'This page is not real' })
     }
+
+    if (message === PublicReportErrors.AUTH_REQUIRED) {
+      if (route.name === 'report-reportId') {
+        return
+      }
+
+      redirect(['', 'report', reportId].join('/'))
+    }
   }
 
   if (validReports.length === 0) {
