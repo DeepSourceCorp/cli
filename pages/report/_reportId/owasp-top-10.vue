@@ -142,7 +142,7 @@ import PublicReportMixin from '~/mixins/publicReportMixin'
 import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 
 import { ReportLevel, ReportType, Repository } from '~/types/types'
-import { ReportPageT } from '~/types/reportTypes'
+import { ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { smartApostrophe } from '~/utils/string'
 
 /**
@@ -183,6 +183,17 @@ export default class PublicReportOwasp extends mixins(PublicReportMixin, Complia
 
   readonly ReportType = ReportType
   readonly ReportPageT = ReportPageT
+
+  /**
+   * Created hook for Vue component.
+   * Sets meta data title and description
+   *
+   * @returns void
+   */
+  created() {
+    const reportTitle = ReportMeta[ReportPageT.OWASP_TOP_10].title
+    this.setPageMetaData(reportTitle, this.ownerLogin)
+  }
 
   /**
    * Mounted hook for Vue component.

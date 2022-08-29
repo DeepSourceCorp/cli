@@ -463,7 +463,7 @@ export default class MutateOwnerReportModal extends Vue {
    * @return {void}
    */
   generatePassword(): void {
-    if (!this.engine) this.engine = new Shifty(false, 32)
+    if (!this.engine) this.engine = new Shifty(false, 16)
 
     this.password = this.engine.generate()
     if (this.isPasswordHidden) {

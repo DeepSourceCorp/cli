@@ -161,7 +161,7 @@ describe('[[ MutateOwnerReportModal ]]', () => {
     // Test generatePassword sets password data property
     expect(vm.password).toBe('')
     vm.generatePassword()
-    expect(vm.password.length).toBe(32)
+    expect(vm.password.length).toBe(16)
 
     // Test generatePassword generates different passwords on each call
     vm.generatePassword()
@@ -178,14 +178,14 @@ describe('[[ MutateOwnerReportModal ]]', () => {
     // Test handleResetPassword
     vm.password = ''
     vm.handleResetPassword()
-    expect(vm.password.length).toBe(32)
+    expect(vm.password.length).toBe(16)
     expect(vm.showPasswordInput).toBe(true)
 
     // Test handlePasswordProtectedToggle for passwordProtected = true
     vm.password = ''
     vm.showPasswordInput = false
     vm.handlePasswordProtectedToggle(true)
-    expect(vm.password.length).toBe(32)
+    expect(vm.password.length).toBe(16)
     expect(vm.showPasswordInput).toBe(true)
 
     // Test handlePasswordProtectedToggle for passwordProtected = false

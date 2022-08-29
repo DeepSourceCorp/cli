@@ -149,7 +149,7 @@ import PublicReportMixin from '~/mixins/publicReportMixin'
 import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 
 import { ReportLevel, ReportType, Repository } from '~/types/types'
-import { ReportPageT } from '~/types/reportTypes'
+import { ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { smartApostrophe, shortenLargeNumber } from '~/utils/string'
 
 /**
@@ -194,6 +194,17 @@ export default class PublicReportSans extends mixins(PublicReportMixin, Complian
 
   readonly ReportType = ReportType
   readonly ReportPageT = ReportPageT
+
+  /**
+   * Created hook for Vue component.
+   * Sets meta data title and description
+   *
+   * @returns void
+   */
+  created() {
+    const reportTitle = ReportMeta[ReportPageT.SANS_TOP_25].title
+    this.setPageMetaData(reportTitle, this.ownerLogin)
+  }
 
   /**
    * Mounted hook for Vue component.

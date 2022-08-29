@@ -2,7 +2,7 @@ import { DurationTypeT } from '~/utils/date'
 import { smartApostrophe } from '~/utils/string'
 import { PublicReport, ReportType } from './types'
 
-type ReportMetaProperties = {
+export type ReportMetaProperties = {
   title: string
   description: string
   hasIssueTable: boolean

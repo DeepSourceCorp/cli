@@ -121,7 +121,7 @@ import { ZChart, ZRadioGroup, ZRadioButton } from '@deepsourcelabs/zeal'
 import PublicReportMixin from '~/mixins/publicReportMixin'
 
 import { IssueDistribution, ReportLevel, ReportType, Repository } from '~/types/types'
-import { Dataset, IssueDistributionT, ReportPageT } from '~/types/reportTypes'
+import { Dataset, IssueDistributionT, ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { shortenLargeNumber, smartApostrophe } from '~/utils/string'
 import { getColorShades } from '~/utils/ui'
 
@@ -173,6 +173,17 @@ export default class PublicReportIssueDistribution extends mixins(PublicReportMi
   readonly IssueDistributionT = IssueDistributionT
 
   baseColor = BASE_COLOR
+
+  /**
+   * Created hook for Vue component.
+   * Sets meta data title and description
+   *
+   * @returns void
+   */
+  created() {
+    const reportTitle = ReportMeta[ReportPageT.DISTRIBUTION].title
+    this.setPageMetaData(reportTitle, this.ownerLogin)
+  }
 
   /**
    * Mounted hook for Vue component.
