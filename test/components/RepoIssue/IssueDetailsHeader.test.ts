@@ -1,11 +1,12 @@
+import Vue from 'vue'
+import dayjs from 'dayjs'
 import { render } from '@testing-library/vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import { RouterLinkStub } from '@vue/test-utils'
 import VTooltip from 'v-tooltip'
 
 import { IssueDetailsHeader } from '~/components/RepoIssues'
-
-import Vue from 'vue'
+import { DurationTypeT, getDateFromXAgo } from '~/utils/date'
 
 interface IssueDetailsHeaderT extends Vue {
   lastSeenDisplay: string
@@ -22,9 +23,13 @@ const stubs = {
   NuxtLink: RouterLinkStub
 }
 
+const today = dayjs().format('YYYY-MM-DD')
+
+const twoYearsAgo = getDateFromXAgo(today, DurationTypeT.years, 2)
+
 const defaultProps = {
   canEditPriority: true,
-  firstSeen: '2020-02-29T07:06:11.659321+00:00',
+  firstSeen: twoYearsAgo,
   issuePriority: {
     cascadingIssuePriority: {
       id: 'SXNzdWVQcmlvcml0eVR5cGU6',
@@ -59,7 +64,7 @@ test('renders IssueDetailsHeader with all props', () => {
     }
   )
 
-  expect(html()).toMatchSnapshot(JSON.stringify(defaultProps))
+  expect(html()).toMatchSnapshot()
 })
 
 test('EmptyChart computed properties', () => {

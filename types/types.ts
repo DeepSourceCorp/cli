@@ -7389,7 +7389,7 @@ export type UpdatePublicReportMutation = (
     { __typename?: 'UpdatePublicReportPayload' }
     & { publicReport?: Maybe<(
       { __typename?: 'PublicReport' }
-      & Pick<PublicReport, 'reportId' | 'label' | 'reportKeys' | 'isRestricted' | 'shareHistoricalData'>
+      & Pick<PublicReport, 'id' | 'reportId' | 'label' | 'reportKeys' | 'isRestricted' | 'shareHistoricalData'>
     )> }
   )> }
 );
@@ -9254,6 +9254,7 @@ export type PublicReportAnalyzerDistributionQuery = (
   { __typename?: 'Query' }
   & { publicReport?: Maybe<(
     { __typename?: 'PublicReport' }
+    & Pick<PublicReport, 'id'>
     & { issueDistributionByAnalyzer?: Maybe<Array<Maybe<(
       { __typename?: 'IssueDistribution' }
       & Pick<IssueDistribution, 'slug' | 'name' | 'value' | 'logoUrl'>
@@ -9271,7 +9272,7 @@ export type PublicReportBaseQuery = (
   { __typename?: 'Query' }
   & { publicReport?: Maybe<(
     { __typename?: 'PublicReport' }
-    & Pick<PublicReport, 'reportId' | 'label' | 'createdAt' | 'views' | 'isRestricted' | 'reportKeys' | 'source' | 'level' | 'shareHistoricalData'>
+    & Pick<PublicReport, 'id' | 'reportId' | 'label' | 'createdAt' | 'views' | 'isRestricted' | 'reportKeys' | 'source' | 'level' | 'shareHistoricalData'>
     & { sourcedRepositories?: Maybe<Array<Maybe<(
       { __typename?: 'Repository' }
       & Pick<Repository, 'id' | 'name' | 'isPrivate'>
@@ -9296,6 +9297,7 @@ export type PublicReportBaseReportQuery = (
   { __typename?: 'Query' }
   & { publicReport?: Maybe<(
     { __typename?: 'PublicReport' }
+    & Pick<PublicReport, 'id'>
     & { report?: Maybe<(
       { __typename?: 'Report' }
       & Pick<Report, 'key' | 'status' | 'currentValue' | 'type'>
@@ -9313,6 +9315,7 @@ export type PublicReportCategoryDistributionQuery = (
   { __typename?: 'Query' }
   & { publicReport?: Maybe<(
     { __typename?: 'PublicReport' }
+    & Pick<PublicReport, 'id'>
     & { issueDistributionByCategory?: Maybe<Array<Maybe<(
       { __typename?: 'IssueDistribution' }
       & Pick<IssueDistribution, 'slug' | 'name' | 'value' | 'logoUrl'>
@@ -9331,6 +9334,7 @@ export type PublicReportComplianceIssuesQuery = (
   { __typename?: 'Query' }
   & { publicReport?: Maybe<(
     { __typename?: 'PublicReport' }
+    & Pick<PublicReport, 'id'>
     & { complianceIssues?: Maybe<Array<Maybe<(
       { __typename?: 'ComplianceIssue' }
       & Pick<ComplianceIssue, 'issueId' | 'title' | 'rank'>
@@ -9355,6 +9359,7 @@ export type PublicReportHistoricValuesQuery = (
   { __typename?: 'Query' }
   & { publicReport?: Maybe<(
     { __typename?: 'PublicReport' }
+    & Pick<PublicReport, 'id'>
     & { report?: Maybe<(
       { __typename?: 'Report' }
       & Pick<Report, 'key' | 'historicalValues'>
@@ -9373,6 +9378,7 @@ export type PublicReportRecentStatsQuery = (
   { __typename?: 'Query' }
   & { publicReport?: Maybe<(
     { __typename?: 'PublicReport' }
+    & Pick<PublicReport, 'id'>
     & { report?: Maybe<(
       { __typename?: 'Report' }
       & { recentStats?: Maybe<Array<Maybe<(

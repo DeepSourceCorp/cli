@@ -64,7 +64,7 @@ import { GraphqlMutationResponse } from '~/types/apolloTypes'
     ZSplitButtonDropdown,
     ZDivider
   },
-  layout: 'repository',
+  layout: 'dashboard',
   middleware: [
     'perm',
     'betaOnly',
