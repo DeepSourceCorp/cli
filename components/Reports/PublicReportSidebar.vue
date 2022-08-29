@@ -129,6 +129,10 @@ export default class PublicReportSidebar extends Vue {
         link: '#intended-use'
       },
       {
+        title: 'Continuous Code Health',
+        link: '#continuous-code-health'
+      },
+      {
         title: 'About DeepSource',
         link: '#about'
       }

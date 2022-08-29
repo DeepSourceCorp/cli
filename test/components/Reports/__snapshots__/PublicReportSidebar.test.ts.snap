@@ -20,6 +20,8 @@ exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop opt
       — Summary
     </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
       — Intended use
+    </a><a href=\\"#continuous-code-health\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Continuous Code Health
     </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
       — About DeepSource
     </a></div>
@@ -65,6 +67,8 @@ exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop opt
       — Summary
     </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
       — Intended use
+    </a><a href=\\"#continuous-code-health\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Continuous Code Health
     </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
       — About DeepSource
     </a></div>
@@ -101,6 +105,8 @@ exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop opt
       — Summary
     </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
       — Intended use
+    </a><a href=\\"#continuous-code-health\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Continuous Code Health
     </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
       — About DeepSource
     </a></div>
@@ -128,6 +134,8 @@ exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop opt
       — Summary
     </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
       — Intended use
+    </a><a href=\\"#continuous-code-health\\" class=\\"hover:text-vanilla-100 text-slate\\">
+      — Continuous Code Health
     </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
       — About DeepSource
     </a></div>

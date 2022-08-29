@@ -11,7 +11,9 @@
       <div v-html="copyText.summary" class="space-y-4 text-vanilla-400"></div>
       <div v-html="copyText.intendedUse" class="space-y-4 text-vanilla-400"></div>
       <div class="space-y-4 text-vanilla-400">
-        <h1 class="text-lg text-vanilla-100 font-semibold">Continuous Code Health</h1>
+        <h1 id="continuous-code-health" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">
+          Continuous Code Health
+        </h1>
         <p>
           DeepSource integrates with {{ smartApostrophe(ownerLogin) }} software development
           workflows to provide developers and key stakeholders a way to identify and fix code health

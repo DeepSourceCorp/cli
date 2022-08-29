@@ -10,7 +10,6 @@ export type ReportMetaProperties = {
   copyText: (companyName: string) => {
     summary: string
     intendedUse: string
-    codeHealth: string
   }
 }
 
@@ -62,15 +61,6 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
           OWASP Top 10 recommendations in their source code. The report can also be used by key
           stakeholders within the organization and interested external stakeholders to understand the
           source code security posture of ${companyName}.
-        </p>`,
-        codeHealth: `<h1 class="text-lg text-vanilla-100 font-semibold">Continuous Code Health</h1>
-        <p>
-        DeepSource integrates with ${smartApostrophe(
-          companyName
-        )} software development workflows to provide developers
-        and key stakeholders a way to identify and fix code health issues continuously and proactively.
-        This report is dynamic. As ${companyName} team improves its source code security posture, the
-        changes will be reflected in this report.
         </p>`
       }
     }
@@ -102,15 +92,6 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
           SANS Top 25 recommendations in their source code. The report can also be used by key
           stakeholders within the organization and interested external stakeholders to understand the
           source code security posture of ${companyName}.
-        </p>`,
-        codeHealth: `<h1 class="text-lg text-vanilla-100 font-semibold">Continuous Code Health</h1>
-        <p>
-        DeepSource integrates with ${smartApostrophe(
-          companyName
-        )} software development workflows to provide developers
-        and key stakeholders a way to identify and fix code health issues continuously and proactively.
-        This report is dynamic. As ${companyName} team improves its source code security posture, the
-        changes will be reflected in this report.
         </p>`
       }
     }
@@ -140,15 +121,6 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
             This report can be used by the ${companyName} team to identify and remediate code health issues in their code base
             and make it more maintainable. The report can also be used by key internal and external stakeholders to understand
             the code quality and maintainability of ${companyName}.
-        </p>`,
-        codeHealth: `<h1 class="text-lg text-vanilla-100 font-semibold">Continuous Code Health</h1>
-        <p>
-        DeepSource integrates with ${smartApostrophe(
-          companyName
-        )} software development workflows to provide developers
-        and key stakeholders a way to identify and fix code health issues continuously and proactively.
-        This report is dynamic. As ${companyName} team improves its source code security posture, the
-        changes will be reflected in this report.
         </p>`
       }
     }
@@ -159,7 +131,6 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     hasIssueTable: false,
     copyText: () => {
       return {
-        codeHealth: ``,
         summary: ``,
         intendedUse: ``
       }

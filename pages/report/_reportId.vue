@@ -85,6 +85,7 @@
                 placeholder="Password to access the report"
                 :required="true"
                 :type="isPasswordHidden ? 'password' : 'text'"
+                @input="clearPasswordError"
                 class="rounded-md border-ink-200"
               />
               <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
@@ -108,6 +109,8 @@
             size="small"
             type="submit"
             full-width
+            :is-loading="submitPasswordLoading"
+            :disabled="submitPasswordLoading"
             @click.prevent="submitPassword"
           />
         </form>
@@ -259,7 +262,7 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
   }
 
   /**
-   * Emit show-public-report-sideba event to trigger sidebar expansion.
+   * Emit show-public-report-sidebar event to trigger sidebar expansion.
    */
   triggerSidebarExpand() {
     this.$root.$emit('ui:show-public-report-sidebar')
@@ -273,6 +276,15 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
       return this.publicReport.owner?.id as string
     }
     return ''
+  }
+
+  /**
+   * Clear password error shown when user starts typing again
+   */
+  clearPasswordError() {
+    if (this.passwordError) {
+      this.passwordError = false
+    }
   }
 
   get currentYear() {

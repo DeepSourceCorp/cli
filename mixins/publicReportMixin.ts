@@ -81,6 +81,8 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
   public reportLabelToDelete = ''
   public deleteLoading = false
 
+  public submitPasswordLoading = false
+
   /**
    * Fetch hook for the public report pages
    */
@@ -274,6 +276,8 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
     token?: string,
     refetch?: boolean
   ): Promise<PublicReport | void> {
+    this.submitPasswordLoading = true
+
     try {
       const response = (await this.$fetchGraphqlData(
         publicReportBase,
@@ -306,6 +310,8 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
           this.$logErrorAndToast(e as Error, 'Unable to verify password. Please contact support.')
           break
       }
+    } finally {
+      this.submitPasswordLoading = false
     }
   }
 
@@ -612,6 +618,8 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
   public async verifyPasswordForPublicReport(
     input: VerifyPasswordForPublicReportInput
   ): Promise<string> {
+    this.submitPasswordLoading = true
+
     try {
       const response = (await this.$applyGraphqlMutation(verifyPasswordForPublicReport, {
         input
@@ -639,6 +647,8 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
           this.$logErrorAndToast(e as Error, 'Unable to verify password. Please contact support.')
           break
       }
+    } finally {
+      this.submitPasswordLoading = false
     }
     return ''
   }
