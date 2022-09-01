@@ -62,12 +62,14 @@
                 <div class="flex w-full space-x-2 md:z-10">
                   <div class="flex w-auto space-x-2">
                     <issue-category-filter
-                      v-model="queryParams.category"
+                      :selected-category="queryParams.category"
+                      @updateCategory="(value) => addFilters({ category: value })"
                       @reset="removeFilter('category')"
                     />
                     <issue-sort
-                      v-model="queryParams.sort"
+                      :selected-sort-filter="queryParams.sort"
                       :show-seen-options="false"
+                      @updateSortFilter="(value) => addFilters({ sort: value })"
                       @reset="removeFilter('sort')"
                     />
                   </div>
