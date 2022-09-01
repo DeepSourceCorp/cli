@@ -82,12 +82,13 @@
         @autofix="openAutofixModal"
       ></issue-list-item>
       <z-pagination
-        :key="$route.fullPath"
-        class="flex justify-center"
         v-if="pageCount > 1"
+        :page="queryParams.page"
+        :key="$route.fullPath"
         :totalPages="pageCount"
         :totalVisible="5"
-        v-model="queryParams.page"
+        class="flex justify-center"
+        @selected="(page) => addFilters({ page })"
       ></z-pagination>
     </div>
     <!-- Autofix Modal -->
