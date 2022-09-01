@@ -3,7 +3,7 @@ import { TrendSection, TrendStat, TrendTitle } from '~/components/Metrics'
 import { VTooltip } from 'v-tooltip'
 import { VueConstructor } from 'vue'
 import { MetricType } from '~/types/metric'
-import { cartesian, generateGenericProps } from '~/test/utils'
+import { cartesian, generateBooleanProps, generateGenericProps } from '~/test/utils'
 import { shallowMount } from '@vue/test-utils'
 
 const injectDirective = (vue: VueConstructor) => vue.directive('tooltip', VTooltip)
@@ -92,7 +92,9 @@ describe('[[TrendSection]]', () => {
       false
     )
 
-    cartesian(namespaceProp, metricProp).forEach((propCombinations) => {
+    const chartType = generateGenericProps('chartType', ['line', 'bar'], false)
+
+    cartesian(namespaceProp, metricProp, chartType).forEach((propCombinations) => {
       const props = { ...baseProps, ...propCombinations }
 
       const { html } = render(

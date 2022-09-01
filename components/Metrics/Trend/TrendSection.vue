@@ -185,9 +185,23 @@ export default class TrendSection extends Vue {
   }
 
   get maxClip() {
-    return this.isUnitPercentage
-      ? 100
-      : roundToSignificantNumber(this.maxDigitInGraph, this.maxDigitInGraph.toString().length - 1)
+    if (this.isUnitPercentage) {
+      return 100
+    }
+
+    return this.chartType === 'line' ? this.maxLineClip : this.maxBarClip
+  }
+
+  get maxLineClip() {
+    const exaggeratedMax = this.maxDigitInGraph * 1.25
+    return roundToSignificantNumber(exaggeratedMax, exaggeratedMax.toString().length - 1)
+  }
+
+  get maxBarClip() {
+    return roundToSignificantNumber(
+      this.maxDigitInGraph,
+      this.maxDigitInGraph.toString().length - 1
+    )
   }
 
   get chartUpdateKey() {
