@@ -26,16 +26,18 @@
           </div>
         </z-tag>
       </div>
-      <div class="flex space-x-3">
-        <div class="flex space-x-1.5 items-center">
+      <div class="flex gap-x-3">
+        <div
+          class="flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-md pl-3 pr-2 h-7"
+        >
           <z-icon
             :icon="isForDefaultBranch ? 'git-branch' : 'git-pull-request'"
-            size="x-small"
-            class="flex-shrink-0 ml-1.5"
+            size="small"
+            class="flex-shrink-0"
           />
-          <div class="text-sm font-medium text-vanilla-400 line-clamp-1">
+          <div class="text-sm text-vanilla-400 line-clamp-1">
             <a v-tooltip="vscLinkTooltip" :href="vcsPrUrl" target="_blank" rel="noopener noreferrer"
-              >{{ branchName }}
+              >{{ isForDefaultBranch ? branchName : pullRequestNumberDisplay }}
             </a>
           </div>
         </div>
@@ -43,16 +45,18 @@
           <template #trigger="{ toggle, isOpen }">
             <button
               @click="toggle"
-              class="flex items-center px-2 border rounded-full cursor-pointer gap-x-2 h-7 border-ink-200 hover:bg-ink-200"
+              class="flex items-center gap-x-2 pl-3 pr-2 h-7 rounded-md cursor-pointer border border-ink-50"
+              :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
             >
-              <div class="flex items-center text-xs gap-x-1 text-vanilla-400">
+              <div class="flex items-center text-sm gap-x-2 text-vanilla-400">
+                <z-icon icon="refresh-cw" size="small" />
+                <span> {{ countText }} </span>
                 <z-icon
                   icon="chevron-down"
                   size="small"
                   class="transition-all duration-300 transform"
                   :class="(isOpen && 'rotate-180') || 'rotate-0'"
                 />
-                <span> {{ countText }} </span>
               </div>
             </button>
           </template>
