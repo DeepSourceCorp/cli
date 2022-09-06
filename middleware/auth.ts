@@ -56,6 +56,9 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
 
       store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
     } catch (e) {
+      if (process.client) {
+        await store.dispatch(`account/auth/${AuthActionTypes.LOG_OUT}`)
+      }
       if (strict) {
         if (redirectToLogin) {
           if (route.fullPath !== '/') {
