@@ -46,7 +46,7 @@
     <!-- Issue list -->
     <div class="flex flex-col gap-y-3.5">
       <issue-editor
-        v-for="edge in edges"
+        v-for="(edge, index) in edges"
         v-bind="edge.node"
         :key="edge.node.id"
         :checkId="checkId"
@@ -54,6 +54,7 @@
         :shortcode="$route.params.issueId"
         :canIgnoreIssues="canIgnoreIssues"
         :blobUrlRoot="blobUrlRoot"
+        :open-accordion="index === 0"
         @ignoreIssues="ignoreIssues"
       ></issue-editor>
       <z-pagination
@@ -70,7 +71,15 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem, ZPagination } from '@deepsourcelabs/zeal'
+import {
+  ZIcon,
+  ZInput,
+  ZButton,
+  ZMenu,
+  ZMenuItem,
+  ZPagination,
+  ZAccordion
+} from '@deepsourcelabs/zeal'
 import IssueDescription from './IssueDescription.vue'
 import IssueEditor from './IssueEditor.vue'
 import { CheckIssueEdge } from '~/types/types'
@@ -86,7 +95,8 @@ const VISIBLE_PAGES = 5
     ZMenuItem,
     IssueDescription,
     IssueEditor,
-    ZPagination
+    ZPagination,
+    ZAccordion
   }
 })
 export default class IssueList extends Vue {
