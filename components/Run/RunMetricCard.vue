@@ -83,7 +83,14 @@ const repoStore = namespace('repository/detail')
 
 enum VALUE_STATE {
   ABOVE = 'Above threshold',
-  BELOW = 'Below threshold'
+  BELOW = 'Below threshold',
+  MEETS = 'Meets threshold'
+}
+
+const ICON_VALUE_STATE = {
+  [VALUE_STATE.ABOVE]: 'metric-high',
+  [VALUE_STATE.BELOW]: 'metric-low',
+  [VALUE_STATE.MEETS]: 'metric-medium'
 }
 
 @Component({
@@ -116,14 +123,16 @@ export default class RunMetricCard extends Vue {
     return this.metricsCaptured.valueTrendDisplay?.includes('%') || false
   }
 
-  get metricThresholdRelation(): string {
+  get metricThresholdRelation(): VALUE_STATE | '' {
     if (
       this.metricsCaptured.value !== null &&
       this.metricsCaptured.value !== undefined &&
       this.metricsCaptured.threshold !== null &&
       this.metricsCaptured.threshold !== undefined
     ) {
-      return this.metricsCaptured.value > this.metricsCaptured.threshold
+      return this.metricsCaptured.value === this.metricsCaptured.threshold
+        ? VALUE_STATE.MEETS
+        : this.metricsCaptured.value > this.metricsCaptured.threshold
         ? VALUE_STATE.ABOVE
         : VALUE_STATE.BELOW
     }
@@ -131,7 +140,7 @@ export default class RunMetricCard extends Vue {
   }
 
   get metricThresholdRelationIcon(): string {
-    return this.metricThresholdRelation === VALUE_STATE.ABOVE ? 'metric-high' : 'metric-low'
+    return this.metricThresholdRelation ? ICON_VALUE_STATE[this.metricThresholdRelation] : ''
   }
 
   get canSuppressMetric(): boolean {

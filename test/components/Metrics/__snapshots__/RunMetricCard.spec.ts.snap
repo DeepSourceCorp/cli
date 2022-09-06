@@ -5,10 +5,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -52,10 +51,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -99,10 +97,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -146,10 +143,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -188,15 +184,198 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
 </div>"
 `;
 
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 20%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 20%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 70"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 70"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 30"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 30"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 50%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 50%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
 exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":false,"threshold":80,"valueTrendDisplay":"Down 20%"}} 1`] = `
 "<div>
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -240,10 +419,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -287,10 +465,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -334,10 +511,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -381,10 +557,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -428,10 +603,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -475,10 +649,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -522,10 +695,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -569,10 +741,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -616,10 +787,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -663,10 +833,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -710,10 +879,9 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
   <!---->
   <div class=\\"p-4 space-y-2.5 grid content-between\\">
     <div>
-      <div class=\\"float-right\\"><button href=\\"#\\" type=\\"button\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap text-juniper justify-center p-0 h-6 w-6 font-normal hover:bg-ink-200\\"><svg viewBox=\\"0 0 24 24\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\" fill=\\"none\\" class=\\"z-icon w-4 h-4 z-icon--minus-circle text-vanilla-400\\">
-            <circle cx=\\"12\\" cy=\\"12\\" r=\\"10\\"></circle>
-            <line x1=\\"8\\" y1=\\"12\\" x2=\\"16\\" y2=\\"12\\"></line>
-          </svg></button></div>
+      <div class=\\"float-right\\">
+        <zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" icon=\\"minus-circle\\"></zbutton-stub>
+      </div>
       <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
         Line coverage
       </p>
@@ -931,6 +1099,190 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
         <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
       </div>
       <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Above threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 20%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 20%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 70"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 70"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 30"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 30"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 50%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":false,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 50%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
     </div>
   </div>
 </div>"
@@ -1672,6 +2024,190 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
 </div>"
 `;
 
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 20%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 20%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 70"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 70"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 30"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 30"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 50%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 50%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
 exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":false,"threshold":80,"valueTrendDisplay":"Down 20%"}} 1`] = `
 "<div>
   <!---->
@@ -2403,6 +2939,190 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
         <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
       </div>
       <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Above threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 20%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 20%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 70"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 70"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 30"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 30"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 50%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":null,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 50%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
     </div>
   </div>
 </div>"
@@ -3144,6 +3864,190 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
 </div>"
 `;
 
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 20%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"juniper\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 20%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"juniper\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 70"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"juniper\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 70"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"juniper\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 30"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"juniper\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 30"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"juniper\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 50%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"juniper\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 50%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"juniper\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
 exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":false,"threshold":80,"valueTrendDisplay":"Down 20%"}} 1`] = `
 "<div>
   <!---->
@@ -3875,6 +4779,190 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
         <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
       </div>
       <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Above threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 20%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 20%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 70"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 70"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 30"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 30"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 50%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isPassing":true,"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 50%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
     </div>
   </div>
 </div>"
@@ -4616,6 +5704,190 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
 </div>"
 `;
 
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 20%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 20%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 70"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Down 70"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 30"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 30"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 50%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":53,"valueTrendDisplay":"Up 50%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"metric-medium\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"cherry\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
 exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":false,"threshold":80,"valueTrendDisplay":"Down 20%"}} 1`] = `
 "<div>
   <!---->
@@ -5347,6 +6619,190 @@ exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"
         <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
       </div>
       <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Above threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 20%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 20%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"20%\\" is-percent=\\"true\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 70"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Down 70"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"70\\" trend-direction=\\"down\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-cherry has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 30"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 30"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"30\\" trend-positive=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 50%"}} 1`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
+    </div>
+  </div>
+</div>"
+`;
+
+exports[`renders RunMetricCard with all prop options: {"metricsCaptured":{"id":"UmVwb3NpdG9yeU1ldHJpY1ZhbHVlOmJ4anhnYQ==","name":"Line coverage","shortcode":"LCV","value":53,"valueDisplay":"53%","extraData":"{}","namespace":{"key":"python","analyzer_shortcode":"python","analyzer_logo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"},"isSuppressed":true,"threshold":53,"valueTrendDisplay":"Up 50%"}} 2`] = `
+"<div>
+  <!---->
+  <div class=\\"p-4 space-y-2.5 grid content-between\\">
+    <div>
+      <div class=\\"float-right\\">
+        <!---->
+      </div>
+      <p class=\\"font-medium leading-normal text-base text-vanilla-100\\">
+        Line coverage
+      </p>
+    </div>
+    <div class=\\"flex items-center justify-between w-full\\">
+      <div class=\\"flex items-center gap-x-2\\"><span class=\\"text-lg font-bold leading-snug text-vanilla-100\\">
+          53%</span>
+        <ticker-stub trend-value=\\"50%\\" trend-positive=\\"true\\" is-percent=\\"true\\" trend-direction=\\"up\\" custom-bg-class=\\"bg-ink-100\\" class=\\"text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+      </div>
+      <ztag-stub state=\\"default\\" iconleft=\\"minus-circle\\" size=\\"x-small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"px-2 py-0\\" iconcolor=\\"vanilla-400\\" class=\\"border border-ink-200\\"><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400\\">Meets threshold</span></ztag-stub>
     </div>
   </div>
 </div>"

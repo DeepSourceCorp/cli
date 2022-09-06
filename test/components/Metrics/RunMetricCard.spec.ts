@@ -42,7 +42,7 @@ test('renders RunMetricCard with all prop options', () => {
 
   const isPassingPropCombo = generateBooleanProps('isPassing')
   const isSuppressedPropCombo = generateBooleanProps('isSuppressed', false)
-  const thresholdPropCombo = generateGenericProps('threshold', [50, 80])
+  const thresholdPropCombo = generateGenericProps('threshold', [50, 80, 53])
   const valueTrendDisplayPropCombo = generateGenericProps(
     'valueTrendDisplay',
     ['Up 50%', 'Down 20%', 'Up 30', 'Down 70'],
@@ -76,7 +76,8 @@ test('renders RunMetricCard with all prop options', () => {
         stubs: {
           NuxtLink: RouterLinkStub,
           Ticker: true,
-          ZTag: true
+          ZTag: true,
+          ZButton: true
         },
         store: new Vuex.Store({
           modules: {
