@@ -1,4 +1,4 @@
-query fetchRepositoryMetricCaptured (
+query fetchRepositoryMetricCaptured(
   $provider: VCSProviderChoices!
   $owner: String!
   $name: String!
@@ -9,6 +9,7 @@ query fetchRepositoryMetricCaptured (
   repository(provider: $provider, owner: $owner, name: $name) {
     id
     userPermissionMeta
+    hasTestCoverage
     metricsCaptured(shortcode: $shortcode, metricType: $metricType) {
       id
       shortcode

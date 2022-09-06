@@ -21,13 +21,13 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 
         </p>
       </div>
-      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-ink-100 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
-          <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How's this calculated?
+      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0 flex-wrap md:flex-nowrap\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-ink-100 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
+          <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
-        <div class=\\"md:w-40\\">
+        <div class=\\"md:w-40 h-8\\">
           <div tabindex=\\"0\\" class=\\"relative w-full h-full leading-8 text-left outline-none custom-select\\">
-            <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-md text-vanilla-300 cursor-pointer\\">
-              <zicon-stub color=\\"vanilla-400\\" icon=\\"calendar-clock\\"></zicon-stub>
+            <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-sm text-vanilla-300 cursor-pointer\\">
+              <zicon-stub color=\\"vanilla-400\\" icon=\\"calendar-clock\\" class=\\"flex-shrink-0\\"></zicon-stub>
               <div class=\\"flex items-center flex-grow h-full outline-none cursor-pointer text-xs cursor-pointer\\"> Duration filter </div><span><zicon-stub icon=\\"chevron-down\\" size=\\"small\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform rotate-0\\"></zicon-stub></span>
             </div>
             <div class=\\"absolute left-0 right-0 z-10 mt-1 overflow-y-auto transition-all duration-300 border border-solid rounded-md max-h-64 options shadow-black border-ink-100 text-vanilla-300 bg-ink-300 hidden\\">
@@ -89,13 +89,13 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 
         </p>
       </div>
-      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-ink-100 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
-          <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How's this calculated?
+      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0 flex-wrap md:flex-nowrap\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-ink-100 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
+          <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
-        <div class=\\"md:w-40\\">
+        <div class=\\"md:w-40 h-8\\">
           <div tabindex=\\"0\\" class=\\"relative w-full h-full leading-8 text-left outline-none custom-select\\">
-            <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-md text-vanilla-300 cursor-pointer\\">
-              <zicon-stub color=\\"vanilla-400\\" icon=\\"calendar-clock\\"></zicon-stub>
+            <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-sm text-vanilla-300 cursor-pointer\\">
+              <zicon-stub color=\\"vanilla-400\\" icon=\\"calendar-clock\\" class=\\"flex-shrink-0\\"></zicon-stub>
               <div class=\\"flex items-center flex-grow h-full outline-none cursor-pointer text-xs cursor-pointer\\"> Duration filter </div><span><zicon-stub icon=\\"chevron-down\\" size=\\"small\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform rotate-0\\"></zicon-stub></span>
             </div>
             <div class=\\"absolute left-0 right-0 z-10 mt-1 overflow-y-auto transition-all duration-300 border border-solid rounded-md max-h-64 options shadow-black border-ink-100 text-vanilla-300 bg-ink-300 hidden\\">

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="metric && metric.namespacesTrends.length">
+  <div>
     <template v-if="isMissingAggregate">
       <lazy-empty-trend
         :namespaces-trend="mockAggregateData"
@@ -8,49 +8,81 @@
         @updateFilter="updateFilter"
       />
     </template>
-    <trend-section
-      v-for="namespacesTrend in metric.namespacesTrends"
-      :key="namespacesTrend.key"
-      :namespaces-trend="namespacesTrend"
-      :metric-meta="trendMetricData"
-      :filter-value="lastDays"
-      :clip="true"
-      :can-modify-threshold="canModifyThreshold"
-      :data-loading="metricDataLoading"
-      @addThreshold="openUpdateThresholdModal"
-      @openUpdateThresholdModal="openUpdateThresholdModal"
-      @deleteThreshold="deleteThreshold"
-      @updateFilter="updateFilter"
-    />
-    <portal to="modal">
-      <edit-threshold-modal
-        v-if="showUpdateThresholdModal"
-        v-bind="editModalProps"
-        @editThreshold="editThreshold"
-        @close="showUpdateThresholdModal = false"
-        @refetch="refetch"
+    <template v-if="metric && metric.namespacesTrends.length">
+      <trend-section
+        v-for="namespacesTrend in metric.namespacesTrends"
+        :key="namespacesTrend.key"
+        :namespaces-trend="namespacesTrend"
+        :metric-meta="trendMetricData"
+        :filter-value="lastDays"
+        :clip="true"
+        :can-modify-threshold="canModifyThreshold"
+        :data-loading="metricDataLoading"
+        @addThreshold="openUpdateThresholdModal"
+        @openUpdateThresholdModal="openUpdateThresholdModal"
+        @deleteThreshold="deleteThreshold"
+        @updateFilter="updateFilter"
       />
-    </portal>
-  </div>
-  <div v-else-if="$fetchState.pending">
-    <div class="bg-ink-300 h-23 animate-pulse"></div>
-    <div v-for="i in 2" :key="i" class="p-6 space-y-6 border-b border-ink-200">
-      <div class="h-8 w-32 bg-ink-300 animate-pulse"></div>
-      <div class="rounded-md space-y-4">
-        <div class="flex gap-x-23">
-          <div v-for="j in 2" :key="`s${j}`" class="h-13 w-32 animate-pulse bg-ink-300"></div>
+      <portal to="modal">
+        <edit-threshold-modal
+          v-if="showUpdateThresholdModal"
+          v-bind="editModalProps"
+          @editThreshold="editThreshold"
+          @close="showUpdateThresholdModal = false"
+          @refetch="refetch"
+        />
+      </portal>
+    </template>
+    <template v-else-if="$fetchState.pending">
+      <div class="bg-ink-300 h-23 animate-pulse"></div>
+      <div v-for="i in 2" :key="i" class="p-6 space-y-6 border-b border-ink-200">
+        <div class="h-8 w-32 bg-ink-300 animate-pulse"></div>
+        <div class="rounded-md space-y-4">
+          <div class="flex gap-x-23">
+            <div v-for="j in 2" :key="`s${j}`" class="h-13 w-32 animate-pulse bg-ink-300"></div>
+          </div>
+          <div class="h-72 bg-ink-300 animate-pulse"></div>
         </div>
-        <div class="h-72 bg-ink-300 animate-pulse"></div>
       </div>
+    </template>
+    <div v-else class="p-4">
+      <lazy-empty-state
+        v-if="checkTestCoverageSetupStatus && !repository.hasTestCoverage"
+        use-v2
+        :webp-image-path="
+          require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.webp')
+        "
+        :png-image-path="
+          require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.png')
+        "
+        :show-border="true"
+        title="Set up code coverage"
+        subtitle="Enable the Test Coverage analyzer on this repository to start collecting code coverage metrics."
+      >
+        <template #action>
+          <z-button
+            icon="scroll"
+            size="small"
+            to="https://deepsource.io/docs/analyzer/test-coverage#setup-test-coverage"
+            target="_blank"
+            rel="noopener noreferrer"
+            label="Read the docs"
+          />
+        </template>
+      </lazy-empty-state>
+      <lazy-empty-state
+        v-else
+        :webp-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.webp')"
+        :png-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.png')"
+        :show-border="true"
+        title="Not enough data"
+      >
+        <template #subtitle>
+          We do not have enough data to show a trend yet. <br class="hidden md:block" />
+          Please come back later.
+        </template>
+      </lazy-empty-state>
     </div>
-  </div>
-  <div v-else class="p-4 min-h-98">
-    <lazy-empty-state
-      title="No data found"
-      subtitle="We don’t have enough data to show a trend."
-      :show-border="true"
-      class="h-full flex flex-col justify-center"
-    />
   </div>
 </template>
 <script lang="ts">
@@ -60,8 +92,11 @@ import { Component, namespace, Vue, Watch } from 'nuxt-property-decorator'
 // Store imports
 import { RepositoryDetailActions } from '~/store/repository/detail'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
-import { MetricType } from '~/types/metric'
+import { DEFAULT_BR_COVERAGE_METRICS, MetricType } from '~/types/metric'
 import { Maybe, Metric, MetricNamespaceTrend, MetricTypeChoices, Repository } from '~/types/types'
+
+//Zeal
+import { ZButton } from '@deepsourcelabs/zeal'
 
 const repoStore = namespace('repository/detail')
 
@@ -69,7 +104,8 @@ const repoStore = namespace('repository/detail')
  * Metric detail page for a Repository metric.
  */
 @Component({
-  layout: 'repository'
+  layout: 'repository',
+  components: { ZButton }
 })
 export default class MetricPage extends Vue {
   @repoStore.Action(RepositoryDetailActions.FETCH_METRIC)
@@ -179,6 +215,10 @@ export default class MetricPage extends Vue {
 
   get canModifyThreshold(): boolean {
     return Boolean(this.repository.userPermissionMeta?.can_modify_metric_thresholds)
+  }
+
+  get checkTestCoverageSetupStatus(): boolean {
+    return DEFAULT_BR_COVERAGE_METRICS.includes(this.$route.params.metric)
   }
 
   /**

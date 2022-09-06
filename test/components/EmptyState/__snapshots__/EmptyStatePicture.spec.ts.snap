@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 1`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 2`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 3`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 4`] = `
+"<picture class=\\"w-full\\">
+  <source srcset=\\"~/assets/test.svg\\" type=\\"image/svg+xml\\">
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 5`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 6`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 7`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 8`] = `
+"<picture class=\\"w-full\\">
+  <source srcset=\\"~/assets/test.svg\\" type=\\"image/svg+xml\\">
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 9`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 10`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 11`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 12`] = `
+"<picture class=\\"w-full\\">
+  <source srcset=\\"~/assets/test.svg\\" type=\\"image/svg+xml\\">
+  <!----> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 13`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <source srcset=\\"~/assets/test.webp\\" type=\\"image/webp\\"> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 14`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <source srcset=\\"~/assets/test.webp\\" type=\\"image/webp\\"> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 15`] = `
+"<picture class=\\"w-full\\">
+  <!---->
+  <source srcset=\\"~/assets/test.webp\\" type=\\"image/webp\\"> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;
+
+exports[`renders EmptyStatePicture with all prop options: EmptyStatePicture 16`] = `
+"<picture class=\\"w-full\\">
+  <source srcset=\\"~/assets/test.svg\\" type=\\"image/svg+xml\\">
+  <source srcset=\\"~/assets/test.webp\\" type=\\"image/webp\\"> <img src=\\"~/assets/test.png\\" alt=\\"Needs test cov\\" class=\\"mx-auto w-full\\"></picture>"
+`;

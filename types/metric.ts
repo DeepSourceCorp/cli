@@ -9,3 +9,5 @@ export enum StatType {
 }
 
 export const NLCV_SHORTCODE = 'NLCV'
+
+export const DEFAULT_BR_COVERAGE_METRICS = ['BCV', 'CCV', 'LCV']

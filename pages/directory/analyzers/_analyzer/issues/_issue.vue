@@ -37,11 +37,7 @@
         v-html="issue.descriptionRendered"
         class="py-2 prose"
       ></div>
-      <lazy-empty-state
-        v-else-if="isLoaded"
-        title="No issue description found!"
-        image-width="w-28"
-      />
+      <lazy-empty-state v-else-if="isLoaded" title="No issue description found!" />
     </div>
   </div>
 </template>

@@ -71,7 +71,6 @@
       title="No issues found!"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
       :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
-      image-width="w-28"
     />
   </div>
 </template>

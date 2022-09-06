@@ -33,7 +33,7 @@
       </div>
       <div
         v-if="isAggregate"
-        class="flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0"
+        class="flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0 flex-wrap md:flex-nowrap"
       >
         <z-button
           button-type="ghost"
@@ -44,20 +44,21 @@
           size="small"
           color="vanilla-100"
           class="border border-ink-100 border-dashed"
-          >How's this calculated?</z-button
+          >How’s this calculated?</z-button
         >
-        <div class="md:w-40">
+        <div class="md:w-40 h-8">
           <z-select
             v-model="currentFilterValue"
             :key="filterValue"
             backgroundClass="bg-ink-200"
             borderClass="border-ink-200"
+            border-radius="rounded-sm"
             spacing="px-2 py-1"
             placeholder="Duration filter"
             @change="(value) => (currentFilterValue = value)"
           >
             <template #icon>
-              <z-icon color="vanilla-400" icon="calendar-clock" />
+              <z-icon color="vanilla-400" icon="calendar-clock" class="flex-shrink-0" />
             </template>
             <z-option
               v-for="(opt, index) in dayOptions"

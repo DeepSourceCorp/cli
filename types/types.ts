@@ -9994,7 +9994,7 @@ export type FetchRepositoryMetricCapturedQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'userPermissionMeta'>
+    & Pick<Repository, 'id' | 'userPermissionMeta' | 'hasTestCoverage'>
     & { metricsCaptured?: Maybe<Array<Maybe<(
       { __typename?: 'Metric' }
       & Pick<Metric, 'id' | 'shortcode' | 'name' | 'category' | 'description' | 'supportsAggregateThreshold' | 'unit'>

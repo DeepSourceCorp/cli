@@ -32,10 +32,15 @@
   <div v-else class="min-h-98 p-4">
     <lazy-empty-state
       title="Not enough data"
-      subtitle="We’re still crunching the numbers before we can show you the metrics. Please come back later!"
+      :webp-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.webp')"
+      :png-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.png')"
       :show-border="true"
-      class="h-full flex flex-col justify-center"
-    />
+    >
+      <template #subtitle>
+        We do not have enough data to show a trend yet. <br class="hidden md:block" />
+        Please come back later.
+      </template>
+    </lazy-empty-state>
   </div>
 </template>
 <script lang="ts">

@@ -97,7 +97,6 @@
             fullyLoaded && analyzer.issueTypeDistribution && !analyzer.issueTypeDistribution.length
           "
           title="No issue statistics found!"
-          image-width="w-28"
         />
         <analyzer-dir-stats
           :is-loading="!fullyLoaded"

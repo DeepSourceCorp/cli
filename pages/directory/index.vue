@@ -45,7 +45,6 @@
         title="No Analyzers found!"
         :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
         :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
-        image-width="w-28"
       />
     </section>
     <section class="px-4 pb-4 mt-10">
@@ -77,7 +76,6 @@
         title="No Transformers found!"
         :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
         :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
-        image-width="w-28"
       />
     </section>
   </div>
