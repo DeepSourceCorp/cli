@@ -36,7 +36,11 @@
             class="flex-shrink-0"
           />
           <div class="text-sm text-vanilla-400 line-clamp-1">
-            <a v-tooltip="vscLinkTooltip" :href="vcsPrUrl" target="_blank" rel="noopener noreferrer"
+            <a
+              v-tooltip="vscLinkTooltip"
+              :href="isForDefaultBranch ? repository.vcsUrl : vcsPrUrl"
+              target="_blank"
+              rel="noopener noreferrer"
               >{{ isForDefaultBranch ? branchName : pullRequestNumberDisplay }}
             </a>
           </div>
