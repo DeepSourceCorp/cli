@@ -78,8 +78,7 @@
         title="Not enough data"
       >
         <template #subtitle>
-          We do not have enough data to show a trend yet. <br class="hidden md:block" />
-          Please come back later.
+          We do not have enough data for the selected time range. Please select another time range.
         </template>
       </lazy-empty-state>
     </div>
