@@ -136,7 +136,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
               companyName
             )} continuous integration (CI) system to track their
             source code's coverage generated after running the automated tests and helps them take action to improve it. This report provides the
-            current and historical snapshot of code coverage metrics for ${smartApostrophe(
+            latest snapshot of code coverage metrics for ${smartApostrophe(
               companyName
             )} source code, limited
             to the repositories tracked on DeepSource.

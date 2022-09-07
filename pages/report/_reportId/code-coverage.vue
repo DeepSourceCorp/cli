@@ -28,23 +28,23 @@
         </template>
       </z-input>
       <div
-        v-show="
+        v-if="
           (codeCoverageReportList && codeCoverageReportList.length) || codeCoverageReportListLoading
         "
       >
         <code-coverage-table-loading
-          v-show="codeCoverageReportListLoading"
+          v-if="codeCoverageReportListLoading"
           :row-count="loaderCount"
         />
         <code-coverage-table
-          v-show="!codeCoverageReportListLoading"
+          v-else-if="codeCoverageReportList && codeCoverageReportList.length"
           :repo-coverage-list="codeCoverageReportList"
           :selected-sort-filter="queryParams.sort"
           @sort-filter-updated="handleSortUpdate"
         />
       </div>
       <lazy-empty-state
-        v-if="
+        v-else-if="
           queryParams.q &&
           !(
             (codeCoverageReportList && codeCoverageReportList.length) ||
@@ -58,7 +58,7 @@
       />
 
       <lazy-empty-state
-        v-if="showEmptyDataState"
+        v-else
         :webp-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.webp')"
         :png-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.png')"
         :show-border="true"
@@ -174,12 +174,12 @@ export default class PublicReportCodeCoverage extends mixins(
   }
 
   /**
-   * Mounted hook that triggers fetching of list of code coverage data.
+   * Fetch hook for Vue component that fetches the report.
    *
    * @returns {Promise<void>}
    */
-  async mounted(): Promise<void> {
-    this.fetchCodeCoverage(false)
+  async fetch(): Promise<void> {
+    await this.fetchCodeCoverage(false)
   }
 
   /**
@@ -213,7 +213,8 @@ export default class PublicReportCodeCoverage extends mixins(
           first,
           offset,
           sort,
-          q
+          q,
+          token: this.token
         },
         refetch
       )) as GraphqlQueryResponse

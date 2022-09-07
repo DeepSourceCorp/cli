@@ -207,12 +207,11 @@ export default class PublicReportSans extends mixins(PublicReportMixin, Complian
   }
 
   /**
-   * Mounted hook for Vue component.
-   * Fetch report data on mount.
+   * Fetch hook for Vue component that fetches the report.
    *
    * @returns {Promise<void>}
    */
-  async mounted(): Promise<void> {
+  async fetch(): Promise<void> {
     await this.refetchData()
   }
 

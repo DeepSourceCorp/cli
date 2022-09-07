@@ -186,12 +186,11 @@ export default class PublicReportIssueDistribution extends mixins(PublicReportMi
   }
 
   /**
-   * Mounted hook for Vue component.
-   * Fetch report data on mount.
+   * Fetch hook for Vue component that fetches the report.
    *
    * @returns {Promise<void>}
    */
-  async mounted(): Promise<void> {
+  async fetch(): Promise<void> {
     await this.refetchData()
   }
 
