@@ -3,7 +3,7 @@
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"issue-distribution"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\"></h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -46,7 +46,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\"></h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -99,7 +99,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\"></h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -149,7 +149,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"issue-distribution"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution insight report for deepsourcelabs</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -192,7 +192,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 compliance report for deepsourcelabs</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -245,7 +245,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 compliance report for deepsourcelabs</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -295,7 +295,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"issue-distribution"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution insight report for deepsourcelabs/asgard</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -338,7 +338,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 compliance report for deepsourcelabs/asgard</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -391,7 +391,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 compliance report for deepsourcelabs/asgard</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>

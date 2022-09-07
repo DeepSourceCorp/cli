@@ -2,14 +2,16 @@ import { DurationTypeT } from '~/utils/date'
 import { smartApostrophe } from '~/utils/string'
 import { PublicReport, ReportType } from './types'
 
+export type ReportCopyTextT = {
+  summary: string | null
+  intendedUse: string | null
+}
+
 export type ReportMetaProperties = {
   title: string
   description: string
   type?: ReportType
-  copyText: (companyName: string) => {
-    summary: string
-    intendedUse: string
-  }
+  copyText: (companyName: string) => ReportCopyTextT
 }
 
 export enum ReportPageT {

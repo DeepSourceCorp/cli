@@ -8,8 +8,17 @@
     </header>
 
     <section class="space-y-14 mt-8 leading-8">
-      <div v-html="copyText.summary" class="space-y-4 text-vanilla-400"></div>
-      <div v-html="copyText.intendedUse" class="space-y-4 text-vanilla-400"></div>
+      <!-- Unsanitized v-html because copy text is in bifrost -->
+      <div
+        v-if="copyText.summary"
+        v-html="copyText.summary"
+        class="space-y-4 text-vanilla-400"
+      ></div>
+      <div
+        v-if="copyText.intendedUse"
+        v-html="copyText.intendedUse"
+        class="space-y-4 text-vanilla-400"
+      ></div>
       <div class="space-y-4 text-vanilla-400">
         <h1 id="continuous-code-health" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">
           Continuous Code Health
@@ -31,7 +40,7 @@
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 import { ReportLevel, ReportType, Repository } from '~/types/types'
-import { ReportMeta, ReportPageT } from '~/types/reportTypes'
+import { ReportCopyTextT, ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { smartApostrophe } from '~/utils/string'
 
 /**
@@ -60,22 +69,12 @@ export default class PublicReportPageWrapper extends Vue {
 
   ReportType = ReportType
 
-  get copyText() {
-    return ReportMeta[this.reportKey].copyText(this.ownerLogin) ?? ''
+  get copyText(): ReportCopyTextT {
+    return ReportMeta[this.reportKey].copyText(this.ownerLogin) ?? { summary: '', intendedUse: '' }
   }
 
-  get label() {
-    const title = ReportMeta[this.reportKey].title
-    const type = String(ReportMeta[this.reportKey].type?.toLowerCase())
-    if (this.level === ReportLevel.Repository) {
-      const repo = this.repositoryList[0]
-      return `${title} ${type} report for ${this.ownerLogin}/${repo.name}`
-    }
-    if (this.level === ReportLevel.Owner) {
-      return `${title} ${type} report for ${this.ownerLogin}`
-    }
-
-    return ''
+  get label(): string {
+    return `${ReportMeta[this.reportKey].title} report` ?? ''
   }
 }
 </script>
