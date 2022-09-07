@@ -5,7 +5,6 @@ import { PublicReport, ReportType } from './types'
 export type ReportMetaProperties = {
   title: string
   description: string
-  hasIssueTable: boolean
   type?: ReportType
   copyText: (companyName: string) => {
     summary: string
@@ -17,14 +16,14 @@ export enum ReportPageT {
   OWASP_TOP_10 = 'owasp-top-10',
   SANS_TOP_25 = 'sans-top-25',
   DISTRIBUTION = 'issue-distribution',
-  PUBLIC_REPORTS = 'public-reports'
+  PUBLIC_REPORTS = 'public-reports',
+  CODE_COVERAGE = 'code-coverage'
 }
 
 export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   [ReportPageT.OWASP_TOP_10]: {
     title: 'OWASP Top 10',
     description: 'Overview of OWASP Top 10 security risks in your code.',
-    hasIssueTable: true,
     type: ReportType.Compliance,
     copyText: (companyName) => {
       return {
@@ -68,7 +67,6 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   [ReportPageT.SANS_TOP_25]: {
     title: 'SANS Top 25',
     description: 'Overview of CWE/SANS Top 25 most dangerous software errors in your code.',
-    hasIssueTable: true,
     type: ReportType.Compliance,
     copyText: (companyName) => {
       return {
@@ -99,7 +97,6 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   [ReportPageT.DISTRIBUTION]: {
     title: 'Issue Distribution',
     description: 'Overview of issues found across categories and Analyzers.',
-    hasIssueTable: false,
     type: ReportType.Insight,
     copyText: (companyName) => {
       return {
@@ -125,10 +122,35 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
       }
     }
   },
+  [ReportPageT.CODE_COVERAGE]: {
+    title: 'Code Coverage',
+    description: 'Track code coverage across your organization.',
+    type: ReportType.Insight,
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+        <p>
+            DeepSource integrates with ${smartApostrophe(
+              companyName
+            )} continuous integration (CI) system to track their
+            source code's coverage generated after running the automated tests and helps them take action to improve it. This report provides the
+            current and historical snapshot of code coverage metrics for ${smartApostrophe(
+              companyName
+            )} source code, limited
+            to the repositories tracked on DeepSource.
+        </p>`,
+        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+            This report can be used by the ${companyName} team to identify and remediate gaps in code not covered by any
+            automated tests and make it more stable and maintainable. The report can also be used by key internal and external
+            stakeholders to understand the stability of ${smartApostrophe(companyName)} software.
+        </p>`
+      }
+    }
+  },
   [ReportPageT.PUBLIC_REPORTS]: {
     title: 'Public Reports',
     description: '',
-    hasIssueTable: false,
     copyText: () => {
       return {
         summary: ``,
@@ -167,9 +189,9 @@ export enum IssueDistributionT {
 }
 
 export interface ReportsTabLink {
+  key: ReportPageT
   label: string
   link: string[]
-  pathName: ReportPageT
 }
 
 export enum PublicReportErrors {
@@ -189,4 +211,16 @@ export type ReportToEditT = {
   label: PublicReport['label']
   source?: PublicReport['source']
   sourcedRepositories?: PublicReport['sourcedRepositories']
+}
+
+export enum CoverageSortT {
+  LCV_ASCENDING = 'lcv-asc',
+  LCV_DESCENDING = 'lcv-desc',
+  BCV_ASCENDING = 'bcv-asc',
+  BCV_DESCENDING = 'bcv-desc'
+}
+
+export enum CodeCoverageT {
+  LCV = 'lcv',
+  BCV = 'bcv'
 }

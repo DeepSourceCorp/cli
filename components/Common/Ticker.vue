@@ -7,7 +7,14 @@
       customBgClass ? '' : showBg ? 'bg-opacity-10' : 'bg-opacity-0'
     ]"
   >
-    <z-icon v-if="icon" :icon="icon" :color="iconColor" class="inline" :class="iconClass"></z-icon>
+    <z-icon
+      v-if="icon"
+      :icon="icon"
+      :color="iconColor"
+      :size="iconSize"
+      class="inline"
+      :class="iconClass"
+    />
     <z-icon
       v-else
       :icon="trendDirection === 'up' ? 'triangle-up' : 'triangle-down'"
@@ -48,6 +55,9 @@ export default class Ticker extends Vue {
 
   @Prop({ default: null })
   icon: string
+
+  @Prop({ default: 'small' })
+  iconSize: string
 
   @Prop({ default: 'pb-0.5' })
   iconClass: string

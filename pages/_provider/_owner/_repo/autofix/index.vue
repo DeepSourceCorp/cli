@@ -236,12 +236,16 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin, Au
   }
 
   get loaderCount(): number {
-    const { provider, owner, repo } = this.$route.params
-    const localCountFromStore = this.$localStore.get(
-      `${provider}-${owner}-${repo}`,
-      'autofix-available-autofixes-count'
-    ) as number
-    return localCountFromStore ?? 3
+    if (process.client) {
+      const { provider, owner, repo } = this.$route.params
+      const localCountFromStore = this.$localStore.get(
+        `${provider}-${owner}-${repo}`,
+        'autofix-available-autofixes-count'
+      ) as number
+      return localCountFromStore ?? 3
+    }
+
+    return 3
   }
 
   head(): Record<string, string> {

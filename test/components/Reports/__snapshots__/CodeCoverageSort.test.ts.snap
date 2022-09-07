@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ CodeCoverageSort ]] renders CodeCoverageSort with all prop options: {"coverageFilters":{"lcv-asc":{"label":"LINE COVERAGE","icon":"arrow-up","name":"lcv-asc"},"lcv-desc":{"label":"LINE COVERAGE","icon":"arrow-down","name":"lcv-desc"}},"coverageType":"lcv","defaultLabel":"Line Coverage","selectedCoverageSortFilter":""} 1`] = `
+"<div class=\\"relative inline-block z-badge\\">
+  <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" class=\\"\\">
+    <div class=\\"flex items-center gap-x-2 font-semibold\\"><span class=\\"uppercase\\">Line Coverage</span>
+      <zicon-stub icon=\\"arrow-up-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    </div>
+  </zbutton-stub>
+  <div class=\\"text-center transform z-badge-content bg-juniper top-0 inline-block text-xs px-2 text-vanilla-100 absolute translate-x-1/2 -translate-y-1/2\\" style=\\"display: none;\\"><span></span></div>
+</div>"
+`;
+
+exports[`[[ CodeCoverageSort ]] renders CodeCoverageSort with all prop options: {"coverageFilters":{"lcv-asc":{"label":"LINE COVERAGE","icon":"arrow-up","name":"lcv-asc"},"lcv-desc":{"label":"LINE COVERAGE","icon":"arrow-down","name":"lcv-desc"}},"coverageType":"lcv","defaultLabel":"Line Coverage","selectedCoverageSortFilter":"lcv-asc"} 1`] = `
+"<div class=\\"relative inline-block z-badge\\">
+  <zbutton-stub color=\\"vanilla-100\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" class=\\"bg-ink-200 hover:bg-ink-100\\">
+    <div class=\\"flex items-center gap-x-2 font-semibold\\"><span class=\\"uppercase\\">LINE COVERAGE</span>
+      <zicon-stub icon=\\"arrow-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    </div>
+  </zbutton-stub>
+  <div class=\\"text-center transform z-badge-content bg-juniper w-2 h-2 top-px right-px text-vanilla-100 absolute translate-x-1/2 -translate-y-1/2 p-0 rounded-full\\"><span></span></div>
+</div>"
+`;
+
+exports[`[[ CodeCoverageSort ]] renders CodeCoverageSort with all prop options: {"coverageFilters":{"lcv-asc":{"label":"LINE COVERAGE","icon":"arrow-up","name":"lcv-asc"},"lcv-desc":{"label":"LINE COVERAGE","icon":"arrow-down","name":"lcv-desc"}},"coverageType":"lcv","defaultLabel":"Line Coverage","selectedCoverageSortFilter":"lcv-desc"} 1`] = `
+"<div class=\\"relative inline-block z-badge\\">
+  <zbutton-stub color=\\"vanilla-100\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" to=\\"\\" class=\\"bg-ink-200 hover:bg-ink-100\\">
+    <div class=\\"flex items-center gap-x-2 font-semibold\\"><span class=\\"uppercase\\">LINE COVERAGE</span>
+      <zicon-stub icon=\\"arrow-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    </div>
+  </zbutton-stub>
+  <div class=\\"text-center transform z-badge-content bg-juniper w-2 h-2 top-px right-px text-vanilla-100 absolute translate-x-1/2 -translate-y-1/2 p-0 rounded-full\\"><span></span></div>
+</div>"
+`;

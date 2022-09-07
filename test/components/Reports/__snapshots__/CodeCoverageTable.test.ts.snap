@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders CodeCoverageTable with all prop options: {"repoCoverageList":[{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6cXdwZ3o=","name":"bob-cli","lcvValue":72.12,"lcvIsPassing":false,"bcvValue":86,"bcvIsPassing":true},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6d2phcGI=","name":"demo-go","lcvValue":72.12,"lcvIsPassing":false,"bcvValue":72.12,"bcvIsPassing":false},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6anBnbHo=","name":"marvin-test-coverage","lcvValue":62,"lcvIsPassing":true,"bcvValue":80,"bcvIsPassing":true},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6dmp2eXo=","name":"asgard","lcvValue":45,"lcvIsPassing":null,"bcvValue":60.8,"bcvIsPassing":null},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6ZXBqZWI=","name":"demo-python","lcvValue":null,"lcvIsPassing":null,"bcvValue":null,"bcvIsPassing":null},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6dmpleXo=","name":"marvin-docker","lcvValue":null,"lcvIsPassing":null,"bcvValue":null,"bcvIsPassing":null},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTpib3BtZXo=","name":"git-label-packages","lcvValue":null,"lcvIsPassing":null,"bcvValue":null,"bcvIsPassing":null},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6Z2tlZHo=","name":"beacon-py","lcvValue":null,"lcvIsPassing":null,"bcvValue":null,"bcvIsPassing":null}],"linkedRows":false} 1`] = `
+"<section class=\\"overflow-x-auto rounded-md border border-ink-200 leading-normal\\">
+  <table class=\\"table-fixed cursor w-full\\">
+    <thead class=\\"border-b border-ink-200\\">
+      <tr class=\\"uppercase text-vanilla-400 text-xs font-semibold\\">
+        <th class=\\"pl-4 py-2.5 text-left w-48 sm:w-auto\\">Repository</th>
+        <th class=\\"pr-2 w-40 text-right\\">
+          <codecoveragesort-stub coveragefilters=\\"[object Object]\\" coveragetype=\\"lcv\\" defaultlabel=\\"Line Coverage\\"></codecoveragesort-stub>
+        </th>
+        <th class=\\"pr-2 w-48 text-right\\">
+          <codecoveragesort-stub coveragefilters=\\"[object Object]\\" coveragetype=\\"bcv\\" defaultlabel=\\"Branch Coverage\\"></codecoveragesort-stub>
+        </th>
+      </tr>
+    </thead>
+    <tbody class=\\"divide-y divide-ink-200\\">
+      <tr class=\\"\\">
+        <td class=\\"text-left truncate text-sm\\">
+          <div to=\\"/gh/deepsourcelabs/bifrost/bob-cli/metrics/LCV\\" class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                bob-cli
+              </span></div>
+        </td>
+        <codecoveragetablecell-stub value=\\"72.12\\" reponame=\\"bob-cli\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub ispassing=\\"true\\" value=\\"86\\" reponame=\\"bob-cli\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"\\">
+        <td class=\\"text-left truncate text-sm\\">
+          <div to=\\"/gh/deepsourcelabs/bifrost/demo-go/metrics/LCV\\" class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                demo-go
+              </span></div>
+        </td>
+        <codecoveragetablecell-stub value=\\"72.12\\" reponame=\\"demo-go\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub value=\\"72.12\\" reponame=\\"demo-go\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"\\">
+        <td class=\\"text-left truncate text-sm\\">
+          <div to=\\"/gh/deepsourcelabs/bifrost/marvin-test-coverage/metrics/LCV\\" class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                marvin-test-coverage
+              </span></div>
+        </td>
+        <codecoveragetablecell-stub ispassing=\\"true\\" value=\\"62\\" reponame=\\"marvin-test-coverage\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub ispassing=\\"true\\" value=\\"80\\" reponame=\\"marvin-test-coverage\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"\\">
+        <td class=\\"text-left truncate text-sm\\">
+          <div to=\\"/gh/deepsourcelabs/bifrost/asgard/metrics/LCV\\" class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                asgard
+              </span></div>
+        </td>
+        <codecoveragetablecell-stub value=\\"45\\" reponame=\\"asgard\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub value=\\"60.8\\" reponame=\\"asgard\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"\\">
+        <td class=\\"text-left truncate text-sm\\">
+          <div to=\\"/gh/deepsourcelabs/bifrost/demo-python/metrics/LCV\\" class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                demo-python
+              </span></div>
+        </td>
+        <codecoveragetablecell-stub reponame=\\"demo-python\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub reponame=\\"demo-python\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"\\">
+        <td class=\\"text-left truncate text-sm\\">
+          <div to=\\"/gh/deepsourcelabs/bifrost/marvin-docker/metrics/LCV\\" class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                marvin-docker
+              </span></div>
+        </td>
+        <codecoveragetablecell-stub reponame=\\"marvin-docker\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub reponame=\\"marvin-docker\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"\\">
+        <td class=\\"text-left truncate text-sm\\">
+          <div to=\\"/gh/deepsourcelabs/bifrost/git-label-packages/metrics/LCV\\" class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                git-label-packages
+              </span></div>
+        </td>
+        <codecoveragetablecell-stub reponame=\\"git-label-packages\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub reponame=\\"git-label-packages\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"\\">
+        <td class=\\"text-left truncate text-sm\\">
+          <div to=\\"/gh/deepsourcelabs/bifrost/beacon-py/metrics/LCV\\" class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                beacon-py
+              </span></div>
+        </td>
+        <codecoveragetablecell-stub reponame=\\"beacon-py\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub reponame=\\"beacon-py\\"></codecoveragetablecell-stub>
+      </tr>
+    </tbody>
+  </table>
+</section>"
+`;
+
+exports[`renders CodeCoverageTable with all prop options: {"repoCoverageList":[{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6cXdwZ3o=","name":"bob-cli","lcvValue":72.12,"lcvIsPassing":false,"bcvValue":86,"bcvIsPassing":true},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6d2phcGI=","name":"demo-go","lcvValue":72.12,"lcvIsPassing":false,"bcvValue":72.12,"bcvIsPassing":false},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6anBnbHo=","name":"marvin-test-coverage","lcvValue":62,"lcvIsPassing":true,"bcvValue":80,"bcvIsPassing":true},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6dmp2eXo=","name":"asgard","lcvValue":45,"lcvIsPassing":null,"bcvValue":60.8,"bcvIsPassing":null},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6ZXBqZWI=","name":"demo-python","lcvValue":null,"lcvIsPassing":null,"bcvValue":null,"bcvIsPassing":null},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6dmpleXo=","name":"marvin-docker","lcvValue":null,"lcvIsPassing":null,"bcvValue":null,"bcvIsPassing":null},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTpib3BtZXo=","name":"git-label-packages","lcvValue":null,"lcvIsPassing":null,"bcvValue":null,"bcvIsPassing":null},{"id":"UmVwb3NpdG9yeUNvdmVyYWdlUmVwb3J0SXRlbTp6Z2tlZHo=","name":"beacon-py","lcvValue":null,"lcvIsPassing":null,"bcvValue":null,"bcvIsPassing":null}],"linkedRows":true} 1`] = `
+"<section class=\\"overflow-x-auto rounded-md border border-ink-200 leading-normal\\">
+  <table class=\\"table-fixed cursor w-full\\">
+    <thead class=\\"border-b border-ink-200\\">
+      <tr class=\\"uppercase text-vanilla-400 text-xs font-semibold\\">
+        <th class=\\"pl-4 py-2.5 text-left w-48 sm:w-auto\\">Repository</th>
+        <th class=\\"pr-2 w-40 text-right\\">
+          <codecoveragesort-stub coveragefilters=\\"[object Object]\\" coveragetype=\\"lcv\\" defaultlabel=\\"Line Coverage\\"></codecoveragesort-stub>
+        </th>
+        <th class=\\"pr-2 w-48 text-right\\">
+          <codecoveragesort-stub coveragefilters=\\"[object Object]\\" coveragetype=\\"bcv\\" defaultlabel=\\"Branch Coverage\\"></codecoveragesort-stub>
+        </th>
+      </tr>
+    </thead>
+    <tbody class=\\"divide-y divide-ink-200\\">
+      <tr class=\\"hover:bg-ink-300\\">
+        <td class=\\"text-left truncate text-sm\\"><a class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                bob-cli
+              </span></a></td>
+        <codecoveragetablecell-stub value=\\"72.12\\" reponame=\\"bob-cli\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub ispassing=\\"true\\" value=\\"86\\" reponame=\\"bob-cli\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"hover:bg-ink-300\\">
+        <td class=\\"text-left truncate text-sm\\"><a class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                demo-go
+              </span></a></td>
+        <codecoveragetablecell-stub value=\\"72.12\\" reponame=\\"demo-go\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub value=\\"72.12\\" reponame=\\"demo-go\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"hover:bg-ink-300\\">
+        <td class=\\"text-left truncate text-sm\\"><a class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                marvin-test-coverage
+              </span></a></td>
+        <codecoveragetablecell-stub ispassing=\\"true\\" value=\\"62\\" reponame=\\"marvin-test-coverage\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub ispassing=\\"true\\" value=\\"80\\" reponame=\\"marvin-test-coverage\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"hover:bg-ink-300\\">
+        <td class=\\"text-left truncate text-sm\\"><a class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                asgard
+              </span></a></td>
+        <codecoveragetablecell-stub value=\\"45\\" reponame=\\"asgard\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub value=\\"60.8\\" reponame=\\"asgard\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"hover:bg-ink-300\\">
+        <td class=\\"text-left truncate text-sm\\"><a class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                demo-python
+              </span></a></td>
+        <codecoveragetablecell-stub reponame=\\"demo-python\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub reponame=\\"demo-python\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"hover:bg-ink-300\\">
+        <td class=\\"text-left truncate text-sm\\"><a class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                marvin-docker
+              </span></a></td>
+        <codecoveragetablecell-stub reponame=\\"marvin-docker\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub reponame=\\"marvin-docker\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"hover:bg-ink-300\\">
+        <td class=\\"text-left truncate text-sm\\"><a class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                git-label-packages
+              </span></a></td>
+        <codecoveragetablecell-stub reponame=\\"git-label-packages\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub reponame=\\"git-label-packages\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+      </tr>
+      <tr class=\\"hover:bg-ink-300\\">
+        <td class=\\"text-left truncate text-sm\\"><a class=\\"block py-2.5 pl-4\\"><span data-original-title=\\"null\\" class=\\" has-tooltip\\">
+                beacon-py
+              </span></a></td>
+        <codecoveragetablecell-stub reponame=\\"beacon-py\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+        <codecoveragetablecell-stub reponame=\\"beacon-py\\" linkedcell=\\"true\\"></codecoveragetablecell-stub>
+      </tr>
+    </tbody>
+  </table>
+</section>"
+`;

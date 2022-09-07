@@ -1876,6 +1876,7 @@ type Owner implements MaskPrimaryKeyNode {
   featureUsage: GenericScalar
   isGsrSshRegistered: Boolean
   installedIntegrations(feature: IntegrationFeature): [IntegrationProvider]
+  repositoriesCoverageReport(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String): RepositoryCoverageReportItemConnection
 }
 
 type OwnerCacheKeys {
@@ -1947,6 +1948,7 @@ type PublicReport implements MaskPrimaryKeyNode {
   complianceIssues(key: String!): [ComplianceIssue]
   issueDistributionByAnalyzer: [IssueDistribution]
   issueDistributionByCategory: [IssueDistribution]
+  repositoriesCoverageReport(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String): RepositoryCoverageReportItemConnection
 }
 
 type PublicReportConnection {
@@ -2274,6 +2276,26 @@ type RepositoryConnection {
   totalCount: Int
 }
 
+type RepositoryCoverageReportItem implements MaskPrimaryKeyNode {
+  name: String!
+  id: ID!
+  lcvValue: Float
+  bcvValue: Float
+  lcvIsPassing: Boolean
+  bcvIsPassing: Boolean
+}
+
+type RepositoryCoverageReportItemConnection {
+  pageInfo: PageInfo!
+  edges: [RepositoryCoverageReportItemEdge]!
+  totalCount: Int
+}
+
+type RepositoryCoverageReportItemEdge {
+  node: RepositoryCoverageReportItem
+  cursor: String!
+}
+
 type RepositoryEdge {
   node: Repository
   cursor: String!
@@ -2424,6 +2446,7 @@ type Run implements MaskPrimaryKeyNode {
   branchName: String
   baseOid: String
   commitOid: String
+  commitMessage: String
   finishedAt: DateTime
   errorMeta: JSONString
   config: GenericScalar
@@ -2867,6 +2890,7 @@ type TransformerRun implements MaskPrimaryKeyNode {
   vcsPrUrl: String
   vcsCommitUrl: String
   pullRequestNumberDisplay: String
+  commitMessage: String
   commitOidShort: String
   gitCompareDisplay: String
   gitCompareUrl: String

@@ -3,6 +3,7 @@
     <reports-sidebar
       :level="ReportLevel.Repository"
       :show-public-reports="hasPublicReportViewAccess"
+      :hidden-reports="[ReportPageT.CODE_COVERAGE]"
     />
 
     <div class="flex flex-col p-4 gap-y-2">

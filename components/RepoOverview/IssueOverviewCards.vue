@@ -219,12 +219,16 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
   }
 
   get loaderCount(): number {
-    const { provider, owner, repo } = this.$route.params
-    const localCountFromStore = this.$localStore.get(
-      `${provider}-${owner}-${repo}`,
-      'issue-overview-loader-count'
-    ) as number
-    return localCountFromStore ?? 6
+    if (process.client) {
+      const { provider, owner, repo } = this.$route.params
+      const localCountFromStore = this.$localStore.get(
+        `${provider}-${owner}-${repo}`,
+        'issue-overview-loader-count'
+      ) as number
+      return localCountFromStore ?? 6
+    }
+
+    return 6
   }
 
   get canCustomizeWidgets(): boolean {

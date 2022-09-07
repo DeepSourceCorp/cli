@@ -197,7 +197,7 @@ export default class IssueDistributionPage extends mixins(OwnerDetailMixin, Repo
 
     const analyzerValues = this.historicalValues.values.analyzer
 
-    if (Object.keys(analyzerValues).length) {
+    if (analyzerValues && Object.keys(analyzerValues).length) {
       this.analyzerDataset = Object.keys(analyzerValues).map((analyzer) => {
         return { name: analyzer, chartType: 'bar', values: analyzerValues[analyzer] }
       })
@@ -205,7 +205,7 @@ export default class IssueDistributionPage extends mixins(OwnerDetailMixin, Repo
 
     const categoryValues = this.historicalValues.values.category
 
-    if (Object.keys(categoryValues).length) {
+    if (categoryValues && Object.keys(categoryValues).length) {
       this.categoryDataset = Object.keys(categoryValues).map((category) => {
         return { name: category, chartType: 'bar', values: categoryValues[category] }
       })

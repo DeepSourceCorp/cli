@@ -32,6 +32,7 @@
       "PublicReport",
       "Repository",
       "RepositoryCollaborator",
+      "RepositoryCoverageReportItem",
       "RepositoryIssue",
       "RepositoryMetricValue",
       "Run",

@@ -1490,6 +1490,15 @@ declare module '*/categoryDistribution.gql' {
 }
     
 
+declare module '*/codeCoverageReport.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const codeCoverageReport: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/complianceIssues.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1548,6 +1557,15 @@ declare module '*/publicReportComplianceIssues.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const publicReportComplianceIssues: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/publicReportCoverageReport.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const publicReportCoverageReport: DocumentNode;
 
   export default defaultDocument;
 }

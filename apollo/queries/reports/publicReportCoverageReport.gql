@@ -1,0 +1,36 @@
+query publicReportCoverageReport(
+  $reportId: String!
+  $token: String
+  $first: Int
+  $offset: Int
+  $sort: String
+  $q: String
+  $before: String
+  $after: String
+  $last: Int
+) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    repositoriesCoverageReport(
+      first: $first
+      offset: $offset
+      sort: $sort
+      q: $q
+      before: $before
+      after: $after
+      last: $last
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          lcvValue
+          lcvIsPassing
+          bcvValue
+          bcvIsPassing
+        }
+      }
+    }
+  }
+}

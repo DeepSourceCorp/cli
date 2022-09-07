@@ -1,3 +1,4 @@
 import SidebarMenu from './SidebarMenu.vue'
+import FilterGeneric from './FilterGeneric.vue'
 
-export { SidebarMenu }
+export { SidebarMenu, FilterGeneric }

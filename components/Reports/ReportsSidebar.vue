@@ -1,6 +1,6 @@
 <template>
   <nav
-    class="flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky top-19 border-b lg:border-r border-ink-200 lg:h-nav-sidebar"
+    class="lg:w-64 flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky top-19 border-b lg:border-b-0 lg:border-r border-ink-200 lg:h-nav-sidebar"
   >
     <div class="flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2">
       <!-- Compliance Items -->
@@ -9,19 +9,18 @@
       </p>
       <template v-for="item in complianceItems">
         <nuxt-link
-          :key="item.label"
+          v-if="showReport(item.key)"
+          :key="item.key"
           :to="$generateRoute(item.link)"
           class="flex-shrink-0 text-sm rounded-md"
         >
           <span
             class="hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block"
-            :class="
-              $route.name === `${rootPath}-${item.pathName}` ? 'bg-ink-300' : 'text-vanilla-400'
-            "
+            :class="$route.name === `${rootPath}-${item.key}` ? 'bg-ink-300' : 'text-vanilla-400'"
             >{{ item.label }}</span
           >
           <z-tab
-            :is-active="$route.name === `${rootPath}-${item.pathName}`"
+            :is-active="$route.name === `${rootPath}-${item.key}`"
             border-active-color="vanilla-400"
             class="lg:hidden"
           >
@@ -36,19 +35,18 @@
       </p>
       <template v-for="item in insightsItems">
         <nuxt-link
-          :key="item.label"
+          v-if="showReport(item.key)"
+          :key="item.key"
           :to="$generateRoute(item.link)"
           class="flex-shrink-0 text-sm rounded-md"
         >
           <span
             class="hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block"
-            :class="
-              $route.name === `${rootPath}-${item.pathName}` ? 'bg-ink-300' : 'text-vanilla-400'
-            "
+            :class="$route.name === `${rootPath}-${item.key}` ? 'bg-ink-300' : 'text-vanilla-400'"
             >{{ item.label }}</span
           >
           <z-tab
-            :is-active="$route.name === `${rootPath}-${item.pathName}`"
+            :is-active="$route.name === `${rootPath}-${item.key}`"
             border-active-color="vanilla-400"
             class="lg:hidden"
           >
@@ -70,7 +68,7 @@
           <span
             class="hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:flex lg:items-center lg:gap-x-2"
             :class="
-              $route.name === `${rootPath}-${publicReportsItem.pathName}`
+              $route.name === `${rootPath}-${publicReportsItem.key}`
                 ? 'bg-ink-300'
                 : 'text-vanilla-400'
             "
@@ -79,7 +77,7 @@
               icon="file-pie-chart"
               size="small"
               :color="
-                $route.name === `${rootPath}-${publicReportsItem.pathName}`
+                $route.name === `${rootPath}-${publicReportsItem.key}`
                   ? 'vanilla-100'
                   : 'vanilla-400'
               "
@@ -88,7 +86,7 @@
             {{ publicReportsItem.label }}
           </span>
           <z-tab
-            :is-active="$route.name === `${rootPath}-${publicReportsItem.pathName}`"
+            :is-active="$route.name === `${rootPath}-${publicReportsItem.key}`"
             icon="file-pie-chart"
             border-active-color="vanilla-400"
             class="lg:hidden"
@@ -105,7 +103,7 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
 import { ZDivider, ZTab, ZIcon } from '@deepsourcelabs/zeal'
-import { ReportPageT, ReportsTabLink } from '~/types/reportTypes'
+import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
 import { ReportLevel } from '~/types/types'
 
 /**
@@ -119,17 +117,20 @@ export default class ReportsSidebar extends Vue {
   @Prop({ required: true })
   showPublicReports: boolean
 
+  @Prop({ default: () => [] })
+  hiddenReports: Array<ReportPageT>
+
   get complianceItems(): ReportsTabLink[] {
     return [
       {
-        label: 'OWASP Top 10',
-        link: [...this.baseLink, ReportPageT.OWASP_TOP_10],
-        pathName: ReportPageT.OWASP_TOP_10
+        key: ReportPageT.OWASP_TOP_10,
+        label: ReportMeta['owasp-top-10'].title,
+        link: [...this.baseLink, ReportPageT.OWASP_TOP_10]
       },
       {
-        label: 'SANS Top 25',
-        link: [...this.baseLink, ReportPageT.SANS_TOP_25],
-        pathName: ReportPageT.SANS_TOP_25
+        key: ReportPageT.SANS_TOP_25,
+        label: ReportMeta['sans-top-25'].title,
+        link: [...this.baseLink, ReportPageT.SANS_TOP_25]
       }
     ]
   }
@@ -137,18 +138,23 @@ export default class ReportsSidebar extends Vue {
   get insightsItems(): ReportsTabLink[] {
     return [
       {
-        label: 'Issue Distribution',
-        link: [...this.baseLink, ReportPageT.DISTRIBUTION],
-        pathName: ReportPageT.DISTRIBUTION
+        key: ReportPageT.CODE_COVERAGE,
+        label: ReportMeta['code-coverage'].title,
+        link: [...this.baseLink, ReportPageT.CODE_COVERAGE]
+      },
+      {
+        key: ReportPageT.DISTRIBUTION,
+        label: ReportMeta['issue-distribution'].title,
+        link: [...this.baseLink, ReportPageT.DISTRIBUTION]
       }
     ]
   }
 
   get publicReportsItem(): ReportsTabLink {
     return {
-      label: 'Public Reports',
-      link: [...this.baseLink, ReportPageT.PUBLIC_REPORTS],
-      pathName: ReportPageT.PUBLIC_REPORTS
+      key: ReportPageT.PUBLIC_REPORTS,
+      label: ReportMeta['public-reports'].title,
+      link: [...this.baseLink, ReportPageT.PUBLIC_REPORTS]
     }
   }
 
@@ -172,6 +178,17 @@ export default class ReportsSidebar extends Vue {
     } else {
       return ''
     }
+  }
+
+  /**
+   * Method to check whether to show the report or not
+   *
+   * @param {ReportPageT} reportKey
+   */
+  showReport(reportKey: ReportPageT): boolean {
+    if (this.hiddenReports.length < 1) return true
+
+    return !this.hiddenReports.includes(reportKey)
   }
 }
 </script>

@@ -13,6 +13,10 @@ import ReportDeleteConfirm from './ReportDeleteConfirm.vue'
 import PublicReportPageWrapper from './PublicReportPageWrapper.vue'
 import ReportsSidebar from './ReportsSidebar.vue'
 import PublicReportSidebar from './PublicReportSidebar.vue'
+import CodeCoverageSort from './CodeCoverageSort.vue'
+import CodeCoverageTableCell from './CodeCoverageTableCell.vue'
+import CodeCoverageTable from './CodeCoverageTable.vue'
+import CodeCoverageTableLoading from './CodeCoverageTableLoading.vue'
 
 export {
   DateRangePicker,
@@ -29,5 +33,9 @@ export {
   ReportDeleteConfirm,
   PublicReportPageWrapper,
   ReportsSidebar,
-  PublicReportSidebar
+  PublicReportSidebar,
+  CodeCoverageSort,
+  CodeCoverageTableCell,
+  CodeCoverageTable,
+  CodeCoverageTableLoading
 }

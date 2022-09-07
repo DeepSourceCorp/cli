@@ -21,12 +21,14 @@ exports[`[[ MutateOwnerReportModal ]] renders MutateOwnerReportModal in create r
         <zcheckbox-stub label=\\"SANS Top 25\\" name=\\"\\" value=\\"sans-top-25\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
         <!---->
+        <!---->
       </div>
       <div class=\\"flex flex-col gap-y-2\\">
         <p class=\\"text-xs uppercase text-vanilla-400 font-medium tracking-wider\\">Insights</p>
         <!---->
         <!---->
         <zcheckbox-stub label=\\"Issue Distribution\\" name=\\"\\" value=\\"issue-distribution\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"Code Coverage\\" name=\\"\\" value=\\"code-coverage\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
       </div>
     </div>
@@ -65,12 +67,14 @@ exports[`[[ MutateOwnerReportModal ]] renders MutateOwnerReportModal in edit rep
         <zcheckbox-stub label=\\"SANS Top 25\\" name=\\"\\" value=\\"sans-top-25\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
         <!---->
+        <!---->
       </div>
       <div class=\\"flex flex-col gap-y-2\\">
         <p class=\\"text-xs uppercase text-vanilla-400 font-medium tracking-wider\\">Insights</p>
         <!---->
         <!---->
         <zcheckbox-stub label=\\"Issue Distribution\\" name=\\"\\" value=\\"issue-distribution\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"Code Coverage\\" name=\\"\\" value=\\"code-coverage\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
       </div>
     </div>

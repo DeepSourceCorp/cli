@@ -31,7 +31,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -70,7 +70,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -109,7 +109,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -148,7 +148,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -187,7 +187,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -226,7 +226,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -265,7 +265,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -304,7 +304,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -343,7 +343,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -382,7 +382,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -421,7 +421,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -460,7 +460,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -499,7 +499,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -538,7 +538,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -577,7 +577,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -616,7 +616,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -655,7 +655,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -694,7 +694,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -733,7 +733,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -772,7 +772,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -811,7 +811,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -850,7 +850,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -889,7 +889,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -928,7 +928,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -967,7 +967,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1006,7 +1006,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1045,7 +1045,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1084,7 +1084,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1123,7 +1123,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1162,7 +1162,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1201,7 +1201,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1240,7 +1240,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1279,7 +1279,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1318,7 +1318,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1357,7 +1357,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1396,7 +1396,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1435,7 +1435,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1474,7 +1474,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1513,7 +1513,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1552,7 +1552,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1591,7 +1591,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1630,7 +1630,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1669,7 +1669,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1708,7 +1708,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1747,7 +1747,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1786,7 +1786,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1825,7 +1825,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1864,7 +1864,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1903,7 +1903,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1942,7 +1942,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -1981,7 +1981,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2020,7 +2020,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2059,7 +2059,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2098,7 +2098,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2137,7 +2137,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2176,7 +2176,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2215,7 +2215,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2254,7 +2254,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2293,7 +2293,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2332,7 +2332,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2371,7 +2371,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2410,7 +2410,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2449,7 +2449,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"down\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->
@@ -2488,7 +2488,7 @@ exports[`renders StatCard with all prop options: {"icon":"python","value":"2000"
     <div class=\\"flex flex-row space-x-2\\">
       <div class=\\"flex items-center space-x-2\\"><span class=\\"text-1.5xl font-medium tracking-snug text-vanilla-100\\"> 2000 </span>
         <div class=\\"space-y-1\\">
-          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
+          <ticker-stub trendvalue=\\"300\\" trendpositive=\\"true\\" trenddirection=\\"up\\" icon=\\"threshold\\" iconsize=\\"small\\" iconclass=\\"pb-0.5\\" trendhint=\\"\\" showbg=\\"true\\" class=\\"hidden md:flex\\"></ticker-stub>
         </div>
       </div>
       <!---->

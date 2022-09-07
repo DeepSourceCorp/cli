@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders CodeCoverageTable with all prop options 1`] = `
+"<section class=\\"overflow-x-auto rounded-md border border-ink-200 leading-normal\\">
+  <table class=\\"table-fixed cursor w-full\\">
+    <thead class=\\"border-b border-ink-200\\">
+      <tr class=\\"uppercase text-vanilla-400 text-xs font-semibold\\">
+        <th class=\\"pl-4 py-2.5 text-left w-48 sm:w-auto\\">Repository</th>
+        <th class=\\"pr-2 w-40 text-right\\">
+          <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" disabled=\\"true\\" to=\\"\\">
+            <div class=\\"flex items-center gap-x-2 font-semibold\\"><span class=\\"uppercase\\">Line Coverage</span>
+              <zicon-stub icon=\\"arrow-up-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+            </div>
+          </zbutton-stub>
+        </th>
+        <th class=\\"pr-2 w-48 text-right\\">
+          <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"x-small\\" disabled=\\"true\\" to=\\"\\">
+            <div class=\\"flex items-center gap-x-2 font-semibold\\"><span class=\\"uppercase\\">Branch Coverage</span>
+              <zicon-stub icon=\\"arrow-up-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+            </div>
+          </zbutton-stub>
+        </th>
+      </tr>
+    </thead>
+    <tbody class=\\"divide-y divide-ink-200\\">
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+      <tr class=\\"h-11\\">
+        <td class=\\"py-2.5 pl-4 text-left\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px w-48\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-16 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+        <td class=\\"py-2.5 pr-4 pl-24 text-right\\">
+          <div class=\\"bg-ink-300 animate-pulse rounded-md h-5 mb-px\\"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>"
+`;
