@@ -40,7 +40,7 @@
       <div>
         <!-- Header Loading state -->
         <div
-          v-if="$fetchState.pending || !run"
+          v-if="isLoading"
           class="flex flex-1 w-full p-4 space-x-2 rounded-sm h-23 border-b border-ink-200"
         >
           <!-- Left Section -->
@@ -108,6 +108,16 @@ export default class AnalyzerDetails extends mixins(
   RoleAccessMixin,
   RunDetailMixin
 ) {
+  public isLoading = false
+  /**
+    Created hook to verify whether a loader skeleton needs to be shown or not.
+  */
+  created() {
+    setTimeout(() => {
+      if (this.$fetchState.pending) this.isLoading = true
+    }, 300)
+  }
+
   /**
    * Fetch hook for the page.
    *
@@ -116,6 +126,7 @@ export default class AnalyzerDetails extends mixins(
   async fetch(): Promise<void> {
     await this.fetchRepoPerms(this.baseRouteParams)
     await this.fetchCurrentRun()
+    this.isLoading = false
   }
 
   get breadCrumbLinks(): ILinks[] {

@@ -1,6 +1,6 @@
 <template>
   <main class="check-body-offset md:sticky">
-    <div v-if="!$fetchState.pending">
+    <div v-if="!isLoading">
       <z-tabs>
         <z-tab-list class="flex-row w-full p-3 -space-x-2 text-center lg:hidden">
           <z-tab
@@ -446,6 +446,8 @@ export default class AnalyzerDetails extends mixins(
     key: string
   }) => Promise<boolean>
 
+  public isLoading = false
+
   /**
    * Created hook to update query params from route query mixin
    *
@@ -453,6 +455,9 @@ export default class AnalyzerDetails extends mixins(
    */
   created(): void {
     this.queryParams = Object.assign(this.queryParams, this.$route.query)
+    setTimeout(() => {
+      if (this.$fetchState.pending) this.isLoading = true
+    }, 300)
   }
 
   /**
@@ -492,6 +497,7 @@ export default class AnalyzerDetails extends mixins(
     await this.fetchCurrentRun()
     await this.fetchCheck({ checkId: this.currentCheck.id })
     await this.fetchIssues()
+    this.isLoading = false
   }
 
   /**
