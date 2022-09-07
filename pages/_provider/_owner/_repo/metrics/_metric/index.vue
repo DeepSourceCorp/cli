@@ -78,7 +78,8 @@
         title="Not enough data"
       >
         <template #subtitle>
-          We do not have enough data for the selected time range. Please select another time range.
+          We do not have enough data for the selected time range. Please select another time range
+          or come back later.
         </template>
       </lazy-empty-state>
     </div>
