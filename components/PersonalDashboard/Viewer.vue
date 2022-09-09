@@ -191,14 +191,14 @@ export default class ViewerCard extends mixins(ActiveUserMixin) {
         actionIcon: 'plus'
       },
       {
-        name: 'join-discord',
-        title: 'Join User Group on Discord',
+        name: 'join-discuss',
+        title: 'Join DeepSource Discuss',
         description:
           'Get in touch with our engineering team, get your questions answered, give feedback.',
-        isComplete: this.$localStore.get(this.storeKey, 'join-discord') as boolean,
-        actionUrl: 'https://deepsource.io/discord',
-        actionLabel: 'Join Discord',
-        actionIcon: 'discord'
+        isComplete: this.$localStore.get(this.storeKey, 'join-discuss') as boolean,
+        actionUrl: 'https://discuss.deepsource.io/',
+        actionLabel: 'Join DeepSource Discuss',
+        actionIcon: 'message-square'
       },
       {
         name: 'follow-twitter',
