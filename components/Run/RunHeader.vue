@@ -73,10 +73,10 @@
                 v-for="run in branchRuns"
                 :to="getRoute(run.runId)"
                 as="nuxt-link"
-                class="bg-ink-300"
+                class="bg-ink-300 p-4"
                 :key="run.runId"
               >
-                <div class="flex flex-col py-1 gap-y-3">
+                <div class="flex flex-col gap-y-2.5">
                   <div class="flex gap-x-1.5 items-center">
                     <z-icon
                       :icon="getStatusIcon(run.status)"
@@ -84,14 +84,32 @@
                       :class="{ 'motion-safe:animate-spin': run.status === 'PEND' }"
                       class="mt-px"
                     />
-                    <div class="text-sm font-medium text-vanilla-100">
+                    <div class="text-sm leading-6 font-medium text-vanilla-100">
                       {{ run.branchName }}
-                      <span class="text-vanilla-400">@{{ run.commitOid.slice(0, 7) }}</span>
                     </div>
                   </div>
-                  <div class="flex flex-wrap gap-x-3">
-                    <meta-data-item icon="flag">
-                      {{ getRunStatsMeta(run) }}
+                  <div class="flex flex-wrap gap-x-4 pl-6">
+                    <meta-data-item v-if="run.commitOid" icon="git-commit">
+                      {{ run.commitOid.slice(0, 7) }}
+                    </meta-data-item>
+                    <meta-data-item
+                      v-if="run.issuesRaisedCount"
+                      icon="double-exclamation"
+                      icon-color="cherry"
+                      size="small"
+                      spacing="space-x-0"
+                    >
+                      {{ shortenLargeNumber(run.issuesRaisedCount) }}
+                    </meta-data-item>
+                    <meta-data-item
+                      v-if="run.issuesResolvedNum"
+                      icon="double-check"
+                      icon-color="juniper"
+                      size="small"
+                      class="ml-1"
+                      spacing="space-x-0.5"
+                    >
+                      {{ shortenLargeNumber(run.issuesResolvedNum) }}
                     </meta-data-item>
                   </div>
                 </div>
@@ -438,28 +456,6 @@ export default class RunHeader extends RepoDetailMixin {
       if (raised) {
         label.push(`${shortenLargeNumber(raised)} issues introduced`)
       }
-
-      if (resolved && resolved > 0) {
-        label.push(`${shortenLargeNumber(resolved)} issues resolved`)
-      }
-    }
-
-    return label.join(', ')
-  }
-
-  /**
-   * Generate the meta data string for issues resolved for a run
-   *
-   * @param {Run|undefined} run
-   * @return {string}
-   */
-  getRunStatsMeta(run: Run | undefined): string {
-    let label = []
-
-    if (run) {
-      const { issuesRaisedCount: raised, issuesResolvedNum: resolved } = run
-
-      label.push(`${shortenLargeNumber(raised ?? 0)} issues introduced`)
 
       if (resolved && resolved > 0) {
         label.push(`${shortenLargeNumber(resolved)} issues resolved`)

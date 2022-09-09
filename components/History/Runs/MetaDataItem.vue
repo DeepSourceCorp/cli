@@ -1,5 +1,5 @@
 <template>
-  <div class="space-x-1">
+  <div :class="[spacing]">
     <z-icon :icon="icon" :size="size" :color="iconColor" class="flex-shrink-0 inline mb-px" />
     <span :class="[textColor, textSize, 'inline']">
       <slot>{{ label }}</slot>
@@ -34,5 +34,8 @@ export default class MetaDataItem extends Vue {
 
   @Prop({ default: 'text-xs md:text-sm' })
   textSize: string
+
+  @Prop({ default: 'space-x-1' })
+  spacing: string
 }
 </script>
