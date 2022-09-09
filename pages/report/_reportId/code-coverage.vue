@@ -157,16 +157,14 @@ export default class PublicReportCodeCoverage extends mixins(
     this.setPageMetaData(reportTitle, this.ownerLogin)
 
     const { page, sort } = this.queryParams
+
+    // Set current page number from query params
     if (Number(page)) {
       this.currentPage = Number(page)
     }
 
-    if (!sort) {
-      // set sort type if it exists it cookies
-      const defaultSortType = this.$cookies.get('code-coverage-report-sort-type')
-      this.addFilters({ sort: defaultSortType })
-    } else if (!(Object.values(CoverageSortT) as string[]).includes(sort as string)) {
-      // check for invalid sort types entered in URL
+    // check for invalid sort types entered in URL
+    if (sort && !(Object.values(CoverageSortT) as string[]).includes(sort as string)) {
       this.removeFilter('sort')
     }
 
@@ -190,12 +188,6 @@ export default class PublicReportCodeCoverage extends mixins(
    * @returns {Promise<void>}
    */
   async fetchCodeCoverage(refetch: boolean = true): Promise<void> {
-    const defaultSortType = this.$cookies.get('code-coverage-report-sort-type')
-
-    if (this.queryParams.sort !== defaultSortType) {
-      this.$cookies.set('code-coverage-report-sort-type', this.queryParams.sort)
-    }
-
     const { reportId } = this.$route.params
 
     const { q, sort } = this.queryParams

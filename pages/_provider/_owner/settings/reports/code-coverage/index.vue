@@ -111,10 +111,18 @@ export default class OwnerCodeCoverage extends mixins(PaginationMixin, RouteQuer
       this.currentPage = Number(page)
     }
 
-    if (!sort) {
-      // set sort type if it exists it cookies
-      const defaultSortType = this.$cookies.get('code-coverage-report-sort-type')
-      this.addFilters({ sort: defaultSortType })
+    if (process.client && !sort) {
+      const { owner, provider } = this.$route.params
+
+      // set sort type if it is absent in URL but exists in localStorage
+      const defaultSortType = this.$localStore.get(
+        `${provider}-${owner}`,
+        'code-coverage-report-sort-type'
+      ) as string
+
+      if (defaultSortType) {
+        this.addFilters({ sort: defaultSortType })
+      }
     } else if (!(Object.values(CoverageSortT) as string[]).includes(sort as string)) {
       // check for invalid sort types entered in URL
       this.removeFilter('sort')
@@ -140,12 +148,6 @@ export default class OwnerCodeCoverage extends mixins(PaginationMixin, RouteQuer
    * @returns {Promise<void>}
    */
   async fetchCodeCoverage(refetch = true): Promise<void> {
-    const defaultSortType = this.$cookies.get('code-coverage-report-sort-type')
-
-    if (this.queryParams.sort !== defaultSortType) {
-      this.$cookies.set('code-coverage-report-sort-type', this.queryParams.sort)
-    }
-
     const { owner: login, provider } = this.$route.params
 
     const { q, sort } = this.queryParams
@@ -212,6 +214,12 @@ export default class OwnerCodeCoverage extends mixins(PaginationMixin, RouteQuer
    * @param {string} newSort
    */
   handleSortUpdate(newSort: string) {
+    if (process.client) {
+      const { owner, provider } = this.$route.params
+
+      // set sort type in localStorage
+      this.$localStore.set(`${provider}-${owner}`, 'code-coverage-report-sort-type', newSort)
+    }
     this.addFilters({ sort: newSort })
   }
 
