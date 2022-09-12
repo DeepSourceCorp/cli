@@ -25,6 +25,9 @@ describe('[[ IssueListItem ]]', () => {
     return vm as unknown as IssueListItemInterface
   }
 
+  const today = new Date()
+  const twoYearsAgo = today.setFullYear(today.getFullYear() - 2)
+
   test('renders `IssueListItem` with all prop options', () => {
     const baseProps = {
       id: 'UmVwb3NpdG9yeUlzc3VlOnpweXJqYg==',
@@ -145,14 +148,14 @@ describe('[[ IssueListItem ]]', () => {
 
   test('`lastSeenDisplay` returns when the issue was seen the last time in a human-readable form', () => {
     const vm = getInstance({
-      modifiedAt: '2020-03-09T17:21:41.965996+00:00'
+      modifiedAt: twoYearsAgo
     })
     expect(vm.lastSeenDisplay).toBe('2 years ago')
   })
 
   test('`firstSeenDisplay` returns when the issue was first seen in a human-readable form', () => {
     const vm = getInstance({
-      createdAt: '2020-03-09T17:21:41.965990+00:00'
+      createdAt: twoYearsAgo
     })
     expect(vm.firstSeenDisplay).toBe('2 years old')
   })
