@@ -158,6 +158,10 @@ export const actions: AuthModuleActions = {
       await this.$applyGraphqlMutation(logoutMutation, {}, null, false)
       // resets the indexedDB
       await this.$resetLocalDB()
+
+      // reset rudder stack
+      this.$rudder.reset()
+
       // reset the apollo cache
       this.$clearGqlStore()
 

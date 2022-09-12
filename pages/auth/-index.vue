@@ -61,6 +61,12 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
     await Promise.all([this.fetchActiveUser(), this.fetchContext()])
 
+    if (!this.$config.onPrem) {
+      const { id } = this.$store.state.user.active.viewer as User
+      const parsedId = atob(id).replace('User:', '')
+      this.$rudder.identify(parsedId)
+    }
+
     const toOnboard = this.toOnboard
     const homePage = this.userHomeUrl
     const installationUrl = this.installationUrls[provider]

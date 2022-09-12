@@ -7,6 +7,13 @@ declare module 'vue/types/vue' {
   }
 }
 
+declare module 'vuex/types/index' {
+  // skipcq: JS-0387, JS-0356
+  interface Store<S> {
+    $rudder: typeof rudderAnalytics
+  }
+}
+
 declare module '@nuxt/types' {
   interface Context {
     $rudder: typeof rudderAnalytics

@@ -19,10 +19,19 @@ import { Middleware } from '@nuxt/types'
 import { AuthActionTypes, AuthGetterTypes } from '~/store/account/auth'
 import { ContextActionTypes } from '~/store/account/context'
 import { ActiveUserActions } from '~/store/user/active'
+import { User } from '~/types/types'
 
 const passList = ['github', 'bitbucket', 'gitlab']
 
-const authMiddleware: Middleware = async ({ app, store, route, redirect, error }) => {
+const authMiddleware: Middleware = async ({
+  app,
+  store,
+  route,
+  redirect,
+  error,
+  $config,
+  $rudder
+}) => {
   let strict = false
   let redirectToLogin = false
 
@@ -53,8 +62,13 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
     try {
       await store.dispatch(`account/auth/${AuthActionTypes.REFRESH}`)
       store.dispatch(`account/context/${ContextActionTypes.FETCH_CONTEXT}`)
-
       store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
+
+      if (process.client && !$config.onPrem) {
+        const { id } = store.state.user.active.viewer as User
+        const parsedId = atob(id).replace('User:', '')
+        $rudder.identify(parsedId)
+      }
     } catch (e) {
       if (process.client) {
         await store.dispatch(`account/auth/${AuthActionTypes.LOG_OUT}`)
