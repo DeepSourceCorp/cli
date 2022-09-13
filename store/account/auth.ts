@@ -191,7 +191,10 @@ export const actions: AuthModuleActions = {
         )
       }
     } catch (e) {
-      throw new Error('Something went wrong while logging you out.')
+      if (process.env.NODE_ENV === 'development') {
+        throw new Error('Something went wrong while logging you out.')
+      }
+      this.$logErrorAndToast(e as Error)
     }
   }
 }
