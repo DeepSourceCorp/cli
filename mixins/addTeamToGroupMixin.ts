@@ -26,6 +26,7 @@ export default class AddTeamToGroupMixin extends Vue {
 
   refetch = true
   TEAM_PERMS = TEAM_PERMS
+  DEFAULT_TEAM_GROUP_ROLE = TeamMemberRoleChoices.Member
 
   /**
    * Dummy function to be overridden on pages that need to refetch data locally within page

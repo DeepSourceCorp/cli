@@ -102,7 +102,7 @@
                 icon="plus"
                 button-type="secondary"
                 size="small"
-                @click="addTeamToOrgGroup(groupTeamsToAdd.id, team.id, 'CONTRIBUTOR')"
+                @click="addTeamToOrgGroup(groupTeamsToAdd.id, team.id, DEFAULT_TEAM_GROUP_ROLE)"
               />
             </div>
           </div>
