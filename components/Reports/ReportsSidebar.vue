@@ -117,9 +117,6 @@ export default class ReportsSidebar extends Vue {
   @Prop({ required: true })
   showPublicReports: boolean
 
-  @Prop({ default: () => [] })
-  hiddenReports: Array<ReportPageT>
-
   get complianceItems(): ReportsTabLink[] {
     return [
       {
@@ -186,9 +183,7 @@ export default class ReportsSidebar extends Vue {
    * @param {ReportPageT} reportKey
    */
   showReport(reportKey: ReportPageT): boolean {
-    if (this.hiddenReports.length < 1) return true
-
-    return !this.hiddenReports.includes(reportKey)
+    return ReportMeta[reportKey].level.includes(this.level)
   }
 }
 </script>

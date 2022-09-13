@@ -1,6 +1,6 @@
 import { DurationTypeT } from '~/utils/date'
 import { smartApostrophe } from '~/utils/string'
-import { PublicReport, ReportType } from './types'
+import { PublicReport, ReportLevel, ReportType } from './types'
 
 export type ReportCopyTextT = {
   summary: string | null
@@ -11,6 +11,7 @@ export type ReportMetaProperties = {
   title: string
   description: string
   type?: ReportType
+  level: ReportLevel[]
   copyText: (companyName: string) => ReportCopyTextT
 }
 
@@ -27,6 +28,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'OWASP Top 10',
     description: 'Overview of OWASP Top 10 security risks in your code.',
     type: ReportType.Compliance,
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
         summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
@@ -70,6 +72,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'SANS Top 25',
     description: 'Overview of CWE/SANS Top 25 most dangerous software errors in your code.',
     type: ReportType.Compliance,
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
         summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
@@ -100,6 +103,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Issue Distribution',
     description: 'Overview of issues found across categories and Analyzers.',
     type: ReportType.Insight,
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
         summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
@@ -128,6 +132,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Code Coverage',
     description: 'Track code coverage across your organization.',
     type: ReportType.Insight,
+    level: [ReportLevel.Enterprise, ReportLevel.Owner],
     copyText: (companyName) => {
       return {
         summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
@@ -153,6 +158,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   [ReportPageT.PUBLIC_REPORTS]: {
     title: 'Public Reports',
     description: '',
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: () => {
       return {
         summary: ``,

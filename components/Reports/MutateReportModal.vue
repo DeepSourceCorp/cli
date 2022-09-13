@@ -116,7 +116,7 @@
           <p class="text-xs uppercase text-vanilla-400 font-medium tracking-wider">Security</p>
           <template v-for="(report, key) in ReportMeta">
             <z-checkbox
-              v-if="report.type === ReportType.Compliance"
+              v-if="report.type === ReportType.Compliance && report.level.includes(level)"
               :key="key"
               :value="key"
               v-model="reportKeys"
@@ -130,7 +130,7 @@
           <p class="text-xs uppercase text-vanilla-400 font-medium tracking-wider">Insights</p>
           <template v-for="(report, key) in ReportMeta">
             <z-checkbox
-              v-if="report.type === ReportType.Insight"
+              v-if="report.type === ReportType.Insight && report.level.includes(level)"
               :key="key"
               :value="key"
               v-model="reportKeys"
@@ -221,7 +221,7 @@ export default class MutateReportModal extends Vue {
   @Prop({ required: true })
   level: ReportLevel
 
-  @Prop({ required: true })
+  @Prop({ default: false })
   editMode: boolean
 
   @Prop({ default: '' })
