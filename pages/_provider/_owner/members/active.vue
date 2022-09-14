@@ -54,6 +54,13 @@
         v-model="currentPage"
       ></z-pagination>
     </template>
+    <empty-state
+      v-else
+      :title="`No results found for '${searchCandidate}'`"
+      :svg-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+      :show-border="true"
+    />
+
     <portal to="modal">
       <update-role-modal
         v-if="showUpdateRoleModal"
