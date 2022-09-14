@@ -1,6 +1,6 @@
 <template>
   <div
-    class="grid grid-cols-2 py-4 border rounded-lg md:grid-cols-5 gap-y-4 border-ink-200 md:pr-5"
+    class="grid grid-cols-2 py-4 border rounded-lg md:grid-cols-3 xl:grid-cols-5 gap-y-6 border-ink-200 md:pr-5"
   >
     <div class="flex flex-col items-center gap-y-2">
       <template v-if="loading">
@@ -30,9 +30,12 @@
         </h3>
         <div
           class="flex flex-col items-center gap-y-0.5 h-full"
-          :class="{ 'justify-center': stat.statValue }"
+          :class="{ 'justify-center': stat.statValue && stat.trendValue }"
         >
-          <p v-if="stat.statValue === null" class="text-base font-medium tracking-wider text-slate">
+          <p
+            v-if="stat.statValue === null"
+            class="text-base font-medium tracking-wider text-slate mt-1"
+          >
             N/A
           </p>
           <p v-else class="text-xl font-semibold text-vanilla-100">
