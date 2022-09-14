@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-3xl">
-    <page-title :title="publicReportMeta.title" class="flex-col md:flex-row gap-y-4">
-      <template slot="description">
-        <p class="text-vanilla-400 mt-2 text-sm">{{ publicReportMeta.description }}</p>
-      </template>
-
-      <template v-if="hasEditAccess" slot="actions">
+    <page-title
+      :title="publicReportMeta.title"
+      :description="publicReportMeta.description"
+      class="flex-col md:flex-row gap-y-4 mb-3"
+    >
+      <template v-if="hasEditAccess" #actions>
         <z-button
           v-show="showCtaAndControls"
           icon="share"
@@ -15,7 +15,7 @@
         />
       </template>
     </page-title>
-    <div v-show="showCtaAndControls" class="flex gap-x-2 justify-between mb-5">
+    <div v-show="showCtaAndControls" class="flex gap-x-2 justify-between mb-5 mt-1">
       <public-report-sort v-model="sort" @updateSortFilter="handleSortChange" />
       <z-input
         v-model="q"

@@ -5,15 +5,12 @@
     <div class="flex flex-col p-4 gap-y-2">
       <page-title
         v-if="!viewingPublicReports"
+        description-width-class="max-w-xl"
         :title="reportTitle"
-        descriptionWidthClass="max-w-xl"
+        :description="reportDescription"
         class="flex-col md:flex-row gap-y-4"
       >
-        <template slot="description">
-          <p class="mt-2 text-sm text-vanilla-400">{{ reportDescription }}</p>
-        </template>
-
-        <template v-if="hasPublicReportEditAccess" slot="actions">
+        <template v-if="hasPublicReportEditAccess" #actions>
           <z-button
             icon="share"
             label="Share"

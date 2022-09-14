@@ -1,13 +1,13 @@
 <template>
-  <div class="flex items-start justify-between mb-4">
-    <div class="gap-y-2">
+  <div class="flex items-start justify-between mb-2">
+    <div class="space-y-1">
       <div class="flex items-center space-x-2">
         <h2 class="text-lg font-medium">
           <slot name="title">{{ title }}</slot>
         </h2>
         <slot name="title-info"></slot>
       </div>
-      <p class="text-xs text-vanilla-400" :class="[descriptionWidthClass]">
+      <p class="text-sm text-vanilla-400" :class="[descriptionWidthClass]">
         <slot name="description">{{ description }} </slot>
       </p>
     </div>

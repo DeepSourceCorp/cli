@@ -9,13 +9,10 @@
       <page-title
         v-if="!viewingPublicReports"
         :title="reportTitle"
-        descriptionWidthClass="max-w-xl"
+        :description="reportDescription"
+        description-width-class="max-w-xl"
         class="flex-col md:flex-row gap-y-4"
       >
-        <template slot="description">
-          <p class="mt-2 text-sm text-vanilla-400">{{ reportDescription }}</p>
-        </template>
-
         <template v-if="hasPublicReportEditAccess" slot="actions">
           <z-button
             icon="share"
