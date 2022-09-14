@@ -1,14 +1,24 @@
 <template>
   <main class="analyzer-page">
     <div
-      class="z-20 flex flex-row justify-between w-full p-2 px-4 space-x-4 border-b bg-ink-400 border-ink-200 md:sticky offset-for-breadcrumbs"
+      class="z-20 flex flex-row items-center justify-between w-full p-2 px-4 space-x-4 border-b bg-ink-400 border-ink-200 md:sticky offset-for-breadcrumbs"
     >
-      <div class="py-1.5 my-px">
+      <div class="flex items-center py-4 md:py-1.5 my-px gap-x-2">
+        <nuxt-link
+          v-if="previousPageLink"
+          :to="previousPageLink"
+          class="flex items-center justify-center gap-x-2 w-7 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
+          ><z-icon icon="arrow-left"
+        /></nuxt-link>
         <z-breadcrumb :key="$route.name" separator="/" class="text-sm text-vanilla-100">
+          <span class="text-vanilla-400 md:hidden">..</span>
           <z-breadcrumb-item
-            v-for="link in breadCrumbLinks"
+            v-for="(link, index) in breadCrumbLinks"
             :key="link.label"
-            :class="{ 'cursor-pointer text-vanilla-400': link.route }"
+            :class="{
+              'cursor-pointer text-vanilla-400': link.route,
+              'hidden md:block': index !== breadCrumbLinks.length - 1
+            }"
           >
             <nuxt-link v-if="link.route" :to="link.route">{{ link.label }}</nuxt-link>
             <template v-else>{{ link.label }}</template>
@@ -18,9 +28,12 @@
       <div class="flex items-center h-full">
         <z-menu class="md:hidden">
           <template #trigger="{ toggle }">
-            <z-button button-type="secondary" size="small" @click="toggle">
-              <z-icon icon="analyzers" />
-            </z-button>
+            <button
+              class="flex items-center gap-x-2 px-2 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
+              @click="toggle"
+            >
+              All checks
+            </button>
           </template>
           <template #body>
             <z-menu-section :divider="false">
@@ -127,6 +140,14 @@ export default class AnalyzerDetails extends mixins(
     await this.fetchRepoPerms(this.baseRouteParams)
     await this.fetchCurrentRun()
     this.isLoading = false
+  }
+
+  /**
+   * Returns a link to the analyzer page for this issue, or undefined if not on a issue page
+   */
+  get previousPageLink(): string | undefined {
+    const { runId, analyzer, issueId } = this.$route.params
+    if (issueId) return this.$generateRoute(['run', runId, analyzer])
   }
 
   get breadCrumbLinks(): ILinks[] {
