@@ -46,7 +46,7 @@
     <!-- Issue list -->
     <div v-if="edges.length" class="flex flex-col gap-y-3.5">
       <issue-editor
-        v-for="(edge, index) in edges"
+        v-for="edge in edges"
         v-bind="edge.node"
         :key="edge.node.id"
         :check-id="checkId"
@@ -54,7 +54,6 @@
         :shortcode="$route.params.issueId"
         :can-ignore-issues="canIgnoreIssues"
         :blob-url-root="blobUrlRoot"
-        :open-accordion="index === 0"
         @ignoreIssues="ignoreIssues"
       />
       <z-pagination

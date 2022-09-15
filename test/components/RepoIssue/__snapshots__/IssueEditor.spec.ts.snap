@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 1`] = `
-"<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
+"<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
   <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
     <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
@@ -9,7 +9,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 1`] = `
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
           <div class=\\"items-center block space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline text-xs truncate gap-x-2 text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 -mb-0.5\\"></zicon-stub></span> <span class=\\"flex flex-wrap items-baseline max-w-lg\\">Dockerfile</span></a></div>
         </div>
-        <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"focus:outline-none hover:bg-ink-200 -mt-1 -mr-1 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
+        <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"-mt-1 -mr-1 focus:outline-none hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
       </div>
     </div>
     <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
@@ -35,7 +35,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 1`] = `
 `;
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 2`] = `
-"<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
+"<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
   <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
     <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
@@ -43,7 +43,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 2`] = `
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
           <div class=\\"items-center block space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline text-xs truncate gap-x-2 text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 -mb-0.5\\"></zicon-stub></span> <span class=\\"flex flex-wrap items-baseline max-w-lg\\">Dockerfile</span></a></div>
         </div>
-        <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"focus:outline-none hover:bg-ink-200 -mt-1 -mr-1 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
+        <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"-mt-1 -mr-1 focus:outline-none hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
       </div>
     </div>
     <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
@@ -71,16 +71,16 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 2`] = `
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 3`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
   <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-0 delay-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
           <div class=\\"items-center block space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline text-xs truncate gap-x-2 text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 -mb-0.5\\"></zicon-stub></span> <span class=\\"flex flex-wrap items-baseline max-w-lg\\">Dockerfile</span></a></div>
         </div>
-        <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"focus:outline-none hover:bg-ink-200 -mt-1 -mr-1 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
+        <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"-mt-1 -mr-1 focus:outline-none hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-0\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -105,16 +105,16 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 3`] = `
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 4`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
   <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-0 delay-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
           <div class=\\"items-center block space-y-1 sm:space-y-0 md:flex md:items-start md:space-x-4\\"><a href=\\"https://github.com/deepsourcelabs/asgard/blob/a8935a7125356db4cff400415f7061b2e5491591/Dockerfile#L17-L17\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"flex items-baseline text-xs truncate gap-x-2 text-vanilla-400\\"><span><zicon-stub icon=\\"file-text\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 -mb-0.5\\"></zicon-stub></span> <span class=\\"flex flex-wrap items-baseline max-w-lg\\">Dockerfile</span></a></div>
         </div>
-        <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"focus:outline-none hover:bg-ink-200 -mt-1 -mr-1 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
+        <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"-mt-1 -mr-1 focus:outline-none hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-0\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -137,7 +137,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 4`] = `
 `;
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 5`] = `
-"<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
+"<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
   <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
     <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
@@ -173,7 +173,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 5`] = `
 `;
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 6`] = `
-"<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
+"<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
   <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
     <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
@@ -211,7 +211,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 6`] = `
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 7`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
   <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-0 delay-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -222,7 +222,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 7`] = `
         </div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-0\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -247,7 +247,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 7`] = `
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 8`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
   <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-0 delay-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -258,7 +258,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 8`] = `
         </div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-0\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">

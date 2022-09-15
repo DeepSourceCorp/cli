@@ -1,7 +1,7 @@
 <template>
   <div>
     <z-accordion-item
-      :is-open="openAccordion"
+      :is-open="true"
       class="w-full border rounded-md border-ink-200"
       :class="{
         'opacity-60 pointer-events-none filter-grayscale transition transform-gpu duration-300 ease-in-out':
@@ -61,7 +61,7 @@
                     icon="slash"
                     icon-color="vanilla-400"
                     size="small"
-                    class="focus:outline-none hover:bg-ink-200 -mt-1 -mr-1"
+                    class="-mt-1 -mr-1 focus:outline-none hover:bg-ink-200"
                     :class="{ 'bg-ink-200': isOpen }"
                     @click.prevent="toggle"
                   />
@@ -193,9 +193,6 @@ export default class IssueEditor extends Vue {
 
   @Prop({ default: false })
   canIgnoreIssues: Boolean
-
-  @Prop({ default: true })
-  openAccordion: Boolean
 
   isOpen = false
   currentComponent = ''
