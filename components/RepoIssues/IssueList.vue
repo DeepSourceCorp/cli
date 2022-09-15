@@ -44,7 +44,7 @@
     </div>
 
     <!-- Issue list -->
-    <div class="flex flex-col gap-y-3.5">
+    <div v-if="edges.length" class="flex flex-col gap-y-3.5">
       <issue-editor
         v-for="edge in edges"
         v-bind="edge.node"
@@ -63,8 +63,15 @@
         :totalVisible="5"
         :page="startPage"
         @selected="updatePage"
-      ></z-pagination>
+      />
     </div>
+    <lazy-empty-state
+      v-else
+      :title="`No results found for '${searchValue}'`"
+      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+      :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+      :show-border="true"
+    />
   </div>
 </template>
 
@@ -114,7 +121,7 @@ export default class IssueList extends Vue {
   @Prop()
   canIgnoreIssues: boolean
 
-  @Prop()
+  @Prop({ required: true })
   edges: Array<CheckIssueEdge>
 
   issuesIgnored: string[] = []
