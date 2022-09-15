@@ -1,0 +1,45 @@
+.v-popper--theme-tooltip {
+  .v-popper__wrapper {
+    display: block !important;
+    z-index: 10000;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    max-width: 300px;
+    border: 1px solid #2c303a;
+    border-radius: 3px;
+    overflow: hidden;
+
+    .v-popper__inner {
+      color: #ffffff;
+      border-radius: 0px;
+      padding: 3px 6px;
+
+      @supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+        background: rgba(44, 48, 58, 0.3);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+      }
+    }
+  }
+
+  &.rich-tooltip {
+    .v-popper__wrapper .v-popper__inner {
+      @apply p-2;
+    }
+  }
+
+  .v-popper__arrow-container {
+    @apply hidden;
+  }
+}
+
+.v-popper--theme-deepsource-dropdown {
+  .v-popper__arrow-container {
+    @apply hidden;
+  }
+
+  .v-popper__wrapper {
+    @apply shadow-xl rounded-lg;
+  }
+}

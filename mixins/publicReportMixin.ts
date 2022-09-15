@@ -177,8 +177,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
    * @returns {Promise<void>}
    */
   public async fetchPublicReportList(refetch = true, query?: string): Promise<void> {
-    // !Note Update route when moving to new Team Layout
-    const ownerPublicReportsRoute = 'provider-owner-settings-reports-public-reports'
+    const ownerPublicReportsRoute = 'provider-owner-reports-public-reports'
     const repoPublicReportsRoute = 'provider-owner-repo-reports-public-reports'
 
     if (

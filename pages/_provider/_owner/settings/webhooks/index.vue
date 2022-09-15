@@ -1,5 +1,5 @@
 <template>
-  <section class="grid grid-cols-1 max-w-3xl p-4">
+  <section class="max-w-3xl p-4">
     <div class="flex justify-between mb-4">
       <h2 class="text-lg font-medium">Endpoints</h2>
       <z-button
@@ -17,7 +17,7 @@
     </div>
     <div class="grid grid-cols-1 gap-2">
       <template v-if="endpointsLoading">
-        <div v-for="index in 3" :key="index" class="h-20 bg-ink-300 animate-pulse rounded-md"></div>
+        <div v-for="index in 3" :key="index" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
       </template>
       <template v-else-if="totalWebhookEndpoints">
         <webhook-card v-for="endpoint in webhookEndpoints" :key="endpoint.id" v-bind="endpoint" />
@@ -31,7 +31,7 @@
       </template>
       <empty-state
         v-else
-        class="border border-dashed rounded-lg border-2 border-ink-200 py-20"
+        class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
         title="Add your first endpoint"
         subtitle="Configure webhook endpoints to let your apps and services know about events in DeepSource as they happen. Start with a new endpoint."
       >

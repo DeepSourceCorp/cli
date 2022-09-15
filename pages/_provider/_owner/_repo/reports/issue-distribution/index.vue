@@ -58,7 +58,8 @@
           :y-axis-max="maxBarClip"
           :y-axis-min="0"
           type="bar"
-        ></z-chart>
+          class=""
+        />
         <div v-show="!shouldChartBeShown" class="h-full px-5">
           <lazy-empty-chart :count="5" chart-type="bar" :stacked="true" />
         </div>

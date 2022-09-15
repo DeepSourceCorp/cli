@@ -1,6 +1,6 @@
 <template>
   <div class="flex min-h-screen mx-auto bg-ink-400 text-vanilla-100">
-    <sidebar v-if="loggedIn" />
+    <sidebar v-if="loggedIn" :is-palette-visible="showPalette" @show-palette="showPalette = true" />
     <logged-out-sidebar v-else />
     <div class="w-full">
       <mobile-nav
@@ -96,7 +96,8 @@
       </div>
     </div>
     <!-- remove this later and inject via zeal -->
-    <portal-target class="z-1000" name="modal" @change="modalToggled"></portal-target>
+    <portal-target name="modal" class="z-1000" @change="modalToggled" />
+    <portal-target name="floating-nav" class="z-30" />
     <client-only>
       <palette
         v-if="showPalette && allowPalette"
@@ -301,9 +302,9 @@ export default class RepositoryLayout extends mixins(
   /**
    * Polling function that polls the status of a repo and keeps polling if the repo is in waiting state (first run).
    *
-   * @returns {Promise<void>}
+   * @returns {void}
    */
-  async pollRepo(): Promise<void> {
+  pollRepo(): void {
     const POLLING_INTERVAL = 5000
     if (process.client) {
       this.pollingId = window.setTimeout(async () => {

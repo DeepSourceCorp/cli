@@ -1,7 +1,7 @@
 <template>
-  <section class="grid grid-cols-1 lg:grid-cols-16-fr">
+  <section class="grid grid-cols-1 lg:grid-cols-16-fr repository-level-settings-page">
     <nav
-      class="flex px-4 pt-2 overflow-x-auto border-b gap-x-8 top-24 hide-scroll border-ink-200 lg:sticky lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r lg:h-nav-sidebar"
+      class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-ink-200 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
     >
       <template v-for="item in navItems">
         <nuxt-link
@@ -11,21 +11,17 @@
           class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
         >
           <span
-            class="hidden p-2 rounded-md group-hover:text-vanilla-100 lg:block"
+            class="block p-2 rounded-md group-hover:text-vanilla-100"
             :class="$route.path.includes(item.link.join('/')) ? 'bg-ink-300' : 'text-vanilla-400'"
             >{{ item.label }}</span
           >
-          <z-tab
-            class="lg:hidden"
-            :isActive="$route.path.includes(item.link.join('/'))"
-            border-active-color="vanilla-400"
-          >
-            <span class="text-sm cursor-pointer">{{ item.label }}</span>
-          </z-tab>
         </nuxt-link>
       </template>
     </nav>
-    <NuxtChild class="mb-24" />
+
+    <nuxt-child class="mb-28 lg:mb-24" />
+
+    <floating-button-mobile :nav-items="navItemsForMobile" />
   </section>
 </template>
 
@@ -81,7 +77,8 @@ interface TabLink {
         RepoPerms.CHANGE_INTEGRATION_SETTINGS
       ]
     }
-  }
+  },
+  scrollToTop: true
 })
 export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
   navItems: TabLink[] = [
@@ -159,6 +156,17 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
     return true
   }
 
+  get navItemsForMobile() {
+    const visibleNavItems = this.navItems.filter((item) => this.isNavLinkVisible(item))
+
+    return visibleNavItems.map((item) => {
+      return {
+        label: item.label,
+        routePath: this.$generateRoute(item.link)
+      }
+    })
+  }
+
   /**
    * Set meta tags
    *
@@ -205,3 +213,24 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
   }
 }
 </script>
+
+<style scoped>
+.repository-level-settings-page {
+  --repository-header-height: 168px;
+}
+
+@media screen and (min-width: 1024px) {
+  .vertical-sidebar {
+    --vertical-sidebar-top-offset: var(--repository-header-height);
+
+    top: var(--vertical-sidebar-top-offset);
+    height: calc(100vh - var(--vertical-sidebar-top-offset));
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .vertical-sidebar {
+    --vertical-sidebar-top-offset: 96px;
+  }
+}
+</style>

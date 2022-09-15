@@ -44,7 +44,7 @@
         :class="[
           isActive('provider-owner-repo') &&
           !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
-            ? 'text-vanilla-100 font-semibold'
+            ? 'text-vanilla-100'
             : 'text-vanilla-400',
           { cursor: repoList.length === 0 }
         ]"
@@ -109,10 +109,9 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
     })
     const { provider, owner } = this.$route.params
 
-    this.dropdownCollapsed = this.$localStore.get(
-      'ui-state',
-      `is-sidebar-collapsed-${provider}-${owner}`
-    ) as boolean
+    this.dropdownCollapsed =
+      (this.$localStore.get('ui-state', `is-sidebar-collapsed-${provider}-${owner}`) as boolean) ??
+      true
   }
 
   beforeDestroy() {
@@ -123,7 +122,7 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
     await this.fetchActiveAnalysisRepoList({
       login: this.activeOwner,
       provider: this.activeProvider,
-      limit: 10,
+      limit: 5,
       refetch: refetch
     })
   }

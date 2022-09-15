@@ -1,6 +1,6 @@
 <template>
-  <div class="pb-12">
-    <sub-nav v-if="transformsAllowed" active="runs"></sub-nav>
+  <div class="pb-28 lg:pb-12">
+    <sub-nav v-if="transformsAllowed" active="runs" class="hidden lg:block" />
     <div class="grid grid-cols-1 p-4 gap-y-4">
       <run-branches
         v-if="defaultBranchRun && !mainBranchFetching"
@@ -54,6 +54,19 @@
         @selected="updatePage"
       ></z-pagination>
     </div>
+
+    <floating-button-mobile
+      :nav-items="[
+        {
+          label: 'Analysis runs',
+          routePath: $generateRoute(['history', 'runs'])
+        },
+        {
+          label: 'Transforms',
+          routePath: $generateRoute(['history', 'transforms'])
+        }
+      ]"
+    />
   </div>
 </template>
 
@@ -79,7 +92,8 @@ const VISIBLE_PAGES = 5
     SubNav,
     ZPagination
   },
-  layout: 'repository'
+  layout: 'repository',
+  scrollToTop: true
 })
 export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   @runListStore.State

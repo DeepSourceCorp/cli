@@ -4,37 +4,34 @@
     class="grid grid-cols-1 lg:grid-cols-16-fr"
   >
     <nav
-      class="border-b lg:border-r border-ink-200 lg:h-nav-sidebar sticky top-10 lg:top-24 bg-ink-400"
+      class="hidden border-b lg:block lg:sticky lg:border-r border-ink-200 lg:h-nav-sidebar top-10 lg:top-24 bg-ink-400"
     >
-      <ul class="flex flex-row lg:flex-col px-4 pt-2 lg:px-2 gap-x-8 gap-y-1 overflow-x-auto">
+      <ul class="flex flex-col px-2 pt-2 overflow-x-auto gap-x-8 gap-y-1">
         <li v-for="metric in navList" :key="metric.shortcode">
           <nuxt-link
             :to="metric.shortcode"
-            class="lg:px-2 lg:py-2.5 lg:hover:bg-ink-300 lg:hover:text-vanilla-100 lg:rounded-md max-w-full text-sm block"
-            :class="isMetricActiveRoute(metric.shortcode) ? 'lg:bg-ink-300' : 'text-vanilla-400'"
+            class="px-2 py-2.5 hover:bg-ink-300 lg:hover:text-vanilla-100 rounded-md max-w-full text-sm block"
+            :class="isMetricActiveRoute(metric.shortcode) ? 'bg-ink-300' : 'text-vanilla-400'"
           >
-            <div class="hidden lg:block truncate">
+            <div class="truncate">
               {{ metric.name }}
             </div>
-            <z-tab
-              :is-active="isMetricActiveRoute(metric.shortcode)"
-              border-active-color="vanilla-400"
-              class="lg:hidden whitespace-nowrap"
-            >
-              <span class="text-sm cursor-pointer">{{ metric.name }}</span>
-            </z-tab>
           </nuxt-link>
         </li>
       </ul>
     </nav>
-    <nuxt-child></nuxt-child>
+
+    <nuxt-child class="mb-28 lg:mb-0" />
+
+    <floating-button-mobile :nav-items="navListForMobile" />
   </div>
-  <div v-else class="min-h-98 p-4">
+  <div v-else class="p-4 min-h-98">
     <lazy-empty-state
       title="Not enough data"
       :webp-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.webp')"
       :png-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.png')"
       :show-border="true"
+      class="flex flex-col justify-center h-full"
     >
       <template #subtitle>
         We do not have enough data to show a trend yet. <br class="hidden md:block" />
@@ -91,7 +88,8 @@ const repoStore = namespace('repository/detail')
         }
       }
     }
-  ]
+  ],
+  scrollToTop: true
 })
 export default class MetricsPage extends Vue {
   @repoStore.State
@@ -108,6 +106,15 @@ export default class MetricsPage extends Vue {
     }
 
     return []
+  }
+
+  get navListForMobile() {
+    return this.navList.map((item) => {
+      return {
+        label: item.name ?? '',
+        routePath: this.$generateRoute(['metrics', item.shortcode ?? ''])
+      }
+    })
   }
 
   /**

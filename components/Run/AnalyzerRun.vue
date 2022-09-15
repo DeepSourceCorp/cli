@@ -25,7 +25,6 @@
               v-for="issue in concreteIssues"
               :key="issue.id"
               v-bind="issue"
-              :show-comparison-stat="false"
               :show-autofix-button="false"
               :issue-link="
                 $generateRoute([
@@ -35,7 +34,6 @@
                   issue.shortcode
                 ])
               "
-              :hide-progress="true"
               :center-content="true"
               :show-seen-info="false"
               link="/history/runs/details/issue"

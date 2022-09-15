@@ -53,6 +53,7 @@
           :y-axis-max="maxLineClip"
           :y-axis-min="0"
           type="line"
+          class="chart-tooltip-z-20"
         />
         <div v-show="!shouldChartBeShown" class="h-full px-5">
           <lazy-empty-chart :count="1" chart-type="line" />

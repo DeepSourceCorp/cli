@@ -22,9 +22,9 @@ export default class TeamDetailMixin extends Vue {
     args: {
       login: string
       provider: string
-      limit: number
-      currentPage: number
-      query: string
+      limit?: number
+      currentPage?: number
+      query?: string
       refetch?: boolean
     },
     refetch?: boolean

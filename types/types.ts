@@ -9015,7 +9015,7 @@ export type OwnerPublicKeyQuery = (
     & Pick<Owner, 'id'>
     & { ownerSetting?: Maybe<(
       { __typename?: 'OwnerSetting' }
-      & Pick<OwnerSetting, 'publicKey'>
+      & Pick<OwnerSetting, 'id' | 'publicKey'>
     )> }
   )> }
 );
@@ -11006,6 +11006,36 @@ export type Unnamed_152_Query = (
           & { user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'fullName' | 'email' | 'avatar' | 'dateJoined'>
+          ) }
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type MembersBaseDetailsQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+  limit?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type MembersBaseDetailsQuery = (
+  { __typename?: 'Query' }
+  & { team?: Maybe<(
+    { __typename?: 'Team' }
+    & Pick<Team, 'id'>
+    & { members?: Maybe<(
+      { __typename?: 'TeamMemberConnection' }
+      & Pick<TeamMemberConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'TeamMemberEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'TeamMember' }
+          & Pick<TeamMember, 'id'>
+          & { user: (
+            { __typename?: 'User' }
+            & Pick<User, 'id' | 'fullName' | 'avatar'>
           ) }
         )> }
       )>> }

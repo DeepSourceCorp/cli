@@ -43,7 +43,7 @@
       <div class="relative space-y-2">
         <!-- Fade effect -->
         <div
-          class="absolute z-10 w-2 h-12 -top-6 left-px bg-gradient-to-b from-ink-400 via-ink-400 to-transparent"
+          class="z-10 absolute w-2 h-12 -top-6 left-px bg-gradient-to-b from-ink-400 via-ink-400 to-transparent"
         ></div>
         <run-card
           v-for="branchRun in runsInBranch"

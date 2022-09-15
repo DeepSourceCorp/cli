@@ -50,11 +50,12 @@
         <base-graph
           v-else-if="autofixTrend.values && autofixTrend.values.length"
           :datasets="dataSets"
-          :showControl="false"
+          :show-control="false"
           :labels="formattedLabels"
           :height="240"
+          class="chart-tooltip-z-20"
           type="line"
-        ></base-graph>
+        />
       </div>
     </div>
   </stat-section>

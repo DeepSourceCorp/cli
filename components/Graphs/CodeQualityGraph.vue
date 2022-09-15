@@ -40,18 +40,18 @@
         </div>
         <z-chart
           v-else
-          ref="code-quality-chart"
-          :dataSets="codeQualityData.data"
+          :data-sets="codeQualityData.data"
           :labels="codeQualityData.labels"
           :height="300"
-          :tooltipOptions="{
+          :tooltip-options="{
             formatTooltipY: formatIntl
           }"
           :colors="codeQualityData.colors"
+          :y-axis-min="0"
+          :axis-options="axisOptions"
+          ref="code-quality-chart"
           type="line"
-          :yAxisMin="0"
-          :showLegend="false"
-          :axisOptions="axisOptions"
+          class="chart-tooltip-z-20"
         />
       </div>
     </div>

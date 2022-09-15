@@ -1,8 +1,6 @@
 <template>
   <div class="grid grid-cols-1 min-h-40 col-span-full">
     <z-chart
-      ref="base-graph-chart"
-      class="flex-grow md:mx-auto"
       :data-sets="datasets"
       :height="chartHeight"
       :labels="labels"
@@ -11,11 +9,12 @@
       :tooltip-options="{
         formatTooltipY: formatIntl
       }"
-      :show-legend="false"
       :axis-options="axisOptions"
       :line-options="lineOptions"
       :bar-options="barOptions"
-      :yAxisMin="0"
+      :y-axis-min="0"
+      ref="base-graph-chart"
+      class="flex-grow md:mx-auto"
     />
   </div>
 </template>
@@ -27,6 +26,9 @@ import { formatIntl } from '@/utils/string'
 @Component({
   components: {
     ZChart
+  },
+  methods: {
+    formatIntl
   },
   layout: 'repository'
 })
@@ -57,7 +59,6 @@ export default class BaseGraph extends Vue {
 
   public chartType = ''
   public selectedMetric = ''
-  public formatIntl = formatIntl
 
   get axisOptions(): Record<string, string | boolean> {
     return {

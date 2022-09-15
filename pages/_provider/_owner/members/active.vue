@@ -207,6 +207,11 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
     })
     await this.refetchData(true)
     this.closeRemoveMemberModal()
+
+    // Emit an event to the event bus instructing the Avatar stack in the dashboard header
+    // to fetch from the network
+    // TODO: Enable once the avatar sizing inconsistency is fixed
+    // this.$root.$emit('fetch-members-base-details')
   }
 
   async transferTeamOwnership(newOwnerId: User['id'], updateBillingEmail: boolean): Promise<void> {

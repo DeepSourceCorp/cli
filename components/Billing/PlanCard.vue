@@ -42,11 +42,13 @@
           </template>
         </div>
         <div class="flex justify-center">
+          <!-- CTA should span full width on the free tier with three plan cards above `1024px`  -->
           <z-button
             :button-type="isPrimary ? 'primary' : 'secondary'"
             :to="routeTo"
             target="blank"
-            class="w-80"
+            class="w-full md:w-80"
+            :class="{ 'lg:w-full xl:w-80': !currentPlanName }"
             @click="nextSteps"
           >
             <z-icon

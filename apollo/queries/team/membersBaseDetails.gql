@@ -1,0 +1,18 @@
+query membersBaseDetails($login: String!, $provider: VCSProviderChoices!, $limit: Int) {
+  team(login: $login, provider: $provider) {
+    id
+    members: teamMembers(first: $limit) {
+      totalCount
+      edges {
+        node {
+          id
+          user {
+            id
+            fullName
+            avatar
+          }
+        }
+      }
+    }
+  }
+}

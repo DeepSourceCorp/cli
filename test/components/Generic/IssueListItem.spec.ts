@@ -3,7 +3,6 @@ import { fireEvent, render } from '@testing-library/vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import VTooltip from 'v-tooltip'
 
-import { BaseCard } from '~/components/History'
 import IssueListItem from '~/components/IssueListItem.vue'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 import { TrendDirection } from '~/types/types'
@@ -15,45 +14,55 @@ interface IssueListItemInterface {
 }
 
 describe('[[ IssueListItem ]]', () => {
-  const getInstance = (props = {}) => {
-    const localVue = createLocalVue()
-    localVue.use(VTooltip)
-    const { vm } = shallowMount(IssueListItem, {
-      propsData: props,
-      localVue
-    })
-    return vm as unknown as IssueListItemInterface
+  const stubs = {
+    IssueType: true,
+    ZIcon: true,
+    Ticker: true,
+    MetaDataItem: true
   }
 
   const today = new Date()
   const twoYearsAgo = today.setFullYear(today.getFullYear() - 2)
 
-  test('renders `IssueListItem` with all prop options', () => {
-    const baseProps = {
-      id: 'UmVwb3NpdG9yeUlzc3VlOnpweXJqYg==',
-      issueType: 'bug-risk',
-      title: 'Dangerous default argument',
-      shortcode: 'PYL-W0102',
-      description:
-        'Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.',
-      occurrenceCount: 3,
-      createdAt: '2020-03-09T17:21:41.965533+00:00',
-      seenIn: 'code.py',
-      firstSeen: '2020-03-09T17:21:41.965533+00:00',
-      lastSeen: '2020-07-06T10:14:07.821843+00:00',
-      modifiedAt: '2020-03-09T17:21:41.965540+00:00',
-      trend: {
-        trendHint: 'Since last week',
-        trendValue: 12,
-        trendDirection: TrendDirection.Down,
-        trendPositive: true
-      },
-      raisedInFiles: ['code.py']
-    }
+  const baseProps = {
+    id: 'UmVwb3NpdG9yeUlzc3VlOnpweXJqYg==',
+    issueType: 'bug-risk',
+    title: 'Dangerous default argument',
+    shortcode: 'PYL-W0102',
+    description:
+      'Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.',
+    occurrenceCount: 3,
+    createdAt: twoYearsAgo,
+    seenIn: 'code.py',
+    modifiedAt: twoYearsAgo,
+    trend: {
+      trendHint: 'Since last week',
+      trendValue: 12,
+      trendDirection: TrendDirection.Down,
+      trendPositive: true
+    },
+    raisedInFiles: ['code.py']
+  }
 
+  // Returns a Wrapper that contains the rendered Vue component
+  const getInstance = (props = {}) => {
+    const localVue = createLocalVue()
+    localVue.use(VTooltip)
+
+    const propsData = {
+      ...baseProps,
+      ...props
+    }
+    const { vm } = shallowMount(IssueListItem, {
+      propsData,
+      localVue,
+      stubs
+    })
+    return vm as unknown as IssueListItemInterface
+  }
+
+  test('renders `IssueListItem` with all prop options', () => {
     const autofixAvailableOptions = generateBooleanProps('autofixAvailable', false)
-    const hideProgressOptions = generateBooleanProps('hideProgress', false)
-    const showComparisonStatOptions = generateBooleanProps('showComparisonStat', false)
     const centerContentOptions = generateBooleanProps('centerContent', false)
     const showAutofixButtonOptions = generateBooleanProps('showAutofixButton', false)
     const disableAutofixButtonOptions = generateBooleanProps('disableAutofixButton', false)
@@ -61,8 +70,6 @@ describe('[[ IssueListItem ]]', () => {
 
     cartesian(
       autofixAvailableOptions,
-      hideProgressOptions,
-      showComparisonStatOptions,
       centerContentOptions,
       showAutofixButtonOptions,
       disableAutofixButtonOptions,
@@ -76,12 +83,7 @@ describe('[[ IssueListItem ]]', () => {
         IssueListItem,
         {
           props,
-          stubs: {
-            IssueType: true,
-            ZIcon: true,
-            Ticker: true,
-            MetaDataItem: true
-          }
+          stubs
         },
         (vue) => {
           vue.use(VTooltip)
@@ -97,15 +99,13 @@ describe('[[ IssueListItem ]]', () => {
       IssueListItem,
       {
         props: {
+          ...baseProps,
           id: 'UmVwb3NpdG9yeUlzc3VlOnpweXJqYg==',
           shortcode: 'PYL-W0102',
           autofixAvailable: true,
           raisedInFiles: ['code.py']
         },
-        stubs: {
-          ZIcon: true,
-          BaseCard
-        }
+        stubs
       },
       (vue) => {
         vue.use(VTooltip)
@@ -147,16 +147,12 @@ describe('[[ IssueListItem ]]', () => {
   })
 
   test('`lastSeenDisplay` returns when the issue was seen the last time in a human-readable form', () => {
-    const vm = getInstance({
-      modifiedAt: twoYearsAgo
-    })
+    const vm = getInstance()
     expect(vm.lastSeenDisplay).toBe('2 years ago')
   })
 
   test('`firstSeenDisplay` returns when the issue was first seen in a human-readable form', () => {
-    const vm = getInstance({
-      createdAt: twoYearsAgo
-    })
+    const vm = getInstance()
     expect(vm.firstSeenDisplay).toBe('2 years old')
   })
 })

@@ -4,7 +4,7 @@
     v-bind="linkAttrs"
     class="flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300"
     :class="[
-      active ? 'bg-ink-300 text-vanilla-100 font-semibold' : 'text-vanilla-400',
+      active ? 'bg-ink-300 text-vanilla-100' : 'text-vanilla-400',
       isCollapsed ? 'max-w-0 w-8' : 'max-w-full w-full'
     ]"
     @click="$emit('click')"

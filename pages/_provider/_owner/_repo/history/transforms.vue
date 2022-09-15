@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <sub-nav active="transforms"></sub-nav>
+  <div class="pb-28 lg:pb-0">
+    <sub-nav active="transforms" class="hidden lg:block" />
     <div class="grid w-full grid-cols-1 p-4 gap-y-4">
       <template v-if="transformRuns">
         <template v-if="transformRuns.length">
@@ -39,6 +39,19 @@
         </div>
       </template>
     </div>
+
+    <floating-button-mobile
+      :nav-items="[
+        {
+          label: 'Analysis runs',
+          routePath: $generateRoute(['history', 'runs'])
+        },
+        {
+          label: 'Transforms',
+          routePath: $generateRoute(['history', 'transforms'])
+        }
+      ]"
+    />
   </div>
 </template>
 
@@ -68,7 +81,8 @@ const transformRunListStore = namespace('transformerRun/list')
   meta: {
     gateFeature: AppFeatures.TRANSFORMS
   },
-  layout: 'repository'
+  layout: 'repository',
+  scrollToTop: true
 })
 export default class Transforms extends mixins(RepoDetailMixin, RoleAccessMixin) {
   @transformRunListStore.State

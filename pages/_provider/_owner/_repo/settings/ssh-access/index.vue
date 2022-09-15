@@ -10,17 +10,7 @@
     <!-- Public key description -->
     <section v-if="repository.encPublicKey">
       <div
-        class="
-          max-w-3xl
-          p-3
-          font-mono
-          text-sm
-          break-words
-          border
-          rounded-md
-          border-ink-200
-          text-vanilla-400
-        "
+        class="p-3 font-mono text-sm break-all border rounded-md border-ink-200 text-vanilla-400"
       >
         {{ this.repository.encPublicKey }}
       </div>

@@ -31,7 +31,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader for GSR: RepoHeader for GSR 1`] = `
         </a><a>
           <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a><a>
-          <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+          <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
         </a></div>
     </div>
   </div>
@@ -105,7 +105,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader with all permission: Default Repo H
         </a><a>
           <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a><a>
-          <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+          <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
         </a></div>
     </div>
   </div>
@@ -142,7 +142,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: Repo
         <!----><a>
           <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a><a>
-          <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+          <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
         </a></div>
     </div>
   </div>
@@ -180,7 +180,7 @@ exports[`[[ RepoHeader ]] renders RepoHeader without perms: Repo Header withut p
         </a><a>
           <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a><a>
-          <ztab-stub icon=\\"settings\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
+          <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
         </a></div>
     </div>
   </div>

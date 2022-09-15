@@ -54,7 +54,7 @@
               >
                 <z-table-cell
                   text-align="left"
-                  class="text-sm font-normal overflow-hidden overflow-ellipsis"
+                  class="overflow-hidden text-sm font-normal overflow-ellipsis"
                   >{{ type.name }}</z-table-cell
                 >
                 <z-table-cell
@@ -241,7 +241,7 @@
               >
                 <z-table-cell
                   text-align="left"
-                  class="text-sm font-normal overflow-hidden overflow-ellipsis"
+                  class="overflow-hidden text-sm font-normal overflow-ellipsis"
                   >{{ metricSetting.name }}</z-table-cell
                 >
                 <z-table-cell
@@ -344,7 +344,7 @@
 
     <div class="space-y-4">
       <div>
-        <h6 class="text-sm text-vanilla-100 mb-1">Test Coverage</h6>
+        <h6 class="mb-1 text-sm text-vanilla-100">Test Coverage</h6>
         <!-- Notice -->
         <p class="text-xs leading-5 text-vanilla-400">
           For tracking test coverage, external data has to be sent to DeepSource. Read
@@ -358,7 +358,7 @@
           on configuration.
         </p>
       </div>
-      <notice class="items-baseline" :enabled="repository.hasTestCoverage">
+      <notice :enabled="true" class="items-baseline">
         <p v-if="repository.hasTestCoverage" class="relative top-px">
           Test coverage tracking is enabled, and we're ready to receive coverage data.
         </p>
@@ -368,7 +368,7 @@
       </notice>
       <div class="flex justify-between gap-x-4">
         <div>
-          <h6 class="text-sm text-vanilla-100 mb-1">New code coverage thresholds</h6>
+          <h6 class="mb-1 text-sm text-vanilla-100">New code coverage thresholds</h6>
           <p class="text-xs leading-5 text-vanilla-400">
             Configure thresholds for new code coverage in pull requests.
           </p>
@@ -390,7 +390,7 @@
           loading-label="Fetching data"
           :disabled="!analyzersWithoutThreshold.length"
           :is-loading="$fetchState.pending"
-          class="border border-ink-100 border-dashed float-right"
+          class="float-right border border-dashed border-ink-100"
           @click="showAddThresholdModal = true"
         />
       </div>
@@ -413,7 +413,7 @@
               <div
                 v-for="index in 3"
                 :key="index"
-                class="h-11 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+                class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-ink-200"
               ></div>
             </template>
             <template
@@ -430,7 +430,7 @@
                 <z-table-cell text-align="right" class="text-sm font-normal">
                   <div
                     v-if="namespace.threshold || namespace.threshold === 0"
-                    class="flex justify-end items-center gap-x-4"
+                    class="flex items-center justify-end gap-x-4"
                   >
                     <span
                       >{{ namespace.threshold
@@ -488,18 +488,17 @@
         <z-table>
           <template v-slot:body>
             <template v-if="$fetchState.pending">
-              <div class="h-11 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"></div>
+              <div class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-ink-200"></div>
             </template>
             <z-table-row v-else class="text-vanilla-100 hover:bg-ink-300">
-              <z-table-cell text-align="left" class="text-sm font-normal capitalize space-x-1 h-11">
+              <z-table-cell text-align="left" class="space-x-1 text-sm font-normal capitalize h-11">
                 <span>{{ aggregateMetricNamespace.key }}</span>
-                <v-popover
+                <tooltip
                   :delay="{ show: 300, hide: 1500 }"
+                  :triggers="['hover', 'click']"
                   placement="top"
-                  trigger="hover click"
                   offset="5"
-                  popover-class="w-44"
-                  popover-inner-class="p-2"
+                  popper-class="rich-tooltip w-44"
                   class="inline"
                 >
                   <z-icon
@@ -508,7 +507,7 @@
                     color="current"
                     class="inline text-vanilla-400 hover:text-vanilla-100"
                   />
-                  <template slot="popover">
+                  <template #popper>
                     <p class="text-xs text-vanilla-100">
                       Aggregate is a weighted average of analyzers activated in the repo.
                       <a
@@ -520,14 +519,14 @@
                       >
                     </p>
                   </template>
-                </v-popover>
+                </tooltip>
               </z-table-cell>
               <z-table-cell text-align="right" class="text-sm font-normal text-right">
                 <div
                   v-if="
                     aggregateMetricNamespace.threshold || aggregateMetricNamespace.threshold === 0
                   "
-                  class="flex justify-end items-center gap-x-4"
+                  class="flex items-center justify-end gap-x-4"
                 >
                   <span
                     >{{ aggregateMetricNamespace.threshold
@@ -643,7 +642,7 @@ import {
 import { MetricType, NLCV_SHORTCODE } from '~/types/metric'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 import { AnalyzerListActions } from '~/store/analyzer/list'
-import { VPopover } from 'v-tooltip'
+import { Tooltip } from 'floating-vue'
 
 const repoStore = namespace('repository/detail')
 const analyzerStore = namespace('analyzer/list')
@@ -672,7 +671,7 @@ export enum InputTypes {
     ZMenu,
     ZMenuSection,
     ZMenuItem,
-    VPopover
+    Tooltip
   },
   layout: 'repository',
   middleware: ['perm'],

@@ -1,7 +1,7 @@
 <template>
   <div class="flex min-h-screen mx-auto bg-ink-400 text-vanilla-100">
     <!-- ? Discover page uses a different sidebar -->
-    <sidebar v-if="loggedIn" />
+    <sidebar v-if="loggedIn" :is-palette-visible="showPalette" @show-palette="showPalette = true" />
     <logged-out-sidebar v-else />
     <div ref="scrolling-div" class="w-full">
       <mobile-nav

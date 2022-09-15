@@ -1,5 +1,5 @@
 <template>
-  <div class="grid gap-5">
+  <div class="space-y-5">
     <h2 class="text-lg font-medium">Upgrade to get more for your team</h2>
     <z-radio-group
       :model-value="billingCycle"
@@ -11,7 +11,14 @@
       </z-radio-button>
       <z-radio-button value="monthly"> Pay monthly </z-radio-button>
     </z-radio-group>
-    <div class="grid max-w-4xl grid-cols-1 gap-5 rounded md:grid-cols-3">
+
+    <!-- Apply classes conditionally based on the current plan tier
+    For `free plan` there are 3 available upgrade plans
+    For `paid plan`, the current plan is excluded from the view -->
+    <div
+      class="grid grid-cols-1 gap-5 rounded max-w-4xl md:grid-cols-3 xl:grid-cols-3"
+      :class="hasPaidPlan ? 'lg:grid-cols-2' : 'lg:grid-cols-1'"
+    >
       <plan-card
         v-for="name in plans"
         :key="name"

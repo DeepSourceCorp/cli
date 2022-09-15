@@ -1,41 +1,30 @@
 <template>
-  <div>
-    <div id="tabs" class="flex xl:col-span-2 pt-2.5 pb-0 border-b border-ink-200">
-      <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
-        <template v-for="settings in settingsOptions">
-          <nuxt-link
-            v-if="owner.isTeam && settings.validator"
-            :key="settings.name"
-            :to="getRoute(settings.name)"
+  <div class="grid grid-cols-1 lg:grid-cols-16-fr team-level-settings-page">
+    <nav
+      class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-ink-200 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
+    >
+      <template v-for="option in settingsOptions">
+        <nuxt-link
+          v-if="owner.isTeam && option.validator"
+          :to="getRoute(option.name)"
+          :key="option.label"
+          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
+        >
+          <span
+            class="hidden p-2 rounded-md group-hover:text-vanilla-100 lg:block"
+            :class="{
+              'bg-ink-300': $route && $route.name && $route.name.startsWith(option.routeName)
+            }"
+            >{{ option.label }}</span
           >
-            <z-tab
-              class="flex items-center space-x-1"
-              :class="settings.isBeta ? 'pb-2.5' : ''"
-              :isActive="$route && $route.name && $route.name.startsWith(settings.routeName)"
-              border-active-color="vanilla-400"
-            >
-              <span>
-                {{ settings.label }}
-              </span>
-              <z-tag
-                v-if="settings.isBeta"
-                :bgColor="
-                  $route && $route.name && $route.name.startsWith(settings.routeName)
-                    ? 'ink-200'
-                    : 'ink-200 opacity-50'
-                "
-                textSize="xxs"
-                spacing="px-2 py-1"
-                class="font-semibold leading-none tracking-wider text-current uppercase"
-              >
-                Beta
-              </z-tag>
-            </z-tab>
-          </nuxt-link>
-        </template>
-      </div>
-    </div>
-    <nuxt-child></nuxt-child>
+        </nuxt-link>
+      </template>
+    </nav>
+
+    <!-- Child view -->
+    <nuxt-child class="mb-28 lg:mb-0" />
+
+    <floating-button-mobile :nav-items="navItemsForMobile" />
   </div>
 </template>
 <script lang="ts">
@@ -75,7 +64,7 @@ export interface LinkOptions {
         if ($config.onPrem) {
           redirect(`/${provider}/${owner}/settings/access`)
         } else {
-          redirect(`/${provider}/${owner}/settings/billing`)
+          redirect(`/${provider}/${owner}/settings/auto-onboard`)
         }
       }
     }
@@ -92,11 +81,11 @@ export interface LinkOptions {
         TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE,
         TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR,
         TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE,
-        TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY,
-        TeamPerms.VIEW_REPORTS
+        TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY
       ]
     }
-  }
+  },
+  scrollToTop: true
 })
 export default class TeamSettings extends mixins(
   TeamDetailMixin,
@@ -164,13 +153,6 @@ export default class TeamSettings extends mixins(
         label: 'Integrations',
         routeName: 'provider-owner-settings-integrations',
         validator: this.canViewIntegrations
-      },
-      {
-        name: 'reports',
-        icon: 'pie-chart',
-        label: 'Reports',
-        routeName: 'provider-owner-settings-reports',
-        validator: this.canViewReports
       }
     ]
   }
@@ -246,13 +228,6 @@ export default class TeamSettings extends mixins(
     return this.$gateKeeper.team(TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD, this.teamPerms.permission)
   }
 
-  get canViewReports(): boolean {
-    return (
-      this.$gateKeeper.team(TeamPerms.VIEW_REPORTS, this.teamPerms.permission) &&
-      (Boolean(this.viewer.isBetaTester) || this.$config.onPrem)
-    )
-  }
-
   get canGenerateSSHKeyPair(): boolean {
     return this.$gateKeeper.team(TeamPerms.GENERATE_OWNER_SSH_KEY_PAIR, this.teamPerms.permission)
   }
@@ -271,6 +246,19 @@ export default class TeamSettings extends mixins(
 
   get canViewPreferences(): boolean {
     return this.$gateKeeper.team(TeamPerms.MANAGE_PREFERNCES, this.teamPerms.permission)
+  }
+
+  get navItemsForMobile() {
+    const visibleNavItems = this.settingsOptions.filter(
+      (item) => this.owner.isTeam && item.validator
+    )
+
+    return visibleNavItems.map((item) => {
+      return {
+        label: item.label,
+        routePath: this.getRoute(item.name)
+      }
+    })
   }
 
   /**
@@ -320,3 +308,25 @@ export default class TeamSettings extends mixins(
   }
 }
 </script>
+
+<style scoped>
+.team-level-settings-page {
+  /* The dashboard header comprising of the team avatar, VCS icon, etc. */
+  --dashboard-header-height: 53px;
+
+  /* The horizontal navbar as part of `dashboard`` layout */
+  --horizontal-navbar-height: 44.5px;
+
+  /* The vertical sidebar top position would be the sum of aforementioned values */
+  --vertical-sidebar-top-offset: calc(
+    var(--dashboard-header-height) + var(--horizontal-navbar-height)
+  );
+}
+
+@media screen and (min-width: 1024px) {
+  .vertical-sidebar {
+    top: var(--vertical-sidebar-top-offset);
+    height: calc(100vh - var(--vertical-sidebar-top-offset));
+  }
+}
+</style>

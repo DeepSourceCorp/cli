@@ -57,8 +57,9 @@
       :height="290"
       :colors="['vanilla-400', 'robin-500']"
       :spline="false"
+      class="chart-tooltip-z-20"
       type="line"
-    ></base-graph>
+    />
   </stat-section>
 </template>
 <script lang="ts">

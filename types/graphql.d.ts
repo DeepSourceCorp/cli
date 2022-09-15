@@ -1959,6 +1959,15 @@ declare module '*/inviteUrl.gql' {
 }
     
 
+declare module '*/membersBaseDetails.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const membersBaseDetails: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/settings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

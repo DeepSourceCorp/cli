@@ -9,7 +9,6 @@
       <issue-list-item
         v-for="issue in issueList"
         :key="issue.id"
-        :showComparisonStat="false"
         v-bind="issue"
         :issueLink="buildRoute(issue)"
         @autofix="(iss) => openAutofixModal(iss, issue)"

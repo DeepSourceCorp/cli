@@ -179,7 +179,7 @@ const navItems: TabLink[] = [
     pattern: new RegExp(/^provider-owner-repo-(history|run|runs|transforms|transforms)/)
   },
   {
-    icon: 'settings',
+    icon: 'wrench',
     label: 'Settings',
     link: 'settings/general',
     loginRequired: true,

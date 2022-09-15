@@ -110,3 +110,10 @@ code.bifrost-inline-code {
   padding: clamp(2px, 0.25em, 4px);
   font-size: 0.8em;
 }
+
+// Create a new stacking context by specifying `z-index` less than the layout (dashboard/repository) header -->
+// Graph tooltips appear below while scrolling
+.chart-tooltip-z-20 .z-chart-wrapper .graph-svg-tip.comparison,
+.z-chart-wrapper.chart-tooltip-z-20 .graph-svg-tip.comparison {
+  z-index: 20;
+}

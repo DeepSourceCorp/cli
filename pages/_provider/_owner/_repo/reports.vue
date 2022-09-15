@@ -23,7 +23,7 @@
           />
         </template>
       </page-title>
-      <nuxt-child class="mb-24" />
+      <nuxt-child class="mb-28 lg:mb-24" />
     </div>
 
     <portal v-if="activeReportName !== ReportPageT.PUBLIC_REPORTS" to="modal">
@@ -81,7 +81,8 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
       strict: true,
       repoPerms: [RepoPerms.VIEW_REPORTS]
     }
-  }
+  },
+  scrollToTop: true
 })
 export default class Reports extends mixins(RoleAccessMixin) {
   isMutateReportModalOpen = false

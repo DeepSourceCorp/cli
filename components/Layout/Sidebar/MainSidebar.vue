@@ -30,7 +30,7 @@
         <nav class="space-y-2">
           <sidebar-item
             v-tooltip="{
-              content: isCollapsed ? activeDashboardHome : '',
+              content: isCollapsed ? 'Home' : '',
               placement: 'right'
             }"
             :is-collapsed="isCollapsed"
@@ -38,61 +38,24 @@
             :active="$route.name === 'provider-owner'"
             :to="getRoute('')"
           >
-            {{ activeDashboardHome }}
+            Home
           </sidebar-item>
           <client-only>
             <pending-adhoc-repos :is-collapsed="isCollapsed" />
           </client-only>
+
+          <sidebar-item
+            v-if="viewer.isBetaTester"
+            :is-collapsed="isCollapsed"
+            icon="search"
+            class="hidden md:flex"
+            @click="$emit('show-palette')"
+          >
+            Quick search
+          </sidebar-item>
+
           <recently-active-repo :is-collapsed="isCollapsed" />
-          <sidebar-item
-            v-tooltip="{
-              content: isCollapsed ? 'All repositories' : '',
-              placement: 'right'
-            }"
-            :is-collapsed="isCollapsed"
-            icon="layers"
-            :active="isActive('provider-owner-all-repos')"
-            :to="getRoute('all-repos')"
-          >
-            <span class="flex items-center justify-between w-full">
-              <span>All repositories</span>
-              <z-tag
-                v-if="repositoryList.totalCount"
-                bg-color="ink-100"
-                text-size="xs"
-                spacing="px-2 py-1"
-                class="leading-none"
-              >
-                <span class="mt-px">{{ repositoryList.totalCount }}</span>
-              </z-tag>
-            </span>
-          </sidebar-item>
-          <sidebar-item
-            v-if="showTeamMembers"
-            v-tooltip="{
-              content: isCollapsed ? 'Team members' : '',
-              placement: 'right'
-            }"
-            :is-collapsed="isCollapsed"
-            icon="users"
-            :active="isActive('provider-owner-members')"
-            :to="getRoute('members/active')"
-          >
-            Team members
-          </sidebar-item>
-          <sidebar-item
-            v-if="showTeamSettings"
-            v-tooltip="{
-              content: isCollapsed ? 'Settings' : '',
-              placement: 'right'
-            }"
-            :is-collapsed="isCollapsed"
-            icon="settings"
-            :active="isActive('provider-owner-settings')"
-            :to="settingsUrl"
-          >
-            Settings
-          </sidebar-item>
+
           <sidebar-item
             v-if="$config.onPrem && isViewerSuperadmin"
             :is-collapsed="isCollapsed"
@@ -136,14 +99,14 @@
         </nuxt-link>
         <sidebar-item
           v-tooltip="{
-            content: isCollapsed ? 'Team home' : '',
+            content: isCollapsed ? 'Home' : '',
             placement: 'right'
           }"
           :is-collapsed="isCollapsed"
           icon="home"
           to="/installation/pending"
         >
-          <span>Team home</span>
+          <span>Home</span>
         </sidebar-item>
         <sidebar-item
           v-tooltip="{
@@ -272,7 +235,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Watch, mixins } from 'nuxt-property-decorator'
+import { Component, Watch, mixins, Prop } from 'nuxt-property-decorator'
 import { ZButton, ZIcon, ZTag } from '@deepsourcelabs/zeal'
 
 // types
@@ -488,99 +451,6 @@ export default class Sidebar extends mixins(
   get canActivateRepo(): boolean {
     const role = this.activeDashboardContext.role as TeamMemberRoleChoices
     return this.$gateKeeper.team(TeamPerms.ACTIVATE_ANALYSIS, role)
-  }
-
-  get showTeamMembers(): boolean {
-    if ('type' in this.activeDashboardContext) {
-      if (this.activeDashboardContext.type === 'user') {
-        return false
-      }
-      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return this.$gateKeeper.team(TeamPerms.MANAGE_TEAM_MEMEBERS, role)
-    }
-    return false
-  }
-
-  get activeDashboardHome(): string {
-    return this.activeDashboardContext.type === 'team' ? 'Team home' : 'Home'
-  }
-
-  get allowedBilling(): boolean {
-    if (this.$config.onPrem) {
-      return false
-    }
-
-    if ('role' in this.activeDashboardContext) {
-      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return this.$gateKeeper.team(
-        [TeamPerms.CHANGE_PLAN, TeamPerms.UPDATE_SEATS, TeamPerms.UPDATE_BILLING_DETAILS],
-        role
-      )
-    }
-    return false
-  }
-
-  get allowedAccessControl(): boolean {
-    if ('role' in this.activeDashboardContext) {
-      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return this.$gateKeeper.team(TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD, role)
-    }
-
-    return false
-  }
-  get allowedAutoOnboard(): boolean {
-    if (!['gh', 'ghe'].includes(this.activeProvider)) {
-      return false
-    }
-    if ('role' in this.activeDashboardContext) {
-      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return this.$gateKeeper.team(
-        [TeamPerms.AUTO_ONBOARD_CRUD_FOR_TEMPLATE, TeamPerms.AUTO_ONBOARD_VIEW_TEMPLATE],
-        role
-      )
-    }
-
-    return false
-  }
-
-  get settingsUrl(): string {
-    if (this.allowedBilling && !this.$config.onPrem) {
-      return this.getRoute('settings/billing')
-    }
-    if (this.allowedAccessControl) {
-      return this.getRoute('settings/access')
-    }
-    if (this.allowedAutoOnboard) {
-      return this.getRoute('settings/auto-onboard')
-    }
-    return this.getRoute('settings')
-  }
-
-  get showTeamSettings(): boolean {
-    if ('type' in this.activeDashboardContext) {
-      if (this.activeDashboardContext.type === 'user') {
-        return false
-      }
-    }
-
-    if ('role' in this.activeDashboardContext) {
-      const role = this.activeDashboardContext.role as TeamMemberRoleChoices
-      return (
-        this.$gateKeeper.team(
-          [
-            TeamPerms.CHANGE_PLAN,
-            TeamPerms.UPDATE_SEATS,
-            TeamPerms.UPDATE_BILLING_DETAILS,
-            TeamPerms.MANAGE_TEAM_MEMEBERS,
-            TeamPerms.VIEW_ACCESS_CONTROL_DASHBOARD,
-            TeamPerms.DELETE_TEAM_ACCOUNT
-          ],
-          role
-        ) || this.allowedAutoOnboard
-      )
-    }
-
-    return false
   }
 
   get currentYear() {

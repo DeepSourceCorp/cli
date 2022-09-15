@@ -137,12 +137,6 @@ export default class IssueListItem extends Vue {
   autofixAvailable!: boolean
 
   @Prop({ default: '' })
-  hideProgress!: boolean
-
-  @Prop({ default: true })
-  showComparisonStat!: boolean
-
-  @Prop({ default: '' })
   centerContent!: boolean
 
   @Prop()

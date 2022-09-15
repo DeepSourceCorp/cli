@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 gap-5 p-4">
+  <div class="p-4 space-y-5">
     <template v-if="activeDashboardContext.has_premium_plan">
       <h2 class="text-lg font-medium">Billing</h2>
       <div class="max-w-2xl">

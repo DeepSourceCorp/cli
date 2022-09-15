@@ -20,7 +20,7 @@
           />
         </template>
       </page-title>
-      <nuxt-child class="mb-24" />
+      <nuxt-child class="mb-28 lg:mb-24" />
     </div>
 
     <portal v-if="activeReportName !== ReportPageT.PUBLIC_REPORTS" to="modal">
@@ -68,8 +68,8 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
     'betaOnly',
     async function ({ route, redirect }) {
       const { provider, owner } = route.params
-      if (route.name === 'provider-owner-settings-reports') {
-        redirect(`/${provider}/${owner}/settings/reports/${ReportPageT.OWASP_TOP_10}`)
+      if (route.name === 'provider-owner-reports') {
+        redirect(`/${provider}/${owner}/reports/${ReportPageT.OWASP_TOP_10}`)
       }
     }
   ],
@@ -78,7 +78,8 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
       strict: true,
       teamPerms: [TeamPerms.VIEW_REPORTS]
     }
-  }
+  },
+  scrollToTop: true
 })
 export default class OwnerReports extends mixins(RoleAccessMixin) {
   isMutateReportModalOpen = false
@@ -123,7 +124,7 @@ export default class OwnerReports extends mixins(RoleAccessMixin) {
 
   get activeReportName(): ReportPageT {
     const currentRouteItem = Object.values(ReportPageT).find(
-      (reportKey) => this.$route.name === `provider-owner-settings-reports-${reportKey}`
+      (reportKey) => this.$route.name === `provider-owner-reports-${reportKey}`
     )
 
     return currentRouteItem ?? ReportPageT.OWASP_TOP_10

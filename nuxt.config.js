@@ -65,7 +65,7 @@ export default {
     '@deepsourcelabs/zeal/dist/chart.css',
     '@assets/css/default.scss',
     '@deepsourcelabs/zeal/src/assets/css/syntax_highlighter.css', // remove this after ZCode export fix
-    '@assets/css/tooltip.scss'
+    '@assets/css/floating_vue.scss'
   ],
 
   // https://nuxtjs.org/blog/moving-from-nuxtjs-dotenv-to-runtime-config
@@ -111,7 +111,7 @@ export default {
     '~/plugins/helpers/storage.client.ts',
     '~/plugins/helpers/worker.client.ts',
     '~/plugins/components/toasts.client.ts',
-    '~/plugins/components/tooltip.ts',
+    '~/plugins/components/floatingVue.ts',
     '~/plugins/components/palette.client.ts'
   ],
 

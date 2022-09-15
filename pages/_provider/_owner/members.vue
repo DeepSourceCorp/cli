@@ -1,39 +1,47 @@
 <template>
-  <div>
-    <div id="tabs" class="flex xl:col-span-2 pt-2.5 pb-0 border-b border-ink-200">
-      <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
-        <nuxt-link :to="getRoute('active')">
-          <z-tab :isActive="$route.path === getRoute('active')" border-active-color="vanilla-400">
-            My team
-          </z-tab>
+  <div class="grid grid-cols-1 lg:grid-cols-16-fr members-page">
+    <nav
+      class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-ink-200 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
+    >
+      <template v-for="item in navItems">
+        <nuxt-link
+          :to="item.link"
+          :key="item.label"
+          class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
+        >
+          <span
+            class="flex items-center justify-between p-2 rounded-md group-hover:text-vanilla-100"
+            :class="{ 'bg-ink-300': $route.path.startsWith(item.link) }"
+            >{{ item.label }}
+            <z-tag
+              v-if="item.count"
+              :bg-color="$route.path.startsWith(item.link) ? 'ink-200' : 'ink-300'"
+              text-size="xs"
+              spacing="py-1 px-2"
+              class="leading-none group-hover:bg-ink-200"
+              ><span class="mt-px">{{ item.count > 9 ? '9+' : item.count }}</span></z-tag
+            >
+          </span>
         </nuxt-link>
-        <nuxt-link :to="getRoute('invited')">
-          <z-tab :isActive="$route.path === getRoute('invited')" border-active-color="vanilla-400">
-            <div v-if="pendingInvitesCount" class="flex items-center space-x-2">
-              <span>Pending invites</span>
-              <span
-                class="bg-cherry w-auto px-1.5 h-4 flex items-center justify-center rounded-full text-vanilla-100 text-xs"
-                >{{ pendingInvitesCount > 9 ? '9+' : pendingInvitesCount }}</span
-              >
-            </div>
-            <template v-else>Pending invites</template>
-          </z-tab>
-        </nuxt-link>
-      </div>
-    </div>
+      </template>
+    </nav>
+
     <div class="max-w-3xl p-4 space-y-8">
       <div class="space-y-4">
         <div v-if="pageHeading" class="flex justify-between">
           <h2 class="text-lg font-medium">{{ pageHeading }}</h2>
           <invite-members-modal @inviteSuccess="inviteSuccess" />
         </div>
-        <nuxt-child></nuxt-child>
+
+        <nuxt-child class="mb-28 lg:mb-0" />
       </div>
     </div>
+
+    <floating-button-mobile :nav-items="navItemsForMobile" />
   </div>
 </template>
 <script lang="ts">
-import { ZButton, ZIcon, ZModal, ZTab } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZModal, ZTab, ZTag } from '@deepsourcelabs/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import { InviteMembersModal } from '@/components/Members'
@@ -46,10 +54,12 @@ import TeamDetailMixin from '@/mixins/teamDetailMixin'
     ZButton,
     ZIcon,
     InviteMembersModal,
-    ZModal
+    ZModal,
+    ZTag
   },
   middleware: ['validateProvider'],
-  layout: 'dashboard'
+  layout: 'dashboard',
+  scrollToTop: true
 })
 export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   showInviteModal = false
@@ -63,6 +73,31 @@ export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) 
       this.fetchSeatsInfo(args),
       this.fetchInviteUrl(args)
     ])
+  }
+
+  get navItems() {
+    return [
+      {
+        label: 'My team',
+        routeName: 'provider-owner-members-active',
+        link: this.getRoute('active')
+      },
+      {
+        label: 'Pending invites',
+        routeName: 'provider-owner-members-invited',
+        link: this.getRoute('invited'),
+        count: this.pendingInvitesCount
+      }
+    ]
+  }
+
+  get navItemsForMobile() {
+    return this.navItems.map((item) => {
+      return {
+        label: item.label,
+        routePath: item.link
+      }
+    })
   }
 
   async fetchInvitedMembers(): Promise<void> {
@@ -117,3 +152,25 @@ export default class Members extends mixins(TeamDetailMixin, OwnerBillingMixin) 
   }
 }
 </script>
+
+<style scoped>
+.members-page {
+  /* The dashboard header comprising of the team/user avatar, VCS icon, etc. */
+  --dashboard-header-height: 53px;
+
+  /* The horizontal navbar as part of `dashboard`` layout */
+  --horizontal-navbar-height: 44.5px;
+
+  /* The vertical sidebar top position would be the sum of aforementioned values */
+  --vertical-sidebar-top-offset: calc(
+    var(--dashboard-header-height) + var(--horizontal-navbar-height)
+  );
+}
+
+@media screen and (min-width: 1024px) {
+  .vertical-sidebar {
+    top: var(--vertical-sidebar-top-offset);
+    height: calc(100vh - var(--vertical-sidebar-top-offset));
+  }
+}
+</style>

@@ -23,14 +23,21 @@ describe('[[ DashboardHeader ]]', () => {
     }
   })
 
+  const stubs = {
+    ZAvatar: true,
+    ZAvatarGroup: true,
+    ZIcon: true,
+    ZTag: true,
+    NuxtLink: RouterLinkStub,
+    InviteMembersModal: true
+  }
+
   test('renders DashboardHeader', () => {
     const { html } = render(
       DashboardHeader,
       {
         mocks: mocksGenerator(),
-        stubs: {
-          NuxtLink: RouterLinkStub
-        },
+        stubs,
         store: new Vuex.Store(storeMock)
       },
       (vue) => {
@@ -48,9 +55,7 @@ describe('[[ DashboardHeader ]]', () => {
         mocks: mocksGenerator({
           $config: { onPrem: true }
         }),
-        stubs: {
-          NuxtLink: RouterLinkStub
-        },
+        stubs,
         store: new Vuex.Store(storeMock)
       },
       (vue) => {
@@ -66,9 +71,7 @@ describe('[[ DashboardHeader ]]', () => {
       DashboardHeader,
       {
         mocks: mocksGenerator(),
-        stubs: {
-          NuxtLink: RouterLinkStub
-        },
+        stubs,
         store: new Vuex.Store({
           modules: storeModulesGenerator({
             'user/active': {
@@ -111,9 +114,7 @@ describe('[[ DashboardHeader ]]', () => {
             }
           }
         }),
-        stubs: {
-          NuxtLink: RouterLinkStub
-        },
+        stubs,
         store: new Vuex.Store({
           modules: storeModulesGenerator({
             'user/active': {
@@ -147,9 +148,7 @@ describe('[[ DashboardHeader ]]', () => {
       DashboardHeader,
       {
         mocks: mocksGenerator(),
-        stubs: {
-          NuxtLink: RouterLinkStub
-        },
+        stubs,
         store: new Vuex.Store({
           modules: storeModulesGenerator({
             'user/active': {

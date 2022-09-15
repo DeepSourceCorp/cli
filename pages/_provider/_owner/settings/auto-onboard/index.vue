@@ -1,5 +1,5 @@
 <template>
-  <section class="grid grid-cols-1 max-w-3xl p-4">
+  <section class="max-w-3xl p-4">
     <div class="flex justify-between mb-4">
       <h2 class="text-lg font-medium">Auto Onboard</h2>
       <z-button
@@ -33,7 +33,7 @@
     </z-input>
     <div class="grid grid-cols-1 gap-2">
       <template v-if="templatesLoading">
-        <div v-for="index in 3" :key="index" class="h-20 bg-ink-300 animate-pulse rounded-md"></div>
+        <div v-for="index in 3" :key="index" class="h-20 rounded-md bg-ink-300 animate-pulse"></div>
       </template>
       <template v-else-if="configTemplateList.length">
         <config-template-card
@@ -56,7 +56,7 @@
       </template>
       <empty-state
         v-else-if="!searchCandidate"
-        class="border border-dashed rounded-lg border-2 border-ink-200 py-20"
+        class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
         title="No Auto Onboard templates found"
         :subtitle="`Auto Onboard helps you activate DeepSource on multiple repositories at once. ${
           allowCrud
@@ -72,7 +72,7 @@
       </empty-state>
       <empty-state
         v-else
-        class="border border-dashed rounded-lg border-2 border-ink-200 py-20"
+        class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
         :title="`We couldn't find any templates matching &quot;${searchCandidate}&quot;`"
       >
         <template slot="action">

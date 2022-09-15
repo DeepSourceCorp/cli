@@ -96,6 +96,9 @@ module.exports = {
             filter: 'drop-shadow(0 0 150px rgba(69, 104, 220, 0.15))'
           }
         }
+      },
+      zIndex: {
+        5: '5'
       }
     }
   }

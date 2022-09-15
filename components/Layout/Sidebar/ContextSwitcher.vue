@@ -8,15 +8,16 @@
         @click="toggle"
       >
         <z-avatar
-          size="sm"
           :image="activeDashboardContext.avatar_url"
           :user-name="activeDashboardContext.login"
           :fallback-image="
             getDefaultAvatar(activeDashboardContext.login, activeDashboardContext.type === 'user')
           "
+          size="sm"
+          stroke="bg-ink-100 p-0.5"
           class="flex-shrink-0"
-          stroke="bg-ink-100 p-1"
-        ></z-avatar>
+          :class="{ 'mx-auto': isCollapsed }"
+        />
         <span v-show="!isCollapsed">{{
           activeDashboardContext.team_name || activeDashboardContext.login
         }}</span>
@@ -40,6 +41,7 @@
             :image="context.avatar_url"
             :fallback-image="getDefaultAvatar(context.login, context.type === 'user')"
             :user-name="context.login"
+            stroke="bg-ink-100 p-0.5"
             type="span"
           />
           <div class="flex-col flex-1">

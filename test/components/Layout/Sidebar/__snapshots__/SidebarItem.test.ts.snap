@@ -127,63 +127,63 @@ exports[`renders SidebarItem with all props: {"active":null} 1`] = `
 `;
 
 exports[`renders SidebarItem with all props: {"active":true,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"active":true,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"active":true,"iconColor":null,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"active":true,"iconColor":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"active":true} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
@@ -372,63 +372,63 @@ exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":null}
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true,"iconColor":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":false,"active":true} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
@@ -624,63 +624,63 @@ exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":null} 
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true,"iconColor":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":null,"active":true} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
@@ -876,63 +876,63 @@ exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":null} 
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true,"iconColor":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"isCollapsed":true,"active":true} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
@@ -1128,63 +1128,63 @@ exports[`renders SidebarItem with all props: {"to":"/hello","active":null} 1`] =
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true,"icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true,"icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true,"iconColor":null,"icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true,"iconColor":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","active":true} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -1373,63 +1373,63 @@ exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true,"icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true,"icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true,"iconColor":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":false,"active":true} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -1625,63 +1625,63 @@ exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true,"icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true,"icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true,"iconColor":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":null,"active":true} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -1877,63 +1877,63 @@ exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true,"icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true,"icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true,"iconColor":null} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"/hello","isCollapsed":true,"active":true} 1`] = `
-"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
@@ -2136,63 +2136,63 @@ exports[`renders SidebarItem with all props: {"to":"https://example.com","active
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true,"icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true,"icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true,"iconColor":null,"icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true,"iconColor":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","active":true} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -2381,63 +2381,63 @@ exports[`renders SidebarItem with all props: {"to":"https://example.com","isColl
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true,"icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true,"icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true,"iconColor":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":false,"active":true} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -2633,63 +2633,63 @@ exports[`renders SidebarItem with all props: {"to":"https://example.com","isColl
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true,"icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true,"icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true,"iconColor":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":null,"active":true} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -2885,63 +2885,63 @@ exports[`renders SidebarItem with all props: {"to":"https://example.com","isColl
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true,"icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true,"icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true,"iconColor":null} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"https://example.com","isCollapsed":true,"active":true} 1`] = `
-"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"https://example.com\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
@@ -3144,63 +3144,63 @@ exports[`renders SidebarItem with all props: {"to":"mailto:","active":null} 1`] 
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true,"icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true,"icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true,"iconColor":null,"icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true,"iconColor":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","active":true} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -3389,63 +3389,63 @@ exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true,"icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true,"icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true,"iconColor":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":false,"active":true} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -3641,63 +3641,63 @@ exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true,"icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true,"icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true,"iconColor":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":null,"active":true} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </a>"
@@ -3893,63 +3893,63 @@ exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true,"icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true,"icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true,"iconColor":null} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":"mailto:","isCollapsed":true,"active":true} 1`] = `
-"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<a href=\\"mailto:\\" class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </a>"
@@ -4152,63 +4152,63 @@ exports[`renders SidebarItem with all props: {"to":null,"active":null} 1`] = `
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true,"iconColor":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"active":true} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
@@ -4397,63 +4397,63 @@ exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"act
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true,"iconColor":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":false,"active":true} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
@@ -4649,63 +4649,63 @@ exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"acti
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true,"iconColor":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":null,"active":true} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-full w-full\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-full w-full\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\"></div>
 </div>"
@@ -4901,63 +4901,63 @@ exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"acti
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true,"iconColor":"vanilla-100","icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true,"iconColor":"vanilla-100"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true,"iconColor":null,"icon":"support"} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <zicon-stub icon=\\"support\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"min-w-4 min-h-4\\"></zicon-stub>
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true,"iconColor":null,"icon":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true,"iconColor":null} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
 `;
 
 exports[`renders SidebarItem with all props: {"to":null,"isCollapsed":true,"active":true} 1`] = `
-"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 font-semibold max-w-0 w-8\\">
+"<div class=\\"flex items-center h-8 px-2 text-sm rounded-sm cursor-pointer gap-x-2 sidebar-item hover:bg-ink-300 bg-ink-300 text-vanilla-100 max-w-0 w-8\\">
   <!---->
   <div class=\\"w-full overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis leading-none py-0.5\\" style=\\"display: none;\\"></div>
 </div>"
