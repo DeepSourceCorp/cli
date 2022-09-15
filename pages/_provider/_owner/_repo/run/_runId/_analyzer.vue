@@ -240,7 +240,7 @@ export default class AnalyzerDetails extends mixins(
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
   );
 
-  --run-check-title-height: 92px;
+  --run-check-title-height: 104px;
 }
 
 /* height of RepoHeader + Breadcrumbs */

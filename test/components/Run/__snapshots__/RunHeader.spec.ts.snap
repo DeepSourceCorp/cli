@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"CNCL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-23\\">
-  <div class=\\"flex flex-col gap-y-1.5 p-3\\">
+"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
+  <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
@@ -46,8 +46,8 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"FAIL","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-23\\">
-  <div class=\\"flex flex-col gap-y-1.5 p-3\\">
+"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
+  <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
@@ -91,8 +91,8 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"PASS","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-23\\">
-  <div class=\\"flex flex-col gap-y-1.5 p-3\\">
+"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
+  <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
@@ -136,8 +136,8 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"PEND","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-23\\">
-  <div class=\\"flex flex-col gap-y-1.5 p-3\\">
+"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
+  <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
@@ -181,8 +181,8 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"READ","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-23\\">
-  <div class=\\"flex flex-col gap-y-1.5 p-3\\">
+"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
+  <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
@@ -226,8 +226,8 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 `;
 
 exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchName":"master","commitOid":"86215f5d0d27e08c86f752c61510130fb37901ef","createdAt":"2020-07-07T16:58:15.109526+00:00","status":"TIMO","finishedIn":88,"gitCompareDisplay":"b3907ba..86215f5","checks":[{"id":"Q2hlY2s6YnJnbnZq","issuesRaisedCount":23,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg"}}],"routeToPrevious":"/gh/deepsourcelabs/demo-python/history/runs","vcsCommitUrl":"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef","vcsPrUrl":"https://github.com/deepsourcelabs/demo-python/pull/77","pullRequestNumberDisplay":"#77","currentAnalyzer":"python"} 1`] = `
-"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-23\\">
-  <div class=\\"flex flex-col gap-y-1.5 p-3\\">
+"<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
+  <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-3\\">
       <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"-ml-1\\"></zicon-stub>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
