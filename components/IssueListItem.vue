@@ -29,8 +29,7 @@
                 {{ firstSeenDisplay }}
               </span>
             </meta-data-item>
-          </div>
-          <div class="flex items-center flex-wrap gap-y-1.5 gap-x-4">
+
             <!-- Occurrences in files -->
             <meta-data-item icon="file-text"> Found in {{ seenIn }} </meta-data-item>
           </div>
@@ -45,25 +44,27 @@
         >
           <!-- Occurence count and Trend  -->
           <div
-            class="flex flex-col items-center justify-center flex-grow text-xs leading-none"
+            class="flex items-center gap-x-2 justify-center flex-grow text-xs leading-none"
             :class="showTrend ? 'py-1' : 'py-2'"
           >
             <!-- Count -->
+            <ticker
+              v-if="showTrend"
+              v-tooltip="trend.trendHint"
+              :trend-direction="trend.trendDirection === TrendDirection.Up ? 'up' : 'down'"
+              :trend-positive="trend.trendPositive"
+              :trend-value="trend.trendValue ? `${trend.trendValue}%` : ' '"
+              :show-bg="false"
+              custom-bg-class="bg-ink-100"
+              class="hidden sm:block text-xxs md:text-xs"
+              :class="trend.trendDirection === TrendDirection.Up ? 'text-cherry' : 'text-juniper'"
+            />
             <div
               v-tooltip="occurrenceCount > 1000 ? `${formatIntl(occurrenceCount)} occurrences` : ''"
               class="text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100"
             >
               {{ shortenLargeNumber(occurrenceCount) }}
             </div>
-            <ticker
-              v-if="showTrend"
-              :trend-direction="trend.trendDirection === TrendDirection.Up ? 'up' : 'down'"
-              :trend-positive="trend.trendPositive"
-              :trend-value="trend.trendValue ? `${trend.trendValue}%` : ' '"
-              :trend-hint="trend.trendHint"
-              :show-bg="false"
-              class="hidden bg-opacity-0 sm:block text-xxs md:text-xs"
-            />
           </div>
           <!-- Autofix -->
           <button
