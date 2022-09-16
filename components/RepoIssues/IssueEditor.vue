@@ -2,6 +2,8 @@
   <div>
     <z-accordion-item
       :is-open="true"
+      span-custom-height
+      custom-max-height="max-h-full"
       class="w-full border rounded-md border-ink-200"
       :class="{
         'opacity-60 pointer-events-none filter-grayscale transition transform-gpu duration-300 ease-in-out':

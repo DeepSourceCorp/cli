@@ -12,7 +12,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 1`] = `
         <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"-mt-1 -mr-1 focus:outline-none hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -46,7 +46,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 2`] = `
         <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"-mt-1 -mr-1 focus:outline-none hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -80,7 +80,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 3`] = `
         <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"-mt-1 -mr-1 focus:outline-none hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -114,7 +114,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 4`] = `
         <div class=\\"flex justify-end w-12\\"><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"\\" iconcolor=\\"vanilla-400\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"slash\\" class=\\"-mt-1 -mr-1 focus:outline-none hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"></zbutton-stub></div><transition-stub enterclass=\\"sm:opacity-0 sm:scale-75\\" leaveclass=\\"sm:opacity-100 sm:scale-100\\" entertoclass=\\"sm:opacity-100 sm:scale-100\\" leavetoclass=\\"sm:opacity-0 sm:scale-75\\" enteractiveclass=\\"animate-slide-bottom-enter-active sm:animate-none sm:transition-all sm:duration-75 sm:ease-out-quad\\" leaveactiveclass=\\"animate-slide-bottom-leave-active sm:animate-none sm:transition-all sm:duration-150 sm:ease-in-quad\\"><!----></transition-stub></span></div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -150,7 +150,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 5`] = `
         </div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -186,7 +186,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 6`] = `
         </div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -222,7 +222,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 7`] = `
         </div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
@@ -258,7 +258,7 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 8`] = `
         </div>
       </div>
     </div>
-    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-52\\">
+    <div class=\\"overflow-hidden text-sm leading-6 duration-300 ease-in-out transition-max-height max-h-full\\">
       <div class=\\"flex flex-col space-y-1\\">
         <div class=\\"text-xs xl:text-sm\\">
           <div class=\\"z-code\\">
