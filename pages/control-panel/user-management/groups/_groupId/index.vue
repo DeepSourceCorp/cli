@@ -55,7 +55,7 @@
             class="flex flex-wrap justify-start gap-2 mt-1 ml-12 md:flex-nowrap md:justify-self-end md:ml-0 md:mt-0"
           >
             <remove-user-from-group-button
-              v-if="!user.scimEnabled"
+              v-if="!group.scimEnabled"
               :org-user="user"
               :group="group"
               @refetch="refetchData"

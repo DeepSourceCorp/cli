@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center items-center p-4 pb-6">
+  <div v-if="!isLoading && groupInvites.length" class="flex justify-center items-center p-4 pb-6">
     <div class="max-w-lg">
       <img src="~/assets/images/ui-states/control-panel/group-invite.svg" alt="" class="mx-auto" />
       <p class="mt-4 text-sm max-w-md mx-auto text-center">
@@ -37,10 +37,33 @@
           :is-loading="resettingLink"
           :disabled="resettingLink"
           @click="resetLink"
-          class="mt-4"
+          class="mt-4 w-36"
         />
       </div>
     </div>
+  </div>
+  <div v-else-if="isLoading" class="flex flex-col justify-center items-center p-4 pb-6 gap-y-4">
+    <div class="h-24 w-24 rounded-full bg-ink-300 animate-pulse"></div>
+    <div class="h-11 w-full max-w-lg bg-ink-300 animate-pulse mt-2"></div>
+    <div class="h-13 w-full max-w-lg bg-ink-300 animate-pulse"></div>
+    <div class="h-13 w-full max-w-lg bg-ink-300 animate-pulse"></div>
+    <div class="h-10 w-36 bg-ink-300 animate-pulse"></div>
+  </div>
+  <div v-else class="p-4">
+    <lazy-empty-state
+      title="No groups found"
+      :show-border="true"
+      class="h-control-panel flex flex-col justify-center"
+    >
+      <template slot="action">
+        <div class="flex justify-around">
+          <nuxt-link-button to="/control-panel/user-management/groups" class="space-x-1.5">
+            <z-icon icon="plus" size="small" color="current" />
+            <span>Create a group</span>
+          </nuxt-link-button>
+        </div>
+      </template>
+    </lazy-empty-state>
   </div>
 </template>
 
@@ -74,6 +97,7 @@ export default class ControlPanelInvite extends mixins(ControlPanelBaseMixin) {
   selectedGroup = ''
   inviteLink = ''
   resettingLink = false
+  isLoading = true
 
   async fetch(): Promise<void> {
     await this.fetchGroupInvites({ refetch: true })
@@ -89,6 +113,7 @@ export default class ControlPanelInvite extends mixins(ControlPanelBaseMixin) {
       }
     }
     this.resettingLink = false
+    this.isLoading = false
   }
 
   async triggerChange(value: string): Promise<void> {
