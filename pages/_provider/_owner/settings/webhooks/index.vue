@@ -31,7 +31,10 @@
       </template>
       <empty-state
         v-else
-        class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
+        :use-v2="true"
+        :webp-image-path="require('~/assets/images/ui-states/owner/webhooks.webp')"
+        :png-image-path="require('~/assets/images/ui-states/owner/webhooks.png')"
+        :show-border="true"
         title="Add your first endpoint"
         subtitle="Configure webhook endpoints to let your apps and services know about events in DeepSource as they happen. Start with a new endpoint."
       >
