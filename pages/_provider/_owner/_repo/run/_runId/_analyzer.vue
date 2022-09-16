@@ -10,7 +10,7 @@
           class="flex items-center justify-center gap-x-2 w-7 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
           ><z-icon icon="arrow-left"
         /></nuxt-link>
-        <z-breadcrumb :key="$route.name" separator="/" class="text-sm text-vanilla-100">
+        <z-breadcrumb :key="$route.path" separator="/" class="text-sm text-vanilla-100">
           <span class="text-vanilla-400 md:hidden">..</span>
           <z-breadcrumb-item
             v-for="(link, index) in breadCrumbLinks"
@@ -167,10 +167,21 @@ export default class AnalyzerDetails extends mixins(
     ]
 
     if (analyzer) {
-      links.push({
+      let link = {
         label: toTitleCase(this.$route.params.analyzer),
         route: issueId ? this.$generateRoute(['run', runId, analyzer]) : undefined
-      })
+      }
+      if (issueId && this.$route.query) {
+        const { listsort, listcategory, listq } = this.$route.query
+        let filters = []
+        if (listsort) filters.push(`sort=${listsort}`)
+        if (listcategory) filters.push(`category=${listcategory}`)
+        if (listq) filters.push(`q=${listq}`)
+        if (filters.length > 0) {
+          link.route = `${link.route}?${filters.join('&')}`
+        }
+      }
+      links.push(link)
     }
 
     if (issueId) {

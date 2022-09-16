@@ -1,6 +1,6 @@
 <template>
   <base-card
-    :to="issueLink"
+    :to="link"
     :remove-default-style="true"
     class="border rounded-lg bg-ink-400 hover:bg-ink-300 border-ink-200"
   >
@@ -97,6 +97,7 @@ import { IssueType } from '@/components/Repository'
 import { formatDate } from '~/utils/date'
 import { formatIntl, safeRenderBackticks, shortenLargeNumber } from '~/utils/string'
 import { IssueSeverity, IssueTrend, TrendDirection } from '~/types/types'
+import { FilterParams } from './Run/AnalyzerRun.vue'
 
 @Component({
   components: {
@@ -158,6 +159,12 @@ export default class IssueListItem extends Vue {
   @Prop({ default: true })
   showSeenInfo!: boolean
 
+  @Prop({ default: {} })
+  issueListFilters: FilterParams
+
+  @Prop({ default: 0 })
+  issueListIndex: number
+
   TrendDirection = TrendDirection
 
   public handleClick(): void {
@@ -184,6 +191,26 @@ export default class IssueListItem extends Vue {
      * Return when the issue was first seen in a human-readable form.
      */
     return `${dayjs(this.createdAt).fromNow(true)} old`
+  }
+
+  /**
+   * Combine the issue link with any active filters
+   *
+   * @returns {string}
+   */
+  get link(): string {
+    let filters: string[] = []
+    const filterTypes = ['category', 'sort', 'q']
+
+    Object.keys(this.issueListFilters).forEach((key) => {
+      if (filterTypes.includes(key)) {
+        filters = filters.concat(`list${key}=${this.issueListFilters[key as keyof FilterParams]}`)
+      }
+    })
+
+    filters = filters.concat(`listindex=${this.issueListIndex}`)
+
+    return filters.length > 0 ? `${this.issueLink}?${filters.join('&')}` : this.issueLink
   }
 }
 </script>

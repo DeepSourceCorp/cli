@@ -14,12 +14,17 @@ const mocks = {
       () => 'gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python'
     ),
   $route: {
-    query: '',
+    query: {
+      listcategory: 'performance',
+      listsort: 'most-frequent'
+    },
     params: {
       provider: 'gh',
       owner: 'deepsourcelabs',
       repo: 'demo-python',
-      runId: '4c1d5e1b-1747-4777-9618-acae5c51ca5d'
+      runId: '4c1d5e1b-1747-4777-9618-acae5c51ca5d',
+      analyzer: 'python',
+      issueId: 'PYL-R0201'
     }
   }
 }

@@ -16,24 +16,48 @@
     <!-- Ignore issue actions -->
     <z-menu v-if="canIgnoreIssues" direction="left" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
-        <z-button
-          type="button"
-          buttonType="secondary"
-          size="small"
-          icon="slash"
-          class="hidden sm:flex"
-          @click="toggle"
-        >
-          Ignore this issue
-        </z-button>
-        <z-button
-          type="button"
-          buttonType="secondary"
-          size="small"
-          icon="slash"
-          class="sm:hidden"
-          @click="toggle"
-        ></z-button>
+        <div class="flex items-center gap-x-2">
+          <z-button
+            type="button"
+            buttonType="secondary"
+            size="small"
+            icon="chevron-left"
+            class="hidden sm:flex"
+            v-tooltip="previousIssue && previousIssue.label"
+            :disabled="!previousIssue"
+            @click="() => $router.push(previousIssue.to)"
+          />
+
+          <z-button
+            type="button"
+            buttonType="secondary"
+            size="small"
+            icon="chevron-right"
+            class="hidden sm:flex"
+            v-tooltip="nextIssue && nextIssue.label"
+            :disabled="!nextIssue"
+            @click="() => $router.push(nextIssue.to)"
+          />
+
+          <z-button
+            type="button"
+            buttonType="secondary"
+            size="small"
+            icon="slash"
+            class="hidden sm:flex"
+            @click="toggle"
+          >
+            Ignore this issue
+          </z-button>
+          <z-button
+            type="button"
+            buttonType="secondary"
+            size="small"
+            icon="slash"
+            class="sm:hidden"
+            @click="toggle"
+          ></z-button>
+        </div>
       </template>
       <template slot="body" class="text-vanilla-200">
         <z-menu-item
@@ -138,6 +162,7 @@ import {
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'
 import { AppFeatures } from '~/types/permTypes'
+import { IssueLink } from '~/mixins/issueListMixin'
 
 export interface CreateIssueActionItem {
   id: string
@@ -178,6 +203,12 @@ export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDe
 
   @Prop({ required: true })
   shortcode: string
+
+  @Prop({ default: null })
+  nextIssue: IssueLink | null
+
+  @Prop({ default: null })
+  previousIssue: IssueLink | null
 
   public isOpen = false
   public currentComponent = ''

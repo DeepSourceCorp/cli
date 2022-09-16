@@ -75,8 +75,22 @@ export default class AnalyzerSelector extends Vue {
    * @returns {string} Route to given analyzer's check
    */
   getRoute(shortcode: string): string {
-    const { runId } = this.$route.params
-    return this.$generateRoute(['run', runId, shortcode])
+    const { runId, issueId } = this.$route.params
+    let link = this.$generateRoute(['run', runId, shortcode])
+    if (this.currentAnalyzer === shortcode) {
+      if (issueId && this.$route.query) {
+        const { listsort, listcategory, listq } = this.$route.query
+
+        let filters = []
+        if (listsort) filters.push(`sort=${listsort}`)
+        if (listcategory) filters.push(`category=${listcategory}`)
+        if (listq) filters.push(`q=${listq}`)
+        if (filters.length > 0) {
+          link = `${link}?${filters.join('&')}`
+        }
+      }
+    }
+    return link
   }
 
   /**

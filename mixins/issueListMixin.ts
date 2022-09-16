@@ -5,6 +5,11 @@ import { RepositoryIssueConnection } from '~/types/types'
 
 const issueListStore = namespace('issue/list')
 
+export interface IssueLink {
+  to: string
+  label: string
+}
+
 @Component
 export default class IssueListMixin extends Vue {
   @issueListStore.State

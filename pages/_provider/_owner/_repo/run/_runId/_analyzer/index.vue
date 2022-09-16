@@ -42,6 +42,7 @@
             v-bind="check"
             :filters="queryParams"
             :can-create-autofix="canCreateAutofix"
+            :currentPage="currentPage"
           >
             <template #controls>
               <div class="flex flex-col pt-3 gap-y-4 md:relative">

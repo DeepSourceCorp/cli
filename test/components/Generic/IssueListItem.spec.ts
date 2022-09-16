@@ -11,6 +11,7 @@ interface IssueListItemInterface {
   showTrend: boolean
   lastSeenDisplay: string
   firstSeenDisplay: string
+  link: string
 }
 
 describe('[[ IssueListItem ]]', () => {
@@ -154,5 +155,18 @@ describe('[[ IssueListItem ]]', () => {
   test('`firstSeenDisplay` returns when the issue was first seen in a human-readable form', () => {
     const vm = getInstance()
     expect(vm.firstSeenDisplay).toBe('2 years old')
+  })
+
+  test('`link` is correctly computed from the `issueListFilters`', () => {
+    const vm = getInstance({
+      issueListFilters: {
+        sort: 'least-frequent',
+        category: 'bug-risk',
+        q: 'dan'
+      }
+    })
+    expect(vm.link.split('?')[1]).toBe(
+      'listsort=least-frequent&listcategory=bug-risk&listq=dan&listindex=0'
+    )
   })
 })

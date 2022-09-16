@@ -3,7 +3,7 @@
     <div class="z-20 p-4 md:sticky top-bar-offset bg-ink-400 border-b border-ink-200">
       <!-- Issue details -->
       <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0 mb-px">
-        <div class="w-full space-y-2.5" v-if="$fetchState.pending">
+        <div class="w-full space-y-2.5" v-if="$fetchState.pending || loading">
           <!-- Left Section -->
           <div class="w-3/5 h-8 rounded-md md:w-4/5 bg-ink-300 animate-pulse"></div>
           <div class="flex w-1/3 space-x-2">
@@ -34,13 +34,15 @@
               :shortcode="$route.params.issueId"
               @ignoreIssues="ignoreIssues"
               :repository="repository"
+              :next-issue="nextIssue"
+              :previous-issue="previousIssue"
             ></issue-actions>
           </div>
         </div>
       </div>
     </div>
     <div class="p-4">
-      <div class="flex" v-if="$fetchState.pending">
+      <div class="flex" v-if="$fetchState.pending || loading">
         <div class="w-full space-y-4 lg:w-4/6">
           <div
             v-for="ii in 3"
@@ -94,16 +96,19 @@ import {
   IssuePriority,
   IssuePriorityLevel,
   CheckIssueEdge,
-  CheckIssueConnection
+  CheckIssueConnection,
+  IssueEdge
 } from '~/types/types'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
+import { IssueTypeOptions } from '~/mixins/issueCategoryMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { fromNow } from '~/utils/date'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
+import { IssueLink } from '~/mixins/issueListMixin'
 
 const PAGE_SIZE = 25
 
@@ -143,15 +148,18 @@ export default class RunIssueDetails extends mixins(
   public issuePriority: IssuePriority | null = null
 
   created() {
-    const { page, sort, q } = this.$route.query
+    const { page, sort, q, listsort, listcategory, listq } = this.$route.query
     this.queryParams = Object.assign(
       this.queryParams,
       {
         page: 1,
         sort: null,
-        q: null
+        q: null,
+        listsort: null,
+        listcategory: null,
+        listq: null
       },
-      { page, sort, q }
+      { page, sort, q, listsort, listcategory, listq }
     )
   }
 
@@ -162,7 +170,8 @@ export default class RunIssueDetails extends mixins(
     this.addFilters({
       q: this.searchCandidate,
       sort: this.sort,
-      page: this.currentPage
+      page: this.currentPage,
+      ...this.$route.query
     })
   }
 
@@ -173,9 +182,14 @@ export default class RunIssueDetails extends mixins(
    */
   @Watch('$route.params.issueId')
   async update(): Promise<void> {
+    this.loading = true
     const { issueId } = this.$route.params
-
-    await Promise.all([this.fetchSingleIssue({ shortcode: issueId })])
+    await Promise.all([
+      this.fetchIssuesInCheck(),
+      this.fetchSingleIssue({ shortcode: issueId }),
+      this.fetchIssues()
+    ])
+    this.loading = false
   }
 
   /**
@@ -218,13 +232,18 @@ export default class RunIssueDetails extends mixins(
     ])
 
     await this.fetchCheck({ checkId: this.currentCheck.id })
-    await this.fetchIssuesInCheck()
-    await Promise.all([this.fetchSingleIssue({ shortcode: issueId })])
+    await Promise.all([
+      this.fetchIssues(),
+      this.fetchIssuesInCheck(),
+      this.fetchSingleIssue({ shortcode: issueId })
+    ])
     this.issuePriority = await this.fetchIssuePriority({
       objectId: this.repository.id,
       level: IssuePriorityLevel.Repository,
       shortcode: issueId
     })
+
+    this.loading = false
   }
 
   /**
@@ -279,6 +298,25 @@ export default class RunIssueDetails extends mixins(
    *
    * @returns {Promise<void>}
    */
+  async fetchIssues(refetch = false): Promise<void> {
+    const index = Number(this.$route.query.listindex)
+    const offset = index === 0 ? 0 : index - 1
+    await this.fetchConcreteIssueList({
+      checkId: this.check.id,
+      first: 3,
+      offset,
+      sort: (this.queryParams.listsort as string) || '',
+      issueType: (this.queryParams.listcategory as string) || '',
+      q: (this.queryParams.listq as string) || '',
+      refetch
+    })
+  }
+
+  /**
+   * Fetches all issues raised in the current check and updates the store
+   *
+   * @returns {Promise<void>}
+   */
   async fetchIssuesInCheck(): Promise<void> {
     const { q, page, sort } = this.queryParams
     return this.fetchCheckIssues({
@@ -309,53 +347,102 @@ export default class RunIssueDetails extends mixins(
   }
 
   /**
-   * Gets the index of the current issue within the set of all issues raised in this check
+   * Combines all filters applied to the issue list into a query string
+   *
+   * @returns {string}
+   */
+  get listFilters(): string {
+    const { query } = this.$route
+
+    let filters: string[] = []
+    const filterTypes = ['listcategory', 'listsort', 'listq']
+    Object.keys(query).forEach((key) => {
+      if (filterTypes.includes(key)) {
+        filters = filters.concat(`${key}=${query[key]}`)
+      }
+    })
+
+    return filters.length > 0 ? `${filters.join('&')}` : ''
+  }
+
+  /**
+   * The index of the current issue within the set of all issues raised in this check
    *
    * @returns {number}
    */
   get issueIndex(): number {
-    if (!this.checkIssues.edges || this.checkIssues.totalCount === 0) return 0
-    return this.checkIssues.edges.findIndex((issue: Maybe<CheckIssueEdge>) => {
-      return issue?.node?.shortcode === this.$route.params.issueId
-    })
+    return Number(this.$route.query.listindex)
   }
 
   /**
-   * Returns a link to the issue page for the next issue in the set if available
+   * Returns an IssueLink to the issue page for the next issue in the set if available
    *
-   * @returns {string}
+   * @returns {IssueLink | null}
    */
-  get linkToNextIssue(): string {
-    const { params } = this.$route
-    return this.issueIndex === 0 || this.checkIssues.totalCount === 1
-      ? ''
-      : this.$generateRoute([
-          'run',
-          params.runId,
-          params.analyzer,
-          this.checkIssues.edges[this.issueIndex + 1]?.node?.shortcode || ''
-        ])
-  }
-
-  /**
-   * Returns a link to the issue page for the previous issue in the set if available
-   *
-   * @returns {string}
-   */
-  get linkToPreviousIssue(): string {
-    const { params } = this.$route
-    if (this.checkIssues.totalCount) {
-      //$generateRoute(['run', $route.params.runId, $route.params.analyzer, issue.shortcode])
-      return this.checkIssues && this.issueIndex === this.checkIssues.totalCount - 1
-        ? ''
-        : this.$generateRoute([
+  get nextIssue(): IssueLink | null {
+    const { params, query } = this.$route
+    // concreteIssueList has 3 issues: [prev, current, next], however when the current index is 0 concreteIssueList is instead [current, next, next + 1]
+    const nextIssueIndex = query.listindex === '0' ? 1 : 2
+    return this.concreteIssueList.totalCount === this.issueIndex + 1
+      ? null
+      : {
+          to: this.$generateRoute([
             'run',
             params.runId,
             params.analyzer,
-            this.checkIssues.edges[this.issueIndex - 1]?.node?.shortcode || ''
-          ])
+            this.concreteIssueList.edges[nextIssueIndex]?.node?.shortcode || '',
+            `?${this.listFilters}${this.listFilters ? '&' : ''}listindex=${this.issueIndex + 1}`
+          ]),
+          label: `Next ${query.listsort || ''} ${
+            query.listcategory ? this.issueLabel(query.listcategory as string) : ''
+          } issue`
+        }
+  }
+
+  /**
+   * Returns an IssueLink to the issue page for the previous issue in the set if available
+   *
+   * @returns {IssueLink | null}
+   */
+  get previousIssue(): IssueLink | null {
+    const { params, query } = this.$route
+    if (this.concreteIssueList.totalCount) {
+      return this.concreteIssueList && this.issueIndex === 0
+        ? null
+        : {
+            to: this.$generateRoute([
+              'run',
+              params.runId,
+              params.analyzer,
+              this.concreteIssueList.edges[0]?.node?.shortcode || '',
+              `?${this.listFilters}${this.listFilters ? '&' : ''}listindex=${this.issueIndex - 1}`
+            ]),
+            label: `Previous ${query.listsort || ''} ${
+              query.listcategory ? this.issueLabel(query.listcategory as string) : ''
+            } issue`
+          }
     }
-    return ''
+    return null
+  }
+
+  /**
+   * Returns a formatted label for the issue type given its category shortcode
+   *
+   * @param {string} shortcode
+   * @returns {string}
+   */
+  issueLabel(shortcode: string): string {
+    const categoryLabelMap: Record<string, string> = {
+      [IssueTypeOptions.ANTI_PATTERN]: 'Anti-pattern',
+      [IssueTypeOptions.BUG_RISK]: 'Bug risk',
+      [IssueTypeOptions.PERFORMANCE]: 'Performance',
+      [IssueTypeOptions.SECURITY]: 'Security',
+      [IssueTypeOptions.COVERAGE]: 'Coverage',
+      [IssueTypeOptions.TYPECHECK]: 'Type check',
+      [IssueTypeOptions.STYLE]: 'Style',
+      [IssueTypeOptions.DOCUMENTATION]: 'Documentation'
+    }
+    return categoryLabelMap[shortcode]
   }
 
   /**

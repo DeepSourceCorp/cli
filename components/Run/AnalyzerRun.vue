@@ -22,7 +22,7 @@
         <div class="grid grid-cols-1 gap-y-3">
           <template v-if="issueCount">
             <issue-list-item
-              v-for="issue in concreteIssues"
+              v-for="(issue, index) in concreteIssues"
               :key="issue.id"
               v-bind="issue"
               :show-autofix-button="false"
@@ -36,7 +36,8 @@
               "
               :center-content="true"
               :show-seen-info="false"
-              link="/history/runs/details/issue"
+              :issue-list-filters="filters"
+              :issue-list-index="getIssueIndex(index)"
             />
           </template>
           <template v-else>
@@ -67,7 +68,7 @@ export interface RunError {
   message: string
 }
 
-interface FilterParams {
+export interface FilterParams {
   category: string
   sort: string
   q: string
@@ -84,6 +85,9 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
 
   @Prop({ default: () => [] })
   errorsRendered: RunError[]
+
+  @Prop({ default: 1 })
+  currentPage: number
 
   @Prop({
     default: () => {
@@ -113,6 +117,15 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
     if (this.filters.category) return true
 
     return false
+  }
+
+  /**
+   * Computes the issue index within the paginated list of issues in the run by adding the raw index to the number of issues to skip based on the `currentPage`
+   *
+   * @param index the item index in the current list
+   */
+  getIssueIndex(index: number): number {
+    return (this.currentPage - 1) * 10 + index
   }
 }
 </script>
