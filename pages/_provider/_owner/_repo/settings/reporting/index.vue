@@ -368,9 +368,9 @@
       </notice>
       <div class="flex justify-between gap-x-4">
         <div>
-          <h6 class="mb-1 text-sm text-vanilla-100">New code coverage thresholds</h6>
+          <h6 class="mb-1 text-sm text-vanilla-100">New Line Coverage thresholds</h6>
           <p class="text-xs leading-5 text-vanilla-400">
-            Configure thresholds for new code coverage in pull requests.
+            Configure thresholds for the New Line Coverage metric reported on commits.
           </p>
         </div>
         <z-button
