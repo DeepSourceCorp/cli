@@ -8,12 +8,12 @@ exports[`renders RunCard with all prop options: RunCard 1`] = `
         <section class=\\"flex items-center text-xs gap-x-1 md:text-base\\">
           <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"self-center flex-shrink-0 inline mt-0.5 mr-0.5 has-tooltip\\" data-original-title=\\"null\\"></zicon-stub>
           <h3 class=\\"inline font-medium cursor-pointer text-vanilla-100 line-clamp-1\\">
-            base
+            Base branch
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>
         <section class=\\"flex flex-wrap items-center flex-grow pl-px mt-1 leading-8 gap-x-4 gap-y-2\\">
-          <meta-data-item label=\\"Analyzed NaN years ago\\" icon=\\"clock\\"></meta-data-item>
-          <meta-data-item label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></meta-data-item>
+          <metadataitem-stub label=\\"Analyzed NaN years ago\\" icon=\\"clock\\"></metadataitem-stub>
+          <metadataitem-stub label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></metadataitem-stub>
           <!---->
         </section>
       </div>
@@ -50,8 +50,8 @@ exports[`renders RunCard with pending: RunCard Pending 1`] = `
           </h3> <span class=\\"inline font-medium text-vanilla-400\\"> @435432 </span>
         </section>
         <section class=\\"flex flex-wrap items-center flex-grow pl-px mt-1 leading-8 gap-x-4 gap-y-2\\">
-          <meta-data-item label=\\"Analysis in progress\\" icon=\\"clock\\"></meta-data-item>
-          <meta-data-item label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></meta-data-item>
+          <metadataitem-stub label=\\"Analysis in progress\\" icon=\\"clock\\"></metadataitem-stub>
+          <metadataitem-stub label=\\"12 issues introduced, 13 issues resolved\\" icon=\\"flag\\" class=\\"md:hidden\\"></metadataitem-stub>
           <!---->
         </section>
       </div>

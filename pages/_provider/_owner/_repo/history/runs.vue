@@ -5,27 +5,23 @@
       <run-branches
         v-if="defaultBranchRun && !mainBranchFetching"
         :key="defaultBranchRun.branchName"
-        :run="defaultBranchRun"
+        :generalized-run="generalizeRun(defaultBranchRun)"
         :branchRunCount="defaultBranchRunCount"
         :class="{ 'opacity-30': expandedBranch && expandedBranch !== defaultBranchRun.branchName }"
         @expanded="updateExpandedBranch"
       >
       </run-branches>
       <template v-if="!fetching">
-        <template v-if="groupedRunList.edges.length !== 0">
-          <template v-for="run in groupedRunList.edges">
-            <run-branches
-              v-if="run.node.branchName !== repository.defaultBranchName"
-              :key="run.node.branchName"
-              :run="run.node"
-              :class="{
-                'opacity-30 pointer-events-none':
-                  expandedBranch && expandedBranch !== run.node.branchName
-              }"
-              @expanded="updateExpandedBranch"
-            >
-            </run-branches>
-          </template>
+        <template v-if="prListNodes.length !== 0">
+          <run-branches
+            v-for="pr in prListNodes"
+            :key="pr.id"
+            :generalized-run="generalizePR(pr)"
+            :class="{
+              'opacity-30 pointer-events-none': expandedBranch && expandedBranch !== pr.branch
+            }"
+            @expanded="updateExpandedBranch"
+          />
         </template>
         <template v-else>
           <div class="flex items-center justify-center text-center min-h-102">
@@ -77,10 +73,12 @@ import { ZPagination } from '@deepsourcelabs/zeal'
 import { SubNav, RunBranches } from '@/components/History'
 // Store & Types
 import { RunListActions } from '@/store/run/list'
-import { Maybe, Run, RunConnection, RunEdge } from '~/types/types'
+import { Maybe, Pr, PrConnection, Run, RunConnection, RunEdge } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import { AppFeatures } from '~/types/permTypes'
+import { generalizeRun, generalizePR } from '~/utils/runs'
+import { resolveNodes } from '~/utils/array'
 
 const runListStore = namespace('run/list')
 
@@ -93,11 +91,12 @@ const VISIBLE_PAGES = 5
     ZPagination
   },
   layout: 'repository',
-  scrollToTop: true
+  scrollToTop: true,
+  methods: { generalizeRun, generalizePR }
 })
 export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   @runListStore.State
-  groupedRunList: RunConnection // Stores all the runs groubed by branch
+  prList: PrConnection // Stores all the runs groubed by branch
 
   @runListStore.State('loading')
   queryLoading: boolean
@@ -134,8 +133,8 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }
 
   get pageCount(): number {
-    if (this.groupedRunList && this.groupedRunList.totalCount) {
-      return Math.ceil(this.groupedRunList.totalCount / this.pageSize)
+    if (this.prList && this.prList.totalCount) {
+      return Math.ceil(this.prList.totalCount / this.pageSize)
     }
     return 0
   }
@@ -152,17 +151,23 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
 
   async fetch(): Promise<void> {
     this.fetching = true
-    await this.fetchRepoDetails(this.baseRouteParams)
     this.mainBranchFetching = true
-    await this.fetchMainBranch()
-    this.mainBranchFetching = false
-    await this.fetchRuns()
+    const mainBranchPromise = this.fetchMainBranch().then(() => (this.mainBranchFetching = false))
+    await Promise.all([
+      this.fetchRepoDetails(this.baseRouteParams),
+      mainBranchPromise,
+      this.fetchRuns()
+    ])
     this.fetching = false
   }
 
   async fetchRuns(refetch = false): Promise<void> {
-    await this.$store.dispatch(`run/list/${RunListActions.FETCH_GROUPED_RUN_LIST}`, {
-      ...this.baseRouteParams,
+    const { name, provider, owner } = this.baseRouteParams
+
+    await this.$store.dispatch(`run/list/${RunListActions.FETCH_PR_LIST}`, {
+      name,
+      owner,
+      provider: this.$providerMetaMap[provider].value,
       currentPageNumber: this.currentPage,
       limit: this.pageSize,
       refetch
@@ -215,6 +220,10 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   get transformsAllowed(): boolean {
     const { provider } = this.$route.params
     return this.$gateKeeper.provider(AppFeatures.TRANSFORMS, provider)
+  }
+
+  get prListNodes(): Pr[] {
+    return resolveNodes(this.prList) as Pr[]
   }
 
   head(): Record<string, string> {

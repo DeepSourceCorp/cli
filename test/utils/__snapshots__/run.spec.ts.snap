@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[run utils]] generalizePR: generalizePR 1`] = `
+Object {
+  "branchName": "feat--yesterday",
+  "commitOid": "o0o0o0o0o",
+  "createdAt": "day before yesterday",
+  "issuesRaisedCount": 420,
+  "issuesResolvedCount": 101,
+  "prNumber": "#1337",
+  "runCount": 78,
+  "runId": "12356",
+  "status": "PASS",
+  "title": undefined,
+}
+`;
+
+exports[`[[run utils]] generalizeRun: generalizeRun 1`] = `
+Object {
+  "branchName": "feat--yesterday",
+  "commitOid": "o0o0o0o0o",
+  "createdAt": "day before yesterday",
+  "issuesRaisedCount": 420,
+  "issuesResolvedCount": 101,
+  "prNumber": "#1337",
+  "runCount": 78,
+  "runId": "12356",
+  "status": "PASS",
+  "title": "feat: add yesterday",
+}
+`;

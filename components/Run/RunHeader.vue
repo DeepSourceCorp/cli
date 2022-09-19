@@ -85,7 +85,7 @@
                       class="mt-px"
                     />
                     <div class="text-sm leading-6 font-medium text-vanilla-100">
-                      {{ run.branchName }}
+                      {{ run.commitMessage || run.branchName }}
                     </div>
                   </div>
                   <div class="flex flex-wrap gap-x-4 pl-6">
@@ -102,14 +102,14 @@
                       {{ shortenLargeNumber(run.issuesRaisedCount) }}
                     </meta-data-item>
                     <meta-data-item
-                      v-if="run.issuesResolvedNum"
+                      v-if="run.issuesResolvedCount"
                       icon="double-check"
                       icon-color="juniper"
                       size="small"
                       class="ml-1"
                       spacing="space-x-0.5"
                     >
-                      {{ shortenLargeNumber(run.issuesResolvedNum) }}
+                      {{ shortenLargeNumber(run.issuesResolvedCount) }}
                     </meta-data-item>
                   </div>
                 </div>

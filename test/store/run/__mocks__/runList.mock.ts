@@ -1,4 +1,4 @@
-import { RunConnection } from '~/types/types'
+import { PrConnection, PrStatus, RunConnection, RunStatus } from '~/types/types'
 import { RunListModuleState } from '~/store/run/list'
 
 /*
@@ -97,10 +97,82 @@ export const RUN_LIST: RunConnection = <RunConnection>{
 }
 
 /**
+ * Mock -- Pr model
+ */
+
+export const PR_LIST = {
+  totalCount: 213,
+  edges: [
+    {
+      node: {
+        id: '1234',
+        createdAt: 'today',
+        modifiedAt: 'never',
+        status: PrStatus.Open,
+        alive: true,
+        baseBranch: 'master',
+        branch: 'feat--yesterday',
+        number: 1337,
+        raisedCount: 420,
+        resolvedCount: 101,
+        runCount: 78,
+        latestAnalysisRun: {
+          id: 'lolrun',
+          runId: '12356',
+          commitOid: 'o0o0o0o0o',
+          status: RunStatus.Pass,
+          createdAt: 'day before yesterday',
+          modifiedAt: 'day after tomorrow',
+          checks: { pageInfo: { hasNextPage: false, hasPreviousPage: true }, edges: [] },
+          extraData: {}
+        }
+      },
+      cursor: ''
+    },
+    {
+      node: {
+        id: '123234',
+        createdAt: 'today32',
+        modifiedAt: 'never32',
+        status: PrStatus.Merged,
+        alive: true,
+        baseBranch: 'master',
+        branch: 'feat--yesterdayyyy',
+        number: 13337,
+        raisedCount: 4200,
+        resolvedCount: 1001,
+        runCount: 708,
+        latestAnalysisRun: {
+          id: 'lolruhn',
+          runId: '1235687',
+          commitOid: 'o0o0o0o0o0o0o0o0o',
+          status: RunStatus.Fail,
+          createdAt: 'day before yesterdayy',
+          modifiedAt: 'day after tomorroww',
+          checks: { pageInfo: { hasNextPage: false, hasPreviousPage: true }, edges: [] },
+          extraData: {}
+        }
+      },
+      cursor: ''
+    }
+  ],
+  pageInfo: { hasNextPage: false, hasPreviousPage: false }
+}
+
+/**
  * Mock -- Run list factory
  * @see RUN_LIST
  */
 export const mockRunList = (): RunConnection => RUN_LIST
+
+/**
+ * Mock -- Pr list factory
+ * @see RUN_LIST
+ */
+export const mockPrList = (): PrConnection => PR_LIST
+
+/** Mock -- branch name */
+export const mockBranchName = 'hello-world'
 
 /**
  * Mock factory
@@ -111,6 +183,7 @@ export const mockRunListState = (): RunListModuleState => ({
   runList: mockRunList(),
   groupedRunList: mockRunList(),
   branchRunList: {
-    'hello-world': mockRunList()
-  }
+    [mockBranchName]: mockRunList()
+  },
+  prList: mockPrList()
 })

@@ -1921,6 +1921,47 @@ enum OwnerVcsProvider {
   GSR
 }
 
+type PR implements MaskPrimaryKeyNode {
+  id: ID!
+  createdAt: DateTime!
+  modifiedAt: DateTime!
+  alive: Boolean
+  baseBranch: String
+  branch: String
+  number: Int
+  raisedCount: Int
+  resolvedCount: Int
+  status: PRStatus!
+  state: PRStateChoices
+  title: String
+  latestAnalysisRun: Run
+  runs(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
+  runCount: Int
+}
+
+type PRConnection {
+  pageInfo: PageInfo!
+  edges: [PREdge]!
+  totalCount: Int
+}
+
+type PREdge {
+  node: PR
+  cursor: String!
+}
+
+enum PRStateChoices {
+  OPEN
+  CLOSED
+}
+
+enum PRStatus {
+  DRAFT
+  OPEN
+  MERGED
+  CLOSED
+}
+
 type PageInfo {
   hasNextPage: Boolean!
   hasPreviousPage: Boolean!
@@ -2176,6 +2217,7 @@ type Repository implements MaskPrimaryKeyNode {
   analyzer: Analyzer
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
+  prs(state: PRStateChoices, q: String, runStatus: RunStatusChoice, offset: Int, before: String, after: String, first: Int, last: Int, number: Int): PRConnection
   userpreferenceSet(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
   watchedBy(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection
@@ -2210,6 +2252,9 @@ type Repository implements MaskPrimaryKeyNode {
   issue(shortcode: String!): RepositoryIssue
   lastRun: Run
   groupedRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
+  pr(number: Int!): PR
+  openPrCount: Int
+  closedPrCount: Int
   autofixRun(runId: String!): AutofixRun
   groupedTransformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
   transformerBranchRuns(branchName: String!, offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
@@ -2451,6 +2496,7 @@ type Run implements MaskPrimaryKeyNode {
   errorMeta: JSONString
   config: GenericScalar
   extraData: JSONString!
+  pullRequest: PR
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   finishedIn: Int
   vcsCommitUrl: String
@@ -2484,6 +2530,15 @@ enum RunStatus {
   TIMO
   CNCL
   READ
+}
+
+enum RunStatusChoice {
+  STATUS_PENDING
+  STATUS_SUCCESS
+  STATUS_FAILURE
+  STATUS_TIMEOUT
+  STATUS_CANCEL
+  STATUS_READY
 }
 
 type SilenceRule implements MaskPrimaryKeyNode {

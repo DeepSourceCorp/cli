@@ -29,6 +29,7 @@
       "Metric",
       "Owner",
       "OwnerSetting",
+      "PR",
       "PublicReport",
       "Repository",
       "RepositoryCollaborator",

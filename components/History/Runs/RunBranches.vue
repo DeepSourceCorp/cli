@@ -1,14 +1,19 @@
 <template>
   <branch-list
     :loading="listLoading"
-    :title="run.pullRequestNumberDisplay || run.branchName"
-    :count="run.branchRunCount || branchRunCount"
+    :title="generalizedRun.prNumber || generalizedRun.branchName"
+    :count="generalizedRun.runCount || branchRunCount"
     @toggled="toggled"
   >
     <!-- Section Card -->
-    <template v-slot:collapsed="{ toggleItems }">
-      <run-card :key="run.commitOid" v-bind="run" action-text="Analyzed" class="z-20">
-        <template slot="toggleTrigger">
+    <template #collapsed="{ toggleItems }">
+      <run-card
+        :key="generalizedRun.commitOid"
+        v-bind="generalizedRun"
+        action-text="Analyzed"
+        class="z-20"
+      >
+        <template #toggleTrigger>
           <div v-if="count" class="flex space-x-2 cursor-pointer md:items-center">
             <button
               :disabled="listLoading"
@@ -39,7 +44,7 @@
         </template>
       </run-card>
     </template>
-    <template v-slot:expanded>
+    <template #expanded>
       <div class="relative space-y-2">
         <!-- Fade effect -->
         <div
@@ -47,12 +52,12 @@
         ></div>
         <run-card
           v-for="branchRun in runsInBranch"
+          v-bind="generalizeRun(branchRun)"
           :key="branchRun.runId"
           :is-secondary="true"
           class="ml-4 is-group-item"
-          v-bind="branchRun"
           action-text="Analyzed"
-        ></run-card>
+        />
       </div>
     </template>
   </branch-list>
@@ -63,9 +68,10 @@ import { ZIcon, ZTag, ZButton } from '@deepsourcelabs/zeal'
 import RunCard from './RunCard.vue'
 import BranchList from '../BranchList.vue'
 import { Run } from '~/types/types'
+import { GeneralizedRunT, generalizeRun } from '~/utils/runs'
 
 import { RunListActions } from '@/store/run/list'
-import { Maybe, RunConnection, RunEdge } from '~/types/types'
+import { RunConnection } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
 const runListStore = namespace('run/list')
@@ -77,14 +83,15 @@ const runListStore = namespace('run/list')
     ZButton,
     RunCard,
     BranchList
-  }
+  },
+  methods: { generalizeRun }
 })
 export default class RunBranches extends Vue {
   public listLoading = false
   public isExpanded = false
 
-  @Prop({ default: '' })
-  run!: Run
+  @Prop({ default: () => {} })
+  generalizedRun!: GeneralizedRunT
 
   @Prop({ default: 0 })
   branchRunCount: number
@@ -105,7 +112,7 @@ export default class RunBranches extends Vue {
     this.isExpanded = isExpanded
     if (isExpanded) {
       await this.fetchRuns()
-      this.$emit('expanded', this.run.branchName)
+      this.$emit('expanded', this.generalizedRun.branchName)
     } else this.$emit('expanded', '')
   }
 
@@ -115,11 +122,11 @@ export default class RunBranches extends Vue {
    * * @return {Array<Run>}
    */
   get runsInBranch(): Array<Run> {
-    if (this.run.branchName) {
-      const runList = this.branchRunList[this.run.branchName] || []
+    if (this.generalizedRun.branchName) {
+      const runList = this.branchRunList[this.generalizedRun.branchName] || []
       const branchRuns = resolveNodes(runList) as Run[]
 
-      return branchRuns.filter((run) => run.runId !== this.run.runId)
+      return branchRuns.filter((run) => run.runId !== this.generalizedRun.runId)
     }
     return []
   }
@@ -130,7 +137,7 @@ export default class RunBranches extends Vue {
    * * @return {number}
    */
   get count(): number {
-    return (this.run.branchRunCount || this.branchRunCount) - 1
+    return (this.generalizedRun.runCount || this.branchRunCount) - 1
   }
 
   get countText(): string {
@@ -153,7 +160,7 @@ export default class RunBranches extends Vue {
       provider: this.$route.params.provider,
       owner: this.$route.params.owner,
       name: this.$route.params.repo,
-      branchName: this.run.branchName || ''
+      branchName: this.generalizedRun.branchName || ''
     }).then(() => {
       this.listLoading = false
     })

@@ -3505,6 +3505,60 @@ export enum OwnerVcsProvider {
   Gsr = 'GSR'
 }
 
+export type Pr = MaskPrimaryKeyNode & {
+  __typename?: 'PR';
+  id: Scalars['ID'];
+  createdAt: Scalars['DateTime'];
+  modifiedAt: Scalars['DateTime'];
+  alive?: Maybe<Scalars['Boolean']>;
+  baseBranch?: Maybe<Scalars['String']>;
+  branch?: Maybe<Scalars['String']>;
+  number?: Maybe<Scalars['Int']>;
+  raisedCount?: Maybe<Scalars['Int']>;
+  resolvedCount?: Maybe<Scalars['Int']>;
+  status: PrStatus;
+  state?: Maybe<PrStateChoices>;
+  title?: Maybe<Scalars['String']>;
+  latestAnalysisRun?: Maybe<Run>;
+  runs?: Maybe<RunConnection>;
+  runCount?: Maybe<Scalars['Int']>;
+};
+
+
+export type PrRunsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  status?: Maybe<Scalars['String']>;
+};
+
+export type PrConnection = {
+  __typename?: 'PRConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<PrEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type PrEdge = {
+  __typename?: 'PREdge';
+  node?: Maybe<Pr>;
+  cursor: Scalars['String'];
+};
+
+export enum PrStateChoices {
+  Open = 'OPEN',
+  Closed = 'CLOSED'
+}
+
+export enum PrStatus {
+  Draft = 'DRAFT',
+  Open = 'OPEN',
+  Merged = 'MERGED',
+  Closed = 'CLOSED'
+}
+
 export type PageInfo = {
   __typename?: 'PageInfo';
   hasNextPage: Scalars['Boolean'];
@@ -4106,6 +4160,7 @@ export type Repository = MaskPrimaryKeyNode & {
   analyzer?: Maybe<Analyzer>;
   issuePriorities: IssuePriorityConnection;
   checks: CheckConnection;
+  prs?: Maybe<PrConnection>;
   userpreferenceSet: UserPreferenceConnection;
   watchedBy: UserPreferenceConnection;
   autofixRuns?: Maybe<AutofixRunConnection>;
@@ -4140,6 +4195,9 @@ export type Repository = MaskPrimaryKeyNode & {
   issue?: Maybe<RepositoryIssue>;
   lastRun?: Maybe<Run>;
   groupedRuns?: Maybe<RunConnection>;
+  pr?: Maybe<Pr>;
+  openPrCount?: Maybe<Scalars['Int']>;
+  closedPrCount?: Maybe<Scalars['Int']>;
   autofixRun?: Maybe<AutofixRun>;
   groupedTransformerRuns?: Maybe<TransformerRunConnection>;
   transformerBranchRuns?: Maybe<TransformerRunConnection>;
@@ -4217,6 +4275,19 @@ export type RepositoryChecksArgs = {
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
+};
+
+
+export type RepositoryPrsArgs = {
+  state?: Maybe<PrStateChoices>;
+  q?: Maybe<Scalars['String']>;
+  runStatus?: Maybe<RunStatusChoice>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  number?: Maybe<Scalars['Int']>;
 };
 
 
@@ -4356,6 +4427,11 @@ export type RepositoryGroupedRunsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   status?: Maybe<Scalars['String']>;
+};
+
+
+export type RepositoryPrArgs = {
+  number: Scalars['Int'];
 };
 
 
@@ -4713,6 +4789,7 @@ export type Run = MaskPrimaryKeyNode & {
   errorMeta?: Maybe<Scalars['JSONString']>;
   config?: Maybe<Scalars['GenericScalar']>;
   extraData: Scalars['JSONString'];
+  pullRequest?: Maybe<Pr>;
   checks: CheckConnection;
   finishedIn?: Maybe<Scalars['Int']>;
   vcsCommitUrl?: Maybe<Scalars['String']>;
@@ -4758,6 +4835,15 @@ export enum RunStatus {
   Timo = 'TIMO',
   Cncl = 'CNCL',
   Read = 'READ'
+}
+
+export enum RunStatusChoice {
+  StatusPending = 'STATUS_PENDING',
+  StatusSuccess = 'STATUS_SUCCESS',
+  StatusFailure = 'STATUS_FAILURE',
+  StatusTimeout = 'STATUS_TIMEOUT',
+  StatusCancel = 'STATUS_CANCEL',
+  StatusReady = 'STATUS_READY'
 }
 
 export type SilenceRule = MaskPrimaryKeyNode & {
@@ -9759,7 +9845,7 @@ export type Unnamed_124_QueryVariables = Exact<{
 
 export type Unnamed_124_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
@@ -9803,7 +9889,7 @@ export type Unnamed_125_QueryVariables = Exact<{
 
 export type Unnamed_125_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'config' | 'blobUrlRoot' | 'vcsProvider' | 'hasViewerEditAccess'>
     & { issue?: Maybe<(
@@ -9832,7 +9918,7 @@ export type Unnamed_126_QueryVariables = Exact<{
 
 export type Unnamed_126_Query = (
   { __typename?: 'Query' }
-  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | (
+  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | (
     { __typename?: 'RepositoryIssue' }
     & Pick<RepositoryIssue, 'shortcode'>
     & { checkIssues: (
@@ -9955,7 +10041,7 @@ export type Unnamed_128_QueryVariables = Exact<{
 
 export type Unnamed_128_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
@@ -10391,6 +10477,40 @@ export type Unnamed_137_Query = (
   )> }
 );
 
+export type Unnamed_138_QueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+  provider: VcsProviderChoices;
+  prState?: Maybe<PrStateChoices>;
+  q?: Maybe<Scalars['String']>;
+  limit: Scalars['Int'];
+  after?: Maybe<Scalars['String']>;
+}>;
+
+
+export type Unnamed_138_Query = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id'>
+    & { prs?: Maybe<(
+      { __typename?: 'PRConnection' }
+      & Pick<PrConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'PREdge' }
+        & { node?: Maybe<(
+          { __typename?: 'PR' }
+          & Pick<Pr, 'id' | 'title' | 'number' | 'raisedCount' | 'resolvedCount' | 'branch' | 'runCount'>
+          & { latestAnalysisRun?: Maybe<(
+            { __typename?: 'Run' }
+            & Pick<Run, 'status' | 'createdAt' | 'runId'>
+          )> }
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
 export type RepositoryBranchRunsQueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
@@ -10412,19 +10532,19 @@ export type RepositoryBranchRunsQuery = (
         { __typename?: 'RunEdge' }
         & { node?: Maybe<(
           { __typename?: 'Run' }
-          & Pick<Run, 'id' | 'config' | 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'vcsPrUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedNum' | 'isForDefaultBranch'>
+          & Pick<Run, 'id' | 'config' | 'createdAt' | 'runId' | 'status' | 'branchName' | 'commitOid' | 'finishedIn' | 'vcsCommitUrl' | 'vcsPrUrl' | 'gitCompareDisplay' | 'pullRequestNumberDisplay' | 'issuesRaisedCount' | 'issuesResolvedCount' | 'isForDefaultBranch' | 'commitMessage'>
         )> }
       )>> }
     )> }
   )> }
 );
 
-export type Unnamed_138_QueryVariables = Exact<{
+export type Unnamed_139_QueryVariables = Exact<{
   checkId: Scalars['ID'];
 }>;
 
 
-export type Unnamed_138_Query = (
+export type Unnamed_139_Query = (
   { __typename?: 'Query' }
   & { check: (
     { __typename?: 'Check' }
@@ -10436,7 +10556,7 @@ export type Unnamed_138_Query = (
   ) }
 );
 
-export type Unnamed_139_QueryVariables = Exact<{
+export type Unnamed_140_QueryVariables = Exact<{
   checkId: Scalars['ID'];
   limit?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
@@ -10446,7 +10566,7 @@ export type Unnamed_139_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_139_Query = (
+export type Unnamed_140_Query = (
   { __typename?: 'Query' }
   & { checkIssues?: Maybe<(
     { __typename?: 'CheckIssueConnection' }
@@ -10610,7 +10730,7 @@ export type RepositoryRunDetailQuery = (
   )> }
 );
 
-export type Unnamed_140_QueryVariables = Exact<{
+export type Unnamed_141_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -10618,7 +10738,7 @@ export type Unnamed_140_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_140_Query = (
+export type Unnamed_141_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -10636,12 +10756,12 @@ export type Unnamed_140_Query = (
   )> }
 );
 
-export type Unnamed_141_QueryVariables = Exact<{
+export type Unnamed_142_QueryVariables = Exact<{
   runId: Scalars['String'];
 }>;
 
 
-export type Unnamed_141_Query = (
+export type Unnamed_142_Query = (
   { __typename?: 'Query' }
   & { transformerRun: (
     { __typename?: 'TransformerRun' }
@@ -10649,7 +10769,7 @@ export type Unnamed_141_Query = (
   ) }
 );
 
-export type Unnamed_142_QueryVariables = Exact<{
+export type Unnamed_143_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -10658,7 +10778,7 @@ export type Unnamed_142_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_142_Query = (
+export type Unnamed_143_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -10676,7 +10796,7 @@ export type Unnamed_142_Query = (
   )> }
 );
 
-export type Unnamed_143_QueryVariables = Exact<{
+export type Unnamed_144_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -10685,7 +10805,7 @@ export type Unnamed_143_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_143_Query = (
+export type Unnamed_144_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -10704,7 +10824,7 @@ export type Unnamed_143_Query = (
   )> }
 );
 
-export type Unnamed_144_QueryVariables = Exact<{
+export type Unnamed_145_QueryVariables = Exact<{
   runId: Scalars['String'];
   provider: VcsProviderChoices;
   owner: Scalars['String'];
@@ -10712,7 +10832,7 @@ export type Unnamed_144_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_144_Query = (
+export type Unnamed_145_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -10756,21 +10876,6 @@ export type AuditLogsQuery = (
   )> }
 );
 
-export type Unnamed_145_QueryVariables = Exact<{
-  provider: VcsProviderChoices;
-  owner: Scalars['String'];
-  name: Scalars['String'];
-}>;
-
-
-export type Unnamed_145_Query = (
-  { __typename?: 'Query' }
-  & { repository?: Maybe<(
-    { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'name' | 'badge' | 'token'>
-  )> }
-);
-
 export type Unnamed_146_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
@@ -10782,11 +10887,26 @@ export type Unnamed_146_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id' | 'showInDiscover' | 'analyzeChangesetOnly' | 'defaultBranchName' | 'isSubmoduleEnabled' | 'config' | 'isActivated' | 'isPrivate'>
+    & Pick<Repository, 'id' | 'name' | 'badge' | 'token'>
   )> }
 );
 
 export type Unnamed_147_QueryVariables = Exact<{
+  provider: VcsProviderChoices;
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type Unnamed_147_Query = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id' | 'showInDiscover' | 'analyzeChangesetOnly' | 'defaultBranchName' | 'isSubmoduleEnabled' | 'config' | 'isActivated' | 'isPrivate'>
+  )> }
+);
+
+export type Unnamed_148_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -10795,7 +10915,7 @@ export type Unnamed_147_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_147_Query = (
+export type Unnamed_148_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -10825,7 +10945,7 @@ export type Unnamed_147_Query = (
   )> }
 );
 
-export type Unnamed_148_QueryVariables = Exact<{
+export type Unnamed_149_QueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -10835,7 +10955,7 @@ export type Unnamed_148_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_148_Query = (
+export type Unnamed_149_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -10886,14 +11006,14 @@ export type RepositoryReportingSettingsQuery = (
   )> }
 );
 
-export type Unnamed_149_QueryVariables = Exact<{
+export type Unnamed_150_QueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type Unnamed_149_Query = (
+export type Unnamed_150_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PublicReport' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
@@ -10936,13 +11056,13 @@ export type RepositoryWidgetsQuery = (
   )> }
 );
 
-export type Unnamed_150_QueryVariables = Exact<{
+export type Unnamed_151_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
 }>;
 
 
-export type Unnamed_150_Query = (
+export type Unnamed_151_Query = (
   { __typename?: 'Query' }
   & { owner?: Maybe<(
     { __typename?: 'Owner' }
@@ -10954,7 +11074,7 @@ export type Unnamed_150_Query = (
   )> }
 );
 
-export type Unnamed_151_QueryVariables = Exact<{
+export type Unnamed_152_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
   limit?: Maybe<Scalars['Int']>;
@@ -10962,7 +11082,7 @@ export type Unnamed_151_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_151_Query = (
+export type Unnamed_152_Query = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
@@ -10981,7 +11101,7 @@ export type Unnamed_151_Query = (
   )> }
 );
 
-export type Unnamed_152_QueryVariables = Exact<{
+export type Unnamed_153_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
   limit?: Maybe<Scalars['Int']>;
@@ -10990,7 +11110,7 @@ export type Unnamed_152_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_152_Query = (
+export type Unnamed_153_Query = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
@@ -11065,12 +11185,12 @@ export type FetchTeamPermissionsQuery = (
   )> }
 );
 
-export type Unnamed_153_QueryVariables = Exact<{
+export type Unnamed_154_QueryVariables = Exact<{
   shortcode: Scalars['String'];
 }>;
 
 
-export type Unnamed_153_Query = (
+export type Unnamed_154_Query = (
   { __typename?: 'Query' }
   & { transformer?: Maybe<(
     { __typename?: 'TransformerTool' }
@@ -11082,12 +11202,12 @@ export type Unnamed_153_Query = (
   )> }
 );
 
-export type Unnamed_154_QueryVariables = Exact<{
+export type Unnamed_155_QueryVariables = Exact<{
   shortcode: Scalars['String'];
 }>;
 
 
-export type Unnamed_154_Query = (
+export type Unnamed_155_Query = (
   { __typename?: 'Query' }
   & { transformer?: Maybe<(
     { __typename?: 'TransformerTool' }
@@ -11099,12 +11219,12 @@ export type Unnamed_154_Query = (
   )> }
 );
 
-export type Unnamed_155_QueryVariables = Exact<{
+export type Unnamed_156_QueryVariables = Exact<{
   q?: Maybe<Scalars['String']>;
 }>;
 
 
-export type Unnamed_155_Query = (
+export type Unnamed_156_Query = (
   { __typename?: 'Query' }
   & { transformers?: Maybe<(
     { __typename?: 'TransformerToolConnection' }
@@ -11122,10 +11242,10 @@ export type Unnamed_155_Query = (
   )> }
 );
 
-export type Unnamed_156_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_157_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_156_Query = (
+export type Unnamed_157_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
@@ -11137,10 +11257,10 @@ export type Unnamed_156_Query = (
   )> }
 );
 
-export type Unnamed_157_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_158_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_157_Query = (
+export type Unnamed_158_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
@@ -11203,10 +11323,10 @@ export type ViewerStarredReposQuery = (
   )> }
 );
 
-export type Unnamed_158_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_159_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_158_Query = (
+export type Unnamed_159_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
@@ -11218,10 +11338,10 @@ export type Unnamed_158_Query = (
   )> }
 );
 
-export type Unnamed_159_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_160_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_159_Query = (
+export type Unnamed_160_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }

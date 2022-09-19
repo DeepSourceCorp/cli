@@ -1,15 +1,17 @@
 import RepositoryRunListGQLQuery from '~/apollo/queries/repository/runs/run/list.gql'
 import RepositoryRunGroupGQLQuery from '~/apollo/queries/repository/runs/run/group.gql'
+import RepositoryPRListGQLQuery from '~/apollo/queries/repository/runs/pr/list.gql'
 import RepositoryBranchRunGQLQuery from '~/apollo/queries/repository/runs/run/branch.gql'
 import { GetterTree, ActionTree, MutationTree, Store, ActionContext } from 'vuex'
 import { GraphqlError, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
-import { Maybe, PageInfo, RunConnection, RunEdge } from '~/types/types'
+import { Maybe, PageInfo, PrConnection, RunConnection, RunEdge } from '~/types/types'
 import { RootState } from '~/store'
 
 export enum RunListActions {
   FETCH_RUN_LIST = 'fetchRunList',
   FETCH_GROUPED_RUN_LIST = 'fetchGroupedRunList',
-  FETCH_BRANCH_RUNS_LIST = 'fetchBranchRuns'
+  FETCH_BRANCH_RUNS_LIST = 'fetchBranchRuns',
+  FETCH_PR_LIST = 'fetchPRList'
 }
 
 export enum RunListMutations {
@@ -17,7 +19,8 @@ export enum RunListMutations {
   SET_LOADING = 'setRunListLoading',
   SET_RUN_LIST = 'setRunList',
   SET_GROUPED_RUN_LIST = 'setGroupedRunList',
-  SET_BRANCH_RUNS_LIST = 'setBranchRuns'
+  SET_BRANCH_RUNS_LIST = 'setBranchRuns',
+  SET_PR_LIST = 'setPrList'
 }
 
 export interface RunListModuleState {
@@ -26,6 +29,7 @@ export interface RunListModuleState {
   runList: RunConnection
   groupedRunList: RunConnection
   branchRunList: Record<string, RunConnection>
+  prList: PrConnection
 }
 
 export const state = (): RunListModuleState => ({
@@ -40,7 +44,8 @@ export const state = (): RunListModuleState => ({
       pageInfo: {} as PageInfo,
       edges: [] as Array<Maybe<RunEdge>>
     },
-    branchRunList: {}
+    branchRunList: {},
+    prList: {}
   })
 })
 
@@ -58,8 +63,9 @@ interface RunListModuleMutations extends MutationTree<RunListModuleState> {
   ) => void
   [RunListMutations.SET_BRANCH_RUNS_LIST]: (
     state: RunListModuleState,
-    runItems: RunConnection
+    runItems: Record<string, RunConnection>
   ) => void
+  [RunListMutations.SET_PR_LIST]: (state: RunListModuleState, prList: PrConnection) => void
 }
 
 export const mutations: RunListModuleMutations = {
@@ -77,6 +83,9 @@ export const mutations: RunListModuleMutations = {
   },
   [RunListMutations.SET_BRANCH_RUNS_LIST]: (state, runItems) => {
     state.branchRunList = Object.assign({}, state.branchRunList, runItems)
+  },
+  [RunListMutations.SET_PR_LIST]: (state, prList) => {
+    state.prList = Object.assign({}, prList)
   }
 }
 
@@ -114,6 +123,20 @@ interface RunListModuleActions extends ActionTree<RunListModuleState, RootState>
       name: string
       branchName: string
       limit?: number
+      refetch?: boolean
+    }
+  ) => Promise<void>
+  [RunListActions.FETCH_PR_LIST]: (
+    this: Store<RootState>,
+    injectee: RunListActionContext,
+    args: {
+      provider: string
+      owner: string
+      name: string
+      prState: string
+      q?: string
+      limit: number
+      currentPageNumber: number
       refetch?: boolean
     }
   ) => Promise<void>
@@ -188,5 +211,31 @@ export const actions: RunListModuleActions = {
         commit(RunListMutations.SET_ERROR, e)
         commit(RunListMutations.SET_LOADING, false)
       })
+  },
+  async [RunListActions.FETCH_PR_LIST](
+    { commit },
+    { name, owner, limit, prState, provider, currentPageNumber, q, refetch }
+  ) {
+    commit(RunListMutations.SET_LOADING, true)
+    try {
+      const response = (await this.$fetchGraphqlData(
+        RepositoryPRListGQLQuery,
+        {
+          name,
+          owner,
+          provider,
+          prState,
+          q,
+          limit,
+          after: this.$getGQLAfter(currentPageNumber, limit)
+        },
+        refetch
+      )) as GraphqlQueryResponse
+      commit(RunListMutations.SET_PR_LIST, response.data.repository?.prs)
+    } catch (e) {
+      commit(RunListMutations.SET_ERROR, e)
+    } finally {
+      commit(RunListMutations.SET_LOADING, false)
+    }
   }
 }

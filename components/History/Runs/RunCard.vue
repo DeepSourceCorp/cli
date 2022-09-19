@@ -13,11 +13,11 @@
                 :color="iconColor"
               />
               <h3 class="inline font-medium cursor-pointer text-vanilla-100 line-clamp-1">
-                {{ branchName }}
+                {{ title || branchName }}
               </h3>
               <span class="inline font-medium text-vanilla-400">
                 <template v-if="!isSecondary">
-                  {{ pullRequestNumberDisplay }}
+                  {{ prNumber }}
                 </template>
                 <template v-else-if="commitOid"> @{{ commitOid.slice(0, 7) }} </template>
               </span>
@@ -78,8 +78,9 @@ import { BaseCard } from '../'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { fromNow } from '@/utils/date'
 import { shortenLargeNumber } from '@/utils/string'
-import { Maybe, RunStatus, Scalars } from '~/types/types'
+import { RunStatus } from '~/types/types'
 import { runStatusIcon, runStatusIconColor, runStatusTagLabel } from '~/utils/ui'
+import { GeneralizedRunT } from '~/utils/runs'
 
 @Component({
   components: {
@@ -88,50 +89,35 @@ import { runStatusIcon, runStatusIconColor, runStatusTagLabel } from '~/utils/ui
   }
 })
 export default class RunCard extends mixins(RepoDetailMixin) {
-  @Prop({ default: 'PASS' })
-  status: RunStatus
+  @Prop({ default: '' })
+  title: GeneralizedRunT['title']
+
+  @Prop({ default: RunStatus.Pass })
+  status: GeneralizedRunT['status']
 
   @Prop({ default: '' })
-  branchName: string
+  branchName: GeneralizedRunT['branchName']
 
   @Prop({ default: '' })
-  runId: string
+  runId: GeneralizedRunT['runId']
 
   @Prop({ default: '' })
-  createdAt: string
+  createdAt: GeneralizedRunT['createdAt']
 
   @Prop({ default: '' })
-  finishedIn: number
+  commitOid: GeneralizedRunT['commitOid']
 
   @Prop({ default: '' })
-  gitCompareDisplay: string
-
-  @Prop({ default: '' })
-  commitOid: string
-
-  @Prop({ default: '' })
-  vcsPrUrl: string
-
-  @Prop({ default: '' })
-  pullRequestNumberDisplay: string
+  prNumber: GeneralizedRunT['prNumber']
 
   @Prop({ default: 0 })
-  issuesRaisedCount: number
+  issuesRaisedCount: GeneralizedRunT['issuesRaisedCount']
 
   @Prop({ default: 0 })
-  issuesResolvedNum: number
-
-  @Prop({ default: 0 })
-  branchRunCount: number
+  issuesResolvedCount: GeneralizedRunT['issuesResolvedCount']
 
   @Prop({ default: false })
   isSecondary: boolean
-
-  @Prop({ required: true })
-  config!: Maybe<Scalars['GenericScalar']>
-
-  @Prop({ default: false })
-  isForDefaultBranch: boolean
 
   get icon(): string {
     return runStatusIcon(this.status)
@@ -159,20 +145,17 @@ export default class RunCard extends mixins(RepoDetailMixin) {
 
   get issueStats(): { label: string; value: string; isPositive: boolean | null }[] {
     const stats = []
-    if (this.issuesRaisedCount !== null) {
-      stats.push({
-        label: 'introduced',
-        value: shortenLargeNumber(this.issuesRaisedCount),
-        isPositive: this.issuesRaisedCount === 0 ? null : false
-      })
-    }
-    if (this.issuesResolvedNum !== null) {
-      stats.push({
-        label: 'resolved',
-        value: shortenLargeNumber(this.issuesResolvedNum),
-        isPositive: this.issuesResolvedNum === 0 ? null : true
-      })
-    }
+    stats.push({
+      label: 'introduced',
+      value: shortenLargeNumber(this.issuesRaisedCount ?? 0),
+      isPositive: this.issuesRaisedCount === 0 ? null : false
+    })
+
+    stats.push({
+      label: 'resolved',
+      value: shortenLargeNumber(this.issuesResolvedCount ?? 0),
+      isPositive: this.issuesResolvedCount === 0 ? null : true
+    })
 
     return stats
   }

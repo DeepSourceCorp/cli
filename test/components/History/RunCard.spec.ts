@@ -8,20 +8,16 @@ import { RunStatus } from '~/types/types'
 
 const generateProps = (overrides = {}) => {
   const base = {
+    title: 'Base branch',
     status: RunStatus.Pass,
     branchName: 'base',
     runId: '4323412432',
     createdAt: 'string',
-    finishedIn: 12,
-    gitCompareDisplay: '2342342...32423423',
     commitOid: '435432',
-    vcsPrUrl: 'https://deepsource.io/github',
-    pullRequestNumberDisplay: '#234',
+    prNumber: '#234',
     issuesRaisedCount: 12,
-    issuesResolvedNum: 13,
-    branchRunCount: 15,
-    isSecondary: true,
-    isForDefaultBranch: true
+    issuesResolvedCount: 13,
+    isSecondary: true
   }
   return Object.assign(base, overrides)
 }
@@ -34,7 +30,8 @@ test('renders RunCard with all prop options', () => {
       stubs: {
         ZIcon: true,
         BaseCard: true,
-        NuxtLink: RouterLinkStub
+        NuxtLink: RouterLinkStub,
+        MetaDataItem: true
       },
       mocks: mocksGenerator(),
       components: { BaseCard }
@@ -51,11 +48,12 @@ test('renders RunCard with pending', () => {
   const { html } = render(
     RunCard,
     {
-      props: generateProps({ status: RunStatus.Pend }),
+      props: generateProps({ status: RunStatus.Pend, title: undefined }),
       stubs: {
         ZIcon: true,
         BaseCard: true,
-        NuxtLink: RouterLinkStub
+        NuxtLink: RouterLinkStub,
+        MetaDataItem: true
       },
       mocks: mocksGenerator(),
       components: { BaseCard }

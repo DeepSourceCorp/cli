@@ -34,9 +34,9 @@
         <run-card
           v-for="run in runList.edges"
           :key="run.node.runId"
-          v-bind="run.node"
+          v-bind="generalizeRun(run.node)"
           actionText="Analyzed"
-        ></run-card>
+        />
       </template>
       <template v-else-if="transformerRunList.edges && selectedRun === 'Transforms'">
         <empty-state v-if="transformerRunList.edges.length < 1">
@@ -104,6 +104,7 @@ import { RunConnection } from '~/types/types'
 import { AutofixRunConnection } from '~/types/types'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+import { generalizeRun } from '~/utils/runs'
 
 const runListStore = namespace('run/list')
 const transformRunListStore = namespace('transformerRun/list')
@@ -126,7 +127,8 @@ interface IRunOptions {
     RunCard,
     TransformCard
   },
-  layout: 'repository'
+  layout: 'repository',
+  methods: { generalizeRun }
 })
 export default class RecentRunsSection extends mixins(RoleAccessMixin) {
   @runListStore.State

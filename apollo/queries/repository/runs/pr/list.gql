@@ -1,0 +1,32 @@
+query (
+  $name: String!
+  $owner: String!
+  $provider: VCSProviderChoices!
+  $prState: PRStateChoices
+  $q: String
+  $limit: Int!
+  $after: String
+) {
+  repository(name: $name, owner: $owner, provider: $provider) {
+    id
+    prs(state: $prState, q: $q, first: $limit, after: $after) {
+      totalCount
+      edges {
+        node {
+          id
+          title
+          number
+          raisedCount
+          resolvedCount
+          branch
+          latestAnalysisRun {
+            status
+            createdAt
+            runId
+          }
+          runCount
+        }
+      }
+    }
+  }
+}
