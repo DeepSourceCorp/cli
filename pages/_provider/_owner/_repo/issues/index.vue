@@ -21,6 +21,7 @@
         />
         <issue-search
           :search-candidate="parsedParams.q"
+          placeholder="Search for an issue..."
           @updateSearch="(value) => addFilters({ q: value })"
         />
       </div>
