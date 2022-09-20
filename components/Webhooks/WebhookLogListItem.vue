@@ -6,7 +6,7 @@
   >
     <span>
       <z-tag
-        v-if="httpStatusCode"
+        v-if="Number.isFinite(httpStatusCode)"
         bgColor="ink-400 bg-opacity-20"
         textSize="xs"
         spacing="px-2 py-0.5"
