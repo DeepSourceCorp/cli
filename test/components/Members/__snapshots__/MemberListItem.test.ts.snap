@@ -141,7 +141,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -168,7 +168,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -195,7 +195,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -222,7 +222,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -369,7 +369,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -396,7 +396,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -423,7 +423,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -450,7 +450,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -597,7 +597,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -624,7 +624,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -651,7 +651,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -678,7 +678,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -825,7 +825,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -881,7 +881,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -1057,7 +1057,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -1113,7 +1113,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -1289,7 +1289,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
@@ -1345,7 +1345,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
   </div>
   <div class=\\"flex items-center justify-end flex-grow\\">
     <div class=\\"text-right\\">
-      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\"> <template></template></zmenu-stub>
+      <zmenu-stub direction=\\"left\\" placement=\\"bottom\\" size=\\"base\\" width=\\"large\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\"> <template></template></zmenu-stub>
     </div>
   </div>
 </li>"
