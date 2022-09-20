@@ -28,7 +28,7 @@
     <form-group label="Access permissions">
       <radio-group-input
         v-model="basePerm"
-        label="Member Base Permissions"
+        label="Member base permissions"
         input-id="team-settings-access-base-perms"
         input-width="wide"
         :options="basePermOptions"
@@ -36,7 +36,7 @@
       ></radio-group-input>
       <check-input
         v-model="issuePerms"
-        label="Issue Permissions"
+        label="Issue permissions"
         input-id="team-settings-access-issue-perms"
         input-width="wide"
         :options="issuePermOptions"
@@ -44,7 +44,7 @@
       ></check-input>
       <check-input
         v-model="metricPerms"
-        label="Metric Thresholds Permission"
+        label="Metric thresholds permission"
         input-id="team-settings-access-metric-perms"
         input-width="wide"
         :options="metricPermOptions"
@@ -52,7 +52,7 @@
       ></check-input>
       <check-input
         v-model="metricSuppressionPerms"
-        label="Suppress Metric Permission"
+        label="Suppress metric permission"
         input-id="team-settings-access-metric-suppress"
         input-width="wide"
         :options="metricSuppressOptions"
@@ -114,25 +114,25 @@ import { AppFeatures, TeamPerms } from '~/types/permTypes'
   layout: 'dashboard'
 })
 export default class AccessControlSettings extends mixins(TeamDetailMixin) {
-  private syncPermissionsWithVcs = true
-  private issuePerms: Record<string, boolean | undefined> = {
+  syncPermissionsWithVcs = true
+  issuePerms: Record<string, boolean | undefined> = {
     canMembersIgnoreIssues: false,
     canContributorsIgnoreIssues: false
   }
-  private metricPerms: Record<string, boolean | undefined> = {
+  metricPerms: Record<string, boolean | undefined> = {
     canMembersModifyMetricThresholds: false,
     canContributorsModifyMetricThresholds: false
   }
-  private metricSuppressionPerms: Record<string, boolean | undefined> = {
+  metricSuppressionPerms: Record<string, boolean | undefined> = {
     canMembersIgnoreFailingMetrics: false,
     canContributorsIgnoreFailingMetrics: false
   }
-  private basePerm: TeamBasePermissionSetDefaultRepositoryPermission =
+  basePerm: TeamBasePermissionSetDefaultRepositoryPermission =
     TeamBasePermissionSetDefaultRepositoryPermission.Write
 
-  private isFetching = false
-  private showSyncModal = false
-  private isSyncing = false
+  isFetching = false
+  showSyncModal = false
+  isSyncing = false
 
   /**
    * Fetch hook for AccessControlSettings page.
@@ -300,11 +300,11 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     }
   }
 
-  private basePermOptions = [
+  basePermOptions = [
     {
       value: TeamBasePermissionSetDefaultRepositoryPermission.Read,
       label: 'Read Only',
-      description: `Members will be able to only view the issues and metrics on all repositories they have access to, but won't be able to take any actions on issues or create Autofixes. You'll need to give each Member additional access to individual repositories from the repository's settings.`
+      description: `Members will be able to only view the issues and metrics on all repositories they have access to, but won't be able to take any actions on issues. You'll need to give each Member additional access to individual repositories from the repository's settings.`
     },
     {
       value: TeamBasePermissionSetDefaultRepositoryPermission.Write,
@@ -318,12 +318,12 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     }
   ]
 
-  private issuePermOptions = [
+  issuePermOptions = [
     { value: 'canMembersIgnoreIssues', label: 'Allow members to ignore issues' },
     { value: 'canContributorsIgnoreIssues', label: 'Allow contributors to ignore issues' }
   ]
 
-  private metricPermOptions = [
+  metricPermOptions = [
     {
       value: 'canMembersModifyMetricThresholds',
       label: 'Allow members to modify metric thresholds'
@@ -334,7 +334,7 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     }
   ]
 
-  private metricSuppressOptions = [
+  metricSuppressOptions = [
     {
       value: 'canMembersIgnoreFailingMetrics',
       label: 'Allow members to suppress a failed metric'
