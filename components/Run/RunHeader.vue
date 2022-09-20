@@ -28,7 +28,7 @@
       </div>
       <div class="flex gap-x-3">
         <div
-          class="flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-md pl-3 pr-2 h-7"
+          class="flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-md pl-2 pr-3 h-7"
         >
           <z-icon
             :icon="isForDefaultBranch ? 'git-branch' : 'git-pull-request'"
@@ -49,7 +49,7 @@
           <template #trigger="{ toggle, isOpen }">
             <button
               @click="toggle"
-              class="flex items-center gap-x-2 pl-3 pr-2 h-7 rounded-md cursor-pointer border border-ink-50"
+              class="flex items-center gap-x-2 px-2 h-7 rounded-md cursor-pointer border border-ink-50"
               :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
             >
               <div class="flex items-center text-sm gap-x-2 text-vanilla-400">
