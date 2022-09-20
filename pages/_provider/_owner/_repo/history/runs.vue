@@ -5,7 +5,7 @@
       <run-branches
         v-if="defaultBranchRun && !mainBranchFetching"
         :key="defaultBranchRun.branchName"
-        :generalized-run="generalizeRun(defaultBranchRun)"
+        :generalized-run="generalizeRun(defaultBranchRun, true)"
         :branchRunCount="defaultBranchRunCount"
         :class="{ 'opacity-30': expandedBranch && expandedBranch !== defaultBranchRun.branchName }"
         @expanded="updateExpandedBranch"

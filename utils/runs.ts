@@ -19,7 +19,7 @@ export interface GeneralizedRunT {
  * @param run A {@link Run} object
  * @returns Object of type {@link GeneralizedRunT}
  */
-export const generalizeRun = (run: Run): GeneralizedRunT => {
+export const generalizeRun = (run: Run, isDefaultBranch = false): GeneralizedRunT => {
   const {
     branchName,
     runId,
@@ -34,7 +34,7 @@ export const generalizeRun = (run: Run): GeneralizedRunT => {
   } = run
 
   return {
-    title: commitMessage,
+    title: isDefaultBranch ? branchName : commitMessage,
     branchName,
     runId,
     runCount: branchRunCount,

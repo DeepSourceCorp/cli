@@ -84,7 +84,7 @@
                       :class="{ 'motion-safe:animate-spin': run.status === 'PEND' }"
                       class="mt-px"
                     />
-                    <div class="text-sm leading-6 font-medium text-vanilla-100">
+                    <div class="text-sm leading-6 font-medium text-vanilla-100 truncate max-w-xs">
                       {{ run.commitMessage || run.branchName }}
                     </div>
                   </div>
