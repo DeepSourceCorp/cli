@@ -1,7 +1,7 @@
 <template>
   <div :class="[spacing]">
     <z-icon :icon="icon" :size="size" :color="iconColor" class="flex-shrink-0 inline mb-px" />
-    <span :class="[textColor, textSize, 'inline']">
+    <span :class="[textColor, textSize, 'inline break-all']">
       <slot>{{ label }}</slot>
     </span>
   </div>
