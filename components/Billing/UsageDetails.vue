@@ -1,6 +1,12 @@
 <template>
   <form-group label="Usage details" class="mt-5">
-    <div class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 bg-ink-400 border-ink-200">
+    <!-- Skeleton loader -->
+    <div v-if="isLoading" class="bg-ink-300 animate-pulse skeleton-loader w-full"></div>
+
+    <div
+      v-else
+      class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 bg-ink-400 border-ink-200"
+    >
       <div v-if="owner.featureUsage" class="p-4 space-y-4 border-r border-ink-200">
         <h5 class="text-xs font-medium leading-none tracking-wider uppercase text-vanilla-400">
           Usage this month
@@ -17,7 +23,6 @@
           </li>
         </ul>
       </div>
-      <div v-else class="bg-ink-300 animate-pulse" style="width: 335px; height: 180px"></div>
 
       <div v-if="features" class="p-4 space-y-4">
         <h5 class="text-xs font-medium leading-none tracking-wider text-vanilla-400">FEATURES</h5>
@@ -52,7 +57,6 @@
           Upgrade plan
         </z-button>
       </div>
-      <div v-else class="bg-ink-300 animate-pulse" style="width: 335px; height: 180px"></div>
     </div>
   </form-group>
 </template>
@@ -71,10 +75,28 @@ import PlanDetailMixin from '~/mixins/planDetailMixin'
   }
 })
 export default class UsageDetails extends mixins(OwnerDetailMixin, PlanDetailMixin) {
+  isLoading = false
+
   async fetch() {
     const { owner: login, provider } = this.$route.params
     const params = { login, provider }
     await this.fetchUsageDetails(params)
+
+    this.isLoading = false
+  }
+
+  /**
+   * Created hook
+   * Verify whether the skeleton loader needs to be shown or not
+   *
+   * @returns {void}
+   */
+  created(): void {
+    setTimeout(() => {
+      if (this.$fetchState.pending) {
+        this.isLoading = true
+      }
+    }, 300)
   }
 
   get features() {
@@ -109,3 +131,9 @@ export default class UsageDetails extends mixins(OwnerDetailMixin, PlanDetailMix
   }
 }
 </script>
+
+<style scoped>
+.skeleton-loader {
+  height: 182px;
+}
+</style>

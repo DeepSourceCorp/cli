@@ -4,8 +4,15 @@
       class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-ink-200 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
     >
       <template v-for="option in settingsOptions">
+        <!-- Show skeleton loader if `dashboardContext` is not populated yet -->
+        <div
+          v-if="showSkeletonLoaders"
+          :key="option.label"
+          class="animate-pulse h-9 bg-ink-300"
+        ></div>
+
         <nuxt-link
-          v-if="owner.isTeam && option.validator"
+          v-else-if="isTeam && option.validator"
           :to="getRoute(option.name)"
           :key="option.label"
           class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
@@ -33,8 +40,6 @@ import { Context } from '@nuxt/types'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
-import TeamDetailMixin from '~/mixins/teamDetailMixin'
 
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 import { TeamMemberRoleChoices } from '~/types/types'
@@ -64,7 +69,7 @@ export interface LinkOptions {
         if ($config.onPrem) {
           redirect(`/${provider}/${owner}/settings/access`)
         } else {
-          redirect(`/${provider}/${owner}/settings/auto-onboard`)
+          redirect(`/${provider}/${owner}/settings/preferences`)
         }
       }
     }
@@ -87,11 +92,7 @@ export interface LinkOptions {
   },
   scrollToTop: true
 })
-export default class TeamSettings extends mixins(
-  TeamDetailMixin,
-  OwnerDetailMixin,
-  ActiveUserMixin
-) {
+export default class TeamSettings extends mixins(ActiveUserMixin) {
   getRoute(candidate: string): string {
     return this.$generateRoute(['settings', candidate])
   }
@@ -176,24 +177,9 @@ export default class TeamSettings extends mixins(
   }
 
   /**
-   * Fetch hook
-   *
-   * @return {Promise<void>}
-   */
-  async fetch(): Promise<void> {
-    const { owner, provider } = this.$route.params
-    const params = {
-      login: owner,
-      provider
-    }
-    await this.fetchOwnerDetails(params)
-    await this.fetchTeamSettings(params)
-  }
-
-  /**
    * Mounted hook
    *
-   * @return {void}
+   * @returns {void}
    */
   mounted(): void {
     this.$nextTick(() => {
@@ -205,21 +191,20 @@ export default class TeamSettings extends mixins(
     const { provider } = this.$route.params
     return (
       this.$gateKeeper.provider(AppFeatures.AUTO_ONBOARD, provider) &&
-      this.activeDashboardContext.type === 'team' &&
+      this.isTeam &&
       this.$gateKeeper.team(TeamPerms.AUTO_ONBOARD_REPOSITORIES, this.teamPerms.permission)
     )
   }
 
   get webhooksAvailable(): boolean {
     return (
-      this.activeDashboardContext.type === 'team' &&
-      this.$gateKeeper.team(TeamPerms.MANAGE_WEBHOOKS, this.teamPerms.permission)
+      this.isTeam && this.$gateKeeper.team(TeamPerms.MANAGE_WEBHOOKS, this.teamPerms.permission)
     )
   }
 
   get issuePriorityAvailable(): boolean {
     return (
-      this.activeDashboardContext.type === 'team' &&
+      this.isTeam &&
       this.$gateKeeper.team(TeamPerms.MANAGE_OWNER_ISSUE_PRIORITY, this.teamPerms.permission)
     )
   }
@@ -239,8 +224,7 @@ export default class TeamSettings extends mixins(
     }
 
     return (
-      this.activeDashboardContext.type === 'team' &&
-      this.$gateKeeper.team(TeamPerms.MANAGE_INTEGRATIONS, this.teamPerms.permission)
+      this.isTeam && this.$gateKeeper.team(TeamPerms.MANAGE_INTEGRATIONS, this.teamPerms.permission)
     )
   }
 
@@ -248,10 +232,12 @@ export default class TeamSettings extends mixins(
     return this.$gateKeeper.team(TeamPerms.MANAGE_PREFERNCES, this.teamPerms.permission)
   }
 
+  get isTeam(): boolean {
+    return this.activeDashboardContext.type === 'team'
+  }
+
   get navItemsForMobile() {
-    const visibleNavItems = this.settingsOptions.filter(
-      (item) => this.owner.isTeam && item.validator
-    )
+    const visibleNavItems = this.settingsOptions.filter((item) => this.isTeam && item.validator)
 
     return visibleNavItems.map((item) => {
       return {
@@ -259,6 +245,10 @@ export default class TeamSettings extends mixins(
         routePath: this.getRoute(item.name)
       }
     })
+  }
+
+  get showSkeletonLoaders(): boolean {
+    return !this.viewer.dashboardContext?.length
   }
 
   /**
@@ -293,7 +283,7 @@ export default class TeamSettings extends mixins(
             icon: opt.icon,
             scope: 'owner',
             condition: (route) => {
-              if (this.activeDashboardContext.type === 'team') {
+              if (this.isTeam) {
                 return route.name?.startsWith('provider-owner-settings') ?? false
               }
               return false
