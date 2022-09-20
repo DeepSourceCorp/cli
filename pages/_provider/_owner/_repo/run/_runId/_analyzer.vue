@@ -20,7 +20,10 @@
               'hidden md:block': index !== breadCrumbLinks.length - 1
             }"
           >
-            <nuxt-link v-if="link.route" :to="link.route">{{ link.label }}</nuxt-link>
+            <span v-if="link.route && link.route === '/'" @click="triggerActiveAnalyzerFlash">{{
+              link.label
+            }}</span>
+            <nuxt-link v-else-if="link.route" :to="link.route">{{ link.label }}</nuxt-link>
             <template v-else>{{ link.label }}</template>
           </z-breadcrumb-item>
         </z-breadcrumb>
@@ -37,7 +40,11 @@
           </template>
           <template #body>
             <z-menu-section :divider="false">
-              <analyzer-selector v-bind="run" :checks="checks" />
+              <analyzer-selector
+                v-bind="run"
+                :checks="checks"
+                :flash-active-analyzer="flashActiveAnalyzer"
+              />
             </z-menu-section>
           </template>
         </z-menu>
@@ -47,7 +54,11 @@
       <div
         class="sticky flex-col justify-between hidden h-full border-r border-ink-200 md:flex top-bar-offset run-body-height"
       >
-        <analyzer-selector v-bind="run" :checks="checks" />
+        <analyzer-selector
+          v-bind="run"
+          :checks="checks"
+          :flash-active-analyzer="flashActiveAnalyzer"
+        />
         <run-summary v-bind="run" />
       </div>
       <div>
@@ -122,6 +133,18 @@ export default class AnalyzerDetails extends mixins(
   RunDetailMixin
 ) {
   public isLoading = false
+  public flashActiveAnalyzer = false
+
+  /**
+   * Sets `flashActiveAnalyzer` to true for 1 second, and then resets it back to false
+   */
+  triggerActiveAnalyzerFlash() {
+    this.flashActiveAnalyzer = true
+    setTimeout(() => {
+      this.flashActiveAnalyzer = false
+    }, 1000)
+  }
+
   /**
     Created hook to verify whether a loader skeleton needs to be shown or not.
   */
@@ -162,7 +185,10 @@ export default class AnalyzerDetails extends mixins(
         label: (this.run.isForDefaultBranch
           ? this.run.branchName
           : this.run.pullRequestNumberDisplay) as string,
-        route: this.$generateRoute(['run', runId])
+        route:
+          analyzer === this.checks[0].analyzer?.shortcode && !issueId
+            ? '/'
+            : this.$generateRoute(['run', runId])
       }
     ]
 

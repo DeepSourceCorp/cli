@@ -5,7 +5,11 @@
       <nuxt-link
         :key="check.id"
         :to="getRoute(check.analyzer.shortcode)"
-        class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300"
+        class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300 border-2"
+        :class="{
+          'border-vanilla-400 animate-pulse-border-once': flashActiveAnalyzer,
+          'border-opacity-0': currentAnalyzer !== check.analyzer.shortcode || !flashActiveAnalyzer
+        }"
       >
         <div
           class="flex justify-between w-full p-2 text-sm rounded-md hover:bg-ink-200"
@@ -35,7 +39,7 @@
 
 <script lang="ts">
 import { ZTag, ZIcon } from '@deepsourcelabs/zeal'
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { Check, CheckStatus } from '~/types/types'
 import { checkStatusIcon, checkStatusIconColor } from '~/utils/ui'
 
@@ -57,6 +61,9 @@ import { checkStatusIcon, checkStatusIconColor } from '~/utils/ui'
 export default class AnalyzerSelector extends Vue {
   @Prop({ default: () => [] })
   checks: Array<Check>
+
+  @Prop({ default: false })
+  flashActiveAnalyzer: boolean
 
   /**
    * given a status, see if the check is pending or not

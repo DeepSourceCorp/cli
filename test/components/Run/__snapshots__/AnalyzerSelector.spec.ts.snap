@@ -3,7 +3,7 @@
 exports[`[[ AnalyzerSelector ]] renders \`AnalyzerSelector\` with all check statuses: {"checks":[{"issuesRaisedCount":1,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948"},"status":"PEND","id":0},{"issuesRaisedCount":1,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948"},"status":"PASS","id":1},{"issuesRaisedCount":1,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948"},"status":"FAIL","id":2},{"issuesRaisedCount":1,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948"},"status":"TIMO","id":3},{"issuesRaisedCount":1,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948"},"status":"CNCL","id":4},{"issuesRaisedCount":1,"analyzer":{"name":"Python","shortcode":"python","description":"DeepSource's Python analyzer.","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948"},"status":"READ","id":5}]} 1`] = `
 "<nav class=\\"flex flex-col p-2 overflow-x-auto gap-x-8 hide-scroll lg:gap-y-1\\">
   <p class=\\"p-2 text-xs font-semibold tracking-wide uppercase text-slate\\">Checks</p>
-  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
+  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300 border-2 border-opacity-0\\">
     <div class=\\"flex justify-between w-full p-2 text-sm rounded-md hover:bg-ink-200 bg-ink-200 text-vanilla-100\\">
       <div class=\\"flex items-center gap-x-2\\">
         <zicon-stub icon=\\"spin-loader\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 animate-spin\\"></zicon-stub> <span>Python</span>
@@ -11,7 +11,7 @@ exports[`[[ AnalyzerSelector ]] renders \`AnalyzerSelector\` with all check stat
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
-  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
+  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300 border-2 border-opacity-0\\">
     <div class=\\"flex justify-between w-full p-2 text-sm rounded-md hover:bg-ink-200 bg-ink-200 text-vanilla-100\\">
       <div class=\\"flex items-center gap-x-2\\">
         <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
@@ -19,7 +19,7 @@ exports[`[[ AnalyzerSelector ]] renders \`AnalyzerSelector\` with all check stat
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
-  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
+  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300 border-2 border-opacity-0\\">
     <div class=\\"flex justify-between w-full p-2 text-sm rounded-md hover:bg-ink-200 bg-ink-200 text-vanilla-100\\">
       <div class=\\"flex items-center gap-x-2\\">
         <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"cherry\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
@@ -27,7 +27,7 @@ exports[`[[ AnalyzerSelector ]] renders \`AnalyzerSelector\` with all check stat
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
-  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
+  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300 border-2 border-opacity-0\\">
     <div class=\\"flex justify-between w-full p-2 text-sm rounded-md hover:bg-ink-200 bg-ink-200 text-vanilla-100\\">
       <div class=\\"flex items-center gap-x-2\\">
         <zicon-stub icon=\\"timer-reset\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
@@ -35,7 +35,7 @@ exports[`[[ AnalyzerSelector ]] renders \`AnalyzerSelector\` with all check stat
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
-  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
+  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300 border-2 border-opacity-0\\">
     <div class=\\"flex justify-between w-full p-2 text-sm rounded-md hover:bg-ink-200 bg-ink-200 text-vanilla-100\\">
       <div class=\\"flex items-center gap-x-2\\">
         <zicon-stub icon=\\"alert-circle\\" size=\\"small\\" position=\\"\\" color=\\"honey\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>
@@ -43,7 +43,7 @@ exports[`[[ AnalyzerSelector ]] renders \`AnalyzerSelector\` with all check stat
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-100\\" textsize=\\"xs\\" spacing=\\"px-2 py-1\\" iconcolor=\\"current\\" class=\\"leading-none min-w-1\\"><span>1</span></ztag-stub>
     </div>
   </nuxt-link>
-  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300\\">
+  <nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python?sort=most-frequent&amp;category=performance\\" class=\\"flex-shrink-0 text-sm rounded-md group hover:bg-ink-300 border-2 border-opacity-0\\">
     <div class=\\"flex justify-between w-full p-2 text-sm rounded-md hover:bg-ink-200 bg-ink-200 text-vanilla-100\\">
       <div class=\\"flex items-center gap-x-2\\">
         <zicon-stub icon=\\"circle-dot\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>Python</span>

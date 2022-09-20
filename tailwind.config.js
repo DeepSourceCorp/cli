@@ -72,7 +72,8 @@ module.exports = {
         '3xs': '12rem'
       },
       animation: {
-        'glow-bg': 'glow 4s ease-out 1ms infinite'
+        'glow-bg': 'glow 4s ease-out 1ms infinite',
+        'pulse-border-once': 'pulse-border-once 1s ease-in forwards'
       },
       keyframes: {
         glow: {
@@ -95,6 +96,9 @@ module.exports = {
           '100%': {
             filter: 'drop-shadow(0 0 150px rgba(69, 104, 220, 0.15))'
           }
+        },
+        'pulse-border-once': {
+          to: { borderColor: 'transparent' }
         }
       },
       zIndex: {
