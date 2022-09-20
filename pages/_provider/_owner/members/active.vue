@@ -144,7 +144,7 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
     const { owner, provider } = this.$route.params
     const args = { login: owner, provider, refetch }
 
-    await Promise.all([this.fetchTeamMembers(refetch), this.fetchOwnerDetails(args)])
+    await Promise.all([this.fetchTeamMembers(), this.fetchOwnerDetails(args)])
   }
 
   async searchActiveUsers(): Promise<void> {
@@ -160,7 +160,7 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   }
 
   @Watch('currentPage')
-  async fetchTeamMembers(refetch = false): Promise<void> {
+  async fetchTeamMembers(): Promise<void> {
     this.listLoading = true
     const { owner, provider } = this.$route.params
     await this.fetchTeam({
@@ -169,7 +169,7 @@ export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
       currentPage: this.currentPage,
       limit: this.limit,
       query: this.searchCandidate,
-      refetch
+      refetch: true
     })
     this.listLoading = false
   }
