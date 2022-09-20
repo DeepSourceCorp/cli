@@ -148,9 +148,9 @@ import { ZIcon, ZDivider, ZTag, ZChart, ZTable, ZTableCell, ZTableRow } from '@d
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 
-import { ReportLevel, ReportType, Repository } from '~/types/types'
+import { ReportLevel, Repository } from '~/types/types'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
-import { smartApostrophe, shortenLargeNumber } from '~/utils/string'
+import { shortenLargeNumber } from '~/utils/string'
 
 /**
  * Public Report Child page
@@ -166,7 +166,6 @@ import { smartApostrophe, shortenLargeNumber } from '~/utils/string'
     ZTableRow
   },
   methods: {
-    smartApostrophe,
     shortenLargeNumber
   }
 })
@@ -181,9 +180,6 @@ export default class PublicReportSans extends mixins(PublicReportMixin, Complian
   ownerLogin: string
 
   @Prop()
-  objectId: string
-
-  @Prop()
   createdAt: string
 
   @Prop()
@@ -192,7 +188,6 @@ export default class PublicReportSans extends mixins(PublicReportMixin, Complian
   @Prop()
   repositoryList: Array<Repository>
 
-  readonly ReportType = ReportType
   readonly ReportPageT = ReportPageT
 
   /**

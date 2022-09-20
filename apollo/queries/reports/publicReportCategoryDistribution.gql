@@ -1,7 +1,7 @@
-query publicReportCategoryDistribution($reportId: String!, $token: String) {
+query publicReportCategoryDistribution($key: String!, $reportId: String!, $token: String) {
   publicReport(reportId: $reportId, token: $token) {
     id
-    issueDistributionByCategory {
+    issueDistributionByCategory(key: $key) {
       slug
       name
       value

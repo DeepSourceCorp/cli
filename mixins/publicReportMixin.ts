@@ -363,6 +363,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
 
   /**
    * Fetch and return distribution stats of a public report.
+   * @param {ReportPageT} key
    * @param {string} reportId
    * @param {IssueDistributionT} distributionType
    * @param {string} token
@@ -370,6 +371,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
    * @returns {Promise<IssueDistribution[]>}
    */
   public async fetchPublicReportDistributionStats(
+    key: ReportPageT,
     reportId: string,
     distributionType: IssueDistributionT,
     token?: string
@@ -383,6 +385,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
 
     try {
       const response = (await this.$fetchGraphqlData(distributionQuery, {
+        key,
         reportId,
         token
       })) as GraphqlQueryResponse

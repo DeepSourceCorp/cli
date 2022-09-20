@@ -93,7 +93,7 @@ import { publicReportCoverageReport } from '@/apollo/queries/reports/publicRepor
 
 import { resolveNodes } from '~/utils/array'
 
-import { ReportLevel, ReportType, Repository, RepositoryCoverageReportItem } from '~/types/types'
+import { ReportLevel, Repository, RepositoryCoverageReportItem } from '~/types/types'
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 import { CoverageSortT, ReportMeta, ReportPageT } from '~/types/reportTypes'
 import PublicReportMixin from '~/mixins/publicReportMixin'
@@ -130,9 +130,6 @@ export default class PublicReportCodeCoverage extends mixins(
   ownerLogin: string
 
   @Prop()
-  objectId: string
-
-  @Prop()
   createdAt: string
 
   @Prop()
@@ -141,7 +138,6 @@ export default class PublicReportCodeCoverage extends mixins(
   @Prop()
   repositoryList: Array<Repository>
 
-  readonly ReportType = ReportType
   readonly ReportPageT = ReportPageT
 
   codeCoverageReportList: Array<RepositoryCoverageReportItem> = []

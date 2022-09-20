@@ -28,7 +28,6 @@
         <nuxt-child
           :share-historical-data="publicReport.shareHistoricalData"
           :level="publicReport.level"
-          :object-id="objectId"
           :owner-login="publicReport.owner.login"
           :created-at="formatDate(parseISODate(publicReport.createdAt))"
           :token="token"
@@ -266,16 +265,6 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
    */
   triggerSidebarExpand() {
     this.$root.$emit('ui:show-public-report-sidebar')
-  }
-
-  get objectId(): string {
-    if (this.publicReport.level === ReportLevel.Repository) {
-      return this.publicReport.repository?.id as string
-    }
-    if (this.publicReport.level === ReportLevel.Owner) {
-      return this.publicReport.owner?.id as string
-    }
-    return ''
   }
 
   /**

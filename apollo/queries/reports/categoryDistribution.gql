@@ -1,5 +1,5 @@
-query categoryDistribution($level: ReportLevel!, $objectId: ID!) {
-  issueDistributionByCategory(level: $level, objectId: $objectId) {
+query categoryDistribution($reportKey: String!, $level: ReportLevel!, $objectId: ID!) {
+  issueDistributionByCategory(reportKey: $reportKey, level: $level, objectId: $objectId) {
     slug
     name
     value

@@ -127,12 +127,12 @@ export default class ReportsSidebar extends Vue {
     return [
       {
         key: ReportPageT.OWASP_TOP_10,
-        label: ReportMeta['owasp-top-10'].title,
+        label: ReportMeta[ReportPageT.OWASP_TOP_10].title,
         link: [...this.baseLink, ReportPageT.OWASP_TOP_10]
       },
       {
         key: ReportPageT.SANS_TOP_25,
-        label: ReportMeta['sans-top-25'].title,
+        label: ReportMeta[ReportPageT.SANS_TOP_25].title,
         link: [...this.baseLink, ReportPageT.SANS_TOP_25]
       }
     ]
@@ -142,12 +142,17 @@ export default class ReportsSidebar extends Vue {
     return [
       {
         key: ReportPageT.CODE_COVERAGE,
-        label: ReportMeta['code-coverage'].title,
+        label: ReportMeta[ReportPageT.CODE_COVERAGE].title,
         link: [...this.baseLink, ReportPageT.CODE_COVERAGE]
       },
       {
+        key: ReportPageT.ISSUES_PREVENTED,
+        label: ReportMeta[ReportPageT.ISSUES_PREVENTED].title,
+        link: [...this.baseLink, ReportPageT.ISSUES_PREVENTED]
+      },
+      {
         key: ReportPageT.DISTRIBUTION,
-        label: ReportMeta['issue-distribution'].title,
+        label: ReportMeta[ReportPageT.DISTRIBUTION].title,
         link: [...this.baseLink, ReportPageT.DISTRIBUTION]
       }
     ]
@@ -156,7 +161,7 @@ export default class ReportsSidebar extends Vue {
   get publicReportsItem(): ReportsTabLink {
     return {
       key: ReportPageT.PUBLIC_REPORTS,
-      label: ReportMeta['public-reports'].title,
+      label: ReportMeta[ReportPageT.PUBLIC_REPORTS].title,
       link: [...this.baseLink, ReportPageT.PUBLIC_REPORTS]
     }
   }

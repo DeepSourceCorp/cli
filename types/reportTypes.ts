@@ -20,7 +20,8 @@ export enum ReportPageT {
   SANS_TOP_25 = 'sans-top-25',
   DISTRIBUTION = 'issue-distribution',
   PUBLIC_REPORTS = 'public-reports',
-  CODE_COVERAGE = 'code-coverage'
+  CODE_COVERAGE = 'code-coverage',
+  ISSUES_PREVENTED = 'issues-prevented'
 }
 
 export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
@@ -151,6 +152,37 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
             This report can be used by the ${companyName} team to identify and remediate gaps in code not covered by any
             automated tests and make it more stable and maintainable. The report can also be used by key internal and external
             stakeholders to understand the stability of ${smartApostrophe(companyName)} software.
+        </p>`
+      }
+    }
+  },
+  [ReportPageT.ISSUES_PREVENTED]: {
+    title: 'Issues Prevented',
+    description: 'Issues prevented from entering the default branch.',
+    type: ReportType.Insight,
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+        <p>
+            DeepSource continuously scans ${smartApostrophe(
+              companyName
+            )} source code to detect code health issues and
+            provides guidance to correct them.
+        </p>
+        <p>
+            This report provides information about the effectiveness of ${smartApostrophe(
+              companyName
+            )} code health efforts by
+            showing the number of code health issues the team prevented from being introduced in the code base. The code health
+            issues detected by DeepSource include, but are not limited to, these categories: bug risks, anti-patterns, style
+            violations, performance issues, code coverage issues, and so on.
+        </p>`,
+        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+            This report can be used by the ${companyName} team to understand the effectiveness of their code health practices,
+            prioritize areas of improvement, and chart out a plan of action. Key internal and external stakeholders can also use
+            the report to understand the code quality and maintainability of ${companyName}.
         </p>`
       }
     }

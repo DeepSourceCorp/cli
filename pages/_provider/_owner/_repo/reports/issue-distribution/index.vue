@@ -12,30 +12,16 @@
 
       <template #report-control>
         <div class="flex justify-between gap-x-2">
-          <z-radio-group
+          <distribution-switch
             v-model="activeFilter"
-            class="hidden sm:grid grid-cols-2 min-w-52 h-8 font-medium text-vanilla-100 sm:w-auto"
+            class="hidden sm:grid grid-cols-2"
             @change="fetchDistributionData"
-          >
-            <z-radio-button
-              :value="IssueDistributionT.CATEGORY"
-              spacing="w-full h-full pt-1"
-              class="text-center"
-            >
-              <span class="w-full text-xs capitalize">By category</span>
-            </z-radio-button>
-            <z-radio-button
-              :value="IssueDistributionT.ANALYZER"
-              spacing="w-full h-full pt-1"
-              class="text-center"
-            >
-              <span class="w-full text-xs capitalize">By analyzer</span></z-radio-button
-            >
-          </z-radio-group>
+          />
+
           <date-range-picker
             v-model="dateRangeFilter"
             :date-range-options="dateRangeOptions"
-            @change="setChartData"
+            @change="fetchHistoricValuesAndSetChartData"
           />
         </div>
       </template>
@@ -65,30 +51,16 @@
         </div>
       </div>
 
-      <z-radio-group
+      <distribution-switch
         v-model="activeFilter"
-        class="grid grid-cols-2 px-5 mt-4 h-8 font-medium text-vanilla-100 sm:hidden"
+        class="grid grid-cols-2 px-5 mt-4 sm:hidden"
         @change="fetchDistributionData"
-      >
-        <z-radio-button
-          :value="IssueDistributionT.CATEGORY"
-          spacing="w-full h-full pt-1"
-          class="text-center"
-        >
-          <span class="w-full text-xs capitalize">By category</span>
-        </z-radio-button>
-        <z-radio-button
-          :value="IssueDistributionT.ANALYZER"
-          spacing="w-full h-full pt-1"
-          class="text-center"
-        >
-          <span class="w-full text-xs capitalize">By analyzer</span></z-radio-button
-        >
-      </z-radio-group>
+      />
     </chart-container>
 
     <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
     <distribution-stats
+      v-if="distributionStatsLoading || distributionStats.length"
       :key="activeFilter"
       :stats="distributionStats"
       :link-cards="true"
@@ -100,14 +72,14 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZRadioGroup, ZRadioButton, ZChart } from '@deepsourcelabs/zeal'
+import { ZChart } from '@deepsourcelabs/zeal'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import ReportMixin from '~/mixins/reportMixin'
+import DistributionReportMixin from '~/mixins/distributionReportMixin'
 
 import { shortenLargeNumber } from '~/utils/string'
-import { IssueDistribution, ReportLevel } from '~/types/types'
-import { Dataset, IssueDistributionT, ReportPageT } from '~/types/reportTypes'
+import { ReportLevel } from '~/types/types'
+import { IssueDistributionT, ReportPageT } from '~/types/reportTypes'
 import { getColorShades } from '~/utils/ui'
 
 const BASE_COLOR = '#1035ad'
@@ -118,32 +90,20 @@ const BASE_COLOR = '#1035ad'
 @Component({
   layout: 'repository',
   components: {
-    ZRadioGroup,
-    ZRadioButton,
     ZChart
   },
   methods: {
     shortenLargeNumber
   }
 })
-export default class IssueDistributionPage extends mixins(RepoDetailMixin, ReportMixin) {
-  public activeFilter: IssueDistributionT = IssueDistributionT.CATEGORY
-  public distributionStats: Array<IssueDistribution> = []
-  public analyzerDataset: Array<Dataset> = []
-  public categoryDataset: Array<Dataset> = []
-
+export default class IssueDistributionPage extends mixins(
+  RepoDetailMixin,
+  DistributionReportMixin
+) {
   readonly IssueDistributionT = IssueDistributionT
 
   get colorShades(): string[] {
     return getColorShades(BASE_COLOR, this.issueDistributionData.length)
-  }
-
-  get shouldChartBeShown(): boolean {
-    return !(
-      this.historicalValuesLoading ||
-      this.historicalValues?.labels.length < 2 ||
-      this.issueDistributionData.length === 0
-    )
   }
 
   /**
@@ -173,7 +133,7 @@ export default class IssueDistributionPage extends mixins(RepoDetailMixin, Repor
     await Promise.all([
       this.fetchReportBase(ReportLevel.Repository, this.repository.id, ReportPageT.DISTRIBUTION),
       this.fetchRecentStats(ReportLevel.Repository, this.repository.id, ReportPageT.DISTRIBUTION),
-      this.setChartData(),
+      this.fetchHistoricValuesAndSetChartData(),
       this.fetchDistributionData()
     ])
   }
@@ -184,8 +144,10 @@ export default class IssueDistributionPage extends mixins(RepoDetailMixin, Repor
    * @return {Promise<void>}
    */
   async fetchDistributionData(): Promise<void> {
+    // Flushing distribution stats before changing distribution type
     this.distributionStats = []
     this.distributionStats = await this.fetchDistributionStats(
+      ReportPageT.DISTRIBUTION,
       ReportLevel.Repository,
       this.repository.id,
       this.activeFilter
@@ -197,66 +159,14 @@ export default class IssueDistributionPage extends mixins(RepoDetailMixin, Repor
    *
    * @return {Promise<void>}
    */
-  async setChartData(): Promise<void> {
+  async fetchHistoricValuesAndSetChartData(): Promise<void> {
     await this.fetchHistoricalValues(
       ReportLevel.Repository,
       this.repository.id,
       ReportPageT.DISTRIBUTION
     )
 
-    const analyzerValues = this.historicalValues.values.analyzer
-
-    if (analyzerValues && Object.keys(analyzerValues).length) {
-      this.analyzerDataset = Object.keys(analyzerValues).map((analyzer) => {
-        return { name: analyzer, chartType: 'bar', values: analyzerValues[analyzer] }
-      })
-    }
-
-    const categoryValues = this.historicalValues.values.category
-
-    if (categoryValues && Object.keys(categoryValues).length) {
-      this.categoryDataset = Object.keys(categoryValues).map((category) => {
-        return { name: category, chartType: 'bar', values: categoryValues[category] }
-      })
-    }
-  }
-
-  get issueDistributionData(): Array<Dataset> {
-    return this.activeFilter === IssueDistributionT.CATEGORY
-      ? this.categoryDataset
-      : this.analyzerDataset
-  }
-
-  get currentVal(): number {
-    return this.report?.currentValue ?? 0
-  }
-
-  get maxDigitHistoricValues(): number {
-    const currentActiveDistribution = (
-      this.activeFilter === IssueDistributionT.CATEGORY
-        ? this.historicalValues.values.category
-        : this.historicalValues.values.analyzer
-    ) as Record<string, number[]>
-
-    /**
-     * First, take out arrays from the map. Then run a reducer funtion over it.
-     * The reducer function maps over every child array and adds it elems with the
-     * next child array (add elems with the same index).
-     *
-     * The first time reduce runs, it returns sum of first and second array (index wise)
-     * In the next iteration, this sum is passed as curr value and is again summed up
-     * with the next array. Thus we get sum of all arrays, index wise.
-     */
-
-    const analyzerReducedValues = Object.values(currentActiveDistribution).reduce((curr, next) => {
-      let sisterArraysSum = []
-      for (let index = 0; index < curr.length; index++) {
-        sisterArraysSum.push(curr[index] + next[index])
-      }
-      return sisterArraysSum
-    })
-
-    return Math.max(...analyzerReducedValues)
+    this.setDistributionChartData()
   }
 }
 </script>

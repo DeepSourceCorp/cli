@@ -3602,6 +3602,16 @@ export type PublicReportComplianceIssuesArgs = {
 };
 
 
+export type PublicReportIssueDistributionByAnalyzerArgs = {
+  key: Scalars['String'];
+};
+
+
+export type PublicReportIssueDistributionByCategoryArgs = {
+  key: Scalars['String'];
+};
+
+
 export type PublicReportRepositoriesCoverageReportArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -3955,12 +3965,14 @@ export type QueryComplianceIssuesArgs = {
 
 export type QueryIssueDistributionByAnalyzerArgs = {
   level?: Maybe<ReportLevel>;
+  reportKey: Scalars['String'];
   objectId?: Maybe<Scalars['ID']>;
 };
 
 
 export type QueryIssueDistributionByCategoryArgs = {
   level?: Maybe<ReportLevel>;
+  reportKey: Scalars['String'];
   objectId?: Maybe<Scalars['ID']>;
 };
 
@@ -9316,6 +9328,7 @@ export type AccessTokenListQuery = (
 );
 
 export type AnalyzerDistributionQueryVariables = Exact<{
+  reportKey: Scalars['String'];
   level: ReportLevel;
   objectId: Scalars['ID'];
 }>;
@@ -9330,6 +9343,7 @@ export type AnalyzerDistributionQuery = (
 );
 
 export type CategoryDistributionQueryVariables = Exact<{
+  reportKey: Scalars['String'];
   level: ReportLevel;
   objectId: Scalars['ID'];
 }>;
@@ -9412,6 +9426,7 @@ export type HistoricalValuesQuery = (
 );
 
 export type PublicReportAnalyzerDistributionQueryVariables = Exact<{
+  key: Scalars['String'];
   reportId: Scalars['String'];
   token?: Maybe<Scalars['String']>;
 }>;
@@ -9473,6 +9488,7 @@ export type PublicReportBaseReportQuery = (
 );
 
 export type PublicReportCategoryDistributionQueryVariables = Exact<{
+  key: Scalars['String'];
   reportId: Scalars['String'];
   token?: Maybe<Scalars['String']>;
 }>;

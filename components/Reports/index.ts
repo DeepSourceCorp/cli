@@ -17,6 +17,7 @@ import CodeCoverageSort from './CodeCoverageSort.vue'
 import CodeCoverageTableCell from './CodeCoverageTableCell.vue'
 import CodeCoverageTable from './CodeCoverageTable.vue'
 import CodeCoverageTableLoading from './CodeCoverageTableLoading.vue'
+import DistributionSwitch from './DistributionSwitch.vue'
 
 export {
   DateRangePicker,
@@ -37,5 +38,6 @@ export {
   CodeCoverageSort,
   CodeCoverageTableCell,
   CodeCoverageTable,
-  CodeCoverageTableLoading
+  CodeCoverageTableLoading,
+  DistributionSwitch
 }

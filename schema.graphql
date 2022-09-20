@@ -1987,8 +1987,8 @@ type PublicReport implements MaskPrimaryKeyNode {
   level: ReportLevel
   report(key: String!): Report
   complianceIssues(key: String!): [ComplianceIssue]
-  issueDistributionByAnalyzer: [IssueDistribution]
-  issueDistributionByCategory: [IssueDistribution]
+  issueDistributionByAnalyzer(key: String!): [IssueDistribution]
+  issueDistributionByCategory(key: String!): [IssueDistribution]
   repositoriesCoverageReport(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String): RepositoryCoverageReportItemConnection
 }
 
@@ -2042,8 +2042,8 @@ type Query {
   report(level: ReportLevel, key: String, objectId: ID): Report
   reports(level: ReportLevel, objectId: ID): [Report]
   complianceIssues(level: ReportLevel, reportKey: String, objectId: ID): [ComplianceIssue]
-  issueDistributionByAnalyzer(level: ReportLevel, objectId: ID): [IssueDistribution]
-  issueDistributionByCategory(level: ReportLevel, objectId: ID): [IssueDistribution]
+  issueDistributionByAnalyzer(level: ReportLevel, reportKey: String!, objectId: ID): [IssueDistribution]
+  issueDistributionByCategory(level: ReportLevel, reportKey: String!, objectId: ID): [IssueDistribution]
   publicReport(reportId: String, token: String): PublicReport
   context: Context
   node(id: ID!): MaskPrimaryKeyNode

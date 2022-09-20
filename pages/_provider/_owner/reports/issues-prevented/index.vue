@@ -2,7 +2,7 @@
   <div class="flex flex-col gap-y-4">
     <chart-container>
       <template #report-stats>
-        <chart-stat title="Total Issues" :value="shortenLargeNumber(currentVal)">
+        <chart-stat :value="shortenLargeNumber(currentVal)" title="Issues Prevented">
           <div
             v-if="reportsDataLoading"
             class="w-24 h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
@@ -25,11 +25,12 @@
           />
         </div>
       </template>
+
       <div
-        v-show="historicalValuesLoading"
+        v-if="historicalValuesLoading"
         class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-      <div v-show="!historicalValuesLoading">
+      <div v-else>
         <z-chart
           v-if="shouldChartBeShown"
           :data-sets="issueDistributionData"
@@ -43,10 +44,9 @@
           :y-axis-max="maxBarClip"
           :y-axis-min="0"
           type="bar"
-          class="chart-tooltip-z-20"
         />
         <div v-show="!shouldChartBeShown" class="h-full px-5">
-          <lazy-empty-chart :count="5" chart-type="bar" :stacked="true" />
+          <lazy-empty-chart :count="5" :stacked="true" chart-type="bar" base-shade="#2eb78b" />
         </div>
       </div>
 
@@ -62,7 +62,6 @@
       v-if="distributionStatsLoading || distributionStats.length"
       :key="activeFilter"
       :stats="distributionStats"
-      :link-cards="false"
       :stat-type="activeFilter"
       :loading="distributionStatsLoading"
     />
@@ -81,13 +80,13 @@ import { ReportLevel } from '~/types/types'
 import { IssueDistributionT, ReportPageT } from '~/types/reportTypes'
 import { getColorShades } from '~/utils/ui'
 
-const BASE_COLOR = '#1035ad'
+const BASE_COLOR = '#2eb78b'
 
 /**
- * Page for displaying issue distribution by analyzer and category type
+ * Page for displaying issues prevented by analyzer and category type
  */
 @Component({
-  layout: 'owner',
+  layout: 'dashbaord',
   components: {
     ZChart
   },
@@ -95,13 +94,11 @@ const BASE_COLOR = '#1035ad'
     shortenLargeNumber
   }
 })
-export default class IssueDistributionPage extends mixins(
+export default class OwnerIssuesPrevented extends mixins(
   OwnerDetailMixin,
   DistributionReportMixin
 ) {
   readonly IssueDistributionT = IssueDistributionT
-
-  baseColor = BASE_COLOR
 
   get colorShades(): string[] {
     return getColorShades(BASE_COLOR, this.issueDistributionData.length)
@@ -122,10 +119,10 @@ export default class IssueDistributionPage extends mixins(
       this.$logErrorAndToast(e as Error, 'Unable to fetch team details, please contact support.')
     }
 
-    // All four queries below have a try-catch block inside them
+    // All three queries below have a try-catch block inside them
     await Promise.all([
-      this.fetchReportBase(ReportLevel.Owner, this.owner.id, ReportPageT.DISTRIBUTION),
-      this.fetchRecentStats(ReportLevel.Owner, this.owner.id, ReportPageT.DISTRIBUTION),
+      this.fetchReportBase(ReportLevel.Owner, this.owner.id, ReportPageT.ISSUES_PREVENTED),
+      this.fetchRecentStats(ReportLevel.Owner, this.owner.id, ReportPageT.ISSUES_PREVENTED),
       this.fetchHistoricValuesAndSetChartData(),
       this.fetchDistributionData()
     ])
@@ -140,7 +137,7 @@ export default class IssueDistributionPage extends mixins(
     // Flushing distribution stats before changing distribution type
     this.distributionStats = []
     this.distributionStats = await this.fetchDistributionStats(
-      ReportPageT.DISTRIBUTION,
+      ReportPageT.ISSUES_PREVENTED,
       ReportLevel.Owner,
       this.owner.id,
       this.activeFilter
@@ -150,10 +147,10 @@ export default class IssueDistributionPage extends mixins(
   /**
    * fetch historical values and set the chart dataset
    *
-   * @return {Promise<void>}
+   * @returns {Promise<void>}
    */
   async fetchHistoricValuesAndSetChartData(): Promise<void> {
-    await this.fetchHistoricalValues(ReportLevel.Owner, this.owner.id, ReportPageT.DISTRIBUTION)
+    await this.fetchHistoricalValues(ReportLevel.Owner, this.owner.id, ReportPageT.ISSUES_PREVENTED)
 
     this.setDistributionChartData()
   }

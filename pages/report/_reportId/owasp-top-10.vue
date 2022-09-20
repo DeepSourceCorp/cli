@@ -28,7 +28,7 @@
             </template>
           </chart-stat>
 
-          <chart-stat title="Active Issues" :value="currentVal">
+          <chart-stat title="Active Issues" :value="shortenLargeNumber(currentVal)">
             <div
               v-if="reportsDataLoading"
               class="w-24 h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
@@ -141,9 +141,9 @@ import { ZChart, ZTable, ZTableCell, ZTableRow } from '@deepsourcelabs/zeal'
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 
-import { ReportLevel, ReportType, Repository } from '~/types/types'
+import { ReportLevel, Repository } from '~/types/types'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
-import { smartApostrophe } from '~/utils/string'
+import { shortenLargeNumber } from '~/utils/string'
 
 /**
  * Public Report Child page
@@ -156,7 +156,7 @@ import { smartApostrophe } from '~/utils/string'
     ZTableRow
   },
   methods: {
-    smartApostrophe
+    shortenLargeNumber
   }
 })
 export default class PublicReportOwasp extends mixins(PublicReportMixin, ComplianceReportMixin) {
@@ -170,9 +170,6 @@ export default class PublicReportOwasp extends mixins(PublicReportMixin, Complia
   ownerLogin: string
 
   @Prop()
-  objectId: string
-
-  @Prop()
   createdAt: string
 
   @Prop()
@@ -181,7 +178,6 @@ export default class PublicReportOwasp extends mixins(PublicReportMixin, Complia
   @Prop()
   repositoryList: Array<Repository>
 
-  readonly ReportType = ReportType
   readonly ReportPageT = ReportPageT
 
   /**

@@ -1,29 +1,14 @@
 import dayjs from 'dayjs'
 import { Component, Vue } from 'nuxt-property-decorator'
-import {
-  Dataset,
-  DateRangeOptionT,
-  HistoricalValues,
-  IssueDistributionT
-} from '~/types/reportTypes'
+import { Dataset, DateRangeOptionT, HistoricalValues } from '~/types/reportTypes'
 import { getDateFromXAgo, DurationTypeT, getDateDiffInDays, formatDate } from '~/utils/date'
 
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 import { reportBase } from '@/apollo/queries/reports/reportBase.gql'
 import { recentStats } from '@/apollo/queries/reports/recentStats.gql'
 import { historicalValues } from '@/apollo/queries/reports/historicalValues.gql'
-import { complianceIssues } from '@/apollo/queries/reports/complianceIssues.gql'
-import { analyzerDistribution } from '@/apollo/queries/reports/analyzerDistribution.gql'
-import { categoryDistribution } from '@/apollo/queries/reports/categoryDistribution.gql'
 
-import {
-  ComplianceIssue,
-  RecentStat,
-  Report,
-  ReportLevel,
-  Repository,
-  IssueDistribution
-} from '~/types/types'
+import { ComplianceIssue, RecentStat, Report, ReportLevel, Repository } from '~/types/types'
 
 import { roundToSignificantNumber } from '~/utils/number'
 
@@ -214,74 +199,6 @@ export default class ReportMixin extends Vue {
         this.recentStatsLoading = false
       }
     }
-  }
-
-  /**
-   * Fetch and set compliance issues of a compliance report.
-   *
-   * @param {ReportLevel} level
-   * @param {string} objectId
-   * @param {string} reportKey
-   */
-  public async fetchComplianceIssues(level: ReportLevel, objectId: string, reportKey: string) {
-    if (objectId && level && reportKey) {
-      this.complianceIssuesLoading = true
-      try {
-        const response = (await this.$fetchGraphqlData(complianceIssues, {
-          level,
-          objectId,
-          reportKey
-        })) as GraphqlQueryResponse
-
-        this.complianceIssueList = response.data.complianceIssues as Array<ComplianceIssue>
-      } catch (e) {
-        this.$logErrorAndToast(
-          e as Error,
-          'Unable to fetch security issues list, please contact support.'
-        )
-      } finally {
-        this.complianceIssuesLoading = false
-      }
-    }
-  }
-
-  /**
-   * Fetch and return compliance issues of a compliance report.
-   *
-   * @param {ReportLevel} level
-   * @param {string} objectId
-   * @param {string} distributionType
-   */
-  public async fetchDistributionStats(
-    level: ReportLevel,
-    objectId: string,
-    distributionType: IssueDistributionT
-  ) {
-    this.distributionStatsLoading = true
-
-    const distributionQuery =
-      distributionType === IssueDistributionT.ANALYZER ? analyzerDistribution : categoryDistribution
-
-    try {
-      const response = (await this.$fetchGraphqlData(distributionQuery, {
-        level,
-        objectId
-      })) as GraphqlQueryResponse
-
-      return (
-        distributionType === IssueDistributionT.ANALYZER
-          ? response.data.issueDistributionByAnalyzer
-          : response.data.issueDistributionByCategory
-      ) as Array<IssueDistribution>
-    } catch (e) {
-      this.$logErrorAndToast(
-        e as Error,
-        'Unable to fetch issue distribution, please contact support.'
-      )
-    } finally {
-      this.distributionStatsLoading = false
-    }
-    return []
   }
 
   /**
