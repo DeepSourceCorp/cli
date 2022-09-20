@@ -7,7 +7,7 @@
         <nuxt-link
           v-if="previousPageLink"
           :to="previousPageLink"
-          class="flex items-center justify-center gap-x-2 w-7 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
+          class="flex md:hidden items-center justify-center gap-x-2 w-7 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
           ><z-icon icon="arrow-left"
         /></nuxt-link>
         <z-breadcrumb :key="$route.path" separator="/" class="text-sm text-vanilla-100">
