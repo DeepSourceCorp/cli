@@ -55,8 +55,11 @@
                 v-tooltip="{ content: stat.help, delay: { show: 0, hide: 100 } }"
               ></z-icon>
             </div>
-            <div v-if="stat.isCode && stat.value" class="p-3 text-sm rounded-md bg-ink-300">
-              <highlightjs langugage="json" :code="stat.value"></highlightjs>
+            <div
+              v-if="stat.isCode && stat.value"
+              class="p-3 text-sm rounded-md bg-ink-300 overflow-x-auto"
+            >
+              <highlightjs langugage="json" :code="stat.value" />
             </div>
             <span v-else>
               {{ stat.value }}
