@@ -186,7 +186,7 @@ export default class AnalyzerDetails extends mixins(
           ? this.run.branchName
           : this.run.pullRequestNumberDisplay) as string,
         route:
-          analyzer === this.checks[0].analyzer?.shortcode && !issueId
+          this.checks?.length > 0 && analyzer === this.checks[0].analyzer?.shortcode && !issueId
             ? '/'
             : this.$generateRoute(['run', runId])
       }
