@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col min-height-for-offset">
+  <section class="flex flex-col">
     <div
       v-if="status === CheckStatus.Fail"
       id="issue-filters"
@@ -134,13 +134,13 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
 .analyzer-page {
   --mobile-navbar-height: 40px;
   --repo-header-height: 184px;
-  --breadcrumb-height: 52px;
+  --breadcrumb-height: 72px;
 
   --top-bar-offset: calc(
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
   );
 
-  --run-check-title-height: 104px;
+  --run-check-title-height: 140px;
 }
 
 .check-filter-headers-offset {
@@ -151,13 +151,23 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   min-height: calc(100vh - var(--top-bar-offset) - var(--run-check-title-height));
 }
 
+@media (min-width: 640px) {
+  .analyzer-page {
+    --run-check-title-height: 104px;
+  }
+}
+
+@media (min-width: 768px) {
+  .analyzer-page {
+    --breadcrumb-height: 52px;
+  }
+}
+
 /* all for tablets */
 @media (min-width: 1023px) {
   .analyzer-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 167.5px;
-    /* Same as mobile */
-    /* --breadcrumb-height: 52px; */
   }
 }
 
@@ -165,8 +175,6 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
   .analyzer-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 96px;
-    /* Same as mobile and tablet */
-    /* --breadcrumb-height: 52px; */
   }
 }
 </style>

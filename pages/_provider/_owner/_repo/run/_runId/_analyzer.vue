@@ -29,7 +29,7 @@
         </z-breadcrumb>
       </div>
       <div class="flex items-center h-full">
-        <z-menu class="md:hidden">
+        <z-menu class="xl:hidden">
           <template #trigger="{ toggle }">
             <button
               class="flex items-center gap-x-2 px-2 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
@@ -50,9 +50,9 @@
         </z-menu>
       </div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-14-fr gap-y-0">
+    <div class="grid grid-cols-1 xl:grid-cols-14-fr gap-y-0">
       <div
-        class="sticky flex-col justify-between hidden h-full border-r border-ink-200 md:flex top-bar-offset run-body-height"
+        class="sticky flex-col justify-between hidden h-full border-r border-ink-200 xl:flex top-bar-offset run-body-height"
       >
         <analyzer-selector
           v-bind="run"
@@ -270,14 +270,14 @@ export default class AnalyzerDetails extends mixins(
 /* all for mobiles */
 .analyzer-page {
   --mobile-navbar-height: 40px;
-  --repo-header-height: 183.5px;
-  --breadcrumb-height: 52px;
+  --repo-header-height: 184px;
+  --breadcrumb-height: 72px;
 
   --top-bar-offset: calc(
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
   );
 
-  --run-check-title-height: 104px;
+  --run-check-title-height: 140px;
 }
 
 /* height of RepoHeader + Breadcrumbs */
@@ -301,13 +301,23 @@ export default class AnalyzerDetails extends mixins(
   min-height: calc(100vh - var(--top-bar-offset) - var(--run-check-title-height));
 }
 
+@media (min-width: 640px) {
+  .analyzer-page {
+    --run-check-title-height: 104px;
+  }
+}
+
+@media (min-width: 768px) {
+  .analyzer-page {
+    --breadcrumb-height: 52px;
+  }
+}
+
 /* all for tablets */
 @media (min-width: 1023px) {
   .analyzer-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 167.5px;
-    /* Same as mobile */
-    /* --breadcrumb-height: 52px; */
   }
 }
 
@@ -315,8 +325,6 @@ export default class AnalyzerDetails extends mixins(
   .analyzer-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 96px;
-    /* Same as mobile and tablet */
-    /* --breadcrumb-height: 52px; */
   }
 }
 </style>

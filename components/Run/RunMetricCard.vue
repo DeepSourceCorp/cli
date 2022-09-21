@@ -1,103 +1,56 @@
 <template>
-  <div>
-    <div v-if="$slots.header" class="bg-ink-200 px-4 py-2">
-      <slot name="header"></slot>
-    </div>
-    <div class="p-4 space-y-2.5 grid content-between">
-      <div>
-        <div class="float-right">
-          <z-button
-            v-if="
-              canSuppressMetric &&
-              metricsCaptured.isPassing === false &&
-              !metricsCaptured.isSuppressed
-            "
-            button-type="ghost"
-            icon="minus-circle"
-            icon-color="vanilla-400"
+  <z-accordion-item :is-open="true" :span-custom-height="true">
+    <template #title="{ open, toggleAccordion }">
+      <div
+        v-if="$slots.header"
+        class="flex w-full item-center justify-between px-4 p-3 border-b border-ink-100 cursor-pointer transition-all duration-300"
+        :class="{ 'border-opacity-0': !open }"
+        @click="isInModal ? () => undefined : toggleAccordion()"
+      >
+        <slot name="header"></slot>
+        <div
+          class="bg-ink-100 text-vanilla-100 text-xs rounded-full px-2 items-center gap-x-0.5"
+          :class="[isInModal ? 'hidden' : 'flex']"
+        >
+          {{ metricsCaptured.length }}
+          <z-icon
+            icon="chevron-down"
             size="x-small"
-            @click="$emit('confirmMetricSuppression', metricsCaptured)"
+            class="transform transition-transform ease-in-out duration-300"
+            :class="{ 'rotate-180': open }"
           />
         </div>
-        <p class="font-medium leading-normal text-base text-vanilla-100">
-          {{ metricsCaptured.name }}
-        </p>
       </div>
-      <div class="flex items-center justify-between w-full">
-        <div class="flex items-center gap-x-2">
-          <span class="text-lg font-bold leading-snug text-vanilla-100">
-            {{ metricsCaptured.valueDisplay }}</span
-          >
-          <ticker
-            v-if="metricsCaptured.valueTrendDisplay"
-            v-tooltip="tooltipText"
-            :trend-value="trendDisplay"
-            :trend-positive="trendPositive"
-            :is-percent="trendIsPercent"
-            :trend-direction="trendDirection"
-            custom-bg-class="bg-ink-100"
-            :class="[trendPositive ? 'text-juniper' : 'text-cherry']"
-          />
-        </div>
-        <template v-if="metricThresholdRelation">
-          <z-tag
-            v-if="metricsCaptured.isSuppressed"
-            icon-left="minus-circle"
-            icon-color="vanilla-400"
-            size="x-small"
-            spacing="px-2 py-0"
-            class="border border-ink-200"
-          >
-            <span
-              class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400"
-              >{{ metricThresholdRelation }}</span
-            >
-          </z-tag>
-          <z-tag
-            v-else
-            :icon-left="metricThresholdRelationIcon"
-            :icon-color="metricsCaptured.isPassing ? 'juniper' : 'cherry'"
-            size="x-small"
-            spacing="px-2 py-0"
-            class="border border-ink-200"
-          >
-            <span
-              class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5"
-              :class="metricsCaptured.isPassing ? 'text-juniper' : 'text-cherry'"
-              >{{ metricThresholdRelation }}</span
-            >
-          </z-tag>
-        </template>
-      </div>
+    </template>
+    <div class="grid divide-y divide-ink-200">
+      <run-metric-stat
+        v-for="metric in metricsCaptured"
+        :key="metric.namespace.key"
+        :metric="metric"
+        :show-suppress-button="showSuppressButton"
+        :tooltip-text="tooltipText"
+        :can-suppress-metric="canSuppressMetric"
+        @confirmMetricSuppression="$emit('confirmMetricSuppression', metric)"
+      />
     </div>
-  </div>
+  </z-accordion-item>
 </template>
 
 <script lang="ts">
 import { Component, namespace, Prop, Vue } from 'nuxt-property-decorator'
-
-import { ZIcon, ZTag, ZButton } from '@deepsourcelabs/zeal'
+import RunMetricStat from './RunMetricStat.vue'
+import { ZIcon, ZTag, ZButton, ZAccordionItem } from '@deepsourcelabs/zeal'
 import { Repository, RepositoryMetricValue } from '~/types/types'
 
 const repoStore = namespace('repository/detail')
-
-enum VALUE_STATE {
-  ABOVE = 'Above threshold',
-  BELOW = 'Below threshold',
-  MEETS = 'Meets threshold'
-}
-
-const ICON_VALUE_STATE = {
-  [VALUE_STATE.ABOVE]: 'metric-high',
-  [VALUE_STATE.BELOW]: 'metric-low',
-  [VALUE_STATE.MEETS]: 'metric-medium'
-}
 
 @Component({
   components: {
     ZIcon,
     ZTag,
-    ZButton
+    ZButton,
+    ZAccordionItem,
+    RunMetricStat
   }
 })
 export default class RunMetricCard extends Vue {
@@ -105,43 +58,10 @@ export default class RunMetricCard extends Vue {
   repository: Repository
 
   @Prop({ required: true })
-  metricsCaptured: RepositoryMetricValue
+  metricsCaptured: RepositoryMetricValue[]
 
-  get trendDisplay(): string {
-    return this.metricsCaptured.valueTrendDisplay?.split(' ')?.[1] ?? ''
-  }
-
-  get trendDirection(): string {
-    return this.metricsCaptured.valueTrendDisplay?.split(' ')?.[0]?.toLowerCase() || ''
-  }
-
-  get trendPositive(): boolean {
-    return this.trendDirection === 'up'
-  }
-
-  get trendIsPercent(): boolean {
-    return this.metricsCaptured.valueTrendDisplay?.includes('%') || false
-  }
-
-  get metricThresholdRelation(): VALUE_STATE | '' {
-    if (
-      this.metricsCaptured.value !== null &&
-      this.metricsCaptured.value !== undefined &&
-      this.metricsCaptured.threshold !== null &&
-      this.metricsCaptured.threshold !== undefined
-    ) {
-      return this.metricsCaptured.value === this.metricsCaptured.threshold
-        ? VALUE_STATE.MEETS
-        : this.metricsCaptured.value > this.metricsCaptured.threshold
-        ? VALUE_STATE.ABOVE
-        : VALUE_STATE.BELOW
-    }
-    return ''
-  }
-
-  get metricThresholdRelationIcon(): string {
-    return this.metricThresholdRelation ? ICON_VALUE_STATE[this.metricThresholdRelation] : ''
-  }
+  @Prop({ default: false })
+  isInModal: boolean
 
   get canSuppressMetric(): boolean {
     return Boolean(this.repository?.userPermissionMeta?.can_ignore_failing_metrics)

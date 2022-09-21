@@ -1,3 +1,5 @@
+import { RepositoryMetricValue } from './types'
+
 export enum MetricType {
   'aggregate' = 'aggregate',
   'generic' = 'generic'
@@ -6,6 +8,11 @@ export enum MetricType {
 export enum StatType {
   'threshold' = 'threshold',
   'metric' = 'metric'
+}
+
+export interface GroupedMetrics {
+  name: string
+  metrics: RepositoryMetricValue[]
 }
 
 export const NLCV_SHORTCODE = 'NLCV'

@@ -524,7 +524,7 @@ export default class RunIssueDetails extends mixins(
 .issue-page {
   --mobile-navbar-height: 40px;
   --repo-header-height: 184px;
-  --breadcrumb-height: 52px;
+  --breadcrumb-height: 72px;
 
   --top-bar-offset: calc(
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
@@ -549,13 +549,17 @@ export default class RunIssueDetails extends mixins(
   );
 }
 
+@media (min-width: 768px) {
+  .analyzer-page {
+    --breadcrumb-height: 52px;
+  }
+}
+
 /* all for tablets */
 @media (min-width: 1023px) {
   .issue-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 167.5px;
-    /* Same as mobile */
-    /* --breadcrumb-height: 52px; */
   }
 }
 
@@ -563,8 +567,6 @@ export default class RunIssueDetails extends mixins(
   .issue-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 96px;
-    /* Same as mobile and tablet */
-    /* --breadcrumb-height: 52px; */
   }
 }
 </style>

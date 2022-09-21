@@ -1,8 +1,8 @@
 <template>
-  <main class="check-body-offset md:sticky">
+  <main class="check-body-offset md:sticky pt-3 md:pt-0">
     <div v-if="!isLoading">
       <z-tabs>
-        <z-tab-list class="flex-row w-full p-3 -space-x-2 text-center lg:hidden">
+        <z-tab-list class="flex-row w-full ml-2 -space-x-2 text-center md:hidden">
           <z-tab
             :is-active="activeTabIndex === 0"
             :action="() => updateActiveTabIndex(0)"
@@ -33,9 +33,9 @@
         <!-- issues -->
         <div
           v-if="activeTabIndex === 0"
-          class="grid grid-cols-1"
+          class="grid grid-cols-1 run-body-height"
           :class="{
-            'lg:grid-cols-fr-22 divide-x divide-ink-200': ['FAIL', 'PASS'].includes(check.status)
+            'md:grid-cols-fr-22 divide-x divide-ink-200': ['FAIL', 'PASS'].includes(check.status)
           }"
         >
           <analyzer-run
@@ -101,80 +101,28 @@
             </template>
           </analyzer-run>
           <section v-if="['FAIL', 'PASS'].includes(check.status)">
-            <div class="sticky flex-col hidden p-3 space-y-2 lg:flex metrics-header-offset">
+            <div class="sticky flex-col hidden p-3 space-y-2 md:flex metrics-header-offset">
               <div
                 v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
-                class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
+                class="grid grid-cols-1 gap-3 overflow-y-auto hide-scroll"
               >
-                <div class="flex items-center gap-x-2">
+                <div class="flex items-center gap-x-1">
+                  <z-icon v-tooltip="metricIconTooltip" :color="metricIconColor" icon="bar-chart" />
                   <p class="text-xs font-semibold tracking-wide uppercase text-slate">Metrics</p>
-                  <z-tag
-                    v-if="areMetricsAlerting"
-                    icon-left="alert-circle"
-                    icon-color="cherry"
-                    size="x-small"
-                    spacing="px-2 py-0"
-                    class="border border-ink-200"
-                  >
-                    <span
-                      class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-cherry"
-                      >Alerting</span
-                    >
-                  </z-tag>
                 </div>
+
                 <run-metric-card
-                  v-for="stat in metricsSortedAlpabetically"
-                  :key="stat.id"
-                  :metrics-captured="stat"
+                  v-for="metricGroup in metricsGroupedByName"
+                  :key="metricGroup.name"
+                  :metrics-captured="metricGroup.metrics"
                   class="border rounded-md border-ink-200 bg-ink-300"
                   @confirmMetricSuppression="confirmMetricSuppression"
                 >
                   <template #header>
                     <div
-                      v-if="isMetricAggregate(stat)"
-                      class="flex items-center justify-between w-full"
+                      class="w-full flex items-center gap-x-2 justify-between text-sm font-semibold text-vanilla-400"
                     >
-                      <div class="flex items-center gap-x-1">
-                        <z-icon icon="aggregate" class="flex-shrink-0" />
-                        <span class="text-xs font-semibold tracking-wide uppercase text-vanilla-400"
-                          >Aggregate</span
-                        >
-                      </div>
-                      <div class="flex items-center gap-x-2">
-                        <lazy-analyzer-logo
-                          v-for="check in getAggregateContributingChecks(stat.shortcode).slice(
-                            0,
-                            3
-                          )"
-                          :key="check.analyzer_shortcode"
-                          :name="check.key"
-                          :shortcode="check.analyzer_shortcode"
-                          :analyzer-logo="check.logo"
-                        />
-                        <z-tag
-                          v-if="getAggregateContributingChecks(stat.shortcode).length > 3"
-                          bg-color="ink-100"
-                          text-size="xs"
-                          spacing="px-2 py-1"
-                          class="leading-none min-w-1"
-                        >
-                          <span>
-                            +{{ getAggregateContributingChecks(stat.shortcode).length - 3 }}
-                          </span>
-                        </z-tag>
-                      </div>
-                    </div>
-                    <div v-else-if="showMetricCardHeader" class="flex items-center gap-x-2">
-                      <lazy-analyzer-logo
-                        :name="stat.namespace.key"
-                        :shortcode="stat.namespace.analyzer_shortcode"
-                        :analyzer-logo="stat.namespace.analyzer_logo"
-                        size="base"
-                      />
-                      <span
-                        class="text-xs font-semibold tracking-wide uppercase text-vanilla-400"
-                        >{{ stat.namespace.key }}</span
-                      >
+                      {{ metricGroup.name }}
                     </div>
                   </template>
                 </run-metric-card>
@@ -196,7 +144,7 @@
           </section>
         </div>
         <!-- metrics -->
-        <div v-else class="flex flex-col p-3 space-y-2 lg:hidden">
+        <div v-else class="flex flex-col p-3 space-y-2 xl:hidden">
           <lazy-run-loading v-if="check.status === CheckStatus.Pend" />
           <lazy-run-cancelled v-else-if="check.status === CheckStatus.Cncl" />
           <lazy-run-timeout v-else-if="check.status === CheckStatus.Timo" />
@@ -205,57 +153,20 @@
           <template v-else>
             <div
               v-if="Array.isArray(check.metricsCaptured) && check.metricsCaptured.length"
-              class="grid grid-cols-1 gap-4 overflow-y-auto sm:grid-cols-2 md:grid-cols-1 hide-scroll"
+              class="grid grid-cols-1 gap-4 overflow-y-auto hide-scroll"
             >
               <run-metric-card
-                v-for="stat in metricsSortedAlpabetically"
-                :key="stat.id"
-                :metrics-captured="stat"
+                v-for="metricGroup in metricsGroupedByName"
+                :key="metricGroup.name"
+                :metrics-captured="metricGroup.metrics"
                 class="border rounded-md border-ink-200 bg-ink-300"
                 @confirmMetricSuppression="confirmMetricSuppression"
               >
                 <template #header>
                   <div
-                    v-if="isMetricAggregate(stat)"
-                    class="flex items-center justify-between w-full"
+                    class="w-full flex items-center gap-x-2 justify-between text-sm font-semibold text-vanilla-400"
                   >
-                    <div class="flex items-center gap-x-1">
-                      <z-icon icon="aggregate" class="flex-shrink-0" />
-                      <span class="text-xs font-semibold tracking-wide uppercase text-vanilla-400"
-                        >Aggregate</span
-                      >
-                    </div>
-                    <div class="flex items-center gap-x-2">
-                      <lazy-analyzer-logo
-                        v-for="check in getAggregateContributingChecks(stat.shortcode).slice(0, 3)"
-                        :key="check.analyzer_shortcode"
-                        :name="check.key"
-                        :shortcode="check.analyzer_shortcode"
-                        :analyzer-logo="check.logo"
-                      />
-                      <z-tag
-                        v-if="getAggregateContributingChecks(stat.shortcode).length > 3"
-                        bg-color="ink-100"
-                        text-size="xs"
-                        spacing="px-2 py-1"
-                        class="leading-none min-w-1"
-                      >
-                        <span>
-                          +{{ getAggregateContributingChecks(stat.shortcode).length - 3 }}
-                        </span>
-                      </z-tag>
-                    </div>
-                  </div>
-                  <div v-else-if="showMetricCardHeader" class="flex items-center gap-x-2">
-                    <lazy-analyzer-logo
-                      :name="stat.namespace.key"
-                      :shortcode="stat.namespace.analyzer_shortcode"
-                      :analyzer-logo="stat.namespace.analyzer_logo"
-                      size="base"
-                    />
-                    <span class="text-xs font-semibold tracking-wide uppercase text-vanilla-400">{{
-                      stat.namespace.key
-                    }}</span>
+                    {{ metricGroup.name }}
                   </div>
                 </template>
               </run-metric-card>
@@ -312,6 +223,21 @@
         @onClose="showConfirmDialog = false"
       >
         <template #default>
+          <run-metric-card
+            v-if="metricToSuppress"
+            :metrics-captured="[metricToSuppress]"
+            :is-in-modal="true"
+            class="border rounded-md border-ink-100 bg-ink-300 md:hidden shadow-xl mb-6"
+            @confirmMetricSuppression="confirmMetricSuppression"
+          >
+            <template #header>
+              <div
+                class="w-full flex items-center gap-x-2 justify-between text-sm font-semibold text-vanilla-400"
+              >
+                {{ metricToSuppress.name }}
+              </div>
+            </template>
+          </run-metric-card>
           <div class="mb-2 text-base font-medium leading-relaxed text-vanilla-100">
             Are you sure you want to suppress the metric?
           </div>
@@ -379,7 +305,7 @@ import PaginationMixin from '~/mixins/paginationMixin'
 
 import { RunDetailActions } from '~/store/run/detail'
 import { resolveNodes } from '~/utils/array'
-import { MetricType } from '~/types/metric'
+import { MetricType, GroupedMetrics } from '~/types/metric'
 
 const runStore = namespace('run/detail')
 
@@ -565,7 +491,7 @@ export default class AnalyzerDetails extends mixins(
    * @returns {void}
    */
   handleResize(): void {
-    if (process.client && window.innerWidth > 1024) this.updateActiveTabIndex(0)
+    if (process.client && window.innerWidth > 768) this.updateActiveTabIndex(0)
   }
 
   /**
@@ -671,6 +597,33 @@ export default class AnalyzerDetails extends mixins(
   }
 
   /**
+   * Returns an array of GroupedMetrics based on each metric's name
+   * Each element in the array corresponds to a unique metric name (i.e Line Coverage, Branch Coverage etc), and contains a nested list of `RepositoryMetricValues` corresponding to individual metric stats from specific analyzers or as an aggregate
+   *
+   * @returns {Array<GroupedMetrics>}
+   */
+  get metricsGroupedByName() {
+    let groupedMetrics: GroupedMetrics[] = []
+
+    this.check.metricsCaptured?.forEach((metric) => {
+      const index = groupedMetrics.findIndex((groupedMetric) => groupedMetric.name === metric?.name)
+      // if findIndex returned -1 here, we are encountering this metric name for the first time, and so we add it to the list of groupedMetrics along with the individual metric
+      if (index === -1 && metric?.name) {
+        groupedMetrics.push({
+          name: metric.name,
+          metrics: [metric]
+        })
+      }
+      // this metric name already exists in groupedMetrics, so we add the metric to the corresponding object's metric list in groupedMetrics
+      else {
+        metric && groupedMetrics[index].metrics.push(metric)
+      }
+    })
+
+    return groupedMetrics
+  }
+
+  /**
    * Creates a list of analyzers that contributed to the given metric's aggregate calculation, with each analyzer's name, shortcode and logo
    *
    * @param {string} metricShortCode The metric shortcode ('LCV', 'NLCV' or 'BCV')
@@ -694,6 +647,22 @@ export default class AnalyzerDetails extends mixins(
         (metricValue) => metricValue?.isPassing === false && metricValue?.isSuppressed !== true
       ) || false
     )
+  }
+
+  get areMetricsPassing(): boolean {
+    return !this.check.metricsCaptured?.some((metricValue) => metricValue?.isPassing === false)
+  }
+
+  get metricIconColor(): string {
+    return this.areMetricsAlerting ? 'cherry' : this.areMetricsPassing ? 'juniper' : 'vanilla-400'
+  }
+
+  get metricIconTooltip(): string {
+    return this.areMetricsAlerting
+      ? 'Metrics are alerting'
+      : this.areMetricsPassing
+      ? 'Metrics are passing'
+      : ''
   }
 
   /**
@@ -779,7 +748,7 @@ export default class AnalyzerDetails extends mixins(
 .analyzer-page {
   --mobile-navbar-height: 40px;
   --repo-header-height: 184px;
-  --breadcrumb-height: 52px;
+  --breadcrumb-height: 72px;
 
   --top-bar-offset: calc(
     var(--repo-header-height) + var(--breadcrumb-height) + var(--mobile-navbar-height)
@@ -792,13 +761,27 @@ export default class AnalyzerDetails extends mixins(
   top: calc(var(--top-bar-offset) + var(--run-check-title-height));
 }
 
+.run-body-height {
+  height: calc(100vh - (var(--top-bar-offset) + var(--run-check-title-height)));
+}
+
+@media (min-width: 640px) {
+  .analyzer-page {
+    --run-check-title-height: 104px;
+  }
+}
+
+@media (min-width: 768px) {
+  .analyzer-page {
+    --breadcrumb-height: 52px;
+  }
+}
+
 /* all for tablets */
 @media (min-width: 1023px) {
   .analyzer-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 167.5px;
-    /* Same as mobile */
-    /* --breadcrumb-height: 52px; */
   }
 }
 
@@ -806,8 +789,6 @@ export default class AnalyzerDetails extends mixins(
   .analyzer-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 96px;
-    /* Same as mobile and tablet */
-    /* --breadcrumb-height: 52px; */
   }
 }
 </style>

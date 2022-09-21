@@ -16,7 +16,7 @@ import { mockRepositoryDetail } from '~/test/store/repository/__mocks__/detail.m
 const injectDirective = (vue: VueConstructor) => vue.directive('tooltip', VTooltip)
 
 test('renders RunMetricCard with all prop options', () => {
-  const repositoryPropCombos = generateBooleanProps('can_ignore_failing_metrics', false).map(
+  const repositoryPropCombos = generateBooleanProps('can_ignore_failing_metrics').map(
     (propState) => ({
       repository: {
         ...mockRepositoryDetail(),
@@ -60,13 +60,15 @@ test('renders RunMetricCard with all prop options', () => {
     localVue.use(Vuex)
 
     const props = {
-      metricsCaptured: {
-        ...baseMetricsCaptured,
-        isPassing: propCombination.isPassing,
-        isSuppressed: propCombination.isSuppressed,
-        threshold: propCombination.threshold,
-        valueTrendDisplay: propCombination.valueTrendDisplay
-      }
+      metricsCaptured: [
+        {
+          ...baseMetricsCaptured,
+          isPassing: propCombination.isPassing,
+          isSuppressed: propCombination.isSuppressed,
+          threshold: propCombination.threshold,
+          valueTrendDisplay: propCombination.valueTrendDisplay
+        }
+      ]
     }
 
     const { html } = render(
