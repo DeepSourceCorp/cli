@@ -1,5 +1,5 @@
-import { PrConnection, PrStatus, RunConnection, RunStatus } from '~/types/types'
-import { RunListModuleState } from '~/store/run/list'
+import { PrConnection, PrStatus, Repository, RunConnection, RunStatus } from '~/types/types'
+import { RepoStatsT, RunListModuleState } from '~/store/run/list'
 
 /*
   +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -185,5 +185,6 @@ export const mockRunListState = (): RunListModuleState => ({
   branchRunList: {
     [mockBranchName]: mockRunList()
   },
-  prList: mockPrList()
+  prList: mockPrList(),
+  repoPrStats: { id: '1234', openPrCount: 10, closedPrCount: 20 } as RepoStatsT
 })

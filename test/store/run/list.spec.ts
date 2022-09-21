@@ -5,9 +5,17 @@ import {
   RunListMutations,
   RunListActionContext,
   RunListModuleState,
-  RunListActions
+  RunListActions,
+  RepoStatsT
 } from '~/store/run/list'
-import { Maybe, PrConnection, PrStatus, Repository, RunConnection, RunEdge } from '~/types/types'
+import {
+  Maybe,
+  PrConnection,
+  PrStateChoices,
+  Repository,
+  RunConnection,
+  RunEdge
+} from '~/types/types'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { mockRunListState, mockBranchName } from './__mocks__/runList.mock'
 
@@ -507,7 +515,14 @@ describe('[Store] Run/List', () => {
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return Promise.resolve({
-                data: { repository: <Repository>{ prs: mockRunListState().prList } }
+                data: {
+                  repository: <Repository>{
+                    id: '1243',
+                    openPrCount: 20,
+                    closedPrCount: 30,
+                    prs: mockRunListState().prList
+                  }
+                }
               })
             }
           }
@@ -522,7 +537,7 @@ describe('[Store] Run/List', () => {
             currentPageNumber: 1,
             limit: 5,
             refetch: false,
-            prState: PrStatus.Open
+            prStatus: PrStateChoices.Open
           })
         })
 
@@ -531,13 +546,13 @@ describe('[Store] Run/List', () => {
         })
 
         test('successfully commits mutations', () => {
-          expect(commit).toHaveBeenCalledTimes(3)
+          expect(commit).toHaveBeenCalledTimes(4)
         })
 
         test(`successfully commits mutation ${RunListMutations.SET_LOADING}`, () => {
           const {
             mock: {
-              calls: [firstCall, , thirdCall]
+              calls: [firstCall, , , fourthCall]
             }
           } = commit
 
@@ -548,10 +563,10 @@ describe('[Store] Run/List', () => {
           expect(firstCall[1]).toEqual(true)
 
           // Assert if `RunListMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(RunListMutations.SET_LOADING)
+          expect(fourthCall[0]).toEqual(RunListMutations.SET_LOADING)
 
           // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
+          expect(fourthCall[1]).toEqual(false)
         })
 
         test(`successfully commits mutation ${RunListMutations.SET_PR_LIST}`, async () => {
@@ -567,6 +582,21 @@ describe('[Store] Run/List', () => {
 
           // Assert if the response from api is same as the one passed to the mutation.
           expect(secondCall[1]).toEqual(apiResponse.data.repository.prs)
+        })
+
+        test(`successfully commits mutation ${RunListMutations.SET_REPO_PR_STATS}`, async () => {
+          const {
+            mock: {
+              calls: [, , thirdCall]
+            }
+          } = commit
+          const apiResponse = await localThis.$fetchGraphqlData()
+
+          // Assert if `RunListMutations.SET_RUN_LIST` is being commited or not.
+          expect(thirdCall[0]).toEqual(RunListMutations.SET_REPO_PR_STATS)
+
+          // Assert if the response from api is same as the one passed to the mutation.
+          expect(thirdCall[1]).toEqual(apiResponse.data.repository)
         })
       })
       describe(`Failure`, () => {
@@ -595,7 +625,7 @@ describe('[Store] Run/List', () => {
             currentPageNumber: 1,
             limit: 5,
             refetch: false,
-            prState: PrStatus.Closed
+            prStatus: PrStateChoices.Closed
           })
         })
 
@@ -773,6 +803,22 @@ describe('[Store] Run/List', () => {
       }
       mutations[RunListMutations.SET_PR_LIST](runListState, newPrList)
       expect(runListState.prList.totalCount).toEqual(newPrList.totalCount)
+    })
+  })
+
+  describe(`Mutation "${RunListMutations.SET_REPO_PR_STATS}"`, () => {
+    beforeEach(() => {
+      runListState.repoPrStats = {} as RepoStatsT
+    })
+    test('successfully adds new repo stats to the state', () => {
+      const newRepoStats: RepoStatsT = {
+        id: '1234',
+        openPrCount: 10,
+        closedPrCount: 20
+      } as RepoStatsT
+
+      mutations[RunListMutations.SET_REPO_PR_STATS](runListState, newRepoStats)
+      expect(runListState.repoPrStats).toEqual(newRepoStats)
     })
   })
 })

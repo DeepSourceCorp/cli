@@ -1,5 +1,5 @@
-import { Pr, PrStatus, Run, RunStatus } from '~/types/types'
-import { generalizePR, generalizeRun } from '~/utils/runs'
+import { Pr, PrStatus, Run, RunStatus, RunStatusChoice } from '~/types/types'
+import { generalizePR, generalizeRun, generalizeRunStatuses } from '~/utils/runs'
 
 describe('[[run utils]]', () => {
   const pr: Pr = {
@@ -51,5 +51,15 @@ describe('[[run utils]]', () => {
   test('generalizePR', () => {
     const generalizedRun = generalizePR(pr)
     expect(generalizedRun).toMatchSnapshot('generalizePR')
+  })
+
+  test('generalizedRunStatusesMap', () => {
+    for (const status of Object.values(RunStatus)) {
+      expect(generalizeRunStatuses(status).status).toBe(status)
+    }
+
+    for (const statusChoice of Object.values(RunStatusChoice)) {
+      expect(generalizeRunStatuses(statusChoice).statusChoice).toBe(statusChoice)
+    }
   })
 })

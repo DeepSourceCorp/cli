@@ -10497,7 +10497,8 @@ export type Unnamed_138_QueryVariables = Exact<{
   name: Scalars['String'];
   owner: Scalars['String'];
   provider: VcsProviderChoices;
-  prState?: Maybe<PrStateChoices>;
+  prStatus: PrStateChoices;
+  runStatus?: Maybe<RunStatusChoice>;
   q?: Maybe<Scalars['String']>;
   limit: Scalars['Int'];
   after?: Maybe<Scalars['String']>;
@@ -10508,7 +10509,7 @@ export type Unnamed_138_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
-    & Pick<Repository, 'id'>
+    & Pick<Repository, 'id' | 'openPrCount' | 'closedPrCount'>
     & { prs?: Maybe<(
       { __typename?: 'PRConnection' }
       & Pick<PrConnection, 'totalCount'>

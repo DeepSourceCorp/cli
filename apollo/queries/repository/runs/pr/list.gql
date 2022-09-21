@@ -2,14 +2,17 @@ query (
   $name: String!
   $owner: String!
   $provider: VCSProviderChoices!
-  $prState: PRStateChoices
+  $prStatus: PRStateChoices!
+  $runStatus: RunStatusChoice
   $q: String
   $limit: Int!
   $after: String
 ) {
   repository(name: $name, owner: $owner, provider: $provider) {
     id
-    prs(state: $prState, q: $q, first: $limit, after: $after) {
+    openPrCount
+    closedPrCount
+    prs(state: $prStatus, q: $q, first: $limit, after: $after, runStatus: $runStatus) {
       totalCount
       edges {
         node {

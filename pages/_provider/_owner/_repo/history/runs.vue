@@ -1,6 +1,15 @@
 <template>
   <div class="pb-28 lg:pb-12">
     <sub-nav v-if="transformsAllowed" active="runs" class="hidden lg:block" />
+    <run-filters
+      :open-count="openPrCount"
+      :closed-count="closedPrCount"
+      :pr-status="prStatusFilter"
+      :run-status="runStatusFilter"
+      :search-text="searchText"
+      class="px-4 pt-5"
+      @runs-filter-update="updatePrFilters"
+    />
     <div class="grid grid-cols-1 p-4 gap-y-4">
       <run-branches
         v-if="defaultBranchRun && !mainBranchFetching"
@@ -25,8 +34,10 @@
         </template>
         <template v-else>
           <div class="flex items-center justify-center text-center min-h-102">
-            <div class="max-w-lg">
-              <span class="text-2xl font-semibold text-vanilla-300">No Runs to Show</span>
+            <div class="max-w-xl">
+              <p class="text-2xl font-semibold text-vanilla-300">
+                No runs on {{ prStatusFilterCopy }} to show
+              </p>
               <p class="text-vanilla-400">
                 If you have recently added this repository it may take a while for the first run to
                 complete and show results
@@ -72,12 +83,22 @@ import { ZPagination } from '@deepsourcelabs/zeal'
 // Components
 import { SubNav, RunBranches } from '@/components/History'
 // Store & Types
-import { RunListActions } from '@/store/run/list'
-import { Maybe, Pr, PrConnection, Run, RunConnection, RunEdge } from '~/types/types'
+import { RepoStatsT, RunListActions } from '@/store/run/list'
+import {
+  Maybe,
+  Pr,
+  PrConnection,
+  PrStateChoices,
+  Repository,
+  Run,
+  RunConnection,
+  RunEdge,
+  RunStatusChoice
+} from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import { AppFeatures } from '~/types/permTypes'
-import { generalizeRun, generalizePR } from '~/utils/runs'
+import { generalizeRun, generalizePR, generalizeRunStatuses } from '~/utils/runs'
 import { resolveNodes } from '~/utils/array'
 
 const runListStore = namespace('run/list')
@@ -96,7 +117,10 @@ const VISIBLE_PAGES = 5
 })
 export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   @runListStore.State
-  prList: PrConnection // Stores all the runs groubed by branch
+  prList: PrConnection
+
+  @runListStore.State
+  repoPrStats: RepoStatsT
 
   @runListStore.State('loading')
   queryLoading: boolean
@@ -119,6 +143,9 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   public currentPage = 1
   public pageSize = 30
   public expandedBranch = ''
+  public prStatusFilter: PrStateChoices = PrStateChoices.Open
+  public runStatusFilter: RunStatusChoice | null = null
+  public searchText: string | null = null
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
@@ -169,14 +196,20 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
       owner,
       provider: this.$providerMetaMap[provider].value,
       currentPageNumber: this.currentPage,
+      prStatus: this.prStatusFilter,
+      runStatus: this.runStatusFilter
+        ? generalizeRunStatuses(this.runStatusFilter).statusChoice
+        : null,
+      q: this.searchText,
       limit: this.pageSize,
       refetch
     })
   }
 
-  refetchRuns(): void {
-    this.fetchRuns(true)
-    this.fetchMainBranch(true)
+  async refetchRuns(): Promise<void> {
+    this.fetching = true
+    await Promise.all([this.fetchRuns(true), this.fetchMainBranch(true)])
+    this.fetching = false
   }
 
   mounted(): void {
@@ -196,6 +229,24 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
         refetch: refetch
       })
     }
+  }
+
+  /**
+   * Update filters for the list of PRs and refetch them
+   *
+   * @param {{ prState: PrStateChoices; runStatus: RunStatusChoice | null; searchText: string}} prFilters - An object containing filters emitted by `RunFilters` component
+   * @returns {void}
+   */
+  updatePrFilters(prFilters: {
+    prState: PrStateChoices
+    runStatus: RunStatusChoice | null
+    searchText: string
+  }): void {
+    const { prState, runStatus, searchText } = prFilters
+    this.prStatusFilter = prState ?? this.prStatusFilter
+    this.searchText = searchText === undefined ? this.searchText : searchText
+    this.runStatusFilter = runStatus === undefined ? this.runStatusFilter : runStatus
+    this.refetchRuns()
   }
 
   get defaultBranchRun(): Maybe<Run> {
@@ -224,6 +275,26 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
 
   get prListNodes(): Pr[] {
     return resolveNodes(this.prList) as Pr[]
+  }
+
+  get openPrCount() {
+    return this.repoPrStats?.openPrCount ?? '0'
+  }
+
+  get closedPrCount() {
+    return this.repoPrStats?.closedPrCount ?? '0'
+  }
+
+  get prStatusFilterCopy() {
+    const copyText = {
+      [this.$providerMetaMap.gh.shortcode]: 'pull requests',
+      [this.$providerMetaMap.ghe.shortcode]: 'pull requests',
+      [this.$providerMetaMap.gl.shortcode]: 'merge requests',
+      [this.$providerMetaMap.bb.shortcode]: 'pull requests',
+      [this.$providerMetaMap.gsr.shortcode]: 'pull requests'
+    }
+
+    return `${this.prStatusFilter.toLowerCase()} ${copyText[this.$route.params.provider]}`
   }
 
   head(): Record<string, string> {

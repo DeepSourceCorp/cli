@@ -1,4 +1,4 @@
-import { Run, Pr, RunStatus } from '~/types/types'
+import { Run, Pr, RunStatus, RunStatusChoice } from '~/types/types'
 
 export interface GeneralizedRunT {
   title: Run['branchName'] | Pr['title']
@@ -75,4 +75,49 @@ export const generalizePR = (PR: Pr): GeneralizedRunT => {
     issuesResolvedCount: resolvedCount,
     status: latestAnalysisRun?.status ?? RunStatus.Pass
   }
+}
+
+/**
+ * Generalize values of type {@link RunStatus} or {@link RunStatusChoice} and return its mapped values
+ *
+ * @param status A value of type {@link RunStatus} or {@link RunStatusChoice}
+ * @returns an object containing `status` of type {@link RunStatus} and `statusChoice` of type {@link RunStatusChoice}
+ */
+export const generalizeRunStatuses = (status: RunStatus | RunStatusChoice) => {
+  const generalizedRunStatusesMap: Record<
+    RunStatus | RunStatusChoice,
+    { status: RunStatus; statusChoice: RunStatusChoice }
+  > = {
+    [RunStatus.Cncl]: { status: RunStatus.Cncl, statusChoice: RunStatusChoice.StatusCancel },
+    [RunStatus.Timo]: { status: RunStatus.Timo, statusChoice: RunStatusChoice.StatusTimeout },
+    [RunStatus.Fail]: { status: RunStatus.Fail, statusChoice: RunStatusChoice.StatusFailure },
+    [RunStatus.Pass]: { status: RunStatus.Pass, statusChoice: RunStatusChoice.StatusSuccess },
+    [RunStatus.Pend]: { status: RunStatus.Pend, statusChoice: RunStatusChoice.StatusPending },
+    [RunStatus.Read]: { status: RunStatus.Read, statusChoice: RunStatusChoice.StatusReady },
+    [RunStatusChoice.StatusCancel]: {
+      status: RunStatus.Cncl,
+      statusChoice: RunStatusChoice.StatusCancel
+    },
+    [RunStatusChoice.StatusTimeout]: {
+      status: RunStatus.Timo,
+      statusChoice: RunStatusChoice.StatusTimeout
+    },
+    [RunStatusChoice.StatusFailure]: {
+      status: RunStatus.Fail,
+      statusChoice: RunStatusChoice.StatusFailure
+    },
+    [RunStatusChoice.StatusSuccess]: {
+      status: RunStatus.Pass,
+      statusChoice: RunStatusChoice.StatusSuccess
+    },
+    [RunStatusChoice.StatusPending]: {
+      status: RunStatus.Pend,
+      statusChoice: RunStatusChoice.StatusPending
+    },
+    [RunStatusChoice.StatusReady]: {
+      status: RunStatus.Read,
+      statusChoice: RunStatusChoice.StatusReady
+    }
+  }
+  return generalizedRunStatusesMap[status]
 }
