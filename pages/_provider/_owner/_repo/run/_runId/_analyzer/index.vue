@@ -184,10 +184,10 @@
     <div v-else>
       <!-- Loading state -->
 
-      <div class="grid w-full grid-cols-1 lg:grid-cols-fr-20">
+      <div class="grid w-full grid-cols-1 md:grid-cols-fr-22 divide-x divide-ink-200">
         <!-- Issues -->
 
-        <div class="flex flex-col p-2 gap-y-3">
+        <div class="flex flex-col p-3 gap-y-3">
           <!-- Controls -->
           <div class="flex items-center w-full space-x-4 h-11">
             <div class="h-8 rounded-md w-22 bg-ink-300 animate-pulse"></div>
@@ -197,11 +197,12 @@
           <div v-for="index in 10" :key="index" class="w-full h-24 bg-ink-300 animate-pulse"></div>
         </div>
         <!-- Metrics -->
-        <div class="flex flex-col p-2 gap-y-3">
+        <div class="flex flex-col p-3 gap-y-3">
+          <div class="flex items-center h-5 w-15 bg-ink-300 animate-pulse"></div>
           <div
             v-for="index in 5"
             :key="index"
-            class="w-full h-32 rounded-md bg-ink-300 animate-pulse"
+            class="w-full h-36 rounded-md bg-ink-300 animate-pulse"
           ></div>
         </div>
       </div>
