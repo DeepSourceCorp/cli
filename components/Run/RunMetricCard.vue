@@ -27,7 +27,7 @@
         v-for="metric in metricsCaptured"
         :key="metric.namespace.key"
         :metric="metric"
-        :show-suppress-button="showSuppressButton"
+        :is-in-modal="isInModal"
         :tooltip-text="tooltipText"
         :can-suppress-metric="canSuppressMetric"
         @confirmMetricSuppression="$emit('confirmMetricSuppression', metric)"
