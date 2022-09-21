@@ -218,7 +218,7 @@ export default class GenerateConfig extends mixins(
   }
 
   async fetch(): Promise<void> {
-    Promise.all([
+    await Promise.all([
       this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true }),
       this.fetchIsCommitPossible(this.baseRouteParams),
       this.fetchRepoDetails(this.baseRouteParams)
