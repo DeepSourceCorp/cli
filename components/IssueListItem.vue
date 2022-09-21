@@ -53,7 +53,7 @@
               v-tooltip="trend.trendHint"
               :trend-direction="trend.trendDirection === TrendDirection.Up ? 'up' : 'down'"
               :trend-positive="trend.trendPositive"
-              :trend-value="trend.trendValue ? `${trend.trendValue}%` : ' '"
+              :trend-value="trend.trendValue ? `${trend.trendValue}%` : 'from 0'"
               :show-bg="false"
               custom-bg-class="bg-ink-100"
               class="hidden sm:block text-xxs md:text-xs"
