@@ -560,6 +560,7 @@ export default class RunIssueDetails extends mixins(
   .issue-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 167.5px;
+    --breadcrumb-height: 52px;
   }
 }
 
@@ -567,6 +568,7 @@ export default class RunIssueDetails extends mixins(
   .issue-page {
     --mobile-navbar-height: 0px;
     --repo-header-height: 96px;
+    --breadcrumb-height: 52px;
   }
 }
 </style>
