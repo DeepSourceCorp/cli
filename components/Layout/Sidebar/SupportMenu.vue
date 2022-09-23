@@ -15,7 +15,9 @@
           rel="noopener noreferrer"
           >Read documentation</z-menu-item
         >
-        <z-menu-item icon="support" as="nuxt-link" to="/support">Contact support</z-menu-item>
+        <z-menu-item v-if="hasPaidPlan" icon="support" as="nuxt-link" to="/support"
+          >Contact support</z-menu-item
+        >
         <z-menu-item
           as="a"
           icon="bulb"
@@ -30,7 +32,7 @@
           href="https://discuss.deepsource.io/"
           target="_blank"
           rel="noopener noreferrer"
-          >Join DeepSource Discuss</z-menu-item
+          >DeepSource Discuss</z-menu-item
         >
       </z-menu-section>
     </template>
@@ -38,8 +40,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
+import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
+import { FREE_PLAN_SLUG } from '~/types/subscription'
 
 /**
  * Support Menu, for the sidebar
@@ -51,8 +55,15 @@ import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
     ZMenuSection
   }
 })
-export default class SupportMenu extends Vue {
+export default class SupportMenu extends mixins(ActiveUserMixin) {
   @Prop()
   isCollapsed: boolean
+
+  get hasPaidPlan(): boolean {
+    return (
+      (this.activeDashboardContext as DashboardContext).subscribed_plan_info?.slug !==
+      FREE_PLAN_SLUG
+    )
+  }
 }
 </script>
