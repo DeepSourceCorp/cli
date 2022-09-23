@@ -1,0 +1,15 @@
+query RepositoryReportingMetricSettings(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    metricSettings {
+      name
+      shortcode
+      isIgnoredInCheckStatus
+      isIgnoredToDisplay
+    }
+  }
+}

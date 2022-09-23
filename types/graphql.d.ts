@@ -1914,6 +1914,15 @@ declare module '*/manageAccess.gql' {
 }
     
 
+declare module '*/metricSettings.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const RepositoryReportingMetricSettings: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/reporting.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

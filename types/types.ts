@@ -10998,6 +10998,25 @@ export type Unnamed_149_Query = (
   )> }
 );
 
+export type RepositoryReportingMetricSettingsQueryVariables = Exact<{
+  provider: VcsProviderChoices;
+  owner: Scalars['String'];
+  name: Scalars['String'];
+}>;
+
+
+export type RepositoryReportingMetricSettingsQuery = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id'>
+    & { metricSettings?: Maybe<Array<Maybe<(
+      { __typename?: 'MetricSetting' }
+      & Pick<MetricSetting, 'name' | 'shortcode' | 'isIgnoredInCheckStatus' | 'isIgnoredToDisplay'>
+    )>>> }
+  )> }
+);
+
 export type RepositoryReportingSettingsQueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];

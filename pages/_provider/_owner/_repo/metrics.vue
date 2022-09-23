@@ -21,7 +21,7 @@
       </ul>
     </nav>
 
-    <nuxt-child class="mb-28 lg:mb-0" />
+    <nuxt-child :repo-metric-settings="repositoryMetricSettings" class="mb-28 lg:mb-0" />
 
     <floating-button-mobile :nav-items="navListForMobile" />
   </div>
@@ -47,10 +47,12 @@ import { Component, Vue, namespace } from 'nuxt-property-decorator'
 // Components
 import { ZTab } from '@deepsourcelabs/zeal'
 
-// Store & Type Imports
+// Store, Queries & Type Imports
 import { Context } from '@nuxt/types'
 import { RepositoryDetailActions } from '~/store/repository/detail'
-import { MetricTypeChoices, Repository } from '~/types/types'
+import RepositoryReportingMetricSettings from '~/apollo/queries/repository/settings/metricSettings.gql'
+import { MetricSetting, MetricTypeChoices, Repository } from '~/types/types'
+import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 const repoStore = namespace('repository/detail')
 
@@ -95,6 +97,8 @@ export default class MetricsPage extends Vue {
   @repoStore.State
   repository: Repository
 
+  repositoryMetricSettings: MetricSetting[] = []
+
   get navList() {
     if (Array.isArray(this.repository.metricsCaptured) && this.repository.metricsCaptured.length) {
       return this.repository.metricsCaptured.map((metric) => {
@@ -115,6 +119,30 @@ export default class MetricsPage extends Vue {
         routePath: this.$generateRoute(['metrics', item.shortcode ?? ''])
       }
     })
+  }
+
+  /**
+   * Fetch hook for the metrics page.
+   * ! Fetches the metrics enabled/disabled logic, so the child page can compute if the metric is disabled or not.
+   */
+  async fetch() {
+    const { provider, owner, repo: name } = this.$route.params
+
+    try {
+      const response = (await this.$fetchGraphqlData(RepositoryReportingMetricSettings, {
+        provider: this.$providerMetaMap[provider].value,
+        owner,
+        name
+      })) as GraphqlQueryResponse
+
+      if (response.data.repository?.metricSettings?.length) {
+        this.repositoryMetricSettings.push(
+          ...(response.data.repository.metricSettings as MetricSetting[])
+        )
+      }
+    } catch (e) {
+      this.$logErrorAndToast(e as Error)
+    }
   }
 
   /**

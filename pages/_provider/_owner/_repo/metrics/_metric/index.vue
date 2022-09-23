@@ -47,7 +47,29 @@
     </template>
     <div v-else class="p-4">
       <lazy-empty-state
-        v-if="checkTestCoverageSetupStatus && !repository.hasTestCoverage"
+        v-if="isMetricDisabled"
+        use-v2
+        :webp-image-path="require('~/assets/images/ui-states/no-items-found-136px.webp')"
+        :png-image-path="require('~/assets/images/ui-states/no-items-found-136px.gif')"
+        :show-border="true"
+        title="Metric capture is disabled"
+      >
+        <template #subtitle>
+          Capturing this metric has been turned off for this repository. To change this, please go
+          to
+          <nuxt-link to="../settings/reporting" class="text-juniper hover:underline focus:underline"
+            >Settings <span class="text-vanilla-400"> › </span> Reporting</nuxt-link
+          >.
+        </template>
+        <template #action>
+          <nuxt-link-button to="../settings/reporting" class="space-x-2">
+            <z-icon icon="wrench" color="ink-400" class="flex-shrink-0" />
+            <span class="text-sm font-medium">Open repository settings</span>
+          </nuxt-link-button>
+        </template>
+      </lazy-empty-state>
+      <lazy-empty-state
+        v-else-if="checkTestCoverageSetupStatus && !repository.hasTestCoverage"
         use-v2
         :webp-image-path="
           require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.webp')
@@ -87,16 +109,23 @@
 </template>
 <script lang="ts">
 // Internals
-import { Component, namespace, Vue, Watch } from 'nuxt-property-decorator'
+import { Component, namespace, Prop, Vue, Watch } from 'nuxt-property-decorator'
 
 // Store imports
 import { RepositoryDetailActions } from '~/store/repository/detail'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 import { DEFAULT_BR_COVERAGE_METRICS, MetricType } from '~/types/metric'
-import { Maybe, Metric, MetricNamespaceTrend, MetricTypeChoices, Repository } from '~/types/types'
+import {
+  Maybe,
+  Metric,
+  MetricNamespaceTrend,
+  MetricSetting,
+  MetricTypeChoices,
+  Repository
+} from '~/types/types'
 
 //Zeal
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
 
 const repoStore = namespace('repository/detail')
 
@@ -105,9 +134,12 @@ const repoStore = namespace('repository/detail')
  */
 @Component({
   layout: 'repository',
-  components: { ZButton }
+  components: { ZButton, ZIcon }
 })
 export default class MetricPage extends Vue {
+  @Prop({ required: true })
+  repoMetricSettings: MetricSetting[]
+
   @repoStore.Action(RepositoryDetailActions.FETCH_METRIC)
   fetchMetricData: (args: {
     provider: string
@@ -219,6 +251,14 @@ export default class MetricPage extends Vue {
 
   get checkTestCoverageSetupStatus(): boolean {
     return DEFAULT_BR_COVERAGE_METRICS.includes(this.$route.params.metric)
+  }
+
+  get isMetricDisabled(): boolean {
+    return Boolean(
+      this.repoMetricSettings?.find(
+        (metricSetting) => metricSetting.shortcode === this.$route.params.metric
+      )?.isIgnoredToDisplay
+    )
   }
 
   /**
