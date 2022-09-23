@@ -15,190 +15,126 @@
         @submit.prevent="createSupportTicket"
         @reset.prevent="resetFormData"
       >
-        <div>
+        <div class="space-y-1.5 max-w-lg">
           <label for="author-account" class="text-xs">Account or team</label>
-          <div class="grid space-x-6 lg:grid-cols-support items-start mt-1.5">
-            <div>
-              <div
-                v-if="!ticketAuthorId"
-                class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"
-              ></div>
-              <z-select
-                v-else
-                id="author-account"
-                v-model="ticketAuthorId"
-                :selected="ticketAuthorId"
-                spacing="px-1 py-2"
+          <div>
+            <div
+              v-if="!ticketAuthorId"
+              class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"
+            ></div>
+            <z-select
+              v-else
+              id="author-account"
+              v-model="ticketAuthorId"
+              :selected="ticketAuthorId"
+              spacing="px-4 py-2"
+              text-size="text-sm"
+            >
+              <z-option
+                v-for="context in viewerContexts"
+                :key="context.team_name || context.login"
+                :label="`${context.team_name || context.login} (${context.vcs_provider_display} ${
+                  context.type === 'user' ? 'Account' : 'Organization'
+                })`"
+                :value="context.id.toString()"
                 text-size="text-sm"
               >
-                <z-option
-                  v-for="context in viewerContexts"
-                  :key="context.team_name || context.login"
-                  :label="`${context.team_name || context.login} (${context.vcs_provider_display} ${
-                    context.type === 'user' ? 'Account' : 'Organization'
-                  })`"
-                  :value="context.id.toString()"
-                  text-size="text-sm"
-                >
-                  <div class="flex items-center space-x-2">
-                    <z-avatar
-                      type="span"
-                      size="sm"
-                      class="flex-shrink-0"
-                      :image="context.avatar_url"
-                      :fallback-image="getDefaultAvatar(context.login, context.type === 'user')"
-                      :user-name="context.login"
-                    />
-                    <span v-show="!isCollapsed">
-                      {{ context.team_name || context.login }}
-                      {{
-                        `(${context.vcs_provider_display} ${
-                          context.type === 'user' ? 'Account' : 'Organization'
-                        })`
-                      }}
-                    </span>
-                  </div>
-                </z-option>
-              </z-select>
-            </div>
-            <info-banner
-              info="Select account or the team on DeepSource with which this ticket is related."
-              class="hidden lg:block"
-            />
-          </div>
-        </div>
-        <div>
-          <label for="author-email" class="text-xs">From</label>
-          <div class="grid space-x-6 lg:grid-cols-support items-start mt-1.5">
-            <div>
-              <div v-if="!authorEmail" class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"></div>
-              <z-select
-                v-else
-                id="author-email"
-                v-model="authorEmail"
-                :selected="authorEmail"
-                spacing="px-1 py-2"
-                text-size="text-sm"
-              >
-                <z-option
-                  :label="`${viewer.fullName} <${authorEmail}>`"
-                  :value="authorEmail"
-                  text-size="text-sm"
-                />
-              </z-select>
-            </div>
-            <info-banner
-              info="We'll use this email as the primary point of contact for this support ticket."
-              class="hidden lg:block"
-            />
-          </div>
-        </div>
-        <div>
-          <label for="author-cc" class="text-xs">CC</label>
-          <div class="grid space-x-6 lg:grid-cols-support items-start mt-1.5">
-            <z-input
-              v-model="authorCC"
-              id="author-cc"
-              type="email"
-              :validate-on-blur="false"
-              :disabled="isFormSubmitting"
-              padding="px-4"
-              placeholder=""
-              multiple
-            />
-            <info-banner
-              info="We'll keep these email addresses in cc when communicating to you about this ticket."
-              class="hidden lg:block"
-            />
-          </div>
-        </div>
-        <div>
-          <label for="support-subject" class="text-xs">Subject</label>
-          <div class="grid space-x-6 lg:grid-cols-support items-start mt-1.5">
-            <z-input
-              v-model="supportSubject"
-              id="support-subject"
-              type="text"
-              :disabled="isFormSubmitting"
-              max-length="250"
-              placeholder=""
-              padding="px-4"
-            />
-          </div>
-        </div>
-        <div>
-          <label id="support-description" class="text-xs">What is the issue?</label>
-          <div class="grid space-x-6 lg:grid-cols-support items-start mt-1.5">
-            <div class="min-w-0">
-              <z-rich-text
-                v-model="supportHTML"
-                placeholder=""
-                :min-length="20"
-                min-length-err-msg="Please add at least 20 characters in the issue description."
-                :max-length="1024"
-                :disabled="isFormSubmitting"
-                :class="{ 'cursor-not-allowed': isFormSubmitting }"
-                aria-labelledby="support-description"
-              >
-                <template #left-toolbar>
-                  <z-file-input
-                    ref="fileUploader"
-                    label="Add files"
-                    :disabled="isFileProcessing || isFormSubmitting"
-                    multiple
-                    accept="image/gif,image/jpeg,image/jpg,.mov,.mp4,image/png,.csv,.docx,.gz,.log,.md,.odf,.odp,.ods,.odt,.pdf,.pptx,.txt,.xls,.xlsx,.zip"
-                    @change="uploadFiles"
-                    @files-emptied="uploadedFiles = []"
-                  >
-                    <template v-slot:activator="{ open }">
-                      <z-button
-                        icon="paperclip"
-                        size="x-small"
-                        button-type="ghost"
-                        icon-color="vanilla-400"
-                        type="button"
-                        :disabled="isFileProcessing || isFormSubmitting"
-                        :is-loading="isFileProcessing"
-                        v-tooltip="'Attach files'"
-                        class="ml-1 opacity-60 hover:opacity-100 hover:text-vanilla-100"
-                        :class="
-                          isFileProcessing || isFormSubmitting
-                            ? 'cursor-not-allowed'
-                            : 'cursor-pointer'
-                        "
-                        @click="open"
-                      />
-                    </template>
-                  </z-file-input>
-                </template>
-              </z-rich-text>
-              <div class="text-xs leading-none">
-                <div
-                  v-for="(uploadedFile, index) in uploadedFiles"
-                  :key="index"
-                  class="flex items-center justify-between px-4 py-2 mt-2 rounded-sm bg-ink-300 text-vanilla-400"
-                >
-                  <span>{{ uploadedFile.filename }}</span>
-                  <button
-                    type="button"
-                    class="p-1 rounded-sm hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
-                    :class="
-                      isFileProcessing || isFormSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'
-                    "
-                    :disabled="isFileProcessing || isFormSubmitting"
-                    v-tooltip="'Remove file'"
-                    @click="removeFile(uploadedFile.filename)"
-                  >
-                    <z-icon icon="trash-2" color="cherry" size="x-small"></z-icon>
-                  </button>
+                <div class="flex items-center space-x-2">
+                  <z-avatar
+                    type="span"
+                    size="sm"
+                    class="flex-shrink-0"
+                    :image="context.avatar_url"
+                    :fallback-image="getDefaultAvatar(context.login, context.type === 'user')"
+                    :user-name="context.login"
+                  />
+                  <span v-show="!isCollapsed">
+                    {{ context.team_name || context.login }}
+                    {{
+                      `(${context.vcs_provider_display} ${
+                        context.type === 'user' ? 'Account' : 'Organization'
+                      })`
+                    }}
+                  </span>
                 </div>
-              </div>
-            </div>
-            <info-banner
-              info="Please be as descriptive as possible.<br/>If you're reporting a bug, please list down the steps you took and attach any screenshots if possible. This will help us reproduce the behaviour."
-              class="hidden lg:block"
+              </z-option>
+            </z-select>
+          </div>
+          <p class="text-vanilla-400 text-xs">
+            Select account or the team on DeepSource with which this ticket is related.
+          </p>
+        </div>
+        <div class="space-y-1.5 max-w-lg">
+          <label for="author-email" class="text-xs">From</label>
+          <div>
+            <div v-if="!authorEmail" class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"></div>
+            <z-select
+              v-else
+              id="author-email"
+              v-model="authorEmail"
+              :selected="authorEmail"
+              spacing="px-4 py-2"
+              text-size="text-sm"
+            >
+              <z-option
+                :label="`${viewer.fullName} <${authorEmail}>`"
+                :value="authorEmail"
+                text-size="text-sm"
+              />
+            </z-select>
+          </div>
+          <p class="text-vanilla-400 text-xs">
+            We'll use this email as the primary point of contact for this support ticket.
+          </p>
+        </div>
+        <div class="space-y-1.5 max-w-lg">
+          <label for="author-cc" class="text-xs">CC</label>
+          <z-input
+            v-model="authorCC"
+            id="author-cc"
+            type="email"
+            :validate-on-blur="false"
+            :disabled="isFormSubmitting"
+            padding="px-4"
+            placeholder=""
+            multiple
+          />
+          <p class="text-vanilla-400 text-xs">
+            We'll keep these email addresses in cc when communicating to you about this ticket.
+          </p>
+        </div>
+        <div class="space-y-1.5 max-w-lg">
+          <label for="support-subject" class="text-xs">Subject</label>
+          <z-input
+            v-model="supportSubject"
+            id="support-subject"
+            type="text"
+            :disabled="isFormSubmitting"
+            max-length="250"
+            placeholder=""
+            padding="px-4"
+          />
+        </div>
+        <div class="space-y-1.5 max-w-lg">
+          <label id="support-description" class="text-xs">What is the issue?</label>
+
+          <div class="min-w-0">
+            <z-rich-text
+              v-model="supportHTML"
+              placeholder=""
+              :min-length="20"
+              min-length-err-msg="Please add at least 20 characters in the issue description."
+              :max-length="1024"
+              :disabled="isFormSubmitting"
+              :class="{ 'cursor-not-allowed': isFormSubmitting }"
+              aria-labelledby="support-description"
             />
           </div>
+          <p class="text-vanilla-400 text-xs">
+            Please be as descriptive as possible.<br />If you're reporting a bug, please list down
+            the steps you took and attach any screenshots if possible. This will help us reproduce
+            the behaviour.
+          </p>
         </div>
         <div class="grid items-start my-1 space-x-6 lg:grid-cols-support">
           <z-button
@@ -286,7 +222,6 @@ export default class Support extends mixins(ActiveUserMixin) {
   private authorEmail = ''
   private authorCC = ''
   private viewerContexts = []
-  private uploadedFiles = [] as AttachmentObj[]
   private isFileProcessing = false
   private isFormSubmitting = false
   private showNotif = false
@@ -363,26 +298,6 @@ export default class Support extends mixins(ActiveUserMixin) {
     this.ticketAuthorId = this.activeDashboardContext.id.toString()
   }
 
-  async uploadFiles({ target }: { target: HTMLInputElement }): Promise<void> {
-    if (target.files) {
-      this.isFileProcessing = true
-      const arrayOfFiles = Array.from(target.files)
-      try {
-        if (this.validateFileSize(arrayOfFiles) && this.validateFileNames(arrayOfFiles))
-          this.uploadedFiles = await getBase64Files(arrayOfFiles)
-      } catch (err) {
-        this.$toast.danger('An error occured while processing files')
-      } finally {
-        this.isFileProcessing = false
-      }
-    }
-  }
-
-  removeFile(filename: string): void {
-    const fileRemover = (fileAttachment: AttachmentObj) => fileAttachment.filename !== filename
-    this.uploadedFiles = this.uploadedFiles.filter(fileRemover)
-  }
-
   validateInputs(valdiationData: SupportValidationData): boolean {
     if (!valdiationData.ticketAuthor) {
       throw new Error('A valid DeepSource account or organization needs to be selected.')
@@ -419,7 +334,6 @@ export default class Support extends mixins(ActiveUserMixin) {
     this.authorCC = ''
     this.supportSubject = ''
     this.supportHTML = ''
-    this.uploadedFiles = []
   }
 
   async createSupportTicket(): Promise<void> {
@@ -437,8 +351,7 @@ export default class Support extends mixins(ActiveUserMixin) {
           fromEmail: dataToValidate.authorEmail,
           ccEmails: dataToValidate.authorCC,
           subject: dataToValidate.supportSubject,
-          body: `Account/Organization Name: ${dataToValidate.ticketAuthor} <br/> ${this.supportHTML}`,
-          attachments: this.uploadedFiles
+          body: `Account/Organization Name: ${dataToValidate.ticketAuthor} <br/> ${this.supportHTML}`
         }
         try {
           const response = await this.$applyGraphqlMutation(SubmitSupportTicketMutation, {
@@ -452,9 +365,6 @@ export default class Support extends mixins(ActiveUserMixin) {
           }
         } catch (reqErr) {
           this.$toast.danger('An error occured while submitting your ticket.')
-          formData.attachments = this.uploadedFiles.map(({ filename, base64Data }) => {
-            return { filename, sizeInBytes: new Blob([base64Data]).size } as AttachmentObj
-          })
           this.logErrorForUser(reqErr as Error, 'Support Page', formData)
         }
       }
