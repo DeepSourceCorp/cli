@@ -11,6 +11,7 @@
     </template>
     <template v-slot:body="{ close }">
       <z-menu-item
+        v-if="!$config.onPrem"
         as="nuxt-link"
         to="/discover"
         class="w-full flex items-center"
@@ -36,6 +37,9 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 import { ZMenu, ZMenuItem, ZButton, ZIcon } from '@deepsourcelabs/zeal'
 
+/**
+ * Extra sub menu shown beside the `Dashboard` link in sidebar
+ */
 @Component({
   name: 'ExtrasMenu',
   components: { ZMenu, ZMenuItem, ZButton, ZIcon }

@@ -89,7 +89,6 @@ export default {
     allowSocialAuth: IS_ON_PREM ? toBool(process.env.ALLOW_SOCIAL_AUTH) : true,
     licenseExpiry: IS_ON_PREM ? new Date(process.env.LICENSE_EXPIRY) : null,
     supportEmail: IS_ON_PREM ? 'enterprise-support@deepsource.io' : 'support@deepsource.io',
-    discoverEnabled: IS_ON_PREM ? toBool(process.env.IS_DISCOVER_ENABLED) : true,
     domain: APP_DOMAIN,
     rudderWriteKey: IS_ON_PREM ? '' : process.env.RUDDER_WRITE_KEY,
     rudderDataPlaneUrl: IS_ON_PREM ? '' : process.env.RUDDER_DATA_PLANE_URL
@@ -133,7 +132,8 @@ export default {
     ? [
         '**/_provider/_owner/settings/billing/*',
         '**/components/Billing/*',
-        '**/settings/integrations/*'
+        '**/settings/integrations/*',
+        '**/discover/*'
       ]
     : [],
 

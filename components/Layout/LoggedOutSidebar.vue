@@ -55,7 +55,10 @@
             <z-icon icon="pricing" color="vanilla-300" class="mr-2.5" />
             <span>Pricing</span>
           </a>
-          <nuxt-link to="/discover" class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
+          <nuxt-link
+            v-if="!$config.onPrem"
+            to="/discover"
+            class="flex items-center px-2 py-1 rounded-md hover:bg-ink-200"
             ><z-icon icon="discover" color="vanilla-300" class="mr-2.5" />
             <span>Discover</span></nuxt-link
           >

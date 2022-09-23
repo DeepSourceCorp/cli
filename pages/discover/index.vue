@@ -94,7 +94,6 @@ const discoverRepositoriesStore = namespace('discover/repositories')
     EditorsPick,
     Trending
   },
-  middleware: ['disableDiscoverOnPrem'],
   layout: 'discover'
 })
 export default class Discover extends mixins(MetaMixin) {

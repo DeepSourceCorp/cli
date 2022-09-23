@@ -182,7 +182,11 @@
       </button-input>
     </form-group>
 
-    <form-group v-if="!repository.isPrivate" label="Discover settings" class="max-w-2xl">
+    <form-group
+      v-if="!$config.onPrem && !repository.isPrivate"
+      label="Discover settings"
+      class="max-w-2xl"
+    >
       <div>
         <button-input
           label="Add to discover"
