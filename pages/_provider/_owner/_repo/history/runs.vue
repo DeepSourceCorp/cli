@@ -33,17 +33,21 @@
           />
         </template>
         <template v-else>
-          <div class="flex items-center justify-center text-center min-h-102">
-            <div class="max-w-xl">
-              <p class="text-2xl font-semibold text-vanilla-300">
-                No runs on {{ prStatusFilterCopy }} to show
-              </p>
-              <p class="text-vanilla-400">
-                If you have recently added this repository it may take a while for the first run to
-                complete and show results
-              </p>
-            </div>
-          </div>
+          <lazy-empty-state
+            v-if="searchText"
+            title="No runs found for this search"
+            subtitle="Please try changing the search query or clearing the filters."
+            :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+            :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+            :show-border="true"
+          />
+          <lazy-empty-state
+            v-else
+            :title="` No runs on ${prStatusFilterCopy} to show`"
+            subtitle="If you have recently added this repository it may take a while for the first run to
+                complete and show results."
+            :show-border="true"
+          />
         </template>
       </template>
       <template v-else>
