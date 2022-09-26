@@ -116,7 +116,7 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
       {
         name: 'access',
         label: 'Access control',
-        icon: 'lock',
+        icon: 'z-lock',
         routeName: 'provider-owner-settings-access',
         validator: this.canViewAccessControl
       },

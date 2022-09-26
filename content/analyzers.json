@@ -1,116 +1,145 @@
 {
-"analyzers": [{
-    "name": "python",
-    "label": "Python",
-    "icon": "lock",
-    "meta": [{
-        "name": "runtime_version",
-        "title": "runtime version",
-        "type": "boolean",
-        "selected": "2.x.x",
-        "values": [{
-            "value": "2.x.x",
-            "label": "2.x.x"
-        },{
-            "value": "3.x.x",
-            "label": "3.x.x"
-        }]
-    }],
-    "active": false,
-    "enabled": false
-},{
-    "name": "go",
-    "label": "Go",
-    "meta": [{
-        "name": "import_path",
-        "title": "import path",
-        "type": "input",
-        "selected": "github.com/deepsourcelabs/marvin..."
-    }],
-    "icon": "cpu",
-    "active": false,
-    "enabled": false
-},{
-    "name": "javascript",
-    "label": "JavaScript",
-    "meta": [{
-        "name": "framework",
-        "title": "framework",
-        "type": "list",
-        "selected": "",
-        "values": [{
-            "value": "ember",
-            "label": "Ember JS"    
-            },{
-                "value": "angular",
-                "label": "Angular"
-            },{
-                "value": "react",
-                "label": "React"
-            },{
-                "value": "meteor",
-                "label": "Meteor"
-            },{
-                "value": "vue",
-                "label": "Vue"
-            }]
-    }, {
-        "name": "dialect",
-        "title": "dialect",
-        "type": "boolean",
-        "selected": "typescript",
-        "values": [{
-            "value": "typescript",
-            "label": "Typescript"
-        }, {
-            "value": "flow",
-            "label": "Flow"
-        }]
-    }], 
-    "icon": "eye",
-    "active": false,
-    "enabled": false
-},{
-    "name": "sql",
-    "label": "SQL",
-    "meta": [],
-    "icon": "anchor",
-    "active": false,
-    "enabled": false
-},{
-    "name": "docker",
-    "label": "Docker",
-    "meta": [],
-    "icon": "archive",
-    "active": false,
-    "enabled": false
-},{
-    "name": "terraform",
-    "label": "Terraform",
-    "meta": [],
-    "icon": "award",
-    "active": false,
-    "enabled": false
-},{
-    "name": "ruby",
-    "label": "Ruby",
-    "meta": [],
-    "icon": "bell",
-    "active": false,
-    "enabled": false
-},{
-    "name": "java",
-    "label": "Java",
-    "meta": [],
-    "icon": "command",
-    "active": false,
-    "enabled": false
-},{
-    "name": "shell",
-    "label": "Shell",
-    "meta": [],
-    "icon": "coffee",
-    "active": false,
-    "enabled": false
-}]
+  "analyzers": [
+    {
+      "name": "python",
+      "label": "Python",
+      "icon": "z-lock",
+      "meta": [
+        {
+          "name": "runtime_version",
+          "title": "runtime version",
+          "type": "boolean",
+          "selected": "2.x.x",
+          "values": [
+            {
+              "value": "2.x.x",
+              "label": "2.x.x"
+            },
+            {
+              "value": "3.x.x",
+              "label": "3.x.x"
+            }
+          ]
+        }
+      ],
+      "active": false,
+      "enabled": false
+    },
+    {
+      "name": "go",
+      "label": "Go",
+      "meta": [
+        {
+          "name": "import_path",
+          "title": "import path",
+          "type": "input",
+          "selected": "github.com/deepsourcelabs/marvin..."
+        }
+      ],
+      "icon": "cpu",
+      "active": false,
+      "enabled": false
+    },
+    {
+      "name": "javascript",
+      "label": "JavaScript",
+      "meta": [
+        {
+          "name": "framework",
+          "title": "framework",
+          "type": "list",
+          "selected": "",
+          "values": [
+            {
+              "value": "ember",
+              "label": "Ember JS"
+            },
+            {
+              "value": "angular",
+              "label": "Angular"
+            },
+            {
+              "value": "react",
+              "label": "React"
+            },
+            {
+              "value": "meteor",
+              "label": "Meteor"
+            },
+            {
+              "value": "vue",
+              "label": "Vue"
+            }
+          ]
+        },
+        {
+          "name": "dialect",
+          "title": "dialect",
+          "type": "boolean",
+          "selected": "typescript",
+          "values": [
+            {
+              "value": "typescript",
+              "label": "Typescript"
+            },
+            {
+              "value": "flow",
+              "label": "Flow"
+            }
+          ]
+        }
+      ],
+      "icon": "eye",
+      "active": false,
+      "enabled": false
+    },
+    {
+      "name": "sql",
+      "label": "SQL",
+      "meta": [],
+      "icon": "anchor",
+      "active": false,
+      "enabled": false
+    },
+    {
+      "name": "docker",
+      "label": "Docker",
+      "meta": [],
+      "icon": "archive",
+      "active": false,
+      "enabled": false
+    },
+    {
+      "name": "terraform",
+      "label": "Terraform",
+      "meta": [],
+      "icon": "award",
+      "active": false,
+      "enabled": false
+    },
+    {
+      "name": "ruby",
+      "label": "Ruby",
+      "meta": [],
+      "icon": "bell",
+      "active": false,
+      "enabled": false
+    },
+    {
+      "name": "java",
+      "label": "Java",
+      "meta": [],
+      "icon": "command",
+      "active": false,
+      "enabled": false
+    },
+    {
+      "name": "shell",
+      "label": "Shell",
+      "meta": [],
+      "icon": "coffee",
+      "active": false,
+      "enabled": false
+    }
+  ]
 }

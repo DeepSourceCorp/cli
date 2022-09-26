@@ -107,7 +107,7 @@ import { AnalyzerMetaInterface } from '~/store/analyzer/list'
   }
 })
 export default class AnalyzerCard extends Vue {
-  @Prop({ default: 'lock' })
+  @Prop({ default: 'z-lock' })
   icon!: string
 
   @Prop({ default: '' })

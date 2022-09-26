@@ -73,7 +73,8 @@ module.exports = {
       },
       animation: {
         'glow-bg': 'glow 4s ease-out 1ms infinite',
-        'pulse-border-once': 'pulse-border-once 1s ease-in forwards'
+        'pulse-border-once': 'pulse-border-once 1s ease-in forwards',
+        'glow-bg-brighter': 'glow-brighter 4s ease-out 1ms infinite'
       },
       keyframes: {
         glow: {
@@ -99,6 +100,27 @@ module.exports = {
         },
         'pulse-border-once': {
           to: { borderColor: 'transparent' }
+        },
+        'glow-brighter': {
+          '0%': {
+            filter: 'drop-shadow(0 0 150px rgba(69, 104, 220, 0.5))'
+          },
+
+          '40%': {
+            filter: 'drop-shadow(0 0 250px rgba(69, 104, 220, 0.5))'
+          },
+
+          '50%': {
+            filter: 'drop-shadow(0 0 275px rgba(69, 104, 220, 0.5))'
+          },
+
+          '80%': {
+            filter: 'drop-shadow(0 0 200px rgba(69, 104, 220, 0.5))'
+          },
+
+          '100%': {
+            filter: 'drop-shadow(0 0 150px rgba(69, 104, 220, 0.5))'
+          }
         }
       },
       zIndex: {

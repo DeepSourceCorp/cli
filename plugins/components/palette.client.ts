@@ -104,7 +104,7 @@ export class CommandManager {
           label: `${repo.ownerLogin}/${repo.name}`, // skipcq: JS-0378
           placeholder: `Select repository page to open`,
           hint: `Press <kbd class="cmd-kbd">Enter</kbd> to jump, <kbd class="cmd-kbd">Tab</kbd> to browse`,
-          icon: repo.isPrivate ? 'lock' : 'globe',
+          icon: repo.isPrivate ? 'z-lock' : 'globe',
           keywords: [repo.name],
           action: (router) => {
             router.push(['', provider, owner, repo.name].join('/'))

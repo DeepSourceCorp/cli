@@ -268,7 +268,7 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
   @repoDetailStore.State
   repository: Repository
 
-  @Prop({ default: 'lock' })
+  @Prop({ default: 'z-lock' })
   icon!: string
 
   @Prop({ default: '' })

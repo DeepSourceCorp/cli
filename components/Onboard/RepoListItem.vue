@@ -21,7 +21,7 @@ import { Analyzer } from '~/types/types'
   }
 })
 export default class RepoListItem extends Vue {
-  @Prop({ default: 'lock' })
+  @Prop({ default: 'z-lock' })
   icon!: string
 
   @Prop({ default: '' })

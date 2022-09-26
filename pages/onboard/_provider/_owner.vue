@@ -84,7 +84,7 @@
                     <div class="items-center" v-if="step.showRepo && currentRepo">
                       <z-icon
                         v-if="repository && 'isPrivate' in repository"
-                        :icon="repository.isPrivate ? 'lock' : 'globe'"
+                        :icon="repository.isPrivate ? 'z-lock' : 'globe'"
                         size="x-small"
                         class="inline-block p-px"
                       />

@@ -34,7 +34,7 @@
             :handleName="repo.ownerLogin"
             :language="repo.supportedAnalyzers ? repo.supportedAnalyzers[0] : ''"
             :analyzer="repo.primaryAnalyzer"
-            :icon="repo.isPrivate ? 'lock' : 'globe'"
+            :icon="repo.isPrivate ? 'z-lock' : 'globe'"
             :repoName="repo.name"
             @click="pickRepo(repo)"
           >

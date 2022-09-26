@@ -21,7 +21,7 @@
             <z-menu-item>
               <div class="flex space-x-2 leading-none items-center">
                 <z-icon
-                  :icon="repo.isPrivate ? 'lock' : 'globe'"
+                  :icon="repo.isPrivate ? 'z-lock' : 'globe'"
                   size="small"
                   class="min-w-4 min-h-4"
                 ></z-icon>
@@ -40,7 +40,7 @@
       <sidebar-item
         v-for="repo in repoWithPendingAdhocRuns"
         :key="repo.id"
-        :icon="repo.isPrivate ? 'lock' : 'globe'"
+        :icon="repo.isPrivate ? 'z-lock' : 'globe'"
         :active="$route.params.repo === repo.name"
         class="pl-7"
         :to="buildRoute(repo)"

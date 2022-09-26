@@ -150,7 +150,7 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
           name: repo.name,
           id: repo.id,
           owner: repo.ownerLogin,
-          icon: repo.isPrivate ? 'lock' : 'globe',
+          icon: repo.isPrivate ? 'z-lock' : 'globe',
           isActive: false
         }
       })

@@ -52,7 +52,7 @@
             v-for="repo in repositoryList"
             :key="repo.id"
             size="x-small"
-            :icon-left="repo.isPrivate ? 'lock' : 'globe'"
+            :icon-left="repo.isPrivate ? 'z-lock' : 'globe'"
             bg-color="ink-200"
             class="gap-x-1 text-vanilla-300 cursor"
           >

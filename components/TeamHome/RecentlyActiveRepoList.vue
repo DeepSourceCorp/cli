@@ -36,7 +36,7 @@
         v-for="repo in repoWithActiveAnalysisWithAnalyzers"
         :key="repo.id"
         :to="generateLink(repo)"
-        :icon="repo.isPrivate ? 'lock' : 'globe'"
+        :icon="repo.isPrivate ? 'z-lock' : 'globe'"
         class="px-4 py-3"
       >
         <template slot="label">

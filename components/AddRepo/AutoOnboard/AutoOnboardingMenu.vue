@@ -37,7 +37,7 @@
             class="border border-ink-200 flex items-center justify-between p-1.5 pl-3.5 rounded-md group"
           >
             <span class="text-vanilla-200 group-hover:text-vanilla-100 flex items-center space-x-2">
-              <z-icon :icon="event.repository.isPrivate ? 'lock' : 'globe'"></z-icon>
+              <z-icon :icon="event.repository.isPrivate ? 'z-lock' : 'globe'"></z-icon>
               <span class="text-sm leading-none">
                 <template v-if="event.repository.owner && event.repository.owner.login">
                   <span class="text-vanilla-400">{{ event.repository.owner.login }}</span> /

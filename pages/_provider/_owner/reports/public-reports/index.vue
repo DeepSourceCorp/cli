@@ -58,11 +58,14 @@
 
     <lazy-empty-state
       v-else-if="q.length"
-      :title="`No results found for ${q}.`"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
       :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
       class="border border-dashed rounded-lg border-ink-200 py-20"
-    />
+    >
+      <template #title>
+        <span class="break-words">No results found for the given search.</span>
+      </template>
+    </lazy-empty-state>
     <lazy-empty-state
       v-else
       title="No public reports found"

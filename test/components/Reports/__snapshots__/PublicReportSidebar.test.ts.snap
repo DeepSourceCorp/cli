@@ -33,13 +33,13 @@ exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop opt
       <ztag-stub state=\\"default\\" iconleft=\\"globe\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
             demo-python
           </span></ztag-stub>
-      <ztag-stub state=\\"default\\" iconleft=\\"lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+      <ztag-stub state=\\"default\\" iconleft=\\"z-lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
             marvin-docker
           </span></ztag-stub>
-      <ztag-stub state=\\"default\\" iconleft=\\"lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+      <ztag-stub state=\\"default\\" iconleft=\\"z-lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
             bob-cli
           </span></ztag-stub>
-      <ztag-stub state=\\"default\\" iconleft=\\"lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+      <ztag-stub state=\\"default\\" iconleft=\\"z-lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
             asgard
           </span></ztag-stub>
     </div>
@@ -77,7 +77,7 @@ exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop opt
         Repository
       </span>
     <div class=\\"flex flex-wrap gap-2\\">
-      <ztag-stub state=\\"default\\" iconleft=\\"lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
+      <ztag-stub state=\\"default\\" iconleft=\\"z-lock\\" size=\\"x-small\\" bgcolor=\\"ink-200\\" textsize=\\"sm\\" spacing=\\"py-1 px-4\\" iconcolor=\\"current\\" class=\\"gap-x-1 text-vanilla-300 cursor\\"><span class=\\"truncate max-w-24 has-tooltip\\" data-original-title=\\"null\\">
             asgard
           </span></ztag-stub>
     </div>

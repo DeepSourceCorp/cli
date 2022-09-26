@@ -10,7 +10,7 @@
     <template slot="title">
       <div class="inline-flex items-center gap-x-2">
         <z-icon
-          :icon="isPrivate ? 'lock' : 'globe'"
+          :icon="isPrivate ? 'z-lock' : 'globe'"
           :size="size === 'small' ? 'x-small' : 'small'"
         ></z-icon>
         <div

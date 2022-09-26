@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-screen mx-auto lg:max-w-6xl 2xl:max-w-7xl animate-gradient">
+  <div class="w-full min-h-screen mx-auto lg:max-w-6xl 2xl:max-w-7xl">
     <div
       v-if="publicReport && publicReport.owner"
       class="sticky top-0 left-0 z-30 w-full border-b lg:hidden border-ink-200 bg-ink-400"
@@ -23,7 +23,7 @@
       />
 
       <div
-        class="w-screen px-4 pb-10 text-sm border-t md:px-6 md:text-base border-ink-300 md:border-t-0"
+        class="w-screen px-4 pb-10 pt-6 lg:pt-26 text-sm border-t md:px-6 md:text-base border-ink-300 md:border-t-0"
       >
         <nuxt-child
           :share-historical-data="publicReport.shareHistoricalData"
@@ -32,7 +32,6 @@
           :created-at="formatDate(parseISODate(publicReport.createdAt))"
           :token="token"
           :repository-list="repositoryList"
-          class="pt-6 lg:pt-26"
         ></nuxt-child>
 
         <section
@@ -64,13 +63,17 @@
       </div>
     </div>
 
-    <div v-else-if="errorMessage" class="flex items-center justify-center h-screen">
-      <div class="w-80">
+    <div
+      v-else-if="errorMessage"
+      class="flex items-center justify-center h-screen animate-glow-bg-brighter"
+    >
+      <div class="w-98 px-5">
         <div class="bg-ink-300 px-4 py-2.5 flex items-center gap-x-2 mb-2 w-max">
-          <z-icon icon="lock" />
+          <z-icon icon="z-lock" />
           <span class="text-xs font-medium">This report is password-protected</span>
         </div>
-        <form @submit="submitPassword" class="max-w-md px-6 py-6 rounded-md bg-ink-300">
+
+        <form @submit="submitPassword" class="px-6 py-6 mb-10 rounded-md bg-ink-300">
           <label for="public-report-pasword" class="block mb-2 text-sm font-medium">
             Enter password
           </label>
@@ -80,7 +83,6 @@
                 v-focus
                 id="public-report-pasword"
                 v-model="password"
-                max-length="32"
                 placeholder="Password to access the report"
                 :required="true"
                 :type="isPasswordHidden ? 'password' : 'text'"
@@ -104,7 +106,7 @@
           </div>
           <z-button
             label="Open report"
-            icon="check"
+            icon="z-unlock"
             size="small"
             type="submit"
             full-width
@@ -113,6 +115,12 @@
             @click.prevent="submitPassword"
           />
         </form>
+
+        <img
+          class="w-auto h-5 mx-auto"
+          src="~/assets/images/logo-wordmark-white.svg"
+          alt="DeepSource"
+        />
       </div>
     </div>
   </div>

@@ -36,7 +36,7 @@
     <z-button
       v-if="!checkoutLoading && checkoutState === null"
       class="mt-3"
-      icon="lock"
+      icon="z-lock"
       iconSize="small"
       :disabled="!enableCheckout"
       @click="checkout"
