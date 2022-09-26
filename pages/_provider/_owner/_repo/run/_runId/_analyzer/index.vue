@@ -33,7 +33,7 @@
         <!-- issues -->
         <div
           v-if="activeTabIndex === 0"
-          class="grid grid-cols-1 run-body-height"
+          class="grid grid-cols-1"
           :class="{
             'md:grid-cols-fr-22 divide-x divide-ink-200': ['FAIL', 'PASS'].includes(check.status)
           }"
@@ -758,12 +758,9 @@ export default class AnalyzerDetails extends mixins(
   --run-check-title-height: 104px;
 }
 
+/* offset for the metrics sidebar, to accomodate the top bar and run header */
 .metrics-header-offset {
   top: calc(var(--top-bar-offset) + var(--run-check-title-height));
-}
-
-.run-body-height {
-  height: calc(100vh - (var(--top-bar-offset) + var(--run-check-title-height)));
 }
 
 @media (min-width: 640px) {

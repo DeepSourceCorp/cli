@@ -1,5 +1,5 @@
 <template>
-  <section class="flex flex-col">
+  <section class="flex flex-col min-height-for-offset">
     <div
       v-if="status === CheckStatus.Fail"
       id="issue-filters"
@@ -142,11 +142,12 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
 
   --run-check-title-height: 140px;
 }
-
+/* offset for the filters container, to accomodate the top bar and run header */
 .check-filter-headers-offset {
   top: calc(var(--top-bar-offset) + var(--run-check-title-height));
 }
 
+/* sets the min-height for the component wrapper, ensures that component height spans entire viewport height minus the top bar and run header */
 .min-height-for-offset {
   min-height: calc(100vh - var(--top-bar-offset) - var(--run-check-title-height));
 }

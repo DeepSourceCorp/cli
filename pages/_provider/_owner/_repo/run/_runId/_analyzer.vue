@@ -1,7 +1,7 @@
 <template>
   <main class="analyzer-page">
     <div
-      class="z-20 flex flex-row items-center justify-between w-full p-2 px-4 space-x-4 border-b bg-ink-400 border-ink-200 md:sticky offset-for-breadcrumbs"
+      class="z-40 flex flex-row items-center justify-between w-full p-2 px-4 space-x-4 border-b bg-ink-400 border-ink-200 md:sticky offset-for-breadcrumbs"
     >
       <div class="flex items-center py-4 md:py-1.5 my-px gap-x-2">
         <nuxt-link
@@ -29,7 +29,7 @@
         </z-breadcrumb>
       </div>
       <div class="flex items-center h-full">
-        <z-menu class="xl:hidden">
+        <z-menu class="xl:hidden" direction="left">
           <template #trigger="{ toggle }">
             <button
               class="flex items-center gap-x-2 px-2 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
@@ -285,20 +285,19 @@ export default class AnalyzerDetails extends mixins(
   top: var(--top-bar-offset);
 }
 
+/* height for the run page, used to set the correct height for the run sidebar */
 .run-body-height {
   height: calc(100vh - var(--top-bar-offset));
 }
 
+/* offset for the breadcrumb container when sticky */
 .offset-for-breadcrumbs {
   top: calc(var(--repo-header-height) + var(--mobile-navbar-height));
 }
 
+/* offset for the check page parent element when sticky, accomodates the top bar and run header */
 .check-body-offset {
   top: calc(var(--top-bar-offset) + var(--run-check-title-height));
-}
-
-.check-body-height {
-  min-height: calc(100vh - var(--top-bar-offset) - var(--run-check-title-height));
 }
 
 @media (min-width: 640px) {
