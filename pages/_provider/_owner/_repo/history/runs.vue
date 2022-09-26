@@ -7,6 +7,7 @@
       :pr-status="prStatusFilter"
       :run-status="runStatusFilter"
       :search-text="searchText"
+      :loading="fetching"
       class="px-4 pt-5"
       @runs-filter-update="updatePrFilters"
     />

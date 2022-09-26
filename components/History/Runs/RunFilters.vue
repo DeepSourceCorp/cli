@@ -1,6 +1,17 @@
 <template>
   <div class="flex flex-wrap sm:flex-nowrap gap-2">
+    <div v-if="loading">
+      <div class="min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm">
+        <div class="bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2">
+          <div class="bg-ink-100 animate-pulse w-full h-4 rounded-md"></div>
+        </div>
+        <div class="flex justify-center items-center px-2">
+          <div class="bg-ink-300 animate-pulse w-full h-4 rounded-md"></div>
+        </div>
+      </div>
+    </div>
     <z-radio-group
+      v-else
       :model-value="prStatus"
       class="grid grid-cols-2 min-w-52 h-8 font-medium text-vanilla-100 w-full sm:w-auto flex-grow sm:flex-grow-0"
       @change="(value) => $emit('runs-filter-update', { prState: value })"
@@ -116,6 +127,9 @@ export default class RunFilters extends Vue {
 
   @Prop({ type: [String, Number] })
   closedCount: string | number
+
+  @Prop({ type: Boolean, default: true })
+  loading: boolean
 
   @Prop({ type: String, default: PrStateChoices.Open })
   prStatus: PrStateChoices

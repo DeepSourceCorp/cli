@@ -20,3 +20,70 @@ exports[`renders RunFilters with all prop options: RunCard 1`] = `
   </div>
 </div>"
 `;
+
+exports[`renders RunFilters with all prop options: RunCard 2`] = `
+"<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
+  <div>
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+        <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
+      </div>
+      <div class=\\"flex justify-center items-center px-2\\">
+        <div class=\\"bg-ink-300 animate-pulse w-full h-4 rounded-md\\"></div>
+      </div>
+    </div>
+  </div>
+  <zbadge-stub isdot=\\"true\\" size=\\"md\\" type=\\"success\\" textcolor=\\"vanilla-100\\">
+    <zbutton-stub color=\\"\\" iconcolor=\\"honey\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"timer\\"><span>Timed out</span>
+      <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    </zbutton-stub>
+  </zbadge-stub>
+  <div class=\\"flex-grow\\">
+    <zinput-stub name=\\"\\" value=\\"lol\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for PR number or title\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"text-sm\\"><template></template> <template></template></zinput-stub>
+  </div>
+</div>"
+`;
+
+exports[`renders RunFilters with all prop options: RunCard 3`] = `
+"<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
+  <div>
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+        <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
+      </div>
+      <div class=\\"flex justify-center items-center px-2\\">
+        <div class=\\"bg-ink-300 animate-pulse w-full h-4 rounded-md\\"></div>
+      </div>
+    </div>
+  </div>
+  <zbadge-stub isdot=\\"true\\" size=\\"md\\" type=\\"success\\" textcolor=\\"vanilla-100\\">
+    <zbutton-stub color=\\"\\" iconcolor=\\"honey\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"timer\\"><span>Timed out</span>
+      <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    </zbutton-stub>
+  </zbadge-stub>
+  <div class=\\"flex-grow\\">
+    <zinput-stub name=\\"\\" value=\\"lol\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for PR number or title\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"text-sm\\"><template></template> <template></template></zinput-stub>
+  </div>
+</div>"
+`;
+
+exports[`renders RunFilters with all prop options: RunCard 4`] = `
+"<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
+  <zradiogroup-stub modelvalue=\\"OPEN\\" class=\\"grid grid-cols-2 min-w-52 h-8 font-medium text-vanilla-100 w-full sm:w-auto flex-grow sm:flex-grow-0\\">
+    <zradiobutton-stub modelvalue=\\"\\" value=\\"OPEN\\" spacing=\\"w-full h-full pt-1\\" class=\\"text-center space-x-2\\">
+      <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline\\"></zicon-stub> <span class=\\"w-full text-xs capitalize\\">20 Open</span>
+    </zradiobutton-stub>
+    <zradiobutton-stub modelvalue=\\"\\" value=\\"CLOSED\\" spacing=\\"w-full h-full pt-1\\" class=\\"text-center space-x-2\\">
+      <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"inline\\"></zicon-stub> <span class=\\"w-full text-xs capitalize\\">30 Closed</span>
+    </zradiobutton-stub>
+  </zradiogroup-stub>
+  <zbadge-stub isdot=\\"true\\" size=\\"md\\" type=\\"success\\" textcolor=\\"vanilla-100\\">
+    <zbutton-stub color=\\"\\" iconcolor=\\"honey\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"secondary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"timer\\"><span>Timed out</span>
+      <zicon-stub icon=\\"x\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+    </zbutton-stub>
+  </zbadge-stub>
+  <div class=\\"flex-grow\\">
+    <zinput-stub name=\\"\\" value=\\"lol\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for PR number or title\\" debouncedelay=\\"350\\" size=\\"small\\" backgroundcolor=\\"ink-300\\" errorbordercolor=\\"cherry\\" class=\\"text-sm\\"><template></template> <template></template></zinput-stub>
+  </div>
+</div>"
+`;
