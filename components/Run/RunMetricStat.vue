@@ -82,7 +82,7 @@
           </div>
         </div>
         <button
-          v-if="!isInModal"
+          v-if="showMetricSuppressButton"
           class="flex items-center gap-x-1 pl-3 pr-2 text-xs text-vanilla-400 rounded-md cursor-pointer bg-ink-100 hover:bg-ink-50 border border-ink-50"
           @click="$emit('confirmMetricSuppression', metric)"
         >
@@ -182,7 +182,7 @@ export default class RunMetricStat extends Vue {
       this.canSuppressMetric &&
       this.metric.isPassing === false &&
       !this.metric.isSuppressed &&
-      this.isInModal
+      !this.isInModal
     )
   }
 }

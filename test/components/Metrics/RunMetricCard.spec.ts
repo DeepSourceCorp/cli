@@ -1,16 +1,11 @@
-import Vuex, { Store } from 'vuex'
+import Vuex from 'vuex'
 import { createLocalVue } from '@vue/test-utils'
 import { render } from '@testing-library/vue'
 import { RunMetricCard } from '~/components/Run'
 import { RouterLinkStub } from '@vue/test-utils'
 import { VTooltip } from 'v-tooltip'
 import { VueConstructor } from 'vue'
-import {
-  cartesian,
-  generateBooleanProps,
-  generateGenericProps,
-  generateStringProps
-} from '~/test/utils'
+import { cartesian, generateBooleanProps, generateGenericProps } from '~/test/utils'
 import { mockRepositoryDetail } from '~/test/store/repository/__mocks__/detail.mock'
 
 const injectDirective = (vue: VueConstructor) => vue.directive('tooltip', VTooltip)
@@ -48,13 +43,16 @@ test('renders RunMetricCard with all prop options', () => {
     ['Up 50%', 'Down 20%', 'Up 30', 'Down 70'],
     false
   )
+  const isInModalPropCombo = generateBooleanProps('isInModal')
+  const canSuppressMetricPropCombo = generateBooleanProps('canSuppressMetric')
 
   cartesian(
     repositoryPropCombos,
     isPassingPropCombo,
     isSuppressedPropCombo,
     thresholdPropCombo,
-    valueTrendDisplayPropCombo
+    valueTrendDisplayPropCombo,
+    isInModalPropCombo
   ).forEach((propCombination) => {
     const localVue = createLocalVue()
     localVue.use(Vuex)
@@ -68,7 +66,9 @@ test('renders RunMetricCard with all prop options', () => {
           threshold: propCombination.threshold,
           valueTrendDisplay: propCombination.valueTrendDisplay
         }
-      ]
+      ],
+      isInModal: propCombination.isInModal,
+      canSuppressMetric: propCombination.canSuppressMetric
     }
 
     const { html } = render(
@@ -79,7 +79,8 @@ test('renders RunMetricCard with all prop options', () => {
           NuxtLink: RouterLinkStub,
           Ticker: true,
           ZTag: true,
-          ZButton: true
+          ZButton: true,
+          LazyAnalyzerLogo: true
         },
         store: new Vuex.Store({
           modules: {
