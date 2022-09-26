@@ -63,7 +63,7 @@
       class="flex flex-col flex-1 flex-grow p-4 pb-10 gap-y-4"
       :class="{
         'lg:h-64': issueList.totalCount === 0,
-        'min-h-screen max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
+        'max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
       }"
     >
       <empty-state
