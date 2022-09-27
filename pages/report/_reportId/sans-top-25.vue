@@ -14,18 +14,7 @@
               v-if="reportsDataLoading"
               class="w-24 h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
             ></div>
-            <template v-else>
-              <span
-                class="w-2 h-2 rounded-full"
-                :class="compliancePassed ? 'bg-juniper' : 'bg-cherry'"
-              />
-              <span
-                class="text-sm font-semibold tracking-wider uppercase"
-                :class="compliancePassed ? 'text-juniper' : 'text-cherry'"
-              >
-                {{ compliancePassed ? 'Passing' : 'Failing' }}
-              </span>
-            </template>
+            <compliance-status v-else :compliance-passed="compliancePassed" />
           </chart-stat>
 
           <chart-stat title="Active Issues" :value="shortenLargeNumber(currentVal)">

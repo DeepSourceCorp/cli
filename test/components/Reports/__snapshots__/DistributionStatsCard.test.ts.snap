@@ -1,0 +1,561 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":"analyzer","linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":"analyzer","linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":"analyzer","linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":"analyzer"} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":"category","linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":"category","linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":"category","linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":"category"} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":null,"linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":null,"linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":null,"linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url","statType":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":"sample-url"} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\"><img src=\\"sample-url\\" alt=\\"Security\\" class=\\"hidden sm:inline-block flex-shrink-0 w-4 h-4\\">
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":"analyzer","linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":"analyzer","linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":"analyzer","linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":"analyzer"} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":"category","linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":"category","linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":"category","linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":"category"} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":null,"linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":null,"linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":null,"linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null,"statType":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"logoUrl":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":"analyzer","linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":"analyzer","linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":"analyzer","linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":"analyzer"} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":"category","linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":"category","linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":"category","linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":"category"} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":null,"linkCards":false} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":null,"linkCards":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":null,"linkCards":true} 1`] = `
+"<a class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md hover:bg-ink-200\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</a>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {"statType":null} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;
+
+exports[`[[ DistributionStatCard ]] renders DistributionStatCard with all prop options: {} 1`] = `
+"<div class=\\"flex flex-col gap-y-3 p-3 text-vanilla-100 bg-ink-300 rounded-md\\">
+  <h5 class=\\"flex items-center text-sm leading-4 font-medium gap-x-2\\">
+    <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"hidden sm:inline-block\\"></zicon-stub>
+    Security
+  </h5>
+  <div class=\\"font-semibold text-base leading-6\\">
+    7
+  </div>
+</div>"
+`;

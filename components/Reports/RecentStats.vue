@@ -4,41 +4,38 @@
   >
     <div class="flex flex-col items-center gap-y-2">
       <template v-if="loading">
-        <div class="h-4 w-24 mb-0.5 bg-ink-300 animate-pulse rounded-sm"></div>
-        <div class="w-6 h-8 mb-px rounded-sm bg-ink-300 animate-pulse"></div>
+        <div class="h-3.5 w-24 bg-ink-300 animate-pulse rounded-sm"></div>
+        <div class="w-8 h-6 mb-px rounded-sm bg-ink-300 animate-pulse"></div>
       </template>
       <template v-else>
-        <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">Current</h3>
-        <p class="text-xl font-semibold text-vanilla-100">
+        <h3 class="text-xxs font-semibold tracking-wider uppercase text-vanilla-400">Current</h3>
+        <p class="text-base font-semibold text-vanilla-100">
           {{ shortenLargeNumber(currentVal) }}
         </p>
       </template>
     </div>
     <template v-if="loading">
       <div v-for="index in 4" :key="index" class="flex flex-col items-center gap-y-2">
-        <div class="h-4 w-24 mb-0.5 bg-ink-300 animate-pulse rounded-sm"></div>
-        <div class="flex flex-col items-center gap-y-0.5">
-          <div class="w-6 h-8 mb-px rounded-sm bg-ink-300 animate-pulse"></div>
-          <div class="h-5 rounded-sm w-11 bg-ink-300 animate-pulse"></div>
+        <div class="h-3.5 w-24 bg-ink-300 animate-pulse rounded-sm"></div>
+        <div class="flex flex-col items-center gap-y-1">
+          <div class="w-8 h-6 rounded-sm bg-ink-300 animate-pulse"></div>
+          <div class="w-12 h-5 rounded-sm bg-ink-300 animate-pulse"></div>
         </div>
       </div>
     </template>
     <template v-else>
       <div v-for="stat in stats" :key="stat.statLabel" class="flex flex-col items-center gap-y-2">
-        <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
+        <h3 class="text-xxs font-semibold tracking-wider uppercase text-vanilla-400">
           {{ stat.statLabel }}
         </h3>
         <div
           class="flex flex-col items-center gap-y-0.5 h-full"
           :class="{ 'justify-center': stat.statValue && stat.trendValue }"
         >
-          <p
-            v-if="stat.statValue === null"
-            class="text-base font-medium tracking-wider text-slate mt-1"
-          >
+          <p v-if="stat.statValue === null" class="text-base font-medium tracking-wider text-slate">
             N/A
           </p>
-          <p v-else class="text-xl font-semibold text-vanilla-100">
+          <p v-else class="text-base font-semibold text-vanilla-100">
             {{ shortenLargeNumber(stat.statValue) }}
           </p>
           <ticker

@@ -62,6 +62,7 @@ module.exports = {
         discover: '8fr 4fr',
         sidebar: '268px 1fr',
         'repeat-8': 'repeat(auto-fill, minmax(8rem, 1fr))',
+        'repeat-10': 'repeat(auto-fill, minmax(10rem, 1fr))',
         '14-fr': 'minmax(auto, 14rem) 1fr'
       },
       height: {

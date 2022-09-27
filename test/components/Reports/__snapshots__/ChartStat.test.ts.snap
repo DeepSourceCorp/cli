@@ -2,9 +2,9 @@
 
 exports[`renders ComplianceStats with all prop options: {"title":"Active Issues","value":12} 1`] = `
 "<div class=\\"text-xs\\">
-  <p class=\\"text-vanilla-400 mb-2 font-semibold uppercase tracking-wider\\">Active Issues</p>
-  <p class=\\"flex items-center gap-x-1.5\\">
-    <p class=\\"text-sm font-semibold tracking-wider\\">12</p>
+  <p class=\\"text-vanilla-400 mb-2 font-semibold uppercase tracking-wider leading-7\\">
+    Active Issues
   </p>
+  <p class=\\"text-base text-vanilla-100 font-semibold leading-8\\">12</p>
 </div>"
 `;

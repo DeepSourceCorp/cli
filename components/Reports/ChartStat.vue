@@ -1,12 +1,12 @@
 <template>
   <div class="text-xs">
-    <p class="text-vanilla-400 mb-2 font-semibold uppercase tracking-wider">{{ title }}</p>
-
-    <p class="flex items-center gap-x-1.5">
-      <slot>
-        <p class="text-sm font-semibold tracking-wider">{{ value }}</p>
-      </slot>
+    <p class="text-vanilla-400 mb-2 font-semibold uppercase tracking-wider leading-7">
+      {{ title }}
     </p>
+
+    <slot>
+      <p class="text-base text-vanilla-100 font-semibold leading-8">{{ value }}</p>
+    </slot>
   </div>
 </template>
 

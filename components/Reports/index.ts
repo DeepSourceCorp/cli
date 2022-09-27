@@ -1,6 +1,7 @@
 import DateRangePicker from './DateRangePicker.vue'
 import RecentStats from './RecentStats.vue'
 import DistributionStats from './DistributionStats.vue'
+import DistributionStatCard from './DistributionStatCard.vue'
 import OccurrenceTags from './OccurrenceTags.vue'
 import ChartContainer from './ChartContainer.vue'
 import ChartStat from './ChartStat.vue'
@@ -18,10 +19,12 @@ import CodeCoverageTableCell from './CodeCoverageTableCell.vue'
 import CodeCoverageTable from './CodeCoverageTable.vue'
 import CodeCoverageTableLoading from './CodeCoverageTableLoading.vue'
 import DistributionSwitch from './DistributionSwitch.vue'
+import ComplianceStatus from './ComplianceStatus.vue'
 
 export {
   DateRangePicker,
   DistributionStats,
+  DistributionStatCard,
   RecentStats,
   OccurrenceTags,
   ChartContainer,
@@ -39,5 +42,6 @@ export {
   CodeCoverageTableCell,
   CodeCoverageTable,
   CodeCoverageTableLoading,
-  DistributionSwitch
+  DistributionSwitch,
+  ComplianceStatus
 }
