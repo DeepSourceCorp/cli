@@ -129,7 +129,8 @@ import { TeamPerms } from '~/types/permTypes'
 import { Team } from '~/types/types'
 // import { resolveNodes } from '~/utils/array'
 import { getDefaultAvatar } from '~/utils/ui'
-import { FREE_PLAN_SLUG } from '~/types/subscription'
+
+const FREE_PLAN_SLUG = 'free'
 
 @Component({
   components: {

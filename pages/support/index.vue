@@ -48,7 +48,7 @@
                     :fallback-image="getDefaultAvatar(context.login, context.type === 'user')"
                     :user-name="context.login"
                   />
-                  <span v-show="!isCollapsed">
+                  <span>
                     {{ context.team_name || context.login }}
                     {{
                       `(${context.vcs_provider_display} ${
@@ -132,11 +132,10 @@
           </div>
           <p class="text-vanilla-400 text-xs">
             Please be as descriptive as possible.<br />If you're reporting a bug, please list down
-            the steps you took and attach any screenshots if possible. This will help us reproduce
-            the behaviour.
+            the steps you took. This will help us reproduce the behaviour.
           </p>
         </div>
-        <div class="grid items-start my-1 space-x-6 lg:grid-cols-support">
+        <div class="space-y-1.5 max-w-lg flex justify-end">
           <z-button
             type="submit"
             icon="mail"
@@ -145,7 +144,6 @@
             loading-label="Sending request"
             label="Send request"
             size="small"
-            class="justify-self-end"
           />
         </div>
       </form>
