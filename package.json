@@ -1,6 +1,6 @@
 {
   "name": "bifrost",
-  "version": "3.20.0",
+  "version": "3.21.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",
