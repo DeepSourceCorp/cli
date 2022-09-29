@@ -1,8 +1,8 @@
 <template>
   <div class="flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26">
     <div class="flex flex-col gap-y-4 p-3">
-      <div class="flex items-start gap-x-3">
-        <z-icon :icon="currentCheck.analyzer.shortcode" size="large" class="-ml-1" />
+      <div class="flex items-start gap-x-2">
+        <z-icon :icon="currentCheck.analyzer.shortcode" size="large" />
         <div class="text-lg font-bold text-vanilla-100">
           {{ currentCheck.analyzer.name }}
           <span class="font-medium text-vanilla-400"
@@ -28,7 +28,7 @@
       </div>
       <div class="flex gap-x-3">
         <div
-          class="flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-md pl-2 pr-3 h-7"
+          class="flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-3px pl-2 pr-3 h-7"
         >
           <z-icon
             :icon="isForDefaultBranch ? 'git-branch' : 'git-pull-request'"
@@ -49,7 +49,7 @@
           <template #trigger="{ toggle, isOpen }">
             <button
               @click="toggle"
-              class="flex items-center gap-x-2 px-2 h-7 rounded-md cursor-pointer border border-ink-50"
+              class="flex items-center gap-x-2 px-2 h-7 rounded-3px cursor-pointer border border-ink-50"
               :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
             >
               <div class="flex items-center text-sm gap-x-2 text-vanilla-400">

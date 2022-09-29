@@ -72,6 +72,9 @@ module.exports = {
         prose: '65ch',
         '3xs': '12rem'
       },
+      borderRadius: {
+        '3px': '3px'
+      },
       animation: {
         'glow-bg': 'glow 4s ease-out 1ms infinite',
         'pulse-border-once': 'pulse-border-once 1s ease-in forwards',
