@@ -5,7 +5,8 @@
     </p>
 
     <slot>
-      <p class="text-base text-vanilla-100 font-semibold leading-8">{{ value }}</p>
+      <div v-if="loading" class="w-24 h-6 mt-px rounded-sm bg-ink-300 animate-pulse"></div>
+      <p v-else class="text-base text-vanilla-100 font-semibold leading-8">{{ value }}</p>
     </slot>
   </div>
 </template>
@@ -19,9 +20,12 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 @Component({})
 export default class ChartStat extends Vue {
   @Prop({ required: true })
-  public title: string
+  title: string
 
   @Prop()
-  public value: number | string
+  value: number | string
+
+  @Prop({ default: false })
+  loading: boolean
 }
 </script>

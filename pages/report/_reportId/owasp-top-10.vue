@@ -9,20 +9,11 @@
     <section v-if="report" class="space-y-4">
       <chart-container :chart-present="shareHistoricalData">
         <template #report-stats>
-          <chart-stat title="Status">
-            <div
-              v-if="reportsDataLoading"
-              class="w-24 h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
-            ></div>
-            <compliance-status v-else :compliance-passed="compliancePassed" />
+          <chart-stat title="Status" :loading="reportsDataLoading">
+            <compliance-status v-if="!reportsDataLoading" :compliance-passed="compliancePassed" />
           </chart-stat>
 
-          <chart-stat title="Active Issues" :value="shortenLargeNumber(currentVal)">
-            <div
-              v-if="reportsDataLoading"
-              class="w-24 h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
-            ></div>
-          </chart-stat>
+          <chart-stat title="Active Issues" :value="currentVal" :loading="reportsDataLoading" />
         </template>
 
         <template v-if="shareHistoricalData" #report-control>

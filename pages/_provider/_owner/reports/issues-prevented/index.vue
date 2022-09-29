@@ -2,12 +2,11 @@
   <div class="flex flex-col gap-y-4">
     <chart-container>
       <template #report-stats>
-        <chart-stat :value="shortenLargeNumber(currentVal)" title="Issues Prevented">
-          <div
-            v-if="reportsDataLoading"
-            class="w-24 h-5 mt-px rounded-sm bg-ink-300 animate-pulse"
-          ></div>
-        </chart-stat>
+        <chart-stat
+          :value="shortenLargeNumber(currentVal)"
+          title="Issues Prevented"
+          :loading="reportsDataLoading"
+        />
       </template>
 
       <template #report-control>
