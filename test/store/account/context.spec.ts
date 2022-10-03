@@ -11,7 +11,7 @@ import {
   ContextActionTypes,
   ContextMutationTypes
 } from '~/store/account/context'
-import { Changelog, Context } from '~/types/types'
+import { Context } from '~/types/types'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 let commit: jest.Mock
@@ -44,7 +44,6 @@ describe('[Store] Account/Context', () => {
     test('has the right initial data', () => {
       const initState = state()
       expect(initState.context).toEqual(<Context>{})
-      expect(initState.changelog).toEqual(<Changelog>{})
     })
   })
 
@@ -134,56 +133,6 @@ describe('[Store] Account/Context', () => {
         })
       })
     })
-
-    describe(`Action "${ContextActionTypes.FETCH_CHANGELOG}"`, () => {
-      describe('Success', () => {
-        beforeEach(async () => {
-          localThis = {
-            $providerMetaMap: {
-              gh: {
-                text: 'Github',
-                shortcode: 'gh',
-                value: 'GITHUB'
-              }
-            },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                setTimeout(() => resolve({ data: { changelog: mockContextStore().changelog } }), 10)
-              )
-            }
-          }
-
-          // Setting the global spy on `localThis.$fetchGraphqlData`
-          spy = jest.spyOn(localThis, '$fetchGraphqlData')
-
-          await actions[ContextActionTypes.FETCH_CHANGELOG].call(localThis, actionCxt)
-        })
-
-        test('successfully calls the api', () => {
-          expect(spy).toHaveBeenCalledTimes(1)
-        })
-
-        test('successfully commits mutations', async () => {
-          expect(commit).toHaveBeenCalledTimes(1)
-        })
-
-        test(`successfully commits mutation ${ContextMutationTypes.SET_CHANGELOG}`, async () => {
-          // Storing the first commit call made
-          const {
-            mock: {
-              calls: [firstCall]
-            }
-          } = commit
-          const apiResponse = await localThis.$fetchGraphqlData()
-
-          // Assert if `ContextMutationTypes.SET_CONTEXT` is being commited or not.
-          expect(firstCall[0]).toEqual(ContextMutationTypes.SET_CHANGELOG)
-
-          // Assert if the response from api is same as the one passed to the mutation.
-          expect(firstCall[1]).toEqual(apiResponse.data.changelog)
-        })
-      })
-    })
   })
 
   /*
@@ -196,13 +145,6 @@ describe('[Store] Account/Context', () => {
       test('successfully updates context field in state', () => {
         mutations[ContextMutationTypes.SET_CONTEXT](contextState, mockContextStore().context)
         expect(contextState.context).toEqual(mockContextStore().context)
-      })
-    })
-
-    describe(`Mutation "${ContextMutationTypes.SET_CHANGELOG}"`, () => {
-      test('successfully updates context field in state', () => {
-        mutations[ContextMutationTypes.SET_CHANGELOG](contextState, mockContextStore().changelog)
-        expect(contextState.changelog).toEqual(mockContextStore().changelog)
       })
     })
   })

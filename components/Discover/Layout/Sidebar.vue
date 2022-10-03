@@ -124,9 +124,6 @@
           :class="[isCollapsed ? 'w-8' : 'lg:space-x-1 w-full justify-between']"
         >
           <user-menu :is-collapsed="isCollapsed" />
-          <client-only>
-            <change-log v-show="!isCollapsed" v-if="!$config.onPrem" />
-          </client-only>
         </div>
       </div>
 

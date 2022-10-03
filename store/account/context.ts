@@ -1,19 +1,16 @@
-import { Changelog, Context } from '~/types/types'
+import { Context } from '~/types/types'
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 import { RootState } from '~/store'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 import contextQuery from '~/apollo/queries/context/context.gql'
-import changelogQuery from '~/apollo/queries/context/changelog.gql'
 
 export enum ContextMutationTypes {
-  SET_CONTEXT = 'setContext',
-  SET_CHANGELOG = 'setChangelog'
+  SET_CONTEXT = 'setContext'
 }
 
 export enum ContextActionTypes {
-  FETCH_CONTEXT = 'fetchContext',
-  FETCH_CHANGELOG = 'fetchChangelog'
+  FETCH_CONTEXT = 'fetchContext'
 }
 
 export enum ContextGetterTypes {
@@ -22,8 +19,7 @@ export enum ContextGetterTypes {
 }
 
 export const state = () => ({
-  context: <Context>{},
-  changelog: <Changelog>{}
+  context: <Context>{}
 })
 
 export type ContextModuleState = ReturnType<typeof state>
@@ -40,15 +36,11 @@ export const getters: GetterTree<ContextModuleState, RootState> = {
 
 interface ContextModuleMutations extends MutationTree<ContextModuleState> {
   [ContextMutationTypes.SET_CONTEXT]: (state: ContextModuleState, context: Context) => void
-  [ContextMutationTypes.SET_CHANGELOG]: (state: ContextModuleState, changelog: Changelog) => void
 }
 
 export const mutations: ContextModuleMutations = {
   [ContextMutationTypes.SET_CONTEXT]: (state, context: Context) => {
     state.context = context
-  },
-  [ContextMutationTypes.SET_CHANGELOG]: (state, changelog: Changelog) => {
-    state.changelog = changelog
   }
 }
 
@@ -60,10 +52,6 @@ interface ContextModuleActions extends ActionTree<ContextModuleState, RootState>
       refetch?: boolean
     }
   ) => Promise<void>
-  [ContextActionTypes.FETCH_CHANGELOG]: (
-    this: Store<RootState>,
-    injectee: ContextActionContext
-  ) => Promise<void>
 }
 
 export const actions: ContextModuleActions = {
@@ -74,9 +62,5 @@ export const actions: ContextModuleActions = {
       args?.refetch
     )
     commit(ContextMutationTypes.SET_CONTEXT, response.data.context)
-  },
-  async [ContextActionTypes.FETCH_CHANGELOG]({ commit }) {
-    const response: GraphqlQueryResponse = await this.$fetchGraphqlData(changelogQuery, {})
-    commit(ContextMutationTypes.SET_CHANGELOG, response.data.changelog)
   }
 }

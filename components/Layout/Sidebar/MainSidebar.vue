@@ -181,9 +181,6 @@
           :class="{ 'lg:space-x-1 w-full justify-between': !isCollapsed, 'w-8': isCollapsed }"
         >
           <user-menu :is-collapsed="isCollapsed" />
-          <client-only>
-            <change-log v-if="!$config.onPrem" v-show="!isCollapsed" class="pr-px" />
-          </client-only>
         </div>
       </div>
       <div class="p-4 border-t border-ink-200" :class="{ 'pt-2': isChristmasSeason() }">
