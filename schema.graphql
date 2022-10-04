@@ -1987,6 +1987,7 @@ type PublicReport implements MaskPrimaryKeyNode {
   level: ReportLevel
   report(key: String!): Report
   complianceIssues(key: String!): [ComplianceIssue]
+  complianceIssuesSeverityMap(key: String!): ComplianceIssueOccurrence
   issueDistributionByAnalyzer(key: String!): [IssueDistribution]
   issueDistributionByCategory(key: String!): [IssueDistribution]
   repositoriesCoverageReport(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String): RepositoryCoverageReportItemConnection
@@ -2042,6 +2043,7 @@ type Query {
   report(level: ReportLevel, key: String, objectId: ID): Report
   reports(level: ReportLevel, objectId: ID): [Report]
   complianceIssues(level: ReportLevel, reportKey: String, objectId: ID): [ComplianceIssue]
+  complianceIssuesSeverityMap(level: ReportLevel, reportKey: String, objectId: ID): ComplianceIssueOccurrence
   issueDistributionByAnalyzer(level: ReportLevel, reportKey: String!, objectId: ID): [IssueDistribution]
   issueDistributionByCategory(level: ReportLevel, reportKey: String!, objectId: ID): [IssueDistribution]
   publicReport(reportId: String, token: String): PublicReport
@@ -2251,7 +2253,7 @@ type Repository implements MaskPrimaryKeyNode {
   vcsDefaultBranchUrl: String
   issue(shortcode: String!): RepositoryIssue
   lastRun: Run
-  groupedRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
+  groupedRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection @deprecated(reason: "Removed in favour of `prs`")
   pr(number: Int!): PR
   openPrCount: Int
   closedPrCount: Int
@@ -2278,7 +2280,6 @@ type Repository implements MaskPrimaryKeyNode {
   autofixableIssuesMetadata: AutofixableIssuesMetadata
   userPermissionMeta: GenericScalar
   issueTypeDistribution(issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): [GenericScalar]
-  alertingMetrics: GenericScalar
   recommendedIssueCount: Int
   totalIssueCount: Int
   isStarred: Boolean

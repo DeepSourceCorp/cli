@@ -117,14 +117,6 @@ export default class RepoDetailMixin extends Vue {
     refetch?: boolean
   }) => Promise<void>
 
-  @repoStore.Action(RepositoryDetailActions.FETCH_ALERTING_METRICS)
-  fetchAlertingMetrics: (args: {
-    provider: string
-    owner: string
-    name: string
-    refetch?: boolean
-  }) => Promise<void>
-
   @repoStore.Action(RepositoryDetailActions.FETCH_ISSUE_TRENDS)
   fetchIssueTrends: (args: {
     provider: string

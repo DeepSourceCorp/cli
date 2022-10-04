@@ -16,7 +16,6 @@ import RepositoryWidgetsGQLQuery from '~/apollo/queries/repository/widgets.gql'
 import RepositoryMetricsGQLQuery from '~/apollo/queries/repository/metrics/metrics.gql'
 import RepositoryMetricGQLQuery from '~/apollo/queries/repository/metrics/metric.gql'
 import RepositoryMetricUpdateThresoldGQLQuery from '~/apollo/queries/repository/metrics/metricThresholdUpdateData.gql'
-import RepositoryAlertingMetricsGQLQuery from '~/apollo/queries/repository/alertingMetrics.gql'
 import RepositorySettingsGeneralGQLQuery from '~/apollo/queries/repository/settings/general.gql'
 import RepositorySettingsSshGQLQuery from '~/apollo/queries/repository/settings/ssh.gql'
 import RepositorySettingsIgnoreRulesGQLQuery from '~/apollo/queries/repository/settings/ignoreRules.gql'
@@ -118,7 +117,6 @@ export enum RepositoryDetailActions {
   FETCH_METRICS = 'fetchMetrics',
   FETCH_METRIC = 'fetchMetric',
   FETCH_NLCV_METRIC = 'fetchNlcvMetric',
-  FETCH_ALERTING_METRICS = 'fetchAlertingMetrics',
   FETCH_CURRENT_RUN_COUNT = 'fetchCurrentRunCount',
   FETCH_ISSUE_TRENDS = 'fetchIssueTrends',
   FETCH_AUTOFIX_TRENDS = 'fetchAutofixTrends',
@@ -266,16 +264,6 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
       refetch?: boolean
     }
   ) => Promise<Repository>
-  [RepositoryDetailActions.FETCH_ALERTING_METRICS]: (
-    this: Store<RootState>,
-    injectee: RepositoryDetailActionContext,
-    args: {
-      provider: string
-      owner: string
-      name: string
-      refetch?: boolean
-    }
-  ) => Promise<void>
   [RepositoryDetailActions.FETCH_ISSUE_TRENDS]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -643,29 +631,6 @@ export const actions: RepositoryDetailModuleActions = {
       )
     }
     return state.repository
-  },
-  async [RepositoryDetailActions.FETCH_ALERTING_METRICS]({ commit }, args) {
-    commit(RepositoryDetailMutations.SET_LOADING, true)
-    // use metrics query later
-    await this.$fetchGraphqlData(
-      RepositoryAlertingMetricsGQLQuery,
-      {
-        provider: this.$providerMetaMap[args.provider].value,
-        owner: args.owner,
-        name: args.name
-      },
-      args.refetch
-    )
-      .then((response: GraphqlQueryResponse) => {
-        // TODO: Toast("Successfully fetched widgets")
-        commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-      })
-      .catch((e: GraphqlError) => {
-        commit(RepositoryDetailMutations.SET_ERROR, e)
-        commit(RepositoryDetailMutations.SET_LOADING, false)
-        // TODO: Toast("Failure in fetching widgets", e)
-      })
   },
   async [RepositoryDetailActions.FETCH_CURRENT_RUN_COUNT]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)

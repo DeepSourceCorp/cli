@@ -8,7 +8,6 @@ import EmptyTrend from './Trend/EmptyTrend.vue'
 import AddNlcvThresholdModal from './Trend/AddNlcvThresholdModal.vue'
 
 import StatSection from './StatSection.vue'
-import AlertingMetricsSection from './AlertingMetricsSection.vue'
 
 import MetricsGraph from './PerformanceGraph/MetricsGraph.vue'
 import GraphDataSelector from './PerformanceGraph/GraphDataSelector.vue'
@@ -18,7 +17,6 @@ export {
   StatCard,
   TrendCard,
   StatSection,
-  AlertingMetricsSection,
   MetricsGraph,
   GraphDataSelector,
   GraphChart,

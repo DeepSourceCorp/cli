@@ -1616,15 +1616,6 @@ declare module '*/addableMembers.gql' {
 }
     
 
-declare module '*/alertingMetrics.gql' {
-  import { DocumentNode } from 'graphql';
-  const defaultDocument: DocumentNode;
-  
-
-  export default defaultDocument;
-}
-    
-
 declare module '*/analysisRun.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

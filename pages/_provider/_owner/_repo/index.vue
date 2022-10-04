@@ -1,7 +1,6 @@
 <template>
   <div class="p-4 space-y-6">
     <issue-overview-cards />
-    <!-- <alerting-metrics-section :routeToMetricsPage="true" /> -->
     <code-quality-graph />
     <client-only>
       <recent-runs-section />
