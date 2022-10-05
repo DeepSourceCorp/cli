@@ -19,9 +19,11 @@
         >
           <span
             class="hidden p-2 rounded-md group-hover:text-vanilla-100 lg:block"
-            :class="{
-              'bg-ink-300': $route && $route.name && $route.name.startsWith(option.routeName)
-            }"
+            :class="
+              $route && $route.name && $route.name.startsWith(option.routeName)
+                ? 'bg-ink-300 text-vanilla-100'
+                : 'text-vanilla-400'
+            "
             >{{ option.label }}</span
           >
         </nuxt-link>

@@ -11,7 +11,9 @@
         >
           <span
             class="flex items-center justify-between p-2 rounded-md group-hover:text-vanilla-100"
-            :class="{ 'bg-ink-300': $route.path.startsWith(item.link) }"
+            :class="
+              $route.path.startsWith(item.link) ? 'bg-ink-300 text-vanilla-100' : 'text-vanilla-400'
+            "
             >{{ item.label }}
             <z-tag
               v-if="item.count"
