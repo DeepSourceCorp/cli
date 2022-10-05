@@ -201,7 +201,12 @@
           </div>
           <section v-if="endpointDeliveriesCount && readOnly" class="py-4 space-y-2">
             <h4 class="text-sm text-vanilla-100">Webhook deliveries</h4>
-            <webhook-log-list :key="$route.params.webhookId" />
+            <webhook-log-list
+              :key="$route.params.webhookId"
+              :endpoint-deliveries="endpointDeliveries"
+              :endpoint-deliveries-count="endpointDeliveriesCount"
+              @update-page-number="fetchEndpointDeliveriesList"
+            />
           </section>
         </form-group>
 
@@ -314,11 +319,7 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
     await Promise.all([
       this.fetchSingleEndpoint({ webhookId }),
       this.fetchWebhookEventTypesList(),
-      this.fetchEndpointDeliveries({
-        webhookId,
-        currentPage: 1,
-        limit: 8
-      })
+      this.fetchEndpointDeliveriesList()
     ])
 
     this.localEndpoint = JSON.parse(JSON.stringify(this.endpoint))
@@ -367,6 +368,22 @@ export default class WebhookEndpoint extends mixins(WebhookMixin, ActiveUserMixi
       this.logErrorForUser(e as Error, 'Disable webhook', { webhookId: webhookId })
       this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
     }
+  }
+
+  /**
+   * Method to fetch the webhook endpoint deliveries list
+   *
+   * @param {number} [currentPage]
+   * @returns {Promise<void>}
+   */
+  fetchEndpointDeliveriesList(currentPage?: number): Promise<void> {
+    const { webhookId } = this.$route.params
+
+    return this.fetchEndpointDeliveries({
+      webhookId,
+      currentPage: currentPage || 1,
+      limit: 8
+    })
   }
 
   /**

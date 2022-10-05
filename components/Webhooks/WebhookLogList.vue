@@ -11,28 +11,38 @@
     >
       <webhook-log-list-item v-for="event in endpointDeliveries" :key="event.id" v-bind="event" />
     </ul>
-    <div class="p-3 flex justify-center border-t border-ink-200" v-if="pageCount > 1">
+    <div v-if="pageCount > 1" class="p-3 flex justify-center border-t border-ink-200">
       <z-pagination
-        class="flex justify-center"
-        :totalPages="pageCount"
-        :totalVisible="5"
+        :total-pages="pageCount"
+        :total-visible="5"
         :page="currentPage"
+        class="flex justify-center"
         @selected="updateCurrentPage"
-      ></z-pagination>
+      />
     </div>
   </div>
 </template>
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { ZPagination } from '@deepsourcelabs/zeal'
-import WebhookMixin from '~/mixins/webhookMixin'
 
+import { WebhookEventDelivery } from '~/types/types'
+
+/**
+ * Component representing the webhook logs list
+ */
 @Component({
   components: {
     ZPagination
   }
 })
-export default class WebhookLogList extends mixins(WebhookMixin) {
+export default class WebhookLogList extends Vue {
+  @Prop({ required: true })
+  endpointDeliveries: Array<WebhookEventDelivery>
+
+  @Prop({ required: true })
+  endpointDeliveriesCount: number
+
   currentPage = 1
   limit = 8
 
@@ -40,22 +50,17 @@ export default class WebhookLogList extends mixins(WebhookMixin) {
     return Math.ceil(this.endpointDeliveriesCount / this.limit)
   }
 
+  /**
+   * Method to update the current page number
+   *
+   * @param {number} pageNumber
+   * @returns {void}
+   */
   updateCurrentPage(pageNumber: number): void {
     this.currentPage = pageNumber
-    this.$fetch()
-  }
 
-  get totalVisible(): number {
-    return this.pageCount >= 5 ? 5 : this.pageCount
-  }
-
-  async fetch(): Promise<void> {
-    const { webhookId } = this.$route.params
-    await this.fetchEndpointDeliveries({
-      webhookId,
-      currentPage: this.currentPage,
-      limit: this.limit
-    })
+    // Emit an event supplying the page number
+    this.$emit('update-page-number', pageNumber)
   }
 }
 </script>

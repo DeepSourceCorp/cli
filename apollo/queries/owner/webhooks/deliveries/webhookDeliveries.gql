@@ -7,7 +7,6 @@ query webhookDeliveries($webhookId: ID!, $limit: Int, $after: String) {
         node {
           id
           eventId
-          payload
           createdAt
           retryCount
           finishedIn

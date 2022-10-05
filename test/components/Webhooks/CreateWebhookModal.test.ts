@@ -61,8 +61,9 @@ describe('[[ CreateWebhookModal ]]', () => {
         mocks,
         store,
         stubs: {
-          ZModal: true,
           CopyButton: true,
+          ToggleInput: true,
+          ZModal: true,
           ZButton: true,
           ZInput: true
         }

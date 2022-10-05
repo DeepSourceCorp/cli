@@ -9203,7 +9203,7 @@ export type WebhookDeliveriesQuery = (
         { __typename?: 'WebhookEventDeliveryEdge' }
         & { node?: Maybe<(
           { __typename?: 'WebhookEventDelivery' }
-          & Pick<WebhookEventDelivery, 'id' | 'eventId' | 'payload' | 'createdAt' | 'retryCount' | 'finishedIn' | 'deliveryId' | 'httpStatusCode'>
+          & Pick<WebhookEventDelivery, 'id' | 'eventId' | 'createdAt' | 'retryCount' | 'finishedIn' | 'deliveryId' | 'httpStatusCode'>
           & { eventType: (
             { __typename?: 'WebhookEventTypes' }
             & Pick<WebhookEventTypes, 'id' | 'name' | 'shortcode'>

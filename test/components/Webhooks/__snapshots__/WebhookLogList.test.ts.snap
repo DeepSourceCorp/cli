@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ WebhookLogList ]] renders the list of webhook logs 1`] = `
+"<div class=\\"border border-ink-200 rounded-md\\">
+  <div class=\\"p-3 grid grid-cols-6 text-sm\\"><span> Status </span> <span class=\\"col-span-3\\"> Event name </span> <span class=\\"col-span-1 text-right\\"> Created </span> <span class=\\"col-span-1 text-right\\"> Finished in </span></div>
+  <ul class=\\"divide-y divide-ink-200 border-t border-ink-200 max-h-96 overflow-scroll default-scroll\\">
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6YnFkbG9v\\" eventid=\\"428382911570379267\\" createdat=\\"2022-10-04T06:41:52.793663+00:00\\" retrycount=\\"0\\" finishedin=\\"0.489\\" deliveryid=\\"428382911687819787\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6emxsdm5l\\" eventid=\\"428382915496247811\\" createdat=\\"2022-10-04T06:41:55.127159+00:00\\" retrycount=\\"0\\" finishedin=\\"0.389\\" deliveryid=\\"428382915596911115\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6enhqa3ls\\" eventid=\\"428382953999958531\\" createdat=\\"2022-10-04T06:42:18.058261+00:00\\" retrycount=\\"0\\" finishedin=\\"0.358\\" deliveryid=\\"428382954067067403\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6YmV2cm13\\" eventid=\\"428382951365935619\\" createdat=\\"2022-10-04T06:42:16.503934+00:00\\" retrycount=\\"0\\" finishedin=\\"0.526\\" deliveryid=\\"428382951466598923\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6em1sbXls\\" eventid=\\"428382957271515651\\" createdat=\\"2022-10-04T06:42:22.142793+00:00\\" retrycount=\\"0\\" finishedin=\\"0.371\\" deliveryid=\\"428382960928948747\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6YnlseG14\\" eventid=\\"428382961063166467\\" createdat=\\"2022-10-04T06:42:23.066198+00:00\\" retrycount=\\"0\\" finishedin=\\"0.351\\" deliveryid=\\"428382962472452619\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6Ymxsdnlu\\" eventid=\\"428382964468941315\\" createdat=\\"2022-10-04T06:42:24.614464+00:00\\" retrycount=\\"0\\" finishedin=\\"0.369\\" deliveryid=\\"428382965072921099\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6emptdnJk\\" eventid=\\"428382969619546627\\" createdat=\\"2022-10-04T06:42:28.941289+00:00\\" retrycount=\\"0\\" finishedin=\\"0.541\\" deliveryid=\\"428382972337455627\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6emV2cmt3\\" eventid=\\"428382971968356867\\" createdat=\\"2022-10-04T06:42:30.885723+00:00\\" retrycount=\\"0\\" finishedin=\\"0.381\\" deliveryid=\\"428382975592235531\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+    <webhookloglistitem-stub id=\\"V2ViaG9va0V2ZW50RGVsaXZlcnk6Ynhqa3Zs\\" eventid=\\"428382978259812867\\" createdat=\\"2022-10-04T06:42:34.234821+00:00\\" retrycount=\\"0\\" finishedin=\\"0.346\\" deliveryid=\\"428382981212602891\\" httpstatuscode=\\"200\\" eventtype=\\"[object Object]\\"></webhookloglistitem-stub>
+  </ul>
+  <div class=\\"p-3 flex justify-center border-t border-ink-200\\">
+    <zpagination-stub page=\\"1\\" totalpages=\\"2\\" totalvisible=\\"5\\" hideforsinglepage=\\"true\\" class=\\"flex justify-center\\"></zpagination-stub>
+  </div>
+</div>"
+`;
