@@ -1,4 +1,9 @@
-query complianceIssues($level: ReportLevel!, $objectId: ID!, $reportKey: String!) {
+query complianceIssues(
+  $level: ReportLevel!
+  $objectId: ID!
+  $reportKey: String!
+  $isOwasp: Boolean!
+) {
   complianceIssues(level: $level, reportKey: $reportKey, objectId: $objectId) {
     issueId
     title
@@ -9,5 +14,13 @@ query complianceIssues($level: ReportLevel!, $objectId: ID!, $reportKey: String!
       total
     }
     rank
+  }
+
+  complianceIssuesSeverityMap(level: $level, reportKey: $reportKey, objectId: $objectId)
+    @include(if: $isOwasp) {
+    high
+    medium
+    low
+    total
   }
 }

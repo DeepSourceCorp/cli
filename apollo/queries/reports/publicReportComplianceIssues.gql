@@ -1,4 +1,9 @@
-query publicReportComplianceIssues($reportId: String!, $token: String, $reportKey: String!) {
+query publicReportComplianceIssues(
+  $reportId: String!
+  $token: String
+  $reportKey: String!
+  $isOwasp: Boolean!
+) {
   publicReport(reportId: $reportId, token: $token) {
     id
     complianceIssues(key: $reportKey) {
@@ -11,6 +16,13 @@ query publicReportComplianceIssues($reportId: String!, $token: String, $reportKe
         total
       }
       rank
+    }
+
+    complianceIssuesSeverityMap(key: $reportKey) @include(if: $isOwasp) {
+      high
+      medium
+      low
+      total
     }
   }
 }

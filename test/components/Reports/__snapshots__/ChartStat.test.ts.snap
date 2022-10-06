@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ComplianceStats with all prop options: {"title":"Active Issues","value":12} 1`] = `
-"<div class=\\"text-xs\\">
+"<div class=\\"text-xs h-14 flex flex-col justify-between\\">
   <p class=\\"text-vanilla-400 mb-2 font-semibold uppercase tracking-wider leading-7\\">
     Active Issues
   </p>

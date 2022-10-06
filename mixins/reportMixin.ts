@@ -8,7 +8,14 @@ import { reportBase } from '@/apollo/queries/reports/reportBase.gql'
 import { recentStats } from '@/apollo/queries/reports/recentStats.gql'
 import { historicalValues } from '@/apollo/queries/reports/historicalValues.gql'
 
-import { ComplianceIssue, RecentStat, Report, ReportLevel, Repository } from '~/types/types'
+import {
+  ComplianceIssue,
+  ComplianceIssueOccurrence,
+  RecentStat,
+  Report,
+  ReportLevel,
+  Repository
+} from '~/types/types'
 
 import { roundToSignificantNumber } from '~/utils/number'
 
@@ -23,6 +30,7 @@ export default class ReportMixin extends Vue {
   public labels: Array<string> = []
   public datasets: Array<Dataset> = []
   public complianceIssueList: Array<ComplianceIssue> = []
+  public complianceIssuesSeverityMap: ComplianceIssueOccurrence = {}
 
   public reportsDataLoading = false
   public historicalValuesLoading = false

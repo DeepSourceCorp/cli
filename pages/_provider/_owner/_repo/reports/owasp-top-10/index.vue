@@ -2,11 +2,21 @@
   <div class="flex flex-col gap-y-4">
     <chart-container>
       <template #report-stats>
-        <chart-stat title="Status" :loading="reportsDataLoading">
-          <compliance-status v-if="!reportsDataLoading" :compliance-passed="compliancePassed" />
-        </chart-stat>
+        <div class="flex flex-wrap gap-y-6 gap-x-8">
+          <div class="flex flex-wrap gap-y-6 gap-x-16">
+            <chart-stat title="Status" :loading="reportsDataLoading">
+              <compliance-status v-if="!reportsDataLoading" :compliance-passed="compliancePassed" />
+            </chart-stat>
+            <chart-stat title="Active Issues" :value="currentVal" :loading="reportsDataLoading" />
+          </div>
 
-        <chart-stat title="Active Issues" :value="currentVal" :loading="reportsDataLoading" />
+          <severity-counts
+            v-if="complianceIssuesSeverityMap"
+            v-bind="complianceIssuesSeverityMap"
+            :loading="complianceIssuesLoading"
+            class="hidden border-l border-ink-200 pl-8 md:flex lg:hidden xl:flex"
+          />
+        </div>
       </template>
 
       <template #report-control>
@@ -16,6 +26,13 @@
           @change="setChartData"
         />
       </template>
+
+      <severity-counts
+        v-if="complianceIssuesSeverityMap"
+        v-bind="complianceIssuesSeverityMap"
+        :loading="complianceIssuesLoading"
+        class="px-5 mt-6 md:hidden lg:flex xl:hidden"
+      />
 
       <div
         v-show="historicalValuesLoading"

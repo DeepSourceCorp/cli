@@ -3,8 +3,8 @@
     class="grid grid-cols-1 py-4 border rounded-lg border-ink-200"
     :class="{ 'min-h-96': chartPresent }"
   >
-    <div class="flex px-5">
-      <div class="grid flex-grow gap-10 grid-cols-repeat-8">
+    <div class="flex justify-between gap-4 px-5">
+      <div class="flex flex-wrap gap-y-6 gap-x-16">
         <slot name="report-stats"></slot>
       </div>
       <div class="flex-shrink-0">

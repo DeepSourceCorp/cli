@@ -1,8 +1,14 @@
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ComplianceIssue, ReportLevel, ReportStatus } from '~/types/types'
+import {
+  ComplianceIssue,
+  ComplianceIssueOccurrence,
+  ReportLevel,
+  ReportStatus
+} from '~/types/types'
 import { complianceIssues } from '@/apollo/queries/reports/complianceIssues.gql'
 import ReportMixin from './reportMixin'
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
+import { ReportPageT } from '~/types/reportTypes'
 
 /**
  * Mixin for compliance report utilities
@@ -14,19 +20,24 @@ export default class ComplianceReportMixin extends mixins(ReportMixin) {
    *
    * @param {ReportLevel} level
    * @param {string} objectId
-   * @param {string} reportKey
+   * @param {ReportPageT} reportKey
    */
-  public async fetchComplianceIssues(level: ReportLevel, objectId: string, reportKey: string) {
+  public async fetchComplianceIssues(level: ReportLevel, objectId: string, reportKey: ReportPageT) {
     if (objectId && level && reportKey) {
+      const isOwasp = reportKey === ReportPageT.OWASP_TOP_10
+
       this.complianceIssuesLoading = true
       try {
         const response = (await this.$fetchGraphqlData(complianceIssues, {
           level,
           objectId,
-          reportKey
+          reportKey,
+          isOwasp
         })) as GraphqlQueryResponse
 
-        this.complianceIssueList = response.data.complianceIssues as Array<ComplianceIssue>
+        this.complianceIssueList = response.data?.complianceIssues as Array<ComplianceIssue>
+        this.complianceIssuesSeverityMap = response.data
+          ?.complianceIssuesSeverityMap as ComplianceIssueOccurrence
       } catch (e) {
         this.$logErrorAndToast(
           e as Error,

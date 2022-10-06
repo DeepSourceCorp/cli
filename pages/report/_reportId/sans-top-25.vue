@@ -226,11 +226,7 @@ export default class PublicReportSans extends mixins(PublicReportMixin, Complian
       })
 
       const promises: Array<Promise<void>> = [
-        this.fetchPublicReportComplianceIssues({
-          reportId,
-          reportKey: ReportPageT.SANS_TOP_25,
-          token: this.token
-        })
+        this.fetchPublicReportComplianceIssues(reportId, ReportPageT.SANS_TOP_25, this.token)
       ]
 
       if (this.shareHistoricalData) {

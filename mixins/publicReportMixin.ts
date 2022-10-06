@@ -22,11 +22,11 @@ import PaginationMixin from './paginationMixin'
 
 import {
   ComplianceIssue,
+  ComplianceIssueOccurrence,
   CreatePublicReportInput,
   IssueDistribution,
   PublicReport,
   PublicReportBaseReportQueryVariables,
-  PublicReportComplianceIssuesQueryVariables,
   PublicReportRecentStatsQueryVariables,
   RecentStat,
   Report,
@@ -409,22 +409,33 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
   /**
    * Fetch recent stats for a report inside public report
    *
-   * @param args {PublicReportComplianceIssuesQueryVariables}
+   * @param {string} reportId
+   * @param {ReportPageT} reportKey
+   * @param {string} token
    *
    * @return {Promise<void>}
    */
   public async fetchPublicReportComplianceIssues(
-    args: PublicReportComplianceIssuesQueryVariables
+    reportId: string,
+    reportKey: ReportPageT,
+    token?: string
   ): Promise<void> {
     this.complianceIssuesLoading = true
     try {
-      const response = (await this.$fetchGraphqlData(
-        publicReportComplianceIssues,
-        args
-      )) as GraphqlQueryResponse
+      const isOwasp = reportKey === ReportPageT.OWASP_TOP_10
+
+      const response = (await this.$fetchGraphqlData(publicReportComplianceIssues, {
+        reportId,
+        token,
+        reportKey,
+        isOwasp
+      })) as GraphqlQueryResponse
 
       this.complianceIssueList = response.data.publicReport
         ?.complianceIssues as Array<ComplianceIssue>
+
+      this.complianceIssuesSeverityMap = response.data.publicReport
+        ?.complianceIssuesSeverityMap as ComplianceIssueOccurrence
     } catch (e) {
       this.$logErrorAndToast(
         e as Error,

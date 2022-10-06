@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders SeverityCounts with all prop options: {"high":1,"low":2,"medium":0} 1`] = `
+"<div class=\\"flex gap-x-8 font-semibold text-xs\\">
+  <chart-stat title=\\"critical\\">
+    <div class=\\"flex items-center gap-x-2\\">
+      <zicon-stub icon=\\"issue-critical\\" size=\\"x-small\\" position=\\"\\" color=\\"cherry\\"></zicon-stub> <span class=\\"text-xs font-semibold\\">1</span>
+    </div>
+  </chart-stat>
+  <chart-stat title=\\"major\\">
+    <div class=\\"flex items-center gap-x-2\\">
+      <zicon-stub icon=\\"issue-major\\" size=\\"x-small\\" position=\\"\\" color=\\"honey\\"></zicon-stub> <span class=\\"text-xs font-semibold\\">0</span>
+    </div>
+  </chart-stat>
+  <chart-stat title=\\"minor\\">
+    <div class=\\"flex items-center gap-x-2\\">
+      <zicon-stub icon=\\"issue-minor\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-xs font-semibold\\">1</span>
+    </div>
+  </chart-stat>
+</div>"
+`;

@@ -9389,6 +9389,7 @@ export type ComplianceIssuesQueryVariables = Exact<{
   level: ReportLevel;
   objectId: Scalars['ID'];
   reportKey: Scalars['String'];
+  isOwasp: Scalars['Boolean'];
 }>;
 
 
@@ -9401,7 +9402,10 @@ export type ComplianceIssuesQuery = (
       { __typename?: 'ComplianceIssueOccurrence' }
       & Pick<ComplianceIssueOccurrence, 'high' | 'medium' | 'low' | 'total'>
     )> }
-  )>>> }
+  )>>>, complianceIssuesSeverityMap?: Maybe<(
+    { __typename?: 'ComplianceIssueOccurrence' }
+    & Pick<ComplianceIssueOccurrence, 'high' | 'medium' | 'low' | 'total'>
+  )> }
 );
 
 export type HistoricalValuesQueryVariables = Exact<{
@@ -9506,6 +9510,7 @@ export type PublicReportComplianceIssuesQueryVariables = Exact<{
   reportId: Scalars['String'];
   token?: Maybe<Scalars['String']>;
   reportKey: Scalars['String'];
+  isOwasp: Scalars['Boolean'];
 }>;
 
 
@@ -9521,7 +9526,10 @@ export type PublicReportComplianceIssuesQuery = (
         { __typename?: 'ComplianceIssueOccurrence' }
         & Pick<ComplianceIssueOccurrence, 'high' | 'medium' | 'low' | 'total'>
       )> }
-    )>>> }
+    )>>>, complianceIssuesSeverityMap?: Maybe<(
+      { __typename?: 'ComplianceIssueOccurrence' }
+      & Pick<ComplianceIssueOccurrence, 'high' | 'medium' | 'low' | 'total'>
+    )> }
   )> }
 );
 

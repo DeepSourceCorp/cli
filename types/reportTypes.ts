@@ -200,13 +200,6 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   }
 }
 
-export type ComplianceIssueOccurences = {
-  high?: number
-  medium?: number
-  low?: number
-  totalValue: number
-}
-
 export type DateRangeOptionT = {
   count: number
   durationType: DurationTypeT

@@ -20,6 +20,7 @@ import CodeCoverageTable from './CodeCoverageTable.vue'
 import CodeCoverageTableLoading from './CodeCoverageTableLoading.vue'
 import DistributionSwitch from './DistributionSwitch.vue'
 import ComplianceStatus from './ComplianceStatus.vue'
+import SeverityCounts from './SeverityCounts.vue'
 
 export {
   DateRangePicker,
@@ -43,5 +44,6 @@ export {
   CodeCoverageTable,
   CodeCoverageTableLoading,
   DistributionSwitch,
-  ComplianceStatus
+  ComplianceStatus,
+  SeverityCounts
 }
