@@ -17,27 +17,29 @@
     <z-menu v-if="canIgnoreIssues" direction="left" class="text-vanilla-100">
       <template v-slot:trigger="{ toggle }">
         <div class="flex items-center gap-x-2">
-          <z-button
-            type="button"
-            buttonType="secondary"
-            size="small"
-            icon="chevron-left"
-            class="hidden sm:flex"
-            v-tooltip="previousIssue && previousIssue.label"
-            :disabled="!previousIssue"
-            @click="() => $router.push(previousIssue.to)"
-          />
+          <div v-if="showNavButtons" class="flex items-center gap-x-2">
+            <z-button
+              type="button"
+              buttonType="secondary"
+              size="small"
+              icon="chevron-left"
+              class="hidden sm:flex"
+              v-tooltip="previousIssue && previousIssue.label"
+              :disabled="!previousIssue"
+              @click="() => $router.push(previousIssue.to)"
+            />
 
-          <z-button
-            type="button"
-            buttonType="secondary"
-            size="small"
-            icon="chevron-right"
-            class="hidden sm:flex"
-            v-tooltip="nextIssue && nextIssue.label"
-            :disabled="!nextIssue"
-            @click="() => $router.push(nextIssue.to)"
-          />
+            <z-button
+              type="button"
+              buttonType="secondary"
+              size="small"
+              icon="chevron-right"
+              class="hidden sm:flex"
+              v-tooltip="nextIssue && nextIssue.label"
+              :disabled="!nextIssue"
+              @click="() => $router.push(nextIssue.to)"
+            />
+          </div>
 
           <z-button
             type="button"
@@ -358,6 +360,14 @@ export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDe
 
   get canIgnoreIssues() {
     return this.repoPerms.canIgnoreIssues
+  }
+
+  /**
+   * Ensures that nav buttons are only shown for the history page
+   */
+  get showNavButtons() {
+    const { runId } = this.$route.params
+    return runId ? true : false
   }
 
   /**
