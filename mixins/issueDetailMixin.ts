@@ -50,8 +50,9 @@ export default class IssueDetailMixin extends Vue {
     name: string
     limit?: number
     currentPage?: number
-    issueCode: string
-  }) => Promise<void>
+    issueCode?: string
+    refetch?: boolean
+  }) => Promise<Array<SilenceRule>>
 
   @issueStore.Action(IssueDetailActions.FETCH_SINGLE_ISSUE)
   fetchSingleIssue: (args: { shortcode: string }) => Promise<void>

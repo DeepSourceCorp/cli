@@ -15,7 +15,7 @@
         :key="rule.node.id"
         :rule="rule.node"
         :vertical-padding="idx === 0 ? 'pb-4' : 'py-4'"
-        @deleteRuleTriggered="openDeleteRuleModal"
+        @delete-rule-triggered="openDeleteRuleModal"
       />
     </div>
     <empty-state

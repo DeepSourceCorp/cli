@@ -9900,14 +9900,6 @@ export type Unnamed_123_Query = (
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'descriptionRendered' | 'issueType' | 'title' | 'shortcode' | 'firstSeen' | 'lastSeen' | 'modifiedAt' | 'occurrenceCount' | 'analyzerName' | 'analyzerShortcode' | 'analyzerLogo' | 'autofixAvailable' | 'newVcsIssueUrl' | 'raisedInFiles' | 'tags' | 'severity'>
-      & { silenceRules?: Maybe<Array<Maybe<(
-        { __typename?: 'SilenceRule' }
-        & Pick<SilenceRule, 'silenceLevel' | 'id' | 'filePath' | 'createdAt' | 'metadata'>
-        & { creator?: Maybe<(
-          { __typename?: 'User' }
-          & Pick<User, 'firstName' | 'lastName' | 'email' | 'avatar'>
-        )> }
-      )>>> }
     )> }
   ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
@@ -9987,7 +9979,7 @@ export type RepoSilenceRulesQueryVariables = Exact<{
   name: Scalars['String'];
   limit?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
-  issueCode: Scalars['String'];
+  issueCode?: Maybe<Scalars['String']>;
 }>;
 
 

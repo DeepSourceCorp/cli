@@ -4,7 +4,7 @@ query RepoSilenceRules(
   $name: String!
   $limit: Int
   $after: String
-  $issueCode: String!
+  $issueCode: String
 ) {
   repository(provider: $provider, owner: $owner, name: $name) {
     id

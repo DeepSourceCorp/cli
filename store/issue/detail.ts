@@ -26,7 +26,6 @@ import {
   ReportIssueFalsePositivePayload,
   IgnoreCheckIssuePayload,
   SilenceRule,
-  SilenceRuleConnection,
   IssuePriority,
   UpdateIssuePriorityInput,
   IssuePriorityLevel
@@ -57,7 +56,6 @@ export enum IssueDetailMutations {
   SET_SINGLE_ISSUE = 'setSingleIssue',
   SET_ISSUE = 'setIssue',
   SET_ISSUE_CHILDREN = 'setIssueChildren',
-  SET_SILENCE_RULE = 'setSilenceRule',
   SET_ISSUE_DIR_DETAILS = 'setIssueDirDetails'
 }
 
@@ -91,10 +89,6 @@ interface IssueDetailModuleMutations extends MutationTree<IssueDetailModuleState
   [IssueDetailMutations.SET_ERROR]: (state: IssueDetailModuleState, error: GraphqlError) => void
   [IssueDetailMutations.SET_ISSUE]: (state: IssueDetailModuleState, issue: RepositoryIssue) => void
   [IssueDetailMutations.SET_SINGLE_ISSUE]: (state: IssueDetailModuleState, issue: Issue) => void
-  [IssueDetailMutations.SET_SILENCE_RULE]: (
-    state: IssueDetailModuleState,
-    rules: SilenceRuleConnection
-  ) => void
   [IssueDetailMutations.SET_ISSUE_CHILDREN]: (
     state: IssueDetailModuleState,
     checkIssues: CheckIssueConnection
@@ -117,9 +111,6 @@ export const mutations: IssueDetailModuleMutations = {
   },
   [IssueDetailMutations.SET_ISSUE_CHILDREN]: (state, checkIssues: CheckIssueConnection) => {
     state.checkIssues = Object.assign({}, state.checkIssues, checkIssues)
-  },
-  [IssueDetailMutations.SET_SILENCE_RULE]: (state, rules: SilenceRuleConnection) => {
-    state.silenceRules = resolveNodes(rules) as SilenceRule[]
   },
   [IssueDetailMutations.SET_SINGLE_ISSUE]: (state, issue: Issue) => {
     if (state.singleIssue.id === issue.id) {
@@ -170,9 +161,10 @@ interface IssueDetailModuleActions extends ActionTree<IssueDetailModuleState, Ro
       name: string
       limit?: number
       currentPage?: number
-      issueCode: string
+      issueCode?: string
+      refetch?: boolean
     }
-  ) => Promise<void>
+  ) => Promise<Array<SilenceRule>>
   [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN]: (
     this: Store<RootState>,
     injectee: IssueDetailActionContext,
@@ -293,16 +285,20 @@ export const actions: IssueDetailModuleActions = {
         commit(IssueDetailMutations.SET_LOADING, false)
       })
   },
-  async [IssueDetailActions.FETCH_SILENCE_RULES]({ commit }, args) {
-    const response = await this.$fetchGraphqlData(SilenceRulesGQLQuery, {
-      provider: this.$providerMetaMap[args.provider].value,
-      owner: args.owner,
-      name: args.name,
-      limit: args.limit ?? 30,
-      after: this.$getGQLAfter(args.currentPage ?? 1, args.limit ?? 30),
-      issueCode: args.issueCode
-    })
-    commit(IssueDetailMutations.SET_SILENCE_RULE, response.data.repository?.silenceRules)
+  async [IssueDetailActions.FETCH_SILENCE_RULES](_, args) {
+    const response = await this.$fetchGraphqlData(
+      SilenceRulesGQLQuery,
+      {
+        provider: this.$providerMetaMap[args.provider].value,
+        owner: args.owner,
+        name: args.name,
+        limit: args.limit ?? 30,
+        after: this.$getGQLAfter(args.currentPage ?? 1, args.limit ?? 30),
+        issueCode: args.issueCode
+      },
+      args.refetch
+    )
+    return resolveNodes(response.data.repository?.silenceRules) as Array<SilenceRule>
   },
   async [IssueDetailActions.FETCH_ISSUE_CHILDREN]({ commit }, args) {
     commit(IssueDetailMutations.SET_LOADING, true)
@@ -325,19 +321,19 @@ export const actions: IssueDetailModuleActions = {
         commit(IssueDetailMutations.SET_LOADING, false)
       })
   },
-  async [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN]({}, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_FILE_PATTERN](_, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueFilePatternMutation, args)
     return response.data.ignoreIssueForFilePatternInRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_TEST_PATTERN]({}, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_TEST_PATTERN](_, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueTestPatternMutation, args)
     return response.data.ignoreIssueForTestPatternsInRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_REPOSITORY]({}, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_REPOSITORY](_, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueRepository, args)
     return response.data.ignoreIssueForRepository
   },
-  async [IssueDetailActions.IGNORE_ISSUE_FOR_FILE]({}, args) {
+  async [IssueDetailActions.IGNORE_ISSUE_FOR_FILE](_, args) {
     const response = await this.$applyGraphqlMutation(IgnoreIssueForFile, args)
     return response.data.ignoreIssueForRepository
   },

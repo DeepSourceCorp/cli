@@ -1,4 +1,4 @@
-query($repositoryId: ID!, $shortcode: String!) {
+query ($repositoryId: ID!, $shortcode: String!) {
   repository: node(id: $repositoryId) {
     ... on Repository {
       id
@@ -22,19 +22,6 @@ query($repositoryId: ID!, $shortcode: String!) {
         autofixAvailable
         newVcsIssueUrl
         raisedInFiles
-        silenceRules {
-          silenceLevel
-          id
-          filePath
-          createdAt
-          metadata
-          creator {
-            firstName
-            lastName
-            email
-            avatar
-          }
-        }
         tags
         severity
       }

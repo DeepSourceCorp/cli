@@ -50,7 +50,7 @@
           button-type="ghost"
           icon="trash-2"
           color="cherry"
-          @click="$emit('deleteRuleTriggered', rule.id)"
+          @click="$emit('delete-rule-triggered', rule.id)"
         />
       </div>
     </template>
