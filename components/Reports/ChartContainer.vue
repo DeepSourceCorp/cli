@@ -4,7 +4,7 @@
     :class="{ 'min-h-96': chartPresent }"
   >
     <div class="flex justify-between gap-4 px-5">
-      <div class="flex flex-wrap gap-y-6 gap-x-16">
+      <div class="flex flex-wrap gap-y-6 gap-x-12">
         <slot name="report-stats"></slot>
       </div>
       <div class="flex-shrink-0">

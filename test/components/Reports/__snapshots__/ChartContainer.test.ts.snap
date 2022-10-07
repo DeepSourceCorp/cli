@@ -3,7 +3,7 @@
 exports[`renders ChartContainer 1`] = `
 "<div class=\\"grid grid-cols-1 py-4 border rounded-lg border-ink-200 min-h-96\\">
   <div class=\\"flex justify-between gap-4 px-5\\">
-    <div class=\\"flex flex-wrap gap-y-6 gap-x-16\\"></div>
+    <div class=\\"flex flex-wrap gap-y-6 gap-x-12\\"></div>
     <div class=\\"flex-shrink-0\\"></div>
   </div>
 </div>"

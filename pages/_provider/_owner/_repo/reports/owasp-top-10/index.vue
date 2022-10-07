@@ -3,7 +3,7 @@
     <chart-container>
       <template #report-stats>
         <div class="flex flex-wrap gap-y-6 gap-x-8">
-          <div class="flex flex-wrap gap-y-6 gap-x-16">
+          <div class="flex flex-wrap gap-y-6 gap-x-12">
             <chart-stat title="Status" :loading="reportsDataLoading">
               <compliance-status v-if="!reportsDataLoading" :compliance-passed="compliancePassed" />
             </chart-stat>

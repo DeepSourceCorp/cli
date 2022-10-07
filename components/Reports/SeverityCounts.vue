@@ -1,5 +1,5 @@
 <template>
-  <div class="flex gap-x-8 font-semibold text-xs">
+  <div class="flex gap-x-12 font-semibold text-xs">
     <chart-stat
       v-for="severity in severityList"
       :key="severity.title"
@@ -60,7 +60,7 @@ export default class SeverityCounts extends Vue {
         title: 'minor',
         icon: 'issue-minor',
         iconColor: 'vanilla-400',
-        value: this.high
+        value: this.low
       }
     ]
   }
