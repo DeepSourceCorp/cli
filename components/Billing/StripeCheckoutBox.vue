@@ -223,7 +223,11 @@ export default class StripeCheckoutBox extends mixins(
       const res = await this.$stripe?.createToken(this.stripeInput.cardElement, {
         name: this.fullName
       })
-      if (res && res.token) {
+      if (res?.error) {
+        throw res.error
+      }
+
+      if (res?.token) {
         const params = {
           email: this.billingEmail,
           name: this.fullName,
