@@ -7,7 +7,7 @@
       :pr-status="prStatusFilter"
       :run-status="runStatusFilter"
       :search-text="searchText"
-      :loading="fetching"
+      :loading="runFilterLoader"
       class="px-4 pt-5"
       @runs-filter-update="updatePrFilters"
     />
@@ -36,10 +36,10 @@
         <template v-else>
           <lazy-empty-state
             v-if="searchText"
-            title="No runs found for this search"
+            :title="`No results found for '${searchText}'`"
             subtitle="Please try changing the search query or clearing the filters."
-            :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
-            :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+            :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-analyses.webp')"
+            :png-image-path="require('~/assets/images/ui-states/runs/no-recent-analyses.png')"
             :show-border="true"
           />
           <lazy-empty-state
@@ -47,6 +47,8 @@
             :title="` No runs on ${prStatusFilterCopy} to show`"
             subtitle="If you have recently added this repository it may take a while for the first run to
                 complete and show results."
+            :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-analyses.webp')"
+            :png-image-path="require('~/assets/images/ui-states/runs/no-recent-analyses.png')"
             :show-border="true"
           />
         </template>
@@ -151,6 +153,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   public prStatusFilter: PrStateChoices = PrStateChoices.Open
   public runStatusFilter: RunStatusChoice | null = null
   public searchText: string | null = null
+  runFilterLoader = false
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
@@ -172,6 +175,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }
 
   created(): void {
+    this.runFilterLoader = true
     if (this.$route.query.page) {
       this.currentPage = Number(this.$route.query.page)
     }
@@ -190,6 +194,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
       mainBranchPromise,
       this.fetchRuns()
     ])
+    this.runFilterLoader = false
     this.fetching = false
   }
 
