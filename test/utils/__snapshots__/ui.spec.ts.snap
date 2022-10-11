@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ Test prCopyText ]] has a default for invalid VCS provider: unknown VCS provider 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: BITBUCKET 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: GITHUB 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: GITHUB_ENTERPRISE 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: GITLAB 1`] = `"merge request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: GSR 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: bb 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: gh 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: ghe 1`] = `"pull request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: gl 1`] = `"merge request"`;
+
+exports[`[[ Test prCopyText ]] returns correct copy text for VCS provider: gsr 1`] = `"pull request"`;

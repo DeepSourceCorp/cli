@@ -17,20 +17,26 @@
       @change="(value) => $emit('runs-filter-update', { prState: value })"
     >
       <z-radio-button
+        v-tooltip="{
+          content: openToggleTooltip
+        }"
         :value="PR_STATE_CHOICES.Open"
         spacing="w-full h-full pt-1"
         class="text-center space-x-2"
       >
         <z-icon icon="git-pull-request" class="inline" />
-        <span class="w-full text-xs capitalize">{{ openCount }} Open</span>
+        <span class="w-full text-xs capitalize">{{ shortenLargeNumber(openCount) }} Open</span>
       </z-radio-button>
       <z-radio-button
+        v-tooltip="{
+          content: closeToggleTooltip
+        }"
         :value="PR_STATE_CHOICES.Closed"
         spacing="w-full h-full pt-1"
         class="text-center space-x-2"
       >
         <z-icon icon="check" class="inline" />
-        <span class="w-full text-xs capitalize">{{ closedCount }} Closed</span>
+        <span class="w-full text-xs capitalize">{{ shortenLargeNumber(closedCount) }} Closed</span>
       </z-radio-button>
     </z-radio-group>
     <z-badge type="success" size="md" :is-dot="Boolean(runStatus)">
@@ -111,15 +117,16 @@ import {
   ZInput,
   ZBadge
 } from '@deepsourcelabs/zeal'
-import { runStatusTagLabel, runStatusIcon, runStatusIconColor } from '~/utils/ui'
+import { runStatusTagLabel, runStatusIcon, runStatusIconColor, prCopyText } from '~/utils/ui'
 import { PrStateChoices, RunStatus } from '~/types/types'
+import { shortenLargeNumber } from '~/utils/string'
 
 /**
  * Component for filtering list of PRs based on their status, status of runs and search text on title or PR number
  */
 @Component({
   components: { ZRadioGroup, ZRadioButton, ZIcon, ZMenu, ZMenuItem, ZButton, ZInput, ZBadge },
-  methods: { runStatusIcon, runStatusTagLabel, runStatusIconColor }
+  methods: { runStatusIcon, runStatusTagLabel, runStatusIconColor, shortenLargeNumber }
 })
 export default class RunFilters extends Vue {
   @Prop({ type: [String, Number] })
@@ -142,5 +149,31 @@ export default class RunFilters extends Vue {
 
   readonly PR_STATE_CHOICES = PrStateChoices
   readonly RUN_STATUSES = RunStatus
+
+  get prStatusFilterCopy() {
+    return prCopyText(this.$route.params.provider)
+  }
+
+  /**
+   * Formats `x open y(s)`
+   *
+   * E.g.: No open pull requests, 1 open pull request, 900000 open pull requests
+   */
+  get openToggleTooltip() {
+    return `${Number(this.openCount) ? this.openCount : 'No'} open ${this.prStatusFilterCopy}${
+      Number(this.openCount) === 1 ? '' : 's'
+    }`
+  }
+
+  /**
+   * Formats `x closed y(s)`
+   *
+   * E.g.: No closed pull requests, 1 closed pull request, 900000 closed pull requests
+   */
+  get closeToggleTooltip() {
+    return `${Number(this.closedCount) ? this.closedCount : 'No'} closed ${
+      this.prStatusFilterCopy
+    }${Number(this.closedCount) === 1 ? '' : 's'}`
+  }
 }
 </script>

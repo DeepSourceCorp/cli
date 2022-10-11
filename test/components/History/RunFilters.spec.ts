@@ -3,12 +3,12 @@ import RunFilters from '~/components/History/Runs/RunFilters.vue'
 import VTooltip from 'v-tooltip'
 import { mocksGenerator } from '~/test/mocks'
 import { PrStateChoices, RunStatus } from '~/types/types'
-import { cartesian, generateBooleanProps } from '~/test/utils'
+import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 
 const generateProps = (overrides = {}) => {
   const base = {
     openCount: 20,
-    closedCount: 30,
+    closedCount: 3200,
     prStatus: PrStateChoices.Open,
     runStatus: RunStatus.Timo,
     searchText: 'lol'
@@ -18,8 +18,10 @@ const generateProps = (overrides = {}) => {
 
 test('renders RunFilters with all prop options', () => {
   const loadingProp = generateBooleanProps('loading')
+  const openCountProp = generateStringProps('openCount', ['1', '20', '3200'])
+  const closedCountProp = generateStringProps('closedCount', ['1', '30', '9000'])
 
-  cartesian(loadingProp).forEach((propCombos) => {
+  cartesian(loadingProp, openCountProp, closedCountProp).forEach((propCombos) => {
     const { html } = render(
       RunFilters,
       {

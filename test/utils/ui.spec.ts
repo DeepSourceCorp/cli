@@ -1,4 +1,11 @@
-import { generateColorFromTag, getColorShades, newShade, containsElement } from '~/utils/ui'
+import { providerMetaMap } from '~/plugins/helpers/provider'
+import {
+  generateColorFromTag,
+  getColorShades,
+  newShade,
+  containsElement,
+  prCopyText
+} from '~/utils/ui'
 
 describe('[[ Test generateColorFromTag ]]', () => {
   it('Returns valid color for known tags', () => {
@@ -118,5 +125,17 @@ describe('[[ Test containsElement ]]', () => {
     expect(containsElement(secondChild, firstGrandChild)).toEqual(false)
     expect(containsElement(firstGrandChild, parent)).toEqual(false)
     expect(containsElement(firstGrandChild, secondChild)).toEqual(false)
+  })
+})
+
+describe('[[ Test prCopyText ]]', () => {
+  it('returns correct copy text for VCS provider', () => {
+    for (const provider of Object.keys(providerMetaMap)) {
+      expect(prCopyText(providerMetaMap[provider].shortcode)).toMatchSnapshot(provider)
+    }
+  })
+
+  it('has a default for invalid VCS provider', () => {
+    expect(prCopyText('undefined')).toMatchSnapshot('unknown VCS provider')
   })
 })

@@ -1,3 +1,4 @@
+import { providerMetaMap, ProviderMeta } from '~/plugins/helpers/provider'
 import { CheckStatus, RunStatus } from '~/types/types'
 
 const knownTagPatterns: Record<string, string> = {
@@ -96,9 +97,9 @@ export function generateColorFromTag(tagName: string): string {
  * @return {string}
  */
 export function newShade(hexColor: string, magnitude: number): string {
-  hexColor = hexColor.replace(`#`, ``)
-  if (hexColor.length === 6) {
-    const decimalColor = parseInt(hexColor, 16)
+  const stdHexColor = hexColor.replace(`#`, ``)
+  if (stdHexColor.length === 6) {
+    const decimalColor = parseInt(stdHexColor, 16)
     let red = (decimalColor >> 16) + magnitude
     red > 255 && (red = 255)
     red < 0 && (red = 0)
@@ -118,7 +119,7 @@ export function newShade(hexColor: string, magnitude: number): string {
     }
     return color
   } else {
-    return hexColor
+    return stdHexColor
   }
 }
 
@@ -293,4 +294,22 @@ export function containsElement(parentCandidate: HTMLElement, target: HTMLElemen
   return Boolean(
     parentCandidate && (target === parentCandidate || parentCandidate.contains(target))
   )
+}
+
+/**
+ * Function to generate correct copy text for a Pull Request depending on the VCS provider.
+ *
+ * @param {ProviderMeta['shortcode']} providerShortcode - Shortcode of the VCS provider
+ * @returns {string} string containing pull request's correct copy text
+ */
+export function prCopyText(providerShortcode: ProviderMeta['shortcode']): string {
+  const copyText = {
+    [providerMetaMap.gh.shortcode]: 'pull request',
+    [providerMetaMap.ghe.shortcode]: 'pull request',
+    [providerMetaMap.gl.shortcode]: 'merge request',
+    [providerMetaMap.bb.shortcode]: 'pull request',
+    [providerMetaMap.gsr.shortcode]: 'pull request'
+  }
+
+  return copyText[providerShortcode] ?? 'pull request'
 }

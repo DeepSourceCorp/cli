@@ -7,13 +7,13 @@
       :pr-status="prStatusFilter"
       :run-status="runStatusFilter"
       :search-text="searchText"
-      :loading="runFilterLoader"
+      :loading="initialFetch"
       class="px-4 pt-5"
       @runs-filter-update="updatePrFilters"
     />
     <div class="grid grid-cols-1 p-4 gap-y-4">
       <run-branches
-        v-if="defaultBranchRun && !mainBranchFetching"
+        v-if="defaultBranchRun && !initialFetch"
         :key="defaultBranchRun.branchName"
         :generalized-run="generalizeRun(defaultBranchRun, true)"
         :branchRunCount="defaultBranchRunCount"
@@ -44,7 +44,7 @@
           />
           <lazy-empty-state
             v-else
-            :title="` No runs on ${prStatusFilterCopy} to show`"
+            :title="`No runs on ${prStatusFilterCopy} to show`"
             subtitle="If you have recently added this repository it may take a while for the first run to
                 complete and show results."
             :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-analyses.webp')"
@@ -107,6 +107,7 @@ import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import { AppFeatures } from '~/types/permTypes'
 import { generalizeRun, generalizePR, generalizeRunStatuses } from '~/utils/runs'
 import { resolveNodes } from '~/utils/array'
+import { prCopyText } from '~/utils/ui'
 
 const runListStore = namespace('run/list')
 
@@ -146,14 +147,13 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }) => Promise<void>
 
   public fetching = true
-  public mainBranchFetching = true
+  public initialFetch = true
   public currentPage = 1
   public pageSize = 30
   public expandedBranch = ''
   public prStatusFilter: PrStateChoices = PrStateChoices.Open
   public runStatusFilter: RunStatusChoice | null = null
   public searchText: string | null = null
-  runFilterLoader = false
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
@@ -175,7 +175,6 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }
 
   created(): void {
-    this.runFilterLoader = true
     if (this.$route.query.page) {
       this.currentPage = Number(this.$route.query.page)
     }
@@ -187,14 +186,12 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
 
   async fetch(): Promise<void> {
     this.fetching = true
-    this.mainBranchFetching = true
-    const mainBranchPromise = this.fetchMainBranch().then(() => (this.mainBranchFetching = false))
     await Promise.all([
       this.fetchRepoDetails(this.baseRouteParams),
-      mainBranchPromise,
+      this.fetchMainBranch(),
       this.fetchRuns()
     ])
-    this.runFilterLoader = false
+    this.initialFetch = false
     this.fetching = false
   }
 
@@ -296,15 +293,7 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
   }
 
   get prStatusFilterCopy() {
-    const copyText = {
-      [this.$providerMetaMap.gh.shortcode]: 'pull requests',
-      [this.$providerMetaMap.ghe.shortcode]: 'pull requests',
-      [this.$providerMetaMap.gl.shortcode]: 'merge requests',
-      [this.$providerMetaMap.bb.shortcode]: 'pull requests',
-      [this.$providerMetaMap.gsr.shortcode]: 'pull requests'
-    }
-
-    return `${this.prStatusFilter.toLowerCase()} ${copyText[this.$route.params.provider]}`
+    return `${this.prStatusFilter.toLowerCase()} ${prCopyText(this.$route.params.provider)}s`
   }
 
   head(): Record<string, string> {

@@ -27,7 +27,7 @@ declare module 'vuex/types/index' {
 /**
  * ProviderMeta class whose instance store the text, shortcode, VCSProvider and auth values for a provider.
  */
-class ProviderMeta {
+export class ProviderMeta {
   text: string
   shortcode: string
   value: VcsProviderChoices
