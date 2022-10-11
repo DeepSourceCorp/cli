@@ -56,7 +56,16 @@ export default {
         href: '/favicon/default-dark.svg',
         media: '(prefers-color-scheme: dark)'
       }
-    ]
+    ],
+    script: IS_ON_PREM
+      ? []
+      : [
+          {
+            src: 'https://betteruptime.com/widgets/announcement.js',
+            'data-id': '145541',
+            async: 'async'
+          }
+        ]
   },
   telemetry: false,
   // Global CSS (https://go.nuxtjs.dev/config-css)
