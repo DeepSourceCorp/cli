@@ -65,6 +65,7 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
   layout: 'dashboard',
   middleware: [
     'perm',
+    'betaOnly',
     async function ({ route, redirect }) {
       const { provider, owner } = route.params
       if (route.name === 'provider-owner-reports') {

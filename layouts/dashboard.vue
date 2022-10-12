@@ -151,7 +151,10 @@ export default class DashboardLayout extends mixins(
   }
 
   get canViewReports(): boolean {
-    return this.$gateKeeper.team(TeamPerms.VIEW_REPORTS, this.teamPerms.permission)
+    return (
+      this.$gateKeeper.team(TeamPerms.VIEW_REPORTS, this.teamPerms.permission) &&
+      (Boolean(this.viewer.isBetaTester) || this.$config.onPrem)
+    )
   }
 
   get showTeamMembers(): boolean {

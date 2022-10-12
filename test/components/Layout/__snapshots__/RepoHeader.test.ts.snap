@@ -138,9 +138,8 @@ exports[`[[ RepoHeader ]] renders RepoHeader without a matching activeLink: Repo
           <ztab-stub icon=\\"autofix\\" borderactivecolor=\\"juniper\\">Autofix</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"bar-chart\\" borderactivecolor=\\"juniper\\">Metrics</ztab-stub>
-        </a><a>
-          <ztab-stub icon=\\"pie-chart\\" borderactivecolor=\\"juniper\\">Reports</ztab-stub>
-        </a><a>
+        </a>
+        <!----><a>
           <ztab-stub icon=\\"history\\" borderactivecolor=\\"juniper\\">History</ztab-stub>
         </a><a>
           <ztab-stub icon=\\"wrench\\" borderactivecolor=\\"juniper\\">Settings</ztab-stub>
