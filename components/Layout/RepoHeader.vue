@@ -169,8 +169,7 @@ const navItems: TabLink[] = [
     link: 'reports/owasp-top-10',
     loginRequired: true,
     perms: [RepoPerms.VIEW_REPORTS],
-    pattern: new RegExp(/^provider-owner-repo-reports-*/),
-    forBeta: true
+    pattern: new RegExp(/^provider-owner-repo-reports-*/)
   },
   {
     icon: 'history',
