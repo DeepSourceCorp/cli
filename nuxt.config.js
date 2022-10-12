@@ -142,9 +142,10 @@ export default {
         '**/_provider/_owner/settings/billing/*',
         '**/components/Billing/*',
         '**/settings/integrations/*',
-        '**/discover/*'
+        '**/discover/*',
+        '**/issues-prevented'
       ]
-    : [],
+    : ['**/issues-prevented'],
 
   loadingIndicator: {
     name: 'pulse',

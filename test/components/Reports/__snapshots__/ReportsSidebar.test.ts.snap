@@ -12,13 +12,13 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
       <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
         Insights
       </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Coverage</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a>
+      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
         <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <!---->
   </nav>
-  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
+  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"
 `;
 
@@ -34,13 +34,13 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
       <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
         Insights
       </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Coverage</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a>
+      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
         <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <!---->
   </nav>
-  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
+  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"
 `;
 
@@ -56,13 +56,13 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
       <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
         Insights
       </p>
-      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+      <!---->
+      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
         <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <!---->
   </nav>
-  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
+  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"
 `;
 
@@ -78,8 +78,8 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
       <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
         Insights
       </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Coverage</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a>
+      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
         <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
@@ -88,7 +88,7 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
           </span>
         <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
   </nav>
-  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
+  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"
 `;
 
@@ -104,8 +104,8 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
       <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
         Insights
       </p> <a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Code Coverage</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Code Coverage</span></ztab-stub></a>
+      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
         <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
@@ -114,7 +114,7 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
           </span>
         <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
   </nav>
-  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
+  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"
 `;
 
@@ -130,8 +130,8 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
       <p class=\\"hidden p-2 text-xs font-semibold tracking-wide uppercase text-slate lg:block\\">
         Insights
       </p>
-      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issues Prevented</span>
-        <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issues Prevented</span></ztab-stub></a><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
+      <!---->
+      <!----><a class=\\"flex-shrink-0 text-sm rounded-md\\"><span class=\\"hidden p-2 rounded-md hover:text-vanilla-100 hover:bg-ink-300 lg:block text-vanilla-400\\">Issue Distribution</span>
         <ztab-stub borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Issue Distribution</span></ztab-stub></a>
     </div>
     <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\" class=\\"hidden lg:block\\"></zdivider-stub>
@@ -140,6 +140,6 @@ exports[`[[ ReportsSidebar ]] renders ReportsSidebar with all prop options: {"sh
           </span>
         <ztab-stub icon=\\"file-pie-chart\\" borderactivecolor=\\"vanilla-400\\" class=\\"lg:hidden\\"><span class=\\"text-sm cursor-pointer\\">Public Reports</span></ztab-stub></a></div>
   </nav>
-  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
+  <floating-button-mobile nav-items=\\"[object Object],[object Object],[object Object],[object Object]\\" class=\\"z-40\\"></floating-button-mobile>
 </div>"
 `;
