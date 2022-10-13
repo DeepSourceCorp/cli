@@ -324,7 +324,7 @@ export const actions: TeamModuleActions = {
   },
 
   async [TeamActions.QUERY_TEAM_MEMBERS](
-    {},
+    _,
     { login, provider, limit, currentPage, query, refetch }
   ) {
     try {
@@ -372,7 +372,11 @@ export const actions: TeamModuleActions = {
         role: args.role
       })
     } catch (e) {
-      this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
+      this.$toast.show({
+        type: 'danger',
+        message: (e as Error).message.replace('GraphQL error: ', ''),
+        timeout: 5
+      })
       commit(TeamMutations.SET_ERROR, e)
     } finally {
       commit(TeamMutations.SET_LOADING, false)
