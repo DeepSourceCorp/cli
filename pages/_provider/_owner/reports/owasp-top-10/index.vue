@@ -88,7 +88,7 @@
                 ></div>
               </z-table-cell>
               <z-table-cell class="ml-8 sm:max-w-2xs text-right">
-                <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"></div>
+                <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mr-2"></div>
               </z-table-cell>
             </z-table-row>
           </template>
@@ -144,6 +144,11 @@ export default class OwnerOwasp extends mixins(OwnerDetailMixin, ComplianceRepor
       await this.fetchOwnerDetails({ login: owner, provider })
     }
 
+    this.reportsDataLoading = true
+    this.historicalValuesLoading = true
+    this.recentStatsLoading = true
+    this.complianceIssuesLoading = true
+
     /**
      * ? Why was fetchReportBase pulled out of Promise.all ->
      * We need to finish report base query first so we have report.status (passing/failing) available.
@@ -157,6 +162,11 @@ export default class OwnerOwasp extends mixins(OwnerDetailMixin, ComplianceRepor
       this.fetchComplianceIssues(ReportLevel.Owner, this.owner.id, ReportPageT.OWASP_TOP_10),
       this.setChartData()
     ])
+
+    this.reportsDataLoading = false
+    this.historicalValuesLoading = false
+    this.recentStatsLoading = false
+    this.complianceIssuesLoading = false
   }
 
   /**

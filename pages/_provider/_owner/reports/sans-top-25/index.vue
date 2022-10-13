@@ -137,6 +137,11 @@ export default class OwnerSans extends mixins(OwnerDetailMixin, ComplianceReport
       await this.fetchOwnerDetails({ login: owner, provider })
     }
 
+    this.reportsDataLoading = true
+    this.historicalValuesLoading = true
+    this.recentStatsLoading = true
+    this.complianceIssuesLoading = true
+
     /**
      * ? Why was fetchReportBase pulled out of Promise.all ->
      * We need to finish report base query first so we have report.status (passing/failing) available.
@@ -150,6 +155,11 @@ export default class OwnerSans extends mixins(OwnerDetailMixin, ComplianceReport
       this.fetchComplianceIssues(ReportLevel.Owner, this.owner.id, ReportPageT.SANS_TOP_25),
       this.setChartData()
     ])
+
+    this.reportsDataLoading = false
+    this.historicalValuesLoading = false
+    this.recentStatsLoading = false
+    this.complianceIssuesLoading = false
   }
 
   /**

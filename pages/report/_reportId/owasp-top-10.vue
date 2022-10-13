@@ -105,7 +105,7 @@
                 </z-table-cell>
                 <z-table-cell class="ml-8 sm:max-w-2xs text-right">
                   <div
-                    class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"
+                    class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mr-2"
                   ></div>
                 </z-table-cell>
               </z-table-row>
