@@ -62,24 +62,8 @@
         <run-summary v-bind="run" />
       </div>
       <div>
-        <!-- Header Loading state -->
-        <div
-          v-if="isLoading"
-          class="flex flex-1 w-full p-4 space-x-2 rounded-sm h-23 border-b border-ink-200"
-        >
-          <!-- Left Section -->
-          <div class="flex flex-col w-3/5 space-y-2 md:w-4/5 justify-evenly">
-            <div class="h-10 rounded-md bg-ink-300 animate-pulse"></div>
-            <div class="h-6 w-40 rounded-md bg-ink-300 animate-pulse"></div>
-          </div>
-          <!-- Right Section -->
-          <div class="relative w-2/5 md:w-1/5">
-            <div class="h-full rounded-md bg-ink-300 animate-pulse"></div>
-          </div>
-        </div>
-
         <run-header
-          v-else-if="showRunHeader"
+          v-if="showRunHeader"
           v-bind="run"
           :checks="checks"
           :current-analyzer="$route.params.analyzer"
@@ -107,6 +91,8 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import { ILinks } from '~/components/Common/BreadcrumbContainer.vue'
 import { toTitleCase } from '~/utils/string'
+import { RunDetailActions } from '~/store/run/detail'
+import { Run } from '~/types/types'
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -125,14 +111,28 @@ import { toTitleCase } from '~/utils/string'
     ZBreadcrumb,
     ZBreadcrumbItem
   },
-  layout: 'repository'
+  layout: 'repository',
+  middleware: [
+    async function ({ store, route, error }) {
+      const { provider, owner, repo, runId } = route.params
+      const runResponse = (await store.dispatch(`run/detail/${RunDetailActions.FETCH_RUN}`, {
+        provider,
+        owner,
+        name: repo,
+        runId
+      })) as Run | undefined
+
+      if (!runResponse) {
+        error({ statusCode: 404, message: 'This page is not real' })
+      }
+    }
+  ]
 })
 export default class AnalyzerDetails extends mixins(
   RepoDetailMixin,
   RoleAccessMixin,
   RunDetailMixin
 ) {
-  public isLoading = false
   public flashActiveAnalyzer = false
 
   /**
@@ -143,26 +143,6 @@ export default class AnalyzerDetails extends mixins(
     setTimeout(() => {
       this.flashActiveAnalyzer = false
     }, 1000)
-  }
-
-  /**
-    Created hook to verify whether a loader skeleton needs to be shown or not.
-  */
-  created() {
-    setTimeout(() => {
-      if (this.$fetchState.pending) this.isLoading = true
-    }, 300)
-  }
-
-  /**
-   * Fetch hook for the page.
-   *
-   * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
-   */
-  async fetch(): Promise<void> {
-    await this.fetchRepoPerms(this.baseRouteParams)
-    await this.fetchCurrentRun()
-    this.isLoading = false
   }
 
   /**
