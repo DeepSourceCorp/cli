@@ -41,6 +41,13 @@
 
       <z-divider />
 
+      <integration-installed-by
+        :avatar="integration.enabledBy.avatar"
+        :user-name="integration.enabledBy.fullName"
+        :email="integration.enabledBy.email"
+        :enabled-on="integration.enabledOn"
+      />
+
       <z-alert v-if="isAlertVisible" type="neutral" :dismissible="true" @dismiss="hideAlert">
         <div class="space-y-2">
           <h2 class="text-sm font-medium text-vanilla-100">How does it work?</h2>
@@ -51,13 +58,6 @@
       </z-alert>
 
       <section class="space-y-8 sm:space-y-7" v-if="integration.installed">
-        <integration-installed-by
-          :avatar="integration.enabledBy.avatar"
-          :user-name="integration.enabledBy.fullName"
-          :email="integration.enabledBy.email"
-          :enabled-on="integration.enabledOn"
-        />
-
         <select-input
           v-model="selectedCloudId"
           :disabled="updatingIntegration"
