@@ -100,7 +100,8 @@
             multiple
           />
           <p class="text-vanilla-400 text-xs">
-            We'll keep these email addresses in cc when communicating to you about this ticket.
+            We'll keep these email addresses in cc when communicating to you about this ticket. Use
+            a comma to separate multiple emails.
           </p>
         </div>
         <div class="space-y-1.5 max-w-lg">
