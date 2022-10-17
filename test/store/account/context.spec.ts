@@ -93,7 +93,7 @@ describe('[Store] Account/Context', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { context: mockContextStore().context } }), 10)
               )
@@ -112,7 +112,7 @@ describe('[Store] Account/Context', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
