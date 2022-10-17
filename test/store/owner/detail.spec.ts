@@ -2442,7 +2442,7 @@ describe('[Store] Owner/Details', () => {
 
     describe(`Mutation "${OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER}"`, () => {
       test('successfully appends shouldTimeoutDataTrigger', () => {
-        const newshouldTimeoutDataTrigger: boolean = false
+        const newshouldTimeoutDataTrigger = false
 
         mutations[OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER](
           ownerState,
