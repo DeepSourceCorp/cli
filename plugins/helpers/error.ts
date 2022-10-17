@@ -1,9 +1,9 @@
 import { Inject, Context } from '@nuxt/types/app'
 import { User } from '~/types/types'
 
-export type logErrorAndToast = (
+export type LogErrorAndToastT = (
   error: Error,
-  toastMessage?: string,
+  toastMessage?: `${string}.`,
   viewer?: User,
   metadata?: {
     context: string
@@ -13,22 +13,22 @@ export type logErrorAndToast = (
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $logErrorAndToast: logErrorAndToast
+    $logErrorAndToast: LogErrorAndToastT
   }
 }
 
 declare module '@nuxt/types' {
   interface NuxtAppOptions {
-    $logErrorAndToast: logErrorAndToast
+    $logErrorAndToast: LogErrorAndToastT
   }
   interface Context {
-    $logErrorAndToast: logErrorAndToast
+    $logErrorAndToast: LogErrorAndToastT
   }
 }
 
 declare module 'vuex/types/index' {
   interface Store<S> {
-    $logErrorAndToast: logErrorAndToast
+    $logErrorAndToast: LogErrorAndToastT
   }
 }
 
@@ -43,7 +43,7 @@ export default ({ $config, $bugsnag, app }: Context, inject: Inject): void => {
    *
    * @return {void}
    */
-  const logErrorAndToast: logErrorAndToast = function (error, toastMessage, viewer, metadata) {
+  const logErrorAndToast: LogErrorAndToastT = function (error, toastMessage, viewer, metadata) {
     const { context, params } = metadata ?? { context: null, params: null }
     const bugsnag = process.client ? app.$bugsnag : $bugsnag
 

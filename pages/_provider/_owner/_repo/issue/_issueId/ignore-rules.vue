@@ -51,7 +51,7 @@ export default class IssuesDetails extends mixins(IssueDetailMixin, RepoDetailMi
     try {
       await this.fetchIgnoreRules()
     } catch (err) {
-      this.$logErrorAndToast(err as Error, 'Something went wrong while fetching the ignore rules')
+      this.$logErrorAndToast(err as Error, 'Something went wrong while fetching the ignore rules.')
     }
   }
 
@@ -80,7 +80,7 @@ export default class IssuesDetails extends mixins(IssueDetailMixin, RepoDetailMi
       // Re-fetch ignore rules
       await this.fetchIgnoreRules()
     } catch (err) {
-      this.$logErrorAndToast(err as Error, 'Something went wrong while ignoring the rule')
+      this.$logErrorAndToast(err as Error, 'Something went wrong while ignoring the rule.')
     } finally {
       this.isModalOpen = false
     }

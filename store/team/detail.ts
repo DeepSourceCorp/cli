@@ -36,6 +36,7 @@ import updateRole from '~/apollo/mutations/team/updateRole.gql'
 import UpdateAccessControlSettings from '~/apollo/mutations/team/updateAccessControlSettings.gql'
 import UpdateTeamBasePermissions from '~/apollo/mutations/team/updateTeamBasePermissions.gql'
 import SyncVcsPermissions from '~/apollo/mutations/team/syncVcsPermissions.gql'
+import { LogErrorAndToastT } from '~/plugins/helpers/error'
 
 export interface TeamState {
   loading: boolean
@@ -341,7 +342,10 @@ export const actions: TeamModuleActions = {
       )
       return resolveNodes(response.data.team?.members) as TeamMember[]
     } catch (e) {
-      this.$logErrorAndToast(e as Error, (e as Error).message.replace('GraphQL error: ', ''))
+      this.$logErrorAndToast(
+        e as Error,
+        (e as Error).message.replace('GraphQL error: ', '') as Parameters<LogErrorAndToastT>['1']
+      )
     }
   },
 
@@ -407,7 +411,10 @@ export const actions: TeamModuleActions = {
       })) as GraphqlMutationResponse
       return response.data.transferTeamOwnership?.ok || false
     } catch (e) {
-      this.$logErrorAndToast(e as Error, (e as Error).message.replace('GraphQL error: ', ''))
+      this.$logErrorAndToast(
+        e as Error,
+        (e as Error).message.replace('GraphQL error: ', '') as Parameters<LogErrorAndToastT>['1']
+      )
       return false
     }
   },

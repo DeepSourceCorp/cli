@@ -85,7 +85,7 @@ export default class InstallationProvider extends mixins(ActiveUserMixin) {
     } catch (e) {
       this.$logErrorAndToast(
         e as Error,
-        'Unable to fetch GitLab accounts, please contact support',
+        'Unable to fetch GitLab accounts, please contact support.',
         this.viewer
       )
     }

@@ -119,7 +119,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<unknown> {
+            $fetchGraphqlData(): Promise<unknown> {
               return new Promise<unknown>((resolve) =>
                 setTimeout(
                   () => resolve({ data: { owner: { id: mockOwnerDetail().owner.id } } }),
@@ -142,7 +142,7 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits the mutation', async () => {
+        test('successfully commits the mutation', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
@@ -167,8 +167,8 @@ describe('[Store] Owner/Details', () => {
               }
             },
             $logErrorAndToast: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -198,7 +198,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: OWNER_DETAILS } }), 10)
               )
@@ -218,11 +218,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -269,8 +269,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -283,11 +283,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -308,7 +308,7 @@ describe('[Store] Owner/Details', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -336,7 +336,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -356,11 +356,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -407,8 +407,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -421,11 +421,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -446,7 +446,7 @@ describe('[Store] Owner/Details', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -474,7 +474,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -495,11 +495,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(4)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -541,8 +541,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -556,11 +556,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -575,7 +575,7 @@ describe('[Store] Owner/Details', () => {
           expect(firstCall[1]).toEqual(true)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -603,7 +603,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -624,11 +624,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -670,8 +670,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -685,11 +685,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -708,7 +708,7 @@ describe('[Store] Owner/Details', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -736,7 +736,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -756,11 +756,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -808,8 +808,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -822,11 +822,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -841,7 +841,7 @@ describe('[Store] Owner/Details', () => {
           expect(firstCall[1]).toEqual(true)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -869,7 +869,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -889,11 +889,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first and last commit calls made
           const {
             mock: {
@@ -941,8 +941,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -955,11 +955,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -974,7 +974,7 @@ describe('[Store] Owner/Details', () => {
           expect(firstCall[1]).toEqual(true)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -1002,7 +1002,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -1022,7 +1022,7 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
@@ -1053,8 +1053,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             },
             $toast: {
               danger: jest.fn()
@@ -1070,11 +1070,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('no mutations are committed', async () => {
+        test('no mutations are committed', () => {
           expect(commit).not.toHaveBeenCalled()
         })
 
-        test('error handler', async () => {
+        test('error handler', () => {
           expect(localThis.$toast.danger).toBeCalledWith(
             'There was an error fetching configuration from VCS provider.'
           )
@@ -1093,7 +1093,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -1113,11 +1113,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first and third commit calls made
           const {
             mock: {
@@ -1165,8 +1165,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -1179,11 +1179,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -1198,7 +1198,7 @@ describe('[Store] Owner/Details', () => {
           expect(firstCall[1]).toEqual(true)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -1226,7 +1226,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -1246,7 +1246,7 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
@@ -1277,8 +1277,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             },
             $logErrorAndToast: jest.fn()
           }
@@ -1292,14 +1292,14 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('no mutations are committed', async () => {
+        test('no mutations are committed', () => {
           expect(commit).not.toHaveBeenCalled()
         })
 
-        test('error handler', async () => {
+        test('error handler', () => {
           expect(localThis.$logErrorAndToast).toBeCalledWith(
             Error('ERR1'),
-            'Something went wrong while fetching seats used information'
+            'Something went wrong while fetching seats used information.'
           )
         })
       })
@@ -1316,7 +1316,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(
                   () =>
@@ -1347,11 +1347,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(2)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first and second commit calls made
           const {
             mock: {
@@ -1382,8 +1382,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -1396,11 +1396,11 @@ describe('[Store] Owner/Details', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -1415,7 +1415,7 @@ describe('[Store] Owner/Details', () => {
           expect(firstCall[1]).toEqual(true)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -1443,12 +1443,12 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { updateOwnerSettings: { ok: true } } }), 10)
               )
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -1469,11 +1469,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -1502,10 +1502,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $applyGraphqlMutation(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) =>
-                reject(new Error('OwnerDetailMutations.ERR1'))
-              )
+            $applyGraphqlMutation(): Promise<Error> {
+              return Promise.reject(new Error('OwnerDetailMutations.ERR1'))
             }
           }
 
@@ -1523,11 +1521,11 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -1548,7 +1546,7 @@ describe('[Store] Owner/Details', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -1566,11 +1564,11 @@ describe('[Store] Owner/Details', () => {
     })
 
     describe(`Action "${OwnerDetailActions.SET_OWNER}"`, () => {
-      beforeEach(async () => {
+      beforeEach(() => {
         actions[OwnerDetailActions.SET_OWNER](actionCxt, mockOwnerDetail().owner)
       })
 
-      test('successfully commits mutation', async () => {
+      test('successfully commits mutation', () => {
         expect(commit).toHaveBeenCalledTimes(1)
 
         // Storing the first commit call made
@@ -1597,7 +1595,7 @@ describe('[Store] Owner/Details', () => {
         })
       })
 
-      test('successfully commits mutation', async () => {
+      test('successfully commits mutation', () => {
         expect(commit).toHaveBeenCalledTimes(1)
 
         // Storing the first commit call made
@@ -1623,7 +1621,7 @@ describe('[Store] Owner/Details', () => {
   describe(`Action "${OwnerDetailActions.APPLY_CREDITS}"`, () => {
     test('successfully commits mutation', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) =>
             setTimeout(() => resolve({ data: {} }), 10)
           )
@@ -1647,7 +1645,7 @@ describe('[Store] Owner/Details', () => {
 
     test('successfully commits error', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
             setTimeout(() => reject(new Error('ERR1')), 10)
           )
@@ -1681,7 +1679,7 @@ describe('[Store] Owner/Details', () => {
             value: 'GITHUB'
           }
         },
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) =>
             setTimeout(() => resolve({ data: { updateBillingInfo: {} } }), 10)
           )
@@ -1716,7 +1714,7 @@ describe('[Store] Owner/Details', () => {
             value: 'GITHUB'
           }
         },
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
             setTimeout(() => reject(new Error('ERR1')), 10)
           )
@@ -1750,7 +1748,7 @@ describe('[Store] Owner/Details', () => {
   describe(`Action "${OwnerDetailActions.GET_BILLING_INFO}"`, () => {
     test('successfully commits mutation', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) =>
             setTimeout(() => resolve({ data: { updateBillingInfo: {} } }), 10)
           )
@@ -1779,7 +1777,7 @@ describe('[Store] Owner/Details', () => {
 
     test('successfully commits error', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
             setTimeout(() => reject(new Error('ERR1')), 10)
           )
@@ -1810,7 +1808,7 @@ describe('[Store] Owner/Details', () => {
   describe(`Action "${OwnerDetailActions.CHECKOUT}"`, () => {
     test('successfully commits mutation', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) =>
             setTimeout(
               () =>
@@ -1857,7 +1855,7 @@ describe('[Store] Owner/Details', () => {
 
     test('successfully commits error', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
             setTimeout(() => reject(new Error('ERR1')), 10)
           )
@@ -1894,7 +1892,7 @@ describe('[Store] Owner/Details', () => {
   describe(`Action "${OwnerDetailActions.UPDATE_SEATS}"`, () => {
     test('successfully commits mutation', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) =>
             setTimeout(
               () =>
@@ -1936,7 +1934,7 @@ describe('[Store] Owner/Details', () => {
 
     test('successfully commits error', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
             setTimeout(() => reject(new Error('ERR1')), 10)
           )
@@ -1968,7 +1966,7 @@ describe('[Store] Owner/Details', () => {
   describe(`Action "${OwnerDetailActions.UPDATE_PAYMENT_SOURCE}"`, () => {
     test('successfully commits mutation', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) =>
             setTimeout(
               () =>
@@ -2015,7 +2013,7 @@ describe('[Store] Owner/Details', () => {
 
     test('successfully commits error', async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
             setTimeout(() => reject(new Error('ERR1')), 10)
           )
@@ -2055,7 +2053,7 @@ describe('[Store] Owner/Details', () => {
             value: 'GITHUB'
           }
         },
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) =>
             setTimeout(() => resolve({ data: {} }), 10)
           )
@@ -2087,7 +2085,7 @@ describe('[Store] Owner/Details', () => {
             value: 'GITHUB'
           }
         },
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
             setTimeout(() => reject(new Error('ERR1')), 10)
           )
@@ -2126,7 +2124,7 @@ describe('[Store] Owner/Details', () => {
             value: 'GITHUB'
           }
         },
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) =>
             setTimeout(() => resolve({ data: {} }), 10)
           )
@@ -2158,7 +2156,7 @@ describe('[Store] Owner/Details', () => {
             value: 'GITHUB'
           }
         },
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
             setTimeout(() => reject(new Error('ERR1')), 10)
           )
@@ -2197,7 +2195,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { owner: mockOwnerDetail().owner } }), 10)
               )
@@ -2246,8 +2244,8 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+            $fetchGraphqlData(): Promise<Error> {
+              return Promise.reject(new Error('ERR1'))
             },
             $logErrorAndToast: jest.fn()
           }
@@ -2283,7 +2281,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { updateTimeoutSetting: { ok: true } } }), 10)
               )
@@ -2304,7 +2302,7 @@ describe('[Store] Owner/Details', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test(`successfully commits mutation ${OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER}`, async () => {
+        test(`successfully commits mutation ${OwnerDetailMutations.UPDATE_DATA_TIMEOUT_TRIGGER}`, () => {
           expect(commit).toHaveBeenCalledTimes(1)
 
           // Storing the second commit call made
@@ -2344,7 +2342,7 @@ describe('[Store] Owner/Details', () => {
                 value: 'GITHUB'
               }
             },
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((_resolve, reject) =>
                 setTimeout(() => reject(new Error('ERR1')), 10)
               )

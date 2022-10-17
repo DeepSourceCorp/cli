@@ -573,7 +573,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
         this.$toast.success('Report deleted succesfully')
         await this.fetchPublicReportList()
       } else {
-        this.$logErrorAndToast(e as Error, 'Unable to delete report. Please contact support')
+        this.$logErrorAndToast(e as Error, 'Unable to delete report. Please contact support.')
       }
     } finally {
       this.deleteLoading = false

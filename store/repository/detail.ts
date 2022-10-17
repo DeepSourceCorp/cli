@@ -60,6 +60,7 @@ import {
   GraphqlQueryResponse
 } from '~/types/apollo-graphql-types'
 import { NLCV_SHORTCODE } from '~/types/metric'
+import type { LogErrorAndToastT } from '~/plugins/helpers/error'
 
 export type RepoSettingOptions = {
   settingType: keyof Repository
@@ -873,7 +874,7 @@ export const actions: RepositoryDetailModuleActions = {
       commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
       commit(RepositoryDetailMutations.SET_LOADING, false)
     } catch (e) {
-      this.$logErrorAndToast(e as Error, 'Unable to fetch reporting configuration', undefined, {
+      this.$logErrorAndToast(e as Error, 'Unable to fetch reporting configuration.', undefined, {
         context: 'repo reporting query failed',
         params: args
       })
@@ -939,7 +940,10 @@ export const actions: RepositoryDetailModuleActions = {
           this.$toast.success(`Successfully activated ${state.repository.name as string}.`)
       }
     } catch (e) {
-      this.$logErrorAndToast(e as Error, (e as Error).message.replace('GraphQL error: ', ''))
+      this.$logErrorAndToast(
+        e as Error,
+        (e as Error).message.replace('GraphQL error: ', '') as Parameters<LogErrorAndToastT>['1']
+      )
       commit(RepositoryDetailMutations.SET_ERROR, e)
     }
   },

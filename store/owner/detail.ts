@@ -44,7 +44,6 @@ import UpdateOwnerDataTriggerTimeoutsGQLMutation from '~/apollo/mutations/owner/
 // Billing
 import BillingDetails from '~/apollo/queries/owner/billing.gql'
 import SeatsInfo from '~/apollo/queries/owner/seatsInfo.gql'
-import BillingStatus from '~/apollo/queries/owner/billing.gql'
 import ApplyCredits from '~/apollo/mutations/owner/applyCreditsToOwner.gql'
 import UpdateBillingInfo from '~/apollo/mutations/owner/updateBillingInfo.gql'
 import GetBillingInfo from '~/apollo/mutations/owner/getBillingInfo.gql'
@@ -647,7 +646,7 @@ export const actions: OwnerDetailModuleActions = {
     } catch (e) {
       this.$logErrorAndToast(
         e as Error,
-        'Something went wrong while fetching seats used information'
+        'Something went wrong while fetching seats used information.'
       )
     }
   },
@@ -656,7 +655,7 @@ export const actions: OwnerDetailModuleActions = {
     try {
       commit(OwnerDetailMutations.SET_LOADING, true)
       const response = (await this.$fetchGraphqlData(
-        BillingStatus,
+        BillingDetails,
         {
           login: args.login,
           provider: this.$providerMetaMap[args.provider].value

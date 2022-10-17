@@ -90,7 +90,7 @@ export default class InstallationProvider extends mixins(
     } catch (e) {
       this.$logErrorAndToast(
         e as Error,
-        'Unable to fetch GitLab accounts, please contact support',
+        'Unable to fetch GitLab accounts, please contact support.',
         this.viewer
       )
     }
@@ -109,7 +109,7 @@ export default class InstallationProvider extends mixins(
     } catch (e) {
       this.$logErrorAndToast(
         e as Error,
-        'Unable to fetch Google Cloud projects, please contact support',
+        'Unable to fetch Google Cloud projects, please contact support.',
         this.viewer
       )
     }
