@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="flex justify-between w-full mt-4 md:mt-0 md:block md:justify-start md:w-auto">
-        <div v-if="Object.keys(this.currentPlan)" class="mt-1.5">
+        <div v-if="!isBilledManually && Object.keys(this.currentPlan)" class="mt-1.5">
           <div v-if="currentPlan.amount" class="flex justify-end space-x-1">
             <div class="flex space-x-1">
               <div class="text-2xl">$</div>

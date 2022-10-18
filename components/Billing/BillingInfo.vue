@@ -11,7 +11,7 @@
               {{ formatDate(parseISODate(ownerBillingInfo.upcomingPaymentDate)) }}
             </div>
           </div>
-          <div v-if="ownerBillingInfo.upcomingBillAmount">
+          <div v-if="!isBilledManually && ownerBillingInfo.upcomingBillAmount">
             <label class="text-sm leading-none tracking-wide text-vanilla-300">
               Renewal amount
             </label>
@@ -27,7 +27,7 @@
               {{ formatUSD(ownerBillingInfo.outstandingCredits) }}
             </div>
           </div>
-          <div class="md:col-span-2">
+          <div v-if="!isBilledManually" class="md:col-span-2">
             <label class="text-sm leading-none tracking-wide text-vanilla-300">
               Billing interval
             </label>
