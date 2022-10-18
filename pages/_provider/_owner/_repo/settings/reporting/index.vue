@@ -891,48 +891,48 @@ export default class Reporting extends mixins(RepoDetailMixin) {
   }
 
   /**
-   * Method to update the repository settings
+   *  Method to update the repository settings. Constructs the mutation payload based on the type and slug of the setting to be updated.
+   *  Uses the `inputType` and `slugToUpdate` to find the corresponding setting in the repository store (which has been updated with the new values),
+   *  and deconstructs the settings object to get the necessary values for the `UpdateRepositorySettingsInput`.
+   *  The mutation is executed after which the repository reporting settings are re-fetched.
    *
+   * @param inputType - The category of settings to be updated
+   * @param slugToUpdate - The specific slug to be updated
    * @returns {Promise<void>}
    */
-  public async updateRepositorySettings(inputType: InputTypes): Promise<void> {
+  public async updateRepositorySettings(
+    inputType: InputTypes,
+    slugToUpdate: string
+  ): Promise<void> {
     if (this.repository?.id && !this.isFetchingData) {
       try {
         const input = { id: this.repository.id } as UpdateRepositorySettingsInput
 
         if (inputType === InputTypes.ISSUE_TYPE && this.repository?.issueTypeSettings) {
-          input.issueTypeSettings = this.repository.issueTypeSettings.map((typeSetting) => {
-            if (typeSetting) {
-              const { slug, isIgnoredInCheckStatus, isIgnoredToDisplay, name } = typeSetting
-              return { slug, isIgnoredInCheckStatus, isIgnoredToDisplay, name }
-            }
-            return {}
-          })
+          const options = this.repository.issueTypeSettings.find(
+            (typeSetting) => typeSetting && typeSetting.slug === slugToUpdate
+          ) as IssueTypeSetting
+          const { slug, isIgnoredInCheckStatus, isIgnoredToDisplay, name } = options
+          input.issueTypeSettings = [
+            options ? { slug, isIgnoredInCheckStatus, isIgnoredToDisplay, name } : {}
+          ]
         } else if (
           inputType === InputTypes.ISSUE_PRIORITY &&
           this.repository.issuePrioritySettings
         ) {
-          input.issuePrioritySettings = this.repository.issuePrioritySettings.map(
-            (prioritySetting) => {
-              if (prioritySetting) {
-                const { slug, isIgnoredInCheckStatus, verboseName, isIgnoredToDisplay, weight } =
-                  prioritySetting
-                return { slug, isIgnoredInCheckStatus, verboseName, isIgnoredToDisplay, weight }
-              }
-              return {}
-            }
-          )
+          const options = this.repository.issuePrioritySettings.find(
+            (prioritySetting) => prioritySetting && prioritySetting.slug === slugToUpdate
+          ) as IssuePrioritySetting
+          const { slug, isIgnoredInCheckStatus, verboseName, isIgnoredToDisplay, weight } = options
+          input.issuePrioritySettings = [
+            options ? { slug, isIgnoredInCheckStatus, verboseName, isIgnoredToDisplay, weight } : {}
+          ]
         } else if (inputType === InputTypes.METRICS && this.repository.metricSettings) {
-          input.metricSettings = this.repository.metricSettings.map((metricSetting) => {
-            if (metricSetting) {
-              const { shortcode, isIgnoredInCheckStatus, isIgnoredToDisplay } = metricSetting
-              return {
-                shortcode,
-                isIgnoredInCheckStatus,
-                isIgnoredToDisplay
-              }
-            }
-          }) as MetricSettingsInput[]
+          const options = this.repository.metricSettings.find(
+            (metricSetting) => metricSetting && metricSetting.shortcode === slugToUpdate
+          ) as MetricSettingsInput
+          const { shortcode, isIgnoredInCheckStatus, isIgnoredToDisplay } = options
+          input.metricSettings = [{ shortcode, isIgnoredInCheckStatus, isIgnoredToDisplay }]
         } else if (inputType === InputTypes.INTEGRATION_MODE) {
           this.updatingIntegrationModeSettings = true
           input.gitlabIntegrationUseStatus = this.gitlabIntegrationUseStatus
@@ -969,7 +969,7 @@ export default class Reporting extends mixins(RepoDetailMixin) {
    */
   public updateRepoSetting(inputType: InputTypes, options: RepoSettingOptions): void {
     this.setRepoSettingField(options)
-    this.updateRepositorySettings(inputType)
+    this.updateRepositorySettings(inputType, options.field)
   }
 
   /**
