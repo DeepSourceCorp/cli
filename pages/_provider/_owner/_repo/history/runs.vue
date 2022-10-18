@@ -1,5 +1,5 @@
 <template>
-  <div class="pb-28 lg:pb-12">
+  <div class="pb-28 lg:pb-12 space-y-4">
     <sub-nav v-if="transformsAllowed" active="runs" class="hidden lg:block" />
     <run-filters
       :open-count="openPrCount"
@@ -8,10 +8,10 @@
       :run-status="runStatusFilter"
       :search-text="searchText"
       :loading="initialFetch"
-      class="px-4 pt-5"
+      class="px-4"
       @runs-filter-update="updatePrFilters"
     />
-    <div class="grid grid-cols-1 p-4 gap-y-4">
+    <div class="space-y-4 px-4">
       <run-branches
         v-if="defaultBranchRun && !initialFetch"
         :key="defaultBranchRun.branchName"
