@@ -49,8 +49,6 @@
       <lazy-empty-state
         v-if="isMetricDisabled"
         use-v2
-        :webp-image-path="require('~/assets/images/ui-states/no-items-found-136px.webp')"
-        :png-image-path="require('~/assets/images/ui-states/no-items-found-136px.gif')"
         :show-border="true"
         title="Metric capture is disabled"
       >

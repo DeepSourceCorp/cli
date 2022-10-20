@@ -1,10 +1,11 @@
 <template>
-  <base-state title="The run couldn't finish in time">
+  <base-state title="This run couldn’t finish in time">
     <template slot="hero">
-      <img
-        class="mx-auto mb-4"
-        :src="require('~/assets/images/ui-states/repo/timeout.svg')"
-        alt="Repo timeout"
+      <empty-state-picture
+        :webp-image-path="require('~/assets/images/ui-states/timeout/timeout-state-136px.webp')"
+        :png-image-path="require('~/assets/images/ui-states/timeout/timeout-state-136px.gif')"
+        width="w-26"
+        class="mx-auto"
       />
     </template>
   </base-state>

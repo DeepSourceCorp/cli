@@ -11,13 +11,13 @@
       <run-error-box v-if="errorsRendered.length" :errorsRendered="errorsRendered" class="mb-3" />
       <lazy-run-loading v-if="status === CheckStatus.Pend" />
       <lazy-run-pass v-else-if="status === CheckStatus.Pass && issueCount === 0" />
+      <lazy-run-failed v-if="status === CheckStatus.Fail && issueCount === 0 && !isFilterApplied">
+        <span v-if="analyzer" class="text-vanilla-400">{{ analyzer.name }} is failing</span>
+      </lazy-run-failed>
       <lazy-run-cancelled v-else-if="status === CheckStatus.Cncl && issueCount === 0" />
       <lazy-run-timeout v-else-if="status === CheckStatus.Timo && issueCount === 0" />
       <lazy-run-waiting v-else-if="status === CheckStatus.Wait && issueCount === 0" />
       <lazy-run-nuked v-else-if="status === CheckStatus.Atmo && issueCount === 0" />
-      <lazy-run-pass
-        v-else-if="status === CheckStatus.Fail && issueCount === 0 && !isFilterApplied"
-      />
       <template v-else>
         <div class="grid grid-cols-1 gap-y-3">
           <template v-if="issueCount">
@@ -40,8 +40,12 @@
               :issue-list-index="getIssueIndex(index)"
             />
           </template>
-          <template v-else>
-            <empty-state class="border-2 border-dashed rounded-md border-ink-200">
+          <template v-else-if="status === CheckStatus.Fail && issueCount === 0 && isFilterApplied">
+            <empty-state
+              :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+              :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+              class="border-2 border-dashed rounded-md border-ink-200"
+            >
               <template slot="title">
                 <p class="text-base text-vanilla-200">No issues found</p>
               </template>
@@ -58,7 +62,7 @@
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
 import IssueListItem from '@/components/IssueListItem.vue'
-import { Issue, CheckStatus } from '@/types/types'
+import { Issue, CheckStatus, Analyzer } from '@/types/types'
 
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import { resolveNodes } from '~/utils/array'
@@ -88,6 +92,9 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
 
   @Prop({ default: 1 })
   currentPage: number
+
+  @Prop({ default: () => {} })
+  analyzer: Analyzer
 
   @Prop({
     default: () => {

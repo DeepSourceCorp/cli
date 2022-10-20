@@ -90,11 +90,15 @@
       </template>
       <empty-state
         v-else
+        :use-v2="true"
+        :webp-image-path="require('~/assets/images/ui-states/no tokens-found-136px.webp')"
+        :png-image-path="require('~/assets/images/ui-states/no-tokens-found-136px.png')"
+        :svg-image-path="require('~/assets/images/ui-states/no-tokens-found-80px.svg')"
+        :show-border="true"
         title="No tokens found"
         subtitle="A Personal Access Token allows you to access the DeepSource API."
-        class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
       >
-        <template slot="action">
+        <template #action>
           <z-button size="small" icon="plus" @click="showGenerateModal = true">
             Generate a token
           </z-button>

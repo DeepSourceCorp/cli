@@ -1,0 +1,13 @@
+query repositoryIssueTotalCount(
+  $provider: VCSProviderChoices!
+  $owner: String!
+  $name: String!
+  $issueType: String
+) {
+  repository(provider: $provider, owner: $owner, name: $name) {
+    id
+    issues(issueType: $issueType) {
+      totalCount
+    }
+  }
+}

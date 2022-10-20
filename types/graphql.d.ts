@@ -1698,6 +1698,15 @@ declare module '*/silenceRules.gql' {
 }
     
 
+declare module '*/totalCount.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const repositoryIssueTotalCount: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/issueRaisedInFiles.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1710,7 +1719,7 @@ declare module '*/issueRaisedInFiles.gql' {
 declare module '*/issueTypeDistribution.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const issueTypeDistribution: DocumentNode;
 
   export default defaultDocument;
 }

@@ -1,27 +1,22 @@
 <template>
-  <div class="container mx-auto">
-    <div
-      class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
-    >
+  <div class="flex flex-col justify-between h-screen text-sm text-center text-vanilla-400">
+    <div class="grid flex-grow px-4 my-24 space-y-8 place-content-center">
+      <video
+        :poster="require('~/assets/loader/installation-loader.png')"
+        autoplay
+        loop
+        muted
+        playsinline
+        class="w-11/12 max-w-2xl mx-auto"
+      >
+        <source src="~/assets/loader/loader.webm" type="video/webm" />
+      </video>
       <div class="space-y-2">
-        <video
-          autoplay
-          loop
-          muted
-          playsinline
-          class="mx-auto max-h-84"
-          :poster="require('~/assets/loader/installation-loader.png')"
-        >
-          <source src="~/assets/loader/loader.webm" type="video/webm" />
-        </video>
-        <h1 class="text-2xl font-semibold text-vanilla-100">
-          Waiting for installation to complete
-        </h1>
-        <p>Please give us a moment while we wait to hear back from your VCS provider.</p>
-      </div>
-      <div class="space-y-2">
-        <p>This page will refresh automatically.</p>
-        <p class="font-semibold">Please do not close this window.</p>
+        <h1 class="text-xl font-semibold text-vanilla-100">Waiting for installation to complete</h1>
+        <p class="max-w-xl mx-auto text-sm">
+          Please give us a moment while we wait to hear back from {{ providerDisplayName }}. This
+          page will refresh automatically, please do not close this window.
+        </p>
       </div>
     </div>
   </div>
@@ -184,6 +179,11 @@ export default class Installation extends mixins(ActiveUserMixin, AuthMixin) {
       default:
         throw new Error(`Something went wrong while setting up your account.`)
     }
+  }
+
+  get providerDisplayName(): string {
+    const { provider } = this.$route.params
+    return this.$providerMetaMap[provider].text
   }
 
   /**

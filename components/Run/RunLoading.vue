@@ -1,11 +1,23 @@
 <template>
   <base-state title="Waiting for results">
     <template slot="hero">
-      <div class="grid place-content-center pb-8">
-        <z-icon icon="spin-loader" class="animate-spin" color="juniper" size="large"></z-icon>
-      </div>
+      <video
+        :poster="require('~/assets/images/ui-states/autofix/loader-animation-108px.png')"
+        autoplay
+        loop
+        disablepictureinpicture
+        muted
+        class="mx-auto w-26"
+      >
+        <source
+          :src="require('~/assets/images/ui-states/autofix/loader-animation-108px.webm')"
+          type="video/webm"
+        />
+      </video>
     </template>
-    <p>We're currently analyzing the branch, it usually takes a few minutes to fetch the results</p>
+    <p class="max-w-md">
+      We're currently analyzing the branch, it usually takes a few minutes to fetch the results.
+    </p>
   </base-state>
 </template>
 <script lang="ts">

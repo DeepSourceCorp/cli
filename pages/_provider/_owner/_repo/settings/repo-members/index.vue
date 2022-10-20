@@ -47,23 +47,22 @@
           @removeMember="() => triggerRemoveMember(member.node)"
         />
       </transition-group>
-      <div
+      <lazy-empty-state
+        v-else-if="searchCandidate"
+        :title="`We couldn't find ${searchCandidate}.`"
+        :show-border="true"
+        :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+        :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+        subtitle="If you are unable to find a collaborator, please add them to this repository first."
+      />
+      <lazy-empty-state
         v-else
-        class="flex flex-col items-center justify-center h-40 p-4 space-y-2 border-2 border-dashed rounded-md border-ink-300"
-      >
-        <template v-if="searchCandidate">
-          <h3 class="text-lg font-semibold">We couldn't find {{ searchCandidate }}.</h3>
-          <p class="text-sm text-vanilla-400">
-            If you are unable to find a collaborator, please add them to this repository first.
-          </p>
-        </template>
-        <template v-else>
-          <h3 class="text-lg font-semibold">You haven't yet added any collaborators.</h3>
-          <p class="text-sm text-vanilla-400">
-            Please add collaborators from your team, by clicking on the button "Add collaborator".
-          </p>
-        </template>
-      </div>
+        :webp-image-path="require('~/assets/images/ui-states/repo/no-collaborators-136px.webp')"
+        :png-image-path="require('~/assets/images/ui-states/repo/no-collaborators-136px.png')"
+        :show-border="true"
+        title="You haven't yet added any collaborators."
+        subtitle="Please add collaborators from your team, by clicking on the button 'Add collaborator'."
+      />
       <z-pagination
         v-if="totalPages"
         class="flex justify-center"

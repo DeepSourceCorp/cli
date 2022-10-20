@@ -15,12 +15,12 @@
       :height="imageWidth ? undefined : 'h-17 md:h-24'"
       :class="{ 'w-full md:w-auto': useV2 }"
     />
-    <div :class="{ 'text-center md:text-left': useV2 }">
+    <div :class="[{ 'text-center md:text-left': useV2 }, { [contentWidth]: useV2 }]">
       <h3
         class="text-vanilla-100"
         :class="
           useV2
-            ? 'mt-7 md:mt-0 max-w-2xs text-base font-medium'
+            ? 'mt-7 md:mt-0 text-base font-medium'
             : 'mt-7 md:mt-5 text-center text-lg font-semibold'
         "
       >
@@ -28,9 +28,7 @@
       </h3>
       <p
         class="text-sm text-vanilla-400"
-        :class="
-          useV2 ? 'mt-2 md:mt-4 max-w-2xs leading-6' : 'mt-2 sm:mt-1 mx-auto max-w-md text-center'
-        "
+        :class="useV2 ? 'mt-2 leading-6' : 'mt-2 sm:mt-1 mx-auto max-w-md text-center'"
       >
         <slot name="subtitle">{{ subtitle }} </slot>
       </p>
@@ -58,13 +56,13 @@ export default class EmptyState extends Vue {
   @Prop({ default: require('~/assets/images/ui-states/empty.webp') })
   webpImagePath: () => any
 
-  @Prop({ default: require('~/assets/images/ui-states/empty.png') })
+  @Prop({ default: require('~/assets/images/ui-states/empty.gif') })
   pngImagePath: () => any
 
   @Prop({ default: '' })
   svgImagePath: () => any
 
-  @Prop({ default: false })
+  @Prop({ default: false, type: Boolean })
   showBorder: boolean
 
   @Prop()
@@ -72,5 +70,8 @@ export default class EmptyState extends Vue {
 
   @Prop({ default: 'This page has no data' })
   altText: string
+
+  @Prop({ default: 'max-w-2xs', type: String })
+  contentWidth: string
 }
 </script>

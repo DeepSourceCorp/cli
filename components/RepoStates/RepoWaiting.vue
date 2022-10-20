@@ -1,9 +1,19 @@
 <template>
   <base-state title="Waiting for results">
     <template slot="hero">
-      <div class="grid pb-8 place-content-center">
-        <z-icon icon="spin-loader" class="animate-spin" color="juniper" size="large"></z-icon>
-      </div>
+      <video
+        :poster="require('~/assets/images/ui-states/autofix/loader-animation-108px.png')"
+        autoplay
+        loop
+        disablepictureinpicture
+        muted
+        class="mx-auto w-26"
+      >
+        <source
+          :src="require('~/assets/images/ui-states/autofix/loader-animation-108px.webm')"
+          type="video/webm"
+        />
+      </video>
     </template>
     <p class="max-w-lg">
       This is the first analysis for this repository. We're analyzing all the files, so it can take

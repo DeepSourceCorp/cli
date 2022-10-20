@@ -30,7 +30,14 @@
         <div class="flex-grow h-8 rounded-md bg-ink-300"></div>
       </div>
     </div>
-    <empty-state v-else title="No pending invites"> </empty-state>
+    <empty-state
+      v-else
+      :webp-image-path="require('~/assets/images/ui-states/pending-invites-136px.webp')"
+      :png-image-path="require('~/assets/images/ui-states/pending-invites-136px.png')"
+      :show-border="true"
+      title="No pending invites"
+    >
+    </empty-state>
     <portal to="modal">
       <z-confirm v-if="showCancelConfirm" @primaryAction="cancelInviteForMember" @onClose="close">
         <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">

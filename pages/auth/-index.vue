@@ -1,11 +1,23 @@
 <template>
-  <div class="flex items-center justify-center h-screen">
-    <div class="text-center">
-      <div class="mb-5 text-4xl text-center">{{ emoji }}</div>
-      <h1 class="text-xl font-semibold text-vanilla-100">Logging you in...</h1>
-      <p class="max-w-xs mt-2 text-vanilla-400">
-        Please wait while we redirect you to the dashboard
-      </p>
+  <div class="flex items-center justify-center h-screen p-4">
+    <div
+      class="w-full max-w-3xl py-20 mx-auto space-y-6 text-center border border-dashed rounded-md border-ink-200"
+    >
+      <video
+        :poster="require('~/assets/images/ui-states/login/norris-hello.png')"
+        autoplay
+        muted
+        playsinline
+        class="mx-auto max-h-24"
+      >
+        <source src="~/assets/images/ui-states/login/norris-hello.webm" type="video/webm" />
+      </video>
+      <div class="space-y-2">
+        <h1 class="text-base font-medium text-vanilla-100">Logging you in...</h1>
+        <p class="mt-2 text-sm text-vanilla-400">
+          Please wait while we redirect you to the dashboard
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -96,20 +108,6 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
    */
   async fetch(): Promise<void> {
     //! empty call
-  }
-
-  get emoji(): string {
-    const today = new Date()
-    if (today.getMonth() === 9 && today.getDate() === 31) {
-      // Halloween
-      return '🎃'
-    }
-    if (today.getMonth() === 11 && today.getDate() >= 20) {
-      // Christmas
-      const christmasEmojis = ['☃️', '🔔', '🎄']
-      return christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)]
-    }
-    return '👋'
   }
 }
 </script>

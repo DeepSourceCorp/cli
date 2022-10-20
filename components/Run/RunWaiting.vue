@@ -1,9 +1,19 @@
 <template>
   <base-state title="Waiting for results">
     <template slot="hero">
-      <div class="grid place-content-center pb-8">
-        <z-icon icon="spin-loader" class="animate-spin" color="juniper" size="large"></z-icon>
-      </div>
+      <video
+        :poster="require('~/assets/images/ui-states/autofix/loader-animation-108px.png')"
+        autoplay
+        loop
+        disablepictureinpicture
+        muted
+        class="mx-auto w-26"
+      >
+        <source
+          :src="require('~/assets/images/ui-states/autofix/loader-animation-108px.webm')"
+          type="video/webm"
+        />
+      </video>
     </template>
     <p>We're waiting for the test coverage artifact to be reported</p>
   </base-state>

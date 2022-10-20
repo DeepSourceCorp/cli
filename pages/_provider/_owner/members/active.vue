@@ -57,7 +57,7 @@
     <empty-state
       v-else
       :title="`No results found for '${searchCandidate}'`"
-      :svg-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+      :svg-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
       :show-border="true"
     />
 

@@ -1,7 +1,17 @@
 <template>
   <base-state title="No issues found in this check">
     <template slot="hero">
-      <div class="mb-4 text-3xl text-center">🎉</div>
+      <empty-state-picture
+        :webp-image-path="
+          require('~/assets/images/ui-states/issues/no-issues-found-static-140px.webp')
+        "
+        :png-image-path="
+          require('~/assets/images/ui-states/issues/no-issues-found-static-140px.png')
+        "
+        width="w-26"
+        alt-text="No issues found"
+        class="mx-auto mb-6"
+      />
     </template>
     <p>Give yourself a cookie.</p>
   </base-state>

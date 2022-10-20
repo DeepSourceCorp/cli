@@ -14,7 +14,7 @@
           <lazy-empty-state
             title="No results found"
             :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
-            :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+            :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
           />
         </div>
         <template v-if="$fetchState.pending">

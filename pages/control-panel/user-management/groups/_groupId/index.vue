@@ -77,7 +77,7 @@
       v-else-if="q.length"
       :title="`No users with name or email '${q}' found`"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
-      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
     />
     <lazy-empty-state v-else title="No users found" />
   </div>

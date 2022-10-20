@@ -56,15 +56,19 @@
       </template>
       <empty-state
         v-else-if="!searchCandidate"
-        class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
+        use-v2
+        show-border
         title="No Auto Onboard templates found"
-        :subtitle="`Auto Onboard helps you activate DeepSource on multiple repositories at once. ${
-          allowCrud
-            ? 'Start with a new template.'
-            : 'Ask your organization admin to create a new template'
-        }`"
+        :webp-image-path="
+          require('~/assets/images/ui-states/auto-onboard/auto-onboard-template-136px.png')
+        "
+        :png-image-path="
+          require('~/assets/images/ui-states/auto-onboard/auto-onboard-template-136px.png')
+        "
+        subtitle="Auto Onboard helps you activate DeepSource on multiple repositories at once. Ask your organization admin to create a new template."
+        content-width="max-w-sm"
       >
-        <template slot="action">
+        <template #action>
           <z-button v-if="allowCrud" size="small" @click="showNewTemplateModal = true" icon="plus">
             Create a new template
           </z-button>
@@ -72,7 +76,7 @@
       </empty-state>
       <empty-state
         v-else
-        class="py-20 border border-2 border-dashed rounded-lg border-ink-200"
+        show-border
         :title="`We couldn't find any templates matching &quot;${searchCandidate}&quot;`"
       >
         <template slot="action">

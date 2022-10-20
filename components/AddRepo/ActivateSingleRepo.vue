@@ -74,7 +74,7 @@
           class="mx-auto"
           height="100px"
           width="auto"
-          src="~/assets/images/ui-states/directory/empty-search.png"
+          src="~/assets/images/ui-states/directory/empty-search.gif"
           :alt="searchCandidate"
         />
         <div>

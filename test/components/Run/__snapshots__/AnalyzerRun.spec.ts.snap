@@ -5,6 +5,7 @@ exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"stat
   <!---->
   <div class=\\"p-3\\">
     <!---->
+    <!---->
     <div class=\\"grid grid-cols-1 gap-y-3\\">
       <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" centercontent=\\"true\\" issuelistfilters=\\"[object Object]\\" issuelistindex=\\"0\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
@@ -20,6 +21,7 @@ exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"stat
   <div id=\\"issue-filters\\" class=\\"px-3 md:sticky md:z-10 check-filter-headers-offset bg-ink-400\\"></div>
   <div class=\\"p-3\\">
     <!---->
+    <!---->
     <div class=\\"grid grid-cols-1 gap-y-3\\">
       <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" centercontent=\\"true\\" issuelistfilters=\\"[object Object]\\" issuelistindex=\\"0\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
 
@@ -34,6 +36,7 @@ exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"stat
 "<section class=\\"flex flex-col min-height-for-offset\\">
   <!---->
   <div class=\\"p-3\\">
+    <!---->
     <!---->
     <div class=\\"grid grid-cols-1 gap-y-3\\">
       <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" centercontent=\\"true\\" issuelistfilters=\\"[object Object]\\" issuelistindex=\\"0\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
@@ -51,6 +54,12 @@ exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"stat
   <div class=\\"p-3\\">
     <!---->
     <lazyrunloading-stub></lazyrunloading-stub>
+    <div class=\\"grid grid-cols-1 gap-y-3\\">
+      <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" centercontent=\\"true\\" issuelistfilters=\\"[object Object]\\" issuelistindex=\\"0\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
+
+There can be cases where the value being raised is dynamically set. One common example is setting the value to \`None\` originally, and then assigning other objects to it based on a condition. Doing so can affect readability, and is generally not recommended. In such cases, either re-write the block, or ignore the issue for this file.\\"></issuelistitem-stub>
+      <issuelistitem-stub id=\\"SXNzdWU6eGJha2di\\" title=\\"Dangerous default argument\\" shortcode=\\"PYL-W0102\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.624106+00:00\\" createdat=\\"2019-06-14T06:57:08.832219+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"3\\" autofixavailable=\\"true\\" centercontent=\\"true\\" issuelistfilters=\\"[object Object]\\" issuelistindex=\\"1\\" description=\\"Do not use a mutable like \`list\` or \`dictionary\` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.\\" autofixtitle=\\"Fix dangerous default argument\\"></issuelistitem-stub>
+    </div>
   </div>
 </section>"
 `;
@@ -59,6 +68,7 @@ exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"stat
 "<section class=\\"flex flex-col min-height-for-offset\\">
   <!---->
   <div class=\\"p-3\\">
+    <!---->
     <!---->
     <div class=\\"grid grid-cols-1 gap-y-3\\">
       <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" centercontent=\\"true\\" issuelistfilters=\\"[object Object]\\" issuelistindex=\\"0\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.
@@ -74,6 +84,7 @@ exports[`[[ AnalyzerRun ]] renders \`AnalyzerRun\` with all prop options: {"stat
 "<section class=\\"flex flex-col min-height-for-offset\\">
   <!---->
   <div class=\\"p-3\\">
+    <!---->
     <!---->
     <div class=\\"grid grid-cols-1 gap-y-3\\">
       <issuelistitem-stub id=\\"SXNzdWU6bGJwZ2d6\\" title=\\"Object of unsupported type raised\\" shortcode=\\"PYL-E0702\\" issuetype=\\"bug-risk\\" severity=\\"CRITICAL\\" modifiedat=\\"2020-07-09T08:54:35.654391+00:00\\" createdat=\\"2019-03-29T12:21:41.724528+00:00\\" seenin=\\"code.py\\" occurrencecount=\\"1\\" centercontent=\\"true\\" issuelistfilters=\\"[object Object]\\" issuelistindex=\\"0\\" description=\\"Raising objects other than a class, an instance or a string can cause a \`TypeError\`.

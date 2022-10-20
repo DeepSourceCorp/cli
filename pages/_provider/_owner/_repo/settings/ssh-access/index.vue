@@ -44,24 +44,29 @@
       </div>
     </section>
 
-    <empty-state
+    <lazy-empty-state
       v-else-if="!$fetchState.pending"
-      class="py-20 border-2 border-dashed rounded-lg border-ink-200"
-      subtitle="An SSH key pair has not been generated yet."
+      :use-v2="true"
+      :png-image-path="require('~/assets/images/ui-states/SSH-Key-136px.png')"
+      :webp-image-path="require('~/assets/images/ui-states/SSH-Key-136px.webp')"
+      :show-border="true"
+      title="An SSH key pair has not been generated yet."
+      subtitle=" Generate SSH key pair."
     >
-      <template slot="action">
+      <template #action>
         <z-button
-          size="small"
           :disabled="updatePending"
           :is-loading="updatePending"
+          size="small"
           loading-label="Generating SSH key pair"
-          @click="generateKeyPair()"
           icon="plus"
+          @click="generateKeyPair"
         >
           Generate SSH key pair
         </z-button>
       </template>
-    </empty-state>
+    </lazy-empty-state>
+
     <portal to="modal">
       <z-confirm
         v-if="isGenerateSSHConfirmModalOpen"

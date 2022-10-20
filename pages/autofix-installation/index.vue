@@ -1,20 +1,10 @@
 <template>
   <div class="container mx-auto">
     <div
-      class="
-        text-vanilla-400 text-sm text-center
-        flex flex-col
-        justify-between
-        min-h-screen
-        pb-24
-        pt-32
-      "
+      class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
     >
       <div class="space-y-2">
-        <video class="max-w-xl mx-auto" poster="/installation-loader.png" autoplay>
-          <source src="/loading.mp4" type="video/mp4" />
-        </video>
-        <h1 class="text-2xl text-vanilla-100 font-semibold">Successfully installed Autofix</h1>
+        <h1 class="text-2xl font-semibold text-vanilla-100">Successfully installed Autofix</h1>
         <p class="max-w-lg mx-auto">
           You can now fix code quality issues with just a click, the Autofix app also allows you to
           run standard transformers on your projects.

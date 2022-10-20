@@ -76,7 +76,7 @@
       v-else-if="query.length || analyzerType.length || sortType.length"
       :title="emptyStateTitle"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
-      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
     />
     <lazy-empty-state
       v-else-if="!isLoading"

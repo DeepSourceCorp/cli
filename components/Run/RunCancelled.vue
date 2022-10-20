@@ -1,12 +1,17 @@
 <template>
-  <base-state title="The run was cancelled">
+  <base-state title="Analysis cancelled">
     <template slot="hero">
-      <img
+      <empty-state-picture
+        :webp-image-path="require('~/assets/images/ui-states/repo/run-cancelled.webp')"
+        :png-image-path="require('~/assets/images/ui-states/repo/run-cancelled.png')"
+        width="w-26"
         class="mx-auto mb-4"
-        :src="require('~/assets/images/ui-states/repo/error.svg')"
-        alt="Run cancelled"
+        alt-text="Analysis cancelled"
       />
     </template>
+    <span class="text-vanilla-400"
+      >This analysis run did not complete and was cancelled due to an error.</span
+    >
   </base-state>
 </template>
 <script lang="ts">

@@ -1,7 +1,15 @@
 <template>
   <z-modal title="Invitation sent" @onClose="$emit('close')">
     <div class="flex flex-col items-center px-4 py-8">
-      <img src="~/assets/images/ui-states/owner/invite-success.svg" class="w-20 h-20 mx-auto" />
+      <video
+        autoplay
+        muted
+        disablepictureinpicture
+        :poster="require('~/assets/images/ui-states/owner/invite-success-136px.png')"
+        class="mx-auto max-h-84"
+      >
+        <source src="~/assets/images/ui-states/owner/invite-sent-136px.webm" type="video/webm" />
+      </video>
       <p class="max-w-sm mt-4 text-sm leading-6 text-center text-vanilla-400">
         We have sent an invite email to your team member(s). They can create an account using the
         link in the email and join your team.

@@ -1,10 +1,11 @@
 <template>
   <base-state title="Test artifacts were not uploaded in time">
     <template slot="hero">
-      <img
-        class="mx-auto mb-4"
-        :src="require('~/assets/images/ui-states/repo/empty.svg')"
-        alt="Run failed"
+      <empty-state-picture
+        :webp-image-path="require('~/assets/images/ui-states/timeout/timeout-state-136px.webp')"
+        :png-image-path="require('~/assets/images/ui-states/timeout/timeout-state-136px.gif')"
+        width="w-26"
+        class="mx-auto"
       />
     </template>
   </base-state>

@@ -1,23 +1,27 @@
 <template>
-  <base-state title="Analysis timed out">
-    <template slot="hero">
-      <img
-        class="mx-auto mb-4"
-        :src="require('~/assets/images/ui-states/repo/timeout.svg')"
-        alt="Repo Timeout"
-      />
-    </template>
-    <div class="max-w-xl">
-      <p>
+  <empty-state
+    use-v2
+    show-border
+    :webp-image-path="require('~/assets/images/ui-states/timeout/timeout-state-136px.webp')"
+    :png-image-path="require('~/assets/images/ui-states/timeout/timeout-state-136px.gif')"
+    title="Analysis timed out"
+    width="w-26"
+    content-width="max-w-sm"
+  >
+    <template #subtitle>
+      <p class="max-w-xl">
         We were not able to finish the analysis in time. This can happen if there are too many files
         to analyze. Please give it another shot.
       </p>
+    </template>
+    <template #action>
       <z-button
         v-if="!activateLoading"
-        @click="activateAnalysis"
         icon="repeat"
         size="small"
         class="mt-4"
+        data-testid="activate-analysis"
+        @click="activateAnalysis"
       >
         Re-run analysis
       </z-button>
@@ -25,8 +29,8 @@
         <z-icon class="animate-spin" icon="spin-loader" color="ink"></z-icon>
         <span>Triggering Run</span>
       </z-button>
-    </div>
-  </base-state>
+    </template>
+  </empty-state>
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'

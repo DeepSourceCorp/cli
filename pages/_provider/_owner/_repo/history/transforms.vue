@@ -9,25 +9,33 @@
         </template>
         <template v-else>
           <empty-state
-            title="Looks empty here"
+            :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-transforms.webp')"
             :subtitle="
               allowConfigGeneration
                 ? 'This repository has no transform runs, you can activate Transformers using the config generator.'
                 : 'This repository has no transform runs, the repository owner can activate Transformers using the config generator.'
             "
+            :show-border="true"
+            :use-v2="true"
+            content-width="max-w-sm"
+            title="No transforms"
           >
             <template #action>
-              <nuxt-link v-if="allowConfigGeneration" :to="$generateRoute(['generate-config'])">
-                <z-button size="small" icon="plus"> Add Transformers </z-button>
-              </nuxt-link>
-              <z-button
-                button-type="secondary"
-                to="https://deepsource.io/docs/concepts/#transformers"
-                size="small"
-                icon="doc"
-              >
-                Read documentation
-              </z-button>
+              <div class="flex items-center gap-x-3">
+                <nuxt-link v-if="allowConfigGeneration" :to="$generateRoute(['generate-config'])">
+                  <z-button size="small" icon="plus"> Add Transformers </z-button>
+                </nuxt-link>
+                <z-button
+                  button-type="secondary"
+                  to="https://deepsource.io/docs/concepts/#transformers"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  size="small"
+                  icon="doc"
+                >
+                  Read documentation
+                </z-button>
+              </div>
             </template>
           </empty-state>
         </template>

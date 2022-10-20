@@ -59,7 +59,7 @@
     <lazy-empty-state
       v-else-if="q.length"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
-      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
       class="border border-dashed rounded-lg border-ink-200 py-20"
     >
       <template #title>

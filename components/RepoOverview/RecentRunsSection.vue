@@ -18,7 +18,7 @@
           }"
           @click="updateSelectedRun(opt)"
         >
-          <h4 class="overflow-x-hidden text-base font-semi whitespace-nowrap overflow-ellipsis">
+          <h4 class="overflow-x-hidden text-sm whitespace-nowrap overflow-ellipsis">
             {{ opt.name }}
           </h4>
         </div>
@@ -26,9 +26,13 @@
     </div>
     <div class="col-span-2 space-y-2 lg:col-span-1">
       <template v-if="runList.edges && selectedRun === 'Analysis runs'">
-        <empty-state v-if="runList.edges.length < 1">
+        <empty-state
+          v-if="runList.edges.length < 1"
+          :show-border="true"
+          :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-analyses.webp')"
+        >
           <template slot="title">
-            <p class="text-base text-vanilla-300">No recent Analysis runs</p>
+            <p class="text-base text-vanilla-300">No recent Analyses</p>
           </template>
         </empty-state>
         <run-card
@@ -39,7 +43,11 @@
         />
       </template>
       <template v-else-if="transformerRunList.edges && selectedRun === 'Transforms'">
-        <empty-state v-if="transformerRunList.edges.length < 1">
+        <empty-state
+          v-if="transformerRunList.edges.length < 1"
+          :show-border="true"
+          :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-transforms.webp')"
+        >
           <template slot="title">
             <p class="text-base text-vanilla-300">No recent Transforms</p>
           </template>
@@ -52,7 +60,11 @@
         ></transform-card>
       </template>
       <template v-else-if="selectedRun === 'Autofixes'">
-        <empty-state v-if="autofixRunList.edges.length < 1">
+        <empty-state
+          v-if="autofixRunList.edges.length < 1"
+          :show-border="true"
+          :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-autofixes.webp')"
+        >
           <template slot="title">
             <p class="text-base text-vanilla-300">No recent Autofixes</p>
           </template></empty-state

@@ -102,7 +102,7 @@
           v-else-if="query.length"
           :title="`No results found for '${query}'`"
           :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
-          :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+          :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
           class="my-auto"
         />
         <lazy-empty-state v-else title="No issues found" />

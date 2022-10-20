@@ -68,7 +68,7 @@
     <lazy-empty-state
       v-else
       :title="`No results found for '${searchValue}'`"
-      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.png')"
+      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
       :show-border="true"
     />

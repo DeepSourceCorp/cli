@@ -66,22 +66,60 @@
         'max-h-auto': issueList && issueList.totalCount && issueList.totalCount > 0
       }"
     >
-      <empty-state
-        v-if="issueList.totalCount === 0"
-        title="No issues found"
-        :subtitle="`That's a good thing, right?!`"
-        class="border-2 border-dashed rounded-lg border-ink-200 py-15"
-      >
-      </empty-state>
-      <issue-list-item
-        v-for="issue in resolveIssueNodes(issueList)"
-        v-bind="issue"
-        :key="issue.id"
-        :show-autofix-button="allowAutofix && hasRepoReadAccess"
-        :disable-autofix-button="!canCreateAutofix"
-        :issue-link="$generateRoute(['issue', issue.shortcode || '', 'occurrences'])"
-        @autofix="openAutofixModal"
-      ></issue-list-item>
+      <template v-if="issueList.totalCount">
+        <issue-list-item
+          v-for="issue in resolveIssueNodes(issueList)"
+          v-bind="issue"
+          :key="issue.id"
+          :show-autofix-button="allowAutofix && hasRepoReadAccess"
+          :disable-autofix-button="!canCreateAutofix"
+          :issue-link="$generateRoute(['issue', issue.shortcode || '', 'occurrences'])"
+          @autofix="openAutofixModal"
+        />
+      </template>
+
+      <template v-else>
+        <lazy-empty-state
+          v-if="issueCategoryDisabled && !hasIssuesCount"
+          :webp-image-path="
+            require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.webp')
+          "
+          :png-image-path="
+            require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.png')
+          "
+          :show-border="true"
+          :title="`${issueCategoryName} issues are not enabled`"
+        >
+          <template #subtitle>
+            <p class="text-sm text-vanilla-400 mt-2 sm:mt-1 mx-auto max-w-md text-center">
+              Configure your CI to send code coverage metrics to start tracking this metric. Head
+              over to
+              <nuxt-link
+                :to="$generateRoute(['settings', 'reporting'])"
+                class="hover:underline focus:underline text-juniper"
+              >
+                Settings <span class="text-vanilla-400">›</span> Reporting
+              </nuxt-link>
+              to see how.
+            </p>
+          </template>
+        </lazy-empty-state>
+
+        <lazy-empty-state
+          v-else
+          :webp-image-path="
+            require('~/assets/images/ui-states/issues/no-issues-found-static-140px.webp')
+          "
+          :png-image-path="
+            require('~/assets/images/ui-states/issues/no-issues-found-static-140px.png')
+          "
+          :show-border="true"
+          title="No issues found"
+          subtitle="That's a good thing, right?!"
+          alt-text="No issues found"
+        />
+      </template>
+
       <z-pagination
         v-if="pageCount > 1"
         :page="queryParams.page"
@@ -129,6 +167,9 @@ import IssueListMixin from '~/mixins/issueListMixin'
 import { RepoPerms } from '~/types/permTypes'
 import RouteQueryMixin, { RouteQueryParamsT } from '~/mixins/routeQueryMixin'
 import { resolveNodes } from '~/utils/array'
+import IssueCategoryMixin from '~/mixins/issueCategoryMixin'
+
+import RepositoryIssuesTotalCountGQLQuery from '~/apollo/queries/repository/issue/totalCount.gql'
 
 const PAGE_SIZE = 25
 const VISIBLE_PAGES = 5
@@ -164,6 +205,7 @@ export interface IssueListFilters extends RouteQueryParamsT {
 })
 export default class Issues extends mixins(
   RepoDetailMixin,
+  IssueCategoryMixin,
   IssueListMixin,
   RoleAccessMixin,
   RouteQueryMixin
@@ -175,6 +217,8 @@ export default class Issues extends mixins(
   public urlFilterState: Record<string, string | (string | null)[]> = {}
   public autofixIssue: Record<string, string | Array<string>> = {}
   public issuesLoading = false
+
+  totalIssuesCountForCategory = 0
 
   /**
    * Function to update category query param based on the new value received
@@ -206,7 +250,7 @@ export default class Issues extends mixins(
     if (analyzer && analyzer !== 'all') {
       parsed['analyzer'] = analyzer as string
     }
-    if (category && category !== 'all' && category !== 'recommended') {
+    if (this.isDefinedCategory) {
       parsed['category'] = category as string
     } else {
       parsed['category'] = undefined
@@ -253,6 +297,18 @@ export default class Issues extends mixins(
 
     // Ensure updates to query params happen before accessing
     await this.fetchIssuesForOwner()
+
+    // Fetch the issues count associated with an issue type except `all` and `recommended`
+    if (this.isDefinedCategory) {
+      const args = {
+        ...this.baseRouteParams,
+        provider: this.$providerMetaMap[this.$route.params.provider].value,
+        issueType: this.queryParams.category
+      }
+      const response = await this.$fetchGraphqlData(RepositoryIssuesTotalCountGQLQuery, args)
+
+      this.totalIssuesCountForCategory = response.data.repository.issues.totalCount
+    }
 
     this.fetchRepoAutofixStats(this.baseRouteParams)
     this.fetchIsCommitPossible(this.baseRouteParams)
@@ -382,6 +438,42 @@ export default class Issues extends mixins(
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
+  }
+
+  get issueCategoryDisabled(): boolean {
+    // Return early if the category is falsy or anything among `all` or `recommended`
+    if (!this.isDefinedCategory) {
+      return false
+    }
+
+    const status = this.repository.issueTypeSettings?.find(
+      (issueType) => issueType?.slug === this.queryParams.category
+    )
+
+    return status?.isIgnoredToDisplay as boolean
+  }
+
+  get issueCategoryName(): string {
+    // Return early if the category is falsy or anything among `all` or `recommended`
+    if (!this.isDefinedCategory) {
+      return ''
+    }
+
+    const match = this.issueCategories.find(
+      (category) => category?.shortcode === this.queryParams.category
+    )
+
+    return match?.name || ''
+  }
+
+  get hasIssuesCount(): boolean {
+    return Boolean(this.totalIssuesCountForCategory)
+  }
+
+  get isDefinedCategory(): boolean {
+    // Returns `true` if `category` is truthy and it is not set to `all` or `recommended`.
+    const { category } = this.queryParams
+    return Boolean(category && category !== 'all' && category !== 'recommended')
   }
 
   /**
