@@ -24,11 +24,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -58,11 +58,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -98,11 +98,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -132,11 +132,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -172,11 +172,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -204,11 +204,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -242,11 +242,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -274,11 +274,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -312,11 +312,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`]
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -346,11 +346,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div> <button disabled=\\"disabled\\" data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -386,11 +386,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -420,11 +420,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div> <button data-testid=\\"autofix-issue\\" class=\\"flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100 cursor-pointer hover:bg-ink-200\\">
           <zicon-stub icon=\\"autofix\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"hidden sm:block\\"></zicon-stub>
           <zicon-stub icon=\\"autofix\\" size=\\"x-small\\" position=\\"\\" color=\\"juniper\\" class=\\"block sm:hidden\\"></zicon-stub> <span class=\\"ml-1 text-sm font-medium text-juniper sm:ml-0\\">Autofix</span>
@@ -460,11 +460,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -492,11 +492,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -530,11 +530,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -562,11 +562,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -600,11 +600,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -632,11 +632,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -670,11 +670,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -702,11 +702,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -740,11 +740,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -772,11 +772,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -810,11 +810,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -842,11 +842,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100 justify-center items-center\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -880,11 +880,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -912,11 +912,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -950,11 +950,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -982,11 +982,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1020,11 +1020,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1052,11 +1052,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1090,11 +1090,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>
@@ -1122,11 +1122,11 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 32`
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100\\">
-        <div class=\\"flex items-center gap-x-2 justify-center flex-grow text-xs leading-none py-1\\">
-          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
+        <div class=\\"flex flex-col items-center justify-center flex-grow text-xs leading-none py-1\\">
           <div class=\\"text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100\\">
             3
           </div>
+          <ticker-stub trend-direction=\\"down\\" trend-positive=\\"true\\" trend-value=\\"12%\\" custom-bg-class=\\"bg-ink-100\\" class=\\"hidden sm:block text-xxs md:text-xs text-juniper has-tooltip\\" data-original-title=\\"null\\"></ticker-stub>
         </div>
         <!---->
       </div>

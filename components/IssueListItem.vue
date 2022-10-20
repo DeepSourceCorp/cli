@@ -44,10 +44,17 @@
         >
           <!-- Occurence count and Trend  -->
           <div
-            class="flex items-center gap-x-2 justify-center flex-grow text-xs leading-none"
+            class="flex flex-col items-center justify-center flex-grow text-xs leading-none"
             :class="showTrend ? 'py-1' : 'py-2'"
           >
             <!-- Count -->
+            <div
+              v-tooltip="occurrenceCount > 1000 ? `${formatIntl(occurrenceCount)} occurrences` : ''"
+              class="text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100"
+            >
+              {{ shortenLargeNumber(occurrenceCount) }}
+            </div>
+            <!-- Trend -->
             <ticker
               v-if="showTrend"
               v-tooltip="trend.trendHint"
@@ -59,12 +66,6 @@
               class="hidden sm:block text-xxs md:text-xs"
               :class="trend.trendDirection === TrendDirection.Up ? 'text-cherry' : 'text-juniper'"
             />
-            <div
-              v-tooltip="occurrenceCount > 1000 ? `${formatIntl(occurrenceCount)} occurrences` : ''"
-              class="text-lg md:text-1.5xl font-bold leading-10 text-vanilla-100"
-            >
-              {{ shortenLargeNumber(occurrenceCount) }}
-            </div>
           </div>
           <!-- Autofix -->
           <button
