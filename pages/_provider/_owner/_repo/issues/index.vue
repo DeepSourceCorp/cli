@@ -106,6 +106,16 @@
         </lazy-empty-state>
 
         <lazy-empty-state
+          v-else-if="parsedParams.q"
+          :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+          :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+          :show-border="true"
+          :title="`No results found for '${parsedParams.q}'`"
+          :alt-text="`No results found for '${parsedParams.q}'`"
+          subtitle="Please try changing the search query or clearing the filters."
+        />
+
+        <lazy-empty-state
           v-else
           :webp-image-path="
             require('~/assets/images/ui-states/issues/no-issues-found-static-140px.webp')
