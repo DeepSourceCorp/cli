@@ -6,7 +6,11 @@
       description-width-class="max-w-2xl"
       description="If your repositories have external private dependencies, you need to grant DeepSource access to fetch those dependencies via this public key."
     />
-    <section v-if="owner.ownerSetting.publicKey">
+
+    <!-- Skeleton loader -->
+    <div v-if="$fetchState.pending" class="w-full h-40 bg-ink-300 animate-pulse"></div>
+
+    <section v-else-if="owner.ownerSetting.publicKey">
       <div
         class="p-3 font-mono text-sm break-all border rounded-md border-ink-200 text-vanilla-400"
       >
@@ -52,7 +56,7 @@
           size="small"
           loading-label="Generating SSH key pair"
           icon="plus"
-          @click="generateKeyPair"
+          @click="generateSSHKeyPair"
         >
           Generate SSH key pair
         </z-button>

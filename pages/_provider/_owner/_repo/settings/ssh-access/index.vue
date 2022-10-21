@@ -7,8 +7,12 @@
       description-width-class="max-w-2xl"
       description="If your repository has external private dependencies, you need to grant DeepSource access to fetch those dependencies via this public key."
     />
+
+    <!-- Skeleton loader -->
+    <div v-if="$fetchState.pending" class="w-full h-40 bg-ink-300 animate-pulse"></div>
+
     <!-- Public key description -->
-    <section v-if="repository.encPublicKey">
+    <section v-else-if="repository.encPublicKey">
       <div
         class="p-3 font-mono text-sm break-all border rounded-md border-ink-200 text-vanilla-400"
       >
