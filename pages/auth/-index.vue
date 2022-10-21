@@ -1,8 +1,6 @@
 <template>
   <div class="flex items-center justify-center h-screen p-4">
-    <div
-      class="w-full max-w-3xl py-20 mx-auto space-y-6 text-center border border-dashed rounded-md border-ink-200"
-    >
+    <div class="w-full max-w-3xl py-20 mx-auto space-y-6 text-center">
       <video
         :poster="require('~/assets/images/ui-states/login/norris-hello.png')"
         autoplay
