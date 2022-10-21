@@ -16,10 +16,11 @@ import (
 )
 
 type ReportOptions struct {
-	Analyzer  string
-	Key       string
-	Value     string
-	ValueFile string
+	Analyzer                    string
+	Key                         string
+	Value                       string
+	ValueFile                   string
+	SkipCertificateVerification bool
 }
 
 // NewCmdVersion returns the current version of cli being used
@@ -59,6 +60,9 @@ func NewCmdReport() *cobra.Command {
 	cmd.Flags().StringVar(&opts.ValueFile, "value-file", "", "Path to the value file")
 
 	cmd.Flags().StringVar(&opts.Value, "value", "", "Value of the artifact")
+
+	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
+	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "Skip SSL certificate verification while sending the test coverage data")
 
 	return cmd
 }
@@ -227,6 +231,7 @@ func (opts *ReportOptions) Run() int {
 		dsnProtocol+"://"+dsnHost+"/graphql/cli/",
 		queryBodyBytes,
 		"application/json",
+		opts.SkipCertificateVerification,
 	)
 	if err != nil {
 		fmt.Println("DeepSource | Error | Reporting failed | ", err)

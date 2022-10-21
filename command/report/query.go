@@ -2,6 +2,7 @@ package report
 
 import (
 	"bytes"
+	"crypto/tls"
 	"fmt"
 	"io/ioutil"
 	"net/http"
@@ -10,11 +11,21 @@ import (
 )
 
 // makeQuery makes a HTTP query with a specified body and returns the response
-func makeQuery(url string, body []byte, bodyMimeType string) ([]byte, error) {
+func makeQuery(url string, body []byte, bodyMimeType string, skipCertificateVerification bool) ([]byte, error) {
 	var resBody []byte
-
 	httpClient := &http.Client{
 		Timeout: time.Second * 60,
+	}
+
+	if skipCertificateVerification {
+		// Create a custom HTTP Transport for skipping verification of SSL certificates
+		// if `--skip-verify` flag is passed.
+		tr := &http.Transport{
+			TLSClientConfig: &tls.Config{
+				InsecureSkipVerify: true,
+			},
+		}
+		httpClient.Transport = tr
 	}
 
 	req, err := http.NewRequest("POST", url, bytes.NewBuffer(body))
