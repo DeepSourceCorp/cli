@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -30,7 +31,7 @@ func startMockAPIServer() {
 	go func() {
 		err := srv.ListenAndServe()
 		if err != nil {
-			panic("Error starting HTTP mock server")
+			panic(fmt.Sprintf("failed to start HTTP mock server with error=%s", err))
 		}
 	}()
 }
