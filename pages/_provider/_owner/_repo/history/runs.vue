@@ -17,6 +17,7 @@
         :key="defaultBranchRun.branchName"
         :generalized-run="generalizeRun(defaultBranchRun, true)"
         :branchRunCount="defaultBranchRunCount"
+        :is-expanded="expandedBranch === defaultBranchRun.branchName"
         :class="{
           'opacity-30 pointer-events-none':
             expandedBranch && expandedBranch !== defaultBranchRun.branchName
@@ -30,6 +31,7 @@
             v-for="pr in prListNodes"
             :key="pr.id"
             :generalized-run="generalizePR(pr)"
+            :is-expanded="expandedBranch === pr.branch"
             :class="{
               'opacity-30 pointer-events-none': expandedBranch && expandedBranch !== pr.branch
             }"
@@ -252,6 +254,8 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
     runStatus: RunStatusChoice | null
     searchText: string
   }): void {
+    // Reset expanded branch
+    this.updateExpandedBranch('')
     const { prState, runStatus, searchText } = prFilters
     this.prStatusFilter = prState ?? this.prStatusFilter
     this.searchText = searchText === undefined ? this.searchText : searchText

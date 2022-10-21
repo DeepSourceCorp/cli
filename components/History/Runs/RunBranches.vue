@@ -3,6 +3,7 @@
     :loading="listLoading"
     :title="generalizedRun.prNumber || generalizedRun.branchName"
     :count="generalizedRun.runCount || branchRunCount"
+    :is-expanded="isExpanded"
     @toggled="toggled"
   >
     <!-- Section Card -->
@@ -88,7 +89,9 @@ const runListStore = namespace('run/list')
 })
 export default class RunBranches extends Vue {
   public listLoading = false
-  public isExpanded = false
+
+  @Prop({ type: Boolean, default: false })
+  isExpanded: boolean
 
   @Prop({ default: () => {} })
   generalizedRun!: GeneralizedRunT
@@ -109,7 +112,6 @@ export default class RunBranches extends Vue {
    * * @return {Promise<void>}
    */
   async toggled(isExpanded: boolean): Promise<void> {
-    this.isExpanded = isExpanded
     if (isExpanded) {
       await this.fetchRuns()
       this.$emit('expanded', this.generalizedRun.branchName)

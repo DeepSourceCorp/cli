@@ -33,6 +33,9 @@ export default class BranchList extends Vue {
   @Prop({ default: false })
   loading: boolean
 
+  @Prop({ default: false })
+  isExpanded: boolean
+
   get countText(): string {
     const count = this.count - 1
 
@@ -49,11 +52,8 @@ export default class BranchList extends Vue {
     }
   }
 
-  public isExpanded = false
-
   toggleItems(): void {
-    this.isExpanded = !this.isExpanded
-    this.$emit('toggled', this.isExpanded)
+    this.$emit('toggled', !this.isExpanded)
   }
 }
 </script>
