@@ -17,7 +17,10 @@
         :key="defaultBranchRun.branchName"
         :generalized-run="generalizeRun(defaultBranchRun, true)"
         :branchRunCount="defaultBranchRunCount"
-        :class="{ 'opacity-30': expandedBranch && expandedBranch !== defaultBranchRun.branchName }"
+        :class="{
+          'opacity-30 pointer-events-none':
+            expandedBranch && expandedBranch !== defaultBranchRun.branchName
+        }"
         @expanded="updateExpandedBranch"
       >
       </run-branches>
