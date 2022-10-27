@@ -173,15 +173,10 @@ func (opts *ReportOptions) Run() int {
 
 	if reportCommandValueFile != "" {
 		// Check file size
-		fileStat, err := os.Stat(reportCommandValueFile)
+		_, err := os.Stat(reportCommandValueFile)
 		if err != nil {
 			fmt.Println("DeepSource error | Error | Unable to read specified value file: " + reportCommandValueFile)
 			sentry.CaptureException(err)
-			return 1
-		}
-
-		if fileStat.Size() > maxArtifactUploadSize {
-			fmt.Println("DeepSource | Error | Value file too large. Should be less than 20 Megabytes")
 			return 1
 		}
 
