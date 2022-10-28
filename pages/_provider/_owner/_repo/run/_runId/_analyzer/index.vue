@@ -127,19 +127,11 @@
                   </template>
                 </run-metric-card>
               </div>
-              <base-state
-                v-else
-                :show-border="true"
-                class="text-vanilla-400"
-                height-class="h-auto"
-                spacing-class="p-6"
-              >
-                <template #title>
-                  <h1 class="mt-1 text-sm text-center text-vanilla-400">
-                    No metrics captured for this check
-                  </h1>
+              <empty-state v-else image-width="w-22">
+                <template slot="title">
+                  <p class="text-base text-vanilla-200">No metrics captured for this check</p>
                 </template>
-              </base-state>
+              </empty-state>
             </div>
           </section>
         </div>
@@ -171,12 +163,11 @@
                 </template>
               </run-metric-card>
             </div>
-            <empty-state
-              v-else
-              :show-border="true"
-              title="No metrics captured for this check"
-              class="text-vanilla-200"
-            />
+            <empty-state v-else>
+              <template slot="title">
+                <p class="text-base text-vanilla-200">No metrics captured for this check</p>
+              </template>
+            </empty-state>
           </template>
         </div>
       </z-tabs>
