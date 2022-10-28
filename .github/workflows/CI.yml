@@ -8,8 +8,44 @@ on:
       - master
 
 jobs:
-  run-tests:
+  run-tests-linux:
     runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v2
+        with:
+          go-version: ^1.18
+
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - name: Build the binary
+        run: make build
+
+      - name: Setup tests
+        run: make test_setup
+        env:
+          CODE_PATH: /home/runner/code
+
+      - name: Run tests
+        run: make test
+        env:
+          CODE_PATH: /home/runner/code
+
+      - name: Report test coverage to DeepSource
+        uses: deepsourcelabs/test-coverage-action@master
+        with:
+          key: go
+          coverage-file: ./coverage.out
+          dsn: ${{ secrets.DEEPSOURCE_DSN }}
+          fail-ci-on-error: true
+
+  run-tests-windows:
+    runs-on: windows-latest
 
     steps:
       - name: Set up Go 1.x
