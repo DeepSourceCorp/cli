@@ -85,13 +85,14 @@ const BASE_COLOR = '#2eb78b'
  * Page for displaying issues prevented by analyzer and category type
  */
 @Component({
-  layout: 'dashbaord',
+  layout: 'dashboard',
   components: {
     ZChart
   },
   methods: {
     shortenLargeNumber
-  }
+  },
+  middleware: ['betaOnly']
 })
 export default class OwnerIssuesPrevented extends mixins(
   OwnerDetailMixin,

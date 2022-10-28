@@ -145,7 +145,7 @@ export default {
         '**/discover/*',
         '**/issues-prevented'
       ]
-    : ['**/issues-prevented'],
+    : [],
 
   loadingIndicator: {
     name: 'pulse',
