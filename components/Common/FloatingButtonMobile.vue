@@ -1,13 +1,13 @@
 <template>
   <portal to="floating-nav">
     <div
-      class="fixed bottom-0 left-0 right-0 w-screen px-4 pb-5 font-medium bg-gradient-to-t from-ink-400 to-transparent"
+      class="lg:hidden fixed bottom-0 left-0 right-0 w-screen px-4 pb-5 font-medium bg-gradient-to-t from-ink-400 to-transparent"
     >
       <Menu
         :triggers="['click', 'touch']"
         placement="top"
         theme="deepsource-dropdown"
-        class="bottom-0 w-full text-center border-0 lg:hidden"
+        class="bottom-0 w-full text-center border-0"
         @apply-show="onShow"
         @apply-hide="onHide"
       >

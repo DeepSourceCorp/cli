@@ -2,8 +2,8 @@
 
 exports[`[[ FloatingButtonMobile ]] renders a floating action button 1`] = `
 "<portal-stub to=\\"floating-nav\\">
-  <div class=\\"fixed bottom-0 left-0 right-0 w-screen px-4 pb-5 font-medium bg-gradient-to-t from-ink-400 to-transparent\\">
-    <div class=\\"v-popper bottom-0 w-full text-center border-0 lg:hidden v-popper--theme-deepsource-dropdown\\"><button class=\\"flex items-center justify-between w-64 px-4 py-3 mx-auto text-sm divide-x rounded-lg shadow-lg ds-mobile-menu-trigger bg-ink-300 text-vanilla-100 divide-ink-100\\"><span class=\\"truncate\\">
+  <div class=\\"lg:hidden fixed bottom-0 left-0 right-0 w-screen px-4 pb-5 font-medium bg-gradient-to-t from-ink-400 to-transparent\\">
+    <div class=\\"v-popper bottom-0 w-full text-center border-0 v-popper--theme-deepsource-dropdown\\"><button class=\\"flex items-center justify-between w-64 px-4 py-3 mx-auto text-sm divide-x rounded-lg shadow-lg ds-mobile-menu-trigger bg-ink-300 text-vanilla-100 divide-ink-100\\"><span class=\\"truncate\\">
             OWASP Top 10
           </span> <span class=\\"pl-4 border-ink-100\\"><zicon-stub icon=\\"chevron-up\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" button-type=\\"secondary\\" class=\\"flex-shrink-0 duration-150 transform\\"></zicon-stub></span></button></div>
   </div>
