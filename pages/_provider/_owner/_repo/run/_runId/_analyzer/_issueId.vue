@@ -169,10 +169,10 @@ export default class RunIssueDetails extends mixins(
   @Watch('sort')
   filtersUpdated(): void {
     this.addFilters({
+      ...this.$route.query,
       q: this.searchCandidate,
       sort: this.sort,
-      page: this.currentPage,
-      ...this.$route.query
+      page: this.currentPage
     })
   }
 
