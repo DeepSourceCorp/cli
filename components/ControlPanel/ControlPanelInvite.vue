@@ -116,7 +116,7 @@ export default class ControlPanelInvite extends mixins(ControlPanelBaseMixin) {
     this.isLoading = false
   }
 
-  async triggerChange(value: string): Promise<void> {
+  triggerChange(value: string): void {
     this.inviteLink =
       this.groupInvites.find((groupInvite: EnterpriseGroup) => groupInvite.id === value)
         ?.invitationUrl || ''

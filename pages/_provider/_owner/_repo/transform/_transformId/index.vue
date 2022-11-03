@@ -164,7 +164,7 @@ export default class Issues extends mixins(RepoDetailMixin) {
     this.$socket.$off('repo-transform-created', this.fetchTransformerRun)
   }
 
-  async fetchTransformerRun(): Promise<void> {
+  fetchTransformerRun(): Promise<void> {
     return this.$store.dispatch(
       `transformerRun/detail/${TransformerRunActions.FETCH_TRANSFORMER_RUN}`,
       {

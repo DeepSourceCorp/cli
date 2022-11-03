@@ -66,7 +66,7 @@ describe('[Store] Analyzer/List', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({ data: { analyzers: <AnalyzerConnection>{} } })
               )
@@ -83,11 +83,11 @@ describe('[Store] Analyzer/List', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${AnalyzerListMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${AnalyzerListMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -133,7 +133,7 @@ describe('[Store] Analyzer/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -144,11 +144,11 @@ describe('[Store] Analyzer/List', () => {
           await actions[AnalyzerListActions.FETCH_ANALYZER_LIST].call(localThis, actionCxt)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${AnalyzerListMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${AnalyzerListMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -168,7 +168,7 @@ describe('[Store] Analyzer/List', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${AnalyzerListMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${AnalyzerListMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]

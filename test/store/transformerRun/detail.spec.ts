@@ -63,7 +63,7 @@ describe('[Store] TransformerRun/Detail', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { transformerRun: mockTransformerRunDetailState().transformerRun }
@@ -84,11 +84,11 @@ describe('[Store] TransformerRun/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${TransformerRunMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${TransformerRunMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -133,7 +133,7 @@ describe('[Store] TransformerRun/Detail', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -146,11 +146,11 @@ describe('[Store] TransformerRun/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${TransformerRunMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${TransformerRunMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -170,7 +170,7 @@ describe('[Store] TransformerRun/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${TransformerRunMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${TransformerRunMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]

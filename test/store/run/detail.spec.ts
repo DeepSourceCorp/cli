@@ -71,7 +71,7 @@ describe('[Store] Run/Detail', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { repository: { id: 'hello', run: mockRunDetailState().run } as Repository }
@@ -95,11 +95,11 @@ describe('[Store] Run/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -145,7 +145,7 @@ describe('[Store] Run/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -161,11 +161,11 @@ describe('[Store] Run/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -185,7 +185,7 @@ describe('[Store] Run/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -205,7 +205,7 @@ describe('[Store] Run/Detail', () => {
       describe(`Success`, () => {
         beforeEach(async () => {
           localThis = {
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { check: mockRunDetailState().check }
@@ -226,11 +226,11 @@ describe('[Store] Run/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -268,7 +268,7 @@ describe('[Store] Run/Detail', () => {
       describe(`Failure`, () => {
         beforeEach(async () => {
           localThis = {
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((_, reject) => reject(new Error('ERR1')))
             }
           }
@@ -281,11 +281,11 @@ describe('[Store] Run/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -305,7 +305,7 @@ describe('[Store] Run/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -326,7 +326,7 @@ describe('[Store] Run/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { checkIssues: mockRunDetailState().checkIssues }
@@ -350,11 +350,11 @@ describe('[Store] Run/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -393,7 +393,7 @@ describe('[Store] Run/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((_, reject) => reject(new Error('ERR1')))
             }
           }
@@ -409,11 +409,11 @@ describe('[Store] Run/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -433,7 +433,7 @@ describe('[Store] Run/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -461,7 +461,7 @@ describe('[Store] Run/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({ data: { check: mockRepositoryDetailStateForAutofixableIssues().check } })
               )
@@ -480,11 +480,11 @@ describe('[Store] Run/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -530,7 +530,7 @@ describe('[Store] Run/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -543,11 +543,11 @@ describe('[Store] Run/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -567,7 +567,7 @@ describe('[Store] Run/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -595,7 +595,7 @@ describe('[Store] Run/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({ data: { check: mockRunDetailStateForConcreteIssueList().check } })
               )
@@ -618,11 +618,11 @@ describe('[Store] Run/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -668,7 +668,7 @@ describe('[Store] Run/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -685,11 +685,11 @@ describe('[Store] Run/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -709,7 +709,7 @@ describe('[Store] Run/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -730,7 +730,7 @@ describe('[Store] Run/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
-            async $applyGraphqlMutation(): Promise<unknown> {
+            $applyGraphqlMutation(): Promise<unknown> {
               return new Promise<unknown>((resolve) =>
                 setTimeout(
                   () =>
@@ -763,7 +763,7 @@ describe('[Store] Run/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, secondCall]
@@ -790,7 +790,7 @@ describe('[Store] Run/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
-            async $applyGraphqlMutation(): Promise<unknown> {
+            $applyGraphqlMutation(): Promise<unknown> {
               return new Promise<unknown>((resolve) =>
                 setTimeout(
                   () =>
@@ -822,7 +822,7 @@ describe('[Store] Run/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, secondCall]
@@ -845,7 +845,7 @@ describe('[Store] Run/Detail', () => {
       describe(`Failure`, () => {
         beforeEach(async () => {
           localThis = {
-            async $applyGraphqlMutation(): Promise<Error> {
+            $applyGraphqlMutation(): Promise<Error> {
               return new Promise<Error>((_, reject) => reject(new Error('ERR1')))
             }
           }
@@ -861,11 +861,11 @@ describe('[Store] Run/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -885,7 +885,7 @@ describe('[Store] Run/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -906,7 +906,7 @@ describe('[Store] Run/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $getGQLAfter: jest.fn(),
-            async $applyGraphqlMutation(): Promise<unknown> {
+            $applyGraphqlMutation(): Promise<unknown> {
               return new Promise<unknown>((resolve) =>
                 setTimeout(
                   () =>
@@ -939,7 +939,7 @@ describe('[Store] Run/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, secondCall]

@@ -63,7 +63,7 @@ describe('[Store] User/Active', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({ data: { viewer: <User>{} } })
               )
@@ -80,7 +80,7 @@ describe('[Store] User/Active', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
@@ -109,7 +109,7 @@ describe('[Store] User/Active', () => {
                 value: 'GITHUB'
               }
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({ data: { viewer: <User>{} } })
               )
@@ -128,7 +128,7 @@ describe('[Store] User/Active', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
@@ -162,7 +162,7 @@ describe('[Store] User/Active', () => {
             $logErrorAndToast(): boolean {
               return true
             },
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>(
                 (_, error) =>
                   error(
@@ -185,7 +185,7 @@ describe('[Store] User/Active', () => {
           expect(loggerFn).toHaveBeenCalledTimes(1)
         })
 
-        test('commits no mutations', async () => {
+        test('commits no mutations', () => {
           expect(commit).toHaveBeenCalledTimes(0)
         })
       })
@@ -194,7 +194,7 @@ describe('[Store] User/Active', () => {
       describe(`Success`, () => {
         beforeEach(async () => {
           localThis = {
-            async $applyGraphqlMutation(): Promise<boolean> {
+            $applyGraphqlMutation(): Promise<boolean> {
               return new Promise<boolean>((resolve) => resolve(true))
             }
           }
@@ -219,7 +219,7 @@ describe('[Store] User/Active', () => {
             $logErrorAndToast(): boolean {
               return true
             },
-            async $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>(
                 (_, error) =>
                   error(
@@ -244,7 +244,7 @@ describe('[Store] User/Active', () => {
           expect(loggerFn).toHaveBeenCalledTimes(1)
         })
 
-        test('commits no mutations', async () => {
+        test('commits no mutations', () => {
           expect(commit).toHaveBeenCalledTimes(0)
         })
       })
@@ -252,7 +252,7 @@ describe('[Store] User/Active', () => {
     describe(`Action "${ActiveUserActions.UPDATE_STARRED_REPO}"`, () => {
       beforeEach(async () => {
         localThis = {
-          async $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
+          $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
             return new Promise<GraphqlQueryResponse>((resolve) =>
               resolve({
                 data: {
@@ -287,7 +287,7 @@ describe('[Store] User/Active', () => {
         if (spy) spy.mockReset()
 
         localThis = {
-          async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+          $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
             return new Promise<GraphqlQueryResponse>((resolve) =>
               resolve({ data: { viewer: <User>{} } })
             )

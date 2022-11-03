@@ -65,7 +65,7 @@ describe('[Store] Repository/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<{ data: { owner: Owner } }> {
+            $fetchGraphqlData(): Promise<{ data: { owner: Owner } }> {
               return new Promise<{ data: { owner: Owner } }>((resolve) =>
                 setTimeout(
                   () =>
@@ -98,11 +98,11 @@ describe('[Store] Repository/List', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepoListMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepoListMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -150,7 +150,7 @@ describe('[Store] Repository/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -167,11 +167,11 @@ describe('[Store] Repository/List', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepoListMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepoListMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -192,7 +192,7 @@ describe('[Store] Repository/List', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RepoListMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RepoListMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {

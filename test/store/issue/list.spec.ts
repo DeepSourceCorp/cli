@@ -67,7 +67,7 @@ describe('[Store] Issue/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return Promise.resolve({ data: { repository: <Repository>{ issue: {} } } })
             }
           }
@@ -92,11 +92,11 @@ describe('[Store] Issue/List', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${IssueListMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${IssueListMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -142,7 +142,7 @@ describe('[Store] Issue/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return Promise.reject(new Error('ERR1'))
             }
           }
@@ -163,11 +163,11 @@ describe('[Store] Issue/List', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${IssueListMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${IssueListMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -187,7 +187,7 @@ describe('[Store] Issue/List', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${IssueListMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${IssueListMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]

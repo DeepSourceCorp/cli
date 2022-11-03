@@ -24,7 +24,7 @@ const localThisSuccess: any = {
       value: 'GITHUB'
     }
   },
-  async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+  $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
     return new Promise<GraphqlQueryResponse>((resolve) =>
       resolve({ data: { team: mockTeamState().team } })
     )
@@ -42,7 +42,7 @@ const localThisFailure: any = {
       value: 'GITHUB'
     }
   },
-  async $fetchGraphqlData(): Promise<Error> {
+  $fetchGraphqlData(): Promise<Error> {
     return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
   },
   $getGQLAfter(): string {
@@ -104,11 +104,11 @@ describe('[Store] Team/List', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${TeamMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${TeamMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -157,11 +157,11 @@ describe('[Store] Team/List', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${TeamMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${TeamMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -181,7 +181,7 @@ describe('[Store] Team/List', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${TeamMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${TeamMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]

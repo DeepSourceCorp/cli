@@ -87,6 +87,8 @@ export default class InstallAutofixForAutoOnboard extends mixins(
     }
   }
 
+  //? Intentional async since overriding a method
+  //skipcq JS-0376
   async finish(): Promise<void> {
     clearTimeout(this.failTimeout)
     clearInterval(this.popUpTimer)

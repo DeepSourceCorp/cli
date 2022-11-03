@@ -187,7 +187,7 @@ describe('[[AddNlcvThresholdModal]]', () => {
       expect(wrapper.emitted().addThreshold?.[0]).toEqual(['Metrik', 30, undefined])
     })
 
-    test('invokes toast when it has error', async () => {
+    test('invokes toast when it has error', () => {
       const localThis = {
         $toast: {
           danger: jest.fn()

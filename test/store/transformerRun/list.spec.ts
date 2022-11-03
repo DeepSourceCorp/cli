@@ -68,7 +68,7 @@ describe('[Store] TransformerRun/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: {
@@ -101,11 +101,11 @@ describe('[Store] TransformerRun/List', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${TransformListMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${TransformListMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -151,7 +151,7 @@ describe('[Store] TransformerRun/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -172,11 +172,11 @@ describe('[Store] TransformerRun/List', () => {
           )
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${TransformListMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${TransformListMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -196,7 +196,7 @@ describe('[Store] TransformerRun/List', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${TransformListMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${TransformListMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]

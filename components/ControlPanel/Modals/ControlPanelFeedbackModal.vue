@@ -18,21 +18,7 @@
             id="directory-feedback"
             :readonly="isLoading"
             required
-            class="
-              w-full
-              h-full
-              p-2
-              mt-2
-              text-sm
-              border
-              outline-none
-              bg-ink-400
-              min-h-28
-              max-h-44
-              lg:max-h-60
-              text-vanilla-100
-              focus:border-vanilla-100
-            "
+            class="w-full h-full p-2 mt-2 text-sm border outline-none bg-ink-400 min-h-28 max-h-44 lg:max-h-60 text-vanilla-100 focus:border-vanilla-100"
           >
           </textarea>
         </label>
@@ -81,7 +67,7 @@ export default class DirectoryFeedbackModal extends Vue {
   private okToContact = false
   private isLoading = false
 
-  async submitFeedback(close: () => void) {
+  submitFeedback(close: () => void) {
     this.isLoading = true
     //! Add logic
     const feedbackDidSubmit = true

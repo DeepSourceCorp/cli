@@ -72,7 +72,7 @@ describe('[[ ACTIONS ]]', () => {
   describe(`Runs ${AccessTokenActions.FETCH_ACCESS_TOKEN}`, () => {
     beforeEach(async () => {
       localThis = {
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             setTimeout(() => resolve(currentAccessTokenResponse), 10)
           )
@@ -89,11 +89,11 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(1)
     })
 
-    test(`successfully commits mutation ${AccessTokenMutations.SET_ACCESS_TOKEN}`, async () => {
+    test(`successfully commits mutation ${AccessTokenMutations.SET_ACCESS_TOKEN}`, () => {
       // Storing the first commit call made
       const {
         mock: {
@@ -112,7 +112,7 @@ describe('[[ ACTIONS ]]', () => {
   describe(`Runs ${AccessTokenActions.FETCH_ACCESS_TOKEN_LIST}`, () => {
     beforeEach(async () => {
       localThis = {
-        async $fetchGraphqlData(): Promise<unknown> {
+        $fetchGraphqlData(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(() => resolve(accessTokenListResponse), 10)
           )
@@ -133,11 +133,11 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(1)
     })
 
-    test(`successfully commits mutation ${AccessTokenMutations.SET_ACCESS_TOKEN_LIST}`, async () => {
+    test(`successfully commits mutation ${AccessTokenMutations.SET_ACCESS_TOKEN_LIST}`, () => {
       // Storing the first commit call made
       const {
         mock: {
@@ -156,7 +156,7 @@ describe('[[ ACTIONS ]]', () => {
   describe(`Runs ${AccessTokenActions.CREATE_USER_ACCESS_TOKEN}`, () => {
     beforeEach(async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(() => resolve(createAccessTokenResponse), 10)
           )
@@ -172,7 +172,7 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(0)
     })
   })
@@ -180,7 +180,7 @@ describe('[[ ACTIONS ]]', () => {
   describe(`Runs ${AccessTokenActions.DELETE_ACCESS_TOKEN}`, () => {
     beforeEach(async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(() => resolve({ data: { ok: true } }), 10)
           )
@@ -195,7 +195,7 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(0)
     })
   })
@@ -203,7 +203,7 @@ describe('[[ ACTIONS ]]', () => {
   describe(`Runs ${AccessTokenActions.DELETE_ALL_ACCESS_TOKEN}`, () => {
     beforeEach(async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(() => resolve({ data: { ok: true } }), 10)
           )
@@ -216,7 +216,7 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(0)
     })
   })

@@ -44,7 +44,7 @@ describe('[Store] Issue/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({ data: { repository: <Repository>{ issue: {} } } })
               )
@@ -64,11 +64,11 @@ describe('[Store] Issue/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${IssueDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${IssueDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -108,7 +108,7 @@ describe('[Store] Issue/Detail', () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -122,11 +122,11 @@ describe('[Store] Issue/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${IssueDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${IssueDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -146,7 +146,7 @@ describe('[Store] Issue/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${IssueDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${IssueDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -166,7 +166,7 @@ describe('[Store] Issue/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 setTimeout(
                   () => resolve({ data: { ignoreIssueForFilePatternInRepository: { ok: true } } }),
@@ -192,7 +192,7 @@ describe('[Store] Issue/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 setTimeout(
                   () => resolve({ data: { ignoreIssueForTestPatternsInRepository: { ok: true } } }),
@@ -217,7 +217,7 @@ describe('[Store] Issue/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { ignoreIssueForRepository: { ok: true } } }), 10)
               )
@@ -239,7 +239,7 @@ describe('[Store] Issue/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { ignoreIssueForRepository: { ok: true } } }), 10)
               )
@@ -262,7 +262,7 @@ describe('[Store] Issue/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { ignoreCheckIssue: { ok: true } } }), 10)
               )
@@ -285,7 +285,7 @@ describe('[Store] Issue/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 setTimeout(() => resolve({ data: { reportIssueFalsePositive: { ok: true } } }), 10)
               )

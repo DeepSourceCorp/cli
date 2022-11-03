@@ -86,7 +86,7 @@ describe('[Store] Owner/Details', () => {
       }
       localThis = {
         ...localState,
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) => resolve(mockResponse))
         }
       }
@@ -121,7 +121,7 @@ describe('[Store] Owner/Details', () => {
       }
       localThis = {
         ...localState,
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) => resolve(mockResponse))
         }
       }
@@ -146,7 +146,7 @@ describe('[Store] Owner/Details', () => {
     test(`Action "${WebhookActions.FETCH_SINGLE_ENDPOINT}"`, async () => {
       localThis = {
         ...localState,
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             resolve({ data: { webhook: webhookStoreMock.endpoint } })
           )
@@ -176,7 +176,7 @@ describe('[Store] Owner/Details', () => {
     test(`Action "${WebhookActions.FETCH_SINGLE_DELIVERY}"`, async () => {
       localThis = {
         ...localState,
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             resolve({ data: { webhookEventDelivery: webhookStoreMock.delivery } })
           )
@@ -215,7 +215,7 @@ describe('[Store] Owner/Details', () => {
 
       localThis = {
         ...localState,
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) => resolve(mockResponse))
         }
       }
@@ -248,7 +248,7 @@ describe('[Store] Owner/Details', () => {
 
       localThis = {
         ...localState,
-        async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+        $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
           return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
         }
       }
@@ -281,7 +281,7 @@ describe('[Store] Owner/Details', () => {
 
     localThis = {
       ...localState,
-      async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+      $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
         return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
       }
     }
@@ -311,7 +311,7 @@ describe('[Store] Owner/Details', () => {
 
     localThis = {
       ...localState,
-      async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+      $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
         return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
       }
     }
@@ -337,7 +337,7 @@ describe('[Store] Owner/Details', () => {
 
     localThis = {
       ...localState,
-      async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+      $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
         return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
       }
     }
@@ -363,7 +363,7 @@ describe('[Store] Owner/Details', () => {
 
     localThis = {
       ...localState,
-      async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+      $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
         return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
       }
     }
@@ -391,7 +391,7 @@ describe('[Store] Owner/Details', () => {
 
     localThis = {
       ...localState,
-      async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+      $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
         return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
       }
     }

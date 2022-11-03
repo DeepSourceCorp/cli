@@ -96,7 +96,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.FETCH_INTEGRATION_DETAILS}"`, async () => {
       const localThis = {
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             setTimeout(() => resolve({ data: { integration: integrationDetails } }), 10)
           )
@@ -127,7 +127,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.FETCH_INTEGRATION_DETAILS}" error handler`, async () => {
       const localThis = {
-        async $fetchGraphqlData(): Promise<void> {
+        $fetchGraphqlData(): Promise<void> {
           return new Promise<void>((_, reject) => setTimeout(() => reject(), 10))
         },
         $logErrorAndToast: jest.fn()
@@ -161,7 +161,7 @@ describe('[Store] Integrations/Detail', () => {
       const queryResponse = { logo }
 
       const localThis = {
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             setTimeout(() => resolve({ data: { integration: queryResponse } }), 10)
           )
@@ -192,7 +192,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.FETCH_INTEGRATION_LOGO_URL}" error handler`, async () => {
       const localThis = {
-        async $fetchGraphqlData(): Promise<void> {
+        $fetchGraphqlData(): Promise<void> {
           return new Promise<void>((_, reject) => setTimeout(() => reject(), 10))
         },
         $logErrorAndToast: jest.fn()
@@ -226,7 +226,7 @@ describe('[Store] Integrations/Detail', () => {
       const queryResponse = { installed }
 
       const localThis = {
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             setTimeout(() => resolve({ data: { integration: queryResponse } }), 10)
           )
@@ -257,7 +257,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.FETCH_INTEGRATION_INSTALLATION_STATUS}" error handler`, async () => {
       const localThis = {
-        async $fetchGraphqlData(): Promise<void> {
+        $fetchGraphqlData(): Promise<void> {
           return new Promise<void>((_, reject) => setTimeout(() => reject(), 10))
         },
         $logErrorAndToast: jest.fn()
@@ -291,7 +291,7 @@ describe('[Store] Integrations/Detail', () => {
         'https://slack.com/oauth/v2/authorize?client_id=3008460848721.2989151408982&scope=channels%3Aread%2Cchat%3Awrite%2Cgroups%3Aread&state=_CKrdQlcaZfYca9U8Dg5wH5gz0-bdoBDrHt9IGIuuVk'
 
       const localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(
               () =>
@@ -329,7 +329,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.GET_INTEGRATION_INSTALLATION_URL}" error handler`, async () => {
       const localThis = {
-        async $applyGraphqlMutation(): Promise<void> {
+        $applyGraphqlMutation(): Promise<void> {
           return new Promise<void>((_, reject) => setTimeout(() => reject(), 10))
         },
         $logErrorAndToast: jest.fn()
@@ -358,7 +358,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.INSTALL_INTEGRATION}"`, async () => {
       const localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(
               () =>
@@ -399,7 +399,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.INSTALL_INTEGRATION}" error handler`, async () => {
       const localThis = {
-        async $applyGraphqlMutation(): Promise<void> {
+        $applyGraphqlMutation(): Promise<void> {
           return new Promise<void>((_, reject) => setTimeout(() => reject(), 10))
         },
         $logErrorAndToast: jest.fn()
@@ -432,7 +432,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.UPDATE_INTEGRATION_SETTINGS}"`, async () => {
       const localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(() => resolve({ data: { updateIntegrationSettings: { ok: true } } }), 10)
           )
@@ -471,7 +471,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.UPDATE_INTEGRATION_SETTINGS}" error handler`, async () => {
       const localThis = {
-        async $applyGraphqlMutation(): Promise<void> {
+        $applyGraphqlMutation(): Promise<void> {
           return new Promise<void>((_, reject) => setTimeout(() => reject(), 10))
         },
         $logErrorAndToast: jest.fn()
@@ -503,7 +503,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.UNINSTALL_INTEGRATION}"`, async () => {
       const localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(() => resolve({ data: { uninstallIntegration: { ok: true } } }), 10)
           )
@@ -538,9 +538,9 @@ describe('[Store] Integrations/Detail', () => {
       expect(ok).toBe(true)
     })
 
-    test(`Action "${IntegrationsDetailActions.UNINSTALL_INTEGRATION}" error handler`, async () => {
+    test(`Action "${IntegrationsDetailActions.UNINSTALL_INTEGRATION}" error handler`, () => {
       const localThis = {
-        async $applyGraphqlMutation(): Promise<void> {
+        $applyGraphqlMutation(): Promise<void> {
           return new Promise<void>((_, reject) =>
             setTimeout(() => reject(new Error('Something went wrong')), 10)
           )
@@ -565,7 +565,7 @@ describe('[Store] Integrations/Detail', () => {
 
     test(`Action "${IntegrationsDetailActions.CREATE_ISSUE_ON_INTEGRATION}"`, async () => {
       const localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(
               () => resolve({ data: { createIssueOnIntegration: { ok: true, issueCode: 123 } } }),

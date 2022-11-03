@@ -124,7 +124,7 @@ export default class UserManagementHome extends mixins(ControlPanelBaseMixin, Pa
     })
   }
 
-  async searchUsers(q: string): Promise<void> {
+  searchUsers(q: string): void {
     this.currentPage = 1
     this.q = q
     this.$fetch()

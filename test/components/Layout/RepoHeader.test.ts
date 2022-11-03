@@ -181,7 +181,7 @@ describe('[[ RepoHeader ]]', () => {
     expect(html()).toMatchSnapshot('RepoHeader without a matching activeLink Snap')
   })
 
-  test('[[ RepoHeader.refetchOnSocketEvent ]]', async () => {
+  test('[[ RepoHeader.refetchOnSocketEvent ]]', () => {
     const wrapper = shallowMount(RepoHeader, {
       stubs,
       mocks,
@@ -197,7 +197,7 @@ describe('[[ RepoHeader ]]', () => {
   })
 
   describe('[[ RepoHeader.canChangeBranch ]]', () => {
-    test('[[ logged in ]]', async () => {
+    test('[[ logged in ]]', () => {
       const wrapper = shallowMount(RepoHeader, {
         stubs,
         mocks,
@@ -212,7 +212,7 @@ describe('[[ RepoHeader ]]', () => {
       expect(vm.canChangeBranch).toBe(true)
     })
 
-    test('[[ logged out ]]', async () => {
+    test('[[ logged out ]]', () => {
       const wrapper = shallowMount(RepoHeader, {
         stubs,
         mocks,

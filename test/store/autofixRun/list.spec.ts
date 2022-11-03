@@ -66,7 +66,7 @@ describe('[Store] AutofixRun/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: {
@@ -95,7 +95,7 @@ describe('[Store] AutofixRun/List', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
@@ -125,7 +125,7 @@ describe('[Store] AutofixRun/List', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -142,11 +142,11 @@ describe('[Store] AutofixRun/List', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
-        test(`successfully commits mutation ${AutofixRunListMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${AutofixRunListMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [firstCall]

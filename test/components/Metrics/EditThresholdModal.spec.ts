@@ -115,7 +115,7 @@ describe('[[EditThresholdModal]]', () => {
       expect(vm.thresholdInputError).toBe(true)
     })
 
-    test('invalid % or numerical value', async () => {
+    test('invalid % or numerical value', () => {
       const baseProps = {
         thresholdValue: 20,
         metricName: 'Zane Alexander',

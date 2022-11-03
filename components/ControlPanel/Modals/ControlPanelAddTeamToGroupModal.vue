@@ -162,7 +162,7 @@ export default class ControlPanelAddTeamToGroupModal extends mixins(AddTeamToGro
     this.showAddTeamModal = true
   }
 
-  async searchTeams(teamName: string): Promise<void> {
+  searchTeams(teamName: string): void {
     this.addTeamSearchCandidate = teamName
     this.$fetch()
   }

@@ -4,7 +4,7 @@ import { AuthGetterTypes } from '~/store/account/auth'
 
 @Component({
   middleware: [
-    async function ({ store, route, redirect, error }) {
+    function ({ store, route, redirect, error }) {
       if (route.name === 'invitation') {
         error({ statusCode: 404, message: 'This page is not real' })
       }

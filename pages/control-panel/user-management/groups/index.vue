@@ -171,7 +171,7 @@ export default class GroupsHome extends mixins(ControlPanelBaseMixin, Pagination
     this.refetch = false
   }
 
-  async searchGroups(q: string): Promise<void> {
+  searchGroups(q: string): void {
     this.currentPage = 1
     this.q = q
     this.$fetch()

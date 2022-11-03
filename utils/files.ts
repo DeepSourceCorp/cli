@@ -1,6 +1,6 @@
-type AttachmentObj = { base64Data: string; filename: string, sizeInBytes?: number }
+type AttachmentObj = { base64Data: string; filename: string; sizeInBytes?: number }
 
-async function fileToBase64(file: File): Promise<string | ArrayBuffer | null> {
+function fileToBase64(file: File): Promise<string | ArrayBuffer | null> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader()
     reader.readAsDataURL(file)

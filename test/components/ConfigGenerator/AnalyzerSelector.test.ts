@@ -121,7 +121,7 @@ describe('[[ AnalyzerSelector ]]', () => {
     expect(html()).toMatchSnapshot(JSON.stringify(propsData))
   })
 
-  test('emits updateAnalyzer', async () => {
+  test('emits updateAnalyzer', () => {
     const wrapper = shallowMount(AnalyzerSelector, {
       propsData,
       stubs,

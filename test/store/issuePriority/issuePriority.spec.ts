@@ -57,7 +57,7 @@ describe('[[ ACTIONS ]]', () => {
   describe(`Runs ${IssuePriorityListActions.FETCH_ISSUES_WITH_PRIORITY}`, () => {
     beforeEach(async () => {
       localThis = {
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             setTimeout(() => resolve(issuePriorityListResponse), 10)
           )
@@ -85,11 +85,11 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(1)
     })
 
-    test(`successfully commits mutation ${IssuePriorityListMutations.SET_ISSUES_WITH_PRIORITY}`, async () => {
+    test(`successfully commits mutation ${IssuePriorityListMutations.SET_ISSUES_WITH_PRIORITY}`, () => {
       // Storing the first commit call made
       const {
         mock: {
@@ -107,7 +107,7 @@ describe('[[ ACTIONS ]]', () => {
     let resp: number
     beforeEach(async () => {
       localThis = {
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             setTimeout(
               () =>
@@ -141,10 +141,10 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(0)
     })
-    test('response is ok', async () => {
+    test('response is ok', () => {
       expect(resp).toBe(4)
     })
   })
@@ -153,7 +153,7 @@ describe('[[ ACTIONS ]]', () => {
     let resp: UnsetIssuePriorityPayload
     beforeEach(async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(
               () =>
@@ -188,10 +188,10 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(0)
     })
-    test('response is ok', async () => {
+    test('response is ok', () => {
       expect(resp.ok).toBe(true)
     })
   })
@@ -200,7 +200,7 @@ describe('[[ ACTIONS ]]', () => {
     let resp: UpdateIssuePriorityPayload
     beforeEach(async () => {
       localThis = {
-        async $applyGraphqlMutation(): Promise<unknown> {
+        $applyGraphqlMutation(): Promise<unknown> {
           return new Promise<unknown>((resolve) =>
             setTimeout(
               () =>
@@ -257,10 +257,10 @@ describe('[[ ACTIONS ]]', () => {
     test('successfully calls the api', () => {
       expect(spy).toHaveBeenCalledTimes(1)
     })
-    test('successfully commits mutations', async () => {
+    test('successfully commits mutations', () => {
       expect(commit).toHaveBeenCalledTimes(0)
     })
-    test('response is ok', async () => {
+    test('response is ok', () => {
       expect(resp).toStrictEqual(updateIssuePriorityResponse)
     })
   })

@@ -49,7 +49,7 @@ describe('[[ Test debounceAsync ]]', () => {
   it('should debounce an async function', (done) => {
     let callCount = 0
 
-    const debounced = debounceAsync(async (value: string) => {
+    const debounced = debounceAsync((value: string) => {
       setTimeout(() => {
         ++callCount
         return Promise.resolve(value)
@@ -82,7 +82,7 @@ describe('[[ Test debounceAsync ]]', () => {
   it('should debounce an async function with default timeout', (done) => {
     let callCount = 0
 
-    const debounced = debounceAsync(async (value: string) => {
+    const debounced = debounceAsync((value: string) => {
       setTimeout(() => {
         ++callCount
         return Promise.resolve(value)

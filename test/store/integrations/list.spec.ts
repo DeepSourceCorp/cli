@@ -54,7 +54,7 @@ describe('[Store] Integrations/List', () => {
 
     test(`Action "${IntegrationsListActions.FETCH_INTEGRATIONS}"`, async () => {
       const localThis = {
-        async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+        $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
           return new Promise<GraphqlQueryResponse>((resolve) =>
             setTimeout(() => resolve({ data: { integrations } }), 10)
           )
@@ -80,7 +80,7 @@ describe('[Store] Integrations/List', () => {
 
     test(`Action "${IntegrationsListActions.FETCH_INTEGRATIONS}" error handler`, async () => {
       const localThis = {
-        async $fetchGraphqlData(): Promise<void> {
+        $fetchGraphqlData(): Promise<void> {
           return new Promise<void>((_, reject) => setTimeout(() => reject(), 10))
         },
         $logErrorAndToast: jest.fn()

@@ -72,7 +72,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({ data: { repository: mockRepositoryDetailStateForWidgets().repository } })
               )
@@ -93,11 +93,11 @@ describe('[Store] Repository/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -143,7 +143,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -158,11 +158,11 @@ describe('[Store] Repository/Detail', () => {
           })
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -182,7 +182,7 @@ describe('[Store] Repository/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -210,7 +210,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<unknown> {
+            $fetchGraphqlData(): Promise<unknown> {
               const repositoryId = mockRepositoryDetailState().repository.id
               return new Promise<unknown>((resolve) =>
                 resolve({ data: { repository: { id: repositoryId } } })
@@ -232,7 +232,7 @@ describe('[Store] Repository/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(1)
         })
 
@@ -258,7 +258,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $logErrorAndToast: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -294,7 +294,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({ data: { repository: mockRepositoryDetailState().repository } })
               )
@@ -320,11 +320,11 @@ describe('[Store] Repository/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -370,7 +370,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -390,11 +390,11 @@ describe('[Store] Repository/Detail', () => {
           )
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -414,7 +414,7 @@ describe('[Store] Repository/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -442,7 +442,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { repository: mockRepositoryDetailStateForSettingsGeneral().repository }
@@ -472,11 +472,11 @@ describe('[Store] Repository/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -522,7 +522,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -544,11 +544,11 @@ describe('[Store] Repository/Detail', () => {
           )
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -568,7 +568,7 @@ describe('[Store] Repository/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -596,7 +596,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: {
@@ -629,11 +629,11 @@ describe('[Store] Repository/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -679,7 +679,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -702,11 +702,11 @@ describe('[Store] Repository/Detail', () => {
           )
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -726,7 +726,7 @@ describe('[Store] Repository/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -754,7 +754,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { repository: mockRepositoryDetailStateForSettingsIgnoreRules().repository }
@@ -783,11 +783,11 @@ describe('[Store] Repository/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -834,7 +834,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -855,11 +855,11 @@ describe('[Store] Repository/Detail', () => {
           )
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -880,7 +880,7 @@ describe('[Store] Repository/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, () => {
           // Storing the second commit call made
           const {
             mock: {
@@ -909,7 +909,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { repository: mockRepositoryDetailStateForSettingsSsh().repository }
@@ -934,11 +934,11 @@ describe('[Store] Repository/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -986,7 +986,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -1003,11 +1003,11 @@ describe('[Store] Repository/Detail', () => {
           )
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           // Storing the first commit call made
           const {
             mock: {
@@ -1028,7 +1028,7 @@ describe('[Store] Repository/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -1056,7 +1056,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { repository: mockRepositoryDetailStateForSettingsGeneral().repository }
@@ -1083,11 +1083,11 @@ describe('[Store] Repository/Detail', () => {
           expect(spy).toHaveBeenCalledTimes(1)
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -1133,7 +1133,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<Error> {
+            $fetchGraphqlData(): Promise<Error> {
               return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
             }
           }
@@ -1152,11 +1152,11 @@ describe('[Store] Repository/Detail', () => {
           )
         })
 
-        test('successfully commits mutations', async () => {
+        test('successfully commits mutations', () => {
           expect(commit).toHaveBeenCalledTimes(3)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_LOADING}`, () => {
           const {
             mock: {
               calls: [firstCall, , thirdCall]
@@ -1176,7 +1176,7 @@ describe('[Store] Repository/Detail', () => {
           expect(thirdCall[1]).toEqual(false)
         })
 
-        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, async () => {
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_ERROR}`, () => {
           const {
             mock: {
               calls: [, secondCall]
@@ -1204,7 +1204,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 resolve({ data: { commitConfigToVcs: { ok: true } } })
               )
@@ -1238,7 +1238,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { repository: mockRepositoryDetailStateForMetrics().repository }
@@ -1283,7 +1283,7 @@ describe('[Store] Repository/Detail', () => {
       })
 
       describe(`Failure`, () => {
-        beforeEach(async () => {
+        beforeEach(() => {
           localThis = {
             $providerMetaMap: {
               gh: {
@@ -1293,7 +1293,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((_resolve, reject) =>
                 reject(new Error('ERR1'))
               )
@@ -1331,7 +1331,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((resolve) =>
                 resolve({
                   data: { repository: mockRepositoryDetailStateForMetrics().repository }
@@ -1367,7 +1367,7 @@ describe('[Store] Repository/Detail', () => {
       })
 
       describe(`Failure`, () => {
-        beforeEach(async () => {
+        beforeEach(() => {
           localThis = {
             $providerMetaMap: {
               gh: {
@@ -1377,7 +1377,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
+            $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
               return new Promise<GraphqlQueryResponse>((_resolve, reject) =>
                 reject(new Error('ERR1'))
               )
@@ -1408,7 +1408,7 @@ describe('[Store] Repository/Detail', () => {
 
     describe(`Action "${RepositoryDetailActions.SET_METRIC_THRESHOLD}"`, () => {
       describe(`Success`, () => {
-        beforeEach(async () => {
+        beforeEach(() => {
           localThis = {
             $providerMetaMap: {
               gh: {
@@ -1418,7 +1418,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
               return new Promise<GraphqlMutationResponse>((resolve) =>
                 resolve({ data: { updateRepoMetricThreshold: { ok: true } } })
               )
@@ -1457,7 +1457,7 @@ describe('[Store] Repository/Detail', () => {
       })
 
       describe(`Failure`, () => {
-        beforeEach(async () => {
+        beforeEach(() => {
           localThis = {
             $providerMetaMap: {
               gh: {
@@ -1467,7 +1467,7 @@ describe('[Store] Repository/Detail', () => {
               }
             },
             $getGQLAfter: jest.fn(),
-            async $applyGraphqlMutation(): Promise<Error> {
+            $applyGraphqlMutation(): Promise<Error> {
               return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
             }
           }
