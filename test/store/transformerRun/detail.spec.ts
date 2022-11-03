@@ -64,11 +64,9 @@ describe('[Store] TransformerRun/Detail', () => {
               }
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { transformerRun: mockTransformerRunDetailState().transformerRun }
-                })
-              )
+              return Promise.resolve({
+                data: { transformerRun: mockTransformerRunDetailState().transformerRun }
+              })
             }
           }
 
@@ -134,7 +132,7 @@ describe('[Store] TransformerRun/Detail', () => {
               }
             },
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 

@@ -87,7 +87,7 @@ describe('[Store] Owner/Details', () => {
       localThis = {
         ...localState,
         $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-          return new Promise<GraphqlQueryResponse>((resolve) => resolve(mockResponse))
+          return Promise.resolve(mockResponse)
         }
       }
       spy = jest.spyOn(localThis, '$fetchGraphqlData')
@@ -122,7 +122,7 @@ describe('[Store] Owner/Details', () => {
       localThis = {
         ...localState,
         $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-          return new Promise<GraphqlQueryResponse>((resolve) => resolve(mockResponse))
+          return Promise.resolve(mockResponse)
         }
       }
 
@@ -147,9 +147,7 @@ describe('[Store] Owner/Details', () => {
       localThis = {
         ...localState,
         $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-          return new Promise<GraphqlQueryResponse>((resolve) =>
-            resolve({ data: { webhook: webhookStoreMock.endpoint } })
-          )
+          return Promise.resolve({ data: { webhook: webhookStoreMock.endpoint } })
         }
       }
 
@@ -177,9 +175,7 @@ describe('[Store] Owner/Details', () => {
       localThis = {
         ...localState,
         $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-          return new Promise<GraphqlQueryResponse>((resolve) =>
-            resolve({ data: { webhookEventDelivery: webhookStoreMock.delivery } })
-          )
+          return Promise.resolve({ data: { webhookEventDelivery: webhookStoreMock.delivery } })
         }
       }
 
@@ -216,7 +212,7 @@ describe('[Store] Owner/Details', () => {
       localThis = {
         ...localState,
         $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-          return new Promise<GraphqlQueryResponse>((resolve) => resolve(mockResponse))
+          return Promise.resolve(mockResponse)
         }
       }
 
@@ -249,7 +245,7 @@ describe('[Store] Owner/Details', () => {
       localThis = {
         ...localState,
         $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-          return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
+          return Promise.resolve(mockResponse)
         }
       }
 
@@ -282,7 +278,7 @@ describe('[Store] Owner/Details', () => {
     localThis = {
       ...localState,
       $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-        return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
+        return Promise.resolve(mockResponse)
       }
     }
 
@@ -312,7 +308,7 @@ describe('[Store] Owner/Details', () => {
     localThis = {
       ...localState,
       $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-        return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
+        return Promise.resolve(mockResponse)
       }
     }
 
@@ -338,7 +334,7 @@ describe('[Store] Owner/Details', () => {
     localThis = {
       ...localState,
       $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-        return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
+        return Promise.resolve(mockResponse)
       }
     }
 
@@ -364,7 +360,7 @@ describe('[Store] Owner/Details', () => {
     localThis = {
       ...localState,
       $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-        return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
+        return Promise.resolve(mockResponse)
       }
     }
 
@@ -392,7 +388,7 @@ describe('[Store] Owner/Details', () => {
     localThis = {
       ...localState,
       $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-        return new Promise<GraphqlMutationResponse>((resolve) => resolve(mockResponse))
+        return Promise.resolve(mockResponse)
       }
     }
 

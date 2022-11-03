@@ -45,9 +45,7 @@ describe('[Store] Issue/Detail', () => {
           localThis = {
             $providerMetaMap: providerMetaMap,
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { repository: <Repository>{ issue: {} } } })
-              )
+              return Promise.resolve({ data: { repository: <Repository>{ issue: {} } } })
             }
           }
 
@@ -109,7 +107,7 @@ describe('[Store] Issue/Detail', () => {
             $providerMetaMap: providerMetaMap,
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 

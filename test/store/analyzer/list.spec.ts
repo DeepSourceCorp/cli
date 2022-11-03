@@ -67,9 +67,7 @@ describe('[Store] Analyzer/List', () => {
               }
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { analyzers: <AnalyzerConnection>{} } })
-              )
+              return Promise.resolve({ data: { analyzers: <AnalyzerConnection>{} } })
             }
           }
 
@@ -134,7 +132,7 @@ describe('[Store] Analyzer/List', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 

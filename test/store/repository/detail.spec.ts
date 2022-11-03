@@ -73,9 +73,9 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { repository: mockRepositoryDetailStateForWidgets().repository } })
-              )
+              return Promise.resolve({
+                data: { repository: mockRepositoryDetailStateForWidgets().repository }
+              })
             }
           }
 
@@ -144,7 +144,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -212,9 +212,7 @@ describe('[Store] Repository/Detail', () => {
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<unknown> {
               const repositoryId = mockRepositoryDetailState().repository.id
-              return new Promise<unknown>((resolve) =>
-                resolve({ data: { repository: { id: repositoryId } } })
-              )
+              return Promise.resolve({ data: { repository: { id: repositoryId } } })
             }
           }
 
@@ -259,7 +257,7 @@ describe('[Store] Repository/Detail', () => {
             $getGQLAfter: jest.fn(),
             $logErrorAndToast: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -295,9 +293,9 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { repository: mockRepositoryDetailState().repository } })
-              )
+              return Promise.resolve({
+                data: { repository: mockRepositoryDetailState().repository }
+              })
             }
           }
 
@@ -371,7 +369,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -443,11 +441,9 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { repository: mockRepositoryDetailStateForSettingsGeneral().repository }
-                })
-              )
+              return Promise.resolve({
+                data: { repository: mockRepositoryDetailStateForSettingsGeneral().repository }
+              })
             }
           }
 
@@ -523,7 +519,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -597,13 +593,11 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: {
-                    repository: mockRepositoryDetailStateForSettingsManageAccess().repository
-                  }
-                })
-              )
+              return Promise.resolve({
+                data: {
+                  repository: mockRepositoryDetailStateForSettingsManageAccess().repository
+                }
+              })
             }
           }
 
@@ -680,7 +674,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -755,11 +749,9 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { repository: mockRepositoryDetailStateForSettingsIgnoreRules().repository }
-                })
-              )
+              return Promise.resolve({
+                data: { repository: mockRepositoryDetailStateForSettingsIgnoreRules().repository }
+              })
             }
           }
 
@@ -835,7 +827,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -910,11 +902,9 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { repository: mockRepositoryDetailStateForSettingsSsh().repository }
-                })
-              )
+              return Promise.resolve({
+                data: { repository: mockRepositoryDetailStateForSettingsSsh().repository }
+              })
             }
           }
 
@@ -987,7 +977,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -1057,11 +1047,9 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { repository: mockRepositoryDetailStateForSettingsGeneral().repository }
-                })
-              )
+              return Promise.resolve({
+                data: { repository: mockRepositoryDetailStateForSettingsGeneral().repository }
+              })
             }
           }
 
@@ -1134,7 +1122,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -1205,9 +1193,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-              return new Promise<GraphqlMutationResponse>((resolve) =>
-                resolve({ data: { commitConfigToVcs: { ok: true } } })
-              )
+              return Promise.resolve({ data: { commitConfigToVcs: { ok: true } } })
             }
           }
 
@@ -1239,11 +1225,9 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { repository: mockRepositoryDetailStateForMetrics().repository }
-                })
-              )
+              return Promise.resolve({
+                data: { repository: mockRepositoryDetailStateForMetrics().repository }
+              })
             }
           }
 
@@ -1294,9 +1278,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((_resolve, reject) =>
-                reject(new Error('ERR1'))
-              )
+              return Promise.reject(new Error('ERR1'))
             },
             async $logErrorAndToast(): Promise<void> {}
           }
@@ -1332,11 +1314,9 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { repository: mockRepositoryDetailStateForMetrics().repository }
-                })
-              )
+              return Promise.resolve({
+                data: { repository: mockRepositoryDetailStateForMetrics().repository }
+              })
             }
           }
 
@@ -1378,9 +1358,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((_resolve, reject) =>
-                reject(new Error('ERR1'))
-              )
+              return Promise.reject(new Error('ERR1'))
             },
             async $logErrorAndToast(): Promise<void> {}
           }
@@ -1419,9 +1397,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
-              return new Promise<GraphqlMutationResponse>((resolve) =>
-                resolve({ data: { updateRepoMetricThreshold: { ok: true } } })
-              )
+              return Promise.resolve({ data: { updateRepoMetricThreshold: { ok: true } } })
             }
           }
 
@@ -1468,7 +1444,7 @@ describe('[Store] Repository/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $applyGraphqlMutation(): Promise<Error> {
-              return new Promise<Error>((_resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 

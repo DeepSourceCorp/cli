@@ -25,9 +25,7 @@ const localThisSuccess: any = {
     }
   },
   $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-    return new Promise<GraphqlQueryResponse>((resolve) =>
-      resolve({ data: { team: mockTeamState().team } })
-    )
+    return Promise.resolve({ data: { team: mockTeamState().team } })
   },
   $getGQLAfter(): string {
     return ''
@@ -43,7 +41,7 @@ const localThisFailure: any = {
     }
   },
   $fetchGraphqlData(): Promise<Error> {
-    return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+    return Promise.reject(new Error('ERR1'))
   },
   $getGQLAfter(): string {
     return ''

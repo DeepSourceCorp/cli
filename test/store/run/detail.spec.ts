@@ -72,11 +72,9 @@ describe('[Store] Run/Detail', () => {
               }
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { repository: { id: 'hello', run: mockRunDetailState().run } as Repository }
-                })
-              )
+              return Promise.resolve({
+                data: { repository: { id: 'hello', run: mockRunDetailState().run } as Repository }
+              })
             }
           }
 
@@ -146,7 +144,7 @@ describe('[Store] Run/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -206,11 +204,9 @@ describe('[Store] Run/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { check: mockRunDetailState().check }
-                })
-              )
+              return Promise.resolve({
+                data: { check: mockRunDetailState().check }
+              })
             }
           }
 
@@ -269,7 +265,7 @@ describe('[Store] Run/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -327,11 +323,9 @@ describe('[Store] Run/Detail', () => {
           localThis = {
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: { checkIssues: mockRunDetailState().checkIssues }
-                })
-              )
+              return Promise.resolve({
+                data: { checkIssues: mockRunDetailState().checkIssues }
+              })
             }
           }
 
@@ -394,7 +388,7 @@ describe('[Store] Run/Detail', () => {
           localThis = {
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((_, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -462,9 +456,9 @@ describe('[Store] Run/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { check: mockRepositoryDetailStateForAutofixableIssues().check } })
-              )
+              return Promise.resolve({
+                data: { check: mockRepositoryDetailStateForAutofixableIssues().check }
+              })
             }
           }
 
@@ -531,7 +525,7 @@ describe('[Store] Run/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -596,9 +590,9 @@ describe('[Store] Run/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { check: mockRunDetailStateForConcreteIssueList().check } })
-              )
+              return Promise.resolve({
+                data: { check: mockRunDetailStateForConcreteIssueList().check }
+              })
             }
           }
 
@@ -669,7 +663,7 @@ describe('[Store] Run/Detail', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 
@@ -846,7 +840,7 @@ describe('[Store] Run/Detail', () => {
         beforeEach(async () => {
           localThis = {
             $applyGraphqlMutation(): Promise<Error> {
-              return new Promise<Error>((_, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 

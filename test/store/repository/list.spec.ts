@@ -151,7 +151,7 @@ describe('[Store] Repository/List', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 

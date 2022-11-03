@@ -47,7 +47,7 @@ describe('[[ CreateTokenModal ]]', () => {
     }
 
     wrapper.vm.createUserAccessToken = jest.fn(() => {
-      return new Promise((resolve) => resolve(payload))
+      return Promise.resolve(payload)
     })
 
     wrapper.setData({ expiry: 120, label: 'HELLO WORLD' })

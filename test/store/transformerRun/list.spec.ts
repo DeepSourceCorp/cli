@@ -69,15 +69,13 @@ describe('[Store] TransformerRun/List', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({
-                  data: {
-                    repository: <Repository>{
-                      groupedTransformerRuns: mockTransformerRunListState().transformerRunList
-                    }
+              return Promise.resolve({
+                data: {
+                  repository: <Repository>{
+                    groupedTransformerRuns: mockTransformerRunListState().transformerRunList
                   }
-                })
-              )
+                }
+              })
             }
           }
 
@@ -152,7 +150,7 @@ describe('[Store] TransformerRun/List', () => {
             },
             $getGQLAfter: jest.fn(),
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 

@@ -64,9 +64,9 @@ describe('[Store] AutofixRun/Detail', () => {
               }
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { autofixRun: mockAutofixRunDetailState().autofixRun } })
-              )
+              return Promise.resolve({
+                data: { autofixRun: mockAutofixRunDetailState().autofixRun }
+              })
             }
           }
 
@@ -132,7 +132,7 @@ describe('[Store] AutofixRun/Detail', () => {
               }
             },
             $fetchGraphqlData(): Promise<Error> {
-              return new Promise<Error>((resolve, reject) => reject(new Error('ERR1')))
+              return Promise.reject(new Error('ERR1'))
             }
           }
 

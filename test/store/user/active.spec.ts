@@ -64,9 +64,7 @@ describe('[Store] User/Active', () => {
               }
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { viewer: <User>{} } })
-              )
+              return Promise.resolve({ data: { viewer: <User>{} } })
             }
           }
 
@@ -110,9 +108,7 @@ describe('[Store] User/Active', () => {
               }
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>((resolve) =>
-                resolve({ data: { viewer: <User>{} } })
-              )
+              return Promise.resolve({ data: { viewer: <User>{} } })
             }
           }
 
@@ -163,12 +159,8 @@ describe('[Store] User/Active', () => {
               return true
             },
             $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>(
-                (_, error) =>
-                  error(
-                    `To go wrong in one's own way is better than to go right in someone else's.`
-                  )
-                // Fyodor Dostoevsky, Crime and Punishment
+              return Promise.reject(
+                `To go wrong in one's own way is better than to go right in someone else's.`
               )
             }
           }
@@ -195,7 +187,7 @@ describe('[Store] User/Active', () => {
         beforeEach(async () => {
           localThis = {
             $applyGraphqlMutation(): Promise<boolean> {
-              return new Promise<boolean>((resolve) => resolve(true))
+              return Promise.resolve(true)
             }
           }
 
@@ -220,12 +212,8 @@ describe('[Store] User/Active', () => {
               return true
             },
             $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
-              return new Promise<GraphqlQueryResponse>(
-                (_, error) =>
-                  error(
-                    `To go wrong in one's own way is better than to go right in someone else's.`
-                  )
-                // Fyodor Dostoevsky, Crime and Punishment
+              return Promise.reject(
+                `To go wrong in one's own way is better than to go right in someone else's.`
               )
             }
           }
@@ -252,15 +240,13 @@ describe('[Store] User/Active', () => {
     describe(`Action "${ActiveUserActions.UPDATE_STARRED_REPO}"`, () => {
       beforeEach(async () => {
         localThis = {
-          $applyGraphqlMutation(): Promise<GraphqlQueryResponse> {
-            return new Promise<GraphqlQueryResponse>((resolve) =>
-              resolve({
-                data: {
-                  // @ts-ignore
-                  updateStarredRepository: true
-                }
-              })
-            )
+          $applyGraphqlMutation(): Promise<Object> {
+            return Promise.resolve({
+              data: {
+                // @ts-ignore
+                updateStarredRepository: true
+              }
+            })
           }
         }
 
@@ -288,9 +274,7 @@ describe('[Store] User/Active', () => {
 
         localThis = {
           $fetchGraphqlData(): Promise<GraphqlQueryResponse> {
-            return new Promise<GraphqlQueryResponse>((resolve) =>
-              resolve({ data: { viewer: <User>{} } })
-            )
+            return Promise.resolve({ data: { viewer: <User>{} } })
           }
         }
 

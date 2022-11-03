@@ -102,12 +102,12 @@ describe('[[ ContextSwitcher ]]', () => {
 
     // @ts-ignore
     wrapper.vm.refetchUser = jest.fn(() => {
-      return new Promise<void>((resolve) => resolve())
+      return Promise.resolve()
     })
 
     // @ts-ignore
     wrapper.vm.updateDefaultContextAPI = jest.fn(({ contextOwnerId: string }) => {
-      return new Promise((resolve) => resolve(null))
+      return Promise.resolve(null)
     })
 
     sampleContext.is_default = false
