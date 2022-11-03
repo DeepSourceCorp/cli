@@ -6,7 +6,8 @@
         <span
           class="text-opacity-60 bg-clip-text text-vanilla-100 bg-gradient-to-br from-ink-200 to-ink-400 via-ink-300"
         >
-          To analyze analysis on every pull request, commit the config file to your repository.
+          To run analysis on every commit automatically, commit the configuration to your
+          repository.
         </span>
       </p>
       <z-button
