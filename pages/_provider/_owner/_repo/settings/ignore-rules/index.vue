@@ -92,7 +92,7 @@ export default class IgnoreRules extends mixins(RepoDetailMixin) {
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    this.refetchIgnoreRules()
+    await this.refetchIgnoreRules()
   }
 
   /**

@@ -58,7 +58,7 @@ export default class SettingsAutofix extends mixins(RepoDetailMixin) {
   }
 
   async fetch(): Promise<void> {
-    this.fetchRepoDetails(this.baseRouteParams)
+    await this.fetchRepoDetails(this.baseRouteParams)
   }
 }
 </script>
