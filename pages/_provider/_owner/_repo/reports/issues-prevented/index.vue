@@ -91,8 +91,7 @@ const BASE_COLOR = '#2eb78b'
   },
   methods: {
     shortenLargeNumber
-  },
-  middleware: ['betaOnly']
+  }
 })
 export default class IssuesPreventedPage extends mixins(RepoDetailMixin, DistributionReportMixin) {
   readonly IssueDistributionT = IssueDistributionT
