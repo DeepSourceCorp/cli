@@ -142,8 +142,7 @@ export default {
         '**/_provider/_owner/settings/billing/*',
         '**/components/Billing/*',
         '**/settings/integrations/*',
-        '**/discover/*',
-        '**/issues-prevented'
+        '**/discover/*'
       ]
     : [],
 

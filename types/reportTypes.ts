@@ -160,7 +160,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Issues Prevented',
     description: 'Issues prevented from entering the default branch.',
     type: ReportType.Insight,
-    level: [],
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
         summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
