@@ -65,7 +65,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
         <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
       </p>
       <p>
-        DeepSource continuously scans deepsourcelabs’ source code continuously to detect violations
+        DeepSource continuously scans deepsourcelabs’ source code to detect violations
         of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.
@@ -211,7 +211,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
         <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
       </p>
       <p>
-        DeepSource continuously scans deepsourcelabs’ source code continuously to detect violations
+        DeepSource continuously scans deepsourcelabs’ source code to detect violations
         of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.
@@ -357,7 +357,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
         <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
       </p>
       <p>
-        DeepSource continuously scans deepsourcelabs’ source code continuously to detect violations
+        DeepSource continuously scans deepsourcelabs’ source code to detect violations
         of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.

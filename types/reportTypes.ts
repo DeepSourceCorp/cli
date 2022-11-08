@@ -52,7 +52,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
         <p>
           DeepSource continuously scans ${smartApostrophe(
             companyName
-          )} source code continuously to detect violations
+          )} source code to detect violations
           of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
           the current, as well as a historical snapshot of the presence of such vulnerabilities in
           ${smartApostrophe(
