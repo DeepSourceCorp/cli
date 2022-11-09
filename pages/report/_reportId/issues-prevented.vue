@@ -167,7 +167,7 @@ export default class PublicReportIssuesPrevented extends mixins(
         promises.push(
           this.fetchPublicReportRecentStats({
             reportId,
-            reportKey: ReportPageT.DISTRIBUTION,
+            reportKey: ReportPageT.ISSUES_PREVENTED,
             token: this.token
           }),
           this.fetchHistoricValuesAndSetChartData()
