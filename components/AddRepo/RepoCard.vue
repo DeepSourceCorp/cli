@@ -151,15 +151,6 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
   ownerLogin: string
 
   @Prop()
-  modifiedAt: string
-
-  @Prop()
-  isActivated: boolean
-
-  @Prop()
-  isFork: boolean
-
-  @Prop()
   isPrivate: boolean
 
   @Prop()
@@ -170,12 +161,6 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
 
   @Prop()
   lastAnalyzedAt: string
-
-  @Prop()
-  config!: Record<string, string>
-
-  @Prop()
-  canBeActivated!: boolean
 
   @Prop()
   supportedAnalyzers!: Array<string>

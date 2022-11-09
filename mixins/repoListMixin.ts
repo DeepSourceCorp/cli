@@ -15,7 +15,7 @@ export default class RepoListMixin extends Vue {
 
   @repoListStore.State
   repoWithActiveAnalysis: Repository[]
-  
+
   @repoListStore.State
   repoWithActiveAnalysisWithAnalyzers: Repository[]
 
@@ -58,7 +58,7 @@ export default class RepoListMixin extends Vue {
     limit: number
     refetch?: boolean
   }) => Promise<void>
-  
+
   @repoListStore.Action(RepoListActions.FETCH_ACTIVE_REPOSITORY_LIST_WITH_ANALYZERS)
   fetchActiveAnalysisRepoListWithAnalyzers: (params: {
     login: string

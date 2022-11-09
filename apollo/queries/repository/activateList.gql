@@ -1,0 +1,34 @@
+query repositoryToActivateList(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $isActivated: Boolean
+  $limit: Int
+  $offset: Int
+  $query: String
+) {
+  owner(login: $login, provider: $provider) {
+    id
+    repositories(
+      isActivated: $isActivated
+      first: $limit
+      offset: $offset
+      name_Icontains: $query
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          vcsProvider
+          ownerLogin
+          isPrivate
+          isStarred
+          latestCommitOid
+          defaultBranchName
+          lastAnalyzedAt
+          supportedAnalyzers
+        }
+      }
+    }
+  }
+}

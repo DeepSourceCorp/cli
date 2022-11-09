@@ -80,6 +80,7 @@ declare module 'vue/types/vue' {
       refetchQueries?: any,
       refreshToken?: boolean
     ): any
+    $getGQLAfter(pageNumber: number, limit: number): string
     $clearGqlStore(): void
   }
 }

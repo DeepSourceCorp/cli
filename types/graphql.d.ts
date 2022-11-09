@@ -940,6 +940,7 @@ declare module '*/list.gql' {
   const defaultDocument: DocumentNode;
   export const listWebhooks: DocumentNode;
 export const repositoryIssueList: DocumentNode;
+export const repositoryList: DocumentNode;
 export const AutofixRuns: DocumentNode;
 export const repositoryRunsList: DocumentNode;
 
@@ -1602,6 +1603,15 @@ declare module '*/reportBase.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const reportBase: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/activateList.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const repositoryToActivateList: DocumentNode;
 
   export default defaultDocument;
 }

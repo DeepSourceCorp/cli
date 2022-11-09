@@ -149,8 +149,10 @@ export default class AllRepos extends mixins(ActiveUserMixin, RepoListMixin) {
 
   async getData(refetch = false): Promise<void> {
     const { owner, provider } = this.$route.params
-    this.pageSize =
-      (this.$localStore.get(`${provider}-${owner}-all-repos`, `currentPageSize`) as number) || 10
+    if (process.client) {
+      this.pageSize =
+        (this.$localStore.get(`${provider}-${owner}-all-repos`, `currentPageSize`) as number) || 10
+    }
     await this.fetchRepoList({
       provider,
       login: owner,
