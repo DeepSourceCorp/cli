@@ -53,7 +53,7 @@
               type="bar"
             ></z-chart>
             <div v-show="!shouldChartBeShown" class="h-full px-5">
-              <lazy-empty-chart :count="5" chart-type="bar" :stacked="true" />
+              <lazy-empty-chart :count="5" :stacked="true" chart-type="bar" base-shade="#2eb78b" />
             </div>
           </div>
         </template>
