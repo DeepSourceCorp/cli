@@ -206,6 +206,7 @@ export default class ActivateSingleRepo extends mixins(
    */
   async searchRepo(val: string): Promise<void> {
     this.searchCandidate = val
+    this.currentPage = 1
     const response = await this.fetchReposToActivate(
       {
         login: this.activeOwner,
@@ -283,7 +284,7 @@ export default class ActivateSingleRepo extends mixins(
         refetch
       )) as GraphqlQueryResponse
 
-      if (response.data.owner?.repositories?.edges.length) {
+      if (response.data.owner?.repositories) {
         this.totalCount = response.data.owner.repositories.totalCount ?? 0
         return resolveNodes(response.data.owner.repositories) as Repository[]
       }
