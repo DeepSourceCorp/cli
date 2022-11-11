@@ -102,7 +102,8 @@ describe('[[EmptyTrend]]', () => {
           stubs: {
             AnalyzerLogo: true,
             ZChart: true,
-            ZIcon: true
+            ZIcon: true,
+            ZSelect: true
           },
           components: { TrendTitle }
         },
@@ -152,7 +153,8 @@ describe('[[EmptyTrend]]', () => {
       propsData: { ...baseProps },
       stubs: {
         AnalyzerLogo: true,
-        ZIcon: true
+        ZIcon: true,
+        ZSelect: true
       },
       components: { TrendTitle }
     })

@@ -52,7 +52,8 @@ describe('[[ RadioGroupInput ]]', () => {
         ...propCombination
       }
       const { html } = render(SelectInput, {
-        props
+        props,
+        stubs: { ZSelect: true }
       })
 
       expect(html()).toMatchSnapshot(JSON.stringify(props))

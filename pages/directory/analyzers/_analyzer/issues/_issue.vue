@@ -35,7 +35,7 @@
       <div
         v-if="isLoaded && issue.descriptionRendered"
         v-html="issue.descriptionRendered"
-        class="py-2 prose"
+        class="py-2 prose-issue-description max-w-prose"
       ></div>
       <lazy-empty-state v-else-if="isLoaded" title="No issue description found!" />
     </div>

@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@deepsource/shifty": "^1.0.0",
-    "@deepsourcelabs/zeal": "^0.11.59",
+    "@deepsourcelabs/zeal": "^0.11.67",
     "@nuxt/content": "^1.11.1",
     "@nuxtjs/apollo": "^4.0.1-rc.4",
     "@nuxtjs/sitemap": "^2.4.0",
@@ -22,6 +22,7 @@
     "cookie-universal-nuxt": "^2.1.4",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.4",
+    "floating-vue": "^1.0.0-beta.18",
     "graphql-tag": "^2.11.0",
     "highlight.js": "^10.7.2",
     "jest-transform-graphql": "^2.1.0",
@@ -37,7 +38,6 @@
     "postcss": "7.0.36",
     "rudder-sdk-js": "^1.2.20",
     "tinykeys": "^1.4.0",
-    "floating-vue": "^1.0.0-beta.18",
     "vuedraggable": "^2.24.3"
   },
   "devDependencies": {

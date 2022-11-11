@@ -104,7 +104,8 @@ describe('[[TrendSection]]', () => {
           stubs: {
             AnalyzerLogo: true,
             ZChart: true,
-            ZIcon: true
+            ZIcon: true,
+            ZSelect: true
           },
           components: { TrendStat, TrendTitle }
         },
@@ -121,7 +122,8 @@ describe('[[TrendSection]]', () => {
       stubs: {
         AnalyzerLogo: true,
         ZChart: true,
-        ZIcon: true
+        ZIcon: true,
+        ZSelect: true
       },
       components: { TrendStat, TrendTitle }
     })

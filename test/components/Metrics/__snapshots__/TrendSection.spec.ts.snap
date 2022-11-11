@@ -25,17 +25,11 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
           <zicon-stub icon=\\"help-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"md:w-40 h-8\\">
-          <div tabindex=\\"0\\" class=\\"relative w-full h-full leading-8 text-left outline-none custom-select\\">
-            <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-sm text-vanilla-300 cursor-pointer\\">
-              <zicon-stub icon=\\"calendar-clock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-              <div class=\\"flex items-center flex-grow h-full outline-none cursor-pointer text-xs cursor-pointer\\"> Duration filter </div><span><zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform rotate-0\\"></zicon-stub></span>
-            </div>
-            <div class=\\"absolute left-0 right-0 z-10 mt-1 overflow-y-auto transition-all duration-300 border border-solid rounded-md max-h-64 options shadow-black border-ink-100 text-vanilla-300 bg-ink-300 hidden\\">
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
-            </div>
-          </div>
+          <zselect-stub selected=\\"30\\" tabindex=\\"0\\" placeholder=\\"Duration filter\\" spacing=\\"px-2 py-1\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-ink-200\\" textsize=\\"text-xs\\">
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">Last 30 days</div>
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+          </zselect-stub>
         </div>
       </div>
     </div>
@@ -146,17 +140,11 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
           <zicon-stub icon=\\"help-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"md:w-40 h-8\\">
-          <div tabindex=\\"0\\" class=\\"relative w-full h-full leading-8 text-left outline-none custom-select\\">
-            <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-sm text-vanilla-300 cursor-pointer\\">
-              <zicon-stub icon=\\"calendar-clock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-              <div class=\\"flex items-center flex-grow h-full outline-none cursor-pointer text-xs cursor-pointer\\"> Duration filter </div><span><zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform rotate-0\\"></zicon-stub></span>
-            </div>
-            <div class=\\"absolute left-0 right-0 z-10 mt-1 overflow-y-auto transition-all duration-300 border border-solid rounded-md max-h-64 options shadow-black border-ink-100 text-vanilla-300 bg-ink-300 hidden\\">
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
-            </div>
-          </div>
+          <zselect-stub selected=\\"30\\" tabindex=\\"0\\" placeholder=\\"Duration filter\\" spacing=\\"px-2 py-1\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-ink-200\\" textsize=\\"text-xs\\">
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">Last 30 days</div>
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+          </zselect-stub>
         </div>
       </div>
     </div>
@@ -267,17 +255,11 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
           <zicon-stub icon=\\"help-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"md:w-40 h-8\\">
-          <div tabindex=\\"0\\" class=\\"relative w-full h-full leading-8 text-left outline-none custom-select\\">
-            <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-sm text-vanilla-300 cursor-pointer\\">
-              <zicon-stub icon=\\"calendar-clock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-              <div class=\\"flex items-center flex-grow h-full outline-none cursor-pointer text-xs cursor-pointer\\"> Duration filter </div><span><zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform rotate-0\\"></zicon-stub></span>
-            </div>
-            <div class=\\"absolute left-0 right-0 z-10 mt-1 overflow-y-auto transition-all duration-300 border border-solid rounded-md max-h-64 options shadow-black border-ink-100 text-vanilla-300 bg-ink-300 hidden\\">
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
-            </div>
-          </div>
+          <zselect-stub selected=\\"30\\" tabindex=\\"0\\" placeholder=\\"Duration filter\\" spacing=\\"px-2 py-1\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-ink-200\\" textsize=\\"text-xs\\">
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">Last 30 days</div>
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+          </zselect-stub>
         </div>
       </div>
     </div>
@@ -388,17 +370,11 @@ exports[`[[TrendSection]] renders TrendSection with all prop options: {"filterVa
           <zicon-stub icon=\\"help-circle\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"md:w-40 h-8\\">
-          <div tabindex=\\"0\\" class=\\"relative w-full h-full leading-8 text-left outline-none custom-select\\">
-            <div class=\\"flex items-center justify-between h-full space-x-2 border border-solid selected border-ink-200 px-2 py-1 bg-ink-200 rounded-sm text-vanilla-300 cursor-pointer\\">
-              <zicon-stub icon=\\"calendar-clock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
-              <div class=\\"flex items-center flex-grow h-full outline-none cursor-pointer text-xs cursor-pointer\\"> Duration filter </div><span><zicon-stub icon=\\"chevron-down\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"transition-all duration-300 transform rotate-0\\"></zicon-stub></span>
-            </div>
-            <div class=\\"absolute left-0 right-0 z-10 mt-1 overflow-y-auto transition-all duration-300 border border-solid rounded-md max-h-64 options shadow-black border-ink-100 text-vanilla-300 bg-ink-300 hidden\\">
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
-              <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
-            </div>
-          </div>
+          <zselect-stub selected=\\"30\\" tabindex=\\"0\\" placeholder=\\"Duration filter\\" spacing=\\"px-2 py-1\\" borderclass=\\"border-ink-200\\" borderradius=\\"rounded-sm\\" backgroundclass=\\"bg-ink-200\\" textsize=\\"text-xs\\">
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 is-selected bg-ink-200 text-xs\\">Last 30 days</div>
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
+            <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
+          </zselect-stub>
         </div>
       </div>
     </div>
