@@ -103,7 +103,14 @@
       :shortcode="issue.shortcode"
       :raisedInFiles="issue.raisedInFiles"
       @close="close"
-    ></autofix-file-chooser>
+      @run-quota-exhausted="openUpgradeAccountModal"
+    />
+    <upgrade-account-modal
+      v-if="isUpgradeAccountModalOpen"
+      :login="$route.params.owner"
+      :provider="$route.params.provider"
+      @close="isUpgradeAccountModalOpen = false"
+    />
     <!-- Create issue on VCS -->
     <template v-if="hasRepoReadAccess">
       <template v-if="createIssueOptions.length > 1">
@@ -213,6 +220,7 @@ export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDe
   previousIssue: IssueLink | null
 
   public isOpen = false
+  public isUpgradeAccountModalOpen = false
   public currentComponent = ''
   public isActionLoading = false
   public defaultActionId = ''
@@ -344,6 +352,16 @@ export default class IssueActions extends mixins(RoleAccessMixin, IntegrationsDe
    */
   public close(): void {
     this.isOpen = false
+  }
+
+  /**
+   * Function to open Upgrade account modal on the `run-quota-exhausted` event
+   *
+   * @returns {void}
+   */
+  public openUpgradeAccountModal(): void {
+    this.isOpen = false
+    this.isUpgradeAccountModalOpen = true
   }
 
   /**

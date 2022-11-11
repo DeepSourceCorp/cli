@@ -267,6 +267,13 @@
         </template>
       </z-confirm>
     </portal>
+
+    <upgrade-account-modal
+      v-if="isUpgradeAccountModalOpen"
+      :login="$route.params.owner"
+      :provider="$route.params.provider"
+      @close="isUpgradeAccountModalOpen = false"
+    />
   </main>
 </template>
 
@@ -355,6 +362,7 @@ export default class AnalyzerDetails extends mixins(
   readonly CheckStatus = CheckStatus
   readonly METRICS_WITH_SECTIONS = ['test-coverage']
   showConfirmDialog = false
+  isUpgradeAccountModalOpen = false
   suppressingMetric = false
   metricToSuppress: RepositoryMetricValue = {} as RepositoryMetricValue
 
@@ -673,16 +681,18 @@ export default class AnalyzerDetails extends mixins(
           checkId: this.check.id
         }
       })
-      this.autofixLoading = false
-      if (response.autofixRunId) {
+      if (response?.autofixRunId) {
         this.$router.push(`/${provider}/${owner}/${repo}/autofix/${response.autofixRunId}`)
-      } else {
-        this.$toast.danger(
-          'An error occured while redirecting you to autofixes for selected issues.'
-        )
       }
     } catch (e) {
-      this.$toast.danger('An error occured while creating autofixes for selected issues.')
+      const err = e as Error
+      if (err.message.includes('Your autofix run quota has been exhausted')) {
+        this.isUpgradeAccountModalOpen = true
+      } else {
+        this.$toast.danger('An error occured while creating autofixes for selected issues.')
+      }
+    } finally {
+      this.autofixLoading = false
     }
   }
 

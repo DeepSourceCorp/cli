@@ -836,63 +836,6 @@ describe('[Store] Run/Detail', () => {
           expect(secondCall[1]).toEqual(false)
         })
       })
-      describe(`Failure`, () => {
-        beforeEach(async () => {
-          localThis = {
-            $applyGraphqlMutation(): Promise<Error> {
-              return Promise.reject(new Error('ERR1'))
-            }
-          }
-
-          // Setting the global spy on `localThis.$applyGraphqlMutation`
-          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
-
-          await actions[RunDetailActions.CREATE_AUTOFIX_PR].call(localThis, actionCxt, {
-            input: {
-              issues: ['string'],
-              checkId: 'string'
-            }
-          })
-        })
-
-        test('successfully commits mutations', () => {
-          expect(commit).toHaveBeenCalledTimes(3)
-        })
-
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
-          const {
-            mock: {
-              calls: [firstCall, , thirdCall]
-            }
-          } = commit
-
-          // Assert if `RunDetailMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(RunDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `RunDetailMutations.SET_LOADING` is being commited or not.
-          expect(thirdCall[0]).toEqual(RunDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(thirdCall[1]).toEqual(false)
-        })
-
-        test(`successfully commits mutation ${RunDetailMutations.SET_ERROR}`, () => {
-          const {
-            mock: {
-              calls: [, secondCall]
-            }
-          } = commit
-
-          // Assert if `RunDetailMutations.SET_ERROR` is being commited or not.
-          expect(secondCall[0]).toEqual(RunDetailMutations.SET_ERROR)
-
-          // Assert if the payload passed to the mutation was empty.
-          expect(secondCall[1]).toEqual(Error('ERR1'))
-        })
-      })
     })
 
     describe(`Action "${RunDetailActions.COMMIT_TO_PR}"`, () => {

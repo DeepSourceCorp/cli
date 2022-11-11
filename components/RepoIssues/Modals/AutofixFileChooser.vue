@@ -256,7 +256,7 @@ export default class AutofixFileChooser extends mixins(
     } catch (e) {
       const err = e as Error
       if (err.message.includes('Your autofix run quota has been exhausted')) {
-        this.$emit('runQuotaExhausted')
+        this.$emit('run-quota-exhausted')
       } else {
         this.$toast.danger(err.message.replace('GraphQL error: ', ''))
         this.logErrorForUser(err, 'AutofixError', {

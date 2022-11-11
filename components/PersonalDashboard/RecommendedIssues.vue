@@ -23,7 +23,14 @@
         :isOpen="isAutofixOpen"
         :repoParams="repoParams"
         @close="closeAutofixModal"
-      ></autofix-file-chooser>
+        @run-quota-exhausted="openUpgradeAccountModal"
+      />
+      <upgrade-account-modal
+        v-if="isUpgradeAccountModalOpen"
+        :login="repoParams.login"
+        :provider="repoParams.provider"
+        @close="isUpgradeAccountModalOpen = false"
+      />
     </div>
   </stat-section>
 </template>
@@ -47,6 +54,7 @@ export default class RecommendedIssues extends mixins(ActiveUserMixin) {
   public autofixIssue: Record<string, string | Array<string>> = {}
   public repoParams: Record<string, string | Array<string>> = {}
   public isAutofixOpen = false
+  public isUpgradeAccountModalOpen = false
 
   async fetch(): Promise<void> {
     await this.fetchRecommendedIssues()
@@ -86,6 +94,16 @@ export default class RecommendedIssues extends mixins(ActiveUserMixin) {
     }
     this.autofixIssue = { ...iss }
     this.isAutofixOpen = true
+  }
+
+  /**
+   * Function to open Upgrade account modal on the `run-quota-exhausted` event
+   *
+   * @returns {void}
+   */
+  public openUpgradeAccountModal(): void {
+    this.isAutofixOpen = false
+    this.isUpgradeAccountModalOpen = true
   }
 }
 </script>

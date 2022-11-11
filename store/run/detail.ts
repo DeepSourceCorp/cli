@@ -282,8 +282,7 @@ export const actions: RunDetailModuleActions = {
       })
       return response.data.createAutofixRunForPullRequest
     } catch (e) {
-      const error = e as GraphqlError
-      commit(RunDetailMutations.SET_ERROR, error)
+      throw e
     } finally {
       commit(RunDetailMutations.SET_LOADING, false)
     }

@@ -111,7 +111,7 @@ export default class UsageDetails extends mixins(OwnerDetailMixin, PlanDetailMix
   }
 
   getCompletion({ value, max }: Record<string, number>): number {
-    return value && max ? (value / max) * 100 : 0
+    return value && max ? Math.min((value / max) * 100, 100) : 0
   }
 
   getUsageText({ max, shortcode, value }: Record<string, number | string>): string {

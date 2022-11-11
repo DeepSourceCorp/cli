@@ -145,10 +145,12 @@
       v-bind="autofixIssue"
       :isOpen="isAutofixOpen"
       @close="isAutofixOpen = false"
-      @runQuotaExhausted="openUpgradeAccountModal"
+      @run-quota-exhausted="openUpgradeAccountModal"
     />
     <upgrade-account-modal
       v-if="isUpgradeAccountModalOpen"
+      :login="$route.params.owner"
+      :provider="$route.params.provider"
       @close="isUpgradeAccountModalOpen = false"
     />
   </div>

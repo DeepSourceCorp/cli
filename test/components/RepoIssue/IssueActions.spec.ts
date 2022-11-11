@@ -92,6 +92,7 @@ interface IssueActionsInterface {
   currentOption: Maybe<CreateIssueActionItem>
   canIgnoreIssues: boolean
   isOpen: boolean
+  isUpgradeAccountModalOpen: boolean
   currentComponent: string
   createJiraIssue: () => Promise<void>
   createIssueOnIntegration: () => Promise<void>
@@ -99,6 +100,7 @@ interface IssueActionsInterface {
   close: () => void
   openModal: (name: string) => void
   markAllOccurrenceDisabled: (checkIds: string[]) => void
+  openUpgradeAccountModal: () => void
 }
 
 const MOCK_STORE = {
@@ -399,5 +401,15 @@ describe('[[ IssueActions ]]', () => {
     ])
 
     expect(vm.isOpen).toEqual(false)
+  })
+
+  test('[[ `openUpgradeAccountModal` ]]', () => {
+    const vm = getInstance(BASE_PROPS, MOCKS)
+    vm.isOpen = true
+    vm.isUpgradeAccountModalOpen = false
+    vm.openUpgradeAccountModal()
+
+    expect(vm.isOpen).toEqual(false)
+    expect(vm.isUpgradeAccountModalOpen).toEqual(true)
   })
 })
