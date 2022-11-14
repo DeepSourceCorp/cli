@@ -87,7 +87,12 @@ describe('[[ AnalyzerRun ]]', () => {
   const getInstance = () => {
     const { vm } = shallowMount(AnalyzerRun, {
       propsData: {
-        status: 'FAIL'
+        status: 'FAIL',
+        filters: {
+          q: 'python',
+          sort: 'most-frequent',
+          category: 'bug-risk'
+        }
       },
       store,
       mocks,
@@ -137,5 +142,46 @@ describe('[[ AnalyzerRun ]]', () => {
   test('`concreteIssues` returns the concrete issue edge nodes', () => {
     const vm = getInstance()
     expect(vm.concreteIssues).toEqual(resolveNodes(concreteIssueList))
+  })
+
+  test('empty state for all statuses when issue count is 0', () => {
+    const statusOptions = generateStringProps(
+      'status',
+      ['PEND', 'PASS', 'FAIL', 'TIMO', 'CNCL', 'READ'],
+      false
+    )
+
+    cartesian(statusOptions).forEach((propCombination) => {
+      const props = propCombination
+
+      const { html } = render(
+        AnalyzerRun,
+        {
+          mocks,
+          props,
+          store: new Vuex.Store({
+            modules: {
+              'run/detail': {
+                namespaced: true,
+                state: {
+                  totalCount: 0,
+                  edges: []
+                }
+              }
+            }
+          }),
+          stubs: {
+            LazyRunLoading: true,
+            IssueListItem: true,
+            EmptyState: true
+          }
+        },
+        (vue) => {
+          vue.use(VTooltip)
+        }
+      )
+
+      expect(html()).toMatchSnapshot(JSON.stringify(props))
+    })
   })
 })

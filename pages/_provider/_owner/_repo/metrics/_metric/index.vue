@@ -94,7 +94,7 @@
         v-else
         :webp-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.webp')"
         :png-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.png')"
-        :show-border="true"
+        :show-border="false"
         title="Not enough data"
       >
         <template #subtitle>

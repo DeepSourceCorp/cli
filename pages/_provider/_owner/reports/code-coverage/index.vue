@@ -34,9 +34,10 @@
 
     <lazy-empty-state
       v-else-if="queryParams.q"
-      :title="`No results found for ${queryParams.q}`"
+      :title="`No results found for '${queryParams.q}'`"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
       :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+      subtitle="Please try changing your search query."
       class="border border-dashed rounded-lg border-ink-200 py-20"
     />
 

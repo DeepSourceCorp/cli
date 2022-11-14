@@ -103,6 +103,7 @@
           :title="`No results found for '${query}'`"
           :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
           :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+          subtitle="Please try changing your search query."
           class="my-auto"
         />
         <lazy-empty-state v-else title="No issues found" />

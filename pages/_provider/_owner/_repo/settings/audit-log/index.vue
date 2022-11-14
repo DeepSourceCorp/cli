@@ -29,8 +29,9 @@
     <empty-state
       v-else
       title="No Audit logs"
+      subtitle="No events have been logged for this account yet. Please check back later!"
       class="py-20 border-2 border-dashed rounded-lg border-ink-200"
-    ></empty-state>
+    />
   </div>
 </template>
 

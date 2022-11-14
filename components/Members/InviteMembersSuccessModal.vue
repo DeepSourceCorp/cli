@@ -10,9 +10,10 @@
       >
         <source src="~/assets/images/ui-states/owner/invite-sent-136px.webm" type="video/webm" />
       </video>
+      <span class="font-semibold text-vanilla-100 text-center">Invitation sent successfully!</span>
       <p class="max-w-sm mt-4 text-sm leading-6 text-center text-vanilla-400">
-        We have sent an invite email to your team member(s). They can create an account using the
-        link in the email and join your team.
+        We've sent an email to your team member(s) with a link to join the team. You can ask them to
+        check their inbox.
       </p>
       <z-button size="small" icon="user-plus" class="mt-6" @click="$emit('invite-more')">
         Invite new member

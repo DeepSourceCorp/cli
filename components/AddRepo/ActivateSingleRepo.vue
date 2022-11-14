@@ -70,55 +70,56 @@
           class="rounded-md opacity-50 h-17 bg-ink-200"
         ></div>
       </div>
-      <div v-else class="flex flex-col items-center justify-center p-2 mt-10 space-y-5 text-center">
-        <img
-          v-if="searchCandidate"
-          :alt="searchCandidate"
-          height="100px"
-          src="~/assets/images/ui-states/directory/empty-search.gif"
-          width="auto"
-          class="mx-auto"
-        />
-        <div>
-          <p class="font-semibold text-vanilla-100">
-            {{
-              searchCandidate
-                ? `No results found for "${searchCandidate}"`
-                : 'We couldn’t find any repositories linked to this account.'
-            }}
-          </p>
-
-          <p class="max-w-md mt-1 text-sm text-vanilla-400">
-            {{
-              owner.hasGrantedAllRepoAccess
-                ? `You can sync your repositories from ${activeProviderName}`
-                : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
-            }}
-          </p>
-        </div>
-        <div class="flex gap-x-2">
-          <z-button
-            rel="noopener noreferrer"
-            v-if="!owner.hasGrantedAllRepoAccess && owner.appConfigurationUrl"
-            :to="owner.appConfigurationUrl"
-            icon="settings"
-            icon-color="vanilla-100"
-            label="Manage Permissions"
-            size="small"
-            target="_blank"
-            class="bg-ink-200 hover:bg-ink-200 hover:opacity-80 text-vanilla-100"
-          />
-          <z-button
-            :is-loading="repoSyncLoading"
-            :disabled="repoSyncLoading"
-            icon="refresh-cw"
-            label="Sync repositories"
-            loading-label="Syncing repositories"
-            size="small"
-            @click="syncRepos"
-          />
-        </div>
-      </div>
+      <lazy-empty-state
+        v-else
+        :use-v2="true"
+        :show-border="false"
+        :title="
+          searchCandidate
+            ? `No results found for '${searchCandidate}'`
+            : 'We couldn’t find any repositories linked to this account.'
+        "
+        :subtitle="
+          owner.hasGrantedAllRepoAccess
+            ? `You can sync your repositories from ${activeProviderName}`
+            : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
+        "
+        :webp-image-path="
+          searchCandidate
+            ? require('~/assets/images/ui-states/directory/empty-search.webp')
+            : undefined
+        "
+        :png-image-path="
+          searchCandidate
+            ? require('~/assets/images/ui-states/directory/empty-search.gif')
+            : undefined
+        "
+      >
+        <template #action>
+          <div class="flex gap-x-2">
+            <z-button
+              v-if="!owner.hasGrantedAllRepoAccess && owner.appConfigurationUrl"
+              :to="owner.appConfigurationUrl"
+              label="Manage Permissions"
+              size="small"
+              target="_blank"
+              rel="noopener noreferrer"
+              icon="settings"
+              icon-color="vanilla-100"
+              class="bg-ink-200 hover:bg-ink-200 hover:opacity-80 text-vanilla-100"
+            />
+            <z-button
+              :is-loading="repoSyncLoading"
+              :disabled="repoSyncLoading"
+              label="Sync repositories"
+              icon="refresh-cw"
+              loading-label="Syncing repositories"
+              size="small"
+              @click="syncRepos"
+            />
+          </div>
+        </template>
+      </lazy-empty-state>
       <div v-if="totalPageCount > 1" class="flex justify-center my-6 text-sm">
         <z-pagination
           :page="currentPage"

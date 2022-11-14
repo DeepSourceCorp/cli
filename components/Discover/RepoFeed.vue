@@ -21,7 +21,11 @@
       </repo-card>
     </div>
     <div v-else>
-      <lazy-empty-state title="No results found" class="font-medium text-vanilla-400" />
+      <lazy-empty-state
+        title="No results found"
+        subtitle="That’s all we can say right now."
+        class="font-medium text-vanilla-400"
+      />
     </div>
   </section>
 </template>

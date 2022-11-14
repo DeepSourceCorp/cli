@@ -43,8 +43,8 @@
             v-if="searchText"
             :title="`No results found for '${searchText}'`"
             subtitle="Please try changing the search query or clearing the filters."
-            :webp-image-path="require('~/assets/images/ui-states/runs/no-recent-analyses.webp')"
-            :png-image-path="require('~/assets/images/ui-states/runs/no-recent-analyses.png')"
+            :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+            :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
             :show-border="true"
           />
           <lazy-empty-state

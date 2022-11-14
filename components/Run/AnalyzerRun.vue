@@ -44,10 +44,11 @@
             <empty-state
               :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
               :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+              subtitle="Please try changing your search query."
               class="border-2 border-dashed rounded-md border-ink-200"
             >
-              <template slot="title">
-                <p class="text-base text-vanilla-200">No issues found</p>
+              <template #title>
+                <p class="text-base text-vanilla-200">{{ emptyStateTitle }}</p>
               </template>
             </empty-state>
           </template>
@@ -124,6 +125,10 @@ export default class AnalyzerRun extends mixins(RunDetailMixin) {
     if (this.filters.category) return true
 
     return false
+  }
+
+  get emptyStateTitle() {
+    return `No results found for ${this.filters.q ? `'${this.filters.q}'` : 'selected filters'}`
   }
 
   /**

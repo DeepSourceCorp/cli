@@ -1,5 +1,5 @@
 <template>
-  <base-state title="Waiting for results">
+  <base-state title="Waiting to receive artifacts">
     <template slot="hero">
       <video
         :poster="require('~/assets/images/ui-states/autofix/loader-animation-108px.png')"
@@ -15,7 +15,10 @@
         />
       </video>
     </template>
-    <p>We're waiting for the test coverage artifact to be reported</p>
+    <p>
+      The analysis will begin as soon as we receive additional artifacts or reports required by the
+      Analyzer.
+    </p>
   </base-state>
 </template>
 <script lang="ts">

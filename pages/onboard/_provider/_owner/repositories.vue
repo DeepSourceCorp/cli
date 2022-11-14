@@ -36,6 +36,17 @@
       <empty-state
         v-else
         class="border-2 border-dashed rounded-md border-ink-200"
+        :use-v2="true"
+        :webp-image-path="
+          searchCandidate
+            ? require('~/assets/images/ui-states/directory/empty-search.webp')
+            : undefined
+        "
+        :png-image-path="
+          searchCandidate
+            ? require('~/assets/images/ui-states/directory/empty-search.gif')
+            : undefined
+        "
         :title="
           searchCandidate
             ? `Could not find '${searchCandidate}'`
@@ -48,21 +59,23 @@
         "
       >
         <template #action>
-          <z-button
-            size="small"
-            icon="refresh-ccw"
-            label="Sync repositories"
-            loading-label="Syncing repositories"
-            :is-loading="repoSyncLoading"
-            @click="syncRepos"
-          />
-          <z-button
-            button-type="secondary"
-            size="small"
-            label="Contact support"
-            icon="support"
-            :to="`mailto:${$config.supportEmail}`"
-          />
+          <div class="flex gap-x-2">
+            <z-button
+              :is-loading="repoSyncLoading"
+              size="small"
+              icon="refresh-ccw"
+              label="Sync repositories"
+              loading-label="Syncing repositories"
+              @click="syncRepos"
+            />
+            <z-button
+              :to="`mailto:${$config.supportEmail}`"
+              button-type="secondary"
+              size="small"
+              label="Contact support"
+              icon="support"
+            />
+          </div>
         </template>
       </empty-state>
     </div>

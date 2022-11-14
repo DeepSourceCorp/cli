@@ -123,7 +123,6 @@
           :png-image-path="
             require('~/assets/images/ui-states/issues/no-issues-found-static-140px.png')
           "
-          :show-border="true"
           title="No issues found"
           subtitle="That's a good thing, right?!"
           alt-text="No issues found"

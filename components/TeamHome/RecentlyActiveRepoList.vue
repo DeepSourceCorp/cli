@@ -26,12 +26,7 @@
         <div class="w-1/5 h-full rounded-md bg-ink-300 animate-pulse"></div>
       </div>
     </template>
-    <template
-      v-else-if="
-        Array.isArray(repoWithActiveAnalysisWithAnalyzers) &&
-        repoWithActiveAnalysisWithAnalyzers.length
-      "
-    >
+    <template v-else-if="false">
       <list-item
         v-for="repo in repoWithActiveAnalysisWithAnalyzers"
         :key="repo.id"
@@ -61,11 +56,7 @@
         </template>
       </list-item>
     </template>
-    <empty-state
-      v-else
-      title="No active repositories found"
-      :svg-image-path="require('~/assets/images/ui-states/repo/inactive.svg')"
-    >
+    <empty-state v-else :use-v2="true" title="No active repositories found">
       <span v-if="canActivateRepo" slot="subtitle">
         No repositories activated, generate a new config or activate a repository directly if a
         <code class="font-medium text-vanilla-200">.deepsource.toml</code> already exists.

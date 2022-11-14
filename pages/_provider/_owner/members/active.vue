@@ -59,6 +59,7 @@
       :title="`No results found for '${searchCandidate}'`"
       :svg-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
       :show-border="true"
+      subtitle="Please try changing your search query."
     />
 
     <portal to="modal">

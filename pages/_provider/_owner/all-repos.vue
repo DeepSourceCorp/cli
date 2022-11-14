@@ -80,7 +80,19 @@
         :allow-star="true"
       />
     </transition-group>
-    <div class="flex items-center justify-center h-64 space-y-2" v-else>No repositories</div>
+    <lazy-empty-state
+      v-else-if="searchCandidate"
+      :title="`No results found for '${searchCandidate}'`"
+      :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+      subtitle="Please try changing your search query."
+    />
+    <lazy-empty-state
+      v-else
+      :subtitle="`DeepSource doesn't have access to any repositories from your account. Please check your settings on ${activeProviderName}.`"
+      :show-border="true"
+      title="No repositories"
+    />
     <z-pagination
       class="flex justify-center"
       v-if="pageCount > 1"

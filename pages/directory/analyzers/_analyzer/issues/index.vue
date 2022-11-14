@@ -68,9 +68,18 @@
     </div>
     <lazy-empty-state
       v-else
-      title="No issues found!"
-      :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
-      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+      :title="searchTerm ? `No results found for '${searchTerm}'` : 'No issues found!'"
+      :subtitle="
+        searchTerm
+          ? `We couldn't find any items for this phrase. Try changing your search query.`
+          : 'That’s all we can say right now.'
+      "
+      :webp-image-path="
+        searchTerm ? require('~/assets/images/ui-states/directory/empty-search.webp') : undefined
+      "
+      :png-image-path="
+        searchTerm ? require('~/assets/images/ui-states/directory/empty-search.gif') : undefined
+      "
     />
   </div>
 </template>

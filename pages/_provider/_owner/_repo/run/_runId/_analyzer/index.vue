@@ -128,8 +128,11 @@
                 </run-metric-card>
               </div>
               <empty-state v-else image-width="w-22">
-                <template slot="title">
-                  <p class="text-base text-vanilla-200">No metrics captured for this check</p>
+                <template #title>
+                  <p class="text-base text-vanilla-200">No metrics recorded</p>
+                </template>
+                <template #subtitle>
+                  The Analyzer did not report any metrics for this analysis run.
                 </template>
               </empty-state>
             </div>
@@ -164,8 +167,11 @@
               </run-metric-card>
             </div>
             <empty-state v-else>
-              <template slot="title">
-                <p class="text-base text-vanilla-200">No metrics captured for this check</p>
+              <template #title>
+                <p class="text-base text-vanilla-200">No metrics recorded</p>
+              </template>
+              <template #subtitle>
+                The Analyzer did not report any metrics for this analysis run.
               </template>
             </empty-state>
           </template>

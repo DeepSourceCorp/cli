@@ -15,6 +15,7 @@
             title="No results found"
             :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
             :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+            subtitle="That’s all we can say right now."
           />
         </div>
         <template v-if="$fetchState.pending">

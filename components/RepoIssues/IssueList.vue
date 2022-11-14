@@ -71,6 +71,7 @@
       :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
       :show-border="true"
+      subtitle="Please try changing your search query."
     />
   </div>
 </template>

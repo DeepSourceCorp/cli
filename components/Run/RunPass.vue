@@ -1,20 +1,11 @@
 <template>
-  <base-state title="No issues found in this check">
-    <template slot="hero">
-      <empty-state-picture
-        :webp-image-path="
-          require('~/assets/images/ui-states/issues/no-issues-found-static-140px.webp')
-        "
-        :png-image-path="
-          require('~/assets/images/ui-states/issues/no-issues-found-static-140px.png')
-        "
-        width="w-26"
-        alt-text="No issues found"
-        class="mx-auto mb-6"
-      />
-    </template>
-    <p>Give yourself a cookie.</p>
-  </base-state>
+  <empty-state
+    :webp-image-path="require('~/assets/images/ui-states/issues/no-issues-found-static-140px.webp')"
+    :png-image-path="require('~/assets/images/ui-states/issues/no-issues-found-static-140px.png')"
+    :show-border="false"
+    title="No issues found in this check"
+    subtitle="Give yourself a cookie."
+  />
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'

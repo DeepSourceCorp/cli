@@ -5,6 +5,7 @@
     :webp-image-path="require('~/assets/images/ui-states/timeout/timeout-state-136px.webp')"
     :png-image-path="require('~/assets/images/ui-states/timeout/timeout-state-136px.gif')"
     title="Analysis timed out"
+    subtitle="We had to cancel this analysis as it took too long to finish. Try making another commit on this branch to retry."
     width="w-26"
     content-width="max-w-sm"
   >

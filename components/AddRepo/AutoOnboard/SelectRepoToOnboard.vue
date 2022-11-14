@@ -81,7 +81,7 @@
           <p class="text-vanilla-100 font-semibold">
             {{
               searchCandidate
-                ? `No results found for "${searchCandidate}"`
+                ? `No results found for '${searchCandidate}'`
                 : 'We couldn’t find any repositories linked to this account.'
             }}
           </p>

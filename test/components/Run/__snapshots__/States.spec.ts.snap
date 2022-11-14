@@ -26,7 +26,7 @@ exports[`[[ Repo Status Components ]] RepoError: RepoError 1`] = `
 `;
 
 exports[`[[ Repo Status Components ]] RepoTimeout: RepoTimeout 1`] = `
-"<emptystate-stub use-v2=\\"\\" show-border=\\"\\" webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" title=\\"Analysis timed out\\" width=\\"w-26\\" content-width=\\"max-w-sm\\" defaultbranchname=\\"master\\">
+"<emptystate-stub use-v2=\\"\\" show-border=\\"\\" webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" title=\\"Analysis timed out\\" subtitle=\\"We had to cancel this analysis as it took too long to finish. Try making another commit on this branch to retry.\\" width=\\"w-26\\" content-width=\\"max-w-sm\\" defaultbranchname=\\"master\\">
   <p class=\\"max-w-xl\\">
     We were not able to finish the analysis in time. This can happen if there are too many files
     to analyze. Please give it another shot.
@@ -86,46 +86,23 @@ exports[`[[ Run Status Components ]] RunLoading: RunLoading 1`] = `
 </section>"
 `;
 
-exports[`[[ Run Status Components ]] RunNuked: RunNuked 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\">
-  <emptystatepicture-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" width=\\"w-26\\" class=\\"mx-auto\\"></emptystatepicture-stub>
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
-    Test artifacts were not uploaded in time
-  </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"></div>
-</section>"
-`;
+exports[`[[ Run Status Components ]] RunNuked: RunNuked 1`] = `"<emptystate-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" title=\\"Artifacts not received in time\\" subtitle=\\"We had to cancel this analysis as we didn't receive additional artifacts or reports required by the Analyzer in time. Try making another commit on this branch to retry.\\"></emptystate-stub>"`;
 
-exports[`[[ Run Status Components ]] RunPass: RunPass 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\">
-  <emptystatepicture-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" width=\\"w-26\\" alt-text=\\"No issues found\\" class=\\"mx-auto mb-6\\"></emptystatepicture-stub>
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
-    No issues found in this check
-  </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
-    <p>Give yourself a cookie.</p>
-  </div>
-</section>"
-`;
+exports[`[[ Run Status Components ]] RunPass: RunPass 1`] = `"<emptystate-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" title=\\"No issues found in this check\\" subtitle=\\"Give yourself a cookie.\\"></emptystate-stub>"`;
 
-exports[`[[ Run Status Components ]] RunTimeout: RunTimeout 1`] = `
-"<section class=\\"grid border border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\">
-  <emptystatepicture-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" width=\\"w-26\\" class=\\"mx-auto\\"></emptystatepicture-stub>
-  <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
-    This run couldn’t finish in time
-  </h1>
-  <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\"></div>
-</section>"
-`;
+exports[`[[ Run Status Components ]] RunTimeout: RunTimeout 1`] = `"<emptystate-stub webp-image-path=\\"timeout.svg\\" png-image-path=\\"timeout.svg\\" title=\\"Analysis timed out\\" subtitle=\\"We had to cancel this analysis as it took too long to finish. Try making another commit on this branch to retry.\\"></emptystate-stub>"`;
 
 exports[`[[ Run Status Components ]] RunWaiting: RunWaiting 1`] = `
 "<section class=\\"grid border border-dashed rounded-md border-ink-200 place-content-center min-h-92 max-h-screen p-12\\"><video poster=\\"timeout.svg\\" autoplay=\\"autoplay\\" loop=\\"loop\\" disablepictureinpicture=\\"\\" muted=\\"muted\\" class=\\"mx-auto w-26\\">
     <source src=\\"timeout.svg\\" type=\\"video/webm\\"></video>
   <h1 class=\\"text-base font-semibold text-center text-vanilla-100 mt-6\\">
-    Waiting for results
+    Waiting to receive artifacts
   </h1>
   <div class=\\"max-w-xl mt-2 text-center text-vanilla-400 text-sm\\">
-    <p>We're waiting for the test coverage artifact to be reported</p>
+    <p>
+      The analysis will begin as soon as we receive additional artifacts or reports required by the
+      Analyzer.
+    </p>
   </div>
 </section>"
 `;

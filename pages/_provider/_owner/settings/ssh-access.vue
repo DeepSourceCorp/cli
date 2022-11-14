@@ -46,8 +46,8 @@
       :png-image-path="require('~/assets/images/ui-states/SSH-Key-136px.png')"
       :webp-image-path="require('~/assets/images/ui-states/SSH-Key-136px.webp')"
       :show-border="true"
-      title="An SSH key pair has not been generated yet."
-      subtitle=" Generate SSH key pair."
+      title="No SSH key pair found"
+      subtitle="Create a new key pair and use the public key to enable DeepSource access to your private dependencies."
     >
       <template #action>
         <z-button

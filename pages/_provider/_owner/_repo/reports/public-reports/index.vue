@@ -64,8 +64,9 @@
       class="border border-dashed rounded-lg border-ink-200 py-20"
     >
       <template #title>
-        <span class="break-words">No results found for the given search.</span>
+        <span class="break-words">No results found for '{{ q }}'</span>
       </template>
+      <template #subtitle> Please try changing your search query. </template>
     </lazy-empty-state>
     <lazy-empty-state
       v-else

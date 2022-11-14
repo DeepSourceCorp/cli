@@ -80,12 +80,13 @@
     />
     <lazy-empty-state
       v-else-if="!isLoading"
+      :use-v2="true"
       title="No priority assignments found"
       subtitle="You haven't assigned priorities to any issues yet."
       class="border border-dashed rounded-lg border-2 border-ink-200 py-20"
     >
       <template slot="action">
-        <div class="flex justify-around">
+        <div class="flex">
           <z-button
             v-if="canChangePriority"
             icon="flag"

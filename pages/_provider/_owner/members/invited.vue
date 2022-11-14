@@ -36,6 +36,7 @@
       :png-image-path="require('~/assets/images/ui-states/pending-invites-136px.png')"
       :show-border="true"
       title="No pending invites"
+      subtitle="Looks like all your invitations have been accepted. Go ahead and invite someone new!"
     >
     </empty-state>
     <portal to="modal">

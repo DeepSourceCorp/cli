@@ -27,17 +27,12 @@
   </div>
   <div v-else class="p-4 min-h-98">
     <lazy-empty-state
-      title="Not enough data"
       :webp-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.webp')"
       :png-image-path="require('~/assets/images/ui-states/metrics/no-data-found-136px.png')"
-      :show-border="true"
+      title="Waiting for data"
+      subtitle="We haven’t received any data to show this metric. Please create a new commit to the default branch to kick things off!"
       class="flex flex-col justify-center h-full"
-    >
-      <template #subtitle>
-        We do not have enough data to show a trend yet. <br class="hidden md:block" />
-        Please come back later.
-      </template>
-    </lazy-empty-state>
+    />
   </div>
 </template>
 <script lang="ts">

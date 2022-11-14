@@ -42,9 +42,10 @@
       </div>
       <lazy-empty-state
         v-else
-        title="No Analyzers found!"
         :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
         :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+        title="No Analyzers found!"
+        subtitle="Please try changing your search query."
       />
     </section>
     <section class="px-4 pb-4 mt-10">
@@ -73,9 +74,10 @@
       </div>
       <lazy-empty-state
         v-else
-        title="No Transformers found!"
         :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
         :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
+        title="No Transformers found!"
+        subtitle="Please try changing your search query."
       />
     </section>
   </div>
