@@ -4,7 +4,7 @@
       class="flex flex-col justify-between min-h-screen pt-32 pb-24 text-sm text-center text-vanilla-400"
     >
       <div class="flex items-center flex-grow">
-        <lazy-empty-state
+        <empty-state
           :png-image-path="require('~/assets/images/ui-states/autofix/autofix-installed.png')"
           :webp-image-path="require('~/assets/images/ui-states/autofix/autofix-installed.webp')"
           class="space-y-8"
@@ -16,7 +16,7 @@
             You can now automatically fix code quality and security issues in a couple of clicks, or
             format code automatically with Transformers.
           </template>
-        </lazy-empty-state>
+        </empty-state>
       </div>
       <div class="space-y-2">
         <p>You can close this window if it does not automatically close.</p>
