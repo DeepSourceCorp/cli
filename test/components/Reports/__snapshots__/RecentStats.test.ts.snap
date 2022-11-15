@@ -3,13 +3,13 @@
 exports[`[[ RecentStats ]] renders RecentStats with all prop options: {"currentVal":1,"stats":[{"statLabel":"1 Month Ago","statValue":17,"trendValue":16,"trendDirection":"DOWN","trendPositive":true},{"statLabel":"3 Months Ago","statValue":4,"trendValue":3,"trendDirection":"DOWN","trendPositive":true},{"statLabel":"6 Months Ago","statValue":0,"trendValue":100,"trendDirection":"DOWN","trendPositive":true},{"statLabel":"12 Months Ago","statValue":null,"trendValue":null,"trendDirection":"DOWN","trendPositive":true}]} 1`] = `
 "<div class=\\"grid grid-cols-2 py-4 border rounded-lg md:grid-cols-3 xl:grid-cols-5 gap-y-6 border-ink-200 md:pr-5\\">
   <div class=\\"flex flex-col items-center gap-y-2\\">
-    <h3 class=\\"text-xxs font-semibold tracking-wider uppercase text-vanilla-400\\">Current</h3>
+    <h3 class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-400\\">Current</h3>
     <p class=\\"text-base font-semibold text-vanilla-100\\">
       1
     </p>
   </div>
   <div class=\\"flex flex-col items-center gap-y-2\\">
-    <h3 class=\\"text-xxs font-semibold tracking-wider uppercase text-vanilla-400\\">
+    <h3 class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-400\\">
       1 Month Ago
     </h3>
     <div class=\\"flex flex-col items-center gap-y-0.5 h-full justify-center\\">
@@ -20,7 +20,7 @@ exports[`[[ RecentStats ]] renders RecentStats with all prop options: {"currentV
     </div>
   </div>
   <div class=\\"flex flex-col items-center gap-y-2\\">
-    <h3 class=\\"text-xxs font-semibold tracking-wider uppercase text-vanilla-400\\">
+    <h3 class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-400\\">
       3 Months Ago
     </h3>
     <div class=\\"flex flex-col items-center gap-y-0.5 h-full justify-center\\">
@@ -31,7 +31,7 @@ exports[`[[ RecentStats ]] renders RecentStats with all prop options: {"currentV
     </div>
   </div>
   <div class=\\"flex flex-col items-center gap-y-2\\">
-    <h3 class=\\"text-xxs font-semibold tracking-wider uppercase text-vanilla-400\\">
+    <h3 class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-400\\">
       6 Months Ago
     </h3>
     <div class=\\"flex flex-col items-center gap-y-0.5 h-full\\">
@@ -42,7 +42,7 @@ exports[`[[ RecentStats ]] renders RecentStats with all prop options: {"currentV
     </div>
   </div>
   <div class=\\"flex flex-col items-center gap-y-2\\">
-    <h3 class=\\"text-xxs font-semibold tracking-wider uppercase text-vanilla-400\\">
+    <h3 class=\\"text-xs font-semibold tracking-wider uppercase text-vanilla-400\\">
       12 Months Ago
     </h3>
     <div class=\\"flex flex-col items-center gap-y-0.5 h-full\\">

@@ -19,13 +19,13 @@
     <div v-show="showCtaAndControls" class="flex gap-x-2 justify-between mb-5 mt-1">
       <public-report-sort v-model="sort" @updateSortFilter="handleSortChange" />
       <z-input
-        v-model="q"
+        :value="q"
         :show-border="false"
         size="small"
         icon="search"
         background-color="ink-300"
-        placeholder="Search by report label"
-        @debounceInput="fetchPublicReportList"
+        placeholder="Search by report label..."
+        @debounceInput="(val) => handlePublicReportSearch(val)"
       >
         <template slot="left">
           <z-icon icon="search" size="small" class="ml-1.5" />
@@ -71,7 +71,7 @@
     <lazy-empty-state
       v-else
       title="No public reports found"
-      subtitle="No public reports for this repository have been created yet."
+      subtitle="No public report has been created for this repository yet."
       class="border border-dashed rounded-lg border-ink-200 py-20"
     >
       <template v-if="hasEditAccess" slot="action">

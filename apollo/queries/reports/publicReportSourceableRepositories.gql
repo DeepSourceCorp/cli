@@ -1,0 +1,29 @@
+query publicReportSourceableRepositories(
+  $ownerLogin: String!
+  $vcsProvider: VCSProviderChoices!
+  $publicReportId: ID
+  $first: Int
+  $after: String
+  $offset: Int
+  $q: String
+) {
+  publicReportSourceableRepositories(
+    ownerLogin: $ownerLogin
+    vcsProvider: $vcsProvider
+    publicReportId: $publicReportId
+    first: $first
+    after: $after
+    offset: $offset
+    q: $q
+  ) {
+    totalCount
+    edges {
+      node {
+        id
+        name
+        ownerLogin
+        isSourced
+      }
+    }
+  }
+}

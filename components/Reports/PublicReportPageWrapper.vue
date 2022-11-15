@@ -39,7 +39,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-import { ReportLevel, ReportType, Repository } from '~/types/types'
+import { ReportLevel, ReportType } from '~/types/types'
 import { ReportCopyTextT, ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { smartApostrophe } from '~/utils/string'
 
@@ -63,9 +63,6 @@ export default class PublicReportPageWrapper extends Vue {
 
   @Prop({ required: true })
   reportKey: ReportPageT
-
-  @Prop()
-  repositoryList: Array<Repository>
 
   ReportType = ReportType
 

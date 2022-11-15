@@ -144,7 +144,7 @@ export default class OwnerCodeCoverage extends mixins(PaginationMixin, RouteQuer
   /**
    * Fetch list of code coverage data.
    *
-   * @params refetch boolean
+   * @param refetch boolean
    *
    * @returns {Promise<void>}
    */

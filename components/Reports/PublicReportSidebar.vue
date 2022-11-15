@@ -2,7 +2,7 @@
   <aside
     v-outside-click="closeSidebar"
     data-testid="public-report-sidebar"
-    class="fixed top-0 z-50 flex-shrink-0 w-64 h-screen px-6 py-6 overflow-y-auto duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-ink-200 lg:border-none"
+    class="fixed top-0 z-50 flex-shrink-0 w-64 h-screen overflow-y-auto px-6 py-6 duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-ink-200 lg:border-none"
     :class="[isOpen ? 'left-0' : '-left-full']"
   >
     <div class="space-y-4">
@@ -16,20 +16,22 @@
 
     <div class="flex flex-col gap-y-3">
       <span class="text-xs font-semibold tracking-wider uppercase text-slate">Reports</span>
-      <nuxt-link
-        v-for="report in reports"
-        :key="report"
-        :to="`/report/${reportId}/${report}`"
-        :class="$route.name === `report-reportId-${report}` ? 'text-vanilla-100' : 'text-slate'"
-        class="text-sm font-medium hover:text-vanilla-100"
-      >
-        {{ ReportMeta[report].title }}
-      </nuxt-link>
+      <template v-for="report in reports">
+        <nuxt-link
+          v-if="report in ReportMeta"
+          :key="report"
+          :to="`/report/${reportId}/${report}`"
+          :class="$route.name === `report-reportId-${report}` ? 'text-vanilla-100' : 'text-slate'"
+          class="text-sm font-medium hover:text-vanilla-100"
+        >
+          {{ ReportMeta[report].title }}
+        </nuxt-link>
+      </template>
     </div>
 
     <z-divider color="ink-200" margin="my-0" />
 
-    <div class="flex flex-col text-sm font-semibold gap-y-3 text-slate">
+    <div class="flex flex-col text-sm gap-y-3 text-slate">
       <a
         v-for="sidebarLink in sidebarLinks"
         :key="sidebarLink.link"
@@ -41,58 +43,38 @@
       </a>
     </div>
 
-    <template v-if="repositoryList && repositoryList.length">
-      <z-divider color="ink-200" margin="my-0" />
-      <div class="flex flex-col gap-y-3">
-        <span class="text-xs font-semibold tracking-wider uppercase text-slate">
-          {{ repositoryList.length > 1 ? 'Repositories' : 'Repository' }}
-        </span>
-        <div class="flex flex-wrap gap-2">
-          <z-tag
-            v-for="repo in repositoryList"
-            :key="repo.id"
-            size="x-small"
-            :icon-left="repo.isPrivate ? 'z-lock' : 'globe'"
-            bg-color="ink-200"
-            class="gap-x-1 text-vanilla-300 cursor"
-          >
-            <span
-              v-tooltip="{ content: repo.name, delay: { show: 0, hide: 100 } }"
-              class="truncate max-w-24"
-            >
-              {{ repo.name }}
-            </span>
-          </z-tag>
-        </div>
-      </div>
-    </template>
+    <z-divider color="ink-200" margin="my-0" />
+
+    <public-report-repo-section :token="token" :report-id="reportId" />
   </aside>
 </template>
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
-import { ZDivider, ZTag } from '@deepsourcelabs/zeal'
+import { ZDivider } from '@deepsourcelabs/zeal'
 import { ReportPageT, ReportMeta } from '~/types/reportTypes'
-import { Repository } from '~/types/types'
 import { containsElement } from '~/utils/ui'
 
 /**
  * Sidebar component for public report page
  */
-@Component({ components: { ZDivider, ZTag } })
+@Component({ components: { ZDivider } })
 export default class PublicReportSidebar extends Vue {
   @Prop({ required: true })
   reports: Array<ReportPageT>
-
-  @Prop({ default: () => [] })
-  repositoryList: Array<Repository>
 
   @Prop({ default: '' })
   ownerLogo: string
 
   @Prop({ default: '' })
   ownerLogin: string
+
+  @Prop({ required: true })
+  reportId: number
+
+  @Prop({ default: '' })
+  token: string
 
   isOpen = false
 
@@ -173,10 +155,6 @@ export default class PublicReportSidebar extends Vue {
     } else if (!containsElement(toggleButton, target) && target.id !== 'mobile-sidebar-toggle') {
       this.toggleSidebar(false)
     }
-  }
-
-  get reportId() {
-    return this.$route.params.reportId
   }
 }
 </script>

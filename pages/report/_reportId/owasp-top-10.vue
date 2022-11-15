@@ -4,7 +4,6 @@
     :owner-login="ownerLogin"
     :created-at="createdAt"
     :report-key="ReportPageT.OWASP_TOP_10"
-    :repository-list="repositoryList"
   >
     <section v-if="report" class="space-y-4">
       <chart-container :chart-present="shareHistoricalData">
@@ -141,7 +140,7 @@ import { ZChart, ZTable, ZTableCell, ZTableRow, ZDivider } from '@deepsourcelabs
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 
-import { ReportLevel, Repository } from '~/types/types'
+import { ReportLevel } from '~/types/types'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { shortenLargeNumber } from '~/utils/string'
 
@@ -158,7 +157,8 @@ import { shortenLargeNumber } from '~/utils/string'
   },
   methods: {
     shortenLargeNumber
-  }
+  },
+  scrollToTop: true
 })
 export default class PublicReportOwasp extends mixins(PublicReportMixin, ComplianceReportMixin) {
   @Prop()
@@ -175,9 +175,6 @@ export default class PublicReportOwasp extends mixins(PublicReportMixin, Complia
 
   @Prop()
   token: string
-
-  @Prop()
-  repositoryList: Array<Repository>
 
   readonly ReportPageT = ReportPageT
 

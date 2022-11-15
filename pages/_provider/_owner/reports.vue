@@ -24,8 +24,10 @@
     </div>
 
     <portal v-if="activeReportName !== ReportPageT.PUBLIC_REPORTS" to="modal">
-      <mutate-report-modal
+      <mutate-owner-report-modal
         v-if="isMutateReportModalOpen"
+        :owner-login="$route.params.owner"
+        :vcs-provider="$route.params.provider"
         :level="ReportLevel.Owner"
         :report-keys-old="[activeReportName]"
         :save-loading="reportSaveLoading"

@@ -1581,19 +1581,28 @@ declare module '*/publicReportRecentStats.gql' {
 }
     
 
-declare module '*/recentStats.gql' {
+declare module '*/publicReportRepoList.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const recentStats: DocumentNode;
+  export const publicReportRepoList: DocumentNode;
 
   export default defaultDocument;
 }
     
 
-declare module '*/repoListForReports.gql' {
+declare module '*/publicReportSourceableRepositories.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const repoListForReports: DocumentNode;
+  export const publicReportSourceableRepositories: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/recentStats.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const recentStats: DocumentNode;
 
   export default defaultDocument;
 }

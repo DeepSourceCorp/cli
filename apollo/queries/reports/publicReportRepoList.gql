@@ -1,0 +1,21 @@
+query publicReportRepoList(
+  $reportId: String!
+  $token: String
+  $first: Int
+  $after: String
+  $offset: Int
+) {
+  publicReport(reportId: $reportId, token: $token) {
+    id
+    sourcedRepositories(first: $first, after: $after, offset: $offset) {
+      totalCount
+      edges {
+        node {
+          id
+          name
+          isPrivate
+        }
+      }
+    }
+  }
+}

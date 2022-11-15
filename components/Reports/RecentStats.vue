@@ -8,7 +8,7 @@
         <div class="w-8 h-6 mb-px rounded-sm bg-ink-300 animate-pulse"></div>
       </template>
       <template v-else>
-        <h3 class="text-xxs font-semibold tracking-wider uppercase text-vanilla-400">Current</h3>
+        <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">Current</h3>
         <p class="text-base font-semibold text-vanilla-100">
           {{ shortenLargeNumber(currentVal) }}
         </p>
@@ -25,7 +25,7 @@
     </template>
     <template v-else>
       <div v-for="stat in stats" :key="stat.statLabel" class="flex flex-col items-center gap-y-2">
-        <h3 class="text-xxs font-semibold tracking-wider uppercase text-vanilla-400">
+        <h3 class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
           {{ stat.statLabel }}
         </h3>
         <div

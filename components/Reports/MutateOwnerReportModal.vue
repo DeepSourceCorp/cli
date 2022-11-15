@@ -1,6 +1,21 @@
 <template>
-  <z-modal :title="editMode ? 'Edit report' : 'Share report'" @onClose="$emit('close')">
-    <fieldset v-if="!showRepoSelection" class="p-4 flex flex-col gap-y-7">
+  <z-modal @onClose="$emit('close')">
+    <template #title>
+      <z-breadcrumb :key="showRepoSelection" class="text-base text-vanilla-100">
+        <z-breadcrumb-item
+          :class="showRepoSelection ? 'text-vanilla-400 cursor-pointer' : 'text-vanilla-100'"
+        >
+          <div role="button" @click="showRepoSelection = false">
+            {{ editMode ? 'Edit report' : 'Share report' }}
+          </div>
+        </z-breadcrumb-item>
+        <z-breadcrumb-item v-if="showRepoSelection" is-current
+          >Select repositories</z-breadcrumb-item
+        >
+      </z-breadcrumb>
+    </template>
+
+    <fieldset v-show="!showRepoSelection" class="p-4 flex flex-col gap-y-7">
       <label for="report-title" class="space-y-2 text-sm text-vanilla-200 w-full">
         <p class="text-sm font-medium text-vanilla-100">Label</p>
         <z-input
@@ -155,37 +170,34 @@
 
       <label for="source-repos" class="space-y-2 text-sm">
         <p class="font-medium text-vanilla-100">Select repositories</p>
-        <z-radio-group
-          @change="handleSourceUpdate"
-          v-model="reportSource"
-          id="source-repos"
-          class="grid grid-cols-2"
-        >
-          <div>
-            <z-radio :value="ReportSource.SourceSelected" label="Custom repositories"></z-radio>
-            <z-button
-              v-if="reportSource === ReportSource.SourceSelected"
-              button-type="link"
-              size="x-small"
-              color="vanilla-400"
-              :label="`${sourcedRepositories.length} selected`"
-              @click="showRepoSelection = true"
-              class="ml-4 underline hover:text-vanilla-100"
-            />
-          </div>
-          <z-radio
-            :value="ReportSource.SourceAll"
-            label="All repositories"
-            class="place-self-start"
-          ></z-radio>
+        <z-radio-group v-model="reportSource" id="source-repos" class="grid grid-cols-2">
+          <z-radio :value="ReportSource.SourceAll" label="All repositories" />
+          <z-radio :value="ReportSource.SourceSelected" label="Custom" />
         </z-radio-group>
       </label>
     </fieldset>
 
-    <select-repositories-for-report v-else v-model="sourcedRepositories" />
+    <select-repositories-for-report
+      v-show="showRepoSelection"
+      :report-id="reportIdOld"
+      :owner-login="ownerLogin"
+      :vcs-provider="vcsProvider"
+      :edit-mode="editMode"
+      @remove-repo="handleRepoRemoval"
+      @add-repo="handleRepoAddition"
+    />
 
     <template v-slot:footer="{ close }">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-ink-200">
+      <div
+        class="p-4 text-right text-vanilla-100 border-ink-200"
+        :class="{ 'border-t border-ink-200': showRepoSelection }"
+      >
+        <span
+          v-if="showRepoSelection && sourceRepoCount"
+          class="float-left text-xs leading-5 font-medium mt-1.5"
+        >
+          {{ sourceRepoCount }} selected
+        </span>
         <z-button
           v-if="showRepoSelection"
           label="Go back"
@@ -193,12 +205,12 @@
           color="vanilla-100"
           size="small"
           icon="arrow-left"
-          class="bg-ink-200"
+          class="mr-px bg-ink-200 opacity-80 hover:opacity-100"
           @click="showRepoSelection = false"
         />
 
         <z-button
-          v-else
+          v-if="showCreateButton"
           icon="check"
           button-type="primary"
           size="small"
@@ -207,6 +219,14 @@
           :disabled="saveLoading"
           class="modal-primary-action"
           @click="handleSave(close)"
+        />
+        <z-button
+          v-else
+          icon="repositories"
+          button-type="primary"
+          size="small"
+          label="Select repositories"
+          @click="showRepoSelection = true"
         />
       </div>
     </template>
@@ -219,14 +239,11 @@ import {
   ZModal,
   ZInput,
   ZButton,
-  ZAlert,
-  ZSelect,
-  ZOption,
-  ZIcon,
-  ZToggle,
   ZCheckbox,
   ZRadioGroup,
-  ZRadio
+  ZRadio,
+  ZBreadcrumb,
+  ZBreadcrumbItem
 } from '@deepsourcelabs/zeal'
 import { ReportPageT, ReportMeta } from '~/types/reportTypes'
 import {
@@ -234,7 +251,9 @@ import {
   ReportLevel,
   ReportSource,
   ReportType,
-  UpdatePublicReportInput
+  UpdatePublicReportInput,
+  UpdateAction,
+  UpdatePublicReportSourcedRepositoriesInput
 } from '~/types/types'
 
 /**
@@ -254,14 +273,11 @@ import {
     ZModal,
     ZInput,
     ZButton,
-    ZAlert,
-    ZSelect,
-    ZOption,
-    ZIcon,
-    ZToggle,
     ZCheckbox,
     ZRadioGroup,
-    ZRadio
+    ZRadio,
+    ZBreadcrumb,
+    ZBreadcrumbItem
   }
 })
 export default class MutateOwnerReportModal extends Vue {
@@ -271,6 +287,12 @@ export default class MutateOwnerReportModal extends Vue {
 
   @Prop({ required: true })
   editMode: boolean
+
+  @Prop({ required: true })
+  ownerLogin: string
+
+  @Prop({ required: true })
+  vcsProvider: string
 
   @Prop({ default: '' })
   reportIdOld: string
@@ -290,8 +312,8 @@ export default class MutateOwnerReportModal extends Vue {
   @Prop({ default: ReportSource.SourceAll })
   reportSourceOld: ReportSource
 
-  @Prop({ default: () => [] })
-  sourcedRepositoriesOld: Array<string>
+  @Prop({ default: 0 })
+  sourceRepoCountOld: number
 
   @Prop({ default: false })
   saveLoading: boolean
@@ -302,7 +324,10 @@ export default class MutateOwnerReportModal extends Vue {
   shareHistoricalData: boolean = false
   reportLabel = ''
   reportSource: ReportSource = ReportSource.SourceAll
-  sourcedRepositories: Array<string> = []
+
+  sourceRepoCount = 0
+  repoListToAdd: Array<string> = []
+  repoListToRemove: Array<string> = []
 
   isPasswordHidden = false
   showPasswordInput = false
@@ -322,11 +347,18 @@ export default class MutateOwnerReportModal extends Vue {
     this.reportLabel = this.reportLabelOld
     this.isRestricted = this.isRestrictedOld
     this.reportSource = this.reportSourceOld
-    this.sourcedRepositories = this.sourcedRepositoriesOld
+
+    if (this.reportSourceOld !== ReportSource.SourceAll) {
+      this.sourceRepoCount = this.sourceRepoCountOld
+    }
   }
 
   get reportUrl(): string {
     return `https://${this.$config.domain}/report/${this.reportIdOld}`
+  }
+
+  get showCreateButton(): boolean {
+    return this.reportSource === ReportSource.SourceAll ? true : this.showRepoSelection
   }
 
   /**
@@ -370,20 +402,43 @@ export default class MutateOwnerReportModal extends Vue {
   }
 
   /**
-   * Method to set report source type
+   * handle repo selection event
    *
-   * @return void
+   * @param {Array<string>} addedRepos
+   * @returns void
    */
-  handleSourceUpdate() {
-    if (this.reportSource === ReportSource.SourceSelected) {
-      this.showRepoSelection = true
-    }
+  handleRepoAddition(addedRepos: Array<string>): void {
+    this.sourceRepoCount += 1
+
+    // Only add unique repo IDs
+    this.repoListToAdd = Array.from(new Set([...this.repoListToAdd, ...addedRepos]))
+
+    // If a repo is  deselected and reselected again, it'll be present in repoListToRemove
+    // Hence, we need to remove it from repoListToRemove since it's selected again.
+    this.repoListToRemove = this.repoListToRemove.filter((repoId) => !addedRepos.includes(repoId))
+  }
+
+  /**
+   * handle repo unselection event
+   *
+   * @param {Array<string>} removedRepos
+   * @returns void
+   */
+  handleRepoRemoval(removedRepos: Array<string>): void {
+    this.sourceRepoCount -= 1
+
+    // Only add unique repo IDs
+    this.repoListToRemove = Array.from(new Set([...this.repoListToRemove, ...removedRepos]))
+
+    // If a repo is  selected and then deselected again, it'll be present in repoListToAdd
+    // Hence, we need to remove it from repoListToAdd since it's deselected agaion.
+    this.repoListToAdd = this.repoListToAdd.filter((repoId) => !removedRepos.includes(repoId))
   }
 
   /**
    * Click handler button for save report button.
    *
-   * @oaram close {() => void}
+   * @param close {() => void}
    *
    * @return void
    */
@@ -404,11 +459,9 @@ export default class MutateOwnerReportModal extends Vue {
    */
   emitCreateReport(close?: () => void) {
     if (this.validateArgs()) {
-      const { provider, owner: ownerLogin, repo: repositoryName } = this.$route.params
       const newReportArgs: CreatePublicReportInput = {
-        ownerLogin,
-        repositoryName,
-        vcsProvider: this.$providerMetaMap[provider].value,
+        ownerLogin: this.ownerLogin,
+        vcsProvider: this.$providerMetaMap[this.vcsProvider].value,
         label: this.reportLabel,
         level: this.level,
         isRestricted: this.isRestricted,
@@ -416,7 +469,7 @@ export default class MutateOwnerReportModal extends Vue {
         shareHistoricalData: this.shareHistoricalData,
         reportKeys: this.reportKeys,
         source: this.reportSource,
-        sourcedRepositories: this.sourcedRepositories
+        sourcedRepositories: this.repoListToAdd
       }
 
       if (Object.keys(newReportArgs).length) {
@@ -426,9 +479,16 @@ export default class MutateOwnerReportModal extends Vue {
   }
 
   /**
+   * Callback function to close modal.
+   *
+   * @function {Close}
+   * @returns {void}
+   */
+
+  /**
    * Method to build args for report updation and emit it.
    *
-   * @oaram close {() => void}
+   * @param {Close} close
    *
    * @return void
    */
@@ -439,20 +499,43 @@ export default class MutateOwnerReportModal extends Vue {
         label: this.reportLabel,
         shareHistoricalData: this.shareHistoricalData,
         reportKeys: this.reportKeys,
-        isRestricted: this.isRestricted,
-        source: this.reportSource
-      }
-
-      if (this.reportSource === ReportSource.SourceSelected) {
-        updatedReportArgs['sourcedRepositories'] = this.sourcedRepositories
+        isRestricted: this.isRestricted
       }
 
       if (this.isRestricted && this.password.length) {
         updatedReportArgs['password'] = this.password
       }
 
+      if (this.reportSourceOld !== this.reportSource) {
+        updatedReportArgs['source'] = this.reportSource
+      }
+
+      const addRepoArgs: UpdatePublicReportSourcedRepositoriesInput = {
+        reportId: this.reportIdOld,
+        action: UpdateAction.Add,
+        repositoryIds: this.reportSource === ReportSource.SourceSelected ? this.repoListToAdd : []
+      }
+
+      const removeRepoArgs: UpdatePublicReportSourcedRepositoriesInput = {
+        reportId: this.reportIdOld,
+        action: UpdateAction.Remove,
+        repositoryIds:
+          this.reportSource === ReportSource.SourceSelected ? this.repoListToRemove : []
+      }
+
+      // In case report source is being turnt to SourceSelected, sourcedRepositories field is required
+      // Moreover, in such a case, the user would be choosing repos for the first time for the respective report,
+      // so there are no reports to be removed per se.
+      if (
+        this.reportSourceOld === ReportSource.SourceAll &&
+        this.reportSource === ReportSource.SourceSelected
+      ) {
+        updatedReportArgs['sourcedRepositories'] = this.repoListToAdd
+        addRepoArgs['repositoryIds'] = []
+      }
+
       if (Object.keys(updatedReportArgs).length) {
-        this.$emit('edit-report', updatedReportArgs, close)
+        this.$emit('edit-report', updatedReportArgs, addRepoArgs, removeRepoArgs, close)
       }
     }
   }
@@ -484,7 +567,7 @@ export default class MutateOwnerReportModal extends Vue {
   }
 
   /**
-   * Validate arguments for create report mutation
+   * Validate arguments for create/edit report mutation
    *
    * @return boolean
    */
@@ -505,7 +588,7 @@ export default class MutateOwnerReportModal extends Vue {
       return false
     }
 
-    if (this.reportSource === ReportSource.SourceSelected && this.sourcedRepositories.length < 1) {
+    if (this.reportSource === ReportSource.SourceSelected && this.sourceRepoCount < 1) {
       this.$toast.danger('Please select at least one repository, or select all repositories.')
       return false
     }

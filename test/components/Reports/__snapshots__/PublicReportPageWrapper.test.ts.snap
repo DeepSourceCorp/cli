@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"issue-distribution"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"ENTERPRISE","reportKey":"issue-distribution"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
@@ -43,7 +43,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 </main>"
 `;
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"owasp-top-10"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"ENTERPRISE","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
@@ -96,7 +96,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 </main>"
 `;
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"ENTERPRISE","reportKey":"sans-top-25"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"ENTERPRISE","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>
@@ -146,7 +146,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 </main>"
 `;
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"issue-distribution"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"OWNER","reportKey":"issue-distribution"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
@@ -189,7 +189,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 </main>"
 `;
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"owasp-top-10"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"OWNER","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
@@ -242,7 +242,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 </main>"
 `;
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"OWNER","reportKey":"sans-top-25"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"OWNER","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>
@@ -292,7 +292,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 </main>"
 `;
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"issue-distribution"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"REPOSITORY","reportKey":"issue-distribution"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
@@ -335,7 +335,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 </main>"
 `;
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"owasp-top-10"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"REPOSITORY","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
@@ -388,7 +388,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 </main>"
 `;
 
-exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","repositoryList":[{"id":"UmVwb3NpdG9yeTp6dmp2eXo=","name":"asgard","isPrivate":true}],"level":"REPOSITORY","reportKey":"sans-top-25"} 1`] = `
+exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"REPOSITORY","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>

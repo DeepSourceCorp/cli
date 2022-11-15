@@ -17,13 +17,14 @@
     <div v-if="publicReport && publicReport.owner" class="flex gap-14">
       <public-report-sidebar
         :reports="publicReport.reportKeys"
-        :repository-list="repositoryList"
         :owner-logo="publicReport.owner.avatar"
         :owner-login="publicReport.owner.login"
+        :token="token"
+        :report-id="$route.params.reportId"
       />
 
       <div
-        class="w-screen px-4 pb-10 pt-6 lg:pt-26 text-sm border-t md:px-6 md:text-base border-ink-300 md:border-t-0"
+        class="px-4 pb-10 pt-6 lg:pt-26 text-sm border-t md:px-6 md:text-base border-ink-300 md:border-t-0"
       >
         <nuxt-child
           :share-historical-data="publicReport.shareHistoricalData"
@@ -31,7 +32,6 @@
           :owner-login="publicReport.owner.login"
           :created-at="formatDate(parseISODate(publicReport.createdAt))"
           :token="token"
-          :repository-list="repositoryList"
         ></nuxt-child>
 
         <section
@@ -133,7 +133,7 @@ import { Context } from '@nuxt/types'
 import gql from 'graphql-tag'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
-import { PublicReport, ReportLevel, Repository } from '~/types/types'
+import { PublicReport } from '~/types/types'
 import { formatDate, parseISODate } from '~/utils/date'
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import { PublicReportErrors } from '~/types/reportTypes'
@@ -153,6 +153,7 @@ import { PublicReportErrors } from '~/types/reportTypes'
     formatDate,
     parseISODate
   },
+  scrollToTop: true,
   /**
    * The middleware has a twofold purpose:
    * 1. Query the reportKeys of the public report, find the first report in the list
@@ -204,7 +205,6 @@ import { PublicReportErrors } from '~/types/reportTypes'
 })
 export default class PublicReportPageParent extends mixins(PublicReportMixin) {
   public publicReport: PublicReport = {} as PublicReport
-  public repositoryList: Array<Repository> = []
 
   public isPasswordHidden = true
   public password = ''
@@ -224,14 +224,6 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
     const { reportId } = this.$route.params
 
     this.publicReport = (await this.fetchPublicReportBase(reportId, this.token)) as PublicReport
-
-    if (this.publicReport?.repository?.id) {
-      this.repositoryList.push(this.publicReport.repository)
-    }
-
-    if (this.publicReport?.sourcedRepositories?.length) {
-      this.repositoryList = this.publicReport.sourcedRepositories as Array<Repository>
-    }
 
     // Redirection specifically for protected reports
     // For non-protected reports, redirection happens in middleware above

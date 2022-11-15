@@ -18,13 +18,13 @@
     <div v-show="showCtaAndControls" class="flex gap-x-2 justify-between mb-5 mt-1">
       <public-report-sort v-model="sort" @updateSortFilter="handleSortChange" />
       <z-input
-        v-model="q"
+        :value="q"
         :show-border="false"
         size="small"
         icon="search"
         background-color="ink-300"
-        placeholder="Search by report label"
-        @debounceInput="fetchPublicReportList"
+        placeholder="Search by report label..."
+        @debounceInput="(val) => handlePublicReportSearch(val)"
       >
         <template slot="left">
           <z-icon icon="search" size="small" class="ml-1.5" />
@@ -67,10 +67,11 @@
       </template>
       <template #subtitle> Please try changing your search query. </template>
     </lazy-empty-state>
+
     <lazy-empty-state
       v-else
       title="No public reports found"
-      subtitle="No public reports for this repository have been created yet."
+      subtitle="No public report has been created for this team yet."
       class="border border-dashed rounded-lg border-ink-200 py-20"
     >
       <template v-if="hasEditAccess" slot="action">
@@ -95,19 +96,23 @@
     </div>
 
     <portal to="modal">
-      <mutate-report-modal
+      <mutate-owner-report-modal
         v-if="isMutateReportModalOpen"
         :edit-mode="editMode"
+        :owner-login="$route.params.owner"
+        :vcs-provider="$route.params.provider"
         :level="ReportLevel.Owner"
         :is-restricted-old="reportToEdit.isRestricted"
         :report-keys-old="reportToEdit.reportKeys"
         :share-historical-data-old="reportToEdit.shareHistoricalData"
         :report-label-old="reportToEdit.label"
         :report-id-old="reportToEdit.reportId"
+        :report-source-old="reportToEdit.source"
+        :source-repo-count-old="sourceRepoCountOld"
         :save-loading="reportSaveLoading"
         @close="triggerModalClose"
         @create-report="createPublicReport"
-        @edit-report="updatePublicReport"
+        @edit-report="updateOwnerPublicReport"
       />
 
       <report-delete-confirm
@@ -124,10 +129,19 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZInput, ZButton, ZPagination, ZConfirm } from '@deepsourcelabs/zeal'
+
 import PublicReportMixin from '~/mixins/publicReportMixin'
-import { ReportLevel } from '~/types/types'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+
+import {
+  ReportLevel,
+  UpdatePublicReportInput,
+  UpdatePublicReportSourcedRepositoriesInput
+} from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'
+
+import { updatePublicReport } from '@/apollo/mutations/reports/updatePublicReport.gql'
+import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 /**
  * Public Report page at team settings level
@@ -153,16 +167,56 @@ export default class OwnerPublicReports extends mixins(PublicReportMixin, RoleAc
     await this.fetchPublicReportList()
   }
 
-  get sourcedRepositoriesOld() {
-    if (this.reportToEdit.sourcedRepositories?.length) {
-      return this.reportToEdit.sourcedRepositories.map((repo) => repo?.id)
-    }
+  /**
+   * Callback function for the `updateOwnerPublicReport` method
+   *
+   * @callback Callback
+   * @returns {void}
+   */
 
-    return []
+  /**
+   * Mutation to update a public report
+   *
+   * @param {UpdatePublicReportInput} editReportArgs
+   * @param {Callback} callback
+   * @returns {Promise<void>}
+   */
+  async updateOwnerPublicReport(
+    editReportArgs: UpdatePublicReportInput,
+    addReposArgs: UpdatePublicReportSourcedRepositoriesInput,
+    removeReposArgs: UpdatePublicReportSourcedRepositoriesInput,
+    callback?: () => void
+  ): Promise<void> {
+    this.reportSaveLoading = true
+
+    try {
+      const response = (await this.$applyGraphqlMutation(updatePublicReport, {
+        updateInput: editReportArgs,
+        addReposInput: addReposArgs,
+        removeReposInput: removeReposArgs
+      })) as GraphqlMutationResponse
+
+      const updatedReport = response.data?.updatePublicReport
+
+      if (updatedReport && updatedReport.publicReport?.reportId) {
+        callback?.()
+        const label = updatedReport.publicReport.label ?? ''
+        this.$toast.success(`${label} has been updated.`)
+        await this.fetchPublicReportList()
+      }
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'Unable to update the report. Please contact support.')
+    } finally {
+      this.reportSaveLoading = false
+    }
   }
 
   get hasEditAccess(): boolean {
     return this.$gateKeeper.team(TeamPerms.UPDATE_PUBLIC_REPORTS, this.teamPerms.permission)
+  }
+
+  get sourceRepoCountOld(): number {
+    return this.reportToEdit.sourcedRepositories?.totalCount ?? 0
   }
 }
 </script>

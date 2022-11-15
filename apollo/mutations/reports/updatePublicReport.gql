@@ -1,5 +1,9 @@
-mutation updatePublicReport($input: UpdatePublicReportInput!) {
-  updatePublicReport(input: $input) {
+mutation updatePublicReport(
+  $updateInput: UpdatePublicReportInput!
+  $addReposInput: UpdatePublicReportSourcedRepositoriesInput!
+  $removeReposInput: UpdatePublicReportSourcedRepositoriesInput!
+) {
+  updatePublicReport(input: $updateInput) {
     publicReport {
       id
       reportId
@@ -7,6 +11,14 @@ mutation updatePublicReport($input: UpdatePublicReportInput!) {
       reportKeys
       isRestricted
       shareHistoricalData
+      source
     }
+  }
+
+  addRepos: updatePublicReportSourcedRepositories(input: $addReposInput) {
+    ok
+  }
+  removeRepos: updatePublicReportSourcedRepositories(input: $removeReposInput) {
+    ok
   }
 }

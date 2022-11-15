@@ -55,8 +55,7 @@ const EMPTY_REPORT: ReportToEditT = {
   reportKeys: [],
   shareHistoricalData: false,
   label: '',
-  source: ReportSource.SourceAll,
-  sourcedRepositories: []
+  source: ReportSource.SourceAll
 }
 
 /**
@@ -71,7 +70,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
   public sort: ReportSortT | '' = ''
   public reportsListLoading = false
   public reportsList: Array<PublicReport> = []
-  public perPageCount = 10
+  public perPageCount = 20
   public editMode = false
   public reportSaveLoading = false
   public reportToEdit: ReportToEditT = EMPTY_REPORT
@@ -100,6 +99,19 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
    * @returns {Promise<void>}
    */
   public async handleSortChange(): Promise<void> {
+    this.currentPage = 1
+    await this.fetchPublicReportList(false)
+  }
+
+  /**
+   * Handler method to search a public report
+   *
+   * @param query string
+   *
+   * @returns {Promise<void>}
+   */
+  public async handlePublicReportSearch(query: string): Promise<void> {
+    this.q = query
     this.currentPage = 1
     await this.fetchPublicReportList(false)
   }
@@ -176,7 +188,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
    * @param refetch boolean
    * @returns {Promise<void>}
    */
-  public async fetchPublicReportList(refetch = true, query?: string): Promise<void> {
+  public async fetchPublicReportList(refetch = true): Promise<void> {
     const ownerPublicReportsRoute = 'provider-owner-reports-public-reports'
     const repoPublicReportsRoute = 'provider-owner-repo-reports-public-reports'
 
@@ -190,7 +202,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
     const first = this.perPageCount
     const offset = this.queryOffset
     const sort = this.sort
-    const searchQuery = query ?? this.q
+    const searchQuery = this.q
 
     if (this.$route.name === ownerPublicReportsRoute) {
       this.reportsListLoading = true

@@ -4,7 +4,6 @@
     :owner-login="ownerLogin"
     :created-at="createdAt"
     :report-key="ReportPageT.ISSUES_PREVENTED"
-    :repository-list="repositoryList"
   >
     <section v-if="report" class="space-y-4">
       <chart-container :chart-present="shareHistoricalData">
@@ -89,7 +88,7 @@ import { ZChart } from '@deepsourcelabs/zeal'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
 
-import { ReportLevel, Repository } from '~/types/types'
+import { ReportLevel } from '~/types/types'
 import { IssueDistributionT, ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { shortenLargeNumber } from '~/utils/string'
 import { getColorShades } from '~/utils/ui'
@@ -106,7 +105,8 @@ const BASE_COLOR = '#2eb78b'
   },
   methods: {
     shortenLargeNumber
-  }
+  },
+  scrollToTop: true
 })
 export default class PublicReportIssuesPrevented extends mixins(
   PublicReportMixin,
@@ -126,9 +126,6 @@ export default class PublicReportIssuesPrevented extends mixins(
 
   @Prop()
   token: string
-
-  @Prop()
-  repositoryList: Array<Repository>
 
   readonly ReportPageT = ReportPageT
   readonly IssueDistributionT = IssueDistributionT

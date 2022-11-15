@@ -38,6 +38,7 @@
       "RepositoryMetricValue",
       "Run",
       "SilenceRule",
+      "SourceableRepository",
       "Team",
       "TeamBasePermissionSet",
       "TeamMember",

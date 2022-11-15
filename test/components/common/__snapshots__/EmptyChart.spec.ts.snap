@@ -5,7 +5,7 @@ exports[`renders EmptyChart with stacked bars: default render 1`] = `
   <div class=\\"absolute inset-0 z-10 grid mx-auto rounded-md place-content-center\\">
     <p class=\\"text-sm text-center text-vanilla-400\\">Not enough data to show a trend. Please come back later.</p>
   </div>
-  <zchart-stub datasets=\\"[object Object]\\" labels=\\"Label 0,Label 1,Label 2,Label 3,Label 4,Label 5,Label 6,Label 7,Label 8,Label 9,Label 10,Label 11,Label 12,Label 13,Label 14\\" type=\\"axis-mixed\\" height=\\"300\\" colors=\\"#1035ad\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"mx-auto no-filter:opacity-10 blur-chart opacity-60\\"></zchart-stub>
+  <zchart-stub datasets=\\"[object Object]\\" labels=\\"Label 0,Label 1,Label 2,Label 3,Label 4,Label 5,Label 6,Label 7,Label 8,Label 9,Label 10,Label 11,Label 12,Label 13,Label 14\\" type=\\"axis-mixed\\" height=\\"300\\" colors=\\"#1035ad\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"mx-auto no-filter:opacity-10 blur-chart opacity-10\\"></zchart-stub>
 </div>"
 `;
 
@@ -14,6 +14,6 @@ exports[`renders EmptyChart without any props: default render 1`] = `
   <div class=\\"absolute inset-0 z-10 grid mx-auto rounded-md place-content-center\\">
     <p class=\\"text-sm text-center text-vanilla-400\\">Not enough data to show a trend. Please come back later.</p>
   </div>
-  <zchart-stub datasets=\\"[object Object]\\" labels=\\"Label 0,Label 1,Label 2,Label 3,Label 4,Label 5,Label 6,Label 7,Label 8,Label 9,Label 10,Label 11,Label 12,Label 13,Label 14\\" type=\\"axis-mixed\\" height=\\"300\\" colors=\\"robin,cherry,honey,juniper\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"mx-auto no-filter:opacity-10 blur-chart opacity-60\\"></zchart-stub>
+  <zchart-stub datasets=\\"[object Object]\\" labels=\\"Label 0,Label 1,Label 2,Label 3,Label 4,Label 5,Label 6,Label 7,Label 8,Label 9,Label 10,Label 11,Label 12,Label 13,Label 14\\" type=\\"axis-mixed\\" height=\\"300\\" colors=\\"robin,cherry,honey,juniper\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"mx-auto no-filter:opacity-10 blur-chart opacity-10\\"></zchart-stub>
 </div>"
 `;

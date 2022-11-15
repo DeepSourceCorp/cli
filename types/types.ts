@@ -2659,6 +2659,7 @@ export type Mutation = {
   uninstallIntegration?: Maybe<UninstallIntegrationPayload>;
   createPublicReport?: Maybe<CreatePublicReportPayload>;
   deletePublicReport?: Maybe<DeletePublicReportPayload>;
+  updatePublicReportSourcedRepositories?: Maybe<UpdatePublicReportSourcedRepositoriesPayload>;
   updatePublicReport?: Maybe<UpdatePublicReportPayload>;
   verifyPasswordForPublicReport?: Maybe<VerifyPasswordForPublicReportPayload>;
 };
@@ -3225,6 +3226,11 @@ export type MutationDeletePublicReportArgs = {
 };
 
 
+export type MutationUpdatePublicReportSourcedRepositoriesArgs = {
+  input: UpdatePublicReportSourcedRepositoriesInput;
+};
+
+
 export type MutationUpdatePublicReportArgs = {
   input: UpdatePublicReportInput;
 };
@@ -3579,7 +3585,7 @@ export type PublicReport = MaskPrimaryKeyNode & {
   shareHistoricalData: Scalars['Boolean'];
   reportKeys?: Maybe<Array<Maybe<Scalars['String']>>>;
   source?: Maybe<ReportSource>;
-  sourcedRepositories?: Maybe<Array<Maybe<Repository>>>;
+  sourcedRepositories?: Maybe<RepositoryConnection>;
   owner?: Maybe<Owner>;
   repository?: Maybe<Repository>;
   views: Scalars['Int'];
@@ -3590,6 +3596,20 @@ export type PublicReport = MaskPrimaryKeyNode & {
   issueDistributionByAnalyzer?: Maybe<Array<Maybe<IssueDistribution>>>;
   issueDistributionByCategory?: Maybe<Array<Maybe<IssueDistribution>>>;
   repositoriesCoverageReport?: Maybe<RepositoryCoverageReportItemConnection>;
+};
+
+
+export type PublicReportSourcedRepositoriesArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  name_Icontains?: Maybe<Scalars['String']>;
+  vcsProvider?: Maybe<Scalars['String']>;
+  isPrivate?: Maybe<Scalars['Boolean']>;
+  isActivated?: Maybe<Scalars['Boolean']>;
+  errorCode?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3685,6 +3705,7 @@ export type Query = {
   issueDistributionByAnalyzer?: Maybe<Array<Maybe<IssueDistribution>>>;
   issueDistributionByCategory?: Maybe<Array<Maybe<IssueDistribution>>>;
   publicReport?: Maybe<PublicReport>;
+  publicReportSourceableRepositories?: Maybe<SourceableRepositoryConnection>;
   context?: Maybe<Context>;
   node?: Maybe<MaskPrimaryKeyNode>;
 };
@@ -3994,6 +4015,19 @@ export type QueryIssueDistributionByCategoryArgs = {
 export type QueryPublicReportArgs = {
   reportId?: Maybe<Scalars['String']>;
   token?: Maybe<Scalars['String']>;
+};
+
+
+export type QueryPublicReportSourceableRepositoriesArgs = {
+  ownerLogin: Scalars['String'];
+  vcsProvider: VcsProviderChoices;
+  q?: Maybe<Scalars['String']>;
+  publicReportId?: Maybe<Scalars['ID']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 
@@ -4930,6 +4964,27 @@ export type SocialType = {
   modified: Scalars['DateTime'];
 };
 
+export type SourceableRepository = MaskPrimaryKeyNode & {
+  __typename?: 'SourceableRepository';
+  name: Scalars['String'];
+  id: Scalars['ID'];
+  ownerLogin: Scalars['String'];
+  isSourced: Scalars['Boolean'];
+};
+
+export type SourceableRepositoryConnection = {
+  __typename?: 'SourceableRepositoryConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<SourceableRepositoryEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type SourceableRepositoryEdge = {
+  __typename?: 'SourceableRepositoryEdge';
+  node?: Maybe<SourceableRepository>;
+  cursor: Scalars['String'];
+};
+
 export enum StatusOptions {
   Published = 'PUBLISHED',
   Draft = 'DRAFT',
@@ -5591,6 +5646,11 @@ export type UpdateAccessTokenPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export enum UpdateAction {
+  Add = 'ADD',
+  Remove = 'REMOVE'
+}
+
 export type UpdateBillingInfoInput = {
   id?: Maybe<Scalars['ID']>;
   ownerId?: Maybe<Scalars['Int']>;
@@ -5783,6 +5843,19 @@ export type UpdatePublicReportInput = {
 export type UpdatePublicReportPayload = {
   __typename?: 'UpdatePublicReportPayload';
   publicReport?: Maybe<PublicReport>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdatePublicReportSourcedRepositoriesInput = {
+  reportId: Scalars['UUID'];
+  action: UpdateAction;
+  repositoryIds?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdatePublicReportSourcedRepositoriesPayload = {
+  __typename?: 'UpdatePublicReportSourcedRepositoriesPayload';
+  ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -7540,7 +7613,9 @@ export type DeletePublicReportMutation = (
 );
 
 export type UpdatePublicReportMutationVariables = Exact<{
-  input: UpdatePublicReportInput;
+  updateInput: UpdatePublicReportInput;
+  addReposInput: UpdatePublicReportSourcedRepositoriesInput;
+  removeReposInput: UpdatePublicReportSourcedRepositoriesInput;
 }>;
 
 
@@ -7550,8 +7625,14 @@ export type UpdatePublicReportMutation = (
     { __typename?: 'UpdatePublicReportPayload' }
     & { publicReport?: Maybe<(
       { __typename?: 'PublicReport' }
-      & Pick<PublicReport, 'id' | 'reportId' | 'label' | 'reportKeys' | 'isRestricted' | 'shareHistoricalData'>
+      & Pick<PublicReport, 'id' | 'reportId' | 'label' | 'reportKeys' | 'isRestricted' | 'shareHistoricalData' | 'source'>
     )> }
+  )>, addRepos?: Maybe<(
+    { __typename?: 'UpdatePublicReportSourcedRepositoriesPayload' }
+    & Pick<UpdatePublicReportSourcedRepositoriesPayload, 'ok'>
+  )>, removeRepos?: Maybe<(
+    { __typename?: 'UpdatePublicReportSourcedRepositoriesPayload' }
+    & Pick<UpdatePublicReportSourcedRepositoriesPayload, 'ok'>
   )> }
 );
 
@@ -9046,10 +9127,10 @@ export type PublicReportListOwnerQuery = (
         & { node?: Maybe<(
           { __typename?: 'PublicReport' }
           & Pick<PublicReport, 'reportId' | 'label' | 'views' | 'createdAt' | 'isRestricted' | 'shareHistoricalData' | 'reportKeys' | 'source'>
-          & { sourcedRepositories?: Maybe<Array<Maybe<(
-            { __typename?: 'Repository' }
-            & Pick<Repository, 'id' | 'name'>
-          )>>> }
+          & { sourcedRepositories?: Maybe<(
+            { __typename?: 'RepositoryConnection' }
+            & Pick<RepositoryConnection, 'totalCount'>
+          )> }
         )> }
       )>> }
     )> }
@@ -9455,10 +9536,7 @@ export type PublicReportBaseQuery = (
   & { publicReport?: Maybe<(
     { __typename?: 'PublicReport' }
     & Pick<PublicReport, 'id' | 'reportId' | 'label' | 'createdAt' | 'views' | 'isRestricted' | 'reportKeys' | 'source' | 'level' | 'shareHistoricalData'>
-    & { sourcedRepositories?: Maybe<Array<Maybe<(
-      { __typename?: 'Repository' }
-      & Pick<Repository, 'id' | 'name' | 'isPrivate'>
-    )>>>, owner?: Maybe<(
+    & { owner?: Maybe<(
       { __typename?: 'Owner' }
       & Pick<Owner, 'id' | 'login' | 'avatar'>
     )>, repository?: Maybe<(
@@ -9608,6 +9686,60 @@ export type PublicReportRecentStatsQuery = (
   )> }
 );
 
+export type PublicReportRepoListQueryVariables = Exact<{
+  reportId: Scalars['String'];
+  token?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  offset?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type PublicReportRepoListQuery = (
+  { __typename?: 'Query' }
+  & { publicReport?: Maybe<(
+    { __typename?: 'PublicReport' }
+    & Pick<PublicReport, 'id'>
+    & { sourcedRepositories?: Maybe<(
+      { __typename?: 'RepositoryConnection' }
+      & Pick<RepositoryConnection, 'totalCount'>
+      & { edges: Array<Maybe<(
+        { __typename?: 'RepositoryEdge' }
+        & { node?: Maybe<(
+          { __typename?: 'Repository' }
+          & Pick<Repository, 'id' | 'name' | 'isPrivate'>
+        )> }
+      )>> }
+    )> }
+  )> }
+);
+
+export type PublicReportSourceableRepositoriesQueryVariables = Exact<{
+  ownerLogin: Scalars['String'];
+  vcsProvider: VcsProviderChoices;
+  publicReportId?: Maybe<Scalars['ID']>;
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  offset?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+}>;
+
+
+export type PublicReportSourceableRepositoriesQuery = (
+  { __typename?: 'Query' }
+  & { publicReportSourceableRepositories?: Maybe<(
+    { __typename?: 'SourceableRepositoryConnection' }
+    & Pick<SourceableRepositoryConnection, 'totalCount'>
+    & { edges: Array<Maybe<(
+      { __typename?: 'SourceableRepositoryEdge' }
+      & { node?: Maybe<(
+        { __typename?: 'SourceableRepository' }
+        & Pick<SourceableRepository, 'id' | 'name' | 'ownerLogin' | 'isSourced'>
+      )> }
+    )>> }
+  )> }
+);
+
 export type RecentStatsQueryVariables = Exact<{
   level: ReportLevel;
   objectId: Scalars['ID'];
@@ -9624,36 +9756,6 @@ export type RecentStatsQuery = (
       { __typename?: 'RecentStat' }
       & Pick<RecentStat, 'statLabel' | 'statValue' | 'trendValue' | 'trendDirection' | 'trendPositive'>
     )>>> }
-  )> }
-);
-
-export type RepoListForReportsQueryVariables = Exact<{
-  login: Scalars['String'];
-  provider: VcsProviderChoices;
-  isActivated?: Maybe<Scalars['Boolean']>;
-  first?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  offset?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-}>;
-
-
-export type RepoListForReportsQuery = (
-  { __typename?: 'Query' }
-  & { owner?: Maybe<(
-    { __typename?: 'Owner' }
-    & Pick<Owner, 'id'>
-    & { repositories?: Maybe<(
-      { __typename?: 'RepositoryConnection' }
-      & Pick<RepositoryConnection, 'totalCount'>
-      & { edges: Array<Maybe<(
-        { __typename?: 'RepositoryEdge' }
-        & { node?: Maybe<(
-          { __typename?: 'Repository' }
-          & Pick<Repository, 'id' | 'name' | 'ownerLogin'>
-        )> }
-      )>> }
-    )> }
   )> }
 );
 
@@ -9882,7 +9984,7 @@ export type Unnamed_122_Query = (
   & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepositoryIdQueryVariables = Exact<{
@@ -9930,7 +10032,7 @@ export type Unnamed_123_Query = (
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'descriptionRendered' | 'issueType' | 'title' | 'shortcode' | 'firstSeen' | 'lastSeen' | 'modifiedAt' | 'occurrenceCount' | 'analyzerName' | 'analyzerShortcode' | 'analyzerLogo' | 'autofixAvailable' | 'newVcsIssueUrl' | 'raisedInFiles' | 'tags' | 'severity'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type Unnamed_124_QueryVariables = Exact<{
@@ -9961,7 +10063,7 @@ export type Unnamed_124_Query = (
         )> }
       )>> }
     ) }
-  ) | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepositoryIssueListQueryVariables = Exact<{
@@ -10093,7 +10195,7 @@ export type Unnamed_126_Query = (
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'raisedInFiles'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type Unnamed_127_QueryVariables = Exact<{
@@ -11086,7 +11188,7 @@ export type Unnamed_146_Query = (
   & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepoStatusPollQueryQueryVariables = Exact<{

@@ -1804,6 +1804,7 @@ type Mutation {
   uninstallIntegration(input: UninstallIntegrationInput!): UninstallIntegrationPayload
   createPublicReport(input: CreatePublicReportInput!): CreatePublicReportPayload
   deletePublicReport(input: DeletePublicReportInput!): DeletePublicReportPayload
+  updatePublicReportSourcedRepositories(input: UpdatePublicReportSourcedRepositoriesInput!): UpdatePublicReportSourcedRepositoriesPayload
   updatePublicReport(input: UpdatePublicReportInput!): UpdatePublicReportPayload
   verifyPasswordForPublicReport(input: VerifyPasswordForPublicReportInput!): VerifyPasswordForPublicReportPayload
 }
@@ -1980,7 +1981,7 @@ type PublicReport implements MaskPrimaryKeyNode {
   shareHistoricalData: Boolean!
   reportKeys: [String]
   source: ReportSource
-  sourcedRepositories: [Repository]
+  sourcedRepositories(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection
   owner: Owner
   repository: Repository
   views: Int!
@@ -2047,6 +2048,7 @@ type Query {
   issueDistributionByAnalyzer(level: ReportLevel, reportKey: String!, objectId: ID): [IssueDistribution]
   issueDistributionByCategory(level: ReportLevel, reportKey: String!, objectId: ID): [IssueDistribution]
   publicReport(reportId: String, token: String): PublicReport
+  publicReportSourceableRepositories(ownerLogin: String!, vcsProvider: VCSProviderChoices!, q: String, publicReportId: ID, offset: Int, before: String, after: String, first: Int, last: Int): SourceableRepositoryConnection
   context: Context
   node(id: ID!): MaskPrimaryKeyNode
 }
@@ -2595,6 +2597,24 @@ type SocialType {
   modified: DateTime!
 }
 
+type SourceableRepository implements MaskPrimaryKeyNode {
+  name: String!
+  id: ID!
+  ownerLogin: String!
+  isSourced: Boolean!
+}
+
+type SourceableRepositoryConnection {
+  pageInfo: PageInfo!
+  edges: [SourceableRepositoryEdge]!
+  totalCount: Int
+}
+
+type SourceableRepositoryEdge {
+  node: SourceableRepository
+  cursor: String!
+}
+
 enum StatusOptions {
   PUBLISHED
   DRAFT
@@ -3112,6 +3132,11 @@ type UpdateAccessTokenPayload {
   clientMutationId: String
 }
 
+enum UpdateAction {
+  ADD
+  REMOVE
+}
+
 input UpdateBillingInfoInput {
   id: ID
   ownerId: Int
@@ -3290,6 +3315,18 @@ input UpdatePublicReportInput {
 
 type UpdatePublicReportPayload {
   publicReport: PublicReport
+  clientMutationId: String
+}
+
+input UpdatePublicReportSourcedRepositoriesInput {
+  reportId: UUID!
+  action: UpdateAction!
+  repositoryIds: [ID]
+  clientMutationId: String
+}
+
+type UpdatePublicReportSourcedRepositoriesPayload {
+  ok: Boolean
   clientMutationId: String
 }
 

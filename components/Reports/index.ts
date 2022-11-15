@@ -21,6 +21,7 @@ import CodeCoverageTableLoading from './CodeCoverageTableLoading.vue'
 import DistributionSwitch from './DistributionSwitch.vue'
 import ComplianceStatus from './ComplianceStatus.vue'
 import SeverityCounts from './SeverityCounts.vue'
+import PublicReportRepoSection from './PublicReportRepoSection.vue'
 
 export {
   DateRangePicker,
@@ -45,5 +46,6 @@ export {
   CodeCoverageTableLoading,
   DistributionSwitch,
   ComplianceStatus,
-  SeverityCounts
+  SeverityCounts,
+  PublicReportRepoSection
 }

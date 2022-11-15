@@ -9,11 +9,6 @@ query publicReportBase($reportId: String!, $token: String) {
     reportKeys
     source
     level
-    sourcedRepositories {
-      id
-      name
-      isPrivate
-    }
     shareHistoricalData
     owner {
       id

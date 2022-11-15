@@ -22,8 +22,7 @@ query publicReportListOwner(
           reportKeys
           source
           sourcedRepositories {
-            id
-            name
+            totalCount
           }
         }
       }

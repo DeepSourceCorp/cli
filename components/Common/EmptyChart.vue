@@ -11,7 +11,7 @@
       :colors="colors"
       :bar-options="{ stacked: this.chartType === 'bar' && this.stacked }"
       type="axis-mixed"
-      class="mx-auto no-filter:opacity-10 blur-chart opacity-60"
+      class="mx-auto no-filter:opacity-10 blur-chart opacity-10"
     >
     </z-chart>
   </div>

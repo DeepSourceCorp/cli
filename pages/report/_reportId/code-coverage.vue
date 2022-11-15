@@ -4,7 +4,6 @@
     :owner-login="ownerLogin"
     :created-at="createdAt"
     :report-key="ReportPageT.CODE_COVERAGE"
-    :repository-list="repositoryList"
   >
     <section class="space-y-4">
       <z-input
@@ -94,7 +93,7 @@ import { publicReportCoverageReport } from '@/apollo/queries/reports/publicRepor
 
 import { resolveNodes } from '~/utils/array'
 
-import { ReportLevel, Repository, RepositoryCoverageReportItem } from '~/types/types'
+import { ReportLevel, RepositoryCoverageReportItem } from '~/types/types'
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 import { CoverageSortT, ReportMeta, ReportPageT } from '~/types/reportTypes'
 import PublicReportMixin from '~/mixins/publicReportMixin'
@@ -114,7 +113,8 @@ export interface CodeCoverageFilters extends RouteQueryParamsT {
     ZInput,
     ZIcon,
     ZPagination
-  }
+  },
+  scrollToTop: true
 })
 export default class PublicReportCodeCoverage extends mixins(
   PaginationMixin,
@@ -135,9 +135,6 @@ export default class PublicReportCodeCoverage extends mixins(
 
   @Prop()
   token: string
-
-  @Prop()
-  repositoryList: Array<Repository>
 
   readonly ReportPageT = ReportPageT
 

@@ -7,8 +7,7 @@ import { ReportLevel } from '~/types/types'
 test('renders PublicReportPageWrapper with all prop options', () => {
   const baseProps = {
     createdAt: 'Jul 25, 2022',
-    ownerLogin: 'deepsourcelabs',
-    repositoryList: [{ id: 'UmVwb3NpdG9yeTp6dmp2eXo=', name: 'asgard', isPrivate: true }]
+    ownerLogin: 'deepsourcelabs'
   }
 
   const reportKeyOptions = generateStringProps(

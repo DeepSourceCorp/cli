@@ -1,11 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders OccurrenceTags with all prop options: {"selectedRepos":[]} 1`] = `
-"<div class=\\"p-4\\">
-  <div class=\\"min-h-96 space-y-3\\">
-    <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a repository...\\" debouncedelay=\\"350\\" icon=\\"search\\" size=\\"small\\" backgroundcolor=\\"ink-200\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"><template></template></zinput-stub>
+exports[`[[ render SelectRepositoriesForReport ]] renders SelectRepositoriesForReport with all prop options: {"ownerLogin":"deepsourcelabs","vcsProvider":"gh","editMode":false} 1`] = `
+"<div class=\\"p-4 pb-0 space-y-4\\">
+  <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"Search for a repository...\\" debouncedelay=\\"350\\" icon=\\"search\\" size=\\"small\\" backgroundcolor=\\"ink-200\\" errorbordercolor=\\"cherry\\" class=\\"w-full\\"></zinput-stub>
+  <div class=\\"h-96 overflow-y-auto pb-5\\">
+    <div class=\\"space-y-2.5\\">
+      <zcheckbox-stub label=\\"deepsourcelabs / demo-go\\" name=\\"\\" value=\\"UmVwb3NpdG9yeTp6d2phcGI=\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
+      <zcheckbox-stub label=\\"deepsourcelabs / marvin-docker\\" name=\\"\\" value=\\"UmVwb3NpdG9yeTp6dmpleXo=\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
+      <zcheckbox-stub label=\\"deepsourcelabs / asgard\\" name=\\"\\" value=\\"UmVwb3NpdG9yeTp6dmp2eXo=\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
+      <zcheckbox-stub label=\\"deepsourcelabs / demo-python\\" name=\\"\\" value=\\"UmVwb3NpdG9yeTp6ZXBqZWI=\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer hover:text-vanilla-100\\"></zcheckbox-stub>
+    </div>
     <!---->
+    <!----> <button class=\\"fixed left-1/2 bottom-19 transform -translate-x-1/2 flex gap-1 items-center text-xs font-medium leading-4 rounded-full py-1.5 px-3.5 bg-ink-200 shadow-double-dark\\" style=\\"display: none;\\">
+      <zicon-stub icon=\\"arrow-up\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\"></zicon-stub>
+      Back to top
+    </button>
   </div>
-  <!---->
 </div>"
 `;

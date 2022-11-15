@@ -6,7 +6,6 @@ import VTooltip from 'v-tooltip'
 import { PublicReportSidebar } from '~/components/Reports'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { mocksGenerator } from '~/test/mocks'
-import { cartesian, generateGenericProps } from '~/test/utils'
 
 interface PublicReportSidebarT extends Vue {
   isOpen: boolean
@@ -16,20 +15,14 @@ interface PublicReportSidebarT extends Vue {
 describe('[[ PublicReportSidebar ]]', () => {
   const baseProps = {
     ownerLogin: 'deepsourcelabs',
+    reportId: '123456',
     ownerLogo: 'https://static.deepsource.io/dashboard/images/empty-avatar.svg',
-    reports: [ReportPageT.OWASP_TOP_10, ReportPageT.SANS_TOP_25, ReportPageT.DISTRIBUTION],
-    repositoryList: [{ id: 'UmVwb3NpdG9yeTp6dmp2eXo=', name: 'asgard', isPrivate: true }]
+    reports: [ReportPageT.OWASP_TOP_10, ReportPageT.SANS_TOP_25, ReportPageT.DISTRIBUTION]
   }
 
   const mocks = mocksGenerator({
     $route: {
-      name: 'provider-owner-repo',
-      params: {
-        provider: 'gh',
-        owner: 'deepsourcelabs',
-        repo: 'bifrost',
-        reportId: '123456'
-      }
+      name: 'provider-owner-repo'
     },
     ReportMeta: ReportMeta
   })
@@ -37,53 +30,25 @@ describe('[[ PublicReportSidebar ]]', () => {
   const stubs = {
     ZTag: true,
     ZDivider: true,
+    PublicReportRepoSection: true,
     NuxtLink: RouterLinkStub
   }
 
   test('renders PublicReportSidebar with all prop options', () => {
-    const repositoryListOptions = generateGenericProps('repositoryList', [
-      [{ id: 'UmVwb3NpdG9yeTp6dmp2eXo=', name: 'asgard', isPrivate: true }],
-      [
-        {
-          id: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
-          name: 'demo-python',
-          isPrivate: false
-        },
-        {
-          id: 'UmVwb3NpdG9yeTp6dmpleXo=',
-          name: 'marvin-docker',
-          isPrivate: true
-        },
-        {
-          id: 'UmVwb3NpdG9yeTp6cXdwZ3o=',
-          name: 'bob-cli',
-          isPrivate: true
-        },
-        { id: 'UmVwb3NpdG9yeTp6dmp2eXo=', name: 'asgard', isPrivate: true }
-      ]
-    ])
-
-    cartesian(repositoryListOptions).forEach((propCombination) => {
-      const props = {
-        ...baseProps,
-        ...propCombination
+    const { html } = render(
+      PublicReportSidebar,
+      {
+        props: baseProps,
+        mocks,
+        stubs
+      },
+      (vue) => {
+        vue.use(VTooltip)
+        vue.directive('outside-click', outsideClickDirective)
       }
+    )
 
-      const { html } = render(
-        PublicReportSidebar,
-        {
-          props,
-          mocks,
-          stubs
-        },
-        (vue) => {
-          vue.use(VTooltip)
-          vue.directive('outside-click', outsideClickDirective)
-        }
-      )
-
-      expect(html()).toMatchSnapshot(JSON.stringify(props))
-    })
+    expect(html()).toMatchSnapshot(JSON.stringify(baseProps))
   })
 
   test('listens to toggle sidebar event', async () => {

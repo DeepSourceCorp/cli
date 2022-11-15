@@ -6,8 +6,12 @@
     :show-info="hasEditAccess"
   >
     <template slot="title">
-      <span class="text-base flex items-center gap-x-2 mb-2">
-        <z-icon color="vanilla-400" :icon="isRestricted ? 'file-lock' : 'file-bar-chart'" />
+      <span class="text-sm font-semibold flex items-center gap-x-2 mb-2">
+        <z-icon
+          color="vanilla-400"
+          size="x-small"
+          :icon="isRestricted ? 'file-lock' : 'file-bar-chart'"
+        />
         <span>{{ label }}</span>
       </span>
     </template>

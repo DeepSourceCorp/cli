@@ -5,7 +5,7 @@ exports[`renders PublicReportCard with all prop options: {"views":0,"hasEditAcce
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           0 views
@@ -25,7 +25,7 @@ exports[`renders PublicReportCard with all prop options: {"views":0,"hasEditAcce
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           0 views
@@ -45,7 +45,7 @@ exports[`renders PublicReportCard with all prop options: {"views":0,"hasEditAcce
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           0 views
@@ -70,7 +70,7 @@ exports[`renders PublicReportCard with all prop options: {"views":0,"hasEditAcce
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           0 views
@@ -95,7 +95,7 @@ exports[`renders PublicReportCard with all prop options: {"views":1,"hasEditAcce
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           1 view
@@ -115,7 +115,7 @@ exports[`renders PublicReportCard with all prop options: {"views":1,"hasEditAcce
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           1 view
@@ -135,7 +135,7 @@ exports[`renders PublicReportCard with all prop options: {"views":1,"hasEditAcce
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           1 view
@@ -160,7 +160,7 @@ exports[`renders PublicReportCard with all prop options: {"views":1,"hasEditAcce
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           1 view
@@ -185,7 +185,7 @@ exports[`renders PublicReportCard with all prop options: {"views":45,"hasEditAcc
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           45 views
@@ -205,7 +205,7 @@ exports[`renders PublicReportCard with all prop options: {"views":45,"hasEditAcc
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           45 views
@@ -225,7 +225,7 @@ exports[`renders PublicReportCard with all prop options: {"views":45,"hasEditAcc
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-bar-chart\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           45 views
@@ -250,7 +250,7 @@ exports[`renders PublicReportCard with all prop options: {"views":45,"hasEditAcc
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
     <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 p-3\\">
-      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-base flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
+      <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\"><span class=\\"text-sm font-semibold flex items-center gap-x-2 mb-2\\"><zicon-stub icon=\\"file-lock\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>Sample report</span></span></div>
       <p class=\\"flex items-center gap-x-4 text-sm\\">
         <metadataitem-stub icon=\\"eye\\">
           45 views
