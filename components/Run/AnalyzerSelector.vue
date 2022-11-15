@@ -5,7 +5,7 @@
       <nuxt-link
         :key="check.id"
         :to="getRoute(check.analyzer.shortcode)"
-        class="flex-shrink-0 text-sm rounded-md group hover:bg-ink-300 border-2"
+        class="flex-shrink-0 text-sm rounded-md group border-2"
         :class="{
           'border-vanilla-400 animate-pulse-border-once': flashActiveAnalyzer,
           'border-opacity-0': currentAnalyzer !== check.analyzer.shortcode || !flashActiveAnalyzer
