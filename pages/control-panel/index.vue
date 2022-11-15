@@ -6,7 +6,7 @@
           <img class="h-5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
           <div class="hidden h-5 border-l border-l-ink-200 md:block"></div>
           <span class="hidden text-sm font-medium capitalize md:block"
-            >Enterprise control panel</span
+            >Enterprise Control Panel</span
           >
         </div>
         <z-button

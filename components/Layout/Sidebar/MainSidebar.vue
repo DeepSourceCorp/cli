@@ -62,7 +62,7 @@
             icon="window"
             to="/control-panel"
           >
-            Control panel
+            Enterprise Control Panel
           </sidebar-item>
         </nav>
       </section>

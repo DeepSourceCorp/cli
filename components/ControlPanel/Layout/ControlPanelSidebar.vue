@@ -12,7 +12,7 @@
           alt="DeepSource's logo"
           class="h-7"
         />
-        <span v-if="!isCollapsed" class="text-sm capitalize">Enterprise control panel</span>
+        <span v-if="!isCollapsed" class="text-sm capitalize">Enterprise Control Panel</span>
       </nuxt-link>
     </section>
     <section class="p-2.5 space-y-2.5" :class="isCollapsed ? '' : 'overflow-y-auto'">
