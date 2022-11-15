@@ -674,10 +674,19 @@ declare module '*/deletePublicReport.gql' {
 }
     
 
-declare module '*/updatePublicReport.gql' {
+declare module '*/updateOwnerPublicReport.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const updatePublicReport: DocumentNode;
+  export const updateOwnerPublicReport: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/updateRepoPublicReport.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updateRepoPublicReport: DocumentNode;
 
   export default defaultDocument;
 }

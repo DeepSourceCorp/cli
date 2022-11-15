@@ -7612,14 +7612,14 @@ export type DeletePublicReportMutation = (
   )> }
 );
 
-export type UpdatePublicReportMutationVariables = Exact<{
+export type UpdateOwnerPublicReportMutationVariables = Exact<{
   updateInput: UpdatePublicReportInput;
   addReposInput: UpdatePublicReportSourcedRepositoriesInput;
   removeReposInput: UpdatePublicReportSourcedRepositoriesInput;
 }>;
 
 
-export type UpdatePublicReportMutation = (
+export type UpdateOwnerPublicReportMutation = (
   { __typename?: 'Mutation' }
   & { updatePublicReport?: Maybe<(
     { __typename?: 'UpdatePublicReportPayload' }
@@ -7633,6 +7633,22 @@ export type UpdatePublicReportMutation = (
   )>, removeRepos?: Maybe<(
     { __typename?: 'UpdatePublicReportSourcedRepositoriesPayload' }
     & Pick<UpdatePublicReportSourcedRepositoriesPayload, 'ok'>
+  )> }
+);
+
+export type UpdateRepoPublicReportMutationVariables = Exact<{
+  updateInput: UpdatePublicReportInput;
+}>;
+
+
+export type UpdateRepoPublicReportMutation = (
+  { __typename?: 'Mutation' }
+  & { updatePublicReport?: Maybe<(
+    { __typename?: 'UpdatePublicReportPayload' }
+    & { publicReport?: Maybe<(
+      { __typename?: 'PublicReport' }
+      & Pick<PublicReport, 'id' | 'reportId' | 'label' | 'reportKeys' | 'isRestricted' | 'shareHistoricalData'>
+    )> }
   )> }
 );
 

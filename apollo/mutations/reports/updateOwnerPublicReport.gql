@@ -1,4 +1,4 @@
-mutation updatePublicReport(
+mutation updateOwnerPublicReport(
   $updateInput: UpdatePublicReportInput!
   $addReposInput: UpdatePublicReportSourcedRepositoriesInput!
   $removeReposInput: UpdatePublicReportSourcedRepositoriesInput!

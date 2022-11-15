@@ -1,0 +1,12 @@
+mutation updateRepoPublicReport($updateInput: UpdatePublicReportInput!) {
+  updatePublicReport(input: $updateInput) {
+    publicReport {
+      id
+      reportId
+      label
+      reportKeys
+      isRestricted
+      shareHistoricalData
+    }
+  }
+}

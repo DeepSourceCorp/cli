@@ -140,7 +140,7 @@ import {
 } from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'
 
-import { updatePublicReport } from '@/apollo/mutations/reports/updatePublicReport.gql'
+import { updateOwnerPublicReport } from '@/apollo/mutations/reports/updateOwnerPublicReport.gql'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 /**
@@ -178,7 +178,9 @@ export default class OwnerPublicReports extends mixins(PublicReportMixin, RoleAc
    * Mutation to update a public report
    *
    * @param {UpdatePublicReportInput} editReportArgs
-   * @param {Callback} callback
+   * @param {UpdatePublicReportSourcedRepositoriesInput} addReposArgs
+   * @param {UpdatePublicReportSourcedRepositoriesInput} removeReposArgs
+   * @param {Callback} callback - callback function called if report is successfully updated
    * @returns {Promise<void>}
    */
   async updateOwnerPublicReport(
@@ -190,7 +192,7 @@ export default class OwnerPublicReports extends mixins(PublicReportMixin, RoleAc
     this.reportSaveLoading = true
 
     try {
-      const response = (await this.$applyGraphqlMutation(updatePublicReport, {
+      const response = (await this.$applyGraphqlMutation(updateOwnerPublicReport, {
         updateInput: editReportArgs,
         addReposInput: addReposArgs,
         removeReposInput: removeReposArgs
@@ -198,11 +200,13 @@ export default class OwnerPublicReports extends mixins(PublicReportMixin, RoleAc
 
       const updatedReport = response.data?.updatePublicReport
 
-      if (updatedReport && updatedReport.publicReport?.reportId) {
+      if (updatedReport?.publicReport?.reportId && updatedReport?.publicReport?.label) {
         callback?.()
-        const label = updatedReport.publicReport.label ?? ''
+        const { label } = updatedReport.publicReport
         this.$toast.success(`${label} has been updated.`)
         await this.fetchPublicReportList()
+      } else {
+        this.$toast.danger('Unable to update the report. Please contact support.')
       }
     } catch (e) {
       this.$logErrorAndToast(e as Error, 'Unable to update the report. Please contact support.')

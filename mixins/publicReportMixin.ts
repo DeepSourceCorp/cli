@@ -13,7 +13,6 @@ import { publicReportComplianceIssues } from '@/apollo/queries/reports/publicRep
 import { publicReportHistoricValues } from '@/apollo/queries/reports/publicReportHistoricalValues.gql'
 
 import { createPublicReport } from '@/apollo/mutations/reports/createPublicReport.gql'
-import { updatePublicReport } from '@/apollo/mutations/reports/updatePublicReport.gql'
 import { deletePublicReport } from '@/apollo/mutations/reports/deletePublicReport.gql'
 import { verifyPasswordForPublicReport } from '@/apollo/mutations/reports/verifyPasswordForPublicReport.gql'
 
@@ -31,7 +30,6 @@ import {
   RecentStat,
   Report,
   ReportSource,
-  UpdatePublicReportInput,
   VerifyPasswordForPublicReportInput
 } from '~/types/types'
 import {
@@ -589,40 +587,6 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
       }
     } finally {
       this.deleteLoading = false
-    }
-  }
-
-  /**
-   * Mutation to update a public report
-   *
-   * @param editReportArgs UpdatePublicReportInput
-   * @param callback () => void
-   *
-   * @return {Promise<void>}
-   */
-  public async updatePublicReport(
-    editReportArgs: UpdatePublicReportInput,
-    callback?: () => void
-  ): Promise<void> {
-    this.reportSaveLoading = true
-
-    try {
-      const response = (await this.$applyGraphqlMutation(updatePublicReport, {
-        input: editReportArgs
-      })) as GraphqlMutationResponse
-
-      const updatedReport = response.data?.updatePublicReport
-
-      if (updatedReport && updatedReport.publicReport?.reportId) {
-        callback?.()
-        const label = updatedReport.publicReport.label ?? ''
-        this.$toast.success(`${label} has been updated.`)
-        await this.fetchPublicReportList()
-      }
-    } catch (e) {
-      this.$logErrorAndToast(e as Error, 'Unable to update the report. Please contact support.')
-    } finally {
-      this.reportSaveLoading = false
     }
   }
 

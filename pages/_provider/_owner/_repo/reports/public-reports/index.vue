@@ -125,10 +125,15 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ZIcon, ZInput, ZButton, ZPagination, ZConfirm } from '@deepsourcelabs/zeal'
+
+import updateRepoPublicReport from '@/apollo/mutations/reports/updateRepoPublicReport.gql'
+
 import PublicReportMixin from '~/mixins/publicReportMixin'
-import { ReportLevel } from '~/types/types'
-import { RepoPerms } from '~/types/permTypes'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
+
+import { ReportLevel, UpdatePublicReportInput } from '~/types/types'
+import { RepoPerms } from '~/types/permTypes'
+import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 /**
  * Public Report page at repository settings level
@@ -156,6 +161,48 @@ export default class RepoPublicReports extends mixins(PublicReportMixin, RoleAcc
 
   get hasEditAccess(): boolean {
     return this.$gateKeeper.repo(RepoPerms.UPDATE_PUBLIC_REPORTS, this.repoPerms.permission)
+  }
+
+  /**
+   * Callback function for the `updateOwnerPublicReport` method
+   *
+   * @callback Callback
+   * @returns {void}
+   */
+
+  /**
+   * Mutation to update a public report
+   *
+   * @param {UpdatePublicReportInput} editReportArgs
+   * @param {Callback} callback - callback function called if report is successfully updated
+   * @return {Promise<void>}
+   */
+  public async updatePublicReport(
+    editReportArgs: UpdatePublicReportInput,
+    callback?: () => void
+  ): Promise<void> {
+    this.reportSaveLoading = true
+
+    try {
+      const response = (await this.$applyGraphqlMutation(updateRepoPublicReport, {
+        updateInput: editReportArgs
+      })) as GraphqlMutationResponse
+
+      const updatedReport = response.data?.updatePublicReport
+
+      if (updatedReport?.publicReport?.reportId && updatedReport?.publicReport?.label) {
+        callback?.()
+        const label = updatedReport.publicReport.label
+        this.$toast.success(`${label} has been updated.`)
+        await this.fetchPublicReportList()
+      } else {
+        this.$toast.danger('Unable to update the report. Please contact support.')
+      }
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'Unable to update the report. Please contact support.')
+    } finally {
+      this.reportSaveLoading = false
+    }
   }
 }
 </script>
