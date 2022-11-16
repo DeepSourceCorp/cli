@@ -26,7 +26,7 @@
     <template v-slot:body="{ close }">
       <z-menu-section
         title="Select dashboard view"
-        class="overflow-y-scroll hide-scroll"
+        class="overflow-y-auto max-h-102"
         :divider="true"
       >
         <z-menu-item
