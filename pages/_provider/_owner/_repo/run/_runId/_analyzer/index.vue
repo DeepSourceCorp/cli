@@ -108,7 +108,9 @@
               >
                 <div class="flex items-center gap-x-1">
                   <z-icon v-tooltip="metricIconTooltip" :color="metricIconColor" icon="bar-chart" />
-                  <p class="text-xs font-semibold tracking-wide uppercase text-slate">Metrics</p>
+                  <p class="text-xs font-semibold tracking-wide uppercase text-vanilla-400">
+                    Metrics
+                  </p>
                 </div>
 
                 <run-metric-card

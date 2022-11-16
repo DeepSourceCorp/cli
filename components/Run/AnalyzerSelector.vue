@@ -1,6 +1,6 @@
 <template>
   <nav class="flex flex-col p-2 overflow-x-auto gap-x-8 hide-scroll lg:gap-y-1">
-    <p class="p-2 pl-2.5 text-xs font-semibold tracking-wide uppercase text-slate">Checks</p>
+    <p class="p-2 pl-2.5 text-xs font-semibold tracking-wide uppercase text-vanilla-400">Checks</p>
     <template v-for="check in checks">
       <nuxt-link
         :key="check.id"
