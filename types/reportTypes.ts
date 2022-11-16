@@ -21,7 +21,8 @@ export enum ReportPageT {
   DISTRIBUTION = 'issue-distribution',
   PUBLIC_REPORTS = 'public-reports',
   CODE_COVERAGE = 'code-coverage',
-  ISSUES_PREVENTED = 'issues-prevented'
+  ISSUES_PREVENTED = 'issues-prevented',
+  ISSUES_AUTOFIXED = 'issues-autofixed'
 }
 
 export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
@@ -183,6 +184,39 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
             This report can be used by the ${companyName} team to understand the effectiveness of their code health practices,
             prioritize areas of improvement, and chart out a plan of action. Key internal and external stakeholders can also use
             the report to understand the code quality and maintainability of ${companyName}.
+        </p>`
+      }
+    }
+  },
+  [ReportPageT.ISSUES_AUTOFIXED]: {
+    title: 'Issues Autofixed',
+    description: 'Issues Autofixed by DeepSource.',
+    type: ReportType.Insight,
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+        <p>
+            DeepSource continuously scans ${smartApostrophe(
+              companyName
+            )} source code to detect code health issues and
+            provides guidance to correct them.
+        </p>
+        <p>
+            This report provides information on the number of issues in ${smartApostrophe(
+              companyName
+            )} codebase, that were
+            fixed using Autofix™. The issues fixed by DeepSource using Autofix™ include, but are not limited to, these categories: bug risks, anti-patterns,
+            style violations, performance issues, and so on.
+        </p>`,
+        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+            This report can be used by the ${companyName} team to understand the effectiveness of DeepSource in fixing their
+            code health issues and improving developer productivity. Key internal and external stakeholders can also use the
+            report to understand the effectiveness of DeepSource in improving the code quality and maintainability of
+            ${smartApostrophe(
+              companyName
+            )} codebase, along with saving significant time for developers.
         </p>`
       }
     }

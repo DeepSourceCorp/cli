@@ -49,16 +49,8 @@ export default class ComplianceReportMixin extends mixins(ReportMixin) {
     }
   }
 
-  get shouldChartBeShown(): boolean {
-    return !(this.historicalValuesLoading || this.labels.length < 2 || this.datasets.length === 0)
-  }
-
   get compliancePassed(): boolean {
     return this.report?.status === ReportStatus.Passing
-  }
-
-  get currentVal(): number {
-    return this.report?.currentValue ?? 0
   }
 
   get chartColors(): Array<string> {

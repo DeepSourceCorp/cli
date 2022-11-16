@@ -18,6 +18,14 @@ export default class DistributionReportMixin extends mixins(ReportMixin) {
   public analyzerDataset: Array<Dataset> = []
   public categoryDataset: Array<Dataset> = []
 
+  get shouldChartBeShown(): boolean {
+    return !(
+      this.historicalValuesLoading ||
+      this.labels.length < 2 ||
+      this.issueDistributionData.length === 0
+    )
+  }
+
   /**
    * Fetch and return distribution stats of a report.
    *
@@ -87,18 +95,6 @@ export default class DistributionReportMixin extends mixins(ReportMixin) {
     return this.activeFilter === IssueDistributionT.CATEGORY
       ? this.categoryDataset
       : this.analyzerDataset
-  }
-
-  get shouldChartBeShown(): boolean {
-    return !(
-      this.historicalValuesLoading ||
-      this.historicalValues?.labels.length < 2 ||
-      this.issueDistributionData.length === 0
-    )
-  }
-
-  get currentVal(): number {
-    return this.report?.currentValue ?? 0
   }
 
   /**

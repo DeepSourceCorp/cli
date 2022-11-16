@@ -151,6 +151,11 @@ export default class ReportsSidebar extends Vue {
         link: [...this.baseLink, ReportPageT.ISSUES_PREVENTED]
       },
       {
+        key: ReportPageT.ISSUES_AUTOFIXED,
+        label: ReportMeta[ReportPageT.ISSUES_AUTOFIXED].title,
+        link: [...this.baseLink, ReportPageT.ISSUES_AUTOFIXED]
+      },
+      {
         key: ReportPageT.DISTRIBUTION,
         label: ReportMeta[ReportPageT.DISTRIBUTION].title,
         link: [...this.baseLink, ReportPageT.DISTRIBUTION]
