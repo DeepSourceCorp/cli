@@ -26,7 +26,12 @@
         <div class="w-1/5 h-full rounded-md bg-ink-300 animate-pulse"></div>
       </div>
     </template>
-    <template v-else-if="false">
+    <template
+      v-else-if="
+        Array.isArray(repoWithActiveAnalysisWithAnalyzers) &&
+        repoWithActiveAnalysisWithAnalyzers.length
+      "
+    >
       <list-item
         v-for="repo in repoWithActiveAnalysisWithAnalyzers"
         :key="repo.id"
