@@ -16,7 +16,14 @@
     </z-input>
 
     <div ref="reportSelectRepositoryList" class="h-96 overflow-y-auto pb-5" @scroll="onScroll">
-      <div v-if="repoList.length" class="space-y-2.5">
+      <div v-if="repoListLoading" class="space-y-4 pt-px mt-4">
+        <div v-for="idx in 8" :key="idx" class="w-72 flex items-center gap-x-2">
+          <div class="h-4 bg-ink-200 animate-pulse w-4 rounded-sm"></div>
+          <div class="h-4 bg-ink-200 animate-pulse flex-grow rounded-sm"></div>
+        </div>
+      </div>
+
+      <div v-else-if="repoList.length" class="space-y-2.5">
         <z-checkbox
           v-for="repo in repoList"
           :model-value="selectedRepos"
@@ -28,12 +35,7 @@
           @change="handleCheckboxSelection"
         />
       </div>
-      <div v-if="repoListLoading" class="space-y-4 pt-px mt-4">
-        <div v-for="idx in 8" :key="idx" class="w-72 flex items-center gap-x-2">
-          <div class="h-4 bg-ink-200 animate-pulse w-4 rounded-sm"></div>
-          <div class="h-4 bg-ink-200 animate-pulse flex-grow rounded-sm"></div>
-        </div>
-      </div>
+
       <lazy-empty-state
         v-else-if="query.length"
         :title="`No results found for '${query}'.`"
