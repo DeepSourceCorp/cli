@@ -21,7 +21,9 @@
           v-if="report in ReportMeta"
           :key="report"
           :to="`/report/${reportId}/${report}`"
-          :class="$route.name === `report-reportId-${report}` ? 'text-vanilla-100' : 'text-slate'"
+          :class="
+            $route.name === `report-reportId-${report}` ? 'text-vanilla-100' : 'text-vanilla-400'
+          "
           class="text-sm font-medium hover:text-vanilla-100"
         >
           {{ ReportMeta[report].title }}
@@ -36,7 +38,7 @@
         v-for="sidebarLink in sidebarLinks"
         :key="sidebarLink.link"
         :href="sidebarLink.link"
-        :class="$route.hash === sidebarLink.link ? 'text-vanilla-100' : 'text-slate'"
+        :class="$route.hash === sidebarLink.link ? 'text-vanilla-100' : 'text-vanilla-400'"
         class="hover:text-vanilla-100"
       >
         — {{ sidebarLink.title }}

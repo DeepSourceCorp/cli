@@ -9,8 +9,8 @@
       :data-sets="chartData"
       :labels="mockLabels"
       :colors="colors"
-      :bar-options="{ stacked: this.chartType === 'bar' && this.stacked }"
-      type="axis-mixed"
+      :bar-options="{ stacked: this.stacked }"
+      :type="this.chartType"
       class="mx-auto no-filter:opacity-10 blur-chart opacity-10"
     >
     </z-chart>
@@ -49,11 +49,19 @@ export default class EmptyChart extends Vue {
   @Prop({ default: 'line' })
   chartType: string
 
+  @Prop({ default: () => [] })
+  chartDataset: Array<Dataset>
+
+  @Prop({ default: () => [] })
+  chartColors: Array<string>
+
   get mockLabels(): Array<string> {
     return Array.from(Array(this.length).keys()).map((idx) => `Label ${idx}`)
   }
 
   get colors(): string[] {
+    if (this.chartColors.length) return this.chartColors
+
     if (this.chartType === 'bar' && this.stacked) {
       return getColorShades(this.baseShade, this.count)
     }
@@ -62,6 +70,8 @@ export default class EmptyChart extends Vue {
   }
 
   get chartData(): Dataset[] {
+    if (this.chartDataset.length) return this.chartDataset
+
     return Array.from(Array(this.count).keys()).map((idx) => {
       return {
         name: `Random Data #${idx}`,

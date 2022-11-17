@@ -3,44 +3,58 @@
     <span class="text-xs font-semibold tracking-wider uppercase text-slate">
       {{ repositoryList.length > 1 ? 'Repositories' : 'Repository' }}
     </span>
-    <div class="flex flex-wrap gap-x-1.5 gap-y-2 text-sm text-vanilla-400 leading-6">
-      <template v-if="repoListLoading && currentPage === 1">
+    <div class="text-sm text-vanilla-400 leading-6">
+      <div v-if="repoListLoading && currentPage === 1" class="flex flex-wrap gap-x-1.5 gap-y-2">
         <div
           v-for="idx in defaultRepoVisible"
           :key="idx"
           class="animate-pulse bg-ink-200 rounded-full h-7 w-24"
         ></div>
-      </template>
+      </div>
 
-      <template v-else>
-        <div
-          v-for="repo in repositoryList.slice(0, defaultRepoVisible)"
-          :key="repo.id"
-          class="inline-flex items-center rounded-full gap-x-1 cursor py-1 px-2.5 bg-ink-200"
-        >
-          <z-icon :icon="repo.isPrivate ? 'z-lock' : 'globe'" />
-          <span
-            v-tooltip="{ content: repo.name, delay: { show: 0, hide: 100 } }"
-            class="truncate max-w-3xs"
+      <template v-else-if="Array.isArray(repositoryList) && repositoryList.length">
+        <div class="flex flex-wrap gap-x-1.5 gap-y-2">
+          <div
+            v-for="repo in repositoryList.slice(0, defaultRepoVisible)"
+            :key="repo.id"
+            class="inline-flex items-center rounded-full gap-x-1 cursor py-1 px-2.5 bg-ink-200"
           >
-            {{ repo.name }}
+            <z-icon :icon="repo.isPrivate ? 'z-lock' : 'globe'" />
+            <span
+              v-tooltip="{ content: repo.name, delay: { show: 0, hide: 100 } }"
+              class="truncate max-w-3xs"
+            >
+              {{ repo.name }}
+            </span>
+          </div>
+          <span
+            v-if="totalCount > defaultRepoVisible"
+            class="py-1 px-3 rounded-full h-7 border border-ink-200 leading-5"
+          >
+            +{{ totalCount - defaultRepoVisible }}
           </span>
         </div>
         <z-menu
-          v-if="repositoryList.length > defaultRepoVisible"
+          v-if="totalCount > defaultRepoVisible"
           width="small"
           placement="top"
-          direction="left"
+          direction="right"
           items-z-class="z-50"
         >
           <template v-slot:trigger="{ toggle, isOpen }">
-            <button
-              class="py-1 px-3 rounded-full h-7 border border-ink-200 hover:bg-ink-200"
+            <z-button
+              button-type="secondary"
+              size="small"
+              full-width="true"
+              icon="repositories"
+              color="vanilla-400"
+              icon-color="vanilla-400"
               :class="isOpen && 'bg-ink-200'"
+              class="py-1 px-3 mt-4 border border-ink-200 hover:bg-ink-200"
               @click="toggle"
             >
-              +{{ totalCount - 5 }}
-            </button>
+              Show all repositories
+            </z-button>
           </template>
           <template slot="body">
             <div
@@ -51,7 +65,7 @@
                 Repositories
               </h6>
               <div
-                v-for="repo in repositoryList.slice(defaultRepoVisible)"
+                v-for="repo in repositoryList"
                 :key="repo.id"
                 class="text-sm text-vanilla-400 flex items-center gap-x-2"
               >
@@ -79,7 +93,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZMenu } from '@deepsourcelabs/zeal'
 import publicReportRepoList from '@/apollo/queries/reports/publicReportRepoList.gql'
 import { Repository } from '~/types/types'
 import PaginationMixin from '~/mixins/paginationMixin'
@@ -92,7 +106,8 @@ import { resolveNodes } from '~/utils/array'
 @Component({
   components: {
     ZIcon,
-    ZMenu
+    ZMenu,
+    ZButton
   }
 })
 export default class PublicReportRepoSection extends mixins(PaginationMixin) {

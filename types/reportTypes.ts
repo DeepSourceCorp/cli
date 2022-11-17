@@ -22,6 +22,7 @@ export enum ReportPageT {
   PUBLIC_REPORTS = 'public-reports',
   CODE_COVERAGE = 'code-coverage',
   ISSUES_PREVENTED = 'issues-prevented',
+  CODE_HEALTH_TREND = 'code-health-trend',
   ISSUES_AUTOFIXED = 'issues-autofixed'
 }
 
@@ -97,6 +98,33 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
           SANS Top 25 recommendations in their source code. The report can also be used by key
           stakeholders within the organization and interested external stakeholders to understand the
           source code security posture of ${companyName}.
+        </p>`
+      }
+    }
+  },
+  [ReportPageT.CODE_HEALTH_TREND]: {
+    title: 'Code Health Trend',
+    description: 'Net new code health issues introduced in the code base.',
+    type: ReportType.Insight,
+    level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+        <p>
+            DeepSource continuously scans ${smartApostrophe(
+              companyName
+            )} source code to detect code health issues. This
+            report provides the current and historical snapshot of active, resolved and net new code health issues introduced to
+            ${smartApostrophe(
+              companyName
+            )} source code, limited to the repositories tracked on DeepSource.
+        </p>
+        `,
+        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+            This report can be used by the ${companyName} team to track how many new issues are being introduced to the codebase
+            and how many existing issues are being resolved. The goal of this report is to provide insights about the net change
+            in code health.
         </p>`
       }
     }
@@ -290,4 +318,31 @@ export enum CoverageSortT {
 export enum CodeCoverageT {
   LCV = 'lcv',
   BCV = 'bcv'
+}
+
+// Code health trend has 3 types of values in historical values (i.e. in its chart)
+export enum CodeHealthTrendT {
+  NET = 'net',
+  ACTIVE = 'active',
+  RESOLVED = 'resolved'
+}
+
+export type CodeHealthTrendMetaProperties = {
+  name: string
+  chartType: 'bar' | 'line'
+}
+
+export const CodeHealthTrendMeta: Record<CodeHealthTrendT, CodeHealthTrendMetaProperties> = {
+  [CodeHealthTrendT.ACTIVE]: {
+    name: 'ACTIVE ISSUES',
+    chartType: 'bar'
+  },
+  [CodeHealthTrendT.RESOLVED]: {
+    name: 'RESOLVED ISSUES',
+    chartType: 'bar'
+  },
+  [CodeHealthTrendT.NET]: {
+    name: 'NET NEW ISSUES',
+    chartType: 'line'
+  }
 }

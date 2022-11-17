@@ -1222,6 +1222,11 @@
   resolved "https://registry.yarnpkg.com/@csstools/convert-colors/-/convert-colors-1.4.0.tgz#ad495dc41b12e75d588c6db8b9834f08fa131eb7"
   integrity sha512-5a6wqoJV/xEdbRNKVo6I4hO3VjyDq//8q2f9I6PBAvMesJHFauXDorcNCsr9RzvsZnaWi5NYCcfyqP1QeFHFbw==
 
+"@deepsource/charts@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@deepsource/charts/-/charts-1.0.0.tgz#82d4c1cef79b8bcd5d8ef69d14e55d30b9052e2d"
+  integrity sha512-5WFWUCtlsCsMLdnQUZAwVsx/lg0IBYVMtpK5eEqGjwT+caWkbCugdtql/no38dgNVusf1V5PHn9CVJalVje2fA==
+
 "@deepsource/nuxt-websocket@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@deepsource/nuxt-websocket/-/nuxt-websocket-1.0.0.tgz#4fcffc7711dc0aab319be8711df8415a4b08ed3b"
@@ -1232,11 +1237,12 @@
   resolved "https://registry.yarnpkg.com/@deepsource/shifty/-/shifty-1.0.0.tgz#ecacb5337fd0ad9022af1df602bcede23664b485"
   integrity sha512-n+xr3puUHlsh5S7eYKtnJ+ASQqzfJ/SpUPi/ADZjiGqpZZu+Q1bSqiVfpUr670ceGL64AUEpAIeVe/N9eHLQ4w==
 
-"@deepsourcelabs/zeal@^0.11.67":
-  version "0.11.67"
-  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.11.67/38f08da5913161c02b3ea56081764b24cfd684d6#38f08da5913161c02b3ea56081764b24cfd684d6"
-  integrity sha512-9TTsyGw6YpEJY95oE1OeCB7XS+R28e+I3Z2lUVczIJaAM+VtDBNKGKWL6reIZn5zcM5hNrhVZXnyR+Ji3zSy7g==
+"@deepsourcelabs/zeal@^0.12.3":
+  version "0.12.3"
+  resolved "https://npm.pkg.github.com/download/@deepsourcelabs/zeal/0.12.3/e252c8220bf4589f0163248b4f3a6ac2ea76f32c#e252c8220bf4589f0163248b4f3a6ac2ea76f32c"
+  integrity sha512-b+46ZOfAc6jISd+KanCkO0YcghfMK1A751z9sl6VcPQDV8HCgU13q+flPEhut8KPr0sEFzc2Lu1StY51tcQFvQ==
   dependencies:
+    "@deepsource/charts" "^1.0.0"
     "@tailwindcss/line-clamp" "^0.2.2"
     "@tailwindcss/postcss7-compat" "^2.2.16"
     "@tailwindcss/typography" "^0.4.1"
@@ -1248,7 +1254,6 @@
     "@tiptap/starter-kit" "^2.0.0-beta.82"
     "@tiptap/vue-2" "^2.0.0-beta.39"
     core-js "^3.16.4"
-    frappe-charts "^2.0.0-rc20"
     postcss "^7.0.38"
     postcss-cli "7.1.2"
     tailwindcss "npm:@tailwindcss/postcss7-compat"
@@ -8512,11 +8517,6 @@ fragment-cache@^0.2.1:
   integrity sha1-QpD60n8T6Jvn8zeZxrxaCr//DRk=
   dependencies:
     map-cache "^0.2.2"
-
-frappe-charts@^2.0.0-rc20:
-  version "2.0.0-rc9"
-  resolved "https://registry.yarnpkg.com/frappe-charts/-/frappe-charts-2.0.0-rc9.tgz#95b68d50d501c655b3d19cdc24a1dde053f4ef9e"
-  integrity sha512-s3GZXKWWQi4/7QzvX7bnYX6lUqQpbQeqQf4ip/uXFQ3VvOtmSkFzrso8pQHD1D3FdDU8oTEnWoSkU7Oe2THbpw==
 
 fresh@0.5.2, fresh@^0.5.2, fresh@~0.5.2:
   version "0.5.2"

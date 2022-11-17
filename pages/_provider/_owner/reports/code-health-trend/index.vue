@@ -1,0 +1,126 @@
+<template>
+  <div class="flex flex-col gap-y-4">
+    <chart-container>
+      <template #report-stats>
+        <chart-stat
+          :value="shortenLargeNumber(report.currentValue)"
+          :loading="reportsDataLoading"
+          title="Net New Issues"
+        />
+      </template>
+
+      <template #report-control>
+        <date-range-picker
+          :selected-filter="dateRangeFilter"
+          :date-range-options="dateRangeOptions"
+          @change="fetchHistoricValuesAndSetChartData"
+        />
+      </template>
+
+      <div
+        v-show="historicalValuesLoading"
+        class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+      ></div>
+      <div v-show="!historicalValuesLoading">
+        <z-chart
+          v-if="shouldChartBeShown"
+          :data-sets="datasets"
+          :labels="labels"
+          :colors="['cherry-500', 'juniper-500', 'robin-500']"
+          :axis-options="{
+            xIsSeries: true
+          }"
+          :tooltipOptions="{
+            formatTooltipY: (d, set) => (set.index === 1 ? Math.abs(d) : d)
+          }"
+          :bar-options="{ stacked: true }"
+          type="axis-mixed"
+          class="chart-tooltip-z-20"
+        />
+        <div v-show="!shouldChartBeShown" class="h-full px-5">
+          <lazy-empty-chart
+            :count="3"
+            :length="7"
+            :chart-colors="['cherry-500', 'juniper-500', 'robin-500']"
+            :chart-dataset="emptyCodeHealthChartDataSet"
+            :stacked="true"
+          />
+        </div>
+      </div>
+    </chart-container>
+
+    <recent-stats
+      :current-val="report.currentValue"
+      :stats="recentStats"
+      :loading="recentStatsLoading"
+    />
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, mixins } from 'nuxt-property-decorator'
+import { ZChart } from '@deepsourcelabs/zeal'
+
+import { shortenLargeNumber } from '~/utils/string'
+
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import CodeHealthReportMixin from '~/mixins/codeHealthReportMixin'
+
+import { ReportLevel } from '~/types/types'
+import { ReportPageT } from '~/types/reportTypes'
+
+/**
+ * Page for displaying the code health trend
+ */
+@Component({
+  layout: 'dashboard',
+  components: {
+    ZChart
+  },
+  methods: {
+    shortenLargeNumber
+  }
+})
+export default class OwnerCodeHealthTrend extends mixins(OwnerDetailMixin, CodeHealthReportMixin) {
+  /**
+   * Fetch report base data, recent stats, and trigger chart data fetching.
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    try {
+      const { owner, provider } = this.$route.params
+      if (!this.owner.id) {
+        await this.fetchOwnerDetails({ login: owner, provider })
+      }
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'Unable to fetch team details, please contact support.')
+    }
+
+    // All four queries below have a try-catch block inside them
+    await Promise.all([
+      this.fetchReportBase(ReportLevel.Owner, this.owner.id, ReportPageT.CODE_HEALTH_TREND),
+      this.fetchRecentStats(ReportLevel.Owner, this.owner.id, ReportPageT.CODE_HEALTH_TREND),
+      this.fetchHistoricValuesAndSetChartData()
+    ])
+  }
+
+  /**
+   * fetch historical values and set the chart dataset
+   * @param {string} [newDateRange]
+   * @returns {Promise<void>}
+   */
+  async fetchHistoricValuesAndSetChartData(newDateRange?: string): Promise<void> {
+    if (newDateRange) {
+      this.dateRangeFilter = newDateRange
+    }
+    await this.fetchHistoricalValues(
+      ReportLevel.Owner,
+      this.owner.id,
+      ReportPageT.CODE_HEALTH_TREND
+    )
+
+    this.datasets = this.formatCodeHealthChartData(this.historicalValues)
+  }
+}
+</script>

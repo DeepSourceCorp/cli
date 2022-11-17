@@ -24,7 +24,7 @@
       />
 
       <div
-        class="px-4 pb-10 pt-6 lg:pt-26 text-sm border-t md:px-6 md:text-base border-ink-300 md:border-t-0"
+        class="w-screen sm:w-auto px-4 pb-10 pt-6 lg:pt-26 text-sm border-t md:px-6 md:text-base border-ink-300 md:border-t-0"
       >
         <nuxt-child
           :share-historical-data="publicReport.shareHistoricalData"

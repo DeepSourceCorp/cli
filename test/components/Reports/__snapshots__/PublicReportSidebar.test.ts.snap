@@ -8,21 +8,21 @@ exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop opt
       deepsourcelabs
     </h1>
   </div>
-  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">Reports</span> <a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+  <div class=\\"flex flex-col gap-y-3\\"><span class=\\"text-xs font-semibold tracking-wider uppercase text-slate\\">Reports</span> <a class=\\"text-sm font-medium hover:text-vanilla-100 text-vanilla-400\\">
       OWASP Top 10
-    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-vanilla-400\\">
       SANS Top 25
-    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-slate\\">
+    </a><a class=\\"text-sm font-medium hover:text-vanilla-100 text-vanilla-400\\">
       Issue Distribution
     </a></div>
   <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>
-  <div class=\\"flex flex-col text-sm gap-y-3 text-slate\\"><a href=\\"#summary\\" class=\\"hover:text-vanilla-100 text-slate\\">
+  <div class=\\"flex flex-col text-sm gap-y-3 text-slate\\"><a href=\\"#summary\\" class=\\"hover:text-vanilla-100 text-vanilla-400\\">
       — Summary
-    </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-slate\\">
+    </a><a href=\\"#intended-use\\" class=\\"hover:text-vanilla-100 text-vanilla-400\\">
       — Intended use
-    </a><a href=\\"#continuous-code-health\\" class=\\"hover:text-vanilla-100 text-slate\\">
+    </a><a href=\\"#continuous-code-health\\" class=\\"hover:text-vanilla-100 text-vanilla-400\\">
       — Continuous Code Health
-    </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-slate\\">
+    </a><a href=\\"#about\\" class=\\"hover:text-vanilla-100 text-vanilla-400\\">
       — About DeepSource
     </a></div>
   <zdivider-stub direction=\\"horizontal\\" margin=\\"my-0\\" color=\\"ink-200\\"></zdivider-stub>

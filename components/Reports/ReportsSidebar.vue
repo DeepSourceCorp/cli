@@ -141,6 +141,11 @@ export default class ReportsSidebar extends Vue {
   get insightsItems(): ReportsTabLink[] {
     return [
       {
+        key: ReportPageT.CODE_HEALTH_TREND,
+        label: ReportMeta[ReportPageT.CODE_HEALTH_TREND].title,
+        link: [...this.baseLink, ReportPageT.CODE_HEALTH_TREND]
+      },
+      {
         key: ReportPageT.CODE_COVERAGE,
         label: ReportMeta[ReportPageT.CODE_COVERAGE].title,
         link: [...this.baseLink, ReportPageT.CODE_COVERAGE]

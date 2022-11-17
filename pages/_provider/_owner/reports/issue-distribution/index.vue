@@ -86,7 +86,7 @@ const BASE_COLOR = '#1035ad'
  * Page for displaying issue distribution by analyzer and category type
  */
 @Component({
-  layout: 'owner',
+  layout: 'dashboard',
   components: {
     ZChart
   },

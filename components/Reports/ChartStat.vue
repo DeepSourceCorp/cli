@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs h-14 flex flex-col justify-between">
     <p class="text-vanilla-400 mb-2 font-semibold uppercase tracking-wider leading-7">
-      {{ title }}
+      <slot name="title">{{ title }}</slot>
     </p>
 
     <slot>
@@ -19,7 +19,7 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
  */
 @Component({})
 export default class ChartStat extends Vue {
-  @Prop({ required: true })
+  @Prop({ default: '' })
   title: string
 
   @Prop()
