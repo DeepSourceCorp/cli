@@ -17,8 +17,8 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in create report mode
     <div class=\\"grid grid-cols-2\\">
       <div class=\\"flex flex-col gap-y-2\\">
         <p class=\\"text-xs uppercase text-vanilla-400 font-medium tracking-wider\\">Security</p>
-        <zcheckbox-stub label=\\"OWASP Top 10\\" name=\\"\\" value=\\"owasp-top-10\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"SANS Top 25\\" name=\\"\\" value=\\"sans-top-25\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"OWASP® Top 10\\" name=\\"\\" value=\\"owasp-top-10\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"CWE/SANS Top 25\\" name=\\"\\" value=\\"sans-top-25\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
         <!---->
         <!---->
@@ -62,8 +62,8 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in edit report mode: 
     <div class=\\"grid grid-cols-2\\">
       <div class=\\"flex flex-col gap-y-2\\">
         <p class=\\"text-xs uppercase text-vanilla-400 font-medium tracking-wider\\">Security</p>
-        <zcheckbox-stub label=\\"OWASP Top 10\\" name=\\"\\" value=\\"owasp-top-10\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"SANS Top 25\\" name=\\"\\" value=\\"sans-top-25\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"OWASP® Top 10\\" name=\\"\\" value=\\"owasp-top-10\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"CWE/SANS Top 25\\" name=\\"\\" value=\\"sans-top-25\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
         <!---->
         <!---->

@@ -17,12 +17,12 @@ interface IFloatingButton extends Vue {
 const baseProps = {
   navItems: [
     {
-      label: 'OWASP Top 10',
+      label: 'OWASP® Top 10',
       routePath: '/gh/deepsourcelabs/reports/owasp-top-10',
       separator: false
     },
     {
-      label: 'SANS Top 25',
+      label: 'CWE/SANS Top 25',
       routePath: '/gh/deepsourcelabs/reports/sans-top-25',
       separator: false
     },
@@ -86,7 +86,7 @@ describe('[[ FloatingButtonMobile ]]', () => {
   test('`currentSelection` finds the entry based on `$route.path`', () => {
     const instance = getInstance()
 
-    expect(instance.currentSelection).toBe('OWASP Top 10')
+    expect(instance.currentSelection).toBe('OWASP® Top 10')
   })
 
   test('`currentSelection` works with dynamic sub routes', () => {

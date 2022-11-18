@@ -28,21 +28,21 @@ export enum ReportPageT {
 
 export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
   [ReportPageT.OWASP_TOP_10]: {
-    title: 'OWASP Top 10',
-    description: 'Overview of OWASP Top 10 security risks in your code.',
+    title: 'OWASP® Top 10',
+    description: 'Overview of OWASP® Top 10 security risks in your code.',
     type: ReportType.Compliance,
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
         summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
         <p>
-          The Open Web Application Security Project Foundation, or OWASP Foundation, is a non-profit
+          The Open Web Application Security Project Foundation, or OWASP® Foundation, is a non-profit
           foundation dedicated to improving software security. The foundation is community-driven and
           helps organizations build secure software through open-source tools, resources, and
-          research. The OWASP Top 10 is a recommendation framework maintained by the OWASP Foundation
+          research. The OWASP® Top 10 is a recommendation framework maintained by the OWASP® Foundation
           since 2003. The list is a collection of security recommendations that helps organizations to
           write more secure code. It is updated periodically to accommodate for the advancements and
-          developments in application security. More information on OWASP Top 10 can be found
+          developments in application security. More information on OWASP® Top 10 can be found
           <a
             href="https://deepsource.io/guides/owasp-top-10/"
             rel="nofollow noopener noreferrer"
@@ -55,7 +55,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
           DeepSource continuously scans ${smartApostrophe(
             companyName
           )} source code to detect violations
-          of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
+          of OWASP® Top 10 recommendations and provides guidance to correct them. This report provides
           the current, as well as a historical snapshot of the presence of such vulnerabilities in
           ${smartApostrophe(
             companyName
@@ -64,7 +64,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
         intendedUse: ` <h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
         <p>
           This report can be used by the ${companyName} team to identify and remediate violations of
-          OWASP Top 10 recommendations in their source code. The report can also be used by key
+          OWASP® Top 10 recommendations in their source code. The report can also be used by key
           stakeholders within the organization and interested external stakeholders to understand the
           source code security posture of ${companyName}.
         </p>`
@@ -72,7 +72,7 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     }
   },
   [ReportPageT.SANS_TOP_25]: {
-    title: 'SANS Top 25',
+    title: 'CWE/SANS Top 25',
     description: 'Overview of CWE/SANS Top 25 most dangerous software errors in your code.',
     type: ReportType.Compliance,
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
@@ -88,14 +88,14 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
         </p>
         <p>
           DeepSource continuously scans ${companyName}’s source code continuously to detect violations
-          of SANS Top 25 recommendations and provides guidance to correct them. This report provides
+          of CWE/SANS Top 25 recommendations and provides guidance to correct them. This report provides
           the current, as well as a historical snapshot of the presence of such vulnerabilities in
           ${companyName}’s source code, limited to the repositories, tracked on DeepSource.
         </p>`,
         intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
         <p>
           This report can be used by the ${companyName} team to identify and remediate violations of
-          SANS Top 25 recommendations in their source code. The report can also be used by key
+          CWE/SANS Top 25 recommendations in their source code. The report can also be used by key
           stakeholders within the organization and interested external stakeholders to understand the
           source code security posture of ${companyName}.
         </p>`

@@ -46,7 +46,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"ENTERPRISE","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP® Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -55,18 +55,18 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
     <div class=\\"space-y-4 text-vanilla-400\\">
       <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
       <p>
-        The Open Web Application Security Project Foundation, or OWASP Foundation, is a non-profit
+        The Open Web Application Security Project Foundation, or OWASP® Foundation, is a non-profit
         foundation dedicated to improving software security. The foundation is community-driven and
         helps organizations build secure software through open-source tools, resources, and
-        research. The OWASP Top 10 is a recommendation framework maintained by the OWASP Foundation
+        research. The OWASP® Top 10 is a recommendation framework maintained by the OWASP® Foundation
         since 2003. The list is a collection of security recommendations that helps organizations to
         write more secure code. It is updated periodically to accommodate for the advancements and
-        developments in application security. More information on OWASP Top 10 can be found
+        developments in application security. More information on OWASP® Top 10 can be found
         <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
       </p>
       <p>
         DeepSource continuously scans deepsourcelabs’ source code to detect violations
-        of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
+        of OWASP® Top 10 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.
       </p>
@@ -75,7 +75,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
       <p>
         This report can be used by the deepsourcelabs team to identify and remediate violations of
-        OWASP Top 10 recommendations in their source code. The report can also be used by key
+        OWASP® Top 10 recommendations in their source code. The report can also be used by key
         stakeholders within the organization and interested external stakeholders to understand the
         source code security posture of deepsourcelabs.
       </p>
@@ -99,7 +99,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"ENTERPRISE","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">CWE/SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -116,7 +116,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       </p>
       <p>
         DeepSource continuously scans deepsourcelabs’s source code continuously to detect violations
-        of SANS Top 25 recommendations and provides guidance to correct them. This report provides
+        of CWE/SANS Top 25 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’s source code, limited to the repositories, tracked on DeepSource.
       </p>
@@ -125,7 +125,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
       <p>
         This report can be used by the deepsourcelabs team to identify and remediate violations of
-        SANS Top 25 recommendations in their source code. The report can also be used by key
+        CWE/SANS Top 25 recommendations in their source code. The report can also be used by key
         stakeholders within the organization and interested external stakeholders to understand the
         source code security posture of deepsourcelabs.
       </p>
@@ -192,7 +192,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"OWNER","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP® Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -201,18 +201,18 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
     <div class=\\"space-y-4 text-vanilla-400\\">
       <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
       <p>
-        The Open Web Application Security Project Foundation, or OWASP Foundation, is a non-profit
+        The Open Web Application Security Project Foundation, or OWASP® Foundation, is a non-profit
         foundation dedicated to improving software security. The foundation is community-driven and
         helps organizations build secure software through open-source tools, resources, and
-        research. The OWASP Top 10 is a recommendation framework maintained by the OWASP Foundation
+        research. The OWASP® Top 10 is a recommendation framework maintained by the OWASP® Foundation
         since 2003. The list is a collection of security recommendations that helps organizations to
         write more secure code. It is updated periodically to accommodate for the advancements and
-        developments in application security. More information on OWASP Top 10 can be found
+        developments in application security. More information on OWASP® Top 10 can be found
         <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
       </p>
       <p>
         DeepSource continuously scans deepsourcelabs’ source code to detect violations
-        of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
+        of OWASP® Top 10 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.
       </p>
@@ -221,7 +221,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
       <p>
         This report can be used by the deepsourcelabs team to identify and remediate violations of
-        OWASP Top 10 recommendations in their source code. The report can also be used by key
+        OWASP® Top 10 recommendations in their source code. The report can also be used by key
         stakeholders within the organization and interested external stakeholders to understand the
         source code security posture of deepsourcelabs.
       </p>
@@ -245,7 +245,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"OWNER","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">CWE/SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -262,7 +262,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       </p>
       <p>
         DeepSource continuously scans deepsourcelabs’s source code continuously to detect violations
-        of SANS Top 25 recommendations and provides guidance to correct them. This report provides
+        of CWE/SANS Top 25 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’s source code, limited to the repositories, tracked on DeepSource.
       </p>
@@ -271,7 +271,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
       <p>
         This report can be used by the deepsourcelabs team to identify and remediate violations of
-        SANS Top 25 recommendations in their source code. The report can also be used by key
+        CWE/SANS Top 25 recommendations in their source code. The report can also be used by key
         stakeholders within the organization and interested external stakeholders to understand the
         source code security posture of deepsourcelabs.
       </p>
@@ -338,7 +338,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"REPOSITORY","reportKey":"owasp-top-10"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP Top 10 report</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP® Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -347,18 +347,18 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
     <div class=\\"space-y-4 text-vanilla-400\\">
       <h1 id=\\"summary\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Summary</h1>
       <p>
-        The Open Web Application Security Project Foundation, or OWASP Foundation, is a non-profit
+        The Open Web Application Security Project Foundation, or OWASP® Foundation, is a non-profit
         foundation dedicated to improving software security. The foundation is community-driven and
         helps organizations build secure software through open-source tools, resources, and
-        research. The OWASP Top 10 is a recommendation framework maintained by the OWASP Foundation
+        research. The OWASP® Top 10 is a recommendation framework maintained by the OWASP® Foundation
         since 2003. The list is a collection of security recommendations that helps organizations to
         write more secure code. It is updated periodically to accommodate for the advancements and
-        developments in application security. More information on OWASP Top 10 can be found
+        developments in application security. More information on OWASP® Top 10 can be found
         <a href=\\"https://deepsource.io/guides/owasp-top-10/\\" rel=\\"nofollow noopener noreferrer\\" target=\\"_blank\\" class=\\"text-juniper-500 font-medium\\">here</a>.
       </p>
       <p>
         DeepSource continuously scans deepsourcelabs’ source code to detect violations
-        of OWASP Top 10 recommendations and provides guidance to correct them. This report provides
+        of OWASP® Top 10 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’ source code, limited to the repositories, tracked on DeepSource.
       </p>
@@ -367,7 +367,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
       <p>
         This report can be used by the deepsourcelabs team to identify and remediate violations of
-        OWASP Top 10 recommendations in their source code. The report can also be used by key
+        OWASP® Top 10 recommendations in their source code. The report can also be used by key
         stakeholders within the organization and interested external stakeholders to understand the
         source code security posture of deepsourcelabs.
       </p>
@@ -391,7 +391,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"REPOSITORY","reportKey":"sans-top-25"} 1`] = `
 "<main>
   <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
-    <h1 class=\\"text-lg md:text-2xl font-semibold\\">SANS Top 25 report</h1>
+    <h1 class=\\"text-lg md:text-2xl font-semibold\\">CWE/SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
     </p>
@@ -408,7 +408,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       </p>
       <p>
         DeepSource continuously scans deepsourcelabs’s source code continuously to detect violations
-        of SANS Top 25 recommendations and provides guidance to correct them. This report provides
+        of CWE/SANS Top 25 recommendations and provides guidance to correct them. This report provides
         the current, as well as a historical snapshot of the presence of such vulnerabilities in
         deepsourcelabs’s source code, limited to the repositories, tracked on DeepSource.
       </p>
@@ -417,7 +417,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
       <h1 id=\\"intended-use\\" class=\\"text-lg text-vanilla-100 font-semibold scroll-mt-8\\">Intended use of this report</h1>
       <p>
         This report can be used by the deepsourcelabs team to identify and remediate violations of
-        SANS Top 25 recommendations in their source code. The report can also be used by key
+        CWE/SANS Top 25 recommendations in their source code. The report can also be used by key
         stakeholders within the organization and interested external stakeholders to understand the
         source code security posture of deepsourcelabs.
       </p>
