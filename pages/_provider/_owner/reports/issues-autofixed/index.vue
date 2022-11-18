@@ -65,8 +65,7 @@ import { ReportPageT } from '~/types/reportTypes'
   },
   methods: {
     shortenLargeNumber
-  },
-  middleware: ['betaOnly']
+  }
 })
 export default class OwnerIssuesPrevented extends mixins(OwnerDetailMixin, ReportMixin) {
   /**

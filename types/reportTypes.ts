@@ -334,11 +334,11 @@ export type CodeHealthTrendMetaProperties = {
 
 export const CodeHealthTrendMeta: Record<CodeHealthTrendT, CodeHealthTrendMetaProperties> = {
   [CodeHealthTrendT.ACTIVE]: {
-    name: 'ACTIVE ISSUES',
+    name: 'ISSUES INTRODUCED',
     chartType: 'bar'
   },
   [CodeHealthTrendT.RESOLVED]: {
-    name: 'RESOLVED ISSUES',
+    name: 'ISSUES RESOLVED',
     chartType: 'bar'
   },
   [CodeHealthTrendT.NET]: {
