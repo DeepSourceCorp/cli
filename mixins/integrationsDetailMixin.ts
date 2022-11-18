@@ -53,6 +53,18 @@ export default class IntegrationsDetailMixin extends mixins(
   installationUrl = ''
   showDeleteConfirmation = false
 
+  get avatar(): string | null | undefined {
+    return this.integration?.enabledBy?.avatar
+  }
+
+  get email(): string | undefined {
+    return this.integration?.enabledBy?.email
+  }
+
+  get userName(): string | undefined {
+    return this.integration?.enabledBy?.fullName || this.email
+  }
+
   /**
    * Fetch integration Data
    *

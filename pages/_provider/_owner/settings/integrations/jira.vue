@@ -42,9 +42,10 @@
       <z-divider />
 
       <integration-installed-by
-        :avatar="integration.enabledBy.avatar"
-        :user-name="integration.enabledBy.fullName"
-        :email="integration.enabledBy.email"
+        v-if="integration.installed"
+        :avatar="avatar"
+        :user-name="userName"
+        :email="email"
         :enabled-on="integration.enabledOn"
       />
 
@@ -135,7 +136,7 @@
               Cancel
             </z-button>
             <z-button
-              :is-loading="uninstallingIntegration"
+              :is-loading="removingIntegration"
               button-type="danger"
               icon="x"
               size="small"

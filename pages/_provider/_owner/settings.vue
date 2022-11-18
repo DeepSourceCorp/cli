@@ -220,11 +220,6 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
   }
 
   get canViewIntegrations(): boolean {
-    // Disable on prem
-    if (this.$config.onPrem) {
-      return false
-    }
-
     return (
       this.isTeam && this.$gateKeeper.team(TeamPerms.MANAGE_INTEGRATIONS, this.teamPerms.permission)
     )

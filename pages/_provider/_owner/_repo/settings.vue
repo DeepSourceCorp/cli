@@ -144,8 +144,7 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
       icon: 'list',
       link: ['settings', 'integrations'],
       perms: [RepoPerms.CHANGE_INTEGRATION_SETTINGS],
-      forTeams: true,
-      disableOnPrem: true
+      forTeams: true
     }
   ]
 

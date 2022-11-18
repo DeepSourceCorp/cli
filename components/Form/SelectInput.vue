@@ -19,7 +19,7 @@
           v-else
           ref="select-input"
           v-model="modelValue"
-          :selected="modelValue"
+          :key="modelValue"
           :placeholder="placeholder"
           :disabled="disabled"
           spacing="py-1 px-2"

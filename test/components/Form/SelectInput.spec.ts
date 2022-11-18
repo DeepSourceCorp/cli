@@ -4,8 +4,8 @@ import { render } from '@testing-library/vue'
 import SelectInput from '~/components/Form/SelectInput.vue'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 
-describe('[[ RadioGroupInput ]]', () => {
-  test('renders `RadioGroupInput` with all prop options', () => {
+describe('[[ SelectInput ]]', () => {
+  test('renders `SelectInput` with all prop options', () => {
     const baseProps = {
       label: 'Test label',
       description: 'Test description',
@@ -35,28 +35,19 @@ describe('[[ RadioGroupInput ]]', () => {
       'wide'
     ])
 
-    const customGridClassOptions = generateStringProps('customGridClass', [
-      '',
-      'grid-cols-1 md:grid-cols-4'
-    ])
+    cartesian(inputWidthOptions, disabledOptions, isInvalid, placeholder).forEach(
+      (propCombination) => {
+        const props = {
+          ...baseProps,
+          ...propCombination
+        }
+        const { html } = render(SelectInput, {
+          props,
+          stubs: { ZSelect: true }
+        })
 
-    cartesian(
-      inputWidthOptions,
-      disabledOptions,
-      customGridClassOptions,
-      isInvalid,
-      placeholder
-    ).forEach((propCombination) => {
-      const props = {
-        ...baseProps,
-        ...propCombination
+        expect(html()).toMatchSnapshot(JSON.stringify(props))
       }
-      const { html } = render(SelectInput, {
-        props,
-        stubs: { ZSelect: true }
-      })
-
-      expect(html()).toMatchSnapshot(JSON.stringify(props))
-    })
+    )
   })
 })

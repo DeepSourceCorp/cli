@@ -138,12 +138,7 @@ export default {
   },
 
   ignore: IS_ON_PREM
-    ? [
-        '**/_provider/_owner/settings/billing/*',
-        '**/components/Billing/*',
-        '**/settings/integrations/*',
-        '**/discover/*'
-      ]
+    ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*', '**/discover/*']
     : [],
 
   loadingIndicator: {
