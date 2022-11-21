@@ -5,8 +5,7 @@ build_local:
 	cd cmd/deepsource && go build -tags static_all -o /tmp/deepsource .
 
 test:
-	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueWorkflow -count=1
-	CGO_ENABLED=0 go test -v ./command/report/tests/... -run TestReportKeyValueFileWorkflow -count=1
+	CGO_ENABLED=0 go test -v ./command/report/tests/... -count=1
 	echo "\n====TESTING DEEPSOURCE PACKAGE====\n"
 	CGO_ENABLED=0 go test -v ./deepsource/tests/...
 	echo "\n====TESTING CONFIG VALIDATOR PACKAGE====\n"
@@ -19,4 +18,4 @@ test_setup:
 	cd ${CODE_PATH} && ls -A1 | xargs rm -rf
 	git clone https://github.com/deepsourcelabs/cli ${CODE_PATH}
 	chmod +x /tmp/deepsource
-	cp ./command/report/tests/dummy/python_coverage.xml /tmp
+	cp ./command/report/tests/golden_files/python_coverage.xml /tmp
