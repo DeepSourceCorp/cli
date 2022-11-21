@@ -260,6 +260,8 @@ func (opts *ReportOptions) Run() int {
 	fmt.Printf("DeepSource | Artifact published successfully\n\n")
 	fmt.Printf("Analyzer  %s\n", analyzerShortcode)
 	fmt.Printf("Key       %s\n", artifactKey)
-	fmt.Printf("Message   %s\n", queryResponse.Data.CreateArtifact.Message)
+	if queryResponse.Data.CreateArtifact.Message != "" {
+		fmt.Printf("Message   %s\n", queryResponse.Data.CreateArtifact.Message)
+	}
 	return 0
 }
