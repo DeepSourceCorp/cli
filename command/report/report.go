@@ -196,8 +196,6 @@ func (opts *ReportOptions) Run() int {
 	reportMeta := make(map[string]string)
 	reportMeta["workDir"] = currentDir
 
-	query := ReportQuery{Query: reportGraphqlQuery}
-
 	queryInput := ReportQueryInput{
 		AccessToken:       dsnAccessToken,
 		CommitOID:         headCommitOID,
@@ -209,6 +207,7 @@ func (opts *ReportOptions) Run() int {
 		Metadata:          reportMeta,
 	}
 
+	query := ReportQuery{Query: reportGraphqlQuery}
 	query.Variables.Input = queryInput
 
 	// Marshal request body
@@ -226,11 +225,27 @@ func (opts *ReportOptions) Run() int {
 		opts.SkipCertificateVerification,
 	)
 	if err != nil {
-		fmt.Fprintln(os.Stderr, "DeepSource | Error | Reporting failed |", err)
-		sentry.CaptureException(err)
-		return 1
+		// Make Query without message field.
+		query := ReportQuery{Query: reportGraphqlQueryOld}
+		query.Variables.Input = queryInput
+		queryBodyBytes, err := json.Marshal(query)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to marshal query body")
+			sentry.CaptureException(err)
+			return 1
+		}
+		queryResponseBody, err = makeQuery(
+			dsnProtocol+"://"+dsnHost+"/graphql/cli/",
+			queryBodyBytes,
+			"application/json",
+			opts.SkipCertificateVerification,
+		)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Reporting failed |", err)
+			sentry.CaptureException(err)
+			return 1
+		}
 	}
-
 	// Parse query's response body
 	queryResponse := QueryResponse{}
 	err = json.Unmarshal(queryResponseBody, &queryResponse)
