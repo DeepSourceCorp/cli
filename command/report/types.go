@@ -27,8 +27,9 @@ type ReportQuery struct {
 type QueryResponse struct {
 	Data struct {
 		CreateArtifact struct {
-			Error string `json:"error"`
-			Ok    bool   `json:"ok"`
+			Error   string `json:"error"`
+			Message string `json:"message"`
+			Ok      bool   `json:"ok"`
 		} `json:"createArtifact"`
 	} `json:"data"`
 }

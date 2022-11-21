@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"strings"
 	"time"
@@ -71,7 +70,7 @@ func (opts *ReportOptions) Run() int {
 	// Verify the env variables
 	dsn := os.Getenv("DEEPSOURCE_DSN")
 	if dsn == "" {
-		fmt.Println("DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page.")
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Environment variable DEEPSOURCE_DSN not set (or) is empty. You can find it under the repository settings page")
 		return 1
 	}
 	sentry.ConfigureScope(func(scope *sentry.Scope) {
@@ -90,9 +89,9 @@ func (opts *ReportOptions) Run() int {
 	// Get current path
 	currentDir, err := os.Getwd()
 	if err != nil {
-		fmt.Println("DeepSource | Error | Unable to identify current directory.")
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to identify current directory")
 		sentry.CaptureException(err)
-		return 0
+		return 1
 	}
 	sentry.ConfigureScope(func(scope *sentry.Scope) {
 		scope.SetExtra("currentDir", currentDir)
@@ -107,16 +106,16 @@ func (opts *ReportOptions) Run() int {
 
 	// Validate DSN parsing
 	if len(dsnSplitProtocolBody) != 2 {
-		err = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
-		fmt.Println(err)
+		err = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository")
+		fmt.Fprintln(os.Stderr, err)
 		sentry.CaptureException(err)
 		return 1
 	}
 
 	// Check for valid protocol
 	if !strings.HasPrefix(dsnSplitProtocolBody[0], "http") {
-		err = errors.New("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
-		fmt.Println(err)
+		err = errors.New("DeepSource | Error | DSN specified should start with http(s). Cross verify DEEPSOURCE_DSN value against the settings page of the repository")
+		fmt.Fprintln(os.Stderr, err)
 		sentry.CaptureException(err)
 		return 1
 	}
@@ -127,8 +126,8 @@ func (opts *ReportOptions) Run() int {
 
 	// Validate DSN parsing
 	if len(dsnSplitTokenHost) != 2 {
-		err = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository.")
-		fmt.Println(err)
+		err = errors.New("DeepSource | Error | Invalid DSN. Cross verify DEEPSOURCE_DSN value against the settings page of the repository")
+		fmt.Fprintln(os.Stderr, err)
 		sentry.CaptureException(err)
 		return 1
 	}
@@ -146,7 +145,7 @@ func (opts *ReportOptions) Run() int {
 	// Head Commit OID
 	headCommitOID, err := gitGetHead(currentDir)
 	if err != nil {
-		fmt.Println("DeepSource | Error | Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to get commit OID HEAD. Make sure you are running the CLI from a git repository")
 		sentry.CaptureException(err)
 		return 1
 	}
@@ -156,7 +155,7 @@ func (opts *ReportOptions) Run() int {
 
 	// Flag validation
 	if reportCommandValue == "" && reportCommandValueFile == "" {
-		fmt.Println("DeepSource | Error | '--value' (or) '--value-file' not passed")
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | '--value' (or) '--value-file' not passed")
 		return 1
 	}
 
@@ -175,14 +174,14 @@ func (opts *ReportOptions) Run() int {
 		// Check file size
 		_, err := os.Stat(reportCommandValueFile)
 		if err != nil {
-			fmt.Println("DeepSource error | Error | Unable to read specified value file: " + reportCommandValueFile)
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to read specified value file:", reportCommandValueFile)
 			sentry.CaptureException(err)
 			return 1
 		}
 
-		valueBytes, err := ioutil.ReadFile(reportCommandValueFile)
+		valueBytes, err := os.ReadFile(reportCommandValueFile)
 		if err != nil {
-			fmt.Println("DeepSource error| Error | Unable to read specified value file: ", reportCommandValueFile)
+			fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to read specified value file:", reportCommandValueFile)
 			sentry.CaptureException(err)
 			return 1
 		}
@@ -197,9 +196,7 @@ func (opts *ReportOptions) Run() int {
 	reportMeta := make(map[string]string)
 	reportMeta["workDir"] = currentDir
 
-	query := ReportQuery{
-		Query: reportGraphqlQuery,
-	}
+	query := ReportQuery{Query: reportGraphqlQuery}
 
 	queryInput := ReportQueryInput{
 		AccessToken:       dsnAccessToken,
@@ -217,9 +214,9 @@ func (opts *ReportOptions) Run() int {
 	// Marshal request body
 	queryBodyBytes, err := json.Marshal(query)
 	if err != nil {
-		fmt.Println("DeepSource | Error | Unable to marshal query body.")
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to marshal query body")
 		sentry.CaptureException(err)
-		return 0
+		return 1
 	}
 
 	queryResponseBody, err := makeQuery(
@@ -229,19 +226,18 @@ func (opts *ReportOptions) Run() int {
 		opts.SkipCertificateVerification,
 	)
 	if err != nil {
-		fmt.Println("DeepSource | Error | Reporting failed | ", err)
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Reporting failed |", err)
 		sentry.CaptureException(err)
-		return 0
+		return 1
 	}
 
-	// Parse query response body
+	// Parse query's response body
 	queryResponse := QueryResponse{}
-
 	err = json.Unmarshal(queryResponseBody, &queryResponse)
 	if err != nil {
-		fmt.Println("DeepSource | Error | Unable to parse response body.")
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Unable to parse response body")
 		sentry.CaptureException(err)
-		return 0
+		return 1
 	}
 
 	// Check for errors in response body
@@ -256,20 +252,14 @@ func (opts *ReportOptions) Run() int {
 	// }
 
 	if !queryResponse.Data.CreateArtifact.Ok {
-		fmt.Println("DeepSource | Error | Reporting failed | ", queryResponse.Data.CreateArtifact.Error)
+		fmt.Fprintln(os.Stderr, "DeepSource | Error | Reporting failed |", queryResponse.Data.CreateArtifact.Error)
 		sentry.CaptureException(errors.New(queryResponse.Data.CreateArtifact.Error))
-		return 0
+		return 1
 	}
 
-	if err != nil {
-		fmt.Println("DeepSource | Error | Unable to report results.")
-		sentry.CaptureException(err)
-		return 0
-	}
-
-	fmt.Printf("DeepSource |  Artifact published successfully \n \n")
-	fmt.Printf("Analyzer  %s \n", analyzerShortcode)
-	fmt.Printf("Key       %s \n", artifactKey)
-
+	fmt.Printf("DeepSource | Artifact published successfully\n\n")
+	fmt.Printf("Analyzer  %s\n", analyzerShortcode)
+	fmt.Printf("Key       %s\n", artifactKey)
+	fmt.Printf("Message   %s\n", queryResponse.Data.CreateArtifact.Message)
 	return 0
 }

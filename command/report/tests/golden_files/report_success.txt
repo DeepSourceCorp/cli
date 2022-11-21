@@ -1,0 +1,5 @@
+DeepSource | Artifact published successfully
+
+Analyzer  test-coverage
+Key       python
+Message   Artifact successfully uploaded for repository demo-python on commit d3401b650b2b3f1c2b4008dfd934d00bf3590b78.
