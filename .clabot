@@ -1,4 +1,4 @@
 {
-  "contributors": ["jai-deepsource", "sanket-deepsource", "sourya-deepsource", "srijan-deepsource", "rahul-deepsource", "vishnu-deepsource", "shivam-deepsource", "siddhant-deepsource", "burntcarrot", "subham-deepsource", "deepsource-autofix[bot]", "dhruvmanila"],
+  "contributors": ["jai-deepsource", "sanket-deepsource", "sourya-deepsource", "srijan-deepsource", "rahul-deepsource", "vishnu-deepsource", "shivam-deepsource", "siddhant-deepsource", "burntcarrot", "subham-deepsource", "tushar-deepsource", "deepsource-autofix[bot]", "dhruvmanila"],
   "message": "Thanks for your pull request. Before we proceed, you\"ll need to sign a Contributor License Agreement - https://docs.google.com/document/d/1Wj255zTFkO0XpC7piChAa0yd96KCEqXf4Qa3e87F5UA. Please send the signed copy to jai@deepsource.io to proceed with the patch review."
 }
