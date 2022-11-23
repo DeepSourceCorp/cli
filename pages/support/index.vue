@@ -149,17 +149,6 @@
         </div>
       </form>
       <input ref="multiEmailInput" type="email" class="hidden" multiple />
-      <portal to="modal">
-        <z-confirm
-          v-if="showNotif"
-          primaryActionLabel="Done"
-          title="Help is on it's way!"
-          subtitle="We've successfully recorded your support ticket. Expect a response from our team via email shortly."
-          :hide-secondary-button="true"
-          @primaryAction="closeDialog"
-        >
-        </z-confirm>
-      </portal>
     </div>
   </div>
 </template>
@@ -223,7 +212,6 @@ export default class Support extends mixins(ActiveUserMixin) {
   private viewerContexts = []
   private isFileProcessing = false
   private isFormSubmitting = false
-  private showNotif = false
 
   get supportText(): string {
     //? This line is responsible for simply getting textual characters from the HTML string that the rich text editor component provides.
@@ -279,10 +267,6 @@ export default class Support extends mixins(ActiveUserMixin) {
       return false
     }
     return true
-  }
-
-  closeDialog(): void {
-    this.showNotif = false
   }
 
   selectAccount(selectedContext: DashboardContext) {
@@ -357,13 +341,18 @@ export default class Support extends mixins(ActiveUserMixin) {
             input: formData
           })
           if (response.data.submitSupportTicket.ok) {
-            this.showNotif = true
             this.resetFormData()
+
+            this.$toast.show({
+              type: 'success',
+              message: `We've successfully recorded your support ticket. Expect a response from our team via email shortly.`,
+              timeout: 5
+            })
           } else {
-            this.$toast.danger('An error occured while submitting your ticket.')
+            this.$toast.danger('An error occurred while submitting your ticket.')
           }
         } catch (reqErr) {
-          this.$toast.danger('An error occured while submitting your ticket.')
+          this.$toast.danger('An error occurred while submitting your ticket.')
           this.logErrorForUser(reqErr as Error, 'Support Page', formData)
         }
       }
