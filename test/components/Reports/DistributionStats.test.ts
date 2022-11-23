@@ -1,6 +1,4 @@
 import { render } from '@testing-library/vue'
-import { VueConstructor } from 'vue'
-import { createLocalVue, RouterLinkStub, shallowMount } from '@vue/test-utils'
 
 import VTooltip from 'v-tooltip'
 import { DistributionStats } from '~/components/Reports'

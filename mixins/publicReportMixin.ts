@@ -78,6 +78,11 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
   public reportLabelToDelete = ''
   public deleteLoading = false
 
+  public showCreateSuccessModal = false
+  public createSuccessModalEditMode = false
+  public newReportCreated: PublicReport | null = null
+  public newReportCreatedPassword = ''
+
   public submitPasswordLoading = false
 
   /**
@@ -155,6 +160,19 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
     this.isMutateReportModalOpen = false
     this.editMode = false
     this.reportToEdit = EMPTY_REPORT
+  }
+
+  /**
+   * Handler method for success modal close.
+   * Resets data for success modal
+   *
+   * @returns void
+   */
+  public triggerSuccessModalClose() {
+    this.showCreateSuccessModal = false
+    this.createSuccessModalEditMode = false
+    this.newReportCreated = null
+    this.newReportCreatedPassword = ''
   }
 
   public get publicReportMeta() {
@@ -537,9 +555,16 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
 
       if (newReport && newReport.reportId) {
         callback?.()
-        this.$toast.success('Report successfully created.')
+
+        this.newReportCreated = newReport
+        this.newReportCreatedPassword = newReportArgs.password ?? ''
+
+        // Adding delay to match closing of previous modal
+        setTimeout(() => {
+          this.showCreateSuccessModal = true
+        }, 400)
+
         await this.fetchPublicReportList()
-        window.open(`/report/${newReport.reportId}`)
       }
     } catch (e) {
       this.$logErrorAndToast(e as Error, "Can't create a report. Please contact support.")

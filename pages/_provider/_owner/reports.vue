@@ -34,6 +34,13 @@
         @close="isMutateReportModalOpen = false"
         @create-report="createPublicReport"
       />
+
+      <create-report-success
+        v-if="showCreateSuccessModal"
+        v-bind="newReportCreated"
+        :password="newReportCreatedPassword"
+        @close="triggerSuccessModalClose"
+      />
     </portal>
   </section>
 </template>
@@ -45,7 +52,7 @@ import { ZDivider } from '@deepsourcelabs/zeal'
 
 import { TeamPerms } from '~/types/permTypes'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
-import { CreatePublicReportInput, ReportLevel } from '~/types/types'
+import { CreatePublicReportInput, PublicReport, ReportLevel } from '~/types/types'
 
 import { createPublicReport } from '@/apollo/mutations/reports/createPublicReport.gql'
 import { GraphqlMutationResponse } from '~/types/apolloTypes'
@@ -86,6 +93,10 @@ export default class OwnerReports extends mixins(RoleAccessMixin) {
   isMutateReportModalOpen = false
   reportSaveLoading = false
 
+  showCreateSuccessModal = false
+  newReportCreated: PublicReport | null = null
+  newReportCreatedPassword: string = ''
+
   ReportLevel = ReportLevel
   ReportPageT = ReportPageT
 
@@ -112,15 +123,32 @@ export default class OwnerReports extends mixins(RoleAccessMixin) {
 
       if (newReport && newReport.reportId) {
         close?.()
-        this.$toast.success('Report successfully created.')
 
-        window.open(`/report/${newReport.reportId}`)
+        this.newReportCreated = newReport
+        this.newReportCreatedPassword = newReportArgs.password ?? ''
+
+        // Adding delay to match closing of previous modal
+        setTimeout(() => {
+          this.showCreateSuccessModal = true
+        }, 400)
       }
     } catch (e) {
       this.$logErrorAndToast(e as Error, "Can't create a report. Please contact support.")
     } finally {
       this.reportSaveLoading = false
     }
+  }
+
+  /**
+   * Handler method for success modal close.
+   * Resets data for success modal
+   *
+   * @returns void
+   */
+  triggerSuccessModalClose(): void {
+    this.showCreateSuccessModal = false
+    this.newReportCreated = null
+    this.newReportCreatedPassword = ''
   }
 
   get activeReportName(): ReportPageT {

@@ -25,7 +25,7 @@ export const mocksGenerator: (overrides?: Record<string, unknown>) => Record<str
           return true
         })
       },
-      $config: { onPrem: false },
+      $config: { onPrem: false, domain: 'deepsource.io' },
       $gateKeeper: {
         repo: jest.fn(() => {
           return true
@@ -45,10 +45,7 @@ export const mocksGenerator: (overrides?: Record<string, unknown>) => Record<str
       },
       $providerMetaMap: providerMetaMap,
       $generateRoute: jest.fn((paths: string[], includeRepoInPath = true) => {
-        if (!Array.isArray(paths)) {
-          paths = []
-        }
-        const path = paths.join('/')
+        const path = Array.isArray(paths) ? paths.join('/') : ''
         if (includeRepoInPath) {
           return `/gh/deepsourcelabs/bifrost/${path}`
         }

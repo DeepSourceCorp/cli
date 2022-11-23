@@ -118,6 +118,14 @@
         @close-confirm="showConfirmDelete = false"
         @delete-report="deletePublicReport"
       />
+
+      <create-report-success
+        v-if="showCreateSuccessModal"
+        v-bind="newReportCreated"
+        :password="newReportCreatedPassword"
+        :edit-mode="createSuccessModalEditMode"
+        @close="triggerSuccessModalClose"
+      />
     </portal>
   </div>
 </template>
@@ -190,10 +198,22 @@ export default class RepoPublicReports extends mixins(PublicReportMixin, RoleAcc
 
       const updatedReport = response.data?.updatePublicReport
 
-      if (updatedReport?.publicReport?.reportId && updatedReport?.publicReport?.label) {
+      if (
+        updatedReport &&
+        updatedReport.publicReport?.reportId &&
+        updatedReport.publicReport?.label
+      ) {
         callback?.()
-        const label = updatedReport.publicReport.label
-        this.$toast.success(`${label} has been updated.`)
+
+        this.newReportCreated = updatedReport.publicReport
+        this.newReportCreatedPassword = editReportArgs.password ?? ''
+        this.createSuccessModalEditMode = true
+
+        // Adding delay to match closing of previous modal
+        setTimeout(() => {
+          this.showCreateSuccessModal = true
+        }, 400)
+
         await this.fetchPublicReportList()
       } else {
         this.$toast.danger('Unable to update the report. Please contact support.')

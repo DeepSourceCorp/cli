@@ -1,0 +1,273 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"editMode":false} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <!---->
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"editMode":null} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <!---->
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"editMode":true} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully updated
+    </h3>
+    <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <!---->
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"password":"deepsource","editMode":false} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <zalert-stub type=\\"warning\\" class=\\"pt-2.5\\">
+      <p class=\\"inline-flex items-start gap-x-2.5 leading-6 tracking-snug\\">
+        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"base\\" position=\\"\\" color=\\"honey-500\\"></zicon-stub>
+        Please make sure you've copied the password. You would not be able to see it again!
+      </p>
+    </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Password</p>
+      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456?password=deepsource
+Password - deepsource\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"password":"deepsource","editMode":null} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <zalert-stub type=\\"warning\\" class=\\"pt-2.5\\">
+      <p class=\\"inline-flex items-start gap-x-2.5 leading-6 tracking-snug\\">
+        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"base\\" position=\\"\\" color=\\"honey-500\\"></zicon-stub>
+        Please make sure you've copied the password. You would not be able to see it again!
+      </p>
+    </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Password</p>
+      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456?password=deepsource
+Password - deepsource\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"password":"deepsource","editMode":true} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully updated
+    </h3>
+    <zalert-stub type=\\"warning\\" class=\\"pt-2.5\\">
+      <p class=\\"inline-flex items-start gap-x-2.5 leading-6 tracking-snug\\">
+        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"base\\" position=\\"\\" color=\\"honey-500\\"></zicon-stub>
+        Please make sure you've copied the password. You would not be able to see it again!
+      </p>
+    </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Password</p>
+      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456?password=deepsource
+Password - deepsource\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"password":"deepsource"} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <zalert-stub type=\\"warning\\" class=\\"pt-2.5\\">
+      <p class=\\"inline-flex items-start gap-x-2.5 leading-6 tracking-snug\\">
+        <zicon-stub icon=\\"solid-alert-circle\\" size=\\"base\\" position=\\"\\" color=\\"honey-500\\"></zicon-stub>
+        Please make sure you've copied the password. You would not be able to see it again!
+      </p>
+    </zalert-stub> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456?password=deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label> <label for=\\"report-password\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Password</p>
+      <zinput-stub name=\\"\\" value=\\"deepsource\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report password\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-password\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456?password=deepsource
+Password - deepsource\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"password":null,"editMode":false} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <!---->
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"password":null,"editMode":null} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <!---->
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"password":null,"editMode":true} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully updated
+    </h3>
+    <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <!---->
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {"password":null} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <!---->
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;
+
+exports[`[[ CreateReportSuccess ]] renders CreateReportSuccess with all prop options: {} 1`] = `
+"<zdialoggeneric-stub>
+  <div class=\\"p-4 flex flex-col gap-y-4 w-98\\">
+    <h3 class=\\"text-sm font-medium text-vanilla-100 leading-6\\">
+      Report has been successfully created
+    </h3>
+    <!----> <label for=\\"report-link\\" class=\\"space-y-1.5\\">
+      <p class=\\"text-xs font-normal text-vanilla-100 leading-5\\">Report URL</p>
+      <zinput-stub name=\\"\\" value=\\"https://deepsource.io/report/123456\\" label=\\"\\" type=\\"text\\" placeholder=\\"Report URL\\" readonly=\\"true\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" id=\\"report-link\\" class=\\"border border-ink-200\\"><template></template></zinput-stub>
+    </label>
+    <!---->
+    <div>
+      <copybutton-stub button-type=\\"link\\" color=\\"vanilla-400\\" icon-color=\\"current\\" icon-size=\\"x-small\\" label=\\"Copy report details\\" succes-label=\\"Report details copied\\" value=\\"View report -
+Link - https://deepsource.io/report/123456\\" class=\\"float-left hover:text-vanilla-100 pl-1 hover:no-underline\\"></copybutton-stub>
+      <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Done\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"check\\" class=\\"float-right\\"></zbutton-stub>
+    </div>
+  </div>
+</zdialoggeneric-stub>"
+`;

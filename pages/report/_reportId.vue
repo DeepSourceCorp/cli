@@ -235,6 +235,21 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
   }
 
   /**
+   * Mounted hook for the vue component.
+   * Prefills password field if it's avilable in URL
+   *
+   * @returns void
+   */
+  mounted(): void {
+    const password = this.$route.query['password']
+
+    // someone can pass string[] as query param too, preventing that
+    if (password && typeof password === 'string') {
+      this.password = password
+    }
+  }
+
+  /**
    * Submit report password and set errors.
    */
   async submitPassword() {

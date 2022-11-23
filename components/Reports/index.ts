@@ -22,6 +22,7 @@ import DistributionSwitch from './DistributionSwitch.vue'
 import ComplianceStatus from './ComplianceStatus.vue'
 import SeverityCounts from './SeverityCounts.vue'
 import PublicReportRepoSection from './PublicReportRepoSection.vue'
+import CreateReportSuccess from './CreateReportSuccess.vue'
 
 export {
   DateRangePicker,
@@ -47,5 +48,6 @@ export {
   DistributionSwitch,
   ComplianceStatus,
   SeverityCounts,
-  PublicReportRepoSection
+  PublicReportRepoSection,
+  CreateReportSuccess
 }

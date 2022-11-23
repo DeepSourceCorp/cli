@@ -2,7 +2,6 @@
   <z-button
     v-bind="zButtonBindings"
     :icon="btnIcon"
-    :icon-color="btnIconColor"
     :label="btnLabel"
     :disabled="disabled"
     @click="copyContent"
@@ -40,7 +39,6 @@ export default class CopyButton extends Vue {
   value: string
 
   hasCopied = false
-  btnIconColor = 'vanilla-100'
 
   get btnIcon(): string {
     return this.hasCopied ? this.succesIcon : this.icon
@@ -55,19 +53,17 @@ export default class CopyButton extends Vue {
 
   get zButtonBindings(): Record<string, string> {
     const attrsBinding = this.$attrs
+
     const btnHasType = Object.keys(attrsBinding).includes('buttonType')
     if (!btnHasType) {
-      attrsBinding['buttonType'] = 'secondary'
+      attrsBinding.buttonType = 'secondary'
     }
+
     const btnHasSize = Object.keys(attrsBinding).includes('size')
     if (!btnHasSize) {
-      attrsBinding['size'] = 'small'
+      attrsBinding.size = 'small'
     }
-    //? Safety net to avoid multiple props being sent to ZButton
-    const btnHasIconColor = Object.keys(attrsBinding).includes('iconColor')
-    if (btnHasIconColor) {
-      delete attrsBinding.iconColor
-    }
+
     return attrsBinding
   }
 

@@ -12,9 +12,7 @@
           placeholder="What’s this report for?"
           size="small"
         />
-        <p class="flex items-center gap-x-1 text-vanilla-400 text-xs">
-          This is used for internal reference only
-        </p>
+        <p class="text-vanilla-400 text-xs">This is used for internal reference only</p>
       </label>
 
       <label v-if="reportIdOld" for="report-link" class="space-y-2 text-sm text-vanilla-200 w-full">
