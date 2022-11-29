@@ -380,7 +380,7 @@ export type ApplyCreditsToOwnerPayload = {
 };
 
 export type Attachment = {
-  base64Data: Scalars['String'];
+  uploadToken: Scalars['UUID'];
   filename: Scalars['String'];
 };
 
@@ -2580,6 +2580,8 @@ export type Mutation = {
   generateKeyPairForOwner?: Maybe<GenerateKeyPairForOwnerPayload>;
   removeKeyPairForOwner?: Maybe<RemoveKeyPairForOwnerPayload>;
   updateTimeoutSetting?: Maybe<UpdateTimeoutSettingPayload>;
+  updateOwnerPinnedReports?: Maybe<UpdateOwnerPinnedReportsPayload>;
+  updateRepositoryPinnedReports?: Maybe<UpdateRepositoryPinnedReportsPayload>;
   updateRepositoryWidgets?: Maybe<UpdateRepositoryWidgetsPayload>;
   deleteSilenceRule?: Maybe<DeleteSilenceRulePayload>;
   updateDefaultDashboardContextForUser?: Maybe<UpdateDefaultDashboardContextForUserPayload>;
@@ -2828,6 +2830,16 @@ export type MutationRemoveKeyPairForOwnerArgs = {
 
 export type MutationUpdateTimeoutSettingArgs = {
   input: UpdateTimeoutSettingInput;
+};
+
+
+export type MutationUpdateOwnerPinnedReportsArgs = {
+  input: UpdateOwnerPinnedReportsInput;
+};
+
+
+export type MutationUpdateRepositoryPinnedReportsArgs = {
+  input: UpdateRepositoryPinnedReportsInput;
 };
 
 
@@ -3500,6 +3512,7 @@ export type OwnerSetting = MaskPrimaryKeyNode & {
   owner: Owner;
   publicKey?: Maybe<Scalars['String']>;
   shouldTimeoutDataTrigger?: Maybe<Scalars['Boolean']>;
+  pinnedReports?: Maybe<Array<Maybe<PinnedReport>>>;
   issueTypeSettings?: Maybe<Array<Maybe<IssueTypeSetting>>>;
 };
 
@@ -3571,6 +3584,17 @@ export type PageInfo = {
   hasPreviousPage: Scalars['Boolean'];
   startCursor?: Maybe<Scalars['String']>;
   endCursor?: Maybe<Scalars['String']>;
+};
+
+export type PinnedReport = {
+  __typename?: 'PinnedReport';
+  key: Scalars['String'];
+  metadata?: Maybe<Scalars['GenericScalar']>;
+};
+
+export type PinnedReportInput = {
+  key: Scalars['String'];
+  metadata?: Maybe<Scalars['GenericScalar']>;
 };
 
 export type PublicReport = MaskPrimaryKeyNode & {
@@ -4230,6 +4254,7 @@ export type Repository = MaskPrimaryKeyNode & {
   repositorycollaboratorSet: RepositoryCollaboratorConnection;
   sourcedInPublicReports: PublicReportConnection;
   publicReports?: Maybe<PublicReportConnection>;
+  repositorySetting?: Maybe<RepositorySetting>;
   silenceRules?: Maybe<SilenceRuleConnection>;
   ownerLogin?: Maybe<Scalars['String']>;
   canBeActivated?: Maybe<Scalars['Boolean']>;
@@ -4289,6 +4314,7 @@ export type Repository = MaskPrimaryKeyNode & {
   hasAdhocRuns?: Maybe<Scalars['Boolean']>;
   hasHacktoberfestEnabled?: Maybe<Scalars['Boolean']>;
   gitlabIntegrationUseStatus?: Maybe<Scalars['Boolean']>;
+  setting?: Maybe<RepositorySetting>;
 };
 
 
@@ -4776,6 +4802,12 @@ export enum RepositoryPermissionChoices {
   Write = 'WRITE',
   Admin = 'ADMIN'
 }
+
+export type RepositorySetting = MaskPrimaryKeyNode & {
+  __typename?: 'RepositorySetting';
+  pinnedReports?: Maybe<Array<Maybe<PinnedReport>>>;
+  id: Scalars['ID'];
+};
 
 export enum RepositoryVcsType {
   Git = 'GIT',
@@ -5811,6 +5843,18 @@ export type UpdateOrCreateRepositoryCollaboratorPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type UpdateOwnerPinnedReportsInput = {
+  ownerId: Scalars['ID'];
+  pinnedReports: Array<Maybe<PinnedReportInput>>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateOwnerPinnedReportsPayload = {
+  __typename?: 'UpdateOwnerPinnedReportsPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type UpdateOwnerSettingsInput = {
   issueTypeSettings: Array<Maybe<IssueTypeSettingInput>>;
   ownerId: Scalars['ID'];
@@ -5869,6 +5913,18 @@ export type UpdateRepoMetricThresholdInput = {
 
 export type UpdateRepoMetricThresholdPayload = {
   __typename?: 'UpdateRepoMetricThresholdPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateRepositoryPinnedReportsInput = {
+  repositoryId: Scalars['ID'];
+  pinnedReports: Array<Maybe<PinnedReportInput>>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateRepositoryPinnedReportsPayload = {
+  __typename?: 'UpdateRepositoryPinnedReportsPayload';
   ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -10000,7 +10056,7 @@ export type Unnamed_122_Query = (
   & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepositoryIdQueryVariables = Exact<{
@@ -10048,7 +10104,7 @@ export type Unnamed_123_Query = (
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'descriptionRendered' | 'issueType' | 'title' | 'shortcode' | 'firstSeen' | 'lastSeen' | 'modifiedAt' | 'occurrenceCount' | 'analyzerName' | 'analyzerShortcode' | 'analyzerLogo' | 'autofixAvailable' | 'newVcsIssueUrl' | 'raisedInFiles' | 'tags' | 'severity'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type Unnamed_124_QueryVariables = Exact<{
@@ -10079,7 +10135,7 @@ export type Unnamed_124_Query = (
         )> }
       )>> }
     ) }
-  ) | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepositoryIssueListQueryVariables = Exact<{
@@ -10211,7 +10267,7 @@ export type Unnamed_126_Query = (
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'raisedInFiles'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type Unnamed_127_QueryVariables = Exact<{
@@ -11204,7 +11260,7 @@ export type Unnamed_146_Query = (
   & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepoStatusPollQueryQueryVariables = Exact<{

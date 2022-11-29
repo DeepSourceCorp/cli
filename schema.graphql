@@ -231,7 +231,7 @@ type ApplyCreditsToOwnerPayload {
 }
 
 input Attachment {
-  base64Data: String!
+  uploadToken: UUID!
   filename: String!
 }
 
@@ -1725,6 +1725,8 @@ type Mutation {
   generateKeyPairForOwner(input: GenerateKeyPairForOwnerInput!): GenerateKeyPairForOwnerPayload
   removeKeyPairForOwner(input: RemoveKeyPairForOwnerInput!): RemoveKeyPairForOwnerPayload
   updateTimeoutSetting(input: UpdateTimeoutSettingInput!): UpdateTimeoutSettingPayload
+  updateOwnerPinnedReports(input: UpdateOwnerPinnedReportsInput!): UpdateOwnerPinnedReportsPayload
+  updateRepositoryPinnedReports(input: UpdateRepositoryPinnedReportsInput!): UpdateRepositoryPinnedReportsPayload
   updateRepositoryWidgets(input: UpdateRepositoryWidgetsInput!): UpdateRepositoryWidgetsPayload
   deleteSilenceRule(input: DeleteSilenceRuleInput!): DeleteSilenceRulePayload
   updateDefaultDashboardContextForUser(input: UpdateDefaultDashboardContextForUserInput!): UpdateDefaultDashboardContextForUserPayload
@@ -1911,6 +1913,7 @@ type OwnerSetting implements MaskPrimaryKeyNode {
   owner: Owner!
   publicKey: String
   shouldTimeoutDataTrigger: Boolean
+  pinnedReports: [PinnedReport]
   issueTypeSettings: [IssueTypeSetting]
 }
 
@@ -1968,6 +1971,16 @@ type PageInfo {
   hasPreviousPage: Boolean!
   startCursor: String
   endCursor: String
+}
+
+type PinnedReport {
+  key: String!
+  metadata: GenericScalar
+}
+
+input PinnedReportInput {
+  key: String!
+  metadata: GenericScalar
 }
 
 type PublicReport implements MaskPrimaryKeyNode {
@@ -2231,6 +2244,7 @@ type Repository implements MaskPrimaryKeyNode {
   repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   sourcedInPublicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection!
   publicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection
+  repositorySetting: RepositorySetting
   silenceRules(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection
   ownerLogin: String
   canBeActivated: Boolean
@@ -2289,6 +2303,7 @@ type Repository implements MaskPrimaryKeyNode {
   hasAdhocRuns: Boolean
   hasHacktoberfestEnabled: Boolean
   gitlabIntegrationUseStatus: Boolean
+  setting: RepositorySetting
 }
 
 type RepositoryCollaborator implements MaskPrimaryKeyNode {
@@ -2431,6 +2446,11 @@ enum RepositoryPermissionChoices {
   READ
   WRITE
   ADMIN
+}
+
+type RepositorySetting implements MaskPrimaryKeyNode {
+  pinnedReports: [PinnedReport]
+  id: ID!
 }
 
 enum RepositoryVcsType {
@@ -3285,6 +3305,17 @@ type UpdateOrCreateRepositoryCollaboratorPayload {
   clientMutationId: String
 }
 
+input UpdateOwnerPinnedReportsInput {
+  ownerId: ID!
+  pinnedReports: [PinnedReportInput]!
+  clientMutationId: String
+}
+
+type UpdateOwnerPinnedReportsPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input UpdateOwnerSettingsInput {
   issueTypeSettings: [IssueTypeSettingInput]!
   ownerId: ID!
@@ -3339,6 +3370,17 @@ input UpdateRepoMetricThresholdInput {
 }
 
 type UpdateRepoMetricThresholdPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input UpdateRepositoryPinnedReportsInput {
+  repositoryId: ID!
+  pinnedReports: [PinnedReportInput]!
+  clientMutationId: String
+}
+
+type UpdateRepositoryPinnedReportsPayload {
   ok: Boolean
   clientMutationId: String
 }

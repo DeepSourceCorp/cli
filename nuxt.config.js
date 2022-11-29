@@ -80,9 +80,8 @@ export default {
   // https://nuxtjs.org/blog/moving-from-nuxtjs-dotenv-to-runtime-config
   // https://nuxtjs.org/docs/2.x/configuration-glossary/configuration-runtime-config
   publicRuntimeConfig: {
-    apolloServerUri: process.env.APOLLO_SERVER_URI,
     apolloClientUri: process.env.APOLLO_CLIENT_URI,
-    csrfServerUri: process.env.CSRF_SERVER_URI,
+    restClientUri: process.env.REST_CLIENT_URI,
     csrfClientUri: process.env.CSRF_CLIENT_URI,
     websocket: {
       url: process.env.WEB_SOCKET_URI || 'wss://events.deepsource.io'
@@ -101,6 +100,11 @@ export default {
     domain: APP_DOMAIN,
     rudderWriteKey: IS_ON_PREM ? '' : process.env.RUDDER_WRITE_KEY,
     rudderDataPlaneUrl: IS_ON_PREM ? '' : process.env.RUDDER_DATA_PLANE_URL
+  },
+
+  privateRuntimeConfig: {
+    apolloServerUri: process.env.APOLLO_SERVER_URI,
+    csrfServerUri: process.env.CSRF_SERVER_URI
   },
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)

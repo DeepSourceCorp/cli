@@ -61,7 +61,7 @@
             </z-select>
           </div>
           <p class="text-vanilla-400 text-xs">
-            Select account or the team on DeepSource with which this ticket is related.
+            Select the workspace to which this support request is related.
           </p>
         </div>
         <div class="space-y-1.5 max-w-lg">
@@ -84,7 +84,7 @@
             </z-select>
           </div>
           <p class="text-vanilla-400 text-xs">
-            We'll use this email as the primary point of contact for this support ticket.
+            We'll use this email as the primary point of contact for this support request.
           </p>
         </div>
         <div class="space-y-1.5 max-w-lg">
@@ -100,7 +100,7 @@
             multiple
           />
           <p class="text-vanilla-400 text-xs">
-            We'll keep these email addresses in cc when communicating to you about this ticket. Use
+            We'll keep these email addresses in CC when communicating to you about this ticket. Use
             a comma to separate multiple emails.
           </p>
         </div>
@@ -116,25 +116,81 @@
             padding="px-4"
           />
         </div>
-        <div class="space-y-1.5 max-w-lg">
-          <label id="support-description" class="text-xs">What is the issue?</label>
+        <div class="space-y-2 max-w-lg">
+          <div class="space-y-1.5">
+            <label id="support-description" class="text-xs">What is the issue?</label>
 
-          <div class="min-w-0">
-            <z-rich-text
-              v-model="supportHTML"
-              placeholder=""
-              :min-length="20"
-              min-length-err-msg="Please add at least 20 characters in the issue description."
-              :max-length="1024"
-              :disabled="isFormSubmitting"
-              :class="{ 'cursor-not-allowed': isFormSubmitting }"
-              aria-labelledby="support-description"
-            />
+            <div class="min-w-0">
+              <z-rich-text
+                v-model="supportHTML"
+                placeholder=""
+                :min-length="20"
+                min-length-err-msg="Please add at least 20 characters in the issue description."
+                :max-length="1024"
+                :disabled="isFormSubmitting"
+                :class="{ 'cursor-not-allowed': isFormSubmitting }"
+                aria-labelledby="support-description"
+              >
+                <template v-if="!$config.onPrem" #left-toolbar>
+                  <z-file-input
+                    ref="fileUploader"
+                    label="Add files"
+                    :disabled="isFileProcessing || isFormSubmitting"
+                    multiple
+                    accept="video/mp4,video/quicktime,image/jpeg,image/png,text/plain,text/csv,application/rtf,application/xml,text/rtf"
+                    @change="prepareFiles"
+                    @files-emptied="filesToUpload = []"
+                  >
+                    <template v-slot:activator="{ open }">
+                      <z-button
+                        icon="paperclip"
+                        size="x-small"
+                        button-type="ghost"
+                        icon-color="vanilla-400"
+                        type="button"
+                        :disabled="isFileProcessing || isFormSubmitting"
+                        :is-loading="isFileProcessing"
+                        v-tooltip="'Attach files'"
+                        class="ml-1 opacity-60 hover:opacity-100 hover:text-vanilla-100"
+                        :class="
+                          isFileProcessing || isFormSubmitting
+                            ? 'cursor-not-allowed'
+                            : 'cursor-pointer'
+                        "
+                        @click="open"
+                      />
+                    </template>
+                  </z-file-input>
+                </template>
+              </z-rich-text>
+            </div>
+            <p class="text-vanilla-400 text-xs">
+              Please be as descriptive as possible. If you're reporting a bug, please list down the
+              steps you took. This will help us reproduce the behavior. You can attach images,
+              videos or text files up to 10 MB in size.
+            </p>
           </div>
-          <p class="text-vanilla-400 text-xs">
-            Please be as descriptive as possible.<br />If you're reporting a bug, please list down
-            the steps you took. This will help us reproduce the behaviour.
-          </p>
+          <div class="space-y-2 max-w-lg text-xs leading-none">
+            <div
+              v-for="(uploadedFile, index) in filesToUpload"
+              :key="index"
+              class="flex items-center justify-between px-4 py-2 rounded-sm bg-ink-300 text-vanilla-400"
+            >
+              <span>{{ uploadedFile.name }}</span>
+              <button
+                type="button"
+                class="p-1 rounded-sm hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
+                :class="
+                  isFileProcessing || isFormSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'
+                "
+                :disabled="isFileProcessing || isFormSubmitting"
+                v-tooltip="'Remove file'"
+                @click="removeFile(index)"
+              >
+                <z-icon icon="trash-2" color="cherry" size="x-small"></z-icon>
+              </button>
+            </div>
+          </div>
         </div>
         <div class="space-y-1.5 max-w-lg flex justify-end">
           <z-button
@@ -154,7 +210,7 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
+import { Component, mixins, namespace } from 'nuxt-property-decorator'
 import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'
 import {
   ZInput,
@@ -169,8 +225,10 @@ import {
 } from '@deepsourcelabs/zeal'
 import { InfoBanner } from '@/components/Settings/index'
 import SubmitSupportTicketMutation from '~/apollo/mutations/support/submitSupportTicket.gql'
-import { AttachmentObj, getBase64Files } from '~/utils/files'
+import { FileUploadContexts, uploadFiles, FileUploadTokenT, FileUploadError } from '~/utils/files'
 import { getDefaultAvatar } from '~/utils/ui'
+import { AuthActionTypes, AuthGetterTypes } from '~/store/account/auth'
+import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
 type SupportValidationData = {
   ticketAuthor: string
@@ -179,6 +237,16 @@ type SupportValidationData = {
   supportSubject: string
   supportText: string
 }
+
+interface FormDataT {
+  fromEmail: string
+  ccEmails: string
+  subject: string
+  body: string
+  attachments?: FileUploadTokenT[]
+}
+
+const authStore = namespace('account/auth')
 
 @Component({
   components: {
@@ -206,12 +274,19 @@ export default class Support extends mixins(ActiveUserMixin) {
   private ticketAuthorId = ''
   private supportHTML = ''
   private supportSubject = ''
-  private supportContext = {} as DashboardContext | Record<string, string>
   private authorEmail = ''
   private authorCC = ''
   private viewerContexts = []
   private isFileProcessing = false
   private isFormSubmitting = false
+  private filesToUpload = [] as File[]
+  private readonly UPLOAD_ENDPOINT = this.$config.restClientUri
+
+  @authStore.Getter(AuthGetterTypes.EXPIRY)
+  tokenExpiry: number
+
+  @authStore.Action(AuthActionTypes.REFRESH)
+  refreshToken: () => Promise<void>
 
   get supportText(): string {
     //? This line is responsible for simply getting textual characters from the HTML string that the rich text editor component provides.
@@ -234,130 +309,288 @@ export default class Support extends mixins(ActiveUserMixin) {
     return ''
   }
 
+  /**
+   * Fetch hook for the page that fetches active user information and sets the default values
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch(): Promise<void> {
+    await this.fetchActiveUser()
+    this.authorEmail = this.viewer.email
+    this.viewerContexts = this.viewer.dashboardContext
+    this.ticketAuthorId = this.activeDashboardContext.id.toString()
+  }
+
+  /**
+   * Validates file sizes for files
+   *
+   * @param {File[]} arrayOfFiles - Files whose sizes need to be validated.
+   *
+   * @returns boolean
+   */
   validateFileSize(arrayOfFiles: File[]): boolean {
-    const sizeConcatenator = (accumulator: number, currentValue: File): number =>
-      accumulator + currentValue.size
-    //? 5242880 = 5MB
-    const filesLt5mbCheck = (file: File) => file.size <= 5242880
-    const areFilesValidSize = arrayOfFiles.every(filesLt5mbCheck)
-    if (!areFilesValidSize) {
-      this.$toast.danger('The attachment should not be larger than 5MB.')
-      this.isFileProcessing = false
-      return false
-    }
+    /**
+     * Function to add a given file's size to the given total number.
+     *
+     * @param {number} accumulator - Total size of files till now
+     * @param {File} currentFile - File whose size has to be added to the total
+     *
+     * @returns {number} new total size of files
+     */
+    const sizeConcatenator = (accumulator: number, currentFile: File): number =>
+      accumulator + currentFile.size
+
     const totalFileSize = arrayOfFiles.reduce(sizeConcatenator, 0)
-    //? 7340032 = 7MB. Payload cap is 10MB. 7MB => ~9.33MB post base64 conversion
-    //? ref: https://stackoverflow.com/questions/4715415/base64-what-is-the-worst-possible-increase-in-space-usage
-    if (totalFileSize > 7340032) {
-      this.$toast.danger('Total size of attachments should be less than 7MB.')
+    //? 10,485,760 = 10MB
+    if (totalFileSize > 10_485_760) {
+      this.$toast.danger('Total size of attachments should be less than 10 MB.')
       this.isFileProcessing = false
       return false
     }
     return true
   }
 
+  /**
+   * Validates names for files
+   *
+   * @param {File[]} arrOfFiles - Files whose name has to validated
+   *
+   * @returns {boolean}
+   */
   validateFileNames(arrOfFiles: File[]): boolean {
     const validFilenameRegex = /^[^\:\/\\\<\>\"\|\?\*\^]{1,255}$/
     const filenameChecker = (val: File) =>
       validFilenameRegex.test(val.name) && val.name.length <= 255
     if (!arrOfFiles.every(filenameChecker)) {
       this.$toast.danger(
-        'File names must be shorter than 256 characters and cannot contain the characters :/<>"|?*^ in them.'
+        'File names must be 256 characters or less and cannot contain special characters.'
       )
       return false
     }
     return true
   }
 
-  selectAccount(selectedContext: DashboardContext) {
-    this.supportContext = selectedContext
-  }
-
-  async fetch(): Promise<void> {
-    await this.fetchActiveUser()
-    this.authorEmail = this.viewer.email
-    this.viewerContexts = this.viewer.dashboardContext
-    this.supportContext = this.activeDashboardContext
-    this.ticketAuthorId = this.activeDashboardContext.id.toString()
-  }
-
+  /**
+   * Validates input data and shows errors as required.
+   *
+   * @param {SupportValidationData} validationData - Data to validate
+   *
+   * @returns {boolean} - Whether data is valid (true) or not (false).
+   */
   validateInputs(valdiationData: SupportValidationData): boolean {
     if (!valdiationData.ticketAuthor) {
-      throw new Error('A valid DeepSource account or organization needs to be selected.')
+      this.$toast.danger('Select a valid DeepSource workspace for this support request.')
+      return false
     }
     if (!valdiationData.authorEmail) {
-      throw new Error('Primary email address is required.')
+      this.$toast.danger('A primary email address is required.')
+      return false
     }
     const multiEmailInput = this.$refs['multiEmailInput'] as HTMLInputElement
     multiEmailInput.value = valdiationData.authorEmail
     if (!multiEmailInput.checkValidity()) {
-      throw new Error('Invalid primary email address given.')
+      this.$toast.danger('The primary email address is invalid.')
+      multiEmailInput.value = ''
+      return false
     }
     multiEmailInput.value = ''
     if (valdiationData.authorCC) {
       multiEmailInput.value = valdiationData.authorCC
       if (!multiEmailInput.checkValidity()) {
-        throw new Error('Invalid input present in CC emails. Please enter comma separated emails.')
+        this.$toast.danger('One or more email addresses added in CC are invalid.')
+        multiEmailInput.value = ''
+        return false
       }
       multiEmailInput.value = ''
     }
     if (!valdiationData.supportSubject || valdiationData.supportSubject.length < 5) {
-      throw new Error('Please add a subject with at least 5 characters.')
+      this.$toast.danger('Subject line should be 5 characters or more.')
+      return false
     }
     if (valdiationData.supportSubject.length > 250) {
-      throw new Error('Please keep the subject line shorter than 250 characters.')
+      this.$toast.danger('Subject line should be 250 characters or less.')
+      return false
     }
     if (!valdiationData.supportText.length || valdiationData.supportText.length < 20) {
-      throw new Error('Please add a description with at least 20 characters.')
+      this.$toast.danger('Description should be 20 characters or more.')
+      return false
     }
     return true
   }
 
+  /**
+   * Validates and appends files to {@link filesToUpload} on `change` event of file input.
+   *
+   * @params {Event} - Change event of a file
+   *
+   * @returns {void}
+   */
+  prepareFiles({ target }: { target: HTMLInputElement }): void {
+    if (target.files) {
+      this.isFileProcessing = true
+      const arrayOfFiles = Array.from(target.files)
+      try {
+        if (this.validateFileSize(arrayOfFiles) && this.validateFileNames(arrayOfFiles))
+          this.filesToUpload = this.filesToUpload.concat(arrayOfFiles)
+      } catch (err) {
+        this.$toast.danger('An error occured while processing files.')
+      } finally {
+        this.isFileProcessing = false
+      }
+    }
+  }
+
+  /**
+   * Deletes a given file via its index from {@link filesToUpload}
+   *
+   * @param {number} fileIndex - Index of the file to delete
+   *
+   * @returns {boolean}
+   */
+  removeFile(fileIndex: number): void {
+    this.filesToUpload.splice(fileIndex, 1)
+  }
+
+  /**
+   * Reset for data to its defaults.
+   *
+   * @returns {void}
+   */
   resetFormData(): void {
     this.authorCC = ''
     this.supportSubject = ''
     this.supportHTML = ''
   }
 
+  /**
+   * Creates a support ticket by calling the mutation with given data.
+   *
+   * @param {FormDataT} formData - Data for the support ticket.
+   *
+   * @returns {Promise<void>}
+   */
+  async submitSupportData(formData: FormDataT): Promise<void> {
+    const response = (await this.$applyGraphqlMutation(SubmitSupportTicketMutation, {
+      input: formData
+    })) as GraphqlMutationResponse
+    if (response.data.submitSupportTicket?.ok) {
+      this.$toast.show({
+        type: 'success',
+        message:
+          "We've successfully recorded your support ticket. Expect a response from our team via email shortly.",
+        timeout: 5
+      })
+      this.resetFormData()
+    } else {
+      this.$toast.show({
+        type: 'danger',
+        message:
+          'An error occurred while creating your support request. Please try submitting the form again. If the issue persists, email us at support@deepsource.io.',
+        timeout: 5
+      })
+
+      this.$logErrorAndToast(new Error('Ticket response not ok'), undefined, this.viewer, {
+        context: 'Support page',
+        params: formData as unknown as Record<string, unknown>
+      })
+    }
+  }
+
+  /**
+   * Checks if the auth JWT has expired and refreshes it if so.
+   *
+   * @returns {Promise<void>}
+   */
+  async updateRefreshTokenIfNeeded(): Promise<void> {
+    const now = (new Date().getTime() + 30_000) / 1000
+    if (now > this.tokenExpiry) {
+      await this.refreshToken()
+    }
+  }
+
+  /**
+   * Function to validate, upload files and create support ticket on form submit.
+   *
+   * @returns {Promise<void>}
+   */
   async createSupportTicket(): Promise<void> {
     this.isFormSubmitting = true
-    try {
-      const dataToValidate: SupportValidationData = {
-        authorEmail: this.authorEmail,
-        authorCC: this.authorCC,
-        supportSubject: this.supportSubject,
-        supportText: this.supportText,
-        ticketAuthor: this.ticketAuthor
-      }
-      if (this.validateInputs(dataToValidate)) {
-        const formData = {
-          fromEmail: dataToValidate.authorEmail,
-          ccEmails: dataToValidate.authorCC,
-          subject: dataToValidate.supportSubject,
-          body: `Account/Organization Name: ${dataToValidate.ticketAuthor} <br/> ${this.supportHTML}`
-        }
-        try {
-          const response = await this.$applyGraphqlMutation(SubmitSupportTicketMutation, {
-            input: formData
-          })
-          if (response.data.submitSupportTicket.ok) {
-            this.resetFormData()
 
-            this.$toast.show({
-              type: 'success',
-              message: `We've successfully recorded your support ticket. Expect a response from our team via email shortly.`,
-              timeout: 5
-            })
-          } else {
-            this.$toast.danger('An error occurred while submitting your ticket.')
+    //? Validate form data
+    const dataToValidate: SupportValidationData = {
+      authorEmail: this.authorEmail,
+      authorCC: this.authorCC,
+      supportSubject: this.supportSubject,
+      supportText: this.supportText,
+      ticketAuthor: this.ticketAuthor
+    }
+
+    if (!this.validateInputs(dataToValidate)) {
+      return
+    }
+
+    const formData: FormDataT = {
+      fromEmail: dataToValidate.authorEmail,
+      ccEmails: dataToValidate.authorCC,
+      subject: dataToValidate.supportSubject,
+      body: `Account/Organization Name: ${dataToValidate.ticketAuthor} <br/> ${this.supportHTML}`
+    }
+
+    try {
+      await this.updateRefreshTokenIfNeeded()
+      if (process.client && this.filesToUpload.length) {
+        const csrfToken = this.$cookies.get('csrftoken')
+        const token = this.$store?.getters[`account/auth/${AuthGetterTypes.TOKEN}`] as string
+
+        const fileUploadTokens = await uploadFiles(
+          `${this.UPLOAD_ENDPOINT}/api/upload/`,
+          FileUploadContexts.zendesk,
+          this.filesToUpload,
+          {
+            headers: {
+              'X-CSRFToken': csrfToken,
+              Authorization: `JWT ${token}`
+            }
           }
-        } catch (reqErr) {
-          this.$toast.danger('An error occurred while submitting your ticket.')
-          this.logErrorForUser(reqErr as Error, 'Support Page', formData)
-        }
+        )
+        formData.attachments = fileUploadTokens
       }
+      await this.submitSupportData(formData)
     } catch (err) {
-      this.$toast.danger((err as Error).message)
+      const tickerError = err as Error
+      if (err instanceof FileUploadError) {
+        this.$toast.show({
+          type: 'danger',
+          message: err.message,
+          timeout: 5
+        })
+      } else if (tickerError.message === 'attachment-failed') {
+        this.$toast.show({
+          type: 'danger',
+          message:
+            'An error occurred while uploading attachments for your support request. Please upload your attachments again and submit the form. If the issue persists, please email us at support@deepsource.io.',
+          timeout: 5
+        })
+      } else if (tickerError.message === 'ticket-creation-failed') {
+        this.$toast.show({
+          type: 'danger',
+          message:
+            'An error occurred while creating your support request. Please try submitting the form again. If the issue persists, email us at support@deepsource.io.',
+          timeout: 5
+        })
+      } else {
+        this.$toast.show({
+          type: 'danger',
+          message:
+            'An error occurred while creating your support request. Please try submitting the form again. If the issue persists, email us at support@deepsource.io.',
+          timeout: 5
+        })
+      }
+
+      this.$logErrorAndToast(tickerError, undefined, this.viewer, {
+        context: 'Support page',
+        params: formData as unknown as Record<string, unknown>
+      })
     } finally {
       this.isFormSubmitting = false
     }
@@ -365,7 +598,7 @@ export default class Support extends mixins(ActiveUserMixin) {
 }
 </script>
 
-<style>
+<style lang="postcss">
 .z-rich-text .ProseMirror p.is-editor-empty:first-child::before {
   content: attr(data-placeholder);
   @apply h-0 pointer-events-none float-left text-slate;

@@ -36,6 +36,7 @@
       "RepositoryCoverageReportItem",
       "RepositoryIssue",
       "RepositoryMetricValue",
+      "RepositorySetting",
       "Run",
       "SilenceRule",
       "SourceableRepository",

@@ -116,11 +116,12 @@ export default class RecentlyActiveRepoList extends mixins(ActiveUserMixin, Repo
       limit: 10
     })
 
-    this.$localStore.set(
-      `${provider}-${owner}`,
-      'recently-active-repo-count',
-      this.repoWithActiveAnalysisWithAnalyzers?.length ?? 0
-    )
+    if (process.client)
+      this.$localStore.set(
+        `${provider}-${owner}`,
+        'recently-active-repo-count',
+        this.repoWithActiveAnalysisWithAnalyzers?.length ?? 0
+      )
     this.repoListLoading = false
   }
 

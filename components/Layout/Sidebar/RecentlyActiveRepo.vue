@@ -136,11 +136,12 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
   updateLocalState(): void {
     const { provider, owner } = this.$route.params
 
-    this.$localStore.set(
-      'ui-state',
-      `is-sidebar-collapsed-${provider}-${owner}`,
-      this.dropdownCollapsed
-    )
+    if (process.client)
+      this.$localStore.set(
+        'ui-state',
+        `is-sidebar-collapsed-${provider}-${owner}`,
+        this.dropdownCollapsed
+      )
   }
 
   get repoList(): Array<Record<string, unknown>> {

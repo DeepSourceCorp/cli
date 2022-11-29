@@ -156,7 +156,7 @@ export default class IssueOverviewCards extends mixins(RepoDetailMixin, RoleAcce
   setLoaderCount(): void {
     const { provider, owner, repo } = this.$route.params
 
-    if (this.issueWidgets) {
+    if (process.client && this.issueWidgets) {
       this.$localStore.set(
         `${provider}-${owner}-${repo}`,
         'issue-overview-loader-count',
