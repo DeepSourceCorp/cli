@@ -10,8 +10,8 @@
     </div>
     <div class="p-4 pt-0 max-w-7xl">
       <form
-        class="grid mt-4 gap-y-5"
         novalidate
+        class="grid mt-4 gap-y-5"
         @submit.prevent="createSupportTicket"
         @reset.prevent="resetFormData"
       >
@@ -41,12 +41,12 @@
               >
                 <div class="flex items-center space-x-2">
                   <z-avatar
+                    :fallback-image="getDefaultAvatar(context.login, context.type === 'user')"
+                    :image="context.avatar_url"
+                    :user-name="context.login"
                     type="span"
                     size="sm"
                     class="flex-shrink-0"
-                    :image="context.avatar_url"
-                    :fallback-image="getDefaultAvatar(context.login, context.type === 'user')"
-                    :user-name="context.login"
                   />
                   <span>
                     {{ context.team_name || context.login }}
@@ -90,11 +90,11 @@
         <div class="space-y-1.5 max-w-lg">
           <label for="author-cc" class="text-xs">CC</label>
           <z-input
-            v-model="authorCC"
             id="author-cc"
-            type="email"
-            :validate-on-blur="false"
+            v-model="authorCC"
             :disabled="isFormSubmitting"
+            :validate-on-blur="false"
+            type="email"
             padding="px-4"
             placeholder=""
             multiple
@@ -107,10 +107,10 @@
         <div class="space-y-1.5 max-w-lg">
           <label for="support-subject" class="text-xs">Subject</label>
           <z-input
-            v-model="supportSubject"
             id="support-subject"
-            type="text"
+            v-model="supportSubject"
             :disabled="isFormSubmitting"
+            type="text"
             max-length="250"
             placeholder=""
             padding="px-4"
@@ -123,19 +123,19 @@
             <div class="min-w-0">
               <z-rich-text
                 v-model="supportHTML"
-                placeholder=""
-                :min-length="20"
-                min-length-err-msg="Please add at least 20 characters in the issue description."
-                :max-length="1024"
                 :disabled="isFormSubmitting"
-                :class="{ 'cursor-not-allowed': isFormSubmitting }"
+                :min-length="20"
+                :max-length="1024"
                 aria-labelledby="support-description"
+                min-length-err-msg="Please add at least 20 characters in the issue description."
+                placeholder=""
+                :class="{ 'cursor-not-allowed': isFormSubmitting }"
               >
                 <template v-if="!$config.onPrem" #left-toolbar>
                   <z-file-input
+                    :disabled="isFileProcessing || isFormSubmitting"
                     ref="fileUploader"
                     label="Add files"
-                    :disabled="isFileProcessing || isFormSubmitting"
                     multiple
                     accept="video/mp4,video/quicktime,image/jpeg,image/png,text/plain,text/csv,application/rtf,application/xml,text/rtf"
                     @change="prepareFiles"
@@ -143,20 +143,20 @@
                   >
                     <template v-slot:activator="{ open }">
                       <z-button
+                        v-tooltip="'Attach files'"
+                        :disabled="isFileProcessing || isFormSubmitting"
+                        :is-loading="isFileProcessing"
                         icon="paperclip"
                         size="x-small"
                         button-type="ghost"
                         icon-color="vanilla-400"
                         type="button"
-                        :disabled="isFileProcessing || isFormSubmitting"
-                        :is-loading="isFileProcessing"
-                        v-tooltip="'Attach files'"
-                        class="ml-1 opacity-60 hover:opacity-100 hover:text-vanilla-100"
                         :class="
                           isFileProcessing || isFormSubmitting
                             ? 'cursor-not-allowed'
                             : 'cursor-pointer'
                         "
+                        class="ml-1 opacity-60 hover:opacity-100 hover:text-vanilla-100"
                         @click="open"
                       />
                     </template>
@@ -178,13 +178,13 @@
             >
               <span>{{ uploadedFile.name }}</span>
               <button
+                v-tooltip="'Remove file'"
+                :disabled="isFileProcessing || isFormSubmitting"
                 type="button"
-                class="p-1 rounded-sm hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
                 :class="
                   isFileProcessing || isFormSubmitting ? 'cursor-not-allowed' : 'cursor-pointer'
                 "
-                :disabled="isFileProcessing || isFormSubmitting"
-                v-tooltip="'Remove file'"
+                class="p-1 rounded-sm hover:bg-cherry-600 hover:bg-opacity-20 disabled:opacity-50"
                 @click="removeFile(index)"
               >
                 <z-icon icon="trash-2" color="cherry" size="x-small"></z-icon>
@@ -194,10 +194,10 @@
         </div>
         <div class="space-y-1.5 max-w-lg flex justify-end">
           <z-button
-            type="submit"
-            icon="mail"
             :disabled="isFileProcessing || isFormSubmitting"
             :is-loading="isFormSubmitting"
+            type="submit"
+            icon="mail"
             loading-label="Sending request"
             label="Send request"
             size="small"
@@ -421,8 +421,8 @@ export default class Support extends mixins(ActiveUserMixin) {
   /**
    * Validates and appends files to {@link filesToUpload} on `change` event of file input.
    *
-   * @params {Event} - Change event of a file
-   *
+   * @param {Event} event - Change event of a file
+   * @param {HTMLInputElement} target
    * @returns {void}
    */
   prepareFiles({ target }: { target: HTMLInputElement }): void {
@@ -433,7 +433,7 @@ export default class Support extends mixins(ActiveUserMixin) {
         if (this.validateFileSize(arrayOfFiles) && this.validateFileNames(arrayOfFiles))
           this.filesToUpload = this.filesToUpload.concat(arrayOfFiles)
       } catch (err) {
-        this.$toast.danger('An error occured while processing files.')
+        this.$toast.danger('An error occurred while processing files.')
       } finally {
         this.isFileProcessing = false
       }
@@ -444,7 +444,6 @@ export default class Support extends mixins(ActiveUserMixin) {
    * Deletes a given file via its index from {@link filesToUpload}
    *
    * @param {number} fileIndex - Index of the file to delete
-   *
    * @returns {boolean}
    */
   removeFile(fileIndex: number): void {
@@ -467,7 +466,6 @@ export default class Support extends mixins(ActiveUserMixin) {
    * Creates a support ticket by calling the mutation with given data.
    *
    * @param {FormDataT} formData - Data for the support ticket.
-   *
    * @returns {Promise<void>}
    */
   async submitSupportData(formData: FormDataT): Promise<void> {
