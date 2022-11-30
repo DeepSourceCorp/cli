@@ -460,6 +460,7 @@ export default class Support extends mixins(ActiveUserMixin) {
     this.authorCC = ''
     this.supportSubject = ''
     this.supportHTML = ''
+    this.filesToUpload = []
   }
 
   /**
