@@ -72,7 +72,10 @@
                 "
                 role="button"
               >
-                <analyzer-logo :shortcode="analyzer.shortcode" />
+                <analyzer-logo
+                  :analyzer-logo="analyzer.analyzerLogo"
+                  :shortcode="analyzer.shortcode"
+                />
                 <span class="text-xs"> {{ analyzer.name }} </span>
               </nuxt-link>
             </template>
