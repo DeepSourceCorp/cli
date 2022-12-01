@@ -1,5 +1,5 @@
 <template>
-  <div class="py-4 px-3 grid content-between" :class="{ aggregate: isMetricAggregate }">
+  <div class="py-4 px-3 grid content-between gap-4" :class="{ aggregate: isMetricAggregate }">
     <div v-if="isMetricAggregate" class="flex items-center justify-between w-full">
       <div class="flex items-center gap-x-2 w-full justify-between">
         <div class="flex items-center gap-x-2">
@@ -23,6 +23,7 @@
         </div>
       </div>
     </div>
+
     <div v-else class="space-y-4">
       <div class="flex justify-between">
         <div class="flex items-center gap-x-2 leading-normal text-sm text-vanilla-100">
@@ -50,46 +51,47 @@
           >
         </div>
       </div>
-      <div
-        v-if="metricThresholdRelation || showMetricSuppressButton"
-        class="flex w-full gap-x-2 justify-between"
-      >
-        <div v-if="metricThresholdRelation" class="flex items-center justify-between w-full">
-          <div
-            v-if="metric.isSuppressed"
-            class="inline-flex items-center space-x-2 px-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
-          >
-            <z-icon icon="minus-circle" size="x-small" />
-            <span
-              class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400"
-              >{{ metricThresholdRelation }}</span
-            >
-          </div>
-          <div
-            v-else
-            class="inline-flex items-center space-x-2 px-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
-          >
-            <z-icon
-              :icon="metricThresholdRelationIcon"
-              :color="metric.isPassing ? 'juniper' : 'cherry'"
-              size="x-small"
-            />
-            <span
-              class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5"
-              :class="metric.isPassing ? 'text-juniper' : 'text-cherry'"
-              >{{ metricThresholdRelation }}</span
-            >
-          </div>
-        </div>
-        <button
-          v-if="showMetricSuppressButton"
-          class="flex items-center gap-x-1 px-2 text-xs text-vanilla-400 rounded-md cursor-pointer bg-ink-100 hover:bg-ink-50 border border-ink-50"
-          @click="$emit('confirmMetricSuppression', metric)"
+    </div>
+
+    <div
+      v-if="metricThresholdRelation || showMetricSuppressButton"
+      class="flex w-full gap-x-2 justify-between"
+    >
+      <div v-if="metricThresholdRelation" class="flex items-center justify-between w-full">
+        <div
+          v-if="metric.isSuppressed"
+          class="inline-flex items-center space-x-2 px-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
         >
           <z-icon icon="minus-circle" size="x-small" />
-          Suppress
-        </button>
+          <span
+            class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-vanilla-400"
+            >{{ metricThresholdRelation }}</span
+          >
+        </div>
+        <div
+          v-else
+          class="inline-flex items-center space-x-2 px-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
+        >
+          <z-icon
+            :icon="metricThresholdRelationIcon"
+            :color="metric.isPassing ? 'juniper' : 'cherry'"
+            size="x-small"
+          />
+          <span
+            class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5"
+            :class="metric.isPassing ? 'text-juniper' : 'text-cherry'"
+            >{{ metricThresholdRelation }}</span
+          >
+        </div>
       </div>
+      <button
+        v-if="showMetricSuppressButton"
+        class="flex items-center gap-x-1 px-2 text-xs text-vanilla-400 rounded-md cursor-pointer bg-ink-100 hover:bg-ink-50 border border-ink-50"
+        @click="$emit('confirmMetricSuppression', metric)"
+      >
+        <z-icon icon="minus-circle" size="x-small" />
+        Suppress
+      </button>
     </div>
   </div>
 </template>

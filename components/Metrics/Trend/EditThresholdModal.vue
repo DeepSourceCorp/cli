@@ -120,6 +120,10 @@ export default class EditThresholdModal extends Vue {
    */
   updateThreshold(close?: () => void): void {
     if (!this.thresholdInputError) {
+      if (close && this.newThresholdValue === undefined) {
+        return close()
+      }
+
       this.$emit('editThreshold', Number(this.newThresholdValue), this.analyzerKey, close)
     } else {
       this.$toast.danger('Please enter a valid threshold value.')
