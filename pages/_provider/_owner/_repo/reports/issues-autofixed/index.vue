@@ -18,13 +18,14 @@
       </template>
 
       <div
-        v-if="historicalValuesLoading"
+        v-show="historicalValuesLoading"
         class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-      <div v-else>
+      <div v-show="!historicalValuesLoading">
         <z-chart
           v-if="shouldChartBeShown"
           :data-sets="datasets"
+          :key="reportRerenderKey"
           :labels="labels"
           :colors="['juniper-500', 'juniper-100']"
           :bar-options="{ stacked: true }"

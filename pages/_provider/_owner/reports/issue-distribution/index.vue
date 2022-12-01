@@ -32,7 +32,7 @@
         <z-chart
           v-if="shouldChartBeShown"
           :data-sets="issueDistributionData"
-          :key="activeFilter"
+          :key="reportRerenderKey"
           :labels="labels"
           :colors="colorShades"
           :bar-options="{ stacked: true }"
@@ -59,7 +59,7 @@
     <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
     <distribution-stats
       v-if="distributionStatsLoading || distributionStats.length"
-      :key="activeFilter"
+      :key="reportRerenderKey"
       :stats="distributionStats"
       :link-cards="false"
       :stat-type="activeFilter"

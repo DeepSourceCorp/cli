@@ -352,6 +352,8 @@ export default {
   vue: {
     config: {
       transpileDependencies: []
+      // productionTip: false,
+      // devtools: true
     }
   }
 }

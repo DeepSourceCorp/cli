@@ -65,7 +65,10 @@ export default class ReportMixin extends Vue {
     this.$cookies.get('reports-default-daterange-filter') ?? Object.keys(this.dateRangeOptions)[0]
 
   get maxDigitHistoricValues(): number {
-    return Math.max(...this.historicalValues?.values?.count)
+    if (this.historicalValues?.values?.count) {
+      return Math.max(...this.historicalValues.values.count)
+    }
+    return 0
   }
 
   get maxLineClip() {
@@ -86,6 +89,10 @@ export default class ReportMixin extends Vue {
 
   get currentVal(): number {
     return this.report?.currentValue ?? 0
+  }
+
+  get reportRerenderKey(): string {
+    return `${this.dateRangeFilter}-${this.maxDigitHistoricValues}-${this.datasets.length}`
   }
 
   /**

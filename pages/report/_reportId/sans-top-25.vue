@@ -32,6 +32,7 @@
             <z-chart
               v-if="shouldChartBeShown"
               :data-sets="datasets"
+              :key="reportRerenderKey"
               :labels="labels"
               :colors="chartColors"
               :axis-options="{

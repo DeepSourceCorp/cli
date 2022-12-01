@@ -115,6 +115,10 @@ export default class DistributionReportMixin extends mixins(ReportMixin) {
         : this.historicalValues.values.analyzer
     ) as Record<string, number[]>
 
+    if (!currentActiveDistribution) {
+      return 0
+    }
+
     // We extract values from the record above.
     // Super array is now an array of arrays
     const superArr = Object.values(currentActiveDistribution)
@@ -146,5 +150,9 @@ export default class DistributionReportMixin extends mixins(ReportMixin) {
     }
 
     return max
+  }
+
+  get reportRerenderKey(): string {
+    return `${this.activeFilter}-${this.dateRangeFilter}-${this.maxBarClip}-${this.issueDistributionData.length}`
   }
 }

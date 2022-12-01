@@ -26,14 +26,14 @@
       </template>
 
       <div
-        v-if="historicalValuesLoading"
+        v-show="historicalValuesLoading"
         class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-      <div v-else>
+      <div v-show="!historicalValuesLoading">
         <z-chart
           v-if="shouldChartBeShown"
           :data-sets="issueDistributionData"
-          :key="activeFilter"
+          :key="reportRerenderKey"
           :labels="labels"
           :colors="colorShades"
           :bar-options="{ stacked: true }"
@@ -59,7 +59,7 @@
     <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
     <distribution-stats
       v-if="distributionStatsLoading || distributionStats.length"
-      :key="activeFilter"
+      :key="reportRerenderKey"
       :stats="distributionStats"
       :stat-type="activeFilter"
       :loading="distributionStatsLoading"

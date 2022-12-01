@@ -34,6 +34,7 @@
             <z-chart
               v-if="shouldChartBeShown"
               :data-sets="datasets"
+              :key="reportRerenderKey"
               :labels="labels"
               :colors="['juniper-500', 'juniper-100']"
               :bar-options="{ stacked: true }"
