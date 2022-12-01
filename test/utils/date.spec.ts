@@ -99,7 +99,7 @@ test('[[ parseISODate ]]', () => {
 
 test('[[ getNextMonth ]]', () => {
   const thisMonth = new Date().getMonth()
-  expect(getNextMonth().getMonth()).toBe(thisMonth + 1 > 12 ? 1 : thisMonth + 1)
+  expect(getNextMonth().getMonth()).toBe(thisMonth + 1 > 11 ? 0 : thisMonth + 1)
 })
 
 test('[[ getNextYear ]]', () => {
