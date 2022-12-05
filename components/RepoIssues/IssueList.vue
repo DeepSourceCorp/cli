@@ -67,11 +67,11 @@
     </div>
     <lazy-empty-state
       v-else
-      :title="`No results found for '${searchValue}'`"
-      :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
-      :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
+      :title="emptyStateTitle"
+      :subtitle="emptyStateSubtitle"
+      :png-image-path="emptyStateImagePaths.png"
+      :webp-image-path="emptyStateImagePaths.webp"
       :show-border="true"
-      subtitle="Please try changing your search query."
     />
   </div>
 </template>
@@ -177,6 +177,27 @@ export default class IssueList extends Vue {
 
   get totalVisible(): number {
     return this.pageCount >= VISIBLE_PAGES ? VISIBLE_PAGES : this.pageCount
+  }
+
+  get emptyStateTitle() {
+    return this.searchValue
+      ? `No results found for '${this.searchValue}'`
+      : 'No more occurrences of this issue'
+  }
+
+  get emptyStateSubtitle() {
+    return this.searchValue ? 'Please try changing your search query' : 'Give yourself a cookie.'
+  }
+
+  get emptyStateImagePaths() {
+    return {
+      png: this.searchValue
+        ? require('~/assets/images/ui-states/directory/empty-search.gif')
+        : require('~/assets/images/ui-states/issues/no-issues-found-static-140px.png'),
+      webp: this.searchValue
+        ? require('~/assets/images/ui-states/directory/empty-search.webp')
+        : require('~/assets/images/ui-states/issues/no-issues-found-static-140px.webp')
+    }
   }
 
   private sortFilters: Array<Record<string, string | boolean>> = [
