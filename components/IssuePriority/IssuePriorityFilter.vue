@@ -12,7 +12,7 @@
         />
       </template>
       <template slot="body" class="text-vanilla-200">
-        <div class="max-h-56 overflow-y-auto">
+        <div class="max-h-56 space-y-px overflow-y-auto hide-scroll">
           <z-menu-item
             v-for="filter in languageFilters"
             :key="filter.shortcode"
@@ -58,7 +58,7 @@ import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
 import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsourcelabs/zeal'
 import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
-import { Analyzer, AnalyzerConnection, IssuePriorityLevel, Maybe } from '~/types/types'
+import { Analyzer, AnalyzerConnection, IssuePriorityLevel } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
