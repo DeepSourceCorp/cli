@@ -74,12 +74,6 @@ describe('[[EmptyTrend]]', () => {
       threshold: 50
     }
 
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
-
     const namespaceProp = generateGenericProps(
       'namespacesTrend',
       [aggregateNamespace, genericNamespace],

@@ -1,9 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ChartContainer 1`] = `
-"<div class=\\"grid grid-cols-1 py-4 border rounded-lg border-ink-200 min-h-96\\">
+exports[`[[ ChartContainer ]] renders chart container with all prop options: {"isWidget":false,"chartPresent":false} 1`] = `
+"<div class=\\"py-4 border border-ink-200 rounded-lg\\">
+  <div class=\\"px-5\\">
+    <h2>Report header</h2>
+  </div>
   <div class=\\"flex justify-between gap-4 px-5\\">
-    <div class=\\"flex flex-wrap gap-y-6 gap-x-12\\"></div>
+    <div class=\\"flex flex-wrap gap-y-6 gap-x-12\\">
+      <p>Report stats</p>
+    </div>
+    <div class=\\"flex-shrink-0\\"></div>
+  </div>
+</div>"
+`;
+
+exports[`[[ ChartContainer ]] renders chart container with all prop options: {"isWidget":false,"chartPresent":true} 1`] = `
+"<div class=\\"py-4 border border-ink-200 rounded-lg min-h-96\\">
+  <div class=\\"px-5\\">
+    <h2>Report header</h2>
+  </div>
+  <div class=\\"flex justify-between gap-4 px-5\\">
+    <div class=\\"flex flex-wrap gap-y-6 gap-x-12\\">
+      <p>Report stats</p>
+    </div>
+    <div class=\\"flex-shrink-0\\"></div>
+  </div>
+</div>"
+`;
+
+exports[`[[ ChartContainer ]] renders chart container with all prop options: {"isWidget":true,"chartPresent":false} 1`] = `
+"<div class=\\"py-4 border border-ink-200 rounded-md\\">
+  <div class=\\"px-5\\">
+    <h2>Report header</h2>
+  </div>
+  <div class=\\"flex justify-between gap-4 px-5\\">
+    <div class=\\"flex flex-wrap gap-y-6 gap-x-12\\">
+      <p>Report stats</p>
+    </div>
+    <div class=\\"flex-shrink-0\\"></div>
+  </div>
+</div>"
+`;
+
+exports[`[[ ChartContainer ]] renders chart container with all prop options: {"isWidget":true,"chartPresent":true} 1`] = `
+"<div class=\\"py-4 border border-ink-200 rounded-md min-h-96\\">
+  <div class=\\"px-5\\">
+    <h2>Report header</h2>
+  </div>
+  <div class=\\"flex justify-between gap-4 px-5\\">
+    <div class=\\"flex flex-wrap gap-y-6 gap-x-12\\">
+      <p>Report stats</p>
+    </div>
     <div class=\\"flex-shrink-0\\"></div>
   </div>
 </div>"

@@ -1,8 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ComplianceStats with all prop options: {"title":"Active Issues","value":12} 1`] = `
+exports[`renders ComplianceStats with all prop options: {"title":"Active Issues","value":12,"loading":false} 1`] = `
 "<div class=\\"text-xs h-14 flex flex-col justify-between\\">
   <p class=\\"text-vanilla-400 mb-2 font-semibold uppercase tracking-wider leading-7\\">Active Issues</p>
-  <p class=\\"text-base text-vanilla-100 font-semibold leading-8\\">12</p>
+  <p class=\\"text-base text-vanilla-100 font-semibold leading-8\\">
+    12
+  </p>
+</div>"
+`;
+
+exports[`renders ComplianceStats with all prop options: {"title":"Active Issues","value":12,"loading":true} 1`] = `
+"<div class=\\"text-xs h-14 flex flex-col justify-between\\">
+  <p class=\\"text-vanilla-400 mb-2 font-semibold uppercase tracking-wider leading-7\\">Active Issues</p>
+  <div class=\\"h-6 mt-px rounded-sm bg-ink-300 animate-pulse\\"></div>
 </div>"
 `;

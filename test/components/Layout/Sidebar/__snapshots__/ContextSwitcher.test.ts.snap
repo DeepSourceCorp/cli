@@ -1,53 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ContextSwitcher ]] renders ContextSwitcher with all prop options: {"isCollapsed":false} 1`] = `
-"<zmenu-stub direction=\\"right\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"w-full\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none hover:bg-ink-200\\">
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span>deepsourcelabs</span>
-  </button>
-  <zmenusection-stub title=\\"Select dashboard view\\" divider=\\"true\\" class=\\"overflow-y-auto max-h-102\\">
-    <zmenuitem-stub as=\\"nuxt-link\\" closeonclick=\\"true\\" to=\\"/gh/deepsourcelabs\\" class=\\"flex items-center w-full space-x-1\\">
-      <zavatar-stub type=\\"span\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-100 p-0.5\\"></zavatar-stub>
-      <div class=\\"flex-col flex-1\\"><span class=\\"text-sm font-medium text-vanilla-200\\">deepsourcelabs</span>
-        <p class=\\"mt-1 text-xs text-vanilla-400\\">
-          GitHub
-          Team
-        </p>
-      </div>
-      <div class=\\"pr-2\\">
-        <zicon-stub icon=\\"star\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"min-w-4 min-h-4 fill-current\\"></zicon-stub>
-      </div>
-    </zmenuitem-stub>
-  </zmenusection-stub>
-  <zmenusection-stub>
-    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"plus\\" closeonclick=\\"true\\" to=\\"/installation/providers/\\">
-      Add new account
-    </zmenuitem-stub>
-  </zmenusection-stub>
-</zmenu-stub>"
+"<span class=\\"relative z-menu w-full\\"><div class=\\"leading-none\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none hover:bg-ink-200\\"><zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0\\"></zavatar-stub> <span>deepsourcelabs</span></button></div>
+<!----></span>"
 `;
 
 exports[`[[ ContextSwitcher ]] renders ContextSwitcher with all prop options: {"isCollapsed":true} 1`] = `
-"<zmenu-stub direction=\\"right\\" placement=\\"bottom\\" size=\\"base\\" width=\\"base\\" bodyspacing=\\"\\" triggerlabel=\\"Menu\\" itemszclass=\\"z-10\\" class=\\"w-full\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none hover:opacity-75 px-0\\">
-    <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0 mx-auto\\"></zavatar-stub> <span style=\\"display: none;\\">deepsourcelabs</span>
-  </button>
-  <zmenusection-stub title=\\"Select dashboard view\\" divider=\\"true\\" class=\\"overflow-y-auto max-h-102\\">
-    <zmenuitem-stub as=\\"nuxt-link\\" closeonclick=\\"true\\" to=\\"/gh/deepsourcelabs\\" class=\\"flex items-center w-full space-x-1\\">
-      <zavatar-stub type=\\"span\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-100 p-0.5\\"></zavatar-stub>
-      <div class=\\"flex-col flex-1\\"><span class=\\"text-sm font-medium text-vanilla-200\\">deepsourcelabs</span>
-        <p class=\\"mt-1 text-xs text-vanilla-400\\">
-          GitHub
-          Team
-        </p>
-      </div>
-      <div class=\\"pr-2\\">
-        <zicon-stub icon=\\"star\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"min-w-4 min-h-4 fill-current\\"></zicon-stub>
-      </div>
-    </zmenuitem-stub>
-  </zmenusection-stub>
-  <zmenusection-stub>
-    <zmenuitem-stub as=\\"nuxt-link\\" icon=\\"plus\\" closeonclick=\\"true\\" to=\\"/installation/providers/\\">
-      Add new account
-    </zmenuitem-stub>
-  </zmenusection-stub>
-</zmenu-stub>"
+"<span class=\\"relative z-menu w-full\\"><div class=\\"leading-none\\"><button type=\\"button\\" class=\\"flex items-center w-full p-1 space-x-2 text-sm transition-all duration-75 rounded-sm outline-none text-vanilla-200 focus:outline-none hover:opacity-75 px-0\\"><zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"sm\\" stroke=\\"bg-ink-100 p-0.5\\" class=\\"flex-shrink-0 mx-auto\\"></zavatar-stub> <span style=\\"display: none;\\">deepsourcelabs</span></button></div>
+<!----></span>"
 `;

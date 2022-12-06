@@ -56,7 +56,7 @@
           v-bind="generalizeRun(branchRun)"
           :key="branchRun.runId"
           :is-secondary="true"
-          class="ml-4 is-group-item"
+          class="ml-4 nested-group-item"
           action-text="Analyzed"
         />
       </div>

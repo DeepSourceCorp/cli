@@ -169,7 +169,7 @@ export default class AnalyzerSearch extends mixins(AnalyzerListMixin) {
    * @return {void}
    */
   outsideClickHandler(event: InputEvent): void {
-    const addButton = this.$parent.$refs['add-analyzer-button'] as Vue
+    const addButton = this.$parent?.$refs['add-analyzer-button'] as Vue
     if (addButton) {
       const el = addButton.$el
       if (event.target == el || el.contains(event.target as Element)) {

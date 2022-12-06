@@ -9,11 +9,7 @@
     <section v-if="report" class="space-y-4">
       <chart-container :chart-present="shareHistoricalData">
         <template #report-stats>
-          <chart-stat
-            :value="shortenLargeNumber(currentVal)"
-            :loading="reportsDataLoading"
-            title="Issues Autofixed"
-          />
+          <chart-stat :value="currentVal" :loading="reportsDataLoading" title="Issues Autofixed" />
         </template>
 
         <template #report-control>

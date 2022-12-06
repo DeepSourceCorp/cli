@@ -74,12 +74,6 @@ describe('[[TrendSection]]', () => {
   }
 
   test('renders TrendSection with all prop options', () => {
-    global.ResizeObserver = jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn()
-    }))
-
     const namespaceProp = generateGenericProps(
       'namespacesTrend',
       [aggregateNamespace, genericNamespace],

@@ -75,6 +75,9 @@ module.exports = {
       borderRadius: {
         '3px': '3px'
       },
+      boxShadow: {
+        blur: '-12px 0px 8px rgba(22, 24, 29, 1);'
+      },
       animation: {
         'glow-bg': 'glow 4s ease-out 1ms infinite',
         'pulse-border-once': 'pulse-border-once 1s ease-in forwards',

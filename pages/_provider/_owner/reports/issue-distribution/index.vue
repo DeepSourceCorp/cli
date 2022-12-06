@@ -2,11 +2,7 @@
   <div class="flex flex-col gap-y-4">
     <chart-container>
       <template #report-stats>
-        <chart-stat
-          title="Total Issues"
-          :value="shortenLargeNumber(currentVal)"
-          :loading="reportsDataLoading"
-        />
+        <chart-stat title="Total Issues" :value="currentVal" :loading="reportsDataLoading" />
       </template>
 
       <template #report-control>
@@ -69,15 +65,15 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
 import { ZChart } from '@deepsourcelabs/zeal'
+import { Component, mixins } from 'nuxt-property-decorator'
 
-import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import DistributionReportMixin from '~/mixins/distributionReportMixin'
+import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import RouteQueryMixin from '~/mixins/routeQueryMixin'
 
-import { shortenLargeNumber } from '~/utils/string'
-import { ReportLevel } from '~/types/types'
 import { IssueDistributionT, ReportPageT } from '~/types/reportTypes'
+import { ReportLevel } from '~/types/types'
 import { getColorShades } from '~/utils/ui'
 
 const BASE_COLOR = '#1035ad'
@@ -89,14 +85,12 @@ const BASE_COLOR = '#1035ad'
   layout: 'dashboard',
   components: {
     ZChart
-  },
-  methods: {
-    shortenLargeNumber
   }
 })
 export default class IssueDistributionPage extends mixins(
+  DistributionReportMixin,
   OwnerDetailMixin,
-  DistributionReportMixin
+  RouteQueryMixin
 ) {
   readonly IssueDistributionT = IssueDistributionT
 
@@ -138,6 +132,10 @@ export default class IssueDistributionPage extends mixins(
   async fetchDistributionData(): Promise<void> {
     // Flushing distribution stats before changing distribution type
     this.distributionStats = []
+
+    // Update `filter` query param
+    this.addFilters({ filter: this.activeFilter })
+
     this.distributionStats = await this.fetchDistributionStats(
       ReportPageT.DISTRIBUTION,
       ReportLevel.Owner,
@@ -155,6 +153,16 @@ export default class IssueDistributionPage extends mixins(
     await this.fetchHistoricalValues(ReportLevel.Owner, this.owner.id, ReportPageT.DISTRIBUTION)
 
     this.setDistributionChartData()
+  }
+
+  /**
+   * Callback for route replace
+   *
+   * @returns {Promise<void>}
+   */
+  async refetchAfterRouteChange(): Promise<void> {
+    // Override the method from `RouteQueryMixin`
+    // Re-fetch is not required in this case
   }
 }
 </script>

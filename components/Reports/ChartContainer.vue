@@ -1,9 +1,16 @@
 <template>
   <div
-    class="grid grid-cols-1 py-4 border rounded-lg border-ink-200"
-    :class="{ 'min-h-96': chartPresent }"
+    :class="[isWidget ? 'rounded-md' : 'rounded-lg', { 'min-h-96': chartPresent }]"
+    class="py-4 border border-ink-200"
   >
-    <div class="flex justify-between gap-4 px-5">
+    <div v-if="$slots['report-header']" class="px-5">
+      <slot name="report-header"></slot>
+    </div>
+
+    <div
+      v-if="$slots['report-stats'] || $slots['report-control']"
+      class="flex justify-between gap-4 px-5"
+    >
       <div class="flex flex-wrap gap-y-6 gap-x-12">
         <slot name="report-stats"></slot>
       </div>
@@ -11,7 +18,8 @@
         <slot name="report-control"></slot>
       </div>
     </div>
-    <slot></slot>
+
+    <slot />
   </div>
 </template>
 
@@ -21,9 +29,12 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 /**
  * Container component for chart and report stats.
  */
-@Component({})
+@Component({ name: 'ChartContainer' })
 export default class ChartContainer extends Vue {
   @Prop({ default: true })
   chartPresent: boolean
+
+  @Prop({ default: false })
+  isWidget: boolean
 }
 </script>

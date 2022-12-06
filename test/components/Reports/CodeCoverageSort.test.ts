@@ -1,9 +1,9 @@
+import { ZButton } from '@deepsourcelabs/zeal'
 import { render } from '@testing-library/vue'
 import { shallowMount } from '@vue/test-utils'
-import { ZButton } from '@deepsourcelabs/zeal'
 
-import { CodeCoverageSort } from '~/components/Reports'
 import { FilterGeneric } from '~/components/Common'
+import { CodeCoverageSort } from '~/components/Reports'
 
 import { cartesian, generateStringProps } from '~/test/utils'
 import { CodeCoverageT, CoverageSortT } from '~/types/reportTypes'
@@ -25,6 +25,7 @@ describe('[[ CodeCoverageSort ]]', () => {
       defaultLabel: 'Line Coverage',
       selectedCoverageSortFilter: ''
     }
+
     const sortOptions = generateStringProps(
       'selectedCoverageSortFilter',
       ['', CoverageSortT.LCV_DESCENDING, CoverageSortT.LCV_ASCENDING],

@@ -584,6 +584,15 @@ declare module '*/updateBillingInfo.gql' {
 }
     
 
+declare module '*/updateOwnerPinnedReports.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updateOwnerPinnedReports: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updatePaymentSource.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1372,6 +1381,15 @@ declare module '*/ownerInstalledIntegration.gql' {
 }
     
 
+declare module '*/pinnedReports.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ownerPinnedReports: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/publicReportListOwner.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1513,6 +1531,15 @@ declare module '*/historicalValues.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const historicalValues: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/pinnedReportData.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const pinnedReportData: DocumentNode;
 
   export default defaultDocument;
 }

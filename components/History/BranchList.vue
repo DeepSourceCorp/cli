@@ -1,9 +1,9 @@
 <template>
   <div
-    class="flex flex-col space-y-2"
     :class="{
-      'is-group transition-all duration-150': isExpanded & !loading
+      'nested-group transition-all duration-150': isExpanded & !loading
     }"
+    class="flex flex-col space-y-2"
   >
     <slot name="collapsed" :toggleItems="toggleItems" :isExpanded="isExpanded"></slot>
     <template v-if="isExpanded && !loading" class="relative">
@@ -57,53 +57,3 @@ export default class BranchList extends Vue {
   }
 }
 </script>
-<style lang="scss">
-$color: #23262e;
-$ident: 14px;
-$left: -($ident);
-
-.is-group {
-  .group-heading {
-    position: relative;
-    &:before {
-      content: '';
-      position: absolute;
-      top: 10px;
-      left: -16px;
-      width: 8px;
-      height: 8px;
-      background-color: $color;
-      border-radius: 100px;
-    }
-  }
-  .is-group-item {
-    position: relative;
-    &:before {
-      content: '';
-      position: absolute;
-      top: -25px;
-      left: $left;
-      border-left: 2px solid $color;
-      border-bottom: 2px solid $color;
-      width: $ident;
-      height: calc(50% + 25px);
-    }
-    &:after {
-      position: absolute;
-      content: '';
-      top: 5px;
-      left: $left;
-      border-left: 2px solid $color;
-      border-top: 0px solid $color;
-      width: $ident;
-      height: 100%;
-    }
-    &:last-child:before {
-      border-bottom-left-radius: 6px;
-    }
-    &:last-child:after {
-      display: none;
-    }
-  }
-}
-</style>

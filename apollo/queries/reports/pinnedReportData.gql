@@ -1,0 +1,14 @@
+query pinnedReportData(
+  $level: ReportLevel!
+  $objectId: ID!
+  $key: String!
+  $startDate: Date!
+  $endDate: Date!
+) {
+  report(level: $level, objectId: $objectId, key: $key) {
+    key
+    status
+    currentValue
+    historicalValues(startDate: $startDate, endDate: $endDate)
+  }
+}

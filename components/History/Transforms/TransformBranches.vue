@@ -13,7 +13,7 @@
         <transform-card
           v-for="branchRun in runsInBranch"
           :key="branchRun.node.runId"
-          class="is-group-item"
+          class="nested-group-item"
           v-bind="branchRun.node"
           actionText="Analyzed"
           link="/history/runs/details"
@@ -24,7 +24,7 @@
       <transform-card
         :key="run.commitOid"
         v-bind="run"
-        class="is-group-item"
+        class="nested-group-item"
         actionText="Analyzed"
         link="/history/runs/details"
       ></transform-card>

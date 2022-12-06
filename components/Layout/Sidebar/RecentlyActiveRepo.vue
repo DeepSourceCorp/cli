@@ -10,7 +10,7 @@
           class="flex items-center justify-center h-8 py-1 space-x-2 text-sm rounded-sm outline-none hover:bg-ink-300 min-w-8 focus:outline-none"
           @click="toggle"
         >
-          <z-icon icon="activity" size="small" class="min-w-4 min-h-4"></z-icon>
+          <z-icon icon="repositories" size="small" class="min-w-4 min-h-4"></z-icon>
         </button>
       </template>
       <template v-slot:body="{ close }" class="z-10">
@@ -50,7 +50,7 @@
         ]"
       >
         <div class="flex items-center space-x-2">
-          <z-icon icon="activity" />
+          <z-icon icon="repositories" />
           <span>Recently active</span>
         </div>
 

@@ -30,9 +30,9 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in create report mode
         <!---->
         <zcheckbox-stub label=\\"Code Health Trend\\" name=\\"\\" value=\\"code-health-trend\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issue Distribution\\" name=\\"\\" value=\\"issue-distribution\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <!---->
         <zcheckbox-stub label=\\"Issues Prevented\\" name=\\"\\" value=\\"issues-prevented\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issues Autofixed\\" name=\\"\\" value=\\"issues-autofixed\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <!---->
         <!---->
       </div>
     </div>
@@ -73,9 +73,9 @@ exports[`[[ MutateReportModal ]] renders MutateReportModal in edit report mode: 
         <!---->
         <zcheckbox-stub label=\\"Code Health Trend\\" name=\\"\\" value=\\"code-health-trend\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issue Distribution\\" name=\\"\\" value=\\"issue-distribution\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <!---->
         <zcheckbox-stub label=\\"Issues Prevented\\" name=\\"\\" value=\\"issues-prevented\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issues Autofixed\\" name=\\"\\" value=\\"issues-autofixed\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <!---->
         <!---->
       </div>
     </div>

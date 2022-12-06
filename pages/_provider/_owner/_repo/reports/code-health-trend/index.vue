@@ -3,7 +3,7 @@
     <chart-container>
       <template #report-stats>
         <chart-stat
-          :value="shortenLargeNumber(report.currentValue)"
+          :value="report.currentValue"
           :loading="reportsDataLoading"
           title="Net New Issues"
         />
@@ -69,6 +69,7 @@ import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 import { ReportLevel } from '~/types/types'
 import { ReportPageT } from '~/types/reportTypes'
+import { getFormattedCodeHealthChartData } from '~/utils/reports'
 
 @Component({
   layout: 'repository',
@@ -124,7 +125,7 @@ export default class CodeHealthTrend extends mixins(RepoDetailMixin, CodeHealthR
       ReportPageT.CODE_HEALTH_TREND
     )
 
-    this.datasets = this.formatCodeHealthChartData(this.historicalValues)
+    this.datasets = getFormattedCodeHealthChartData(this.historicalValues)
   }
 }
 </script>

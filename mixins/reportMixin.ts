@@ -1,7 +1,5 @@
-import dayjs from 'dayjs'
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Dataset, DateRangeOptionT, HistoricalValues } from '~/types/reportTypes'
-import { getDateFromXAgo, DurationTypeT, getDateDiffInDays, formatDate } from '~/utils/date'
 
 import { GraphqlQueryResponse } from '~/types/apolloTypes'
 import { reportBase } from '@/apollo/queries/reports/reportBase.gql'
@@ -18,6 +16,7 @@ import {
 } from '~/types/types'
 
 import { roundToSignificantNumber } from '~/utils/number'
+import { dateRangeOptions, getDateRange, prepareLabels } from '~/utils/reports'
 
 /**
  * Mixin for reports queries and utilities
@@ -38,28 +37,7 @@ export default class ReportMixin extends Vue {
   public distributionStatsLoading = false
   public complianceIssuesLoading = false
 
-  public dateRangeOptions: Record<string, DateRangeOptionT> = {
-    '7d': {
-      count: 7,
-      durationType: DurationTypeT.days
-    },
-    '4w': {
-      count: 4,
-      durationType: DurationTypeT.weeks
-    },
-    '3m': {
-      count: 3,
-      durationType: DurationTypeT.months
-    },
-    '6m': {
-      count: 6,
-      durationType: DurationTypeT.months
-    },
-    '12m': {
-      count: 12,
-      durationType: DurationTypeT.months
-    }
-  }
+  public dateRangeOptions: Record<string, DateRangeOptionT> = dateRangeOptions
 
   public dateRangeFilter: string =
     this.$cookies.get('reports-default-daterange-filter') ?? Object.keys(this.dateRangeOptions)[0]
@@ -123,34 +101,6 @@ export default class ReportMixin extends Vue {
     }
 
     return true
-  }
-
-  /**
-   * Create array of labels by inferring date format type from start and end date.
-   *
-   * @param {HistoricalValues} historicalValues
-   * @param {string} startDate
-   * @param {string} endDate
-   * @returns {Array<string>}
-   */
-  prepareLabels(
-    historicalValues: HistoricalValues,
-    startDate: string,
-    endDate: string
-  ): Array<string> {
-    const dateRange = getDateDiffInDays(endDate, startDate)
-
-    if (Array.isArray(historicalValues.labels) && historicalValues.labels.length) {
-      if (dateRange <= 90) {
-        return historicalValues.labels.map((label: string) => formatDate(new Date(label), 'DD MMM'))
-      } else {
-        return historicalValues.labels.map((label: string) =>
-          formatDate(new Date(label), 'MMM YYYY')
-        )
-      }
-    }
-
-    return []
   }
 
   /**
@@ -238,16 +188,7 @@ export default class ReportMixin extends Vue {
       this.$cookies.set('reports-default-daterange-filter', this.dateRangeFilter)
     }
 
-    const activeDateRangeFilter = this.dateRangeOptions[this.dateRangeFilter]
-
-    const endDate = dayjs().format('YYYY-MM-DD')
-
-    const startDate = getDateFromXAgo(
-      endDate,
-      activeDateRangeFilter.durationType,
-      activeDateRangeFilter.count,
-      'YYYY-MM-DD'
-    )
+    const { startDate, endDate } = getDateRange(this.dateRangeFilter)
 
     if (objectId && level && key) {
       /**
@@ -272,7 +213,7 @@ export default class ReportMixin extends Vue {
 
         // Only setting labels in mixin cause they are common accross every page.
         // Datasets are not.
-        this.labels = this.prepareLabels(this.historicalValues, startDate, endDate)
+        this.labels = prepareLabels(this.historicalValues.labels, startDate, endDate)
       } catch (e) {
         this.$logErrorAndToast(
           e as Error,

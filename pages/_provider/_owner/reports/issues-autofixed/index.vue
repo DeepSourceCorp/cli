@@ -2,11 +2,7 @@
   <div class="flex flex-col gap-y-4">
     <chart-container>
       <template #report-stats>
-        <chart-stat
-          :value="shortenLargeNumber(currentVal)"
-          :loading="reportsDataLoading"
-          title="Issues Autofixed"
-        />
+        <chart-stat :value="currentVal" :loading="reportsDataLoading" title="Issues Autofixed" />
       </template>
 
       <template #report-control>

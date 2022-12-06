@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ EmptyPinnedCodeCoverageTable ]] renders the empty state for pinned code coverage widget empty 1`] = `
+"<div class=\\"rounded-md relative pointer-events-none\\">
+  <div class=\\"z-10 grid absolute mx-auto inset-0 rounded-md place-content-center\\">
+    <p class=\\"text-sm text-center text-vanilla-400\\">Not enough data</p>
+  </div>
+  <codecoveragetable-stub linked-rows=\\"true\\" repo-coverage-list=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"no-filter:opacity-10 blur-table opacity-60\\"></codecoveragetable-stub>
+</div>"
+`;

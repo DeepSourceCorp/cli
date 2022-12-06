@@ -7489,6 +7489,19 @@ export type Unnamed_51_Mutation = (
   )> }
 );
 
+export type UpdateOwnerPinnedReportsMutationVariables = Exact<{
+  input: UpdateOwnerPinnedReportsInput;
+}>;
+
+
+export type UpdateOwnerPinnedReportsMutation = (
+  { __typename?: 'Mutation' }
+  & { updateOwnerPinnedReports?: Maybe<(
+    { __typename?: 'UpdateOwnerPinnedReportsPayload' }
+    & Pick<UpdateOwnerPinnedReportsPayload, 'ok'>
+  )> }
+);
+
 export type Unnamed_52_MutationVariables = Exact<{
   id: Scalars['ID'];
   token: Scalars['String'];
@@ -9175,6 +9188,27 @@ export type OwnerInstalledIntegrationQuery = (
   )> }
 );
 
+export type OwnerPinnedReportsQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type OwnerPinnedReportsQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { setting?: Maybe<(
+      { __typename?: 'OwnerSetting' }
+      & { pinnedReports?: Maybe<Array<Maybe<(
+        { __typename?: 'PinnedReport' }
+        & Pick<PinnedReport, 'key' | 'metadata'>
+      )>>> }
+    )> }
+  )> }
+);
+
 export type PublicReportListOwnerQueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
@@ -9575,6 +9609,23 @@ export type HistoricalValuesQuery = (
   & { report?: Maybe<(
     { __typename?: 'Report' }
     & Pick<Report, 'key' | 'historicalValues'>
+  )> }
+);
+
+export type PinnedReportDataQueryVariables = Exact<{
+  level: ReportLevel;
+  objectId: Scalars['ID'];
+  key: Scalars['String'];
+  startDate: Scalars['Date'];
+  endDate: Scalars['Date'];
+}>;
+
+
+export type PinnedReportDataQuery = (
+  { __typename?: 'Query' }
+  & { report?: Maybe<(
+    { __typename?: 'Report' }
+    & Pick<Report, 'key' | 'status' | 'currentValue' | 'historicalValues'>
   )> }
 );
 

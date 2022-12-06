@@ -1,0 +1,5 @@
+mutation updateOwnerPinnedReports($input: UpdateOwnerPinnedReportsInput!) {
+  updateOwnerPinnedReports(input: $input) {
+    ok
+  }
+}

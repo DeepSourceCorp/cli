@@ -7,13 +7,15 @@ import ReportMixin from './reportMixin'
 
 import { analyzerDistribution } from '@/apollo/queries/reports/analyzerDistribution.gql'
 import { categoryDistribution } from '@/apollo/queries/reports/categoryDistribution.gql'
+import { getMaxDigitDistributionHistoricalValues } from '~/utils/reports'
 
 /**
  * Mixin for distribution report utilities
  */
 @Component({})
 export default class DistributionReportMixin extends mixins(ReportMixin) {
-  public activeFilter: IssueDistributionT = IssueDistributionT.CATEGORY
+  public activeFilter: IssueDistributionT = this.getActiveFilter()
+
   public distributionStats: Array<IssueDistribution> = []
   public analyzerDataset: Array<Dataset> = []
   public categoryDataset: Array<Dataset> = []
@@ -69,6 +71,21 @@ export default class DistributionReportMixin extends mixins(ReportMixin) {
   }
 
   /**
+   * Get the active filter from query params falling back to the value `category`
+   *
+   * @returns {IssueDistributionT}
+   */
+  getActiveFilter(): IssueDistributionT {
+    if (
+      Object.values(IssueDistributionT).includes(this.$route.query.filter as IssueDistributionT)
+    ) {
+      return this.$route.query.filter as IssueDistributionT
+    }
+
+    return IssueDistributionT.CATEGORY
+  }
+
+  /**
    * Set historical values for each distribution type
    *
    * @return void
@@ -97,59 +114,12 @@ export default class DistributionReportMixin extends mixins(ReportMixin) {
       : this.analyzerDataset
   }
 
-  /**
-   * Purpose of this getter:
-   *
-   * If this is the distribution array ->
-   * [18, 9, 3, 3, 3, 14, 9, 0, 8, 12]
-   * [6, 5, 11, 12, 6, 14, 0, 9, 6, 19]
-   * [7, 18, 7, 0, 17, 16, 17, 10, 11, 12]
-   *
-   * We want sum of all values at the same index, and then find the max of those sums.
-   */
+  get currentVal(): number {
+    return this.report?.currentValue ?? 0
+  }
+
   get maxDigitHistoricValues(): number {
-    // current active distribution will be a record with each value as an array
-    const currentActiveDistribution = (
-      this.activeFilter === IssueDistributionT.CATEGORY
-        ? this.historicalValues.values.category
-        : this.historicalValues.values.analyzer
-    ) as Record<string, number[]>
-
-    if (!currentActiveDistribution) {
-      return 0
-    }
-
-    // We extract values from the record above.
-    // Super array is now an array of arrays
-    const superArr = Object.values(currentActiveDistribution)
-
-    // The final max value we'll return
-    let max = Number.MIN_SAFE_INTEGER
-
-    // Total num of child arrays in super array
-    const totalArrays = superArr.length
-
-    // Each child array is of same length, so we find the length of children array
-    const childArrLength = superArr[0].length
-
-    /**
-     * Now we want to find sum of values at each index across all child arrays
-     * i.e. in first iteration of loop below, currentSum will be sum of all elements
-     * at index 0 across all child arrays
-     */
-    for (let i = 0; i < childArrLength; i++) {
-      let currentSum = 0
-
-      for (let j = 0; j < totalArrays; j++) {
-        // get sum of value at a particular index across all child arrays
-        currentSum += superArr[j][i]
-      }
-
-      // Check if the sum we just calculated is the biggest sum yet or not
-      max = currentSum > max ? currentSum : max
-    }
-
-    return max
+    return getMaxDigitDistributionHistoricalValues(this.activeFilter, this.historicalValues)
   }
 
   get reportRerenderKey(): string {

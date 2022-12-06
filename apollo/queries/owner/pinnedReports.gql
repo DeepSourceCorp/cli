@@ -1,0 +1,11 @@
+query ownerPinnedReports($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    setting {
+      pinnedReports {
+        key
+        metadata
+      }
+    }
+  }
+}

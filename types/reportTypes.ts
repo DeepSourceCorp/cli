@@ -1,6 +1,20 @@
 import { DurationTypeT } from '~/utils/date'
 import { smartApostrophe } from '~/utils/string'
-import { PublicReport, ReportLevel, ReportType } from './types'
+import { GraphqlQueryResponse } from './apollo-graphql-types'
+import {
+  PinnedReport,
+  PublicReport,
+  ReportLevel,
+  ReportType,
+  RepositoryCoverageReportItem
+} from './types'
+
+// For use in pinnable reports menu items
+export enum PinnableReportType {
+  COMPLIANCE = 'compliance', // `owasp-top-10` & `sans-top-25`
+  DISTRIBUTION = 'distribution-insights', // `issue-distribution` & `issues-prevented`
+  NON_DISTRIBUTION = 'non-distribution-insights' // `code-coverage`
+}
 
 export type ReportCopyTextT = {
   summary: string | null
@@ -8,10 +22,14 @@ export type ReportCopyTextT = {
 }
 
 export type ReportMetaProperties = {
+  key?: ReportPageT
   title: string
   description: string
   type?: ReportType
-  level: ReportLevel[]
+  pinnableType?: PinnableReportType // For use in pinnable reports menu items
+  helpText?: string
+  level: Array<ReportLevel>
+  metadataItems?: Array<IReportMetadata>
   copyText: (companyName: string) => ReportCopyTextT
 }
 
@@ -31,6 +49,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'OWASP® Top 10',
     description: 'Overview of OWASP® Top 10 security risks in your code.',
     type: ReportType.Compliance,
+    pinnableType: PinnableReportType.COMPLIANCE, // For use in pinnable reports menu items
+    helpText: 'Compliance with OWASP®️ Top 10 security standard',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
@@ -75,6 +95,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'CWE/SANS Top 25',
     description: 'Overview of CWE/SANS Top 25 most dangerous software errors in your code.',
     type: ReportType.Compliance,
+    pinnableType: PinnableReportType.COMPLIANCE, // For use in pinnable reports menu items
+    helpText: 'Compliance with CWE/SANS Top 25 security standard',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
@@ -106,6 +128,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Code Health Trend',
     description: 'Net new code health issues introduced in the code base.',
     type: ReportType.Insight,
+    pinnableType: PinnableReportType.NON_DISTRIBUTION, // For use in pinnable reports menu items
+    helpText: 'Net new code health issues introduced in the code base',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
@@ -133,7 +157,19 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Issue Distribution',
     description: 'Overview of issues found across categories and Analyzers.',
     type: ReportType.Insight,
+    pinnableType: PinnableReportType.DISTRIBUTION, // For use in pinnable reports menu items
+    helpText: 'Distribution of all code health issues present in the code base',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
+    metadataItems: [
+      {
+        filter: `${ReportPageT.DISTRIBUTION}-analyzer` as ReportMetadataFilterT,
+        text: 'By Analyzer'
+      },
+      {
+        filter: `${ReportPageT.DISTRIBUTION}-category` as ReportMetadataFilterT,
+        text: 'By Category'
+      }
+    ],
     copyText: (companyName) => {
       return {
         summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
@@ -158,38 +194,23 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
       }
     }
   },
-  [ReportPageT.CODE_COVERAGE]: {
-    title: 'Code Coverage',
-    description: 'Track code coverage across your organization.',
-    type: ReportType.Insight,
-    level: [ReportLevel.Enterprise, ReportLevel.Owner],
-    copyText: (companyName) => {
-      return {
-        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
-        <p>
-            DeepSource integrates with ${smartApostrophe(
-              companyName
-            )} continuous integration (CI) system to track their
-            source code's coverage generated after running the automated tests and helps them take action to improve it. This report provides the
-            latest snapshot of code coverage metrics for ${smartApostrophe(
-              companyName
-            )} source code, limited
-            to the repositories tracked on DeepSource.
-        </p>`,
-        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
-        <p>
-            This report can be used by the ${companyName} team to identify and remediate gaps in code not covered by any
-            automated tests and make it more stable and maintainable. The report can also be used by key internal and external
-            stakeholders to understand the stability of ${smartApostrophe(companyName)} software.
-        </p>`
-      }
-    }
-  },
   [ReportPageT.ISSUES_PREVENTED]: {
     title: 'Issues Prevented',
     description: 'Issues prevented from entering the default branch.',
     type: ReportType.Insight,
+    pinnableType: PinnableReportType.DISTRIBUTION, // For use in pinnable reports menu items
+    helpText: 'Issues you’ve prevented from entering the code base',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
+    metadataItems: [
+      {
+        filter: `${ReportPageT.ISSUES_PREVENTED}-analyzer` as ReportMetadataFilterT,
+        text: 'By Analyzer'
+      },
+      {
+        filter: `${ReportPageT.ISSUES_PREVENTED}-category` as ReportMetadataFilterT,
+        text: 'By Category'
+      }
+    ],
     copyText: (companyName) => {
       return {
         summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
@@ -220,6 +241,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Issues Autofixed',
     description: 'Issues Autofixed by DeepSource.',
     type: ReportType.Insight,
+    pinnableType: PinnableReportType.NON_DISTRIBUTION, // For use in pinnable reports menu items
+    helpText: 'Code health issues automatically fixed with Autofix™',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
     copyText: (companyName) => {
       return {
@@ -245,6 +268,35 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
             ${smartApostrophe(
               companyName
             )} codebase, along with saving significant time for developers.
+        </p>`
+      }
+    }
+  },
+  [ReportPageT.CODE_COVERAGE]: {
+    title: 'Code Coverage',
+    description: 'Track code coverage across your organization.',
+    type: ReportType.Insight,
+    pinnableType: PinnableReportType.NON_DISTRIBUTION, // For use in pinnable reports menu items
+    helpText: 'Code coverage and related metrics of your code base',
+    level: [ReportLevel.Enterprise, ReportLevel.Owner],
+    copyText: (companyName) => {
+      return {
+        summary: `<h1 id="summary" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Summary</h1>
+            <p>
+                DeepSource integrates with ${smartApostrophe(
+                  companyName
+                )} continuous integration (CI) system to track their
+                source code's coverage generated after running the automated tests and helps them take action to improve it. This report provides the
+                latest snapshot of code coverage metrics for ${smartApostrophe(
+                  companyName
+                )} source code, limited
+                to the repositories tracked on DeepSource.
+            </p>`,
+        intendedUse: `<h1 id="intended-use" class="text-lg text-vanilla-100 font-semibold scroll-mt-8">Intended use of this report</h1>
+        <p>
+            This report can be used by the ${companyName} team to identify and remediate gaps in code not covered by any
+            automated tests and make it more stable and maintainable. The report can also be used by key internal and external
+            stakeholders to understand the stability of ${smartApostrophe(companyName)} software.
         </p>`
       }
     }
@@ -287,6 +339,14 @@ export interface ReportsTabLink {
   key: ReportPageT
   label: string
   link: string[]
+}
+
+// Consumed in pinned reports
+export interface IReportInfo {
+  key: ReportPageT
+  query: string
+  componentName: string
+  handleResponse: (response: GraphqlQueryResponse, filter?: IssueDistributionT) => IHandleResponse
 }
 
 export enum PublicReportErrors {
@@ -345,4 +405,50 @@ export const CodeHealthTrendMeta: Record<CodeHealthTrendT, CodeHealthTrendMetaPr
     name: 'NET NEW ISSUES',
     chartType: 'line'
   }
+}
+
+// Consumed in pinned reports
+// The following are consumed in pinned reports
+
+// Type information corresponding to individual entries after processing the query response
+export type CompiledPinnedReportT = PinnedReport & IHandleResponse
+
+// Type information corresponding to chart datasets
+export type DataSetsT = Array<{ name: string; chartType?: string; values: Array<number> }>
+
+export enum LoadingConditions {
+  REPORT_SWAP = 'report-swap', // Denotes the currently pinned report got swapped with a different one
+  REPORT_CONTROLS_CHANGE = 'report-controls-change' // Denotes a change in report controls value
+}
+
+export interface ILoadingValue {
+  condition: LoadingConditions | null
+  status: boolean
+}
+
+export interface IHandleResponse {
+  compliancePassing?: boolean // Specific to `owasp-top-10` and `sans-top-25`` reports
+  coverageList?: Array<RepositoryCoverageReportItem> // Specific to `code-coverage` report
+  datasets?: DataSetsT
+  label: string
+  historicalValues?: HistoricalValues
+  value?: number
+  valueLabel?: string
+}
+
+export type ReportMetadataFilterT = `${ReportPageT}-analyzer` | `${ReportPageT}-category`
+
+export interface IPinnableReportItem {
+  accordionItemIsOpen?: boolean // For `distribution-based` entries that get rendered as accordions
+  key: ReportPageT
+  label: string
+  metadata: { filter: ReportMetadataFilterT; text: string } | null
+  metadataItems?: Array<IReportMetadata>
+  type: PinnableReportType
+}
+
+// Type information corresponding to the report metadata
+export interface IReportMetadata {
+  filter: ReportMetadataFilterT
+  text: string
 }

@@ -130,7 +130,6 @@ import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 
 import { ReportLevel } from '~/types/types'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
-import { shortenLargeNumber } from '~/utils/string'
 
 /**
  * Public Report Child page
@@ -144,11 +143,7 @@ import { shortenLargeNumber } from '~/utils/string'
     ZTable,
     ZTableCell,
     ZTableRow
-  },
-  methods: {
-    shortenLargeNumber
-  },
-  scrollToTop: true
+  }
 })
 export default class PublicReportSans extends mixins(PublicReportMixin, ComplianceReportMixin) {
   @Prop()

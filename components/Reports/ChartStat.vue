@@ -6,7 +6,13 @@
 
     <slot>
       <div v-if="loading" class="h-6 mt-px rounded-sm bg-ink-300 animate-pulse"></div>
-      <p v-else class="text-base text-vanilla-100 font-semibold leading-8">{{ value }}</p>
+      <p
+        v-else
+        v-tooltip="value > 1000 ? `${value}` : ''"
+        class="text-base text-vanilla-100 font-semibold leading-8"
+      >
+        {{ shortenLargeNumber(value) }}
+      </p>
     </slot>
   </div>
 </template>
@@ -14,10 +20,12 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
+import { shortenLargeNumber } from '~/utils/string'
+
 /**
  * Component to show a stat in ChartContainer
  */
-@Component({})
+@Component({ methods: { shortenLargeNumber } })
 export default class ChartStat extends Vue {
   @Prop({ default: '' })
   title: string

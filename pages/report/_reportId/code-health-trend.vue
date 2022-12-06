@@ -10,7 +10,7 @@
       <chart-container :chart-present="shareHistoricalData">
         <template #report-stats>
           <chart-stat
-            :value="shortenLargeNumber(report.currentValue)"
+            :value="report.currentValue"
             :loading="reportsDataLoading"
             title="Net New Issues"
           />
@@ -78,6 +78,7 @@ import CodeHealthReportMixin from '~/mixins/codeHealthReportMixin'
 import { ReportLevel, Repository } from '~/types/types'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { shortenLargeNumber } from '~/utils/string'
+import { getFormattedCodeHealthChartData } from '~/utils/reports'
 
 /**
  * Public Report Child page
@@ -151,7 +152,7 @@ export default class PublicReportCodeHealth extends mixins(
       this.token
     )
 
-    this.datasets = this.formatCodeHealthChartData(this.historicalValues)
+    this.datasets = getFormattedCodeHealthChartData(this.historicalValues)
   }
 
   /**

@@ -3,7 +3,7 @@
     <chart-container>
       <template #report-stats>
         <chart-stat
-          :value="shortenLargeNumber(report.currentValue)"
+          :value="report.currentValue"
           :loading="reportsDataLoading"
           title="Net New Issues"
         />
@@ -69,6 +69,7 @@ import CodeHealthReportMixin from '~/mixins/codeHealthReportMixin'
 
 import { ReportLevel } from '~/types/types'
 import { ReportPageT } from '~/types/reportTypes'
+import { getFormattedCodeHealthChartData } from '~/utils/reports'
 
 /**
  * Page for displaying the code health trend
@@ -121,7 +122,7 @@ export default class OwnerCodeHealthTrend extends mixins(OwnerDetailMixin, CodeH
       ReportPageT.CODE_HEALTH_TREND
     )
 
-    this.datasets = this.formatCodeHealthChartData(this.historicalValues)
+    this.datasets = getFormattedCodeHealthChartData(this.historicalValues)
   }
 }
 </script>

@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ PinnableReportsList ]] renders the list of pinnable reports as menu items 1`] = `"<span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"settings-2\\" class=\\"v-popper--has-tooltip\\"></zbutton-stub></div><!----></span>"`;

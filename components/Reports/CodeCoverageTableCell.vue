@@ -3,7 +3,8 @@
     <component
       :is="linkedCell ? 'nuxt-link' : 'div'"
       :to="$generateRoute([repoName, 'metrics', 'LCV'])"
-      class="block py-2.5 pr-4"
+      :class="isWidget ? 'pr-5' : 'pr-4'"
+      class="block py-2.5"
     >
       <div v-if="isPassing !== null" class="flex font-medium justify-end">
         <ticker
@@ -43,6 +44,9 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 export default class CodeCoverageTableCell extends Vue {
   @Prop({ default: null })
   isPassing: boolean
+
+  @Prop({ default: false })
+  isWidget: boolean
 
   @Prop({ default: null })
   value: number | string

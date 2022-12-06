@@ -76,9 +76,10 @@ test('renders CodeCoverageTable with all prop options', () => {
     ]
   }
 
+  const isWidgetOptions = generateBooleanProps('isWidget', false)
   const linkedRowsOptions = generateBooleanProps('linkedRows', false)
 
-  cartesian(linkedRowsOptions).forEach((propCombination) => {
+  cartesian(isWidgetOptions, linkedRowsOptions).forEach((propCombination) => {
     const props = {
       ...baseProps,
       ...propCombination

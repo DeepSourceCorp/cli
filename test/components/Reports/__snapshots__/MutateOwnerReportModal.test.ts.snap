@@ -32,9 +32,9 @@ exports[`[[ render MutateOwnerReportModal ]] renders MutateOwnerReportModal in c
         <!---->
         <zcheckbox-stub label=\\"Code Health Trend\\" name=\\"\\" value=\\"code-health-trend\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issue Distribution\\" name=\\"\\" value=\\"issue-distribution\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"Code Coverage\\" name=\\"\\" value=\\"code-coverage\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issues Prevented\\" name=\\"\\" value=\\"issues-prevented\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issues Autofixed\\" name=\\"\\" value=\\"issues-autofixed\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"Code Coverage\\" name=\\"\\" value=\\"code-coverage\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
       </div>
     </div>
@@ -84,9 +84,9 @@ exports[`[[ render MutateOwnerReportModal ]] renders MutateOwnerReportModal in e
         <!---->
         <zcheckbox-stub label=\\"Code Health Trend\\" name=\\"\\" value=\\"code-health-trend\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issue Distribution\\" name=\\"\\" value=\\"issue-distribution\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
-        <zcheckbox-stub label=\\"Code Coverage\\" name=\\"\\" value=\\"code-coverage\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issues Prevented\\" name=\\"\\" value=\\"issues-prevented\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <zcheckbox-stub label=\\"Issues Autofixed\\" name=\\"\\" value=\\"issues-autofixed\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
+        <zcheckbox-stub label=\\"Code Coverage\\" name=\\"\\" value=\\"code-coverage\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" class=\\"cursor-pointer\\"></zcheckbox-stub>
         <!---->
       </div>
     </div>

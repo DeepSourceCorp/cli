@@ -1,28 +1,38 @@
 <template>
-  <section class="overflow-x-auto rounded-md border border-ink-200 leading-normal">
+  <section
+    :class="isWidget ? 'max-h-92 overflow-y-scroll' : 'rounded-md border border-ink-200'"
+    class="overflow-x-auto hide-scroll leading-normal"
+  >
     <table class="table-fixed cursor w-full">
-      <thead class="border-b border-ink-200">
+      <thead :class="isWidget ? 'border-ink-300' : 'border-ink-200'" class="border-b">
         <tr class="uppercase text-vanilla-400 text-xs font-semibold">
-          <th class="pl-4 py-2.5 text-left w-48 sm:w-auto">Repository</th>
-          <th class="pr-2 w-40 text-right">
+          <th
+            :class="isWidget ? 'pl-5' : 'pl-4 sm:w-auto'"
+            class="py-2.5 text-left w-48 font-semibold"
+          >
+            Repository
+          </th>
+          <th :class="[isWidget ? 'w-28' : 'w-40 pr-2']" class="text-right">
             <code-coverage-sort
               v-model="activeSortFilter"
-              default-label="Line Coverage"
               :coverage-filters="lcvSortFilters"
               :coverage-type="CodeCoverageT.LCV"
+              :default-label="isWidget ? 'Line' : 'Line Coverage'"
+              :is-widget="isWidget"
             />
           </th>
-          <th class="pr-2 w-48 text-right">
+          <th :class="[isWidget ? 'w-28 pr-5' : 'w-48 pr-2']" class="text-right">
             <code-coverage-sort
               v-model="activeSortFilter"
-              default-label="Branch Coverage"
               :coverage-filters="bcvSortFilters"
               :coverage-type="CodeCoverageT.BCV"
+              :default-label="isWidget ? 'Branch' : 'Branch Coverage'"
+              :is-widget="isWidget"
             />
           </th>
         </tr>
       </thead>
-      <tbody class="divide-y divide-ink-200">
+      <tbody :class="isWidget ? 'divide-ink-300' : 'divide-ink-200'" class="divide-y">
         <template v-if="repoCoverageList">
           <tr
             v-for="repoCoverage in repoCoverageList"
@@ -33,7 +43,8 @@
               <component
                 :is="linkedRows ? 'nuxt-link' : 'div'"
                 :to="$generateRoute([repoCoverage.name, 'metrics', 'LCV'])"
-                class="block py-2.5 pl-4"
+                :class="isWidget ? 'pl-5' : 'pl-4'"
+                class="block py-2.5"
               >
                 <span v-tooltip="{ content: repoCoverage.name, delay: { show: 200, hide: 100 } }">
                   {{ repoCoverage.name }}
@@ -49,6 +60,7 @@
             <code-coverage-table-cell
               :linked-cell="linkedRows"
               :is-passing="repoCoverage.bcvIsPassing"
+              :is-widget="isWidget"
               :value="repoCoverage.bcvValue"
               :repo-name="repoCoverage.name"
             />
@@ -78,11 +90,14 @@ export default class CodeCoverageTable extends Vue {
   @ModelSync('selectedSortFilter', 'sort-filter-updated', { type: String })
   readonly activeSortFilter: CodeCoverageT | ''
 
-  @Prop({ required: true })
-  repoCoverageList: Array<RepositoryCoverageReportItem>
+  @Prop({ default: false })
+  isWidget: boolean
 
   @Prop({ default: false })
   linkedRows: boolean
+
+  @Prop({ required: true })
+  repoCoverageList: Array<RepositoryCoverageReportItem>
 
   CodeCoverageT = CodeCoverageT
 
@@ -110,6 +125,26 @@ export default class CodeCoverageTable extends Vue {
       icon: 'arrow-down',
       name: CoverageSortT.LCV_DESCENDING
     }
+  }
+
+  /**
+   * The `mounted` hook
+   * Update sort filter labels for report widgets
+   *
+   * @returns {void}
+   */
+  mounted(): void {
+    if (!this.isWidget) {
+      return
+    }
+
+    Object.keys(this.bcvSortFilters).forEach(
+      (key) => ((this.bcvSortFilters[key as CoverageSortT] as FilterChoice).label = 'BRANCH')
+    )
+
+    Object.keys(this.lcvSortFilters).forEach(
+      (key) => ((this.lcvSortFilters[key as CoverageSortT] as FilterChoice).label = 'LINE')
+    )
   }
 }
 </script>

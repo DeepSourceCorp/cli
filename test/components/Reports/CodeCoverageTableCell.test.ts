@@ -1,30 +1,40 @@
 import { render } from '@testing-library/vue'
-import { CodeCoverageTableCell } from '~/components/Reports'
 import { RouterLinkStub } from '@vue/test-utils'
+import VTooltip from 'floating-vue'
 
-import { cartesian, generateBooleanProps, generateGenericProps } from '~/test/utils'
+import { CodeCoverageTableCell } from '~/components/Reports'
 import { mocksGenerator } from '~/test/mocks'
+import { cartesian, generateBooleanProps, generateGenericProps } from '~/test/utils'
 
 test('renders CodeCoverageTableCell with all prop options', () => {
-  const valueOptions = generateGenericProps('value', ['', '72.12', 56])
   const isPassingOptions = generateBooleanProps('isPassing')
+  const isWidgetOptions = generateBooleanProps('isWidget')
   const linkedCellOptions = generateBooleanProps('linkedCell', false)
+  const valueOptions = generateGenericProps('value', ['', '72.12', 56])
 
-  cartesian(valueOptions, isPassingOptions, linkedCellOptions).forEach((propCombination) => {
-    const props = {
-      ...propCombination,
-      repoName: 'asgard'
+  cartesian(isPassingOptions, isWidgetOptions, linkedCellOptions, valueOptions).forEach(
+    (propCombination) => {
+      const props = {
+        ...propCombination,
+        repoName: 'asgard'
+      }
+
+      const { html } = render(
+        CodeCoverageTableCell,
+        {
+          props,
+          stubs: {
+            Ticker: true,
+            NuxtLink: RouterLinkStub
+          },
+          mocks: mocksGenerator()
+        },
+        (vue) => {
+          vue.use(VTooltip)
+        }
+      )
+
+      expect(html()).toMatchSnapshot(JSON.stringify(props))
     }
-
-    const { html } = render(CodeCoverageTableCell, {
-      props,
-      stubs: {
-        Ticker: true,
-        NuxtLink: RouterLinkStub
-      },
-      mocks: mocksGenerator()
-    })
-
-    expect(html()).toMatchSnapshot(JSON.stringify(props))
-  })
+  )
 })

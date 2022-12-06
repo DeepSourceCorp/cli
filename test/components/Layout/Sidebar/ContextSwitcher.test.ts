@@ -1,17 +1,17 @@
+import { ZMenu } from '@deepsourcelabs/zeal'
 import { render } from '@testing-library/vue'
-import { ContextSwitcher } from '~/components/Layout/Sidebar'
+
 import { createLocalVue, RouterLinkStub, shallowMount } from '@vue/test-utils'
-import Vuex, { Store } from 'vuex'
 import { VueConstructor } from 'vue'
+import Vuex, { Store } from 'vuex'
+import { ContextSwitcher } from '~/components/Layout/Sidebar'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 
 const stubs = {
   NuxtLink: RouterLinkStub,
   ZAvatar: true,
   ZIcon: true,
-  ZMenu: true,
-  ZMenuItem: true,
-  ZMenuSection: true
+  ZMenu
 }
 
 const mocks = {

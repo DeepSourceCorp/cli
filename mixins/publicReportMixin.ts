@@ -1,24 +1,34 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 
-import { GraphqlQueryResponse, GraphqlMutationResponse } from '~/types/apolloTypes'
+import { GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apolloTypes'
 
-import { publicReportListRepo } from '@/apollo/queries/repository/publicReportListRepo.gql'
 import { publicReportListOwner } from '@/apollo/queries/owner/publicReportListOwner.gql'
+import { publicReportAnalyzerDistribution } from '@/apollo/queries/reports/publicReportAnalyzerDistribution.gql'
 import { publicReportBase } from '@/apollo/queries/reports/publicReportBase.gql'
 import { publicReportBaseReport } from '@/apollo/queries/reports/publicReportBaseReport.gql'
-import { publicReportRecentStats } from '@/apollo/queries/reports/publicReportRecentStats.gql'
 import { publicReportCategoryDistribution } from '@/apollo/queries/reports/publicReportCategoryDistribution.gql'
-import { publicReportAnalyzerDistribution } from '@/apollo/queries/reports/publicReportAnalyzerDistribution.gql'
 import { publicReportComplianceIssues } from '@/apollo/queries/reports/publicReportComplianceIssues.gql'
 import { publicReportHistoricValues } from '@/apollo/queries/reports/publicReportHistoricalValues.gql'
+import { publicReportRecentStats } from '@/apollo/queries/reports/publicReportRecentStats.gql'
+import { publicReportListRepo } from '@/apollo/queries/repository/publicReportListRepo.gql'
 
 import { createPublicReport } from '@/apollo/mutations/reports/createPublicReport.gql'
 import { deletePublicReport } from '@/apollo/mutations/reports/deletePublicReport.gql'
 import { verifyPasswordForPublicReport } from '@/apollo/mutations/reports/verifyPasswordForPublicReport.gql'
 
-import ReportMixin from './reportMixin'
 import PaginationMixin from './paginationMixin'
+import ReportMixin from './reportMixin'
 
+import {
+  HistoricalValues,
+  IssueDistributionT,
+  PublicReportErrors,
+  ReportMeta,
+  ReportMetaProperties,
+  ReportPageT,
+  ReportSortT,
+  ReportToEditT
+} from '~/types/reportTypes'
 import {
   ComplianceIssue,
   ComplianceIssueOccurrence,
@@ -32,19 +42,8 @@ import {
   ReportSource,
   VerifyPasswordForPublicReportInput
 } from '~/types/types'
-import {
-  HistoricalValues,
-  IssueDistributionT,
-  PublicReportErrors,
-  ReportMeta,
-  ReportMetaProperties,
-  ReportPageT,
-  ReportSortT,
-  ReportToEditT
-} from '~/types/reportTypes'
-import dayjs from 'dayjs'
-import { getDateFromXAgo } from '~/utils/date'
 import { resolveNodes } from '~/utils/array'
+import { getDateRange, prepareLabels } from '~/utils/reports'
 import MetaMixin from './metaMixin'
 
 const EMPTY_REPORT: ReportToEditT = {
@@ -494,16 +493,8 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
       this.$cookies.set('reports-default-daterange-filter', this.dateRangeFilter)
     }
 
-    const activeDateRangeFilter = this.dateRangeOptions[this.dateRangeFilter]
+    const { startDate, endDate } = getDateRange(this.dateRangeFilter)
 
-    const endDate = dayjs().format('YYYY-MM-DD')
-
-    const startDate = getDateFromXAgo(
-      endDate,
-      activeDateRangeFilter.durationType,
-      activeDateRangeFilter.count,
-      'YYYY-MM-DD'
-    )
     if (reportId && reportKey && startDate && endDate) {
       this.historicalValuesLoading = true
       try {
@@ -519,7 +510,7 @@ export default class PublicReportMixin extends mixins(ReportMixin, PaginationMix
 
         // Only setting labels in mixin cause they are common accross every page.
         // Datasets are not.
-        this.labels = this.prepareLabels(this.historicalValues, startDate, endDate)
+        this.labels = prepareLabels(this.historicalValues.labels, startDate, endDate)
       } catch (e) {
         this.$logErrorAndToast(
           e as Error,

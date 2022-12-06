@@ -2,8 +2,8 @@
   <div class="flex items-center gap-x-1.5 leading-8">
     <span class="w-1.5 h-1.5 rounded-full" :class="compliancePassed ? 'bg-juniper' : 'bg-cherry'" />
     <span
-      class="text-sm font-semibold tracking-wider uppercase text-13px"
-      :class="compliancePassed ? 'text-juniper' : 'text-cherry'"
+      :class="[compliancePassed ? 'text-juniper' : 'text-cherry', textSize]"
+      class="font-semibold tracking-wider uppercase"
     >
       {{ compliancePassed ? 'Passing' : 'Failing' }}
     </span>
@@ -20,6 +20,9 @@ import { Vue, Component, Prop } from 'nuxt-property-decorator'
 export default class ComplianceStatus extends Vue {
   @Prop({ required: true })
   compliancePassed: boolean
+
+  @Prop({ default: 'text-13px', validator: (value: string) => value.startsWith('text-') })
+  textSize: string
 }
 </script>
 

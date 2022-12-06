@@ -226,7 +226,7 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
   }
 
   get canViewPreferences(): boolean {
-    return this.$gateKeeper.team(TeamPerms.MANAGE_PREFERNCES, this.teamPerms.permission)
+    return this.$gateKeeper.team(TeamPerms.MANAGE_PREFERENCES, this.teamPerms.permission)
   }
 
   get isTeam(): boolean {

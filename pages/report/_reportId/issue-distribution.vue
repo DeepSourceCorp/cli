@@ -8,11 +8,7 @@
     <section v-if="report" class="space-y-4">
       <chart-container :chart-present="shareHistoricalData">
         <template #report-stats>
-          <chart-stat
-            title="Total Issues"
-            :value="shortenLargeNumber(currentVal)"
-            :loading="reportsDataLoading"
-          />
+          <chart-stat title="Total Issues" :value="currentVal" :loading="reportsDataLoading" />
         </template>
 
         <template #report-control>
@@ -91,7 +87,6 @@ import PublicReportMixin from '~/mixins/publicReportMixin'
 
 import { ReportLevel } from '~/types/types'
 import { IssueDistributionT, ReportMeta, ReportPageT } from '~/types/reportTypes'
-import { shortenLargeNumber } from '~/utils/string'
 import { getColorShades } from '~/utils/ui'
 import DistributionReportMixin from '~/mixins/distributionReportMixin'
 
@@ -103,9 +98,6 @@ const BASE_COLOR = '#1035ad'
 @Component({
   components: {
     ZChart
-  },
-  methods: {
-    shortenLargeNumber
   },
   scrollToTop: true
 })

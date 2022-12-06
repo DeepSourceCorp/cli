@@ -2,11 +2,7 @@
   <div class="flex flex-col gap-y-4">
     <chart-container>
       <template #report-stats>
-        <chart-stat
-          title="Issues Prevented"
-          :value="shortenLargeNumber(currentVal)"
-          :loading="reportsDataLoading"
-        />
+        <chart-stat title="Issues Prevented" :value="currentVal" :loading="reportsDataLoading" />
       </template>
 
       <template #report-control>
@@ -68,15 +64,15 @@
 </template>
 
 <script lang="ts">
-import { Component, mixins } from 'nuxt-property-decorator'
 import { ZChart } from '@deepsourcelabs/zeal'
+import { Component, mixins } from 'nuxt-property-decorator'
 
-import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import DistributionReportMixin from '~/mixins/distributionReportMixin'
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import RouteQueryMixin from '~/mixins/routeQueryMixin'
 
-import { shortenLargeNumber } from '~/utils/string'
-import { ReportLevel } from '~/types/types'
 import { IssueDistributionT, ReportPageT } from '~/types/reportTypes'
+import { ReportLevel } from '~/types/types'
 import { getColorShades } from '~/utils/ui'
 
 const BASE_COLOR = '#2eb78b'
@@ -88,12 +84,13 @@ const BASE_COLOR = '#2eb78b'
   layout: 'repository',
   components: {
     ZChart
-  },
-  methods: {
-    shortenLargeNumber
   }
 })
-export default class IssuesPreventedPage extends mixins(RepoDetailMixin, DistributionReportMixin) {
+export default class IssuesPreventedPage extends mixins(
+  DistributionReportMixin,
+  RepoDetailMixin,
+  RouteQueryMixin
+) {
   readonly IssueDistributionT = IssueDistributionT
 
   get colorShades(): string[] {
@@ -148,6 +145,10 @@ export default class IssuesPreventedPage extends mixins(RepoDetailMixin, Distrib
   async fetchDistributionData(): Promise<void> {
     // Flushing distribution stats before changing distribution type
     this.distributionStats = []
+
+    // Update `filter` query param
+    this.addFilters({ filter: this.activeFilter })
+
     this.distributionStats = await this.fetchDistributionStats(
       ReportPageT.ISSUES_PREVENTED,
       ReportLevel.Repository,
@@ -169,6 +170,16 @@ export default class IssuesPreventedPage extends mixins(RepoDetailMixin, Distrib
     )
 
     this.setDistributionChartData()
+  }
+
+  /**
+   * Callback for route replace
+   *
+   * @returns {Promise<void>}
+   */
+  async refetchAfterRouteChange(): Promise<void> {
+    // Override the method from `RouteQueryMixin`
+    // Re-fetch is not required in this case
   }
 }
 </script>

@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"allowPinningReports":false} 1`] = `
+"<div class=\\"py-4 border border-ink-200 pt-4 pb-0.5 rounded-md min-h-96\\">
+  <div class=\\"px-5\\">
+    <div class=\\"inline-flex items-center justify-between w-full\\">
+      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
+      <div class=\\"hidden lg:block h-10 relative w-11\\">
+        <transition-stub name=\\"slide-fade\\">
+          <div class=\\"w-full h-full inline-flex items-center justify-end absolute top-0 left-0\\">
+            <zicon-stub icon=\\"more-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+          </div>
+        </transition-stub>
+      </div>
+    </div>
+  </div>
+  <!---->
+  <div class=\\"h-72 mx-5 mt-5 rounded-lg bg-ink-300 animate-pulse\\"></div>
+</div>"
+`;
+
+exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"allowPinningReports":true} 1`] = `
+"<div class=\\"py-4 border border-ink-200 pt-4 pb-0.5 rounded-md min-h-96\\">
+  <div class=\\"px-5\\">
+    <div class=\\"inline-flex items-center justify-between w-full\\">
+      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
+      <div class=\\"hidden lg:block h-10 relative w-19\\">
+        <transition-stub name=\\"slide-fade\\">
+          <div class=\\"w-full h-full inline-flex items-center justify-end absolute top-0 left-0\\">
+            <zicon-stub icon=\\"more-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+          </div>
+        </transition-stub>
+      </div>
+    </div>
+  </div>
+  <!---->
+  <div class=\\"h-72 mx-5 mt-5 rounded-lg bg-ink-300 animate-pulse\\"></div>
+</div>"
+`;
+
+exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":null,"status":false},"allowPinningReports":false} 1`] = `
+"<div class=\\"py-4 border border-ink-200 pt-4 pb-0.5 rounded-md min-h-96\\">
+  <div class=\\"px-5\\">
+    <div class=\\"inline-flex items-center justify-between w-full\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
+        Code Coverage
+
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+      </h3>
+      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
+      <div class=\\"hidden lg:block h-10 relative w-11\\">
+        <transition-stub name=\\"slide-fade\\">
+          <div class=\\"w-full h-full inline-flex items-center justify-end absolute top-0 left-0\\">
+            <zicon-stub icon=\\"more-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+          </div>
+        </transition-stub>
+      </div>
+    </div>
+  </div>
+  <!---->
+  <codecoveragetable-stub selected-sort-filter=\\"\\" is-widget=\\"true\\" linked-rows=\\"true\\" repo-coverage-list=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"hide-scroll\\"></codecoveragetable-stub>
+</div>"
+`;
+
+exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":null,"status":false},"allowPinningReports":true} 1`] = `
+"<div class=\\"py-4 border border-ink-200 pt-4 pb-0.5 rounded-md min-h-96\\">
+  <div class=\\"px-5\\">
+    <div class=\\"inline-flex items-center justify-between w-full\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
+        Code Coverage
+
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+      </h3>
+      <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
+      <div class=\\"hidden lg:block h-10 relative w-19\\">
+        <transition-stub name=\\"slide-fade\\">
+          <div class=\\"w-full h-full inline-flex items-center justify-end absolute top-0 left-0\\">
+            <zicon-stub icon=\\"more-horizontal\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+          </div>
+        </transition-stub>
+      </div>
+    </div>
+  </div>
+  <!---->
+  <codecoveragetable-stub selected-sort-filter=\\"\\" is-widget=\\"true\\" linked-rows=\\"true\\" repo-coverage-list=\\"[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]\\" class=\\"hide-scroll\\"></codecoveragetable-stub>
+</div>"
+`;

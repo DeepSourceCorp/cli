@@ -117,3 +117,54 @@ code.bifrost-inline-code {
 .z-chart-wrapper.chart-tooltip-z-20 .graph-svg-tip.comparison {
   z-index: 20;
 }
+
+// Adds lines to the left, creating a visual nested hierarchy
+// Used in the pinned report widgets (accordion as part of the menu) and the run history page
+.nested-group {
+  $color: #23262e;
+  $ident: 14px;
+  $left: -($ident);
+
+  .nested-group-heading {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 10px;
+      left: -16px;
+      width: 8px;
+      height: 8px;
+      background-color: $color;
+      border-radius: 100px;
+    }
+  }
+  .nested-group-item {
+    position: relative;
+    &:before {
+      content: '';
+      position: absolute;
+      top: -25px;
+      left: $left;
+      border-left: 2px solid $color;
+      border-bottom: 2px solid $color;
+      width: $ident;
+      height: calc(50% + 25px);
+    }
+    &:after {
+      position: absolute;
+      content: '';
+      top: 5px;
+      left: $left;
+      border-left: 2px solid $color;
+      border-top: 0px solid $color;
+      width: $ident;
+      height: 100%;
+    }
+    &:last-child:before {
+      border-bottom-left-radius: 6px;
+    }
+    &:last-child:after {
+      display: none;
+    }
+  }
+}
