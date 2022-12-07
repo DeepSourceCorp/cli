@@ -310,9 +310,10 @@ export default class PinnableReportsList extends Vue {
   expandCurrentlySelectedCollapsible(): void {
     this.insightsItems.forEach((item) => {
       if (item.type === PinnableReportType.DISTRIBUTION) {
-        this.collapsibleVisibilityStatus[item.key] = this.isCurrentlyPinnedReport(
-          item as IPinnableReportItem
-        )
+        const isCurrentlyPinned = this.isCurrentlyPinnedReport(item as IPinnableReportItem)
+
+        this.collapsibleVisibilityStatus[item.key] = isCurrentlyPinned
+        this.collapsibleHeaderAnimations[item.key] = isCurrentlyPinned ? 'rotate-180' : 'rotate-0'
       }
     })
   }
