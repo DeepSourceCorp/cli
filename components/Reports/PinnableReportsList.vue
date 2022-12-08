@@ -193,6 +193,9 @@ export default class PinnableReportsList extends Vue {
   @Prop({ required: true })
   provider: string
 
+  @Prop({ required: false })
+  repoName: string
+
   @Prop({ required: true })
   reportSlot: number
 
@@ -238,12 +241,16 @@ export default class PinnableReportsList extends Vue {
       return `${this.provider}_${this.owner}_pinned-code-coverage-sort-type_${this.reportSlot}`
     }
 
-    // Cookie identifier has the convention `provider_owner_reportType_date-range-filter_report-slot`
+    // Cookie identifier has the convention `provider_owner_repo_reportType_date-range-filter_report-slot`
     // Distribution-based reports have `metadata` with the `filter` type
     // `issue-distribution-analyzer`, `issues-prevented-category`
     // Cookie identifier naming falls back to report keys for other reports
     const reportType = reportItem?.metadata?.filter || reportItem?.key
-    return `${this.provider}_${this.owner}_${reportType}_date-range-filter_${this.reportSlot}` || ''
+    return (
+      `${this.provider}_${this.owner}${
+        this.level === ReportLevel.Repository ? `_${this.repoName}` : ''
+      }_${reportType}_date-range-filter_${this.reportSlot}` || ''
+    )
   }
 
   get expandToTop(): boolean {

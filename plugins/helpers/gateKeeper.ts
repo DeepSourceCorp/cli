@@ -175,7 +175,8 @@ const REPO_PERMS_MAP = {
     RepositoryCollaboratorPermission.Admin,
     RepositoryCollaboratorPermission.Write
   ],
-  [RepoPerms.UPDATE_PUBLIC_REPORTS]: [RepositoryCollaboratorPermission.Admin]
+  [RepoPerms.UPDATE_PUBLIC_REPORTS]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.PIN_REPORTS]: [RepositoryCollaboratorPermission.Admin]
 }
 
 const FEATURES_PROVIDER_MAP = {

@@ -53,7 +53,8 @@ export enum RepoPerms {
   CREATE_ISSUE_ON_INTEGRATION = 'createIssueOnIntegration',
   VIEW_REPORTS = 'viewReports',
   VIEW_PUBLIC_REPORTS = 'viewPublicReports',
-  UPDATE_PUBLIC_REPORTS = 'updatePublicReports'
+  UPDATE_PUBLIC_REPORTS = 'updatePublicReports',
+  PIN_REPORTS = 'pinReports'
 }
 
 export enum AppFeatures {

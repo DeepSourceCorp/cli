@@ -80,10 +80,11 @@
               <pinnable-reports-list
                 v-if="allowPinningReports"
                 :current-selection="reportType"
-                :level="ReportLevel.Owner"
+                :level="level"
                 :owner="owner"
                 :pinned-reports="pinnedReports"
                 :provider="provider"
+                :repo-name="repoName"
                 :report-slot="reportSlot"
               >
                 <template #menu-trigger="{ toggle }">
@@ -227,6 +228,9 @@ export default class PinnedChartReport extends Vue {
   label: string
 
   @Prop({ required: true })
+  level: ReportLevel
+
+  @Prop({ required: true })
   loadingValue: ILoadingValue
 
   @Prop({ required: true })
@@ -240,6 +244,9 @@ export default class PinnedChartReport extends Vue {
 
   @Prop({ required: true })
   provider: string
+
+  @Prop({ required: false })
+  repoName: string
 
   @Prop({ required: true })
   reportSlot: number
@@ -258,7 +265,6 @@ export default class PinnedChartReport extends Vue {
   timeoutId: ReturnType<typeof setTimeout>
 
   LoadingConditions = LoadingConditions
-  ReportLevel = ReportLevel
 
   get chartProps(): IChartProps {
     const { startDate, endDate } = getDateRange(this.dateRangeFilter)
@@ -464,7 +470,9 @@ export default class PinnedChartReport extends Vue {
    */
   getDateRangeFilter(): string {
     const reportType = this.metadata?.filter || this.reportKey
-    const cookieIdentifier = `${this.provider}_${this.owner}_${reportType}_date-range-filter_${this.reportSlot}`
+    const cookieIdentifier = `${this.provider}_${this.owner}${
+      this.level === ReportLevel.Repository ? `_${this.repoName}` : ''
+    }_${reportType}_date-range-filter_${this.reportSlot}`
 
     const validKeys = Object.keys(dateRangeOptions)
     const valueFromCookie = this.$cookies.get(cookieIdentifier)

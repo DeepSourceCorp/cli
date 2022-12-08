@@ -7901,6 +7901,19 @@ export type Unnamed_66_Mutation = (
   )> }
 );
 
+export type UpdateRepositoryPinnedReportsMutationVariables = Exact<{
+  input: UpdateRepositoryPinnedReportsInput;
+}>;
+
+
+export type UpdateRepositoryPinnedReportsMutation = (
+  { __typename?: 'Mutation' }
+  & { updateRepositoryPinnedReports?: Maybe<(
+    { __typename?: 'UpdateRepositoryPinnedReportsPayload' }
+    & Pick<UpdateRepositoryPinnedReportsPayload, 'ok'>
+  )> }
+);
+
 export type Unnamed_67_MutationVariables = Exact<{
   input: UpdateRepositoryWidgetsInput;
 }>;
@@ -10537,6 +10550,28 @@ export type RepositoryPermissionsQuery = (
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'userPermissionMeta'>
+  )> }
+);
+
+export type RepositoryPinnedReportsQueryVariables = Exact<{
+  name: Scalars['String'];
+  owner: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type RepositoryPinnedReportsQuery = (
+  { __typename?: 'Query' }
+  & { repository?: Maybe<(
+    { __typename?: 'Repository' }
+    & Pick<Repository, 'id'>
+    & { setting?: Maybe<(
+      { __typename?: 'RepositorySetting' }
+      & { pinnedReports?: Maybe<Array<Maybe<(
+        { __typename?: 'PinnedReport' }
+        & Pick<PinnedReport, 'key' | 'metadata'>
+      )>>> }
+    )> }
   )> }
 );
 

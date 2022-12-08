@@ -818,6 +818,15 @@ declare module '*/updateRepoMetricThreshold.gql' {
 }
     
 
+declare module '*/updateRepositoryPinnedReports.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updateRepositoryPinnedReports: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updateRepositoryWidgets.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1385,6 +1394,7 @@ declare module '*/pinnedReports.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ownerPinnedReports: DocumentNode;
+export const repositoryPinnedReports: DocumentNode;
 
   export default defaultDocument;
 }

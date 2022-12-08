@@ -1,0 +1,5 @@
+mutation updateRepositoryPinnedReports($input: UpdateRepositoryPinnedReportsInput!) {
+  updateRepositoryPinnedReports(input: $input) {
+    ok
+  }
+}

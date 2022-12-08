@@ -1,0 +1,11 @@
+query repositoryPinnedReports($name: String!, $owner: String!, $provider: VCSProviderChoices!) {
+  repository(name: $name, owner: $owner, provider: $provider) {
+    id
+    setting {
+      pinnedReports {
+        key
+        metadata
+      }
+    }
+  }
+}
