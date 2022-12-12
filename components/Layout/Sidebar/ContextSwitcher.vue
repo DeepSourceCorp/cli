@@ -176,8 +176,9 @@ export default class ContextSwitcher extends mixins(ActiveUserMixin, ContextMixi
    */
   isActive(context: DashboardContext): boolean {
     return (
-      context.login === this.activeDashboardContext.login ||
-      context.team_name === this.activeDashboardContext.team_name
+      (context.login === this.activeDashboardContext.login ||
+        context.team_name === this.activeDashboardContext.team_name) &&
+      context.vcs_provider == this.activeDashboardContext.vcs_provider
     )
   }
 
