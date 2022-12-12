@@ -1,10 +1,9 @@
 import { ZMenu } from '@deepsourcelabs/zeal'
 import { render } from '@testing-library/vue'
-
-import { createLocalVue, RouterLinkStub, shallowMount } from '@vue/test-utils'
-import { VueConstructor } from 'vue'
-import Vuex, { Store } from 'vuex'
 import { ContextSwitcher } from '~/components/Layout/Sidebar'
+import { createLocalVue, RouterLinkStub } from '@vue/test-utils'
+import Vuex, { Store } from 'vuex'
+import { VueConstructor } from 'vue'
 import { cartesian, generateBooleanProps } from '~/test/utils'
 
 const stubs = {
@@ -87,38 +86,5 @@ describe('[[ ContextSwitcher ]]', () => {
 
       expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
     })
-  })
-
-  test('updateDefaultContext triggers updation and refetch', async () => {
-    const wrapper = shallowMount(ContextSwitcher, {
-      stubs,
-      mocks,
-      store,
-      localVue,
-      propsData: {
-        isCollapsed: false
-      }
-    })
-
-    // @ts-ignore
-    wrapper.vm.refetchUser = jest.fn(() => {
-      return Promise.resolve()
-    })
-
-    // @ts-ignore
-    wrapper.vm.updateDefaultContextAPI = jest.fn(({ contextOwnerId: string }) => {
-      return Promise.resolve(null)
-    })
-
-    sampleContext.is_default = false
-
-    // @ts-ignore
-    await wrapper.vm.updateDefaultContext(sampleContext)
-
-    // @ts-ignore
-    expect(wrapper.vm.refetchUser.mock.calls.length).toBe(1)
-
-    // @ts-ignore
-    expect(wrapper.vm.updateDefaultContextAPI.mock.calls.length).toBe(1)
   })
 })

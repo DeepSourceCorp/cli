@@ -132,6 +132,9 @@ module.exports = {
       },
       zIndex: {
         5: '5'
+      },
+      fontSize: {
+        '11px': '11px'
       }
     }
   }
