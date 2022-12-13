@@ -21,11 +21,11 @@
             <issue-type :issue-type="issueType" />
             <!-- First seen and last seen -->
             <meta-data-item v-if="showSeenInfo" icon="clock">
-              <span v-tooltip="`Last seen on ${formatDate(modifiedAt, 'lll')}`">
+              <span v-tooltip="`Last seen on ${formatDate(lastSeen, 'lll')}`">
                 {{ lastSeenDisplay }}
               </span>
               &mdash;
-              <span v-tooltip="`First seen on ${formatDate(createdAt, 'lll')}`">
+              <span v-tooltip="`First seen on ${formatDate(firstSeen, 'lll')}`">
                 {{ firstSeenDisplay }}
               </span>
             </meta-data-item>
@@ -125,10 +125,10 @@ export default class IssueListItem extends Vue {
   severity: IssueSeverity
 
   @Prop({ default: '' })
-  modifiedAt!: string
+  lastSeen!: string
 
   @Prop({ default: '' })
-  createdAt!: string
+  firstSeen!: string
 
   @Prop({ default: '' })
   seenIn!: string
@@ -184,14 +184,14 @@ export default class IssueListItem extends Vue {
     /**
      * Return when the issue was seen the last time in a human-readable form.
      */
-    return dayjs(this.modifiedAt).fromNow()
+    return dayjs(this.lastSeen).fromNow()
   }
 
   get firstSeenDisplay(): string {
     /**
      * Return when the issue was first seen in a human-readable form.
      */
-    return `${dayjs(this.createdAt).fromNow(true)} old`
+    return `${dayjs(this.firstSeen).fromNow(true)} old`
   }
 
   /**

@@ -33,9 +33,9 @@ describe('[[ IssueListItem ]]', () => {
     description:
       'Do not use a mutable like `list` or `dictionary` as a default value to an argument. Python’s default arguments are evaluated once when the function is defined. Using a mutable default argument and mutating it will mutate that object for all future calls to the function as well.',
     occurrenceCount: 3,
-    createdAt: twoYearsAgo,
+    firstSeen: twoYearsAgo,
     seenIn: 'code.py',
-    modifiedAt: twoYearsAgo,
+    lastSeen: twoYearsAgo,
     trend: {
       trendHint: 'Since last week',
       trendValue: 12,

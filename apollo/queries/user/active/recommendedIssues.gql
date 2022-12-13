@@ -11,6 +11,8 @@ query {
           modifiedAt
           createdAt
           seenIn
+          firstSeen
+          lastSeen
           occurrenceCount
           autofixAvailable
           raisedInFiles

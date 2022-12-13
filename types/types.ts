@@ -11601,7 +11601,7 @@ export type Unnamed_154_Query = (
         { __typename?: 'RepositoryIssueEdge' }
         & { node?: Maybe<(
           { __typename?: 'RepositoryIssue' }
-          & Pick<RepositoryIssue, 'id' | 'title' | 'shortcode' | 'issueType' | 'modifiedAt' | 'createdAt' | 'seenIn' | 'occurrenceCount' | 'autofixAvailable' | 'raisedInFiles'>
+          & Pick<RepositoryIssue, 'id' | 'title' | 'shortcode' | 'issueType' | 'modifiedAt' | 'createdAt' | 'seenIn' | 'firstSeen' | 'lastSeen' | 'occurrenceCount' | 'autofixAvailable' | 'raisedInFiles'>
           & { repositoryInstance: (
             { __typename?: 'Repository' }
             & Pick<Repository, 'id' | 'name' | 'vcsProvider'>
