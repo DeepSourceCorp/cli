@@ -54,7 +54,7 @@ spec:
                 apk update && \
                 apk add --no-cache curl git && \
                 yarn install && \
-                yarn test --cache --coverage=true --coverageReporters=cobertura && \
+                yarn test --cache --silent --ci --coverage=true --coverageReporters=cobertura && \
                 curl https://deepsource.io/cli | sh && \
                 ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
               workingDir: /workspace/source
