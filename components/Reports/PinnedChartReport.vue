@@ -183,7 +183,7 @@ interface IChartProps {
   class: string
   colors: Array<string>
   dataSets: DataSetsT
-  formatTooltipOptions?: Record<string, unknown>
+  tooltipOptions?: Record<string, unknown>
   labels: Array<string>
   type: string
   yAxisMax?: number
@@ -311,7 +311,7 @@ export default class PinnedChartReport extends Vue {
         ...commonProps,
         barOptions: { stacked: true },
         colors: ['cherry-500', 'juniper-500', 'robin-500'],
-        formatTooltipOptions: {
+        tooltipOptions: {
           formatTooltipY: (d: number, set: Record<string, unknown>) =>
             set.index === 1 ? Math.abs(d) : d
         },
