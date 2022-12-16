@@ -1,6 +1,6 @@
 <template>
   <!-- Description -->
-  <div class="hidden lg:block">
+  <div class="hidden lg:block space-y-3">
     <div class="px-4 text-sm font-medium tracking-wider uppercase text-vanilla-100">
       Description
     </div>
