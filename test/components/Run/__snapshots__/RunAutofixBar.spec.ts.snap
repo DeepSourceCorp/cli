@@ -8,7 +8,7 @@ exports[`[[ RunAutofixBar ]] renders \`RunAutofixBar\` with all prop options: {"
         <div class=\\"divide-y divide-ink-200\\">
           <div class=\\"flex flex-col w-full bg-ink-400\\">
             <div class=\\"w-full flex gap-x-1 items-center leading-7 py-2 px-4\\">
-              <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"[object Object]\\" size=\\"small\\" spacing=\\"4\\" class=\\"align-top\\"></zcheckbox-stub>
+              <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"BAN-B101\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" spacing=\\"4\\" class=\\"align-top\\"></zcheckbox-stub>
               <div class=\\"flex w-full space-x-2 text-sm\\"><span class=\\"flex-grow\\"><nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python/BAN-B101\\"><span class=\\"text-vanilla-300 mr-1.5\\">Assert statement used outside of tests</span></nuxt-link> <span class=\\"text-slate\\">BAN-B101</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>1</span></span></div>
             </div>
           </div>
@@ -28,7 +28,7 @@ exports[`[[ RunAutofixBar ]] renders \`RunAutofixBar\` with all prop options: {"
         <div class=\\"divide-y divide-ink-200\\">
           <div class=\\"flex flex-col w-full bg-ink-400\\">
             <div class=\\"w-full flex gap-x-1 items-center leading-7 py-2 px-4\\">
-              <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"[object Object]\\" truevalue=\\"true\\" modelvalue=\\"[object Object]\\" size=\\"small\\" spacing=\\"4\\" class=\\"align-top\\"></zcheckbox-stub>
+              <zcheckbox-stub label=\\"\\" name=\\"\\" value=\\"BAN-B101\\" truevalue=\\"true\\" modelvalue=\\"\\" size=\\"small\\" spacing=\\"4\\" class=\\"align-top\\"></zcheckbox-stub>
               <div class=\\"flex w-full space-x-2 text-sm\\"><span class=\\"flex-grow\\"><nuxt-link to=\\"gh/deepsourcelabs/demo-python/run/4c1d5e1b-1747-4777-9618-acae5c51ca5d/python/BAN-B101\\"><span class=\\"text-vanilla-300 mr-1.5\\">Assert statement used outside of tests</span></nuxt-link> <span class=\\"text-slate\\">BAN-B101</span></span> <span class=\\"text-vanilla-400 flex space-x-1\\"><span class=\\"text-xs\\">×</span> <span>1</span></span></div>
             </div>
           </div>

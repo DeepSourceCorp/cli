@@ -47,4 +47,20 @@ function parseArrayString(candidate?: string | null | undefined): unknown[] {
   return []
 }
 
-export { getLastTwoTrends, getChangeFromTrend, resolveNodes, parseArrayString }
+/**
+ * Method to test equality of two arrays
+ * @template T
+ * @param {Array<T>} a
+ * @param {Array<T>} b
+ * @param {boolean} [strict=false] match elements and their positions too, or not
+ * @returns {boolean}
+ */
+function checkArrayEquality<T>(a: Array<T>, b: Array<T>, strict = false): boolean {
+  if (strict) {
+    return a.length === b.length && a.every((element, index) => element === b[index])
+  }
+
+  return a.length === b.length && a.every((element) => b.includes(element))
+}
+
+export { getLastTwoTrends, getChangeFromTrend, resolveNodes, parseArrayString, checkArrayEquality }

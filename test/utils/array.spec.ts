@@ -1,5 +1,11 @@
 import { Trend } from '~/store/owner/detail'
-import { getLastTwoTrends, getChangeFromTrend, resolveNodes, parseArrayString } from '~/utils/array'
+import {
+  getLastTwoTrends,
+  getChangeFromTrend,
+  resolveNodes,
+  parseArrayString,
+  checkArrayEquality
+} from '~/utils/array'
 
 describe('[[ Test parseArrayString ]]', () => {
   it('Parses a valid string', () => {
@@ -187,5 +193,41 @@ describe('[[ Test getChangeFromTrend ]]', () => {
 
     expect(getChangeFromTrend(nullishInput) === 0).toBeTruthy()
     expect(getChangeFromTrend(nullishInput, true) === 0).toBeTruthy()
+  })
+})
+
+describe('[[ Test checkArrayEquality ]]', () => {
+  it('Tests strict equality between two arrays', () => {
+    const firstArray = [1, 2, 3, 4]
+    const firstArrayDuplicate = [1, 2, 3, 4]
+    const firstArrayFlipped = [4, 3, 2, 1]
+    const firstArrayRandomised = [2, 4, 1, 3]
+
+    const secondArray = [3, 4, 5, 6]
+
+    // True condition
+    expect(checkArrayEquality(firstArray, firstArrayDuplicate, true)).toBe(true)
+
+    // False condition
+    expect(checkArrayEquality(firstArray, secondArray, true)).toBe(false)
+    expect(checkArrayEquality(firstArray, firstArrayFlipped, true)).toBe(false)
+    expect(checkArrayEquality(firstArray, firstArrayRandomised, true)).toBe(false)
+  })
+
+  it('Tests strict equality between two arrays', () => {
+    const firstArray = [1, 2, 3, 4]
+    const firstArrayDuplicate = [1, 2, 3, 4]
+    const firstArrayFlipped = [4, 3, 2, 1]
+    const firstArrayRandomised = [2, 4, 1, 3]
+
+    const secondArray = [3, 4, 5, 6]
+
+    // True condition
+    expect(checkArrayEquality(firstArray, firstArrayDuplicate)).toBe(true)
+    expect(checkArrayEquality(firstArray, firstArrayFlipped)).toBe(true)
+    expect(checkArrayEquality(firstArray, firstArrayRandomised)).toBe(true)
+
+    // False condition
+    expect(checkArrayEquality(firstArray, secondArray)).toBe(false)
   })
 })

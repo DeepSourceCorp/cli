@@ -67,7 +67,7 @@
               <div class="w-full flex gap-x-1 items-center leading-7 py-2 px-4">
                 <z-checkbox
                   v-model="selectedIssues"
-                  :value="issue"
+                  :value="issue.shortcode"
                   :true-value="true"
                   :false-value="false"
                   size="small"
@@ -119,6 +119,7 @@ import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
 import { ZButton, ZAccordion, ZAccordionItem, ZCheckbox, ZIcon } from '@deepsourcelabs/zeal'
 import { safeRenderBackticks } from '~/utils/string'
 import RunDetailMixin from '~/mixins/runDetailMixin'
+import { checkArrayEquality } from '~/utils/array'
 
 export interface RunError {
   level: number
@@ -157,8 +158,20 @@ export default class RunAutofixBar extends mixins(RunDetailMixin) {
   autofixLoading: boolean
 
   public isAccordionOpen = false
-  public selectedIssues: Record<string, string>[] = []
+  public selectedIssues: Array<string> = []
   public selectAll = true
+
+  /**
+   * Mounted hook for the vue component.
+   * Initializes `selectedIssues` to all `autofixableIssues` if `selectAll` is true
+   *
+   * @returns {void}
+   */
+  mounted(): void {
+    this.selectedIssues = this.selectAll
+      ? this.autofixableIssues.map((issue) => issue.shortcode)
+      : []
+  }
 
   /**
    * Toggles the accordion state
@@ -181,24 +194,13 @@ export default class RunAutofixBar extends mixins(RunDetailMixin) {
   }
 
   /**
-   * @returns {Array<string>} Returns an array of shortcodes of the selectedIssues.
-   */
-  get selectedIssueShortcodeArray(): Array<string> {
-    const shortcodeArray: Array<string> = this.selectedIssues.map((issue) => {
-      return issue.shortcode
-    })
-    return shortcodeArray
-  }
-
-  /**
    * Watcher for `selectAll`. Selects all issues (w/ searched filter if available) when `newVal` is true.
    *
    * @param {boolean} newVal - Updated value of `selectAll`.
    * @returns {void}
    */
-  @Watch('selectAll', { immediate: true })
   public updateSelectAll(newVal: boolean): void {
-    this.selectedIssues = newVal ? this.autofixableIssues : []
+    this.selectedIssues = newVal ? this.autofixableIssues.map((issue) => issue.shortcode) : []
   }
 
   /**
@@ -207,8 +209,23 @@ export default class RunAutofixBar extends mixins(RunDetailMixin) {
    * @returns {void}
    */
   @Watch('autofixLoading')
-  public closeAccordion() {
+  public closeAccordion(): void {
     if (this.autofixLoading === false) this.isAccordionOpen = false
+  }
+
+  /**
+   * Watcher for the `selectedIssues` data property.
+   * Toggles `selectAll` based on `selectedIssues` having all `autofixableIssueShortcodes`.
+   *
+   * @param {Array<String>} updatedSelectedIssues
+   * @returns {void}
+   */
+  @Watch('selectedIssues')
+  toggleSelectAll(updatedSelectedIssues: Array<string>): void {
+    const autofixableIssueShortcodes = this.autofixableIssues.map((issue) => issue.shortcode)
+
+    // Set selectAll to true if selectedIssues is same as autofixableIssues, else set to false
+    this.selectAll = checkArrayEquality(autofixableIssueShortcodes, updatedSelectedIssues)
   }
 
   /**
@@ -217,21 +234,7 @@ export default class RunAutofixBar extends mixins(RunDetailMixin) {
    * @returns {void}
    */
   triggerAutofixOnSelectedIssues(): void {
-    this.$emit('autofixIssues', this.selectedIssueShortcodeArray)
-  }
-
-  /**
-   * Function to check if a given `issue` is already present in list of `selectedIssues` or not.
-   *
-   * @param {Record<string, string>[]} selectedIssues
-   * @param {Record<string, string>} issue
-   * @returns {boolean} - Returns `true` if an issue is already selected.
-   */
-  public isIssueSelected(
-    selectedIssues: Record<string, string>[],
-    issue: Record<string, string>
-  ): boolean {
-    return selectedIssues.includes(issue)
+    this.$emit('autofixIssues', this.selectedIssues)
   }
 }
 </script>
