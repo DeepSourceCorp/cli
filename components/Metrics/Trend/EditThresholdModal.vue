@@ -42,7 +42,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 
-import { ZModal, ZInput, ZButton } from '@deepsourcelabs/zeal'
+import { ZModal, ZInput, ZButton } from '@deepsource/zeal'
 import { Maybe, Metric, MetricNamespace, MetricNamespaceTrend, Repository } from '~/types/types'
 import { MetricType } from '~/types/metric'
 

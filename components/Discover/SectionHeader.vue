@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-import { ZDivider } from '@deepsourcelabs/zeal'
+import { ZDivider } from '@deepsource/zeal'
 
 @Component({
   components: {

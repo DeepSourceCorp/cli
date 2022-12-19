@@ -109,7 +109,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm } from '@deepsourcelabs/zeal'
+import { ZButton, ZConfirm } from '@deepsource/zeal'
 import AccessTokenMixin from '~/mixins/accessTokenMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 

@@ -22,7 +22,7 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import IntegrationsListMixin from '~/mixins/integrationsListMixin'

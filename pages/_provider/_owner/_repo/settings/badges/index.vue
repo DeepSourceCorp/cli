@@ -89,7 +89,7 @@ import {
   ZSelect,
   ZOption,
   ZToggle
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { RepositoryDetailActions } from '~/store/repository/detail'
 import { Repository } from '~/types/types'
 import { RepoPerms } from '~/types/permTypes'

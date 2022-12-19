@@ -70,7 +70,7 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZChart } from '@deepsourcelabs/zeal'
+import { ZChart } from '@deepsource/zeal'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import CodeHealthReportMixin from '~/mixins/codeHealthReportMixin'

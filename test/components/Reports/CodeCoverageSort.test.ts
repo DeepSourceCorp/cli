@@ -1,4 +1,4 @@
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 import { render } from '@testing-library/vue'
 import { shallowMount } from '@vue/test-utils'
 

@@ -86,7 +86,7 @@
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import { StatCard, StatSection } from '@/components/Metrics'
-import { ZButton, ZIcon, ZTicker } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZTicker } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { formatIntl, shortenLargeNumber, toSentenceCase } from '~/utils/string'
 import { RepoPerms } from '~/types/permTypes'

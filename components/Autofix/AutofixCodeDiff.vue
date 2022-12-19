@@ -117,7 +117,7 @@
   </div>
 </template>
 <script lang="ts">
-import { ZCheckbox, ZCode } from '@deepsourcelabs/zeal'
+import { ZCheckbox, ZCode } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import { Maybe, Scalars } from '~/types/types'

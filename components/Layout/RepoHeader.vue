@@ -117,7 +117,7 @@ import { Run, Maybe } from '~/types/types'
 import RepoHeaderInfo from './RepoHeaderInfo.vue'
 import RouteParamsMixin from '@/mixins/routeParamsMixin'
 
-import { ZLabel, ZButton, ZTab, ZTag, ZIcon } from '@deepsourcelabs/zeal'
+import { ZLabel, ZButton, ZTab, ZTag, ZIcon } from '@deepsource/zeal'
 
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'

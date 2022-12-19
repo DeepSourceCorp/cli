@@ -56,7 +56,7 @@
 <script lang="ts">
 import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
-import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsource/zeal'
 import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
 import { Analyzer, AnalyzerConnection, IssuePriorityLevel } from '~/types/types'
 import { resolveNodes } from '~/utils/array'

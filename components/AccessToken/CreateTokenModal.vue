@@ -79,7 +79,7 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZButton, ZAlert, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZModal, ZInput, ZButton, ZAlert, ZSelect, ZOption } from '@deepsource/zeal'
 import AccessTokenMixin, { CreatedAccessToken } from '~/mixins/accessTokenMixin'
 import { formatDate, parseISODate } from '~/utils/date'
 import dayjs from 'dayjs'

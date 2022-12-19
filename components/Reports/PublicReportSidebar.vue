@@ -54,7 +54,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
-import { ZDivider } from '@deepsourcelabs/zeal'
+import { ZDivider } from '@deepsource/zeal'
 import { ReportPageT, ReportMeta } from '~/types/reportTypes'
 import { containsElement } from '~/utils/ui'
 

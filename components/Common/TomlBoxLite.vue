@@ -6,7 +6,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 
 @Component({
   name: 'TomlBoxLite',

@@ -27,7 +27,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZCheckbox } from '@deepsourcelabs/zeal'
+import { ZCheckbox } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({

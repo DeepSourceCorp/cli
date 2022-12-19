@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
+import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 

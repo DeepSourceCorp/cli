@@ -78,7 +78,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZRadioGroup, ZRadioButton } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZRadioGroup, ZRadioButton } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { RepoPerms } from '~/types/permTypes'
 import TomlGeneratorMixin from '~/mixins/tomlGeneratorMixin'

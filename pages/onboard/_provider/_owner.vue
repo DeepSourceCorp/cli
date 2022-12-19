@@ -108,7 +108,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
-import { ZAvatar, ZIcon, ZButton, ZStepper, ZStep } from '@deepsourcelabs/zeal'
+import { ZAvatar, ZIcon, ZButton, ZStepper, ZStep } from '@deepsource/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { Context } from '@nuxt/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'

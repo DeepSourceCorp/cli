@@ -42,7 +42,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton } from '@deepsource/zeal'
 import { WebhookEventTypesConnection } from '~/types/types'
 import { getHumanizedTimeFromNow } from '~/utils/date'
 

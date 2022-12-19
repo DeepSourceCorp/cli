@@ -23,7 +23,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { parseISODate, formatDate } from '~/utils/date'
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 import { BillingInfo } from '~/types/types'
 
 @Component({

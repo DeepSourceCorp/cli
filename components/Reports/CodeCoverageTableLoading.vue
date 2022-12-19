@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton } from '@deepsource/zeal'
 
 /**
  * Loading state component for code coverage report table

@@ -122,7 +122,7 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins, Prop } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZButton, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
+import { ZModal, ZInput, ZButton, ZIcon, ZPagination } from '@deepsource/zeal'
 import PriorityTypeSelect from './PriorityTypeSelect.vue'
 import IssuePrioritySort from './IssuePrioritySort.vue'
 import IssuePriorityFilter from './IssuePriorityFilter.vue'

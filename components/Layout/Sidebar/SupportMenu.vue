@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
+import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 
 /**
  * Support Menu, for the sidebar

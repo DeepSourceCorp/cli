@@ -265,7 +265,7 @@ import {
   ZBreadcrumb,
   ZBreadcrumbItem,
   ZCheckbox
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'

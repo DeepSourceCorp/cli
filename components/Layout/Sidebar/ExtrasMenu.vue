@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZMenu, ZMenuItem, ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZMenu, ZMenuItem, ZButton, ZIcon } from '@deepsource/zeal'
 
 /**
  * Extra sub menu shown beside the `Dashboard` link in sidebar

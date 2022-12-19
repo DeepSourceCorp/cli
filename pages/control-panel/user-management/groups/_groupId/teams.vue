@@ -165,7 +165,7 @@ import {
   ZMenuSection,
   ZMenuItem,
   ZPagination
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 
 import { OrgGroupsActions, OrgGroupsGetters } from '~/store/control-panel/groups'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'

@@ -180,7 +180,7 @@ import {
   ZIcon,
   ZToggle,
   ZCheckbox
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { ReportPageT, ReportMeta } from '~/types/reportTypes'
 import {
   CreatePublicReportInput,

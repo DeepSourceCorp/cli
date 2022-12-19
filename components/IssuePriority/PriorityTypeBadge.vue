@@ -12,7 +12,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { IssuePriorityTypes, IssuePriorityTypesVerbose } from '~/types/issuePriorityTypes'
 import { IssuePriorityLevel } from '~/types/types'
 

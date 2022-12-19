@@ -159,7 +159,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsource/zeal'
 import { RepositoryIssue, Maybe } from '~/types/types'
 import { AutofixFileChooser } from '@/components/RepoIssues'
 import {

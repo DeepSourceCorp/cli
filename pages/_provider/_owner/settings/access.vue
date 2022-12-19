@@ -86,7 +86,7 @@
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import TeamDetailMixin from '~/mixins/teamDetailMixin'
-import { ZButton, ZConfirm } from '@deepsourcelabs/zeal'
+import { ZButton, ZConfirm } from '@deepsource/zeal'
 import { CheckInput, FormGroup, RadioGroupInput, ToggleInput } from '~/components/Form'
 
 import { TeamBasePermissionSetDefaultRepositoryPermission, Maybe } from '~/types/types'

@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts">
-import { ZIcon, ZInput, ZTabItem, ZTabList, ZTabPane, ZTabPanes, ZTabs } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput, ZTabItem, ZTabList, ZTabPane, ZTabPanes, ZTabs } from '@deepsource/zeal'
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
 
 import EditorsPick from '@/components/Discover/EditorsPick.vue'

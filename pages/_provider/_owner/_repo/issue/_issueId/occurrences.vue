@@ -59,7 +59,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZPagination } from '@deepsourcelabs/zeal'
+import { ZPagination } from '@deepsource/zeal'
 import { IssueDescription, IssueOccurrenceSection } from '@/components/RepoIssues/index'
 
 import IssueDetailMixin from '@/mixins/issueDetailMixin'

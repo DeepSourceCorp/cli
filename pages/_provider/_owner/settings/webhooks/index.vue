@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZPagination } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZPagination } from '@deepsource/zeal'
 import { TeamPerms } from '~/types/permTypes'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'

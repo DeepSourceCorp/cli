@@ -56,7 +56,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import { ZButton, ZMenu, ZMenuItem, ZMenuSection, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZMenu, ZMenuItem, ZMenuSection, ZIcon } from '@deepsource/zeal'
 import { StatType } from '~/types/metric'
 import { Metric, MetricNamespaceTrend } from '~/types/types'
 

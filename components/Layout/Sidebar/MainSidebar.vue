@@ -233,7 +233,7 @@
 
 <script lang="ts">
 import { Component, Watch, mixins, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
 
 // types
 import { TeamPerms } from '~/types/permTypes'

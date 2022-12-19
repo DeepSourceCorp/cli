@@ -45,7 +45,7 @@
 <script lang="ts">
 import { Component, namespace, Prop, mixins, Watch } from 'nuxt-property-decorator'
 
-import { ZBreadcrumb, ZBreadcrumbItem, ZIcon } from '@deepsourcelabs/zeal'
+import { ZBreadcrumb, ZBreadcrumbItem, ZIcon } from '@deepsource/zeal'
 
 import { IssueDetailActions } from '~/store/issue/detail'
 import { Analyzer, Issue } from '~/types/types'

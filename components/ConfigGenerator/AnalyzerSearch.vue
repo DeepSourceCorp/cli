@@ -66,7 +66,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput, ZTag, ZButton } from '@deepsource/zeal'
 import Analyzer from './Analyzer.vue'
 
 import { AnalyzerInterface } from '~/store/analyzer/list'

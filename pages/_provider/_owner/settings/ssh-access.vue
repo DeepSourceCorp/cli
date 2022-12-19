@@ -117,7 +117,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
-import { ZTextarea, ZButton, ZConfirm } from '@deepsourcelabs/zeal'
+import { ZTextarea, ZButton, ZConfirm } from '@deepsource/zeal'
 
 @Component({
   components: {

@@ -90,7 +90,7 @@ import {
   ZAvatar,
   ZPagination,
   ZConfirm
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { TeamPerms } from '~/types/permTypes'
 
 @Component({

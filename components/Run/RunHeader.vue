@@ -169,7 +169,7 @@
   </div>
 </template>
 <script lang="ts">
-import { ZIcon, ZTag, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTag, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 import { Component, namespace, Prop } from 'nuxt-property-decorator'
 
 import LinkToPrev from '@/components/LinkToPrev.vue'

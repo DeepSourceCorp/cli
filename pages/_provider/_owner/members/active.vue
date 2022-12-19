@@ -100,7 +100,7 @@ import {
   RemoveMemberModal,
   TransferOwnershipModal
 } from '@/components/Members'
-import { ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
+import { ZInput, ZIcon, ZPagination } from '@deepsource/zeal'
 
 import { User, TeamMember } from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'

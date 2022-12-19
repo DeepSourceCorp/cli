@@ -37,7 +37,7 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
 import { Context } from '@nuxt/types'
-import { ZTab, ZTag } from '@deepsourcelabs/zeal'
+import { ZTab, ZTag } from '@deepsource/zeal'
 
 /**
  * User settings page

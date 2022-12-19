@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZButton, ZDivider, ZIcon, ZSelect, ZOption } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import integrationsDetailMixin from '~/mixins/integrationsDetailMixin'

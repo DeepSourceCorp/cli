@@ -85,7 +85,7 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 
 @Component({

@@ -17,7 +17,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZInput, ZButton } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton } from '@deepsource/zeal'
 
 @Component({
   components: {

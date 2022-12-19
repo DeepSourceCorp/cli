@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZIcon, ZBadge, ZInput, ZMenu, ZMenuItem } from '@deepsourcelabs/zeal'
+import { ZIcon, ZBadge, ZInput, ZMenu, ZMenuItem } from '@deepsource/zeal'
 @Component({
   components: {
     ZIcon,

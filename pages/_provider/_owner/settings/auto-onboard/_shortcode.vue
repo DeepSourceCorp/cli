@@ -120,7 +120,7 @@
 
 <script lang="ts">
 import { Component, mixins, Provide } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput, ZButton, ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
 import { Analyzer } from '@/components/ConfigGenerator'
 
 import { RepoConfigAnalyzerMeta, RepoConfigInterface } from '~/store/repository/detail'

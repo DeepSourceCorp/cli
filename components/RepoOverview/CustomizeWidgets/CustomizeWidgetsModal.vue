@@ -85,7 +85,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZModal, ZTag, ZCheckbox, ZInput } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZModal, ZTag, ZCheckbox, ZInput } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import Draggable from 'vuedraggable'
 

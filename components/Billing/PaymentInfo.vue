@@ -7,16 +7,7 @@
     v-if="isBilledByStripe && ownerBillingInfo.activeCard"
   >
     <div
-      class="
-        flex
-        items-center
-        justify-between
-        w-full
-        p-4
-        border
-        rounded-md
-        border-ink-200 border-opacity-70
-      "
+      class="flex items-center justify-between w-full p-4 border rounded-md border-ink-200 border-opacity-70"
     >
       <div class="flex items-center space-x-4">
         <img
@@ -59,7 +50,7 @@ import { Component, mixins } from 'nuxt-property-decorator'
 
 import { FormGroup } from '~/components/Form'
 import UpdateBillingDetailsModal from './Modals/UpdateBillingDetailsModal.vue'
-import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({

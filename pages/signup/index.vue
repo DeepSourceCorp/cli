@@ -83,7 +83,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZDivider, ZIcon, ZCarousel, ZSlide, ZCard } from '@deepsourcelabs/zeal'
+import { ZButton, ZDivider, ZIcon, ZCarousel, ZSlide, ZCard } from '@deepsource/zeal'
 import AuthMixin from '~/mixins/authMixin'
 import MetaMixin from '~/mixins/metaMixin'
 

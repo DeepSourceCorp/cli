@@ -92,7 +92,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZInput, ZDivider, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZInput, ZDivider, ZIcon } from '@deepsource/zeal'
 import { RepoListItem } from '.'
 
 // types

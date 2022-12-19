@@ -137,7 +137,7 @@ import {
   ZIcon,
   ZOption,
   ZSelect
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'

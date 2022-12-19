@@ -14,7 +14,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZConfirm } from '@deepsourcelabs/zeal'
+import { ZIcon, ZConfirm } from '@deepsource/zeal'
 
 @Component({
   components: {

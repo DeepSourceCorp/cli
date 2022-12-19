@@ -59,7 +59,7 @@
 <script lang="ts">
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 
-import { ZModal, ZInput, ZButton, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZModal, ZInput, ZButton, ZSelect, ZOption } from '@deepsource/zeal'
 import { Analyzer } from '~/types/types'
 
 /**

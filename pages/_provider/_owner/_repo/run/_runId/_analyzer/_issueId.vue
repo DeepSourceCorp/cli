@@ -82,7 +82,7 @@
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
 
-import { ZTag, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem, ZIcon } from '@deepsourcelabs/zeal'
+import { ZTag, ZTabs, ZTabList, ZTabPane, ZTabPanes, ZTabItem, ZIcon } from '@deepsource/zeal'
 
 import LinkToPrev from '@/components/LinkToPrev.vue'
 import { IssueDetailsHeader, IssueActions, IssueDescription } from '@/components/RepoIssues/index'

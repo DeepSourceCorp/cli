@@ -78,7 +78,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZAvatar, ZCheckbox, ZButton } from '@deepsourcelabs/zeal'
+import { ZAvatar, ZCheckbox, ZButton } from '@deepsource/zeal'
 import { AddRepoModal } from '@/components/AddRepo'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
 import { getDefaultAvatar } from '~/utils/ui'

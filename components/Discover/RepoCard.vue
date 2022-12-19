@@ -81,7 +81,7 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
 
 import { BaseCard } from '@/components/History'

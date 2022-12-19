@@ -110,7 +110,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZChart, ZTable, ZTableCell, ZTableRow } from '@deepsourcelabs/zeal'
+import { ZChart, ZTable, ZTableCell, ZTableRow } from '@deepsource/zeal'
 
 import { ReportPageT } from '~/types/reportTypes'
 

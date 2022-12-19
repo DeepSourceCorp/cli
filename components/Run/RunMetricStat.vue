@@ -98,7 +98,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon, ZTag, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTag, ZButton } from '@deepsource/zeal'
 import { RepositoryMetricValue } from '~/types/types'
 import { MetricType } from '~/types/metric'
 

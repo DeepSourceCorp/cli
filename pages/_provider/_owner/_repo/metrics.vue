@@ -40,7 +40,7 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
 
 // Components
-import { ZTab } from '@deepsourcelabs/zeal'
+import { ZTab } from '@deepsource/zeal'
 
 // Store, Queries & Type Imports
 import { Context } from '@nuxt/types'

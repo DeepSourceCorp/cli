@@ -22,7 +22,7 @@
   </z-modal>
 </template>
 <script lang="ts">
-import { ZModal, ZButton } from '@deepsourcelabs/zeal'
+import { ZModal, ZButton } from '@deepsource/zeal'
 import { Vue, Component } from 'nuxt-property-decorator'
 
 /**

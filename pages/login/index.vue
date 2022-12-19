@@ -54,7 +54,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { Context } from '@nuxt/types'
-import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 // Import State & Types
 import AuthMixin from '~/mixins/authMixin'
 import { AuthActionTypes } from '~/store/account/auth'

@@ -23,7 +23,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { BaseState } from '@/components/RepoStates'
 
 /**

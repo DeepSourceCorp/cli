@@ -38,7 +38,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZTag } from '@deepsourcelabs/zeal'
+import { ZTag } from '@deepsource/zeal'
 import { WebhookEventTypes } from '~/types/types'
 import { fromNow } from '~/utils/date'
 

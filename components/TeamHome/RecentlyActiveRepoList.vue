@@ -82,7 +82,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 import { getHumanizedTimeFromNow, formatDate } from '@/utils/date'
 import { AddRepoModal } from '@/components/AddRepo'
 import AnalyzerLogo from '@/components/AnalyzerLogo.vue'

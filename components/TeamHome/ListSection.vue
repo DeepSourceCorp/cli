@@ -38,7 +38,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 import { StatSection } from '@/components/Metrics'
 
 @Component({

@@ -63,7 +63,7 @@
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
-import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 import { parseISODate, formatDate, getDateDiffInDays } from '~/utils/date'
 import { AccessTokenExpirationStatus } from '~/types/types'
 

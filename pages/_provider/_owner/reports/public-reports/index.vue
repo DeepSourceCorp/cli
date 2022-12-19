@@ -136,7 +136,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZPagination, ZConfirm } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput, ZButton, ZPagination, ZConfirm } from '@deepsource/zeal'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'

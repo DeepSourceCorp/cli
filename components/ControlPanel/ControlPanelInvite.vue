@@ -69,7 +69,7 @@
 
 <script lang="ts">
 import { Component, mixins, namespace, Prop } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZIcon, ZSelect, ZOption } from '@deepsource/zeal'
 
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { OrgGroupsActions, OrgGroupsGetters } from '~/store/control-panel/groups'

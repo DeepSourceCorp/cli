@@ -53,7 +53,7 @@
 import { Vue, Component, Prop, Model } from 'nuxt-property-decorator'
 import { Metrics } from '~/store/repository/detail'
 
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 
 @Component({
   components: {

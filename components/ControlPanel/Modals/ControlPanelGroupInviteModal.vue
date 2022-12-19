@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZModal } from '@deepsourcelabs/zeal'
+import { ZButton, ZModal } from '@deepsource/zeal'
 import { OrgGroupsActions } from '~/store/control-panel/groups'
 
 const groupManagementStore = namespace('control-panel/groups')

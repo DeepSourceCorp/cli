@@ -85,14 +85,7 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import {
-  ZInput,
-  ZIcon,
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZTab,
-  ZPagination
-} from '@deepsourcelabs/zeal'
+import { ZInput, ZIcon, ZBreadcrumb, ZBreadcrumbItem, ZTab, ZPagination } from '@deepsource/zeal'
 
 import { OrgGroupsActions, OrgGroupsGetters } from '~/store/control-panel/groups'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'

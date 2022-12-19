@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { ZTag, ZIcon } from '@deepsourcelabs/zeal'
+import { ZTag, ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue, Watch } from 'nuxt-property-decorator'
 import { Check, CheckStatus } from '~/types/types'
 import { checkStatusIcon, checkStatusIconColor } from '~/utils/ui'

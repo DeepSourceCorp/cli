@@ -1,4 +1,4 @@
-import { ZMenu } from '@deepsourcelabs/zeal'
+import { ZMenu } from '@deepsource/zeal'
 import { render } from '@testing-library/vue'
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import VTooltip from 'floating-vue'

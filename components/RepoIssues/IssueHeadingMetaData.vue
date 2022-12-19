@@ -21,7 +21,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import IssueType from '@/components/Repository/IssueType.vue'
 import { fromNow } from '~/utils/date'
 

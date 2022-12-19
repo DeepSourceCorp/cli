@@ -60,7 +60,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZChart } from '@deepsourcelabs/zeal'
+import { ZChart } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 

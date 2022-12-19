@@ -43,7 +43,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZStep, ZStepper, ZDivider } from '@deepsourcelabs/zeal'
+import { ZIcon, ZModal, ZButton, ZStep, ZStepper, ZDivider } from '@deepsource/zeal'
 
 @Component({
   components: {

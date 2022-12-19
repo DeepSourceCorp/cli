@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 
 @Component({ components: { ZButton }, name: 'CopyButton' })
 export default class CopyButton extends Vue {

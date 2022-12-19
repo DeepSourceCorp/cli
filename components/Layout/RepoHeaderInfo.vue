@@ -102,7 +102,7 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZPulse, ZModal, ZInput, ZMenu, ZMenuItem, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZPulse, ZModal, ZInput, ZMenu, ZMenuItem, ZButton } from '@deepsource/zeal'
 import { fromNow } from '@/utils/date'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 

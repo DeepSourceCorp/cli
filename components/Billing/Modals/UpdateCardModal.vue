@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { Component, Ref, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZButton, ZInput, ZIcon } from '@deepsourcelabs/zeal'
+import { ZModal, ZButton, ZInput, ZIcon } from '@deepsource/zeal'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 
 import { StripeCardElement, StripeCardElementChangeEvent } from '@stripe/stripe-js'

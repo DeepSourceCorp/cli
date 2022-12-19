@@ -38,7 +38,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZInput } from '@deepsourcelabs/zeal'
+import { ZInput } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({

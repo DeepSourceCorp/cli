@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZTab } from '@deepsourcelabs/zeal'
+import { ZTab } from '@deepsource/zeal'
 
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'

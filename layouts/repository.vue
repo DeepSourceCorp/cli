@@ -113,7 +113,7 @@
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { RepoHeader, MobileNav, LoggedOutSidebar } from '@/components/Layout'
 import { Sidebar } from '@/components/Layout/Sidebar'
-import { ZAlert, ZButton, ZIcon, ZLabel } from '@deepsourcelabs/zeal'
+import { ZAlert, ZButton, ZIcon, ZLabel } from '@deepsource/zeal'
 import AuthMixin from '@/mixins/authMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import PortalMixin from '@/mixins/portalMixin'

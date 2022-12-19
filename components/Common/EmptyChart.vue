@@ -19,7 +19,7 @@
 <script lang="ts">
 import { Vue, Prop, Component } from 'nuxt-property-decorator'
 import { Dataset } from '~/types/reportTypes'
-import { ZChart } from '@deepsourcelabs/zeal'
+import { ZChart } from '@deepsource/zeal'
 import { getColorShades } from '~/utils/ui'
 
 const BASE_COLOR = '#1035ad'

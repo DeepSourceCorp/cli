@@ -25,7 +25,7 @@
 import { Vue, Component } from 'nuxt-property-decorator'
 
 import { BaseState } from '.'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 
 @Component({
   components: {

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/vue'
 import { IgnoredRule } from '~/components/Repository'
 import { BaseCard } from '~/components/History'
-import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton } from '@deepsource/zeal'
 import { VTooltip } from 'v-tooltip'
 import { VueConstructor } from 'vue'
 import { RouterLinkStub } from '@vue/test-utils'

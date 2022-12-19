@@ -56,7 +56,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZModal } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZModal } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 import IssueCategoryMixin, { IssueCategoryChoice } from '~/mixins/issueCategoryMixin'

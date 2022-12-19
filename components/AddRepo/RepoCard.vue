@@ -110,7 +110,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { BaseCard } from '@/components/History'
 import { fromNow } from '~/utils/date'
 import AnalyzerListMixin from '~/mixins/analyzerListMixin'

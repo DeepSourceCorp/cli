@@ -55,7 +55,7 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZDivider, ZIcon } from '@deepsource/zeal'
 import { Menu } from 'floating-vue'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 

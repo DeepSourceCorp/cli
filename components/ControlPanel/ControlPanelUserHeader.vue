@@ -86,7 +86,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZAvatar, ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZButton, ZAvatar, ZIcon, ZTag } from '@deepsource/zeal'
 
 import { EnterpriseUser } from '~/types/types'
 import { formatDate, parseISODate } from '~/utils/date'

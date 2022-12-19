@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts">
-import { ZTab } from '@deepsourcelabs/zeal'
+import { ZTab } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import { DashboardHeader, LoggedOutSidebar, MobileNav } from '~/components/Layout'

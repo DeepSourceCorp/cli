@@ -140,7 +140,7 @@ import {
   ZMenuItem,
   ZMenuSection,
   ZAccordionItem
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { fromNow } from '~/utils/date'
 import { safeRenderBackticks } from '~/utils/string'
 import { toWrappableString } from '~/utils/string'

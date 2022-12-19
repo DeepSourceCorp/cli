@@ -104,7 +104,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar } from '@deepsourcelabs/zeal'
+import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZAvatar } from '@deepsource/zeal'
 import { formatDate } from '@/utils/date'
 import TEAM_PERMS from '~/utils/teamPerms'
 

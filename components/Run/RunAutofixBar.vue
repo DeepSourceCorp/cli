@@ -116,7 +116,7 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZAccordion, ZAccordionItem, ZCheckbox, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZAccordion, ZAccordionItem, ZCheckbox, ZIcon } from '@deepsource/zeal'
 import { safeRenderBackticks } from '~/utils/string'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import { checkArrayEquality } from '~/utils/array'

@@ -65,7 +65,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZTag, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTag, ZButton } from '@deepsource/zeal'
 import RunCard from './RunCard.vue'
 import BranchList from '../BranchList.vue'
 import { Run } from '~/types/types'

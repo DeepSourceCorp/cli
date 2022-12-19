@@ -186,7 +186,7 @@ import { Component, mixins } from 'nuxt-property-decorator'
 
 import { FormGroup } from '~/components/Form'
 import UpdateBillingDetailsModal from './Modals/UpdateBillingDetailsModal.vue'
-import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 
 import { parseISODate, formatDate } from '~/utils/date'
 import { formatUSD } from '~/utils/string'

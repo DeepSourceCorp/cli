@@ -96,7 +96,7 @@
 
 <script lang="ts">
 import { mixins, Component, Watch } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZButton, ZPagination } from '@deepsourcelabs/zeal'
+import { ZInput, ZIcon, ZButton, ZPagination } from '@deepsource/zeal'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import { ConfigTemplate } from '~/types/types'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'

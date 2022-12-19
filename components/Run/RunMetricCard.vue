@@ -39,7 +39,7 @@
 <script lang="ts">
 import { Component, namespace, Prop, Vue } from 'nuxt-property-decorator'
 import RunMetricStat from './RunMetricStat.vue'
-import { ZIcon, ZTag, ZButton, ZAccordionItem } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTag, ZButton, ZAccordionItem } from '@deepsource/zeal'
 import { Repository, RepositoryMetricValue } from '~/types/types'
 
 const repoStore = namespace('repository/detail')

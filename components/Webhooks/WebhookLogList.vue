@@ -24,7 +24,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZPagination } from '@deepsourcelabs/zeal'
+import { ZPagination } from '@deepsource/zeal'
 
 import { WebhookEventDelivery } from '~/types/types'
 

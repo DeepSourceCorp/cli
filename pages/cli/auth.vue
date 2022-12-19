@@ -19,18 +19,7 @@
               maxlength="1"
               autocomplete="off"
               :disabled="freeze"
-              class="
-                p-1
-                bg-ink-400
-                rounded-md
-                border border-ink-200
-                active:border-juniper
-                focus:outline-none
-                text-vanilla-100
-                font-bold
-                text-center
-                h-12
-              "
+              class="p-1 bg-ink-400 rounded-md border border-ink-200 active:border-juniper focus:outline-none text-vanilla-100 font-bold text-center h-12"
               placeholder=""
               :id="`cli-otp-input-${idx}`"
               :key="idx"
@@ -97,7 +86,7 @@
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import VerifyDeviceMutation from '~/apollo/mutations/cli/verifyDevice.gql'
-import { ZButton, ZInput } from '@deepsourcelabs/zeal'
+import { ZButton, ZInput } from '@deepsource/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
 

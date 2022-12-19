@@ -1,6 +1,6 @@
 import { render } from '@testing-library/vue'
 import { createLocalVue, mount, RouterLinkStub } from '@vue/test-utils'
-import { outsideClickDirective } from '@deepsourcelabs/zeal'
+import { outsideClickDirective } from '@deepsource/zeal'
 import VTooltip from 'v-tooltip'
 
 import { PublicReportSidebar } from '~/components/Reports'

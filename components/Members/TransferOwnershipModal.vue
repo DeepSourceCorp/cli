@@ -192,7 +192,7 @@ import {
   ZDialogGeneric,
   ZButton,
   ZCheckbox
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { TeamMember } from '~/types/types'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'

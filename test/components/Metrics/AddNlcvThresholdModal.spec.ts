@@ -1,5 +1,5 @@
 import { render } from '@testing-library/vue'
-import { ZInput, ZButton, ZModal, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZModal, ZSelect, ZOption } from '@deepsource/zeal'
 import { AddNlcvThresholdModal } from '~/components/Metrics'
 import { shallowMount } from '@vue/test-utils'
 

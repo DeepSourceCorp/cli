@@ -2,7 +2,7 @@ import { render } from '@testing-library/vue'
 import { EditThresholdModal } from '~/components/Metrics'
 import { VTooltip } from 'v-tooltip'
 import { VueConstructor } from 'vue'
-import { ZInput, ZButton, ZModal } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZModal } from '@deepsource/zeal'
 import { shallowMount } from '@vue/test-utils'
 import { cartesian, generateStringProps } from '~/test/utils'
 

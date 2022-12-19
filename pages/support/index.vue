@@ -222,7 +222,7 @@ import {
   ZAvatar,
   ZConfirm,
   ZFileInput
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { InfoBanner } from '@/components/Settings/index'
 import SubmitSupportTicketMutation from '~/apollo/mutations/support/submitSupportTicket.gql'
 import { FileUploadContexts, uploadFiles, FileUploadTokenT, FileUploadError } from '~/utils/files'

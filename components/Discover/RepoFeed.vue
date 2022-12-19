@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { Component, Prop, namespace, Vue } from 'nuxt-property-decorator'
-import { ZDivider, ZIcon } from '@deepsourcelabs/zeal'
+import { ZDivider, ZIcon } from '@deepsource/zeal'
 
 import { resolveNodes } from '@/utils/array'
 import { fromNow } from '@/utils/date'

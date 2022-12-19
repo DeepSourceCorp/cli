@@ -99,7 +99,7 @@
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
 import { parseISODate, formatDate } from '~/utils/date'
-import { ZRadioGroup, ZRadioButton } from '@deepsourcelabs/zeal'
+import { ZRadioGroup, ZRadioButton } from '@deepsource/zeal'
 
 import { TeamPerms } from '~/types/permTypes'
 import { getHumanizedTimeFromNow } from '~/utils/date'

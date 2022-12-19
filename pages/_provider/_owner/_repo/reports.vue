@@ -48,8 +48,8 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZTab, ZButton, ZIcon, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsourcelabs/zeal'
-import { ZDivider } from '@deepsourcelabs/zeal'
+import { ZTab, ZButton, ZIcon, ZMenu, ZMenuItem, ZSplitButtonDropdown } from '@deepsource/zeal'
+import { ZDivider } from '@deepsource/zeal'
 
 import { RepoPerms } from '~/types/permTypes'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'

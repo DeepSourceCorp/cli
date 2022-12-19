@@ -66,7 +66,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZAlert, ZButton, ZIcon, ZInput, ZDialogGeneric } from '@deepsourcelabs/zeal'
+import { ZAlert, ZButton, ZIcon, ZInput, ZDialogGeneric } from '@deepsource/zeal'
 
 /**
  * Success modal for report creation

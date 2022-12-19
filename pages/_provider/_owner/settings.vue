@@ -37,7 +37,7 @@
   </div>
 </template>
 <script lang="ts">
-import { ZTab, ZTag } from '@deepsourcelabs/zeal'
+import { ZTab, ZTag } from '@deepsource/zeal'
 import { Context } from '@nuxt/types'
 import { Component, mixins } from 'nuxt-property-decorator'
 

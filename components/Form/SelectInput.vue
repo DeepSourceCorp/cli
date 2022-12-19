@@ -43,7 +43,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Ref, Watch } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZSelect, ZOption, ZIcon } from '@deepsourcelabs/zeal'
+import { ZSelect, ZOption, ZIcon } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 export interface SelectComponent extends Vue {

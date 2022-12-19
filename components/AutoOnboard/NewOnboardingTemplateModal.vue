@@ -77,7 +77,7 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZButton } from '@deepsourcelabs/zeal'
+import { ZModal, ZInput, ZButton } from '@deepsource/zeal'
 import ConfigGeneratorMixin from '~/mixins/configGeneratorMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import { RepoConfigAnalyzerMeta, RepoConfigInterface } from '~/store/repository/detail'

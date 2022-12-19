@@ -127,7 +127,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZTextarea, ZConfirm } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZTextarea, ZConfirm } from '@deepsource/zeal'
 import { RepositoryDetailActions } from '~/store/repository/detail'
 import { InfoBanner } from '@/components/Settings/index'
 import { RepoPerms } from '~/types/permTypes'

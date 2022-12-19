@@ -1,1 +1,1 @@
-declare module "@deepsourcelabs/zeal";
+declare module '@deepsource/zeal'

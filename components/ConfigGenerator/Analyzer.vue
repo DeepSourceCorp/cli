@@ -225,15 +225,7 @@
 
 <script lang="ts">
 import { toSentenceCase } from '@/utils/string'
-import {
-  ZButton,
-  ZCheckbox,
-  ZIcon,
-  ZInput,
-  ZOption,
-  ZRadio,
-  ZRadioGroup
-} from '@deepsourcelabs/zeal'
+import { ZButton, ZCheckbox, ZIcon, ZInput, ZOption, ZRadio, ZRadioGroup } from '@deepsource/zeal'
 import { Component, mixins, namespace, Prop, Watch } from 'nuxt-property-decorator'
 
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'

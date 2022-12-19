@@ -306,7 +306,7 @@ import {
   ZButton,
   ZTag,
   ZConfirm
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 

@@ -51,7 +51,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
 
 import { shortenLargeNumber } from '~/utils/string'
 import IssueTypeT from '~/types/issueDistribution'

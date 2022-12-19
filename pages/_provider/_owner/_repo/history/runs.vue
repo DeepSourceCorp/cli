@@ -91,7 +91,7 @@
 
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
-import { ZPagination } from '@deepsourcelabs/zeal'
+import { ZPagination } from '@deepsource/zeal'
 // Components
 import { SubNav, RunBranches } from '@/components/History'
 // Store & Types

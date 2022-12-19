@@ -93,7 +93,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZCheckbox, ZOption, ZRadioGroup, ZRadio } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput, ZCheckbox, ZOption, ZRadioGroup, ZRadio } from '@deepsource/zeal'
 import { AnalyzerMetaInterface } from '~/store/analyzer/list'
 
 @Component({

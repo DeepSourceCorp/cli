@@ -66,7 +66,7 @@
 </template>
 
 <script lang="ts">
-import { ZChart } from '@deepsourcelabs/zeal'
+import { ZChart } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import DistributionReportMixin from '~/mixins/distributionReportMixin'

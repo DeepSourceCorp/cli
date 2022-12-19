@@ -70,7 +70,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import dayjs from 'dayjs'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import IssueType from '@/components/Repository/IssueType.vue'
 import { PriorityTypeBadge, PriorityTypeSelect } from '@/components/IssuePriority/index'
 import { formatDate } from '@/utils/date'

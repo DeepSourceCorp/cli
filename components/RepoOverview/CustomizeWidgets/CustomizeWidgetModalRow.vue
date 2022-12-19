@@ -27,7 +27,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZCheckbox } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZCheckbox } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 import { toSentenceCase } from '~/utils/string'
 

@@ -53,7 +53,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZLabel, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZLabel, ZButton } from '@deepsource/zeal'
 
 export interface RunError {
   level: number

@@ -14,7 +14,7 @@
 </template>
 
 <script lang="ts">
-import { ZAvatar } from '@deepsourcelabs/zeal'
+import { ZAvatar } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { formatDate } from '~/utils/date'
 import { getDefaultAvatar } from '~/utils/ui'

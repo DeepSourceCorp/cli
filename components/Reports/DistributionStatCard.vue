@@ -26,7 +26,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { formatIntl, shortenLargeNumber, toSentenceCase } from '~/utils/string'
 import { IssueDistributionT } from '~/types/reportTypes'
 

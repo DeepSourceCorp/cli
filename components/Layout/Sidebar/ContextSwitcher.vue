@@ -121,15 +121,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import {
-  ZAvatar,
-  ZIcon,
-  ZInput,
-  ZMenu,
-  ZMenuItem,
-  ZMenuSection,
-  ZDivider
-} from '@deepsourcelabs/zeal'
+import { ZAvatar, ZIcon, ZInput, ZMenu, ZMenuItem, ZMenuSection, ZDivider } from '@deepsource/zeal'
 
 // types
 import ActiveUserMixin, { DashboardContext } from '~/mixins/activeUserMixin'

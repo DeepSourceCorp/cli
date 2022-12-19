@@ -50,7 +50,7 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZDivider, ZIcon, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZButton, ZDivider, ZIcon, ZSelect, ZOption } from '@deepsource/zeal'
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
 /**

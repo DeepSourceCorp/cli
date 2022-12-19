@@ -16,7 +16,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZTab } from '@deepsourcelabs/zeal'
+import { ZTab } from '@deepsource/zeal'
 
 @Component({
   components: {

@@ -129,7 +129,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZButton, ZAvatar } from '@deepsourcelabs/zeal'
+import { ZModal, ZButton, ZAvatar } from '@deepsource/zeal'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import { GetUpgradeCodeQualitySubscriptionPlanInfoPayload } from '~/types/types'

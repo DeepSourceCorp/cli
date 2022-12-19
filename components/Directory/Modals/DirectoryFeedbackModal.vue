@@ -61,7 +61,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, namespace, Prop } from 'nuxt-property-decorator'
-import { ZModal, ZButton, ZCheckbox } from '@deepsourcelabs/zeal'
+import { ZModal, ZButton, ZCheckbox } from '@deepsource/zeal'
 import { AddAnalyzerFeedbackInput, AddTransformerFeedbackInput } from '~/types/types'
 import { DirectoryActions } from '~/store/directory/directory'
 

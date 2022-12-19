@@ -40,7 +40,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZRadioGroup, ZRadio, ZTag } from '@deepsourcelabs/zeal'
+import { ZRadioGroup, ZRadio, ZTag } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({

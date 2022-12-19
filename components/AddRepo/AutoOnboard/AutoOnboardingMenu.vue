@@ -101,7 +101,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZTabPane, ZTag } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZIcon, ZTabPane, ZTag } from '@deepsource/zeal'
 import { RepoCard } from '@/components/AddRepo'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'

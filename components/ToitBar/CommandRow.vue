@@ -34,7 +34,7 @@
 </template>
 <script lang="ts">
 import { mixins, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZAvatar } from '@deepsourcelabs/zeal'
+import { ZIcon, ZAvatar } from '@deepsource/zeal'
 import ContextMixin from '~/mixins/contextMixin'
 import { parseKeybinding } from 'tinykeys'
 

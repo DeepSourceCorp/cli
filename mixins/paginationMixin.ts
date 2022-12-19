@@ -1,5 +1,5 @@
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZPagination } from '@deepsourcelabs/zeal'
+import { ZPagination } from '@deepsource/zeal'
 
 @Component({
   components: {

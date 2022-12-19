@@ -79,7 +79,7 @@ import {
   ZButton,
   ZMenu,
   ZMenuItem
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { IssueDetailsHeader, IssueActions } from '@/components/RepoIssues/index'
 
 import IssueDetailMixin from '@/mixins/issueDetailMixin'

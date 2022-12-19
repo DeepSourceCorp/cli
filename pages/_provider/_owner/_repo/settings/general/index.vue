@@ -213,7 +213,7 @@
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { ToggleInput, TextInput, SelectInput, FormGroup } from '@/components/Form'
 import { Notice, InfoBanner } from '@/components/Settings/index'
-import { ZDivider, ZInput, ZIcon, ZButton, ZToggle, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZDivider, ZInput, ZIcon, ZButton, ZToggle, ZSelect, ZOption } from '@deepsource/zeal'
 import { Maybe, TeamMemberRoleChoices } from '~/types/types'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'

@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import gql from 'graphql-tag'
 import { Context } from '@nuxt/types'
 

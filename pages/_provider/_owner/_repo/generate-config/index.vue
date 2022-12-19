@@ -107,7 +107,7 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZStepper, ZStep, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZStepper, ZStep, ZInput, ZTag, ZButton } from '@deepsource/zeal'
 import { TomlBox, AnalyzerSelector, PatternsSelector } from '@/components/ConfigGenerator'
 import InstallAutofixModal from '@/components/Autofix/Modals/InstallAutofixModal.vue'
 import { NextStepsModal } from '@/components/ConfigGenerator'

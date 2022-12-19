@@ -55,7 +55,7 @@ import PriorityTypeSelect from './PriorityTypeSelect.vue'
 import PriorityTypeBadge from './PriorityTypeBadge.vue'
 import AnalyzerLogo from '~/components/AnalyzerLogo.vue'
 import IssueType from '@/components/Repository/IssueType.vue'
-import { ZTag, ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZTag, ZIcon, ZButton } from '@deepsource/zeal'
 import { safeRenderBackticks } from '~/utils/string'
 import { Analyzer } from '~/types/types'
 

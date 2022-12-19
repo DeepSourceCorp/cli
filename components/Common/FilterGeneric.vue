@@ -7,7 +7,7 @@
 
 <script lang="ts">
 import { Vue, Component, ModelSync, Prop } from 'nuxt-property-decorator'
-import { ZBadge } from '@deepsourcelabs/zeal'
+import { ZBadge } from '@deepsource/zeal'
 
 export interface FilterChoice {
   name: string

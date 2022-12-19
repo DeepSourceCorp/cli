@@ -133,7 +133,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZTabPane, ZPagination } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZIcon, ZTabPane, ZPagination } from '@deepsource/zeal'
 import { RepoCard } from '@/components/AddRepo'
 
 import RepositoriesActivationListQuery from '~/apollo/queries/repository/activateList.gql'

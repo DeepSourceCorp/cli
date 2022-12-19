@@ -73,7 +73,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTag, ZLabel, ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTag, ZLabel, ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'

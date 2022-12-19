@@ -136,7 +136,7 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZChart, ZTable, ZTableCell, ZTableRow, ZDivider } from '@deepsourcelabs/zeal'
+import { ZChart, ZTable, ZTableCell, ZTableRow, ZDivider } from '@deepsource/zeal'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
 import ComplianceReportMixin from '~/mixins/complianceReportMixin'

@@ -123,7 +123,7 @@
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 
-import { ZIcon, ZButton, ZInput, ZBadge, ZPagination } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZInput, ZBadge, ZPagination } from '@deepsource/zeal'
 import {
   IssuePrioritySort,
   ChooseIssueModal,

@@ -48,7 +48,7 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
 import { EnterpriseUser, Owner } from '~/types/types'
 import { TeamActions } from '~/store/team/detail'
 

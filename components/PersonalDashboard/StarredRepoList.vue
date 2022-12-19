@@ -38,7 +38,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ListSection } from '@/components/TeamHome'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { getHumanizedTimeFromNow, formatDate } from '@/utils/date'
 
 import { Repository } from '~/types/types'

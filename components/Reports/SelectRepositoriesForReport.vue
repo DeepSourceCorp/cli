@@ -78,7 +78,7 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZCheckbox, ZButton } from '@deepsourcelabs/zeal'
+import { ZInput, ZIcon, ZCheckbox, ZButton } from '@deepsource/zeal'
 
 import PaginationMixin from '~/mixins/paginationMixin'
 import { resolveNodes } from '~/utils/array'

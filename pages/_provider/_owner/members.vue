@@ -43,7 +43,7 @@
   </div>
 </template>
 <script lang="ts">
-import { ZButton, ZIcon, ZModal, ZTab, ZTag } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZModal, ZTab, ZTag } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import { InviteMembersModal } from '@/components/Members'

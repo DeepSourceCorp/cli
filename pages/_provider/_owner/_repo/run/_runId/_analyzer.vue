@@ -85,7 +85,7 @@ import {
   ZButton,
   ZBreadcrumb,
   ZBreadcrumbItem
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'

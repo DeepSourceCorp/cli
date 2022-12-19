@@ -1,5 +1,5 @@
 import Vue from 'vue'
 
-import { outsideClickDirective } from '@deepsourcelabs/zeal'
+import { outsideClickDirective } from '@deepsource/zeal'
 
 Vue.directive('outside-click', outsideClickDirective)

@@ -52,7 +52,7 @@ import {
   ZTabPane,
   ZTabPanes,
   ZTabItem
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'

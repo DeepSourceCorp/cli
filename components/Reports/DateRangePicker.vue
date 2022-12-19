@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, ModelSync } from 'nuxt-property-decorator'
-import { ZIcon, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZIcon, ZSelect, ZOption } from '@deepsource/zeal'
 import { DateRangeOptionT } from '~/types/reportTypes'
 
 /**

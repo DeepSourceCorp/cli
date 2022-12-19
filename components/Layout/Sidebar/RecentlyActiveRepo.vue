@@ -78,7 +78,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins, Watch } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZTag } from '@deepsourcelabs/zeal'
+import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZTag } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import RepoListMixin from '~/mixins/repoListMixin'

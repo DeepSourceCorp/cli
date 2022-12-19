@@ -96,7 +96,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZAvatar, ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZAvatar, ZIcon, ZButton } from '@deepsource/zeal'
 import { getDefaultAvatar } from '~/utils/ui'
 
 @Component({

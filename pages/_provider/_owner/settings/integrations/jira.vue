@@ -165,7 +165,7 @@ import {
   ZSelect,
   ZTextarea,
   ZConfirm
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import JiraIntegrationMixin from '~/mixins/jiraIntegrationMixin'
 

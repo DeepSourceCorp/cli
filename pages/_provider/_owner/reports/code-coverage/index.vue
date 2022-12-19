@@ -67,7 +67,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
+import { ZInput, ZIcon, ZPagination } from '@deepsource/zeal'
 
 import PaginationMixin from '~/mixins/paginationMixin'
 import RouteQueryMixin, { RouteQueryParamsT } from '~/mixins/routeQueryMixin'

@@ -1,9 +1,9 @@
 module.exports = {
-  presets: [require('@deepsourcelabs/zeal/tailwind.config')],
+  presets: [require('@deepsource/zeal/tailwind.config')],
   plugins: [require('@tailwindcss/line-clamp')],
   purge: {
     content: [
-      './node_modules/@deepsourcelabs/**/*.vue',
+      './node_modules/@deepsource/**/*.vue',
       `components/**/*.{vue,js}`,
       `mixins/**/*.{vue,js,ts}`,
       `layouts/**/*.vue`,

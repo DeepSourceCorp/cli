@@ -137,7 +137,7 @@
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
-import { ZButton, ZTag, ZIcon, ZChart } from '@deepsourcelabs/zeal'
+import { ZButton, ZTag, ZIcon, ZChart } from '@deepsource/zeal'
 
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { Analyzer, Issue } from '~/types/types'

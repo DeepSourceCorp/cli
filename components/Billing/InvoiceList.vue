@@ -45,7 +45,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { FormGroup } from '~/components/Form'
-import { ZButton, ZDivider, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZDivider, ZIcon } from '@deepsource/zeal'
 import { parseISODate, formatDate } from '~/utils/date'
 import { BillingInfo } from '~/types/types'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'

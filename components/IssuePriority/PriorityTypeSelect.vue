@@ -85,7 +85,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
+import { ZIcon, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 import {
   IssuePriorityLevelVerbose,
   IssuePriorityTypes,

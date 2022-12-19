@@ -21,7 +21,7 @@
 
 <script lang="ts">
 import { Component, namespace, Vue } from 'nuxt-property-decorator'
-import { ZTextarea, ZButton, ZConfirm } from '@deepsourcelabs/zeal'
+import { ZTextarea, ZButton, ZConfirm } from '@deepsource/zeal'
 import { Owner } from '~/types/types'
 import { OwnerDetailActions } from '~/store/owner/detail'
 

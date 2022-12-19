@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 import { AccountSetupCard, RecentlyActiveRepoList } from '@/components/TeamHome'

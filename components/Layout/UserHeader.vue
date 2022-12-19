@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTag, ZAvatar, ZAvatarGroup } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTag, ZAvatar, ZAvatarGroup } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'

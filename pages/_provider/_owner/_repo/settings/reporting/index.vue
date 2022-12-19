@@ -618,7 +618,7 @@ import {
   ZMenu,
   ZMenuSection,
   ZMenuItem
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import {
   Analyzer,
   IssuePrioritySetting,

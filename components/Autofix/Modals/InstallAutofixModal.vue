@@ -43,7 +43,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZModal, ZButton } from '@deepsource/zeal'
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'
 
 @Component({

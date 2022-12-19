@@ -77,14 +77,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import {
-  ZInput,
-  ZButton,
-  ZIcon,
-  ZTabPane,
-  ZBreadcrumb,
-  ZBreadcrumbItem
-} from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZIcon, ZTabPane, ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'

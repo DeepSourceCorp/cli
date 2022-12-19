@@ -120,7 +120,7 @@
 
 <script lang="ts">
 import { Component, mixins, namespace } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZAvatar, ZModal, ZPagination } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZIcon, ZAvatar, ZModal, ZPagination } from '@deepsource/zeal'
 
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { OrgGroupsActions, OrgGroupsGetters } from '~/store/control-panel/groups'

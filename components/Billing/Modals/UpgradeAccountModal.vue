@@ -27,7 +27,7 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZModal } from '@deepsourcelabs/zeal'
+import { ZButton, ZModal } from '@deepsource/zeal'
 
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import PlanDetailMixin from '~/mixins/planDetailMixin'

@@ -13,7 +13,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZConfirm, ZButton, ZCheckbox } from '@deepsourcelabs/zeal'
+import { ZIcon, ZConfirm, ZButton, ZCheckbox } from '@deepsource/zeal'
 
 @Component({
   name: 'GenerateSshKeyConfirmModal',

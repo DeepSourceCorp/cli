@@ -110,7 +110,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZMenu, ZMenuItem, ZPagination } from '@deepsourcelabs/zeal'
+import { ZInput, ZButton, ZIcon, ZMenu, ZMenuItem, ZPagination } from '@deepsource/zeal'
 import { RepoCard, AddRepoModal } from '@/components/AddRepo'
 
 // types

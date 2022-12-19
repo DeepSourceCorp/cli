@@ -118,7 +118,7 @@
 
 <script lang="ts">
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZPagination, ZConfirm, ZModal, ZButton } from '@deepsourcelabs/zeal'
+import { ZInput, ZIcon, ZPagination, ZConfirm, ZModal, ZButton } from '@deepsource/zeal'
 import { MemberListItem } from '@/components/Members'
 import { Maybe, RepositoryPermissionChoices, TeamMember } from '~/types/types'
 import { RepoPerms } from '~/types/permTypes'

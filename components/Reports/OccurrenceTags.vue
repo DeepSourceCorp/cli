@@ -50,7 +50,7 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { shortenLargeNumber } from '~/utils/string'
 
-import { ZTag } from '@deepsourcelabs/zeal'
+import { ZTag } from '@deepsource/zeal'
 
 /**
  * Component to show issue level wise tags and total value.

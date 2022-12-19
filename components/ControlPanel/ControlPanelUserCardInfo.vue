@@ -62,7 +62,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZAvatar, ZTag } from '@deepsourcelabs/zeal'
+import { ZIcon, ZAvatar, ZTag } from '@deepsource/zeal'
 import { EnterpriseUser } from '~/types/types'
 import { getDefaultAvatar } from '~/utils/ui'
 

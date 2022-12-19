@@ -42,7 +42,7 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import { ModelSync, Prop } from 'vue-property-decorator'
-import { ZIcon, ZButton, ZMenu, ZMenuItem, ZBadge } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZMenu, ZMenuItem, ZBadge } from '@deepsource/zeal'
 
 export interface SortChoice {
   name: string

@@ -70,10 +70,10 @@ export default {
   telemetry: false,
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
-    '@deepsourcelabs/zeal/dist/typography.css',
-    '@deepsourcelabs/zeal/dist/chart.css',
+    '@deepsource/zeal/dist/typography.css',
+    '@deepsource/zeal/dist/chart.css',
     '@assets/css/default.scss',
-    '@deepsourcelabs/zeal/src/assets/css/syntax_highlighter.css', // remove this after ZCode export fix
+    '@deepsource/zeal/src/assets/css/syntax_highlighter.css', // remove this after ZCode export fix
     '@assets/css/floating_vue.scss'
   ],
 

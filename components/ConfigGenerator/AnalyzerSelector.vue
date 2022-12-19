@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZTag, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput, ZTag, ZButton } from '@deepsource/zeal'
 import Analyzer from './Analyzer.vue'
 import AnalyzerSearch from './AnalyzerSearch.vue'
 

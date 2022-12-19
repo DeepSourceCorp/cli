@@ -37,7 +37,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZCheckbox } from '@deepsourcelabs/zeal'
+import { ZIcon, ZModal, ZButton, ZCheckbox } from '@deepsource/zeal'
 import IssueDetailMixin from '~/mixins/issueDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 

@@ -29,7 +29,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { shortenLargeNumber } from '@/utils/string'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 
 /**
  * Ticker component for showing trends.

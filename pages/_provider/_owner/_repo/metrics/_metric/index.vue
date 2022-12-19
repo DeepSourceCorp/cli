@@ -123,7 +123,7 @@ import {
 } from '~/types/types'
 
 //Zeal
-import { ZButton, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon } from '@deepsource/zeal'
 
 const repoStore = namespace('repository/detail')
 

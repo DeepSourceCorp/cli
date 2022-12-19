@@ -22,7 +22,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton } from '@deepsource/zeal'
 import InstallAutofixMixin from '~/mixins/installAutofixMixin'
 
 @Component({

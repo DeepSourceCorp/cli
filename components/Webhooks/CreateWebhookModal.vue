@@ -108,7 +108,7 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZModal, ZInput, ZCheckbox, ZToggle, ZButton } from '@deepsourcelabs/zeal'
+import { ZModal, ZInput, ZCheckbox, ZToggle, ZButton } from '@deepsource/zeal'
 import WebhookMixin from '~/mixins/webhookMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'

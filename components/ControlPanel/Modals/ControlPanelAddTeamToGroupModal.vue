@@ -123,7 +123,7 @@ import {
   ZMenu,
   ZMenuSection,
   ZMenuItem
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import AddTeamToGroupMixin from '~/mixins/addTeamToGroupMixin'
 import { formatDate, parseISODate } from '~/utils/date'
 import { resolveNodes } from '~/utils/array'

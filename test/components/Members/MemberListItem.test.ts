@@ -4,7 +4,7 @@ import { render, fireEvent } from '@testing-library/vue'
 import { MemberListItem } from '~/components/Members'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 
-import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
+import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 
 const baseProps = {
   avatar: '/static/dashboard/images/empty-avatar.svg',

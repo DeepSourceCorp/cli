@@ -119,7 +119,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Inject, Watch } from 'nuxt-property-decorator'
-import { ZChart, ZIcon, ZMenu, ZMenuItem, ZInput, ZModal, ZButton } from '@deepsourcelabs/zeal'
+import { ZChart, ZIcon, ZMenu, ZMenuItem, ZInput, ZModal, ZButton } from '@deepsource/zeal'
 import { Metrics, MetricsNamespace } from '~/store/repository/detail'
 import { formatIntl } from '@/utils/string'
 

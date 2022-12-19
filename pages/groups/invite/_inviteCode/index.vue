@@ -85,7 +85,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZAvatar, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZAvatar, ZIcon } from '@deepsource/zeal'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 
 import GetGroupInviteInfoQuery from '@/apollo/queries/control-panel/user-management/getGroupInviteInfo.gql'

@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 @Component({

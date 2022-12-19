@@ -99,7 +99,7 @@
 
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 
 /**
  * 404 Error Page

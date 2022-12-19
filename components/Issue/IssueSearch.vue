@@ -36,7 +36,7 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import { ModelSync, Prop } from 'vue-property-decorator'
-import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput } from '@deepsource/zeal'
 
 @Component({
   components: {

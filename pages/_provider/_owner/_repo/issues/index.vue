@@ -157,7 +157,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZTag, ZPagination } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZTag, ZPagination } from '@deepsource/zeal'
 import {
   IssueAnalyzerSelector,
   IssueCategorySelector,

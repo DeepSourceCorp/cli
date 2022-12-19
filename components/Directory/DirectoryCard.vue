@@ -58,7 +58,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZTag, ZIcon } from '@deepsourcelabs/zeal'
+import { ZTag, ZIcon } from '@deepsource/zeal'
 import { getDateDiffInDays } from '~/utils/date'
 import { Analyzer, TransformerTool } from '~/types/types'
 

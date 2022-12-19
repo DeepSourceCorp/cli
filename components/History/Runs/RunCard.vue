@@ -73,7 +73,7 @@
 </template>
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { BaseCard } from '../'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { fromNow } from '@/utils/date'

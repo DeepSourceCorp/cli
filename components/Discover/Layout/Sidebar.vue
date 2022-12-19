@@ -188,7 +188,7 @@
 
 <script lang="ts">
 import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZButton, ZConfirm, ZIcon, ZTag } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AuthMixin from '~/mixins/authMixin'

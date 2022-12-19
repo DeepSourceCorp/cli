@@ -118,7 +118,7 @@
 </template>
 
 <script lang="ts">
-import { ZAvatar, ZAvatarGroup, ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZAvatar, ZAvatarGroup, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, mixins } from 'nuxt-property-decorator'
 
 // import TeamMembersBaseDetailsGQLQuery from '~/apollo/queries/team/membersBaseDetails.gql'

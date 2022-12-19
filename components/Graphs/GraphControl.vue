@@ -45,7 +45,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'nuxt-property-decorator'
-import { ZIcon, ZDivider, ZChart, ZSelect, ZOption } from '@deepsourcelabs/zeal'
+import { ZIcon, ZDivider, ZChart, ZSelect, ZOption } from '@deepsource/zeal'
 
 import { createDuration, DurationTypeT } from '~/utils/date'
 

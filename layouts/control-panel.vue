@@ -92,7 +92,7 @@ import { MobileNav } from '@/components/Layout'
 import AuthMixin from '@/mixins/authMixin'
 import PortalMixin from '@/mixins/portalMixin'
 
-import { ZButton, ZBreadcrumb, ZBreadcrumbItem, ZTab } from '@deepsourcelabs/zeal'
+import { ZButton, ZBreadcrumb, ZBreadcrumbItem, ZTab } from '@deepsource/zeal'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { stripTrailingSlash } from '~/utils/string'
 import { ControlPanelRouteT } from '~/types/control-panel'

@@ -46,7 +46,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
-import { ZTag, ZSelect, ZOption, ZButton, ZChart, ZIcon } from '@deepsourcelabs/zeal'
+import { ZTag, ZSelect, ZOption, ZButton, ZChart, ZIcon } from '@deepsource/zeal'
 
 import { DurationTypeT, formatDate, parseISODate } from '~/utils/date'
 import { StatType, MetricType } from '~/types/metric'

@@ -27,7 +27,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { Notice } from '@/components/Settings/index'
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { AppFeatures, RepoPerms } from '~/types/permTypes'
 

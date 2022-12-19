@@ -11,21 +11,7 @@
           <span
             v-tooltip="'Back to search'"
             @click="selectedMember = null"
-            class="
-              absolute
-              items-center
-              justify-center
-              hidden
-              w-5
-              h-5
-              rounded-full
-              cursor-pointer
-              group-hover:flex
-              -top-2
-              -right-2
-              bg-ink-100
-              hover:bg-slate
-            "
+            class="absolute items-center justify-center hidden w-5 h-5 rounded-full cursor-pointer group-hover:flex -top-2 -right-2 bg-ink-100 hover:bg-slate"
           >
             <z-icon icon="corner-up-left" size="x-small" />
           </span>
@@ -100,7 +86,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZInput, ZIcon, ZModal, ZButton, ZRadioGroup, ZRadio } from '@deepsourcelabs/zeal'
+import { ZInput, ZIcon, ZModal, ZButton, ZRadioGroup, ZRadio } from '@deepsource/zeal'
 import { MemberListItem } from '@/components/Members'
 import RepoDetailMixin, { REPO_PERMS } from '~/mixins/repoDetailMixin'
 import { Maybe, RepositoryPermissionChoices, TeamMember } from '~/types/types'

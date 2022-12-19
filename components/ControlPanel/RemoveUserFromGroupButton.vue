@@ -47,7 +47,7 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop } from 'nuxt-property-decorator'
-import { ZButton, ZConfirm, ZIcon } from '@deepsourcelabs/zeal'
+import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
 import { OrgUsersActions } from '~/store/control-panel/users'
 import { EnterpriseGroup, EnterpriseUser } from '~/types/types'
 import MutationFailedError from '~/utils/mutationFailedError'

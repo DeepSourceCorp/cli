@@ -68,7 +68,7 @@ import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
 // Components
 import { SubNav, TransformBranches } from '@/components/History'
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 // Store & Types
 import { TransformListActions } from '@/store/transformerRun/list'
 import { TransformerRun, TransformerRunConnection } from '~/types/types'

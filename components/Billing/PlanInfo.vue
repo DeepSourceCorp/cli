@@ -124,7 +124,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZModal, ZNumberInput } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZModal, ZNumberInput } from '@deepsource/zeal'
 import ContextMixin from '@/mixins/contextMixin'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'

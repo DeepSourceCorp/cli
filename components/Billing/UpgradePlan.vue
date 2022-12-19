@@ -58,7 +58,7 @@
 </template>
 <script lang="ts">
 import { mixins, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZConfirm, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZConfirm, ZButton } from '@deepsource/zeal'
 
 import { BillingInfo } from '~/types/types'
 

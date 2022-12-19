@@ -108,7 +108,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
-import { ZDivider, ZTab, ZIcon } from '@deepsourcelabs/zeal'
+import { ZDivider, ZTab, ZIcon } from '@deepsource/zeal'
 import { ReportMeta, ReportPageT, ReportsTabLink } from '~/types/reportTypes'
 import { ReportLevel } from '~/types/types'
 

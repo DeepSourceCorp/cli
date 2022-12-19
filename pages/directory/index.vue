@@ -86,7 +86,7 @@
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 
-import { ZIcon, ZInput } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput } from '@deepsource/zeal'
 
 import MetaMixin from '~/mixins/metaMixin'
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'

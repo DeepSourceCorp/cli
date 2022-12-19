@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZConfirm, ZButton } from '@deepsourcelabs/zeal'
+import { ZConfirm, ZButton } from '@deepsource/zeal'
 
 /**
  * Confirm report delete modal

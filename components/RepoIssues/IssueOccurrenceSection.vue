@@ -71,7 +71,7 @@
 
 <script lang="ts">
 import { Vue, Component, namespace } from 'nuxt-property-decorator'
-import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem } from '@deepsourcelabs/zeal'
+import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem } from '@deepsource/zeal'
 import IssueEditor from './IssueEditor.vue'
 
 // types

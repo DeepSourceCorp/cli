@@ -66,7 +66,7 @@
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
 import { BaseCard } from '@/components/History'
-import { ZIcon, ZButton, ZAvatar } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZAvatar } from '@deepsource/zeal'
 import { fromNow } from '@/utils/date'
 import { safeRenderBackticks } from '~/utils/string'
 import { AutofixRun, AutofixRunStatus, Maybe, Scalars } from '~/types/types'

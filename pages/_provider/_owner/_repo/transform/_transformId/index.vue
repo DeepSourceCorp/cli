@@ -99,7 +99,7 @@
 
 <script lang="ts">
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton, ZTag, ZDivider, ZCode } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZTag, ZDivider, ZCode } from '@deepsource/zeal'
 import { TransformHeader } from '@/components/Transform'
 
 // Import State & Types

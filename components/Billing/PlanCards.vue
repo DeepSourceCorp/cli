@@ -34,7 +34,7 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZRadioButton, ZRadioGroup } from '@deepsourcelabs/zeal'
+import { ZRadioButton, ZRadioGroup } from '@deepsource/zeal'
 
 import PlanDetailMixin from '~/mixins/planDetailMixin'
 

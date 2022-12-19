@@ -29,7 +29,7 @@
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
 
-import { ZIcon, ZRadioGroup, ZRadioButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZRadioGroup, ZRadioButton } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { Analyzer, AnalyzerEdge } from '~/types/types'
 

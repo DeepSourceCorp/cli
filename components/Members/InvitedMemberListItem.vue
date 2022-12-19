@@ -48,7 +48,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
-import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZButton } from '@deepsource/zeal'
 import { formatDate, parseISODate } from '@/utils/date'
 
 @Component({

@@ -60,7 +60,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZInput, ZIcon, ZModal, ZTextarea } from '@deepsourcelabs/zeal'
+import { ZButton, ZInput, ZIcon, ZModal, ZTextarea } from '@deepsource/zeal'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 

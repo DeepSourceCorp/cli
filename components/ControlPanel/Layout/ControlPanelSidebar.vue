@@ -65,7 +65,7 @@
 
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTag } from '@deepsource/zeal'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 
 import { ControlPanelRouteT } from '~/types/control-panel'

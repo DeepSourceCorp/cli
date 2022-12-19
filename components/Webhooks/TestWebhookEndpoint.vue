@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZConfirm, ZButton } from '@deepsourcelabs/zeal'
+import { ZConfirm, ZButton } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import WebhookMixin from '~/mixins/webhookMixin'

@@ -115,7 +115,7 @@ import {
   ZBreadcrumbItem,
   ZTab,
   ZPagination
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 
 import { OrgUsersGetters, OrgUsersActions } from '~/store/control-panel/users'
 import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'

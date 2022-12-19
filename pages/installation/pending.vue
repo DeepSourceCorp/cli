@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton } from '@deepsource/zeal'
 import { Context } from '@nuxt/types'
 import { ContextGetterTypes } from '~/store/account/context'
 import ContextMixin from '~/mixins/contextMixin'

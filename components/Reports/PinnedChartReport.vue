@@ -149,7 +149,7 @@
 </template>
 
 <script lang="ts">
-import { ZButton, ZChart, ZIcon, ZTag } from '@deepsourcelabs/zeal'
+import { ZButton, ZChart, ZIcon, ZTag } from '@deepsource/zeal'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 
 import {

@@ -38,7 +38,7 @@
 </template>
 
 <script lang="ts">
-import { ZTag, ZIcon } from '@deepsourcelabs/zeal'
+import { ZTag, ZIcon } from '@deepsource/zeal'
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
 import IntegrationsListMixin from '~/mixins/integrationsListMixin'

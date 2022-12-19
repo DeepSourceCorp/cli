@@ -37,7 +37,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZTimeline, ZTimelineItem, ZAvatar } from '@deepsourcelabs/zeal'
+import { ZIcon, ZTimeline, ZTimelineItem, ZAvatar } from '@deepsource/zeal'
 import { RepoPerms } from '~/types/permTypes'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'

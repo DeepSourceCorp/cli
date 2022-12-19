@@ -56,7 +56,7 @@
 <script lang="ts">
 import { mixins, Component } from 'nuxt-property-decorator'
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
-import { ZIcon, ZConfirm, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZConfirm, ZButton } from '@deepsource/zeal'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 
 @Component({

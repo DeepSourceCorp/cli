@@ -10,7 +10,7 @@ import RunWaiting from '~/components/Run/RunWaiting.vue'
 import RunFailed from '~/components/Run/RunFailed.vue'
 import { RepoTimeout, RepoEmpty, RepoError, RepoWaiting } from '~/components/RepoStates'
 import { createLocalVue, mount } from '@vue/test-utils'
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 import { storeModulesGenerator } from '~/test/mocks'
 import { VcsProviderChoices } from '~/types/types'
 

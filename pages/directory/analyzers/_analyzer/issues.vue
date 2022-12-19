@@ -47,7 +47,7 @@
 <script lang="ts">
 import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
 
-import { ZButton, ZInput, ZIcon, ZPagination } from '@deepsourcelabs/zeal'
+import { ZButton, ZInput, ZIcon, ZPagination } from '@deepsource/zeal'
 
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { Analyzer, Issue } from '~/types/types'

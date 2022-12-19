@@ -35,7 +35,7 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
-import { ZIcon, ZBadge } from '@deepsourcelabs/zeal'
+import { ZIcon, ZBadge } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 @Component({

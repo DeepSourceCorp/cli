@@ -42,7 +42,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import { WSRepoAnalysisUpdatedPayload } from '~/types/websockets'
 import { RunStatus } from '~/types/types'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'

@@ -20,7 +20,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import InputWrapper from './InputWrapper.vue'
-import { ZToggle } from '@deepsourcelabs/zeal'
+import { ZToggle } from '@deepsource/zeal'
 import { ModelSync } from 'vue-property-decorator'
 
 @Component({

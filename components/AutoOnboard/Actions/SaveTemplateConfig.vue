@@ -52,7 +52,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins, Watch, Inject } from 'nuxt-property-decorator'
-import { ZInput, ZTextarea, ZButton, ZModal } from '@deepsourcelabs/zeal'
+import { ZInput, ZTextarea, ZButton, ZModal } from '@deepsource/zeal'
 
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'

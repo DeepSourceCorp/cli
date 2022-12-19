@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZButton } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton } from '@deepsource/zeal'
 import { SilenceRule } from '~/types/types'
 import { fromNow } from '~/utils/date'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'

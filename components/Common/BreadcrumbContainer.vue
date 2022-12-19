@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
-import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
+import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
 
 export interface ILinks {
   label: string

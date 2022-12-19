@@ -89,7 +89,7 @@
 
 <script lang="ts">
 import { Component, Prop, Watch, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZCheckbox, ZList, ZListItem, ZInput } from '@deepsourcelabs/zeal'
+import { ZIcon, ZModal, ZButton, ZCheckbox, ZList, ZListItem, ZInput } from '@deepsource/zeal'
 
 // types
 import { AutofixRunStatus, Maybe } from '~/types/types'

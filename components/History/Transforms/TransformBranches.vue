@@ -33,7 +33,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component, Prop, namespace } from 'nuxt-property-decorator'
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import TransformCard from './TransformCard.vue'
 import BranchList from '../BranchList.vue'
 

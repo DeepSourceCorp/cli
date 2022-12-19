@@ -187,14 +187,7 @@
 <script lang="ts">
 import { Component, Vue, Prop, mixins } from 'nuxt-property-decorator'
 
-import {
-  ZButton,
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZMenu,
-  ZMenuItem,
-  ZIcon
-} from '@deepsourcelabs/zeal'
+import { ZButton, ZBreadcrumb, ZBreadcrumbItem, ZMenu, ZMenuItem, ZIcon } from '@deepsource/zeal'
 
 import { Analyzer, TransformerTool } from '~/types/types'
 import AuthMixin from '~/mixins/authMixin'

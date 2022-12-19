@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'nuxt-property-decorator'
 
-import { ZTab } from '@deepsourcelabs/zeal'
+import { ZTab } from '@deepsource/zeal'
 
 interface TabListT {
   label: string

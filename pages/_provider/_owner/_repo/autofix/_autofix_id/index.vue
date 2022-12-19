@@ -308,14 +308,7 @@
 
 <script lang="ts">
 import { Component, namespace, Watch, mixins } from 'nuxt-property-decorator'
-import {
-  ZIcon,
-  ZButton,
-  ZCheckbox,
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZDivider
-} from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZCheckbox, ZBreadcrumb, ZBreadcrumbItem, ZDivider } from '@deepsource/zeal'
 import { AutofixCard, AutofixListItem, AutofixCodeDiff, Info } from '@/components/Autofix/index'
 
 import { RunDetailActions } from '~/store/run/detail'

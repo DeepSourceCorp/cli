@@ -37,7 +37,7 @@
 import { Component, namespace, mixins } from 'nuxt-property-decorator'
 import { IgnoredRule } from '@/components/Repository/index'
 import { IgnoredRuleDeleteModal } from '@/components/Settings/index'
-import { ZDivider, ZInput, ZMenu, ZMenuItem, ZIcon } from '@deepsourcelabs/zeal'
+import { ZDivider, ZInput, ZMenu, ZMenuItem, ZIcon } from '@deepsource/zeal'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 
 const repoStore = namespace('repository/detail')

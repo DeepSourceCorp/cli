@@ -116,7 +116,7 @@ import {
   ZButton,
   ZInput,
   ZBadge
-} from '@deepsourcelabs/zeal'
+} from '@deepsource/zeal'
 import { runStatusTagLabel, runStatusIcon, runStatusIconColor, prCopyText } from '~/utils/ui'
 import { PrStateChoices, RunStatus } from '~/types/types'
 import { shortenLargeNumber } from '~/utils/string'

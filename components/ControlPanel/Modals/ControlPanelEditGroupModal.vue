@@ -56,7 +56,7 @@
 
 <script lang="ts">
 import { Component, Vue, namespace, Prop, Watch } from 'nuxt-property-decorator'
-import { ZButton, ZModal, ZIcon, ZInput } from '@deepsourcelabs/zeal'
+import { ZButton, ZModal, ZIcon, ZInput } from '@deepsource/zeal'
 import { OrgGroupsActions } from '~/store/control-panel/groups'
 import { EnterpriseGroup } from '~/types/types'
 

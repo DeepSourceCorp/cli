@@ -89,7 +89,7 @@
 </template>
 
 <script lang="ts">
-import { ZIcon } from '@deepsourcelabs/zeal'
+import { ZIcon } from '@deepsource/zeal'
 import dayjs from 'dayjs'
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 

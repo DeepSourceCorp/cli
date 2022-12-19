@@ -25,7 +25,7 @@
 </template>
 
 <script lang="ts">
-import { ZOption, ZSelect } from '@deepsourcelabs/zeal'
+import { ZOption, ZSelect } from '@deepsource/zeal'
 import { Component, mixins, ModelSync, Prop } from 'nuxt-property-decorator'
 
 import IntegrationsDetailMixin from '~/mixins/integrationsDetailMixin'

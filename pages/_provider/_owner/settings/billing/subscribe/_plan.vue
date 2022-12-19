@@ -171,8 +171,8 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsourcelabs/zeal'
-import { ZButton, ZIcon, ZDivider, ZInput } from '@deepsourcelabs/zeal'
+import { ZBreadcrumb, ZBreadcrumbItem } from '@deepsource/zeal'
+import { ZButton, ZIcon, ZDivider, ZInput } from '@deepsource/zeal'
 import SubscriptionMixin, { Plan } from '~/mixins/subscriptionMixin'
 import { formatUSD } from '~/utils/string'
 import { parseISODate, formatDate } from '~/utils/date'

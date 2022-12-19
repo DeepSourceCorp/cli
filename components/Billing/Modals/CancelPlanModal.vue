@@ -71,7 +71,7 @@
 </template>
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZModal, ZButton, ZInput } from '@deepsourcelabs/zeal'
+import { ZIcon, ZModal, ZButton, ZInput } from '@deepsource/zeal'
 
 import SubscriptionMixin from '~/mixins/subscriptionMixin'
 import { parseISODate, formatDate } from '~/utils/date'

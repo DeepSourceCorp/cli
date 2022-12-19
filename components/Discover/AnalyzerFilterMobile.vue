@@ -27,16 +27,7 @@
             <nuxt-link
               v-if="!['test-coverage', 'secrets'].includes(analyzer.shortcode)"
               :key="analyzer.id"
-              class="
-                inline-flex
-                items-center
-                justify-center
-                p-2
-                space-x-1
-                text-sm
-                rounded-md
-                cursor-pointer
-              "
+              class="inline-flex items-center justify-center p-2 space-x-1 text-sm rounded-md cursor-pointer"
               :class="[
                 $route.params.lang === analyzer.shortcode
                   ? 'bg-gradient-dawn'
@@ -65,7 +56,7 @@
 </template>
 <script lang="ts">
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZModal } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZModal } from '@deepsource/zeal'
 
 import { DirectoryActions, DirectoryGetters } from '~/store/directory/directory'
 import { Analyzer, Maybe } from '~/types/types'

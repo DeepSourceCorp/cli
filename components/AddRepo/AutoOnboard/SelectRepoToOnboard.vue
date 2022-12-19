@@ -130,14 +130,7 @@
 </template>
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import {
-  ZInput,
-  ZIcon,
-  ZCheckbox,
-  ZBreadcrumb,
-  ZBreadcrumbItem,
-  ZButton
-} from '@deepsourcelabs/zeal'
+import { ZInput, ZIcon, ZCheckbox, ZBreadcrumb, ZBreadcrumbItem, ZButton } from '@deepsource/zeal'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import AutoOnboardMixin from '~/mixins/autoOnboardMixin'

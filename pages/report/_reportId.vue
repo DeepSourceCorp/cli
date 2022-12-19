@@ -128,7 +128,7 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
-import { ZIcon, ZDivider, ZTag, ZButton, ZInput } from '@deepsourcelabs/zeal'
+import { ZIcon, ZDivider, ZTag, ZButton, ZInput } from '@deepsource/zeal'
 import { Context } from '@nuxt/types'
 import gql from 'graphql-tag'
 

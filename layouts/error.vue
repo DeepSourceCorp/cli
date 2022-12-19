@@ -102,7 +102,7 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { NuxtError } from '@nuxt/types'
-import { ZButton } from '@deepsourcelabs/zeal'
+import { ZButton } from '@deepsource/zeal'
 import { formatDate } from '~/utils/date'
 
 @Component({

@@ -93,7 +93,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZButton, ZIcon, ZMenu } from '@deepsourcelabs/zeal'
+import { ZButton, ZIcon, ZMenu } from '@deepsource/zeal'
 import publicReportRepoList from '@/apollo/queries/reports/publicReportRepoList.gql'
 import { Repository } from '~/types/types'
 import PaginationMixin from '~/mixins/paginationMixin'

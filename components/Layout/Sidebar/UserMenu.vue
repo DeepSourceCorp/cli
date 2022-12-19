@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { Component, Prop, mixins } from 'nuxt-property-decorator'
-import { ZAvatar, ZMenu, ZMenuItem, ZMenuSection } from '@deepsourcelabs/zeal'
+import { ZAvatar, ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
 
 // mixins
 import ActiveUserMixin from '~/mixins/activeUserMixin'

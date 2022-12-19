@@ -40,7 +40,7 @@
 <script lang="ts">
 import { Vue, Component } from 'nuxt-property-decorator'
 import { ModelSync } from 'vue-property-decorator'
-import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsourcelabs/zeal'
+import { ZIcon, ZButton, ZInput, ZMenu, ZMenuItem, ZBadge } from '@deepsource/zeal'
 import { IssueCategoryChoice, IssueTypeOptions } from '~/mixins/issueCategoryMixin'
 
 /**
