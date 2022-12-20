@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-row-reverse w-full gap-2 xl:w-4/6 xl:flex-row">
-    <!-- Sort menu -->
-    <z-menu direction="left" width="x-small" class="text-vanilla-100">
-      <template v-slot:trigger="{ toggle }">
+    <!-- Sort menu mobile -->
+    <z-menu direction="left" width="x-small" class="xl:hidden text-vanilla-100">
+      <template #trigger="{ toggle }">
         <z-button
           v-if="!sortApplied"
           icon="amount-down"
@@ -22,18 +22,57 @@
           button-type="secondary"
           @click="clearSort"
         >
-          <div class="flex items-center space-x-2">
+          <div class="flex items-center gap-x-2">
             <span class="hidden xl:inline-block">Sorted by - {{ selectedFilter }}</span>
-            <z-icon icon="x" size="small"></z-icon>
+            <z-icon icon="x" />
           </div>
         </z-button>
       </template>
-      <template slot="body" class="text-vanilla-200">
+      <template #body class="text-vanilla-200">
         <z-menu-item
           v-for="filter in sortFilters"
-          v-bind:key="filter.name"
+          :key="filter.name"
           :icon="filter.icon"
-          @click="() => sortIssues(filter.name)"
+          @click="sortIssues(filter.name)"
+        >
+          {{ filter.label }}
+        </z-menu-item>
+      </template>
+    </z-menu>
+    <!-- Sort menu desktop -->
+    <z-menu direction="right" width="x-small" class="hidden xl:inline-block text-vanilla-100">
+      <template #trigger="{ toggle }">
+        <z-button
+          v-if="!sortApplied"
+          icon="amount-down"
+          type="button"
+          size="small"
+          class="text-sm"
+          button-type="secondary"
+          @click="toggle"
+        >
+          Sort
+        </z-button>
+        <z-button
+          v-else
+          type="button"
+          size="small"
+          class="text-sm"
+          button-type="secondary"
+          @click="clearSort"
+        >
+          <div class="flex items-center gap-x-2">
+            <span class="inline-block">Sorted by - {{ selectedFilter }}</span>
+            <z-icon icon="x" />
+          </div>
+        </z-button>
+      </template>
+      <template #body class="text-vanilla-200">
+        <z-menu-item
+          v-for="filter in sortFilters"
+          :key="filter.name"
+          :icon="filter.icon"
+          @click="sortIssues(filter.name)"
         >
           {{ filter.label }}
         </z-menu-item>
