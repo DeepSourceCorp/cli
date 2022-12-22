@@ -32,12 +32,20 @@ export class ProviderMeta {
   shortcode: string
   value: VcsProviderChoices
   auth: string
+  icon: string
 
-  constructor(text: string, shortcode: string, value: VcsProviderChoices, auth: string) {
+  constructor(
+    text: string,
+    shortcode: string,
+    value: VcsProviderChoices,
+    auth: string,
+    icon: string
+  ) {
     this.text = text
     this.shortcode = shortcode
     this.value = value
     this.auth = auth
+    this.icon = icon
   }
 }
 
@@ -45,45 +53,63 @@ export class ProviderMeta {
  * ! In case of updates to `auth` value, update corresponding data in `nuxt.config.js` as well.
  */
 export const providerMetaMap: Record<string, ProviderMeta> = {
-  gh: new ProviderMeta('GitHub', 'gh', VcsProviderChoices.Github, 'github'),
+  gh: new ProviderMeta('GitHub', 'gh', VcsProviderChoices.Github, 'github', 'github'),
   ghe: new ProviderMeta(
     'GitHub Enterprise',
     'ghe',
     VcsProviderChoices.GithubEnterprise,
-    'github-enterprise'
+    'github-enterprise',
+    'github'
   ),
-  gl: new ProviderMeta('GitLab', 'gl', VcsProviderChoices.Gitlab, 'gitlab'),
-  bb: new ProviderMeta('Bitbucket', 'bb', VcsProviderChoices.Bitbucket, 'bitbucket-oauth2'),
-  gsr: new ProviderMeta('Google Cloud', 'gsr', VcsProviderChoices.Gsr, 'google-oauth2'),
+  gl: new ProviderMeta('GitLab', 'gl', VcsProviderChoices.Gitlab, 'gitlab', 'gitlab'),
+  bb: new ProviderMeta(
+    'Bitbucket',
+    'bb',
+    VcsProviderChoices.Bitbucket,
+    'bitbucket-oauth2',
+    'bitbucket'
+  ),
+  gsr: new ProviderMeta(
+    'Google Cloud',
+    'gsr',
+    VcsProviderChoices.Gsr,
+    'google-oauth2',
+    'google-cloud'
+  ),
   [VcsProviderChoices.Github]: new ProviderMeta(
     'GitHub',
     'gh',
     VcsProviderChoices.Github,
+    'github',
     'github'
   ),
   [VcsProviderChoices.GithubEnterprise]: new ProviderMeta(
     'GitHub Enterprise',
     'ghe',
     VcsProviderChoices.GithubEnterprise,
-    'github-enterprise'
+    'github-enterprise',
+    'github'
   ),
   [VcsProviderChoices.Gitlab]: new ProviderMeta(
     'GitLab',
     'gl',
     VcsProviderChoices.Gitlab,
+    'gitlab',
     'gitlab'
   ),
   [VcsProviderChoices.Bitbucket]: new ProviderMeta(
     'Bitbucket',
     'bb',
     VcsProviderChoices.Bitbucket,
-    'bitbucket-oauth2'
+    'bitbucket-oauth2',
+    'bitbucket'
   ),
   [VcsProviderChoices.Gsr]: new ProviderMeta(
     'Google Cloud',
     'gsr',
     VcsProviderChoices.Gsr,
-    'google-oauth2'
+    'google-oauth2',
+    'google-cloud'
   )
 }
 
