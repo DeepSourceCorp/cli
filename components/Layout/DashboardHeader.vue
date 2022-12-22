@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="overflow-x-auto border-b bg-ink-300 border-ink-200">
+    <div class="overflow-x-auto border-b bg-ink-300 border-slate-400">
       <div id="header" class="flex items-center p-3">
         <h2 class="inline-flex items-center space-x-3 font-medium text-vanilla-100">
           <nuxt-link
@@ -45,7 +45,7 @@
                 :icon-left="repoVCSIcon"
                 spacing="p-0.5"
                 bg-color="ink-200"
-                class="border border-ink-100"
+                class="border border-slate-400"
               />
             </a>
             <template v-if="!$config.onPrem && activeDashboardContext.type === 'team'">
@@ -62,7 +62,7 @@
                   bg-color="ink-200"
                   spacing="px-2.5"
                   text-size="xs"
-                  class="py-1 gap-x-1 font-medium leading-none border border-ink-100"
+                  class="py-1 gap-x-1 font-medium leading-none border border-slate-400"
                 >
                   {{ planName }}
                 </z-tag>
@@ -73,7 +73,7 @@
                   bg-color="ink-200"
                   spacing="px-2.5"
                   text-size="xs"
-                  class="h-6 font-semibold leading-none tracking-wider text-center uppercase border border-ink-100 text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
+                  class="h-6 font-semibold leading-none tracking-wider text-center uppercase border border-slate-400 text-vanilla-300 hover:text-vanilla-100 hover:bg-ink-100"
                 >
                   <span>Upgrade</span></z-tag
                 >

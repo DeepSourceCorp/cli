@@ -4,7 +4,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
+    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
@@ -34,7 +34,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
+    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
@@ -64,7 +64,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
+    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
@@ -94,7 +94,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
+    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
@@ -124,7 +124,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
+    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
@@ -159,7 +159,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
+    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
@@ -194,7 +194,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
+    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>
@@ -229,7 +229,7 @@ exports[`renders IssuePriorityCard with all prop options: {"title":"Assert state
 "<div to=\\"\\" class=\\"block group\\">
   <!---->
   <div class=\\"flex flex-wrap flex-1 w-full\\">
-    <div class=\\"space-y-1 text-sm border-ink-300 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
+    <div class=\\"space-y-1 text-sm border-slate-400 text-vanilla-400 w-full md:w-4/5 pb-3 pr-3 pt-2\\">
       <div class=\\"flex items-center space-x-2 text-base font-semibold text-vanilla-200\\">
         <p class=\\"text-sm font-semibold text-vanilla-300\\"><span>Assert statement used outside of tests</span> <span class=\\"ml-1 text-xs font-normal text-vanilla-400 whitespace-nowrap\\">BAN-B101
       </span></p>

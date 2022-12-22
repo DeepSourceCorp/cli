@@ -18,7 +18,7 @@
       </div>
       <div
         v-else-if="selectedAnalyzers.length === 0"
-        class="flex flex-col items-center px-6 py-16 space-y-4 border-2 border-dashed rounded-lg border-ink-200"
+        class="flex flex-col items-center px-6 py-16 space-y-4 border-2 border-dashed rounded-lg border-slate-400"
       >
         <z-icon icon="analyzers" size="large" color="vanilla-300" />
         <p class="max-w-sm mx-auto text-sm leading-relaxed text-center text-vanilla-300">

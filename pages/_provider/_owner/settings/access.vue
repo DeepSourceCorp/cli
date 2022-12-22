@@ -19,7 +19,7 @@
             button-type="secondary"
             icon-size="x-small"
             size="small"
-            class="mt-2 border border-ink-200"
+            class="mt-2 border border-slate-400"
             @click="triggerUpdateSettings"
           />
         </template>

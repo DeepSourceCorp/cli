@@ -42,7 +42,7 @@
         </template>
         <div
           v-else
-          class="flex flex-col items-center justify-center flex-1 w-full p-6 text-sm text-center border border-dashed rounded-md text-vanilla-400 border-ink-200"
+          class="flex flex-col items-center justify-center flex-1 w-full p-6 text-sm text-center border border-dashed rounded-md text-vanilla-400 border-slate-400"
         >
           <div v-if="loading" class="flex flex-col items-center space-y-2">
             <z-icon class="animate-spin" icon="spin-loader"></z-icon>

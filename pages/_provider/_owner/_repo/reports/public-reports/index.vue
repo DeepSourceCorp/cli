@@ -61,7 +61,7 @@
       v-else-if="q.length"
       :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
       :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
-      class="border border-dashed rounded-lg border-ink-200 py-20"
+      class="border border-dashed rounded-lg border-slate-400 py-20"
     >
       <template #title>
         <span class="break-words">No results found for '{{ q }}'</span>
@@ -72,7 +72,7 @@
       v-else
       title="No public reports found"
       subtitle="No public report has been created for this repository yet."
-      class="border border-dashed rounded-lg border-ink-200 py-20"
+      class="border border-dashed rounded-lg border-slate-400 py-20"
     >
       <template v-if="hasEditAccess" slot="action">
         <div class="flex justify-around">

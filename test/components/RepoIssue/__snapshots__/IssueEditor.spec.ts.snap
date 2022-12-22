@@ -2,8 +2,8 @@
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 1`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
-  <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
+  <div class=\\"z-accordion-item w-full border rounded-md border-slate-400 text-vanilla-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -36,8 +36,8 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 1`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 2`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
-  <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
+  <div class=\\"z-accordion-item w-full border rounded-md border-slate-400 text-vanilla-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -70,8 +70,8 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 2`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 3`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
-  <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
+  <div class=\\"z-accordion-item w-full border rounded-md border-slate-400 text-vanilla-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -104,8 +104,8 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 3`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 4`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
-  <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
+  <div class=\\"z-accordion-item w-full border rounded-md border-slate-400 text-vanilla-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -138,8 +138,8 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 4`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 5`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
-  <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
+  <div class=\\"z-accordion-item w-full border rounded-md border-slate-400 text-vanilla-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -174,8 +174,8 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 5`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 6`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\" openaccordion=\\"true\\">
-  <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
+  <div class=\\"z-accordion-item w-full border rounded-md border-slate-400 text-vanilla-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -210,8 +210,8 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 6`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 7`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
-  <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
+  <div class=\\"z-accordion-item w-full border rounded-md border-slate-400 text-vanilla-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>
@@ -246,8 +246,8 @@ exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 7`] = `
 
 exports[`[[ IssueEditor ]] [[ Renders IssueEditor ]] 8`] = `
 "<div createdat=\\"2020-07-09T08:52:13.924241+00:00\\" modifiedat=\\"2020-07-09T08:52:13.924250+00:00\\">
-  <div class=\\"z-accordion-item w-full border rounded-md border-ink-200 text-vanilla-200\\">
-    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200 border-opacity-100 rounded-b-none\\">
+  <div class=\\"z-accordion-item w-full border rounded-md border-slate-400 text-vanilla-200\\">
+    <div class=\\"p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400 border-opacity-100 rounded-b-none\\">
       <div class=\\"flex justify-between gap-x-2\\">
         <div class=\\"w-full space-y-1 cursor-pointer has-tooltip\\" data-original-title=\\"null\\">
           <div class=\\"flex flex-grow\\"><span class=\\"flex-grow text-base font-medium text-vanilla-100\\">Pin versions in apt get install. Instead of <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;</code> use <code class=\\"bifrost-inline-code\\">apt-get install &lt;package&gt;=&lt;version&gt;</code></span></div>

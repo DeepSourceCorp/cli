@@ -4,7 +4,7 @@
       :is-open="isAccordionOpen"
       :span-custom-height="true"
       custom-max-height="max-h-item"
-      class="bg-ink-300 rounded-md border border-ink-200"
+      class="bg-ink-300 rounded-md border border-slate-400"
     >
       <template #title>
         <div class="flex items-center justify-between px-4 py-2 text-sm bg-ink-300 rounded-md">

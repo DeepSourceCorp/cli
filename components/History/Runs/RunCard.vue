@@ -42,7 +42,7 @@
         <!-- stats-->
         <div
           v-if="issueStats.length && !isPending"
-          class="border-l border-ink-200"
+          class="border-l border-slate-400"
           :class="{ 'hidden md:block': isSecondary }"
         >
           <div

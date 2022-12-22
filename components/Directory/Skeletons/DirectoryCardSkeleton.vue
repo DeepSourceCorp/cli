@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col border border-ink-200 rounded-md min-h-60 p-4">
+  <div class="flex flex-col border border-slate-400 rounded-md min-h-60 p-4">
     <div class="flex justify-between space-x-2">
       <div
         class="h-15 w-15 flex place-items-center p-2 bg-ink-300 rounded-md flex-shrink-0 animate-pulse"

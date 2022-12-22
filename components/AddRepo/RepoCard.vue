@@ -99,7 +99,7 @@
           <span
             v-for="analyzer in supportedAnalyzersLogos"
             :key="analyzer.shortcode"
-            class="p-px border-2 rounded-full bg-ink-200 border-ink-400 group-hover:border-ink-300"
+            class="p-px border-2 rounded-full bg-ink-200 border-slate-400 group-hover:border-slate-400"
           >
             <analyzer-logo v-bind="analyzer" :hideTooltip="true" size="small" />
           </span>
@@ -270,7 +270,7 @@ export default class RepoCard extends mixins(AnalyzerListMixin) {
 </script>
 <style>
 .ribbon:after {
-  @apply border-ink-200 content top-10 h-0 left-0 absolute w-0;
+  @apply border-slate-400 content top-10 h-0 left-0 absolute w-0;
   border-left-width: 16px;
   border-right-width: 16px;
   border-bottom: 10px solid transparent;

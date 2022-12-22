@@ -4,7 +4,7 @@
       :is-open="true"
       span-custom-height
       custom-max-height="max-h-full"
-      class="w-full border rounded-md border-ink-200"
+      class="w-full border rounded-md border-slate-400"
       :class="{
         'opacity-60 pointer-events-none filter-grayscale transition transform-gpu duration-300 ease-in-out':
           isIgnored || (checkIssueIds.length && checkIssueIds.includes(id))
@@ -13,7 +13,7 @@
       <!-- heading -->
       <template #title="{ open, toggleAccordion }">
         <div
-          class="p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-ink-200"
+          class="p-3 space-y-1 transition-all duration-100 border-b rounded-md bg-ink-300 border-slate-400"
           :class="open ? 'border-opacity-100 rounded-b-none' : 'border-opacity-0 delay-200'"
         >
           <div class="flex justify-between gap-x-2">

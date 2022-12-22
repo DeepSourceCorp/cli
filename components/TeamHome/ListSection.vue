@@ -9,7 +9,7 @@
       </div>
     </div>
     <template slot="footer">
-      <div v-if="footerLink" class="border-t border-ink-300 flex justify-center">
+      <div v-if="footerLink" class="border-t border-slate-400 flex justify-center">
         <z-button
           :to="footerLink"
           buttonType="ghost"
@@ -27,7 +27,7 @@
           </div>
         </z-button>
       </div>
-      <div v-if="allowLoadMore" class="border-t border-ink-300 p-2 flex justify-center">
+      <div v-if="allowLoadMore" class="border-t border-slate-400 p-2 flex justify-center">
         <div class="group flex items-center space-x-2 cursor-pointer text-vanilla-400 text-sm">
           Load more
           <z-icon icon="chevron-down" size="small"></z-icon>

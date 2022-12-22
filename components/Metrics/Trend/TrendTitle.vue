@@ -18,7 +18,7 @@
             :icon-color="namespacesTrend.isPassing ? 'juniper' : 'cherry'"
             size="x-small"
             spacing="px-2 py-0"
-            class="border border-ink-200"
+            class="border border-slate-400"
           >
             <span
               class="font-semibold text-xxs uppercase tracking-wider leading-none py-1.5"
@@ -43,7 +43,7 @@
           icon="help-circle"
           size="small"
           color="vanilla-100"
-          class="border border-ink-100 border-dashed"
+          class="border border-slate-400 border-dashed"
           >How’s this calculated?</z-button
         >
         <div class="md:w-40 h-8">
@@ -51,7 +51,7 @@
             v-model="currentFilterValue"
             :key="filterValue"
             backgroundClass="bg-ink-200"
-            borderClass="border-ink-200"
+            borderClass="border-slate-400"
             border-radius="rounded-sm"
             spacing="px-2 py-1"
             placeholder="Duration filter"

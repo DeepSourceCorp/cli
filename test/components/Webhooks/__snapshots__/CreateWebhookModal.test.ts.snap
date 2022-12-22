@@ -16,15 +16,15 @@ exports[`[[ CreateWebhookModal ]] renders CreateWebhookModal with the store 1`] 
   </fieldset>
   <section class=\\"p-4 pt-0 space-y-2\\">
     <h4 class=\\"text-sm font-medium text-vanilla-400\\">Select events</h4>
-    <div class=\\"space-y-2 overflow-y-scroll max-h-52\\"><label class=\\"block p-3 border rounded-md cursor-pointer border-ink-200\\">
+    <div class=\\"space-y-2 overflow-y-scroll max-h-52\\"><label class=\\"block p-3 border rounded-md cursor-pointer border-slate-400\\">
         <div class=\\"flex items-center mb-1\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox\\"><input type=\\"checkbox\\" name=\\"analysis_run.started\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"analysis_run.started\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-4 w-4 absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
             <!----></label> <code class=\\"text-sm\\">analysis_run.started</code></div>
         <p class=\\"ml-6 text-xs text-vanilla-400\\">This event is triggered when an analysis run is started.</p>
-      </label><label class=\\"block p-3 border rounded-md cursor-pointer border-ink-200\\">
+      </label><label class=\\"block p-3 border rounded-md cursor-pointer border-slate-400\\">
         <div class=\\"flex items-center mb-1\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox\\"><input type=\\"checkbox\\" name=\\"analysis_run.updated\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"analysis_run.updated\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-4 w-4 absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
             <!----></label> <code class=\\"text-sm\\">analysis_run.updated</code></div>
         <p class=\\"ml-6 text-xs text-vanilla-400\\">This event is triggered when an analysis run is updated.</p>
-      </label><label class=\\"block p-3 border rounded-md cursor-pointer border-ink-200\\">
+      </label><label class=\\"block p-3 border rounded-md cursor-pointer border-slate-400\\">
         <div class=\\"flex items-center mb-1\\"><label class=\\"relative flex items-center pl-6 text-base group z-input z-input__checkbox\\"><input type=\\"checkbox\\" name=\\"repository_issue.introduced\\" class=\\"absolute w-0 h-0 opacity-0\\" value=\\"repository_issue.introduced\\"><span data-before=\\"✓\\" data-content=\\"\\" class=\\"z-input__checkbox--checkmark h-4 w-4 absolute left-0 grid text-center text-transparent bg-transparent border border-solid rounded-sm cursor-pointer place-items-center border-slate before:content-before sibling-checked:text-ink-100 sibling-checked:bg-juniper sibling-checked:border-juniper group-hover:border-juniper\\"></span>
             <!----></label> <code class=\\"text-sm\\">repository_issue.introduced</code></div>
         <p class=\\"ml-6 text-xs text-vanilla-400\\">This event is trigerred when an issue is introduced on the default branch.</p>

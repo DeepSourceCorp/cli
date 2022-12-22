@@ -48,7 +48,7 @@
             </slot>
           </div>
         </div>
-        <z-tag v-if="isPassing !== null" class="border border-ink-200">
+        <z-tag v-if="isPassing !== null" class="border border-slate-400">
           <z-icon :icon="isPassing ? 'metric-high' : 'metric-low'" :color="color" />
           <span class="font-semibold text-xxs uppercase tracking-wider" :class="`text-${color}`">{{
             thresholdLabel

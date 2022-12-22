@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex p-2 overflow-x-scroll border-b sm:block sm:border-0 border-ink-200 hide-scroll sm:space-y-2"
+    class="flex p-2 overflow-x-scroll border-b sm:block sm:border-0 border-slate-400 hide-scroll sm:space-y-2"
   >
     <div
       v-for="(metric, index) in dataPoints"

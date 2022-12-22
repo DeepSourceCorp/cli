@@ -2,7 +2,7 @@
   <section
     class="flex flex-col justify-between"
     :class="{
-      'border rounded-md border-ink-200': showBorder
+      'border rounded-md border-slate-400': showBorder
     }"
   >
     <div
@@ -11,7 +11,7 @@
       :class="{
         'md:gap-0 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5': fullWidth,
         'xl:gap-0 xl:grid-cols-2': !fullWidth,
-        'border-b border-ink-200 px-4': showBorder,
+        'border-b border-slate-400 px-4': showBorder,
         'py-2': $slots.controls && showBorder && !headerSpacingClass,
         'py-3': !$slots.controls && showBorder && !headerSpacingClass,
         'pt-0 pb-2': $slots.controls && !showBorder && !headerSpacingClass,

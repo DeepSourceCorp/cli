@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 border-b border-ink-200" :class="{ 'lg:pb-7': !orgUser.scimEnabled }">
+  <div class="p-4 border-b border-slate-400" :class="{ 'lg:pb-7': !orgUser.scimEnabled }">
     <div class="flex flex-col md:flex-row gap-y-0.5">
       <div class="flex items-center gap-x-4">
         <okta-icon-wrapper

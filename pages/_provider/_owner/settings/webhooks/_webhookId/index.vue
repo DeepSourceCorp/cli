@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section class="px-4 py-3.5 min-h-13 border-b border-ink-200 flex flex-row items-center">
+    <section class="px-4 py-3.5 min-h-13 border-b border-slate-400 flex flex-row items-center">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['settings', 'webhooks'])">All endpoints</nuxt-link>
@@ -160,12 +160,12 @@
           </password-input>
           <div class="py-4">
             <h4 class="mb-2 text-sm text-vanilla-100">Selected events</h4>
-            <div class="border rounded-md border-ink-200">
+            <div class="border rounded-md border-slate-400">
               <template v-if="readOnly">
                 <span
                   v-for="(event, position) in subscribedEvents"
                   :key="event.shortcode"
-                  class="block px-3 pt-2 pb-3 border-ink-200 space-y-0.5"
+                  class="block px-3 pt-2 pb-3 border-slate-400 space-y-0.5"
                   :class="{
                     'border-t': position !== 0
                   }"
@@ -178,7 +178,7 @@
                 <label
                   v-for="(event, position) in allEventsList"
                   :key="event.shortcode"
-                  class="block p-3 cursor-pointer border-ink-200"
+                  class="block p-3 cursor-pointer border-slate-400"
                   :class="{
                     'border-t': position !== 0,
                     'bg-ink-300': selectedEvents.includes(event.shortcode)

@@ -18,7 +18,7 @@
             <span class="truncate">
               {{ currentSelection }}
             </span>
-            <span class="pl-4 border-ink-100">
+            <span class="pl-4 border-slate-400">
               <z-icon
                 button-type="secondary"
                 size="small"

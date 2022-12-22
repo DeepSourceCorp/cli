@@ -70,8 +70,8 @@
           class="block p-3 border rounded-md cursor-pointer"
           :class="
             selectedEvents.includes(event.shortcode)
-              ? 'border-ink-100 bg-ink-200'
-              : 'border-ink-200'
+              ? 'border-slate-400 bg-ink-200'
+              : 'border-slate-400'
           "
         >
           <div class="flex items-center mb-1">
@@ -89,7 +89,7 @@
       </div>
     </section>
     <template v-slot:footer="{ close }">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-ink-200">
+      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
         <z-button
           :isLoading="savingWebhookEndpoint"
           :disabled="savingWebhookEndpoint || selectedEvents.length === 0"

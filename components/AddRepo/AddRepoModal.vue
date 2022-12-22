@@ -4,7 +4,7 @@
       <template v-slot:default="{ close }" @click.stop>
         <div @click.stop>
           <z-tabs :defaultActive="currentTab" class="w-full max-w-xl -mb-px sm:w-120">
-            <div class="flex justify-between px-4 border-b border-ink-200">
+            <div class="flex justify-between px-4 border-b border-slate-400">
               <z-tab-list class="pt-4">
                 <z-tab-item
                   class="flex items-center space-x-1"

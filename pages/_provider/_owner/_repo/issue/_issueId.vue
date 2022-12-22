@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Back to Issue list Page -->
-    <div class="flex flex-row items-center px-4 py-2 border-b min-h-13 border-ink-200">
+    <div class="flex flex-row items-center px-4 py-2 border-b min-h-13 border-slate-400">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="routeToPrevious">All issues</nuxt-link>
@@ -37,7 +37,7 @@
       >
       </issue-details-header>
     </div>
-    <div id="tabs" class="flex mt-3 border-b xl:col-span-2 border-ink-300">
+    <div id="tabs" class="flex mt-3 border-b xl:col-span-2 border-slate-400">
       <div class="flex self-end px-4 space-x-4 overflow-auto flex-nowrap">
         <nuxt-link :to="getRoute('occurrences')">
           <z-tab

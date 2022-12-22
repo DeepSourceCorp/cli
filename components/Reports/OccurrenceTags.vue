@@ -9,7 +9,7 @@
         spacing="py-0 px-2"
         icon-left="issue-minor"
         text-size="xs"
-        class="border border-ink-200 gap-x-1"
+        class="border border-slate-400 gap-x-1"
       >
         {{ shortenLargeNumber(low) }}
       </z-tag>
@@ -22,7 +22,7 @@
         icon-left="issue-major"
         icon-color="honey"
         text-size="xs"
-        class="border border-ink-200 gap-x-1"
+        class="border border-slate-400 gap-x-1"
       >
         {{ shortenLargeNumber(medium) }}
       </z-tag>
@@ -35,7 +35,7 @@
         icon-left="issue-critical"
         icon-color="cherry"
         text-size="xs"
-        class="border border-ink-200 gap-x-1"
+        class="border border-slate-400 gap-x-1"
       >
         {{ shortenLargeNumber(high) }}
       </z-tag>

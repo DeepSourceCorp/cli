@@ -45,7 +45,7 @@
               :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
               :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
               subtitle="Please try changing your search query."
-              class="border-2 border-dashed rounded-md border-ink-200"
+              class="border-2 border-dashed rounded-md border-slate-400"
             >
               <template #title>
                 <p class="text-base text-vanilla-200">{{ emptyStateTitle }}</p>

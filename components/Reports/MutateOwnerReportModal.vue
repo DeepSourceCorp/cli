@@ -189,8 +189,8 @@
 
     <template v-slot:footer="{ close }">
       <div
-        class="p-4 text-right text-vanilla-100 border-ink-200"
-        :class="{ 'border-t border-ink-200': showRepoSelection }"
+        class="p-4 text-right text-vanilla-100 border-slate-400"
+        :class="{ 'border-t border-slate-400': showRepoSelection }"
       >
         <span
           v-if="showRepoSelection && sourceRepoCount"

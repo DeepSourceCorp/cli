@@ -1,7 +1,7 @@
 <template>
   <z-badge v-if="autofixableIssuesCount > 0" type="success" :is-dot="modelValue ? true : false">
     <div
-      class="flex items-center h-8 p-2 space-x-2 leading-none border rounded-sm max-w-44 border-ink-200"
+      class="flex items-center h-8 p-2 space-x-2 leading-none border rounded-sm max-w-44 border-slate-400"
       :class="modelValue ? 'hover:bg-ink-100 bg-ink-200' : 'hover:bg-ink-200 border-dashed'"
     >
       <div

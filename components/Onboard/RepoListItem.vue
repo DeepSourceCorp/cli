@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center px-2 py-2 border-b border-ink-300 cursor-pointer gap-x-2 hover:bg-ink-300 hover:border-0 hover:rounded-md"
+    class="flex items-center px-2 py-2 border-b border-slate-400 cursor-pointer gap-x-2 hover:bg-ink-300 hover:border-0 hover:rounded-md"
     @click="handleClick"
   >
     <z-icon :icon="icon" size="small"></z-icon>

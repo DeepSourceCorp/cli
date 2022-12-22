@@ -4,7 +4,7 @@
     class="ph-ignore-input ph-no-capture"
     :class="{
       'border-vanilla-200': cardInputFocus,
-      'border-ink-100': !cardInputFocus
+      'border-slate-400': !cardInputFocus
     }"
   ></div>
 </template>

@@ -44,7 +44,7 @@
       </div>
       <div v-else class="flex justify-end text-sm text-right text-vanilla-200">
         <button
-          class="flex items-center h-8 px-2 py-1 space-x-2 text-sm border border-dashed rounded-md border-ink-300 hover:border-ink-200 text-vanilla-400 hover:text-vanilla-200"
+          class="flex items-center h-8 px-2 py-1 space-x-2 text-sm border border-dashed rounded-md border-slate-400 hover:border-slate-400 text-vanilla-400 hover:text-vanilla-200"
           @click="showThresholdUpdate = true"
         >
           <z-icon size="small" icon="plus"></z-icon>

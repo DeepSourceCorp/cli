@@ -2,9 +2,9 @@
   <div class="fixed inset-0 flex items-start justify-center pt-32">
     <div
       ref="command-k-wrapper"
-      class="w-full mx-auto overflow-hidden border rounded-lg outline-none sm:w-120 min-h-10 border-ink-100 shadow-double-dark bg-ink-300"
+      class="w-full mx-auto overflow-hidden border rounded-lg outline-none sm:w-120 min-h-10 border-slate-400 shadow-double-dark bg-ink-300"
     >
-      <div class="p-4 pb-0 border-ink-100" :class="{ 'border-b': commands.length }">
+      <div class="p-4 pb-0 border-slate-400" :class="{ 'border-b': commands.length }">
         <div class="space-x-2">
           <span
             v-for="crumb in breadcrumbs"

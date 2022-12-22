@@ -1,12 +1,12 @@
 <template>
   <div class="min-h-screen">
-    <nav class="sticky top-0 z-50 border-b col-span-full border-ink-200 h-14 bg-ink-400">
+    <nav class="sticky top-0 z-50 border-b col-span-full border-slate-400 h-14 bg-ink-400">
       <section class="grid h-full max-w-5xl grid-cols-2 px-4 py-2.5 mx-auto">
         <div class="flex items-center">
           <component
             :is="isAnalysisRunning ? 'div' : 'nuxt-link'"
             :to="isAnalysisRunning ? null : repoSelectorRoute"
-            class="flex items-center h-full pr-2 border-r md:pr-5 border-ink-200"
+            class="flex items-center h-full pr-2 border-r md:pr-5 border-slate-400"
           >
             <img
               src="~/assets/images/logo-wordmark-white.svg"
@@ -44,7 +44,7 @@
             button-type="secondary"
             icon-size="small"
             size="small"
-            class="border border-ink-200"
+            class="border border-slate-400"
             :to="`mailto:${$config.supportEmail}`"
           />
         </div>

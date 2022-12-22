@@ -2,7 +2,7 @@
   <base-card
     :to="link"
     :remove-default-style="true"
-    class="border rounded-lg bg-ink-400 hover:bg-ink-300 border-ink-200"
+    class="border rounded-lg bg-ink-400 hover:bg-ink-300 border-slate-400"
   >
     <template #left-section>
       <div class="flex justify-between w-full">
@@ -37,7 +37,7 @@
 
         <!-- right section -->
         <div
-          class="flex flex-col w-1/4 h-full border-l xs:w-1/5 border-ink-200 group-hover:border-ink-100"
+          class="flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400"
           :class="{
             'justify-center items-center': centerContent
           }"
@@ -72,7 +72,7 @@
             v-if="autofixAvailable && showAutofixButton"
             :disabled="disableAutofixButton"
             data-testid="autofix-issue"
-            class="flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-ink-200 group-hover:border-ink-100"
+            class="flex items-center justify-center w-full h-auto p-2 border-t sm:gap-x-2 border-slate-400 group-hover:border-slate-400"
             :class="{
               'cursor-pointer hover:bg-ink-200': !disableAutofixButton
             }"

@@ -35,7 +35,7 @@
     </template>
     <template v-else-if="$fetchState.pending">
       <div class="bg-ink-300 h-23 animate-pulse"></div>
-      <div v-for="i in 2" :key="i" class="p-6 space-y-6 border-b border-ink-200">
+      <div v-for="i in 2" :key="i" class="p-6 space-y-6 border-b border-slate-400">
         <div class="h-8 w-32 bg-ink-300 animate-pulse"></div>
         <div class="rounded-md space-y-4">
           <div class="flex gap-x-23">

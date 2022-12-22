@@ -1,7 +1,7 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <aside
-    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-ink-200 group bg-ink-400"
+    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-slate-400 group bg-ink-400"
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
@@ -21,7 +21,7 @@
             content: isCollapsed ? 'Activate new repository' : '',
             placement: 'right'
           }"
-          class="flex items-center w-full p-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
+          class="flex items-center w-full p-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-slate-400 hover:bg-ink-200"
           @click="showAddRepoModal = true"
         >
           <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
@@ -69,7 +69,7 @@
     </template>
     <!-- Dummy menu when user isn't onboarded -->
     <section v-else class="flex-grow hide-scroll">
-      <div class="border-b border-ink-200" :class="[isCollapsed ? 'py-4 pl-5' : 'py-4 pl-5']">
+      <div class="border-b border-slate-400" :class="[isCollapsed ? 'py-4 pl-5' : 'py-4 pl-5']">
         <deep-source-logo :is-collapsed="isCollapsed" />
       </div>
       <nav class="p-2.5 space-y-2">
@@ -80,7 +80,7 @@
             placement: 'right'
           }"
           :href="installationUrl"
-          class="flex items-center w-full p-2 mb-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
+          class="flex items-center w-full p-2 mb-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-slate-400 hover:bg-ink-200"
         >
           <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
           <span v-show="!isCollapsed" class="text-sm font-medium">Activate new repository</span>
@@ -92,7 +92,7 @@
             placement: 'right'
           }"
           :to="installationUrl"
-          class="flex items-center w-full p-2 mb-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
+          class="flex items-center w-full p-2 mb-2 space-x-2 leading-none border rounded-sm bg-ink-300 border-slate-400 hover:bg-ink-200"
         >
           <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
           <span v-show="!isCollapsed" class="text-sm font-medium">Activate new repository</span>
@@ -139,7 +139,7 @@
       v-if="
         !isCollapsed && owner.maxUsagePercentage >= 100 && Object.keys(availableUpgradePlans).length
       "
-      class="p-4 border-t border-ink-200"
+      class="p-4 border-t border-slate-400"
     >
       <h4 class="mb-2 text-sm font-medium leading-6 text-vanilla-100">Usage quota exhausted :(</h4>
       <p class="mb-4 text-xs font-normal leading-5 text-vanilla-400">
@@ -157,7 +157,7 @@
     </section>
     <!-- User menu -->
     <section class="relative self-end w-full justify-self-end group">
-      <div class="p-2.5 border-t border-ink-200 space-y-2">
+      <div class="p-2.5 border-t border-slate-400 space-y-2">
         <div class="lg:flex">
           <support-menu :is-collapsed="isCollapsed" />
         </div>
@@ -183,7 +183,7 @@
           <user-menu :is-collapsed="isCollapsed" />
         </div>
       </div>
-      <div class="p-4 border-t border-ink-200" :class="{ 'pt-2': isChristmasSeason() }">
+      <div class="p-4 border-t border-slate-400" :class="{ 'pt-2': isChristmasSeason() }">
         <div class="flex items-center justify-between space-x-2 leading-none">
           <img
             v-if="isChristmasSeason()"

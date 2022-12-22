@@ -7,7 +7,7 @@
   >
     <div class="overflow-y-scroll max-h-84">
       <div v-if="selectedMember" class="p-4 space-y-5">
-        <div class="relative px-2 border rounded-lg border-ink-200 group">
+        <div class="relative px-2 border rounded-lg border-slate-400 group">
           <span
             v-tooltip="'Back to search'"
             @click="selectedMember = null"
@@ -59,7 +59,7 @@
         </div>
         <div
           v-if="memberSearchCandidate && hasMembers"
-          class="border-t divide-y divide-ink-100 border-ink-100"
+          class="border-t divide-y divide-ink-100 border-slate-400"
         >
           <member-list-item
             class="px-4 cursor-pointer hover:bg-ink-200"

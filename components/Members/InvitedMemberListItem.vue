@@ -1,5 +1,5 @@
 <template>
-  <li class="flex items-center py-2 space-x-3 text-sm border-b border-ink-300">
+  <li class="flex items-center py-2 space-x-3 text-sm border-b border-slate-400">
     <div class="items-center w-1/2 space-y-2 leading-none text-vanilla-100">
       <div>{{ email }}</div>
       <z-button

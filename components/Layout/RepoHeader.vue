@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-ink-200"
+      class="grid grid-cols-1 gap-2 border-b lg:gap-0 grid-row-3 xl:grid-cols-fr-fr-22 xl:grid-rows-2 auto-rows-auto bg-ink-300 min-h-24 border-slate-400"
     >
       <div id="header" class="xl:col-span-2">
         <div class="px-4 pt-3 space-x-2 space-y-2 xl:space-y-0">
@@ -44,7 +44,7 @@
               rel="noopener noreferrer"
             >
               <z-tag
-                class="border-2 border-ink-200"
+                class="border-2 border-slate-400"
                 spacing="p-0.5"
                 bg-color="ink-200"
                 v-tooltip="`Open repo on ${$providerMetaMap[repository.vcsProvider].text}`"
@@ -91,7 +91,7 @@
           :vcsCommitUrl="lastRun.vcsCommitUrl"
           :currentlyAnalysing="repository.runs && repository.runs.totalCount"
           :canChangeBranch="canChangeBranch"
-          class="flex flex-col h-full px-4 py-2 space-y-2 text-sm md:px-3 xl:border-l xl:border-ink-200 text-vanilla-400"
+          class="flex flex-col h-full px-4 py-2 space-y-2 text-sm md:px-3 xl:border-l xl:border-slate-400 text-vanilla-400"
         ></repo-header-info>
       </div>
       <div id="tabs" class="flex xl:col-span-2">

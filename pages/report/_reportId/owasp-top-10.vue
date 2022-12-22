@@ -23,7 +23,7 @@
               v-if="complianceIssuesSeverityMap"
               v-bind="complianceIssuesSeverityMap"
               :loading="complianceIssuesLoading"
-              class="hidden border-l border-ink-200 pl-8 md:flex lg:hidden xl:flex"
+              class="hidden border-l border-slate-400 pl-8 md:flex lg:hidden xl:flex"
             />
           </div>
         </template>
@@ -76,7 +76,7 @@
         :loading="recentStatsLoading"
       />
 
-      <div class="overflow-x-auto border rounded-lg border-ink-200">
+      <div class="overflow-x-auto border rounded-lg border-slate-400">
         <z-table class="border-none text-vanilla-100 cursor">
           <template #head>
             <z-table-row class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
@@ -95,17 +95,17 @@
               >
                 <z-table-cell class="flex-none w-12 mr-6 text-left">
                   <div
-                    class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 w-12 -mx-2"
+                    class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 w-12 -mx-2"
                   ></div>
                 </z-table-cell>
                 <z-table-cell class="text-left">
                   <div
-                    class="h-full max-w-sm opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-6"
+                    class="h-full max-w-sm opacity-50 bg-ink-300 animate-pulse border-slate-400 -mx-6"
                   ></div>
                 </z-table-cell>
                 <z-table-cell class="ml-8 sm:max-w-2xs text-right">
                   <div
-                    class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mr-2"
+                    class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 -mr-2"
                   ></div>
                 </z-table-cell>
               </z-table-row>

@@ -1,17 +1,17 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <aside
-    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-ink-200 group bg-ink-400"
+    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-slate-400 group bg-ink-400"
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
-    <section class="p-4 border-b border-ink-200">
+    <section class="p-4 border-b border-slate-400">
       <nuxt-link :to="homeUrl">
         <img class="h-5 mt-0.5" src="~/assets/images/logo-wordmark-white.svg" alt="DeepSource" />
       </nuxt-link>
     </section>
     <section
-      class="flex flex-col justify-between flex-grow h-full p-3 space-y-3 overflow-y-scroll hide-scroll border-ink-200"
+      class="flex flex-col justify-between flex-grow h-full p-3 space-y-3 overflow-y-scroll hide-scroll border-slate-400"
     >
       <div class="space-y-2">
         <nuxt-link
@@ -19,7 +19,7 @@
           icon="add-watchlist"
           :active="$route.name === 'discover-watchlist'"
           to="/discover/watchlist"
-          class="flex items-center w-full p-2 gap-x-2 text-sm leading-none border rounded-sm bg-ink-300 border-ink-200 hover:bg-ink-200"
+          class="flex items-center w-full p-2 gap-x-2 text-sm leading-none border rounded-sm bg-ink-300 border-slate-400 hover:bg-ink-200"
         >
           <z-icon icon="plus" size="small" color="vanilla-400" class="min-w-4 min-h-4" />
           <span class="flex justify-between w-full">
@@ -106,7 +106,7 @@
       </div>
     </section>
 
-    <section class="relative self-end w-full border-t border-ink-200 justify-self-end group">
+    <section class="relative self-end w-full border-t border-slate-400 justify-self-end group">
       <div v-if="loggedIn" class="p-2.5 space-y-2">
         <div class="lg:flex">
           <support-menu :is-collapsed="isCollapsed" />
@@ -132,7 +132,7 @@
 
       <footer
         v-else
-        class="w-full p-3 border-solid border-ink-200 bg-gradient-dark-dawn backdrop-blur-xl"
+        class="w-full p-3 border-solid border-slate-400 bg-gradient-dark-dawn backdrop-blur-xl"
       >
         <h3 class="text-lg font-semibold">Run your first analysis.</h3>
         <p class="mt-2 text-sm text-vanilla-400">
@@ -144,7 +144,7 @@
         </nuxt-link>
       </footer>
       <div
-        class="border-t border-ink-200"
+        class="border-t border-slate-400"
         :class="[isChristmasSeason() ? 'p-4 pt-2' : 'px-2 py-4']"
       >
         <div class="flex items-center justify-between space-x-2 leading-none">

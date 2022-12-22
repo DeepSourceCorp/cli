@@ -1,6 +1,6 @@
 <template>
   <section :class="hasAutoOnboardEvents ? 'p-4' : 'px-4'">
-    <div class="p-3 border rounded-md border-ink-200 -mx-1" v-if="hasAutoOnboardEvents">
+    <div class="p-3 border rounded-md border-slate-400 -mx-1" v-if="hasAutoOnboardEvents">
       <div class="flex justify-between items-center" :class="isCollapsed ? 'pb-0' : 'pb-3'">
         <div class="flex items-center space-x-1.5">
           <span class="text-vanilla-300 text-sm font-medium leading-none">
@@ -8,7 +8,7 @@
           </span>
           <z-tag
             v-if="openCount || pendingCount"
-            bgColor="ink-400 border border-ink-100"
+            bgColor="ink-400 border border-slate-400"
             textSize="xxs"
             spacing="px-2 py-0.5"
             class="tracking-wider font-semibold"
@@ -34,7 +34,7 @@
           <li
             v-for="event in sortedEvents"
             :key="event.id"
-            class="border border-ink-200 flex items-center justify-between p-1.5 pl-3.5 rounded-md group"
+            class="border border-slate-400 flex items-center justify-between p-1.5 pl-3.5 rounded-md group"
           >
             <span class="text-vanilla-200 group-hover:text-vanilla-100 flex items-center space-x-2">
               <z-icon :icon="event.repository.isPrivate ? 'z-lock' : 'globe'"></z-icon>

@@ -4,7 +4,7 @@
     class="grid grid-cols-1 lg:grid-cols-16-fr"
   >
     <nav
-      class="hidden border-b lg:block lg:sticky lg:border-r border-ink-200 lg:h-nav-sidebar top-10 lg:top-24 bg-ink-400"
+      class="hidden border-b lg:block lg:sticky lg:border-r border-slate-400 lg:h-nav-sidebar top-10 lg:top-24 bg-ink-400"
     >
       <ul class="flex flex-col px-2 pt-2 overflow-x-auto gap-x-8 gap-y-1">
         <li v-for="metric in navList" :key="metric.shortcode">

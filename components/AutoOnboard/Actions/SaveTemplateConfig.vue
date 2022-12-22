@@ -25,13 +25,13 @@
               autocorrect="off"
               autocapitalize="off"
               spellcheck="false"
-              class="w-full h-full p-2 text-sm rounded-sm bg-ink-400 border outline-none resize-none min-h-20 border-ink-100 focus:border-vanilla-400 text-vanilla-200"
+              class="w-full h-full p-2 text-sm rounded-sm bg-ink-400 border outline-none resize-none min-h-20 border-slate-400 focus:border-vanilla-400 text-vanilla-200"
               placeholder="Description for this template can include the analyzers available in this and the projects this template is best suited for"
             ></textarea>
           </div>
         </fieldset>
         <template v-slot:footer="{ close }">
-          <div class="p-4 space-x-4 text-right text-vanilla-100 border-ink-200">
+          <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
             <z-button
               :icon="savingConfig ? 'animate-spin' : 'autofix'"
               :iconColor="savingConfig ? 'ink animate-spin' : ''"

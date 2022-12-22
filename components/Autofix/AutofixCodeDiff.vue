@@ -4,14 +4,14 @@
     <div
       v-for="(change, name) in changeSet"
       :key="name"
-      class="relative flex flex-col border rounded-sm code border-ink-200"
+      class="relative flex flex-col border rounded-sm code border-slate-400"
     >
       <div
         v-if="isGroup"
         class="absolute w-6 h-0.5 bg-juniper transform -translate-x-full top-4"
       ></div>
       <!-- title -->
-      <div class="flex items-center p-2 space-x-1 text-sm border-b bg-ink-300 border-ink-200">
+      <div class="flex items-center p-2 space-x-1 text-sm border-b bg-ink-300 border-slate-400">
         <z-checkbox
           v-if="!isReadOnly"
           v-model="selectedFiles"
@@ -66,7 +66,7 @@
         v-for="(code, index) in change.patches"
         :key="code.id"
         class="flex w-full"
-        :class="{ 'border-b-2 border-ink-200': index !== change.patches.length - 1 }"
+        :class="{ 'border-b-2 border-slate-400': index !== change.patches.length - 1 }"
       >
         <div
           class="flex items-start pt-4 bg-ink-300"
@@ -95,7 +95,7 @@
         <template v-else>
           <div class="grid w-full grid-cols-2">
             <div
-              class="col-span-1 border-r after_html border-ink-200"
+              class="col-span-1 border-r after_html border-slate-400"
               :class="{
                 'bg-ink-300 opacity-20': !isHunkSelected(code.id)
               }"

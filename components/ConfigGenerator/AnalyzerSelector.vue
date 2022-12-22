@@ -27,7 +27,7 @@
       >
       </analyzer>
     </template>
-    <div v-else class="flex items-center h-64 border rounded-sm border-ink-300">
+    <div v-else class="flex items-center h-64 border rounded-sm border-slate-400">
       <div class="max-w-md mx-auto space-y-4 font-medium text-center font-base">
         <p>
           Analyzers will find issues in your code. Add an analyzer by selecting a language you’ve

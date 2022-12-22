@@ -10,7 +10,7 @@
             class="w-1/2 -mb-3"
           >
             <div
-              class="w-full p-3 border rounded-l-md border-ink-200"
+              class="w-full p-3 border rounded-l-md border-slate-400"
               :class="{ 'bg-ink-50 border-r-0': activeTabIndex === 0 }"
             >
               Issues
@@ -23,7 +23,7 @@
             class="w-1/2 -mb-3"
           >
             <div
-              class="w-full p-3 border rounded-r-md border-ink-200"
+              class="w-full p-3 border rounded-r-md border-slate-400"
               :class="{ 'bg-ink-50 border-l-0': activeTabIndex === 1 }"
             >
               Metrics
@@ -117,7 +117,7 @@
                   v-for="metricGroup in metricsGroupedByName"
                   :key="metricGroup.name"
                   :metrics-captured="metricGroup.metrics"
-                  class="border rounded-md border-ink-200 bg-ink-300"
+                  class="border rounded-md border-slate-400 bg-ink-300"
                   @confirmMetricSuppression="confirmMetricSuppression"
                 >
                   <template #header>
@@ -156,7 +156,7 @@
                 v-for="metricGroup in metricsGroupedByName"
                 :key="metricGroup.name"
                 :metrics-captured="metricGroup.metrics"
-                class="border rounded-md border-ink-200 bg-ink-300"
+                class="border rounded-md border-slate-400 bg-ink-300"
                 @confirmMetricSuppression="confirmMetricSuppression"
               >
                 <template #header>
@@ -227,7 +227,7 @@
             v-if="metricToSuppress"
             :metrics-captured="[metricToSuppress]"
             :is-in-modal="true"
-            class="border rounded-md border-ink-100 bg-ink-300 md:hidden shadow-xl mb-6"
+            class="border rounded-md border-slate-400 bg-ink-300 md:hidden shadow-xl mb-6"
             @confirmMetricSuppression="confirmMetricSuppression"
           >
             <template #header>

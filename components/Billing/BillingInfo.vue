@@ -2,7 +2,7 @@
   <form-group label="Billing Information" :divide="false" bodyClass="space-y-4" class="mt-5">
     <div v-if="isBilledByStripe || isBilledManually">
       <div
-        class="grid w-full grid-cols-1 border rounded-md border-opacity-70 md:grid-cols-2 border-ink-200"
+        class="grid w-full grid-cols-1 border rounded-md border-opacity-70 md:grid-cols-2 border-slate-400"
       >
         <div class="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 bg-ink-300">
           <div v-if="ownerBillingInfo.upcomingPaymentDate">

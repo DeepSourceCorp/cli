@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ChartContainer ]] renders chart container with all prop options: {"isWidget":false,"chartPresent":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 rounded-lg\\">
+"<div class=\\"py-4 border border-slate-400 rounded-lg\\">
   <div class=\\"px-5\\">
     <h2>Report header</h2>
   </div>
@@ -15,7 +15,7 @@ exports[`[[ ChartContainer ]] renders chart container with all prop options: {"i
 `;
 
 exports[`[[ ChartContainer ]] renders chart container with all prop options: {"isWidget":false,"chartPresent":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 rounded-lg min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 rounded-lg min-h-96\\">
   <div class=\\"px-5\\">
     <h2>Report header</h2>
   </div>
@@ -29,7 +29,7 @@ exports[`[[ ChartContainer ]] renders chart container with all prop options: {"i
 `;
 
 exports[`[[ ChartContainer ]] renders chart container with all prop options: {"isWidget":true,"chartPresent":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 rounded-md\\">
+"<div class=\\"py-4 border border-slate-400 rounded-md\\">
   <div class=\\"px-5\\">
     <h2>Report header</h2>
   </div>
@@ -43,7 +43,7 @@ exports[`[[ ChartContainer ]] renders chart container with all prop options: {"i
 `;
 
 exports[`[[ ChartContainer ]] renders chart container with all prop options: {"isWidget":true,"chartPresent":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <h2>Report header</h2>
   </div>

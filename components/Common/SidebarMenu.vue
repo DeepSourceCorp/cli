@@ -2,7 +2,7 @@
   <div class="sidebar-menu" v-outside-click="closeSidebar">
     <!-- Sidebar modal -->
     <div
-      class="absolute top-0 z-30 flex flex-col h-screen duration-200 cursor-pointer transition-width group bg-ink-400 sidebar-menu border-ink-200 text-vanilla-100"
+      class="absolute top-0 z-30 flex flex-col h-screen duration-200 cursor-pointer transition-width group bg-ink-400 sidebar-menu border-slate-400 text-vanilla-100"
       :class="[modalWidth, directionClasses, borderClasses, isOpen && 'shadow-black']"
     >
       <!-- Hover Gradient border -->
@@ -33,14 +33,14 @@
         <slot :isCollapsed="isCollapsed"></slot>
       </div>
       <footer
-        class="w-full p-3 border-t border-solid border-ink-200 bg-gradient-dark-dawn backdrop-blur-xl"
+        class="w-full p-3 border-t border-solid border-slate-400 bg-gradient-dark-dawn backdrop-blur-xl"
         :class="footerClass"
         v-if="$scopedSlots.footer"
       >
         <slot name="footer" :isCollapsed="isCollapsed"></slot>
       </footer>
       <footer
-        class="w-full px-2 py-4 border-t border-solid border-ink-200"
+        class="w-full px-2 py-4 border-t border-solid border-slate-400"
         :class="footerBrandClass"
         v-if="$scopedSlots.brand"
       >

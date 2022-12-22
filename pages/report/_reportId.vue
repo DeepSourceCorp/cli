@@ -2,7 +2,7 @@
   <div class="w-full min-h-screen mx-auto lg:max-w-6xl 2xl:max-w-7xl">
     <div
       v-if="publicReport && publicReport.owner"
-      class="sticky top-0 left-0 z-30 w-full border-b lg:hidden border-ink-200 bg-ink-400"
+      class="sticky top-0 left-0 z-30 w-full border-b lg:hidden border-slate-400 bg-ink-400"
     >
       <z-button
         id="mobile-sidebar-toggle"
@@ -24,7 +24,7 @@
       />
 
       <div
-        class="w-screen sm:w-auto px-4 pb-10 pt-6 lg:pt-26 text-sm border-t md:px-6 md:text-base border-ink-300 md:border-t-0"
+        class="w-screen px-4 pt-6 pb-10 text-sm border-t sm:w-auto lg:pt-26 md:px-6 md:text-base border-slate-400 md:border-t-0"
       >
         <nuxt-child
           :share-historical-data="publicReport.shareHistoricalData"
@@ -36,7 +36,7 @@
 
         <section
           id="about"
-          class="space-y-4 leading-8 border-b text-vanilla-400 mt-14 pb-14 border-ink-200 scroll-mt-8"
+          class="space-y-4 leading-8 border-b text-vanilla-400 mt-14 pb-14 border-slate-400 scroll-mt-8"
         >
           <h2 class="text-lg font-semibold text-vanilla-100">About DeepSource</h2>
           <p>
@@ -67,7 +67,7 @@
       v-else-if="errorMessage"
       class="flex items-center justify-center h-screen animate-glow-bg-brighter"
     >
-      <div class="w-98 px-5">
+      <div class="px-5 w-98">
         <div class="bg-ink-300 px-4 py-2.5 flex items-center gap-x-2 mb-2 w-max">
           <z-icon icon="z-lock" />
           <span class="text-xs font-medium">This report is password-protected</span>
@@ -87,7 +87,7 @@
                 :required="true"
                 :type="isPasswordHidden ? 'password' : 'text'"
                 @input="clearPasswordError"
-                class="rounded-md border-ink-200"
+                class="rounded-md border-slate-400"
               />
               <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
                 <z-button

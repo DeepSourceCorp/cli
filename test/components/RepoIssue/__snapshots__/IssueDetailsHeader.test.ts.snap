@@ -14,9 +14,9 @@ exports[`renders IssueDetailsHeader with all props 1`] = `
         <span data-original-title=\\"null\\" class=\\" has-tooltip\\">2 years old</span></span>
       </div>
       <prioritytypeselect-stub priority=\\"high\\" menutitle=\\"\\" showfooter=\\"true\\" size=\\"small\\" width=\\"small\\" direction=\\"right\\" verbosetitle=\\"true\\" source=\\"REPOSITORY\\" showtooltip=\\"true\\"></prioritytypeselect-stub>
-      <div class=\\"flex items-center justify-between gap-x-1\\"><a class=\\"flex items-center gap-x-1 uppercase border border-ink-200 rounded-full px-1.5 py-1 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"w-2 h-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"font-medium tracking-wide text-xxs text-vanilla-400\\">
+      <div class=\\"flex items-center justify-between gap-x-1\\"><a class=\\"flex items-center gap-x-1 uppercase border border-slate-400 rounded-full px-1.5 py-1 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"w-2 h-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"font-medium tracking-wide text-xxs text-vanilla-400\\">
             a01
-          </span></a><a class=\\"flex items-center gap-x-1 uppercase border border-ink-200 rounded-full px-1.5 py-1 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"w-2 h-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"font-medium tracking-wide text-xxs text-vanilla-400\\">
+          </span></a><a class=\\"flex items-center gap-x-1 uppercase border border-slate-400 rounded-full px-1.5 py-1 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"w-2 h-2 rounded-full\\" style=\\"background: rgb(234, 88, 12);\\"></span> <span class=\\"font-medium tracking-wide text-xxs text-vanilla-400\\">
             owasp top 10
           </span></a></div>
     </div>

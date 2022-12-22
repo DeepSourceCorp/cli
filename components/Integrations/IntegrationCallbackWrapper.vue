@@ -1,6 +1,6 @@
 <template>
   <div class="flex justify-center pt-26 animate-glow-bg">
-    <div class="max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-ink-200">
+    <div class="max-w-2xl pt-6 pb-4 space-y-6 border rounded-md bg-ink-400 border-slate-400">
       <div class="flex items-center justify-center gap-x-2">
         <div class="p-1.5 pr-1 rounded-sm bg-ink-300">
           <img

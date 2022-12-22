@@ -1,7 +1,7 @@
 <template>
   <div class="mb-12">
     <directory-header :info-obj="transformer" :is-loading="!fullyLoaded" type="transformer" />
-    <div class="px-4 py-6 border-b border-ink-200">
+    <div class="px-4 py-6 border-b border-slate-400">
       <div class="grid items-center max-w-4xl grid-cols-2 md:grid-cols-3 gap-y-6">
         <div class="grid gap-y-1">
           <p class="text-vanilla-400">Language</p>
@@ -56,7 +56,7 @@
         <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
           Sample configuration
         </h3>
-        <hr class="flex-grow border-ink-200" />
+        <hr class="flex-grow border-slate-400" />
       </div>
       <toml-box-lite
         v-if="fullyLoaded && transformer.exampleConfig"
@@ -71,7 +71,7 @@
         <h3 class="flex-shrink-0 text-sm tracking-wider uppercase text-vanilla-400">
           What developers are saying
         </h3>
-        <hr class="flex-grow border-ink-200" />
+        <hr class="flex-grow border-slate-400" />
       </div>
       <div class="mt-4"></div>
     </div> -->

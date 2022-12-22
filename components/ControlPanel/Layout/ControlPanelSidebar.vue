@@ -1,11 +1,11 @@
 <template>
   <!-- TODO the sidebar shouldn't need a z-index in lg+ screens but conflicts with zeal components block this  -->
   <nav
-    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-ink-200 group bg-ink-400"
+    class="fixed top-0 z-50 flex flex-col h-screen duration-200 border-r lg:sticky lg:left-0 transition-width transform-gpu border-slate-400 group bg-ink-400"
     v-outside-click="closeMenu"
     :class="[isOpen ? 'left-0' : '-left-full', collapsedSidebar ? 'w-14' : 'w-72']"
   >
-    <section class="p-3 border-b border-ink-200">
+    <section class="p-3 border-b border-slate-400">
       <nuxt-link to="/control-panel" class="cursor-pointer flex items-center gap-0.5 rounded-sm">
         <img
           src="~/assets/images/deepsource-only-logo-white.svg"
@@ -31,7 +31,7 @@
       </sidebar-item>
     </section>
     <section class="relative w-full group">
-      <div class="p-2.5 border-t border-ink-200 space-y-2">
+      <div class="p-2.5 border-t border-slate-400 space-y-2">
         <sidebar-item
           v-for="cpItem in secondaryControlPanelMenus"
           :key="getPageTitle(cpItem.title)"

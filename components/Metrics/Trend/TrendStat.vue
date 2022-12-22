@@ -46,7 +46,7 @@
         icon-size="x-small"
         color="vanilla-100"
         label="Add threshold"
-        class="border border-ink-100 border-dashed"
+        class="border border-slate-400 border-dashed"
         @click="$emit('addThreshold')"
       />
     </div>

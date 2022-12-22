@@ -71,7 +71,7 @@
         <div
           v-for="(changes, name) in transformerRun.changeset"
           :key="name"
-          class="w-full border rounded-md border-ink-200"
+          class="w-full border rounded-md border-slate-400"
         >
           <!-- Heading -->
           <div class="px-4 py-2 font-medium bg-ink-300 text-vanilla-100">
@@ -82,9 +82,9 @@
             v-for="(change, index) in changes"
             :key="change.id"
             class="grid w-full grid-cols-2"
-            :class="{ 'border-b-4 border-ink-200': index !== changes.length - 1 }"
+            :class="{ 'border-b-4 border-slate-400': index !== changes.length - 1 }"
           >
-            <div class="col-span-1 border-r after_html border-ink-200">
+            <div class="col-span-1 border-r after_html border-slate-400">
               <z-code :content="change.before_html"></z-code>
             </div>
             <div class="col-span-1 before_html">

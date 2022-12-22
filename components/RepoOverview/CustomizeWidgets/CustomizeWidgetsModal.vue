@@ -55,7 +55,7 @@
     </section>
     <template v-slot:footer="{ close }">
       <div
-        class="flex items-center justify-between px-4 py-3 space-x-4 border-t text-vanilla-100 border-ink-200"
+        class="flex items-center justify-between px-4 py-3 space-x-4 border-t text-vanilla-100 border-slate-400"
       >
         <span v-if="enabledWidgets.length < MIN_WIDGETS" class="text-xs font-medium text-honey">
           You need to select at least {{ MIN_WIDGETS }} widgets

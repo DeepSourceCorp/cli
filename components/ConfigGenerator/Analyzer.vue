@@ -161,7 +161,7 @@
             @click.prevent="toggleTransformer(transformer)"
             class="flex items-center justify-between p-1 pl-2 text-sm border rounded-md"
             :class="[
-              transformer.enabled ? 'bg-ink-200 border-ink-100' : 'border-ink-200',
+              transformer.enabled ? 'bg-ink-200 border-slate-400' : 'border-slate-400',
               readOnly ? 'cursor-not-allowed' : 'cursor-pointer'
             ]"
           >
@@ -184,7 +184,7 @@
 
       <div v-else-if="showInstallAutofixAppCTA" class="p-3 space-y-2">
         <label class="text-sm tracking-wide text-vanilla-400">Transformers</label>
-        <div class="px-4 py-6 space-y-5 text-sm text-center border border-ink-100">
+        <div class="px-4 py-6 space-y-5 text-sm text-center border border-slate-400">
           <h4 class="text-base font-medium text-vanilla-100">
             Enable Autofix app on {{ $providerMetaMap[$route.params.provider].text }}
           </h4>

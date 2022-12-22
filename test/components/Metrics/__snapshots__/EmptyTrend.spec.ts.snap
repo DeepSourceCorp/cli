@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue":30,"metricMeta":{"shortcode":"DftPnk","name":"Daft Punk","unit":""},"namespacesTrend":{"key":"aggregate","valueTrend":{"labels":["2022-05-30T12:44:02.022478+00:00","2022-06-01T12:44:02.022478+00:00","2022-06-02T12:44:02.022478+00:00","2022-06-03T12:44:02.022478+00:00","2022-05-28T12:44:02.022478+00:00","2022-05-31T12:44:02.022478+00:00","2022-05-29T12:44:02.022478+00:00","2022-06-04T12:44:02.022478+00:00","2022-06-05T12:44:02.022478+00:00","2022-06-07T12:44:02.022478+00:00","2022-06-06T12:44:02.022478+00:00"],"values":[84,68,78,55,94,51,58,82,90,68,85]},"isPassing":true,"valueDisplay":"85%","analyzerShortcode":"javascript","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/javascript.svg","threshold":50}} 1`] = `
-"<div class=\\"space-y-4 px-6 py-4 border-b border-ink-200 bg-ink-300\\">
+"<div class=\\"space-y-4 px-6 py-4 border-b border-slate-400 bg-ink-300\\">
   <div>
     <div class=\\"flex flex-wrap md:flex-nowrap items-start gap-x-2 gap-y-4\\">
       <div class=\\"flex-grow space-y-1.5\\">
@@ -12,7 +12,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
               Daft Punk
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-ink-200 px-2 py-0 text-sm bg-ink-300\\">
+          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
             <zicon-stub icon=\\"metric-high\\" color=\\"juniper\\" size=\\"x-small\\"></zicon-stub><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Threshold passing</span>
             <!---->
           </div>
@@ -21,11 +21,11 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 
         </p>
       </div>
-      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0 flex-wrap md:flex-nowrap\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-ink-100 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
+      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0 flex-wrap md:flex-nowrap\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-slate-400 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
           <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"md:w-40 h-8\\">
-          <zselect-stub backgroundclass=\\"bg-ink-200\\" borderclass=\\"border-ink-200\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
+          <zselect-stub backgroundclass=\\"bg-ink-200\\" borderclass=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
@@ -38,7 +38,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 `;
 
 exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue":30,"metricMeta":{"shortcode":"DftPnk","name":"Daft Punk","unit":""},"namespacesTrend":{"key":"javascript","valueTrend":{"labels":["2022-05-30T12:44:02.022478+00:00","2022-06-01T12:44:02.022478+00:00","2022-06-02T12:44:02.022478+00:00","2022-06-03T12:44:02.022478+00:00","2022-05-28T12:44:02.022478+00:00","2022-05-31T12:44:02.022478+00:00","2022-05-29T12:44:02.022478+00:00","2022-06-04T12:44:02.022478+00:00","2022-06-05T12:44:02.022478+00:00","2022-06-07T12:44:02.022478+00:00","2022-06-06T12:44:02.022478+00:00"],"values":[84,68,78,55,94,51,58,82,90,68,85]},"isPassing":true,"valueDisplay":"85%","analyzerShortcode":"javascript","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/javascript.svg","threshold":50}} 1`] = `
-"<div class=\\"space-y-4 px-6 py-4 border-b border-ink-200\\">
+"<div class=\\"space-y-4 px-6 py-4 border-b border-slate-400\\">
   <div>
     <div class=\\"flex flex-wrap md:flex-nowrap items-start gap-x-2 gap-y-4\\">
       <div class=\\"flex-grow space-y-1.5\\">
@@ -49,7 +49,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
               javascript
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-ink-200 px-2 py-0 text-sm bg-ink-300\\">
+          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
             <zicon-stub icon=\\"metric-high\\" color=\\"juniper\\" size=\\"x-small\\"></zicon-stub><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Threshold passing</span>
             <!---->
           </div>
@@ -63,7 +63,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 `;
 
 exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue":30,"metricMeta":{"shortcode":"DftPnk","name":"Daft Punk","unit":"%"},"namespacesTrend":{"key":"aggregate","valueTrend":{"labels":["2022-05-30T12:44:02.022478+00:00","2022-06-01T12:44:02.022478+00:00","2022-06-02T12:44:02.022478+00:00","2022-06-03T12:44:02.022478+00:00","2022-05-28T12:44:02.022478+00:00","2022-05-31T12:44:02.022478+00:00","2022-05-29T12:44:02.022478+00:00","2022-06-04T12:44:02.022478+00:00","2022-06-05T12:44:02.022478+00:00","2022-06-07T12:44:02.022478+00:00","2022-06-06T12:44:02.022478+00:00"],"values":[84,68,78,55,94,51,58,82,90,68,85]},"isPassing":true,"valueDisplay":"85%","analyzerShortcode":"javascript","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/javascript.svg","threshold":50}} 1`] = `
-"<div class=\\"space-y-4 px-6 py-4 border-b border-ink-200 bg-ink-300\\">
+"<div class=\\"space-y-4 px-6 py-4 border-b border-slate-400 bg-ink-300\\">
   <div>
     <div class=\\"flex flex-wrap md:flex-nowrap items-start gap-x-2 gap-y-4\\">
       <div class=\\"flex-grow space-y-1.5\\">
@@ -74,7 +74,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
               Daft Punk
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-ink-200 px-2 py-0 text-sm bg-ink-300\\">
+          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
             <zicon-stub icon=\\"metric-high\\" color=\\"juniper\\" size=\\"x-small\\"></zicon-stub><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Threshold passing</span>
             <!---->
           </div>
@@ -83,11 +83,11 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 
         </p>
       </div>
-      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0 flex-wrap md:flex-nowrap\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-ink-100 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
+      <div class=\\"flex items-center gap-2 justify-between md:justify-start flex-grow md:flex-grow-0 flex-wrap md:flex-nowrap\\"><a href=\\"https://deepsource.io/docs/dashboard/repo-overview/#metric-aggregate-calculation\\" type=\\"link\\" class=\\"inline-flex items-center font-medium transition-colors duration-300 ease-in-out rounded-sm z-btn focus:outline-none whitespace-nowrap border border-slate-400 border-dashed text-vanilla-100 justify-center z-btn--vanilla-100 p-0 h-8 px-4 py-1 text-xs space-x-1 leading-loose font-normal hover:bg-ink-200\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\">
           <zicon-stub icon=\\"help-circle\\" color=\\"vanilla-100\\" size=\\"small\\" class=\\"mr-1.5\\"></zicon-stub>How’s this calculated?
         </a>
         <div class=\\"md:w-40 h-8\\">
-          <zselect-stub backgroundclass=\\"bg-ink-200\\" borderclass=\\"border-ink-200\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
+          <zselect-stub backgroundclass=\\"bg-ink-200\\" borderclass=\\"border-slate-400\\" border-radius=\\"rounded-sm\\" spacing=\\"px-2 py-1\\" placeholder=\\"Duration filter\\" value=\\"30\\">
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 30 days</div>
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 60 days</div>
             <div class=\\"p-2 cursor-pointer z-option text-vanilla-300 hover:bg-ink-200 text-xs\\">Last 90 days</div>
@@ -100,7 +100,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
 `;
 
 exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue":30,"metricMeta":{"shortcode":"DftPnk","name":"Daft Punk","unit":"%"},"namespacesTrend":{"key":"javascript","valueTrend":{"labels":["2022-05-30T12:44:02.022478+00:00","2022-06-01T12:44:02.022478+00:00","2022-06-02T12:44:02.022478+00:00","2022-06-03T12:44:02.022478+00:00","2022-05-28T12:44:02.022478+00:00","2022-05-31T12:44:02.022478+00:00","2022-05-29T12:44:02.022478+00:00","2022-06-04T12:44:02.022478+00:00","2022-06-05T12:44:02.022478+00:00","2022-06-07T12:44:02.022478+00:00","2022-06-06T12:44:02.022478+00:00"],"values":[84,68,78,55,94,51,58,82,90,68,85]},"isPassing":true,"valueDisplay":"85%","analyzerShortcode":"javascript","analyzerLogo":"https://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/javascript.svg","threshold":50}} 1`] = `
-"<div class=\\"space-y-4 px-6 py-4 border-b border-ink-200\\">
+"<div class=\\"space-y-4 px-6 py-4 border-b border-slate-400\\">
   <div>
     <div class=\\"flex flex-wrap md:flex-nowrap items-start gap-x-2 gap-y-4\\">
       <div class=\\"flex-grow space-y-1.5\\">
@@ -111,7 +111,7 @@ exports[`[[EmptyTrend]] renders EmptyTrend with all prop options: {"filterValue"
               javascript
             </h1>
           </div>
-          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-ink-200 px-2 py-0 text-sm bg-ink-300\\">
+          <div class=\\"inline-flex items-center space-x-2 rounded-full justify-evenly text-vanilla-100 border border-slate-400 px-2 py-0 text-sm bg-ink-300\\">
             <zicon-stub icon=\\"metric-high\\" color=\\"juniper\\" size=\\"x-small\\"></zicon-stub><span class=\\"font-semibold text-xxs uppercase tracking-wider leading-none py-1.5 text-juniper\\">Threshold passing</span>
             <!---->
           </div>

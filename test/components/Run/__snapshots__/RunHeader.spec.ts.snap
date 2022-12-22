@@ -8,14 +8,14 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
           <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
     <div class=\\"flex gap-x-3\\">
-      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-3px pl-2 pr-3 h-7\\">
+      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-slate-400 rounded-3px pl-2 pr-3 h-7\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
           </a></div>
@@ -53,14 +53,14 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
           <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
     <div class=\\"flex gap-x-3\\">
-      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-3px pl-2 pr-3 h-7\\">
+      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-slate-400 rounded-3px pl-2 pr-3 h-7\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
           </a></div>
@@ -98,14 +98,14 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
           <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
     <div class=\\"flex gap-x-3\\">
-      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-3px pl-2 pr-3 h-7\\">
+      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-slate-400 rounded-3px pl-2 pr-3 h-7\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
           </a></div>
@@ -143,14 +143,14 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
           <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
     <div class=\\"flex gap-x-3\\">
-      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-3px pl-2 pr-3 h-7\\">
+      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-slate-400 rounded-3px pl-2 pr-3 h-7\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
           </a></div>
@@ -188,14 +188,14 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
           <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
     <div class=\\"flex gap-x-3\\">
-      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-3px pl-2 pr-3 h-7\\">
+      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-slate-400 rounded-3px pl-2 pr-3 h-7\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
           </a></div>
@@ -233,14 +233,14 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
-      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-ink-200 py-0.5 px-2 hidden md:inline-flex\\">
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
           <zicon-stub icon=\\"check\\" size=\\"small\\" position=\\"\\" color=\\"juniper\\" class=\\"flex-shrink-0\\"></zicon-stub> <span class=\\"font-semibold leading-7 tracking-wider uppercase text-vanilla-200 text-xxs\\">Running</span>
         </div>
       </ztag-stub>
     </div>
     <div class=\\"flex gap-x-3\\">
-      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-3px pl-2 pr-3 h-7\\">
+      <div class=\\"flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-slate-400 rounded-3px pl-2 pr-3 h-7\\">
         <zicon-stub icon=\\"git-pull-request\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
         <div class=\\"text-sm text-vanilla-400 line-clamp-1\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/pull/77\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\" data-original-title=\\"null\\" class=\\" has-tooltip\\">#77
           </a></div>

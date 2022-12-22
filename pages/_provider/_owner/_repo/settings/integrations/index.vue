@@ -8,7 +8,7 @@
       v-if="!$fetchState.pending && !integrations.length"
       title="No integrations installed"
       subtitle="You can install them from organization settings"
-      class="border border-dashed rounded-lg border-ink-200"
+      class="border border-dashed rounded-lg border-slate-400"
     >
       <nuxt-link :to="$generateRoute(['settings', 'integrations'], false)" slot="action">
         <z-button size="small">

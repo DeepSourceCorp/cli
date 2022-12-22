@@ -22,7 +22,7 @@
         <h2 class="flex-shrink-0 font-medium tracking-wider uppercase text-vanilla-400">
           Analyzers
         </h2>
-        <hr class="flex-grow border-ink-200" />
+        <hr class="flex-grow border-slate-400" />
       </div>
       <div
         v-if="areAnalyzersLoading"
@@ -53,7 +53,7 @@
         <h2 class="flex-shrink-0 font-medium tracking-wider uppercase text-vanilla-400">
           Transformers
         </h2>
-        <hr class="flex-grow border-ink-200" />
+        <hr class="flex-grow border-slate-400" />
       </div>
       <div
         v-if="areTransformersLoading"
@@ -160,7 +160,7 @@ export default class AnalyzersDirectory extends mixins(MetaMixin) {
 </script>
 <style scoped>
 .directory-hero {
-  background-image: linear-gradient(rgba(22, 24, 29, 0), rgba(22, 24, 29, 0.9)),
+  background-image: linear-gradient(rgba(18, 19, 23, 0), rgba(18, 19, 23, 0.9)),
     url('~assets/images/analyzer-dir/directory_bg.svg');
   background-repeat: no-repeat;
   background-size: cover;

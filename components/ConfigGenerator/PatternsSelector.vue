@@ -25,7 +25,7 @@
           autocorrect="off"
           autocapitalize="off"
           spellcheck="false"
-          class="w-full font-mono h-full p-2 text-xs bg-transparent border outline-none resize-none min-h-20 border-ink-200 text-vanilla-200"
+          class="w-full font-mono h-full p-2 text-xs bg-transparent border outline-none resize-none min-h-20 border-slate-400 text-vanilla-200"
           placeholder="test/**
 integration_tests/tests_*.py
 **/*_test.go"
@@ -50,7 +50,7 @@ integration_tests/tests_*.py
           autocorrect="off"
           autocapitalize="off"
           spellcheck="false"
-          class="w-full font-mono h-full p-2 text-xs bg-transparent border outline-none resize-none min-h-20 border-ink-200 text-vanilla-200"
+          class="w-full font-mono h-full p-2 text-xs bg-transparent border outline-none resize-none min-h-20 border-slate-400 text-vanilla-200"
           placeholder="migrations/**
 /dist/*min.js"
         ></textarea>

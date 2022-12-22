@@ -1,5 +1,5 @@
 <template>
-  <div class="rounded-md border border-ink-200 px-4 py-3">
+  <div class="rounded-md border border-slate-400 px-4 py-3">
     <div>
       <div class="w-5/6 h-6 bg-ink-300 animate-pulse"></div>
       <div class="flex space-x-5 mt-4">

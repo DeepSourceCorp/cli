@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":false,"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
@@ -26,7 +26,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 `;
 
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":false,"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
@@ -49,7 +49,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 `;
 
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":true,"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
@@ -74,7 +74,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 `;
 
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":true,"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
@@ -97,7 +97,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 `;
 
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":false,"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
@@ -129,7 +129,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 `;
 
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":false,"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
@@ -159,7 +159,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 `;
 
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":true,"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
@@ -191,7 +191,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 `;
 
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":true,"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
@@ -221,7 +221,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 `;
 
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":false,"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
@@ -246,7 +246,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 `;
 
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":false,"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
@@ -269,7 +269,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 `;
 
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":true,"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
@@ -294,7 +294,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 `;
 
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":true,"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
@@ -317,7 +317,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 `;
 
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":false,"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
@@ -349,7 +349,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 `;
 
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":false,"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
@@ -379,7 +379,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 `;
 
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":true,"allowPinningReports":false} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
@@ -411,7 +411,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 `;
 
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":true,"allowPinningReports":true} 1`] = `
-"<div class=\\"py-4 border border-ink-200 gap-y-2 rounded-md min-h-96\\">
+"<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
     <div class=\\"inline-flex items-center justify-between w-full\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>

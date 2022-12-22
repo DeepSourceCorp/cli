@@ -42,7 +42,7 @@
     <!-- Mobile layout -->
     <div class="flex flex-col items-center md:hidden">
       <z-tabs class="w-full -mb-px">
-        <div class="flex justify-between px-4 border-b border-ink-200">
+        <div class="flex justify-between px-4 border-b border-slate-400">
           <z-tab-list class="flex pt-4 space-x-4 overflow-auto sm:w-auto hide-scroll">
             <z-tab-item class="flex items-center flex-shrink-0" icon="tachometer-fast">
               <span>Recommended Projects</span>
@@ -215,7 +215,7 @@ export default class Discover extends mixins(MetaMixin) {
 
 <style scoped>
 .discover-mobile-hero {
-  background-image: linear-gradient(rgba(22, 24, 29, 0), rgba(22, 24, 29, 0.9)),
+  background-image: linear-gradient(rgba(18, 19, 23, 0), rgba(18, 19, 23, 0.9)),
     url('~assets/images/discover/discover-mobile-bg.svg');
   background-position: center;
   background-repeat: no-repeat;
@@ -239,7 +239,7 @@ export default class Discover extends mixins(MetaMixin) {
 
 @responsive {
   .discover-hero {
-    background-image: linear-gradient(rgba(22, 24, 29, 0), rgba(22, 24, 29, 0.9)),
+    background-image: linear-gradient(rgba(18, 19, 23, 0), rgba(18, 19, 23, 0.9)),
       url('~assets/images/discover/discover-bg.svg');
     background-position: center;
     background-repeat: no-repeat;

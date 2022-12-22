@@ -11,7 +11,7 @@
             >
           </span>
         </div>
-        <z-tag class="border border-ink-200 py-0.5 px-2 hidden md:inline-flex" spacing="">
+        <z-tag class="border border-slate-400 py-0.5 px-2 hidden md:inline-flex" spacing="">
           <div class="flex items-center gap-x-1">
             <z-icon
               :icon="getCheckStatusIcon(currentCheck.status)"
@@ -28,7 +28,7 @@
       </div>
       <div class="flex gap-x-3">
         <div
-          class="flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-ink-50 rounded-3px pl-2 pr-3 h-7"
+          class="flex items-center gap-x-2 bg-ink-200 hover:bg-ink-100 border border-slate-400 rounded-3px pl-2 pr-3 h-7"
         >
           <z-icon
             :icon="isForDefaultBranch ? 'git-branch' : 'git-pull-request'"
@@ -49,7 +49,7 @@
           <template #trigger="{ toggle, isOpen }">
             <button
               @click="toggle"
-              class="flex items-center gap-x-2 px-2 h-7 rounded-3px cursor-pointer border border-ink-50"
+              class="flex items-center gap-x-2 px-2 h-7 rounded-3px cursor-pointer border border-slate-400"
               :class="[isOpen ? 'bg-ink-100' : 'bg-ink-200 hover:bg-ink-100']"
             >
               <div class="flex items-center text-sm gap-x-2 text-vanilla-400">
@@ -67,7 +67,7 @@
           <template #body>
             <z-menu-section
               :divider="false"
-              class="overflow-y-auto border divide-y rounded-md border-ink-200 divide-ink-200 max-h-96 hide-scroll"
+              class="overflow-y-auto border divide-y rounded-md border-slate-400 divide-ink-200 max-h-96 hide-scroll"
             >
               <z-menu-item
                 v-for="run in branchRuns"

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex-col hidden p-2 space-y-4 border-r border-ink-200 lg:flex">
+  <div class="flex-col hidden p-2 space-y-4 border-r border-slate-400 lg:flex">
     <!-- Issue Types View -->
     <slot name="cta"></slot>
     <section class="flex-shrink space-y-1 overflow-y-scroll hide-scroll">

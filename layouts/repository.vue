@@ -4,7 +4,7 @@
     <logged-out-sidebar v-else />
     <div class="w-full">
       <mobile-nav
-        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-ink-200"
+        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-slate-400"
       />
       <repo-header :key="repository.id" class="z-40 w-full md:sticky top-10 lg:top-0" />
       <!--

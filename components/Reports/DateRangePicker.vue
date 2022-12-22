@@ -4,7 +4,7 @@
       v-model="modelValue"
       :disabled="disabled"
       background-class="bg-ink-300"
-      border-class="border-ink-300"
+      border-class="border-slate-400"
     >
       <template #icon>
         <z-icon

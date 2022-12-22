@@ -22,7 +22,7 @@
           ></div>
           <div
             v-if="show"
-            class="p-6 mx-2 border rounded-lg bg-ink-400 bg-opacity-40 blur border-ink-100 transform-gpu sm:p-10 sm:mx-0"
+            class="p-6 mx-2 border rounded-lg bg-ink-400 bg-opacity-40 blur border-slate-400 transform-gpu sm:p-10 sm:mx-0"
             :class="{
               'max-w-sm': width === 'sm',
               'max-w-md': width === 'md',

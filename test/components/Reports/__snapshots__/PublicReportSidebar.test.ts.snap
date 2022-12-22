@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ PublicReportSidebar ]] renders PublicReportSidebar with all prop options: {"ownerLogin":"deepsourcelabs","reportId":"123456","ownerLogo":"https://static.deepsource.io/dashboard/images/empty-avatar.svg","reports":["owasp-top-10","sans-top-25","issue-distribution"]} 1`] = `
-"<aside data-testid=\\"public-report-sidebar\\" class=\\"fixed top-0 z-50 flex-shrink-0 w-64 h-screen overflow-y-auto px-6 py-6 duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-ink-200 lg:border-none -left-full\\" data-outside-click-index=\\"0\\">
+"<aside data-testid=\\"public-report-sidebar\\" class=\\"fixed top-0 z-50 flex-shrink-0 w-64 h-screen overflow-y-auto px-6 py-6 duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-slate-400 lg:border-none -left-full\\" data-outside-click-index=\\"0\\">
   <div class=\\"space-y-4\\">
     <div class=\\"w-15 p-2.5 bg-ink-200 rounded-sm\\"><img src=\\"https://static.deepsource.io/dashboard/images/empty-avatar.svg\\" alt=\\"deepsourcelabs logo\\" width=\\"42\\"></div>
     <h1 class=\\"text-vanilla-200 text-1.5xl font-semibold break-words\\">

@@ -39,7 +39,7 @@
     </div>
     <template v-slot:footer="{ close }">
       <div
-        class="flex items-center justify-end p-4 space-x-4 text-right text-vanilla-100 border-ink-200"
+        class="flex items-center justify-end p-4 space-x-4 text-right text-vanilla-100 border-slate-400"
       >
         <z-button button-type="ghost" class="text-vanilla-100" size="small" @click="close">
           I've changed my mind

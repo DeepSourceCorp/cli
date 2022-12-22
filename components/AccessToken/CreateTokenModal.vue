@@ -38,7 +38,7 @@
           max-length="32"
           placeholder="What’s this token for?"
           :required="true"
-          class="rounded-md border-ink-200"
+          class="rounded-md border-slate-400"
         />
       </label>
       <label for="expiry" class="block space-y-2 text-sm text-vanilla-200">
@@ -60,7 +60,7 @@
       </label>
     </fieldset>
     <template v-if="!showSuccess">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-ink-200">
+      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
         <z-button
           :is-loading="savingToken"
           :disabled="disableAction"

@@ -6,7 +6,7 @@
         v-for="issue in issueTypes"
         class="p-5 transition-all duration-100 border rounded-md cursor-pointer"
         :key="issue.name"
-        :class="issue.isChecked ? 'bg-ink-300 border-ink-200' : 'bg-ink-400 border-ink-300'"
+        :class="issue.isChecked ? 'bg-ink-300 border-slate-400' : 'bg-ink-400 border-slate-400'"
         @click.prevent="issue.isChecked = !issue.isChecked"
       >
         <div class="space-y-2">

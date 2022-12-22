@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-wrap sm:flex-nowrap gap-2">
     <div v-if="loading">
-      <div class="min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm">
-        <div class="bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2">
+      <div class="min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm">
+        <div class="bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2">
           <div class="bg-ink-100 animate-pulse w-full h-4 rounded-md"></div>
         </div>
         <div class="flex justify-center items-center px-2">

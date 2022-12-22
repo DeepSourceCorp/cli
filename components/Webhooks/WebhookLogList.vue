@@ -1,5 +1,5 @@
 <template>
-  <div class="border border-ink-200 rounded-md">
+  <div class="border border-slate-400 rounded-md">
     <div class="p-3 grid grid-cols-6 text-sm">
       <span> Status </span>
       <span class="col-span-3"> Event name </span>
@@ -7,11 +7,11 @@
       <span class="col-span-1 text-right"> Finished in </span>
     </div>
     <ul
-      class="divide-y divide-ink-200 border-t border-ink-200 max-h-96 overflow-scroll default-scroll"
+      class="divide-y divide-ink-200 border-t border-slate-400 max-h-96 overflow-scroll default-scroll"
     >
       <webhook-log-list-item v-for="event in endpointDeliveries" :key="event.id" v-bind="event" />
     </ul>
-    <div v-if="pageCount > 1" class="p-3 flex justify-center border-t border-ink-200">
+    <div v-if="pageCount > 1" class="p-3 flex justify-center border-t border-slate-400">
       <z-pagination
         :total-pages="pageCount"
         :total-visible="5"

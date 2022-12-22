@@ -1,11 +1,11 @@
 <template>
   <section
-    :class="isWidget ? 'max-h-92 overflow-y-scroll' : 'rounded-md border border-ink-200'"
-    class="overflow-x-auto hide-scroll leading-normal"
+    :class="isWidget ? 'max-h-92 overflow-y-scroll' : 'rounded-md border border-slate-400'"
+    class="overflow-x-auto leading-normal hide-scroll"
   >
-    <table class="table-fixed cursor w-full">
-      <thead :class="isWidget ? 'border-ink-300' : 'border-ink-200'" class="border-b">
-        <tr class="uppercase text-vanilla-400 text-xs font-semibold">
+    <table class="w-full table-fixed cursor">
+      <thead class="border-b border-slate-400">
+        <tr class="text-xs font-semibold uppercase text-vanilla-400">
           <th
             :class="isWidget ? 'pl-5' : 'pl-4 sm:w-auto'"
             class="py-2.5 text-left w-48 font-semibold"
@@ -39,7 +39,7 @@
             :key="repoCoverage.id"
             :class="{ 'hover:bg-ink-300': linkedRows }"
           >
-            <td class="text-left truncate text-sm">
+            <td class="text-sm text-left truncate">
               <component
                 :is="linkedRows ? 'nuxt-link' : 'div'"
                 :to="$generateRoute([repoCoverage.name, 'metrics', 'LCV'])"

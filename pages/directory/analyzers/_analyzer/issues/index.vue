@@ -1,10 +1,10 @@
 <template>
   <div>
     <div
-      class="flex flex-row-reverse items-center px-4 py-3 border-b gap-x-2 border-ink-200 lg:flex-row"
+      class="flex flex-row-reverse items-center px-4 py-3 border-b gap-x-2 border-slate-400 lg:flex-row"
     >
       <div
-        class="duration-300 ease-in-out border rounded-md border-ink-200"
+        class="duration-300 ease-in-out border rounded-md border-slate-400"
         :class="
           onlyAutofix
             ? 'border-solid bg-vanilla-100 bg-opacity-5'

@@ -7,7 +7,7 @@
         rel="noopener noreferrer"
         v-for="inv in invoices"
         :key="inv.invoiceId"
-        class="flex items-center w-full p-4 space-x-4 border rounded-md cursor-pointer group border-ink-200 border-opacity-70 hover:bg-ink-300 hover:border-ink-200 text-vanilla-400 hover:text-vanilla-100"
+        class="flex items-center w-full p-4 space-x-4 border rounded-md cursor-pointer group border-slate-400 border-opacity-70 hover:bg-ink-300 hover:border-slate-400 text-vanilla-400 hover:text-vanilla-100"
       >
         <!-- Replace with PDF -->
         <z-icon icon="file-text" size="base" color="current" />

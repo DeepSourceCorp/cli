@@ -4,13 +4,13 @@
     <logged-out-sidebar v-else />
     <div class="w-full">
       <mobile-nav
-        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-ink-200"
+        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-slate-400"
       />
       <dashboard-header class="z-30 w-full md:sticky md:top-10 lg:top-0" />
 
       <!-- Tabs list -->
       <div
-        class="sticky z-30 flex px-3 pt-3 overflow-x-scroll border-b border-ink-200 gap-x-5 bg-ink-400 hide-scroll tabs-list-container"
+        class="sticky z-30 flex px-3 pt-3 overflow-x-scroll border-b border-slate-400 gap-x-5 bg-ink-400 hide-scroll tabs-list-container"
       >
         <template v-for="tab in tabsList">
           <nuxt-link

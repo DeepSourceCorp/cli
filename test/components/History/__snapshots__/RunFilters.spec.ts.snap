@@ -528,8 +528,8 @@ exports[`renders RunFilters with all prop options: RunCard 25`] = `
 exports[`renders RunFilters with all prop options: RunCard 26`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -551,8 +551,8 @@ exports[`renders RunFilters with all prop options: RunCard 26`] = `
 exports[`renders RunFilters with all prop options: RunCard 27`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -574,8 +574,8 @@ exports[`renders RunFilters with all prop options: RunCard 27`] = `
 exports[`renders RunFilters with all prop options: RunCard 28`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -597,8 +597,8 @@ exports[`renders RunFilters with all prop options: RunCard 28`] = `
 exports[`renders RunFilters with all prop options: RunCard 29`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -620,8 +620,8 @@ exports[`renders RunFilters with all prop options: RunCard 29`] = `
 exports[`renders RunFilters with all prop options: RunCard 30`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -643,8 +643,8 @@ exports[`renders RunFilters with all prop options: RunCard 30`] = `
 exports[`renders RunFilters with all prop options: RunCard 31`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -666,8 +666,8 @@ exports[`renders RunFilters with all prop options: RunCard 31`] = `
 exports[`renders RunFilters with all prop options: RunCard 32`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -689,8 +689,8 @@ exports[`renders RunFilters with all prop options: RunCard 32`] = `
 exports[`renders RunFilters with all prop options: RunCard 33`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -712,8 +712,8 @@ exports[`renders RunFilters with all prop options: RunCard 33`] = `
 exports[`renders RunFilters with all prop options: RunCard 34`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -735,8 +735,8 @@ exports[`renders RunFilters with all prop options: RunCard 34`] = `
 exports[`renders RunFilters with all prop options: RunCard 35`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -758,8 +758,8 @@ exports[`renders RunFilters with all prop options: RunCard 35`] = `
 exports[`renders RunFilters with all prop options: RunCard 36`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -781,8 +781,8 @@ exports[`renders RunFilters with all prop options: RunCard 36`] = `
 exports[`renders RunFilters with all prop options: RunCard 37`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -804,8 +804,8 @@ exports[`renders RunFilters with all prop options: RunCard 37`] = `
 exports[`renders RunFilters with all prop options: RunCard 38`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -827,8 +827,8 @@ exports[`renders RunFilters with all prop options: RunCard 38`] = `
 exports[`renders RunFilters with all prop options: RunCard 39`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -850,8 +850,8 @@ exports[`renders RunFilters with all prop options: RunCard 39`] = `
 exports[`renders RunFilters with all prop options: RunCard 40`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -873,8 +873,8 @@ exports[`renders RunFilters with all prop options: RunCard 40`] = `
 exports[`renders RunFilters with all prop options: RunCard 41`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -896,8 +896,8 @@ exports[`renders RunFilters with all prop options: RunCard 41`] = `
 exports[`renders RunFilters with all prop options: RunCard 42`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -919,8 +919,8 @@ exports[`renders RunFilters with all prop options: RunCard 42`] = `
 exports[`renders RunFilters with all prop options: RunCard 43`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -942,8 +942,8 @@ exports[`renders RunFilters with all prop options: RunCard 43`] = `
 exports[`renders RunFilters with all prop options: RunCard 44`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -965,8 +965,8 @@ exports[`renders RunFilters with all prop options: RunCard 44`] = `
 exports[`renders RunFilters with all prop options: RunCard 45`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -988,8 +988,8 @@ exports[`renders RunFilters with all prop options: RunCard 45`] = `
 exports[`renders RunFilters with all prop options: RunCard 46`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1011,8 +1011,8 @@ exports[`renders RunFilters with all prop options: RunCard 46`] = `
 exports[`renders RunFilters with all prop options: RunCard 47`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1034,8 +1034,8 @@ exports[`renders RunFilters with all prop options: RunCard 47`] = `
 exports[`renders RunFilters with all prop options: RunCard 48`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1057,8 +1057,8 @@ exports[`renders RunFilters with all prop options: RunCard 48`] = `
 exports[`renders RunFilters with all prop options: RunCard 49`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1080,8 +1080,8 @@ exports[`renders RunFilters with all prop options: RunCard 49`] = `
 exports[`renders RunFilters with all prop options: RunCard 50`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1103,8 +1103,8 @@ exports[`renders RunFilters with all prop options: RunCard 50`] = `
 exports[`renders RunFilters with all prop options: RunCard 51`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1126,8 +1126,8 @@ exports[`renders RunFilters with all prop options: RunCard 51`] = `
 exports[`renders RunFilters with all prop options: RunCard 52`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1149,8 +1149,8 @@ exports[`renders RunFilters with all prop options: RunCard 52`] = `
 exports[`renders RunFilters with all prop options: RunCard 53`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1172,8 +1172,8 @@ exports[`renders RunFilters with all prop options: RunCard 53`] = `
 exports[`renders RunFilters with all prop options: RunCard 54`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1195,8 +1195,8 @@ exports[`renders RunFilters with all prop options: RunCard 54`] = `
 exports[`renders RunFilters with all prop options: RunCard 55`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1218,8 +1218,8 @@ exports[`renders RunFilters with all prop options: RunCard 55`] = `
 exports[`renders RunFilters with all prop options: RunCard 56`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1241,8 +1241,8 @@ exports[`renders RunFilters with all prop options: RunCard 56`] = `
 exports[`renders RunFilters with all prop options: RunCard 57`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1264,8 +1264,8 @@ exports[`renders RunFilters with all prop options: RunCard 57`] = `
 exports[`renders RunFilters with all prop options: RunCard 58`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1287,8 +1287,8 @@ exports[`renders RunFilters with all prop options: RunCard 58`] = `
 exports[`renders RunFilters with all prop options: RunCard 59`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1310,8 +1310,8 @@ exports[`renders RunFilters with all prop options: RunCard 59`] = `
 exports[`renders RunFilters with all prop options: RunCard 60`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1333,8 +1333,8 @@ exports[`renders RunFilters with all prop options: RunCard 60`] = `
 exports[`renders RunFilters with all prop options: RunCard 61`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1356,8 +1356,8 @@ exports[`renders RunFilters with all prop options: RunCard 61`] = `
 exports[`renders RunFilters with all prop options: RunCard 62`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1379,8 +1379,8 @@ exports[`renders RunFilters with all prop options: RunCard 62`] = `
 exports[`renders RunFilters with all prop options: RunCard 63`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1402,8 +1402,8 @@ exports[`renders RunFilters with all prop options: RunCard 63`] = `
 exports[`renders RunFilters with all prop options: RunCard 64`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1425,8 +1425,8 @@ exports[`renders RunFilters with all prop options: RunCard 64`] = `
 exports[`renders RunFilters with all prop options: RunCard 65`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1448,8 +1448,8 @@ exports[`renders RunFilters with all prop options: RunCard 65`] = `
 exports[`renders RunFilters with all prop options: RunCard 66`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1471,8 +1471,8 @@ exports[`renders RunFilters with all prop options: RunCard 66`] = `
 exports[`renders RunFilters with all prop options: RunCard 67`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1494,8 +1494,8 @@ exports[`renders RunFilters with all prop options: RunCard 67`] = `
 exports[`renders RunFilters with all prop options: RunCard 68`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1517,8 +1517,8 @@ exports[`renders RunFilters with all prop options: RunCard 68`] = `
 exports[`renders RunFilters with all prop options: RunCard 69`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1540,8 +1540,8 @@ exports[`renders RunFilters with all prop options: RunCard 69`] = `
 exports[`renders RunFilters with all prop options: RunCard 70`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1563,8 +1563,8 @@ exports[`renders RunFilters with all prop options: RunCard 70`] = `
 exports[`renders RunFilters with all prop options: RunCard 71`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1586,8 +1586,8 @@ exports[`renders RunFilters with all prop options: RunCard 71`] = `
 exports[`renders RunFilters with all prop options: RunCard 72`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1609,8 +1609,8 @@ exports[`renders RunFilters with all prop options: RunCard 72`] = `
 exports[`renders RunFilters with all prop options: RunCard 73`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1632,8 +1632,8 @@ exports[`renders RunFilters with all prop options: RunCard 73`] = `
 exports[`renders RunFilters with all prop options: RunCard 74`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">
@@ -1655,8 +1655,8 @@ exports[`renders RunFilters with all prop options: RunCard 74`] = `
 exports[`renders RunFilters with all prop options: RunCard 75`] = `
 "<div class=\\"flex flex-wrap sm:flex-nowrap gap-2\\">
   <div>
-    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-ink-200 rounded-sm\\">
-      <div class=\\"bg-ink-200 border-r border-ink-200 flex justify-center items-center px-2\\">
+    <div class=\\"min-w-52 h-8 grid grid-cols-2 border border-slate-400 rounded-sm\\">
+      <div class=\\"bg-ink-200 border-r border-slate-400 flex justify-center items-center px-2\\">
         <div class=\\"bg-ink-100 animate-pulse w-full h-4 rounded-md\\"></div>
       </div>
       <div class=\\"flex justify-center items-center px-2\\">

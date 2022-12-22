@@ -34,7 +34,7 @@
       </div>
     </div>
     <template v-slot:footer="{ close }">
-      <div class="p-4 space-x-3 text-right text-vanilla-100 border-ink-200">
+      <div class="p-4 space-x-3 text-right text-vanilla-100 border-slate-400">
         <z-button
           icon="check-circle"
           :is-loading="isLoading"

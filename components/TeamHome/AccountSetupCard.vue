@@ -1,5 +1,5 @@
 <template>
-  <div class="col-span-1 border rounded-md border-ink-200 xl:col-span-2">
+  <div class="col-span-1 border rounded-md border-slate-400 xl:col-span-2">
     <div v-if="completion > 0" class="p-2">Account setup is {{ completion }}% complete</div>
     <div v-else class="p-2">Setup your account</div>
     <div class="w-full h-1 bg-ink-200">
@@ -14,7 +14,7 @@
       <div v-for="(step, index) in steps" :key="index" class="flex items-start space-x-2">
         <div
           class="grid flex-shrink-0 w-4 h-4 rounded-full place-content-center"
-          :class="getStatus(step) ? 'bg-juniper stroke-4' : 'border-2 border-ink-50'"
+          :class="getStatus(step) ? 'bg-juniper stroke-4' : 'border-2 border-slate-400'"
           :style="{
             'stroke-width': 4
           }"

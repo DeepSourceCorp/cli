@@ -1,7 +1,7 @@
 <template>
   <div class="reports-nav-container">
     <nav
-      class="lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-ink-200"
+      class="lg:w-64 hidden lg:flex gap-x-8 lg:flex-col lg:gap-y-4 pt-2 lg:pt-2 overflow-x-auto hide-scroll lg:sticky border-b lg:border-b-0 lg:border-r border-slate-400"
       :class="atOwnerLevel ? 'vertical-sidebar-owner-level' : 'vertical-sidebar-repository-level'"
     >
       <div class="flex flex-shrink-0 gap-x-8 lg:flex-col lg:gap-y-1 pr-0 pl-4 lg:px-2">

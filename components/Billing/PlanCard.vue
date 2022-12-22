@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="border rounded-md border-ink-300 min-h-24 group">
+    <div class="border rounded-md border-slate-400 min-h-24 group">
       <div
         class="p-5 space-y-8"
         :class="{
           'bg-ink-300': isPrimary,
-          'border-b border-ink-300': features.length
+          'border-b border-slate-400': features.length
         }"
       >
         <div class="space-y-5">

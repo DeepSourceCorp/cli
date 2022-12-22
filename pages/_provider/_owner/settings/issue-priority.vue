@@ -65,7 +65,7 @@
         :priority="issue.issuePriority.ownerIssuePriority.slug"
         :can-change-priority="canChangePriority"
         :class="{
-          'border-b border-ink-200': position < issueList.length - 1
+          'border-b border-slate-400': position < issueList.length - 1
         }"
         @priority-edited="editPriority(issue.shortcode, $event)"
         @priority-unset="unsetPriority(issue.shortcode)"
@@ -83,7 +83,7 @@
       :use-v2="true"
       title="No priority assignments found"
       subtitle="You haven't assigned priorities to any issues yet."
-      class="border border-dashed rounded-lg border-2 border-ink-200 py-20"
+      class="border border-dashed rounded-lg border-2 border-slate-400 py-20"
     >
       <template slot="action">
         <div class="flex">

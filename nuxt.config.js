@@ -148,7 +148,7 @@ export default {
   loadingIndicator: {
     name: 'pulse',
     color: '#f5f5f5',
-    background: '#16181D'
+    background: '#121317'
   },
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

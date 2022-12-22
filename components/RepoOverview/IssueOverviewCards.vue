@@ -2,8 +2,8 @@
   <stat-section
     :body-spacing="0"
     :grid-spacing="0"
-    spacing-class="p-0 gap-px"
-    header-spacing-class="pl-4 pr-2 py-2"
+    spacing-class="gap-px p-0"
+    header-spacing-class="py-2 pl-4 pr-2"
     customGridClass="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
   >
     <div slot="title" class="flex items-center justify-between">
@@ -30,7 +30,11 @@
       />
     </div>
     <template v-if="$fetchState.pending">
-      <div v-for="idx in loaderCount" :key="idx" class="p-2 space-y-4 h-22 sm:h-24 outline-ink-200">
+      <div
+        v-for="idx in loaderCount"
+        :key="idx"
+        class="p-2 space-y-4 h-22 sm:h-24 outline-slate-400"
+      >
         <div class="h-6 rounded-md bg-ink-300 w-36 animate-pulse"></div>
         <div class="h-6 rounded-md bg-ink-300 w-14 animate-pulse"></div>
       </div>
@@ -47,7 +51,7 @@
           :trend-positive="isTrendPositive(issueWidgets[widget])"
           :trend-value="issueWidgets[widget].trend_value"
           :remove-styles="true"
-          class="outline-ink-200 hover:bg-ink-300 p-3"
+          class="p-3 outline-slate-400 hover:bg-ink-300"
           :class="{
             [issueWidgets[widget].value_display === '']:
               'text-lg font-medium tracking-wider text-vanilla-400'

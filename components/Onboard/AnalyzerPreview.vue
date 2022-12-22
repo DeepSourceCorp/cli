@@ -1,6 +1,6 @@
 <template>
   <div class="flex w-11/12 rounded-md bg-ink-300 h-80">
-    <section class="w-2/5 p-4 space-y-4 border-r border-ink-200">
+    <section class="w-2/5 p-4 space-y-4 border-r border-slate-400">
       <!-- Avatar and header -->
       <div class="flex items-center space-x-2">
         <!-- Avatar Component -->
@@ -56,7 +56,7 @@
       <!-- placeholder -->
       <div class="w-full h-5 rounded-md bg-ink-200"></div>
       <!-- Tab Component -->
-      <div class="flex text-sm text-center border-b gap-x-5 border-ink-200">
+      <div class="flex text-sm text-center border-b gap-x-5 border-slate-400">
         <div
           v-for="tab in tabs"
           :key="tab.name"
@@ -78,7 +78,7 @@
           <!-- Recently added analyzer in expanded state -->
           <div
             v-if="index == selectedAnalyzers.length - 1"
-            class="inline-flex items-center px-2 py-1 space-x-1 border-2 border-solid bg-ink-200 border-ink-400"
+            class="inline-flex items-center px-2 py-1 space-x-1 border-2 border-solid bg-ink-200 border-slate-400"
           >
             <analyzer-logo v-bind="analyzer" :hideTooltip="true" />
             <span class="text-sm font-bold text-vanilla-200">{{ analyzer.label }}</span>

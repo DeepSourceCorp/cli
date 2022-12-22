@@ -1,5 +1,5 @@
 <template>
-  <div id="tabs" class="flex xl:col-span-2 pt-2.5 pb-0 border-b border-ink-200">
+  <div id="tabs" class="flex xl:col-span-2 pt-2.5 pb-0 border-b border-slate-400">
     <div class="flex self-end px-2 space-x-5 overflow-auto md:px-4 flex-nowrap">
       <template v-for="settings in settingsOptions">
         <nuxt-link :key="settings.name" :to="settings.route">

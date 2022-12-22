@@ -2,7 +2,7 @@
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"ENTERPRISE","reportKey":"issue-distribution"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
@@ -45,7 +45,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"ENTERPRISE","reportKey":"owasp-top-10"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP® Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
@@ -98,7 +98,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"ENTERPRISE","reportKey":"sans-top-25"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">CWE/SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
@@ -148,7 +148,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"OWNER","reportKey":"issue-distribution"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
@@ -191,7 +191,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"OWNER","reportKey":"owasp-top-10"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP® Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
@@ -244,7 +244,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"OWNER","reportKey":"sans-top-25"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">CWE/SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
@@ -294,7 +294,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"REPOSITORY","reportKey":"issue-distribution"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">Issue Distribution report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
@@ -337,7 +337,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"REPOSITORY","reportKey":"owasp-top-10"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">OWASP® Top 10 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022
@@ -390,7 +390,7 @@ exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Ju
 
 exports[`renders PublicReportPageWrapper with all prop options: {"createdAt":"Jul 25, 2022","ownerLogin":"deepsourcelabs","level":"REPOSITORY","reportKey":"sans-top-25"} 1`] = `
 "<main>
-  <header class=\\"space-y-4 md:space-y-1 border-b border-ink-200 pb-8\\">
+  <header class=\\"space-y-4 md:space-y-1 border-b border-slate-400 pb-8\\">
     <h1 class=\\"text-lg md:text-2xl font-semibold\\">CWE/SANS Top 25 report</h1>
     <p class=\\"text-vanilla-400 tracking-wide text-xs md:text-sm font-medium\\">
       Created on Jul 25, 2022

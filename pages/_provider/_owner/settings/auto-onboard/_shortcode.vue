@@ -1,6 +1,6 @@
 <template>
   <section>
-    <div class="px-4 py-3.5 min-h-13 border-b border-ink-200 flex flex-row items-center">
+    <div class="px-4 py-3.5 min-h-13 border-b border-slate-400 flex flex-row items-center">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['settings', 'auto-onboard'])">All templates</nuxt-link>

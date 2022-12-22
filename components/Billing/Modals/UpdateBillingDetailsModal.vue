@@ -33,7 +33,7 @@
           v-model="billingAddress"
           id="billing-address"
           :placeholder="`Avengers Tower \n200 Park Avenue, New York`"
-          class="focus-within:border-vanilla-400 border-ink-100 bg-ink-400 text-vanilla-300"
+          class="focus-within:border-vanilla-400 border-slate-400 bg-ink-400 text-vanilla-300"
         ></z-textarea>
       </fieldset>
     </div>

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders EmptyState with all prop options: EmptyState 1`] = `
-"<section class=\\"w-full px-3.5 md:px-12 py-12 md:py-19 border border-dashed rounded-md border-ink-200 flex flex-wrap md:flex-nowrap items-start gap-x-7 gap-y-8 justify-center\\">
+"<section class=\\"w-full px-3.5 md:px-12 py-12 md:py-19 border border-dashed rounded-md border-slate-400 flex flex-wrap md:flex-nowrap items-start gap-x-7 gap-y-8 justify-center\\">
   <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"w-full md:w-auto\\"></emptystatepicture-stub>
   <div class=\\"text-center md:text-left max-w-2xs\\">
     <h3 class=\\"text-vanilla-100 mt-7 md:mt-0 text-base font-medium\\"> No data found</h3>
@@ -23,7 +23,7 @@ exports[`renders EmptyState with all prop options: EmptyState 2`] = `
 `;
 
 exports[`renders EmptyState with all prop options: EmptyState 3`] = `
-"<section class=\\"w-full px-3.5 md:px-12 py-12 md:py-19 border border-dashed rounded-md border-ink-200\\">
+"<section class=\\"w-full px-3.5 md:px-12 py-12 md:py-19 border border-dashed rounded-md border-slate-400\\">
   <emptystatepicture-stub webp-image-path=\\"test-image-dir/test-image-file.png\\" png-image-path=\\"test-image-dir/test-image-file.png\\" svg-image-path=\\"\\" width=\\"w-auto\\" alt-text=\\"This page has no data\\" height=\\"h-17 md:h-20\\" class=\\"\\"></emptystatepicture-stub>
   <div class=\\"\\">
     <h3 class=\\"text-vanilla-100 mt-7 md:mt-5 text-center text-lg font-semibold\\"> No data found</h3>

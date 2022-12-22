@@ -3,19 +3,19 @@
     <h1 class="text-lg font-medium">License overview</h1>
     <div class="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-3">
       <div
-        class="border border-ink-200 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
+        class="border border-slate-400 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
       >
         <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Total seats</p>
         <span class="text-xl font-semibold">{{ orgLicenseData.seatsTotal }}</span>
       </div>
       <div
-        class="border border-ink-200 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
+        class="border border-slate-400 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
       >
         <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Seats used</p>
         <span class="text-xl font-semibold">{{ orgLicenseData.seatsUsed }}</span>
       </div>
       <div
-        class="border border-ink-200 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
+        class="border border-slate-400 rounded-md py-3 px-3.5 bg-ink-300 flex flex-col justify-between min-h-23"
       >
         <p class="text-sm font-medium tracking-wider uppercase text-vanilla-400">Valid till</p>
         <span class="text-xl font-semibold">{{

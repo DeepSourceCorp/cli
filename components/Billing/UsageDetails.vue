@@ -5,9 +5,9 @@
 
     <div
       v-else
-      class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 bg-ink-400 border-ink-200"
+      class="grid w-full grid-cols-1 border rounded-md md:grid-cols-2 bg-ink-400 border-slate-400"
     >
-      <div v-if="owner.featureUsage" class="p-4 space-y-4 border-r border-ink-200">
+      <div v-if="owner.featureUsage" class="p-4 space-y-4 border-r border-slate-400">
         <h5 class="text-xs font-medium leading-none tracking-wider uppercase text-vanilla-400">
           Usage this month
         </h5>

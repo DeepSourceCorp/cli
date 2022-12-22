@@ -10,7 +10,7 @@
     <div class="lg:flex lg:flex-grow">
       <div
         v-if="analyzer && analyzer.issues"
-        class="hidden w-full p-4 text-sm border-r max-w-min border-ink-200 lg:block"
+        class="hidden w-full p-4 text-sm border-r max-w-min border-slate-400 lg:block"
       >
         <analyzer-issues-filter
           :active-filter="issueCategory"

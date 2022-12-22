@@ -2,7 +2,7 @@
   <section class="flex flex-col space-y-4 h-full">
     <div
       v-if="hasAutoOnboardEvents"
-      class="px-4 py-3 border-b border-ink-200 flex flex-row items-center"
+      class="px-4 py-3 border-b border-slate-400 flex flex-row items-center"
     >
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400 cursor-pointer">

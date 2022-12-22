@@ -8,7 +8,7 @@ exports[`[[ CreateTokenModal ]] Renders CreateTokenModal 1`] = `
       tokens have the same privileges as you.
     </p> <label for=\\"title\\" class=\\"block space-y-2 text-sm text-vanilla-200\\">
       <p class=\\"ml-px text-sm font-semibold text-vanilla-300\\">Token label</p>
-      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"What’s this token for?\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\" maxlength=\\"32\\" required=\\"true\\" id=\\"title\\" class=\\"rounded-md border-ink-200\\"></zinput-stub>
+      <zinput-stub name=\\"\\" value=\\"\\" label=\\"\\" type=\\"text\\" placeholder=\\"What’s this token for?\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" showborder=\\"true\\" errorbordercolor=\\"cherry\\" maxlength=\\"32\\" required=\\"true\\" id=\\"title\\" class=\\"rounded-md border-slate-400\\"></zinput-stub>
     </label> <label for=\\"expiry\\" class=\\"block space-y-2 text-sm text-vanilla-200\\">
       <p class=\\"ml-px text-sm font-semibold text-vanilla-300\\">Expiration</p>
       <div class=\\"h-10\\">
@@ -24,7 +24,7 @@ exports[`[[ CreateTokenModal ]] Renders CreateTokenModal 1`] = `
       <p class=\\"ml-px text-xs text-honey\\">Expires on Feb 21, 2055</p>
     </label>
   </fieldset>
-  <div class=\\"p-4 space-x-4 text-right text-vanilla-100 border-ink-200\\">
+  <div class=\\"p-4 space-x-4 text-right text-vanilla-100 border-slate-400\\">
     <zbutton-stub color=\\"\\" iconcolor=\\"\\" label=\\"Generate\\" loadinglabel=\\"Generating\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"primary\\" type=\\"button\\" size=\\"small\\" disabled=\\"true\\" to=\\"\\" icon=\\"check\\" class=\\"modal-primary-action\\"></zbutton-stub>
   </div>
 </zmodal-stub>"

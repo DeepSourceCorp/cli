@@ -44,7 +44,7 @@
 
     <recent-stats :current-val="currentVal" :stats="recentStats" :loading="recentStatsLoading" />
 
-    <div class="overflow-x-auto border rounded-lg border-ink-200">
+    <div class="overflow-x-auto border rounded-lg border-slate-400">
       <z-table class="border-none text-vanilla-100">
         <template #head>
           <z-table-row class="text-xs font-semibold tracking-wider uppercase text-vanilla-400">
@@ -63,19 +63,23 @@
             >
               <z-table-cell class="flex-none w-14 text-left">
                 <div
-                  class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 w-12 -mx-2"
+                  class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 w-12 -mx-2"
                 ></div>
               </z-table-cell>
               <z-table-cell class="flex-none w-16 text-left sm:w-20">
-                <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-4"></div>
+                <div
+                  class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 -mx-4"
+                ></div>
               </z-table-cell>
               <z-table-cell class="text-left pl-1 sm:pl-5">
                 <div
-                  class="h-full w-100 sm:w-auto sm:max-w-md opacity-50 bg-ink-300 animate-pulse border-ink-200 -mr-4"
+                  class="h-full w-100 sm:w-auto sm:max-w-md opacity-50 bg-ink-300 animate-pulse border-slate-400 -mr-4"
                 ></div>
               </z-table-cell>
               <z-table-cell class="ml-20 xl:ml-22 text-right sm:flex-initial pr-8">
-                <div class="h-full opacity-50 bg-ink-300 animate-pulse border-ink-200 -mx-5"></div>
+                <div
+                  class="h-full opacity-50 bg-ink-300 animate-pulse border-slate-400 -mx-5"
+                ></div>
               </z-table-cell>
             </z-table-row>
           </template>

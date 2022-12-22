@@ -1,5 +1,5 @@
 <template>
-  <div class="border-2 border-ink-200 border-dashed rounded-md p-4 md:p-12 text-center">
+  <div class="border-2 border-slate-400 border-dashed rounded-md p-4 md:p-12 text-center">
     <h2 class="font-semibold text-2xl">Autofix app is not installed</h2>
     <p class="max-w-xl mx-auto text-vanilla-400 text-sm mt-4">
       To create commits and pull-requests automatically, we need the Autofix app installed on the

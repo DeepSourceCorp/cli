@@ -2,7 +2,7 @@
 
 exports[`[[ AnalyzerPreview ]] renders AnalyzerPreview 1`] = `
 "<div class=\\"flex w-11/12 rounded-md bg-ink-300 h-80\\">
-  <section class=\\"w-2/5 p-4 space-y-4 border-r border-ink-200\\">
+  <section class=\\"w-2/5 p-4 space-y-4 border-r border-slate-400\\">
     <div class=\\"flex items-center space-x-2\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><span class=\\"flex items-center justify-center text-center rounded-full bg-gradient-skeleton text-vanilla-300 leading-none h-8 w-8 text-sm\\"></span></a>
       <div class=\\"flex items-center space-x-2 text-base font-medium cursor-pointer text-vanilla-200\\">
 
@@ -32,7 +32,7 @@ exports[`[[ AnalyzerPreview ]] renders AnalyzerPreview 1`] = `
       /
       <span class=\\"px-16 ml-2 bg-ink-100\\"></span></div>
     <div class=\\"w-full h-5 rounded-md bg-ink-200\\"></div>
-    <div class=\\"flex text-sm text-center border-b gap-x-5 border-ink-200\\">
+    <div class=\\"flex text-sm text-center border-b gap-x-5 border-slate-400\\">
       <div class=\\"pb-1 border-b-2 -mb-0.5 text-vanilla-400 border-transparent\\">
         Overview
       </div>

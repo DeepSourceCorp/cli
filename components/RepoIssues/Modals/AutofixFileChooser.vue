@@ -59,7 +59,9 @@
         </div>
       </div>
       <template v-slot:footer="{ close }">
-        <div class="p-2 space-x-1 leading-none text-right border-t text-vanilla-100 border-ink-200">
+        <div
+          class="p-2 space-x-1 leading-none text-right border-t text-vanilla-100 border-slate-400"
+        >
           <button
             @click="close()"
             class="inline-flex items-center justify-center h-8 px-4 py-1 space-x-1 text-xs font-medium leading-loose transition-colors duration-300 ease-in-out rounded-sm bg-ink-200 focus:outline-none whitespace-nowrap text-vanilla-100 hover:bg-ink-100"

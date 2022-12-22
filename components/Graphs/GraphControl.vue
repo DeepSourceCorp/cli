@@ -4,7 +4,7 @@
       <z-select
         v-model="currentFilterValue"
         backgroundClass="bg-ink-300"
-        borderClass="border-ink-300"
+        borderClass="border-slate-400"
       >
         <template #icon>
           <z-icon color="vanilla-400" icon="calendar-clock" />

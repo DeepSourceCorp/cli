@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="overflow-x-auto border-b bg-ink-300 border-ink-200">
+    <div class="overflow-x-auto border-b bg-ink-300 border-slate-400">
       <div id="header" class="flex items-center p-4">
         <h2 class="inline-flex items-center space-x-4 font-medium text-vanilla-100">
           <nuxt-link class="inline-flex items-center flex-shrink-0 space-x-2" to="/me">

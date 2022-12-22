@@ -1,7 +1,7 @@
 <template>
   <li
     :class="draggable ? 'bg-ink-200' : 'ignore-element'"
-    class="flex items-center p-2 space-x-2 border rounded-md cursor-pointer border-ink-200 drag-handler"
+    class="flex items-center p-2 space-x-2 border rounded-md cursor-pointer border-slate-400 drag-handler"
     @click="updateRowCheck"
   >
     <z-icon

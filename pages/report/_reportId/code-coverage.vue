@@ -54,7 +54,7 @@
         :webp-image-path="require('~/assets/images/ui-states/directory/empty-search.webp')"
         :png-image-path="require('~/assets/images/ui-states/directory/empty-search.gif')"
         subtitle="Please try changing your search query."
-        class="border border-dashed rounded-lg border-ink-200 py-20"
+        class="border border-dashed rounded-lg border-slate-400 py-20"
       />
 
       <lazy-empty-state

@@ -24,7 +24,7 @@
           <div
             v-for="team in teamsToAdd"
             :key="team.id"
-            class="grid items-center grid-cols-2 p-4 border rounded-md border-ink-200 bg-ink-300"
+            class="grid items-center grid-cols-2 p-4 border rounded-md border-slate-400 bg-ink-300"
           >
             <div class="flex items-center gap-x-3">
               <z-avatar

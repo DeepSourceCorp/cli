@@ -3,7 +3,7 @@
     :is="to ? 'nuxt-link' : 'li'"
     :to="to"
     tag="li"
-    class="flex space-x-2 hover:bg-ink-300 cursor-pointer border-b border-ink-300 last:border-none p-2"
+    class="flex space-x-2 hover:bg-ink-300 cursor-pointer border-b border-slate-400 last:border-none p-2"
   >
     <div class="w-2/3 flex items-center text-sm">
       <div class="w-8 flex items-center">

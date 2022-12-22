@@ -1,6 +1,6 @@
 <template>
   <section>
-    <section class="px-4 py-3.5 min-h-13 border-b border-ink-200 flex flex-row items-center">
+    <section class="px-4 py-3.5 min-h-13 border-b border-slate-400 flex flex-row items-center">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['settings', 'webhooks'])">All endpoints</nuxt-link>

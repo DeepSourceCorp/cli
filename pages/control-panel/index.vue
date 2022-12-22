@@ -35,7 +35,7 @@
             :href="card.href ? card.href : managementConsoleUrl ? managementConsoleUrl : null"
             :target="card.to ? false : '_blank'"
             :rel="card.to ? false : 'noopener noreferrer'"
-            class="p-4 border rounded-md cursor-pointer border-ink-200 hover:bg-ink-300"
+            class="p-4 border rounded-md cursor-pointer border-slate-400 hover:bg-ink-300"
           >
             <div class="flex items-center justify-center w-12 h-12 rounded-sm bg-ink-200">
               <z-icon :icon="card.icon" size="large" />

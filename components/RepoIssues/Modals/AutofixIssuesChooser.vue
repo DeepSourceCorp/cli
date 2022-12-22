@@ -81,7 +81,7 @@
       </div>
       <template v-slot:footer="{ close }">
         <div
-          class="p-4 space-x-4 text-right text-vanilla-100 border-t border-ink-200 flex items-center justify-end"
+          class="p-4 space-x-4 text-right text-vanilla-100 border-t border-slate-400 flex items-center justify-end"
         >
           <z-button buttonType="secondary" size="small" @click="close">Cancel</z-button>
           <z-button

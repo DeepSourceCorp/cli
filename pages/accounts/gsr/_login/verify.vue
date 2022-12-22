@@ -44,7 +44,7 @@
         <p class="text-sm text-vanilla-300">The following is the URL for the webhook endpoint:</p>
         <client-only>
           <div
-            class="flex items-center justify-between p-2 space-x-2 overflow-scroll border rounded-md hide-scroll bg-ink-400 border-ink-50"
+            class="flex items-center justify-between p-2 space-x-2 overflow-scroll border rounded-md hide-scroll bg-ink-400 border-slate-400"
           >
             <span class="overflow-x-scroll font-mono text-sm text-vanilla-300 default-scroll">
               {{ webhookUrl }}
@@ -85,7 +85,7 @@
           and add the register the following public key.
         </p>
         <div
-          class="p-2 overflow-scroll font-mono text-sm break-words border rounded-md default-scroll bg-ink-400 text-vanilla-300 border-ink-50 max-h-24"
+          class="p-2 overflow-scroll font-mono text-sm break-words border rounded-md default-scroll bg-ink-400 text-vanilla-300 border-slate-400 max-h-24"
         >
           {{ owner.ownerSetting.publicKey }}
         </div>

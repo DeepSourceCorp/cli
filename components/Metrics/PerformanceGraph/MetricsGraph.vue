@@ -21,7 +21,7 @@
       v-model="selectedIndex"
     ></graph-data-selector>
     <div
-      class="col-span-1 border-l lg:col-span-2 xl:col-span-3 2xl:col-span-4 border-ink-300 divide-y divide-ink-300"
+      class="col-span-1 border-l lg:col-span-2 xl:col-span-3 2xl:col-span-4 border-slate-400 divide-y divide-ink-300"
     >
       <div v-for="ns in namespaces" :key="ns">
         <graph-chart

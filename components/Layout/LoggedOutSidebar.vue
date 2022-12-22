@@ -13,7 +13,7 @@
       footerBrandClass="bg-ink-300 px-4"
     >
       <template slot="header">
-        <section class="p-4 border-b border-ink-200">
+        <section class="p-4 border-b border-slate-400">
           <img
             src="~/assets/images/logo-wordmark-white.svg"
             alt="DeepSource"

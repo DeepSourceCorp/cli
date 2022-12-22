@@ -1,14 +1,14 @@
 <template>
   <section class="space-y-4">
-    <div class="border rounded-md bg-ink-400 border-ink-200">
-      <div class="p-5 font-medium border-ink-200">Your first analysis is running...</div>
+    <div class="border rounded-md bg-ink-400 border-slate-400">
+      <div class="p-5 font-medium border-slate-400">Your first analysis is running...</div>
       <div
         v-for="(stage, index) in stages"
         :key="stage.title"
         class="flex items-center justify-between px-5 py-5 text-sm"
         :class="{
-          'bg-ink-300 border-t border-ink-200': stage.status === 'in-progress',
-          'border-t border-ink-200': index === 0,
+          'bg-ink-300 border-t border-slate-400': stage.status === 'in-progress',
+          'border-t border-slate-400': index === 0,
           'border-b': stage.status === 'in-progress' && index !== stages.length - 1,
           'border-b-0': index === stages.length - 1
         }"

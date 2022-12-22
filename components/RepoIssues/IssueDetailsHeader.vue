@@ -50,7 +50,7 @@
             :key="tag"
             :to="`${$generateRoute(['issues'])}?category=all&q=tag:${tag}`"
             v-tooltip="`View all issues tagged ${deslugifyTag(tag).toUpperCase()}`"
-            class="flex items-center gap-x-1 uppercase border border-ink-200 rounded-full px-1.5 py-1"
+            class="flex items-center gap-x-1 uppercase border border-slate-400 rounded-full px-1.5 py-1"
           >
             <span
               class="w-2 h-2 rounded-full"

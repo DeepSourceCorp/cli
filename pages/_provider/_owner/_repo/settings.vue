@@ -1,7 +1,7 @@
 <template>
   <section class="grid grid-cols-1 lg:grid-cols-16-fr repository-level-settings-page">
     <nav
-      class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-ink-200 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
+      class="hidden px-4 pt-2 overflow-x-auto border-b gap-x-8 hide-scroll border-slate-400 lg:sticky lg:flex lg:flex-col lg:gap-y-1 lg:p-2 lg:border-r vertical-sidebar"
     >
       <template v-for="item in navItems">
         <nuxt-link

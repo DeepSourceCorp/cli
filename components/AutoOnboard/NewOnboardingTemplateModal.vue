@@ -16,7 +16,7 @@
             autocorrect="off"
             autocapitalize="off"
             spellcheck="false"
-            class="w-full h-full p-2 text-sm border rounded-sm outline-none resize-none bg-ink-400 min-h-20 border-ink-100 focus:border-vanilla-400 text-vanilla-200"
+            class="w-full h-full p-2 text-sm border rounded-sm outline-none resize-none bg-ink-400 min-h-20 border-slate-400 focus:border-vanilla-400 text-vanilla-200"
             placeholder="Add a short description of this template to explain where it can be used."
           ></textarea>
         </div>
@@ -34,7 +34,7 @@
         />
         <div class="space-y-3" v-if="activeAnalyzers.length">
           <analyzer
-            class="z-20 border border-ink-100"
+            class="z-20 border border-slate-400"
             v-for="analyzer in activeAnalyzers"
             :key="analyzer.shortcode"
             v-bind="analyzer"
@@ -59,7 +59,7 @@
       </section>
     </div>
     <template v-slot:footer="{ close }">
-      <div class="p-4 space-x-4 text-right text-vanilla-100 border-ink-200">
+      <div class="p-4 space-x-4 text-right text-vanilla-100 border-slate-400">
         <z-button
           :icon="savingConfig ? 'spin-loader' : 'autofix'"
           :iconColor="savingConfig ? 'ink animate-spin' : ''"

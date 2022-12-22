@@ -6,7 +6,7 @@
         ? `/directory/analyzers/${infoObj.shortcode}`
         : `/directory/transformers/${infoObj.shortcode}`
     "
-    class="flex flex-col p-4 border rounded-md border-ink-200 min-h-48"
+    class="flex flex-col p-4 border rounded-md border-slate-400 min-h-48"
     :class="{ 'hover:bg-ink-300 hover:cursor-pointer': infoObj.shortcode }"
   >
     <div class="flex justify-between space-x-2">

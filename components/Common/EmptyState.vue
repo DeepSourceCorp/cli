@@ -2,7 +2,7 @@
   <section
     class="w-full px-3.5 md:px-12 py-12 md:py-19"
     :class="{
-      'border border-dashed rounded-md border-ink-200': showBorder,
+      'border border-dashed rounded-md border-slate-400': showBorder,
       'flex flex-wrap md:flex-nowrap items-start gap-x-7 gap-y-8 justify-center': useV2
     }"
   >

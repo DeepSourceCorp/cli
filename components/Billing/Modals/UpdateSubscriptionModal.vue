@@ -57,7 +57,7 @@
           </span>
         </div>
         <div
-          class="flex items-baseline justify-between pt-3 border-t border-ink-200"
+          class="flex items-baseline justify-between pt-3 border-t border-slate-400"
           v-if="!$fetchState.pending && !planInfo.billedImmediately && planInfo.upcomingBillDate"
         >
           <div>
@@ -72,7 +72,7 @@
             {{ formatUSD(planInfo.upcomingBillAmount) }}
           </span>
         </div>
-        <div class="pt-3 border-t border-ink-200">
+        <div class="pt-3 border-t border-slate-400">
           <div class="flex items-center justify-between">
             <span class="text-base font-semibold">Due today</span>
             <span
@@ -100,7 +100,7 @@
       </section>
     </div>
     <template v-slot:footer="{ close }">
-      <div class="flex justify-between p-4 text-vanilla-100 border-ink-200">
+      <div class="flex justify-between p-4 text-vanilla-100 border-slate-400">
         <div class="items-end hidden md:flex">
           <span class="leading-none bg-ink-200 rounded-bl-md text-xs px-2 py-1.5 text-vanilla-400">
             Powered by

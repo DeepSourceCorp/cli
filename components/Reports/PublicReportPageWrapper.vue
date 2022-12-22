@@ -1,6 +1,6 @@
 <template>
   <main>
-    <header class="space-y-4 md:space-y-1 border-b border-ink-200 pb-8">
+    <header class="space-y-4 md:space-y-1 border-b border-slate-400 pb-8">
       <h1 class="text-lg md:text-2xl font-semibold">{{ label }}</h1>
       <p class="text-vanilla-400 tracking-wide text-xs md:text-sm font-medium">
         Created on {{ createdAt }}

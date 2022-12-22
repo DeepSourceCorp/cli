@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[isWidget ? 'rounded-md' : 'rounded-lg', { 'min-h-96': chartPresent }]"
-    class="py-4 border border-ink-200"
+    class="py-4 border border-slate-400"
   >
     <div v-if="$slots['report-header']" class="px-5">
       <slot name="report-header"></slot>

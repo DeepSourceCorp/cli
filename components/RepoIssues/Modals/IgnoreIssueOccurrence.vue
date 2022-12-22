@@ -17,7 +17,7 @@
         </div>
       </div>
       <template slot="footer">
-        <div class="px-3 py-3 space-x-2 text-right border-t text-vanilla-100 border-ink-200">
+        <div class="px-3 py-3 space-x-2 text-right border-t text-vanilla-100 border-slate-400">
           <z-button
             class="flex items-center space-x-2 modal-primary-action"
             spacing="px-2"

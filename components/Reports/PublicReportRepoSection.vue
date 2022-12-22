@@ -29,7 +29,7 @@
           </div>
           <span
             v-if="totalCount > defaultRepoVisible"
-            class="py-1 px-3 rounded-full h-7 border border-ink-200 leading-5"
+            class="py-1 px-3 rounded-full h-7 border border-slate-400 leading-5"
           >
             +{{ totalCount - defaultRepoVisible }}
           </span>
@@ -50,7 +50,7 @@
               color="vanilla-400"
               icon-color="vanilla-400"
               :class="isOpen && 'bg-ink-200'"
-              class="py-1 px-3 mt-4 border border-ink-200 hover:bg-ink-200"
+              class="py-1 px-3 mt-4 border border-slate-400 hover:bg-ink-200"
               @click="toggle"
             >
               Show all repositories

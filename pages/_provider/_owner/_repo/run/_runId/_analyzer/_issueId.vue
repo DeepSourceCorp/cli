@@ -1,6 +1,6 @@
 <template>
   <main class="pb-6 issue-page">
-    <div class="z-20 p-4 md:sticky top-bar-offset bg-ink-400 border-b border-ink-200">
+    <div class="z-20 p-4 md:sticky top-bar-offset bg-ink-400 border-b border-slate-400">
       <!-- Issue details -->
       <div class="flex flex-col space-y-3 xl:flex-row xl:space-y-0 mb-px">
         <div class="w-full space-y-2.5" v-if="$fetchState.pending || loading">

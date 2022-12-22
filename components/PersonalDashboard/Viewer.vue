@@ -1,6 +1,6 @@
 <template>
   <stat-section :bodyIsGrid="false" :bodySpacing="0">
-    <div class="p-4 space-y-4 border-b border-ink-200">
+    <div class="p-4 space-y-4 border-b border-slate-400">
       <div class="flex space-x-4">
         <z-avatar
           :image="viewer.avatar"

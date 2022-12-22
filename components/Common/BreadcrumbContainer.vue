@@ -1,5 +1,5 @@
 <template>
-  <div class="p-4 border-b border-ink-200">
+  <div class="p-4 border-b border-slate-400">
     <z-breadcrumb separator="/" class="mb-px text-sm text-vanilla-100">
       <z-breadcrumb-item
         v-for="link in links"

@@ -42,12 +42,12 @@
         </z-input>
       </div>
 
-      <div class="flex flex-col overflow-y-auto border rounded-md border-ink-200 h-96 2xl:h-102">
+      <div class="flex flex-col overflow-y-auto border rounded-md border-slate-400 h-96 2xl:h-102">
         <template v-if="$fetchState.pending">
           <div
             v-for="index in 10"
             :key="index"
-            class="p-8 border-b opacity-50 bg-ink-200 animate-pulse border-ink-100"
+            class="p-8 border-b opacity-50 bg-ink-200 animate-pulse border-slate-400"
           ></div>
         </template>
 
@@ -57,7 +57,7 @@
             :key="issue.shortcode"
             :remove-default-style="true"
             :class="{
-              'border-b border-ink-200': issueList.length > 0
+              'border-b border-slate-400': issueList.length > 0
             }"
           >
             <template slot="title">

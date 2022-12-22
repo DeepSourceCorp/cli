@@ -29,7 +29,7 @@
             <span class="text-sm text-vanilla-100">New owner of this team</span>
             <div
               v-if="newOwner"
-              class="flex flex-row justify-between h-10 px-3 space-x-2 border rounded-md shadow-inner bg-ink-200 border-ink-100"
+              class="flex flex-row justify-between h-10 px-3 space-x-2 border rounded-md shadow-inner bg-ink-200 border-slate-400"
             >
               <div class="flex flex-row space-x-2">
                 <div class="my-auto h-7">
@@ -70,7 +70,7 @@
               </z-input>
               <div
                 v-if="showSearchResults"
-                class="absolute z-10 w-full mt-1 overflow-y-auto border rounded-md shadow-double-dark max-h-44 sm:max-h-80 border-ink-100"
+                class="absolute z-10 w-full mt-1 overflow-y-auto border rounded-md shadow-double-dark max-h-44 sm:max-h-80 border-slate-400"
                 tabindex="-1"
               >
                 <div

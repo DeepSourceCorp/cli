@@ -17,7 +17,7 @@
       <div
         v-for="idx in loaderCount"
         :key="idx"
-        class="flex w-full h-12 px-4 py-3 space-x-3 border-b border-ink-300 last:border-none"
+        class="flex w-full h-12 px-4 py-3 space-x-3 border-b border-slate-400 last:border-none"
       >
         <div class="w-5 h-full rounded-md bg-ink-300 animate-pulse"></div>
         <div class="w-1/4 h-full rounded-md bg-ink-300 animate-pulse"></div>

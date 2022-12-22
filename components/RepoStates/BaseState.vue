@@ -1,6 +1,6 @@
 <template>
   <section
-    class="grid border border-dashed rounded-md border-ink-200 place-content-center"
+    class="grid border border-dashed rounded-md border-slate-400 place-content-center"
     :class="[heightClass, spacingClass]"
   >
     <slot name="hero"></slot>

@@ -32,7 +32,7 @@
           <p class="text-xs text-vanilla-400">Estimated time to be saved</p>
         </div>
       </div>
-      <div class="w-full sm:border-r border-ink-200">
+      <div class="w-full sm:border-r border-slate-400">
         <div class="flex items-start p-4 space-x-5">
           <graph-legend
             class="w-1/2 md:w-auto"

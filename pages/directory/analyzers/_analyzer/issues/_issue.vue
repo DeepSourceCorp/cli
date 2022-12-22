@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="px-4 py-3 border-b border-ink-200">
+    <div class="px-4 py-3 border-b border-slate-400">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item>
           <nuxt-link :to="`${analyzerUrl}/issues`" class="text-vanilla-400">All issues</nuxt-link>
@@ -8,7 +8,7 @@
         <z-breadcrumb-item isCurrent>{{ issue.shortcode }}</z-breadcrumb-item>
       </z-breadcrumb>
     </div>
-    <div class="p-4 border-b border-ink-200">
+    <div class="p-4 border-b border-slate-400">
       <div class="max-w-prose">
         <h1 v-if="isLoaded" class="text-2xl font-semibold">
           <span v-html="safeRenderBackticks(issue.title)" />

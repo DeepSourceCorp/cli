@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="px-4 py-4 border-b border-ink-200">
+    <div class="px-4 py-4 border-b border-slate-400">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="cursor-pointer text-vanilla-400">
           <nuxt-link to="/control-panel/user-management/groups">Groups</nuxt-link>
@@ -13,7 +13,7 @@
       :loading="$fetchState.pending"
       @refetch="refetchData"
     />
-    <div class="flex items-center justify-between px-4 border-b border-ink-200">
+    <div class="flex items-center justify-between px-4 border-b border-slate-400">
       <div class="flex gap-5 pt-3 overflow-auto flex-nowrap">
         <nuxt-link :to="`/control-panel/user-management/groups/${$route.params.groupId}`">
           <z-tab icon="users" border-active-color="vanilla-100" is-active> Users </z-tab>
@@ -44,7 +44,7 @@
           v-for="user in groupUsers"
           :key="user.id"
           :to="`/control-panel/user-management/users/${user.id}`"
-          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-3 gap-x-4 gap-y-2 border-ink-200 hover:bg-ink-300"
+          class="grid items-center grid-cols-1 p-4 border rounded-md md:grid-cols-3 gap-x-4 gap-y-2 border-slate-400 hover:bg-ink-300"
         >
           <control-panel-user-card-info
             :org-user="user"

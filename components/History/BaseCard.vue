@@ -5,13 +5,13 @@
     @click="$emit('click')"
     class="block group"
     :class="{
-      'border rounded-lg border-ink-200': !removeDefaultStyle,
+      'border rounded-lg border-slate-400': !removeDefaultStyle,
       'bg-ink-400 hover:bg-ink-300': to && !removeDefaultStyle
     }"
   >
     <div
       v-if="$slots.header"
-      class="p-3 text-sm border-b border-ink-300 group-hover:border-ink-200 text-vanilla-400"
+      class="p-3 text-sm border-b border-slate-400 group-hover:border-slate-400 text-vanilla-400"
     >
       <slot name="header"></slot>
     </div>
@@ -19,7 +19,7 @@
       <!-- Left Section -->
       <slot name="left-section">
         <div
-          class="space-y-1 text-sm border-ink-300 text-vanilla-400"
+          class="space-y-1 text-sm border-slate-400 text-vanilla-400"
           :class="[{ 'w-full md:w-4/5': showInfo }, customPadding]"
         >
           <div class="flex items-center space-x-2 text-base font-semibold text-vanilla-200">
@@ -33,7 +33,7 @@
         v-if="showInfo"
         class="hidden w-full md:block md:w-1/5"
         :class="{
-          'sm:border-l border-ink-300 group-hover:border-ink-200': !removeDefaultStyle
+          'sm:border-l border-slate-400 group-hover:border-slate-400': !removeDefaultStyle
         }"
       >
         <slot name="info"></slot>

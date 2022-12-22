@@ -3,7 +3,7 @@
     <template #title="{ open, toggleAccordion }">
       <div
         v-if="$slots.header"
-        class="flex w-full item-center justify-between px-4 p-3 border-b border-ink-100 cursor-pointer transition-all duration-300"
+        class="flex w-full item-center justify-between px-4 p-3 border-b border-slate-400 cursor-pointer transition-all duration-300"
         :class="{ 'border-opacity-0': !open }"
         @click="isInModal ? () => undefined : toggleAccordion()"
       >

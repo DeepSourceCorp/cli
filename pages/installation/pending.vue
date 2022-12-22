@@ -4,7 +4,7 @@
       :svg-image-path="require('~/assets/images/ui-states/repo/inactive.svg')"
       title="You have not activated a repository yet"
       subtitle="Click the button below to get started."
-      class="flex flex-col justify-center min-h-full border-2 border-dashed rounded-lg border-ink-200"
+      class="flex flex-col justify-center min-h-full border-2 border-dashed rounded-lg border-slate-400"
     >
       <template #action>
         <z-button

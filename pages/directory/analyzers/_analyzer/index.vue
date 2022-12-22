@@ -2,7 +2,7 @@
   <div class="mb-12">
     <directory-header :info-obj="analyzer" :is-loading="!fullyLoaded" />
     <directory-tabs :active-tab="0" :analyzer-url="analyzerUrl" />
-    <div class="px-4 py-6 border-b border-ink-200">
+    <div class="px-4 py-6 border-b border-slate-400">
       <div class="grid items-center max-w-4xl grid-cols-2 md:grid-cols-3 gap-y-6">
         <div class="grid gap-y-1">
           <p class="text-vanilla-400">Categories</p>
@@ -74,7 +74,7 @@
         <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
           Sample configuration
         </h3>
-        <hr class="flex-grow border-ink-200" />
+        <hr class="flex-grow border-slate-400" />
       </div>
       <toml-box-lite
         v-if="fullyLoaded && analyzer.exampleConfig"
@@ -89,7 +89,7 @@
         <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
           Stats
         </h3>
-        <hr class="flex-grow border-ink-200" />
+        <hr class="flex-grow border-slate-400" />
       </div>
       <div class="mt-4">
         <lazy-empty-state
@@ -109,7 +109,7 @@
         <h3 class="flex-shrink-0 text-sm font-medium tracking-wider uppercase text-vanilla-400">
           Issues
         </h3>
-        <hr class="flex-grow border-ink-200" />
+        <hr class="flex-grow border-slate-400" />
         <nuxt-link
           :to="`/directory/analyzers/${
             this.analyzer.shortcode || this.$route.params.analyzer

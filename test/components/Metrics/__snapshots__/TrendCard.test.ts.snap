@@ -71,7 +71,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -105,7 +105,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -207,7 +207,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -241,7 +241,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -343,7 +343,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -377,7 +377,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -479,7 +479,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":false,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -513,7 +513,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":false,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -615,7 +615,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":false,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -649,7 +649,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":false,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -751,7 +751,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":false,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -785,7 +785,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":false,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -887,7 +887,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -921,7 +921,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1023,7 +1023,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":null,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1057,7 +1057,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":null,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1159,7 +1159,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":null,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1193,7 +1193,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":null,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1295,7 +1295,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":null,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1329,7 +1329,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":null,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1431,7 +1431,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1465,7 +1465,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1567,7 +1567,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":true,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1601,7 +1601,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":true,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1703,7 +1703,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":true,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1737,7 +1737,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":true,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1839,7 +1839,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":true,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1873,7 +1873,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":true,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -1975,7 +1975,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2009,7 +2009,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showAccent":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2111,7 +2111,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry","showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2145,7 +2145,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":"cherry"} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2247,7 +2247,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2281,7 +2281,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2383,7 +2383,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2417,7 +2417,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2519,7 +2519,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2553,7 +2553,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2655,7 +2655,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":false,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2689,7 +2689,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":false,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2791,7 +2791,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":false,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2825,7 +2825,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":false,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2927,7 +2927,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":false,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -2961,7 +2961,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":false,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3063,7 +3063,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3097,7 +3097,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3199,7 +3199,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":null,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3233,7 +3233,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":null,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3335,7 +3335,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":null,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3369,7 +3369,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":null,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3471,7 +3471,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":null,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3505,7 +3505,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":null,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3607,7 +3607,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3641,7 +3641,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3743,7 +3743,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":true,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3777,7 +3777,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":true,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3879,7 +3879,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":true,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -3913,7 +3913,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":true,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4015,7 +4015,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":true,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4049,7 +4049,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":true,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4151,7 +4151,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4185,7 +4185,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showAccent":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4287,7 +4287,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4321,7 +4321,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","color":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-null\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4423,7 +4423,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4457,7 +4457,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4559,7 +4559,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4593,7 +4593,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4695,7 +4695,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4729,7 +4729,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4831,7 +4831,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":false,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4865,7 +4865,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":false,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -4967,7 +4967,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":false,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5001,7 +5001,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":false,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5103,7 +5103,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":false,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5137,7 +5137,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":false,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5239,7 +5239,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5273,7 +5273,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5375,7 +5375,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":null,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5409,7 +5409,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":null,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5511,7 +5511,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":null,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5545,7 +5545,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":null,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5647,7 +5647,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":null,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5681,7 +5681,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":null,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5783,7 +5783,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5817,7 +5817,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <!---->
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 rounded-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 rounded-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5919,7 +5919,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":true,"roundedCorners":false,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -5953,7 +5953,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":true,"roundedCorners":false} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -6055,7 +6055,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":true,"roundedCorners":null,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -6089,7 +6089,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":true,"roundedCorners":null} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -6191,7 +6191,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":true,"roundedCorners":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -6225,7 +6225,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":true,"roundedCorners":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -6327,7 +6327,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":true,"showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -6361,7 +6361,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showAccent":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -6463,7 +6463,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World","showBorder":true} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World
@@ -6497,7 +6497,7 @@ exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World
 exports[`renders TrendCard with all props: {"icon":"python","title":"Hello World"} 1`] = `
 "<div class=\\"flex flex-row w-full overflow-hidden rounded-md\\">
   <div class=\\"w-1 bg-cherry\\"></div>
-  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-ink-300 border-l-0 rounded-r-md\\">
+  <div class=\\"flex flex-col flex-grow px-3 py-2 space-y-2 border border-slate-400 border-l-0 rounded-r-md\\">
     <div class=\\"flex flex-row justify-between\\">
       <h5>
         Hello World

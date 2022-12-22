@@ -1,6 +1,6 @@
 <template>
   <div class="relative top-0 flex flex-col w-full pb-6 space-y-5">
-    <div class="px-4 py-3.5 min-h-13 border-b border-ink-200 flex flex-row items-center">
+    <div class="px-4 py-3.5 min-h-13 border-b border-slate-400 flex flex-row items-center">
       <z-breadcrumb separator="/" class="text-sm text-vanilla-100">
         <z-breadcrumb-item class="text-vanilla-400">
           <nuxt-link :to="$generateRoute(['autofix'])">Autofix</nuxt-link>
@@ -31,7 +31,7 @@
     <!-- banner -->
     <div
       v-if="isAutofixConcluded"
-      class="flex items-center px-4 py-3 space-x-4 border-t border-b bg-ink-300 border-ink-200"
+      class="flex items-center px-4 py-3 space-x-4 border-t border-b bg-ink-300 border-slate-400"
     >
       <div class="flex items-center flex-1 space-x-6">
         <div class="flex items-center space-x-2">

@@ -7,7 +7,7 @@
     />
     <div class="relative grid items-start justify-center flex-grow">
       <div
-        class="max-w-lg p-6 mx-2 space-y-5 border rounded-lg w-120 bg-ink-400 border-ink-100 sm:p-10 sm:mx-0"
+        class="max-w-lg p-6 mx-2 space-y-5 border rounded-lg w-120 bg-ink-400 border-slate-400 sm:p-10 sm:mx-0"
       >
         <h1 class="text-2xl font-bold leading-snug text-vanilla-100">Frontend health report</h1>
         <div class="flex items-center justify-between">

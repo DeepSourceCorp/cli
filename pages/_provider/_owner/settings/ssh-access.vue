@@ -12,7 +12,7 @@
 
     <section v-else-if="owner.ownerSetting.publicKey">
       <div
-        class="p-3 font-mono text-sm break-all border rounded-md border-ink-200 text-vanilla-400"
+        class="p-3 font-mono text-sm break-all border rounded-md border-slate-400 text-vanilla-400"
       >
         {{ owner.ownerSetting.publicKey }}
       </div>

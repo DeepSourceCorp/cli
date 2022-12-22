@@ -50,6 +50,28 @@ module.exports = {
   },
   theme: {
     extend: {
+      colors: {
+        ink: {
+          50: '#303540',
+          100: '#2a2e37',
+          200: '#23262e',
+          300: '#16181d',
+          400: '#121317'
+        },
+        slate: {
+          DEFAULT: '#52575c',
+          200: '#52575c',
+          300: '#24272b',
+          400: '#1d2023'
+        }
+      },
+      borderColor: (theme) => ({
+        ...theme('colors'),
+        DEFAULT: theme('colors.slate.200', 'currentColor')
+      }),
+      outline: (theme) => ({
+        'slate-400': [`1px solid ${theme('colors.slate.400')}`, '0px']
+      }),
       spacing: {
         19: '4.75rem',
         84: '21rem',
@@ -76,8 +98,11 @@ module.exports = {
         '3px': '3px'
       },
       boxShadow: {
-        blur: '-12px 0px 8px rgba(22, 24, 29, 1);'
+        blur: '-12px 0px 8px rgba(18, 19, 23, 1);'
       },
+      // borderColor: {
+      //   DEFAULT: '#52575c'
+      // },
       animation: {
         'glow-bg': 'glow 4s ease-out 1ms infinite',
         'pulse-border-once': 'pulse-border-once 1s ease-in forwards',

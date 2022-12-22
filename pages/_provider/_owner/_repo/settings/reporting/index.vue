@@ -43,7 +43,7 @@
               <div
                 v-for="index in 8"
                 :key="index"
-                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-slate-400"
               ></div>
             </template>
             <template v-else>
@@ -133,7 +133,7 @@
               <div
                 v-for="index in 3"
                 :key="index"
-                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-slate-400"
               ></div>
             </template>
             <template v-else>
@@ -230,7 +230,7 @@
               <div
                 v-for="index in 5"
                 :key="index"
-                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-ink-200"
+                class="p-5 border-b opacity-50 bg-ink-300 animate-pulse border-slate-400"
               ></div>
             </template>
             <template v-else>
@@ -320,7 +320,7 @@
             </label>
             <div
               v-if="hideContents"
-              class="absolute flex items-center justify-between w-full h-10 p-2 border top-8 backdrop-blur bg-ink-400 bg-opacity-10 no-filter:bg-opacity-100 border-ink-200"
+              class="absolute flex items-center justify-between w-full h-10 p-2 border top-8 backdrop-blur bg-ink-400 bg-opacity-10 no-filter:bg-opacity-100 border-slate-400"
             >
               <button
                 class="flex items-center mx-auto text-sm leading-none cursor-pointer gap-x-2"
@@ -390,7 +390,7 @@
           loading-label="Fetching data"
           :disabled="!analyzersWithoutThreshold.length"
           :is-loading="$fetchState.pending"
-          class="float-right border border-dashed border-ink-100"
+          class="float-right border border-dashed border-slate-400"
           @click="showAddThresholdModal = true"
         />
       </div>
@@ -413,7 +413,7 @@
               <div
                 v-for="index in 3"
                 :key="index"
-                class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-ink-200"
+                class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-slate-400"
               ></div>
             </template>
             <template
@@ -488,7 +488,7 @@
         <z-table>
           <template v-slot:body>
             <template v-if="$fetchState.pending">
-              <div class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-ink-200"></div>
+              <div class="border-b opacity-50 h-11 bg-ink-300 animate-pulse border-slate-400"></div>
             </template>
             <z-table-row v-else class="text-vanilla-100 hover:bg-ink-300">
               <z-table-cell text-align="left" class="space-x-1 text-sm font-normal capitalize h-11">

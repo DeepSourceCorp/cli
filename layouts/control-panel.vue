@@ -3,10 +3,10 @@
     <control-panel-sidebar />
     <div class="flex flex-col w-full">
       <mobile-nav
-        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-ink-200"
+        class="sticky top-0 z-30 w-full h-10 border-b lg:hidden bg-ink-300 border-slate-400"
       />
       <div
-        class="sticky flex flex-row items-center justify-between border-b top-10 lg:top-0 border-ink-200 px-3.5 py-2.5 z-10 bg-ink-400"
+        class="sticky flex flex-row items-center justify-between border-b top-10 lg:top-0 border-slate-400 px-3.5 py-2.5 z-10 bg-ink-400"
       >
         <div class="flex items-center gap-x-2">
           <div class="flex-shrink-0 w-6 h-6 rounded-sm bg-ink-200">
@@ -48,7 +48,7 @@
         :class="pageSubroutes.length ? 'grid-cols-1 lg:grid-cols-sidebar' : 'grid-cols-1'"
       >
         <div
-          class="sticky z-10 flex gap-5 px-4 pt-3 overflow-auto border-b control-panel-sub-sidebar-offset lg:hidden flex-nowrap border-ink-200 bg-ink-400"
+          class="sticky z-10 flex gap-5 px-4 pt-3 overflow-auto border-b control-panel-sub-sidebar-offset lg:hidden flex-nowrap border-slate-400 bg-ink-400"
         >
           <z-tab
             v-for="cpItem in pageSubroutes"
@@ -64,7 +64,7 @@
         </div>
         <nav
           v-if="pageSubroutes.length"
-          class="control-panel-sub-sidebar sticky border-r border-ink-200 p-2.5 space-y-2.5 hidden lg:block"
+          class="control-panel-sub-sidebar sticky border-r border-slate-400 p-2.5 space-y-2.5 hidden lg:block"
         >
           <sidebar-item
             v-for="cpItem in pageSubroutes"

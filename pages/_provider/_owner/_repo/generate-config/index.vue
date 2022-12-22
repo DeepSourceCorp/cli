@@ -1,7 +1,7 @@
 <template>
   <!-- Title -->
   <div>
-    <div class="flex items-center justify-between p-4 border-b border-ink-200">
+    <div class="flex items-center justify-between p-4 border-b border-slate-400">
       <h4 class="flex items-center space-x-2 text-md text-vanilla-400">
         <z-icon :icon="repository.isPrivate ? 'z-lock' : 'globe'" size="small"></z-icon>
         <span>

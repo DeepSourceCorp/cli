@@ -29,7 +29,7 @@
           :transformer-shortcode="transformerShortcode"
           route="generate-config"
           size="small"
-          class="border rounded-lg hover:bg-ink-200 border-ink-200"
+          class="border rounded-lg hover:bg-ink-200 border-slate-400"
         />
 
         <div

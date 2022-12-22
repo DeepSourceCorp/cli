@@ -1,13 +1,13 @@
 <template>
   <main class="analyzer-page">
     <div
-      class="z-40 flex flex-row items-center justify-between w-full p-2 px-4 space-x-4 border-b bg-ink-400 border-ink-200 md:sticky offset-for-breadcrumbs"
+      class="z-40 flex flex-row items-center justify-between w-full p-2 px-4 space-x-4 border-b bg-ink-400 border-slate-400 md:sticky offset-for-breadcrumbs"
     >
       <div class="flex items-center py-4 md:py-1.5 my-px gap-x-2">
         <nuxt-link
           v-if="previousPageLink"
           :to="previousPageLink"
-          class="flex md:hidden items-center justify-center gap-x-2 w-7 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
+          class="flex md:hidden items-center justify-center gap-x-2 w-7 h-7 rounded-md cursor-pointer border border-slate-400 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
           ><z-icon icon="arrow-left"
         /></nuxt-link>
         <z-breadcrumb :key="$route.path" separator="/" class="text-sm text-vanilla-100">
@@ -32,7 +32,7 @@
         <z-menu class="xl:hidden" direction="left">
           <template #trigger="{ toggle }">
             <button
-              class="flex items-center gap-x-2 px-2 h-7 rounded-md cursor-pointer border border-ink-50 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
+              class="flex items-center gap-x-2 px-2 h-7 rounded-md cursor-pointer border border-slate-400 bg-ink-200 hover:bg-ink-100 text-sm text-vanilla-400"
               @click="toggle"
             >
               All checks
@@ -52,7 +52,7 @@
     </div>
     <div class="grid grid-cols-1 xl:grid-cols-14-fr gap-y-0">
       <div
-        class="sticky flex-col justify-between hidden h-full border-r border-ink-200 xl:flex top-bar-offset run-body-height"
+        class="sticky flex-col justify-between hidden h-full border-r border-slate-400 xl:flex top-bar-offset run-body-height"
       >
         <analyzer-selector
           v-bind="run"
@@ -67,7 +67,7 @@
           v-bind="run"
           :checks="checks"
           :current-analyzer="$route.params.analyzer"
-          class="z-30 border-b bg-ink-400 border-ink-200 md:sticky top-bar-offset"
+          class="z-30 border-b bg-ink-400 border-slate-400 md:sticky top-bar-offset"
         />
         <nuxt-child />
       </div>

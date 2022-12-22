@@ -6,7 +6,7 @@
         <!-- <z-icon icon="support" size="medium" color="vanilla-100" class="mr-2" /> -->
         <h1 class="my-px text-xl font-semibold leading-none">Contact support</h1>
       </div>
-      <hr class="border-ink-200" />
+      <hr class="border-slate-400" />
     </div>
     <div class="p-4 pt-0 max-w-7xl">
       <form

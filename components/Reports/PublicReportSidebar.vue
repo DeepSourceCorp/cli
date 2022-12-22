@@ -2,7 +2,7 @@
   <aside
     v-outside-click="closeSidebar"
     data-testid="public-report-sidebar"
-    class="fixed top-0 z-50 flex-shrink-0 w-64 h-screen overflow-y-auto px-6 py-6 duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-ink-200 lg:border-none"
+    class="fixed top-0 z-50 flex-shrink-0 w-64 h-screen overflow-y-auto px-6 py-6 duration-200 border-r hide-scroll lg:sticky space-y-7 md:pt-20 lg:pt-26 lg:px-4 transform-gpu bg-ink-400 border-slate-400 lg:border-none"
     :class="[isOpen ? 'left-0' : '-left-full']"
   >
     <div class="space-y-4">

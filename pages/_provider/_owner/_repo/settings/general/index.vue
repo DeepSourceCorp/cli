@@ -49,7 +49,7 @@
         label="Enable git submodules"
         input-id="enable-git-submodules"
         v-model="enableGitMod"
-        class="max-w-2xl border-t border-ink-300"
+        class="max-w-2xl border-t border-slate-400"
         @input="updateRepositorySettings"
       >
         <template slot="description">

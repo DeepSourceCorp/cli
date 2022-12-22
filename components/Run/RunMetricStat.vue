@@ -1,10 +1,10 @@
 <template>
-  <div class="py-4 px-3 grid content-between gap-4" :class="{ aggregate: isMetricAggregate }">
+  <div class="grid content-between gap-4 px-3 py-4" :class="{ aggregate: isMetricAggregate }">
     <div v-if="isMetricAggregate" class="flex items-center justify-between w-full">
-      <div class="flex items-center gap-x-2 w-full justify-between">
+      <div class="flex items-center justify-between w-full gap-x-2">
         <div class="flex items-center gap-x-2">
           <z-icon icon="aggregate" />
-          <span class="leading-normal text-sm text-vanilla-100">Aggregate</span>
+          <span class="text-sm leading-normal text-vanilla-100">Aggregate</span>
         </div>
         <div class="flex items-center gap-x-2">
           <ticker
@@ -17,7 +17,7 @@
             custom-bg-class="bg-ink-100"
             :class="[trendPositive ? 'text-juniper' : 'text-cherry']"
           />
-          <span class="stat-value font-semibold leading-snug text-vanilla-100">
+          <span class="font-semibold leading-snug stat-value text-vanilla-100">
             {{ metric.valueDisplay }}</span
           >
         </div>
@@ -26,7 +26,7 @@
 
     <div v-else class="space-y-4">
       <div class="flex justify-between">
-        <div class="flex items-center gap-x-2 leading-normal text-sm text-vanilla-100">
+        <div class="flex items-center text-sm leading-normal gap-x-2 text-vanilla-100">
           <lazy-analyzer-logo
             :name="metric.namespace.key"
             :shortcode="metric.namespace.analyzer_shortcode"
@@ -46,7 +46,7 @@
             custom-bg-class="bg-ink-100"
             :class="[trendPositive ? 'text-juniper' : 'text-cherry']"
           />
-          <span class="stat-value font-semibold leading-snug text-vanilla-100">
+          <span class="font-semibold leading-snug stat-value text-vanilla-100">
             {{ metric.valueDisplay }}</span
           >
         </div>
@@ -55,12 +55,12 @@
 
     <div
       v-if="metricThresholdRelation || showMetricSuppressButton"
-      class="flex w-full gap-x-2 justify-between"
+      class="flex justify-between w-full gap-x-2"
     >
       <div v-if="metricThresholdRelation" class="flex items-center justify-between w-full">
         <div
           v-if="metric.isSuppressed"
-          class="inline-flex items-center space-x-2 px-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
+          class="inline-flex items-center px-2 space-x-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
         >
           <z-icon icon="minus-circle" size="x-small" />
           <span
@@ -70,7 +70,7 @@
         </div>
         <div
           v-else
-          class="inline-flex items-center space-x-2 px-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
+          class="inline-flex items-center px-2 space-x-2 rounded-md justify-evenly text-vanilla-100 bg-ink-100"
         >
           <z-icon
             :icon="metricThresholdRelationIcon"
@@ -86,7 +86,7 @@
       </div>
       <button
         v-if="showMetricSuppressButton"
-        class="flex items-center gap-x-1 px-2 text-xs text-vanilla-400 rounded-md cursor-pointer bg-ink-100 hover:bg-ink-50 border border-ink-50"
+        class="flex items-center px-2 text-xs border rounded-md cursor-pointer gap-x-1 text-vanilla-400 bg-ink-100 hover:bg-ink-50 border-slate-400"
         @click="$emit('confirmMetricSuppression', metric)"
       >
         <z-icon icon="minus-circle" size="x-small" />

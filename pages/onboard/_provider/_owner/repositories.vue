@@ -35,7 +35,7 @@
       </template>
       <empty-state
         v-else
-        class="border-2 border-dashed rounded-md border-ink-200"
+        class="border-2 border-dashed rounded-md border-slate-400"
         :use-v2="true"
         :webp-image-path="
           searchCandidate

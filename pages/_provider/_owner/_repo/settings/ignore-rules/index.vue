@@ -22,7 +22,7 @@
       v-else
       title="No ignored rules"
       subtitle="Ignored rules help you teach DeepSource which issues are not important to you and should be removed. Create a new rule from an issue to see it here."
-      class="py-20 border-2 border-dashed rounded-lg border-ink-200"
+      class="py-20 border-2 border-dashed rounded-lg border-slate-400"
     />
     <ignored-rule-delete-modal
       :isOpen="isDeleteModalOpen"

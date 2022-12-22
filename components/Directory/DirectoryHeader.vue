@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="fixed z-10 flex items-center w-full px-4 py-4 border-b border-ink-200 top-10 lg:top-0 bg-ink-400"
+      class="fixed z-10 flex items-center w-full px-4 py-4 border-b border-slate-400 top-10 lg:top-0 bg-ink-400"
     >
       <z-breadcrumb separator="/" class="py-px text-sm text-vanilla-100">
         <z-breadcrumb-item
@@ -21,7 +21,7 @@
         >
       </z-breadcrumb>
     </div>
-    <div ref="analyzer-dir-header" class="px-4 border-b py-7 border-ink-200 mt-14">
+    <div ref="analyzer-dir-header" class="px-4 border-b py-7 border-slate-400 mt-14">
       <div class="flex items-center space-x-5">
         <div
           class="flex flex-shrink-0 p-4 rounded-md h-26 w-26 place-items-center bg-ink-300"

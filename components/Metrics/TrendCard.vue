@@ -9,7 +9,7 @@
     <div
       class="flex flex-col flex-grow px-3 py-2 space-y-2"
       :class="{
-        'border border-ink-300': showBorder,
+        'border border-slate-400': showBorder,
         'border-l-0': showAccent && showBorder,
         'rounded-r-md': showAccent && roundedCorners,
         'rounded-md': !showAccent && roundedCorners

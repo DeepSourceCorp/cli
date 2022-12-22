@@ -11,7 +11,7 @@
       <div class="max-w-2xl flex flex-col gap-y-2">
         <label class="text-sm text-vanilla-100">Preview</label>
         <!-- Preview component -->
-        <div class="flex flex-col items-center h-40 p-2 border border-ink-200">
+        <div class="flex flex-col items-center h-40 p-2 border border-slate-400">
           <div class="flex justify-center flex-1 item-center">
             <img :src="badgeImageURL" alt="badge" />
           </div>
@@ -37,7 +37,7 @@
           label="Show trend"
           input-id="show-trend"
           v-model="showTrend"
-          class="max-w-2xl border-t border-ink-300"
+          class="max-w-2xl border-t border-slate-400"
         >
           <template slot="description">
             <p class="max-w-sm">
@@ -51,7 +51,7 @@
           </template>
         </toggle-input>
         <!-- Format -->
-        <div class="flex items-center max-w-2xl py-4 border-t border-ink-200">
+        <div class="flex items-center max-w-2xl py-4 border-t border-slate-400">
           <div class="flex-1 text-sm text-vanilla-100">Format</div>
           <div class="w-1/3 md:w-1/4 h-8">
             <z-select v-model="selectedFormat" spacing="py-1 px-2" class="text-sm">
@@ -66,7 +66,7 @@
           </div>
         </div>
         <!-- Add referral -->
-        <div class="flex items-center max-w-2xl py-4 border-t border-ink-200">
+        <div class="flex items-center max-w-2xl py-4 border-t border-slate-400">
           <div class="flex-1 text-sm text-vanilla-100">Add referral to badge</div>
           <z-toggle v-model="addReferral"></z-toggle>
         </div>
