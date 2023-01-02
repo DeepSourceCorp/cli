@@ -14,25 +14,32 @@
       </template>
 
       <div
-        v-show="historicalValuesLoading"
-        class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+        v-if="historicalValuesLoading"
+        class="h-report-chart mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-      <div v-show="!historicalValuesLoading">
-        <z-chart
-          v-if="shouldChartBeShown"
-          :data-sets="datasets"
-          :key="reportRerenderKey"
-          :labels="labels"
-          :colors="['juniper-500', 'juniper-100']"
-          :bar-options="{ stacked: true }"
-          :axis-options="{
-            xIsSeries: true
-          }"
-          :y-axis-min="0"
-          type="bar"
-        />
-        <div v-show="!shouldChartBeShown" class="h-full px-5">
-          <lazy-empty-chart :count="2" :stacked="true" chart-type="bar" base-shade="#33CB9A" />
+      <div v-else>
+        <template v-if="shouldChartBeShown">
+          <z-chart
+            :key="reportRerenderKey"
+            :data-sets="datasets"
+            :labels="labels"
+            :colors="chartColors"
+            :bar-options="{ stacked: true }"
+            :axis-options="{
+              xIsSeries: true
+            }"
+            :y-axis-min="0"
+            type="bar"
+          />
+          <report-chart-legend :datasets="datasets" class="px-5" />
+        </template>
+        <div v-else class="h-full px-5">
+          <lazy-empty-chart
+            :count="2"
+            :stacked="true"
+            :chart-colors="chartColors"
+            chart-type="bar"
+          />
         </div>
       </div>
     </chart-container>
@@ -50,7 +57,8 @@ import ReportMixin from '~/mixins/reportMixin'
 
 import { shortenLargeNumber } from '~/utils/string'
 import { ReportLevel } from '~/types/types'
-import { ReportPageT } from '~/types/reportTypes'
+import { ReportMeta, ReportPageT } from '~/types/reportTypes'
+import { getFormattedIssuesAutofixedChartData } from '~/utils/reports'
 
 /**
  * Repository level page for displaying the current and historical data of the issues Autofixed.
@@ -65,6 +73,8 @@ import { ReportPageT } from '~/types/reportTypes'
   }
 })
 export default class IssuesAutofixedPage extends mixins(RepoDetailMixin, ReportMixin) {
+  readonly chartColors: string[] = ReportMeta[ReportPageT.ISSUES_AUTOFIXED].colors ?? []
+
   /**
    * Fetch report base data recent stats, and trigger chart data fetching.
    *
@@ -121,21 +131,7 @@ export default class IssuesAutofixedPage extends mixins(RepoDetailMixin, ReportM
       ReportPageT.ISSUES_AUTOFIXED
     )
 
-    const prValues = (this.historicalValues.values.pr ?? []) as number[]
-    const defaultBranchValues = (this.historicalValues.values.default_branch ?? []) as number[]
-
-    this.datasets = [
-      {
-        name: 'Fixed in Pull Requests',
-        values: prValues,
-        chartType: 'bar'
-      },
-      {
-        name: 'Fixed in Default Branch',
-        values: defaultBranchValues,
-        chartType: 'bar'
-      }
-    ]
+    this.datasets = getFormattedIssuesAutofixedChartData(this.historicalValues)
   }
 }
 </script>

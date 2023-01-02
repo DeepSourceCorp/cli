@@ -25,24 +25,25 @@
 
         <template v-if="shareHistoricalData">
           <div
-            v-show="historicalValuesLoading"
+            v-if="historicalValuesLoading"
             class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
           ></div>
-          <div v-show="!historicalValuesLoading">
-            <z-chart
-              v-if="shouldChartBeShown"
-              :data-sets="datasets"
-              :key="reportRerenderKey"
-              :labels="labels"
-              :colors="chartColors"
-              :axis-options="{
-                xIsSeries: true
-              }"
-              :y-axis-max="maxLineClip"
-              :y-axis-min="0"
-              type="line"
-            />
-            <div v-show="!shouldChartBeShown" class="h-full px-5">
+          <div v-else>
+            <template v-if="shouldChartBeShown">
+              <z-chart
+                :key="reportRerenderKey"
+                :data-sets="datasets"
+                :labels="labels"
+                :colors="chartColors"
+                :axis-options="{
+                  xIsSeries: true
+                }"
+                :y-axis-max="maxLineClip"
+                :y-axis-min="0"
+                type="line"
+              />
+            </template>
+            <div v-else class="h-full px-5">
               <lazy-empty-chart :count="1" chart-type="line" />
             </div>
           </div>
@@ -130,6 +131,7 @@ import ComplianceReportMixin from '~/mixins/complianceReportMixin'
 
 import { ReportLevel } from '~/types/types'
 import { ReportMeta, ReportPageT } from '~/types/reportTypes'
+import { getFormattedComplianceChartData } from '~/utils/reports'
 
 /**
  * Public Report Child page
@@ -193,14 +195,7 @@ export default class PublicReportSans extends mixins(PublicReportMixin, Complian
 
     await this.fetchPublicReportHistoricalValues(reportId, ReportPageT.SANS_TOP_25, this.token)
 
-    if (Array.isArray(this.historicalValues?.values?.count)) {
-      this.datasets = [
-        {
-          name: 'Active Issues',
-          values: this.historicalValues?.values?.count
-        }
-      ]
-    }
+    this.datasets = getFormattedComplianceChartData(this.historicalValues)
   }
 
   /**

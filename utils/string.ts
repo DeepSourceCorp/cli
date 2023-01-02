@@ -20,11 +20,11 @@ function toTitleCase(candidate: string): string {
     })
 }
 
-function toSentenceCase(candidate: string): string {
+function toSentenceCase(candidate: string, removeWhitespace = true): string {
   if (!candidate) return ''
 
-  const sentence = candidate.replace(/[-, _]/g, ' ').toLowerCase()
-  return sentence.charAt(0).toUpperCase() + sentence.substring(1)
+  const sentence = removeWhitespace ? candidate.replace(/[-, _]/g, ' ').toLowerCase() : candidate
+  return sentence.charAt(0).toUpperCase() + sentence.substring(1).toLowerCase()
 }
 
 const formatter = new Intl.NumberFormat()

@@ -1,5 +1,5 @@
 <template>
-  <div class="text-xs h-14 flex flex-col justify-between">
+  <div class="text-xs sm:h-14 flex flex-col justify-between">
     <p class="text-vanilla-400 mb-2 font-semibold uppercase tracking-wider leading-7">
       <slot name="title">{{ title }}</slot>
     </p>

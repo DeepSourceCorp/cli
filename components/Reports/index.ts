@@ -23,6 +23,7 @@ import ComplianceStatus from './ComplianceStatus.vue'
 import SeverityCounts from './SeverityCounts.vue'
 import PublicReportRepoSection from './PublicReportRepoSection.vue'
 import CreateReportSuccess from './CreateReportSuccess.vue'
+import ReportChartLegend from './ReportChartLegend.vue'
 
 export {
   DateRangePicker,
@@ -49,5 +50,6 @@ export {
   ComplianceStatus,
   SeverityCounts,
   PublicReportRepoSection,
-  CreateReportSuccess
+  CreateReportSuccess,
+  ReportChartLegend
 }

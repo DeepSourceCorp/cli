@@ -32,7 +32,9 @@ describe('[[ Test toTitleCase ]]', () => {
 describe('[[ Test toSentenceCase ]]', () => {
   it('Accepts valid input', () => {
     expect(toSentenceCase(`hello-world`)).toBe('Hello world')
+    expect(toSentenceCase(`hello-world`, false)).toBe('Hello-world')
     expect(toSentenceCase(`hello-world-new_Story`)).toBe('Hello world new story')
+    expect(toSentenceCase(`hello-world-new_Story`, false)).toBe('Hello-world-new_story')
     expect(toSentenceCase(`Hello World`)).toBe('Hello world')
   })
   it('Accepts invalid input', () => {

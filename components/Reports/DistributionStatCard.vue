@@ -13,7 +13,7 @@
         :alt="name"
       />
       <z-icon v-else :icon="slug" color="vanilla-100" class="hidden sm:inline-block" />
-      {{ toSentenceCase(name) }}
+      {{ toSentenceCase(name, false) }}
     </h5>
     <div
       v-tooltip="value > 1000 ? `${formatIntl(value)} ${name}` : ''"

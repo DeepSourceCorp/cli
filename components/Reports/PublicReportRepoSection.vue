@@ -43,9 +43,9 @@
         >
           <template v-slot:trigger="{ toggle, isOpen }">
             <z-button
+              :full-width="true"
               button-type="secondary"
               size="small"
-              full-width="true"
               icon="repositories"
               color="vanilla-400"
               icon-color="vanilla-400"

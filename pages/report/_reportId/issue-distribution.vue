@@ -29,26 +29,38 @@
         </template>
         <template v-if="shareHistoricalData">
           <div
-            v-show="historicalValuesLoading"
-            class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+            v-if="historicalValuesLoading"
+            class="h-report-chart mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
           ></div>
-          <div v-show="!historicalValuesLoading">
-            <z-chart
-              v-if="shouldChartBeShown"
-              :data-sets="issueDistributionData"
-              :key="reportRerenderKey"
-              :labels="labels"
-              :colors="colorShades"
-              :bar-options="{ stacked: true }"
-              :axis-options="{
-                xIsSeries: true
-              }"
-              :y-axis-max="maxBarClip"
-              :y-axis-min="0"
-              type="bar"
-            />
-            <div v-show="!shouldChartBeShown" class="h-full px-5">
-              <lazy-empty-chart :count="5" chart-type="bar" :stacked="true" />
+          <div v-else>
+            <template v-if="shouldChartBeShown">
+              <z-chart
+                :key="reportRerenderKey"
+                :data-sets="issueDistributionData"
+                :labels="labels"
+                :colors="chartColors"
+                :bar-options="{ stacked: true }"
+                :axis-options="{
+                  xIsSeries: true
+                }"
+                :y-axis-max="maxBarClip"
+                :y-axis-min="0"
+                type="bar"
+              />
+
+              <report-chart-legend
+                :datasets="issueDistributionData"
+                :others-dataset-names="othersDatasetNames"
+                class="px-5"
+              />
+            </template>
+            <div v-else class="h-full px-5">
+              <lazy-empty-chart
+                :count="4"
+                :stacked="true"
+                :chart-colors="chartColors"
+                chart-type="bar"
+              />
             </div>
           </div>
         </template>
@@ -84,13 +96,10 @@ import { Component, mixins, Prop } from 'nuxt-property-decorator'
 import { ZChart } from '@deepsource/zeal'
 
 import PublicReportMixin from '~/mixins/publicReportMixin'
+import DistributionReportMixin from '~/mixins/distributionReportMixin'
 
 import { ReportLevel } from '~/types/types'
 import { IssueDistributionT, ReportMeta, ReportPageT } from '~/types/reportTypes'
-import { getColorShades } from '~/utils/ui'
-import DistributionReportMixin from '~/mixins/distributionReportMixin'
-
-const BASE_COLOR = '#1035ad'
 
 /**
  * Public Report Child page
@@ -122,8 +131,7 @@ export default class PublicReportIssueDistribution extends mixins(
 
   readonly ReportPageT = ReportPageT
   readonly IssueDistributionT = IssueDistributionT
-
-  baseColor = BASE_COLOR
+  readonly chartColors: string[] = ReportMeta[ReportPageT.DISTRIBUTION].colors ?? []
 
   /**
    * Created hook for Vue component.
@@ -173,11 +181,7 @@ export default class PublicReportIssueDistribution extends mixins(
 
     await this.fetchPublicReportHistoricalValues(reportId, ReportPageT.DISTRIBUTION, this.token)
 
-    this.setDistributionChartData()
-  }
-
-  get colorShades(): string[] {
-    return getColorShades(BASE_COLOR, this.issueDistributionData.length)
+    this.setDistributionChartData(ReportPageT.DISTRIBUTION)
   }
 
   /**

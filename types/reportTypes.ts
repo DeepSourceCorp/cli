@@ -26,6 +26,8 @@ export type ReportMetaProperties = {
   title: string
   description: string
   type?: ReportType
+  colors?: Array<string>
+  bgColors?: Array<string>
   pinnableType?: PinnableReportType // For use in pinnable reports menu items
   helpText?: string
   level: Array<ReportLevel>
@@ -128,6 +130,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Code Health Trend',
     description: 'Net new code health issues introduced in the code base.',
     type: ReportType.Insight,
+    colors: ['cherry-500', 'juniper-500', 'robin-500'],
+    bgColors: ['bg-cherry-500', 'bg-juniper-500', 'bg-robin-500'],
     pinnableType: PinnableReportType.NON_DISTRIBUTION, // For use in pinnable reports menu items
     helpText: 'Net new code health issues introduced in the code base',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
@@ -157,6 +161,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Issue Distribution',
     description: 'Overview of issues found across categories and Analyzers.',
     type: ReportType.Insight,
+    colors: ['robin-600', 'robin-500', 'robin-400', 'robin-200'],
+    bgColors: ['bg-robin-600', 'bg-robin-500', 'bg-robin-400', 'bg-robin-200'],
     pinnableType: PinnableReportType.DISTRIBUTION, // For use in pinnable reports menu items
     helpText: 'Distribution of all code health issues present in the code base',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
@@ -198,6 +204,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Issues Prevented',
     description: 'Issues prevented from entering the default branch.',
     type: ReportType.Insight,
+    colors: ['juniper-600', 'juniper-500', 'juniper-300', 'juniper-100'],
+    bgColors: ['bg-juniper-600', 'bg-juniper-500', 'bg-juniper-300', 'bg-juniper-100'],
     pinnableType: PinnableReportType.DISTRIBUTION, // For use in pinnable reports menu items
     helpText: 'Issues you’ve prevented from entering the code base',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
@@ -241,6 +249,8 @@ export const ReportMeta: Record<ReportPageT, ReportMetaProperties> = {
     title: 'Issues Autofixed',
     description: 'Issues Autofixed by DeepSource.',
     type: ReportType.Insight,
+    colors: ['juniper-500', 'juniper-100'],
+    bgColors: ['bg-juniper-500', 'bg-juniper-100'],
     pinnableType: PinnableReportType.NON_DISTRIBUTION, // For use in pinnable reports menu items
     helpText: 'Code health issues automatically fixed with Autofix™',
     level: [ReportLevel.Enterprise, ReportLevel.Owner, ReportLevel.Repository],
@@ -323,6 +333,7 @@ export interface Dataset {
   name: string
   values: number[]
   chartType?: string
+  bgColor?: string
 }
 
 export interface HistoricalValues {
@@ -394,18 +405,20 @@ export type CodeHealthTrendMetaProperties = {
 
 export const CodeHealthTrendMeta: Record<CodeHealthTrendT, CodeHealthTrendMetaProperties> = {
   [CodeHealthTrendT.ACTIVE]: {
-    name: 'ISSUES INTRODUCED',
+    name: 'issues introduced',
     chartType: 'bar'
   },
   [CodeHealthTrendT.RESOLVED]: {
-    name: 'ISSUES RESOLVED',
+    name: 'issues resolved',
     chartType: 'bar'
   },
   [CodeHealthTrendT.NET]: {
-    name: 'NET NEW ISSUES',
+    name: 'net new issues',
     chartType: 'line'
   }
 }
+
+export const MAX_INDIVIDUAL_DATASET = 3
 
 // Consumed in pinned reports
 // The following are consumed in pinned reports

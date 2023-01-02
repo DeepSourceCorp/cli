@@ -18,31 +18,33 @@
       </template>
 
       <div
-        v-show="historicalValuesLoading"
-        class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+        v-if="historicalValuesLoading"
+        class="h-report-chart mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-      <div v-show="!historicalValuesLoading">
-        <z-chart
-          v-if="shouldChartBeShown"
-          :data-sets="datasets"
-          :key="reportRerenderKey"
-          :labels="labels"
-          :colors="['cherry-500', 'juniper-500', 'robin-500']"
-          :axis-options="{
-            xIsSeries: true
-          }"
-          :tooltipOptions="{
-            formatTooltipY: (d, set) => (set.index === 1 ? Math.abs(d) : d)
-          }"
-          :bar-options="{ stacked: true }"
-          type="axis-mixed"
-          class="chart-tooltip-z-20"
-        />
-        <div v-show="!shouldChartBeShown" class="h-full px-5">
+      <div v-else>
+        <template v-if="shouldChartBeShown">
+          <z-chart
+            :key="reportRerenderKey"
+            :data-sets="datasets"
+            :labels="labels"
+            :colors="chartColors"
+            :axis-options="{
+              xIsSeries: true
+            }"
+            :tooltip-options="{
+              formatTooltipY: (d, set) => (set.index === 1 ? Math.abs(d) : d)
+            }"
+            :bar-options="{ stacked: true }"
+            type="axis-mixed"
+            class="chart-tooltip-z-20"
+          />
+          <report-chart-legend :datasets="datasets" class="px-5" />
+        </template>
+        <div v-else class="h-full px-5">
           <lazy-empty-chart
             :count="3"
             :length="7"
-            :chart-colors="['cherry-500', 'juniper-500', 'robin-500']"
+            :chart-colors="chartColors"
             :chart-dataset="emptyCodeHealthChartDataSet"
             :stacked="true"
           />
@@ -68,7 +70,7 @@ import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import CodeHealthReportMixin from '~/mixins/codeHealthReportMixin'
 
 import { ReportLevel } from '~/types/types'
-import { ReportPageT } from '~/types/reportTypes'
+import { ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { getFormattedCodeHealthChartData } from '~/utils/reports'
 
 /**
@@ -84,6 +86,8 @@ import { getFormattedCodeHealthChartData } from '~/utils/reports'
   }
 })
 export default class OwnerCodeHealthTrend extends mixins(OwnerDetailMixin, CodeHealthReportMixin) {
+  readonly chartColors: string[] = ReportMeta[ReportPageT.CODE_HEALTH_TREND].colors ?? []
+
   /**
    * Fetch report base data, recent stats, and trigger chart data fetching.
    *

@@ -21,27 +21,38 @@
         </div>
       </template>
       <div
-        v-show="historicalValuesLoading"
-        class="h-72 mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
+        v-if="historicalValuesLoading"
+        class="h-report-chart mx-5 my-1.5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
-      <div v-show="!historicalValuesLoading">
-        <z-chart
-          v-if="shouldChartBeShown"
-          :data-sets="issueDistributionData"
-          :key="reportRerenderKey"
-          :labels="labels"
-          :colors="colorShades"
-          :bar-options="{ stacked: true }"
-          :axis-options="{
-            xIsSeries: true
-          }"
-          :y-axis-max="maxBarClip"
-          :y-axis-min="0"
-          type="bar"
-          class="chart-tooltip-z-20"
-        />
-        <div v-show="!shouldChartBeShown" class="h-full px-5">
-          <lazy-empty-chart :count="5" chart-type="bar" :stacked="true" />
+      <div v-else>
+        <template v-if="shouldChartBeShown">
+          <z-chart
+            :key="reportRerenderKey"
+            :data-sets="issueDistributionData"
+            :labels="labels"
+            :colors="chartColors"
+            :bar-options="{ stacked: true }"
+            :axis-options="{
+              xIsSeries: true
+            }"
+            :y-axis-max="maxBarClip"
+            :y-axis-min="0"
+            type="bar"
+            class="chart-tooltip-z-20"
+          />
+          <report-chart-legend
+            :datasets="issueDistributionData"
+            :others-dataset-names="othersDatasetNames"
+            class="px-5"
+          />
+        </template>
+        <div v-else class="h-full px-5">
+          <lazy-empty-chart
+            :count="4"
+            :stacked="true"
+            :chart-colors="chartColors"
+            chart-type="bar"
+          />
         </div>
       </div>
 
@@ -72,11 +83,8 @@ import DistributionReportMixin from '~/mixins/distributionReportMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 
-import { IssueDistributionT, ReportPageT } from '~/types/reportTypes'
 import { ReportLevel } from '~/types/types'
-import { getColorShades } from '~/utils/ui'
-
-const BASE_COLOR = '#1035ad'
+import { IssueDistributionT, ReportMeta, ReportPageT } from '~/types/reportTypes'
 
 /**
  * Page for displaying issue distribution by analyzer and category type
@@ -93,12 +101,7 @@ export default class IssueDistributionPage extends mixins(
   RouteQueryMixin
 ) {
   readonly IssueDistributionT = IssueDistributionT
-
-  baseColor = BASE_COLOR
-
-  get colorShades(): string[] {
-    return getColorShades(BASE_COLOR, this.issueDistributionData.length)
-  }
+  readonly chartColors: string[] = ReportMeta[ReportPageT.DISTRIBUTION].colors ?? []
 
   /**
    * Fetch recent stats, compliance issues and trigger chart data fetching.
@@ -152,7 +155,7 @@ export default class IssueDistributionPage extends mixins(
   async fetchHistoricValuesAndSetChartData(): Promise<void> {
     await this.fetchHistoricalValues(ReportLevel.Owner, this.owner.id, ReportPageT.DISTRIBUTION)
 
-    this.setDistributionChartData()
+    this.setDistributionChartData(ReportPageT.DISTRIBUTION)
   }
 
   /**

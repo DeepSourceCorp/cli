@@ -4,6 +4,9 @@ import {
   getFilterText,
   getFilterType,
   getFormattedCodeHealthChartData,
+  getFormattedComplianceChartData,
+  getFormattedDistributionChartData,
+  getFormattedIssuesAutofixedChartData,
   getMaxDigitDistributionHistoricalValues,
   prepareLabels
 } from '~/utils/reports'
@@ -99,24 +102,241 @@ describe('[[ reports utils ]]', () => {
     // Expected result
     const formattedCodeHealthChartData: Array<Dataset> = [
       {
-        name: 'ISSUES INTRODUCED',
+        bgColor: 'bg-cherry-500',
+        name: 'issues introduced',
         chartType: 'bar',
         values: [247, 325, 281, 262, 300, 201, 217, 272, 284, 282, 298, 258, 23]
       },
       {
-        name: 'ISSUES RESOLVED',
+        bgColor: 'bg-juniper-500',
+        name: 'issues resolved',
         chartType: 'bar',
         values: [-256, -259, -250, -365, -285, -284, -295, -302, -268, -250, -298, -299, -21]
       },
       {
-        name: 'NET NEW ISSUES',
+        bgColor: 'bg-robin-500',
+        name: 'net new issues',
         chartType: 'line',
         values: [-9, 66, 31, -103, 15, -83, -78, -30, 16, 32, 0, -41, 2]
       }
     ]
 
     // Assertion
-    expect(getFormattedCodeHealthChartData(historicalValues)).toEqual(formattedCodeHealthChartData)
+    expect(getFormattedCodeHealthChartData(historicalValues)).toEqual<Array<Dataset>>(
+      formattedCodeHealthChartData
+    )
+  })
+
+  test('`getFormattedIssuesAutofixedChartData` method formats dataset for issues autofixed chart correctly', () => {
+    // Historical values input
+    const historicalValues = {
+      labels: [
+        '2022-12-08',
+        '2022-12-09',
+        '2022-12-10',
+        '2022-12-11',
+        '2022-12-12',
+        '2022-12-13',
+        '2022-12-14',
+        '2022-12-15'
+      ],
+      values: {
+        total: [31, 14, 33, 34, 18, 20, 5, 30],
+        pr: [12, 1, 16, 16, 8, 4, 2, 14],
+        default_branch: [19, 13, 17, 18, 10, 16, 3, 16]
+      }
+    } as unknown as HistoricalValues
+
+    // Expected result
+    const formattedIssuesAutofixedChartData: Array<Dataset> = [
+      {
+        name: 'In pull requests',
+        values: [12, 1, 16, 16, 8, 4, 2, 14],
+        chartType: 'bar',
+        bgColor: 'bg-juniper-500'
+      },
+      {
+        name: 'In default branch',
+        values: [19, 13, 17, 18, 10, 16, 3, 16],
+        chartType: 'bar',
+        bgColor: 'bg-juniper-100'
+      }
+    ]
+
+    // Assertion
+    expect(getFormattedIssuesAutofixedChartData(historicalValues)).toEqual<Array<Dataset>>(
+      formattedIssuesAutofixedChartData
+    )
+  })
+
+  test('`getFormattedComplianceChartData` method formats dataset for compliance chart correctly', () => {
+    // Historical values input
+    const historicalValues = {
+      labels: [
+        '2021-12-01',
+        '2022-01-01',
+        '2022-02-01',
+        '2022-03-01',
+        '2022-04-01',
+        '2022-05-01',
+        '2022-06-01',
+        '2022-07-01',
+        '2022-08-01',
+        '2022-09-01',
+        '2022-10-01',
+        '2022-11-01',
+        '2022-12-01'
+      ],
+      values: { count: [19, 18, 12, 11, 19, 8, 5, 3, 4, 8, 9, 9, 9] }
+    } as unknown as HistoricalValues
+
+    // Expected result
+    const formattedComplianceChartData: Array<Dataset> = [
+      {
+        name: 'Active Issues',
+        values: [19, 18, 12, 11, 19, 8, 5, 3, 4, 8, 9, 9, 9]
+      }
+    ]
+
+    // Assertion
+    expect(getFormattedComplianceChartData(historicalValues)).toEqual<Array<Dataset>>(
+      formattedComplianceChartData
+    )
+
+    // Create historicalValues which will be incompatible with compliance report
+    const historicalValuesWithoutCount = {
+      labels: [
+        '2021-12-01',
+        '2022-01-01',
+        '2022-02-01',
+        '2022-03-01',
+        '2022-04-01',
+        '2022-05-01',
+        '2022-06-01',
+        '2022-07-01',
+        '2022-08-01',
+        '2022-09-01',
+        '2022-10-01',
+        '2022-11-01',
+        '2022-12-01'
+      ],
+      values: { randomField: [19, 18, 12, 11, 19, 8, 5, 3, 4, 8, 9, 9, 9] }
+    } as unknown as HistoricalValues
+
+    // Assertion
+    expect(getFormattedComplianceChartData(historicalValuesWithoutCount)).toEqual<Array<Dataset>>(
+      []
+    )
+  })
+
+  test('`getFormattedDistributionChartData` method formats dataset for distribution chart correctly', () => {
+    // Historical values input
+    const historicalValues = {
+      labels: [
+        '2021-12-01',
+        '2022-01-01',
+        '2022-02-01',
+        '2022-03-01',
+        '2022-04-01',
+        '2022-05-01',
+        '2022-06-01',
+        '2022-07-01',
+        '2022-08-01',
+        '2022-09-01',
+        '2022-10-01',
+        '2022-11-01',
+        '2022-12-01'
+      ],
+      values: {
+        analyzer: {
+          docker: [3, 11, 1, 2, 8, 0, 10, 12, 9, 8, 14, 14, 14],
+          python: [7, 0, 13, 10, 18, 17, 18, 3, 6, 16, 16, 16, 16],
+          'test-coverage': [16, 3, 15, 15, 8, 16, 14, 9, 19, 3, 4, 4, 4]
+        },
+        category: {
+          antipattern: [18, 4, 18, 14, 19, 12, 18, 10, 1, 1, 9, 9, 9],
+          'bug-risk': [12, 9, 4, 0, 2, 11, 17, 18, 8, 18, 4, 4, 4],
+          coverage: [6, 0, 6, 10, 17, 2, 5, 9, 4, 1, 7, 7, 7],
+          doc: [16, 12, 4, 1, 2, 5, 9, 5, 0, 1, 12, 12, 12],
+          performance: [6, 9, 3, 19, 15, 2, 13, 5, 0, 8, 13, 13, 13],
+          security: [13, 14, 12, 17, 12, 7, 11, 18, 4, 4, 15, 15, 15],
+          style: [12, 18, 14, 0, 6, 3, 11, 7, 13, 11, 17, 17, 17],
+          typecheck: [0, 18, 9, 15, 5, 11, 17, 4, 6, 17, 19, 19, 19]
+        }
+      }
+    } as unknown as HistoricalValues
+
+    const categoryValues = historicalValues.values.category as Record<string, number[]>
+    const analyzerValues = historicalValues.values.analyzer as Record<string, number[]>
+
+    // Expected result
+    const formattedCategoryDistributionChartData: Array<Dataset> = [
+      {
+        name: 'typecheck',
+        chartType: 'bar',
+        values: [0, 18, 9, 15, 5, 11, 17, 4, 6, 17, 19, 19, 19],
+        bgColor: 'bg-robin-600'
+      },
+      {
+        name: 'security',
+        chartType: 'bar',
+        values: [13, 14, 12, 17, 12, 7, 11, 18, 4, 4, 15, 15, 15],
+        bgColor: 'bg-robin-500'
+      },
+      {
+        name: 'style',
+        chartType: 'bar',
+        values: [12, 18, 14, 0, 6, 3, 11, 7, 13, 11, 17, 17, 17],
+        bgColor: 'bg-robin-400'
+      },
+      {
+        name: 'others',
+        chartType: 'bar',
+        values: [58, 34, 35, 44, 55, 32, 62, 47, 13, 29, 45, 45, 45],
+        bgColor: 'bg-robin-200'
+      }
+    ]
+
+    const categoryOthersDatasetNames: Array<string> = [
+      'antipattern',
+      'bug-risk',
+      'coverage',
+      'doc',
+      'performance'
+    ]
+
+    const formattedAnalyzerDistributionChartData: Array<Dataset> = [
+      {
+        name: 'python',
+        chartType: 'bar',
+        values: [7, 0, 13, 10, 18, 17, 18, 3, 6, 16, 16, 16, 16],
+        bgColor: 'bg-robin-600'
+      },
+      {
+        name: 'test-coverage',
+        chartType: 'bar',
+        values: [16, 3, 15, 15, 8, 16, 14, 9, 19, 3, 4, 4, 4],
+        bgColor: 'bg-robin-500'
+      },
+      {
+        name: 'docker',
+        chartType: 'bar',
+        values: [3, 11, 1, 2, 8, 0, 10, 12, 9, 8, 14, 14, 14],
+        bgColor: 'bg-robin-400'
+      }
+    ]
+
+    const analyzerOthersDatasetNames: Array<string> = []
+
+    // Test for analyzer dataset
+    expect(getFormattedDistributionChartData(analyzerValues, ReportPageT.DISTRIBUTION)).toEqual<
+      [Array<Dataset>, Array<string>]
+    >([formattedAnalyzerDistributionChartData, analyzerOthersDatasetNames])
+
+    // Test for category dataset
+    expect(getFormattedDistributionChartData(categoryValues, ReportPageT.DISTRIBUTION)).toEqual<
+      [Array<Dataset>, Array<string>]
+    >([formattedCategoryDistributionChartData, categoryOthersDatasetNames])
   })
 
   test('`getMaxDigitDistributionHistoricalValues` returns `0` as the max value if `currentActiveDistribution` is falsy', () => {

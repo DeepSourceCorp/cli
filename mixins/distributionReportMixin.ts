@@ -7,7 +7,10 @@ import ReportMixin from './reportMixin'
 
 import { analyzerDistribution } from '@/apollo/queries/reports/analyzerDistribution.gql'
 import { categoryDistribution } from '@/apollo/queries/reports/categoryDistribution.gql'
-import { getMaxDigitDistributionHistoricalValues } from '~/utils/reports'
+import {
+  getFormattedDistributionChartData,
+  getMaxDigitDistributionHistoricalValues
+} from '~/utils/reports'
 
 /**
  * Mixin for distribution report utilities
@@ -20,12 +23,56 @@ export default class DistributionReportMixin extends mixins(ReportMixin) {
   public analyzerDataset: Array<Dataset> = []
   public categoryDataset: Array<Dataset> = []
 
+  public datasetNames: Array<string> = []
+  public categoryOthersDatasetNames: Array<string> = []
+  public analyzerOthersDatasetNames: Array<string> = []
+
   get shouldChartBeShown(): boolean {
     return !(
       this.historicalValuesLoading ||
       this.labels.length < 2 ||
       this.issueDistributionData.length === 0
     )
+  }
+
+  get issueDistributionData(): Array<Dataset> {
+    return this.activeFilter === IssueDistributionT.CATEGORY
+      ? this.categoryDataset
+      : this.analyzerDataset
+  }
+
+  // We need this as a getter so it updates every time distribution type is changed
+  get othersDatasetNames(): Array<string> {
+    return this.activeFilter === IssueDistributionT.CATEGORY
+      ? this.categoryOthersDatasetNames
+      : this.analyzerOthersDatasetNames
+  }
+
+  get currentVal(): number {
+    return this.report?.currentValue ?? 0
+  }
+
+  get maxDigitHistoricValues(): number {
+    return getMaxDigitDistributionHistoricalValues(this.activeFilter, this.historicalValues)
+  }
+
+  get reportRerenderKey(): string {
+    return `${this.activeFilter}-${this.dateRangeFilter}-${this.maxBarClip}-${this.issueDistributionData.length}`
+  }
+
+  /**
+   * Get the active filter from query params falling back to the value `category`
+   *
+   * @returns {IssueDistributionT}
+   */
+  getActiveFilter(): IssueDistributionT {
+    if (
+      Object.values(IssueDistributionT).includes(this.$route.query.filter as IssueDistributionT)
+    ) {
+      return this.$route.query.filter as IssueDistributionT
+    }
+
+    return IssueDistributionT.CATEGORY
   }
 
   /**
@@ -71,58 +118,31 @@ export default class DistributionReportMixin extends mixins(ReportMixin) {
   }
 
   /**
-   * Get the active filter from query params falling back to the value `category`
-   *
-   * @returns {IssueDistributionT}
-   */
-  getActiveFilter(): IssueDistributionT {
-    if (
-      Object.values(IssueDistributionT).includes(this.$route.query.filter as IssueDistributionT)
-    ) {
-      return this.$route.query.filter as IssueDistributionT
-    }
-
-    return IssueDistributionT.CATEGORY
-  }
-
-  /**
    * Set historical values for each distribution type
    *
    * @return void
    */
-  public setDistributionChartData(): void {
-    const analyzerValues = this.historicalValues.values.analyzer
+  public setDistributionChartData(reportKey: ReportPageT): void {
+    const analyzerValues = this.historicalValues.values.analyzer as Record<string, number[]>
 
     if (analyzerValues) {
-      this.analyzerDataset = Object.keys(analyzerValues).map((analyzer) => {
-        return { name: analyzer, chartType: 'bar', values: analyzerValues[analyzer] }
-      })
+      const [dataset, othersDatasetNames] = getFormattedDistributionChartData(
+        analyzerValues,
+        reportKey
+      )
+      this.analyzerDataset = dataset
+      this.analyzerOthersDatasetNames = othersDatasetNames
     }
 
-    const categoryValues = this.historicalValues.values.category
+    const categoryValues = this.historicalValues.values.category as Record<string, number[]>
 
     if (categoryValues) {
-      this.categoryDataset = Object.keys(categoryValues).map((category) => {
-        return { name: category, chartType: 'bar', values: categoryValues[category] }
-      })
+      const [dataset, othersDatasetNames] = getFormattedDistributionChartData(
+        categoryValues,
+        reportKey
+      )
+      this.categoryDataset = dataset
+      this.categoryOthersDatasetNames = othersDatasetNames
     }
-  }
-
-  get issueDistributionData(): Array<Dataset> {
-    return this.activeFilter === IssueDistributionT.CATEGORY
-      ? this.categoryDataset
-      : this.analyzerDataset
-  }
-
-  get currentVal(): number {
-    return this.report?.currentValue ?? 0
-  }
-
-  get maxDigitHistoricValues(): number {
-    return getMaxDigitDistributionHistoricalValues(this.activeFilter, this.historicalValues)
-  }
-
-  get reportRerenderKey(): string {
-    return `${this.activeFilter}-${this.dateRangeFilter}-${this.maxBarClip}-${this.issueDistributionData.length}`
   }
 }
