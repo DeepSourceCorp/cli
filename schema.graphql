@@ -231,7 +231,7 @@ type ApplyCreditsToOwnerPayload {
 }
 
 input Attachment {
-  uploadToken: UUID!
+  token: UUID!
   filename: String!
 }
 
@@ -963,8 +963,6 @@ type EnterpriseGroup implements MaskPrimaryKeyNode {
   members(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseUserConnection
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection!
   invitationCode: String
-  groupusermembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupUserMembershipConnection!
-  groupteammembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupTeamMembershipConnection!
   groupTeams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupTeamMembershipConnection
   groupUsers(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupUserMembershipConnection
   allTeams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
@@ -1026,15 +1024,11 @@ type EnterpriseTeam implements MaskPrimaryKeyNode {
   members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
   syncPermissionsWithVcs: Boolean!
-  teammemberSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
-  teammemberinvitationSet(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection!
-  groupSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseGroupConnection!
-  groupteammembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupTeamMembershipConnection!
   basePermissionSet: TeamBasePermissionSet
   billingDetails: GenericScalar
   numMembersTotal: Int
   isViewerPrimaryUser: Boolean
-  teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection
+  teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
   invites(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
   invitationUrl: String
   logs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
@@ -1042,6 +1036,8 @@ type EnterpriseTeam implements MaskPrimaryKeyNode {
   accountSetupStatus: GenericScalar
   roleInGroup: TeamMemberRoleChoices
   isDirectMember: Boolean
+  repositoryCollaborators(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String, isAddedFromVcs: Boolean, isPermFromVcs: Boolean): RepositoryCollaboratorConnection!
+  activeRepositoryCount: Int
   allLogs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
 }
 
@@ -1077,18 +1073,14 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
+  socialAuth(offset: Int, before: String, after: String, first: Int, last: Int): UserSocialConnectionConnection!
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection!
-  auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection!
-  teamMemberships(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
-  repositorySet(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
+  teamMemberships(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
   transactions(offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!
   scimGroups(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseGroupConnection!
-  groupusermembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupUserMembershipConnection!
-  autofixrunSet(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
-  repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   silenceRulesCreated(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection!
   fullName: String
   team(offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
@@ -1511,6 +1503,11 @@ type IssueDistribution {
   logoUrl: String
 }
 
+enum IssueDistributionSortKey {
+  ASC
+  DESC
+}
+
 type IssueEdge {
   node: Issue
   cursor: String!
@@ -1776,6 +1773,7 @@ type Mutation {
   gsrInstallationLanding(input: GSRInstallationLandingInput!): GSRInstallationLandingPayload
   updateStarredRepository(input: UpdateStarredRepositoryInput!): UpdateStarredRepositoryPayload
   updateWatchedRepository(input: UpdateWatchedRepositoryInput!): UpdateWatchedRepositoryPayload
+  updateUserDetails(input: UpdateUserDetailsInput!): UpdateUserDetailsPayload
   confirmInvitation(input: ConfirmInvitationInput!): ConfirmInvitationPayload
   verifyDevice(input: VerifyDeviceInput!): VerifyDevicePayload
   createConfigTemplate(input: CreateConfigTemplateInput!): CreateConfigTemplatePayload
@@ -1880,6 +1878,7 @@ type Owner implements MaskPrimaryKeyNode {
   isGsrSshRegistered: Boolean
   installedIntegrations(feature: IntegrationFeature): [IntegrationProvider]
   repositoriesCoverageReport(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String): RepositoryCoverageReportItemConnection
+  activeRepositoryCount: Int
 }
 
 type OwnerCacheKeys {
@@ -2002,8 +2001,8 @@ type PublicReport implements MaskPrimaryKeyNode {
   report(key: String!): Report
   complianceIssues(key: String!): [ComplianceIssue]
   complianceIssuesSeverityMap(key: String!): ComplianceIssueOccurrence
-  issueDistributionByAnalyzer(key: String!): [IssueDistribution]
-  issueDistributionByCategory(key: String!): [IssueDistribution]
+  issueDistributionByAnalyzer(key: String!, sortKey: IssueDistributionSortKey): [IssueDistribution]
+  issueDistributionByCategory(key: String!, sortKey: IssueDistributionSortKey): [IssueDistribution]
   repositoriesCoverageReport(offset: Int, before: String, after: String, first: Int, last: Int, q: String, sort: String): RepositoryCoverageReportItemConnection
 }
 
@@ -2058,8 +2057,8 @@ type Query {
   reports(level: ReportLevel, objectId: ID): [Report]
   complianceIssues(level: ReportLevel, reportKey: String, objectId: ID): [ComplianceIssue]
   complianceIssuesSeverityMap(level: ReportLevel, reportKey: String, objectId: ID): ComplianceIssueOccurrence
-  issueDistributionByAnalyzer(level: ReportLevel, reportKey: String!, objectId: ID): [IssueDistribution]
-  issueDistributionByCategory(level: ReportLevel, reportKey: String!, objectId: ID): [IssueDistribution]
+  issueDistributionByAnalyzer(level: ReportLevel, reportKey: String!, objectId: ID, sortKey: IssueDistributionSortKey): [IssueDistribution]
+  issueDistributionByCategory(level: ReportLevel, reportKey: String!, objectId: ID, sortKey: IssueDistributionSortKey): [IssueDistribution]
   publicReport(reportId: String, token: String): PublicReport
   publicReportSourceableRepositories(ownerLogin: String!, vcsProvider: VCSProviderChoices!, q: String, publicReportId: ID, offset: Int, before: String, after: String, first: Int, last: Int): SourceableRepositoryConnection
   context: Context
@@ -2199,7 +2198,7 @@ type Repository implements MaskPrimaryKeyNode {
   vcsProvider: VCSProviderChoices!
   vcsUrl: String!
   vcsRepoUid: String!
-  collaborators(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection
+  collaborators(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String, isAddedFromVcs: Boolean, isPermFromVcs: Boolean): RepositoryCollaboratorConnection
   vcsCreatedAt: DateTime
   sshUrl: String!
   defaultBranchName: String
@@ -2235,13 +2234,11 @@ type Repository implements MaskPrimaryKeyNode {
   issuePriorities(offset: Int, before: String, after: String, first: Int, last: Int): IssuePriorityConnection!
   checks(offset: Int, before: String, after: String, first: Int, last: Int): CheckConnection!
   prs(state: PRStateChoices, q: String, runStatus: RunStatusChoice, offset: Int, before: String, after: String, first: Int, last: Int, number: Int): PRConnection
-  userpreferenceSet(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
   watchedBy(offset: Int, before: String, after: String, first: Int, last: Int): UserPreferenceConnection!
   autofixRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection
   transformerRuns(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TransformerRunConnection
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
   runs(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
-  repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   sourcedInPublicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection!
   publicReports(offset: Int, before: String, after: String, first: Int, last: Int, sort: String, q: String): PublicReportConnection
   repositorySetting: RepositorySetting
@@ -2283,7 +2280,7 @@ type Repository implements MaskPrimaryKeyNode {
   viewerPermission: RepositoryPermissionChoices
   autofixGithubAppInstallationUrl: String
   autofixBitbucketAddonInstallationUrl: String
-  addableMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection
+  addableMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection
   dsn: String
   hasTestCoverage: Boolean
   badge: GenericScalar!
@@ -2314,6 +2311,8 @@ type RepositoryCollaborator implements MaskPrimaryKeyNode {
   repository: Repository!
   user: User!
   permission: RepositoryCollaboratorPermission!
+  isAddedFromVcs: Boolean!
+  isPermFromVcs: Boolean!
 }
 
 type RepositoryCollaboratorConnection {
@@ -2712,6 +2711,7 @@ type SyncRepositoriesForOwnerPayload {
 
 input SyncVcsPermissionsInput {
   teamId: ID!
+  overrideChangesMadeOnDeepsource: Boolean = true
   clientMutationId: String
 }
 
@@ -2740,15 +2740,11 @@ type Team implements MaskPrimaryKeyNode {
   members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
   syncPermissionsWithVcs: Boolean!
-  teammemberSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
-  teammemberinvitationSet(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection!
-  groupSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseGroupConnection!
-  groupteammembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupTeamMembershipConnection!
   basePermissionSet: TeamBasePermissionSet
   billingDetails: GenericScalar
   numMembersTotal: Int
   isViewerPrimaryUser: Boolean
-  teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection
+  teamMembers(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
   invites(offset: Int, before: String, after: String, first: Int, last: Int, status: String): TeamMemberInvitationConnection
   invitationUrl: String
   logs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
@@ -2756,6 +2752,8 @@ type Team implements MaskPrimaryKeyNode {
   accountSetupStatus: GenericScalar
   roleInGroup: TeamMemberRoleChoices
   isDirectMember: Boolean
+  repositoryCollaborators(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String, isAddedFromVcs: Boolean, isPermFromVcs: Boolean): RepositoryCollaboratorConnection!
+  activeRepositoryCount: Int
 }
 
 type TeamBasePermissionSet implements MaskPrimaryKeyNode {
@@ -2808,6 +2806,8 @@ type TeamMember implements MaskPrimaryKeyNode {
   role: TeamMemberRoleChoices
   team: EnterpriseTeam!
   user: User!
+  isAddedFromVcs: Boolean!
+  isRoleFromVcs: Boolean!
   isPrimaryUser: Boolean
 }
 
@@ -3477,6 +3477,19 @@ type UpdateTimeoutSettingPayload {
   clientMutationId: String
 }
 
+input UpdateUserDetailsInput {
+  displayName: String
+  email: String
+  avatarToken: UUID
+  clientMutationId: String
+}
+
+type UpdateUserDetailsPayload {
+  ok: Boolean
+  viewer: User
+  clientMutationId: String
+}
+
 input UpdateWatchedRepositoryInput {
   repoId: ID!
   action: ActionChoice!
@@ -3520,18 +3533,14 @@ type User implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
+  socialAuth(offset: Int, before: String, after: String, first: Int, last: Int): UserSocialConnectionConnection!
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection
-  auditlogSet(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection!
-  teamMemberships(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String]): TeamMemberConnection!
-  repositorySet(offset: Int, before: String, after: String, first: Int, last: Int, name_Icontains: String, vcsProvider: String, isPrivate: Boolean, isActivated: Boolean, errorCode: Int): RepositoryConnection!
+  teamMemberships(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
   transactions(offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!
   scimGroups(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseGroupConnection!
-  groupusermembershipSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String): GroupUserMembershipConnection!
-  autofixrunSet(offset: Int, before: String, after: String, first: Int, last: Int, status: String, status_In: [String], pullRequestStatus_In: [String]): AutofixRunConnection!
   onboardingEvents(offset: Int, before: String, after: String, first: Int, last: Int, owner: ID): AutoOnboardEventConnection!
-  repositorycollaboratorSet(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String): RepositoryCollaboratorConnection!
   silenceRulesCreated(offset: Int, before: String, after: String, first: Int, last: Int, creator: ID, issueTitle: String, issueCode: String, filePath: String, silenceLevel: String): SilenceRuleConnection!
   fullName: String
   availableCredits: Float
@@ -3547,6 +3556,9 @@ type User implements MaskPrimaryKeyNode {
   missiveUserHash: String
   isBetaTester: Boolean
   connectedVcsProviders: [VCSProviderChoices]
+  socialConnections: [UserSocialConnection!]!
+  personalAccounts(login: String, offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection
+  teamAccounts(login: String, offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
 }
 
 type UserConnection {
@@ -3578,6 +3590,31 @@ type UserPreferenceConnection {
 
 type UserPreferenceEdge {
   node: UserPreference
+  cursor: String!
+}
+
+type UserSocialConnection implements MaskPrimaryKeyNode {
+  id: ID!
+  enabledOn: DateTime!
+  provider: UserSocialConnectionChoices!
+}
+
+enum UserSocialConnectionChoices {
+  GITHUB
+  GITLAB
+  BITBUCKET
+  GITHUB_ENTERPRISE
+  GSR
+}
+
+type UserSocialConnectionConnection {
+  pageInfo: PageInfo!
+  edges: [UserSocialConnectionEdge]!
+  totalCount: Int
+}
+
+type UserSocialConnectionEdge {
+  node: UserSocialConnection
   cursor: String!
 }
 

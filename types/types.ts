@@ -380,7 +380,7 @@ export type ApplyCreditsToOwnerPayload = {
 };
 
 export type Attachment = {
-  uploadToken: Scalars['UUID'];
+  token: Scalars['UUID'];
   filename: Scalars['String'];
 };
 
@@ -1264,8 +1264,6 @@ export type EnterpriseGroup = MaskPrimaryKeyNode & {
   members?: Maybe<EnterpriseUserConnection>;
   teams: EnterpriseTeamConnection;
   invitationCode?: Maybe<Scalars['String']>;
-  groupusermembershipSet: GroupUserMembershipConnection;
-  groupteammembershipSet: GroupTeamMembershipConnection;
   groupTeams?: Maybe<GroupTeamMembershipConnection>;
   groupUsers?: Maybe<GroupUserMembershipConnection>;
   allTeams?: Maybe<TeamConnection>;
@@ -1285,26 +1283,6 @@ export type EnterpriseGroupMembersArgs = {
 
 
 export type EnterpriseGroupTeamsArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-};
-
-
-export type EnterpriseGroupGroupusermembershipSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-};
-
-
-export type EnterpriseGroupGroupteammembershipSetArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -1456,15 +1434,11 @@ export type EnterpriseTeam = MaskPrimaryKeyNode & {
   members: UserConnection;
   invitationCode?: Maybe<Scalars['String']>;
   syncPermissionsWithVcs: Scalars['Boolean'];
-  teammemberSet: TeamMemberConnection;
-  teammemberinvitationSet: TeamMemberInvitationConnection;
-  groupSet: EnterpriseGroupConnection;
-  groupteammembershipSet: GroupTeamMembershipConnection;
   basePermissionSet?: Maybe<TeamBasePermissionSet>;
   billingDetails?: Maybe<Scalars['GenericScalar']>;
   numMembersTotal?: Maybe<Scalars['Int']>;
   isViewerPrimaryUser?: Maybe<Scalars['Boolean']>;
-  teamMembers?: Maybe<TeamMemberConnection>;
+  teamMembers: TeamMemberConnection;
   invites?: Maybe<TeamMemberInvitationConnection>;
   invitationUrl?: Maybe<Scalars['String']>;
   logs?: Maybe<AuditLogConnection>;
@@ -1472,6 +1446,8 @@ export type EnterpriseTeam = MaskPrimaryKeyNode & {
   accountSetupStatus?: Maybe<Scalars['GenericScalar']>;
   roleInGroup?: Maybe<TeamMemberRoleChoices>;
   isDirectMember?: Maybe<Scalars['Boolean']>;
+  repositoryCollaborators: RepositoryCollaboratorConnection;
+  activeRepositoryCount?: Maybe<Scalars['Int']>;
   allLogs?: Maybe<AuditLogConnection>;
 };
 
@@ -1485,47 +1461,6 @@ export type EnterpriseTeamMembersArgs = {
 };
 
 
-export type EnterpriseTeamTeammemberSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-  role?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-export type EnterpriseTeamTeammemberinvitationSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  status?: Maybe<Scalars['String']>;
-};
-
-
-export type EnterpriseTeamGroupSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-};
-
-
-export type EnterpriseTeamGroupteammembershipSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-};
-
-
 export type EnterpriseTeamTeamMembersArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -1534,6 +1469,8 @@ export type EnterpriseTeamTeamMembersArgs = {
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   role?: Maybe<Array<Maybe<Scalars['String']>>>;
+  isAddedFromVcs?: Maybe<Scalars['Boolean']>;
+  isRoleFromVcs?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1559,6 +1496,19 @@ export type EnterpriseTeamLogsArgs = {
   createdAfter?: Maybe<Scalars['String']>;
   ipAddress_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   eventName_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type EnterpriseTeamRepositoryCollaboratorsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+  permission?: Maybe<Scalars['String']>;
+  isAddedFromVcs?: Maybe<Scalars['Boolean']>;
+  isPermFromVcs?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1611,18 +1561,14 @@ export type EnterpriseUser = MaskPrimaryKeyNode & {
   bookmarkedIssues: RepositoryIssueConnection;
   preference?: Maybe<UserPreference>;
   IsBetaTester: Scalars['Boolean'];
+  socialAuth: UserSocialConnectionConnection;
   accessTokens: AccessTokenConnection;
-  auditlogSet: AuditLogConnection;
   primaryOwnerships: OwnerConnection;
   teams: EnterpriseTeamConnection;
   teamMemberships: TeamMemberConnection;
-  repositorySet: RepositoryConnection;
   transactions: TransactionConnection;
   scimGroups: EnterpriseGroupConnection;
-  groupusermembershipSet: GroupUserMembershipConnection;
-  autofixrunSet: AutofixRunConnection;
   onboardingEvents: AutoOnboardEventConnection;
-  repositorycollaboratorSet: RepositoryCollaboratorConnection;
   silenceRulesCreated: SilenceRuleConnection;
   fullName?: Maybe<Scalars['String']>;
   team?: Maybe<TeamConnection>;
@@ -1657,7 +1603,7 @@ export type EnterpriseUserBookmarkedIssuesArgs = {
 };
 
 
-export type EnterpriseUserAccessTokensArgs = {
+export type EnterpriseUserSocialAuthArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -1666,18 +1612,12 @@ export type EnterpriseUserAccessTokensArgs = {
 };
 
 
-export type EnterpriseUserAuditlogSetArgs = {
+export type EnterpriseUserAccessTokensArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  actor_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  created?: Maybe<Scalars['String']>;
-  createdBefore?: Maybe<Scalars['String']>;
-  createdAfter?: Maybe<Scalars['String']>;
-  ipAddress_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  eventName_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -1708,20 +1648,8 @@ export type EnterpriseUserTeamMembershipsArgs = {
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   role?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-export type EnterpriseUserRepositorySetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  name_Icontains?: Maybe<Scalars['String']>;
-  vcsProvider?: Maybe<Scalars['String']>;
-  isPrivate?: Maybe<Scalars['Boolean']>;
-  isActivated?: Maybe<Scalars['Boolean']>;
-  errorCode?: Maybe<Scalars['Int']>;
+  isAddedFromVcs?: Maybe<Scalars['Boolean']>;
+  isRoleFromVcs?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1745,28 +1673,6 @@ export type EnterpriseUserScimGroupsArgs = {
 };
 
 
-export type EnterpriseUserGroupusermembershipSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-};
-
-
-export type EnterpriseUserAutofixrunSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  status?: Maybe<Scalars['String']>;
-  status_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  pullRequestStatus_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
 export type EnterpriseUserOnboardingEventsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -1774,17 +1680,6 @@ export type EnterpriseUserOnboardingEventsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   owner?: Maybe<Scalars['ID']>;
-};
-
-
-export type EnterpriseUserRepositorycollaboratorSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-  permission?: Maybe<Scalars['String']>;
 };
 
 
@@ -2328,6 +2223,11 @@ export type IssueDistribution = {
   logoUrl?: Maybe<Scalars['String']>;
 };
 
+export enum IssueDistributionSortKey {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
 export type IssueEdge = {
   __typename?: 'IssueEdge';
   node?: Maybe<Issue>;
@@ -2631,6 +2531,7 @@ export type Mutation = {
   gsrInstallationLanding?: Maybe<GsrInstallationLandingPayload>;
   updateStarredRepository?: Maybe<UpdateStarredRepositoryPayload>;
   updateWatchedRepository?: Maybe<UpdateWatchedRepositoryPayload>;
+  updateUserDetails?: Maybe<UpdateUserDetailsPayload>;
   confirmInvitation?: Maybe<ConfirmInvitationPayload>;
   verifyDevice?: Maybe<VerifyDevicePayload>;
   createConfigTemplate?: Maybe<CreateConfigTemplatePayload>;
@@ -3088,6 +2989,11 @@ export type MutationUpdateWatchedRepositoryArgs = {
 };
 
 
+export type MutationUpdateUserDetailsArgs = {
+  input: UpdateUserDetailsInput;
+};
+
+
 export type MutationConfirmInvitationArgs = {
   input: ConfirmInvitationInput;
 };
@@ -3322,6 +3228,7 @@ export type Owner = MaskPrimaryKeyNode & {
   isGsrSshRegistered?: Maybe<Scalars['Boolean']>;
   installedIntegrations?: Maybe<Array<Maybe<IntegrationProvider>>>;
   repositoriesCoverageReport?: Maybe<RepositoryCoverageReportItemConnection>;
+  activeRepositoryCount?: Maybe<Scalars['Int']>;
 };
 
 
@@ -3654,11 +3561,13 @@ export type PublicReportComplianceIssuesSeverityMapArgs = {
 
 export type PublicReportIssueDistributionByAnalyzerArgs = {
   key: Scalars['String'];
+  sortKey?: Maybe<IssueDistributionSortKey>;
 };
 
 
 export type PublicReportIssueDistributionByCategoryArgs = {
   key: Scalars['String'];
+  sortKey?: Maybe<IssueDistributionSortKey>;
 };
 
 
@@ -4026,6 +3935,7 @@ export type QueryIssueDistributionByAnalyzerArgs = {
   level?: Maybe<ReportLevel>;
   reportKey: Scalars['String'];
   objectId?: Maybe<Scalars['ID']>;
+  sortKey?: Maybe<IssueDistributionSortKey>;
 };
 
 
@@ -4033,6 +3943,7 @@ export type QueryIssueDistributionByCategoryArgs = {
   level?: Maybe<ReportLevel>;
   reportKey: Scalars['String'];
   objectId?: Maybe<Scalars['ID']>;
+  sortKey?: Maybe<IssueDistributionSortKey>;
 };
 
 
@@ -4245,13 +4156,11 @@ export type Repository = MaskPrimaryKeyNode & {
   issuePriorities: IssuePriorityConnection;
   checks: CheckConnection;
   prs?: Maybe<PrConnection>;
-  userpreferenceSet: UserPreferenceConnection;
   watchedBy: UserPreferenceConnection;
   autofixRuns?: Maybe<AutofixRunConnection>;
   transformerRuns?: Maybe<TransformerRunConnection>;
   onboardingEvents: AutoOnboardEventConnection;
   runs?: Maybe<RunConnection>;
-  repositorycollaboratorSet: RepositoryCollaboratorConnection;
   sourcedInPublicReports: PublicReportConnection;
   publicReports?: Maybe<PublicReportConnection>;
   repositorySetting?: Maybe<RepositorySetting>;
@@ -4326,6 +4235,8 @@ export type RepositoryCollaboratorsArgs = {
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   permission?: Maybe<Scalars['String']>;
+  isAddedFromVcs?: Maybe<Scalars['Boolean']>;
+  isPermFromVcs?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4377,15 +4288,6 @@ export type RepositoryPrsArgs = {
 };
 
 
-export type RepositoryUserpreferenceSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-
 export type RepositoryWatchedByArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -4434,17 +4336,6 @@ export type RepositoryRunsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   status?: Maybe<Scalars['String']>;
-};
-
-
-export type RepositoryRepositorycollaboratorSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-  permission?: Maybe<Scalars['String']>;
 };
 
 
@@ -4576,6 +4467,8 @@ export type RepositoryAddableMembersArgs = {
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   role?: Maybe<Array<Maybe<Scalars['String']>>>;
+  isAddedFromVcs?: Maybe<Scalars['Boolean']>;
+  isRoleFromVcs?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -4628,6 +4521,8 @@ export type RepositoryCollaborator = MaskPrimaryKeyNode & {
   repository: Repository;
   user: User;
   permission: RepositoryCollaboratorPermission;
+  isAddedFromVcs: Scalars['Boolean'];
+  isPermFromVcs: Scalars['Boolean'];
 };
 
 export type RepositoryCollaboratorConnection = {
@@ -5099,6 +4994,7 @@ export type SyncRepositoriesForOwnerPayload = {
 
 export type SyncVcsPermissionsInput = {
   teamId: Scalars['ID'];
+  overrideChangesMadeOnDeepsource?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
@@ -5129,15 +5025,11 @@ export type Team = MaskPrimaryKeyNode & {
   members: UserConnection;
   invitationCode?: Maybe<Scalars['String']>;
   syncPermissionsWithVcs: Scalars['Boolean'];
-  teammemberSet: TeamMemberConnection;
-  teammemberinvitationSet: TeamMemberInvitationConnection;
-  groupSet: EnterpriseGroupConnection;
-  groupteammembershipSet: GroupTeamMembershipConnection;
   basePermissionSet?: Maybe<TeamBasePermissionSet>;
   billingDetails?: Maybe<Scalars['GenericScalar']>;
   numMembersTotal?: Maybe<Scalars['Int']>;
   isViewerPrimaryUser?: Maybe<Scalars['Boolean']>;
-  teamMembers?: Maybe<TeamMemberConnection>;
+  teamMembers: TeamMemberConnection;
   invites?: Maybe<TeamMemberInvitationConnection>;
   invitationUrl?: Maybe<Scalars['String']>;
   logs?: Maybe<AuditLogConnection>;
@@ -5145,6 +5037,8 @@ export type Team = MaskPrimaryKeyNode & {
   accountSetupStatus?: Maybe<Scalars['GenericScalar']>;
   roleInGroup?: Maybe<TeamMemberRoleChoices>;
   isDirectMember?: Maybe<Scalars['Boolean']>;
+  repositoryCollaborators: RepositoryCollaboratorConnection;
+  activeRepositoryCount?: Maybe<Scalars['Int']>;
 };
 
 
@@ -5157,47 +5051,6 @@ export type TeamMembersArgs = {
 };
 
 
-export type TeamTeammemberSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-  role?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-export type TeamTeammemberinvitationSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  status?: Maybe<Scalars['String']>;
-};
-
-
-export type TeamGroupSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-};
-
-
-export type TeamGroupteammembershipSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-};
-
-
 export type TeamTeamMembersArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -5206,6 +5059,8 @@ export type TeamTeamMembersArgs = {
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   role?: Maybe<Array<Maybe<Scalars['String']>>>;
+  isAddedFromVcs?: Maybe<Scalars['Boolean']>;
+  isRoleFromVcs?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -5231,6 +5086,19 @@ export type TeamLogsArgs = {
   createdAfter?: Maybe<Scalars['String']>;
   ipAddress_In?: Maybe<Array<Maybe<Scalars['String']>>>;
   eventName_In?: Maybe<Array<Maybe<Scalars['String']>>>;
+};
+
+
+export type TeamRepositoryCollaboratorsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
+  permission?: Maybe<Scalars['String']>;
+  isAddedFromVcs?: Maybe<Scalars['Boolean']>;
+  isPermFromVcs?: Maybe<Scalars['Boolean']>;
 };
 
 export type TeamBasePermissionSet = MaskPrimaryKeyNode & {
@@ -5288,6 +5156,8 @@ export type TeamMember = MaskPrimaryKeyNode & {
   role?: Maybe<TeamMemberRoleChoices>;
   team: EnterpriseTeam;
   user: User;
+  isAddedFromVcs: Scalars['Boolean'];
+  isRoleFromVcs: Scalars['Boolean'];
   isPrimaryUser?: Maybe<Scalars['Boolean']>;
 };
 
@@ -6028,6 +5898,20 @@ export type UpdateTimeoutSettingPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type UpdateUserDetailsInput = {
+  displayName?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  avatarToken?: Maybe<Scalars['UUID']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type UpdateUserDetailsPayload = {
+  __typename?: 'UpdateUserDetailsPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  viewer?: Maybe<User>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type UpdateWatchedRepositoryInput = {
   repoId: Scalars['ID'];
   action: ActionChoice;
@@ -6074,18 +5958,14 @@ export type User = MaskPrimaryKeyNode & {
   bookmarkedIssues: RepositoryIssueConnection;
   preference?: Maybe<UserPreference>;
   IsBetaTester: Scalars['Boolean'];
+  socialAuth: UserSocialConnectionConnection;
   accessTokens?: Maybe<AccessTokenConnection>;
-  auditlogSet: AuditLogConnection;
   primaryOwnerships: OwnerConnection;
   teams: EnterpriseTeamConnection;
   teamMemberships: TeamMemberConnection;
-  repositorySet: RepositoryConnection;
   transactions: TransactionConnection;
   scimGroups: EnterpriseGroupConnection;
-  groupusermembershipSet: GroupUserMembershipConnection;
-  autofixrunSet: AutofixRunConnection;
   onboardingEvents: AutoOnboardEventConnection;
-  repositorycollaboratorSet: RepositoryCollaboratorConnection;
   silenceRulesCreated: SilenceRuleConnection;
   fullName?: Maybe<Scalars['String']>;
   availableCredits?: Maybe<Scalars['Float']>;
@@ -6101,6 +5981,9 @@ export type User = MaskPrimaryKeyNode & {
   missiveUserHash?: Maybe<Scalars['String']>;
   isBetaTester?: Maybe<Scalars['Boolean']>;
   connectedVcsProviders?: Maybe<Array<Maybe<VcsProviderChoices>>>;
+  socialConnections: Array<UserSocialConnection>;
+  personalAccounts?: Maybe<OwnerConnection>;
+  teamAccounts?: Maybe<TeamConnection>;
 };
 
 
@@ -6131,7 +6014,7 @@ export type UserBookmarkedIssuesArgs = {
 };
 
 
-export type UserAccessTokensArgs = {
+export type UserSocialAuthArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -6140,18 +6023,12 @@ export type UserAccessTokensArgs = {
 };
 
 
-export type UserAuditlogSetArgs = {
+export type UserAccessTokensArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
-  actor_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  created?: Maybe<Scalars['String']>;
-  createdBefore?: Maybe<Scalars['String']>;
-  createdAfter?: Maybe<Scalars['String']>;
-  ipAddress_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  eventName_In?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
@@ -6182,20 +6059,8 @@ export type UserTeamMembershipsArgs = {
   last?: Maybe<Scalars['Int']>;
   q?: Maybe<Scalars['String']>;
   role?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
-export type UserRepositorySetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  name_Icontains?: Maybe<Scalars['String']>;
-  vcsProvider?: Maybe<Scalars['String']>;
-  isPrivate?: Maybe<Scalars['Boolean']>;
-  isActivated?: Maybe<Scalars['Boolean']>;
-  errorCode?: Maybe<Scalars['Int']>;
+  isAddedFromVcs?: Maybe<Scalars['Boolean']>;
+  isRoleFromVcs?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -6219,28 +6084,6 @@ export type UserScimGroupsArgs = {
 };
 
 
-export type UserGroupusermembershipSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-};
-
-
-export type UserAutofixrunSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  status?: Maybe<Scalars['String']>;
-  status_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-  pullRequestStatus_In?: Maybe<Array<Maybe<Scalars['String']>>>;
-};
-
-
 export type UserOnboardingEventsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
@@ -6248,17 +6091,6 @@ export type UserOnboardingEventsArgs = {
   first?: Maybe<Scalars['Int']>;
   last?: Maybe<Scalars['Int']>;
   owner?: Maybe<Scalars['ID']>;
-};
-
-
-export type UserRepositorycollaboratorSetArgs = {
-  offset?: Maybe<Scalars['Int']>;
-  before?: Maybe<Scalars['String']>;
-  after?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-  q?: Maybe<Scalars['String']>;
-  permission?: Maybe<Scalars['String']>;
 };
 
 
@@ -6303,6 +6135,27 @@ export type UserRecommendedIssuesArgs = {
   q?: Maybe<Scalars['String']>;
   severityIn?: Maybe<Array<Maybe<Scalars['String']>>>;
   autofixAvailable?: Maybe<Scalars['Boolean']>;
+};
+
+
+export type UserPersonalAccountsArgs = {
+  login?: Maybe<Scalars['String']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type UserTeamAccountsArgs = {
+  login?: Maybe<Scalars['String']>;
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  q?: Maybe<Scalars['String']>;
 };
 
 export type UserConnection = {
@@ -6367,6 +6220,34 @@ export type UserPreferenceConnection = {
 export type UserPreferenceEdge = {
   __typename?: 'UserPreferenceEdge';
   node?: Maybe<UserPreference>;
+  cursor: Scalars['String'];
+};
+
+export type UserSocialConnection = MaskPrimaryKeyNode & {
+  __typename?: 'UserSocialConnection';
+  id: Scalars['ID'];
+  enabledOn: Scalars['DateTime'];
+  provider: UserSocialConnectionChoices;
+};
+
+export enum UserSocialConnectionChoices {
+  Github = 'GITHUB',
+  Gitlab = 'GITLAB',
+  Bitbucket = 'BITBUCKET',
+  GithubEnterprise = 'GITHUB_ENTERPRISE',
+  Gsr = 'GSR'
+}
+
+export type UserSocialConnectionConnection = {
+  __typename?: 'UserSocialConnectionConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<UserSocialConnectionEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type UserSocialConnectionEdge = {
+  __typename?: 'UserSocialConnectionEdge';
+  node?: Maybe<UserSocialConnection>;
   cursor: Scalars['String'];
 };
 
@@ -8311,10 +8192,10 @@ export type Unnamed_89_Query = (
           & { node?: Maybe<(
             { __typename?: 'Team' }
             & Pick<Team, 'id' | 'login' | 'name' | 'avatar' | 'roleInGroup'>
-            & { teamMembers?: Maybe<(
+            & { teamMembers: (
               { __typename?: 'TeamMemberConnection' }
               & Pick<TeamMemberConnection, 'totalCount'>
-            )> }
+            ) }
           )> }
         )>> }
       )> }
@@ -10120,7 +10001,7 @@ export type Unnamed_122_Query = (
   & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepositoryIdQueryVariables = Exact<{
@@ -10168,7 +10049,7 @@ export type Unnamed_123_Query = (
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'descriptionRendered' | 'issueType' | 'title' | 'shortcode' | 'firstSeen' | 'lastSeen' | 'modifiedAt' | 'occurrenceCount' | 'analyzerName' | 'analyzerShortcode' | 'analyzerLogo' | 'autofixAvailable' | 'newVcsIssueUrl' | 'raisedInFiles' | 'tags' | 'severity'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type Unnamed_124_QueryVariables = Exact<{
@@ -10199,7 +10080,7 @@ export type Unnamed_124_Query = (
         )> }
       )>> }
     ) }
-  ) | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepositoryIssueListQueryVariables = Exact<{
@@ -10331,7 +10212,7 @@ export type Unnamed_126_Query = (
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'raisedInFiles'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type Unnamed_127_QueryVariables = Exact<{
@@ -11346,7 +11227,7 @@ export type Unnamed_146_Query = (
   & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepoStatusPollQueryQueryVariables = Exact<{
@@ -11445,7 +11326,7 @@ export type Unnamed_149_Query = (
   & { team?: Maybe<(
     { __typename?: 'Team' }
     & Pick<Team, 'id' | 'numMembersTotal' | 'invitationUrl'>
-    & { members?: Maybe<(
+    & { members: (
       { __typename?: 'TeamMemberConnection' }
       & Pick<TeamMemberConnection, 'totalCount'>
       & { edges: Array<Maybe<(
@@ -11459,7 +11340,7 @@ export type Unnamed_149_Query = (
           ) }
         )> }
       )>> }
-    )> }
+    ) }
   )> }
 );
 
@@ -11475,7 +11356,7 @@ export type MembersBaseDetailsQuery = (
   & { team?: Maybe<(
     { __typename?: 'Team' }
     & Pick<Team, 'id'>
-    & { members?: Maybe<(
+    & { members: (
       { __typename?: 'TeamMemberConnection' }
       & Pick<TeamMemberConnection, 'totalCount'>
       & { edges: Array<Maybe<(
@@ -11489,7 +11370,7 @@ export type MembersBaseDetailsQuery = (
           ) }
         )> }
       )>> }
-    )> }
+    ) }
   )> }
 );
 

@@ -50,6 +50,7 @@
       "TransformerTool",
       "User",
       "UserPreference",
+      "UserSocialConnection",
       "Webhook",
       "WebhookEventDelivery",
       "WebhookEventTypes"

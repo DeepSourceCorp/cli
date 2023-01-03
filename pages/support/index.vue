@@ -229,6 +229,7 @@ import { FileUploadContexts, uploadFiles, FileUploadTokenT, FileUploadError } fr
 import { getDefaultAvatar } from '~/utils/ui'
 import { AuthActionTypes, AuthGetterTypes } from '~/store/account/auth'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
+import { Attachment } from '~/types/types'
 
 type SupportValidationData = {
   ticketAuthor: string
@@ -243,7 +244,7 @@ interface FormDataT {
   ccEmails: string
   subject: string
   body: string
-  attachments?: FileUploadTokenT[]
+  attachments?: Attachment[]
 }
 
 const authStore = namespace('account/auth')
@@ -552,7 +553,10 @@ export default class Support extends mixins(ActiveUserMixin) {
             }
           }
         )
-        formData.attachments = fileUploadTokens
+        formData.attachments = fileUploadTokens.map((uploadToken) => ({
+          token: uploadToken.token,
+          filename: uploadToken.filename
+        }))
       }
       await this.submitSupportData(formData)
     } catch (err) {
