@@ -9,7 +9,9 @@ module.exports = {
       `layouts/**/*.vue`,
       `pages/**/*.vue`,
       `plugins/**/*.{js,ts}`,
-      `nuxt.config.{js,ts}`
+      `nuxt.config.{js,ts}`,
+      // Report types file has bg color config
+      'types/reportTypes.ts'
     ],
     options: {
       safelist: [
