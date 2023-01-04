@@ -357,7 +357,7 @@ export interface IReportInfo {
   key: ReportPageT
   query: string
   componentName: string
-  handleResponse: (response: GraphqlQueryResponse, filter?: IssueDistributionT) => IHandleResponse
+  handleResponse: (response: GraphqlQueryResponse, filter?: IssueDistributionT) => IHandledResponse
 }
 
 export enum PublicReportErrors {
@@ -424,14 +424,16 @@ export const MAX_INDIVIDUAL_DATASET = 3
 // The following are consumed in pinned reports
 
 // Type information corresponding to individual entries after processing the query response
-export type CompiledPinnedReportT = PinnedReport & IHandleResponse
+export type CompiledPinnedReportT = PinnedReport & IHandledResponse & { componentName: string }
 
 // Type information corresponding to chart datasets
 export type DataSetsT = Array<{ name: string; chartType?: string; values: Array<number> }>
 
 export enum LoadingConditions {
-  REPORT_SWAP = 'report-swap', // Denotes the currently pinned report got swapped with a different one
-  REPORT_CONTROLS_CHANGE = 'report-controls-change' // Denotes a change in report controls value
+  REPORT_WIDGET_INITIAL_LOAD = 'report-widget-initial-load', // Denotes the pinned initial load
+  REPORT_WIDGET_DATA_FETCH = 'report-widget-data-fetch', // Denotes the pinned report data fetch
+  REPORT_CONTROLS_CHANGE = 'report-controls-change', // Denotes a change in report controls value
+  REPORT_SWAP = 'report-swap' // Denotes the currently pinned report got swapped with a different one
 }
 
 export interface ILoadingValue {
@@ -439,7 +441,7 @@ export interface ILoadingValue {
   status: boolean
 }
 
-export interface IHandleResponse {
+export interface IHandledResponse {
   compliancePassing?: boolean // Specific to `owasp-top-10` and `sans-top-25`` reports
   coverageList?: Array<RepositoryCoverageReportItem> // Specific to `code-coverage` report
   datasets?: DataSetsT

@@ -1,13 +1,8 @@
 <template>
   <chart-container :is-widget="true" class="pt-4 pb-0.5" @mouseleave.native="hideReportControls">
     <template #report-header>
-      <div class="inline-flex items-center justify-between w-full">
-        <div
-          v-if="loadingValue.status && isReportGettingSwapped"
-          class="h-5 w-56 animate-pulse bg-ink-300"
-        ></div>
-
-        <h3 v-else class="inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal">
+      <div class="inline-flex items-center justify-between w-full h-8">
+        <h3 class="inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal">
           {{ label }}
 
           <z-icon
@@ -86,7 +81,7 @@
     <template v-if="loadingValue.status">
       <!-- Skeleton loader for the case in which the report gets swapped -->
       <div
-        v-if="isReportGettingSwapped"
+        v-if="isReportWidgetDataFetch || isReportGettingSwapped"
         class="h-72 mx-5 mt-5 rounded-lg bg-ink-300 animate-pulse"
       ></div>
 
@@ -135,7 +130,7 @@ export default class PinnedCodeCoverageReport extends Vue {
   @Prop({ required: true })
   allowPinningReports: boolean
 
-  @Prop({ required: true })
+  @Prop()
   coverageList: Array<RepositoryCoverageReportItem>
 
   @Prop({ required: true })
@@ -190,7 +185,12 @@ export default class PinnedCodeCoverageReport extends Vue {
     return this.loadingValue.condition === LoadingConditions.REPORT_SWAP
   }
 
+  get isReportWidgetDataFetch(): boolean {
+    return this.loadingValue.condition === LoadingConditions.REPORT_WIDGET_DATA_FETCH
+  }
+
   get loaderCount(): number {
+    const defaultLoaderCount = 7
     let loaderCountFromStore = null
 
     if (process.client) {
@@ -200,7 +200,11 @@ export default class PinnedCodeCoverageReport extends Vue {
       ) as number
     }
 
-    return loaderCountFromStore ?? 7
+    // Ensure the loader count does not exceed `7` since the report widget shows only max `7` entries
+    if (loaderCountFromStore) {
+      return loaderCountFromStore > defaultLoaderCount ? defaultLoaderCount : loaderCountFromStore
+    }
+    return defaultLoaderCount
   }
 
   get selectedSortType(): string {

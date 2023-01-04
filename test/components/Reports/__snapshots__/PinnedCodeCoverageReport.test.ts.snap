@@ -3,8 +3,12 @@
 exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 pt-4 pb-0.5 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
+        Code Coverage
+
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-10 relative w-11\\">
         <transition-stub name=\\"slide-fade\\">
@@ -23,8 +27,12 @@ exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report 
 exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 pt-4 pb-0.5 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
+        Code Coverage
+
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-10 relative w-19\\">
         <transition-stub name=\\"slide-fade\\">
@@ -43,7 +51,7 @@ exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report 
 exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":null,"status":false},"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 pt-4 pb-0.5 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
         Code Coverage
 
@@ -67,7 +75,7 @@ exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report 
 exports[`[[ PinnedCodeCoverageReport ]] renders the code coverage pinned report widget: {"loadingValue":{"condition":null,"status":false},"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 pt-4 pb-0.5 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal\\">
         Code Coverage
 

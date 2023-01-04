@@ -1,14 +1,8 @@
 <template>
   <chart-container :is-widget="true" class="gap-y-2" @mouseleave.native="hideReportControls">
     <template #report-header>
-      <div class="inline-flex items-center justify-between w-full">
-        <div
-          v-if="loadingValue.status && isReportGettingSwapped"
-          class="h-5 w-56 animate-pulse bg-ink-300"
-        ></div>
-
+      <div class="inline-flex items-center justify-between w-full h-8">
         <h3
-          v-else
           class="inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap"
           :class="{ 'overflow-hidden': revealReportControls }"
         >
@@ -24,12 +18,19 @@
             class="hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0"
           />
 
-          <compliance-status
-            v-if="isComplianceReport"
-            :compliance-passed="compliancePassing"
-            text-size="text-xxs md:text-xs"
-            class="border border-ink-200 rounded-full px-2 hidden xs:flex lg:hidden"
-          />
+          <template v-if="isComplianceReport">
+            <div
+              v-if="loadingValue.status && compliancePassing === undefined"
+              class="w-19 h-7 animate-pulse bg-ink-300 rounded-full hidden xs:flex lg:hidden"
+            ></div>
+
+            <compliance-status
+              v-else-if="typeof compliancePassing === 'boolean'"
+              :compliance-passed="compliancePassing"
+              text-size="text-xxs md:text-xs"
+              class="border border-ink-200 rounded-full px-2 hidden xs:flex lg:hidden"
+            />
+          </template>
         </h3>
 
         <!-- Report controls section for smaller screens -->
@@ -112,7 +113,7 @@
 
     <div class="inline-flex items-center gap-x-3 px-5 mt-3.5">
       <div
-        v-if="loadingValue.status && isReportGettingSwapped"
+        v-if="loadingValue.status && (isReportWidgetDataFetch || isReportGettingSwapped)"
         class="h-7 w-52 bg-ink-300 animate-pulse"
       ></div>
 
@@ -139,11 +140,11 @@
     ></div>
 
     <template v-else>
-      <div v-if="showChartEmptyState" class="px-5">
+      <z-chart v-if="showChart" v-bind="chartProps" />
+
+      <div v-else class="px-5">
         <lazy-empty-chart v-bind="emptyChartProps" />
       </div>
-
-      <z-chart v-else :key="dateRangeFilter" v-bind="chartProps" />
     </template>
   </chart-container>
 </template>
@@ -212,13 +213,13 @@ export default class PinnedChartReport extends Vue {
   @Prop({ required: true })
   allowPinningReports: boolean
 
-  @Prop({ required: false })
+  @Prop()
   compliancePassing: boolean
 
-  @Prop({ required: true })
+  @Prop()
   datasets: DataSetsT
 
-  @Prop({ required: true })
+  @Prop()
   historicalValues: HistoricalValues
 
   @Prop({ required: true })
@@ -245,16 +246,16 @@ export default class PinnedChartReport extends Vue {
   @Prop({ required: true })
   provider: string
 
-  @Prop({ required: false })
+  @Prop()
   repoName: string
 
   @Prop({ required: true })
   reportSlot: number
 
-  @Prop({ required: true })
+  @Prop()
   value: number
 
-  @Prop({ required: true })
+  @Prop()
   valueLabel: string
 
   dateRangeFilter = this.getDateRangeFilter()
@@ -266,7 +267,7 @@ export default class PinnedChartReport extends Vue {
 
   LoadingConditions = LoadingConditions
 
-  get chartProps(): IChartProps {
+  get chartProps(): IChartProps | undefined {
     const { startDate, endDate } = getDateRange(this.dateRangeFilter)
 
     const labels = prepareLabels(this.historicalValues?.labels, startDate, endDate)
@@ -410,6 +411,10 @@ export default class PinnedChartReport extends Vue {
     )
   }
 
+  get isReportWidgetDataFetch(): boolean {
+    return this.loadingValue.condition === LoadingConditions.REPORT_WIDGET_DATA_FETCH
+  }
+
   get isReportGettingSwapped(): boolean {
     return this.loadingValue.condition === LoadingConditions.REPORT_SWAP
   }
@@ -445,8 +450,8 @@ export default class PinnedChartReport extends Vue {
     return this.$generateRoute(['reports', path])
   }
 
-  get showChartEmptyState(): boolean {
-    return (this.historicalValues?.labels?.length as number) < 2 || this.datasets?.length === 0
+  get showChart(): boolean {
+    return (this.historicalValues?.labels?.length as number) >= 2 && this.datasets?.length > 0
   }
 
   /**

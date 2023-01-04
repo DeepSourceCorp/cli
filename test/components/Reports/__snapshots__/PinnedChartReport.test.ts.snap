@@ -3,8 +3,12 @@
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":false,"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
+          SANS Top 25<!----></span>
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <compliancestatus-stub text-size=\\"text-xxs md:text-xs\\" class=\\"border border-ink-200 rounded-full px-2 hidden xs:flex lg:hidden\\"></compliancestatus-stub>
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-8 relative w-52
       
@@ -28,8 +32,12 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":false,"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
+          SANS Top 25<!----></span>
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <compliancestatus-stub text-size=\\"text-xxs md:text-xs\\" class=\\"border border-ink-200 rounded-full px-2 hidden xs:flex lg:hidden\\"></compliancestatus-stub>
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-8 relative w-60 lg:w-64 xl:w-60\\">
         <transition-stub name=\\"slide-fade\\">
@@ -51,8 +59,12 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":true,"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
+          SANS Top 25<!----></span>
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <compliancestatus-stub compliance-passed=\\"true\\" text-size=\\"text-xxs md:text-xs\\" class=\\"border border-ink-200 rounded-full px-2 hidden xs:flex lg:hidden\\"></compliancestatus-stub>
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-8 relative w-52
       
@@ -76,8 +88,12 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":true,"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
+          SANS Top 25<!----></span>
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <compliancestatus-stub compliance-passed=\\"true\\" text-size=\\"text-xxs md:text-xs\\" class=\\"border border-ink-200 rounded-full px-2 hidden xs:flex lg:hidden\\"></compliancestatus-stub>
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-8 relative w-60 lg:w-64 xl:w-60\\">
         <transition-stub name=\\"slide-fade\\">
@@ -99,7 +115,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":false,"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
           SANS Top 25<!----></span>
         <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
@@ -131,7 +147,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":false,"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
           SANS Top 25<!----></span>
         <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
@@ -161,7 +177,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":true,"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
           SANS Top 25<!----></span>
         <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
@@ -193,7 +209,7 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":true,"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
           SANS Top 25<!----></span>
         <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
@@ -223,8 +239,12 @@ exports[`[[ PinnedChartReport ]] renders a compliance based pinned report widget
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":false,"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
+          Issue Distribution BY ANALYZER </span>
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <!---->
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-8 relative w-52
       lg:w-72 xl:w-52
@@ -248,8 +268,12 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":false,"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
+          Issue Distribution BY ANALYZER </span>
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <!---->
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-8 relative w-60 lg:w-72 xl:w-60\\">
         <transition-stub name=\\"slide-fade\\">
@@ -271,8 +295,12 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":true,"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
+          Issue Distribution BY ANALYZER </span>
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <!---->
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-8 relative w-52
       lg:w-72 xl:w-52
@@ -296,8 +324,12 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":"report-swap","status":true},"compliancePassing":true,"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
-      <div class=\\"h-5 w-56 animate-pulse bg-ink-300\\"></div>
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
+      <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
+          Issue Distribution BY ANALYZER </span>
+        <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
+        <!---->
+      </h3>
       <zbutton-stub color=\\"vanilla-400\\" iconcolor=\\"\\" label=\\"\\" loadinglabel=\\"\\" as=\\"button\\" justify=\\"center\\" buttontype=\\"ghost\\" type=\\"button\\" size=\\"small\\" to=\\"\\" icon=\\"pie-chart\\" class=\\"lg:hidden v-popper--has-tooltip\\"></zbutton-stub>
       <div class=\\"hidden lg:block h-8 relative w-60 lg:w-72 xl:w-60\\">
         <transition-stub name=\\"slide-fade\\">
@@ -319,7 +351,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":false,"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
           Issue Distribution BY ANALYZER </span>
         <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
@@ -351,7 +383,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":false,"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
           Issue Distribution BY ANALYZER </span>
         <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
@@ -381,7 +413,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":true,"allowPinningReports":false} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
           Issue Distribution BY ANALYZER </span>
         <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>
@@ -413,7 +445,7 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
 exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widget: {"loadingValue":{"condition":null,"status":false},"compliancePassing":true,"allowPinningReports":true} 1`] = `
 "<div class=\\"py-4 border border-slate-400 gap-y-2 rounded-md min-h-96\\">
   <div class=\\"px-5\\">
-    <div class=\\"inline-flex items-center justify-between w-full\\">
+    <div class=\\"inline-flex items-center justify-between w-full h-8\\">
       <h3 class=\\"inline-flex items-center gap-x-2 text-vanilla-100 text-sm font-normal whitespace-nowrap\\"><span>
           Issue Distribution BY ANALYZER </span>
         <zicon-stub icon=\\"help\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"hidden lg:inline stroke-1.5 transition-opacity duration-75 flex-shrink-0 v-popper--has-tooltip\\"></zicon-stub>

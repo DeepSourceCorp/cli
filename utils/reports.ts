@@ -319,8 +319,8 @@ export const getMaxDigitDistributionHistoricalValues = (
   // current active distribution will be a record with each value as an array
   const currentActiveDistribution = (
     filter === IssueDistributionT.CATEGORY
-      ? historicalValues.values.category
-      : historicalValues.values.analyzer
+      ? historicalValues?.values.category
+      : historicalValues?.values.analyzer
   ) as Record<string, number[]>
 
   if (!currentActiveDistribution) {

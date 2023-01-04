@@ -9,6 +9,7 @@ import {
   ILoadingValue,
   IssueDistributionT,
   LoadingConditions,
+  ReportMeta,
   ReportPageT
 } from '~/types/reportTypes'
 import {
@@ -60,18 +61,18 @@ interface IFetchPinnedReportsArgs {
  */
 @Component({ name: 'PinnedReportsMixin' })
 export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
-  compiledPinnedReports = [] as Array<CompiledPinnedReportT>
+  compiledPinnedReports = new Array(4).fill({}) as Array<CompiledPinnedReportT>
   dateRangeOptions: Record<string, DateRangeOptionT> = dateRangeOptions
   loadingValues: Array<ILoadingValue> = new Array(4).fill({ condition: null, status: false })
+  pinnedReports: Array<PinnedReport> = []
   objectId = ''
 
-  get pinnedReports(): Array<PinnedReport> {
-    return this.compiledPinnedReports.map(({ key, metadata }: CompiledPinnedReportT) => {
-      // Prevent supplying metadata filter text to the `updateRepositoryPinnedReports` GQL mutation
-      const metadataEntry = metadata ? { filter: metadata.filter } : null
-      return { key, metadata: metadataEntry }
-    })
-  }
+  // Key used to force re-render the UI at each phase of data fetch
+  reRenderKey = 0
+
+  // Indicates if the action is specific to a report slot (report-control-change/report-swap)
+  // Used to distinguish between initial page load and further report specific actions
+  widgetSpecificAction = false
 
   /**
    * Method to fetch the list of report keys pinned at the owner level
@@ -95,6 +96,16 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
       [ReportLevel.Repository]: RepositoryPinnedReportsGQLQuery
     } as Record<ReportLevel, DocumentNode>
 
+    // Update `loadingValues` entries only if in the `report-widget-initial-load` state
+    // Report control change/swap action would change any one entry to `report-controls-change`
+    // and `report-swap` respectively
+    if (this.loadingValues.every(({ condition }) => condition === null)) {
+      this.loadingValues = new Array(4).fill({
+        condition: LoadingConditions.REPORT_WIDGET_INITIAL_LOAD,
+        status: true
+      })
+    }
+
     // Trigger the GQL query based on the level
     const gqlQuery = gqlQueryMap[level]
     const response = await this.$fetchGraphqlData(gqlQuery, args, refetchReportsList)
@@ -112,47 +123,92 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
       pinnedReports: Array<PinnedReport>
     }
 
-    this.compiledPinnedReports = await Promise.all(
-      setting?.pinnedReports.map((report, reportSlot) => {
-        const { query, componentName, handleResponse } = ReportMap[report.key as ReportPageT]
+    setting?.pinnedReports.forEach((report, reportSlot) => {
+      const filterText = getFilterText(report.metadata?.filter)
 
-        // TODO: Dynamically import GQL queries
-        const queryArgs = this.getQueryArgs(
-          level,
-          report?.metadata?.filter || report.key,
-          reportSlot
-        )
-        const queryDocNode = DocNodeMap[query]
+      // Combine report metadata and the response from the corresponding GQL query
+      const metadata = report.metadata ? { ...report.metadata, text: filterText } : null
 
-        return this.$fetchGraphqlData(queryDocNode, queryArgs, refetchReportData)
-          .then((response: GraphqlQueryResponse) => {
-            const filterText = getFilterText(report.metadata?.filter)
+      const { componentName } = ReportMap[report.key as ReportPageT]
 
-            // Remove the report key prefix from the `filter`
-            // `issue-distribution-category` -> `category`
-            const filterType = getFilterType(report.metadata?.filter)
-            const handledResponse = handleResponse(response, filterType as IssueDistributionT)
+      const { key } = report
+      const { title: label } = ReportMeta[key as ReportPageT]
 
-            // Combine report metadata and the response from the corresponding GQL query
-            const metadata = report.metadata ? { ...report.metadata, text: filterText } : null
+      this.compiledPinnedReports[reportSlot] = {
+        ...report,
+        metadata,
+        componentName,
+        label
+      } as CompiledPinnedReportT
+    })
 
-            const compiledPinnedReport = {
-              ...report,
-              metadata,
-              ...handledResponse,
-              componentName
-            } as Record<string, unknown>
-
-            return compiledPinnedReport
-          })
-          .catch((err: Error) => {
-            this.$logErrorAndToast(err)
-          })
+    // Update `loadingValues` entries only if in the `report-widget-initial-load` state
+    if (
+      this.loadingValues.every(
+        ({ condition }) => condition === LoadingConditions.REPORT_WIDGET_INITIAL_LOAD
+      )
+    ) {
+      this.loadingValues = new Array(4).fill({
+        condition: LoadingConditions.REPORT_WIDGET_DATA_FETCH,
+        status: true
       })
+    }
+
+    let reportSlot = 0
+
+    for (const report of setting?.pinnedReports) {
+      const { query, handleResponse } = ReportMap[report.key as ReportPageT]
+
+      // TODO: Dynamically import GQL queries
+      const queryArgs = this.getQueryArgs(level, report?.metadata?.filter || report.key, reportSlot)
+      const queryDocNode = DocNodeMap[query]
+
+      try {
+        // skipcq JS-0032
+        const response: GraphqlQueryResponse = await this.$fetchGraphqlData(
+          queryDocNode,
+          queryArgs,
+          refetchReportData
+        )
+
+        // Remove the report key prefix from the `filter`
+        // `issue-distribution-category` -> `category`
+        const filterType = getFilterType(report.metadata?.filter)
+        const handledResponse = handleResponse(response, filterType as IssueDistributionT)
+
+        this.compiledPinnedReports[reportSlot] = {
+          ...this.compiledPinnedReports[reportSlot],
+          ...handledResponse
+        }
+      } catch (err) {
+        this.$logErrorAndToast(err as Error)
+      } finally {
+        // Reset the loading value entry corresponding to the current slot in iteration
+        this.loadingValues[reportSlot] = { condition: null, status: false }
+
+        // Force re-render the UI to reveal the corresponding chart/coverage report
+        if (!this.widgetSpecificAction) {
+          this.reRenderKey++
+        }
+
+        // Increment the index signifying the next iteration
+        reportSlot++
+      }
+    }
+
+    // Compute `pinnedReports` after compiling the data `compiledPinnedReports` for use in the markup
+    this.pinnedReports = this.compiledPinnedReports.map(
+      ({ key, metadata }: CompiledPinnedReportT) => {
+        // Prevent supplying metadata filter text `metadata.text` to the the GQL mutation aimed at updating the list of pinned reports
+        const metadataEntry = metadata ? { filter: metadata.filter } : null
+        return { key, metadata: metadataEntry }
+      }
     )
 
-    // Reset the `loadingValues` array
-    this.loadingValues = this.getLoadingValues()
+    // Reset the state for widget specific actions `report-controls-change/report-swap`
+    if (this.widgetSpecificAction) {
+      this.widgetSpecificAction = false
+    }
   }
 
   /**
@@ -288,7 +344,7 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
   async updatePinnedReports(
     level: ReportLevel,
     pinnedReports: Array<PinnedReportInput>,
-    reportSlotFromEmit?: number
+    reportSlotFromEmit: number
   ): Promise<void> {
     try {
       // Set the loading state corresponding to the report slot in scope to `true`
@@ -297,6 +353,26 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
         true,
         reportSlotFromEmit
       )
+
+      // Update report widget label straightaway
+      if (typeof reportSlotFromEmit === 'number') {
+        const { key, metadata } = pinnedReports[reportSlotFromEmit]
+
+        const { componentName } = ReportMap[key as ReportPageT]
+        const { title: label } = ReportMeta[key as ReportPageT]
+
+        const filterText = getFilterText(metadata?.filter)
+
+        // Combine report metadata and the response from the corresponding GQL query
+        const metadataEntry = metadata ? { ...metadata, text: filterText } : null
+
+        this.compiledPinnedReports[reportSlotFromEmit] = {
+          ...this.compiledPinnedReports[reportSlotFromEmit],
+          componentName, // Update `componentName` so that the skeleton loader shows up accordingly
+          label,
+          metadata: metadataEntry
+        }
+      }
 
       const args = { pinnedReports } as {
         ownerId?: string
@@ -316,6 +392,9 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
       // Trigger the GQL mutation based on the level
       const gqlMutation = gqlMutationMap[level]
       await this.$applyGraphqlMutation(gqlMutation, { input: args })
+
+      // Signify that it's an action specific to a report widget
+      this.widgetSpecificAction = true
 
       // Re-fetch the list of pinned reports at the owner level
       await this.fetchPinnedReports({ level, refetchReportsList: true })
@@ -338,8 +417,8 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
     level: ReportLevel,
     reportItem: CompiledPinnedReportT,
     reportSlot: number,
-    reportSlotFromEmit?: number,
-    reportControlValueFromEmit?: string
+    reportSlotFromEmit: number,
+    reportControlValueFromEmit: string
   ): Promise<void> {
     // Set the loading state corresponding to the report slot in scope to `true`
     this.loadingValues = this.getLoadingValues(
@@ -358,6 +437,9 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
     ) {
       this.$cookies.set(cookieIdentifier, reportControlValueFromEmit)
     }
+
+    // Signify that it's an action specific to a report widget
+    this.widgetSpecificAction = true
 
     await this.fetchPinnedReports({ level })
   }

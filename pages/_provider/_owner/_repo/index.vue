@@ -3,45 +3,42 @@
     <issue-overview-cards />
 
     <div v-if="canViewPinnedReports" class="grid grid-cols-1 gap-4 lg:grid-cols-2">
-      <template v-if="isPinnedReportsLoading">
-        <div v-for="ii in 4" :key="ii" class="bg-ink-300 animate-pulse h-98"></div>
-      </template>
-
-      <template v-else>
+      <div
+        v-for="(report, reportSlot) in compiledPinnedReports"
+        :key="`${reportSlot}-${reRenderKey}`"
+      >
         <div
-          v-for="(report, reportSlot) in compiledPinnedReports"
-          :key="
-            report.metadata
-              ? `${report.metadata.filter}-${reportSlot}`
-              : `${report.key}-${reportSlot}`
+          v-if="
+            loadingValues[reportSlot].condition === LoadingConditions.REPORT_WIDGET_INITIAL_LOAD
           "
-        >
-          <component
-            v-if="report"
-            :is="report.componentName"
-            v-bind="{ ...report, reportKey: report.key }"
-            :allow-pinning-reports="allowPinningReports"
-            :loading-value="loadingValues[reportSlot]"
-            :level="ReportLevel.Repository"
-            :owner="$route.params.owner"
-            :provider="$route.params.provider"
-            :pinned-reports="pinnedReports"
-            :repo-name="$route.params.repo"
-            :report-slot="reportSlot"
-            class="h-full"
-            @update-report-controls="
-              (reportSlotFromEmit, reportControlValueFromEmit) =>
-                updateReportControls(
-                  ReportLevel.Repository,
-                  report,
-                  reportSlot,
-                  reportSlotFromEmit,
-                  reportControlValueFromEmit
-                )
-            "
-          />
-        </div>
-      </template>
+          class="pinned-report-widget animate-pulse bg-ink-300"
+        ></div>
+
+        <component
+          v-else
+          :is="report.componentName"
+          v-bind="{ ...report, reportKey: report.key }"
+          :allow-pinning-reports="allowPinningReports"
+          :loading-value="loadingValues[reportSlot]"
+          :level="ReportLevel.Repository"
+          :owner="$route.params.owner"
+          :provider="$route.params.provider"
+          :pinned-reports="pinnedReports"
+          :repo-name="$route.params.repo"
+          :report-slot="reportSlot"
+          class="pinned-report-widget"
+          @update-report-controls="
+            (reportSlotFromEmit, reportControlValueFromEmit) =>
+              updateReportControls(
+                ReportLevel.Repository,
+                report,
+                reportSlot,
+                reportSlotFromEmit,
+                reportControlValueFromEmit
+              )
+          "
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -58,6 +55,7 @@ import PinnedReportsMixin from '~/mixins/pinnedReportsMixin'
 import RepoDetailMixin from '~/mixins/repoDetailMixin'
 import { PinnedReportInput, ReportLevel } from '~/types/types'
 import { RepoPerms } from '~/types/permTypes'
+import { LoadingConditions } from '~/types/reportTypes'
 
 export interface Widget {
   title: string
@@ -84,22 +82,8 @@ export interface Widget {
   layout: 'repository'
 })
 export default class Overview extends mixins(PinnedReportsMixin, RepoDetailMixin) {
-  isPinnedReportsLoading = false
+  LoadingConditions = LoadingConditions
   ReportLevel = ReportLevel
-
-  /**
-   * The `created` hook
-   * Determine if the skeleton loader is to be displayed
-   *
-   * @returns {void}
-   */
-  created(): void {
-    setTimeout(() => {
-      if (this.$fetchState.pending) {
-        this.isPinnedReportsLoading = true
-      }
-    }, 300)
-  }
 
   /**
    * Fetch hook to fetch all the basic details for a repository
@@ -114,12 +98,8 @@ export default class Overview extends mixins(PinnedReportsMixin, RepoDetailMixin
 
       // Fetch pinned reports list only if the user has the required perms
       if (this.canViewPinnedReports) {
-        this.isPinnedReportsLoading = true
-
         // Fetch the list of report keys pinned at the repository level
         await this.fetchPinnedReports({ level: ReportLevel.Repository })
-
-        this.isPinnedReportsLoading = false
       }
     } catch (e) {
       process.client && this.$toast.danger('There was a problem loading this repository')
@@ -179,9 +159,16 @@ export default class Overview extends mixins(PinnedReportsMixin, RepoDetailMixin
    */
   async updatePinnedReportsHandler(
     pinnedReports: Array<PinnedReportInput>,
-    reportSlotFromEmit?: number
+    reportSlotFromEmit: number
   ): Promise<void> {
     await this.updatePinnedReports(ReportLevel.Repository, pinnedReports, reportSlotFromEmit)
   }
 }
 </script>
+
+<style scoped>
+/* Specify fixed height to prevent layout shifts */
+.pinned-report-widget {
+  height: 406px;
+}
+</style>

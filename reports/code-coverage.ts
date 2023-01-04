@@ -1,5 +1,5 @@
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
-import { IHandleResponse, IReportInfo, ReportMeta, ReportPageT } from '~/types/reportTypes'
+import { IHandledResponse, IReportInfo, ReportMeta, ReportPageT } from '~/types/reportTypes'
 import { RepositoryCoverageReportItem } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
@@ -10,7 +10,7 @@ export default {
   query: 'codeCoverage',
   componentName: 'PinnedCodeCoverageReport',
   handleResponse: (response: GraphqlQueryResponse) => {
-    const handledResponse: IHandleResponse = {
+    const handledResponse: IHandledResponse = {
       label: ReportMeta[reportKey].title,
       coverageList:
         (resolveNodes(

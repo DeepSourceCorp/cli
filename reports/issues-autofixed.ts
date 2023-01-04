@@ -1,6 +1,6 @@
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 import {
-  IHandleResponse,
+  IHandledResponse,
   HistoricalValues,
   IReportInfo,
   ReportMeta,
@@ -16,7 +16,7 @@ export default {
   handleResponse: (response: GraphqlQueryResponse) => {
     const { report } = response.data
 
-    const handledResponse: IHandleResponse = {
+    const handledResponse: IHandledResponse = {
       label: ReportMeta[reportKey].title,
       value: report?.currentValue ?? 0,
       valueLabel: 'issues autofixed'
