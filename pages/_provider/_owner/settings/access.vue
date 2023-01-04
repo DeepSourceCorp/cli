@@ -66,18 +66,25 @@
         @onClose="closeSyncModal"
         title="Proceed with sync?"
         primary-action-label="Sync access settings"
-        primary-action-icon="alert-circle"
+        primary-action-icon="check"
         @primaryAction="syncAccessSettings"
       >
-        <div class="flex items-center mb-2 text-base leading-relaxed text-vanilla-100">
-          Confirm and sync
-        </div>
-        <p class="text-sm leading-relaxed text-vanilla-400">
-          Doing this will sync the organization’s access settings from
-          {{ $providerMetaMap[this.$route.params.provider].text }} and override any changes that you
-          might have done on DeepSource.
-          <b class="text-vanilla-100">This action cannot be undone.</b>
+        <div class="mb-3 leading-relaxed text-vanilla-100">Confirm and sync</div>
+        <p class="text-sm leading-6 mb-2.5 text-vanilla-300">
+          This operation will sync your team's access control settings from
+          {{ providerName }}. This has the following side-effects:
         </p>
+        <ul class="space-y-5 text-sm text-vanilla-300">
+          <li class="flex items-baseline gap-x-1.5">
+            <z-icon icon="arrow-right" size="x-small" class="flex-shrink-0" />Role of some members
+            in your team on DeepSource will get updated as configured on {{ providerName }}. This
+            may result in your team's occupied seat count being affected.
+          </li>
+          <li class="flex items-baseline gap-x-1.5">
+            <z-icon icon="arrow-right" size="x-small" class="flex-shrink-0" />Collaborators will be
+            added or updated on each repository as configured on {{ providerName }}.
+          </li>
+        </ul>
       </z-confirm>
     </portal>
   </div>
@@ -86,10 +93,10 @@
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
 import TeamDetailMixin from '~/mixins/teamDetailMixin'
-import { ZButton, ZConfirm } from '@deepsource/zeal'
+import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
 import { CheckInput, FormGroup, RadioGroupInput, ToggleInput } from '~/components/Form'
 
-import { TeamBasePermissionSetDefaultRepositoryPermission, Maybe } from '~/types/types'
+import { TeamBasePermissionSetDefaultRepositoryPermission } from '~/types/types'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
 /**
@@ -102,7 +109,8 @@ import { AppFeatures, TeamPerms } from '~/types/permTypes'
     RadioGroupInput,
     ToggleInput,
     ZButton,
-    ZConfirm
+    ZConfirm,
+    ZIcon
   },
   middleware: ['teamOnly', 'perm', 'validateProvider'],
   meta: {
@@ -141,6 +149,10 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
    */
   async fetch(): Promise<void> {
     await this.refetchPerms(false)
+  }
+
+  get providerName(): string {
+    return this.$providerMetaMap[this.$route.params.provider].text
   }
 
   /**
