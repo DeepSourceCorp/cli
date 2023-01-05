@@ -20,7 +20,7 @@
 
           <template v-if="isComplianceReport">
             <div
-              v-if="loadingValue.status && compliancePassing === undefined"
+              v-if="loadingValue.status && typeof compliancePassing === 'undefined'"
               class="w-19 h-7 animate-pulse bg-ink-300 rounded-full hidden xs:flex lg:hidden"
             ></div>
 
@@ -119,13 +119,16 @@
 
       <template v-else>
         <compliance-status
-          v-if="isComplianceReport"
+          v-if="isComplianceReport && typeof compliancePassing === 'boolean'"
           :compliance-passed="compliancePassing"
           text-size="text-xs"
           class="border border-ink-200 rounded-full px-2 hidden lg:flex"
         />
 
-        <div class="inline-flex items-center gap-x-1 text-sm">
+        <div
+          v-if="typeof value === 'number' && valueLabel"
+          class="inline-flex items-center gap-x-1 text-sm"
+        >
           <z-icon icon="activity" />
 
           <span v-tooltip="value > 1000 ? `${value}` : ''">{{ shortenLargeNumber(value) }}</span>
@@ -140,7 +143,11 @@
     ></div>
 
     <template v-else>
-      <z-chart v-if="showChart" v-bind="chartProps" />
+      <div v-if="error" class="px-5">
+        <lazy-empty-chart v-bind="{ ...emptyChartProps, subtitle: 'Something went wrong' }" />
+      </div>
+
+      <z-chart v-else-if="showChart" v-bind="chartProps" />
 
       <div v-else class="px-5">
         <lazy-empty-chart v-bind="emptyChartProps" />
@@ -218,6 +225,9 @@ export default class PinnedChartReport extends Vue {
 
   @Prop()
   datasets: DataSetsT
+
+  @Prop()
+  error: boolean
 
   @Prop()
   historicalValues: HistoricalValues

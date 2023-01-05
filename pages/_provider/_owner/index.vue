@@ -13,7 +13,10 @@
       </template>
     </div>
 
-    <div v-if="canViewPinnedReports" class="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <div
+      v-if="canViewPinnedReports && pinnedReportsListIsAvailable"
+      class="grid grid-cols-1 gap-4 lg:grid-cols-2"
+    >
       <div
         v-for="(report, reportSlot) in compiledPinnedReports"
         :key="`${reportSlot}-${reRenderKey}`"

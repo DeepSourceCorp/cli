@@ -424,7 +424,8 @@ export const MAX_INDIVIDUAL_DATASET = 3
 // The following are consumed in pinned reports
 
 // Type information corresponding to individual entries after processing the query response
-export type CompiledPinnedReportT = PinnedReport & IHandledResponse & { componentName: string }
+export type CompiledPinnedReportT = PinnedReport &
+  IHandledResponse & { componentName: string; error?: boolean }
 
 // Type information corresponding to chart datasets
 export type DataSetsT = Array<{ name: string; chartType?: string; values: Array<number> }>

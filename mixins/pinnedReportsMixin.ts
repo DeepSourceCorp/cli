@@ -74,6 +74,16 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
   // Used to distinguish between initial page load and further report specific actions
   widgetSpecificAction = false
 
+  get pinnedReportsListIsAvailable(): boolean {
+    // If the initial GQL query aimed at fetching the list of pinned reports fails,
+    // `compiledPinnedReports` would be an array of objects with a single property, `error`
+
+    return !this.compiledPinnedReports.every(
+      (compiledPinnedReport) =>
+        Object.keys(compiledPinnedReport).length === 1 && compiledPinnedReport.error
+    )
+  }
+
   /**
    * Method to fetch the list of report keys pinned at the owner level
    *
@@ -106,9 +116,20 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
       })
     }
 
-    // Trigger the GQL query based on the level
-    const gqlQuery = gqlQueryMap[level]
-    const response = await this.$fetchGraphqlData(gqlQuery, args, refetchReportsList)
+    let response = {} as GraphqlQueryResponse
+
+    try {
+      // Trigger the GQL query based on the level
+      const gqlQuery = gqlQueryMap[level]
+
+      response = await this.$fetchGraphqlData(gqlQuery, args, refetchReportsList)
+    } catch (err) {
+      this.compiledPinnedReports = new Array(4).fill({ error: true })
+      this.$logErrorAndToast(err as Error)
+
+      this.loadingValues = new Array(4).fill({ condition: null, status: false })
+      return
+    }
 
     const responseMap = {
       [ReportLevel.Owner]: response?.data?.owner,
@@ -182,6 +203,11 @@ export default class PinnedReportsMixin extends mixins(RoleAccessMixin) {
         }
       } catch (err) {
         this.$logErrorAndToast(err as Error)
+
+        this.compiledPinnedReports[reportSlot] = {
+          ...this.compiledPinnedReports[reportSlot],
+          error: true
+        }
       } finally {
         // Reset the loading value entry corresponding to the current slot in iteration
         this.loadingValues[reportSlot] = { condition: null, status: false }

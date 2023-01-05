@@ -1,7 +1,7 @@
 <template>
   <div class="rounded-md relative pointer-events-none">
     <div class="z-10 grid absolute mx-auto inset-0 rounded-md place-content-center">
-      <p class="text-sm text-center text-vanilla-400">Not enough data</p>
+      <p class="text-sm text-center text-vanilla-400">{{ subtitle }}</p>
     </div>
     <code-coverage-table
       :linked-rows="true"
@@ -11,7 +11,7 @@
   </div>
 </template>
 <script lang="ts">
-import { Vue, Component } from 'nuxt-property-decorator'
+import { Vue, Component, Prop } from 'nuxt-property-decorator'
 
 /**
  * Component to show empty code coverage table
@@ -20,6 +20,9 @@ import { Vue, Component } from 'nuxt-property-decorator'
   name: 'EmptyPinnedCodeCoverageTable'
 })
 export default class EmptyPinnedCodeCoverageTable extends Vue {
+  @Prop({ default: 'Not enough data' })
+  subtitle: string
+
   tableData = Array.from({ length: 7 }).map((_, idx) => {
     const booleanOptions = [true, false]
 

@@ -11,6 +11,7 @@ test('renders SeverityCounts with all prop options', () => {
   const { html } = render(SeverityCounts, {
     props,
     stubs: {
+      ChartStat: true,
       ZIcon: true
     }
   })

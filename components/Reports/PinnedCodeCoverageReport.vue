@@ -104,7 +104,10 @@
       @sort-filter-updated="updateSortTypeHandler"
     />
 
-    <lazy-empty-pinned-code-coverage-table v-else />
+    <lazy-empty-pinned-code-coverage-table
+      v-else
+      :subtitle="error ? 'Something went wrong' : 'Not enough data'"
+    />
   </chart-container>
 </template>
 
@@ -132,6 +135,9 @@ export default class PinnedCodeCoverageReport extends Vue {
 
   @Prop()
   coverageList: Array<RepositoryCoverageReportItem>
+
+  @Prop()
+  error: boolean
 
   @Prop({ required: true })
   reportKey: ReportPageT
