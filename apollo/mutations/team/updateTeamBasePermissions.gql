@@ -1,6 +1,6 @@
 mutation updateTeamBasePermissions (
   $teamId: ID!
-  $defaultRepositoryPermission: RepositoryPermissionChoices
+  $defaultRepositoryPermission: DefaultRepositoryPermissionChoices
   $canMembersIgnoreIssues: Boolean
   $canContributorsIgnoreIssues: Boolean
   $canMembersModifyMetricThresholds: Boolean

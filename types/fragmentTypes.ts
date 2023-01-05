@@ -23,6 +23,7 @@
       "FeatureDefinition",
       "GroupTeamMembership",
       "GroupUserMembership",
+      "IdentityProvider",
       "Issue",
       "IssuePriority",
       "IssuePriorityType",
@@ -51,6 +52,7 @@
       "User",
       "UserPreference",
       "UserSocialConnection",
+      "VerifiableDomain",
       "Webhook",
       "WebhookEventDelivery",
       "WebhookEventTypes"

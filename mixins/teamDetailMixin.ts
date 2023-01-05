@@ -2,7 +2,7 @@ import { Component, Vue, namespace } from 'nuxt-property-decorator'
 import { TeamActions } from '~/store/team/detail'
 import {
   Team,
-  TeamBasePermissionSetDefaultRepositoryPermission,
+  DefaultRepositoryPermissionChoices,
   TransferTeamOwnershipInput,
   UpdateTeamBasePermissionsPayload
 } from '~/types/types'
@@ -104,7 +104,7 @@ export default class TeamDetailMixin extends Vue {
   @teamStore.Action(TeamActions.UPDATE_TEAM_BASE_PERMS)
   updateTeamBasePermissions: (args: {
     teamId: string
-    defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
+    defaultRepositoryPermission: DefaultRepositoryPermissionChoices
     canMembersIgnoreIssues: boolean
     canContributorsIgnoreIssues: boolean
     canMembersModifyMetricThresholds: boolean

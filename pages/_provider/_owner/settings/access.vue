@@ -96,7 +96,7 @@ import TeamDetailMixin from '~/mixins/teamDetailMixin'
 import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
 import { CheckInput, FormGroup, RadioGroupInput, ToggleInput } from '~/components/Form'
 
-import { TeamBasePermissionSetDefaultRepositoryPermission } from '~/types/types'
+import { DefaultRepositoryPermissionChoices } from '~/types/types'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
 
 /**
@@ -135,8 +135,7 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
     canMembersIgnoreFailingMetrics: false,
     canContributorsIgnoreFailingMetrics: false
   }
-  basePerm: TeamBasePermissionSetDefaultRepositoryPermission =
-    TeamBasePermissionSetDefaultRepositoryPermission.Write
+  basePerm: DefaultRepositoryPermissionChoices = DefaultRepositoryPermissionChoices.Write
 
   isFetching = false
   showSyncModal = false
@@ -314,17 +313,22 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
 
   basePermOptions = [
     {
-      value: TeamBasePermissionSetDefaultRepositoryPermission.Read,
+      value: DefaultRepositoryPermissionChoices.None,
+      label: 'No permission',
+      description: `Members will have read-only access to public repositories. For private repositories, you'll need to give each Member additional access to individual repositories from the repository's settings.`
+    },
+    {
+      value: DefaultRepositoryPermissionChoices.Read,
       label: 'Read Only',
       description: `Members will be able to only view the issues and metrics on all repositories they have access to, but won't be able to take any actions on issues. You'll need to give each Member additional access to individual repositories from the repository's settings.`
     },
     {
-      value: TeamBasePermissionSetDefaultRepositoryPermission.Write,
+      value: DefaultRepositoryPermissionChoices.Write,
       label: 'Maintain',
       description: `Members will have full access to all repositories which they have access to, <b>except</b> the ability to add new Members and deactivating or activating analysis on it.`
     },
     {
-      value: TeamBasePermissionSetDefaultRepositoryPermission.Admin,
+      value: DefaultRepositoryPermissionChoices.Admin,
       label: 'Administrator',
       description: `Members will have full access to all repositories which they have access to, <b>including</b> the ability to add new Members and deactivating or activating analysis on it.`
     }

@@ -68,6 +68,17 @@ type AddAnalyzerFeedbackPayload {
   clientMutationId: String
 }
 
+input AddIdentityProviderInput {
+  teamId: ID!
+  xmlMetadataUrl: String!
+  clientMutationId: String
+}
+
+type AddIdentityProviderPayload {
+  ok: Boolean!
+  clientMutationId: String
+}
+
 input AddTeamToGroupInput {
   groupId: ID!
   teamId: ID!
@@ -841,6 +852,13 @@ scalar Date
 
 scalar DateTime
 
+enum DefaultRepositoryPermissionChoices {
+  NONE
+  READ
+  WRITE
+  ADMIN
+}
+
 input DeleteAccessTokenInput {
   tokenId: ID!
   clientMutationId: String
@@ -880,6 +898,16 @@ type DeleteGroupPayload {
   clientMutationId: String
 }
 
+input DeleteIdentityProviderInput {
+  teamId: ID!
+  clientMutationId: String
+}
+
+type DeleteIdentityProviderPayload {
+  ok: Boolean!
+  clientMutationId: String
+}
+
 type DeleteJSONWebTokenCookie {
   deleted: Boolean!
 }
@@ -898,12 +926,32 @@ type DeleteRefreshTokenCookie {
   deleted: Boolean!
 }
 
+input DeleteRequestingUserInput {
+  sendEmail: Boolean = true
+  clientMutationId: String
+}
+
+type DeleteRequestingUserPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
 input DeleteSilenceRuleInput {
   silenceRuleId: ID!
   clientMutationId: String
 }
 
 type DeleteSilenceRulePayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input DeleteTeamInput {
+  teamId: ID!
+  clientMutationId: String
+}
+
+type DeleteTeamPayload {
   ok: Boolean
   clientMutationId: String
 }
@@ -1024,6 +1072,7 @@ type EnterpriseTeam implements MaskPrimaryKeyNode {
   members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
   syncPermissionsWithVcs: Boolean!
+  identityProvider: IdentityProvider
   basePermissionSet: TeamBasePermissionSet
   billingDetails: GenericScalar
   numMembersTotal: Int
@@ -1038,6 +1087,7 @@ type EnterpriseTeam implements MaskPrimaryKeyNode {
   isDirectMember: Boolean
   repositoryCollaborators(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String, isAddedFromVcs: Boolean, isPermFromVcs: Boolean): RepositoryCollaboratorConnection!
   activeRepositoryCount: Int
+  verifiableDomain: VerifiableDomain
   allLogs(offset: Int, before: String, after: String, first: Int, last: Int, actor_In: [String], created: String, createdBefore: String, createdAfter: String, ipAddress_In: [String], eventName_In: [String]): AuditLogConnection
 }
 
@@ -1073,6 +1123,7 @@ type EnterpriseUser implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
+  deleted: DateTime
   socialAuth(offset: Int, before: String, after: String, first: Int, last: Int): UserSocialConnectionConnection!
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection!
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
@@ -1288,6 +1339,13 @@ type GroupUserMembershipConnection {
 type GroupUserMembershipEdge {
   node: GroupUserMembership
   cursor: String!
+}
+
+type IdentityProvider implements MaskPrimaryKeyNode {
+  id: ID!
+  xmlMetadataUrl: String!
+  domain: VerifiableDomain
+  provider: String!
 }
 
 enum IgnoreCheckIssueActionChoice {
@@ -1687,6 +1745,8 @@ enum MetricTypeChoices {
 }
 
 type Mutation {
+  addIdentityProvider(input: AddIdentityProviderInput!): AddIdentityProviderPayload
+  deleteIdentityProvider(input: DeleteIdentityProviderInput!): DeleteIdentityProviderPayload
   updateEnterpriseInstallation(input: UpdateEnterpriseInstallationInput!): UpdateEnterpriseInstallationPayload
   createGroup(input: CreateGroupInput!): CreateGroupPayload
   updateGroup(input: UpdateGroupInput!): UpdateGroupPayload
@@ -1774,6 +1834,8 @@ type Mutation {
   updateStarredRepository(input: UpdateStarredRepositoryInput!): UpdateStarredRepositoryPayload
   updateWatchedRepository(input: UpdateWatchedRepositoryInput!): UpdateWatchedRepositoryPayload
   updateUserDetails(input: UpdateUserDetailsInput!): UpdateUserDetailsPayload
+  deleteRequestingUser(input: DeleteRequestingUserInput!): DeleteRequestingUserPayload
+  deleteTeam(input: DeleteTeamInput!): DeleteTeamPayload
   confirmInvitation(input: ConfirmInvitationInput!): ConfirmInvitationPayload
   verifyDevice(input: VerifyDeviceInput!): VerifyDevicePayload
   createConfigTemplate(input: CreateConfigTemplateInput!): CreateConfigTemplatePayload
@@ -2018,6 +2080,7 @@ type PublicReportEdge {
 }
 
 type Query {
+  saml2LoginUrl(email: String!): String
   changelog: Changelog
   isViewerSuperadmin: Boolean
   getGroupInviteInfo(invitationCode: String!): GroupInviteInfo
@@ -2740,6 +2803,8 @@ type Team implements MaskPrimaryKeyNode {
   members(offset: Int, before: String, after: String, first: Int, last: Int): UserConnection!
   invitationCode: String
   syncPermissionsWithVcs: Boolean!
+  verifiableDomains(offset: Int, before: String, after: String, first: Int, last: Int): VerifiableDomainConnection!
+  identityProvider: IdentityProvider
   basePermissionSet: TeamBasePermissionSet
   billingDetails: GenericScalar
   numMembersTotal: Int
@@ -2754,6 +2819,7 @@ type Team implements MaskPrimaryKeyNode {
   isDirectMember: Boolean
   repositoryCollaborators(offset: Int, before: String, after: String, first: Int, last: Int, q: String, permission: String, isAddedFromVcs: Boolean, isPermFromVcs: Boolean): RepositoryCollaboratorConnection!
   activeRepositoryCount: Int
+  verifiableDomain: VerifiableDomain
 }
 
 type TeamBasePermissionSet implements MaskPrimaryKeyNode {
@@ -2762,19 +2828,13 @@ type TeamBasePermissionSet implements MaskPrimaryKeyNode {
   modifiedAt: DateTime!
   alive: Boolean
   team: EnterpriseTeam!
-  defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
+  defaultRepositoryPermission: DefaultRepositoryPermissionChoices
   canMembersIgnoreIssues: Boolean!
   canMembersModifyMetricThresholds: Boolean!
   canMembersIgnoreFailingMetrics: Boolean!
   canContributorsIgnoreIssues: Boolean!
   canContributorsModifyMetricThresholds: Boolean!
   canContributorsIgnoreFailingMetrics: Boolean!
-}
-
-enum TeamBasePermissionSetDefaultRepositoryPermission {
-  READ
-  WRITE
-  ADMIN
 }
 
 type TeamConnection {
@@ -3428,7 +3488,7 @@ type UpdateStarredRepositoryPayload {
 
 input UpdateTeamBasePermissionsInput {
   teamId: ID!
-  defaultRepositoryPermission: RepositoryPermissionChoices
+  defaultRepositoryPermission: DefaultRepositoryPermissionChoices
   canMembersIgnoreIssues: Boolean
   canMembersModifyMetricThresholds: Boolean
   canMembersIgnoreFailingMetrics: Boolean
@@ -3533,6 +3593,7 @@ type User implements MaskPrimaryKeyNode {
   bookmarkedIssues(offset: Int, before: String, after: String, first: Int, last: Int, issueType: String, analyzer: String, sort: String, severity: String, q: String, severityIn: [String], autofixAvailable: Boolean): RepositoryIssueConnection!
   preference: UserPreference
   IsBetaTester: Boolean!
+  deleted: DateTime
   socialAuth(offset: Int, before: String, after: String, first: Int, last: Int): UserSocialConnectionConnection!
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection
   primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
@@ -3624,6 +3685,23 @@ enum VCSProviderChoices {
   BITBUCKET
   GITHUB_ENTERPRISE
   GSR
+}
+
+type VerifiableDomain implements MaskPrimaryKeyNode {
+  domainName: String!
+  verified: Boolean!
+  id: ID!
+}
+
+type VerifiableDomainConnection {
+  pageInfo: PageInfo!
+  edges: [VerifiableDomainEdge]!
+  totalCount: Int
+}
+
+type VerifiableDomainEdge {
+  node: VerifiableDomain
+  cursor: String!
 }
 
 type Verify {

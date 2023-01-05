@@ -11,7 +11,7 @@ import { resolveNodes } from '~/utils/array'
 // Apollo Types
 import {
   Team,
-  TeamBasePermissionSetDefaultRepositoryPermission,
+  DefaultRepositoryPermissionChoices,
   TeamMember,
   TeamMemberRoleChoices,
   TransferTeamOwnershipInput,
@@ -231,7 +231,7 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
     injectee: TeamActionContext,
     args: {
       teamId: string
-      defaultRepositoryPermission: TeamBasePermissionSetDefaultRepositoryPermission
+      defaultRepositoryPermission: DefaultRepositoryPermissionChoices
       canMembersIgnoreIssues: boolean
       canContributorsIgnoreIssues: boolean
       canMembersModifyMetricThresholds: boolean

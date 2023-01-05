@@ -88,6 +88,18 @@ export type AddAnalyzerFeedbackPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type AddIdentityProviderInput = {
+  teamId: Scalars['ID'];
+  xmlMetadataUrl: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type AddIdentityProviderPayload = {
+  __typename?: 'AddIdentityProviderPayload';
+  ok: Scalars['Boolean'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type AddTeamToGroupInput = {
   groupId: Scalars['ID'];
   teamId: Scalars['ID'];
@@ -1128,6 +1140,13 @@ export type CreditsInfo = {
 
 
 
+export enum DefaultRepositoryPermissionChoices {
+  None = 'NONE',
+  Read = 'READ',
+  Write = 'WRITE',
+  Admin = 'ADMIN'
+}
+
 export type DeleteAccessTokenInput = {
   tokenId: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
@@ -1171,6 +1190,17 @@ export type DeleteGroupPayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type DeleteIdentityProviderInput = {
+  teamId: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DeleteIdentityProviderPayload = {
+  __typename?: 'DeleteIdentityProviderPayload';
+  ok: Scalars['Boolean'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type DeleteJsonWebTokenCookie = {
   __typename?: 'DeleteJSONWebTokenCookie';
   deleted: Scalars['Boolean'];
@@ -1192,6 +1222,17 @@ export type DeleteRefreshTokenCookie = {
   deleted: Scalars['Boolean'];
 };
 
+export type DeleteRequestingUserInput = {
+  sendEmail?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DeleteRequestingUserPayload = {
+  __typename?: 'DeleteRequestingUserPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 export type DeleteSilenceRuleInput = {
   silenceRuleId: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
@@ -1199,6 +1240,17 @@ export type DeleteSilenceRuleInput = {
 
 export type DeleteSilenceRulePayload = {
   __typename?: 'DeleteSilenceRulePayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DeleteTeamInput = {
+  teamId: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type DeleteTeamPayload = {
+  __typename?: 'DeleteTeamPayload';
   ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -1434,6 +1486,7 @@ export type EnterpriseTeam = MaskPrimaryKeyNode & {
   members: UserConnection;
   invitationCode?: Maybe<Scalars['String']>;
   syncPermissionsWithVcs: Scalars['Boolean'];
+  identityProvider?: Maybe<IdentityProvider>;
   basePermissionSet?: Maybe<TeamBasePermissionSet>;
   billingDetails?: Maybe<Scalars['GenericScalar']>;
   numMembersTotal?: Maybe<Scalars['Int']>;
@@ -1448,6 +1501,7 @@ export type EnterpriseTeam = MaskPrimaryKeyNode & {
   isDirectMember?: Maybe<Scalars['Boolean']>;
   repositoryCollaborators: RepositoryCollaboratorConnection;
   activeRepositoryCount?: Maybe<Scalars['Int']>;
+  verifiableDomain?: Maybe<VerifiableDomain>;
   allLogs?: Maybe<AuditLogConnection>;
 };
 
@@ -1561,6 +1615,7 @@ export type EnterpriseUser = MaskPrimaryKeyNode & {
   bookmarkedIssues: RepositoryIssueConnection;
   preference?: Maybe<UserPreference>;
   IsBetaTester: Scalars['Boolean'];
+  deleted?: Maybe<Scalars['DateTime']>;
   socialAuth: UserSocialConnectionConnection;
   accessTokens: AccessTokenConnection;
   primaryOwnerships: OwnerConnection;
@@ -1936,6 +1991,14 @@ export type GroupUserMembershipEdge = {
   __typename?: 'GroupUserMembershipEdge';
   node?: Maybe<GroupUserMembership>;
   cursor: Scalars['String'];
+};
+
+export type IdentityProvider = MaskPrimaryKeyNode & {
+  __typename?: 'IdentityProvider';
+  id: Scalars['ID'];
+  xmlMetadataUrl: Scalars['String'];
+  domain?: Maybe<VerifiableDomain>;
+  provider: Scalars['String'];
 };
 
 export enum IgnoreCheckIssueActionChoice {
@@ -2445,6 +2508,8 @@ export enum MetricTypeChoices {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  addIdentityProvider?: Maybe<AddIdentityProviderPayload>;
+  deleteIdentityProvider?: Maybe<DeleteIdentityProviderPayload>;
   updateEnterpriseInstallation?: Maybe<UpdateEnterpriseInstallationPayload>;
   createGroup?: Maybe<CreateGroupPayload>;
   updateGroup?: Maybe<UpdateGroupPayload>;
@@ -2532,6 +2597,8 @@ export type Mutation = {
   updateStarredRepository?: Maybe<UpdateStarredRepositoryPayload>;
   updateWatchedRepository?: Maybe<UpdateWatchedRepositoryPayload>;
   updateUserDetails?: Maybe<UpdateUserDetailsPayload>;
+  deleteRequestingUser?: Maybe<DeleteRequestingUserPayload>;
+  deleteTeam?: Maybe<DeleteTeamPayload>;
   confirmInvitation?: Maybe<ConfirmInvitationPayload>;
   verifyDevice?: Maybe<VerifyDevicePayload>;
   createConfigTemplate?: Maybe<CreateConfigTemplatePayload>;
@@ -2565,6 +2632,16 @@ export type Mutation = {
   updatePublicReportSourcedRepositories?: Maybe<UpdatePublicReportSourcedRepositoriesPayload>;
   updatePublicReport?: Maybe<UpdatePublicReportPayload>;
   verifyPasswordForPublicReport?: Maybe<VerifyPasswordForPublicReportPayload>;
+};
+
+
+export type MutationAddIdentityProviderArgs = {
+  input: AddIdentityProviderInput;
+};
+
+
+export type MutationDeleteIdentityProviderArgs = {
+  input: DeleteIdentityProviderInput;
 };
 
 
@@ -2991,6 +3068,16 @@ export type MutationUpdateWatchedRepositoryArgs = {
 
 export type MutationUpdateUserDetailsArgs = {
   input: UpdateUserDetailsInput;
+};
+
+
+export type MutationDeleteRequestingUserArgs = {
+  input: DeleteRequestingUserInput;
+};
+
+
+export type MutationDeleteTeamArgs = {
+  input: DeleteTeamInput;
 };
 
 
@@ -3596,6 +3683,7 @@ export type PublicReportEdge = {
 
 export type Query = {
   __typename?: 'Query';
+  saml2LoginUrl?: Maybe<Scalars['String']>;
   changelog?: Maybe<Changelog>;
   isViewerSuperadmin?: Maybe<Scalars['Boolean']>;
   getGroupInviteInfo?: Maybe<GroupInviteInfo>;
@@ -3641,6 +3729,11 @@ export type Query = {
   publicReportSourceableRepositories?: Maybe<SourceableRepositoryConnection>;
   context?: Maybe<Context>;
   node?: Maybe<MaskPrimaryKeyNode>;
+};
+
+
+export type QuerySaml2LoginUrlArgs = {
+  email: Scalars['String'];
 };
 
 
@@ -5025,6 +5118,8 @@ export type Team = MaskPrimaryKeyNode & {
   members: UserConnection;
   invitationCode?: Maybe<Scalars['String']>;
   syncPermissionsWithVcs: Scalars['Boolean'];
+  verifiableDomains: VerifiableDomainConnection;
+  identityProvider?: Maybe<IdentityProvider>;
   basePermissionSet?: Maybe<TeamBasePermissionSet>;
   billingDetails?: Maybe<Scalars['GenericScalar']>;
   numMembersTotal?: Maybe<Scalars['Int']>;
@@ -5039,10 +5134,20 @@ export type Team = MaskPrimaryKeyNode & {
   isDirectMember?: Maybe<Scalars['Boolean']>;
   repositoryCollaborators: RepositoryCollaboratorConnection;
   activeRepositoryCount?: Maybe<Scalars['Int']>;
+  verifiableDomain?: Maybe<VerifiableDomain>;
 };
 
 
 export type TeamMembersArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  before?: Maybe<Scalars['String']>;
+  after?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+
+export type TeamVerifiableDomainsArgs = {
   offset?: Maybe<Scalars['Int']>;
   before?: Maybe<Scalars['String']>;
   after?: Maybe<Scalars['String']>;
@@ -5108,7 +5213,7 @@ export type TeamBasePermissionSet = MaskPrimaryKeyNode & {
   modifiedAt: Scalars['DateTime'];
   alive?: Maybe<Scalars['Boolean']>;
   team: EnterpriseTeam;
-  defaultRepositoryPermission?: Maybe<TeamBasePermissionSetDefaultRepositoryPermission>;
+  defaultRepositoryPermission?: Maybe<DefaultRepositoryPermissionChoices>;
   canMembersIgnoreIssues: Scalars['Boolean'];
   canMembersModifyMetricThresholds: Scalars['Boolean'];
   canMembersIgnoreFailingMetrics: Scalars['Boolean'];
@@ -5116,12 +5221,6 @@ export type TeamBasePermissionSet = MaskPrimaryKeyNode & {
   canContributorsModifyMetricThresholds: Scalars['Boolean'];
   canContributorsIgnoreFailingMetrics: Scalars['Boolean'];
 };
-
-export enum TeamBasePermissionSetDefaultRepositoryPermission {
-  Read = 'READ',
-  Write = 'WRITE',
-  Admin = 'ADMIN'
-}
 
 export type TeamConnection = {
   __typename?: 'TeamConnection';
@@ -5845,7 +5944,7 @@ export type UpdateStarredRepositoryPayload = {
 
 export type UpdateTeamBasePermissionsInput = {
   teamId: Scalars['ID'];
-  defaultRepositoryPermission?: Maybe<RepositoryPermissionChoices>;
+  defaultRepositoryPermission?: Maybe<DefaultRepositoryPermissionChoices>;
   canMembersIgnoreIssues?: Maybe<Scalars['Boolean']>;
   canMembersModifyMetricThresholds?: Maybe<Scalars['Boolean']>;
   canMembersIgnoreFailingMetrics?: Maybe<Scalars['Boolean']>;
@@ -5958,6 +6057,7 @@ export type User = MaskPrimaryKeyNode & {
   bookmarkedIssues: RepositoryIssueConnection;
   preference?: Maybe<UserPreference>;
   IsBetaTester: Scalars['Boolean'];
+  deleted?: Maybe<Scalars['DateTime']>;
   socialAuth: UserSocialConnectionConnection;
   accessTokens?: Maybe<AccessTokenConnection>;
   primaryOwnerships: OwnerConnection;
@@ -6258,6 +6358,26 @@ export enum VcsProviderChoices {
   GithubEnterprise = 'GITHUB_ENTERPRISE',
   Gsr = 'GSR'
 }
+
+export type VerifiableDomain = MaskPrimaryKeyNode & {
+  __typename?: 'VerifiableDomain';
+  domainName: Scalars['String'];
+  verified: Scalars['Boolean'];
+  id: Scalars['ID'];
+};
+
+export type VerifiableDomainConnection = {
+  __typename?: 'VerifiableDomainConnection';
+  pageInfo: PageInfo;
+  edges: Array<Maybe<VerifiableDomainEdge>>;
+  totalCount?: Maybe<Scalars['Int']>;
+};
+
+export type VerifiableDomainEdge = {
+  __typename?: 'VerifiableDomainEdge';
+  node?: Maybe<VerifiableDomain>;
+  cursor: Scalars['String'];
+};
 
 export type Verify = {
   __typename?: 'Verify';
@@ -7934,7 +8054,7 @@ export type Unnamed_75_Mutation = (
 
 export type UpdateTeamBasePermissionsMutationVariables = Exact<{
   teamId: Scalars['ID'];
-  defaultRepositoryPermission?: Maybe<RepositoryPermissionChoices>;
+  defaultRepositoryPermission?: Maybe<DefaultRepositoryPermissionChoices>;
   canMembersIgnoreIssues?: Maybe<Scalars['Boolean']>;
   canContributorsIgnoreIssues?: Maybe<Scalars['Boolean']>;
   canMembersModifyMetricThresholds?: Maybe<Scalars['Boolean']>;
@@ -9998,10 +10118,10 @@ export type Unnamed_122_QueryVariables = Exact<{
 
 export type Unnamed_122_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'IdentityProvider' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'name' | 'defaultBranchName' | 'hasViewerEditAccess' | 'vcsUrl' | 'vcsHost' | 'supportedAnalyzers' | 'isCommitPossible' | 'isAutofixEnabled' | 'autofixGithubAppInstallationUrl'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'VerifiableDomain' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepositoryIdQueryVariables = Exact<{
@@ -10042,14 +10162,14 @@ export type Unnamed_123_QueryVariables = Exact<{
 
 export type Unnamed_123_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'IdentityProvider' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'config' | 'blobUrlRoot' | 'vcsProvider' | 'hasViewerEditAccess'>
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'descriptionRendered' | 'issueType' | 'title' | 'shortcode' | 'firstSeen' | 'lastSeen' | 'modifiedAt' | 'occurrenceCount' | 'analyzerName' | 'analyzerShortcode' | 'analyzerLogo' | 'autofixAvailable' | 'newVcsIssueUrl' | 'raisedInFiles' | 'tags' | 'severity'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'VerifiableDomain' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type Unnamed_124_QueryVariables = Exact<{
@@ -10063,7 +10183,7 @@ export type Unnamed_124_QueryVariables = Exact<{
 
 export type Unnamed_124_Query = (
   { __typename?: 'Query' }
-  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | (
+  & { node?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'IdentityProvider' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | { __typename?: 'Repository' } | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | (
     { __typename?: 'RepositoryIssue' }
     & Pick<RepositoryIssue, 'shortcode'>
     & { checkIssues: (
@@ -10080,7 +10200,7 @@ export type Unnamed_124_Query = (
         )> }
       )>> }
     ) }
-  ) | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'VerifiableDomain' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepositoryIssueListQueryVariables = Exact<{
@@ -10206,13 +10326,13 @@ export type Unnamed_126_QueryVariables = Exact<{
 
 export type Unnamed_126_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'IdentityProvider' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & { issue?: Maybe<(
       { __typename?: 'RepositoryIssue' }
       & Pick<RepositoryIssue, 'id' | 'raisedInFiles'>
     )> }
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'VerifiableDomain' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type Unnamed_127_QueryVariables = Exact<{
@@ -11224,10 +11344,10 @@ export type Unnamed_146_QueryVariables = Exact<{
 
 export type Unnamed_146_Query = (
   { __typename?: 'Query' }
-  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
+  & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'IdentityProvider' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
     & Pick<Repository, 'id' | 'encPublicKey'>
-  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
+  ) | { __typename?: 'RepositoryCollaborator' } | { __typename?: 'RepositoryCoverageReportItem' } | { __typename?: 'RepositoryIssue' } | { __typename?: 'RepositoryMetricValue' } | { __typename?: 'RepositorySetting' } | { __typename?: 'Run' } | { __typename?: 'SilenceRule' } | { __typename?: 'SourceableRepository' } | { __typename?: 'Team' } | { __typename?: 'TeamBasePermissionSet' } | { __typename?: 'TeamMember' } | { __typename?: 'TeamMemberInvitation' } | { __typename?: 'Transaction' } | { __typename?: 'TransformerReview' } | { __typename?: 'TransformerRun' } | { __typename?: 'TransformerTool' } | { __typename?: 'User' } | { __typename?: 'UserPreference' } | { __typename?: 'UserSocialConnection' } | { __typename?: 'VerifiableDomain' } | { __typename?: 'Webhook' } | { __typename?: 'WebhookEventDelivery' } | { __typename?: 'WebhookEventTypes' }> }
 );
 
 export type RepoStatusPollQueryQueryVariables = Exact<{
