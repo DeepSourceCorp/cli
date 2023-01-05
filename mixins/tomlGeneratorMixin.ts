@@ -70,11 +70,10 @@ export default class TomlGeneratorMixin extends Vue {
     // Returns a toml template string of analyzers section (including it's meta)
     return allAnalyzers
       .map((analyzer) => {
-        const header = [
-          '[[analyzers]]',
-          `name = ${JSON.stringify(analyzer.name)}`,
-          `enabled = ${analyzer.enabled ? 'true' : 'false'}`
-        ].join(NEWLINE)
+        const headerLines = ['[[analyzers]]', `name = ${JSON.stringify(analyzer.name)}`]
+        if (!analyzer.enabled) headerLines.push('enabled = false')
+
+        const header = headerLines.join(NEWLINE)
 
         const meta = [header]
 
@@ -116,11 +115,10 @@ export default class TomlGeneratorMixin extends Vue {
     // Returns a toml template string of transformers section
     return allTransformers
       .map((transformer: TransformerInterface) => {
-        return [
-          `[[transformers]]`,
-          `name = ${JSON.stringify(transformer.name)}`,
-          `enabled = ${transformer.enabled ? 'true' : 'false'}`
-        ].join(NEWLINE)
+        const headerLines = [`[[transformers]]`, `name = ${JSON.stringify(transformer.name)}`]
+        if (!transformer.enabled) headerLines.push('enabled = false')
+
+        return headerLines.join(NEWLINE)
       })
       .join(NEWLINE.repeat(2))
   }

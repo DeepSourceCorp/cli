@@ -96,7 +96,7 @@ describe('Generate TOML from JSON', () => {
       ]
 
       expect(fn(testAnalyzers)).toStrictEqual(
-        `[[analyzers]]\nname = "python"\nenabled = true\n\n  [analyzers.meta]\n  max_line_length = 100\n  skip_doc_coverage = [\n    "module",\n    "magic",\n    "class"\n  ]\n\n[[analyzers]]\nname = "test-coverage"\nenabled = true\n\n[[analyzers]]\nname = "docker"\nenabled = true`
+        `[[analyzers]]\nname = "python"\n\n  [analyzers.meta]\n  max_line_length = 100\n  skip_doc_coverage = [\n    "module",\n    "magic",\n    "class"\n  ]\n\n[[analyzers]]\nname = "test-coverage"\n\n[[analyzers]]\nname = "docker"`
       )
 
       testAnalyzers = [
@@ -113,7 +113,7 @@ describe('Generate TOML from JSON', () => {
       ]
 
       expect(fn(testAnalyzers)).toStrictEqual(
-        `[[analyzers]]\nname = "test-coverage"\nenabled = true\n\n[[analyzers]]\nname = "docker"\nenabled = true`
+        `[[analyzers]]\nname = "test-coverage"\n\n[[analyzers]]\nname = "docker"`
       )
     }
   })
@@ -147,7 +147,7 @@ describe('Generate TOML from JSON', () => {
         }
       ]
       expect(fn(transformersConfig)).toStrictEqual(
-        `[[transformers]]\nname = "black"\nenabled = true\n\n[[transformers]]\nname = "prettier"\nenabled = true\n\n[[transformers]]\nname = "yapf"\nenabled = false`
+        `[[transformers]]\nname = "black"\n\n[[transformers]]\nname = "prettier"\n\n[[transformers]]\nname = "yapf"\nenabled = false`
       )
     }
   })
