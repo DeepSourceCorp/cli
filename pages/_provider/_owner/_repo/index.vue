@@ -171,7 +171,16 @@ export default class Overview extends mixins(PinnedReportsMixin, RepoDetailMixin
 
 <style scoped>
 /* Specify fixed height to prevent layout shifts */
-.pinned-report-widget {
-  height: 406px;
+@media screen and (min-width: 1025px) {
+  .pinned-report-widget {
+    height: 406px;
+  }
+}
+
+/* `iPad Pro` device has the legends appearing towards the bottom */
+@media screen and (width: 1024px) {
+  .pinned-report-widget {
+    height: 442px;
+  }
 }
 </style>

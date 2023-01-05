@@ -7,6 +7,7 @@ import {
   ReportPageT
 } from '~/types/reportTypes'
 import { Report } from '~/types/types'
+import { getFormattedDistributionChartData } from '~/utils/reports'
 
 const reportKey = ReportPageT.ISSUES_PREVENTED
 
@@ -27,17 +28,25 @@ export default {
     const analyzerValues = historicalValues?.values?.analyzer
 
     if (analyzerValues && filter === IssueDistributionT.ANALYZER) {
-      handledResponse.datasets = Object.keys(analyzerValues).map((analyzer) => {
-        return { name: analyzer, chartType: 'bar', values: analyzerValues[analyzer] }
-      })
+      const [dataset, othersDatasetNames] = getFormattedDistributionChartData(
+        analyzerValues,
+        reportKey
+      )
+
+      handledResponse.datasets = dataset
+      handledResponse.othersDatasetNames = othersDatasetNames
     }
 
     const categoryValues = historicalValues?.values?.category
 
     if (categoryValues && filter === IssueDistributionT.CATEGORY) {
-      handledResponse.datasets = Object.keys(categoryValues).map((category) => {
-        return { name: category, chartType: 'bar', values: categoryValues[category] }
-      })
+      const [dataset, othersDatasetNames] = getFormattedDistributionChartData(
+        categoryValues,
+        reportKey
+      )
+
+      handledResponse.datasets = dataset
+      handledResponse.othersDatasetNames = othersDatasetNames
     }
 
     handledResponse.historicalValues = historicalValues

@@ -1,14 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ReportChartLegend with others dataset: {"datasets":[{"name":"doc","chartType":"bar","values":[9,18,17,0,0,0,0,0],"bgColor":"bg-juniper-600"},{"name":"security","chartType":"bar","values":[18,19,5,0,0,0,0,0],"bgColor":"bg-juniper-500"},{"name":"bug-risk","chartType":"bar","values":[11,19,10,0,0,0,0,0],"bgColor":"bg-juniper-300"},{"name":"others","chartType":"bar","values":[62,51,45,0,0,0,0,0],"bgColor":"bg-juniper-100"}],"othersDatasetNames":["antipattern","coverage","performance","style","typecheck"]} 1`] = `
-"<div class=\\"flex flex-wrap gap-x-7 gap-y-3 leading-3 text-vanilla-400 text-xs\\">
-  <div class=\\"flex items-center gap-x-2\\"><span class=\\"w-2 h-2 rounded-sm bg-juniper-600\\"></span>
+"<div class=\\"gap-x-7 gap-y-3 leading-3 text-vanilla-400 text-xs flex flex-wrap\\">
+  <div class=\\"flex items-center gap-x-2 truncate\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-600\\"></span>
     Documentation
   </div>
-  <div class=\\"flex items-center gap-x-2\\"><span class=\\"w-2 h-2 rounded-sm bg-juniper-500\\"></span>
+  <div class=\\"flex items-center gap-x-2 truncate\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-500\\"></span>
     Security
   </div>
-  <div class=\\"flex items-center gap-x-2\\"><span class=\\"w-2 h-2 rounded-sm bg-juniper-300\\"></span>
+  <div class=\\"flex items-center gap-x-2 truncate\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-300\\"></span>
     Bug risk
   </div><span class=\\"relative z-menu\\"><div class=\\"leading-none\\"><button class=\\"flex items-center gap-x-2 leading-3 cursor-pointer hover:text-vanilla-100 focus:text-vanilla-100\\"><span class=\\"w-2 h-2 rounded-sm bg-juniper-100\\"></span> Others
   </button>
@@ -17,14 +17,14 @@ exports[`renders ReportChartLegend with others dataset: {"datasets":[{"name":"do
 `;
 
 exports[`renders ReportChartLegend without others dataset: {"datasets":[{"name":"doc","chartType":"bar","values":[9,18,17,0,0,0,0,0],"bgColor":"bg-juniper-600"},{"name":"security","chartType":"bar","values":[18,19,5,0,0,0,0,0],"bgColor":"bg-juniper-500"},{"name":"bug-risk","chartType":"bar","values":[11,19,10,0,0,0,0,0],"bgColor":"bg-juniper-300"}]} 1`] = `
-"<div class=\\"flex flex-wrap gap-x-7 gap-y-3 leading-3 text-vanilla-400 text-xs\\">
-  <div class=\\"flex items-center gap-x-2\\"><span class=\\"w-2 h-2 rounded-sm bg-juniper-600\\"></span>
+"<div class=\\"gap-x-7 gap-y-3 leading-3 text-vanilla-400 text-xs flex flex-wrap\\">
+  <div class=\\"flex items-center gap-x-2 truncate\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-600\\"></span>
     Documentation
   </div>
-  <div class=\\"flex items-center gap-x-2\\"><span class=\\"w-2 h-2 rounded-sm bg-juniper-500\\"></span>
+  <div class=\\"flex items-center gap-x-2 truncate\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-500\\"></span>
     Security
   </div>
-  <div class=\\"flex items-center gap-x-2\\"><span class=\\"w-2 h-2 rounded-sm bg-juniper-300\\"></span>
+  <div class=\\"flex items-center gap-x-2 truncate\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-300\\"></span>
     Bug risk
   </div>
 </div>"

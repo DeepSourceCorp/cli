@@ -4,8 +4,14 @@ import VTooltip from 'floating-vue'
 
 import { ChartContainer } from '~/components/Reports'
 import PinnedChartReport from '~/components/Reports/PinnedChartReport.vue'
-import { cartesian, generateBooleanProps, generateGenericProps } from '~/test/utils'
+import {
+  cartesian,
+  generateBooleanProps,
+  generateGenericProps,
+  generateStringProps
+} from '~/test/utils'
 import { LoadingConditions } from '~/types/reportTypes'
+import { ReportLevel } from '~/types/types'
 
 interface IPinnedChartReport extends Vue {
   // Data properties
@@ -85,6 +91,7 @@ describe('[[ PinnedChartReport ]]', () => {
     ComplianceStatus: true,
     LazyEmptyChart: true,
     PinnableReportsList: true,
+    ReportChartLegend: true,
     ZButton: true,
     ZChart: true,
     ZIcon: true,
@@ -98,7 +105,7 @@ describe('[[ PinnedChartReport ]]', () => {
 
     const { vm } = shallowMount(PinnedChartReport, {
       mocks,
-      propsData: { ...complianceChartProps, ...props },
+      propsData: { ...complianceChartProps, level: ReportLevel.Owner, ...props },
       stubs,
       localVue
     })
@@ -123,30 +130,36 @@ describe('[[ PinnedChartReport ]]', () => {
   test('renders a compliance based pinned report widget', () => {
     const allowPinningReportsOptions = generateBooleanProps('allowPinningReports', false)
     const compliancePassingOptions = generateBooleanProps('compliancePassing', false)
+    const levelOptions = generateStringProps('level', [ReportLevel.Owner, ReportLevel.Repository])
+
     const loadingValueOptions = getLoadingValueOptions()
 
-    cartesian(allowPinningReportsOptions, compliancePassingOptions, loadingValueOptions).forEach(
-      (propCombination) => {
-        const { html } = render(
-          PinnedChartReport,
-          {
-            mocks,
-            propsData: { ...complianceChartProps, ...propCombination },
-            stubs
-          },
-          (vue) => {
-            vue.use(VTooltip)
-          }
-        )
+    cartesian(
+      allowPinningReportsOptions,
+      compliancePassingOptions,
+      levelOptions,
+      loadingValueOptions
+    ).forEach((propCombination) => {
+      const { html } = render(
+        PinnedChartReport,
+        {
+          mocks,
+          propsData: { ...complianceChartProps, ...propCombination },
+          stubs
+        },
+        (vue) => {
+          vue.use(VTooltip)
+        }
+      )
 
-        expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
-      }
-    )
+      expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
+    })
   })
 
   test('renders a distribution based pinned report widget', () => {
     const allowPinningReportsOptions = generateBooleanProps('allowPinningReports', false)
     const compliancePassingOptions = generateBooleanProps('compliancePassing', false)
+    const levelOptions = generateStringProps('level', [ReportLevel.Owner, ReportLevel.Repository])
     const loadingValueOptions = getLoadingValueOptions()
 
     const distributionChartProps = {
@@ -219,23 +232,26 @@ describe('[[ PinnedChartReport ]]', () => {
       valueLabel: 'ACTIVE ISSUES'
     }
 
-    cartesian(allowPinningReportsOptions, compliancePassingOptions, loadingValueOptions).forEach(
-      (propCombination) => {
-        const { html } = render(
-          PinnedChartReport,
-          {
-            mocks,
-            propsData: { ...distributionChartProps, ...propCombination },
-            stubs
-          },
-          (vue) => {
-            vue.use(VTooltip)
-          }
-        )
+    cartesian(
+      allowPinningReportsOptions,
+      compliancePassingOptions,
+      levelOptions,
+      loadingValueOptions
+    ).forEach((propCombination) => {
+      const { html } = render(
+        PinnedChartReport,
+        {
+          mocks,
+          propsData: { ...distributionChartProps, ...propCombination },
+          stubs
+        },
+        (vue) => {
+          vue.use(VTooltip)
+        }
+      )
 
-        expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
-      }
-    )
+      expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
+    })
   })
 
   test('`showReportControls` method sets `revealReportControls` data property to `true` after clearing the timer', () => {

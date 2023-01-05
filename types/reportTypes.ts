@@ -446,6 +446,7 @@ export interface IHandledResponse {
   compliancePassing?: boolean // Specific to `owasp-top-10` and `sans-top-25`` reports
   coverageList?: Array<RepositoryCoverageReportItem> // Specific to `code-coverage` report
   datasets?: DataSetsT
+  othersDatasetNames?: Array<string>
   label: string
   historicalValues?: HistoricalValues
   value?: number

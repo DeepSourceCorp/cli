@@ -6,6 +6,7 @@ import {
   ReportMeta,
   ReportPageT
 } from '~/types/reportTypes'
+import { getFormattedIssuesAutofixedChartData } from '~/utils/reports'
 
 const reportKey = ReportPageT.ISSUES_AUTOFIXED
 
@@ -24,21 +25,7 @@ export default {
 
     const { historicalValues } = report as { historicalValues: HistoricalValues }
 
-    const prValues = (historicalValues.values.pr ?? []) as Array<number>
-    const defaultBranchValues = (historicalValues.values.default_branch ?? []) as Array<number>
-
-    handledResponse.datasets = [
-      {
-        name: 'Fixed in Pull Requests',
-        values: prValues,
-        chartType: 'bar'
-      },
-      {
-        name: 'Fixed in Default Branch',
-        values: defaultBranchValues,
-        chartType: 'bar'
-      }
-    ]
+    handledResponse.datasets = getFormattedIssuesAutofixedChartData(historicalValues)
 
     handledResponse.historicalValues = historicalValues
 

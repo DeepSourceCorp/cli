@@ -111,29 +111,45 @@
       </div>
     </template>
 
-    <div class="inline-flex items-center gap-x-3 px-5 mt-3.5">
+    <div class="inline-flex justify-between px-5 mt-3.5 w-full">
       <div
         v-if="loadingValue.status && (isReportWidgetDataFetch || isReportGettingSwapped)"
         class="h-7 w-52 bg-ink-300 animate-pulse"
       ></div>
 
       <template v-else>
-        <compliance-status
-          v-if="isComplianceReport && typeof compliancePassing === 'boolean'"
-          :compliance-passed="compliancePassing"
-          text-size="text-xs"
-          class="border border-ink-200 rounded-full px-2 hidden lg:flex"
-        />
-
         <div
-          v-if="typeof value === 'number' && valueLabel"
-          class="inline-flex items-center gap-x-1 text-sm"
+          :class="{ 'items-center': isComplianceReport }"
+          class="inline-flex gap-x-3 truncate self-start lg:leading-3"
         >
-          <z-icon icon="activity" />
+          <compliance-status
+            v-if="isComplianceReport && typeof compliancePassing === 'boolean'"
+            :compliance-passed="compliancePassing"
+            text-size="text-xs"
+            class="border border-ink-200 rounded-full px-2 hidden lg:flex"
+          />
 
-          <span v-tooltip="value > 1000 ? `${value}` : ''">{{ shortenLargeNumber(value) }}</span>
-          <span class="text-vanilla-400">{{ valueLabel }}</span>
+          <div
+            v-if="typeof value === 'number' && valueLabel"
+            class="inline-flex items-center lg:items-start truncate gap-x-1 text-sm"
+          >
+            <z-icon icon="activity" />
+
+            <span v-tooltip="value > 1000 ? `${value}` : ''">{{ shortenLargeNumber(value) }}</span>
+            <span class="text-vanilla-400 truncate">{{ valueLabel }}</span>
+          </div>
         </div>
+
+        <!-- Legend appears next to the value count and label on larger screens - above `1025px` -->
+        <report-chart-legend
+          v-if="showChartLegend"
+          :datasets="datasets"
+          :others-dataset-names="othersDatasetNames"
+          layout="grid"
+          menu-direction="left"
+          menu-placement="top"
+          class="chart-legend-lg"
+        />
       </template>
     </div>
 
@@ -152,6 +168,14 @@
       <div v-else class="px-5">
         <lazy-empty-chart v-bind="emptyChartProps" />
       </div>
+
+      <!-- Legend appears below the chart for mobile and tablet devices - till `1025px` -->
+      <report-chart-legend
+        v-if="showChartLegend"
+        :datasets="datasets"
+        :others-dataset-names="othersDatasetNames"
+        class="chart-legend-sm px-5"
+      />
     </template>
   </chart-container>
 </template>
@@ -229,7 +253,10 @@ export default class PinnedChartReport extends Vue {
   @Prop()
   error: boolean
 
-  @Prop()
+  @Prop({ required: false })
+  othersDatasetNames: Array<string>
+
+  @Prop({ required: true })
   historicalValues: HistoricalValues
 
   @Prop({ required: true })
@@ -464,6 +491,10 @@ export default class PinnedChartReport extends Vue {
     return (this.historicalValues?.labels?.length as number) >= 2 && this.datasets?.length > 0
   }
 
+  get showChartLegend(): boolean {
+    return !this.isComplianceReport && this.showChart
+  }
+
   /**
    * Method to compute the current report type
    *
@@ -535,8 +566,30 @@ export default class PinnedChartReport extends Vue {
 </script>
 
 <style scoped>
+/* Chart legend for smaller screens is visible by default */
+.chart-legend-sm {
+  @apply flex;
+}
+
+/* Chart legend for larger screens is hidden by default */
+.chart-legend-lg {
+  @apply hidden;
+}
+
 .chart-skeleton-loader {
   height: 260px;
+}
+
+@media (min-width: 1025px) {
+  /* Hide chart legend for smaller screens */
+  .chart-legend-sm {
+    @apply hidden;
+  }
+
+  /* Show chart legend for larger screens */
+  .chart-legend-lg {
+    @apply grid;
+  }
 }
 
 .slide-fade-enter-active,
