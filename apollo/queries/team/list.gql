@@ -1,4 +1,4 @@
-query(
+query teamMemberList(
   $login: String!
   $provider: VCSProviderChoices!
   $limit: Int
@@ -16,6 +16,7 @@ query(
           id
           role
           isPrimaryUser
+          isRoleFromVcs
           user {
             id
             fullName

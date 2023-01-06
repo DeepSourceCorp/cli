@@ -29,13 +29,13 @@
     </nav>
 
     <div class="max-w-3xl p-4 space-y-8">
-      <div class="space-y-4">
+      <div class="space-y-4 mb-28">
         <div v-if="pageHeading" class="flex justify-between">
           <h2 class="text-lg font-medium">{{ pageHeading }}</h2>
           <invite-members-modal @inviteSuccess="inviteSuccess" />
         </div>
 
-        <nuxt-child class="mb-28 lg:mb-0" />
+        <nuxt-child />
       </div>
     </div>
 
@@ -50,6 +50,9 @@ import { InviteMembersModal } from '@/components/Members'
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
 
+/**
+ * Team members parent page
+ */
 @Component({
   components: {
     ZTab,

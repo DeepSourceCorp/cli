@@ -970,6 +970,7 @@ export const repositoryIssueList: DocumentNode;
 export const repositoryList: DocumentNode;
 export const AutofixRuns: DocumentNode;
 export const repositoryRunsList: DocumentNode;
+export const teamMemberList: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1964,7 +1965,7 @@ declare module '*/ignoreRules.gql' {
 declare module '*/manageAccess.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const manageRepositoryAccess: DocumentNode;
 
   export default defaultDocument;
 }

@@ -5,13 +5,17 @@ import { MemberListItem } from '~/components/Members'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
 
 import { ZMenu, ZMenuItem, ZMenuSection } from '@deepsource/zeal'
+import { mocksGenerator } from '~/test/mocks'
 
 const baseProps = {
   avatar: '/static/dashboard/images/empty-avatar.svg',
   dateJoined: '2019-02-01T07:55:15.466139+00:00',
   email: 'root@deepsource.io',
   fullName: 'Duck Norris',
-  id: 'VXNlcjpseGJhbWI='
+  id: 'VXNlcjpseGJhbWI=',
+  login: 'deepsourcelabs',
+  vcsProvider: 'gh',
+  teamAvatarUrl: 'static/dashboard/images/empty-avatar.svg'
 }
 
 const optionalProps = {
@@ -19,7 +23,9 @@ const optionalProps = {
   isPrimaryUser: false,
   isRepo: false,
   role: 'ADMIN',
-  showRoleOptions: true
+  showRoleOptions: true,
+  isPermFromVcs: false,
+  isLastListItem: false
 }
 
 const localVue = createLocalVue()
@@ -46,74 +52,84 @@ const store = new Vuex.Store({
   }
 })
 
+const mocks = mocksGenerator()
+
 test('renders MemberListItem with all prop options for team', () => {
   const teamRoleOptions = generateStringProps('role', ['ADMIN', 'MEMBER', 'CONTRIBUTOR'], false)
   const isPrimaryUserOptions = generateBooleanProps('isPrimaryUser', false)
   const clickableOptions = generateBooleanProps('clickable', false)
   const showRoleOptions = generateBooleanProps('showRoleOptions', false)
+  const isPermFromVcsOptions = generateBooleanProps('isPermFromVcs', false)
+  const isLastListItemOptions = generateBooleanProps('isLastListItem', false)
 
-  cartesian(isPrimaryUserOptions, clickableOptions, showRoleOptions, teamRoleOptions).forEach(
-    (propCombination) => {
-      const props = {
-        ...baseProps,
-        ...propCombination,
-        isRepo: false
-      }
-
-      const { html } = render(MemberListItem, {
-        props,
-        stubs: {
-          ZIcon: true,
-          ZMenu: true,
-          ZMenuItem: true,
-          ZMenuSection: true,
-          ZAvatar: true
-        },
-        store
-      })
-
-      expect(html()).toMatchSnapshot(JSON.stringify(props))
+  cartesian(
+    isPrimaryUserOptions,
+    clickableOptions,
+    showRoleOptions,
+    teamRoleOptions,
+    isPermFromVcsOptions,
+    isLastListItemOptions
+  ).forEach((propCombination) => {
+    const props = {
+      ...baseProps,
+      ...propCombination,
+      isRepo: false
     }
-  )
+
+    const { html } = render(MemberListItem, {
+      props,
+      stubs: {
+        ZIcon: true,
+        ZMenu: true,
+        ZMenuItem: true,
+        ZMenuSection: true,
+        ZAvatar: true
+      },
+      store,
+      mocks
+    })
+
+    expect(html()).toMatchSnapshot(JSON.stringify(props))
+  })
 })
 
 test('renders MemberListItem with all prop options for repo', () => {
-  const baseProps = {
-    avatar: '/static/dashboard/images/empty-avatar.svg',
-    dateJoined: '2019-02-01T07:55:15.466139+00:00',
-    email: 'root@deepsource.io',
-    fullName: 'Duck Norris',
-    id: 'VXNlcjpseGJhbWI='
-  }
-
   const repoRoleOptions = generateStringProps('role', ['ADMIN', 'WRITE', 'READ'], false)
   const isPrimaryUserOptions = generateBooleanProps('isPrimaryUser', false)
   const clickableOptions = generateBooleanProps('clickable', false)
   const showRoleOptions = generateBooleanProps('showRoleOptions', false)
+  const isPermFromVcsOptions = generateBooleanProps('isPermFromVcs', false)
+  const isLastListItemOptions = generateBooleanProps('isLastListItem', false)
 
-  cartesian(isPrimaryUserOptions, clickableOptions, showRoleOptions, repoRoleOptions).forEach(
-    (propCombination) => {
-      const props = {
-        ...baseProps,
-        ...propCombination,
-        isRepo: true
-      }
-
-      const { html } = render(MemberListItem, {
-        props,
-        stubs: {
-          ZIcon: true,
-          ZMenu: true,
-          ZMenuItem: true,
-          ZMenuSection: true,
-          ZAvatar: true
-        },
-        store
-      })
-
-      expect(html()).toMatchSnapshot(JSON.stringify(props))
+  cartesian(
+    isPrimaryUserOptions,
+    clickableOptions,
+    showRoleOptions,
+    repoRoleOptions,
+    isPermFromVcsOptions,
+    isLastListItemOptions
+  ).forEach((propCombination) => {
+    const props = {
+      ...baseProps,
+      ...propCombination,
+      isRepo: true
     }
-  )
+
+    const { html } = render(MemberListItem, {
+      props,
+      stubs: {
+        ZIcon: true,
+        ZMenu: true,
+        ZMenuItem: true,
+        ZMenuSection: true,
+        ZAvatar: true
+      },
+      store,
+      mocks
+    })
+
+    expect(html()).toMatchSnapshot(JSON.stringify(props))
+  })
 })
 
 test('Emits "updateRole" event', async () => {
@@ -125,7 +141,8 @@ test('Emits "updateRole" event', async () => {
       ZAvatar: true
     },
     components: { ZMenu, ZMenuItem, ZMenuSection },
-    store
+    store,
+    mocks
   })
 
   const button = getByTestId('show-role-menu')
@@ -146,7 +163,8 @@ test('Emits "removeMember" event', async () => {
       ZAvatar: true
     },
     components: { ZMenu, ZMenuItem, ZMenuSection },
-    store
+    store,
+    mocks
   })
 
   const button = getByTestId('show-role-menu')
@@ -176,7 +194,8 @@ test('Emits "transferOwnership" event', async () => {
       ZAvatar: true
     },
     components: { ZMenu, ZMenuItem, ZMenuSection },
-    store
+    store,
+    mocks
   })
 
   const button = getByTestId('show-role-menu')

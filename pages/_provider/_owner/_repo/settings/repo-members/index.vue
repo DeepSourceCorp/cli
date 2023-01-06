@@ -35,16 +35,21 @@
         v-if="repository.collaborators.edges.length"
         move-class="duration-200 transform"
         tag="ul"
-        class="divide-y divide-ink-300"
       >
         <member-list-item
-          v-for="member in repository.collaborators.edges"
-          :key="member.node.id"
-          :isRepo="true"
-          :role="member.node.permission"
-          v-bind="member.node.user"
-          @updateRole="({ role, newRole }) => triggerUpdateRole(member.node, role, newRole)"
-          @removeMember="() => triggerRemoveMember(member.node)"
+          v-for="(member, index) in repoMembers"
+          :key="member.id"
+          :is-repo="true"
+          :role="member.permission"
+          :is-perm-from-vcs="member.isPermFromVcs"
+          :team-avatar-url="activeDashboardContext.avatar_url"
+          :login="activeDashboardContext.login"
+          :account-type="activeDashboardContext.type"
+          :vcs-provider="activeDashboardContext.vcs_provider"
+          :is-last-list-item="index === repoMembers.length - 1"
+          v-bind="member.user"
+          @updateRole="({ role, newRole }) => triggerUpdateRole(member, role, newRole)"
+          @removeMember="() => triggerRemoveMember(member)"
         />
       </transition-group>
       <lazy-empty-state
@@ -72,12 +77,8 @@
         v-model="currentPageNumber"
       ></z-pagination>
     </template>
-    <div v-else class="flex flex-col space-y-2">
-      <div v-for="i in 10" :key="i" class="flex w-full space-x-2 animate-pulse">
-        <div class="w-8 h-8 rounded-md bg-ink-300"></div>
-        <div class="w-2/3 h-8 rounded-md bg-ink-300"></div>
-        <div class="flex-grow h-8 rounded-md bg-ink-300"></div>
-      </div>
+    <div v-else class="flex flex-col">
+      <member-list-item-loading v-for="loader in LIMIT" :key="loader" />
     </div>
     <portal to="modal">
       <add-collaborator-modal
@@ -120,10 +121,17 @@
 import { Component, mixins, Watch } from 'nuxt-property-decorator'
 import { ZInput, ZIcon, ZPagination, ZConfirm, ZModal, ZButton } from '@deepsource/zeal'
 import { MemberListItem } from '@/components/Members'
-import { Maybe, RepositoryPermissionChoices, TeamMember } from '~/types/types'
+import {
+  Maybe,
+  RepositoryCollaborator,
+  RepositoryPermissionChoices,
+  TeamMember
+} from '~/types/types'
 import { RepoPerms } from '~/types/permTypes'
 import RepoDetailMixin, { REPO_PERMS } from '~/mixins/repoDetailMixin'
 import AddCollaboratorModal from '~/components/Settings/Modals/AddCollaboratorModal.vue'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import { resolveNodes } from '~/utils/array'
 
 const LIMIT = 15
 
@@ -147,7 +155,7 @@ const LIMIT = 15
     }
   }
 })
-export default class RepositoryMembers extends mixins(RepoDetailMixin) {
+export default class RepositoryMembers extends mixins(ActiveUserMixin, RepoDetailMixin) {
   public showAddCollaboratorModal = false
   public searchRule = ''
   public searchCandidate = ''
@@ -158,6 +166,7 @@ export default class RepositoryMembers extends mixins(RepoDetailMixin) {
   public isRemoveModalOpen = false
 
   private repoPerms = REPO_PERMS
+  private LIMIT = LIMIT
 
   getRoleMessage(newRole: RepositoryPermissionChoices, name: string): string {
     const role = this.repoPerms[newRole].label
@@ -171,6 +180,10 @@ export default class RepositoryMembers extends mixins(RepoDetailMixin) {
 
   async fetch(): Promise<void> {
     await this.fetchRepoMembers(false)
+
+    if (!this.viewer) {
+      await this.fetchActiveUser()
+    }
   }
 
   @Watch('currentPageNumber')
@@ -194,6 +207,10 @@ export default class RepositoryMembers extends mixins(RepoDetailMixin) {
       pages = Math.ceil(this.repository?.collaborators?.totalCount / LIMIT)
     }
     return pages > 1 ? pages : 0
+  }
+
+  get repoMembers() {
+    return (resolveNodes(this.repository.collaborators) as Array<RepositoryCollaborator>) ?? []
   }
 
   async searchRepoMembers(): Promise<void> {

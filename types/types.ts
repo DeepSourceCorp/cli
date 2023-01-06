@@ -11257,7 +11257,7 @@ export type Unnamed_144_Query = (
   )> }
 );
 
-export type Unnamed_145_QueryVariables = Exact<{
+export type ManageRepositoryAccessQueryVariables = Exact<{
   provider: VcsProviderChoices;
   owner: Scalars['String'];
   name: Scalars['String'];
@@ -11267,7 +11267,7 @@ export type Unnamed_145_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_145_Query = (
+export type ManageRepositoryAccessQuery = (
   { __typename?: 'Query' }
   & { repository?: Maybe<(
     { __typename?: 'Repository' }
@@ -11279,7 +11279,7 @@ export type Unnamed_145_Query = (
         { __typename?: 'RepositoryCollaboratorEdge' }
         & { node?: Maybe<(
           { __typename?: 'RepositoryCollaborator' }
-          & Pick<RepositoryCollaborator, 'id' | 'permission'>
+          & Pick<RepositoryCollaborator, 'id' | 'permission' | 'isPermFromVcs'>
           & { repository: (
             { __typename?: 'Repository' }
             & Pick<Repository, 'id'>
@@ -11337,12 +11337,12 @@ export type RepositoryReportingSettingsQuery = (
   )> }
 );
 
-export type Unnamed_146_QueryVariables = Exact<{
+export type Unnamed_145_QueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type Unnamed_146_Query = (
+export type Unnamed_145_Query = (
   { __typename?: 'Query' }
   & { repository?: Maybe<{ __typename?: 'AccessToken' } | { __typename?: 'Analyzer' } | { __typename?: 'AnalyzerReview' } | { __typename?: 'AuditLog' } | { __typename?: 'AutoOnboardEvent' } | { __typename?: 'AutofixRun' } | { __typename?: 'Check' } | { __typename?: 'CheckIssue' } | { __typename?: 'ConfigTemplate' } | { __typename?: 'EnterpriseGroup' } | { __typename?: 'EnterpriseInstallationSetup' } | { __typename?: 'EnterpriseTeam' } | { __typename?: 'EnterpriseUser' } | { __typename?: 'FeatureDefinition' } | { __typename?: 'GroupTeamMembership' } | { __typename?: 'GroupUserMembership' } | { __typename?: 'IdentityProvider' } | { __typename?: 'Issue' } | { __typename?: 'IssuePriority' } | { __typename?: 'IssuePriorityType' } | { __typename?: 'Metric' } | { __typename?: 'Owner' } | { __typename?: 'OwnerSetting' } | { __typename?: 'PR' } | { __typename?: 'PublicReport' } | (
     { __typename?: 'Repository' }
@@ -11387,13 +11387,13 @@ export type RepositoryWidgetsQuery = (
   )> }
 );
 
-export type Unnamed_147_QueryVariables = Exact<{
+export type Unnamed_146_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
 }>;
 
 
-export type Unnamed_147_Query = (
+export type Unnamed_146_Query = (
   { __typename?: 'Query' }
   & { owner?: Maybe<(
     { __typename?: 'Owner' }
@@ -11405,7 +11405,7 @@ export type Unnamed_147_Query = (
   )> }
 );
 
-export type Unnamed_148_QueryVariables = Exact<{
+export type Unnamed_147_QueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
   limit?: Maybe<Scalars['Int']>;
@@ -11413,7 +11413,7 @@ export type Unnamed_148_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_148_Query = (
+export type Unnamed_147_Query = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
@@ -11432,7 +11432,7 @@ export type Unnamed_148_Query = (
   )> }
 );
 
-export type Unnamed_149_QueryVariables = Exact<{
+export type TeamMemberListQueryVariables = Exact<{
   login: Scalars['String'];
   provider: VcsProviderChoices;
   limit?: Maybe<Scalars['Int']>;
@@ -11441,7 +11441,7 @@ export type Unnamed_149_QueryVariables = Exact<{
 }>;
 
 
-export type Unnamed_149_Query = (
+export type TeamMemberListQuery = (
   { __typename?: 'Query' }
   & { team?: Maybe<(
     { __typename?: 'Team' }
@@ -11453,7 +11453,7 @@ export type Unnamed_149_Query = (
         { __typename?: 'TeamMemberEdge' }
         & { node?: Maybe<(
           { __typename?: 'TeamMember' }
-          & Pick<TeamMember, 'id' | 'role' | 'isPrimaryUser'>
+          & Pick<TeamMember, 'id' | 'role' | 'isPrimaryUser' | 'isRoleFromVcs'>
           & { user: (
             { __typename?: 'User' }
             & Pick<User, 'id' | 'fullName' | 'email' | 'avatar' | 'dateJoined'>
@@ -11516,12 +11516,12 @@ export type FetchTeamPermissionsQuery = (
   )> }
 );
 
-export type Unnamed_150_QueryVariables = Exact<{
+export type Unnamed_148_QueryVariables = Exact<{
   shortcode: Scalars['String'];
 }>;
 
 
-export type Unnamed_150_Query = (
+export type Unnamed_148_Query = (
   { __typename?: 'Query' }
   & { transformer?: Maybe<(
     { __typename?: 'TransformerTool' }
@@ -11533,12 +11533,12 @@ export type Unnamed_150_Query = (
   )> }
 );
 
-export type Unnamed_151_QueryVariables = Exact<{
+export type Unnamed_149_QueryVariables = Exact<{
   shortcode: Scalars['String'];
 }>;
 
 
-export type Unnamed_151_Query = (
+export type Unnamed_149_Query = (
   { __typename?: 'Query' }
   & { transformer?: Maybe<(
     { __typename?: 'TransformerTool' }
@@ -11550,12 +11550,12 @@ export type Unnamed_151_Query = (
   )> }
 );
 
-export type Unnamed_152_QueryVariables = Exact<{
+export type Unnamed_150_QueryVariables = Exact<{
   q?: Maybe<Scalars['String']>;
 }>;
 
 
-export type Unnamed_152_Query = (
+export type Unnamed_150_Query = (
   { __typename?: 'Query' }
   & { transformers?: Maybe<(
     { __typename?: 'TransformerToolConnection' }
@@ -11573,10 +11573,10 @@ export type Unnamed_152_Query = (
   )> }
 );
 
-export type Unnamed_153_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_151_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_153_Query = (
+export type Unnamed_151_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
@@ -11588,10 +11588,10 @@ export type Unnamed_153_Query = (
   )> }
 );
 
-export type Unnamed_154_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_152_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_154_Query = (
+export type Unnamed_152_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
@@ -11654,10 +11654,10 @@ export type ViewerStarredReposQuery = (
   )> }
 );
 
-export type Unnamed_155_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_153_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_155_Query = (
+export type Unnamed_153_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }
@@ -11669,10 +11669,10 @@ export type Unnamed_155_Query = (
   )> }
 );
 
-export type Unnamed_156_QueryVariables = Exact<{ [key: string]: never; }>;
+export type Unnamed_154_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type Unnamed_156_Query = (
+export type Unnamed_154_Query = (
   { __typename?: 'Query' }
   & { viewer?: Maybe<(
     { __typename?: 'User' }

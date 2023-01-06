@@ -15,30 +15,23 @@
         </template>
       </z-input>
     </div>
-    <div v-if="listLoading" class="flex flex-col space-y-2.5">
-      <div
-        v-for="loader in this.limit"
-        :key="loader"
-        class="flex w-full py-1 space-x-4 animate-pulse"
-      >
-        <div class="rounded-full w-9 h-9 bg-ink-300"></div>
-        <div class="w-1/3 h-10 rounded-md bg-ink-300"></div>
-        <div class="w-1/3 h-10 rounded-md bg-ink-300"></div>
-        <div class="flex-grow h-10 rounded-md bg-ink-300"></div>
-      </div>
+    <div v-if="listLoading" class="flex flex-col">
+      <member-list-item-loading v-for="loader in limit" :key="loader" />
     </div>
     <template v-else-if="teamMembersList && teamMembersList.length">
-      <transition-group
-        move-class="duration-200 transform"
-        tag="ul"
-        class="divide-y divide-ink-300"
-      >
+      <transition-group move-class="duration-200 transform" tag="ul">
         <member-list-item
-          v-for="member in teamMembersList"
+          v-for="(member, index) in teamMembersList"
           :key="member.id"
           :role="member.role"
+          :is-perm-from-vcs="member.isRoleFromVcs"
           :is-primary-user="member.isPrimaryUser"
+          :team-avatar-url="owner.avatar"
           :allow-transfer="allowTransfer"
+          :login="$route.params.owner"
+          :vcs-provider="$route.params.provider"
+          :is-last-list-item="index === teamMembersList.length - 1"
+          account-type="team"
           v-bind="member.user"
           @updateRole="triggerUpdateRole"
           @removeMember="triggerRemoveMember"
@@ -106,6 +99,9 @@ import { User, TeamMember } from '~/types/types'
 import { TeamPerms } from '~/types/permTypes'
 import { resolveNodes } from '~/utils/array'
 
+/**
+ * Active team members page
+ */
 @Component({
   components: {
     ZInput,
@@ -125,7 +121,7 @@ import { resolveNodes } from '~/utils/array'
   },
   layout: 'dashboard'
 })
-export default class Member extends mixins(TeamDetailMixin, OwnerBillingMixin) {
+export default class ActiveMembers extends mixins(TeamDetailMixin, OwnerBillingMixin) {
   private searchCandidate = ''
   private limit = 10
   private currentPage = 1
