@@ -131,7 +131,7 @@
                 placeholder=""
                 :class="{ 'cursor-not-allowed': isFormSubmitting }"
               >
-                <template v-if="!$config.onPrem" #left-toolbar>
+                <template #left-toolbar>
                   <z-file-input
                     :disabled="isFileProcessing || isFormSubmitting"
                     ref="fileUploader"
@@ -543,7 +543,7 @@ export default class Support extends mixins(ActiveUserMixin) {
         const token = this.$store?.getters[`account/auth/${AuthGetterTypes.TOKEN}`] as string
 
         const fileUploadTokens = await uploadFiles(
-          `${this.UPLOAD_ENDPOINT}/api/upload/`,
+          `${this.UPLOAD_ENDPOINT}`,
           FileUploadContexts.zendesk,
           this.filesToUpload,
           {
