@@ -40,7 +40,7 @@ const defaultProps = {
     source: 'REPOSITORY'
   },
   issueType: 'style',
-  lastSeen: '2020-07-09T08:55:25.934225+00:00',
+  lastSeen: twoYearsAgo,
   severity: 'MINOR',
   shortcode: 'PYL-C0412',
   tags: ['a01', 'owasp-top-10'],
