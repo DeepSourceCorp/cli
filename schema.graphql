@@ -1785,6 +1785,7 @@ type Mutation {
   updateOwnerPinnedReports(input: UpdateOwnerPinnedReportsInput!): UpdateOwnerPinnedReportsPayload
   updateRepositoryPinnedReports(input: UpdateRepositoryPinnedReportsInput!): UpdateRepositoryPinnedReportsPayload
   updateRepositoryWidgets(input: UpdateRepositoryWidgetsInput!): UpdateRepositoryWidgetsPayload
+  regenerateRepositoryDSN(input: RegenerateRepositoryDSNInput!): RegenerateRepositoryDSNPayload
   deleteSilenceRule(input: DeleteSilenceRuleInput!): DeleteSilenceRulePayload
   updateDefaultDashboardContextForUser(input: UpdateDefaultDashboardContextForUserInput!): UpdateDefaultDashboardContextForUserPayload
   updateBillingInfo(input: UpdateBillingInfoInput!): UpdateBillingInfoPayload
@@ -2141,6 +2142,16 @@ type RefreshToken {
   refreshExpiresIn: Int!
   token: String!
   refreshToken: String!
+}
+
+input RegenerateRepositoryDSNInput {
+  repositoryId: ID!
+  clientMutationId: String
+}
+
+type RegenerateRepositoryDSNPayload {
+  dsn: String!
+  clientMutationId: String
 }
 
 input RemoveKeyPairForOwnerInput {

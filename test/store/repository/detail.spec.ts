@@ -16,7 +16,7 @@ import {
   RepositoryDetailActions,
   RepositoryDetailMutations
 } from '~/store/repository/detail'
-import { Repository } from '~/types/types'
+import { RegenerateRepositoryDsnPayload, Repository } from '~/types/types'
 import { GraphqlMutationResponse, GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 let actionCxt: RepositoryDetailActionContext
@@ -1464,6 +1464,58 @@ describe('[Store] Repository/Detail', () => {
             // Assert if the payload passed to the mutation was empty.
             expect(e).toEqual(Error('ERR1'))
           }
+        })
+      })
+    })
+
+    describe(`Action "${RepositoryDetailActions.REGENERATE_REPOSITORY_DSN}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $providerMetaMap: {
+              gh: {
+                text: 'Github',
+                shortcode: 'gh',
+                value: 'GITHUB'
+              }
+            },
+            $getGQLAfter: jest.fn(),
+            $applyGraphqlMutation(): Promise<GraphqlMutationResponse> {
+              return Promise.resolve({ data: { regenerateRepositoryDSN: { dsn: 'demo-dsn' } } })
+            }
+          }
+
+          // Setting the global spy on `localThis.$applyGraphqlMutation`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+          await actions[RepositoryDetailActions.REGENERATE_REPOSITORY_DSN].call(
+            localThis,
+            actionCxt
+          )
+        })
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+
+        test('successfully commits mutations', () => {
+          // Loading and Metrics mutation
+          expect(commit).toHaveBeenCalledTimes(1)
+        })
+
+        test(`successfully commits mutation ${RepositoryDetailMutations.SET_REPOSITORY}`, async () => {
+          const {
+            mock: {
+              calls: [firstCall]
+            }
+          } = commit
+          const apiResponse = await localThis.$applyGraphqlMutation()
+          const data = apiResponse?.data?.regenerateRepositoryDSN as RegenerateRepositoryDsnPayload
+
+          // Assert if `RepositoryDetailMutations.SET_REPOSITORY` is being commited or not.
+          expect(firstCall[0]).toEqual(RepositoryDetailMutations.SET_REPOSITORY)
+
+          // Assert if the response from api is same as the one passed to the mutation.
+          expect(firstCall[1].dsn).toEqual(data.dsn)
         })
       })
     })

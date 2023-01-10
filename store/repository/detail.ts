@@ -38,6 +38,7 @@ import RemoveCollaborator from '~/apollo/mutations/repository/settings/removeCol
 import UpdateRepositoryWidgets from '~/apollo/mutations/repository/updateRepositoryWidgets.gql'
 import TriggerGSRRun from '~/apollo/mutations/repository/triggerGSRRun.gql'
 import triggerAdhocRunGQLMutation from '~/apollo/mutations/repository/triggerAdHocRun.gql'
+import regenerateRepositoryDSN from '~/apollo/mutations/repository/settings/regenerateRepositoryDSN.gql'
 
 import {
   UpdateRepoMetricThresholdInput,
@@ -51,7 +52,10 @@ import {
   UpdateRepositoryWidgetsPayload,
   ActivateGsrRepositoryInput,
   UpdateRepositorySettingsPayload,
-  MetricTypeChoices
+  MetricTypeChoices,
+  RegenerateRepositoryDsnPayload,
+  UpdateOrCreateRepositoryCollaboratorPayload,
+  UpdateOrCreateRepositoryCollaboratorInput
 } from '~/types/types'
 import { TransformerInterface } from '~/store/analyzer/list'
 import {
@@ -143,7 +147,8 @@ export enum RepositoryDetailActions {
   UPDATE_REPOSITORY_IN_STORE = 'updateRepositoryInStore',
   TRIGGER_GSR_ACTIVATION = 'triggerGSRActivation',
   POLL_REPO_STATUS = 'pollRepoStatus',
-  TRIGGER_ADHOC_RUN = 'triggerAdHocRun'
+  TRIGGER_ADHOC_RUN = 'triggerAdHocRun',
+  REGENERATE_REPOSITORY_DSN = 'regenerateRepositoryDSN'
 }
 
 export enum RepositoryDetailMutations {
@@ -159,8 +164,13 @@ export interface RepoDetailState {
   repository: Repository
 }
 
+/**
+ * Repository details state
+ *
+ * @return {RepoDetailState}
+ */
 export const state = (): RepoDetailState => ({
-  loading: false as boolean,
+  loading: false,
   error: {},
   repository: {} as Repository
 })
@@ -178,33 +188,36 @@ export const getters: GetterTree<RepositoryDetailModuleState, RootState> = {
 
 interface RepositoryDetailModuleMutations extends MutationTree<RepositoryDetailModuleState> {
   [RepositoryDetailMutations.SET_LOADING]: (
-    state: RepositoryDetailModuleState,
+    repoDetailState: RepositoryDetailModuleState,
     value: boolean
   ) => void
   [RepositoryDetailMutations.SET_ERROR]: (
-    state: RepositoryDetailModuleState,
+    repoDetailState: RepositoryDetailModuleState,
     error: GraphqlError
   ) => void
   [RepositoryDetailMutations.SET_REPOSITORY]: (
-    state: RepositoryDetailModuleState,
+    repoDetailState: RepositoryDetailModuleState,
     repository: Repository
   ) => void
 }
 
 export const mutations: RepositoryDetailModuleMutations = {
-  [RepositoryDetailMutations.SET_LOADING]: (state, value) => {
-    state.loading = value
+  [RepositoryDetailMutations.SET_LOADING]: (repoDetailState, value) => {
+    repoDetailState.loading = value
   },
-  [RepositoryDetailMutations.SET_ERROR]: (state, error) => {
-    state.error = Object.assign({}, state.error, error)
+  [RepositoryDetailMutations.SET_ERROR]: (repoDetailState, error) => {
+    repoDetailState.error = Object.assign({}, repoDetailState.error, error)
   },
-  [RepositoryDetailMutations.SET_REPOSITORY]: (state, repository) => {
-    state.repository = Object.assign({}, state.repository, repository)
+  [RepositoryDetailMutations.SET_REPOSITORY]: (repoDetailState, repository) => {
+    repoDetailState.repository = Object.assign({}, repoDetailState.repository, repository)
   },
-  [RepositoryDetailMutations.SET_REPO_SETTING_VALUE]: (state, options: RepoSettingOptions) => {
+  [RepositoryDetailMutations.SET_REPO_SETTING_VALUE]: (
+    repoDetailState,
+    options: RepoSettingOptions
+  ) => {
     const { settingType, field, value } = options
 
-    const repoSettings = state.repository[settingType].map(
+    const repoSettings = repoDetailState.repository[settingType].map(
       (repoSetting: { slug?: string; shortcode?: string }) => {
         if (repoSetting?.slug === field || repoSetting?.shortcode === field) {
           return { ...repoSetting, ...value }
@@ -214,7 +227,7 @@ export const mutations: RepositoryDetailModuleMutations = {
     )
 
     const updatedSettings = { [settingType]: repoSettings }
-    state.repository = Object.assign({}, state.repository, updatedSettings)
+    repoDetailState.repository = Object.assign({}, repoDetailState.repository, updatedSettings)
   }
 }
 
@@ -433,9 +446,9 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
     args: {
-      input: UpdateRepositorySettingsInput
+      input: UpdateOrCreateRepositoryCollaboratorInput
     }
-  ) => Promise<void>
+  ) => Promise<UpdateOrCreateRepositoryCollaboratorPayload | undefined>
   [RepositoryDetailActions.REMOVE_MEMBER]: (
     this: Store<RootState>,
     injectee: RepositoryDetailActionContext,
@@ -531,6 +544,10 @@ interface RepositoryDetailModuleActions extends ActionTree<RepositoryDetailModul
     injectee: RepositoryDetailActionContext,
     args: { config: string }
   ) => Promise<void>
+  [RepositoryDetailActions.REGENERATE_REPOSITORY_DSN]: (
+    this: Store<RootState>,
+    injectee: RepositoryDetailActionContext
+  ) => Promise<void>
 }
 
 export const actions: RepositoryDetailModuleActions = {
@@ -576,7 +593,7 @@ export const actions: RepositoryDetailModuleActions = {
     }
   },
   async [RepositoryDetailActions.FETCH_METRIC](
-    { state },
+    { state: repoDetailState },
     {
       owner,
       name,
@@ -601,14 +618,14 @@ export const actions: RepositoryDetailModuleActions = {
         refetch
       )) as GraphqlQueryResponse
 
-      return response.data.repository ?? state.repository
+      return response.data.repository ?? repoDetailState.repository
     } catch (e: unknown) {
       this.$logErrorAndToast(e as Error, 'An error occured while fetching the metric.')
       throw e
     }
   },
   async [RepositoryDetailActions.FETCH_NLCV_METRIC](
-    { state },
+    { state: repoDetailState },
     { owner, name, provider, shortcode, metricType = MetricTypeChoices.DefaultBranchOnly, refetch }
   ) {
     try {
@@ -624,14 +641,14 @@ export const actions: RepositoryDetailModuleActions = {
         refetch
       )) as GraphqlQueryResponse
 
-      return response.data.repository ?? state.repository
+      return response.data.repository ?? repoDetailState.repository
     } catch (e: unknown) {
       this.$logErrorAndToast(
         e as Error,
         'An error occured while fetching new line code coverage information.'
       )
     }
-    return state.repository
+    return repoDetailState.repository
   },
   async [RepositoryDetailActions.FETCH_CURRENT_RUN_COUNT]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
@@ -926,7 +943,10 @@ export const actions: RepositoryDetailModuleActions = {
     })
     return response.data.commitConfigToVcs
   },
-  async [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION]({ commit, state }, { isActivated, id }) {
+  async [RepositoryDetailActions.TOGGLE_REPO_ACTIVATION](
+    { commit, state: repoDetailState },
+    { isActivated, id }
+  ) {
     try {
       const response = (await this.$applyGraphqlMutation(ToggleRepositoryActivationMutation, {
         input: { id, isActivated }
@@ -937,7 +957,9 @@ export const actions: RepositoryDetailModuleActions = {
           response.data.toggleRepositoryActivation.repository
         )
         if (response.data.toggleRepositoryActivation.repository?.isActivated)
-          this.$toast.success(`Successfully activated ${state.repository.name as string}.`)
+          this.$toast.success(
+            `Successfully activated ${repoDetailState.repository.name as string}.`
+          )
       }
     } catch (e) {
       this.$logErrorAndToast(
@@ -1021,12 +1043,16 @@ export const actions: RepositoryDetailModuleActions = {
       const response = await this.$applyGraphqlMutation(UpdatePermission, {
         input: args.input
       })
-      commit(RepositoryDetailMutations.SET_LOADING, false)
-      return response.data.updateOrCreateRepositoryCollaborator
+
+      return response.data
+        .updateOrCreateRepositoryCollaborator as UpdateOrCreateRepositoryCollaboratorPayload
     } catch (e) {
       commit(RepositoryDetailMutations.SET_ERROR, e)
+    } finally {
       commit(RepositoryDetailMutations.SET_LOADING, false)
     }
+
+    return undefined
   },
   async [RepositoryDetailActions.REMOVE_MEMBER]({ commit }, args) {
     commit(RepositoryDetailMutations.SET_LOADING, true)
@@ -1158,12 +1184,26 @@ export const actions: RepositoryDetailModuleActions = {
     )
     commit(RepositoryDetailMutations.SET_REPOSITORY, response.data.repository)
   },
-  async [RepositoryDetailActions.TRIGGER_ADHOC_RUN]({ state }, args) {
+  async [RepositoryDetailActions.TRIGGER_ADHOC_RUN]({ state: repoDetailState }, args) {
     await this.$applyGraphqlMutation(triggerAdhocRunGQLMutation, {
       input: {
         config: args.config,
-        repositoryId: state.repository.id
+        repositoryId: repoDetailState.repository.id
       }
+    })
+  },
+  async [RepositoryDetailActions.REGENERATE_REPOSITORY_DSN]({ commit, state: repoDetailState }) {
+    const response = await this.$applyGraphqlMutation(regenerateRepositoryDSN, {
+      input: {
+        repositoryId: repoDetailState.repository.id
+      }
+    })
+
+    const data = response?.data?.regenerateRepositoryDSN as RegenerateRepositoryDsnPayload
+
+    commit(RepositoryDetailMutations.SET_REPOSITORY, {
+      ...repoDetailState.repository,
+      dsn: data?.dsn
     })
   }
 }

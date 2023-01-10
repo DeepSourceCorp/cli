@@ -312,25 +312,40 @@
           <div class="relative">
             <label for="repo-setting-dsn" class="text-sm text-vanilla-100">
               Data Source Name (DSN)
-              <z-input :value="repository.dsn" id="repo-setting-dsn" :read-only="true" class="mt-2">
-                <template slot="right">
-                  <copy-button :value="repository.dsn" :disabled="!repository.dsn" class="w-32" />
-                </template>
-              </z-input>
+
+              <div class="relative">
+                <z-input
+                  id="repo-setting-dsn"
+                  :value="isDSNHidden ? 'random-placeholder-to-hide-dsn' : repository.dsn"
+                  :read-only="true"
+                  :type="isDSNHidden ? 'password' : 'text'"
+                  class="mt-2 border-ink-200"
+                />
+                <div class="absolute flex top-1 right-1 gap-x-1 bg-ink-400">
+                  <z-button
+                    v-tooltip="isDSNHidden ? 'Reveal DSN' : 'Hide DSN'"
+                    :icon="isDSNHidden ? 'eye' : 'eye-off'"
+                    :disabled="!repository.dsn"
+                    button-type="secondary"
+                    size="small"
+                    @click="isDSNHidden = !isDSNHidden"
+                  />
+                  <z-button
+                    v-tooltip="'Generate new DSN'"
+                    button-type="secondary"
+                    icon="refresh-cw"
+                    size="small"
+                    @click="showDSNRegenerateConfirm = true"
+                  />
+                  <copy-button
+                    v-tooltip="'Copy DSN'"
+                    :value="repository.dsn"
+                    :disabled="!repository.dsn"
+                    :icon-only="true"
+                  />
+                </div>
+              </div>
             </label>
-            <div
-              v-if="hideContents"
-              class="absolute flex items-center justify-between w-full h-10 p-2 border top-8 backdrop-blur bg-ink-400 bg-opacity-10 no-filter:bg-opacity-100 border-slate-400"
-            >
-              <button
-                class="flex items-center mx-auto text-sm leading-none cursor-pointer gap-x-2"
-                @click="showContents()"
-              >
-                <z-icon size="small" icon="eye" color="vanilla-100"></z-icon>
-                <span>Reveal</span>
-              </button>
-              <copy-button :value="repository.dsn" :disabled="!repository.dsn" class="w-26" />
-            </div>
           </div>
         </div>
         <p class="text-xs leading-5 text-vanilla-400">
@@ -596,6 +611,34 @@
           @editThreshold="editThreshold"
           @close="showEditThresholdModal = false"
         />
+
+        <z-confirm
+          v-if="showDSNRegenerateConfirm"
+          title="Confirm regenerate DSN for this repository?"
+          subtitle="This action is irreversible, and will invalidate the old DSN. You must replace the old DSN with the new one wherever you are using it."
+          @onClose="showDSNRegenerateConfirm = false"
+        >
+          <template v-slot:footer="{ close }">
+            <div class="flex items-center justify-end mt-6 gap-x-4">
+              <z-button
+                label="Cancel"
+                button-type="ghost"
+                size="small"
+                class="text-vanilla-100"
+                @click="close"
+              />
+
+              <z-button
+                label="Confirm and regenerate DSN"
+                loading-label="Confirm and regenerate DSN"
+                icon="refresh-ccw"
+                size="small"
+                :is-loading="regenerateDSNLoading"
+                :disabled="regenerateDSNLoading"
+                @click="regenerateDSN"
+              />
+            </div> </template
+        ></z-confirm>
       </portal>
     </div>
   </div>
@@ -617,7 +660,8 @@ import {
   ZRadio,
   ZMenu,
   ZMenuSection,
-  ZMenuItem
+  ZMenuItem,
+  ZConfirm
 } from '@deepsource/zeal'
 import {
   Analyzer,
@@ -671,6 +715,7 @@ export enum InputTypes {
     ZMenu,
     ZMenuSection,
     ZMenuItem,
+    ZConfirm,
     Tooltip
   },
   layout: 'repository',
@@ -716,7 +761,10 @@ export default class Reporting extends mixins(RepoDetailMixin) {
   @analyzerStore.Action(AnalyzerListActions.FETCH_ANALYZER_NAMES)
   fetchAnalyzerNames: (args: { categories?: string[] }) => Promise<Analyzer[]>
 
-  public hideContents = true
+  public isDSNHidden = true
+  public showDSNRegenerateConfirm = false
+  public regenerateDSNLoading = false
+
   public isFetchingData = false
   public updatingIntegrationModeSettings = false
 
@@ -972,13 +1020,17 @@ export default class Reporting extends mixins(RepoDetailMixin) {
     this.updateRepositorySettings(inputType, options.field)
   }
 
-  /**
-   * Show contents within the DSN field.
-   *
-   * @returns {void} void
-   */
-  public showContents(): void {
-    this.hideContents = false
+  async regenerateDSN() {
+    this.regenerateDSNLoading = true
+    try {
+      await this.regenerateRepositoryDSN()
+      this.showDSNRegenerateConfirm = false
+      this.$toast.success('Regenerated DSN successfully.')
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'Unable to regenrate DSN. Please contact support.')
+    } finally {
+      this.regenerateDSNLoading = false
+    }
   }
 
   /**

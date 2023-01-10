@@ -2548,6 +2548,7 @@ export type Mutation = {
   updateOwnerPinnedReports?: Maybe<UpdateOwnerPinnedReportsPayload>;
   updateRepositoryPinnedReports?: Maybe<UpdateRepositoryPinnedReportsPayload>;
   updateRepositoryWidgets?: Maybe<UpdateRepositoryWidgetsPayload>;
+  regenerateRepositoryDSN?: Maybe<RegenerateRepositoryDsnPayload>;
   deleteSilenceRule?: Maybe<DeleteSilenceRulePayload>;
   updateDefaultDashboardContextForUser?: Maybe<UpdateDefaultDashboardContextForUserPayload>;
   updateBillingInfo?: Maybe<UpdateBillingInfoPayload>;
@@ -2823,6 +2824,11 @@ export type MutationUpdateRepositoryPinnedReportsArgs = {
 
 export type MutationUpdateRepositoryWidgetsArgs = {
   input: UpdateRepositoryWidgetsInput;
+};
+
+
+export type MutationRegenerateRepositoryDsnArgs = {
+  input: RegenerateRepositoryDsnInput;
 };
 
 
@@ -4078,6 +4084,17 @@ export type RefreshToken = {
   refreshExpiresIn: Scalars['Int'];
   token: Scalars['String'];
   refreshToken: Scalars['String'];
+};
+
+export type RegenerateRepositoryDsnInput = {
+  repositoryId: Scalars['ID'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type RegenerateRepositoryDsnPayload = {
+  __typename?: 'RegenerateRepositoryDSNPayload';
+  dsn: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 export type RemoveKeyPairForOwnerInput = {
@@ -7802,6 +7819,19 @@ export type Unnamed_59_Mutation = (
       { __typename?: 'Repository' }
       & Pick<Repository, 'encPublicKey'>
     )> }
+  )> }
+);
+
+export type RegenerateRepositoryDsnMutationVariables = Exact<{
+  input: RegenerateRepositoryDsnInput;
+}>;
+
+
+export type RegenerateRepositoryDsnMutation = (
+  { __typename?: 'Mutation' }
+  & { regenerateRepositoryDSN?: Maybe<(
+    { __typename?: 'RegenerateRepositoryDSNPayload' }
+    & Pick<RegenerateRepositoryDsnPayload, 'dsn'>
   )> }
 );
 

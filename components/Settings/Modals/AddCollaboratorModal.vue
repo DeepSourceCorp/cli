@@ -128,7 +128,7 @@ export default class AddCollaboratorModal extends mixins(RepoDetailMixin) {
             permission: this.selectedRole
           }
         })
-        if (!response.ok) {
+        if (!response?.ok) {
           throw new Error()
         }
 

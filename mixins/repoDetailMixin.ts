@@ -242,7 +242,7 @@ export default class RepoDetailMixin extends Vue {
   @repoStore.Action(RepositoryDetailActions.UPDATE_MEMBER_PERMISSION)
   updateMemberPermission: (args: {
     input: UpdateOrCreateRepositoryCollaboratorInput
-  }) => Promise<UpdateOrCreateRepositoryCollaboratorPayload>
+  }) => Promise<UpdateOrCreateRepositoryCollaboratorPayload | undefined>
 
   @repoStore.Action(RepositoryDetailActions.REMOVE_MEMBER)
   removeMemberAPI: (args: { input: RemoveRepositoryCollaboratorInput }) => Promise<void>
@@ -263,6 +263,9 @@ export default class RepoDetailMixin extends Vue {
 
   @repoStore.Action(RepositoryDetailActions.TRIGGER_ADHOC_RUN)
   triggerAdHocRun: (args: { config: string }) => void
+
+  @repoStore.Action(RepositoryDetailActions.REGENERATE_REPOSITORY_DSN)
+  regenerateRepositoryDSN: () => Promise<void>
 
   get baseRouteParams(): { name: string; provider: string; owner: string } {
     const { provider, owner, repo } = this.$route.params

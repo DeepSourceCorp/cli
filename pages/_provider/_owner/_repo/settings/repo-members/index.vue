@@ -239,7 +239,7 @@ export default class RepositoryMembers extends mixins(ActiveUserMixin, RepoDetai
             permission: this.newMemberRole
           }
         })
-        if (!response.ok) {
+        if (!response?.ok) {
           throw new Error()
         }
         this.fetchRepoMembers(true)

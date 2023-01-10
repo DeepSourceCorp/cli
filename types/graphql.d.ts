@@ -755,6 +755,15 @@ declare module '*/generateSSHKey.gql' {
 }
     
 
+declare module '*/regenerateRepositoryDSN.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const regenerateRepositoryDSN: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/removeCollaborator.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
