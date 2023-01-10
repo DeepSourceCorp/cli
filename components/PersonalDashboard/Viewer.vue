@@ -192,7 +192,7 @@ export default class ViewerCard extends mixins(ActiveUserMixin) {
       },
       {
         name: 'join-discuss',
-        title: 'Join DeepSource Discuss',
+        title: 'Join Community forum',
         description:
           'Get in touch with our engineering team, get your questions answered, give feedback.',
         isComplete: this.$localStore.get(this.storeKey, 'join-discuss') as boolean,

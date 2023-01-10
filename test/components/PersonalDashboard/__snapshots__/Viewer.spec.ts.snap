@@ -49,7 +49,7 @@ exports[`[[ Viewer ]] renders Viewer 1`] = `
             <!----></label>
           <div class=\\"space-y-2\\">
             <h5 class=\\"leading-none line-through text-vanilla-400\\">
-              Join DeepSource Discuss
+              Join Community forum
             </h5>
             <!---->
           </div>
