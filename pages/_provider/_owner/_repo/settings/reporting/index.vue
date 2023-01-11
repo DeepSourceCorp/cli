@@ -331,6 +331,7 @@
                     @click="isDSNHidden = !isDSNHidden"
                   />
                   <z-button
+                    v-if="canRegenerateDSN"
                     v-tooltip="'Generate new DSN'"
                     button-type="secondary"
                     icon="refresh-cw"
@@ -613,7 +614,7 @@
         />
 
         <z-confirm
-          v-if="showDSNRegenerateConfirm"
+          v-if="showDSNRegenerateConfirm && canRegenerateDSN"
           title="Confirm regenerate DSN for this repository?"
           subtitle="This action is irreversible, and will invalidate the old DSN. You must replace the old DSN with the new one wherever you are using it."
           @onClose="showDSNRegenerateConfirm = false"
@@ -646,7 +647,6 @@
 
 <script lang="ts">
 import { mixins, Component, namespace } from 'nuxt-property-decorator'
-import { Notice } from '@/components/Settings/index'
 import {
   ZDivider,
   ZInput,
@@ -663,6 +663,18 @@ import {
   ZMenuItem,
   ZConfirm
 } from '@deepsource/zeal'
+import { Tooltip } from 'floating-vue'
+
+import {
+  RepositoryDetailMutations,
+  RepoSettingOptions,
+  RepositoryDetailActions
+} from '~/store/repository/detail'
+import { AnalyzerListActions } from '~/store/analyzer/list'
+
+import RepoDetailMixin from '~/mixins/repoDetailMixin'
+import RoleAccessMixin from '~/mixins/roleAccessMixin'
+
 import {
   Analyzer,
   IssuePrioritySetting,
@@ -675,18 +687,9 @@ import {
   Repository,
   UpdateRepositorySettingsInput
 } from '~/types/types'
-import { InfoBanner } from '@/components/Settings/index'
 import { RepoPerms } from '~/types/permTypes'
-import RepoDetailMixin from '~/mixins/repoDetailMixin'
-import {
-  RepositoryDetailMutations,
-  RepoSettingOptions,
-  RepositoryDetailActions
-} from '~/store/repository/detail'
 import { MetricType, NLCV_SHORTCODE } from '~/types/metric'
 import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
-import { AnalyzerListActions } from '~/store/analyzer/list'
-import { Tooltip } from 'floating-vue'
 
 const repoStore = namespace('repository/detail')
 const analyzerStore = namespace('analyzer/list')
@@ -700,7 +703,6 @@ export enum InputTypes {
 
 @Component({
   components: {
-    Notice,
     ZDivider,
     ZInput,
     ZIcon,
@@ -709,7 +711,6 @@ export enum InputTypes {
     ZTableCell,
     ZTableRow,
     ZCheckbox,
-    InfoBanner,
     ZRadioGroup,
     ZRadio,
     ZMenu,
@@ -725,6 +726,7 @@ export enum InputTypes {
       strict: true,
       repoPerms: [
         RepoPerms.VIEW_DSN,
+        RepoPerms.REGENERATE_DSN,
         RepoPerms.CHANGE_ISSUE_TYPES_TO_REPORT,
         RepoPerms.CHANGE_ISSUES_TO_TYPE_TO_BLOCK_PRS_ON,
         RepoPerms.CHANGE_PRIORITY_SETTINGS_TO_REPORT,
@@ -733,7 +735,7 @@ export enum InputTypes {
     }
   }
 })
-export default class Reporting extends mixins(RepoDetailMixin) {
+export default class Reporting extends mixins(RepoDetailMixin, RoleAccessMixin) {
   @repoStore.State
   repository!: Repository
 
@@ -860,7 +862,11 @@ export default class Reporting extends mixins(RepoDetailMixin) {
         ? this.fetchNlcvData(true)
         : new Promise((resolve) => resolve({} as Repository))
 
-      const [nlcvData, analyzerNames] = await Promise.all([nlcvDataPromise, analyzerNamesPromise])
+      const [nlcvData, analyzerNames] = await Promise.all([
+        nlcvDataPromise,
+        analyzerNamesPromise,
+        this.fetchRepoPerms(this.baseRouteParams)
+      ])
 
       this.nlcvRepositoryData = nlcvData
       this.analyzerNames = analyzerNames
@@ -936,6 +942,10 @@ export default class Reporting extends mixins(RepoDetailMixin) {
 
   get canModifyThreshold(): boolean {
     return Boolean(this.nlcvRepositoryData.userPermissionMeta?.can_modify_metric_thresholds)
+  }
+
+  get canRegenerateDSN(): boolean {
+    return this.$gateKeeper.repo(RepoPerms.REGENERATE_DSN, this.repoPerms.permission)
   }
 
   /**

@@ -176,7 +176,8 @@ const REPO_PERMS_MAP = {
     RepositoryCollaboratorPermission.Write
   ],
   [RepoPerms.UPDATE_PUBLIC_REPORTS]: [RepositoryCollaboratorPermission.Admin],
-  [RepoPerms.PIN_REPORTS]: [RepositoryCollaboratorPermission.Admin]
+  [RepoPerms.PIN_REPORTS]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.REGENERATE_DSN]: [RepositoryCollaboratorPermission.Admin]
 }
 
 const FEATURES_PROVIDER_MAP = {
@@ -270,9 +271,9 @@ export default ({ $providerMetaMap, route }: Context, inject: Inject): void => {
       }
 
       if (Array.isArray(feature)) {
-        const allowedMap = feature.map((feature) => {
-          if (feature in FEATURES_PROVIDER_MAP) {
-            return FEATURES_PROVIDER_MAP[feature].includes(providerToTest)
+        const allowedMap = feature.map((appFeature) => {
+          if (appFeature in FEATURES_PROVIDER_MAP) {
+            return FEATURES_PROVIDER_MAP[appFeature].includes(providerToTest)
           }
           return true
         })
