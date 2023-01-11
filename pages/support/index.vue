@@ -19,7 +19,7 @@
           <label for="author-account" class="text-xs">Account or team</label>
           <div>
             <div
-              v-if="!ticketAuthorId"
+              v-if="$fetchState.pending"
               class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"
             ></div>
             <z-select
@@ -27,6 +27,7 @@
               id="author-account"
               v-model="ticketAuthorId"
               :selected="ticketAuthorId"
+              :disabled="!isPartOfTeam"
               spacing="px-4 py-2"
               text-size="text-sm"
             >
@@ -67,7 +68,10 @@
         <div class="space-y-1.5 max-w-lg">
           <label for="author-email" class="text-xs">From</label>
           <div>
-            <div v-if="!authorEmail" class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"></div>
+            <div
+              v-if="$fetchState.pending"
+              class="py-5 my-px rounded-sm bg-ink-300 animate-pulse"
+            ></div>
             <z-select
               v-else
               id="author-email"
@@ -310,6 +314,10 @@ export default class Support extends mixins(ActiveUserMixin) {
     return ''
   }
 
+  get isPartOfTeam(): boolean {
+    return Boolean(this.viewerContexts?.length)
+  }
+
   /**
    * Fetch hook for the page that fetches active user information and sets the default values
    *
@@ -379,7 +387,7 @@ export default class Support extends mixins(ActiveUserMixin) {
    * @returns {boolean} - Whether data is valid (true) or not (false).
    */
   validateInputs(valdiationData: SupportValidationData): boolean {
-    if (!valdiationData.ticketAuthor) {
+    if (!valdiationData.ticketAuthor && this.isPartOfTeam) {
       this.$toast.danger('Select a valid DeepSource workspace for this support request.')
       return false
     }
@@ -533,7 +541,9 @@ export default class Support extends mixins(ActiveUserMixin) {
       fromEmail: dataToValidate.authorEmail,
       ccEmails: dataToValidate.authorCC,
       subject: dataToValidate.supportSubject,
-      body: `Account/Organization Name: ${dataToValidate.ticketAuthor} <br/> ${this.supportHTML}`
+      body: `Account/Organization Name: ${
+        this.isPartOfTeam ? dataToValidate.ticketAuthor : 'Not part of any team'
+      } <br/> ${this.supportHTML}`
     }
 
     try {
