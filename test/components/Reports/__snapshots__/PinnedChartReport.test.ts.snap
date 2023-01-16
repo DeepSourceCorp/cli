@@ -1485,10 +1485,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1519,10 +1519,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1555,10 +1555,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1589,10 +1589,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1625,10 +1625,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1659,10 +1659,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1695,10 +1695,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1729,10 +1729,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1765,10 +1765,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1799,10 +1799,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1835,10 +1835,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1869,10 +1869,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1905,10 +1905,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1939,10 +1939,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -1975,10 +1975,10 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;
 
@@ -2009,9 +2009,9 @@ exports[`[[ PinnedChartReport ]] renders a distribution based pinned report widg
         <zicon-stub icon=\\"activity\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span>93</span> <span class=\\"text-vanilla-400 truncate\\">ACTIVE ISSUES</span>
       </div>
     </div>
-    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" menu-direction=\\"left\\" menu-placement=\\"top\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
+    <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" layout=\\"grid\\" class=\\"chart-legend-lg\\"></reportchartlegend-stub>
   </div>
   <zchart-stub datasets=\\"[object Object],[object Object],[object Object]\\" labels=\\"25 Jul,01 Aug,08 Aug,15 Aug,22 Aug,29 Aug,05 Sep,12 Sep,19 Sep,26 Sep,03 Oct,10 Oct,17 Oct,24 Oct\\" yaxismin=\\"0\\" yaxismax=\\"30\\" type=\\"bar\\" height=\\"300\\" colors=\\"#1035ad,#3e63db,#6c91ff\\" lineoptions=\\"[object Object]\\" baroptions=\\"[object Object]\\" axisoptions=\\"[object Object]\\" maxlegendpoints=\\"8\\" maxslices=\\"12\\" class=\\"chart-tooltip-z-20\\"></zchart-stub>
-  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
+  <reportchartlegend-stub datasets=\\"[object Object],[object Object],[object Object]\\" menu-placement=\\"top\\" class=\\"chart-legend-sm px-5\\"></reportchartlegend-stub>
 </div>"
 `;

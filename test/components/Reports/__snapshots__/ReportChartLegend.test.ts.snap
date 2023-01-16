@@ -24,7 +24,7 @@ exports[`renders ReportChartLegend without others dataset: {"datasets":[{"name":
   <div class=\\"flex items-center gap-x-2 truncate\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-500\\"></span>
     Security
   </div>
-  <div class=\\"flex items-center gap-x-2 truncate\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-300\\"></span>
+  <div class=\\"flex items-center gap-x-2 truncate col-start-2\\"><span class=\\"w-2 h-2 rounded-sm flex-shrink-0 bg-juniper-300\\"></span>
     Bug risk
   </div>
 </div>"

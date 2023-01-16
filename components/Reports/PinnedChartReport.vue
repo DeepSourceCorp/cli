@@ -140,14 +140,12 @@
           </div>
         </div>
 
-        <!-- Legend appears next to the value count and label on larger screens - above `1025px` -->
+        <!-- Legend appears next to the value count and label on larger screens - above `1024px` -->
         <report-chart-legend
           v-if="showChartLegend"
           :datasets="datasets"
           :others-dataset-names="othersDatasetNames"
           layout="grid"
-          menu-direction="left"
-          menu-placement="top"
           class="chart-legend-lg"
         />
       </template>
@@ -169,11 +167,12 @@
         <lazy-empty-chart v-bind="emptyChartProps" />
       </div>
 
-      <!-- Legend appears below the chart for mobile and tablet devices - till `1025px` -->
+      <!-- Legend appears below the chart for mobile and tablet devices - till `1024px` -->
       <report-chart-legend
         v-if="showChartLegend"
         :datasets="datasets"
         :others-dataset-names="othersDatasetNames"
+        menu-placement="top"
         class="chart-legend-sm px-5"
       />
     </template>
@@ -580,8 +579,8 @@ export default class PinnedChartReport extends Vue {
   height: 260px;
 }
 
-@media (min-width: 1025px) {
-  /* Hide chart legend for smaller screens */
+@media screen and (min-width: 1025px) {
+  /* Hide chart legend corresponding to smaller devices */
   .chart-legend-sm {
     @apply hidden;
   }

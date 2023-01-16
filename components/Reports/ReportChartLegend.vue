@@ -3,11 +3,12 @@
     :class="isGridLayout ? 'grid custom-grid-cols' : 'flex flex-wrap'"
     class="gap-x-7 gap-y-3 leading-3 text-vanilla-400 text-xs"
   >
-    <template v-for="dataset in datasets">
+    <template v-for="(dataset, idx) in datasets">
       <div
         v-if="dataset.name !== 'others'"
-        v-tooltip="dataset.name"
+        v-tooltip="datasetNameFormatter(dataset.name)"
         :key="dataset.name"
+        :class="{ 'col-start-2': datasets.length === 3 && idx === 2 && !othersDatasetNames.length }"
         class="flex items-center gap-x-2 truncate"
       >
         <span :class="dataset.bgColor" class="w-2 h-2 rounded-sm flex-shrink-0" />
@@ -72,7 +73,7 @@ export default class ReportChartLegend extends Vue {
   @Prop({ default: 'flex' })
   layout: string
 
-  @Prop({ default: 'right' })
+  @Prop({ default: 'left' })
   menuDirection: string
 
   @Prop({ default: 'bottom' })
