@@ -1,97 +1,104 @@
 <template>
   <div class="relative h-screen four-o-four">
-    <div class="absolute inset-0">
-      <div class="relative h-screen">
-        <picture class="absolute left-0 hidden h-screen xl:block">
-          <source
-            class="h-screen"
-            :srcset="require('~/assets/images/errors/404-bg-left.webp')"
-            type="image/webp"
-          />
-          <source
-            class="h-screen"
-            :srcset="require('~/assets/images/errors/404-bg-left.png')"
-            type="image/png"
-          />
-          <img :src="require('~/assets/images/errors/404-bg-left.png')" alt="" class="h-screen" />
-        </picture>
-        <picture class="absolute right-0 hidden h-screen xl:block">
-          <source
-            class="h-screen"
-            :srcset="require('~/assets/images/errors/404-bg-right.webp')"
-            type="image/webp"
-          />
-          <source
-            class="h-screen"
-            :srcset="require('~/assets/images/errors/404-bg-right.png')"
-            type="image/png"
-          />
-          <img :src="require('~/assets/images/errors/404-bg-right.png')" alt="" class="h-screen" />
-        </picture>
-        <picture class="absolute hidden top-28 left-40 nebula lg:block">
-          <source
-            class="h-48"
-            :srcset="require('~/assets/images/errors/nebula.webp')"
-            type="image/webp"
-          />
-          <source
-            class="h-48"
-            :srcset="require('~/assets/images/errors/nebula.png')"
-            type="image/png"
-          />
-          <img :src="require('~/assets/images/errors/nebula.png')" alt="" class="h-48" />
-        </picture>
-        <picture class="absolute top-15 right-15 rocket">
-          <source
-            class="h-20 md:h-28 lg:h-32"
-            :srcset="require('~/assets/images/errors/rocket.webp')"
-            type="image/webp"
-          />
-          <source
-            class="h-20 md:h-28 lg:h-32"
-            :srcset="require('~/assets/images/errors/rocket.png')"
-            type="image/png"
-          />
-          <img
-            :src="require('~/assets/images/errors/rocket.png')"
-            alt=""
-            class="h-20 md:h-28 lg:h-32"
-          />
-        </picture>
-      </div>
-    </div>
-    <div class="absolute bottom-0 w-full">
-      <div class="flex items-end">
-        <img
-          class="bottom-0 max-h-screen mx-auto left-10"
-          :src="require('~/assets/images/errors/moon.png')"
-          alt=""
-        />
-      </div>
-    </div>
-    <div class="absolute inset-0 bottom-0 flex flex-col justify-end w-full">
-      <div
-        class="flex flex-col items-center justify-between py-8 lg:justify-end h-2/3 lg:h-screen lg:space-y-12"
-      >
-        <div class="flex flex-col items-center justify-between text-center">
-          <span
-            class="text-2.5xl sm:text-3xl font-black tracking-widest text-vanilla-100 lg:text-ink-400"
-          >
-            404
-          </span>
-          <span
-            class="max-w-md text-1.5xl sm:text-2xl font-black text-center text-vanilla-100 lg:text-ink-400"
-          >
-            This dimension doesn't exist... yet!
-          </span>
-          <div class="flex gap-x-5">
-            <a href="/" class="norris-button btn-primary">Go home</a>
-            <nuxt-link :to="loginUrl" class="norris-button btn-secondary">Login</nuxt-link>
-          </div>
-        </div>
-        <span class="mx-auto text-vanilla-100 lg:text-ink-400">
-          © {{ new Date().getFullYear() }}, DeepSource Corp.
+    <!-- Planet on top for Mobile -->
+    <picture class="absolute top-0 right-0 lg:hidden">
+      <source
+        :srcset="require('~/assets/images/errors/404/planet-top-mobile.webp')"
+        type="image/webp"
+      />
+      <source
+        :srcset="require('~/assets/images/errors/404/planet-top-mobile.png')"
+        type="image/png"
+      />
+      <img :src="require('~/assets/images/errors/404/planet-top-mobile.png')" alt="" />
+    </picture>
+
+    <!-- Planet on top for Desktop -->
+    <picture class="hidden absolute top-0 right-0 lg:inline">
+      <source
+        :srcset="require('~/assets/images/errors/404/planet-top-desktop.webp')"
+        type="image/webp"
+      />
+      <source
+        :srcset="require('~/assets/images/errors/404/planet-top-desktop.png')"
+        type="image/png"
+      />
+      <img
+        class="bottom-10"
+        :src="require('~/assets/images/errors/404/planet-top-desktop.png')"
+        alt=""
+      />
+    </picture>
+
+    <div class="flex flex-col items-center justify-center h-full">
+      <div class="p-8 space-y-2.5 max-w-sm lg:max-w-lg xl:max-w-3xl text-container z-30">
+        <h1 class="title font-bold text-vanilla-100">
+          <span class="text-vanilla-400"> 404 </span>
+          <span class="text-vanilla-100"> Not Found </span>
+        </h1>
+
+        <span class="text-sm font-medium text-vanilla-200 lg:text-2xl">
+          This dimension doesn't exist
         </span>
+
+        <p class="text-sm text-vanilla-400 font-normal lg:text-1.5xl">
+          We couldn’t find a page at the URL you’re on. You can try
+          <span class="text-vanilla-100 font-medium"
+            ><nuxt-link :to="loginUrl">logging in</nuxt-link></span
+          >
+          or go back to the
+          <span class="text-vanilla-100 font-medium"><a href="/">homepage</a></span
+          >.
+        </p>
+      </div>
+    </div>
+
+    <picture class="absolute bottom-60 left-0 lg:bottom-20">
+      <source
+        :srcset="require('~/assets/images/errors/404/left-static-desktop.webp')"
+        type="image/webp"
+      />
+      <source
+        :srcset="require('~/assets/images/errors/404/left-static-desktop.png')"
+        type="image/png"
+      />
+      <img :src="require('~/assets/images/errors/404/left-static-desktop.png')" alt="" />
+    </picture>
+
+    <picture class="absolute bottom-10 right-0">
+      <source
+        :srcset="require('~/assets/images/errors/404/right-static-desktop.webp')"
+        type="image/webp"
+      />
+      <source
+        :srcset="require('~/assets/images/errors/404/right-static-desktop.png')"
+        type="image/png"
+      />
+      <img :src="require('~/assets/images/errors/404/right-static-desktop.png')" alt="" />
+    </picture>
+
+    <!-- Cloud on the bottom left only shows up on Desktop -->
+    <picture class="hidden absolute bottom-0 z-20 lg:block">
+      <source
+        :srcset="require('~/assets/images/errors/404/cloud-bottom-left-desktop.webp')"
+        type="image/webp"
+      />
+      <source
+        :srcset="require('~/assets/images/errors/404/cloud-bottom-left-desktop.png')"
+        type="image/png"
+      />
+      <img :src="require('~/assets/images/errors/404/cloud-bottom-left-desktop.png')" alt="" />
+    </picture>
+
+    <div class="absolute bottom-0 w-screen overflow-hidden">
+      <div class="flex items-end">
+        <div class="max-h-screen mx-auto z-10 foreground"></div>
+
+        <img
+          :src="require('~/assets/images/errors/404/smoke.gif')"
+          alt=""
+          class="hidden absolute max-h-screen mx-auto right-1/2 smoke lg:inline"
+        />
       </div>
     </div>
   </div>
@@ -117,116 +124,55 @@ export default class FourOFour extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@font-face {
-  font-family: 'Retro Game';
-  src: local('Retro Game'), url(~/assets/fonts/retro-gaming.ttf) format('truetype');
-}
-
 .four-o-four {
-  background: #101116;
-  background-size: contain;
-  font-family: 'Retro Game', monospace;
-  background-image: url(~/assets/images/errors/stars.png);
+  background: #01010f;
+  background-size: cover;
+  background-image: url('~/assets/images/errors/404/stars-bg-mobile.webp');
+  background-image: image-set(
+    url('~/assets/images/errors/404/stars-bg-mobile.webp') type('image/webp'),
+    url('~/assets/images/errors/404/stars-bg-mobile.png') type('image/png')
+  );
+}
 
-  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABFklEQVRYR9WXURLDIAhE6/0PbSdOtUpcd1Gnpv1KGpTHBpCE1/cXq+vrMph7dGvXZTtpfW10DCA5jrH1H0Jhs5E0hnZdCR+vb5S8Nn8mQCeS9BdSalYJqMBjAGzq59xAESN7VFVUgV8AZB/dZBR7QTFDCqGquvUBVVoEtgIwpQRzmANSFHgWQKExHdIrPeuMvQNDarXe6nC/AutgV3JW+6bgqQLeV8FekRtgV+ToDKEKnACYKsfZjjkam7a0ZpYTytwmgainpC3HvwBocgKOxqRjehoR9DFKNFYtOwCGYCszobeCbl26N6yyQ6g8X/Wex/rBPsNEV6qAMaJPMynIHQCoSqS9JSMmwef51LflTgCRszU7DvAGiV6mHWfsaVUAAAAASUVORK5CYII=),
-    auto;
-
-  .rocket {
-    animation: floating 5s steps(4, end) infinite;
-  }
-
-  .nebula {
-    animation: filter-animation 12s ease-in-out infinite;
+@media screen and (min-width: 1024px) {
+  .four-o-four {
+    background: #01010f;
+    background-size: cover;
+    background-image: url('~/assets/images/errors/404/stars-bg-desktop.webp');
+    background-image: image-set(
+      url('~/assets/images/errors/404/stars-bg-desktop.webp') type('image/webp'),
+      url('~/assets/images/errors/404/stars-bg-desktop.png') type('image/png')
+    );
   }
 }
 
-.norris-button {
-  @apply px-3 py-1 text-lg mt-8 border-solid border-4 relative inline-block text-center select-none;
+.foreground {
+  width: 1263px;
+  height: 256px;
+  background-position: center;
+  background-image: url(~/assets/images/errors/404/foreground-desktop.png);
+  background-repeat: no-repeat;
+}
 
-  border-image-slice: 2;
-  border-image-width: 2;
-  border-image-repeat: stretch;
-  border-image-source: url('data:image/svg+xml;utf8,<?xml version="1.0" encoding="UTF-8" ?><svg version="1.1" width="5" height="5" xmlns="http://www.w3.org/2000/svg"><path d="M2 1 h1 v1 h-1 z M1 2 h1 v1 h-1 z M3 2 h1 v1 h-1 z M2 3 h1 v1 h-1 z" fill="rgb(18, 19, 23)" /></svg>');
-  border-image-outset: 2;
-  border-image-repeat: space;
-  cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC)
-      14 0,
-    pointer;
+.smoke {
+  margin-right: -30rem;
+  bottom: 5.5rem;
+  height: 85px;
+}
 
-  &::after {
-    @apply absolute;
+.title {
+  font-size: 30px;
+}
 
-    top: -4px;
-    right: -4px;
-    bottom: -4px;
-    left: -4px;
-    content: '';
-  }
-
-  &.btn-primary {
-    @apply bg-juniper text-ink-400;
-
-    &:focus {
-      box-shadow: 0 0 0 6px rgba(#2eb78b, 0.3);
-    }
-
-    &:active::after {
-      box-shadow: inset 5px 5px #2eb78b;
-      @apply border-juniper-600;
-    }
-
-    &::after {
-      box-shadow: inset -5px -5px #2eb78b;
-    }
-  }
-
-  &.btn-secondary {
-    @apply bg-ink-100 text-vanilla-100;
-
-    &:focus {
-      box-shadow: 0 0 0 6px rgba(#23262e, 0.3);
-    }
-
-    &:active::after {
-      box-shadow: inset 5px 5px #23262e;
-      @apply border-juniper-600;
-    }
-
-    &::after {
-      box-shadow: inset -5px -5px #23262e;
-    }
+@media screen and (min-width: 1024px) {
+  .title {
+    font-size: 60px;
   }
 }
 
-@keyframes floating {
-  0% {
-    transform: translateY(0px);
-  }
-  25% {
-    transform: translateY(10px);
-  }
-  50% {
-    transform: translateY(0px);
-  }
-  75% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-@keyframes filter-animation {
-  0% {
-    filter: hue-rotate(0deg);
-  }
-
-  50% {
-    filter: hue-rotate(100deg);
-  }
-
-  100% {
-    filter: hue-rotate(0deg);
-  }
+.text-container {
+  background: rgba(92, 114, 207, 0.2);
+  backdrop-filter: blur(4px);
+  border-radius: 8px;
 }
 </style>
