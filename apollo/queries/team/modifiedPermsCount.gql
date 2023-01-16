@@ -1,0 +1,16 @@
+query modifiedPermsCount(
+  $login: String!
+  $provider: VCSProviderChoices!
+  $isRoleFromVcs: Boolean!
+  $first: Int
+) {
+  team(login: $login, provider: $provider) {
+    id
+    teamMembers(isRoleFromVcs: $isRoleFromVcs, first: $first) {
+      totalCount
+    }
+    repositoryCollaborators(isPermFromVcs: $isRoleFromVcs, first: $first) {
+      totalCount
+    }
+  }
+}

@@ -46,6 +46,7 @@ export interface TeamState {
 
 export type TeamActionContext = ActionContext<TeamState, RootState>
 
+// State for team details store
 export const state = (): TeamState => ({
   ...(<TeamState>{
     loading: false,
@@ -69,14 +70,14 @@ export interface TeamActionsModuleMutations extends MutationTree<TeamState> {
 }
 
 export const mutations: TeamActionsModuleMutations = {
-  [TeamMutations.SET_LOADING]: (state, value) => {
-    state.loading = value
+  [TeamMutations.SET_LOADING]: (teamDetailsState, value) => {
+    teamDetailsState.loading = value
   },
-  [TeamMutations.SET_ERROR]: (state, error) => {
-    state.error = Object.assign({}, state.error, error)
+  [TeamMutations.SET_ERROR]: (teamDetailsState, error) => {
+    teamDetailsState.error = Object.assign({}, teamDetailsState.error, error)
   },
-  [TeamMutations.SET_TEAM]: (state, team) => {
-    state.team = Object.assign({}, state.team, team)
+  [TeamMutations.SET_TEAM]: (teamDetailsState, team) => {
+    teamDetailsState.team = Object.assign({}, teamDetailsState.team, team)
   }
 }
 
@@ -239,12 +240,13 @@ export interface TeamModuleActions extends ActionTree<TeamState, RootState> {
       canMembersIgnoreFailingMetrics: boolean
       canContributorsIgnoreFailingMetrics: boolean
     }
-  ) => Promise<UpdateTeamBasePermissionsPayload>
+  ) => Promise<UpdateTeamBasePermissionsPayload | undefined>
   [TeamActions.SYNC_VCS_PERMISSIONS]: (
     this: Store<RootState>,
     injectee: TeamActionContext,
     args: {
       teamId: string
+      overrideChangesMadeOnDeepsource: boolean
     }
   ) => Promise<void>
   [TeamActions.INVITE_SINGLE]: (
@@ -347,6 +349,7 @@ export const actions: TeamModuleActions = {
         (e as Error).message.replace('GraphQL error: ', '') as Parameters<LogErrorAndToastT>['1']
       )
     }
+    return undefined
   },
 
   async [TeamActions.FETCH_INVITED_USERS]({ commit }, { login, provider, limit, currentPage }) {
@@ -537,18 +540,25 @@ export const actions: TeamModuleActions = {
       commit(TeamMutations.SET_ERROR, error)
       commit(TeamMutations.SET_LOADING, false)
     }
+    return undefined
   },
 
-  async [TeamActions.SYNC_VCS_PERMISSIONS]({ commit }, { teamId }) {
+  async [TeamActions.SYNC_VCS_PERMISSIONS](
+    { commit },
+    { teamId, overrideChangesMadeOnDeepsource }
+  ) {
     try {
       commit(TeamMutations.SET_LOADING, true)
       await this.$applyGraphqlMutation(SyncVcsPermissions, {
-        teamId
+        teamId,
+        overrideChangesMadeOnDeepsource
       })
-      commit(TeamMutations.SET_LOADING, false)
+      this.$toast.success('Successfully synced permissions.')
     } catch (e) {
-      const error = e as GraphqlError
+      const error = e as Error
+      this.$logErrorAndToast(error, 'Unable to sync permissions. Please contact support.')
       commit(TeamMutations.SET_ERROR, error)
+    } finally {
       commit(TeamMutations.SET_LOADING, false)
     }
   },

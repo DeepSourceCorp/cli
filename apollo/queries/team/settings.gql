@@ -1,4 +1,4 @@
-query fetchTeamPermissions ($login: String!, $provider: VCSProviderChoices!) {
+query fetchTeamPermissions($login: String!, $provider: VCSProviderChoices!) {
   team(login: $login, provider: $provider) {
     id
     login

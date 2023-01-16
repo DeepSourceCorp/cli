@@ -61,43 +61,31 @@
       ></check-input>
     </form-group>
     <portal to="modal">
-      <z-confirm
+      <confirm-sync-modal
         v-if="showSyncModal"
-        @onClose="closeSyncModal"
-        title="Proceed with sync?"
-        primary-action-label="Sync access settings"
-        primary-action-icon="check"
-        @primaryAction="syncAccessSettings"
-      >
-        <div class="mb-3 leading-relaxed text-vanilla-100">Confirm and sync</div>
-        <p class="text-sm leading-6 mb-2.5 text-vanilla-300">
-          This operation will sync your team's access control settings from
-          {{ providerName }}. This has the following side-effects:
-        </p>
-        <ul class="space-y-5 text-sm text-vanilla-300">
-          <li class="flex items-baseline gap-x-1.5">
-            <z-icon icon="arrow-right" size="x-small" class="flex-shrink-0" />Role of some members
-            in your team on DeepSource will get updated as configured on {{ providerName }}. This
-            may result in your team's occupied seat count being affected.
-          </li>
-          <li class="flex items-baseline gap-x-1.5">
-            <z-icon icon="arrow-right" size="x-small" class="flex-shrink-0" />Collaborators will be
-            added or updated on each repository as configured on {{ providerName }}.
-          </li>
-        </ul>
-      </z-confirm>
+        :provider-name="providerName"
+        :team-member-role-updated-count="teamMemberRoleUpdatedCount"
+        :repo-collaborator-updated-count="repoCollaboratorUpdatedCount"
+        @close-sync-modal="closeSyncModal"
+        @sync-access-settings="syncAccessSettings"
+      />
     </portal>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Watch, mixins } from 'nuxt-property-decorator'
-import TeamDetailMixin from '~/mixins/teamDetailMixin'
 import { ZButton, ZConfirm, ZIcon } from '@deepsource/zeal'
+
 import { CheckInput, FormGroup, RadioGroupInput, ToggleInput } from '~/components/Form'
 
-import { DefaultRepositoryPermissionChoices } from '~/types/types'
+import TeamDetailMixin from '~/mixins/teamDetailMixin'
+
+import modifiedPermsCount from '~/apollo/queries/team/modifiedPermsCount.gql'
+
+import { DefaultRepositoryPermissionChoices, Team } from '~/types/types'
 import { AppFeatures, TeamPerms } from '~/types/permTypes'
+import { GraphqlQueryResponse } from '~/types/apolloTypes'
 
 /**
  * Class for `AccessControlSettings` page. Handles controls for provider permissions and access permissions.
@@ -141,13 +129,16 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
   showSyncModal = false
   isSyncing = false
 
+  teamMemberRoleUpdatedCount = 0
+  repoCollaboratorUpdatedCount = 0
+
   /**
    * Fetch hook for AccessControlSettings page.
    *
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    await this.refetchPerms(false)
+    await Promise.all([this.refetchPerms(false), this.fetchModifiedPermsCount()])
   }
 
   get providerName(): string {
@@ -212,13 +203,16 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
   /**
    * Trigger mutation to manually sync access settings.
    *
+   * @param {boolean} overrideChangesMadeOnDeepsource
    * @returns {Promise<void>} Promise<void>
    */
-  async syncAccessSettings(): Promise<void> {
+  async syncAccessSettings(overrideChangesMadeOnDeepsource: boolean): Promise<void> {
     this.isSyncing = true
     await this.syncVcsPermissionss({
-      teamId: this.team.id
+      teamId: this.team.id,
+      overrideChangesMadeOnDeepsource
     })
+    this.isSyncing = false
   }
 
   /**
@@ -253,12 +247,35 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
       canContributorsIgnoreFailingMetrics:
         this.team.basePermissionSet?.canContributorsIgnoreFailingMetrics
     }
+
     // this.metricSuppressionPerms = {
     //   canMembersIgnoreFailingMetrics: this.team.basePermissionSet?.canMembersIgnoreFailingMetrics,
     //   canContributorsIgnoreFailingMetrics:
     //     this.team.basePermissionSet?.canContributorsIgnoreFailingMetrics
     // }
     this.isFetching = false
+  }
+
+  /**
+   * Method to fetch count of updated perms
+   *
+   * @returns {Promise<void>}
+   */
+  async fetchModifiedPermsCount(): Promise<void> {
+    try {
+      const response: GraphqlQueryResponse = await this.$fetchGraphqlData(modifiedPermsCount, {
+        login: this.$route.params.owner,
+        provider: this.$providerMetaMap[this.$route.params.provider].value,
+        isRoleFromVcs: true,
+        first: 10
+      })
+      const team = response?.data?.team as Team
+
+      this.teamMemberRoleUpdatedCount = team.teamMembers?.totalCount ?? 0
+      this.repoCollaboratorUpdatedCount = team.repositoryCollaborators?.totalCount ?? 0
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'Unable to fetch team data. Please conatct support.')
+    }
   }
 
   /**
@@ -299,7 +316,7 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
             this.metricSuppressionPerms.canContributorsIgnoreFailingMetrics || false
         })
 
-        if (res.ok) {
+        if (res?.ok) {
           await this.refetchPerms(true)
           this.$toast.success('Access permissions updates successfully.')
         } else {

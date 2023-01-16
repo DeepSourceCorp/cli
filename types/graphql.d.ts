@@ -893,7 +893,7 @@ declare module '*/resetTeamInviteLink.gql' {
 declare module '*/syncVcsPermissions.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const syncVcsPermissions: DocumentNode;
 
   export default defaultDocument;
 }
@@ -2038,6 +2038,15 @@ declare module '*/membersBaseDetails.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const membersBaseDetails: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/modifiedPermsCount.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const modifiedPermsCount: DocumentNode;
 
   export default defaultDocument;
 }

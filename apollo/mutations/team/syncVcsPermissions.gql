@@ -1,5 +1,7 @@
-mutation($teamId: ID!) {
-  syncVcsPermissions(input: { teamId: $teamId }) {
+mutation syncVcsPermissions($teamId: ID!, $overrideChangesMadeOnDeepsource: Boolean!) {
+  syncVcsPermissions(
+    input: { teamId: $teamId, overrideChangesMadeOnDeepsource: $overrideChangesMadeOnDeepsource }
+  ) {
     ok
   }
 }

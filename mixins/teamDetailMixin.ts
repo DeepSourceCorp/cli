@@ -9,6 +9,9 @@ import {
 
 const teamStore = namespace('team/detail')
 
+/**
+ * Mixin with team details related information
+ */
 @Component
 export default class TeamDetailMixin extends Vue {
   @teamStore.State
@@ -111,8 +114,11 @@ export default class TeamDetailMixin extends Vue {
     canContributorsModifyMetricThresholds: boolean
     canMembersIgnoreFailingMetrics: boolean
     canContributorsIgnoreFailingMetrics: boolean
-  }) => Promise<UpdateTeamBasePermissionsPayload>
+  }) => Promise<UpdateTeamBasePermissionsPayload | undefined>
 
   @teamStore.Action(TeamActions.SYNC_VCS_PERMISSIONS)
-  syncVcsPermissionss: (args: { teamId: string }) => Promise<void>
+  syncVcsPermissionss: (args: {
+    teamId: string
+    overrideChangesMadeOnDeepsource: boolean
+  }) => Promise<void>
 }
