@@ -1,6 +1,7 @@
 <template>
   <main>
     <four-o-four v-if="error.statusCode === 404" />
+    <five-hundred v-else-if="[500, 501, 502, 503, 504].includes(error.statusCode)" />
     <div v-else class="flex items-center justify-center min-h-screen bg-ink-400 text-vanilla-100">
       <section
         v-if="$config.onPrem && error.statusCode === 403 && error.message === 'license-expired'"
@@ -47,46 +48,6 @@
           </z-button>
         </div>
       </section>
-      <div
-        v-else-if="[500, 501, 502, 503, 504].includes(error.statusCode)"
-        class="max-w-xl space-y-5 text-center"
-      >
-        <!-- 
-        500 Internal Server Error
-        501 Not Implemented
-        502 Bad Gateway
-        503 Service Unavailable
-        504 Gateway Timeout 
-      -->
-        <h1 class="font-black text-center text-7xl">{{ error.statusCode }}</h1>
-        <div class="space-y-2">
-          <p class="text-lg font-semibold text-center text-vanilla-100">
-            There was an error while accessing DeepSource.
-          </p>
-          <p class="max-w-md mx-auto text-sm text-vanilla-200">
-            Our engineers are working to fix this, if this issue persists, please contact DeepSource
-            support. We regret any inconvenience caused.
-          </p>
-        </div>
-        <div class="flex items-center justify-center space-x-3">
-          <a
-            v-if="!$config.onPrem"
-            href="https://deepsourcestatus.com/"
-            target="blank"
-            rel="noreferrer noopener"
-            class="text-sm text-center text-juniper hover:underline"
-          >
-            Status page
-          </a>
-          <a
-            v-if="$config.supportEmail"
-            class="text-sm text-center text-juniper hover:underline"
-            :href="`mailto:${$config.supportEmail}`"
-          >
-            Contact support
-          </a>
-        </div>
-      </div>
       <div v-else class="max-w-xl space-y-5 text-center">
         <h1 class="font-black text-center text-7xl">{{ error.statusCode }}</h1>
         <p class="text-lg font-semibold text-center text-vanilla-100">{{ error.message }}</p>
