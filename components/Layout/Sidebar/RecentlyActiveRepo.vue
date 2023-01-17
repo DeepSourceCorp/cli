@@ -42,8 +42,7 @@
         @click.prevent="toggleDropdown"
         class="flex items-center justify-between w-full px-2 py-1 text-sm outline-none focus:outline-none"
         :class="[
-          isActive('provider-owner-repo') &&
-          !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
+          isActive && !(repoWithPendingAdhocRuns && repoWithPendingAdhocRuns.length)
             ? 'text-vanilla-100'
             : 'text-vanilla-400',
           { cursor: repoList.length === 0 }
@@ -169,8 +168,13 @@ export default class SidebarRecentlyActive extends mixins(ActiveUserMixin, RepoL
     }
   }
 
-  public isActive(params: string): boolean {
-    return this.$route.name?.startsWith(params) || false
+  get isActive(): boolean {
+    if (!this.$route.name) return false
+
+    return (
+      this.$route.name === 'provider-owner-repo' ||
+      this.$route.name?.startsWith('provider-owner-repo-')
+    )
   }
 
   public getRoute(params: string): string {
