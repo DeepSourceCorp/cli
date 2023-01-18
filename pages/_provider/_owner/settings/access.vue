@@ -3,13 +3,25 @@
     <h2 class="text-lg font-medium">Access control</h2>
     <form-group v-if="allowSyncAccessSettings" label="Provider Permissions">
       <toggle-input
-        label="Automatically sync access settings from GitHub"
-        description="Issues would be reported only for lines that have been added or modified across all the files affected."
+        :label="`Automatically sync access settings from ${providerName}`"
         input-id="team-settings-access-sync"
         v-model="syncPermissionsWithVcs"
       >
-        <template slot="description">
-          <p>GitHub allows access settings to be synced automatically.</p>
+        <template #description>
+          <p>
+            DeepSource allows some access settings to be synced automatically from
+            {{ providerName }}.
+            <a
+              href="https://deepsource.io/docs/access-control/team-members#automatic-sync-with-github"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center text-juniper hover:underline focus:underline"
+            >
+              <span>Learn more</span>
+              <z-icon icon="arrow-up-right" size="x-small" color="juniper" />
+            </a>
+          </p>
+
           <z-button
             :is-loading="isSyncing"
             :disabled="isSyncing"
