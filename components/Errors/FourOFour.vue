@@ -30,26 +30,28 @@
       />
     </picture>
 
-    <div class="flex flex-col items-center justify-center h-full">
-      <div class="p-8 space-y-2.5 max-w-sm lg:max-w-lg xl:max-w-3xl text-container z-30">
+    <div class="flex flex-col items-center justify-center h-full p-4 lg:p-0">
+      <div class="p-6 space-y-4 max-w-sm text-container z-30 lg:p-8 lg:max-w-lg xl:max-w-3xl">
         <h1 class="title font-bold text-vanilla-100">
           <span class="text-vanilla-400"> 404 </span>
           <span class="text-vanilla-100"> Not Found </span>
         </h1>
 
-        <span class="text-sm font-medium text-vanilla-200 lg:text-2xl">
-          This dimension doesn't exist
-        </span>
+        <div class="space-y-4">
+          <h2 class="text-base font-medium text-vanilla-200 lg:text-2xl">
+            This dimension doesn't exist...
+          </h2>
 
-        <p class="text-sm text-vanilla-400 font-normal lg:text-1.5xl">
-          We couldn’t find a page at the URL you’re on. You can try
-          <span class="text-vanilla-100 font-medium"
-            ><nuxt-link :to="loginUrl">logging in</nuxt-link></span
-          >
-          or go back to the
-          <span class="text-vanilla-100 font-medium"><a href="/">homepage</a></span
-          >.
-        </p>
+          <p class="text-sm text-vanilla-400 font-normal lg:text-1.5xl">
+            We couldn’t find a page at the URL you’re on. You can try
+            <span class="text-juniper-400 font-medium"
+              ><nuxt-link :to="loginUrl">logging in</nuxt-link></span
+            >
+            or go back to the
+            <span class="text-juniper-400 font-medium"><a href="/">homepage</a></span
+            >.
+          </p>
+        </div>
       </div>
     </div>
 

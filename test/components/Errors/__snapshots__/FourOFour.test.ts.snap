@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ FourOFour ]] renders \`404\` error page contents 1`] = `
+"<div class=\\"relative h-screen four-o-four\\">
+  <picture class=\\"absolute top-0 right-0 lg:hidden\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
+  <picture class=\\"hidden absolute top-0 right-0 lg:inline\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\" class=\\"bottom-10\\"></picture>
+  <div class=\\"flex flex-col items-center justify-center h-full p-4 lg:p-0\\">
+    <div class=\\"p-6 space-y-4 max-w-sm text-container z-30 lg:p-8 lg:max-w-lg xl:max-w-3xl\\">
+      <h1 class=\\"title font-bold text-vanilla-100\\"><span class=\\"text-vanilla-400\\"> 404 </span> <span class=\\"text-vanilla-100\\"> Not Found </span></h1>
+      <div class=\\"space-y-4\\">
+        <h2 class=\\"text-base font-medium text-vanilla-200 lg:text-2xl\\">
+          This dimension doesn't exist...
+        </h2>
+        <p class=\\"text-sm text-vanilla-400 font-normal lg:text-1.5xl\\">
+          We couldn’t find a page at the URL you’re on. You can try
+          <span class=\\"text-juniper-400 font-medium\\"><a>logging in</a></span>
+          or go back to the
+          <span class=\\"text-juniper-400 font-medium\\"><a href=\\"/\\">homepage</a></span>.
+        </p>
+      </div>
+    </div>
+  </div>
+  <picture class=\\"absolute bottom-60 left-0 lg:bottom-20\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
+  <picture class=\\"absolute bottom-10 right-0\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
+  <picture class=\\"hidden absolute bottom-0 z-20 lg:block\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
+    <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
+  <div class=\\"absolute bottom-0 w-screen overflow-hidden\\">
+    <div class=\\"flex items-end\\">
+      <div class=\\"max-h-screen mx-auto z-10 foreground\\"></div> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\" class=\\"hidden absolute max-h-screen mx-auto right-1/2 smoke lg:inline\\">
+    </div>
+  </div>
+</div>"
+`;
