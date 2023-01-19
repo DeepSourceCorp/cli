@@ -2,7 +2,7 @@ import { GetterTree, ActionTree, MutationTree, Store, ActionContext } from 'vuex
 
 import OrgGroupsQuery from '~/apollo/queries/control-panel/user-management/groups.gql'
 import OrgGroupInvitesQuery from '~/apollo/queries/control-panel/user-management/invites.gql'
-import AdddTeamQuery from '~/apollo/queries/control-panel/user-management/addTeam.gql'
+import AddTeamQuery from '~/apollo/queries/control-panel/user-management/addTeam.gql'
 import OrgGroupUserQuery from '~/apollo/queries/control-panel/user-management/groupAndUsers.gql'
 import OrgGroupTeamQuery from '~/apollo/queries/control-panel/user-management/groupAndTeams.gql'
 
@@ -76,20 +76,20 @@ export const state = (): OrgGroupsModuleState => ({
 export type OrgGroupsActionContext = ActionContext<OrgGroupsModuleState, RootState>
 
 export const getters: GetterTree<OrgGroupsModuleState, RootState> = {
-  [OrgGroupsGetters.ORG_GROUPS_DATA]: (state) => {
-    return state.OrgGroupsData as EnterpriseGroup[]
+  [OrgGroupsGetters.ORG_GROUPS_DATA]: (groupState) => {
+    return groupState.OrgGroupsData as EnterpriseGroup[]
   },
-  [OrgGroupsGetters.ORG_GROUP_INVITES_DATA]: (state) => {
-    return state.OrgGroupInvitesData as EnterpriseGroup[]
+  [OrgGroupsGetters.ORG_GROUP_INVITES_DATA]: (groupState) => {
+    return groupState.OrgGroupInvitesData as EnterpriseGroup[]
   },
-  [OrgGroupsGetters.TEAMS_TO_ADD]: (state) => {
-    return state.teamsToAdd as EnterpriseGroup
+  [OrgGroupsGetters.TEAMS_TO_ADD]: (groupState) => {
+    return groupState.teamsToAdd as EnterpriseGroup
   },
-  [OrgGroupsGetters.ORG_GROUP_DATA]: (state) => {
-    return state.OrgGroupData as EnterpriseGroup
+  [OrgGroupsGetters.ORG_GROUP_DATA]: (groupState) => {
+    return groupState.OrgGroupData as EnterpriseGroup
   },
-  [OrgGroupsGetters.ENTERPRISE_SCIM_ENABLED]: (state) => {
-    return state.EnterpriseScimEnabled || false
+  [OrgGroupsGetters.ENTERPRISE_SCIM_ENABLED]: (groupState) => {
+    return groupState.EnterpriseScimEnabled || false
   }
 }
 interface OrgGroupsModuleMutations extends MutationTree<OrgGroupsModuleState> {
@@ -117,23 +117,23 @@ interface OrgGroupsModuleMutations extends MutationTree<OrgGroupsModuleState> {
 }
 
 export const mutations: OrgGroupsModuleMutations = {
-  [OrgGroupsMutations.SET_ORG_GROUPS_DATA]: (state, OrgGroupsData) => {
-    state.OrgGroupsData = OrgGroupsData
+  [OrgGroupsMutations.SET_ORG_GROUPS_DATA]: (groupState, OrgGroupsData) => {
+    groupState.OrgGroupsData = OrgGroupsData
   },
-  [OrgGroupsMutations.SET_TEAMS_TO_ADD]: (state, teamsToAdd) => {
-    state.teamsToAdd = teamsToAdd
+  [OrgGroupsMutations.SET_TEAMS_TO_ADD]: (groupState, teamsToAdd) => {
+    groupState.teamsToAdd = teamsToAdd
   },
-  [OrgGroupsMutations.SET_ORG_GROUP_DATA]: (state, OrgGroupData) => {
-    state.OrgGroupData = Object.assign({}, state.OrgGroupData, OrgGroupData)
+  [OrgGroupsMutations.SET_ORG_GROUP_DATA]: (groupState, OrgGroupData) => {
+    groupState.OrgGroupData = Object.assign({}, groupState.OrgGroupData, OrgGroupData)
   },
-  [OrgGroupsMutations.SET_ORG_GROUP_INVITES_DATA]: (state, OrgGroupInvitesData) => {
-    state.OrgGroupInvitesData = OrgGroupInvitesData
+  [OrgGroupsMutations.SET_ORG_GROUP_INVITES_DATA]: (groupState, OrgGroupInvitesData) => {
+    groupState.OrgGroupInvitesData = OrgGroupInvitesData
   },
-  [OrgGroupsMutations.SET_ENTERPRISE_SCIM_ENABLED]: (state, EnterpriseScimEnabled) => {
-    state.EnterpriseScimEnabled = EnterpriseScimEnabled
+  [OrgGroupsMutations.SET_ENTERPRISE_SCIM_ENABLED]: (groupState, EnterpriseScimEnabled) => {
+    groupState.EnterpriseScimEnabled = EnterpriseScimEnabled
   },
-  [OrgGroupsMutations.SET_ERROR]: (state, error) => {
-    state.error = Object.assign({}, state.error, error)
+  [OrgGroupsMutations.SET_ERROR]: (groupState, error) => {
+    groupState.error = Object.assign({}, groupState.error, error)
   }
 }
 
@@ -225,7 +225,7 @@ export const actions: OrgGroupsModuleActions = {
   async [OrgGroupsActions.FETCH_TEAMS_TO_ADD]({ commit }, args) {
     try {
       const response = (await this.$fetchGraphqlData(
-        AdddTeamQuery,
+        AddTeamQuery,
         args,
         args?.refetch
       )) as GraphqlQueryResponse

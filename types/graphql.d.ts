@@ -1060,7 +1060,7 @@ declare module '*/superadminCheck.gql' {
 declare module '*/addTeam.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const AddTeamQuery: DocumentNode;
 
   export default defaultDocument;
 }

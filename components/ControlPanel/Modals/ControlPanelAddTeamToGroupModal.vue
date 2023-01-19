@@ -39,13 +39,12 @@
                 </p>
                 <div class="flex items-center gap-x-3">
                   <div
-                    v-if="team.teamMembers && team.teamMembers.totalCount"
+                    v-if="team.teamMembers && team.numMembersTotal"
                     class="flex items-center gap-x-1.5 text-vanilla-400"
                   >
                     <z-icon icon="users" size="x-small" class="flex-shrink-0" />
                     <span class="text-xxs"
-                      >{{ team.teamMembers.totalCount }} member<span
-                        v-if="team.teamMembers.totalCount > 1"
+                      >{{ team.numMembersTotal }} member<span v-if="team.numMembersTotal > 1"
                         >s</span
                       ></span
                     >

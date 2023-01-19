@@ -1,4 +1,4 @@
-query($groupId: ID!, $q: String) {
+query AddTeamQuery($groupId: ID!, $q: String) {
   enterprise {
     group(id: $groupId) {
       id
@@ -9,9 +9,7 @@ query($groupId: ID!, $q: String) {
             login
             name
             avatar
-            teamMembers {
-              totalCount
-            }
+            numMembersTotal
             roleInGroup
           }
         }

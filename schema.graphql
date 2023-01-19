@@ -1745,6 +1745,10 @@ enum MetricTypeChoices {
 }
 
 type Mutation {
+  createConfigTemplate(input: CreateConfigTemplateInput!): CreateConfigTemplatePayload
+  updateConfigTemplate(input: UpdateConfigTemplateInput!): UpdateConfigTemplatePayload
+  deleteConfigTemplate(input: DeleteConfigTemplateInput!): DeleteConfigTemplatePayload
+  autoOnboard(input: AutoOnboardInput!): AutoOnboardPayload
   addIdentityProvider(input: AddIdentityProviderInput!): AddIdentityProviderPayload
   deleteIdentityProvider(input: DeleteIdentityProviderInput!): DeleteIdentityProviderPayload
   updateEnterpriseInstallation(input: UpdateEnterpriseInstallationInput!): UpdateEnterpriseInstallationPayload
@@ -1839,10 +1843,6 @@ type Mutation {
   deleteTeam(input: DeleteTeamInput!): DeleteTeamPayload
   confirmInvitation(input: ConfirmInvitationInput!): ConfirmInvitationPayload
   verifyDevice(input: VerifyDeviceInput!): VerifyDevicePayload
-  createConfigTemplate(input: CreateConfigTemplateInput!): CreateConfigTemplatePayload
-  updateConfigTemplate(input: UpdateConfigTemplateInput!): UpdateConfigTemplatePayload
-  deleteConfigTemplate(input: DeleteConfigTemplateInput!): DeleteConfigTemplatePayload
-  autoOnboard(input: AutoOnboardInput!): AutoOnboardPayload
   submitSupportTicket(input: SubmitSupportTicketInput!): SubmitSupportTicketPayload
   createWebhook(input: CreateWebhookInput!): CreateWebhookPayload
   testWebhook(input: TestWebhookInput!): TestWebhookPayload
