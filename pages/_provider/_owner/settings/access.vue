@@ -278,7 +278,7 @@ export default class AccessControlSettings extends mixins(TeamDetailMixin) {
       const response: GraphqlQueryResponse = await this.$fetchGraphqlData(modifiedPermsCount, {
         login: this.$route.params.owner,
         provider: this.$providerMetaMap[this.$route.params.provider].value,
-        isRoleFromVcs: true,
+        isRoleFromVcs: false,
         first: 10
       })
       const team = response?.data?.team as Team
