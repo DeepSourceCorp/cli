@@ -17,7 +17,7 @@
               </span>
             </div>
             <z-alert v-if="teamMemberRoleUpdatedCount" type="info" class="mx-4">
-              {{ teamMemberRoleUpdatedCount }}
+              {{ shortenLargeNumber(teamMemberRoleUpdatedCount) }}
               {{ teamMemberRoleUpdatedCount === 1 ? `user's role was` : `users' roles were` }}
               updated in your team.
             </z-alert>
@@ -31,7 +31,7 @@
               </span>
             </div>
             <z-alert v-if="repoCollaboratorUpdatedCount" type="info" class="mx-4">
-              {{ repoCollaboratorUpdatedCount }}
+              {{ shortenLargeNumber(repoCollaboratorUpdatedCount) }}
               {{
                 repoCollaboratorUpdatedCount === 1
                   ? `user's permission was`
@@ -79,6 +79,8 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZModal, ZIcon, ZButton, ZCheckbox, ZAlert } from '@deepsource/zeal'
 
+import { shortenLargeNumber } from '~/utils/string'
+
 // Modal to confirm manual syncing
 @Component({
   components: {
@@ -87,6 +89,9 @@ import { ZModal, ZIcon, ZButton, ZCheckbox, ZAlert } from '@deepsource/zeal'
     ZButton,
     ZCheckbox,
     ZAlert
+  },
+  methods: {
+    shortenLargeNumber
   }
 })
 export default class ConfirmSyncModal extends Vue {
