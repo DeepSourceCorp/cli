@@ -310,38 +310,40 @@ export default class Sidebar extends mixins(
     const params = { login, provider, refetch: true }
     await this.fetchMaxUsagePercentage(params)
 
-    // Identify the user via RudderStack
-    const { avatar, dateJoined: createdAt, email, firstName, id, lastName } = this.viewer
+    if (process.client) {
+      // Identify the user via RudderStack
+      const { avatar, dateJoined: createdAt, email, firstName, id, lastName } = this.viewer
 
-    // @ts-ignore
-    this.$rudder.identify(id, {
-      avatar,
-      createdAt,
-      email,
-      firstName,
-      lastName
-    })
-
-    // Identify the team via RudderStack
-    const {
-      avatar_url: team_avatar_url,
-      id: groupId,
-      subscribed_plan_info,
-      team_name,
-      type,
-      vcs_provider_display
-    } = this.activeDashboardContext
-
-    if (type === 'team' && groupId && team_name) {
-      this.$rudder.group(String(groupId), {
-        avatar: team_avatar_url,
-        name: team_name,
-        plan:
-          typeof subscribed_plan_info === 'object'
-            ? subscribed_plan_info.name
-            : subscribed_plan_info,
-        vcsProvider: vcs_provider_display
+      // @ts-ignore
+      this.$rudder?.identify(id, {
+        avatar,
+        createdAt,
+        email,
+        firstName,
+        lastName
       })
+
+      // Identify the team via RudderStack
+      const {
+        avatar_url: team_avatar_url,
+        id: groupId,
+        subscribed_plan_info,
+        team_name,
+        type,
+        vcs_provider_display
+      } = this.activeDashboardContext
+
+      if (type === 'team' && groupId && team_name) {
+        this.$rudder?.group(String(groupId), {
+          avatar: team_avatar_url,
+          name: team_name,
+          plan:
+            typeof subscribed_plan_info === 'object'
+              ? subscribed_plan_info.name
+              : subscribed_plan_info,
+          vcsProvider: vcs_provider_display
+        })
+      }
     }
   }
 

@@ -160,7 +160,9 @@ export const actions: AuthModuleActions = {
       await this.$resetLocalDB()
 
       // reset rudder stack
-      this.$rudder.reset()
+      if (process.client) {
+        this.$rudder?.reset()
+      }
 
       // reset the apollo cache
       this.$clearGqlStore()
