@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col p-4 gap-y-2 max-w-2xl">
     <page-title
-      class="max-w-2xl"
       title="Badges"
       description-width-class="max-w-2xl"
       description="Embeddable badges that can be used to link to the DeepSource dashboard for this project. Add
         these badges in the project's README, wiki or the website."
+      class="max-w-2xl"
     />
     <div class="flex flex-col gap-y-2">
       <div class="max-w-2xl flex flex-col gap-y-2">
@@ -16,7 +16,7 @@
             <img :src="badgeImageURL" alt="badge" />
           </div>
           <z-input v-model="embedCode" class="self-end pr-0.5">
-            <template slot="right">
+            <template #right>
               <copy-button :value="embedCode" :disabled="!embedCode" class="w-36" />
             </template>
           </z-input>
@@ -33,20 +33,15 @@
         </div>
         <!-- Show trend -->
         <toggle-input
+          v-model="showTrend"
           input-width="x-small"
           label="Show trend"
           input-id="show-trend"
-          v-model="showTrend"
           class="max-w-2xl border-t border-slate-400"
         >
-          <template slot="description">
-            <p class="max-w-sm">
-              If you are using private submodules, ensure that DeepSource has access to them via an
-              <nuxt-link
-                :to="$generateRoute(['settings', 'ssh-access'])"
-                class="font-medium text-juniper"
-                >SSH key</nuxt-link
-              >.
+          <template #description>
+            <p class="max-w-xs">
+              Add a trendline showing how the value of this metric has varied in the last 6 months.
             </p>
           </template>
         </toggle-input>
@@ -76,29 +71,26 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, namespace } from 'nuxt-property-decorator'
-import { Notice } from '@/components/Settings/index'
-import { ToggleInput, FormGroup } from '@/components/Form'
 import {
-  ZInput,
-  ZRadioGroup,
-  ZRadioButton,
-  ZIcon,
   ZButton,
   ZDivider,
-  ZSelect,
+  ZIcon,
+  ZInput,
   ZOption,
+  ZRadioButton,
+  ZRadioGroup,
+  ZSelect,
   ZToggle
 } from '@deepsource/zeal'
+import { Component, namespace, Vue } from 'nuxt-property-decorator'
+
 import { RepositoryDetailActions } from '~/store/repository/detail'
 import { Repository } from '~/types/types'
-import { RepoPerms } from '~/types/permTypes'
 
 const repoStore = namespace('repository/detail')
 
 @Component({
   components: {
-    Notice,
     ZInput,
     ZIcon,
     ZButton,
@@ -107,9 +99,7 @@ const repoStore = namespace('repository/detail')
     ZDivider,
     ZSelect,
     ZOption,
-    ZToggle,
-    ToggleInput,
-    FormGroup
+    ZToggle
   },
   layout: 'repository'
 })
