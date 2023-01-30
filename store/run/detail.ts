@@ -17,7 +17,8 @@ import {
   Run,
   CheckIssueConnection,
   CreateAutofixRunForPullRequestInput,
-  CreatePullRequestInput
+  CreatePullRequestInput,
+  CreateAutofixRunForPullRequestPayload
 } from '~/types/types'
 import { GetterTree, ActionTree, MutationTree, ActionContext, Store } from 'vuex'
 import {
@@ -26,6 +27,17 @@ import {
   GraphqlQueryResponse
 } from '~/types/apollo-graphql-types'
 import { RootState } from '~/store'
+
+export type PageRefetchStatusT = {
+  issueOccurrences: { status: boolean; page: number; issueId: string }
+  runs: { status: boolean }
+  runDetail: {
+    status: boolean
+    analyzer: string
+    runId: string
+    pageOffset: number
+  }
+}
 
 export enum RunDetailActions {
   FETCH_RUN = 'fetchRun',
@@ -46,7 +58,8 @@ export enum RunDetailMutations {
   SET_RUN = 'setRun',
   SET_CHECK = 'setCheck',
   SET_CHECK_ISSUES = 'setCheckIssues',
-  SET_CONCRETE_ISSUE_LIST = 'setConcreteIssueList'
+  SET_CONCRETE_ISSUE_LIST = 'setConcreteIssueList',
+  SET_PAGE_REFETCH_STATUS = 'setPageRefetchStatus'
 }
 
 export const state = () => ({
@@ -58,7 +71,21 @@ export const state = () => ({
   concreteIssueList: {
     pageInfo: {} as PageInfo,
     edges: [] as Array<Maybe<IssueEdge>>
-  } as IssueConnection
+  } as IssueConnection,
+  pageRefetchStatus: {
+    runs: { status: false }, // history/runs
+    runDetail: {
+      status: false,
+      analyzer: '',
+      runId: '',
+      pageOffset: 0
+    }, // run/_runId/_analyzer
+    issueOccurrences: {
+      status: false,
+      issueId: '',
+      page: 1
+    } // run/_runId/_issueId
+  } as PageRefetchStatusT
 })
 
 export type RunDetailModuleState = ReturnType<typeof state>
@@ -79,26 +106,39 @@ interface RunDetailModuleMutations extends MutationTree<RunDetailModuleState> {
     state: RunDetailModuleState,
     concreteIssueList: IssueConnection
   ) => void
+  [RunDetailMutations.SET_PAGE_REFETCH_STATUS]: (
+    state: RunDetailModuleState,
+    pageRefetchStatus: PageRefetchStatusT
+  ) => void
 }
 
 export const mutations: RunDetailModuleMutations = {
-  [RunDetailMutations.SET_LOADING]: (state, value) => {
-    state.loading = value
+  [RunDetailMutations.SET_LOADING]: (runDetailState, value) => {
+    runDetailState.loading = value
   },
-  [RunDetailMutations.SET_ERROR]: (state, error) => {
-    state.error = Object.assign({}, state.error, error)
+  [RunDetailMutations.SET_ERROR]: (runDetailState, error) => {
+    runDetailState.error = Object.assign({}, runDetailState.error, error)
   },
-  [RunDetailMutations.SET_RUN]: (state, run) => {
-    state.run = run
+  [RunDetailMutations.SET_RUN]: (runDetailState, run) => {
+    runDetailState.run = run
   },
-  [RunDetailMutations.SET_CHECK]: (state, check) => {
-    state.check = check
+  [RunDetailMutations.SET_CHECK]: (runDetailState, check) => {
+    runDetailState.check = check
   },
-  [RunDetailMutations.SET_CHECK_ISSUES]: (state, checkIssues) => {
-    state.checkIssues = checkIssues
+  [RunDetailMutations.SET_CHECK_ISSUES]: (runDetailState, checkIssues) => {
+    runDetailState.checkIssues = checkIssues
   },
-  [RunDetailMutations.SET_CONCRETE_ISSUE_LIST]: (state, concreteIssueList) => {
-    state.concreteIssueList = concreteIssueList
+  [RunDetailMutations.SET_CONCRETE_ISSUE_LIST]: (runDetailState, concreteIssueList) => {
+    runDetailState.concreteIssueList = concreteIssueList
+  },
+  [RunDetailMutations.SET_PAGE_REFETCH_STATUS]: (
+    runDetailState,
+    pageRefetchStatus: PageRefetchStatusT
+  ) => {
+    runDetailState.pageRefetchStatus = Object.assign(
+      runDetailState.pageRefetchStatus,
+      pageRefetchStatus
+    )
   }
 }
 
@@ -132,6 +172,7 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
       limit: number
       q?: Maybe<string>
       sort?: Maybe<string>
+      refetch?: boolean
     }
   ) => Promise<void>
   [RunDetailActions.FETCH_AUTOFIXABLE_ISSUES]: (
@@ -160,7 +201,7 @@ interface RunDetailModuleActions extends ActionTree<RunDetailModuleState, RootSt
     args: {
       input: CreateAutofixRunForPullRequestInput
     }
-  ) => Promise<void>
+  ) => Promise<CreateAutofixRunForPullRequestPayload>
   [RunDetailActions.COMMIT_TO_PR]: (
     this: Store<RootState>,
     injectee: RunDetailActionContext,
@@ -228,14 +269,18 @@ export const actions: RunDetailModuleActions = {
   },
   async [RunDetailActions.FETCH_CHECK_ISSUES]({ commit }, args) {
     commit(RunDetailMutations.SET_LOADING, true)
-    await this.$fetchGraphqlData(RepositoryRunCheckIssuesGQLQuery, {
-      checkId: args.checkId,
-      shortcode: args.shortcode,
-      limit: args.limit,
-      after: this.$getGQLAfter(args.currentPageNumber, args.limit),
-      q: args.q,
-      sort: args.sort
-    })
+    await this.$fetchGraphqlData(
+      RepositoryRunCheckIssuesGQLQuery,
+      {
+        checkId: args.checkId,
+        shortcode: args.shortcode,
+        limit: args.limit,
+        after: this.$getGQLAfter(args.currentPageNumber, args.limit),
+        q: args.q,
+        sort: args.sort
+      },
+      args.refetch
+    )
       .then((response: GraphqlQueryResponse) => {
         commit(RunDetailMutations.SET_CHECK_ISSUES, response.data.checkIssues)
         commit(RunDetailMutations.SET_LOADING, false)
@@ -280,7 +325,7 @@ export const actions: RunDetailModuleActions = {
       const response = await this.$applyGraphqlMutation(CreateAutofixRunForPullRequestMutation, {
         input: args.input
       })
-      return response.data.createAutofixRunForPullRequest
+      return response.data.createAutofixRunForPullRequest as CreateAutofixRunForPullRequestPayload
     } catch (e) {
       throw e
     } finally {

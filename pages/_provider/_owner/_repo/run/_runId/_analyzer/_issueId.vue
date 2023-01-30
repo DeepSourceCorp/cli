@@ -57,7 +57,6 @@
       <div v-else class="grid grid-cols-3">
         <issue-list
           v-bind="issueOccurrences"
-          class="col-span-3 lg:col-span-2"
           :description="singleIssue.descriptionRendered"
           :check-id="currentCheck ? currentCheck.id : ''"
           :can-ignore-issues="canIgnoreIssues"
@@ -66,6 +65,8 @@
           :start-page="queryParams.page"
           :search-value="queryParams.q"
           :blob-url-root="run.blobUrlRoot"
+          :issue-index="issueIndex"
+          class="col-span-3 lg:col-span-2"
           @search="(val) => (searchCandidate = val)"
           @sort="(val) => (sort = val)"
           @page="(val) => (currentPage = val)"
@@ -110,6 +111,7 @@ import { fromNow } from '~/utils/date'
 import { RepoPerms, TeamPerms } from '~/types/permTypes'
 import { IssuePriorityLevelVerbose } from '~/types/issuePriorityTypes'
 import { IssueLink } from '~/mixins/issueListMixin'
+import { RunDetailMutations } from '~/store/run/detail'
 
 const PAGE_SIZE = 25
 
@@ -222,6 +224,28 @@ export default class RunIssueDetails extends mixins(
 
     this.$localStore.set('check-issues', this.localKey, [...new Set(issuesIgnored)])
     this.$root.$emit('update-ignored-issues-checks')
+
+    const { analyzer, runId, issueId } = this.$route.params
+
+    const newPageRefetchStatus = {
+      issueOccurrences: {
+        status: true,
+        issueId, // Specify the `issueId` so that the re-fetch happens on visiting the issue occurrences page with a matching `issueId`
+        page: this.$route.query.page ? Number(this.$route.query.page) : 1
+      },
+      runs: { status: true },
+      runDetail: {
+        status: true,
+        analyzer,
+        runId,
+        pageOffset: Math.floor(this.issueIndex / 10) * 10 // Specify the page offset so that the re-fetch happens on visiting the page the issue resided
+      }
+    }
+
+    this.$store.commit(
+      `run/detail/${RunDetailMutations.SET_PAGE_REFETCH_STATUS}`,
+      newPageRefetchStatus
+    )
   }
 
   async fetch(): Promise<void> {
@@ -233,9 +257,15 @@ export default class RunIssueDetails extends mixins(
     ])
 
     await this.fetchCheck({ checkId: this.currentCheck.id })
+
+    const { status, issueId: issueIdFromStore, page } = this.pageRefetchStatus.issueOccurrences
+
+    // Re-fetch only if the page visited corresponds to the issue being ignored
+    const refetch = status && issueId === issueIdFromStore && page === (this.queryParams.page ?? 1)
+
     await Promise.all([
       this.fetchIssues(),
-      this.fetchIssuesInCheck(),
+      this.fetchIssuesInCheck(refetch),
       this.fetchSingleIssue({ shortcode: issueId })
     ])
     this.issuePriority = await this.fetchIssuePriority({
@@ -245,6 +275,18 @@ export default class RunIssueDetails extends mixins(
     })
 
     this.loading = false
+
+    if (refetch) {
+      // Reset the state
+      this.$store.commit(`run/detail/${RunDetailMutations.SET_PAGE_REFETCH_STATUS}`, {
+        ...this.pageRefetchStatus,
+        issueOccurrences: {
+          status: false,
+          issueId: '',
+          page: 1
+        }
+      })
+    }
   }
 
   /**
@@ -316,9 +358,10 @@ export default class RunIssueDetails extends mixins(
   /**
    * Fetches all issues raised in the current check and updates the store
    *
+   * @param {boolean} [refetch=false]
    * @returns {Promise<void>}
    */
-  async fetchIssuesInCheck(): Promise<void> {
+  async fetchIssuesInCheck(refetch = false): Promise<void> {
     const { q, page, sort } = this.queryParams
     return this.fetchCheckIssues({
       checkId: this.check.id,
@@ -326,7 +369,8 @@ export default class RunIssueDetails extends mixins(
       limit: this.pageSize,
       currentPageNumber: page as number,
       q: q as string,
-      sort: sort as string
+      sort: sort as string,
+      refetch
     })
   }
 

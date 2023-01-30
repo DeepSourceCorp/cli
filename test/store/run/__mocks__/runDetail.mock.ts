@@ -184,7 +184,21 @@ export const mockRunDetailState = (): RunDetailModuleState => ({
   run: mockRunDetail(),
   check: mockCheckDetail(),
   checkIssues: mockCheckIssueList(),
-  concreteIssueList: {} as IssueConnection
+  concreteIssueList: {} as IssueConnection,
+  pageRefetchStatus: {
+    issueOccurrences: {
+      status: false,
+      page: 1,
+      issueId: ''
+    },
+    runs: { status: false },
+    runDetail: {
+      status: false,
+      analyzer: '',
+      runId: '',
+      pageOffset: 0
+    }
+  }
 })
 
 /*
@@ -218,7 +232,21 @@ export const mockRepositoryDetailStateForAutofixableIssues = (): RunDetailModule
   run: mockRunDetail(),
   check: mockCheckDetail(),
   checkIssues: {} as CheckIssueConnection,
-  concreteIssueList: {} as IssueConnection
+  concreteIssueList: {} as IssueConnection,
+  pageRefetchStatus: {
+    issueOccurrences: {
+      status: false,
+      page: 1,
+      issueId: ''
+    },
+    runs: { status: false },
+    runDetail: {
+      status: false,
+      analyzer: '',
+      runId: '',
+      pageOffset: 0
+    }
+  }
 })
 
 /*
@@ -262,5 +290,19 @@ export const mockRunDetailStateForConcreteIssueList = (): RunDetailModuleState =
   run: mockRunDetail(),
   check: mockCheckDetail(),
   checkIssues: {} as CheckIssueConnection,
-  concreteIssueList: mockRunDetailForConcreteIssueList() as IssueConnection
+  concreteIssueList: mockRunDetailForConcreteIssueList() as IssueConnection,
+  pageRefetchStatus: {
+    issueOccurrences: {
+      status: false,
+      page: 1,
+      issueId: ''
+    },
+    runs: { status: false },
+    runDetail: {
+      status: false,
+      analyzer: '',
+      runId: '',
+      pageOffset: 0
+    }
+  }
 })

@@ -113,6 +113,7 @@ import { AppFeatures } from '~/types/permTypes'
 import { generalizeRun, generalizePR, generalizeRunStatuses } from '~/utils/runs'
 import { resolveNodes } from '~/utils/array'
 import { prCopyText } from '~/utils/ui'
+import { RunDetailMutations } from '~/store/run/detail'
 
 const runListStore = namespace('run/list')
 
@@ -191,13 +192,25 @@ export default class Runs extends mixins(RepoDetailMixin, RouteQueryMixin) {
 
   async fetch(): Promise<void> {
     this.fetching = true
+
+    const { pageRefetchStatus } = this.$store.state.run.detail
+    const refetch = pageRefetchStatus.runs.status
+
     await Promise.all([
       this.fetchRepoDetails(this.baseRouteParams),
-      this.fetchMainBranch(),
-      this.fetchRuns()
+      this.fetchMainBranch(refetch),
+      this.fetchRuns(refetch)
     ])
     this.initialFetch = false
     this.fetching = false
+
+    if (refetch) {
+      // Reset the state
+      this.$store.commit(`run/detail/${RunDetailMutations.SET_PAGE_REFETCH_STATUS}`, {
+        ...pageRefetchStatus,
+        runs: { status: false }
+      })
+    }
   }
 
   async fetchRuns(refetch = false): Promise<void> {

@@ -91,7 +91,7 @@ import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import RunDetailMixin from '~/mixins/runDetailMixin'
 import { ILinks } from '~/components/Common/BreadcrumbContainer.vue'
 import { toTitleCase } from '~/utils/string'
-import { RunDetailActions } from '~/store/run/detail'
+import { PageRefetchStatusT, RunDetailActions } from '~/store/run/detail'
 import { Run } from '~/types/types'
 
 /**
@@ -114,12 +114,15 @@ import { Run } from '~/types/types'
   layout: 'repository',
   middleware: [
     async function ({ store, route, error }) {
+      const refetch = (store.state.run.detail.pageRefetchStatus as PageRefetchStatusT).runDetail
+
       const { provider, owner, repo, runId } = route.params
       const runResponse = (await store.dispatch(`run/detail/${RunDetailActions.FETCH_RUN}`, {
         provider,
         owner,
         name: repo,
-        runId
+        runId,
+        refetch
       })) as Run | undefined
 
       if (!runResponse) {

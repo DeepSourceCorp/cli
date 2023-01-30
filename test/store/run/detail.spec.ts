@@ -1,19 +1,23 @@
 import {
-  state,
-  mutations,
   actions,
-  RunDetailMutations,
+  mutations,
+  PageRefetchStatusT,
   RunDetailActionContext,
+  RunDetailActions,
   RunDetailModuleState,
-  RunDetailActions
+  RunDetailMutations,
+  state
 } from '~/store/run/detail'
+import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+
+import { IssueConnection, IssueEdge, Maybe, PageInfo, Repository, Run } from '~/types/types'
 import {
+  mockCheckDetail,
+  mockCheckIssueList,
   mockRepositoryDetailStateForAutofixableIssues,
   mockRunDetailState,
   mockRunDetailStateForConcreteIssueList
 } from './__mocks__/runDetail.mock'
-import { IssueConnection, IssueEdge, Maybe, PageInfo, Repository, Run } from '~/types/types'
-import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
 
 let actionCxt: RunDetailActionContext
 let commit: jest.Mock
@@ -780,61 +784,95 @@ describe('[Store] Run/Detail', () => {
     })
 
     describe(`Action "${RunDetailActions.CREATE_AUTOFIX_PR}"`, () => {
-      describe(`Success`, () => {
-        beforeEach(async () => {
-          localThis = {
-            $getGQLAfter: jest.fn(),
-            $applyGraphqlMutation(): Promise<unknown> {
-              return new Promise<unknown>((resolve) =>
-                setTimeout(
-                  () =>
-                    resolve({
-                      data: {
-                        createAutofixRunForPullRequest: {
-                          autofixRunId: 'string'
-                        }
+      test('Success', async () => {
+        localThis = {
+          $getGQLAfter: jest.fn(),
+          $applyGraphqlMutation(): Promise<unknown> {
+            return new Promise<unknown>((resolve) =>
+              setTimeout(
+                () =>
+                  resolve({
+                    data: {
+                      createAutofixRunForPullRequest: {
+                        autofixRunId: 'string'
                       }
-                    }),
-                  10
-                )
+                    }
+                  }),
+                10
               )
+            )
+          }
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+        const { autofixRunId } = await actions[RunDetailActions.CREATE_AUTOFIX_PR].call(
+          localThis as any, // skipcq JS-0323
+          actionCxt,
+          {
+            input: {
+              issues: ['string'],
+              checkId: 'string'
             }
           }
+        )
 
-          // Setting the global spy on `localThis.$applyGraphqlMutation`
-          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+        expect(autofixRunId).toBe('string')
+        expect(spy).toHaveBeenCalledTimes(1)
 
-          await actions[RunDetailActions.CREATE_AUTOFIX_PR].call(localThis, actionCxt, {
+        const {
+          mock: {
+            calls: [firstCall, secondCall]
+          }
+        } = commit
+
+        // Assert if `RunDetailMutations.SET_LOADING` is being commited or not.
+        expect(firstCall[0]).toEqual(RunDetailMutations.SET_LOADING)
+
+        // Assert if right data is passed to the mutation.
+        expect(firstCall[1]).toEqual(true)
+
+        // Assert if `RunDetailMutations.SET_LOADING` is being commited or not.
+        expect(secondCall[0]).toEqual(RunDetailMutations.SET_LOADING)
+
+        // Assert if right data is passed to the mutation.
+        expect(secondCall[1]).toEqual(false)
+      })
+
+      test('Failure', () => {
+        localThis = {
+          $getGQLAfter: jest.fn(),
+          $applyGraphqlMutation(): Promise<unknown> {
+            return Promise.reject(new Error('ERR1'))
+          }
+        }
+
+        // Setting the global spy on `localThis.$applyGraphqlMutation`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+        expect(
+          actions[RunDetailActions.CREATE_AUTOFIX_PR].call(localThis, actionCxt, {
             input: {
               issues: ['string'],
               checkId: 'string'
             }
           })
-        })
+        ).rejects.toThrowError(new Error('ERR1'))
 
-        test('successfully calls the api', () => {
-          expect(spy).toHaveBeenCalledTimes(1)
-        })
+        expect(spy).toHaveBeenCalledTimes(1)
 
-        test(`successfully commits mutation ${RunDetailMutations.SET_LOADING}`, () => {
-          const {
-            mock: {
-              calls: [firstCall, secondCall]
-            }
-          } = commit
+        const {
+          mock: {
+            calls: [firstCall]
+          }
+        } = commit
 
-          // Assert if `RunDetailMutations.SET_LOADING` is being commited or not.
-          expect(firstCall[0]).toEqual(RunDetailMutations.SET_LOADING)
+        // Assert if `RunDetailMutations.SET_LOADING` is being commited or not.
+        expect(firstCall[0]).toEqual(RunDetailMutations.SET_LOADING)
 
-          // Assert if right data is passed to the mutation.
-          expect(firstCall[1]).toEqual(true)
-
-          // Assert if `RunDetailMutations.SET_LOADING` is being commited or not.
-          expect(secondCall[0]).toEqual(RunDetailMutations.SET_LOADING)
-
-          // Assert if right data is passed to the mutation.
-          expect(secondCall[1]).toEqual(false)
-        })
+        // Assert if right data is passed to the mutation.
+        expect(firstCall[1]).toEqual(true)
       })
     })
 
@@ -894,6 +932,83 @@ describe('[Store] Run/Detail', () => {
 
           // Assert if right data is passed to the mutation.
           expect(secondCall[1]).toEqual(false)
+        })
+      })
+    })
+
+    describe(`Action "${RunDetailActions.IGNORE_CHECK_METRIC}"`, () => {
+      describe(`Success`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $getGQLAfter: jest.fn(),
+            $applyGraphqlMutation(): Promise<unknown> {
+              return new Promise<unknown>((resolve) =>
+                setTimeout(
+                  () =>
+                    resolve({
+                      data: {
+                        ignoreCheckMetric: {
+                          ok: true
+                        }
+                      }
+                    }),
+                  10
+                )
+              )
+            }
+          }
+
+          // Setting the global spy on `localThis.$applyGraphqlMutation`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+          const status = await actions[RunDetailActions.IGNORE_CHECK_METRIC].call(
+            localThis,
+            actionCxt,
+            {
+              checkId: 'test-check-id',
+              key: 'test-key',
+              metricShortcode: 'test-metric-shortcode'
+            }
+          )
+
+          expect(status).toBe(true)
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+        })
+      })
+
+      describe(`Failure`, () => {
+        beforeEach(async () => {
+          localThis = {
+            $getGQLAfter: jest.fn(),
+            $applyGraphqlMutation(): Promise<unknown> {
+              return Promise.reject(new Error('ERR1'))
+            },
+            $logErrorAndToast: jest.fn()
+          }
+
+          // Setting the global spy on `localThis.$applyGraphqlMutation`
+          spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+          const status = await actions[RunDetailActions.IGNORE_CHECK_METRIC].call(
+            localThis,
+            actionCxt,
+            {
+              checkId: 'test-check-id',
+              key: 'test-key',
+              metricShortcode: 'test-metric-shortcode'
+            }
+          )
+
+          expect(status).toBe(false)
+        })
+
+        test('successfully calls the api', () => {
+          expect(spy).toHaveBeenCalledTimes(1)
+
+          expect(localThis.$logErrorAndToast).toBeCalled()
         })
       })
     })
@@ -983,6 +1098,46 @@ describe('[Store] Run/Detail', () => {
         expect(runDetailState.concreteIssueList.edges[0]?.node?.issueType).toEqual(
           newConcreteIssueList.edges[0]?.node?.issueType
         )
+      })
+    })
+
+    describe(`Mutation "${RunDetailMutations.SET_CHECK}"`, () => {
+      test('successfully adds new check details to the state', () => {
+        const newCheckDetail = mockCheckDetail()
+
+        mutations[RunDetailMutations.SET_CHECK](runDetailState, newCheckDetail)
+        expect(runDetailState.check).toEqual(newCheckDetail)
+      })
+    })
+
+    describe(`Mutation "${RunDetailMutations.SET_CHECK_ISSUES}"`, () => {
+      test('successfully adds new check issue list to the state', () => {
+        const newCheckIssueList = mockCheckIssueList()
+
+        mutations[RunDetailMutations.SET_CHECK_ISSUES](runDetailState, newCheckIssueList)
+        expect(runDetailState.checkIssues).toEqual(newCheckIssueList)
+      })
+    })
+
+    describe(`Mutation "${RunDetailMutations.SET_PAGE_REFETCH_STATUS}"`, () => {
+      test('successfully adds new page refetch status to the state', () => {
+        const newPageRefetchStatus = {
+          runs: { status: true }, // history/runs
+          runDetail: {
+            status: true,
+            analyzer: 'test-analyzer',
+            runId: 'test-run-id',
+            pageOffset: 1
+          }, // run/_runId/_analyzer
+          issueOccurrences: {
+            status: true,
+            issueId: 'test-issue-id',
+            page: 2
+          }
+        } as PageRefetchStatusT
+
+        mutations[RunDetailMutations.SET_PAGE_REFETCH_STATUS](runDetailState, newPageRefetchStatus)
+        expect(runDetailState.pageRefetchStatus).toEqual(newPageRefetchStatus)
       })
     })
   })

@@ -9,7 +9,7 @@ import {
   Maybe,
   Run
 } from '~/types/types'
-import { RunDetailActions } from '@/store/run/detail'
+import { PageRefetchStatusT, RunDetailActions } from '@/store/run/detail'
 import { resolveNodes } from '~/utils/array'
 
 const runDetailStore = namespace('run/detail')
@@ -37,6 +37,9 @@ export default class RunDetailMixin extends Vue {
   @runDetailStore.State('error')
   runDetailError: boolean
 
+  @runDetailStore.State
+  pageRefetchStatus: PageRefetchStatusT
+
   @runDetailStore.Action(RunDetailActions.FETCH_RUN)
   fetchRun: (args: {
     provider: string
@@ -57,6 +60,7 @@ export default class RunDetailMixin extends Vue {
     limit: number
     q?: Maybe<string>
     sort?: Maybe<string>
+    refetch?: boolean
   }) => Promise<void>
 
   @runDetailStore.Action(RunDetailActions.FETCH_AUTOFIXABLE_ISSUES)

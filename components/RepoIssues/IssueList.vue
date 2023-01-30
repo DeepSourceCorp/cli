@@ -82,6 +82,7 @@ import { ZIcon, ZInput, ZButton, ZMenu, ZMenuItem, ZPagination, ZAccordion } fro
 import IssueDescription from './IssueDescription.vue'
 import IssueEditor from './IssueEditor.vue'
 import { CheckIssueEdge } from '~/types/types'
+import { RunDetailMutations } from '~/store/run/detail'
 
 const VISIBLE_PAGES = 5
 
@@ -126,6 +127,9 @@ export default class IssueList extends Vue {
   @Prop({ required: true })
   edges: Array<CheckIssueEdge>
 
+  @Prop({ required: true })
+  issueIndex: number
+
   issuesIgnored: string[] = []
 
   mounted() {
@@ -149,6 +153,28 @@ export default class IssueList extends Vue {
   ignoreIssues(issueIds: string[]): void {
     this.issuesIgnored = [...new Set(this.issuesIgnored.concat(issueIds))]
     this.$localStore.set('check-issues', this.localKey, this.issuesIgnored)
+
+    const { analyzer, runId, issueId } = this.$route.params
+
+    const newPageRefetchStatus = {
+      issueOccurrences: {
+        status: true,
+        issueId, // Specify the `issueId` so that the re-fetch happens on visiting the issue occurrences page with a matching `issueId`
+        page: this.$route.query.page ? Number(this.$route.query.page) : 1
+      },
+      runs: { status: true },
+      runDetail: {
+        status: true,
+        analyzer,
+        runId,
+        pageOffset: Math.floor(this.issueIndex / 10) * 10 // Specify the page offset so that the re-fetch happens on visiting the page the issue resided
+      }
+    }
+
+    this.$store.commit(
+      `run/detail/${RunDetailMutations.SET_PAGE_REFETCH_STATUS}`,
+      newPageRefetchStatus
+    )
   }
 
   debounceSearch(value: string): void {

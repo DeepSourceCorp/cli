@@ -310,7 +310,7 @@ import {
 import RouteQueryMixin from '~/mixins/routeQueryMixin'
 import PaginationMixin from '~/mixins/paginationMixin'
 
-import { RunDetailActions } from '~/store/run/detail'
+import { RunDetailActions, RunDetailMutations } from '~/store/run/detail'
 import { resolveNodes } from '~/utils/array'
 import { MetricType, GroupedMetrics } from '~/types/metric'
 
@@ -428,11 +428,34 @@ export default class AnalyzerDetails extends mixins(
    * @returns {Promise<void>} A promise that resolves with no return on completion of fetch.
    */
   async fetch(): Promise<void> {
+    const { status, analyzer, runId, pageOffset } = this.pageRefetchStatus.runDetail
+    const { analyzer: analyzerFromRouteParams, runId: runIdFromRouteParams } = this.$route.params
+
+    // Trigger a re-fetch only if the status corresponding to the page is `true` and the route params and page offset matches
+    const refetch =
+      status &&
+      analyzer === analyzerFromRouteParams &&
+      runId === runIdFromRouteParams &&
+      this.queryOffset === pageOffset
+
     await this.fetchRepoPerms(this.baseRouteParams)
     await this.fetchCurrentRun()
     await this.fetchCheck({ checkId: this.currentCheck.id })
-    await this.fetchIssues()
+    await this.fetchIssues(refetch)
     this.isLoading = false
+
+    if (refetch) {
+      // Reset the state
+      this.$store.commit(`run/detail/${RunDetailMutations.SET_PAGE_REFETCH_STATUS}`, {
+        ...this.pageRefetchStatus,
+        runDetail: {
+          status: false,
+          analyzer: '',
+          runId: '',
+          pageOffset: 0
+        }
+      })
+    }
   }
 
   /**
