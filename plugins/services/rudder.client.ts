@@ -1,6 +1,10 @@
 import { Context, Inject } from '@nuxt/types/app'
 import * as rudderAnalytics from 'rudder-sdk-js'
 
+import { DashboardContext } from '~/mixins/activeUserMixin'
+import { AuthGetterTypes } from '~/store/account/auth'
+import { ActiveUserActions, ActiveUserGetterTypes } from '~/store/user/active'
+
 declare module 'vue/types/vue' {
   interface Vue {
     $rudder: typeof rudderAnalytics
@@ -27,12 +31,86 @@ declare module '@nuxt/types' {
  * @param {Inject} inject
  * @returns {void}
  */
-export default (context: Context, inject: Inject): void => {
-  const { $config } = context
+export default async (context: Context, inject: Inject): Promise<void> => {
+  const { route, store, $config } = context
+
+  const { rudderWriteKey, rudderDataPlaneUrl } = $config
+
+  if (!process.client || !rudderWriteKey || !rudderDataPlaneUrl) {
+    return
+  }
+
+  /**
+   * Helper to invoke the Vuex action aimed at fetching viewer information
+   * @returns {Promise<User | undefined>}
+   */
+  const getViewerInfo = async () => {
+    if (store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]) {
+      try {
+        await store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
+        const viewerInfo = store.getters[`user/active/${ActiveUserGetterTypes.GET_VIEWER}`]
+        return viewerInfo
+      } catch (e) {
+        return undefined
+      }
+    }
+
+    return undefined
+  }
 
   inject('rudder', rudderAnalytics)
 
-  if ($config.rudderWriteKey && $config.rudderDataPlaneUrl) {
-    rudderAnalytics.load($config.rudderWriteKey, $config.rudderDataPlaneUrl)
+  rudderAnalytics.load($config.rudderWriteKey, $config.rudderDataPlaneUrl)
+
+  const viewer = await getViewerInfo()
+  if (viewer && Object.keys(viewer).length) {
+    const {
+      avatar,
+      dateJoined: createdAt,
+      dashboardContext,
+      email,
+      firstName,
+      id,
+      lastName
+    } = viewer
+
+    rudderAnalytics.identify(id, {
+      avatar,
+      createdAt,
+      email,
+      firstName,
+      lastName
+    })
+
+    const { provider, owner } = route.params
+
+    const activeDashboardContext = dashboardContext
+      // Invoke `$rudder.group` only for team accounts
+      .find(({ login, type, vcs_provider }: DashboardContext) => {
+        return type === 'team' && vcs_provider === provider && login === owner
+      })
+
+    // Identify the team via RudderStack
+    if (activeDashboardContext && Object.keys(activeDashboardContext).length) {
+      const {
+        avatar_url: team_avatar_url,
+        id: groupId,
+        subscribed_plan_info,
+        team_name,
+        vcs_provider_display
+      } = activeDashboardContext
+
+      if (groupId && team_name) {
+        rudderAnalytics.group(String(groupId), {
+          avatar: team_avatar_url,
+          name: team_name,
+          plan:
+            typeof subscribed_plan_info === 'object'
+              ? subscribed_plan_info.name
+              : subscribed_plan_info,
+          vcsProvider: vcs_provider_display
+        })
+      }
+    }
   }
 }

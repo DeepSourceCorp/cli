@@ -71,10 +71,48 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
     await Promise.all([this.fetchActiveUser(), this.fetchContext()])
 
-    if (!this.$config.onPrem) {
-      const { id } = this.$store.state.user.active.viewer as User
-      const parsedId = atob(id).replace('User:', '')
-      this.$rudder.identify(parsedId)
+    // Identify the user via RudderStack
+    const {
+      avatar,
+      email,
+      dateJoined: createdAt,
+      firstName,
+      id,
+      lastName
+    } = this.$store.state.user.active.viewer
+
+    if (!this.$config.onPrem && id && email) {
+      const parsedId = Buffer.from(id, 'base64').toString().replace('User:', '')
+      this.$rudder.identify(parsedId, {
+        avatar,
+        createdAt,
+        email,
+        firstName,
+        lastName
+      })
+    }
+
+    // Identify the team via RudderStack
+    const {
+      avatar_url: team_avatar_url,
+      id: groupId,
+      subscribed_plan_info,
+      team_name,
+      type,
+      vcs_provider_display
+    } = this.activeDashboardContext
+
+    // Invoke `$rudder.group` only for team accounts
+    if (!this.$config.onPrem && groupId && team_name && type === 'team') {
+      this.$rudder.group(String(groupId), {
+        avatar: team_avatar_url,
+        name: team_name,
+        plan:
+          typeof subscribed_plan_info === 'object'
+            ? subscribed_plan_info.name
+            : subscribed_plan_info,
+        vcsProvider: vcs_provider_display
+      })
     }
 
     const toOnboard = this.toOnboard
