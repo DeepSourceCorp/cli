@@ -1,20 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":0,"teamMemberRoleUpdatedCount":0} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -22,7 +21,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -30,38 +29,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":0,"teamMemberRoleUpdatedCount":1} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's role was
-            updated in your team.
+            Role of 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -69,38 +65,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":0,"teamMemberRoleUpdatedCount":12} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' roles were
-            updated in your team.
+            Roles of 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -108,26 +101,25 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":0,"teamMemberRoleUpdatedCount":null} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -135,7 +127,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -143,26 +135,25 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":0} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -170,7 +161,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -178,26 +169,25 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":1,"teamMemberRoleUpdatedCount":0} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -205,124 +195,111 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's permission was
-            updated across your team's repositories.
+            Repository permissions for 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":1,"teamMemberRoleUpdatedCount":1} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's role was
-            updated in your team.
+            Role of 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's permission was
-            updated across your team's repositories.
+            Repository permissions for 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":1,"teamMemberRoleUpdatedCount":12} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' roles were
-            updated in your team.
+            Roles of 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's permission was
-            updated across your team's repositories.
+            Repository permissions for 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":1,"teamMemberRoleUpdatedCount":null} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -330,38 +307,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's permission was
-            updated across your team's repositories.
+            Repository permissions for 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":1} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -369,38 +343,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's permission was
-            updated across your team's repositories.
+            Repository permissions for 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":12,"teamMemberRoleUpdatedCount":0} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -408,124 +379,111 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' permissions were
-            updated across your team's repositories.
+            Repository permissions for 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":12,"teamMemberRoleUpdatedCount":1} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's role was
-            updated in your team.
+            Role of 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' permissions were
-            updated across your team's repositories.
+            Repository permissions for 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":12,"teamMemberRoleUpdatedCount":12} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' roles were
-            updated in your team.
+            Roles of 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' permissions were
-            updated across your team's repositories.
+            Repository permissions for 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":12,"teamMemberRoleUpdatedCount":null} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -533,38 +491,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' permissions were
-            updated across your team's repositories.
+            Repository permissions for 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":12} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -572,38 +527,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' permissions were
-            updated across your team's repositories.
+            Repository permissions for 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":null,"teamMemberRoleUpdatedCount":0} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -611,7 +563,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -619,38 +571,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":null,"teamMemberRoleUpdatedCount":1} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's role was
-            updated in your team.
+            Role of 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -658,38 +607,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":null,"teamMemberRoleUpdatedCount":12} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' roles were
-            updated in your team.
+            Roles of 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -697,26 +643,25 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":null,"teamMemberRoleUpdatedCount":null} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -724,7 +669,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -732,26 +677,25 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"repoCollaboratorUpdatedCount":null} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -759,7 +703,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -767,26 +711,25 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"teamMemberRoleUpdatedCount":0} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -794,7 +737,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -802,38 +745,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"teamMemberRoleUpdatedCount":1} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            1
-            user's role was
-            updated in your team.
+            Role of 1 user has been manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -841,38 +781,35 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"teamMemberRoleUpdatedCount":12} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <zalert-stub type=\\"info\\" class=\\"mx-4\\">
-            12
-            users' roles were
-            updated in your team.
+            Roles of 12 users are manually updated on DeepSource. This will be affected by the sync.
           </zalert-stub>
         </li>
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -880,26 +817,25 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {"teamMemberRoleUpdatedCount":null} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -907,7 +843,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -915,26 +851,25 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;
 
 exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {} 1`] = `
-"<zmodal-stub title=\\"Confirm and Sync\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
+"<zmodal-stub title=\\"Confirm and sync access settings\\" width=\\"base\\" closeafterprimaryaction=\\"true\\" primaryactiontype=\\"primary\\" showheaderborder=\\"true\\">
   <div class=\\"px-4 pt-5\\">
     <div class=\\"mb-6\\">
       <p class=\\"text-sm leading-6 mb-2.5 text-vanilla-300\\">
-        This operation will sync your team's access control settings from
+        This operation will sync your team's access control settings and member permissions from
         GitHub. This has the following side-effects:
       </p>
       <ul class=\\"space-y-6 text-sm text-vanilla-300\\">
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Role of some members in your team on DeepSource will get updated as configured on
-              GitHub. This may result in your team's occupied seat count being
-              affected.
+              Roles of some team members can get updated on DeepSource. This may affect the number
+              of seats your team is occupying on DeepSource.
             </span>
           </div>
           <!---->
@@ -942,7 +877,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         <li class=\\"space-y-2.5\\">
           <div class=\\"flex items-baseline gap-x-1.5\\">
             <zicon-stub icon=\\"arrow-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0\\"></zicon-stub> <span>
-              Collaborators will be added or updated on each repository as configured on
+              Direct collaborators will be added or updated on each repository as configured on
               GitHub.
             </span>
           </div>
@@ -950,7 +885,7 @@ exports[`[[ ConfirmSyncModal ]] renders ConfirmSyncModal modal with all props: {
         </li>
       </ul>
     </div>
-    <zcheckbox-stub label=\\"Override changes made on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
+    <zcheckbox-stub label=\\"Override manual changes to roles and permissions on DeepSource\\" name=\\"\\" value=\\"\\" truevalue=\\"true\\" modelvalue=\\"true\\" size=\\"small\\" class=\\"cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t\\"></zcheckbox-stub>
   </div>
 </zmodal-stub>"
 `;

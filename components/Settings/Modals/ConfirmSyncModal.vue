@@ -1,9 +1,9 @@
 <template>
-  <z-modal title="Confirm and Sync" @onClose="$emit('close-sync-modal')">
+  <z-modal title="Confirm and sync access settings" @onClose="$emit('close-sync-modal')">
     <div class="px-4 pt-5">
       <div class="mb-6">
         <p class="text-sm leading-6 mb-2.5 text-vanilla-300">
-          This operation will sync your team's access control settings from
+          This operation will sync your team's access control settings and member permissions from
           {{ providerName }}. This has the following side-effects:
         </p>
         <ul class="space-y-6 text-sm text-vanilla-300">
@@ -11,33 +11,24 @@
             <div class="flex items-baseline gap-x-1.5">
               <z-icon icon="arrow-right" size="x-small" class="flex-shrink-0" />
               <span>
-                Role of some members in your team on DeepSource will get updated as configured on
-                {{ providerName }}. This may result in your team's occupied seat count being
-                affected.
+                Roles of some team members can get updated on DeepSource. This may affect the number
+                of seats your team is occupying on DeepSource.
               </span>
             </div>
             <z-alert v-if="teamMemberRoleUpdatedCount" type="info" class="mx-4">
-              {{ shortenLargeNumber(teamMemberRoleUpdatedCount) }}
-              {{ teamMemberRoleUpdatedCount === 1 ? `user's role was` : `users' roles were` }}
-              updated in your team.
+              {{ teamMemberRoleUpdatedCopyText }}
             </z-alert>
           </li>
           <li class="space-y-2.5">
             <div class="flex items-baseline gap-x-1.5">
               <z-icon icon="arrow-right" size="x-small" class="flex-shrink-0" />
               <span>
-                Collaborators will be added or updated on each repository as configured on
+                Direct collaborators will be added or updated on each repository as configured on
                 {{ providerName }}.
               </span>
             </div>
             <z-alert v-if="repoCollaboratorUpdatedCount" type="info" class="mx-4">
-              {{ shortenLargeNumber(repoCollaboratorUpdatedCount) }}
-              {{
-                repoCollaboratorUpdatedCount === 1
-                  ? `user's permission was`
-                  : `users' permissions were`
-              }}
-              updated across your team's repositories.
+              {{ repoCollaboratorUpdatedCopyText }}
             </z-alert>
           </li>
         </ul>
@@ -45,7 +36,7 @@
 
       <z-checkbox
         v-model="overrideChanges"
-        label="Override changes made on DeepSource"
+        label="Override manual changes to roles and permissions on DeepSource"
         size="small"
         class="cursor-pointer text-vanilla-400 border-ink-200 pt-3 border-t"
       />
@@ -98,10 +89,10 @@ export default class ConfirmSyncModal extends Vue {
   @Prop({ required: true })
   providerName: string
 
-  @Prop()
+  @Prop({ default: 0 })
   teamMemberRoleUpdatedCount: number
 
-  @Prop()
+  @Prop({ default: 0 })
   repoCollaboratorUpdatedCount: number
 
   overrideChanges = true
@@ -122,6 +113,26 @@ export default class ConfirmSyncModal extends Vue {
   emitSyncAccessSettings(close: () => void): void {
     this.$emit('sync-access-settings', this.overrideChanges)
     close()
+  }
+
+  get teamMemberRoleUpdatedCopyText(): string {
+    if (this.teamMemberRoleUpdatedCount === 1) {
+      return 'Role of 1 user has been manually updated on DeepSource. This will be affected by the sync.'
+    }
+
+    return `Roles of ${shortenLargeNumber(
+      this.teamMemberRoleUpdatedCount
+    )} users are manually updated on DeepSource. This will be affected by the sync.`
+  }
+
+  get repoCollaboratorUpdatedCopyText(): string {
+    if (this.repoCollaboratorUpdatedCount === 1) {
+      return 'Repository permissions for 1 user has been manually updated on DeepSource. This will be affected by the sync.'
+    }
+
+    return `Repository permissions for ${shortenLargeNumber(
+      this.repoCollaboratorUpdatedCount
+    )} users are manually updated on DeepSource. This will be affected by the sync.`
   }
 }
 </script>
