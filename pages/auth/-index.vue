@@ -83,7 +83,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
     if (!this.$config.onPrem && id && email) {
       const parsedId = Buffer.from(id, 'base64').toString().replace('User:', '')
-      this.$rudder.identify(parsedId, {
+      this.$rudder?.identify(parsedId, {
         avatar,
         createdAt,
         email,
@@ -104,7 +104,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
     // Invoke `$rudder.group` only for team accounts
     if (!this.$config.onPrem && groupId && team_name && type === 'team') {
-      this.$rudder.group(String(groupId), {
+      this.$rudder?.group(String(groupId), {
         avatar: team_avatar_url,
         name: team_name,
         plan:
