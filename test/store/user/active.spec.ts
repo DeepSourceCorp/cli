@@ -263,11 +263,48 @@ describe('[Store] User/Active', () => {
         expect(spy).toHaveBeenCalledTimes(1)
       })
     })
+    describe(`Action "${ActiveUserActions.UPDATE_USER_DETAILS}"`, () => {
+      beforeEach(async () => {
+        localThis = {
+          $applyGraphqlMutation(): Promise<Object> {
+            return Promise.resolve({
+              data: {
+                // @ts-ignore
+                updateUserDetails: {
+                  viewer: {
+                    fullName: 'Rohan',
+                    firstName: 'Rohan',
+                    lastName: '',
+                    email: 'rohan@deepsource.io',
+                    avatar:
+                      'https://local-asgard-static.s3.us-east-1.amazonaws.com/avatars/9f8ae9fd-ba73-41c4-a664-fa768ef37ee0'
+                  }
+                }
+              }
+            })
+          }
+        }
+
+        // Setting the global spy on `localThis.$fetchGraphqlData`
+        spy = jest.spyOn(localThis, '$applyGraphqlMutation')
+
+        await actions[ActiveUserActions.UPDATE_USER_DETAILS].call(localThis, actionCxt, {
+          input: {
+            displayName: 'Rohan',
+            email: 'rohan@deepsource.io'
+          }
+        })
+      })
+      test('successfully calls the api', () => {
+        expect(spy).toHaveBeenCalledTimes(1)
+      })
+    })
     describe(`Actions "${[
       ActiveUserActions.FETCH_STARRED_REPOS,
       ActiveUserActions.FETCH_GITLAB_ACCOUNTS,
       ActiveUserActions.FETCH_GSR_PROJECTS,
-      ActiveUserActions.FETCH_RECOMMENDED_ISSUES
+      ActiveUserActions.FETCH_RECOMMENDED_ISSUES,
+      ActiveUserActions.FETCH_WORKSPACES
     ].join(', ')}"`, () => {
       beforeEach(() => {
         if (spy) spy.mockReset()
@@ -286,7 +323,8 @@ describe('[Store] User/Active', () => {
         ActiveUserActions.FETCH_STARRED_REPOS,
         ActiveUserActions.FETCH_GITLAB_ACCOUNTS,
         ActiveUserActions.FETCH_GSR_PROJECTS,
-        ActiveUserActions.FETCH_RECOMMENDED_ISSUES
+        ActiveUserActions.FETCH_RECOMMENDED_ISSUES,
+        ActiveUserActions.FETCH_WORKSPACES
       ]
 
       actionsToTest.forEach((actionName) => {

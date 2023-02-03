@@ -48,7 +48,7 @@ spec:
               resources:
                 requests:
                   cpu: 5
-                  memory: 8Gi
+                  memory: 6Gi
               script: |
                 #!/bin/sh
                 apk update && \

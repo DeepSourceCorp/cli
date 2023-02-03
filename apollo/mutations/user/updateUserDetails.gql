@@ -1,0 +1,11 @@
+mutation($input: UpdateUserDetailsInput!) {
+  updateUserDetails(input: $input) {
+    viewer {
+      fullName
+      firstName
+      lastName
+      email
+      avatar
+    }
+  }
+}

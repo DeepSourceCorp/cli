@@ -3,9 +3,11 @@ import { AuthGetterTypes } from '~/store/account/auth'
 import { ActiveUserActions, ActiveUserGetterTypes } from '~/store/user/active'
 
 import {
+  DeleteRequestingUserInput,
   TeamMemberRoleChoices,
   UpdateDefaultDashboardContextForUserPayload,
   UpdateStarredRepositoryPayload,
+  UpdateUserDetailsInput,
   User
 } from '~/types/types'
 
@@ -68,6 +70,22 @@ export default class ActiveUserMixin extends Vue {
 
   @activeUserStore.Action(ActiveUserActions.FETCH_STARRED_REPOS)
   fetchStarredRepos: () => Promise<void>
+
+  @activeUserStore.Action(ActiveUserActions.FETCH_ACCOUNT_INFO)
+  fetchAccountInfo: (args: {
+    login: string
+    isViewerPrimaryUser: boolean
+    refetch?: boolean
+  }) => Promise<void>
+
+  @activeUserStore.Action(ActiveUserActions.FETCH_WORKSPACES)
+  fetchWorkspaces: (args: { login: string; refetch?: boolean }) => Promise<void>
+
+  @activeUserStore.Action(ActiveUserActions.UPDATE_USER_DETAILS)
+  updateUserDetails: (input: UpdateUserDetailsInput) => Promise<User | undefined>
+
+  @activeUserStore.Action(ActiveUserActions.DELETE_USER)
+  deleteUser: (input: DeleteRequestingUserInput) => Promise<boolean>
 
   // @activeUserStore.Action(ActiveUserActions.FETCH_ACTIVITY)
   // fetchActivityFeed: () => Promise<void>

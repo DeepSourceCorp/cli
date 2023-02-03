@@ -1,4 +1,4 @@
-query {
+query activeUserInfo {
   viewer {
     id
     connectedVcsProviders
@@ -20,6 +20,10 @@ query {
       login
       vcsProvider
       billingEmail
+    }
+    socialConnections {
+      enabledOn
+      provider
     }
   }
 }

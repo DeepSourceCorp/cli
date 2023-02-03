@@ -119,7 +119,7 @@ declare module '*/deleteGroup.gql' {
 declare module '*/deleteUser.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const DeleteRequestingUser: DocumentNode;
 
   export default defaultDocument;
 }
@@ -953,6 +953,15 @@ declare module '*/updateStarredRepo.gql' {
 }
     
 
+declare module '*/updateUserDetails.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/checkExists.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -1732,6 +1741,7 @@ declare module '*/detail.gql' {
   const defaultDocument: DocumentNode;
   export const RepoDetails: DocumentNode;
 export const repositoryRunCheckDetails: DocumentNode;
+export const activeUserInfo: DocumentNode;
 
   export default defaultDocument;
 }
@@ -2061,6 +2071,15 @@ declare module '*/settings.gql' {
 }
     
 
+declare module '*/accountInfo.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const activeUserAccountInfo: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/recommendedIssues.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -2092,6 +2111,15 @@ declare module '*/userGitlabAccounts.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/workspaces.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const activeUserWorkspaces: DocumentNode;
 
   export default defaultDocument;
 }

@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ AccountCard ]] renders AccountCard for Admins 1`] = `
+"<nuxt-link to=\\"/gh/deepsourcelabs\\" class=\\"flex items-center w-full gap-2 p-3 hover:bg-ink-300\\">
+  <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+  <div class=\\"space-y-1.5\\">
+    <div class=\\"leading-6 flex items-center gap-x-2\\">
+      deepsourcelabs
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-50\\" textsize=\\"sm\\" spacing=\\"px-2 h-4\\" iconcolor=\\"current\\"><span class=\\"text-8px font-semibold tracking-wider text-vanilla-400\\">ADMIN</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center gap-4\\">
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"users\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">5 members</span>
+      </div>
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"globe\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">10 active
+          repositories</span>
+      </div>
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Github</span>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;
+
+exports[`[[ AccountCard ]] renders AccountCard for Contributors 1`] = `
+"<nuxt-link to=\\"/gh/deepsourcelabs\\" class=\\"flex items-center w-full gap-2 p-3 hover:bg-ink-300\\">
+  <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+  <div class=\\"space-y-1.5\\">
+    <div class=\\"leading-6 flex items-center gap-x-2\\">
+      deepsourcelabs
+      <!---->
+    </div>
+    <div class=\\"flex items-center gap-4\\">
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"users\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">5 members</span>
+      </div>
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"globe\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">10 active
+          repositories</span>
+      </div>
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Github</span>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;
+
+exports[`[[ AccountCard ]] renders AccountCard for Owners 1`] = `
+"<nuxt-link to=\\"/gh/deepsourcelabs\\" class=\\"flex items-center w-full gap-2 p-3 hover:bg-ink-300\\">
+  <zavatar-stub type=\\"link\\" image=\\"/static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"md\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
+  <div class=\\"space-y-1.5\\">
+    <div class=\\"leading-6 flex items-center gap-x-2\\">
+      deepsourcelabs
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"robin-400\\" textsize=\\"sm\\" spacing=\\"px-2 h-4\\" iconcolor=\\"current\\"><span class=\\"text-8px font-semibold tracking-wider text-ink-400\\">OWNER</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center gap-4\\">
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"users\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">5 members</span>
+      </div>
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"globe\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">10 active
+          repositories</span>
+      </div>
+      <div class=\\"flex items-center gap-1\\">
+        <zicon-stub icon=\\"\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> <span class=\\"text-vanilla-400 text-sm\\">Github</span>
+      </div>
+    </div>
+  </div>
+</nuxt-link>"
+`;

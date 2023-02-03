@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ TeamLabel ]] renders TeamLabel with all props 1`] = `"<nuxt-link to=\\"/gh/deepsourcelabs/members/active\\" class=\\"bg-vanilla-100 bg-opacity-10 px-1 rounded-sm text-cherry-150\\">deepsourcelabs</nuxt-link>"`;

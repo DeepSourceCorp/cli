@@ -6,10 +6,11 @@
           <nuxt-link :key="settings.name" :to="settings.route">
             <z-tab
               :is-active="$route && $route.path === settings.route"
-              border-active-color="vanilla-400"
+              border-active-color="juniper"
               class="flex items-center space-x-1"
               :class="settings.isBeta ? 'pb-2.5' : ''"
             >
+              <z-icon :icon="settings.icon" />
               <span>
                 {{ settings.label }}
               </span>
@@ -36,14 +37,15 @@
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
 import ActiveUserMixin from '@/mixins/activeUserMixin'
+import AccessTokenMixin from '~/mixins/accessTokenMixin'
 import { Context } from '@nuxt/types'
-import { ZTab, ZTag } from '@deepsource/zeal'
+import { ZTab, ZTag, ZIcon } from '@deepsource/zeal'
 
 /**
  * User settings page
  */
 @Component({
-  components: { ZTab, ZTag },
+  components: { ZTab, ZTag, ZIcon },
   meta: {
     auth: {
       strict: true,
@@ -53,21 +55,38 @@ import { ZTab, ZTag } from '@deepsource/zeal'
   middleware: [
     function ({ redirect, route }: Context): void {
       if (route.name === 'settings') {
-        redirect(`/settings/tokens`)
+        redirect(`/settings/account`)
       }
     }
   ],
   layout: 'user'
 })
-export default class UserSettings extends mixins(ActiveUserMixin) {
+export default class UserSettings extends mixins(ActiveUserMixin, AccessTokenMixin) {
   get settingsOptions(): Record<string, unknown>[] {
     return [
+      {
+        name: 'user-account',
+        route: '/settings/account',
+        label: 'Account',
+        icon: 'tool',
+        isBeta: false,
+        routeName: 'provider-owner-settings-account'
+      },
       {
         name: 'user-token',
         route: '/settings/tokens',
         label: 'Tokens',
-        isBeta: true,
-        routeName: 'provider-owner-settings-webhooks'
+        icon: 'coins',
+        isBeta: false,
+        routeName: 'provider-owner-settings-tokens'
+      },
+      {
+        name: 'user-workspaces',
+        route: '/settings/workspaces',
+        label: 'Workspaces',
+        icon: 'layout',
+        isBeta: false,
+        routeName: 'provider-owner-settings-workspaces'
       }
     ]
   }
@@ -84,6 +103,20 @@ export default class UserSettings extends mixins(ActiveUserMixin) {
       description:
         'DeepSource is an automated code review tool that helps developers automatically find and fix issues in their code.'
     }
+  }
+
+  /**
+   * Fetch hook for settings pages.
+   * Fetches tokens and workspaces
+   *
+   * @returns {Promise<void>}
+   */
+  async fetch() {
+    await this.fetchAccessTokenList({
+      currentPage: 0,
+      limit: 0,
+      refetch: true
+    })
   }
 }
 </script>

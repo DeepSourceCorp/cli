@@ -1,0 +1,30 @@
+query activeUserWorkspaces($login: String) {
+  viewer {
+    id
+    personalAccounts(login: $login) {
+      totalCount
+      edges {
+        node {
+          login
+          vcsProvider
+          avatar
+          activeRepositoryCount
+        }
+      }
+    }
+    teamAccounts(login: $login) {
+      totalCount
+      edges {
+        node {
+          login
+          vcsProvider
+          avatar
+          activeRepositoryCount
+          numMembersTotal
+          roleInGroup
+          isViewerPrimaryUser
+        }
+      }
+    }
+  }
+}

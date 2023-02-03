@@ -2000,6 +2000,7 @@ type PR implements MaskPrimaryKeyNode {
   status: PRStatus!
   state: PRStateChoices
   title: String
+  mergeCommitOid: String
   latestAnalysisRun: Run
   runs(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
   runCount: Int
@@ -3607,7 +3608,6 @@ type User implements MaskPrimaryKeyNode {
   deleted: DateTime
   socialAuth(offset: Int, before: String, after: String, first: Int, last: Int): UserSocialConnectionConnection!
   accessTokens(offset: Int, before: String, after: String, first: Int, last: Int): AccessTokenConnection
-  primaryOwnerships(offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection!
   teams(offset: Int, before: String, after: String, first: Int, last: Int, q: String): EnterpriseTeamConnection!
   teamMemberships(offset: Int, before: String, after: String, first: Int, last: Int, q: String, role: [String], isAddedFromVcs: Boolean, isRoleFromVcs: Boolean): TeamMemberConnection!
   transactions(offset: Int, before: String, after: String, first: Int, last: Int, transactionType: String): TransactionConnection!
@@ -3630,7 +3630,7 @@ type User implements MaskPrimaryKeyNode {
   connectedVcsProviders: [VCSProviderChoices]
   socialConnections: [UserSocialConnection!]!
   personalAccounts(login: String, offset: Int, before: String, after: String, first: Int, last: Int): OwnerConnection
-  teamAccounts(login: String, offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
+  teamAccounts(login: String, isViewerPrimaryUser: Boolean, offset: Int, before: String, after: String, first: Int, last: Int, q: String): TeamConnection
 }
 
 type UserConnection {

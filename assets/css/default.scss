@@ -172,3 +172,7 @@ code.bifrost-inline-code {
 .h-report-chart {
   height: 18.875rem;
 }
+
+button.auxillary-button {
+  @apply flex items-center gap-x-1.5 px-2 h-7 rounded-3px cursor-pointer bg-ink-200 hover:bg-ink-100 border border-ink-50;
+}

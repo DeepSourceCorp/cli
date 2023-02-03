@@ -8,6 +8,7 @@ enum FileUploadContexts {
 interface FileUploadTokenT {
   filename: string
   token: string
+  url: string
 }
 
 interface FileUploadSuccessResponseT {

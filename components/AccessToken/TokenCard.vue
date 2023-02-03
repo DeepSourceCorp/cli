@@ -1,9 +1,9 @@
 <template>
-  <base-card>
-    <template slot="title">
-      <span class="text-base">{{ description }}</span>
+  <base-card :remove-default-style="true">
+    <template #title>
+      <span class="text-base font-medium">{{ description }}</span>
     </template>
-    <template slot="description">
+    <template #description>
       <p class="flex items-center space-x-4 text-sm">
         <span
           v-tooltip="{ content: 'Token expiry status', delay: { show: 300, hide: 100 } }"
@@ -46,15 +46,11 @@
         </span>
       </p>
     </template>
-    <template slot="info">
-      <div class="flex items-center justify-around h-full">
-        <z-button
-          v-tooltip="'Delete token'"
-          icon="trash-2"
-          button-type="ghost"
-          icon-color="cherry opacity-75"
-          @click="$emit('delete', id)"
-        />
+    <template #info>
+      <div class="flex items-center justify-end h-full pr-3.5">
+        <z-button v-tooltip="'Delete token'" button-type="ghost" @click="$emit('delete', id)">
+          <z-icon icon="trash-2" color="cherry opacity-75" />
+        </z-button>
       </div>
     </template>
   </base-card>

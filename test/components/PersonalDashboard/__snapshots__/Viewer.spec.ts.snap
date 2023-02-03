@@ -16,7 +16,7 @@ exports[`[[ Viewer ]] renders Viewer 1`] = `
       <div class=\\"space-y-2\\">
         <h6 class=\\"text-xs font-medium tracking-wide uppercase text-vanilla-400\\">Your Teams</h6>
         <div class=\\"space-x-2\\">
-          <nuxt-link to=\\"/gh/deepsourcelabs\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" alt=\\"deepsourcelabs\\" class=\\"rounded-full leading-none h-8 w-8 text-sm\\">
+          <nuxt-link to=\\"/gh/deepsourcelabs\\"><a class=\\"inline-block rounded-full bg-ink-300 p-0.5\\"><img src=\\"https://static.deepsource.io/avatars/14ce08c1-6b0d-4502-9a03-576af9a06f9d.png\\" alt=\\"deepsourcelabs\\" class=\\"rounded-full object-cover leading-none h-8 w-8 text-sm\\">
               <!----></a></nuxt-link>
         </div>
       </div>

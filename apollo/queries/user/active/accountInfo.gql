@@ -1,0 +1,45 @@
+query activeUserAccountInfo($login: String, $isViewerPrimaryUser: Boolean) {
+  viewer {
+    id
+    connectedVcsProviders
+    fullName
+    firstName
+    lastName
+    email
+    avatar
+    lastLogin
+    isActive
+    isAsgardian
+    isBetaTester
+    isStaff
+    dashboardContext
+    availableCredits
+    dateJoined
+    primaryOwner {
+      id
+      login
+      vcsProvider
+      billingEmail
+    }
+    socialConnections {
+      enabledOn
+      provider
+    }
+    personalAccounts(login: $login) {
+      totalCount
+    }
+    teamAccounts(login: $login) {
+      totalCount
+    }
+    primaryTeamAccounts: teamAccounts(login: $login, isViewerPrimaryUser: $isViewerPrimaryUser) {
+      totalCount
+      edges {
+        node {
+          id
+          login
+          vcsProvider
+        }
+      }
+    }
+  }
+}

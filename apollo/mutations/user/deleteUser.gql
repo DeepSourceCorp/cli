@@ -1,0 +1,5 @@
+mutation DeleteRequestingUser($input: DeleteRequestingUserInput!) {
+  deleteRequestingUser(input: $input) {
+    ok
+  }
+}
