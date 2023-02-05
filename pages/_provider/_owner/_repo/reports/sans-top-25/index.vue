@@ -139,7 +139,7 @@ export default class Sans extends mixins(RepoDetailMixin, ComplianceReportMixin)
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     const { repo, provider, owner } = this.$route.params
     if (!this.validateRepoDetails(this.repository)) {
       await this.fetchBasicRepoDetails({

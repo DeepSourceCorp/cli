@@ -15,10 +15,5 @@ query publicReportBase($reportId: String!, $token: String) {
       login
       avatar
     }
-    repository {
-      id
-      name
-      isPrivate
-    }
   }
 }

@@ -149,7 +149,7 @@ export default class PublicReportIssueDistribution extends mixins(
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     await this.refetchData()
   }
 

@@ -126,7 +126,7 @@ export default class PublicReportIssuesAutofixed extends mixins(PublicReportMixi
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     const { reportId } = this.$route.params
 
     if (reportId) {

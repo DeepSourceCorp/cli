@@ -181,7 +181,7 @@ export default class PublicReportSans extends mixins(PublicReportMixin, Complian
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     await this.refetchData()
   }
 

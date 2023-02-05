@@ -192,7 +192,7 @@ export default class PublicReportOwasp extends mixins(PublicReportMixin, Complia
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     await this.refetchData()
   }
 

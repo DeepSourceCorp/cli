@@ -21,7 +21,17 @@ import { AuthActionTypes, AuthGetterTypes } from '~/store/account/auth'
 import { ContextActionTypes } from '~/store/account/context'
 import { ActiveUserActions } from '~/store/user/active'
 
-const passList = ['github', 'bitbucket', 'gitlab']
+const publicReportPassList = [
+  'report-reportId',
+  'report-reportId-owasp-top-10',
+  'report-reportId-sans-top-25',
+  'report-reportId-code-coverage',
+  'report-reportId-issue-distribution',
+  'report-reportId-issues-prevented',
+  'report-reportId-code-health-trend',
+  'report-reportId-issues-autofixed'
+]
+const passList = ['github', 'bitbucket', 'gitlab', ...publicReportPassList]
 
 const authMiddleware: Middleware = async ({ app, store, route, redirect, error }) => {
   let strict = false

@@ -9724,9 +9724,6 @@ export type PublicReportBaseQuery = (
     & { owner?: Maybe<(
       { __typename?: 'Owner' }
       & Pick<Owner, 'id' | 'login' | 'avatar'>
-    )>, repository?: Maybe<(
-      { __typename?: 'Repository' }
-      & Pick<Repository, 'id' | 'name' | 'isPrivate'>
     )> }
   )> }
 );

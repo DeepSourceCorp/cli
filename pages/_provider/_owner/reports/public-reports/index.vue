@@ -171,7 +171,7 @@ export default class OwnerPublicReports extends mixins(PublicReportMixin, RoleAc
   /**
    * Fetch hook for the public report pages
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     await this.fetchPublicReportList()
   }
 

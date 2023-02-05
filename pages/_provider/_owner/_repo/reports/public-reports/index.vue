@@ -163,7 +163,7 @@ export default class RepoPublicReports extends mixins(PublicReportMixin, RoleAcc
   /**
    * Fetch hook for the public report pages
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     await Promise.all([this.fetchRepoPerms(this.baseRouteParams), this.fetchPublicReportList()])
   }
 

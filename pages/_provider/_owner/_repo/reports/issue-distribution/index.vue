@@ -109,7 +109,7 @@ export default class IssueDistributionPage extends mixins(
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     const { repo, provider, owner } = this.$route.params
     try {
       if (!this.validateRepoDetails(this.repository)) {

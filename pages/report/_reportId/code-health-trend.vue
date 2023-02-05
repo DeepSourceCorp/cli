@@ -135,7 +135,7 @@ export default class PublicReportCodeHealth extends mixins(
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     await this.refetchData()
   }
 

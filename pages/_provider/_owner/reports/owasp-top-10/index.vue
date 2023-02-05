@@ -143,7 +143,7 @@ export default class OwnerOwasp extends mixins(OwnerDetailMixin, ComplianceRepor
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     const { owner, provider } = this.$route.params
     if (!this.owner.id) {
       await this.fetchOwnerDetails({ login: owner, provider })

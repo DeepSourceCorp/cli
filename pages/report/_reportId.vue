@@ -220,7 +220,18 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
    * Fetches basic data of public report and handles redirection to first report
    * for protected reports.
    */
-  async fetch() {
+  async mounted() {
+    const password = this.$route.query['password']
+
+    // someone can pass string[] as query param too, preventing that
+    if (password && typeof password === 'string') {
+      this.password = password
+    }
+
+    await this.fetchDataAndRedirect()
+  }
+
+  async fetchDataAndRedirect() {
     const { reportId } = this.$route.params
 
     this.publicReport = (await this.fetchPublicReportBase(reportId, this.token)) as PublicReport
@@ -231,21 +242,6 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
       const firstReport = this.publicReport.reportKeys[0]
 
       this.$router.push(`/report/${reportId}/${firstReport}`)
-    }
-  }
-
-  /**
-   * Mounted hook for the vue component.
-   * Prefills password field if it's avilable in URL
-   *
-   * @returns void
-   */
-  mounted(): void {
-    const password = this.$route.query['password']
-
-    // someone can pass string[] as query param too, preventing that
-    if (password && typeof password === 'string') {
-      this.password = password
     }
   }
 
@@ -271,7 +267,7 @@ export default class PublicReportPageParent extends mixins(PublicReportMixin) {
 
     if (this.token) {
       this.passwordError = false
-      this.$fetch()
+      this.fetchDataAndRedirect()
     }
   }
 

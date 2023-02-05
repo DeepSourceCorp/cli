@@ -170,7 +170,7 @@ export default class PublicReportCodeCoverage extends mixins(
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     await this.fetchCodeCoverage(false)
   }
 

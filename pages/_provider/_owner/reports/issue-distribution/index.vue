@@ -108,7 +108,7 @@ export default class IssueDistributionPage extends mixins(
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     try {
       const { owner, provider } = this.$route.params
       if (!this.owner.id) {

@@ -152,7 +152,7 @@ export default class PublicReportIssuesPrevented extends mixins(
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     const { reportId } = this.$route.params
 
     if (reportId) {

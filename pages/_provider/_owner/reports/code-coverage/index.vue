@@ -137,7 +137,7 @@ export default class OwnerCodeCoverage extends mixins(PaginationMixin, RouteQuer
    *
    * @returns {Promise<void>}
    */
-  async fetch(): Promise<void> {
+  async mounted(): Promise<void> {
     this.fetchCodeCoverage(false)
   }
 
