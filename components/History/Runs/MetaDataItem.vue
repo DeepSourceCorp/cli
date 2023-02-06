@@ -1,7 +1,7 @@
 <template>
   <div :class="[spacing]">
     <z-icon :icon="icon" :size="size" :color="iconColor" class="flex-shrink-0 inline mb-px" />
-    <span :class="[textColor, textSize, 'inline break-all']">
+    <span :class="[textColor, textSize, wordBreak, 'inline']">
       <slot>{{ label }}</slot>
     </span>
   </div>
@@ -37,5 +37,11 @@ export default class MetaDataItem extends Vue {
 
   @Prop({ default: 'space-x-1' })
   spacing: string
+
+  @Prop({
+    default: 'break-all',
+    validator: (value: string) => ['break-normal', 'break-words', 'break-all'].includes(value)
+  })
+  wordBreak: string
 }
 </script>

@@ -176,10 +176,19 @@ export default class AnalyzerDetails extends mixins(
     ]
 
     if (analyzer) {
-      let link = {
-        label: toTitleCase(this.$route.params.analyzer),
+      // Do not follow title case for `cxx` Analyzer
+      const analyzerLabelsMap: Record<string, string> = {
+        cxx: 'cxx'
+      }
+
+      const breadcrumbLabel =
+        analyzerLabelsMap[this.currentAnalyzer] ?? toTitleCase(this.currentAnalyzer)
+
+      const link = {
+        label: breadcrumbLabel,
         route: issueId ? this.$generateRoute(['run', runId, analyzer]) : undefined
       }
+
       if (issueId && this.$route.query) {
         const { listsort, listcategory, listq } = this.$route.query
         let filters = []
@@ -190,6 +199,7 @@ export default class AnalyzerDetails extends mixins(
           link.route = `${link.route}?${filters.join('&')}`
         }
       }
+
       links.push(link)
     }
 

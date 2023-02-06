@@ -4,9 +4,10 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 "<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
   <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-2\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <analyzer-logo size=\\"large\\" name=\\"Python\\" shortcode=\\"python\\" description=\\"DeepSource's Python analyzer.\\" analyzerlogo=\\"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg\\"></analyzer-logo>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
+
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
@@ -49,9 +50,10 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 "<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
   <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-2\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <analyzer-logo size=\\"large\\" name=\\"Python\\" shortcode=\\"python\\" description=\\"DeepSource's Python analyzer.\\" analyzerlogo=\\"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg\\"></analyzer-logo>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
+
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
@@ -94,9 +96,10 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 "<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
   <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-2\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <analyzer-logo size=\\"large\\" name=\\"Python\\" shortcode=\\"python\\" description=\\"DeepSource's Python analyzer.\\" analyzerlogo=\\"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg\\"></analyzer-logo>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
+
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
@@ -139,9 +142,10 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 "<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
   <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-2\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <analyzer-logo size=\\"large\\" name=\\"Python\\" shortcode=\\"python\\" description=\\"DeepSource's Python analyzer.\\" analyzerlogo=\\"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg\\"></analyzer-logo>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
+
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
@@ -184,9 +188,10 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 "<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
   <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-2\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <analyzer-logo size=\\"large\\" name=\\"Python\\" shortcode=\\"python\\" description=\\"DeepSource's Python analyzer.\\" analyzerlogo=\\"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg\\"></analyzer-logo>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
+
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">
@@ -229,9 +234,10 @@ exports[`[[ RunHeader ]] renders \`RunHeader\` with all prop options: {"branchNa
 "<div class=\\"flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26\\">
   <div class=\\"flex flex-col gap-y-4 p-3\\">
     <div class=\\"flex items-start gap-x-2\\">
-      <zicon-stub icon=\\"python\\" size=\\"large\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub>
+      <analyzer-logo size=\\"large\\" name=\\"Python\\" shortcode=\\"python\\" description=\\"DeepSource's Python analyzer.\\" analyzerlogo=\\"http://local-asgard-static.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg\\"></analyzer-logo>
       <div class=\\"text-lg font-bold text-vanilla-100\\">
         Python
+
         <span class=\\"font-medium text-vanilla-400\\"><a href=\\"https://github.com/deepsourcelabs/demo-python/commit/86215f5d0d27e08c86f752c61510130fb37901ef\\" target=\\"_blank\\" rel=\\"noopener noreferrer\\">@86215f5</a></span></div>
       <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"sm\\" spacing=\\"\\" iconcolor=\\"current\\" class=\\"border border-slate-400 py-0.5 px-2 hidden md:inline-flex\\">
         <div class=\\"flex items-center gap-x-1\\">

@@ -31,7 +31,9 @@
             </meta-data-item>
 
             <!-- Occurrences in files -->
-            <meta-data-item icon="file-text"> Found in {{ seenIn }} </meta-data-item>
+            <meta-data-item icon="file-text" word-break="break-normal">
+              Found in {{ seenIn }}
+            </meta-data-item>
           </div>
         </div>
 

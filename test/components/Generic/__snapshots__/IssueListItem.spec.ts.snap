@@ -20,7 +20,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 1`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -54,7 +56,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 2`]
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -94,7 +98,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 3`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -128,7 +134,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 4`]
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -168,7 +176,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 5`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -200,7 +210,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 6`]
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -238,7 +250,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 7`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -270,7 +284,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 8`]
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -308,7 +324,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 9`]
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -342,7 +360,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 10`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -382,7 +402,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 11`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -416,7 +438,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 12`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -456,7 +480,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 13`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -488,7 +514,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 14`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -526,7 +554,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 15`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -558,7 +588,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 16`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -596,7 +628,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 17`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -628,7 +662,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 18`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -666,7 +702,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 19`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -698,7 +736,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 20`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -736,7 +776,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 21`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -768,7 +810,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 22`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -806,7 +850,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 23`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -838,7 +884,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 24`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400 justify-center items-center\\">
@@ -876,7 +924,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 25`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -908,7 +958,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 26`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -946,7 +998,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 27`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -978,7 +1032,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 28`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -1016,7 +1072,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 29`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -1048,7 +1106,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 30`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -1086,7 +1146,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 31`
             <span data-original-title=\\"null\\" class=\\" has-tooltip\\">
               2 years old
             </span></metadataitem-stub>
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">
@@ -1118,7 +1180,9 @@ exports[`[[ IssueListItem ]] renders \`IssueListItem\` with all prop options 32`
         <div class=\\"flex items-center flex-wrap gap-y-1.5 gap-x-4\\">
           <issuetype-stub issuetype=\\"bug-risk\\"></issuetype-stub>
           <!---->
-          <metadataitem-stub icon=\\"file-text\\"> Found in code.py </metadataitem-stub>
+          <metadataitem-stub icon=\\"file-text\\" word-break=\\"break-normal\\">
+            Found in code.py
+          </metadataitem-stub>
         </div>
       </div>
       <div class=\\"flex flex-col w-1/4 h-full border-l xs:w-1/5 border-slate-400 group-hover:border-slate-400\\">

@@ -2,15 +2,18 @@
   <div class="flex lg:grid lg:grid-cols-fr-16 xl:grid-cols-fr-22 w-full justify-between md:h-26">
     <div class="flex flex-col gap-y-4 p-3">
       <div class="flex items-start gap-x-2">
-        <z-icon :icon="currentCheck.analyzer.shortcode" size="large" />
+        <analyzer-logo v-bind="currentCheck.analyzer" size="large" />
+
         <div class="text-lg font-bold text-vanilla-100">
           {{ currentCheck.analyzer.name }}
+
           <span class="font-medium text-vanilla-400"
             ><a v-if="vcsCommitUrl" :href="vcsCommitUrl" target="_blank" rel="noopener noreferrer"
               >@{{ commitOid.slice(0, 7) }}</a
             >
           </span>
         </div>
+
         <z-tag class="border border-slate-400 py-0.5 px-2 hidden md:inline-flex" spacing="">
           <div class="flex items-center gap-x-1">
             <z-icon
