@@ -10,7 +10,7 @@
         icon="search"
         placeholder="Search repositories..."
         class="flex-grow"
-        @debounceInput="searchRepo"
+        @input="debounceSearchRepo"
       >
         <template #left>
           <z-icon icon="search" class="ml-1.5" />
@@ -18,60 +18,16 @@
       </z-input>
     </div>
     <div class="flex-grow overflow-x-hidden">
-      <div v-if="reposToActivateList.length" class="p-4 space-y-2">
-        <repo-card
-          v-for="repo in reposToActivateList"
-          :key="repo.id"
-          v-bind="repo"
-          :analyzer-shortcode="analyzerShortcode"
-          :remove-default-style="true"
-          :show-info="false"
-          :transformer-shortcode="transformerShortcode"
-          route="generate-config"
-          size="small"
-          class="border rounded-lg hover:bg-ink-200 border-slate-400"
-        />
-
-        <div
-          v-if="$route.params.provider === 'gl'"
-          class="flex flex-col items-center p-4 space-y-4"
-        >
-          <p class="text-sm font-normal text-vanilla-100">
-            Can't find the repository that you're looking for?
-          </p>
-
-          <z-button
-            v-if="repoSyncLoading"
-            :disabled="true"
-            button-type="ghost"
-            size="small"
-            class="flex items-center bg-ink-200 text-vanilla-100"
-          >
-            <z-icon icon="spin-loader" color="vanilla-100" class="mr-2 animate-spin" />
-            <span>Syncing repositories</span>
-          </z-button>
-          <z-button
-            v-else
-            button-type="ghost"
-            icon="refresh-cw"
-            icon-color="vanilla-100"
-            size="small"
-            class="bg-ink-200 text-vanilla-100 hover:bg-opacity-80"
-            @click="syncRepos"
-          >
-            Sync repositories
-          </z-button>
-        </div>
-      </div>
-      <div v-else-if="$fetchState.pending" class="p-4 space-y-2 animate-pulse">
+      <div v-if="reposListLoading" class="p-4 space-y-2 animate-pulse">
         <div
           v-for="loopIndex in 4"
           :key="loopIndex"
           class="rounded-md opacity-50 h-17 bg-ink-200"
         ></div>
       </div>
+
       <lazy-empty-state
-        v-else
+        v-else-if="reposToActivateList && reposToActivateList.length === 0"
         :use-v2="true"
         :show-border="false"
         :title="
@@ -120,6 +76,53 @@
           </div>
         </template>
       </lazy-empty-state>
+
+      <div v-else class="p-4 space-y-2">
+        <repo-card
+          v-for="repo in reposToActivateList"
+          :key="repo.id"
+          v-bind="repo"
+          :analyzer-shortcode="analyzerShortcode"
+          :remove-default-style="true"
+          :show-info="false"
+          :transformer-shortcode="transformerShortcode"
+          route="generate-config"
+          size="small"
+          class="border rounded-lg hover:bg-ink-200 border-slate-400"
+        />
+
+        <div
+          v-if="$route.params.provider === 'gl'"
+          class="flex flex-col items-center p-4 space-y-4"
+        >
+          <p class="text-sm font-normal text-vanilla-100">
+            Can't find the repository that you're looking for?
+          </p>
+
+          <z-button
+            v-if="repoSyncLoading"
+            :disabled="true"
+            button-type="ghost"
+            size="small"
+            class="flex items-center bg-ink-200 text-vanilla-100"
+          >
+            <z-icon icon="spin-loader" color="vanilla-100" class="mr-2 animate-spin" />
+            <span>Syncing repositories</span>
+          </z-button>
+          <z-button
+            v-else
+            button-type="ghost"
+            icon="refresh-cw"
+            icon-color="vanilla-100"
+            size="small"
+            class="bg-ink-200 text-vanilla-100 hover:bg-opacity-80"
+            @click="syncRepos"
+          >
+            Sync repositories
+          </z-button>
+        </div>
+      </div>
+
       <div v-if="totalPageCount > 1" class="flex justify-center my-6 text-sm">
         <z-pagination
           :page="currentPage"
@@ -132,20 +135,23 @@
   </z-tab-pane>
 </template>
 <script lang="ts">
-import { Component, mixins, Prop } from 'nuxt-property-decorator'
-import { ZInput, ZButton, ZIcon, ZTabPane, ZPagination } from '@deepsource/zeal'
 import { RepoCard } from '@/components/AddRepo'
+import { ZButton, ZIcon, ZInput, ZPagination, ZTabPane } from '@deepsource/zeal'
+import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
 import RepositoriesActivationListQuery from '~/apollo/queries/repository/activateList.gql'
 
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import OwnerDetailMixin from '~/mixins/ownerDetailMixin'
+import PaginationMixin from '~/mixins/paginationMixin'
 import RepoListMixin from '~/mixins/repoListMixin'
 import RepoSyncMixin from '~/mixins/repoSyncMixin'
-import PaginationMixin from '~/mixins/paginationMixin'
-import { Repository, RepositoryToActivateListQueryVariables } from '~/types/types'
+
 import { GraphqlQueryResponse } from '~/types/apollo-graphql-types'
+import { Repository, RepositoryToActivateListQueryVariables } from '~/types/types'
+
 import { resolveNodes } from '~/utils/array'
+import { debounceAsync } from '~/utils/debounce'
 
 interface ZInputT extends Vue {
   focus: () => void
@@ -178,8 +184,12 @@ export default class ActivateSingleRepo extends mixins(
   transformerShortcode: string
 
   reposToActivateList: Repository[] = []
-  public searchCandidate = ''
-  public perPageCount = 30
+  searchCandidate = ''
+  perPageCount = 30
+  reposListLoading = false
+  timeoutId: ReturnType<typeof setTimeout>
+
+  debouncedSearchRepo = debounceAsync(this.searchRepo, 400)
 
   /**
    * Mounted hook for Vue component
@@ -200,14 +210,28 @@ export default class ActivateSingleRepo extends mixins(
   }
 
   /**
+   * Handler method for the `ZInput` `input` event
+   * Debounce API calls
+   *
+   * @param {string} val
+   * @returns {void}
+   */
+  async debounceSearchRepo(val: string): Promise<void> {
+    this.searchCandidate = val
+    this.reposListLoading = true
+
+    await this.debouncedSearchRepo()
+  }
+
+  /**
    * Search repo input change handler
    *
    * @param {string} val
    * @returns {Promise<void>}
    */
-  async searchRepo(val: string): Promise<void> {
-    this.searchCandidate = val
+  async searchRepo(): Promise<void> {
     this.currentPage = 1
+
     const response = await this.fetchReposToActivate(
       {
         login: this.activeOwner,
@@ -218,6 +242,7 @@ export default class ActivateSingleRepo extends mixins(
       },
       true
     )
+
     this.reposToActivateList = response ?? []
     const searchBox = this.$refs['search-repo-input'] as ZInputT
     if (searchBox) {
@@ -231,6 +256,8 @@ export default class ActivateSingleRepo extends mixins(
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
+    this.reposListLoading = true
+
     await this.refetchData()
   }
 
@@ -279,6 +306,9 @@ export default class ActivateSingleRepo extends mixins(
     refetch?: boolean
   ): Promise<Repository[] | undefined> {
     try {
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId)
+      }
       const response = (await this.$fetchGraphqlData(
         RepositoriesActivationListQuery,
         { ...args, isActivated: false },
@@ -294,6 +324,10 @@ export default class ActivateSingleRepo extends mixins(
         e as Error,
         'We encountered an error while trying to fetch your repositories. Please try refreshing this page and try again. If the issue keeps happening, contact our support.'
       )
+    } finally {
+      this.timeoutId = setTimeout(() => {
+        this.reposListLoading = false
+      }, 300)
     }
   }
 }

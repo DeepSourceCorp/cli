@@ -219,6 +219,7 @@ export const storeModulesGenerator = (overrides = {}) => {
       'owner/detail': {
         namespaced: true,
         state: {
+          hasGrantedAllRepoAccess: true,
           loading: false,
           error: {},
           billingInfo: {},
@@ -311,6 +312,440 @@ export const storeModulesGenerator = (overrides = {}) => {
           fetchRepoPerms: jest.fn(),
           fetchRepoRunCount: jest.fn(),
           fetchCurrentRunCount: jest.fn()
+        }
+      },
+      'repository/list': {
+        namespaced: true,
+        state: {
+          loading: false,
+          error: {},
+          repositoryList: {
+            pageInfo: {},
+            totalCount: 7,
+            edges: [
+              {
+                node: {
+                  id: 'UmVwb3NpdG9yeTp6d2phcGI=',
+                  name: 'demo-go',
+                  vcsProvider: 'GITHUB',
+                  ownerLogin: 'deepsourcelabs',
+                  modifiedAt: '2023-02-01T12:45:50.053493+00:00',
+                  isActivated: true,
+                  isFork: false,
+                  isPrivate: false,
+                  isStarred: true,
+                  latestCommitOid: 'cf64c729235234a4f59336a4005928ab2216846f',
+                  defaultBranchName: 'master',
+                  lastAnalyzedAt: '2022-10-03T10:49:47.035467+00:00',
+                  availableAnalyzers: {
+                    edges: [
+                      {
+                        node: {
+                          id: 'QW5hbHl6ZXI6cnlieXZ6',
+                          name: 'Go',
+                          shortcode: 'go',
+                          analyzerLogo:
+                            'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/go.svg?v=1592555094'
+                        }
+                      },
+                      {
+                        node: {
+                          id: 'QW5hbHl6ZXI6b2x6cW5i',
+                          name: 'Dockerfile',
+                          shortcode: 'docker',
+                          analyzerLogo:
+                            'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/docker.svg?v=1590404051'
+                        }
+                      }
+                    ]
+                  },
+                  primaryAnalyzer: {
+                    id: 'QW5hbHl6ZXI6cnlieXZ6',
+                    name: 'Go',
+                    shortcode: 'go',
+                    analyzerLogo:
+                      'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/go.svg?v=1592555094'
+                  },
+                  canBeActivated: true,
+                  supportedAnalyzers: ['go']
+                }
+              },
+              {
+                node: {
+                  id: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
+                  name: 'demo-python',
+                  vcsProvider: 'GITHUB',
+                  ownerLogin: 'deepsourcelabs',
+                  modifiedAt: '2023-01-27T10:08:07.560393+00:00',
+                  isActivated: true,
+                  isFork: false,
+                  isPrivate: false,
+                  isStarred: true,
+                  latestCommitOid: 'b3907ba96caa65668f3f8b96663f6629f607e860',
+                  defaultBranchName: 'master',
+                  lastAnalyzedAt: '2020-07-06T10:14:07.593783+00:00',
+                  availableAnalyzers: {
+                    edges: [
+                      {
+                        node: {
+                          id: 'QW5hbHl6ZXI6bGtiZXZ6',
+                          name: 'Python',
+                          shortcode: 'python',
+                          analyzerLogo:
+                            'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948'
+                        }
+                      }
+                    ]
+                  },
+                  primaryAnalyzer: {
+                    id: 'QW5hbHl6ZXI6bGtiZXZ6',
+                    name: 'Python',
+                    shortcode: 'python',
+                    analyzerLogo:
+                      'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948'
+                  },
+                  canBeActivated: true,
+                  supportedAnalyzers: ['python']
+                }
+              },
+              {
+                node: {
+                  id: 'UmVwb3NpdG9yeTp6cXdwZ3o=',
+                  name: 'bob-cli',
+                  vcsProvider: 'GITHUB',
+                  ownerLogin: 'deepsourcelabs',
+                  modifiedAt: '2022-09-20T07:42:07.811123+00:00',
+                  isActivated: true,
+                  isFork: false,
+                  isPrivate: true,
+                  isStarred: true,
+                  latestCommitOid: 'ad36dcec96660414d075b32fda0d7b4ccc46bbff',
+                  defaultBranchName: 'master',
+                  lastAnalyzedAt: '2020-06-18T19:34:18.873588+00:00',
+                  availableAnalyzers: {
+                    edges: [
+                      {
+                        node: {
+                          id: 'QW5hbHl6ZXI6bGtiZXZ6',
+                          name: 'Python',
+                          shortcode: 'python',
+                          analyzerLogo:
+                            'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948'
+                        }
+                      }
+                    ]
+                  },
+                  primaryAnalyzer: {
+                    id: 'QW5hbHl6ZXI6bGtiZXZ6',
+                    name: 'Python',
+                    shortcode: 'python',
+                    analyzerLogo:
+                      'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948'
+                  },
+                  canBeActivated: true,
+                  supportedAnalyzers: ['python']
+                }
+              },
+              {
+                node: {
+                  id: 'UmVwb3NpdG9yeTp6bXhyeWI=',
+                  name: 'atlas',
+                  vcsProvider: 'GITHUB',
+                  ownerLogin: 'deepsourcelabs',
+                  modifiedAt: '2022-02-22T10:32:11.768641+00:00',
+                  isActivated: true,
+                  isFork: false,
+                  isPrivate: true,
+                  isStarred: false,
+                  latestCommitOid: 'b44fb26c2a2e4e45cafe5e275367b47f9a56442d',
+                  defaultBranchName: 'master',
+                  lastAnalyzedAt: '2020-06-17T12:55:52.875763+00:00',
+                  availableAnalyzers: {
+                    edges: [
+                      {
+                        node: {
+                          id: 'QW5hbHl6ZXI6cnlieXZ6',
+                          name: 'Go',
+                          shortcode: 'go',
+                          analyzerLogo:
+                            'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/go.svg?v=1592555094'
+                        }
+                      }
+                    ]
+                  },
+                  primaryAnalyzer: null,
+                  canBeActivated: true,
+                  supportedAnalyzers: ['go', 'docker']
+                }
+              },
+              {
+                node: {
+                  id: 'UmVwb3NpdG9yeTp6Z2tsZHo=',
+                  name: 'marvin-javascript',
+                  vcsProvider: 'GITHUB',
+                  ownerLogin: 'deepsourcelabs',
+                  modifiedAt: '2022-02-27T07:42:51.221976+00:00',
+                  isActivated: true,
+                  isFork: false,
+                  isPrivate: true,
+                  isStarred: false,
+                  latestCommitOid: '2cc3e8c5000f9adc584b59c60746292c8494798a',
+                  defaultBranchName: 'master',
+                  lastAnalyzedAt: null,
+                  availableAnalyzers: {
+                    edges: []
+                  },
+                  primaryAnalyzer: null,
+                  canBeActivated: true,
+                  supportedAnalyzers: ['docker', 'javascript']
+                }
+              },
+              {
+                node: {
+                  id: 'UmVwb3NpdG9yeTpib3BtZXo=',
+                  name: 'git-label-packages',
+                  vcsProvider: 'GITHUB',
+                  ownerLogin: 'deepsourcelabs',
+                  modifiedAt: '2020-06-04T09:59:47.893220+00:00',
+                  isActivated: true,
+                  isFork: true,
+                  isPrivate: false,
+                  isStarred: false,
+                  latestCommitOid: '96346ebd1f541bbdf2ad848114aca42904f7fe74',
+                  defaultBranchName: 'master',
+                  lastAnalyzedAt: null,
+                  availableAnalyzers: {
+                    edges: []
+                  },
+                  primaryAnalyzer: null,
+                  canBeActivated: true,
+                  supportedAnalyzers: []
+                }
+              },
+              {
+                node: {
+                  id: 'UmVwb3NpdG9yeTp6Z2tlZHo=',
+                  name: 'beacon-py',
+                  vcsProvider: 'GITHUB',
+                  ownerLogin: 'deepsourcelabs',
+                  modifiedAt: '2020-06-04T09:59:47.624723+00:00',
+                  isActivated: true,
+                  isFork: false,
+                  isPrivate: false,
+                  isStarred: false,
+                  latestCommitOid: '98aef23f8915b11b7a415dbf840a3af166d92ca3',
+                  defaultBranchName: 'master',
+                  lastAnalyzedAt: null,
+                  availableAnalyzers: {
+                    edges: []
+                  },
+                  primaryAnalyzer: null,
+                  canBeActivated: true,
+                  supportedAnalyzers: ['python']
+                }
+              }
+            ]
+          },
+          newRepos: {
+            pageInfo: {},
+            totalCount: 0,
+            edges: []
+          },
+          repoWithActiveAnalysis: [
+            {
+              id: 'UmVwb3NpdG9yeTp6d2phcGI=',
+              name: 'demo-go',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: false,
+              lastAnalyzedAt: '2022-10-03T10:49:47.035467+00:00'
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
+              name: 'demo-python',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: false,
+              lastAnalyzedAt: '2020-07-06T10:14:07.593783+00:00'
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6cXdwZ3o=',
+              name: 'bob-cli',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: true,
+              lastAnalyzedAt: '2020-06-18T19:34:18.873588+00:00'
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6bXhyeWI=',
+              name: 'atlas',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: true,
+              lastAnalyzedAt: '2020-06-17T12:55:52.875763+00:00'
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6Z2tsZHo=',
+              name: 'marvin-javascript',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: true,
+              lastAnalyzedAt: null
+            }
+          ],
+          repoWithActiveAnalysisWithAnalyzers: [
+            {
+              id: 'UmVwb3NpdG9yeTp6d2phcGI=',
+              name: 'demo-go',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: false,
+              lastAnalyzedAt: '2022-10-03T10:49:47.035467+00:00',
+              availableAnalyzers: {
+                edges: [
+                  {
+                    node: {
+                      id: 'QW5hbHl6ZXI6cnlieXZ6',
+                      name: 'Go',
+                      shortcode: 'go',
+                      analyzerLogo:
+                        'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/go.svg?v=1592555094'
+                    }
+                  },
+                  {
+                    node: {
+                      id: 'QW5hbHl6ZXI6b2x6cW5i',
+                      name: 'Dockerfile',
+                      shortcode: 'docker',
+                      analyzerLogo:
+                        'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/docker.svg?v=1590404051'
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6ZXBqZWI=',
+              name: 'demo-python',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: false,
+              lastAnalyzedAt: '2020-07-06T10:14:07.593783+00:00',
+              availableAnalyzers: {
+                edges: [
+                  {
+                    node: {
+                      id: 'QW5hbHl6ZXI6bGtiZXZ6',
+                      name: 'Python',
+                      shortcode: 'python',
+                      analyzerLogo:
+                        'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948'
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6cXdwZ3o=',
+              name: 'bob-cli',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: true,
+              lastAnalyzedAt: '2020-06-18T19:34:18.873588+00:00',
+              availableAnalyzers: {
+                edges: [
+                  {
+                    node: {
+                      id: 'QW5hbHl6ZXI6bGtiZXZ6',
+                      name: 'Python',
+                      shortcode: 'python',
+                      analyzerLogo:
+                        'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/python.svg?v=1585728948'
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6bXhyeWI=',
+              name: 'atlas',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: true,
+              lastAnalyzedAt: '2020-06-17T12:55:52.875763+00:00',
+              availableAnalyzers: {
+                edges: [
+                  {
+                    node: {
+                      id: 'QW5hbHl6ZXI6cnlieXZ6',
+                      name: 'Go',
+                      shortcode: 'go',
+                      analyzerLogo:
+                        'http://local-asgard-static-csv.s3.us-east-1.amazonaws.com/analyzer_logos/go.svg?v=1592555094'
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6Z2tsZHo=',
+              name: 'marvin-javascript',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: true,
+              lastAnalyzedAt: null,
+              availableAnalyzers: {
+                edges: []
+              }
+            },
+            {
+              id: 'UmVwb3NpdG9yeTpib3BtZXo=',
+              name: 'git-label-packages',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: true,
+              isPrivate: false,
+              lastAnalyzedAt: null,
+              availableAnalyzers: {
+                edges: []
+              }
+            },
+            {
+              id: 'UmVwb3NpdG9yeTp6Z2tlZHo=',
+              name: 'beacon-py',
+              vcsProvider: 'GITHUB',
+              ownerLogin: 'deepsourcelabs',
+              isActivated: true,
+              isFork: false,
+              isPrivate: false,
+              lastAnalyzedAt: null,
+              availableAnalyzers: {
+                edges: []
+              }
+            }
+          ],
+          repoWithPendingAdhocRuns: []
         }
       }
     },
