@@ -508,6 +508,7 @@ type Check implements MaskPrimaryKeyNode {
   issuesResolvedCount: Int
   autofixableIssues: [AutofixableIssueDetail]
   filesAffectedByAutofix: Int
+  hasInferredArtifacts: Boolean
 }
 
 type CheckConnection {
@@ -1806,6 +1807,7 @@ type Mutation {
   removeTeamMember(input: RemoveTeamMemberInput!): RemoveTeamMemberPayload
   updateTeamMemberRole(input: UpdateTeamMemberRoleInput!): UpdateTeamMemberRolePayload
   transferTeamOwnership(input: TransferTeamOwnershipInput!): TransferTeamOwnershipPayload
+  syncRepositoryForOwner(input: SyncRepositoryForOwnerInput!): SyncRepositoryForOwnerPayload
   syncRepositoriesForOwner(input: SyncRepositoriesForOwnerInput!): SyncRepositoriesForOwnerPayload
   createAutofixRun(input: CreateAutofixRunInput!): CreateAutofixRunPayload
   createdPullRequest(input: CreatePullRequestInput!): CreatePullRequestPayload
@@ -2523,6 +2525,7 @@ enum RepositoryPermissionChoices {
 }
 
 type RepositorySetting implements MaskPrimaryKeyNode {
+  inferDefaultBranchCoverage: Boolean
   pinnedReports: [PinnedReport]
   id: ID!
 }
@@ -2780,6 +2783,17 @@ input SyncRepositoriesForOwnerInput {
 }
 
 type SyncRepositoriesForOwnerPayload {
+  ok: Boolean
+  clientMutationId: String
+}
+
+input SyncRepositoryForOwnerInput {
+  ownerId: ID!
+  repositoryName: String!
+  clientMutationId: String
+}
+
+type SyncRepositoryForOwnerPayload {
   ok: Boolean
   clientMutationId: String
 }
@@ -3467,6 +3481,7 @@ input UpdateRepositorySettingsInput {
   issuePrioritySettings: [RepositoryIssuePrioritySettingsInput]
   metricSettings: [MetricSettingsInput]
   gitlabIntegrationUseStatus: Boolean
+  inferDefaultBranchCoverage: Boolean
   id: ID!
   clientMutationId: String
 }

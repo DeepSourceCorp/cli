@@ -1,7 +1,12 @@
 import { Component, Vue, namespace } from 'nuxt-property-decorator'
 import { OwnerDetailActions } from '~/store/owner/detail'
 
-import { Owner, IssueTypeSetting, IntegrationFeature } from '~/types/types'
+import {
+  Owner,
+  IssueTypeSetting,
+  IntegrationFeature,
+  SyncRepositoryForOwnerInput
+} from '~/types/types'
 
 const ownerDetailStore = namespace('owner/detail')
 
@@ -65,6 +70,9 @@ export default class OwnerDetailMixin extends Vue {
 
   @ownerDetailStore.Action(OwnerDetailActions.SYNC_REPOS_FOR_OWNER)
   syncReposForOwner: () => Promise<void>
+
+  @ownerDetailStore.Action(OwnerDetailActions.SYNC_SINGLE_REPO_FOR_OWNER)
+  syncSingleRepoForOwner: (args: SyncRepositoryForOwnerInput) => Promise<boolean>
 
   @ownerDetailStore.Action(OwnerDetailActions.FETCH_OWNER_SSH_KEY)
   fetchOwnerSSHKey: (args: { login: string; provider: string }) => Promise<void>

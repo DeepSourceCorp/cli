@@ -1,0 +1,5 @@
+mutation syncRepositoryForOwner($input: SyncRepositoryForOwnerInput!) {
+  syncRepositoryForOwner(input: $input) {
+    ok
+  }
+}

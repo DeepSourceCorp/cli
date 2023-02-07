@@ -27,7 +27,8 @@ describe('[[ ActivateSingleRepo ]]', () => {
     ZIcon: true,
     ZInput: true,
     ZPagination: true,
-    ZTabPane: true
+    ZTabPane: true,
+    SyncRepoAlert: true
   }
 
   test('renders an input widget with a list of repositories that can be activated', () => {

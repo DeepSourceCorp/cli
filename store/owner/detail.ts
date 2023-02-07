@@ -20,7 +20,9 @@ import {
   VerifyGsrSetupPayload,
   VerifyGsrWebhooksInput,
   VerifyGsrWebhooksPayload,
-  IntegrationFeature
+  IntegrationFeature,
+  SyncRepositoryForOwnerInput,
+  SyncRepositoriesForOwnerPayload
 } from '~/types/types'
 import { GraphqlError, GraphqlMutationResponse } from '~/types/apollo-graphql-types'
 
@@ -31,6 +33,7 @@ import AppConfig from '~/apollo/queries/owner/appConfig.gql'
 import IssueTrendsGQLQuery from '~/apollo/queries/owner/issueTrends.gql'
 import AutofixTrendsGQLQuery from '~/apollo/queries/owner/autofixTrends.gql'
 import SyncRepositories from '~/apollo/mutations/owner/syncRepositories.gql'
+import SyncOwnerRepository from '~/apollo/mutations/owner/syncRepository.gql'
 
 // Settings
 import IssueTypeSettingsGQLQuery from '~/apollo/queries/owner/settings/IssueTypeSettings.gql'
@@ -196,6 +199,7 @@ export enum OwnerDetailActions {
   SET_ISSUE_TYPE_SETTING = 'setIssueTypeSetting',
   SUBMIT_ISSUE_TYPE_SETTINGS = 'submitIssueTypeSettings',
   SYNC_REPOS_FOR_OWNER = 'syncReposForOwner',
+  SYNC_SINGLE_REPO_FOR_OWNER = 'syncSingleRepoForOwner',
   SET_DATA_TIMEOUT_TRIGGER = 'setDataTimeoutTrigger',
 
   FETCH_BILLING_DETAILS = 'fetchBillingDetails',
@@ -300,6 +304,12 @@ interface OwnerDetailModuleActions extends ActionTree<OwnerDetailModuleState, Ro
     this: Store<RootState>,
     injectee: OwnerDetailModuleActionContext
   ) => Promise<void>
+
+  [OwnerDetailActions.SYNC_SINGLE_REPO_FOR_OWNER]: (
+    this: Store<RootState>,
+    injectee: OwnerDetailModuleActionContext,
+    args: SyncRepositoryForOwnerInput
+  ) => Promise<boolean>
 
   [OwnerDetailActions.SET_OWNER]: (injectee: OwnerDetailModuleActionContext, owner: Owner) => void
 
@@ -712,6 +722,12 @@ export const actions: OwnerDetailModuleActions = {
       commit(OwnerDetailMutations.SET_ERROR, err)
       commit(OwnerDetailMutations.SET_LOADING, false)
     }
+  },
+
+  async [OwnerDetailActions.SYNC_SINGLE_REPO_FOR_OWNER](_, args) {
+    const res = await this.$applyGraphqlMutation(SyncOwnerRepository, { input: args })
+    const data = res?.data?.syncRepositoryForOwner as SyncRepositoriesForOwnerPayload
+    return Boolean(data.ok)
   },
 
   [OwnerDetailActions.SET_OWNER]({ commit }, owner) {

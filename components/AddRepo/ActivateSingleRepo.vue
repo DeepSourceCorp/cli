@@ -17,67 +17,75 @@
         </template>
       </z-input>
     </div>
-    <div class="flex-grow overflow-x-hidden">
-      <div v-if="reposListLoading" class="p-4 space-y-2 animate-pulse">
+    <div class="flex-grow overflow-x-hidden p-4">
+      <div v-if="reposListLoading" class="space-y-2 animate-pulse">
         <div
           v-for="loopIndex in 4"
           :key="loopIndex"
           class="rounded-md opacity-50 h-17 bg-ink-200"
         ></div>
       </div>
+      <div v-else-if="reposToActivateList && reposToActivateList.length === 0" class="space-y-5">
+        <lazy-empty-state
+          :use-v2="true"
+          :show-border="true"
+          :title="
+            searchCandidate
+              ? `No results found for '${searchCandidate}'`
+              : 'We couldn’t find any repositories linked to this account.'
+          "
+          :subtitle="
+            owner.hasGrantedAllRepoAccess
+              ? `You can sync your repositories from ${activeProviderName}`
+              : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
+          "
+          :webp-image-path="
+            searchCandidate
+              ? require('~/assets/images/ui-states/directory/empty-search.webp')
+              : undefined
+          "
+          :png-image-path="
+            searchCandidate
+              ? require('~/assets/images/ui-states/directory/empty-search.gif')
+              : undefined
+          "
+          class="border-ink-100"
+        >
+          <template #action>
+            <div class="flex gap-x-2 justify-center md:justify-start">
+              <z-button
+                v-if="!owner.hasGrantedAllRepoAccess && owner.appConfigurationUrl"
+                :to="owner.appConfigurationUrl"
+                label="Manage Permissions"
+                size="small"
+                target="_blank"
+                rel="noopener noreferrer"
+                icon="settings"
+                icon-color="vanilla-100"
+                class="bg-ink-200 hover:bg-ink-200 hover:opacity-80 text-vanilla-100"
+              />
+              <z-button
+                :is-loading="repoSyncLoading"
+                :disabled="repoSyncLoading"
+                label="Sync repositories"
+                icon="refresh-cw"
+                loading-label="Syncing repositories"
+                size="small"
+                @click="syncRepos"
+              />
+            </div>
+          </template>
+        </lazy-empty-state>
 
-      <lazy-empty-state
-        v-else-if="reposToActivateList && reposToActivateList.length === 0"
-        :use-v2="true"
-        :show-border="false"
-        :title="
-          searchCandidate
-            ? `No results found for '${searchCandidate}'`
-            : 'We couldn’t find any repositories linked to this account.'
-        "
-        :subtitle="
-          owner.hasGrantedAllRepoAccess
-            ? `You can sync your repositories from ${activeProviderName}`
-            : 'Make sure to grant DeepSource access to the Git repositories you’d like to import.'
-        "
-        :webp-image-path="
-          searchCandidate
-            ? require('~/assets/images/ui-states/directory/empty-search.webp')
-            : undefined
-        "
-        :png-image-path="
-          searchCandidate
-            ? require('~/assets/images/ui-states/directory/empty-search.gif')
-            : undefined
-        "
-      >
-        <template #action>
-          <div class="flex gap-x-2">
-            <z-button
-              v-if="!owner.hasGrantedAllRepoAccess && owner.appConfigurationUrl"
-              :to="owner.appConfigurationUrl"
-              label="Manage Permissions"
-              size="small"
-              target="_blank"
-              rel="noopener noreferrer"
-              icon="settings"
-              icon-color="vanilla-100"
-              class="bg-ink-200 hover:bg-ink-200 hover:opacity-80 text-vanilla-100"
-            />
-            <z-button
-              :is-loading="repoSyncLoading"
-              :disabled="repoSyncLoading"
-              label="Sync repositories"
-              icon="refresh-cw"
-              loading-label="Syncing repositories"
-              size="small"
-              @click="syncRepos"
-            />
-          </div>
-        </template>
-      </lazy-empty-state>
+        <sync-repo-alert
+          :initial-repo-name="repoToSync"
+          :loading="singleRepoSyncLoading"
+          :error-message="singleRepoSyncErrMsg"
+          @sync-repo="(repoName) => syncSingleRepo(repoName, owner.id)"
+        />
+      </div>
 
-      <div v-else class="p-4 space-y-2">
+      <div v-else class="space-y-2">
         <repo-card
           v-for="repo in reposToActivateList"
           :key="repo.id"
@@ -136,7 +144,7 @@
 </template>
 <script lang="ts">
 import { RepoCard } from '@/components/AddRepo'
-import { ZButton, ZIcon, ZInput, ZPagination, ZTabPane } from '@deepsource/zeal'
+import { ZButton, ZIcon, ZInput, ZPagination, ZTabPane, ZAlert } from '@deepsource/zeal'
 import { Component, mixins, Prop } from 'nuxt-property-decorator'
 
 import RepositoriesActivationListQuery from '~/apollo/queries/repository/activateList.gql'
@@ -153,10 +161,6 @@ import { Repository, RepositoryToActivateListQueryVariables } from '~/types/type
 import { resolveNodes } from '~/utils/array'
 import { debounceAsync } from '~/utils/debounce'
 
-interface ZInputT extends Vue {
-  focus: () => void
-}
-
 /**
  * Component to activate new repositories
  */
@@ -167,6 +171,7 @@ interface ZInputT extends Vue {
     ZIcon,
     ZTabPane,
     ZPagination,
+    ZAlert,
     RepoCard
   }
 })
@@ -206,7 +211,7 @@ export default class ActivateSingleRepo extends mixins(
    * @return {Promise<void>}
    */
   async fetchReposAfterSync(): Promise<void> {
-    this.$fetch()
+    this.refetchData()
   }
 
   /**
@@ -244,7 +249,8 @@ export default class ActivateSingleRepo extends mixins(
     )
 
     this.reposToActivateList = response ?? []
-    const searchBox = this.$refs['search-repo-input'] as ZInputT
+
+    const searchBox = this.$refs['search-repo-input'] as HTMLInputElement
     if (searchBox) {
       searchBox.focus()
     }
@@ -258,7 +264,7 @@ export default class ActivateSingleRepo extends mixins(
   async fetch(): Promise<void> {
     this.reposListLoading = true
 
-    await this.refetchData()
+    await this.refetchData(false)
   }
 
   /**
@@ -266,15 +272,28 @@ export default class ActivateSingleRepo extends mixins(
    *
    * @returns {Promise<void>}
    */
-  async refetchData(): Promise<void> {
-    await Promise.all([
-      this.fetchReposToActivate({
+  async refetchData(refetch = true): Promise<void> {
+    this.repoToSync = ''
+    this.singleRepoSyncErrMsg = ''
+
+    if (!this.owner.id) {
+      await this.fetchOwnerID({
         login: this.activeOwner,
-        provider: this.$providerMetaMap[this.activeProvider].value,
-        limit: this.perPageCount,
-        offset: this.queryOffset,
-        query: this.searchCandidate ? this.searchCandidate : null
-      }).then((response) => (this.reposToActivateList = response ?? [])),
+        provider: this.$providerMetaMap[this.activeProvider].value
+      })
+    }
+
+    await Promise.all([
+      this.fetchReposToActivate(
+        {
+          login: this.activeOwner,
+          provider: this.$providerMetaMap[this.activeProvider].value,
+          limit: this.perPageCount,
+          offset: this.queryOffset,
+          query: this.searchCandidate ? this.searchCandidate : null
+        },
+        refetch
+      ).then((response) => (this.reposToActivateList = response ?? [])),
       this.fetchAppConfig({
         login: this.activeOwner,
         provider: this.activeProvider,

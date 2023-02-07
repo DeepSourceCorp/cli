@@ -15,9 +15,9 @@ export const focusDirective = {
      * @return {void}
      */
     const focusIfAvailable = (tagName: string) => {
-      const elements = el.getElementsByTagName(tagName)
+      const elements = Array.from(el.getElementsByTagName(tagName)) as HTMLElement[]
       if (elements.length) {
-        ;(elements[0] as HTMLElement).focus()
+        elements[0].focus()
         return true
       }
       return false

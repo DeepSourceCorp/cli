@@ -691,6 +691,7 @@ export type Check = MaskPrimaryKeyNode & {
   issuesResolvedCount?: Maybe<Scalars['Int']>;
   autofixableIssues?: Maybe<Array<Maybe<AutofixableIssueDetail>>>;
   filesAffectedByAutofix?: Maybe<Scalars['Int']>;
+  hasInferredArtifacts?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -2569,6 +2570,7 @@ export type Mutation = {
   removeTeamMember?: Maybe<RemoveTeamMemberPayload>;
   updateTeamMemberRole?: Maybe<UpdateTeamMemberRolePayload>;
   transferTeamOwnership?: Maybe<TransferTeamOwnershipPayload>;
+  syncRepositoryForOwner?: Maybe<SyncRepositoryForOwnerPayload>;
   syncRepositoriesForOwner?: Maybe<SyncRepositoriesForOwnerPayload>;
   createAutofixRun?: Maybe<CreateAutofixRunPayload>;
   createdPullRequest?: Maybe<CreatePullRequestPayload>;
@@ -2929,6 +2931,11 @@ export type MutationUpdateTeamMemberRoleArgs = {
 
 export type MutationTransferTeamOwnershipArgs = {
   input: TransferTeamOwnershipInput;
+};
+
+
+export type MutationSyncRepositoryForOwnerArgs = {
+  input: SyncRepositoryForOwnerInput;
 };
 
 
@@ -4811,6 +4818,7 @@ export enum RepositoryPermissionChoices {
 
 export type RepositorySetting = MaskPrimaryKeyNode & {
   __typename?: 'RepositorySetting';
+  inferDefaultBranchCoverage?: Maybe<Scalars['Boolean']>;
   pinnedReports?: Maybe<Array<Maybe<PinnedReport>>>;
   id: Scalars['ID'];
 };
@@ -5099,6 +5107,18 @@ export type SyncRepositoriesForOwnerInput = {
 
 export type SyncRepositoriesForOwnerPayload = {
   __typename?: 'SyncRepositoriesForOwnerPayload';
+  ok?: Maybe<Scalars['Boolean']>;
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type SyncRepositoryForOwnerInput = {
+  ownerId: Scalars['ID'];
+  repositoryName: Scalars['String'];
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+export type SyncRepositoryForOwnerPayload = {
+  __typename?: 'SyncRepositoryForOwnerPayload';
   ok?: Maybe<Scalars['Boolean']>;
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -5926,6 +5946,7 @@ export type UpdateRepositorySettingsInput = {
   issuePrioritySettings?: Maybe<Array<Maybe<RepositoryIssuePrioritySettingsInput>>>;
   metricSettings?: Maybe<Array<Maybe<MetricSettingsInput>>>;
   gitlabIntegrationUseStatus?: Maybe<Scalars['Boolean']>;
+  inferDefaultBranchCoverage?: Maybe<Scalars['Boolean']>;
   id: Scalars['ID'];
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -7481,6 +7502,19 @@ export type Unnamed_50_Mutation = (
   & { syncRepositoriesForOwner?: Maybe<(
     { __typename?: 'SyncRepositoriesForOwnerPayload' }
     & Pick<SyncRepositoriesForOwnerPayload, 'ok'>
+  )> }
+);
+
+export type SyncRepositoryForOwnerMutationVariables = Exact<{
+  input: SyncRepositoryForOwnerInput;
+}>;
+
+
+export type SyncRepositoryForOwnerMutation = (
+  { __typename?: 'Mutation' }
+  & { syncRepositoryForOwner?: Maybe<(
+    { __typename?: 'SyncRepositoryForOwnerPayload' }
+    & Pick<SyncRepositoryForOwnerPayload, 'ok'>
   )> }
 );
 
@@ -11658,7 +11692,13 @@ export type ActiveUserAccountInfoQuery = (
     )>, socialConnections: Array<(
       { __typename?: 'UserSocialConnection' }
       & Pick<UserSocialConnection, 'enabledOn' | 'provider'>
+    )>, personalAccounts?: Maybe<(
+      { __typename?: 'OwnerConnection' }
+      & Pick<OwnerConnection, 'totalCount'>
     )>, teamAccounts?: Maybe<(
+      { __typename?: 'TeamConnection' }
+      & Pick<TeamConnection, 'totalCount'>
+    )>, primaryTeamAccounts?: Maybe<(
       { __typename?: 'TeamConnection' }
       & Pick<TeamConnection, 'totalCount'>
       & { edges: Array<Maybe<(

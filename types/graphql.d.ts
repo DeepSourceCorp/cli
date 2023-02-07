@@ -575,6 +575,15 @@ declare module '*/syncRepositories.gql' {
 }
     
 
+declare module '*/syncRepository.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const syncRepositoryForOwner: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updateBillingInfo.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

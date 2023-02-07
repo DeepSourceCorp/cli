@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders SyncRepoAlert with all props: {"errorMessage":"Sample error message.","loading":false,"initialRepoName":"sample-repo"} 1`] = `
+"<zalert-stub type=\\"info\\" class=\\"border border-robin border-opacity-10\\">
+  <div class=\\"flex items-baseline gap-x-2\\">
+    <zicon-stub icon=\\"solid-alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"robin-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
+    <div class=\\"space-y-3\\"><span class=\\"text-robin-300 text-sm leading-7\\">The repository you’re looking for might not have been synced. You can manually sync the
+        repository to DeepSource.</span>
+      <div class=\\"space-y-1\\">
+        <div class=\\"flex flex-wrap gap-y-2 sm:flex-nowrap\\">
+          <zinput-stub name=\\"\\" value=\\"sample-repo\\" label=\\"\\" type=\\"text\\" padding=\\"p-0 px-3\\" placeholder=\\"Enter the repository name\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"text-xs leading-5 border border-ink-200 sm:rounded-r-none sm:border-r-0\\"></zinput-stub> <button class=\\"py-3 px-6 flex gap-x-1 w-full sm:w-auto items-center justify-center flex-shrink-0 bg-ink-300 text-xs leading-3 text-vanilla-100 rounded-sm sm:rounded-l-none border border-ink-200\\">
+            <zicon-stub icon=\\"repositories\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"\\"></zicon-stub> <span>Sync repository</span>
+          </button>
+        </div> <span class=\\"text-cherry-500 text-xs leading-5\\">
+          Sample error message.
+        </span>
+      </div>
+    </div>
+  </div>
+</zalert-stub>"
+`;
+
+exports[`renders SyncRepoAlert with all props: {"errorMessage":"Sample error message.","loading":true,"initialRepoName":"sample-repo"} 1`] = `
+"<zalert-stub type=\\"info\\" class=\\"border border-robin border-opacity-10\\">
+  <div class=\\"flex items-baseline gap-x-2\\">
+    <zicon-stub icon=\\"solid-alert-circle\\" size=\\"x-small\\" position=\\"\\" color=\\"robin-400\\" class=\\"flex-shrink-0\\"></zicon-stub>
+    <div class=\\"space-y-3\\"><span class=\\"text-robin-300 text-sm leading-7\\">The repository you’re looking for might not have been synced. You can manually sync the
+        repository to DeepSource.</span>
+      <div class=\\"space-y-1\\">
+        <div class=\\"flex flex-wrap gap-y-2 sm:flex-nowrap\\">
+          <zinput-stub name=\\"\\" value=\\"sample-repo\\" label=\\"\\" type=\\"text\\" padding=\\"p-0 px-3\\" placeholder=\\"Enter the repository name\\" debouncedelay=\\"350\\" size=\\"medium\\" backgroundcolor=\\"ink-400\\" errorbordercolor=\\"cherry\\" class=\\"text-xs leading-5 border border-ink-200 sm:rounded-r-none sm:border-r-0\\"></zinput-stub> <button disabled=\\"disabled\\" class=\\"py-3 px-6 flex gap-x-1 w-full sm:w-auto items-center justify-center flex-shrink-0 bg-ink-300 text-xs leading-3 text-vanilla-100 rounded-sm sm:rounded-l-none border border-ink-200 opacity-50 cursor-not-allowed\\">
+            <zicon-stub icon=\\"spin-loader\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"animate-spin\\"></zicon-stub> <span>Sync repository</span>
+          </button>
+        </div> <span class=\\"text-cherry-500 text-xs leading-5\\">
+          Sample error message.
+        </span>
+      </div>
+    </div>
+  </div>
+</zalert-stub>"
+`;
