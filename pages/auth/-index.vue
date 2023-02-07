@@ -82,7 +82,7 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
     } = this.$store.state.user.active.viewer
 
     if (!this.$config.onPrem && id && email) {
-      const parsedId = Buffer.from(id, 'base64').toString().replace('User:', '')
+      const parsedId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
       this.$rudder?.identify(parsedId, {
         avatar,
         createdAt,

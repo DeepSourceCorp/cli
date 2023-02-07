@@ -314,14 +314,18 @@ export default class Sidebar extends mixins(
       // Identify the user via RudderStack
       const { avatar, dateJoined: createdAt, email, firstName, id, lastName } = this.viewer
 
-      // @ts-ignore
-      this.$rudder?.identify(id, {
-        avatar,
-        createdAt,
-        email,
-        firstName,
-        lastName
-      })
+      if (id && email) {
+        const parsedId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
+
+        // @ts-ignore
+        this.$rudder?.identify(parsedId, {
+          avatar,
+          createdAt,
+          email,
+          firstName,
+          lastName
+        })
+      }
 
       // Identify the team via RudderStack
       const {

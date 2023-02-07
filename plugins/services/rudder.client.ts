@@ -74,13 +74,17 @@ export default async (context: Context, inject: Inject): Promise<void> => {
       lastName
     } = viewer
 
-    rudderAnalytics.identify(id, {
-      avatar,
-      createdAt,
-      email,
-      firstName,
-      lastName
-    })
+    if (id && email) {
+      const parsedId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
+
+      rudderAnalytics.identify(parsedId, {
+        avatar,
+        createdAt,
+        email,
+        firstName,
+        lastName
+      })
+    }
 
     const { provider, owner } = route.params
 
