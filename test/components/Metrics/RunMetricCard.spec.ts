@@ -10,7 +10,7 @@ import { mockRepositoryDetail } from '~/test/store/repository/__mocks__/detail.m
 
 const injectDirective = (vue: VueConstructor) => vue.directive('tooltip', VTooltip)
 
-test('renders RunMetricCard with all prop options', () => {
+describe('[[RunMetricCard]]', () => {
   const repositoryPropCombos = generateBooleanProps('can_ignore_failing_metrics').map(
     (propState) => ({
       repository: {
@@ -44,58 +44,107 @@ test('renders RunMetricCard with all prop options', () => {
     false
   )
   const isInModalPropCombo = generateBooleanProps('isInModal')
-  const canSuppressMetricPropCombo = generateBooleanProps('canSuppressMetric')
 
-  cartesian(
-    repositoryPropCombos,
-    isPassingPropCombo,
-    isSuppressedPropCombo,
-    thresholdPropCombo,
-    valueTrendDisplayPropCombo,
-    isInModalPropCombo
-  ).forEach((propCombination) => {
-    const localVue = createLocalVue()
-    localVue.use(Vuex)
+  test('renders RunMetricCard with all prop options', () => {
+    cartesian(
+      repositoryPropCombos,
+      isPassingPropCombo,
+      isSuppressedPropCombo,
+      thresholdPropCombo,
+      valueTrendDisplayPropCombo
+    ).forEach((propCombination) => {
+      const localVue = createLocalVue()
+      localVue.use(Vuex)
 
-    const props = {
-      metricsCaptured: [
+      const props = {
+        metricsCaptured: [
+          {
+            ...baseMetricsCaptured,
+            isPassing: propCombination.isPassing,
+            isSuppressed: propCombination.isSuppressed,
+            threshold: propCombination.threshold,
+            valueTrendDisplay: propCombination.valueTrendDisplay
+          }
+        ],
+        isInModal: propCombination.isInModal
+      }
+
+      const { html } = render(
+        RunMetricCard,
         {
-          ...baseMetricsCaptured,
-          isPassing: propCombination.isPassing,
-          isSuppressed: propCombination.isSuppressed,
-          threshold: propCombination.threshold,
-          valueTrendDisplay: propCombination.valueTrendDisplay
-        }
-      ],
-      isInModal: propCombination.isInModal,
-      canSuppressMetric: propCombination.canSuppressMetric
-    }
-
-    const { html } = render(
-      RunMetricCard,
-      {
-        props,
-        stubs: {
-          NuxtLink: RouterLinkStub,
-          Ticker: true,
-          ZTag: true,
-          ZButton: true,
-          LazyAnalyzerLogo: true
-        },
-        store: new Vuex.Store({
-          modules: {
-            'repository/detail': {
-              namespaced: true,
-              state: {
-                repository: propCombination.repository
+          props,
+          stubs: {
+            NuxtLink: RouterLinkStub,
+            Ticker: true,
+            ZTag: true,
+            ZButton: true,
+            LazyAnalyzerLogo: true
+          },
+          store: new Vuex.Store({
+            modules: {
+              'repository/detail': {
+                namespaced: true,
+                state: {
+                  repository: propCombination.repository
+                }
               }
             }
-          }
-        })
-      },
-      injectDirective
-    )
+          })
+        },
+        injectDirective
+      )
 
-    expect(html()).toMatchSnapshot(JSON.stringify(props))
+      expect(html()).toMatchSnapshot(JSON.stringify(props))
+    })
+  })
+
+  test('Render RunMetricCard in modal', () => {
+    cartesian(isInModalPropCombo).forEach((propCombination) => {
+      const localVue = createLocalVue()
+      localVue.use(Vuex)
+
+      const props = {
+        metricsCaptured: [
+          {
+            ...baseMetricsCaptured,
+            isPassing: true,
+            isSuppressed: true,
+            threshold: 35,
+            valueTrendDisplay: 'Up 50%'
+          }
+        ],
+        isInModal: propCombination.isInModal
+      }
+
+      const { html } = render(
+        RunMetricCard,
+        {
+          props,
+          stubs: {
+            NuxtLink: RouterLinkStub,
+            Ticker: true,
+            ZTag: true,
+            ZButton: true,
+            LazyAnalyzerLogo: true
+          },
+          store: new Vuex.Store({
+            modules: {
+              'repository/detail': {
+                namespaced: true,
+                state: {
+                  repository: {
+                    ...mockRepositoryDetail(),
+                    userPermissionMeta: { can_ignore_failing_metrics: false }
+                  }
+                }
+              }
+            }
+          })
+        },
+        injectDirective
+      )
+
+      expect(html()).toMatchSnapshot(JSON.stringify(props))
+    })
   })
 })
