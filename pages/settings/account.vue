@@ -122,6 +122,7 @@ export default class PersonalAccessTokenPage extends mixins(
   ContextMixin
 ) {
   isLoading = false
+  timeoutId: ReturnType<typeof setTimeout> | null = null
 
   /**
    * Fetch the user account related information
@@ -130,10 +131,16 @@ export default class PersonalAccessTokenPage extends mixins(
    * @returns {Promise<void>}
    */
   async fetch(): Promise<void> {
-    await Promise.all([
-      this.fetchAccountInfo({ login: '', isViewerPrimaryUser: true }),
-      this.fetchContext()
-    ])
+    try {
+      await Promise.all([
+        this.fetchAccountInfo({ login: '', isViewerPrimaryUser: true }),
+        this.fetchContext()
+      ])
+    } catch (e) {
+      this.$logErrorAndToast(e as Error, 'Unable to fetch user data. Please contact support.')
+    } finally {
+      this.isLoading = false
+    }
   }
 
   /**
@@ -143,11 +150,20 @@ export default class PersonalAccessTokenPage extends mixins(
    * @returns {void}
    */
   created(): void {
-    setTimeout(() => {
+    this.timeoutId = setTimeout(() => {
       if (this.$fetchState.pending) {
         this.isLoading = true
       }
     }, 300)
+  }
+
+  /**
+   * Before destroy hook to clear timeout.
+   */
+  beforeDestroy(): void {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId)
+    }
   }
 
   get tokenCountString() {
