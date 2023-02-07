@@ -201,7 +201,7 @@
         bg-color="bg-honey"
       >
         Something went wrong when trying to commit your changes. Please try running this again in a
-        few minutes. We're terribly sorry about this.
+        few minutes.
       </alert-box>
 
       <alert-box
@@ -210,7 +210,7 @@
         bg-color="bg-honey"
       >
         Something went wrong when trying to create the pull-request. Please try running this again
-        in a few minutes. We're terribly sorry about this.
+        in a few minutes.
       </alert-box>
     </section>
     <div class="px-4" v-if="!$fetchState.pending && autofixRun.errorsRendered.length">
