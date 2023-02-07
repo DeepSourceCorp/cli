@@ -95,7 +95,7 @@
     />
     <z-pagination
       class="flex justify-center"
-      v-if="pageCount > 1"
+      v-if="pageCount > 1 && !repoListloading"
       :totalPages="pageCount"
       :totalVisible="5"
       :page="currentPage"

@@ -131,7 +131,7 @@
         </div>
       </div>
 
-      <div v-if="totalPageCount > 1" class="flex justify-center my-6 text-sm">
+      <div v-if="totalPageCount > 1 && !reposListLoading" class="flex justify-center my-6 text-sm">
         <z-pagination
           :page="currentPage"
           :total-pages="totalPageCount"

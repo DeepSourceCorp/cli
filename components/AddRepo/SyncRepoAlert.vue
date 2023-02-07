@@ -4,8 +4,8 @@
       <z-icon icon="solid-alert-circle" color="robin-400" size="x-small" class="flex-shrink-0" />
       <div class="space-y-3">
         <span class="text-robin-300 text-sm leading-7"
-          >The repository you’re looking for might not have been synced. You can manually sync the
-          repository to DeepSource.</span
+          >The repository you’re looking for might not have been synced with DeepSource. You can try
+          syncing it manually.</span
         >
         <div class="space-y-1">
           <div class="flex flex-wrap gap-y-2 sm:flex-nowrap">
