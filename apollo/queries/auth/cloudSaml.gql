@@ -1,0 +1,3 @@
+query getCloudSamlLink($email: String!) {
+  saml2LoginUrl(email: $email)
+}

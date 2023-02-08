@@ -8316,6 +8316,16 @@ export type Unnamed_83_Query = (
   )> }
 );
 
+export type GetCloudSamlLinkQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetCloudSamlLinkQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'saml2LoginUrl'>
+);
+
 export type Unnamed_84_QueryVariables = Exact<{ [key: string]: never; }>;
 
 

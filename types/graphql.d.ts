@@ -1030,6 +1030,15 @@ declare module '*/publicList.gql' {
 }
     
 
+declare module '*/cloudSaml.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const getCloudSamlLink: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/socialAuthUrls.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
