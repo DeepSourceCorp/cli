@@ -15,7 +15,7 @@ ENV STRIPE_KEY=$STRIPE_PUBLISHABLE_KEY
 RUN apk update && \
     apk add git make
 
-COPY package.json yarn.lock .npmrc /app/
+COPY package.json yarn.lock /app/
 
 WORKDIR /app
 
@@ -23,8 +23,7 @@ RUN yarn
 
 COPY . /app
 
-RUN make build && \
-    rm -rf .npmrc
+RUN make build
 
 FROM node:14.19-alpine AS node
 

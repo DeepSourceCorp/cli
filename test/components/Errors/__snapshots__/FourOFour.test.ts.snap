@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`[[ FourOFour ]] renders \`404\` error page contents 1`] = `
-"<div class=\\"relative h-screen four-o-four\\">
+"<div class=\\"relative h-screen-dynamic four-o-four\\">
   <picture class=\\"absolute top-0 right-0 lg:hidden\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/webp\\">
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
@@ -35,7 +35,7 @@ exports[`[[ FourOFour ]] renders \`404\` error page contents 1`] = `
     <source srcset=\\"test-image-dir/test-image-file.png\\" type=\\"image/png\\"> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\"></picture>
   <div class=\\"absolute bottom-0 w-screen overflow-hidden\\">
     <div class=\\"flex items-end\\">
-      <div class=\\"max-h-screen mx-auto z-10 foreground\\"></div> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\" class=\\"hidden absolute max-h-screen mx-auto right-1/2 smoke lg:inline\\">
+      <div class=\\"max-h-screen-dynamic mx-auto z-10 foreground\\"></div> <img src=\\"test-image-dir/test-image-file.png\\" alt=\\"\\" class=\\"hidden absolute max-h-screen-dynamic mx-auto right-1/2 smoke lg:inline\\">
     </div>
   </div>
 </div>"

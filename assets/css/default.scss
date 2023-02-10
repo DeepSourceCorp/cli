@@ -173,6 +173,16 @@ code.bifrost-inline-code {
   height: 18.875rem;
 }
 
+.h-screen-dynamic {
+  height: 100dvh;
+}
+.max-h-screen-dynamic {
+  max-height: 100dvh;
+}
+.min-h-screen-dynamic {
+  min-height: 100dvh;
+}
+
 button.auxillary-button {
   @apply flex items-center gap-x-1.5 px-2 h-7 rounded-3px cursor-pointer bg-ink-200 hover:bg-ink-100 border border-ink-50;
 }

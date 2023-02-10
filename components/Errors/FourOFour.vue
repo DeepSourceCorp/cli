@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-screen four-o-four">
+  <div class="relative h-screen-dynamic four-o-four">
     <!-- Planet on top for Mobile -->
     <picture class="absolute top-0 right-0 lg:hidden">
       <source
@@ -94,12 +94,12 @@
 
     <div class="absolute bottom-0 w-screen overflow-hidden">
       <div class="flex items-end">
-        <div class="max-h-screen mx-auto z-10 foreground"></div>
+        <div class="max-h-screen-dynamic mx-auto z-10 foreground"></div>
 
         <img
           :src="require('~/assets/images/errors/404/smoke.gif')"
           alt=""
-          class="hidden absolute max-h-screen mx-auto right-1/2 smoke lg:inline"
+          class="hidden absolute max-h-screen-dynamic mx-auto right-1/2 smoke lg:inline"
         />
       </div>
     </div>
