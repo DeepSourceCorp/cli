@@ -69,7 +69,7 @@ import { BaseCard } from '@/components/History'
 import { ZIcon, ZButton, ZAvatar } from '@deepsource/zeal'
 import { fromNow } from '@/utils/date'
 import { safeRenderBackticks } from '~/utils/string'
-import { AutofixRun, AutofixRunStatus, Maybe, Scalars } from '~/types/types'
+import { AutofixRunStatus } from '~/types/types'
 import RoleAccessMixin from '~/mixins/roleAccessMixin'
 import { getDefaultAvatar } from '~/utils/ui'
 
@@ -86,24 +86,6 @@ import { getDefaultAvatar } from '~/utils/ui'
   }
 })
 export default class AutofixListItem extends mixins(RoleAccessMixin) {
-  @Prop()
-  autofixRun!: AutofixRun
-
-  @Prop()
-  pullRequestNumber!: number
-
-  @Prop()
-  isGeneratedFromPr!: boolean
-
-  @Prop()
-  issuesAffected!: Maybe<Scalars['Int']>
-
-  @Prop()
-  pullRequestStatus!: string
-
-  @Prop()
-  committedToBranchStatus!: string
-
   @Prop()
   runId!: string
 
@@ -127,15 +109,6 @@ export default class AutofixListItem extends mixins(RoleAccessMixin) {
 
   @Prop()
   pullRequestTitle!: string
-
-  @Prop()
-  filesAffected!: number
-
-  @Prop({ default: true })
-  removeDefaultStyle: boolean
-
-  @Prop()
-  repositoryId!: string
 
   @Prop({ default: true })
   showInfo!: boolean

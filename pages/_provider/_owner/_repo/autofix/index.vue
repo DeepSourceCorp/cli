@@ -78,11 +78,10 @@
           >
             <autofix-list-item
               v-for="run in pendingAutofixList"
+              v-bind="getAutofixListItem(run)"
               :key="run.runId"
-              :autofixRun="run"
-              v-bind="run"
               :showInfo="false"
-            ></autofix-list-item>
+            />
           </div>
           <empty-state v-else title="No pending commits" />
         </template>
@@ -93,10 +92,9 @@
           >
             <autofix-list-item
               v-for="run in autofixListItems"
+              v-bind="getAutofixListItem(run)"
               :key="run.runId"
-              :autofixRun="run"
-              v-bind="run"
-            ></autofix-list-item>
+            />
           </div>
           <empty-state v-else title="No autofix runs available" />
         </template>
@@ -238,6 +236,36 @@ export default class Autofix extends mixins(RepoDetailMixin, RoleAccessMixin, Au
         'autofix-available-autofixes-count',
         count
       )
+  }
+
+  /**
+   * Get required properties for the @see{@link AutofixListItem} component.
+   *
+   * @param {AutofixRun} autofixRun - @see{@link AutofixRun} object to extract properties from.
+   * @returns Object with required properties for @see{@link AutofixListItem}
+   */
+  getAutofixListItem(autofixRun: AutofixRun) {
+    const {
+      runId,
+      issue,
+      analyzer,
+      createdBy,
+      createdAt,
+      resolvedIssuesCount,
+      status,
+      pullRequestTitle
+    } = autofixRun
+
+    return {
+      runId,
+      issue,
+      analyzer,
+      createdBy,
+      createdAt,
+      resolvedIssuesCount,
+      status,
+      pullRequestTitle
+    }
   }
 
   get loaderCount(): number {

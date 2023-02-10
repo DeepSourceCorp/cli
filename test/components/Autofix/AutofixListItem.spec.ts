@@ -1,19 +1,14 @@
 import '@testing-library/jest-dom'
 import { render } from '@testing-library/vue'
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { createLocalVue } from '@vue/test-utils'
 import VTooltip from 'v-tooltip'
 import { VueConstructor } from 'vue'
 import Vuex from 'vuex'
 
 import { AutofixListItem } from '~/components/Autofix'
-import IssueListItem from '~/components/IssueListItem.vue'
 import { mocksGenerator, storeModulesGenerator } from '~/test/mocks'
 import { cartesian, generateBooleanProps, generateStringProps } from '~/test/utils'
-import {
-  AutofixRunCommittedToBranchStatus,
-  AutofixRunPullRequestStatus,
-  AutofixRunStatus
-} from '~/types/types'
+import { AutofixRunStatus } from '~/types/types'
 
 const autofixRun = {
   id: 'QXV0b2ZpeFJ1bjpicnZlZ3g=',
@@ -23,9 +18,7 @@ const autofixRun = {
   finishedIn: 19,
   isGeneratedFromPr: false,
   issuesAffected: 1,
-  committedToBranchStatus: 'NCB',
   resolvedIssuesCount: 28,
-  pullRequestStatus: 'PNC',
   pullRequestTitle: '',
   pullRequestNumber: null,
   status: 'PASS',
@@ -98,45 +91,16 @@ describe('[[ IssueListItem ]]', () => {
 
   test('renders `IssueListItem` with all prop options', () => {
     const baseProps = {
-      autofixRun: autofixRun,
-      pullRequestNumber: '#1214',
-      issuesAffected: ['123', '125'],
       runId: 'string',
       issue: autofixRun.issue,
       analyzer: autofixRun.analyzer,
       createdBy: autofixRun.createdBy,
       createdAt: autofixRun.createdAt,
       resolvedIssuesCount: 23,
-      pullRequestTitle: autofixRun.pullRequestTitle,
-      filesAffected: 123,
-      repositoryId: '2342342343242343'
+      pullRequestTitle: autofixRun.pullRequestTitle
     }
 
-    const isGeneratedFromPr = generateBooleanProps('isGeneratedFromPr', false)
     const showInfo = generateBooleanProps('showInfo', false)
-    const removeDefaultStyle = generateBooleanProps('removeDefaultStyle', false)
-    const pullRequestStatus = generateStringProps(
-      'pullRequestStatus',
-      [
-        AutofixRunPullRequestStatus.Pnc,
-        AutofixRunPullRequestStatus.Prc,
-        AutofixRunPullRequestStatus.Prf,
-        AutofixRunPullRequestStatus.Prm,
-        AutofixRunPullRequestStatus.Pro,
-        AutofixRunPullRequestStatus.Prp
-      ],
-      false
-    )
-    const committedToBranchStatus = generateStringProps(
-      'committedToBranchStatus',
-      [
-        AutofixRunCommittedToBranchStatus.Cip,
-        AutofixRunCommittedToBranchStatus.Ctb,
-        AutofixRunCommittedToBranchStatus.Ctf,
-        AutofixRunCommittedToBranchStatus.Ncb
-      ],
-      false
-    )
     const status = generateStringProps(
       'status',
       [
@@ -150,14 +114,7 @@ describe('[[ IssueListItem ]]', () => {
       false
     )
 
-    cartesian(
-      isGeneratedFromPr,
-      showInfo,
-      removeDefaultStyle,
-      pullRequestStatus,
-      committedToBranchStatus,
-      status
-    ).forEach((propCombination) => {
+    cartesian(showInfo, status).forEach((propCombination) => {
       const props = {
         ...baseProps,
         ...propCombination
