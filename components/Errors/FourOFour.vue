@@ -31,24 +31,24 @@
     </picture>
 
     <div class="flex flex-col items-center justify-center h-full p-4 lg:p-0">
-      <div class="p-6 space-y-4 max-w-sm text-container z-30 lg:p-8 lg:max-w-lg xl:max-w-3xl">
-        <h1 class="title font-bold text-vanilla-100">
+      <div class="p-6 space-y-5 max-w-sm text-container z-30 lg:p-8 lg:max-w-lg xl:max-w-2xl">
+        <h1 class="text-2.5xl leading-none font-bold text-vanilla-100">
           <span class="text-vanilla-400"> 404 </span>
-          <span class="text-vanilla-100"> Not Found </span>
+          Not Found
         </h1>
 
-        <div class="space-y-4">
-          <h2 class="text-base font-medium text-vanilla-200 lg:text-2xl">
+        <div class="space-y-3">
+          <h2 class="text-base font-semibold text-vanilla-200 lg:text-lg">
             This dimension doesn't exist...
           </h2>
 
-          <p class="text-sm text-vanilla-400 font-normal lg:text-1.5xl">
+          <p class="text-sm text-vanilla-400 font-medium lg:text-base">
             We couldn’t find a page at the URL you’re on. You can try
-            <span class="text-juniper-400 font-medium"
+            <span class="text-juniper-400 font-semibold"
               ><nuxt-link :to="loginUrl">logging in</nuxt-link></span
             >
-            or go back to the
-            <span class="text-juniper-400 font-medium"><a href="/">homepage</a></span
+            or going back to the
+            <span class="text-juniper-400 font-semibold"><a href="/">homepage</a></span
             >.
           </p>
         </div>
@@ -160,16 +160,6 @@ export default class FourOFour extends Vue {
   margin-right: -30rem;
   bottom: 5.5rem;
   height: 85px;
-}
-
-.title {
-  font-size: 30px;
-}
-
-@media screen and (min-width: 1024px) {
-  .title {
-    font-size: 60px;
-  }
 }
 
 .text-container {

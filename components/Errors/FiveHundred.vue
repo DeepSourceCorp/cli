@@ -69,19 +69,19 @@
       </div>
     </div>
 
-    <div class="absolute inset-0 flex flex-col justify-end w-full">
-      <div class="flex flex-col items-center justify-center py-8 px-6 h-screen">
-        <div
-          class="flex flex-col justify-between max-w-sm lg:max-w-lg xl:max-w-3xl space-y-4 p-8 z-30 text-container"
-        >
-          <span class="title leading-none font-bold text-vanilla-100 mb-2">
-            <span class="text-vanilla-400">500</span> Server Error
-          </span>
-          <span class="text-sm lg:text-2xl font-semibold text-vanilla-200">
+    <div class="flex flex-col items-center justify-center h-full p-4 lg:p-0">
+      <div class="p-6 space-y-5 max-w-sm text-container z-30 lg:p-8 lg:max-w-lg xl:max-w-2xl">
+        <h1 class="text-2.5xl leading-none font-bold text-vanilla-100">
+          <span class="text-vanilla-400">500</span> Server Error
+        </h1>
+
+        <div class="space-y-3">
+          <h2 class="text-base font-semibold text-vanilla-200 lg:text-lg">
             Looks like something went wrong :(
-          </span>
-          <span class="text-sm lg:text-1.5xl font-medium text-vanilla-400"
-            >Our engineers are working on a rescue mission.
+          </h2>
+
+          <p class="text-sm font-medium text-vanilla-400 lg:text-base">
+            Our engineers are working on a rescue mission.
             <span v-if="!$config.onPrem"
               >Check out
               <a
@@ -92,8 +92,8 @@
                 >deepsourcestatus.com</a
               >
               for updates.</span
-            ></span
-          >
+            >
+          </p>
         </div>
       </div>
     </div>
@@ -119,10 +119,6 @@ export default class FiveHundred extends Vue {}
   background-image: url(~/assets/images/errors/500/stars.png);
 }
 
-.title {
-  font-size: 30px;
-}
-
 .text-container {
   background: #5c72cf33;
   border-radius: 8px;
@@ -140,11 +136,5 @@ export default class FiveHundred extends Vue {}
   margin-right: -35rem;
   bottom: 5.5rem;
   height: 85px;
-}
-
-@media (min-width: 1024px) {
-  .title {
-    font-size: 60px;
-  }
 }
 </style>
