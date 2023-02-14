@@ -36,6 +36,8 @@ export default async (context: Context, inject: Inject): Promise<void> => {
 
   const { rudderWriteKey, rudderDataPlaneUrl } = $config
 
+  const isLoggedIn = store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]
+
   if (!process.client || !rudderWriteKey || !rudderDataPlaneUrl) {
     return
   }
@@ -45,22 +47,23 @@ export default async (context: Context, inject: Inject): Promise<void> => {
    * @returns {Promise<User | undefined>}
    */
   const getViewerInfo = async () => {
-    if (store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]) {
-      try {
-        await store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
-        const viewerInfo = store.getters[`user/active/${ActiveUserGetterTypes.GET_VIEWER}`]
-        return viewerInfo
-      } catch (e) {
-        return undefined
-      }
+    try {
+      await store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
+      const viewerInfo = store.getters[`user/active/${ActiveUserGetterTypes.GET_VIEWER}`]
+      return viewerInfo
+    } catch (e) {
+      return undefined
     }
-
-    return undefined
   }
 
   inject('rudder', rudderAnalytics)
 
   rudderAnalytics.load($config.rudderWriteKey, $config.rudderDataPlaneUrl)
+
+  // Return early if the user is not logged in
+  if (!isLoggedIn) {
+    return
+  }
 
   const viewer = await getViewerInfo()
   if (viewer && Object.keys(viewer).length) {

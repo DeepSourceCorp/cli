@@ -232,22 +232,26 @@
 </template>
 
 <script lang="ts">
-import { Component, Watch, mixins, Prop } from 'nuxt-property-decorator'
 import { ZButton, ZIcon, ZTag } from '@deepsource/zeal'
+import { Component, mixins, namespace, Watch } from 'nuxt-property-decorator'
+
+import ContextMixin from '@/mixins/contextMixin'
+import OwnerDetailMixin from '@/mixins/ownerDetailMixin'
+import ActiveUserMixin from '~/mixins/activeUserMixin'
+import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
+import PlanDetailMixin from '~/mixins/planDetailMixin'
+import RepoListMixin from '~/mixins/repoListMixin'
+
+import { AuthGetterTypes } from '~/store/account/auth'
 
 // types
 import { TeamPerms } from '~/types/permTypes'
-import { TeamMemberRoleChoices, User } from '~/types/types'
+import { TeamMemberRoleChoices } from '~/types/types'
 
-import ActiveUserMixin from '~/mixins/activeUserMixin'
-import ContextMixin from '@/mixins/contextMixin'
-import OwnerDetailMixin from '@/mixins/ownerDetailMixin'
-import PlanDetailMixin from '~/mixins/planDetailMixin'
-import RepoListMixin from '~/mixins/repoListMixin'
-import ControlPanelBaseMixin from '~/mixins/control-panel/ControlPanelBaseMixin'
 import { isChristmasSeason } from '~/utils/easter'
 import { containsElement } from '~/utils/ui'
 
+const authStore = namespace('account/auth')
 /**
  * Primary sidebar containing information and navigation for a user and the currently active owner.
  */
@@ -269,6 +273,9 @@ export default class Sidebar extends mixins(
   RepoListMixin,
   ControlPanelBaseMixin
 ) {
+  @authStore.Getter(AuthGetterTypes.GET_LOGGED_IN)
+  isLoggedIn: boolean
+
   public isCollapsed = false
   public collapsedSidebar = false
   public toggleCollapsed = false
@@ -307,10 +314,11 @@ export default class Sidebar extends mixins(
   @Watch('$route.params.owner')
   async fetchMaxUsageInfo(): Promise<void> {
     const { owner: login, provider } = this.$route.params
+
     const params = { login, provider, refetch: true }
     await this.fetchMaxUsagePercentage(params)
 
-    if (process.client) {
+    if (process.client && this.isLoggedIn) {
       // Identify the user via RudderStack
       const { avatar, dateJoined: createdAt, email, firstName, id, lastName } = this.viewer
 
