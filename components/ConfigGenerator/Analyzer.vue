@@ -2,11 +2,11 @@
   <div class="text-base font-normal rounded-md bg-ink-300">
     <div class="flex items-center justify-between p-4">
       <div
-        class="flex items-center space-x-2 font-bold select-none text-vanilla-100"
-        @click="isCollapsed = !isCollapsed"
         :class="{
           'cursor-pointer': hasCollapsibleContent
         }"
+        class="flex items-center space-x-2 font-bold select-none text-vanilla-100"
+        @click="isCollapsed = !isCollapsed"
       >
         <analyzer-logo
           :analyzerLogo="analyzerLogo"
@@ -17,19 +17,19 @@
         <span>{{ label }}</span>
         <z-icon
           v-if="collapsible && hasCollapsibleContent"
-          class="duration-150 transform"
           size="x-small"
           :class="{
             '-rotate-90': isCollapsed
           }"
+          class="duration-150 transform"
           icon="triangle-down"
         />
       </div>
       <button
-        @click="onClose"
         v-if="!readOnly"
         v-tooltip="{ content: 'Remove Analyzer', delay: { show: 700, hide: 100 } }"
         class="p-1 rounded-md cursor-pointer hover:bg-cherry-600 hover:bg-opacity-20"
+        @click="onClose"
       >
         <z-icon icon="trash-2" color="cherry" size="small"></z-icon>
       </button>
@@ -56,8 +56,8 @@
             <template v-if="config.type == 'string'">
               <template v-if="config.enum && config.enum.length">
                 <z-radio-group
-                  :read-only="readOnly"
                   v-model="config.selected"
+                  :read-only="readOnly || disableActions"
                   class="grid grid-cols-2 gap-2 -mb-2 text-xs md:grid-cols-3 lg:grid-cols-5"
                 >
                   <z-radio
@@ -74,7 +74,7 @@
                 <z-input
                   v-tooltip="forTemplate ? 'This value will be added during runtime' : ''"
                   v-model="config.selected"
-                  :disabled="forTemplate && hasTemplate(config)"
+                  :disabled="forTemplate ? hasTemplate(config) : disableActions"
                   :read-only="readOnly && !(forTemplate && hasTemplate(config))"
                   size="small"
                   class="rounded-md"
@@ -83,10 +83,10 @@
             </template>
             <template v-else-if="config.type == 'boolean'">
               <z-radio-group
-                :readOnly="readOnly"
-                :modelValue="`${Number(config.selected)}`"
-                @change="(val) => (config.selected = Boolean(Number(val)))"
+                :model-value="`${Number(config.selected)}`"
+                :read-only="readOnly || disableActions"
                 class="grid grid-cols-3 text-xs gap-y-2 gap-x-4 md:grid-cols-6 lg:grid-cols-8"
+                @change="(val) => (config.selected = Boolean(Number(val)))"
               >
                 <!--Make these values boolean true and false-->
                 <z-radio value="1" label="Yes" />
@@ -99,16 +99,16 @@
                 class="grid grid-cols-2 gap-2 -mb-2 text-xs md:grid-cols-3 lg:grid-cols-5"
               >
                 <z-checkbox
-                  class="mb-2 mr-4"
                   v-for="option in config.items.enum"
                   :key="option"
                   :label="config.labels ? config.labels[option] : option"
-                  :readOnly="readOnly"
+                  :read-only="readOnly || disableActions"
                   :value="option"
-                  size="small"
-                  :modelValue="
+                  :model-value="
                     Array.isArray(config.selected) ? config.selected.includes(option) : false
                   "
+                  size="small"
+                  class="mb-2 mr-4"
                   @change="(isChecked) => updateChecks(option, isChecked, config)"
                 />
               </div>
@@ -120,7 +120,7 @@
                       : ''
                   "
                   :value="Array.isArray(config.selected) ? config.selected.join(', ') : ''"
-                  :disabled="forTemplate && hasTemplate(config)"
+                  :disabled="forTemplate ? hasTemplate(config) : disableActions"
                   :read-only="readOnly && !(forTemplate && hasTemplate(config))"
                   size="small"
                   class="rounded-md"
@@ -130,17 +130,17 @@
             </template>
             <template v-else-if="config.type == 'integer'">
               <z-input
-                class="rounded-md"
-                :disabled="forTemplate && hasTemplate(config)"
-                :readOnly="readOnly && !(forTemplate && hasTemplate(config))"
+                v-model="config.selected"
                 v-tooltip="
                   forTemplate && hasTemplate(config)
                     ? 'This value will automatically be filled during runtime'
                     : ''
                 "
-                v-model="config.selected"
+                :disabled="forTemplate ? hasTemplate(config) : disableActions"
+                :read-only="readOnly && !(forTemplate && hasTemplate(config))"
                 size="small"
                 type="number"
+                class="rounded-md"
               />
             </template>
           </div>
@@ -148,8 +148,8 @@
       </div>
       <div
         v-if="showTransformers"
-        class="p-3 space-y-2"
         :class="Array.isArray(configItems) && configItems.length ? '' : 'pt-0'"
+        class="p-3 space-y-2"
       >
         <label class="font-medium leading-none tracking-widest uppercase text-xxs text-vanilla-400"
           >Transformers</label
@@ -158,25 +158,25 @@
           <div
             v-for="transformer in transformerItems"
             :key="transformer.shortcode"
-            @click.prevent="toggleTransformer(transformer)"
-            class="flex items-center justify-between p-1 pl-2 text-sm border rounded-md"
             :class="[
               transformer.enabled ? 'bg-ink-200 border-slate-400' : 'border-slate-400',
               readOnly ? 'cursor-not-allowed' : 'cursor-pointer'
             ]"
+            class="flex items-center justify-between p-1 pl-2 text-sm border rounded-md"
+            @click.prevent="toggleTransformer(transformer)"
           >
             <div
-              class="flex items-center space-x-2"
               :class="readOnly ? 'text-vanilla-400' : 'text-vanilla-200'"
+              class="flex items-center space-x-2"
             >
               <img :src="transformer.logo" class="w-auto h-3" :alt="transformer.name" />
               <span>{{ transformer.name }}</span>
             </div>
             <z-checkbox
-              :readOnly="readOnly"
+              :model-value="transformer.enabled"
+              :read-only="readOnly || disableActions"
               :value="transformer.shortcode"
               size="small"
-              v-model="transformer.enabled"
             />
           </div>
         </div>
@@ -297,6 +297,9 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
   @Prop({ default: true })
   collapsible: Boolean
 
+  @Prop({ default: false })
+  disableActions: Boolean
+
   public configItems: Array<AnalyzerMetaProperitiesInterface> = []
   public transformerItems: Array<TransformerInterface> = []
   public invalidFields: Array<string> = []
@@ -320,9 +323,11 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
    * @returns {void}
    */
   toggleTransformer(transformer: TransformerInterface) {
-    if (!this.readOnly) {
-      transformer.enabled = !transformer.enabled
+    if (this.readOnly || this.disableActions) {
+      return
     }
+
+    transformer.enabled = !transformer.enabled
   }
 
   /**
@@ -551,16 +556,21 @@ export default class Analyzer extends mixins(InstallAutofixMixin, RoleAccessMixi
   /**
    * Compute invalid fields from config items
    *
+   * @param {boolean} [collapseCardsIfRequired=true]
    * @returns {number}
    */
-  validateConfig(): number {
+  validateConfig(collapseCardsIfRequired = true): number {
     const requiredFields = this.analyzerMeta.required || []
     this.invalidFields = this.configItems
       .filter((configItem: AnalyzerMetaProperitiesInterface) => {
         return requiredFields.includes(configItem.name) && !configItem.selected
       })
       .map((configItem: AnalyzerMetaProperitiesInterface) => configItem.name)
-    this.isCollapsed = this.invalidFields.length == 0
+
+    if (collapseCardsIfRequired) {
+      this.isCollapsed = this.invalidFields.length == 0
+    }
+
     return this.invalidFields.length
   }
 

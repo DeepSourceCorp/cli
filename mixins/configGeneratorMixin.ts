@@ -10,7 +10,7 @@ import { RepoConfigInterface } from '~/store/repository/detail'
 const analyzerListStore = namespace('analyzer/list')
 
 export interface AnalyzerComponent extends Vue {
-  validateConfig: () => number
+  validateConfig: (collapseCardsIfRequired?: boolean) => number
 }
 
 const BASE_CONFIG = {
@@ -87,13 +87,13 @@ export default class ConfigGeneratorMixin extends Vue {
     }
   }
 
-  validateConfig(): boolean {
+  validateConfig(collapseCardsIfRequired = true): boolean {
     let issueCount = 0
     this.$children.forEach((child: unknown) => {
       const childProxy = child as AnalyzerComponent
 
       if (childProxy.validateConfig) {
-        issueCount = issueCount + childProxy.validateConfig()
+        issueCount = issueCount + childProxy.validateConfig(collapseCardsIfRequired)
       }
     })
 

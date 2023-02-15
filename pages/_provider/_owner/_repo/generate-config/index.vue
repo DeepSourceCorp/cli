@@ -22,13 +22,14 @@
               Analyzers
             </div>
           </template>
-          <template slot="description">
+          <template #description>
             <!-- Select which analyzer to add -->
             <analyzer-selector
-              class="mt-2"
               ref="analyzer-selector"
               :is-processing="isProcessing"
-              :userConfig="userConfig"
+              :user-config="userConfig"
+              :disable-analyzer-card-actions="disableAnalyzerCardActions"
+              class="mt-2"
               @updateAnalyzers="updateAnalyzerConfig"
               @updateTransformers="updateTransformersConfig"
             ></analyzer-selector>
@@ -45,36 +46,36 @@
               >
             </div>
           </template>
-          <template slot="description">
+          <template #description>
             <!-- select patterns -->
             <patterns-selector
-              @updatePatterns="updatePatternsConfig"
-              :vcsUrl="repository.vcsUrl"
-              :testPatterns="userConfig.test_patterns || []"
-              :excludePatterns="userConfig.exclude_patterns || []"
+              :vcs-url="repository.vcsUrl"
+              :test-patterns="userConfig.test_patterns || []"
+              :exclude-patterns="userConfig.exclude_patterns || []"
               class="grid grid-cols-1 gap-4 mt-2"
-            ></patterns-selector>
+              @updatePatterns="updatePatternsConfig"
+            />
           </template>
         </z-step>
       </z-stepper>
       <!-- TOML -->
       <div class="col-span-4">
         <toml-box
-          class="sticky space-y-2 top-32"
           :toml="toml"
-          :repoId="repository.id"
-          :isCommitPossible="repository.isCommitPossible"
-          :actionDisabled="actionDisabled"
-          :isAutofixEnabled="repository.isAutofixEnabled"
-          :canBeActivated="repository.canBeActivated"
-          :isActivated="repository.isActivated"
-          :canViewerUpgrade="canViewerUpgrade"
+          :repo-id="repository.id"
+          :is-commit-possible="repository.isCommitPossible"
+          :action-disabled="actionDisabled"
+          :is-autofix-enabled="repository.isAutofixEnabled"
+          :can-be-activated="repository.canBeActivated"
+          :is-activated="repository.isActivated"
+          :can-viewer-upgrade="canViewerUpgrade"
+          class="sticky space-y-2 top-32"
           @activateRepo="activateRepo"
           @toggleNextSteps="showNextStepsModal"
           @commitConfig="commitConfig"
           @commitGSR="handleCommitGSR"
         >
-          <template slot="message">
+          <template #message>
             You'll be adding a
             <span class="font-mono bg-ink-100 rounded-md text-vanilla-100 p-0.5"
               >.deepsource.toml</span
@@ -95,10 +96,10 @@
         />
         <next-steps-modal
           v-if="showNextSteps"
+          :action-disabled="actionDisabled"
+          :show-modal="showNextSteps"
           @close="showNextSteps = false"
           @activate="activateRepo"
-          :actionDisabled="actionDisabled"
-          :showModal="showNextSteps"
         ></next-steps-modal>
       </portal>
     </div>
@@ -200,13 +201,14 @@ export default class GenerateConfig extends mixins(
     exclude_patterns: []
   }
 
-  public showAddDefaultBranchModal = false
-  public showNextSteps = false
-  public isProcessing = false
+  showAddDefaultBranchModal = false
+  showNextSteps = false
+  isProcessing = false
+  disableAnalyzerCardActions = false
 
   showNextStepsModal() {
     const selector = this.$refs['analyzer-selector'] as AnalyzerSelector
-    const isConfigValid = selector.validateConfig()
+    const isConfigValid = selector.validateConfig(false)
     if (isConfigValid) {
       this.showNextSteps = true
       return
@@ -298,7 +300,7 @@ export default class GenerateConfig extends mixins(
 
   async handleCommitGSR(): Promise<void> {
     const selector = this.$refs['analyzer-selector'] as AnalyzerSelector
-    const isConfigValid = selector.validateConfig()
+    const isConfigValid = selector.validateConfig(false)
 
     if (!isConfigValid) {
       this.$toast.danger(
@@ -338,9 +340,11 @@ export default class GenerateConfig extends mixins(
   }
 
   async commitConfig(createPullRequest = false): Promise<void> {
+    this.disableAnalyzerCardActions = true
+
     const selector = this.$refs['analyzer-selector'] as AnalyzerSelector
     const pullLabel = this.$route.params.provider === 'gl' ? 'merge' : 'pull'
-    const isConfigValid = selector.validateConfig()
+    const isConfigValid = selector.validateConfig(false)
     if (isConfigValid) {
       const args = {
         config: this.toml,
@@ -373,6 +377,8 @@ export default class GenerateConfig extends mixins(
         this.$toast.danger((e as Error).message.replace('GraphQL error: ', ''))
       } finally {
         this.fetchBasicRepoDetails({ ...this.baseRouteParams, refetch: true })
+
+        this.disableAnalyzerCardActions = false
       }
     }
   }

@@ -1,7 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[[ AnalyzerSelector ]] renders AnalyzerSelector with all prop options: {"userConfig":{"version":1,"analyzers":[{"name":"ansible","enabled":true,"meta":{}},{"name":"test-coverage","enabled":true,"meta":{}}],"transformers":[{"name":"black","enabled":true}],"test_patterns":["*/tests/**/test_*.py"],"exclude_patterns":["core/migrations/*","providers/tests/common/test_files/*"]}} 1`] = `
+exports[`[[ AnalyzerSelector ]] renders AnalyzerSelector with all prop options: {"disableAnalyzerCardOptions":false} 1`] = `
 "<div class=\\"w-full space-y-2\\">
+  <analyzersearch-stub selectedanalyzers=\\"ansible,test-coverage\\" closeonadd=\\"true\\" dropdownbgclass=\\"bg-ink-300\\"></analyzersearch-stub>
+  <analyzer-stub icon=\\"ansible\\" name=\\"ansible\\" label=\\"Ansible\\" analyzermeta=\\"[object Object]\\" selectedanalyzer=\\"[object Object]\\" availabletransformers=\\"\\" selectedtransformers=\\"[object Object]\\" collapsible=\\"true\\" shortcode=\\"ansible\\" transformers=\\"\\" meta=\\"[object Object]\\" class=\\"z-20\\"></analyzer-stub>
+  <analyzer-stub icon=\\"test-coverage\\" name=\\"test-coverage\\" label=\\"Test Coverage\\" analyzermeta=\\"[object Object]\\" selectedanalyzer=\\"[object Object]\\" availabletransformers=\\"\\" selectedtransformers=\\"[object Object]\\" collapsible=\\"true\\" shortcode=\\"test-coverage\\" transformers=\\"\\" meta=\\"[object Object]\\" class=\\"z-20\\"></analyzer-stub>
+</div>"
+`;
+
+exports[`[[ AnalyzerSelector ]] renders AnalyzerSelector with all prop options: {"disableAnalyzerCardOptions":true} 1`] = `
+"<div class=\\"w-full space-y-2\\" disableanalyzercardoptions=\\"true\\">
   <analyzersearch-stub selectedanalyzers=\\"ansible,test-coverage\\" closeonadd=\\"true\\" dropdownbgclass=\\"bg-ink-300\\"></analyzersearch-stub>
   <analyzer-stub icon=\\"ansible\\" name=\\"ansible\\" label=\\"Ansible\\" analyzermeta=\\"[object Object]\\" selectedanalyzer=\\"[object Object]\\" availabletransformers=\\"\\" selectedtransformers=\\"[object Object]\\" collapsible=\\"true\\" shortcode=\\"ansible\\" transformers=\\"\\" meta=\\"[object Object]\\" class=\\"z-20\\"></analyzer-stub>
   <analyzer-stub icon=\\"test-coverage\\" name=\\"test-coverage\\" label=\\"Test Coverage\\" analyzermeta=\\"[object Object]\\" selectedanalyzer=\\"[object Object]\\" availabletransformers=\\"\\" selectedtransformers=\\"[object Object]\\" collapsible=\\"true\\" shortcode=\\"test-coverage\\" transformers=\\"\\" meta=\\"[object Object]\\" class=\\"z-20\\"></analyzer-stub>

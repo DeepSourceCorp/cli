@@ -3,6 +3,7 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import { AnalyzerSelector } from '~/components/ConfigGenerator'
 import { render } from '@testing-library/vue'
 import { VueConstructor } from 'vue'
+import { cartesian, generateBooleanProps } from '~/test/utils'
 
 const stubs = {
   ZIcon: true,
@@ -111,14 +112,18 @@ describe('[[ AnalyzerSelector ]]', () => {
   })
 
   test('renders AnalyzerSelector with all prop options', () => {
-    const { html } = render(AnalyzerSelector, {
-      propsData,
-      stubs,
-      mocks,
-      store
-    })
+    const disableAnalyzerCardOptions = generateBooleanProps('disableAnalyzerCardOptions', false)
 
-    expect(html()).toMatchSnapshot(JSON.stringify(propsData))
+    cartesian(disableAnalyzerCardOptions).forEach((propCombination) => {
+      const { html } = render(AnalyzerSelector, {
+        propsData: { ...propsData, ...propCombination },
+        stubs,
+        mocks,
+        store
+      })
+
+      expect(html()).toMatchSnapshot(JSON.stringify(propCombination))
+    })
   })
 
   test('emits updateAnalyzer', () => {

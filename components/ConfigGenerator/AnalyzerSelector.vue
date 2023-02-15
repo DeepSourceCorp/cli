@@ -14,13 +14,14 @@
       <analyzer
         v-for="analyzer in activeAnalyzers"
         :key="analyzer.shortcode"
-        class="z-20"
         v-bind="analyzer"
         :analyzer-logo="analyzer.analyzerLogo"
         :available-transformers="analyzer.transformers"
         :analyzer-meta="analyzer.meta"
+        :disable-actions="disableAnalyzerCardActions"
         :selected-analyzer="getConfig(analyzer.shortcode)"
         :selected-transformers="userConfig.transformers"
+        class="z-20"
         @onClose="removeAnalyzer(analyzer)"
         @analyzersUpdated="syncAnalyzer"
         @transformersUpdated="syncTransformers"
@@ -90,7 +91,7 @@ const analyzerListStore = namespace('analyzer/list')
  * **/
 
 export interface AnalyzerComponent extends Vue {
-  validateConfig: () => number
+  validateConfig: (collapseCardsIfRequired?: boolean) => number
 }
 
 @Component({
@@ -110,6 +111,9 @@ export default class AnalyzerSelector extends Vue {
 
   @Prop({ default: false })
   isProcessing: boolean
+
+  @Prop({ default: false })
+  disableAnalyzerCardActions: boolean
 
   @analyzerListStore.Getter(AnalyzerListGetters.ANALYZERS)
   analyzerList: AnalyzerInterface[]
@@ -155,13 +159,13 @@ export default class AnalyzerSelector extends Vue {
     })
   }
 
-  validateConfig(): boolean {
+  validateConfig(collapseCardsIfRequired = true): boolean {
     let issueCount = 0
     this.$children.forEach((child: unknown) => {
       const childProxy = child as AnalyzerComponent
 
       if (childProxy.validateConfig) {
-        issueCount = issueCount + childProxy.validateConfig()
+        issueCount = issueCount + childProxy.validateConfig(collapseCardsIfRequired)
       }
     })
 
