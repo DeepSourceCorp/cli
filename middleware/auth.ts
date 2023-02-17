@@ -63,11 +63,13 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
 
     try {
       await store.dispatch(`account/auth/${AuthActionTypes.REFRESH}`)
-      store.dispatch(`account/context/${ContextActionTypes.FETCH_CONTEXT}`)
-      store.dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
     } catch (e) {
       if (process.client) {
-        await store.dispatch(`account/auth/${AuthActionTypes.LOG_OUT}`)
+        if (store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]) {
+          await store.dispatch(`account/auth/${AuthActionTypes.LOG_OUT}`)
+        } else {
+          await store.dispatch(`account/auth/${AuthActionTypes.PURGE_CLIENT_DATA}`)
+        }
       }
       if (strict) {
         if (redirectToLogin) {
@@ -82,6 +84,21 @@ const authMiddleware: Middleware = async ({ app, store, route, redirect, error }
           error({ statusCode: 404, message: 'This page is not real' })
         }
       }
+    }
+
+    const catchAndReportErrors = (e: Error) => {
+      app.$logErrorAndToast(e as Error)
+      error({ statusCode: 500 })
+    }
+
+    if (store.getters[`account/auth/${AuthGetterTypes.GET_LOGGED_IN}`]) {
+      store
+        .dispatch(`account/context/${ContextActionTypes.FETCH_CONTEXT}`)
+        .catch(catchAndReportErrors)
+
+      store
+        .dispatch(`user/active/${ActiveUserActions.FETCH_VIEWER_INFO}`)
+        .catch(catchAndReportErrors)
     }
   }
 }
