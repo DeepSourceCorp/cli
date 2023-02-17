@@ -22,10 +22,10 @@
 
 <script lang="ts">
 import { Component, mixins } from 'nuxt-property-decorator'
+
 import AuthMixin from '~/mixins/authMixin'
 import ActiveUserMixin from '~/mixins/activeUserMixin'
 import ContextMixin from '~/mixins/contextMixin'
-import { User } from '~/types/types'
 
 /**
  * Auth page that is responsible for logging in the user with `code` from providers.
@@ -71,48 +71,50 @@ export default class Auth extends mixins(AuthMixin, ActiveUserMixin, ContextMixi
 
     await Promise.all([this.fetchActiveUser(), this.fetchContext()])
 
-    // Identify the user via RudderStack
-    const {
-      avatar,
-      email,
-      dateJoined: createdAt,
-      firstName,
-      id,
-      lastName
-    } = this.$store.state.user.active.viewer
-
-    if (!this.$config.onPrem && id && email) {
-      const parsedId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
-      this.$rudder?.identify(parsedId, {
+    if (this.loggedIn) {
+      // Identify the user via RudderStack
+      const {
         avatar,
-        createdAt,
         email,
+        dateJoined: createdAt,
         firstName,
+        id,
         lastName
-      })
-    }
+      } = this.$store.state.user.active.viewer
 
-    // Identify the team via RudderStack
-    const {
-      avatar_url: team_avatar_url,
-      id: groupId,
-      subscribed_plan_info,
-      team_name,
-      type,
-      vcs_provider_display
-    } = this.activeDashboardContext
+      if (!this.$config.onPrem && id && email) {
+        const parsedId = Buffer.from(id, 'base64').toString().toLowerCase().replace('user:', '')
+        this.$rudder?.identify(parsedId, {
+          avatar,
+          createdAt,
+          email,
+          firstName,
+          lastName
+        })
+      }
 
-    // Invoke `$rudder.group` only for team accounts
-    if (!this.$config.onPrem && groupId && team_name && type === 'team') {
-      this.$rudder?.group(String(groupId), {
-        avatar: team_avatar_url,
-        name: team_name,
-        plan:
-          typeof subscribed_plan_info === 'object'
-            ? subscribed_plan_info.name
-            : subscribed_plan_info,
-        vcsProvider: vcs_provider_display
-      })
+      // Identify the team via RudderStack
+      const {
+        avatar_url: team_avatar_url,
+        id: groupId,
+        subscribed_plan_info,
+        team_name,
+        type,
+        vcs_provider_display
+      } = this.activeDashboardContext
+
+      // Invoke `$rudder.group` only for team accounts
+      if (!this.$config.onPrem && groupId && team_name && type === 'team') {
+        this.$rudder?.group(String(groupId), {
+          avatar: team_avatar_url,
+          name: team_name,
+          plan:
+            typeof subscribed_plan_info === 'object'
+              ? subscribed_plan_info.name
+              : subscribed_plan_info,
+          vcsProvider: vcs_provider_display
+        })
+      }
     }
 
     const toOnboard = this.toOnboard
