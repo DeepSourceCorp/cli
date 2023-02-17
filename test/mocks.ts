@@ -304,7 +304,69 @@ export const storeModulesGenerator = (overrides = {}) => {
         state: {
           repository: {
             id: 'UmVwb3NpdG9yeTp6dmp2eXo=',
-            vcsProvider: VcsProviderChoices.Github
+            vcsProvider: VcsProviderChoices.Github,
+            issueTypeDistribution: [
+              {
+                shortcode: 'all',
+                name: 'All issues',
+                description: 'All the issues',
+                count: 411
+              },
+              {
+                shortcode: 'recommended',
+                name: 'Recommended',
+                description: 'Recommended Issues',
+                count: 209
+              },
+              {
+                shortcode: 'bug-risk',
+                name: 'Bug Risk',
+                description: null,
+                count: 195
+              },
+              {
+                shortcode: 'antipattern',
+                name: 'Anti-pattern',
+                description: null,
+                count: 136
+              },
+              {
+                shortcode: 'security',
+                name: 'Security',
+                description: null,
+                count: 58
+              },
+              {
+                shortcode: 'performance',
+                name: 'Performance',
+                description: null,
+                count: 22
+              },
+              {
+                shortcode: 'style',
+                name: 'Style',
+                description: null,
+                count: 0
+              },
+              {
+                shortcode: 'doc',
+                name: 'Documentation',
+                description: null,
+                count: 0
+              },
+              {
+                shortcode: 'typecheck',
+                name: 'Typecheck',
+                description: null,
+                count: 0
+              },
+              {
+                shortcode: 'coverage',
+                name: 'Coverage',
+                description: null,
+                count: 0
+              }
+            ]
           }
         },
         actions: {

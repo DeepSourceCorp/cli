@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[[ CategorySelector ]] renders the list of issue category items 1`] = `
+"<div class=\\"flex-col hidden p-2 space-y-4 border-r border-slate-400 lg:flex\\">
+  <section class=\\"flex-shrink space-y-1 overflow-y-scroll hide-scroll\\">
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"all\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        All issues
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">411</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300 bg-ink-300\\">
+      <zicon-stub icon=\\"star\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-100\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-100\\">
+        Recommended
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-200\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">209</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"bug-risk\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        Bug Risk
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">195</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"antipattern\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        Anti-pattern
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">136</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"security\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        Security
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">58</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"performance\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        Performance
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">22</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"typecheck\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        Typecheck
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">0</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"coverage\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        Coverage
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">0</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"style\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        Style
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">0</span></ztag-stub>
+    </div>
+    <div class=\\"flex items-center p-2 space-x-2 rounded-sm cursor-pointer group hover:bg-ink-300\\">
+      <zicon-stub icon=\\"doc\\" size=\\"small\\" position=\\"\\" color=\\"slate\\" class=\\"group-hover:text-vanilla-100\\"></zicon-stub> <span class=\\"flex-1 text-sm group-hover:text-vanilla-100 text-vanilla-400\\">
+        Documentation
+      </span>
+      <ztag-stub state=\\"default\\" size=\\"small\\" bgcolor=\\"ink-300\\" textsize=\\"xs\\" spacing=\\"py-1 px-2\\" iconcolor=\\"current\\" class=\\"leading-none group-hover:bg-ink-200 has-tooltip\\" data-original-title=\\"null\\"><span class=\\"mt-px\\">0</span></ztag-stub>
+    </div>
+  </section>
+</div>"
+`;
