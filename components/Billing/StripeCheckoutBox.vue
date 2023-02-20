@@ -306,18 +306,26 @@ export default class StripeCheckoutBox extends mixins(
       }
     } catch (e) {
       this.checkoutState = 'FAIL'
+      const err = e as Error
       try {
-        const err = e as Error
         const errorMessage = JSON.parse(err.message.replace('GraphQL error: ', ''))
         if (Array.isArray(errorMessage)) {
           this.$toast.danger(errorMessage.join('\n'))
         } else {
           this.$toast.danger(errorMessage)
         }
-      } catch (e) {
-        this.$toast.danger(
-          'Something went wrong processing your card payment. Please check your card details or contact support.'
-        )
+      } catch (_parseError) {
+        if (err.message) {
+          this.$toast.show({
+            type: 'danger',
+            message: err.message.replace('GraphQL error: ', ''),
+            duration: 10000
+          })
+        } else {
+          this.$toast.danger(
+            'Something went wrong processing your card payment. Please check your card details or contact support.'
+          )
+        }
       } finally {
         this.logErrorForUser(e as Error, 'Billing error', {})
       }
