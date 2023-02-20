@@ -161,7 +161,7 @@ import { GraphqlMutationResponse } from '~/types/apollo-graphql-types'
   meta: {
     auth: {
       strict: true,
-      repoPerms: [TeamPerms.VIEW_PUBLIC_REPORTS]
+      teamPerms: [TeamPerms.VIEW_PUBLIC_REPORTS]
     }
   }
 })
