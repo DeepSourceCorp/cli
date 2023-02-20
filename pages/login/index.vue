@@ -66,6 +66,7 @@
                 <span>Continue with SSO</span>
               </a>
               <button
+                v-else
                 :key="samlLogin"
                 :disabled="samlLoginLoading"
                 class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
