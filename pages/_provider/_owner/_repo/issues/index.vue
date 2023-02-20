@@ -81,27 +81,20 @@
       <template v-else>
         <lazy-empty-state
           v-if="issueCategoryDisabled && !hasIssuesCount"
-          :webp-image-path="
-            require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.webp')
-          "
-          :png-image-path="
-            require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.png')
-          "
+          :use-v2="true"
+          :webp-image-path="disabledStateImagePath.webp"
+          :png-image-path="disabledStateImagePath.png"
           :show-border="true"
-          :title="`${issueCategoryName} issues are not enabled`"
+          :title="`${issueCategoryName} issues are not being reported`"
+          :subtitle="disabledStateSubtitle"
+          content-width="max-w-xs"
         >
-          <template #subtitle>
-            <p class="text-sm text-vanilla-400 mt-2 sm:mt-1 mx-auto max-w-md text-center">
-              Configure your CI to send code coverage metrics to start tracking this metric. Head
-              over to
-              <nuxt-link
-                :to="$generateRoute(['settings', 'reporting'])"
-                class="hover:underline focus:underline text-juniper"
-              >
-                Settings <span class="text-vanilla-400">›</span> Reporting
-              </nuxt-link>
-              to see how.
-            </p>
+          <template #action>
+            <!-- Using the click handler here instead of the `to` prop since it was resulting in a reload while navigating -->
+            <z-button size="small" @click="$router.push($generateRoute(['settings', 'reporting']))">
+              <span>Open repository settings</span>
+              <z-icon icon="arrow-right" color="current" />
+            </z-button>
           </template>
         </lazy-empty-state>
 
@@ -485,6 +478,30 @@ export default class Issues extends mixins(
     // Returns `true` if `category` is truthy and it is not set to `all` or `recommended`.
     const { category } = this.queryParams
     return Boolean(category && category !== 'all' && category !== 'recommended')
+  }
+
+  get issueCategoryIsCoverage(): boolean {
+    return this.issueCategoryName.toLowerCase() === 'coverage'
+  }
+
+  get disabledStateImagePath(): Record<string, string> {
+    if (this.issueCategoryIsCoverage) {
+      return {
+        webp: require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.webp'),
+        png: require('~/assets/images/ui-states/metrics/set-up-code-coverage-136px.png')
+      }
+    }
+
+    return {
+      webp: require('~/assets/images/ui-states/runs/no-recent-analyses.webp'),
+      png: require('~/assets/images/ui-states/runs/no-recent-analyses.png')
+    }
+  }
+
+  get disabledStateSubtitle(): string {
+    return this.issueCategoryIsCoverage
+      ? 'Configure your CI to send code coverage metrics to start tracking this metric.'
+      : `You can change this in the repository's settings. Once enabled, ${this.issueCategoryName.toLowerCase()} issues will start getting reported from the next analysis`
   }
 
   /**
