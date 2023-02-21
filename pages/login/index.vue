@@ -35,7 +35,7 @@
                 class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md"
                 :class="[`login-btn-${opt.icon}`]"
               >
-                <z-icon :icon="opt.icon" />
+                <z-icon :icon="opt.icon" size="base" />
                 <span>Continue with {{ opt.label }}</span>
               </a>
             </div>
