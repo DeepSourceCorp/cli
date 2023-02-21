@@ -105,7 +105,7 @@ export default class AuthMixin extends Vue {
       if (githubServerEnabled) {
         options.push({
           provider: 'github-enterprise',
-          icon: 'github',
+          icon: 'github-enterprise',
           label: 'GitHub Enterprise',
           bg: 'bg-ink-200'
         })

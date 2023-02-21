@@ -63,7 +63,7 @@
                 href="/saml2/login"
                 class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
               >
-                <z-icon icon="key" color="vanilla-100" />
+                <z-icon icon="key-2" color="vanilla-100" />
                 <span>Continue with SSO</span>
               </a>
               <button
@@ -74,7 +74,7 @@
                 @click="nextSamlAction"
               >
                 <z-icon
-                  :icon="samlLoginLoading ? 'spin-loader' : 'key'"
+                  :icon="samlLoginLoading ? 'spin-loader' : 'key-2'"
                   color="vanilla-100"
                   :class="{ 'animate-spin cursor-not-allowed': samlLoginLoading }"
                 />
