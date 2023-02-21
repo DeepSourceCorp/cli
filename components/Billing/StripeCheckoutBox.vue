@@ -288,14 +288,14 @@ export default class StripeCheckoutBox extends mixins(
               this.$toast.show({
                 type: 'danger',
                 message: result.error.message,
-                duration: 10000
+                timeout: 10
               })
             } else {
               this.$toast.show({
                 type: 'danger',
                 message:
                   'We are unable to authenticate your payment method. Please choose a different payment method and try again.',
-                duration: 6000
+                timeout: 6
               })
             }
             setTimeout(() => {
@@ -319,7 +319,7 @@ export default class StripeCheckoutBox extends mixins(
           this.$toast.show({
             type: 'danger',
             message: err.message.replace('GraphQL error: ', ''),
-            duration: 10000
+            timeout: 10
           })
         } else {
           this.$toast.danger(

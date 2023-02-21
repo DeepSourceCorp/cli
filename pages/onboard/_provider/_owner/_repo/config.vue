@@ -264,7 +264,7 @@ export default class OnboardConfig extends mixins(
           this.$toast.show({
             type: 'success',
             message: `We have created a ${pullLabel} request with the configuration, analysis will start automatically once it is merged.`,
-            duration: 5
+            timeout: 5
           })
 
           this.$router.push({
