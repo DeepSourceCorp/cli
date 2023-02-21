@@ -59,6 +59,7 @@
               />
               <a
                 v-if="$config.onPrem"
+                :key="`a-${samlLogin}-${$config.onPrem}`"
                 href="/saml2/login"
                 class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
               >
@@ -67,7 +68,7 @@
               </a>
               <button
                 v-else
-                :key="samlLogin"
+                :key="`btn-${samlLogin}-${$config.onPrem}`"
                 :disabled="samlLoginLoading"
                 class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
                 @click="nextSamlAction"
