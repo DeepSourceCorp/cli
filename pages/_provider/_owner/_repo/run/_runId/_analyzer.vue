@@ -62,13 +62,19 @@
         <run-summary v-bind="run" />
       </div>
       <div>
-        <run-header
-          v-if="showRunHeader"
-          v-bind="run"
-          :checks="checks"
-          :current-analyzer="$route.params.analyzer"
-          class="z-30 border-b bg-ink-400 border-slate-400 md:sticky top-bar-offset"
-        />
+        <div class="z-30 md:sticky top-bar-offset">
+          <run-header
+            v-if="showRunHeader"
+            v-bind="run"
+            :checks="checks"
+            :current-analyzer="$route.params.analyzer"
+            class="border-b bg-ink-400 border-ink-200"
+          />
+          <inferred-artifact
+            v-if="checkHasInferredArtifacts && checkInferredArtifactsPr"
+            v-bind="checkInferredArtifactsPr"
+          />
+        </div>
         <nuxt-child />
       </div>
     </div>
@@ -92,7 +98,7 @@ import RunDetailMixin from '~/mixins/runDetailMixin'
 import { ILinks } from '~/components/Common/BreadcrumbContainer.vue'
 import { toTitleCase } from '~/utils/string'
 import { PageRefetchStatusT, RunDetailActions } from '~/store/run/detail'
-import { Run } from '~/types/types'
+import { Check, Pr, PrStatus, Run } from '~/types/types'
 
 /**
  * Page that provides detailed information about generated issues for a specific analyzer run.
@@ -154,6 +160,25 @@ export default class AnalyzerDetails extends mixins(
   get previousPageLink(): string | undefined {
     const { runId, analyzer, issueId } = this.$route.params
     if (issueId) return this.$generateRoute(['run', runId, analyzer])
+  }
+
+  get currentCheck(): Check | undefined {
+    return this.getCurrentCheck(this.$route.params.analyzer)
+  }
+
+  get checkHasInferredArtifacts(): boolean {
+    if (this.currentCheck?.analyzer?.shortcode !== 'test-coverage') {
+      return false
+    }
+    return this.currentCheck?.hasInferredArtifacts ?? false
+  }
+
+  get checkInferredArtifactsPr(): Pr | null {
+    if (this.currentCheck?.analyzer?.shortcode !== 'test-coverage') {
+      return null
+    }
+
+    return this.currentCheck?.inferredArtifactsPr ?? null
   }
 
   get breadCrumbLinks(): ILinks[] {

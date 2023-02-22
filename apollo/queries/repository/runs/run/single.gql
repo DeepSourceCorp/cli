@@ -24,6 +24,12 @@ query repositoryRunDetail(
               description
               analyzerLogo
             }
+            hasInferredArtifacts
+            inferredArtifactsPr {
+              id
+              vcsUrl
+              number
+            }
           }
         }
       }

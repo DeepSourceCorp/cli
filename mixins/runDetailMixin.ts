@@ -91,4 +91,12 @@ export default class RunDetailMixin extends Vue {
   get checks(): Check[] {
     return resolveNodes(this.run.checks) as Check[]
   }
+
+  getCurrentCheck(analyzerShortcode: string): Check | undefined {
+    const filteredCheck = this.checks.find((edge) => {
+      return edge.analyzer?.shortcode === analyzerShortcode
+    })
+
+    return filteredCheck
+  }
 }

@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders CoverageEnabledCard with all prop options: {"hasTestCoverage":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"hasTestCoverage":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"hasTestCoverage":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border border-juniper bg-juniper bg-opacity-5 border-opacity-10\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-juniper-500\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-juniper-300\\">
+        Reporting active
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":false,"hasTestCoverage":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":false,"hasTestCoverage":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":false,"hasTestCoverage":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border border-juniper bg-juniper bg-opacity-5 border-opacity-10\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-juniper-500\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-juniper-300\\">
+        Reporting active
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":null,"hasTestCoverage":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":null,"hasTestCoverage":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":null,"hasTestCoverage":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border border-juniper bg-juniper bg-opacity-5 border-opacity-10\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-juniper-500\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-juniper-300\\">
+        Reporting active
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":true,"hasTestCoverage":false} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"rounded-full bg-ink-200 animate-pulse w-32 h-coverage-badge\\"></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":true,"hasTestCoverage":null} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"rounded-full bg-ink-200 animate-pulse w-32 h-coverage-badge\\"></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":true,"hasTestCoverage":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"rounded-full bg-ink-200 animate-pulse w-32 h-coverage-badge\\"></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {"loading":true} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"rounded-full bg-ink-200 animate-pulse w-32 h-coverage-badge\\"></div>
+  </div>
+</div>"
+`;
+
+exports[`renders CoverageEnabledCard with all prop options: {} 1`] = `
+"<div class=\\"bg-ink-300 border border-ink-200 rounded-md\\">
+  <div class=\\"p-4 border-ink-200 flex flex-wrap items-start gap-2 justify-between\\">
+    <div class=\\"space-y-1\\">
+      <h4 class=\\"text-sm leading-4\\">Code Coverage</h4>
+      <p class=\\"text-vanilla-400 text-xs leading-6\\">
+        When active, DeepSource will report code coverage issues and metrics.
+      </p>
+    </div>
+    <div class=\\"flex items-center gap-x-2 rounded-l-full rounded-r-full px-2.5 py-0.5 border bg-ink-200 border-ink-50\\"><span class=\\"rounded-full w-1.5 h-1.5 bg-vanilla-400\\"></span> <span class=\\"uppercase leading-6 text-xxs font-semibold text-vanilla-400\\">
+        Reporting inactive
+      </span></div>
+  </div>
+</div>"
+`;

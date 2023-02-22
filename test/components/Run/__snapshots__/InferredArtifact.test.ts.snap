@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders InferredArtifact with all prop options: {"vcsUrl":"https://github.com/deepsourcelabs/bifrost/pull/32","number":32} 1`] = `
+"<div class=\\"w-full inline-flex gap-x-1.5 sm:items-center bg-ink-300 p-3 text-sm text-vanilla-400 border-b border-ink-200\\">
+  <zicon-stub icon=\\"artifact\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 mt-1 sm:mt-0 inline-block sm:hidden\\"></zicon-stub>
+  <zicon-stub icon=\\"artifact\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 mt-1 sm:mt-0 hidden sm:inline-block\\"></zicon-stub> <span>
+    This check was inferred using the coverage report sent for
+    <a href=\\"https://github.com/deepsourcelabs/bifrost/pull/32\\" target=\\"_blank\\" rel=\\"noreferrer noopener\\" class=\\"inline-flex items-center text-vanilla-100 hover:underline hover:cursor-pointer\\">
+      PR #32
+      <zicon-stub icon=\\"arrow-up-right\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 mt-1 inline-block sm:hidden\\"></zicon-stub> <zicon-stub icon=\\"arrow-up-right\\" size=\\"small\\" position=\\"\\" color=\\"vanilla-400\\" class=\\"flex-shrink-0 mt-0.5 hidden sm:inline-block\\"></zicon-stub></a></span>
+</div>"
+`;

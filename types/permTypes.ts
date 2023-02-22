@@ -55,7 +55,8 @@ export enum RepoPerms {
   VIEW_PUBLIC_REPORTS = 'viewPublicReports',
   UPDATE_PUBLIC_REPORTS = 'updatePublicReports',
   PIN_REPORTS = 'pinReports',
-  REGENERATE_DSN = 'regenerateDSN'
+  REGENERATE_DSN = 'regenerateDSN',
+  VIEW_CODE_COVERAGE_SETTINGS = 'viewCodeCoverageSettings'
 }
 
 export enum AppFeatures {

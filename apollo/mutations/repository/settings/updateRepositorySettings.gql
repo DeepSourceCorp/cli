@@ -1,4 +1,4 @@
-mutation($input: UpdateRepositorySettingsInput!) {
+mutation updateRepositorySettings($input: UpdateRepositorySettingsInput!) {
   updateRepositorySettings(input: $input) {
     repository {
       id

@@ -189,7 +189,6 @@ import {
   runStatusIconColor
 } from '~/utils/ui'
 import { resolveNodes } from '~/utils/array'
-import { stat } from 'fs'
 
 const runListStore = namespace('run/list')
 

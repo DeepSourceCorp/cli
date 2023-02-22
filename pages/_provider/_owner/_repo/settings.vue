@@ -74,7 +74,8 @@ interface TabLink {
         RepoPerms.VIEW_AUDIT_LOGS,
         RepoPerms.VIEW_BADGES,
         RepoPerms.CHANGE_ISSUE_PRIORITY,
-        RepoPerms.CHANGE_INTEGRATION_SETTINGS
+        RepoPerms.CHANGE_INTEGRATION_SETTINGS,
+        RepoPerms.VIEW_CODE_COVERAGE_SETTINGS
       ]
     }
   },
@@ -92,6 +93,12 @@ export default class Settings extends mixins(RoleAccessMixin, RepoDetailMixin) {
       label: 'Configuration',
       icon: 'sliders',
       link: ['settings', 'config']
+    },
+    {
+      label: 'Code Coverage',
+      icon: 'test-coverage',
+      link: ['settings', 'code-coverage'],
+      perms: [RepoPerms.VIEW_CODE_COVERAGE_SETTINGS]
     },
     {
       label: 'Reporting',

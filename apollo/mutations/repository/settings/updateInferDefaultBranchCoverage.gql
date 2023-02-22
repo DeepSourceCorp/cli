@@ -1,0 +1,11 @@
+mutation updateInferDefaultBranchCoverage($input: UpdateRepositorySettingsInput!) {
+  updateRepositorySettings(input: $input) {
+    repository {
+      id
+      repositorySetting {
+        id
+        inferDefaultBranchCoverage
+      }
+    }
+  }
+}

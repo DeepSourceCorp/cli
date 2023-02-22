@@ -177,7 +177,11 @@ const REPO_PERMS_MAP = {
   ],
   [RepoPerms.UPDATE_PUBLIC_REPORTS]: [RepositoryCollaboratorPermission.Admin],
   [RepoPerms.PIN_REPORTS]: [RepositoryCollaboratorPermission.Admin],
-  [RepoPerms.REGENERATE_DSN]: [RepositoryCollaboratorPermission.Admin]
+  [RepoPerms.REGENERATE_DSN]: [RepositoryCollaboratorPermission.Admin],
+  [RepoPerms.VIEW_CODE_COVERAGE_SETTINGS]: [
+    RepositoryCollaboratorPermission.Admin,
+    RepositoryCollaboratorPermission.Write
+  ]
 }
 
 const FEATURES_PROVIDER_MAP = {

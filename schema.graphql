@@ -509,6 +509,7 @@ type Check implements MaskPrimaryKeyNode {
   autofixableIssues: [AutofixableIssueDetail]
   filesAffectedByAutofix: Int
   hasInferredArtifacts: Boolean
+  inferredArtifactsPr: PR
 }
 
 type CheckConnection {
@@ -2006,6 +2007,7 @@ type PR implements MaskPrimaryKeyNode {
   latestAnalysisRun: Run
   runs(offset: Int, before: String, after: String, first: Int, last: Int, status: String): RunConnection
   runCount: Int
+  vcsUrl: String
 }
 
 type PRConnection {

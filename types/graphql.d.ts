@@ -782,6 +782,15 @@ declare module '*/removeCollaborator.gql' {
 }
     
 
+declare module '*/updateInferDefaultBranchCoverage.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const updateInferDefaultBranchCoverage: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/updatePermission.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -794,7 +803,7 @@ declare module '*/updatePermission.gql' {
 declare module '*/updateRepositorySettings.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  
+  export const updateRepositorySettings: DocumentNode;
 
   export default defaultDocument;
 }
@@ -1976,6 +1985,15 @@ declare module '*/badges.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/codeCoverage.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const codeCoverage: DocumentNode;
 
   export default defaultDocument;
 }
