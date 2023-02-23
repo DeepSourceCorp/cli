@@ -17,12 +17,12 @@
         <!-- Report controls section for smaller screens -->
         <z-button
           v-tooltip="'View full report'"
-          :to="$generateRoute(['reports', reportKey])"
           button-type="ghost"
           color="vanilla-400"
           icon="pie-chart"
           size="small"
           class="lg:hidden"
+          @click="navigateToReportPage"
         />
 
         <!-- Report controls section for larger screens -->
@@ -46,11 +46,11 @@
             >
               <z-button
                 v-tooltip="'View full report'"
-                :to="$generateRoute(['reports', reportKey])"
                 button-type="ghost"
                 color="vanilla-400"
                 icon="pie-chart"
                 size="small"
+                @click="navigateToReportPage"
               />
 
               <pinnable-reports-list
@@ -235,6 +235,16 @@ export default class PinnedCodeCoverageReport extends Vue {
     this.timeoutId = setTimeout(() => {
       this.revealReportControls = false
     }, 1000)
+  }
+
+  /**
+   * Navigate to the code coverage report page
+   *
+   * @returns {void}
+   */
+  navigateToReportPage(): void {
+    const reportPageUrl = this.$generateRoute(['reports', this.reportKey])
+    this.$router.push(reportPageUrl)
   }
 
   /**

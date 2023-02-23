@@ -36,12 +36,12 @@
         <!-- Report controls section for smaller screens -->
         <z-button
           v-tooltip="'View full report'"
-          :to="reportPageUrl"
           button-type="ghost"
           color="vanilla-400"
           icon="pie-chart"
           size="small"
           class="lg:hidden"
+          @click="navigateToReportPage"
         />
 
         <!-- Report controls section for larger screens -->
@@ -71,11 +71,11 @@
             >
               <z-button
                 v-tooltip="'View full report'"
-                :to="reportPageUrl"
                 button-type="ghost"
                 color="vanilla-400"
                 icon="pie-chart"
                 size="small"
+                @click="navigateToReportPage"
               />
 
               <pinnable-reports-list
@@ -255,7 +255,7 @@ export default class PinnedChartReport extends Vue {
   @Prop({ required: false })
   othersDatasetNames: Array<string>
 
-  @Prop({ required: true })
+  @Prop()
   historicalValues: HistoricalValues
 
   @Prop({ required: true })
@@ -475,17 +475,6 @@ export default class PinnedChartReport extends Vue {
     `
   }
 
-  get reportPageUrl(): string {
-    // issue-distribution-analyzer -> analyzer
-    const filterType = getFilterType(this.metadata?.filter)
-
-    const path = [ReportPageT.DISTRIBUTION, ReportPageT.ISSUES_PREVENTED].includes(this.reportKey)
-      ? `${this.reportKey}?filter=${filterType}`
-      : this.reportKey
-
-    return this.$generateRoute(['reports', path])
-  }
-
   get showChart(): boolean {
     return (this.historicalValues?.labels?.length as number) >= 2 && this.datasets?.length > 0
   }
@@ -535,6 +524,24 @@ export default class PinnedChartReport extends Vue {
     this.timeoutId = setTimeout(() => {
       this.revealReportControls = false
     }, 1000)
+  }
+
+  /**
+   * Navigate to the report page
+   *
+   * @returns {void}
+   */
+  navigateToReportPage(): void {
+    // issue-distribution-analyzer -> analyzer
+    const filterType = getFilterType(this.metadata?.filter)
+
+    const path = [ReportPageT.DISTRIBUTION, ReportPageT.ISSUES_PREVENTED].includes(this.reportKey)
+      ? `${this.reportKey}?filter=${filterType}`
+      : this.reportKey
+
+    const reportPageUrl = this.$generateRoute(['reports', path])
+
+    this.$router.push(reportPageUrl)
   }
 
   /**
