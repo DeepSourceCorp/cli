@@ -17,9 +17,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -44,9 +42,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -71,9 +67,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -98,9 +92,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -123,9 +115,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -148,9 +138,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -173,9 +161,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -198,9 +184,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -225,9 +209,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -252,9 +234,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -279,9 +259,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -306,9 +284,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -331,9 +307,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -356,9 +330,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -381,9 +353,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -406,9 +376,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -433,9 +401,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -460,9 +426,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -487,9 +451,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -514,9 +476,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -539,9 +499,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -564,9 +522,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -589,9 +545,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -614,9 +568,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1217,9 +1169,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1244,9 +1194,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1271,9 +1219,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1298,9 +1244,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1323,9 +1267,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1348,9 +1290,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1373,9 +1313,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1398,9 +1336,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1425,9 +1361,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1452,9 +1386,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1479,9 +1411,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1506,9 +1436,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1531,9 +1459,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1556,9 +1482,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1581,9 +1505,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1606,9 +1528,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1633,9 +1553,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1660,9 +1578,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1687,9 +1603,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1714,9 +1628,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1739,9 +1651,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1764,9 +1674,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1789,9 +1697,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -1814,9 +1720,7 @@ exports[`renders MemberListItem with all prop options for repo: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div>
       <!---->
     </div>
@@ -2417,9 +2321,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2443,9 +2345,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2469,9 +2369,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2495,9 +2393,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2519,9 +2415,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2545,9 +2439,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2569,9 +2461,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2595,9 +2485,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2621,9 +2509,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2647,9 +2533,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2673,9 +2557,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2699,9 +2581,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2723,9 +2603,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2749,9 +2627,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2773,9 +2649,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2799,9 +2673,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2825,9 +2697,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2851,9 +2721,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2877,9 +2745,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2903,9 +2769,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2927,9 +2791,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2953,9 +2815,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -2977,9 +2837,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3003,9 +2861,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3593,9 +3449,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3619,9 +3473,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3645,9 +3497,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3671,9 +3521,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3695,9 +3543,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3721,9 +3567,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3745,9 +3589,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3771,9 +3613,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3797,9 +3637,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3823,9 +3661,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3849,9 +3685,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3875,9 +3709,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3899,9 +3731,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3925,9 +3755,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3949,9 +3777,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -3975,9 +3801,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -4001,9 +3825,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -4027,9 +3849,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -4053,9 +3873,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -4079,9 +3897,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -4103,9 +3919,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -4129,9 +3943,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -4153,9 +3965,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>
@@ -4179,9 +3989,7 @@ exports[`renders MemberListItem with all prop options for team: {"avatar":"/stat
         <zicon-stub icon=\\"mail\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> root@deepsource.io
       </div>
       <div class=\\"inline-flex items-center gap-x-1\\">
-        <zavatar-stub type=\\"span\\" image=\\"static/dashboard/images/empty-avatar.svg\\" fallbackimage=\\"test-image-dir/test-image-file.png\\" username=\\"deepsourcelabs\\" size=\\"2xs\\" stroke=\\"bg-ink-300 p-0.5\\"></zavatar-stub>
-
-        Added on deepsourcelabs
+        <zicon-stub icon=\\"logo\\" size=\\"x-small\\" position=\\"\\" color=\\"vanilla-400\\"></zicon-stub> Added on DeepSource
       </div> <span class=\\"sm:ml-auto\\">since Feb 1, 2019</span>
     </div>
   </div>

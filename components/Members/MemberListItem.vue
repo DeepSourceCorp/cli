@@ -104,16 +104,8 @@
           <z-icon :icon="providerMeta.icon" size="x-small" /> Synced from {{ providerMeta.text }}
         </div>
 
-        <div v-else-if="login" class="inline-flex items-center gap-x-1">
-          <z-avatar
-            :image="teamAvatarUrl"
-            :fallback-image="getDefaultAvatar(login, accountType === 'user')"
-            :user-name="login"
-            size="2xs"
-            type="span"
-          />
-
-          Added on {{ login }}
+        <div v-else class="inline-flex items-center gap-x-1">
+          <z-icon icon="logo" size="x-small" /> Added on DeepSource
         </div>
 
         <!-- Every child element needs to be spaced out by 20px, except the last element, which needs to be right aligned.
