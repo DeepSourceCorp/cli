@@ -72,13 +72,14 @@
               v-else
               :key="`btn-${samlLogin}-${$config.onPrem}`"
               :disabled="samlLoginLoading"
-              class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
+              class="flex justify-center items-center gap-x-3 p-3 rounded-md w-full login-btn"
+              :class="{ 'cursor-not-allowed login-btn-no-hover': samlLoginLoading }"
               @click="nextSamlAction"
             >
               <z-icon
                 :icon="samlLoginLoading ? 'spin-loader' : 'key-2'"
                 color="vanilla-100"
-                :class="{ 'animate-spin cursor-not-allowed': samlLoginLoading }"
+                :class="{ 'animate-spin': samlLoginLoading }"
               />
               <span>Continue with SSO</span>
             </button>
@@ -191,6 +192,7 @@ export default class SignIn extends mixins(AuthMixin, MetaMixin) {
         location.href = samlAuthUrl
       } else {
         this.samlLoginError = true
+        this.samlLoginLoading = false
       }
     } catch (e) {
       const loginError = e as Error
@@ -285,6 +287,12 @@ export default class SignIn extends mixins(AuthMixin, MetaMixin) {
 .login-btn:hover {
   background: linear-gradient(#303540, #303540) padding-box,
     linear-gradient(113.04deg, #454a54 14.99%, #454a54 77.27%) border-box;
+}
+
+.login-btn-no-hover:hover {
+  border: theme('spacing.px') solid theme('colors.transparent');
+  background: linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
+    linear-gradient(113.04deg, #393c43 14.99%, #282b33 77.27%) border-box;
 }
 
 .login-btn-github {
