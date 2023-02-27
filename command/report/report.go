@@ -52,16 +52,16 @@ func NewCmdReport() *cobra.Command {
 	}
 
 	// --repo, -r flag
-	cmd.Flags().StringVar(&opts.Analyzer, "analyzer", "", "The analyzer shortcode whose test coverage is being reported")
+	cmd.Flags().StringVar(&opts.Analyzer, "analyzer", "", "name of the analyzer (example: test-coverage)")
 
-	cmd.Flags().StringVar(&opts.Key, "key", "", "The artifact being reported.tcv for test-coverage")
+	cmd.Flags().StringVar(&opts.Key, "key", "", "shortcode of the analyzer (example: go)")
 
-	cmd.Flags().StringVar(&opts.ValueFile, "value-file", "", "Path to the value file")
+	cmd.Flags().StringVar(&opts.Value, "value", "", "value of the artifact")
 
-	cmd.Flags().StringVar(&opts.Value, "value", "", "Value of the artifact")
+	cmd.Flags().StringVar(&opts.ValueFile, "value-file", "", "path of the artifact value file")
 
 	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
-	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "Skip SSL certificate verification while sending the test coverage data")
+	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
 
 	return cmd
 }
@@ -81,10 +81,12 @@ func (opts *ReportOptions) Run() int {
 	// Command: report //
 	/////////////////////
 
-	reportCommandAnalyzerShortcode := opts.Analyzer
-	reportCommandKey := opts.Key
-	reportCommandValue := opts.Value
-	reportCommandValueFile := opts.ValueFile
+	clean := func(s string) string { return strings.TrimSpace(s) }
+
+	reportCommandAnalyzerShortcode := clean(opts.Analyzer)
+	reportCommandKey := clean(opts.Key)
+	reportCommandValue := clean(opts.Value)
+	reportCommandValueFile := clean(opts.ValueFile)
 
 	// Get current path
 	currentDir, err := os.Getwd()
@@ -96,6 +98,30 @@ func (opts *ReportOptions) Run() int {
 	sentry.ConfigureScope(func(scope *sentry.Scope) {
 		scope.SetExtra("currentDir", currentDir)
 	})
+
+	//////////////////
+	// Validate Key //
+	//////////////////
+
+	supportedKey := map[string]bool{
+		"python":     true,
+		"go":         true,
+		"javascript": true,
+		"ruby":       true,
+		"java":       true,
+		"scala":      true,
+		"php":        true,
+		"csharp":     true,
+		"cxx":        true,
+		"rust":       true,
+	}
+
+	if supportedKey[reportCommandKey] {
+		err = fmt.Errorf("DeepSource | Error | Invalid Key: %s", reportCommandKey)
+		fmt.Fprintln(os.Stderr, err)
+		sentry.CaptureException(err)
+		return 1
+	}
 
 	//////////////////
 	// Validate DSN //
