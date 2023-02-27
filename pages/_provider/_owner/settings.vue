@@ -234,7 +234,10 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
 
   get canViewSecurity(): boolean {
     return (
-      this.isTeam && this.$gateKeeper.team(TeamPerms.MANAGE_SECURITY, this.teamPerms.permission)
+      !this.$config.onPrem &&
+      this.$config.enableSaml &&
+      this.isTeam &&
+      this.$gateKeeper.team(TeamPerms.MANAGE_SECURITY, this.teamPerms.permission)
     )
   }
 

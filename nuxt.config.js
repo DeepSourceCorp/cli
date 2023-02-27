@@ -142,7 +142,13 @@ export default {
   },
 
   ignore: IS_ON_PREM
-    ? ['**/_provider/_owner/settings/billing/*', '**/components/Billing/*', '**/discover/*']
+    ? [
+        '**/_provider/_owner/settings/billing/*',
+        '**/_provider/_owner/settings/security.vue',
+        '**/components/Settings/Security/*',
+        '**/components/Billing/*',
+        '**/discover/*'
+      ]
     : [],
 
   loadingIndicator: {
