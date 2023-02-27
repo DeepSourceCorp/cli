@@ -1,0 +1,28 @@
+query teamSecuritySettings($login: String!, $provider: VCSProviderChoices!) {
+  owner(login: $login, provider: $provider) {
+    id
+    billingInfo {
+      billingBackend
+    }
+    team {
+      id
+      name
+      vcsProvider
+      verifiableDomain {
+        id
+        domainName
+        verified
+      }
+      identityProvider {
+        id
+        xmlMetadataUrl
+        provider
+        domain {
+          id
+          domainName
+          verified
+        }
+      }
+    }
+  }
+}

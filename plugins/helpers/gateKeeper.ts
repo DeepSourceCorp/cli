@@ -75,7 +75,8 @@ const TEAM_PERMS_MAP = {
   [TeamPerms.VIEW_PUBLIC_REPORTS]: [TeamMemberRoleChoices.Admin, TeamMemberRoleChoices.Member],
   [TeamPerms.UPDATE_PUBLIC_REPORTS]: [TeamMemberRoleChoices.Admin],
   [TeamPerms.MANAGE_PREFERENCES]: [TeamMemberRoleChoices.Admin],
-  [TeamPerms.PIN_REPORTS]: [TeamMemberRoleChoices.Admin]
+  [TeamPerms.PIN_REPORTS]: [TeamMemberRoleChoices.Admin],
+  [TeamPerms.MANAGE_SECURITY]: [TeamMemberRoleChoices.Admin]
 }
 
 const REPO_PERMS_MAP = {

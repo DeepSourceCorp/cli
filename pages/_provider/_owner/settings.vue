@@ -156,6 +156,13 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
         label: 'Integrations',
         routeName: 'provider-owner-settings-integrations',
         validator: this.canViewIntegrations
+      },
+      {
+        name: 'security',
+        icon: 'security',
+        label: 'Security',
+        routeName: 'provider-owner-settings-security',
+        validator: this.canViewSecurity
       }
     ]
   }
@@ -222,6 +229,12 @@ export default class TeamSettings extends mixins(ActiveUserMixin) {
   get canViewIntegrations(): boolean {
     return (
       this.isTeam && this.$gateKeeper.team(TeamPerms.MANAGE_INTEGRATIONS, this.teamPerms.permission)
+    )
+  }
+
+  get canViewSecurity(): boolean {
+    return (
+      this.isTeam && this.$gateKeeper.team(TeamPerms.MANAGE_SECURITY, this.teamPerms.permission)
     )
   }
 

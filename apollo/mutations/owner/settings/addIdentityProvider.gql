@@ -1,0 +1,5 @@
+mutation addIdentityProvider($input: AddIdentityProviderInput!) {
+  addIdentityProvider(input: $input) {
+    ok
+  }
+}

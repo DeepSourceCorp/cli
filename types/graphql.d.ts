@@ -530,6 +530,24 @@ declare module '*/resumePlan.gql' {
 }
     
 
+declare module '*/addIdentityProvider.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const addIdentityProvider: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/deleteIdentityProvider.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const deleteIdentityProvider: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/generateKeyPair.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -2093,6 +2111,15 @@ declare module '*/modifiedPermsCount.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const modifiedPermsCount: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/security.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const teamSecuritySettings: DocumentNode;
 
   export default defaultDocument;
 }

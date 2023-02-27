@@ -1,7 +1,9 @@
 <template>
   <div class="relative min-h-screen overflow-hidden">
     <div class="bg-login-gradient"></div>
-    <div class="flex flex-col h-full min-h-screen px-5 lg:px-10 py-6 lg:py-8 z-10 absolute inset-0">
+    <div
+      class="flex flex-col h-full min-h-screen px-5 lg:px-10 py-6 lg:py-8 z-10 absolute inset-0 overflow-y-auto"
+    >
       <div class="flex-grow flex items-center justify-center py-8">
         <div class="flex flex-col items-center w-full sm:max-w-sm">
           <div class="deepsource-logo">
@@ -20,77 +22,77 @@
               />
             </svg>
           </div>
-          <transition-group tag="div" name="move-up" class="w-full">
-            <div
-              :key="samlLogin"
-              class="mt-8 text-center text-vanilla-100 text-lg font-medium leading-6"
+          <!-- <transition-group tag="div" name="move-up" mode="out-in" class="w-full"> -->
+          <div
+            :key="samlLogin"
+            class="mt-8 text-center text-vanilla-100 text-lg font-medium leading-6"
+          >
+            {{ samlLogin ? "What's your email address?" : 'Log in to DeepSource' }}
+          </div>
+          <div v-if="!samlLogin" key="base-login" class="grid gap-y-4 mt-9 w-full">
+            <a
+              v-for="opt in loginOptions"
+              :key="opt.provider"
+              :href="opt.link ? opt.link : buildUrl(opt.provider)"
+              class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md"
+              :class="[`login-btn-${opt.icon}`]"
             >
-              {{ samlLogin ? "What's your email address?" : 'Log in to DeepSource' }}
+              <z-icon :icon="opt.icon" size="base" />
+              <span>Continue with {{ opt.label }}</span>
+            </a>
+          </div>
+          <div v-else key="saml-login" class="mt-9 mb-5 w-full">
+            <z-input
+              v-model="samlEmail"
+              type="email"
+              placeholder="Enter your email address..."
+              class="border-ink-200"
+            />
+            <div v-if="samlLoginError" class="flex items-center gap-x-1 mt-1 text-cherry text-sm">
+              <z-icon icon="alert-circle" color="current" />
+              <span>SSO is not set up for your email domain.</span>
             </div>
-            <div v-if="!samlLogin" key="base-login" class="grid gap-y-4 mt-9 w-full">
-              <a
-                v-for="opt in loginOptions"
-                :key="opt.provider"
-                :href="opt.link ? opt.link : buildUrl(opt.provider)"
-                class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md"
-                :class="[`login-btn-${opt.icon}`]"
-              >
-                <z-icon :icon="opt.icon" size="base" />
-                <span>Continue with {{ opt.label }}</span>
-              </a>
-            </div>
-            <div v-else key="saml-login" class="mt-9 mb-5 w-full">
-              <z-input
-                v-model="samlEmail"
-                type="email"
-                placeholder="Enter your email address..."
-                class="border-ink-200"
-              />
-              <div v-if="samlLoginError" class="flex items-center gap-x-1 mt-1 text-cherry text-sm">
-                <z-icon icon="alert-circle" color="current" />
-                <span>SSO is not set up for your email domain.</span>
-              </div>
-            </div>
-            <template v-if="$config.enableSaml">
-              <hr
-                v-if="loginOptions.length && !samlLogin"
-                :key="`hr-${loginOptions.length && !samlLogin}`"
-                class="border-slate-400 my-6 w-full"
-              />
-              <a
-                v-if="$config.onPrem"
-                :key="`a-${samlLogin}-${$config.onPrem}`"
-                href="/saml2/login"
-                class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
-              >
-                <z-icon icon="key-2" color="vanilla-100" />
-                <span>Continue with SSO</span>
-              </a>
-              <button
-                v-else
-                :key="`btn-${samlLogin}-${$config.onPrem}`"
-                :disabled="samlLoginLoading"
-                class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
-                @click="nextSamlAction"
-              >
-                <z-icon
-                  :icon="samlLoginLoading ? 'spin-loader' : 'key-2'"
-                  color="vanilla-100"
-                  :class="{ 'animate-spin cursor-not-allowed': samlLoginLoading }"
-                />
-                <span>Continue with SSO</span>
-              </button>
-            </template>
+          </div>
+          <template v-if="$config.enableSaml">
+            <hr
+              v-if="loginOptions.length && !samlLogin"
+              :key="`hr-${loginOptions.length && !samlLogin}`"
+              class="border-slate-400 my-6 w-full"
+            />
+            <a
+              v-if="$config.onPrem"
+              :key="`a-${samlLogin}-${$config.onPrem}`"
+              href="/saml2/login"
+              class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
+            >
+              <z-icon icon="key-2" color="vanilla-100" />
+              <span>Continue with SSO</span>
+            </a>
             <button
-              v-if="samlLogin"
-              :key="samlLogin"
-              class="flex gap-x-2 items-center mx-auto mt-5 text-sm text-vanilla-400 hover:text-vanilla-100"
-              @click="resetSamlLogin"
+              v-else
+              :key="`btn-${samlLogin}-${$config.onPrem}`"
+              :disabled="samlLoginLoading"
+              class="flex justify-center items-center gap-x-3 login-btn p-3 rounded-md w-full"
+              @click="nextSamlAction"
             >
-              <z-icon icon="arrow-left" />
-              <span> Back to login </span>
+              <z-icon
+                :icon="samlLoginLoading ? 'spin-loader' : 'key-2'"
+                color="vanilla-100"
+                :class="{ 'animate-spin cursor-not-allowed': samlLoginLoading }"
+              />
+              <span>Continue with SSO</span>
             </button>
-          </transition-group>
+          </template>
+          <button
+            v-if="samlLogin"
+            :key="samlLogin"
+            class="flex gap-x-2 items-center mx-auto mt-5 text-sm text-vanilla-400 hover:text-vanilla-100"
+            @click="resetSamlLogin"
+          >
+            <z-icon icon="arrow-left" />
+            <span> Back to login </span>
+          </button>
+          <!-- </transition-group> -->
         </div>
       </div>
     </div>
@@ -196,7 +198,6 @@ export default class SignIn extends mixins(AuthMixin, MetaMixin) {
         loginError,
         loginError.message.replace('GraphQL error: ', '') as `{string}.`
       )
-    } finally {
       this.samlLoginLoading = false
     }
   }
@@ -263,12 +264,12 @@ export default class SignIn extends mixins(AuthMixin, MetaMixin) {
   transition: all 250ms ease-out 100ms;
 }
 
-.move-up-leave-active {
+/* .move-up-leave-active {
   transition: all 0ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
+} */
 
-.move-up-enter,
-.move-up-leave-to {
+/* .move-up-leave-to, */
+.move-up-enter {
   transform: translateY(20px);
   opacity: 0;
 }
@@ -281,9 +282,19 @@ export default class SignIn extends mixins(AuthMixin, MetaMixin) {
     linear-gradient(113.04deg, #393c43 14.99%, #282b33 77.27%) border-box;
 }
 
+.login-btn:hover {
+  background: linear-gradient(#303540, #303540) padding-box,
+    linear-gradient(113.04deg, #454a54 14.99%, #454a54 77.27%) border-box;
+}
+
 .login-btn-github {
   background: linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
     linear-gradient(113.04deg, #393c43 14.99%, #282b33 77.27%) border-box;
+}
+
+.login-btn-github:hover {
+  background: linear-gradient(#303540, #303540) padding-box,
+    linear-gradient(113.04deg, #454a54 14.99%, #454a54 77.27%) border-box;
 }
 
 .login-btn-gitlab {
@@ -291,13 +302,28 @@ export default class SignIn extends mixins(AuthMixin, MetaMixin) {
     linear-gradient(113.04deg, #2a2740 14.99%, #1f1b2f 77.27%) border-box;
 }
 
+.login-btn-gitlab:hover {
+  background: linear-gradient(#282246, #282246) padding-box,
+    linear-gradient(113.04deg, #352e59 14.99%, #352e59 77.27%) border-box;
+}
+
 .login-btn-bitbucket {
   background: linear-gradient(#1c243e, #1c243e) padding-box,
     linear-gradient(113.04deg, #313a52 14.99%, #1f2943 77.27%) border-box;
 }
 
+.login-btn-bitbucket:hover {
+  background: linear-gradient(#1c2a58, #1c2a58) padding-box,
+    linear-gradient(113.04deg, #37446c 14.99%, #37446c 77.27%) border-box;
+}
+
 .login-btn-gsr {
   background: linear-gradient(theme(colors.ink.200), theme(colors.ink.200)) padding-box,
     linear-gradient(113.04deg, #393c43 14.99%, #282b33 77.27%) border-box;
+}
+
+.login-btn-gsr:hover {
+  background: linear-gradient(#303540, #303540) padding-box,
+    linear-gradient(113.04deg, #454a54 14.99%, #454a54 77.27%) border-box;
 }
 </style>

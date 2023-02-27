@@ -1,0 +1,5 @@
+mutation deleteIdentityProvider($input: DeleteIdentityProviderInput!) {
+  deleteIdentityProvider(input: $input) {
+    ok
+  }
+}

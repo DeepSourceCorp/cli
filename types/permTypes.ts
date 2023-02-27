@@ -21,7 +21,8 @@ export enum TeamPerms {
   VIEW_PUBLIC_REPORTS = 'viewPublicReports',
   UPDATE_PUBLIC_REPORTS = 'updatePublicReports',
   MANAGE_PREFERENCES = 'managePreferences',
-  PIN_REPORTS = 'pinReports'
+  PIN_REPORTS = 'pinReports',
+  MANAGE_SECURITY = 'manageSecurity'
 }
 
 export enum RepoPerms {

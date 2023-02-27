@@ -7441,6 +7441,32 @@ export type Unnamed_47_Mutation = (
   )> }
 );
 
+export type AddIdentityProviderMutationVariables = Exact<{
+  input: AddIdentityProviderInput;
+}>;
+
+
+export type AddIdentityProviderMutation = (
+  { __typename?: 'Mutation' }
+  & { addIdentityProvider?: Maybe<(
+    { __typename?: 'AddIdentityProviderPayload' }
+    & Pick<AddIdentityProviderPayload, 'ok'>
+  )> }
+);
+
+export type DeleteIdentityProviderMutationVariables = Exact<{
+  input: DeleteIdentityProviderInput;
+}>;
+
+
+export type DeleteIdentityProviderMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteIdentityProvider?: Maybe<(
+    { __typename?: 'DeleteIdentityProviderPayload' }
+    & Pick<DeleteIdentityProviderPayload, 'ok'>
+  )> }
+);
+
 export type GenerateKeyPairForOwnerMutationVariables = Exact<{
   ownerId: Scalars['ID'];
 }>;
@@ -11647,6 +11673,38 @@ export type ModifiedPermsCountQuery = (
       { __typename?: 'RepositoryCollaboratorConnection' }
       & Pick<RepositoryCollaboratorConnection, 'totalCount'>
     ) }
+  )> }
+);
+
+export type TeamSecuritySettingsQueryVariables = Exact<{
+  login: Scalars['String'];
+  provider: VcsProviderChoices;
+}>;
+
+
+export type TeamSecuritySettingsQuery = (
+  { __typename?: 'Query' }
+  & { owner?: Maybe<(
+    { __typename?: 'Owner' }
+    & Pick<Owner, 'id'>
+    & { billingInfo?: Maybe<(
+      { __typename?: 'BillingInfo' }
+      & Pick<BillingInfo, 'billingBackend'>
+    )>, team?: Maybe<(
+      { __typename?: 'EnterpriseTeam' }
+      & Pick<EnterpriseTeam, 'id' | 'name' | 'vcsProvider'>
+      & { verifiableDomain?: Maybe<(
+        { __typename?: 'VerifiableDomain' }
+        & Pick<VerifiableDomain, 'id' | 'domainName' | 'verified'>
+      )>, identityProvider?: Maybe<(
+        { __typename?: 'IdentityProvider' }
+        & Pick<IdentityProvider, 'id' | 'xmlMetadataUrl' | 'provider'>
+        & { domain?: Maybe<(
+          { __typename?: 'VerifiableDomain' }
+          & Pick<VerifiableDomain, 'id' | 'domainName' | 'verified'>
+        )> }
+      )> }
+    )> }
   )> }
 );
 
