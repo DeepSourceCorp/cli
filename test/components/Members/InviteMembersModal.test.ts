@@ -4,13 +4,14 @@ import VTooltip from 'v-tooltip'
 import Vuex, { Store } from 'vuex'
 
 import { InviteMembersModal } from '~/components/Members'
+import { TeamMemberRoleChoices } from '~/types/types'
 
 interface member {
   index: number
   email: string
   isValid: boolean
   modifyAllowed: boolean
-  role: string
+  role: TeamMemberRoleChoices
 }
 
 interface InviteMembersModalInterface {
@@ -106,14 +107,14 @@ describe('[[ InviteMembersModal ]]', () => {
                     node: {
                       email: 'test@test.com',
                       createdAt: '2022-05-25T07:26:58.330500+00:00',
-                      role: 'CONTRIBUTOR'
+                      role: TeamMemberRoleChoices.Contributor
                     }
                   },
                   {
                     node: {
                       email: 'test2@test.com',
                       createdAt: '2022-05-25T07:28:33.183971+00:00',
-                      role: 'ADMIN'
+                      role: TeamMemberRoleChoices.Admin
                     }
                   }
                 ]
@@ -299,7 +300,7 @@ describe('[[ InviteMembersModal ]]', () => {
           index: 4,
           isValid: true,
           modifyAllowed: false,
-          role: 'CONTRIBUTOR'
+          role: TeamMemberRoleChoices.Contributor
         })
       ])
     )
@@ -368,9 +369,27 @@ describe('[[ InviteMembersModal ]]', () => {
 
     // Assertion
     expect(instance.initialMembersToInvites).toEqual([
-      { email: '', index: 0, isValid: true, modifyAllowed: false, role: 'CONTRIBUTOR' },
-      { email: '', index: 1, isValid: true, modifyAllowed: false, role: 'CONTRIBUTOR' },
-      { email: '', index: 2, isValid: true, modifyAllowed: false, role: 'CONTRIBUTOR' }
+      {
+        email: '',
+        index: 0,
+        isValid: true,
+        modifyAllowed: false,
+        role: TeamMemberRoleChoices.Contributor
+      },
+      {
+        email: '',
+        index: 1,
+        isValid: true,
+        modifyAllowed: false,
+        role: TeamMemberRoleChoices.Contributor
+      },
+      {
+        email: '',
+        index: 2,
+        isValid: true,
+        modifyAllowed: false,
+        role: TeamMemberRoleChoices.Contributor
+      }
     ])
   })
 
@@ -379,9 +398,27 @@ describe('[[ InviteMembersModal ]]', () => {
 
     // Assertion
     expect(instance.initialMembersToInvites).toEqual([
-      { email: '', index: 0, isValid: true, modifyAllowed: true, role: 'CONTRIBUTOR' },
-      { email: '', index: 1, isValid: true, modifyAllowed: true, role: 'CONTRIBUTOR' },
-      { email: '', index: 2, isValid: true, modifyAllowed: false, role: 'CONTRIBUTOR' }
+      {
+        email: '',
+        index: 0,
+        isValid: true,
+        modifyAllowed: true,
+        role: TeamMemberRoleChoices.Member
+      },
+      {
+        email: '',
+        index: 1,
+        isValid: true,
+        modifyAllowed: true,
+        role: TeamMemberRoleChoices.Member
+      },
+      {
+        email: '',
+        index: 2,
+        isValid: true,
+        modifyAllowed: false,
+        role: TeamMemberRoleChoices.Contributor
+      }
     ])
   })
 })

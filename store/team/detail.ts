@@ -589,7 +589,7 @@ export const actions: TeamModuleActions = {
   async [TeamActions.CANCEL_INVITE]({ commit, dispatch }, { ownerId, email, ...refetchArgs }) {
     try {
       commit(TeamMutations.SET_LOADING, true)
-      const role = 'CONTRIBUTOR'
+      const role = TeamMemberRoleChoices.Contributor
       const action = 'CANCEL'
 
       const refetchParams = {

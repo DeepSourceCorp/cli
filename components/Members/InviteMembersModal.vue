@@ -124,7 +124,7 @@ import { Component, mixins } from 'nuxt-property-decorator'
 
 import OwnerBillingMixin from '~/mixins/ownerBillingMixin'
 import TeamDetailMixin from '@/mixins/teamDetailMixin'
-import { Invitee } from '~/types/types'
+import { Invitee, TeamMemberRoleChoices } from '~/types/types'
 import { resolveNodes } from '~/utils/array'
 
 interface member {
@@ -132,7 +132,7 @@ interface member {
   email: string
   isValid: boolean
   modifyAllowed: boolean
-  role: string
+  role: TeamMemberRoleChoices
 }
 
 const INPUT_DATA: member[] = [
@@ -141,35 +141,35 @@ const INPUT_DATA: member[] = [
     email: '',
     isValid: true,
     modifyAllowed: false,
-    role: 'CONTRIBUTOR'
+    role: TeamMemberRoleChoices.Contributor
   },
   {
     index: 1,
     email: '',
     isValid: true,
     modifyAllowed: false,
-    role: 'CONTRIBUTOR'
+    role: TeamMemberRoleChoices.Contributor
   },
   {
     index: 2,
     email: '',
     isValid: true,
     modifyAllowed: false,
-    role: 'CONTRIBUTOR'
+    role: TeamMemberRoleChoices.Contributor
   }
 ]
 
 const ROLES = [
   {
-    value: 'ADMIN',
+    value: TeamMemberRoleChoices.Admin,
     label: 'Administrator'
   },
   {
-    value: 'MEMBER',
+    value: TeamMemberRoleChoices.Member,
     label: 'Member'
   },
   {
-    value: 'CONTRIBUTOR',
+    value: TeamMemberRoleChoices.Contributor,
     label: 'Contributor'
   }
 ]
@@ -314,7 +314,7 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
       email: '',
       isValid: true,
       modifyAllowed,
-      role: 'CONTRIBUTOR'
+      role: modifyAllowed ? TeamMemberRoleChoices.Member : TeamMemberRoleChoices.Contributor
     })
   }
 
@@ -374,6 +374,7 @@ export default class InviteMembersModal extends mixins(TeamDetailMixin, OwnerBil
       if (seatsAvailable-- > 0) {
         return {
           ...member,
+          role: TeamMemberRoleChoices.Member,
           modifyAllowed: true
         }
       } else {

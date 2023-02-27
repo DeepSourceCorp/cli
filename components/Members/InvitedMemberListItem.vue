@@ -50,6 +50,7 @@
 import { Vue, Component, Prop } from 'nuxt-property-decorator'
 import { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZButton } from '@deepsource/zeal'
 import { formatDate, parseISODate } from '@/utils/date'
+import { TeamMemberRoleChoices } from '~/types/types'
 
 @Component({
   components: { ZIcon, ZMenu, ZMenuItem, ZMenuSection, ZButton },
@@ -69,17 +70,17 @@ export default class MemberListItem extends Vue {
   id: string
 
   private roles = {
-    ADMIN: {
+    [TeamMemberRoleChoices.Admin]: {
       title: 'Administrator',
       description:
         'Full access to all repositories and the team, including billing, adding, or removing members.'
     },
-    CONTRIBUTOR: {
+    [TeamMemberRoleChoices.Contributor]: {
       title: 'Contributor',
       description:
         "Contributors don't have any team level access or any access to change repo level settings."
     },
-    MEMBER: {
+    [TeamMemberRoleChoices.Member]: {
       title: 'Member',
       description: 'Add and edit specific repositories'
     }

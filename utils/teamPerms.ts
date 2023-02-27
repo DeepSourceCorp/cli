@@ -1,14 +1,16 @@
+import { TeamMemberRoleChoices } from '~/types/types'
+
 const TEAM_PERMS = {
-  ADMIN: {
+  [TeamMemberRoleChoices.Admin]: {
     title: 'Administrator',
     description:
       'Full access to all repositories and the team, including billing, adding, or removing members.'
   },
-  MEMBER: {
+  [TeamMemberRoleChoices.Member]: {
     title: 'Member',
     description: 'Add and edit specific repositories.'
   },
-  CONTRIBUTOR: {
+  [TeamMemberRoleChoices.Contributor]: {
     title: 'Contributor',
     description:
       "Contributors don't have any team level access or any access to change repo level settings."
