@@ -116,7 +116,7 @@ func (opts *ReportOptions) Run() int {
 		"rust":       true,
 	}
 
-	if supportedKey[reportCommandKey] {
+	if !supportedKey[reportCommandKey] {
 		err = fmt.Errorf("DeepSource | Error | Invalid Key: %s", reportCommandKey)
 		fmt.Fprintln(os.Stderr, err)
 		sentry.CaptureException(err)
