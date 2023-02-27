@@ -17,6 +17,12 @@ spec:
                 value: /tekton/home
               - name: GOOGLE_APPLICATION_CREDENTIALS
                 value: /secret/kaniko.json
+              - name: TRIVY_EXIT_CODE
+                value: '0'
+              - name: TRIVY_CACHE_DIR
+                value: /trivycache
+              - name: TRIVY_SEVERITY
+                value: HIGH,CRITICAL,MEDIUM,LOW
             envFrom:
               - secretRef:
                   name: jx-boot-job-env-vars
@@ -72,19 +78,34 @@ spec:
               script: |
                 #!/busybox/sh
                 source .jx/variables.sh
-                /kaniko/executor --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X --build-arg=DISABLE_SENTRY=true --build-arg=ZEAL_SECRET=$ZEAL_SECRET --build-arg=STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY --build-arg=NODE_ENV=staging --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-dev/$REPO_NAME:$BRANCH_NAME --cache=true --snapshotMode=redo --cache-dir=/kanikocache
+                /kaniko/executor --cache-repo=us.gcr.io/deepsource-dev/$REPO_NAME --tarPath=/workspace/source/$REPO_NAME.tar --build-arg=GOOGLE_ANALYTICS_ID=UA-XXXXXXXX-X --build-arg=DISABLE_SENTRY=true --build-arg=ZEAL_SECRET=$ZEAL_SECRET --build-arg=STRIPE_PUBLISHABLE_KEY=$STRIPE_PUBLISHABLE_KEY --build-arg=NODE_ENV=staging --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-dev/$REPO_NAME:$BRANCH_NAME --cache=true --snapshotMode=redo --cache-dir=/kanikocache
+              workingDir: /workspace/source
+            - name: scan-image
+              image: aquasec/trivy:0.36.1
+              envFrom:
+                - secretRef:
+                    name: trivy-db-secret
+              args:
+                - image
+                - --input
+                - bifrost.tar
               workingDir: /workspace/source
           workspaces:
             - name: kanikocache
               mountPath: /kanikocache
             - name: kaniko
               mountPath: /secret
+            - name: trivycache
+              mountPath: /trivycache
         workspaces:
           - name: kanikocache
             workspace: bifrost-cache
             subPath: kanikocache
           - name: kaniko
             workspace: kaniko
+          - name: trivycache
+            workspace: bifrost-cache
+            subPath: trivycache
     workspaces:
       - name: bifrost-cache
       - name: kaniko
@@ -101,6 +122,9 @@ spec:
     - name: stripe
       secret:
         secretName: stripe-publishable
+    - name: secret
+      secret:
+        secretName: trivy-db-secret
   podTemplate:
     nodeSelector:
       scheduledBy: jx

@@ -19,6 +19,12 @@ spec:
                 value: /secret/kaniko.json
               - name: GOOGLE_ANALYTICS_ID
                 value: UA-125031134-1
+              - name: TRIVY_EXIT_CODE
+                value: '0'
+              - name: TRIVY_CACHE_DIR
+                value: /trivycache
+              - name: TRIVY_SEVERITY
+                value: HIGH,CRITICAL,MEDIUM,LOW
             envFrom:
               - secretRef:
                   name: jx-boot-job-env-vars
@@ -31,6 +37,8 @@ spec:
                   name: bifrost-sentry
               - secretRef:
                   name: bifrost-sentry-auth
+              - secretRef:
+                  name: defectdojo-api
             name: ''
           steps:
             - image: gcr.io/tekton-releases/github.com/tektoncd/pipeline/cmd/git-init:v0.19.0
@@ -74,7 +82,108 @@ spec:
               script: |
                 #!/busybox/sh
                 source .jx/variables.sh
-                /kaniko/executor --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-production/$REPO_NAME:$PULL_BASE_REF --cache=false
+                /kaniko/executor --cache-repo=us.gcr.io/deepsource-dev/$REPO_NAME --tarPath=/workspace/source/$REPO_NAME.tar --context=/workspace/source --dockerfile=Dockerfile --destination=us.gcr.io/deepsource-production/$REPO_NAME:$PULL_BASE_REF --cache=false
+              workingDir: /workspace/source
+            - name: scan-image
+              image: aquasec/trivy:0.36.1
+              envFrom:
+                - secretRef:
+                    name: trivy-db-secret
+              args:
+                - image
+                - -f
+                - json
+                - -o
+                - bifrost-results.json
+                - --input
+                - bifrost.tar
+              workingDir: /workspace/source
+            - name: create-defectdojo-engagement
+              image: us.gcr.io/deepsource-dev/crane:alpine
+              script: |
+                #!/bin/sh
+                source .jx/variables.sh && \
+                export DATE=`date +%Y-%m-%d` && \
+                apk add curl && apk add git && \
+                apk add jq && \
+                curl -X 'GET' 'http://defectdojo.deepsource.icu/api/v2/engagements/?product=5&name=production' \
+                -H 'accept: application/json' \
+                -H 'Authorization: Token '"$DEFECTDOJO_API"'' > engagement_result.txt
+                RESULT_LEN=$(cat engagement_result.txt | jq '.["results"] | length')
+                rm engagement_result.txt && \
+                if [[ $RESULT_LEN == 0 ]]; then
+                  curl -X 'POST' \
+                  'http://defectdojo.deepsource.icu/api/v2/engagements/' \
+                  -H 'accept: application/json' -H 'Content-Type: multipart/form-data' \
+                  -H 'Authorization: Token '"$DEFECTDOJO_API"'' \
+                  -F 'name=production' \
+                  -F 'minimum_severity=Info' \
+                  -F 'branch_tag=production' \
+                  -F 'product=5' \
+                  -F 'target_start='"$DATE"'' \
+                  -F 'target_end='"$DATE"'' \
+                  -F 'status=In Progress' 
+                else
+                  exit 0
+                fi
+              workingDir: /workspace/source
+            - name: push-defectdojo
+              image: us.gcr.io/deepsource-dev/crane:alpine
+              script: |
+                #!/bin/sh
+                source .jx/variables.sh && \
+                export DATE=`date +%Y-%m-%d` && \
+                apk add curl && apk add jq && \
+                curl -X 'GET' \
+                'http://defectdojo.deepsource.icu/api/v2/tests/?title='"$REPO_NAME"'-production' \
+                -H 'accept: application/json' \
+                -H 'Authorization: Token '"$DEFECTDOJO_API"'' > test_result.txt && \
+                RESULT_LEN=$(cat test_result.txt | jq '.["results"] | length') && \
+                rm test_result.txt && \
+                if [[ $RESULT_LEN == 0 ]]; then
+                  curl -X 'POST' \
+                  'http://defectdojo.deepsource.icu/api/v2/import-scan/' \
+                  -H 'accept: application/json' \
+                  -H 'Content-Type: multipart/form-data' \
+                  -H 'Authorization: Token '"$DEFECTDOJO_API"'' \
+                  -F 'scan_date='"$DATE"'' \
+                  -F 'minimum_severity=Info' \
+                  -F 'active=true' \
+                  -F 'verified=true' \
+                  -F 'test_title='"$REPO_NAME"'-production' \
+                  -F 'scan_type=Trivy Scan' \
+                  -F 'file=@bifrost-results.json;type=application/json' \
+                  -F 'product_type_name=deepsourcelabs' \
+                  -F 'product_name='"$REPO_NAME"'' \
+                  -F 'engagement_name=production' \
+                  -F 'tags=vuln_scan,trivy' \
+                  -F 'close_old_findings=true' \
+                  -F 'close_old_findings_product_scope=false' \
+                  -F 'push_to_jira=false' \
+                  -F 'build_id='"$PULL_BASE_REF"'' \
+                  -F 'create_finding_groups_for_all_findings=true' \
+                  -F 'deduplication_on_engagement=true'
+                else
+                  curl -X 'POST' \
+                  'http://defectdojo.deepsource.icu/api/v2/reimport-scan/' \
+                  -H 'accept: application/json' \
+                  -H 'Content-Type: multipart/form-data' \
+                  -H 'Authorization: Token '"$DEFECTDOJO_API"'' \
+                  -F 'minimum_severity=Info' \
+                  -F 'active=true' \
+                  -F 'verified=true' \
+                  -F 'do_not_reactivate=true' \
+                  -F 'scan_type=Trivy Scan' \
+                  -F 'file=@bifrost-results.json;type=application/json' \
+                  -F 'product_name='"$REPO_NAME"'' \
+                  -F 'engagement_name=production' \
+                  -F 'test_title='"$REPO_NAME"'-production' \
+                  -F 'deduplication_on_engagement=true' \
+                  -F 'push_to_jira=false' \
+                  -F 'close_old_findings=true' \
+                  -F 'close_old_findings_product_scope=false' \
+                  -F 'create_finding_groups_for_all_findings=true'
+                fi
               workingDir: /workspace/source
           workspaces:
             - name: kanikocache
@@ -85,6 +194,9 @@ spec:
             - name: stripe
             - name: sentry
             - name: sentry-auth
+            - name: trivycache
+              mountPath: /trivycache
+            - name: defectdojo-api
         workspaces:
           - name: kanikocache
             workspace: bifrost-cache
@@ -99,9 +211,15 @@ spec:
             workspace: sentry
           - name: sentry-auth
             workspace: sentry-auth
+          - name: trivycache
+            workspace: bifrost-cache
+            subPath: trivycache
+          - name: defectdojo-api
+            workspace: defectdojo-api
     workspaces:
       - name: bifrost-cache
       - name: kaniko
+      - name: defectdojo-api
   workspaces:
     - name: bifrost-cache
       persistentVolumeClaim:
@@ -121,6 +239,12 @@ spec:
     - name: sentry-auth
       secret:
         secretName: bifrost-sentry-auth
+    - name: secret
+      secret:
+        secretName: trivy-db-secret
+    - name: defectdojo-api
+      secret:
+        secretName: defectdojo-api
   podTemplate:
     nodeSelector:
       scheduledBy: jx
