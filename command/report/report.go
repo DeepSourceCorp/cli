@@ -81,12 +81,10 @@ func (opts *ReportOptions) Run() int {
 	// Command: report //
 	/////////////////////
 
-	clean := func(s string) string { return strings.TrimSpace(s) }
-
-	reportCommandAnalyzerShortcode := clean(opts.Analyzer)
-	reportCommandKey := clean(opts.Key)
-	reportCommandValue := clean(opts.Value)
-	reportCommandValueFile := clean(opts.ValueFile)
+	reportCommandAnalyzerShortcode := strings.TrimSpace(opts.Analyzer)
+	reportCommandKey := strings.TrimSpace(opts.Key)
+	reportCommandValue := strings.TrimSpace(opts.Value)
+	reportCommandValueFile := strings.TrimSpace(opts.ValueFile)
 
 	// Get current path
 	currentDir, err := os.Getwd()
