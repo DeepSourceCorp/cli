@@ -8,6 +8,8 @@ import (
 	"os"
 	"os/exec"
 	"testing"
+
+	"github.com/go-test/deep"
 )
 
 // Workflow tested:
@@ -50,11 +52,15 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 
-	if string(requestBodyData) == string(req) {
-		log.Println("yay")
+	if want, got := string(requestBodyData), string(req); want == got {
 		w.Write([]byte(successResponseBodyData))
 	} else {
-		log.Println("nay")
+		if eq := deep.Equal(want, got); len(eq) != 0 {
+			log.Println("Mismatch found:")
+			for _, e := range eq {
+				log.Printf("diff: %v\n", e)
+			}
+		}
 		w.Write([]byte(errorResponseBodyData))
 	}
 }

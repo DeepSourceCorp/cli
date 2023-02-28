@@ -10,6 +10,7 @@ require (
 	github.com/deepsourcelabs/graphql v0.2.2
 	github.com/fatih/color v1.12.0
 	github.com/getsentry/sentry-go v0.6.0
+	github.com/go-test/deep v1.1.0
 	github.com/owenrumney/go-sarif/v2 v2.1.0
 	github.com/pelletier/go-toml v1.9.2
 	github.com/pterm/pterm v0.12.23
