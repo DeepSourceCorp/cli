@@ -83,7 +83,7 @@ func (opts *ReportOptions) Run() int {
 
 	reportCommandAnalyzerShortcode := strings.TrimSpace(opts.Analyzer)
 	reportCommandKey := strings.TrimSpace(opts.Key)
-	reportCommandValue := strings.TrimSpace(opts.Value)
+	reportCommandValue := opts.Value
 	reportCommandValueFile := strings.TrimSpace(opts.ValueFile)
 
 	// Get current path
