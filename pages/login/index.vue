@@ -50,7 +50,7 @@
             />
             <div v-if="samlLoginError" class="flex items-center gap-x-1 mt-1 text-cherry text-sm">
               <z-icon icon="alert-circle" color="current" />
-              <span>SSO is not set up for your email domain.</span>
+              <span>SSO is not set up for your domain.</span>
             </div>
           </div>
           <template v-if="$config.enableSaml">

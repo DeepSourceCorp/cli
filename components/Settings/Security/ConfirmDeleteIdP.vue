@@ -1,11 +1,11 @@
 <template>
-  <z-modal title="Delete SSO configuration" @onClose="$emit('close')">
+  <z-modal title="Delete identity provider configuration" @onClose="$emit('close')">
     <template #default="{ close }">
       <div class="p-4">
         <template v-if="step === 0">
           <p class="text-vanilla-100 text-sm leading-5">
-            Are you sure you want to delete your SSO configuration? Deleting your configuration
-            would:
+            Are you sure you want to delete your identity provider configuration? Deleting your
+            configuration would:
           </p>
           <ul class="mt-3 text-vanilla-100 text-sm leading-5 space-y-6">
             <li class="flex items-baseline gap-x-1.5">
@@ -17,20 +17,7 @@
                   class="-mb-1 flex-shrink-0"
                 />
               </div>
-              <span>
-                Remove your verified domain and you would have to manually get it re-verified again.
-              </span>
-            </li>
-            <li class="flex items-baseline gap-x-1.5">
-              <div>
-                <z-icon
-                  icon="alert-circle"
-                  color="cherry"
-                  size="small"
-                  class="-mb-1 flex-shrink-0"
-                />
-              </div>
-              <span>Sign out all your team members.</span>
+              <span> Prevent your team members from signing-in via SAML SSO. </span>
             </li>
           </ul>
           <div class="mt-7 text-right">

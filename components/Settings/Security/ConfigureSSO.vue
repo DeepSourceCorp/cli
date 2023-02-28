@@ -2,7 +2,7 @@
   <z-modal title="Configure SSO Identity Provider" @onClose="$emit('close')">
     <div class="px-4 py-3 space-y-5">
       <label class="block space-y-2">
-        <div class="text-xs leading-5">Email domain</div>
+        <div class="text-xs leading-5">Domain name</div>
         <z-input
           :read-only="true"
           :value="verifiableDomain ? verifiableDomain.domainName : ''"
@@ -22,6 +22,7 @@
           <z-input v-focus v-model="xmlMetadataUrl" size="small" placeholder="" />
         </label>
         <a
+          v-if="CONFIGURE_DOCS_LINK"
           :href="CONFIGURE_DOCS_LINK"
           target="_blank"
           rel="noopener noreferrer"
@@ -79,7 +80,8 @@ export default class ConfigureSSO extends Vue {
   @Prop({ default: false, type: Boolean })
   savingChanges: boolean
 
-  readonly CONFIGURE_DOCS_LINK = '#'
+  // TODO: Add the link once docs are in place
+  readonly CONFIGURE_DOCS_LINK = ''
   xmlMetadataUrl = ''
 
   closeModal(close?: () => void) {

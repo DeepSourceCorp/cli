@@ -1,9 +1,9 @@
 <template>
   <div :class="{ 'cursor-not-allowed': isSSONotConfigurable }">
     <div :class="{ 'opacity-60 pointer-events-none': isSSONotConfigurable }" class="space-y-5">
-      <h2 class="text-sm text-vanilla-100 leading-5">Single Sign-On</h2>
+      <h2 class="text-sm text-vanilla-100 leading-5">SAML Single Sign-On</h2>
       <div class="p-4 bg-ink-300 border border-ink-200 rounded-md">
-        <p class="text-sm leading-4 tracking-wide text-vanilla-300">Email domain</p>
+        <p class="text-sm leading-4 tracking-wide text-vanilla-300">Domain name</p>
         <p class="mt-1.5 text-xs leading-5 text-vanilla-400">
           When configured, users whose email address ends in the specified domain would be allowed
           to sign in using your SSO provider.
@@ -65,7 +65,7 @@
           <hr class="border-ink-200 -mx-4 mt-4 mb-3" />
           <div class="-mb-1 flex items-center justify-between flex-wrap">
             <p class="text-xs leading-4 text-vanilla-400">
-              Please contact us to update your team's email domain.
+              Please contact us to update your team's domain.
             </p>
             <nuxt-link
               to="/support"
@@ -94,7 +94,7 @@
             @click="$emit('open-configure-sso')"
           />
         </div>
-        <p class="text-sm leading-4 tracking-wide text-vanilla-300">SAML</p>
+        <p class="text-sm leading-4 tracking-wide text-vanilla-300">Identity provider</p>
         <p class="mt-1.5 text-xs leading-5 text-vanilla-400">
           {{
             isSAMLConfigured
@@ -105,16 +105,14 @@
         <z-alert v-if="!isSAMLConfigurable" type="info" class="mt-3">
           <div class="flex gap-x-2 items-center">
             <z-icon icon="solid-alert-circle" color="robin-400" />
-            <span
-              >You need to first verify your email domain to configure SAML Single Sign-On.</span
-            >
+            <span>You need to first verify your domain to configure SAML Single Sign-On.</span>
           </div>
         </z-alert>
         <div v-if="isSAMLConfigured" class="mt-2 border border-slate-400 rounded-md">
           <div class="px-4 pt-2 pb-3 grid grid-cols-2 lg:grid-cols-4 content-between">
             <div>
               <p class="uppercase text-xxs leading-7 tracking-wider text-vanilla-400">
-                Email domain
+                Domain name
               </p>
               <p class="text-xs leading-3 font-medium text-vanilla-100 truncate mt-2">
                 {{ identityProvider.domain.domainName || verifiableDomain.domainName }}
@@ -172,7 +170,7 @@ export default class SsoConfiguration extends Vue {
   @Prop({ required: true })
   canSetupSso: boolean
 
-  readonly SSO_DOCS_LINK = ''
+  readonly SSO_DOCS_LINK = 'https://deepsource.io/docs/enterprise-server/sso'
 
   SSO_SETUP_STATES = SSO_SETUP_STATES
 
