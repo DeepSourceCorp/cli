@@ -51,8 +51,10 @@ func graphQLAPIMock(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	if string(requestBodyData) == string(req) {
+		log.Println("yay")
 		w.Write([]byte(successResponseBodyData))
 	} else {
+		log.Println("nay")
 		w.Write([]byte(errorResponseBodyData))
 	}
 }
@@ -63,7 +65,7 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 	// Read test artifact file
 	data, err := os.ReadFile("/tmp/python_coverage.xml")
 	if err != nil {
-		t.Errorf(err.Error())
+		t.Error(err)
 	}
 
 	cmd := exec.Command("/tmp/deepsource",
@@ -102,8 +104,8 @@ func TestReportKeyValueWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if string(output) != outStr {
-		t.Errorf("Expected: %s, Got: %s", string(output), outStr)
+	if want := string(output); want != outStr {
+		t.Errorf("Expected: %s, Got: %s", want, outStr)
 	}
 }
 
@@ -145,7 +147,7 @@ func TestReportKeyValueFileWorkflow(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if string(output) != outStr {
-		t.Errorf("Expected: %s, Got: %s", string(output), outStr)
+	if want := string(output); want != outStr {
+		t.Errorf("Expected: %s, Got: %s", want, outStr)
 	}
 }
