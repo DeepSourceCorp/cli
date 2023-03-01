@@ -9,7 +9,7 @@
     <hr class="border-ink-200" />
     <!-- Skeleton loaders -->
     <div v-if="isLoading" class="space-y-5">
-      <h2 class="text-sm text-vanilla-100 leading-5">Single Sign-On</h2>
+      <h2 class="text-sm text-vanilla-100 leading-5">SAML Single Sign-On</h2>
       <div class="h-domain-config-card bg-ink-300 animate-pulse rounded-md"></div>
       <div class="h-saml-config-card bg-ink-300 animate-pulse rounded-md"></div>
     </div>
@@ -154,7 +154,10 @@ export default class OwnerSecurity extends mixins(ActiveUserMixin) {
     const supportTicketInput: SubmitSupportTicketInput = {
       fromEmail: this.viewer.email,
       subject: 'Domain verification Request',
-      body: `Team: ${this.team.name}<br/> Provider: ${this.team.vcsProvider}<br/> Domain: ${this.domainToVerify}<br/>:)`
+      body: `Team: ${this.team.name}<br/>
+      Provider: ${this.$providerMetaMap[this.team.vcsProvider]}<br/>
+      Request type: Domain verification for Single Sign-on<br/>
+      Domain: ${this.domainToVerify}`
     }
     try {
       const response: GraphqlMutationResponse = await this.$applyGraphqlMutation(

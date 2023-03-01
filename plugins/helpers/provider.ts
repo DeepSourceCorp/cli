@@ -1,6 +1,6 @@
 import { Context } from '@nuxt/types'
 import { Inject } from '@nuxt/types/app'
-import { VcsProviderChoices } from '../../types/types'
+import { OwnerVcsProvider, VcsProviderChoices } from '../../types/types'
 
 declare module 'vue/types/vue' {
   interface Vue {
@@ -49,68 +49,76 @@ export class ProviderMeta {
   }
 }
 
-/**
- * ! In case of updates to `auth` value, update corresponding data in `nuxt.config.js` as well.
- */
-export const providerMetaMap: Record<string, ProviderMeta> = {
-  gh: new ProviderMeta('GitHub', 'gh', VcsProviderChoices.Github, 'github', 'github'),
-  ghe: new ProviderMeta(
-    'GitHub Enterprise',
-    'ghe',
-    VcsProviderChoices.GithubEnterprise,
-    'github-enterprise',
-    'github'
-  ),
-  gl: new ProviderMeta('GitLab', 'gl', VcsProviderChoices.Gitlab, 'gitlab', 'gitlab'),
-  bb: new ProviderMeta(
-    'Bitbucket',
-    'bb',
-    VcsProviderChoices.Bitbucket,
-    'bitbucket-oauth2',
-    'bitbucket'
-  ),
-  gsr: new ProviderMeta(
-    'Google Cloud',
-    'gsr',
-    VcsProviderChoices.Gsr,
-    'google-oauth2',
-    'google-cloud'
-  ),
-  [VcsProviderChoices.Github]: new ProviderMeta(
+enum routerVcsMap {
+  gh = 'gh',
+  ghe = 'ghe',
+  gl = 'gl',
+  bb = 'bb',
+  gsr = 'gsr'
+}
+
+const howToMakeAVcsMap = {
+  [routerVcsMap.gh]: new ProviderMeta(
     'GitHub',
-    'gh',
+    routerVcsMap.gh,
     VcsProviderChoices.Github,
     'github',
     'github'
   ),
-  [VcsProviderChoices.GithubEnterprise]: new ProviderMeta(
+  [routerVcsMap.ghe]: new ProviderMeta(
     'GitHub Enterprise',
-    'ghe',
+    routerVcsMap.ghe,
     VcsProviderChoices.GithubEnterprise,
     'github-enterprise',
     'github'
   ),
-  [VcsProviderChoices.Gitlab]: new ProviderMeta(
+  [routerVcsMap.gl]: new ProviderMeta(
     'GitLab',
-    'gl',
+    routerVcsMap.gl,
     VcsProviderChoices.Gitlab,
     'gitlab',
     'gitlab'
   ),
-  [VcsProviderChoices.Bitbucket]: new ProviderMeta(
+  [routerVcsMap.bb]: new ProviderMeta(
     'Bitbucket',
-    'bb',
+    routerVcsMap.bb,
     VcsProviderChoices.Bitbucket,
     'bitbucket-oauth2',
     'bitbucket'
   ),
-  [VcsProviderChoices.Gsr]: new ProviderMeta(
+  [routerVcsMap.gsr]: new ProviderMeta(
     'Google Cloud',
-    'gsr',
+    routerVcsMap.gsr,
     VcsProviderChoices.Gsr,
     'google-oauth2',
     'google-cloud'
   )
+}
+
+/**
+ * ! In case of updates to `auth` value, update corresponding data in `nuxt.config.js` as well.
+ */
+export const providerMetaMap: Record<string, ProviderMeta> = {
+  // router
+  [routerVcsMap.gh]: howToMakeAVcsMap[routerVcsMap.gh],
+  [routerVcsMap.ghe]: howToMakeAVcsMap[routerVcsMap.ghe],
+  [routerVcsMap.gl]: howToMakeAVcsMap[routerVcsMap.gl],
+  [routerVcsMap.bb]: howToMakeAVcsMap[routerVcsMap.bb],
+  [routerVcsMap.gsr]: howToMakeAVcsMap[routerVcsMap.gsr],
+
+  // VcsProviderChoices
+  [VcsProviderChoices.Github]: howToMakeAVcsMap[routerVcsMap.gh],
+  [VcsProviderChoices.GithubEnterprise]: howToMakeAVcsMap[routerVcsMap.ghe],
+  [VcsProviderChoices.Gitlab]: howToMakeAVcsMap[routerVcsMap.gl],
+  [VcsProviderChoices.Bitbucket]: howToMakeAVcsMap[routerVcsMap.bb],
+  [VcsProviderChoices.Gsr]: howToMakeAVcsMap[routerVcsMap.gsr],
+
+  // OwnerVcsProvider
+  [OwnerVcsProvider.Gh]: howToMakeAVcsMap[routerVcsMap.gh],
+  [OwnerVcsProvider.Ghe]: howToMakeAVcsMap[routerVcsMap.ghe],
+  [OwnerVcsProvider.Gl]: howToMakeAVcsMap[routerVcsMap.gl],
+  [OwnerVcsProvider.Bb]: howToMakeAVcsMap[routerVcsMap.bb],
+  [OwnerVcsProvider.Gsr]: howToMakeAVcsMap[routerVcsMap.gsr]
 }
 
 export default (_context: Context, inject: Inject): void => {
