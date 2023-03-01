@@ -58,7 +58,7 @@ func NewCmdReport() *cobra.Command {
 
 	cmd.Flags().StringVar(&opts.Value, "value", "", "value of the artifact")
 
-	cmd.Flags().StringVar(&opts.ValueFile, "value-file", "", "path of the artifact value file")
+	cmd.Flags().StringVar(&opts.ValueFile, "value-file", "", "path to the artifact value file")
 
 	// --skip-verify flag to skip SSL certificate verification while reporting test coverage data.
 	cmd.Flags().BoolVar(&opts.SkipCertificateVerification, "skip-verify", false, "skip SSL certificate verification while sending the test coverage data")
