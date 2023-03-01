@@ -155,7 +155,7 @@ export default class OwnerSecurity extends mixins(ActiveUserMixin) {
       fromEmail: this.viewer.email,
       subject: 'Domain verification Request',
       body: `Team: ${this.team.name}<br/>
-      Provider: ${this.$providerMetaMap[this.team.vcsProvider]}<br/>
+      Provider: ${this.$providerMetaMap[this.team.vcsProvider]?.text ?? this.team.vcsProvider}<br/>
       Request type: Domain verification for Single Sign-on<br/>
       Domain: ${this.domainToVerify}`
     }
