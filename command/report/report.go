@@ -52,7 +52,7 @@ func NewCmdReport() *cobra.Command {
 	}
 
 	// --repo, -r flag
-	cmd.Flags().StringVar(&opts.Analyzer, "analyzer", "", "name of the analyzer (example: test-coverage)")
+	cmd.Flags().StringVar(&opts.Analyzer, "analyzer", "", "name of the analyzer to report the artifact to (example: test-coverage)")
 
 	cmd.Flags().StringVar(&opts.Key, "key", "", "shortcode of the analyzer (example: go)")
 
